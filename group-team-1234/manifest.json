@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1234",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1234",
+    "kind": "team",
+    "name": "安全编码评审专家",
+    "description": "擅长输入校验、输出转义与最小权限，覆盖安全编码评审全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "secure-code-review-team-lead",
+        "role": "lead",
+        "name": "安全编码评审主理人",
+        "evidence": null
+      },
+      {
+        "slug": "secure-code-review",
+        "role": "member",
+        "name": "安全编码评审 顾问",
+        "evidence": "original_assets/secure-code-review/merkle_root",
+        "member_merkle_root": "e1bed5700da402ed6bcd279d33f5b9e940c15a2319f95294d3a185e713235c9f"
+      },
+      {
+        "slug": "tdd-flow-coach",
+        "role": "member",
+        "name": "测试驱动开发 教练",
+        "evidence": "original_assets/tdd-flow-coach/merkle_root",
+        "member_merkle_root": "f2f54aa704e334631b648902742310ac87c864075b2decd8e899f885a9382026"
+      },
+      {
+        "slug": "audit-trail-design",
+        "role": "member",
+        "name": "审计留痕设计 顾问",
+        "evidence": "original_assets/audit-trail-design/merkle_root",
+        "member_merkle_root": "18102c50b10895ec3af6adc5c40fb38687dde34e9bfc6cb20ad2ac9fa4435b57"
+      }
+    ],
+    "team_lead": "secure-code-review-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4b8711d5d4e360ff",
+  "prompt_hash": "2d5d74b02eff8120",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1234\", \"kind\": \"team\", \"name\": \"安全编码评审专家\", \"description\": \"擅长输入校验、输出转义与最小权限，覆盖安全编码评审全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"secure-code-review-team-lead\", \"role\": \"lead\", \"name\": \"安全编码评审主理人\", \"evidence\": null}, {\"slug\": \"secure-code-review\", \"role\": \"member\", \"name\": \"安全编码评审 顾问\", \"evidence\": \"original_assets/secure-code-review/merkle_root\", \"member_merkle_root\": \"e1bed5700da402ed6bcd279d33f5b9e940c15a2319f95294d3a185e713235c9f\"}, {\"slug\": \"tdd-flow-coach\", \"role\": \"member\", \"name\": \"测试驱动开发 教练\", \"evidence\": \"original_assets/tdd-flow-coach/merkle_root\", \"member_merkle_root\": \"f2f54aa704e334631b648902742310ac87c864075b2decd8e899f885a9382026\"}, {\"slug\": \"audit-trail-design\", \"role\": \"member\", \"name\": \"审计留痕设计 顾问\", \"evidence\": \"original_assets/audit-trail-design/merkle_root\", \"member_merkle_root\": \"18102c50b10895ec3af6adc5c40fb38687dde34e9bfc6cb20ad2ac9fa4435b57\"}], \"team_lead\": \"secure-code-review-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audit-trail-design.md": "3f661645b1ac89e3c047c15bca1ee4689ccf644f066bea529b58173d537375e8",
+    "agents/secure-code-review-team-lead.md": "6af33b0b60f2c9458290b1c2306a3bd0c5ffa2f35d64cb2465798a8bb728914f",
+    "agents/secure-code-review.md": "68606434ab04ad97096477fbd86fdc99b74fa98897a4ee38cfbf11518d0dc2c7",
+    "agents/tdd-flow-coach.md": "6d08fe02941cde1010b51fe3b9b8ca65f11072c13dc0e8baf8ba4bde75d482bb",
+    "plugin.json": "3960e292439666232fd865ed6cef7df9520e605c51338cb0af18821991c3efd0",
+    "settings.json": "fe22832b46f5e071f53ddbad32e554e217d48593f642bef4c7a88bfb2b5f74b5"
+  }
+}

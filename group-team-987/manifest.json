@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-987",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-987",
+    "kind": "team",
+    "name": "查询缓存命中优化专家",
+    "description": "输入查询缓存相关需求，输出键含版本、失效联动、穿透防护三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "query-cache-pro-team-lead",
+        "role": "lead",
+        "name": "查询缓存主理人",
+        "evidence": null
+      },
+      {
+        "slug": "query-cache-pro",
+        "role": "member",
+        "name": "查询缓存 命中优化 顾问",
+        "evidence": "original_assets/query-cache-pro/merkle_root",
+        "member_merkle_root": "951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf"
+      },
+      {
+        "slug": "sheet-batch-pro",
+        "role": "member",
+        "name": "表格批量 计算汇总 顾问",
+        "evidence": "original_assets/sheet-batch-pro/merkle_root",
+        "member_merkle_root": "09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9"
+      },
+      {
+        "slug": "data-reconcile-pro",
+        "role": "member",
+        "name": "数据对账 差异定位 顾问",
+        "evidence": "original_assets/data-reconcile-pro/merkle_root",
+        "member_merkle_root": "eb00d862f27be49dceb10e647c2c73cfb947e0b363b4f153e73bc803bf840976"
+      }
+    ],
+    "team_lead": "query-cache-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cbea5fc86df1b2fe",
+  "prompt_hash": "ac3adb869356b1d4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-987\", \"kind\": \"team\", \"name\": \"查询缓存命中优化专家\", \"description\": \"输入查询缓存相关需求，输出键含版本、失效联动、穿透防护三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"query-cache-pro-team-lead\", \"role\": \"lead\", \"name\": \"查询缓存主理人\", \"evidence\": null}, {\"slug\": \"query-cache-pro\", \"role\": \"member\", \"name\": \"查询缓存 命中优化 顾问\", \"evidence\": \"original_assets/query-cache-pro/merkle_root\", \"member_merkle_root\": \"951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf\"}, {\"slug\": \"sheet-batch-pro\", \"role\": \"member\", \"name\": \"表格批量 计算汇总 顾问\", \"evidence\": \"original_assets/sheet-batch-pro/merkle_root\", \"member_merkle_root\": \"09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9\"}, {\"slug\": \"data-reconcile-pro\", \"role\": \"member\", \"name\": \"数据对账 差异定位 顾问\", \"evidence\": \"original_assets/data-reconcile-pro/merkle_root\", \"member_merkle_root\": \"eb00d862f27be49dceb10e647c2c73cfb947e0b363b4f153e73bc803bf840976\"}], \"team_lead\": \"query-cache-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-reconcile-pro.md": "5f14611d01417a918ce9e5a3e7a0272de2b1aa3879cae41bd3967c514bf9a277",
+    "agents/query-cache-pro-team-lead.md": "5f13ea6ca5daad20598765156eeff1622269c081085dfb5eb4850f075e3659d2",
+    "agents/query-cache-pro.md": "d4903def0571035437acae54d974981b2493ee2b4105e5668ab0fe721fd609b2",
+    "agents/sheet-batch-pro.md": "9a2ad1fefb1f680199f60fe803b2ef59bd53824971d5c8f32582dfe3eee790cf",
+    "plugin.json": "166f0dd083f416efb860e6599d8c8c926410f4e742a337d011f0ef6a04b4475d",
+    "settings.json": "859219794309bd32bcfa5b714be491f3937121f43b1936b0750a5b5085eaf6b3"
+  }
+}

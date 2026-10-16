@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-toolkit-pro-01-fixed-team-lead",
+  "agents": [
+    "./agents/sql-toolkit-pro-01-fixed-team-lead.md",
+    "./agents/sql-toolkit-pro-01-fixed.md",
+    "./agents/sql-toolkit-pro-fixed.md",
+    "./agents/sql-toolkit-pro-03.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle SQL转TS",
+    "zh": "帮我处理SQL转TS"
+  },
+  "description": "SQL Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 库转 关系 转查询 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每"
+  },
+  "displayName": {
+    "en": "SQL Suite Team",
+    "zh": "数据 库转 关系 转查询 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-toolkit-pro-01-fixed-team-lead",
+      "name": {
+        "en": "SQL转TS主理人",
+        "zh": "SQL转TS主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-01-fixed.png",
+      "id": "sql-toolkit-pro-01-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "SQL转TS 自然语言转命令"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "SQL转TS 自然语言转命令"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-fixed.png",
+      "id": "sql-toolkit-pro-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-03.png",
+      "id": "sql-toolkit-pro-03",
+      "name": {
+        "en": "SQL与数据库 Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "profession": {
+        "en": "SQL与数据库 Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-214",
+  "plugin": "group-team-214",
+  "profession": {
+    "en": "SQL Suite Collaboration Team",
+    "zh": "数据 库转 关系 转查询 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle SQL转TS",
+      "zh": "帮我处理SQL转TS"
+    },
+    {
+      "en": "Plan 关系查询",
+      "zh": "帮我规划关系查询"
+    },
+    {
+      "en": "Review 数据转查询",
+      "zh": "帮我检查数据转查询"
+    }
+  ],
+  "tags": [
+    {
+      "en": "SQL转TS",
+      "zh": "SQL转TS"
+    },
+    {
+      "en": "关系查询",
+      "zh": "关系查询"
+    },
+    {
+      "en": "数据转查询",
+      "zh": "数据转查询"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-toolkit-pro-01-fixed-team-lead",
+    "memberAgents": [
+      "sql-toolkit-pro-01-fixed",
+      "sql-toolkit-pro-fixed",
+      "sql-toolkit-pro-03"
+    ]
+  },
+  "version": "1.0.0"
+}

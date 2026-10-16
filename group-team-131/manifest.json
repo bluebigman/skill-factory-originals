@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-131",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-131",
+    "kind": "team",
+    "name": "联盟 落地页 私域 团队",
+    "description": "联盟 落地页 私域 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "marketing-toolkit-pro-team-lead",
+        "role": "lead",
+        "name": "联盟配置审查主理人",
+        "evidence": null
+      },
+      {
+        "slug": "marketing-toolkit-pro",
+        "role": "member",
+        "name": "联盟配置审查 营销数据条款审查",
+        "evidence": "original_assets/marketing-toolkit-pro/merkle_root",
+        "member_merkle_root": "4f92f95aa6a8e154f60ff046f3acb9a4850baa447fd9d1415cb192aa3d172fea"
+      },
+      {
+        "slug": "landing-page-review",
+        "role": "member",
+        "name": "落地页 转化路径 顾问",
+        "evidence": "original_assets/landing-page-review/merkle_root",
+        "member_merkle_root": "fcb46623e77a500c06035435954bfe0df8eebd4e6827c6272cc19afbffe6c960"
+      },
+      {
+        "slug": "private-domain-ops",
+        "role": "member",
+        "name": "私域运营 用户分层 顾问",
+        "evidence": "original_assets/private-domain-ops/merkle_root",
+        "member_merkle_root": "879453eff2eec2b1c6147a5db59f159802256931b12406b2c157df94c33ae69e"
+      }
+    ],
+    "team_lead": "marketing-toolkit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c8f0084a086085e2",
+  "prompt_hash": "89941a867b156765",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-131\", \"kind\": \"team\", \"name\": \"联盟 落地页 私域 团队\", \"description\": \"联盟 落地页 私域 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"marketing-toolkit-pro-team-lead\", \"role\": \"lead\", \"name\": \"联盟配置审查主理人\", \"evidence\": null}, {\"slug\": \"marketing-toolkit-pro\", \"role\": \"member\", \"name\": \"联盟配置审查 营销数据条款审查\", \"evidence\": \"original_assets/marketing-toolkit-pro/merkle_root\", \"member_merkle_root\": \"4f92f95aa6a8e154f60ff046f3acb9a4850baa447fd9d1415cb192aa3d172fea\"}, {\"slug\": \"landing-page-review\", \"role\": \"member\", \"name\": \"落地页 转化路径 顾问\", \"evidence\": \"original_assets/landing-page-review/merkle_root\", \"member_merkle_root\": \"fcb46623e77a500c06035435954bfe0df8eebd4e6827c6272cc19afbffe6c960\"}, {\"slug\": \"private-domain-ops\", \"role\": \"member\", \"name\": \"私域运营 用户分层 顾问\", \"evidence\": \"original_assets/private-domain-ops/merkle_root\", \"member_merkle_root\": \"879453eff2eec2b1c6147a5db59f159802256931b12406b2c157df94c33ae69e\"}], \"team_lead\": \"marketing-toolkit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/landing-page-review.md": "8654cbb30b35e8bf4c0c326a63b6ef7077dcde79bc073e9157464e575ffa8b54",
+    "agents/marketing-toolkit-pro-team-lead.md": "c93e5c1fa8088544385a0d9e61f30dfff83ec5453531bd8c77ae9a27ae4e2c72",
+    "agents/marketing-toolkit-pro.md": "195769d3ec0c325d5e5f2c7bcce33c09668435545a9ac940f650a36d40631dec",
+    "agents/private-domain-ops.md": "d45085b8653bd563ec88bad15011cdae0a0ac160931b2a0be2e619b3e90d0c5a",
+    "plugin.json": "96111fea7d623db05ddbacaeb7d37bedf20c5f0454b6e86ea29b5cdbbd11d2ad",
+    "settings.json": "1ba2c840105fefcbe52524f21aa3af3e271692b6ef6ad2ec9049ff8d2ac13175"
+  }
+}

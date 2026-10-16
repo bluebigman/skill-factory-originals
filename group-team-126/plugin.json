@@ -1,0 +1,126 @@
+{
+  "agentName": "api-transmission-assurance-e-team-lead",
+  "agents": [
+    "./agents/api-transmission-assurance-e-team-lead.md",
+    "./agents/api-transmission-assurance-expert.md",
+    "./agents/api-param-migration-auditor.md",
+    "./agents/code-review-suite-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口联调",
+    "zh": "帮我处理接口联调"
+  },
+  "description": "API Integration Transport Assurance team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "接口 联调 调试 代码 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "API Integration Transport Assurance Team",
+    "zh": "接口 联调 调试 代码 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-transmission-assurance-e-team-lead",
+      "name": {
+        "en": "接口联调主理人",
+        "zh": "接口联调主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-transmission-assurance-expert.png",
+      "id": "api-transmission-assurance-expert",
+      "name": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "profession": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-param-migration-auditor.png",
+      "id": "api-param-migration-auditor",
+      "name": {
+        "en": "API Parameter and Migration Auditor",
+        "zh": "接口调试 参数核对 下线迁移"
+      },
+      "profession": {
+        "en": "API Parameter and Migration Auditor",
+        "zh": "接口调试 参数核对 下线迁移"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-review-suite-pro.png",
+      "id": "code-review-suite-pro",
+      "name": {
+        "en": "Code Review Suite Pro",
+        "zh": "代码审查 缺陷排查 质量门禁"
+      },
+      "profession": {
+        "en": "Code Review Suite Pro",
+        "zh": "代码审查 缺陷排查 质量门禁"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-126",
+  "plugin": "group-team-126",
+  "profession": {
+    "en": "API Integration Transport Assurance Collaboration Team",
+    "zh": "接口 联调 调试 代码 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口联调",
+      "zh": "帮我处理接口联调"
+    },
+    {
+      "en": "Plan 接口调试",
+      "zh": "帮我规划接口调试"
+    },
+    {
+      "en": "Review 代码审查",
+      "zh": "帮我检查代码审查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "接口联调",
+      "zh": "接口联调"
+    },
+    {
+      "en": "接口调试",
+      "zh": "接口调试"
+    },
+    {
+      "en": "代码审查",
+      "zh": "代码审查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-transmission-assurance-e-team-lead",
+    "memberAgents": [
+      "api-transmission-assurance-expert",
+      "api-param-migration-auditor",
+      "code-review-suite-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-convert-pro-02-team-lead",
+  "agents": [
+    "./agents/doc-convert-pro-02-team-lead.md",
+    "./agents/doc-convert-pro-02.md",
+    "./agents/doc-convert-pro-fixed.md",
+    "./agents/subtitle-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档转换",
+    "zh": "帮我处理文档转换"
+  },
+  "description": "文档格式转换 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "容错 隐私 语音 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "文档格式转换 Suite Team",
+    "zh": "容错 隐私 语音 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-convert-pro-02-team-lead",
+      "name": {
+        "en": "文档转换主理人",
+        "zh": "文档转换主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-02.png",
+      "id": "doc-convert-pro-02",
+      "name": {
+        "en": "文档格式转换 Suite",
+        "zh": "文档转换 容错转换 标签修复"
+      },
+      "profession": {
+        "en": "文档格式转换 Suite",
+        "zh": "文档转换 容错转换 标签修复"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-fixed.png",
+      "id": "doc-convert-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/subtitle-expert.png",
+      "id": "subtitle-expert",
+      "name": {
+        "en": "SubPro",
+        "zh": "视频字幕 语音转写 时间轴对齐"
+      },
+      "profession": {
+        "en": "SubPro",
+        "zh": "视频字幕 语音转写 时间轴对齐"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-141",
+  "plugin": "group-team-141",
+  "profession": {
+    "en": "文档格式转换 Suite Collaboration Team",
+    "zh": "容错 隐私 语音 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档转换",
+      "zh": "帮我处理文档转换"
+    },
+    {
+      "en": "Plan 图片标准化",
+      "zh": "帮我规划图片标准化"
+    },
+    {
+      "en": "Review 视频字幕",
+      "zh": "帮我检查视频字幕"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档转换",
+      "zh": "文档转换"
+    },
+    {
+      "en": "图片标准化",
+      "zh": "图片标准化"
+    },
+    {
+      "en": "视频字幕",
+      "zh": "视频字幕"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-convert-pro-02-team-lead",
+    "memberAgents": [
+      "doc-convert-pro-02",
+      "doc-convert-pro-fixed",
+      "subtitle-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

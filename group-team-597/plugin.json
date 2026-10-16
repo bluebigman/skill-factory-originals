@@ -1,0 +1,126 @@
+{
+  "agentName": "mobile-gesture-pro-team-lead",
+  "agents": [
+    "./agents/mobile-gesture-pro-team-lead.md",
+    "./agents/mobile-gesture-pro.md",
+    "./agents/playtest-method.md",
+    "./agents/ar-vr-usability.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 移动交互",
+    "zh": "帮我处理移动交互"
+  },
+  "description": "mobile-gesture-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 移动交互 requirements, output three deliverables: 避让系统, 一义一势, 提供替代. Verifiable end-to-end, evidence per step.",
+    "zh": "输入移动交互相关需求，输出避让系统、一义一势、提供替代三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "mobile-gesture-pro Team",
+    "zh": "移动交互手势规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "mobile-gesture-pro-team-lead",
+      "name": {
+        "en": "移动交互主理人",
+        "zh": "移动交互主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/mobile-gesture-pro.png",
+      "id": "mobile-gesture-pro",
+      "name": {
+        "en": "mobile-gesture-pro",
+        "zh": "移动交互 手势规范 顾问"
+      },
+      "profession": {
+        "en": "mobile-gesture-pro",
+        "zh": "移动交互 手势规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/playtest-method.png",
+      "id": "playtest-method",
+      "name": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "profession": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ar-vr-usability.png",
+      "id": "ar-vr-usability",
+      "name": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "profession": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-597",
+  "plugin": "group-team-597",
+  "profession": {
+    "en": "mobile-gesture-pro Collaboration Team",
+    "zh": "移动交互手势规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 移动交互",
+      "zh": "帮我处理移动交互"
+    },
+    {
+      "en": "Plan 可用性",
+      "zh": "帮我规划可用性"
+    },
+    {
+      "en": "Review 沉浸体验",
+      "zh": "帮我检查沉浸体验"
+    }
+  ],
+  "tags": [
+    {
+      "en": "避让系统",
+      "zh": "避让系统"
+    },
+    {
+      "en": "一义一势",
+      "zh": "一义一势"
+    },
+    {
+      "en": "提供替代",
+      "zh": "提供替代"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "mobile-gesture-pro-team-lead",
+    "memberAgents": [
+      "mobile-gesture-pro",
+      "playtest-method",
+      "ar-vr-usability"
+    ]
+  },
+  "version": "1.0.0"
+}

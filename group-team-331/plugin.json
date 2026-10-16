@@ -1,0 +1,126 @@
+{
+  "agentName": "data-mask-pro-team-lead",
+  "agents": [
+    "./agents/data-mask-pro-team-lead.md",
+    "./agents/data-mask-pro.md",
+    "./agents/agent-output-verify-pro.md",
+    "./agents/agent-quota-guard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 数据脱敏",
+    "zh": "帮我处理数据脱敏"
+  },
+  "description": "data-mask-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据脱敏 requirements, output three deliverables: 规则分级, 可用优先, 可逆控制. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据脱敏相关需求，输出规则分级、可用优先、可逆控制三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "data-mask-pro Team",
+    "zh": "数据脱敏专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-mask-pro-team-lead",
+      "name": {
+        "en": "数据脱敏主理人",
+        "zh": "数据脱敏主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-mask-pro.png",
+      "id": "data-mask-pro",
+      "name": {
+        "en": "data-mask-pro",
+        "zh": "数据脱敏 规则配置 顾问"
+      },
+      "profession": {
+        "en": "data-mask-pro",
+        "zh": "数据脱敏 规则配置 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-pro.png",
+      "id": "agent-output-verify-pro",
+      "name": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-quota-guard.png",
+      "id": "agent-quota-guard",
+      "name": {
+        "en": "agent-quota-guard",
+        "zh": "配额守卫 资源限额 顾问"
+      },
+      "profession": {
+        "en": "agent-quota-guard",
+        "zh": "配额守卫 资源限额 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-331",
+  "plugin": "group-team-331",
+  "profession": {
+    "en": "data-mask-pro Collaboration Team",
+    "zh": "数据脱敏专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据脱敏",
+      "zh": "帮我处理数据脱敏"
+    },
+    {
+      "en": "Plan 输出验证",
+      "zh": "帮我规划输出验证"
+    },
+    {
+      "en": "Review 配额守卫",
+      "zh": "帮我检查配额守卫"
+    }
+  ],
+  "tags": [
+    {
+      "en": "规则分级",
+      "zh": "规则分级"
+    },
+    {
+      "en": "可用优先",
+      "zh": "可用优先"
+    },
+    {
+      "en": "可逆控制",
+      "zh": "可逆控制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-mask-pro-team-lead",
+    "memberAgents": [
+      "data-mask-pro",
+      "agent-output-verify-pro",
+      "agent-quota-guard"
+    ]
+  },
+  "version": "1.0.0"
+}

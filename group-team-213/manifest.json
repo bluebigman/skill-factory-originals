@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-213",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-213",
+    "kind": "team",
+    "name": "社媒 故事 直播 团队",
+    "description": "社媒 故事 直播 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "social-copy-pro-team-lead",
+        "role": "lead",
+        "name": "社媒文案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "social-copy-pro",
+        "role": "member",
+        "name": "社媒文案 平台适配 话题标签",
+        "evidence": "original_assets/social-copy-pro/merkle_root",
+        "member_merkle_root": "33ce472f6b7953dd565e2483e38cddc0e34fdac07aded7504f8da932580e5406"
+      },
+      {
+        "slug": "story-outline-pro",
+        "role": "member",
+        "name": "故事大纲 情节设计 人物弧光",
+        "evidence": "original_assets/story-outline-pro/merkle_root",
+        "member_merkle_root": "d7db10ab04d93ff656bcc93d86701bd58b12c83b47a5a499296ebd616b522817"
+      },
+      {
+        "slug": "live-script-pro",
+        "role": "member",
+        "name": "直播脚本 话术节奏 互动设计",
+        "evidence": "original_assets/live-script-pro/merkle_root",
+        "member_merkle_root": "8b75e57d009879885a05efd931d89faaa75a586e5066a21e499c72b396127ac7"
+      }
+    ],
+    "team_lead": "social-copy-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7fc556ff5064f0ab",
+  "prompt_hash": "d2ce225996d41d6c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-213\", \"kind\": \"team\", \"name\": \"社媒 故事 直播 团队\", \"description\": \"社媒 故事 直播 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"social-copy-pro-team-lead\", \"role\": \"lead\", \"name\": \"社媒文案主理人\", \"evidence\": null}, {\"slug\": \"social-copy-pro\", \"role\": \"member\", \"name\": \"社媒文案 平台适配 话题标签\", \"evidence\": \"original_assets/social-copy-pro/merkle_root\", \"member_merkle_root\": \"33ce472f6b7953dd565e2483e38cddc0e34fdac07aded7504f8da932580e5406\"}, {\"slug\": \"story-outline-pro\", \"role\": \"member\", \"name\": \"故事大纲 情节设计 人物弧光\", \"evidence\": \"original_assets/story-outline-pro/merkle_root\", \"member_merkle_root\": \"d7db10ab04d93ff656bcc93d86701bd58b12c83b47a5a499296ebd616b522817\"}, {\"slug\": \"live-script-pro\", \"role\": \"member\", \"name\": \"直播脚本 话术节奏 互动设计\", \"evidence\": \"original_assets/live-script-pro/merkle_root\", \"member_merkle_root\": \"8b75e57d009879885a05efd931d89faaa75a586e5066a21e499c72b396127ac7\"}], \"team_lead\": \"social-copy-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/live-script-pro.md": "2382f8852ffd0b485cd5596437fb6eeb64f23606a17941dc205fe03708de8a89",
+    "agents/social-copy-pro-team-lead.md": "292b1e3a4762e15941d86fb15d1e7fc6e3d4b1c9fd2c74bcaa45de774a828367",
+    "agents/social-copy-pro.md": "d42707edaac820648bd8688f6e69755208e4a8e400d91e1d268131c363be53ca",
+    "agents/story-outline-pro.md": "5a17e95b01938fd61eeaaf5641eebbec971bf7a7b27603b6f5fe9715177cfc28",
+    "plugin.json": "c2195d47e7c91946aaff71d5a760a6f58b03a7825839ff67b71a913d48adc500",
+    "settings.json": "f05fe801e2f5f83732284a9b7172bb81688b31122d1afd795808c871f478be36"
+  }
+}

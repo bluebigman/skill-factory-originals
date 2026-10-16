@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-318",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-318",
+    "kind": "team",
+    "name": "接口延迟专家",
+    "description": "接口延迟专家：围绕接口延迟，覆盖分段测量／长尾关注／依赖分析，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-latency-pro-team-lead",
+        "role": "lead",
+        "name": "接口延迟主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-latency-pro",
+        "role": "member",
+        "name": "接口延迟 分段测量 顾问",
+        "evidence": "original_assets/api-latency-pro/merkle_root",
+        "member_merkle_root": "8c7691cb847c0c63afc1ff016e09bfb514609511719dbd079c9b12dcb3bbe977"
+      },
+      {
+        "slug": "agent-skill-registry",
+        "role": "member",
+        "name": "技能注册 发现机制 顾问",
+        "evidence": "original_assets/agent-skill-registry/merkle_root",
+        "member_merkle_root": "3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee"
+      },
+      {
+        "slug": "agent-version-compat",
+        "role": "member",
+        "name": "版本兼容 平滑升级 顾问",
+        "evidence": "original_assets/agent-version-compat/merkle_root",
+        "member_merkle_root": "02baa3a5ec8db8f7d621149849372011363d4a75df21d018d883f41d97e927cb"
+      }
+    ],
+    "team_lead": "api-latency-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1dc76b49091ff735",
+  "prompt_hash": "2b6a9c11524e9432",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-318\", \"kind\": \"team\", \"name\": \"接口延迟专家\", \"description\": \"接口延迟专家：围绕接口延迟，覆盖分段测量／长尾关注／依赖分析，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-latency-pro-team-lead\", \"role\": \"lead\", \"name\": \"接口延迟主理人\", \"evidence\": null}, {\"slug\": \"api-latency-pro\", \"role\": \"member\", \"name\": \"接口延迟 分段测量 顾问\", \"evidence\": \"original_assets/api-latency-pro/merkle_root\", \"member_merkle_root\": \"8c7691cb847c0c63afc1ff016e09bfb514609511719dbd079c9b12dcb3bbe977\"}, {\"slug\": \"agent-skill-registry\", \"role\": \"member\", \"name\": \"技能注册 发现机制 顾问\", \"evidence\": \"original_assets/agent-skill-registry/merkle_root\", \"member_merkle_root\": \"3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee\"}, {\"slug\": \"agent-version-compat\", \"role\": \"member\", \"name\": \"版本兼容 平滑升级 顾问\", \"evidence\": \"original_assets/agent-version-compat/merkle_root\", \"member_merkle_root\": \"02baa3a5ec8db8f7d621149849372011363d4a75df21d018d883f41d97e927cb\"}], \"team_lead\": \"api-latency-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-skill-registry.md": "47b42f221f9529acb59f0c8b530bf01caad35cff381104512c88b7d7bcd5dac6",
+    "agents/agent-version-compat.md": "63a24ee2db0ba33196bec3e8d6aea7b8d17300ca9bd76a14a5bae7cfb7d9e61f",
+    "agents/api-latency-pro-team-lead.md": "5ed7d26d5d527c8b64f2c3f7ba0d1f0e20388dc13f2831dc2d498f5bfb8159e1",
+    "agents/api-latency-pro.md": "8f1d57d7e8811d5d2e81862c3c210758b0a77cd18015e5605fd3a3bc6ee91afb",
+    "plugin.json": "4ed20d6a9d39c1e71db58879495b583da4c748646eb63974e0e085c77ce86e6d",
+    "settings.json": "ae1f799ea7480664944fae670e6fa3165777d7c774fb4b1fac0358174b340f01"
+  }
+}

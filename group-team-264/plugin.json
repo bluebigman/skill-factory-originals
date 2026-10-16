@@ -1,0 +1,126 @@
+{
+  "agentName": "tool-schema-validator-team-lead",
+  "agents": [
+    "./agents/tool-schema-validator-team-lead.md",
+    "./agents/tool-schema-validator.md",
+    "./agents/agent-log-copilot.md",
+    "./agents/agent-output-format.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 工具契约",
+    "zh": "帮我处理工具契约"
+  },
+  "description": "tool-schema-validator team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 工具契约 end-to-end: 路径绝对, 静默降级 and 契约回归. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长路径绝对、静默降级与契约回归，覆盖工具契约全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "tool-schema-validator Team",
+    "zh": "工具契约专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "tool-schema-validator-team-lead",
+      "name": {
+        "en": "工具契约主理人",
+        "zh": "工具契约主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/tool-schema-validator.png",
+      "id": "tool-schema-validator",
+      "name": {
+        "en": "tool-schema-validator",
+        "zh": "工具契约 结构校验 顾问"
+      },
+      "profession": {
+        "en": "tool-schema-validator",
+        "zh": "工具契约 结构校验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-log-copilot.png",
+      "id": "agent-log-copilot",
+      "name": {
+        "en": "agent-log-copilot",
+        "zh": "日志助手 解析 归因 建议"
+      },
+      "profession": {
+        "en": "agent-log-copilot",
+        "zh": "日志助手 解析 归因 建议"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-format.png",
+      "id": "agent-output-format",
+      "name": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "profession": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-264",
+  "plugin": "group-team-264",
+  "profession": {
+    "en": "tool-schema-validator Collaboration Team",
+    "zh": "工具契约专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 工具契约",
+      "zh": "帮我处理工具契约"
+    },
+    {
+      "en": "Plan 日志助手",
+      "zh": "帮我规划日志助手"
+    },
+    {
+      "en": "Review 输出规范",
+      "zh": "帮我检查输出规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "路径绝对",
+      "zh": "路径绝对"
+    },
+    {
+      "en": "静默降级",
+      "zh": "静默降级"
+    },
+    {
+      "en": "契约回归",
+      "zh": "契约回归"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "tool-schema-validator-team-lead",
+    "memberAgents": [
+      "tool-schema-validator",
+      "agent-log-copilot",
+      "agent-output-format"
+    ]
+  },
+  "version": "1.0.0"
+}

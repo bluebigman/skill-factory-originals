@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-739",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-739",
+    "kind": "team",
+    "name": "故障分级响应流程专家",
+    "description": "擅长分级标准、响应时限与沟通机制，覆盖故障分级全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "incident-triage-pro-team-lead",
+        "role": "lead",
+        "name": "故障分级主理人",
+        "evidence": null
+      },
+      {
+        "slug": "incident-triage-pro",
+        "role": "member",
+        "name": "故障分级 响应流程 顾问",
+        "evidence": "original_assets/incident-triage-pro/merkle_root",
+        "member_merkle_root": "3d7af40472e198a706cfcbacd5ae32c9c0ba678a00a674be871a5d81a5c9cd7d"
+      },
+      {
+        "slug": "image-batch-expert",
+        "role": "member",
+        "name": "图片批处理 格式转换",
+        "evidence": "original_assets/image-batch-expert/merkle_root",
+        "member_merkle_root": "a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870"
+      },
+      {
+        "slug": "agent-rollback-plan",
+        "role": "member",
+        "name": "回滚预案 快速恢复 顾问",
+        "evidence": "original_assets/agent-rollback-plan/merkle_root",
+        "member_merkle_root": "e3bfcf3e5519a89a43972ef71b61f1c6130008d9126550ad7f54678001992f9f"
+      }
+    ],
+    "team_lead": "incident-triage-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ad73776456015227",
+  "prompt_hash": "486071f1d3d2f760",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-739\", \"kind\": \"team\", \"name\": \"故障分级响应流程专家\", \"description\": \"擅长分级标准、响应时限与沟通机制，覆盖故障分级全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"incident-triage-pro-team-lead\", \"role\": \"lead\", \"name\": \"故障分级主理人\", \"evidence\": null}, {\"slug\": \"incident-triage-pro\", \"role\": \"member\", \"name\": \"故障分级 响应流程 顾问\", \"evidence\": \"original_assets/incident-triage-pro/merkle_root\", \"member_merkle_root\": \"3d7af40472e198a706cfcbacd5ae32c9c0ba678a00a674be871a5d81a5c9cd7d\"}, {\"slug\": \"image-batch-expert\", \"role\": \"member\", \"name\": \"图片批处理 格式转换\", \"evidence\": \"original_assets/image-batch-expert/merkle_root\", \"member_merkle_root\": \"a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870\"}, {\"slug\": \"agent-rollback-plan\", \"role\": \"member\", \"name\": \"回滚预案 快速恢复 顾问\", \"evidence\": \"original_assets/agent-rollback-plan/merkle_root\", \"member_merkle_root\": \"e3bfcf3e5519a89a43972ef71b61f1c6130008d9126550ad7f54678001992f9f\"}], \"team_lead\": \"incident-triage-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-rollback-plan.md": "8829da79d651358980c00d76b7a2630347f9b047bd5854618c2ee68ed2785726",
+    "agents/image-batch-expert.md": "e468a7eb2f4be6d21a57549587258c4ee4a8c41f01673ae2c91b3403b56066fe",
+    "agents/incident-triage-pro-team-lead.md": "5e92e84e18492527e632b8cb03cee632c076ad5015c7155c1572d939a4ca52e5",
+    "agents/incident-triage-pro.md": "19ea59689ee939a3f0521605ed15c0cfdb48a9635e3f54c91bb65013da0bdb2f",
+    "plugin.json": "8f7705afccd255b1c007b06606a6b9e74c4e15991a0093cdab7b03ea9ae2644e",
+    "settings.json": "5983f08b6f5198b507b7674fd7d22829751a03ebf2c22267ef95789a6fee8586"
+  }
+}

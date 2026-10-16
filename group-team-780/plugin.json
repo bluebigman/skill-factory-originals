@@ -1,0 +1,126 @@
+{
+  "agentName": "video-subtitle-pro-team-lead",
+  "agents": [
+    "./agents/video-subtitle-pro-team-lead.md",
+    "./agents/video-subtitle-pro.md",
+    "./agents/market-intelligence-expert-v111.md",
+    "./agents/proofread-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 视频字幕",
+    "zh": "帮我处理视频字幕"
+  },
+  "description": "Video Subtitle Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 校对审阅 requirements, output three deliverables: 视频字幕, 语音转写, 本地处理. Verifiable end-to-end, evidence per step.",
+    "zh": "输入校对审阅相关需求，输出视频字幕、语音转写、本地处理三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Video Subtitle Pro Team",
+    "zh": "市场洞察竞品追踪专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "video-subtitle-pro-team-lead",
+      "name": {
+        "en": "视频字幕主理人",
+        "zh": "视频字幕主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/video-subtitle-pro.png",
+      "id": "video-subtitle-pro",
+      "name": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "profession": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/market-intelligence-expert-v111.png",
+      "id": "market-intelligence-expert-v111",
+      "name": {
+        "en": "IntelScope",
+        "zh": "市场洞察 竞品追踪 情报简报"
+      },
+      "profession": {
+        "en": "IntelScope",
+        "zh": "市场洞察 竞品追踪 情报简报"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/proofread-pro.png",
+      "id": "proofread-pro",
+      "name": {
+        "en": "proofread-pro",
+        "zh": "校对审阅 错漏检出 顾问"
+      },
+      "profession": {
+        "en": "proofread-pro",
+        "zh": "校对审阅 错漏检出 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-780",
+  "plugin": "group-team-780",
+  "profession": {
+    "en": "Video Subtitle Pro Collaboration Team",
+    "zh": "市场洞察竞品追踪专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 视频字幕",
+      "zh": "帮我处理视频字幕"
+    },
+    {
+      "en": "Plan 市场洞察",
+      "zh": "帮我规划市场洞察"
+    },
+    {
+      "en": "Review 校对审阅",
+      "zh": "帮我检查校对审阅"
+    }
+  ],
+  "tags": [
+    {
+      "en": "视频字幕",
+      "zh": "视频字幕"
+    },
+    {
+      "en": "语音转写",
+      "zh": "语音转写"
+    },
+    {
+      "en": "本地处理",
+      "zh": "本地处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "video-subtitle-pro-team-lead",
+    "memberAgents": [
+      "video-subtitle-pro",
+      "market-intelligence-expert-v111",
+      "proofread-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

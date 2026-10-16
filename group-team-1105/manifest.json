@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1105",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1105",
+    "kind": "team",
+    "name": "输出规范结构化专家",
+    "description": "擅长结构固定、类型明确与错误可判，覆盖输出规范全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-output-format-team-lead",
+        "role": "lead",
+        "name": "输出规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-output-format",
+        "role": "member",
+        "name": "输出规范 结构化 顾问",
+        "evidence": "original_assets/agent-output-format/merkle_root",
+        "member_merkle_root": "4ebe7b3d464c66239a6b016a81aeb4b33eeb39ab8da7aa594f50569a73dbecde"
+      },
+      {
+        "slug": "data-export-control",
+        "role": "member",
+        "name": "数据导出管控 顾问",
+        "evidence": "original_assets/data-export-control/merkle_root",
+        "member_merkle_root": "f8ea15628a5fc63541ad10d1e04ef935d5e0ec4eb651f5fe7bc7bf15412d9003"
+      },
+      {
+        "slug": "ops-deploy-pro-fixed",
+        "role": "member",
+        "name": "缓存清理 批处理脚本 故障排查",
+        "evidence": "original_assets/ops-deploy-pro-fixed/merkle_root",
+        "member_merkle_root": "a945b5b0743654fcafe1bdff59f5eea350af07edc1637e2b013bf4b430ac5cdf"
+      }
+    ],
+    "team_lead": "agent-output-format-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cfa2ee75a99debf2",
+  "prompt_hash": "b64e723d0f976d34",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1105\", \"kind\": \"team\", \"name\": \"输出规范结构化专家\", \"description\": \"擅长结构固定、类型明确与错误可判，覆盖输出规范全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-output-format-team-lead\", \"role\": \"lead\", \"name\": \"输出规范主理人\", \"evidence\": null}, {\"slug\": \"agent-output-format\", \"role\": \"member\", \"name\": \"输出规范 结构化 顾问\", \"evidence\": \"original_assets/agent-output-format/merkle_root\", \"member_merkle_root\": \"4ebe7b3d464c66239a6b016a81aeb4b33eeb39ab8da7aa594f50569a73dbecde\"}, {\"slug\": \"data-export-control\", \"role\": \"member\", \"name\": \"数据导出管控 顾问\", \"evidence\": \"original_assets/data-export-control/merkle_root\", \"member_merkle_root\": \"f8ea15628a5fc63541ad10d1e04ef935d5e0ec4eb651f5fe7bc7bf15412d9003\"}, {\"slug\": \"ops-deploy-pro-fixed\", \"role\": \"member\", \"name\": \"缓存清理 批处理脚本 故障排查\", \"evidence\": \"original_assets/ops-deploy-pro-fixed/merkle_root\", \"member_merkle_root\": \"a945b5b0743654fcafe1bdff59f5eea350af07edc1637e2b013bf4b430ac5cdf\"}], \"team_lead\": \"agent-output-format-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-format-team-lead.md": "303e20d75f2b82d0d96ecf8b3aee60558851a196cd7bd7f74d75de52ceefa6af",
+    "agents/agent-output-format.md": "59998f1ef85ddc45bdbfb25e3ce7daae2f0164391132938803d94aa06a0b7a14",
+    "agents/data-export-control.md": "a7fcb7c0fe7e1caee2ade02f77c4fa3698df00578540c1c714dae546980ff1f0",
+    "agents/ops-deploy-pro-fixed.md": "d731732e997cf84cb3a8c834f2657f78a6f6fbcdd957cb8c58b94bb1cf919fe9",
+    "plugin.json": "bc369e7e54c1c6ce3169cf23cd152281099b85d99fa53a8659bd6181834028d4",
+    "settings.json": "f0158ebbc095f1266a142b29475b7e312f8bfccc57cb13419ede409a0e6cb2a8"
+  }
+}

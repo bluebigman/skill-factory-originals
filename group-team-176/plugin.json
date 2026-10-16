@@ -1,0 +1,126 @@
+{
+  "agentName": "language-learning-pro-team-lead",
+  "agents": [
+    "./agents/language-learning-pro-team-lead.md",
+    "./agents/language-learning-pro.md",
+    "./agents/child-bullying-coach.md",
+    "./agents/algo-practice-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "15-Education",
+  "defaultInitPrompt": {
+    "en": "Handle 语言学习",
+    "zh": "帮我处理语言学习"
+  },
+  "description": "Language Learning Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "语言 校园 算法 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Language Learning Pro Team",
+    "zh": "语言 校园 算法 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "language-learning-pro-team-lead",
+      "name": {
+        "en": "语言学习主理人",
+        "zh": "语言学习主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/language-learning-pro.png",
+      "id": "language-learning-pro",
+      "name": {
+        "en": "Language Learning Pro",
+        "zh": "语言学习 记忆方法 口语练习"
+      },
+      "profession": {
+        "en": "Language Learning Pro",
+        "zh": "语言学习 记忆方法 口语练习"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/child-bullying-coach.png",
+      "id": "child-bullying-coach",
+      "name": {
+        "en": "Child Bullying Coach",
+        "zh": "校园欺凌 识别应对 教练"
+      },
+      "profession": {
+        "en": "Child Bullying Coach",
+        "zh": "校园欺凌 识别应对 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/algo-practice-plan.png",
+      "id": "algo-practice-plan",
+      "name": {
+        "en": "Algo Practice Plan",
+        "zh": "算法刷题 计划编排 顾问"
+      },
+      "profession": {
+        "en": "Algo Practice Plan",
+        "zh": "算法刷题 计划编排 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-176",
+  "plugin": "group-team-176",
+  "profession": {
+    "en": "Language Learning Pro Collaboration Team",
+    "zh": "语言 校园 算法 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 语言学习",
+      "zh": "帮我处理语言学习"
+    },
+    {
+      "en": "Plan 校园欺凌",
+      "zh": "帮我规划校园欺凌"
+    },
+    {
+      "en": "Review 算法刷题",
+      "zh": "帮我检查算法刷题"
+    }
+  ],
+  "tags": [
+    {
+      "en": "语言学习",
+      "zh": "语言学习"
+    },
+    {
+      "en": "校园欺凌",
+      "zh": "校园欺凌"
+    },
+    {
+      "en": "算法刷题",
+      "zh": "算法刷题"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "language-learning-pro-team-lead",
+    "memberAgents": [
+      "language-learning-pro",
+      "child-bullying-coach",
+      "algo-practice-plan"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-229",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-229",
+    "kind": "team",
+    "name": "输出验证专家",
+    "description": "擅长结论先行、引用核验与矛盾检测，覆盖输出验证全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-output-verify-pro-team-lead",
+        "role": "lead",
+        "name": "输出验证主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-output-verify-pro",
+        "role": "member",
+        "name": "输出验证 幻觉检测 顾问",
+        "evidence": "original_assets/agent-output-verify-pro/merkle_root",
+        "member_merkle_root": "01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1"
+      },
+      {
+        "slug": "agent-hallucination-guard",
+        "role": "member",
+        "name": "幻觉拦截 事实核验 顾问",
+        "evidence": "original_assets/agent-hallucination-guard/merkle_root",
+        "member_merkle_root": "a7aab578c7cadd3abe9a6bd4f75edf2f398a4c8c3943bb45a3b1ffe3b73ce679"
+      },
+      {
+        "slug": "agent-trace-audit-pro",
+        "role": "member",
+        "name": "行为审计 轨迹留痕 顾问",
+        "evidence": "original_assets/agent-trace-audit-pro/merkle_root",
+        "member_merkle_root": "a46512022b4f394a76fabdf5bae28193d5b2d73209b584761beed1126faa9832"
+      }
+    ],
+    "team_lead": "agent-output-verify-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f2c3c7490796d5f2",
+  "prompt_hash": "6479315d55cf10e7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-229\", \"kind\": \"team\", \"name\": \"输出验证专家\", \"description\": \"擅长结论先行、引用核验与矛盾检测，覆盖输出验证全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-output-verify-pro-team-lead\", \"role\": \"lead\", \"name\": \"输出验证主理人\", \"evidence\": null}, {\"slug\": \"agent-output-verify-pro\", \"role\": \"member\", \"name\": \"输出验证 幻觉检测 顾问\", \"evidence\": \"original_assets/agent-output-verify-pro/merkle_root\", \"member_merkle_root\": \"01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1\"}, {\"slug\": \"agent-hallucination-guard\", \"role\": \"member\", \"name\": \"幻觉拦截 事实核验 顾问\", \"evidence\": \"original_assets/agent-hallucination-guard/merkle_root\", \"member_merkle_root\": \"a7aab578c7cadd3abe9a6bd4f75edf2f398a4c8c3943bb45a3b1ffe3b73ce679\"}, {\"slug\": \"agent-trace-audit-pro\", \"role\": \"member\", \"name\": \"行为审计 轨迹留痕 顾问\", \"evidence\": \"original_assets/agent-trace-audit-pro/merkle_root\", \"member_merkle_root\": \"a46512022b4f394a76fabdf5bae28193d5b2d73209b584761beed1126faa9832\"}], \"team_lead\": \"agent-output-verify-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-hallucination-guard.md": "0132dc608855ca4407f847e3d998de5a5351fe2bbbd70434063299e697da6455",
+    "agents/agent-output-verify-pro-team-lead.md": "5745ea194e12558fb45a9f82a71fdcbec14b22937da38e4abddd3edc71bc1eaa",
+    "agents/agent-output-verify-pro.md": "a72b286026d83cc6ea0ee41748e1774aad39173eaf101bffb1651109c7c620be",
+    "agents/agent-trace-audit-pro.md": "a984dddb67d87d1015c114ac20d47a6d4a906d13e10faa8543785174532125a1",
+    "plugin.json": "26ea99ede35ef62da30d216eca4f946c6fc5958aac5a0211867d959817938d0f",
+    "settings.json": "a98b714377b7efb2f51755fb7465e75106ef1f731ffce2ade394ecb135da713f"
+  }
+}

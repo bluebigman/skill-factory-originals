@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-326",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-326",
+    "kind": "team",
+    "name": "性能剖析专家",
+    "description": "性能剖析专家：围绕性能剖析，覆盖热点定位／小步优化／复测对照，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "perf-profile-pro-team-lead",
+        "role": "lead",
+        "name": "性能剖析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "perf-profile-pro",
+        "role": "member",
+        "name": "性能剖析 热点定位 顾问",
+        "evidence": "original_assets/perf-profile-pro/merkle_root",
+        "member_merkle_root": "3c0a934e3e01fecbf69b495b0f98b31d405fe5f19e639fedc1076627643ee000"
+      },
+      {
+        "slug": "dev-toolbox-expert",
+        "role": "member",
+        "name": "开发工具 编码调试 效率提能",
+        "evidence": "original_assets/dev-toolbox-expert/merkle_root",
+        "member_merkle_root": "f36cb23e33c35767863be36261760068e26fd55c4f24dfe8930d46dc31b5b531"
+      },
+      {
+        "slug": "code-query-expert",
+        "role": "member",
+        "name": "代码速查 语法示例 调试技巧",
+        "evidence": "original_assets/code-query-expert/merkle_root",
+        "member_merkle_root": "e1f01f877e534e48787774045a1ec6d76e93da1883bdf5232da3a17c0826fa17"
+      }
+    ],
+    "team_lead": "perf-profile-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cac2cfe505772cc5",
+  "prompt_hash": "31541143267df086",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-326\", \"kind\": \"team\", \"name\": \"性能剖析专家\", \"description\": \"性能剖析专家：围绕性能剖析，覆盖热点定位／小步优化／复测对照，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"perf-profile-pro-team-lead\", \"role\": \"lead\", \"name\": \"性能剖析主理人\", \"evidence\": null}, {\"slug\": \"perf-profile-pro\", \"role\": \"member\", \"name\": \"性能剖析 热点定位 顾问\", \"evidence\": \"original_assets/perf-profile-pro/merkle_root\", \"member_merkle_root\": \"3c0a934e3e01fecbf69b495b0f98b31d405fe5f19e639fedc1076627643ee000\"}, {\"slug\": \"dev-toolbox-expert\", \"role\": \"member\", \"name\": \"开发工具 编码调试 效率提能\", \"evidence\": \"original_assets/dev-toolbox-expert/merkle_root\", \"member_merkle_root\": \"f36cb23e33c35767863be36261760068e26fd55c4f24dfe8930d46dc31b5b531\"}, {\"slug\": \"code-query-expert\", \"role\": \"member\", \"name\": \"代码速查 语法示例 调试技巧\", \"evidence\": \"original_assets/code-query-expert/merkle_root\", \"member_merkle_root\": \"e1f01f877e534e48787774045a1ec6d76e93da1883bdf5232da3a17c0826fa17\"}], \"team_lead\": \"perf-profile-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-query-expert.md": "2a156e6663bcd58bb4bb1a6d44a87aaf9df04a6f984c82dbd2c46c40e720a78d",
+    "agents/dev-toolbox-expert.md": "8917ea92e2564f58fff6b7fd730b0d52cb7ee183e2de68e15a5c62fbe508223b",
+    "agents/perf-profile-pro-team-lead.md": "d81e9b80fad6528ace9d988846eb79dd6a6d886cdeb048027d5b8eaba987deff",
+    "agents/perf-profile-pro.md": "5bc4031f8a180a6b6f692f488367e1b0628e88e5b795ac6523e7345ab0fc8c09",
+    "plugin.json": "fb1ef94eb88f9a69db28a377fc0c7b7e4fb3a89f581a5f5c901c0bfbade8d92f",
+    "settings.json": "11e2ef02285ed7065add576ffd15e25ef66a996f89e5ac278bc080b83524ecb3"
+  }
+}

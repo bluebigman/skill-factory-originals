@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1139",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1139",
+    "kind": "team",
+    "name": "文本抽取模式专家",
+    "description": "文本抽取模式专家：围绕文本抽取模式，覆盖先定模式／样例驱动／置信标注，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "text-extract-schema-team-lead",
+        "role": "lead",
+        "name": "文本抽取模式主理人",
+        "evidence": null
+      },
+      {
+        "slug": "text-extract-schema",
+        "role": "member",
+        "name": "文本抽取模式 助手",
+        "evidence": "original_assets/text-extract-schema/merkle_root",
+        "member_merkle_root": "bf93bb6d0b5294be4b5925206324b67253730f707ab2d9068609a5e8bea4d395"
+      },
+      {
+        "slug": "feature-flag-plan",
+        "role": "member",
+        "name": "功能开关方案 顾问",
+        "evidence": "original_assets/feature-flag-plan/merkle_root",
+        "member_merkle_root": "aec333bc3a785d65c737ac38dbb69e4f0700827ec50923ea2bfd00dc48e746ce"
+      },
+      {
+        "slug": "prompt-injection-guard",
+        "role": "member",
+        "name": "提示注入防护 顾问",
+        "evidence": "original_assets/prompt-injection-guard/merkle_root",
+        "member_merkle_root": "537d9a063ae28bbf570e8944532ae47b271cb4cf86609ff1c3d4072c8407e6f1"
+      }
+    ],
+    "team_lead": "text-extract-schema-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8d7e9423db7618e7",
+  "prompt_hash": "ae8706d60d7da715",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1139\", \"kind\": \"team\", \"name\": \"文本抽取模式专家\", \"description\": \"文本抽取模式专家：围绕文本抽取模式，覆盖先定模式／样例驱动／置信标注，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"text-extract-schema-team-lead\", \"role\": \"lead\", \"name\": \"文本抽取模式主理人\", \"evidence\": null}, {\"slug\": \"text-extract-schema\", \"role\": \"member\", \"name\": \"文本抽取模式 助手\", \"evidence\": \"original_assets/text-extract-schema/merkle_root\", \"member_merkle_root\": \"bf93bb6d0b5294be4b5925206324b67253730f707ab2d9068609a5e8bea4d395\"}, {\"slug\": \"feature-flag-plan\", \"role\": \"member\", \"name\": \"功能开关方案 顾问\", \"evidence\": \"original_assets/feature-flag-plan/merkle_root\", \"member_merkle_root\": \"aec333bc3a785d65c737ac38dbb69e4f0700827ec50923ea2bfd00dc48e746ce\"}, {\"slug\": \"prompt-injection-guard\", \"role\": \"member\", \"name\": \"提示注入防护 顾问\", \"evidence\": \"original_assets/prompt-injection-guard/merkle_root\", \"member_merkle_root\": \"537d9a063ae28bbf570e8944532ae47b271cb4cf86609ff1c3d4072c8407e6f1\"}], \"team_lead\": \"text-extract-schema-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/feature-flag-plan.md": "bce40008bbf489c64406f72bbaed35daeb4f0c4d49fc6bd52e6eef2f178b3cb2",
+    "agents/prompt-injection-guard.md": "6f69e48eac06829d43c4249b4aa9ff02b183202255c19c9a23bad43c0c9b9bc5",
+    "agents/text-extract-schema-team-lead.md": "fbbda010543acd971f45a1d4535648f923b3747db456c62db9fdd5b1730f7d35",
+    "agents/text-extract-schema.md": "bac2bcf68818938348bf929c8605bd460007201210f5a2d0056c7ad3fec89040",
+    "plugin.json": "49f83b5a1b140843720396ca91748f6046cbf97859641e2e16ec99ded0821acb",
+    "settings.json": "e2008f64077385cf82d873a3f36cc1a4171aa256458a809298eaa535c76ec686"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-api-companion-team-lead",
+  "agents": [
+    "./agents/agent-api-companion-team-lead.md",
+    "./agents/agent-api-companion.md",
+    "./agents/agent-goal-decompose-pro.md",
+    "./agents/agent-test-harness.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口助手",
+    "zh": "帮我处理接口助手"
+  },
+  "description": "agent-api-companion team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 接口助手 end-to-end: 契约优先, 兼容检查 and 示例可跑. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长契约优先、兼容检查与示例可跑，覆盖接口助手全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-api-companion Team",
+    "zh": "接口助手专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-api-companion-team-lead",
+      "name": {
+        "en": "接口助手主理人",
+        "zh": "接口助手主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-api-companion.png",
+      "id": "agent-api-companion",
+      "name": {
+        "en": "agent-api-companion",
+        "zh": "接口助手 调试 契约 兼容"
+      },
+      "profession": {
+        "en": "agent-api-companion",
+        "zh": "接口助手 调试 契约 兼容"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-goal-decompose-pro.png",
+      "id": "agent-goal-decompose-pro",
+      "name": {
+        "en": "agent-goal-decompose-pro",
+        "zh": "目标拆解 任务分解 顾问"
+      },
+      "profession": {
+        "en": "agent-goal-decompose-pro",
+        "zh": "目标拆解 任务分解 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-test-harness.png",
+      "id": "agent-test-harness",
+      "name": {
+        "en": "agent-test-harness",
+        "zh": "测试台架 用例管理 顾问"
+      },
+      "profession": {
+        "en": "agent-test-harness",
+        "zh": "测试台架 用例管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-314",
+  "plugin": "group-team-314",
+  "profession": {
+    "en": "agent-api-companion Collaboration Team",
+    "zh": "接口助手专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口助手",
+      "zh": "帮我处理接口助手"
+    },
+    {
+      "en": "Plan 目标拆解",
+      "zh": "帮我规划目标拆解"
+    },
+    {
+      "en": "Review 测试台架",
+      "zh": "帮我检查测试台架"
+    }
+  ],
+  "tags": [
+    {
+      "en": "契约优先",
+      "zh": "契约优先"
+    },
+    {
+      "en": "兼容检查",
+      "zh": "兼容检查"
+    },
+    {
+      "en": "示例可跑",
+      "zh": "示例可跑"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-api-companion-team-lead",
+    "memberAgents": [
+      "agent-api-companion",
+      "agent-goal-decompose-pro",
+      "agent-test-harness"
+    ]
+  },
+  "version": "1.0.0"
+}

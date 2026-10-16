@@ -1,0 +1,126 @@
+{
+  "agentName": "pricing-page-ux-team-lead",
+  "agents": [
+    "./agents/pricing-page-ux-team-lead.md",
+    "./agents/pricing-page-ux.md",
+    "./agents/animation-principle.md",
+    "./agents/visual-asset-brief.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 定价页面",
+    "zh": "帮我处理定价页面"
+  },
+  "description": "pricing-page-ux team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 定价页面, covers 维度对齐 / 推荐克制 / 价格透明, delivering structured results and actionable checklists.",
+    "zh": "定价页面专家：围绕定价页面，覆盖维度对齐／推荐克制／价格透明，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "pricing-page-ux Team",
+    "zh": "定价页面专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pricing-page-ux-team-lead",
+      "name": {
+        "en": "定价页面主理人",
+        "zh": "定价页面主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pricing-page-ux.png",
+      "id": "pricing-page-ux",
+      "name": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "profession": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/animation-principle.png",
+      "id": "animation-principle",
+      "name": {
+        "en": "animation-principle",
+        "zh": "动效设计原则 顾问"
+      },
+      "profession": {
+        "en": "animation-principle",
+        "zh": "动效设计原则 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/visual-asset-brief.png",
+      "id": "visual-asset-brief",
+      "name": {
+        "en": "visual-asset-brief",
+        "zh": "视觉素材需求 助手"
+      },
+      "profession": {
+        "en": "visual-asset-brief",
+        "zh": "视觉素材需求 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1040",
+  "plugin": "group-team-1040",
+  "profession": {
+    "en": "pricing-page-ux Collaboration Team",
+    "zh": "定价页面专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 定价页面",
+      "zh": "帮我处理定价页面"
+    },
+    {
+      "en": "Plan 动效设计原则",
+      "zh": "帮我规划动效设计原则"
+    },
+    {
+      "en": "Review 视觉素材需求",
+      "zh": "帮我检查视觉素材需求"
+    }
+  ],
+  "tags": [
+    {
+      "en": "维度对齐",
+      "zh": "维度对齐"
+    },
+    {
+      "en": "推荐克制",
+      "zh": "推荐克制"
+    },
+    {
+      "en": "价格透明",
+      "zh": "价格透明"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pricing-page-ux-team-lead",
+    "memberAgents": [
+      "pricing-page-ux",
+      "animation-principle",
+      "visual-asset-brief"
+    ]
+  },
+  "version": "1.0.0"
+}

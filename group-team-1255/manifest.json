@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-1255",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1255",
+    "kind": "team",
+    "name": "知识卡片专家",
+    "description": "擅长指标先定、对比基线与归因克制，覆盖内容效果复盘全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-base-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "项目记忆主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-base-pro-01-fixed",
+        "role": "member",
+        "name": "项目记忆 知识卡片 双向链接",
+        "evidence": "original_assets/knowledge-base-pro-01-fixed/merkle_root",
+        "member_merkle_root": "2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd"
+      },
+      {
+        "slug": "content-performance-review",
+        "role": "member",
+        "name": "内容效果复盘 顾问",
+        "evidence": "original_assets/content-performance-review/merkle_root",
+        "member_merkle_root": "68a68b93e245446042b36406b08a9c4cb15059ce4bf6d7f8d370267a68fb3a83"
+      },
+      {
+        "slug": "doc-convert-pro-01-fixed",
+        "role": "member",
+        "name": "文档转换 视觉美化 文本抽取",
+        "evidence": "original_assets/doc-convert-pro-01-fixed/merkle_root",
+        "member_merkle_root": "f090a0c606648878474670b9c50f3994faacef26fba2afac4c34ec31a9a5dd0b"
+      }
+    ],
+    "team_lead": "knowledge-base-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e9558fcf8afeab21",
+  "prompt_hash": "7edd24715faabb1c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1255\", \"kind\": \"team\", \"name\": \"知识卡片专家\", \"description\": \"擅长指标先定、对比基线与归因克制，覆盖内容效果复盘全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-base-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"项目记忆主理人\", \"evidence\": null}, {\"slug\": \"knowledge-base-pro-01-fixed\", \"role\": \"member\", \"name\": \"项目记忆 知识卡片 双向链接\", \"evidence\": \"original_assets/knowledge-base-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd\"}, {\"slug\": \"content-performance-review\", \"role\": \"member\", \"name\": \"内容效果复盘 顾问\", \"evidence\": \"original_assets/content-performance-review/merkle_root\", \"member_merkle_root\": \"68a68b93e245446042b36406b08a9c4cb15059ce4bf6d7f8d370267a68fb3a83\"}, {\"slug\": \"doc-convert-pro-01-fixed\", \"role\": \"member\", \"name\": \"文档转换 视觉美化 文本抽取\", \"evidence\": \"original_assets/doc-convert-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"f090a0c606648878474670b9c50f3994faacef26fba2afac4c34ec31a9a5dd0b\"}], \"team_lead\": \"knowledge-base-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-performance-review.md": "13dc7d49df581538fdf8eec2b4b135fb1033186f3ecb502f1a959c3251e28426",
+    "agents/doc-convert-pro-01-fixed.md": "77194b911b3974b714db51140d9f8a0132a53326f49b220c3a3d5eb39b158430",
+    "agents/knowledge-base-pro-01-fixed-team-lead.md": "7fc8e2cca00cbf472d52e280e244265420e17c03c820b0c8b4546cd629fcc934",
+    "agents/knowledge-base-pro-01-fixed.md": "ef24bf55672448d0f67bd3f1c0ef339ca2700c5d2fd7a288871dc025acc6474e",
+    "plugin.json": "2ebd0d482ada104f866e3e76cab13c7a24006f879e79e23b37dd9c9bda2cd6bd",
+    "settings.json": "f987716af6cfb1fbd636adf3c17613389c5d63e5f9c2e26677c31204b55e3eb9"
+  }
+}

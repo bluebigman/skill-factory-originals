@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1012",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1012",
+    "kind": "team",
+    "name": "错误码注册表专家",
+    "description": "擅长集中登记、分段分配与含义稳定，覆盖错误码注册表全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "error-code-registry-team-lead",
+        "role": "lead",
+        "name": "错误码注册表主理人",
+        "evidence": null
+      },
+      {
+        "slug": "error-code-registry",
+        "role": "member",
+        "name": "错误码注册表 顾问",
+        "evidence": "original_assets/error-code-registry/merkle_root",
+        "member_merkle_root": "a2ed5fa2f305dbe6c1ae3e7ca2ba3a334f4cb609232355010f79cdcea3922b3c"
+      },
+      {
+        "slug": "agent-retry-policy",
+        "role": "member",
+        "name": "重试策略 分类处理 顾问",
+        "evidence": "original_assets/agent-retry-policy/merkle_root",
+        "member_merkle_root": "711d9a54a4a596c7c7ae9959b19a8d52d9414d6ee59ec569c3ae59768efb2d52"
+      },
+      {
+        "slug": "ui-design-expert",
+        "role": "member",
+        "name": "界面设计 组件美化",
+        "evidence": "original_assets/ui-design-expert/merkle_root",
+        "member_merkle_root": "8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16"
+      }
+    ],
+    "team_lead": "error-code-registry-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "26b3a0f062850c1e",
+  "prompt_hash": "ac67844338faf53c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1012\", \"kind\": \"team\", \"name\": \"错误码注册表专家\", \"description\": \"擅长集中登记、分段分配与含义稳定，覆盖错误码注册表全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"error-code-registry-team-lead\", \"role\": \"lead\", \"name\": \"错误码注册表主理人\", \"evidence\": null}, {\"slug\": \"error-code-registry\", \"role\": \"member\", \"name\": \"错误码注册表 顾问\", \"evidence\": \"original_assets/error-code-registry/merkle_root\", \"member_merkle_root\": \"a2ed5fa2f305dbe6c1ae3e7ca2ba3a334f4cb609232355010f79cdcea3922b3c\"}, {\"slug\": \"agent-retry-policy\", \"role\": \"member\", \"name\": \"重试策略 分类处理 顾问\", \"evidence\": \"original_assets/agent-retry-policy/merkle_root\", \"member_merkle_root\": \"711d9a54a4a596c7c7ae9959b19a8d52d9414d6ee59ec569c3ae59768efb2d52\"}, {\"slug\": \"ui-design-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化\", \"evidence\": \"original_assets/ui-design-expert/merkle_root\", \"member_merkle_root\": \"8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16\"}], \"team_lead\": \"error-code-registry-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-retry-policy.md": "ccf2e453c2c0ae7d62bf49ab6dec52b91557b2bc1754ae2755642bbcc0cbf20b",
+    "agents/error-code-registry-team-lead.md": "4c86eee0169c8832cd3660ef9a99b5f0af0d20ac9beae3f42bd633e9499e48c0",
+    "agents/error-code-registry.md": "7e299e34122bffcb85c83084e3588ab96dd99445b40796f46f323e9375487d01",
+    "agents/ui-design-expert.md": "4232b93b321ca0f9059c04d01345a8f8ff430532c58bb14480774256770cb60e",
+    "plugin.json": "d97378a123a46e1a69b23881e7f56d02c67e847e7e2760ce82367be07074aa1d",
+    "settings.json": "ac6fb6b7c0394b907f59a65094c44ce424ce59455880f3908459194238392c23"
+  }
+}

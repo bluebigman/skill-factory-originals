@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-148",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-148",
+    "kind": "team",
+    "name": "权限 外部 隐私 团队",
+    "description": "权限 外部 隐私 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "permission-governance-team-lead",
+        "role": "lead",
+        "name": "权限治理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "permission-governance",
+        "role": "member",
+        "name": "权限治理 最小授权 高危复核",
+        "evidence": "original_assets/permission-governance/merkle_root",
+        "member_merkle_root": "6114e07e53036736a684ddb4af91f1031be8751d68d9f4cacd331f324b86208c"
+      },
+      {
+        "slug": "partner-compliance",
+        "role": "member",
+        "name": "外部合作 合规审查 顾问",
+        "evidence": "original_assets/partner-compliance/merkle_root",
+        "member_merkle_root": "16da26b7cb2cb53c432acdd172b9fcef83f735e185fc753f909cca746e384ac8"
+      },
+      {
+        "slug": "privacy-compliance",
+        "role": "member",
+        "name": "隐私合规 数据收集 顾问",
+        "evidence": "original_assets/privacy-compliance/merkle_root",
+        "member_merkle_root": "c8cf4c86f9a1b55ad66cdf056f53f4a054d6f88d778e2387edb2df65b0a957db"
+      }
+    ],
+    "team_lead": "permission-governance-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6b2f91e50eedf133",
+  "prompt_hash": "b3ce082baa5e99f1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-148\", \"kind\": \"team\", \"name\": \"权限 外部 隐私 团队\", \"description\": \"权限 外部 隐私 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"permission-governance-team-lead\", \"role\": \"lead\", \"name\": \"权限治理主理人\", \"evidence\": null}, {\"slug\": \"permission-governance\", \"role\": \"member\", \"name\": \"权限治理 最小授权 高危复核\", \"evidence\": \"original_assets/permission-governance/merkle_root\", \"member_merkle_root\": \"6114e07e53036736a684ddb4af91f1031be8751d68d9f4cacd331f324b86208c\"}, {\"slug\": \"partner-compliance\", \"role\": \"member\", \"name\": \"外部合作 合规审查 顾问\", \"evidence\": \"original_assets/partner-compliance/merkle_root\", \"member_merkle_root\": \"16da26b7cb2cb53c432acdd172b9fcef83f735e185fc753f909cca746e384ac8\"}, {\"slug\": \"privacy-compliance\", \"role\": \"member\", \"name\": \"隐私合规 数据收集 顾问\", \"evidence\": \"original_assets/privacy-compliance/merkle_root\", \"member_merkle_root\": \"c8cf4c86f9a1b55ad66cdf056f53f4a054d6f88d778e2387edb2df65b0a957db\"}], \"team_lead\": \"permission-governance-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/partner-compliance.md": "8f49eb343a6d9a16aaa4df066c710023995bcfbd6e4a38842990f1db607fb576",
+    "agents/permission-governance-team-lead.md": "2a6a9ab62e4558dbc750a1ea6923308f242968b01477215c39d8d5e457c7d703",
+    "agents/permission-governance.md": "2369079e1e1dab76795a0ccb4ee1ea30ab2a098eb53b9487c2f84a0c0ecd3b68",
+    "agents/privacy-compliance.md": "86f368ed82a1bf5e6c6ee9eabd4b9a3180e757dbcfe53dc7597e2597294bbb8c",
+    "plugin.json": "2cba300f3c7aa296be0ea247143f61fdf5af9898af9b91291a1ce5b2be2dfa17",
+    "settings.json": "7ad5ed7dce45d0566eb9c1e2f325b3bc60f2f69e83e4ba8e09a65ae18ac1794d"
+  }
+}

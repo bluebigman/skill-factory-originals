@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085714",
+  "slug": "group-team-1003",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1003",
+    "kind": "team",
+    "name": "赢单复盘专家",
+    "description": "擅长双向复盘、客观归因与样本阈值，覆盖赢单复盘全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "win-loss-analysis-team-lead",
+        "role": "lead",
+        "name": "赢单复盘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "win-loss-analysis",
+        "role": "member",
+        "name": "赢单复盘 归因分析 顾问",
+        "evidence": "original_assets/win-loss-analysis/merkle_root",
+        "member_merkle_root": "8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd"
+      },
+      {
+        "slug": "pricing-review",
+        "role": "member",
+        "name": "定价复核 顾问",
+        "evidence": "original_assets/pricing-review/merkle_root",
+        "member_merkle_root": "66cbd89c5b7a30902f505f5dba91ac31703c95c31249f658287bcf12bf1329f7"
+      },
+      {
+        "slug": "code-review-guide",
+        "role": "member",
+        "name": "代码评审把关 顾问",
+        "evidence": "original_assets/code-review-guide/merkle_root",
+        "member_merkle_root": "938b1f443cdffae153e8bf9311acf7d5d106d513f02e34f85d5771f925711b72"
+      }
+    ],
+    "team_lead": "win-loss-analysis-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2be0306eaa5e9bdc",
+  "prompt_hash": "00812f504bda9109",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1003\", \"kind\": \"team\", \"name\": \"赢单复盘专家\", \"description\": \"擅长双向复盘、客观归因与样本阈值，覆盖赢单复盘全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"win-loss-analysis-team-lead\", \"role\": \"lead\", \"name\": \"赢单复盘主理人\", \"evidence\": null}, {\"slug\": \"win-loss-analysis\", \"role\": \"member\", \"name\": \"赢单复盘 归因分析 顾问\", \"evidence\": \"original_assets/win-loss-analysis/merkle_root\", \"member_merkle_root\": \"8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd\"}, {\"slug\": \"pricing-review\", \"role\": \"member\", \"name\": \"定价复核 顾问\", \"evidence\": \"original_assets/pricing-review/merkle_root\", \"member_merkle_root\": \"66cbd89c5b7a30902f505f5dba91ac31703c95c31249f658287bcf12bf1329f7\"}, {\"slug\": \"code-review-guide\", \"role\": \"member\", \"name\": \"代码评审把关 顾问\", \"evidence\": \"original_assets/code-review-guide/merkle_root\", \"member_merkle_root\": \"938b1f443cdffae153e8bf9311acf7d5d106d513f02e34f85d5771f925711b72\"}], \"team_lead\": \"win-loss-analysis-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-review-guide.md": "57283e3a0fbf2feafb75a26c5d01774ce7c9018b7b5f0d72de0e9a3a39c51251",
+    "agents/pricing-review.md": "a3e29cb3d8a3221a463377ee7f914c1c3ee88183a31f3c3b60b313cdadec1d1d",
+    "agents/win-loss-analysis-team-lead.md": "3394388d79c8bf5ed2a04bc088476e1b45d7010fdc061fc6f9d8245ef8af2971",
+    "agents/win-loss-analysis.md": "8f16e9c1a16f1c3f31fd85af192c263652c60a7848c447488e2acc9ac26fd323",
+    "plugin.json": "5472bb87e9cfcb82cecdcd301750c96b248038b19f70d62996b9412e2852b59a",
+    "settings.json": "ffcaa0e41b4f5ba1b9ff14877168f6592004a62a4a33b16f4bf4da110e4c9e9e"
+  }
+}

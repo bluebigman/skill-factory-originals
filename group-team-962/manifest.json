@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-962",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-962",
+    "kind": "team",
+    "name": "接口编码报错修复专家",
+    "description": "擅长需求翻译、视觉规范与设计评审，覆盖接口编码报错修全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ui-design-expert-team-lead",
+        "role": "lead",
+        "name": "界面设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ui-design-expert",
+        "role": "member",
+        "name": "界面设计 组件美化",
+        "evidence": "original_assets/ui-design-expert/merkle_root",
+        "member_merkle_root": "8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16"
+      },
+      {
+        "slug": "api-address-integrity-expert",
+        "role": "member",
+        "name": "接口编码 报错修复",
+        "evidence": "original_assets/api-address-integrity-expert/merkle_root",
+        "member_merkle_root": "f7dba804fb3c6a8d437f1d220392ef6dcf2762edb4c90ba1112aeeff25d860f3"
+      },
+      {
+        "slug": "data-viz-pro-01",
+        "role": "member",
+        "name": "报表数据 配置解析 快速生成",
+        "evidence": "original_assets/data-viz-pro-01/merkle_root",
+        "member_merkle_root": "670962c43509a74e0941835667a497a475cefe86e6ca5a3831f19ce52ff38137"
+      }
+    ],
+    "team_lead": "ui-design-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b5779562fe1a254b",
+  "prompt_hash": "3e7b99ab9c2f4d5e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-962\", \"kind\": \"team\", \"name\": \"接口编码报错修复专家\", \"description\": \"擅长需求翻译、视觉规范与设计评审，覆盖接口编码报错修全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ui-design-expert-team-lead\", \"role\": \"lead\", \"name\": \"界面设计主理人\", \"evidence\": null}, {\"slug\": \"ui-design-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化\", \"evidence\": \"original_assets/ui-design-expert/merkle_root\", \"member_merkle_root\": \"8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16\"}, {\"slug\": \"api-address-integrity-expert\", \"role\": \"member\", \"name\": \"接口编码 报错修复\", \"evidence\": \"original_assets/api-address-integrity-expert/merkle_root\", \"member_merkle_root\": \"f7dba804fb3c6a8d437f1d220392ef6dcf2762edb4c90ba1112aeeff25d860f3\"}, {\"slug\": \"data-viz-pro-01\", \"role\": \"member\", \"name\": \"报表数据 配置解析 快速生成\", \"evidence\": \"original_assets/data-viz-pro-01/merkle_root\", \"member_merkle_root\": \"670962c43509a74e0941835667a497a475cefe86e6ca5a3831f19ce52ff38137\"}], \"team_lead\": \"ui-design-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-address-integrity-expert.md": "3acf73e78e29c59ec54c5b357facd8ce2eb6154292e8f03d5c226e4a2e4117bd",
+    "agents/data-viz-pro-01.md": "8c65b7b7c622faac1bc1ea69bc7ff2e01856f2416e5a552634a1a5049ffdcf78",
+    "agents/ui-design-expert-team-lead.md": "7f18d86da8b4b513050f153ed9628b39a1f0edbedefee9d15ee0f0524baa6854",
+    "agents/ui-design-expert.md": "0b965a707c6b0d671174d8f30bc23ef7a04e86c0da6361af6a2ea5b50fc53ab4",
+    "plugin.json": "a334b57b5903d83006a582d0a5c06c7cfe8f3753638068851287aaf005ea2fb2",
+    "settings.json": "8ba1a9f5a02eab029b4da7b96343e126bd17e026ce216f0c48b78ebacd40f2c0"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-922",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-922",
+    "kind": "team",
+    "name": "文件归集整理专家",
+    "description": "文件归集整理专家：围绕会议纪要，覆盖决议明确／截止时间／跟踪机制，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "meeting-minutes-pro-team-lead",
+        "role": "lead",
+        "name": "会议纪要主理人",
+        "evidence": null
+      },
+      {
+        "slug": "meeting-minutes-pro",
+        "role": "member",
+        "name": "会议纪要 决议提炼 顾问",
+        "evidence": "original_assets/meeting-minutes-pro/merkle_root",
+        "member_merkle_root": "e6d4d0963cfee5b2bfdf65cdbae46d706ecdcfdad5cd57a0511afc2c43b569ef"
+      },
+      {
+        "slug": "file-organize-rules",
+        "role": "member",
+        "name": "文件归集整理 助手",
+        "evidence": "original_assets/file-organize-rules/merkle_root",
+        "member_merkle_root": "29f5d9d8339d253a75bf7c79a83a9ebacc74b30eff52ea18bf67028b814a3175"
+      },
+      {
+        "slug": "overseas-support-pro",
+        "role": "member",
+        "name": "海外客服 多语支持 顾问",
+        "evidence": "original_assets/overseas-support-pro/merkle_root",
+        "member_merkle_root": "f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3"
+      }
+    ],
+    "team_lead": "meeting-minutes-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b8fe2612998d6dd9",
+  "prompt_hash": "5e0f59b76080d1cd",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-922\", \"kind\": \"team\", \"name\": \"文件归集整理专家\", \"description\": \"文件归集整理专家：围绕会议纪要，覆盖决议明确／截止时间／跟踪机制，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"meeting-minutes-pro-team-lead\", \"role\": \"lead\", \"name\": \"会议纪要主理人\", \"evidence\": null}, {\"slug\": \"meeting-minutes-pro\", \"role\": \"member\", \"name\": \"会议纪要 决议提炼 顾问\", \"evidence\": \"original_assets/meeting-minutes-pro/merkle_root\", \"member_merkle_root\": \"e6d4d0963cfee5b2bfdf65cdbae46d706ecdcfdad5cd57a0511afc2c43b569ef\"}, {\"slug\": \"file-organize-rules\", \"role\": \"member\", \"name\": \"文件归集整理 助手\", \"evidence\": \"original_assets/file-organize-rules/merkle_root\", \"member_merkle_root\": \"29f5d9d8339d253a75bf7c79a83a9ebacc74b30eff52ea18bf67028b814a3175\"}, {\"slug\": \"overseas-support-pro\", \"role\": \"member\", \"name\": \"海外客服 多语支持 顾问\", \"evidence\": \"original_assets/overseas-support-pro/merkle_root\", \"member_merkle_root\": \"f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3\"}], \"team_lead\": \"meeting-minutes-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/file-organize-rules.md": "530e6e4f8e8c64a1cdb088d811acdf5a3430e02c67c2e7e96863b1c1b0318c3f",
+    "agents/meeting-minutes-pro-team-lead.md": "0f3f6ba3438771c79114e94afc27adfc597a0f5209d95ac0df58aacfdabe9ca0",
+    "agents/meeting-minutes-pro.md": "2532dc405c1db690afbe47bf57d87aa77bd2745b89b4cee3fbb0a60b9586c144",
+    "agents/overseas-support-pro.md": "79b5cff68fa8027681a0ac16a0b61ee83f1f1cc1ec81a9a8ba9bfc5d45067744",
+    "plugin.json": "d7b8784c7c1e02e2a22244557fe030f4a6efa522fd0aebc95df0bee54017b870",
+    "settings.json": "3b4660035848badfcce3065cf8c7697724a65eae36861628d6d09335b3c6a993"
+  }
+}

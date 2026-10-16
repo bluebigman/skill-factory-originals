@@ -1,0 +1,126 @@
+{
+  "agentName": "posture-care-pro-team-lead",
+  "agents": [
+    "./agents/posture-care-pro-team-lead.md",
+    "./agents/posture-care-pro.md",
+    "./agents/knowledge-management-pro.md",
+    "./agents/reading-notes-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "15-Education",
+  "defaultInitPrompt": {
+    "en": "Handle 久坐改善",
+    "zh": "帮我处理久坐改善"
+  },
+  "description": "Posture Care Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "久坐 知识 读书 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Posture Care Pro Team",
+    "zh": "久坐 知识 读书 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "posture-care-pro-team-lead",
+      "name": {
+        "en": "久坐改善主理人",
+        "zh": "久坐改善主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/posture-care-pro.png",
+      "id": "posture-care-pro",
+      "name": {
+        "en": "Posture Care Pro",
+        "zh": "久坐改善 体态调整 拉伸放松"
+      },
+      "profession": {
+        "en": "Posture Care Pro",
+        "zh": "久坐改善 体态调整 拉伸放松"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-management-pro.png",
+      "id": "knowledge-management-pro",
+      "name": {
+        "en": "Knowledge Management Pro",
+        "zh": "知识管理 笔记体系 总结提炼"
+      },
+      "profession": {
+        "en": "Knowledge Management Pro",
+        "zh": "知识管理 笔记体系 总结提炼"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/reading-notes-pro.png",
+      "id": "reading-notes-pro",
+      "name": {
+        "en": "Reading Notes Pro",
+        "zh": "读书笔记 知识卡片 输出转化"
+      },
+      "profession": {
+        "en": "Reading Notes Pro",
+        "zh": "读书笔记 知识卡片 输出转化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-167",
+  "plugin": "group-team-167",
+  "profession": {
+    "en": "Posture Care Pro Collaboration Team",
+    "zh": "久坐 知识 读书 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 久坐改善",
+      "zh": "帮我处理久坐改善"
+    },
+    {
+      "en": "Plan 知识管理",
+      "zh": "帮我规划知识管理"
+    },
+    {
+      "en": "Review 读书笔记",
+      "zh": "帮我检查读书笔记"
+    }
+  ],
+  "tags": [
+    {
+      "en": "久坐改善",
+      "zh": "久坐改善"
+    },
+    {
+      "en": "知识管理",
+      "zh": "知识管理"
+    },
+    {
+      "en": "读书笔记",
+      "zh": "读书笔记"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "posture-care-pro-team-lead",
+    "memberAgents": [
+      "posture-care-pro",
+      "knowledge-management-pro",
+      "reading-notes-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

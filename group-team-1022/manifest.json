@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1022",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1022",
+    "kind": "team",
+    "name": "生产安全专家",
+    "description": "生产安全专家：围绕生产安全，覆盖分区排查／高危优先／闭环整改，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "safety-production-pro-team-lead",
+        "role": "lead",
+        "name": "生产安全主理人",
+        "evidence": null
+      },
+      {
+        "slug": "safety-production-pro",
+        "role": "member",
+        "name": "生产安全 隐患排查 顾问",
+        "evidence": "original_assets/safety-production-pro/merkle_root",
+        "member_merkle_root": "378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd"
+      },
+      {
+        "slug": "query-cache-pro",
+        "role": "member",
+        "name": "查询缓存 命中优化 顾问",
+        "evidence": "original_assets/query-cache-pro/merkle_root",
+        "member_merkle_root": "951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf"
+      },
+      {
+        "slug": "config-drift-check",
+        "role": "member",
+        "name": "配置漂移核验 顾问",
+        "evidence": "original_assets/config-drift-check/merkle_root",
+        "member_merkle_root": "787d4599e6be9c0ded8c9a83b842544dcf7ec17b7a77e2b69c04a9b8860b5efa"
+      }
+    ],
+    "team_lead": "safety-production-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "99a67ad30c83edda",
+  "prompt_hash": "6a1e14bc11c7eb27",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1022\", \"kind\": \"team\", \"name\": \"生产安全专家\", \"description\": \"生产安全专家：围绕生产安全，覆盖分区排查／高危优先／闭环整改，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"safety-production-pro-team-lead\", \"role\": \"lead\", \"name\": \"生产安全主理人\", \"evidence\": null}, {\"slug\": \"safety-production-pro\", \"role\": \"member\", \"name\": \"生产安全 隐患排查 顾问\", \"evidence\": \"original_assets/safety-production-pro/merkle_root\", \"member_merkle_root\": \"378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd\"}, {\"slug\": \"query-cache-pro\", \"role\": \"member\", \"name\": \"查询缓存 命中优化 顾问\", \"evidence\": \"original_assets/query-cache-pro/merkle_root\", \"member_merkle_root\": \"951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf\"}, {\"slug\": \"config-drift-check\", \"role\": \"member\", \"name\": \"配置漂移核验 顾问\", \"evidence\": \"original_assets/config-drift-check/merkle_root\", \"member_merkle_root\": \"787d4599e6be9c0ded8c9a83b842544dcf7ec17b7a77e2b69c04a9b8860b5efa\"}], \"team_lead\": \"safety-production-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/config-drift-check.md": "1d2c295a20963735f3527e0bee4e7ed197130a82c741b771486a15f84b8ae994",
+    "agents/query-cache-pro.md": "67162cdb5b23e770fca6062635b3aae4471b9d361cc1271ff8d0dd1310b20f03",
+    "agents/safety-production-pro-team-lead.md": "d176fade0b8ca548d77dcd531fcf68c09ccab3a221a03340299921b0a67ad37c",
+    "agents/safety-production-pro.md": "26061cbb44b974ba54b059d760432bc978851b0a4fbd78627b06cd3523c33cbc",
+    "plugin.json": "988b65b890ace5787dc707d7d2ca5bf038036097be10e0d5f9e08f5e7ed5bf2b",
+    "settings.json": "03db7f1d68d9000eee02d1149f4e018040216640b757db7e248615b979e258ef"
+  }
+}

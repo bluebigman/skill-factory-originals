@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-393",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-393",
+    "kind": "team",
+    "name": "服务承诺时效设计专家",
+    "description": "输入服务承诺相关需求，输出分级承诺、例外写明、计量口径三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "service-sla-pro-team-lead",
+        "role": "lead",
+        "name": "服务承诺主理人",
+        "evidence": null
+      },
+      {
+        "slug": "service-sla-pro",
+        "role": "member",
+        "name": "服务承诺 时效设计 顾问",
+        "evidence": "original_assets/service-sla-pro/merkle_root",
+        "member_merkle_root": "dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa"
+      },
+      {
+        "slug": "deal-review-pro",
+        "role": "member",
+        "name": "商机评审 风险把关 顾问",
+        "evidence": "original_assets/deal-review-pro/merkle_root",
+        "member_merkle_root": "872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265"
+      },
+      {
+        "slug": "contract-mfg-audit-pro",
+        "role": "member",
+        "name": "代工管理 过程审核 顾问",
+        "evidence": "original_assets/contract-mfg-audit-pro/merkle_root",
+        "member_merkle_root": "e6db2db3f515fa85e99569ef501fd812d3becd37383f1898ba423bc77fcfa9f9"
+      }
+    ],
+    "team_lead": "service-sla-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "49fdf09e5986020e",
+  "prompt_hash": "7995b5371204df94",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-393\", \"kind\": \"team\", \"name\": \"服务承诺时效设计专家\", \"description\": \"输入服务承诺相关需求，输出分级承诺、例外写明、计量口径三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"service-sla-pro-team-lead\", \"role\": \"lead\", \"name\": \"服务承诺主理人\", \"evidence\": null}, {\"slug\": \"service-sla-pro\", \"role\": \"member\", \"name\": \"服务承诺 时效设计 顾问\", \"evidence\": \"original_assets/service-sla-pro/merkle_root\", \"member_merkle_root\": \"dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa\"}, {\"slug\": \"deal-review-pro\", \"role\": \"member\", \"name\": \"商机评审 风险把关 顾问\", \"evidence\": \"original_assets/deal-review-pro/merkle_root\", \"member_merkle_root\": \"872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265\"}, {\"slug\": \"contract-mfg-audit-pro\", \"role\": \"member\", \"name\": \"代工管理 过程审核 顾问\", \"evidence\": \"original_assets/contract-mfg-audit-pro/merkle_root\", \"member_merkle_root\": \"e6db2db3f515fa85e99569ef501fd812d3becd37383f1898ba423bc77fcfa9f9\"}], \"team_lead\": \"service-sla-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-mfg-audit-pro.md": "4316532dcb7450cd073987f6ecd530b89bb42cde2651651cc9b24041d70b9b1c",
+    "agents/deal-review-pro.md": "2958a469385141f8f59b0da401cc4553a868a216993d32ba23074f85b83df50c",
+    "agents/service-sla-pro-team-lead.md": "ef42fbd73686c21ff2a657ec62b808694352eea86d6c3323afeeca02ff33c1bb",
+    "agents/service-sla-pro.md": "35b4e75f3d8084c6958d898bef344282e56fd508b6026dc72c274e12809ef7e9",
+    "plugin.json": "ab6124820d136137660ee2729ca4c733b2f33f87f53e1e475edb9a7382fc45fd",
+    "settings.json": "720d25b5086574e52e83f75e440c7a14d4ed41050c2856f6e54cffe420d06e6e"
+  }
+}

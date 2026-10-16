@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1006",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1006",
+    "kind": "team",
+    "name": "能耗管理节能诊断专家",
+    "description": "擅长分项计量、攻其大头与峰谷优化，覆盖能耗管理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "energy-consumption-pro-team-lead",
+        "role": "lead",
+        "name": "能耗管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "energy-consumption-pro",
+        "role": "member",
+        "name": "能耗管理 节能诊断 顾问",
+        "evidence": "original_assets/energy-consumption-pro/merkle_root",
+        "member_merkle_root": "6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719"
+      },
+      {
+        "slug": "industrial-service-pro",
+        "role": "member",
+        "name": "工业服务 交付标准 顾问",
+        "evidence": "original_assets/industrial-service-pro/merkle_root",
+        "member_merkle_root": "c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d"
+      },
+      {
+        "slug": "finance-toolkit-pro",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro/merkle_root",
+        "member_merkle_root": "3626d1435ab9ed2d8316f44a50811ccf8439a181c9aebfd98e215c021beac685"
+      }
+    ],
+    "team_lead": "energy-consumption-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7457f4f156f0fcf8",
+  "prompt_hash": "685236e77dd2c4db",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1006\", \"kind\": \"team\", \"name\": \"能耗管理节能诊断专家\", \"description\": \"擅长分项计量、攻其大头与峰谷优化，覆盖能耗管理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"energy-consumption-pro-team-lead\", \"role\": \"lead\", \"name\": \"能耗管理主理人\", \"evidence\": null}, {\"slug\": \"energy-consumption-pro\", \"role\": \"member\", \"name\": \"能耗管理 节能诊断 顾问\", \"evidence\": \"original_assets/energy-consumption-pro/merkle_root\", \"member_merkle_root\": \"6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719\"}, {\"slug\": \"industrial-service-pro\", \"role\": \"member\", \"name\": \"工业服务 交付标准 顾问\", \"evidence\": \"original_assets/industrial-service-pro/merkle_root\", \"member_merkle_root\": \"c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d\"}, {\"slug\": \"finance-toolkit-pro\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro/merkle_root\", \"member_merkle_root\": \"3626d1435ab9ed2d8316f44a50811ccf8439a181c9aebfd98e215c021beac685\"}], \"team_lead\": \"energy-consumption-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/energy-consumption-pro-team-lead.md": "8bdfe6f45ffe77029f8e6e2691bef0ac5fb123d540bd62c854f6ec6c2922c48b",
+    "agents/energy-consumption-pro.md": "5a913cbcf76ef905ce0980620743b11b545511900ccb2d982c6e5000a930806c",
+    "agents/finance-toolkit-pro.md": "a0c6e303238b5b04ce61111a3867833884a22e24818ba9e71261c0242d1ac984",
+    "agents/industrial-service-pro.md": "d3ee66d0a31f5a421fc84f458a93a652a0531272ea471c2507a75cdaca2f1fba",
+    "plugin.json": "4b231c58f696bc13373917a9a346e2f0058366565c2a88e104048334e7192751",
+    "settings.json": "e3bd486a674e789f5938802689694a8c090754a25314ad9f37185c6fac04ef42"
+  }
+}

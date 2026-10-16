@@ -1,0 +1,126 @@
+{
+  "agentName": "log-pattern-mining-team-lead",
+  "agents": [
+    "./agents/log-pattern-mining-team-lead.md",
+    "./agents/log-pattern-mining.md",
+    "./agents/sql-toolkit-pro-03.md",
+    "./agents/kb-build-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 日志挖掘",
+    "zh": "帮我处理日志挖掘"
+  },
+  "description": "log-pattern-mining team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 日志挖掘 end-to-end: 模式提取, 异常聚类 and 基线上线. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长模式提取、异常聚类与基线上线，覆盖日志挖掘全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "log-pattern-mining Team",
+    "zh": "日志挖掘专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "log-pattern-mining-team-lead",
+      "name": {
+        "en": "日志挖掘主理人",
+        "zh": "日志挖掘主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/log-pattern-mining.png",
+      "id": "log-pattern-mining",
+      "name": {
+        "en": "log-pattern-mining",
+        "zh": "日志挖掘 模式识别 顾问"
+      },
+      "profession": {
+        "en": "log-pattern-mining",
+        "zh": "日志挖掘 模式识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-03.png",
+      "id": "sql-toolkit-pro-03",
+      "name": {
+        "en": "SQL与数据库 Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "profession": {
+        "en": "SQL与数据库 Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kb-build-pro.png",
+      "id": "kb-build-pro",
+      "name": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "profession": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-578",
+  "plugin": "group-team-578",
+  "profession": {
+    "en": "log-pattern-mining Collaboration Team",
+    "zh": "日志挖掘专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 日志挖掘",
+      "zh": "帮我处理日志挖掘"
+    },
+    {
+      "en": "Plan 数据转查询",
+      "zh": "帮我规划数据转查询"
+    },
+    {
+      "en": "Review 知识库构建",
+      "zh": "帮我检查知识库构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "模式提取",
+      "zh": "模式提取"
+    },
+    {
+      "en": "异常聚类",
+      "zh": "异常聚类"
+    },
+    {
+      "en": "基线上线",
+      "zh": "基线上线"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "log-pattern-mining-team-lead",
+    "memberAgents": [
+      "log-pattern-mining",
+      "sql-toolkit-pro-03",
+      "kb-build-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

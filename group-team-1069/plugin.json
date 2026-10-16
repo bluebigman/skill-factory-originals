@@ -1,0 +1,126 @@
+{
+  "agentName": "hr-recruit-flow-team-lead",
+  "agents": [
+    "./agents/hr-recruit-flow-team-lead.md",
+    "./agents/hr-recruit-flow.md",
+    "./agents/rollback-drill.md",
+    "./agents/image-batch-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 招聘流程设计",
+    "zh": "帮我处理招聘流程设计"
+  },
+  "description": "hr-recruit-flow team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 招聘流程设计 end-to-end: 流程清晰, 标准统一 and 反馈及时. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长流程清晰、标准统一与反馈及时，覆盖招聘流程设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "hr-recruit-flow Team",
+    "zh": "招聘流程设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "hr-recruit-flow-team-lead",
+      "name": {
+        "en": "招聘流程设计主理人",
+        "zh": "招聘流程设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/hr-recruit-flow.png",
+      "id": "hr-recruit-flow",
+      "name": {
+        "en": "hr-recruit-flow",
+        "zh": "招聘流程设计 顾问"
+      },
+      "profession": {
+        "en": "hr-recruit-flow",
+        "zh": "招聘流程设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/rollback-drill.png",
+      "id": "rollback-drill",
+      "name": {
+        "en": "rollback-drill",
+        "zh": "回滚演练 顾问"
+      },
+      "profession": {
+        "en": "rollback-drill",
+        "zh": "回滚演练 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/image-batch-expert.png",
+      "id": "image-batch-expert",
+      "name": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "profession": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1069",
+  "plugin": "group-team-1069",
+  "profession": {
+    "en": "hr-recruit-flow Collaboration Team",
+    "zh": "招聘流程设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 招聘流程设计",
+      "zh": "帮我处理招聘流程设计"
+    },
+    {
+      "en": "Plan 回滚演练",
+      "zh": "帮我规划回滚演练"
+    },
+    {
+      "en": "Review 图片批处理",
+      "zh": "帮我检查图片批处理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "流程清晰",
+      "zh": "流程清晰"
+    },
+    {
+      "en": "标准统一",
+      "zh": "标准统一"
+    },
+    {
+      "en": "反馈及时",
+      "zh": "反馈及时"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "hr-recruit-flow-team-lead",
+    "memberAgents": [
+      "hr-recruit-flow",
+      "rollback-drill",
+      "image-batch-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

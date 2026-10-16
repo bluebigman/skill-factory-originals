@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1201",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1201",
+    "kind": "team",
+    "name": "双语文档对齐专家",
+    "description": "擅长语义对齐、格式同步与版本同步，覆盖双语文档对齐全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-bilingual-align-team-lead",
+        "role": "lead",
+        "name": "双语文档对齐主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-bilingual-align",
+        "role": "member",
+        "name": "双语文档对齐 顾问",
+        "evidence": "original_assets/doc-bilingual-align/merkle_root",
+        "member_merkle_root": "8e72078ecd229892f1b2fc6c4d2e832a96d6010be94a31685d3d3f9948e4b2d6"
+      },
+      {
+        "slug": "microcopy-craft",
+        "role": "member",
+        "name": "界面文案打磨 顾问",
+        "evidence": "original_assets/microcopy-craft/merkle_root",
+        "member_merkle_root": "956f1ce9f1a2ead5e2dc569cf8366e0ec6835b74b397018922f6a54a42846f9e"
+      },
+      {
+        "slug": "seo-content-brief",
+        "role": "member",
+        "name": "内容选题简报 助手",
+        "evidence": "original_assets/seo-content-brief/merkle_root",
+        "member_merkle_root": "d08aa2ac053218d5835d97e9c0055071bec855f08463daac81233829347d1650"
+      }
+    ],
+    "team_lead": "doc-bilingual-align-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8dbc27d17cacb153",
+  "prompt_hash": "540925bc5a1b9ff1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1201\", \"kind\": \"team\", \"name\": \"双语文档对齐专家\", \"description\": \"擅长语义对齐、格式同步与版本同步，覆盖双语文档对齐全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-bilingual-align-team-lead\", \"role\": \"lead\", \"name\": \"双语文档对齐主理人\", \"evidence\": null}, {\"slug\": \"doc-bilingual-align\", \"role\": \"member\", \"name\": \"双语文档对齐 顾问\", \"evidence\": \"original_assets/doc-bilingual-align/merkle_root\", \"member_merkle_root\": \"8e72078ecd229892f1b2fc6c4d2e832a96d6010be94a31685d3d3f9948e4b2d6\"}, {\"slug\": \"microcopy-craft\", \"role\": \"member\", \"name\": \"界面文案打磨 顾问\", \"evidence\": \"original_assets/microcopy-craft/merkle_root\", \"member_merkle_root\": \"956f1ce9f1a2ead5e2dc569cf8366e0ec6835b74b397018922f6a54a42846f9e\"}, {\"slug\": \"seo-content-brief\", \"role\": \"member\", \"name\": \"内容选题简报 助手\", \"evidence\": \"original_assets/seo-content-brief/merkle_root\", \"member_merkle_root\": \"d08aa2ac053218d5835d97e9c0055071bec855f08463daac81233829347d1650\"}], \"team_lead\": \"doc-bilingual-align-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-bilingual-align-team-lead.md": "85a0a64496a4ee6d2b113e0fc8fd81755170cfbe35243d61436c2e6b7fa1e283",
+    "agents/doc-bilingual-align.md": "75bb2defafa1e56da7e4e8a5be15eadfcceabf4158ff22da7edc81ec4ea7d98b",
+    "agents/microcopy-craft.md": "4a78fb69430c97eb41542126f37a29ea08265205064f9283d53daae269cc7e51",
+    "agents/seo-content-brief.md": "a1d48310e4ab15c68e6b3142a16ce4e08d639ba1d58baebf1205563e6521be47",
+    "plugin.json": "91229c812d542d169aafa620b377a0735b3f7da67df20c9b42b5d3bde8b93765",
+    "settings.json": "f539188940ecbb0beadc4462c3dd6c04bf9e055f6903c9eeb6c8dfecd311ac9f"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1145",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1145",
+    "kind": "team",
+    "name": "文档翻译润色专家",
+    "description": "文档翻译润色专家：围绕文档翻译润色，覆盖意译优先／术语统一／长句拆分，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-translate-polish-team-lead",
+        "role": "lead",
+        "name": "文档翻译润色主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-translate-polish",
+        "role": "member",
+        "name": "文档翻译润色 顾问",
+        "evidence": "original_assets/doc-translate-polish/merkle_root",
+        "member_merkle_root": "ca7fb9ae95d27962f55c17da8307bf4a732f40008e2740dcd27091e24d6cfa6d"
+      },
+      {
+        "slug": "crisis-response",
+        "role": "member",
+        "name": "危机应对 顾问",
+        "evidence": "original_assets/crisis-response/merkle_root",
+        "member_merkle_root": "410f51a6b973b7c693d3fa7469cacb8c5c7b7d949e0c3c82d5405035da84fec6"
+      },
+      {
+        "slug": "public-relations",
+        "role": "member",
+        "name": "公关传播 顾问",
+        "evidence": "original_assets/public-relations/merkle_root",
+        "member_merkle_root": "558965270d7c6f8ef518e63e23f031385dffadb244175004acf06bd1b1c5d278"
+      }
+    ],
+    "team_lead": "doc-translate-polish-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "81b097b3e7b017da",
+  "prompt_hash": "b8e1e684b84c633d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1145\", \"kind\": \"team\", \"name\": \"文档翻译润色专家\", \"description\": \"文档翻译润色专家：围绕文档翻译润色，覆盖意译优先／术语统一／长句拆分，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-translate-polish-team-lead\", \"role\": \"lead\", \"name\": \"文档翻译润色主理人\", \"evidence\": null}, {\"slug\": \"doc-translate-polish\", \"role\": \"member\", \"name\": \"文档翻译润色 顾问\", \"evidence\": \"original_assets/doc-translate-polish/merkle_root\", \"member_merkle_root\": \"ca7fb9ae95d27962f55c17da8307bf4a732f40008e2740dcd27091e24d6cfa6d\"}, {\"slug\": \"crisis-response\", \"role\": \"member\", \"name\": \"危机应对 顾问\", \"evidence\": \"original_assets/crisis-response/merkle_root\", \"member_merkle_root\": \"410f51a6b973b7c693d3fa7469cacb8c5c7b7d949e0c3c82d5405035da84fec6\"}, {\"slug\": \"public-relations\", \"role\": \"member\", \"name\": \"公关传播 顾问\", \"evidence\": \"original_assets/public-relations/merkle_root\", \"member_merkle_root\": \"558965270d7c6f8ef518e63e23f031385dffadb244175004acf06bd1b1c5d278\"}], \"team_lead\": \"doc-translate-polish-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crisis-response.md": "2acd9212da499d1ee4841f23aef92d861509e67c331bac4adb2545c8dfe5ca0e",
+    "agents/doc-translate-polish-team-lead.md": "0146c33ecc2ccb20b5dcb4905c8a0303391e400c4c8af2cff192a0b33b63c5c8",
+    "agents/doc-translate-polish.md": "d1f96d4b49b1b2a00ff5e262f67a3af4b3faf4ee9f105144bba0757ca947d08d",
+    "agents/public-relations.md": "8f74d7ad00d409c332111eb71c0ffb48ad4f4d4cabf2cf8758b4c5fe3132d710",
+    "plugin.json": "03c5036c4c48fff5b348802380284781628d0137beb8903c6cf2b649bbe07e6d",
+    "settings.json": "27250a97472103610bf40a3c99d8989a6605c724742a53ef9253458d756ba43f"
+  }
+}

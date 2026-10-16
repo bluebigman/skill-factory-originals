@@ -1,0 +1,126 @@
+{
+  "agentName": "secrets-management-team-lead",
+  "agents": [
+    "./agents/secrets-management-team-lead.md",
+    "./agents/secrets-management.md",
+    "./agents/ops-deploy-pro.md",
+    "./agents/data-sample-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 密钥安全管理",
+    "zh": "帮我处理密钥安全管理"
+  },
+  "description": "secrets-management team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 密钥安全管理 end-to-end: 泄露处置, 抽样方法 and 复核记录. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长泄露处置、抽样方法与复核记录，覆盖密钥安全管理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "secrets-management Team",
+    "zh": "密钥安全管理顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "secrets-management-team-lead",
+      "name": {
+        "en": "密钥安全管理主理人",
+        "zh": "密钥安全管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/secrets-management.png",
+      "id": "secrets-management",
+      "name": {
+        "en": "secrets-management",
+        "zh": "密钥安全管理 顾问"
+      },
+      "profession": {
+        "en": "secrets-management",
+        "zh": "密钥安全管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro.png",
+      "id": "ops-deploy-pro",
+      "name": {
+        "en": "运维与部署 Suite",
+        "zh": "缓存清理 故障排查"
+      },
+      "profession": {
+        "en": "运维与部署 Suite",
+        "zh": "缓存清理 故障排查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-sample-review.png",
+      "id": "data-sample-review",
+      "name": {
+        "en": "data-sample-review",
+        "zh": "数据抽样复核 助手"
+      },
+      "profession": {
+        "en": "data-sample-review",
+        "zh": "数据抽样复核 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1237",
+  "plugin": "group-team-1237",
+  "profession": {
+    "en": "secrets-management Collaboration Team",
+    "zh": "密钥安全管理顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 密钥安全管理",
+      "zh": "帮我处理密钥安全管理"
+    },
+    {
+      "en": "Plan 缓存清理",
+      "zh": "帮我规划缓存清理"
+    },
+    {
+      "en": "Review 数据抽样复核",
+      "zh": "帮我检查数据抽样复核"
+    }
+  ],
+  "tags": [
+    {
+      "en": "不入库",
+      "zh": "不入库"
+    },
+    {
+      "en": "环境隔离",
+      "zh": "环境隔离"
+    },
+    {
+      "en": "最小权限",
+      "zh": "最小权限"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "secrets-management-team-lead",
+    "memberAgents": [
+      "secrets-management",
+      "ops-deploy-pro",
+      "data-sample-review"
+    ]
+  },
+  "version": "1.0.0"
+}

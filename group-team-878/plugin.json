@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-base-pro-fixed-team-lead",
+  "agents": [
+    "./agents/knowledge-base-pro-fixed-team-lead.md",
+    "./agents/knowledge-base-pro-fixed.md",
+    "./agents/title-ab-plan.md",
+    "./agents/copy-test-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 文档建站",
+    "zh": "帮我处理文档建站"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 标题测试 requirements, output three deliverables: 样本均分, 指标明确, 结论留存. Verifiable end-to-end, evidence per step.",
+    "zh": "输入标题测试相关需求，输出样本均分、指标明确、结论留存三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "标题测试专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-base-pro-fixed-team-lead",
+      "name": {
+        "en": "文档建站主理人",
+        "zh": "文档建站主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-fixed.png",
+      "id": "knowledge-base-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文档建站 知识库构建"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文档建站 知识库构建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/title-ab-plan.png",
+      "id": "title-ab-plan",
+      "name": {
+        "en": "title-ab-plan",
+        "zh": "标题测试 顾问"
+      },
+      "profession": {
+        "en": "title-ab-plan",
+        "zh": "标题测试 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/copy-test-method.png",
+      "id": "copy-test-method",
+      "name": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "profession": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-878",
+  "plugin": "group-team-878",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "标题测试专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档建站",
+      "zh": "帮我处理文档建站"
+    },
+    {
+      "en": "Plan 标题测试",
+      "zh": "帮我规划标题测试"
+    },
+    {
+      "en": "Review 文案测试",
+      "zh": "帮我检查文案测试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档建站",
+      "zh": "文档建站"
+    },
+    {
+      "en": "知识库搭建",
+      "zh": "知识库搭建"
+    },
+    {
+      "en": "资料整理",
+      "zh": "资料整理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-base-pro-fixed-team-lead",
+    "memberAgents": [
+      "knowledge-base-pro-fixed",
+      "title-ab-plan",
+      "copy-test-method"
+    ]
+  },
+  "version": "1.0.0"
+}

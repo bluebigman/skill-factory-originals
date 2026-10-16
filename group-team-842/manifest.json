@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-842",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-842",
+    "kind": "team",
+    "name": "实习日志文档生成专家",
+    "description": "输入敏感文件防护相关需求，输出分类标识、访问审计、传输加密三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-pro-team-lead",
+        "role": "lead",
+        "name": "实习日志主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-pro",
+        "role": "member",
+        "name": "实习日志 文档生成",
+        "evidence": "original_assets/data-pipeline-pro/merkle_root",
+        "member_merkle_root": "bdd1f61b0f21957065260daa0b3171ea2d149689a8560e6cbb5321e4fd83970c"
+      },
+      {
+        "slug": "sensitive-file-guard",
+        "role": "member",
+        "name": "敏感文件防护 顾问",
+        "evidence": "original_assets/sensitive-file-guard/merkle_root",
+        "member_merkle_root": "c0ce48e6fd93bc06144504ddaa239ac982dc4571e6e8ad3d1cb171b811b69583"
+      },
+      {
+        "slug": "data-clean-pro-04",
+        "role": "member",
+        "name": "数据整理 字段还原 批量处理",
+        "evidence": "original_assets/data-clean-pro-04/merkle_root",
+        "member_merkle_root": "5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9"
+      }
+    ],
+    "team_lead": "data-pipeline-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "983748f3ab569e24",
+  "prompt_hash": "a68b823c965f48ad",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-842\", \"kind\": \"team\", \"name\": \"实习日志文档生成专家\", \"description\": \"输入敏感文件防护相关需求，输出分类标识、访问审计、传输加密三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-pro-team-lead\", \"role\": \"lead\", \"name\": \"实习日志主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-pro\", \"role\": \"member\", \"name\": \"实习日志 文档生成\", \"evidence\": \"original_assets/data-pipeline-pro/merkle_root\", \"member_merkle_root\": \"bdd1f61b0f21957065260daa0b3171ea2d149689a8560e6cbb5321e4fd83970c\"}, {\"slug\": \"sensitive-file-guard\", \"role\": \"member\", \"name\": \"敏感文件防护 顾问\", \"evidence\": \"original_assets/sensitive-file-guard/merkle_root\", \"member_merkle_root\": \"c0ce48e6fd93bc06144504ddaa239ac982dc4571e6e8ad3d1cb171b811b69583\"}, {\"slug\": \"data-clean-pro-04\", \"role\": \"member\", \"name\": \"数据整理 字段还原 批量处理\", \"evidence\": \"original_assets/data-clean-pro-04/merkle_root\", \"member_merkle_root\": \"5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9\"}], \"team_lead\": \"data-pipeline-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-04.md": "be27881749f722ea0e32e68d704c812ae811fac2f44b4adb39df449335136508",
+    "agents/data-pipeline-pro-team-lead.md": "ce8b9c9df2aac21847678cfbbeddd44908295f0c364d53ea8ab0ffc5b628a289",
+    "agents/data-pipeline-pro.md": "3bb29bb47b5786d94b22f4bd71ba7cabf0733f93764e30db834d04c83d5a4b22",
+    "agents/sensitive-file-guard.md": "c77448662d197f827823b3641a2623b88d8a3a96ccd172a21ed8fb81f0cb9a76",
+    "plugin.json": "f1317d004ec826c426c6d8a751e61290f9b26895724e7d713e940a42a3f7f476",
+    "settings.json": "3bde81e8cef7d5a7d7cb413a916c7cbb8efeb27544129e9fb2d5a48204178438"
+  }
+}

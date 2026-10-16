@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1277",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1277",
+    "kind": "team",
+    "name": "看板规格指标选型专家",
+    "description": "看板规格指标选型专家：围绕看板规格，覆盖受众优先／指标精简／层次分明，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "dashboard-spec-pro-team-lead",
+        "role": "lead",
+        "name": "看板规格主理人",
+        "evidence": null
+      },
+      {
+        "slug": "dashboard-spec-pro",
+        "role": "member",
+        "name": "看板规格 指标选型 顾问",
+        "evidence": "original_assets/dashboard-spec-pro/merkle_root",
+        "member_merkle_root": "f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6"
+      },
+      {
+        "slug": "toolkit-pro-08-fixed",
+        "role": "member",
+        "name": "UX设计 样例解析 情节构建",
+        "evidence": "original_assets/toolkit-pro-08-fixed/merkle_root",
+        "member_merkle_root": "4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6"
+      },
+      {
+        "slug": "data-destruction",
+        "role": "member",
+        "name": "数据销毁规范 顾问",
+        "evidence": "original_assets/data-destruction/merkle_root",
+        "member_merkle_root": "346bbf23d4c41ed624ef4369d2116ab68a45ad4cc904562c4b6e99752b51645e"
+      }
+    ],
+    "team_lead": "dashboard-spec-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "536c10a05ad33b93",
+  "prompt_hash": "f8ccd214ecf3641d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1277\", \"kind\": \"team\", \"name\": \"看板规格指标选型专家\", \"description\": \"看板规格指标选型专家：围绕看板规格，覆盖受众优先／指标精简／层次分明，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"dashboard-spec-pro-team-lead\", \"role\": \"lead\", \"name\": \"看板规格主理人\", \"evidence\": null}, {\"slug\": \"dashboard-spec-pro\", \"role\": \"member\", \"name\": \"看板规格 指标选型 顾问\", \"evidence\": \"original_assets/dashboard-spec-pro/merkle_root\", \"member_merkle_root\": \"f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6\"}, {\"slug\": \"toolkit-pro-08-fixed\", \"role\": \"member\", \"name\": \"UX设计 样例解析 情节构建\", \"evidence\": \"original_assets/toolkit-pro-08-fixed/merkle_root\", \"member_merkle_root\": \"4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6\"}, {\"slug\": \"data-destruction\", \"role\": \"member\", \"name\": \"数据销毁规范 顾问\", \"evidence\": \"original_assets/data-destruction/merkle_root\", \"member_merkle_root\": \"346bbf23d4c41ed624ef4369d2116ab68a45ad4cc904562c4b6e99752b51645e\"}], \"team_lead\": \"dashboard-spec-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/dashboard-spec-pro-team-lead.md": "33c72221dbd5ce9bf85fe70401fb7bd1c6aa759fc44322b17cfc5aad7f089898",
+    "agents/dashboard-spec-pro.md": "5b982f30db82622bb70b5f773c340fd4ef952956e675be4bcf9aa349be98d4f7",
+    "agents/data-destruction.md": "c2ebfc9ee80dc9d058333c251d564d421db3a8fb67f74a013b40f2fe37485967",
+    "agents/toolkit-pro-08-fixed.md": "ab5e759ccedf47a3e24bdbbc8a0fd4caf2136dad2f10cf231a282f5a66eecc95",
+    "plugin.json": "5bc013f5af8dedd2316f70740f655296ee451bbd0f6f3b729c8145f177d91603",
+    "settings.json": "9b8c709a6e439b7fc0741e59035faea394dc3779e1a4dec7a90d11ea3b2ea800"
+  }
+}

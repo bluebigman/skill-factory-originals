@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1171",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1171",
+    "kind": "team",
+    "name": "运营手册专家",
+    "description": "擅长异常分支、更新机制与认证标准，覆盖运营手册全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-runbook-team-lead",
+        "role": "lead",
+        "name": "运营手册主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-runbook",
+        "role": "member",
+        "name": "运营手册 编写",
+        "evidence": "original_assets/ops-runbook/merkle_root",
+        "member_merkle_root": "2c40e17910ed424f5ed538ab66272d5bbf52b58a370546402f1e6cd5a40a0a3b"
+      },
+      {
+        "slug": "report-certification",
+        "role": "member",
+        "name": "报表认证机制 顾问",
+        "evidence": "original_assets/report-certification/merkle_root",
+        "member_merkle_root": "5a8990adeacff29b12c3bcdcf41bce1188cda38d1e2e9ff5bb7b342e5695808b"
+      },
+      {
+        "slug": "feedback-triage",
+        "role": "member",
+        "name": "反馈分类处置 助手",
+        "evidence": "original_assets/feedback-triage/merkle_root",
+        "member_merkle_root": "f9c842e4ff007521d7bf166164697f637fffbcd249f0e90c22bd78b6319f5983"
+      }
+    ],
+    "team_lead": "ops-runbook-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b7bf67b947abffcf",
+  "prompt_hash": "5e0d93f6eb1b1d85",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1171\", \"kind\": \"team\", \"name\": \"运营手册专家\", \"description\": \"擅长异常分支、更新机制与认证标准，覆盖运营手册全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-runbook-team-lead\", \"role\": \"lead\", \"name\": \"运营手册主理人\", \"evidence\": null}, {\"slug\": \"ops-runbook\", \"role\": \"member\", \"name\": \"运营手册 编写\", \"evidence\": \"original_assets/ops-runbook/merkle_root\", \"member_merkle_root\": \"2c40e17910ed424f5ed538ab66272d5bbf52b58a370546402f1e6cd5a40a0a3b\"}, {\"slug\": \"report-certification\", \"role\": \"member\", \"name\": \"报表认证机制 顾问\", \"evidence\": \"original_assets/report-certification/merkle_root\", \"member_merkle_root\": \"5a8990adeacff29b12c3bcdcf41bce1188cda38d1e2e9ff5bb7b342e5695808b\"}, {\"slug\": \"feedback-triage\", \"role\": \"member\", \"name\": \"反馈分类处置 助手\", \"evidence\": \"original_assets/feedback-triage/merkle_root\", \"member_merkle_root\": \"f9c842e4ff007521d7bf166164697f637fffbcd249f0e90c22bd78b6319f5983\"}], \"team_lead\": \"ops-runbook-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/feedback-triage.md": "86ca964b2ca781d73cd0384ccc6d763a8479c39cd27e4038c1292d92498d8d31",
+    "agents/ops-runbook-team-lead.md": "3eebaa20ebc0d5d0b744ab14264f882d7841846701304b877f461a6d21378fe4",
+    "agents/ops-runbook.md": "f9e0f644a2fe73a8e2dd427707a03702db64b3c2f2509e665434d3f8498f29d0",
+    "agents/report-certification.md": "57488625c7411b752d64da585307635fcec65e95b71eb8ef248dcef8d1e76115",
+    "plugin.json": "2d8f906e8733554fcaa95874abe5a69df099ca2b5d06d370fed5fae3b9f4e201",
+    "settings.json": "78e5506ff74f8439555bba5a717b24cedc4373793199b6fcda9983159da7e89f"
+  }
+}

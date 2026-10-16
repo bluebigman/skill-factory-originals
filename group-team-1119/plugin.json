@@ -1,0 +1,126 @@
+{
+  "agentName": "crawl-file-pro-team-lead",
+  "agents": [
+    "./agents/crawl-file-pro-team-lead.md",
+    "./agents/crawl-file-pro.md",
+    "./agents/spec-review-plan.md",
+    "./agents/pipeline-review-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 文件采集",
+    "zh": "帮我处理文件采集"
+  },
+  "description": "Crawl File Organizer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 方案评审把关 requirements, output three deliverables: 质疑必回, 限时评审, 退出标准. Verifiable end-to-end, evidence per step.",
+    "zh": "输入方案评审把关相关需求，输出质疑必回、限时评审、退出标准三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Crawl File Organizer Team",
+    "zh": "文件采集专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "crawl-file-pro-team-lead",
+      "name": {
+        "en": "文件采集主理人",
+        "zh": "文件采集主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/crawl-file-pro.png",
+      "id": "crawl-file-pro",
+      "name": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "profession": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/spec-review-plan.png",
+      "id": "spec-review-plan",
+      "name": {
+        "en": "spec-review-plan",
+        "zh": "方案评审把关 顾问"
+      },
+      "profession": {
+        "en": "spec-review-plan",
+        "zh": "方案评审把关 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pipeline-review-pro.png",
+      "id": "pipeline-review-pro",
+      "name": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "profession": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1119",
+  "plugin": "group-team-1119",
+  "profession": {
+    "en": "Crawl File Organizer Collaboration Team",
+    "zh": "文件采集专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文件采集",
+      "zh": "帮我处理文件采集"
+    },
+    {
+      "en": "Plan 方案评审把关",
+      "zh": "帮我规划方案评审把关"
+    },
+    {
+      "en": "Review 销售漏斗",
+      "zh": "帮我检查销售漏斗"
+    }
+  ],
+  "tags": [
+    {
+      "en": "网页采集",
+      "zh": "网页采集"
+    },
+    {
+      "en": "数据提取",
+      "zh": "数据提取"
+    },
+    {
+      "en": "展品归档",
+      "zh": "展品归档"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "crawl-file-pro-team-lead",
+    "memberAgents": [
+      "crawl-file-pro",
+      "spec-review-plan",
+      "pipeline-review-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

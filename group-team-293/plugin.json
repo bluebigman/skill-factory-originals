@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-sla-team-lead",
+  "agents": [
+    "./agents/data-pipeline-sla-team-lead.md",
+    "./agents/data-pipeline-sla.md",
+    "./agents/query-cache-pro.md",
+    "./agents/report-automation-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 管线时效",
+    "zh": "帮我处理管线时效"
+  },
+  "description": "data-pipeline-sla team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 管线时效 end-to-end: 水位监控, 超时告警 and 分级承诺. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长水位监控、超时告警与分级承诺，覆盖管线时效全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "data-pipeline-sla Team",
+    "zh": "管线时效专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-sla-team-lead",
+      "name": {
+        "en": "管线时效主理人",
+        "zh": "管线时效主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-sla.png",
+      "id": "data-pipeline-sla",
+      "name": {
+        "en": "data-pipeline-sla",
+        "zh": "管线时效 延迟监控 顾问"
+      },
+      "profession": {
+        "en": "data-pipeline-sla",
+        "zh": "管线时效 延迟监控 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/query-cache-pro.png",
+      "id": "query-cache-pro",
+      "name": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "profession": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-automation-pro.png",
+      "id": "report-automation-pro",
+      "name": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "profession": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-293",
+  "plugin": "group-team-293",
+  "profession": {
+    "en": "data-pipeline-sla Collaboration Team",
+    "zh": "管线时效专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 管线时效",
+      "zh": "帮我处理管线时效"
+    },
+    {
+      "en": "Plan 查询缓存",
+      "zh": "帮我规划查询缓存"
+    },
+    {
+      "en": "Review 报表自动",
+      "zh": "帮我检查报表自动"
+    }
+  ],
+  "tags": [
+    {
+      "en": "水位监控",
+      "zh": "水位监控"
+    },
+    {
+      "en": "超时告警",
+      "zh": "超时告警"
+    },
+    {
+      "en": "分级承诺",
+      "zh": "分级承诺"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-sla-team-lead",
+    "memberAgents": [
+      "data-pipeline-sla",
+      "query-cache-pro",
+      "report-automation-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

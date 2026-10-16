@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1242",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1242",
+    "kind": "team",
+    "name": "界面文案专家",
+    "description": "输入界面文案相关需求，输出动词开头、称谓统一、场景匹配三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "microcopy-coach-team-lead",
+        "role": "lead",
+        "name": "界面文案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "microcopy-coach",
+        "role": "member",
+        "name": "界面文案 撰写 教练",
+        "evidence": "original_assets/microcopy-coach/merkle_root",
+        "member_merkle_root": "dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2"
+      },
+      {
+        "slug": "article-extract-clean",
+        "role": "member",
+        "name": "网页正文提取 助手",
+        "evidence": "original_assets/article-extract-clean/merkle_root",
+        "member_merkle_root": "4bf58c4f18b46e14e5d4b9029c1294e7f5b0ad2ccbaa8727efd47a12a95726e9"
+      },
+      {
+        "slug": "naming-method",
+        "role": "member",
+        "name": "命名方法 顾问",
+        "evidence": "original_assets/naming-method/merkle_root",
+        "member_merkle_root": "2ccc8b900afdea59db679f240748240edcff614db1b06d0db67580fd617e59a2"
+      }
+    ],
+    "team_lead": "microcopy-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1b67089f1f4cf583",
+  "prompt_hash": "c8b6d31fd5d4cc6c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1242\", \"kind\": \"team\", \"name\": \"界面文案专家\", \"description\": \"输入界面文案相关需求，输出动词开头、称谓统一、场景匹配三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"microcopy-coach-team-lead\", \"role\": \"lead\", \"name\": \"界面文案主理人\", \"evidence\": null}, {\"slug\": \"microcopy-coach\", \"role\": \"member\", \"name\": \"界面文案 撰写 教练\", \"evidence\": \"original_assets/microcopy-coach/merkle_root\", \"member_merkle_root\": \"dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2\"}, {\"slug\": \"article-extract-clean\", \"role\": \"member\", \"name\": \"网页正文提取 助手\", \"evidence\": \"original_assets/article-extract-clean/merkle_root\", \"member_merkle_root\": \"4bf58c4f18b46e14e5d4b9029c1294e7f5b0ad2ccbaa8727efd47a12a95726e9\"}, {\"slug\": \"naming-method\", \"role\": \"member\", \"name\": \"命名方法 顾问\", \"evidence\": \"original_assets/naming-method/merkle_root\", \"member_merkle_root\": \"2ccc8b900afdea59db679f240748240edcff614db1b06d0db67580fd617e59a2\"}], \"team_lead\": \"microcopy-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/article-extract-clean.md": "7524a463560b9fbc6b08739ce5e019c537f19cf3f46241525783b71e7e303313",
+    "agents/microcopy-coach-team-lead.md": "73477881ed3eda1be7f43a713eb725e7ffd219d0107c55b57f052320df2c357c",
+    "agents/microcopy-coach.md": "d366eeadd04961c3f6ba16de13ef41bc9da188254281da3cd87827898525d3b4",
+    "agents/naming-method.md": "c83f0b3b4a2e43bf7d463a18b036cf124fa7a29750cf724d7ca12363b499d644",
+    "plugin.json": "0db092bcd3c25fbbacef5513c5c8f6b9396b683d378c207b6f6f70ab05451dc2",
+    "settings.json": "6a8148a1f9095ae69143235ce33771ae40a650e85524ff03c8431d0f5e1990c8"
+  }
+}

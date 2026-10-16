@@ -1,0 +1,126 @@
+{
+  "agentName": "onboarding-flow-team-lead",
+  "agents": [
+    "./agents/onboarding-flow-team-lead.md",
+    "./agents/onboarding-flow.md",
+    "./agents/info-architecture.md",
+    "./agents/empty-state-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 上手引导流程",
+    "zh": "帮我处理上手引导流程"
+  },
+  "description": "onboarding-flow team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 上手引导流程 requirements, output three deliverables: 卡片分类, 交叉验证, 层级克制. Verifiable end-to-end, evidence per step.",
+    "zh": "输入上手引导流程相关需求，输出卡片分类、交叉验证、层级克制三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "onboarding-flow Team",
+    "zh": "上手引导流程专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "onboarding-flow-team-lead",
+      "name": {
+        "en": "上手引导流程主理人",
+        "zh": "上手引导流程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/onboarding-flow.png",
+      "id": "onboarding-flow",
+      "name": {
+        "en": "onboarding-flow",
+        "zh": "上手引导流程 顾问"
+      },
+      "profession": {
+        "en": "onboarding-flow",
+        "zh": "上手引导流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/info-architecture.png",
+      "id": "info-architecture",
+      "name": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "profession": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/empty-state-pro.png",
+      "id": "empty-state-pro",
+      "name": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "profession": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-883",
+  "plugin": "group-team-883",
+  "profession": {
+    "en": "onboarding-flow Collaboration Team",
+    "zh": "上手引导流程专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 上手引导流程",
+      "zh": "帮我处理上手引导流程"
+    },
+    {
+      "en": "Plan 信息架构",
+      "zh": "帮我规划信息架构"
+    },
+    {
+      "en": "Review 空状态",
+      "zh": "帮我检查空状态"
+    }
+  ],
+  "tags": [
+    {
+      "en": "首价值前置",
+      "zh": "首价值前置"
+    },
+    {
+      "en": "步骤精简",
+      "zh": "步骤精简"
+    },
+    {
+      "en": "可跳过",
+      "zh": "可跳过"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "onboarding-flow-team-lead",
+    "memberAgents": [
+      "onboarding-flow",
+      "info-architecture",
+      "empty-state-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

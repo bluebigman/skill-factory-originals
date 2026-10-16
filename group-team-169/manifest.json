@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-169",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-169",
+    "kind": "team",
+    "name": "商品 客服 直播 团队",
+    "description": "商品 客服 直播 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "product-description-pro-team-lead",
+        "role": "lead",
+        "name": "商品详情主理人",
+        "evidence": null
+      },
+      {
+        "slug": "product-description-pro",
+        "role": "member",
+        "name": "商品详情 卖点提炼 转化文案",
+        "evidence": "original_assets/product-description-pro/merkle_root",
+        "member_merkle_root": "c9bdb8bd7dac78219f6b7891dbdef7739e772c4113ad2c783109382b24e7a625"
+      },
+      {
+        "slug": "customer-service-reply-pro",
+        "role": "member",
+        "name": "客服回复 话术库 投诉处理",
+        "evidence": "original_assets/customer-service-reply-pro/merkle_root",
+        "member_merkle_root": "df08f9098a8a6f70c288d46dc7775934cf3180320af3a13759048f63c16a9ba0"
+      },
+      {
+        "slug": "live-commerce-script-pro",
+        "role": "member",
+        "name": "直播话术 带货文案 客服话术",
+        "evidence": "original_assets/live-commerce-script-pro/merkle_root",
+        "member_merkle_root": "71be476ada377357c4bf9c0c0e6dc29092e0d9714f4addc6026fa35467f1163a"
+      }
+    ],
+    "team_lead": "product-description-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cf2a93b7a81ddd33",
+  "prompt_hash": "d103bc0a0d1c416b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-169\", \"kind\": \"team\", \"name\": \"商品 客服 直播 团队\", \"description\": \"商品 客服 直播 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"product-description-pro-team-lead\", \"role\": \"lead\", \"name\": \"商品详情主理人\", \"evidence\": null}, {\"slug\": \"product-description-pro\", \"role\": \"member\", \"name\": \"商品详情 卖点提炼 转化文案\", \"evidence\": \"original_assets/product-description-pro/merkle_root\", \"member_merkle_root\": \"c9bdb8bd7dac78219f6b7891dbdef7739e772c4113ad2c783109382b24e7a625\"}, {\"slug\": \"customer-service-reply-pro\", \"role\": \"member\", \"name\": \"客服回复 话术库 投诉处理\", \"evidence\": \"original_assets/customer-service-reply-pro/merkle_root\", \"member_merkle_root\": \"df08f9098a8a6f70c288d46dc7775934cf3180320af3a13759048f63c16a9ba0\"}, {\"slug\": \"live-commerce-script-pro\", \"role\": \"member\", \"name\": \"直播话术 带货文案 客服话术\", \"evidence\": \"original_assets/live-commerce-script-pro/merkle_root\", \"member_merkle_root\": \"71be476ada377357c4bf9c0c0e6dc29092e0d9714f4addc6026fa35467f1163a\"}], \"team_lead\": \"product-description-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/customer-service-reply-pro.md": "18ccaa955076f8f7dab1e0fa043c62bef2192351798657efd4c56045d73439ee",
+    "agents/live-commerce-script-pro.md": "301a74ba478655bab0b8d5e6164dba1464e27de049a23ddf60c9989cb60701f7",
+    "agents/product-description-pro-team-lead.md": "3021944fd9836bad43572425e5b4aedb48adbc823e0d90770b79e885a3adfa52",
+    "agents/product-description-pro.md": "c4d3daa58df087178ac5ef9066697aff7a51f0b2018e19ef25b36c415423a688",
+    "plugin.json": "7346eb37ef2278cc4bad1a5779e46af55bba77d4cd7b092e4ab6105c94928192",
+    "settings.json": "ad7dc9ebbd60369596613e6e1341243777df90d2f0803c0fdf1254532cba5084"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1169",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1169",
+    "kind": "team",
+    "name": "无障碍检查清单专家",
+    "description": "无障碍检查清单专家：围绕无障碍，覆盖对比达标／键盘可达／替代文本，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "accessibility-check-team-lead",
+        "role": "lead",
+        "name": "无障碍主理人",
+        "evidence": null
+      },
+      {
+        "slug": "accessibility-check",
+        "role": "member",
+        "name": "无障碍 检查清单 顾问",
+        "evidence": "original_assets/accessibility-check/merkle_root",
+        "member_merkle_root": "94855af715644292945da9725667b15298013fd61b35f42c2f1197fa553e3f91"
+      },
+      {
+        "slug": "usability-test-pro",
+        "role": "member",
+        "name": "可用性 测试执行 顾问",
+        "evidence": "original_assets/usability-test-pro/merkle_root",
+        "member_merkle_root": "07a0e1b9314b6ba865758a834a52a84c9ef95090dd32994e86560306a5f64744"
+      },
+      {
+        "slug": "color-system-build",
+        "role": "member",
+        "name": "配色系统构建 顾问",
+        "evidence": "original_assets/color-system-build/merkle_root",
+        "member_merkle_root": "aac72d98398efe04ca86e82416b0d271d70d7c19fcdaf0eac9335f98af229042"
+      }
+    ],
+    "team_lead": "accessibility-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a2fcb56f3a3cf8ba",
+  "prompt_hash": "73b570b1f442b42a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1169\", \"kind\": \"team\", \"name\": \"无障碍检查清单专家\", \"description\": \"无障碍检查清单专家：围绕无障碍，覆盖对比达标／键盘可达／替代文本，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"accessibility-check-team-lead\", \"role\": \"lead\", \"name\": \"无障碍主理人\", \"evidence\": null}, {\"slug\": \"accessibility-check\", \"role\": \"member\", \"name\": \"无障碍 检查清单 顾问\", \"evidence\": \"original_assets/accessibility-check/merkle_root\", \"member_merkle_root\": \"94855af715644292945da9725667b15298013fd61b35f42c2f1197fa553e3f91\"}, {\"slug\": \"usability-test-pro\", \"role\": \"member\", \"name\": \"可用性 测试执行 顾问\", \"evidence\": \"original_assets/usability-test-pro/merkle_root\", \"member_merkle_root\": \"07a0e1b9314b6ba865758a834a52a84c9ef95090dd32994e86560306a5f64744\"}, {\"slug\": \"color-system-build\", \"role\": \"member\", \"name\": \"配色系统构建 顾问\", \"evidence\": \"original_assets/color-system-build/merkle_root\", \"member_merkle_root\": \"aac72d98398efe04ca86e82416b0d271d70d7c19fcdaf0eac9335f98af229042\"}], \"team_lead\": \"accessibility-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/accessibility-check-team-lead.md": "05a9dd1d70225e767cbb82ed178edc997bc19599a29fbe955c8781a119c510b5",
+    "agents/accessibility-check.md": "03364df1be05db9fa8b40a1273a6dad3ca9e9a016c0a8fd351ffc3612ba9e2e8",
+    "agents/color-system-build.md": "8d78ad68d03f6047299576f07e1baa48f3f93210d6fcc3d97cb9ff9f08df6dda",
+    "agents/usability-test-pro.md": "d7c46b5eb5ca4aa0a154da208c9746d688b3cad95dc0020fc15b298f413c289d",
+    "plugin.json": "a35dcd984e6a8d7b2c04fadf1bd9c5293b4096bf6a2e47b37cb94bee6e99f8ce",
+    "settings.json": "973b8c3b2c0e21a27f96779086d1247adcde4acb37d66e325c2c35d632380218"
+  }
+}

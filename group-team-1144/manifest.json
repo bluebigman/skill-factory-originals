@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1144",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1144",
+    "kind": "team",
+    "name": "续约管理专家",
+    "description": "擅长锁定结构、分工明确与数据校验，覆盖协作表格规范全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sheet-collab-rule-team-lead",
+        "role": "lead",
+        "name": "协作表格规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sheet-collab-rule",
+        "role": "member",
+        "name": "协作表格规范 顾问",
+        "evidence": "original_assets/sheet-collab-rule/merkle_root",
+        "member_merkle_root": "d94099dd0c76627ba02898678b216076267fd4f8544eb07aed607418240645f3"
+      },
+      {
+        "slug": "renewal-playbook",
+        "role": "member",
+        "name": "续约管理 提前动作 顾问",
+        "evidence": "original_assets/renewal-playbook/merkle_root",
+        "member_merkle_root": "d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54"
+      },
+      {
+        "slug": "retail-inventory",
+        "role": "member",
+        "name": "零售库存管理 顾问",
+        "evidence": "original_assets/retail-inventory/merkle_root",
+        "member_merkle_root": "8b11cba73916fd951cbb2779ef5fb45e7a2ff50b80546522fac1deb7014b2bb9"
+      }
+    ],
+    "team_lead": "sheet-collab-rule-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "479c37003b95b078",
+  "prompt_hash": "f9db9bad16d17b7c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1144\", \"kind\": \"team\", \"name\": \"续约管理专家\", \"description\": \"擅长锁定结构、分工明确与数据校验，覆盖协作表格规范全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sheet-collab-rule-team-lead\", \"role\": \"lead\", \"name\": \"协作表格规范主理人\", \"evidence\": null}, {\"slug\": \"sheet-collab-rule\", \"role\": \"member\", \"name\": \"协作表格规范 顾问\", \"evidence\": \"original_assets/sheet-collab-rule/merkle_root\", \"member_merkle_root\": \"d94099dd0c76627ba02898678b216076267fd4f8544eb07aed607418240645f3\"}, {\"slug\": \"renewal-playbook\", \"role\": \"member\", \"name\": \"续约管理 提前动作 顾问\", \"evidence\": \"original_assets/renewal-playbook/merkle_root\", \"member_merkle_root\": \"d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54\"}, {\"slug\": \"retail-inventory\", \"role\": \"member\", \"name\": \"零售库存管理 顾问\", \"evidence\": \"original_assets/retail-inventory/merkle_root\", \"member_merkle_root\": \"8b11cba73916fd951cbb2779ef5fb45e7a2ff50b80546522fac1deb7014b2bb9\"}], \"team_lead\": \"sheet-collab-rule-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/renewal-playbook.md": "c63a5479e0de82d4434c40a9235b1efd31da34d2322c66ab298667cdc5f782be",
+    "agents/retail-inventory.md": "731cfe8dfa2ad56c338f4a792a08cfc46c5b4d01dda89523e2439aabbb2ed545",
+    "agents/sheet-collab-rule-team-lead.md": "fa80359a3f8d33fbdc937c8f8451c94b30f1179dc390cdbe82679a621283148f",
+    "agents/sheet-collab-rule.md": "a3b88199294357d2aaa978164f54b7e04884a4f41a31f8c825dd8463caa390fa",
+    "plugin.json": "a62147ff0b09a17d363cee968d01b7112cf659a1800eb617977694f72b752850",
+    "settings.json": "de13bb2b871dfc2b85a07f685b3e9866f3d2ccb79ac2f58184e93c36dca33ff9"
+  }
+}

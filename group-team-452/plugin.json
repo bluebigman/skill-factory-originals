@@ -1,0 +1,126 @@
+{
+  "agentName": "dashboard-spec-pro-team-lead",
+  "agents": [
+    "./agents/dashboard-spec-pro-team-lead.md",
+    "./agents/dashboard-spec-pro.md",
+    "./agents/agent-skill-registry.md",
+    "./agents/agent-output-format.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 看板规格",
+    "zh": "帮我处理看板规格"
+  },
+  "description": "dashboard-spec-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 看板规格, covers 受众优先 / 指标精简 / 层次分明, delivering structured results and actionable checklists.",
+    "zh": "看板规格专家：围绕看板规格，覆盖受众优先／指标精简／层次分明，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "dashboard-spec-pro Team",
+    "zh": "看板规格专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "dashboard-spec-pro-team-lead",
+      "name": {
+        "en": "看板规格主理人",
+        "zh": "看板规格主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/dashboard-spec-pro.png",
+      "id": "dashboard-spec-pro",
+      "name": {
+        "en": "dashboard-spec-pro",
+        "zh": "看板规格 指标选型 顾问"
+      },
+      "profession": {
+        "en": "dashboard-spec-pro",
+        "zh": "看板规格 指标选型 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-skill-registry.png",
+      "id": "agent-skill-registry",
+      "name": {
+        "en": "agent-skill-registry",
+        "zh": "技能注册 发现机制 顾问"
+      },
+      "profession": {
+        "en": "agent-skill-registry",
+        "zh": "技能注册 发现机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-format.png",
+      "id": "agent-output-format",
+      "name": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "profession": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-452",
+  "plugin": "group-team-452",
+  "profession": {
+    "en": "dashboard-spec-pro Collaboration Team",
+    "zh": "看板规格专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 看板规格",
+      "zh": "帮我处理看板规格"
+    },
+    {
+      "en": "Plan 技能注册",
+      "zh": "帮我规划技能注册"
+    },
+    {
+      "en": "Review 输出规范",
+      "zh": "帮我检查输出规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "指标精简",
+      "zh": "指标精简"
+    },
+    {
+      "en": "层次分明",
+      "zh": "层次分明"
+    },
+    {
+      "en": "刷新策略",
+      "zh": "刷新策略"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "dashboard-spec-pro-team-lead",
+    "memberAgents": [
+      "dashboard-spec-pro",
+      "agent-skill-registry",
+      "agent-output-format"
+    ]
+  },
+  "version": "1.0.0"
+}

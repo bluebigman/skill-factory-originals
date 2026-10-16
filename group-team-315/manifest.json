@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-315",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-315",
+    "kind": "team",
+    "name": "数据问答专家",
+    "description": "数据问答专家：围绕数据问答，覆盖检索优先／来源标注／口径一致，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-data-qa-team-lead",
+        "role": "lead",
+        "name": "数据问答主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-data-qa",
+        "role": "member",
+        "name": "数据问答 检索增强 顾问",
+        "evidence": "original_assets/agent-data-qa/merkle_root",
+        "member_merkle_root": "cedf8f14eaac2c14e3010915ce47ac26f8ca2a26322ab94ba201056271d26bf6"
+      },
+      {
+        "slug": "metric-definition-pro",
+        "role": "member",
+        "name": "指标定义 口径统一 顾问",
+        "evidence": "original_assets/metric-definition-pro/merkle_root",
+        "member_merkle_root": "dcbf4226ca9c031646b3a2480319d1d62c88a179017e3bd720baa3e6e4ff908b"
+      },
+      {
+        "slug": "etl-pipeline-guard",
+        "role": "member",
+        "name": "ETL 管线 顾问",
+        "evidence": "original_assets/etl-pipeline-guard/merkle_root",
+        "member_merkle_root": "ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4"
+      }
+    ],
+    "team_lead": "agent-data-qa-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "07173907059bcaff",
+  "prompt_hash": "b1f597d405c4c7a9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-315\", \"kind\": \"team\", \"name\": \"数据问答专家\", \"description\": \"数据问答专家：围绕数据问答，覆盖检索优先／来源标注／口径一致，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-data-qa-team-lead\", \"role\": \"lead\", \"name\": \"数据问答主理人\", \"evidence\": null}, {\"slug\": \"agent-data-qa\", \"role\": \"member\", \"name\": \"数据问答 检索增强 顾问\", \"evidence\": \"original_assets/agent-data-qa/merkle_root\", \"member_merkle_root\": \"cedf8f14eaac2c14e3010915ce47ac26f8ca2a26322ab94ba201056271d26bf6\"}, {\"slug\": \"metric-definition-pro\", \"role\": \"member\", \"name\": \"指标定义 口径统一 顾问\", \"evidence\": \"original_assets/metric-definition-pro/merkle_root\", \"member_merkle_root\": \"dcbf4226ca9c031646b3a2480319d1d62c88a179017e3bd720baa3e6e4ff908b\"}, {\"slug\": \"etl-pipeline-guard\", \"role\": \"member\", \"name\": \"ETL 管线 顾问\", \"evidence\": \"original_assets/etl-pipeline-guard/merkle_root\", \"member_merkle_root\": \"ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4\"}], \"team_lead\": \"agent-data-qa-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-data-qa-team-lead.md": "74337f644313ccf612421c81d403926edd56455c841a0ccc88ba0a18e00ccc0d",
+    "agents/agent-data-qa.md": "b272060453ea77fe82aa5851fea8efd2bbc1ca59c5c735dfd9329dfec3dace6a",
+    "agents/etl-pipeline-guard.md": "42bc97b831b34d93ab6951bc4d3e20c1d63328a558ab9fb1182a4189d7dd7f5c",
+    "agents/metric-definition-pro.md": "132f79630037d1436f6635bb776f7a6447e529d5fb277030b0ae776cc6bb4397",
+    "plugin.json": "ba7eb5b8a087d7c5e3795de0b17fe9aa85ba36e04b279d3bbde685ea1a48267f",
+    "settings.json": "a90a97d44e7a98e4b30f2aa8fcb957ec43b964acda10ef2c37c595e0a5ec71f3"
+  }
+}

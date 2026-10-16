@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-952",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-952",
+    "kind": "team",
+    "name": "任务队列优先级专家",
+    "description": "输入任务队列相关需求，输出幂等入队、超时处理、定期演练三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-task-queue-team-lead",
+        "role": "lead",
+        "name": "任务队列主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-task-queue",
+        "role": "member",
+        "name": "任务队列 优先级 顾问",
+        "evidence": "original_assets/agent-task-queue/merkle_root",
+        "member_merkle_root": "6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72"
+      },
+      {
+        "slug": "backup-restore-plan",
+        "role": "member",
+        "name": "备份恢复方案 顾问",
+        "evidence": "original_assets/backup-restore-plan/merkle_root",
+        "member_merkle_root": "452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e"
+      },
+      {
+        "slug": "dashboard-perf",
+        "role": "member",
+        "name": "仪表盘性能 优化",
+        "evidence": "original_assets/dashboard-perf/merkle_root",
+        "member_merkle_root": "bd11086875b811988350233e32033bef7fc05a220d2e4c74cae90db8e83be220"
+      }
+    ],
+    "team_lead": "agent-task-queue-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8773b2e25f57cb1a",
+  "prompt_hash": "6a1ef71ef5c8961b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-952\", \"kind\": \"team\", \"name\": \"任务队列优先级专家\", \"description\": \"输入任务队列相关需求，输出幂等入队、超时处理、定期演练三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-task-queue-team-lead\", \"role\": \"lead\", \"name\": \"任务队列主理人\", \"evidence\": null}, {\"slug\": \"agent-task-queue\", \"role\": \"member\", \"name\": \"任务队列 优先级 顾问\", \"evidence\": \"original_assets/agent-task-queue/merkle_root\", \"member_merkle_root\": \"6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72\"}, {\"slug\": \"backup-restore-plan\", \"role\": \"member\", \"name\": \"备份恢复方案 顾问\", \"evidence\": \"original_assets/backup-restore-plan/merkle_root\", \"member_merkle_root\": \"452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e\"}, {\"slug\": \"dashboard-perf\", \"role\": \"member\", \"name\": \"仪表盘性能 优化\", \"evidence\": \"original_assets/dashboard-perf/merkle_root\", \"member_merkle_root\": \"bd11086875b811988350233e32033bef7fc05a220d2e4c74cae90db8e83be220\"}], \"team_lead\": \"agent-task-queue-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-task-queue-team-lead.md": "08b8e71b2a16f8799f01c16dbe3703ea5ecb4d0a76f5f49573fde14c36b5ee27",
+    "agents/agent-task-queue.md": "755be901f7689d8b7a699d0a2a27577efb0465e350d2376d161e47636076f718",
+    "agents/backup-restore-plan.md": "14c564169c8053e7154b980438d9d9701da1d04eecfee685cf7ea45bf0849154",
+    "agents/dashboard-perf.md": "c26fb7b90e3f040180d557a0d8755064602efde87b09d41469b87ec5db199053",
+    "plugin.json": "fecb60862e3e4b3f38be64dfb8d0047d3b34e77e749b48010b635f276736316a",
+    "settings.json": "c20716b3c7a3bc4ad9a602347bef4bb9caf9029c8e3aa8b184168d9561412b72"
+  }
+}

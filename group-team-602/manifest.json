@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-602",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-602",
+    "kind": "team",
+    "name": "数据转查询专家",
+    "description": "输入重试熔断相关需求，输出指数退避、熔断开窗、超时必备三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-toolkit-pro-03-fixed-team-lead",
+        "role": "lead",
+        "name": "数据转查询主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-toolkit-pro-03-fixed",
+        "role": "member",
+        "name": "数据转查询 自然语言转SQL",
+        "evidence": "original_assets/sql-toolkit-pro-03-fixed/merkle_root",
+        "member_merkle_root": "315179b112e0337511f2c1bc4826b5fc59158f11a14c48522d50db47108d9486"
+      },
+      {
+        "slug": "ai-workflow-expert",
+        "role": "member",
+        "name": "AI工作流 多步编排 自动执行",
+        "evidence": "original_assets/ai-workflow-expert/merkle_root",
+        "member_merkle_root": "d96666e0dbc075cfc05b3ca7154434fe32123347dd3844b2366dd4b232814f7f"
+      },
+      {
+        "slug": "reliability-wrapper-pro",
+        "role": "member",
+        "name": "重试熔断 超时降级 顾问",
+        "evidence": "original_assets/reliability-wrapper-pro/merkle_root",
+        "member_merkle_root": "62a0237bfc7e113746b729daba70dbce676c6762e4f81a3924f27465757dff89"
+      }
+    ],
+    "team_lead": "sql-toolkit-pro-03-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c15a06ebe7509b40",
+  "prompt_hash": "1058e3a7f44447e0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-602\", \"kind\": \"team\", \"name\": \"数据转查询专家\", \"description\": \"输入重试熔断相关需求，输出指数退避、熔断开窗、超时必备三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-toolkit-pro-03-fixed-team-lead\", \"role\": \"lead\", \"name\": \"数据转查询主理人\", \"evidence\": null}, {\"slug\": \"sql-toolkit-pro-03-fixed\", \"role\": \"member\", \"name\": \"数据转查询 自然语言转SQL\", \"evidence\": \"original_assets/sql-toolkit-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"315179b112e0337511f2c1bc4826b5fc59158f11a14c48522d50db47108d9486\"}, {\"slug\": \"ai-workflow-expert\", \"role\": \"member\", \"name\": \"AI工作流 多步编排 自动执行\", \"evidence\": \"original_assets/ai-workflow-expert/merkle_root\", \"member_merkle_root\": \"d96666e0dbc075cfc05b3ca7154434fe32123347dd3844b2366dd4b232814f7f\"}, {\"slug\": \"reliability-wrapper-pro\", \"role\": \"member\", \"name\": \"重试熔断 超时降级 顾问\", \"evidence\": \"original_assets/reliability-wrapper-pro/merkle_root\", \"member_merkle_root\": \"62a0237bfc7e113746b729daba70dbce676c6762e4f81a3924f27465757dff89\"}], \"team_lead\": \"sql-toolkit-pro-03-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ai-workflow-expert.md": "04b6f60ef53a22fd75f3a9e3cdb6ad43e253418681d441ece810d21e25fa2d53",
+    "agents/reliability-wrapper-pro.md": "4d4f4c2e60bd74a4bdfdb854b39b750cfb5c7c27e5acd1e6e91047c150a6faa5",
+    "agents/sql-toolkit-pro-03-fixed-team-lead.md": "2141efcb305e85a15394ea5c3cb80fc8311dd62a44f0c9777007c0c46ffbf7fe",
+    "agents/sql-toolkit-pro-03-fixed.md": "c6557576b96cc2ce8216981cb15731efbf9889dae1b9979be730a4faeedd7ecb",
+    "plugin.json": "a4240fad72ecab2df10c63341d284db635770337d25976f9fa0c43b6ca06d07f",
+    "settings.json": "54ede9117b47e17de828d093298dc245b4627c541c3a1185f25bc91f15d0d1af"
+  }
+}

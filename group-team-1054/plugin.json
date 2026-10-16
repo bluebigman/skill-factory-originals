@@ -1,0 +1,126 @@
+{
+  "agentName": "accessibility-check-team-lead",
+  "agents": [
+    "./agents/accessibility-check-team-lead.md",
+    "./agents/accessibility-check.md",
+    "./agents/ppt-visual-tune.md",
+    "./agents/info-architecture.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 无障碍",
+    "zh": "帮我处理无障碍"
+  },
+  "description": "accessibility-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 无障碍 end-to-end: 对比达标, 键盘可达 and 替代文本. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长对比达标、键盘可达与替代文本，覆盖无障碍全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "accessibility-check Team",
+    "zh": "检查清单专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "accessibility-check-team-lead",
+      "name": {
+        "en": "无障碍主理人",
+        "zh": "无障碍主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/accessibility-check.png",
+      "id": "accessibility-check",
+      "name": {
+        "en": "accessibility-check",
+        "zh": "无障碍 检查清单 顾问"
+      },
+      "profession": {
+        "en": "accessibility-check",
+        "zh": "无障碍 检查清单 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ppt-visual-tune.png",
+      "id": "ppt-visual-tune",
+      "name": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "profession": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/info-architecture.png",
+      "id": "info-architecture",
+      "name": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "profession": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1054",
+  "plugin": "group-team-1054",
+  "profession": {
+    "en": "accessibility-check Collaboration Team",
+    "zh": "检查清单专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 无障碍",
+      "zh": "帮我处理无障碍"
+    },
+    {
+      "en": "Plan PPT",
+      "zh": "帮我规划PPT"
+    },
+    {
+      "en": "Review 信息架构",
+      "zh": "帮我检查信息架构"
+    }
+  ],
+  "tags": [
+    {
+      "en": "对比达标",
+      "zh": "对比达标"
+    },
+    {
+      "en": "键盘可达",
+      "zh": "键盘可达"
+    },
+    {
+      "en": "替代文本",
+      "zh": "替代文本"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "accessibility-check-team-lead",
+    "memberAgents": [
+      "accessibility-check",
+      "ppt-visual-tune",
+      "info-architecture"
+    ]
+  },
+  "version": "1.0.0"
+}

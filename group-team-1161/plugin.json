@@ -1,0 +1,126 @@
+{
+  "agentName": "game-community-mod-team-lead",
+  "agents": [
+    "./agents/game-community-mod-team-lead.md",
+    "./agents/game-community-mod.md",
+    "./agents/ar-vr-usability.md",
+    "./agents/user-research-synth.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 游戏社区",
+    "zh": "帮我处理游戏社区"
+  },
+  "description": "game-community-mod team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 游戏社区 requirements, output three deliverables: 规则前置, 分级处罚, 申诉通道. Verifiable end-to-end, evidence per step.",
+    "zh": "输入游戏社区相关需求，输出规则前置、分级处罚、申诉通道三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "game-community-mod Team",
+    "zh": "游戏社区专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "game-community-mod-team-lead",
+      "name": {
+        "en": "游戏社区主理人",
+        "zh": "游戏社区主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/game-community-mod.png",
+      "id": "game-community-mod",
+      "name": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "profession": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ar-vr-usability.png",
+      "id": "ar-vr-usability",
+      "name": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "profession": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/user-research-synth.png",
+      "id": "user-research-synth",
+      "name": {
+        "en": "user-research-synth",
+        "zh": "用户研究 洞察归纳 顾问"
+      },
+      "profession": {
+        "en": "user-research-synth",
+        "zh": "用户研究 洞察归纳 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1161",
+  "plugin": "group-team-1161",
+  "profession": {
+    "en": "game-community-mod Collaboration Team",
+    "zh": "游戏社区专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 游戏社区",
+      "zh": "帮我处理游戏社区"
+    },
+    {
+      "en": "Plan 沉浸体验",
+      "zh": "帮我规划沉浸体验"
+    },
+    {
+      "en": "Review 用户研究",
+      "zh": "帮我检查用户研究"
+    }
+  ],
+  "tags": [
+    {
+      "en": "规则前置",
+      "zh": "规则前置"
+    },
+    {
+      "en": "分级处罚",
+      "zh": "分级处罚"
+    },
+    {
+      "en": "申诉通道",
+      "zh": "申诉通道"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "game-community-mod-team-lead",
+    "memberAgents": [
+      "game-community-mod",
+      "ar-vr-usability",
+      "user-research-synth"
+    ]
+  },
+  "version": "1.0.0"
+}

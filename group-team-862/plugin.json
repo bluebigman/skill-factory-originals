@@ -1,0 +1,126 @@
+{
+  "agentName": "table-relation-map-team-lead",
+  "agents": [
+    "./agents/table-relation-map-team-lead.md",
+    "./agents/table-relation-map.md",
+    "./agents/log-standard-define.md",
+    "./agents/sql-toolkit-pro-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 表关系梳理",
+    "zh": "帮我处理表关系梳理"
+  },
+  "description": "table-relation-map team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 表关系梳理, covers 实体识别 / 关系明确 / 分级明确, delivering structured results and actionable checklists.",
+    "zh": "表关系梳理专家：围绕表关系梳理，覆盖实体识别／关系明确／分级明确，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "table-relation-map Team",
+    "zh": "表关系梳理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "table-relation-map-team-lead",
+      "name": {
+        "en": "表关系梳理主理人",
+        "zh": "表关系梳理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/table-relation-map.png",
+      "id": "table-relation-map",
+      "name": {
+        "en": "table-relation-map",
+        "zh": "表关系梳理 助手"
+      },
+      "profession": {
+        "en": "table-relation-map",
+        "zh": "表关系梳理 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/log-standard-define.png",
+      "id": "log-standard-define",
+      "name": {
+        "en": "log-standard-define",
+        "zh": "日志规范 制定"
+      },
+      "profession": {
+        "en": "log-standard-define",
+        "zh": "日志规范 制定"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-fixed.png",
+      "id": "sql-toolkit-pro-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-862",
+  "plugin": "group-team-862",
+  "profession": {
+    "en": "table-relation-map Collaboration Team",
+    "zh": "表关系梳理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 表关系梳理",
+      "zh": "帮我处理表关系梳理"
+    },
+    {
+      "en": "Plan 日志规范",
+      "zh": "帮我规划日志规范"
+    },
+    {
+      "en": "Review 关系查询",
+      "zh": "帮我检查关系查询"
+    }
+  ],
+  "tags": [
+    {
+      "en": "实体识别",
+      "zh": "实体识别"
+    },
+    {
+      "en": "关系明确",
+      "zh": "关系明确"
+    },
+    {
+      "en": "键一致",
+      "zh": "键一致"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "table-relation-map-team-lead",
+    "memberAgents": [
+      "table-relation-map",
+      "log-standard-define",
+      "sql-toolkit-pro-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

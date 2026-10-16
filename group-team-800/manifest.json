@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-800",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-800",
+    "kind": "team",
+    "name": "变更日志版本记录专家",
+    "description": "输入变更日志相关需求，输出分类清晰、影响说明、日期明确三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "changelog-pro-team-lead",
+        "role": "lead",
+        "name": "变更日志主理人",
+        "evidence": null
+      },
+      {
+        "slug": "changelog-pro",
+        "role": "member",
+        "name": "变更日志 版本记录 顾问",
+        "evidence": "original_assets/changelog-pro/merkle_root",
+        "member_merkle_root": "36496aadd03d734d904388dfe78b222fee895715fd79fcdb091a460e6296b1ac"
+      },
+      {
+        "slug": "schema-evolution-pro",
+        "role": "member",
+        "name": "模式演进 兼容变更 顾问",
+        "evidence": "original_assets/schema-evolution-pro/merkle_root",
+        "member_merkle_root": "b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335"
+      },
+      {
+        "slug": "agent-regression-guard",
+        "role": "member",
+        "name": "回归守护 基线 顾问",
+        "evidence": "original_assets/agent-regression-guard/merkle_root",
+        "member_merkle_root": "c3c7d8470e2b0e04de9d81acd717e4731ff35ccfe5628be1985a4705a2760198"
+      }
+    ],
+    "team_lead": "changelog-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ef5746ac99d81bbd",
+  "prompt_hash": "6a6673723021edb6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-800\", \"kind\": \"team\", \"name\": \"变更日志版本记录专家\", \"description\": \"输入变更日志相关需求，输出分类清晰、影响说明、日期明确三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"changelog-pro-team-lead\", \"role\": \"lead\", \"name\": \"变更日志主理人\", \"evidence\": null}, {\"slug\": \"changelog-pro\", \"role\": \"member\", \"name\": \"变更日志 版本记录 顾问\", \"evidence\": \"original_assets/changelog-pro/merkle_root\", \"member_merkle_root\": \"36496aadd03d734d904388dfe78b222fee895715fd79fcdb091a460e6296b1ac\"}, {\"slug\": \"schema-evolution-pro\", \"role\": \"member\", \"name\": \"模式演进 兼容变更 顾问\", \"evidence\": \"original_assets/schema-evolution-pro/merkle_root\", \"member_merkle_root\": \"b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335\"}, {\"slug\": \"agent-regression-guard\", \"role\": \"member\", \"name\": \"回归守护 基线 顾问\", \"evidence\": \"original_assets/agent-regression-guard/merkle_root\", \"member_merkle_root\": \"c3c7d8470e2b0e04de9d81acd717e4731ff35ccfe5628be1985a4705a2760198\"}], \"team_lead\": \"changelog-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-regression-guard.md": "983a6c8b0f72532e5fa43727d39636e0b01a5807d1d26c190648b15ee219bd86",
+    "agents/changelog-pro-team-lead.md": "680678f9bf93dc047b0395a544344ebef64906f5a833f500cc1c07664652648a",
+    "agents/changelog-pro.md": "da5d9dbe4e202627b044f029840a05956ed219ccaa32c541f5c643eefdcdc71c",
+    "agents/schema-evolution-pro.md": "5fa6de6d5fa4a4aa97aa5371a1d6bbab68632a06b466872cf647df18ce25a42d",
+    "plugin.json": "019c74e32fd19dd5ef4080f2abacb0bbb86b7a575dd93e2a0b3e03c33e5db58e",
+    "settings.json": "23cece33b60b809f9b7ce1be425e379c30d8a3dd71c857a1c990c8a2cb914f46"
+  }
+}

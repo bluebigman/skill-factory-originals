@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-05-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-05-team-lead.md",
+    "./agents/data-clean-pro-05.md",
+    "./agents/pdf-parse-pro.md",
+    "./agents/api-debug-trace.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据解析",
+    "zh": "帮我处理数据解析"
+  },
+  "description": "数据清洗与结构化 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input PDF requirements, output three deliverables: 乱码兜底, 抽取核对, 先看请求. Verifiable end-to-end, evidence per step.",
+    "zh": "输入PDF相关需求，输出乱码兜底、抽取核对、先看请求三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "数据清洗与结构化 Suite Team",
+    "zh": "数据解析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-05-team-lead",
+      "name": {
+        "en": "数据解析主理人",
+        "zh": "数据解析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-05.png",
+      "id": "data-clean-pro-05",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pdf-parse-pro.png",
+      "id": "pdf-parse-pro",
+      "name": {
+        "en": "pdf-parse-pro",
+        "zh": "PDF 解析 顾问"
+      },
+      "profession": {
+        "en": "pdf-parse-pro",
+        "zh": "PDF 解析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-debug-trace.png",
+      "id": "api-debug-trace",
+      "name": {
+        "en": "api-debug-trace",
+        "zh": "接口调试追踪 助手"
+      },
+      "profession": {
+        "en": "api-debug-trace",
+        "zh": "接口调试追踪 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-937",
+  "plugin": "group-team-937",
+  "profession": {
+    "en": "数据清洗与结构化 Suite Collaboration Team",
+    "zh": "数据解析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据解析",
+      "zh": "帮我处理数据解析"
+    },
+    {
+      "en": "Plan PDF",
+      "zh": "帮我规划PDF"
+    },
+    {
+      "en": "Review 接口调试追踪",
+      "zh": "帮我检查接口调试追踪"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据整理",
+      "zh": "数据整理"
+    },
+    {
+      "en": "信息抽取",
+      "zh": "信息抽取"
+    },
+    {
+      "en": "置信标注",
+      "zh": "置信标注"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-05-team-lead",
+    "memberAgents": [
+      "data-clean-pro-05",
+      "pdf-parse-pro",
+      "api-debug-trace"
+    ]
+  },
+  "version": "1.0.0"
+}

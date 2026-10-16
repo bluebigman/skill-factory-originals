@@ -1,0 +1,126 @@
+{
+  "agentName": "scene-narrative-pro-team-lead",
+  "agents": [
+    "./agents/scene-narrative-pro-team-lead.md",
+    "./agents/scene-narrative-pro.md",
+    "./agents/doc-pagination-check.md",
+    "./agents/doc-index-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 场景叙事",
+    "zh": "帮我处理场景叙事"
+  },
+  "description": "scene-narrative-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 场景叙事 requirements, output three deliverables: 光线引导, 声音铺底, 信息留白. Verifiable end-to-end, evidence per step.",
+    "zh": "输入场景叙事相关需求，输出光线引导、声音铺底、信息留白三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "scene-narrative-pro Team",
+    "zh": "场景叙事氛围营造专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "scene-narrative-pro-team-lead",
+      "name": {
+        "en": "场景叙事主理人",
+        "zh": "场景叙事主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/scene-narrative-pro.png",
+      "id": "scene-narrative-pro",
+      "name": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "profession": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-pagination-check.png",
+      "id": "doc-pagination-check",
+      "name": {
+        "en": "doc-pagination-check",
+        "zh": "分页排版检查 助手"
+      },
+      "profession": {
+        "en": "doc-pagination-check",
+        "zh": "分页排版检查 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-index-build.png",
+      "id": "doc-index-build",
+      "name": {
+        "en": "doc-index-build",
+        "zh": "文档索引构建 助手"
+      },
+      "profession": {
+        "en": "doc-index-build",
+        "zh": "文档索引构建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1083",
+  "plugin": "group-team-1083",
+  "profession": {
+    "en": "scene-narrative-pro Collaboration Team",
+    "zh": "场景叙事氛围营造专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 场景叙事",
+      "zh": "帮我处理场景叙事"
+    },
+    {
+      "en": "Plan 分页排版检查",
+      "zh": "帮我规划分页排版检查"
+    },
+    {
+      "en": "Review 文档索引构建",
+      "zh": "帮我检查文档索引构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "环境讲故事",
+      "zh": "环境讲故事"
+    },
+    {
+      "en": "光线引导",
+      "zh": "光线引导"
+    },
+    {
+      "en": "声音铺底",
+      "zh": "声音铺底"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "scene-narrative-pro-team-lead",
+    "memberAgents": [
+      "scene-narrative-pro",
+      "doc-pagination-check",
+      "doc-index-build"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1020",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1020",
+    "kind": "team",
+    "name": "通知设计专家",
+    "description": "输入通知设计相关需求，输出分级发送、聚合防扰、行动明确三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "notification-design-team-lead",
+        "role": "lead",
+        "name": "通知设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "notification-design",
+        "role": "member",
+        "name": "通知设计 顾问",
+        "evidence": "original_assets/notification-design/merkle_root",
+        "member_merkle_root": "bed49a31d4529a33ce39e561b122488a8b774daa1b100436a015ea3279c3583d"
+      },
+      {
+        "slug": "prd-write-coach",
+        "role": "member",
+        "name": "需求文档撰写 顾问",
+        "evidence": "original_assets/prd-write-coach/merkle_root",
+        "member_merkle_root": "5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233"
+      },
+      {
+        "slug": "ui-game-hud",
+        "role": "member",
+        "name": "游戏界面 信息层级 顾问",
+        "evidence": "original_assets/ui-game-hud/merkle_root",
+        "member_merkle_root": "fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd"
+      }
+    ],
+    "team_lead": "notification-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "13dd7cd507c479e1",
+  "prompt_hash": "531ae206db700b76",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1020\", \"kind\": \"team\", \"name\": \"通知设计专家\", \"description\": \"输入通知设计相关需求，输出分级发送、聚合防扰、行动明确三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"notification-design-team-lead\", \"role\": \"lead\", \"name\": \"通知设计主理人\", \"evidence\": null}, {\"slug\": \"notification-design\", \"role\": \"member\", \"name\": \"通知设计 顾问\", \"evidence\": \"original_assets/notification-design/merkle_root\", \"member_merkle_root\": \"bed49a31d4529a33ce39e561b122488a8b774daa1b100436a015ea3279c3583d\"}, {\"slug\": \"prd-write-coach\", \"role\": \"member\", \"name\": \"需求文档撰写 顾问\", \"evidence\": \"original_assets/prd-write-coach/merkle_root\", \"member_merkle_root\": \"5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233\"}, {\"slug\": \"ui-game-hud\", \"role\": \"member\", \"name\": \"游戏界面 信息层级 顾问\", \"evidence\": \"original_assets/ui-game-hud/merkle_root\", \"member_merkle_root\": \"fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd\"}], \"team_lead\": \"notification-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/notification-design-team-lead.md": "b396ce354753eb1249f7c5d41c1883b6b5c1682dfc1a7ba9dd1129fc057893c8",
+    "agents/notification-design.md": "c0e9ffd23fb22a76fd90b24be102449a0b8c47fe6ae20c2d9597402d73a1f149",
+    "agents/prd-write-coach.md": "57124a41166f41687d23a1bd5205743624717ba45c48fef7b50ce836fe670486",
+    "agents/ui-game-hud.md": "11a7f69f9f00f051b46a91b2c2d383a381e8a794172d343ce352ab48bdc8ed73",
+    "plugin.json": "5d39a3bc7ad2dba09b5546d06b775bf47680838b418ee67a2bbb3286031925f6",
+    "settings.json": "e235e29d2621617dc5b1ce640388ecd13734370f71143de7d8eb4f28e72947fe"
+  }
+}

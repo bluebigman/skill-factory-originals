@@ -1,0 +1,126 @@
+{
+  "agentName": "game-economy-balance-team-lead",
+  "agents": [
+    "./agents/game-economy-balance-team-lead.md",
+    "./agents/game-economy-balance.md",
+    "./agents/error-message-pro.md",
+    "./agents/doc-accessibility.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 游戏经济",
+    "zh": "帮我处理游戏经济"
+  },
+  "description": "game-economy-balance team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 游戏经济, covers 先定产出 / 通胀监控 / 分层验证, delivering structured results and actionable checklists.",
+    "zh": "文档无障碍顾问专家：围绕游戏经济，覆盖先定产出／通胀监控／分层验证，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "game-economy-balance Team",
+    "zh": "文档无障碍顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "game-economy-balance-team-lead",
+      "name": {
+        "en": "游戏经济主理人",
+        "zh": "游戏经济主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/game-economy-balance.png",
+      "id": "game-economy-balance",
+      "name": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "profession": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/error-message-pro.png",
+      "id": "error-message-pro",
+      "name": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "profession": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-accessibility.png",
+      "id": "doc-accessibility",
+      "name": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "profession": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-915",
+  "plugin": "group-team-915",
+  "profession": {
+    "en": "game-economy-balance Collaboration Team",
+    "zh": "文档无障碍顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 游戏经济",
+      "zh": "帮我处理游戏经济"
+    },
+    {
+      "en": "Plan 错误提示",
+      "zh": "帮我规划错误提示"
+    },
+    {
+      "en": "Review 文档无障碍",
+      "zh": "帮我检查文档无障碍"
+    }
+  ],
+  "tags": [
+    {
+      "en": "通胀监控",
+      "zh": "通胀监控"
+    },
+    {
+      "en": "分层验证",
+      "zh": "分层验证"
+    },
+    {
+      "en": "沙盒试算",
+      "zh": "沙盒试算"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "game-economy-balance-team-lead",
+    "memberAgents": [
+      "game-economy-balance",
+      "error-message-pro",
+      "doc-accessibility"
+    ]
+  },
+  "version": "1.0.0"
+}

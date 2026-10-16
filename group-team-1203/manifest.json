@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1203",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1203",
+    "kind": "team",
+    "name": "数据销毁规范专家",
+    "description": "输入数据销毁规范相关需求，输出按级销毁、不可恢复、见证留痕三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-destruction-team-lead",
+        "role": "lead",
+        "name": "数据销毁规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-destruction",
+        "role": "member",
+        "name": "数据销毁规范 顾问",
+        "evidence": "original_assets/data-destruction/merkle_root",
+        "member_merkle_root": "346bbf23d4c41ed624ef4369d2116ab68a45ad4cc904562c4b6e99752b51645e"
+      },
+      {
+        "slug": "cache-invalidation",
+        "role": "member",
+        "name": "缓存失效策略 顾问",
+        "evidence": "original_assets/cache-invalidation/merkle_root",
+        "member_merkle_root": "bc19769eef43f2e732f49c177a4a8cb1a1313f81e89c1add4375144b003eae7c"
+      },
+      {
+        "slug": "csv-quick-analyze",
+        "role": "member",
+        "name": "CSV 快速分析 助手",
+        "evidence": "original_assets/csv-quick-analyze/merkle_root",
+        "member_merkle_root": "99b6b797ee1424c82693f2cc70260bc71b47f5debbd3aa493c62e8b88d95cee4"
+      }
+    ],
+    "team_lead": "data-destruction-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b768e92bb06e3632",
+  "prompt_hash": "04eabe545511c7d8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1203\", \"kind\": \"team\", \"name\": \"数据销毁规范专家\", \"description\": \"输入数据销毁规范相关需求，输出按级销毁、不可恢复、见证留痕三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-destruction-team-lead\", \"role\": \"lead\", \"name\": \"数据销毁规范主理人\", \"evidence\": null}, {\"slug\": \"data-destruction\", \"role\": \"member\", \"name\": \"数据销毁规范 顾问\", \"evidence\": \"original_assets/data-destruction/merkle_root\", \"member_merkle_root\": \"346bbf23d4c41ed624ef4369d2116ab68a45ad4cc904562c4b6e99752b51645e\"}, {\"slug\": \"cache-invalidation\", \"role\": \"member\", \"name\": \"缓存失效策略 顾问\", \"evidence\": \"original_assets/cache-invalidation/merkle_root\", \"member_merkle_root\": \"bc19769eef43f2e732f49c177a4a8cb1a1313f81e89c1add4375144b003eae7c\"}, {\"slug\": \"csv-quick-analyze\", \"role\": \"member\", \"name\": \"CSV 快速分析 助手\", \"evidence\": \"original_assets/csv-quick-analyze/merkle_root\", \"member_merkle_root\": \"99b6b797ee1424c82693f2cc70260bc71b47f5debbd3aa493c62e8b88d95cee4\"}], \"team_lead\": \"data-destruction-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cache-invalidation.md": "4dfe2e027bbbe4891a5d0982deb086550f3caea966261bd94f7f78f052f2df30",
+    "agents/csv-quick-analyze.md": "0249a42d2b3db6df3c3e140c18a86436467339c7636831c20631a055b33cbab0",
+    "agents/data-destruction-team-lead.md": "5283d09c5b53b8c726abcec782499fcf6c3e8bbdd1f0cb4ff268de0573da200d",
+    "agents/data-destruction.md": "95a4561649d2cf73f289894de7425b19a9ee78ffc98f24bf41e8a2a5675c2964",
+    "plugin.json": "0d45378780dd148cca6709c1e6f46a6b98bb59a1ad73858d22ebe8b3b3968884",
+    "settings.json": "2e5655848e5a7ce4ed94b5df93c9185a2097a502c4b46311d537ce0eed6ee4cd"
+  }
+}

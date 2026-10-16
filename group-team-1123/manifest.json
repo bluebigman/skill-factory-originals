@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1123",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1123",
+    "kind": "team",
+    "name": "自动化审计专家",
+    "description": "擅长触发核对、僵尸清理与冲突检查，覆盖自动化审计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "automation-audit-team-lead",
+        "role": "lead",
+        "name": "自动化审计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "automation-audit",
+        "role": "member",
+        "name": "自动化审计 顾问",
+        "evidence": "original_assets/automation-audit/merkle_root",
+        "member_merkle_root": "e07c6cc059e620155a5a44575a8df11a13c86b7d317ad7710dd7f35150105627"
+      },
+      {
+        "slug": "manufacturing-sop",
+        "role": "member",
+        "name": "生产作业规范 顾问",
+        "evidence": "original_assets/manufacturing-sop/merkle_root",
+        "member_merkle_root": "36ecc2e12525042087ff02d824a0186207acbe9f49fabe21840ede8eee94c62b"
+      },
+      {
+        "slug": "customer-health",
+        "role": "member",
+        "name": "客户健康度 评估",
+        "evidence": "original_assets/customer-health/merkle_root",
+        "member_merkle_root": "279074f39c7f3a09d0cb04e8087eb10eb27e025c53cf5b7de69ea1c7d66dd753"
+      }
+    ],
+    "team_lead": "automation-audit-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0ad02780d769f52a",
+  "prompt_hash": "9bdf46f5a3ff2baf",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1123\", \"kind\": \"team\", \"name\": \"自动化审计专家\", \"description\": \"擅长触发核对、僵尸清理与冲突检查，覆盖自动化审计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"automation-audit-team-lead\", \"role\": \"lead\", \"name\": \"自动化审计主理人\", \"evidence\": null}, {\"slug\": \"automation-audit\", \"role\": \"member\", \"name\": \"自动化审计 顾问\", \"evidence\": \"original_assets/automation-audit/merkle_root\", \"member_merkle_root\": \"e07c6cc059e620155a5a44575a8df11a13c86b7d317ad7710dd7f35150105627\"}, {\"slug\": \"manufacturing-sop\", \"role\": \"member\", \"name\": \"生产作业规范 顾问\", \"evidence\": \"original_assets/manufacturing-sop/merkle_root\", \"member_merkle_root\": \"36ecc2e12525042087ff02d824a0186207acbe9f49fabe21840ede8eee94c62b\"}, {\"slug\": \"customer-health\", \"role\": \"member\", \"name\": \"客户健康度 评估\", \"evidence\": \"original_assets/customer-health/merkle_root\", \"member_merkle_root\": \"279074f39c7f3a09d0cb04e8087eb10eb27e025c53cf5b7de69ea1c7d66dd753\"}], \"team_lead\": \"automation-audit-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/automation-audit-team-lead.md": "224071faa6b958f1ffddc603daeaba1fc0267a85a6ab2e9af26b0ddeff3da755",
+    "agents/automation-audit.md": "aeed7956dd3d46f09ac1a9383b5ca6e15a4ddfd184c53cea77044a49bf6c1cc4",
+    "agents/customer-health.md": "85d3b2e2ef40260ad890ec59d8742809e542e3b61c75d4f69e38b80a943e8d63",
+    "agents/manufacturing-sop.md": "2a491c8c09ee17c79fcb3e15b6067efba74ebdd3039e9d7180fc9297c160dd52",
+    "plugin.json": "b4bf1dcbf24f3b1d2798b23fb54bdff4a33a6b1da46be20681fcd3af414b5e65",
+    "settings.json": "2f2b1e196a0779acbd77eb035f4b88d7f04c64e1691a4ca4e1a32df92b87da9e"
+  }
+}

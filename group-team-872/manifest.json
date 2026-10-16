@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-872",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-872",
+    "kind": "team",
+    "name": "文档签署流程专家",
+    "description": "擅长先定流程、版本冻结与条款对照，覆盖文档签署流程全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-sign-flow-team-lead",
+        "role": "lead",
+        "name": "文档签署流程主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-sign-flow",
+        "role": "member",
+        "name": "文档签署流程 顾问",
+        "evidence": "original_assets/doc-sign-flow/merkle_root",
+        "member_merkle_root": "a8bf55ce3392db4a729034de3c16c960b961249befc9ba15303f7d5779d38d59"
+      },
+      {
+        "slug": "sop-writer-pro",
+        "role": "member",
+        "name": "流程编写 步骤细化 顾问",
+        "evidence": "original_assets/sop-writer-pro/merkle_root",
+        "member_merkle_root": "062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb"
+      },
+      {
+        "slug": "process-fmea-pro",
+        "role": "member",
+        "name": "过程风险 预防分析 顾问",
+        "evidence": "original_assets/process-fmea-pro/merkle_root",
+        "member_merkle_root": "a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2"
+      }
+    ],
+    "team_lead": "doc-sign-flow-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a95cb057b4b67b58",
+  "prompt_hash": "f6d92f5868d0e226",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-872\", \"kind\": \"team\", \"name\": \"文档签署流程专家\", \"description\": \"擅长先定流程、版本冻结与条款对照，覆盖文档签署流程全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-sign-flow-team-lead\", \"role\": \"lead\", \"name\": \"文档签署流程主理人\", \"evidence\": null}, {\"slug\": \"doc-sign-flow\", \"role\": \"member\", \"name\": \"文档签署流程 顾问\", \"evidence\": \"original_assets/doc-sign-flow/merkle_root\", \"member_merkle_root\": \"a8bf55ce3392db4a729034de3c16c960b961249befc9ba15303f7d5779d38d59\"}, {\"slug\": \"sop-writer-pro\", \"role\": \"member\", \"name\": \"流程编写 步骤细化 顾问\", \"evidence\": \"original_assets/sop-writer-pro/merkle_root\", \"member_merkle_root\": \"062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb\"}, {\"slug\": \"process-fmea-pro\", \"role\": \"member\", \"name\": \"过程风险 预防分析 顾问\", \"evidence\": \"original_assets/process-fmea-pro/merkle_root\", \"member_merkle_root\": \"a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2\"}], \"team_lead\": \"doc-sign-flow-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-sign-flow-team-lead.md": "4602fce5dec6adac7571eab002e2e0498e643305434ade9f16c859c497740c49",
+    "agents/doc-sign-flow.md": "bd5254e867eb62dbc93cda21cd1500da005291b4f991f92e95bfb368af0c0f85",
+    "agents/process-fmea-pro.md": "a1188512c01000e5603185719a1ab78324a98b20ad33bf98b74c2efcf1cbf360",
+    "agents/sop-writer-pro.md": "5537ebbea63808b1c05a96938e8bfde811a972be838b7c27d9667473e2c147f3",
+    "plugin.json": "a2f08913fbbfafb4f06642f09aeb04dd899ab80c289436348e254460a5b7d779",
+    "settings.json": "e6bfa93f5d22689b1f335fca6b2e9e686c1a3d759b98b70a5e41a6fd38601f27"
+  }
+}

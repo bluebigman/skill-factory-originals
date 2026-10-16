@@ -1,0 +1,126 @@
+{
+  "agentName": "markdown-standard-pro-team-lead",
+  "agents": [
+    "./agents/markdown-standard-pro-team-lead.md",
+    "./agents/markdown-standard-pro.md",
+    "./agents/scene-narrative-pro.md",
+    "./agents/ui-visual-forge-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle Mark",
+    "zh": "帮我处理Mark"
+  },
+  "description": "markdown-standard-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers Mark end-to-end: 标题层级, 列表一致 and 链接可用. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长标题层级、列表一致与链接可用，覆盖Mark全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "markdown-standard-pro Team",
+    "zh": "界面设计组件美化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "markdown-standard-pro-team-lead",
+      "name": {
+        "en": "Mark主理人",
+        "zh": "Mark主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/markdown-standard-pro.png",
+      "id": "markdown-standard-pro",
+      "name": {
+        "en": "markdown-standard-pro",
+        "zh": "Mark 规范 顾问"
+      },
+      "profession": {
+        "en": "markdown-standard-pro",
+        "zh": "Mark 规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/scene-narrative-pro.png",
+      "id": "scene-narrative-pro",
+      "name": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "profession": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-visual-forge-expert.png",
+      "id": "ui-visual-forge-expert",
+      "name": {
+        "en": "UI Visual Forge Expert",
+        "zh": "界面设计 组件美化 视觉产出"
+      },
+      "profession": {
+        "en": "UI Visual Forge Expert",
+        "zh": "界面设计 组件美化 视觉产出"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-669",
+  "plugin": "group-team-669",
+  "profession": {
+    "en": "markdown-standard-pro Collaboration Team",
+    "zh": "界面设计组件美化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle Mark",
+      "zh": "帮我处理Mark"
+    },
+    {
+      "en": "Plan 场景叙事",
+      "zh": "帮我规划场景叙事"
+    },
+    {
+      "en": "Review 界面设计",
+      "zh": "帮我检查界面设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标题层级",
+      "zh": "标题层级"
+    },
+    {
+      "en": "列表一致",
+      "zh": "列表一致"
+    },
+    {
+      "en": "链接可用",
+      "zh": "链接可用"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "markdown-standard-pro-team-lead",
+    "memberAgents": [
+      "markdown-standard-pro",
+      "scene-narrative-pro",
+      "ui-visual-forge-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

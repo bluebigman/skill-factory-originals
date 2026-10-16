@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-143",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-143",
+    "kind": "team",
+    "name": "追溯 采购 供应商 团队",
+    "description": "追溯 采购 供应商 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "traceability-build-pro-team-lead",
+        "role": "lead",
+        "name": "追溯体系主理人",
+        "evidence": null
+      },
+      {
+        "slug": "traceability-build-pro",
+        "role": "member",
+        "name": "追溯体系 批次管理 顾问",
+        "evidence": "original_assets/traceability-build-pro/merkle_root",
+        "member_merkle_root": "4d7876b6471503bbbc3965b434e2ab40579765831dcb608948b8d2fe5d61dab9"
+      },
+      {
+        "slug": "procurement-cost-pro",
+        "role": "member",
+        "name": "采购降本 议价准备 顾问",
+        "evidence": "original_assets/procurement-cost-pro/merkle_root",
+        "member_merkle_root": "fdb6c894cdbd109505c2e3a654253091d06454a4fb75ec142ca233d99a527184"
+      },
+      {
+        "slug": "supplier-qualify-pro",
+        "role": "member",
+        "name": "供应商 准入评估 顾问",
+        "evidence": "original_assets/supplier-qualify-pro/merkle_root",
+        "member_merkle_root": "eb1b558351128e5f1e814a153a3eff932ed5045fd67be3691d114c5a01165f02"
+      }
+    ],
+    "team_lead": "traceability-build-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3d06b5a3b0eabe41",
+  "prompt_hash": "00b1d2fe625df6c2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-143\", \"kind\": \"team\", \"name\": \"追溯 采购 供应商 团队\", \"description\": \"追溯 采购 供应商 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"traceability-build-pro-team-lead\", \"role\": \"lead\", \"name\": \"追溯体系主理人\", \"evidence\": null}, {\"slug\": \"traceability-build-pro\", \"role\": \"member\", \"name\": \"追溯体系 批次管理 顾问\", \"evidence\": \"original_assets/traceability-build-pro/merkle_root\", \"member_merkle_root\": \"4d7876b6471503bbbc3965b434e2ab40579765831dcb608948b8d2fe5d61dab9\"}, {\"slug\": \"procurement-cost-pro\", \"role\": \"member\", \"name\": \"采购降本 议价准备 顾问\", \"evidence\": \"original_assets/procurement-cost-pro/merkle_root\", \"member_merkle_root\": \"fdb6c894cdbd109505c2e3a654253091d06454a4fb75ec142ca233d99a527184\"}, {\"slug\": \"supplier-qualify-pro\", \"role\": \"member\", \"name\": \"供应商 准入评估 顾问\", \"evidence\": \"original_assets/supplier-qualify-pro/merkle_root\", \"member_merkle_root\": \"eb1b558351128e5f1e814a153a3eff932ed5045fd67be3691d114c5a01165f02\"}], \"team_lead\": \"traceability-build-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/procurement-cost-pro.md": "5704df43cd512c6e23a21a6a1992ad4c73b568eecd62c9bee554f38c0d26b979",
+    "agents/supplier-qualify-pro.md": "f08495ae50c76657a7dc6e75cc88e063aaa0f69110582eda65e6967074647db4",
+    "agents/traceability-build-pro-team-lead.md": "c6c8d37c4cf991cd3830bfb986b5dea97053e168cca315171c3fac6dab21a12d",
+    "agents/traceability-build-pro.md": "e3685ae909a606d48cbc99e5b947bbd544230e3ce9937164eca1c6aaf9791d57",
+    "plugin.json": "fc6f4932affaf31541ffc5c50705ef3307d095864b0bcbeb2fa8e16e942ce1b0",
+    "settings.json": "f60409cc75e0268b6b1025ac53ace54757d476a1947ee093b62e67ff5885ba48"
+  }
+}

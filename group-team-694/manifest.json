@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-694",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-694",
+    "kind": "team",
+    "name": "集成测试专家",
+    "description": "集成测试专家：围绕外派安置，覆盖签证前置／过渡住房／教育对接，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "expat-relocation-pro-team-lead",
+        "role": "lead",
+        "name": "外派安置主理人",
+        "evidence": null
+      },
+      {
+        "slug": "expat-relocation-pro",
+        "role": "member",
+        "name": "外派安置 落地支持 顾问",
+        "evidence": "original_assets/expat-relocation-pro/merkle_root",
+        "member_merkle_root": "aefabf8d21f420d22666f671cb522572fa82ace3dad7993e914984827e7e8a82"
+      },
+      {
+        "slug": "image-batch-expert",
+        "role": "member",
+        "name": "图片批处理 格式转换",
+        "evidence": "original_assets/image-batch-expert/merkle_root",
+        "member_merkle_root": "a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870"
+      },
+      {
+        "slug": "integration-test-pro",
+        "role": "member",
+        "name": "集成测试 场景覆盖 顾问",
+        "evidence": "original_assets/integration-test-pro/merkle_root",
+        "member_merkle_root": "11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8"
+      }
+    ],
+    "team_lead": "expat-relocation-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ec0e385f996c09a1",
+  "prompt_hash": "8d30197ccb16b9e3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-694\", \"kind\": \"team\", \"name\": \"集成测试专家\", \"description\": \"集成测试专家：围绕外派安置，覆盖签证前置／过渡住房／教育对接，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"expat-relocation-pro-team-lead\", \"role\": \"lead\", \"name\": \"外派安置主理人\", \"evidence\": null}, {\"slug\": \"expat-relocation-pro\", \"role\": \"member\", \"name\": \"外派安置 落地支持 顾问\", \"evidence\": \"original_assets/expat-relocation-pro/merkle_root\", \"member_merkle_root\": \"aefabf8d21f420d22666f671cb522572fa82ace3dad7993e914984827e7e8a82\"}, {\"slug\": \"image-batch-expert\", \"role\": \"member\", \"name\": \"图片批处理 格式转换\", \"evidence\": \"original_assets/image-batch-expert/merkle_root\", \"member_merkle_root\": \"a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870\"}, {\"slug\": \"integration-test-pro\", \"role\": \"member\", \"name\": \"集成测试 场景覆盖 顾问\", \"evidence\": \"original_assets/integration-test-pro/merkle_root\", \"member_merkle_root\": \"11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8\"}], \"team_lead\": \"expat-relocation-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/expat-relocation-pro-team-lead.md": "88ba1dd3e3ddede1f2c14be92674181d4a23a80c1d971efba1a09951be85613e",
+    "agents/expat-relocation-pro.md": "654bb8ac55cf46473fb4b480a2e8040eec412b9bd3c029edccf077c28b6a6419",
+    "agents/image-batch-expert.md": "9f55b9301e094190f7b41101f13f6adea571bda737531e22ac5830814452de6a",
+    "agents/integration-test-pro.md": "eda8070ef219596969f439f028b3146d9993765cb477ba36e63bfe292846de07",
+    "plugin.json": "18522959b38a02eef7a9707962cd5b5f351d3bf1229f4f1d84137c030f388f7a",
+    "settings.json": "e85b92e9fb00e695c3e0e5d558fe24d917a1707259b7ccce09e48eff2000808f"
+  }
+}

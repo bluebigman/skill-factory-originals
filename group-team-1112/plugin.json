@@ -1,0 +1,126 @@
+{
+  "agentName": "content-repurpose-team-lead",
+  "agents": [
+    "./agents/content-repurpose-team-lead.md",
+    "./agents/content-repurpose.md",
+    "./agents/word-track-review.md",
+    "./agents/image-brief-generate.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容复用",
+    "zh": "帮我处理内容复用"
+  },
+  "description": "content-repurpose team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 内容复用, covers 先定母题 / 统一识别 / 对比效果, delivering structured results and actionable checklists.",
+    "zh": "内容复用专家：围绕内容复用，覆盖先定母题／统一识别／对比效果，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "content-repurpose Team",
+    "zh": "内容复用专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-repurpose-team-lead",
+      "name": {
+        "en": "内容复用主理人",
+        "zh": "内容复用主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-repurpose.png",
+      "id": "content-repurpose",
+      "name": {
+        "en": "content-repurpose",
+        "zh": "内容复用 一稿多用 顾问"
+      },
+      "profession": {
+        "en": "content-repurpose",
+        "zh": "内容复用 一稿多用 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/word-track-review.png",
+      "id": "word-track-review",
+      "name": {
+        "en": "word-track-review",
+        "zh": "Word 修订审阅 顾问"
+      },
+      "profession": {
+        "en": "word-track-review",
+        "zh": "Word 修订审阅 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/image-brief-generate.png",
+      "id": "image-brief-generate",
+      "name": {
+        "en": "image-brief-generate",
+        "zh": "配图需求描述 助手"
+      },
+      "profession": {
+        "en": "image-brief-generate",
+        "zh": "配图需求描述 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1112",
+  "plugin": "group-team-1112",
+  "profession": {
+    "en": "content-repurpose Collaboration Team",
+    "zh": "内容复用专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容复用",
+      "zh": "帮我处理内容复用"
+    },
+    {
+      "en": "Plan Word",
+      "zh": "帮我规划Word"
+    },
+    {
+      "en": "Review 配图需求描述",
+      "zh": "帮我检查配图需求描述"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定母题",
+      "zh": "先定母题"
+    },
+    {
+      "en": "统一识别",
+      "zh": "统一识别"
+    },
+    {
+      "en": "对比效果",
+      "zh": "对比效果"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-repurpose-team-lead",
+    "memberAgents": [
+      "content-repurpose",
+      "word-track-review",
+      "image-brief-generate"
+    ]
+  },
+  "version": "1.0.0"
+}

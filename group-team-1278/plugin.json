@@ -1,0 +1,126 @@
+{
+  "agentName": "schema-contract-test-team-lead",
+  "agents": [
+    "./agents/schema-contract-test-team-lead.md",
+    "./agents/schema-contract-test.md",
+    "./agents/discovery-call-coach.md",
+    "./agents/incident-severity.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 契约测试",
+    "zh": "帮我处理契约测试"
+  },
+  "description": "schema-contract-test team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 契约测试 requirements, output three deliverables: 契约先行, 双向验证, 版本对齐. Verifiable end-to-end, evidence per step.",
+    "zh": "输入契约测试相关需求，输出契约先行、双向验证、版本对齐三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "schema-contract-test Team",
+    "zh": "契约测试专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "schema-contract-test-team-lead",
+      "name": {
+        "en": "契约测试主理人",
+        "zh": "契约测试主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/schema-contract-test.png",
+      "id": "schema-contract-test",
+      "name": {
+        "en": "schema-contract-test",
+        "zh": "契约测试 顾问"
+      },
+      "profession": {
+        "en": "schema-contract-test",
+        "zh": "契约测试 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/discovery-call-coach.png",
+      "id": "discovery-call-coach",
+      "name": {
+        "en": "discovery-call-coach",
+        "zh": "需求挖掘 提问框架 教练"
+      },
+      "profession": {
+        "en": "discovery-call-coach",
+        "zh": "需求挖掘 提问框架 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/incident-severity.png",
+      "id": "incident-severity",
+      "name": {
+        "en": "incident-severity",
+        "zh": "事件分级标准 顾问"
+      },
+      "profession": {
+        "en": "incident-severity",
+        "zh": "事件分级标准 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1278",
+  "plugin": "group-team-1278",
+  "profession": {
+    "en": "schema-contract-test Collaboration Team",
+    "zh": "契约测试专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 契约测试",
+      "zh": "帮我处理契约测试"
+    },
+    {
+      "en": "Plan 需求挖掘",
+      "zh": "帮我规划需求挖掘"
+    },
+    {
+      "en": "Review 事件分级标准",
+      "zh": "帮我检查事件分级标准"
+    }
+  ],
+  "tags": [
+    {
+      "en": "契约先行",
+      "zh": "契约先行"
+    },
+    {
+      "en": "双向验证",
+      "zh": "双向验证"
+    },
+    {
+      "en": "版本对齐",
+      "zh": "版本对齐"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "schema-contract-test-team-lead",
+    "memberAgents": [
+      "schema-contract-test",
+      "discovery-call-coach",
+      "incident-severity"
+    ]
+  },
+  "version": "1.0.0"
+}

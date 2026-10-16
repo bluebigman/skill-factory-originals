@@ -1,0 +1,126 @@
+{
+  "agentName": "annual-report-expert-team-lead",
+  "agents": [
+    "./agents/annual-report-expert-team-lead.md",
+    "./agents/annual-report-expert.md",
+    "./agents/import-inspection-pro.md",
+    "./agents/energy-consumption-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 年报财报速读与数据整理专家",
+    "zh": "帮我处理年报财报速读与数据整理专家"
+  },
+  "description": "AnnualReport team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 进口检验, covers 数据抽取 / 结构速读 / 指标解读, delivering structured results and actionable checklists.",
+    "zh": "进口检验专家：围绕进口检验，覆盖数据抽取／结构速读／指标解读，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "AnnualReport Team",
+    "zh": "进口检验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "annual-report-expert-team-lead",
+      "name": {
+        "en": "年报财报速读与数据整理专家主理人",
+        "zh": "年报财报速读与数据整理专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/annual-report-expert.png",
+      "id": "annual-report-expert",
+      "name": {
+        "en": "AnnualReport",
+        "zh": "年报官"
+      },
+      "profession": {
+        "en": "AnnualReport",
+        "zh": "年报财报速读与数据整理专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/import-inspection-pro.png",
+      "id": "import-inspection-pro",
+      "name": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "profession": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/energy-consumption-pro.png",
+      "id": "energy-consumption-pro",
+      "name": {
+        "en": "energy-consumption-pro",
+        "zh": "能耗管理 节能诊断 顾问"
+      },
+      "profession": {
+        "en": "energy-consumption-pro",
+        "zh": "能耗管理 节能诊断 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1016",
+  "plugin": "group-team-1016",
+  "profession": {
+    "en": "AnnualReport Collaboration Team",
+    "zh": "进口检验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 年报财报速读与数据整理专家",
+      "zh": "帮我处理年报财报速读与数据整理专家"
+    },
+    {
+      "en": "Plan 进口检验",
+      "zh": "帮我规划进口检验"
+    },
+    {
+      "en": "Review 能耗管理",
+      "zh": "帮我检查能耗管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据抽取",
+      "zh": "数据抽取"
+    },
+    {
+      "en": "结构速读",
+      "zh": "结构速读"
+    },
+    {
+      "en": "指标解读",
+      "zh": "指标解读"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "annual-report-expert-team-lead",
+    "memberAgents": [
+      "annual-report-expert",
+      "import-inspection-pro",
+      "energy-consumption-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1037",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1037",
+    "kind": "team",
+    "name": "转自然语言转命令专家",
+    "description": "转自然语言转命令专家：围绕指标告警设计，覆盖带上下钻／变更同步／负责人，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-toolkit-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "SQL转TS主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-toolkit-pro-01-fixed",
+        "role": "member",
+        "name": "SQL转TS 自然语言转命令",
+        "evidence": "original_assets/sql-toolkit-pro-01-fixed/merkle_root",
+        "member_merkle_root": "228507b3057d38b0ab1cdde107c875bde51f55e4e23f57ce8728121c95e512f0"
+      },
+      {
+        "slug": "metric-alert-design",
+        "role": "member",
+        "name": "指标告警设计 顾问",
+        "evidence": "original_assets/metric-alert-design/merkle_root",
+        "member_merkle_root": "e8346c457d9b1d71d0718f3f2f6a3c4de67e9c1823f54dda55bd081e796d3aaa"
+      },
+      {
+        "slug": "data-dict-build",
+        "role": "member",
+        "name": "数据字典构建 助手",
+        "evidence": "original_assets/data-dict-build/merkle_root",
+        "member_merkle_root": "c15630acf9adec568ba079ca1c091736d02d2d344501d7b40479a0e554e2cb4b"
+      }
+    ],
+    "team_lead": "sql-toolkit-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "94d79482d60c0878",
+  "prompt_hash": "b0e670016b10fd53",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1037\", \"kind\": \"team\", \"name\": \"转自然语言转命令专家\", \"description\": \"转自然语言转命令专家：围绕指标告警设计，覆盖带上下钻／变更同步／负责人，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-toolkit-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"SQL转TS主理人\", \"evidence\": null}, {\"slug\": \"sql-toolkit-pro-01-fixed\", \"role\": \"member\", \"name\": \"SQL转TS 自然语言转命令\", \"evidence\": \"original_assets/sql-toolkit-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"228507b3057d38b0ab1cdde107c875bde51f55e4e23f57ce8728121c95e512f0\"}, {\"slug\": \"metric-alert-design\", \"role\": \"member\", \"name\": \"指标告警设计 顾问\", \"evidence\": \"original_assets/metric-alert-design/merkle_root\", \"member_merkle_root\": \"e8346c457d9b1d71d0718f3f2f6a3c4de67e9c1823f54dda55bd081e796d3aaa\"}, {\"slug\": \"data-dict-build\", \"role\": \"member\", \"name\": \"数据字典构建 助手\", \"evidence\": \"original_assets/data-dict-build/merkle_root\", \"member_merkle_root\": \"c15630acf9adec568ba079ca1c091736d02d2d344501d7b40479a0e554e2cb4b\"}], \"team_lead\": \"sql-toolkit-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-dict-build.md": "05755facbe47c16eafaae0edaa71aab00c49b49f9f8e576281d5fc590c7ac091",
+    "agents/metric-alert-design.md": "b62859ce735d5956a1d8a25ce2e36e856624fcd2c2fe5ce67d0d544d10a15b57",
+    "agents/sql-toolkit-pro-01-fixed-team-lead.md": "6005ca9d9abb5b6a301bbfd1df0b6d77922aa1015e45f0b381204fee60d2052d",
+    "agents/sql-toolkit-pro-01-fixed.md": "3268abd37455cd0f6e3a627222deea19f2dc376b26fbb9f4553e46998855ffd7",
+    "plugin.json": "8fa08b8718ec32e10ca15cceb3094bacd1f404ad48fbcaad62883e2911193a3b",
+    "settings.json": "317d81fee62d3339d6040e6679e5513edac2832d1947bf5c730e20852d42818e"
+  }
+}

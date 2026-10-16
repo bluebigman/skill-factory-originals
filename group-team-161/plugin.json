@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-output-verify-team-lead",
+  "agents": [
+    "./agents/agent-output-verify-team-lead.md",
+    "./agents/agent-output-verify.md",
+    "./agents/content-moderation.md",
+    "./agents/agent-trace-audit.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 输出验证",
+    "zh": "帮我处理输出验证"
+  },
+  "description": "Agent Output Verification team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "输出 内容 行为 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Agent Output Verification Team",
+    "zh": "输出 内容 行为 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-output-verify-team-lead",
+      "name": {
+        "en": "输出验证主理人",
+        "zh": "输出验证主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-output-verify.png",
+      "id": "agent-output-verify",
+      "name": {
+        "en": "Agent Output Verification",
+        "zh": "输出验证 幻觉检测 置信标注"
+      },
+      "profession": {
+        "en": "Agent Output Verification",
+        "zh": "输出验证 幻觉检测 置信标注"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-moderation.png",
+      "id": "content-moderation",
+      "name": {
+        "en": "Content Moderation",
+        "zh": "内容审核 红线识别 顾问"
+      },
+      "profession": {
+        "en": "Content Moderation",
+        "zh": "内容审核 红线识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-trace-audit.png",
+      "id": "agent-trace-audit",
+      "name": {
+        "en": "Agent Behavior Audit",
+        "zh": "行为审计 轨迹留痕 越权接管"
+      },
+      "profession": {
+        "en": "Agent Behavior Audit",
+        "zh": "行为审计 轨迹留痕 越权接管"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-161",
+  "plugin": "group-team-161",
+  "profession": {
+    "en": "Agent Output Verification Collaboration Team",
+    "zh": "输出 内容 行为 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 输出验证",
+      "zh": "帮我处理输出验证"
+    },
+    {
+      "en": "Plan 内容审核",
+      "zh": "帮我规划内容审核"
+    },
+    {
+      "en": "Review 行为审计",
+      "zh": "帮我检查行为审计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "输出验证",
+      "zh": "输出验证"
+    },
+    {
+      "en": "内容审核",
+      "zh": "内容审核"
+    },
+    {
+      "en": "行为审计",
+      "zh": "行为审计"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-output-verify-team-lead",
+    "memberAgents": [
+      "agent-output-verify",
+      "content-moderation",
+      "agent-trace-audit"
+    ]
+  },
+  "version": "1.0.0"
+}

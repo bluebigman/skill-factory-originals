@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-866",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-866",
+    "kind": "team",
+    "name": "国际标准对照梳理专家",
+    "description": "国际标准对照梳理专家：围绕国际标准，覆盖版本溯源／差异列表／取严原则，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "intl-standards-map-team-lead",
+        "role": "lead",
+        "name": "国际标准主理人",
+        "evidence": null
+      },
+      {
+        "slug": "intl-standards-map",
+        "role": "member",
+        "name": "国际标准 对照梳理 顾问",
+        "evidence": "original_assets/intl-standards-map/merkle_root",
+        "member_merkle_root": "be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89"
+      },
+      {
+        "slug": "finance-toolkit-pro-fixed",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747"
+      },
+      {
+        "slug": "industrial-service-pro",
+        "role": "member",
+        "name": "工业服务 交付标准 顾问",
+        "evidence": "original_assets/industrial-service-pro/merkle_root",
+        "member_merkle_root": "c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d"
+      }
+    ],
+    "team_lead": "intl-standards-map-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2da2c1cadc0b19df",
+  "prompt_hash": "6f736345f7410531",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-866\", \"kind\": \"team\", \"name\": \"国际标准对照梳理专家\", \"description\": \"国际标准对照梳理专家：围绕国际标准，覆盖版本溯源／差异列表／取严原则，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"intl-standards-map-team-lead\", \"role\": \"lead\", \"name\": \"国际标准主理人\", \"evidence\": null}, {\"slug\": \"intl-standards-map\", \"role\": \"member\", \"name\": \"国际标准 对照梳理 顾问\", \"evidence\": \"original_assets/intl-standards-map/merkle_root\", \"member_merkle_root\": \"be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89\"}, {\"slug\": \"finance-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747\"}, {\"slug\": \"industrial-service-pro\", \"role\": \"member\", \"name\": \"工业服务 交付标准 顾问\", \"evidence\": \"original_assets/industrial-service-pro/merkle_root\", \"member_merkle_root\": \"c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d\"}], \"team_lead\": \"intl-standards-map-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/finance-toolkit-pro-fixed.md": "0d7ee689a00a8cdb4d53d2b8fb301060de8298738a1201611c726b3c021749c0",
+    "agents/industrial-service-pro.md": "84aec99059c05a732700a2cb37a6e0fca233ed4dda701fa9a5c61a312f6b0dab",
+    "agents/intl-standards-map-team-lead.md": "e0a295d8824fe0a1b79fa48bc4395e0cfca5d822bf0ed12930624e67add90135",
+    "agents/intl-standards-map.md": "e77147598ac77556861d9d989f8cf43ed9960cc08f1dce96ff37ab384318b86d",
+    "plugin.json": "0b7c089cad07ffb43c68947ddbe1ff73e8da3c67169658c4fcf2abd2d7673a3e",
+    "settings.json": "234331f8667045aba4ef2ef500cb31f8de76da3d2c13a9c2377b4a92d74d4bfe"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-index-build-team-lead",
+  "agents": [
+    "./agents/doc-index-build-team-lead.md",
+    "./agents/doc-index-build.md",
+    "./agents/cn-rewrite-deaifier.md",
+    "./agents/social-post-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档索引构建",
+    "zh": "帮我处理文档索引构建"
+  },
+  "description": "doc-index-build team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档索引构建 end-to-end: 覆盖完整, 层级合理 and 页码准确. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长覆盖完整、层级合理与页码准确，覆盖文档索引构建全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-index-build Team",
+    "zh": "文档索引构建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-index-build-team-lead",
+      "name": {
+        "en": "文档索引构建主理人",
+        "zh": "文档索引构建主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-index-build.png",
+      "id": "doc-index-build",
+      "name": {
+        "en": "doc-index-build",
+        "zh": "文档索引构建 助手"
+      },
+      "profession": {
+        "en": "doc-index-build",
+        "zh": "文档索引构建 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cn-rewrite-deaifier.png",
+      "id": "cn-rewrite-deaifier",
+      "name": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "profession": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/social-post-plan.png",
+      "id": "social-post-plan",
+      "name": {
+        "en": "social-post-plan",
+        "zh": "社交内容排期 助手"
+      },
+      "profession": {
+        "en": "social-post-plan",
+        "zh": "社交内容排期 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1087",
+  "plugin": "group-team-1087",
+  "profession": {
+    "en": "doc-index-build Collaboration Team",
+    "zh": "文档索引构建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档索引构建",
+      "zh": "帮我处理文档索引构建"
+    },
+    {
+      "en": "Plan 中文改写",
+      "zh": "帮我规划中文改写"
+    },
+    {
+      "en": "Review 社交内容排期",
+      "zh": "帮我检查社交内容排期"
+    }
+  ],
+  "tags": [
+    {
+      "en": "覆盖完整",
+      "zh": "覆盖完整"
+    },
+    {
+      "en": "层级合理",
+      "zh": "层级合理"
+    },
+    {
+      "en": "页码准确",
+      "zh": "页码准确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-index-build-team-lead",
+    "memberAgents": [
+      "doc-index-build",
+      "cn-rewrite-deaifier",
+      "social-post-plan"
+    ]
+  },
+  "version": "1.0.0"
+}

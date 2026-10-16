@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1163",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1163",
+    "kind": "team",
+    "name": "技术债台账助手专家",
+    "description": "技术债台账助手专家：围绕技术债台账，覆盖量化影响／来源可溯／偿还排期，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "tech-debt-ledger-team-lead",
+        "role": "lead",
+        "name": "技术债台账主理人",
+        "evidence": null
+      },
+      {
+        "slug": "tech-debt-ledger",
+        "role": "member",
+        "name": "技术债台账 助手",
+        "evidence": "original_assets/tech-debt-ledger/merkle_root",
+        "member_merkle_root": "73c009b5eb12eb04b6d497a5c69db96b890bd40aae3b0444918284c981ecd957"
+      },
+      {
+        "slug": "service-sla-design",
+        "role": "member",
+        "name": "服务承诺设计 顾问",
+        "evidence": "original_assets/service-sla-design/merkle_root",
+        "member_merkle_root": "d225d40adc5191e43744b390dcb40b259185f72ab62bd078715ccbd4811864c4"
+      },
+      {
+        "slug": "load-test-plan",
+        "role": "member",
+        "name": "压测方案设计 顾问",
+        "evidence": "original_assets/load-test-plan/merkle_root",
+        "member_merkle_root": "27d78b760a7d0e3c847fabf5a52805b1f17d90a2d0c7268448a991f8e6d27201"
+      }
+    ],
+    "team_lead": "tech-debt-ledger-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3c831e1c898e2c0d",
+  "prompt_hash": "5b6a142bbe80634e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1163\", \"kind\": \"team\", \"name\": \"技术债台账助手专家\", \"description\": \"技术债台账助手专家：围绕技术债台账，覆盖量化影响／来源可溯／偿还排期，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"tech-debt-ledger-team-lead\", \"role\": \"lead\", \"name\": \"技术债台账主理人\", \"evidence\": null}, {\"slug\": \"tech-debt-ledger\", \"role\": \"member\", \"name\": \"技术债台账 助手\", \"evidence\": \"original_assets/tech-debt-ledger/merkle_root\", \"member_merkle_root\": \"73c009b5eb12eb04b6d497a5c69db96b890bd40aae3b0444918284c981ecd957\"}, {\"slug\": \"service-sla-design\", \"role\": \"member\", \"name\": \"服务承诺设计 顾问\", \"evidence\": \"original_assets/service-sla-design/merkle_root\", \"member_merkle_root\": \"d225d40adc5191e43744b390dcb40b259185f72ab62bd078715ccbd4811864c4\"}, {\"slug\": \"load-test-plan\", \"role\": \"member\", \"name\": \"压测方案设计 顾问\", \"evidence\": \"original_assets/load-test-plan/merkle_root\", \"member_merkle_root\": \"27d78b760a7d0e3c847fabf5a52805b1f17d90a2d0c7268448a991f8e6d27201\"}], \"team_lead\": \"tech-debt-ledger-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/load-test-plan.md": "5106f45467f6104521a3b04d233d88a21254757eef575f4eb495f8bd19b4588c",
+    "agents/service-sla-design.md": "5f17c8f393e10546d9d7781f7789b940536472ce07504225aed80fe04420196d",
+    "agents/tech-debt-ledger-team-lead.md": "4c3ac2934e199d88d992875c83d58f322fd0eb4fd4fb36029d6e2894bf51382a",
+    "agents/tech-debt-ledger.md": "8d69244a0c5b1c4f1cb2d56d8e62af9e799c1c91dd064badcec0fe538195dfe8",
+    "plugin.json": "b691d7ad1ab884af4ab4e43fbbef2a8ba0e2f2fe4bee5fefd5168408abf0f4ed",
+    "settings.json": "e01b8c2c92eb91897abd4393fa8a6401892e9d54454e5daf134b6f94355e7826"
+  }
+}

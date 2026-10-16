@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-05-fixed-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-05-fixed-team-lead.md",
+    "./agents/data-clean-pro-05-fixed.md",
+    "./agents/data-clean-pro.md",
+    "./agents/data-viz-pro-02.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据解析",
+    "zh": "帮我处理数据解析"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "信息 缺失 报表 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "信息 缺失 报表 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-05-fixed-team-lead",
+      "name": {
+        "en": "数据解析主理人",
+        "zh": "数据解析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-05-fixed.png",
+      "id": "data-clean-pro-05-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro.png",
+      "id": "data-clean-pro",
+      "name": {
+        "en": "Data Cleaning Expert",
+        "zh": "数据清洗 缺失填补 异常剔除"
+      },
+      "profession": {
+        "en": "Data Cleaning Expert",
+        "zh": "数据清洗 缺失填补 异常剔除"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-02.png",
+      "id": "data-viz-pro-02",
+      "name": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "数据洞察 报表分析 流程规范"
+      },
+      "profession": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "数据洞察 报表分析 流程规范"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-139",
+  "plugin": "group-team-139",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "信息 缺失 报表 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据解析",
+      "zh": "帮我处理数据解析"
+    },
+    {
+      "en": "Plan 数据清洗",
+      "zh": "帮我规划数据清洗"
+    },
+    {
+      "en": "Review 数据洞察",
+      "zh": "帮我检查数据洞察"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据解析",
+      "zh": "数据解析"
+    },
+    {
+      "en": "数据清洗",
+      "zh": "数据清洗"
+    },
+    {
+      "en": "数据洞察",
+      "zh": "数据洞察"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-05-fixed-team-lead",
+    "memberAgents": [
+      "data-clean-pro-05-fixed",
+      "data-clean-pro",
+      "data-viz-pro-02"
+    ]
+  },
+  "version": "1.0.0"
+}

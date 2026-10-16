@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1119",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1119",
+    "kind": "team",
+    "name": "文件采集专家",
+    "description": "输入方案评审把关相关需求，输出质疑必回、限时评审、退出标准三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "crawl-file-pro-team-lead",
+        "role": "lead",
+        "name": "文件采集主理人",
+        "evidence": null
+      },
+      {
+        "slug": "crawl-file-pro",
+        "role": "member",
+        "name": "文件采集 素材整理",
+        "evidence": "original_assets/crawl-file-pro/merkle_root",
+        "member_merkle_root": "df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f"
+      },
+      {
+        "slug": "spec-review-plan",
+        "role": "member",
+        "name": "方案评审把关 顾问",
+        "evidence": "original_assets/spec-review-plan/merkle_root",
+        "member_merkle_root": "53bf40292cc1f537c0caa8dea670047316551dd147ea3eec2bf9fb85f90f6992"
+      },
+      {
+        "slug": "pipeline-review-pro",
+        "role": "member",
+        "name": "销售漏斗 复盘机制 顾问",
+        "evidence": "original_assets/pipeline-review-pro/merkle_root",
+        "member_merkle_root": "9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0"
+      }
+    ],
+    "team_lead": "crawl-file-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0016d1a582389f37",
+  "prompt_hash": "08fcd53593843cf5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1119\", \"kind\": \"team\", \"name\": \"文件采集专家\", \"description\": \"输入方案评审把关相关需求，输出质疑必回、限时评审、退出标准三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"crawl-file-pro-team-lead\", \"role\": \"lead\", \"name\": \"文件采集主理人\", \"evidence\": null}, {\"slug\": \"crawl-file-pro\", \"role\": \"member\", \"name\": \"文件采集 素材整理\", \"evidence\": \"original_assets/crawl-file-pro/merkle_root\", \"member_merkle_root\": \"df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f\"}, {\"slug\": \"spec-review-plan\", \"role\": \"member\", \"name\": \"方案评审把关 顾问\", \"evidence\": \"original_assets/spec-review-plan/merkle_root\", \"member_merkle_root\": \"53bf40292cc1f537c0caa8dea670047316551dd147ea3eec2bf9fb85f90f6992\"}, {\"slug\": \"pipeline-review-pro\", \"role\": \"member\", \"name\": \"销售漏斗 复盘机制 顾问\", \"evidence\": \"original_assets/pipeline-review-pro/merkle_root\", \"member_merkle_root\": \"9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0\"}], \"team_lead\": \"crawl-file-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crawl-file-pro-team-lead.md": "72f740865f3ea78eef8b9ea13c445c1fefae4f2864a0f4586f31996606634837",
+    "agents/crawl-file-pro.md": "4eb721683d6190aeefd5d3c7335b8dc5694ff254b1f1f94e3706dbf7d3f0e310",
+    "agents/pipeline-review-pro.md": "2989b97cd6f4650963325efcf284ae3be47cc64b602dac6b0ab847bf1b401f90",
+    "agents/spec-review-plan.md": "25888ae943c9f53e6dd570c0d57a226693dba752236782cf35c6e65c427057a3",
+    "plugin.json": "e19f492c8a27eef01b71c79f2b4d833eb96ff66c492c7cfe74bde9437aed7e92",
+    "settings.json": "4562bc5785b8b2fe34e5b553830cc10580c75f3eb4a01e9ce8ed31159ad4ed25"
+  }
+}

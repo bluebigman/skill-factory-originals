@@ -1,0 +1,126 @@
+{
+  "agentName": "report-automation-pro-team-lead",
+  "agents": [
+    "./agents/report-automation-pro-team-lead.md",
+    "./agents/report-automation-pro.md",
+    "./agents/observability-inject-pro.md",
+    "./agents/growth-dashboard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 报表自动",
+    "zh": "帮我处理报表自动"
+  },
+  "description": "report-automation-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 报表自动, covers 定时可靠 / 失败告警 / 数据就绪, delivering structured results and actionable checklists.",
+    "zh": "报表自动专家：围绕报表自动，覆盖定时可靠／失败告警／数据就绪，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "report-automation-pro Team",
+    "zh": "报表自动专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "report-automation-pro-team-lead",
+      "name": {
+        "en": "报表自动主理人",
+        "zh": "报表自动主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/report-automation-pro.png",
+      "id": "report-automation-pro",
+      "name": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "profession": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/observability-inject-pro.png",
+      "id": "observability-inject-pro",
+      "name": {
+        "en": "observability-inject-pro",
+        "zh": "链路追踪 指标埋点 顾问"
+      },
+      "profession": {
+        "en": "observability-inject-pro",
+        "zh": "链路追踪 指标埋点 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/growth-dashboard.png",
+      "id": "growth-dashboard",
+      "name": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "profession": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-686",
+  "plugin": "group-team-686",
+  "profession": {
+    "en": "report-automation-pro Collaboration Team",
+    "zh": "报表自动专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报表自动",
+      "zh": "帮我处理报表自动"
+    },
+    {
+      "en": "Plan 链路追踪",
+      "zh": "帮我规划链路追踪"
+    },
+    {
+      "en": "Review 增长看板",
+      "zh": "帮我检查增长看板"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据就绪",
+      "zh": "数据就绪"
+    },
+    {
+      "en": "分发清单",
+      "zh": "分发清单"
+    },
+    {
+      "en": "版本管理",
+      "zh": "版本管理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "report-automation-pro-team-lead",
+    "memberAgents": [
+      "report-automation-pro",
+      "observability-inject-pro",
+      "growth-dashboard"
+    ]
+  },
+  "version": "1.0.0"
+}

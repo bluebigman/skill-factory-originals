@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-590",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-590",
+    "kind": "team",
+    "name": "包数据转换专家",
+    "description": "输入多智能体相关需求，输出职责互斥、依赖成图、冲突暴露三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "R包数据转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-pro-01-fixed",
+        "role": "member",
+        "name": "R包数据转换 批量整理",
+        "evidence": "original_assets/data-pipeline-pro-01-fixed/merkle_root",
+        "member_merkle_root": "6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237"
+      },
+      {
+        "slug": "multi-agent-orchestrate-pro",
+        "role": "member",
+        "name": "多智能体 任务编排 顾问",
+        "evidence": "original_assets/multi-agent-orchestrate-pro/merkle_root",
+        "member_merkle_root": "af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571"
+      },
+      {
+        "slug": "agent-table-agent",
+        "role": "member",
+        "name": "表格智能 理解 顾问",
+        "evidence": "original_assets/agent-table-agent/merkle_root",
+        "member_merkle_root": "66699bea218e145255346b26ab5e799b5dbac201a52bf0008d3f62ab26e768ae"
+      }
+    ],
+    "team_lead": "data-pipeline-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4784a19cb3900fce",
+  "prompt_hash": "636742be5534e8a2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-590\", \"kind\": \"team\", \"name\": \"包数据转换专家\", \"description\": \"输入多智能体相关需求，输出职责互斥、依赖成图、冲突暴露三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"R包数据转换主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-pro-01-fixed\", \"role\": \"member\", \"name\": \"R包数据转换 批量整理\", \"evidence\": \"original_assets/data-pipeline-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237\"}, {\"slug\": \"multi-agent-orchestrate-pro\", \"role\": \"member\", \"name\": \"多智能体 任务编排 顾问\", \"evidence\": \"original_assets/multi-agent-orchestrate-pro/merkle_root\", \"member_merkle_root\": \"af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571\"}, {\"slug\": \"agent-table-agent\", \"role\": \"member\", \"name\": \"表格智能 理解 顾问\", \"evidence\": \"original_assets/agent-table-agent/merkle_root\", \"member_merkle_root\": \"66699bea218e145255346b26ab5e799b5dbac201a52bf0008d3f62ab26e768ae\"}], \"team_lead\": \"data-pipeline-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-table-agent.md": "3f634d72ed9aa990d9f220871209d85c3470508f4ffb63575bfd2e46c9ce3520",
+    "agents/data-pipeline-pro-01-fixed-team-lead.md": "4bf08d80200d61c490932aca78b38ab48b5d94c1f74e24fb07e3d176664d376b",
+    "agents/data-pipeline-pro-01-fixed.md": "a53a91a013f9895dcf60978782cc040678a48d0fa3cd1513e44be48e5d1fa3da",
+    "agents/multi-agent-orchestrate-pro.md": "7b00a056601d7bd4120dca9980c7a237faf51bebc5ba4b7fc76f526da026573d",
+    "plugin.json": "e83c747dcbc21b34ab176cf96393dde0f9ed86cd3819502532c8e71b2f83b4be",
+    "settings.json": "f56d8602761da03290a78b55110b1c6c8887dd3923b4d1d7236f7946016e4517"
+  }
+}

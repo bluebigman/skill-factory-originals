@@ -1,0 +1,126 @@
+{
+  "agentName": "inventory-tracking-pro-team-lead",
+  "agents": [
+    "./agents/inventory-tracking-pro-team-lead.md",
+    "./agents/inventory-tracking-pro.md",
+    "./agents/ecommerce-newbie-coach.md",
+    "./agents/inventory-alert-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 库存管理",
+    "zh": "帮我处理库存管理"
+  },
+  "description": "Inventory Tracking Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "库存 管理 电商 预警 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "Inventory Tracking Pro Team",
+    "zh": "库存 管理 电商 预警 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "inventory-tracking-pro-team-lead",
+      "name": {
+        "en": "库存管理主理人",
+        "zh": "库存管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/inventory-tracking-pro.png",
+      "id": "inventory-tracking-pro",
+      "name": {
+        "en": "Inventory Tracking Pro",
+        "zh": "库存管理 补货预警 周转率"
+      },
+      "profession": {
+        "en": "Inventory Tracking Pro",
+        "zh": "库存管理 补货预警 周转率"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ecommerce-newbie-coach.png",
+      "id": "ecommerce-newbie-coach",
+      "name": {
+        "en": "Ecommerce Newbie Coach",
+        "zh": "电商开店 选品思路 顾问"
+      },
+      "profession": {
+        "en": "Ecommerce Newbie Coach",
+        "zh": "电商开店 选品思路 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/inventory-alert-coach.png",
+      "id": "inventory-alert-coach",
+      "name": {
+        "en": "Inventory Alert Coach",
+        "zh": "库存预警 补货点 助手"
+      },
+      "profession": {
+        "en": "Inventory Alert Coach",
+        "zh": "库存预警 补货点 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-146",
+  "plugin": "group-team-146",
+  "profession": {
+    "en": "Inventory Tracking Pro Collaboration Team",
+    "zh": "库存 管理 电商 预警 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 库存管理",
+      "zh": "帮我处理库存管理"
+    },
+    {
+      "en": "Plan 电商开店",
+      "zh": "帮我规划电商开店"
+    },
+    {
+      "en": "Review 库存预警",
+      "zh": "帮我检查库存预警"
+    }
+  ],
+  "tags": [
+    {
+      "en": "库存管理",
+      "zh": "库存管理"
+    },
+    {
+      "en": "电商开店",
+      "zh": "电商开店"
+    },
+    {
+      "en": "库存预警",
+      "zh": "库存预警"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "inventory-tracking-pro-team-lead",
+    "memberAgents": [
+      "inventory-tracking-pro",
+      "ecommerce-newbie-coach",
+      "inventory-alert-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

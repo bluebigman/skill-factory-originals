@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-doc-index-team-lead",
+  "agents": [
+    "./agents/agent-doc-index-team-lead.md",
+    "./agents/agent-doc-index.md",
+    "./agents/global-content-calendar.md",
+    "./agents/cn-rewrite-deaifier.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档索引",
+    "zh": "帮我处理文档索引"
+  },
+  "description": "agent-doc-index team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档索引 requirements, output three deliverables: 索引完整, 语义检索, 引用可跳. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档索引相关需求，输出索引完整、语义检索、引用可跳三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-doc-index Team",
+    "zh": "文档索引检索专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-doc-index-team-lead",
+      "name": {
+        "en": "文档索引主理人",
+        "zh": "文档索引主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-doc-index.png",
+      "id": "agent-doc-index",
+      "name": {
+        "en": "agent-doc-index",
+        "zh": "文档索引 检索 顾问"
+      },
+      "profession": {
+        "en": "agent-doc-index",
+        "zh": "文档索引 检索 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-content-calendar.png",
+      "id": "global-content-calendar",
+      "name": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "profession": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cn-rewrite-deaifier.png",
+      "id": "cn-rewrite-deaifier",
+      "name": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "profession": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-720",
+  "plugin": "group-team-720",
+  "profession": {
+    "en": "agent-doc-index Collaboration Team",
+    "zh": "文档索引检索专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档索引",
+      "zh": "帮我处理文档索引"
+    },
+    {
+      "en": "Plan 全球内容",
+      "zh": "帮我规划全球内容"
+    },
+    {
+      "en": "Review 中文改写",
+      "zh": "帮我检查中文改写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "索引完整",
+      "zh": "索引完整"
+    },
+    {
+      "en": "语义检索",
+      "zh": "语义检索"
+    },
+    {
+      "en": "引用可跳",
+      "zh": "引用可跳"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-doc-index-team-lead",
+    "memberAgents": [
+      "agent-doc-index",
+      "global-content-calendar",
+      "cn-rewrite-deaifier"
+    ]
+  },
+  "version": "1.0.0"
+}

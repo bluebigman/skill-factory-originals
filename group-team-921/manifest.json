@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-921",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-921",
+    "kind": "team",
+    "name": "实验分析顾问专家",
+    "description": "擅长先定指标、隐私脱敏与引用合规，覆盖实验分析全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ab-test-analyze-team-lead",
+        "role": "lead",
+        "name": "实验分析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ab-test-analyze",
+        "role": "member",
+        "name": "实验分析 顾问",
+        "evidence": "original_assets/ab-test-analyze/merkle_root",
+        "member_merkle_root": "ed6454da48f0faedab02a8a11163406a818d4222d99e11426806040f3d741b4d"
+      },
+      {
+        "slug": "doc-legal-boundary",
+        "role": "member",
+        "name": "文档合规边界 顾问",
+        "evidence": "original_assets/doc-legal-boundary/merkle_root",
+        "member_merkle_root": "1f95db4c9dd32f97e07fa85c68dc455329bd29d592cb2fa6ed5e79c8e1240021"
+      },
+      {
+        "slug": "anomaly-detection-pro",
+        "role": "member",
+        "name": "异常检测 基线建模 顾问",
+        "evidence": "original_assets/anomaly-detection-pro/merkle_root",
+        "member_merkle_root": "f079af11cec343749503ccf6950fd63707a98a59aa817f1d65a2d94ac3cf6833"
+      }
+    ],
+    "team_lead": "ab-test-analyze-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "164a3fe5e221db30",
+  "prompt_hash": "a743d5b4fd01be8d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-921\", \"kind\": \"team\", \"name\": \"实验分析顾问专家\", \"description\": \"擅长先定指标、隐私脱敏与引用合规，覆盖实验分析全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ab-test-analyze-team-lead\", \"role\": \"lead\", \"name\": \"实验分析主理人\", \"evidence\": null}, {\"slug\": \"ab-test-analyze\", \"role\": \"member\", \"name\": \"实验分析 顾问\", \"evidence\": \"original_assets/ab-test-analyze/merkle_root\", \"member_merkle_root\": \"ed6454da48f0faedab02a8a11163406a818d4222d99e11426806040f3d741b4d\"}, {\"slug\": \"doc-legal-boundary\", \"role\": \"member\", \"name\": \"文档合规边界 顾问\", \"evidence\": \"original_assets/doc-legal-boundary/merkle_root\", \"member_merkle_root\": \"1f95db4c9dd32f97e07fa85c68dc455329bd29d592cb2fa6ed5e79c8e1240021\"}, {\"slug\": \"anomaly-detection-pro\", \"role\": \"member\", \"name\": \"异常检测 基线建模 顾问\", \"evidence\": \"original_assets/anomaly-detection-pro/merkle_root\", \"member_merkle_root\": \"f079af11cec343749503ccf6950fd63707a98a59aa817f1d65a2d94ac3cf6833\"}], \"team_lead\": \"ab-test-analyze-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ab-test-analyze-team-lead.md": "d1dba1854cc22c82cb461767f772c086358e186e7399e420da587dd589f18c81",
+    "agents/ab-test-analyze.md": "f17f58cda6fc9f697bf74fe0c6e4e2b863b6fcfc0fad75654b26ae57c880881f",
+    "agents/anomaly-detection-pro.md": "806c0dbf413183d03f63cba576eca0e1e2f793bdef547a23f93820c901e7168c",
+    "agents/doc-legal-boundary.md": "fe611d2b7c8d9e783ecf9971c5c1c2bd4f06237a6207274357fe14d563cfdf7a",
+    "plugin.json": "1cc8ba9360f28658c075a1980b09e340dc28d2c9b9b049c594c5081be3b09eac",
+    "settings.json": "a667123fc8a7f6bc455d596ea8e94951c795c9d74833d7ea8b9c3b674682497f"
+  }
+}

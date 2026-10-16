@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-145",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-145",
+    "kind": "team",
+    "name": "联盟 增长 市场 团队",
+    "description": "联盟 增长 市场 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "marketing-toolkit-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "联盟配置审查主理人",
+        "evidence": null
+      },
+      {
+        "slug": "marketing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "联盟配置审查 营销数据条款审查",
+        "evidence": "original_assets/marketing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1"
+      },
+      {
+        "slug": "growth-experiment",
+        "role": "member",
+        "name": "增长实验 假设设计 顾问",
+        "evidence": "original_assets/growth-experiment/merkle_root",
+        "member_merkle_root": "c28d18d83a91f8fdd819b16af6e58db166014d1f158dfc97fac7990e73a0123a"
+      },
+      {
+        "slug": "market-intelligence-expert-v111",
+        "role": "member",
+        "name": "市场洞察 竞品追踪 情报简报",
+        "evidence": "original_assets/market-intelligence-expert-v111/merkle_root",
+        "member_merkle_root": "aa0b8aa48f1779c4d82f0696a83c493087cb17513c5ea553a6b8d96ba614e8be"
+      }
+    ],
+    "team_lead": "marketing-toolkit-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f968cf1673bf4474",
+  "prompt_hash": "318bdd6a44e0e0d8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-145\", \"kind\": \"team\", \"name\": \"联盟 增长 市场 团队\", \"description\": \"联盟 增长 市场 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"marketing-toolkit-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"联盟配置审查主理人\", \"evidence\": null}, {\"slug\": \"marketing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"联盟配置审查 营销数据条款审查\", \"evidence\": \"original_assets/marketing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1\"}, {\"slug\": \"growth-experiment\", \"role\": \"member\", \"name\": \"增长实验 假设设计 顾问\", \"evidence\": \"original_assets/growth-experiment/merkle_root\", \"member_merkle_root\": \"c28d18d83a91f8fdd819b16af6e58db166014d1f158dfc97fac7990e73a0123a\"}, {\"slug\": \"market-intelligence-expert-v111\", \"role\": \"member\", \"name\": \"市场洞察 竞品追踪 情报简报\", \"evidence\": \"original_assets/market-intelligence-expert-v111/merkle_root\", \"member_merkle_root\": \"aa0b8aa48f1779c4d82f0696a83c493087cb17513c5ea553a6b8d96ba614e8be\"}], \"team_lead\": \"marketing-toolkit-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/growth-experiment.md": "2f9eaabdb025040eb670a3613cff4ded59e199d53290a622caf58dfb37eeb26d",
+    "agents/market-intelligence-expert-v111.md": "28b5ead1b043d608b2f2f323d3d844a6d1e497d1e87e98b29392faa10bc76ca1",
+    "agents/marketing-toolkit-pro-fixed-team-lead.md": "0f1163da7bbae329be915e42b1a78267065c92143c5c42c287b4b79850a97358",
+    "agents/marketing-toolkit-pro-fixed.md": "54694865c771574dc066c6992f14015762a64455265e08f875bd52b259497c98",
+    "plugin.json": "f4d32f781da5c4b8c1b4f18b2e7ed7848dba15e587c6ca9a89d60f3985a31894",
+    "settings.json": "daec7e37c59a634a033ef58fc6c514bd2466d4690ccb2afa12b3aae72ed72536"
+  }
+}

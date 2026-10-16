@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1026",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1026",
+    "kind": "team",
+    "name": "跨时区会议专家",
+    "description": "输入跨时区会议相关需求，输出时区轮换、议程前置、结论留档三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "intl-meeting-coach-team-lead",
+        "role": "lead",
+        "name": "跨时区会议主理人",
+        "evidence": null
+      },
+      {
+        "slug": "intl-meeting-coach",
+        "role": "member",
+        "name": "跨时区会议 组织 教练",
+        "evidence": "original_assets/intl-meeting-coach/merkle_root",
+        "member_merkle_root": "b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1"
+      },
+      {
+        "slug": "agriculture-plan",
+        "role": "member",
+        "name": "农事计划编制 顾问",
+        "evidence": "original_assets/agriculture-plan/merkle_root",
+        "member_merkle_root": "07dc27c0f79f3da35f364a14a6d576b31645d9be93459fca0a9a0796c7d97159"
+      },
+      {
+        "slug": "nonprofit-program",
+        "role": "member",
+        "name": "公益项目设计 顾问",
+        "evidence": "original_assets/nonprofit-program/merkle_root",
+        "member_merkle_root": "2a91f0a370ac75ee20789574fdd8f4c3a5476768bd773b1c45e0f7b283092a15"
+      }
+    ],
+    "team_lead": "intl-meeting-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c4b2430c7dbda755",
+  "prompt_hash": "6e459f10ae44406b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1026\", \"kind\": \"team\", \"name\": \"跨时区会议专家\", \"description\": \"输入跨时区会议相关需求，输出时区轮换、议程前置、结论留档三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"intl-meeting-coach-team-lead\", \"role\": \"lead\", \"name\": \"跨时区会议主理人\", \"evidence\": null}, {\"slug\": \"intl-meeting-coach\", \"role\": \"member\", \"name\": \"跨时区会议 组织 教练\", \"evidence\": \"original_assets/intl-meeting-coach/merkle_root\", \"member_merkle_root\": \"b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1\"}, {\"slug\": \"agriculture-plan\", \"role\": \"member\", \"name\": \"农事计划编制 顾问\", \"evidence\": \"original_assets/agriculture-plan/merkle_root\", \"member_merkle_root\": \"07dc27c0f79f3da35f364a14a6d576b31645d9be93459fca0a9a0796c7d97159\"}, {\"slug\": \"nonprofit-program\", \"role\": \"member\", \"name\": \"公益项目设计 顾问\", \"evidence\": \"original_assets/nonprofit-program/merkle_root\", \"member_merkle_root\": \"2a91f0a370ac75ee20789574fdd8f4c3a5476768bd773b1c45e0f7b283092a15\"}], \"team_lead\": \"intl-meeting-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agriculture-plan.md": "760f431b8c2d5bd243c4485e6393818605c512063e05846013a966c5578c70d5",
+    "agents/intl-meeting-coach-team-lead.md": "d4c8387dbccff56e1fd8349212bf5f123908e27807d0845e6ea239cfa0d5e0ce",
+    "agents/intl-meeting-coach.md": "b1a48851c0253b6fed7a2cdf022a92e1feac7f75d0ce8dcff026cb2693218d9b",
+    "agents/nonprofit-program.md": "08a9686ebb6b43ef58fcc24327c274e2e09dce6ae5768a48a8a34c17a0c333b6",
+    "plugin.json": "3a0e16db49090a358bc66b6138b294a584c5a47682953843c262391b70295f9b",
+    "settings.json": "565638b6707387506db5180ce428b0b40e3a672e06720ca0a72974cfc184c00e"
+  }
+}

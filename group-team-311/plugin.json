@@ -1,0 +1,126 @@
+{
+  "agentName": "data-lineage-trace-team-lead",
+  "agents": [
+    "./agents/data-lineage-trace-team-lead.md",
+    "./agents/data-lineage-trace.md",
+    "./agents/attribution-basic.md",
+    "./agents/growth-dashboard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据血缘",
+    "zh": "帮我处理数据血缘"
+  },
+  "description": "data-lineage-trace team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 效果 增长 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "data-lineage-trace Team",
+    "zh": "数据 效果 增长 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-lineage-trace-team-lead",
+      "name": {
+        "en": "数据血缘主理人",
+        "zh": "数据血缘主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-lineage-trace.png",
+      "id": "data-lineage-trace",
+      "name": {
+        "en": "data-lineage-trace",
+        "zh": "数据血缘 链路追踪 顾问"
+      },
+      "profession": {
+        "en": "data-lineage-trace",
+        "zh": "数据血缘 链路追踪 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/attribution-basic.png",
+      "id": "attribution-basic",
+      "name": {
+        "en": "attribution-basic",
+        "zh": "效果归因 口径统一 顾问"
+      },
+      "profession": {
+        "en": "attribution-basic",
+        "zh": "效果归因 口径统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/growth-dashboard.png",
+      "id": "growth-dashboard",
+      "name": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "profession": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-311",
+  "plugin": "group-team-311",
+  "profession": {
+    "en": "data-lineage-trace Collaboration Team",
+    "zh": "数据 效果 增长 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据血缘",
+      "zh": "帮我处理数据血缘"
+    },
+    {
+      "en": "Plan 效果归因",
+      "zh": "帮我规划效果归因"
+    },
+    {
+      "en": "Review 增长看板",
+      "zh": "帮我检查增长看板"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据血缘",
+      "zh": "数据血缘"
+    },
+    {
+      "en": "效果归因",
+      "zh": "效果归因"
+    },
+    {
+      "en": "增长看板",
+      "zh": "增长看板"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-lineage-trace-team-lead",
+    "memberAgents": [
+      "data-lineage-trace",
+      "attribution-basic",
+      "growth-dashboard"
+    ]
+  },
+  "version": "1.0.0"
+}

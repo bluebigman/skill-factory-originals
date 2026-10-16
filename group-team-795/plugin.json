@@ -1,0 +1,126 @@
+{
+  "agentName": "template-engine-pro-team-lead",
+  "agents": [
+    "./agents/template-engine-pro-team-lead.md",
+    "./agents/template-engine-pro.md",
+    "./agents/market-intelligence-expert-v111.md",
+    "./agents/cn-rewrite-deaifier.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 模板引擎",
+    "zh": "帮我处理模板引擎"
+  },
+  "description": "template-engine-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 模板引擎 requirements, output three deliverables: 变量声明, 缺失处理, 转义安全. Verifiable end-to-end, evidence per step.",
+    "zh": "输入模板引擎相关需求，输出变量声明、缺失处理、转义安全三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "template-engine-pro Team",
+    "zh": "模板引擎变量替换专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "template-engine-pro-team-lead",
+      "name": {
+        "en": "模板引擎主理人",
+        "zh": "模板引擎主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/template-engine-pro.png",
+      "id": "template-engine-pro",
+      "name": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "profession": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/market-intelligence-expert-v111.png",
+      "id": "market-intelligence-expert-v111",
+      "name": {
+        "en": "IntelScope",
+        "zh": "市场洞察 竞品追踪 情报简报"
+      },
+      "profession": {
+        "en": "IntelScope",
+        "zh": "市场洞察 竞品追踪 情报简报"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cn-rewrite-deaifier.png",
+      "id": "cn-rewrite-deaifier",
+      "name": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "profession": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-795",
+  "plugin": "group-team-795",
+  "profession": {
+    "en": "template-engine-pro Collaboration Team",
+    "zh": "模板引擎变量替换专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 模板引擎",
+      "zh": "帮我处理模板引擎"
+    },
+    {
+      "en": "Plan 市场洞察",
+      "zh": "帮我规划市场洞察"
+    },
+    {
+      "en": "Review 中文改写",
+      "zh": "帮我检查中文改写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "变量声明",
+      "zh": "变量声明"
+    },
+    {
+      "en": "缺失处理",
+      "zh": "缺失处理"
+    },
+    {
+      "en": "转义安全",
+      "zh": "转义安全"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "template-engine-pro-team-lead",
+    "memberAgents": [
+      "template-engine-pro",
+      "market-intelligence-expert-v111",
+      "cn-rewrite-deaifier"
+    ]
+  },
+  "version": "1.0.0"
+}

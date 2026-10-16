@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-812",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-812",
+    "kind": "team",
+    "name": "状态管理断点续跑专家",
+    "description": "擅长状态落盘、断点可续与幂等重入，覆盖状态管理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-state-manage-team-lead",
+        "role": "lead",
+        "name": "状态管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-state-manage",
+        "role": "member",
+        "name": "状态管理 断点续跑 顾问",
+        "evidence": "original_assets/agent-state-manage/merkle_root",
+        "member_merkle_root": "224c77a0917a84bab703c8615ea3c37923f9d4fbd66aa83af407b4e54ab106d3"
+      },
+      {
+        "slug": "config-error-triage-expert",
+        "role": "member",
+        "name": "配置排查 报错定位",
+        "evidence": "original_assets/config-error-triage-expert/merkle_root",
+        "member_merkle_root": "f0bc33854157bde16f03516c49046337efaf9effb4c1265bd33e3b2e18d073a1"
+      },
+      {
+        "slug": "sql-toolkit-pro-03-fixed",
+        "role": "member",
+        "name": "数据转查询 自然语言转SQL",
+        "evidence": "original_assets/sql-toolkit-pro-03-fixed/merkle_root",
+        "member_merkle_root": "315179b112e0337511f2c1bc4826b5fc59158f11a14c48522d50db47108d9486"
+      }
+    ],
+    "team_lead": "agent-state-manage-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ef95655f68a2f09c",
+  "prompt_hash": "8146cc0c547c6df3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-812\", \"kind\": \"team\", \"name\": \"状态管理断点续跑专家\", \"description\": \"擅长状态落盘、断点可续与幂等重入，覆盖状态管理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-state-manage-team-lead\", \"role\": \"lead\", \"name\": \"状态管理主理人\", \"evidence\": null}, {\"slug\": \"agent-state-manage\", \"role\": \"member\", \"name\": \"状态管理 断点续跑 顾问\", \"evidence\": \"original_assets/agent-state-manage/merkle_root\", \"member_merkle_root\": \"224c77a0917a84bab703c8615ea3c37923f9d4fbd66aa83af407b4e54ab106d3\"}, {\"slug\": \"config-error-triage-expert\", \"role\": \"member\", \"name\": \"配置排查 报错定位\", \"evidence\": \"original_assets/config-error-triage-expert/merkle_root\", \"member_merkle_root\": \"f0bc33854157bde16f03516c49046337efaf9effb4c1265bd33e3b2e18d073a1\"}, {\"slug\": \"sql-toolkit-pro-03-fixed\", \"role\": \"member\", \"name\": \"数据转查询 自然语言转SQL\", \"evidence\": \"original_assets/sql-toolkit-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"315179b112e0337511f2c1bc4826b5fc59158f11a14c48522d50db47108d9486\"}], \"team_lead\": \"agent-state-manage-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-state-manage-team-lead.md": "e102d1a503c20c13b3da2820fd9f6b2cc1d68c58070548be2c804bb310a3b057",
+    "agents/agent-state-manage.md": "61a0c9b6192fc89c8fbd5d87adc00ab09160cdf7d9015467997ee555cf0a9746",
+    "agents/config-error-triage-expert.md": "bbc3ebaf96a03010b389190a173b2f998ae41d63f490b337cb358aeb7073b597",
+    "agents/sql-toolkit-pro-03-fixed.md": "bbe4604e54c44116442d88c0cffa471cc7d65fb868dae8b51d4389443f062a8a",
+    "plugin.json": "2f880f621212dd3f6879d3fe70430818dba153395c1890f0346e00b66cf45efd",
+    "settings.json": "b5089ff38ae542877d9fb868ae961f40076091677ce90929e12f2eddeeff349c"
+  }
+}

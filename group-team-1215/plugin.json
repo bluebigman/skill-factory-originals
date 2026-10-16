@@ -1,0 +1,126 @@
+{
+  "agentName": "presentation-timing-team-lead",
+  "agents": [
+    "./agents/presentation-timing-team-lead.md",
+    "./agents/presentation-timing.md",
+    "./agents/faq-build-pro.md",
+    "./agents/content-structure.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 演示时长控制",
+    "zh": "帮我处理演示时长控制"
+  },
+  "description": "presentation-timing team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 演示时长控制 requirements, output three deliverables: 排练计时, 备份版本, 真实问法. Verifiable end-to-end, evidence per step.",
+    "zh": "输入演示时长控制相关需求，输出排练计时、备份版本、真实问法三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "presentation-timing Team",
+    "zh": "演示时长控制顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "presentation-timing-team-lead",
+      "name": {
+        "en": "演示时长控制主理人",
+        "zh": "演示时长控制主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/presentation-timing.png",
+      "id": "presentation-timing",
+      "name": {
+        "en": "presentation-timing",
+        "zh": "演示时长控制 顾问"
+      },
+      "profession": {
+        "en": "presentation-timing",
+        "zh": "演示时长控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/faq-build-pro.png",
+      "id": "faq-build-pro",
+      "name": {
+        "en": "faq-build-pro",
+        "zh": "常见问题库构建 助手"
+      },
+      "profession": {
+        "en": "faq-build-pro",
+        "zh": "常见问题库构建 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-structure.png",
+      "id": "content-structure",
+      "name": {
+        "en": "content-structure",
+        "zh": "内容结构设计 顾问"
+      },
+      "profession": {
+        "en": "content-structure",
+        "zh": "内容结构设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1215",
+  "plugin": "group-team-1215",
+  "profession": {
+    "en": "presentation-timing Collaboration Team",
+    "zh": "演示时长控制顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 演示时长控制",
+      "zh": "帮我处理演示时长控制"
+    },
+    {
+      "en": "Plan 常见问题库构建",
+      "zh": "帮我规划常见问题库构建"
+    },
+    {
+      "en": "Review 内容结构设计",
+      "zh": "帮我检查内容结构设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "核心优先",
+      "zh": "核心优先"
+    },
+    {
+      "en": "预留问答",
+      "zh": "预留问答"
+    },
+    {
+      "en": "排练计时",
+      "zh": "排练计时"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "presentation-timing-team-lead",
+    "memberAgents": [
+      "presentation-timing",
+      "faq-build-pro",
+      "content-structure"
+    ]
+  },
+  "version": "1.0.0"
+}

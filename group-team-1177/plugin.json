@@ -1,0 +1,126 @@
+{
+  "agentName": "sandbox-execution-team-lead",
+  "agents": [
+    "./agents/sandbox-execution-team-lead.md",
+    "./agents/sandbox-execution.md",
+    "./agents/safety-production-pro.md",
+    "./agents/schema-migration-safe.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 沙箱执行隔离",
+    "zh": "帮我处理沙箱执行隔离"
+  },
+  "description": "sandbox-execution team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 沙箱执行隔离 end-to-end: 最小权限, 网络受限 and 资源上限. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长最小权限、网络受限与资源上限，覆盖沙箱执行隔离全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "sandbox-execution Team",
+    "zh": "沙箱执行隔离专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sandbox-execution-team-lead",
+      "name": {
+        "en": "沙箱执行隔离主理人",
+        "zh": "沙箱执行隔离主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sandbox-execution.png",
+      "id": "sandbox-execution",
+      "name": {
+        "en": "sandbox-execution",
+        "zh": "沙箱执行隔离 顾问"
+      },
+      "profession": {
+        "en": "sandbox-execution",
+        "zh": "沙箱执行隔离 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/safety-production-pro.png",
+      "id": "safety-production-pro",
+      "name": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "profession": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/schema-migration-safe.png",
+      "id": "schema-migration-safe",
+      "name": {
+        "en": "schema-migration-safe",
+        "zh": "结构变更安全 顾问"
+      },
+      "profession": {
+        "en": "schema-migration-safe",
+        "zh": "结构变更安全 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1177",
+  "plugin": "group-team-1177",
+  "profession": {
+    "en": "sandbox-execution Collaboration Team",
+    "zh": "沙箱执行隔离专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 沙箱执行隔离",
+      "zh": "帮我处理沙箱执行隔离"
+    },
+    {
+      "en": "Plan 生产安全",
+      "zh": "帮我规划生产安全"
+    },
+    {
+      "en": "Review 结构变更安全",
+      "zh": "帮我检查结构变更安全"
+    }
+  ],
+  "tags": [
+    {
+      "en": "最小权限",
+      "zh": "最小权限"
+    },
+    {
+      "en": "网络受限",
+      "zh": "网络受限"
+    },
+    {
+      "en": "资源上限",
+      "zh": "资源上限"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sandbox-execution-team-lead",
+    "memberAgents": [
+      "sandbox-execution",
+      "safety-production-pro",
+      "schema-migration-safe"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "ui-game-hud-team-lead",
+  "agents": [
+    "./agents/ui-game-hud-team-lead.md",
+    "./agents/ui-game-hud.md",
+    "./agents/game-liveops-pro.md",
+    "./agents/game-doc-standard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 游戏界面",
+    "zh": "帮我处理游戏界面"
+  },
+  "description": "ui-game-hud team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 游戏界面 requirements, output three deliverables: 可读优先, 可自定义, 避开遮挡. Verifiable end-to-end, evidence per step.",
+    "zh": "输入游戏界面相关需求，输出可读优先、可自定义、避开遮挡三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ui-game-hud Team",
+    "zh": "游戏策划文档规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ui-game-hud-team-lead",
+      "name": {
+        "en": "游戏界面主理人",
+        "zh": "游戏界面主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ui-game-hud.png",
+      "id": "ui-game-hud",
+      "name": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "profession": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-liveops-pro.png",
+      "id": "game-liveops-pro",
+      "name": {
+        "en": "game-liveops-pro",
+        "zh": "游戏运营 活动节奏 顾问"
+      },
+      "profession": {
+        "en": "game-liveops-pro",
+        "zh": "游戏运营 活动节奏 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-doc-standard.png",
+      "id": "game-doc-standard",
+      "name": {
+        "en": "game-doc-standard",
+        "zh": "游戏策划 文档规范 顾问"
+      },
+      "profession": {
+        "en": "game-doc-standard",
+        "zh": "游戏策划 文档规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-585",
+  "plugin": "group-team-585",
+  "profession": {
+    "en": "ui-game-hud Collaboration Team",
+    "zh": "游戏策划文档规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 游戏界面",
+      "zh": "帮我处理游戏界面"
+    },
+    {
+      "en": "Plan 游戏运营",
+      "zh": "帮我规划游戏运营"
+    },
+    {
+      "en": "Review 游戏策划",
+      "zh": "帮我检查游戏策划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "可读优先",
+      "zh": "可读优先"
+    },
+    {
+      "en": "可自定义",
+      "zh": "可自定义"
+    },
+    {
+      "en": "避开遮挡",
+      "zh": "避开遮挡"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ui-game-hud-team-lead",
+    "memberAgents": [
+      "ui-game-hud",
+      "game-liveops-pro",
+      "game-doc-standard"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "expense-reimburse-expert-team-lead",
+  "agents": [
+    "./agents/expense-reimburse-expert-team-lead.md",
+    "./agents/expense-reimburse-expert.md",
+    "./agents/consulting-framework.md",
+    "./agents/intl-standards-map.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 报销与费用管理专家",
+    "zh": "帮我处理报销与费用管理专家"
+  },
+  "description": "ExpenseReimburse team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 咨询框架 requirements, output three deliverables: 费用归类, 假设驱动, 数据支撑. Verifiable end-to-end, evidence per step.",
+    "zh": "输入咨询框架相关需求，输出费用归类、假设驱动、数据支撑三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ExpenseReimburse Team",
+    "zh": "咨询框架专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "expense-reimburse-expert-team-lead",
+      "name": {
+        "en": "报销与费用管理专家主理人",
+        "zh": "报销与费用管理专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/expense-reimburse-expert.png",
+      "id": "expense-reimburse-expert",
+      "name": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "profession": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/consulting-framework.png",
+      "id": "consulting-framework",
+      "name": {
+        "en": "consulting-framework",
+        "zh": "咨询框架 顾问"
+      },
+      "profession": {
+        "en": "consulting-framework",
+        "zh": "咨询框架 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-standards-map.png",
+      "id": "intl-standards-map",
+      "name": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "profession": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1011",
+  "plugin": "group-team-1011",
+  "profession": {
+    "en": "ExpenseReimburse Collaboration Team",
+    "zh": "咨询框架专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报销与费用管理专家",
+      "zh": "帮我处理报销与费用管理专家"
+    },
+    {
+      "en": "Plan 咨询框架",
+      "zh": "帮我规划咨询框架"
+    },
+    {
+      "en": "Review 国际标准",
+      "zh": "帮我检查国际标准"
+    }
+  ],
+  "tags": [
+    {
+      "en": "费用归类",
+      "zh": "费用归类"
+    },
+    {
+      "en": "报销明细输出",
+      "zh": "报销明细输出"
+    },
+    {
+      "en": "图片发票抽取",
+      "zh": "图片发票抽取"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "expense-reimburse-expert-team-lead",
+    "memberAgents": [
+      "expense-reimburse-expert",
+      "consulting-framework",
+      "intl-standards-map"
+    ]
+  },
+  "version": "1.0.0"
+}

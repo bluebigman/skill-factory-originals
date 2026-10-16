@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-708",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-708",
+    "kind": "team",
+    "name": "转化优化专家",
+    "description": "输入搜索内容相关需求，输出意图分类、一词一页、结构可读三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "seo-content-pro-team-lead",
+        "role": "lead",
+        "name": "搜索内容主理人",
+        "evidence": null
+      },
+      {
+        "slug": "seo-content-pro",
+        "role": "member",
+        "name": "搜索内容 关键词布局 顾问",
+        "evidence": "original_assets/seo-content-pro/merkle_root",
+        "member_merkle_root": "cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80"
+      },
+      {
+        "slug": "landing-page-opt",
+        "role": "member",
+        "name": "落地页 转化优化 顾问",
+        "evidence": "original_assets/landing-page-opt/merkle_root",
+        "member_merkle_root": "404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87"
+      },
+      {
+        "slug": "template-engine-pro",
+        "role": "member",
+        "name": "模板引擎 变量替换 顾问",
+        "evidence": "original_assets/template-engine-pro/merkle_root",
+        "member_merkle_root": "d22b505294457fd9a3aa4fc618bdee66d9f0ef2d1b5585cb77f460b6b2233860"
+      }
+    ],
+    "team_lead": "seo-content-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "084a9c887bd6acf2",
+  "prompt_hash": "4e8990f1e0b6fe07",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-708\", \"kind\": \"team\", \"name\": \"转化优化专家\", \"description\": \"输入搜索内容相关需求，输出意图分类、一词一页、结构可读三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"seo-content-pro-team-lead\", \"role\": \"lead\", \"name\": \"搜索内容主理人\", \"evidence\": null}, {\"slug\": \"seo-content-pro\", \"role\": \"member\", \"name\": \"搜索内容 关键词布局 顾问\", \"evidence\": \"original_assets/seo-content-pro/merkle_root\", \"member_merkle_root\": \"cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80\"}, {\"slug\": \"landing-page-opt\", \"role\": \"member\", \"name\": \"落地页 转化优化 顾问\", \"evidence\": \"original_assets/landing-page-opt/merkle_root\", \"member_merkle_root\": \"404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87\"}, {\"slug\": \"template-engine-pro\", \"role\": \"member\", \"name\": \"模板引擎 变量替换 顾问\", \"evidence\": \"original_assets/template-engine-pro/merkle_root\", \"member_merkle_root\": \"d22b505294457fd9a3aa4fc618bdee66d9f0ef2d1b5585cb77f460b6b2233860\"}], \"team_lead\": \"seo-content-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/landing-page-opt.md": "19b30834c0ff5f59ac02989ec6b254fa96609f40a87257adaf31e8156473840e",
+    "agents/seo-content-pro-team-lead.md": "401d4741abfa63f4ffb08acbbf5047aefb0e0a9b4c24ed6455cb97589368313f",
+    "agents/seo-content-pro.md": "e3903677b8ccf1f29938f8bfc088556cf94837ae53b2a3002d936b76ded9245a",
+    "agents/template-engine-pro.md": "01a948aba819d688aacf0a0e543ce93ca15505b0e4fb39994f877cd2fc7285ec",
+    "plugin.json": "e7737a1a93caab9f575fc0b4124fc7bcdf0931568bd62204c3e8d5d93f7f99a5",
+    "settings.json": "a6655ea194523aaa368dddb078e5bd534f0b32e4360ba8f8b23b05055a1fdc71"
+  }
+}

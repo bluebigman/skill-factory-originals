@@ -1,0 +1,126 @@
+{
+  "agentName": "search-ux-design-team-lead",
+  "agents": [
+    "./agents/search-ux-design-team-lead.md",
+    "./agents/search-ux-design.md",
+    "./agents/space-wayfinding.md",
+    "./agents/visual-asset-brief.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 搜索体验设计",
+    "zh": "帮我处理搜索体验设计"
+  },
+  "description": "search-ux-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 搜索体验设计 requirements, output three deliverables: 容错处理, 筛选可见, 结果排序. Verifiable end-to-end, evidence per step.",
+    "zh": "输入搜索体验设计相关需求，输出容错处理、筛选可见、结果排序三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "search-ux-design Team",
+    "zh": "搜索体验设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "search-ux-design-team-lead",
+      "name": {
+        "en": "搜索体验设计主理人",
+        "zh": "搜索体验设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/search-ux-design.png",
+      "id": "search-ux-design",
+      "name": {
+        "en": "search-ux-design",
+        "zh": "搜索体验设计 顾问"
+      },
+      "profession": {
+        "en": "search-ux-design",
+        "zh": "搜索体验设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/space-wayfinding.png",
+      "id": "space-wayfinding",
+      "name": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "profession": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/visual-asset-brief.png",
+      "id": "visual-asset-brief",
+      "name": {
+        "en": "visual-asset-brief",
+        "zh": "视觉素材需求 助手"
+      },
+      "profession": {
+        "en": "visual-asset-brief",
+        "zh": "视觉素材需求 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1071",
+  "plugin": "group-team-1071",
+  "profession": {
+    "en": "search-ux-design Collaboration Team",
+    "zh": "搜索体验设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 搜索体验设计",
+      "zh": "帮我处理搜索体验设计"
+    },
+    {
+      "en": "Plan 导视系统",
+      "zh": "帮我规划导视系统"
+    },
+    {
+      "en": "Review 视觉素材需求",
+      "zh": "帮我检查视觉素材需求"
+    }
+  ],
+  "tags": [
+    {
+      "en": "容错处理",
+      "zh": "容错处理"
+    },
+    {
+      "en": "筛选可见",
+      "zh": "筛选可见"
+    },
+    {
+      "en": "结果排序",
+      "zh": "结果排序"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "search-ux-design-team-lead",
+    "memberAgents": [
+      "search-ux-design",
+      "space-wayfinding",
+      "visual-asset-brief"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "notification-design-team-lead",
+  "agents": [
+    "./agents/notification-design-team-lead.md",
+    "./agents/notification-design.md",
+    "./agents/prd-write-coach.md",
+    "./agents/ui-game-hud.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 通知设计",
+    "zh": "帮我处理通知设计"
+  },
+  "description": "notification-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 通知设计 requirements, output three deliverables: 分级发送, 聚合防扰, 行动明确. Verifiable end-to-end, evidence per step.",
+    "zh": "输入通知设计相关需求，输出分级发送、聚合防扰、行动明确三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "notification-design Team",
+    "zh": "通知设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "notification-design-team-lead",
+      "name": {
+        "en": "通知设计主理人",
+        "zh": "通知设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/notification-design.png",
+      "id": "notification-design",
+      "name": {
+        "en": "notification-design",
+        "zh": "通知设计 顾问"
+      },
+      "profession": {
+        "en": "notification-design",
+        "zh": "通知设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prd-write-coach.png",
+      "id": "prd-write-coach",
+      "name": {
+        "en": "prd-write-coach",
+        "zh": "需求文档撰写 顾问"
+      },
+      "profession": {
+        "en": "prd-write-coach",
+        "zh": "需求文档撰写 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-game-hud.png",
+      "id": "ui-game-hud",
+      "name": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "profession": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1020",
+  "plugin": "group-team-1020",
+  "profession": {
+    "en": "notification-design Collaboration Team",
+    "zh": "通知设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 通知设计",
+      "zh": "帮我处理通知设计"
+    },
+    {
+      "en": "Plan 需求文档撰写",
+      "zh": "帮我规划需求文档撰写"
+    },
+    {
+      "en": "Review 游戏界面",
+      "zh": "帮我检查游戏界面"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级发送",
+      "zh": "分级发送"
+    },
+    {
+      "en": "聚合防扰",
+      "zh": "聚合防扰"
+    },
+    {
+      "en": "行动明确",
+      "zh": "行动明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "notification-design-team-lead",
+    "memberAgents": [
+      "notification-design",
+      "prd-write-coach",
+      "ui-game-hud"
+    ]
+  },
+  "version": "1.0.0"
+}

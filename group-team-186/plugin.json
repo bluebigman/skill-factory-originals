@@ -1,0 +1,126 @@
+{
+  "agentName": "self-discipline-pro-team-lead",
+  "agents": [
+    "./agents/self-discipline-pro-team-lead.md",
+    "./agents/self-discipline-pro.md",
+    "./agents/resume-tailor.md",
+    "./agents/meeting-notes-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 自律养成",
+    "zh": "帮我处理自律养成"
+  },
+  "description": "Self Discipline Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "自律 简历 会议 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Self Discipline Pro Team",
+    "zh": "自律 简历 会议 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "self-discipline-pro-team-lead",
+      "name": {
+        "en": "自律养成主理人",
+        "zh": "自律养成主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/self-discipline-pro.png",
+      "id": "self-discipline-pro",
+      "name": {
+        "en": "Self Discipline Pro",
+        "zh": "自律养成 时间安排 目标管理"
+      },
+      "profession": {
+        "en": "Self Discipline Pro",
+        "zh": "自律养成 时间安排 目标管理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/resume-tailor.png",
+      "id": "resume-tailor",
+      "name": {
+        "en": "Resume Tailor",
+        "zh": "简历定制 岗位匹配 顾问"
+      },
+      "profession": {
+        "en": "Resume Tailor",
+        "zh": "简历定制 岗位匹配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/meeting-notes-pro.png",
+      "id": "meeting-notes-pro",
+      "name": {
+        "en": "Meeting Notes Pro",
+        "zh": "会议纪要 行动项 决议跟踪"
+      },
+      "profession": {
+        "en": "Meeting Notes Pro",
+        "zh": "会议纪要 行动项 决议跟踪"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-186",
+  "plugin": "group-team-186",
+  "profession": {
+    "en": "Self Discipline Pro Collaboration Team",
+    "zh": "自律 简历 会议 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 自律养成",
+      "zh": "帮我处理自律养成"
+    },
+    {
+      "en": "Plan 简历定制",
+      "zh": "帮我规划简历定制"
+    },
+    {
+      "en": "Review 会议纪要",
+      "zh": "帮我检查会议纪要"
+    }
+  ],
+  "tags": [
+    {
+      "en": "自律养成",
+      "zh": "自律养成"
+    },
+    {
+      "en": "简历定制",
+      "zh": "简历定制"
+    },
+    {
+      "en": "会议纪要",
+      "zh": "会议纪要"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "self-discipline-pro-team-lead",
+    "memberAgents": [
+      "self-discipline-pro",
+      "resume-tailor",
+      "meeting-notes-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

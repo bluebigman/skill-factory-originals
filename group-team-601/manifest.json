@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-601",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-601",
+    "kind": "team",
+    "name": "游戏新手引导设计专家",
+    "description": "游戏新手引导设计专家：围绕游戏新手，覆盖边做边教／一次一点／早期首胜，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "game-onboarding-pro-team-lead",
+        "role": "lead",
+        "name": "游戏新手主理人",
+        "evidence": null
+      },
+      {
+        "slug": "game-onboarding-pro",
+        "role": "member",
+        "name": "游戏新手 引导设计 顾问",
+        "evidence": "original_assets/game-onboarding-pro/merkle_root",
+        "member_merkle_root": "305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b"
+      },
+      {
+        "slug": "onboarding-product",
+        "role": "member",
+        "name": "新用户 上手引导 顾问",
+        "evidence": "original_assets/onboarding-product/merkle_root",
+        "member_merkle_root": "5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab"
+      },
+      {
+        "slug": "user-research-synth",
+        "role": "member",
+        "name": "用户研究 洞察归纳 顾问",
+        "evidence": "original_assets/user-research-synth/merkle_root",
+        "member_merkle_root": "d5d2c8d084d6ba5373694015824f6df112eb2affff3784f1f34446a206f514e6"
+      }
+    ],
+    "team_lead": "game-onboarding-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9bb21f5801b34ed3",
+  "prompt_hash": "a87d6348530c839a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-601\", \"kind\": \"team\", \"name\": \"游戏新手引导设计专家\", \"description\": \"游戏新手引导设计专家：围绕游戏新手，覆盖边做边教／一次一点／早期首胜，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"game-onboarding-pro-team-lead\", \"role\": \"lead\", \"name\": \"游戏新手主理人\", \"evidence\": null}, {\"slug\": \"game-onboarding-pro\", \"role\": \"member\", \"name\": \"游戏新手 引导设计 顾问\", \"evidence\": \"original_assets/game-onboarding-pro/merkle_root\", \"member_merkle_root\": \"305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b\"}, {\"slug\": \"onboarding-product\", \"role\": \"member\", \"name\": \"新用户 上手引导 顾问\", \"evidence\": \"original_assets/onboarding-product/merkle_root\", \"member_merkle_root\": \"5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab\"}, {\"slug\": \"user-research-synth\", \"role\": \"member\", \"name\": \"用户研究 洞察归纳 顾问\", \"evidence\": \"original_assets/user-research-synth/merkle_root\", \"member_merkle_root\": \"d5d2c8d084d6ba5373694015824f6df112eb2affff3784f1f34446a206f514e6\"}], \"team_lead\": \"game-onboarding-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-onboarding-pro-team-lead.md": "18d794c3f584bb6dccc55138f5580888961404d510b583c841fa3cca71a63969",
+    "agents/game-onboarding-pro.md": "06cca7cfee15b1c1b439ec426953bf771faef2bd8db23854b7910853f872a6b2",
+    "agents/onboarding-product.md": "84c5148b874760a9108c84a123fb1dd66fecc7dfb74163e310408a1e7ff1a0a3",
+    "agents/user-research-synth.md": "c1cff16918162913c2ad8b9e20972a340fbfcd766c5b9418be42af4159631beb",
+    "plugin.json": "92050fbdd50eee5da4b1756c540c02dd24b1d1eaa9f36ab7d5e97216dc72efc5",
+    "settings.json": "d816d71da757e4bedb2dc5903afed20201556af45ad22cbf0e427a7b14532360"
+  }
+}

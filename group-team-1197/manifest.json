@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1197",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1197",
+    "kind": "team",
+    "name": "客户成功专家",
+    "description": "输入客户成功相关需求，输出里程碑制、阶段回访、分区排查三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "customer-onboard-cs-team-lead",
+        "role": "lead",
+        "name": "客户成功主理人",
+        "evidence": null
+      },
+      {
+        "slug": "customer-onboard-cs",
+        "role": "member",
+        "name": "客户成功 上手陪跑 顾问",
+        "evidence": "original_assets/customer-onboard-cs/merkle_root",
+        "member_merkle_root": "27028e9e1858e332cf0e09c1dac79bbc74af62265c864a94a83b8620299fbbea"
+      },
+      {
+        "slug": "safety-management",
+        "role": "member",
+        "name": "安全管理 顾问",
+        "evidence": "original_assets/safety-management/merkle_root",
+        "member_merkle_root": "6dd3f2de179924da51d658a3dd72c50ed10b7e18e9b655f0a2304629ed999af1"
+      },
+      {
+        "slug": "internal-qa",
+        "role": "member",
+        "name": "内部答疑整理 助手",
+        "evidence": "original_assets/internal-qa/merkle_root",
+        "member_merkle_root": "b83421909336f7c68c0d4063e10b1c66b9b76a9e29eb8a207520ebc550e704ff"
+      }
+    ],
+    "team_lead": "customer-onboard-cs-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3602850fdef4ba99",
+  "prompt_hash": "235c2faceab673eb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1197\", \"kind\": \"team\", \"name\": \"客户成功专家\", \"description\": \"输入客户成功相关需求，输出里程碑制、阶段回访、分区排查三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"customer-onboard-cs-team-lead\", \"role\": \"lead\", \"name\": \"客户成功主理人\", \"evidence\": null}, {\"slug\": \"customer-onboard-cs\", \"role\": \"member\", \"name\": \"客户成功 上手陪跑 顾问\", \"evidence\": \"original_assets/customer-onboard-cs/merkle_root\", \"member_merkle_root\": \"27028e9e1858e332cf0e09c1dac79bbc74af62265c864a94a83b8620299fbbea\"}, {\"slug\": \"safety-management\", \"role\": \"member\", \"name\": \"安全管理 顾问\", \"evidence\": \"original_assets/safety-management/merkle_root\", \"member_merkle_root\": \"6dd3f2de179924da51d658a3dd72c50ed10b7e18e9b655f0a2304629ed999af1\"}, {\"slug\": \"internal-qa\", \"role\": \"member\", \"name\": \"内部答疑整理 助手\", \"evidence\": \"original_assets/internal-qa/merkle_root\", \"member_merkle_root\": \"b83421909336f7c68c0d4063e10b1c66b9b76a9e29eb8a207520ebc550e704ff\"}], \"team_lead\": \"customer-onboard-cs-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/customer-onboard-cs-team-lead.md": "82e16d98d8e83f94fbef846cfa730d4846bfd7711a68d833c719385f17676982",
+    "agents/customer-onboard-cs.md": "5045665658eeb75ca676ea9bf2d3b606051441464301a0e5b2d25b0120f7b06a",
+    "agents/internal-qa.md": "72c8440cee99f81c2cb8a894e5170d73a5d702e97fb7817ca4da9d9c1e528a27",
+    "agents/safety-management.md": "85cf4541594e5833ca2af4e9071fd4f73596955e50f1c61805b5c2e523d770e5",
+    "plugin.json": "7d704b964a894d4b88b56e012be17b3edecf1c4f2443bcebd84c0f3ab25160e0",
+    "settings.json": "4c08b246f1e570010c25f55260345028e42bb9342fa361bff21b6ba584a95958"
+  }
+}

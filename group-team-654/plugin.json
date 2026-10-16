@@ -1,0 +1,126 @@
+{
+  "agentName": "form-design-pro-team-lead",
+  "agents": [
+    "./agents/form-design-pro-team-lead.md",
+    "./agents/form-design-pro.md",
+    "./agents/playtest-method.md",
+    "./agents/virtual-space-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 表单设计",
+    "zh": "帮我处理表单设计"
+  },
+  "description": "form-design-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 表单设计 end-to-end: 必填最少, 即时校验 and 错误可改. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长必填最少、即时校验与错误可改，覆盖表单设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "form-design-pro Team",
+    "zh": "填写体验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "form-design-pro-team-lead",
+      "name": {
+        "en": "表单设计主理人",
+        "zh": "表单设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/form-design-pro.png",
+      "id": "form-design-pro",
+      "name": {
+        "en": "form-design-pro",
+        "zh": "表单设计 填写体验 顾问"
+      },
+      "profession": {
+        "en": "form-design-pro",
+        "zh": "表单设计 填写体验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/playtest-method.png",
+      "id": "playtest-method",
+      "name": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "profession": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/virtual-space-pro.png",
+      "id": "virtual-space-pro",
+      "name": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "profession": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-654",
+  "plugin": "group-team-654",
+  "profession": {
+    "en": "form-design-pro Collaboration Team",
+    "zh": "填写体验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 表单设计",
+      "zh": "帮我处理表单设计"
+    },
+    {
+      "en": "Plan 可用性",
+      "zh": "帮我规划可用性"
+    },
+    {
+      "en": "Review 虚拟空间",
+      "zh": "帮我检查虚拟空间"
+    }
+  ],
+  "tags": [
+    {
+      "en": "必填最少",
+      "zh": "必填最少"
+    },
+    {
+      "en": "即时校验",
+      "zh": "即时校验"
+    },
+    {
+      "en": "错误可改",
+      "zh": "错误可改"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "form-design-pro-team-lead",
+    "memberAgents": [
+      "form-design-pro",
+      "playtest-method",
+      "virtual-space-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

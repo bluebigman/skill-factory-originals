@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-525",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-525",
+    "kind": "team",
+    "name": "图片批处理专家",
+    "description": "擅长参数方案、格式转换与首件确认，覆盖代工管理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "image-batch-expert-team-lead",
+        "role": "lead",
+        "name": "图片批处理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "image-batch-expert",
+        "role": "member",
+        "name": "图片批处理 格式转换",
+        "evidence": "original_assets/image-batch-expert/merkle_root",
+        "member_merkle_root": "a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870"
+      },
+      {
+        "slug": "contract-mfg-audit-pro",
+        "role": "member",
+        "name": "代工管理 过程审核 顾问",
+        "evidence": "original_assets/contract-mfg-audit-pro/merkle_root",
+        "member_merkle_root": "e6db2db3f515fa85e99569ef501fd812d3becd37383f1898ba423bc77fcfa9f9"
+      },
+      {
+        "slug": "pipeline-review-pro",
+        "role": "member",
+        "name": "销售漏斗 复盘机制 顾问",
+        "evidence": "original_assets/pipeline-review-pro/merkle_root",
+        "member_merkle_root": "9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0"
+      }
+    ],
+    "team_lead": "image-batch-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "99126fd9d15ec33a",
+  "prompt_hash": "0db860f5ae4ec98d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-525\", \"kind\": \"team\", \"name\": \"图片批处理专家\", \"description\": \"擅长参数方案、格式转换与首件确认，覆盖代工管理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"image-batch-expert-team-lead\", \"role\": \"lead\", \"name\": \"图片批处理主理人\", \"evidence\": null}, {\"slug\": \"image-batch-expert\", \"role\": \"member\", \"name\": \"图片批处理 格式转换\", \"evidence\": \"original_assets/image-batch-expert/merkle_root\", \"member_merkle_root\": \"a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870\"}, {\"slug\": \"contract-mfg-audit-pro\", \"role\": \"member\", \"name\": \"代工管理 过程审核 顾问\", \"evidence\": \"original_assets/contract-mfg-audit-pro/merkle_root\", \"member_merkle_root\": \"e6db2db3f515fa85e99569ef501fd812d3becd37383f1898ba423bc77fcfa9f9\"}, {\"slug\": \"pipeline-review-pro\", \"role\": \"member\", \"name\": \"销售漏斗 复盘机制 顾问\", \"evidence\": \"original_assets/pipeline-review-pro/merkle_root\", \"member_merkle_root\": \"9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0\"}], \"team_lead\": \"image-batch-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-mfg-audit-pro.md": "a5dd747c55400d9990c1c1d42317f3909de9c67ce7e75e53805ab83a1fdb25e5",
+    "agents/image-batch-expert-team-lead.md": "1905a62ea701afb247bc93309a447159023e32151cd6e8c141effe5bd784f7c7",
+    "agents/image-batch-expert.md": "5bc17e313f137409b74156ccb89c96a79c6e481d1aadfccb9ca87b500cd160ad",
+    "agents/pipeline-review-pro.md": "95047207ca2285b2387bd2531ef98f9b6e1d0ed8d7b3c1053a88a860a4d13131",
+    "plugin.json": "18f354164eea2070305727887055e4f454f8145333475da8c399d02f3c24a094",
+    "settings.json": "3a28a9f0f5aea65a3920864034a99d92264a78719efabb7b5a0a546c12f9491f"
+  }
+}

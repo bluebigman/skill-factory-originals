@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-409",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-409",
+    "kind": "team",
+    "name": "跨境数据合规处理专家",
+    "description": "跨境数据合规处理专家：围绕跨境数据，覆盖最小必要／明示同意／跨境评估，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "gdpr-data-handle-team-lead",
+        "role": "lead",
+        "name": "跨境数据主理人",
+        "evidence": null
+      },
+      {
+        "slug": "gdpr-data-handle",
+        "role": "member",
+        "name": "跨境数据 合规处理 顾问",
+        "evidence": "original_assets/gdpr-data-handle/merkle_root",
+        "member_merkle_root": "2bc76e25954d53ea92523823e6ce85964085e80a6dc4199e4b904c98a7773fb0"
+      },
+      {
+        "slug": "safety-production-pro",
+        "role": "member",
+        "name": "生产安全 隐患排查 顾问",
+        "evidence": "original_assets/safety-production-pro/merkle_root",
+        "member_merkle_root": "378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd"
+      },
+      {
+        "slug": "agent-sandbox-policy",
+        "role": "member",
+        "name": "沙箱策略 隔离边界 顾问",
+        "evidence": "original_assets/agent-sandbox-policy/merkle_root",
+        "member_merkle_root": "a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e"
+      }
+    ],
+    "team_lead": "gdpr-data-handle-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f9d488df2722d13d",
+  "prompt_hash": "00e37cb4622b152f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-409\", \"kind\": \"team\", \"name\": \"跨境数据合规处理专家\", \"description\": \"跨境数据合规处理专家：围绕跨境数据，覆盖最小必要／明示同意／跨境评估，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"gdpr-data-handle-team-lead\", \"role\": \"lead\", \"name\": \"跨境数据主理人\", \"evidence\": null}, {\"slug\": \"gdpr-data-handle\", \"role\": \"member\", \"name\": \"跨境数据 合规处理 顾问\", \"evidence\": \"original_assets/gdpr-data-handle/merkle_root\", \"member_merkle_root\": \"2bc76e25954d53ea92523823e6ce85964085e80a6dc4199e4b904c98a7773fb0\"}, {\"slug\": \"safety-production-pro\", \"role\": \"member\", \"name\": \"生产安全 隐患排查 顾问\", \"evidence\": \"original_assets/safety-production-pro/merkle_root\", \"member_merkle_root\": \"378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd\"}, {\"slug\": \"agent-sandbox-policy\", \"role\": \"member\", \"name\": \"沙箱策略 隔离边界 顾问\", \"evidence\": \"original_assets/agent-sandbox-policy/merkle_root\", \"member_merkle_root\": \"a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e\"}], \"team_lead\": \"gdpr-data-handle-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-sandbox-policy.md": "18e4b63b28d07a87950b8190cfb2244f6f133c2d1c6f2a0fc8f313f2229e535b",
+    "agents/gdpr-data-handle-team-lead.md": "236ece660a5688f735c9e5b324a0838472ddbec97f9454a90041dd497b387450",
+    "agents/gdpr-data-handle.md": "f06245a4899a9d13c217c180fb46222ef13418a988b67062b599bc4002b0c52e",
+    "agents/safety-production-pro.md": "4bec75f8a56100b3c3abaa974c87cddcc5f429c6815b62a9d92d0c525050f13f",
+    "plugin.json": "96dfb0193e8267a11bcd1f2ff5c0dd38e548f2f54502337b522c831de921e715",
+    "settings.json": "e4bb3170427668103bec19771f046a34e2b042ea6bb67e48b7e6fe1af699d0da"
+  }
+}

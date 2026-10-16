@@ -1,0 +1,126 @@
+{
+  "agentName": "user-story-write-team-lead",
+  "agents": [
+    "./agents/user-story-write-team-lead.md",
+    "./agents/user-story-write.md",
+    "./agents/game-economy-balance.md",
+    "./agents/spatial-layout-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 用户故事",
+    "zh": "帮我处理用户故事"
+  },
+  "description": "user-story-write team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 用户故事 end-to-end: 角色明确, 价值明确 and 验收条件. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长角色明确、价值明确与验收条件，覆盖用户故事全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "user-story-write Team",
+    "zh": "用户故事专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "user-story-write-team-lead",
+      "name": {
+        "en": "用户故事主理人",
+        "zh": "用户故事主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/user-story-write.png",
+      "id": "user-story-write",
+      "name": {
+        "en": "user-story-write",
+        "zh": "用户故事 撰写"
+      },
+      "profession": {
+        "en": "user-story-write",
+        "zh": "用户故事 撰写"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-economy-balance.png",
+      "id": "game-economy-balance",
+      "name": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "profession": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/spatial-layout-pro.png",
+      "id": "spatial-layout-pro",
+      "name": {
+        "en": "spatial-layout-pro",
+        "zh": "空间布局 动线设计 顾问"
+      },
+      "profession": {
+        "en": "spatial-layout-pro",
+        "zh": "空间布局 动线设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-830",
+  "plugin": "group-team-830",
+  "profession": {
+    "en": "user-story-write Collaboration Team",
+    "zh": "用户故事专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 用户故事",
+      "zh": "帮我处理用户故事"
+    },
+    {
+      "en": "Plan 游戏经济",
+      "zh": "帮我规划游戏经济"
+    },
+    {
+      "en": "Review 空间布局",
+      "zh": "帮我检查空间布局"
+    }
+  ],
+  "tags": [
+    {
+      "en": "价值明确",
+      "zh": "价值明确"
+    },
+    {
+      "en": "验收条件",
+      "zh": "验收条件"
+    },
+    {
+      "en": "粒度适中",
+      "zh": "粒度适中"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "user-story-write-team-lead",
+    "memberAgents": [
+      "user-story-write",
+      "game-economy-balance",
+      "spatial-layout-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

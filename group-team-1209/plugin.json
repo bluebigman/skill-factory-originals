@@ -1,0 +1,126 @@
+{
+  "agentName": "onboarding-narrative-team-lead",
+  "agents": [
+    "./agents/onboarding-narrative-team-lead.md",
+    "./agents/onboarding-narrative.md",
+    "./agents/illustration-guide.md",
+    "./agents/doc-accessibility.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 引导叙事设计",
+    "zh": "帮我处理引导叙事设计"
+  },
+  "description": "onboarding-narrative team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 引导叙事设计 requirements, output three deliverables: 步数精简, 进度可见, 流失补救. Verifiable end-to-end, evidence per step.",
+    "zh": "输入引导叙事设计相关需求，输出步数精简、进度可见、流失补救三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "onboarding-narrative Team",
+    "zh": "引导叙事设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "onboarding-narrative-team-lead",
+      "name": {
+        "en": "引导叙事设计主理人",
+        "zh": "引导叙事设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/onboarding-narrative.png",
+      "id": "onboarding-narrative",
+      "name": {
+        "en": "onboarding-narrative",
+        "zh": "引导叙事设计 顾问"
+      },
+      "profession": {
+        "en": "onboarding-narrative",
+        "zh": "引导叙事设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/illustration-guide.png",
+      "id": "illustration-guide",
+      "name": {
+        "en": "illustration-guide",
+        "zh": "插画风格指南 顾问"
+      },
+      "profession": {
+        "en": "illustration-guide",
+        "zh": "插画风格指南 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-accessibility.png",
+      "id": "doc-accessibility",
+      "name": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "profession": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1209",
+  "plugin": "group-team-1209",
+  "profession": {
+    "en": "onboarding-narrative Collaboration Team",
+    "zh": "引导叙事设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 引导叙事设计",
+      "zh": "帮我处理引导叙事设计"
+    },
+    {
+      "en": "Plan 插画风格指南",
+      "zh": "帮我规划插画风格指南"
+    },
+    {
+      "en": "Review 文档无障碍",
+      "zh": "帮我检查文档无障碍"
+    }
+  ],
+  "tags": [
+    {
+      "en": "步数精简",
+      "zh": "步数精简"
+    },
+    {
+      "en": "进度可见",
+      "zh": "进度可见"
+    },
+    {
+      "en": "流失补救",
+      "zh": "流失补救"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "onboarding-narrative-team-lead",
+    "memberAgents": [
+      "onboarding-narrative",
+      "illustration-guide",
+      "doc-accessibility"
+    ]
+  },
+  "version": "1.0.0"
+}

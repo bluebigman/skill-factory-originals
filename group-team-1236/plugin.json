@@ -1,0 +1,126 @@
+{
+  "agentName": "pdf-content-extract-team-lead",
+  "agents": [
+    "./agents/pdf-content-extract-team-lead.md",
+    "./agents/pdf-content-extract.md",
+    "./agents/copy-test-method.md",
+    "./agents/citation-format-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle PDF",
+    "zh": "帮我处理PDF"
+  },
+  "description": "pdf-content-extract team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input PDF requirements, output three deliverables: 版式优先, 表格独立, 页码标注. Verifiable end-to-end, evidence per step.",
+    "zh": "输入PDF相关需求，输出版式优先、表格独立、页码标注三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "pdf-content-extract Team",
+    "zh": "内容提专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pdf-content-extract-team-lead",
+      "name": {
+        "en": "PDF主理人",
+        "zh": "PDF主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pdf-content-extract.png",
+      "id": "pdf-content-extract",
+      "name": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "profession": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/copy-test-method.png",
+      "id": "copy-test-method",
+      "name": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "profession": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/citation-format-pro.png",
+      "id": "citation-format-pro",
+      "name": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "profession": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1236",
+  "plugin": "group-team-1236",
+  "profession": {
+    "en": "pdf-content-extract Collaboration Team",
+    "zh": "内容提专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle PDF",
+      "zh": "帮我处理PDF"
+    },
+    {
+      "en": "Plan 文案测试",
+      "zh": "帮我规划文案测试"
+    },
+    {
+      "en": "Review 引用规范",
+      "zh": "帮我检查引用规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "版式优先",
+      "zh": "版式优先"
+    },
+    {
+      "en": "表格独立",
+      "zh": "表格独立"
+    },
+    {
+      "en": "页码标注",
+      "zh": "页码标注"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pdf-content-extract-team-lead",
+    "memberAgents": [
+      "pdf-content-extract",
+      "copy-test-method",
+      "citation-format-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

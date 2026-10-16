@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1143",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1143",
+    "kind": "team",
+    "name": "任务流程编排专家",
+    "description": "输入数据契约相关需求，输出字段约定、变更流程、质量条款三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ai-workflow-expert-team-lead",
+        "role": "lead",
+        "name": "AI工作流主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ai-workflow-expert",
+        "role": "member",
+        "name": "AI工作流 多步编排 自动执行",
+        "evidence": "original_assets/ai-workflow-expert/merkle_root",
+        "member_merkle_root": "d96666e0dbc075cfc05b3ca7154434fe32123347dd3844b2366dd4b232814f7f"
+      },
+      {
+        "slug": "api-transmission-assurance-expert",
+        "role": "member",
+        "name": "接口联调 传输校验 异步排查",
+        "evidence": "original_assets/api-transmission-assurance-expert/merkle_root",
+        "member_merkle_root": "49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac"
+      },
+      {
+        "slug": "data-contract",
+        "role": "member",
+        "name": "数据契约 顾问",
+        "evidence": "original_assets/data-contract/merkle_root",
+        "member_merkle_root": "cd01d2345867d7310314b2cca06bf03b3e148c0c904be3fd22716223d2bfd710"
+      }
+    ],
+    "team_lead": "ai-workflow-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a709bc5199707dc7",
+  "prompt_hash": "b9a38c1fa5516ca0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1143\", \"kind\": \"team\", \"name\": \"任务流程编排专家\", \"description\": \"输入数据契约相关需求，输出字段约定、变更流程、质量条款三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ai-workflow-expert-team-lead\", \"role\": \"lead\", \"name\": \"AI工作流主理人\", \"evidence\": null}, {\"slug\": \"ai-workflow-expert\", \"role\": \"member\", \"name\": \"AI工作流 多步编排 自动执行\", \"evidence\": \"original_assets/ai-workflow-expert/merkle_root\", \"member_merkle_root\": \"d96666e0dbc075cfc05b3ca7154434fe32123347dd3844b2366dd4b232814f7f\"}, {\"slug\": \"api-transmission-assurance-expert\", \"role\": \"member\", \"name\": \"接口联调 传输校验 异步排查\", \"evidence\": \"original_assets/api-transmission-assurance-expert/merkle_root\", \"member_merkle_root\": \"49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac\"}, {\"slug\": \"data-contract\", \"role\": \"member\", \"name\": \"数据契约 顾问\", \"evidence\": \"original_assets/data-contract/merkle_root\", \"member_merkle_root\": \"cd01d2345867d7310314b2cca06bf03b3e148c0c904be3fd22716223d2bfd710\"}], \"team_lead\": \"ai-workflow-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ai-workflow-expert-team-lead.md": "af5285deb9f5d84f89d6de972dd37dd7cb70982f943523e993e17fa00ed47f1c",
+    "agents/ai-workflow-expert.md": "19a93992608b7f745ba0ec929126eb5bc96ad64bf6505b98e10945b0d40618d4",
+    "agents/api-transmission-assurance-expert.md": "c26a641da6265b6bbaf47051316a66bdca54ffb3b1c0fd4e26465891d14aac6c",
+    "agents/data-contract.md": "8adea7ce7478ee0ca8c8cef676ca7b84e66140dc89bfd1f79489296da89ea768",
+    "plugin.json": "b3e2535babed27171aee0559bc0fb7e5f73287a5785a020e2ee1e00fc070eaf6",
+    "settings.json": "d213021f30e629f6d3980610eb042e14f9c51d6006f12824e55dafe9d9d1a70b"
+  }
+}

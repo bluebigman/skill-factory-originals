@@ -1,0 +1,126 @@
+{
+  "agentName": "newsletter-coach-team-lead",
+  "agents": [
+    "./agents/newsletter-coach-team-lead.md",
+    "./agents/newsletter-coach.md",
+    "./agents/content-performance-review.md",
+    "./agents/content-localize-checklist.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 订阅通讯",
+    "zh": "帮我处理订阅通讯"
+  },
+  "description": "newsletter-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 订阅通讯 requirements, output three deliverables: 固定节奏, 单一主题, 价值前置. Verifiable end-to-end, evidence per step.",
+    "zh": "输入订阅通讯相关需求，输出固定节奏、单一主题、价值前置三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "newsletter-coach Team",
+    "zh": "订阅通讯专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "newsletter-coach-team-lead",
+      "name": {
+        "en": "订阅通讯主理人",
+        "zh": "订阅通讯主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/newsletter-coach.png",
+      "id": "newsletter-coach",
+      "name": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "profession": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-performance-review.png",
+      "id": "content-performance-review",
+      "name": {
+        "en": "content-performance-review",
+        "zh": "内容效果复盘 顾问"
+      },
+      "profession": {
+        "en": "content-performance-review",
+        "zh": "内容效果复盘 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-localize-checklist.png",
+      "id": "content-localize-checklist",
+      "name": {
+        "en": "content-localize-checklist",
+        "zh": "本地化清单 顾问"
+      },
+      "profession": {
+        "en": "content-localize-checklist",
+        "zh": "本地化清单 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1095",
+  "plugin": "group-team-1095",
+  "profession": {
+    "en": "newsletter-coach Collaboration Team",
+    "zh": "订阅通讯专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 订阅通讯",
+      "zh": "帮我处理订阅通讯"
+    },
+    {
+      "en": "Plan 内容效果复盘",
+      "zh": "帮我规划内容效果复盘"
+    },
+    {
+      "en": "Review 本地化清单",
+      "zh": "帮我检查本地化清单"
+    }
+  ],
+  "tags": [
+    {
+      "en": "固定节奏",
+      "zh": "固定节奏"
+    },
+    {
+      "en": "单一主题",
+      "zh": "单一主题"
+    },
+    {
+      "en": "价值前置",
+      "zh": "价值前置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "newsletter-coach-team-lead",
+    "memberAgents": [
+      "newsletter-coach",
+      "content-performance-review",
+      "content-localize-checklist"
+    ]
+  },
+  "version": "1.0.0"
+}

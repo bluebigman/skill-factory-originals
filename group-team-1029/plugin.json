@@ -1,0 +1,126 @@
+{
+  "agentName": "md-wechat-draft-team-lead",
+  "agents": [
+    "./agents/md-wechat-draft-team-lead.md",
+    "./agents/md-wechat-draft.md",
+    "./agents/kol-selection-pro.md",
+    "./agents/copy-hook-craft.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle Markdown",
+    "zh": "帮我处理Markdown"
+  },
+  "description": "md-wechat-draft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input Markdown requirements, output three deliverables: 先定主题, 段落短化, 标题序号. Verifiable end-to-end, evidence per step.",
+    "zh": "输入Markdown相关需求，输出先定主题、段落短化、标题序号三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "md-wechat-draft Team",
+    "zh": "转公众号专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "md-wechat-draft-team-lead",
+      "name": {
+        "en": "Markdown主理人",
+        "zh": "Markdown主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/md-wechat-draft.png",
+      "id": "md-wechat-draft",
+      "name": {
+        "en": "md-wechat-draft",
+        "zh": "Markdown 转公众号 助手"
+      },
+      "profession": {
+        "en": "md-wechat-draft",
+        "zh": "Markdown 转公众号 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kol-selection-pro.png",
+      "id": "kol-selection-pro",
+      "name": {
+        "en": "kol-selection-pro",
+        "zh": "达人筛选 匹配评估 顾问"
+      },
+      "profession": {
+        "en": "kol-selection-pro",
+        "zh": "达人筛选 匹配评估 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/copy-hook-craft.png",
+      "id": "copy-hook-craft",
+      "name": {
+        "en": "copy-hook-craft",
+        "zh": "文案钩子打磨 顾问"
+      },
+      "profession": {
+        "en": "copy-hook-craft",
+        "zh": "文案钩子打磨 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1029",
+  "plugin": "group-team-1029",
+  "profession": {
+    "en": "md-wechat-draft Collaboration Team",
+    "zh": "转公众号专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle Markdown",
+      "zh": "帮我处理Markdown"
+    },
+    {
+      "en": "Plan 达人筛选",
+      "zh": "帮我规划达人筛选"
+    },
+    {
+      "en": "Review 文案钩子打磨",
+      "zh": "帮我检查文案钩子打磨"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定主题",
+      "zh": "先定主题"
+    },
+    {
+      "en": "段落短化",
+      "zh": "段落短化"
+    },
+    {
+      "en": "标题序号",
+      "zh": "标题序号"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "md-wechat-draft-team-lead",
+    "memberAgents": [
+      "md-wechat-draft",
+      "kol-selection-pro",
+      "copy-hook-craft"
+    ]
+  },
+  "version": "1.0.0"
+}

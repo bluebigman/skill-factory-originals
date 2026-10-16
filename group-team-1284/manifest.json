@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1284",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1284",
+    "kind": "team",
+    "name": "供应商管理专家",
+    "description": "输入供应商管理相关需求，输出准入标准、分级管理、绩效评估三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "vendor-management-team-lead",
+        "role": "lead",
+        "name": "供应商管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "vendor-management",
+        "role": "member",
+        "name": "供应商管理 顾问",
+        "evidence": "original_assets/vendor-management/merkle_root",
+        "member_merkle_root": "a900d16f90200286d2199e41e222621974ffcedbcdaaa6642955e253f7ec4971"
+      },
+      {
+        "slug": "error-budget",
+        "role": "member",
+        "name": "错误预算 顾问",
+        "evidence": "original_assets/error-budget/merkle_root",
+        "member_merkle_root": "717a62807a697f044a898056436594486a5f36acba412e8c119e6d400a62486a"
+      },
+      {
+        "slug": "safety-management",
+        "role": "member",
+        "name": "安全管理 顾问",
+        "evidence": "original_assets/safety-management/merkle_root",
+        "member_merkle_root": "6dd3f2de179924da51d658a3dd72c50ed10b7e18e9b655f0a2304629ed999af1"
+      }
+    ],
+    "team_lead": "vendor-management-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f5feab6a687ecab4",
+  "prompt_hash": "4c605db2bf0fda33",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1284\", \"kind\": \"team\", \"name\": \"供应商管理专家\", \"description\": \"输入供应商管理相关需求，输出准入标准、分级管理、绩效评估三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"vendor-management-team-lead\", \"role\": \"lead\", \"name\": \"供应商管理主理人\", \"evidence\": null}, {\"slug\": \"vendor-management\", \"role\": \"member\", \"name\": \"供应商管理 顾问\", \"evidence\": \"original_assets/vendor-management/merkle_root\", \"member_merkle_root\": \"a900d16f90200286d2199e41e222621974ffcedbcdaaa6642955e253f7ec4971\"}, {\"slug\": \"error-budget\", \"role\": \"member\", \"name\": \"错误预算 顾问\", \"evidence\": \"original_assets/error-budget/merkle_root\", \"member_merkle_root\": \"717a62807a697f044a898056436594486a5f36acba412e8c119e6d400a62486a\"}, {\"slug\": \"safety-management\", \"role\": \"member\", \"name\": \"安全管理 顾问\", \"evidence\": \"original_assets/safety-management/merkle_root\", \"member_merkle_root\": \"6dd3f2de179924da51d658a3dd72c50ed10b7e18e9b655f0a2304629ed999af1\"}], \"team_lead\": \"vendor-management-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/error-budget.md": "53d5702573ec8b3c1422fefd5f08465dec7fe97c0ae77198db7b9c72d28ee598",
+    "agents/safety-management.md": "a4ed18a1794f2d8966996caf133fab2ac4abd27d2b133501ea6d1905523b07bc",
+    "agents/vendor-management-team-lead.md": "3c99f487c1252c0746a4593f52ad5b49ecb498bd2ce62b94b10ba5f92168df6d",
+    "agents/vendor-management.md": "c72ee0c3d0076cd42e2e3a59a596d1a83f0dd4482a8fc2c88bd18aa2ffec8281",
+    "plugin.json": "d5b96fba0d4bddf5b0141c6821e5a812b99f524f7b2c7dcd25de04c50473b6e7",
+    "settings.json": "6e27046b868aa84675dbe066f050b386d28dfc62ed86d924e2f02abe3c8737e1"
+  }
+}

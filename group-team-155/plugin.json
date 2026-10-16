@@ -1,0 +1,126 @@
+{
+  "agentName": "home-moving-checklist-team-lead",
+  "agents": [
+    "./agents/home-moving-checklist-team-lead.md",
+    "./agents/home-moving-checklist.md",
+    "./agents/file-rename-batch.md",
+    "./agents/resume-job-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 搬家准备",
+    "zh": "帮我处理搬家准备"
+  },
+  "description": "Home Moving Checklist team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "搬家 文件 简历 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Home Moving Checklist Team",
+    "zh": "搬家 文件 简历 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "home-moving-checklist-team-lead",
+      "name": {
+        "en": "搬家准备主理人",
+        "zh": "搬家准备主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/home-moving-checklist.png",
+      "id": "home-moving-checklist",
+      "name": {
+        "en": "Home Moving Checklist",
+        "zh": "搬家准备 打包整理 安顿"
+      },
+      "profession": {
+        "en": "Home Moving Checklist",
+        "zh": "搬家准备 打包整理 安顿"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/file-rename-batch.png",
+      "id": "file-rename-batch",
+      "name": {
+        "en": "File Rename Batch",
+        "zh": "文件批量 重命名 助手"
+      },
+      "profession": {
+        "en": "File Rename Batch",
+        "zh": "文件批量 重命名 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/resume-job-pro.png",
+      "id": "resume-job-pro",
+      "name": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "profession": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-155",
+  "plugin": "group-team-155",
+  "profession": {
+    "en": "Home Moving Checklist Collaboration Team",
+    "zh": "搬家 文件 简历 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 搬家准备",
+      "zh": "帮我处理搬家准备"
+    },
+    {
+      "en": "Plan 文件批量",
+      "zh": "帮我规划文件批量"
+    },
+    {
+      "en": "Review 简历优化",
+      "zh": "帮我检查简历优化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "搬家准备",
+      "zh": "搬家准备"
+    },
+    {
+      "en": "文件批量",
+      "zh": "文件批量"
+    },
+    {
+      "en": "简历优化",
+      "zh": "简历优化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "home-moving-checklist-team-lead",
+    "memberAgents": [
+      "home-moving-checklist",
+      "file-rename-batch",
+      "resume-job-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

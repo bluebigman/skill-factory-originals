@@ -1,0 +1,126 @@
+{
+  "agentName": "formula-audit-pro-team-lead",
+  "agents": [
+    "./agents/formula-audit-pro-team-lead.md",
+    "./agents/formula-audit-pro.md",
+    "./agents/web-extract-pro.md",
+    "./agents/data-archival-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 公式审计",
+    "zh": "帮我处理公式审计"
+  },
+  "description": "formula-audit-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 公式审计 end-to-end: 引用检查, 类型校验 and 循环引用. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长引用检查、类型校验与循环引用，覆盖公式审计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "formula-audit-pro Team",
+    "zh": "公式审计引用检查专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "formula-audit-pro-team-lead",
+      "name": {
+        "en": "公式审计主理人",
+        "zh": "公式审计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/formula-audit-pro.png",
+      "id": "formula-audit-pro",
+      "name": {
+        "en": "formula-audit-pro",
+        "zh": "公式审计 引用检查 顾问"
+      },
+      "profession": {
+        "en": "formula-audit-pro",
+        "zh": "公式审计 引用检查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/web-extract-pro.png",
+      "id": "web-extract-pro",
+      "name": {
+        "en": "Web Extract Engineer",
+        "zh": "网页提取 结构化解析"
+      },
+      "profession": {
+        "en": "Web Extract Engineer",
+        "zh": "网页提取 结构化解析"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-archival-pro.png",
+      "id": "data-archival-pro",
+      "name": {
+        "en": "data-archival-pro",
+        "zh": "数据归档 冷热分层 顾问"
+      },
+      "profession": {
+        "en": "data-archival-pro",
+        "zh": "数据归档 冷热分层 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-784",
+  "plugin": "group-team-784",
+  "profession": {
+    "en": "formula-audit-pro Collaboration Team",
+    "zh": "公式审计引用检查专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 公式审计",
+      "zh": "帮我处理公式审计"
+    },
+    {
+      "en": "Plan 网页提取",
+      "zh": "帮我规划网页提取"
+    },
+    {
+      "en": "Review 数据归档",
+      "zh": "帮我检查数据归档"
+    }
+  ],
+  "tags": [
+    {
+      "en": "类型校验",
+      "zh": "类型校验"
+    },
+    {
+      "en": "循环引用",
+      "zh": "循环引用"
+    },
+    {
+      "en": "结果验证",
+      "zh": "结果验证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "formula-audit-pro-team-lead",
+    "memberAgents": [
+      "formula-audit-pro",
+      "web-extract-pro",
+      "data-archival-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

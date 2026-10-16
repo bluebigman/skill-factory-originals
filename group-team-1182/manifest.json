@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1182",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1182",
+    "kind": "team",
+    "name": "报表认证机制专家",
+    "description": "输入报表认证机制相关需求，输出认证标准、口径审核、认证标记三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-certification-team-lead",
+        "role": "lead",
+        "name": "报表认证机制主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-certification",
+        "role": "member",
+        "name": "报表认证机制 顾问",
+        "evidence": "original_assets/report-certification/merkle_root",
+        "member_merkle_root": "5a8990adeacff29b12c3bcdcf41bce1188cda38d1e2e9ff5bb7b342e5695808b"
+      },
+      {
+        "slug": "agent-rollback-plan",
+        "role": "member",
+        "name": "回滚预案 快速恢复 顾问",
+        "evidence": "original_assets/agent-rollback-plan/merkle_root",
+        "member_merkle_root": "e3bfcf3e5519a89a43972ef71b61f1c6130008d9126550ad7f54678001992f9f"
+      },
+      {
+        "slug": "requirement-clarify-pro",
+        "role": "member",
+        "name": "需求澄清 边界确认 顾问",
+        "evidence": "original_assets/requirement-clarify-pro/merkle_root",
+        "member_merkle_root": "4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39"
+      }
+    ],
+    "team_lead": "report-certification-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "110aaef90d75cf25",
+  "prompt_hash": "77c3f3728767b798",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1182\", \"kind\": \"team\", \"name\": \"报表认证机制专家\", \"description\": \"输入报表认证机制相关需求，输出认证标准、口径审核、认证标记三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-certification-team-lead\", \"role\": \"lead\", \"name\": \"报表认证机制主理人\", \"evidence\": null}, {\"slug\": \"report-certification\", \"role\": \"member\", \"name\": \"报表认证机制 顾问\", \"evidence\": \"original_assets/report-certification/merkle_root\", \"member_merkle_root\": \"5a8990adeacff29b12c3bcdcf41bce1188cda38d1e2e9ff5bb7b342e5695808b\"}, {\"slug\": \"agent-rollback-plan\", \"role\": \"member\", \"name\": \"回滚预案 快速恢复 顾问\", \"evidence\": \"original_assets/agent-rollback-plan/merkle_root\", \"member_merkle_root\": \"e3bfcf3e5519a89a43972ef71b61f1c6130008d9126550ad7f54678001992f9f\"}, {\"slug\": \"requirement-clarify-pro\", \"role\": \"member\", \"name\": \"需求澄清 边界确认 顾问\", \"evidence\": \"original_assets/requirement-clarify-pro/merkle_root\", \"member_merkle_root\": \"4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39\"}], \"team_lead\": \"report-certification-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-rollback-plan.md": "fc54d7f3acd525e083a197d417cc074e96a65323a850fe20211167460b0aa86f",
+    "agents/report-certification-team-lead.md": "55dde552cc6a4c2538c8fa351fce57e5b33efec0f2fc0af1c31c54254e816ce4",
+    "agents/report-certification.md": "1411b44ec1def61945cf0533841ff8200befa421018705ad22c1304e3e62ee88",
+    "agents/requirement-clarify-pro.md": "97062f446da21499e2a8fd92e8fcc30d909e1b36535f53e91d3a0c4e9415a499",
+    "plugin.json": "772c1527102c1071c9b85180aa997849fafc75d03a3c22424d72f8b03e353218",
+    "settings.json": "6cd421aeec49f1ae8dfaec51f2cf51efe022a1c78bd1c9fbe985c5eacd53ee2d"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1114",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1114",
+    "kind": "team",
+    "name": "错误码注册表顾问专家",
+    "description": "擅长文档同步、对外收敛与分级水印，覆盖错误码注册表全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "error-code-registry-team-lead",
+        "role": "lead",
+        "name": "错误码注册表主理人",
+        "evidence": null
+      },
+      {
+        "slug": "error-code-registry",
+        "role": "member",
+        "name": "错误码注册表 顾问",
+        "evidence": "original_assets/error-code-registry/merkle_root",
+        "member_merkle_root": "a2ed5fa2f305dbe6c1ae3e7ca2ba3a334f4cb609232355010f79cdcea3922b3c"
+      },
+      {
+        "slug": "doc-watermark-apply",
+        "role": "member",
+        "name": "文档水印管理 助手",
+        "evidence": "original_assets/doc-watermark-apply/merkle_root",
+        "member_merkle_root": "fc907a74faa58fdb913dcd025eead4111531092711c4dcab5f30571a4e17cb13"
+      },
+      {
+        "slug": "compliance-checklist",
+        "role": "member",
+        "name": "合规自查清单 顾问",
+        "evidence": "original_assets/compliance-checklist/merkle_root",
+        "member_merkle_root": "7185942060cb3c6674ea93f5796f1fd7d44904c50fe23fbf75308a905f987506"
+      }
+    ],
+    "team_lead": "error-code-registry-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a74fbfeeeb7ef50a",
+  "prompt_hash": "cdab2a2dea4f2449",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1114\", \"kind\": \"team\", \"name\": \"错误码注册表顾问专家\", \"description\": \"擅长文档同步、对外收敛与分级水印，覆盖错误码注册表全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"error-code-registry-team-lead\", \"role\": \"lead\", \"name\": \"错误码注册表主理人\", \"evidence\": null}, {\"slug\": \"error-code-registry\", \"role\": \"member\", \"name\": \"错误码注册表 顾问\", \"evidence\": \"original_assets/error-code-registry/merkle_root\", \"member_merkle_root\": \"a2ed5fa2f305dbe6c1ae3e7ca2ba3a334f4cb609232355010f79cdcea3922b3c\"}, {\"slug\": \"doc-watermark-apply\", \"role\": \"member\", \"name\": \"文档水印管理 助手\", \"evidence\": \"original_assets/doc-watermark-apply/merkle_root\", \"member_merkle_root\": \"fc907a74faa58fdb913dcd025eead4111531092711c4dcab5f30571a4e17cb13\"}, {\"slug\": \"compliance-checklist\", \"role\": \"member\", \"name\": \"合规自查清单 顾问\", \"evidence\": \"original_assets/compliance-checklist/merkle_root\", \"member_merkle_root\": \"7185942060cb3c6674ea93f5796f1fd7d44904c50fe23fbf75308a905f987506\"}], \"team_lead\": \"error-code-registry-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/compliance-checklist.md": "ab55410711e38f0488fb66275d32fcdf46aa6c08b2ab3b6b5e6aa8c7eccb1085",
+    "agents/doc-watermark-apply.md": "0951fbca2e77579adc4393b72fdff95db45197eae30a70a8c8a0f28cf3b8d310",
+    "agents/error-code-registry-team-lead.md": "4fbe538d729a75c5c1b40b40adef4167d78a1c4b990271c284d68477522e3993",
+    "agents/error-code-registry.md": "2481405a65f1132727f14359a6449fbaae85017279dff0c14492b4c714e3a52f",
+    "plugin.json": "a0da0285bcd47a5d2caa48aad39fcd06f067a3479b0528f40c859035c310339d",
+    "settings.json": "ac6fb6b7c0394b907f59a65094c44ce424ce59455880f3908459194238392c23"
+  }
+}

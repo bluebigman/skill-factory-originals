@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-bilingual-align-team-lead",
+  "agents": [
+    "./agents/doc-bilingual-align-team-lead.md",
+    "./agents/doc-bilingual-align.md",
+    "./agents/content-lifecycle.md",
+    "./agents/audience-segment-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 双语文档对齐",
+    "zh": "帮我处理双语文档对齐"
+  },
+  "description": "doc-bilingual-align team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 双语文档对齐 requirements, output three deliverables: 语义对齐, 格式同步, 版本同步. Verifiable end-to-end, evidence per step.",
+    "zh": "输入双语文档对齐相关需求，输出语义对齐、格式同步、版本同步三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-bilingual-align Team",
+    "zh": "双语文档对齐顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-bilingual-align-team-lead",
+      "name": {
+        "en": "双语文档对齐主理人",
+        "zh": "双语文档对齐主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-bilingual-align.png",
+      "id": "doc-bilingual-align",
+      "name": {
+        "en": "doc-bilingual-align",
+        "zh": "双语文档对齐 顾问"
+      },
+      "profession": {
+        "en": "doc-bilingual-align",
+        "zh": "双语文档对齐 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-lifecycle.png",
+      "id": "content-lifecycle",
+      "name": {
+        "en": "content-lifecycle",
+        "zh": "内容生命周期 顾问"
+      },
+      "profession": {
+        "en": "content-lifecycle",
+        "zh": "内容生命周期 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audience-segment-pro.png",
+      "id": "audience-segment-pro",
+      "name": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "profession": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1212",
+  "plugin": "group-team-1212",
+  "profession": {
+    "en": "doc-bilingual-align Collaboration Team",
+    "zh": "双语文档对齐顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 双语文档对齐",
+      "zh": "帮我处理双语文档对齐"
+    },
+    {
+      "en": "Plan 内容生命周期",
+      "zh": "帮我规划内容生命周期"
+    },
+    {
+      "en": "Review 受众分层",
+      "zh": "帮我检查受众分层"
+    }
+  ],
+  "tags": [
+    {
+      "en": "术语表先行",
+      "zh": "术语表先行"
+    },
+    {
+      "en": "语义对齐",
+      "zh": "语义对齐"
+    },
+    {
+      "en": "格式同步",
+      "zh": "格式同步"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-bilingual-align-team-lead",
+    "memberAgents": [
+      "doc-bilingual-align",
+      "content-lifecycle",
+      "audience-segment-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

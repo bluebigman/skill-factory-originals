@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1236",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1236",
+    "kind": "team",
+    "name": "内容提专家",
+    "description": "输入PDF相关需求，输出版式优先、表格独立、页码标注三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pdf-content-extract-team-lead",
+        "role": "lead",
+        "name": "PDF主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pdf-content-extract",
+        "role": "member",
+        "name": "PDF 内容提取 助手",
+        "evidence": "original_assets/pdf-content-extract/merkle_root",
+        "member_merkle_root": "1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb"
+      },
+      {
+        "slug": "copy-test-method",
+        "role": "member",
+        "name": "文案测试 方法设计 顾问",
+        "evidence": "original_assets/copy-test-method/merkle_root",
+        "member_merkle_root": "fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd"
+      },
+      {
+        "slug": "citation-format-pro",
+        "role": "member",
+        "name": "引用规范 来源标注 顾问",
+        "evidence": "original_assets/citation-format-pro/merkle_root",
+        "member_merkle_root": "83b069281f0368a7a368d7e331009a935900223577889e8693d8b64f2d51456a"
+      }
+    ],
+    "team_lead": "pdf-content-extract-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0f06357025f7e980",
+  "prompt_hash": "f18205a0d0818c1f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1236\", \"kind\": \"team\", \"name\": \"内容提专家\", \"description\": \"输入PDF相关需求，输出版式优先、表格独立、页码标注三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pdf-content-extract-team-lead\", \"role\": \"lead\", \"name\": \"PDF主理人\", \"evidence\": null}, {\"slug\": \"pdf-content-extract\", \"role\": \"member\", \"name\": \"PDF 内容提取 助手\", \"evidence\": \"original_assets/pdf-content-extract/merkle_root\", \"member_merkle_root\": \"1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb\"}, {\"slug\": \"copy-test-method\", \"role\": \"member\", \"name\": \"文案测试 方法设计 顾问\", \"evidence\": \"original_assets/copy-test-method/merkle_root\", \"member_merkle_root\": \"fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd\"}, {\"slug\": \"citation-format-pro\", \"role\": \"member\", \"name\": \"引用规范 来源标注 顾问\", \"evidence\": \"original_assets/citation-format-pro/merkle_root\", \"member_merkle_root\": \"83b069281f0368a7a368d7e331009a935900223577889e8693d8b64f2d51456a\"}], \"team_lead\": \"pdf-content-extract-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/citation-format-pro.md": "3505255256c3b2f14bce54cf73a27c8e6d5f1180546835bd6453aac89b32381f",
+    "agents/copy-test-method.md": "3994ec5609fbd0a3e3b6eefdbc09dc2fb1b8a7fe6884fbac3886bbe901e65826",
+    "agents/pdf-content-extract-team-lead.md": "48037fdc1940399a18ff3d5209f2b2a40db43b5351a06de1c68c2ca84ab42b7f",
+    "agents/pdf-content-extract.md": "0b68aa9ef06871a275ec62d64b89298691b535d4ddd756278909e0014714e433",
+    "plugin.json": "d04eac67dfbf57aa15b9b0f9d965ffbe7a2a409baf5d983169b2e1a58afcd331",
+    "settings.json": "2368ccf5a7f99a0114ff002d5b0bada1b57001d2d918895643d083d976fdaee5"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "home-study-env-team-lead",
+  "agents": [
+    "./agents/home-study-env-team-lead.md",
+    "./agents/home-study-env.md",
+    "./agents/eye-care-pro.md",
+    "./agents/study-habit-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "15-Education",
+  "defaultInitPrompt": {
+    "en": "Handle 学习环境",
+    "zh": "帮我处理学习环境"
+  },
+  "description": "Home Study Env team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "学习 环境 用眼 习惯 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "Home Study Env Team",
+    "zh": "学习 环境 用眼 习惯 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "home-study-env-team-lead",
+      "name": {
+        "en": "学习环境主理人",
+        "zh": "学习环境主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/home-study-env.png",
+      "id": "home-study-env",
+      "name": {
+        "en": "Home Study Env",
+        "zh": "学习环境 书桌整理 顾问"
+      },
+      "profession": {
+        "en": "Home Study Env",
+        "zh": "学习环境 书桌整理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/eye-care-pro.png",
+      "id": "eye-care-pro",
+      "name": {
+        "en": "Eye Care Pro",
+        "zh": "用眼健康 休息节奏 护眼习惯"
+      },
+      "profession": {
+        "en": "Eye Care Pro",
+        "zh": "用眼健康 休息节奏 护眼习惯"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/study-habit-coach.png",
+      "id": "study-habit-coach",
+      "name": {
+        "en": "Study Habit Coach",
+        "zh": "背单词 学习 专注"
+      },
+      "profession": {
+        "en": "Study Habit Coach",
+        "zh": "学习习惯 作业辅导 专注力"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-157",
+  "plugin": "group-team-157",
+  "profession": {
+    "en": "Home Study Env Collaboration Team",
+    "zh": "学习 环境 用眼 习惯 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 学习环境",
+      "zh": "帮我处理学习环境"
+    },
+    {
+      "en": "Plan 用眼健康",
+      "zh": "帮我规划用眼健康"
+    },
+    {
+      "en": "Review 学习习惯",
+      "zh": "帮我检查学习习惯"
+    }
+  ],
+  "tags": [
+    {
+      "en": "学习环境",
+      "zh": "学习环境"
+    },
+    {
+      "en": "用眼健康",
+      "zh": "用眼健康"
+    },
+    {
+      "en": "学习习惯",
+      "zh": "学习习惯"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "home-study-env-team-lead",
+    "memberAgents": [
+      "home-study-env",
+      "eye-care-pro",
+      "study-habit-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

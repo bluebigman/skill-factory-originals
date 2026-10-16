@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-939",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-939",
+    "kind": "team",
+    "name": "内部沟通文案助手专家",
+    "description": "输入内部沟通文案相关需求，输出受众先行、行动明确、语气一致三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "internal-comms-draft-team-lead",
+        "role": "lead",
+        "name": "内部沟通文案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "internal-comms-draft",
+        "role": "member",
+        "name": "内部沟通文案 助手",
+        "evidence": "original_assets/internal-comms-draft/merkle_root",
+        "member_merkle_root": "357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e"
+      },
+      {
+        "slug": "copy-test-method",
+        "role": "member",
+        "name": "文案测试 方法设计 顾问",
+        "evidence": "original_assets/copy-test-method/merkle_root",
+        "member_merkle_root": "fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd"
+      },
+      {
+        "slug": "doc-localization-pro",
+        "role": "member",
+        "name": "文档本地 术语统一 顾问",
+        "evidence": "original_assets/doc-localization-pro/merkle_root",
+        "member_merkle_root": "dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd"
+      }
+    ],
+    "team_lead": "internal-comms-draft-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "04012880d756341d",
+  "prompt_hash": "f850196175bba0b6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-939\", \"kind\": \"team\", \"name\": \"内部沟通文案助手专家\", \"description\": \"输入内部沟通文案相关需求，输出受众先行、行动明确、语气一致三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"internal-comms-draft-team-lead\", \"role\": \"lead\", \"name\": \"内部沟通文案主理人\", \"evidence\": null}, {\"slug\": \"internal-comms-draft\", \"role\": \"member\", \"name\": \"内部沟通文案 助手\", \"evidence\": \"original_assets/internal-comms-draft/merkle_root\", \"member_merkle_root\": \"357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e\"}, {\"slug\": \"copy-test-method\", \"role\": \"member\", \"name\": \"文案测试 方法设计 顾问\", \"evidence\": \"original_assets/copy-test-method/merkle_root\", \"member_merkle_root\": \"fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd\"}, {\"slug\": \"doc-localization-pro\", \"role\": \"member\", \"name\": \"文档本地 术语统一 顾问\", \"evidence\": \"original_assets/doc-localization-pro/merkle_root\", \"member_merkle_root\": \"dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd\"}], \"team_lead\": \"internal-comms-draft-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/copy-test-method.md": "62d443171167d072273e959f0711a166268720a2c6193b0693159cb4c3310a59",
+    "agents/doc-localization-pro.md": "752b551ba5a5d6fcc070a043ed8b344de711a74565033cedf656e244b962ea98",
+    "agents/internal-comms-draft-team-lead.md": "676aa7958b6137d9d4552fd75ceb21bf833093a8b16a247d895bbb1538b76e43",
+    "agents/internal-comms-draft.md": "2de2e0a2f9634e1b58fcf51738ad93aa990076fd8338fd0c927bb4ba9d014c6a",
+    "plugin.json": "4b5cdd4e3f512d098c113e388defe05a0abc502d9a4b643fce386b73bec12859",
+    "settings.json": "22f2036603c75e163b2e0386cdf2e406acaba3fd11d03670ca84d7bb6ca8250b"
+  }
+}

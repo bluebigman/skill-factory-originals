@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-02-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-02-team-lead.md",
+    "./agents/data-clean-pro-02.md",
+    "./agents/data-audit-pro.md",
+    "./agents/api-debug-chain-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 医疗行政",
+    "zh": "帮我处理医疗行政"
+  },
+  "description": "数据清洗与结构化 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 医疗行政结构化 requirements, output three deliverables: 数据清洗, 字段映射, 信息萃取. Verifiable end-to-end, evidence per step.",
+    "zh": "输入医疗行政结构化相关需求，输出数据清洗、字段映射、信息萃取三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "数据清洗与结构化 Suite Team",
+    "zh": "医疗行政数据专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-02-team-lead",
+      "name": {
+        "en": "医疗行政主理人",
+        "zh": "医疗行政主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-02.png",
+      "id": "data-clean-pro-02",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-audit-pro.png",
+      "id": "data-audit-pro",
+      "name": {
+        "en": "Survey Data Analyst",
+        "zh": "调研数据 清洗校验 分析报告"
+      },
+      "profession": {
+        "en": "Survey Data Analyst",
+        "zh": "调研数据 清洗校验 分析报告"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-debug-chain-pro.png",
+      "id": "api-debug-chain-pro",
+      "name": {
+        "en": "API Debug Chain Expert",
+        "zh": "接口联调 鉴权核验 字段映射"
+      },
+      "profession": {
+        "en": "API Debug Chain Expert",
+        "zh": "接口联调 鉴权核验 字段映射"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-912",
+  "plugin": "group-team-912",
+  "profession": {
+    "en": "数据清洗与结构化 Suite Collaboration Team",
+    "zh": "医疗行政结构化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 医疗行政",
+      "zh": "帮我处理医疗行政"
+    },
+    {
+      "en": "Plan 调研数据",
+      "zh": "帮我规划调研数据"
+    },
+    {
+      "en": "Review 接口联调",
+      "zh": "帮我检查接口联调"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据清洗",
+      "zh": "数据清洗"
+    },
+    {
+      "en": "字段映射",
+      "zh": "字段映射"
+    },
+    {
+      "en": "信息萃取",
+      "zh": "信息萃取"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-02-team-lead",
+    "memberAgents": [
+      "data-clean-pro-02",
+      "data-audit-pro",
+      "api-debug-chain-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

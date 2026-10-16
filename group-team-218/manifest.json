@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-218",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-218",
+    "kind": "team",
+    "name": "销售报表专家",
+    "description": "输入销售报表相关需求，输出数据叙事、动态图表、仪表盘三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-viz-pro-03-fixed-team-lead",
+        "role": "lead",
+        "name": "销售报表主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-viz-pro-03-fixed",
+        "role": "member",
+        "name": "销售报表 SVG图表开发",
+        "evidence": "original_assets/data-viz-pro-03-fixed/merkle_root",
+        "member_merkle_root": "3e0ff6a9d9d520d371caba2753f411d7386a9f3aae2f515adb74f7e0957082d8"
+      },
+      {
+        "slug": "agent-toolkit-pro-fixed",
+        "role": "member",
+        "name": "技能包管理 能力导航",
+        "evidence": "original_assets/agent-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "a3749d1cf9ed9be673955de68caac1d80ba1da469003b4d9904ce56ea45808c9"
+      },
+      {
+        "slug": "agent-toolkit-pro-03",
+        "role": "member",
+        "name": "技能编排 技能组合 开发辅助",
+        "evidence": "original_assets/agent-toolkit-pro-03/merkle_root",
+        "member_merkle_root": "0759ce15c667a4de5be429b703071b9f16827935fad82b26be999f434a809152"
+      }
+    ],
+    "team_lead": "data-viz-pro-03-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b21304aa9f1d58fe",
+  "prompt_hash": "260b8b89ac78f4a4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-218\", \"kind\": \"team\", \"name\": \"销售报表专家\", \"description\": \"输入销售报表相关需求，输出数据叙事、动态图表、仪表盘三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-viz-pro-03-fixed-team-lead\", \"role\": \"lead\", \"name\": \"销售报表主理人\", \"evidence\": null}, {\"slug\": \"data-viz-pro-03-fixed\", \"role\": \"member\", \"name\": \"销售报表 SVG图表开发\", \"evidence\": \"original_assets/data-viz-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"3e0ff6a9d9d520d371caba2753f411d7386a9f3aae2f515adb74f7e0957082d8\"}, {\"slug\": \"agent-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"技能包管理 能力导航\", \"evidence\": \"original_assets/agent-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"a3749d1cf9ed9be673955de68caac1d80ba1da469003b4d9904ce56ea45808c9\"}, {\"slug\": \"agent-toolkit-pro-03\", \"role\": \"member\", \"name\": \"技能编排 技能组合 开发辅助\", \"evidence\": \"original_assets/agent-toolkit-pro-03/merkle_root\", \"member_merkle_root\": \"0759ce15c667a4de5be429b703071b9f16827935fad82b26be999f434a809152\"}], \"team_lead\": \"data-viz-pro-03-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-toolkit-pro-03.md": "258c0a654a8e1f945aa204c65a4170ef6517bcb902b6c1bd0b4e02eda16b1864",
+    "agents/agent-toolkit-pro-fixed.md": "467b201c8c64b5479e10fdf0965a886d2814916c09aa99034e5a874046ce0ef4",
+    "agents/data-viz-pro-03-fixed-team-lead.md": "d63213e9fde301ee5ed030d775dde56f2b43c5fbe8b1fe76241b26192549a5e2",
+    "agents/data-viz-pro-03-fixed.md": "51663b32190d92178a37e76df1ae9c4d59ee56e48b50e7c50f52e27c122ed87b",
+    "plugin.json": "ba3f58daca4d37dace76d36418593ee917596d92a87cdaa6ec169d9c4ab04585",
+    "settings.json": "0ca5f58670949a759d2998fd7ba9445c564822fa1da970b53af2ae325162626a"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-549",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-549",
+    "kind": "team",
+    "name": "游戏运营活动节奏专家",
+    "description": "输入对战匹配相关需求，输出分段匹配、等待权衡、连败保护三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "multiplayer-match-pro-team-lead",
+        "role": "lead",
+        "name": "对战匹配主理人",
+        "evidence": null
+      },
+      {
+        "slug": "multiplayer-match-pro",
+        "role": "member",
+        "name": "对战匹配 公平性 顾问",
+        "evidence": "original_assets/multiplayer-match-pro/merkle_root",
+        "member_merkle_root": "028bf48a56e7674b7d3840b9a558c6b5a301da4879aecd52d353bb86adf34227"
+      },
+      {
+        "slug": "game-liveops-pro",
+        "role": "member",
+        "name": "游戏运营 活动节奏 顾问",
+        "evidence": "original_assets/game-liveops-pro/merkle_root",
+        "member_merkle_root": "54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c"
+      },
+      {
+        "slug": "map-visual-design",
+        "role": "member",
+        "name": "地图可视化 表达规范 顾问",
+        "evidence": "original_assets/map-visual-design/merkle_root",
+        "member_merkle_root": "682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd"
+      }
+    ],
+    "team_lead": "multiplayer-match-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5304950c704d90fb",
+  "prompt_hash": "5d0054282c1c8ca0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-549\", \"kind\": \"team\", \"name\": \"游戏运营活动节奏专家\", \"description\": \"输入对战匹配相关需求，输出分段匹配、等待权衡、连败保护三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"multiplayer-match-pro-team-lead\", \"role\": \"lead\", \"name\": \"对战匹配主理人\", \"evidence\": null}, {\"slug\": \"multiplayer-match-pro\", \"role\": \"member\", \"name\": \"对战匹配 公平性 顾问\", \"evidence\": \"original_assets/multiplayer-match-pro/merkle_root\", \"member_merkle_root\": \"028bf48a56e7674b7d3840b9a558c6b5a301da4879aecd52d353bb86adf34227\"}, {\"slug\": \"game-liveops-pro\", \"role\": \"member\", \"name\": \"游戏运营 活动节奏 顾问\", \"evidence\": \"original_assets/game-liveops-pro/merkle_root\", \"member_merkle_root\": \"54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c\"}, {\"slug\": \"map-visual-design\", \"role\": \"member\", \"name\": \"地图可视化 表达规范 顾问\", \"evidence\": \"original_assets/map-visual-design/merkle_root\", \"member_merkle_root\": \"682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd\"}], \"team_lead\": \"multiplayer-match-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-liveops-pro.md": "8831b35c06a23beaa2f27158bc782a4e68841e4fb9ae36564450bb74a995d60a",
+    "agents/map-visual-design.md": "b9cb0b545e3a0961c32e2169eb76566d8ab39d147e183956595a6937ed1cc588",
+    "agents/multiplayer-match-pro-team-lead.md": "a263d753f11a3da0e2b0fa6aedcabef3c85f5246304e598e86c7a352aa4e922c",
+    "agents/multiplayer-match-pro.md": "3d3f079dfb032617e667c4f2d421cb149e2bc39846ac2f9d8aa57d312058bd7c",
+    "plugin.json": "cbe211c8c7fd262350cb2631174b6a71a424403cba95fd19ea155aea1958c578",
+    "settings.json": "f3fcfd8c6a6c3b5b4ab572cec1ef9ac9bfad35833da8e8e499ffe03571a3a61a"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "intl-partner-screen-team-lead",
+  "agents": [
+    "./agents/intl-partner-screen-team-lead.md",
+    "./agents/intl-partner-screen.md",
+    "./agents/error-budget.md",
+    "./agents/dev-onboarding.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 海外伙伴",
+    "zh": "帮我处理海外伙伴"
+  },
+  "description": "intl-partner-screen team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 海外伙伴 requirements, output three deliverables: 资质核验, 案例验证, 经营佐证. Verifiable end-to-end, evidence per step.",
+    "zh": "输入海外伙伴相关需求，输出资质核验、案例验证、经营佐证三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "intl-partner-screen Team",
+    "zh": "海外伙伴尽调筛选专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "intl-partner-screen-team-lead",
+      "name": {
+        "en": "海外伙伴主理人",
+        "zh": "海外伙伴主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/intl-partner-screen.png",
+      "id": "intl-partner-screen",
+      "name": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "profession": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/error-budget.png",
+      "id": "error-budget",
+      "name": {
+        "en": "error-budget",
+        "zh": "错误预算 顾问"
+      },
+      "profession": {
+        "en": "error-budget",
+        "zh": "错误预算 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dev-onboarding.png",
+      "id": "dev-onboarding",
+      "name": {
+        "en": "dev-onboarding",
+        "zh": "新人上手流程 顾问"
+      },
+      "profession": {
+        "en": "dev-onboarding",
+        "zh": "新人上手流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1194",
+  "plugin": "group-team-1194",
+  "profession": {
+    "en": "intl-partner-screen Collaboration Team",
+    "zh": "海外伙伴尽调筛选专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 海外伙伴",
+      "zh": "帮我处理海外伙伴"
+    },
+    {
+      "en": "Plan 错误预算",
+      "zh": "帮我规划错误预算"
+    },
+    {
+      "en": "Review 新人上手流程",
+      "zh": "帮我检查新人上手流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "案例验证",
+      "zh": "案例验证"
+    },
+    {
+      "en": "经营佐证",
+      "zh": "经营佐证"
+    },
+    {
+      "en": "小额试单",
+      "zh": "小额试单"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "intl-partner-screen-team-lead",
+    "memberAgents": [
+      "intl-partner-screen",
+      "error-budget",
+      "dev-onboarding"
+    ]
+  },
+  "version": "1.0.0"
+}

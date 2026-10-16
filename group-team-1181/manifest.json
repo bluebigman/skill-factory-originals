@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1181",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1181",
+    "kind": "team",
+    "name": "能力声明专家",
+    "description": "能力声明专家：围绕能力声明，覆盖能做什么／输入要求／输出形态，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-capability-declare-team-lead",
+        "role": "lead",
+        "name": "能力声明主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-capability-declare",
+        "role": "member",
+        "name": "能力声明 边界公示 顾问",
+        "evidence": "original_assets/agent-capability-declare/merkle_root",
+        "member_merkle_root": "3223ac0d01a23b1d8ab566f56eac249419645c6335beba00b0d80bc817440303"
+      },
+      {
+        "slug": "agent-cost-attribution",
+        "role": "member",
+        "name": "成本归因 分项核算 顾问",
+        "evidence": "original_assets/agent-cost-attribution/merkle_root",
+        "member_merkle_root": "1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa"
+      },
+      {
+        "slug": "agent-skill-registry",
+        "role": "member",
+        "name": "技能注册 发现机制 顾问",
+        "evidence": "original_assets/agent-skill-registry/merkle_root",
+        "member_merkle_root": "3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee"
+      }
+    ],
+    "team_lead": "agent-capability-declare-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d6a7865159015991",
+  "prompt_hash": "99e15dfef8fc67c7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1181\", \"kind\": \"team\", \"name\": \"能力声明专家\", \"description\": \"能力声明专家：围绕能力声明，覆盖能做什么／输入要求／输出形态，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-capability-declare-team-lead\", \"role\": \"lead\", \"name\": \"能力声明主理人\", \"evidence\": null}, {\"slug\": \"agent-capability-declare\", \"role\": \"member\", \"name\": \"能力声明 边界公示 顾问\", \"evidence\": \"original_assets/agent-capability-declare/merkle_root\", \"member_merkle_root\": \"3223ac0d01a23b1d8ab566f56eac249419645c6335beba00b0d80bc817440303\"}, {\"slug\": \"agent-cost-attribution\", \"role\": \"member\", \"name\": \"成本归因 分项核算 顾问\", \"evidence\": \"original_assets/agent-cost-attribution/merkle_root\", \"member_merkle_root\": \"1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa\"}, {\"slug\": \"agent-skill-registry\", \"role\": \"member\", \"name\": \"技能注册 发现机制 顾问\", \"evidence\": \"original_assets/agent-skill-registry/merkle_root\", \"member_merkle_root\": \"3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee\"}], \"team_lead\": \"agent-capability-declare-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-capability-declare-team-lead.md": "48f510ccec29467002416e51a015f5518aef3ef637afd6f7407868d45d7e0e76",
+    "agents/agent-capability-declare.md": "5969ded1006dd45208605a0f52f3a568263edaa0845d2fee3f8019f8120119c9",
+    "agents/agent-cost-attribution.md": "0e45c2f1530305d3c7b8c7baad619f014345776dce1835a1cbb3e1e09db16c0e",
+    "agents/agent-skill-registry.md": "9970f5b24b20263e00dc9d97023ffc8a44ce7f9f5ec4aab956bdfaf87a7a7fff",
+    "plugin.json": "8ea0b8a46c0950639bc67b761dfd121a9e253d4d2b353ff109b1bf7ee1c3e75a",
+    "settings.json": "7c1b4dddcd2ad525631e0a8fda7ec4f67647e8d78ac98a86e1593113b57c698b"
+  }
+}

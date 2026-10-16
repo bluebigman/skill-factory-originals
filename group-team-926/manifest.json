@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-926",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-926",
+    "kind": "team",
+    "name": "文档版本比对专家",
+    "description": "文档版本比对专家：围绕文档版本比对，覆盖差异分级／位置明确／批量汇总，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-version-diff-team-lead",
+        "role": "lead",
+        "name": "文档版本比对主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-version-diff",
+        "role": "member",
+        "name": "文档版本比对 顾问",
+        "evidence": "original_assets/doc-version-diff/merkle_root",
+        "member_merkle_root": "d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e"
+      },
+      {
+        "slug": "incident-triage-pro",
+        "role": "member",
+        "name": "故障分级 响应流程 顾问",
+        "evidence": "original_assets/incident-triage-pro/merkle_root",
+        "member_merkle_root": "3d7af40472e198a706cfcbacd5ae32c9c0ba678a00a674be871a5d81a5c9cd7d"
+      },
+      {
+        "slug": "cross-border-listing-pro",
+        "role": "member",
+        "name": "跨境选品 上架合规 顾问",
+        "evidence": "original_assets/cross-border-listing-pro/merkle_root",
+        "member_merkle_root": "f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac"
+      }
+    ],
+    "team_lead": "doc-version-diff-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3b828712f81310bc",
+  "prompt_hash": "db3f27387036627c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-926\", \"kind\": \"team\", \"name\": \"文档版本比对专家\", \"description\": \"文档版本比对专家：围绕文档版本比对，覆盖差异分级／位置明确／批量汇总，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-version-diff-team-lead\", \"role\": \"lead\", \"name\": \"文档版本比对主理人\", \"evidence\": null}, {\"slug\": \"doc-version-diff\", \"role\": \"member\", \"name\": \"文档版本比对 顾问\", \"evidence\": \"original_assets/doc-version-diff/merkle_root\", \"member_merkle_root\": \"d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e\"}, {\"slug\": \"incident-triage-pro\", \"role\": \"member\", \"name\": \"故障分级 响应流程 顾问\", \"evidence\": \"original_assets/incident-triage-pro/merkle_root\", \"member_merkle_root\": \"3d7af40472e198a706cfcbacd5ae32c9c0ba678a00a674be871a5d81a5c9cd7d\"}, {\"slug\": \"cross-border-listing-pro\", \"role\": \"member\", \"name\": \"跨境选品 上架合规 顾问\", \"evidence\": \"original_assets/cross-border-listing-pro/merkle_root\", \"member_merkle_root\": \"f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac\"}], \"team_lead\": \"doc-version-diff-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-listing-pro.md": "b989aa6bf694d50f24d527915d29cc222607866e066504dee77acb061fe0cce2",
+    "agents/doc-version-diff-team-lead.md": "025e106614c306f666a1b79a4f5d119563bc602c963999604b2c49b344164f85",
+    "agents/doc-version-diff.md": "eac9d14313e507f7b630bbf6d8d61378c3fa70e26859e6a930becfa8223c8f99",
+    "agents/incident-triage-pro.md": "890d67079d62fc6e5b488b7e5afddd01d66e94b65c0d627736ce51c095dcb831",
+    "plugin.json": "a4fe31478667adb477ac885ec94e7f72ca30679a57fbb78a1e65e561f39bf5dd",
+    "settings.json": "7b456acab83afd2b4dfa85a028094a9921666be2e2f24e279ca50fe021e6662f"
+  }
+}

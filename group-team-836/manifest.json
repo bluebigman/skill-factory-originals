@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-836",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-836",
+    "kind": "team",
+    "name": "出口单据一致性专家",
+    "description": "出口单据一致性专家：围绕出口单据，覆盖数据抽取／结构速读／指标解读，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "annual-report-expert-team-lead",
+        "role": "lead",
+        "name": "年报财报速读与数据整理专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "annual-report-expert",
+        "role": "member",
+        "name": "年报官",
+        "evidence": "original_assets/annual-report-expert/merkle_root",
+        "member_merkle_root": "f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2"
+      },
+      {
+        "slug": "export-doc-check",
+        "role": "member",
+        "name": "出口单据 一致性 顾问",
+        "evidence": "original_assets/export-doc-check/merkle_root",
+        "member_merkle_root": "286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d"
+      },
+      {
+        "slug": "intl-meeting-coach",
+        "role": "member",
+        "name": "跨时区会议 组织 教练",
+        "evidence": "original_assets/intl-meeting-coach/merkle_root",
+        "member_merkle_root": "b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1"
+      }
+    ],
+    "team_lead": "annual-report-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "183bb404eea3eb30",
+  "prompt_hash": "11829b4c87b361d0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-836\", \"kind\": \"team\", \"name\": \"出口单据一致性专家\", \"description\": \"出口单据一致性专家：围绕出口单据，覆盖数据抽取／结构速读／指标解读，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"annual-report-expert-team-lead\", \"role\": \"lead\", \"name\": \"年报财报速读与数据整理专家主理人\", \"evidence\": null}, {\"slug\": \"annual-report-expert\", \"role\": \"member\", \"name\": \"年报官\", \"evidence\": \"original_assets/annual-report-expert/merkle_root\", \"member_merkle_root\": \"f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2\"}, {\"slug\": \"export-doc-check\", \"role\": \"member\", \"name\": \"出口单据 一致性 顾问\", \"evidence\": \"original_assets/export-doc-check/merkle_root\", \"member_merkle_root\": \"286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d\"}, {\"slug\": \"intl-meeting-coach\", \"role\": \"member\", \"name\": \"跨时区会议 组织 教练\", \"evidence\": \"original_assets/intl-meeting-coach/merkle_root\", \"member_merkle_root\": \"b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1\"}], \"team_lead\": \"annual-report-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/annual-report-expert-team-lead.md": "9927bead2d5225307676a8dec9f143c5da813d66f867c29f104cbd699646824d",
+    "agents/annual-report-expert.md": "e470ea7ca7d5e1e7f51922d97c9f04b159183ed3f44ed38cd36d8542c0bfc81f",
+    "agents/export-doc-check.md": "4ad451fb35f071bb5a9fb23cd2fc45c780c31e1c9360a4060573d20faeb990be",
+    "agents/intl-meeting-coach.md": "c572f70e461c004e6bf3b09c3c5be03959cc6ac1276323ead4003d6c9031b1d7",
+    "plugin.json": "7f2fa375a8018c5e51764fd875edd17ac4eadfe15d133c9132ca22b7206ef955",
+    "settings.json": "65a016e8eb01ca42447d9efa7b8d687090c4c1c18ea069ea622cb9bfc0e3e472"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-base-pro-01-team-lead",
+  "agents": [
+    "./agents/knowledge-base-pro-01-team-lead.md",
+    "./agents/knowledge-base-pro-01.md",
+    "./agents/chart-builder-expert.md",
+    "./agents/longform-editing.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 项目记忆",
+    "zh": "帮我处理项目记忆"
+  },
+  "description": "知识库与笔记 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 长文编辑打磨, covers 选型决策 / 数据准备 / 图表达人, delivering structured results and actionable checklists.",
+    "zh": "擅长选型决策、数据准备与图表达人，覆盖长文编辑打磨全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "知识库与笔记 Suite Team",
+    "zh": "项目记忆知识卡片专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-base-pro-01-team-lead",
+      "name": {
+        "en": "项目记忆主理人",
+        "zh": "项目记忆主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01.png",
+      "id": "knowledge-base-pro-01",
+      "name": {
+        "en": "知识库与笔记 Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "知识库与笔记 Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/chart-builder-expert.png",
+      "id": "chart-builder-expert",
+      "name": {
+        "en": "ChartCraft",
+        "zh": "图表可视化制作专家"
+      },
+      "profession": {
+        "en": "ChartCraft",
+        "zh": "数据图表设计与生成专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/longform-editing.png",
+      "id": "longform-editing",
+      "name": {
+        "en": "longform-editing",
+        "zh": "长文编辑打磨 顾问"
+      },
+      "profession": {
+        "en": "longform-editing",
+        "zh": "长文编辑打磨 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1034",
+  "plugin": "group-team-1034",
+  "profession": {
+    "en": "知识库与笔记 Suite Collaboration Team",
+    "zh": "项目记忆知识卡片专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 项目记忆",
+      "zh": "帮我处理项目记忆"
+    },
+    {
+      "en": "Plan 数据图表设计与生成专家",
+      "zh": "帮我规划数据图表设计与生成专家"
+    },
+    {
+      "en": "Review 长文编辑打磨",
+      "zh": "帮我检查长文编辑打磨"
+    }
+  ],
+  "tags": [
+    {
+      "en": "错误追踪",
+      "zh": "错误追踪"
+    },
+    {
+      "en": "经验沉淀",
+      "zh": "经验沉淀"
+    },
+    {
+      "en": "笔记整理",
+      "zh": "笔记整理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-base-pro-01-team-lead",
+    "memberAgents": [
+      "knowledge-base-pro-01",
+      "chart-builder-expert",
+      "longform-editing"
+    ]
+  },
+  "version": "1.0.0"
+}

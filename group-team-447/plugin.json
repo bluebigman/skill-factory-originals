@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-toolkit-pro-team-lead",
+  "agents": [
+    "./agents/sql-toolkit-pro-team-lead.md",
+    "./agents/sql-toolkit-pro.md",
+    "./agents/dep-license-audit-pro.md",
+    "./agents/safety-production-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 关系查询",
+    "zh": "帮我处理关系查询"
+  },
+  "description": "SQL与数据库 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 生产安全 requirements, output three deliverables: 分区排查, 高危优先, 闭环整改. Verifiable end-to-end, evidence per step.",
+    "zh": "输入生产安全相关需求，输出分区排查、高危优先、闭环整改三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "SQL与数据库 Suite Team",
+    "zh": "关系查询专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-toolkit-pro-team-lead",
+      "name": {
+        "en": "关系查询主理人",
+        "zh": "关系查询主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro.png",
+      "id": "sql-toolkit-pro",
+      "name": {
+        "en": "SQL与数据库 Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "profession": {
+        "en": "SQL与数据库 Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dep-license-audit-pro.png",
+      "id": "dep-license-audit-pro",
+      "name": {
+        "en": "Dependency and License Compliance Auditor",
+        "zh": "依赖清单 许可证 合规检查"
+      },
+      "profession": {
+        "en": "Dependency and License Compliance Auditor",
+        "zh": "依赖清单 许可证 合规检查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/safety-production-pro.png",
+      "id": "safety-production-pro",
+      "name": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "profession": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-447",
+  "plugin": "group-team-447",
+  "profession": {
+    "en": "SQL与数据库 Suite Collaboration Team",
+    "zh": "关系查询专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 关系查询",
+      "zh": "帮我处理关系查询"
+    },
+    {
+      "en": "Plan 依赖清单",
+      "zh": "帮我规划依赖清单"
+    },
+    {
+      "en": "Review 生产安全",
+      "zh": "帮我检查生产安全"
+    }
+  ],
+  "tags": [
+    {
+      "en": "类型安全",
+      "zh": "类型安全"
+    },
+    {
+      "en": "记录转换",
+      "zh": "记录转换"
+    },
+    {
+      "en": "水文建模",
+      "zh": "水文建模"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-toolkit-pro-team-lead",
+    "memberAgents": [
+      "sql-toolkit-pro",
+      "dep-license-audit-pro",
+      "safety-production-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "group-team-lead",
+  "agents": [
+    "./agents/group-team-lead.md",
+    "./agents/mp-title-coach.md",
+    "./agents/promotion-planning-pro.md",
+    "./agents/seo-content-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "How to handle 公众号标题",
+    "zh": "遇到公众号标题怎么办"
+  },
+  "description": "Mp Title Coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "公众号 促销 内容 团队：主理人调度 3 位专业角色分阶段协作，输出可执行方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Mp Title Coach Team",
+    "zh": "公众号 促销 内容 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "group-team-lead",
+      "name": {
+        "en": "公众号标题主理人",
+        "zh": "公众号标题主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/mp-title-coach.png",
+      "id": "mp-title-coach",
+      "name": {
+        "en": "Mp Title Coach",
+        "zh": "公众号标题 拟写打磨 顾问"
+      },
+      "profession": {
+        "en": "Mp Title Coach",
+        "zh": "公众号标题 拟写打磨 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/promotion-planning-pro.png",
+      "id": "promotion-planning-pro",
+      "name": {
+        "en": "Promotion Planning Pro",
+        "zh": "促销活动 优惠 方案"
+      },
+      "profession": {
+        "en": "Promotion Planning Pro",
+        "zh": "促销活动 方案设计 效果预估"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/seo-content-plan.png",
+      "id": "seo-content-plan",
+      "name": {
+        "en": "Seo Content Plan",
+        "zh": "内容SEO 选题布局 顾问"
+      },
+      "profession": {
+        "en": "Seo Content Plan",
+        "zh": "内容SEO 选题布局 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-100",
+  "plugin": "group-team-100",
+  "profession": {
+    "en": "Mp Title Coach Collaboration Team",
+    "zh": "公众号 促销 内容 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "How to handle 公众号标题",
+      "zh": "遇到公众号标题怎么办"
+    },
+    {
+      "en": "Help me plan 促销活动",
+      "zh": "帮我规划促销活动"
+    },
+    {
+      "en": "Review my 内容SEO",
+      "zh": "帮我检查内容SEO"
+    }
+  ],
+  "tags": [
+    {
+      "en": "公众号标题",
+      "zh": "公众号标题"
+    },
+    {
+      "en": "促销活动",
+      "zh": "促销活动"
+    },
+    {
+      "en": "内容SEO",
+      "zh": "内容SEO"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "group-team-lead",
+    "memberAgents": [
+      "mp-title-coach",
+      "promotion-planning-pro",
+      "seo-content-plan"
+    ]
+  },
+  "version": "1.0.1"
+}

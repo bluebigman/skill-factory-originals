@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-04-fixed-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-04-fixed-team-lead.md",
+    "./agents/data-clean-pro-04-fixed.md",
+    "./agents/data-clean-pro-02-fixed.md",
+    "./agents/data-pipeline-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据整理",
+    "zh": "帮我处理数据整理"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 医疗 实习 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "数据 医疗 实习 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-04-fixed-team-lead",
+      "name": {
+        "en": "数据整理主理人",
+        "zh": "数据整理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-04-fixed.png",
+      "id": "data-clean-pro-04-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-02-fixed.png",
+      "id": "data-clean-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro.png",
+      "id": "data-pipeline-pro",
+      "name": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "profession": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-191",
+  "plugin": "group-team-191",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "数据 医疗 实习 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据整理",
+      "zh": "帮我处理数据整理"
+    },
+    {
+      "en": "Plan 医疗行政",
+      "zh": "帮我规划医疗行政"
+    },
+    {
+      "en": "Review 实习日志",
+      "zh": "帮我检查实习日志"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据整理",
+      "zh": "数据整理"
+    },
+    {
+      "en": "医疗行政",
+      "zh": "医疗行政"
+    },
+    {
+      "en": "实习日志",
+      "zh": "实习日志"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-04-fixed-team-lead",
+    "memberAgents": [
+      "data-clean-pro-04-fixed",
+      "data-clean-pro-02-fixed",
+      "data-pipeline-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

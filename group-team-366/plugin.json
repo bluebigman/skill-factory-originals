@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-perf-tune-team-lead",
+  "agents": [
+    "./agents/sql-perf-tune-team-lead.md",
+    "./agents/sql-perf-tune.md",
+    "./agents/agent-eval-framework.md",
+    "./agents/data-lineage-trace.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle SQL",
+    "zh": "帮我处理SQL"
+  },
+  "description": "sql-perf-tune team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input SQL requirements, output three deliverables: 索引匹配, 避免函数, 分页优化. Verifiable end-to-end, evidence per step.",
+    "zh": "输入SQL相关需求，输出索引匹配、避免函数、分页优化三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "sql-perf-tune Team",
+    "zh": "效果评测专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-perf-tune-team-lead",
+      "name": {
+        "en": "SQL主理人",
+        "zh": "SQL主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-perf-tune.png",
+      "id": "sql-perf-tune",
+      "name": {
+        "en": "sql-perf-tune",
+        "zh": "SQL 调优 顾问"
+      },
+      "profession": {
+        "en": "sql-perf-tune",
+        "zh": "SQL 调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-eval-framework.png",
+      "id": "agent-eval-framework",
+      "name": {
+        "en": "agent-eval-framework",
+        "zh": "效果评测 用例设计 顾问"
+      },
+      "profession": {
+        "en": "agent-eval-framework",
+        "zh": "效果评测 用例设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-lineage-trace.png",
+      "id": "data-lineage-trace",
+      "name": {
+        "en": "data-lineage-trace",
+        "zh": "数据血缘 链路追踪 顾问"
+      },
+      "profession": {
+        "en": "data-lineage-trace",
+        "zh": "数据血缘 链路追踪 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-366",
+  "plugin": "group-team-366",
+  "profession": {
+    "en": "sql-perf-tune Collaboration Team",
+    "zh": "效果评测专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle SQL",
+      "zh": "帮我处理SQL"
+    },
+    {
+      "en": "Plan 效果评测",
+      "zh": "帮我规划效果评测"
+    },
+    {
+      "en": "Review 数据血缘",
+      "zh": "帮我检查数据血缘"
+    }
+  ],
+  "tags": [
+    {
+      "en": "看执行计划",
+      "zh": "看执行计划"
+    },
+    {
+      "en": "索引匹配",
+      "zh": "索引匹配"
+    },
+    {
+      "en": "避免函数",
+      "zh": "避免函数"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-perf-tune-team-lead",
+    "memberAgents": [
+      "sql-perf-tune",
+      "agent-eval-framework",
+      "data-lineage-trace"
+    ]
+  },
+  "version": "1.0.0"
+}

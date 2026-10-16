@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1081",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1081",
+    "kind": "team",
+    "name": "幻觉拦截专家",
+    "description": "擅长置信分层、幂等入队与超时处理，覆盖幻觉拦截全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-hallucination-guard-team-lead",
+        "role": "lead",
+        "name": "幻觉拦截主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-hallucination-guard",
+        "role": "member",
+        "name": "幻觉拦截 事实核验 顾问",
+        "evidence": "original_assets/agent-hallucination-guard/merkle_root",
+        "member_merkle_root": "a7aab578c7cadd3abe9a6bd4f75edf2f398a4c8c3943bb45a3b1ffe3b73ce679"
+      },
+      {
+        "slug": "agent-task-queue",
+        "role": "member",
+        "name": "任务队列 优先级 顾问",
+        "evidence": "original_assets/agent-task-queue/merkle_root",
+        "member_merkle_root": "6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72"
+      },
+      {
+        "slug": "pdf-type-router",
+        "role": "member",
+        "name": "PDF 类型路由 助手",
+        "evidence": "original_assets/pdf-type-router/merkle_root",
+        "member_merkle_root": "fae78e504567fd4f6e13dde3f4189ca8414095397f4ad5810bb8d9df8abd5e48"
+      }
+    ],
+    "team_lead": "agent-hallucination-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4f76d7bd2ac62252",
+  "prompt_hash": "180a51ab2f42c65c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1081\", \"kind\": \"team\", \"name\": \"幻觉拦截专家\", \"description\": \"擅长置信分层、幂等入队与超时处理，覆盖幻觉拦截全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-hallucination-guard-team-lead\", \"role\": \"lead\", \"name\": \"幻觉拦截主理人\", \"evidence\": null}, {\"slug\": \"agent-hallucination-guard\", \"role\": \"member\", \"name\": \"幻觉拦截 事实核验 顾问\", \"evidence\": \"original_assets/agent-hallucination-guard/merkle_root\", \"member_merkle_root\": \"a7aab578c7cadd3abe9a6bd4f75edf2f398a4c8c3943bb45a3b1ffe3b73ce679\"}, {\"slug\": \"agent-task-queue\", \"role\": \"member\", \"name\": \"任务队列 优先级 顾问\", \"evidence\": \"original_assets/agent-task-queue/merkle_root\", \"member_merkle_root\": \"6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72\"}, {\"slug\": \"pdf-type-router\", \"role\": \"member\", \"name\": \"PDF 类型路由 助手\", \"evidence\": \"original_assets/pdf-type-router/merkle_root\", \"member_merkle_root\": \"fae78e504567fd4f6e13dde3f4189ca8414095397f4ad5810bb8d9df8abd5e48\"}], \"team_lead\": \"agent-hallucination-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-hallucination-guard-team-lead.md": "1f95f065fcfd62ce72c1232f3f3768d973e0bf22b1f85f1d8b9d73d1dcd3f7f1",
+    "agents/agent-hallucination-guard.md": "cce3378bda3c546ab149ca717454507d2b77317f523a39d3700e06e2191505ef",
+    "agents/agent-task-queue.md": "94c49c575fff042d5502ee68f7655d2684056ec403bc72302ef1d8147d62d0e0",
+    "agents/pdf-type-router.md": "f19100306e2665ce58c52100bac49af091386ee456df968bb08b863bee8b717b",
+    "plugin.json": "61008bba3c772150845f50318b5c30e63ece03aab01e84f77bd8a8ebbca72b3c",
+    "settings.json": "bb4470d507c334c2f5939d20df8594257176e0ddde82819756d1d1c455befdf9"
+  }
+}

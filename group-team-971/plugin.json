@@ -1,0 +1,126 @@
+{
+  "agentName": "code-dev-pro-team-lead",
+  "agents": [
+    "./agents/code-dev-pro-team-lead.md",
+    "./agents/code-dev-pro.md",
+    "./agents/permission-governance-pro.md",
+    "./agents/tool-interface-design-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 代码开发",
+    "zh": "帮我处理代码开发"
+  },
+  "description": "Code Development Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 权限治理 requirements, output three deliverables: 最小必要, 临时过期, 凭据隔离. Verifiable end-to-end, evidence per step.",
+    "zh": "输入权限治理相关需求，输出最小必要、临时过期、凭据隔离三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Code Development Expert Team",
+    "zh": "代码开发专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "code-dev-pro-team-lead",
+      "name": {
+        "en": "代码开发主理人",
+        "zh": "代码开发主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/code-dev-pro.png",
+      "id": "code-dev-pro",
+      "name": {
+        "en": "Code Development Expert",
+        "zh": "代码开发 调试修复"
+      },
+      "profession": {
+        "en": "Code Development Expert",
+        "zh": "代码开发 调试修复"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/permission-governance-pro.png",
+      "id": "permission-governance-pro",
+      "name": {
+        "en": "permission-governance-pro",
+        "zh": "权限治理 最小授权 顾问"
+      },
+      "profession": {
+        "en": "permission-governance-pro",
+        "zh": "权限治理 最小授权 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tool-interface-design-pro.png",
+      "id": "tool-interface-design-pro",
+      "name": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "profession": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-971",
+  "plugin": "group-team-971",
+  "profession": {
+    "en": "Code Development Expert Collaboration Team",
+    "zh": "代码开发专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 代码开发",
+      "zh": "帮我处理代码开发"
+    },
+    {
+      "en": "Plan 权限治理",
+      "zh": "帮我规划权限治理"
+    },
+    {
+      "en": "Review 工具设计",
+      "zh": "帮我检查工具设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "规则预览",
+      "zh": "规则预览"
+    },
+    {
+      "en": "脚本回滚",
+      "zh": "脚本回滚"
+    },
+    {
+      "en": "编码规范",
+      "zh": "编码规范"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "code-dev-pro-team-lead",
+    "memberAgents": [
+      "code-dev-pro",
+      "permission-governance-pro",
+      "tool-interface-design-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

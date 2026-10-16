@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1132",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1132",
+    "kind": "team",
+    "name": "公众号排版专家",
+    "description": "擅长排版规范、覆盖完整与层级合理，覆盖文档索引重建全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "wechat-content-expert-team-lead",
+        "role": "lead",
+        "name": "号手主理人",
+        "evidence": null
+      },
+      {
+        "slug": "wechat-content-expert",
+        "role": "member",
+        "name": "号手 公众号排版 图文美化",
+        "evidence": "original_assets/wechat-content-expert/merkle_root",
+        "member_merkle_root": "fea742789f660b4f02f790df5acc68d84d1e475ebd23c53a3d4f2225a685d7f0"
+      },
+      {
+        "slug": "note-life-pro",
+        "role": "member",
+        "name": "笔记与生活助手",
+        "evidence": "original_assets/note-life-pro/merkle_root",
+        "member_merkle_root": "c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86"
+      },
+      {
+        "slug": "doc-index-rebuild",
+        "role": "member",
+        "name": "文档索引重建 助手",
+        "evidence": "original_assets/doc-index-rebuild/merkle_root",
+        "member_merkle_root": "22b289458ce1d87bb279873d29478cb5f42f9ab6b381c712e4e292c5630d8512"
+      }
+    ],
+    "team_lead": "wechat-content-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8f494e2c812c45ae",
+  "prompt_hash": "9fc5d04c31d132a4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1132\", \"kind\": \"team\", \"name\": \"公众号排版专家\", \"description\": \"擅长排版规范、覆盖完整与层级合理，覆盖文档索引重建全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"wechat-content-expert-team-lead\", \"role\": \"lead\", \"name\": \"号手主理人\", \"evidence\": null}, {\"slug\": \"wechat-content-expert\", \"role\": \"member\", \"name\": \"号手 公众号排版 图文美化\", \"evidence\": \"original_assets/wechat-content-expert/merkle_root\", \"member_merkle_root\": \"fea742789f660b4f02f790df5acc68d84d1e475ebd23c53a3d4f2225a685d7f0\"}, {\"slug\": \"note-life-pro\", \"role\": \"member\", \"name\": \"笔记与生活助手\", \"evidence\": \"original_assets/note-life-pro/merkle_root\", \"member_merkle_root\": \"c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86\"}, {\"slug\": \"doc-index-rebuild\", \"role\": \"member\", \"name\": \"文档索引重建 助手\", \"evidence\": \"original_assets/doc-index-rebuild/merkle_root\", \"member_merkle_root\": \"22b289458ce1d87bb279873d29478cb5f42f9ab6b381c712e4e292c5630d8512\"}], \"team_lead\": \"wechat-content-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-index-rebuild.md": "dfa82c5f23ccbd57588bc7d9bdb4d7d19ce6bdc1008fc34d2824617ead190e64",
+    "agents/note-life-pro.md": "3292412cd2538a7bb650e58bb2113d25b588d983438bb674f43e1662ec16a63f",
+    "agents/wechat-content-expert-team-lead.md": "a48a6614250b13692ab4ade9440d658ec8ba8dfdc72f42a00e9a0c6f9cb15a45",
+    "agents/wechat-content-expert.md": "6d3cad337a47be644af852b5ce370e97c3f82f5dcfcb0294e404d66413fab707",
+    "plugin.json": "c850598e1604f1a50c5f1397392816dc0ddd0302859036370fca89a29f507ca1",
+    "settings.json": "9af78922aa4d2c65056fcfcf7b9b47b756236de22e13fccf1bcb61ccb2933d7e"
+  }
+}

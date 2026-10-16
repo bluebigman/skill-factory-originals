@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-876",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-876",
+    "kind": "team",
+    "name": "跨境数据专家",
+    "description": "跨境数据专家：围绕跨境数据，覆盖最小必要／明示同意／跨境评估，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "gdpr-data-handle-team-lead",
+        "role": "lead",
+        "name": "跨境数据主理人",
+        "evidence": null
+      },
+      {
+        "slug": "gdpr-data-handle",
+        "role": "member",
+        "name": "跨境数据 合规处理 顾问",
+        "evidence": "original_assets/gdpr-data-handle/merkle_root",
+        "member_merkle_root": "2bc76e25954d53ea92523823e6ce85964085e80a6dc4199e4b904c98a7773fb0"
+      },
+      {
+        "slug": "api-toolkit-pro-fixed",
+        "role": "member",
+        "name": "协议转换 REST",
+        "evidence": "original_assets/api-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23"
+      },
+      {
+        "slug": "data-retention-rule",
+        "role": "member",
+        "name": "数据保留策略 顾问",
+        "evidence": "original_assets/data-retention-rule/merkle_root",
+        "member_merkle_root": "05a616b44f725afc00df746c11b902fb4b16cfa8f667a970a4a7aadb2130dd27"
+      }
+    ],
+    "team_lead": "gdpr-data-handle-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "211b98b5e45b6e73",
+  "prompt_hash": "e7cc8d2cf1f0cf1d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-876\", \"kind\": \"team\", \"name\": \"跨境数据专家\", \"description\": \"跨境数据专家：围绕跨境数据，覆盖最小必要／明示同意／跨境评估，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"gdpr-data-handle-team-lead\", \"role\": \"lead\", \"name\": \"跨境数据主理人\", \"evidence\": null}, {\"slug\": \"gdpr-data-handle\", \"role\": \"member\", \"name\": \"跨境数据 合规处理 顾问\", \"evidence\": \"original_assets/gdpr-data-handle/merkle_root\", \"member_merkle_root\": \"2bc76e25954d53ea92523823e6ce85964085e80a6dc4199e4b904c98a7773fb0\"}, {\"slug\": \"api-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"协议转换 REST\", \"evidence\": \"original_assets/api-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23\"}, {\"slug\": \"data-retention-rule\", \"role\": \"member\", \"name\": \"数据保留策略 顾问\", \"evidence\": \"original_assets/data-retention-rule/merkle_root\", \"member_merkle_root\": \"05a616b44f725afc00df746c11b902fb4b16cfa8f667a970a4a7aadb2130dd27\"}], \"team_lead\": \"gdpr-data-handle-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-toolkit-pro-fixed.md": "fc99ed97f8a108b990f98225b2367fad3f25942b1b010fb6b9e272377f3484aa",
+    "agents/data-retention-rule.md": "fca6e13c7d7799ae3290d5354c8001ee921c6479ce398ce8a400c6e85796fb46",
+    "agents/gdpr-data-handle-team-lead.md": "c49614a26155d5b551fad4e8dcdacf6fbd4b4bd8ae126ef6b20561fc31b35f3e",
+    "agents/gdpr-data-handle.md": "75367bcdf1a4ce2005e6b02f10b2e9b0ded21cf7eee9d8a9a1e202ec2ad87019",
+    "plugin.json": "c0dd0199bb8a876cb1df26d1986bcfc719e884beb3820973c95cf6d1ff6203c2",
+    "settings.json": "e4bb3170427668103bec19771f046a34e2b042ea6bb67e48b7e6fe1af699d0da"
+  }
+}

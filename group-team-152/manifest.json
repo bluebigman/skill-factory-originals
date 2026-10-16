@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-152",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-152",
+    "kind": "team",
+    "name": "结构化 表格 报表 团队",
+    "description": "结构化 表格 报表 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-11-team-lead",
+        "role": "lead",
+        "name": "数据解析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-11",
+        "role": "member",
+        "name": "数据解析 结构化提取",
+        "evidence": "original_assets/data-clean-pro-11/merkle_root",
+        "member_merkle_root": "aba80f3e111775fa3694c45e4eab15db58e292c977d7f66565c3d1653499dc53"
+      },
+      {
+        "slug": "data-cleanup-pro",
+        "role": "member",
+        "name": "数据清洗 表格整理 去重规范",
+        "evidence": "original_assets/data-cleanup-pro/merkle_root",
+        "member_merkle_root": "8cb2b8649f63ce106c4ed7ad05bb608d0976bc9ef34988884de0ee79b7f68d38"
+      },
+      {
+        "slug": "data-viz-pro-02-fixed",
+        "role": "member",
+        "name": "数据洞察 报表分析 流程规范",
+        "evidence": "original_assets/data-viz-pro-02-fixed/merkle_root",
+        "member_merkle_root": "1ea169d8f20b6831943aa7284060484606f3538c60486a5ffb0e34d871a41653"
+      }
+    ],
+    "team_lead": "data-clean-pro-11-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e55bbe8e44c9bd59",
+  "prompt_hash": "b7c70318594d3633",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-152\", \"kind\": \"team\", \"name\": \"结构化 表格 报表 团队\", \"description\": \"结构化 表格 报表 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-11-team-lead\", \"role\": \"lead\", \"name\": \"数据解析主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-11\", \"role\": \"member\", \"name\": \"数据解析 结构化提取\", \"evidence\": \"original_assets/data-clean-pro-11/merkle_root\", \"member_merkle_root\": \"aba80f3e111775fa3694c45e4eab15db58e292c977d7f66565c3d1653499dc53\"}, {\"slug\": \"data-cleanup-pro\", \"role\": \"member\", \"name\": \"数据清洗 表格整理 去重规范\", \"evidence\": \"original_assets/data-cleanup-pro/merkle_root\", \"member_merkle_root\": \"8cb2b8649f63ce106c4ed7ad05bb608d0976bc9ef34988884de0ee79b7f68d38\"}, {\"slug\": \"data-viz-pro-02-fixed\", \"role\": \"member\", \"name\": \"数据洞察 报表分析 流程规范\", \"evidence\": \"original_assets/data-viz-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"1ea169d8f20b6831943aa7284060484606f3538c60486a5ffb0e34d871a41653\"}], \"team_lead\": \"data-clean-pro-11-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-11-team-lead.md": "bec464b30942638ccfbd96380f07d76588cccc95b95dff4ba61971a0b360ee73",
+    "agents/data-clean-pro-11.md": "284f4f2c50b3c5d7af2ef5dac3eb650e72085c93f35e69b4acfa33d66369c89e",
+    "agents/data-cleanup-pro.md": "919b8f82962a8394634cb290229066643aec0fb8672966a8a8c3c546a0abee15",
+    "agents/data-viz-pro-02-fixed.md": "8d3de62975191d98b2cfeba8a778b0325d109ffb202ec408e0a45024db16650c",
+    "plugin.json": "713341f389b036912ab91e7404d0fc40b4b0a8ee1841ec2c8feb0e4b53818217",
+    "settings.json": "524dcf95a7362628c44aeb542ce2f4bde9dfa71b5cfce6ca7e77231c9ebc2000"
+  }
+}

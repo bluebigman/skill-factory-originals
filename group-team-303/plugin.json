@@ -1,0 +1,126 @@
+{
+  "agentName": "research-ops-expert-team-lead",
+  "agents": [
+    "./agents/research-ops-expert-team-lead.md",
+    "./agents/research-ops-expert.md",
+    "./agents/bi-dashboard-expert.md",
+    "./agents/viz-builder-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 学术研究",
+    "zh": "帮我处理学术研究"
+  },
+  "description": "Academic Research Ops Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 学术研究 end-to-end: 场景选型, 组件设计 and 数据接入. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长场景选型、组件设计与数据接入，覆盖学术研究全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Academic Research Ops Expert Team",
+    "zh": "学术研究专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "research-ops-expert-team-lead",
+      "name": {
+        "en": "学术研究主理人",
+        "zh": "学术研究主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/research-ops-expert.png",
+      "id": "research-ops-expert",
+      "name": {
+        "en": "Academic Research Ops Expert",
+        "zh": "学术研究 资料检索 综述整理"
+      },
+      "profession": {
+        "en": "Academic Research Ops Expert",
+        "zh": "学术研究 资料检索 综述整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/bi-dashboard-expert.png",
+      "id": "bi-dashboard-expert",
+      "name": {
+        "en": "BI Dashboard Expert",
+        "zh": "数据看板 SQL查询 指标呈现"
+      },
+      "profession": {
+        "en": "BI Dashboard Expert",
+        "zh": "数据看板 SQL查询 指标呈现"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/viz-builder-expert.png",
+      "id": "viz-builder-expert",
+      "name": {
+        "en": "VizPro",
+        "zh": "数据大屏 可视化搭建"
+      },
+      "profession": {
+        "en": "VizPro",
+        "zh": "数据大屏 可视化搭建"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-303",
+  "plugin": "group-team-303",
+  "profession": {
+    "en": "Academic Research Ops Expert Collaboration Team",
+    "zh": "学术研究专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 学术研究",
+      "zh": "帮我处理学术研究"
+    },
+    {
+      "en": "Plan 数据看板",
+      "zh": "帮我规划数据看板"
+    },
+    {
+      "en": "Review 数据大屏",
+      "zh": "帮我检查数据大屏"
+    }
+  ],
+  "tags": [
+    {
+      "en": "批量转换",
+      "zh": "批量转换"
+    },
+    {
+      "en": "数据整形清洗",
+      "zh": "数据整形清洗"
+    },
+    {
+      "en": "图表配置",
+      "zh": "图表配置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "research-ops-expert-team-lead",
+    "memberAgents": [
+      "research-ops-expert",
+      "bi-dashboard-expert",
+      "viz-builder-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

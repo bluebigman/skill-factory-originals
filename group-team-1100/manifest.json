@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1100",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1100",
+    "kind": "team",
+    "name": "需求文档撰写专家",
+    "description": "需求文档撰写专家：围绕需求文档撰写，覆盖验收可测／边界明确／依赖显式，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "prd-write-coach-team-lead",
+        "role": "lead",
+        "name": "需求文档撰写主理人",
+        "evidence": null
+      },
+      {
+        "slug": "prd-write-coach",
+        "role": "member",
+        "name": "需求文档撰写 顾问",
+        "evidence": "original_assets/prd-write-coach/merkle_root",
+        "member_merkle_root": "5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233"
+      },
+      {
+        "slug": "navigation-design",
+        "role": "member",
+        "name": "导航设计 路径清晰 顾问",
+        "evidence": "original_assets/navigation-design/merkle_root",
+        "member_merkle_root": "8196496324ee88edcce1f98ac0d3d78b6f82091ccbb88b9356db1f70f2c187da"
+      },
+      {
+        "slug": "ar-vr-usability",
+        "role": "member",
+        "name": "沉浸体验 舒适度 顾问",
+        "evidence": "original_assets/ar-vr-usability/merkle_root",
+        "member_merkle_root": "ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849"
+      }
+    ],
+    "team_lead": "prd-write-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "90f84d63406d2576",
+  "prompt_hash": "ca4b5acc3512a96a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1100\", \"kind\": \"team\", \"name\": \"需求文档撰写专家\", \"description\": \"需求文档撰写专家：围绕需求文档撰写，覆盖验收可测／边界明确／依赖显式，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"prd-write-coach-team-lead\", \"role\": \"lead\", \"name\": \"需求文档撰写主理人\", \"evidence\": null}, {\"slug\": \"prd-write-coach\", \"role\": \"member\", \"name\": \"需求文档撰写 顾问\", \"evidence\": \"original_assets/prd-write-coach/merkle_root\", \"member_merkle_root\": \"5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233\"}, {\"slug\": \"navigation-design\", \"role\": \"member\", \"name\": \"导航设计 路径清晰 顾问\", \"evidence\": \"original_assets/navigation-design/merkle_root\", \"member_merkle_root\": \"8196496324ee88edcce1f98ac0d3d78b6f82091ccbb88b9356db1f70f2c187da\"}, {\"slug\": \"ar-vr-usability\", \"role\": \"member\", \"name\": \"沉浸体验 舒适度 顾问\", \"evidence\": \"original_assets/ar-vr-usability/merkle_root\", \"member_merkle_root\": \"ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849\"}], \"team_lead\": \"prd-write-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ar-vr-usability.md": "7c6218b87ec835bfa8763cfc422ed797b94b5bddcb87349a5a50072cb3efda6d",
+    "agents/navigation-design.md": "92e8e67455d7c69a39c7767715699f25f712819f0fd86ea5151f54c78291df6f",
+    "agents/prd-write-coach-team-lead.md": "926b3a2078761ab7e832473ec5629521f92d34e1ef6907c532c23be5e7a137e7",
+    "agents/prd-write-coach.md": "4cde7448984e8c29bd0e651ea3fbb4d36290faa38a1af40af8d53795728b185d",
+    "plugin.json": "a2d4b6ad5637236951364e82ce67c323a2333b02912fbe61b44ce1505fc16dc1",
+    "settings.json": "f7d7cbcb859d6b7d4aaed4527ec49942fb87aa01a662a92048839fa0347a8e21"
+  }
+}

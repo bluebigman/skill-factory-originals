@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-971",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-971",
+    "kind": "team",
+    "name": "代码开发专家",
+    "description": "输入权限治理相关需求，输出最小必要、临时过期、凭据隔离三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "code-dev-pro-team-lead",
+        "role": "lead",
+        "name": "代码开发主理人",
+        "evidence": null
+      },
+      {
+        "slug": "code-dev-pro",
+        "role": "member",
+        "name": "代码开发 调试修复",
+        "evidence": "original_assets/code-dev-pro/merkle_root",
+        "member_merkle_root": "1553f4664a170903486a4f38a29ebd6db44db2c8c47c66d80b601fdd89b6c8be"
+      },
+      {
+        "slug": "permission-governance-pro",
+        "role": "member",
+        "name": "权限治理 最小授权 顾问",
+        "evidence": "original_assets/permission-governance-pro/merkle_root",
+        "member_merkle_root": "820f551092224c12c415319488cb0e9d111874cf1e76824fb7895f461773af99"
+      },
+      {
+        "slug": "tool-interface-design-pro",
+        "role": "member",
+        "name": "工具设计 接口契约 顾问",
+        "evidence": "original_assets/tool-interface-design-pro/merkle_root",
+        "member_merkle_root": "425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5"
+      }
+    ],
+    "team_lead": "code-dev-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3bc7d75edb39dfa7",
+  "prompt_hash": "b04cd4f8ed919758",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-971\", \"kind\": \"team\", \"name\": \"代码开发专家\", \"description\": \"输入权限治理相关需求，输出最小必要、临时过期、凭据隔离三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"code-dev-pro-team-lead\", \"role\": \"lead\", \"name\": \"代码开发主理人\", \"evidence\": null}, {\"slug\": \"code-dev-pro\", \"role\": \"member\", \"name\": \"代码开发 调试修复\", \"evidence\": \"original_assets/code-dev-pro/merkle_root\", \"member_merkle_root\": \"1553f4664a170903486a4f38a29ebd6db44db2c8c47c66d80b601fdd89b6c8be\"}, {\"slug\": \"permission-governance-pro\", \"role\": \"member\", \"name\": \"权限治理 最小授权 顾问\", \"evidence\": \"original_assets/permission-governance-pro/merkle_root\", \"member_merkle_root\": \"820f551092224c12c415319488cb0e9d111874cf1e76824fb7895f461773af99\"}, {\"slug\": \"tool-interface-design-pro\", \"role\": \"member\", \"name\": \"工具设计 接口契约 顾问\", \"evidence\": \"original_assets/tool-interface-design-pro/merkle_root\", \"member_merkle_root\": \"425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5\"}], \"team_lead\": \"code-dev-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-dev-pro-team-lead.md": "fc1939b4c2b5a520e78fe5ad5077a847f3c6765ae4b6e61d88533ef43d7d3717",
+    "agents/code-dev-pro.md": "3400ede71f8081a454c401426f2ea1dada6bc596cf883301c7ac270350c054d5",
+    "agents/permission-governance-pro.md": "456295f4e3c2e2e318219e0436ae8b3284e9c4254f27a74ea4962e00a842e421",
+    "agents/tool-interface-design-pro.md": "48a17940edcc692032a728d41786d35a9ed5812ed4f34a4742f5ccbce4531ca4",
+    "plugin.json": "3d98d94eaf2d9ef6d8fae3b777b2719440fa55828ee37a721a77f6c58af69904",
+    "settings.json": "8dba8809fec3f405a471fec0167448003b0ef08434463166f3b90a26df8115b2"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-convert-pro-01-team-lead",
+  "agents": [
+    "./agents/doc-convert-pro-01-team-lead.md",
+    "./agents/doc-convert-pro-01.md",
+    "./agents/knowledge-base-pro-fixed.md",
+    "./agents/media-process-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档转换",
+    "zh": "帮我处理文档转换"
+  },
+  "description": "文档格式转换 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档转换视觉美 requirements, output three deliverables: 格式迁移, 内容保真, 视觉美化. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档转换视觉美相关需求，输出格式迁移、内容保真、视觉美化三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "文档格式转换 Suite Team",
+    "zh": "文档转换视觉美化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-convert-pro-01-team-lead",
+      "name": {
+        "en": "文档转换主理人",
+        "zh": "文档转换主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-01.png",
+      "id": "doc-convert-pro-01",
+      "name": {
+        "en": "文档格式转换 Suite",
+        "zh": "文档转换 视觉美化 文本抽取"
+      },
+      "profession": {
+        "en": "文档格式转换 Suite",
+        "zh": "文档转换 视觉美化 文本抽取"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-fixed.png",
+      "id": "knowledge-base-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文档建站 知识库构建"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文档建站 知识库构建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/media-process-pro.png",
+      "id": "media-process-pro",
+      "name": {
+        "en": "图片与视频处理 Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "profession": {
+        "en": "图片与视频处理 Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-714",
+  "plugin": "group-team-714",
+  "profession": {
+    "en": "文档格式转换 Suite Collaboration Team",
+    "zh": "文档转换视觉美化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档转换",
+      "zh": "帮我处理文档转换"
+    },
+    {
+      "en": "Plan 文档建站",
+      "zh": "帮我规划文档建站"
+    },
+    {
+      "en": "Review 政务设计规范",
+      "zh": "帮我检查政务设计规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "格式迁移",
+      "zh": "格式迁移"
+    },
+    {
+      "en": "内容保真",
+      "zh": "内容保真"
+    },
+    {
+      "en": "公众号排版",
+      "zh": "公众号排版"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-convert-pro-01-team-lead",
+    "memberAgents": [
+      "doc-convert-pro-01",
+      "knowledge-base-pro-fixed",
+      "media-process-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

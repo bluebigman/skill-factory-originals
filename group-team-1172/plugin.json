@@ -1,0 +1,126 @@
+{
+  "agentName": "newsletter-compose-team-lead",
+  "agents": [
+    "./agents/newsletter-compose-team-lead.md",
+    "./agents/newsletter-compose.md",
+    "./agents/doc-migration-format.md",
+    "./agents/doc-glossary-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 团队周报编排",
+    "zh": "帮我处理团队周报编排"
+  },
+  "description": "newsletter-compose team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 团队周报编排, covers 固定栏目 / 重点前置 / 问题不藏, delivering structured results and actionable checklists.",
+    "zh": "文档格式迁移专家：围绕团队周报编排，覆盖固定栏目／重点前置／问题不藏，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "newsletter-compose Team",
+    "zh": "文档格式迁移专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "newsletter-compose-team-lead",
+      "name": {
+        "en": "团队周报编排主理人",
+        "zh": "团队周报编排主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/newsletter-compose.png",
+      "id": "newsletter-compose",
+      "name": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "profession": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-migration-format.png",
+      "id": "doc-migration-format",
+      "name": {
+        "en": "doc-migration-format",
+        "zh": "文档格式迁移 助手"
+      },
+      "profession": {
+        "en": "doc-migration-format",
+        "zh": "文档格式迁移 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-glossary-build.png",
+      "id": "doc-glossary-build",
+      "name": {
+        "en": "doc-glossary-build",
+        "zh": "术语表构建 助手"
+      },
+      "profession": {
+        "en": "doc-glossary-build",
+        "zh": "术语表构建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1172",
+  "plugin": "group-team-1172",
+  "profession": {
+    "en": "newsletter-compose Collaboration Team",
+    "zh": "文档格式迁移专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 团队周报编排",
+      "zh": "帮我处理团队周报编排"
+    },
+    {
+      "en": "Plan 文档格式迁移",
+      "zh": "帮我规划文档格式迁移"
+    },
+    {
+      "en": "Review 术语表构建",
+      "zh": "帮我检查术语表构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "固定栏目",
+      "zh": "固定栏目"
+    },
+    {
+      "en": "重点前置",
+      "zh": "重点前置"
+    },
+    {
+      "en": "问题不藏",
+      "zh": "问题不藏"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "newsletter-compose-team-lead",
+    "memberAgents": [
+      "newsletter-compose",
+      "doc-migration-format",
+      "doc-glossary-build"
+    ]
+  },
+  "version": "1.0.0"
+}

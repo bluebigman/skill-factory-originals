@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-674",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-674",
+    "kind": "team",
+    "name": "版本兼容平滑升级专家",
+    "description": "输入版本兼容相关需求，输出迁移指引、强制截止、歧义显式三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-version-compat-team-lead",
+        "role": "lead",
+        "name": "版本兼容主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-version-compat",
+        "role": "member",
+        "name": "版本兼容 平滑升级 顾问",
+        "evidence": "original_assets/agent-version-compat/merkle_root",
+        "member_merkle_root": "02baa3a5ec8db8f7d621149849372011363d4a75df21d018d883f41d97e927cb"
+      },
+      {
+        "slug": "sql-toolkit-pro-01",
+        "role": "member",
+        "name": "SQL转TS 自然语言转命令",
+        "evidence": "original_assets/sql-toolkit-pro-01/merkle_root",
+        "member_merkle_root": "04df68f6f515d8fde28cbe41cda76502fc7597309de89239c71ce2dc2e04eaf4"
+      },
+      {
+        "slug": "agent-instruction-clarify",
+        "role": "member",
+        "name": "指令澄清 歧义识别 顾问",
+        "evidence": "original_assets/agent-instruction-clarify/merkle_root",
+        "member_merkle_root": "6eb56e5423754167ebe23d58a288dce6dbbbf3dcd23d1537ea5051464a76a373"
+      }
+    ],
+    "team_lead": "agent-version-compat-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "bc66cc2419e010be",
+  "prompt_hash": "2d7202e7006dea88",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-674\", \"kind\": \"team\", \"name\": \"版本兼容平滑升级专家\", \"description\": \"输入版本兼容相关需求，输出迁移指引、强制截止、歧义显式三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-version-compat-team-lead\", \"role\": \"lead\", \"name\": \"版本兼容主理人\", \"evidence\": null}, {\"slug\": \"agent-version-compat\", \"role\": \"member\", \"name\": \"版本兼容 平滑升级 顾问\", \"evidence\": \"original_assets/agent-version-compat/merkle_root\", \"member_merkle_root\": \"02baa3a5ec8db8f7d621149849372011363d4a75df21d018d883f41d97e927cb\"}, {\"slug\": \"sql-toolkit-pro-01\", \"role\": \"member\", \"name\": \"SQL转TS 自然语言转命令\", \"evidence\": \"original_assets/sql-toolkit-pro-01/merkle_root\", \"member_merkle_root\": \"04df68f6f515d8fde28cbe41cda76502fc7597309de89239c71ce2dc2e04eaf4\"}, {\"slug\": \"agent-instruction-clarify\", \"role\": \"member\", \"name\": \"指令澄清 歧义识别 顾问\", \"evidence\": \"original_assets/agent-instruction-clarify/merkle_root\", \"member_merkle_root\": \"6eb56e5423754167ebe23d58a288dce6dbbbf3dcd23d1537ea5051464a76a373\"}], \"team_lead\": \"agent-version-compat-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-instruction-clarify.md": "e3e2278675ca2ef3de7b5587b51af81ba279cf2099f62c92e87a7a4996b2d13f",
+    "agents/agent-version-compat-team-lead.md": "9641417308de6dcdd0e7959a2666faeea7aafdbcbc55f19264e1816bad320e84",
+    "agents/agent-version-compat.md": "631e2893c1351435d3a4b18555e6cffe2ee1e0539597b0bc32fa9b002b67d0ac",
+    "agents/sql-toolkit-pro-01.md": "86df27f80d76bbc0557b0b3357426257ef759b09e23641e35a434e9f421e9e4c",
+    "plugin.json": "0f8f0fae5e70c4175485704f4dc969a065db39f9bde596af053cc5b6a29fbcd2",
+    "settings.json": "d000045b404221dba391876d8cfdc78680ab426262a46846888f1759d45525d0"
+  }
+}

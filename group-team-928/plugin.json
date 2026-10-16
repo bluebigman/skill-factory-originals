@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-rollback-plan-team-lead",
+  "agents": [
+    "./agents/agent-rollback-plan-team-lead.md",
+    "./agents/agent-rollback-plan.md",
+    "./agents/customer-advocacy.md",
+    "./agents/oncall-handbook.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 回滚预案",
+    "zh": "帮我处理回滚预案"
+  },
+  "description": "agent-rollback-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 回滚预案 end-to-end: 预案预演, 恢复时限 and 影响评估. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长预案预演、恢复时限与影响评估，覆盖回滚预案全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-rollback-plan Team",
+    "zh": "回滚预案快速恢复专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-rollback-plan-team-lead",
+      "name": {
+        "en": "回滚预案主理人",
+        "zh": "回滚预案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-rollback-plan.png",
+      "id": "agent-rollback-plan",
+      "name": {
+        "en": "agent-rollback-plan",
+        "zh": "回滚预案 快速恢复 顾问"
+      },
+      "profession": {
+        "en": "agent-rollback-plan",
+        "zh": "回滚预案 快速恢复 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/customer-advocacy.png",
+      "id": "customer-advocacy",
+      "name": {
+        "en": "customer-advocacy",
+        "zh": "客户推荐 培育路径 顾问"
+      },
+      "profession": {
+        "en": "customer-advocacy",
+        "zh": "客户推荐 培育路径 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/oncall-handbook.png",
+      "id": "oncall-handbook",
+      "name": {
+        "en": "oncall-handbook",
+        "zh": "值班手册 编写"
+      },
+      "profession": {
+        "en": "oncall-handbook",
+        "zh": "值班手册 编写"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-928",
+  "plugin": "group-team-928",
+  "profession": {
+    "en": "agent-rollback-plan Collaboration Team",
+    "zh": "回滚预案快速恢复专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 回滚预案",
+      "zh": "帮我处理回滚预案"
+    },
+    {
+      "en": "Plan 客户推荐",
+      "zh": "帮我规划客户推荐"
+    },
+    {
+      "en": "Review 值班手册",
+      "zh": "帮我检查值班手册"
+    }
+  ],
+  "tags": [
+    {
+      "en": "预案预演",
+      "zh": "预案预演"
+    },
+    {
+      "en": "恢复时限",
+      "zh": "恢复时限"
+    },
+    {
+      "en": "影响评估",
+      "zh": "影响评估"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-rollback-plan-team-lead",
+    "memberAgents": [
+      "agent-rollback-plan",
+      "customer-advocacy",
+      "oncall-handbook"
+    ]
+  },
+  "version": "1.0.0"
+}

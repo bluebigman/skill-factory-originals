@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-improve-loop-team-lead",
+  "agents": [
+    "./agents/agent-improve-loop-team-lead.md",
+    "./agents/agent-improve-loop.md",
+    "./agents/resume-job-pro.md",
+    "./agents/integration-test-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 改进闭环",
+    "zh": "帮我处理改进闭环"
+  },
+  "description": "agent-improve-loop team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 改进闭环, covers 度量先定 / 小步验证 / 效果对照, delivering structured results and actionable checklists.",
+    "zh": "改进闭环专家：围绕改进闭环，覆盖度量先定／小步验证／效果对照，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "agent-improve-loop Team",
+    "zh": "改进闭环专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-improve-loop-team-lead",
+      "name": {
+        "en": "改进闭环主理人",
+        "zh": "改进闭环主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-improve-loop.png",
+      "id": "agent-improve-loop",
+      "name": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "profession": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/resume-job-pro.png",
+      "id": "resume-job-pro",
+      "name": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "profession": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/integration-test-pro.png",
+      "id": "integration-test-pro",
+      "name": {
+        "en": "integration-test-pro",
+        "zh": "集成测试 场景覆盖 顾问"
+      },
+      "profession": {
+        "en": "integration-test-pro",
+        "zh": "集成测试 场景覆盖 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1241",
+  "plugin": "group-team-1241",
+  "profession": {
+    "en": "agent-improve-loop Collaboration Team",
+    "zh": "改进闭环专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 改进闭环",
+      "zh": "帮我处理改进闭环"
+    },
+    {
+      "en": "Plan 简历优化",
+      "zh": "帮我规划简历优化"
+    },
+    {
+      "en": "Review 集成测试",
+      "zh": "帮我检查集成测试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "度量先定",
+      "zh": "度量先定"
+    },
+    {
+      "en": "小步验证",
+      "zh": "小步验证"
+    },
+    {
+      "en": "效果对照",
+      "zh": "效果对照"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-improve-loop-team-lead",
+    "memberAgents": [
+      "agent-improve-loop",
+      "resume-job-pro",
+      "integration-test-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

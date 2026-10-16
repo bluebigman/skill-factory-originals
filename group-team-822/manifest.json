@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-822",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-822",
+    "kind": "team",
+    "name": "技能编排组合专家",
+    "description": "输入表格智能相关需求，输出结构识别、类型推断、校验规则三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-toolkit-pro-03-fixed-team-lead",
+        "role": "lead",
+        "name": "技能编排主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-toolkit-pro-03-fixed",
+        "role": "member",
+        "name": "技能编排 技能组合 开发辅助",
+        "evidence": "original_assets/agent-toolkit-pro-03-fixed/merkle_root",
+        "member_merkle_root": "c0f55055efacd8e1a540075c5246e2b97f0781fef484cf4ea7bbbb89dd216829"
+      },
+      {
+        "slug": "agent-table-agent",
+        "role": "member",
+        "name": "表格智能 理解 顾问",
+        "evidence": "original_assets/agent-table-agent/merkle_root",
+        "member_merkle_root": "66699bea218e145255346b26ab5e799b5dbac201a52bf0008d3f62ab26e768ae"
+      },
+      {
+        "slug": "agent-eval-framework",
+        "role": "member",
+        "name": "效果评测 用例设计 顾问",
+        "evidence": "original_assets/agent-eval-framework/merkle_root",
+        "member_merkle_root": "71c0c0c1b0c3e57e2da89192fb36193a6b4069dd047e08e188bb91d1a0bbe0a8"
+      }
+    ],
+    "team_lead": "agent-toolkit-pro-03-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2ba92547d77a5158",
+  "prompt_hash": "586d435f2a745206",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-822\", \"kind\": \"team\", \"name\": \"技能编排组合专家\", \"description\": \"输入表格智能相关需求，输出结构识别、类型推断、校验规则三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-toolkit-pro-03-fixed-team-lead\", \"role\": \"lead\", \"name\": \"技能编排主理人\", \"evidence\": null}, {\"slug\": \"agent-toolkit-pro-03-fixed\", \"role\": \"member\", \"name\": \"技能编排 技能组合 开发辅助\", \"evidence\": \"original_assets/agent-toolkit-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"c0f55055efacd8e1a540075c5246e2b97f0781fef484cf4ea7bbbb89dd216829\"}, {\"slug\": \"agent-table-agent\", \"role\": \"member\", \"name\": \"表格智能 理解 顾问\", \"evidence\": \"original_assets/agent-table-agent/merkle_root\", \"member_merkle_root\": \"66699bea218e145255346b26ab5e799b5dbac201a52bf0008d3f62ab26e768ae\"}, {\"slug\": \"agent-eval-framework\", \"role\": \"member\", \"name\": \"效果评测 用例设计 顾问\", \"evidence\": \"original_assets/agent-eval-framework/merkle_root\", \"member_merkle_root\": \"71c0c0c1b0c3e57e2da89192fb36193a6b4069dd047e08e188bb91d1a0bbe0a8\"}], \"team_lead\": \"agent-toolkit-pro-03-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-eval-framework.md": "969b36c1d082cfb7d00e86824892d45d8dce3115caa80bba69fe608ba8d4b7a6",
+    "agents/agent-table-agent.md": "f26b4fc6ad3a0c4215a3d91231b3140f2ff32ef854d6d37ba965edaaee44287f",
+    "agents/agent-toolkit-pro-03-fixed-team-lead.md": "056cabb04c6ce60f56e792e96945d74e9373c866946318f2aa9347d5ba479948",
+    "agents/agent-toolkit-pro-03-fixed.md": "fdcfb9d4e598e251873ae5ca96cbc544ecb7087ce3bd0894b0219396039b07da",
+    "plugin.json": "bc75f4d3824f1c6b71def6d50cd11e90c4802489dc8ebc710fc97c814101c9e5",
+    "settings.json": "8812d9346274dabfc123118dc2289a1f4af5ea8aa77baf7f809510c8c8b0a263"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-202",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-202",
+    "kind": "team",
+    "name": "流程 合同 项目 团队",
+    "description": "流程 合同 项目 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "flow-orchestrate-pro-team-lead",
+        "role": "lead",
+        "name": "流程编排与数据管道主理人",
+        "evidence": null
+      },
+      {
+        "slug": "flow-orchestrate-pro",
+        "role": "member",
+        "name": "流程编排与数据管道",
+        "evidence": "original_assets/flow-orchestrate-pro/merkle_root",
+        "member_merkle_root": "ec3e98b69e19ee2ff615d7bd9f71de5f4702905fe7b5da8bb9229c5d41229ace"
+      },
+      {
+        "slug": "contract-review-expert",
+        "role": "member",
+        "name": "合同条款审查专家",
+        "evidence": "original_assets/contract-review-expert/merkle_root",
+        "member_merkle_root": "03b41eaf0eb6db3fa42dbb79bf6f5b8a0196caeae3ea813f846230b4f8c4b298"
+      },
+      {
+        "slug": "project-planning-expert",
+        "role": "member",
+        "name": "项目管理排期专家",
+        "evidence": "original_assets/project-planning-expert/merkle_root",
+        "member_merkle_root": "a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9"
+      }
+    ],
+    "team_lead": "flow-orchestrate-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b57ceacaa89a9c5c",
+  "prompt_hash": "eb24becaef5234bb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-202\", \"kind\": \"team\", \"name\": \"流程 合同 项目 团队\", \"description\": \"流程 合同 项目 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"flow-orchestrate-pro-team-lead\", \"role\": \"lead\", \"name\": \"流程编排与数据管道主理人\", \"evidence\": null}, {\"slug\": \"flow-orchestrate-pro\", \"role\": \"member\", \"name\": \"流程编排与数据管道\", \"evidence\": \"original_assets/flow-orchestrate-pro/merkle_root\", \"member_merkle_root\": \"ec3e98b69e19ee2ff615d7bd9f71de5f4702905fe7b5da8bb9229c5d41229ace\"}, {\"slug\": \"contract-review-expert\", \"role\": \"member\", \"name\": \"合同条款审查专家\", \"evidence\": \"original_assets/contract-review-expert/merkle_root\", \"member_merkle_root\": \"03b41eaf0eb6db3fa42dbb79bf6f5b8a0196caeae3ea813f846230b4f8c4b298\"}, {\"slug\": \"project-planning-expert\", \"role\": \"member\", \"name\": \"项目管理排期专家\", \"evidence\": \"original_assets/project-planning-expert/merkle_root\", \"member_merkle_root\": \"a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9\"}], \"team_lead\": \"flow-orchestrate-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-review-expert.md": "93318c9b487ce1d9d84871f8d1d0af19d2474dc27162ca4f26179079200f949a",
+    "agents/flow-orchestrate-pro-team-lead.md": "b3dabb19590a9c22db2a010dc7ec2917ffb478f4e08fde8f60667abaf90b0329",
+    "agents/flow-orchestrate-pro.md": "7cd9bcde48d1be63ab7813b5e8fb55c74f9dcbbe7ad2af07532f7b76343ffbe7",
+    "agents/project-planning-expert.md": "0324397bfb72f704abaec4758d8da9979530f178cac699364484f72201144882",
+    "plugin.json": "fda5bdd230c04aa0ab319a05877b3cd9e0a0402f13cd54ee257ceb16aac1476f",
+    "settings.json": "c7b018901c4fc4968dbe4eb95bc2638ae372f632505a211dbf47bc86d815166d"
+  }
+}

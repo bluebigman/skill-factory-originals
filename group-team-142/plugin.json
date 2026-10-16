@@ -1,0 +1,126 @@
+{
+  "agentName": "home-safety-check-pro-team-lead",
+  "agents": [
+    "./agents/home-safety-check-pro-team-lead.md",
+    "./agents/home-safety-check-pro.md",
+    "./agents/life-plan-forge-expert.md",
+    "./agents/contract-clause-audit-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 居家安全",
+    "zh": "帮我处理居家安全"
+  },
+  "description": "Home Safety Check Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "居家 生活 合同 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Home Safety Check Pro Team",
+    "zh": "居家 生活 合同 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "home-safety-check-pro-team-lead",
+      "name": {
+        "en": "居家安全主理人",
+        "zh": "居家安全主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/home-safety-check-pro.png",
+      "id": "home-safety-check-pro",
+      "name": {
+        "en": "Home Safety Check Pro",
+        "zh": "居家安全 隐患排查 适老改造"
+      },
+      "profession": {
+        "en": "Home Safety Check Pro",
+        "zh": "居家安全 隐患排查 适老适幼改造"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/life-plan-forge-expert.png",
+      "id": "life-plan-forge-expert",
+      "name": {
+        "en": "Life Plan Forge Expert",
+        "zh": "生活计划 出行饮食 清单生成"
+      },
+      "profession": {
+        "en": "Life Plan Forge Expert",
+        "zh": "生活计划 出行饮食 清单生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-clause-audit-expert.png",
+      "id": "contract-clause-audit-expert",
+      "name": {
+        "en": "Contract Clause Audit Expert",
+        "zh": "合同审查 风险条款 核查助手"
+      },
+      "profession": {
+        "en": "Contract Clause Audit Expert",
+        "zh": "合同审查 风险条款 核查助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-142",
+  "plugin": "group-team-142",
+  "profession": {
+    "en": "Home Safety Check Pro Collaboration Team",
+    "zh": "居家 生活 合同 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 居家安全",
+      "zh": "帮我处理居家安全"
+    },
+    {
+      "en": "Plan 生活计划",
+      "zh": "帮我规划生活计划"
+    },
+    {
+      "en": "Review 合同审查",
+      "zh": "帮我检查合同审查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "居家安全",
+      "zh": "居家安全"
+    },
+    {
+      "en": "生活计划",
+      "zh": "生活计划"
+    },
+    {
+      "en": "合同审查",
+      "zh": "合同审查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "home-safety-check-pro-team-lead",
+    "memberAgents": [
+      "home-safety-check-pro",
+      "life-plan-forge-expert",
+      "contract-clause-audit-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

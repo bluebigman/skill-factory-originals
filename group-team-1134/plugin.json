@@ -1,0 +1,126 @@
+{
+  "agentName": "rag-pipeline-team-lead",
+  "agents": [
+    "./agents/rag-pipeline-team-lead.md",
+    "./agents/rag-pipeline.md",
+    "./agents/api-latency-pro.md",
+    "./agents/artifact-version.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 检索增强流程",
+    "zh": "帮我处理检索增强流程"
+  },
+  "description": "rag-pipeline team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 检索增强流程 requirements, output three deliverables: 检索优先, 证据绑定, 无据不答. Verifiable end-to-end, evidence per step.",
+    "zh": "输入检索增强流程相关需求，输出检索优先、证据绑定、无据不答三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "rag-pipeline Team",
+    "zh": "检索增强流程专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "rag-pipeline-team-lead",
+      "name": {
+        "en": "检索增强流程主理人",
+        "zh": "检索增强流程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/rag-pipeline.png",
+      "id": "rag-pipeline",
+      "name": {
+        "en": "rag-pipeline",
+        "zh": "检索增强流程 顾问"
+      },
+      "profession": {
+        "en": "rag-pipeline",
+        "zh": "检索增强流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-latency-pro.png",
+      "id": "api-latency-pro",
+      "name": {
+        "en": "api-latency-pro",
+        "zh": "接口延迟 分段测量 顾问"
+      },
+      "profession": {
+        "en": "api-latency-pro",
+        "zh": "接口延迟 分段测量 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/artifact-version.png",
+      "id": "artifact-version",
+      "name": {
+        "en": "artifact-version",
+        "zh": "制品版本管理 顾问"
+      },
+      "profession": {
+        "en": "artifact-version",
+        "zh": "制品版本管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1134",
+  "plugin": "group-team-1134",
+  "profession": {
+    "en": "rag-pipeline Collaboration Team",
+    "zh": "检索增强流程专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 检索增强流程",
+      "zh": "帮我处理检索增强流程"
+    },
+    {
+      "en": "Plan 接口延迟",
+      "zh": "帮我规划接口延迟"
+    },
+    {
+      "en": "Review 制品版本管理",
+      "zh": "帮我检查制品版本管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "检索优先",
+      "zh": "检索优先"
+    },
+    {
+      "en": "证据绑定",
+      "zh": "证据绑定"
+    },
+    {
+      "en": "无据不答",
+      "zh": "无据不答"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "rag-pipeline-team-lead",
+    "memberAgents": [
+      "rag-pipeline",
+      "api-latency-pro",
+      "artifact-version"
+    ]
+  },
+  "version": "1.0.0"
+}

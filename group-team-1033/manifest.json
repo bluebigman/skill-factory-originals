@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1033",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1033",
+    "kind": "team",
+    "name": "实现映射专家",
+    "description": "擅长双向追踪、覆盖验证与变更影响，覆盖需求追踪全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "requirement-trace-pro-team-lead",
+        "role": "lead",
+        "name": "需求追踪主理人",
+        "evidence": null
+      },
+      {
+        "slug": "requirement-trace-pro",
+        "role": "member",
+        "name": "需求追踪 实现映射 顾问",
+        "evidence": "original_assets/requirement-trace-pro/merkle_root",
+        "member_merkle_root": "252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f"
+      },
+      {
+        "slug": "overseas-support-pro",
+        "role": "member",
+        "name": "海外客服 多语支持 顾问",
+        "evidence": "original_assets/overseas-support-pro/merkle_root",
+        "member_merkle_root": "f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3"
+      },
+      {
+        "slug": "discovery-call-coach",
+        "role": "member",
+        "name": "需求挖掘 提问框架 教练",
+        "evidence": "original_assets/discovery-call-coach/merkle_root",
+        "member_merkle_root": "5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d"
+      }
+    ],
+    "team_lead": "requirement-trace-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "48800f68dc15849f",
+  "prompt_hash": "7e4a19fd5bb9fabd",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1033\", \"kind\": \"team\", \"name\": \"实现映射专家\", \"description\": \"擅长双向追踪、覆盖验证与变更影响，覆盖需求追踪全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"requirement-trace-pro-team-lead\", \"role\": \"lead\", \"name\": \"需求追踪主理人\", \"evidence\": null}, {\"slug\": \"requirement-trace-pro\", \"role\": \"member\", \"name\": \"需求追踪 实现映射 顾问\", \"evidence\": \"original_assets/requirement-trace-pro/merkle_root\", \"member_merkle_root\": \"252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f\"}, {\"slug\": \"overseas-support-pro\", \"role\": \"member\", \"name\": \"海外客服 多语支持 顾问\", \"evidence\": \"original_assets/overseas-support-pro/merkle_root\", \"member_merkle_root\": \"f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3\"}, {\"slug\": \"discovery-call-coach\", \"role\": \"member\", \"name\": \"需求挖掘 提问框架 教练\", \"evidence\": \"original_assets/discovery-call-coach/merkle_root\", \"member_merkle_root\": \"5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d\"}], \"team_lead\": \"requirement-trace-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/discovery-call-coach.md": "0d971562cfa71c7fff0df214a157559bff8fe9dd67422db54e55efa4cac60762",
+    "agents/overseas-support-pro.md": "d00ab8197216b2fa3546a33b7fdfb8baa59ee7810e0d1eae7d95663421bed65d",
+    "agents/requirement-trace-pro-team-lead.md": "cc5749509261766489e3ae285bb018360ba6bf11ef3728d63c291039b2de8ef0",
+    "agents/requirement-trace-pro.md": "310ba80dec4f8bf0d62cdb297b7f9229e6412fc7b99f74fa61e24e6a53235b19",
+    "plugin.json": "dcc05092ebf3d733e40b664c2c36d3c3e748a1fe771659eeda315c0d0c75b3f7",
+    "settings.json": "571cc8434d5086415262acaad8f3799e2563749a8de6abaeb03f615506d4e620"
+  }
+}

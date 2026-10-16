@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-973",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-973",
+    "kind": "team",
+    "name": "规范手册专家",
+    "description": "擅长目标倒推、关注边际与预留机动，覆盖品牌语气全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "brand-voice-guide-team-lead",
+        "role": "lead",
+        "name": "品牌语气主理人",
+        "evidence": null
+      },
+      {
+        "slug": "brand-voice-guide",
+        "role": "member",
+        "name": "品牌语气 规范手册 顾问",
+        "evidence": "original_assets/brand-voice-guide/merkle_root",
+        "member_merkle_root": "fe9b169e37b9d27d701b6b351135a29afb8011fa0b36cb37b73c8e2ab804b05d"
+      },
+      {
+        "slug": "marketing-mix-pro",
+        "role": "member",
+        "name": "渠道组合 预算分配 顾问",
+        "evidence": "original_assets/marketing-mix-pro/merkle_root",
+        "member_merkle_root": "ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0"
+      },
+      {
+        "slug": "video-subtitle-pro",
+        "role": "member",
+        "name": "视频字幕 语音转写",
+        "evidence": "original_assets/video-subtitle-pro/merkle_root",
+        "member_merkle_root": "dda9415b8588836c3d75106e73e312ecd1d3de54c1beed12106ed87581708819"
+      }
+    ],
+    "team_lead": "brand-voice-guide-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6afac0922ca0c41b",
+  "prompt_hash": "522427856e26af3c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-973\", \"kind\": \"team\", \"name\": \"规范手册专家\", \"description\": \"擅长目标倒推、关注边际与预留机动，覆盖品牌语气全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"brand-voice-guide-team-lead\", \"role\": \"lead\", \"name\": \"品牌语气主理人\", \"evidence\": null}, {\"slug\": \"brand-voice-guide\", \"role\": \"member\", \"name\": \"品牌语气 规范手册 顾问\", \"evidence\": \"original_assets/brand-voice-guide/merkle_root\", \"member_merkle_root\": \"fe9b169e37b9d27d701b6b351135a29afb8011fa0b36cb37b73c8e2ab804b05d\"}, {\"slug\": \"marketing-mix-pro\", \"role\": \"member\", \"name\": \"渠道组合 预算分配 顾问\", \"evidence\": \"original_assets/marketing-mix-pro/merkle_root\", \"member_merkle_root\": \"ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0\"}, {\"slug\": \"video-subtitle-pro\", \"role\": \"member\", \"name\": \"视频字幕 语音转写\", \"evidence\": \"original_assets/video-subtitle-pro/merkle_root\", \"member_merkle_root\": \"dda9415b8588836c3d75106e73e312ecd1d3de54c1beed12106ed87581708819\"}], \"team_lead\": \"brand-voice-guide-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/brand-voice-guide-team-lead.md": "e1c3fbebd50f7ded04c4bd3c2e0a5ff01503d15a2e4313ec63d99e17ebee451d",
+    "agents/brand-voice-guide.md": "baeb90bac9f93299fd52377d923bdd6eaf8f28c3f6d2a9cccbbe9f36184783c5",
+    "agents/marketing-mix-pro.md": "a354769c9f54e61729440fb74b806239abb6c79b870439837599c851e54cd49c",
+    "agents/video-subtitle-pro.md": "7e738bf49cdc9e266da23792bc4f3d8562a4995cd9a7daeaf0cb2bbaf4d5cdb0",
+    "plugin.json": "ed59c8ad8399c8a5bee79be8874e6440ff69dc1e66ebc9f0c8257d9058c9173b",
+    "settings.json": "c99233ae99994437b665ab7e0ad9a939bd47e4670abcef42d0bf120c83419ecb"
+  }
+}

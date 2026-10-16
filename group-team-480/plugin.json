@@ -1,0 +1,126 @@
+{
+  "agentName": "ai-app-launch-safety-expert-team-lead",
+  "agents": [
+    "./agents/ai-app-launch-safety-expert-team-lead.md",
+    "./agents/ai-app-launch-safety-expert.md",
+    "./agents/api-toolkit-pro-fixed.md",
+    "./agents/agent-dependency-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle AI应用上线",
+    "zh": "帮我处理AI应用上线"
+  },
+  "description": "AI Application Pre-Launch Security Self-Audit Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 依赖检查 end-to-end: 版本锁定, 漏洞扫描 and 最小依赖. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长版本锁定、漏洞扫描与最小依赖，覆盖依赖检查全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "AI Application Pre-Launch Security Self-Audit Expert Team",
+    "zh": "应用上线专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ai-app-launch-safety-expert-team-lead",
+      "name": {
+        "en": "AI应用上线主理人",
+        "zh": "AI应用上线主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ai-app-launch-safety-expert.png",
+      "id": "ai-app-launch-safety-expert",
+      "name": {
+        "en": "AI Application Pre-Launch Security Self-Audit Expert",
+        "zh": "AI应用上线 安全自查"
+      },
+      "profession": {
+        "en": "AI Application Pre-Launch Security Self-Audit Expert",
+        "zh": "AI应用上线 安全自查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-toolkit-pro-fixed.png",
+      "id": "api-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "协议转换 REST"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "协议转换 REST"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-dependency-check.png",
+      "id": "agent-dependency-check",
+      "name": {
+        "en": "agent-dependency-check",
+        "zh": "依赖检查 版本锁定 顾问"
+      },
+      "profession": {
+        "en": "agent-dependency-check",
+        "zh": "依赖检查 版本锁定 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-480",
+  "plugin": "group-team-480",
+  "profession": {
+    "en": "AI Application Pre-Launch Security Self-Audit Expert Collaboration Team",
+    "zh": "应用上线专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle AI应用上线",
+      "zh": "帮我处理AI应用上线"
+    },
+    {
+      "en": "Plan 协议转换",
+      "zh": "帮我规划协议转换"
+    },
+    {
+      "en": "Review 依赖检查",
+      "zh": "帮我检查依赖检查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "对外入口",
+      "zh": "对外入口"
+    },
+    {
+      "en": "清点核验",
+      "zh": "清点核验"
+    },
+    {
+      "en": "代码安全",
+      "zh": "代码安全"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ai-app-launch-safety-expert-team-lead",
+    "memberAgents": [
+      "ai-app-launch-safety-expert",
+      "api-toolkit-pro-fixed",
+      "agent-dependency-check"
+    ]
+  },
+  "version": "1.0.0"
+}

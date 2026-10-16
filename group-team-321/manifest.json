@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-321",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-321",
+    "kind": "team",
+    "name": "上下 数据 表格 团队",
+    "description": "上下 数据 表格 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-context-budget-team-lead",
+        "role": "lead",
+        "name": "上下文预主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-context-budget",
+        "role": "member",
+        "name": "上下文预 分配策略 顾问",
+        "evidence": "original_assets/agent-context-budget/merkle_root",
+        "member_merkle_root": "77a00fd836b76f6b201b6a9baee3e639452e2d99002be9b92c374d174c1e4637"
+      },
+      {
+        "slug": "data-archival-pro",
+        "role": "member",
+        "name": "数据归档 冷热分层 顾问",
+        "evidence": "original_assets/data-archival-pro/merkle_root",
+        "member_merkle_root": "42715320d770aa0b53ab84a67d89a854edebeaf342219d8973dbc4fe8e8bb712"
+      },
+      {
+        "slug": "table-merge-pro",
+        "role": "member",
+        "name": "表格合并 多表对齐 顾问",
+        "evidence": "original_assets/table-merge-pro/merkle_root",
+        "member_merkle_root": "93613c351e8332ceb8715d178483ec750e082e49821a3e8827629b01b79a6d3b"
+      }
+    ],
+    "team_lead": "agent-context-budget-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "34f2eb3a06b1b64e",
+  "prompt_hash": "f99e85cf3a11ab0c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-321\", \"kind\": \"team\", \"name\": \"上下 数据 表格 团队\", \"description\": \"上下 数据 表格 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-context-budget-team-lead\", \"role\": \"lead\", \"name\": \"上下文预主理人\", \"evidence\": null}, {\"slug\": \"agent-context-budget\", \"role\": \"member\", \"name\": \"上下文预 分配策略 顾问\", \"evidence\": \"original_assets/agent-context-budget/merkle_root\", \"member_merkle_root\": \"77a00fd836b76f6b201b6a9baee3e639452e2d99002be9b92c374d174c1e4637\"}, {\"slug\": \"data-archival-pro\", \"role\": \"member\", \"name\": \"数据归档 冷热分层 顾问\", \"evidence\": \"original_assets/data-archival-pro/merkle_root\", \"member_merkle_root\": \"42715320d770aa0b53ab84a67d89a854edebeaf342219d8973dbc4fe8e8bb712\"}, {\"slug\": \"table-merge-pro\", \"role\": \"member\", \"name\": \"表格合并 多表对齐 顾问\", \"evidence\": \"original_assets/table-merge-pro/merkle_root\", \"member_merkle_root\": \"93613c351e8332ceb8715d178483ec750e082e49821a3e8827629b01b79a6d3b\"}], \"team_lead\": \"agent-context-budget-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-context-budget-team-lead.md": "b5f9bdeaff5a015f1eb30817b3f7e71f00b81deceb8cf0cfc41bef479adf68dd",
+    "agents/agent-context-budget.md": "efead054af524a1e72eb0b8941f9ad2158f4fb979c46c4386e75085cd69ace65",
+    "agents/data-archival-pro.md": "a8b0ccc07604d6fa348d2b4591daa66555c0c019c299541a13be6d0f4cef78ff",
+    "agents/table-merge-pro.md": "4fe08526e3a45d4206992368b576f97ef54183d4f20b26a6e2cf6d0307b346a1",
+    "plugin.json": "ae8c87c6eadb790550313a1949cf7ddc7578dae1f18788973c0e7a3c0fe39b0e",
+    "settings.json": "6b74a2d08dc84820733606925996a3549753526edfba8efc7204bbae036a892e"
+  }
+}

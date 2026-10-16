@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085714",
+  "slug": "group-team-1000",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1000",
+    "kind": "team",
+    "name": "任务激励专家",
+    "description": "擅长进度可见、即时反馈与难度匹配，覆盖任务激励全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "gamification-design-team-lead",
+        "role": "lead",
+        "name": "任务激励主理人",
+        "evidence": null
+      },
+      {
+        "slug": "gamification-design",
+        "role": "member",
+        "name": "任务激励 系统设计 顾问",
+        "evidence": "original_assets/gamification-design/merkle_root",
+        "member_merkle_root": "3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765"
+      },
+      {
+        "slug": "search-ux-design",
+        "role": "member",
+        "name": "搜索体验设计 顾问",
+        "evidence": "original_assets/search-ux-design/merkle_root",
+        "member_merkle_root": "cd4e5b7837e5667ee74fb734c7b4bb024ff2c4c3f6de2345d8d782a9ed451b1c"
+      },
+      {
+        "slug": "user-story-write",
+        "role": "member",
+        "name": "用户故事 撰写",
+        "evidence": "original_assets/user-story-write/merkle_root",
+        "member_merkle_root": "c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643"
+      }
+    ],
+    "team_lead": "gamification-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "747c0d99d09896f8",
+  "prompt_hash": "6c1b5f6cd6749400",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1000\", \"kind\": \"team\", \"name\": \"任务激励专家\", \"description\": \"擅长进度可见、即时反馈与难度匹配，覆盖任务激励全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"gamification-design-team-lead\", \"role\": \"lead\", \"name\": \"任务激励主理人\", \"evidence\": null}, {\"slug\": \"gamification-design\", \"role\": \"member\", \"name\": \"任务激励 系统设计 顾问\", \"evidence\": \"original_assets/gamification-design/merkle_root\", \"member_merkle_root\": \"3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765\"}, {\"slug\": \"search-ux-design\", \"role\": \"member\", \"name\": \"搜索体验设计 顾问\", \"evidence\": \"original_assets/search-ux-design/merkle_root\", \"member_merkle_root\": \"cd4e5b7837e5667ee74fb734c7b4bb024ff2c4c3f6de2345d8d782a9ed451b1c\"}, {\"slug\": \"user-story-write\", \"role\": \"member\", \"name\": \"用户故事 撰写\", \"evidence\": \"original_assets/user-story-write/merkle_root\", \"member_merkle_root\": \"c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643\"}], \"team_lead\": \"gamification-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/gamification-design-team-lead.md": "b4bbb330fdcfac9d556bd1e00c847249e7d084eaf4ea92cc1ffcd353b92eed0f",
+    "agents/gamification-design.md": "20225d0d2f2842d7a48ea855df9471ae3c819870bd746352157496ad011cc4ae",
+    "agents/search-ux-design.md": "e11955e5f9ddd498b365735779c55cba2fa34771bcfba701134313661fcff4bb",
+    "agents/user-story-write.md": "c491caec3fe7d6f48a45e74baecae817e7601b8310a63253d79e82e23b806c0f",
+    "plugin.json": "0c00849657f4bf4c81fd2fe68992988ad0ece99930c73cf40cfb5dbb2b4383a5",
+    "settings.json": "01abd0882779efde09c2fed0a5bb89c42175ddac0207b336c7217cb4acfed7db"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1149",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1149",
+    "kind": "team",
+    "name": "文档快速翻译专家",
+    "description": "输入文档快速翻译相关需求，输出先建术语、意译优先、长句拆分三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-translate-quick-team-lead",
+        "role": "lead",
+        "name": "文档快速翻译主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-translate-quick",
+        "role": "member",
+        "name": "文档快速翻译 助手",
+        "evidence": "original_assets/doc-translate-quick/merkle_root",
+        "member_merkle_root": "9400d5630e3ac698fb85eab753856dc0c6fcf678b26aa4e86e5e393ed4d5feef"
+      },
+      {
+        "slug": "naming-candidate",
+        "role": "member",
+        "name": "命名候选生成 顾问",
+        "evidence": "original_assets/naming-candidate/merkle_root",
+        "member_merkle_root": "f4e9cfe19d09e52037123fab4e4f7d6a1221be40899dc9f24987d781bc13a42e"
+      },
+      {
+        "slug": "doc-index-build",
+        "role": "member",
+        "name": "文档索引构建 助手",
+        "evidence": "original_assets/doc-index-build/merkle_root",
+        "member_merkle_root": "a9c08376873c6ad68c14f76981baec6a4843b4927005425e190c1ddd1075b8fd"
+      }
+    ],
+    "team_lead": "doc-translate-quick-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2409d749a4bad960",
+  "prompt_hash": "8b1ce68977477142",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1149\", \"kind\": \"team\", \"name\": \"文档快速翻译专家\", \"description\": \"输入文档快速翻译相关需求，输出先建术语、意译优先、长句拆分三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-translate-quick-team-lead\", \"role\": \"lead\", \"name\": \"文档快速翻译主理人\", \"evidence\": null}, {\"slug\": \"doc-translate-quick\", \"role\": \"member\", \"name\": \"文档快速翻译 助手\", \"evidence\": \"original_assets/doc-translate-quick/merkle_root\", \"member_merkle_root\": \"9400d5630e3ac698fb85eab753856dc0c6fcf678b26aa4e86e5e393ed4d5feef\"}, {\"slug\": \"naming-candidate\", \"role\": \"member\", \"name\": \"命名候选生成 顾问\", \"evidence\": \"original_assets/naming-candidate/merkle_root\", \"member_merkle_root\": \"f4e9cfe19d09e52037123fab4e4f7d6a1221be40899dc9f24987d781bc13a42e\"}, {\"slug\": \"doc-index-build\", \"role\": \"member\", \"name\": \"文档索引构建 助手\", \"evidence\": \"original_assets/doc-index-build/merkle_root\", \"member_merkle_root\": \"a9c08376873c6ad68c14f76981baec6a4843b4927005425e190c1ddd1075b8fd\"}], \"team_lead\": \"doc-translate-quick-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-index-build.md": "f34bcfe56ed61ef2c7c64f5d57fe2f81b649d353ff02a0a4f75e5c4e4cb64fa7",
+    "agents/doc-translate-quick-team-lead.md": "897b780bf8b04372ac43e31407a6f7f166da402f34b9c123cfc6b4854b370590",
+    "agents/doc-translate-quick.md": "6dba3a4cab4e84727447d58ce995eb428744d9cd30682ffd7977b7844e29f1e8",
+    "agents/naming-candidate.md": "4d172c2ae86b349334ed2551cb9bf8350f2a8e97927be3311827ffe5c459f73f",
+    "plugin.json": "f27651dfe4fcd7bec95d5f88f7ef36ff0506dd1dc3520cd823caa246c9531838",
+    "settings.json": "22fac826c407b694433f9370e404c0153caae9336f2a5a488e63d97b4c9683b0"
+  }
+}

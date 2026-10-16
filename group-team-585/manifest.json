@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-585",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-585",
+    "kind": "team",
+    "name": "游戏策划文档规范专家",
+    "description": "输入游戏界面相关需求，输出可读优先、可自定义、避开遮挡三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ui-game-hud-team-lead",
+        "role": "lead",
+        "name": "游戏界面主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ui-game-hud",
+        "role": "member",
+        "name": "游戏界面 信息层级 顾问",
+        "evidence": "original_assets/ui-game-hud/merkle_root",
+        "member_merkle_root": "fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd"
+      },
+      {
+        "slug": "game-liveops-pro",
+        "role": "member",
+        "name": "游戏运营 活动节奏 顾问",
+        "evidence": "original_assets/game-liveops-pro/merkle_root",
+        "member_merkle_root": "54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c"
+      },
+      {
+        "slug": "game-doc-standard",
+        "role": "member",
+        "name": "游戏策划 文档规范 顾问",
+        "evidence": "original_assets/game-doc-standard/merkle_root",
+        "member_merkle_root": "7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f"
+      }
+    ],
+    "team_lead": "ui-game-hud-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c28ee0e45a7710f2",
+  "prompt_hash": "f68cfffad0b5fbae",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-585\", \"kind\": \"team\", \"name\": \"游戏策划文档规范专家\", \"description\": \"输入游戏界面相关需求，输出可读优先、可自定义、避开遮挡三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ui-game-hud-team-lead\", \"role\": \"lead\", \"name\": \"游戏界面主理人\", \"evidence\": null}, {\"slug\": \"ui-game-hud\", \"role\": \"member\", \"name\": \"游戏界面 信息层级 顾问\", \"evidence\": \"original_assets/ui-game-hud/merkle_root\", \"member_merkle_root\": \"fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd\"}, {\"slug\": \"game-liveops-pro\", \"role\": \"member\", \"name\": \"游戏运营 活动节奏 顾问\", \"evidence\": \"original_assets/game-liveops-pro/merkle_root\", \"member_merkle_root\": \"54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c\"}, {\"slug\": \"game-doc-standard\", \"role\": \"member\", \"name\": \"游戏策划 文档规范 顾问\", \"evidence\": \"original_assets/game-doc-standard/merkle_root\", \"member_merkle_root\": \"7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f\"}], \"team_lead\": \"ui-game-hud-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-doc-standard.md": "680eac0b9da9f26cdb4f22d28855ff8515132f5125726603ea8d4db2988f41d8",
+    "agents/game-liveops-pro.md": "7a659c1c73b532b4d7b0d0809f745461cadc0375290a720c4851aafe3a9f40d3",
+    "agents/ui-game-hud-team-lead.md": "eb34798c5f93130408292f4a7eefd9c693b4a46525469b690cb09959351f681b",
+    "agents/ui-game-hud.md": "c942d8d3f8dbfa30094b31fb2912f74d2436fb1d352776b4f9ddbb3d86c63969",
+    "plugin.json": "b8fb49c10ab1f8fa5f51ccb4e36fe44435d200290c0e6b6099c989db1e8a420d",
+    "settings.json": "c840100d6e568aa476952ef1beba4c36069f0c289b2a26b0f5ef817ac44eff82"
+  }
+}

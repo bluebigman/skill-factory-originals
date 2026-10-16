@@ -1,0 +1,126 @@
+{
+  "agentName": "user-research-plan-team-lead",
+  "agents": [
+    "./agents/user-research-plan-team-lead.md",
+    "./agents/user-research-plan.md",
+    "./agents/cli-helper-expert.md",
+    "./agents/etl-pipeline-guard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 用户调研方案",
+    "zh": "帮我处理用户调研方案"
+  },
+  "description": "user-research-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 用户调研方案 requirements, output three deliverables: 目标明确, 样本代表, 问题中立. Verifiable end-to-end, evidence per step.",
+    "zh": "输入用户调研方案相关需求，输出目标明确、样本代表、问题中立三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "user-research-plan Team",
+    "zh": "用户调研方案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "user-research-plan-team-lead",
+      "name": {
+        "en": "用户调研方案主理人",
+        "zh": "用户调研方案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/user-research-plan.png",
+      "id": "user-research-plan",
+      "name": {
+        "en": "user-research-plan",
+        "zh": "用户调研方案 顾问"
+      },
+      "profession": {
+        "en": "user-research-plan",
+        "zh": "用户调研方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cli-helper-expert.png",
+      "id": "cli-helper-expert",
+      "name": {
+        "en": "CmdPro",
+        "zh": "命令行助手 脚本生成"
+      },
+      "profession": {
+        "en": "CmdPro",
+        "zh": "命令行助手 脚本生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/etl-pipeline-guard.png",
+      "id": "etl-pipeline-guard",
+      "name": {
+        "en": "etl-pipeline-guard",
+        "zh": "ETL 管线 顾问"
+      },
+      "profession": {
+        "en": "etl-pipeline-guard",
+        "zh": "ETL 管线 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1110",
+  "plugin": "group-team-1110",
+  "profession": {
+    "en": "user-research-plan Collaboration Team",
+    "zh": "用户调研方案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 用户调研方案",
+      "zh": "帮我处理用户调研方案"
+    },
+    {
+      "en": "Plan 命令行助手",
+      "zh": "帮我规划命令行助手"
+    },
+    {
+      "en": "Review ETL",
+      "zh": "帮我检查ETL"
+    }
+  ],
+  "tags": [
+    {
+      "en": "目标明确",
+      "zh": "目标明确"
+    },
+    {
+      "en": "样本代表",
+      "zh": "样本代表"
+    },
+    {
+      "en": "问题中立",
+      "zh": "问题中立"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "user-research-plan-team-lead",
+    "memberAgents": [
+      "user-research-plan",
+      "cli-helper-expert",
+      "etl-pipeline-guard"
+    ]
+  },
+  "version": "1.0.0"
+}

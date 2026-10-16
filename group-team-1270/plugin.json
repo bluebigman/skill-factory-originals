@@ -1,0 +1,126 @@
+{
+  "agentName": "community-ops-team-lead",
+  "agents": [
+    "./agents/community-ops-team-lead.md",
+    "./agents/community-ops.md",
+    "./agents/internal-comms-draft.md",
+    "./agents/markdown-standard-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 社群运营",
+    "zh": "帮我处理社群运营"
+  },
+  "description": "community-ops team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 社群运营 end-to-end: 规则先行, 价值供给 and 活跃机制. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长规则先行、价值供给与活跃机制，覆盖社群运营全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "community-ops Team",
+    "zh": "社群 内部 规范 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "community-ops-team-lead",
+      "name": {
+        "en": "社群运营主理人",
+        "zh": "社群运营主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/community-ops.png",
+      "id": "community-ops",
+      "name": {
+        "en": "community-ops",
+        "zh": "社群运营 顾问"
+      },
+      "profession": {
+        "en": "community-ops",
+        "zh": "社群运营 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/internal-comms-draft.png",
+      "id": "internal-comms-draft",
+      "name": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "profession": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/markdown-standard-pro.png",
+      "id": "markdown-standard-pro",
+      "name": {
+        "en": "markdown-standard-pro",
+        "zh": "Mark 规范 顾问"
+      },
+      "profession": {
+        "en": "markdown-standard-pro",
+        "zh": "Mark 规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1270",
+  "plugin": "group-team-1270",
+  "profession": {
+    "en": "community-ops Collaboration Team",
+    "zh": "社群 内部 规范 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 社群运营",
+      "zh": "帮我处理社群运营"
+    },
+    {
+      "en": "Plan 内部沟通文案",
+      "zh": "帮我规划内部沟通文案"
+    },
+    {
+      "en": "Review Mark",
+      "zh": "帮我检查Mark"
+    }
+  ],
+  "tags": [
+    {
+      "en": "规则先行",
+      "zh": "规则先行"
+    },
+    {
+      "en": "价值供给",
+      "zh": "价值供给"
+    },
+    {
+      "en": "活跃机制",
+      "zh": "活跃机制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "community-ops-team-lead",
+    "memberAgents": [
+      "community-ops",
+      "internal-comms-draft",
+      "markdown-standard-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

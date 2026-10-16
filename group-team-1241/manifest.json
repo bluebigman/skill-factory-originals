@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1241",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1241",
+    "kind": "team",
+    "name": "改进闭环专家",
+    "description": "改进闭环专家：围绕改进闭环，覆盖度量先定／小步验证／效果对照，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-improve-loop-team-lead",
+        "role": "lead",
+        "name": "改进闭环主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-improve-loop",
+        "role": "member",
+        "name": "改进闭环 度量驱动 顾问",
+        "evidence": "original_assets/agent-improve-loop/merkle_root",
+        "member_merkle_root": "b14c4541bcb71e6120033e9cbafd40573db5f714d74887ea5e797fdff5857f80"
+      },
+      {
+        "slug": "resume-job-pro",
+        "role": "member",
+        "name": "简历优化 岗位匹配 面试准备",
+        "evidence": "original_assets/resume-job-pro/merkle_root",
+        "member_merkle_root": "66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b"
+      },
+      {
+        "slug": "integration-test-pro",
+        "role": "member",
+        "name": "集成测试 场景覆盖 顾问",
+        "evidence": "original_assets/integration-test-pro/merkle_root",
+        "member_merkle_root": "11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8"
+      }
+    ],
+    "team_lead": "agent-improve-loop-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2e2a5ee3232e1cfd",
+  "prompt_hash": "7f5f8de937e2f90c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1241\", \"kind\": \"team\", \"name\": \"改进闭环专家\", \"description\": \"改进闭环专家：围绕改进闭环，覆盖度量先定／小步验证／效果对照，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-improve-loop-team-lead\", \"role\": \"lead\", \"name\": \"改进闭环主理人\", \"evidence\": null}, {\"slug\": \"agent-improve-loop\", \"role\": \"member\", \"name\": \"改进闭环 度量驱动 顾问\", \"evidence\": \"original_assets/agent-improve-loop/merkle_root\", \"member_merkle_root\": \"b14c4541bcb71e6120033e9cbafd40573db5f714d74887ea5e797fdff5857f80\"}, {\"slug\": \"resume-job-pro\", \"role\": \"member\", \"name\": \"简历优化 岗位匹配 面试准备\", \"evidence\": \"original_assets/resume-job-pro/merkle_root\", \"member_merkle_root\": \"66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b\"}, {\"slug\": \"integration-test-pro\", \"role\": \"member\", \"name\": \"集成测试 场景覆盖 顾问\", \"evidence\": \"original_assets/integration-test-pro/merkle_root\", \"member_merkle_root\": \"11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8\"}], \"team_lead\": \"agent-improve-loop-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-improve-loop-team-lead.md": "295c2fb8e35549feaa6f1ada3a7ac584e35c214fa641ba0281ce76a226d79849",
+    "agents/agent-improve-loop.md": "0934467c943342e6b9e2f2948515220704c2eafc1e41ccd22b8aa8403736880f",
+    "agents/integration-test-pro.md": "0e62ec8272d62f680bb12768f2697b3264dc0cba55fc5a768fcdf9167f745c06",
+    "agents/resume-job-pro.md": "7320c9281958079b0704e5a1e169f8f88fb8cba262454d5ca46e945843bc2465",
+    "plugin.json": "6a6139fbd5a137858fbd2ce168df84f4ac5664a5c11c3700f48aab06e981b80e",
+    "settings.json": "478eb1d1ad9740c3c5e4f380c7529f297fcfad0478ec0d6678ada20a129e577f"
+  }
+}

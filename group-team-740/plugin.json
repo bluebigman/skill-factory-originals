@@ -1,0 +1,126 @@
+{
+  "agentName": "media-process-pro-fixed-team-lead",
+  "agents": [
+    "./agents/media-process-pro-fixed-team-lead.md",
+    "./agents/media-process-pro-fixed.md",
+    "./agents/wechat-content-expert.md",
+    "./agents/doc-batch-process.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 政务设计规范",
+    "zh": "帮我处理政务设计规范"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 文档批处, covers 排版规范 / 模板先行 / 变量清单, delivering structured results and actionable checklists.",
+    "zh": "文档批处模板套用专家：围绕文档批处，覆盖排版规范／模板先行／变量清单，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "文档批处模板套用专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "media-process-pro-fixed-team-lead",
+      "name": {
+        "en": "政务设计规范主理人",
+        "zh": "政务设计规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/media-process-pro-fixed.png",
+      "id": "media-process-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/wechat-content-expert.png",
+      "id": "wechat-content-expert",
+      "name": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "profession": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-batch-process.png",
+      "id": "doc-batch-process",
+      "name": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "profession": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-740",
+  "plugin": "group-team-740",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "文档批处模板套用专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 政务设计规范",
+      "zh": "帮我处理政务设计规范"
+    },
+    {
+      "en": "Plan 号手",
+      "zh": "帮我规划号手"
+    },
+    {
+      "en": "Review 文档批处",
+      "zh": "帮我检查文档批处"
+    }
+  ],
+  "tags": [
+    {
+      "en": "审计实施",
+      "zh": "审计实施"
+    },
+    {
+      "en": "一键成片",
+      "zh": "一键成片"
+    },
+    {
+      "en": "自动剪辑",
+      "zh": "自动剪辑"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "media-process-pro-fixed-team-lead",
+    "memberAgents": [
+      "media-process-pro-fixed",
+      "wechat-content-expert",
+      "doc-batch-process"
+    ]
+  },
+  "version": "1.0.0"
+}

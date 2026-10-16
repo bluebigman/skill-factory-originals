@@ -1,0 +1,126 @@
+{
+  "agentName": "meeting-minutes-pro-team-lead",
+  "agents": [
+    "./agents/meeting-minutes-pro-team-lead.md",
+    "./agents/meeting-minutes-pro.md",
+    "./agents/file-organize-rules.md",
+    "./agents/overseas-support-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 会议纪要",
+    "zh": "帮我处理会议纪要"
+  },
+  "description": "meeting-minutes-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 会议纪要, covers 决议明确 / 截止时间 / 跟踪机制, delivering structured results and actionable checklists.",
+    "zh": "文件归集整理专家：围绕会议纪要，覆盖决议明确／截止时间／跟踪机制，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "meeting-minutes-pro Team",
+    "zh": "文件归集整理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "meeting-minutes-pro-team-lead",
+      "name": {
+        "en": "会议纪要主理人",
+        "zh": "会议纪要主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/meeting-minutes-pro.png",
+      "id": "meeting-minutes-pro",
+      "name": {
+        "en": "meeting-minutes-pro",
+        "zh": "会议纪要 决议提炼 顾问"
+      },
+      "profession": {
+        "en": "meeting-minutes-pro",
+        "zh": "会议纪要 决议提炼 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/file-organize-rules.png",
+      "id": "file-organize-rules",
+      "name": {
+        "en": "file-organize-rules",
+        "zh": "文件归集整理 助手"
+      },
+      "profession": {
+        "en": "file-organize-rules",
+        "zh": "文件归集整理 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/overseas-support-pro.png",
+      "id": "overseas-support-pro",
+      "name": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "profession": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-922",
+  "plugin": "group-team-922",
+  "profession": {
+    "en": "meeting-minutes-pro Collaboration Team",
+    "zh": "文件归集整理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 会议纪要",
+      "zh": "帮我处理会议纪要"
+    },
+    {
+      "en": "Plan 文件归集整理",
+      "zh": "帮我规划文件归集整理"
+    },
+    {
+      "en": "Review 海外客服",
+      "zh": "帮我检查海外客服"
+    }
+  ],
+  "tags": [
+    {
+      "en": "决议明确",
+      "zh": "决议明确"
+    },
+    {
+      "en": "责任人",
+      "zh": "责任人"
+    },
+    {
+      "en": "截止时间",
+      "zh": "截止时间"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "meeting-minutes-pro-team-lead",
+    "memberAgents": [
+      "meeting-minutes-pro",
+      "file-organize-rules",
+      "overseas-support-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-663",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-663",
+    "kind": "team",
+    "name": "表格清洗字段规范专家",
+    "description": "擅长数据去重、格式统一与办公表格，覆盖表格清洗字段规全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-refine-pro-team-lead",
+        "role": "lead",
+        "name": "表格清洗主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-refine-pro",
+        "role": "member",
+        "name": "表格清洗 字段规范 批量去重",
+        "evidence": "original_assets/data-refine-pro/merkle_root",
+        "member_merkle_root": "3cfd4d6a81eaa10d8b1c4dc31b8d41abecec04b881e96db123295e0aea1ba4a3"
+      },
+      {
+        "slug": "data-clean-pro-10-fixed",
+        "role": "member",
+        "name": "数据汤 批量转换 结构化输出",
+        "evidence": "original_assets/data-clean-pro-10-fixed/merkle_root",
+        "member_merkle_root": "3e847d8fde6d3812980134de12c3d7ef757090db215d1fe70f9e1749a041099b"
+      },
+      {
+        "slug": "api-address-integrity-expert",
+        "role": "member",
+        "name": "接口编码 报错修复",
+        "evidence": "original_assets/api-address-integrity-expert/merkle_root",
+        "member_merkle_root": "f7dba804fb3c6a8d437f1d220392ef6dcf2762edb4c90ba1112aeeff25d860f3"
+      }
+    ],
+    "team_lead": "data-refine-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "704dd0928dc4541b",
+  "prompt_hash": "90d78851db94a839",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-663\", \"kind\": \"team\", \"name\": \"表格清洗字段规范专家\", \"description\": \"擅长数据去重、格式统一与办公表格，覆盖表格清洗字段规全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-refine-pro-team-lead\", \"role\": \"lead\", \"name\": \"表格清洗主理人\", \"evidence\": null}, {\"slug\": \"data-refine-pro\", \"role\": \"member\", \"name\": \"表格清洗 字段规范 批量去重\", \"evidence\": \"original_assets/data-refine-pro/merkle_root\", \"member_merkle_root\": \"3cfd4d6a81eaa10d8b1c4dc31b8d41abecec04b881e96db123295e0aea1ba4a3\"}, {\"slug\": \"data-clean-pro-10-fixed\", \"role\": \"member\", \"name\": \"数据汤 批量转换 结构化输出\", \"evidence\": \"original_assets/data-clean-pro-10-fixed/merkle_root\", \"member_merkle_root\": \"3e847d8fde6d3812980134de12c3d7ef757090db215d1fe70f9e1749a041099b\"}, {\"slug\": \"api-address-integrity-expert\", \"role\": \"member\", \"name\": \"接口编码 报错修复\", \"evidence\": \"original_assets/api-address-integrity-expert/merkle_root\", \"member_merkle_root\": \"f7dba804fb3c6a8d437f1d220392ef6dcf2762edb4c90ba1112aeeff25d860f3\"}], \"team_lead\": \"data-refine-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-address-integrity-expert.md": "a88cf4bdbb4db8ddb180c189aeb74f9849b1966d187e6dddf464fceb77f09a85",
+    "agents/data-clean-pro-10-fixed.md": "05e5c0491606017161e925eb697e26b0cf38f48191de4b38ce22c6ece1a37eb2",
+    "agents/data-refine-pro-team-lead.md": "871ece44054c3d47af7df57f7fbcbb348514b221a2595f99d9a9d3f1af22d2af",
+    "agents/data-refine-pro.md": "7fd0fd42e0bc48ba3459daf9315a295a9ec2593ecb52702fc6d3cd5538dbf22c",
+    "plugin.json": "10be244c13d26cac8a5d48e93169ef2efbb67bb0639054d15c8425d54e008c29",
+    "settings.json": "904c90c97a81444dc16b7181f4376670c7c895958f442ef2c95597b7c9bf41d7"
+  }
+}

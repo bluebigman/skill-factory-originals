@@ -1,0 +1,126 @@
+{
+  "agentName": "calibration-manage-pro-team-lead",
+  "agents": [
+    "./agents/calibration-manage-pro-team-lead.md",
+    "./agents/calibration-manage-pro.md",
+    "./agents/incident-postmortem-pro.md",
+    "./agents/release-readiness-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 计量器具",
+    "zh": "帮我处理计量器具"
+  },
+  "description": "calibration-manage-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 计量器具 end-to-end: 台账齐全, 周期强制 and 状态标识. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长台账齐全、周期强制与状态标识，覆盖计量器具全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "calibration-manage-pro Team",
+    "zh": "根因分析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "calibration-manage-pro-team-lead",
+      "name": {
+        "en": "计量器具主理人",
+        "zh": "计量器具主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/calibration-manage-pro.png",
+      "id": "calibration-manage-pro",
+      "name": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "profession": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/incident-postmortem-pro.png",
+      "id": "incident-postmortem-pro",
+      "name": {
+        "en": "incident-postmortem-pro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "profession": {
+        "en": "incident-postmortem-pro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/release-readiness-pro.png",
+      "id": "release-readiness-pro",
+      "name": {
+        "en": "release-readiness-pro",
+        "zh": "发布就绪 检查清单 顾问"
+      },
+      "profession": {
+        "en": "release-readiness-pro",
+        "zh": "发布就绪 检查清单 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-768",
+  "plugin": "group-team-768",
+  "profession": {
+    "en": "calibration-manage-pro Collaboration Team",
+    "zh": "根因分析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 计量器具",
+      "zh": "帮我处理计量器具"
+    },
+    {
+      "en": "Plan 事故复盘",
+      "zh": "帮我规划事故复盘"
+    },
+    {
+      "en": "Review 发布就绪",
+      "zh": "帮我检查发布就绪"
+    }
+  ],
+  "tags": [
+    {
+      "en": "周期强制",
+      "zh": "周期强制"
+    },
+    {
+      "en": "状态标识",
+      "zh": "状态标识"
+    },
+    {
+      "en": "超期停用",
+      "zh": "超期停用"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "calibration-manage-pro-team-lead",
+    "memberAgents": [
+      "calibration-manage-pro",
+      "incident-postmortem-pro",
+      "release-readiness-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

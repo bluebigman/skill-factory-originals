@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-178",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-178",
+    "kind": "team",
+    "name": "数据库 报表 显微 团队",
+    "description": "数据库 报表 显微 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-toolkit-pro-02-fixed-team-lead",
+        "role": "lead",
+        "name": "SQL生成编辑主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-toolkit-pro-02-fixed",
+        "role": "member",
+        "name": "SQL生成编辑 查询构建器",
+        "evidence": "original_assets/sql-toolkit-pro-02-fixed/merkle_root",
+        "member_merkle_root": "d62131e5e2cf6a04bc50a510633960e582e040557f3701052d5e857bfe24a4e3"
+      },
+      {
+        "slug": "data-viz-pro-01",
+        "role": "member",
+        "name": "报表数据 配置解析 快速生成",
+        "evidence": "original_assets/data-viz-pro-01/merkle_root",
+        "member_merkle_root": "670962c43509a74e0941835667a497a475cefe86e6ca5a3831f19ce52ff38137"
+      },
+      {
+        "slug": "agent-toolkit-pro-01",
+        "role": "member",
+        "name": "显微成像 批量转换 流程编排",
+        "evidence": "original_assets/agent-toolkit-pro-01/merkle_root",
+        "member_merkle_root": "d7005dd8bd0cd1abddb92a46e8505795411060d0a7a386e382b66e793db141e2"
+      }
+    ],
+    "team_lead": "sql-toolkit-pro-02-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3614b3970df06ed2",
+  "prompt_hash": "1477e23bc9458659",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-178\", \"kind\": \"team\", \"name\": \"数据库 报表 显微 团队\", \"description\": \"数据库 报表 显微 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-toolkit-pro-02-fixed-team-lead\", \"role\": \"lead\", \"name\": \"SQL生成编辑主理人\", \"evidence\": null}, {\"slug\": \"sql-toolkit-pro-02-fixed\", \"role\": \"member\", \"name\": \"SQL生成编辑 查询构建器\", \"evidence\": \"original_assets/sql-toolkit-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"d62131e5e2cf6a04bc50a510633960e582e040557f3701052d5e857bfe24a4e3\"}, {\"slug\": \"data-viz-pro-01\", \"role\": \"member\", \"name\": \"报表数据 配置解析 快速生成\", \"evidence\": \"original_assets/data-viz-pro-01/merkle_root\", \"member_merkle_root\": \"670962c43509a74e0941835667a497a475cefe86e6ca5a3831f19ce52ff38137\"}, {\"slug\": \"agent-toolkit-pro-01\", \"role\": \"member\", \"name\": \"显微成像 批量转换 流程编排\", \"evidence\": \"original_assets/agent-toolkit-pro-01/merkle_root\", \"member_merkle_root\": \"d7005dd8bd0cd1abddb92a46e8505795411060d0a7a386e382b66e793db141e2\"}], \"team_lead\": \"sql-toolkit-pro-02-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-toolkit-pro-01.md": "44aae446c9199689fdf08503378bc963fd8c17f51c465cf86ea04e67e2f9dea3",
+    "agents/data-viz-pro-01.md": "8f5d5f0776d871fac846abf261b94b4cfa698573301b74eaab2d9f9fe0f55d0e",
+    "agents/sql-toolkit-pro-02-fixed-team-lead.md": "8de1bc78f358e572ad4e3c5004c61fa8a71b10fe7fc7a5e58f5bdc5fd1bbeed6",
+    "agents/sql-toolkit-pro-02-fixed.md": "9d6131b2897229718b00718a5bf0e28d3e41721d0327ef428835ed4ef9e90aab",
+    "plugin.json": "d17e20c6110900ed36ac0e446da663ba42e3cb76a11592495a24dc453f5e17b7",
+    "settings.json": "3256313ed4397f4a7ec07c176c427536a2e3846c51ef4bbaed5eb02a9aae89ba"
+  }
+}

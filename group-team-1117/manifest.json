@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1117",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1117",
+    "kind": "team",
+    "name": "沉浸体验专家",
+    "description": "擅长视差控制、舒适模式与单次限时，覆盖沉浸体验全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ar-vr-usability-team-lead",
+        "role": "lead",
+        "name": "沉浸体验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ar-vr-usability",
+        "role": "member",
+        "name": "沉浸体验 舒适度 顾问",
+        "evidence": "original_assets/ar-vr-usability/merkle_root",
+        "member_merkle_root": "ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849"
+      },
+      {
+        "slug": "form-design-pro",
+        "role": "member",
+        "name": "表单设计 填写体验 顾问",
+        "evidence": "original_assets/form-design-pro/merkle_root",
+        "member_merkle_root": "92da63d3661ad42ec8afcdac4e2f30e02339ef6831a86fc8f887cce94f1713bc"
+      },
+      {
+        "slug": "multiplayer-match-pro",
+        "role": "member",
+        "name": "对战匹配 公平性 顾问",
+        "evidence": "original_assets/multiplayer-match-pro/merkle_root",
+        "member_merkle_root": "028bf48a56e7674b7d3840b9a558c6b5a301da4879aecd52d353bb86adf34227"
+      }
+    ],
+    "team_lead": "ar-vr-usability-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2ed53783438a4257",
+  "prompt_hash": "946f2e37d0e984a6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1117\", \"kind\": \"team\", \"name\": \"沉浸体验专家\", \"description\": \"擅长视差控制、舒适模式与单次限时，覆盖沉浸体验全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ar-vr-usability-team-lead\", \"role\": \"lead\", \"name\": \"沉浸体验主理人\", \"evidence\": null}, {\"slug\": \"ar-vr-usability\", \"role\": \"member\", \"name\": \"沉浸体验 舒适度 顾问\", \"evidence\": \"original_assets/ar-vr-usability/merkle_root\", \"member_merkle_root\": \"ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849\"}, {\"slug\": \"form-design-pro\", \"role\": \"member\", \"name\": \"表单设计 填写体验 顾问\", \"evidence\": \"original_assets/form-design-pro/merkle_root\", \"member_merkle_root\": \"92da63d3661ad42ec8afcdac4e2f30e02339ef6831a86fc8f887cce94f1713bc\"}, {\"slug\": \"multiplayer-match-pro\", \"role\": \"member\", \"name\": \"对战匹配 公平性 顾问\", \"evidence\": \"original_assets/multiplayer-match-pro/merkle_root\", \"member_merkle_root\": \"028bf48a56e7674b7d3840b9a558c6b5a301da4879aecd52d353bb86adf34227\"}], \"team_lead\": \"ar-vr-usability-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ar-vr-usability-team-lead.md": "beb81413cd5dd14feeadff01c7ae8d1cf0d8e40e88088a20e5af2450d288c460",
+    "agents/ar-vr-usability.md": "9687ba663550db540be699590d614e5eecc3cdc8033e526f326a81676a285426",
+    "agents/form-design-pro.md": "63cf5f238f20e3d718a978391f1f711d0a251963965c286ae4e26daedccf22cd",
+    "agents/multiplayer-match-pro.md": "0e9ee8a2ba6bf307cbd4ffb2595db299327fa90080f9f29017c68978bb733326",
+    "plugin.json": "8ec1444d29d7a58fe5a3d68bf42d2d3de92e9bf31a85b6d180b9037d9ead1d81",
+    "settings.json": "9fe5096bb3f946ab7c6cfb32db4667a80c06ae1f6974dfe5b223ff58de682661"
+  }
+}

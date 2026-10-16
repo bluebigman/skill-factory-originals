@@ -1,0 +1,126 @@
+{
+  "agentName": "ops-cloud-pro-team-lead",
+  "agents": [
+    "./agents/ops-cloud-pro-team-lead.md",
+    "./agents/ops-cloud-pro.md",
+    "./agents/agent-tool-selection.md",
+    "./agents/data-clean-pro-03-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 云环境部署",
+    "zh": "帮我处理云环境部署"
+  },
+  "description": "Cloud Ops Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 工具选择 end-to-end: 选择逻辑, 依赖顺序 and 成本权衡. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长选择逻辑、依赖顺序与成本权衡，覆盖工具选择全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Cloud Ops Expert Team",
+    "zh": "工具选择专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ops-cloud-pro-team-lead",
+      "name": {
+        "en": "云环境部署主理人",
+        "zh": "云环境部署主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ops-cloud-pro.png",
+      "id": "ops-cloud-pro",
+      "name": {
+        "en": "Cloud Ops Expert",
+        "zh": "云环境部署 服务编排 运维巡检"
+      },
+      "profession": {
+        "en": "Cloud Ops Expert",
+        "zh": "云环境部署 服务编排 运维巡检"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-tool-selection.png",
+      "id": "agent-tool-selection",
+      "name": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "profession": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-03-fixed.png",
+      "id": "data-clean-pro-03-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "懒人记录 字段映射 置信标注"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "懒人记录 字段映射 置信标注"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-807",
+  "plugin": "group-team-807",
+  "profession": {
+    "en": "Cloud Ops Expert Collaboration Team",
+    "zh": "工具选择专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 云环境部署",
+      "zh": "帮我处理云环境部署"
+    },
+    {
+      "en": "Plan 工具选择",
+      "zh": "帮我规划工具选择"
+    },
+    {
+      "en": "Review 懒人记录",
+      "zh": "帮我检查懒人记录"
+    }
+  ],
+  "tags": [
+    {
+      "en": "构建器底座",
+      "zh": "构建器底座"
+    },
+    {
+      "en": "模板部署",
+      "zh": "模板部署"
+    },
+    {
+      "en": "异步日志配置",
+      "zh": "异步日志配置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ops-cloud-pro-team-lead",
+    "memberAgents": [
+      "ops-cloud-pro",
+      "agent-tool-selection",
+      "data-clean-pro-03-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

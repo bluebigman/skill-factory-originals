@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-convert-pro-fixed-team-lead",
+  "agents": [
+    "./agents/doc-convert-pro-fixed-team-lead.md",
+    "./agents/doc-convert-pro-fixed.md",
+    "./agents/review-response.md",
+    "./agents/audience-segment-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 图片标准化",
+    "zh": "帮我处理图片标准化"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 评价回应 requirements, output three deliverables: 分级响应, 公开简明, 洞察回流. Verifiable end-to-end, evidence per step.",
+    "zh": "输入评价回应相关需求，输出分级响应、公开简明、洞察回流三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "图片标准化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-convert-pro-fixed-team-lead",
+      "name": {
+        "en": "图片标准化主理人",
+        "zh": "图片标准化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-fixed.png",
+      "id": "doc-convert-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/review-response.png",
+      "id": "review-response",
+      "name": {
+        "en": "review-response",
+        "zh": "评价回应 顾问"
+      },
+      "profession": {
+        "en": "review-response",
+        "zh": "评价回应 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audience-segment-pro.png",
+      "id": "audience-segment-pro",
+      "name": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "profession": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1014",
+  "plugin": "group-team-1014",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "图片标准化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 图片标准化",
+      "zh": "帮我处理图片标准化"
+    },
+    {
+      "en": "Plan 评价回应",
+      "zh": "帮我规划评价回应"
+    },
+    {
+      "en": "Review 受众分层",
+      "zh": "帮我检查受众分层"
+    }
+  ],
+  "tags": [
+    {
+      "en": "批量压缩",
+      "zh": "批量压缩"
+    },
+    {
+      "en": "格式转换",
+      "zh": "格式转换"
+    },
+    {
+      "en": "隐私转换",
+      "zh": "隐私转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-convert-pro-fixed-team-lead",
+    "memberAgents": [
+      "doc-convert-pro-fixed",
+      "review-response",
+      "audience-segment-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

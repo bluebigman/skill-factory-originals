@@ -1,0 +1,126 @@
+{
+  "agentName": "permission-governance-pro-team-lead",
+  "agents": [
+    "./agents/permission-governance-pro-team-lead.md",
+    "./agents/permission-governance-pro.md",
+    "./agents/query-cache-pro.md",
+    "./agents/runtime-exposure-audit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 权限治理",
+    "zh": "帮我处理权限治理"
+  },
+  "description": "permission-governance-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 权限治理 end-to-end: 最小必要, 临时过期 and 凭据隔离. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长最小必要、临时过期与凭据隔离，覆盖权限治理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "permission-governance-pro Team",
+    "zh": "查询缓存专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "permission-governance-pro-team-lead",
+      "name": {
+        "en": "权限治理主理人",
+        "zh": "权限治理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/permission-governance-pro.png",
+      "id": "permission-governance-pro",
+      "name": {
+        "en": "permission-governance-pro",
+        "zh": "权限治理 最小授权 顾问"
+      },
+      "profession": {
+        "en": "permission-governance-pro",
+        "zh": "权限治理 最小授权 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/query-cache-pro.png",
+      "id": "query-cache-pro",
+      "name": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "profession": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/runtime-exposure-audit-pro.png",
+      "id": "runtime-exposure-audit-pro",
+      "name": {
+        "en": "Runtime Exposure Surface Auditor",
+        "zh": "线上权限 日志泄露 风险排查"
+      },
+      "profession": {
+        "en": "Runtime Exposure Surface Auditor",
+        "zh": "线上权限 日志泄露 风险排查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-847",
+  "plugin": "group-team-847",
+  "profession": {
+    "en": "permission-governance-pro Collaboration Team",
+    "zh": "查询缓存专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 权限治理",
+      "zh": "帮我处理权限治理"
+    },
+    {
+      "en": "Plan 查询缓存",
+      "zh": "帮我规划查询缓存"
+    },
+    {
+      "en": "Review 线上权限",
+      "zh": "帮我检查线上权限"
+    }
+  ],
+  "tags": [
+    {
+      "en": "最小必要",
+      "zh": "最小必要"
+    },
+    {
+      "en": "临时过期",
+      "zh": "临时过期"
+    },
+    {
+      "en": "凭据隔离",
+      "zh": "凭据隔离"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "permission-governance-pro-team-lead",
+    "memberAgents": [
+      "permission-governance-pro",
+      "query-cache-pro",
+      "runtime-exposure-audit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

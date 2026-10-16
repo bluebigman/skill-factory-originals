@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-170",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-170",
+    "kind": "team",
+    "name": "项目 任务 事故 跟踪 团队",
+    "description": "项目 任务 事故 跟踪 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "project-task-split-team-lead",
+        "role": "lead",
+        "name": "项目任务主理人",
+        "evidence": null
+      },
+      {
+        "slug": "project-task-split",
+        "role": "member",
+        "name": "项目任务 拆解排期 顾问",
+        "evidence": "original_assets/project-task-split/merkle_root",
+        "member_merkle_root": "4677c03eecee67b8ece86420b1a612d4ea05e30e40fab72e62d62fd42f49e5dc"
+      },
+      {
+        "slug": "incident-retro",
+        "role": "member",
+        "name": "事故复盘 根因分析 顾问",
+        "evidence": "original_assets/incident-retro/merkle_root",
+        "member_merkle_root": "0f5e9403aef3a3a93d1ff2f741504cfbb3c7d2f48fee3b6a21e68eedc9907c9a"
+      },
+      {
+        "slug": "project-tracking-pro",
+        "role": "member",
+        "name": "项目跟踪 进度汇报 风险预警",
+        "evidence": "original_assets/project-tracking-pro/merkle_root",
+        "member_merkle_root": "34d0ea06e273e6556f669503c7a78f2a47294d12e61e4d924fd84228c3fa669e"
+      }
+    ],
+    "team_lead": "project-task-split-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7149c472cb3e81ce",
+  "prompt_hash": "c0bbb5e46fa76166",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-170\", \"kind\": \"team\", \"name\": \"项目 任务 事故 跟踪 团队\", \"description\": \"项目 任务 事故 跟踪 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"project-task-split-team-lead\", \"role\": \"lead\", \"name\": \"项目任务主理人\", \"evidence\": null}, {\"slug\": \"project-task-split\", \"role\": \"member\", \"name\": \"项目任务 拆解排期 顾问\", \"evidence\": \"original_assets/project-task-split/merkle_root\", \"member_merkle_root\": \"4677c03eecee67b8ece86420b1a612d4ea05e30e40fab72e62d62fd42f49e5dc\"}, {\"slug\": \"incident-retro\", \"role\": \"member\", \"name\": \"事故复盘 根因分析 顾问\", \"evidence\": \"original_assets/incident-retro/merkle_root\", \"member_merkle_root\": \"0f5e9403aef3a3a93d1ff2f741504cfbb3c7d2f48fee3b6a21e68eedc9907c9a\"}, {\"slug\": \"project-tracking-pro\", \"role\": \"member\", \"name\": \"项目跟踪 进度汇报 风险预警\", \"evidence\": \"original_assets/project-tracking-pro/merkle_root\", \"member_merkle_root\": \"34d0ea06e273e6556f669503c7a78f2a47294d12e61e4d924fd84228c3fa669e\"}], \"team_lead\": \"project-task-split-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/incident-retro.md": "42139889a51431cfbe1c6c476bc47b0c2a50a6d0c33f7823011d7eeb93892de2",
+    "agents/project-task-split-team-lead.md": "c065e82686b215e41fb3dc7816cfd1582f5d3faf2fd5db70d2c647fb58ab3f4d",
+    "agents/project-task-split.md": "b5a0ba5dd6267358166255748e65de324c0fd3e32ef6d538b2904b16ae334622",
+    "agents/project-tracking-pro.md": "b10d31cbc465c0b8df539c6d8f20bf8d87e051d62738fe6b3e72b62b34d7a5aa",
+    "plugin.json": "a6f86348a105875ee54c783e9e9eaab3ad2b7a027d8e291dc33e285d5b9ab91a",
+    "settings.json": "90cd92fb1b47f5c66281ae7b744c06e6f259648b7900bb3ddbfb050f21121dbe"
+  }
+}

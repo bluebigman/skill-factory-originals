@@ -1,0 +1,126 @@
+{
+  "agentName": "viz-builder-expert-team-lead",
+  "agents": [
+    "./agents/viz-builder-expert-team-lead.md",
+    "./agents/viz-builder-expert.md",
+    "./agents/sql-toolkit-pro-02-fixed.md",
+    "./agents/token-cost-control-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据大屏",
+    "zh": "帮我处理数据大屏"
+  },
+  "description": "VizPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 成本控制 end-to-end: 场景选型, 组件设计 and 数据接入. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长场景选型、组件设计与数据接入，覆盖成本控制全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "VizPro Team",
+    "zh": "可视化搭建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "viz-builder-expert-team-lead",
+      "name": {
+        "en": "数据大屏主理人",
+        "zh": "数据大屏主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/viz-builder-expert.png",
+      "id": "viz-builder-expert",
+      "name": {
+        "en": "VizPro",
+        "zh": "数据大屏 可视化搭建"
+      },
+      "profession": {
+        "en": "VizPro",
+        "zh": "数据大屏 可视化搭建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-02-fixed.png",
+      "id": "sql-toolkit-pro-02-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/token-cost-control-pro.png",
+      "id": "token-cost-control-pro",
+      "name": {
+        "en": "token-cost-control-pro",
+        "zh": "成本控制 上下文压 顾问"
+      },
+      "profession": {
+        "en": "token-cost-control-pro",
+        "zh": "成本控制 上下文压 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1222",
+  "plugin": "group-team-1222",
+  "profession": {
+    "en": "VizPro Collaboration Team",
+    "zh": "可视化搭建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据大屏",
+      "zh": "帮我处理数据大屏"
+    },
+    {
+      "en": "Plan SQL生成编辑",
+      "zh": "帮我规划SQL生成编辑"
+    },
+    {
+      "en": "Review 成本控制",
+      "zh": "帮我检查成本控制"
+    }
+  ],
+  "tags": [
+    {
+      "en": "场景选型",
+      "zh": "场景选型"
+    },
+    {
+      "en": "组件设计",
+      "zh": "组件设计"
+    },
+    {
+      "en": "数据接入",
+      "zh": "数据接入"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "viz-builder-expert-team-lead",
+    "memberAgents": [
+      "viz-builder-expert",
+      "sql-toolkit-pro-02-fixed",
+      "token-cost-control-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

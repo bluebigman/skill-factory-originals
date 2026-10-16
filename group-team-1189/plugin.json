@@ -1,0 +1,126 @@
+{
+  "agentName": "csv-quick-analyze-team-lead",
+  "agents": [
+    "./agents/csv-quick-analyze-team-lead.md",
+    "./agents/csv-quick-analyze.md",
+    "./agents/metric-layer.md",
+    "./agents/sheet-master-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle CSV",
+    "zh": "帮我处理CSV"
+  },
+  "description": "csv-quick-analyze team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers CSV end-to-end: 先看结构, 缺失统计 and 分布概览. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长先看结构、缺失统计与分布概览，覆盖CSV全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "csv-quick-analyze Team",
+    "zh": "快速分析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "csv-quick-analyze-team-lead",
+      "name": {
+        "en": "CSV主理人",
+        "zh": "CSV主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/csv-quick-analyze.png",
+      "id": "csv-quick-analyze",
+      "name": {
+        "en": "csv-quick-analyze",
+        "zh": "CSV 快速分析 助手"
+      },
+      "profession": {
+        "en": "csv-quick-analyze",
+        "zh": "CSV 快速分析 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/metric-layer.png",
+      "id": "metric-layer",
+      "name": {
+        "en": "metric-layer",
+        "zh": "指标层建设 顾问"
+      },
+      "profession": {
+        "en": "metric-layer",
+        "zh": "指标层建设 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sheet-master-pro.png",
+      "id": "sheet-master-pro",
+      "name": {
+        "en": "Spreadsheet Expert",
+        "zh": "表格处理 Excel公式"
+      },
+      "profession": {
+        "en": "Spreadsheet Expert",
+        "zh": "表格处理 Excel公式"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1189",
+  "plugin": "group-team-1189",
+  "profession": {
+    "en": "csv-quick-analyze Collaboration Team",
+    "zh": "快速分析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle CSV",
+      "zh": "帮我处理CSV"
+    },
+    {
+      "en": "Plan 指标层建设",
+      "zh": "帮我规划指标层建设"
+    },
+    {
+      "en": "Review 表格处理",
+      "zh": "帮我检查表格处理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先看结构",
+      "zh": "先看结构"
+    },
+    {
+      "en": "缺失统计",
+      "zh": "缺失统计"
+    },
+    {
+      "en": "分布概览",
+      "zh": "分布概览"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "csv-quick-analyze-team-lead",
+    "memberAgents": [
+      "csv-quick-analyze",
+      "metric-layer",
+      "sheet-master-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

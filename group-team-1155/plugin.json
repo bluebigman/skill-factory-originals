@@ -1,0 +1,126 @@
+{
+  "agentName": "overseas-support-pro-team-lead",
+  "agents": [
+    "./agents/overseas-support-pro-team-lead.md",
+    "./agents/overseas-support-pro.md",
+    "./agents/doc-quick-lint.md",
+    "./agents/doc-version-diff.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 海外客服",
+    "zh": "帮我处理海外客服"
+  },
+  "description": "overseas-support-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 海外客服 requirements, output three deliverables: 时段覆盖, 问题分级, 升级路径. Verifiable end-to-end, evidence per step.",
+    "zh": "输入海外客服相关需求，输出时段覆盖、问题分级、升级路径三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "overseas-support-pro Team",
+    "zh": "海外客服专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "overseas-support-pro-team-lead",
+      "name": {
+        "en": "海外客服主理人",
+        "zh": "海外客服主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/overseas-support-pro.png",
+      "id": "overseas-support-pro",
+      "name": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "profession": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-quick-lint.png",
+      "id": "doc-quick-lint",
+      "name": {
+        "en": "doc-quick-lint",
+        "zh": "文档快速体检 助手"
+      },
+      "profession": {
+        "en": "doc-quick-lint",
+        "zh": "文档快速体检 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-version-diff.png",
+      "id": "doc-version-diff",
+      "name": {
+        "en": "doc-version-diff",
+        "zh": "文档版本比对 顾问"
+      },
+      "profession": {
+        "en": "doc-version-diff",
+        "zh": "文档版本比对 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1155",
+  "plugin": "group-team-1155",
+  "profession": {
+    "en": "overseas-support-pro Collaboration Team",
+    "zh": "海外客服专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 海外客服",
+      "zh": "帮我处理海外客服"
+    },
+    {
+      "en": "Plan 文档快速体检",
+      "zh": "帮我规划文档快速体检"
+    },
+    {
+      "en": "Review 文档版本比对",
+      "zh": "帮我检查文档版本比对"
+    }
+  ],
+  "tags": [
+    {
+      "en": "时段覆盖",
+      "zh": "时段覆盖"
+    },
+    {
+      "en": "问题分级",
+      "zh": "问题分级"
+    },
+    {
+      "en": "升级路径",
+      "zh": "升级路径"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "overseas-support-pro-team-lead",
+    "memberAgents": [
+      "overseas-support-pro",
+      "doc-quick-lint",
+      "doc-version-diff"
+    ]
+  },
+  "version": "1.0.0"
+}

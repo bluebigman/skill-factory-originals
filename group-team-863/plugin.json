@@ -1,0 +1,126 @@
+{
+  "agentName": "sheet-collab-rule-team-lead",
+  "agents": [
+    "./agents/sheet-collab-rule-team-lead.md",
+    "./agents/sheet-collab-rule.md",
+    "./agents/win-loss-analysis.md",
+    "./agents/overseas-support-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 协作表格规范",
+    "zh": "帮我处理协作表格规范"
+  },
+  "description": "sheet-collab-rule team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 协作表格规范 requirements, output three deliverables: 锁定结构, 分工明确, 数据校验. Verifiable end-to-end, evidence per step.",
+    "zh": "输入协作表格规范相关需求，输出锁定结构、分工明确、数据校验三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "sheet-collab-rule Team",
+    "zh": "协作表格规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sheet-collab-rule-team-lead",
+      "name": {
+        "en": "协作表格规范主理人",
+        "zh": "协作表格规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sheet-collab-rule.png",
+      "id": "sheet-collab-rule",
+      "name": {
+        "en": "sheet-collab-rule",
+        "zh": "协作表格规范 顾问"
+      },
+      "profession": {
+        "en": "sheet-collab-rule",
+        "zh": "协作表格规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/win-loss-analysis.png",
+      "id": "win-loss-analysis",
+      "name": {
+        "en": "win-loss-analysis",
+        "zh": "赢单复盘 归因分析 顾问"
+      },
+      "profession": {
+        "en": "win-loss-analysis",
+        "zh": "赢单复盘 归因分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/overseas-support-pro.png",
+      "id": "overseas-support-pro",
+      "name": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "profession": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-863",
+  "plugin": "group-team-863",
+  "profession": {
+    "en": "sheet-collab-rule Collaboration Team",
+    "zh": "协作表格规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 协作表格规范",
+      "zh": "帮我处理协作表格规范"
+    },
+    {
+      "en": "Plan 赢单复盘",
+      "zh": "帮我规划赢单复盘"
+    },
+    {
+      "en": "Review 海外客服",
+      "zh": "帮我检查海外客服"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分工明确",
+      "zh": "分工明确"
+    },
+    {
+      "en": "数据校验",
+      "zh": "数据校验"
+    },
+    {
+      "en": "变更可见",
+      "zh": "变更可见"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sheet-collab-rule-team-lead",
+    "memberAgents": [
+      "sheet-collab-rule",
+      "win-loss-analysis",
+      "overseas-support-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

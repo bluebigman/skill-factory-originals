@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-977",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-977",
+    "kind": "team",
+    "name": "回滚演练顾问专家",
+    "description": "擅长样件分级、爬坡曲线与工艺固化，覆盖新品导入全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "new-product-npi-pro-team-lead",
+        "role": "lead",
+        "name": "新品导入主理人",
+        "evidence": null
+      },
+      {
+        "slug": "new-product-npi-pro",
+        "role": "member",
+        "name": "新品导入 试产爬坡 顾问",
+        "evidence": "original_assets/new-product-npi-pro/merkle_root",
+        "member_merkle_root": "b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc"
+      },
+      {
+        "slug": "customer-advocacy",
+        "role": "member",
+        "name": "客户推荐 培育路径 顾问",
+        "evidence": "original_assets/customer-advocacy/merkle_root",
+        "member_merkle_root": "0e5288c288b1f5079f617f2f83ab786dbb4eab7cd944b333c8113b2ecd236a9e"
+      },
+      {
+        "slug": "rollback-drill",
+        "role": "member",
+        "name": "回滚演练 顾问",
+        "evidence": "original_assets/rollback-drill/merkle_root",
+        "member_merkle_root": "400db811a724100dfba11861375d2865e5f3b7ac02ac6128a8344519962a2487"
+      }
+    ],
+    "team_lead": "new-product-npi-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "15c18a6230e3624c",
+  "prompt_hash": "30af5e354004161b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-977\", \"kind\": \"team\", \"name\": \"回滚演练顾问专家\", \"description\": \"擅长样件分级、爬坡曲线与工艺固化，覆盖新品导入全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"new-product-npi-pro-team-lead\", \"role\": \"lead\", \"name\": \"新品导入主理人\", \"evidence\": null}, {\"slug\": \"new-product-npi-pro\", \"role\": \"member\", \"name\": \"新品导入 试产爬坡 顾问\", \"evidence\": \"original_assets/new-product-npi-pro/merkle_root\", \"member_merkle_root\": \"b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc\"}, {\"slug\": \"customer-advocacy\", \"role\": \"member\", \"name\": \"客户推荐 培育路径 顾问\", \"evidence\": \"original_assets/customer-advocacy/merkle_root\", \"member_merkle_root\": \"0e5288c288b1f5079f617f2f83ab786dbb4eab7cd944b333c8113b2ecd236a9e\"}, {\"slug\": \"rollback-drill\", \"role\": \"member\", \"name\": \"回滚演练 顾问\", \"evidence\": \"original_assets/rollback-drill/merkle_root\", \"member_merkle_root\": \"400db811a724100dfba11861375d2865e5f3b7ac02ac6128a8344519962a2487\"}], \"team_lead\": \"new-product-npi-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/customer-advocacy.md": "8c20c14c26a83b0e70b14fabfb5f3a3ffcdcf42bc8e98b3148562647dcf42c29",
+    "agents/new-product-npi-pro-team-lead.md": "12a87b40d4213cf0120f9054133c25382584fe771474c56188f5fb902abfed71",
+    "agents/new-product-npi-pro.md": "2c9e01cbc24ecf8152ea136cd20b6bb599a833dd8ba997c5246f9cf5c1e1def4",
+    "agents/rollback-drill.md": "45e5726e4ec7656bfb39d4b074352d5aeb3f643d193525b37b70bf7a3102e4e1",
+    "plugin.json": "948d7981ee16c952239404411d3461a5cc0dd2b1ce1b2dd7c480e2b6a3187ffe",
+    "settings.json": "f9dbc12764a9a5da74a6dc228ef0d862d423b62e3a8f4db76ea0f51186fd9d51"
+  }
+}

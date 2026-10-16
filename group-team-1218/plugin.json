@@ -1,0 +1,126 @@
+{
+  "agentName": "content-update-plan-team-lead",
+  "agents": [
+    "./agents/content-update-plan-team-lead.md",
+    "./agents/content-update-plan.md",
+    "./agents/marketing-mix-pro.md",
+    "./agents/tone-adaptation.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 内容更新规划",
+    "zh": "帮我处理内容更新规划"
+  },
+  "description": "content-update-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 内容更新规划 requirements, output three deliverables: 版本标注, 旧版归档, 目标倒推. Verifiable end-to-end, evidence per step.",
+    "zh": "输入内容更新规划相关需求，输出版本标注、旧版归档、目标倒推三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "content-update-plan Team",
+    "zh": "内容更新规划顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-update-plan-team-lead",
+      "name": {
+        "en": "内容更新规划主理人",
+        "zh": "内容更新规划主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-update-plan.png",
+      "id": "content-update-plan",
+      "name": {
+        "en": "content-update-plan",
+        "zh": "内容更新规划 顾问"
+      },
+      "profession": {
+        "en": "content-update-plan",
+        "zh": "内容更新规划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/marketing-mix-pro.png",
+      "id": "marketing-mix-pro",
+      "name": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "profession": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tone-adaptation.png",
+      "id": "tone-adaptation",
+      "name": {
+        "en": "tone-adaptation",
+        "zh": "语气适配改写 助手"
+      },
+      "profession": {
+        "en": "tone-adaptation",
+        "zh": "语气适配改写 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1218",
+  "plugin": "group-team-1218",
+  "profession": {
+    "en": "content-update-plan Collaboration Team",
+    "zh": "内容更新规划顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容更新规划",
+      "zh": "帮我处理内容更新规划"
+    },
+    {
+      "en": "Plan 渠道组合",
+      "zh": "帮我规划渠道组合"
+    },
+    {
+      "en": "Review 语气适配改写",
+      "zh": "帮我检查语气适配改写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按时效排",
+      "zh": "按时效排"
+    },
+    {
+      "en": "增量更新",
+      "zh": "增量更新"
+    },
+    {
+      "en": "版本标注",
+      "zh": "版本标注"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-update-plan-team-lead",
+    "memberAgents": [
+      "content-update-plan",
+      "marketing-mix-pro",
+      "tone-adaptation"
+    ]
+  },
+  "version": "1.0.0"
+}

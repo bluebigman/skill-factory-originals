@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1178",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1178",
+    "kind": "team",
+    "name": "自动化审计顾问专家",
+    "description": "自动化审计顾问专家：围绕自动化审计，覆盖触发核对／僵尸清理／冲突检查，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "automation-audit-team-lead",
+        "role": "lead",
+        "name": "自动化审计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "automation-audit",
+        "role": "member",
+        "name": "自动化审计 顾问",
+        "evidence": "original_assets/automation-audit/merkle_root",
+        "member_merkle_root": "e07c6cc059e620155a5a44575a8df11a13c86b7d317ad7710dd7f35150105627"
+      },
+      {
+        "slug": "document-control",
+        "role": "member",
+        "name": "文件受控管理 顾问",
+        "evidence": "original_assets/document-control/merkle_root",
+        "member_merkle_root": "ffd71edfaca29b725781841c093e149519259ebcf5b8de045042dfb809fc66dd"
+      },
+      {
+        "slug": "sop-compliance-check",
+        "role": "member",
+        "name": "流程合规 步骤核验 顾问",
+        "evidence": "original_assets/sop-compliance-check/merkle_root",
+        "member_merkle_root": "eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f"
+      }
+    ],
+    "team_lead": "automation-audit-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1f1383423b9f2f02",
+  "prompt_hash": "7c2b2693c9de8d3a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1178\", \"kind\": \"team\", \"name\": \"自动化审计顾问专家\", \"description\": \"自动化审计顾问专家：围绕自动化审计，覆盖触发核对／僵尸清理／冲突检查，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"automation-audit-team-lead\", \"role\": \"lead\", \"name\": \"自动化审计主理人\", \"evidence\": null}, {\"slug\": \"automation-audit\", \"role\": \"member\", \"name\": \"自动化审计 顾问\", \"evidence\": \"original_assets/automation-audit/merkle_root\", \"member_merkle_root\": \"e07c6cc059e620155a5a44575a8df11a13c86b7d317ad7710dd7f35150105627\"}, {\"slug\": \"document-control\", \"role\": \"member\", \"name\": \"文件受控管理 顾问\", \"evidence\": \"original_assets/document-control/merkle_root\", \"member_merkle_root\": \"ffd71edfaca29b725781841c093e149519259ebcf5b8de045042dfb809fc66dd\"}, {\"slug\": \"sop-compliance-check\", \"role\": \"member\", \"name\": \"流程合规 步骤核验 顾问\", \"evidence\": \"original_assets/sop-compliance-check/merkle_root\", \"member_merkle_root\": \"eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f\"}], \"team_lead\": \"automation-audit-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/automation-audit-team-lead.md": "6df401d93f9a3b1a66772959875a3c769e18363dca6b0ed528579f1edc2c7e29",
+    "agents/automation-audit.md": "ddb9049c712924cd463aebb4928b0a89431dff65b4e9f057cf7a75545816b9ae",
+    "agents/document-control.md": "013f81e11bbb18acc15ca3b576d90f775e2401e573e6e9771e97f5ce9db22b94",
+    "agents/sop-compliance-check.md": "c89924b9d958b1130d77a0a850d551c6fd20c79d8f5cdf402e7483c13738213d",
+    "plugin.json": "268d54247a2545842f40b5ff0586c0ddd10cf07e2344c3d0c726436ce1a76815",
+    "settings.json": "2f2b1e196a0779acbd77eb035f4b88d7f04c64e1691a4ca4e1a32df92b87da9e"
+  }
+}

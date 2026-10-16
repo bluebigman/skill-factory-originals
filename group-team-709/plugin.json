@@ -1,0 +1,126 @@
+{
+  "agentName": "db-index-audit-team-lead",
+  "agents": [
+    "./agents/db-index-audit-team-lead.md",
+    "./agents/db-index-audit.md",
+    "./agents/sql-master-pro.md",
+    "./agents/growth-dashboard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 索引审计",
+    "zh": "帮我处理索引审计"
+  },
+  "description": "db-index-audit team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 索引审计 end-to-end: 冗余检测, 缺失检测 and 变更谨慎. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长冗余检测、缺失检测与变更谨慎，覆盖索引审计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "db-index-audit Team",
+    "zh": "索引审计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "db-index-audit-team-lead",
+      "name": {
+        "en": "索引审计主理人",
+        "zh": "索引审计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/db-index-audit.png",
+      "id": "db-index-audit",
+      "name": {
+        "en": "db-index-audit",
+        "zh": "索引审计 冗余识别 顾问"
+      },
+      "profession": {
+        "en": "db-index-audit",
+        "zh": "索引审计 冗余识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-master-pro.png",
+      "id": "sql-master-pro",
+      "name": {
+        "en": "SQL Database Expert",
+        "zh": "数据库查询 SQL编写"
+      },
+      "profession": {
+        "en": "SQL Database Expert",
+        "zh": "数据库查询 SQL编写"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/growth-dashboard.png",
+      "id": "growth-dashboard",
+      "name": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "profession": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-709",
+  "plugin": "group-team-709",
+  "profession": {
+    "en": "db-index-audit Collaboration Team",
+    "zh": "索引审计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 索引审计",
+      "zh": "帮我处理索引审计"
+    },
+    {
+      "en": "Plan 数据库查询",
+      "zh": "帮我规划数据库查询"
+    },
+    {
+      "en": "Review 增长看板",
+      "zh": "帮我检查增长看板"
+    }
+  ],
+  "tags": [
+    {
+      "en": "冗余检测",
+      "zh": "冗余检测"
+    },
+    {
+      "en": "缺失检测",
+      "zh": "缺失检测"
+    },
+    {
+      "en": "变更谨慎",
+      "zh": "变更谨慎"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "db-index-audit-team-lead",
+    "memberAgents": [
+      "db-index-audit",
+      "sql-master-pro",
+      "growth-dashboard"
+    ]
+  },
+  "version": "1.0.0"
+}

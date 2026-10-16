@@ -1,0 +1,126 @@
+{
+  "agentName": "data-consistency-check-team-lead",
+  "agents": [
+    "./agents/data-consistency-check-team-lead.md",
+    "./agents/data-consistency-check.md",
+    "./agents/attribution-basic.md",
+    "./agents/browser-flow-record.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据一致性核验",
+    "zh": "帮我处理数据一致性核验"
+  },
+  "description": "data-consistency-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 数据一致性核验, covers 定义口径 / 双向比对 / 差异分级, delivering structured results and actionable checklists.",
+    "zh": "数据一致性核验专家：围绕数据一致性核验，覆盖定义口径／双向比对／差异分级，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "data-consistency-check Team",
+    "zh": "数据一致性核验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-consistency-check-team-lead",
+      "name": {
+        "en": "数据一致性核验主理人",
+        "zh": "数据一致性核验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-consistency-check.png",
+      "id": "data-consistency-check",
+      "name": {
+        "en": "data-consistency-check",
+        "zh": "数据一致性核验 助手"
+      },
+      "profession": {
+        "en": "data-consistency-check",
+        "zh": "数据一致性核验 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/attribution-basic.png",
+      "id": "attribution-basic",
+      "name": {
+        "en": "attribution-basic",
+        "zh": "效果归因 口径统一 顾问"
+      },
+      "profession": {
+        "en": "attribution-basic",
+        "zh": "效果归因 口径统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/browser-flow-record.png",
+      "id": "browser-flow-record",
+      "name": {
+        "en": "browser-flow-record",
+        "zh": "浏览器流程录制 助手"
+      },
+      "profession": {
+        "en": "browser-flow-record",
+        "zh": "浏览器流程录制 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1085",
+  "plugin": "group-team-1085",
+  "profession": {
+    "en": "data-consistency-check Collaboration Team",
+    "zh": "数据一致性核验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据一致性核验",
+      "zh": "帮我处理数据一致性核验"
+    },
+    {
+      "en": "Plan 效果归因",
+      "zh": "帮我规划效果归因"
+    },
+    {
+      "en": "Review 浏览器流程录制",
+      "zh": "帮我检查浏览器流程录制"
+    }
+  ],
+  "tags": [
+    {
+      "en": "定义口径",
+      "zh": "定义口径"
+    },
+    {
+      "en": "双向比对",
+      "zh": "双向比对"
+    },
+    {
+      "en": "差异分级",
+      "zh": "差异分级"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-consistency-check-team-lead",
+    "memberAgents": [
+      "data-consistency-check",
+      "attribution-basic",
+      "browser-flow-record"
+    ]
+  },
+  "version": "1.0.0"
+}

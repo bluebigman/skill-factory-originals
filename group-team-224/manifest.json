@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-224",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-224",
+    "kind": "team",
+    "name": "网页 识别 提示词 团队",
+    "description": "网页 识别 提示词 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "web-extract-pro-team-lead",
+        "role": "lead",
+        "name": "网页提取主理人",
+        "evidence": null
+      },
+      {
+        "slug": "web-extract-pro",
+        "role": "member",
+        "name": "网页提取 结构化解析",
+        "evidence": "original_assets/web-extract-pro/merkle_root",
+        "member_merkle_root": "0c86d79514fd5e4a26a868855046fba24b197d1876285a6fede8fb08ccb2eb06"
+      },
+      {
+        "slug": "ocr-doc-parse-expert",
+        "role": "member",
+        "name": "OCR 图文识别 版面还原",
+        "evidence": "original_assets/ocr-doc-parse-expert/merkle_root",
+        "member_merkle_root": "f59361f0b4972060b4e37f471b1e345df1580bd3ae5eadab9a37f45e94f7b821"
+      },
+      {
+        "slug": "prompt-effect-tuning-expert",
+        "role": "member",
+        "name": "提示词 效果优化 调优助手",
+        "evidence": "original_assets/prompt-effect-tuning-expert/merkle_root",
+        "member_merkle_root": "42542ae4f6bc6b755e28389604837b7ee54457ddcbfbcec2d7a88ba1cca3d121"
+      }
+    ],
+    "team_lead": "web-extract-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "222bbc6ae21da7fd",
+  "prompt_hash": "561b0a91aa0b58f9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-224\", \"kind\": \"team\", \"name\": \"网页 识别 提示词 团队\", \"description\": \"网页 识别 提示词 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"web-extract-pro-team-lead\", \"role\": \"lead\", \"name\": \"网页提取主理人\", \"evidence\": null}, {\"slug\": \"web-extract-pro\", \"role\": \"member\", \"name\": \"网页提取 结构化解析\", \"evidence\": \"original_assets/web-extract-pro/merkle_root\", \"member_merkle_root\": \"0c86d79514fd5e4a26a868855046fba24b197d1876285a6fede8fb08ccb2eb06\"}, {\"slug\": \"ocr-doc-parse-expert\", \"role\": \"member\", \"name\": \"OCR 图文识别 版面还原\", \"evidence\": \"original_assets/ocr-doc-parse-expert/merkle_root\", \"member_merkle_root\": \"f59361f0b4972060b4e37f471b1e345df1580bd3ae5eadab9a37f45e94f7b821\"}, {\"slug\": \"prompt-effect-tuning-expert\", \"role\": \"member\", \"name\": \"提示词 效果优化 调优助手\", \"evidence\": \"original_assets/prompt-effect-tuning-expert/merkle_root\", \"member_merkle_root\": \"42542ae4f6bc6b755e28389604837b7ee54457ddcbfbcec2d7a88ba1cca3d121\"}], \"team_lead\": \"web-extract-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ocr-doc-parse-expert.md": "956881056ae9475bf9ded8a7bd0b9f4660df5380fd2653ca40b374e4c31faae1",
+    "agents/prompt-effect-tuning-expert.md": "4568699ca951593242934470d72389346dd611513b3b2ae94de5a9275e70df91",
+    "agents/web-extract-pro-team-lead.md": "80fe410ec95ca984133033f23f52b175b3a68f7b301880334d162ae39e6e66db",
+    "agents/web-extract-pro.md": "fbb6f4bcf5053a8182d3ca597040d50a2c64085dca9d2dbd758367f3d8ef8871",
+    "plugin.json": "1cad6a102ac43ba7cf3618409d2e854e40c8d1dd5771e04526bbbada714645c5",
+    "settings.json": "bb5d20fce837ac33fe391d3633165e7e5b7764e695c1f9710542316a4b66bd5b"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-toolkit-pro-fixed-team-lead",
+  "agents": [
+    "./agents/sql-toolkit-pro-fixed-team-lead.md",
+    "./agents/sql-toolkit-pro-fixed.md",
+    "./agents/toolkit-pro-08-fixed.md",
+    "./agents/log-standard-define.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 关系查询",
+    "zh": "帮我处理关系查询"
+  },
+  "description": "SQL Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 日志规范, covers 分级明确 / 必含字段 / 敏感脱敏, delivering structured results and actionable checklists.",
+    "zh": "样例解析专家：围绕日志规范，覆盖分级明确／必含字段／敏感脱敏，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "SQL Suite Team",
+    "zh": "样例解析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-toolkit-pro-fixed-team-lead",
+      "name": {
+        "en": "关系查询主理人",
+        "zh": "关系查询主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-fixed.png",
+      "id": "sql-toolkit-pro-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "关系查询 HEC 方言适配"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-08-fixed.png",
+      "id": "toolkit-pro-08-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/log-standard-define.png",
+      "id": "log-standard-define",
+      "name": {
+        "en": "log-standard-define",
+        "zh": "日志规范 制定"
+      },
+      "profession": {
+        "en": "log-standard-define",
+        "zh": "日志规范 制定"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1259",
+  "plugin": "group-team-1259",
+  "profession": {
+    "en": "SQL Suite Collaboration Team",
+    "zh": "样例解析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 关系查询",
+      "zh": "帮我处理关系查询"
+    },
+    {
+      "en": "Plan UX设计",
+      "zh": "帮我规划UX设计"
+    },
+    {
+      "en": "Review 日志规范",
+      "zh": "帮我检查日志规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "关系查询",
+      "zh": "关系查询"
+    },
+    {
+      "en": "类型安全",
+      "zh": "类型安全"
+    },
+    {
+      "en": "记录转换",
+      "zh": "记录转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-toolkit-pro-fixed-team-lead",
+    "memberAgents": [
+      "sql-toolkit-pro-fixed",
+      "toolkit-pro-08-fixed",
+      "log-standard-define"
+    ]
+  },
+  "version": "1.0.0"
+}

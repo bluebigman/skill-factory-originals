@@ -1,0 +1,126 @@
+{
+  "agentName": "presales-support-pro-team-lead",
+  "agents": [
+    "./agents/presales-support-pro-team-lead.md",
+    "./agents/presales-support-pro.md",
+    "./agents/resume-job-pro.md",
+    "./agents/project-manage-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 售前支持",
+    "zh": "帮我处理售前支持"
+  },
+  "description": "presales-support-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 售前支持 end-to-end: 需求转译, 范围界定 and 承诺可验. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长需求转译、范围界定与承诺可验，覆盖售前支持全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "presales-support-pro Team",
+    "zh": "售前支持方案配合专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "presales-support-pro-team-lead",
+      "name": {
+        "en": "售前支持主理人",
+        "zh": "售前支持主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/presales-support-pro.png",
+      "id": "presales-support-pro",
+      "name": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "profession": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/resume-job-pro.png",
+      "id": "resume-job-pro",
+      "name": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "profession": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/project-manage-pro.png",
+      "id": "project-manage-pro",
+      "name": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "profession": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-745",
+  "plugin": "group-team-745",
+  "profession": {
+    "en": "presales-support-pro Collaboration Team",
+    "zh": "售前支持方案配合专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 售前支持",
+      "zh": "帮我处理售前支持"
+    },
+    {
+      "en": "Plan 简历优化",
+      "zh": "帮我规划简历优化"
+    },
+    {
+      "en": "Review 项目任务管理",
+      "zh": "帮我检查项目任务管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "需求转译",
+      "zh": "需求转译"
+    },
+    {
+      "en": "范围界定",
+      "zh": "范围界定"
+    },
+    {
+      "en": "承诺可验",
+      "zh": "承诺可验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "presales-support-pro-team-lead",
+    "memberAgents": [
+      "presales-support-pro",
+      "resume-job-pro",
+      "project-manage-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

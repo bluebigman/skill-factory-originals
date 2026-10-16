@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-885",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-885",
+    "kind": "team",
+    "name": "报告数据核验专家",
+    "description": "报告数据核验专家：围绕报告数据核验，覆盖口径先对／交叉验证／异常问因，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-data-verify-team-lead",
+        "role": "lead",
+        "name": "报告数据核验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-data-verify",
+        "role": "member",
+        "name": "报告数据核验 顾问",
+        "evidence": "original_assets/report-data-verify/merkle_root",
+        "member_merkle_root": "577adfc1ad40ebc68b3efd1c7650d85b61e80dc2414dc9f73cf114da694136b4"
+      },
+      {
+        "slug": "sop-compliance-check",
+        "role": "member",
+        "name": "流程合规 步骤核验 顾问",
+        "evidence": "original_assets/sop-compliance-check/merkle_root",
+        "member_merkle_root": "eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f"
+      },
+      {
+        "slug": "global-payment-ops",
+        "role": "member",
+        "name": "跨境收款 流程核对 顾问",
+        "evidence": "original_assets/global-payment-ops/merkle_root",
+        "member_merkle_root": "91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0"
+      }
+    ],
+    "team_lead": "report-data-verify-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "656794848ea29432",
+  "prompt_hash": "d0eadae0b54d8f2d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-885\", \"kind\": \"team\", \"name\": \"报告数据核验专家\", \"description\": \"报告数据核验专家：围绕报告数据核验，覆盖口径先对／交叉验证／异常问因，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-data-verify-team-lead\", \"role\": \"lead\", \"name\": \"报告数据核验主理人\", \"evidence\": null}, {\"slug\": \"report-data-verify\", \"role\": \"member\", \"name\": \"报告数据核验 顾问\", \"evidence\": \"original_assets/report-data-verify/merkle_root\", \"member_merkle_root\": \"577adfc1ad40ebc68b3efd1c7650d85b61e80dc2414dc9f73cf114da694136b4\"}, {\"slug\": \"sop-compliance-check\", \"role\": \"member\", \"name\": \"流程合规 步骤核验 顾问\", \"evidence\": \"original_assets/sop-compliance-check/merkle_root\", \"member_merkle_root\": \"eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f\"}, {\"slug\": \"global-payment-ops\", \"role\": \"member\", \"name\": \"跨境收款 流程核对 顾问\", \"evidence\": \"original_assets/global-payment-ops/merkle_root\", \"member_merkle_root\": \"91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0\"}], \"team_lead\": \"report-data-verify-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/global-payment-ops.md": "3b62389b2968653d060ad9953802aaab5d07e8a28aeabfba180cf24ee18cec67",
+    "agents/report-data-verify-team-lead.md": "9b705dfdc10d4ca5d4eaa8bf8118d5bc5e3209dccb0bc10eb0ed9978f27dc518",
+    "agents/report-data-verify.md": "e7a89efde20df7449bed668c38dc04aa0bdebac43003202e624a1cce2e0f1d0a",
+    "agents/sop-compliance-check.md": "834c4f57036f4ea70407f1df6b478803ae26b97be9652a73497e5f636d1aa28d",
+    "plugin.json": "cc580e5f024b4e08ce1b637bdde6c4ac0273a672678e8bb4d3eca2c1a2faad96",
+    "settings.json": "9a5d81f8553be3b57f8bf76832b87b423d5015665217dccc97c8a5db67b26db0"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-trace-audit-pro-team-lead",
+  "agents": [
+    "./agents/agent-trace-audit-pro-team-lead.md",
+    "./agents/agent-trace-audit-pro.md",
+    "./agents/influencer-compliance.md",
+    "./agents/safety-production-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 行为审计",
+    "zh": "帮我处理行为审计"
+  },
+  "description": "agent-trace-audit-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 行为审计 end-to-end: 决策留痕, 来源可溯 and 异常接管. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长决策留痕、来源可溯与异常接管，覆盖行为审计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-trace-audit-pro Team",
+    "zh": "轨迹留痕专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-trace-audit-pro-team-lead",
+      "name": {
+        "en": "行为审计主理人",
+        "zh": "行为审计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-trace-audit-pro.png",
+      "id": "agent-trace-audit-pro",
+      "name": {
+        "en": "agent-trace-audit-pro",
+        "zh": "行为审计 轨迹留痕 顾问"
+      },
+      "profession": {
+        "en": "agent-trace-audit-pro",
+        "zh": "行为审计 轨迹留痕 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/influencer-compliance.png",
+      "id": "influencer-compliance",
+      "name": {
+        "en": "influencer-compliance",
+        "zh": "推广合规 标识规范 顾问"
+      },
+      "profession": {
+        "en": "influencer-compliance",
+        "zh": "推广合规 标识规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/safety-production-pro.png",
+      "id": "safety-production-pro",
+      "name": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "profession": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-402",
+  "plugin": "group-team-402",
+  "profession": {
+    "en": "agent-trace-audit-pro Collaboration Team",
+    "zh": "轨迹留痕专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 行为审计",
+      "zh": "帮我处理行为审计"
+    },
+    {
+      "en": "Plan 推广合规",
+      "zh": "帮我规划推广合规"
+    },
+    {
+      "en": "Review 生产安全",
+      "zh": "帮我检查生产安全"
+    }
+  ],
+  "tags": [
+    {
+      "en": "决策留痕",
+      "zh": "决策留痕"
+    },
+    {
+      "en": "来源可溯",
+      "zh": "来源可溯"
+    },
+    {
+      "en": "异常接管",
+      "zh": "异常接管"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-trace-audit-pro-team-lead",
+    "memberAgents": [
+      "agent-trace-audit-pro",
+      "influencer-compliance",
+      "safety-production-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

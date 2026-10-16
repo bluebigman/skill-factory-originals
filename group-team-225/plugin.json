@@ -1,0 +1,126 @@
+{
+  "agentName": "api-contract-sentinel-team-lead",
+  "agents": [
+    "./agents/api-contract-sentinel-team-lead.md",
+    "./agents/api-contract-sentinel.md",
+    "./agents/tool-interface-design.md",
+    "./agents/observability-inject.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口契约",
+    "zh": "帮我处理接口契约"
+  },
+  "description": "API Contract Sentinel team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "接口 工具 链路 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "API Contract Sentinel Team",
+    "zh": "接口 工具 链路 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-contract-sentinel-team-lead",
+      "name": {
+        "en": "接口契约主理人",
+        "zh": "接口契约主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-contract-sentinel.png",
+      "id": "api-contract-sentinel",
+      "name": {
+        "en": "API Contract Sentinel",
+        "zh": "接口契约 分页字段 请求头"
+      },
+      "profession": {
+        "en": "API Contract Sentinel",
+        "zh": "接口契约 分页字段 请求头"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tool-interface-design.png",
+      "id": "tool-interface-design",
+      "name": {
+        "en": "Tool Interface Design",
+        "zh": "工具设计 接口契约 描述规范"
+      },
+      "profession": {
+        "en": "Tool Interface Design",
+        "zh": "工具设计 接口契约 描述规范"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/observability-inject.png",
+      "id": "observability-inject",
+      "name": {
+        "en": "Observability Injection",
+        "zh": "链路追踪 指标埋点 异常告警"
+      },
+      "profession": {
+        "en": "Observability Injection",
+        "zh": "链路追踪 指标埋点 异常告警"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-225",
+  "plugin": "group-team-225",
+  "profession": {
+    "en": "API Contract Sentinel Collaboration Team",
+    "zh": "接口 工具 链路 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口契约",
+      "zh": "帮我处理接口契约"
+    },
+    {
+      "en": "Plan 工具设计",
+      "zh": "帮我规划工具设计"
+    },
+    {
+      "en": "Review 链路追踪",
+      "zh": "帮我检查链路追踪"
+    }
+  ],
+  "tags": [
+    {
+      "en": "接口契约",
+      "zh": "接口契约"
+    },
+    {
+      "en": "工具设计",
+      "zh": "工具设计"
+    },
+    {
+      "en": "链路追踪",
+      "zh": "链路追踪"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-contract-sentinel-team-lead",
+    "memberAgents": [
+      "api-contract-sentinel",
+      "tool-interface-design",
+      "observability-inject"
+    ]
+  },
+  "version": "1.0.0"
+}

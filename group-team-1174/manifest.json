@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1174",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1174",
+    "kind": "team",
+    "name": "备份安全专家",
+    "description": "擅长加密存储、访问控制与异地副本，覆盖备份安全全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "backup-security-team-lead",
+        "role": "lead",
+        "name": "备份安全主理人",
+        "evidence": null
+      },
+      {
+        "slug": "backup-security",
+        "role": "member",
+        "name": "备份安全 顾问",
+        "evidence": "original_assets/backup-security/merkle_root",
+        "member_merkle_root": "da21c0477471693d1c339b2210fa61d16d6aa614a5cf0a03fcec9bb890f2e697"
+      },
+      {
+        "slug": "data-onboarding-doc",
+        "role": "member",
+        "name": "数据上手文档 助手",
+        "evidence": "original_assets/data-onboarding-doc/merkle_root",
+        "member_merkle_root": "786abc4c649d4012137ddce2d9ae1f7cc831bad6f3f91c3aff1b488741d98132"
+      },
+      {
+        "slug": "query-cost-control",
+        "role": "member",
+        "name": "查询成本管控 顾问",
+        "evidence": "original_assets/query-cost-control/merkle_root",
+        "member_merkle_root": "ae3e10fea462a4d4ce16e52f8532da2e1444977d00658924ae9e44338b8735fc"
+      }
+    ],
+    "team_lead": "backup-security-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "833fe39ebf415080",
+  "prompt_hash": "4aa44bc2b6fa8cb6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1174\", \"kind\": \"team\", \"name\": \"备份安全专家\", \"description\": \"擅长加密存储、访问控制与异地副本，覆盖备份安全全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"backup-security-team-lead\", \"role\": \"lead\", \"name\": \"备份安全主理人\", \"evidence\": null}, {\"slug\": \"backup-security\", \"role\": \"member\", \"name\": \"备份安全 顾问\", \"evidence\": \"original_assets/backup-security/merkle_root\", \"member_merkle_root\": \"da21c0477471693d1c339b2210fa61d16d6aa614a5cf0a03fcec9bb890f2e697\"}, {\"slug\": \"data-onboarding-doc\", \"role\": \"member\", \"name\": \"数据上手文档 助手\", \"evidence\": \"original_assets/data-onboarding-doc/merkle_root\", \"member_merkle_root\": \"786abc4c649d4012137ddce2d9ae1f7cc831bad6f3f91c3aff1b488741d98132\"}, {\"slug\": \"query-cost-control\", \"role\": \"member\", \"name\": \"查询成本管控 顾问\", \"evidence\": \"original_assets/query-cost-control/merkle_root\", \"member_merkle_root\": \"ae3e10fea462a4d4ce16e52f8532da2e1444977d00658924ae9e44338b8735fc\"}], \"team_lead\": \"backup-security-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/backup-security-team-lead.md": "a6d3e4d73a637b281ab1fb58e798eb9ec129679ee0a85359bdee2cf25f7cfe58",
+    "agents/backup-security.md": "9a7c2da303683c332dd1c15131acf1fd4c0e231bc250afa3e82567e344503009",
+    "agents/data-onboarding-doc.md": "75c63a3fa8ba66ea89ef2a2b6daca5830fb830d3655a78ebe627ba22977df413",
+    "agents/query-cost-control.md": "77bd94bab71ee62b968eb56e3d2d47e30ed4f2d0b432bfdf90c9498659dee6c4",
+    "plugin.json": "9876b87321fee3cd679900a10466fe161157aa258be4c1bd44dc167cf9f349dc",
+    "settings.json": "e319c2c94d0f259dfb9aeccbdeaa99dbed99b7e1626dfef9fec4dd32bc5c6e21"
+  }
+}

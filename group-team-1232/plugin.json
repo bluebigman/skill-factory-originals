@@ -1,0 +1,126 @@
+{
+  "agentName": "oncall-handbook-team-lead",
+  "agents": [
+    "./agents/oncall-handbook-team-lead.md",
+    "./agents/oncall-handbook.md",
+    "./agents/partner-screen.md",
+    "./agents/sales-territory-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 值班手册",
+    "zh": "帮我处理值班手册"
+  },
+  "description": "oncall-handbook team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 值班手册, covers 升级路径 / 常用命令 / 演练更新, delivering structured results and actionable checklists.",
+    "zh": "值班手册编写专家：围绕值班手册，覆盖升级路径／常用命令／演练更新，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "oncall-handbook Team",
+    "zh": "值班手册编写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "oncall-handbook-team-lead",
+      "name": {
+        "en": "值班手册主理人",
+        "zh": "值班手册主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/oncall-handbook.png",
+      "id": "oncall-handbook",
+      "name": {
+        "en": "oncall-handbook",
+        "zh": "值班手册 编写"
+      },
+      "profession": {
+        "en": "oncall-handbook",
+        "zh": "值班手册 编写"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/partner-screen.png",
+      "id": "partner-screen",
+      "name": {
+        "en": "partner-screen",
+        "zh": "合作方筛选 顾问"
+      },
+      "profession": {
+        "en": "partner-screen",
+        "zh": "合作方筛选 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sales-territory-pro.png",
+      "id": "sales-territory-pro",
+      "name": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "profession": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1232",
+  "plugin": "group-team-1232",
+  "profession": {
+    "en": "oncall-handbook Collaboration Team",
+    "zh": "值班手册编写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 值班手册",
+      "zh": "帮我处理值班手册"
+    },
+    {
+      "en": "Plan 合作方筛选",
+      "zh": "帮我规划合作方筛选"
+    },
+    {
+      "en": "Review 区域划分",
+      "zh": "帮我检查区域划分"
+    }
+  ],
+  "tags": [
+    {
+      "en": "首屏告警处置",
+      "zh": "首屏告警处置"
+    },
+    {
+      "en": "升级路径",
+      "zh": "升级路径"
+    },
+    {
+      "en": "常用命令",
+      "zh": "常用命令"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "oncall-handbook-team-lead",
+    "memberAgents": [
+      "oncall-handbook",
+      "partner-screen",
+      "sales-territory-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

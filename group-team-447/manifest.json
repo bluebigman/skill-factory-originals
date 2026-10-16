@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-447",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-447",
+    "kind": "team",
+    "name": "关系查询专家",
+    "description": "输入生产安全相关需求，输出分区排查、高危优先、闭环整改三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-toolkit-pro-team-lead",
+        "role": "lead",
+        "name": "关系查询主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-toolkit-pro",
+        "role": "member",
+        "name": "关系查询 HEC 方言适配",
+        "evidence": "original_assets/sql-toolkit-pro/merkle_root",
+        "member_merkle_root": "c12e7e8a7b49cd4458543ba462b8d6c8e7731cae5d3a6764ca9a4ce97d539714"
+      },
+      {
+        "slug": "dep-license-audit-pro",
+        "role": "member",
+        "name": "依赖清单 许可证 合规检查",
+        "evidence": "original_assets/dep-license-audit-pro/merkle_root",
+        "member_merkle_root": "4f9325aec0f05b008022a75990ab49cc3ff0daba2a89b806cf53612356d110e7"
+      },
+      {
+        "slug": "safety-production-pro",
+        "role": "member",
+        "name": "生产安全 隐患排查 顾问",
+        "evidence": "original_assets/safety-production-pro/merkle_root",
+        "member_merkle_root": "378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd"
+      }
+    ],
+    "team_lead": "sql-toolkit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f1c1416274a9387d",
+  "prompt_hash": "f4f3ad1423a2af77",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-447\", \"kind\": \"team\", \"name\": \"关系查询专家\", \"description\": \"输入生产安全相关需求，输出分区排查、高危优先、闭环整改三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-toolkit-pro-team-lead\", \"role\": \"lead\", \"name\": \"关系查询主理人\", \"evidence\": null}, {\"slug\": \"sql-toolkit-pro\", \"role\": \"member\", \"name\": \"关系查询 HEC 方言适配\", \"evidence\": \"original_assets/sql-toolkit-pro/merkle_root\", \"member_merkle_root\": \"c12e7e8a7b49cd4458543ba462b8d6c8e7731cae5d3a6764ca9a4ce97d539714\"}, {\"slug\": \"dep-license-audit-pro\", \"role\": \"member\", \"name\": \"依赖清单 许可证 合规检查\", \"evidence\": \"original_assets/dep-license-audit-pro/merkle_root\", \"member_merkle_root\": \"4f9325aec0f05b008022a75990ab49cc3ff0daba2a89b806cf53612356d110e7\"}, {\"slug\": \"safety-production-pro\", \"role\": \"member\", \"name\": \"生产安全 隐患排查 顾问\", \"evidence\": \"original_assets/safety-production-pro/merkle_root\", \"member_merkle_root\": \"378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd\"}], \"team_lead\": \"sql-toolkit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/dep-license-audit-pro.md": "1ff068a0b2c0f7217dbc5aadb2f2070527812fa885531975a6e04217274eccbb",
+    "agents/safety-production-pro.md": "97b046bb4d0229aab9140279931e79ad76fcca387c2e2827a5e1aff44ff36800",
+    "agents/sql-toolkit-pro-team-lead.md": "12dd039500fe02621c6f3fe674fe997cdd8f8495f406f004794376dc26bc6952",
+    "agents/sql-toolkit-pro.md": "23e47d65267160eb17b54710de898fd57e28c3ae239369eb579af282ba4fb449",
+    "plugin.json": "d12923c5c87461877c400fd00c33a1db28b741a8d0e0bd092036ba5b2cd4f4cd",
+    "settings.json": "dd3224fecf46d172902c4a9cc3738f284bfc0c4b57bd3853d679e10e649924ee"
+  }
+}

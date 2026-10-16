@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-828",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-828",
+    "kind": "team",
+    "name": "流程编写专家",
+    "description": "流程编写专家：围绕流程编写，覆盖输入输出／异常分支／先查禁售，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sop-writer-pro-team-lead",
+        "role": "lead",
+        "name": "流程编写主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sop-writer-pro",
+        "role": "member",
+        "name": "流程编写 步骤细化 顾问",
+        "evidence": "original_assets/sop-writer-pro/merkle_root",
+        "member_merkle_root": "062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb"
+      },
+      {
+        "slug": "cross-border-listing-pro",
+        "role": "member",
+        "name": "跨境选品 上架合规 顾问",
+        "evidence": "original_assets/cross-border-listing-pro/merkle_root",
+        "member_merkle_root": "f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac"
+      },
+      {
+        "slug": "handover-doc",
+        "role": "member",
+        "name": "交接文档撰写 助手",
+        "evidence": "original_assets/handover-doc/merkle_root",
+        "member_merkle_root": "e5facbfa7110c26b3d6a0f18b4745a62cb9e8818f1e8aad6433d3c67a5afbf38"
+      }
+    ],
+    "team_lead": "sop-writer-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4905158729429ef7",
+  "prompt_hash": "a34c6536cd124bce",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-828\", \"kind\": \"team\", \"name\": \"流程编写专家\", \"description\": \"流程编写专家：围绕流程编写，覆盖输入输出／异常分支／先查禁售，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sop-writer-pro-team-lead\", \"role\": \"lead\", \"name\": \"流程编写主理人\", \"evidence\": null}, {\"slug\": \"sop-writer-pro\", \"role\": \"member\", \"name\": \"流程编写 步骤细化 顾问\", \"evidence\": \"original_assets/sop-writer-pro/merkle_root\", \"member_merkle_root\": \"062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb\"}, {\"slug\": \"cross-border-listing-pro\", \"role\": \"member\", \"name\": \"跨境选品 上架合规 顾问\", \"evidence\": \"original_assets/cross-border-listing-pro/merkle_root\", \"member_merkle_root\": \"f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac\"}, {\"slug\": \"handover-doc\", \"role\": \"member\", \"name\": \"交接文档撰写 助手\", \"evidence\": \"original_assets/handover-doc/merkle_root\", \"member_merkle_root\": \"e5facbfa7110c26b3d6a0f18b4745a62cb9e8818f1e8aad6433d3c67a5afbf38\"}], \"team_lead\": \"sop-writer-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-listing-pro.md": "b473de9f97578513b1dafd266f6a1e6352407c973232c98c36c67f0204d24b0e",
+    "agents/handover-doc.md": "3d4ec85bf29ffe2c7d243e6b734603f4926754489682d019746c62b97f1ca071",
+    "agents/sop-writer-pro-team-lead.md": "4b2e70ac57f82eeeff91aeafdca3dcba45ecb7fa03034d69a2d6c6bf47d8060c",
+    "agents/sop-writer-pro.md": "606eaccd0fbc7645f57c9084582163f48b8e1dd8fa40071d1b07e69274bded94",
+    "plugin.json": "21efaa2a26c3fc58c3b377dc0400f0da4e9e803df2386e260ae1aab508575dcb",
+    "settings.json": "efa9dce4c7be49db32bf0d72c89f8782b11df12f0709a1834f4303027a69433e"
+  }
+}

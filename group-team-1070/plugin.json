@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-convert-pro-fixed-team-lead",
+  "agents": [
+    "./agents/doc-convert-pro-fixed-team-lead.md",
+    "./agents/doc-convert-pro-fixed.md",
+    "./agents/event-plan-review.md",
+    "./agents/newsletter-compose.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 图片标准化",
+    "zh": "帮我处理图片标准化"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 活动方案, covers 目标单一 / 预算留余 / 风险预案, delivering structured results and actionable checklists.",
+    "zh": "隐私转换专家：围绕活动方案，覆盖目标单一／预算留余／风险预案，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "隐私转换专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-convert-pro-fixed-team-lead",
+      "name": {
+        "en": "图片标准化主理人",
+        "zh": "图片标准化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-fixed.png",
+      "id": "doc-convert-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/event-plan-review.png",
+      "id": "event-plan-review",
+      "name": {
+        "en": "event-plan-review",
+        "zh": "活动方案 评审"
+      },
+      "profession": {
+        "en": "event-plan-review",
+        "zh": "活动方案 评审"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/newsletter-compose.png",
+      "id": "newsletter-compose",
+      "name": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "profession": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1070",
+  "plugin": "group-team-1070",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "隐私转换专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 图片标准化",
+      "zh": "帮我处理图片标准化"
+    },
+    {
+      "en": "Plan 活动方案",
+      "zh": "帮我规划活动方案"
+    },
+    {
+      "en": "Review 团队周报编排",
+      "zh": "帮我检查团队周报编排"
+    }
+  ],
+  "tags": [
+    {
+      "en": "图片标准化",
+      "zh": "图片标准化"
+    },
+    {
+      "en": "批量压缩",
+      "zh": "批量压缩"
+    },
+    {
+      "en": "格式转换",
+      "zh": "格式转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-convert-pro-fixed-team-lead",
+    "memberAgents": [
+      "doc-convert-pro-fixed",
+      "event-plan-review",
+      "newsletter-compose"
+    ]
+  },
+  "version": "1.0.0"
+}

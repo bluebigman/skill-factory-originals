@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-944",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-944",
+    "kind": "team",
+    "name": "演讲备注撰写助手专家",
+    "description": "演讲备注撰写助手专家：围绕文档批处，覆盖模板先行／变量清单／小样验证，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-batch-process-team-lead",
+        "role": "lead",
+        "name": "文档批处主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-batch-process",
+        "role": "member",
+        "name": "文档批处 模板套用 顾问",
+        "evidence": "original_assets/doc-batch-process/merkle_root",
+        "member_merkle_root": "1f5eb82a5d7a0122dabab8fb1360324f5685082c9676704fde1029436e6f2ed0"
+      },
+      {
+        "slug": "slide-speaker-note",
+        "role": "member",
+        "name": "演讲备注撰写 助手",
+        "evidence": "original_assets/slide-speaker-note/merkle_root",
+        "member_merkle_root": "1483bda6e45414469364992e71dbf32fe5e15a65073b7b9d6244aa163649f0eb"
+      },
+      {
+        "slug": "report-outline-design",
+        "role": "member",
+        "name": "报告大纲设计 顾问",
+        "evidence": "original_assets/report-outline-design/merkle_root",
+        "member_merkle_root": "e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3"
+      }
+    ],
+    "team_lead": "doc-batch-process-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fc10e7759f7d783c",
+  "prompt_hash": "1e1b6ff3ccb20178",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-944\", \"kind\": \"team\", \"name\": \"演讲备注撰写助手专家\", \"description\": \"演讲备注撰写助手专家：围绕文档批处，覆盖模板先行／变量清单／小样验证，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-batch-process-team-lead\", \"role\": \"lead\", \"name\": \"文档批处主理人\", \"evidence\": null}, {\"slug\": \"doc-batch-process\", \"role\": \"member\", \"name\": \"文档批处 模板套用 顾问\", \"evidence\": \"original_assets/doc-batch-process/merkle_root\", \"member_merkle_root\": \"1f5eb82a5d7a0122dabab8fb1360324f5685082c9676704fde1029436e6f2ed0\"}, {\"slug\": \"slide-speaker-note\", \"role\": \"member\", \"name\": \"演讲备注撰写 助手\", \"evidence\": \"original_assets/slide-speaker-note/merkle_root\", \"member_merkle_root\": \"1483bda6e45414469364992e71dbf32fe5e15a65073b7b9d6244aa163649f0eb\"}, {\"slug\": \"report-outline-design\", \"role\": \"member\", \"name\": \"报告大纲设计 顾问\", \"evidence\": \"original_assets/report-outline-design/merkle_root\", \"member_merkle_root\": \"e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3\"}], \"team_lead\": \"doc-batch-process-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-batch-process-team-lead.md": "a67001873e9fd73a0263090a99b6b06ccc252635dae944b3765cbab8bc445168",
+    "agents/doc-batch-process.md": "cfa0acf84bb0060ae27b692101ab08d0d684398998c6e23684565078e8cbc55a",
+    "agents/report-outline-design.md": "e8302bda5b9ebe394d565068419a681e15f32c0d491c2bda431f00db474336dc",
+    "agents/slide-speaker-note.md": "c3acdfc220ff9f69eb7be03c9cfc4d9c02330d735980bc9f690b79e4af83e59a",
+    "plugin.json": "a5f649c98cf0038cf5139057ecf56be2076c8cc587724cc3d378e2a52a3b21a0",
+    "settings.json": "1d6d03608e42bde2233c6bffaae777c60fae3b0ca3a4c9ffc72c323c27dd7ef5"
+  }
+}

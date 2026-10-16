@@ -1,0 +1,126 @@
+{
+  "agentName": "game-team-workflow-team-lead",
+  "agents": [
+    "./agents/game-team-workflow-team-lead.md",
+    "./agents/game-team-workflow.md",
+    "./agents/sales-enable-pro.md",
+    "./agents/agent-release-gate.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 游戏团队",
+    "zh": "帮我处理游戏团队"
+  },
+  "description": "game-team-workflow team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 游戏团队 requirements, output three deliverables: 里程碑制, 资产管线, 每日可玩. Verifiable end-to-end, evidence per step.",
+    "zh": "输入游戏团队相关需求，输出里程碑制、资产管线、每日可玩三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "game-team-workflow Team",
+    "zh": "销售赋能素材工具专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "game-team-workflow-team-lead",
+      "name": {
+        "en": "游戏团队主理人",
+        "zh": "游戏团队主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/game-team-workflow.png",
+      "id": "game-team-workflow",
+      "name": {
+        "en": "game-team-workflow",
+        "zh": "游戏团队 协作流程 顾问"
+      },
+      "profession": {
+        "en": "game-team-workflow",
+        "zh": "游戏团队 协作流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sales-enable-pro.png",
+      "id": "sales-enable-pro",
+      "name": {
+        "en": "sales-enable-pro",
+        "zh": "销售赋能 素材工具 顾问"
+      },
+      "profession": {
+        "en": "sales-enable-pro",
+        "zh": "销售赋能 素材工具 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-release-gate.png",
+      "id": "agent-release-gate",
+      "name": {
+        "en": "agent-release-gate",
+        "zh": "发布闸门 清单 顾问"
+      },
+      "profession": {
+        "en": "agent-release-gate",
+        "zh": "发布闸门 清单 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-614",
+  "plugin": "group-team-614",
+  "profession": {
+    "en": "game-team-workflow Collaboration Team",
+    "zh": "销售赋能素材工具专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 游戏团队",
+      "zh": "帮我处理游戏团队"
+    },
+    {
+      "en": "Plan 销售赋能",
+      "zh": "帮我规划销售赋能"
+    },
+    {
+      "en": "Review 发布闸门",
+      "zh": "帮我检查发布闸门"
+    }
+  ],
+  "tags": [
+    {
+      "en": "里程碑制",
+      "zh": "里程碑制"
+    },
+    {
+      "en": "资产管线",
+      "zh": "资产管线"
+    },
+    {
+      "en": "每日可玩",
+      "zh": "每日可玩"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "game-team-workflow-team-lead",
+    "memberAgents": [
+      "game-team-workflow",
+      "sales-enable-pro",
+      "agent-release-gate"
+    ]
+  },
+  "version": "1.0.0"
+}

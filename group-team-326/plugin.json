@@ -1,0 +1,126 @@
+{
+  "agentName": "perf-profile-pro-team-lead",
+  "agents": [
+    "./agents/perf-profile-pro-team-lead.md",
+    "./agents/perf-profile-pro.md",
+    "./agents/dev-toolbox-expert.md",
+    "./agents/code-query-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 性能剖析",
+    "zh": "帮我处理性能剖析"
+  },
+  "description": "perf-profile-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 性能剖析, covers 热点定位 / 小步优化 / 复测对照, delivering structured results and actionable checklists.",
+    "zh": "性能剖析专家：围绕性能剖析，覆盖热点定位／小步优化／复测对照，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "perf-profile-pro Team",
+    "zh": "性能剖析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "perf-profile-pro-team-lead",
+      "name": {
+        "en": "性能剖析主理人",
+        "zh": "性能剖析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/perf-profile-pro.png",
+      "id": "perf-profile-pro",
+      "name": {
+        "en": "perf-profile-pro",
+        "zh": "性能剖析 热点定位 顾问"
+      },
+      "profession": {
+        "en": "perf-profile-pro",
+        "zh": "性能剖析 热点定位 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dev-toolbox-expert.png",
+      "id": "dev-toolbox-expert",
+      "name": {
+        "en": "ToolSmith",
+        "zh": "开发工具 编码调试 效率提能"
+      },
+      "profession": {
+        "en": "ToolSmith",
+        "zh": "开发工具 编码调试 效率提能"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-query-expert.png",
+      "id": "code-query-expert",
+      "name": {
+        "en": "CheatPro",
+        "zh": "代码速查 语法示例 调试技巧"
+      },
+      "profession": {
+        "en": "CheatPro",
+        "zh": "代码速查 语法示例 调试技巧"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-326",
+  "plugin": "group-team-326",
+  "profession": {
+    "en": "perf-profile-pro Collaboration Team",
+    "zh": "性能剖析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 性能剖析",
+      "zh": "帮我处理性能剖析"
+    },
+    {
+      "en": "Plan 开发工具",
+      "zh": "帮我规划开发工具"
+    },
+    {
+      "en": "Review 代码速查",
+      "zh": "帮我检查代码速查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "热点定位",
+      "zh": "热点定位"
+    },
+    {
+      "en": "小步优化",
+      "zh": "小步优化"
+    },
+    {
+      "en": "复测对照",
+      "zh": "复测对照"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "perf-profile-pro-team-lead",
+    "memberAgents": [
+      "perf-profile-pro",
+      "dev-toolbox-expert",
+      "code-query-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

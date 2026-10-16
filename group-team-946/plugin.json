@@ -1,0 +1,126 @@
+{
+  "agentName": "expense-reimburse-expert-team-lead",
+  "agents": [
+    "./agents/expense-reimburse-expert-team-lead.md",
+    "./agents/expense-reimburse-expert.md",
+    "./agents/energy-consumption-pro.md",
+    "./agents/industrial-service-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 报销与费用管理专家",
+    "zh": "帮我处理报销与费用管理专家"
+  },
+  "description": "ExpenseReimburse team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 能耗管理 requirements, output three deliverables: 费用归类, 分项计量, 攻其大头. Verifiable end-to-end, evidence per step.",
+    "zh": "输入能耗管理相关需求，输出费用归类、分项计量、攻其大头三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ExpenseReimburse Team",
+    "zh": "交付标准专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "expense-reimburse-expert-team-lead",
+      "name": {
+        "en": "报销与费用管理专家主理人",
+        "zh": "报销与费用管理专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/expense-reimburse-expert.png",
+      "id": "expense-reimburse-expert",
+      "name": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "profession": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/energy-consumption-pro.png",
+      "id": "energy-consumption-pro",
+      "name": {
+        "en": "energy-consumption-pro",
+        "zh": "能耗管理 节能诊断 顾问"
+      },
+      "profession": {
+        "en": "energy-consumption-pro",
+        "zh": "能耗管理 节能诊断 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/industrial-service-pro.png",
+      "id": "industrial-service-pro",
+      "name": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "profession": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-946",
+  "plugin": "group-team-946",
+  "profession": {
+    "en": "ExpenseReimburse Collaboration Team",
+    "zh": "交付标准专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报销与费用管理专家",
+      "zh": "帮我处理报销与费用管理专家"
+    },
+    {
+      "en": "Plan 能耗管理",
+      "zh": "帮我规划能耗管理"
+    },
+    {
+      "en": "Review 工业服务",
+      "zh": "帮我检查工业服务"
+    }
+  ],
+  "tags": [
+    {
+      "en": "报销明细输出",
+      "zh": "报销明细输出"
+    },
+    {
+      "en": "图片发票抽取",
+      "zh": "图片发票抽取"
+    },
+    {
+      "en": "分项计量",
+      "zh": "分项计量"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "expense-reimburse-expert-team-lead",
+    "memberAgents": [
+      "expense-reimburse-expert",
+      "energy-consumption-pro",
+      "industrial-service-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

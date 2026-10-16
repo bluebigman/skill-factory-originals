@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-847",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-847",
+    "kind": "team",
+    "name": "查询缓存专家",
+    "description": "擅长最小必要、临时过期与凭据隔离，覆盖权限治理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "permission-governance-pro-team-lead",
+        "role": "lead",
+        "name": "权限治理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "permission-governance-pro",
+        "role": "member",
+        "name": "权限治理 最小授权 顾问",
+        "evidence": "original_assets/permission-governance-pro/merkle_root",
+        "member_merkle_root": "820f551092224c12c415319488cb0e9d111874cf1e76824fb7895f461773af99"
+      },
+      {
+        "slug": "query-cache-pro",
+        "role": "member",
+        "name": "查询缓存 命中优化 顾问",
+        "evidence": "original_assets/query-cache-pro/merkle_root",
+        "member_merkle_root": "951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf"
+      },
+      {
+        "slug": "runtime-exposure-audit-pro",
+        "role": "member",
+        "name": "线上权限 日志泄露 风险排查",
+        "evidence": "original_assets/runtime-exposure-audit-pro/merkle_root",
+        "member_merkle_root": "f9f1dd4790db69760b3aa1f13c33ba580a029f17be604c27130bc9bfd23d63cf"
+      }
+    ],
+    "team_lead": "permission-governance-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "88bae868922b000c",
+  "prompt_hash": "a19723fef597d594",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-847\", \"kind\": \"team\", \"name\": \"查询缓存专家\", \"description\": \"擅长最小必要、临时过期与凭据隔离，覆盖权限治理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"permission-governance-pro-team-lead\", \"role\": \"lead\", \"name\": \"权限治理主理人\", \"evidence\": null}, {\"slug\": \"permission-governance-pro\", \"role\": \"member\", \"name\": \"权限治理 最小授权 顾问\", \"evidence\": \"original_assets/permission-governance-pro/merkle_root\", \"member_merkle_root\": \"820f551092224c12c415319488cb0e9d111874cf1e76824fb7895f461773af99\"}, {\"slug\": \"query-cache-pro\", \"role\": \"member\", \"name\": \"查询缓存 命中优化 顾问\", \"evidence\": \"original_assets/query-cache-pro/merkle_root\", \"member_merkle_root\": \"951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf\"}, {\"slug\": \"runtime-exposure-audit-pro\", \"role\": \"member\", \"name\": \"线上权限 日志泄露 风险排查\", \"evidence\": \"original_assets/runtime-exposure-audit-pro/merkle_root\", \"member_merkle_root\": \"f9f1dd4790db69760b3aa1f13c33ba580a029f17be604c27130bc9bfd23d63cf\"}], \"team_lead\": \"permission-governance-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/permission-governance-pro-team-lead.md": "2e3b0cdae45ec856483219e2fdcd156d5a96a9aae3065ac5834583e351320547",
+    "agents/permission-governance-pro.md": "e959c4d9ab5add78e84ccdd640eed41b51bc27c26734a517c2c0b70f3c2118c0",
+    "agents/query-cache-pro.md": "76c1f3e3b6db1ea1a92144e20e3af0566041995086af83212694c19b45a4f2ce",
+    "agents/runtime-exposure-audit-pro.md": "2cfc897bdeaecbe8fa658624c2930a3131a42877e7b1434ac133bb03229a8ae2",
+    "plugin.json": "da8d9d72f55a1a985106e6d2c09557203027010046816a582104fc2bceac52a1",
+    "settings.json": "83a30e2385d476beeef41327808360dfa71f097155f0ec4b67f8ddda6a4d436f"
+  }
+}

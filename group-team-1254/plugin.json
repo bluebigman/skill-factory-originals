@@ -1,0 +1,126 @@
+{
+  "agentName": "incident-triage-pro-team-lead",
+  "agents": [
+    "./agents/incident-triage-pro-team-lead.md",
+    "./agents/incident-triage-pro.md",
+    "./agents/load-test-plan.md",
+    "./agents/doc-version-ledger.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 故障分级",
+    "zh": "帮我处理故障分级"
+  },
+  "description": "incident-triage-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 故障分级 requirements, output three deliverables: 分级标准, 响应时限, 沟通机制. Verifiable end-to-end, evidence per step.",
+    "zh": "输入故障分级相关需求，输出分级标准、响应时限、沟通机制三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "incident-triage-pro Team",
+    "zh": "故障分级专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "incident-triage-pro-team-lead",
+      "name": {
+        "en": "故障分级主理人",
+        "zh": "故障分级主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/incident-triage-pro.png",
+      "id": "incident-triage-pro",
+      "name": {
+        "en": "incident-triage-pro",
+        "zh": "故障分级 响应流程 顾问"
+      },
+      "profession": {
+        "en": "incident-triage-pro",
+        "zh": "故障分级 响应流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/load-test-plan.png",
+      "id": "load-test-plan",
+      "name": {
+        "en": "load-test-plan",
+        "zh": "压测方案设计 顾问"
+      },
+      "profession": {
+        "en": "load-test-plan",
+        "zh": "压测方案设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-version-ledger.png",
+      "id": "doc-version-ledger",
+      "name": {
+        "en": "doc-version-ledger",
+        "zh": "文档版本台账 助手"
+      },
+      "profession": {
+        "en": "doc-version-ledger",
+        "zh": "文档版本台账 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1254",
+  "plugin": "group-team-1254",
+  "profession": {
+    "en": "incident-triage-pro Collaboration Team",
+    "zh": "故障分级专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 故障分级",
+      "zh": "帮我处理故障分级"
+    },
+    {
+      "en": "Plan 压测方案设计",
+      "zh": "帮我规划压测方案设计"
+    },
+    {
+      "en": "Review 文档版本台账",
+      "zh": "帮我检查文档版本台账"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级标准",
+      "zh": "分级标准"
+    },
+    {
+      "en": "响应时限",
+      "zh": "响应时限"
+    },
+    {
+      "en": "沟通机制",
+      "zh": "沟通机制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "incident-triage-pro-team-lead",
+    "memberAgents": [
+      "incident-triage-pro",
+      "load-test-plan",
+      "doc-version-ledger"
+    ]
+  },
+  "version": "1.0.0"
+}

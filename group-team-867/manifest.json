@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-867",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-867",
+    "kind": "team",
+    "name": "用户分群分析专家",
+    "description": "输入用户分群分析相关需求，输出组间差异、组内同质、规模可控三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "segment-analysis-team-lead",
+        "role": "lead",
+        "name": "用户分群分析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "segment-analysis",
+        "role": "member",
+        "name": "用户分群分析 助手",
+        "evidence": "original_assets/segment-analysis/merkle_root",
+        "member_merkle_root": "b4f0a88b99c7c4eabb644b511f5e4aab6a922c3e0426db6b185abb0b5c1bd1bc"
+      },
+      {
+        "slug": "dev-env-bootstrap",
+        "role": "member",
+        "name": "开发环境搭建 助手",
+        "evidence": "original_assets/dev-env-bootstrap/merkle_root",
+        "member_merkle_root": "e50333f7dd2f103b47fd99e55f293a068e184bee79892eccef8939b3b885e353"
+      },
+      {
+        "slug": "api-transmission-assurance-expert",
+        "role": "member",
+        "name": "接口联调 传输校验 异步排查",
+        "evidence": "original_assets/api-transmission-assurance-expert/merkle_root",
+        "member_merkle_root": "49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac"
+      }
+    ],
+    "team_lead": "segment-analysis-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4499152cbc01f24f",
+  "prompt_hash": "38720e5b75225bb9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-867\", \"kind\": \"team\", \"name\": \"用户分群分析专家\", \"description\": \"输入用户分群分析相关需求，输出组间差异、组内同质、规模可控三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"segment-analysis-team-lead\", \"role\": \"lead\", \"name\": \"用户分群分析主理人\", \"evidence\": null}, {\"slug\": \"segment-analysis\", \"role\": \"member\", \"name\": \"用户分群分析 助手\", \"evidence\": \"original_assets/segment-analysis/merkle_root\", \"member_merkle_root\": \"b4f0a88b99c7c4eabb644b511f5e4aab6a922c3e0426db6b185abb0b5c1bd1bc\"}, {\"slug\": \"dev-env-bootstrap\", \"role\": \"member\", \"name\": \"开发环境搭建 助手\", \"evidence\": \"original_assets/dev-env-bootstrap/merkle_root\", \"member_merkle_root\": \"e50333f7dd2f103b47fd99e55f293a068e184bee79892eccef8939b3b885e353\"}, {\"slug\": \"api-transmission-assurance-expert\", \"role\": \"member\", \"name\": \"接口联调 传输校验 异步排查\", \"evidence\": \"original_assets/api-transmission-assurance-expert/merkle_root\", \"member_merkle_root\": \"49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac\"}], \"team_lead\": \"segment-analysis-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-transmission-assurance-expert.md": "900a17cb6c78db365126db58e73c9bd611a5763efaf414b7f5f9ee672a0ce9a6",
+    "agents/dev-env-bootstrap.md": "d1de3ae61a24e5e4a4b13da61dd40ea45d185268c60e6e2da28cefb456749d9b",
+    "agents/segment-analysis-team-lead.md": "a2229384e2edb192ce6ece1657473dd58298f1cf348e593dcd6a1c8ee8716cd7",
+    "agents/segment-analysis.md": "1fab0f676ad855dc23d68ccbe0fa6825fc8791e7ae49a44355e91930db1a4726",
+    "plugin.json": "72bed6b47048ccc80e6b72cbf4b2efcb9e43eee4d1d6eeec09d0f99098ab1e97",
+    "settings.json": "43241b4a071b13bd9f73f05f3d0ac8db506534555bf9ea50085b67c3a648e5a8"
+  }
+}

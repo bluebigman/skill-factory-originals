@@ -1,0 +1,126 @@
+{
+  "agentName": "proofread-pro-team-lead",
+  "agents": [
+    "./agents/proofread-pro-team-lead.md",
+    "./agents/proofread-pro.md",
+    "./agents/doc-craft-pro.md",
+    "./agents/presentation-timing.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 校对审阅",
+    "zh": "帮我处理校对审阅"
+  },
+  "description": "proofread-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 校对审阅 requirements, output three deliverables: 分层校对, 术语一致, 数字核对. Verifiable end-to-end, evidence per step.",
+    "zh": "输入校对审阅相关需求，输出分层校对、术语一致、数字核对三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "proofread-pro Team",
+    "zh": "错漏检出专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "proofread-pro-team-lead",
+      "name": {
+        "en": "校对审阅主理人",
+        "zh": "校对审阅主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/proofread-pro.png",
+      "id": "proofread-pro",
+      "name": {
+        "en": "proofread-pro",
+        "zh": "校对审阅 错漏检出 顾问"
+      },
+      "profession": {
+        "en": "proofread-pro",
+        "zh": "校对审阅 错漏检出 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-craft-pro.png",
+      "id": "doc-craft-pro",
+      "name": {
+        "en": "Document Craft Expert",
+        "zh": "文档排版撰写专家"
+      },
+      "profession": {
+        "en": "Document Craft Expert",
+        "zh": "文档排版撰写专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/presentation-timing.png",
+      "id": "presentation-timing",
+      "name": {
+        "en": "presentation-timing",
+        "zh": "演示时长控制 顾问"
+      },
+      "profession": {
+        "en": "presentation-timing",
+        "zh": "演示时长控制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1227",
+  "plugin": "group-team-1227",
+  "profession": {
+    "en": "proofread-pro Collaboration Team",
+    "zh": "错漏检出专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 校对审阅",
+      "zh": "帮我处理校对审阅"
+    },
+    {
+      "en": "Plan 文档排版撰写专家",
+      "zh": "帮我规划文档排版撰写专家"
+    },
+    {
+      "en": "Review 演示时长控制",
+      "zh": "帮我检查演示时长控制"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分层校对",
+      "zh": "分层校对"
+    },
+    {
+      "en": "术语一致",
+      "zh": "术语一致"
+    },
+    {
+      "en": "数字核对",
+      "zh": "数字核对"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "proofread-pro-team-lead",
+    "memberAgents": [
+      "proofread-pro",
+      "doc-craft-pro",
+      "presentation-timing"
+    ]
+  },
+  "version": "1.0.0"
+}

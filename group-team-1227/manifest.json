@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1227",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1227",
+    "kind": "team",
+    "name": "错漏检出专家",
+    "description": "输入校对审阅相关需求，输出分层校对、术语一致、数字核对三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "proofread-pro-team-lead",
+        "role": "lead",
+        "name": "校对审阅主理人",
+        "evidence": null
+      },
+      {
+        "slug": "proofread-pro",
+        "role": "member",
+        "name": "校对审阅 错漏检出 顾问",
+        "evidence": "original_assets/proofread-pro/merkle_root",
+        "member_merkle_root": "5260e28db683c4c169aa1a8a95c1c05af3cd3bc194be4e87ee7c2418d07e4f4c"
+      },
+      {
+        "slug": "doc-craft-pro",
+        "role": "member",
+        "name": "文档排版撰写专家",
+        "evidence": "original_assets/doc-craft-pro/merkle_root",
+        "member_merkle_root": "e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18"
+      },
+      {
+        "slug": "presentation-timing",
+        "role": "member",
+        "name": "演示时长控制 顾问",
+        "evidence": "original_assets/presentation-timing/merkle_root",
+        "member_merkle_root": "d000305d9cd648424e1c6f1d2332d09c002bae2133ca901adb76f6b78ce2aeda"
+      }
+    ],
+    "team_lead": "proofread-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c1bc3d044f105428",
+  "prompt_hash": "d7757c186a2320b1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1227\", \"kind\": \"team\", \"name\": \"错漏检出专家\", \"description\": \"输入校对审阅相关需求，输出分层校对、术语一致、数字核对三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"proofread-pro-team-lead\", \"role\": \"lead\", \"name\": \"校对审阅主理人\", \"evidence\": null}, {\"slug\": \"proofread-pro\", \"role\": \"member\", \"name\": \"校对审阅 错漏检出 顾问\", \"evidence\": \"original_assets/proofread-pro/merkle_root\", \"member_merkle_root\": \"5260e28db683c4c169aa1a8a95c1c05af3cd3bc194be4e87ee7c2418d07e4f4c\"}, {\"slug\": \"doc-craft-pro\", \"role\": \"member\", \"name\": \"文档排版撰写专家\", \"evidence\": \"original_assets/doc-craft-pro/merkle_root\", \"member_merkle_root\": \"e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18\"}, {\"slug\": \"presentation-timing\", \"role\": \"member\", \"name\": \"演示时长控制 顾问\", \"evidence\": \"original_assets/presentation-timing/merkle_root\", \"member_merkle_root\": \"d000305d9cd648424e1c6f1d2332d09c002bae2133ca901adb76f6b78ce2aeda\"}], \"team_lead\": \"proofread-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-craft-pro.md": "2e6dfa6999e559c34dbe90faa9cf1c52e20c7883da741ad8b3a3be3b35b96b4d",
+    "agents/presentation-timing.md": "a5cfb006b306e11e4c9248fd3322f7094113648573e5c52ea751d5b6ec5a6323",
+    "agents/proofread-pro-team-lead.md": "b837616d31990a2d5bba5eb273a01ebf790b8720c14b31755a2382c5efca8e8b",
+    "agents/proofread-pro.md": "729514d0daaaf27d0b591c636705c0f03011981c899fb7cbd6534407a894e63c",
+    "plugin.json": "6375c92e8fdca2ad99663715f1f5d5c4a84aa327f1106c8c7cb5fe41efe1b0d9",
+    "settings.json": "fd15c13ac5d364fa7ad3a467cf5e506ce2f23aabe2776b23bf7a3feaa9f7079d"
+  }
+}

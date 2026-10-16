@@ -1,0 +1,126 @@
+{
+  "agentName": "service-sla-pro-team-lead",
+  "agents": [
+    "./agents/service-sla-pro-team-lead.md",
+    "./agents/service-sla-pro.md",
+    "./agents/deal-review-pro.md",
+    "./agents/contract-mfg-audit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 服务承诺",
+    "zh": "帮我处理服务承诺"
+  },
+  "description": "service-sla-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 服务承诺 requirements, output three deliverables: 分级承诺, 例外写明, 计量口径. Verifiable end-to-end, evidence per step.",
+    "zh": "输入服务承诺相关需求，输出分级承诺、例外写明、计量口径三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "service-sla-pro Team",
+    "zh": "服务承诺时效设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "service-sla-pro-team-lead",
+      "name": {
+        "en": "服务承诺主理人",
+        "zh": "服务承诺主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/service-sla-pro.png",
+      "id": "service-sla-pro",
+      "name": {
+        "en": "service-sla-pro",
+        "zh": "服务承诺 时效设计 顾问"
+      },
+      "profession": {
+        "en": "service-sla-pro",
+        "zh": "服务承诺 时效设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/deal-review-pro.png",
+      "id": "deal-review-pro",
+      "name": {
+        "en": "deal-review-pro",
+        "zh": "商机评审 风险把关 顾问"
+      },
+      "profession": {
+        "en": "deal-review-pro",
+        "zh": "商机评审 风险把关 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-mfg-audit-pro.png",
+      "id": "contract-mfg-audit-pro",
+      "name": {
+        "en": "contract-mfg-audit-pro",
+        "zh": "代工管理 过程审核 顾问"
+      },
+      "profession": {
+        "en": "contract-mfg-audit-pro",
+        "zh": "代工管理 过程审核 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-393",
+  "plugin": "group-team-393",
+  "profession": {
+    "en": "service-sla-pro Collaboration Team",
+    "zh": "服务承诺时效设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 服务承诺",
+      "zh": "帮我处理服务承诺"
+    },
+    {
+      "en": "Plan 商机评审",
+      "zh": "帮我规划商机评审"
+    },
+    {
+      "en": "Review 代工管理",
+      "zh": "帮我检查代工管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级承诺",
+      "zh": "分级承诺"
+    },
+    {
+      "en": "例外写明",
+      "zh": "例外写明"
+    },
+    {
+      "en": "计量口径",
+      "zh": "计量口径"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "service-sla-pro-team-lead",
+    "memberAgents": [
+      "service-sla-pro",
+      "deal-review-pro",
+      "contract-mfg-audit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

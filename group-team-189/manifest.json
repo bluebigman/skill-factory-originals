@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-189",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-189",
+    "kind": "team",
+    "name": "系列 图文 脚本 团队",
+    "description": "系列 图文 脚本 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "series-column-plan-team-lead",
+        "role": "lead",
+        "name": "系列栏目主理人",
+        "evidence": null
+      },
+      {
+        "slug": "series-column-plan",
+        "role": "member",
+        "name": "系列栏目 IP化 顾问",
+        "evidence": "original_assets/series-column-plan/merkle_root",
+        "member_merkle_root": "c203c2bdc0a2647c3f3478691dcb39dc257627d2ab7ba730f32087c17970d18b"
+      },
+      {
+        "slug": "visual-text-ratio",
+        "role": "member",
+        "name": "图文配比 排版节奏 助手",
+        "evidence": "original_assets/visual-text-ratio/merkle_root",
+        "member_merkle_root": "01d73b049ae277e15e10a524b49b8ab260ab2e2f328acc02868dbb9e586cdcc6"
+      },
+      {
+        "slug": "script-structure",
+        "role": "member",
+        "name": "脚本结构 节奏设计 顾问",
+        "evidence": "original_assets/script-structure/merkle_root",
+        "member_merkle_root": "42b15f66ccb42aae629f659d5fc0344fec945def96e9701fd4951cc9d4ead112"
+      }
+    ],
+    "team_lead": "series-column-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "056ad44419b77b62",
+  "prompt_hash": "fb68f5ec69aae9ab",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-189\", \"kind\": \"team\", \"name\": \"系列 图文 脚本 团队\", \"description\": \"系列 图文 脚本 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"series-column-plan-team-lead\", \"role\": \"lead\", \"name\": \"系列栏目主理人\", \"evidence\": null}, {\"slug\": \"series-column-plan\", \"role\": \"member\", \"name\": \"系列栏目 IP化 顾问\", \"evidence\": \"original_assets/series-column-plan/merkle_root\", \"member_merkle_root\": \"c203c2bdc0a2647c3f3478691dcb39dc257627d2ab7ba730f32087c17970d18b\"}, {\"slug\": \"visual-text-ratio\", \"role\": \"member\", \"name\": \"图文配比 排版节奏 助手\", \"evidence\": \"original_assets/visual-text-ratio/merkle_root\", \"member_merkle_root\": \"01d73b049ae277e15e10a524b49b8ab260ab2e2f328acc02868dbb9e586cdcc6\"}, {\"slug\": \"script-structure\", \"role\": \"member\", \"name\": \"脚本结构 节奏设计 顾问\", \"evidence\": \"original_assets/script-structure/merkle_root\", \"member_merkle_root\": \"42b15f66ccb42aae629f659d5fc0344fec945def96e9701fd4951cc9d4ead112\"}], \"team_lead\": \"series-column-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/script-structure.md": "770bb5f0acaff8882b163232a716e4c1e4b972747d5e24fe886eb3f3cd637d2d",
+    "agents/series-column-plan-team-lead.md": "02059621b6b3c9259efb5cdb1be428474ac41f0e60457dd90cbc770d6c6ecf8c",
+    "agents/series-column-plan.md": "cbe9c58b48aea18edaf7282e7b39b91ceafbe463d1704cf5b7dd8a12ec4f645b",
+    "agents/visual-text-ratio.md": "dd400c8b3a22527a672aded57f9174d002ef01fac93328a5382429d6ea32f89e",
+    "plugin.json": "985c99b230f35d916f3ddf728b4d566c5fc4d14bec1e35b276eca3b9f1dab2fa",
+    "settings.json": "42e5e57f8cbed751eef40305d4207d5c67f7b10433d1be96cd4221f1ed2b7682"
+  }
+}

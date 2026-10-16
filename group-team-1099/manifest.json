@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1099",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1099",
+    "kind": "team",
+    "name": "内容指标定义专家",
+    "description": "擅长口径唯一、定期复核与主题具体，覆盖内容指标定义全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-metrics-define-team-lead",
+        "role": "lead",
+        "name": "内容指标定义主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-metrics-define",
+        "role": "member",
+        "name": "内容指标定义 顾问",
+        "evidence": "original_assets/content-metrics-define/merkle_root",
+        "member_merkle_root": "e9d87c54e7d51e4e08c080ddf879f8bfc47aeae7b86286d8aad10ecd2a300229"
+      },
+      {
+        "slug": "email-professional",
+        "role": "member",
+        "name": "商务邮件撰写 顾问",
+        "evidence": "original_assets/email-professional/merkle_root",
+        "member_merkle_root": "820500dfae2ce82dd5ba4068f74301c3368540672ba261cbb2a814cc9eb2bcf3"
+      },
+      {
+        "slug": "cn-rewrite-deaifier",
+        "role": "member",
+        "name": "中文改写 去AI味 风格润色",
+        "evidence": "original_assets/cn-rewrite-deaifier/merkle_root",
+        "member_merkle_root": "c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167"
+      }
+    ],
+    "team_lead": "content-metrics-define-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ea1b1f389f42bc1b",
+  "prompt_hash": "84806efb65cd8b94",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1099\", \"kind\": \"team\", \"name\": \"内容指标定义专家\", \"description\": \"擅长口径唯一、定期复核与主题具体，覆盖内容指标定义全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-metrics-define-team-lead\", \"role\": \"lead\", \"name\": \"内容指标定义主理人\", \"evidence\": null}, {\"slug\": \"content-metrics-define\", \"role\": \"member\", \"name\": \"内容指标定义 顾问\", \"evidence\": \"original_assets/content-metrics-define/merkle_root\", \"member_merkle_root\": \"e9d87c54e7d51e4e08c080ddf879f8bfc47aeae7b86286d8aad10ecd2a300229\"}, {\"slug\": \"email-professional\", \"role\": \"member\", \"name\": \"商务邮件撰写 顾问\", \"evidence\": \"original_assets/email-professional/merkle_root\", \"member_merkle_root\": \"820500dfae2ce82dd5ba4068f74301c3368540672ba261cbb2a814cc9eb2bcf3\"}, {\"slug\": \"cn-rewrite-deaifier\", \"role\": \"member\", \"name\": \"中文改写 去AI味 风格润色\", \"evidence\": \"original_assets/cn-rewrite-deaifier/merkle_root\", \"member_merkle_root\": \"c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167\"}], \"team_lead\": \"content-metrics-define-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cn-rewrite-deaifier.md": "1c80b7228033fc02976fe8c206fa52b7b60c4c1bbd3e9eba576322b28e82edb2",
+    "agents/content-metrics-define-team-lead.md": "aa9c63d1eb81d211276ff1b32c101949807e11b49146db84666c55ed3c39aea8",
+    "agents/content-metrics-define.md": "f2d5747bba2fd1a7ff5c42d67a61342d6e7f02403206d9ee9e97b115a42d2d1f",
+    "agents/email-professional.md": "27c69f15a4e7609f0efc20106c6b7955b2ed9bf3799b032981062fbbc6e2b4f2",
+    "plugin.json": "0a9b032da13ceb69236cb8be78970670bd6a001e83a40c9238acfc0bbf6a151f",
+    "settings.json": "4099bd1d3da0d37a1415a16e84e859dc95d23da9bee5d364261e38128a5d0117"
+  }
+}

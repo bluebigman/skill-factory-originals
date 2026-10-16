@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-02-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-02-team-lead.md",
+    "./agents/data-clean-pro-02.md",
+    "./agents/toolkit-pro-04.md",
+    "./agents/data-refine-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 医疗行政",
+    "zh": "帮我处理医疗行政"
+  },
+  "description": "数据清洗与结构化 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 结构化输出, covers 医疗行政 / 数据清洗 / 字段映射, delivering structured results and actionable checklists.",
+    "zh": "结构化输出专家：围绕结构化输出，覆盖医疗行政／数据清洗／字段映射，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "数据清洗与结构化 Suite Team",
+    "zh": "结构化输出专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-02-team-lead",
+      "name": {
+        "en": "医疗行政主理人",
+        "zh": "医疗行政主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-02.png",
+      "id": "data-clean-pro-02",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-04.png",
+      "id": "toolkit-pro-04",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "数据整理 清洗转换 批量模板"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "数据整理 清洗转换 批量模板"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-refine-pro.png",
+      "id": "data-refine-pro",
+      "name": {
+        "en": "Table Data Refiner",
+        "zh": "表格清洗 字段规范 批量去重"
+      },
+      "profession": {
+        "en": "Table Data Refiner",
+        "zh": "表格清洗 字段规范 批量去重"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-582",
+  "plugin": "group-team-582",
+  "profession": {
+    "en": "数据清洗与结构化 Suite Collaboration Team",
+    "zh": "结构化输出专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 医疗行政",
+      "zh": "帮我处理医疗行政"
+    },
+    {
+      "en": "Plan 数据整理",
+      "zh": "帮我规划数据整理"
+    },
+    {
+      "en": "Review 表格清洗",
+      "zh": "帮我检查表格清洗"
+    }
+  ],
+  "tags": [
+    {
+      "en": "医疗行政",
+      "zh": "医疗行政"
+    },
+    {
+      "en": "数据清洗",
+      "zh": "数据清洗"
+    },
+    {
+      "en": "字段映射",
+      "zh": "字段映射"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-02-team-lead",
+    "memberAgents": [
+      "data-clean-pro-02",
+      "toolkit-pro-04",
+      "data-refine-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

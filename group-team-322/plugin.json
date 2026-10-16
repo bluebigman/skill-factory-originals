@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-error-playbook-team-lead",
+  "agents": [
+    "./agents/agent-error-playbook-team-lead.md",
+    "./agents/agent-error-playbook.md",
+    "./agents/agent-cache-strategy.md",
+    "./agents/agent-config-guard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 错误手册",
+    "zh": "帮我处理错误手册"
+  },
+  "description": "agent-error-playbook team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 错误手册 end-to-end: 错误分类, 处置步骤 and 自愈建议. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长错误分类、处置步骤与自愈建议，覆盖错误手册全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-error-playbook Team",
+    "zh": "错误手册专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-error-playbook-team-lead",
+      "name": {
+        "en": "错误手册主理人",
+        "zh": "错误手册主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-error-playbook.png",
+      "id": "agent-error-playbook",
+      "name": {
+        "en": "agent-error-playbook",
+        "zh": "错误手册 分类 顾问"
+      },
+      "profession": {
+        "en": "agent-error-playbook",
+        "zh": "错误手册 分类 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-cache-strategy.png",
+      "id": "agent-cache-strategy",
+      "name": {
+        "en": "agent-cache-strategy",
+        "zh": "缓存策略 失效控制 顾问"
+      },
+      "profession": {
+        "en": "agent-cache-strategy",
+        "zh": "缓存策略 失效控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-config-guard.png",
+      "id": "agent-config-guard",
+      "name": {
+        "en": "agent-config-guard",
+        "zh": "配置守护 漂移 顾问"
+      },
+      "profession": {
+        "en": "agent-config-guard",
+        "zh": "配置守护 漂移 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-322",
+  "plugin": "group-team-322",
+  "profession": {
+    "en": "agent-error-playbook Collaboration Team",
+    "zh": "错误手册专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 错误手册",
+      "zh": "帮我处理错误手册"
+    },
+    {
+      "en": "Plan 缓存策略",
+      "zh": "帮我规划缓存策略"
+    },
+    {
+      "en": "Review 配置守护",
+      "zh": "帮我检查配置守护"
+    }
+  ],
+  "tags": [
+    {
+      "en": "错误分类",
+      "zh": "错误分类"
+    },
+    {
+      "en": "处置步骤",
+      "zh": "处置步骤"
+    },
+    {
+      "en": "自愈建议",
+      "zh": "自愈建议"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-error-playbook-team-lead",
+    "memberAgents": [
+      "agent-error-playbook",
+      "agent-cache-strategy",
+      "agent-config-guard"
+    ]
+  },
+  "version": "1.0.0"
+}

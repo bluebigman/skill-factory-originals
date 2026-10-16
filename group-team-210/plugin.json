@@ -1,0 +1,126 @@
+{
+  "agentName": "customer-complaint-team-lead",
+  "agents": [
+    "./agents/customer-complaint-team-lead.md",
+    "./agents/customer-complaint.md",
+    "./agents/dir-archive-rule.md",
+    "./agents/business-trip-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 客诉处理",
+    "zh": "帮我处理客诉处理"
+  },
+  "description": "Customer Complaint team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "客诉 目录 出差 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Customer Complaint Team",
+    "zh": "客诉 目录 出差 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "customer-complaint-team-lead",
+      "name": {
+        "en": "客诉处理主理人",
+        "zh": "客诉处理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/customer-complaint.png",
+      "id": "customer-complaint",
+      "name": {
+        "en": "Customer Complaint",
+        "zh": "客诉处理 话术拆解 顾问"
+      },
+      "profession": {
+        "en": "Customer Complaint",
+        "zh": "客诉处理 话术拆解 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dir-archive-rule.png",
+      "id": "dir-archive-rule",
+      "name": {
+        "en": "Dir Archive Rule",
+        "zh": "目录归档 命名规范 助手"
+      },
+      "profession": {
+        "en": "Dir Archive Rule",
+        "zh": "目录归档 命名规范 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/business-trip-pro.png",
+      "id": "business-trip-pro",
+      "name": {
+        "en": "Business Trip Pro",
+        "zh": "出差安排 行程报销 客户拜访"
+      },
+      "profession": {
+        "en": "Business Trip Pro",
+        "zh": "出差安排 行程报销 客户拜访"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-210",
+  "plugin": "group-team-210",
+  "profession": {
+    "en": "Customer Complaint Collaboration Team",
+    "zh": "客诉 目录 出差 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 客诉处理",
+      "zh": "帮我处理客诉处理"
+    },
+    {
+      "en": "Plan 目录归档",
+      "zh": "帮我规划目录归档"
+    },
+    {
+      "en": "Review 出差安排",
+      "zh": "帮我检查出差安排"
+    }
+  ],
+  "tags": [
+    {
+      "en": "客诉处理",
+      "zh": "客诉处理"
+    },
+    {
+      "en": "目录归档",
+      "zh": "目录归档"
+    },
+    {
+      "en": "出差安排",
+      "zh": "出差安排"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "customer-complaint-team-lead",
+    "memberAgents": [
+      "customer-complaint",
+      "dir-archive-rule",
+      "business-trip-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

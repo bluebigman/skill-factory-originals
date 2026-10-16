@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-196",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-196",
+    "kind": "team",
+    "name": "测试 路由 部署 团队",
+    "description": "测试 路由 部署 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "code-assist-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "BDD测试主理人",
+        "evidence": null
+      },
+      {
+        "slug": "code-assist-pro-fixed",
+        "role": "member",
+        "name": "BDD测试 性能剖析 快速交付",
+        "evidence": "original_assets/code-assist-pro-fixed/merkle_root",
+        "member_merkle_root": "3e500e6778ada2b7c988cad4c365c4baaef7f8b0113dbf9b7ab0cb8ecb3cc8d8"
+      },
+      {
+        "slug": "code-assist-pro-02",
+        "role": "member",
+        "name": "Web路由设计 任务拆解",
+        "evidence": "original_assets/code-assist-pro-02/merkle_root",
+        "member_merkle_root": "7339b7092e9a1326926478db4f302956c6d80464fb3bf280da9a338b2237674f"
+      },
+      {
+        "slug": "ops-deploy-pro-01",
+        "role": "member",
+        "name": "部署配置",
+        "evidence": "original_assets/ops-deploy-pro-01/merkle_root",
+        "member_merkle_root": "bca0949763eb5b80d151267a8d69fd92ba1dcdc23d2c56a525536644ba1b6084"
+      }
+    ],
+    "team_lead": "code-assist-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e0fb6af83ae5d67e",
+  "prompt_hash": "8399509db4a19d0b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-196\", \"kind\": \"team\", \"name\": \"测试 路由 部署 团队\", \"description\": \"测试 路由 部署 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"code-assist-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"BDD测试主理人\", \"evidence\": null}, {\"slug\": \"code-assist-pro-fixed\", \"role\": \"member\", \"name\": \"BDD测试 性能剖析 快速交付\", \"evidence\": \"original_assets/code-assist-pro-fixed/merkle_root\", \"member_merkle_root\": \"3e500e6778ada2b7c988cad4c365c4baaef7f8b0113dbf9b7ab0cb8ecb3cc8d8\"}, {\"slug\": \"code-assist-pro-02\", \"role\": \"member\", \"name\": \"Web路由设计 任务拆解\", \"evidence\": \"original_assets/code-assist-pro-02/merkle_root\", \"member_merkle_root\": \"7339b7092e9a1326926478db4f302956c6d80464fb3bf280da9a338b2237674f\"}, {\"slug\": \"ops-deploy-pro-01\", \"role\": \"member\", \"name\": \"部署配置\", \"evidence\": \"original_assets/ops-deploy-pro-01/merkle_root\", \"member_merkle_root\": \"bca0949763eb5b80d151267a8d69fd92ba1dcdc23d2c56a525536644ba1b6084\"}], \"team_lead\": \"code-assist-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-assist-pro-02.md": "c562ae3def5d1c95644e9e3a7ea1e4a2f8d1f3a879f8a947bd620e5696addcbe",
+    "agents/code-assist-pro-fixed-team-lead.md": "e4a01097d9e673a00b413c66bd96262cffa74c0bacc58e3dd2141bdc147ca2a4",
+    "agents/code-assist-pro-fixed.md": "6fc28cdb6456ccb99a55f178e76b965913eaf0b3b0ce909576279103387cee47",
+    "agents/ops-deploy-pro-01.md": "fccd0f1553ec0cca9c4725e535cac5337734a92313294cb7cced93140cf8765c",
+    "plugin.json": "1b75a9ff53e2d1cfbc4f94a22101225f985225df50398bcc2970b27a1dabc374",
+    "settings.json": "30e032cb3c4942fa2bc22b5e22f5ede505a968a58c4dcc32f5ed0c8764b01855"
+  }
+}

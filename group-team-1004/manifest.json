@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085714",
+  "slug": "group-team-1004",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1004",
+    "kind": "team",
+    "name": "配图需求描述专家",
+    "description": "配图需求描述专家：围绕配图需求描述，覆盖用途清晰／构图描述／风格统一，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "image-brief-generate-team-lead",
+        "role": "lead",
+        "name": "配图需求描述主理人",
+        "evidence": null
+      },
+      {
+        "slug": "image-brief-generate",
+        "role": "member",
+        "name": "配图需求描述 助手",
+        "evidence": "original_assets/image-brief-generate/merkle_root",
+        "member_merkle_root": "45e574a8b0735440d99e74b935d90544e7bc6a3afaa5ac35e3ca85a9a7bd3399"
+      },
+      {
+        "slug": "doc-craft-pro",
+        "role": "member",
+        "name": "文档排版撰写专家",
+        "evidence": "original_assets/doc-craft-pro/merkle_root",
+        "member_merkle_root": "e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18"
+      },
+      {
+        "slug": "content-lifecycle",
+        "role": "member",
+        "name": "内容生命周期 顾问",
+        "evidence": "original_assets/content-lifecycle/merkle_root",
+        "member_merkle_root": "d53254c5fbd828b447116e8f8ef1a206d1fcde4d605f411998324200fcb8813c"
+      }
+    ],
+    "team_lead": "image-brief-generate-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "847832ef6347221d",
+  "prompt_hash": "b9a918b1cddbf420",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1004\", \"kind\": \"team\", \"name\": \"配图需求描述专家\", \"description\": \"配图需求描述专家：围绕配图需求描述，覆盖用途清晰／构图描述／风格统一，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"image-brief-generate-team-lead\", \"role\": \"lead\", \"name\": \"配图需求描述主理人\", \"evidence\": null}, {\"slug\": \"image-brief-generate\", \"role\": \"member\", \"name\": \"配图需求描述 助手\", \"evidence\": \"original_assets/image-brief-generate/merkle_root\", \"member_merkle_root\": \"45e574a8b0735440d99e74b935d90544e7bc6a3afaa5ac35e3ca85a9a7bd3399\"}, {\"slug\": \"doc-craft-pro\", \"role\": \"member\", \"name\": \"文档排版撰写专家\", \"evidence\": \"original_assets/doc-craft-pro/merkle_root\", \"member_merkle_root\": \"e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18\"}, {\"slug\": \"content-lifecycle\", \"role\": \"member\", \"name\": \"内容生命周期 顾问\", \"evidence\": \"original_assets/content-lifecycle/merkle_root\", \"member_merkle_root\": \"d53254c5fbd828b447116e8f8ef1a206d1fcde4d605f411998324200fcb8813c\"}], \"team_lead\": \"image-brief-generate-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-lifecycle.md": "a967c8b4d0329a11e8460964aff4882e47ff163668f8e641cf3cbc7124fa1ac2",
+    "agents/doc-craft-pro.md": "b9cdb1ce05034460eb1c8944fa45a39d69f2d1947379f678cf22789c2fc3e286",
+    "agents/image-brief-generate-team-lead.md": "5d4bb82aa54cfbad8944640ecc45db0b79fda66644e54fade658b32b98fcf52a",
+    "agents/image-brief-generate.md": "af5e5cb9ac5b14ea702d3d0a6243aa0c8a7c74ebfe6f2f8ef952e015459a31cb",
+    "plugin.json": "c7e0cea123b255cbd3afd85b73fcc8b7aa791f7a2874c7895564c57e37c3aea5",
+    "settings.json": "e24eeac47b87863972234b518c92223b899278b155df211d1fbb6049a9a7e2de"
+  }
+}

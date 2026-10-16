@@ -1,0 +1,126 @@
+{
+  "agentName": "automation-audit-team-lead",
+  "agents": [
+    "./agents/automation-audit-team-lead.md",
+    "./agents/automation-audit.md",
+    "./agents/document-control.md",
+    "./agents/sop-compliance-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 自动化审计",
+    "zh": "帮我处理自动化审计"
+  },
+  "description": "automation-audit team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 自动化审计, covers 触发核对 / 僵尸清理 / 冲突检查, delivering structured results and actionable checklists.",
+    "zh": "自动化审计顾问专家：围绕自动化审计，覆盖触发核对／僵尸清理／冲突检查，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "automation-audit Team",
+    "zh": "自动化审计顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "automation-audit-team-lead",
+      "name": {
+        "en": "自动化审计主理人",
+        "zh": "自动化审计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/automation-audit.png",
+      "id": "automation-audit",
+      "name": {
+        "en": "automation-audit",
+        "zh": "自动化审计 顾问"
+      },
+      "profession": {
+        "en": "automation-audit",
+        "zh": "自动化审计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/document-control.png",
+      "id": "document-control",
+      "name": {
+        "en": "document-control",
+        "zh": "文件受控管理 顾问"
+      },
+      "profession": {
+        "en": "document-control",
+        "zh": "文件受控管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sop-compliance-check.png",
+      "id": "sop-compliance-check",
+      "name": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "profession": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1178",
+  "plugin": "group-team-1178",
+  "profession": {
+    "en": "automation-audit Collaboration Team",
+    "zh": "自动化审计顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 自动化审计",
+      "zh": "帮我处理自动化审计"
+    },
+    {
+      "en": "Plan 文件受控管理",
+      "zh": "帮我规划文件受控管理"
+    },
+    {
+      "en": "Review 流程合规",
+      "zh": "帮我检查流程合规"
+    }
+  ],
+  "tags": [
+    {
+      "en": "清单化",
+      "zh": "清单化"
+    },
+    {
+      "en": "触发核对",
+      "zh": "触发核对"
+    },
+    {
+      "en": "僵尸清理",
+      "zh": "僵尸清理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "automation-audit-team-lead",
+    "memberAgents": [
+      "automation-audit",
+      "document-control",
+      "sop-compliance-check"
+    ]
+  },
+  "version": "1.0.0"
+}

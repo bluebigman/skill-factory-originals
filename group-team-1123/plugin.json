@@ -1,0 +1,126 @@
+{
+  "agentName": "automation-audit-team-lead",
+  "agents": [
+    "./agents/automation-audit-team-lead.md",
+    "./agents/automation-audit.md",
+    "./agents/manufacturing-sop.md",
+    "./agents/customer-health.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 自动化审计",
+    "zh": "帮我处理自动化审计"
+  },
+  "description": "automation-audit team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 自动化审计 end-to-end: 触发核对, 僵尸清理 and 冲突检查. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长触发核对、僵尸清理与冲突检查，覆盖自动化审计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "automation-audit Team",
+    "zh": "自动化审计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "automation-audit-team-lead",
+      "name": {
+        "en": "自动化审计主理人",
+        "zh": "自动化审计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/automation-audit.png",
+      "id": "automation-audit",
+      "name": {
+        "en": "automation-audit",
+        "zh": "自动化审计 顾问"
+      },
+      "profession": {
+        "en": "automation-audit",
+        "zh": "自动化审计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/manufacturing-sop.png",
+      "id": "manufacturing-sop",
+      "name": {
+        "en": "manufacturing-sop",
+        "zh": "生产作业规范 顾问"
+      },
+      "profession": {
+        "en": "manufacturing-sop",
+        "zh": "生产作业规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/customer-health.png",
+      "id": "customer-health",
+      "name": {
+        "en": "customer-health",
+        "zh": "客户健康度 评估"
+      },
+      "profession": {
+        "en": "customer-health",
+        "zh": "客户健康度 评估"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1123",
+  "plugin": "group-team-1123",
+  "profession": {
+    "en": "automation-audit Collaboration Team",
+    "zh": "自动化审计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 自动化审计",
+      "zh": "帮我处理自动化审计"
+    },
+    {
+      "en": "Plan 生产作业规范",
+      "zh": "帮我规划生产作业规范"
+    },
+    {
+      "en": "Review 客户健康度",
+      "zh": "帮我检查客户健康度"
+    }
+  ],
+  "tags": [
+    {
+      "en": "触发核对",
+      "zh": "触发核对"
+    },
+    {
+      "en": "僵尸清理",
+      "zh": "僵尸清理"
+    },
+    {
+      "en": "冲突检查",
+      "zh": "冲突检查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "automation-audit-team-lead",
+    "memberAgents": [
+      "automation-audit",
+      "manufacturing-sop",
+      "customer-health"
+    ]
+  },
+  "version": "1.0.0"
+}

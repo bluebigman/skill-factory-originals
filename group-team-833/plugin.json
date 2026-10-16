@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-doc-pipeline-team-lead",
+  "agents": [
+    "./agents/agent-doc-pipeline-team-lead.md",
+    "./agents/agent-doc-pipeline.md",
+    "./agents/churn-prevent-pro.md",
+    "./agents/sheet-collab-rule.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 文档流水",
+    "zh": "帮我处理文档流水"
+  },
+  "description": "agent-doc-pipeline team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档流水 requirements, output three deliverables: 质量抽检, 行为信号, 分级干预. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档流水相关需求，输出质量抽检、行为信号、分级干预三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-doc-pipeline Team",
+    "zh": "客户流失预警干预专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-doc-pipeline-team-lead",
+      "name": {
+        "en": "文档流水主理人",
+        "zh": "文档流水主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-doc-pipeline.png",
+      "id": "agent-doc-pipeline",
+      "name": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "profession": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/churn-prevent-pro.png",
+      "id": "churn-prevent-pro",
+      "name": {
+        "en": "churn-prevent-pro",
+        "zh": "客户流失 预警干预 顾问"
+      },
+      "profession": {
+        "en": "churn-prevent-pro",
+        "zh": "客户流失 预警干预 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sheet-collab-rule.png",
+      "id": "sheet-collab-rule",
+      "name": {
+        "en": "sheet-collab-rule",
+        "zh": "协作表格规范 顾问"
+      },
+      "profession": {
+        "en": "sheet-collab-rule",
+        "zh": "协作表格规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-833",
+  "plugin": "group-team-833",
+  "profession": {
+    "en": "agent-doc-pipeline Collaboration Team",
+    "zh": "客户流失预警干预专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档流水",
+      "zh": "帮我处理文档流水"
+    },
+    {
+      "en": "Plan 客户流失",
+      "zh": "帮我规划客户流失"
+    },
+    {
+      "en": "Review 协作表格规范",
+      "zh": "帮我检查协作表格规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结构化",
+      "zh": "结构化"
+    },
+    {
+      "en": "幂等入库",
+      "zh": "幂等入库"
+    },
+    {
+      "en": "异常隔离",
+      "zh": "异常隔离"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-doc-pipeline-team-lead",
+    "memberAgents": [
+      "agent-doc-pipeline",
+      "churn-prevent-pro",
+      "sheet-collab-rule"
+    ]
+  },
+  "version": "1.0.0"
+}

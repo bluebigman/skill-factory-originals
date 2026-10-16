@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1110",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1110",
+    "kind": "team",
+    "name": "用户调研方案专家",
+    "description": "输入用户调研方案相关需求，输出目标明确、样本代表、问题中立三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "user-research-plan-team-lead",
+        "role": "lead",
+        "name": "用户调研方案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "user-research-plan",
+        "role": "member",
+        "name": "用户调研方案 顾问",
+        "evidence": "original_assets/user-research-plan/merkle_root",
+        "member_merkle_root": "7985112ddbb8b653c89b84f014d5986f9bf7ae001ef5803a8eb394f6aa504466"
+      },
+      {
+        "slug": "cli-helper-expert",
+        "role": "member",
+        "name": "命令行助手 脚本生成",
+        "evidence": "original_assets/cli-helper-expert/merkle_root",
+        "member_merkle_root": "b5186bf2184ffc69b49138837cd5c5777b18dd17b963e4030e0106964c15635f"
+      },
+      {
+        "slug": "etl-pipeline-guard",
+        "role": "member",
+        "name": "ETL 管线 顾问",
+        "evidence": "original_assets/etl-pipeline-guard/merkle_root",
+        "member_merkle_root": "ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4"
+      }
+    ],
+    "team_lead": "user-research-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9c460eda21f76c1d",
+  "prompt_hash": "3bcb91dbee5236ca",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1110\", \"kind\": \"team\", \"name\": \"用户调研方案专家\", \"description\": \"输入用户调研方案相关需求，输出目标明确、样本代表、问题中立三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"user-research-plan-team-lead\", \"role\": \"lead\", \"name\": \"用户调研方案主理人\", \"evidence\": null}, {\"slug\": \"user-research-plan\", \"role\": \"member\", \"name\": \"用户调研方案 顾问\", \"evidence\": \"original_assets/user-research-plan/merkle_root\", \"member_merkle_root\": \"7985112ddbb8b653c89b84f014d5986f9bf7ae001ef5803a8eb394f6aa504466\"}, {\"slug\": \"cli-helper-expert\", \"role\": \"member\", \"name\": \"命令行助手 脚本生成\", \"evidence\": \"original_assets/cli-helper-expert/merkle_root\", \"member_merkle_root\": \"b5186bf2184ffc69b49138837cd5c5777b18dd17b963e4030e0106964c15635f\"}, {\"slug\": \"etl-pipeline-guard\", \"role\": \"member\", \"name\": \"ETL 管线 顾问\", \"evidence\": \"original_assets/etl-pipeline-guard/merkle_root\", \"member_merkle_root\": \"ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4\"}], \"team_lead\": \"user-research-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cli-helper-expert.md": "cdde38d295d16b2a95b48cd4f2706e6728b6fb877b83eaadcec60b5594329fb6",
+    "agents/etl-pipeline-guard.md": "4411c6c10753fbd824900dc3678c43d9d0bc2026a8d9b373c5d242370571b6c0",
+    "agents/user-research-plan-team-lead.md": "1988faa16d55ca5659afca94e6d6666624ca237e3720f6d90d271e6dffbffa8b",
+    "agents/user-research-plan.md": "bfdbdd22b66ad2a266a3cc0830c8a0e5d5ea0fc3dc50deb267da2e7603212e68",
+    "plugin.json": "706349300407730fd8891ce2e4c7ef7c49b7b328fdd51b7415ff1e6f59097707",
+    "settings.json": "5cab8088dba98c194025c1d54b683182a678fdce561d35b8e27b70d3574ded1b"
+  }
+}

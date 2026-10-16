@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-base-pro-01-fixed-team-lead",
+  "agents": [
+    "./agents/knowledge-base-pro-01-fixed-team-lead.md",
+    "./agents/knowledge-base-pro-01-fixed.md",
+    "./agents/media-process-pro-fixed.md",
+    "./agents/video-subtitle-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 项目记忆",
+    "zh": "帮我处理项目记忆"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 项目记忆 requirements, output three deliverables: 错误追踪, 经验沉淀, 笔记整理. Verifiable end-to-end, evidence per step.",
+    "zh": "输入项目记忆相关需求，输出错误追踪、经验沉淀、笔记整理三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "项目记忆专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-base-pro-01-fixed-team-lead",
+      "name": {
+        "en": "项目记忆主理人",
+        "zh": "项目记忆主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01-fixed.png",
+      "id": "knowledge-base-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/media-process-pro-fixed.png",
+      "id": "media-process-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/video-subtitle-pro.png",
+      "id": "video-subtitle-pro",
+      "name": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "profession": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-647",
+  "plugin": "group-team-647",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "项目记忆专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 项目记忆",
+      "zh": "帮我处理项目记忆"
+    },
+    {
+      "en": "Plan 政务设计规范",
+      "zh": "帮我规划政务设计规范"
+    },
+    {
+      "en": "Review 视频字幕",
+      "zh": "帮我检查视频字幕"
+    }
+  ],
+  "tags": [
+    {
+      "en": "笔记整理",
+      "zh": "笔记整理"
+    },
+    {
+      "en": "知识卡片",
+      "zh": "知识卡片"
+    },
+    {
+      "en": "信息萃取",
+      "zh": "信息萃取"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-base-pro-01-fixed-team-lead",
+    "memberAgents": [
+      "knowledge-base-pro-01-fixed",
+      "media-process-pro-fixed",
+      "video-subtitle-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

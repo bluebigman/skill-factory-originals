@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-807",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-807",
+    "kind": "team",
+    "name": "工具选择专家",
+    "description": "擅长选择逻辑、依赖顺序与成本权衡，覆盖工具选择全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-cloud-pro-team-lead",
+        "role": "lead",
+        "name": "云环境部署主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-cloud-pro",
+        "role": "member",
+        "name": "云环境部署 服务编排 运维巡检",
+        "evidence": "original_assets/ops-cloud-pro/merkle_root",
+        "member_merkle_root": "afb86f84156f46f2b83850a1d28c30f18a82fc4da98b6d81f7fb3b08c79e5d18"
+      },
+      {
+        "slug": "agent-tool-selection",
+        "role": "member",
+        "name": "工具选择 依赖排序 顾问",
+        "evidence": "original_assets/agent-tool-selection/merkle_root",
+        "member_merkle_root": "d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb"
+      },
+      {
+        "slug": "data-clean-pro-03-fixed",
+        "role": "member",
+        "name": "懒人记录 字段映射 置信标注",
+        "evidence": "original_assets/data-clean-pro-03-fixed/merkle_root",
+        "member_merkle_root": "fb486b32ff640c3d90139a989d0f28809e3a310208e21ad0bde6e1997af0067d"
+      }
+    ],
+    "team_lead": "ops-cloud-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9d0078c2529e36ea",
+  "prompt_hash": "3ee165f0f9a968a2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-807\", \"kind\": \"team\", \"name\": \"工具选择专家\", \"description\": \"擅长选择逻辑、依赖顺序与成本权衡，覆盖工具选择全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-cloud-pro-team-lead\", \"role\": \"lead\", \"name\": \"云环境部署主理人\", \"evidence\": null}, {\"slug\": \"ops-cloud-pro\", \"role\": \"member\", \"name\": \"云环境部署 服务编排 运维巡检\", \"evidence\": \"original_assets/ops-cloud-pro/merkle_root\", \"member_merkle_root\": \"afb86f84156f46f2b83850a1d28c30f18a82fc4da98b6d81f7fb3b08c79e5d18\"}, {\"slug\": \"agent-tool-selection\", \"role\": \"member\", \"name\": \"工具选择 依赖排序 顾问\", \"evidence\": \"original_assets/agent-tool-selection/merkle_root\", \"member_merkle_root\": \"d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb\"}, {\"slug\": \"data-clean-pro-03-fixed\", \"role\": \"member\", \"name\": \"懒人记录 字段映射 置信标注\", \"evidence\": \"original_assets/data-clean-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"fb486b32ff640c3d90139a989d0f28809e3a310208e21ad0bde6e1997af0067d\"}], \"team_lead\": \"ops-cloud-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-tool-selection.md": "dc88f519f8dc31456df26aa6de64124b64c403d60cf52093ed6aaf561e8d51f4",
+    "agents/data-clean-pro-03-fixed.md": "b75a4f82f6ed26b2b150d9cc9129abf05d13b1e7995f4167619961a934f1b870",
+    "agents/ops-cloud-pro-team-lead.md": "7c05b1f5c564111c1b7959912891d0cd2b60e310a07723ac40de0da3f5f8b1ec",
+    "agents/ops-cloud-pro.md": "6c81b4476f9830859d7dc1a1084c8ff5cede4a2232e0e1e50b16adc692b0d30f",
+    "plugin.json": "0eaeb01726e7d4a3fe72a69f7527027ef822fdb73295a0deaa17b8c19fb57d3f",
+    "settings.json": "c6cd110397c2e186adb79104546da71b28f1e7191935acced4e7978de8394a69"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-802",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-802",
+    "kind": "team",
+    "name": "数据整理专家",
+    "description": "擅长批量脚本、字段还原与批量处理，覆盖错误手册全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-04-fixed-team-lead",
+        "role": "lead",
+        "name": "数据整理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-04-fixed",
+        "role": "member",
+        "name": "数据整理 字段还原 批量处理",
+        "evidence": "original_assets/data-clean-pro-04-fixed/merkle_root",
+        "member_merkle_root": "175fb2f1b9a75022b44579d96162eb77fae84c179f754df8c98e946091373e6c"
+      },
+      {
+        "slug": "agent-error-playbook",
+        "role": "member",
+        "name": "错误手册 分类 顾问",
+        "evidence": "original_assets/agent-error-playbook/merkle_root",
+        "member_merkle_root": "521181de4cd7f050598b73e3f0e0fc973c285329e82c3f5596016736a37909b0"
+      },
+      {
+        "slug": "web-capture-api-debug-expert",
+        "role": "member",
+        "name": "网页采集 接口调试 数据整理",
+        "evidence": "original_assets/web-capture-api-debug-expert/merkle_root",
+        "member_merkle_root": "f1f53cc62eb2820a6700a52dd037ac5692a7def1429d6163448faa57c54baf2b"
+      }
+    ],
+    "team_lead": "data-clean-pro-04-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ac999b2a4d77ce94",
+  "prompt_hash": "6e8916eccde8ddfe",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-802\", \"kind\": \"team\", \"name\": \"数据整理专家\", \"description\": \"擅长批量脚本、字段还原与批量处理，覆盖错误手册全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-04-fixed-team-lead\", \"role\": \"lead\", \"name\": \"数据整理主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-04-fixed\", \"role\": \"member\", \"name\": \"数据整理 字段还原 批量处理\", \"evidence\": \"original_assets/data-clean-pro-04-fixed/merkle_root\", \"member_merkle_root\": \"175fb2f1b9a75022b44579d96162eb77fae84c179f754df8c98e946091373e6c\"}, {\"slug\": \"agent-error-playbook\", \"role\": \"member\", \"name\": \"错误手册 分类 顾问\", \"evidence\": \"original_assets/agent-error-playbook/merkle_root\", \"member_merkle_root\": \"521181de4cd7f050598b73e3f0e0fc973c285329e82c3f5596016736a37909b0\"}, {\"slug\": \"web-capture-api-debug-expert\", \"role\": \"member\", \"name\": \"网页采集 接口调试 数据整理\", \"evidence\": \"original_assets/web-capture-api-debug-expert/merkle_root\", \"member_merkle_root\": \"f1f53cc62eb2820a6700a52dd037ac5692a7def1429d6163448faa57c54baf2b\"}], \"team_lead\": \"data-clean-pro-04-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-error-playbook.md": "f95fef0995873df55aaee70e2580599c8fb1530fe3e8886a5662363223625512",
+    "agents/data-clean-pro-04-fixed-team-lead.md": "127aef116fb48d7044d12571368ab605ea6bf54421155d29886fd4d3dd598617",
+    "agents/data-clean-pro-04-fixed.md": "8ceea93dc59d42eff04ece0eec53de6bb29471a35eb23e150449822c39b992c9",
+    "agents/web-capture-api-debug-expert.md": "f66a1accc95ecbf17615dbcda9498228286100e107fcae31f96463422050db1e",
+    "plugin.json": "dc49108395bd99dccebf76f4bb3d57c3a42c73798533b2c29b8c1cb3f38ffdcb",
+    "settings.json": "e27a53af8e6224de7ae06778a0f540c8aa0634042229c3953a3671c5f7d9ac44"
+  }
+}

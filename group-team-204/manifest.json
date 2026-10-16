@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-204",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-204",
+    "kind": "team",
+    "name": "任务 数据 配置 团队",
+    "description": "任务 数据 配置 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "toolkit-pro-02-team-lead",
+        "role": "lead",
+        "name": "任务治理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "toolkit-pro-02",
+        "role": "member",
+        "name": "任务治理 PR评审效能洞察",
+        "evidence": "original_assets/toolkit-pro-02/merkle_root",
+        "member_merkle_root": "ef64783aa9162b38b94d3f8967aeb808177fcd9e5e84b80ab70e0d21565babc2"
+      },
+      {
+        "slug": "toolkit-pro-03-fixed",
+        "role": "member",
+        "name": "数据回溯 标准作业 数据保全",
+        "evidence": "original_assets/toolkit-pro-03-fixed/merkle_root",
+        "member_merkle_root": "963f02a30f6038b2fd1dcd2616a0339bb5e58c7a6a6ec3b56d15e749c8312407"
+      },
+      {
+        "slug": "config-error-triage-expert",
+        "role": "member",
+        "name": "配置排查 报错定位",
+        "evidence": "original_assets/config-error-triage-expert/merkle_root",
+        "member_merkle_root": "f0bc33854157bde16f03516c49046337efaf9effb4c1265bd33e3b2e18d073a1"
+      }
+    ],
+    "team_lead": "toolkit-pro-02-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a714f5938050d53a",
+  "prompt_hash": "fba2b99f38735615",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-204\", \"kind\": \"team\", \"name\": \"任务 数据 配置 团队\", \"description\": \"任务 数据 配置 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"toolkit-pro-02-team-lead\", \"role\": \"lead\", \"name\": \"任务治理主理人\", \"evidence\": null}, {\"slug\": \"toolkit-pro-02\", \"role\": \"member\", \"name\": \"任务治理 PR评审效能洞察\", \"evidence\": \"original_assets/toolkit-pro-02/merkle_root\", \"member_merkle_root\": \"ef64783aa9162b38b94d3f8967aeb808177fcd9e5e84b80ab70e0d21565babc2\"}, {\"slug\": \"toolkit-pro-03-fixed\", \"role\": \"member\", \"name\": \"数据回溯 标准作业 数据保全\", \"evidence\": \"original_assets/toolkit-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"963f02a30f6038b2fd1dcd2616a0339bb5e58c7a6a6ec3b56d15e749c8312407\"}, {\"slug\": \"config-error-triage-expert\", \"role\": \"member\", \"name\": \"配置排查 报错定位\", \"evidence\": \"original_assets/config-error-triage-expert/merkle_root\", \"member_merkle_root\": \"f0bc33854157bde16f03516c49046337efaf9effb4c1265bd33e3b2e18d073a1\"}], \"team_lead\": \"toolkit-pro-02-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/config-error-triage-expert.md": "4f26b380b0b6d50a707ba74668a16135897057da7907a99dd59baf063b23de3f",
+    "agents/toolkit-pro-02-team-lead.md": "5465595c26c5447e0f7e7e6828d440f9ab8e51a6d486ad390095e826367931ee",
+    "agents/toolkit-pro-02.md": "258d7d195620a9d7ff31c1b1155d6ae0b16f39a9405caae34b95fbd5a1a3220b",
+    "agents/toolkit-pro-03-fixed.md": "583439cdbeb751e396fe14e58079df521ec919644dbf8be5d3db89fdc367df57",
+    "plugin.json": "3ec4296c9dfe962d79cab86ba911f13c7ce53774d3dead79a0ba542e0459c805",
+    "settings.json": "71d6eb5ad65694bd404e26632cbefa87282e14dcf1c91b61819c6c068afb9a26"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "internal-comms-draft-team-lead",
+  "agents": [
+    "./agents/internal-comms-draft-team-lead.md",
+    "./agents/internal-comms-draft.md",
+    "./agents/copy-test-method.md",
+    "./agents/doc-localization-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内部沟通文案",
+    "zh": "帮我处理内部沟通文案"
+  },
+  "description": "internal-comms-draft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 内部沟通文案, covers 受众先行 / 行动明确 / 语气一致, delivering structured results and actionable checklists.",
+    "zh": "输入内部沟通文案相关需求，输出受众先行、行动明确、语气一致三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "internal-comms-draft Team",
+    "zh": "内部沟通文案助手专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "internal-comms-draft-team-lead",
+      "name": {
+        "en": "内部沟通文案主理人",
+        "zh": "内部沟通文案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/internal-comms-draft.png",
+      "id": "internal-comms-draft",
+      "name": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "profession": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/copy-test-method.png",
+      "id": "copy-test-method",
+      "name": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "profession": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-localization-pro.png",
+      "id": "doc-localization-pro",
+      "name": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "profession": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-939",
+  "plugin": "group-team-939",
+  "profession": {
+    "en": "internal-comms-draft Collaboration Team",
+    "zh": "内部沟通文案助手专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内部沟通文案",
+      "zh": "帮我处理内部沟通文案"
+    },
+    {
+      "en": "Plan 文案测试",
+      "zh": "帮我规划文案测试"
+    },
+    {
+      "en": "Review 文档本地",
+      "zh": "帮我检查文档本地"
+    }
+  ],
+  "tags": [
+    {
+      "en": "受众先行",
+      "zh": "受众先行"
+    },
+    {
+      "en": "结论在首段",
+      "zh": "结论在首段"
+    },
+    {
+      "en": "行动明确",
+      "zh": "行动明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "internal-comms-draft-team-lead",
+    "memberAgents": [
+      "internal-comms-draft",
+      "copy-test-method",
+      "doc-localization-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

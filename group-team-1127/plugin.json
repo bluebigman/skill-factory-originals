@@ -1,0 +1,126 @@
+{
+  "agentName": "oncall-handbook-team-lead",
+  "agents": [
+    "./agents/oncall-handbook-team-lead.md",
+    "./agents/oncall-handbook.md",
+    "./agents/code-owner-rule.md",
+    "./agents/pricing-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 值班手册",
+    "zh": "帮我处理值班手册"
+  },
+  "description": "oncall-handbook team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 值班手册, covers 升级路径 / 常用命令 / 演练更新, delivering structured results and actionable checklists.",
+    "zh": "值班手册专家：围绕值班手册，覆盖升级路径／常用命令／演练更新，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "oncall-handbook Team",
+    "zh": "值班手册专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "oncall-handbook-team-lead",
+      "name": {
+        "en": "值班手册主理人",
+        "zh": "值班手册主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/oncall-handbook.png",
+      "id": "oncall-handbook",
+      "name": {
+        "en": "oncall-handbook",
+        "zh": "值班手册 编写"
+      },
+      "profession": {
+        "en": "oncall-handbook",
+        "zh": "值班手册 编写"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-owner-rule.png",
+      "id": "code-owner-rule",
+      "name": {
+        "en": "code-owner-rule",
+        "zh": "代码归属规则 顾问"
+      },
+      "profession": {
+        "en": "code-owner-rule",
+        "zh": "代码归属规则 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pricing-review.png",
+      "id": "pricing-review",
+      "name": {
+        "en": "pricing-review",
+        "zh": "定价复核 顾问"
+      },
+      "profession": {
+        "en": "pricing-review",
+        "zh": "定价复核 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1127",
+  "plugin": "group-team-1127",
+  "profession": {
+    "en": "oncall-handbook Collaboration Team",
+    "zh": "值班手册专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 值班手册",
+      "zh": "帮我处理值班手册"
+    },
+    {
+      "en": "Plan 代码归属规则",
+      "zh": "帮我规划代码归属规则"
+    },
+    {
+      "en": "Review 定价复核",
+      "zh": "帮我检查定价复核"
+    }
+  ],
+  "tags": [
+    {
+      "en": "升级路径",
+      "zh": "升级路径"
+    },
+    {
+      "en": "常用命令",
+      "zh": "常用命令"
+    },
+    {
+      "en": "演练更新",
+      "zh": "演练更新"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "oncall-handbook-team-lead",
+    "memberAgents": [
+      "oncall-handbook",
+      "code-owner-rule",
+      "pricing-review"
+    ]
+  },
+  "version": "1.0.0"
+}

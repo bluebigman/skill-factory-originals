@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1047",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1047",
+    "kind": "team",
+    "name": "安全部署核查专家",
+    "description": "输入安全部署核查相关需求，输出默认关闭、端口收敛、鉴权前置三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "secure-deploy-check-team-lead",
+        "role": "lead",
+        "name": "安全部署核查主理人",
+        "evidence": null
+      },
+      {
+        "slug": "secure-deploy-check",
+        "role": "member",
+        "name": "安全部署核查 顾问",
+        "evidence": "original_assets/secure-deploy-check/merkle_root",
+        "member_merkle_root": "7e48c2e06837075272b2f1fd7c0be8ad8da899155929671b3d0539fe958e8c91"
+      },
+      {
+        "slug": "doc-ocr-postfix",
+        "role": "member",
+        "name": "OCR 结果校订 助手",
+        "evidence": "original_assets/doc-ocr-postfix/merkle_root",
+        "member_merkle_root": "e1a25c4c1c742e6cc421adc25c11510f441d48cbcbe618ebecc7426faa071df8"
+      },
+      {
+        "slug": "agent-output-verify-pro",
+        "role": "member",
+        "name": "输出验证 幻觉检测 顾问",
+        "evidence": "original_assets/agent-output-verify-pro/merkle_root",
+        "member_merkle_root": "01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1"
+      }
+    ],
+    "team_lead": "secure-deploy-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "84a19e74dbdd4bae",
+  "prompt_hash": "0692a6064c959161",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1047\", \"kind\": \"team\", \"name\": \"安全部署核查专家\", \"description\": \"输入安全部署核查相关需求，输出默认关闭、端口收敛、鉴权前置三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"secure-deploy-check-team-lead\", \"role\": \"lead\", \"name\": \"安全部署核查主理人\", \"evidence\": null}, {\"slug\": \"secure-deploy-check\", \"role\": \"member\", \"name\": \"安全部署核查 顾问\", \"evidence\": \"original_assets/secure-deploy-check/merkle_root\", \"member_merkle_root\": \"7e48c2e06837075272b2f1fd7c0be8ad8da899155929671b3d0539fe958e8c91\"}, {\"slug\": \"doc-ocr-postfix\", \"role\": \"member\", \"name\": \"OCR 结果校订 助手\", \"evidence\": \"original_assets/doc-ocr-postfix/merkle_root\", \"member_merkle_root\": \"e1a25c4c1c742e6cc421adc25c11510f441d48cbcbe618ebecc7426faa071df8\"}, {\"slug\": \"agent-output-verify-pro\", \"role\": \"member\", \"name\": \"输出验证 幻觉检测 顾问\", \"evidence\": \"original_assets/agent-output-verify-pro/merkle_root\", \"member_merkle_root\": \"01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1\"}], \"team_lead\": \"secure-deploy-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-verify-pro.md": "911b83360f631a1d3e5500f8a2626ceaef9065bc7ca3ce631dcf13c8b640c4dd",
+    "agents/doc-ocr-postfix.md": "ed061ba6da558aa6735ac10457757efa340c389f1804b44fbd190390b98e6d46",
+    "agents/secure-deploy-check-team-lead.md": "f6f25751fe5569bcc28ce02d5df6275d93d1dfcdb1bc615f02430d3e8d425c60",
+    "agents/secure-deploy-check.md": "0f236d6f4c3290c6931f5e80235f73e4f5e19e9755a5f8bd43371838ecdb3dfe",
+    "plugin.json": "d00c7b872a1c676e9ac0a9fe66ff5bd3f525a40e1410b3a4a1c48bb892a7236b",
+    "settings.json": "a451d7b841553c12e463c1e27056103a7ca20c1e81d912da150baa91e2fce9d7"
+  }
+}

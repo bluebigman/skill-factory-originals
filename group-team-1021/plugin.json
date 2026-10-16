@@ -1,0 +1,126 @@
+{
+  "agentName": "tourism-itinerary-team-lead",
+  "agents": [
+    "./agents/tourism-itinerary-team-lead.md",
+    "./agents/tourism-itinerary.md",
+    "./agents/intl-standards-map.md",
+    "./agents/export-doc-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 行程规划",
+    "zh": "帮我处理行程规划"
+  },
+  "description": "tourism-itinerary team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 行程规划 end-to-end: 节奏合理, 备选方案 and 预算匹配. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长节奏合理、备选方案与预算匹配，覆盖行程规划全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "tourism-itinerary Team",
+    "zh": "行程规划专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "tourism-itinerary-team-lead",
+      "name": {
+        "en": "行程规划主理人",
+        "zh": "行程规划主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/tourism-itinerary.png",
+      "id": "tourism-itinerary",
+      "name": {
+        "en": "tourism-itinerary",
+        "zh": "行程规划 助手"
+      },
+      "profession": {
+        "en": "tourism-itinerary",
+        "zh": "行程规划 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-standards-map.png",
+      "id": "intl-standards-map",
+      "name": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "profession": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/export-doc-check.png",
+      "id": "export-doc-check",
+      "name": {
+        "en": "export-doc-check",
+        "zh": "出口单据 一致性 顾问"
+      },
+      "profession": {
+        "en": "export-doc-check",
+        "zh": "出口单据 一致性 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1021",
+  "plugin": "group-team-1021",
+  "profession": {
+    "en": "tourism-itinerary Collaboration Team",
+    "zh": "行程规划专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 行程规划",
+      "zh": "帮我处理行程规划"
+    },
+    {
+      "en": "Plan 国际标准",
+      "zh": "帮我规划国际标准"
+    },
+    {
+      "en": "Review 出口单据",
+      "zh": "帮我检查出口单据"
+    }
+  ],
+  "tags": [
+    {
+      "en": "节奏合理",
+      "zh": "节奏合理"
+    },
+    {
+      "en": "备选方案",
+      "zh": "备选方案"
+    },
+    {
+      "en": "预算匹配",
+      "zh": "预算匹配"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "tourism-itinerary-team-lead",
+    "memberAgents": [
+      "tourism-itinerary",
+      "intl-standards-map",
+      "export-doc-check"
+    ]
+  },
+  "version": "1.0.0"
+}

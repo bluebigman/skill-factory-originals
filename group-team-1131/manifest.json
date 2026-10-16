@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1131",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1131",
+    "kind": "team",
+    "name": "数据素养培训专家",
+    "description": "输入数据素养培训相关需求，输出分层培训、常见误区、定期复训三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-literacy-team-lead",
+        "role": "lead",
+        "name": "数据素养培训主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-literacy",
+        "role": "member",
+        "name": "数据素养培训 顾问",
+        "evidence": "original_assets/data-literacy/merkle_root",
+        "member_merkle_root": "16bb2d08dec21c079d62be2b4a644051f10db50878e506eb42e59a7a82cd408f"
+      },
+      {
+        "slug": "cs-qbr-pro",
+        "role": "member",
+        "name": "客户复盘 季度会议 顾问",
+        "evidence": "original_assets/cs-qbr-pro/merkle_root",
+        "member_merkle_root": "c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6"
+      },
+      {
+        "slug": "sales-script-coach",
+        "role": "member",
+        "name": "销售话术 场景演练 教练",
+        "evidence": "original_assets/sales-script-coach/merkle_root",
+        "member_merkle_root": "df424d622b16c5b137c729a8d683f67a334a4e5a612d316ea86cbefc37e14af6"
+      }
+    ],
+    "team_lead": "data-literacy-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "893c7f2d7d456dd4",
+  "prompt_hash": "7489b91224b1778f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1131\", \"kind\": \"team\", \"name\": \"数据素养培训专家\", \"description\": \"输入数据素养培训相关需求，输出分层培训、常见误区、定期复训三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-literacy-team-lead\", \"role\": \"lead\", \"name\": \"数据素养培训主理人\", \"evidence\": null}, {\"slug\": \"data-literacy\", \"role\": \"member\", \"name\": \"数据素养培训 顾问\", \"evidence\": \"original_assets/data-literacy/merkle_root\", \"member_merkle_root\": \"16bb2d08dec21c079d62be2b4a644051f10db50878e506eb42e59a7a82cd408f\"}, {\"slug\": \"cs-qbr-pro\", \"role\": \"member\", \"name\": \"客户复盘 季度会议 顾问\", \"evidence\": \"original_assets/cs-qbr-pro/merkle_root\", \"member_merkle_root\": \"c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6\"}, {\"slug\": \"sales-script-coach\", \"role\": \"member\", \"name\": \"销售话术 场景演练 教练\", \"evidence\": \"original_assets/sales-script-coach/merkle_root\", \"member_merkle_root\": \"df424d622b16c5b137c729a8d683f67a334a4e5a612d316ea86cbefc37e14af6\"}], \"team_lead\": \"data-literacy-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cs-qbr-pro.md": "7f33678b37b1a3faef4f67ea6a01e470d07d2e3c4b773290e22c9d3976ee64bc",
+    "agents/data-literacy-team-lead.md": "da73d55f63ff0f33e3bf09256844d0db736bb69d71eeb2bbb7b4ebfff8d22d6b",
+    "agents/data-literacy.md": "cb199e119a52d914691807fa34810a412eef2f4d8e1874bac5d07cabb08fd2bf",
+    "agents/sales-script-coach.md": "b60f2aec9d0f44cb035348ab3adbb15e725028a8529bfa3ee6bf970e2af0f5cd",
+    "plugin.json": "2dbae7741e0bea0079e311a2356e0b593a5010d1d9082e78b7ca32d52b65672f",
+    "settings.json": "825cb7eea493bd00f51a7817ac1462130e74a111cf6246490d9f8f52b17834b8"
+  }
+}

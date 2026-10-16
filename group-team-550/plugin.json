@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-master-pro-team-lead",
+  "agents": [
+    "./agents/sql-master-pro-team-lead.md",
+    "./agents/sql-master-pro.md",
+    "./agents/sql-build-pro.md",
+    "./agents/sheet-batch-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据库查询",
+    "zh": "帮我处理数据库查询"
+  },
+  "description": "SQL Database Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 表格批量 end-to-end: 批前备份, 小样验证 and 幂等设计. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长批前备份、小样验证与幂等设计，覆盖表格批量全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "SQL Database Expert Team",
+    "zh": "数据库查询专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-master-pro-team-lead",
+      "name": {
+        "en": "数据库查询主理人",
+        "zh": "数据库查询主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-master-pro.png",
+      "id": "sql-master-pro",
+      "name": {
+        "en": "SQL Database Expert",
+        "zh": "数据库查询 SQL编写"
+      },
+      "profession": {
+        "en": "SQL Database Expert",
+        "zh": "数据库查询 SQL编写"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-build-pro.png",
+      "id": "sql-build-pro",
+      "name": {
+        "en": "SQL Build Engineer",
+        "zh": "SQL 构建与看板"
+      },
+      "profession": {
+        "en": "SQL Build Engineer",
+        "zh": "SQL 构建与看板"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sheet-batch-pro.png",
+      "id": "sheet-batch-pro",
+      "name": {
+        "en": "sheet-batch-pro",
+        "zh": "表格批量 计算汇总 顾问"
+      },
+      "profession": {
+        "en": "sheet-batch-pro",
+        "zh": "表格批量 计算汇总 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-550",
+  "plugin": "group-team-550",
+  "profession": {
+    "en": "SQL Database Expert Collaboration Team",
+    "zh": "数据库查询专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据库查询",
+      "zh": "帮我处理数据库查询"
+    },
+    {
+      "en": "Plan SQL",
+      "zh": "帮我规划SQL"
+    },
+    {
+      "en": "Review 表格批量",
+      "zh": "帮我检查表格批量"
+    }
+  ],
+  "tags": [
+    {
+      "en": "层级操作",
+      "zh": "层级操作"
+    },
+    {
+      "en": "遍历查询",
+      "zh": "遍历查询"
+    },
+    {
+      "en": "数据查询",
+      "zh": "数据查询"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-master-pro-team-lead",
+    "memberAgents": [
+      "sql-master-pro",
+      "sql-build-pro",
+      "sheet-batch-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

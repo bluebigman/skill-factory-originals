@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-555",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-555",
+    "kind": "team",
+    "name": "生活计划专家",
+    "description": "输入销售赋能相关需求，输出过期下架、收集反馈、培训配套三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "life-plan-forge-expert-team-lead",
+        "role": "lead",
+        "name": "生活计划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "life-plan-forge-expert",
+        "role": "member",
+        "name": "生活计划 出行饮食 清单生成",
+        "evidence": "original_assets/life-plan-forge-expert/merkle_root",
+        "member_merkle_root": "3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b"
+      },
+      {
+        "slug": "sales-enable-pro",
+        "role": "member",
+        "name": "销售赋能 素材工具 顾问",
+        "evidence": "original_assets/sales-enable-pro/merkle_root",
+        "member_merkle_root": "40cb04b62cc137982d695cf91dc96c4ffd18f816fa0fc9a69b100e18149f83b3"
+      },
+      {
+        "slug": "doc-version-manage",
+        "role": "member",
+        "name": "文档版本 变更记录 顾问",
+        "evidence": "original_assets/doc-version-manage/merkle_root",
+        "member_merkle_root": "90ff09cdf852ce46bd244d7638227132c7c2f506333c6614e85ee4c36ceff1c2"
+      }
+    ],
+    "team_lead": "life-plan-forge-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f92ffb9e1e96abc5",
+  "prompt_hash": "ffd812680167a7b9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-555\", \"kind\": \"team\", \"name\": \"生活计划专家\", \"description\": \"输入销售赋能相关需求，输出过期下架、收集反馈、培训配套三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"life-plan-forge-expert-team-lead\", \"role\": \"lead\", \"name\": \"生活计划主理人\", \"evidence\": null}, {\"slug\": \"life-plan-forge-expert\", \"role\": \"member\", \"name\": \"生活计划 出行饮食 清单生成\", \"evidence\": \"original_assets/life-plan-forge-expert/merkle_root\", \"member_merkle_root\": \"3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b\"}, {\"slug\": \"sales-enable-pro\", \"role\": \"member\", \"name\": \"销售赋能 素材工具 顾问\", \"evidence\": \"original_assets/sales-enable-pro/merkle_root\", \"member_merkle_root\": \"40cb04b62cc137982d695cf91dc96c4ffd18f816fa0fc9a69b100e18149f83b3\"}, {\"slug\": \"doc-version-manage\", \"role\": \"member\", \"name\": \"文档版本 变更记录 顾问\", \"evidence\": \"original_assets/doc-version-manage/merkle_root\", \"member_merkle_root\": \"90ff09cdf852ce46bd244d7638227132c7c2f506333c6614e85ee4c36ceff1c2\"}], \"team_lead\": \"life-plan-forge-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-version-manage.md": "1595760a4129be68f253e74851079f653d0729f6dd327d96d68d6a68aab3d4cd",
+    "agents/life-plan-forge-expert-team-lead.md": "d7c8969fea8a382e95ee0ccb4c16b03086854b7b4b74b649c0e2e622f1558caa",
+    "agents/life-plan-forge-expert.md": "1f2c77160e778ca63e6d22fef142f61e30070a9124c79905f721e9df31f6e5dd",
+    "agents/sales-enable-pro.md": "7ec3c249b87d84844760a929be844f086ef7898b94fd8a20d2c0914dfa4edb17",
+    "plugin.json": "c0713265c2a4f5b25413c7a399557ed6ba78af1bf2aa6dddb8b188fd84476763",
+    "settings.json": "8d8725c4731202d70598125866bc73c5f25ecee4abb0f294a34df32ffcd1775f"
+  }
+}

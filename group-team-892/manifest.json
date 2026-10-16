@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-892",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-892",
+    "kind": "team",
+    "name": "沙箱策略隔离边界专家",
+    "description": "擅长逃逸检测、资源限额与减少噪音，覆盖沙箱策略全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-sandbox-policy-team-lead",
+        "role": "lead",
+        "name": "沙箱策略主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-sandbox-policy",
+        "role": "member",
+        "name": "沙箱策略 隔离边界 顾问",
+        "evidence": "original_assets/agent-sandbox-policy/merkle_root",
+        "member_merkle_root": "a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e"
+      },
+      {
+        "slug": "monitor-alert-tune",
+        "role": "member",
+        "name": "监控告警调优 顾问",
+        "evidence": "original_assets/monitor-alert-tune/merkle_root",
+        "member_merkle_root": "24a44b3031a28e985b8cdb23af4775d08e9f062e7a629a3d683df2cc40d8be50"
+      },
+      {
+        "slug": "migration-plan-review",
+        "role": "member",
+        "name": "数据迁移方案 评审",
+        "evidence": "original_assets/migration-plan-review/merkle_root",
+        "member_merkle_root": "4a2fe45662b1d4bb9d1b838283489ac97012b7b57d5b9ca5dc567fa3af589e29"
+      }
+    ],
+    "team_lead": "agent-sandbox-policy-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c5feb0a04512f244",
+  "prompt_hash": "d8fd2fd7f1f487e3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-892\", \"kind\": \"team\", \"name\": \"沙箱策略隔离边界专家\", \"description\": \"擅长逃逸检测、资源限额与减少噪音，覆盖沙箱策略全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-sandbox-policy-team-lead\", \"role\": \"lead\", \"name\": \"沙箱策略主理人\", \"evidence\": null}, {\"slug\": \"agent-sandbox-policy\", \"role\": \"member\", \"name\": \"沙箱策略 隔离边界 顾问\", \"evidence\": \"original_assets/agent-sandbox-policy/merkle_root\", \"member_merkle_root\": \"a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e\"}, {\"slug\": \"monitor-alert-tune\", \"role\": \"member\", \"name\": \"监控告警调优 顾问\", \"evidence\": \"original_assets/monitor-alert-tune/merkle_root\", \"member_merkle_root\": \"24a44b3031a28e985b8cdb23af4775d08e9f062e7a629a3d683df2cc40d8be50\"}, {\"slug\": \"migration-plan-review\", \"role\": \"member\", \"name\": \"数据迁移方案 评审\", \"evidence\": \"original_assets/migration-plan-review/merkle_root\", \"member_merkle_root\": \"4a2fe45662b1d4bb9d1b838283489ac97012b7b57d5b9ca5dc567fa3af589e29\"}], \"team_lead\": \"agent-sandbox-policy-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-sandbox-policy-team-lead.md": "e644555f42b8364c2ed93659d8e247ab8891608f13af93d1b2c8b022eeee5331",
+    "agents/agent-sandbox-policy.md": "6ef40925ce50ca52036c488da31574df524f8e28bd97006234ac1df5af3de696",
+    "agents/migration-plan-review.md": "913deb657af3de03c4bb928d783c52db2d941a33d3e20125e6f2562071ab7ab1",
+    "agents/monitor-alert-tune.md": "0ce9038ef158f2bdae0fae2862d4022fc7bdbebe81254018cb01ea1fb3863974",
+    "plugin.json": "31ec6c9e56c9c8bd40431ab794a09fc129c64e4796415669fd5b88a89cc3082a",
+    "settings.json": "04061d09251baded97e1e8568fe0cd6c71b3a5e1097ab2f5d710d7cff6918520"
+  }
+}

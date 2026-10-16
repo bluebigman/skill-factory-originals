@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-accessibility-check-team-lead",
+  "agents": [
+    "./agents/doc-accessibility-check-team-lead.md",
+    "./agents/doc-accessibility-check.md",
+    "./agents/error-message-pro.md",
+    "./agents/prototype-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 文档可达性核查",
+    "zh": "帮我处理文档可达性核查"
+  },
+  "description": "doc-accessibility-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档可达性核查 requirements, output three deliverables: 表格表头, 说明原因, 给出动作. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档可达性核查相关需求，输出表格表头、说明原因、给出动作三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-accessibility-check Team",
+    "zh": "错误提示专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-accessibility-check-team-lead",
+      "name": {
+        "en": "文档可达性核查主理人",
+        "zh": "文档可达性核查主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-accessibility-check.png",
+      "id": "doc-accessibility-check",
+      "name": {
+        "en": "doc-accessibility-check",
+        "zh": "文档可达性核查 顾问"
+      },
+      "profession": {
+        "en": "doc-accessibility-check",
+        "zh": "文档可达性核查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/error-message-pro.png",
+      "id": "error-message-pro",
+      "name": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "profession": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prototype-method.png",
+      "id": "prototype-method",
+      "name": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "profession": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1146",
+  "plugin": "group-team-1146",
+  "profession": {
+    "en": "doc-accessibility-check Collaboration Team",
+    "zh": "错误提示专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档可达性核查",
+      "zh": "帮我处理文档可达性核查"
+    },
+    {
+      "en": "Plan 错误提示",
+      "zh": "帮我规划错误提示"
+    },
+    {
+      "en": "Review 原型验证",
+      "zh": "帮我检查原型验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标题结构",
+      "zh": "标题结构"
+    },
+    {
+      "en": "替代文本",
+      "zh": "替代文本"
+    },
+    {
+      "en": "对比度",
+      "zh": "对比度"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-accessibility-check-team-lead",
+    "memberAgents": [
+      "doc-accessibility-check",
+      "error-message-pro",
+      "prototype-method"
+    ]
+  },
+  "version": "1.0.0"
+}

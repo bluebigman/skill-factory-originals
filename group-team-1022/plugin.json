@@ -1,0 +1,126 @@
+{
+  "agentName": "safety-production-pro-team-lead",
+  "agents": [
+    "./agents/safety-production-pro-team-lead.md",
+    "./agents/safety-production-pro.md",
+    "./agents/query-cache-pro.md",
+    "./agents/config-drift-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 生产安全",
+    "zh": "帮我处理生产安全"
+  },
+  "description": "safety-production-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 生产安全, covers 分区排查 / 高危优先 / 闭环整改, delivering structured results and actionable checklists.",
+    "zh": "生产安全专家：围绕生产安全，覆盖分区排查／高危优先／闭环整改，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "safety-production-pro Team",
+    "zh": "生产安全专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "safety-production-pro-team-lead",
+      "name": {
+        "en": "生产安全主理人",
+        "zh": "生产安全主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/safety-production-pro.png",
+      "id": "safety-production-pro",
+      "name": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "profession": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/query-cache-pro.png",
+      "id": "query-cache-pro",
+      "name": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "profession": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/config-drift-check.png",
+      "id": "config-drift-check",
+      "name": {
+        "en": "config-drift-check",
+        "zh": "配置漂移核验 顾问"
+      },
+      "profession": {
+        "en": "config-drift-check",
+        "zh": "配置漂移核验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1022",
+  "plugin": "group-team-1022",
+  "profession": {
+    "en": "safety-production-pro Collaboration Team",
+    "zh": "生产安全专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 生产安全",
+      "zh": "帮我处理生产安全"
+    },
+    {
+      "en": "Plan 查询缓存",
+      "zh": "帮我规划查询缓存"
+    },
+    {
+      "en": "Review 配置漂移核验",
+      "zh": "帮我检查配置漂移核验"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分区排查",
+      "zh": "分区排查"
+    },
+    {
+      "en": "高危优先",
+      "zh": "高危优先"
+    },
+    {
+      "en": "闭环整改",
+      "zh": "闭环整改"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "safety-production-pro-team-lead",
+    "memberAgents": [
+      "safety-production-pro",
+      "query-cache-pro",
+      "config-drift-check"
+    ]
+  },
+  "version": "1.0.0"
+}

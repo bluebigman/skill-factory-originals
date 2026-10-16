@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-967",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-967",
+    "kind": "team",
+    "name": "批量数据校验专家",
+    "description": "输入批量数据校验相关需求，输出错误报告、抽样复核、定期演练三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "batch-data-validate-team-lead",
+        "role": "lead",
+        "name": "批量数据校验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "batch-data-validate",
+        "role": "member",
+        "name": "批量数据校验 助手",
+        "evidence": "original_assets/batch-data-validate/merkle_root",
+        "member_merkle_root": "80a37cd96340e06758935396de79dd96eefe09dc62f9c3921045f634f23e3278"
+      },
+      {
+        "slug": "backup-restore-plan",
+        "role": "member",
+        "name": "备份恢复方案 顾问",
+        "evidence": "original_assets/backup-restore-plan/merkle_root",
+        "member_merkle_root": "452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e"
+      },
+      {
+        "slug": "sql-toolkit-pro-02-fixed",
+        "role": "member",
+        "name": "SQL生成编辑 查询构建器",
+        "evidence": "original_assets/sql-toolkit-pro-02-fixed/merkle_root",
+        "member_merkle_root": "d62131e5e2cf6a04bc50a510633960e582e040557f3701052d5e857bfe24a4e3"
+      }
+    ],
+    "team_lead": "batch-data-validate-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2b301a5030fca39c",
+  "prompt_hash": "740ac3f3d3f394f5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-967\", \"kind\": \"team\", \"name\": \"批量数据校验专家\", \"description\": \"输入批量数据校验相关需求，输出错误报告、抽样复核、定期演练三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"batch-data-validate-team-lead\", \"role\": \"lead\", \"name\": \"批量数据校验主理人\", \"evidence\": null}, {\"slug\": \"batch-data-validate\", \"role\": \"member\", \"name\": \"批量数据校验 助手\", \"evidence\": \"original_assets/batch-data-validate/merkle_root\", \"member_merkle_root\": \"80a37cd96340e06758935396de79dd96eefe09dc62f9c3921045f634f23e3278\"}, {\"slug\": \"backup-restore-plan\", \"role\": \"member\", \"name\": \"备份恢复方案 顾问\", \"evidence\": \"original_assets/backup-restore-plan/merkle_root\", \"member_merkle_root\": \"452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e\"}, {\"slug\": \"sql-toolkit-pro-02-fixed\", \"role\": \"member\", \"name\": \"SQL生成编辑 查询构建器\", \"evidence\": \"original_assets/sql-toolkit-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"d62131e5e2cf6a04bc50a510633960e582e040557f3701052d5e857bfe24a4e3\"}], \"team_lead\": \"batch-data-validate-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/backup-restore-plan.md": "aa2db4010838b5a5b0bd2cb004485b4eca39a8796ff40c9f4d538708f7eaa0ee",
+    "agents/batch-data-validate-team-lead.md": "97665eae8958a5052992eaf63e8177bdb88dc0b2a0c81ca4a53d0a9dddefebfe",
+    "agents/batch-data-validate.md": "06e3b052e8adcccef7ecedf94aedaebefab68474adcfdd87984f41e06c508513",
+    "agents/sql-toolkit-pro-02-fixed.md": "101f9adfa98d2e44769ee24c8ebe885c2f6a7903fbfcf730384dc1b71252af4a",
+    "plugin.json": "69ce9889cdc92b7e9ef01def5566f04ee7f2386064dccd976aaccd98d704907f",
+    "settings.json": "17305df88e10923deeb27264d0c625ba068b1f0497530ed08197d264b3d375f6"
+  }
+}

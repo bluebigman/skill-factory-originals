@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1039",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1039",
+    "kind": "team",
+    "name": "多文档合并专家",
+    "description": "擅长顺序明确、样式统一与页码重排，覆盖多文档合并全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-merge-batch-team-lead",
+        "role": "lead",
+        "name": "多文档合并主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-merge-batch",
+        "role": "member",
+        "name": "多文档合并 助手",
+        "evidence": "original_assets/doc-merge-batch/merkle_root",
+        "member_merkle_root": "2fc2217052556dd5c33c7604cebd7c4ec5c1506440bc89c602edecf6347096d1"
+      },
+      {
+        "slug": "brand-tone-guide",
+        "role": "member",
+        "name": "品牌语气指南 顾问",
+        "evidence": "original_assets/brand-tone-guide/merkle_root",
+        "member_merkle_root": "e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c"
+      },
+      {
+        "slug": "content-hook-craft",
+        "role": "member",
+        "name": "内容钩子设计 顾问",
+        "evidence": "original_assets/content-hook-craft/merkle_root",
+        "member_merkle_root": "a8dd97cd78bd5e39044527392f49eb6a045f7a76d1d8a45b38a4fda8f87ea534"
+      }
+    ],
+    "team_lead": "doc-merge-batch-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e7bb72f975caa9cb",
+  "prompt_hash": "24fba5abb039820d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1039\", \"kind\": \"team\", \"name\": \"多文档合并专家\", \"description\": \"擅长顺序明确、样式统一与页码重排，覆盖多文档合并全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-merge-batch-team-lead\", \"role\": \"lead\", \"name\": \"多文档合并主理人\", \"evidence\": null}, {\"slug\": \"doc-merge-batch\", \"role\": \"member\", \"name\": \"多文档合并 助手\", \"evidence\": \"original_assets/doc-merge-batch/merkle_root\", \"member_merkle_root\": \"2fc2217052556dd5c33c7604cebd7c4ec5c1506440bc89c602edecf6347096d1\"}, {\"slug\": \"brand-tone-guide\", \"role\": \"member\", \"name\": \"品牌语气指南 顾问\", \"evidence\": \"original_assets/brand-tone-guide/merkle_root\", \"member_merkle_root\": \"e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c\"}, {\"slug\": \"content-hook-craft\", \"role\": \"member\", \"name\": \"内容钩子设计 顾问\", \"evidence\": \"original_assets/content-hook-craft/merkle_root\", \"member_merkle_root\": \"a8dd97cd78bd5e39044527392f49eb6a045f7a76d1d8a45b38a4fda8f87ea534\"}], \"team_lead\": \"doc-merge-batch-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/brand-tone-guide.md": "88b2ba9055e1de50e6d7e782f901e9f03b79ad543068c38ff90c4dc623e136e0",
+    "agents/content-hook-craft.md": "885bf3da7c24eb04687e7143a24a7ba2ef143d0ce3f47183ed6d58c20962cf54",
+    "agents/doc-merge-batch-team-lead.md": "329ef10d50a349f5ffcf947917c784fb22e60e5d233dfacc98b6fa72a9434946",
+    "agents/doc-merge-batch.md": "5960dcdc39f9030e1c413261a22cbfa447664c4ef20e4941487c224ab5d8872a",
+    "plugin.json": "e6c849403c6c039a5a2bf1da47cf87ef045263d98d17215b9a7d7ab0c7246c88",
+    "settings.json": "6006872231c15f5d5f7b53fec21748f8496ecc5e7a0c462b476dc5f33f13c411"
+  }
+}

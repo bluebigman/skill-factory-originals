@@ -1,0 +1,126 @@
+{
+  "agentName": "api-mock-pro-team-lead",
+  "agents": [
+    "./agents/api-mock-pro-team-lead.md",
+    "./agents/api-mock-pro.md",
+    "./agents/config-error-triage-expert.md",
+    "./agents/sheet-master-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口模拟",
+    "zh": "帮我处理接口模拟"
+  },
+  "description": "API Mock and Replay Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 接口模拟联调编排 end-to-end: 模拟响应, 字段编排 and 示例生成. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长模拟响应、字段编排与示例生成，覆盖接口模拟联调编排全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "API Mock and Replay Expert Team",
+    "zh": "接口模拟联调编排专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-mock-pro-team-lead",
+      "name": {
+        "en": "接口模拟主理人",
+        "zh": "接口模拟主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-mock-pro.png",
+      "id": "api-mock-pro",
+      "name": {
+        "en": "API Mock and Replay Expert",
+        "zh": "接口模拟 联调编排 时序回放"
+      },
+      "profession": {
+        "en": "API Mock and Replay Expert",
+        "zh": "接口模拟 联调编排 时序回放"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/config-error-triage-expert.png",
+      "id": "config-error-triage-expert",
+      "name": {
+        "en": "Config Error Triage Expert",
+        "zh": "配置排查 报错定位"
+      },
+      "profession": {
+        "en": "Config Error Triage Expert",
+        "zh": "配置排查 报错定位"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sheet-master-pro.png",
+      "id": "sheet-master-pro",
+      "name": {
+        "en": "Spreadsheet Expert",
+        "zh": "表格处理 Excel公式"
+      },
+      "profession": {
+        "en": "Spreadsheet Expert",
+        "zh": "表格处理 Excel公式"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-781",
+  "plugin": "group-team-781",
+  "profession": {
+    "en": "API Mock and Replay Expert Collaboration Team",
+    "zh": "接口模拟联调编排专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口模拟",
+      "zh": "帮我处理接口模拟"
+    },
+    {
+      "en": "Plan 配置排查",
+      "zh": "帮我规划配置排查"
+    },
+    {
+      "en": "Review 表格处理",
+      "zh": "帮我检查表格处理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字段编排",
+      "zh": "字段编排"
+    },
+    {
+      "en": "示例生成",
+      "zh": "示例生成"
+    },
+    {
+      "en": "边界取值",
+      "zh": "边界取值"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-mock-pro-team-lead",
+    "memberAgents": [
+      "api-mock-pro",
+      "config-error-triage-expert",
+      "sheet-master-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

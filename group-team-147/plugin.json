@@ -1,0 +1,126 @@
+{
+  "agentName": "quality-spc-pro-team-lead",
+  "agents": [
+    "./agents/quality-spc-pro-team-lead.md",
+    "./agents/quality-spc-pro.md",
+    "./agents/sla-define.md",
+    "./agents/agent-continuous-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 过程质量",
+    "zh": "帮我处理过程质量"
+  },
+  "description": "Quality Spc Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "过程 服务 持续 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Quality Spc Pro Team",
+    "zh": "过程 服务 持续 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "quality-spc-pro-team-lead",
+      "name": {
+        "en": "过程质量主理人",
+        "zh": "过程质量主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/quality-spc-pro.png",
+      "id": "quality-spc-pro",
+      "name": {
+        "en": "Quality Spc Pro",
+        "zh": "过程质量 控制图 顾问"
+      },
+      "profession": {
+        "en": "Quality Spc Pro",
+        "zh": "过程质量 控制图 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sla-define.png",
+      "id": "sla-define",
+      "name": {
+        "en": "Sla Define",
+        "zh": "服务标准 响应时限 顾问"
+      },
+      "profession": {
+        "en": "Sla Define",
+        "zh": "服务标准 响应时限 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-continuous-check.png",
+      "id": "agent-continuous-check",
+      "name": {
+        "en": "Agent Continuous Check",
+        "zh": "持续检查 定时 顾问"
+      },
+      "profession": {
+        "en": "Agent Continuous Check",
+        "zh": "持续检查 定时 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-147",
+  "plugin": "group-team-147",
+  "profession": {
+    "en": "Quality Spc Pro Collaboration Team",
+    "zh": "过程 服务 持续 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 过程质量",
+      "zh": "帮我处理过程质量"
+    },
+    {
+      "en": "Plan 服务标准",
+      "zh": "帮我规划服务标准"
+    },
+    {
+      "en": "Review 持续检查",
+      "zh": "帮我检查持续检查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "过程质量",
+      "zh": "过程质量"
+    },
+    {
+      "en": "服务标准",
+      "zh": "服务标准"
+    },
+    {
+      "en": "持续检查",
+      "zh": "持续检查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "quality-spc-pro-team-lead",
+    "memberAgents": [
+      "quality-spc-pro",
+      "sla-define",
+      "agent-continuous-check"
+    ]
+  },
+  "version": "1.0.0"
+}

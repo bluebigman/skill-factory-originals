@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-instruction-clarify-team-lead",
+  "agents": [
+    "./agents/agent-instruction-clarify-team-lead.md",
+    "./agents/agent-instruction-clarify.md",
+    "./agents/agent-identity-manage.md",
+    "./agents/pii-redact-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 指令澄清",
+    "zh": "帮我处理指令澄清"
+  },
+  "description": "agent-instruction-clarify team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 指令澄清 requirements, output three deliverables: 歧义显式, 边界确认, 成功标准. Verifiable end-to-end, evidence per step.",
+    "zh": "输入指令澄清相关需求，输出歧义显式、边界确认、成功标准三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-instruction-clarify Team",
+    "zh": "指令澄清专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-instruction-clarify-team-lead",
+      "name": {
+        "en": "指令澄清主理人",
+        "zh": "指令澄清主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-instruction-clarify.png",
+      "id": "agent-instruction-clarify",
+      "name": {
+        "en": "agent-instruction-clarify",
+        "zh": "指令澄清 歧义识别 顾问"
+      },
+      "profession": {
+        "en": "agent-instruction-clarify",
+        "zh": "指令澄清 歧义识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-identity-manage.png",
+      "id": "agent-identity-manage",
+      "name": {
+        "en": "agent-identity-manage",
+        "zh": "身份管理 凭据轮换 顾问"
+      },
+      "profession": {
+        "en": "agent-identity-manage",
+        "zh": "身份管理 凭据轮换 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pii-redact-pro.png",
+      "id": "pii-redact-pro",
+      "name": {
+        "en": "pii-redact-pro",
+        "zh": "隐私信息脱敏 助手"
+      },
+      "profession": {
+        "en": "pii-redact-pro",
+        "zh": "隐私信息脱敏 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1206",
+  "plugin": "group-team-1206",
+  "profession": {
+    "en": "agent-instruction-clarify Collaboration Team",
+    "zh": "指令澄清专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 指令澄清",
+      "zh": "帮我处理指令澄清"
+    },
+    {
+      "en": "Plan 身份管理",
+      "zh": "帮我规划身份管理"
+    },
+    {
+      "en": "Review 隐私信息脱敏",
+      "zh": "帮我检查隐私信息脱敏"
+    }
+  ],
+  "tags": [
+    {
+      "en": "歧义显式",
+      "zh": "歧义显式"
+    },
+    {
+      "en": "边界确认",
+      "zh": "边界确认"
+    },
+    {
+      "en": "成功标准",
+      "zh": "成功标准"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-instruction-clarify-team-lead",
+    "memberAgents": [
+      "agent-instruction-clarify",
+      "agent-identity-manage",
+      "pii-redact-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

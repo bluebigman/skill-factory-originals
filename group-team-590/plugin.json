@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-pro-01-fixed-team-lead",
+  "agents": [
+    "./agents/data-pipeline-pro-01-fixed-team-lead.md",
+    "./agents/data-pipeline-pro-01-fixed.md",
+    "./agents/multi-agent-orchestrate-pro.md",
+    "./agents/agent-table-agent.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle R包数据转换",
+    "zh": "帮我处理R包数据转换"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 多智能体 requirements, output three deliverables: 职责互斥, 依赖成图, 冲突暴露. Verifiable end-to-end, evidence per step.",
+    "zh": "输入多智能体相关需求，输出职责互斥、依赖成图、冲突暴露三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "包数据转换专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-pro-01-fixed-team-lead",
+      "name": {
+        "en": "R包数据转换主理人",
+        "zh": "R包数据转换主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro-01-fixed.png",
+      "id": "data-pipeline-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/multi-agent-orchestrate-pro.png",
+      "id": "multi-agent-orchestrate-pro",
+      "name": {
+        "en": "multi-agent-orchestrate-pro",
+        "zh": "多智能体 任务编排 顾问"
+      },
+      "profession": {
+        "en": "multi-agent-orchestrate-pro",
+        "zh": "多智能体 任务编排 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-table-agent.png",
+      "id": "agent-table-agent",
+      "name": {
+        "en": "agent-table-agent",
+        "zh": "表格智能 理解 顾问"
+      },
+      "profession": {
+        "en": "agent-table-agent",
+        "zh": "表格智能 理解 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-590",
+  "plugin": "group-team-590",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "包数据转换专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle R包数据转换",
+      "zh": "帮我处理R包数据转换"
+    },
+    {
+      "en": "Plan 多智能体",
+      "zh": "帮我规划多智能体"
+    },
+    {
+      "en": "Review 表格智能",
+      "zh": "帮我检查表格智能"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文件重命名",
+      "zh": "文件重命名"
+    },
+    {
+      "en": "批量整理",
+      "zh": "批量整理"
+    },
+    {
+      "en": "命名规范",
+      "zh": "命名规范"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-pro-01-fixed-team-lead",
+    "memberAgents": [
+      "data-pipeline-pro-01-fixed",
+      "multi-agent-orchestrate-pro",
+      "agent-table-agent"
+    ]
+  },
+  "version": "1.0.0"
+}

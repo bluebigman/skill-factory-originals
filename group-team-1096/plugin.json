@@ -1,0 +1,126 @@
+{
+  "agentName": "illustration-guide-team-lead",
+  "agents": [
+    "./agents/illustration-guide-team-lead.md",
+    "./agents/illustration-guide.md",
+    "./agents/onboarding-product.md",
+    "./agents/design-system-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 插画风格指南",
+    "zh": "帮我处理插画风格指南"
+  },
+  "description": "illustration-guide team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 插画风格指南 end-to-end: 风格统一, 语义一致 and 尺寸适配. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长风格统一、语义一致与尺寸适配，覆盖插画风格指南全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "illustration-guide Team",
+    "zh": "插画风格指南专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "illustration-guide-team-lead",
+      "name": {
+        "en": "插画风格指南主理人",
+        "zh": "插画风格指南主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/illustration-guide.png",
+      "id": "illustration-guide",
+      "name": {
+        "en": "illustration-guide",
+        "zh": "插画风格指南 顾问"
+      },
+      "profession": {
+        "en": "illustration-guide",
+        "zh": "插画风格指南 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/onboarding-product.png",
+      "id": "onboarding-product",
+      "name": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "profession": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/design-system-pro.png",
+      "id": "design-system-pro",
+      "name": {
+        "en": "design-system-pro",
+        "zh": "设计系统 组件规范 顾问"
+      },
+      "profession": {
+        "en": "design-system-pro",
+        "zh": "设计系统 组件规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1096",
+  "plugin": "group-team-1096",
+  "profession": {
+    "en": "illustration-guide Collaboration Team",
+    "zh": "插画风格指南专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 插画风格指南",
+      "zh": "帮我处理插画风格指南"
+    },
+    {
+      "en": "Plan 新用户",
+      "zh": "帮我规划新用户"
+    },
+    {
+      "en": "Review 设计系统",
+      "zh": "帮我检查设计系统"
+    }
+  ],
+  "tags": [
+    {
+      "en": "风格统一",
+      "zh": "风格统一"
+    },
+    {
+      "en": "语义一致",
+      "zh": "语义一致"
+    },
+    {
+      "en": "尺寸适配",
+      "zh": "尺寸适配"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "illustration-guide-team-lead",
+    "memberAgents": [
+      "illustration-guide",
+      "onboarding-product",
+      "design-system-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

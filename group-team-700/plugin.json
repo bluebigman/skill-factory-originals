@@ -1,0 +1,126 @@
+{
+  "agentName": "code-assist-pro-02-team-lead",
+  "agents": [
+    "./agents/code-assist-pro-02-team-lead.md",
+    "./agents/code-assist-pro-02.md",
+    "./agents/gdpr-data-handle.md",
+    "./agents/java-code-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle Web路由设计",
+    "zh": "帮我处理Web路由设计"
+  },
+  "description": "代码开发辅助 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 跨境数据, covers 最小必要 / 明示同意 / 跨境评估, delivering structured results and actionable checklists.",
+    "zh": "路由设计专家：围绕跨境数据，覆盖最小必要／明示同意／跨境评估，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "代码开发辅助 Suite Team",
+    "zh": "路由设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "code-assist-pro-02-team-lead",
+      "name": {
+        "en": "Web路由设计主理人",
+        "zh": "Web路由设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-02.png",
+      "id": "code-assist-pro-02",
+      "name": {
+        "en": "代码开发辅助 Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "profession": {
+        "en": "代码开发辅助 Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/gdpr-data-handle.png",
+      "id": "gdpr-data-handle",
+      "name": {
+        "en": "gdpr-data-handle",
+        "zh": "跨境数据 合规处理 顾问"
+      },
+      "profession": {
+        "en": "gdpr-data-handle",
+        "zh": "跨境数据 合规处理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/java-code-pro.png",
+      "id": "java-code-pro",
+      "name": {
+        "en": "Java Code Toolkit",
+        "zh": "Java 工程工具"
+      },
+      "profession": {
+        "en": "Java Code Toolkit",
+        "zh": "Java 工程工具"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-700",
+  "plugin": "group-team-700",
+  "profession": {
+    "en": "代码开发辅助 Suite Collaboration Team",
+    "zh": "路由设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle Web路由设计",
+      "zh": "帮我处理Web路由设计"
+    },
+    {
+      "en": "Plan 跨境数据",
+      "zh": "帮我规划跨境数据"
+    },
+    {
+      "en": "Review Java",
+      "zh": "帮我检查Java"
+    }
+  ],
+  "tags": [
+    {
+      "en": "轻量框架",
+      "zh": "轻量框架"
+    },
+    {
+      "en": "调试助手",
+      "zh": "调试助手"
+    },
+    {
+      "en": "任务拆解",
+      "zh": "任务拆解"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "code-assist-pro-02-team-lead",
+    "memberAgents": [
+      "code-assist-pro-02",
+      "gdpr-data-handle",
+      "java-code-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

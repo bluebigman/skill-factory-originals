@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1148",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1148",
+    "kind": "team",
+    "name": "海外招聘专家",
+    "description": "海外招聘专家：围绕海外招聘，覆盖合同合规／口径明确／时区友好，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "intl-talent-onboard-team-lead",
+        "role": "lead",
+        "name": "海外招聘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "intl-talent-onboard",
+        "role": "member",
+        "name": "海外招聘 入职衔接 助手",
+        "evidence": "original_assets/intl-talent-onboard/merkle_root",
+        "member_merkle_root": "45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6"
+      },
+      {
+        "slug": "deal-review-pro",
+        "role": "member",
+        "name": "商机评审 风险把关 顾问",
+        "evidence": "original_assets/deal-review-pro/merkle_root",
+        "member_merkle_root": "872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265"
+      },
+      {
+        "slug": "agent-handoff-pro",
+        "role": "member",
+        "name": "任务交接 上下文传 顾问",
+        "evidence": "original_assets/agent-handoff-pro/merkle_root",
+        "member_merkle_root": "f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d"
+      }
+    ],
+    "team_lead": "intl-talent-onboard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3f43745294bc4b6d",
+  "prompt_hash": "082f9b08fb6b36de",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1148\", \"kind\": \"team\", \"name\": \"海外招聘专家\", \"description\": \"海外招聘专家：围绕海外招聘，覆盖合同合规／口径明确／时区友好，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"intl-talent-onboard-team-lead\", \"role\": \"lead\", \"name\": \"海外招聘主理人\", \"evidence\": null}, {\"slug\": \"intl-talent-onboard\", \"role\": \"member\", \"name\": \"海外招聘 入职衔接 助手\", \"evidence\": \"original_assets/intl-talent-onboard/merkle_root\", \"member_merkle_root\": \"45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6\"}, {\"slug\": \"deal-review-pro\", \"role\": \"member\", \"name\": \"商机评审 风险把关 顾问\", \"evidence\": \"original_assets/deal-review-pro/merkle_root\", \"member_merkle_root\": \"872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265\"}, {\"slug\": \"agent-handoff-pro\", \"role\": \"member\", \"name\": \"任务交接 上下文传 顾问\", \"evidence\": \"original_assets/agent-handoff-pro/merkle_root\", \"member_merkle_root\": \"f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d\"}], \"team_lead\": \"intl-talent-onboard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-handoff-pro.md": "9c54ad9835c8d225ebab0553387d1acfe8ff948d3ccae34502de1e9e1972e7c5",
+    "agents/deal-review-pro.md": "faa3e2db03569f05e1d78e8b033d3dd93a773ffe60eec1ff5f50c964b6634a09",
+    "agents/intl-talent-onboard-team-lead.md": "809810ce29958d5942c2a2ad624aaddd6d2e8a4547331a3abfcbfe50ab1aa501",
+    "agents/intl-talent-onboard.md": "ac2ad375eca4abdd20a9a326807c3375debe75e7582c0118c9129364a4057850",
+    "plugin.json": "859fe437afbb7dccd57f806b71db0d18ca1719bb54740b959e3ff82ee66d5a0a",
+    "settings.json": "5fd88f1195918f1a92e56e06108463e4d074f1f5bf5c615681f5ca752d87a2fd"
+  }
+}

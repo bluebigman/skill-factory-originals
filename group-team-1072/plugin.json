@@ -1,0 +1,126 @@
+{
+  "agentName": "data-dict-pro-team-lead",
+  "agents": [
+    "./agents/data-dict-pro-team-lead.md",
+    "./agents/data-dict-pro.md",
+    "./agents/agent-perf-budget.md",
+    "./agents/queue-backpressure.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据字典",
+    "zh": "帮我处理数据字典"
+  },
+  "description": "data-dict-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 数据字典 end-to-end: 字段必备, 口径记录 and 更新同步. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长字段必备、口径记录与更新同步，覆盖数据字典全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "data-dict-pro Team",
+    "zh": "数据字典专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-dict-pro-team-lead",
+      "name": {
+        "en": "数据字典主理人",
+        "zh": "数据字典主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-dict-pro.png",
+      "id": "data-dict-pro",
+      "name": {
+        "en": "data-dict-pro",
+        "zh": "数据字典 字段说明 顾问"
+      },
+      "profession": {
+        "en": "data-dict-pro",
+        "zh": "数据字典 字段说明 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-perf-budget.png",
+      "id": "agent-perf-budget",
+      "name": {
+        "en": "agent-perf-budget",
+        "zh": "性能预算 限额 顾问"
+      },
+      "profession": {
+        "en": "agent-perf-budget",
+        "zh": "性能预算 限额 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/queue-backpressure.png",
+      "id": "queue-backpressure",
+      "name": {
+        "en": "queue-backpressure",
+        "zh": "队列背压控制 顾问"
+      },
+      "profession": {
+        "en": "queue-backpressure",
+        "zh": "队列背压控制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1072",
+  "plugin": "group-team-1072",
+  "profession": {
+    "en": "data-dict-pro Collaboration Team",
+    "zh": "数据字典专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据字典",
+      "zh": "帮我处理数据字典"
+    },
+    {
+      "en": "Plan 性能预算",
+      "zh": "帮我规划性能预算"
+    },
+    {
+      "en": "Review 队列背压控制",
+      "zh": "帮我检查队列背压控制"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字段必备",
+      "zh": "字段必备"
+    },
+    {
+      "en": "口径记录",
+      "zh": "口径记录"
+    },
+    {
+      "en": "更新同步",
+      "zh": "更新同步"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-dict-pro-team-lead",
+    "memberAgents": [
+      "data-dict-pro",
+      "agent-perf-budget",
+      "queue-backpressure"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "service-sla-design-team-lead",
+  "agents": [
+    "./agents/service-sla-design-team-lead.md",
+    "./agents/service-sla-design.md",
+    "./agents/code-owner-rule.md",
+    "./agents/rollback-safety.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 服务承诺设计",
+    "zh": "帮我处理服务承诺设计"
+  },
+  "description": "service-sla-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 服务承诺设计 end-to-end: 指标明确, 例外说明 and 违约处理. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长指标明确、例外说明与违约处理，覆盖服务承诺设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "service-sla-design Team",
+    "zh": "服务承诺设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "service-sla-design-team-lead",
+      "name": {
+        "en": "服务承诺设计主理人",
+        "zh": "服务承诺设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/service-sla-design.png",
+      "id": "service-sla-design",
+      "name": {
+        "en": "service-sla-design",
+        "zh": "服务承诺设计 顾问"
+      },
+      "profession": {
+        "en": "service-sla-design",
+        "zh": "服务承诺设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-owner-rule.png",
+      "id": "code-owner-rule",
+      "name": {
+        "en": "code-owner-rule",
+        "zh": "代码归属规则 顾问"
+      },
+      "profession": {
+        "en": "code-owner-rule",
+        "zh": "代码归属规则 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/rollback-safety.png",
+      "id": "rollback-safety",
+      "name": {
+        "en": "rollback-safety",
+        "zh": "回滚安全性 顾问"
+      },
+      "profession": {
+        "en": "rollback-safety",
+        "zh": "回滚安全性 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1111",
+  "plugin": "group-team-1111",
+  "profession": {
+    "en": "service-sla-design Collaboration Team",
+    "zh": "服务承诺设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 服务承诺设计",
+      "zh": "帮我处理服务承诺设计"
+    },
+    {
+      "en": "Plan 代码归属规则",
+      "zh": "帮我规划代码归属规则"
+    },
+    {
+      "en": "Review 回滚安全性",
+      "zh": "帮我检查回滚安全性"
+    }
+  ],
+  "tags": [
+    {
+      "en": "指标明确",
+      "zh": "指标明确"
+    },
+    {
+      "en": "例外说明",
+      "zh": "例外说明"
+    },
+    {
+      "en": "违约处理",
+      "zh": "违约处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "service-sla-design-team-lead",
+    "memberAgents": [
+      "service-sla-design",
+      "code-owner-rule",
+      "rollback-safety"
+    ]
+  },
+  "version": "1.0.0"
+}

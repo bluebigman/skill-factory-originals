@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1036",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1036",
+    "kind": "team",
+    "name": "咨询框架顾问专家",
+    "description": "擅长假设驱动、数据支撑与边界声明，覆盖咨询框架全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "consulting-framework-team-lead",
+        "role": "lead",
+        "name": "咨询框架主理人",
+        "evidence": null
+      },
+      {
+        "slug": "consulting-framework",
+        "role": "member",
+        "name": "咨询框架 顾问",
+        "evidence": "original_assets/consulting-framework/merkle_root",
+        "member_merkle_root": "a379013b140de34186336295183b6588433deb9e04837dcbfbfcb384c5007eca"
+      },
+      {
+        "slug": "import-inspection-pro",
+        "role": "member",
+        "name": "进口检验 标准对照 顾问",
+        "evidence": "original_assets/import-inspection-pro/merkle_root",
+        "member_merkle_root": "4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f"
+      },
+      {
+        "slug": "franchise-standard",
+        "role": "member",
+        "name": "连锁标准制定 顾问",
+        "evidence": "original_assets/franchise-standard/merkle_root",
+        "member_merkle_root": "ab056da894b22137abcbb8af198bd823e69ba8be80e17b4fb060f909dc42e176"
+      }
+    ],
+    "team_lead": "consulting-framework-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6110d414fc253014",
+  "prompt_hash": "0cf4140631914803",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1036\", \"kind\": \"team\", \"name\": \"咨询框架顾问专家\", \"description\": \"擅长假设驱动、数据支撑与边界声明，覆盖咨询框架全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"consulting-framework-team-lead\", \"role\": \"lead\", \"name\": \"咨询框架主理人\", \"evidence\": null}, {\"slug\": \"consulting-framework\", \"role\": \"member\", \"name\": \"咨询框架 顾问\", \"evidence\": \"original_assets/consulting-framework/merkle_root\", \"member_merkle_root\": \"a379013b140de34186336295183b6588433deb9e04837dcbfbfcb384c5007eca\"}, {\"slug\": \"import-inspection-pro\", \"role\": \"member\", \"name\": \"进口检验 标准对照 顾问\", \"evidence\": \"original_assets/import-inspection-pro/merkle_root\", \"member_merkle_root\": \"4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f\"}, {\"slug\": \"franchise-standard\", \"role\": \"member\", \"name\": \"连锁标准制定 顾问\", \"evidence\": \"original_assets/franchise-standard/merkle_root\", \"member_merkle_root\": \"ab056da894b22137abcbb8af198bd823e69ba8be80e17b4fb060f909dc42e176\"}], \"team_lead\": \"consulting-framework-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/consulting-framework-team-lead.md": "759d6d7769f46e2a9535be650752ec87aa7fd0e9a10187a5e4ad108043d5e50e",
+    "agents/consulting-framework.md": "de4baf2cad9995d2c71c666e9174ef20dd98713a7624e65ed5d7e5683ed135a3",
+    "agents/franchise-standard.md": "5644df1f5136a9c8d13bf03d813fa6c067c10d77c31052b00846463861071c9c",
+    "agents/import-inspection-pro.md": "71bddd70a9fa636442ab643884a89fddc35e332de9f065237b11875b30cb1fcd",
+    "plugin.json": "d59840333cf59b46f48b4abb61b9cb19eaa42f71990964ea2b56bfc57d2454ed",
+    "settings.json": "1a32b3c43ea25d22e50e0074e7d5a7e3e16354758a10ebb5aaac54a09db0ec83"
+  }
+}

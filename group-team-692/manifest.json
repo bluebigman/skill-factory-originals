@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-692",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-692",
+    "kind": "team",
+    "name": "系统设计专家",
+    "description": "擅长维度对齐、推荐克制与价格透明，覆盖定价页面全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pricing-page-ux-team-lead",
+        "role": "lead",
+        "name": "定价页面主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pricing-page-ux",
+        "role": "member",
+        "name": "定价页面 表达清晰 顾问",
+        "evidence": "original_assets/pricing-page-ux/merkle_root",
+        "member_merkle_root": "a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248"
+      },
+      {
+        "slug": "gamification-design",
+        "role": "member",
+        "name": "任务激励 系统设计 顾问",
+        "evidence": "original_assets/gamification-design/merkle_root",
+        "member_merkle_root": "3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765"
+      },
+      {
+        "slug": "prototype-method",
+        "role": "member",
+        "name": "原型验证 保真度 顾问",
+        "evidence": "original_assets/prototype-method/merkle_root",
+        "member_merkle_root": "c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3"
+      }
+    ],
+    "team_lead": "pricing-page-ux-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "11016ca71793d622",
+  "prompt_hash": "8656a742b7e6801f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-692\", \"kind\": \"team\", \"name\": \"系统设计专家\", \"description\": \"擅长维度对齐、推荐克制与价格透明，覆盖定价页面全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pricing-page-ux-team-lead\", \"role\": \"lead\", \"name\": \"定价页面主理人\", \"evidence\": null}, {\"slug\": \"pricing-page-ux\", \"role\": \"member\", \"name\": \"定价页面 表达清晰 顾问\", \"evidence\": \"original_assets/pricing-page-ux/merkle_root\", \"member_merkle_root\": \"a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248\"}, {\"slug\": \"gamification-design\", \"role\": \"member\", \"name\": \"任务激励 系统设计 顾问\", \"evidence\": \"original_assets/gamification-design/merkle_root\", \"member_merkle_root\": \"3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765\"}, {\"slug\": \"prototype-method\", \"role\": \"member\", \"name\": \"原型验证 保真度 顾问\", \"evidence\": \"original_assets/prototype-method/merkle_root\", \"member_merkle_root\": \"c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3\"}], \"team_lead\": \"pricing-page-ux-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/gamification-design.md": "9e8a3dd4aa063c8675aca9aa4ffdeec3ba52cc4bbc14fa21252683a6fe038955",
+    "agents/pricing-page-ux-team-lead.md": "58673fa8a71816e29b079baab744c18eda6803de8101a8cf955431800657cc6e",
+    "agents/pricing-page-ux.md": "e9c045e0d44c802e2932912a633f3dca77427d78ac12f1fd6a44d8d5fab6b6ef",
+    "agents/prototype-method.md": "8dab90f19fd6f803d24a602f175c15e48abfc6e9b4e357148ab0c7bc37836ad4",
+    "plugin.json": "97b81e43d549352642c65f9f5daa63cf1fee1aeeececcd8f476d76a4f60d7fe8",
+    "settings.json": "85ddc5a50f38aed1e32d0c2e8286036edce1f743b185c1758da36f07c476871f"
+  }
+}

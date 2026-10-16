@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1260",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1260",
+    "kind": "team",
+    "name": "业务连续性专家",
+    "description": "输入业务连续性相关需求，输出影响分析、恢复目标、预案演练三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "business-continuity-team-lead",
+        "role": "lead",
+        "name": "业务连续性主理人",
+        "evidence": null
+      },
+      {
+        "slug": "business-continuity",
+        "role": "member",
+        "name": "业务连续性 顾问",
+        "evidence": "original_assets/business-continuity/merkle_root",
+        "member_merkle_root": "e8118bf540f9bfdb33a77af18bf50fed0046d5ded9f5bbd81f674df775af7bbc"
+      },
+      {
+        "slug": "doc-version-manage",
+        "role": "member",
+        "name": "文档版本 变更记录 顾问",
+        "evidence": "original_assets/doc-version-manage/merkle_root",
+        "member_merkle_root": "90ff09cdf852ce46bd244d7638227132c7c2f506333c6614e85ee4c36ceff1c2"
+      },
+      {
+        "slug": "meeting-note-struct",
+        "role": "member",
+        "name": "会议纪要结构化 助手",
+        "evidence": "original_assets/meeting-note-struct/merkle_root",
+        "member_merkle_root": "90e50cf17dfd473b2899700f2d49129a1aa8230331a9fba724112fb8bd9c8b04"
+      }
+    ],
+    "team_lead": "business-continuity-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cf5c6b580455dc99",
+  "prompt_hash": "1be428670441ff26",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1260\", \"kind\": \"team\", \"name\": \"业务连续性专家\", \"description\": \"输入业务连续性相关需求，输出影响分析、恢复目标、预案演练三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"business-continuity-team-lead\", \"role\": \"lead\", \"name\": \"业务连续性主理人\", \"evidence\": null}, {\"slug\": \"business-continuity\", \"role\": \"member\", \"name\": \"业务连续性 顾问\", \"evidence\": \"original_assets/business-continuity/merkle_root\", \"member_merkle_root\": \"e8118bf540f9bfdb33a77af18bf50fed0046d5ded9f5bbd81f674df775af7bbc\"}, {\"slug\": \"doc-version-manage\", \"role\": \"member\", \"name\": \"文档版本 变更记录 顾问\", \"evidence\": \"original_assets/doc-version-manage/merkle_root\", \"member_merkle_root\": \"90ff09cdf852ce46bd244d7638227132c7c2f506333c6614e85ee4c36ceff1c2\"}, {\"slug\": \"meeting-note-struct\", \"role\": \"member\", \"name\": \"会议纪要结构化 助手\", \"evidence\": \"original_assets/meeting-note-struct/merkle_root\", \"member_merkle_root\": \"90e50cf17dfd473b2899700f2d49129a1aa8230331a9fba724112fb8bd9c8b04\"}], \"team_lead\": \"business-continuity-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/business-continuity-team-lead.md": "485cd90242dcb942c0c77d0ed9e3cc66c7ec329175238fb49dc2c983abe1177d",
+    "agents/business-continuity.md": "9741d69b8e93fb10a63d96a2334642055288baa53f1d3e68f3739a31568f5ab7",
+    "agents/doc-version-manage.md": "4212744bc6690837af2f23d4123dca383c035e42b842406a077df9fa5d24071a",
+    "agents/meeting-note-struct.md": "4b6afe157647dd00c8455cccc58695da00a58c8eeeeba10b42e125047f2e46bb",
+    "plugin.json": "d3fa55f24e98ff6bee8be7d6e0faf628fc848f00a68d6b662b4172192ec506b5",
+    "settings.json": "7d18cde95a31901595ab286cca9afb273b38b197446758981520827a2281d391"
+  }
+}

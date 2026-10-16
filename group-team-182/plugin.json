@@ -1,0 +1,126 @@
+{
+  "agentName": "equipment-maintain-pro-team-lead",
+  "agents": [
+    "./agents/equipment-maintain-pro-team-lead.md",
+    "./agents/equipment-maintain-pro.md",
+    "./agents/home-service-diagnose.md",
+    "./agents/inventory-turn-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 设备维保",
+    "zh": "帮我处理设备维保"
+  },
+  "description": "Equipment Maintain Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "设备 家政 库存 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Equipment Maintain Pro Team",
+    "zh": "设备 家政 库存 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "equipment-maintain-pro-team-lead",
+      "name": {
+        "en": "设备维保主理人",
+        "zh": "设备维保主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/equipment-maintain-pro.png",
+      "id": "equipment-maintain-pro",
+      "name": {
+        "en": "Equipment Maintain Pro",
+        "zh": "设备维保 计划编制 顾问"
+      },
+      "profession": {
+        "en": "Equipment Maintain Pro",
+        "zh": "设备维保 计划编制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/home-service-diagnose.png",
+      "id": "home-service-diagnose",
+      "name": {
+        "en": "Home Service Diagnose",
+        "zh": "家政服务 排班质检 顾问"
+      },
+      "profession": {
+        "en": "Home Service Diagnose",
+        "zh": "家政服务 排班质检 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/inventory-turn-pro.png",
+      "id": "inventory-turn-pro",
+      "name": {
+        "en": "Inventory Turn Pro",
+        "zh": "库存周转 呆滞清理 顾问"
+      },
+      "profession": {
+        "en": "Inventory Turn Pro",
+        "zh": "库存周转 呆滞清理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-182",
+  "plugin": "group-team-182",
+  "profession": {
+    "en": "Equipment Maintain Pro Collaboration Team",
+    "zh": "设备 家政 库存 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 设备维保",
+      "zh": "帮我处理设备维保"
+    },
+    {
+      "en": "Plan 家政服务",
+      "zh": "帮我规划家政服务"
+    },
+    {
+      "en": "Review 库存周转",
+      "zh": "帮我检查库存周转"
+    }
+  ],
+  "tags": [
+    {
+      "en": "设备维保",
+      "zh": "设备维保"
+    },
+    {
+      "en": "家政服务",
+      "zh": "家政服务"
+    },
+    {
+      "en": "库存周转",
+      "zh": "库存周转"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "equipment-maintain-pro-team-lead",
+    "memberAgents": [
+      "equipment-maintain-pro",
+      "home-service-diagnose",
+      "inventory-turn-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

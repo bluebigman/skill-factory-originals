@@ -1,0 +1,126 @@
+{
+  "agentName": "content-compliance-pro-team-lead",
+  "agents": [
+    "./agents/content-compliance-pro-team-lead.md",
+    "./agents/content-compliance-pro.md",
+    "./agents/doc-knowledge-builder-pro.md",
+    "./agents/network-fault-tolerance.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 内容合规",
+    "zh": "帮我处理内容合规"
+  },
+  "description": "content-compliance-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 内容合规, covers 红线清单 / 全量扫描 / 风险分级, delivering structured results and actionable checklists.",
+    "zh": "内容合规专家：围绕内容合规，覆盖红线清单／全量扫描／风险分级，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "content-compliance-pro Team",
+    "zh": "内容合规专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-compliance-pro-team-lead",
+      "name": {
+        "en": "内容合规主理人",
+        "zh": "内容合规主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-compliance-pro.png",
+      "id": "content-compliance-pro",
+      "name": {
+        "en": "content-compliance-pro",
+        "zh": "内容合规 红线识别 顾问"
+      },
+      "profession": {
+        "en": "content-compliance-pro",
+        "zh": "内容合规 红线识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-knowledge-builder-pro.png",
+      "id": "doc-knowledge-builder-pro",
+      "name": {
+        "en": "Long Document Knowledge Base Builder",
+        "zh": "长文档 章节拆解 要点提取"
+      },
+      "profession": {
+        "en": "Long Document Knowledge Base Builder",
+        "zh": "长文档 章节拆解 要点提取"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/network-fault-tolerance.png",
+      "id": "network-fault-tolerance",
+      "name": {
+        "en": "network-fault-tolerance",
+        "zh": "网络容错设计 顾问"
+      },
+      "profession": {
+        "en": "network-fault-tolerance",
+        "zh": "网络容错设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1253",
+  "plugin": "group-team-1253",
+  "profession": {
+    "en": "content-compliance-pro Collaboration Team",
+    "zh": "内容合规专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容合规",
+      "zh": "帮我处理内容合规"
+    },
+    {
+      "en": "Plan 长文档",
+      "zh": "帮我规划长文档"
+    },
+    {
+      "en": "Review 网络容错设计",
+      "zh": "帮我检查网络容错设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "红线清单",
+      "zh": "红线清单"
+    },
+    {
+      "en": "全量扫描",
+      "zh": "全量扫描"
+    },
+    {
+      "en": "风险分级",
+      "zh": "风险分级"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-compliance-pro-team-lead",
+    "memberAgents": [
+      "content-compliance-pro",
+      "doc-knowledge-builder-pro",
+      "network-fault-tolerance"
+    ]
+  },
+  "version": "1.0.0"
+}

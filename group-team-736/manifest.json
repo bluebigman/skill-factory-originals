@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-736",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-736",
+    "kind": "team",
+    "name": "赢单复盘归因分析专家",
+    "description": "赢单复盘归因分析专家：围绕赢单复盘，覆盖双向复盘／客观归因／样本阈值，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "crawl-file-pro-team-lead",
+        "role": "lead",
+        "name": "文件采集主理人",
+        "evidence": null
+      },
+      {
+        "slug": "crawl-file-pro",
+        "role": "member",
+        "name": "文件采集 素材整理",
+        "evidence": "original_assets/crawl-file-pro/merkle_root",
+        "member_merkle_root": "df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f"
+      },
+      {
+        "slug": "win-loss-analysis",
+        "role": "member",
+        "name": "赢单复盘 归因分析 顾问",
+        "evidence": "original_assets/win-loss-analysis/merkle_root",
+        "member_merkle_root": "8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd"
+      },
+      {
+        "slug": "game-qa-method",
+        "role": "member",
+        "name": "游戏测试 用例设计 顾问",
+        "evidence": "original_assets/game-qa-method/merkle_root",
+        "member_merkle_root": "bad1c48a48b96c47eedf6190a80e2b2d5859af97ecc4ccaf8e9b7c1d6019f884"
+      }
+    ],
+    "team_lead": "crawl-file-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "19582a567623592c",
+  "prompt_hash": "be2bd3751f82d2ad",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-736\", \"kind\": \"team\", \"name\": \"赢单复盘归因分析专家\", \"description\": \"赢单复盘归因分析专家：围绕赢单复盘，覆盖双向复盘／客观归因／样本阈值，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"crawl-file-pro-team-lead\", \"role\": \"lead\", \"name\": \"文件采集主理人\", \"evidence\": null}, {\"slug\": \"crawl-file-pro\", \"role\": \"member\", \"name\": \"文件采集 素材整理\", \"evidence\": \"original_assets/crawl-file-pro/merkle_root\", \"member_merkle_root\": \"df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f\"}, {\"slug\": \"win-loss-analysis\", \"role\": \"member\", \"name\": \"赢单复盘 归因分析 顾问\", \"evidence\": \"original_assets/win-loss-analysis/merkle_root\", \"member_merkle_root\": \"8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd\"}, {\"slug\": \"game-qa-method\", \"role\": \"member\", \"name\": \"游戏测试 用例设计 顾问\", \"evidence\": \"original_assets/game-qa-method/merkle_root\", \"member_merkle_root\": \"bad1c48a48b96c47eedf6190a80e2b2d5859af97ecc4ccaf8e9b7c1d6019f884\"}], \"team_lead\": \"crawl-file-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crawl-file-pro-team-lead.md": "f3a16d3c9b7ae7a9fba21855e4ef46372635874621cd2acf8d30ba3da6b4cdcf",
+    "agents/crawl-file-pro.md": "37433950d6d39beeae65d92c46df5182c5fee420eb8245207d41c14b810c97c9",
+    "agents/game-qa-method.md": "f18014361d38bfa178f25f978f5a30a9b2cba1177cca5ad161955c1ed181a9e5",
+    "agents/win-loss-analysis.md": "be6e9d0bf5ffcb9f9bceede648f71df2e2b893cead9a64d79be54e77aef5f334",
+    "plugin.json": "cb5542c2f75d8aa6b06c19e6737768b630d39ec07bbde2464cc0a869c94dd117",
+    "settings.json": "4562bc5785b8b2fe34e5b553830cc10580c75f3eb4a01e9ce8ed31159ad4ed25"
+  }
+}

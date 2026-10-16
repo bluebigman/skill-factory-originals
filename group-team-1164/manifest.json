@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1164",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1164",
+    "kind": "team",
+    "name": "本地化清单专家",
+    "description": "输入本地化清单相关需求，输出文本、图片、格式三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "media-asset-pro-team-lead",
+        "role": "lead",
+        "name": "媒体素材工程主理人",
+        "evidence": null
+      },
+      {
+        "slug": "media-asset-pro",
+        "role": "member",
+        "name": "媒体素材工程",
+        "evidence": "original_assets/media-asset-pro/merkle_root",
+        "member_merkle_root": "03cd9214e90e98210dc0aeee56096b38c510aa06d96dd5cc29195aafd5673500"
+      },
+      {
+        "slug": "content-localize-checklist",
+        "role": "member",
+        "name": "本地化清单 顾问",
+        "evidence": "original_assets/content-localize-checklist/merkle_root",
+        "member_merkle_root": "e9dd8cfacefbac1d5e9844251c210a0109756ffbc57c2d358131bfdc7489331a"
+      },
+      {
+        "slug": "video-subtitle-pro",
+        "role": "member",
+        "name": "视频字幕 语音转写",
+        "evidence": "original_assets/video-subtitle-pro/merkle_root",
+        "member_merkle_root": "dda9415b8588836c3d75106e73e312ecd1d3de54c1beed12106ed87581708819"
+      }
+    ],
+    "team_lead": "media-asset-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "50a740ebf1e6feeb",
+  "prompt_hash": "c1b08895b9176b8c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1164\", \"kind\": \"team\", \"name\": \"本地化清单专家\", \"description\": \"输入本地化清单相关需求，输出文本、图片、格式三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"media-asset-pro-team-lead\", \"role\": \"lead\", \"name\": \"媒体素材工程主理人\", \"evidence\": null}, {\"slug\": \"media-asset-pro\", \"role\": \"member\", \"name\": \"媒体素材工程\", \"evidence\": \"original_assets/media-asset-pro/merkle_root\", \"member_merkle_root\": \"03cd9214e90e98210dc0aeee56096b38c510aa06d96dd5cc29195aafd5673500\"}, {\"slug\": \"content-localize-checklist\", \"role\": \"member\", \"name\": \"本地化清单 顾问\", \"evidence\": \"original_assets/content-localize-checklist/merkle_root\", \"member_merkle_root\": \"e9dd8cfacefbac1d5e9844251c210a0109756ffbc57c2d358131bfdc7489331a\"}, {\"slug\": \"video-subtitle-pro\", \"role\": \"member\", \"name\": \"视频字幕 语音转写\", \"evidence\": \"original_assets/video-subtitle-pro/merkle_root\", \"member_merkle_root\": \"dda9415b8588836c3d75106e73e312ecd1d3de54c1beed12106ed87581708819\"}], \"team_lead\": \"media-asset-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-localize-checklist.md": "66ace23e34585c1b0db591c731649eb01b8d9d89c30e72816621b0b1c213f34d",
+    "agents/media-asset-pro-team-lead.md": "7da2631da0a6a48d14ef91f0294ea87a325f4bea82ce97637efaf8edc87bf36e",
+    "agents/media-asset-pro.md": "7bcc36552044cb6940797e368ec6b64409cab8b94411a931230257665ae7f5a5",
+    "agents/video-subtitle-pro.md": "3bd3d3b50b0cdfe0a05013aa83c20fe66304297993b304704d66b70d930a2ecc",
+    "plugin.json": "51c3e6eb59841639d4a139e0adc9560781b7918588249ead40dcdffd39f28a7a",
+    "settings.json": "17a37ac39728f8bafc640e68373b92d7bcd3fff0ab92e6cf45a0884be089b1cf"
+  }
+}

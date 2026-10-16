@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-756",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-756",
+    "kind": "team",
+    "name": "报价方案专家",
+    "description": "报价方案专家：围绕报价方案，覆盖三档选项／边界写清／按价值组织，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "quotation-standard-team-lead",
+        "role": "lead",
+        "name": "报价方案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "quotation-standard",
+        "role": "member",
+        "name": "报价方案 结构规范 顾问",
+        "evidence": "original_assets/quotation-standard/merkle_root",
+        "member_merkle_root": "2e9ce8e360651d99f7502fbc960482be4b8c2bc5268f46b822855bed85495b70"
+      },
+      {
+        "slug": "crawl-file-pro",
+        "role": "member",
+        "name": "文件采集 素材整理",
+        "evidence": "original_assets/crawl-file-pro/merkle_root",
+        "member_merkle_root": "df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f"
+      },
+      {
+        "slug": "resume-job-pro",
+        "role": "member",
+        "name": "简历优化 岗位匹配 面试准备",
+        "evidence": "original_assets/resume-job-pro/merkle_root",
+        "member_merkle_root": "66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b"
+      }
+    ],
+    "team_lead": "quotation-standard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2a19e58461297878",
+  "prompt_hash": "185bad9351119375",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-756\", \"kind\": \"team\", \"name\": \"报价方案专家\", \"description\": \"报价方案专家：围绕报价方案，覆盖三档选项／边界写清／按价值组织，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"quotation-standard-team-lead\", \"role\": \"lead\", \"name\": \"报价方案主理人\", \"evidence\": null}, {\"slug\": \"quotation-standard\", \"role\": \"member\", \"name\": \"报价方案 结构规范 顾问\", \"evidence\": \"original_assets/quotation-standard/merkle_root\", \"member_merkle_root\": \"2e9ce8e360651d99f7502fbc960482be4b8c2bc5268f46b822855bed85495b70\"}, {\"slug\": \"crawl-file-pro\", \"role\": \"member\", \"name\": \"文件采集 素材整理\", \"evidence\": \"original_assets/crawl-file-pro/merkle_root\", \"member_merkle_root\": \"df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f\"}, {\"slug\": \"resume-job-pro\", \"role\": \"member\", \"name\": \"简历优化 岗位匹配 面试准备\", \"evidence\": \"original_assets/resume-job-pro/merkle_root\", \"member_merkle_root\": \"66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b\"}], \"team_lead\": \"quotation-standard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crawl-file-pro.md": "483a7049663e21b2be6ab21946a06598294f3d02a76e52c0856be414ede986a6",
+    "agents/quotation-standard-team-lead.md": "bb21a87c10ee7e69e3f147ef4e65e1cc26c458863827ce5d4aaa15b7714c9380",
+    "agents/quotation-standard.md": "91f9d421878c6826c5d09a5411a166c9036c5c309a722f826164715291985321",
+    "agents/resume-job-pro.md": "6aaad538757626f5bc1ffdcc969f61b37e4fe948ee1439f10f1786bf27ccea68",
+    "plugin.json": "a063acca5420f75e19dc1d59d8167d31b141f5324ffca3406c112c60db0bef5c",
+    "settings.json": "6d34f92293b82be97f36934b5ac67ee68184b24c387928bb7815e5fdeddee969"
+  }
+}

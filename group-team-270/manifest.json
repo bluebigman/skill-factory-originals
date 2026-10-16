@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-270",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-270",
+    "kind": "team",
+    "name": "产品 错误 设计 团队",
+    "description": "产品 错误 设计 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "product-roadmap-pro-team-lead",
+        "role": "lead",
+        "name": "产品路线主理人",
+        "evidence": null
+      },
+      {
+        "slug": "product-roadmap-pro",
+        "role": "member",
+        "name": "产品路线 优先级 顾问",
+        "evidence": "original_assets/product-roadmap-pro/merkle_root",
+        "member_merkle_root": "9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f"
+      },
+      {
+        "slug": "error-message-pro",
+        "role": "member",
+        "name": "错误提示 文案设计 顾问",
+        "evidence": "original_assets/error-message-pro/merkle_root",
+        "member_merkle_root": "9862f73eda48d03aa1879bb8c6d96c71a8c91c3c919a4673479220550561351a"
+      },
+      {
+        "slug": "handoff-design-dev",
+        "role": "member",
+        "name": "设计交付 协作规范 顾问",
+        "evidence": "original_assets/handoff-design-dev/merkle_root",
+        "member_merkle_root": "44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104"
+      }
+    ],
+    "team_lead": "product-roadmap-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "af9950046fe1b3c4",
+  "prompt_hash": "9effb573402e167b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-270\", \"kind\": \"team\", \"name\": \"产品 错误 设计 团队\", \"description\": \"产品 错误 设计 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"product-roadmap-pro-team-lead\", \"role\": \"lead\", \"name\": \"产品路线主理人\", \"evidence\": null}, {\"slug\": \"product-roadmap-pro\", \"role\": \"member\", \"name\": \"产品路线 优先级 顾问\", \"evidence\": \"original_assets/product-roadmap-pro/merkle_root\", \"member_merkle_root\": \"9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f\"}, {\"slug\": \"error-message-pro\", \"role\": \"member\", \"name\": \"错误提示 文案设计 顾问\", \"evidence\": \"original_assets/error-message-pro/merkle_root\", \"member_merkle_root\": \"9862f73eda48d03aa1879bb8c6d96c71a8c91c3c919a4673479220550561351a\"}, {\"slug\": \"handoff-design-dev\", \"role\": \"member\", \"name\": \"设计交付 协作规范 顾问\", \"evidence\": \"original_assets/handoff-design-dev/merkle_root\", \"member_merkle_root\": \"44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104\"}], \"team_lead\": \"product-roadmap-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/error-message-pro.md": "df801311f26e9c7bcaf2fb201ba1e2b039fd19b248e6ba2ebd5a60f875601c0e",
+    "agents/handoff-design-dev.md": "e4ae36fc709aca816b0ae1a1435f9b651648ff33e54d6d87ebd759c171f7050d",
+    "agents/product-roadmap-pro-team-lead.md": "5e8e46f846f64306d92623b8b170dcb67f671c7d671f2fcdce803d6b06e15ab6",
+    "agents/product-roadmap-pro.md": "7811279653536cf2581d7be1ea80fc83ed3f5fe2f19ceb3ed9edd0177ba9d19f",
+    "plugin.json": "c49db243900a86328e4528a475cd2f98eb53baabfec0b85246bb482a552d1044",
+    "settings.json": "28245c681e9b0652b95fbc7de7d0b52e0ac45f542fff50c06dc8a14d24a607cf"
+  }
+}

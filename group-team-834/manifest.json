@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-834",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-834",
+    "kind": "team",
+    "name": "中文改写去味专家",
+    "description": "擅长固定节奏、单一主题与价值前置，覆盖订阅通讯全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "newsletter-coach-team-lead",
+        "role": "lead",
+        "name": "订阅通讯主理人",
+        "evidence": null
+      },
+      {
+        "slug": "newsletter-coach",
+        "role": "member",
+        "name": "订阅通讯 内容运营 教练",
+        "evidence": "original_assets/newsletter-coach/merkle_root",
+        "member_merkle_root": "4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c"
+      },
+      {
+        "slug": "doc-convert-pro-01-fixed",
+        "role": "member",
+        "name": "文档转换 视觉美化 文本抽取",
+        "evidence": "original_assets/doc-convert-pro-01-fixed/merkle_root",
+        "member_merkle_root": "f090a0c606648878474670b9c50f3994faacef26fba2afac4c34ec31a9a5dd0b"
+      },
+      {
+        "slug": "cn-rewrite-deaifier",
+        "role": "member",
+        "name": "中文改写 去AI味 风格润色",
+        "evidence": "original_assets/cn-rewrite-deaifier/merkle_root",
+        "member_merkle_root": "c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167"
+      }
+    ],
+    "team_lead": "newsletter-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9b790c1b6afb8502",
+  "prompt_hash": "49197af96508b082",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-834\", \"kind\": \"team\", \"name\": \"中文改写去味专家\", \"description\": \"擅长固定节奏、单一主题与价值前置，覆盖订阅通讯全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"newsletter-coach-team-lead\", \"role\": \"lead\", \"name\": \"订阅通讯主理人\", \"evidence\": null}, {\"slug\": \"newsletter-coach\", \"role\": \"member\", \"name\": \"订阅通讯 内容运营 教练\", \"evidence\": \"original_assets/newsletter-coach/merkle_root\", \"member_merkle_root\": \"4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c\"}, {\"slug\": \"doc-convert-pro-01-fixed\", \"role\": \"member\", \"name\": \"文档转换 视觉美化 文本抽取\", \"evidence\": \"original_assets/doc-convert-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"f090a0c606648878474670b9c50f3994faacef26fba2afac4c34ec31a9a5dd0b\"}, {\"slug\": \"cn-rewrite-deaifier\", \"role\": \"member\", \"name\": \"中文改写 去AI味 风格润色\", \"evidence\": \"original_assets/cn-rewrite-deaifier/merkle_root\", \"member_merkle_root\": \"c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167\"}], \"team_lead\": \"newsletter-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cn-rewrite-deaifier.md": "e5ccd38fc926ad51bb3f08874bb680c7f7cb7601348a5959e4a6a526b3552f71",
+    "agents/doc-convert-pro-01-fixed.md": "e022423085309f6f553fb113eea2062e425d1358ab4c0d01dab3d7cd64c5c322",
+    "agents/newsletter-coach-team-lead.md": "7962355e63b2d5555db540e59b9c39d1ef02f18d7261cfbfef4ae23b021286e7",
+    "agents/newsletter-coach.md": "8664feac4ff5b623a0ba2c4d41cbbdcc53ac7112343c3c2da959c726030bd4bb",
+    "plugin.json": "1b048011a2bc6efb5d639cc7cc1b9480a5c99076b523086e7ed4f39cb5f977fa",
+    "settings.json": "94ca7c4dd23519327ca25626c989a5fa9d40e8c98a107b516eb715453325f967"
+  }
+}

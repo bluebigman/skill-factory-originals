@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-190",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-190",
+    "kind": "team",
+    "name": "职场 搬家 面试 团队",
+    "description": "职场 搬家 面试 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "workplace-communication-pro-team-lead",
+        "role": "lead",
+        "name": "职场沟通主理人",
+        "evidence": null
+      },
+      {
+        "slug": "workplace-communication-pro",
+        "role": "member",
+        "name": "职场沟通 向上管理 跨部门协作",
+        "evidence": "original_assets/workplace-communication-pro/merkle_root",
+        "member_merkle_root": "ba64dceb90534251dec4c490217cedd16b537aeebb1d9ac1c2de990c4d164a86"
+      },
+      {
+        "slug": "moving-relocation-pro",
+        "role": "member",
+        "name": "搬家 搬迁清单 租房交接",
+        "evidence": "original_assets/moving-relocation-pro/merkle_root",
+        "member_merkle_root": "4417f867b646ab2701c3f9d91aeac884a953868a0f69673069ea6af423a165be"
+      },
+      {
+        "slug": "job-interview-pro",
+        "role": "member",
+        "name": "面试准备 自我介绍 问答演练",
+        "evidence": "original_assets/job-interview-pro/merkle_root",
+        "member_merkle_root": "a2da694b11a8be9fbe8bf321347e82eb43de3f7ebf33b9543f216415196acea2"
+      }
+    ],
+    "team_lead": "workplace-communication-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "071d1323557f5e09",
+  "prompt_hash": "b81f6eb64251c54b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-190\", \"kind\": \"team\", \"name\": \"职场 搬家 面试 团队\", \"description\": \"职场 搬家 面试 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"workplace-communication-pro-team-lead\", \"role\": \"lead\", \"name\": \"职场沟通主理人\", \"evidence\": null}, {\"slug\": \"workplace-communication-pro\", \"role\": \"member\", \"name\": \"职场沟通 向上管理 跨部门协作\", \"evidence\": \"original_assets/workplace-communication-pro/merkle_root\", \"member_merkle_root\": \"ba64dceb90534251dec4c490217cedd16b537aeebb1d9ac1c2de990c4d164a86\"}, {\"slug\": \"moving-relocation-pro\", \"role\": \"member\", \"name\": \"搬家 搬迁清单 租房交接\", \"evidence\": \"original_assets/moving-relocation-pro/merkle_root\", \"member_merkle_root\": \"4417f867b646ab2701c3f9d91aeac884a953868a0f69673069ea6af423a165be\"}, {\"slug\": \"job-interview-pro\", \"role\": \"member\", \"name\": \"面试准备 自我介绍 问答演练\", \"evidence\": \"original_assets/job-interview-pro/merkle_root\", \"member_merkle_root\": \"a2da694b11a8be9fbe8bf321347e82eb43de3f7ebf33b9543f216415196acea2\"}], \"team_lead\": \"workplace-communication-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/job-interview-pro.md": "ff283cf426fd80a86be17386fd4e3c419d6afe2a3d627ac779349b56b71b266b",
+    "agents/moving-relocation-pro.md": "966517fbaf6146a8fc8d14fbe7b09ad76bc4c3dc508ad408cc50d94ac83b0f77",
+    "agents/workplace-communication-pro-team-lead.md": "30367d278dc11b6f3fa6241e3163f8425f666a8191f078df57d9a35d856a650e",
+    "agents/workplace-communication-pro.md": "f231d89e21fd6fff68af3d98f0f0bad176e02b53fff4287eab035346273068b9",
+    "plugin.json": "1c08bae98634b677c4274192877da3c48fce1bcedfafdef3bf9f99debf00772e",
+    "settings.json": "667139eafa4c0962320f75fe87eb9895fc29935b82d45c88a1eb526481d66f09"
+  }
+}

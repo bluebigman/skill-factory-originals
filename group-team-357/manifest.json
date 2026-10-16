@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-357",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-357",
+    "kind": "team",
+    "name": "图表选型专家",
+    "description": "图表选型专家：围绕SQL，覆盖全表扫描／隐式转换／笛卡尔积，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-review-pro-team-lead",
+        "role": "lead",
+        "name": "SQL主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-review-pro",
+        "role": "member",
+        "name": "SQL 审查 顾问",
+        "evidence": "original_assets/sql-review-pro/merkle_root",
+        "member_merkle_root": "578a9523d4b4f6cd9680eeeb334e028e2f5dcb600bed123ca9db5698257016c5"
+      },
+      {
+        "slug": "chart-select-pro",
+        "role": "member",
+        "name": "图表选型 配色规范 顾问",
+        "evidence": "original_assets/chart-select-pro/merkle_root",
+        "member_merkle_root": "994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e"
+      },
+      {
+        "slug": "data-lineage-trace",
+        "role": "member",
+        "name": "数据血缘 链路追踪 顾问",
+        "evidence": "original_assets/data-lineage-trace/merkle_root",
+        "member_merkle_root": "a6ef6cbb3e56720199394282bdf0e400017a23348e1c9197b79af905549bcbc8"
+      }
+    ],
+    "team_lead": "sql-review-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cf724cc9a97965a7",
+  "prompt_hash": "e991d00011853b07",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-357\", \"kind\": \"team\", \"name\": \"图表选型专家\", \"description\": \"图表选型专家：围绕SQL，覆盖全表扫描／隐式转换／笛卡尔积，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-review-pro-team-lead\", \"role\": \"lead\", \"name\": \"SQL主理人\", \"evidence\": null}, {\"slug\": \"sql-review-pro\", \"role\": \"member\", \"name\": \"SQL 审查 顾问\", \"evidence\": \"original_assets/sql-review-pro/merkle_root\", \"member_merkle_root\": \"578a9523d4b4f6cd9680eeeb334e028e2f5dcb600bed123ca9db5698257016c5\"}, {\"slug\": \"chart-select-pro\", \"role\": \"member\", \"name\": \"图表选型 配色规范 顾问\", \"evidence\": \"original_assets/chart-select-pro/merkle_root\", \"member_merkle_root\": \"994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e\"}, {\"slug\": \"data-lineage-trace\", \"role\": \"member\", \"name\": \"数据血缘 链路追踪 顾问\", \"evidence\": \"original_assets/data-lineage-trace/merkle_root\", \"member_merkle_root\": \"a6ef6cbb3e56720199394282bdf0e400017a23348e1c9197b79af905549bcbc8\"}], \"team_lead\": \"sql-review-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/chart-select-pro.md": "eca49fd9d3ac91213d9e77af4d416a8ebfdbf3657fd47534c2ccf975b83e0a15",
+    "agents/data-lineage-trace.md": "ee0d92cd61195b59c45028716ebc13a7874d534816243a2d495a4574cbc79743",
+    "agents/sql-review-pro-team-lead.md": "68886582ec4a253b52968cb4c445f367f9bb6d6ad5ec88d89482b423470c1da8",
+    "agents/sql-review-pro.md": "c5d4fb4790f58e7b00599c9983617f9c205059cf109d747f371d3c57165cfb3d",
+    "plugin.json": "03071816ef66cabeaca2cc6544eaa0195e6a7ee95477ed18b0058d865e9eccd4",
+    "settings.json": "c72d74ec07c36b90fa8493bebf5a1cb7325d00aebcbe4b9c39723aa4e5a187a0"
+  }
+}

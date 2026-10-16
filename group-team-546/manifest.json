@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-546",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-546",
+    "kind": "team",
+    "name": "表格智能理解专家",
+    "description": "表格智能理解专家：围绕表格智能，覆盖结构识别／类型推断／校验规则，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-table-agent-team-lead",
+        "role": "lead",
+        "name": "表格智能主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-table-agent",
+        "role": "member",
+        "name": "表格智能 理解 顾问",
+        "evidence": "original_assets/agent-table-agent/merkle_root",
+        "member_merkle_root": "66699bea218e145255346b26ab5e799b5dbac201a52bf0008d3f62ab26e768ae"
+      },
+      {
+        "slug": "toolkit-pro-02-fixed",
+        "role": "member",
+        "name": "任务治理 PR评审效能洞察",
+        "evidence": "original_assets/toolkit-pro-02-fixed/merkle_root",
+        "member_merkle_root": "681548b3f533faf77826f40c82ab56d9aba9052d96a81042923cc7d7dd735462"
+      },
+      {
+        "slug": "toolkit-pro-03-fixed",
+        "role": "member",
+        "name": "数据回溯 标准作业 数据保全",
+        "evidence": "original_assets/toolkit-pro-03-fixed/merkle_root",
+        "member_merkle_root": "963f02a30f6038b2fd1dcd2616a0339bb5e58c7a6a6ec3b56d15e749c8312407"
+      }
+    ],
+    "team_lead": "agent-table-agent-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "324700bf0292c8fb",
+  "prompt_hash": "1c1ef6275ca7702a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-546\", \"kind\": \"team\", \"name\": \"表格智能理解专家\", \"description\": \"表格智能理解专家：围绕表格智能，覆盖结构识别／类型推断／校验规则，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-table-agent-team-lead\", \"role\": \"lead\", \"name\": \"表格智能主理人\", \"evidence\": null}, {\"slug\": \"agent-table-agent\", \"role\": \"member\", \"name\": \"表格智能 理解 顾问\", \"evidence\": \"original_assets/agent-table-agent/merkle_root\", \"member_merkle_root\": \"66699bea218e145255346b26ab5e799b5dbac201a52bf0008d3f62ab26e768ae\"}, {\"slug\": \"toolkit-pro-02-fixed\", \"role\": \"member\", \"name\": \"任务治理 PR评审效能洞察\", \"evidence\": \"original_assets/toolkit-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"681548b3f533faf77826f40c82ab56d9aba9052d96a81042923cc7d7dd735462\"}, {\"slug\": \"toolkit-pro-03-fixed\", \"role\": \"member\", \"name\": \"数据回溯 标准作业 数据保全\", \"evidence\": \"original_assets/toolkit-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"963f02a30f6038b2fd1dcd2616a0339bb5e58c7a6a6ec3b56d15e749c8312407\"}], \"team_lead\": \"agent-table-agent-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-table-agent-team-lead.md": "5bb4689f9d9733ed8c3b4648a13917d889f44c1d19e77da377379ec4a1e90017",
+    "agents/agent-table-agent.md": "ded024cd0a243209cc6318076f29d3f6e7a2f0f3ce74ada4724a03a5e25b42e9",
+    "agents/toolkit-pro-02-fixed.md": "05bad3e21e4b5b7f544de7b0bbdcbaa6e720f54cfd438bd2461d4739832032d7",
+    "agents/toolkit-pro-03-fixed.md": "36ab735d196ce2db50a0140430c02bf31722335ab121a4ef9e83dee14448b56e",
+    "plugin.json": "153d6b325f04cb75af07c1d62550f671ab9bb6ca8694276476dfd1a47cf3ad17",
+    "settings.json": "1eb5161960bc07cbbce813af5cfc8ff850cba6def956d2217ca17a35b58aa1e9"
+  }
+}

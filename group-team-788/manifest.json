@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-788",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-788",
+    "kind": "team",
+    "name": "销售话术专家",
+    "description": "输入销售话术相关需求，输出演练固化、需求转译、范围界定三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sales-script-coach-team-lead",
+        "role": "lead",
+        "name": "销售话术主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sales-script-coach",
+        "role": "member",
+        "name": "销售话术 场景演练 教练",
+        "evidence": "original_assets/sales-script-coach/merkle_root",
+        "member_merkle_root": "df424d622b16c5b137c729a8d683f67a334a4e5a612d316ea86cbefc37e14af6"
+      },
+      {
+        "slug": "presales-support-pro",
+        "role": "member",
+        "name": "售前支持 方案配合 顾问",
+        "evidence": "original_assets/presales-support-pro/merkle_root",
+        "member_merkle_root": "98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e"
+      },
+      {
+        "slug": "customer-advocacy",
+        "role": "member",
+        "name": "客户推荐 培育路径 顾问",
+        "evidence": "original_assets/customer-advocacy/merkle_root",
+        "member_merkle_root": "0e5288c288b1f5079f617f2f83ab786dbb4eab7cd944b333c8113b2ecd236a9e"
+      }
+    ],
+    "team_lead": "sales-script-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4efbeead13dc6569",
+  "prompt_hash": "8a724ec75575ef4b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-788\", \"kind\": \"team\", \"name\": \"销售话术专家\", \"description\": \"输入销售话术相关需求，输出演练固化、需求转译、范围界定三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sales-script-coach-team-lead\", \"role\": \"lead\", \"name\": \"销售话术主理人\", \"evidence\": null}, {\"slug\": \"sales-script-coach\", \"role\": \"member\", \"name\": \"销售话术 场景演练 教练\", \"evidence\": \"original_assets/sales-script-coach/merkle_root\", \"member_merkle_root\": \"df424d622b16c5b137c729a8d683f67a334a4e5a612d316ea86cbefc37e14af6\"}, {\"slug\": \"presales-support-pro\", \"role\": \"member\", \"name\": \"售前支持 方案配合 顾问\", \"evidence\": \"original_assets/presales-support-pro/merkle_root\", \"member_merkle_root\": \"98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e\"}, {\"slug\": \"customer-advocacy\", \"role\": \"member\", \"name\": \"客户推荐 培育路径 顾问\", \"evidence\": \"original_assets/customer-advocacy/merkle_root\", \"member_merkle_root\": \"0e5288c288b1f5079f617f2f83ab786dbb4eab7cd944b333c8113b2ecd236a9e\"}], \"team_lead\": \"sales-script-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/customer-advocacy.md": "542da69eeab9b9a648eda7cba3508b49364593f8be76e7a61ea145d2de7527d9",
+    "agents/presales-support-pro.md": "8b9bd45b983929c8c75647463ccf788e550d66c54c0046fcd9759183f868c444",
+    "agents/sales-script-coach-team-lead.md": "0aac984d541300b3286350d2b104b12030ecec32fd13e8ba2f046cb868c3a88e",
+    "agents/sales-script-coach.md": "a8282890170e8412e85936e178855aed24f8c1976eca9ee196b8c847cb74ba37",
+    "plugin.json": "136b9315a56d58d337f2a00fc9d296ac91eda4aea42054b6743a4d80592e21f0",
+    "settings.json": "24db4eb21510da3e55e805343a266d4750082d196184e483f5b1de7231d75928"
+  }
+}

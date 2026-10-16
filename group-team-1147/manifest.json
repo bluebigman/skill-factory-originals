@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1147",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1147",
+    "kind": "team",
+    "name": "隐私信息脱敏助手专家",
+    "description": "擅长分级处理、比较用柱与趋势用线，覆盖隐私信息脱敏全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pii-redact-pro-team-lead",
+        "role": "lead",
+        "name": "隐私信息脱敏主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pii-redact-pro",
+        "role": "member",
+        "name": "隐私信息脱敏 助手",
+        "evidence": "original_assets/pii-redact-pro/merkle_root",
+        "member_merkle_root": "3a79e30e0ef53398b6b0be66430cdfaac9db19d33aaa9b94f6508e12179a7a75"
+      },
+      {
+        "slug": "ops-deploy-pro-01",
+        "role": "member",
+        "name": "部署配置",
+        "evidence": "original_assets/ops-deploy-pro-01/merkle_root",
+        "member_merkle_root": "bca0949763eb5b80d151267a8d69fd92ba1dcdc23d2c56a525536644ba1b6084"
+      },
+      {
+        "slug": "data-visual-pick",
+        "role": "member",
+        "name": "图表类型选择 顾问",
+        "evidence": "original_assets/data-visual-pick/merkle_root",
+        "member_merkle_root": "d070e5daa197cbd60a3d1b5c19c520fd0b85f4bd1860cf9144d4934566004587"
+      }
+    ],
+    "team_lead": "pii-redact-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a9984532d4b1cd42",
+  "prompt_hash": "9e7a97f949b0fcb4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1147\", \"kind\": \"team\", \"name\": \"隐私信息脱敏助手专家\", \"description\": \"擅长分级处理、比较用柱与趋势用线，覆盖隐私信息脱敏全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pii-redact-pro-team-lead\", \"role\": \"lead\", \"name\": \"隐私信息脱敏主理人\", \"evidence\": null}, {\"slug\": \"pii-redact-pro\", \"role\": \"member\", \"name\": \"隐私信息脱敏 助手\", \"evidence\": \"original_assets/pii-redact-pro/merkle_root\", \"member_merkle_root\": \"3a79e30e0ef53398b6b0be66430cdfaac9db19d33aaa9b94f6508e12179a7a75\"}, {\"slug\": \"ops-deploy-pro-01\", \"role\": \"member\", \"name\": \"部署配置\", \"evidence\": \"original_assets/ops-deploy-pro-01/merkle_root\", \"member_merkle_root\": \"bca0949763eb5b80d151267a8d69fd92ba1dcdc23d2c56a525536644ba1b6084\"}, {\"slug\": \"data-visual-pick\", \"role\": \"member\", \"name\": \"图表类型选择 顾问\", \"evidence\": \"original_assets/data-visual-pick/merkle_root\", \"member_merkle_root\": \"d070e5daa197cbd60a3d1b5c19c520fd0b85f4bd1860cf9144d4934566004587\"}], \"team_lead\": \"pii-redact-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-visual-pick.md": "0594880d90413db6c9270f3ed53c9b22b5392c1eb08dee0d0ae903938f7b7449",
+    "agents/ops-deploy-pro-01.md": "acd17a9b179c6a3446c45432e079abb26da71f986558277c933302739daec36e",
+    "agents/pii-redact-pro-team-lead.md": "07b0b467881b1be5a69c4462d979d85a3989ddeb84e543cab51657093401565b",
+    "agents/pii-redact-pro.md": "4596543dd321fae1f540cf073302dfc4f117e9103a3b6c2efaf67db6762f9525",
+    "plugin.json": "d440b0b3188b6bff25109ca0b737acd42e7bfbd373542b191f4d12af08df992f",
+    "settings.json": "d907e7ec2e258126cc1267b8ba3f15198c923c5ce5834d2f9aeed25322aff294"
+  }
+}

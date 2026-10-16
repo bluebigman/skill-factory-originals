@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1185",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1185",
+    "kind": "team",
+    "name": "报表自动定时生成专家",
+    "description": "输入报表自动相关需求，输出定时可靠、失败告警、数据就绪三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-automation-pro-team-lead",
+        "role": "lead",
+        "name": "报表自动主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-automation-pro",
+        "role": "member",
+        "name": "报表自动 定时生成 顾问",
+        "evidence": "original_assets/report-automation-pro/merkle_root",
+        "member_merkle_root": "48a4feea1f986d230fd3f2739fa3ed4ce62ad8d3c2b84b2938ed926e0cf1481f"
+      },
+      {
+        "slug": "agent-red-team",
+        "role": "member",
+        "name": "对抗测试 越权探测 顾问",
+        "evidence": "original_assets/agent-red-team/merkle_root",
+        "member_merkle_root": "bab54a8701fef286bfa688a05c77f1e693cf4a907d0c6b7012cd72b1f4b92b39"
+      },
+      {
+        "slug": "doc-legal-boundary",
+        "role": "member",
+        "name": "文档合规边界 顾问",
+        "evidence": "original_assets/doc-legal-boundary/merkle_root",
+        "member_merkle_root": "1f95db4c9dd32f97e07fa85c68dc455329bd29d592cb2fa6ed5e79c8e1240021"
+      }
+    ],
+    "team_lead": "report-automation-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "799de520e1fb5ada",
+  "prompt_hash": "89d489ceda910dee",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1185\", \"kind\": \"team\", \"name\": \"报表自动定时生成专家\", \"description\": \"输入报表自动相关需求，输出定时可靠、失败告警、数据就绪三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-automation-pro-team-lead\", \"role\": \"lead\", \"name\": \"报表自动主理人\", \"evidence\": null}, {\"slug\": \"report-automation-pro\", \"role\": \"member\", \"name\": \"报表自动 定时生成 顾问\", \"evidence\": \"original_assets/report-automation-pro/merkle_root\", \"member_merkle_root\": \"48a4feea1f986d230fd3f2739fa3ed4ce62ad8d3c2b84b2938ed926e0cf1481f\"}, {\"slug\": \"agent-red-team\", \"role\": \"member\", \"name\": \"对抗测试 越权探测 顾问\", \"evidence\": \"original_assets/agent-red-team/merkle_root\", \"member_merkle_root\": \"bab54a8701fef286bfa688a05c77f1e693cf4a907d0c6b7012cd72b1f4b92b39\"}, {\"slug\": \"doc-legal-boundary\", \"role\": \"member\", \"name\": \"文档合规边界 顾问\", \"evidence\": \"original_assets/doc-legal-boundary/merkle_root\", \"member_merkle_root\": \"1f95db4c9dd32f97e07fa85c68dc455329bd29d592cb2fa6ed5e79c8e1240021\"}], \"team_lead\": \"report-automation-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-red-team.md": "2b2b129e323d1ace67ea07be47beff5c9c81811be05f42eb450361d4d1d17050",
+    "agents/doc-legal-boundary.md": "7c364e76b9ec7e903531632322efd3129b601a03921d0169fe0aba66214a9a00",
+    "agents/report-automation-pro-team-lead.md": "b6778c91ef31483c919a2c3044642ceaa4ce98b07c410398b8304dfe70772b7a",
+    "agents/report-automation-pro.md": "fb356b8c2c50b1d5915c89989d2306c3ec82b35c6c90c462b958e643ca891fd4",
+    "plugin.json": "6208f72326f7580b8b57a2bd41e35f12690c7b75933345a9fe6394ade1191b9d",
+    "settings.json": "e546b109249b31ab0f4eed4a7654b238183e2f31dd80f39c6bbc690214db7e87"
+  }
+}

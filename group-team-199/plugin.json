@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-09-fixed-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-09-fixed-team-lead.md",
+    "./agents/data-clean-pro-09-fixed.md",
+    "./agents/data-clean-pro-06-fixed.md",
+    "./agents/data-clean-pro-03.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据建模",
+    "zh": "帮我处理数据建模"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 文档 懒人 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "数据 文档 懒人 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-09-fixed-team-lead",
+      "name": {
+        "en": "数据建模主理人",
+        "zh": "数据建模主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-09-fixed.png",
+      "id": "data-clean-pro-09-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据建模 结构化转换 批量处理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据建模 结构化转换 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-06-fixed.png",
+      "id": "data-clean-pro-06-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文档转写 结构化转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文档转写 结构化转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-03.png",
+      "id": "data-clean-pro-03",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "懒人记录 字段映射 置信标注"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "懒人记录 字段映射 置信标注"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-199",
+  "plugin": "group-team-199",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "数据 文档 懒人 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据建模",
+      "zh": "帮我处理数据建模"
+    },
+    {
+      "en": "Plan 文档转写",
+      "zh": "帮我规划文档转写"
+    },
+    {
+      "en": "Review 懒人记录",
+      "zh": "帮我检查懒人记录"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据建模",
+      "zh": "数据建模"
+    },
+    {
+      "en": "文档转写",
+      "zh": "文档转写"
+    },
+    {
+      "en": "懒人记录",
+      "zh": "懒人记录"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-09-fixed-team-lead",
+    "memberAgents": [
+      "data-clean-pro-09-fixed",
+      "data-clean-pro-06-fixed",
+      "data-clean-pro-03"
+    ]
+  },
+  "version": "1.0.0"
+}

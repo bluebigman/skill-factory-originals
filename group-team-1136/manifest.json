@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1136",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1136",
+    "kind": "team",
+    "name": "关键词布局专家",
+    "description": "关键词布局专家：围绕搜索内容，覆盖意图分类／一词一页／结构可读，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "seo-content-pro-team-lead",
+        "role": "lead",
+        "name": "搜索内容主理人",
+        "evidence": null
+      },
+      {
+        "slug": "seo-content-pro",
+        "role": "member",
+        "name": "搜索内容 关键词布局 顾问",
+        "evidence": "original_assets/seo-content-pro/merkle_root",
+        "member_merkle_root": "cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80"
+      },
+      {
+        "slug": "content-update-plan",
+        "role": "member",
+        "name": "内容更新规划 顾问",
+        "evidence": "original_assets/content-update-plan/merkle_root",
+        "member_merkle_root": "0c973e163f0f6e0cacaf3abc16c3d5809647fdbcc3cc689ef9fd6782ad2d754c"
+      },
+      {
+        "slug": "editorial-calendar",
+        "role": "member",
+        "name": "编辑日历编排 助手",
+        "evidence": "original_assets/editorial-calendar/merkle_root",
+        "member_merkle_root": "cb50295e09d3e30c2020ee3bfb2ab95e57fdd3ad784b77194ff51071c11545e5"
+      }
+    ],
+    "team_lead": "seo-content-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "528bb893aa4488ff",
+  "prompt_hash": "8e2fdde6a7b1e4b2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1136\", \"kind\": \"team\", \"name\": \"关键词布局专家\", \"description\": \"关键词布局专家：围绕搜索内容，覆盖意图分类／一词一页／结构可读，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"seo-content-pro-team-lead\", \"role\": \"lead\", \"name\": \"搜索内容主理人\", \"evidence\": null}, {\"slug\": \"seo-content-pro\", \"role\": \"member\", \"name\": \"搜索内容 关键词布局 顾问\", \"evidence\": \"original_assets/seo-content-pro/merkle_root\", \"member_merkle_root\": \"cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80\"}, {\"slug\": \"content-update-plan\", \"role\": \"member\", \"name\": \"内容更新规划 顾问\", \"evidence\": \"original_assets/content-update-plan/merkle_root\", \"member_merkle_root\": \"0c973e163f0f6e0cacaf3abc16c3d5809647fdbcc3cc689ef9fd6782ad2d754c\"}, {\"slug\": \"editorial-calendar\", \"role\": \"member\", \"name\": \"编辑日历编排 助手\", \"evidence\": \"original_assets/editorial-calendar/merkle_root\", \"member_merkle_root\": \"cb50295e09d3e30c2020ee3bfb2ab95e57fdd3ad784b77194ff51071c11545e5\"}], \"team_lead\": \"seo-content-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-update-plan.md": "0a1667924f1da2d976b50038f96a36976586ecaaa578af1c39b8f8514f58b4cc",
+    "agents/editorial-calendar.md": "ed4860c0a3e890d5e582a453491d782e4c010f7931732840924455028015b1d4",
+    "agents/seo-content-pro-team-lead.md": "bf1eb14013b986220ab575aa29cd0e5c882e6f8fd5d5c4919689ace12c135b92",
+    "agents/seo-content-pro.md": "da83f7f02eb926bd839055720e2f0eadc1c4cf24c3c1c1246e398ea9651fdfd7",
+    "plugin.json": "abf78928a5a9d7b02d9da738379e9c49d90e486be13812712a1bd1da85de0575",
+    "settings.json": "a6655ea194523aaa368dddb078e5bd534f0b32e4360ba8f8b23b05055a1fdc71"
+  }
+}

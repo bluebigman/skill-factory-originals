@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-633",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-633",
+    "kind": "team",
+    "name": "渠道组合预算分配专家",
+    "description": "输入渠道组合相关需求，输出目标倒推、关注边际、预留机动三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "marketing-mix-pro-team-lead",
+        "role": "lead",
+        "name": "渠道组合主理人",
+        "evidence": null
+      },
+      {
+        "slug": "marketing-mix-pro",
+        "role": "member",
+        "name": "渠道组合 预算分配 顾问",
+        "evidence": "original_assets/marketing-mix-pro/merkle_root",
+        "member_merkle_root": "ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0"
+      },
+      {
+        "slug": "microcopy-coach",
+        "role": "member",
+        "name": "界面文案 撰写 教练",
+        "evidence": "original_assets/microcopy-coach/merkle_root",
+        "member_merkle_root": "dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2"
+      },
+      {
+        "slug": "community-grow-pro",
+        "role": "member",
+        "name": "社群运营 活跃机制 顾问",
+        "evidence": "original_assets/community-grow-pro/merkle_root",
+        "member_merkle_root": "e0c3352933eceb5fe16b05aaa437247f8254607188e0c7bf75d431ff9fe16a9a"
+      }
+    ],
+    "team_lead": "marketing-mix-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b2cb3f79623e94cf",
+  "prompt_hash": "7449abeb3d4c2c03",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-633\", \"kind\": \"team\", \"name\": \"渠道组合预算分配专家\", \"description\": \"输入渠道组合相关需求，输出目标倒推、关注边际、预留机动三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"marketing-mix-pro-team-lead\", \"role\": \"lead\", \"name\": \"渠道组合主理人\", \"evidence\": null}, {\"slug\": \"marketing-mix-pro\", \"role\": \"member\", \"name\": \"渠道组合 预算分配 顾问\", \"evidence\": \"original_assets/marketing-mix-pro/merkle_root\", \"member_merkle_root\": \"ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0\"}, {\"slug\": \"microcopy-coach\", \"role\": \"member\", \"name\": \"界面文案 撰写 教练\", \"evidence\": \"original_assets/microcopy-coach/merkle_root\", \"member_merkle_root\": \"dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2\"}, {\"slug\": \"community-grow-pro\", \"role\": \"member\", \"name\": \"社群运营 活跃机制 顾问\", \"evidence\": \"original_assets/community-grow-pro/merkle_root\", \"member_merkle_root\": \"e0c3352933eceb5fe16b05aaa437247f8254607188e0c7bf75d431ff9fe16a9a\"}], \"team_lead\": \"marketing-mix-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/community-grow-pro.md": "96b41c78ffe8658a206396de8fe546fc4ab6da3eda7b5056063047929d56f03a",
+    "agents/marketing-mix-pro-team-lead.md": "ebff37479f6a9edddf2846882427e445279123da028a16673f2d850921079a6e",
+    "agents/marketing-mix-pro.md": "037f06efec4f6f7790ce90f05d4bd2af69e8f9fd949d855c3ef4f5edc8e175fd",
+    "agents/microcopy-coach.md": "3bb5ce57a3ab57c3cc7228a76008320cbd8a55a59476ff3dc3419163b3331188",
+    "plugin.json": "ef309a76fd1f275825bdd7473410203ca4a7a69091721916f42b3dc7cfca0db5",
+    "settings.json": "b0612f92e524feb0ca972a0ec6bddc92cc9cd2398b60f46fe76a66ec90327712"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1268",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1268",
+    "kind": "team",
+    "name": "数据管道守护专家",
+    "description": "数据管道守护专家：围绕数据管道守护，覆盖幂等写入／断点续跑／质量校验，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-guard-team-lead",
+        "role": "lead",
+        "name": "数据管道守护主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-guard",
+        "role": "member",
+        "name": "数据管道守护 顾问",
+        "evidence": "original_assets/data-pipeline-guard/merkle_root",
+        "member_merkle_root": "9b7631fe2d357544928eaba193fbe819f5daaabf76d52b70a5abeb507ead75c9"
+      },
+      {
+        "slug": "agent-tool-selection",
+        "role": "member",
+        "name": "工具选择 依赖排序 顾问",
+        "evidence": "original_assets/agent-tool-selection/merkle_root",
+        "member_merkle_root": "d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb"
+      },
+      {
+        "slug": "api-transmission-assurance-expert",
+        "role": "member",
+        "name": "接口联调 传输校验 异步排查",
+        "evidence": "original_assets/api-transmission-assurance-expert/merkle_root",
+        "member_merkle_root": "49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac"
+      }
+    ],
+    "team_lead": "data-pipeline-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e26b5b2d2cffa93b",
+  "prompt_hash": "4220ad36e98829af",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1268\", \"kind\": \"team\", \"name\": \"数据管道守护专家\", \"description\": \"数据管道守护专家：围绕数据管道守护，覆盖幂等写入／断点续跑／质量校验，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-guard-team-lead\", \"role\": \"lead\", \"name\": \"数据管道守护主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-guard\", \"role\": \"member\", \"name\": \"数据管道守护 顾问\", \"evidence\": \"original_assets/data-pipeline-guard/merkle_root\", \"member_merkle_root\": \"9b7631fe2d357544928eaba193fbe819f5daaabf76d52b70a5abeb507ead75c9\"}, {\"slug\": \"agent-tool-selection\", \"role\": \"member\", \"name\": \"工具选择 依赖排序 顾问\", \"evidence\": \"original_assets/agent-tool-selection/merkle_root\", \"member_merkle_root\": \"d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb\"}, {\"slug\": \"api-transmission-assurance-expert\", \"role\": \"member\", \"name\": \"接口联调 传输校验 异步排查\", \"evidence\": \"original_assets/api-transmission-assurance-expert/merkle_root\", \"member_merkle_root\": \"49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac\"}], \"team_lead\": \"data-pipeline-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-tool-selection.md": "4ef9bbaa0d91d420079ed67a9eba381bce401c8b946d3a8875a0615973ba7411",
+    "agents/api-transmission-assurance-expert.md": "58f9311e468c1bc6e177b9adb08d3b1392535255d83055970d5208c923503370",
+    "agents/data-pipeline-guard-team-lead.md": "3c91a05a4d2c5bf5248fd071718b2b7ab0d8db4f536d305d43a4a370febbecb2",
+    "agents/data-pipeline-guard.md": "7dd15614c159ab09472da541278f4765c3ecd88484e938cf5737b4973b5ee056",
+    "plugin.json": "ad24ea41e596a21f52764af9907f001aabba7715c206cb6deb62f4776797132e",
+    "settings.json": "d6c4f9a3b59d67d6cefcd05623817b818772d2e210b2df2508da4d1690ac04d6"
+  }
+}

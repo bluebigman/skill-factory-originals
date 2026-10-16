@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1189",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1189",
+    "kind": "team",
+    "name": "快速分析专家",
+    "description": "擅长先看结构、缺失统计与分布概览，覆盖CSV全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "csv-quick-analyze-team-lead",
+        "role": "lead",
+        "name": "CSV主理人",
+        "evidence": null
+      },
+      {
+        "slug": "csv-quick-analyze",
+        "role": "member",
+        "name": "CSV 快速分析 助手",
+        "evidence": "original_assets/csv-quick-analyze/merkle_root",
+        "member_merkle_root": "99b6b797ee1424c82693f2cc70260bc71b47f5debbd3aa493c62e8b88d95cee4"
+      },
+      {
+        "slug": "metric-layer",
+        "role": "member",
+        "name": "指标层建设 顾问",
+        "evidence": "original_assets/metric-layer/merkle_root",
+        "member_merkle_root": "bae1034c175b58849cc161ce05e6fe8f1e7cffda7055dfa92be5e95ad2dd9448"
+      },
+      {
+        "slug": "sheet-master-pro",
+        "role": "member",
+        "name": "表格处理 Excel公式",
+        "evidence": "original_assets/sheet-master-pro/merkle_root",
+        "member_merkle_root": "3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163"
+      }
+    ],
+    "team_lead": "csv-quick-analyze-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7a4a354d7ec130c6",
+  "prompt_hash": "611794eb9d7014b1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1189\", \"kind\": \"team\", \"name\": \"快速分析专家\", \"description\": \"擅长先看结构、缺失统计与分布概览，覆盖CSV全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"csv-quick-analyze-team-lead\", \"role\": \"lead\", \"name\": \"CSV主理人\", \"evidence\": null}, {\"slug\": \"csv-quick-analyze\", \"role\": \"member\", \"name\": \"CSV 快速分析 助手\", \"evidence\": \"original_assets/csv-quick-analyze/merkle_root\", \"member_merkle_root\": \"99b6b797ee1424c82693f2cc70260bc71b47f5debbd3aa493c62e8b88d95cee4\"}, {\"slug\": \"metric-layer\", \"role\": \"member\", \"name\": \"指标层建设 顾问\", \"evidence\": \"original_assets/metric-layer/merkle_root\", \"member_merkle_root\": \"bae1034c175b58849cc161ce05e6fe8f1e7cffda7055dfa92be5e95ad2dd9448\"}, {\"slug\": \"sheet-master-pro\", \"role\": \"member\", \"name\": \"表格处理 Excel公式\", \"evidence\": \"original_assets/sheet-master-pro/merkle_root\", \"member_merkle_root\": \"3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163\"}], \"team_lead\": \"csv-quick-analyze-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/csv-quick-analyze-team-lead.md": "290bfc41a1c5755c98de816fd3072c16ad1f08097facd794a51601cd928cb9af",
+    "agents/csv-quick-analyze.md": "cf24275466a1ff35b539db296ddd5617f8e43ea506fd7f04b69cae1e4e909565",
+    "agents/metric-layer.md": "dce2bdae234219ce4825ba22453b2b3a0d627cf281a8bdad633b407cddeea1c2",
+    "agents/sheet-master-pro.md": "2b7b64c018280fc8e05d5e5c5aa49e27482c68c3de1e9159fe55a1caad563713",
+    "plugin.json": "bb593b3ec85d1331494cacac7b9073184cdd33bcf605096386a4901b55780065",
+    "settings.json": "e8084552b1c17c5d37a0d6fd9356cfb016267992b79a8e4e7cda33509bdaf6ca"
+  }
+}

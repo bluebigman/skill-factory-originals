@@ -1,0 +1,126 @@
+{
+  "agentName": "code-assist-pro-02-fixed-team-lead",
+  "agents": [
+    "./agents/code-assist-pro-02-fixed-team-lead.md",
+    "./agents/code-assist-pro-02-fixed.md",
+    "./agents/evidence-audit-pro.md",
+    "./agents/java-code-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle Web路由设计",
+    "zh": "帮我处理Web路由设计"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 路由设计任务拆解 end-to-end: 轻量框架, 调试助手 and 架构设计. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长轻量框架、调试助手与架构设计，覆盖路由设计任务拆解全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "路由设计任务拆解专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "code-assist-pro-02-fixed-team-lead",
+      "name": {
+        "en": "Web路由设计主理人",
+        "zh": "Web路由设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-02-fixed.png",
+      "id": "code-assist-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/evidence-audit-pro.png",
+      "id": "evidence-audit-pro",
+      "name": {
+        "en": "Evidence Audit Expert",
+        "zh": "数据核验与审计"
+      },
+      "profession": {
+        "en": "Evidence Audit Expert",
+        "zh": "数据核验与审计"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/java-code-pro.png",
+      "id": "java-code-pro",
+      "name": {
+        "en": "Java Code Toolkit",
+        "zh": "Java 工程工具"
+      },
+      "profession": {
+        "en": "Java Code Toolkit",
+        "zh": "Java 工程工具"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-816",
+  "plugin": "group-team-816",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "路由设计任务拆解专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle Web路由设计",
+      "zh": "帮我处理Web路由设计"
+    },
+    {
+      "en": "Plan 数据核验与审计",
+      "zh": "帮我规划数据核验与审计"
+    },
+    {
+      "en": "Review Java",
+      "zh": "帮我检查Java"
+    }
+  ],
+  "tags": [
+    {
+      "en": "轻量框架",
+      "zh": "轻量框架"
+    },
+    {
+      "en": "调试助手",
+      "zh": "调试助手"
+    },
+    {
+      "en": "架构设计",
+      "zh": "架构设计"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "code-assist-pro-02-fixed-team-lead",
+    "memberAgents": [
+      "code-assist-pro-02-fixed",
+      "evidence-audit-pro",
+      "java-code-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "landing-page-opt-team-lead",
+  "agents": [
+    "./agents/landing-page-opt-team-lead.md",
+    "./agents/landing-page-opt.md",
+    "./agents/paid-ads-guard.md",
+    "./agents/email-lifecycle-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 落地页",
+    "zh": "帮我处理落地页"
+  },
+  "description": "landing-page-opt team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 落地页 requirements, output three deliverables: 减少摩擦, 对照实验, 预算上限. Verifiable end-to-end, evidence per step.",
+    "zh": "输入落地页相关需求，输出减少摩擦、对照实验、预算上限三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "landing-page-opt Team",
+    "zh": "落地页转化优化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "landing-page-opt-team-lead",
+      "name": {
+        "en": "落地页主理人",
+        "zh": "落地页主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/landing-page-opt.png",
+      "id": "landing-page-opt",
+      "name": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "profession": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/paid-ads-guard.png",
+      "id": "paid-ads-guard",
+      "name": {
+        "en": "paid-ads-guard",
+        "zh": "投放管理 预算护栏 顾问"
+      },
+      "profession": {
+        "en": "paid-ads-guard",
+        "zh": "投放管理 预算护栏 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/email-lifecycle-pro.png",
+      "id": "email-lifecycle-pro",
+      "name": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "profession": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-886",
+  "plugin": "group-team-886",
+  "profession": {
+    "en": "landing-page-opt Collaboration Team",
+    "zh": "落地页转化优化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 落地页",
+      "zh": "帮我处理落地页"
+    },
+    {
+      "en": "Plan 投放管理",
+      "zh": "帮我规划投放管理"
+    },
+    {
+      "en": "Review 邮件触达",
+      "zh": "帮我检查邮件触达"
+    }
+  ],
+  "tags": [
+    {
+      "en": "单一目标",
+      "zh": "单一目标"
+    },
+    {
+      "en": "证据支撑",
+      "zh": "证据支撑"
+    },
+    {
+      "en": "减少摩擦",
+      "zh": "减少摩擦"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "landing-page-opt-team-lead",
+    "memberAgents": [
+      "landing-page-opt",
+      "paid-ads-guard",
+      "email-lifecycle-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

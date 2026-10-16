@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-906",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-906",
+    "kind": "team",
+    "name": "模板引擎专家",
+    "description": "模板引擎专家：围绕模板引擎，覆盖变量声明／缺失处理／转义安全，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "template-engine-pro-team-lead",
+        "role": "lead",
+        "name": "模板引擎主理人",
+        "evidence": null
+      },
+      {
+        "slug": "template-engine-pro",
+        "role": "member",
+        "name": "模板引擎 变量替换 顾问",
+        "evidence": "original_assets/template-engine-pro/merkle_root",
+        "member_merkle_root": "d22b505294457fd9a3aa4fc618bdee66d9f0ef2d1b5585cb77f460b6b2233860"
+      },
+      {
+        "slug": "event-plan-review",
+        "role": "member",
+        "name": "活动方案 评审",
+        "evidence": "original_assets/event-plan-review/merkle_root",
+        "member_merkle_root": "706d771229b494c01db5d1675a2e6f231e2901835a9326dc55288e03ffe13cb4"
+      },
+      {
+        "slug": "pdf-content-extract",
+        "role": "member",
+        "name": "PDF 内容提取 助手",
+        "evidence": "original_assets/pdf-content-extract/merkle_root",
+        "member_merkle_root": "1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb"
+      }
+    ],
+    "team_lead": "template-engine-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cee2e274df5c990e",
+  "prompt_hash": "0ec0df75007513e2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-906\", \"kind\": \"team\", \"name\": \"模板引擎专家\", \"description\": \"模板引擎专家：围绕模板引擎，覆盖变量声明／缺失处理／转义安全，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"template-engine-pro-team-lead\", \"role\": \"lead\", \"name\": \"模板引擎主理人\", \"evidence\": null}, {\"slug\": \"template-engine-pro\", \"role\": \"member\", \"name\": \"模板引擎 变量替换 顾问\", \"evidence\": \"original_assets/template-engine-pro/merkle_root\", \"member_merkle_root\": \"d22b505294457fd9a3aa4fc618bdee66d9f0ef2d1b5585cb77f460b6b2233860\"}, {\"slug\": \"event-plan-review\", \"role\": \"member\", \"name\": \"活动方案 评审\", \"evidence\": \"original_assets/event-plan-review/merkle_root\", \"member_merkle_root\": \"706d771229b494c01db5d1675a2e6f231e2901835a9326dc55288e03ffe13cb4\"}, {\"slug\": \"pdf-content-extract\", \"role\": \"member\", \"name\": \"PDF 内容提取 助手\", \"evidence\": \"original_assets/pdf-content-extract/merkle_root\", \"member_merkle_root\": \"1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb\"}], \"team_lead\": \"template-engine-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/event-plan-review.md": "f36ea8fb690a0fbb4a1abd1e0e47bc2f697564fe63e64da694a7b68898cc5b65",
+    "agents/pdf-content-extract.md": "cc54ab94253b2274b696ac9eef3aa77946a66b69a2aeeae8a766d6b960aa62a0",
+    "agents/template-engine-pro-team-lead.md": "825019e6bdbf0081efb9f4473d3f72eafc29b4ada562032f24b9eda7dbeec9c7",
+    "agents/template-engine-pro.md": "6b8f9d924ecd8125ac84c1ac028e8665e094ae1d6aa935d70c788384c9a090f9",
+    "plugin.json": "fffabc243ca8aaf2c948c8a3cf0498113aa9d4d8bed5fe7b29b5ff24d99dd87d",
+    "settings.json": "5dd3045d3078adfcdf17c74818b57489abfc6967a2ac63c57b39b526f3e88367"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "requirement-clarify-pro-team-lead",
+  "agents": [
+    "./agents/requirement-clarify-pro-team-lead.md",
+    "./agents/requirement-clarify-pro.md",
+    "./agents/agent-quality-gate.md",
+    "./agents/cs-health-score.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 需求澄清",
+    "zh": "帮我处理需求澄清"
+  },
+  "description": "requirement-clarify-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 需求澄清 end-to-end: 变更机制, 判据明确 and 类型分支. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长变更机制、判据明确与类型分支，覆盖需求澄清全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "requirement-clarify-pro Team",
+    "zh": "边界确认专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "requirement-clarify-pro-team-lead",
+      "name": {
+        "en": "需求澄清主理人",
+        "zh": "需求澄清主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/requirement-clarify-pro.png",
+      "id": "requirement-clarify-pro",
+      "name": {
+        "en": "requirement-clarify-pro",
+        "zh": "需求澄清 边界确认 顾问"
+      },
+      "profession": {
+        "en": "requirement-clarify-pro",
+        "zh": "需求澄清 边界确认 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-quality-gate.png",
+      "id": "agent-quality-gate",
+      "name": {
+        "en": "agent-quality-gate",
+        "zh": "质量闸门 判据 顾问"
+      },
+      "profession": {
+        "en": "agent-quality-gate",
+        "zh": "质量闸门 判据 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cs-health-score.png",
+      "id": "cs-health-score",
+      "name": {
+        "en": "cs-health-score",
+        "zh": "客户健康 评分模型 顾问"
+      },
+      "profession": {
+        "en": "cs-health-score",
+        "zh": "客户健康 评分模型 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-968",
+  "plugin": "group-team-968",
+  "profession": {
+    "en": "requirement-clarify-pro Collaboration Team",
+    "zh": "边界确认专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 需求澄清",
+      "zh": "帮我处理需求澄清"
+    },
+    {
+      "en": "Plan 质量闸门",
+      "zh": "帮我规划质量闸门"
+    },
+    {
+      "en": "Review 客户健康",
+      "zh": "帮我检查客户健康"
+    }
+  ],
+  "tags": [
+    {
+      "en": "边界界定",
+      "zh": "边界界定"
+    },
+    {
+      "en": "验收标准",
+      "zh": "验收标准"
+    },
+    {
+      "en": "干系人",
+      "zh": "干系人"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "requirement-clarify-pro-team-lead",
+    "memberAgents": [
+      "requirement-clarify-pro",
+      "agent-quality-gate",
+      "cs-health-score"
+    ]
+  },
+  "version": "1.0.0"
+}

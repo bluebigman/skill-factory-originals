@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1122",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1122",
+    "kind": "team",
+    "name": "数据问答检索增强专家",
+    "description": "输入数据问答相关需求，输出检索优先、来源标注、口径一致三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cred-crypto-audit-pro-team-lead",
+        "role": "lead",
+        "name": "凭据与加密强度审计专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cred-crypto-audit-pro",
+        "role": "member",
+        "name": "凭据与加密强度审计专家",
+        "evidence": "original_assets/cred-crypto-audit-pro/merkle_root",
+        "member_merkle_root": "c9ef475c94341153b34f2e61871a9d497bd53aa3e2f1ac33cfa04ad28466a580"
+      },
+      {
+        "slug": "agent-data-qa",
+        "role": "member",
+        "name": "数据问答 检索增强 顾问",
+        "evidence": "original_assets/agent-data-qa/merkle_root",
+        "member_merkle_root": "cedf8f14eaac2c14e3010915ce47ac26f8ca2a26322ab94ba201056271d26bf6"
+      },
+      {
+        "slug": "data-destruction",
+        "role": "member",
+        "name": "数据销毁规范 顾问",
+        "evidence": "original_assets/data-destruction/merkle_root",
+        "member_merkle_root": "346bbf23d4c41ed624ef4369d2116ab68a45ad4cc904562c4b6e99752b51645e"
+      }
+    ],
+    "team_lead": "cred-crypto-audit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "112eac67d614f7c1",
+  "prompt_hash": "08918cdb4f9a1eae",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1122\", \"kind\": \"team\", \"name\": \"数据问答检索增强专家\", \"description\": \"输入数据问答相关需求，输出检索优先、来源标注、口径一致三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cred-crypto-audit-pro-team-lead\", \"role\": \"lead\", \"name\": \"凭据与加密强度审计专家主理人\", \"evidence\": null}, {\"slug\": \"cred-crypto-audit-pro\", \"role\": \"member\", \"name\": \"凭据与加密强度审计专家\", \"evidence\": \"original_assets/cred-crypto-audit-pro/merkle_root\", \"member_merkle_root\": \"c9ef475c94341153b34f2e61871a9d497bd53aa3e2f1ac33cfa04ad28466a580\"}, {\"slug\": \"agent-data-qa\", \"role\": \"member\", \"name\": \"数据问答 检索增强 顾问\", \"evidence\": \"original_assets/agent-data-qa/merkle_root\", \"member_merkle_root\": \"cedf8f14eaac2c14e3010915ce47ac26f8ca2a26322ab94ba201056271d26bf6\"}, {\"slug\": \"data-destruction\", \"role\": \"member\", \"name\": \"数据销毁规范 顾问\", \"evidence\": \"original_assets/data-destruction/merkle_root\", \"member_merkle_root\": \"346bbf23d4c41ed624ef4369d2116ab68a45ad4cc904562c4b6e99752b51645e\"}], \"team_lead\": \"cred-crypto-audit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-data-qa.md": "fd3bb9ec2ddd5fadb5e9af9d7d928b3925d43039845e10a3160d9a987a144084",
+    "agents/cred-crypto-audit-pro-team-lead.md": "1a9b04266f3aecf583b73f0a21085e02db8c17578531f97268753e3e323e0ae6",
+    "agents/cred-crypto-audit-pro.md": "0faf0bd598bc5ab8b506a5957b56a784d9f52825d357c60470e816c818b12332",
+    "agents/data-destruction.md": "8d6ac21e993883cc7012b81b55332bee5db1f3f2778621444f2c9c8e0dc6352d",
+    "plugin.json": "24502a4a26bbfaf73cc25411636a29b93e6905745d368d00371b44608aa04c83",
+    "settings.json": "17dc94f5f413f7250cb1a10c5ea8cbdcff5644364175742b6f241cb9c5b60f4e"
+  }
+}

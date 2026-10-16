@@ -1,0 +1,126 @@
+{
+  "agentName": "report-automation-pro-team-lead",
+  "agents": [
+    "./agents/report-automation-pro-team-lead.md",
+    "./agents/report-automation-pro.md",
+    "./agents/vector-index-build.md",
+    "./agents/safety-production-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 报表自动",
+    "zh": "帮我处理报表自动"
+  },
+  "description": "report-automation-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 报表自动 end-to-end: 定时可靠, 失败告警 and 数据就绪. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长定时可靠、失败告警与数据就绪，覆盖报表自动全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "report-automation-pro Team",
+    "zh": "定时生成专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "report-automation-pro-team-lead",
+      "name": {
+        "en": "报表自动主理人",
+        "zh": "报表自动主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/report-automation-pro.png",
+      "id": "report-automation-pro",
+      "name": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "profession": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/vector-index-build.png",
+      "id": "vector-index-build",
+      "name": {
+        "en": "vector-index-build",
+        "zh": "向量索引构建 顾问"
+      },
+      "profession": {
+        "en": "vector-index-build",
+        "zh": "向量索引构建 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/safety-production-pro.png",
+      "id": "safety-production-pro",
+      "name": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "profession": {
+        "en": "safety-production-pro",
+        "zh": "生产安全 隐患排查 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1210",
+  "plugin": "group-team-1210",
+  "profession": {
+    "en": "report-automation-pro Collaboration Team",
+    "zh": "定时生成专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报表自动",
+      "zh": "帮我处理报表自动"
+    },
+    {
+      "en": "Plan 向量索引构建",
+      "zh": "帮我规划向量索引构建"
+    },
+    {
+      "en": "Review 生产安全",
+      "zh": "帮我检查生产安全"
+    }
+  ],
+  "tags": [
+    {
+      "en": "失败告警",
+      "zh": "失败告警"
+    },
+    {
+      "en": "数据就绪",
+      "zh": "数据就绪"
+    },
+    {
+      "en": "分发清单",
+      "zh": "分发清单"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "report-automation-pro-team-lead",
+    "memberAgents": [
+      "report-automation-pro",
+      "vector-index-build",
+      "safety-production-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

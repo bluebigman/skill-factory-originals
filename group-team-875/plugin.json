@@ -1,0 +1,126 @@
+{
+  "agentName": "import-inspection-pro-team-lead",
+  "agents": [
+    "./agents/import-inspection-pro-team-lead.md",
+    "./agents/import-inspection-pro.md",
+    "./agents/annual-report-expert.md",
+    "./agents/industrial-service-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 进口检验",
+    "zh": "帮我处理进口检验"
+  },
+  "description": "import-inspection-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 进口检验 end-to-end: 标准对照, 按批抽样 and 预检前置. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长标准对照、按批抽样与预检前置，覆盖进口检验全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "import-inspection-pro Team",
+    "zh": "工业服务交付标准专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "import-inspection-pro-team-lead",
+      "name": {
+        "en": "进口检验主理人",
+        "zh": "进口检验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/import-inspection-pro.png",
+      "id": "import-inspection-pro",
+      "name": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "profession": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/annual-report-expert.png",
+      "id": "annual-report-expert",
+      "name": {
+        "en": "AnnualReport",
+        "zh": "年报官"
+      },
+      "profession": {
+        "en": "AnnualReport",
+        "zh": "年报财报速读与数据整理专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/industrial-service-pro.png",
+      "id": "industrial-service-pro",
+      "name": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "profession": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-875",
+  "plugin": "group-team-875",
+  "profession": {
+    "en": "import-inspection-pro Collaboration Team",
+    "zh": "工业服务交付标准专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 进口检验",
+      "zh": "帮我处理进口检验"
+    },
+    {
+      "en": "Plan 年报财报速读与数据整理专家",
+      "zh": "帮我规划年报财报速读与数据整理专家"
+    },
+    {
+      "en": "Review 工业服务",
+      "zh": "帮我检查工业服务"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标准对照",
+      "zh": "标准对照"
+    },
+    {
+      "en": "按批抽样",
+      "zh": "按批抽样"
+    },
+    {
+      "en": "不合格处置",
+      "zh": "不合格处置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "import-inspection-pro-team-lead",
+    "memberAgents": [
+      "import-inspection-pro",
+      "annual-report-expert",
+      "industrial-service-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

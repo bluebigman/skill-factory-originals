@@ -1,0 +1,126 @@
+{
+  "agentName": "table-merge-pro-team-lead",
+  "agents": [
+    "./agents/table-merge-pro-team-lead.md",
+    "./agents/table-merge-pro.md",
+    "./agents/agent-sandbox-policy.md",
+    "./agents/agent-toolkit-pro-03.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 表格合并",
+    "zh": "帮我处理表格合并"
+  },
+  "description": "table-merge-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 表格合并 end-to-end: 字段映射, 冲突策略 and 行数核对. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长字段映射、冲突策略与行数核对，覆盖表格合并全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "table-merge-pro Team",
+    "zh": "表格合并专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "table-merge-pro-team-lead",
+      "name": {
+        "en": "表格合并主理人",
+        "zh": "表格合并主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/table-merge-pro.png",
+      "id": "table-merge-pro",
+      "name": {
+        "en": "table-merge-pro",
+        "zh": "表格合并 多表对齐 顾问"
+      },
+      "profession": {
+        "en": "table-merge-pro",
+        "zh": "表格合并 多表对齐 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-sandbox-policy.png",
+      "id": "agent-sandbox-policy",
+      "name": {
+        "en": "agent-sandbox-policy",
+        "zh": "沙箱策略 隔离边界 顾问"
+      },
+      "profession": {
+        "en": "agent-sandbox-policy",
+        "zh": "沙箱策略 隔离边界 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-03.png",
+      "id": "agent-toolkit-pro-03",
+      "name": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "技能编排 技能组合 开发辅助"
+      },
+      "profession": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "技能编排 技能组合 开发辅助"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-776",
+  "plugin": "group-team-776",
+  "profession": {
+    "en": "table-merge-pro Collaboration Team",
+    "zh": "表格合并专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 表格合并",
+      "zh": "帮我处理表格合并"
+    },
+    {
+      "en": "Plan 沙箱策略",
+      "zh": "帮我规划沙箱策略"
+    },
+    {
+      "en": "Review 技能编排",
+      "zh": "帮我检查技能编排"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字段映射",
+      "zh": "字段映射"
+    },
+    {
+      "en": "冲突策略",
+      "zh": "冲突策略"
+    },
+    {
+      "en": "行数核对",
+      "zh": "行数核对"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "table-merge-pro-team-lead",
+    "memberAgents": [
+      "table-merge-pro",
+      "agent-sandbox-policy",
+      "agent-toolkit-pro-03"
+    ]
+  },
+  "version": "1.0.0"
+}

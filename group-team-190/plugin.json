@@ -1,0 +1,126 @@
+{
+  "agentName": "workplace-communication-pro-team-lead",
+  "agents": [
+    "./agents/workplace-communication-pro-team-lead.md",
+    "./agents/workplace-communication-pro.md",
+    "./agents/moving-relocation-pro.md",
+    "./agents/job-interview-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 职场沟通",
+    "zh": "帮我处理职场沟通"
+  },
+  "description": "Workplace Communication Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "职场 搬家 面试 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Workplace Communication Pro Team",
+    "zh": "职场 搬家 面试 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "workplace-communication-pro-team-lead",
+      "name": {
+        "en": "职场沟通主理人",
+        "zh": "职场沟通主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/workplace-communication-pro.png",
+      "id": "workplace-communication-pro",
+      "name": {
+        "en": "Workplace Communication Pro",
+        "zh": "职场沟通 向上管理 跨部门协作"
+      },
+      "profession": {
+        "en": "Workplace Communication Pro",
+        "zh": "职场沟通 向上管理 跨部门协作"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/moving-relocation-pro.png",
+      "id": "moving-relocation-pro",
+      "name": {
+        "en": "Moving Relocation Pro",
+        "zh": "搬家 搬迁清单 租房交接"
+      },
+      "profession": {
+        "en": "Moving Relocation Pro",
+        "zh": "搬家 搬迁清单 租房交接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/job-interview-pro.png",
+      "id": "job-interview-pro",
+      "name": {
+        "en": "Job Interview Pro",
+        "zh": "面试准备 自我介绍 问答演练"
+      },
+      "profession": {
+        "en": "Job Interview Pro",
+        "zh": "面试准备 自我介绍 问答演练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-190",
+  "plugin": "group-team-190",
+  "profession": {
+    "en": "Workplace Communication Pro Collaboration Team",
+    "zh": "职场 搬家 面试 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 职场沟通",
+      "zh": "帮我处理职场沟通"
+    },
+    {
+      "en": "Plan 搬家",
+      "zh": "帮我规划搬家"
+    },
+    {
+      "en": "Review 面试准备",
+      "zh": "帮我检查面试准备"
+    }
+  ],
+  "tags": [
+    {
+      "en": "职场沟通",
+      "zh": "职场沟通"
+    },
+    {
+      "en": "搬家",
+      "zh": "搬家"
+    },
+    {
+      "en": "面试准备",
+      "zh": "面试准备"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "workplace-communication-pro-team-lead",
+    "memberAgents": [
+      "workplace-communication-pro",
+      "moving-relocation-pro",
+      "job-interview-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

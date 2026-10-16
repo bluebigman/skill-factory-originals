@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-894",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-894",
+    "kind": "team",
+    "name": "内容选题简报专家",
+    "description": "输入内容选题简报相关需求，输出搜索意图、结构建议、内链规划三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "seo-content-brief-team-lead",
+        "role": "lead",
+        "name": "内容选题简报主理人",
+        "evidence": null
+      },
+      {
+        "slug": "seo-content-brief",
+        "role": "member",
+        "name": "内容选题简报 助手",
+        "evidence": "original_assets/seo-content-brief/merkle_root",
+        "member_merkle_root": "d08aa2ac053218d5835d97e9c0055071bec855f08463daac81233829347d1650"
+      },
+      {
+        "slug": "pdf-content-extract",
+        "role": "member",
+        "name": "PDF 内容提取 助手",
+        "evidence": "original_assets/pdf-content-extract/merkle_root",
+        "member_merkle_root": "1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb"
+      },
+      {
+        "slug": "content-repurpose",
+        "role": "member",
+        "name": "内容复用 一稿多用 顾问",
+        "evidence": "original_assets/content-repurpose/merkle_root",
+        "member_merkle_root": "b189669df47abe525205d0f88fa61626521dc2f95dc482960479e194f7bb306f"
+      }
+    ],
+    "team_lead": "seo-content-brief-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a0f1f88ed3cdda45",
+  "prompt_hash": "1b46c7ac1b1372f4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-894\", \"kind\": \"team\", \"name\": \"内容选题简报专家\", \"description\": \"输入内容选题简报相关需求，输出搜索意图、结构建议、内链规划三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"seo-content-brief-team-lead\", \"role\": \"lead\", \"name\": \"内容选题简报主理人\", \"evidence\": null}, {\"slug\": \"seo-content-brief\", \"role\": \"member\", \"name\": \"内容选题简报 助手\", \"evidence\": \"original_assets/seo-content-brief/merkle_root\", \"member_merkle_root\": \"d08aa2ac053218d5835d97e9c0055071bec855f08463daac81233829347d1650\"}, {\"slug\": \"pdf-content-extract\", \"role\": \"member\", \"name\": \"PDF 内容提取 助手\", \"evidence\": \"original_assets/pdf-content-extract/merkle_root\", \"member_merkle_root\": \"1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb\"}, {\"slug\": \"content-repurpose\", \"role\": \"member\", \"name\": \"内容复用 一稿多用 顾问\", \"evidence\": \"original_assets/content-repurpose/merkle_root\", \"member_merkle_root\": \"b189669df47abe525205d0f88fa61626521dc2f95dc482960479e194f7bb306f\"}], \"team_lead\": \"seo-content-brief-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-repurpose.md": "9d7b4b74e20bee23fe4de04642cfafba07e0020c49df92c839a1452160b313de",
+    "agents/pdf-content-extract.md": "3bed5e25482a18ae5e669320c1146f747d9bff9857104bd667f5ad23708c6840",
+    "agents/seo-content-brief-team-lead.md": "b753f7ea5dce4ccf8fdfac45016fa3b94bebf13988b05837ee83618913ac501a",
+    "agents/seo-content-brief.md": "3e9dd3756f5626c628e0f2c65598d7c0bdcd8a58f895535d78bd156fbdb79cec",
+    "plugin.json": "b709e33ed320444bbffe86ceba2bcbe21da75566042fa6eb26b71152cc1a5ab2",
+    "settings.json": "1c6b0021eb493ef112c591e98f2d528b9f2af2c675d9aee5f0968e72a46b9f63"
+  }
+}

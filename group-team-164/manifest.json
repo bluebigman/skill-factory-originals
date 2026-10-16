@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-164",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-164",
+    "kind": "team",
+    "name": "容错 知识库 一键 团队",
+    "description": "容错 知识库 一键 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-convert-pro-02-fixed-team-lead",
+        "role": "lead",
+        "name": "文档转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-convert-pro-02-fixed",
+        "role": "member",
+        "name": "文档转换 容错转换 标签修复",
+        "evidence": "original_assets/doc-convert-pro-02-fixed/merkle_root",
+        "member_merkle_root": "86da6bdecac82ef29cc6388b98b68acba9597ee64641a194902ee387d035d6d6"
+      },
+      {
+        "slug": "knowledge-base-pro-fixed",
+        "role": "member",
+        "name": "文档建站 知识库构建",
+        "evidence": "original_assets/knowledge-base-pro-fixed/merkle_root",
+        "member_merkle_root": "e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43"
+      },
+      {
+        "slug": "media-process-pro-fixed",
+        "role": "member",
+        "name": "政务设计规范 一键成片",
+        "evidence": "original_assets/media-process-pro-fixed/merkle_root",
+        "member_merkle_root": "2decbdf309d75b8ecb3d3d3756d533cdfce5ac9fdbf2d65b0694bf2bea5c45e8"
+      }
+    ],
+    "team_lead": "doc-convert-pro-02-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e669a2825da0c6a8",
+  "prompt_hash": "7ed71ef2f246b3b9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-164\", \"kind\": \"team\", \"name\": \"容错 知识库 一键 团队\", \"description\": \"容错 知识库 一键 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-convert-pro-02-fixed-team-lead\", \"role\": \"lead\", \"name\": \"文档转换主理人\", \"evidence\": null}, {\"slug\": \"doc-convert-pro-02-fixed\", \"role\": \"member\", \"name\": \"文档转换 容错转换 标签修复\", \"evidence\": \"original_assets/doc-convert-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"86da6bdecac82ef29cc6388b98b68acba9597ee64641a194902ee387d035d6d6\"}, {\"slug\": \"knowledge-base-pro-fixed\", \"role\": \"member\", \"name\": \"文档建站 知识库构建\", \"evidence\": \"original_assets/knowledge-base-pro-fixed/merkle_root\", \"member_merkle_root\": \"e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43\"}, {\"slug\": \"media-process-pro-fixed\", \"role\": \"member\", \"name\": \"政务设计规范 一键成片\", \"evidence\": \"original_assets/media-process-pro-fixed/merkle_root\", \"member_merkle_root\": \"2decbdf309d75b8ecb3d3d3756d533cdfce5ac9fdbf2d65b0694bf2bea5c45e8\"}], \"team_lead\": \"doc-convert-pro-02-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-02-fixed-team-lead.md": "1261e529e4cadec429881c1eb2363382e57d91adca8ce05582419040009f05f3",
+    "agents/doc-convert-pro-02-fixed.md": "dd8afc4c6344d699b46c7d62cff85c5b0a36288612f1e34bb174537eee74e51d",
+    "agents/knowledge-base-pro-fixed.md": "f99bb2d85fcb0da716aad5e87e731fe0e915f76ab2fd876fa0d6556c197499c5",
+    "agents/media-process-pro-fixed.md": "ac72862e6d817bd4c7079973f28886e95b655054cfadeadaefca4e906bac037d",
+    "plugin.json": "ffa0edb79e1e8b39e2782f812ad576acf93c1446ffcb863605b7b49cc90f588a",
+    "settings.json": "d206d01c3991e44ee1b1d12de842bd7cbd455527eb0d944ec9d2e5ae7e69da71"
+  }
+}

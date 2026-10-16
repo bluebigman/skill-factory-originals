@@ -1,0 +1,126 @@
+{
+  "agentName": "scene-narrative-pro-team-lead",
+  "agents": [
+    "./agents/scene-narrative-pro-team-lead.md",
+    "./agents/scene-narrative-pro.md",
+    "./agents/document-diff-pro.md",
+    "./agents/note-life-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 场景叙事",
+    "zh": "帮我处理场景叙事"
+  },
+  "description": "scene-narrative-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 场景叙事, covers 光线引导 / 声音铺底 / 信息留白, delivering structured results and actionable checklists.",
+    "zh": "场景叙事专家：围绕场景叙事，覆盖光线引导／声音铺底／信息留白，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "scene-narrative-pro Team",
+    "zh": "场景叙事专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "scene-narrative-pro-team-lead",
+      "name": {
+        "en": "场景叙事主理人",
+        "zh": "场景叙事主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/scene-narrative-pro.png",
+      "id": "scene-narrative-pro",
+      "name": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "profession": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/document-diff-pro.png",
+      "id": "document-diff-pro",
+      "name": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "profession": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/note-life-pro.png",
+      "id": "note-life-pro",
+      "name": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "profession": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1079",
+  "plugin": "group-team-1079",
+  "profession": {
+    "en": "scene-narrative-pro Collaboration Team",
+    "zh": "场景叙事专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 场景叙事",
+      "zh": "帮我处理场景叙事"
+    },
+    {
+      "en": "Plan 文档比对",
+      "zh": "帮我规划文档比对"
+    },
+    {
+      "en": "Review 笔记与生活助手",
+      "zh": "帮我检查笔记与生活助手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "光线引导",
+      "zh": "光线引导"
+    },
+    {
+      "en": "声音铺底",
+      "zh": "声音铺底"
+    },
+    {
+      "en": "信息留白",
+      "zh": "信息留白"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "scene-narrative-pro-team-lead",
+    "memberAgents": [
+      "scene-narrative-pro",
+      "document-diff-pro",
+      "note-life-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

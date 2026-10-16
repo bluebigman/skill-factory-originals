@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1085",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1085",
+    "kind": "team",
+    "name": "数据一致性核验专家",
+    "description": "数据一致性核验专家：围绕数据一致性核验，覆盖定义口径／双向比对／差异分级，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-consistency-check-team-lead",
+        "role": "lead",
+        "name": "数据一致性核验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-consistency-check",
+        "role": "member",
+        "name": "数据一致性核验 助手",
+        "evidence": "original_assets/data-consistency-check/merkle_root",
+        "member_merkle_root": "39c607ee14a52825d9348169db20c71ebbe93ff12e38751c17fdeceed52316b2"
+      },
+      {
+        "slug": "attribution-basic",
+        "role": "member",
+        "name": "效果归因 口径统一 顾问",
+        "evidence": "original_assets/attribution-basic/merkle_root",
+        "member_merkle_root": "f5d005d9e236062d46347f2290e030d702c3fd4e667551c3dc11bc8db40a5d94"
+      },
+      {
+        "slug": "browser-flow-record",
+        "role": "member",
+        "name": "浏览器流程录制 助手",
+        "evidence": "original_assets/browser-flow-record/merkle_root",
+        "member_merkle_root": "a103832dddedb054d4f286607d7004cb397193a153be4d8207e2f994cbe3fc10"
+      }
+    ],
+    "team_lead": "data-consistency-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6100f1af994a849e",
+  "prompt_hash": "970733d7a6dadda4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1085\", \"kind\": \"team\", \"name\": \"数据一致性核验专家\", \"description\": \"数据一致性核验专家：围绕数据一致性核验，覆盖定义口径／双向比对／差异分级，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-consistency-check-team-lead\", \"role\": \"lead\", \"name\": \"数据一致性核验主理人\", \"evidence\": null}, {\"slug\": \"data-consistency-check\", \"role\": \"member\", \"name\": \"数据一致性核验 助手\", \"evidence\": \"original_assets/data-consistency-check/merkle_root\", \"member_merkle_root\": \"39c607ee14a52825d9348169db20c71ebbe93ff12e38751c17fdeceed52316b2\"}, {\"slug\": \"attribution-basic\", \"role\": \"member\", \"name\": \"效果归因 口径统一 顾问\", \"evidence\": \"original_assets/attribution-basic/merkle_root\", \"member_merkle_root\": \"f5d005d9e236062d46347f2290e030d702c3fd4e667551c3dc11bc8db40a5d94\"}, {\"slug\": \"browser-flow-record\", \"role\": \"member\", \"name\": \"浏览器流程录制 助手\", \"evidence\": \"original_assets/browser-flow-record/merkle_root\", \"member_merkle_root\": \"a103832dddedb054d4f286607d7004cb397193a153be4d8207e2f994cbe3fc10\"}], \"team_lead\": \"data-consistency-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/attribution-basic.md": "c03410d4a09e65427e1ca7512ddfe3f9dfb2de85d0233aeb33f2e79fe5b6ddaf",
+    "agents/browser-flow-record.md": "6466cbbbf127d0491ddbda25810bd012019256c5868f9b19b0b47237e236d056",
+    "agents/data-consistency-check-team-lead.md": "d01a7374204b86d3d23c3078469d46c71d96cb41eaa7488790586eb137363cc2",
+    "agents/data-consistency-check.md": "262a4d72aa96ea9898939b125356cff30be826c96aa5642cacff54076f2f0d14",
+    "plugin.json": "5e63e6d1b27bffcdd302cb7329e43ff140a3bda083e93b7d6b8d4f1a5c2b65ce",
+    "settings.json": "177a52c117349b8e86a3d15400f48b27cb767d8ec8d2a3b628766326aadde8a6"
+  }
+}

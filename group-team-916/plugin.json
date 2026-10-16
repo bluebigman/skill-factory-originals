@@ -1,0 +1,126 @@
+{
+  "agentName": "intl-standards-map-team-lead",
+  "agents": [
+    "./agents/intl-standards-map-team-lead.md",
+    "./agents/intl-standards-map.md",
+    "./agents/import-inspection-pro.md",
+    "./agents/intl-meeting-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 国际标准",
+    "zh": "帮我处理国际标准"
+  },
+  "description": "intl-standards-map team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 国际标准 requirements, output three deliverables: 版本溯源, 差异列表, 取严原则. Verifiable end-to-end, evidence per step.",
+    "zh": "输入国际标准相关需求，输出版本溯源、差异列表、取严原则三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "intl-standards-map Team",
+    "zh": "对照梳理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "intl-standards-map-team-lead",
+      "name": {
+        "en": "国际标准主理人",
+        "zh": "国际标准主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/intl-standards-map.png",
+      "id": "intl-standards-map",
+      "name": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "profession": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/import-inspection-pro.png",
+      "id": "import-inspection-pro",
+      "name": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "profession": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-meeting-coach.png",
+      "id": "intl-meeting-coach",
+      "name": {
+        "en": "intl-meeting-coach",
+        "zh": "跨时区会议 组织 教练"
+      },
+      "profession": {
+        "en": "intl-meeting-coach",
+        "zh": "跨时区会议 组织 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-916",
+  "plugin": "group-team-916",
+  "profession": {
+    "en": "intl-standards-map Collaboration Team",
+    "zh": "对照梳理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 国际标准",
+      "zh": "帮我处理国际标准"
+    },
+    {
+      "en": "Plan 进口检验",
+      "zh": "帮我规划进口检验"
+    },
+    {
+      "en": "Review 跨时区会议",
+      "zh": "帮我检查跨时区会议"
+    }
+  ],
+  "tags": [
+    {
+      "en": "差异列表",
+      "zh": "差异列表"
+    },
+    {
+      "en": "取严原则",
+      "zh": "取严原则"
+    },
+    {
+      "en": "周期预留",
+      "zh": "周期预留"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "intl-standards-map-team-lead",
+    "memberAgents": [
+      "intl-standards-map",
+      "import-inspection-pro",
+      "intl-meeting-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

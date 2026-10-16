@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-675",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-675",
+    "kind": "team",
+    "name": "报价方案结构规范专家",
+    "description": "擅长三档选项、边界写清与要素齐全，覆盖报价方案全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "quotation-standard-team-lead",
+        "role": "lead",
+        "name": "报价方案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "quotation-standard",
+        "role": "member",
+        "name": "报价方案 结构规范 顾问",
+        "evidence": "original_assets/quotation-standard/merkle_root",
+        "member_merkle_root": "2e9ce8e360651d99f7502fbc960482be4b8c2bc5268f46b822855bed85495b70"
+      },
+      {
+        "slug": "cross-border-invoice-pro",
+        "role": "member",
+        "name": "跨境发票 信息核对 助手",
+        "evidence": "original_assets/cross-border-invoice-pro/merkle_root",
+        "member_merkle_root": "8e198007bcd94c9ee4122e88ceccb66b1553e99098d3996342b8c18b773d5a27"
+      },
+      {
+        "slug": "new-product-npi-pro",
+        "role": "member",
+        "name": "新品导入 试产爬坡 顾问",
+        "evidence": "original_assets/new-product-npi-pro/merkle_root",
+        "member_merkle_root": "b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc"
+      }
+    ],
+    "team_lead": "quotation-standard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "48348a595f3200f3",
+  "prompt_hash": "24e5dd3e4bee725e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-675\", \"kind\": \"team\", \"name\": \"报价方案结构规范专家\", \"description\": \"擅长三档选项、边界写清与要素齐全，覆盖报价方案全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"quotation-standard-team-lead\", \"role\": \"lead\", \"name\": \"报价方案主理人\", \"evidence\": null}, {\"slug\": \"quotation-standard\", \"role\": \"member\", \"name\": \"报价方案 结构规范 顾问\", \"evidence\": \"original_assets/quotation-standard/merkle_root\", \"member_merkle_root\": \"2e9ce8e360651d99f7502fbc960482be4b8c2bc5268f46b822855bed85495b70\"}, {\"slug\": \"cross-border-invoice-pro\", \"role\": \"member\", \"name\": \"跨境发票 信息核对 助手\", \"evidence\": \"original_assets/cross-border-invoice-pro/merkle_root\", \"member_merkle_root\": \"8e198007bcd94c9ee4122e88ceccb66b1553e99098d3996342b8c18b773d5a27\"}, {\"slug\": \"new-product-npi-pro\", \"role\": \"member\", \"name\": \"新品导入 试产爬坡 顾问\", \"evidence\": \"original_assets/new-product-npi-pro/merkle_root\", \"member_merkle_root\": \"b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc\"}], \"team_lead\": \"quotation-standard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-invoice-pro.md": "5d3e49a51ed6e0c5bcd5995e52b7cee9f59c6d25a36427dba9b50f6e1a96829a",
+    "agents/new-product-npi-pro.md": "d7af6a286d6091570ee9f9fd5ee0ca66e1dac8de84819709838850e88640076f",
+    "agents/quotation-standard-team-lead.md": "1249249db6a157918c33080641bceab9da1439d56aa4aec192a6381299dbc6f3",
+    "agents/quotation-standard.md": "a52d47c46d8e13201391661f13c25eb51dbd2a00087656061572879d4f8c991e",
+    "plugin.json": "caf55b83addd40f87353337f09728baa6b9b6d59bd992fac32e8b0f834ef571b",
+    "settings.json": "6d34f92293b82be97f36934b5ac67ee68184b24c387928bb7815e5fdeddee969"
+  }
+}

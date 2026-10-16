@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-279",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-279",
+    "kind": "team",
+    "name": "降级矩阵专家",
+    "description": "擅长分级明确、能力声明与触发条件，覆盖降级矩阵全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-degrade-matrix-team-lead",
+        "role": "lead",
+        "name": "降级矩阵主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-degrade-matrix",
+        "role": "member",
+        "name": "降级矩阵 分级策略 顾问",
+        "evidence": "original_assets/agent-degrade-matrix/merkle_root",
+        "member_merkle_root": "320a0f1f49031374d4005fb53a986d2783c60af7656d7c351b4d2230d2455abb"
+      },
+      {
+        "slug": "agent-loop-breaker",
+        "role": "member",
+        "name": "循环检测 重复识别 顾问",
+        "evidence": "original_assets/agent-loop-breaker/merkle_root",
+        "member_merkle_root": "b33f8a154757c0180a4d5111fb3500d417a8c4d8ae49a2bfccd4c46925e2a3b6"
+      },
+      {
+        "slug": "agent-user-intent",
+        "role": "member",
+        "name": "意图识别 歧义澄清 顾问",
+        "evidence": "original_assets/agent-user-intent/merkle_root",
+        "member_merkle_root": "2a94b015002d0e9facf61a6acbf916034601be02ef783d179c2195b642b90e54"
+      }
+    ],
+    "team_lead": "agent-degrade-matrix-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "34a990de322fa425",
+  "prompt_hash": "8d7549d0325fb1e1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-279\", \"kind\": \"team\", \"name\": \"降级矩阵专家\", \"description\": \"擅长分级明确、能力声明与触发条件，覆盖降级矩阵全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-degrade-matrix-team-lead\", \"role\": \"lead\", \"name\": \"降级矩阵主理人\", \"evidence\": null}, {\"slug\": \"agent-degrade-matrix\", \"role\": \"member\", \"name\": \"降级矩阵 分级策略 顾问\", \"evidence\": \"original_assets/agent-degrade-matrix/merkle_root\", \"member_merkle_root\": \"320a0f1f49031374d4005fb53a986d2783c60af7656d7c351b4d2230d2455abb\"}, {\"slug\": \"agent-loop-breaker\", \"role\": \"member\", \"name\": \"循环检测 重复识别 顾问\", \"evidence\": \"original_assets/agent-loop-breaker/merkle_root\", \"member_merkle_root\": \"b33f8a154757c0180a4d5111fb3500d417a8c4d8ae49a2bfccd4c46925e2a3b6\"}, {\"slug\": \"agent-user-intent\", \"role\": \"member\", \"name\": \"意图识别 歧义澄清 顾问\", \"evidence\": \"original_assets/agent-user-intent/merkle_root\", \"member_merkle_root\": \"2a94b015002d0e9facf61a6acbf916034601be02ef783d179c2195b642b90e54\"}], \"team_lead\": \"agent-degrade-matrix-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-degrade-matrix-team-lead.md": "33c611987ca80b9e4a4fa12bc70550ff9e4349638f9e5ebeb5840ae0ea7fb5a8",
+    "agents/agent-degrade-matrix.md": "30993505df04768f85ee6222763adb72751f9ef73ce91703aaa87c89a892462b",
+    "agents/agent-loop-breaker.md": "4779044bb71efe558ca20ff7971d5784c3b45543929ceb7639376c85b39bbbcb",
+    "agents/agent-user-intent.md": "5f82b9795c997d67de6bae252b49a9d38fbd0772ff8056766fdb5c41f7d3a1d9",
+    "plugin.json": "1ab6439b0bf3311cff9bf37ef071e69275a683928974f89371c4959980fd609c",
+    "settings.json": "fd75a672f422d26e31769d47b89d23d0b6a5fb3b018b879d3689a2145d1ec327"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-845",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-845",
+    "kind": "team",
+    "name": "文案设计专家",
+    "description": "输入错误提示相关需求，输出说明原因、给出动作、不丢数据三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "error-message-pro-team-lead",
+        "role": "lead",
+        "name": "错误提示主理人",
+        "evidence": null
+      },
+      {
+        "slug": "error-message-pro",
+        "role": "member",
+        "name": "错误提示 文案设计 顾问",
+        "evidence": "original_assets/error-message-pro/merkle_root",
+        "member_merkle_root": "9862f73eda48d03aa1879bb8c6d96c71a8c91c3c919a4673479220550561351a"
+      },
+      {
+        "slug": "onboarding-flow",
+        "role": "member",
+        "name": "上手引导流程 顾问",
+        "evidence": "original_assets/onboarding-flow/merkle_root",
+        "member_merkle_root": "c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050"
+      },
+      {
+        "slug": "prd-write-coach",
+        "role": "member",
+        "name": "需求文档撰写 顾问",
+        "evidence": "original_assets/prd-write-coach/merkle_root",
+        "member_merkle_root": "5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233"
+      }
+    ],
+    "team_lead": "error-message-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "773cb24c19955c81",
+  "prompt_hash": "e6ea6628ab371d8c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-845\", \"kind\": \"team\", \"name\": \"文案设计专家\", \"description\": \"输入错误提示相关需求，输出说明原因、给出动作、不丢数据三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"error-message-pro-team-lead\", \"role\": \"lead\", \"name\": \"错误提示主理人\", \"evidence\": null}, {\"slug\": \"error-message-pro\", \"role\": \"member\", \"name\": \"错误提示 文案设计 顾问\", \"evidence\": \"original_assets/error-message-pro/merkle_root\", \"member_merkle_root\": \"9862f73eda48d03aa1879bb8c6d96c71a8c91c3c919a4673479220550561351a\"}, {\"slug\": \"onboarding-flow\", \"role\": \"member\", \"name\": \"上手引导流程 顾问\", \"evidence\": \"original_assets/onboarding-flow/merkle_root\", \"member_merkle_root\": \"c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050\"}, {\"slug\": \"prd-write-coach\", \"role\": \"member\", \"name\": \"需求文档撰写 顾问\", \"evidence\": \"original_assets/prd-write-coach/merkle_root\", \"member_merkle_root\": \"5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233\"}], \"team_lead\": \"error-message-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/error-message-pro-team-lead.md": "04cde44776ce820e4d645732c48662a4004c0f2eefef58155e245179c375c09c",
+    "agents/error-message-pro.md": "952f0aa1b065d86d0f2a745a1685026846d0f0fc5433d42ed191a5ed334eb3d8",
+    "agents/onboarding-flow.md": "fad3652e512d9bcb4326b52be621f76aa8271be9090be7c38b3c173ab41a9825",
+    "agents/prd-write-coach.md": "f5ea15b68c81a4f71fec80864d5efe8f7b622da0289e55d6a1d55178d0f46e79",
+    "plugin.json": "e8048f1bc09d81aa1bbf49ec40b522e1611e591ff2e43eeb8ac23f65cd0f5369",
+    "settings.json": "d1fb1bd5251f4d0f530236236f69f19bbfb8f134d2f1ce2d1506a0216763033d"
+  }
+}

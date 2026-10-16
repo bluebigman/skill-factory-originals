@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-616",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-616",
+    "kind": "team",
+    "name": "云环境部署专家",
+    "description": "云环境部署专家：围绕公式审计，覆盖引用检查／类型校验／循环引用，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-cloud-pro-team-lead",
+        "role": "lead",
+        "name": "云环境部署主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-cloud-pro",
+        "role": "member",
+        "name": "云环境部署 服务编排 运维巡检",
+        "evidence": "original_assets/ops-cloud-pro/merkle_root",
+        "member_merkle_root": "afb86f84156f46f2b83850a1d28c30f18a82fc4da98b6d81f7fb3b08c79e5d18"
+      },
+      {
+        "slug": "formula-audit-pro",
+        "role": "member",
+        "name": "公式审计 引用检查 顾问",
+        "evidence": "original_assets/formula-audit-pro/merkle_root",
+        "member_merkle_root": "313ee1651ec0e1c0846e731e298e18afe2a9ae0e5f866903e44915fd77bb0e6f"
+      },
+      {
+        "slug": "agent-input-sanitize",
+        "role": "member",
+        "name": "输入净化 注入防护 顾问",
+        "evidence": "original_assets/agent-input-sanitize/merkle_root",
+        "member_merkle_root": "9ef089fa0016b33f34f4a049b098160fa9f7033d151934309645bb76056ab1e7"
+      }
+    ],
+    "team_lead": "ops-cloud-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9ccbb9cce086f6b5",
+  "prompt_hash": "004a4cc2a4339aa5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-616\", \"kind\": \"team\", \"name\": \"云环境部署专家\", \"description\": \"云环境部署专家：围绕公式审计，覆盖引用检查／类型校验／循环引用，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-cloud-pro-team-lead\", \"role\": \"lead\", \"name\": \"云环境部署主理人\", \"evidence\": null}, {\"slug\": \"ops-cloud-pro\", \"role\": \"member\", \"name\": \"云环境部署 服务编排 运维巡检\", \"evidence\": \"original_assets/ops-cloud-pro/merkle_root\", \"member_merkle_root\": \"afb86f84156f46f2b83850a1d28c30f18a82fc4da98b6d81f7fb3b08c79e5d18\"}, {\"slug\": \"formula-audit-pro\", \"role\": \"member\", \"name\": \"公式审计 引用检查 顾问\", \"evidence\": \"original_assets/formula-audit-pro/merkle_root\", \"member_merkle_root\": \"313ee1651ec0e1c0846e731e298e18afe2a9ae0e5f866903e44915fd77bb0e6f\"}, {\"slug\": \"agent-input-sanitize\", \"role\": \"member\", \"name\": \"输入净化 注入防护 顾问\", \"evidence\": \"original_assets/agent-input-sanitize/merkle_root\", \"member_merkle_root\": \"9ef089fa0016b33f34f4a049b098160fa9f7033d151934309645bb76056ab1e7\"}], \"team_lead\": \"ops-cloud-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-input-sanitize.md": "b58027a514caa7cb4f2fd110932260eef28b8829f466560dcc4a90a0f5d166db",
+    "agents/formula-audit-pro.md": "a9885d9b182001a641ef6ae9ee03fe32a88138d056b20a51a5deeaa4c7107e38",
+    "agents/ops-cloud-pro-team-lead.md": "ef7158118e28127312bb8e0ee69817bc7ae55b96f8a2bcb1e04cc95318a18dca",
+    "agents/ops-cloud-pro.md": "07f61343d4d3a3e915e358ce0c63537ea93ffc126903af464c030ad023a3da3f",
+    "plugin.json": "3802b11d10f0614180f920cddb25b1f2c7888faf18e1fb67e0eac65b8cbdb02d",
+    "settings.json": "c6cd110397c2e186adb79104546da71b28f1e7191935acced4e7978de8394a69"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "perf-bottleneck-pro-team-lead",
+  "agents": [
+    "./agents/perf-bottleneck-pro-team-lead.md",
+    "./agents/perf-bottleneck-pro.md",
+    "./agents/data-viz-pro-02.md",
+    "./agents/data-anomaly-monitor.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 性能瓶颈",
+    "zh": "帮我处理性能瓶颈"
+  },
+  "description": "perf-bottleneck-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 性能瓶颈 requirements, output three deliverables: 指标先行, 链路定位, 优化排序. Verifiable end-to-end, evidence per step.",
+    "zh": "输入性能瓶颈相关需求，输出指标先行、链路定位、优化排序三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "perf-bottleneck-pro Team",
+    "zh": "性能瓶颈链路分析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "perf-bottleneck-pro-team-lead",
+      "name": {
+        "en": "性能瓶颈主理人",
+        "zh": "性能瓶颈主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/perf-bottleneck-pro.png",
+      "id": "perf-bottleneck-pro",
+      "name": {
+        "en": "perf-bottleneck-pro",
+        "zh": "性能瓶颈 链路分析 顾问"
+      },
+      "profession": {
+        "en": "perf-bottleneck-pro",
+        "zh": "性能瓶颈 链路分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-02.png",
+      "id": "data-viz-pro-02",
+      "name": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "数据洞察 报表分析 流程规范"
+      },
+      "profession": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "数据洞察 报表分析 流程规范"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-anomaly-monitor.png",
+      "id": "data-anomaly-monitor",
+      "name": {
+        "en": "data-anomaly-monitor",
+        "zh": "数据异常监控 顾问"
+      },
+      "profession": {
+        "en": "data-anomaly-monitor",
+        "zh": "数据异常监控 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1170",
+  "plugin": "group-team-1170",
+  "profession": {
+    "en": "perf-bottleneck-pro Collaboration Team",
+    "zh": "性能瓶颈链路分析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 性能瓶颈",
+      "zh": "帮我处理性能瓶颈"
+    },
+    {
+      "en": "Plan 数据洞察",
+      "zh": "帮我规划数据洞察"
+    },
+    {
+      "en": "Review 数据异常监控",
+      "zh": "帮我检查数据异常监控"
+    }
+  ],
+  "tags": [
+    {
+      "en": "指标先行",
+      "zh": "指标先行"
+    },
+    {
+      "en": "链路定位",
+      "zh": "链路定位"
+    },
+    {
+      "en": "优化排序",
+      "zh": "优化排序"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "perf-bottleneck-pro-team-lead",
+    "memberAgents": [
+      "perf-bottleneck-pro",
+      "data-viz-pro-02",
+      "data-anomaly-monitor"
+    ]
+  },
+  "version": "1.0.0"
+}

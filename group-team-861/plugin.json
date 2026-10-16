@@ -1,0 +1,126 @@
+{
+  "agentName": "expense-reimburse-expert-team-lead",
+  "agents": [
+    "./agents/expense-reimburse-expert-team-lead.md",
+    "./agents/expense-reimburse-expert.md",
+    "./agents/overseas-culture-adapt.md",
+    "./agents/intl-standards-map.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 报销与费用管理专家",
+    "zh": "帮我处理报销与费用管理专家"
+  },
+  "description": "ExpenseReimburse team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 海外沟通 end-to-end: 费用归类, 称谓先行 and 直曲有别. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长费用归类、称谓先行与直曲有别，覆盖海外沟通全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ExpenseReimburse Team",
+    "zh": "国际标准专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "expense-reimburse-expert-team-lead",
+      "name": {
+        "en": "报销与费用管理专家主理人",
+        "zh": "报销与费用管理专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/expense-reimburse-expert.png",
+      "id": "expense-reimburse-expert",
+      "name": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "profession": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/overseas-culture-adapt.png",
+      "id": "overseas-culture-adapt",
+      "name": {
+        "en": "overseas-culture-adapt",
+        "zh": "海外沟通 文化适配 顾问"
+      },
+      "profession": {
+        "en": "overseas-culture-adapt",
+        "zh": "海外沟通 文化适配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-standards-map.png",
+      "id": "intl-standards-map",
+      "name": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "profession": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-861",
+  "plugin": "group-team-861",
+  "profession": {
+    "en": "ExpenseReimburse Collaboration Team",
+    "zh": "国际标准专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报销与费用管理专家",
+      "zh": "帮我处理报销与费用管理专家"
+    },
+    {
+      "en": "Plan 海外沟通",
+      "zh": "帮我规划海外沟通"
+    },
+    {
+      "en": "Review 国际标准",
+      "zh": "帮我检查国际标准"
+    }
+  ],
+  "tags": [
+    {
+      "en": "图片发票抽取",
+      "zh": "图片发票抽取"
+    },
+    {
+      "en": "称谓先行",
+      "zh": "称谓先行"
+    },
+    {
+      "en": "直曲有别",
+      "zh": "直曲有别"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "expense-reimburse-expert-team-lead",
+    "memberAgents": [
+      "expense-reimburse-expert",
+      "overseas-culture-adapt",
+      "intl-standards-map"
+    ]
+  },
+  "version": "1.0.0"
+}

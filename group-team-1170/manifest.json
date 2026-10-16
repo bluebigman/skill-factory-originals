@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1170",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1170",
+    "kind": "team",
+    "name": "性能瓶颈链路分析专家",
+    "description": "输入性能瓶颈相关需求，输出指标先行、链路定位、优化排序三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "perf-bottleneck-pro-team-lead",
+        "role": "lead",
+        "name": "性能瓶颈主理人",
+        "evidence": null
+      },
+      {
+        "slug": "perf-bottleneck-pro",
+        "role": "member",
+        "name": "性能瓶颈 链路分析 顾问",
+        "evidence": "original_assets/perf-bottleneck-pro/merkle_root",
+        "member_merkle_root": "0528aeef667ca3fd38a30fbfa2bc5d21375eeb8621e5ce1e0714e249bfa12a65"
+      },
+      {
+        "slug": "data-viz-pro-02",
+        "role": "member",
+        "name": "数据洞察 报表分析 流程规范",
+        "evidence": "original_assets/data-viz-pro-02/merkle_root",
+        "member_merkle_root": "2bb343e89495ca740b66d73c16fb9b6742dfc4df81fd74c9e6c79e5e0b2e7cd1"
+      },
+      {
+        "slug": "data-anomaly-monitor",
+        "role": "member",
+        "name": "数据异常监控 顾问",
+        "evidence": "original_assets/data-anomaly-monitor/merkle_root",
+        "member_merkle_root": "53b4fddf7548f97a1b06a064b9536b53e4e6b92d65bcac32d98ef82dd904c634"
+      }
+    ],
+    "team_lead": "perf-bottleneck-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f4d5cdd8c2123f98",
+  "prompt_hash": "ae75dcf0b44207ae",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1170\", \"kind\": \"team\", \"name\": \"性能瓶颈链路分析专家\", \"description\": \"输入性能瓶颈相关需求，输出指标先行、链路定位、优化排序三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"perf-bottleneck-pro-team-lead\", \"role\": \"lead\", \"name\": \"性能瓶颈主理人\", \"evidence\": null}, {\"slug\": \"perf-bottleneck-pro\", \"role\": \"member\", \"name\": \"性能瓶颈 链路分析 顾问\", \"evidence\": \"original_assets/perf-bottleneck-pro/merkle_root\", \"member_merkle_root\": \"0528aeef667ca3fd38a30fbfa2bc5d21375eeb8621e5ce1e0714e249bfa12a65\"}, {\"slug\": \"data-viz-pro-02\", \"role\": \"member\", \"name\": \"数据洞察 报表分析 流程规范\", \"evidence\": \"original_assets/data-viz-pro-02/merkle_root\", \"member_merkle_root\": \"2bb343e89495ca740b66d73c16fb9b6742dfc4df81fd74c9e6c79e5e0b2e7cd1\"}, {\"slug\": \"data-anomaly-monitor\", \"role\": \"member\", \"name\": \"数据异常监控 顾问\", \"evidence\": \"original_assets/data-anomaly-monitor/merkle_root\", \"member_merkle_root\": \"53b4fddf7548f97a1b06a064b9536b53e4e6b92d65bcac32d98ef82dd904c634\"}], \"team_lead\": \"perf-bottleneck-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-anomaly-monitor.md": "07f5e61a93e3f08e5a8e95e69b7751f6c6b15d2365469b76614838d2a59427b1",
+    "agents/data-viz-pro-02.md": "13bbe56345b9d9245134e09e543945fde20a8478b4ffe10f7636208695f87524",
+    "agents/perf-bottleneck-pro-team-lead.md": "f382d281be4c82b22aa1a61d108487210a9a51e218dd16c8a436f735169a3dd3",
+    "agents/perf-bottleneck-pro.md": "a667250affe1e627b390fae1d472ce94b834185bba6bf51aa3c411c493da5a5d",
+    "plugin.json": "49148f9c10d7964a13864a1733d2050a49863a3b9c13b6af7dc251efd89eeccf",
+    "settings.json": "71e19be70dc6330053a5bb9c1b4d2e03cd76aa150ff303af67d55a2088a57625"
+  }
+}

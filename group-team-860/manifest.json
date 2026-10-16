@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-860",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-860",
+    "kind": "team",
+    "name": "空间布局动线设计专家",
+    "description": "输入空间布局相关需求，输出视差控制、舒适模式、单次限时三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "spatial-layout-pro-team-lead",
+        "role": "lead",
+        "name": "空间布局主理人",
+        "evidence": null
+      },
+      {
+        "slug": "spatial-layout-pro",
+        "role": "member",
+        "name": "空间布局 动线设计 顾问",
+        "evidence": "original_assets/spatial-layout-pro/merkle_root",
+        "member_merkle_root": "3b138ee5fb23a1aedbae888792ad955d2d11c9aeb737f4d38ba91e402fe2e860"
+      },
+      {
+        "slug": "ar-vr-usability",
+        "role": "member",
+        "name": "沉浸体验 舒适度 顾问",
+        "evidence": "original_assets/ar-vr-usability/merkle_root",
+        "member_merkle_root": "ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849"
+      },
+      {
+        "slug": "accessibility-check",
+        "role": "member",
+        "name": "无障碍 检查清单 顾问",
+        "evidence": "original_assets/accessibility-check/merkle_root",
+        "member_merkle_root": "94855af715644292945da9725667b15298013fd61b35f42c2f1197fa553e3f91"
+      }
+    ],
+    "team_lead": "spatial-layout-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "267c41a520588cc8",
+  "prompt_hash": "b042095d1d771eb3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-860\", \"kind\": \"team\", \"name\": \"空间布局动线设计专家\", \"description\": \"输入空间布局相关需求，输出视差控制、舒适模式、单次限时三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"spatial-layout-pro-team-lead\", \"role\": \"lead\", \"name\": \"空间布局主理人\", \"evidence\": null}, {\"slug\": \"spatial-layout-pro\", \"role\": \"member\", \"name\": \"空间布局 动线设计 顾问\", \"evidence\": \"original_assets/spatial-layout-pro/merkle_root\", \"member_merkle_root\": \"3b138ee5fb23a1aedbae888792ad955d2d11c9aeb737f4d38ba91e402fe2e860\"}, {\"slug\": \"ar-vr-usability\", \"role\": \"member\", \"name\": \"沉浸体验 舒适度 顾问\", \"evidence\": \"original_assets/ar-vr-usability/merkle_root\", \"member_merkle_root\": \"ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849\"}, {\"slug\": \"accessibility-check\", \"role\": \"member\", \"name\": \"无障碍 检查清单 顾问\", \"evidence\": \"original_assets/accessibility-check/merkle_root\", \"member_merkle_root\": \"94855af715644292945da9725667b15298013fd61b35f42c2f1197fa553e3f91\"}], \"team_lead\": \"spatial-layout-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/accessibility-check.md": "b3a549ffcbe0829254b2e6f3f5c2e74814f52c20256834ee74eeeaf7d74ed40f",
+    "agents/ar-vr-usability.md": "e95cc1b59c95694d8f8a8f4c463b76b44824b70f53cdc0ce43030b77cbe627bd",
+    "agents/spatial-layout-pro-team-lead.md": "837d0698281a26d798dd945420b7647b4f6686129582859f8586f7a75ca236f8",
+    "agents/spatial-layout-pro.md": "a792b13d5ca700a636928f1e173815822ecc80de703c6f4bd150caf662f38e26",
+    "plugin.json": "0706f9ea878e31e23877ef266d8afd63e41a184ba87e5ee9c1b5cd77ec91d0ef",
+    "settings.json": "774b13648713171849e55bcf742aa4964542e2f9ce20c0f64a8914eadb00e17a"
+  }
+}

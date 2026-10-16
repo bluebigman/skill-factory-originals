@@ -1,0 +1,126 @@
+{
+  "agentName": "ab-test-analysis-team-lead",
+  "agents": [
+    "./agents/ab-test-analysis-team-lead.md",
+    "./agents/ab-test-analysis.md",
+    "./agents/agent-conflict-resolve.md",
+    "./agents/schema-doc-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 实验分析",
+    "zh": "帮我处理实验分析"
+  },
+  "description": "ab-test-analysis team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 实验分析 end-to-end: 最小样本, 多重比较 and 因果谨慎. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长最小样本、多重比较与因果谨慎，覆盖实验分析全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ab-test-analysis Team",
+    "zh": "实验分析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ab-test-analysis-team-lead",
+      "name": {
+        "en": "实验分析主理人",
+        "zh": "实验分析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ab-test-analysis.png",
+      "id": "ab-test-analysis",
+      "name": {
+        "en": "ab-test-analysis",
+        "zh": "实验分析 显著性 顾问"
+      },
+      "profession": {
+        "en": "ab-test-analysis",
+        "zh": "实验分析 显著性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-conflict-resolve.png",
+      "id": "agent-conflict-resolve",
+      "name": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "profession": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/schema-doc-pro.png",
+      "id": "schema-doc-pro",
+      "name": {
+        "en": "schema-doc-pro",
+        "zh": "表结构文 字段释义 顾问"
+      },
+      "profession": {
+        "en": "schema-doc-pro",
+        "zh": "表结构文 字段释义 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-325",
+  "plugin": "group-team-325",
+  "profession": {
+    "en": "ab-test-analysis Collaboration Team",
+    "zh": "实验分析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 实验分析",
+      "zh": "帮我处理实验分析"
+    },
+    {
+      "en": "Plan 冲突消解",
+      "zh": "帮我规划冲突消解"
+    },
+    {
+      "en": "Review 表结构文",
+      "zh": "帮我检查表结构文"
+    }
+  ],
+  "tags": [
+    {
+      "en": "最小样本",
+      "zh": "最小样本"
+    },
+    {
+      "en": "多重比较",
+      "zh": "多重比较"
+    },
+    {
+      "en": "因果谨慎",
+      "zh": "因果谨慎"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ab-test-analysis-team-lead",
+    "memberAgents": [
+      "ab-test-analysis",
+      "agent-conflict-resolve",
+      "schema-doc-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

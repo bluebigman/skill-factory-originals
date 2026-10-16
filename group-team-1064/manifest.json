@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1064",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1064",
+    "kind": "team",
+    "name": "增量重构专家",
+    "description": "增量重构专家：围绕增量重构，覆盖小步前进／测试护栏／行为不变，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "refactor-increment-team-lead",
+        "role": "lead",
+        "name": "增量重构主理人",
+        "evidence": null
+      },
+      {
+        "slug": "refactor-increment",
+        "role": "member",
+        "name": "增量重构 顾问",
+        "evidence": "original_assets/refactor-increment/merkle_root",
+        "member_merkle_root": "9d49483e10ae88664612c3be018033d8e6bbcdfb3419f12e828ef77cb1e6a96e"
+      },
+      {
+        "slug": "data-anomaly-monitor",
+        "role": "member",
+        "name": "数据异常监控 顾问",
+        "evidence": "original_assets/data-anomaly-monitor/merkle_root",
+        "member_merkle_root": "53b4fddf7548f97a1b06a064b9536b53e4e6b92d65bcac32d98ef82dd904c634"
+      },
+      {
+        "slug": "vulnerability-disclosure",
+        "role": "member",
+        "name": "漏洞披露流程 顾问",
+        "evidence": "original_assets/vulnerability-disclosure/merkle_root",
+        "member_merkle_root": "ca97275693b2cf152024a8d4531c0964b0cb9936f4062496a821c7ccf78dce5d"
+      }
+    ],
+    "team_lead": "refactor-increment-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d9297f3726b5b7ae",
+  "prompt_hash": "962881ef53ad9473",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1064\", \"kind\": \"team\", \"name\": \"增量重构专家\", \"description\": \"增量重构专家：围绕增量重构，覆盖小步前进／测试护栏／行为不变，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"refactor-increment-team-lead\", \"role\": \"lead\", \"name\": \"增量重构主理人\", \"evidence\": null}, {\"slug\": \"refactor-increment\", \"role\": \"member\", \"name\": \"增量重构 顾问\", \"evidence\": \"original_assets/refactor-increment/merkle_root\", \"member_merkle_root\": \"9d49483e10ae88664612c3be018033d8e6bbcdfb3419f12e828ef77cb1e6a96e\"}, {\"slug\": \"data-anomaly-monitor\", \"role\": \"member\", \"name\": \"数据异常监控 顾问\", \"evidence\": \"original_assets/data-anomaly-monitor/merkle_root\", \"member_merkle_root\": \"53b4fddf7548f97a1b06a064b9536b53e4e6b92d65bcac32d98ef82dd904c634\"}, {\"slug\": \"vulnerability-disclosure\", \"role\": \"member\", \"name\": \"漏洞披露流程 顾问\", \"evidence\": \"original_assets/vulnerability-disclosure/merkle_root\", \"member_merkle_root\": \"ca97275693b2cf152024a8d4531c0964b0cb9936f4062496a821c7ccf78dce5d\"}], \"team_lead\": \"refactor-increment-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-anomaly-monitor.md": "2d2f677d5cb47177a22eb573aaebfe4b5137453c79c40bde559b8e20a5f15d44",
+    "agents/refactor-increment-team-lead.md": "ae5a6c56c39cec488efd3f118236b063324a105daa40e1527fd3b7b66ff4c02a",
+    "agents/refactor-increment.md": "2460b43206ac1c0c9d54d25a13857dbf418bf4361daff3c92633a5ebb085edc8",
+    "agents/vulnerability-disclosure.md": "a7d69dea857ec8809165c43982c13e378a3e6941493c63402d52a1fe6ede8307",
+    "plugin.json": "e6e79b1f957dc04d788a0bc6495623a93df28b8b22807bf2c5763953e5bd1830",
+    "settings.json": "a990fcd1a318d44b4895a988bafe6cd6e98dbce6fbbc719f2217643f2b2938d0"
+  }
+}

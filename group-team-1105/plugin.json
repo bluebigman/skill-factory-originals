@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-output-format-team-lead",
+  "agents": [
+    "./agents/agent-output-format-team-lead.md",
+    "./agents/agent-output-format.md",
+    "./agents/data-export-control.md",
+    "./agents/ops-deploy-pro-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 输出规范",
+    "zh": "帮我处理输出规范"
+  },
+  "description": "agent-output-format team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 输出规范 end-to-end: 结构固定, 类型明确 and 错误可判. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长结构固定、类型明确与错误可判，覆盖输出规范全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-output-format Team",
+    "zh": "输出规范结构化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-output-format-team-lead",
+      "name": {
+        "en": "输出规范主理人",
+        "zh": "输出规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-output-format.png",
+      "id": "agent-output-format",
+      "name": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "profession": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-export-control.png",
+      "id": "data-export-control",
+      "name": {
+        "en": "data-export-control",
+        "zh": "数据导出管控 顾问"
+      },
+      "profession": {
+        "en": "data-export-control",
+        "zh": "数据导出管控 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro-fixed.png",
+      "id": "ops-deploy-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "缓存清理 批处理脚本 故障排查"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "缓存清理 批处理脚本 故障排查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1105",
+  "plugin": "group-team-1105",
+  "profession": {
+    "en": "agent-output-format Collaboration Team",
+    "zh": "输出规范结构化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 输出规范",
+      "zh": "帮我处理输出规范"
+    },
+    {
+      "en": "Plan 数据导出管控",
+      "zh": "帮我规划数据导出管控"
+    },
+    {
+      "en": "Review 缓存清理",
+      "zh": "帮我检查缓存清理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结构固定",
+      "zh": "结构固定"
+    },
+    {
+      "en": "类型明确",
+      "zh": "类型明确"
+    },
+    {
+      "en": "错误可判",
+      "zh": "错误可判"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-output-format-team-lead",
+    "memberAgents": [
+      "agent-output-format",
+      "data-export-control",
+      "ops-deploy-pro-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

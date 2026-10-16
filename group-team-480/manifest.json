@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-480",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-480",
+    "kind": "team",
+    "name": "应用上线专家",
+    "description": "擅长版本锁定、漏洞扫描与最小依赖，覆盖依赖检查全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ai-app-launch-safety-expert-team-lead",
+        "role": "lead",
+        "name": "AI应用上线主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ai-app-launch-safety-expert",
+        "role": "member",
+        "name": "AI应用上线 安全自查",
+        "evidence": "original_assets/ai-app-launch-safety-expert/merkle_root",
+        "member_merkle_root": "b58084af0b132ed64cd4a96df2c2753e96fc7711819d5cf6b48a4f301ec6035e"
+      },
+      {
+        "slug": "api-toolkit-pro-fixed",
+        "role": "member",
+        "name": "协议转换 REST",
+        "evidence": "original_assets/api-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23"
+      },
+      {
+        "slug": "agent-dependency-check",
+        "role": "member",
+        "name": "依赖检查 版本锁定 顾问",
+        "evidence": "original_assets/agent-dependency-check/merkle_root",
+        "member_merkle_root": "a7d42a6390546ade10d70d151336feaf7ca418fa42297f1bfcd2edf179bc01dd"
+      }
+    ],
+    "team_lead": "ai-app-launch-safety-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fc8587adcf74b565",
+  "prompt_hash": "e731cec2fab1a162",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-480\", \"kind\": \"team\", \"name\": \"应用上线专家\", \"description\": \"擅长版本锁定、漏洞扫描与最小依赖，覆盖依赖检查全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ai-app-launch-safety-expert-team-lead\", \"role\": \"lead\", \"name\": \"AI应用上线主理人\", \"evidence\": null}, {\"slug\": \"ai-app-launch-safety-expert\", \"role\": \"member\", \"name\": \"AI应用上线 安全自查\", \"evidence\": \"original_assets/ai-app-launch-safety-expert/merkle_root\", \"member_merkle_root\": \"b58084af0b132ed64cd4a96df2c2753e96fc7711819d5cf6b48a4f301ec6035e\"}, {\"slug\": \"api-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"协议转换 REST\", \"evidence\": \"original_assets/api-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23\"}, {\"slug\": \"agent-dependency-check\", \"role\": \"member\", \"name\": \"依赖检查 版本锁定 顾问\", \"evidence\": \"original_assets/agent-dependency-check/merkle_root\", \"member_merkle_root\": \"a7d42a6390546ade10d70d151336feaf7ca418fa42297f1bfcd2edf179bc01dd\"}], \"team_lead\": \"ai-app-launch-safety-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-dependency-check.md": "397ee8e414951a1d11a618439a175f5299c7f3a926c06a030348bf92afcf27b1",
+    "agents/ai-app-launch-safety-expert-team-lead.md": "ccec46b305383b6bad5b6b2f039a13862bd0f38a3b3755191d91f7eea41ff13d",
+    "agents/ai-app-launch-safety-expert.md": "f4c2fddf6118308d7cbe39c7d71c093234f9597ea6db41d588be21f3347f73c0",
+    "agents/api-toolkit-pro-fixed.md": "6e2ea86ba8de8f7f42f08503cb952a41ac07c06c7a982ef6dc20ca7fb6f98362",
+    "plugin.json": "4185aa1e325e1e2420574c39e04dbe1028551b5c2cb3e8a2fcefc4299e678a9f",
+    "settings.json": "4f63d150720a15c3d386d53642641a784180784a0a6e0e0bf2c7f6a71d198ae0"
+  }
+}

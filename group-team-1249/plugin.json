@@ -1,0 +1,126 @@
+{
+  "agentName": "debug-breakpoint-pro-team-lead",
+  "agents": [
+    "./agents/debug-breakpoint-pro-team-lead.md",
+    "./agents/debug-breakpoint-pro.md",
+    "./agents/query-optimize.md",
+    "./agents/data-clean-pro-02.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 断点调试",
+    "zh": "帮我处理断点调试"
+  },
+  "description": "debug-breakpoint-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 断点调试 end-to-end: 二分定位, 条件断点 and 观察变量. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长二分定位、条件断点与观察变量，覆盖断点调试全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "debug-breakpoint-pro Team",
+    "zh": "断点调试专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "debug-breakpoint-pro-team-lead",
+      "name": {
+        "en": "断点调试主理人",
+        "zh": "断点调试主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/debug-breakpoint-pro.png",
+      "id": "debug-breakpoint-pro",
+      "name": {
+        "en": "debug-breakpoint-pro",
+        "zh": "断点调试 顾问"
+      },
+      "profession": {
+        "en": "debug-breakpoint-pro",
+        "zh": "断点调试 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/query-optimize.png",
+      "id": "query-optimize",
+      "name": {
+        "en": "query-optimize",
+        "zh": "查询优化 助手"
+      },
+      "profession": {
+        "en": "query-optimize",
+        "zh": "查询优化 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-02.png",
+      "id": "data-clean-pro-02",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1249",
+  "plugin": "group-team-1249",
+  "profession": {
+    "en": "debug-breakpoint-pro Collaboration Team",
+    "zh": "断点调试专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 断点调试",
+      "zh": "帮我处理断点调试"
+    },
+    {
+      "en": "Plan 查询优化",
+      "zh": "帮我规划查询优化"
+    },
+    {
+      "en": "Review 医疗行政",
+      "zh": "帮我检查医疗行政"
+    }
+  ],
+  "tags": [
+    {
+      "en": "二分定位",
+      "zh": "二分定位"
+    },
+    {
+      "en": "条件断点",
+      "zh": "条件断点"
+    },
+    {
+      "en": "观察变量",
+      "zh": "观察变量"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "debug-breakpoint-pro-team-lead",
+    "memberAgents": [
+      "debug-breakpoint-pro",
+      "query-optimize",
+      "data-clean-pro-02"
+    ]
+  },
+  "version": "1.0.0"
+}

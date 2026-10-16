@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-doc-pipeline-team-lead",
+  "agents": [
+    "./agents/agent-doc-pipeline-team-lead.md",
+    "./agents/agent-doc-pipeline.md",
+    "./agents/objection-handle-pro.md",
+    "./agents/cross-border-listing-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 文档流水",
+    "zh": "帮我处理文档流水"
+  },
+  "description": "agent-doc-pipeline team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档流水 requirements, output three deliverables: 解析保真, 幂等入库, 异常隔离. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档流水相关需求，输出解析保真、幂等入库、异常隔离三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-doc-pipeline Team",
+    "zh": "文档流水解析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-doc-pipeline-team-lead",
+      "name": {
+        "en": "文档流水主理人",
+        "zh": "文档流水主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-doc-pipeline.png",
+      "id": "agent-doc-pipeline",
+      "name": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "profession": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/objection-handle-pro.png",
+      "id": "objection-handle-pro",
+      "name": {
+        "en": "objection-handle-pro",
+        "zh": "异议处理 应对准备 顾问"
+      },
+      "profession": {
+        "en": "objection-handle-pro",
+        "zh": "异议处理 应对准备 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cross-border-listing-pro.png",
+      "id": "cross-border-listing-pro",
+      "name": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "profession": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1266",
+  "plugin": "group-team-1266",
+  "profession": {
+    "en": "agent-doc-pipeline Collaboration Team",
+    "zh": "文档流水解析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档流水",
+      "zh": "帮我处理文档流水"
+    },
+    {
+      "en": "Plan 异议处理",
+      "zh": "帮我规划异议处理"
+    },
+    {
+      "en": "Review 跨境选品",
+      "zh": "帮我检查跨境选品"
+    }
+  ],
+  "tags": [
+    {
+      "en": "解析保真",
+      "zh": "解析保真"
+    },
+    {
+      "en": "结构化",
+      "zh": "结构化"
+    },
+    {
+      "en": "幂等入库",
+      "zh": "幂等入库"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-doc-pipeline-team-lead",
+    "memberAgents": [
+      "agent-doc-pipeline",
+      "objection-handle-pro",
+      "cross-border-listing-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

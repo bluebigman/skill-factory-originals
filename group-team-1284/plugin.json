@@ -1,0 +1,126 @@
+{
+  "agentName": "vendor-management-team-lead",
+  "agents": [
+    "./agents/vendor-management-team-lead.md",
+    "./agents/vendor-management.md",
+    "./agents/error-budget.md",
+    "./agents/safety-management.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 供应商管理",
+    "zh": "帮我处理供应商管理"
+  },
+  "description": "vendor-management team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 供应商管理 requirements, output three deliverables: 准入标准, 分级管理, 绩效评估. Verifiable end-to-end, evidence per step.",
+    "zh": "输入供应商管理相关需求，输出准入标准、分级管理、绩效评估三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "vendor-management Team",
+    "zh": "供应商管理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "vendor-management-team-lead",
+      "name": {
+        "en": "供应商管理主理人",
+        "zh": "供应商管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/vendor-management.png",
+      "id": "vendor-management",
+      "name": {
+        "en": "vendor-management",
+        "zh": "供应商管理 顾问"
+      },
+      "profession": {
+        "en": "vendor-management",
+        "zh": "供应商管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/error-budget.png",
+      "id": "error-budget",
+      "name": {
+        "en": "error-budget",
+        "zh": "错误预算 顾问"
+      },
+      "profession": {
+        "en": "error-budget",
+        "zh": "错误预算 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/safety-management.png",
+      "id": "safety-management",
+      "name": {
+        "en": "safety-management",
+        "zh": "安全管理 顾问"
+      },
+      "profession": {
+        "en": "safety-management",
+        "zh": "安全管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1284",
+  "plugin": "group-team-1284",
+  "profession": {
+    "en": "vendor-management Collaboration Team",
+    "zh": "供应商管理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 供应商管理",
+      "zh": "帮我处理供应商管理"
+    },
+    {
+      "en": "Plan 错误预算",
+      "zh": "帮我规划错误预算"
+    },
+    {
+      "en": "Review 安全管理",
+      "zh": "帮我检查安全管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "准入标准",
+      "zh": "准入标准"
+    },
+    {
+      "en": "分级管理",
+      "zh": "分级管理"
+    },
+    {
+      "en": "绩效评估",
+      "zh": "绩效评估"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "vendor-management-team-lead",
+    "memberAgents": [
+      "vendor-management",
+      "error-budget",
+      "safety-management"
+    ]
+  },
+  "version": "1.0.0"
+}

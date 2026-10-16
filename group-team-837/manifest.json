@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-837",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-837",
+    "kind": "team",
+    "name": "数据解析信息抽取专家",
+    "description": "输入表格公式相关需求，输出引用检查、类型匹配、循环引用三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-05-team-lead",
+        "role": "lead",
+        "name": "数据解析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-05",
+        "role": "member",
+        "name": "数据解析 信息抽取 置信标注",
+        "evidence": "original_assets/data-clean-pro-05/merkle_root",
+        "member_merkle_root": "cae6787ac17b521275a78da853a1efe6e374161375bcbb1dd9819507d4a97906"
+      },
+      {
+        "slug": "table-formula-pro",
+        "role": "member",
+        "name": "表格公式 报错排查 顾问",
+        "evidence": "original_assets/table-formula-pro/merkle_root",
+        "member_merkle_root": "3dfcb4f0c33b5d38671474d39afe65dfbe1a71f6dceaa430dc47a672d5729438"
+      },
+      {
+        "slug": "doc-legal-boundary",
+        "role": "member",
+        "name": "文档合规边界 顾问",
+        "evidence": "original_assets/doc-legal-boundary/merkle_root",
+        "member_merkle_root": "1f95db4c9dd32f97e07fa85c68dc455329bd29d592cb2fa6ed5e79c8e1240021"
+      }
+    ],
+    "team_lead": "data-clean-pro-05-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "556b35c48e867ab6",
+  "prompt_hash": "cc95f40c32af446e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-837\", \"kind\": \"team\", \"name\": \"数据解析信息抽取专家\", \"description\": \"输入表格公式相关需求，输出引用检查、类型匹配、循环引用三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-05-team-lead\", \"role\": \"lead\", \"name\": \"数据解析主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-05\", \"role\": \"member\", \"name\": \"数据解析 信息抽取 置信标注\", \"evidence\": \"original_assets/data-clean-pro-05/merkle_root\", \"member_merkle_root\": \"cae6787ac17b521275a78da853a1efe6e374161375bcbb1dd9819507d4a97906\"}, {\"slug\": \"table-formula-pro\", \"role\": \"member\", \"name\": \"表格公式 报错排查 顾问\", \"evidence\": \"original_assets/table-formula-pro/merkle_root\", \"member_merkle_root\": \"3dfcb4f0c33b5d38671474d39afe65dfbe1a71f6dceaa430dc47a672d5729438\"}, {\"slug\": \"doc-legal-boundary\", \"role\": \"member\", \"name\": \"文档合规边界 顾问\", \"evidence\": \"original_assets/doc-legal-boundary/merkle_root\", \"member_merkle_root\": \"1f95db4c9dd32f97e07fa85c68dc455329bd29d592cb2fa6ed5e79c8e1240021\"}], \"team_lead\": \"data-clean-pro-05-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-05-team-lead.md": "f61b4aa4dbb40f01be91a0f66d949dedefd379215108017adac09a997de14d32",
+    "agents/data-clean-pro-05.md": "93dfe251de64cb2e4084869cfa303d02b020e767322f88de704d2ac4d9ea88a8",
+    "agents/doc-legal-boundary.md": "546890c6196e453f1f77e8e9f1edb591696a43eabf97fd54d476be12b01dc48a",
+    "agents/table-formula-pro.md": "2e583012e1aa1513251c200feaab47d0d517ef3be14edc82a51bc18e1dfa3b6a",
+    "plugin.json": "1a7e884b8839f4b4aa31ccba1e6ce980fa771ddd3665409f844825db59653836",
+    "settings.json": "ba92bd11f9bc6d0e0f7845726fa036140676661815d0007e53218a542a29fae9"
+  }
+}

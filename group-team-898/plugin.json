@@ -1,0 +1,126 @@
+{
+  "agentName": "newsletter-compose-team-lead",
+  "agents": [
+    "./agents/newsletter-compose-team-lead.md",
+    "./agents/newsletter-compose.md",
+    "./agents/document-diff-pro.md",
+    "./agents/brand-tone-guide.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 团队周报编排",
+    "zh": "帮我处理团队周报编排"
+  },
+  "description": "newsletter-compose team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 团队周报编排 requirements, output three deliverables: 固定栏目, 重点前置, 问题不藏. Verifiable end-to-end, evidence per step.",
+    "zh": "输入团队周报编排相关需求，输出固定栏目、重点前置、问题不藏三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "newsletter-compose Team",
+    "zh": "文档比对专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "newsletter-compose-team-lead",
+      "name": {
+        "en": "团队周报编排主理人",
+        "zh": "团队周报编排主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/newsletter-compose.png",
+      "id": "newsletter-compose",
+      "name": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "profession": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/document-diff-pro.png",
+      "id": "document-diff-pro",
+      "name": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "profession": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/brand-tone-guide.png",
+      "id": "brand-tone-guide",
+      "name": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "profession": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-898",
+  "plugin": "group-team-898",
+  "profession": {
+    "en": "newsletter-compose Collaboration Team",
+    "zh": "文档比对专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 团队周报编排",
+      "zh": "帮我处理团队周报编排"
+    },
+    {
+      "en": "Plan 文档比对",
+      "zh": "帮我规划文档比对"
+    },
+    {
+      "en": "Review 品牌语气指南",
+      "zh": "帮我检查品牌语气指南"
+    }
+  ],
+  "tags": [
+    {
+      "en": "固定栏目",
+      "zh": "固定栏目"
+    },
+    {
+      "en": "重点前置",
+      "zh": "重点前置"
+    },
+    {
+      "en": "数据可视化",
+      "zh": "数据可视化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "newsletter-compose-team-lead",
+    "memberAgents": [
+      "newsletter-compose",
+      "document-diff-pro",
+      "brand-tone-guide"
+    ]
+  },
+  "version": "1.0.0"
+}

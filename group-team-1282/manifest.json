@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1282",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1282",
+    "kind": "team",
+    "name": "内容设计专家",
+    "description": "擅长语气维度、定期抽审与字幕生成，覆盖内容设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-design-system-team-lead",
+        "role": "lead",
+        "name": "内容设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-design-system",
+        "role": "member",
+        "name": "内容设计 语气体系 顾问",
+        "evidence": "original_assets/content-design-system/merkle_root",
+        "member_merkle_root": "56e1ccf3803fa86c8e23579797663f24a7cf5bc5f105dd465a000f4766658d85"
+      },
+      {
+        "slug": "audio-clip-expert",
+        "role": "member",
+        "name": "音频剪辑专家",
+        "evidence": "original_assets/audio-clip-expert/merkle_root",
+        "member_merkle_root": "c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8"
+      },
+      {
+        "slug": "microcopy-coach",
+        "role": "member",
+        "name": "界面文案 撰写 教练",
+        "evidence": "original_assets/microcopy-coach/merkle_root",
+        "member_merkle_root": "dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2"
+      }
+    ],
+    "team_lead": "content-design-system-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f1593c81049dfc0b",
+  "prompt_hash": "5bce3073214569c0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1282\", \"kind\": \"team\", \"name\": \"内容设计专家\", \"description\": \"擅长语气维度、定期抽审与字幕生成，覆盖内容设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-design-system-team-lead\", \"role\": \"lead\", \"name\": \"内容设计主理人\", \"evidence\": null}, {\"slug\": \"content-design-system\", \"role\": \"member\", \"name\": \"内容设计 语气体系 顾问\", \"evidence\": \"original_assets/content-design-system/merkle_root\", \"member_merkle_root\": \"56e1ccf3803fa86c8e23579797663f24a7cf5bc5f105dd465a000f4766658d85\"}, {\"slug\": \"audio-clip-expert\", \"role\": \"member\", \"name\": \"音频剪辑专家\", \"evidence\": \"original_assets/audio-clip-expert/merkle_root\", \"member_merkle_root\": \"c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8\"}, {\"slug\": \"microcopy-coach\", \"role\": \"member\", \"name\": \"界面文案 撰写 教练\", \"evidence\": \"original_assets/microcopy-coach/merkle_root\", \"member_merkle_root\": \"dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2\"}], \"team_lead\": \"content-design-system-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audio-clip-expert.md": "c9635cd3be44953a0cdebcb83b0349e9197819bcd9aa7f870d947619899ab556",
+    "agents/content-design-system-team-lead.md": "716b75f0ace5b8ba12042f6ce74b42ddad39ddc1177225df2b9d3962912948f4",
+    "agents/content-design-system.md": "0924dec670382b4992675b9b78282cc0f073ada1f184008307cf12de25996d59",
+    "agents/microcopy-coach.md": "67d7c5519dbd421c7c990baf6fbbf0a975e3bc116d87ae5627595ecbb1b239c9",
+    "plugin.json": "ade457b38612febeab08648b3eb19ac7081428cf48c503abb46bbcd1833ee648",
+    "settings.json": "6c05839d1c8040d901cddc562cdd45c7b9d324233dc8d90f37469da0256a4c96"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-515",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-515",
+    "kind": "team",
+    "name": "开发工具专家",
+    "description": "输入多模态路相关需求，输出类型识别、能力匹配、降级声明三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "dev-toolbox-expert-team-lead",
+        "role": "lead",
+        "name": "开发工具主理人",
+        "evidence": null
+      },
+      {
+        "slug": "dev-toolbox-expert",
+        "role": "member",
+        "name": "开发工具 编码调试 效率提能",
+        "evidence": "original_assets/dev-toolbox-expert/merkle_root",
+        "member_merkle_root": "f36cb23e33c35767863be36261760068e26fd55c4f24dfe8930d46dc31b5b531"
+      },
+      {
+        "slug": "agent-multimodal-route",
+        "role": "member",
+        "name": "多模态路 类型识别 顾问",
+        "evidence": "original_assets/agent-multimodal-route/merkle_root",
+        "member_merkle_root": "e76cc03641ead46cf3cc962d2db822fbdcf6b2610e409ad37337e229990d0744"
+      },
+      {
+        "slug": "chart-data-verify",
+        "role": "member",
+        "name": "图表核验 数据一致 顾问",
+        "evidence": "original_assets/chart-data-verify/merkle_root",
+        "member_merkle_root": "59add37e0ecfb439422211efd490c18f21ae5c341e40fde0bd07a126973959f6"
+      }
+    ],
+    "team_lead": "dev-toolbox-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9ee6696271358876",
+  "prompt_hash": "852062a1497d820e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-515\", \"kind\": \"team\", \"name\": \"开发工具专家\", \"description\": \"输入多模态路相关需求，输出类型识别、能力匹配、降级声明三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"dev-toolbox-expert-team-lead\", \"role\": \"lead\", \"name\": \"开发工具主理人\", \"evidence\": null}, {\"slug\": \"dev-toolbox-expert\", \"role\": \"member\", \"name\": \"开发工具 编码调试 效率提能\", \"evidence\": \"original_assets/dev-toolbox-expert/merkle_root\", \"member_merkle_root\": \"f36cb23e33c35767863be36261760068e26fd55c4f24dfe8930d46dc31b5b531\"}, {\"slug\": \"agent-multimodal-route\", \"role\": \"member\", \"name\": \"多模态路 类型识别 顾问\", \"evidence\": \"original_assets/agent-multimodal-route/merkle_root\", \"member_merkle_root\": \"e76cc03641ead46cf3cc962d2db822fbdcf6b2610e409ad37337e229990d0744\"}, {\"slug\": \"chart-data-verify\", \"role\": \"member\", \"name\": \"图表核验 数据一致 顾问\", \"evidence\": \"original_assets/chart-data-verify/merkle_root\", \"member_merkle_root\": \"59add37e0ecfb439422211efd490c18f21ae5c341e40fde0bd07a126973959f6\"}], \"team_lead\": \"dev-toolbox-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-multimodal-route.md": "21dd0a9d21b6cc0210b023a7f8b257e004f6d7dae2722d520af1fb4fe59cbf9a",
+    "agents/chart-data-verify.md": "719ecc687e952df0451a0aac15745aecddaa13ed69fd6bcb380cb71d747fcb15",
+    "agents/dev-toolbox-expert-team-lead.md": "85da8957feff01eec51637ccdd4cf12bf9a780838274c0c70fbbb82fc01643a6",
+    "agents/dev-toolbox-expert.md": "26d948a1024f9fcc7c2a5e58ed860decab8a4295ed7a8ce5d7046f8d9097a620",
+    "plugin.json": "5a5123d147f1395728d6747e49db4059dc1d089abb97fe1c8f56b31dc13813f5",
+    "settings.json": "1f2a5be85b72b16f41ab72e317f489899680cc520690b18d70863b6d9933df87"
+  }
+}

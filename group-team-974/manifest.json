@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-974",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-974",
+    "kind": "team",
+    "name": "用户故事撰写专家",
+    "description": "用户故事撰写专家：围绕设计交付，覆盖标注齐全／边界说明／资产规范，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "handoff-design-dev-team-lead",
+        "role": "lead",
+        "name": "设计交付主理人",
+        "evidence": null
+      },
+      {
+        "slug": "handoff-design-dev",
+        "role": "member",
+        "name": "设计交付 协作规范 顾问",
+        "evidence": "original_assets/handoff-design-dev/merkle_root",
+        "member_merkle_root": "44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104"
+      },
+      {
+        "slug": "game-onboarding-pro",
+        "role": "member",
+        "name": "游戏新手 引导设计 顾问",
+        "evidence": "original_assets/game-onboarding-pro/merkle_root",
+        "member_merkle_root": "305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b"
+      },
+      {
+        "slug": "user-story-write",
+        "role": "member",
+        "name": "用户故事 撰写",
+        "evidence": "original_assets/user-story-write/merkle_root",
+        "member_merkle_root": "c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643"
+      }
+    ],
+    "team_lead": "handoff-design-dev-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ed37e603f33c89f5",
+  "prompt_hash": "59afe51ff48ea336",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-974\", \"kind\": \"team\", \"name\": \"用户故事撰写专家\", \"description\": \"用户故事撰写专家：围绕设计交付，覆盖标注齐全／边界说明／资产规范，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"handoff-design-dev-team-lead\", \"role\": \"lead\", \"name\": \"设计交付主理人\", \"evidence\": null}, {\"slug\": \"handoff-design-dev\", \"role\": \"member\", \"name\": \"设计交付 协作规范 顾问\", \"evidence\": \"original_assets/handoff-design-dev/merkle_root\", \"member_merkle_root\": \"44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104\"}, {\"slug\": \"game-onboarding-pro\", \"role\": \"member\", \"name\": \"游戏新手 引导设计 顾问\", \"evidence\": \"original_assets/game-onboarding-pro/merkle_root\", \"member_merkle_root\": \"305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b\"}, {\"slug\": \"user-story-write\", \"role\": \"member\", \"name\": \"用户故事 撰写\", \"evidence\": \"original_assets/user-story-write/merkle_root\", \"member_merkle_root\": \"c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643\"}], \"team_lead\": \"handoff-design-dev-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-onboarding-pro.md": "0851ea4c31ea56b8d099655a3a0de1b160cc43553335c767dab1fe9b3462c63e",
+    "agents/handoff-design-dev-team-lead.md": "94fdeddf448da91d1baf798c20f7f9756b53d113adcbad4ed9fcba1d0979cf6f",
+    "agents/handoff-design-dev.md": "3746c10b5f77393aaf2a11209c28ea69bd4fd2fe7722c3b8a18600a64d89d79f",
+    "agents/user-story-write.md": "45b51df3d70724a5517b8d29120553cc8f2857e0ed4c7a8d3858a780aeed94c7",
+    "plugin.json": "e908abb99ef836293d83cdcfe960cd2996f0ec17f623906b130539fa0cbd9454",
+    "settings.json": "b2e1f53526a926348325f16877980edb6423578dce6210065b0f4ed848d860ef"
+  }
+}

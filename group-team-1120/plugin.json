@@ -1,0 +1,126 @@
+{
+  "agentName": "game-story-branch-team-lead",
+  "agents": [
+    "./agents/game-story-branch-team-lead.md",
+    "./agents/game-story-branch.md",
+    "./agents/audience-segment-pro.md",
+    "./agents/crisis-response.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 剧情分支",
+    "zh": "帮我处理剧情分支"
+  },
+  "description": "game-story-branch team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 剧情分支 end-to-end: 主干清晰, 分支收敛 and 状态记录. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长主干清晰、分支收敛与状态记录，覆盖剧情分支全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "game-story-branch Team",
+    "zh": "剧情分支专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "game-story-branch-team-lead",
+      "name": {
+        "en": "剧情分支主理人",
+        "zh": "剧情分支主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/game-story-branch.png",
+      "id": "game-story-branch",
+      "name": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "profession": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audience-segment-pro.png",
+      "id": "audience-segment-pro",
+      "name": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "profession": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/crisis-response.png",
+      "id": "crisis-response",
+      "name": {
+        "en": "crisis-response",
+        "zh": "危机应对 顾问"
+      },
+      "profession": {
+        "en": "crisis-response",
+        "zh": "危机应对 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1120",
+  "plugin": "group-team-1120",
+  "profession": {
+    "en": "game-story-branch Collaboration Team",
+    "zh": "剧情分支专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 剧情分支",
+      "zh": "帮我处理剧情分支"
+    },
+    {
+      "en": "Plan 受众分层",
+      "zh": "帮我规划受众分层"
+    },
+    {
+      "en": "Review 危机应对",
+      "zh": "帮我检查危机应对"
+    }
+  ],
+  "tags": [
+    {
+      "en": "主干清晰",
+      "zh": "主干清晰"
+    },
+    {
+      "en": "分支收敛",
+      "zh": "分支收敛"
+    },
+    {
+      "en": "状态记录",
+      "zh": "状态记录"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "game-story-branch-team-lead",
+    "memberAgents": [
+      "game-story-branch",
+      "audience-segment-pro",
+      "crisis-response"
+    ]
+  },
+  "version": "1.0.0"
+}

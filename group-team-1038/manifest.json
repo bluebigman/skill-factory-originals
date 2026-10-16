@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1038",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1038",
+    "kind": "team",
+    "name": "技术债台账专家",
+    "description": "输入技术债台账相关需求，输出量化影响、来源可溯、偿还排期三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "tech-debt-ledger-team-lead",
+        "role": "lead",
+        "name": "技术债台账主理人",
+        "evidence": null
+      },
+      {
+        "slug": "tech-debt-ledger",
+        "role": "member",
+        "name": "技术债台账 助手",
+        "evidence": "original_assets/tech-debt-ledger/merkle_root",
+        "member_merkle_root": "73c009b5eb12eb04b6d497a5c69db96b890bd40aae3b0444918284c981ecd957"
+      },
+      {
+        "slug": "business-continuity",
+        "role": "member",
+        "name": "业务连续性 顾问",
+        "evidence": "original_assets/business-continuity/merkle_root",
+        "member_merkle_root": "e8118bf540f9bfdb33a77af18bf50fed0046d5ded9f5bbd81f674df775af7bbc"
+      },
+      {
+        "slug": "meeting-sync-pro",
+        "role": "member",
+        "name": "会议同步 纪要分发 顾问",
+        "evidence": "original_assets/meeting-sync-pro/merkle_root",
+        "member_merkle_root": "3ef001d850779fa8a91511a935b9f8d04cf42b5e879411a82f13991266b8cbbd"
+      }
+    ],
+    "team_lead": "tech-debt-ledger-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "156eab6a32fbc08e",
+  "prompt_hash": "c0228523cc0c4803",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1038\", \"kind\": \"team\", \"name\": \"技术债台账专家\", \"description\": \"输入技术债台账相关需求，输出量化影响、来源可溯、偿还排期三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"tech-debt-ledger-team-lead\", \"role\": \"lead\", \"name\": \"技术债台账主理人\", \"evidence\": null}, {\"slug\": \"tech-debt-ledger\", \"role\": \"member\", \"name\": \"技术债台账 助手\", \"evidence\": \"original_assets/tech-debt-ledger/merkle_root\", \"member_merkle_root\": \"73c009b5eb12eb04b6d497a5c69db96b890bd40aae3b0444918284c981ecd957\"}, {\"slug\": \"business-continuity\", \"role\": \"member\", \"name\": \"业务连续性 顾问\", \"evidence\": \"original_assets/business-continuity/merkle_root\", \"member_merkle_root\": \"e8118bf540f9bfdb33a77af18bf50fed0046d5ded9f5bbd81f674df775af7bbc\"}, {\"slug\": \"meeting-sync-pro\", \"role\": \"member\", \"name\": \"会议同步 纪要分发 顾问\", \"evidence\": \"original_assets/meeting-sync-pro/merkle_root\", \"member_merkle_root\": \"3ef001d850779fa8a91511a935b9f8d04cf42b5e879411a82f13991266b8cbbd\"}], \"team_lead\": \"tech-debt-ledger-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/business-continuity.md": "3ef55cf684a4317a947dd5dd9a4654d8152db7850510a6ce1fbf8bac67e8612a",
+    "agents/meeting-sync-pro.md": "d93231f5e51cb462a2ef46b462f8988ae2f3252822292cf924ac372aae88ecb3",
+    "agents/tech-debt-ledger-team-lead.md": "fd4ed169ff3458603fe9856812ed78741e0c0375bf65afd2f6c1d0091fe5cfd1",
+    "agents/tech-debt-ledger.md": "2f8b79cc971f7a4e83e1697620ba9c59e72a3210c7184c8d4885932b212acd5a",
+    "plugin.json": "16c93a600ffeaa8f8ce6bed3f7fa8f239a6210fa1d79851cc58d817de6a869f6",
+    "settings.json": "e01b8c2c92eb91897abd4393fa8a6401892e9d54454e5daf134b6f94355e7826"
+  }
+}

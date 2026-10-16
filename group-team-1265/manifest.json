@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1265",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1265",
+    "kind": "team",
+    "name": "表结构文字段释义专家",
+    "description": "表结构文字段释义专家：围绕表结构文，覆盖字段完整／口径记录／变更同步，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "schema-doc-pro-team-lead",
+        "role": "lead",
+        "name": "表结构文主理人",
+        "evidence": null
+      },
+      {
+        "slug": "schema-doc-pro",
+        "role": "member",
+        "name": "表结构文 字段释义 顾问",
+        "evidence": "original_assets/schema-doc-pro/merkle_root",
+        "member_merkle_root": "f7531c41bbd2878ecdf687a2ae1898e4372460923bca11d81d6a4e2f6bdf5c6e"
+      },
+      {
+        "slug": "secret-rotation",
+        "role": "member",
+        "name": "密钥轮换流程 顾问",
+        "evidence": "original_assets/secret-rotation/merkle_root",
+        "member_merkle_root": "0e40b130c56b40e91e184b34fa8051749e2a696f80db35293fe8f26efd64543a"
+      },
+      {
+        "slug": "data-audit-pro",
+        "role": "member",
+        "name": "调研数据 清洗校验 分析报告",
+        "evidence": "original_assets/data-audit-pro/merkle_root",
+        "member_merkle_root": "b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3"
+      }
+    ],
+    "team_lead": "schema-doc-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2bb275b92efca8af",
+  "prompt_hash": "938c7f9a8274cc81",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1265\", \"kind\": \"team\", \"name\": \"表结构文字段释义专家\", \"description\": \"表结构文字段释义专家：围绕表结构文，覆盖字段完整／口径记录／变更同步，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"schema-doc-pro-team-lead\", \"role\": \"lead\", \"name\": \"表结构文主理人\", \"evidence\": null}, {\"slug\": \"schema-doc-pro\", \"role\": \"member\", \"name\": \"表结构文 字段释义 顾问\", \"evidence\": \"original_assets/schema-doc-pro/merkle_root\", \"member_merkle_root\": \"f7531c41bbd2878ecdf687a2ae1898e4372460923bca11d81d6a4e2f6bdf5c6e\"}, {\"slug\": \"secret-rotation\", \"role\": \"member\", \"name\": \"密钥轮换流程 顾问\", \"evidence\": \"original_assets/secret-rotation/merkle_root\", \"member_merkle_root\": \"0e40b130c56b40e91e184b34fa8051749e2a696f80db35293fe8f26efd64543a\"}, {\"slug\": \"data-audit-pro\", \"role\": \"member\", \"name\": \"调研数据 清洗校验 分析报告\", \"evidence\": \"original_assets/data-audit-pro/merkle_root\", \"member_merkle_root\": \"b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3\"}], \"team_lead\": \"schema-doc-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-audit-pro.md": "18364c828f8420a5f735622a2ff62666037b4259dba1eec76e83718d47b46437",
+    "agents/schema-doc-pro-team-lead.md": "d800bdec674d1b6ebf83644556fc57bb6ed635f341d526228d2db0644f5888d9",
+    "agents/schema-doc-pro.md": "a35f2391ec0500b3bd1e75a2dd417b3a85cb009e1a8fb4ff4dc92f7e69be2b5d",
+    "agents/secret-rotation.md": "e55cd449a62efebc4edbd29f19facce5d1c1d4a709608d94a4fd1b9c09fb06e7",
+    "plugin.json": "99bcd5e4747b5d964b6adc8547fe1a2c0ae990816941f9022e6a4ab918079aae",
+    "settings.json": "a0654ce3dde052e3fe31ae2eda4e1679097a502e5398a90b931841e3d45f13e1"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "citation-format-pro-team-lead",
+  "agents": [
+    "./agents/citation-format-pro-team-lead.md",
+    "./agents/citation-format-pro.md",
+    "./agents/content-repurposing-pro.md",
+    "./agents/subtitle-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 引用规范",
+    "zh": "帮我处理引用规范"
+  },
+  "description": "citation-format-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 引用规范 requirements, output three deliverables: 来源可查, 格式统一, 页码明确. Verifiable end-to-end, evidence per step.",
+    "zh": "输入引用规范相关需求，输出来源可查、格式统一、页码明确三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "citation-format-pro Team",
+    "zh": "引用规范来源标注专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "citation-format-pro-team-lead",
+      "name": {
+        "en": "引用规范主理人",
+        "zh": "引用规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/citation-format-pro.png",
+      "id": "citation-format-pro",
+      "name": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "profession": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-repurposing-pro.png",
+      "id": "content-repurposing-pro",
+      "name": {
+        "en": "content-repurposing-pro",
+        "zh": "内容复用 一稿多投 顾问"
+      },
+      "profession": {
+        "en": "content-repurposing-pro",
+        "zh": "内容复用 一稿多投 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/subtitle-expert.png",
+      "id": "subtitle-expert",
+      "name": {
+        "en": "SubPro",
+        "zh": "视频字幕 语音转写 时间轴对齐"
+      },
+      "profession": {
+        "en": "SubPro",
+        "zh": "视频字幕 语音转写 时间轴对齐"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-743",
+  "plugin": "group-team-743",
+  "profession": {
+    "en": "citation-format-pro Collaboration Team",
+    "zh": "引用规范来源标注专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 引用规范",
+      "zh": "帮我处理引用规范"
+    },
+    {
+      "en": "Plan 内容复用",
+      "zh": "帮我规划内容复用"
+    },
+    {
+      "en": "Review 视频字幕",
+      "zh": "帮我检查视频字幕"
+    }
+  ],
+  "tags": [
+    {
+      "en": "来源可查",
+      "zh": "来源可查"
+    },
+    {
+      "en": "格式统一",
+      "zh": "格式统一"
+    },
+    {
+      "en": "页码明确",
+      "zh": "页码明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "citation-format-pro-team-lead",
+    "memberAgents": [
+      "citation-format-pro",
+      "content-repurposing-pro",
+      "subtitle-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

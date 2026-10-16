@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1183",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1183",
+    "kind": "team",
+    "name": "引用格式规范专家",
+    "description": "擅长统一风格、信息完整与正文对应，覆盖引用格式规范全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-citation-format-team-lead",
+        "role": "lead",
+        "name": "引用格式规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-citation-format",
+        "role": "member",
+        "name": "引用格式规范 顾问",
+        "evidence": "original_assets/doc-citation-format/merkle_root",
+        "member_merkle_root": "36b3eeeae25a02bbc61676b43692204a554ebdb28de484102af4ac23d05e96df"
+      },
+      {
+        "slug": "subtitle-expert",
+        "role": "member",
+        "name": "视频字幕 语音转写 时间轴对齐",
+        "evidence": "original_assets/subtitle-expert/merkle_root",
+        "member_merkle_root": "29cc7bd9c2315c9918e026807a574de6228b906c7880f220a60c0dbe56957299"
+      },
+      {
+        "slug": "global-brand-tone",
+        "role": "member",
+        "name": "品牌出海 语气统一 顾问",
+        "evidence": "original_assets/global-brand-tone/merkle_root",
+        "member_merkle_root": "1f25fbfea65b2cd17f9298b96426877723dc916497d04003a140e3b74ed63954"
+      }
+    ],
+    "team_lead": "doc-citation-format-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0c4c8b6554d639ff",
+  "prompt_hash": "c0330dfc674218c1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1183\", \"kind\": \"team\", \"name\": \"引用格式规范专家\", \"description\": \"擅长统一风格、信息完整与正文对应，覆盖引用格式规范全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-citation-format-team-lead\", \"role\": \"lead\", \"name\": \"引用格式规范主理人\", \"evidence\": null}, {\"slug\": \"doc-citation-format\", \"role\": \"member\", \"name\": \"引用格式规范 顾问\", \"evidence\": \"original_assets/doc-citation-format/merkle_root\", \"member_merkle_root\": \"36b3eeeae25a02bbc61676b43692204a554ebdb28de484102af4ac23d05e96df\"}, {\"slug\": \"subtitle-expert\", \"role\": \"member\", \"name\": \"视频字幕 语音转写 时间轴对齐\", \"evidence\": \"original_assets/subtitle-expert/merkle_root\", \"member_merkle_root\": \"29cc7bd9c2315c9918e026807a574de6228b906c7880f220a60c0dbe56957299\"}, {\"slug\": \"global-brand-tone\", \"role\": \"member\", \"name\": \"品牌出海 语气统一 顾问\", \"evidence\": \"original_assets/global-brand-tone/merkle_root\", \"member_merkle_root\": \"1f25fbfea65b2cd17f9298b96426877723dc916497d04003a140e3b74ed63954\"}], \"team_lead\": \"doc-citation-format-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-citation-format-team-lead.md": "c1badebc49ad005d02c0145229afa51ea74225fe853726d5001d43db164f43d5",
+    "agents/doc-citation-format.md": "4c575c276fd14d633a6b7fa8b9c4e3d6c98101d92da342dfee8053e754f613d9",
+    "agents/global-brand-tone.md": "0cecff6f36e68b804c5514506e30f1417f9e57e8d257880995bbcacaed2b8331",
+    "agents/subtitle-expert.md": "ce06f24fbb3cdd27189fb6899f99f105017ff0745c4c0f6c5c3653de9f664f13",
+    "plugin.json": "607b1520ecdd54b8c574a6e9c34f8631692527721edb3b9f66bc4d94adbb811c",
+    "settings.json": "d2ca3b238dd5aaf833c2509b6cb093badab60e2ed0250e8829792116d8574485"
+  }
+}

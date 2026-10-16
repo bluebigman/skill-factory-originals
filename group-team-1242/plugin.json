@@ -1,0 +1,126 @@
+{
+  "agentName": "microcopy-coach-team-lead",
+  "agents": [
+    "./agents/microcopy-coach-team-lead.md",
+    "./agents/microcopy-coach.md",
+    "./agents/article-extract-clean.md",
+    "./agents/naming-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 界面文案",
+    "zh": "帮我处理界面文案"
+  },
+  "description": "microcopy-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 界面文案 requirements, output three deliverables: 动词开头, 称谓统一, 场景匹配. Verifiable end-to-end, evidence per step.",
+    "zh": "输入界面文案相关需求，输出动词开头、称谓统一、场景匹配三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "microcopy-coach Team",
+    "zh": "界面文案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "microcopy-coach-team-lead",
+      "name": {
+        "en": "界面文案主理人",
+        "zh": "界面文案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/microcopy-coach.png",
+      "id": "microcopy-coach",
+      "name": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "profession": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/article-extract-clean.png",
+      "id": "article-extract-clean",
+      "name": {
+        "en": "article-extract-clean",
+        "zh": "网页正文提取 助手"
+      },
+      "profession": {
+        "en": "article-extract-clean",
+        "zh": "网页正文提取 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/naming-method.png",
+      "id": "naming-method",
+      "name": {
+        "en": "naming-method",
+        "zh": "命名方法 顾问"
+      },
+      "profession": {
+        "en": "naming-method",
+        "zh": "命名方法 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1242",
+  "plugin": "group-team-1242",
+  "profession": {
+    "en": "microcopy-coach Collaboration Team",
+    "zh": "界面文案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 界面文案",
+      "zh": "帮我处理界面文案"
+    },
+    {
+      "en": "Plan 网页正文提取",
+      "zh": "帮我规划网页正文提取"
+    },
+    {
+      "en": "Review 命名方法",
+      "zh": "帮我检查命名方法"
+    }
+  ],
+  "tags": [
+    {
+      "en": "动词开头",
+      "zh": "动词开头"
+    },
+    {
+      "en": "称谓统一",
+      "zh": "称谓统一"
+    },
+    {
+      "en": "场景匹配",
+      "zh": "场景匹配"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "microcopy-coach-team-lead",
+    "memberAgents": [
+      "microcopy-coach",
+      "article-extract-clean",
+      "naming-method"
+    ]
+  },
+  "version": "1.0.0"
+}

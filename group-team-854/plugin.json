@@ -1,0 +1,126 @@
+{
+  "agentName": "audio-clip-expert-team-lead",
+  "agents": [
+    "./agents/audio-clip-expert-team-lead.md",
+    "./agents/audio-clip-expert.md",
+    "./agents/doc-format-unify.md",
+    "./agents/kb-article-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 音频剪辑与播客后期制作专家",
+    "zh": "帮我处理音频剪辑与播客后期制作专家"
+  },
+  "description": "AudioClip team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档格式统一 requirements, output three deliverables: 字幕生成, 样式驱动, 标题层级. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档格式统一相关需求，输出字幕生成、样式驱动、标题层级三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "AudioClip Team",
+    "zh": "文档格式统一专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "audio-clip-expert-team-lead",
+      "name": {
+        "en": "音频剪辑与播客后期制作专家主理人",
+        "zh": "音频剪辑与播客后期制作专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/audio-clip-expert.png",
+      "id": "audio-clip-expert",
+      "name": {
+        "en": "AudioClip",
+        "zh": "音频剪辑专家"
+      },
+      "profession": {
+        "en": "AudioClip",
+        "zh": "音频剪辑与播客后期制作专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-format-unify.png",
+      "id": "doc-format-unify",
+      "name": {
+        "en": "doc-format-unify",
+        "zh": "文档格式统一 助手"
+      },
+      "profession": {
+        "en": "doc-format-unify",
+        "zh": "文档格式统一 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kb-article-build.png",
+      "id": "kb-article-build",
+      "name": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "profession": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-854",
+  "plugin": "group-team-854",
+  "profession": {
+    "en": "AudioClip Collaboration Team",
+    "zh": "文档格式统一专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 音频剪辑与播客后期制作专家",
+      "zh": "帮我处理音频剪辑与播客后期制作专家"
+    },
+    {
+      "en": "Plan 文档格式统一",
+      "zh": "帮我规划文档格式统一"
+    },
+    {
+      "en": "Review 知识库条目",
+      "zh": "帮我检查知识库条目"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字幕生成",
+      "zh": "字幕生成"
+    },
+    {
+      "en": "发布包交付",
+      "zh": "发布包交付"
+    },
+    {
+      "en": "智能转写清稿",
+      "zh": "智能转写清稿"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "audio-clip-expert-team-lead",
+    "memberAgents": [
+      "audio-clip-expert",
+      "doc-format-unify",
+      "kb-article-build"
+    ]
+  },
+  "version": "1.0.0"
+}

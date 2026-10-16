@@ -1,0 +1,126 @@
+{
+  "agentName": "life-plan-forge-expert-team-lead",
+  "agents": [
+    "./agents/life-plan-forge-expert-team-lead.md",
+    "./agents/life-plan-forge-expert.md",
+    "./agents/integration-test-pro.md",
+    "./agents/sop-compliance-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 生活计划",
+    "zh": "帮我处理生活计划"
+  },
+  "description": "Life Plan Forge Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 集成测试 requirements, output three deliverables: 场景真实, 环境隔离, 数据准备. Verifiable end-to-end, evidence per step.",
+    "zh": "输入集成测试相关需求，输出场景真实、环境隔离、数据准备三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Life Plan Forge Expert Team",
+    "zh": "生活计划出行饮食专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "life-plan-forge-expert-team-lead",
+      "name": {
+        "en": "生活计划主理人",
+        "zh": "生活计划主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/life-plan-forge-expert.png",
+      "id": "life-plan-forge-expert",
+      "name": {
+        "en": "Life Plan Forge Expert",
+        "zh": "生活计划 出行饮食 清单生成"
+      },
+      "profession": {
+        "en": "Life Plan Forge Expert",
+        "zh": "生活计划 出行饮食 清单生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/integration-test-pro.png",
+      "id": "integration-test-pro",
+      "name": {
+        "en": "integration-test-pro",
+        "zh": "集成测试 场景覆盖 顾问"
+      },
+      "profession": {
+        "en": "integration-test-pro",
+        "zh": "集成测试 场景覆盖 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sop-compliance-check.png",
+      "id": "sop-compliance-check",
+      "name": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "profession": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-684",
+  "plugin": "group-team-684",
+  "profession": {
+    "en": "Life Plan Forge Expert Collaboration Team",
+    "zh": "生活计划出行饮食专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 生活计划",
+      "zh": "帮我处理生活计划"
+    },
+    {
+      "en": "Plan 集成测试",
+      "zh": "帮我规划集成测试"
+    },
+    {
+      "en": "Review 流程合规",
+      "zh": "帮我检查流程合规"
+    }
+  ],
+  "tags": [
+    {
+      "en": "旅行行程规划",
+      "zh": "旅行行程规划"
+    },
+    {
+      "en": "预算分配",
+      "zh": "预算分配"
+    },
+    {
+      "en": "日程编排",
+      "zh": "日程编排"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "life-plan-forge-expert-team-lead",
+    "memberAgents": [
+      "life-plan-forge-expert",
+      "integration-test-pro",
+      "sop-compliance-check"
+    ]
+  },
+  "version": "1.0.0"
+}

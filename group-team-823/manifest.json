@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-823",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-823",
+    "kind": "team",
+    "name": "文档整理专家",
+    "description": "擅长依赖声明、幂等重跑与断点续跑，覆盖ETL全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "etl-pipeline-guard-team-lead",
+        "role": "lead",
+        "name": "ETL主理人",
+        "evidence": null
+      },
+      {
+        "slug": "etl-pipeline-guard",
+        "role": "member",
+        "name": "ETL 管线 顾问",
+        "evidence": "original_assets/etl-pipeline-guard/merkle_root",
+        "member_merkle_root": "ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4"
+      },
+      {
+        "slug": "kb-build-pro",
+        "role": "member",
+        "name": "知识库构建 文档整理",
+        "evidence": "original_assets/kb-build-pro/merkle_root",
+        "member_merkle_root": "9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d"
+      },
+      {
+        "slug": "data-insight-attribution-expert",
+        "role": "member",
+        "name": "数据洞察 指标异常 归因分析",
+        "evidence": "original_assets/data-insight-attribution-expert/merkle_root",
+        "member_merkle_root": "880a51ffd1e2a3c47febd7ffc439bd27955bb149ecb31bd038444db62ab710ec"
+      }
+    ],
+    "team_lead": "etl-pipeline-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1069c87b67f216fa",
+  "prompt_hash": "c5bb27a7b2746f59",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-823\", \"kind\": \"team\", \"name\": \"文档整理专家\", \"description\": \"擅长依赖声明、幂等重跑与断点续跑，覆盖ETL全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"etl-pipeline-guard-team-lead\", \"role\": \"lead\", \"name\": \"ETL主理人\", \"evidence\": null}, {\"slug\": \"etl-pipeline-guard\", \"role\": \"member\", \"name\": \"ETL 管线 顾问\", \"evidence\": \"original_assets/etl-pipeline-guard/merkle_root\", \"member_merkle_root\": \"ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4\"}, {\"slug\": \"kb-build-pro\", \"role\": \"member\", \"name\": \"知识库构建 文档整理\", \"evidence\": \"original_assets/kb-build-pro/merkle_root\", \"member_merkle_root\": \"9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d\"}, {\"slug\": \"data-insight-attribution-expert\", \"role\": \"member\", \"name\": \"数据洞察 指标异常 归因分析\", \"evidence\": \"original_assets/data-insight-attribution-expert/merkle_root\", \"member_merkle_root\": \"880a51ffd1e2a3c47febd7ffc439bd27955bb149ecb31bd038444db62ab710ec\"}], \"team_lead\": \"etl-pipeline-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-insight-attribution-expert.md": "38e6d8b5119f1d02a4fab71066ae97687c00149662f5375b7503b3f3993678cc",
+    "agents/etl-pipeline-guard-team-lead.md": "fb2b0c9298e2dc1db15f44ede2b200f6e6a3acf779f51903dbb6be5f27a045bd",
+    "agents/etl-pipeline-guard.md": "df89055a523d6b18fbc2d29987b730da13d29d87a55e0510de675e7d04294968",
+    "agents/kb-build-pro.md": "e5da492a4dbef1605a34dfa964b3cccf24b25247056cf38772476feebc21963a",
+    "plugin.json": "c3486ad55c92de8fd678a0ae9aaf275d73fbadcfd9b9789242a58df0bc998874",
+    "settings.json": "92cb84da1a7c4f0536fa4cf5ada1e9b72717a65c9c63b51bdd5889866646ea93"
+  }
+}

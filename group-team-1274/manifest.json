@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1274",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1274",
+    "kind": "team",
+    "name": "重构安全规划专家",
+    "description": "重构安全规划专家：围绕重构安全规划，覆盖测试先行／小步提交／行为不变，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "refactor-safe-plan-team-lead",
+        "role": "lead",
+        "name": "重构安全规划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "refactor-safe-plan",
+        "role": "member",
+        "name": "重构安全规划 顾问",
+        "evidence": "original_assets/refactor-safe-plan/merkle_root",
+        "member_merkle_root": "75024f16000788bb8fcf736b8d343f0b6f109f52c773560e0f6e1fb01cc3e790"
+      },
+      {
+        "slug": "dashboard-info-design",
+        "role": "member",
+        "name": "信息看板设计 顾问",
+        "evidence": "original_assets/dashboard-info-design/merkle_root",
+        "member_merkle_root": "15a4e7bd6b411e73335e60050446acbe75dcfba23a037b055e576eaf4542dc10"
+      },
+      {
+        "slug": "backup-restore-plan",
+        "role": "member",
+        "name": "备份恢复方案 顾问",
+        "evidence": "original_assets/backup-restore-plan/merkle_root",
+        "member_merkle_root": "452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e"
+      }
+    ],
+    "team_lead": "refactor-safe-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e470b2e27e7d7523",
+  "prompt_hash": "b8cb3b9f2b1df3ba",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1274\", \"kind\": \"team\", \"name\": \"重构安全规划专家\", \"description\": \"重构安全规划专家：围绕重构安全规划，覆盖测试先行／小步提交／行为不变，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"refactor-safe-plan-team-lead\", \"role\": \"lead\", \"name\": \"重构安全规划主理人\", \"evidence\": null}, {\"slug\": \"refactor-safe-plan\", \"role\": \"member\", \"name\": \"重构安全规划 顾问\", \"evidence\": \"original_assets/refactor-safe-plan/merkle_root\", \"member_merkle_root\": \"75024f16000788bb8fcf736b8d343f0b6f109f52c773560e0f6e1fb01cc3e790\"}, {\"slug\": \"dashboard-info-design\", \"role\": \"member\", \"name\": \"信息看板设计 顾问\", \"evidence\": \"original_assets/dashboard-info-design/merkle_root\", \"member_merkle_root\": \"15a4e7bd6b411e73335e60050446acbe75dcfba23a037b055e576eaf4542dc10\"}, {\"slug\": \"backup-restore-plan\", \"role\": \"member\", \"name\": \"备份恢复方案 顾问\", \"evidence\": \"original_assets/backup-restore-plan/merkle_root\", \"member_merkle_root\": \"452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e\"}], \"team_lead\": \"refactor-safe-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/backup-restore-plan.md": "7f2e22db2938d2c085698a46b8e920f2e612bb349664e7f41164510054f5ac1a",
+    "agents/dashboard-info-design.md": "d5bbd1725f873cb5b12d248f8d972377b721f619cbf8ce55a00eed2436adc1c7",
+    "agents/refactor-safe-plan-team-lead.md": "3dded61781bbbbe9d89503c64158911deffb947539720985551cbbc6683a4a4d",
+    "agents/refactor-safe-plan.md": "73344d118baaeb98d444ff886c99ed03723460ae574ae0bec7b5444054e06da6",
+    "plugin.json": "210c60d315f931a6de164f4fbc503f6c14bf1a27a351836f0a920c13ea7446dc",
+    "settings.json": "3f5ea006300a01a7d5a7cb9dfe57f189b1cabef5690e7cb555437411ee91e3e3"
+  }
+}

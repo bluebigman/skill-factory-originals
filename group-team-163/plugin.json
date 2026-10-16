@@ -1,0 +1,126 @@
+{
+  "agentName": "ops-deploy-pro-fixed-team-lead",
+  "agents": [
+    "./agents/ops-deploy-pro-fixed-team-lead.md",
+    "./agents/ops-deploy-pro-fixed.md",
+    "./agents/cfg-hygiene-residue-auditor.md",
+    "./agents/code-assist-pro-01.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 缓存清理",
+    "zh": "帮我处理缓存清理"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "缓存 配置 批量 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "缓存 配置 批量 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ops-deploy-pro-fixed-team-lead",
+      "name": {
+        "en": "缓存清理主理人",
+        "zh": "缓存清理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro-fixed.png",
+      "id": "ops-deploy-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "缓存清理 批处理脚本 故障排查"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "缓存清理 批处理脚本 故障排查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cfg-hygiene-residue-auditor.png",
+      "id": "cfg-hygiene-residue-auditor",
+      "name": {
+        "en": "Config Hygiene and Residue Auditor",
+        "zh": "配置校验 占位清理 列表规范"
+      },
+      "profession": {
+        "en": "Config Hygiene and Residue Auditor",
+        "zh": "配置校验 占位清理 列表规范"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-01.png",
+      "id": "code-assist-pro-01",
+      "name": {
+        "en": "代码开发辅助 Suite",
+        "zh": "Rails 批量造数 快捷生成"
+      },
+      "profession": {
+        "en": "代码开发辅助 Suite",
+        "zh": "Rails 批量造数 快捷生成"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-163",
+  "plugin": "group-team-163",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "缓存 配置 批量 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 缓存清理",
+      "zh": "帮我处理缓存清理"
+    },
+    {
+      "en": "Plan 配置校验",
+      "zh": "帮我规划配置校验"
+    },
+    {
+      "en": "Review Rails",
+      "zh": "帮我检查Rails"
+    }
+  ],
+  "tags": [
+    {
+      "en": "缓存清理",
+      "zh": "缓存清理"
+    },
+    {
+      "en": "配置校验",
+      "zh": "配置校验"
+    },
+    {
+      "en": "Rails",
+      "zh": "Rails"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ops-deploy-pro-fixed-team-lead",
+    "memberAgents": [
+      "ops-deploy-pro-fixed",
+      "cfg-hygiene-residue-auditor",
+      "code-assist-pro-01"
+    ]
+  },
+  "version": "1.0.0"
+}

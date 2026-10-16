@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-perf-budget-team-lead",
+  "agents": [
+    "./agents/agent-perf-budget-team-lead.md",
+    "./agents/agent-perf-budget.md",
+    "./agents/agent-regression-guard.md",
+    "./agents/agent-task-queue.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 性能预算",
+    "zh": "帮我处理性能预算"
+  },
+  "description": "agent-perf-budget team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 性能预算 requirements, output three deliverables: 基线固定, 全量回归, 差异归因. Verifiable end-to-end, evidence per step.",
+    "zh": "输入性能预算相关需求，输出基线固定、全量回归、差异归因三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-perf-budget Team",
+    "zh": "性能预算专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-perf-budget-team-lead",
+      "name": {
+        "en": "性能预算主理人",
+        "zh": "性能预算主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-perf-budget.png",
+      "id": "agent-perf-budget",
+      "name": {
+        "en": "agent-perf-budget",
+        "zh": "性能预算 限额 顾问"
+      },
+      "profession": {
+        "en": "agent-perf-budget",
+        "zh": "性能预算 限额 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-regression-guard.png",
+      "id": "agent-regression-guard",
+      "name": {
+        "en": "agent-regression-guard",
+        "zh": "回归守护 基线 顾问"
+      },
+      "profession": {
+        "en": "agent-regression-guard",
+        "zh": "回归守护 基线 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-task-queue.png",
+      "id": "agent-task-queue",
+      "name": {
+        "en": "agent-task-queue",
+        "zh": "任务队列 优先级 顾问"
+      },
+      "profession": {
+        "en": "agent-task-queue",
+        "zh": "任务队列 优先级 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-324",
+  "plugin": "group-team-324",
+  "profession": {
+    "en": "agent-perf-budget Collaboration Team",
+    "zh": "性能预算专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 性能预算",
+      "zh": "帮我处理性能预算"
+    },
+    {
+      "en": "Plan 回归守护",
+      "zh": "帮我规划回归守护"
+    },
+    {
+      "en": "Review 任务队列",
+      "zh": "帮我检查任务队列"
+    }
+  ],
+  "tags": [
+    {
+      "en": "预算预设",
+      "zh": "预算预设"
+    },
+    {
+      "en": "超预算告警",
+      "zh": "超预算告警"
+    },
+    {
+      "en": "优化排序",
+      "zh": "优化排序"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-perf-budget-team-lead",
+    "memberAgents": [
+      "agent-perf-budget",
+      "agent-regression-guard",
+      "agent-task-queue"
+    ]
+  },
+  "version": "1.0.0"
+}

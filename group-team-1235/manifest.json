@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1235",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1235",
+    "kind": "team",
+    "name": "标题撰写专家",
+    "description": "标题撰写专家：围绕续约管理，覆盖场景识别／提前启动／价值回顾，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cold-email-expert-team-lead",
+        "role": "lead",
+        "name": "邮件营销主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cold-email-expert",
+        "role": "member",
+        "name": "邮件营销 标题撰写 转化优化",
+        "evidence": "original_assets/cold-email-expert/merkle_root",
+        "member_merkle_root": "458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc"
+      },
+      {
+        "slug": "contract-legal-pro",
+        "role": "member",
+        "name": "合同法律风险顾问",
+        "evidence": "original_assets/contract-legal-pro/merkle_root",
+        "member_merkle_root": "596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3"
+      },
+      {
+        "slug": "renewal-playbook",
+        "role": "member",
+        "name": "续约管理 提前动作 顾问",
+        "evidence": "original_assets/renewal-playbook/merkle_root",
+        "member_merkle_root": "d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54"
+      }
+    ],
+    "team_lead": "cold-email-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "34a6505ca6f73878",
+  "prompt_hash": "7a672f74e66f6149",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1235\", \"kind\": \"team\", \"name\": \"标题撰写专家\", \"description\": \"标题撰写专家：围绕续约管理，覆盖场景识别／提前启动／价值回顾，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cold-email-expert-team-lead\", \"role\": \"lead\", \"name\": \"邮件营销主理人\", \"evidence\": null}, {\"slug\": \"cold-email-expert\", \"role\": \"member\", \"name\": \"邮件营销 标题撰写 转化优化\", \"evidence\": \"original_assets/cold-email-expert/merkle_root\", \"member_merkle_root\": \"458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc\"}, {\"slug\": \"contract-legal-pro\", \"role\": \"member\", \"name\": \"合同法律风险顾问\", \"evidence\": \"original_assets/contract-legal-pro/merkle_root\", \"member_merkle_root\": \"596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3\"}, {\"slug\": \"renewal-playbook\", \"role\": \"member\", \"name\": \"续约管理 提前动作 顾问\", \"evidence\": \"original_assets/renewal-playbook/merkle_root\", \"member_merkle_root\": \"d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54\"}], \"team_lead\": \"cold-email-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cold-email-expert-team-lead.md": "f2177eb793498abaae39cf0dc5f479c93e5f9e878d89cf90fc436daa8be4c6b1",
+    "agents/cold-email-expert.md": "31bcfeb3124fc57775b67edfcbc860df2b40f4fe10923e02012d9dd329127a97",
+    "agents/contract-legal-pro.md": "4045ba47d107a6c3bf59ad67c16f2f2a15aabed3725735b8b4f4a82cd4086ec8",
+    "agents/renewal-playbook.md": "e1170d9244b36fbb78bcedb7aff8c4533769ac4804f2fd6471a0f91dc2ccd469",
+    "plugin.json": "249cd80997e32fb8a1afa637589d17247b3a8bbe42e8e91b9e151a03906ef77a",
+    "settings.json": "3ac08b0561a81cfc114ad212fadb5969c5fb43942f5aab1b12d207f59d957181"
+  }
+}

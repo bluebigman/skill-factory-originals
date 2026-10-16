@@ -1,0 +1,126 @@
+{
+  "agentName": "kanban-flow-coach-team-lead",
+  "agents": [
+    "./agents/kanban-flow-coach-team-lead.md",
+    "./agents/kanban-flow-coach.md",
+    "./agents/audio-meeting-minutes.md",
+    "./agents/acceptance-criteria.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 看板流程",
+    "zh": "帮我处理看板流程"
+  },
+  "description": "Kanban Flow Coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "看板 会议 验收 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Kanban Flow Coach Team",
+    "zh": "看板 会议 验收 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "kanban-flow-coach-team-lead",
+      "name": {
+        "en": "看板流程主理人",
+        "zh": "看板流程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/kanban-flow-coach.png",
+      "id": "kanban-flow-coach",
+      "name": {
+        "en": "Kanban Flow Coach",
+        "zh": "看板流程 瓶颈识别 顾问"
+      },
+      "profession": {
+        "en": "Kanban Flow Coach",
+        "zh": "看板流程 瓶颈识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audio-meeting-minutes.png",
+      "id": "audio-meeting-minutes",
+      "name": {
+        "en": "Audio Meeting Minutes",
+        "zh": "会议录音 转写纪要 助手"
+      },
+      "profession": {
+        "en": "Audio Meeting Minutes",
+        "zh": "会议录音 转写纪要 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/acceptance-criteria.png",
+      "id": "acceptance-criteria",
+      "name": {
+        "en": "Acceptance Criteria",
+        "zh": "验收标准 可测定义 顾问"
+      },
+      "profession": {
+        "en": "Acceptance Criteria",
+        "zh": "验收标准 可测定义 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-160",
+  "plugin": "group-team-160",
+  "profession": {
+    "en": "Kanban Flow Coach Collaboration Team",
+    "zh": "看板 会议 验收 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 看板流程",
+      "zh": "帮我处理看板流程"
+    },
+    {
+      "en": "Plan 会议录音",
+      "zh": "帮我规划会议录音"
+    },
+    {
+      "en": "Review 验收标准",
+      "zh": "帮我检查验收标准"
+    }
+  ],
+  "tags": [
+    {
+      "en": "看板流程",
+      "zh": "看板流程"
+    },
+    {
+      "en": "会议录音",
+      "zh": "会议录音"
+    },
+    {
+      "en": "验收标准",
+      "zh": "验收标准"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "kanban-flow-coach-team-lead",
+    "memberAgents": [
+      "kanban-flow-coach",
+      "audio-meeting-minutes",
+      "acceptance-criteria"
+    ]
+  },
+  "version": "1.0.0"
+}

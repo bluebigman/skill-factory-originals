@@ -1,0 +1,126 @@
+{
+  "agentName": "ai-app-launch-safety-expert-team-lead",
+  "agents": [
+    "./agents/ai-app-launch-safety-expert-team-lead.md",
+    "./agents/ai-app-launch-safety-expert.md",
+    "./agents/agent-context-budget.md",
+    "./agents/file-ops-suite-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle AI应用上线",
+    "zh": "帮我处理AI应用上线"
+  },
+  "description": "AI Application Pre-Launch Security Self-Audit Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 上下文预, covers 预算分配 / 溢出策略 / 压缩质量, delivering structured results and actionable checklists.",
+    "zh": "应用上线安全自查专家：围绕上下文预，覆盖预算分配／溢出策略／压缩质量，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "AI Application Pre-Launch Security Self-Audit Expert Team",
+    "zh": "应用上线安全自查专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ai-app-launch-safety-expert-team-lead",
+      "name": {
+        "en": "AI应用上线主理人",
+        "zh": "AI应用上线主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ai-app-launch-safety-expert.png",
+      "id": "ai-app-launch-safety-expert",
+      "name": {
+        "en": "AI Application Pre-Launch Security Self-Audit Expert",
+        "zh": "AI应用上线 安全自查"
+      },
+      "profession": {
+        "en": "AI Application Pre-Launch Security Self-Audit Expert",
+        "zh": "AI应用上线 安全自查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-context-budget.png",
+      "id": "agent-context-budget",
+      "name": {
+        "en": "agent-context-budget",
+        "zh": "上下文预 分配策略 顾问"
+      },
+      "profession": {
+        "en": "agent-context-budget",
+        "zh": "上下文预 分配策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/file-ops-suite-pro.png",
+      "id": "file-ops-suite-pro",
+      "name": {
+        "en": "File Ops Suite Pro",
+        "zh": "批量重命名 数据备份 文件整理"
+      },
+      "profession": {
+        "en": "File Ops Suite Pro",
+        "zh": "批量重命名 数据备份 文件整理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-570",
+  "plugin": "group-team-570",
+  "profession": {
+    "en": "AI Application Pre-Launch Security Self-Audit Expert Collaboration Team",
+    "zh": "应用上线安全自查专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle AI应用上线",
+      "zh": "帮我处理AI应用上线"
+    },
+    {
+      "en": "Plan 上下文预",
+      "zh": "帮我规划上下文预"
+    },
+    {
+      "en": "Review 批量重命名",
+      "zh": "帮我检查批量重命名"
+    }
+  ],
+  "tags": [
+    {
+      "en": "清点核验",
+      "zh": "清点核验"
+    },
+    {
+      "en": "代码安全",
+      "zh": "代码安全"
+    },
+    {
+      "en": "声明核验",
+      "zh": "声明核验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ai-app-launch-safety-expert-team-lead",
+    "memberAgents": [
+      "ai-app-launch-safety-expert",
+      "agent-context-budget",
+      "file-ops-suite-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

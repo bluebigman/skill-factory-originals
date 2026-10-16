@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1154",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1154",
+    "kind": "team",
+    "name": "多级校验专家",
+    "description": "多级校验专家：围绕验证链，覆盖多级校验／独立判据／拦截优先，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-output-verify-chain-team-lead",
+        "role": "lead",
+        "name": "验证链主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-output-verify-chain",
+        "role": "member",
+        "name": "验证链 多级校验 顾问",
+        "evidence": "original_assets/agent-output-verify-chain/merkle_root",
+        "member_merkle_root": "37806a3ac995a1d9ba36870e32c0326d6dcb72eaefa2ce74c5ada2b6db34e5d8"
+      },
+      {
+        "slug": "agent-input-sanitize",
+        "role": "member",
+        "name": "输入净化 注入防护 顾问",
+        "evidence": "original_assets/agent-input-sanitize/merkle_root",
+        "member_merkle_root": "9ef089fa0016b33f34f4a049b098160fa9f7033d151934309645bb76056ab1e7"
+      },
+      {
+        "slug": "tech-debt-track",
+        "role": "member",
+        "name": "技术债 识别登记 顾问",
+        "evidence": "original_assets/tech-debt-track/merkle_root",
+        "member_merkle_root": "3be991882d747ef0595e8dd75c079cba6775b8e22a37b6242f7cd36ad21ab6a3"
+      }
+    ],
+    "team_lead": "agent-output-verify-chain-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d8d28130d6ee4215",
+  "prompt_hash": "457d853ac3c43ff2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1154\", \"kind\": \"team\", \"name\": \"多级校验专家\", \"description\": \"多级校验专家：围绕验证链，覆盖多级校验／独立判据／拦截优先，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-output-verify-chain-team-lead\", \"role\": \"lead\", \"name\": \"验证链主理人\", \"evidence\": null}, {\"slug\": \"agent-output-verify-chain\", \"role\": \"member\", \"name\": \"验证链 多级校验 顾问\", \"evidence\": \"original_assets/agent-output-verify-chain/merkle_root\", \"member_merkle_root\": \"37806a3ac995a1d9ba36870e32c0326d6dcb72eaefa2ce74c5ada2b6db34e5d8\"}, {\"slug\": \"agent-input-sanitize\", \"role\": \"member\", \"name\": \"输入净化 注入防护 顾问\", \"evidence\": \"original_assets/agent-input-sanitize/merkle_root\", \"member_merkle_root\": \"9ef089fa0016b33f34f4a049b098160fa9f7033d151934309645bb76056ab1e7\"}, {\"slug\": \"tech-debt-track\", \"role\": \"member\", \"name\": \"技术债 识别登记 顾问\", \"evidence\": \"original_assets/tech-debt-track/merkle_root\", \"member_merkle_root\": \"3be991882d747ef0595e8dd75c079cba6775b8e22a37b6242f7cd36ad21ab6a3\"}], \"team_lead\": \"agent-output-verify-chain-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-input-sanitize.md": "b0e5b1dd61be88fea146fd12abf1e10df964f97224ebaf856128523d6802b69c",
+    "agents/agent-output-verify-chain-team-lead.md": "641982c514331c5d9220925d49114b7919f31074ccf7518be04790fd0524b959",
+    "agents/agent-output-verify-chain.md": "a13d77a722010d18893e3f1256882646967e5c198abac10bb9e829cf7f05b40b",
+    "agents/tech-debt-track.md": "cb6e09d1204363f1fd1e0fbfc2a0005d0e87863e58fb79df63a15c33b474083b",
+    "plugin.json": "6ce7483f7cdf4508c99bb15a805457a574c40c7c68700076676bb129018e91da",
+    "settings.json": "e22e328f27de38059b032741f3bfeb31356d78db0938f411ab3e80473e9346cd"
+  }
+}

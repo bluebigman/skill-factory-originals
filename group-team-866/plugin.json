@@ -1,0 +1,126 @@
+{
+  "agentName": "intl-standards-map-team-lead",
+  "agents": [
+    "./agents/intl-standards-map-team-lead.md",
+    "./agents/intl-standards-map.md",
+    "./agents/finance-toolkit-pro-fixed.md",
+    "./agents/industrial-service-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 国际标准",
+    "zh": "帮我处理国际标准"
+  },
+  "description": "intl-standards-map team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 国际标准, covers 版本溯源 / 差异列表 / 取严原则, delivering structured results and actionable checklists.",
+    "zh": "国际标准对照梳理专家：围绕国际标准，覆盖版本溯源／差异列表／取严原则，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "intl-standards-map Team",
+    "zh": "国际标准对照梳理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "intl-standards-map-team-lead",
+      "name": {
+        "en": "国际标准主理人",
+        "zh": "国际标准主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/intl-standards-map.png",
+      "id": "intl-standards-map",
+      "name": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "profession": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/finance-toolkit-pro-fixed.png",
+      "id": "finance-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/industrial-service-pro.png",
+      "id": "industrial-service-pro",
+      "name": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "profession": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-866",
+  "plugin": "group-team-866",
+  "profession": {
+    "en": "intl-standards-map Collaboration Team",
+    "zh": "国际标准对照梳理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 国际标准",
+      "zh": "帮我处理国际标准"
+    },
+    {
+      "en": "Plan 财务文本",
+      "zh": "帮我规划财务文本"
+    },
+    {
+      "en": "Review 工业服务",
+      "zh": "帮我检查工业服务"
+    }
+  ],
+  "tags": [
+    {
+      "en": "版本溯源",
+      "zh": "版本溯源"
+    },
+    {
+      "en": "差异列表",
+      "zh": "差异列表"
+    },
+    {
+      "en": "取严原则",
+      "zh": "取严原则"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "intl-standards-map-team-lead",
+    "memberAgents": [
+      "intl-standards-map",
+      "finance-toolkit-pro-fixed",
+      "industrial-service-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

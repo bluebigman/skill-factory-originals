@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1158",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1158",
+    "kind": "team",
+    "name": "日志隐私核验专家",
+    "description": "输入日志隐私核验相关需求，输出禁打凭据、分级输出、采样控制三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "log-privacy-check-team-lead",
+        "role": "lead",
+        "name": "日志隐私核验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "log-privacy-check",
+        "role": "member",
+        "name": "日志隐私核验 顾问",
+        "evidence": "original_assets/log-privacy-check/merkle_root",
+        "member_merkle_root": "6d360b510e3419d0534ec6b53345139cc5399beff6395b2bdf72d86594c77aab"
+      },
+      {
+        "slug": "api-debug-pro",
+        "role": "member",
+        "name": "接口调试 请求构造 响应解析",
+        "evidence": "original_assets/api-debug-pro/merkle_root",
+        "member_merkle_root": "c34cd3a1be93c931fabd47ab677114d505714b4a082f3b899564a0893b45d747"
+      },
+      {
+        "slug": "lsp-code-intel",
+        "role": "member",
+        "name": "代码语义分析 助手",
+        "evidence": "original_assets/lsp-code-intel/merkle_root",
+        "member_merkle_root": "5d49db3e7785c018c06168a880c857536aab70ead4ff72776cf5ae99be69fe59"
+      }
+    ],
+    "team_lead": "log-privacy-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e7f07550f3110aef",
+  "prompt_hash": "a67ef705cfb21ea2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1158\", \"kind\": \"team\", \"name\": \"日志隐私核验专家\", \"description\": \"输入日志隐私核验相关需求，输出禁打凭据、分级输出、采样控制三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"log-privacy-check-team-lead\", \"role\": \"lead\", \"name\": \"日志隐私核验主理人\", \"evidence\": null}, {\"slug\": \"log-privacy-check\", \"role\": \"member\", \"name\": \"日志隐私核验 顾问\", \"evidence\": \"original_assets/log-privacy-check/merkle_root\", \"member_merkle_root\": \"6d360b510e3419d0534ec6b53345139cc5399beff6395b2bdf72d86594c77aab\"}, {\"slug\": \"api-debug-pro\", \"role\": \"member\", \"name\": \"接口调试 请求构造 响应解析\", \"evidence\": \"original_assets/api-debug-pro/merkle_root\", \"member_merkle_root\": \"c34cd3a1be93c931fabd47ab677114d505714b4a082f3b899564a0893b45d747\"}, {\"slug\": \"lsp-code-intel\", \"role\": \"member\", \"name\": \"代码语义分析 助手\", \"evidence\": \"original_assets/lsp-code-intel/merkle_root\", \"member_merkle_root\": \"5d49db3e7785c018c06168a880c857536aab70ead4ff72776cf5ae99be69fe59\"}], \"team_lead\": \"log-privacy-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-debug-pro.md": "6463cdad5dfe6ce0db5bb680f9c4e71a939f473cb7e50dbbc785323ab9a1def6",
+    "agents/log-privacy-check-team-lead.md": "6f593735ac295012013df70c49c9bf91459ae6920bfd693bde81c526eb00c260",
+    "agents/log-privacy-check.md": "123bd9b3ab65d0fb5a85429a87abc6fc16447d3a87e8bd0815f3b8093ca7a2a3",
+    "agents/lsp-code-intel.md": "5be0acb2bec27222dda8636b872ff3638ce7a5406165dbd3176a6406978bf742",
+    "plugin.json": "b42a4449c8181110624d4948f42a392675e2efa418f0375a4eb71c6c7450caee",
+    "settings.json": "0d6f8fb5951902a77e2fa740dc9d17acab4d89f9bcf679748c0217693d588cc3"
+  }
+}

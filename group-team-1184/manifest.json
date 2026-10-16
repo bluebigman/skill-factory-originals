@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1184",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1184",
+    "kind": "team",
+    "name": "可用性专家",
+    "description": "可用性专家：围绕可用性，覆盖任务导向／出声思维／记录失败，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "usability-test-pro-team-lead",
+        "role": "lead",
+        "name": "可用性主理人",
+        "evidence": null
+      },
+      {
+        "slug": "usability-test-pro",
+        "role": "member",
+        "name": "可用性 测试执行 顾问",
+        "evidence": "original_assets/usability-test-pro/merkle_root",
+        "member_merkle_root": "07a0e1b9314b6ba865758a834a52a84c9ef95090dd32994e86560306a5f64744"
+      },
+      {
+        "slug": "design-taste-check",
+        "role": "member",
+        "name": "设计品味核查 顾问",
+        "evidence": "original_assets/design-taste-check/merkle_root",
+        "member_merkle_root": "8819673bac2cdeaa390dc9c080081edb7970ae7f33158340b300a6e87f1250a4"
+      },
+      {
+        "slug": "form-ux-review",
+        "role": "member",
+        "name": "表单体验评审 顾问",
+        "evidence": "original_assets/form-ux-review/merkle_root",
+        "member_merkle_root": "361232929c868b61f9ee23bcd61a97aa0a02717189fa5f99174c109f266768fc"
+      }
+    ],
+    "team_lead": "usability-test-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2209c65c8b7e126f",
+  "prompt_hash": "c768eb277c2725c2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1184\", \"kind\": \"team\", \"name\": \"可用性专家\", \"description\": \"可用性专家：围绕可用性，覆盖任务导向／出声思维／记录失败，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"usability-test-pro-team-lead\", \"role\": \"lead\", \"name\": \"可用性主理人\", \"evidence\": null}, {\"slug\": \"usability-test-pro\", \"role\": \"member\", \"name\": \"可用性 测试执行 顾问\", \"evidence\": \"original_assets/usability-test-pro/merkle_root\", \"member_merkle_root\": \"07a0e1b9314b6ba865758a834a52a84c9ef95090dd32994e86560306a5f64744\"}, {\"slug\": \"design-taste-check\", \"role\": \"member\", \"name\": \"设计品味核查 顾问\", \"evidence\": \"original_assets/design-taste-check/merkle_root\", \"member_merkle_root\": \"8819673bac2cdeaa390dc9c080081edb7970ae7f33158340b300a6e87f1250a4\"}, {\"slug\": \"form-ux-review\", \"role\": \"member\", \"name\": \"表单体验评审 顾问\", \"evidence\": \"original_assets/form-ux-review/merkle_root\", \"member_merkle_root\": \"361232929c868b61f9ee23bcd61a97aa0a02717189fa5f99174c109f266768fc\"}], \"team_lead\": \"usability-test-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-taste-check.md": "e3e8713fc2ddcf26a23311eea4af78678a2b5636953c20e66c23d860ee5983d8",
+    "agents/form-ux-review.md": "a272d69fb3f11dffeb3a2ed9f3e59549f2e898630326f7559fd7da5539b24709",
+    "agents/usability-test-pro-team-lead.md": "cbad0428b0c6b26ddff0c06c81eaeb79f2cc9655d3794bf4eb4bd789c83cab04",
+    "agents/usability-test-pro.md": "150dff0c81351b4f0624f438eed4a1bcecb3d7f118423f1a4e2e341fa04722ba",
+    "plugin.json": "d0a585cfe3ae30afdd4d6c62c1996ca8e759fa1734e488bbb985a49aad4f60f1",
+    "settings.json": "2b631cd7ebafe6ffaff6d9d1d7cc8f8372316f61523828aa6b18097b981ee0d0"
+  }
+}

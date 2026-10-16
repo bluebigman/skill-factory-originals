@@ -1,0 +1,126 @@
+{
+  "agentName": "copy-hook-craft-team-lead",
+  "agents": [
+    "./agents/copy-hook-craft-team-lead.md",
+    "./agents/copy-hook-craft.md",
+    "./agents/email-lifecycle-pro.md",
+    "./agents/knowledge-base-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文案钩子打磨",
+    "zh": "帮我处理文案钩子打磨"
+  },
+  "description": "copy-hook-craft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文案钩子打磨 requirements, output three deliverables: 痛点前置, 一个卖点, 行动明确. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文案钩子打磨相关需求，输出痛点前置、一个卖点、行动明确三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "copy-hook-craft Team",
+    "zh": "邮件触达生命周期专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "copy-hook-craft-team-lead",
+      "name": {
+        "en": "文案钩子打磨主理人",
+        "zh": "文案钩子打磨主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/copy-hook-craft.png",
+      "id": "copy-hook-craft",
+      "name": {
+        "en": "copy-hook-craft",
+        "zh": "文案钩子打磨 顾问"
+      },
+      "profession": {
+        "en": "copy-hook-craft",
+        "zh": "文案钩子打磨 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/email-lifecycle-pro.png",
+      "id": "email-lifecycle-pro",
+      "name": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "profession": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro.png",
+      "id": "knowledge-base-pro",
+      "name": {
+        "en": "知识库与笔记 Suite",
+        "zh": "文档建站 知识库搭建"
+      },
+      "profession": {
+        "en": "知识库与笔记 Suite",
+        "zh": "文档建站 知识库搭建"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1248",
+  "plugin": "group-team-1248",
+  "profession": {
+    "en": "copy-hook-craft Collaboration Team",
+    "zh": "邮件触达生命周期专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文案钩子打磨",
+      "zh": "帮我处理文案钩子打磨"
+    },
+    {
+      "en": "Plan 邮件触达",
+      "zh": "帮我规划邮件触达"
+    },
+    {
+      "en": "Review 文档建站",
+      "zh": "帮我检查文档建站"
+    }
+  ],
+  "tags": [
+    {
+      "en": "痛点前置",
+      "zh": "痛点前置"
+    },
+    {
+      "en": "一个卖点",
+      "zh": "一个卖点"
+    },
+    {
+      "en": "行动明确",
+      "zh": "行动明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "copy-hook-craft-team-lead",
+    "memberAgents": [
+      "copy-hook-craft",
+      "email-lifecycle-pro",
+      "knowledge-base-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

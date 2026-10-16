@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1225",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1225",
+    "kind": "team",
+    "name": "销售报表图表开发专家",
+    "description": "擅长最小权限、网络受限与文件隔离，覆盖沙箱策略全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-viz-pro-03-team-lead",
+        "role": "lead",
+        "name": "销售报表主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-viz-pro-03",
+        "role": "member",
+        "name": "销售报表 SVG图表开发",
+        "evidence": "original_assets/data-viz-pro-03/merkle_root",
+        "member_merkle_root": "d503f9a770a088996187ccf251d92c167aeec2bfa7f8f283cf4806fedcae20c8"
+      },
+      {
+        "slug": "agent-sandbox-policy",
+        "role": "member",
+        "name": "沙箱策略 隔离边界 顾问",
+        "evidence": "original_assets/agent-sandbox-policy/merkle_root",
+        "member_merkle_root": "a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e"
+      },
+      {
+        "slug": "toolkit-pro-07-fixed",
+        "role": "member",
+        "name": "行情研判 收入筹划 图像比对",
+        "evidence": "original_assets/toolkit-pro-07-fixed/merkle_root",
+        "member_merkle_root": "f069129cb8c47b3acee22d306f7a8a9bbabf0c5b2b5fa1d0a0d2c1586628d82f"
+      }
+    ],
+    "team_lead": "data-viz-pro-03-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f9efd9c229f38736",
+  "prompt_hash": "51743cafeab70f64",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1225\", \"kind\": \"team\", \"name\": \"销售报表图表开发专家\", \"description\": \"擅长最小权限、网络受限与文件隔离，覆盖沙箱策略全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-viz-pro-03-team-lead\", \"role\": \"lead\", \"name\": \"销售报表主理人\", \"evidence\": null}, {\"slug\": \"data-viz-pro-03\", \"role\": \"member\", \"name\": \"销售报表 SVG图表开发\", \"evidence\": \"original_assets/data-viz-pro-03/merkle_root\", \"member_merkle_root\": \"d503f9a770a088996187ccf251d92c167aeec2bfa7f8f283cf4806fedcae20c8\"}, {\"slug\": \"agent-sandbox-policy\", \"role\": \"member\", \"name\": \"沙箱策略 隔离边界 顾问\", \"evidence\": \"original_assets/agent-sandbox-policy/merkle_root\", \"member_merkle_root\": \"a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e\"}, {\"slug\": \"toolkit-pro-07-fixed\", \"role\": \"member\", \"name\": \"行情研判 收入筹划 图像比对\", \"evidence\": \"original_assets/toolkit-pro-07-fixed/merkle_root\", \"member_merkle_root\": \"f069129cb8c47b3acee22d306f7a8a9bbabf0c5b2b5fa1d0a0d2c1586628d82f\"}], \"team_lead\": \"data-viz-pro-03-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-sandbox-policy.md": "9b33b93e459a623f4385d60b3db5de3efe43e8f4c1f452e8827068ac746e7b48",
+    "agents/data-viz-pro-03-team-lead.md": "dc8f041261ed9e6c629e3ca39ea0cc9ab1751eab5e61728153b8672854a95180",
+    "agents/data-viz-pro-03.md": "cbb68abdc9c37ac34940a26ae31bb73c7d38b952ed9bbd0833ea5815211629a8",
+    "agents/toolkit-pro-07-fixed.md": "4b080cfce61cc43972be26fc2c44e383350b13a0b2997b039a1f7e28b15db663",
+    "plugin.json": "f18845948e9f333cc2729b51ee060613ad4a8683bd183add95ec4e52d4f3129b",
+    "settings.json": "adb54283a37fae28e95dcad54e75d9877e8f93e32822ca1d797b38bfc68c434d"
+  }
+}

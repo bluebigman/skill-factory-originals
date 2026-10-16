@@ -1,0 +1,126 @@
+{
+  "agentName": "content-metrics-define-team-lead",
+  "agents": [
+    "./agents/content-metrics-define-team-lead.md",
+    "./agents/content-metrics-define.md",
+    "./agents/email-professional.md",
+    "./agents/cn-rewrite-deaifier.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容指标定义",
+    "zh": "帮我处理内容指标定义"
+  },
+  "description": "content-metrics-define team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内容指标定义 end-to-end: 口径唯一, 定期复核 and 主题具体. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长口径唯一、定期复核与主题具体，覆盖内容指标定义全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "content-metrics-define Team",
+    "zh": "内容指标定义专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-metrics-define-team-lead",
+      "name": {
+        "en": "内容指标定义主理人",
+        "zh": "内容指标定义主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-metrics-define.png",
+      "id": "content-metrics-define",
+      "name": {
+        "en": "content-metrics-define",
+        "zh": "内容指标定义 顾问"
+      },
+      "profession": {
+        "en": "content-metrics-define",
+        "zh": "内容指标定义 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/email-professional.png",
+      "id": "email-professional",
+      "name": {
+        "en": "email-professional",
+        "zh": "商务邮件撰写 顾问"
+      },
+      "profession": {
+        "en": "email-professional",
+        "zh": "商务邮件撰写 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cn-rewrite-deaifier.png",
+      "id": "cn-rewrite-deaifier",
+      "name": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "profession": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1099",
+  "plugin": "group-team-1099",
+  "profession": {
+    "en": "content-metrics-define Collaboration Team",
+    "zh": "内容指标定义专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容指标定义",
+      "zh": "帮我处理内容指标定义"
+    },
+    {
+      "en": "Plan 商务邮件撰写",
+      "zh": "帮我规划商务邮件撰写"
+    },
+    {
+      "en": "Review 中文改写",
+      "zh": "帮我检查中文改写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "口径唯一",
+      "zh": "口径唯一"
+    },
+    {
+      "en": "定期复核",
+      "zh": "定期复核"
+    },
+    {
+      "en": "可获取",
+      "zh": "可获取"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-metrics-define-team-lead",
+    "memberAgents": [
+      "content-metrics-define",
+      "email-professional",
+      "cn-rewrite-deaifier"
+    ]
+  },
+  "version": "1.0.0"
+}

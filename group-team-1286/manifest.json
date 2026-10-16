@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-1286",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1286",
+    "kind": "team",
+    "name": "技能组合专家",
+    "description": "技能编排专家：围绕沙箱策略，覆盖最小权限／网络受限／文件隔离，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-toolkit-pro-03-team-lead",
+        "role": "lead",
+        "name": "技能编排主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-toolkit-pro-03",
+        "role": "member",
+        "name": "技能编排 技能组合 开发辅助",
+        "evidence": "original_assets/agent-toolkit-pro-03/merkle_root",
+        "member_merkle_root": "0759ce15c667a4de5be429b703071b9f16827935fad82b26be999f434a809152"
+      },
+      {
+        "slug": "agent-sandbox-policy",
+        "role": "member",
+        "name": "沙箱策略 隔离边界 顾问",
+        "evidence": "original_assets/agent-sandbox-policy/merkle_root",
+        "member_merkle_root": "a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e"
+      },
+      {
+        "slug": "token-cost-control-pro",
+        "role": "member",
+        "name": "成本控制 上下文压 顾问",
+        "evidence": "original_assets/token-cost-control-pro/merkle_root",
+        "member_merkle_root": "6d5c2086f42a3ef54cb30e4b244fe65b14a6ff17350a3af6f7d07354bc1a2983"
+      }
+    ],
+    "team_lead": "agent-toolkit-pro-03-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8e27ed346759f8f4",
+  "prompt_hash": "6e3c77e292bc92c8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1286\", \"kind\": \"team\", \"name\": \"技能组合专家\", \"description\": \"技能编排专家：围绕沙箱策略，覆盖最小权限／网络受限／文件隔离，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-toolkit-pro-03-team-lead\", \"role\": \"lead\", \"name\": \"技能编排主理人\", \"evidence\": null}, {\"slug\": \"agent-toolkit-pro-03\", \"role\": \"member\", \"name\": \"技能编排 技能组合 开发辅助\", \"evidence\": \"original_assets/agent-toolkit-pro-03/merkle_root\", \"member_merkle_root\": \"0759ce15c667a4de5be429b703071b9f16827935fad82b26be999f434a809152\"}, {\"slug\": \"agent-sandbox-policy\", \"role\": \"member\", \"name\": \"沙箱策略 隔离边界 顾问\", \"evidence\": \"original_assets/agent-sandbox-policy/merkle_root\", \"member_merkle_root\": \"a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e\"}, {\"slug\": \"token-cost-control-pro\", \"role\": \"member\", \"name\": \"成本控制 上下文压 顾问\", \"evidence\": \"original_assets/token-cost-control-pro/merkle_root\", \"member_merkle_root\": \"6d5c2086f42a3ef54cb30e4b244fe65b14a6ff17350a3af6f7d07354bc1a2983\"}], \"team_lead\": \"agent-toolkit-pro-03-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-sandbox-policy.md": "35a4ee9208667a8eee0fd037bd9989788ae8b918fc73b686cd23609fbfb74f49",
+    "agents/agent-toolkit-pro-03-team-lead.md": "eba34540efd4b400a36e9722febeb74a06f88832fb56dabfef192098952418d7",
+    "agents/agent-toolkit-pro-03.md": "f129e67fce8c86dd0576a2192a4fe04e138195d17d8f9b9db0227f120aa20cc0",
+    "agents/token-cost-control-pro.md": "a75d4580fb054b9f66792a26b97574688723b5bd2c0aff643effe23c85fbef17",
+    "plugin.json": "310363be126c4e3489f87a339c4d3c1f9c36f4e9af66b8eefef512b465726c26",
+    "settings.json": "e3a6ac0f6292fac90bcd2f322affb410dedfe646825033c9968d5416e68722ff"
+  }
+}

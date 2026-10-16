@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1231",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1231",
+    "kind": "team",
+    "name": "代码检索定位专家",
+    "description": "擅长先定符号、组合条件与历史追溯，覆盖代码检索定位全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "code-search-pro-team-lead",
+        "role": "lead",
+        "name": "代码检索定位主理人",
+        "evidence": null
+      },
+      {
+        "slug": "code-search-pro",
+        "role": "member",
+        "name": "代码检索定位 助手",
+        "evidence": "original_assets/code-search-pro/merkle_root",
+        "member_merkle_root": "77b0e1c3aa8914369200e3b952e09942d97ce80138ab7e27bc0394d471670905"
+      },
+      {
+        "slug": "data-clean-pro-01-fixed",
+        "role": "member",
+        "name": "代码仓数据接入 结构化转换",
+        "evidence": "original_assets/data-clean-pro-01-fixed/merkle_root",
+        "member_merkle_root": "ab0e7ef18d56f0e89c60178033fb96724b1625ff6edbcfc0d0025f642c362126"
+      },
+      {
+        "slug": "toolkit-pro-08-fixed",
+        "role": "member",
+        "name": "UX设计 样例解析 情节构建",
+        "evidence": "original_assets/toolkit-pro-08-fixed/merkle_root",
+        "member_merkle_root": "4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6"
+      }
+    ],
+    "team_lead": "code-search-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c912f6c7caa382f7",
+  "prompt_hash": "48a6e9e6a94b3547",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1231\", \"kind\": \"team\", \"name\": \"代码检索定位专家\", \"description\": \"擅长先定符号、组合条件与历史追溯，覆盖代码检索定位全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"code-search-pro-team-lead\", \"role\": \"lead\", \"name\": \"代码检索定位主理人\", \"evidence\": null}, {\"slug\": \"code-search-pro\", \"role\": \"member\", \"name\": \"代码检索定位 助手\", \"evidence\": \"original_assets/code-search-pro/merkle_root\", \"member_merkle_root\": \"77b0e1c3aa8914369200e3b952e09942d97ce80138ab7e27bc0394d471670905\"}, {\"slug\": \"data-clean-pro-01-fixed\", \"role\": \"member\", \"name\": \"代码仓数据接入 结构化转换\", \"evidence\": \"original_assets/data-clean-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"ab0e7ef18d56f0e89c60178033fb96724b1625ff6edbcfc0d0025f642c362126\"}, {\"slug\": \"toolkit-pro-08-fixed\", \"role\": \"member\", \"name\": \"UX设计 样例解析 情节构建\", \"evidence\": \"original_assets/toolkit-pro-08-fixed/merkle_root\", \"member_merkle_root\": \"4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6\"}], \"team_lead\": \"code-search-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-search-pro-team-lead.md": "710e141dbcd07ca9ed64a13f5fee5cf77ca99931b24035aea75e6620cb904a15",
+    "agents/code-search-pro.md": "69dd9b24a7f1d6515a88282af52e61ead926c9d138f687e854ff1d807f568bf1",
+    "agents/data-clean-pro-01-fixed.md": "6fe70ada967c9f6165c4bf6de893e0501ed7042fddd6a5777c9c1b2b4ed51193",
+    "agents/toolkit-pro-08-fixed.md": "d5d6a6ea7a612151155eb1e924d46de1e2618f0a2b89fb58a66224eef764a03a",
+    "plugin.json": "a171f159921f5739dc202ec2c73cfe1c63b06e4b1ddd523798d079a359e07065",
+    "settings.json": "66a0c6d54173d6862919f0b86810ae366286292b7c4083ee8e1415ed4d94cb1d"
+  }
+}

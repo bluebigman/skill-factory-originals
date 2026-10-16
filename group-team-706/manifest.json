@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-706",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-706",
+    "kind": "team",
+    "name": "表格处理数据整理专家",
+    "description": "表格处理数据整理专家：围绕观测看板，覆盖指标精简／层次分明／异常高亮，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-obs-dashboard-team-lead",
+        "role": "lead",
+        "name": "观测看板主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-obs-dashboard",
+        "role": "member",
+        "name": "观测看板 指标呈现 顾问",
+        "evidence": "original_assets/agent-obs-dashboard/merkle_root",
+        "member_merkle_root": "152f70bd1fac917b845d48a858e57c00feec909407cca69b549e0f8727b3dfb5"
+      },
+      {
+        "slug": "excel-table-expert",
+        "role": "member",
+        "name": "Excel表格处理 数据整理",
+        "evidence": "original_assets/excel-table-expert/merkle_root",
+        "member_merkle_root": "1b9658c0a33eb39748b9eb9340e8424cd23d8534f1d402a16b666d183267280c"
+      },
+      {
+        "slug": "etl-pipeline-guard",
+        "role": "member",
+        "name": "ETL 管线 顾问",
+        "evidence": "original_assets/etl-pipeline-guard/merkle_root",
+        "member_merkle_root": "ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4"
+      }
+    ],
+    "team_lead": "agent-obs-dashboard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "86eba53934ffd16d",
+  "prompt_hash": "1b0e0ce362e74e6b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-706\", \"kind\": \"team\", \"name\": \"表格处理数据整理专家\", \"description\": \"表格处理数据整理专家：围绕观测看板，覆盖指标精简／层次分明／异常高亮，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-obs-dashboard-team-lead\", \"role\": \"lead\", \"name\": \"观测看板主理人\", \"evidence\": null}, {\"slug\": \"agent-obs-dashboard\", \"role\": \"member\", \"name\": \"观测看板 指标呈现 顾问\", \"evidence\": \"original_assets/agent-obs-dashboard/merkle_root\", \"member_merkle_root\": \"152f70bd1fac917b845d48a858e57c00feec909407cca69b549e0f8727b3dfb5\"}, {\"slug\": \"excel-table-expert\", \"role\": \"member\", \"name\": \"Excel表格处理 数据整理\", \"evidence\": \"original_assets/excel-table-expert/merkle_root\", \"member_merkle_root\": \"1b9658c0a33eb39748b9eb9340e8424cd23d8534f1d402a16b666d183267280c\"}, {\"slug\": \"etl-pipeline-guard\", \"role\": \"member\", \"name\": \"ETL 管线 顾问\", \"evidence\": \"original_assets/etl-pipeline-guard/merkle_root\", \"member_merkle_root\": \"ff796b6331818cfdff5d4da386a78e24372d46aade56e386e51517e71c15bae4\"}], \"team_lead\": \"agent-obs-dashboard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-obs-dashboard-team-lead.md": "5196f1b51657d91d8434ac357dae635deea9f9f5415185e52184b961c47a715d",
+    "agents/agent-obs-dashboard.md": "76176ad9e6fb907dc0fc9ecc2b38c0fd0aef4aa9532e3ee515115fb5eb8be7b5",
+    "agents/etl-pipeline-guard.md": "e65ef501b1992d38d4ee4d98c36cdf7e919809f40697f1b7b7cf5e915d2fea56",
+    "agents/excel-table-expert.md": "97c0a4cff0ba1e9a4e91ef0761ad87f863e55cac4e9f74425d3c66c921c796e6",
+    "plugin.json": "1f7d97614baa9b77a0fc03fd2b5cce91d7426622ec4499cdde7af65baf0aaf36",
+    "settings.json": "3b0ce3ddb6489b5507c92fdcdc887e9ad000a60cadca15c9eb1d961daf632021"
+  }
+}

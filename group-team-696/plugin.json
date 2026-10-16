@@ -1,0 +1,126 @@
+{
+  "agentName": "gamification-design-team-lead",
+  "agents": [
+    "./agents/gamification-design-team-lead.md",
+    "./agents/gamification-design.md",
+    "./agents/error-message-pro.md",
+    "./agents/virtual-space-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 任务激励",
+    "zh": "帮我处理任务激励"
+  },
+  "description": "gamification-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 任务激励 end-to-end: 保留自主, 说明原因 and 给出动作. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长保留自主、说明原因与给出动作，覆盖任务激励全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "gamification-design Team",
+    "zh": "错误提示文案设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "gamification-design-team-lead",
+      "name": {
+        "en": "任务激励主理人",
+        "zh": "任务激励主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/gamification-design.png",
+      "id": "gamification-design",
+      "name": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "profession": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/error-message-pro.png",
+      "id": "error-message-pro",
+      "name": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "profession": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/virtual-space-pro.png",
+      "id": "virtual-space-pro",
+      "name": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "profession": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-696",
+  "plugin": "group-team-696",
+  "profession": {
+    "en": "gamification-design Collaboration Team",
+    "zh": "错误提示文案设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 任务激励",
+      "zh": "帮我处理任务激励"
+    },
+    {
+      "en": "Plan 错误提示",
+      "zh": "帮我规划错误提示"
+    },
+    {
+      "en": "Review 虚拟空间",
+      "zh": "帮我检查虚拟空间"
+    }
+  ],
+  "tags": [
+    {
+      "en": "难度匹配",
+      "zh": "难度匹配"
+    },
+    {
+      "en": "保留自主",
+      "zh": "保留自主"
+    },
+    {
+      "en": "防疲劳",
+      "zh": "防疲劳"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "gamification-design-team-lead",
+    "memberAgents": [
+      "gamification-design",
+      "error-message-pro",
+      "virtual-space-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-768",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-768",
+    "kind": "team",
+    "name": "根因分析专家",
+    "description": "擅长台账齐全、周期强制与状态标识，覆盖计量器具全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "calibration-manage-pro-team-lead",
+        "role": "lead",
+        "name": "计量器具主理人",
+        "evidence": null
+      },
+      {
+        "slug": "calibration-manage-pro",
+        "role": "member",
+        "name": "计量器具 校准管理 顾问",
+        "evidence": "original_assets/calibration-manage-pro/merkle_root",
+        "member_merkle_root": "bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf"
+      },
+      {
+        "slug": "incident-postmortem-pro",
+        "role": "member",
+        "name": "事故复盘 根因分析 顾问",
+        "evidence": "original_assets/incident-postmortem-pro/merkle_root",
+        "member_merkle_root": "19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1"
+      },
+      {
+        "slug": "release-readiness-pro",
+        "role": "member",
+        "name": "发布就绪 检查清单 顾问",
+        "evidence": "original_assets/release-readiness-pro/merkle_root",
+        "member_merkle_root": "80ee289bad061528d4c264336fdc3282999291e551b370cba5239ebdc9b3727d"
+      }
+    ],
+    "team_lead": "calibration-manage-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c84c69f9f091e880",
+  "prompt_hash": "63a3572b8b14aa5d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-768\", \"kind\": \"team\", \"name\": \"根因分析专家\", \"description\": \"擅长台账齐全、周期强制与状态标识，覆盖计量器具全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"calibration-manage-pro-team-lead\", \"role\": \"lead\", \"name\": \"计量器具主理人\", \"evidence\": null}, {\"slug\": \"calibration-manage-pro\", \"role\": \"member\", \"name\": \"计量器具 校准管理 顾问\", \"evidence\": \"original_assets/calibration-manage-pro/merkle_root\", \"member_merkle_root\": \"bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf\"}, {\"slug\": \"incident-postmortem-pro\", \"role\": \"member\", \"name\": \"事故复盘 根因分析 顾问\", \"evidence\": \"original_assets/incident-postmortem-pro/merkle_root\", \"member_merkle_root\": \"19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1\"}, {\"slug\": \"release-readiness-pro\", \"role\": \"member\", \"name\": \"发布就绪 检查清单 顾问\", \"evidence\": \"original_assets/release-readiness-pro/merkle_root\", \"member_merkle_root\": \"80ee289bad061528d4c264336fdc3282999291e551b370cba5239ebdc9b3727d\"}], \"team_lead\": \"calibration-manage-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/calibration-manage-pro-team-lead.md": "0ac5d70a821522f02caebe742c1445fa440105046e789ff13cad6689cd5f7e16",
+    "agents/calibration-manage-pro.md": "356178246e7e146fd0afbdba4bf8893b43aff4f3724fa5eb999fcb4354c741d0",
+    "agents/incident-postmortem-pro.md": "2100caf513ccee9460d8784a20a13449b35c9c7ca26f11d35c3c892e4a0c574a",
+    "agents/release-readiness-pro.md": "1351cfa084e7e8f11b4f825a8a86eeb62b40d64e46af4796a4b00daf389eb569",
+    "plugin.json": "c7da50ded1b7228c6aefd9fdee225c306c01147e74bd15583f014a1ce5ff76f0",
+    "settings.json": "3f1c9267b0f0758700d27482c2df7b644f01654355de928b139244cdec5e6ec5"
+  }
+}

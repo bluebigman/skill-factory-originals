@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-128",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-128",
+    "kind": "team",
+    "name": "居家 图片 邮件 团队",
+    "description": "居家 图片 邮件 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "home-safety-check-team-lead",
+        "role": "lead",
+        "name": "居家安全主理人",
+        "evidence": null
+      },
+      {
+        "slug": "home-safety-check",
+        "role": "member",
+        "name": "居家安全 隐患排查 防护",
+        "evidence": "original_assets/home-safety-check/merkle_root",
+        "member_merkle_root": "d19744ee4567bf9f7b58f6303c7d40089416eb5ed1dc4ed7ca9268d8237e9afb"
+      },
+      {
+        "slug": "image-batch-expert",
+        "role": "member",
+        "name": "图片批处理 格式转换",
+        "evidence": "original_assets/image-batch-expert/merkle_root",
+        "member_merkle_root": "a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870"
+      },
+      {
+        "slug": "cold-email-expert",
+        "role": "member",
+        "name": "邮件营销 标题撰写 转化优化",
+        "evidence": "original_assets/cold-email-expert/merkle_root",
+        "member_merkle_root": "458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc"
+      }
+    ],
+    "team_lead": "home-safety-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e777008f28c787d4",
+  "prompt_hash": "920cd6047b40688c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-128\", \"kind\": \"team\", \"name\": \"居家 图片 邮件 团队\", \"description\": \"居家 图片 邮件 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"home-safety-check-team-lead\", \"role\": \"lead\", \"name\": \"居家安全主理人\", \"evidence\": null}, {\"slug\": \"home-safety-check\", \"role\": \"member\", \"name\": \"居家安全 隐患排查 防护\", \"evidence\": \"original_assets/home-safety-check/merkle_root\", \"member_merkle_root\": \"d19744ee4567bf9f7b58f6303c7d40089416eb5ed1dc4ed7ca9268d8237e9afb\"}, {\"slug\": \"image-batch-expert\", \"role\": \"member\", \"name\": \"图片批处理 格式转换\", \"evidence\": \"original_assets/image-batch-expert/merkle_root\", \"member_merkle_root\": \"a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870\"}, {\"slug\": \"cold-email-expert\", \"role\": \"member\", \"name\": \"邮件营销 标题撰写 转化优化\", \"evidence\": \"original_assets/cold-email-expert/merkle_root\", \"member_merkle_root\": \"458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc\"}], \"team_lead\": \"home-safety-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cold-email-expert.md": "85018ae9f2ef34eb54990902fc454cf351be48262874258364a3c11ec9258743",
+    "agents/home-safety-check-team-lead.md": "7d1c9791effaae3f714eae8793bfed5c4f3406cb1d61049e5da3e159061d9e1c",
+    "agents/home-safety-check.md": "9fc1d4cc71d498e8a6d0dc032499713777431d210eb1086e23174162081a38e6",
+    "agents/image-batch-expert.md": "82efb639b9eaf31e895cc3b75a09f42af3a25bb6814a6063b2115c6ba1740194",
+    "plugin.json": "4f27b3e2e06a1f8da12988a950407b521aee07251e73356ecb1233c22998116f",
+    "settings.json": "ba9289921f71a2eeb46e46c7bc2cd5826e4cb6386532d3692aee61c6590acef4"
+  }
+}

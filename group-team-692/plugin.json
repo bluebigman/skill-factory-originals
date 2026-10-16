@@ -1,0 +1,126 @@
+{
+  "agentName": "pricing-page-ux-team-lead",
+  "agents": [
+    "./agents/pricing-page-ux-team-lead.md",
+    "./agents/pricing-page-ux.md",
+    "./agents/gamification-design.md",
+    "./agents/prototype-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 定价页面",
+    "zh": "帮我处理定价页面"
+  },
+  "description": "pricing-page-ux team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 定价页面 end-to-end: 维度对齐, 推荐克制 and 价格透明. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长维度对齐、推荐克制与价格透明，覆盖定价页面全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "pricing-page-ux Team",
+    "zh": "系统设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pricing-page-ux-team-lead",
+      "name": {
+        "en": "定价页面主理人",
+        "zh": "定价页面主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pricing-page-ux.png",
+      "id": "pricing-page-ux",
+      "name": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "profession": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/gamification-design.png",
+      "id": "gamification-design",
+      "name": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "profession": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prototype-method.png",
+      "id": "prototype-method",
+      "name": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "profession": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-692",
+  "plugin": "group-team-692",
+  "profession": {
+    "en": "pricing-page-ux Collaboration Team",
+    "zh": "系统设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 定价页面",
+      "zh": "帮我处理定价页面"
+    },
+    {
+      "en": "Plan 任务激励",
+      "zh": "帮我规划任务激励"
+    },
+    {
+      "en": "Review 原型验证",
+      "zh": "帮我检查原型验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "价格透明",
+      "zh": "价格透明"
+    },
+    {
+      "en": "疑虑前置",
+      "zh": "疑虑前置"
+    },
+    {
+      "en": "拒绝暗黑",
+      "zh": "拒绝暗黑"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pricing-page-ux-team-lead",
+    "memberAgents": [
+      "pricing-page-ux",
+      "gamification-design",
+      "prototype-method"
+    ]
+  },
+  "version": "1.0.0"
+}

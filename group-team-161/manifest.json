@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-161",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-161",
+    "kind": "team",
+    "name": "输出 内容 行为 团队",
+    "description": "输出 内容 行为 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-output-verify-team-lead",
+        "role": "lead",
+        "name": "输出验证主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-output-verify",
+        "role": "member",
+        "name": "输出验证 幻觉检测 置信标注",
+        "evidence": "original_assets/agent-output-verify/merkle_root",
+        "member_merkle_root": "625512ee2ca9149cb9d877a61b3787b7f032adcf8fc817d62eb9fdeda3094567"
+      },
+      {
+        "slug": "content-moderation",
+        "role": "member",
+        "name": "内容审核 红线识别 顾问",
+        "evidence": "original_assets/content-moderation/merkle_root",
+        "member_merkle_root": "87fcbb144f1da4bf393ebe532422452f93fc1a5d946550febc51cc99b4253e86"
+      },
+      {
+        "slug": "agent-trace-audit",
+        "role": "member",
+        "name": "行为审计 轨迹留痕 越权接管",
+        "evidence": "original_assets/agent-trace-audit/merkle_root",
+        "member_merkle_root": "6fd2bc7e27b18f054554e14d1fbebd135ccebde395baf1a6fc4e34adcd5a168a"
+      }
+    ],
+    "team_lead": "agent-output-verify-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "32b3828cb3737838",
+  "prompt_hash": "5000bef342dcc012",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-161\", \"kind\": \"team\", \"name\": \"输出 内容 行为 团队\", \"description\": \"输出 内容 行为 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-output-verify-team-lead\", \"role\": \"lead\", \"name\": \"输出验证主理人\", \"evidence\": null}, {\"slug\": \"agent-output-verify\", \"role\": \"member\", \"name\": \"输出验证 幻觉检测 置信标注\", \"evidence\": \"original_assets/agent-output-verify/merkle_root\", \"member_merkle_root\": \"625512ee2ca9149cb9d877a61b3787b7f032adcf8fc817d62eb9fdeda3094567\"}, {\"slug\": \"content-moderation\", \"role\": \"member\", \"name\": \"内容审核 红线识别 顾问\", \"evidence\": \"original_assets/content-moderation/merkle_root\", \"member_merkle_root\": \"87fcbb144f1da4bf393ebe532422452f93fc1a5d946550febc51cc99b4253e86\"}, {\"slug\": \"agent-trace-audit\", \"role\": \"member\", \"name\": \"行为审计 轨迹留痕 越权接管\", \"evidence\": \"original_assets/agent-trace-audit/merkle_root\", \"member_merkle_root\": \"6fd2bc7e27b18f054554e14d1fbebd135ccebde395baf1a6fc4e34adcd5a168a\"}], \"team_lead\": \"agent-output-verify-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-verify-team-lead.md": "c2742626bc03eb6463b89a4580c5544749d8e343908af54f916207ed64740f2b",
+    "agents/agent-output-verify.md": "ab7edc503167edd721a490a7cdfebb8825c67b62db7d3d25633dc11035c87847",
+    "agents/agent-trace-audit.md": "b776e18ac8d4b941942797bf87eef44464a7cc725dce8d557d525551c90a7239",
+    "agents/content-moderation.md": "89aac946b058f8515413ac48569fcedeb167b0e6ad3339c954637e13a135b8f8",
+    "plugin.json": "31776e92e23b8885694ef2bc2b2ecc3972f06b5a3050f6ee19e523ef1eb5ef90",
+    "settings.json": "4b7406cfae166f50307aee4d55d8d575e579663ce513ab007ce6ccd55db6d77a"
+  }
+}

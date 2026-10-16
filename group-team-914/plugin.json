@@ -1,0 +1,126 @@
+{
+  "agentName": "internal-comms-draft-team-lead",
+  "agents": [
+    "./agents/internal-comms-draft-team-lead.md",
+    "./agents/internal-comms-draft.md",
+    "./agents/doc-convert-pro-fixed.md",
+    "./agents/social-post-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内部沟通文案",
+    "zh": "帮我处理内部沟通文案"
+  },
+  "description": "internal-comms-draft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内部沟通文案 end-to-end: 受众先行, 行动明确 and 语气一致. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长受众先行、行动明确与语气一致，覆盖内部沟通文案全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "internal-comms-draft Team",
+    "zh": "内部沟通文案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "internal-comms-draft-team-lead",
+      "name": {
+        "en": "内部沟通文案主理人",
+        "zh": "内部沟通文案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/internal-comms-draft.png",
+      "id": "internal-comms-draft",
+      "name": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "profession": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-fixed.png",
+      "id": "doc-convert-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/social-post-plan.png",
+      "id": "social-post-plan",
+      "name": {
+        "en": "social-post-plan",
+        "zh": "社交内容排期 助手"
+      },
+      "profession": {
+        "en": "social-post-plan",
+        "zh": "社交内容排期 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-914",
+  "plugin": "group-team-914",
+  "profession": {
+    "en": "internal-comms-draft Collaboration Team",
+    "zh": "内部沟通文案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内部沟通文案",
+      "zh": "帮我处理内部沟通文案"
+    },
+    {
+      "en": "Plan 图片标准化",
+      "zh": "帮我规划图片标准化"
+    },
+    {
+      "en": "Review 社交内容排期",
+      "zh": "帮我检查社交内容排期"
+    }
+  ],
+  "tags": [
+    {
+      "en": "受众先行",
+      "zh": "受众先行"
+    },
+    {
+      "en": "行动明确",
+      "zh": "行动明确"
+    },
+    {
+      "en": "语气一致",
+      "zh": "语气一致"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "internal-comms-draft-team-lead",
+    "memberAgents": [
+      "internal-comms-draft",
+      "doc-convert-pro-fixed",
+      "social-post-plan"
+    ]
+  },
+  "version": "1.0.0"
+}

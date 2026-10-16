@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-quota-guard-team-lead",
+  "agents": [
+    "./agents/agent-quota-guard-team-lead.md",
+    "./agents/agent-quota-guard.md",
+    "./agents/influencer-compliance.md",
+    "./agents/agent-supervision-guard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 配额守卫",
+    "zh": "帮我处理配额守卫"
+  },
+  "description": "agent-quota-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 配额守卫 requirements, output three deliverables: 预算上限, 失败即停, 来源盘点. Verifiable end-to-end, evidence per step.",
+    "zh": "输入配额守卫相关需求，输出预算上限、失败即停、来源盘点三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-quota-guard Team",
+    "zh": "配额守卫专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-quota-guard-team-lead",
+      "name": {
+        "en": "配额守卫主理人",
+        "zh": "配额守卫主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-quota-guard.png",
+      "id": "agent-quota-guard",
+      "name": {
+        "en": "agent-quota-guard",
+        "zh": "配额守卫 资源限额 顾问"
+      },
+      "profession": {
+        "en": "agent-quota-guard",
+        "zh": "配额守卫 资源限额 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/influencer-compliance.png",
+      "id": "influencer-compliance",
+      "name": {
+        "en": "influencer-compliance",
+        "zh": "推广合规 标识规范 顾问"
+      },
+      "profession": {
+        "en": "influencer-compliance",
+        "zh": "推广合规 标识规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-supervision-guard.png",
+      "id": "agent-supervision-guard",
+      "name": {
+        "en": "agent-supervision-guard",
+        "zh": "运行监督 异常告警 顾问"
+      },
+      "profession": {
+        "en": "agent-supervision-guard",
+        "zh": "运行监督 异常告警 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-260",
+  "plugin": "group-team-260",
+  "profession": {
+    "en": "agent-quota-guard Collaboration Team",
+    "zh": "配额守卫专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 配额守卫",
+      "zh": "帮我处理配额守卫"
+    },
+    {
+      "en": "Plan 推广合规",
+      "zh": "帮我规划推广合规"
+    },
+    {
+      "en": "Review 运行监督",
+      "zh": "帮我检查运行监督"
+    }
+  ],
+  "tags": [
+    {
+      "en": "预算上限",
+      "zh": "预算上限"
+    },
+    {
+      "en": "失败即停",
+      "zh": "失败即停"
+    },
+    {
+      "en": "来源盘点",
+      "zh": "来源盘点"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-quota-guard-team-lead",
+    "memberAgents": [
+      "agent-quota-guard",
+      "influencer-compliance",
+      "agent-supervision-guard"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-677",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-677",
+    "kind": "team",
+    "name": "显微成像专家",
+    "description": "显微成像专家：围绕SQL，覆盖索引匹配／避免函数／分页优化，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-toolkit-pro-01-team-lead",
+        "role": "lead",
+        "name": "显微成像主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-toolkit-pro-01",
+        "role": "member",
+        "name": "显微成像 批量转换 流程编排",
+        "evidence": "original_assets/agent-toolkit-pro-01/merkle_root",
+        "member_merkle_root": "d7005dd8bd0cd1abddb92a46e8505795411060d0a7a386e382b66e793db141e2"
+      },
+      {
+        "slug": "sql-perf-tune",
+        "role": "member",
+        "name": "SQL 调优 顾问",
+        "evidence": "original_assets/sql-perf-tune/merkle_root",
+        "member_merkle_root": "e6b662ffe52a65d1a2a2d94c00fd2ea404a3d977efb7c0256bfcaafa6537838e"
+      },
+      {
+        "slug": "data-clean-pro-05",
+        "role": "member",
+        "name": "数据解析 信息抽取 置信标注",
+        "evidence": "original_assets/data-clean-pro-05/merkle_root",
+        "member_merkle_root": "cae6787ac17b521275a78da853a1efe6e374161375bcbb1dd9819507d4a97906"
+      }
+    ],
+    "team_lead": "agent-toolkit-pro-01-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4befb609fba95465",
+  "prompt_hash": "846edf5f395189b5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-677\", \"kind\": \"team\", \"name\": \"显微成像专家\", \"description\": \"显微成像专家：围绕SQL，覆盖索引匹配／避免函数／分页优化，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-toolkit-pro-01-team-lead\", \"role\": \"lead\", \"name\": \"显微成像主理人\", \"evidence\": null}, {\"slug\": \"agent-toolkit-pro-01\", \"role\": \"member\", \"name\": \"显微成像 批量转换 流程编排\", \"evidence\": \"original_assets/agent-toolkit-pro-01/merkle_root\", \"member_merkle_root\": \"d7005dd8bd0cd1abddb92a46e8505795411060d0a7a386e382b66e793db141e2\"}, {\"slug\": \"sql-perf-tune\", \"role\": \"member\", \"name\": \"SQL 调优 顾问\", \"evidence\": \"original_assets/sql-perf-tune/merkle_root\", \"member_merkle_root\": \"e6b662ffe52a65d1a2a2d94c00fd2ea404a3d977efb7c0256bfcaafa6537838e\"}, {\"slug\": \"data-clean-pro-05\", \"role\": \"member\", \"name\": \"数据解析 信息抽取 置信标注\", \"evidence\": \"original_assets/data-clean-pro-05/merkle_root\", \"member_merkle_root\": \"cae6787ac17b521275a78da853a1efe6e374161375bcbb1dd9819507d4a97906\"}], \"team_lead\": \"agent-toolkit-pro-01-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-toolkit-pro-01-team-lead.md": "3580f011ef82e7cffa4e936b08a41ec2c247d6f4cd0e902dea46a19b7be762e6",
+    "agents/agent-toolkit-pro-01.md": "baff0c1a2b3ee2809b6d1e03a5a344a8b770ceabab76edf70a98a0e194194ce4",
+    "agents/data-clean-pro-05.md": "e07b05c00f75dd0de1aa46fb3779d01f5c638a0feb2720cc92ac70bc5b8624b2",
+    "agents/sql-perf-tune.md": "487bdc2ad7e9601ebb2c87fa0bee5d9ec482a7ec9fc5d802e08fedd28aae39f5",
+    "plugin.json": "886c08e674cb273e9cf1c5bfb65207cd33dc3dc26b94422ff93fe659f5304952",
+    "settings.json": "f37fa569367c35f28644b8b4e01e18b17892e0e13bf504e92496c5a6fc30c97b"
+  }
+}

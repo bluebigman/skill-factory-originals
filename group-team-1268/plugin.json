@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-guard-team-lead",
+  "agents": [
+    "./agents/data-pipeline-guard-team-lead.md",
+    "./agents/data-pipeline-guard.md",
+    "./agents/agent-tool-selection.md",
+    "./agents/api-transmission-assurance-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据管道守护",
+    "zh": "帮我处理数据管道守护"
+  },
+  "description": "data-pipeline-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 数据管道守护, covers 幂等写入 / 断点续跑 / 质量校验, delivering structured results and actionable checklists.",
+    "zh": "数据管道守护专家：围绕数据管道守护，覆盖幂等写入／断点续跑／质量校验，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "data-pipeline-guard Team",
+    "zh": "数据管道守护专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-guard-team-lead",
+      "name": {
+        "en": "数据管道守护主理人",
+        "zh": "数据管道守护主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-guard.png",
+      "id": "data-pipeline-guard",
+      "name": {
+        "en": "data-pipeline-guard",
+        "zh": "数据管道守护 顾问"
+      },
+      "profession": {
+        "en": "data-pipeline-guard",
+        "zh": "数据管道守护 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-tool-selection.png",
+      "id": "agent-tool-selection",
+      "name": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "profession": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-transmission-assurance-expert.png",
+      "id": "api-transmission-assurance-expert",
+      "name": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "profession": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1268",
+  "plugin": "group-team-1268",
+  "profession": {
+    "en": "data-pipeline-guard Collaboration Team",
+    "zh": "数据管道守护专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据管道守护",
+      "zh": "帮我处理数据管道守护"
+    },
+    {
+      "en": "Plan 工具选择",
+      "zh": "帮我规划工具选择"
+    },
+    {
+      "en": "Review 接口联调",
+      "zh": "帮我检查接口联调"
+    }
+  ],
+  "tags": [
+    {
+      "en": "幂等写入",
+      "zh": "幂等写入"
+    },
+    {
+      "en": "断点续跑",
+      "zh": "断点续跑"
+    },
+    {
+      "en": "质量校验",
+      "zh": "质量校验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-guard-team-lead",
+    "memberAgents": [
+      "data-pipeline-guard",
+      "agent-tool-selection",
+      "api-transmission-assurance-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "quality-inspection-team-lead",
+  "agents": [
+    "./agents/quality-inspection-team-lead.md",
+    "./agents/quality-inspection.md",
+    "./agents/performance-review.md",
+    "./agents/code-quality-gate.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 质量检验规范",
+    "zh": "帮我处理质量检验规范"
+  },
+  "description": "quality-inspection team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 质量检验规范, covers 标准明确 / 抽样方法 / 判定规则, delivering structured results and actionable checklists.",
+    "zh": "质量检验规范专家：围绕质量检验规范，覆盖标准明确／抽样方法／判定规则，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "quality-inspection Team",
+    "zh": "质量检验规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "quality-inspection-team-lead",
+      "name": {
+        "en": "质量检验规范主理人",
+        "zh": "质量检验规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/quality-inspection.png",
+      "id": "quality-inspection",
+      "name": {
+        "en": "quality-inspection",
+        "zh": "质量检验规范 顾问"
+      },
+      "profession": {
+        "en": "quality-inspection",
+        "zh": "质量检验规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/performance-review.png",
+      "id": "performance-review",
+      "name": {
+        "en": "performance-review",
+        "zh": "绩效评估设计 顾问"
+      },
+      "profession": {
+        "en": "performance-review",
+        "zh": "绩效评估设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-quality-gate.png",
+      "id": "code-quality-gate",
+      "name": {
+        "en": "code-quality-gate",
+        "zh": "代码质量门禁 顾问"
+      },
+      "profession": {
+        "en": "code-quality-gate",
+        "zh": "代码质量门禁 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1013",
+  "plugin": "group-team-1013",
+  "profession": {
+    "en": "quality-inspection Collaboration Team",
+    "zh": "质量检验规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 质量检验规范",
+      "zh": "帮我处理质量检验规范"
+    },
+    {
+      "en": "Plan 绩效评估设计",
+      "zh": "帮我规划绩效评估设计"
+    },
+    {
+      "en": "Review 代码质量门禁",
+      "zh": "帮我检查代码质量门禁"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标准明确",
+      "zh": "标准明确"
+    },
+    {
+      "en": "抽样方法",
+      "zh": "抽样方法"
+    },
+    {
+      "en": "判定规则",
+      "zh": "判定规则"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "quality-inspection-team-lead",
+    "memberAgents": [
+      "quality-inspection",
+      "performance-review",
+      "code-quality-gate"
+    ]
+  },
+  "version": "1.0.0"
+}

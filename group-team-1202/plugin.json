@@ -1,0 +1,126 @@
+{
+  "agentName": "empty-state-design-team-lead",
+  "agents": [
+    "./agents/empty-state-design-team-lead.md",
+    "./agents/empty-state-design.md",
+    "./agents/map-visual-design.md",
+    "./agents/virtual-space-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 空状态设计",
+    "zh": "帮我处理空状态设计"
+  },
+  "description": "empty-state-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 空状态设计, covers 说明原因 / 给出动作 / 视觉轻盈, delivering structured results and actionable checklists.",
+    "zh": "空状态设计专家：围绕空状态设计，覆盖说明原因／给出动作／视觉轻盈，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "empty-state-design Team",
+    "zh": "空状态设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "empty-state-design-team-lead",
+      "name": {
+        "en": "空状态设计主理人",
+        "zh": "空状态设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/empty-state-design.png",
+      "id": "empty-state-design",
+      "name": {
+        "en": "empty-state-design",
+        "zh": "空状态设计 顾问"
+      },
+      "profession": {
+        "en": "empty-state-design",
+        "zh": "空状态设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/map-visual-design.png",
+      "id": "map-visual-design",
+      "name": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "profession": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/virtual-space-pro.png",
+      "id": "virtual-space-pro",
+      "name": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "profession": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1202",
+  "plugin": "group-team-1202",
+  "profession": {
+    "en": "empty-state-design Collaboration Team",
+    "zh": "空状态设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 空状态设计",
+      "zh": "帮我处理空状态设计"
+    },
+    {
+      "en": "Plan 地图可视化",
+      "zh": "帮我规划地图可视化"
+    },
+    {
+      "en": "Review 虚拟空间",
+      "zh": "帮我检查虚拟空间"
+    }
+  ],
+  "tags": [
+    {
+      "en": "说明原因",
+      "zh": "说明原因"
+    },
+    {
+      "en": "给出动作",
+      "zh": "给出动作"
+    },
+    {
+      "en": "视觉轻盈",
+      "zh": "视觉轻盈"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "empty-state-design-team-lead",
+    "memberAgents": [
+      "empty-state-design",
+      "map-visual-design",
+      "virtual-space-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "refactor-increment-team-lead",
+  "agents": [
+    "./agents/refactor-increment-team-lead.md",
+    "./agents/refactor-increment.md",
+    "./agents/data-anomaly-monitor.md",
+    "./agents/vulnerability-disclosure.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 增量重构",
+    "zh": "帮我处理增量重构"
+  },
+  "description": "refactor-increment team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 增量重构, covers 小步前进 / 测试护栏 / 行为不变, delivering structured results and actionable checklists.",
+    "zh": "增量重构专家：围绕增量重构，覆盖小步前进／测试护栏／行为不变，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "refactor-increment Team",
+    "zh": "增量重构专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "refactor-increment-team-lead",
+      "name": {
+        "en": "增量重构主理人",
+        "zh": "增量重构主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/refactor-increment.png",
+      "id": "refactor-increment",
+      "name": {
+        "en": "refactor-increment",
+        "zh": "增量重构 顾问"
+      },
+      "profession": {
+        "en": "refactor-increment",
+        "zh": "增量重构 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-anomaly-monitor.png",
+      "id": "data-anomaly-monitor",
+      "name": {
+        "en": "data-anomaly-monitor",
+        "zh": "数据异常监控 顾问"
+      },
+      "profession": {
+        "en": "data-anomaly-monitor",
+        "zh": "数据异常监控 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/vulnerability-disclosure.png",
+      "id": "vulnerability-disclosure",
+      "name": {
+        "en": "vulnerability-disclosure",
+        "zh": "漏洞披露流程 顾问"
+      },
+      "profession": {
+        "en": "vulnerability-disclosure",
+        "zh": "漏洞披露流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1064",
+  "plugin": "group-team-1064",
+  "profession": {
+    "en": "refactor-increment Collaboration Team",
+    "zh": "增量重构专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 增量重构",
+      "zh": "帮我处理增量重构"
+    },
+    {
+      "en": "Plan 数据异常监控",
+      "zh": "帮我规划数据异常监控"
+    },
+    {
+      "en": "Review 漏洞披露流程",
+      "zh": "帮我检查漏洞披露流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "小步前进",
+      "zh": "小步前进"
+    },
+    {
+      "en": "测试护栏",
+      "zh": "测试护栏"
+    },
+    {
+      "en": "行为不变",
+      "zh": "行为不变"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "refactor-increment-team-lead",
+    "memberAgents": [
+      "refactor-increment",
+      "data-anomaly-monitor",
+      "vulnerability-disclosure"
+    ]
+  },
+  "version": "1.0.0"
+}

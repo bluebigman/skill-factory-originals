@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-789",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-789",
+    "kind": "team",
+    "name": "结构化解析专家",
+    "description": "擅长配色克制、坐标规范与标注清晰，覆盖图表选型全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "web-extract-pro-team-lead",
+        "role": "lead",
+        "name": "网页提取主理人",
+        "evidence": null
+      },
+      {
+        "slug": "web-extract-pro",
+        "role": "member",
+        "name": "网页提取 结构化解析",
+        "evidence": "original_assets/web-extract-pro/merkle_root",
+        "member_merkle_root": "0c86d79514fd5e4a26a868855046fba24b197d1876285a6fede8fb08ccb2eb06"
+      },
+      {
+        "slug": "chart-select-pro",
+        "role": "member",
+        "name": "图表选型 配色规范 顾问",
+        "evidence": "original_assets/chart-select-pro/merkle_root",
+        "member_merkle_root": "994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e"
+      },
+      {
+        "slug": "dim-model-design",
+        "role": "member",
+        "name": "维度建模 事实维度 顾问",
+        "evidence": "original_assets/dim-model-design/merkle_root",
+        "member_merkle_root": "aac49bf0cf5a4fc3753c78d140c9fd48b377e15f25b0d563873b8ab76f862655"
+      }
+    ],
+    "team_lead": "web-extract-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e20c4bdd260f0d4e",
+  "prompt_hash": "6b27f054006c2ab3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-789\", \"kind\": \"team\", \"name\": \"结构化解析专家\", \"description\": \"擅长配色克制、坐标规范与标注清晰，覆盖图表选型全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"web-extract-pro-team-lead\", \"role\": \"lead\", \"name\": \"网页提取主理人\", \"evidence\": null}, {\"slug\": \"web-extract-pro\", \"role\": \"member\", \"name\": \"网页提取 结构化解析\", \"evidence\": \"original_assets/web-extract-pro/merkle_root\", \"member_merkle_root\": \"0c86d79514fd5e4a26a868855046fba24b197d1876285a6fede8fb08ccb2eb06\"}, {\"slug\": \"chart-select-pro\", \"role\": \"member\", \"name\": \"图表选型 配色规范 顾问\", \"evidence\": \"original_assets/chart-select-pro/merkle_root\", \"member_merkle_root\": \"994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e\"}, {\"slug\": \"dim-model-design\", \"role\": \"member\", \"name\": \"维度建模 事实维度 顾问\", \"evidence\": \"original_assets/dim-model-design/merkle_root\", \"member_merkle_root\": \"aac49bf0cf5a4fc3753c78d140c9fd48b377e15f25b0d563873b8ab76f862655\"}], \"team_lead\": \"web-extract-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/chart-select-pro.md": "e7f39e1ef1551f540ff62bd4c9f64d59dfbc35d82abfc1a3f4810e2feee40252",
+    "agents/dim-model-design.md": "3b450ccc1e73652b60e298d54e41564c20c4cef775661cc5bd29ab1b3d2debfa",
+    "agents/web-extract-pro-team-lead.md": "006f2bbb5119f8d5c9fb7c384e3bfd100e6563eb7890208cce944b34c49fbec4",
+    "agents/web-extract-pro.md": "a9d30ad37eee1bd95f859bcfd6bec0741eb26375cf6c4a195687e6a03a492a42",
+    "plugin.json": "5915b73f2d8b8adb3b817205e0d4f188d15ea8a540731971266517fe09f37306",
+    "settings.json": "bb5d20fce837ac33fe391d3633165e7e5b7764e695c1f9710542316a4b66bd5b"
+  }
+}

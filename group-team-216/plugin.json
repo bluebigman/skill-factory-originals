@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-toolkit-pro-03-fixed-team-lead",
+  "agents": [
+    "./agents/sql-toolkit-pro-03-fixed-team-lead.md",
+    "./agents/sql-toolkit-pro-03-fixed.md",
+    "./agents/data-viz-pro-03.md",
+    "./agents/agent-toolkit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据转查询",
+    "zh": "帮我处理数据转查询"
+  },
+  "description": "SQL Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 销售 技能 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "SQL Suite Team",
+    "zh": "数据 销售 技能 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-toolkit-pro-03-fixed-team-lead",
+      "name": {
+        "en": "数据转查询主理人",
+        "zh": "数据转查询主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-03-fixed.png",
+      "id": "sql-toolkit-pro-03-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-03.png",
+      "id": "data-viz-pro-03",
+      "name": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "销售报表 SVG图表开发"
+      },
+      "profession": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "销售报表 SVG图表开发"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro.png",
+      "id": "agent-toolkit-pro",
+      "name": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "技能包管理 能力导航"
+      },
+      "profession": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "技能包管理 能力导航"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-216",
+  "plugin": "group-team-216",
+  "profession": {
+    "en": "SQL Suite Collaboration Team",
+    "zh": "数据 销售 技能 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据转查询",
+      "zh": "帮我处理数据转查询"
+    },
+    {
+      "en": "Plan 销售报表",
+      "zh": "帮我规划销售报表"
+    },
+    {
+      "en": "Review 技能包管理",
+      "zh": "帮我检查技能包管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据转查询",
+      "zh": "数据转查询"
+    },
+    {
+      "en": "销售报表",
+      "zh": "销售报表"
+    },
+    {
+      "en": "技能包管理",
+      "zh": "技能包管理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-toolkit-pro-03-fixed-team-lead",
+    "memberAgents": [
+      "sql-toolkit-pro-03-fixed",
+      "data-viz-pro-03",
+      "agent-toolkit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "space-wayfinding-team-lead",
+  "agents": [
+    "./agents/space-wayfinding-team-lead.md",
+    "./agents/space-wayfinding.md",
+    "./agents/game-economy-balance.md",
+    "./agents/ui-pattern-library.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 导视系统",
+    "zh": "帮我处理导视系统"
+  },
+  "description": "space-wayfinding team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 导视系统 requirements, output three deliverables: 层级一致, 视觉连续, 先定产出. Verifiable end-to-end, evidence per step.",
+    "zh": "输入导视系统相关需求，输出层级一致、视觉连续、先定产出三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "space-wayfinding Team",
+    "zh": "导视系统寻路设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "space-wayfinding-team-lead",
+      "name": {
+        "en": "导视系统主理人",
+        "zh": "导视系统主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/space-wayfinding.png",
+      "id": "space-wayfinding",
+      "name": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "profession": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-economy-balance.png",
+      "id": "game-economy-balance",
+      "name": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "profession": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-pattern-library.png",
+      "id": "ui-pattern-library",
+      "name": {
+        "en": "ui-pattern-library",
+        "zh": "界面模式库 顾问"
+      },
+      "profession": {
+        "en": "ui-pattern-library",
+        "zh": "界面模式库 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1104",
+  "plugin": "group-team-1104",
+  "profession": {
+    "en": "space-wayfinding Collaboration Team",
+    "zh": "导视系统寻路设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 导视系统",
+      "zh": "帮我处理导视系统"
+    },
+    {
+      "en": "Plan 游戏经济",
+      "zh": "帮我规划游戏经济"
+    },
+    {
+      "en": "Review 界面模式库",
+      "zh": "帮我检查界面模式库"
+    }
+  ],
+  "tags": [
+    {
+      "en": "层级一致",
+      "zh": "层级一致"
+    },
+    {
+      "en": "视觉连续",
+      "zh": "视觉连续"
+    },
+    {
+      "en": "多模态",
+      "zh": "多模态"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "space-wayfinding-team-lead",
+    "memberAgents": [
+      "space-wayfinding",
+      "game-economy-balance",
+      "ui-pattern-library"
+    ]
+  },
+  "version": "1.0.0"
+}

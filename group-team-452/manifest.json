@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-452",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-452",
+    "kind": "team",
+    "name": "看板规格专家",
+    "description": "看板规格专家：围绕看板规格，覆盖受众优先／指标精简／层次分明，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "dashboard-spec-pro-team-lead",
+        "role": "lead",
+        "name": "看板规格主理人",
+        "evidence": null
+      },
+      {
+        "slug": "dashboard-spec-pro",
+        "role": "member",
+        "name": "看板规格 指标选型 顾问",
+        "evidence": "original_assets/dashboard-spec-pro/merkle_root",
+        "member_merkle_root": "f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6"
+      },
+      {
+        "slug": "agent-skill-registry",
+        "role": "member",
+        "name": "技能注册 发现机制 顾问",
+        "evidence": "original_assets/agent-skill-registry/merkle_root",
+        "member_merkle_root": "3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee"
+      },
+      {
+        "slug": "agent-output-format",
+        "role": "member",
+        "name": "输出规范 结构化 顾问",
+        "evidence": "original_assets/agent-output-format/merkle_root",
+        "member_merkle_root": "4ebe7b3d464c66239a6b016a81aeb4b33eeb39ab8da7aa594f50569a73dbecde"
+      }
+    ],
+    "team_lead": "dashboard-spec-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6eee1f9188ec324a",
+  "prompt_hash": "7800dd6c6400ee84",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-452\", \"kind\": \"team\", \"name\": \"看板规格专家\", \"description\": \"看板规格专家：围绕看板规格，覆盖受众优先／指标精简／层次分明，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"dashboard-spec-pro-team-lead\", \"role\": \"lead\", \"name\": \"看板规格主理人\", \"evidence\": null}, {\"slug\": \"dashboard-spec-pro\", \"role\": \"member\", \"name\": \"看板规格 指标选型 顾问\", \"evidence\": \"original_assets/dashboard-spec-pro/merkle_root\", \"member_merkle_root\": \"f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6\"}, {\"slug\": \"agent-skill-registry\", \"role\": \"member\", \"name\": \"技能注册 发现机制 顾问\", \"evidence\": \"original_assets/agent-skill-registry/merkle_root\", \"member_merkle_root\": \"3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee\"}, {\"slug\": \"agent-output-format\", \"role\": \"member\", \"name\": \"输出规范 结构化 顾问\", \"evidence\": \"original_assets/agent-output-format/merkle_root\", \"member_merkle_root\": \"4ebe7b3d464c66239a6b016a81aeb4b33eeb39ab8da7aa594f50569a73dbecde\"}], \"team_lead\": \"dashboard-spec-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-format.md": "7433ac0836ed1a44b35892a20f788a426edd2d5098dcc8d88a1374472fa64f43",
+    "agents/agent-skill-registry.md": "b17adfb5a46abcdcdc5fa899e768adfbe82bb66786429b61fb356e74d5cae6bc",
+    "agents/dashboard-spec-pro-team-lead.md": "e5afe7a9c32020bedac3c65f9995f3093cf5aa0c5779034dc5cb6ec000dbac89",
+    "agents/dashboard-spec-pro.md": "9d82ab72212c2907e6c7c4ab909540514ee409f9bc315b806ff0660cafe77aba",
+    "plugin.json": "27ea429a190eaf205df686e116b4c413f3dc70905cab680745a2f7e7d2abf3ec",
+    "settings.json": "9b8c709a6e439b7fc0741e59035faea394dc3779e1a4dec7a90d11ea3b2ea800"
+  }
+}

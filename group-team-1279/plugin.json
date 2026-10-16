@@ -1,0 +1,126 @@
+{
+  "agentName": "ai-flavor-remove-team-lead",
+  "agents": [
+    "./agents/ai-flavor-remove-team-lead.md",
+    "./agents/ai-flavor-remove.md",
+    "./agents/ugc-operation.md",
+    "./agents/doc-citation-format.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 去",
+    "zh": "帮我处理去"
+  },
+  "description": "ai-flavor-remove team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 去 end-to-end: 语气自然, 保留信息 and 降低门槛. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长语气自然、保留信息与降低门槛，覆盖去全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ai-flavor-remove Team",
+    "zh": "用户内容运营机制专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ai-flavor-remove-team-lead",
+      "name": {
+        "en": "去主理人",
+        "zh": "去主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ai-flavor-remove.png",
+      "id": "ai-flavor-remove",
+      "name": {
+        "en": "ai-flavor-remove",
+        "zh": "去 AI 味改写 助手"
+      },
+      "profession": {
+        "en": "ai-flavor-remove",
+        "zh": "去 AI 味改写 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ugc-operation.png",
+      "id": "ugc-operation",
+      "name": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "profession": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-citation-format.png",
+      "id": "doc-citation-format",
+      "name": {
+        "en": "doc-citation-format",
+        "zh": "引用格式规范 顾问"
+      },
+      "profession": {
+        "en": "doc-citation-format",
+        "zh": "引用格式规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1279",
+  "plugin": "group-team-1279",
+  "profession": {
+    "en": "ai-flavor-remove Collaboration Team",
+    "zh": "用户内容运营机制专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 去",
+      "zh": "帮我处理去"
+    },
+    {
+      "en": "Plan 用户内容",
+      "zh": "帮我规划用户内容"
+    },
+    {
+      "en": "Review 引用格式规范",
+      "zh": "帮我检查引用格式规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "语气自然",
+      "zh": "语气自然"
+    },
+    {
+      "en": "保留信息",
+      "zh": "保留信息"
+    },
+    {
+      "en": "拆长句",
+      "zh": "拆长句"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ai-flavor-remove-team-lead",
+    "memberAgents": [
+      "ai-flavor-remove",
+      "ugc-operation",
+      "doc-citation-format"
+    ]
+  },
+  "version": "1.0.0"
+}

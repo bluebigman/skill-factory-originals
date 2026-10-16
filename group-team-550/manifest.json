@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-550",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-550",
+    "kind": "team",
+    "name": "数据库查询专家",
+    "description": "擅长批前备份、小样验证与幂等设计，覆盖表格批量全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-master-pro-team-lead",
+        "role": "lead",
+        "name": "数据库查询主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-master-pro",
+        "role": "member",
+        "name": "数据库查询 SQL编写",
+        "evidence": "original_assets/sql-master-pro/merkle_root",
+        "member_merkle_root": "aa31790810cf37c1076e4a7001265ee29780ab606fff8a4f4b41e4d8fb6b9e53"
+      },
+      {
+        "slug": "sql-build-pro",
+        "role": "member",
+        "name": "SQL 构建与看板",
+        "evidence": "original_assets/sql-build-pro/merkle_root",
+        "member_merkle_root": "9e46e419fc79fe673ce9bb963a2101e27f7bb0f2a9b28f7f8787254a7e832b73"
+      },
+      {
+        "slug": "sheet-batch-pro",
+        "role": "member",
+        "name": "表格批量 计算汇总 顾问",
+        "evidence": "original_assets/sheet-batch-pro/merkle_root",
+        "member_merkle_root": "09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9"
+      }
+    ],
+    "team_lead": "sql-master-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "14673400fccff700",
+  "prompt_hash": "75ab0fb733482e72",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-550\", \"kind\": \"team\", \"name\": \"数据库查询专家\", \"description\": \"擅长批前备份、小样验证与幂等设计，覆盖表格批量全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-master-pro-team-lead\", \"role\": \"lead\", \"name\": \"数据库查询主理人\", \"evidence\": null}, {\"slug\": \"sql-master-pro\", \"role\": \"member\", \"name\": \"数据库查询 SQL编写\", \"evidence\": \"original_assets/sql-master-pro/merkle_root\", \"member_merkle_root\": \"aa31790810cf37c1076e4a7001265ee29780ab606fff8a4f4b41e4d8fb6b9e53\"}, {\"slug\": \"sql-build-pro\", \"role\": \"member\", \"name\": \"SQL 构建与看板\", \"evidence\": \"original_assets/sql-build-pro/merkle_root\", \"member_merkle_root\": \"9e46e419fc79fe673ce9bb963a2101e27f7bb0f2a9b28f7f8787254a7e832b73\"}, {\"slug\": \"sheet-batch-pro\", \"role\": \"member\", \"name\": \"表格批量 计算汇总 顾问\", \"evidence\": \"original_assets/sheet-batch-pro/merkle_root\", \"member_merkle_root\": \"09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9\"}], \"team_lead\": \"sql-master-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/sheet-batch-pro.md": "be004e90bc528d45538013ea5a8e80d0211d86d024a98693a968408de35b83b9",
+    "agents/sql-build-pro.md": "38735cb65914b66846ca09aa5497b48ff894be9c7b4e061fd02d3663ddaeae02",
+    "agents/sql-master-pro-team-lead.md": "1a1a204ce1cf309b9d958e068cc665dcb1cd0892240551e1655c6af1f893d8ad",
+    "agents/sql-master-pro.md": "9a450ca837b34f3f934117fe02ad68d99d6b2de73418614088e8364496b74f8f",
+    "plugin.json": "d39a1a63cf0d69eac5d431a7f0a51c52e37e1790e51b0e592a4f6dc7e6c315c8",
+    "settings.json": "59f152f8fb2018aec3424398cd2aab37e57f574e0eb7aba2efc48144fb133247"
+  }
+}

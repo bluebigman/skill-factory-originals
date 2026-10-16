@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-129",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-129",
+    "kind": "team",
+    "name": "产线 零售 生产 团队",
+    "description": "产线 零售 生产 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "mes-line-balance-pro-team-lead",
+        "role": "lead",
+        "name": "产线节拍主理人",
+        "evidence": null
+      },
+      {
+        "slug": "mes-line-balance-pro",
+        "role": "member",
+        "name": "产线节拍 平衡优化 顾问",
+        "evidence": "original_assets/mes-line-balance-pro/merkle_root",
+        "member_merkle_root": "83724fddba3397f5709c1b6194da9cc8e060204d7fb09b5f69b16ca0970b1e97"
+      },
+      {
+        "slug": "retail-diagnose",
+        "role": "member",
+        "name": "零售经营 客流诊断 顾问",
+        "evidence": "original_assets/retail-diagnose/merkle_root",
+        "member_merkle_root": "e5c7c3e77d4eef444e810c987fd54a19a9fd2e129f2e71cfdbd462a868f7ca23"
+      },
+      {
+        "slug": "production-scheduling-pro",
+        "role": "member",
+        "name": "生产排程 交期保障 顾问",
+        "evidence": "original_assets/production-scheduling-pro/merkle_root",
+        "member_merkle_root": "4fa7d422dcb1e49d7fe01eda2cb37aaa62d9184f3f37541cca5b15d18fa2e783"
+      }
+    ],
+    "team_lead": "mes-line-balance-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1d2e73f83782dbdf",
+  "prompt_hash": "2428dd6538ff2f19",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-129\", \"kind\": \"team\", \"name\": \"产线 零售 生产 团队\", \"description\": \"产线 零售 生产 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"mes-line-balance-pro-team-lead\", \"role\": \"lead\", \"name\": \"产线节拍主理人\", \"evidence\": null}, {\"slug\": \"mes-line-balance-pro\", \"role\": \"member\", \"name\": \"产线节拍 平衡优化 顾问\", \"evidence\": \"original_assets/mes-line-balance-pro/merkle_root\", \"member_merkle_root\": \"83724fddba3397f5709c1b6194da9cc8e060204d7fb09b5f69b16ca0970b1e97\"}, {\"slug\": \"retail-diagnose\", \"role\": \"member\", \"name\": \"零售经营 客流诊断 顾问\", \"evidence\": \"original_assets/retail-diagnose/merkle_root\", \"member_merkle_root\": \"e5c7c3e77d4eef444e810c987fd54a19a9fd2e129f2e71cfdbd462a868f7ca23\"}, {\"slug\": \"production-scheduling-pro\", \"role\": \"member\", \"name\": \"生产排程 交期保障 顾问\", \"evidence\": \"original_assets/production-scheduling-pro/merkle_root\", \"member_merkle_root\": \"4fa7d422dcb1e49d7fe01eda2cb37aaa62d9184f3f37541cca5b15d18fa2e783\"}], \"team_lead\": \"mes-line-balance-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/mes-line-balance-pro-team-lead.md": "cedf1defa3a3373b83b2895bd168aed93092423227c7e6b412bc077625531735",
+    "agents/mes-line-balance-pro.md": "1a0630ee5ad96a06dd8987c017327a265a56399e74d0b8f3632e6650b315ba12",
+    "agents/production-scheduling-pro.md": "3d6a9a256658378300b5e3476528337a6dfb698a27a14f338f0df4d780a27adc",
+    "agents/retail-diagnose.md": "e09cb38976a1583fc7882c19169f2981607ec113d08a24b573195793be63fdb0",
+    "plugin.json": "35b986b1225057bb2ad1fc532016adfe79e30ee3189576a52f6ac8dab8a0df3d",
+    "settings.json": "8040061b775813e148371a5d99e2adbe5b90d11d423eaf4905422ca03898d9b5"
+  }
+}

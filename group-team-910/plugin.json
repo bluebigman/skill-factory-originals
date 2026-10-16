@@ -1,0 +1,126 @@
+{
+  "agentName": "event-plan-review-team-lead",
+  "agents": [
+    "./agents/event-plan-review-team-lead.md",
+    "./agents/event-plan-review.md",
+    "./agents/marketing-toolkit-pro-fixed.md",
+    "./agents/doc-format-unify.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 活动方案",
+    "zh": "帮我处理活动方案"
+  },
+  "description": "event-plan-review team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 活动方案, covers 目标单一 / 预算留余 / 风险预案, delivering structured results and actionable checklists.",
+    "zh": "活动方案专家：围绕活动方案，覆盖目标单一／预算留余／风险预案，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "event-plan-review Team",
+    "zh": "活动方案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "event-plan-review-team-lead",
+      "name": {
+        "en": "活动方案主理人",
+        "zh": "活动方案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/event-plan-review.png",
+      "id": "event-plan-review",
+      "name": {
+        "en": "event-plan-review",
+        "zh": "活动方案 评审"
+      },
+      "profession": {
+        "en": "event-plan-review",
+        "zh": "活动方案 评审"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/marketing-toolkit-pro-fixed.png",
+      "id": "marketing-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-format-unify.png",
+      "id": "doc-format-unify",
+      "name": {
+        "en": "doc-format-unify",
+        "zh": "文档格式统一 助手"
+      },
+      "profession": {
+        "en": "doc-format-unify",
+        "zh": "文档格式统一 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-910",
+  "plugin": "group-team-910",
+  "profession": {
+    "en": "event-plan-review Collaboration Team",
+    "zh": "活动方案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 活动方案",
+      "zh": "帮我处理活动方案"
+    },
+    {
+      "en": "Plan 联盟配置审查",
+      "zh": "帮我规划联盟配置审查"
+    },
+    {
+      "en": "Review 文档格式统一",
+      "zh": "帮我检查文档格式统一"
+    }
+  ],
+  "tags": [
+    {
+      "en": "预算留余",
+      "zh": "预算留余"
+    },
+    {
+      "en": "风险预案",
+      "zh": "风险预案"
+    },
+    {
+      "en": "数据埋点",
+      "zh": "数据埋点"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "event-plan-review-team-lead",
+    "memberAgents": [
+      "event-plan-review",
+      "marketing-toolkit-pro-fixed",
+      "doc-format-unify"
+    ]
+  },
+  "version": "1.0.0"
+}

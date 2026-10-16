@@ -1,0 +1,126 @@
+{
+  "agentName": "manufacturing-sop-team-lead",
+  "agents": [
+    "./agents/manufacturing-sop-team-lead.md",
+    "./agents/manufacturing-sop.md",
+    "./agents/code-review-guide.md",
+    "./agents/pipeline-review-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 生产作业规范",
+    "zh": "帮我处理生产作业规范"
+  },
+  "description": "manufacturing-sop team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 生产作业规范, covers 异常处理 / 记录留痕 / 定期更新, delivering structured results and actionable checklists.",
+    "zh": "生产作业规范专家：围绕生产作业规范，覆盖异常处理／记录留痕／定期更新，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "manufacturing-sop Team",
+    "zh": "生产作业规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "manufacturing-sop-team-lead",
+      "name": {
+        "en": "生产作业规范主理人",
+        "zh": "生产作业规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/manufacturing-sop.png",
+      "id": "manufacturing-sop",
+      "name": {
+        "en": "manufacturing-sop",
+        "zh": "生产作业规范 顾问"
+      },
+      "profession": {
+        "en": "manufacturing-sop",
+        "zh": "生产作业规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-review-guide.png",
+      "id": "code-review-guide",
+      "name": {
+        "en": "code-review-guide",
+        "zh": "代码评审把关 顾问"
+      },
+      "profession": {
+        "en": "code-review-guide",
+        "zh": "代码评审把关 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pipeline-review-pro.png",
+      "id": "pipeline-review-pro",
+      "name": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "profession": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-998",
+  "plugin": "group-team-998",
+  "profession": {
+    "en": "manufacturing-sop Collaboration Team",
+    "zh": "生产作业规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 生产作业规范",
+      "zh": "帮我处理生产作业规范"
+    },
+    {
+      "en": "Plan 代码评审把关",
+      "zh": "帮我规划代码评审把关"
+    },
+    {
+      "en": "Review 销售漏斗",
+      "zh": "帮我检查销售漏斗"
+    }
+  ],
+  "tags": [
+    {
+      "en": "步骤可执行",
+      "zh": "步骤可执行"
+    },
+    {
+      "en": "关键控制点",
+      "zh": "关键控制点"
+    },
+    {
+      "en": "异常处理",
+      "zh": "异常处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "manufacturing-sop-team-lead",
+    "memberAgents": [
+      "manufacturing-sop",
+      "code-review-guide",
+      "pipeline-review-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

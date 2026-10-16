@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-accessibility-check-team-lead",
+  "agents": [
+    "./agents/doc-accessibility-check-team-lead.md",
+    "./agents/doc-accessibility-check.md",
+    "./agents/game-economy-balance.md",
+    "./agents/color-system-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 文档可达性核查",
+    "zh": "帮我处理文档可达性核查"
+  },
+  "description": "doc-accessibility-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档可达性核查 requirements, output three deliverables: 标题结构, 替代文本, 阅读顺序. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档可达性核查相关需求，输出标题结构、替代文本、阅读顺序三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-accessibility-check Team",
+    "zh": "游戏经济专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-accessibility-check-team-lead",
+      "name": {
+        "en": "文档可达性核查主理人",
+        "zh": "文档可达性核查主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-accessibility-check.png",
+      "id": "doc-accessibility-check",
+      "name": {
+        "en": "doc-accessibility-check",
+        "zh": "文档可达性核查 顾问"
+      },
+      "profession": {
+        "en": "doc-accessibility-check",
+        "zh": "文档可达性核查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-economy-balance.png",
+      "id": "game-economy-balance",
+      "name": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "profession": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/color-system-build.png",
+      "id": "color-system-build",
+      "name": {
+        "en": "color-system-build",
+        "zh": "配色系统构建 顾问"
+      },
+      "profession": {
+        "en": "color-system-build",
+        "zh": "配色系统构建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1137",
+  "plugin": "group-team-1137",
+  "profession": {
+    "en": "doc-accessibility-check Collaboration Team",
+    "zh": "游戏经济专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档可达性核查",
+      "zh": "帮我处理文档可达性核查"
+    },
+    {
+      "en": "Plan 游戏经济",
+      "zh": "帮我规划游戏经济"
+    },
+    {
+      "en": "Review 配色系统构建",
+      "zh": "帮我检查配色系统构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标题结构",
+      "zh": "标题结构"
+    },
+    {
+      "en": "替代文本",
+      "zh": "替代文本"
+    },
+    {
+      "en": "阅读顺序",
+      "zh": "阅读顺序"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-accessibility-check-team-lead",
+    "memberAgents": [
+      "doc-accessibility-check",
+      "game-economy-balance",
+      "color-system-build"
+    ]
+  },
+  "version": "1.0.0"
+}

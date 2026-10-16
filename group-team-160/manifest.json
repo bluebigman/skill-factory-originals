@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-160",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-160",
+    "kind": "team",
+    "name": "看板 会议 验收 团队",
+    "description": "看板 会议 验收 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "kanban-flow-coach-team-lead",
+        "role": "lead",
+        "name": "看板流程主理人",
+        "evidence": null
+      },
+      {
+        "slug": "kanban-flow-coach",
+        "role": "member",
+        "name": "看板流程 瓶颈识别 顾问",
+        "evidence": "original_assets/kanban-flow-coach/merkle_root",
+        "member_merkle_root": "aa1f7f2603bda30f71468e7fff9d03d9e8db5d30c25479a2c0d0f4a1c0616f5e"
+      },
+      {
+        "slug": "audio-meeting-minutes",
+        "role": "member",
+        "name": "会议录音 转写纪要 助手",
+        "evidence": "original_assets/audio-meeting-minutes/merkle_root",
+        "member_merkle_root": "09ea9156c29de0e9635cbf62c8c836317c6f1a2a48e0c833ef602e339ee23f51"
+      },
+      {
+        "slug": "acceptance-criteria",
+        "role": "member",
+        "name": "验收标准 可测定义 顾问",
+        "evidence": "original_assets/acceptance-criteria/merkle_root",
+        "member_merkle_root": "5ddfeb9ea43475277d970839038aa5876b1603190974420778850cffa40d3717"
+      }
+    ],
+    "team_lead": "kanban-flow-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1536f1924d66aabe",
+  "prompt_hash": "019709658e46811f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-160\", \"kind\": \"team\", \"name\": \"看板 会议 验收 团队\", \"description\": \"看板 会议 验收 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"kanban-flow-coach-team-lead\", \"role\": \"lead\", \"name\": \"看板流程主理人\", \"evidence\": null}, {\"slug\": \"kanban-flow-coach\", \"role\": \"member\", \"name\": \"看板流程 瓶颈识别 顾问\", \"evidence\": \"original_assets/kanban-flow-coach/merkle_root\", \"member_merkle_root\": \"aa1f7f2603bda30f71468e7fff9d03d9e8db5d30c25479a2c0d0f4a1c0616f5e\"}, {\"slug\": \"audio-meeting-minutes\", \"role\": \"member\", \"name\": \"会议录音 转写纪要 助手\", \"evidence\": \"original_assets/audio-meeting-minutes/merkle_root\", \"member_merkle_root\": \"09ea9156c29de0e9635cbf62c8c836317c6f1a2a48e0c833ef602e339ee23f51\"}, {\"slug\": \"acceptance-criteria\", \"role\": \"member\", \"name\": \"验收标准 可测定义 顾问\", \"evidence\": \"original_assets/acceptance-criteria/merkle_root\", \"member_merkle_root\": \"5ddfeb9ea43475277d970839038aa5876b1603190974420778850cffa40d3717\"}], \"team_lead\": \"kanban-flow-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/acceptance-criteria.md": "5783d4b8ffd3a1274ae3675894aa41e318ce1faf2ee87ccc53a42690958326f8",
+    "agents/audio-meeting-minutes.md": "a2a6ad17bae63ec0b68b294ef916f5696e43405b369a4cea33e405b47195caaf",
+    "agents/kanban-flow-coach-team-lead.md": "de284ad4e58f3e598a93d4b8eed9686271cf189485373085dbe49f9f5ba3c9b1",
+    "agents/kanban-flow-coach.md": "a72c6caa714e060536ebb043893442008d61ed3e1f3de9115a9a09d37becee29",
+    "plugin.json": "8253c59c98a8716038f68478df4c7a457770f97bcf410a47e4b0a9b38221ae6e",
+    "settings.json": "b1c7ae19d2a6763a83b54a0428c5dc58f630d955e37043c43feb7b8288770cf4"
+  }
+}

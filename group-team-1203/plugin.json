@@ -1,0 +1,126 @@
+{
+  "agentName": "data-destruction-team-lead",
+  "agents": [
+    "./agents/data-destruction-team-lead.md",
+    "./agents/data-destruction.md",
+    "./agents/cache-invalidation.md",
+    "./agents/csv-quick-analyze.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据销毁规范",
+    "zh": "帮我处理数据销毁规范"
+  },
+  "description": "data-destruction team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据销毁规范 requirements, output three deliverables: 按级销毁, 不可恢复, 见证留痕. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据销毁规范相关需求，输出按级销毁、不可恢复、见证留痕三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "data-destruction Team",
+    "zh": "数据销毁规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-destruction-team-lead",
+      "name": {
+        "en": "数据销毁规范主理人",
+        "zh": "数据销毁规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-destruction.png",
+      "id": "data-destruction",
+      "name": {
+        "en": "data-destruction",
+        "zh": "数据销毁规范 顾问"
+      },
+      "profession": {
+        "en": "data-destruction",
+        "zh": "数据销毁规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cache-invalidation.png",
+      "id": "cache-invalidation",
+      "name": {
+        "en": "cache-invalidation",
+        "zh": "缓存失效策略 顾问"
+      },
+      "profession": {
+        "en": "cache-invalidation",
+        "zh": "缓存失效策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/csv-quick-analyze.png",
+      "id": "csv-quick-analyze",
+      "name": {
+        "en": "csv-quick-analyze",
+        "zh": "CSV 快速分析 助手"
+      },
+      "profession": {
+        "en": "csv-quick-analyze",
+        "zh": "CSV 快速分析 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1203",
+  "plugin": "group-team-1203",
+  "profession": {
+    "en": "data-destruction Collaboration Team",
+    "zh": "数据销毁规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据销毁规范",
+      "zh": "帮我处理数据销毁规范"
+    },
+    {
+      "en": "Plan 缓存失效策略",
+      "zh": "帮我规划缓存失效策略"
+    },
+    {
+      "en": "Review CSV",
+      "zh": "帮我检查CSV"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按级销毁",
+      "zh": "按级销毁"
+    },
+    {
+      "en": "不可恢复",
+      "zh": "不可恢复"
+    },
+    {
+      "en": "见证留痕",
+      "zh": "见证留痕"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-destruction-team-lead",
+    "memberAgents": [
+      "data-destruction",
+      "cache-invalidation",
+      "csv-quick-analyze"
+    ]
+  },
+  "version": "1.0.0"
+}

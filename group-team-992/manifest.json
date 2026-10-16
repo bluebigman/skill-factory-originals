@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-992",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-992",
+    "kind": "team",
+    "name": "差异定位专家",
+    "description": "差异定位专家：围绕数据对账，覆盖口径对齐／全量比对／差异分类，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-reconcile-pro-team-lead",
+        "role": "lead",
+        "name": "数据对账主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-reconcile-pro",
+        "role": "member",
+        "name": "数据对账 差异定位 顾问",
+        "evidence": "original_assets/data-reconcile-pro/merkle_root",
+        "member_merkle_root": "eb00d862f27be49dceb10e647c2c73cfb947e0b363b4f153e73bc803bf840976"
+      },
+      {
+        "slug": "agent-error-playbook",
+        "role": "member",
+        "name": "错误手册 分类 顾问",
+        "evidence": "original_assets/agent-error-playbook/merkle_root",
+        "member_merkle_root": "521181de4cd7f050598b73e3f0e0fc973c285329e82c3f5596016736a37909b0"
+      },
+      {
+        "slug": "metric-anomaly-root",
+        "role": "member",
+        "name": "指标异常定位 助手",
+        "evidence": "original_assets/metric-anomaly-root/merkle_root",
+        "member_merkle_root": "b26d14d5e9c10ca793cfe98f1559d72fe3e267a73f4403b89e3d2aa4ac5551f8"
+      }
+    ],
+    "team_lead": "data-reconcile-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "171145c4a0a19cf9",
+  "prompt_hash": "56fcb0c3b9e082fd",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-992\", \"kind\": \"team\", \"name\": \"差异定位专家\", \"description\": \"差异定位专家：围绕数据对账，覆盖口径对齐／全量比对／差异分类，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-reconcile-pro-team-lead\", \"role\": \"lead\", \"name\": \"数据对账主理人\", \"evidence\": null}, {\"slug\": \"data-reconcile-pro\", \"role\": \"member\", \"name\": \"数据对账 差异定位 顾问\", \"evidence\": \"original_assets/data-reconcile-pro/merkle_root\", \"member_merkle_root\": \"eb00d862f27be49dceb10e647c2c73cfb947e0b363b4f153e73bc803bf840976\"}, {\"slug\": \"agent-error-playbook\", \"role\": \"member\", \"name\": \"错误手册 分类 顾问\", \"evidence\": \"original_assets/agent-error-playbook/merkle_root\", \"member_merkle_root\": \"521181de4cd7f050598b73e3f0e0fc973c285329e82c3f5596016736a37909b0\"}, {\"slug\": \"metric-anomaly-root\", \"role\": \"member\", \"name\": \"指标异常定位 助手\", \"evidence\": \"original_assets/metric-anomaly-root/merkle_root\", \"member_merkle_root\": \"b26d14d5e9c10ca793cfe98f1559d72fe3e267a73f4403b89e3d2aa4ac5551f8\"}], \"team_lead\": \"data-reconcile-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-error-playbook.md": "563a1e9fef4115244bbdec491b785230a74a372a12d09ef76baa0820609520bf",
+    "agents/data-reconcile-pro-team-lead.md": "636306ba75df5ee355e120f3a0b26ab3ba43d0ac5705bb209a0d5b5aaca6893a",
+    "agents/data-reconcile-pro.md": "146cb8b82b8e4095b6e3bceb34ce1900661ae20f3cde170d7704c7ddcffae34d",
+    "agents/metric-anomaly-root.md": "96784c861c9ed40a9201f98b475152432fe7563dfd0e3f1b14a4327051a1fc5e",
+    "plugin.json": "128cfb654c183d59010cd6b37bd162d04d81c581d55bc48a5e36a30b91089e02",
+    "settings.json": "8d54cd8c2f5f75925e6947e2f4c95263f0efb7e4632822a3679fd2eb3d0ba028"
+  }
+}

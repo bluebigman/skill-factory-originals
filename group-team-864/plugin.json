@@ -1,0 +1,126 @@
+{
+  "agentName": "ugc-operation-team-lead",
+  "agents": [
+    "./agents/ugc-operation-team-lead.md",
+    "./agents/ugc-operation.md",
+    "./agents/writing-toolkit-pro.md",
+    "./agents/kb-article-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 用户内容",
+    "zh": "帮我处理用户内容"
+  },
+  "description": "ugc-operation team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 用户内容 end-to-end: 降低门槛, 即时回应 and 激励分层. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长降低门槛、即时回应与激励分层，覆盖用户内容全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ugc-operation Team",
+    "zh": "知识库条目专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ugc-operation-team-lead",
+      "name": {
+        "en": "用户内容主理人",
+        "zh": "用户内容主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ugc-operation.png",
+      "id": "ugc-operation",
+      "name": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "profession": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/writing-toolkit-pro.png",
+      "id": "writing-toolkit-pro",
+      "name": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "profession": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kb-article-build.png",
+      "id": "kb-article-build",
+      "name": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "profession": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-864",
+  "plugin": "group-team-864",
+  "profession": {
+    "en": "ugc-operation Collaboration Team",
+    "zh": "知识库条目专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 用户内容",
+      "zh": "帮我处理用户内容"
+    },
+    {
+      "en": "Plan 文本净化",
+      "zh": "帮我规划文本净化"
+    },
+    {
+      "en": "Review 知识库条目",
+      "zh": "帮我检查知识库条目"
+    }
+  ],
+  "tags": [
+    {
+      "en": "即时回应",
+      "zh": "即时回应"
+    },
+    {
+      "en": "激励分层",
+      "zh": "激励分层"
+    },
+    {
+      "en": "先授权",
+      "zh": "先授权"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ugc-operation-team-lead",
+    "memberAgents": [
+      "ugc-operation",
+      "writing-toolkit-pro",
+      "kb-article-build"
+    ]
+  },
+  "version": "1.0.0"
+}

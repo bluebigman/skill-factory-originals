@@ -1,0 +1,126 @@
+{
+  "agentName": "sales-script-coach-team-lead",
+  "agents": [
+    "./agents/sales-script-coach-team-lead.md",
+    "./agents/sales-script-coach.md",
+    "./agents/presales-support-pro.md",
+    "./agents/customer-advocacy.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 销售话术",
+    "zh": "帮我处理销售话术"
+  },
+  "description": "sales-script-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 销售话术 requirements, output three deliverables: 演练固化, 需求转译, 范围界定. Verifiable end-to-end, evidence per step.",
+    "zh": "输入销售话术相关需求，输出演练固化、需求转译、范围界定三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "sales-script-coach Team",
+    "zh": "销售话术专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sales-script-coach-team-lead",
+      "name": {
+        "en": "销售话术主理人",
+        "zh": "销售话术主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sales-script-coach.png",
+      "id": "sales-script-coach",
+      "name": {
+        "en": "sales-script-coach",
+        "zh": "销售话术 场景演练 教练"
+      },
+      "profession": {
+        "en": "sales-script-coach",
+        "zh": "销售话术 场景演练 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/presales-support-pro.png",
+      "id": "presales-support-pro",
+      "name": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "profession": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/customer-advocacy.png",
+      "id": "customer-advocacy",
+      "name": {
+        "en": "customer-advocacy",
+        "zh": "客户推荐 培育路径 顾问"
+      },
+      "profession": {
+        "en": "customer-advocacy",
+        "zh": "客户推荐 培育路径 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-788",
+  "plugin": "group-team-788",
+  "profession": {
+    "en": "sales-script-coach Collaboration Team",
+    "zh": "销售话术专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 销售话术",
+      "zh": "帮我处理销售话术"
+    },
+    {
+      "en": "Plan 售前支持",
+      "zh": "帮我规划售前支持"
+    },
+    {
+      "en": "Review 客户推荐",
+      "zh": "帮我检查客户推荐"
+    }
+  ],
+  "tags": [
+    {
+      "en": "演练固化",
+      "zh": "演练固化"
+    },
+    {
+      "en": "按场景分类",
+      "zh": "按场景分类"
+    },
+    {
+      "en": "讲人话",
+      "zh": "讲人话"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sales-script-coach-team-lead",
+    "memberAgents": [
+      "sales-script-coach",
+      "presales-support-pro",
+      "customer-advocacy"
+    ]
+  },
+  "version": "1.0.0"
+}

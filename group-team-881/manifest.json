@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-881",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-881",
+    "kind": "team",
+    "name": "海外招聘入职衔接专家",
+    "description": "擅长依赖成图、关键路径与资源约束，覆盖任务规划全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-task-plan-team-lead",
+        "role": "lead",
+        "name": "任务规划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-task-plan",
+        "role": "member",
+        "name": "任务规划 排期 顾问",
+        "evidence": "original_assets/agent-task-plan/merkle_root",
+        "member_merkle_root": "b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a"
+      },
+      {
+        "slug": "intl-talent-onboard",
+        "role": "member",
+        "name": "海外招聘 入职衔接 助手",
+        "evidence": "original_assets/intl-talent-onboard/merkle_root",
+        "member_merkle_root": "45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6"
+      },
+      {
+        "slug": "contract-guard-pro",
+        "role": "member",
+        "name": "合同合规审查",
+        "evidence": "original_assets/contract-guard-pro/merkle_root",
+        "member_merkle_root": "d867668b246dd0cc191db7c36aa8f4d695ff89f488876cef53a22fedf4e90b3a"
+      }
+    ],
+    "team_lead": "agent-task-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6592b5f6b58de21a",
+  "prompt_hash": "571ee80934b06861",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-881\", \"kind\": \"team\", \"name\": \"海外招聘入职衔接专家\", \"description\": \"擅长依赖成图、关键路径与资源约束，覆盖任务规划全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-task-plan-team-lead\", \"role\": \"lead\", \"name\": \"任务规划主理人\", \"evidence\": null}, {\"slug\": \"agent-task-plan\", \"role\": \"member\", \"name\": \"任务规划 排期 顾问\", \"evidence\": \"original_assets/agent-task-plan/merkle_root\", \"member_merkle_root\": \"b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a\"}, {\"slug\": \"intl-talent-onboard\", \"role\": \"member\", \"name\": \"海外招聘 入职衔接 助手\", \"evidence\": \"original_assets/intl-talent-onboard/merkle_root\", \"member_merkle_root\": \"45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6\"}, {\"slug\": \"contract-guard-pro\", \"role\": \"member\", \"name\": \"合同合规审查\", \"evidence\": \"original_assets/contract-guard-pro/merkle_root\", \"member_merkle_root\": \"d867668b246dd0cc191db7c36aa8f4d695ff89f488876cef53a22fedf4e90b3a\"}], \"team_lead\": \"agent-task-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-task-plan-team-lead.md": "a9fef33f8398512566f8fd490d0de9868b0b8e032027b03f7b5d4d24c5a6965b",
+    "agents/agent-task-plan.md": "78e3a0bb64a9217ea6d1b2b99660b0f93952ffdb4ddb0910ea505e8739eee741",
+    "agents/contract-guard-pro.md": "411a261e97ace9d39c98c6e8bd22935a3f80805051f12fa74d0289cc8b5138e9",
+    "agents/intl-talent-onboard.md": "6cfe7f7dd7326da524f654daca316ea3dad68df09be55adc79943068d7b59b8a",
+    "plugin.json": "19b0badc70bd7549eab10fe6ba1525b55c06f0d77d2c60dd48f9e1a3048c3483",
+    "settings.json": "a71142c6b9396f44e7fd969fd71770bd6dd6c3800eff7da2e710e08a60fc4b02"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-base-pro-team-lead",
+  "agents": [
+    "./agents/knowledge-base-pro-team-lead.md",
+    "./agents/knowledge-base-pro.md",
+    "./agents/knowledge-base-pro-01-fixed.md",
+    "./agents/document-diff-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档建站",
+    "zh": "帮我处理文档建站"
+  },
+  "description": "知识库与笔记 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档比对 end-to-end: 差异分级, 位置明确 and 批量汇总. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长差异分级、位置明确与批量汇总，覆盖文档比对全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "知识库与笔记 Suite Team",
+    "zh": "文档比对版本差异专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-base-pro-team-lead",
+      "name": {
+        "en": "文档建站主理人",
+        "zh": "文档建站主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro.png",
+      "id": "knowledge-base-pro",
+      "name": {
+        "en": "知识库与笔记 Suite",
+        "zh": "文档建站 知识库搭建"
+      },
+      "profession": {
+        "en": "知识库与笔记 Suite",
+        "zh": "文档建站 知识库搭建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01-fixed.png",
+      "id": "knowledge-base-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/document-diff-pro.png",
+      "id": "document-diff-pro",
+      "name": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "profession": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-754",
+  "plugin": "group-team-754",
+  "profession": {
+    "en": "知识库与笔记 Suite Collaboration Team",
+    "zh": "文档比对版本差异专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档建站",
+      "zh": "帮我处理文档建站"
+    },
+    {
+      "en": "Plan 项目记忆",
+      "zh": "帮我规划项目记忆"
+    },
+    {
+      "en": "Review 文档比对",
+      "zh": "帮我检查文档比对"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档建站",
+      "zh": "文档建站"
+    },
+    {
+      "en": "资料整理",
+      "zh": "资料整理"
+    },
+    {
+      "en": "学习参考",
+      "zh": "学习参考"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-base-pro-team-lead",
+    "memberAgents": [
+      "knowledge-base-pro",
+      "knowledge-base-pro-01-fixed",
+      "document-diff-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

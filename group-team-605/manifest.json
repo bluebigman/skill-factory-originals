@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-605",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-605",
+    "kind": "team",
+    "name": "文档解构要点提炼专家",
+    "description": "擅长优化排序、预算联动与字段完备，覆盖成本归因全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-struct-pro-team-lead",
+        "role": "lead",
+        "name": "文档解构主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-struct-pro",
+        "role": "member",
+        "name": "文档解构 要点提炼 结构化输出",
+        "evidence": "original_assets/doc-struct-pro/merkle_root",
+        "member_merkle_root": "9393ea384639f7b3391cdd04d31a128922a0c84eeccfda769b91c5dbe6e1b960"
+      },
+      {
+        "slug": "agent-cost-attribution",
+        "role": "member",
+        "name": "成本归因 分项核算 顾问",
+        "evidence": "original_assets/agent-cost-attribution/merkle_root",
+        "member_merkle_root": "1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa"
+      },
+      {
+        "slug": "api-contract-test",
+        "role": "member",
+        "name": "接口契约 兼容校验 顾问",
+        "evidence": "original_assets/api-contract-test/merkle_root",
+        "member_merkle_root": "46b3ec9a1590398609de04242bcb24d1ed4b92017abc0bd17fafc0fdfdeb8b4b"
+      }
+    ],
+    "team_lead": "doc-struct-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7d3ff0ef9c86d680",
+  "prompt_hash": "c9a40c103ce6cb18",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-605\", \"kind\": \"team\", \"name\": \"文档解构要点提炼专家\", \"description\": \"擅长优化排序、预算联动与字段完备，覆盖成本归因全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-struct-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档解构主理人\", \"evidence\": null}, {\"slug\": \"doc-struct-pro\", \"role\": \"member\", \"name\": \"文档解构 要点提炼 结构化输出\", \"evidence\": \"original_assets/doc-struct-pro/merkle_root\", \"member_merkle_root\": \"9393ea384639f7b3391cdd04d31a128922a0c84eeccfda769b91c5dbe6e1b960\"}, {\"slug\": \"agent-cost-attribution\", \"role\": \"member\", \"name\": \"成本归因 分项核算 顾问\", \"evidence\": \"original_assets/agent-cost-attribution/merkle_root\", \"member_merkle_root\": \"1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa\"}, {\"slug\": \"api-contract-test\", \"role\": \"member\", \"name\": \"接口契约 兼容校验 顾问\", \"evidence\": \"original_assets/api-contract-test/merkle_root\", \"member_merkle_root\": \"46b3ec9a1590398609de04242bcb24d1ed4b92017abc0bd17fafc0fdfdeb8b4b\"}], \"team_lead\": \"doc-struct-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-cost-attribution.md": "8fe803e2a6967d5fb7802ed889b638cac8edabab700eea2e54f77dd60ea6e810",
+    "agents/api-contract-test.md": "35ba5ebb20284036c4d5fa62984bd64e9905e59e4db7fb71ca2199afd8cf2b4c",
+    "agents/doc-struct-pro-team-lead.md": "a8cef76cf71590e90b64e8b41925ba5c6a72d4287a5cf3d6674505ae18c7203e",
+    "agents/doc-struct-pro.md": "241266ed60389d1fe2d342820b2b86f7d593f1cdcf827a484cadb9795cc2e782",
+    "plugin.json": "2563dccc0dcae8cfdaff993c90d7d1fa7a059e119e2e0564d6f17449d6c1ce02",
+    "settings.json": "547bff647ec8b966e4f24aed6d7a38887a709cb4997a19384c883943152313ff"
+  }
+}

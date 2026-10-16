@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1019",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1019",
+    "kind": "team",
+    "name": "商务邮件撰写专家",
+    "description": "商务邮件撰写专家：围绕商务邮件撰写，覆盖主题具体／一段一事／行动明确，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "email-professional-team-lead",
+        "role": "lead",
+        "name": "商务邮件撰写主理人",
+        "evidence": null
+      },
+      {
+        "slug": "email-professional",
+        "role": "member",
+        "name": "商务邮件撰写 顾问",
+        "evidence": "original_assets/email-professional/merkle_root",
+        "member_merkle_root": "820500dfae2ce82dd5ba4068f74301c3368540672ba261cbb2a814cc9eb2bcf3"
+      },
+      {
+        "slug": "report-outline-design",
+        "role": "member",
+        "name": "报告大纲设计 顾问",
+        "evidence": "original_assets/report-outline-design/merkle_root",
+        "member_merkle_root": "e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3"
+      },
+      {
+        "slug": "copy-test-method",
+        "role": "member",
+        "name": "文案测试 方法设计 顾问",
+        "evidence": "original_assets/copy-test-method/merkle_root",
+        "member_merkle_root": "fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd"
+      }
+    ],
+    "team_lead": "email-professional-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9f93d7a20527b23b",
+  "prompt_hash": "18d1b1b31005a845",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1019\", \"kind\": \"team\", \"name\": \"商务邮件撰写专家\", \"description\": \"商务邮件撰写专家：围绕商务邮件撰写，覆盖主题具体／一段一事／行动明确，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"email-professional-team-lead\", \"role\": \"lead\", \"name\": \"商务邮件撰写主理人\", \"evidence\": null}, {\"slug\": \"email-professional\", \"role\": \"member\", \"name\": \"商务邮件撰写 顾问\", \"evidence\": \"original_assets/email-professional/merkle_root\", \"member_merkle_root\": \"820500dfae2ce82dd5ba4068f74301c3368540672ba261cbb2a814cc9eb2bcf3\"}, {\"slug\": \"report-outline-design\", \"role\": \"member\", \"name\": \"报告大纲设计 顾问\", \"evidence\": \"original_assets/report-outline-design/merkle_root\", \"member_merkle_root\": \"e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3\"}, {\"slug\": \"copy-test-method\", \"role\": \"member\", \"name\": \"文案测试 方法设计 顾问\", \"evidence\": \"original_assets/copy-test-method/merkle_root\", \"member_merkle_root\": \"fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd\"}], \"team_lead\": \"email-professional-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/copy-test-method.md": "abce1d76ecf90a84b1decb033eeadac7e2c01397deef9818d76c4aa6047ab535",
+    "agents/email-professional-team-lead.md": "1d3a1db7f248648592357b85a3fd074d6f1309e204175ce37cb616db1e2ba88f",
+    "agents/email-professional.md": "1f8605aa70236a24f46166177cd79343cadd975f087da9bf9865f062fd124b4c",
+    "agents/report-outline-design.md": "fe77e9c1e56906f0557a5c1d30c509addf9a58250c9e9ddd82d4ac723a1b7cf5",
+    "plugin.json": "815f23e4787de610617b37979797d18d047d3fe50367a3c372cb7449b0e21f80",
+    "settings.json": "02835f68cf08a5d10fb12a277ddb9f9a582c2430bf3e655f626a85a53baa7e5f"
+  }
+}

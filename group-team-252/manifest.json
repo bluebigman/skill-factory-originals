@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-252",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-252",
+    "kind": "team",
+    "name": "跨境 报价 续约 团队",
+    "description": "跨境 报价 续约 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cross-border-listing-pro-team-lead",
+        "role": "lead",
+        "name": "跨境选品主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cross-border-listing-pro",
+        "role": "member",
+        "name": "跨境选品 上架合规 顾问",
+        "evidence": "original_assets/cross-border-listing-pro/merkle_root",
+        "member_merkle_root": "f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac"
+      },
+      {
+        "slug": "quotation-standard",
+        "role": "member",
+        "name": "报价方案 结构规范 顾问",
+        "evidence": "original_assets/quotation-standard/merkle_root",
+        "member_merkle_root": "2e9ce8e360651d99f7502fbc960482be4b8c2bc5268f46b822855bed85495b70"
+      },
+      {
+        "slug": "renewal-playbook",
+        "role": "member",
+        "name": "续约管理 提前动作 顾问",
+        "evidence": "original_assets/renewal-playbook/merkle_root",
+        "member_merkle_root": "d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54"
+      }
+    ],
+    "team_lead": "cross-border-listing-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "55403f4a5f428fee",
+  "prompt_hash": "84b929033e90bc44",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-252\", \"kind\": \"team\", \"name\": \"跨境 报价 续约 团队\", \"description\": \"跨境 报价 续约 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cross-border-listing-pro-team-lead\", \"role\": \"lead\", \"name\": \"跨境选品主理人\", \"evidence\": null}, {\"slug\": \"cross-border-listing-pro\", \"role\": \"member\", \"name\": \"跨境选品 上架合规 顾问\", \"evidence\": \"original_assets/cross-border-listing-pro/merkle_root\", \"member_merkle_root\": \"f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac\"}, {\"slug\": \"quotation-standard\", \"role\": \"member\", \"name\": \"报价方案 结构规范 顾问\", \"evidence\": \"original_assets/quotation-standard/merkle_root\", \"member_merkle_root\": \"2e9ce8e360651d99f7502fbc960482be4b8c2bc5268f46b822855bed85495b70\"}, {\"slug\": \"renewal-playbook\", \"role\": \"member\", \"name\": \"续约管理 提前动作 顾问\", \"evidence\": \"original_assets/renewal-playbook/merkle_root\", \"member_merkle_root\": \"d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54\"}], \"team_lead\": \"cross-border-listing-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-listing-pro-team-lead.md": "84a5931ba6df4eb84658aba424a177ff1d9c60ee7b49e315cc34424fea910312",
+    "agents/cross-border-listing-pro.md": "f729d03d4e818852222899beff9e84f0bdf4004d3fb5abbf8ba86ea28ff1b1b0",
+    "agents/quotation-standard.md": "e99bd45752341cbed2cfb52cb108cb5323c5952ce9d6eb050105b825c7316fb1",
+    "agents/renewal-playbook.md": "e4a47df48c326e50bc0364ec942b10ee5950d585acff672f745f8de3b9cb33d4",
+    "plugin.json": "acaf4edd8b69f27e52d3e3305dd3dad51ad278dd5ffbf0bbee3639ccdd19671e",
+    "settings.json": "60ae113510f7273188d1f55758486ece7e31963c152fe92e9b20c2186963194b"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-745",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-745",
+    "kind": "team",
+    "name": "售前支持方案配合专家",
+    "description": "擅长需求转译、范围界定与承诺可验，覆盖售前支持全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "presales-support-pro-team-lead",
+        "role": "lead",
+        "name": "售前支持主理人",
+        "evidence": null
+      },
+      {
+        "slug": "presales-support-pro",
+        "role": "member",
+        "name": "售前支持 方案配合 顾问",
+        "evidence": "original_assets/presales-support-pro/merkle_root",
+        "member_merkle_root": "98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e"
+      },
+      {
+        "slug": "resume-job-pro",
+        "role": "member",
+        "name": "简历优化 岗位匹配 面试准备",
+        "evidence": "original_assets/resume-job-pro/merkle_root",
+        "member_merkle_root": "66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b"
+      },
+      {
+        "slug": "project-manage-pro",
+        "role": "member",
+        "name": "项目任务管理 进度跟踪",
+        "evidence": "original_assets/project-manage-pro/merkle_root",
+        "member_merkle_root": "956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0"
+      }
+    ],
+    "team_lead": "presales-support-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e1309078c5763540",
+  "prompt_hash": "7b67211c6493ad63",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-745\", \"kind\": \"team\", \"name\": \"售前支持方案配合专家\", \"description\": \"擅长需求转译、范围界定与承诺可验，覆盖售前支持全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"presales-support-pro-team-lead\", \"role\": \"lead\", \"name\": \"售前支持主理人\", \"evidence\": null}, {\"slug\": \"presales-support-pro\", \"role\": \"member\", \"name\": \"售前支持 方案配合 顾问\", \"evidence\": \"original_assets/presales-support-pro/merkle_root\", \"member_merkle_root\": \"98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e\"}, {\"slug\": \"resume-job-pro\", \"role\": \"member\", \"name\": \"简历优化 岗位匹配 面试准备\", \"evidence\": \"original_assets/resume-job-pro/merkle_root\", \"member_merkle_root\": \"66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b\"}, {\"slug\": \"project-manage-pro\", \"role\": \"member\", \"name\": \"项目任务管理 进度跟踪\", \"evidence\": \"original_assets/project-manage-pro/merkle_root\", \"member_merkle_root\": \"956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0\"}], \"team_lead\": \"presales-support-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/presales-support-pro-team-lead.md": "dcdf1d235949c2cccb5b5f86f35574e6ae9413320143b14820419f70abe5e142",
+    "agents/presales-support-pro.md": "1bbf4200c8b786c896d06e680a51e4a2fc0e5f69efa248667fcfcbec195543c3",
+    "agents/project-manage-pro.md": "76c27c8efb56058cd972cc47e0dab34ba601f661984109ab99195a3624dc191e",
+    "agents/resume-job-pro.md": "86e37c62efeb3d3276dcc2385b4a38ae2d63d86485afc0fce29c1e42847bd69e",
+    "plugin.json": "1eb9a951f98717f04ed534e518207cc16db321fd3276c487340f6cf5478401a4",
+    "settings.json": "2aab88a4fc62ba18a7a5a2104d42f3510ea5b0a68756448c1ae5c060ceffb716"
+  }
+}

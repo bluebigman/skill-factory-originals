@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-task-queue-team-lead",
+  "agents": [
+    "./agents/agent-task-queue-team-lead.md",
+    "./agents/agent-task-queue.md",
+    "./agents/backup-restore-plan.md",
+    "./agents/dashboard-perf.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 任务队列",
+    "zh": "帮我处理任务队列"
+  },
+  "description": "agent-task-queue team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 任务队列 requirements, output three deliverables: 幂等入队, 超时处理, 定期演练. Verifiable end-to-end, evidence per step.",
+    "zh": "输入任务队列相关需求，输出幂等入队、超时处理、定期演练三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-task-queue Team",
+    "zh": "任务队列优先级专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-task-queue-team-lead",
+      "name": {
+        "en": "任务队列主理人",
+        "zh": "任务队列主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-task-queue.png",
+      "id": "agent-task-queue",
+      "name": {
+        "en": "agent-task-queue",
+        "zh": "任务队列 优先级 顾问"
+      },
+      "profession": {
+        "en": "agent-task-queue",
+        "zh": "任务队列 优先级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/backup-restore-plan.png",
+      "id": "backup-restore-plan",
+      "name": {
+        "en": "backup-restore-plan",
+        "zh": "备份恢复方案 顾问"
+      },
+      "profession": {
+        "en": "backup-restore-plan",
+        "zh": "备份恢复方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dashboard-perf.png",
+      "id": "dashboard-perf",
+      "name": {
+        "en": "dashboard-perf",
+        "zh": "仪表盘性能 优化"
+      },
+      "profession": {
+        "en": "dashboard-perf",
+        "zh": "仪表盘性能 优化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-952",
+  "plugin": "group-team-952",
+  "profession": {
+    "en": "agent-task-queue Collaboration Team",
+    "zh": "任务队列优先级专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 任务队列",
+      "zh": "帮我处理任务队列"
+    },
+    {
+      "en": "Plan 备份恢复方案",
+      "zh": "帮我规划备份恢复方案"
+    },
+    {
+      "en": "Review 仪表盘性能",
+      "zh": "帮我检查仪表盘性能"
+    }
+  ],
+  "tags": [
+    {
+      "en": "幂等入队",
+      "zh": "幂等入队"
+    },
+    {
+      "en": "超时处理",
+      "zh": "超时处理"
+    },
+    {
+      "en": "防饿死",
+      "zh": "防饿死"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-task-queue-team-lead",
+    "memberAgents": [
+      "agent-task-queue",
+      "backup-restore-plan",
+      "dashboard-perf"
+    ]
+  },
+  "version": "1.0.0"
+}

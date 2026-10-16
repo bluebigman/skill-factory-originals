@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-595",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-595",
+    "kind": "team",
+    "name": "客户流失专家",
+    "description": "客户流失专家：围绕客户流失，覆盖行为信号／分级干预／归因访谈，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "churn-prevent-pro-team-lead",
+        "role": "lead",
+        "name": "客户流失主理人",
+        "evidence": null
+      },
+      {
+        "slug": "churn-prevent-pro",
+        "role": "member",
+        "name": "客户流失 预警干预 顾问",
+        "evidence": "original_assets/churn-prevent-pro/merkle_root",
+        "member_merkle_root": "5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58"
+      },
+      {
+        "slug": "sales-territory-pro",
+        "role": "member",
+        "name": "区域划分 覆盖策略 顾问",
+        "evidence": "original_assets/sales-territory-pro/merkle_root",
+        "member_merkle_root": "dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7"
+      },
+      {
+        "slug": "requirement-clarify-pro",
+        "role": "member",
+        "name": "需求澄清 边界确认 顾问",
+        "evidence": "original_assets/requirement-clarify-pro/merkle_root",
+        "member_merkle_root": "4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39"
+      }
+    ],
+    "team_lead": "churn-prevent-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7ccad4411778a4e9",
+  "prompt_hash": "c211dec18d17525b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-595\", \"kind\": \"team\", \"name\": \"客户流失专家\", \"description\": \"客户流失专家：围绕客户流失，覆盖行为信号／分级干预／归因访谈，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"churn-prevent-pro-team-lead\", \"role\": \"lead\", \"name\": \"客户流失主理人\", \"evidence\": null}, {\"slug\": \"churn-prevent-pro\", \"role\": \"member\", \"name\": \"客户流失 预警干预 顾问\", \"evidence\": \"original_assets/churn-prevent-pro/merkle_root\", \"member_merkle_root\": \"5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58\"}, {\"slug\": \"sales-territory-pro\", \"role\": \"member\", \"name\": \"区域划分 覆盖策略 顾问\", \"evidence\": \"original_assets/sales-territory-pro/merkle_root\", \"member_merkle_root\": \"dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7\"}, {\"slug\": \"requirement-clarify-pro\", \"role\": \"member\", \"name\": \"需求澄清 边界确认 顾问\", \"evidence\": \"original_assets/requirement-clarify-pro/merkle_root\", \"member_merkle_root\": \"4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39\"}], \"team_lead\": \"churn-prevent-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/churn-prevent-pro-team-lead.md": "46e18a35fc5ba0a4bf817dbed4886922400166bbd9b51fbfe2eb326af11a4e8e",
+    "agents/churn-prevent-pro.md": "c1d90af463b742423048ec68035eae1357ba4357d30243a4910d970ef8d2ea53",
+    "agents/requirement-clarify-pro.md": "bc6bf22560a0b32b3403d16d6c5e2d533d02e22b8b66b98c7090bf7c63b15f35",
+    "agents/sales-territory-pro.md": "3c5538c6109f5ad3a3f2703e8f75c39bee9050aa94b8ee744926f6e679ae4dc7",
+    "plugin.json": "9b60919cd6fdf34582b90d7efc2b2c6b06dbc3229dcb0576934dd926f7ff29d5",
+    "settings.json": "b3594999141ad1abab514d1be360242985dcfcd15e438a7a63febb67e8cbe112"
+  }
+}

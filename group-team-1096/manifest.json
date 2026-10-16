@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1096",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1096",
+    "kind": "team",
+    "name": "插画风格指南专家",
+    "description": "擅长风格统一、语义一致与尺寸适配，覆盖插画风格指南全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "illustration-guide-team-lead",
+        "role": "lead",
+        "name": "插画风格指南主理人",
+        "evidence": null
+      },
+      {
+        "slug": "illustration-guide",
+        "role": "member",
+        "name": "插画风格指南 顾问",
+        "evidence": "original_assets/illustration-guide/merkle_root",
+        "member_merkle_root": "aa946c79335cb2d54b35fce47e7887c2e0610d4389184a31cbb3213d344eefea"
+      },
+      {
+        "slug": "onboarding-product",
+        "role": "member",
+        "name": "新用户 上手引导 顾问",
+        "evidence": "original_assets/onboarding-product/merkle_root",
+        "member_merkle_root": "5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab"
+      },
+      {
+        "slug": "design-system-pro",
+        "role": "member",
+        "name": "设计系统 组件规范 顾问",
+        "evidence": "original_assets/design-system-pro/merkle_root",
+        "member_merkle_root": "600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce"
+      }
+    ],
+    "team_lead": "illustration-guide-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "765a3428bec817d3",
+  "prompt_hash": "ec6024b65a1c1d65",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1096\", \"kind\": \"team\", \"name\": \"插画风格指南专家\", \"description\": \"擅长风格统一、语义一致与尺寸适配，覆盖插画风格指南全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"illustration-guide-team-lead\", \"role\": \"lead\", \"name\": \"插画风格指南主理人\", \"evidence\": null}, {\"slug\": \"illustration-guide\", \"role\": \"member\", \"name\": \"插画风格指南 顾问\", \"evidence\": \"original_assets/illustration-guide/merkle_root\", \"member_merkle_root\": \"aa946c79335cb2d54b35fce47e7887c2e0610d4389184a31cbb3213d344eefea\"}, {\"slug\": \"onboarding-product\", \"role\": \"member\", \"name\": \"新用户 上手引导 顾问\", \"evidence\": \"original_assets/onboarding-product/merkle_root\", \"member_merkle_root\": \"5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab\"}, {\"slug\": \"design-system-pro\", \"role\": \"member\", \"name\": \"设计系统 组件规范 顾问\", \"evidence\": \"original_assets/design-system-pro/merkle_root\", \"member_merkle_root\": \"600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce\"}], \"team_lead\": \"illustration-guide-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-system-pro.md": "3eeabe97917b30718c5fce73ae60ac0da333c64f3f1395f5a98cb506b388bd03",
+    "agents/illustration-guide-team-lead.md": "faedea676dfd6ec7f54b9d1aadbd434ede60f2e89640270a28ae625b3ccba7b5",
+    "agents/illustration-guide.md": "6bff39d33847fe2e1a3b03df3223060c063a9d03ce7c334171851866ccc78284",
+    "agents/onboarding-product.md": "d67342ffc52553fcebb14f4b164556548ef6ddaef7f2d68a6618fb5ab681136a",
+    "plugin.json": "b91fcc6352f8ace6fc545a6cf07e80d7e16a2406a8275671b0fff18d8297f521",
+    "settings.json": "a06e0b2b534089b61106fad9f50c5893841588403372041d9af7bb06218859e9"
+  }
+}

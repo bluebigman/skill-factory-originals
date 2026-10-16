@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-template-version-team-lead",
+  "agents": [
+    "./agents/doc-template-version-team-lead.md",
+    "./agents/doc-template-version.md",
+    "./agents/meeting-facilitation.md",
+    "./agents/doc-version-manage.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 模板版本管理",
+    "zh": "帮我处理模板版本管理"
+  },
+  "description": "doc-template-version team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 模板版本管理 end-to-end: 变更说明, 兼容声明 and 旧版保留. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长变更说明、兼容声明与旧版保留，覆盖模板版本管理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-template-version Team",
+    "zh": "模板版本管理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-template-version-team-lead",
+      "name": {
+        "en": "模板版本管理主理人",
+        "zh": "模板版本管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-template-version.png",
+      "id": "doc-template-version",
+      "name": {
+        "en": "doc-template-version",
+        "zh": "模板版本管理 助手"
+      },
+      "profession": {
+        "en": "doc-template-version",
+        "zh": "模板版本管理 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/meeting-facilitation.png",
+      "id": "meeting-facilitation",
+      "name": {
+        "en": "meeting-facilitation",
+        "zh": "会议主持 顾问"
+      },
+      "profession": {
+        "en": "meeting-facilitation",
+        "zh": "会议主持 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-version-manage.png",
+      "id": "doc-version-manage",
+      "name": {
+        "en": "doc-version-manage",
+        "zh": "文档版本 变更记录 顾问"
+      },
+      "profession": {
+        "en": "doc-version-manage",
+        "zh": "文档版本 变更记录 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1207",
+  "plugin": "group-team-1207",
+  "profession": {
+    "en": "doc-template-version Collaboration Team",
+    "zh": "模板版本管理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 模板版本管理",
+      "zh": "帮我处理模板版本管理"
+    },
+    {
+      "en": "Plan 会议主持",
+      "zh": "帮我规划会议主持"
+    },
+    {
+      "en": "Review 文档版本",
+      "zh": "帮我检查文档版本"
+    }
+  ],
+  "tags": [
+    {
+      "en": "变更说明",
+      "zh": "变更说明"
+    },
+    {
+      "en": "兼容声明",
+      "zh": "兼容声明"
+    },
+    {
+      "en": "旧版保留",
+      "zh": "旧版保留"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-template-version-team-lead",
+    "memberAgents": [
+      "doc-template-version",
+      "meeting-facilitation",
+      "doc-version-manage"
+    ]
+  },
+  "version": "1.0.0"
+}

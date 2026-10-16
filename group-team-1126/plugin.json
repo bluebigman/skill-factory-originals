@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-pro-01-fixed-team-lead",
+  "agents": [
+    "./agents/data-pipeline-pro-01-fixed-team-lead.md",
+    "./agents/data-pipeline-pro-01-fixed.md",
+    "./agents/cost-visibility.md",
+    "./agents/data-dict-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle R包数据转换",
+    "zh": "帮我处理R包数据转换"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 成本可见性 end-to-end: 按维度拆, 异常告警 and 责任到人. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长按维度拆、异常告警与责任到人，覆盖成本可见性全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "成本可见性专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-pro-01-fixed-team-lead",
+      "name": {
+        "en": "R包数据转换主理人",
+        "zh": "R包数据转换主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro-01-fixed.png",
+      "id": "data-pipeline-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cost-visibility.png",
+      "id": "cost-visibility",
+      "name": {
+        "en": "cost-visibility",
+        "zh": "成本可见性 顾问"
+      },
+      "profession": {
+        "en": "cost-visibility",
+        "zh": "成本可见性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-dict-build.png",
+      "id": "data-dict-build",
+      "name": {
+        "en": "data-dict-build",
+        "zh": "数据字典构建 助手"
+      },
+      "profession": {
+        "en": "data-dict-build",
+        "zh": "数据字典构建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1126",
+  "plugin": "group-team-1126",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "成本可见性专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle R包数据转换",
+      "zh": "帮我处理R包数据转换"
+    },
+    {
+      "en": "Plan 成本可见性",
+      "zh": "帮我规划成本可见性"
+    },
+    {
+      "en": "Review 数据字典构建",
+      "zh": "帮我检查数据字典构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "批量整理",
+      "zh": "批量整理"
+    },
+    {
+      "en": "命名规范",
+      "zh": "命名规范"
+    },
+    {
+      "en": "规格转化",
+      "zh": "规格转化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-pro-01-fixed-team-lead",
+    "memberAgents": [
+      "data-pipeline-pro-01-fixed",
+      "cost-visibility",
+      "data-dict-build"
+    ]
+  },
+  "version": "1.0.0"
+}

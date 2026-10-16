@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-889",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-889",
+    "kind": "team",
+    "name": "代工管理过程审核专家",
+    "description": "代工管理过程审核专家：围绕代工管理，覆盖首件确认／过程巡线／变更管控，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "contract-mfg-audit-pro-team-lead",
+        "role": "lead",
+        "name": "代工管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "contract-mfg-audit-pro",
+        "role": "member",
+        "name": "代工管理 过程审核 顾问",
+        "evidence": "original_assets/contract-mfg-audit-pro/merkle_root",
+        "member_merkle_root": "e6db2db3f515fa85e99569ef501fd812d3becd37383f1898ba423bc77fcfa9f9"
+      },
+      {
+        "slug": "cs-health-score",
+        "role": "member",
+        "name": "客户健康 评分模型 顾问",
+        "evidence": "original_assets/cs-health-score/merkle_root",
+        "member_merkle_root": "4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2"
+      },
+      {
+        "slug": "sales-enable-pro",
+        "role": "member",
+        "name": "销售赋能 素材工具 顾问",
+        "evidence": "original_assets/sales-enable-pro/merkle_root",
+        "member_merkle_root": "40cb04b62cc137982d695cf91dc96c4ffd18f816fa0fc9a69b100e18149f83b3"
+      }
+    ],
+    "team_lead": "contract-mfg-audit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8bbe9f3623379831",
+  "prompt_hash": "05f60834981d6093",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-889\", \"kind\": \"team\", \"name\": \"代工管理过程审核专家\", \"description\": \"代工管理过程审核专家：围绕代工管理，覆盖首件确认／过程巡线／变更管控，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"contract-mfg-audit-pro-team-lead\", \"role\": \"lead\", \"name\": \"代工管理主理人\", \"evidence\": null}, {\"slug\": \"contract-mfg-audit-pro\", \"role\": \"member\", \"name\": \"代工管理 过程审核 顾问\", \"evidence\": \"original_assets/contract-mfg-audit-pro/merkle_root\", \"member_merkle_root\": \"e6db2db3f515fa85e99569ef501fd812d3becd37383f1898ba423bc77fcfa9f9\"}, {\"slug\": \"cs-health-score\", \"role\": \"member\", \"name\": \"客户健康 评分模型 顾问\", \"evidence\": \"original_assets/cs-health-score/merkle_root\", \"member_merkle_root\": \"4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2\"}, {\"slug\": \"sales-enable-pro\", \"role\": \"member\", \"name\": \"销售赋能 素材工具 顾问\", \"evidence\": \"original_assets/sales-enable-pro/merkle_root\", \"member_merkle_root\": \"40cb04b62cc137982d695cf91dc96c4ffd18f816fa0fc9a69b100e18149f83b3\"}], \"team_lead\": \"contract-mfg-audit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-mfg-audit-pro-team-lead.md": "101f50d61d472af0f237169d0996c4a3a59adf4dd05eeff30a21a402abf79e2a",
+    "agents/contract-mfg-audit-pro.md": "71a9415c3fe57d7a83c572a00114d98e4d555cc2608a343a88e16e6918407af7",
+    "agents/cs-health-score.md": "496d525f6c1bae3ca921f8e0e191065421a44c1db5ca860d9c0c89afa036e847",
+    "agents/sales-enable-pro.md": "27776da7333e9e01b6f85db66f59fc0a33a4b58f414e401a2ce48dd474c3c341",
+    "plugin.json": "334508520808d4fbe13fd6e01c33fa896813b7a1e692cb1c589909fa3bcdc6d6",
+    "settings.json": "9447b7df8acfac56f9ac2b049223eccc3d9acc98edad1f48816ad123074564b3"
+  }
+}

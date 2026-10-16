@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-862",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-862",
+    "kind": "team",
+    "name": "表关系梳理专家",
+    "description": "表关系梳理专家：围绕表关系梳理，覆盖实体识别／关系明确／分级明确，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "table-relation-map-team-lead",
+        "role": "lead",
+        "name": "表关系梳理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "table-relation-map",
+        "role": "member",
+        "name": "表关系梳理 助手",
+        "evidence": "original_assets/table-relation-map/merkle_root",
+        "member_merkle_root": "e84709221060b7bb9e8664708d6e69b8ef6ae5d85b2520131e445472d6d70b54"
+      },
+      {
+        "slug": "log-standard-define",
+        "role": "member",
+        "name": "日志规范 制定",
+        "evidence": "original_assets/log-standard-define/merkle_root",
+        "member_merkle_root": "d0db9a571878ebf682ca131148552a08b9e059c46a2dfc2a3b76f816a9897bf6"
+      },
+      {
+        "slug": "sql-toolkit-pro-fixed",
+        "role": "member",
+        "name": "关系查询 HEC 方言适配",
+        "evidence": "original_assets/sql-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999"
+      }
+    ],
+    "team_lead": "table-relation-map-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "05c0a213a2274349",
+  "prompt_hash": "5b9883198e1d1566",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-862\", \"kind\": \"team\", \"name\": \"表关系梳理专家\", \"description\": \"表关系梳理专家：围绕表关系梳理，覆盖实体识别／关系明确／分级明确，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"table-relation-map-team-lead\", \"role\": \"lead\", \"name\": \"表关系梳理主理人\", \"evidence\": null}, {\"slug\": \"table-relation-map\", \"role\": \"member\", \"name\": \"表关系梳理 助手\", \"evidence\": \"original_assets/table-relation-map/merkle_root\", \"member_merkle_root\": \"e84709221060b7bb9e8664708d6e69b8ef6ae5d85b2520131e445472d6d70b54\"}, {\"slug\": \"log-standard-define\", \"role\": \"member\", \"name\": \"日志规范 制定\", \"evidence\": \"original_assets/log-standard-define/merkle_root\", \"member_merkle_root\": \"d0db9a571878ebf682ca131148552a08b9e059c46a2dfc2a3b76f816a9897bf6\"}, {\"slug\": \"sql-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"关系查询 HEC 方言适配\", \"evidence\": \"original_assets/sql-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999\"}], \"team_lead\": \"table-relation-map-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/log-standard-define.md": "33285802017593ba56c0ede209f7288349f72a732966d6a4ee4f2a0222b22dd0",
+    "agents/sql-toolkit-pro-fixed.md": "e50f08a0dd225864041f8695e59d6444586291dbee17e21c1281b8bb0d02542c",
+    "agents/table-relation-map-team-lead.md": "1a43b0a03a038e5e04f3a45861f0cdf765be0580da665840048f661588b47968",
+    "agents/table-relation-map.md": "eec419d53de5f63f6ee80faa5106680afba48bc00bb6aa89e1a98246dfed25e9",
+    "plugin.json": "e2fa11e06f1dfb0caa94835a5d6e7078a5b1b945854ee7d9a8662142960219eb",
+    "settings.json": "ebc6106db60a57a6ab230701c97cde851b737993dda300892665a5ff8a7af57b"
+  }
+}

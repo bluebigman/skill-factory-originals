@@ -1,0 +1,126 @@
+{
+  "agentName": "content-structure-team-lead",
+  "agents": [
+    "./agents/content-structure-team-lead.md",
+    "./agents/content-structure.md",
+    "./agents/note-life-pro.md",
+    "./agents/image-brief-generate.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容结构设计",
+    "zh": "帮我处理内容结构设计"
+  },
+  "description": "content-structure team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内容结构设计 end-to-end: 结论先行, 分层清晰 and 每节独立. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长结论先行、分层清晰与每节独立，覆盖内容结构设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "content-structure Team",
+    "zh": "内容结构设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-structure-team-lead",
+      "name": {
+        "en": "内容结构设计主理人",
+        "zh": "内容结构设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-structure.png",
+      "id": "content-structure",
+      "name": {
+        "en": "content-structure",
+        "zh": "内容结构设计 顾问"
+      },
+      "profession": {
+        "en": "content-structure",
+        "zh": "内容结构设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/note-life-pro.png",
+      "id": "note-life-pro",
+      "name": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "profession": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/image-brief-generate.png",
+      "id": "image-brief-generate",
+      "name": {
+        "en": "image-brief-generate",
+        "zh": "配图需求描述 助手"
+      },
+      "profession": {
+        "en": "image-brief-generate",
+        "zh": "配图需求描述 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1168",
+  "plugin": "group-team-1168",
+  "profession": {
+    "en": "content-structure Collaboration Team",
+    "zh": "内容结构设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容结构设计",
+      "zh": "帮我处理内容结构设计"
+    },
+    {
+      "en": "Plan 笔记与生活助手",
+      "zh": "帮我规划笔记与生活助手"
+    },
+    {
+      "en": "Review 配图需求描述",
+      "zh": "帮我检查配图需求描述"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结论先行",
+      "zh": "结论先行"
+    },
+    {
+      "en": "分层清晰",
+      "zh": "分层清晰"
+    },
+    {
+      "en": "每节独立",
+      "zh": "每节独立"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-structure-team-lead",
+    "memberAgents": [
+      "content-structure",
+      "note-life-pro",
+      "image-brief-generate"
+    ]
+  },
+  "version": "1.0.0"
+}

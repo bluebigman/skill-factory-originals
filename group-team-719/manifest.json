@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-719",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-719",
+    "kind": "team",
+    "name": "简历优化岗位匹配专家",
+    "description": "简历优化岗位匹配专家：围绕计量器具，覆盖台账齐全／周期强制／状态标识，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "resume-job-pro-team-lead",
+        "role": "lead",
+        "name": "简历优化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "resume-job-pro",
+        "role": "member",
+        "name": "简历优化 岗位匹配 面试准备",
+        "evidence": "original_assets/resume-job-pro/merkle_root",
+        "member_merkle_root": "66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b"
+      },
+      {
+        "slug": "calibration-manage-pro",
+        "role": "member",
+        "name": "计量器具 校准管理 顾问",
+        "evidence": "original_assets/calibration-manage-pro/merkle_root",
+        "member_merkle_root": "bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf"
+      },
+      {
+        "slug": "life-plan-forge-expert",
+        "role": "member",
+        "name": "生活计划 出行饮食 清单生成",
+        "evidence": "original_assets/life-plan-forge-expert/merkle_root",
+        "member_merkle_root": "3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b"
+      }
+    ],
+    "team_lead": "resume-job-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ec1e14113671cdf4",
+  "prompt_hash": "bdd8dc481df7a886",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-719\", \"kind\": \"team\", \"name\": \"简历优化岗位匹配专家\", \"description\": \"简历优化岗位匹配专家：围绕计量器具，覆盖台账齐全／周期强制／状态标识，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"resume-job-pro-team-lead\", \"role\": \"lead\", \"name\": \"简历优化主理人\", \"evidence\": null}, {\"slug\": \"resume-job-pro\", \"role\": \"member\", \"name\": \"简历优化 岗位匹配 面试准备\", \"evidence\": \"original_assets/resume-job-pro/merkle_root\", \"member_merkle_root\": \"66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b\"}, {\"slug\": \"calibration-manage-pro\", \"role\": \"member\", \"name\": \"计量器具 校准管理 顾问\", \"evidence\": \"original_assets/calibration-manage-pro/merkle_root\", \"member_merkle_root\": \"bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf\"}, {\"slug\": \"life-plan-forge-expert\", \"role\": \"member\", \"name\": \"生活计划 出行饮食 清单生成\", \"evidence\": \"original_assets/life-plan-forge-expert/merkle_root\", \"member_merkle_root\": \"3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b\"}], \"team_lead\": \"resume-job-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/calibration-manage-pro.md": "bc1720e4025e6db7d547ea0086489da3eff9100ee9a419cb1e205f7e18d32ad6",
+    "agents/life-plan-forge-expert.md": "ba5b6764194ba42c3616c2cf84451adf9977ce1e17443b270d18ede147eea430",
+    "agents/resume-job-pro-team-lead.md": "d07a9f215e07c6d44ffb14809ffc568734b810382f96361f54d3a43773ebca40",
+    "agents/resume-job-pro.md": "ed717d278fcb56b424760e0a0c97b72e15da1cb45aac85fe326e47a9bebe9825",
+    "plugin.json": "9c079161fa19e48ac13d30aee1d342aa2e57bbae75dc93f228d3fa59fd2d3cc5",
+    "settings.json": "9ea3f2c3d63ad184dee0a09339f6848525913b0f55da348e134c62d57d27694b"
+  }
+}

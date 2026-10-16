@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-831",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-831",
+    "kind": "team",
+    "name": "国际物流专家",
+    "description": "国际物流专家：围绕进口检验，覆盖标准对照／按批抽样／预检前置，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "import-inspection-pro-team-lead",
+        "role": "lead",
+        "name": "进口检验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "import-inspection-pro",
+        "role": "member",
+        "name": "进口检验 标准对照 顾问",
+        "evidence": "original_assets/import-inspection-pro/merkle_root",
+        "member_merkle_root": "4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f"
+      },
+      {
+        "slug": "energy-consumption-pro",
+        "role": "member",
+        "name": "能耗管理 节能诊断 顾问",
+        "evidence": "original_assets/energy-consumption-pro/merkle_root",
+        "member_merkle_root": "6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719"
+      },
+      {
+        "slug": "intl-logistics-pro",
+        "role": "member",
+        "name": "国际物流 时效管理 顾问",
+        "evidence": "original_assets/intl-logistics-pro/merkle_root",
+        "member_merkle_root": "050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0"
+      }
+    ],
+    "team_lead": "import-inspection-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f8b68f654c82d84e",
+  "prompt_hash": "cd333a47c4e8ccf4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-831\", \"kind\": \"team\", \"name\": \"国际物流专家\", \"description\": \"国际物流专家：围绕进口检验，覆盖标准对照／按批抽样／预检前置，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"import-inspection-pro-team-lead\", \"role\": \"lead\", \"name\": \"进口检验主理人\", \"evidence\": null}, {\"slug\": \"import-inspection-pro\", \"role\": \"member\", \"name\": \"进口检验 标准对照 顾问\", \"evidence\": \"original_assets/import-inspection-pro/merkle_root\", \"member_merkle_root\": \"4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f\"}, {\"slug\": \"energy-consumption-pro\", \"role\": \"member\", \"name\": \"能耗管理 节能诊断 顾问\", \"evidence\": \"original_assets/energy-consumption-pro/merkle_root\", \"member_merkle_root\": \"6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719\"}, {\"slug\": \"intl-logistics-pro\", \"role\": \"member\", \"name\": \"国际物流 时效管理 顾问\", \"evidence\": \"original_assets/intl-logistics-pro/merkle_root\", \"member_merkle_root\": \"050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0\"}], \"team_lead\": \"import-inspection-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/energy-consumption-pro.md": "7d19139663ded779be44046298e843a0a61b3869481aa8464d909a88e4356ed2",
+    "agents/import-inspection-pro-team-lead.md": "85881ea458b5c8dc762aef2d74312c7f99afb04d18ec263af5007e9b617f53b1",
+    "agents/import-inspection-pro.md": "84ab525e520ef9c1a8be006dac0f892f1c686bed5df418296ef82f1efb8a0c33",
+    "agents/intl-logistics-pro.md": "63a0f82e8a3a396a68482a158c9bf5fcad2cc7494b8149f5e87aa68ef8bed48e",
+    "plugin.json": "727b55d415eeba37abb25bec8be44a164dfbb4f286cae369861480722ca5833a",
+    "settings.json": "8ddd32c8c099e924667fb14e8d20f53b20af0dbd94ed59341539e7d2599b99e1"
+  }
+}

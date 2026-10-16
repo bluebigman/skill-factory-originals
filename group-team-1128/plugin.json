@@ -1,0 +1,126 @@
+{
+  "agentName": "crisis-response-team-lead",
+  "agents": [
+    "./agents/crisis-response-team-lead.md",
+    "./agents/crisis-response.md",
+    "./agents/kb-article-build.md",
+    "./agents/social-listening-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 危机应对",
+    "zh": "帮我处理危机应对"
+  },
+  "description": "crisis-response team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 危机应对 requirements, output three deliverables: 快速响应, 事实优先, 统一口径. Verifiable end-to-end, evidence per step.",
+    "zh": "输入危机应对相关需求，输出快速响应、事实优先、统一口径三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "crisis-response Team",
+    "zh": "危机应对专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "crisis-response-team-lead",
+      "name": {
+        "en": "危机应对主理人",
+        "zh": "危机应对主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/crisis-response.png",
+      "id": "crisis-response",
+      "name": {
+        "en": "crisis-response",
+        "zh": "危机应对 顾问"
+      },
+      "profession": {
+        "en": "crisis-response",
+        "zh": "危机应对 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kb-article-build.png",
+      "id": "kb-article-build",
+      "name": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "profession": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/social-listening-pro.png",
+      "id": "social-listening-pro",
+      "name": {
+        "en": "social-listening-pro",
+        "zh": "舆情聆听 信号识别 顾问"
+      },
+      "profession": {
+        "en": "social-listening-pro",
+        "zh": "舆情聆听 信号识别 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1128",
+  "plugin": "group-team-1128",
+  "profession": {
+    "en": "crisis-response Collaboration Team",
+    "zh": "危机应对专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 危机应对",
+      "zh": "帮我处理危机应对"
+    },
+    {
+      "en": "Plan 知识库条目",
+      "zh": "帮我规划知识库条目"
+    },
+    {
+      "en": "Review 舆情聆听",
+      "zh": "帮我检查舆情聆听"
+    }
+  ],
+  "tags": [
+    {
+      "en": "快速响应",
+      "zh": "快速响应"
+    },
+    {
+      "en": "事实优先",
+      "zh": "事实优先"
+    },
+    {
+      "en": "统一口径",
+      "zh": "统一口径"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "crisis-response-team-lead",
+    "memberAgents": [
+      "crisis-response",
+      "kb-article-build",
+      "social-listening-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

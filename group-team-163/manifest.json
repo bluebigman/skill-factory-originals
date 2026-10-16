@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-163",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-163",
+    "kind": "team",
+    "name": "缓存 配置 批量 团队",
+    "description": "缓存 配置 批量 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-deploy-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "缓存清理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-deploy-pro-fixed",
+        "role": "member",
+        "name": "缓存清理 批处理脚本 故障排查",
+        "evidence": "original_assets/ops-deploy-pro-fixed/merkle_root",
+        "member_merkle_root": "a945b5b0743654fcafe1bdff59f5eea350af07edc1637e2b013bf4b430ac5cdf"
+      },
+      {
+        "slug": "cfg-hygiene-residue-auditor",
+        "role": "member",
+        "name": "配置校验 占位清理 列表规范",
+        "evidence": "original_assets/cfg-hygiene-residue-auditor/merkle_root",
+        "member_merkle_root": "fd89ac8302941589e6e4a52d96a407dc94dbf0cf5301f2290fbf40a69f9f2f1f"
+      },
+      {
+        "slug": "code-assist-pro-01",
+        "role": "member",
+        "name": "Rails 批量造数 快捷生成",
+        "evidence": "original_assets/code-assist-pro-01/merkle_root",
+        "member_merkle_root": "4d9040254439cc96df470bdff0d6904a866cb32b153274fe7771996fd206d48f"
+      }
+    ],
+    "team_lead": "ops-deploy-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "16cedd585f250620",
+  "prompt_hash": "b6bd3d5914a3117e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-163\", \"kind\": \"team\", \"name\": \"缓存 配置 批量 团队\", \"description\": \"缓存 配置 批量 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-deploy-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"缓存清理主理人\", \"evidence\": null}, {\"slug\": \"ops-deploy-pro-fixed\", \"role\": \"member\", \"name\": \"缓存清理 批处理脚本 故障排查\", \"evidence\": \"original_assets/ops-deploy-pro-fixed/merkle_root\", \"member_merkle_root\": \"a945b5b0743654fcafe1bdff59f5eea350af07edc1637e2b013bf4b430ac5cdf\"}, {\"slug\": \"cfg-hygiene-residue-auditor\", \"role\": \"member\", \"name\": \"配置校验 占位清理 列表规范\", \"evidence\": \"original_assets/cfg-hygiene-residue-auditor/merkle_root\", \"member_merkle_root\": \"fd89ac8302941589e6e4a52d96a407dc94dbf0cf5301f2290fbf40a69f9f2f1f\"}, {\"slug\": \"code-assist-pro-01\", \"role\": \"member\", \"name\": \"Rails 批量造数 快捷生成\", \"evidence\": \"original_assets/code-assist-pro-01/merkle_root\", \"member_merkle_root\": \"4d9040254439cc96df470bdff0d6904a866cb32b153274fe7771996fd206d48f\"}], \"team_lead\": \"ops-deploy-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cfg-hygiene-residue-auditor.md": "f135eab94464a3db16ee0cdd93d39b58da97ac3e76acaf3a5bc6e3c3c3821783",
+    "agents/code-assist-pro-01.md": "beb3b600dd4537a662c3925d5f97835f104bfe7517b355082510ef9e7d51ab03",
+    "agents/ops-deploy-pro-fixed-team-lead.md": "dba06f28d6ddf19e00439c7f67ea0cbfe30ef823f43f6040a676bf0970be91ff",
+    "agents/ops-deploy-pro-fixed.md": "ba1e403312da87221c6cd05a8993aa7ab77f7053dc45c31acb9e26d806621e22",
+    "plugin.json": "29ca2017d687a315705ba72fa21c464d3ffb6bc34c0fece76dbe9f6b39c7e413",
+    "settings.json": "33be737e591616b4601768d81788a64ac706bf6c53854e4fa6c8f1eaa79fdc02"
+  }
+}

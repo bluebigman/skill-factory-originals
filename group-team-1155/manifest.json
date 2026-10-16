@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1155",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1155",
+    "kind": "team",
+    "name": "海外客服专家",
+    "description": "输入海外客服相关需求，输出时段覆盖、问题分级、升级路径三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "overseas-support-pro-team-lead",
+        "role": "lead",
+        "name": "海外客服主理人",
+        "evidence": null
+      },
+      {
+        "slug": "overseas-support-pro",
+        "role": "member",
+        "name": "海外客服 多语支持 顾问",
+        "evidence": "original_assets/overseas-support-pro/merkle_root",
+        "member_merkle_root": "f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3"
+      },
+      {
+        "slug": "doc-quick-lint",
+        "role": "member",
+        "name": "文档快速体检 助手",
+        "evidence": "original_assets/doc-quick-lint/merkle_root",
+        "member_merkle_root": "ea8bb1bcd7d5c3f9c2d0326a37cf1f224f4dede6acba36e83fb74e56bdff5823"
+      },
+      {
+        "slug": "doc-version-diff",
+        "role": "member",
+        "name": "文档版本比对 顾问",
+        "evidence": "original_assets/doc-version-diff/merkle_root",
+        "member_merkle_root": "d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e"
+      }
+    ],
+    "team_lead": "overseas-support-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "653984ab97a6948f",
+  "prompt_hash": "452e6abd4d920b02",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1155\", \"kind\": \"team\", \"name\": \"海外客服专家\", \"description\": \"输入海外客服相关需求，输出时段覆盖、问题分级、升级路径三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"overseas-support-pro-team-lead\", \"role\": \"lead\", \"name\": \"海外客服主理人\", \"evidence\": null}, {\"slug\": \"overseas-support-pro\", \"role\": \"member\", \"name\": \"海外客服 多语支持 顾问\", \"evidence\": \"original_assets/overseas-support-pro/merkle_root\", \"member_merkle_root\": \"f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3\"}, {\"slug\": \"doc-quick-lint\", \"role\": \"member\", \"name\": \"文档快速体检 助手\", \"evidence\": \"original_assets/doc-quick-lint/merkle_root\", \"member_merkle_root\": \"ea8bb1bcd7d5c3f9c2d0326a37cf1f224f4dede6acba36e83fb74e56bdff5823\"}, {\"slug\": \"doc-version-diff\", \"role\": \"member\", \"name\": \"文档版本比对 顾问\", \"evidence\": \"original_assets/doc-version-diff/merkle_root\", \"member_merkle_root\": \"d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e\"}], \"team_lead\": \"overseas-support-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-quick-lint.md": "c62d632d58985eaa295ccc0410cd6b023ffa0b1b0bc998ade047fdfd83c052cd",
+    "agents/doc-version-diff.md": "43747128cb0e680cfec15625953e8da3610c43309f71ca487228f7329b8a695f",
+    "agents/overseas-support-pro-team-lead.md": "e19701ed7f1db852f0aa0c96d92c96d22a58a58c7bde629da6d37d4675a69ac1",
+    "agents/overseas-support-pro.md": "adb02d58aed54f4bd53801614888c29ae0d0f1bf55231f82e36cc0a8b4811367",
+    "plugin.json": "0e0042e5db23822e2e4cb3e60ee0bfe55525890d28547dc7126b744eb0cb976f",
+    "settings.json": "bad2f0c1ade112d27f31efb15520177dd2061540960b9bedf9c9026a29bb8b9f"
+  }
+}

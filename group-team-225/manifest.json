@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-225",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-225",
+    "kind": "team",
+    "name": "接口 工具 链路 团队",
+    "description": "接口 工具 链路 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-contract-sentinel-team-lead",
+        "role": "lead",
+        "name": "接口契约主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-contract-sentinel",
+        "role": "member",
+        "name": "接口契约 分页字段 请求头",
+        "evidence": "original_assets/api-contract-sentinel/merkle_root",
+        "member_merkle_root": "7dec84f6d0260e6d0130330dd8714c4436bd1185a30415117c360f7a098a9360"
+      },
+      {
+        "slug": "tool-interface-design",
+        "role": "member",
+        "name": "工具设计 接口契约 描述规范",
+        "evidence": "original_assets/tool-interface-design/merkle_root",
+        "member_merkle_root": "c549c4117cb81c6e45b2c5efd8743032d3391261813bcdd5ff1833af47f97e90"
+      },
+      {
+        "slug": "observability-inject",
+        "role": "member",
+        "name": "链路追踪 指标埋点 异常告警",
+        "evidence": "original_assets/observability-inject/merkle_root",
+        "member_merkle_root": "94c3132fb9dbff9caa4d8e729b764f5a39507cf7c181e477b2a36fbf8a912032"
+      }
+    ],
+    "team_lead": "api-contract-sentinel-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a08081a442c46eda",
+  "prompt_hash": "c3ded2d86096a41b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-225\", \"kind\": \"team\", \"name\": \"接口 工具 链路 团队\", \"description\": \"接口 工具 链路 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-contract-sentinel-team-lead\", \"role\": \"lead\", \"name\": \"接口契约主理人\", \"evidence\": null}, {\"slug\": \"api-contract-sentinel\", \"role\": \"member\", \"name\": \"接口契约 分页字段 请求头\", \"evidence\": \"original_assets/api-contract-sentinel/merkle_root\", \"member_merkle_root\": \"7dec84f6d0260e6d0130330dd8714c4436bd1185a30415117c360f7a098a9360\"}, {\"slug\": \"tool-interface-design\", \"role\": \"member\", \"name\": \"工具设计 接口契约 描述规范\", \"evidence\": \"original_assets/tool-interface-design/merkle_root\", \"member_merkle_root\": \"c549c4117cb81c6e45b2c5efd8743032d3391261813bcdd5ff1833af47f97e90\"}, {\"slug\": \"observability-inject\", \"role\": \"member\", \"name\": \"链路追踪 指标埋点 异常告警\", \"evidence\": \"original_assets/observability-inject/merkle_root\", \"member_merkle_root\": \"94c3132fb9dbff9caa4d8e729b764f5a39507cf7c181e477b2a36fbf8a912032\"}], \"team_lead\": \"api-contract-sentinel-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-contract-sentinel-team-lead.md": "386a723b5a01750a4ac1cd2c5bcb63606adc8b54df0747ed00b84dc9c786ecb1",
+    "agents/api-contract-sentinel.md": "abedcb2cbd9637767399271ee7d7c105d61bb8cf023c1d1be4ab0e3a28e07a50",
+    "agents/observability-inject.md": "c2385643330cf6f09232f7afb89716af07cdf092493585e0227dfd0adaa6890b",
+    "agents/tool-interface-design.md": "a497aebdfd2cdc6863fc54a41d959c68e8a276c363d7ef79ee71cc86ddfed50b",
+    "plugin.json": "5909a1b73eef37e0b8406d5c5cf3422c351a94f703a2ef36982273270d3899d2",
+    "settings.json": "ef22f9a6719387cc9b5c67314e62d65fd636e6e2b94773b660e0aac94b70d29c"
+  }
+}

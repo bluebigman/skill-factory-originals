@@ -1,0 +1,126 @@
+{
+  "agentName": "visual-consistency-team-lead",
+  "agents": [
+    "./agents/visual-consistency-team-lead.md",
+    "./agents/visual-consistency.md",
+    "./agents/navigation-design.md",
+    "./agents/user-story-write.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 视觉一致性",
+    "zh": "帮我处理视觉一致性"
+  },
+  "description": "visual-consistency team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 视觉一致性, covers 色板统一 / 字体统一 / 间距统一, delivering structured results and actionable checklists.",
+    "zh": "导航设计路径清晰专家：围绕视觉一致性，覆盖色板统一／字体统一／间距统一，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "visual-consistency Team",
+    "zh": "导航设计路径清晰专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "visual-consistency-team-lead",
+      "name": {
+        "en": "视觉一致性主理人",
+        "zh": "视觉一致性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/visual-consistency.png",
+      "id": "visual-consistency",
+      "name": {
+        "en": "visual-consistency",
+        "zh": "视觉一致性 顾问"
+      },
+      "profession": {
+        "en": "visual-consistency",
+        "zh": "视觉一致性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/navigation-design.png",
+      "id": "navigation-design",
+      "name": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "profession": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/user-story-write.png",
+      "id": "user-story-write",
+      "name": {
+        "en": "user-story-write",
+        "zh": "用户故事 撰写"
+      },
+      "profession": {
+        "en": "user-story-write",
+        "zh": "用户故事 撰写"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1133",
+  "plugin": "group-team-1133",
+  "profession": {
+    "en": "visual-consistency Collaboration Team",
+    "zh": "导航设计路径清晰专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 视觉一致性",
+      "zh": "帮我处理视觉一致性"
+    },
+    {
+      "en": "Plan 导航设计",
+      "zh": "帮我规划导航设计"
+    },
+    {
+      "en": "Review 用户故事",
+      "zh": "帮我检查用户故事"
+    }
+  ],
+  "tags": [
+    {
+      "en": "间距统一",
+      "zh": "间距统一"
+    },
+    {
+      "en": "图标统一",
+      "zh": "图标统一"
+    },
+    {
+      "en": "圆角统一",
+      "zh": "圆角统一"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "visual-consistency-team-lead",
+    "memberAgents": [
+      "visual-consistency",
+      "navigation-design",
+      "user-story-write"
+    ]
+  },
+  "version": "1.0.0"
+}

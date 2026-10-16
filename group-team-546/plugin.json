@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-table-agent-team-lead",
+  "agents": [
+    "./agents/agent-table-agent-team-lead.md",
+    "./agents/agent-table-agent.md",
+    "./agents/toolkit-pro-02-fixed.md",
+    "./agents/toolkit-pro-03-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 表格智能",
+    "zh": "帮我处理表格智能"
+  },
+  "description": "agent-table-agent team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 表格智能, covers 结构识别 / 类型推断 / 校验规则, delivering structured results and actionable checklists.",
+    "zh": "表格智能理解专家：围绕表格智能，覆盖结构识别／类型推断／校验规则，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "agent-table-agent Team",
+    "zh": "表格智能理解专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-table-agent-team-lead",
+      "name": {
+        "en": "表格智能主理人",
+        "zh": "表格智能主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-table-agent.png",
+      "id": "agent-table-agent",
+      "name": {
+        "en": "agent-table-agent",
+        "zh": "表格智能 理解 顾问"
+      },
+      "profession": {
+        "en": "agent-table-agent",
+        "zh": "表格智能 理解 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-02-fixed.png",
+      "id": "toolkit-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-03-fixed.png",
+      "id": "toolkit-pro-03-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据回溯 标准作业 数据保全"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据回溯 标准作业 数据保全"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-546",
+  "plugin": "group-team-546",
+  "profession": {
+    "en": "agent-table-agent Collaboration Team",
+    "zh": "表格智能理解专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 表格智能",
+      "zh": "帮我处理表格智能"
+    },
+    {
+      "en": "Plan 任务治理",
+      "zh": "帮我规划任务治理"
+    },
+    {
+      "en": "Review 数据回溯",
+      "zh": "帮我检查数据回溯"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结构识别",
+      "zh": "结构识别"
+    },
+    {
+      "en": "类型推断",
+      "zh": "类型推断"
+    },
+    {
+      "en": "校验规则",
+      "zh": "校验规则"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-table-agent-team-lead",
+    "memberAgents": [
+      "agent-table-agent",
+      "toolkit-pro-02-fixed",
+      "toolkit-pro-03-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

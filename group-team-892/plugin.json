@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-sandbox-policy-team-lead",
+  "agents": [
+    "./agents/agent-sandbox-policy-team-lead.md",
+    "./agents/agent-sandbox-policy.md",
+    "./agents/monitor-alert-tune.md",
+    "./agents/migration-plan-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 沙箱策略",
+    "zh": "帮我处理沙箱策略"
+  },
+  "description": "agent-sandbox-policy team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 沙箱策略 end-to-end: 逃逸检测, 资源限额 and 减少噪音. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长逃逸检测、资源限额与减少噪音，覆盖沙箱策略全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-sandbox-policy Team",
+    "zh": "沙箱策略隔离边界专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-sandbox-policy-team-lead",
+      "name": {
+        "en": "沙箱策略主理人",
+        "zh": "沙箱策略主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-sandbox-policy.png",
+      "id": "agent-sandbox-policy",
+      "name": {
+        "en": "agent-sandbox-policy",
+        "zh": "沙箱策略 隔离边界 顾问"
+      },
+      "profession": {
+        "en": "agent-sandbox-policy",
+        "zh": "沙箱策略 隔离边界 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/monitor-alert-tune.png",
+      "id": "monitor-alert-tune",
+      "name": {
+        "en": "monitor-alert-tune",
+        "zh": "监控告警调优 顾问"
+      },
+      "profession": {
+        "en": "monitor-alert-tune",
+        "zh": "监控告警调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/migration-plan-review.png",
+      "id": "migration-plan-review",
+      "name": {
+        "en": "migration-plan-review",
+        "zh": "数据迁移方案 评审"
+      },
+      "profession": {
+        "en": "migration-plan-review",
+        "zh": "数据迁移方案 评审"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-892",
+  "plugin": "group-team-892",
+  "profession": {
+    "en": "agent-sandbox-policy Collaboration Team",
+    "zh": "沙箱策略隔离边界专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 沙箱策略",
+      "zh": "帮我处理沙箱策略"
+    },
+    {
+      "en": "Plan 监控告警调优",
+      "zh": "帮我规划监控告警调优"
+    },
+    {
+      "en": "Review 数据迁移方案",
+      "zh": "帮我检查数据迁移方案"
+    }
+  ],
+  "tags": [
+    {
+      "en": "网络受限",
+      "zh": "网络受限"
+    },
+    {
+      "en": "文件隔离",
+      "zh": "文件隔离"
+    },
+    {
+      "en": "逃逸检测",
+      "zh": "逃逸检测"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-sandbox-policy-team-lead",
+    "memberAgents": [
+      "agent-sandbox-policy",
+      "monitor-alert-tune",
+      "migration-plan-review"
+    ]
+  },
+  "version": "1.0.0"
+}

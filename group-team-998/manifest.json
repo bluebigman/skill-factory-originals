@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-998",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-998",
+    "kind": "team",
+    "name": "生产作业规范专家",
+    "description": "生产作业规范专家：围绕生产作业规范，覆盖异常处理／记录留痕／定期更新，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "manufacturing-sop-team-lead",
+        "role": "lead",
+        "name": "生产作业规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "manufacturing-sop",
+        "role": "member",
+        "name": "生产作业规范 顾问",
+        "evidence": "original_assets/manufacturing-sop/merkle_root",
+        "member_merkle_root": "36ecc2e12525042087ff02d824a0186207acbe9f49fabe21840ede8eee94c62b"
+      },
+      {
+        "slug": "code-review-guide",
+        "role": "member",
+        "name": "代码评审把关 顾问",
+        "evidence": "original_assets/code-review-guide/merkle_root",
+        "member_merkle_root": "938b1f443cdffae153e8bf9311acf7d5d106d513f02e34f85d5771f925711b72"
+      },
+      {
+        "slug": "pipeline-review-pro",
+        "role": "member",
+        "name": "销售漏斗 复盘机制 顾问",
+        "evidence": "original_assets/pipeline-review-pro/merkle_root",
+        "member_merkle_root": "9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0"
+      }
+    ],
+    "team_lead": "manufacturing-sop-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f0b82b7c39dad549",
+  "prompt_hash": "d429a372a618f3c7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-998\", \"kind\": \"team\", \"name\": \"生产作业规范专家\", \"description\": \"生产作业规范专家：围绕生产作业规范，覆盖异常处理／记录留痕／定期更新，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"manufacturing-sop-team-lead\", \"role\": \"lead\", \"name\": \"生产作业规范主理人\", \"evidence\": null}, {\"slug\": \"manufacturing-sop\", \"role\": \"member\", \"name\": \"生产作业规范 顾问\", \"evidence\": \"original_assets/manufacturing-sop/merkle_root\", \"member_merkle_root\": \"36ecc2e12525042087ff02d824a0186207acbe9f49fabe21840ede8eee94c62b\"}, {\"slug\": \"code-review-guide\", \"role\": \"member\", \"name\": \"代码评审把关 顾问\", \"evidence\": \"original_assets/code-review-guide/merkle_root\", \"member_merkle_root\": \"938b1f443cdffae153e8bf9311acf7d5d106d513f02e34f85d5771f925711b72\"}, {\"slug\": \"pipeline-review-pro\", \"role\": \"member\", \"name\": \"销售漏斗 复盘机制 顾问\", \"evidence\": \"original_assets/pipeline-review-pro/merkle_root\", \"member_merkle_root\": \"9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0\"}], \"team_lead\": \"manufacturing-sop-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-review-guide.md": "b616b42b1580e154f4179be46930d9e179e589e6d87b750d6dc29da806fbf39d",
+    "agents/manufacturing-sop-team-lead.md": "cc15a68b629d9cdb5074234f5dff96e27bb3ab3f2bea4d78306a3d0ca3741057",
+    "agents/manufacturing-sop.md": "15d80ccad3507c550c6c1d554695d7a4b744d54824f9cdfae4d309604c350f92",
+    "agents/pipeline-review-pro.md": "eed7ce5c27c63f36a61b70d0ed6faf46d10d7f9263a7f66d7ca6b562033682af",
+    "plugin.json": "75fe3912ab38ec4fcc0dcb9a94536464fb463ac0234935ec44a3c61c39fc4760",
+    "settings.json": "95c344672ccf6acb686e483c59e2914d7e17f41747291035eacc3ec27b9c82ac"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1213",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1213",
+    "kind": "team",
+    "name": "第三方审计专家",
+    "description": "擅长数据流向、权限最小与退出策略，覆盖第三方审计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "third-party-audit-team-lead",
+        "role": "lead",
+        "name": "第三方审计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "third-party-audit",
+        "role": "member",
+        "name": "第三方审计 顾问",
+        "evidence": "original_assets/third-party-audit/merkle_root",
+        "member_merkle_root": "37f053aaa4750b8ce5b60e856e2fc19674e323441a27d25394f4ff6506f39f0e"
+      },
+      {
+        "slug": "sql-readonly-guard",
+        "role": "member",
+        "name": "只读查询守护 顾问",
+        "evidence": "original_assets/sql-readonly-guard/merkle_root",
+        "member_merkle_root": "7b9154345ea15c96df9a46a98cc47092891012a27938518e6d19165fddf555e2"
+      },
+      {
+        "slug": "api-debug-chain-pro",
+        "role": "member",
+        "name": "接口联调 鉴权核验 字段映射",
+        "evidence": "original_assets/api-debug-chain-pro/merkle_root",
+        "member_merkle_root": "3311dbb8e356611bf14d63bf804b0017523d0906a41514b3d0deeeb712360e9f"
+      }
+    ],
+    "team_lead": "third-party-audit-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e56c98ad4332ae84",
+  "prompt_hash": "620c1010b2341321",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1213\", \"kind\": \"team\", \"name\": \"第三方审计专家\", \"description\": \"擅长数据流向、权限最小与退出策略，覆盖第三方审计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"third-party-audit-team-lead\", \"role\": \"lead\", \"name\": \"第三方审计主理人\", \"evidence\": null}, {\"slug\": \"third-party-audit\", \"role\": \"member\", \"name\": \"第三方审计 顾问\", \"evidence\": \"original_assets/third-party-audit/merkle_root\", \"member_merkle_root\": \"37f053aaa4750b8ce5b60e856e2fc19674e323441a27d25394f4ff6506f39f0e\"}, {\"slug\": \"sql-readonly-guard\", \"role\": \"member\", \"name\": \"只读查询守护 顾问\", \"evidence\": \"original_assets/sql-readonly-guard/merkle_root\", \"member_merkle_root\": \"7b9154345ea15c96df9a46a98cc47092891012a27938518e6d19165fddf555e2\"}, {\"slug\": \"api-debug-chain-pro\", \"role\": \"member\", \"name\": \"接口联调 鉴权核验 字段映射\", \"evidence\": \"original_assets/api-debug-chain-pro/merkle_root\", \"member_merkle_root\": \"3311dbb8e356611bf14d63bf804b0017523d0906a41514b3d0deeeb712360e9f\"}], \"team_lead\": \"third-party-audit-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-debug-chain-pro.md": "0e198f97fffe835ca3a6f2b200b9cad5260e6942c0e27a15383d8b90038ff642",
+    "agents/sql-readonly-guard.md": "6770175044e4fece1b96f7622b7e1473e1eacbb7f6889da815a54dff260ee493",
+    "agents/third-party-audit-team-lead.md": "e4a1f4b810363a5f378d171b5324fcc8ad4242bf73665da0f427c83c9856c61c",
+    "agents/third-party-audit.md": "2505924dacd92f5b6663036bbb8c085b6b8c01f7d912ac085faf85b771ad7c0e",
+    "plugin.json": "59915b6216f49f311bd6c5b9d38085a9485f8f581ab68b40419929e0c6ff0270",
+    "settings.json": "9c4acaa8fb0bae9ea312b81a71ff4258235cb76666777892541f0cae0ed2a123"
+  }
+}

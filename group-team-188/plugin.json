@@ -1,0 +1,126 @@
+{
+  "agentName": "toolkit-pro-team-lead",
+  "agents": [
+    "./agents/toolkit-pro-team-lead.md",
+    "./agents/toolkit-pro.md",
+    "./agents/toolkit-pro-08-fixed.md",
+    "./agents/api-toolkit-pro-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据采集清洗",
+    "zh": "帮我处理数据采集清洗"
+  },
+  "description": "综合工具 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 体验 协议 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "综合工具 Suite Team",
+    "zh": "数据 体验 协议 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "toolkit-pro-team-lead",
+      "name": {
+        "en": "数据采集清洗主理人",
+        "zh": "数据采集清洗主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/toolkit-pro.png",
+      "id": "toolkit-pro",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "数据采集清洗 回放自动化"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "数据采集清洗 回放自动化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-08-fixed.png",
+      "id": "toolkit-pro-08-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-toolkit-pro-fixed.png",
+      "id": "api-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "协议转换 REST"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "协议转换 REST"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-188",
+  "plugin": "group-team-188",
+  "profession": {
+    "en": "综合工具 Suite Collaboration Team",
+    "zh": "数据 体验 协议 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据采集清洗",
+      "zh": "帮我处理数据采集清洗"
+    },
+    {
+      "en": "Plan UX设计",
+      "zh": "帮我规划UX设计"
+    },
+    {
+      "en": "Review 协议转换",
+      "zh": "帮我检查协议转换"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据采集清洗",
+      "zh": "数据采集清洗"
+    },
+    {
+      "en": "UX设计",
+      "zh": "UX设计"
+    },
+    {
+      "en": "协议转换",
+      "zh": "协议转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "toolkit-pro-team-lead",
+    "memberAgents": [
+      "toolkit-pro",
+      "toolkit-pro-08-fixed",
+      "api-toolkit-pro-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

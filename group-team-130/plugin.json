@@ -1,0 +1,126 @@
+{
+  "agentName": "interview-answer-coach-team-lead",
+  "agents": [
+    "./agents/interview-answer-coach-team-lead.md",
+    "./agents/interview-answer-coach.md",
+    "./agents/study-motivation-coach.md",
+    "./agents/interview-sim-eval.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "15-Education",
+  "defaultInitPrompt": {
+    "en": "Handle 面试答题",
+    "zh": "帮我处理面试答题"
+  },
+  "description": "Interview Answer Coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "面试 学习 模拟 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Interview Answer Coach Team",
+    "zh": "面试 学习 模拟 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "interview-answer-coach-team-lead",
+      "name": {
+        "en": "面试答题主理人",
+        "zh": "面试答题主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/interview-answer-coach.png",
+      "id": "interview-answer-coach",
+      "name": {
+        "en": "Interview Answer Coach",
+        "zh": "面试答题 思路拆解 顾问"
+      },
+      "profession": {
+        "en": "Interview Answer Coach",
+        "zh": "面试答题 思路拆解 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/study-motivation-coach.png",
+      "id": "study-motivation-coach",
+      "name": {
+        "en": "Study Motivation Coach",
+        "zh": "学习动力 内驱力 教练"
+      },
+      "profession": {
+        "en": "Study Motivation Coach",
+        "zh": "学习动力 内驱力 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/interview-sim-eval.png",
+      "id": "interview-sim-eval",
+      "name": {
+        "en": "Interview Sim Eval",
+        "zh": "模拟面试 追问演练 顾问"
+      },
+      "profession": {
+        "en": "Interview Sim Eval",
+        "zh": "模拟面试 追问演练 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-130",
+  "plugin": "group-team-130",
+  "profession": {
+    "en": "Interview Answer Coach Collaboration Team",
+    "zh": "面试 学习 模拟 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 面试答题",
+      "zh": "帮我处理面试答题"
+    },
+    {
+      "en": "Plan 学习动力",
+      "zh": "帮我规划学习动力"
+    },
+    {
+      "en": "Review 模拟面试",
+      "zh": "帮我检查模拟面试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "面试答题",
+      "zh": "面试答题"
+    },
+    {
+      "en": "学习动力",
+      "zh": "学习动力"
+    },
+    {
+      "en": "模拟面试",
+      "zh": "模拟面试"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "interview-answer-coach-team-lead",
+    "memberAgents": [
+      "interview-answer-coach",
+      "study-motivation-coach",
+      "interview-sim-eval"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-pro-fixed-team-lead",
+  "agents": [
+    "./agents/data-pipeline-pro-fixed-team-lead.md",
+    "./agents/data-pipeline-pro-fixed.md",
+    "./agents/data-clean-pro-09.md",
+    "./agents/data-clean-pro-06.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 实习日志",
+    "zh": "帮我处理实习日志"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "实习 数据 文档 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "实习 数据 文档 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-pro-fixed-team-lead",
+      "name": {
+        "en": "实习日志主理人",
+        "zh": "实习日志主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro-fixed.png",
+      "id": "data-pipeline-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-09.png",
+      "id": "data-clean-pro-09",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据建模 结构化转换 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据建模 结构化转换 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-06.png",
+      "id": "data-clean-pro-06",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "文档转写 结构化转换"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "文档转写 结构化转换"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-195",
+  "plugin": "group-team-195",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "实习 数据 文档 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 实习日志",
+      "zh": "帮我处理实习日志"
+    },
+    {
+      "en": "Plan 数据建模",
+      "zh": "帮我规划数据建模"
+    },
+    {
+      "en": "Review 文档转写",
+      "zh": "帮我检查文档转写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "实习日志",
+      "zh": "实习日志"
+    },
+    {
+      "en": "数据建模",
+      "zh": "数据建模"
+    },
+    {
+      "en": "文档转写",
+      "zh": "文档转写"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-pro-fixed-team-lead",
+    "memberAgents": [
+      "data-pipeline-pro-fixed",
+      "data-clean-pro-09",
+      "data-clean-pro-06"
+    ]
+  },
+  "version": "1.0.0"
+}

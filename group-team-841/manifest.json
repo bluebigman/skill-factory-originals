@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-841",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-841",
+    "kind": "team",
+    "name": "年报官专家",
+    "description": "年报官专家：围绕国际物流，覆盖数据抽取／结构速读／指标解读，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "annual-report-expert-team-lead",
+        "role": "lead",
+        "name": "年报财报速读与数据整理专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "annual-report-expert",
+        "role": "member",
+        "name": "年报官",
+        "evidence": "original_assets/annual-report-expert/merkle_root",
+        "member_merkle_root": "f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2"
+      },
+      {
+        "slug": "finance-toolkit-pro-fixed",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747"
+      },
+      {
+        "slug": "intl-logistics-pro",
+        "role": "member",
+        "name": "国际物流 时效管理 顾问",
+        "evidence": "original_assets/intl-logistics-pro/merkle_root",
+        "member_merkle_root": "050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0"
+      }
+    ],
+    "team_lead": "annual-report-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6ef53c80285e0d25",
+  "prompt_hash": "7318b5b2004ee17e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-841\", \"kind\": \"team\", \"name\": \"年报官专家\", \"description\": \"年报官专家：围绕国际物流，覆盖数据抽取／结构速读／指标解读，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"annual-report-expert-team-lead\", \"role\": \"lead\", \"name\": \"年报财报速读与数据整理专家主理人\", \"evidence\": null}, {\"slug\": \"annual-report-expert\", \"role\": \"member\", \"name\": \"年报官\", \"evidence\": \"original_assets/annual-report-expert/merkle_root\", \"member_merkle_root\": \"f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2\"}, {\"slug\": \"finance-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747\"}, {\"slug\": \"intl-logistics-pro\", \"role\": \"member\", \"name\": \"国际物流 时效管理 顾问\", \"evidence\": \"original_assets/intl-logistics-pro/merkle_root\", \"member_merkle_root\": \"050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0\"}], \"team_lead\": \"annual-report-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/annual-report-expert-team-lead.md": "931e4b91cca561954d54ef42105c36fc599ffbcf62afc2915f506416dbc551a6",
+    "agents/annual-report-expert.md": "34df5e9e431d840615dd274ae2600eae99fdeebb696bdc0c1f02a9c0a5b32d2c",
+    "agents/finance-toolkit-pro-fixed.md": "fdf11c5dc1b605fef5f1dbf720ddcdb220ea49b1e01562e4134df148e2ffe85a",
+    "agents/intl-logistics-pro.md": "e61a4b08fc393019fe01d8f6e284c3a5da4e3cbae6f9f83c906ad1ce6f542979",
+    "plugin.json": "8cc55bcedb8c039e5b6a27b6a1a529d934877a10e0722aab3bedba7f766d4153",
+    "settings.json": "65a016e8eb01ca42447d9efa7b8d687090c4c1c18ea069ea622cb9bfc0e3e472"
+  }
+}

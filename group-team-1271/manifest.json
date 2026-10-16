@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1271",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1271",
+    "kind": "team",
+    "name": "多智能体专家",
+    "description": "多智能体专家：围绕多智能体，覆盖职责互斥／依赖成图／冲突暴露，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "multi-agent-orchestrate-pro-team-lead",
+        "role": "lead",
+        "name": "多智能体主理人",
+        "evidence": null
+      },
+      {
+        "slug": "multi-agent-orchestrate-pro",
+        "role": "member",
+        "name": "多智能体 任务编排 顾问",
+        "evidence": "original_assets/multi-agent-orchestrate-pro/merkle_root",
+        "member_merkle_root": "af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571"
+      },
+      {
+        "slug": "sheet-batch-pro",
+        "role": "member",
+        "name": "表格批量 计算汇总 顾问",
+        "evidence": "original_assets/sheet-batch-pro/merkle_root",
+        "member_merkle_root": "09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9"
+      },
+      {
+        "slug": "schema-evolution-pro",
+        "role": "member",
+        "name": "模式演进 兼容变更 顾问",
+        "evidence": "original_assets/schema-evolution-pro/merkle_root",
+        "member_merkle_root": "b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335"
+      }
+    ],
+    "team_lead": "multi-agent-orchestrate-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "47a2f5a14c50eae3",
+  "prompt_hash": "c344272d0dbb747c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1271\", \"kind\": \"team\", \"name\": \"多智能体专家\", \"description\": \"多智能体专家：围绕多智能体，覆盖职责互斥／依赖成图／冲突暴露，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"multi-agent-orchestrate-pro-team-lead\", \"role\": \"lead\", \"name\": \"多智能体主理人\", \"evidence\": null}, {\"slug\": \"multi-agent-orchestrate-pro\", \"role\": \"member\", \"name\": \"多智能体 任务编排 顾问\", \"evidence\": \"original_assets/multi-agent-orchestrate-pro/merkle_root\", \"member_merkle_root\": \"af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571\"}, {\"slug\": \"sheet-batch-pro\", \"role\": \"member\", \"name\": \"表格批量 计算汇总 顾问\", \"evidence\": \"original_assets/sheet-batch-pro/merkle_root\", \"member_merkle_root\": \"09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9\"}, {\"slug\": \"schema-evolution-pro\", \"role\": \"member\", \"name\": \"模式演进 兼容变更 顾问\", \"evidence\": \"original_assets/schema-evolution-pro/merkle_root\", \"member_merkle_root\": \"b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335\"}], \"team_lead\": \"multi-agent-orchestrate-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/multi-agent-orchestrate-pro-team-lead.md": "965d2714a36cc1b3bfd8274285444794af7042c14f250cd0382800af36ac7d39",
+    "agents/multi-agent-orchestrate-pro.md": "826d5d64d67ba3bab8fc67ed5a735711653a2fdd5f4ec895d9c68897fa06aeae",
+    "agents/schema-evolution-pro.md": "35d68da3770dae80396eeeca48b6744f0c929fc7974cdbc5f7bcc1c751861468",
+    "agents/sheet-batch-pro.md": "94b8471ee49bee4abed9f393eb8b001f9a93b13d0eaee66a4e8ef2e119abe34e",
+    "plugin.json": "ccf457ac47bc4d6b3c97f315871240dfb777e0d1a402892797de5ee703ed0ceb",
+    "settings.json": "4e35c476abe31e9b9ec40193671086bca2310ede0cbde95c2120fd1b6f9bcf2b"
+  }
+}

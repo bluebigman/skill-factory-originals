@@ -1,0 +1,126 @@
+{
+  "agentName": "press-release-draft-team-lead",
+  "agents": [
+    "./agents/press-release-draft-team-lead.md",
+    "./agents/press-release-draft.md",
+    "./agents/report-outline-design.md",
+    "./agents/document-diff-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 新闻稿撰写",
+    "zh": "帮我处理新闻稿撰写"
+  },
+  "description": "press-release-draft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 新闻稿撰写 requirements, output three deliverables: 倒金字塔, 要素齐全, 引语具体. Verifiable end-to-end, evidence per step.",
+    "zh": "输入新闻稿撰写相关需求，输出倒金字塔、要素齐全、引语具体三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "press-release-draft Team",
+    "zh": "新闻稿撰写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "press-release-draft-team-lead",
+      "name": {
+        "en": "新闻稿撰写主理人",
+        "zh": "新闻稿撰写主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/press-release-draft.png",
+      "id": "press-release-draft",
+      "name": {
+        "en": "press-release-draft",
+        "zh": "新闻稿撰写 助手"
+      },
+      "profession": {
+        "en": "press-release-draft",
+        "zh": "新闻稿撰写 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-outline-design.png",
+      "id": "report-outline-design",
+      "name": {
+        "en": "report-outline-design",
+        "zh": "报告大纲设计 顾问"
+      },
+      "profession": {
+        "en": "report-outline-design",
+        "zh": "报告大纲设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/document-diff-pro.png",
+      "id": "document-diff-pro",
+      "name": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "profession": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1224",
+  "plugin": "group-team-1224",
+  "profession": {
+    "en": "press-release-draft Collaboration Team",
+    "zh": "新闻稿撰写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 新闻稿撰写",
+      "zh": "帮我处理新闻稿撰写"
+    },
+    {
+      "en": "Plan 报告大纲设计",
+      "zh": "帮我规划报告大纲设计"
+    },
+    {
+      "en": "Review 文档比对",
+      "zh": "帮我检查文档比对"
+    }
+  ],
+  "tags": [
+    {
+      "en": "倒金字塔",
+      "zh": "倒金字塔"
+    },
+    {
+      "en": "要素齐全",
+      "zh": "要素齐全"
+    },
+    {
+      "en": "引语具体",
+      "zh": "引语具体"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "press-release-draft-team-lead",
+    "memberAgents": [
+      "press-release-draft",
+      "report-outline-design",
+      "document-diff-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

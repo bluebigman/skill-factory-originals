@@ -1,0 +1,126 @@
+{
+  "agentName": "data-mask-pro-team-lead",
+  "agents": [
+    "./agents/data-mask-pro-team-lead.md",
+    "./agents/data-mask-pro.md",
+    "./agents/agent-trace-audit-pro.md",
+    "./agents/agent-supervision-guard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 数据脱敏",
+    "zh": "帮我处理数据脱敏"
+  },
+  "description": "data-mask-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据脱敏 requirements, output three deliverables: 决策留痕, 来源可溯, 异常接管. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据脱敏相关需求，输出决策留痕、来源可溯、异常接管三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "data-mask-pro Team",
+    "zh": "规则配置专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-mask-pro-team-lead",
+      "name": {
+        "en": "数据脱敏主理人",
+        "zh": "数据脱敏主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-mask-pro.png",
+      "id": "data-mask-pro",
+      "name": {
+        "en": "data-mask-pro",
+        "zh": "数据脱敏 规则配置 顾问"
+      },
+      "profession": {
+        "en": "data-mask-pro",
+        "zh": "数据脱敏 规则配置 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-trace-audit-pro.png",
+      "id": "agent-trace-audit-pro",
+      "name": {
+        "en": "agent-trace-audit-pro",
+        "zh": "行为审计 轨迹留痕 顾问"
+      },
+      "profession": {
+        "en": "agent-trace-audit-pro",
+        "zh": "行为审计 轨迹留痕 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-supervision-guard.png",
+      "id": "agent-supervision-guard",
+      "name": {
+        "en": "agent-supervision-guard",
+        "zh": "运行监督 异常告警 顾问"
+      },
+      "profession": {
+        "en": "agent-supervision-guard",
+        "zh": "运行监督 异常告警 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-351",
+  "plugin": "group-team-351",
+  "profession": {
+    "en": "data-mask-pro Collaboration Team",
+    "zh": "规则配置专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据脱敏",
+      "zh": "帮我处理数据脱敏"
+    },
+    {
+      "en": "Plan 行为审计",
+      "zh": "帮我规划行为审计"
+    },
+    {
+      "en": "Review 运行监督",
+      "zh": "帮我检查运行监督"
+    }
+  ],
+  "tags": [
+    {
+      "en": "可逆控制",
+      "zh": "可逆控制"
+    },
+    {
+      "en": "全链路",
+      "zh": "全链路"
+    },
+    {
+      "en": "审计",
+      "zh": "审计"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-mask-pro-team-lead",
+    "memberAgents": [
+      "data-mask-pro",
+      "agent-trace-audit-pro",
+      "agent-supervision-guard"
+    ]
+  },
+  "version": "1.0.0"
+}

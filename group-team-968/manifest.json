@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-968",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-968",
+    "kind": "team",
+    "name": "边界确认专家",
+    "description": "擅长变更机制、判据明确与类型分支，覆盖需求澄清全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "requirement-clarify-pro-team-lead",
+        "role": "lead",
+        "name": "需求澄清主理人",
+        "evidence": null
+      },
+      {
+        "slug": "requirement-clarify-pro",
+        "role": "member",
+        "name": "需求澄清 边界确认 顾问",
+        "evidence": "original_assets/requirement-clarify-pro/merkle_root",
+        "member_merkle_root": "4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39"
+      },
+      {
+        "slug": "agent-quality-gate",
+        "role": "member",
+        "name": "质量闸门 判据 顾问",
+        "evidence": "original_assets/agent-quality-gate/merkle_root",
+        "member_merkle_root": "0874f21b1cd80c7375b937af6514ba472ebb2d0bccee39c54373c0cef64148e2"
+      },
+      {
+        "slug": "cs-health-score",
+        "role": "member",
+        "name": "客户健康 评分模型 顾问",
+        "evidence": "original_assets/cs-health-score/merkle_root",
+        "member_merkle_root": "4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2"
+      }
+    ],
+    "team_lead": "requirement-clarify-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c30eada8e2870c01",
+  "prompt_hash": "dec615472c9f7349",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-968\", \"kind\": \"team\", \"name\": \"边界确认专家\", \"description\": \"擅长变更机制、判据明确与类型分支，覆盖需求澄清全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"requirement-clarify-pro-team-lead\", \"role\": \"lead\", \"name\": \"需求澄清主理人\", \"evidence\": null}, {\"slug\": \"requirement-clarify-pro\", \"role\": \"member\", \"name\": \"需求澄清 边界确认 顾问\", \"evidence\": \"original_assets/requirement-clarify-pro/merkle_root\", \"member_merkle_root\": \"4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39\"}, {\"slug\": \"agent-quality-gate\", \"role\": \"member\", \"name\": \"质量闸门 判据 顾问\", \"evidence\": \"original_assets/agent-quality-gate/merkle_root\", \"member_merkle_root\": \"0874f21b1cd80c7375b937af6514ba472ebb2d0bccee39c54373c0cef64148e2\"}, {\"slug\": \"cs-health-score\", \"role\": \"member\", \"name\": \"客户健康 评分模型 顾问\", \"evidence\": \"original_assets/cs-health-score/merkle_root\", \"member_merkle_root\": \"4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2\"}], \"team_lead\": \"requirement-clarify-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-quality-gate.md": "dcb09e72f0fa8f95a734b29aee0be73ccefae59293d37c164f12703db6f036ae",
+    "agents/cs-health-score.md": "f1193844f3e3d096b8fdcb766e93bf461944cafef9294e8f431fb7829143a057",
+    "agents/requirement-clarify-pro-team-lead.md": "9b3af7b5252bd51988227c47d0b3c5be7ffb06449f12aef68eca98839de2f6d0",
+    "agents/requirement-clarify-pro.md": "c73a8a159969cf807ca265c0bbb1ac836e09db78c8d36f56e901b54d433a82bc",
+    "plugin.json": "21481a3a3a856b2928e8c21cbbd8209fd780373b836388e9c31a32320439222b",
+    "settings.json": "d41b9785b53ffe5ab2a84542c1eb06464e53f19f48acebe9ab7943dfd4bd0e26"
+  }
+}

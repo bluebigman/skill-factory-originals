@@ -1,0 +1,126 @@
+{
+  "agentName": "oee-improve-pro-team-lead",
+  "agents": [
+    "./agents/oee-improve-pro-team-lead.md",
+    "./agents/oee-improve-pro.md",
+    "./agents/travel-guide-pro.md",
+    "./agents/edu-institution-diagnose.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 设备效率",
+    "zh": "帮我处理设备效率"
+  },
+  "description": "Oee Improve Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "设备 旅游 教培 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Oee Improve Pro Team",
+    "zh": "设备 旅游 教培 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "oee-improve-pro-team-lead",
+      "name": {
+        "en": "设备效率主理人",
+        "zh": "设备效率主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/oee-improve-pro.png",
+      "id": "oee-improve-pro",
+      "name": {
+        "en": "Oee Improve Pro",
+        "zh": "设备效率 损失分析 顾问"
+      },
+      "profession": {
+        "en": "Oee Improve Pro",
+        "zh": "设备效率 损失分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/travel-guide-pro.png",
+      "id": "travel-guide-pro",
+      "name": {
+        "en": "Travel Guide Pro",
+        "zh": "旅游攻略 自由行 行程规划"
+      },
+      "profession": {
+        "en": "Travel Guide Pro",
+        "zh": "旅游攻略 自由行 行程规划"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/edu-institution-diagnose.png",
+      "id": "edu-institution-diagnose",
+      "name": {
+        "en": "Edu Institution Diagnose",
+        "zh": "教培经营 续费率 顾问"
+      },
+      "profession": {
+        "en": "Edu Institution Diagnose",
+        "zh": "教培经营 续费率 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-175",
+  "plugin": "group-team-175",
+  "profession": {
+    "en": "Oee Improve Pro Collaboration Team",
+    "zh": "设备 旅游 教培 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 设备效率",
+      "zh": "帮我处理设备效率"
+    },
+    {
+      "en": "Plan 旅游攻略",
+      "zh": "帮我规划旅游攻略"
+    },
+    {
+      "en": "Review 教培经营",
+      "zh": "帮我检查教培经营"
+    }
+  ],
+  "tags": [
+    {
+      "en": "设备效率",
+      "zh": "设备效率"
+    },
+    {
+      "en": "旅游攻略",
+      "zh": "旅游攻略"
+    },
+    {
+      "en": "教培经营",
+      "zh": "教培经营"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "oee-improve-pro-team-lead",
+    "memberAgents": [
+      "oee-improve-pro",
+      "travel-guide-pro",
+      "edu-institution-diagnose"
+    ]
+  },
+  "version": "1.0.0"
+}

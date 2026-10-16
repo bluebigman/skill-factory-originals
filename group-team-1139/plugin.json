@@ -1,0 +1,126 @@
+{
+  "agentName": "text-extract-schema-team-lead",
+  "agents": [
+    "./agents/text-extract-schema-team-lead.md",
+    "./agents/text-extract-schema.md",
+    "./agents/feature-flag-plan.md",
+    "./agents/prompt-injection-guard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 文本抽取模式",
+    "zh": "帮我处理文本抽取模式"
+  },
+  "description": "text-extract-schema team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 文本抽取模式, covers 先定模式 / 样例驱动 / 置信标注, delivering structured results and actionable checklists.",
+    "zh": "文本抽取模式专家：围绕文本抽取模式，覆盖先定模式／样例驱动／置信标注，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "text-extract-schema Team",
+    "zh": "文本抽取模式专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "text-extract-schema-team-lead",
+      "name": {
+        "en": "文本抽取模式主理人",
+        "zh": "文本抽取模式主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/text-extract-schema.png",
+      "id": "text-extract-schema",
+      "name": {
+        "en": "text-extract-schema",
+        "zh": "文本抽取模式 助手"
+      },
+      "profession": {
+        "en": "text-extract-schema",
+        "zh": "文本抽取模式 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/feature-flag-plan.png",
+      "id": "feature-flag-plan",
+      "name": {
+        "en": "feature-flag-plan",
+        "zh": "功能开关方案 顾问"
+      },
+      "profession": {
+        "en": "feature-flag-plan",
+        "zh": "功能开关方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prompt-injection-guard.png",
+      "id": "prompt-injection-guard",
+      "name": {
+        "en": "prompt-injection-guard",
+        "zh": "提示注入防护 顾问"
+      },
+      "profession": {
+        "en": "prompt-injection-guard",
+        "zh": "提示注入防护 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1139",
+  "plugin": "group-team-1139",
+  "profession": {
+    "en": "text-extract-schema Collaboration Team",
+    "zh": "文本抽取模式专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文本抽取模式",
+      "zh": "帮我处理文本抽取模式"
+    },
+    {
+      "en": "Plan 功能开关方案",
+      "zh": "帮我规划功能开关方案"
+    },
+    {
+      "en": "Review 提示注入防护",
+      "zh": "帮我检查提示注入防护"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定模式",
+      "zh": "先定模式"
+    },
+    {
+      "en": "样例驱动",
+      "zh": "样例驱动"
+    },
+    {
+      "en": "置信标注",
+      "zh": "置信标注"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "text-extract-schema-team-lead",
+    "memberAgents": [
+      "text-extract-schema",
+      "feature-flag-plan",
+      "prompt-injection-guard"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-180",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-180",
+    "kind": "team",
+    "name": "自然 知识 排版 团队",
+    "description": "自然 知识 排版 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "writing-toolkit-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "文本净化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "writing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "文本净化 自然化改写 格式校准",
+        "evidence": "original_assets/writing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "45f6debcd20b1de0881602df43c31167689299e5b2a185308302baa124923cca"
+      },
+      {
+        "slug": "knowledge-base-pro-01-fixed",
+        "role": "member",
+        "name": "项目记忆 知识卡片 双向链接",
+        "evidence": "original_assets/knowledge-base-pro-01-fixed/merkle_root",
+        "member_merkle_root": "2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd"
+      },
+      {
+        "slug": "wechat-article-pro",
+        "role": "member",
+        "name": "公众号文章 排版结构 完读率",
+        "evidence": "original_assets/wechat-article-pro/merkle_root",
+        "member_merkle_root": "b6135756039278fc2f52e854287f059c2321ec83c8f3abc45dca829ca87facac"
+      }
+    ],
+    "team_lead": "writing-toolkit-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c7348fe30dd7a4a5",
+  "prompt_hash": "d8f691b2d583fc61",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-180\", \"kind\": \"team\", \"name\": \"自然 知识 排版 团队\", \"description\": \"自然 知识 排版 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"writing-toolkit-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"文本净化主理人\", \"evidence\": null}, {\"slug\": \"writing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"文本净化 自然化改写 格式校准\", \"evidence\": \"original_assets/writing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"45f6debcd20b1de0881602df43c31167689299e5b2a185308302baa124923cca\"}, {\"slug\": \"knowledge-base-pro-01-fixed\", \"role\": \"member\", \"name\": \"项目记忆 知识卡片 双向链接\", \"evidence\": \"original_assets/knowledge-base-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd\"}, {\"slug\": \"wechat-article-pro\", \"role\": \"member\", \"name\": \"公众号文章 排版结构 完读率\", \"evidence\": \"original_assets/wechat-article-pro/merkle_root\", \"member_merkle_root\": \"b6135756039278fc2f52e854287f059c2321ec83c8f3abc45dca829ca87facac\"}], \"team_lead\": \"writing-toolkit-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/knowledge-base-pro-01-fixed.md": "6c88f7c34dade768f0e9db72c1afae31d4e5cfe1986d4c4de6d0c80e64508aad",
+    "agents/wechat-article-pro.md": "52f5178416b13258f960cec8be0c76356c3e929d20b3ae8637573cfbc43aeef2",
+    "agents/writing-toolkit-pro-fixed-team-lead.md": "6bf5db096ee4d211a22d8f6f978208f385965e818f73fbd0110141f5a6916f42",
+    "agents/writing-toolkit-pro-fixed.md": "e00fae3266c6ba6497d855b2e6fc7f691cfcee50035abd7ea4a3fdb3881d23a0",
+    "plugin.json": "fa2a2ca34320141f2aedc096edc033f73d124e2a2fd546d6ea2f61d2a4084060",
+    "settings.json": "f46ff203b331bfc9b7003b04e78ce47076388a782223ac9dbaff42b519faefcc"
+  }
+}

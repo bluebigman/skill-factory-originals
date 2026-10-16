@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1088",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1088",
+    "kind": "team",
+    "name": "文档可达性核查专家",
+    "description": "文档可达性核查专家：围绕用户故事，覆盖角色明确／价值明确／验收条件，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "user-story-write-team-lead",
+        "role": "lead",
+        "name": "用户故事主理人",
+        "evidence": null
+      },
+      {
+        "slug": "user-story-write",
+        "role": "member",
+        "name": "用户故事 撰写",
+        "evidence": "original_assets/user-story-write/merkle_root",
+        "member_merkle_root": "c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643"
+      },
+      {
+        "slug": "doc-accessibility-check",
+        "role": "member",
+        "name": "文档可达性核查 顾问",
+        "evidence": "original_assets/doc-accessibility-check/merkle_root",
+        "member_merkle_root": "9c605d6dc8c51d9d17decf784dfde5ebfab4aa868ebcd2fe6de62cab1b890652"
+      },
+      {
+        "slug": "form-design-pro",
+        "role": "member",
+        "name": "表单设计 填写体验 顾问",
+        "evidence": "original_assets/form-design-pro/merkle_root",
+        "member_merkle_root": "92da63d3661ad42ec8afcdac4e2f30e02339ef6831a86fc8f887cce94f1713bc"
+      }
+    ],
+    "team_lead": "user-story-write-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "14c46e40b29cabe6",
+  "prompt_hash": "12f57bcec100eb79",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1088\", \"kind\": \"team\", \"name\": \"文档可达性核查专家\", \"description\": \"文档可达性核查专家：围绕用户故事，覆盖角色明确／价值明确／验收条件，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"user-story-write-team-lead\", \"role\": \"lead\", \"name\": \"用户故事主理人\", \"evidence\": null}, {\"slug\": \"user-story-write\", \"role\": \"member\", \"name\": \"用户故事 撰写\", \"evidence\": \"original_assets/user-story-write/merkle_root\", \"member_merkle_root\": \"c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643\"}, {\"slug\": \"doc-accessibility-check\", \"role\": \"member\", \"name\": \"文档可达性核查 顾问\", \"evidence\": \"original_assets/doc-accessibility-check/merkle_root\", \"member_merkle_root\": \"9c605d6dc8c51d9d17decf784dfde5ebfab4aa868ebcd2fe6de62cab1b890652\"}, {\"slug\": \"form-design-pro\", \"role\": \"member\", \"name\": \"表单设计 填写体验 顾问\", \"evidence\": \"original_assets/form-design-pro/merkle_root\", \"member_merkle_root\": \"92da63d3661ad42ec8afcdac4e2f30e02339ef6831a86fc8f887cce94f1713bc\"}], \"team_lead\": \"user-story-write-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-accessibility-check.md": "bf50e9783d42ce5fb76cf6a80bbd378dc6840bb7d190c16575397b7d3ac46c73",
+    "agents/form-design-pro.md": "aae9df1368575f48c81d58f8505bac87e3fa8c8d915800cbbd3471b25f5f8974",
+    "agents/user-story-write-team-lead.md": "e7f41d2614f2685dbecac405873b25d5f175df7b30125e7aaaa8ca7e24e7f4f9",
+    "agents/user-story-write.md": "ece3e93b80e3152c3a1264a9cb270688b9027441c78303febb58b7e65957555b",
+    "plugin.json": "c80d4933030f4dd41a380fec48e6364bf24409d3758784e3727038028beb297c",
+    "settings.json": "55500ad2dd64715a24bd3e2cdb8b00774a76b3f3331c00e5223f9eda3a70a677"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-751",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-751",
+    "kind": "team",
+    "name": "需求挖掘提问框架专家",
+    "description": "输入需求挖掘相关需求，输出顺序提问、开放为主、复述确认三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "discovery-call-coach-team-lead",
+        "role": "lead",
+        "name": "需求挖掘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "discovery-call-coach",
+        "role": "member",
+        "name": "需求挖掘 提问框架 教练",
+        "evidence": "original_assets/discovery-call-coach/merkle_root",
+        "member_merkle_root": "5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d"
+      },
+      {
+        "slug": "cold-email-expert",
+        "role": "member",
+        "name": "邮件营销 标题撰写 转化优化",
+        "evidence": "original_assets/cold-email-expert/merkle_root",
+        "member_merkle_root": "458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc"
+      },
+      {
+        "slug": "game-team-workflow",
+        "role": "member",
+        "name": "游戏团队 协作流程 顾问",
+        "evidence": "original_assets/game-team-workflow/merkle_root",
+        "member_merkle_root": "74b7274e4168683e87965a695ea8531e3629e476ea420312d23f3aea32dfd5e5"
+      }
+    ],
+    "team_lead": "discovery-call-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5bdc7345709a7c96",
+  "prompt_hash": "ba7cd4a04d28ed22",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-751\", \"kind\": \"team\", \"name\": \"需求挖掘提问框架专家\", \"description\": \"输入需求挖掘相关需求，输出顺序提问、开放为主、复述确认三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"discovery-call-coach-team-lead\", \"role\": \"lead\", \"name\": \"需求挖掘主理人\", \"evidence\": null}, {\"slug\": \"discovery-call-coach\", \"role\": \"member\", \"name\": \"需求挖掘 提问框架 教练\", \"evidence\": \"original_assets/discovery-call-coach/merkle_root\", \"member_merkle_root\": \"5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d\"}, {\"slug\": \"cold-email-expert\", \"role\": \"member\", \"name\": \"邮件营销 标题撰写 转化优化\", \"evidence\": \"original_assets/cold-email-expert/merkle_root\", \"member_merkle_root\": \"458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc\"}, {\"slug\": \"game-team-workflow\", \"role\": \"member\", \"name\": \"游戏团队 协作流程 顾问\", \"evidence\": \"original_assets/game-team-workflow/merkle_root\", \"member_merkle_root\": \"74b7274e4168683e87965a695ea8531e3629e476ea420312d23f3aea32dfd5e5\"}], \"team_lead\": \"discovery-call-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cold-email-expert.md": "1552f7d220e44600372dcc101d92b4783cecbc1af2339fd9593fb15f4b779df7",
+    "agents/discovery-call-coach-team-lead.md": "b1f35208f77881826d04c4f99377f3d49b916b97141149fed732c6e31fe3d2d5",
+    "agents/discovery-call-coach.md": "c7e612801953026e4048e6cb4ed534a5c4efe6b02f92c4dd10d5c7d62ab5cf9b",
+    "agents/game-team-workflow.md": "d603a2827a62a4b08f686b8b1c4faa2c880732e965f05baac2633aff32a32296",
+    "plugin.json": "e05806412d9e053db3d500e4e32aecdc2ce68b4a30d756ebad60d88cc97aace6",
+    "settings.json": "79444f6c9e82b537a0cd9ecfe6311e1a75c124d6b98ba0397fc26521e98e6cb1"
+  }
+}

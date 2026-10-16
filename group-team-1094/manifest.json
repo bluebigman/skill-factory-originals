@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1094",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1094",
+    "kind": "team",
+    "name": "事件分级标准专家",
+    "description": "事件分级标准专家：围绕事件分级标准，覆盖响应时限／升级路径／通告范围，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "incident-severity-team-lead",
+        "role": "lead",
+        "name": "事件分级标准主理人",
+        "evidence": null
+      },
+      {
+        "slug": "incident-severity",
+        "role": "member",
+        "name": "事件分级标准 顾问",
+        "evidence": "original_assets/incident-severity/merkle_root",
+        "member_merkle_root": "6709789613453d3862d8cc0dfca72d46ec524121cb69ee02cde2df3cedb325d0"
+      },
+      {
+        "slug": "overseas-support-pro",
+        "role": "member",
+        "name": "海外客服 多语支持 顾问",
+        "evidence": "original_assets/overseas-support-pro/merkle_root",
+        "member_merkle_root": "f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3"
+      },
+      {
+        "slug": "performance-review",
+        "role": "member",
+        "name": "绩效评估设计 顾问",
+        "evidence": "original_assets/performance-review/merkle_root",
+        "member_merkle_root": "5f5a37ea828b9c3e4fcc8dae7d35711677bca54b933099e7966c9fae59bfab9c"
+      }
+    ],
+    "team_lead": "incident-severity-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "729666f9e545ef25",
+  "prompt_hash": "ff918d5db26d4a8d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1094\", \"kind\": \"team\", \"name\": \"事件分级标准专家\", \"description\": \"事件分级标准专家：围绕事件分级标准，覆盖响应时限／升级路径／通告范围，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"incident-severity-team-lead\", \"role\": \"lead\", \"name\": \"事件分级标准主理人\", \"evidence\": null}, {\"slug\": \"incident-severity\", \"role\": \"member\", \"name\": \"事件分级标准 顾问\", \"evidence\": \"original_assets/incident-severity/merkle_root\", \"member_merkle_root\": \"6709789613453d3862d8cc0dfca72d46ec524121cb69ee02cde2df3cedb325d0\"}, {\"slug\": \"overseas-support-pro\", \"role\": \"member\", \"name\": \"海外客服 多语支持 顾问\", \"evidence\": \"original_assets/overseas-support-pro/merkle_root\", \"member_merkle_root\": \"f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3\"}, {\"slug\": \"performance-review\", \"role\": \"member\", \"name\": \"绩效评估设计 顾问\", \"evidence\": \"original_assets/performance-review/merkle_root\", \"member_merkle_root\": \"5f5a37ea828b9c3e4fcc8dae7d35711677bca54b933099e7966c9fae59bfab9c\"}], \"team_lead\": \"incident-severity-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/incident-severity-team-lead.md": "0c845740567f6ea3d0e6c6a9dce223a3e340e398e855bc51c4d54fe2959f6a4e",
+    "agents/incident-severity.md": "beb5afd45d94fe58570d7966d49f340e07e3cb99142c403748e82c31202596e1",
+    "agents/overseas-support-pro.md": "b5e7456e6c0496eaf917010455fcb7efe70ac6a4c02e9774c46d56b17c5a0bb3",
+    "agents/performance-review.md": "eb023c753636dd044b02e52b8546c8279a44f5409dfcdc8d67f0403c0b05afd3",
+    "plugin.json": "feda52fb376fad79b831947e6a6f22313ef53218d8c9ad8e015487572e456e1e",
+    "settings.json": "6748d18caa9f2e75ae52707f518d6f509eccef450326cef977c2b48ba2324bfb"
+  }
+}

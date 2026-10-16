@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1259",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1259",
+    "kind": "team",
+    "name": "样例解析专家",
+    "description": "样例解析专家：围绕日志规范，覆盖分级明确／必含字段／敏感脱敏，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-toolkit-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "关系查询主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-toolkit-pro-fixed",
+        "role": "member",
+        "name": "关系查询 HEC 方言适配",
+        "evidence": "original_assets/sql-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999"
+      },
+      {
+        "slug": "toolkit-pro-08-fixed",
+        "role": "member",
+        "name": "UX设计 样例解析 情节构建",
+        "evidence": "original_assets/toolkit-pro-08-fixed/merkle_root",
+        "member_merkle_root": "4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6"
+      },
+      {
+        "slug": "log-standard-define",
+        "role": "member",
+        "name": "日志规范 制定",
+        "evidence": "original_assets/log-standard-define/merkle_root",
+        "member_merkle_root": "d0db9a571878ebf682ca131148552a08b9e059c46a2dfc2a3b76f816a9897bf6"
+      }
+    ],
+    "team_lead": "sql-toolkit-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "37c06ddb25a077f4",
+  "prompt_hash": "00bcc39763c1331e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1259\", \"kind\": \"team\", \"name\": \"样例解析专家\", \"description\": \"样例解析专家：围绕日志规范，覆盖分级明确／必含字段／敏感脱敏，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-toolkit-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"关系查询主理人\", \"evidence\": null}, {\"slug\": \"sql-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"关系查询 HEC 方言适配\", \"evidence\": \"original_assets/sql-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999\"}, {\"slug\": \"toolkit-pro-08-fixed\", \"role\": \"member\", \"name\": \"UX设计 样例解析 情节构建\", \"evidence\": \"original_assets/toolkit-pro-08-fixed/merkle_root\", \"member_merkle_root\": \"4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6\"}, {\"slug\": \"log-standard-define\", \"role\": \"member\", \"name\": \"日志规范 制定\", \"evidence\": \"original_assets/log-standard-define/merkle_root\", \"member_merkle_root\": \"d0db9a571878ebf682ca131148552a08b9e059c46a2dfc2a3b76f816a9897bf6\"}], \"team_lead\": \"sql-toolkit-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/log-standard-define.md": "782f5201d95c7b4c27f6a9096e6d9e9539472086cd78b874c13f34f776be8368",
+    "agents/sql-toolkit-pro-fixed-team-lead.md": "26ed45a1aaa424fdcc628ef8f9df14f7f3a252e5e5b2ccf76ad091c45973040f",
+    "agents/sql-toolkit-pro-fixed.md": "79a8701030b05e2c8a26de901a257b58bfbff8b357f41d95b044e71a85617da9",
+    "agents/toolkit-pro-08-fixed.md": "2500d4659b9e8b2682eb267055dc75ece72fac35641387c851e27d0eff3268ad",
+    "plugin.json": "373f514af3681a7b5756bdb73746d16c5e34d5b559736f5a01396c5bf58e276d",
+    "settings.json": "6f4f731af78e8fc8861587e78d69835677179d86fbad5b09f565cef9f55f13e8"
+  }
+}

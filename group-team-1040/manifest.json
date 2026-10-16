@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1040",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1040",
+    "kind": "team",
+    "name": "定价页面专家",
+    "description": "定价页面专家：围绕定价页面，覆盖维度对齐／推荐克制／价格透明，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pricing-page-ux-team-lead",
+        "role": "lead",
+        "name": "定价页面主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pricing-page-ux",
+        "role": "member",
+        "name": "定价页面 表达清晰 顾问",
+        "evidence": "original_assets/pricing-page-ux/merkle_root",
+        "member_merkle_root": "a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248"
+      },
+      {
+        "slug": "animation-principle",
+        "role": "member",
+        "name": "动效设计原则 顾问",
+        "evidence": "original_assets/animation-principle/merkle_root",
+        "member_merkle_root": "a50a5e7156618a845aea30c491e5c9648ddef71cdc73c43958b343800c7a3bc4"
+      },
+      {
+        "slug": "visual-asset-brief",
+        "role": "member",
+        "name": "视觉素材需求 助手",
+        "evidence": "original_assets/visual-asset-brief/merkle_root",
+        "member_merkle_root": "68518667fe0fa1356d6b1ee862ff02106dde5ca094d1131e9a84656fb6d97c6b"
+      }
+    ],
+    "team_lead": "pricing-page-ux-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "66539705b29e5f1d",
+  "prompt_hash": "e5b33befb4906af1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1040\", \"kind\": \"team\", \"name\": \"定价页面专家\", \"description\": \"定价页面专家：围绕定价页面，覆盖维度对齐／推荐克制／价格透明，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pricing-page-ux-team-lead\", \"role\": \"lead\", \"name\": \"定价页面主理人\", \"evidence\": null}, {\"slug\": \"pricing-page-ux\", \"role\": \"member\", \"name\": \"定价页面 表达清晰 顾问\", \"evidence\": \"original_assets/pricing-page-ux/merkle_root\", \"member_merkle_root\": \"a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248\"}, {\"slug\": \"animation-principle\", \"role\": \"member\", \"name\": \"动效设计原则 顾问\", \"evidence\": \"original_assets/animation-principle/merkle_root\", \"member_merkle_root\": \"a50a5e7156618a845aea30c491e5c9648ddef71cdc73c43958b343800c7a3bc4\"}, {\"slug\": \"visual-asset-brief\", \"role\": \"member\", \"name\": \"视觉素材需求 助手\", \"evidence\": \"original_assets/visual-asset-brief/merkle_root\", \"member_merkle_root\": \"68518667fe0fa1356d6b1ee862ff02106dde5ca094d1131e9a84656fb6d97c6b\"}], \"team_lead\": \"pricing-page-ux-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/animation-principle.md": "dd3a0e46aad3261cd2f7bc05d899939d4d3a57154a8cfcdeb292f5b4005d14f2",
+    "agents/pricing-page-ux-team-lead.md": "43acff9668ca13df1370cd4d06afb9dcba030c27b8b5babb14f431c189df1952",
+    "agents/pricing-page-ux.md": "b70f5de3d5eed707256ec64fe949eda9942bf65cd3d6e89276d633866f154d70",
+    "agents/visual-asset-brief.md": "dc5e0c90e18ee39b5976e4489010895eb06f6877ad92c80d4829ca78ed3843f9",
+    "plugin.json": "541b2987db21342c53e08d73711d959b03956b03bc4d307ad7a4eab9acfcdef5",
+    "settings.json": "85ddc5a50f38aed1e32d0c2e8286036edce1f743b185c1758da36f07c476871f"
+  }
+}

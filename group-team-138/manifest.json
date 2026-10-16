@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-138",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-138",
+    "kind": "team",
+    "name": "财务 报销 年报 团队",
+    "description": "财务 报销 年报 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "finance-toolkit-pro-team-lead",
+        "role": "lead",
+        "name": "财务文本主理人",
+        "evidence": null
+      },
+      {
+        "slug": "finance-toolkit-pro",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro/merkle_root",
+        "member_merkle_root": "3626d1435ab9ed2d8316f44a50811ccf8439a181c9aebfd98e215c021beac685"
+      },
+      {
+        "slug": "expense-reimburse-expert",
+        "role": "member",
+        "name": "报销与费用管理专家",
+        "evidence": "original_assets/expense-reimburse-expert/merkle_root",
+        "member_merkle_root": "a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f"
+      },
+      {
+        "slug": "annual-report-expert",
+        "role": "member",
+        "name": "年报官",
+        "evidence": "original_assets/annual-report-expert/merkle_root",
+        "member_merkle_root": "f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2"
+      }
+    ],
+    "team_lead": "finance-toolkit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a0151e7861cbd093",
+  "prompt_hash": "4866a25863d6bf26",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-138\", \"kind\": \"team\", \"name\": \"财务 报销 年报 团队\", \"description\": \"财务 报销 年报 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"finance-toolkit-pro-team-lead\", \"role\": \"lead\", \"name\": \"财务文本主理人\", \"evidence\": null}, {\"slug\": \"finance-toolkit-pro\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro/merkle_root\", \"member_merkle_root\": \"3626d1435ab9ed2d8316f44a50811ccf8439a181c9aebfd98e215c021beac685\"}, {\"slug\": \"expense-reimburse-expert\", \"role\": \"member\", \"name\": \"报销与费用管理专家\", \"evidence\": \"original_assets/expense-reimburse-expert/merkle_root\", \"member_merkle_root\": \"a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f\"}, {\"slug\": \"annual-report-expert\", \"role\": \"member\", \"name\": \"年报官\", \"evidence\": \"original_assets/annual-report-expert/merkle_root\", \"member_merkle_root\": \"f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2\"}], \"team_lead\": \"finance-toolkit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/annual-report-expert.md": "dc9d91e7d8a7feae39124b3510f02caa5280fa20a4c373b9b3003ab8db5cf294",
+    "agents/expense-reimburse-expert.md": "b4fd9d5dcfe78df7f3e3d688138083bb8d3a43257cf53514d87d95dce92e145e",
+    "agents/finance-toolkit-pro-team-lead.md": "afae529d141a9804255ab1ede2dbb7a1a718e4e125decaea875f1cb99b7aab95",
+    "agents/finance-toolkit-pro.md": "18a9162b0f448629102a21b29c38b78cf1d66fb28977e19415812f6e3ec81502",
+    "plugin.json": "02419cd36bc932247bf18bf1ea1d95a05758fdd20019080e6abe74eb2286bcd7",
+    "settings.json": "2034cb54701fe7c18b2d349f4fee76da9e34ae7c4afb5921bca4b4b3ed3ded82"
+  }
+}

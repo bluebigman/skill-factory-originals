@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-722",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-722",
+    "kind": "team",
+    "name": "文件采集素材整理专家",
+    "description": "擅长合同合规、口径明确与时区友好，覆盖海外招聘全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "crawl-file-pro-team-lead",
+        "role": "lead",
+        "name": "文件采集主理人",
+        "evidence": null
+      },
+      {
+        "slug": "crawl-file-pro",
+        "role": "member",
+        "name": "文件采集 素材整理",
+        "evidence": "original_assets/crawl-file-pro/merkle_root",
+        "member_merkle_root": "df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f"
+      },
+      {
+        "slug": "intl-talent-onboard",
+        "role": "member",
+        "name": "海外招聘 入职衔接 助手",
+        "evidence": "original_assets/intl-talent-onboard/merkle_root",
+        "member_merkle_root": "45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6"
+      },
+      {
+        "slug": "new-product-npi-pro",
+        "role": "member",
+        "name": "新品导入 试产爬坡 顾问",
+        "evidence": "original_assets/new-product-npi-pro/merkle_root",
+        "member_merkle_root": "b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc"
+      }
+    ],
+    "team_lead": "crawl-file-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d5ab70087b079f29",
+  "prompt_hash": "4af7b5399be72454",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-722\", \"kind\": \"team\", \"name\": \"文件采集素材整理专家\", \"description\": \"擅长合同合规、口径明确与时区友好，覆盖海外招聘全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"crawl-file-pro-team-lead\", \"role\": \"lead\", \"name\": \"文件采集主理人\", \"evidence\": null}, {\"slug\": \"crawl-file-pro\", \"role\": \"member\", \"name\": \"文件采集 素材整理\", \"evidence\": \"original_assets/crawl-file-pro/merkle_root\", \"member_merkle_root\": \"df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f\"}, {\"slug\": \"intl-talent-onboard\", \"role\": \"member\", \"name\": \"海外招聘 入职衔接 助手\", \"evidence\": \"original_assets/intl-talent-onboard/merkle_root\", \"member_merkle_root\": \"45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6\"}, {\"slug\": \"new-product-npi-pro\", \"role\": \"member\", \"name\": \"新品导入 试产爬坡 顾问\", \"evidence\": \"original_assets/new-product-npi-pro/merkle_root\", \"member_merkle_root\": \"b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc\"}], \"team_lead\": \"crawl-file-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crawl-file-pro-team-lead.md": "4b77024582b2365108cf48424c56096eef54bd17babfd296a1fba2f842dce562",
+    "agents/crawl-file-pro.md": "7d8b072e3340254e756589038dac26e3ba1acba172da2acc8d4499273b2527f1",
+    "agents/intl-talent-onboard.md": "09aeb34354a1cecdd1a53846b7f1f6840a4f0c444f35c9ae843d440a6ab9ecd3",
+    "agents/new-product-npi-pro.md": "45b0ba8f0fad21cc58e27c173b9018052202e4e270d73e562f945984d952ed96",
+    "plugin.json": "2e0f4c3455efd6cc53d3b86da84fbe7f6f5a8b6c1b2569fa00025ca96674cd73",
+    "settings.json": "4562bc5785b8b2fe34e5b553830cc10580c75f3eb4a01e9ce8ed31159ad4ed25"
+  }
+}

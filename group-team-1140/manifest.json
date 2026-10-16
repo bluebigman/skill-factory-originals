@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1140",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1140",
+    "kind": "team",
+    "name": "流程合规专家",
+    "description": "输入流程合规相关需求，输出步骤核验、偏差记录、预警机制三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sop-compliance-check-team-lead",
+        "role": "lead",
+        "name": "流程合规主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sop-compliance-check",
+        "role": "member",
+        "name": "流程合规 步骤核验 顾问",
+        "evidence": "original_assets/sop-compliance-check/merkle_root",
+        "member_merkle_root": "eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f"
+      },
+      {
+        "slug": "global-pm-coach",
+        "role": "member",
+        "name": "跨国项目 协同推进 教练",
+        "evidence": "original_assets/global-pm-coach/merkle_root",
+        "member_merkle_root": "d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa"
+      },
+      {
+        "slug": "dev-onboarding",
+        "role": "member",
+        "name": "新人上手流程 顾问",
+        "evidence": "original_assets/dev-onboarding/merkle_root",
+        "member_merkle_root": "7146d0023c8122e544f09effae5710a7355a377748fa2e2eecfaa7814f864e8b"
+      }
+    ],
+    "team_lead": "sop-compliance-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a58710898a24e448",
+  "prompt_hash": "74712ae7b4872e9a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1140\", \"kind\": \"team\", \"name\": \"流程合规专家\", \"description\": \"输入流程合规相关需求，输出步骤核验、偏差记录、预警机制三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sop-compliance-check-team-lead\", \"role\": \"lead\", \"name\": \"流程合规主理人\", \"evidence\": null}, {\"slug\": \"sop-compliance-check\", \"role\": \"member\", \"name\": \"流程合规 步骤核验 顾问\", \"evidence\": \"original_assets/sop-compliance-check/merkle_root\", \"member_merkle_root\": \"eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f\"}, {\"slug\": \"global-pm-coach\", \"role\": \"member\", \"name\": \"跨国项目 协同推进 教练\", \"evidence\": \"original_assets/global-pm-coach/merkle_root\", \"member_merkle_root\": \"d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa\"}, {\"slug\": \"dev-onboarding\", \"role\": \"member\", \"name\": \"新人上手流程 顾问\", \"evidence\": \"original_assets/dev-onboarding/merkle_root\", \"member_merkle_root\": \"7146d0023c8122e544f09effae5710a7355a377748fa2e2eecfaa7814f864e8b\"}], \"team_lead\": \"sop-compliance-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/dev-onboarding.md": "504f6427c40207813d97429eea869cffced57e71dd994a6a2cbd36648040db83",
+    "agents/global-pm-coach.md": "319070a9d85c550fbeffb2147ce876fb8d3fc4f726c4504f6c6765d46d433c05",
+    "agents/sop-compliance-check-team-lead.md": "4858a82921b39b5c252165e48a0a42b76be636e71820b8a0e061bed384ae7cff",
+    "agents/sop-compliance-check.md": "77ca9142c362568a93e9513be36b3bcedd626dc8572d1742dd74c474222b4545",
+    "plugin.json": "f067bf068eb5aadbeb11dd9864d3165e51ce4e81b48556fad9ab024fddfa02ec",
+    "settings.json": "4e2ae26f4e66dfa0286466f6a1944df6094840bd92ea76f3acabaa5b85fd8537"
+  }
+}

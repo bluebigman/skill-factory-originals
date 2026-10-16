@@ -1,0 +1,126 @@
+{
+  "agentName": "ui-pattern-library-team-lead",
+  "agents": [
+    "./agents/ui-pattern-library-team-lead.md",
+    "./agents/ui-pattern-library.md",
+    "./agents/game-doc-standard.md",
+    "./agents/playtest-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 界面模式库",
+    "zh": "帮我处理界面模式库"
+  },
+  "description": "ui-pattern-library team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 界面模式库 end-to-end: 场景匹配, 版本留痕 and 交叉引用. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长场景匹配、版本留痕与交叉引用，覆盖界面模式库全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ui-pattern-library Team",
+    "zh": "界面模式库专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ui-pattern-library-team-lead",
+      "name": {
+        "en": "界面模式库主理人",
+        "zh": "界面模式库主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ui-pattern-library.png",
+      "id": "ui-pattern-library",
+      "name": {
+        "en": "ui-pattern-library",
+        "zh": "界面模式库 顾问"
+      },
+      "profession": {
+        "en": "ui-pattern-library",
+        "zh": "界面模式库 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-doc-standard.png",
+      "id": "game-doc-standard",
+      "name": {
+        "en": "game-doc-standard",
+        "zh": "游戏策划 文档规范 顾问"
+      },
+      "profession": {
+        "en": "game-doc-standard",
+        "zh": "游戏策划 文档规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/playtest-method.png",
+      "id": "playtest-method",
+      "name": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "profession": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1192",
+  "plugin": "group-team-1192",
+  "profession": {
+    "en": "ui-pattern-library Collaboration Team",
+    "zh": "界面模式库专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 界面模式库",
+      "zh": "帮我处理界面模式库"
+    },
+    {
+      "en": "Plan 游戏策划",
+      "zh": "帮我规划游戏策划"
+    },
+    {
+      "en": "Review 可用性",
+      "zh": "帮我检查可用性"
+    }
+  ],
+  "tags": [
+    {
+      "en": "场景匹配",
+      "zh": "场景匹配"
+    },
+    {
+      "en": "一致性",
+      "zh": "一致性"
+    },
+    {
+      "en": "可访问",
+      "zh": "可访问"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ui-pattern-library-team-lead",
+    "memberAgents": [
+      "ui-pattern-library",
+      "game-doc-standard",
+      "playtest-method"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-toolkit-pro-01-team-lead",
+  "agents": [
+    "./agents/agent-toolkit-pro-01-team-lead.md",
+    "./agents/agent-toolkit-pro-01.md",
+    "./agents/sql-perf-tune.md",
+    "./agents/data-clean-pro-05.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 显微成像",
+    "zh": "帮我处理显微成像"
+  },
+  "description": "技能与智能体编排 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around SQL, covers 索引匹配 / 避免函数 / 分页优化, delivering structured results and actionable checklists.",
+    "zh": "显微成像专家：围绕SQL，覆盖索引匹配／避免函数／分页优化，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "技能与智能体编排 Suite Team",
+    "zh": "显微成像专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-toolkit-pro-01-team-lead",
+      "name": {
+        "en": "显微成像主理人",
+        "zh": "显微成像主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-01.png",
+      "id": "agent-toolkit-pro-01",
+      "name": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "profession": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-perf-tune.png",
+      "id": "sql-perf-tune",
+      "name": {
+        "en": "sql-perf-tune",
+        "zh": "SQL 调优 顾问"
+      },
+      "profession": {
+        "en": "sql-perf-tune",
+        "zh": "SQL 调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-05.png",
+      "id": "data-clean-pro-05",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-677",
+  "plugin": "group-team-677",
+  "profession": {
+    "en": "技能与智能体编排 Suite Collaboration Team",
+    "zh": "显微成像专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 显微成像",
+      "zh": "帮我处理显微成像"
+    },
+    {
+      "en": "Plan SQL",
+      "zh": "帮我规划SQL"
+    },
+    {
+      "en": "Review 数据解析",
+      "zh": "帮我检查数据解析"
+    }
+  ],
+  "tags": [
+    {
+      "en": "批量转换",
+      "zh": "批量转换"
+    },
+    {
+      "en": "格式校验",
+      "zh": "格式校验"
+    },
+    {
+      "en": "字段校验",
+      "zh": "字段校验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-toolkit-pro-01-team-lead",
+    "memberAgents": [
+      "agent-toolkit-pro-01",
+      "sql-perf-tune",
+      "data-clean-pro-05"
+    ]
+  },
+  "version": "1.0.0"
+}

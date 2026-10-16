@@ -1,0 +1,126 @@
+{
+  "agentName": "space-wayfinding-team-lead",
+  "agents": [
+    "./agents/space-wayfinding-team-lead.md",
+    "./agents/space-wayfinding.md",
+    "./agents/game-community-mod.md",
+    "./agents/prd-write-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 导视系统",
+    "zh": "帮我处理导视系统"
+  },
+  "description": "space-wayfinding team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 导视系统 end-to-end: 层级一致, 视觉连续 and 规则前置. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长层级一致、视觉连续与规则前置，覆盖导视系统全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "space-wayfinding Team",
+    "zh": "需求文档撰写顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "space-wayfinding-team-lead",
+      "name": {
+        "en": "导视系统主理人",
+        "zh": "导视系统主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/space-wayfinding.png",
+      "id": "space-wayfinding",
+      "name": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "profession": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-community-mod.png",
+      "id": "game-community-mod",
+      "name": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "profession": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prd-write-coach.png",
+      "id": "prd-write-coach",
+      "name": {
+        "en": "prd-write-coach",
+        "zh": "需求文档撰写 顾问"
+      },
+      "profession": {
+        "en": "prd-write-coach",
+        "zh": "需求文档撰写 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-855",
+  "plugin": "group-team-855",
+  "profession": {
+    "en": "space-wayfinding Collaboration Team",
+    "zh": "需求文档撰写顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 导视系统",
+      "zh": "帮我处理导视系统"
+    },
+    {
+      "en": "Plan 游戏社区",
+      "zh": "帮我规划游戏社区"
+    },
+    {
+      "en": "Review 需求文档撰写",
+      "zh": "帮我检查需求文档撰写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "视觉连续",
+      "zh": "视觉连续"
+    },
+    {
+      "en": "多模态",
+      "zh": "多模态"
+    },
+    {
+      "en": "无障碍",
+      "zh": "无障碍"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "space-wayfinding-team-lead",
+    "memberAgents": [
+      "space-wayfinding",
+      "game-community-mod",
+      "prd-write-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

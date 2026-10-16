@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-toolkit-pro-03-fixed-team-lead",
+  "agents": [
+    "./agents/sql-toolkit-pro-03-fixed-team-lead.md",
+    "./agents/sql-toolkit-pro-03-fixed.md",
+    "./agents/ai-workflow-expert.md",
+    "./agents/reliability-wrapper-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据转查询",
+    "zh": "帮我处理数据转查询"
+  },
+  "description": "SQL Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 重试熔断 requirements, output three deliverables: 指数退避, 熔断开窗, 超时必备. Verifiable end-to-end, evidence per step.",
+    "zh": "输入重试熔断相关需求，输出指数退避、熔断开窗、超时必备三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "SQL Suite Team",
+    "zh": "数据转查询专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-toolkit-pro-03-fixed-team-lead",
+      "name": {
+        "en": "数据转查询主理人",
+        "zh": "数据转查询主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-03-fixed.png",
+      "id": "sql-toolkit-pro-03-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ai-workflow-expert.png",
+      "id": "ai-workflow-expert",
+      "name": {
+        "en": "FlowMaster",
+        "zh": "AI工作流 多步编排 自动执行"
+      },
+      "profession": {
+        "en": "FlowMaster",
+        "zh": "AI工作流 多步编排 自动执行"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/reliability-wrapper-pro.png",
+      "id": "reliability-wrapper-pro",
+      "name": {
+        "en": "reliability-wrapper-pro",
+        "zh": "重试熔断 超时降级 顾问"
+      },
+      "profession": {
+        "en": "reliability-wrapper-pro",
+        "zh": "重试熔断 超时降级 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-602",
+  "plugin": "group-team-602",
+  "profession": {
+    "en": "SQL Suite Collaboration Team",
+    "zh": "数据转查询专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据转查询",
+      "zh": "帮我处理数据转查询"
+    },
+    {
+      "en": "Plan AI工作流",
+      "zh": "帮我规划AI工作流"
+    },
+    {
+      "en": "Review 重试熔断",
+      "zh": "帮我检查重试熔断"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据查询",
+      "zh": "数据查询"
+    },
+    {
+      "en": "方言适配",
+      "zh": "方言适配"
+    },
+    {
+      "en": "结果校验",
+      "zh": "结果校验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-toolkit-pro-03-fixed-team-lead",
+    "memberAgents": [
+      "sql-toolkit-pro-03-fixed",
+      "ai-workflow-expert",
+      "reliability-wrapper-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

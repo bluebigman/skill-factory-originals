@@ -1,0 +1,126 @@
+{
+  "agentName": "email-professional-team-lead",
+  "agents": [
+    "./agents/email-professional-team-lead.md",
+    "./agents/email-professional.md",
+    "./agents/report-outline-design.md",
+    "./agents/copy-test-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 商务邮件撰写",
+    "zh": "帮我处理商务邮件撰写"
+  },
+  "description": "email-professional team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 商务邮件撰写, covers 主题具体 / 一段一事 / 行动明确, delivering structured results and actionable checklists.",
+    "zh": "商务邮件撰写专家：围绕商务邮件撰写，覆盖主题具体／一段一事／行动明确，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "email-professional Team",
+    "zh": "商务邮件撰写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "email-professional-team-lead",
+      "name": {
+        "en": "商务邮件撰写主理人",
+        "zh": "商务邮件撰写主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/email-professional.png",
+      "id": "email-professional",
+      "name": {
+        "en": "email-professional",
+        "zh": "商务邮件撰写 顾问"
+      },
+      "profession": {
+        "en": "email-professional",
+        "zh": "商务邮件撰写 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-outline-design.png",
+      "id": "report-outline-design",
+      "name": {
+        "en": "report-outline-design",
+        "zh": "报告大纲设计 顾问"
+      },
+      "profession": {
+        "en": "report-outline-design",
+        "zh": "报告大纲设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/copy-test-method.png",
+      "id": "copy-test-method",
+      "name": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "profession": {
+        "en": "copy-test-method",
+        "zh": "文案测试 方法设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1019",
+  "plugin": "group-team-1019",
+  "profession": {
+    "en": "email-professional Collaboration Team",
+    "zh": "商务邮件撰写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 商务邮件撰写",
+      "zh": "帮我处理商务邮件撰写"
+    },
+    {
+      "en": "Plan 报告大纲设计",
+      "zh": "帮我规划报告大纲设计"
+    },
+    {
+      "en": "Review 文案测试",
+      "zh": "帮我检查文案测试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "主题具体",
+      "zh": "主题具体"
+    },
+    {
+      "en": "一段一事",
+      "zh": "一段一事"
+    },
+    {
+      "en": "行动明确",
+      "zh": "行动明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "email-professional-team-lead",
+    "memberAgents": [
+      "email-professional",
+      "report-outline-design",
+      "copy-test-method"
+    ]
+  },
+  "version": "1.0.0"
+}

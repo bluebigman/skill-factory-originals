@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-324",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-324",
+    "kind": "team",
+    "name": "性能预算专家",
+    "description": "输入性能预算相关需求，输出基线固定、全量回归、差异归因三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-perf-budget-team-lead",
+        "role": "lead",
+        "name": "性能预算主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-perf-budget",
+        "role": "member",
+        "name": "性能预算 限额 顾问",
+        "evidence": "original_assets/agent-perf-budget/merkle_root",
+        "member_merkle_root": "5086429f26b686e840361ba8dc792aec4195921b90c2a7f0e383c7a70368bf5e"
+      },
+      {
+        "slug": "agent-regression-guard",
+        "role": "member",
+        "name": "回归守护 基线 顾问",
+        "evidence": "original_assets/agent-regression-guard/merkle_root",
+        "member_merkle_root": "c3c7d8470e2b0e04de9d81acd717e4731ff35ccfe5628be1985a4705a2760198"
+      },
+      {
+        "slug": "agent-task-queue",
+        "role": "member",
+        "name": "任务队列 优先级 顾问",
+        "evidence": "original_assets/agent-task-queue/merkle_root",
+        "member_merkle_root": "6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72"
+      }
+    ],
+    "team_lead": "agent-perf-budget-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "723ec985922c95c9",
+  "prompt_hash": "3e053efd0457cce9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-324\", \"kind\": \"team\", \"name\": \"性能预算专家\", \"description\": \"输入性能预算相关需求，输出基线固定、全量回归、差异归因三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-perf-budget-team-lead\", \"role\": \"lead\", \"name\": \"性能预算主理人\", \"evidence\": null}, {\"slug\": \"agent-perf-budget\", \"role\": \"member\", \"name\": \"性能预算 限额 顾问\", \"evidence\": \"original_assets/agent-perf-budget/merkle_root\", \"member_merkle_root\": \"5086429f26b686e840361ba8dc792aec4195921b90c2a7f0e383c7a70368bf5e\"}, {\"slug\": \"agent-regression-guard\", \"role\": \"member\", \"name\": \"回归守护 基线 顾问\", \"evidence\": \"original_assets/agent-regression-guard/merkle_root\", \"member_merkle_root\": \"c3c7d8470e2b0e04de9d81acd717e4731ff35ccfe5628be1985a4705a2760198\"}, {\"slug\": \"agent-task-queue\", \"role\": \"member\", \"name\": \"任务队列 优先级 顾问\", \"evidence\": \"original_assets/agent-task-queue/merkle_root\", \"member_merkle_root\": \"6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72\"}], \"team_lead\": \"agent-perf-budget-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-perf-budget-team-lead.md": "1680141ea4a749bf087441e347d0bc5e8def5f2eb96add9c0746824b30fd16c4",
+    "agents/agent-perf-budget.md": "1c35a3a7bc153688189e371a7d10f0c04c906713a55bf7058f57782793373c63",
+    "agents/agent-regression-guard.md": "a0461f3981a78e3032ce1ba014d607f85f7dfbaa24414ca8ac2cd5b4cf940a31",
+    "agents/agent-task-queue.md": "b8bb895fc0d5038b2a9ecaabf859aa7758fde8b29fea900cebfc3480d34e09a7",
+    "plugin.json": "9c7fdc2d4ee6d88b642fa802f656e3679ed5731333ba36915c44e1a0525ab1da",
+    "settings.json": "3c610365fe9ce804462ac6c9d61f467ccbb612979bea96d1dd0065fb5b0f8812"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-994",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-994",
+    "kind": "team",
+    "name": "内容效果复盘专家",
+    "description": "擅长行动清单、分页控制与页眉页脚，覆盖内容效果复盘全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-performance-review-team-lead",
+        "role": "lead",
+        "name": "内容效果复盘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-performance-review",
+        "role": "member",
+        "name": "内容效果复盘 顾问",
+        "evidence": "original_assets/content-performance-review/merkle_root",
+        "member_merkle_root": "68a68b93e245446042b36406b08a9c4cb15059ce4bf6d7f8d370267a68fb3a83"
+      },
+      {
+        "slug": "doc-print-layout",
+        "role": "member",
+        "name": "文档打印排版 顾问",
+        "evidence": "original_assets/doc-print-layout/merkle_root",
+        "member_merkle_root": "273e394f13d2a85702edf6fd9e0c255a40f6e1e96ddfde7f369219a61b117fc1"
+      },
+      {
+        "slug": "scene-narrative-pro",
+        "role": "member",
+        "name": "场景叙事 氛围营造 顾问",
+        "evidence": "original_assets/scene-narrative-pro/merkle_root",
+        "member_merkle_root": "31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb"
+      }
+    ],
+    "team_lead": "content-performance-review-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "787de1f8723b65d0",
+  "prompt_hash": "b6d06e036fc24d11",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-994\", \"kind\": \"team\", \"name\": \"内容效果复盘专家\", \"description\": \"擅长行动清单、分页控制与页眉页脚，覆盖内容效果复盘全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-performance-review-team-lead\", \"role\": \"lead\", \"name\": \"内容效果复盘主理人\", \"evidence\": null}, {\"slug\": \"content-performance-review\", \"role\": \"member\", \"name\": \"内容效果复盘 顾问\", \"evidence\": \"original_assets/content-performance-review/merkle_root\", \"member_merkle_root\": \"68a68b93e245446042b36406b08a9c4cb15059ce4bf6d7f8d370267a68fb3a83\"}, {\"slug\": \"doc-print-layout\", \"role\": \"member\", \"name\": \"文档打印排版 顾问\", \"evidence\": \"original_assets/doc-print-layout/merkle_root\", \"member_merkle_root\": \"273e394f13d2a85702edf6fd9e0c255a40f6e1e96ddfde7f369219a61b117fc1\"}, {\"slug\": \"scene-narrative-pro\", \"role\": \"member\", \"name\": \"场景叙事 氛围营造 顾问\", \"evidence\": \"original_assets/scene-narrative-pro/merkle_root\", \"member_merkle_root\": \"31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb\"}], \"team_lead\": \"content-performance-review-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-performance-review-team-lead.md": "b98aeb10cfabab227c104db6fe4c6600aae07735e21a7711acee4e03045ae221",
+    "agents/content-performance-review.md": "a7cc399fe907b9890c7a03faff85830e365fb301c42a3505abe65e798b7aca12",
+    "agents/doc-print-layout.md": "9ab373d99525bf4d50972c3008b799b77810a70c5cda624d50d053e6fd1e45a4",
+    "agents/scene-narrative-pro.md": "a0401c91d812df4d665e19532a78072a00c18c28fa0f4a4e91682881ca5bf6f8",
+    "plugin.json": "c0a89539286c4da79478f9bddbaca1169bbe701406334d6e6bad2600dad8b72a",
+    "settings.json": "60aed73ef3a16cba3e4d9c0beef7ce7202abba24ba74157c9a5a7b399d288905"
+  }
+}

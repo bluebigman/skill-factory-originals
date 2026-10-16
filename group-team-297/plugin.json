@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-extract-pro-team-lead",
+  "agents": [
+    "./agents/knowledge-extract-pro-team-lead.md",
+    "./agents/knowledge-extract-pro.md",
+    "./agents/spreadsheet-audit-pro.md",
+    "./agents/data-audit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 知识提取",
+    "zh": "帮我处理知识提取"
+  },
+  "description": "knowledge-extract-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 知识提取 requirements, output three deliverables: 要点提取, 来源标注, 去重合并. Verifiable end-to-end, evidence per step.",
+    "zh": "输入知识提取相关需求，输出要点提取、来源标注、去重合并三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "knowledge-extract-pro Team",
+    "zh": "知识提取专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-extract-pro-team-lead",
+      "name": {
+        "en": "知识提取主理人",
+        "zh": "知识提取主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-extract-pro.png",
+      "id": "knowledge-extract-pro",
+      "name": {
+        "en": "knowledge-extract-pro",
+        "zh": "知识提取 要点归纳 顾问"
+      },
+      "profession": {
+        "en": "knowledge-extract-pro",
+        "zh": "知识提取 要点归纳 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/spreadsheet-audit-pro.png",
+      "id": "spreadsheet-audit-pro",
+      "name": {
+        "en": "spreadsheet-audit-pro",
+        "zh": "表格审计 公式核验 顾问"
+      },
+      "profession": {
+        "en": "spreadsheet-audit-pro",
+        "zh": "表格审计 公式核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-audit-pro.png",
+      "id": "data-audit-pro",
+      "name": {
+        "en": "Survey Data Analyst",
+        "zh": "调研数据 清洗校验 分析报告"
+      },
+      "profession": {
+        "en": "Survey Data Analyst",
+        "zh": "调研数据 清洗校验 分析报告"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-297",
+  "plugin": "group-team-297",
+  "profession": {
+    "en": "knowledge-extract-pro Collaboration Team",
+    "zh": "知识提取专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 知识提取",
+      "zh": "帮我处理知识提取"
+    },
+    {
+      "en": "Plan 表格审计",
+      "zh": "帮我规划表格审计"
+    },
+    {
+      "en": "Review 调研数据",
+      "zh": "帮我检查调研数据"
+    }
+  ],
+  "tags": [
+    {
+      "en": "要点提取",
+      "zh": "要点提取"
+    },
+    {
+      "en": "来源标注",
+      "zh": "来源标注"
+    },
+    {
+      "en": "去重合并",
+      "zh": "去重合并"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-extract-pro-team-lead",
+    "memberAgents": [
+      "knowledge-extract-pro",
+      "spreadsheet-audit-pro",
+      "data-audit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1272",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1272",
+    "kind": "team",
+    "name": "错误预算专家",
+    "description": "输入错误预算相关需求，输出先定目标、预算计算、冻结机制三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "error-budget-team-lead",
+        "role": "lead",
+        "name": "错误预算主理人",
+        "evidence": null
+      },
+      {
+        "slug": "error-budget",
+        "role": "member",
+        "name": "错误预算 顾问",
+        "evidence": "original_assets/error-budget/merkle_root",
+        "member_merkle_root": "717a62807a697f044a898056436594486a5f36acba412e8c119e6d400a62486a"
+      },
+      {
+        "slug": "file-organize-rules",
+        "role": "member",
+        "name": "文件归集整理 助手",
+        "evidence": "original_assets/file-organize-rules/merkle_root",
+        "member_merkle_root": "29f5d9d8339d253a75bf7c79a83a9ebacc74b30eff52ea18bf67028b814a3175"
+      },
+      {
+        "slug": "shift-handover",
+        "role": "member",
+        "name": "交接班管理 顾问",
+        "evidence": "original_assets/shift-handover/merkle_root",
+        "member_merkle_root": "f5a4b33884855375ced57210d26998666cec8d1f80dbd00c08bfdb6dbc2d9442"
+      }
+    ],
+    "team_lead": "error-budget-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "87eb653cee13e314",
+  "prompt_hash": "da9b7720eaf00136",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1272\", \"kind\": \"team\", \"name\": \"错误预算专家\", \"description\": \"输入错误预算相关需求，输出先定目标、预算计算、冻结机制三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"error-budget-team-lead\", \"role\": \"lead\", \"name\": \"错误预算主理人\", \"evidence\": null}, {\"slug\": \"error-budget\", \"role\": \"member\", \"name\": \"错误预算 顾问\", \"evidence\": \"original_assets/error-budget/merkle_root\", \"member_merkle_root\": \"717a62807a697f044a898056436594486a5f36acba412e8c119e6d400a62486a\"}, {\"slug\": \"file-organize-rules\", \"role\": \"member\", \"name\": \"文件归集整理 助手\", \"evidence\": \"original_assets/file-organize-rules/merkle_root\", \"member_merkle_root\": \"29f5d9d8339d253a75bf7c79a83a9ebacc74b30eff52ea18bf67028b814a3175\"}, {\"slug\": \"shift-handover\", \"role\": \"member\", \"name\": \"交接班管理 顾问\", \"evidence\": \"original_assets/shift-handover/merkle_root\", \"member_merkle_root\": \"f5a4b33884855375ced57210d26998666cec8d1f80dbd00c08bfdb6dbc2d9442\"}], \"team_lead\": \"error-budget-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/error-budget-team-lead.md": "f6de7c34e912e5880716b218a59afcf0b0780c70a0ff8d0099ffc2186626c25f",
+    "agents/error-budget.md": "aecd05a817149332d216e831c45be1197e9813e3e586f93f0c48c7fec1ea994d",
+    "agents/file-organize-rules.md": "1d0b391dbdee59908e24c6904e8ec1e3a4a7fda68db9c19f07c50b3b3ccd882e",
+    "agents/shift-handover.md": "a1f69e60f1df3f86e7ec74af677fd173418ae4dce12afa076ae77030cedbfccf",
+    "plugin.json": "efc9088747e300a936a94de14516ea6c37f0108047dbbe826b8ffea5f88d19ef",
+    "settings.json": "59ff662f038a6f2768e7f3bf2538e64857986c5a5754bd255284b5e503ff819c"
+  }
+}

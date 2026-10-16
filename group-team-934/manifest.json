@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-934",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-934",
+    "kind": "team",
+    "name": "社交内容排期专家",
+    "description": "社交内容排期专家：围绕社交内容排期，覆盖节庆对齐／按区发布／素材分级，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "social-post-plan-team-lead",
+        "role": "lead",
+        "name": "社交内容排期主理人",
+        "evidence": null
+      },
+      {
+        "slug": "social-post-plan",
+        "role": "member",
+        "name": "社交内容排期 助手",
+        "evidence": "original_assets/social-post-plan/merkle_root",
+        "member_merkle_root": "7a99418f0791b1531f1e9922b4e6f4ffc1b95c570a56ac2b62b6d05cd74a1da6"
+      },
+      {
+        "slug": "doc-convert-pro-01-fixed",
+        "role": "member",
+        "name": "文档转换 视觉美化 文本抽取",
+        "evidence": "original_assets/doc-convert-pro-01-fixed/merkle_root",
+        "member_merkle_root": "f090a0c606648878474670b9c50f3994faacef26fba2afac4c34ec31a9a5dd0b"
+      },
+      {
+        "slug": "landing-page-opt",
+        "role": "member",
+        "name": "落地页 转化优化 顾问",
+        "evidence": "original_assets/landing-page-opt/merkle_root",
+        "member_merkle_root": "404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87"
+      }
+    ],
+    "team_lead": "social-post-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5e8fbf5f62637f92",
+  "prompt_hash": "753e4232eb5d871f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-934\", \"kind\": \"team\", \"name\": \"社交内容排期专家\", \"description\": \"社交内容排期专家：围绕社交内容排期，覆盖节庆对齐／按区发布／素材分级，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"social-post-plan-team-lead\", \"role\": \"lead\", \"name\": \"社交内容排期主理人\", \"evidence\": null}, {\"slug\": \"social-post-plan\", \"role\": \"member\", \"name\": \"社交内容排期 助手\", \"evidence\": \"original_assets/social-post-plan/merkle_root\", \"member_merkle_root\": \"7a99418f0791b1531f1e9922b4e6f4ffc1b95c570a56ac2b62b6d05cd74a1da6\"}, {\"slug\": \"doc-convert-pro-01-fixed\", \"role\": \"member\", \"name\": \"文档转换 视觉美化 文本抽取\", \"evidence\": \"original_assets/doc-convert-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"f090a0c606648878474670b9c50f3994faacef26fba2afac4c34ec31a9a5dd0b\"}, {\"slug\": \"landing-page-opt\", \"role\": \"member\", \"name\": \"落地页 转化优化 顾问\", \"evidence\": \"original_assets/landing-page-opt/merkle_root\", \"member_merkle_root\": \"404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87\"}], \"team_lead\": \"social-post-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-01-fixed.md": "fbb2e9f59f43bc8f2c6ee588323891c06bd276c2b609781a9c2a368b3500e0c5",
+    "agents/landing-page-opt.md": "2e5b7ae16a718296d4bdde8e6f68ea0a37c02ddffd07686064e1771db2066517",
+    "agents/social-post-plan-team-lead.md": "9705e80dd4cdc34e73029bba7df391cee75becf5c80b401fa534433ac4ef54b4",
+    "agents/social-post-plan.md": "d5d14650f8517b92ae991b1d0dd537fb0ba447abe6c5127095d5cc54aa9c44da",
+    "plugin.json": "6d5e93aa33585157a463a6ab6db414d4f11e34bbb9f61f2aec1d01fcb54696cf",
+    "settings.json": "344772e063f234e08dda3c933bbd3ac13d44f166ca0cd2f151f23fe194632b89"
+  }
+}

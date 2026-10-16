@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-558",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-558",
+    "kind": "team",
+    "name": "接口模拟专家",
+    "description": "擅长降级声明、兜底路径与质量下限，覆盖优雅降级全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-mock-pro-team-lead",
+        "role": "lead",
+        "name": "接口模拟主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-mock-pro",
+        "role": "member",
+        "name": "接口模拟 联调编排 时序回放",
+        "evidence": "original_assets/api-mock-pro/merkle_root",
+        "member_merkle_root": "b42abd116ab122435193729e91f6ff6528bc04f15dd2fefeda36991824fa4917"
+      },
+      {
+        "slug": "graceful-degrade-pro",
+        "role": "member",
+        "name": "优雅降级 兜底路径 顾问",
+        "evidence": "original_assets/graceful-degrade-pro/merkle_root",
+        "member_merkle_root": "d28ebb4d724064199513aa88d1c380a1a06e3c8949f45facd3a937afeb3b7ecf"
+      },
+      {
+        "slug": "metric-definition-pro",
+        "role": "member",
+        "name": "指标定义 口径统一 顾问",
+        "evidence": "original_assets/metric-definition-pro/merkle_root",
+        "member_merkle_root": "dcbf4226ca9c031646b3a2480319d1d62c88a179017e3bd720baa3e6e4ff908b"
+      }
+    ],
+    "team_lead": "api-mock-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fc60e950b9da3dfc",
+  "prompt_hash": "bbb35cecf8bfa55a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-558\", \"kind\": \"team\", \"name\": \"接口模拟专家\", \"description\": \"擅长降级声明、兜底路径与质量下限，覆盖优雅降级全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-mock-pro-team-lead\", \"role\": \"lead\", \"name\": \"接口模拟主理人\", \"evidence\": null}, {\"slug\": \"api-mock-pro\", \"role\": \"member\", \"name\": \"接口模拟 联调编排 时序回放\", \"evidence\": \"original_assets/api-mock-pro/merkle_root\", \"member_merkle_root\": \"b42abd116ab122435193729e91f6ff6528bc04f15dd2fefeda36991824fa4917\"}, {\"slug\": \"graceful-degrade-pro\", \"role\": \"member\", \"name\": \"优雅降级 兜底路径 顾问\", \"evidence\": \"original_assets/graceful-degrade-pro/merkle_root\", \"member_merkle_root\": \"d28ebb4d724064199513aa88d1c380a1a06e3c8949f45facd3a937afeb3b7ecf\"}, {\"slug\": \"metric-definition-pro\", \"role\": \"member\", \"name\": \"指标定义 口径统一 顾问\", \"evidence\": \"original_assets/metric-definition-pro/merkle_root\", \"member_merkle_root\": \"dcbf4226ca9c031646b3a2480319d1d62c88a179017e3bd720baa3e6e4ff908b\"}], \"team_lead\": \"api-mock-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-mock-pro-team-lead.md": "f2129b8f6faad665d52bedc167fb1051206b897f1e29e87a44fe9a1a161cc435",
+    "agents/api-mock-pro.md": "b0bbb7ef3fc270d62fcf98a9dbdfdf15de36843ab58e0689380b75c821481daf",
+    "agents/graceful-degrade-pro.md": "5f472883205a2fdd8c9fd547ff1e1bb4896609f304a340bd5569c1921af2251d",
+    "agents/metric-definition-pro.md": "14ad109f2d5f2dace5b95d771e169f795dd618a57396396fcfd6e3e40c7d7bbe",
+    "plugin.json": "52098c31617004a4d7df50c9e747b82476eed2e9fa5e47457ad87fb77a783a41",
+    "settings.json": "2165c2cc687eb28003f0d2cf88711a6d0caac2f1bcf70d0e55b4a1dae74cd6c7"
+  }
+}

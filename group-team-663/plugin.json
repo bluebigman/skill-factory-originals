@@ -1,0 +1,126 @@
+{
+  "agentName": "data-refine-pro-team-lead",
+  "agents": [
+    "./agents/data-refine-pro-team-lead.md",
+    "./agents/data-refine-pro.md",
+    "./agents/data-clean-pro-10-fixed.md",
+    "./agents/api-address-integrity-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 表格清洗",
+    "zh": "帮我处理表格清洗"
+  },
+  "description": "Table Data Refiner team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 表格清洗字段规 end-to-end: 数据去重, 格式统一 and 办公表格. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长数据去重、格式统一与办公表格，覆盖表格清洗字段规全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Table Data Refiner Team",
+    "zh": "表格清洗字段规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-refine-pro-team-lead",
+      "name": {
+        "en": "表格清洗主理人",
+        "zh": "表格清洗主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-refine-pro.png",
+      "id": "data-refine-pro",
+      "name": {
+        "en": "Table Data Refiner",
+        "zh": "表格清洗 字段规范 批量去重"
+      },
+      "profession": {
+        "en": "Table Data Refiner",
+        "zh": "表格清洗 字段规范 批量去重"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-10-fixed.png",
+      "id": "data-clean-pro-10-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据汤 批量转换 结构化输出"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据汤 批量转换 结构化输出"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-address-integrity-expert.png",
+      "id": "api-address-integrity-expert",
+      "name": {
+        "en": "API Address Integrity Expert",
+        "zh": "接口编码 报错修复"
+      },
+      "profession": {
+        "en": "API Address Integrity Expert",
+        "zh": "接口编码 报错修复"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-663",
+  "plugin": "group-team-663",
+  "profession": {
+    "en": "Table Data Refiner Collaboration Team",
+    "zh": "表格清洗字段规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 表格清洗",
+      "zh": "帮我处理表格清洗"
+    },
+    {
+      "en": "Plan 数据汤",
+      "zh": "帮我规划数据汤"
+    },
+    {
+      "en": "Review 接口编码",
+      "zh": "帮我检查接口编码"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据去重",
+      "zh": "数据去重"
+    },
+    {
+      "en": "格式统一",
+      "zh": "格式统一"
+    },
+    {
+      "en": "办公表格",
+      "zh": "办公表格"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-refine-pro-team-lead",
+    "memberAgents": [
+      "data-refine-pro",
+      "data-clean-pro-10-fixed",
+      "api-address-integrity-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

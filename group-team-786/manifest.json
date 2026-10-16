@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-786",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-786",
+    "kind": "team",
+    "name": "销售漏斗复盘机制专家",
+    "description": "销售漏斗复盘机制专家：围绕销售漏斗，覆盖退出标准／停滞预警／口径统一，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pipeline-review-pro-team-lead",
+        "role": "lead",
+        "name": "销售漏斗主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pipeline-review-pro",
+        "role": "member",
+        "name": "销售漏斗 复盘机制 顾问",
+        "evidence": "original_assets/pipeline-review-pro/merkle_root",
+        "member_merkle_root": "9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0"
+      },
+      {
+        "slug": "global-pm-coach",
+        "role": "member",
+        "name": "跨国项目 协同推进 教练",
+        "evidence": "original_assets/global-pm-coach/merkle_root",
+        "member_merkle_root": "d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa"
+      },
+      {
+        "slug": "agent-quality-gate",
+        "role": "member",
+        "name": "质量闸门 判据 顾问",
+        "evidence": "original_assets/agent-quality-gate/merkle_root",
+        "member_merkle_root": "0874f21b1cd80c7375b937af6514ba472ebb2d0bccee39c54373c0cef64148e2"
+      }
+    ],
+    "team_lead": "pipeline-review-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3319747ae8142fc3",
+  "prompt_hash": "4893f15b230108e1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-786\", \"kind\": \"team\", \"name\": \"销售漏斗复盘机制专家\", \"description\": \"销售漏斗复盘机制专家：围绕销售漏斗，覆盖退出标准／停滞预警／口径统一，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pipeline-review-pro-team-lead\", \"role\": \"lead\", \"name\": \"销售漏斗主理人\", \"evidence\": null}, {\"slug\": \"pipeline-review-pro\", \"role\": \"member\", \"name\": \"销售漏斗 复盘机制 顾问\", \"evidence\": \"original_assets/pipeline-review-pro/merkle_root\", \"member_merkle_root\": \"9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0\"}, {\"slug\": \"global-pm-coach\", \"role\": \"member\", \"name\": \"跨国项目 协同推进 教练\", \"evidence\": \"original_assets/global-pm-coach/merkle_root\", \"member_merkle_root\": \"d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa\"}, {\"slug\": \"agent-quality-gate\", \"role\": \"member\", \"name\": \"质量闸门 判据 顾问\", \"evidence\": \"original_assets/agent-quality-gate/merkle_root\", \"member_merkle_root\": \"0874f21b1cd80c7375b937af6514ba472ebb2d0bccee39c54373c0cef64148e2\"}], \"team_lead\": \"pipeline-review-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-quality-gate.md": "7aae2c729bfdd92ae7b4d3fc73ac6d8487f79995be7f80c79b1d79d060646f86",
+    "agents/global-pm-coach.md": "978c191284332675956aaebb47252aacd8e987553d84743af91e51f09668d5b6",
+    "agents/pipeline-review-pro-team-lead.md": "35cc246761e8aefdc4169fe9554e3f62f5765e9eb29b2f39aa5dedb8c2975774",
+    "agents/pipeline-review-pro.md": "7390550cf59d84ccb2af862116f87d62b2b7fa45d2fdf62be0075733f4037f66",
+    "plugin.json": "a8cd1d8b8bb2d48ee151d9d2237f572f088da7bcef7bd7186e0e94fed675d476",
+    "settings.json": "92ad3c4eebd49fb01af1fe7a00efa1c3dbad1c31b418055e5c8df46bd7c5de63"
+  }
+}

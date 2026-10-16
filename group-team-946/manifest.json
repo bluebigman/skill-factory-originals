@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-946",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-946",
+    "kind": "team",
+    "name": "交付标准专家",
+    "description": "输入能耗管理相关需求，输出费用归类、分项计量、攻其大头三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "expense-reimburse-expert-team-lead",
+        "role": "lead",
+        "name": "报销与费用管理专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "expense-reimburse-expert",
+        "role": "member",
+        "name": "报销与费用管理专家",
+        "evidence": "original_assets/expense-reimburse-expert/merkle_root",
+        "member_merkle_root": "a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f"
+      },
+      {
+        "slug": "energy-consumption-pro",
+        "role": "member",
+        "name": "能耗管理 节能诊断 顾问",
+        "evidence": "original_assets/energy-consumption-pro/merkle_root",
+        "member_merkle_root": "6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719"
+      },
+      {
+        "slug": "industrial-service-pro",
+        "role": "member",
+        "name": "工业服务 交付标准 顾问",
+        "evidence": "original_assets/industrial-service-pro/merkle_root",
+        "member_merkle_root": "c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d"
+      }
+    ],
+    "team_lead": "expense-reimburse-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "51ae4841740f2a9a",
+  "prompt_hash": "115fa529df898c25",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-946\", \"kind\": \"team\", \"name\": \"交付标准专家\", \"description\": \"输入能耗管理相关需求，输出费用归类、分项计量、攻其大头三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"expense-reimburse-expert-team-lead\", \"role\": \"lead\", \"name\": \"报销与费用管理专家主理人\", \"evidence\": null}, {\"slug\": \"expense-reimburse-expert\", \"role\": \"member\", \"name\": \"报销与费用管理专家\", \"evidence\": \"original_assets/expense-reimburse-expert/merkle_root\", \"member_merkle_root\": \"a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f\"}, {\"slug\": \"energy-consumption-pro\", \"role\": \"member\", \"name\": \"能耗管理 节能诊断 顾问\", \"evidence\": \"original_assets/energy-consumption-pro/merkle_root\", \"member_merkle_root\": \"6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719\"}, {\"slug\": \"industrial-service-pro\", \"role\": \"member\", \"name\": \"工业服务 交付标准 顾问\", \"evidence\": \"original_assets/industrial-service-pro/merkle_root\", \"member_merkle_root\": \"c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d\"}], \"team_lead\": \"expense-reimburse-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/energy-consumption-pro.md": "e6dba868bf378146ee8ed0e616634f20a20179215f00c880269ebb8d772bf965",
+    "agents/expense-reimburse-expert-team-lead.md": "b0840b7a3e14cf2b3554fabc0aaab493ab8abb6397bdc5c3142cba6e15cb514b",
+    "agents/expense-reimburse-expert.md": "3bc587dfe1c4e7963e3243d4055ff300564dcb54220589e7f8ba0e351c0938a0",
+    "agents/industrial-service-pro.md": "12ecf78280f099f0f1ce56677b88271ee5943a23fba6385e0f12b3d0143d4bfb",
+    "plugin.json": "19a03a99b16385a6a7f57c3bd50c2145217119f4ed453cb93195bb6538330d34",
+    "settings.json": "9b448d1208a2647f891961629bf9ec573c19f4d1f4347fd858431d50cf4a302e"
+  }
+}

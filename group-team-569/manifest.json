@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-569",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-569",
+    "kind": "team",
+    "name": "设计交付协作规范专家",
+    "description": "擅长先定产出、通胀监控与分层验证，覆盖游戏经济全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "game-economy-balance-team-lead",
+        "role": "lead",
+        "name": "游戏经济主理人",
+        "evidence": null
+      },
+      {
+        "slug": "game-economy-balance",
+        "role": "member",
+        "name": "游戏经济 数值平衡 顾问",
+        "evidence": "original_assets/game-economy-balance/merkle_root",
+        "member_merkle_root": "3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66"
+      },
+      {
+        "slug": "design-system-pro",
+        "role": "member",
+        "name": "设计系统 组件规范 顾问",
+        "evidence": "original_assets/design-system-pro/merkle_root",
+        "member_merkle_root": "600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce"
+      },
+      {
+        "slug": "handoff-design-dev",
+        "role": "member",
+        "name": "设计交付 协作规范 顾问",
+        "evidence": "original_assets/handoff-design-dev/merkle_root",
+        "member_merkle_root": "44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104"
+      }
+    ],
+    "team_lead": "game-economy-balance-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8cf0a22886a7b89d",
+  "prompt_hash": "14e563263d71dd61",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-569\", \"kind\": \"team\", \"name\": \"设计交付协作规范专家\", \"description\": \"擅长先定产出、通胀监控与分层验证，覆盖游戏经济全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"game-economy-balance-team-lead\", \"role\": \"lead\", \"name\": \"游戏经济主理人\", \"evidence\": null}, {\"slug\": \"game-economy-balance\", \"role\": \"member\", \"name\": \"游戏经济 数值平衡 顾问\", \"evidence\": \"original_assets/game-economy-balance/merkle_root\", \"member_merkle_root\": \"3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66\"}, {\"slug\": \"design-system-pro\", \"role\": \"member\", \"name\": \"设计系统 组件规范 顾问\", \"evidence\": \"original_assets/design-system-pro/merkle_root\", \"member_merkle_root\": \"600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce\"}, {\"slug\": \"handoff-design-dev\", \"role\": \"member\", \"name\": \"设计交付 协作规范 顾问\", \"evidence\": \"original_assets/handoff-design-dev/merkle_root\", \"member_merkle_root\": \"44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104\"}], \"team_lead\": \"game-economy-balance-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-system-pro.md": "d94a787fdd8302a1aaf0409d87bc2c617face6f18b9357b6c200353f82693be2",
+    "agents/game-economy-balance-team-lead.md": "edff73cef8686ba2d00334aff5cc28890693c30ce94c9b1f5766801472de0ecd",
+    "agents/game-economy-balance.md": "f97941f7ee1fd62e832febf2f2a77cef7a3f8a4df729216fe17dc7868d54f5d2",
+    "agents/handoff-design-dev.md": "11241c195c6266b32b37c6150b04844b8ebe03a85f2e01247556e8d0af64e5b7",
+    "plugin.json": "84da2fc0ff61eddd56be8b0e396fd82bbc1b7a966efd6c98c6c61625e5a6994c",
+    "settings.json": "fbc20208508e3fcf4274ad0ce437a09763bbc1ecdab2a4d508026be5cf81932c"
+  }
+}

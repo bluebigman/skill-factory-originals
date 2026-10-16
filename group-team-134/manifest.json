@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-134",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-134",
+    "kind": "team",
+    "name": "合同 公众号 数据 团队",
+    "description": "合同 公众号 数据 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "contract-risk-read-team-lead",
+        "role": "lead",
+        "name": "合同风险主理人",
+        "evidence": null
+      },
+      {
+        "slug": "contract-risk-read",
+        "role": "member",
+        "name": "合同风险 条款识别 顾问",
+        "evidence": "original_assets/contract-risk-read/merkle_root",
+        "member_merkle_root": "06a0a8e630066bf43522f4de3b5bc9a09a7d2288ff455e02317ff392821152bf"
+      },
+      {
+        "slug": "mp-publish-check",
+        "role": "member",
+        "name": "公众号发布 合规自检 顾问",
+        "evidence": "original_assets/mp-publish-check/merkle_root",
+        "member_merkle_root": "ced2f61f43e95d071d6a8ce695aff5b5a1230dcbd271798800c2fe5586c997af"
+      },
+      {
+        "slug": "data-classify",
+        "role": "member",
+        "name": "数据分级 敏感识别 顾问",
+        "evidence": "original_assets/data-classify/merkle_root",
+        "member_merkle_root": "212257686f5fb080e96aefcc422c670601cc1ac6dd605af67ea6daa35d94feaf"
+      }
+    ],
+    "team_lead": "contract-risk-read-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a446aea9bf52b48c",
+  "prompt_hash": "a21fe38032dd578d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-134\", \"kind\": \"team\", \"name\": \"合同 公众号 数据 团队\", \"description\": \"合同 公众号 数据 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"contract-risk-read-team-lead\", \"role\": \"lead\", \"name\": \"合同风险主理人\", \"evidence\": null}, {\"slug\": \"contract-risk-read\", \"role\": \"member\", \"name\": \"合同风险 条款识别 顾问\", \"evidence\": \"original_assets/contract-risk-read/merkle_root\", \"member_merkle_root\": \"06a0a8e630066bf43522f4de3b5bc9a09a7d2288ff455e02317ff392821152bf\"}, {\"slug\": \"mp-publish-check\", \"role\": \"member\", \"name\": \"公众号发布 合规自检 顾问\", \"evidence\": \"original_assets/mp-publish-check/merkle_root\", \"member_merkle_root\": \"ced2f61f43e95d071d6a8ce695aff5b5a1230dcbd271798800c2fe5586c997af\"}, {\"slug\": \"data-classify\", \"role\": \"member\", \"name\": \"数据分级 敏感识别 顾问\", \"evidence\": \"original_assets/data-classify/merkle_root\", \"member_merkle_root\": \"212257686f5fb080e96aefcc422c670601cc1ac6dd605af67ea6daa35d94feaf\"}], \"team_lead\": \"contract-risk-read-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-risk-read-team-lead.md": "60d7602946573db92f1c86a5b4417954f4c44f8100b9c1dc566cc1ade8139864",
+    "agents/contract-risk-read.md": "9a9c301ef4e80cdac62875161713d48b0e5d30e460560fefc6bf429f276cd6cc",
+    "agents/data-classify.md": "f2106fd8e8d769f78788fca329e755afb8ba1e11a01cb4e2a99243c0d5cc0e5f",
+    "agents/mp-publish-check.md": "e389feb94fa11385d01388a7c5a242829dbcbb3cb14ac191d49ffe092949e466",
+    "plugin.json": "92ebe8dbfd6dcd6dccb606504aface35c8cb1eba52788c03b172eb03bdbe8483",
+    "settings.json": "4d2305e0c9671fe15184f7cf1aca71407f1abd9ee036e9f3554323c79ad665e0"
+  }
+}

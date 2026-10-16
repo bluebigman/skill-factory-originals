@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-783",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-783",
+    "kind": "team",
+    "name": "实习日志专家",
+    "description": "输入增长看板相关需求，输出指标分层、口径文档、自动采集三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-pro-team-lead",
+        "role": "lead",
+        "name": "实习日志主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-pro",
+        "role": "member",
+        "name": "实习日志 文档生成",
+        "evidence": "original_assets/data-pipeline-pro/merkle_root",
+        "member_merkle_root": "bdd1f61b0f21957065260daa0b3171ea2d149689a8560e6cbb5321e4fd83970c"
+      },
+      {
+        "slug": "data-refine-pro",
+        "role": "member",
+        "name": "表格清洗 字段规范 批量去重",
+        "evidence": "original_assets/data-refine-pro/merkle_root",
+        "member_merkle_root": "3cfd4d6a81eaa10d8b1c4dc31b8d41abecec04b881e96db123295e0aea1ba4a3"
+      },
+      {
+        "slug": "growth-dashboard",
+        "role": "member",
+        "name": "增长看板 指标搭建 顾问",
+        "evidence": "original_assets/growth-dashboard/merkle_root",
+        "member_merkle_root": "c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09"
+      }
+    ],
+    "team_lead": "data-pipeline-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ccf69f517f066431",
+  "prompt_hash": "a4c4486536dafbcc",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-783\", \"kind\": \"team\", \"name\": \"实习日志专家\", \"description\": \"输入增长看板相关需求，输出指标分层、口径文档、自动采集三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-pro-team-lead\", \"role\": \"lead\", \"name\": \"实习日志主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-pro\", \"role\": \"member\", \"name\": \"实习日志 文档生成\", \"evidence\": \"original_assets/data-pipeline-pro/merkle_root\", \"member_merkle_root\": \"bdd1f61b0f21957065260daa0b3171ea2d149689a8560e6cbb5321e4fd83970c\"}, {\"slug\": \"data-refine-pro\", \"role\": \"member\", \"name\": \"表格清洗 字段规范 批量去重\", \"evidence\": \"original_assets/data-refine-pro/merkle_root\", \"member_merkle_root\": \"3cfd4d6a81eaa10d8b1c4dc31b8d41abecec04b881e96db123295e0aea1ba4a3\"}, {\"slug\": \"growth-dashboard\", \"role\": \"member\", \"name\": \"增长看板 指标搭建 顾问\", \"evidence\": \"original_assets/growth-dashboard/merkle_root\", \"member_merkle_root\": \"c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09\"}], \"team_lead\": \"data-pipeline-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-pipeline-pro-team-lead.md": "44139aa79b1b7299327d7dd9de46c38a0688d017b4d09defaa2afabcaa7237c4",
+    "agents/data-pipeline-pro.md": "7b57f3b6a975741936320ea38a682a711aa872e60a4cd2593df4468eda896248",
+    "agents/data-refine-pro.md": "68e3f8155aee7c42748e1b8dd603246fa0d65e0e27ebebb172502ecab2ec0a65",
+    "agents/growth-dashboard.md": "e2eafbdcc5bb00c61188a75d7f6ad10e542e32c2f75d041facd9624e0695f9b7",
+    "plugin.json": "1f480cb20f042840ddda4c7428721df42c4a60662c215f90a86d43ad6d5e3d5d",
+    "settings.json": "3bde81e8cef7d5a7d7cb413a916c7cbb8efeb27544129e9fb2d5a48204178438"
+  }
+}

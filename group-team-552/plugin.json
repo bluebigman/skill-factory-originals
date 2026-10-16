@@ -1,0 +1,126 @@
+{
+  "agentName": "polish-translate-expert-team-lead",
+  "agents": [
+    "./agents/polish-translate-expert-team-lead.md",
+    "./agents/polish-translate-expert.md",
+    "./agents/localization-qa-pro.md",
+    "./agents/game-story-branch.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 润语",
+    "zh": "帮我处理润语"
+  },
+  "description": "Lingua team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 本地化翻译, covers 精准翻译 / 术语统一 / 译文润色, delivering structured results and actionable checklists.",
+    "zh": "润语文本润色专家：围绕本地化翻译，覆盖精准翻译／术语统一／译文润色，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Lingua Team",
+    "zh": "润语文本润色专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "polish-translate-expert-team-lead",
+      "name": {
+        "en": "润语主理人",
+        "zh": "润语主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/polish-translate-expert.png",
+      "id": "polish-translate-expert",
+      "name": {
+        "en": "Lingua",
+        "zh": "润语 文本润色 文案优化"
+      },
+      "profession": {
+        "en": "Lingua",
+        "zh": "润语 文本润色 文案优化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/localization-qa-pro.png",
+      "id": "localization-qa-pro",
+      "name": {
+        "en": "localization-qa-pro",
+        "zh": "本地化翻译 质量验收 顾问"
+      },
+      "profession": {
+        "en": "localization-qa-pro",
+        "zh": "本地化翻译 质量验收 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-story-branch.png",
+      "id": "game-story-branch",
+      "name": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "profession": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-552",
+  "plugin": "group-team-552",
+  "profession": {
+    "en": "Lingua Collaboration Team",
+    "zh": "润语文本润色专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 润语",
+      "zh": "帮我处理润语"
+    },
+    {
+      "en": "Plan 本地化翻译",
+      "zh": "帮我规划本地化翻译"
+    },
+    {
+      "en": "Review 剧情分支",
+      "zh": "帮我检查剧情分支"
+    }
+  ],
+  "tags": [
+    {
+      "en": "术语统一",
+      "zh": "术语统一"
+    },
+    {
+      "en": "译文润色",
+      "zh": "译文润色"
+    },
+    {
+      "en": "母语终审",
+      "zh": "母语终审"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "polish-translate-expert-team-lead",
+    "memberAgents": [
+      "polish-translate-expert",
+      "localization-qa-pro",
+      "game-story-branch"
+    ]
+  },
+  "version": "1.0.0"
+}

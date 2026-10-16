@@ -1,0 +1,126 @@
+{
+  "agentName": "toolkit-pro-04-fixed-team-lead",
+  "agents": [
+    "./agents/toolkit-pro-04-fixed-team-lead.md",
+    "./agents/toolkit-pro-04-fixed.md",
+    "./agents/toolkit-pro-05-fixed.md",
+    "./agents/toolkit-pro-07-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据整理",
+    "zh": "帮我处理数据整理"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 整理 叙事 行情 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "数据 整理 叙事 行情 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "toolkit-pro-04-fixed-team-lead",
+      "name": {
+        "en": "数据整理主理人",
+        "zh": "数据整理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-04-fixed.png",
+      "id": "toolkit-pro-04-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据整理 清洗转换 批量模板"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据整理 清洗转换 批量模板"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-05-fixed.png",
+      "id": "toolkit-pro-05-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据叙事 构建配置 批量处理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据叙事 构建配置 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-07-fixed.png",
+      "id": "toolkit-pro-07-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "行情研判 收入筹划 图像比对"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "行情研判 收入筹划 图像比对"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-179",
+  "plugin": "group-team-179",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "数据 整理 叙事 行情 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据整理",
+      "zh": "帮我处理数据整理"
+    },
+    {
+      "en": "Plan 数据叙事",
+      "zh": "帮我规划数据叙事"
+    },
+    {
+      "en": "Review 行情研判",
+      "zh": "帮我检查行情研判"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据整理",
+      "zh": "数据整理"
+    },
+    {
+      "en": "数据叙事",
+      "zh": "数据叙事"
+    },
+    {
+      "en": "行情研判",
+      "zh": "行情研判"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "toolkit-pro-04-fixed-team-lead",
+    "memberAgents": [
+      "toolkit-pro-04-fixed",
+      "toolkit-pro-05-fixed",
+      "toolkit-pro-07-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

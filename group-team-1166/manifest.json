@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1166",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1166",
+    "kind": "team",
+    "name": "性能剖析顾问专家",
+    "description": "性能剖析顾问专家：围绕性能剖析，覆盖先测基线／一次一改／基线比对，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "perf-profile-guide-team-lead",
+        "role": "lead",
+        "name": "性能剖析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "perf-profile-guide",
+        "role": "member",
+        "name": "性能剖析 顾问",
+        "evidence": "original_assets/perf-profile-guide/merkle_root",
+        "member_merkle_root": "51f4a0a166b8a275f4bf667573cb0a369c9c10c682d38b2e6c7d022df7b9c741"
+      },
+      {
+        "slug": "config-drift-check",
+        "role": "member",
+        "name": "配置漂移核验 顾问",
+        "evidence": "original_assets/config-drift-check/merkle_root",
+        "member_merkle_root": "787d4599e6be9c0ded8c9a83b842544dcf7ec17b7a77e2b69c04a9b8860b5efa"
+      },
+      {
+        "slug": "reliability-wrapper-pro",
+        "role": "member",
+        "name": "重试熔断 超时降级 顾问",
+        "evidence": "original_assets/reliability-wrapper-pro/merkle_root",
+        "member_merkle_root": "62a0237bfc7e113746b729daba70dbce676c6762e4f81a3924f27465757dff89"
+      }
+    ],
+    "team_lead": "perf-profile-guide-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "69a6d33da88e2ab2",
+  "prompt_hash": "af6df4cd9c19b267",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1166\", \"kind\": \"team\", \"name\": \"性能剖析顾问专家\", \"description\": \"性能剖析顾问专家：围绕性能剖析，覆盖先测基线／一次一改／基线比对，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"perf-profile-guide-team-lead\", \"role\": \"lead\", \"name\": \"性能剖析主理人\", \"evidence\": null}, {\"slug\": \"perf-profile-guide\", \"role\": \"member\", \"name\": \"性能剖析 顾问\", \"evidence\": \"original_assets/perf-profile-guide/merkle_root\", \"member_merkle_root\": \"51f4a0a166b8a275f4bf667573cb0a369c9c10c682d38b2e6c7d022df7b9c741\"}, {\"slug\": \"config-drift-check\", \"role\": \"member\", \"name\": \"配置漂移核验 顾问\", \"evidence\": \"original_assets/config-drift-check/merkle_root\", \"member_merkle_root\": \"787d4599e6be9c0ded8c9a83b842544dcf7ec17b7a77e2b69c04a9b8860b5efa\"}, {\"slug\": \"reliability-wrapper-pro\", \"role\": \"member\", \"name\": \"重试熔断 超时降级 顾问\", \"evidence\": \"original_assets/reliability-wrapper-pro/merkle_root\", \"member_merkle_root\": \"62a0237bfc7e113746b729daba70dbce676c6762e4f81a3924f27465757dff89\"}], \"team_lead\": \"perf-profile-guide-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/config-drift-check.md": "2be452cad6a0b3bb3ac6049a812ebdcbd94cbba9daaf1f0796cb6e4ee8e40659",
+    "agents/perf-profile-guide-team-lead.md": "b94b45634d07021ddefc206063dae77ede823437888ff3b00fee767d20593c4e",
+    "agents/perf-profile-guide.md": "012b02dfa8e4e8b37153e7549e18ed3179f03e13e00c3626ca8e14b38f1b0eb7",
+    "agents/reliability-wrapper-pro.md": "8f1d21c5b6e306ca3d53d486208da89cf9a850f838691088cbabe7fabd971d7a",
+    "plugin.json": "fa19b4edd642d29b04d0bb3bdd6c802e9d8bac30baba057156c95dbb17af7065",
+    "settings.json": "37b5f86db055ca3b0335fc4ba3933c7cd24ad96333ceb6da97405666bb84a5d9"
+  }
+}

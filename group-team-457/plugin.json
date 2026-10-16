@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-hallucination-guard-team-lead",
+  "agents": [
+    "./agents/agent-hallucination-guard-team-lead.md",
+    "./agents/agent-hallucination-guard.md",
+    "./agents/data-audit-pro.md",
+    "./agents/observability-inject-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 幻觉拦截",
+    "zh": "帮我处理幻觉拦截"
+  },
+  "description": "agent-hallucination-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 幻觉拦截 requirements, output three deliverables: 置信分层, 快照复现, 成本可见. Verifiable end-to-end, evidence per step.",
+    "zh": "输入幻觉拦截相关需求，输出置信分层、快照复现、成本可见三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-hallucination-guard Team",
+    "zh": "幻觉拦截事实核验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-hallucination-guard-team-lead",
+      "name": {
+        "en": "幻觉拦截主理人",
+        "zh": "幻觉拦截主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-hallucination-guard.png",
+      "id": "agent-hallucination-guard",
+      "name": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "profession": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-audit-pro.png",
+      "id": "data-audit-pro",
+      "name": {
+        "en": "Survey Data Analyst",
+        "zh": "调研数据 清洗校验 分析报告"
+      },
+      "profession": {
+        "en": "Survey Data Analyst",
+        "zh": "调研数据 清洗校验 分析报告"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/observability-inject-pro.png",
+      "id": "observability-inject-pro",
+      "name": {
+        "en": "observability-inject-pro",
+        "zh": "链路追踪 指标埋点 顾问"
+      },
+      "profession": {
+        "en": "observability-inject-pro",
+        "zh": "链路追踪 指标埋点 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-457",
+  "plugin": "group-team-457",
+  "profession": {
+    "en": "agent-hallucination-guard Collaboration Team",
+    "zh": "幻觉拦截事实核验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 幻觉拦截",
+      "zh": "帮我处理幻觉拦截"
+    },
+    {
+      "en": "Plan 调研数据",
+      "zh": "帮我规划调研数据"
+    },
+    {
+      "en": "Review 链路追踪",
+      "zh": "帮我检查链路追踪"
+    }
+  ],
+  "tags": [
+    {
+      "en": "置信分层",
+      "zh": "置信分层"
+    },
+    {
+      "en": "调研数据",
+      "zh": "调研数据"
+    },
+    {
+      "en": "清洗分析",
+      "zh": "清洗分析"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-hallucination-guard-team-lead",
+    "memberAgents": [
+      "agent-hallucination-guard",
+      "data-audit-pro",
+      "observability-inject-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

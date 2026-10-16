@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1118",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1118",
+    "kind": "team",
+    "name": "数据归档方案专家",
+    "description": "数据归档方案专家：围绕数据归档方案，覆盖冷热分离／归档可查／恢复演练，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-archive-plan-team-lead",
+        "role": "lead",
+        "name": "数据归档方案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-archive-plan",
+        "role": "member",
+        "name": "数据归档方案 顾问",
+        "evidence": "original_assets/data-archive-plan/merkle_root",
+        "member_merkle_root": "96ef46ced61fcd0aee175e34db3e8783238f459403954cb052e88e186f0c21e2"
+      },
+      {
+        "slug": "license-compliance",
+        "role": "member",
+        "name": "许可证合规 顾问",
+        "evidence": "original_assets/license-compliance/merkle_root",
+        "member_merkle_root": "efe1e620fba1a246ca938c834bde7179b2dfa7a28da63725944cf866235b6d42"
+      },
+      {
+        "slug": "agent-api-companion",
+        "role": "member",
+        "name": "接口助手 调试 契约 兼容",
+        "evidence": "original_assets/agent-api-companion/merkle_root",
+        "member_merkle_root": "6f1b68c31f25b944fd559df5e9f0500f59577168259fd1114cf5b633e1f4a0b0"
+      }
+    ],
+    "team_lead": "data-archive-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c7c47e95cef17d71",
+  "prompt_hash": "f570aed4c42be337",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1118\", \"kind\": \"team\", \"name\": \"数据归档方案专家\", \"description\": \"数据归档方案专家：围绕数据归档方案，覆盖冷热分离／归档可查／恢复演练，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-archive-plan-team-lead\", \"role\": \"lead\", \"name\": \"数据归档方案主理人\", \"evidence\": null}, {\"slug\": \"data-archive-plan\", \"role\": \"member\", \"name\": \"数据归档方案 顾问\", \"evidence\": \"original_assets/data-archive-plan/merkle_root\", \"member_merkle_root\": \"96ef46ced61fcd0aee175e34db3e8783238f459403954cb052e88e186f0c21e2\"}, {\"slug\": \"license-compliance\", \"role\": \"member\", \"name\": \"许可证合规 顾问\", \"evidence\": \"original_assets/license-compliance/merkle_root\", \"member_merkle_root\": \"efe1e620fba1a246ca938c834bde7179b2dfa7a28da63725944cf866235b6d42\"}, {\"slug\": \"agent-api-companion\", \"role\": \"member\", \"name\": \"接口助手 调试 契约 兼容\", \"evidence\": \"original_assets/agent-api-companion/merkle_root\", \"member_merkle_root\": \"6f1b68c31f25b944fd559df5e9f0500f59577168259fd1114cf5b633e1f4a0b0\"}], \"team_lead\": \"data-archive-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-api-companion.md": "c288fe9b109f1e7cf9dc4ae9aafd472332f0e4081476115b9107586fdff77087",
+    "agents/data-archive-plan-team-lead.md": "d5dbeb31aed7a3caf8a21913933106a614f2e60d9a4cf5c98bfe1303ba262cbf",
+    "agents/data-archive-plan.md": "f0cfd21e2286ce500db04273a431e0ea505386e4ae2c4d08ccbd864e314c445a",
+    "agents/license-compliance.md": "6a25f238dad6e5a180421db1aae8e97d86bf40d1a94d259ec005fd94d5bf02fd",
+    "plugin.json": "719a37d58b9dfc106ca8591d28abf3543ea7bdee9d4efa8500841e413f2a4854",
+    "settings.json": "ed6b3a8b0ed0ef59dbf0aa1a25e0881dc987fb575d9778eb78d13e6b7aa81c66"
+  }
+}

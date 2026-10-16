@@ -1,0 +1,126 @@
+{
+  "agentName": "quotation-standard-team-lead",
+  "agents": [
+    "./agents/quotation-standard-team-lead.md",
+    "./agents/quotation-standard.md",
+    "./agents/cross-border-invoice-pro.md",
+    "./agents/new-product-npi-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 报价方案",
+    "zh": "帮我处理报价方案"
+  },
+  "description": "quotation-standard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 报价方案 end-to-end: 三档选项, 边界写清 and 要素齐全. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长三档选项、边界写清与要素齐全，覆盖报价方案全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "quotation-standard Team",
+    "zh": "报价方案结构规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "quotation-standard-team-lead",
+      "name": {
+        "en": "报价方案主理人",
+        "zh": "报价方案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/quotation-standard.png",
+      "id": "quotation-standard",
+      "name": {
+        "en": "quotation-standard",
+        "zh": "报价方案 结构规范 顾问"
+      },
+      "profession": {
+        "en": "quotation-standard",
+        "zh": "报价方案 结构规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cross-border-invoice-pro.png",
+      "id": "cross-border-invoice-pro",
+      "name": {
+        "en": "cross-border-invoice-pro",
+        "zh": "跨境发票 信息核对 助手"
+      },
+      "profession": {
+        "en": "cross-border-invoice-pro",
+        "zh": "跨境发票 信息核对 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/new-product-npi-pro.png",
+      "id": "new-product-npi-pro",
+      "name": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "profession": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-675",
+  "plugin": "group-team-675",
+  "profession": {
+    "en": "quotation-standard Collaboration Team",
+    "zh": "报价方案结构规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报价方案",
+      "zh": "帮我处理报价方案"
+    },
+    {
+      "en": "Plan 跨境发票",
+      "zh": "帮我规划跨境发票"
+    },
+    {
+      "en": "Review 新品导入",
+      "zh": "帮我检查新品导入"
+    }
+  ],
+  "tags": [
+    {
+      "en": "三档选项",
+      "zh": "三档选项"
+    },
+    {
+      "en": "边界写清",
+      "zh": "边界写清"
+    },
+    {
+      "en": "按价值组织",
+      "zh": "按价值组织"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "quotation-standard-team-lead",
+    "memberAgents": [
+      "quotation-standard",
+      "cross-border-invoice-pro",
+      "new-product-npi-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

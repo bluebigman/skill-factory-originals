@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1102",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1102",
+    "kind": "team",
+    "name": "生产作业规范顾问专家",
+    "description": "擅长异常处理、记录留痕与定期更新，覆盖生产作业规范全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "manufacturing-sop-team-lead",
+        "role": "lead",
+        "name": "生产作业规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "manufacturing-sop",
+        "role": "member",
+        "name": "生产作业规范 顾问",
+        "evidence": "original_assets/manufacturing-sop/merkle_root",
+        "member_merkle_root": "36ecc2e12525042087ff02d824a0186207acbe9f49fabe21840ede8eee94c62b"
+      },
+      {
+        "slug": "defect-triage-pro",
+        "role": "member",
+        "name": "缺陷分级 优先级 顾问",
+        "evidence": "original_assets/defect-triage-pro/merkle_root",
+        "member_merkle_root": "4d8b413086a3bb675b6d6c4bce49c668c7b043b4878ba4ac2b673398f99692e0"
+      },
+      {
+        "slug": "agent-task-plan",
+        "role": "member",
+        "name": "任务规划 排期 顾问",
+        "evidence": "original_assets/agent-task-plan/merkle_root",
+        "member_merkle_root": "b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a"
+      }
+    ],
+    "team_lead": "manufacturing-sop-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "77d3ebb6b23646c3",
+  "prompt_hash": "4e96333522784445",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1102\", \"kind\": \"team\", \"name\": \"生产作业规范顾问专家\", \"description\": \"擅长异常处理、记录留痕与定期更新，覆盖生产作业规范全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"manufacturing-sop-team-lead\", \"role\": \"lead\", \"name\": \"生产作业规范主理人\", \"evidence\": null}, {\"slug\": \"manufacturing-sop\", \"role\": \"member\", \"name\": \"生产作业规范 顾问\", \"evidence\": \"original_assets/manufacturing-sop/merkle_root\", \"member_merkle_root\": \"36ecc2e12525042087ff02d824a0186207acbe9f49fabe21840ede8eee94c62b\"}, {\"slug\": \"defect-triage-pro\", \"role\": \"member\", \"name\": \"缺陷分级 优先级 顾问\", \"evidence\": \"original_assets/defect-triage-pro/merkle_root\", \"member_merkle_root\": \"4d8b413086a3bb675b6d6c4bce49c668c7b043b4878ba4ac2b673398f99692e0\"}, {\"slug\": \"agent-task-plan\", \"role\": \"member\", \"name\": \"任务规划 排期 顾问\", \"evidence\": \"original_assets/agent-task-plan/merkle_root\", \"member_merkle_root\": \"b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a\"}], \"team_lead\": \"manufacturing-sop-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-task-plan.md": "245c884fca0bba46c31d4ed282f9e68b2012b0ea28461c62635f9280716aad47",
+    "agents/defect-triage-pro.md": "039eab6f65748b89bce34b2dfc18203454ee9a52e27f34775503fdd6a79c960c",
+    "agents/manufacturing-sop-team-lead.md": "7b0528078b8528b34daf42fa7a1d7e1fd511adfa6fb2d68322b16cd913c07236",
+    "agents/manufacturing-sop.md": "860f5247e10d2bcc13c8135af75796711f216637919069555c7de8ae9ef12b0d",
+    "plugin.json": "6396388804a7d5783ee308118f757870c4ae86554be1ea0945f3bb901833c55e",
+    "settings.json": "95c344672ccf6acb686e483c59e2914d7e17f41747291035eacc3ec27b9c82ac"
+  }
+}

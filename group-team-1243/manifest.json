@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1243",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1243",
+    "kind": "team",
+    "name": "蓝绿部署方案专家",
+    "description": "擅长两套环境、流量切换与健康检查，覆盖蓝绿部署方案全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "deploy-bluegreen-team-lead",
+        "role": "lead",
+        "name": "蓝绿部署方案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "deploy-bluegreen",
+        "role": "member",
+        "name": "蓝绿部署方案 顾问",
+        "evidence": "original_assets/deploy-bluegreen/merkle_root",
+        "member_merkle_root": "63afdac0c72c01979d97a57d43db37e31d9e251625eb07457e1b2c38163bdcc1"
+      },
+      {
+        "slug": "data-quality-check",
+        "role": "member",
+        "name": "数据质量核验 助手",
+        "evidence": "original_assets/data-quality-check/merkle_root",
+        "member_merkle_root": "e6eb43d85cadd09f32ddef6d2683b9261efbec451bd65d4158eb622b99e61299"
+      },
+      {
+        "slug": "report-layer-design",
+        "role": "member",
+        "name": "报表层设计 顾问",
+        "evidence": "original_assets/report-layer-design/merkle_root",
+        "member_merkle_root": "d5006b0a83768cf271c5bafe707ba6b9ab50ba49de16ca26180545ab2ad139f7"
+      }
+    ],
+    "team_lead": "deploy-bluegreen-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c8e991eeb34e70e1",
+  "prompt_hash": "0a9ae0cdcdf39d32",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1243\", \"kind\": \"team\", \"name\": \"蓝绿部署方案专家\", \"description\": \"擅长两套环境、流量切换与健康检查，覆盖蓝绿部署方案全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"deploy-bluegreen-team-lead\", \"role\": \"lead\", \"name\": \"蓝绿部署方案主理人\", \"evidence\": null}, {\"slug\": \"deploy-bluegreen\", \"role\": \"member\", \"name\": \"蓝绿部署方案 顾问\", \"evidence\": \"original_assets/deploy-bluegreen/merkle_root\", \"member_merkle_root\": \"63afdac0c72c01979d97a57d43db37e31d9e251625eb07457e1b2c38163bdcc1\"}, {\"slug\": \"data-quality-check\", \"role\": \"member\", \"name\": \"数据质量核验 助手\", \"evidence\": \"original_assets/data-quality-check/merkle_root\", \"member_merkle_root\": \"e6eb43d85cadd09f32ddef6d2683b9261efbec451bd65d4158eb622b99e61299\"}, {\"slug\": \"report-layer-design\", \"role\": \"member\", \"name\": \"报表层设计 顾问\", \"evidence\": \"original_assets/report-layer-design/merkle_root\", \"member_merkle_root\": \"d5006b0a83768cf271c5bafe707ba6b9ab50ba49de16ca26180545ab2ad139f7\"}], \"team_lead\": \"deploy-bluegreen-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-quality-check.md": "4aa109eeee34e6e02107c27a07210f2c52adb2f18d6933c72a19064dc1db2af1",
+    "agents/deploy-bluegreen-team-lead.md": "ac1a9e53d6b45aa12e5c01c4b50be4bc900f003edbe8d4dd2c1e995ddd0c1a85",
+    "agents/deploy-bluegreen.md": "75bf67e77e99c0440202b088eaf0be59f6852c451ca6831c4daa76a01014ef06",
+    "agents/report-layer-design.md": "c4968337020a8675b0cb96f4d7b232c925907c82095c997b1d43b8374b725af0",
+    "plugin.json": "830e2cf82fdb6e75467230affef341a4ff628a43c5058c5c6b778df6ac656144",
+    "settings.json": "c1820bb6143644fcc457eaef31cab8b6d11020a718d9ebd757a255f9f4047845"
+  }
+}

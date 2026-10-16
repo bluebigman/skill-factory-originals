@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-batch-process-team-lead",
+  "agents": [
+    "./agents/doc-batch-process-team-lead.md",
+    "./agents/doc-batch-process.md",
+    "./agents/ugc-operation.md",
+    "./agents/word-track-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档批处",
+    "zh": "帮我处理文档批处"
+  },
+  "description": "doc-batch-process team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 文档批处, covers 模板先行 / 变量清单 / 小样验证, delivering structured results and actionable checklists.",
+    "zh": "用户内容专家：围绕文档批处，覆盖模板先行／变量清单／小样验证，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "doc-batch-process Team",
+    "zh": "用户内容专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-batch-process-team-lead",
+      "name": {
+        "en": "文档批处主理人",
+        "zh": "文档批处主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-batch-process.png",
+      "id": "doc-batch-process",
+      "name": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "profession": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ugc-operation.png",
+      "id": "ugc-operation",
+      "name": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "profession": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/word-track-review.png",
+      "id": "word-track-review",
+      "name": {
+        "en": "word-track-review",
+        "zh": "Word 修订审阅 顾问"
+      },
+      "profession": {
+        "en": "word-track-review",
+        "zh": "Word 修订审阅 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1103",
+  "plugin": "group-team-1103",
+  "profession": {
+    "en": "doc-batch-process Collaboration Team",
+    "zh": "用户内容专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档批处",
+      "zh": "帮我处理文档批处"
+    },
+    {
+      "en": "Plan 用户内容",
+      "zh": "帮我规划用户内容"
+    },
+    {
+      "en": "Review Word",
+      "zh": "帮我检查Word"
+    }
+  ],
+  "tags": [
+    {
+      "en": "变量清单",
+      "zh": "变量清单"
+    },
+    {
+      "en": "小样验证",
+      "zh": "小样验证"
+    },
+    {
+      "en": "异常隔离",
+      "zh": "异常隔离"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-batch-process-team-lead",
+    "memberAgents": [
+      "doc-batch-process",
+      "ugc-operation",
+      "word-track-review"
+    ]
+  },
+  "version": "1.0.0"
+}

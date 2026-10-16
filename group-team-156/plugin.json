@@ -1,0 +1,126 @@
+{
+  "agentName": "restaurant-diagnose-team-lead",
+  "agents": [
+    "./agents/restaurant-diagnose-team-lead.md",
+    "./agents/restaurant-diagnose.md",
+    "./agents/logistics-diagnose.md",
+    "./agents/mrp-param-tune-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 餐饮经营",
+    "zh": "帮我处理餐饮经营"
+  },
+  "description": "Restaurant Diagnose team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "餐饮 物流 物料 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Restaurant Diagnose Team",
+    "zh": "餐饮 物流 物料 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "restaurant-diagnose-team-lead",
+      "name": {
+        "en": "餐饮经营主理人",
+        "zh": "餐饮经营主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/restaurant-diagnose.png",
+      "id": "restaurant-diagnose",
+      "name": {
+        "en": "Restaurant Diagnose",
+        "zh": "餐饮经营 翻台率 顾问"
+      },
+      "profession": {
+        "en": "Restaurant Diagnose",
+        "zh": "餐饮经营 翻台率 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/logistics-diagnose.png",
+      "id": "logistics-diagnose",
+      "name": {
+        "en": "Logistics Diagnose",
+        "zh": "物流运营 时效分析 顾问"
+      },
+      "profession": {
+        "en": "Logistics Diagnose",
+        "zh": "物流运营 时效分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/mrp-param-tune-pro.png",
+      "id": "mrp-param-tune-pro",
+      "name": {
+        "en": "Mrp Param Tune Pro",
+        "zh": "物料计划 参数校准 顾问"
+      },
+      "profession": {
+        "en": "Mrp Param Tune Pro",
+        "zh": "物料计划 参数校准 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-156",
+  "plugin": "group-team-156",
+  "profession": {
+    "en": "Restaurant Diagnose Collaboration Team",
+    "zh": "餐饮 物流 物料 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 餐饮经营",
+      "zh": "帮我处理餐饮经营"
+    },
+    {
+      "en": "Plan 物流运营",
+      "zh": "帮我规划物流运营"
+    },
+    {
+      "en": "Review 物料计划",
+      "zh": "帮我检查物料计划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "餐饮经营",
+      "zh": "餐饮经营"
+    },
+    {
+      "en": "物流运营",
+      "zh": "物流运营"
+    },
+    {
+      "en": "物料计划",
+      "zh": "物料计划"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "restaurant-diagnose-team-lead",
+    "memberAgents": [
+      "restaurant-diagnose",
+      "logistics-diagnose",
+      "mrp-param-tune-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

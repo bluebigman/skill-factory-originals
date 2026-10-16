@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1087",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1087",
+    "kind": "team",
+    "name": "文档索引构建专家",
+    "description": "擅长覆盖完整、层级合理与页码准确，覆盖文档索引构建全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-index-build-team-lead",
+        "role": "lead",
+        "name": "文档索引构建主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-index-build",
+        "role": "member",
+        "name": "文档索引构建 助手",
+        "evidence": "original_assets/doc-index-build/merkle_root",
+        "member_merkle_root": "a9c08376873c6ad68c14f76981baec6a4843b4927005425e190c1ddd1075b8fd"
+      },
+      {
+        "slug": "cn-rewrite-deaifier",
+        "role": "member",
+        "name": "中文改写 去AI味 风格润色",
+        "evidence": "original_assets/cn-rewrite-deaifier/merkle_root",
+        "member_merkle_root": "c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167"
+      },
+      {
+        "slug": "social-post-plan",
+        "role": "member",
+        "name": "社交内容排期 助手",
+        "evidence": "original_assets/social-post-plan/merkle_root",
+        "member_merkle_root": "7a99418f0791b1531f1e9922b4e6f4ffc1b95c570a56ac2b62b6d05cd74a1da6"
+      }
+    ],
+    "team_lead": "doc-index-build-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "42e4cb37fdfccdd9",
+  "prompt_hash": "320bfb853a91be84",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1087\", \"kind\": \"team\", \"name\": \"文档索引构建专家\", \"description\": \"擅长覆盖完整、层级合理与页码准确，覆盖文档索引构建全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-index-build-team-lead\", \"role\": \"lead\", \"name\": \"文档索引构建主理人\", \"evidence\": null}, {\"slug\": \"doc-index-build\", \"role\": \"member\", \"name\": \"文档索引构建 助手\", \"evidence\": \"original_assets/doc-index-build/merkle_root\", \"member_merkle_root\": \"a9c08376873c6ad68c14f76981baec6a4843b4927005425e190c1ddd1075b8fd\"}, {\"slug\": \"cn-rewrite-deaifier\", \"role\": \"member\", \"name\": \"中文改写 去AI味 风格润色\", \"evidence\": \"original_assets/cn-rewrite-deaifier/merkle_root\", \"member_merkle_root\": \"c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167\"}, {\"slug\": \"social-post-plan\", \"role\": \"member\", \"name\": \"社交内容排期 助手\", \"evidence\": \"original_assets/social-post-plan/merkle_root\", \"member_merkle_root\": \"7a99418f0791b1531f1e9922b4e6f4ffc1b95c570a56ac2b62b6d05cd74a1da6\"}], \"team_lead\": \"doc-index-build-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cn-rewrite-deaifier.md": "a99456e1d408b39a9e79eebb413be67606cc5ae122604abf9d3b412e9d4e2f50",
+    "agents/doc-index-build-team-lead.md": "8d88bbc90beb721029c8664f2b6fcd92efcf3b49f0c9c670c0b1d3bec8295ed6",
+    "agents/doc-index-build.md": "6f9d8e983c473effb9dceb8d57d54f541034b02df739954df9e92e5c3b559aef",
+    "agents/social-post-plan.md": "5ae387f8a454fd1f8ea75bf1cd9701d7ce55dfe88930a90778dede73db819c46",
+    "plugin.json": "3b79c4689f7665b74423f265a14547a2c281ffdabd939f635503ed609918df83",
+    "settings.json": "e8903784557d74e4e8ea6bf80b4911ad9e6e56a58b45a967432ca0adb79bd2d7"
+  }
+}

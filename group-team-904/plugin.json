@@ -1,0 +1,126 @@
+{
+  "agentName": "pdf-parse-pro-team-lead",
+  "agents": [
+    "./agents/pdf-parse-pro-team-lead.md",
+    "./agents/pdf-parse-pro.md",
+    "./agents/forecast-sanity.md",
+    "./agents/report-automation-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle PDF",
+    "zh": "帮我处理PDF"
+  },
+  "description": "pdf-parse-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input PDF requirements, output three deliverables: 版式识别, 表格优先, 顺序保证. Verifiable end-to-end, evidence per step.",
+    "zh": "输入PDF相关需求，输出版式识别、表格优先、顺序保证三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "pdf-parse-pro Team",
+    "zh": "预测结果校验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pdf-parse-pro-team-lead",
+      "name": {
+        "en": "PDF主理人",
+        "zh": "PDF主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pdf-parse-pro.png",
+      "id": "pdf-parse-pro",
+      "name": {
+        "en": "pdf-parse-pro",
+        "zh": "PDF 解析 顾问"
+      },
+      "profession": {
+        "en": "pdf-parse-pro",
+        "zh": "PDF 解析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/forecast-sanity.png",
+      "id": "forecast-sanity",
+      "name": {
+        "en": "forecast-sanity",
+        "zh": "预测结果校验 顾问"
+      },
+      "profession": {
+        "en": "forecast-sanity",
+        "zh": "预测结果校验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-automation-pro.png",
+      "id": "report-automation-pro",
+      "name": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "profession": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-904",
+  "plugin": "group-team-904",
+  "profession": {
+    "en": "pdf-parse-pro Collaboration Team",
+    "zh": "预测结果校验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle PDF",
+      "zh": "帮我处理PDF"
+    },
+    {
+      "en": "Plan 预测结果校验",
+      "zh": "帮我规划预测结果校验"
+    },
+    {
+      "en": "Review 报表自动",
+      "zh": "帮我检查报表自动"
+    }
+  ],
+  "tags": [
+    {
+      "en": "版式识别",
+      "zh": "版式识别"
+    },
+    {
+      "en": "表格优先",
+      "zh": "表格优先"
+    },
+    {
+      "en": "顺序保证",
+      "zh": "顺序保证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pdf-parse-pro-team-lead",
+    "memberAgents": [
+      "pdf-parse-pro",
+      "forecast-sanity",
+      "report-automation-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

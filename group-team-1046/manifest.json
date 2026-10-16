@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1046",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1046",
+    "kind": "team",
+    "name": "公益项目设计专家",
+    "description": "公益项目设计专家：围绕咨询框架，覆盖假设驱动／数据支撑／边界声明，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "consulting-framework-team-lead",
+        "role": "lead",
+        "name": "咨询框架主理人",
+        "evidence": null
+      },
+      {
+        "slug": "consulting-framework",
+        "role": "member",
+        "name": "咨询框架 顾问",
+        "evidence": "original_assets/consulting-framework/merkle_root",
+        "member_merkle_root": "a379013b140de34186336295183b6588433deb9e04837dcbfbfcb384c5007eca"
+      },
+      {
+        "slug": "nonprofit-program",
+        "role": "member",
+        "name": "公益项目设计 顾问",
+        "evidence": "original_assets/nonprofit-program/merkle_root",
+        "member_merkle_root": "2a91f0a370ac75ee20789574fdd8f4c3a5476768bd773b1c45e0f7b283092a15"
+      },
+      {
+        "slug": "finance-toolkit-pro-fixed",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747"
+      }
+    ],
+    "team_lead": "consulting-framework-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ceb314839b609738",
+  "prompt_hash": "dd0dd8ac5aad0633",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1046\", \"kind\": \"team\", \"name\": \"公益项目设计专家\", \"description\": \"公益项目设计专家：围绕咨询框架，覆盖假设驱动／数据支撑／边界声明，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"consulting-framework-team-lead\", \"role\": \"lead\", \"name\": \"咨询框架主理人\", \"evidence\": null}, {\"slug\": \"consulting-framework\", \"role\": \"member\", \"name\": \"咨询框架 顾问\", \"evidence\": \"original_assets/consulting-framework/merkle_root\", \"member_merkle_root\": \"a379013b140de34186336295183b6588433deb9e04837dcbfbfcb384c5007eca\"}, {\"slug\": \"nonprofit-program\", \"role\": \"member\", \"name\": \"公益项目设计 顾问\", \"evidence\": \"original_assets/nonprofit-program/merkle_root\", \"member_merkle_root\": \"2a91f0a370ac75ee20789574fdd8f4c3a5476768bd773b1c45e0f7b283092a15\"}, {\"slug\": \"finance-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747\"}], \"team_lead\": \"consulting-framework-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/consulting-framework-team-lead.md": "b79a3483ac8904206dc44df5d755be9dcd293b48612f4e97ac2aebee205b9af4",
+    "agents/consulting-framework.md": "38f49705c0ffa03e4a5565b9f0281796970936a96b13cdbc13ea4faac0d05aaa",
+    "agents/finance-toolkit-pro-fixed.md": "504301ee408863089490431ec644c613728ef0c394c4a53b31fd11e14cd49c6a",
+    "agents/nonprofit-program.md": "fe0ce52d960e24915194d881b0bdd11d6c93421806d370e471ef5c415e7f8c70",
+    "plugin.json": "552367f2d876051fbeab3d8fdaa2562c88a382d015fd38ce7832c529f620a7d6",
+    "settings.json": "1a32b3c43ea25d22e50e0074e7d5a7e3e16354758a10ebb5aaac54a09db0ec83"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "capacity-planning-pro-team-lead",
+  "agents": [
+    "./agents/capacity-planning-pro-team-lead.md",
+    "./agents/capacity-planning-pro.md",
+    "./agents/agent-capability-declare.md",
+    "./agents/agent-state-manage.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 容量规划",
+    "zh": "帮我处理容量规划"
+  },
+  "description": "capacity-planning-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 容量规划 requirements, output three deliverables: 基线测量, 增长预测, 瓶颈前置. Verifiable end-to-end, evidence per step.",
+    "zh": "输入容量规划相关需求，输出基线测量、增长预测、瓶颈前置三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "capacity-planning-pro Team",
+    "zh": "容量规划专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "capacity-planning-pro-team-lead",
+      "name": {
+        "en": "容量规划主理人",
+        "zh": "容量规划主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/capacity-planning-pro.png",
+      "id": "capacity-planning-pro",
+      "name": {
+        "en": "capacity-planning-pro",
+        "zh": "容量规划 负载预测 顾问"
+      },
+      "profession": {
+        "en": "capacity-planning-pro",
+        "zh": "容量规划 负载预测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-capability-declare.png",
+      "id": "agent-capability-declare",
+      "name": {
+        "en": "agent-capability-declare",
+        "zh": "能力声明 边界公示 顾问"
+      },
+      "profession": {
+        "en": "agent-capability-declare",
+        "zh": "能力声明 边界公示 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-state-manage.png",
+      "id": "agent-state-manage",
+      "name": {
+        "en": "agent-state-manage",
+        "zh": "状态管理 断点续跑 顾问"
+      },
+      "profession": {
+        "en": "agent-state-manage",
+        "zh": "状态管理 断点续跑 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-316",
+  "plugin": "group-team-316",
+  "profession": {
+    "en": "capacity-planning-pro Collaboration Team",
+    "zh": "容量规划专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 容量规划",
+      "zh": "帮我处理容量规划"
+    },
+    {
+      "en": "Plan 能力声明",
+      "zh": "帮我规划能力声明"
+    },
+    {
+      "en": "Review 状态管理",
+      "zh": "帮我检查状态管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "基线测量",
+      "zh": "基线测量"
+    },
+    {
+      "en": "增长预测",
+      "zh": "增长预测"
+    },
+    {
+      "en": "瓶颈前置",
+      "zh": "瓶颈前置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "capacity-planning-pro-team-lead",
+    "memberAgents": [
+      "capacity-planning-pro",
+      "agent-capability-declare",
+      "agent-state-manage"
+    ]
+  },
+  "version": "1.0.0"
+}

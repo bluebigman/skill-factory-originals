@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-transcribe-struct-team-lead",
+  "agents": [
+    "./agents/doc-transcribe-struct-team-lead.md",
+    "./agents/doc-transcribe-struct.md",
+    "./agents/short-video-script.md",
+    "./agents/content-calendar.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档转写",
+    "zh": "帮我处理文档转写"
+  },
+  "description": "Doc Transcribe Struct team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "文档 短视频 内容 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "Doc Transcribe Struct Team",
+    "zh": "文档 短视频 内容 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-transcribe-struct-team-lead",
+      "name": {
+        "en": "文档转写主理人",
+        "zh": "文档转写主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-transcribe-struct.png",
+      "id": "doc-transcribe-struct",
+      "name": {
+        "en": "Doc Transcribe Struct",
+        "zh": "文档转写 结构化整理 助手"
+      },
+      "profession": {
+        "en": "Doc Transcribe Struct",
+        "zh": "文档转写 结构化整理 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/short-video-script.png",
+      "id": "short-video-script",
+      "name": {
+        "en": "Short Video Script",
+        "zh": "短视频 脚本拆解 顾问"
+      },
+      "profession": {
+        "en": "Short Video Script",
+        "zh": "短视频 脚本拆解 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-calendar.png",
+      "id": "content-calendar",
+      "name": {
+        "en": "Content Calendar",
+        "zh": "内容日历 排期管理 顾问"
+      },
+      "profession": {
+        "en": "Content Calendar",
+        "zh": "内容日历 排期管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-205",
+  "plugin": "group-team-205",
+  "profession": {
+    "en": "Doc Transcribe Struct Collaboration Team",
+    "zh": "文档 短视频 内容 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档转写",
+      "zh": "帮我处理文档转写"
+    },
+    {
+      "en": "Plan 短视频",
+      "zh": "帮我规划短视频"
+    },
+    {
+      "en": "Review 内容日历",
+      "zh": "帮我检查内容日历"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档转写",
+      "zh": "文档转写"
+    },
+    {
+      "en": "短视频",
+      "zh": "短视频"
+    },
+    {
+      "en": "内容日历",
+      "zh": "内容日历"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-transcribe-struct-team-lead",
+    "memberAgents": [
+      "doc-transcribe-struct",
+      "short-video-script",
+      "content-calendar"
+    ]
+  },
+  "version": "1.0.0"
+}

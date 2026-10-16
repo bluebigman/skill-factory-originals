@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-863",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-863",
+    "kind": "team",
+    "name": "协作表格规范专家",
+    "description": "输入协作表格规范相关需求，输出锁定结构、分工明确、数据校验三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sheet-collab-rule-team-lead",
+        "role": "lead",
+        "name": "协作表格规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sheet-collab-rule",
+        "role": "member",
+        "name": "协作表格规范 顾问",
+        "evidence": "original_assets/sheet-collab-rule/merkle_root",
+        "member_merkle_root": "d94099dd0c76627ba02898678b216076267fd4f8544eb07aed607418240645f3"
+      },
+      {
+        "slug": "win-loss-analysis",
+        "role": "member",
+        "name": "赢单复盘 归因分析 顾问",
+        "evidence": "original_assets/win-loss-analysis/merkle_root",
+        "member_merkle_root": "8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd"
+      },
+      {
+        "slug": "overseas-support-pro",
+        "role": "member",
+        "name": "海外客服 多语支持 顾问",
+        "evidence": "original_assets/overseas-support-pro/merkle_root",
+        "member_merkle_root": "f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3"
+      }
+    ],
+    "team_lead": "sheet-collab-rule-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b62a040690c293c0",
+  "prompt_hash": "24abb9bfe698e6b6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-863\", \"kind\": \"team\", \"name\": \"协作表格规范专家\", \"description\": \"输入协作表格规范相关需求，输出锁定结构、分工明确、数据校验三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sheet-collab-rule-team-lead\", \"role\": \"lead\", \"name\": \"协作表格规范主理人\", \"evidence\": null}, {\"slug\": \"sheet-collab-rule\", \"role\": \"member\", \"name\": \"协作表格规范 顾问\", \"evidence\": \"original_assets/sheet-collab-rule/merkle_root\", \"member_merkle_root\": \"d94099dd0c76627ba02898678b216076267fd4f8544eb07aed607418240645f3\"}, {\"slug\": \"win-loss-analysis\", \"role\": \"member\", \"name\": \"赢单复盘 归因分析 顾问\", \"evidence\": \"original_assets/win-loss-analysis/merkle_root\", \"member_merkle_root\": \"8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd\"}, {\"slug\": \"overseas-support-pro\", \"role\": \"member\", \"name\": \"海外客服 多语支持 顾问\", \"evidence\": \"original_assets/overseas-support-pro/merkle_root\", \"member_merkle_root\": \"f8f9043cf6720452142eae7ab26a03309ccd435b9069df2844a0f12a806fece3\"}], \"team_lead\": \"sheet-collab-rule-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/overseas-support-pro.md": "524bf6ab7194c792eae85d88f2b0ab35990b4450022171f18b3665d4916f876c",
+    "agents/sheet-collab-rule-team-lead.md": "d37eb7a8224b5137bbdd42cb644923f24f20530bd9821526a63bd308fe5bd785",
+    "agents/sheet-collab-rule.md": "73af37df36e350438d6b4a2c151a5d83963fb7e11e334f1e8fefcbab6918bd4d",
+    "agents/win-loss-analysis.md": "a5cd3df7043d4c2568ac84b4c7b9ae5df7bfc02691268e91cb77a13ad699e523",
+    "plugin.json": "8c068265e46afb657c367c48b91ac512cff101dcd71fa1ba39115c63452cb1a6",
+    "settings.json": "de13bb2b871dfc2b85a07f685b3e9866f3d2ccb79ac2f58184e93c36dca33ff9"
+  }
+}

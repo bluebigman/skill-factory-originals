@@ -1,0 +1,126 @@
+{
+  "agentName": "batch-data-validate-team-lead",
+  "agents": [
+    "./agents/batch-data-validate-team-lead.md",
+    "./agents/batch-data-validate.md",
+    "./agents/backup-restore-plan.md",
+    "./agents/sql-toolkit-pro-02-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 批量数据校验",
+    "zh": "帮我处理批量数据校验"
+  },
+  "description": "batch-data-validate team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 批量数据校验 requirements, output three deliverables: 错误报告, 抽样复核, 定期演练. Verifiable end-to-end, evidence per step.",
+    "zh": "输入批量数据校验相关需求，输出错误报告、抽样复核、定期演练三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "batch-data-validate Team",
+    "zh": "批量数据校验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "batch-data-validate-team-lead",
+      "name": {
+        "en": "批量数据校验主理人",
+        "zh": "批量数据校验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/batch-data-validate.png",
+      "id": "batch-data-validate",
+      "name": {
+        "en": "batch-data-validate",
+        "zh": "批量数据校验 助手"
+      },
+      "profession": {
+        "en": "batch-data-validate",
+        "zh": "批量数据校验 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/backup-restore-plan.png",
+      "id": "backup-restore-plan",
+      "name": {
+        "en": "backup-restore-plan",
+        "zh": "备份恢复方案 顾问"
+      },
+      "profession": {
+        "en": "backup-restore-plan",
+        "zh": "备份恢复方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-02-fixed.png",
+      "id": "sql-toolkit-pro-02-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-967",
+  "plugin": "group-team-967",
+  "profession": {
+    "en": "batch-data-validate Collaboration Team",
+    "zh": "批量数据校验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 批量数据校验",
+      "zh": "帮我处理批量数据校验"
+    },
+    {
+      "en": "Plan 备份恢复方案",
+      "zh": "帮我规划备份恢复方案"
+    },
+    {
+      "en": "Review SQL生成编辑",
+      "zh": "帮我检查SQL生成编辑"
+    }
+  ],
+  "tags": [
+    {
+      "en": "错误报告",
+      "zh": "错误报告"
+    },
+    {
+      "en": "抽样复核",
+      "zh": "抽样复核"
+    },
+    {
+      "en": "校验清单化",
+      "zh": "校验清单化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "batch-data-validate-team-lead",
+    "memberAgents": [
+      "batch-data-validate",
+      "backup-restore-plan",
+      "sql-toolkit-pro-02-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

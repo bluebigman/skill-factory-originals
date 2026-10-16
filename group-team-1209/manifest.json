@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1209",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1209",
+    "kind": "team",
+    "name": "引导叙事设计专家",
+    "description": "输入引导叙事设计相关需求，输出步数精简、进度可见、流失补救三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "onboarding-narrative-team-lead",
+        "role": "lead",
+        "name": "引导叙事设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "onboarding-narrative",
+        "role": "member",
+        "name": "引导叙事设计 顾问",
+        "evidence": "original_assets/onboarding-narrative/merkle_root",
+        "member_merkle_root": "de39823ec3f9aecb1a003dc69768210c57dcb5ae74cabc092226380516fa9469"
+      },
+      {
+        "slug": "illustration-guide",
+        "role": "member",
+        "name": "插画风格指南 顾问",
+        "evidence": "original_assets/illustration-guide/merkle_root",
+        "member_merkle_root": "aa946c79335cb2d54b35fce47e7887c2e0610d4389184a31cbb3213d344eefea"
+      },
+      {
+        "slug": "doc-accessibility",
+        "role": "member",
+        "name": "文档无障碍 顾问",
+        "evidence": "original_assets/doc-accessibility/merkle_root",
+        "member_merkle_root": "ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e"
+      }
+    ],
+    "team_lead": "onboarding-narrative-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d1a817e297d33bd4",
+  "prompt_hash": "012abb8d1f58ca79",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1209\", \"kind\": \"team\", \"name\": \"引导叙事设计专家\", \"description\": \"输入引导叙事设计相关需求，输出步数精简、进度可见、流失补救三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"onboarding-narrative-team-lead\", \"role\": \"lead\", \"name\": \"引导叙事设计主理人\", \"evidence\": null}, {\"slug\": \"onboarding-narrative\", \"role\": \"member\", \"name\": \"引导叙事设计 顾问\", \"evidence\": \"original_assets/onboarding-narrative/merkle_root\", \"member_merkle_root\": \"de39823ec3f9aecb1a003dc69768210c57dcb5ae74cabc092226380516fa9469\"}, {\"slug\": \"illustration-guide\", \"role\": \"member\", \"name\": \"插画风格指南 顾问\", \"evidence\": \"original_assets/illustration-guide/merkle_root\", \"member_merkle_root\": \"aa946c79335cb2d54b35fce47e7887c2e0610d4389184a31cbb3213d344eefea\"}, {\"slug\": \"doc-accessibility\", \"role\": \"member\", \"name\": \"文档无障碍 顾问\", \"evidence\": \"original_assets/doc-accessibility/merkle_root\", \"member_merkle_root\": \"ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e\"}], \"team_lead\": \"onboarding-narrative-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-accessibility.md": "639db3fc86cce7747534192a2b8fd557fa12a8c18e6e747a5812a50b5fdbcd57",
+    "agents/illustration-guide.md": "e2995a8c8ad36c051368a4cf2fb28dec4307bf940047ca36b7db383dc16910b5",
+    "agents/onboarding-narrative-team-lead.md": "7a69af704029c62d837a5f8d5c9e100a290e46cb87ebff213fba2200f27b99de",
+    "agents/onboarding-narrative.md": "ab1be1b081a7412bfbb05f00ac85438dc0895dba4252296c862b055edb6acdeb",
+    "plugin.json": "2b92f4403ae3fa4abaa0f7087aca779f3ba1ff85a1f5892b4a45c9e2f6c44f67",
+    "settings.json": "a28c3aa3a3f05ef87ac191af6ed47520605976d509fdf5513344c5507d1b5547"
+  }
+}

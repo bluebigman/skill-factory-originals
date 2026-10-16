@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-1076",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1076",
+    "kind": "team",
+    "name": "海外沟通专家",
+    "description": "海外沟通专家：围绕海外沟通，覆盖费用归类／称谓先行／直曲有别，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "expense-reimburse-expert-team-lead",
+        "role": "lead",
+        "name": "报销与费用管理专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "expense-reimburse-expert",
+        "role": "member",
+        "name": "报销与费用管理专家",
+        "evidence": "original_assets/expense-reimburse-expert/merkle_root",
+        "member_merkle_root": "a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f"
+      },
+      {
+        "slug": "overseas-culture-adapt",
+        "role": "member",
+        "name": "海外沟通 文化适配 顾问",
+        "evidence": "original_assets/overseas-culture-adapt/merkle_root",
+        "member_merkle_root": "9552678f18b8a69a4ae847080ea0faa72a5463645b57a0476dfdecc2a9bae4a3"
+      },
+      {
+        "slug": "intl-meeting-coach",
+        "role": "member",
+        "name": "跨时区会议 组织 教练",
+        "evidence": "original_assets/intl-meeting-coach/merkle_root",
+        "member_merkle_root": "b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1"
+      }
+    ],
+    "team_lead": "expense-reimburse-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "80c38afa0c65750b",
+  "prompt_hash": "da4e82905fc2ba3c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1076\", \"kind\": \"team\", \"name\": \"海外沟通专家\", \"description\": \"海外沟通专家：围绕海外沟通，覆盖费用归类／称谓先行／直曲有别，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"expense-reimburse-expert-team-lead\", \"role\": \"lead\", \"name\": \"报销与费用管理专家主理人\", \"evidence\": null}, {\"slug\": \"expense-reimburse-expert\", \"role\": \"member\", \"name\": \"报销与费用管理专家\", \"evidence\": \"original_assets/expense-reimburse-expert/merkle_root\", \"member_merkle_root\": \"a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f\"}, {\"slug\": \"overseas-culture-adapt\", \"role\": \"member\", \"name\": \"海外沟通 文化适配 顾问\", \"evidence\": \"original_assets/overseas-culture-adapt/merkle_root\", \"member_merkle_root\": \"9552678f18b8a69a4ae847080ea0faa72a5463645b57a0476dfdecc2a9bae4a3\"}, {\"slug\": \"intl-meeting-coach\", \"role\": \"member\", \"name\": \"跨时区会议 组织 教练\", \"evidence\": \"original_assets/intl-meeting-coach/merkle_root\", \"member_merkle_root\": \"b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1\"}], \"team_lead\": \"expense-reimburse-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/expense-reimburse-expert-team-lead.md": "684d00fd5622bd1f821d1f842f68fe76a73f2cc46b0bd4ddab6102162a6d6534",
+    "agents/expense-reimburse-expert.md": "079885b0d584acf7db7d6305eeeb2768178482260f1917183c33a69bd5629a85",
+    "agents/intl-meeting-coach.md": "956652e0b5d342c3583245729c46562de741a08f8b09d2080542bdc3a44eaf3e",
+    "agents/overseas-culture-adapt.md": "53205b7c049ddfb3d44e5c43ca94476eae8785df19d0e3be6963d834cd7fc327",
+    "plugin.json": "8c2c7b9d103cef905e1a2227141a21e0f78c08c8af2037bd4151c5b8caa9aff8",
+    "settings.json": "9b448d1208a2647f891961629bf9ec573c19f4d1f4347fd858431d50cf4a302e"
+  }
+}

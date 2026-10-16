@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1206",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1206",
+    "kind": "team",
+    "name": "指令澄清专家",
+    "description": "输入指令澄清相关需求，输出歧义显式、边界确认、成功标准三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-instruction-clarify-team-lead",
+        "role": "lead",
+        "name": "指令澄清主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-instruction-clarify",
+        "role": "member",
+        "name": "指令澄清 歧义识别 顾问",
+        "evidence": "original_assets/agent-instruction-clarify/merkle_root",
+        "member_merkle_root": "6eb56e5423754167ebe23d58a288dce6dbbbf3dcd23d1537ea5051464a76a373"
+      },
+      {
+        "slug": "agent-identity-manage",
+        "role": "member",
+        "name": "身份管理 凭据轮换 顾问",
+        "evidence": "original_assets/agent-identity-manage/merkle_root",
+        "member_merkle_root": "26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533"
+      },
+      {
+        "slug": "pii-redact-pro",
+        "role": "member",
+        "name": "隐私信息脱敏 助手",
+        "evidence": "original_assets/pii-redact-pro/merkle_root",
+        "member_merkle_root": "3a79e30e0ef53398b6b0be66430cdfaac9db19d33aaa9b94f6508e12179a7a75"
+      }
+    ],
+    "team_lead": "agent-instruction-clarify-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "31e2e2dc1fe36f59",
+  "prompt_hash": "58644afd8048c3bb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1206\", \"kind\": \"team\", \"name\": \"指令澄清专家\", \"description\": \"输入指令澄清相关需求，输出歧义显式、边界确认、成功标准三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-instruction-clarify-team-lead\", \"role\": \"lead\", \"name\": \"指令澄清主理人\", \"evidence\": null}, {\"slug\": \"agent-instruction-clarify\", \"role\": \"member\", \"name\": \"指令澄清 歧义识别 顾问\", \"evidence\": \"original_assets/agent-instruction-clarify/merkle_root\", \"member_merkle_root\": \"6eb56e5423754167ebe23d58a288dce6dbbbf3dcd23d1537ea5051464a76a373\"}, {\"slug\": \"agent-identity-manage\", \"role\": \"member\", \"name\": \"身份管理 凭据轮换 顾问\", \"evidence\": \"original_assets/agent-identity-manage/merkle_root\", \"member_merkle_root\": \"26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533\"}, {\"slug\": \"pii-redact-pro\", \"role\": \"member\", \"name\": \"隐私信息脱敏 助手\", \"evidence\": \"original_assets/pii-redact-pro/merkle_root\", \"member_merkle_root\": \"3a79e30e0ef53398b6b0be66430cdfaac9db19d33aaa9b94f6508e12179a7a75\"}], \"team_lead\": \"agent-instruction-clarify-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-identity-manage.md": "abddcac715adea2286603f2567c90435785cbc87240988eb1628a25cf776da02",
+    "agents/agent-instruction-clarify-team-lead.md": "003a8344d5f581960e43033e49dfb410fe5dcb5af25fb8ce517e7a837640e811",
+    "agents/agent-instruction-clarify.md": "5bd6e4142240ee04c4f4924d945fa2557cd6b7419589551552cf3964531c6dca",
+    "agents/pii-redact-pro.md": "cd77a8cdc5bce8e08ea0f6491a67b06c1842c40c619fc2197a572c6a00de0bc2",
+    "plugin.json": "542f4c8f9233b92b7b501bdbeea22a3a405636bbf354a91a08ee758404031525",
+    "settings.json": "aec5dca249989a5e63f06ae6abdf06874f92839fe8b446dcd4d764de988d269b"
+  }
+}

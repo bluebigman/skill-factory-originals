@@ -1,0 +1,126 @@
+{
+  "agentName": "global-content-calendar-team-lead",
+  "agents": [
+    "./agents/global-content-calendar-team-lead.md",
+    "./agents/global-content-calendar.md",
+    "./agents/writing-toolkit-pro-fixed.md",
+    "./agents/newsletter-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 全球内容",
+    "zh": "帮我处理全球内容"
+  },
+  "description": "global-content-calendar team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 全球内容 requirements, output three deliverables: 节庆对齐, 按区发布, 素材分级. Verifiable end-to-end, evidence per step.",
+    "zh": "输入全球内容相关需求，输出节庆对齐、按区发布、素材分级三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "global-content-calendar Team",
+    "zh": "全球内容专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "global-content-calendar-team-lead",
+      "name": {
+        "en": "全球内容主理人",
+        "zh": "全球内容主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/global-content-calendar.png",
+      "id": "global-content-calendar",
+      "name": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "profession": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/writing-toolkit-pro-fixed.png",
+      "id": "writing-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/newsletter-coach.png",
+      "id": "newsletter-coach",
+      "name": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "profession": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1062",
+  "plugin": "group-team-1062",
+  "profession": {
+    "en": "global-content-calendar Collaboration Team",
+    "zh": "全球内容专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 全球内容",
+      "zh": "帮我处理全球内容"
+    },
+    {
+      "en": "Plan 文本净化",
+      "zh": "帮我规划文本净化"
+    },
+    {
+      "en": "Review 订阅通讯",
+      "zh": "帮我检查订阅通讯"
+    }
+  ],
+  "tags": [
+    {
+      "en": "节庆对齐",
+      "zh": "节庆对齐"
+    },
+    {
+      "en": "按区发布",
+      "zh": "按区发布"
+    },
+    {
+      "en": "素材分级",
+      "zh": "素材分级"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "global-content-calendar-team-lead",
+    "memberAgents": [
+      "global-content-calendar",
+      "writing-toolkit-pro-fixed",
+      "newsletter-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

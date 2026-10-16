@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1283",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1283",
+    "kind": "team",
+    "name": "报表可复现专家",
+    "description": "报表可复现专家：围绕报表可复现，覆盖环境声明／结果对账／定时执行，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-reproduce-team-lead",
+        "role": "lead",
+        "name": "报表可复现主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-reproduce",
+        "role": "member",
+        "name": "报表可复现 顾问",
+        "evidence": "original_assets/report-reproduce/merkle_root",
+        "member_merkle_root": "453e53625d25985436efc7c60a46e9a4614c803f7569b5f4e009aac4b38279de"
+      },
+      {
+        "slug": "tool-interface-design-pro",
+        "role": "member",
+        "name": "工具设计 接口契约 顾问",
+        "evidence": "original_assets/tool-interface-design-pro/merkle_root",
+        "member_merkle_root": "425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5"
+      },
+      {
+        "slug": "insight-report-layer",
+        "role": "member",
+        "name": "洞察报告分层 顾问",
+        "evidence": "original_assets/insight-report-layer/merkle_root",
+        "member_merkle_root": "8a515e373ab2b46030420ee8d9a2736d9ff3165e23175b73a022c4f5b40967ac"
+      }
+    ],
+    "team_lead": "report-reproduce-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c8202b6492d6412f",
+  "prompt_hash": "b240c439bafefdbd",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1283\", \"kind\": \"team\", \"name\": \"报表可复现专家\", \"description\": \"报表可复现专家：围绕报表可复现，覆盖环境声明／结果对账／定时执行，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-reproduce-team-lead\", \"role\": \"lead\", \"name\": \"报表可复现主理人\", \"evidence\": null}, {\"slug\": \"report-reproduce\", \"role\": \"member\", \"name\": \"报表可复现 顾问\", \"evidence\": \"original_assets/report-reproduce/merkle_root\", \"member_merkle_root\": \"453e53625d25985436efc7c60a46e9a4614c803f7569b5f4e009aac4b38279de\"}, {\"slug\": \"tool-interface-design-pro\", \"role\": \"member\", \"name\": \"工具设计 接口契约 顾问\", \"evidence\": \"original_assets/tool-interface-design-pro/merkle_root\", \"member_merkle_root\": \"425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5\"}, {\"slug\": \"insight-report-layer\", \"role\": \"member\", \"name\": \"洞察报告分层 顾问\", \"evidence\": \"original_assets/insight-report-layer/merkle_root\", \"member_merkle_root\": \"8a515e373ab2b46030420ee8d9a2736d9ff3165e23175b73a022c4f5b40967ac\"}], \"team_lead\": \"report-reproduce-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/insight-report-layer.md": "472009647e8605791bd415f7529cb8b393c6e3b7911a296d2f39702ff33be1d1",
+    "agents/report-reproduce-team-lead.md": "9952e1555c2b84e7023c6630525bc1a7df9c9f34ecf28a4a08e11eb05cc91b61",
+    "agents/report-reproduce.md": "da64953845ff6fb60fb1fe7996f76d951eeaae8306b3ad7a92f01ada21e5b67a",
+    "agents/tool-interface-design-pro.md": "e2d451c0235a9b84241327393872b316bf1b6ab3a102d5cb2f918d2e19a35a27",
+    "plugin.json": "4f759c156d7801f1f748dcf13d0825d0ec60f8e9ca2a29601aa33fc3efbd6407",
+    "settings.json": "ecd022bed5bb5cf135aa4bb943bf31e38447e68150d725d9ae4b321e5fe4eacc"
+  }
+}

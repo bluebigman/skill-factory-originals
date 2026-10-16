@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-988",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-988",
+    "kind": "team",
+    "name": "邮件营销标题撰写专家",
+    "description": "擅长场景识别、样件分级与爬坡曲线，覆盖新品导入全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cold-email-expert-team-lead",
+        "role": "lead",
+        "name": "邮件营销主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cold-email-expert",
+        "role": "member",
+        "name": "邮件营销 标题撰写 转化优化",
+        "evidence": "original_assets/cold-email-expert/merkle_root",
+        "member_merkle_root": "458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc"
+      },
+      {
+        "slug": "new-product-npi-pro",
+        "role": "member",
+        "name": "新品导入 试产爬坡 顾问",
+        "evidence": "original_assets/new-product-npi-pro/merkle_root",
+        "member_merkle_root": "b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc"
+      },
+      {
+        "slug": "integration-test-env",
+        "role": "member",
+        "name": "集成测试环境 顾问",
+        "evidence": "original_assets/integration-test-env/merkle_root",
+        "member_merkle_root": "73d0ea615b2aea6ff59049a09cefedec2c93b141c84817e0609c53054656fd49"
+      }
+    ],
+    "team_lead": "cold-email-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "78aa2451c3f6a7a3",
+  "prompt_hash": "f865e9da8b2f00e9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-988\", \"kind\": \"team\", \"name\": \"邮件营销标题撰写专家\", \"description\": \"擅长场景识别、样件分级与爬坡曲线，覆盖新品导入全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cold-email-expert-team-lead\", \"role\": \"lead\", \"name\": \"邮件营销主理人\", \"evidence\": null}, {\"slug\": \"cold-email-expert\", \"role\": \"member\", \"name\": \"邮件营销 标题撰写 转化优化\", \"evidence\": \"original_assets/cold-email-expert/merkle_root\", \"member_merkle_root\": \"458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc\"}, {\"slug\": \"new-product-npi-pro\", \"role\": \"member\", \"name\": \"新品导入 试产爬坡 顾问\", \"evidence\": \"original_assets/new-product-npi-pro/merkle_root\", \"member_merkle_root\": \"b4cb01a32392d8c30d302dd8dc2bc4c221fdca98fa00bfcd6f8558904b2baecc\"}, {\"slug\": \"integration-test-env\", \"role\": \"member\", \"name\": \"集成测试环境 顾问\", \"evidence\": \"original_assets/integration-test-env/merkle_root\", \"member_merkle_root\": \"73d0ea615b2aea6ff59049a09cefedec2c93b141c84817e0609c53054656fd49\"}], \"team_lead\": \"cold-email-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cold-email-expert-team-lead.md": "22cb5d15f011d5f4c47930943da55086a9590e166ca6b1e7b7c1b80e145e018b",
+    "agents/cold-email-expert.md": "99219b25901e8ed5a0de8493dc653790fc6bec2de2a0d5cc39e82c6182f4cada",
+    "agents/integration-test-env.md": "9990f26ad7b6510a16275ef26982fd6d5ba5a2c2029fe24bdea8da683606ca16",
+    "agents/new-product-npi-pro.md": "c3e60f2b762b5a645f46329b18bda8e5791a2706cf3153a021ada4eab9deffd5",
+    "plugin.json": "efae1d92c2d1ce96e9d190654d3038ad142ccc334723341b5897ce307fbf27f6",
+    "settings.json": "3ac08b0561a81cfc114ad212fadb5969c5fb43942f5aab1b12d207f59d957181"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1043",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1043",
+    "kind": "team",
+    "name": "预警干预专家",
+    "description": "预警干预专家：围绕客户流失，覆盖行为信号／分级干预／归因访谈，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "churn-prevent-pro-team-lead",
+        "role": "lead",
+        "name": "客户流失主理人",
+        "evidence": null
+      },
+      {
+        "slug": "churn-prevent-pro",
+        "role": "member",
+        "name": "客户流失 预警干预 顾问",
+        "evidence": "original_assets/churn-prevent-pro/merkle_root",
+        "member_merkle_root": "5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58"
+      },
+      {
+        "slug": "partner-screen",
+        "role": "member",
+        "name": "合作方筛选 顾问",
+        "evidence": "original_assets/partner-screen/merkle_root",
+        "member_merkle_root": "00c3811508026f729ee2bfc9008786184fa0bcc84cc8179983b71292980bdd9f"
+      },
+      {
+        "slug": "customer-health",
+        "role": "member",
+        "name": "客户健康度 评估",
+        "evidence": "original_assets/customer-health/merkle_root",
+        "member_merkle_root": "279074f39c7f3a09d0cb04e8087eb10eb27e025c53cf5b7de69ea1c7d66dd753"
+      }
+    ],
+    "team_lead": "churn-prevent-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "112c68fa0f04b4ae",
+  "prompt_hash": "73bfbb901098ef1f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1043\", \"kind\": \"team\", \"name\": \"预警干预专家\", \"description\": \"预警干预专家：围绕客户流失，覆盖行为信号／分级干预／归因访谈，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"churn-prevent-pro-team-lead\", \"role\": \"lead\", \"name\": \"客户流失主理人\", \"evidence\": null}, {\"slug\": \"churn-prevent-pro\", \"role\": \"member\", \"name\": \"客户流失 预警干预 顾问\", \"evidence\": \"original_assets/churn-prevent-pro/merkle_root\", \"member_merkle_root\": \"5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58\"}, {\"slug\": \"partner-screen\", \"role\": \"member\", \"name\": \"合作方筛选 顾问\", \"evidence\": \"original_assets/partner-screen/merkle_root\", \"member_merkle_root\": \"00c3811508026f729ee2bfc9008786184fa0bcc84cc8179983b71292980bdd9f\"}, {\"slug\": \"customer-health\", \"role\": \"member\", \"name\": \"客户健康度 评估\", \"evidence\": \"original_assets/customer-health/merkle_root\", \"member_merkle_root\": \"279074f39c7f3a09d0cb04e8087eb10eb27e025c53cf5b7de69ea1c7d66dd753\"}], \"team_lead\": \"churn-prevent-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/churn-prevent-pro-team-lead.md": "7c4e200899b49ba9e011571bf2fa5dd01d80cd669c02e55c3a246abe30c3e149",
+    "agents/churn-prevent-pro.md": "29f146bb967775fba01f48b9101d85c96675e7af55b07aa52357d36aa3d56a46",
+    "agents/customer-health.md": "52b074ffc88813b97b421dc1c3cac8b1d341553bee3e52fb7becf59108274626",
+    "agents/partner-screen.md": "aceb5af76df1ac081ab6ab9e105e272fd8af00897321756772f4144d04bf2cd0",
+    "plugin.json": "c115b395de9a013adb87138c14bd7bb54b443b36395899a4ad36810d639e9ffb",
+    "settings.json": "b3594999141ad1abab514d1be360242985dcfcd15e438a7a63febb67e8cbe112"
+  }
+}

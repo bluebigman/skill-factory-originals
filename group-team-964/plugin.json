@@ -1,0 +1,126 @@
+{
+  "agentName": "newsletter-coach-team-lead",
+  "agents": [
+    "./agents/newsletter-coach-team-lead.md",
+    "./agents/newsletter-coach.md",
+    "./agents/content-repurpose.md",
+    "./agents/faq-build-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 订阅通讯",
+    "zh": "帮我处理订阅通讯"
+  },
+  "description": "newsletter-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 订阅通讯, covers 固定节奏 / 单一主题 / 价值前置, delivering structured results and actionable checklists.",
+    "zh": "常见问题库构建专家：围绕订阅通讯，覆盖固定节奏／单一主题／价值前置，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "newsletter-coach Team",
+    "zh": "常见问题库构建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "newsletter-coach-team-lead",
+      "name": {
+        "en": "订阅通讯主理人",
+        "zh": "订阅通讯主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/newsletter-coach.png",
+      "id": "newsletter-coach",
+      "name": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "profession": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-repurpose.png",
+      "id": "content-repurpose",
+      "name": {
+        "en": "content-repurpose",
+        "zh": "内容复用 一稿多用 顾问"
+      },
+      "profession": {
+        "en": "content-repurpose",
+        "zh": "内容复用 一稿多用 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/faq-build-pro.png",
+      "id": "faq-build-pro",
+      "name": {
+        "en": "faq-build-pro",
+        "zh": "常见问题库构建 助手"
+      },
+      "profession": {
+        "en": "faq-build-pro",
+        "zh": "常见问题库构建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-964",
+  "plugin": "group-team-964",
+  "profession": {
+    "en": "newsletter-coach Collaboration Team",
+    "zh": "常见问题库构建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 订阅通讯",
+      "zh": "帮我处理订阅通讯"
+    },
+    {
+      "en": "Plan 内容复用",
+      "zh": "帮我规划内容复用"
+    },
+    {
+      "en": "Review 常见问题库构建",
+      "zh": "帮我检查常见问题库构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "适合扫读",
+      "zh": "适合扫读"
+    },
+    {
+      "en": "退订简单",
+      "zh": "退订简单"
+    },
+    {
+      "en": "先定母题",
+      "zh": "先定母题"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "newsletter-coach-team-lead",
+    "memberAgents": [
+      "newsletter-coach",
+      "content-repurpose",
+      "faq-build-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

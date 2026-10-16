@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-888",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-888",
+    "kind": "team",
+    "name": "依赖许可证专家",
+    "description": "擅长全量清单、商用兼容与冲突处置，覆盖依赖许可证全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "dependency-license-team-lead",
+        "role": "lead",
+        "name": "依赖许可证主理人",
+        "evidence": null
+      },
+      {
+        "slug": "dependency-license",
+        "role": "member",
+        "name": "依赖许可证 核查",
+        "evidence": "original_assets/dependency-license/merkle_root",
+        "member_merkle_root": "db2818489580e633bf8fb06e0753c3d13625af066661a3d2125af973c77b0ac6"
+      },
+      {
+        "slug": "service-health-pro",
+        "role": "member",
+        "name": "服务健康 探活机制 顾问",
+        "evidence": "original_assets/service-health-pro/merkle_root",
+        "member_merkle_root": "3de5a97e7824daf9145972cd8e60507fb87899e8b59cf9f1b7c6cdc6d646aaf9"
+      },
+      {
+        "slug": "agent-conflict-resolve",
+        "role": "member",
+        "name": "冲突消解 优先级裁 顾问",
+        "evidence": "original_assets/agent-conflict-resolve/merkle_root",
+        "member_merkle_root": "97ac99ce9abe60f4d76848fad999a2617dbbeed7f69b487952a66c7262eb95b7"
+      }
+    ],
+    "team_lead": "dependency-license-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cbf7282f741eb348",
+  "prompt_hash": "f774c94a14beae3b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-888\", \"kind\": \"team\", \"name\": \"依赖许可证专家\", \"description\": \"擅长全量清单、商用兼容与冲突处置，覆盖依赖许可证全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"dependency-license-team-lead\", \"role\": \"lead\", \"name\": \"依赖许可证主理人\", \"evidence\": null}, {\"slug\": \"dependency-license\", \"role\": \"member\", \"name\": \"依赖许可证 核查\", \"evidence\": \"original_assets/dependency-license/merkle_root\", \"member_merkle_root\": \"db2818489580e633bf8fb06e0753c3d13625af066661a3d2125af973c77b0ac6\"}, {\"slug\": \"service-health-pro\", \"role\": \"member\", \"name\": \"服务健康 探活机制 顾问\", \"evidence\": \"original_assets/service-health-pro/merkle_root\", \"member_merkle_root\": \"3de5a97e7824daf9145972cd8e60507fb87899e8b59cf9f1b7c6cdc6d646aaf9\"}, {\"slug\": \"agent-conflict-resolve\", \"role\": \"member\", \"name\": \"冲突消解 优先级裁 顾问\", \"evidence\": \"original_assets/agent-conflict-resolve/merkle_root\", \"member_merkle_root\": \"97ac99ce9abe60f4d76848fad999a2617dbbeed7f69b487952a66c7262eb95b7\"}], \"team_lead\": \"dependency-license-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-conflict-resolve.md": "3dfa47c0beac6026793bec150d36588b208eae2be5f7d80b98df5234a8424f49",
+    "agents/dependency-license-team-lead.md": "38bd0d8c7650dbfc369d4b0f843349a87e1326b52d3531e12bddd90950c5262a",
+    "agents/dependency-license.md": "6759df7d1eb774865a5fe0491cd4d5488250bfe71983ec98afcbf06a80259a55",
+    "agents/service-health-pro.md": "1de977be89ddccb8632863d79f80665fcfb48a6e81aae01fc2ce94a30f7f70b7",
+    "plugin.json": "81b942496e32bbb0e020ca839e653c6c76e244d959a167b10abba0eb40393605",
+    "settings.json": "88ca0d72b31538b04e4ceaa65b6470b3b55f4723ab4d6f7ae2795a1ca0a611d2"
+  }
+}

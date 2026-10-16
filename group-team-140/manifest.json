@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-140",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-140",
+    "kind": "team",
+    "name": "回调 精度 缺陷 团队",
+    "description": "回调 精度 缺陷 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-link-delivery-expert-team-lead",
+        "role": "lead",
+        "name": "接口联调主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-link-delivery-expert",
+        "role": "member",
+        "name": "接口联调 回调投递 链路核验",
+        "evidence": "original_assets/api-link-delivery-expert/merkle_root",
+        "member_merkle_root": "4048abbe94c69dbbd2593e47ce8ba196b2a2f4c4c33fffcdbd89c524fd1c0442"
+      },
+      {
+        "slug": "api-integration-hygiene-expert",
+        "role": "member",
+        "name": "接口调试 精度 跳转 上传核验",
+        "evidence": "original_assets/api-integration-hygiene-expert/merkle_root",
+        "member_merkle_root": "55077177a6482cd55748bb9afa68c2721f534e5c93e445ab1b20e226f2e023a3"
+      },
+      {
+        "slug": "code-guard-pro",
+        "role": "member",
+        "name": "代码审查 缺陷定位 修复建议",
+        "evidence": "original_assets/code-guard-pro/merkle_root",
+        "member_merkle_root": "988116e06891f180e3613301252ac5ba252f44c01e2bcbb20d73d4f59ecea6d1"
+      }
+    ],
+    "team_lead": "api-link-delivery-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7cb6cd91e8cd0d62",
+  "prompt_hash": "6456c6d626c38dab",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-140\", \"kind\": \"team\", \"name\": \"回调 精度 缺陷 团队\", \"description\": \"回调 精度 缺陷 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-link-delivery-expert-team-lead\", \"role\": \"lead\", \"name\": \"接口联调主理人\", \"evidence\": null}, {\"slug\": \"api-link-delivery-expert\", \"role\": \"member\", \"name\": \"接口联调 回调投递 链路核验\", \"evidence\": \"original_assets/api-link-delivery-expert/merkle_root\", \"member_merkle_root\": \"4048abbe94c69dbbd2593e47ce8ba196b2a2f4c4c33fffcdbd89c524fd1c0442\"}, {\"slug\": \"api-integration-hygiene-expert\", \"role\": \"member\", \"name\": \"接口调试 精度 跳转 上传核验\", \"evidence\": \"original_assets/api-integration-hygiene-expert/merkle_root\", \"member_merkle_root\": \"55077177a6482cd55748bb9afa68c2721f534e5c93e445ab1b20e226f2e023a3\"}, {\"slug\": \"code-guard-pro\", \"role\": \"member\", \"name\": \"代码审查 缺陷定位 修复建议\", \"evidence\": \"original_assets/code-guard-pro/merkle_root\", \"member_merkle_root\": \"988116e06891f180e3613301252ac5ba252f44c01e2bcbb20d73d4f59ecea6d1\"}], \"team_lead\": \"api-link-delivery-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-integration-hygiene-expert.md": "e759465669151bb2b4c63f98a21d8b148b1fe593016fea6d114a768bb4b69952",
+    "agents/api-link-delivery-expert-team-lead.md": "fbb51d0628ba3cd45ef26b692391eaab22e639bef2cd226619205cf63dab2529",
+    "agents/api-link-delivery-expert.md": "e275fa05ce5e4f1286d94f9dce7f86cccae850daef61496faae6597d2573471c",
+    "agents/code-guard-pro.md": "d0dd90e4834c8d27f73c7cd4739dc0d003bf808e81b6fafdc1cdd7ab63e439ca",
+    "plugin.json": "e7acf176d4fb718813a10494bd1d889425b50dc80efa2577af93c911d0d1afc7",
+    "settings.json": "19a82a4d2a5a021ee6b615f1cd40a8ce3fb15ea5bc768dde4bbe6503f70326ff"
+  }
+}

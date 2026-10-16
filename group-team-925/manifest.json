@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-925",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-925",
+    "kind": "team",
+    "name": "预测结果校验顾问专家",
+    "description": "擅长区间输出、假设显式与定期回测，覆盖预测结果校验全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "forecast-sanity-team-lead",
+        "role": "lead",
+        "name": "预测结果校验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "forecast-sanity",
+        "role": "member",
+        "name": "预测结果校验 顾问",
+        "evidence": "original_assets/forecast-sanity/merkle_root",
+        "member_merkle_root": "6786273fea98195dce464384be579aa3eaa6729e012c5078f1ed9e7911a4ed6e"
+      },
+      {
+        "slug": "api-rate-govern",
+        "role": "member",
+        "name": "限流治理 配额分配 顾问",
+        "evidence": "original_assets/api-rate-govern/merkle_root",
+        "member_merkle_root": "9d64e671d16340e1702f788feb52fd7344f0b36eee2b08852bce8d9f94552b4a"
+      },
+      {
+        "slug": "survey-design-pro",
+        "role": "member",
+        "name": "问卷设计 顾问",
+        "evidence": "original_assets/survey-design-pro/merkle_root",
+        "member_merkle_root": "0d11003da96653253123379fa9aacff2e950d9aa071c7ebed89788b342279ca8"
+      }
+    ],
+    "team_lead": "forecast-sanity-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e721a317d8233768",
+  "prompt_hash": "81be78db5192e4e1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-925\", \"kind\": \"team\", \"name\": \"预测结果校验顾问专家\", \"description\": \"擅长区间输出、假设显式与定期回测，覆盖预测结果校验全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"forecast-sanity-team-lead\", \"role\": \"lead\", \"name\": \"预测结果校验主理人\", \"evidence\": null}, {\"slug\": \"forecast-sanity\", \"role\": \"member\", \"name\": \"预测结果校验 顾问\", \"evidence\": \"original_assets/forecast-sanity/merkle_root\", \"member_merkle_root\": \"6786273fea98195dce464384be579aa3eaa6729e012c5078f1ed9e7911a4ed6e\"}, {\"slug\": \"api-rate-govern\", \"role\": \"member\", \"name\": \"限流治理 配额分配 顾问\", \"evidence\": \"original_assets/api-rate-govern/merkle_root\", \"member_merkle_root\": \"9d64e671d16340e1702f788feb52fd7344f0b36eee2b08852bce8d9f94552b4a\"}, {\"slug\": \"survey-design-pro\", \"role\": \"member\", \"name\": \"问卷设计 顾问\", \"evidence\": \"original_assets/survey-design-pro/merkle_root\", \"member_merkle_root\": \"0d11003da96653253123379fa9aacff2e950d9aa071c7ebed89788b342279ca8\"}], \"team_lead\": \"forecast-sanity-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-rate-govern.md": "d6291bc0ee441c471c31ac8f12a1fe3d66430d621ff3a90a0c05a204b2d7f1d6",
+    "agents/forecast-sanity-team-lead.md": "959edf696eb37bbbc52f43135b5207c768efd014959a3b79151bee63658081cc",
+    "agents/forecast-sanity.md": "e08b0d39684c177049debc85241e9fde1a25c36b2ce983bce480db68c65c45f7",
+    "agents/survey-design-pro.md": "29eb43adccb250e32fd27ef226ece43dad958ecbc09a62b4d100739406c4feb3",
+    "plugin.json": "35c1963d83b2eec9f020f07e44232973a4509dab4409240bd95fd40e62805359",
+    "settings.json": "452638ac8e7ffeeb2fc12fe99e8c42151f7171c606682804300e6d8af7696436"
+  }
+}

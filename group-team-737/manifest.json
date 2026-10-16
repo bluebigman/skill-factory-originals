@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-737",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-737",
+    "kind": "team",
+    "name": "文档排版专家",
+    "description": "输入Mark相关需求，输出标题层级、列表一致、链接可用三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-craft-pro-team-lead",
+        "role": "lead",
+        "name": "文档排版撰写专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-craft-pro",
+        "role": "member",
+        "name": "文档排版撰写专家",
+        "evidence": "original_assets/doc-craft-pro/merkle_root",
+        "member_merkle_root": "e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18"
+      },
+      {
+        "slug": "markdown-standard-pro",
+        "role": "member",
+        "name": "Mark 规范 顾问",
+        "evidence": "original_assets/markdown-standard-pro/merkle_root",
+        "member_merkle_root": "53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1"
+      },
+      {
+        "slug": "media-process-pro",
+        "role": "member",
+        "name": "政务设计规范 一键成片",
+        "evidence": "original_assets/media-process-pro/merkle_root",
+        "member_merkle_root": "5dde9cc8493bd344606f88ef638a3415c90873663b772baa5235772596f0d25e"
+      }
+    ],
+    "team_lead": "doc-craft-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "56e2cd376455f4f1",
+  "prompt_hash": "8ae9ff4d8be81b1e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-737\", \"kind\": \"team\", \"name\": \"文档排版专家\", \"description\": \"输入Mark相关需求，输出标题层级、列表一致、链接可用三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-craft-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档排版撰写专家主理人\", \"evidence\": null}, {\"slug\": \"doc-craft-pro\", \"role\": \"member\", \"name\": \"文档排版撰写专家\", \"evidence\": \"original_assets/doc-craft-pro/merkle_root\", \"member_merkle_root\": \"e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18\"}, {\"slug\": \"markdown-standard-pro\", \"role\": \"member\", \"name\": \"Mark 规范 顾问\", \"evidence\": \"original_assets/markdown-standard-pro/merkle_root\", \"member_merkle_root\": \"53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1\"}, {\"slug\": \"media-process-pro\", \"role\": \"member\", \"name\": \"政务设计规范 一键成片\", \"evidence\": \"original_assets/media-process-pro/merkle_root\", \"member_merkle_root\": \"5dde9cc8493bd344606f88ef638a3415c90873663b772baa5235772596f0d25e\"}], \"team_lead\": \"doc-craft-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-craft-pro-team-lead.md": "f1cddc94ed25f0384b191ae3347dbd34b7393e89a4842396903613104d5c67a4",
+    "agents/doc-craft-pro.md": "2f14a0b2e2deefd92303b53425f4787e79c32f4ed712babdf702f2832c9d9675",
+    "agents/markdown-standard-pro.md": "9a19f42fd8e8ab36c8ed68fc5bc49d423300508d2424c80cf08bea2380ee68af",
+    "agents/media-process-pro.md": "9820338cf95c3069803c5c768b474912072b8f7f9eefb5454dab7d0559b25e64",
+    "plugin.json": "934ec0da1811dd5dce36b23972d32e66403f13a701c5ee13873d0c04d334b327",
+    "settings.json": "de379e6b6f58d1b66479c77adc3baefe29266c9ee393ca90b41807f558953d89"
+  }
+}

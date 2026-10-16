@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1048",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1048",
+    "kind": "team",
+    "name": "回滚安全性专家",
+    "description": "擅长数据兼容、脚本就绪与演练定期，覆盖回滚安全性全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "rollback-safety-team-lead",
+        "role": "lead",
+        "name": "回滚安全性主理人",
+        "evidence": null
+      },
+      {
+        "slug": "rollback-safety",
+        "role": "member",
+        "name": "回滚安全性 顾问",
+        "evidence": "original_assets/rollback-safety/merkle_root",
+        "member_merkle_root": "6cfa24419fde159caa4257bf9040beb646e8507ba1458f20e634cc4aa537af27"
+      },
+      {
+        "slug": "data-incident-review",
+        "role": "member",
+        "name": "数据事故复盘 顾问",
+        "evidence": "original_assets/data-incident-review/merkle_root",
+        "member_merkle_root": "3545b038c2665cfe9608cd07f0d30dd230953a098313e208b420f553d23d50c5"
+      },
+      {
+        "slug": "channel-partner-pro",
+        "role": "member",
+        "name": "渠道伙伴 管理机制 顾问",
+        "evidence": "original_assets/channel-partner-pro/merkle_root",
+        "member_merkle_root": "90bb7f4fbc0f6649077f913d61f10256638d3a9d71f43d38536e4262345f09f9"
+      }
+    ],
+    "team_lead": "rollback-safety-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ddc00fd5f3b10593",
+  "prompt_hash": "8e3813dad9036bec",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1048\", \"kind\": \"team\", \"name\": \"回滚安全性专家\", \"description\": \"擅长数据兼容、脚本就绪与演练定期，覆盖回滚安全性全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"rollback-safety-team-lead\", \"role\": \"lead\", \"name\": \"回滚安全性主理人\", \"evidence\": null}, {\"slug\": \"rollback-safety\", \"role\": \"member\", \"name\": \"回滚安全性 顾问\", \"evidence\": \"original_assets/rollback-safety/merkle_root\", \"member_merkle_root\": \"6cfa24419fde159caa4257bf9040beb646e8507ba1458f20e634cc4aa537af27\"}, {\"slug\": \"data-incident-review\", \"role\": \"member\", \"name\": \"数据事故复盘 顾问\", \"evidence\": \"original_assets/data-incident-review/merkle_root\", \"member_merkle_root\": \"3545b038c2665cfe9608cd07f0d30dd230953a098313e208b420f553d23d50c5\"}, {\"slug\": \"channel-partner-pro\", \"role\": \"member\", \"name\": \"渠道伙伴 管理机制 顾问\", \"evidence\": \"original_assets/channel-partner-pro/merkle_root\", \"member_merkle_root\": \"90bb7f4fbc0f6649077f913d61f10256638d3a9d71f43d38536e4262345f09f9\"}], \"team_lead\": \"rollback-safety-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/channel-partner-pro.md": "95cc50d0cf8698f60d29dc5ad7620de180b11b4074828fea6118aaae964ac584",
+    "agents/data-incident-review.md": "0b28a16c62dec21a7ea88e47c261caa841dc25abd7011994e8d5e52b40f0aa81",
+    "agents/rollback-safety-team-lead.md": "cd28505368f726c35f9d802e27d6cedcd7b44b0654e6b134b2808036ee0429d5",
+    "agents/rollback-safety.md": "4642d75deadc310b4b55ec08eb107384147e6498fd34bd42e134b794fdaef8de",
+    "plugin.json": "5d3f3a681c1cd7003f7b569d03437467c991ad9343a28ff70fc08e8e29a9df40",
+    "settings.json": "8998c276a6bb7617339307acce914417cfc23d4a81fc9371be184299c5eb55de"
+  }
+}

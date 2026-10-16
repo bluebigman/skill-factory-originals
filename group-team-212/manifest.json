@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-212",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-212",
+    "kind": "team",
+    "name": "敏感 接口 命令 团队",
+    "description": "敏感 接口 命令 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "config-compliance-check-pro-team-lead",
+        "role": "lead",
+        "name": "敏感标注主理人",
+        "evidence": null
+      },
+      {
+        "slug": "config-compliance-check-pro",
+        "role": "member",
+        "name": "敏感标注 缺省兜底 边界约束",
+        "evidence": "original_assets/config-compliance-check-pro/merkle_root",
+        "member_merkle_root": "f209130eee9cb80012524c8d1c2e82755461241fe84431dd87eeb7d686d4b7c5"
+      },
+      {
+        "slug": "api-perf-pro",
+        "role": "member",
+        "name": "接口响应 耗时定位 性能优化",
+        "evidence": "original_assets/api-perf-pro/merkle_root",
+        "member_merkle_root": "d4e481f379d8083bdfc252cba4faf86aa61452777b15278837c84cd8d713e168"
+      },
+      {
+        "slug": "cli-helper-expert",
+        "role": "member",
+        "name": "命令行助手 脚本生成",
+        "evidence": "original_assets/cli-helper-expert/merkle_root",
+        "member_merkle_root": "b5186bf2184ffc69b49138837cd5c5777b18dd17b963e4030e0106964c15635f"
+      }
+    ],
+    "team_lead": "config-compliance-check-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4fdd952284433239",
+  "prompt_hash": "a5e56a5197b38181",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-212\", \"kind\": \"team\", \"name\": \"敏感 接口 命令 团队\", \"description\": \"敏感 接口 命令 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"config-compliance-check-pro-team-lead\", \"role\": \"lead\", \"name\": \"敏感标注主理人\", \"evidence\": null}, {\"slug\": \"config-compliance-check-pro\", \"role\": \"member\", \"name\": \"敏感标注 缺省兜底 边界约束\", \"evidence\": \"original_assets/config-compliance-check-pro/merkle_root\", \"member_merkle_root\": \"f209130eee9cb80012524c8d1c2e82755461241fe84431dd87eeb7d686d4b7c5\"}, {\"slug\": \"api-perf-pro\", \"role\": \"member\", \"name\": \"接口响应 耗时定位 性能优化\", \"evidence\": \"original_assets/api-perf-pro/merkle_root\", \"member_merkle_root\": \"d4e481f379d8083bdfc252cba4faf86aa61452777b15278837c84cd8d713e168\"}, {\"slug\": \"cli-helper-expert\", \"role\": \"member\", \"name\": \"命令行助手 脚本生成\", \"evidence\": \"original_assets/cli-helper-expert/merkle_root\", \"member_merkle_root\": \"b5186bf2184ffc69b49138837cd5c5777b18dd17b963e4030e0106964c15635f\"}], \"team_lead\": \"config-compliance-check-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-perf-pro.md": "926c4b23d5fabb4051566eaa41e9ffb903aabd69a7021c0e67effaaa73c861b9",
+    "agents/cli-helper-expert.md": "85a64bf4f7358b80725abd156b62c827576d16f5f782343ca33d9d635aaf867f",
+    "agents/config-compliance-check-pro-team-lead.md": "172aa700abe5ef9ac8c95a6cef3a8696c680dd58b71a1c9653e599839df18382",
+    "agents/config-compliance-check-pro.md": "62c314f18e06cb5ea473eb6eff78df0ea0a92a272891a52b76a1b4eb9b1e0f21",
+    "plugin.json": "0d371435f0954b9ab42a77e5d07a6568bb2a3e39b24b4f5686601d04959fc7ee",
+    "settings.json": "8d70784635d5257f2d0bc25acb651fad793489fb67a5aa0b4bb984de6ada387b"
+  }
+}

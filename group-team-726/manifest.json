@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-726",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-726",
+    "kind": "team",
+    "name": "内容格式专家",
+    "description": "内容格式专家：围绕内容格式，覆盖文本净化／痕迹检测／金融论文，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "writing-toolkit-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "文本净化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "writing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "文本净化 自然化改写 格式校准",
+        "evidence": "original_assets/writing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "45f6debcd20b1de0881602df43c31167689299e5b2a185308302baa124923cca"
+      },
+      {
+        "slug": "marketing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "联盟配置审查 营销数据条款审查",
+        "evidence": "original_assets/marketing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1"
+      },
+      {
+        "slug": "doc-convert-pro-fixed",
+        "role": "member",
+        "name": "图片标准化 隐私转换 格式转换",
+        "evidence": "original_assets/doc-convert-pro-fixed/merkle_root",
+        "member_merkle_root": "ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1"
+      }
+    ],
+    "team_lead": "writing-toolkit-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b1d5318082240564",
+  "prompt_hash": "b97c78b263dc1b54",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-726\", \"kind\": \"team\", \"name\": \"内容格式专家\", \"description\": \"内容格式专家：围绕内容格式，覆盖文本净化／痕迹检测／金融论文，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"writing-toolkit-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"文本净化主理人\", \"evidence\": null}, {\"slug\": \"writing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"文本净化 自然化改写 格式校准\", \"evidence\": \"original_assets/writing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"45f6debcd20b1de0881602df43c31167689299e5b2a185308302baa124923cca\"}, {\"slug\": \"marketing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"联盟配置审查 营销数据条款审查\", \"evidence\": \"original_assets/marketing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1\"}, {\"slug\": \"doc-convert-pro-fixed\", \"role\": \"member\", \"name\": \"图片标准化 隐私转换 格式转换\", \"evidence\": \"original_assets/doc-convert-pro-fixed/merkle_root\", \"member_merkle_root\": \"ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1\"}], \"team_lead\": \"writing-toolkit-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-fixed.md": "ec47aecf3812bdeeee6d75a4fb99a213292acf34c375d49751cbf339cc6d4e85",
+    "agents/marketing-toolkit-pro-fixed.md": "7cbce7f74c9fe8093341b43088d9491a69d11f4a60dca126101536f22cd7dc19",
+    "agents/writing-toolkit-pro-fixed-team-lead.md": "5218712b039e16785e01bf9cac242a7b1f61df3abc36a76626d19d2d2604fc18",
+    "agents/writing-toolkit-pro-fixed.md": "bb19c033eb7c70c8a12346c3cc3a33ec053018e0693fe8d72d7e0a1012facca3",
+    "plugin.json": "eda27286f3fc993ff02186229986878b266992840df1abe5c2058b89d7b647b1",
+    "settings.json": "f46ff203b331bfc9b7003b04e78ce47076388a782223ac9dbaff42b519faefcc"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-660",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-660",
+    "kind": "team",
+    "name": "上手文档快速开始专家",
+    "description": "输入上手文档相关需求，输出环境前置、示例可跑、进阶索引三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "onboarding-doc-pro-team-lead",
+        "role": "lead",
+        "name": "上手文档主理人",
+        "evidence": null
+      },
+      {
+        "slug": "onboarding-doc-pro",
+        "role": "member",
+        "name": "上手文档 快速开始 顾问",
+        "evidence": "original_assets/onboarding-doc-pro/merkle_root",
+        "member_merkle_root": "797b8723680bbfd624a95cbc41b047668673e4ea7354ceb82f06f9f3d42708ec"
+      },
+      {
+        "slug": "objection-handle-pro",
+        "role": "member",
+        "name": "异议处理 应对准备 顾问",
+        "evidence": "original_assets/objection-handle-pro/merkle_root",
+        "member_merkle_root": "2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f"
+      },
+      {
+        "slug": "cross-border-listing-pro",
+        "role": "member",
+        "name": "跨境选品 上架合规 顾问",
+        "evidence": "original_assets/cross-border-listing-pro/merkle_root",
+        "member_merkle_root": "f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac"
+      }
+    ],
+    "team_lead": "onboarding-doc-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cfe1d5cda0cbf0a6",
+  "prompt_hash": "2a4ebf5dc5f46067",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-660\", \"kind\": \"team\", \"name\": \"上手文档快速开始专家\", \"description\": \"输入上手文档相关需求，输出环境前置、示例可跑、进阶索引三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"onboarding-doc-pro-team-lead\", \"role\": \"lead\", \"name\": \"上手文档主理人\", \"evidence\": null}, {\"slug\": \"onboarding-doc-pro\", \"role\": \"member\", \"name\": \"上手文档 快速开始 顾问\", \"evidence\": \"original_assets/onboarding-doc-pro/merkle_root\", \"member_merkle_root\": \"797b8723680bbfd624a95cbc41b047668673e4ea7354ceb82f06f9f3d42708ec\"}, {\"slug\": \"objection-handle-pro\", \"role\": \"member\", \"name\": \"异议处理 应对准备 顾问\", \"evidence\": \"original_assets/objection-handle-pro/merkle_root\", \"member_merkle_root\": \"2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f\"}, {\"slug\": \"cross-border-listing-pro\", \"role\": \"member\", \"name\": \"跨境选品 上架合规 顾问\", \"evidence\": \"original_assets/cross-border-listing-pro/merkle_root\", \"member_merkle_root\": \"f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac\"}], \"team_lead\": \"onboarding-doc-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-listing-pro.md": "e864c97f40bbaf63abc5bf189dbd7f173c7e5d89cfd02fd64a9914a4ee1e5746",
+    "agents/objection-handle-pro.md": "00960ec56f2e03df46448d42d418d1d422f876944623a717e5fe9a5a9f910540",
+    "agents/onboarding-doc-pro-team-lead.md": "cdf29248e5f972cdc1b8ef3ccb3f455883d25c0342219212e3daf38eff0f6e06",
+    "agents/onboarding-doc-pro.md": "bf112285170946fee54ef9ad2b72bc751b2624fc88583e6df92bcb6aa940f292",
+    "plugin.json": "48b6fe0edcbe275ae134166effa5f0178c67dc7b9a5f8f9196d691fa127d9293",
+    "settings.json": "6fd21e30a8b338987fc6bd766ab16e3e4dd90440a12a9d2c4eec3075e6ee4406"
+  }
+}

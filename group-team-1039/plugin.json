@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-merge-batch-team-lead",
+  "agents": [
+    "./agents/doc-merge-batch-team-lead.md",
+    "./agents/doc-merge-batch.md",
+    "./agents/brand-tone-guide.md",
+    "./agents/content-hook-craft.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 多文档合并",
+    "zh": "帮我处理多文档合并"
+  },
+  "description": "doc-merge-batch team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 多文档合并 end-to-end: 顺序明确, 样式统一 and 页码重排. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长顺序明确、样式统一与页码重排，覆盖多文档合并全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-merge-batch Team",
+    "zh": "多文档合并专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-merge-batch-team-lead",
+      "name": {
+        "en": "多文档合并主理人",
+        "zh": "多文档合并主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-merge-batch.png",
+      "id": "doc-merge-batch",
+      "name": {
+        "en": "doc-merge-batch",
+        "zh": "多文档合并 助手"
+      },
+      "profession": {
+        "en": "doc-merge-batch",
+        "zh": "多文档合并 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/brand-tone-guide.png",
+      "id": "brand-tone-guide",
+      "name": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "profession": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-hook-craft.png",
+      "id": "content-hook-craft",
+      "name": {
+        "en": "content-hook-craft",
+        "zh": "内容钩子设计 顾问"
+      },
+      "profession": {
+        "en": "content-hook-craft",
+        "zh": "内容钩子设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1039",
+  "plugin": "group-team-1039",
+  "profession": {
+    "en": "doc-merge-batch Collaboration Team",
+    "zh": "多文档合并专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 多文档合并",
+      "zh": "帮我处理多文档合并"
+    },
+    {
+      "en": "Plan 品牌语气指南",
+      "zh": "帮我规划品牌语气指南"
+    },
+    {
+      "en": "Review 内容钩子设计",
+      "zh": "帮我检查内容钩子设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "顺序明确",
+      "zh": "顺序明确"
+    },
+    {
+      "en": "样式统一",
+      "zh": "样式统一"
+    },
+    {
+      "en": "页码重排",
+      "zh": "页码重排"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-merge-batch-team-lead",
+    "memberAgents": [
+      "doc-merge-batch",
+      "brand-tone-guide",
+      "content-hook-craft"
+    ]
+  },
+  "version": "1.0.0"
+}

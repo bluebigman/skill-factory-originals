@@ -1,0 +1,126 @@
+{
+  "agentName": "finance-toolkit-pro-fixed-team-lead",
+  "agents": [
+    "./agents/finance-toolkit-pro-fixed-team-lead.md",
+    "./agents/finance-toolkit-pro-fixed.md",
+    "./agents/industrial-service-pro.md",
+    "./agents/export-doc-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 财务文本",
+    "zh": "帮我处理财务文本"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 工业服务, covers 服务分级 / 时限明确 / 备件前置, delivering structured results and actionable checklists.",
+    "zh": "财务文本定投测算专家：围绕工业服务，覆盖服务分级／时限明确／备件前置，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "财务文本定投测算专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "finance-toolkit-pro-fixed-team-lead",
+      "name": {
+        "en": "财务文本主理人",
+        "zh": "财务文本主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/finance-toolkit-pro-fixed.png",
+      "id": "finance-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/industrial-service-pro.png",
+      "id": "industrial-service-pro",
+      "name": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "profession": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/export-doc-check.png",
+      "id": "export-doc-check",
+      "name": {
+        "en": "export-doc-check",
+        "zh": "出口单据 一致性 顾问"
+      },
+      "profession": {
+        "en": "export-doc-check",
+        "zh": "出口单据 一致性 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1055",
+  "plugin": "group-team-1055",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "财务文本定投测算专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 财务文本",
+      "zh": "帮我处理财务文本"
+    },
+    {
+      "en": "Plan 工业服务",
+      "zh": "帮我规划工业服务"
+    },
+    {
+      "en": "Review 出口单据",
+      "zh": "帮我检查出口单据"
+    }
+  ],
+  "tags": [
+    {
+      "en": "金额提取",
+      "zh": "金额提取"
+    },
+    {
+      "en": "基金体检",
+      "zh": "基金体检"
+    },
+    {
+      "en": "持仓穿透",
+      "zh": "持仓穿透"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "finance-toolkit-pro-fixed-team-lead",
+    "memberAgents": [
+      "finance-toolkit-pro-fixed",
+      "industrial-service-pro",
+      "export-doc-check"
+    ]
+  },
+  "version": "1.0.0"
+}

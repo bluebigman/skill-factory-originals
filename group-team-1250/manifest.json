@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1250",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1250",
+    "kind": "team",
+    "name": "事故复盘专家",
+    "description": "事故复盘专家：围绕事故复盘，覆盖无责复盘／根因到底／闭环跟踪，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "incident-postmortem-pro-team-lead",
+        "role": "lead",
+        "name": "事故复盘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "incident-postmortem-pro",
+        "role": "member",
+        "name": "事故复盘 根因分析 顾问",
+        "evidence": "original_assets/incident-postmortem-pro/merkle_root",
+        "member_merkle_root": "19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1"
+      },
+      {
+        "slug": "project-planning-expert",
+        "role": "member",
+        "name": "项目管理排期专家",
+        "evidence": "original_assets/project-planning-expert/merkle_root",
+        "member_merkle_root": "a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9"
+      },
+      {
+        "slug": "requirement-trace",
+        "role": "member",
+        "name": "需求追踪建表 助手",
+        "evidence": "original_assets/requirement-trace/merkle_root",
+        "member_merkle_root": "d3f9c845837caab08754d40f34cd8415c0b0c067544e79f7618a8e7ee09c06d0"
+      }
+    ],
+    "team_lead": "incident-postmortem-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f11461e331c98300",
+  "prompt_hash": "0bf274b1fef53bd4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1250\", \"kind\": \"team\", \"name\": \"事故复盘专家\", \"description\": \"事故复盘专家：围绕事故复盘，覆盖无责复盘／根因到底／闭环跟踪，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"incident-postmortem-pro-team-lead\", \"role\": \"lead\", \"name\": \"事故复盘主理人\", \"evidence\": null}, {\"slug\": \"incident-postmortem-pro\", \"role\": \"member\", \"name\": \"事故复盘 根因分析 顾问\", \"evidence\": \"original_assets/incident-postmortem-pro/merkle_root\", \"member_merkle_root\": \"19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1\"}, {\"slug\": \"project-planning-expert\", \"role\": \"member\", \"name\": \"项目管理排期专家\", \"evidence\": \"original_assets/project-planning-expert/merkle_root\", \"member_merkle_root\": \"a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9\"}, {\"slug\": \"requirement-trace\", \"role\": \"member\", \"name\": \"需求追踪建表 助手\", \"evidence\": \"original_assets/requirement-trace/merkle_root\", \"member_merkle_root\": \"d3f9c845837caab08754d40f34cd8415c0b0c067544e79f7618a8e7ee09c06d0\"}], \"team_lead\": \"incident-postmortem-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/incident-postmortem-pro-team-lead.md": "b292435a8b751423337858f5d4597c78c4fdffdf7cbd3041a11e35f9487f84df",
+    "agents/incident-postmortem-pro.md": "5bb09edebfabf9460a233e7089bf36b70f01335c05be9b6db572c2d1944b9ef1",
+    "agents/project-planning-expert.md": "f826a0427b8e5f8a4ad196a6a5abfc3541026c006eae2043b535b1554b142c99",
+    "agents/requirement-trace.md": "7f7fedadc62428ce15b05a3ba59db34c3edd33e0778bdd7705c7239c92dc0f5b",
+    "plugin.json": "c07524738cc94a6f3d019dfe152e5a0ebed1517dea2461678c6bacb6cf787680",
+    "settings.json": "686f7aa9ab0b7b5600d7ce32e62e723175e49c8e18dc9d37a2f5a16d616b36b6"
+  }
+}

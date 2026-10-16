@@ -1,0 +1,126 @@
+{
+  "agentName": "marketing-toolkit-pro-fixed-team-lead",
+  "agents": [
+    "./agents/marketing-toolkit-pro-fixed-team-lead.md",
+    "./agents/marketing-toolkit-pro-fixed.md",
+    "./agents/audio-clip-expert.md",
+    "./agents/wechat-content-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 联盟配置审查",
+    "zh": "帮我处理联盟配置审查"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 联盟配置审查 end-to-end: 字幕生成, 排版规范 and 发布包交付. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长字幕生成、排版规范与发布包交付，覆盖联盟配置审查全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "联盟配置审查专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "marketing-toolkit-pro-fixed-team-lead",
+      "name": {
+        "en": "联盟配置审查主理人",
+        "zh": "联盟配置审查主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/marketing-toolkit-pro-fixed.png",
+      "id": "marketing-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audio-clip-expert.png",
+      "id": "audio-clip-expert",
+      "name": {
+        "en": "AudioClip",
+        "zh": "音频剪辑专家"
+      },
+      "profession": {
+        "en": "AudioClip",
+        "zh": "音频剪辑与播客后期制作专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/wechat-content-expert.png",
+      "id": "wechat-content-expert",
+      "name": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "profession": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1258",
+  "plugin": "group-team-1258",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "联盟配置审查专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 联盟配置审查",
+      "zh": "帮我处理联盟配置审查"
+    },
+    {
+      "en": "Plan 音频剪辑与播客后期制作专家",
+      "zh": "帮我规划音频剪辑与播客后期制作专家"
+    },
+    {
+      "en": "Review 号手",
+      "zh": "帮我检查号手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分销核对",
+      "zh": "分销核对"
+    },
+    {
+      "en": "扩展巡检",
+      "zh": "扩展巡检"
+    },
+    {
+      "en": "博客发布",
+      "zh": "博客发布"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "marketing-toolkit-pro-fixed-team-lead",
+    "memberAgents": [
+      "marketing-toolkit-pro-fixed",
+      "audio-clip-expert",
+      "wechat-content-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

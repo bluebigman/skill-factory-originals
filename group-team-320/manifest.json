@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-320",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-320",
+    "kind": "team",
+    "name": "性能瓶颈专家",
+    "description": "输入性能瓶颈相关需求，输出回归验证、探活标准、快速失败三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "perf-bottleneck-pro-team-lead",
+        "role": "lead",
+        "name": "性能瓶颈主理人",
+        "evidence": null
+      },
+      {
+        "slug": "perf-bottleneck-pro",
+        "role": "member",
+        "name": "性能瓶颈 链路分析 顾问",
+        "evidence": "original_assets/perf-bottleneck-pro/merkle_root",
+        "member_merkle_root": "0528aeef667ca3fd38a30fbfa2bc5d21375eeb8621e5ce1e0714e249bfa12a65"
+      },
+      {
+        "slug": "service-health-pro",
+        "role": "member",
+        "name": "服务健康 探活机制 顾问",
+        "evidence": "original_assets/service-health-pro/merkle_root",
+        "member_merkle_root": "3de5a97e7824daf9145972cd8e60507fb87899e8b59cf9f1b7c6cdc6d646aaf9"
+      },
+      {
+        "slug": "agent-concurrency-pro",
+        "role": "member",
+        "name": "并发控制 锁策略 顾问",
+        "evidence": "original_assets/agent-concurrency-pro/merkle_root",
+        "member_merkle_root": "f2734f18a3ea1817136ba1e50a36582d9f8d7ceda100a56e658f4885972c5dd4"
+      }
+    ],
+    "team_lead": "perf-bottleneck-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "23bec06cf291e421",
+  "prompt_hash": "12cbe23b9a4ca5fb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-320\", \"kind\": \"team\", \"name\": \"性能瓶颈专家\", \"description\": \"输入性能瓶颈相关需求，输出回归验证、探活标准、快速失败三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"perf-bottleneck-pro-team-lead\", \"role\": \"lead\", \"name\": \"性能瓶颈主理人\", \"evidence\": null}, {\"slug\": \"perf-bottleneck-pro\", \"role\": \"member\", \"name\": \"性能瓶颈 链路分析 顾问\", \"evidence\": \"original_assets/perf-bottleneck-pro/merkle_root\", \"member_merkle_root\": \"0528aeef667ca3fd38a30fbfa2bc5d21375eeb8621e5ce1e0714e249bfa12a65\"}, {\"slug\": \"service-health-pro\", \"role\": \"member\", \"name\": \"服务健康 探活机制 顾问\", \"evidence\": \"original_assets/service-health-pro/merkle_root\", \"member_merkle_root\": \"3de5a97e7824daf9145972cd8e60507fb87899e8b59cf9f1b7c6cdc6d646aaf9\"}, {\"slug\": \"agent-concurrency-pro\", \"role\": \"member\", \"name\": \"并发控制 锁策略 顾问\", \"evidence\": \"original_assets/agent-concurrency-pro/merkle_root\", \"member_merkle_root\": \"f2734f18a3ea1817136ba1e50a36582d9f8d7ceda100a56e658f4885972c5dd4\"}], \"team_lead\": \"perf-bottleneck-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-concurrency-pro.md": "d51d4267f55a97934a3b6dd19ab3b17efffc9156bed4a13ffa2f581532f5ae2c",
+    "agents/perf-bottleneck-pro-team-lead.md": "a6595b4a5f12ee455198c2b749cdc9cecf8b119e68679ce8132f29a7b2f07aed",
+    "agents/perf-bottleneck-pro.md": "ed67bf45ed0f9d10e474f58ec75f8187182ea71f70d0c780c7932f786e477c2c",
+    "agents/service-health-pro.md": "dc4943eea46efe8176b8a07c487f9ccd0c128fdc91101a4c8e9801d8ef6f6f73",
+    "plugin.json": "d0cfab1932bf749eef32d17ce53672591bf6065d366e5731d1110eb0f9d2706e",
+    "settings.json": "71e19be70dc6330053a5bb9c1b4d2e03cd76aa150ff303af67d55a2088a57625"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-300",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-300",
+    "kind": "team",
+    "name": "运维 工程 与数 团队",
+    "description": "运维 工程 与数 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-value-pro-team-lead",
+        "role": "lead",
+        "name": "运维配置体检与规范化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-value-pro",
+        "role": "member",
+        "name": "运维配置体检与规范化",
+        "evidence": "original_assets/ops-value-pro/merkle_root",
+        "member_merkle_root": "bea9de17f59b54c8bdabdf57523e677a87c0c304c7af4cdc399e1310142a17b1"
+      },
+      {
+        "slug": "java-code-pro",
+        "role": "member",
+        "name": "Java 工程工具",
+        "evidence": "original_assets/java-code-pro/merkle_root",
+        "member_merkle_root": "0b5d03c9eb4d06cbd35d6c185457ae9d1d4516ee5d337f7ee009465950c14c22"
+      },
+      {
+        "slug": "java-sql-pro",
+        "role": "member",
+        "name": "Java与SQL开发助手",
+        "evidence": "original_assets/java-sql-pro/merkle_root",
+        "member_merkle_root": "ec02162537a8954a009af64b91550cb922c41e2b12c2a98268d3c069ac6ed0c8"
+      }
+    ],
+    "team_lead": "ops-value-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6b17d9100d5992e2",
+  "prompt_hash": "df4a388aeae0afb3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-300\", \"kind\": \"team\", \"name\": \"运维 工程 与数 团队\", \"description\": \"运维 工程 与数 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-value-pro-team-lead\", \"role\": \"lead\", \"name\": \"运维配置体检与规范化主理人\", \"evidence\": null}, {\"slug\": \"ops-value-pro\", \"role\": \"member\", \"name\": \"运维配置体检与规范化\", \"evidence\": \"original_assets/ops-value-pro/merkle_root\", \"member_merkle_root\": \"bea9de17f59b54c8bdabdf57523e677a87c0c304c7af4cdc399e1310142a17b1\"}, {\"slug\": \"java-code-pro\", \"role\": \"member\", \"name\": \"Java 工程工具\", \"evidence\": \"original_assets/java-code-pro/merkle_root\", \"member_merkle_root\": \"0b5d03c9eb4d06cbd35d6c185457ae9d1d4516ee5d337f7ee009465950c14c22\"}, {\"slug\": \"java-sql-pro\", \"role\": \"member\", \"name\": \"Java与SQL开发助手\", \"evidence\": \"original_assets/java-sql-pro/merkle_root\", \"member_merkle_root\": \"ec02162537a8954a009af64b91550cb922c41e2b12c2a98268d3c069ac6ed0c8\"}], \"team_lead\": \"ops-value-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/java-code-pro.md": "141f1820ffe5d99cd428c43d4dd3ff8a3f8ad5f6deea1af938c99e472877fbfa",
+    "agents/java-sql-pro.md": "25fc7ad32b71de28e3df331fe89617f64097403df268300410da1402547c4002",
+    "agents/ops-value-pro-team-lead.md": "d8d525ecf58b8302a11227bc7b6f7bbeb3bcc9e37b2d3dcc43f5a0d7b45ceb0d",
+    "agents/ops-value-pro.md": "f548744f04d909fa24e500572066ec63390886703e30b74b763c973a16607748",
+    "plugin.json": "00bc70fe958abb06d09b3c64bb764ac9800300942b09b3091bb5c465e6fd196b",
+    "settings.json": "718c1366c03c59f6099c26acb4cfea245a137cfbb64f3a4b459a96143cdf1b9e"
+  }
+}

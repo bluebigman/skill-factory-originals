@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-localization-pro-team-lead",
+  "agents": [
+    "./agents/doc-localization-pro-team-lead.md",
+    "./agents/doc-localization-pro.md",
+    "./agents/naming-candidate.md",
+    "./agents/tone-adaptation.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档本地",
+    "zh": "帮我处理文档本地"
+  },
+  "description": "doc-localization-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 文档本地, covers 语境适配 / 格式保留 / 文化适配, delivering structured results and actionable checklists.",
+    "zh": "文档本地术语统一专家：围绕文档本地，覆盖语境适配／格式保留／文化适配，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "doc-localization-pro Team",
+    "zh": "文档本地术语统一专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-localization-pro-team-lead",
+      "name": {
+        "en": "文档本地主理人",
+        "zh": "文档本地主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-localization-pro.png",
+      "id": "doc-localization-pro",
+      "name": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "profession": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/naming-candidate.png",
+      "id": "naming-candidate",
+      "name": {
+        "en": "naming-candidate",
+        "zh": "命名候选生成 顾问"
+      },
+      "profession": {
+        "en": "naming-candidate",
+        "zh": "命名候选生成 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tone-adaptation.png",
+      "id": "tone-adaptation",
+      "name": {
+        "en": "tone-adaptation",
+        "zh": "语气适配改写 助手"
+      },
+      "profession": {
+        "en": "tone-adaptation",
+        "zh": "语气适配改写 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1205",
+  "plugin": "group-team-1205",
+  "profession": {
+    "en": "doc-localization-pro Collaboration Team",
+    "zh": "文档本地术语统一专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档本地",
+      "zh": "帮我处理文档本地"
+    },
+    {
+      "en": "Plan 命名候选生成",
+      "zh": "帮我规划命名候选生成"
+    },
+    {
+      "en": "Review 语气适配改写",
+      "zh": "帮我检查语气适配改写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "术语表",
+      "zh": "术语表"
+    },
+    {
+      "en": "语境适配",
+      "zh": "语境适配"
+    },
+    {
+      "en": "格式保留",
+      "zh": "格式保留"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-localization-pro-team-lead",
+    "memberAgents": [
+      "doc-localization-pro",
+      "naming-candidate",
+      "tone-adaptation"
+    ]
+  },
+  "version": "1.0.0"
+}

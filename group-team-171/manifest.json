@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-171",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-171",
+    "kind": "team",
+    "name": "数据 分析 知识 库生 团队",
+    "description": "数据 分析 知识 库生 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-workflow-expert-team-lead",
+        "role": "lead",
+        "name": "数据分析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-workflow-expert",
+        "role": "member",
+        "name": "数据分析 指标拆解",
+        "evidence": "original_assets/data-workflow-expert/merkle_root",
+        "member_merkle_root": "3f3dd56cfe9693f860f8407b65eb2ca7025b196c5559bce23fa90327e059e316"
+      },
+      {
+        "slug": "kb-entry-organizer-pro",
+        "role": "member",
+        "name": "知识条目 去重合并 标签归类",
+        "evidence": "original_assets/kb-entry-organizer-pro/merkle_root",
+        "member_merkle_root": "2bc29ead93dfe2780b3a4469b7d82e5cee80e41170b87238216c581e18e839db"
+      },
+      {
+        "slug": "sql-toolkit-pro-02",
+        "role": "member",
+        "name": "SQL生成编辑 查询构建器",
+        "evidence": "original_assets/sql-toolkit-pro-02/merkle_root",
+        "member_merkle_root": "e56f34f85889335ad8bf5908376e9b49c27cf3f1afef1f520c6f19ea74e3a88b"
+      }
+    ],
+    "team_lead": "data-workflow-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "22a35f184ad94aeb",
+  "prompt_hash": "3e82d903b9e1b34d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-171\", \"kind\": \"team\", \"name\": \"数据 分析 知识 库生 团队\", \"description\": \"数据 分析 知识 库生 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-workflow-expert-team-lead\", \"role\": \"lead\", \"name\": \"数据分析主理人\", \"evidence\": null}, {\"slug\": \"data-workflow-expert\", \"role\": \"member\", \"name\": \"数据分析 指标拆解\", \"evidence\": \"original_assets/data-workflow-expert/merkle_root\", \"member_merkle_root\": \"3f3dd56cfe9693f860f8407b65eb2ca7025b196c5559bce23fa90327e059e316\"}, {\"slug\": \"kb-entry-organizer-pro\", \"role\": \"member\", \"name\": \"知识条目 去重合并 标签归类\", \"evidence\": \"original_assets/kb-entry-organizer-pro/merkle_root\", \"member_merkle_root\": \"2bc29ead93dfe2780b3a4469b7d82e5cee80e41170b87238216c581e18e839db\"}, {\"slug\": \"sql-toolkit-pro-02\", \"role\": \"member\", \"name\": \"SQL生成编辑 查询构建器\", \"evidence\": \"original_assets/sql-toolkit-pro-02/merkle_root\", \"member_merkle_root\": \"e56f34f85889335ad8bf5908376e9b49c27cf3f1afef1f520c6f19ea74e3a88b\"}], \"team_lead\": \"data-workflow-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-workflow-expert-team-lead.md": "a81440eb2a29f72d6490e1bc8bf4d0a6908e1d8f24b079a01ddbff59e5b2aea5",
+    "agents/data-workflow-expert.md": "258955f060bc69f3457752448c2496bb1a1b4265f57ca18b1f02edbf2aab659a",
+    "agents/kb-entry-organizer-pro.md": "1b5889bc39bcda00b2bc0689aefa2361a41c24072e5cc4ee36824dcf7f056dc5",
+    "agents/sql-toolkit-pro-02.md": "f9196beac498fb80c598172276d6b1a9a741abe3c011ae9666c9500fca740b85",
+    "plugin.json": "bdb2160be33cda019cacc7f31d910e49f8335b1dd21152df5c1106216957d269",
+    "settings.json": "b0a57baa180499ac62c39270e2c2e0d9021629b657c3f19417b373322122385c"
+  }
+}

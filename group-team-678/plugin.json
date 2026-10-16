@@ -1,0 +1,126 @@
+{
+  "agentName": "objection-handle-pro-team-lead",
+  "agents": [
+    "./agents/objection-handle-pro-team-lead.md",
+    "./agents/objection-handle-pro.md",
+    "./agents/renewal-playbook.md",
+    "./agents/global-pricing-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 异议处理",
+    "zh": "帮我处理异议处理"
+  },
+  "description": "objection-handle-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 异议处理 requirements, output three deliverables: 提前启动, 价值回顾, 风险早识. Verifiable end-to-end, evidence per step.",
+    "zh": "输入异议处理相关需求，输出提前启动、价值回顾、风险早识三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "objection-handle-pro Team",
+    "zh": "异议处理应对准备专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "objection-handle-pro-team-lead",
+      "name": {
+        "en": "异议处理主理人",
+        "zh": "异议处理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/objection-handle-pro.png",
+      "id": "objection-handle-pro",
+      "name": {
+        "en": "objection-handle-pro",
+        "zh": "异议处理 应对准备 顾问"
+      },
+      "profession": {
+        "en": "objection-handle-pro",
+        "zh": "异议处理 应对准备 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/renewal-playbook.png",
+      "id": "renewal-playbook",
+      "name": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "profession": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-pricing-pro.png",
+      "id": "global-pricing-pro",
+      "name": {
+        "en": "global-pricing-pro",
+        "zh": "全球定价 区域差异 顾问"
+      },
+      "profession": {
+        "en": "global-pricing-pro",
+        "zh": "全球定价 区域差异 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-678",
+  "plugin": "group-team-678",
+  "profession": {
+    "en": "objection-handle-pro Collaboration Team",
+    "zh": "异议处理应对准备专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 异议处理",
+      "zh": "帮我处理异议处理"
+    },
+    {
+      "en": "Plan 续约管理",
+      "zh": "帮我规划续约管理"
+    },
+    {
+      "en": "Review 全球定价",
+      "zh": "帮我检查全球定价"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先认同",
+      "zh": "先认同"
+    },
+    {
+      "en": "追问澄清",
+      "zh": "追问澄清"
+    },
+    {
+      "en": "证据回应",
+      "zh": "证据回应"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "objection-handle-pro-team-lead",
+    "memberAgents": [
+      "objection-handle-pro",
+      "renewal-playbook",
+      "global-pricing-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

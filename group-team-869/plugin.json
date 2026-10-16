@@ -1,0 +1,126 @@
+{
+  "agentName": "global-content-calendar-team-lead",
+  "agents": [
+    "./agents/global-content-calendar-team-lead.md",
+    "./agents/global-content-calendar.md",
+    "./agents/microcopy-coach.md",
+    "./agents/copy-hook-craft.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 全球内容",
+    "zh": "帮我处理全球内容"
+  },
+  "description": "global-content-calendar team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 全球内容, covers 节庆对齐 / 按区发布 / 素材分级, delivering structured results and actionable checklists.",
+    "zh": "文案钩子打磨专家：围绕全球内容，覆盖节庆对齐／按区发布／素材分级，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "global-content-calendar Team",
+    "zh": "文案钩子打磨专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "global-content-calendar-team-lead",
+      "name": {
+        "en": "全球内容主理人",
+        "zh": "全球内容主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/global-content-calendar.png",
+      "id": "global-content-calendar",
+      "name": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "profession": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/microcopy-coach.png",
+      "id": "microcopy-coach",
+      "name": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "profession": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/copy-hook-craft.png",
+      "id": "copy-hook-craft",
+      "name": {
+        "en": "copy-hook-craft",
+        "zh": "文案钩子打磨 顾问"
+      },
+      "profession": {
+        "en": "copy-hook-craft",
+        "zh": "文案钩子打磨 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-869",
+  "plugin": "group-team-869",
+  "profession": {
+    "en": "global-content-calendar Collaboration Team",
+    "zh": "文案钩子打磨专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 全球内容",
+      "zh": "帮我处理全球内容"
+    },
+    {
+      "en": "Plan 界面文案",
+      "zh": "帮我规划界面文案"
+    },
+    {
+      "en": "Review 文案钩子打磨",
+      "zh": "帮我检查文案钩子打磨"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按区发布",
+      "zh": "按区发布"
+    },
+    {
+      "en": "素材分级",
+      "zh": "素材分级"
+    },
+    {
+      "en": "一次多产",
+      "zh": "一次多产"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "global-content-calendar-team-lead",
+    "memberAgents": [
+      "global-content-calendar",
+      "microcopy-coach",
+      "copy-hook-craft"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "product-roadmap-pro-team-lead",
+  "agents": [
+    "./agents/product-roadmap-pro-team-lead.md",
+    "./agents/product-roadmap-pro.md",
+    "./agents/error-message-pro.md",
+    "./agents/handoff-design-dev.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 产品路线",
+    "zh": "帮我处理产品路线"
+  },
+  "description": "product-roadmap-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "产品 错误 设计 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "product-roadmap-pro Team",
+    "zh": "产品 错误 设计 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "product-roadmap-pro-team-lead",
+      "name": {
+        "en": "产品路线主理人",
+        "zh": "产品路线主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/product-roadmap-pro.png",
+      "id": "product-roadmap-pro",
+      "name": {
+        "en": "product-roadmap-pro",
+        "zh": "产品路线 优先级 顾问"
+      },
+      "profession": {
+        "en": "product-roadmap-pro",
+        "zh": "产品路线 优先级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/error-message-pro.png",
+      "id": "error-message-pro",
+      "name": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "profession": {
+        "en": "error-message-pro",
+        "zh": "错误提示 文案设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/handoff-design-dev.png",
+      "id": "handoff-design-dev",
+      "name": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "profession": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-270",
+  "plugin": "group-team-270",
+  "profession": {
+    "en": "product-roadmap-pro Collaboration Team",
+    "zh": "产品 错误 设计 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 产品路线",
+      "zh": "帮我处理产品路线"
+    },
+    {
+      "en": "Plan 错误提示",
+      "zh": "帮我规划错误提示"
+    },
+    {
+      "en": "Review 设计交付",
+      "zh": "帮我检查设计交付"
+    }
+  ],
+  "tags": [
+    {
+      "en": "产品路线",
+      "zh": "产品路线"
+    },
+    {
+      "en": "错误提示",
+      "zh": "错误提示"
+    },
+    {
+      "en": "设计交付",
+      "zh": "设计交付"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "product-roadmap-pro-team-lead",
+    "memberAgents": [
+      "product-roadmap-pro",
+      "error-message-pro",
+      "handoff-design-dev"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-07-fixed-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-07-fixed-team-lead.md",
+    "./agents/data-clean-pro-07-fixed.md",
+    "./agents/data-clean-pro-04.md",
+    "./agents/data-clean-pro-02.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 随机检索",
+    "zh": "帮我处理随机检索"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "随机 数据 医疗 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "随机 数据 医疗 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-07-fixed-team-lead",
+      "name": {
+        "en": "随机检索主理人",
+        "zh": "随机检索主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-07-fixed.png",
+      "id": "data-clean-pro-07-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "随机检索 结构化输出 置信标注"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "随机检索 结构化输出 置信标注"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-04.png",
+      "id": "data-clean-pro-04",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-02.png",
+      "id": "data-clean-pro-02",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-187",
+  "plugin": "group-team-187",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "随机 数据 医疗 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 随机检索",
+      "zh": "帮我处理随机检索"
+    },
+    {
+      "en": "Plan 数据整理",
+      "zh": "帮我规划数据整理"
+    },
+    {
+      "en": "Review 医疗行政",
+      "zh": "帮我检查医疗行政"
+    }
+  ],
+  "tags": [
+    {
+      "en": "随机检索",
+      "zh": "随机检索"
+    },
+    {
+      "en": "数据整理",
+      "zh": "数据整理"
+    },
+    {
+      "en": "医疗行政",
+      "zh": "医疗行政"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-07-fixed-team-lead",
+    "memberAgents": [
+      "data-clean-pro-07-fixed",
+      "data-clean-pro-04",
+      "data-clean-pro-02"
+    ]
+  },
+  "version": "1.0.0"
+}

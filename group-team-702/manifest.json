@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-702",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-702",
+    "kind": "team",
+    "name": "达人筛选匹配评估专家",
+    "description": "擅长调性匹配、数据校验与小单试投，覆盖达人筛选全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "kol-selection-pro-team-lead",
+        "role": "lead",
+        "name": "达人筛选主理人",
+        "evidence": null
+      },
+      {
+        "slug": "kol-selection-pro",
+        "role": "member",
+        "name": "达人筛选 匹配评估 顾问",
+        "evidence": "original_assets/kol-selection-pro/merkle_root",
+        "member_merkle_root": "2b3468f0435208beff7ae7229862b5b5b0e052dec0ad8b93a995cb00df5ef18c"
+      },
+      {
+        "slug": "doc-localization-pro",
+        "role": "member",
+        "name": "文档本地 术语统一 顾问",
+        "evidence": "original_assets/doc-localization-pro/merkle_root",
+        "member_merkle_root": "dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd"
+      },
+      {
+        "slug": "ui-visual-forge-expert",
+        "role": "member",
+        "name": "界面设计 组件美化 视觉产出",
+        "evidence": "original_assets/ui-visual-forge-expert/merkle_root",
+        "member_merkle_root": "e4c930a09c3a96ad42334dbde9c801fc4e3b159a0d2c03951c194f9980f589ed"
+      }
+    ],
+    "team_lead": "kol-selection-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b948a05545783e46",
+  "prompt_hash": "88379a200f8e9aa7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-702\", \"kind\": \"team\", \"name\": \"达人筛选匹配评估专家\", \"description\": \"擅长调性匹配、数据校验与小单试投，覆盖达人筛选全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"kol-selection-pro-team-lead\", \"role\": \"lead\", \"name\": \"达人筛选主理人\", \"evidence\": null}, {\"slug\": \"kol-selection-pro\", \"role\": \"member\", \"name\": \"达人筛选 匹配评估 顾问\", \"evidence\": \"original_assets/kol-selection-pro/merkle_root\", \"member_merkle_root\": \"2b3468f0435208beff7ae7229862b5b5b0e052dec0ad8b93a995cb00df5ef18c\"}, {\"slug\": \"doc-localization-pro\", \"role\": \"member\", \"name\": \"文档本地 术语统一 顾问\", \"evidence\": \"original_assets/doc-localization-pro/merkle_root\", \"member_merkle_root\": \"dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd\"}, {\"slug\": \"ui-visual-forge-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化 视觉产出\", \"evidence\": \"original_assets/ui-visual-forge-expert/merkle_root\", \"member_merkle_root\": \"e4c930a09c3a96ad42334dbde9c801fc4e3b159a0d2c03951c194f9980f589ed\"}], \"team_lead\": \"kol-selection-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-localization-pro.md": "aee97fde0c6e99d66e1c16e6bf5601ba95c02be5a1eb6f5f54402a5a896cbd6c",
+    "agents/kol-selection-pro-team-lead.md": "8f559467601c433113f926fd2d4abf3f340b5480e6fe58e981315a5854dc3120",
+    "agents/kol-selection-pro.md": "82e252625bface121ac60eb10c69466623286958ba8d8ed1612825668b20296b",
+    "agents/ui-visual-forge-expert.md": "b41d46b882863d1f602c69646f14f0ae66209fdb71ccd42ea16c00f09ce012d8",
+    "plugin.json": "7b1700795916d504ff1275a16b15d60e2187e882a6ed391792fc5c1065f35665",
+    "settings.json": "d53498416925cf028d87c59e39002b85ac118796fd430c9ffbbc6eb36e64058d"
+  }
+}

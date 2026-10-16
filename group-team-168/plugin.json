@@ -1,0 +1,126 @@
+{
+  "agentName": "brand-tone-coach-team-lead",
+  "agents": [
+    "./agents/brand-tone-coach-team-lead.md",
+    "./agents/brand-tone-coach.md",
+    "./agents/channel-evaluate.md",
+    "./agents/campaign-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 品牌调性",
+    "zh": "帮我处理品牌调性"
+  },
+  "description": "Brand Tone Coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "品牌 渠道 活动 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Brand Tone Coach Team",
+    "zh": "品牌 渠道 活动 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "brand-tone-coach-team-lead",
+      "name": {
+        "en": "品牌调性主理人",
+        "zh": "品牌调性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/brand-tone-coach.png",
+      "id": "brand-tone-coach",
+      "name": {
+        "en": "Brand Tone Coach",
+        "zh": "品牌调性 表达统一 教练"
+      },
+      "profession": {
+        "en": "Brand Tone Coach",
+        "zh": "品牌调性 表达统一 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/channel-evaluate.png",
+      "id": "channel-evaluate",
+      "name": {
+        "en": "Channel Evaluate",
+        "zh": "渠道评估 ROI 顾问"
+      },
+      "profession": {
+        "en": "Channel Evaluate",
+        "zh": "渠道评估 ROI 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/campaign-review.png",
+      "id": "campaign-review",
+      "name": {
+        "en": "Campaign Review",
+        "zh": "活动复盘 数据归因 顾问"
+      },
+      "profession": {
+        "en": "Campaign Review",
+        "zh": "活动复盘 数据归因 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-168",
+  "plugin": "group-team-168",
+  "profession": {
+    "en": "Brand Tone Coach Collaboration Team",
+    "zh": "品牌 渠道 活动 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 品牌调性",
+      "zh": "帮我处理品牌调性"
+    },
+    {
+      "en": "Plan 渠道评估",
+      "zh": "帮我规划渠道评估"
+    },
+    {
+      "en": "Review 活动复盘",
+      "zh": "帮我检查活动复盘"
+    }
+  ],
+  "tags": [
+    {
+      "en": "品牌调性",
+      "zh": "品牌调性"
+    },
+    {
+      "en": "渠道评估",
+      "zh": "渠道评估"
+    },
+    {
+      "en": "活动复盘",
+      "zh": "活动复盘"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "brand-tone-coach-team-lead",
+    "memberAgents": [
+      "brand-tone-coach",
+      "channel-evaluate",
+      "campaign-review"
+    ]
+  },
+  "version": "1.0.0"
+}

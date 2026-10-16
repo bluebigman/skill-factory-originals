@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-identity-manage-team-lead",
+  "agents": [
+    "./agents/agent-identity-manage-team-lead.md",
+    "./agents/agent-identity-manage.md",
+    "./agents/agent-data-boundary.md",
+    "./agents/agent-input-sanitize.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 身份管理",
+    "zh": "帮我处理身份管理"
+  },
+  "description": "agent-identity-manage team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 身份管理 requirements, output three deliverables: 身份唯一, 凭据轮换, 最小暴露. Verifiable end-to-end, evidence per step.",
+    "zh": "输入身份管理相关需求，输出身份唯一、凭据轮换、最小暴露三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-identity-manage Team",
+    "zh": "身份管理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-identity-manage-team-lead",
+      "name": {
+        "en": "身份管理主理人",
+        "zh": "身份管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-identity-manage.png",
+      "id": "agent-identity-manage",
+      "name": {
+        "en": "agent-identity-manage",
+        "zh": "身份管理 凭据轮换 顾问"
+      },
+      "profession": {
+        "en": "agent-identity-manage",
+        "zh": "身份管理 凭据轮换 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-data-boundary.png",
+      "id": "agent-data-boundary",
+      "name": {
+        "en": "agent-data-boundary",
+        "zh": "数据边界 范围控制 顾问"
+      },
+      "profession": {
+        "en": "agent-data-boundary",
+        "zh": "数据边界 范围控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-input-sanitize.png",
+      "id": "agent-input-sanitize",
+      "name": {
+        "en": "agent-input-sanitize",
+        "zh": "输入净化 注入防护 顾问"
+      },
+      "profession": {
+        "en": "agent-input-sanitize",
+        "zh": "输入净化 注入防护 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-283",
+  "plugin": "group-team-283",
+  "profession": {
+    "en": "agent-identity-manage Collaboration Team",
+    "zh": "身份管理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 身份管理",
+      "zh": "帮我处理身份管理"
+    },
+    {
+      "en": "Plan 数据边界",
+      "zh": "帮我规划数据边界"
+    },
+    {
+      "en": "Review 输入净化",
+      "zh": "帮我检查输入净化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "身份唯一",
+      "zh": "身份唯一"
+    },
+    {
+      "en": "凭据轮换",
+      "zh": "凭据轮换"
+    },
+    {
+      "en": "最小暴露",
+      "zh": "最小暴露"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-identity-manage-team-lead",
+    "memberAgents": [
+      "agent-identity-manage",
+      "agent-data-boundary",
+      "agent-input-sanitize"
+    ]
+  },
+  "version": "1.0.0"
+}

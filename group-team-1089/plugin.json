@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-perf-budget-team-lead",
+  "agents": [
+    "./agents/agent-perf-budget-team-lead.md",
+    "./agents/agent-perf-budget.md",
+    "./agents/data-pipeline-pro-01-fixed.md",
+    "./agents/agent-output-verify-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 性能预算",
+    "zh": "帮我处理性能预算"
+  },
+  "description": "agent-perf-budget team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 性能预算 requirements, output three deliverables: 预算预设, 优化排序, 回归基线. Verifiable end-to-end, evidence per step.",
+    "zh": "输入性能预算相关需求，输出预算预设、优化排序、回归基线三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-perf-budget Team",
+    "zh": "性能预算限额专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-perf-budget-team-lead",
+      "name": {
+        "en": "性能预算主理人",
+        "zh": "性能预算主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-perf-budget.png",
+      "id": "agent-perf-budget",
+      "name": {
+        "en": "agent-perf-budget",
+        "zh": "性能预算 限额 顾问"
+      },
+      "profession": {
+        "en": "agent-perf-budget",
+        "zh": "性能预算 限额 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro-01-fixed.png",
+      "id": "data-pipeline-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-pro.png",
+      "id": "agent-output-verify-pro",
+      "name": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1089",
+  "plugin": "group-team-1089",
+  "profession": {
+    "en": "agent-perf-budget Collaboration Team",
+    "zh": "性能预算限额专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 性能预算",
+      "zh": "帮我处理性能预算"
+    },
+    {
+      "en": "Plan R包数据转换",
+      "zh": "帮我规划R包数据转换"
+    },
+    {
+      "en": "Review 输出验证",
+      "zh": "帮我检查输出验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "预算预设",
+      "zh": "预算预设"
+    },
+    {
+      "en": "优化排序",
+      "zh": "优化排序"
+    },
+    {
+      "en": "回归基线",
+      "zh": "回归基线"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-perf-budget-team-lead",
+    "memberAgents": [
+      "agent-perf-budget",
+      "data-pipeline-pro-01-fixed",
+      "agent-output-verify-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

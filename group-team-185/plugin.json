@@ -1,0 +1,126 @@
+{
+  "agentName": "polish-translate-expert-team-lead",
+  "agents": [
+    "./agents/polish-translate-expert-team-lead.md",
+    "./agents/polish-translate-expert.md",
+    "./agents/ui-visual-forge-expert.md",
+    "./agents/wechat-content-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 润语",
+    "zh": "帮我处理润语"
+  },
+  "description": "Lingua team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "润语 界面 号手 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Lingua Team",
+    "zh": "润语 界面 号手 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "polish-translate-expert-team-lead",
+      "name": {
+        "en": "润语主理人",
+        "zh": "润语主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/polish-translate-expert.png",
+      "id": "polish-translate-expert",
+      "name": {
+        "en": "Lingua",
+        "zh": "润语 文本润色 文案优化"
+      },
+      "profession": {
+        "en": "Lingua",
+        "zh": "润语 文本润色 文案优化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-visual-forge-expert.png",
+      "id": "ui-visual-forge-expert",
+      "name": {
+        "en": "UI Visual Forge Expert",
+        "zh": "界面设计 组件美化 视觉产出"
+      },
+      "profession": {
+        "en": "UI Visual Forge Expert",
+        "zh": "界面设计 组件美化 视觉产出"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/wechat-content-expert.png",
+      "id": "wechat-content-expert",
+      "name": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "profession": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-185",
+  "plugin": "group-team-185",
+  "profession": {
+    "en": "Lingua Collaboration Team",
+    "zh": "润语 界面 号手 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 润语",
+      "zh": "帮我处理润语"
+    },
+    {
+      "en": "Plan 界面设计",
+      "zh": "帮我规划界面设计"
+    },
+    {
+      "en": "Review 号手",
+      "zh": "帮我检查号手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "润语",
+      "zh": "润语"
+    },
+    {
+      "en": "界面设计",
+      "zh": "界面设计"
+    },
+    {
+      "en": "号手",
+      "zh": "号手"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "polish-translate-expert-team-lead",
+    "memberAgents": [
+      "polish-translate-expert",
+      "ui-visual-forge-expert",
+      "wechat-content-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

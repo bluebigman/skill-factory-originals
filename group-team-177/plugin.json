@@ -1,0 +1,126 @@
+{
+  "agentName": "mp-title-coach-team-lead",
+  "agents": [
+    "./agents/mp-title-coach-team-lead.md",
+    "./agents/mp-title-coach.md",
+    "./agents/seo-article-pro.md",
+    "./agents/promotion-planning-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 公众号标题",
+    "zh": "帮我处理公众号标题"
+  },
+  "description": "Mp Title Coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "公众号 搜索 促销 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "Mp Title Coach Team",
+    "zh": "公众号 搜索 促销 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "mp-title-coach-team-lead",
+      "name": {
+        "en": "公众号标题主理人",
+        "zh": "公众号标题主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/mp-title-coach.png",
+      "id": "mp-title-coach",
+      "name": {
+        "en": "Mp Title Coach",
+        "zh": "公众号标题 拟写打磨 顾问"
+      },
+      "profession": {
+        "en": "Mp Title Coach",
+        "zh": "公众号标题 拟写打磨 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/seo-article-pro.png",
+      "id": "seo-article-pro",
+      "name": {
+        "en": "SEO Article Pro",
+        "zh": "搜索排名 关键词布局 转化率"
+      },
+      "profession": {
+        "en": "SEO Article Pro",
+        "zh": "SEO文章 关键词布局 搜索意图"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/promotion-planning-pro.png",
+      "id": "promotion-planning-pro",
+      "name": {
+        "en": "Promotion Planning Pro",
+        "zh": "促销活动 优惠 方案"
+      },
+      "profession": {
+        "en": "Promotion Planning Pro",
+        "zh": "促销活动 方案设计 效果预估"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-177",
+  "plugin": "group-team-177",
+  "profession": {
+    "en": "Mp Title Coach Collaboration Team",
+    "zh": "公众号 搜索 促销 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 公众号标题",
+      "zh": "帮我处理公众号标题"
+    },
+    {
+      "en": "Plan SEO文章",
+      "zh": "帮我规划SEO文章"
+    },
+    {
+      "en": "Review 促销活动",
+      "zh": "帮我检查促销活动"
+    }
+  ],
+  "tags": [
+    {
+      "en": "公众号标题",
+      "zh": "公众号标题"
+    },
+    {
+      "en": "SEO文章",
+      "zh": "SEO文章"
+    },
+    {
+      "en": "促销活动",
+      "zh": "促销活动"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "mp-title-coach-team-lead",
+    "memberAgents": [
+      "mp-title-coach",
+      "seo-article-pro",
+      "promotion-planning-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

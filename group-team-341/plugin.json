@@ -1,0 +1,126 @@
+{
+  "agentName": "data-mask-pro-team-lead",
+  "agents": [
+    "./agents/data-mask-pro-team-lead.md",
+    "./agents/data-mask-pro.md",
+    "./agents/agent-hallucination-guard.md",
+    "./agents/influencer-compliance.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 数据脱敏",
+    "zh": "帮我处理数据脱敏"
+  },
+  "description": "data-mask-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据脱敏 requirements, output three deliverables: 置信分层, 明确标识, 数据可溯. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据脱敏相关需求，输出置信分层、明确标识、数据可溯三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "data-mask-pro Team",
+    "zh": "数据脱敏规则配置专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-mask-pro-team-lead",
+      "name": {
+        "en": "数据脱敏主理人",
+        "zh": "数据脱敏主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-mask-pro.png",
+      "id": "data-mask-pro",
+      "name": {
+        "en": "data-mask-pro",
+        "zh": "数据脱敏 规则配置 顾问"
+      },
+      "profession": {
+        "en": "data-mask-pro",
+        "zh": "数据脱敏 规则配置 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-hallucination-guard.png",
+      "id": "agent-hallucination-guard",
+      "name": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "profession": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/influencer-compliance.png",
+      "id": "influencer-compliance",
+      "name": {
+        "en": "influencer-compliance",
+        "zh": "推广合规 标识规范 顾问"
+      },
+      "profession": {
+        "en": "influencer-compliance",
+        "zh": "推广合规 标识规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-341",
+  "plugin": "group-team-341",
+  "profession": {
+    "en": "data-mask-pro Collaboration Team",
+    "zh": "数据脱敏规则配置专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据脱敏",
+      "zh": "帮我处理数据脱敏"
+    },
+    {
+      "en": "Plan 幻觉拦截",
+      "zh": "帮我规划幻觉拦截"
+    },
+    {
+      "en": "Review 推广合规",
+      "zh": "帮我检查推广合规"
+    }
+  ],
+  "tags": [
+    {
+      "en": "可用优先",
+      "zh": "可用优先"
+    },
+    {
+      "en": "可逆控制",
+      "zh": "可逆控制"
+    },
+    {
+      "en": "全链路",
+      "zh": "全链路"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-mask-pro-team-lead",
+    "memberAgents": [
+      "data-mask-pro",
+      "agent-hallucination-guard",
+      "influencer-compliance"
+    ]
+  },
+  "version": "1.0.0"
+}

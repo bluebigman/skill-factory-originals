@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1086",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1086",
+    "kind": "team",
+    "name": "知识贡献机制专家",
+    "description": "输入知识贡献机制相关需求，输出评审轻量、署名留痕、激励可见三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-contribution-team-lead",
+        "role": "lead",
+        "name": "知识贡献机制主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-contribution",
+        "role": "member",
+        "name": "知识贡献机制 顾问",
+        "evidence": "original_assets/knowledge-contribution/merkle_root",
+        "member_merkle_root": "274b52c310ea40383f56bd9f420a7688dab37b5c065f8f19c149b3519ebf8498"
+      },
+      {
+        "slug": "cross-border-listing-pro",
+        "role": "member",
+        "name": "跨境选品 上架合规 顾问",
+        "evidence": "original_assets/cross-border-listing-pro/merkle_root",
+        "member_merkle_root": "f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac"
+      },
+      {
+        "slug": "doc-figure-table-num",
+        "role": "member",
+        "name": "图表编号管理 助手",
+        "evidence": "original_assets/doc-figure-table-num/merkle_root",
+        "member_merkle_root": "d56b74e8e3ba958e05a36121aa547e63158ab3f10c680822f2424c5ee005518c"
+      }
+    ],
+    "team_lead": "knowledge-contribution-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6bbf10c14842c98f",
+  "prompt_hash": "1ad10b6cf72f18c4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1086\", \"kind\": \"team\", \"name\": \"知识贡献机制专家\", \"description\": \"输入知识贡献机制相关需求，输出评审轻量、署名留痕、激励可见三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-contribution-team-lead\", \"role\": \"lead\", \"name\": \"知识贡献机制主理人\", \"evidence\": null}, {\"slug\": \"knowledge-contribution\", \"role\": \"member\", \"name\": \"知识贡献机制 顾问\", \"evidence\": \"original_assets/knowledge-contribution/merkle_root\", \"member_merkle_root\": \"274b52c310ea40383f56bd9f420a7688dab37b5c065f8f19c149b3519ebf8498\"}, {\"slug\": \"cross-border-listing-pro\", \"role\": \"member\", \"name\": \"跨境选品 上架合规 顾问\", \"evidence\": \"original_assets/cross-border-listing-pro/merkle_root\", \"member_merkle_root\": \"f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac\"}, {\"slug\": \"doc-figure-table-num\", \"role\": \"member\", \"name\": \"图表编号管理 助手\", \"evidence\": \"original_assets/doc-figure-table-num/merkle_root\", \"member_merkle_root\": \"d56b74e8e3ba958e05a36121aa547e63158ab3f10c680822f2424c5ee005518c\"}], \"team_lead\": \"knowledge-contribution-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-listing-pro.md": "55872dc873903a024f07aead58bff426796a342adc8e48629273796c24ed4340",
+    "agents/doc-figure-table-num.md": "90ae48c21bade6bc9a7551bf200403b8cb41c600198d8e5e6f97d835b8122d6d",
+    "agents/knowledge-contribution-team-lead.md": "46392ced4e34d704b552600b12eb940c25e86e18940de93bca4655570f5317e0",
+    "agents/knowledge-contribution.md": "15e6308844a13ea97e9ff4971860790fe1988af2c82392c2c8d8643f31deff38",
+    "plugin.json": "e49b23fbeb188d7f6c7278c6e0441696c2d9c6292d65a195fed2092f5f278694",
+    "settings.json": "d5312df20fb2eeacb9dffc09faf5dcf5e8d9fd264f754d8cf8aa4ac8581262f5"
+  }
+}

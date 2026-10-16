@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-996",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-996",
+    "kind": "team",
+    "name": "连锁标准制定专家",
+    "description": "输入连锁标准制定相关需求，输出标准统一、培训体系、督导机制三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "franchise-standard-team-lead",
+        "role": "lead",
+        "name": "连锁标准制定主理人",
+        "evidence": null
+      },
+      {
+        "slug": "franchise-standard",
+        "role": "member",
+        "name": "连锁标准制定 顾问",
+        "evidence": "original_assets/franchise-standard/merkle_root",
+        "member_merkle_root": "ab056da894b22137abcbb8af198bd823e69ba8be80e17b4fb060f909dc42e176"
+      },
+      {
+        "slug": "agriculture-plan",
+        "role": "member",
+        "name": "农事计划编制 顾问",
+        "evidence": "original_assets/agriculture-plan/merkle_root",
+        "member_merkle_root": "07dc27c0f79f3da35f364a14a6d576b31645d9be93459fca0a9a0796c7d97159"
+      },
+      {
+        "slug": "intl-standards-map",
+        "role": "member",
+        "name": "国际标准 对照梳理 顾问",
+        "evidence": "original_assets/intl-standards-map/merkle_root",
+        "member_merkle_root": "be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89"
+      }
+    ],
+    "team_lead": "franchise-standard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "51bc469c365a420a",
+  "prompt_hash": "1395830d31072621",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-996\", \"kind\": \"team\", \"name\": \"连锁标准制定专家\", \"description\": \"输入连锁标准制定相关需求，输出标准统一、培训体系、督导机制三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"franchise-standard-team-lead\", \"role\": \"lead\", \"name\": \"连锁标准制定主理人\", \"evidence\": null}, {\"slug\": \"franchise-standard\", \"role\": \"member\", \"name\": \"连锁标准制定 顾问\", \"evidence\": \"original_assets/franchise-standard/merkle_root\", \"member_merkle_root\": \"ab056da894b22137abcbb8af198bd823e69ba8be80e17b4fb060f909dc42e176\"}, {\"slug\": \"agriculture-plan\", \"role\": \"member\", \"name\": \"农事计划编制 顾问\", \"evidence\": \"original_assets/agriculture-plan/merkle_root\", \"member_merkle_root\": \"07dc27c0f79f3da35f364a14a6d576b31645d9be93459fca0a9a0796c7d97159\"}, {\"slug\": \"intl-standards-map\", \"role\": \"member\", \"name\": \"国际标准 对照梳理 顾问\", \"evidence\": \"original_assets/intl-standards-map/merkle_root\", \"member_merkle_root\": \"be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89\"}], \"team_lead\": \"franchise-standard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agriculture-plan.md": "fd6c25e6380283b03f83fd7bd5179e8aab57becdc3f38e6ed73a9aaa357fe990",
+    "agents/franchise-standard-team-lead.md": "05de78f2b0510b010a1d73c9a82c63c40c58981901591598a069c16fa4ad66f7",
+    "agents/franchise-standard.md": "324f815d1b92e2f3611422e52324ca672028ead830a8ba2e3006827832f366c4",
+    "agents/intl-standards-map.md": "c71461c3caf7b6e844ae58e73b6dc3a37baeff2898a9a51dd140d9ebbc3c0c82",
+    "plugin.json": "4fea74822e76d469a65354d8e4ecaac5d0785c2c89007fb3ce6e0efbeb636119",
+    "settings.json": "313013c71f15acefcf6a7287387f8aba14492a81e5ce83517dce7a8535af08a8"
+  }
+}

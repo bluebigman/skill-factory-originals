@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1027",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1027",
+    "kind": "team",
+    "name": "数据叙事撰写专家",
+    "description": "擅长结论先行、一图一义与标注关键，覆盖数据叙事撰写全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-narrative-team-lead",
+        "role": "lead",
+        "name": "数据叙事撰写主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-narrative",
+        "role": "member",
+        "name": "数据叙事撰写 顾问",
+        "evidence": "original_assets/report-narrative/merkle_root",
+        "member_merkle_root": "4d698d6f6b1fcf035f9188960016cee56c857492b07672a07e88cf5f8d2c0cdd"
+      },
+      {
+        "slug": "batch-data-validate",
+        "role": "member",
+        "name": "批量数据校验 助手",
+        "evidence": "original_assets/batch-data-validate/merkle_root",
+        "member_merkle_root": "80a37cd96340e06758935396de79dd96eefe09dc62f9c3921045f634f23e3278"
+      },
+      {
+        "slug": "data-access-request",
+        "role": "member",
+        "name": "数据取用流程 顾问",
+        "evidence": "original_assets/data-access-request/merkle_root",
+        "member_merkle_root": "f6a868431831ecf17ed8a232f00c26fd2f1579cc133eed4f081c0c556e0601f8"
+      }
+    ],
+    "team_lead": "report-narrative-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "92693c6239f5fa09",
+  "prompt_hash": "13bd41c42a2db392",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1027\", \"kind\": \"team\", \"name\": \"数据叙事撰写专家\", \"description\": \"擅长结论先行、一图一义与标注关键，覆盖数据叙事撰写全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-narrative-team-lead\", \"role\": \"lead\", \"name\": \"数据叙事撰写主理人\", \"evidence\": null}, {\"slug\": \"report-narrative\", \"role\": \"member\", \"name\": \"数据叙事撰写 顾问\", \"evidence\": \"original_assets/report-narrative/merkle_root\", \"member_merkle_root\": \"4d698d6f6b1fcf035f9188960016cee56c857492b07672a07e88cf5f8d2c0cdd\"}, {\"slug\": \"batch-data-validate\", \"role\": \"member\", \"name\": \"批量数据校验 助手\", \"evidence\": \"original_assets/batch-data-validate/merkle_root\", \"member_merkle_root\": \"80a37cd96340e06758935396de79dd96eefe09dc62f9c3921045f634f23e3278\"}, {\"slug\": \"data-access-request\", \"role\": \"member\", \"name\": \"数据取用流程 顾问\", \"evidence\": \"original_assets/data-access-request/merkle_root\", \"member_merkle_root\": \"f6a868431831ecf17ed8a232f00c26fd2f1579cc133eed4f081c0c556e0601f8\"}], \"team_lead\": \"report-narrative-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/batch-data-validate.md": "1666e9c2570013060f3c0da1cdbf03237e23804c0c2b462bda5bb09f3fe15c83",
+    "agents/data-access-request.md": "ce21d6bde5179f5a430d01cdfde9b87407e6a9b6202de4c3aeb099bec6ed4128",
+    "agents/report-narrative-team-lead.md": "3174ca1a1e645ed41dbcbff831abdbed8480bb653aaf2b3364e00542ec89fca4",
+    "agents/report-narrative.md": "f4609d89a0301c200f0f42434852a802b3977d73c9c79286b26b8fcb55db5e15",
+    "plugin.json": "4cf82f646a94bcca0fcb48c414899ff5bb7eecf32d0fa9054146db03ccc26843",
+    "settings.json": "a21d752f37bbd41b98b04eab0ac0542b36451c6d4fca1482c639105d3ce5e546"
+  }
+}

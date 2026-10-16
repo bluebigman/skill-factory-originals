@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-776",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-776",
+    "kind": "team",
+    "name": "表格合并专家",
+    "description": "擅长字段映射、冲突策略与行数核对，覆盖表格合并全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "table-merge-pro-team-lead",
+        "role": "lead",
+        "name": "表格合并主理人",
+        "evidence": null
+      },
+      {
+        "slug": "table-merge-pro",
+        "role": "member",
+        "name": "表格合并 多表对齐 顾问",
+        "evidence": "original_assets/table-merge-pro/merkle_root",
+        "member_merkle_root": "93613c351e8332ceb8715d178483ec750e082e49821a3e8827629b01b79a6d3b"
+      },
+      {
+        "slug": "agent-sandbox-policy",
+        "role": "member",
+        "name": "沙箱策略 隔离边界 顾问",
+        "evidence": "original_assets/agent-sandbox-policy/merkle_root",
+        "member_merkle_root": "a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e"
+      },
+      {
+        "slug": "agent-toolkit-pro-03",
+        "role": "member",
+        "name": "技能编排 技能组合 开发辅助",
+        "evidence": "original_assets/agent-toolkit-pro-03/merkle_root",
+        "member_merkle_root": "0759ce15c667a4de5be429b703071b9f16827935fad82b26be999f434a809152"
+      }
+    ],
+    "team_lead": "table-merge-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6a855f6ece6e89ba",
+  "prompt_hash": "65ca735e65d5df9f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-776\", \"kind\": \"team\", \"name\": \"表格合并专家\", \"description\": \"擅长字段映射、冲突策略与行数核对，覆盖表格合并全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"table-merge-pro-team-lead\", \"role\": \"lead\", \"name\": \"表格合并主理人\", \"evidence\": null}, {\"slug\": \"table-merge-pro\", \"role\": \"member\", \"name\": \"表格合并 多表对齐 顾问\", \"evidence\": \"original_assets/table-merge-pro/merkle_root\", \"member_merkle_root\": \"93613c351e8332ceb8715d178483ec750e082e49821a3e8827629b01b79a6d3b\"}, {\"slug\": \"agent-sandbox-policy\", \"role\": \"member\", \"name\": \"沙箱策略 隔离边界 顾问\", \"evidence\": \"original_assets/agent-sandbox-policy/merkle_root\", \"member_merkle_root\": \"a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e\"}, {\"slug\": \"agent-toolkit-pro-03\", \"role\": \"member\", \"name\": \"技能编排 技能组合 开发辅助\", \"evidence\": \"original_assets/agent-toolkit-pro-03/merkle_root\", \"member_merkle_root\": \"0759ce15c667a4de5be429b703071b9f16827935fad82b26be999f434a809152\"}], \"team_lead\": \"table-merge-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-sandbox-policy.md": "a4329489c10cf004bb46e3a9f2bb9f9d4ab802d65527eff64731ef32f3f824be",
+    "agents/agent-toolkit-pro-03.md": "9a248ef670c3bb41f70c110de8793e9d098028fb9e10780fb1247f23f5dac786",
+    "agents/table-merge-pro-team-lead.md": "ec1bfbea59bd1b75351fa229fa91562b8d6505bba8d96571d766bfd7025029ae",
+    "agents/table-merge-pro.md": "f49d5116317dcc41866fb0cf94bfe79706c34a9d59436f53ee6a85ff72245b2e",
+    "plugin.json": "c93dcab7fc85a38b846e86e8a5dc32a1976abcae03488fb28579e7d97b4ea8b8",
+    "settings.json": "7e8885675f17febb07d718ee9c346a5ef6b2375c5a278f86aa808a6c57039abb"
+  }
+}

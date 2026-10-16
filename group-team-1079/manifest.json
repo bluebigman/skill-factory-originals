@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1079",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1079",
+    "kind": "team",
+    "name": "场景叙事专家",
+    "description": "场景叙事专家：围绕场景叙事，覆盖光线引导／声音铺底／信息留白，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "scene-narrative-pro-team-lead",
+        "role": "lead",
+        "name": "场景叙事主理人",
+        "evidence": null
+      },
+      {
+        "slug": "scene-narrative-pro",
+        "role": "member",
+        "name": "场景叙事 氛围营造 顾问",
+        "evidence": "original_assets/scene-narrative-pro/merkle_root",
+        "member_merkle_root": "31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb"
+      },
+      {
+        "slug": "document-diff-pro",
+        "role": "member",
+        "name": "文档比对 版本差异 顾问",
+        "evidence": "original_assets/document-diff-pro/merkle_root",
+        "member_merkle_root": "489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935"
+      },
+      {
+        "slug": "note-life-pro",
+        "role": "member",
+        "name": "笔记与生活助手",
+        "evidence": "original_assets/note-life-pro/merkle_root",
+        "member_merkle_root": "c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86"
+      }
+    ],
+    "team_lead": "scene-narrative-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1eba708f7d03c190",
+  "prompt_hash": "09b5c4104bedf36e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1079\", \"kind\": \"team\", \"name\": \"场景叙事专家\", \"description\": \"场景叙事专家：围绕场景叙事，覆盖光线引导／声音铺底／信息留白，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"scene-narrative-pro-team-lead\", \"role\": \"lead\", \"name\": \"场景叙事主理人\", \"evidence\": null}, {\"slug\": \"scene-narrative-pro\", \"role\": \"member\", \"name\": \"场景叙事 氛围营造 顾问\", \"evidence\": \"original_assets/scene-narrative-pro/merkle_root\", \"member_merkle_root\": \"31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb\"}, {\"slug\": \"document-diff-pro\", \"role\": \"member\", \"name\": \"文档比对 版本差异 顾问\", \"evidence\": \"original_assets/document-diff-pro/merkle_root\", \"member_merkle_root\": \"489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935\"}, {\"slug\": \"note-life-pro\", \"role\": \"member\", \"name\": \"笔记与生活助手\", \"evidence\": \"original_assets/note-life-pro/merkle_root\", \"member_merkle_root\": \"c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86\"}], \"team_lead\": \"scene-narrative-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/document-diff-pro.md": "c4708ccbd329061891adaa2c35617d01769d6a7ac9700286b2e7205a0e38bac6",
+    "agents/note-life-pro.md": "c2d8e347e178a870091d184f3eabb97f44525c94fa8469552f7b8adba6bc8643",
+    "agents/scene-narrative-pro-team-lead.md": "108c92add01a9eb5be3487ee2e6784e66749e1e8e4e0ae762811e4ad30785c95",
+    "agents/scene-narrative-pro.md": "0be90ad8ba79365a80219d81a94c44bb31f7e0034724db8319aaab178273f2fc",
+    "plugin.json": "beadb99ba02ba6a8982a318521bce546b08b4da5bfd11dd5111c1c870e75135c",
+    "settings.json": "c42b5ac250ab77b6f8c92a574175f5ba7f5a95a4116a39f899a2ce6de2c23486"
+  }
+}

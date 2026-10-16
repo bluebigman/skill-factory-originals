@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1035",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1035",
+    "kind": "team",
+    "name": "游戏运营专家",
+    "description": "输入游戏运营相关需求，输出版本对齐、指标日更、事故预案三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "game-liveops-pro-team-lead",
+        "role": "lead",
+        "name": "游戏运营主理人",
+        "evidence": null
+      },
+      {
+        "slug": "game-liveops-pro",
+        "role": "member",
+        "name": "游戏运营 活动节奏 顾问",
+        "evidence": "original_assets/game-liveops-pro/merkle_root",
+        "member_merkle_root": "54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c"
+      },
+      {
+        "slug": "design-system-pro",
+        "role": "member",
+        "name": "设计系统 组件规范 顾问",
+        "evidence": "original_assets/design-system-pro/merkle_root",
+        "member_merkle_root": "600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce"
+      },
+      {
+        "slug": "accessibility-check",
+        "role": "member",
+        "name": "无障碍 检查清单 顾问",
+        "evidence": "original_assets/accessibility-check/merkle_root",
+        "member_merkle_root": "94855af715644292945da9725667b15298013fd61b35f42c2f1197fa553e3f91"
+      }
+    ],
+    "team_lead": "game-liveops-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a96b7317616f327d",
+  "prompt_hash": "6e9946027f37a16c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1035\", \"kind\": \"team\", \"name\": \"游戏运营专家\", \"description\": \"输入游戏运营相关需求，输出版本对齐、指标日更、事故预案三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"game-liveops-pro-team-lead\", \"role\": \"lead\", \"name\": \"游戏运营主理人\", \"evidence\": null}, {\"slug\": \"game-liveops-pro\", \"role\": \"member\", \"name\": \"游戏运营 活动节奏 顾问\", \"evidence\": \"original_assets/game-liveops-pro/merkle_root\", \"member_merkle_root\": \"54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c\"}, {\"slug\": \"design-system-pro\", \"role\": \"member\", \"name\": \"设计系统 组件规范 顾问\", \"evidence\": \"original_assets/design-system-pro/merkle_root\", \"member_merkle_root\": \"600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce\"}, {\"slug\": \"accessibility-check\", \"role\": \"member\", \"name\": \"无障碍 检查清单 顾问\", \"evidence\": \"original_assets/accessibility-check/merkle_root\", \"member_merkle_root\": \"94855af715644292945da9725667b15298013fd61b35f42c2f1197fa553e3f91\"}], \"team_lead\": \"game-liveops-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/accessibility-check.md": "c6b75b9cea789a1aa33a07c70d6b01b68190c517227208df3371222b7e1655e7",
+    "agents/design-system-pro.md": "98d6d1aa2646f2551f1b8cb83694de1543d438635f0144129a52e122d2664ed7",
+    "agents/game-liveops-pro-team-lead.md": "042bde4c615a428f4b0e5279945da0cf7d72b424710f31ab3b6d94876644f469",
+    "agents/game-liveops-pro.md": "6d66019c09d23633a22cd456fc64ea94fd2d9c5835a1c67686b9dde6e5a9db49",
+    "plugin.json": "665f7bed42a96848e234d598cc175751be49a18c73855335807436b1121f9e84",
+    "settings.json": "430323304a43eb2d3e723ac2bb5559ed962f2af2fc551e56b631b6740a6358b1"
+  }
+}

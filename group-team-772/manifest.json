@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-772",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-772",
+    "kind": "team",
+    "name": "客诉处理升级机制专家",
+    "description": "输入客诉处理相关需求，输出首问负责、分级升级、时限承诺三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "complaint-handle-pro-team-lead",
+        "role": "lead",
+        "name": "客诉处理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "complaint-handle-pro",
+        "role": "member",
+        "name": "客诉处理 升级机制 顾问",
+        "evidence": "original_assets/complaint-handle-pro/merkle_root",
+        "member_merkle_root": "31da8b20995b6488cc9b566c127a731df14e268c43f005347029b63d053dc2fd"
+      },
+      {
+        "slug": "intl-talent-onboard",
+        "role": "member",
+        "name": "海外招聘 入职衔接 助手",
+        "evidence": "original_assets/intl-talent-onboard/merkle_root",
+        "member_merkle_root": "45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6"
+      },
+      {
+        "slug": "academic-expert",
+        "role": "member",
+        "name": "学术写作 文献综述 格式规范",
+        "evidence": "original_assets/academic-expert/merkle_root",
+        "member_merkle_root": "57a9bfc01e3b61ee08193a96425131e66d0b0ea86b8a8e800d240ff15f6fa022"
+      }
+    ],
+    "team_lead": "complaint-handle-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b2bb7527b30daad4",
+  "prompt_hash": "161f457c42e7d7ff",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-772\", \"kind\": \"team\", \"name\": \"客诉处理升级机制专家\", \"description\": \"输入客诉处理相关需求，输出首问负责、分级升级、时限承诺三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"complaint-handle-pro-team-lead\", \"role\": \"lead\", \"name\": \"客诉处理主理人\", \"evidence\": null}, {\"slug\": \"complaint-handle-pro\", \"role\": \"member\", \"name\": \"客诉处理 升级机制 顾问\", \"evidence\": \"original_assets/complaint-handle-pro/merkle_root\", \"member_merkle_root\": \"31da8b20995b6488cc9b566c127a731df14e268c43f005347029b63d053dc2fd\"}, {\"slug\": \"intl-talent-onboard\", \"role\": \"member\", \"name\": \"海外招聘 入职衔接 助手\", \"evidence\": \"original_assets/intl-talent-onboard/merkle_root\", \"member_merkle_root\": \"45f285b37b8cd45891851bdee47c56cd04aba29d0980db5c2e126e0b4b7d1ce6\"}, {\"slug\": \"academic-expert\", \"role\": \"member\", \"name\": \"学术写作 文献综述 格式规范\", \"evidence\": \"original_assets/academic-expert/merkle_root\", \"member_merkle_root\": \"57a9bfc01e3b61ee08193a96425131e66d0b0ea86b8a8e800d240ff15f6fa022\"}], \"team_lead\": \"complaint-handle-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/academic-expert.md": "b835b0c8ff2bb03c35d674c575b07cba68addcfd724d2aa7273c3eb8ed4b162d",
+    "agents/complaint-handle-pro-team-lead.md": "11c18d7be46d5da77f29b4829540eb611276fe405d0e6381d88fbb8e54f033e1",
+    "agents/complaint-handle-pro.md": "525635643ab22456459b000c86aaadfbee7c6cfe0fa792083ab36beeb9b74ace",
+    "agents/intl-talent-onboard.md": "281d58f5aed45177e8038f6262dbfe53b5984bddfbec84df42290b0bf5d64c22",
+    "plugin.json": "832fc7b1505764489854d20e24759243dd1658f29fb4ade487ec0f834cffc0de",
+    "settings.json": "aebc53886268d9536e7492afdc588cd2d4aa8322402c7c41363053ad93940d7d"
+  }
+}

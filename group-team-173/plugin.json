@@ -1,0 +1,126 @@
+{
+  "agentName": "writing-toolkit-pro-team-lead",
+  "agents": [
+    "./agents/writing-toolkit-pro-team-lead.md",
+    "./agents/writing-toolkit-pro.md",
+    "./agents/knowledge-base-pro-01.md",
+    "./agents/mp-article-format.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文本净化",
+    "zh": "帮我处理文本净化"
+  },
+  "description": "文本写作与润色 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "文本 项目 公众号 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "文本写作与润色 Suite Team",
+    "zh": "文本 项目 公众号 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "writing-toolkit-pro-team-lead",
+      "name": {
+        "en": "文本净化主理人",
+        "zh": "文本净化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/writing-toolkit-pro.png",
+      "id": "writing-toolkit-pro",
+      "name": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "profession": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01.png",
+      "id": "knowledge-base-pro-01",
+      "name": {
+        "en": "知识库与笔记 Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "知识库与笔记 Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/mp-article-format.png",
+      "id": "mp-article-format",
+      "name": {
+        "en": "Mp Article Format",
+        "zh": "公众号文章 图文排版 助手"
+      },
+      "profession": {
+        "en": "Mp Article Format",
+        "zh": "公众号文章 图文排版 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-173",
+  "plugin": "group-team-173",
+  "profession": {
+    "en": "文本写作与润色 Suite Collaboration Team",
+    "zh": "文本 项目 公众号 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文本净化",
+      "zh": "帮我处理文本净化"
+    },
+    {
+      "en": "Plan 项目记忆",
+      "zh": "帮我规划项目记忆"
+    },
+    {
+      "en": "Review 公众号文章",
+      "zh": "帮我检查公众号文章"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文本净化",
+      "zh": "文本净化"
+    },
+    {
+      "en": "项目记忆",
+      "zh": "项目记忆"
+    },
+    {
+      "en": "公众号文章",
+      "zh": "公众号文章"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "writing-toolkit-pro-team-lead",
+    "memberAgents": [
+      "writing-toolkit-pro",
+      "knowledge-base-pro-01",
+      "mp-article-format"
+    ]
+  },
+  "version": "1.0.0"
+}

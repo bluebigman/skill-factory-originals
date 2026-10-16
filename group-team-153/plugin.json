@@ -1,0 +1,126 @@
+{
+  "agentName": "api-debug-chain-pro-team-lead",
+  "agents": [
+    "./agents/api-debug-chain-pro-team-lead.md",
+    "./agents/api-debug-chain-pro.md",
+    "./agents/api-debug-pro.md",
+    "./agents/ops-deploy-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口联调",
+    "zh": "帮我处理接口联调"
+  },
+  "description": "API Debug Chain Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "接口 联调 调试 缓存 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "API Debug Chain Expert Team",
+    "zh": "接口 联调 调试 缓存 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-debug-chain-pro-team-lead",
+      "name": {
+        "en": "接口联调主理人",
+        "zh": "接口联调主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-debug-chain-pro.png",
+      "id": "api-debug-chain-pro",
+      "name": {
+        "en": "API Debug Chain Expert",
+        "zh": "接口联调 鉴权核验 字段映射"
+      },
+      "profession": {
+        "en": "API Debug Chain Expert",
+        "zh": "接口联调 鉴权核验 字段映射"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-debug-pro.png",
+      "id": "api-debug-pro",
+      "name": {
+        "en": "API Debug Workbench",
+        "zh": "接口调试 请求构造 响应解析"
+      },
+      "profession": {
+        "en": "API Debug Workbench",
+        "zh": "接口调试 请求构造 响应解析"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro.png",
+      "id": "ops-deploy-pro",
+      "name": {
+        "en": "运维与部署 Suite",
+        "zh": "缓存清理 故障排查"
+      },
+      "profession": {
+        "en": "运维与部署 Suite",
+        "zh": "缓存清理 故障排查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-153",
+  "plugin": "group-team-153",
+  "profession": {
+    "en": "API Debug Chain Expert Collaboration Team",
+    "zh": "接口 联调 调试 缓存 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口联调",
+      "zh": "帮我处理接口联调"
+    },
+    {
+      "en": "Plan 接口调试",
+      "zh": "帮我规划接口调试"
+    },
+    {
+      "en": "Review 缓存清理",
+      "zh": "帮我检查缓存清理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "接口联调",
+      "zh": "接口联调"
+    },
+    {
+      "en": "接口调试",
+      "zh": "接口调试"
+    },
+    {
+      "en": "缓存清理",
+      "zh": "缓存清理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-debug-chain-pro-team-lead",
+    "memberAgents": [
+      "api-debug-chain-pro",
+      "api-debug-pro",
+      "ops-deploy-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

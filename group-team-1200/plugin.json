@@ -1,0 +1,126 @@
+{
+  "agentName": "defect-triage-pro-team-lead",
+  "agents": [
+    "./agents/defect-triage-pro-team-lead.md",
+    "./agents/defect-triage-pro.md",
+    "./agents/doc-archive-strategy.md",
+    "./agents/calibration-manage-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 缺陷分级",
+    "zh": "帮我处理缺陷分级"
+  },
+  "description": "defect-triage-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 缺陷分级 requirements, output three deliverables: 分级标准, 修复排期, 回归验证. Verifiable end-to-end, evidence per step.",
+    "zh": "输入缺陷分级相关需求，输出分级标准、修复排期、回归验证三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "defect-triage-pro Team",
+    "zh": "缺陷分级专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "defect-triage-pro-team-lead",
+      "name": {
+        "en": "缺陷分级主理人",
+        "zh": "缺陷分级主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/defect-triage-pro.png",
+      "id": "defect-triage-pro",
+      "name": {
+        "en": "defect-triage-pro",
+        "zh": "缺陷分级 优先级 顾问"
+      },
+      "profession": {
+        "en": "defect-triage-pro",
+        "zh": "缺陷分级 优先级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-archive-strategy.png",
+      "id": "doc-archive-strategy",
+      "name": {
+        "en": "doc-archive-strategy",
+        "zh": "文档归档策略 顾问"
+      },
+      "profession": {
+        "en": "doc-archive-strategy",
+        "zh": "文档归档策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/calibration-manage-pro.png",
+      "id": "calibration-manage-pro",
+      "name": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "profession": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1200",
+  "plugin": "group-team-1200",
+  "profession": {
+    "en": "defect-triage-pro Collaboration Team",
+    "zh": "缺陷分级专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 缺陷分级",
+      "zh": "帮我处理缺陷分级"
+    },
+    {
+      "en": "Plan 文档归档策略",
+      "zh": "帮我规划文档归档策略"
+    },
+    {
+      "en": "Review 计量器具",
+      "zh": "帮我检查计量器具"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级标准",
+      "zh": "分级标准"
+    },
+    {
+      "en": "修复排期",
+      "zh": "修复排期"
+    },
+    {
+      "en": "回归验证",
+      "zh": "回归验证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "defect-triage-pro-team-lead",
+    "memberAgents": [
+      "defect-triage-pro",
+      "doc-archive-strategy",
+      "calibration-manage-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

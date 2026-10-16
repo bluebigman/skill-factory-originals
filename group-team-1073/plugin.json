@@ -1,0 +1,126 @@
+{
+  "agentName": "process-fmea-pro-team-lead",
+  "agents": [
+    "./agents/process-fmea-pro-team-lead.md",
+    "./agents/process-fmea-pro.md",
+    "./agents/incident-postmortem.md",
+    "./agents/team-knowledge-base.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 过程风险",
+    "zh": "帮我处理过程风险"
+  },
+  "description": "process-fmea-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 过程风险, covers 打分一致 / 动态更新 / 根因分层, delivering structured results and actionable checklists.",
+    "zh": "过程风险专家：围绕过程风险，覆盖打分一致／动态更新／根因分层，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "process-fmea-pro Team",
+    "zh": "过程风险专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "process-fmea-pro-team-lead",
+      "name": {
+        "en": "过程风险主理人",
+        "zh": "过程风险主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/process-fmea-pro.png",
+      "id": "process-fmea-pro",
+      "name": {
+        "en": "process-fmea-pro",
+        "zh": "过程风险 预防分析 顾问"
+      },
+      "profession": {
+        "en": "process-fmea-pro",
+        "zh": "过程风险 预防分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/incident-postmortem.png",
+      "id": "incident-postmortem",
+      "name": {
+        "en": "incident-postmortem",
+        "zh": "故障复盘 顾问"
+      },
+      "profession": {
+        "en": "incident-postmortem",
+        "zh": "故障复盘 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/team-knowledge-base.png",
+      "id": "team-knowledge-base",
+      "name": {
+        "en": "team-knowledge-base",
+        "zh": "团队知识库 顾问"
+      },
+      "profession": {
+        "en": "team-knowledge-base",
+        "zh": "团队知识库 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1073",
+  "plugin": "group-team-1073",
+  "profession": {
+    "en": "process-fmea-pro Collaboration Team",
+    "zh": "过程风险专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 过程风险",
+      "zh": "帮我处理过程风险"
+    },
+    {
+      "en": "Plan 故障复盘",
+      "zh": "帮我规划故障复盘"
+    },
+    {
+      "en": "Review 团队知识库",
+      "zh": "帮我检查团队知识库"
+    }
+  ],
+  "tags": [
+    {
+      "en": "打分一致",
+      "zh": "打分一致"
+    },
+    {
+      "en": "动态更新",
+      "zh": "动态更新"
+    },
+    {
+      "en": "全流程展开",
+      "zh": "全流程展开"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "process-fmea-pro-team-lead",
+    "memberAgents": [
+      "process-fmea-pro",
+      "incident-postmortem",
+      "team-knowledge-base"
+    ]
+  },
+  "version": "1.0.0"
+}

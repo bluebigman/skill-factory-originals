@@ -1,0 +1,126 @@
+{
+  "agentName": "search-ux-pro-team-lead",
+  "agents": [
+    "./agents/search-ux-pro-team-lead.md",
+    "./agents/search-ux-pro.md",
+    "./agents/empty-state-pro.md",
+    "./agents/prototype-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 搜索体验",
+    "zh": "帮我处理搜索体验"
+  },
+  "description": "search-ux-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 搜索体验 end-to-end: 容错纠错, 筛选可清 and 历史联想. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长容错纠错、筛选可清与历史联想，覆盖搜索体验全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "search-ux-pro Team",
+    "zh": "搜索体验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "search-ux-pro-team-lead",
+      "name": {
+        "en": "搜索体验主理人",
+        "zh": "搜索体验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/search-ux-pro.png",
+      "id": "search-ux-pro",
+      "name": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "profession": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/empty-state-pro.png",
+      "id": "empty-state-pro",
+      "name": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "profession": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prototype-method.png",
+      "id": "prototype-method",
+      "name": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "profession": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1165",
+  "plugin": "group-team-1165",
+  "profession": {
+    "en": "search-ux-pro Collaboration Team",
+    "zh": "搜索体验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 搜索体验",
+      "zh": "帮我处理搜索体验"
+    },
+    {
+      "en": "Plan 空状态",
+      "zh": "帮我规划空状态"
+    },
+    {
+      "en": "Review 原型验证",
+      "zh": "帮我检查原型验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "容错纠错",
+      "zh": "容错纠错"
+    },
+    {
+      "en": "筛选可清",
+      "zh": "筛选可清"
+    },
+    {
+      "en": "历史联想",
+      "zh": "历史联想"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "search-ux-pro-team-lead",
+    "memberAgents": [
+      "search-ux-pro",
+      "empty-state-pro",
+      "prototype-method"
+    ]
+  },
+  "version": "1.0.0"
+}

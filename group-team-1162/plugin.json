@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-data-boundary-team-lead",
+  "agents": [
+    "./agents/agent-data-boundary-team-lead.md",
+    "./agents/agent-data-boundary.md",
+    "./agents/data-retention-rule.md",
+    "./agents/data-catalog.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 数据边界",
+    "zh": "帮我处理数据边界"
+  },
+  "description": "agent-data-boundary team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 数据边界 end-to-end: 最小采集, 范围控制 and 保留期限. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长最小采集、范围控制与保留期限，覆盖数据边界全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-data-boundary Team",
+    "zh": "数据边界专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-data-boundary-team-lead",
+      "name": {
+        "en": "数据边界主理人",
+        "zh": "数据边界主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-data-boundary.png",
+      "id": "agent-data-boundary",
+      "name": {
+        "en": "agent-data-boundary",
+        "zh": "数据边界 范围控制 顾问"
+      },
+      "profession": {
+        "en": "agent-data-boundary",
+        "zh": "数据边界 范围控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-retention-rule.png",
+      "id": "data-retention-rule",
+      "name": {
+        "en": "data-retention-rule",
+        "zh": "数据保留策略 顾问"
+      },
+      "profession": {
+        "en": "data-retention-rule",
+        "zh": "数据保留策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-catalog.png",
+      "id": "data-catalog",
+      "name": {
+        "en": "data-catalog",
+        "zh": "数据目录建设 顾问"
+      },
+      "profession": {
+        "en": "data-catalog",
+        "zh": "数据目录建设 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1162",
+  "plugin": "group-team-1162",
+  "profession": {
+    "en": "agent-data-boundary Collaboration Team",
+    "zh": "数据边界专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据边界",
+      "zh": "帮我处理数据边界"
+    },
+    {
+      "en": "Plan 数据保留策略",
+      "zh": "帮我规划数据保留策略"
+    },
+    {
+      "en": "Review 数据目录建设",
+      "zh": "帮我检查数据目录建设"
+    }
+  ],
+  "tags": [
+    {
+      "en": "最小采集",
+      "zh": "最小采集"
+    },
+    {
+      "en": "范围控制",
+      "zh": "范围控制"
+    },
+    {
+      "en": "保留期限",
+      "zh": "保留期限"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-data-boundary-team-lead",
+    "memberAgents": [
+      "agent-data-boundary",
+      "data-retention-rule",
+      "data-catalog"
+    ]
+  },
+  "version": "1.0.0"
+}

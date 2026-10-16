@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1157",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1157",
+    "kind": "team",
+    "name": "组件规格定义专家",
+    "description": "组件规格定义专家：围绕组件规格定义，覆盖状态齐全／尺寸规范／间距统一，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "component-spec-team-lead",
+        "role": "lead",
+        "name": "组件规格定义主理人",
+        "evidence": null
+      },
+      {
+        "slug": "component-spec",
+        "role": "member",
+        "name": "组件规格定义 顾问",
+        "evidence": "original_assets/component-spec/merkle_root",
+        "member_merkle_root": "c144ab21ce7d257e52b382149def87f2a98e7e1181b26f6f6f2d9dd98742b2b3"
+      },
+      {
+        "slug": "empty-state-pro",
+        "role": "member",
+        "name": "空状态 异常设计 顾问",
+        "evidence": "original_assets/empty-state-pro/merkle_root",
+        "member_merkle_root": "9deeff72d6b55464bc44a416ebe2035e65e11c3dea6e9c7fc305a77f1088163a"
+      },
+      {
+        "slug": "playtest-method",
+        "role": "member",
+        "name": "可用性 玩家测试 顾问",
+        "evidence": "original_assets/playtest-method/merkle_root",
+        "member_merkle_root": "aa524317c7eb4c0b2abe384046a568580148b6b417c36573b180229bd82aa980"
+      }
+    ],
+    "team_lead": "component-spec-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1bf93cbbce4e96cf",
+  "prompt_hash": "11c7f00d7188def9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1157\", \"kind\": \"team\", \"name\": \"组件规格定义专家\", \"description\": \"组件规格定义专家：围绕组件规格定义，覆盖状态齐全／尺寸规范／间距统一，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"component-spec-team-lead\", \"role\": \"lead\", \"name\": \"组件规格定义主理人\", \"evidence\": null}, {\"slug\": \"component-spec\", \"role\": \"member\", \"name\": \"组件规格定义 顾问\", \"evidence\": \"original_assets/component-spec/merkle_root\", \"member_merkle_root\": \"c144ab21ce7d257e52b382149def87f2a98e7e1181b26f6f6f2d9dd98742b2b3\"}, {\"slug\": \"empty-state-pro\", \"role\": \"member\", \"name\": \"空状态 异常设计 顾问\", \"evidence\": \"original_assets/empty-state-pro/merkle_root\", \"member_merkle_root\": \"9deeff72d6b55464bc44a416ebe2035e65e11c3dea6e9c7fc305a77f1088163a\"}, {\"slug\": \"playtest-method\", \"role\": \"member\", \"name\": \"可用性 玩家测试 顾问\", \"evidence\": \"original_assets/playtest-method/merkle_root\", \"member_merkle_root\": \"aa524317c7eb4c0b2abe384046a568580148b6b417c36573b180229bd82aa980\"}], \"team_lead\": \"component-spec-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/component-spec-team-lead.md": "a0e37fbcaada7b7626fd4c83c325e6efddd9c94e1e61a4c8d10403ffb36c0c6b",
+    "agents/component-spec.md": "1642110d8c67d49b5e9a67342c856c01b6a149228c71d66bdd40683a35c8bb14",
+    "agents/empty-state-pro.md": "516b381d8b4706a25c7958ba86a42fb42dce293cdbf7f98c404773c211d555f0",
+    "agents/playtest-method.md": "98e889dcd9d1faf0e8b4c2055af880644bbf17d6818fff5f9745e23d36fd3ef3",
+    "plugin.json": "c165d860ea41ce42c1f4950a6e858c367aff0673b98fd95932a74714a80ff2c4",
+    "settings.json": "f37bace33dd8a8bb713a01c9f6fbb9391fe2f281da79d9a0ac7b76378e3dd357"
+  }
+}

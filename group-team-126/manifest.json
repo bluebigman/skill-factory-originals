@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-126",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-126",
+    "kind": "team",
+    "name": "接口 联调 调试 代码 团队",
+    "description": "接口 联调 调试 代码 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-transmission-assurance-e-team-lead",
+        "role": "lead",
+        "name": "接口联调主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-transmission-assurance-expert",
+        "role": "member",
+        "name": "接口联调 传输校验 异步排查",
+        "evidence": "original_assets/api-transmission-assurance-expert/merkle_root",
+        "member_merkle_root": "49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac"
+      },
+      {
+        "slug": "api-param-migration-auditor",
+        "role": "member",
+        "name": "接口调试 参数核对 下线迁移",
+        "evidence": "original_assets/api-param-migration-auditor/merkle_root",
+        "member_merkle_root": "f8ad75ff17d8c24f8a53a813e0b3b6d2a103918308ff881048a3c9127c3b3812"
+      },
+      {
+        "slug": "code-review-suite-pro",
+        "role": "member",
+        "name": "代码审查 缺陷排查 质量门禁",
+        "evidence": "original_assets/code-review-suite-pro/merkle_root",
+        "member_merkle_root": "e137cb881a21161e1f66df4f40a0a93f03dce7286c483e654c97ebbf230777f7"
+      }
+    ],
+    "team_lead": "api-transmission-assurance-e-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "27dfd886cc44f580",
+  "prompt_hash": "f6be79951875c4eb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-126\", \"kind\": \"team\", \"name\": \"接口 联调 调试 代码 团队\", \"description\": \"接口 联调 调试 代码 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-transmission-assurance-e-team-lead\", \"role\": \"lead\", \"name\": \"接口联调主理人\", \"evidence\": null}, {\"slug\": \"api-transmission-assurance-expert\", \"role\": \"member\", \"name\": \"接口联调 传输校验 异步排查\", \"evidence\": \"original_assets/api-transmission-assurance-expert/merkle_root\", \"member_merkle_root\": \"49079aed4653610f87fb8805cb5c6d63d38e797587c926bed40c74aebf34fbac\"}, {\"slug\": \"api-param-migration-auditor\", \"role\": \"member\", \"name\": \"接口调试 参数核对 下线迁移\", \"evidence\": \"original_assets/api-param-migration-auditor/merkle_root\", \"member_merkle_root\": \"f8ad75ff17d8c24f8a53a813e0b3b6d2a103918308ff881048a3c9127c3b3812\"}, {\"slug\": \"code-review-suite-pro\", \"role\": \"member\", \"name\": \"代码审查 缺陷排查 质量门禁\", \"evidence\": \"original_assets/code-review-suite-pro/merkle_root\", \"member_merkle_root\": \"e137cb881a21161e1f66df4f40a0a93f03dce7286c483e654c97ebbf230777f7\"}], \"team_lead\": \"api-transmission-assurance-e-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-param-migration-auditor.md": "300c1872673ae419777445a7712ccc5c12004a13ce5eed214a6c71de8a24a6bc",
+    "agents/api-transmission-assurance-e-team-lead.md": "582bdebbd360222e34ff78d35052019f83169e2f1e3ef06d416c012f772dfd7d",
+    "agents/api-transmission-assurance-expert.md": "ad6d6a86bd289923eaea3331b17c03692d7ac15827be8e151bc44184ad9566ba",
+    "agents/code-review-suite-pro.md": "4693a81576c884f862daf055b1a11ece386d007c9beb8d9a4063c9fae062488b",
+    "plugin.json": "6db163ff760cda1093c9a4a931b12ba63f7b9d37f4ed6469697c22f18dd00754",
+    "settings.json": "a309d1d66102b07b55191f9e36970cb7fdb6dfcc3c79bb90abd8d28a71ef582c"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-version-diff-team-lead",
+  "agents": [
+    "./agents/doc-version-diff-team-lead.md",
+    "./agents/doc-version-diff.md",
+    "./agents/hospitality-service.md",
+    "./agents/security-training.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 文档版本比对",
+    "zh": "帮我处理文档版本比对"
+  },
+  "description": "doc-version-diff team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档版本比对 requirements, output three deliverables: 差异分级, 位置明确, 批量汇总. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档版本比对相关需求，输出差异分级、位置明确、批量汇总三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-version-diff Team",
+    "zh": "文档版本比对顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-version-diff-team-lead",
+      "name": {
+        "en": "文档版本比对主理人",
+        "zh": "文档版本比对主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-version-diff.png",
+      "id": "doc-version-diff",
+      "name": {
+        "en": "doc-version-diff",
+        "zh": "文档版本比对 顾问"
+      },
+      "profession": {
+        "en": "doc-version-diff",
+        "zh": "文档版本比对 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/hospitality-service.png",
+      "id": "hospitality-service",
+      "name": {
+        "en": "hospitality-service",
+        "zh": "服务标准设计 顾问"
+      },
+      "profession": {
+        "en": "hospitality-service",
+        "zh": "服务标准设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/security-training.png",
+      "id": "security-training",
+      "name": {
+        "en": "security-training",
+        "zh": "安全培训 顾问"
+      },
+      "profession": {
+        "en": "security-training",
+        "zh": "安全培训 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1008",
+  "plugin": "group-team-1008",
+  "profession": {
+    "en": "doc-version-diff Collaboration Team",
+    "zh": "文档版本比对顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档版本比对",
+      "zh": "帮我处理文档版本比对"
+    },
+    {
+      "en": "Plan 服务标准设计",
+      "zh": "帮我规划服务标准设计"
+    },
+    {
+      "en": "Review 安全培训",
+      "zh": "帮我检查安全培训"
+    }
+  ],
+  "tags": [
+    {
+      "en": "差异分级",
+      "zh": "差异分级"
+    },
+    {
+      "en": "位置明确",
+      "zh": "位置明确"
+    },
+    {
+      "en": "批量汇总",
+      "zh": "批量汇总"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-version-diff-team-lead",
+    "memberAgents": [
+      "doc-version-diff",
+      "hospitality-service",
+      "security-training"
+    ]
+  },
+  "version": "1.0.0"
+}

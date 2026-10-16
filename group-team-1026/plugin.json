@@ -1,0 +1,126 @@
+{
+  "agentName": "intl-meeting-coach-team-lead",
+  "agents": [
+    "./agents/intl-meeting-coach-team-lead.md",
+    "./agents/intl-meeting-coach.md",
+    "./agents/agriculture-plan.md",
+    "./agents/nonprofit-program.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 跨时区会议",
+    "zh": "帮我处理跨时区会议"
+  },
+  "description": "intl-meeting-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 跨时区会议 requirements, output three deliverables: 时区轮换, 议程前置, 结论留档. Verifiable end-to-end, evidence per step.",
+    "zh": "输入跨时区会议相关需求，输出时区轮换、议程前置、结论留档三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "intl-meeting-coach Team",
+    "zh": "跨时区会议专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "intl-meeting-coach-team-lead",
+      "name": {
+        "en": "跨时区会议主理人",
+        "zh": "跨时区会议主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/intl-meeting-coach.png",
+      "id": "intl-meeting-coach",
+      "name": {
+        "en": "intl-meeting-coach",
+        "zh": "跨时区会议 组织 教练"
+      },
+      "profession": {
+        "en": "intl-meeting-coach",
+        "zh": "跨时区会议 组织 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agriculture-plan.png",
+      "id": "agriculture-plan",
+      "name": {
+        "en": "agriculture-plan",
+        "zh": "农事计划编制 顾问"
+      },
+      "profession": {
+        "en": "agriculture-plan",
+        "zh": "农事计划编制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/nonprofit-program.png",
+      "id": "nonprofit-program",
+      "name": {
+        "en": "nonprofit-program",
+        "zh": "公益项目设计 顾问"
+      },
+      "profession": {
+        "en": "nonprofit-program",
+        "zh": "公益项目设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1026",
+  "plugin": "group-team-1026",
+  "profession": {
+    "en": "intl-meeting-coach Collaboration Team",
+    "zh": "跨时区会议专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 跨时区会议",
+      "zh": "帮我处理跨时区会议"
+    },
+    {
+      "en": "Plan 农事计划编制",
+      "zh": "帮我规划农事计划编制"
+    },
+    {
+      "en": "Review 公益项目设计",
+      "zh": "帮我检查公益项目设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "时区轮换",
+      "zh": "时区轮换"
+    },
+    {
+      "en": "议程前置",
+      "zh": "议程前置"
+    },
+    {
+      "en": "结论留档",
+      "zh": "结论留档"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "intl-meeting-coach-team-lead",
+    "memberAgents": [
+      "intl-meeting-coach",
+      "agriculture-plan",
+      "nonprofit-program"
+    ]
+  },
+  "version": "1.0.0"
+}

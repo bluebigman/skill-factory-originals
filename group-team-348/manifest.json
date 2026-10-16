@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-348",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-348",
+    "kind": "team",
+    "name": "链路追踪指标埋点专家",
+    "description": "擅长快照复现、成本可见与长尾监控，覆盖链路追踪全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "observability-inject-pro-team-lead",
+        "role": "lead",
+        "name": "链路追踪主理人",
+        "evidence": null
+      },
+      {
+        "slug": "observability-inject-pro",
+        "role": "member",
+        "name": "链路追踪 指标埋点 顾问",
+        "evidence": "original_assets/observability-inject-pro/merkle_root",
+        "member_merkle_root": "10035696f515cd25ee66be0efd6a2df22a8225eb74c73b5334d97cd29f8d6875"
+      },
+      {
+        "slug": "agent-tool-selection",
+        "role": "member",
+        "name": "工具选择 依赖排序 顾问",
+        "evidence": "original_assets/agent-tool-selection/merkle_root",
+        "member_merkle_root": "d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb"
+      },
+      {
+        "slug": "graceful-degrade-pro",
+        "role": "member",
+        "name": "优雅降级 兜底路径 顾问",
+        "evidence": "original_assets/graceful-degrade-pro/merkle_root",
+        "member_merkle_root": "d28ebb4d724064199513aa88d1c380a1a06e3c8949f45facd3a937afeb3b7ecf"
+      }
+    ],
+    "team_lead": "observability-inject-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8313b6f6d005c3db",
+  "prompt_hash": "37ec0af5e746276f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-348\", \"kind\": \"team\", \"name\": \"链路追踪指标埋点专家\", \"description\": \"擅长快照复现、成本可见与长尾监控，覆盖链路追踪全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"observability-inject-pro-team-lead\", \"role\": \"lead\", \"name\": \"链路追踪主理人\", \"evidence\": null}, {\"slug\": \"observability-inject-pro\", \"role\": \"member\", \"name\": \"链路追踪 指标埋点 顾问\", \"evidence\": \"original_assets/observability-inject-pro/merkle_root\", \"member_merkle_root\": \"10035696f515cd25ee66be0efd6a2df22a8225eb74c73b5334d97cd29f8d6875\"}, {\"slug\": \"agent-tool-selection\", \"role\": \"member\", \"name\": \"工具选择 依赖排序 顾问\", \"evidence\": \"original_assets/agent-tool-selection/merkle_root\", \"member_merkle_root\": \"d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb\"}, {\"slug\": \"graceful-degrade-pro\", \"role\": \"member\", \"name\": \"优雅降级 兜底路径 顾问\", \"evidence\": \"original_assets/graceful-degrade-pro/merkle_root\", \"member_merkle_root\": \"d28ebb4d724064199513aa88d1c380a1a06e3c8949f45facd3a937afeb3b7ecf\"}], \"team_lead\": \"observability-inject-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-tool-selection.md": "ef7e7c821043f896bccc21f4b9a7a9be553b84ea7d5b749a02090b7c88764a25",
+    "agents/graceful-degrade-pro.md": "7b26cb6b8fd94ff517479cfabad92da07bd0f4f8697cf5541267680794b7ff0c",
+    "agents/observability-inject-pro-team-lead.md": "07db97fb5a87ca67359e359d8a17dc619f89008859cf6d9992cea74ac7ab16eb",
+    "agents/observability-inject-pro.md": "2afa3a0f6d86ead96e3ffd8192ca0619a32e99876cf72bea6cdc28518a1a48f8",
+    "plugin.json": "83f9227a48c553109bc611c6bfb67f46dd7e1fd7fe07d2b3c1566e737baa7430",
+    "settings.json": "84010c9db16a6f4ef14cdb33d800ad474733aced143a8c75346962af1e2a4110"
+  }
+}

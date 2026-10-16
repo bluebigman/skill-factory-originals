@@ -1,0 +1,126 @@
+{
+  "agentName": "search-ux-pro-team-lead",
+  "agents": [
+    "./agents/search-ux-pro-team-lead.md",
+    "./agents/search-ux-pro.md",
+    "./agents/onboarding-product.md",
+    "./agents/game-community-mod.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 搜索体验",
+    "zh": "帮我处理搜索体验"
+  },
+  "description": "search-ux-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 搜索体验, covers 容错纠错 / 筛选可清 / 历史联想, delivering structured results and actionable checklists.",
+    "zh": "上手引导专家：围绕搜索体验，覆盖容错纠错／筛选可清／历史联想，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "search-ux-pro Team",
+    "zh": "上手引导专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "search-ux-pro-team-lead",
+      "name": {
+        "en": "搜索体验主理人",
+        "zh": "搜索体验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/search-ux-pro.png",
+      "id": "search-ux-pro",
+      "name": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "profession": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/onboarding-product.png",
+      "id": "onboarding-product",
+      "name": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "profession": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-community-mod.png",
+      "id": "game-community-mod",
+      "name": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "profession": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-950",
+  "plugin": "group-team-950",
+  "profession": {
+    "en": "search-ux-pro Collaboration Team",
+    "zh": "上手引导专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 搜索体验",
+      "zh": "帮我处理搜索体验"
+    },
+    {
+      "en": "Plan 新用户",
+      "zh": "帮我规划新用户"
+    },
+    {
+      "en": "Review 游戏社区",
+      "zh": "帮我检查游戏社区"
+    }
+  ],
+  "tags": [
+    {
+      "en": "容错纠错",
+      "zh": "容错纠错"
+    },
+    {
+      "en": "无结果兜底",
+      "zh": "无结果兜底"
+    },
+    {
+      "en": "排序可解释",
+      "zh": "排序可解释"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "search-ux-pro-team-lead",
+    "memberAgents": [
+      "search-ux-pro",
+      "onboarding-product",
+      "game-community-mod"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "landing-page-opt-team-lead",
+  "agents": [
+    "./agents/landing-page-opt-team-lead.md",
+    "./agents/landing-page-opt.md",
+    "./agents/global-content-calendar.md",
+    "./agents/editorial-review-flow.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 落地页",
+    "zh": "帮我处理落地页"
+  },
+  "description": "landing-page-opt team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 落地页 requirements, output three deliverables: 首屏说清, 单一目标, 证据支撑. Verifiable end-to-end, evidence per step.",
+    "zh": "输入落地页相关需求，输出首屏说清、单一目标、证据支撑三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "landing-page-opt Team",
+    "zh": "落地页专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "landing-page-opt-team-lead",
+      "name": {
+        "en": "落地页主理人",
+        "zh": "落地页主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/landing-page-opt.png",
+      "id": "landing-page-opt",
+      "name": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "profession": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-content-calendar.png",
+      "id": "global-content-calendar",
+      "name": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "profession": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/editorial-review-flow.png",
+      "id": "editorial-review-flow",
+      "name": {
+        "en": "editorial-review-flow",
+        "zh": "编辑评审流程 顾问"
+      },
+      "profession": {
+        "en": "editorial-review-flow",
+        "zh": "编辑评审流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1251",
+  "plugin": "group-team-1251",
+  "profession": {
+    "en": "landing-page-opt Collaboration Team",
+    "zh": "落地页专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 落地页",
+      "zh": "帮我处理落地页"
+    },
+    {
+      "en": "Plan 全球内容",
+      "zh": "帮我规划全球内容"
+    },
+    {
+      "en": "Review 编辑评审流程",
+      "zh": "帮我检查编辑评审流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "首屏说清",
+      "zh": "首屏说清"
+    },
+    {
+      "en": "单一目标",
+      "zh": "单一目标"
+    },
+    {
+      "en": "证据支撑",
+      "zh": "证据支撑"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "landing-page-opt-team-lead",
+    "memberAgents": [
+      "landing-page-opt",
+      "global-content-calendar",
+      "editorial-review-flow"
+    ]
+  },
+  "version": "1.0.0"
+}

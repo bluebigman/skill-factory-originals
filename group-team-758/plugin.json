@@ -1,0 +1,126 @@
+{
+  "agentName": "time-mgmt-expert-team-lead",
+  "agents": [
+    "./agents/time-mgmt-expert-team-lead.md",
+    "./agents/time-mgmt-expert.md",
+    "./agents/agent-doc-pipeline.md",
+    "./agents/discovery-call-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 个人时间管理与任务规划专家",
+    "zh": "帮我处理个人时间管理与任务规划专家"
+  },
+  "description": "TimeMgmt team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档流水 requirements, output three deliverables: 时间排期, 解析保真, 幂等入库. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档流水相关需求，输出时间排期、解析保真、幂等入库三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "TimeMgmt Team",
+    "zh": "时间管理专家专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "time-mgmt-expert-team-lead",
+      "name": {
+        "en": "个人时间管理与任务规划专家主理人",
+        "zh": "个人时间管理与任务规划专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/time-mgmt-expert.png",
+      "id": "time-mgmt-expert",
+      "name": {
+        "en": "TimeMgmt",
+        "zh": "时间管理专家"
+      },
+      "profession": {
+        "en": "TimeMgmt",
+        "zh": "个人时间管理与任务规划专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-doc-pipeline.png",
+      "id": "agent-doc-pipeline",
+      "name": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "profession": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/discovery-call-coach.png",
+      "id": "discovery-call-coach",
+      "name": {
+        "en": "discovery-call-coach",
+        "zh": "需求挖掘 提问框架 教练"
+      },
+      "profession": {
+        "en": "discovery-call-coach",
+        "zh": "需求挖掘 提问框架 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-758",
+  "plugin": "group-team-758",
+  "profession": {
+    "en": "TimeMgmt Collaboration Team",
+    "zh": "时间管理专家专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 个人时间管理与任务规划专家",
+      "zh": "帮我处理个人时间管理与任务规划专家"
+    },
+    {
+      "en": "Plan 文档流水",
+      "zh": "帮我规划文档流水"
+    },
+    {
+      "en": "Review 需求挖掘",
+      "zh": "帮我检查需求挖掘"
+    }
+  ],
+  "tags": [
+    {
+      "en": "时间排期",
+      "zh": "时间排期"
+    },
+    {
+      "en": "优先级排定",
+      "zh": "优先级排定"
+    },
+    {
+      "en": "看板结构化",
+      "zh": "看板结构化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "time-mgmt-expert-team-lead",
+    "memberAgents": [
+      "time-mgmt-expert",
+      "agent-doc-pipeline",
+      "discovery-call-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

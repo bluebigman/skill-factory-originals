@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-716",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-716",
+    "kind": "team",
+    "name": "事故复盘根因分析专家",
+    "description": "擅长签证前置、过渡住房与教育对接，覆盖外派安置全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "expat-relocation-pro-team-lead",
+        "role": "lead",
+        "name": "外派安置主理人",
+        "evidence": null
+      },
+      {
+        "slug": "expat-relocation-pro",
+        "role": "member",
+        "name": "外派安置 落地支持 顾问",
+        "evidence": "original_assets/expat-relocation-pro/merkle_root",
+        "member_merkle_root": "aefabf8d21f420d22666f671cb522572fa82ace3dad7993e914984827e7e8a82"
+      },
+      {
+        "slug": "incident-postmortem-pro",
+        "role": "member",
+        "name": "事故复盘 根因分析 顾问",
+        "evidence": "original_assets/incident-postmortem-pro/merkle_root",
+        "member_merkle_root": "19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1"
+      },
+      {
+        "slug": "sop-writer-pro",
+        "role": "member",
+        "name": "流程编写 步骤细化 顾问",
+        "evidence": "original_assets/sop-writer-pro/merkle_root",
+        "member_merkle_root": "062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb"
+      }
+    ],
+    "team_lead": "expat-relocation-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f1557aa7db2de919",
+  "prompt_hash": "f70eaba7bb8561c7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-716\", \"kind\": \"team\", \"name\": \"事故复盘根因分析专家\", \"description\": \"擅长签证前置、过渡住房与教育对接，覆盖外派安置全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"expat-relocation-pro-team-lead\", \"role\": \"lead\", \"name\": \"外派安置主理人\", \"evidence\": null}, {\"slug\": \"expat-relocation-pro\", \"role\": \"member\", \"name\": \"外派安置 落地支持 顾问\", \"evidence\": \"original_assets/expat-relocation-pro/merkle_root\", \"member_merkle_root\": \"aefabf8d21f420d22666f671cb522572fa82ace3dad7993e914984827e7e8a82\"}, {\"slug\": \"incident-postmortem-pro\", \"role\": \"member\", \"name\": \"事故复盘 根因分析 顾问\", \"evidence\": \"original_assets/incident-postmortem-pro/merkle_root\", \"member_merkle_root\": \"19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1\"}, {\"slug\": \"sop-writer-pro\", \"role\": \"member\", \"name\": \"流程编写 步骤细化 顾问\", \"evidence\": \"original_assets/sop-writer-pro/merkle_root\", \"member_merkle_root\": \"062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb\"}], \"team_lead\": \"expat-relocation-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/expat-relocation-pro-team-lead.md": "c12f3d3c36924fcae9d387cb13c23cec45b54a9b71b5f3cc514fdad5c8ef4276",
+    "agents/expat-relocation-pro.md": "8c12fe6a3f0b07c3b7d464ccfccf3a62298d3b00798f5b6905e496eb92d9e3c4",
+    "agents/incident-postmortem-pro.md": "2de850ba190e4c4a3d1f30e7d96379bc94444767a9db405285d2ec763f2b4d73",
+    "agents/sop-writer-pro.md": "6af13025a5f52fcf148080f1765da417f0ef110c7addf1afa23b816bfe071699",
+    "plugin.json": "536ad03ad3a3d4c034fc78a81a25753d655819a5ee26e42ee52dcbc2bad7913e",
+    "settings.json": "e85b92e9fb00e695c3e0e5d558fe24d917a1707259b7ccce09e48eff2000808f"
+  }
+}

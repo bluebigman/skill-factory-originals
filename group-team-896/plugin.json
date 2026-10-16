@@ -1,0 +1,126 @@
+{
+  "agentName": "tool-interface-design-pro-team-lead",
+  "agents": [
+    "./agents/tool-interface-design-pro-team-lead.md",
+    "./agents/tool-interface-design-pro.md",
+    "./agents/pdf-parse-pro.md",
+    "./agents/agent-toolkit-pro-01.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 工具设计",
+    "zh": "帮我处理工具设计"
+  },
+  "description": "tool-interface-design-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 工具设计 end-to-end: 场景示例, 版式识别 and 表格优先. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长场景示例、版式识别与表格优先，覆盖工具设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "tool-interface-design-pro Team",
+    "zh": "工具设计接口契约专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "tool-interface-design-pro-team-lead",
+      "name": {
+        "en": "工具设计主理人",
+        "zh": "工具设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/tool-interface-design-pro.png",
+      "id": "tool-interface-design-pro",
+      "name": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "profession": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pdf-parse-pro.png",
+      "id": "pdf-parse-pro",
+      "name": {
+        "en": "pdf-parse-pro",
+        "zh": "PDF 解析 顾问"
+      },
+      "profession": {
+        "en": "pdf-parse-pro",
+        "zh": "PDF 解析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-01.png",
+      "id": "agent-toolkit-pro-01",
+      "name": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "profession": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-896",
+  "plugin": "group-team-896",
+  "profession": {
+    "en": "tool-interface-design-pro Collaboration Team",
+    "zh": "工具设计接口契约专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 工具设计",
+      "zh": "帮我处理工具设计"
+    },
+    {
+      "en": "Plan PDF",
+      "zh": "帮我规划PDF"
+    },
+    {
+      "en": "Review 显微成像",
+      "zh": "帮我检查显微成像"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字段类型",
+      "zh": "字段类型"
+    },
+    {
+      "en": "必填标注",
+      "zh": "必填标注"
+    },
+    {
+      "en": "默认值",
+      "zh": "默认值"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "tool-interface-design-pro-team-lead",
+    "memberAgents": [
+      "tool-interface-design-pro",
+      "pdf-parse-pro",
+      "agent-toolkit-pro-01"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-695",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-695",
+    "kind": "team",
+    "name": "品牌语气规范手册专家",
+    "description": "输入受众分层相关需求，输出按行为分、规模可用、内容差异三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "audience-segment-pro-team-lead",
+        "role": "lead",
+        "name": "受众分层主理人",
+        "evidence": null
+      },
+      {
+        "slug": "audience-segment-pro",
+        "role": "member",
+        "name": "受众分层 策略匹配 顾问",
+        "evidence": "original_assets/audience-segment-pro/merkle_root",
+        "member_merkle_root": "5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1"
+      },
+      {
+        "slug": "brand-voice-guide",
+        "role": "member",
+        "name": "品牌语气 规范手册 顾问",
+        "evidence": "original_assets/brand-voice-guide/merkle_root",
+        "member_merkle_root": "fe9b169e37b9d27d701b6b351135a29afb8011fa0b36cb37b73c8e2ab804b05d"
+      },
+      {
+        "slug": "knowledge-base-pro-fixed",
+        "role": "member",
+        "name": "文档建站 知识库构建",
+        "evidence": "original_assets/knowledge-base-pro-fixed/merkle_root",
+        "member_merkle_root": "e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43"
+      }
+    ],
+    "team_lead": "audience-segment-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "54587a21ce8bd4b3",
+  "prompt_hash": "4d2343585be84de8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-695\", \"kind\": \"team\", \"name\": \"品牌语气规范手册专家\", \"description\": \"输入受众分层相关需求，输出按行为分、规模可用、内容差异三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"audience-segment-pro-team-lead\", \"role\": \"lead\", \"name\": \"受众分层主理人\", \"evidence\": null}, {\"slug\": \"audience-segment-pro\", \"role\": \"member\", \"name\": \"受众分层 策略匹配 顾问\", \"evidence\": \"original_assets/audience-segment-pro/merkle_root\", \"member_merkle_root\": \"5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1\"}, {\"slug\": \"brand-voice-guide\", \"role\": \"member\", \"name\": \"品牌语气 规范手册 顾问\", \"evidence\": \"original_assets/brand-voice-guide/merkle_root\", \"member_merkle_root\": \"fe9b169e37b9d27d701b6b351135a29afb8011fa0b36cb37b73c8e2ab804b05d\"}, {\"slug\": \"knowledge-base-pro-fixed\", \"role\": \"member\", \"name\": \"文档建站 知识库构建\", \"evidence\": \"original_assets/knowledge-base-pro-fixed/merkle_root\", \"member_merkle_root\": \"e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43\"}], \"team_lead\": \"audience-segment-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audience-segment-pro-team-lead.md": "e660f2f7882f2919a8ee1142fd6f841934ee5662f68c9dca58dd4080969ca97b",
+    "agents/audience-segment-pro.md": "894af859c3ddad8e21a1cac02a75f61eee9ee52910ed069fe352025050a8ede5",
+    "agents/brand-voice-guide.md": "df5c7c743a1f5eab855cc833c5abea28e3db0a69b8134519c2059b0d8edf657f",
+    "agents/knowledge-base-pro-fixed.md": "82aa92a91a93da27c4321fc97151ceaebd519d28d7b5a51b2d93a0a89cbd1989",
+    "plugin.json": "5819bdc01b407b0e873f859c797af6dc8fabf6291d3cfd19b2aab6332d4930fc",
+    "settings.json": "e3fe4a4ab1b8062967be5cfbf2ca06ef0f733b1b10f85e1d14d11fb8f74a1bdc"
+  }
+}

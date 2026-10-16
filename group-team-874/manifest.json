@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-874",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-874",
+    "kind": "team",
+    "name": "视觉调优专家",
+    "description": "输入定价页面相关需求，输出疑虑前置、拒绝暗黑、容错纠错三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pricing-page-ux-team-lead",
+        "role": "lead",
+        "name": "定价页面主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pricing-page-ux",
+        "role": "member",
+        "name": "定价页面 表达清晰 顾问",
+        "evidence": "original_assets/pricing-page-ux/merkle_root",
+        "member_merkle_root": "a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248"
+      },
+      {
+        "slug": "search-ux-pro",
+        "role": "member",
+        "name": "搜索体验 检索设计 顾问",
+        "evidence": "original_assets/search-ux-pro/merkle_root",
+        "member_merkle_root": "0c877a3cdef4a30e1fdc26f0a15571605522d4ed71393989d051b3f764a92818"
+      },
+      {
+        "slug": "ppt-visual-tune",
+        "role": "member",
+        "name": "PPT 视觉调优 顾问",
+        "evidence": "original_assets/ppt-visual-tune/merkle_root",
+        "member_merkle_root": "69f3c44aecaf4ff0191b8113f0afdd08e6584b9b88b6d51067434cd435168c75"
+      }
+    ],
+    "team_lead": "pricing-page-ux-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f542cceb3df3e86a",
+  "prompt_hash": "c68d49da91e6dd23",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-874\", \"kind\": \"team\", \"name\": \"视觉调优专家\", \"description\": \"输入定价页面相关需求，输出疑虑前置、拒绝暗黑、容错纠错三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pricing-page-ux-team-lead\", \"role\": \"lead\", \"name\": \"定价页面主理人\", \"evidence\": null}, {\"slug\": \"pricing-page-ux\", \"role\": \"member\", \"name\": \"定价页面 表达清晰 顾问\", \"evidence\": \"original_assets/pricing-page-ux/merkle_root\", \"member_merkle_root\": \"a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248\"}, {\"slug\": \"search-ux-pro\", \"role\": \"member\", \"name\": \"搜索体验 检索设计 顾问\", \"evidence\": \"original_assets/search-ux-pro/merkle_root\", \"member_merkle_root\": \"0c877a3cdef4a30e1fdc26f0a15571605522d4ed71393989d051b3f764a92818\"}, {\"slug\": \"ppt-visual-tune\", \"role\": \"member\", \"name\": \"PPT 视觉调优 顾问\", \"evidence\": \"original_assets/ppt-visual-tune/merkle_root\", \"member_merkle_root\": \"69f3c44aecaf4ff0191b8113f0afdd08e6584b9b88b6d51067434cd435168c75\"}], \"team_lead\": \"pricing-page-ux-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ppt-visual-tune.md": "5de240617bc5cb4233c6299a14be4a6ba618374788c0e7e34057c1ae12f094ec",
+    "agents/pricing-page-ux-team-lead.md": "baa8422c02ea29c457d6359869a0333de0d9cdeb68a8f39c3d9a4d809feee3e5",
+    "agents/pricing-page-ux.md": "6e0daa08c8ee83fc0702b6801ec08d3c76470a698c8d270ac54a2efefd59b75a",
+    "agents/search-ux-pro.md": "9b8d9641e242c51ef573147c6ae770a4e1f92c210fa023c473e1375b0c35d9db",
+    "plugin.json": "fd6295bf0592ca2fcbb62a074b8a3a91f46ce731cf510df09d8c95f2c60e5108",
+    "settings.json": "85ddc5a50f38aed1e32d0c2e8286036edce1f743b185c1758da36f07c476871f"
+  }
+}

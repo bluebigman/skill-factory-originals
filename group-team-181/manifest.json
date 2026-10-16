@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-181",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-181",
+    "kind": "team",
+    "name": "家居 时间块 室内 团队",
+    "description": "家居 时间块 室内 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "home-repair-guide-team-lead",
+        "role": "lead",
+        "name": "家居维修主理人",
+        "evidence": null
+      },
+      {
+        "slug": "home-repair-guide",
+        "role": "member",
+        "name": "家居维修 报修沟通 对接",
+        "evidence": "original_assets/home-repair-guide/merkle_root",
+        "member_merkle_root": "36e625f588e2ec64d2a289174fc6aa4e12bc3a2e464345c4d74b6f8ce311c985"
+      },
+      {
+        "slug": "time-block-coach",
+        "role": "member",
+        "name": "时间块 日程编排 顾问",
+        "evidence": "original_assets/time-block-coach/merkle_root",
+        "member_merkle_root": "60e3f07ff4cc54deda2d9380208e5a5fa4d088f4d38d24dc3fa7b0b8eac932b4"
+      },
+      {
+        "slug": "home-air-guide",
+        "role": "member",
+        "name": "室内空气 通风净化 助手",
+        "evidence": "original_assets/home-air-guide/merkle_root",
+        "member_merkle_root": "3d1ea36c71ba7ac7f764c88a6b5a76a066e2ca13bbcd4310845e29115ba2c706"
+      }
+    ],
+    "team_lead": "home-repair-guide-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cf2c9b68094a11b4",
+  "prompt_hash": "106e1fe1aad5c224",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-181\", \"kind\": \"team\", \"name\": \"家居 时间块 室内 团队\", \"description\": \"家居 时间块 室内 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"home-repair-guide-team-lead\", \"role\": \"lead\", \"name\": \"家居维修主理人\", \"evidence\": null}, {\"slug\": \"home-repair-guide\", \"role\": \"member\", \"name\": \"家居维修 报修沟通 对接\", \"evidence\": \"original_assets/home-repair-guide/merkle_root\", \"member_merkle_root\": \"36e625f588e2ec64d2a289174fc6aa4e12bc3a2e464345c4d74b6f8ce311c985\"}, {\"slug\": \"time-block-coach\", \"role\": \"member\", \"name\": \"时间块 日程编排 顾问\", \"evidence\": \"original_assets/time-block-coach/merkle_root\", \"member_merkle_root\": \"60e3f07ff4cc54deda2d9380208e5a5fa4d088f4d38d24dc3fa7b0b8eac932b4\"}, {\"slug\": \"home-air-guide\", \"role\": \"member\", \"name\": \"室内空气 通风净化 助手\", \"evidence\": \"original_assets/home-air-guide/merkle_root\", \"member_merkle_root\": \"3d1ea36c71ba7ac7f764c88a6b5a76a066e2ca13bbcd4310845e29115ba2c706\"}], \"team_lead\": \"home-repair-guide-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/home-air-guide.md": "3d6b2fb073d7a9b6b02f0f17f9d32f8e68aef1fea06928a6f0e57103e775b23c",
+    "agents/home-repair-guide-team-lead.md": "b32daedf2f61b848bf10cdd9826301f72ae665b8d21fb7382a108e1d09d94498",
+    "agents/home-repair-guide.md": "6802d131788954b18157407186052f5706a4f9a94f7764a6e4fa6bae455083f5",
+    "agents/time-block-coach.md": "84e6a92778663ce2d0e24bfbcb6b205b2509eee68fa6ff64717b36892fcfec27",
+    "plugin.json": "9ea69d21035bdce665c006e1a27c85bb1f1e5ff4681344a407f3251b36984b5e",
+    "settings.json": "7283f952ead8999553015dc9c169ce6d5536a20eda14fe554972664b68ae8871"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-output-verify-pro-team-lead",
+  "agents": [
+    "./agents/agent-output-verify-pro-team-lead.md",
+    "./agents/agent-output-verify-pro.md",
+    "./agents/agent-hallucination-guard.md",
+    "./agents/agent-trace-audit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 输出验证",
+    "zh": "帮我处理输出验证"
+  },
+  "description": "agent-output-verify-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 输出验证 end-to-end: 结论先行, 引用核验 and 矛盾检测. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长结论先行、引用核验与矛盾检测，覆盖输出验证全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-output-verify-pro Team",
+    "zh": "输出验证专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-output-verify-pro-team-lead",
+      "name": {
+        "en": "输出验证主理人",
+        "zh": "输出验证主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-pro.png",
+      "id": "agent-output-verify-pro",
+      "name": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-hallucination-guard.png",
+      "id": "agent-hallucination-guard",
+      "name": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "profession": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-trace-audit-pro.png",
+      "id": "agent-trace-audit-pro",
+      "name": {
+        "en": "agent-trace-audit-pro",
+        "zh": "行为审计 轨迹留痕 顾问"
+      },
+      "profession": {
+        "en": "agent-trace-audit-pro",
+        "zh": "行为审计 轨迹留痕 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-229",
+  "plugin": "group-team-229",
+  "profession": {
+    "en": "agent-output-verify-pro Collaboration Team",
+    "zh": "输出验证专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 输出验证",
+      "zh": "帮我处理输出验证"
+    },
+    {
+      "en": "Plan 幻觉拦截",
+      "zh": "帮我规划幻觉拦截"
+    },
+    {
+      "en": "Review 行为审计",
+      "zh": "帮我检查行为审计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结论先行",
+      "zh": "结论先行"
+    },
+    {
+      "en": "引用核验",
+      "zh": "引用核验"
+    },
+    {
+      "en": "矛盾检测",
+      "zh": "矛盾检测"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-output-verify-pro-team-lead",
+    "memberAgents": [
+      "agent-output-verify-pro",
+      "agent-hallucination-guard",
+      "agent-trace-audit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

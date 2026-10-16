@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1007",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1007",
+    "kind": "team",
+    "name": "异常波动排查专家",
+    "description": "异常波动排查专家：围绕异常波动排查，覆盖定位切片／时序对比／外部因素，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "kb-build-pro-team-lead",
+        "role": "lead",
+        "name": "知识库构建主理人",
+        "evidence": null
+      },
+      {
+        "slug": "kb-build-pro",
+        "role": "member",
+        "name": "知识库构建 文档整理",
+        "evidence": "original_assets/kb-build-pro/merkle_root",
+        "member_merkle_root": "9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d"
+      },
+      {
+        "slug": "evidence-audit-pro",
+        "role": "member",
+        "name": "数据核验与审计",
+        "evidence": "original_assets/evidence-audit-pro/merkle_root",
+        "member_merkle_root": "0198cd7c3719f47ff474e16a845786b0cce2825b7480200c19e08cd2cdc71481"
+      },
+      {
+        "slug": "anomaly-investigate",
+        "role": "member",
+        "name": "异常波动排查 助手",
+        "evidence": "original_assets/anomaly-investigate/merkle_root",
+        "member_merkle_root": "3d78c13d1dd25ccc6a0e3878188fa4af1120593036f306989518af03b330d6da"
+      }
+    ],
+    "team_lead": "kb-build-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b18946f28293e542",
+  "prompt_hash": "5cdf284ac9d7fdf5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1007\", \"kind\": \"team\", \"name\": \"异常波动排查专家\", \"description\": \"异常波动排查专家：围绕异常波动排查，覆盖定位切片／时序对比／外部因素，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"kb-build-pro-team-lead\", \"role\": \"lead\", \"name\": \"知识库构建主理人\", \"evidence\": null}, {\"slug\": \"kb-build-pro\", \"role\": \"member\", \"name\": \"知识库构建 文档整理\", \"evidence\": \"original_assets/kb-build-pro/merkle_root\", \"member_merkle_root\": \"9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d\"}, {\"slug\": \"evidence-audit-pro\", \"role\": \"member\", \"name\": \"数据核验与审计\", \"evidence\": \"original_assets/evidence-audit-pro/merkle_root\", \"member_merkle_root\": \"0198cd7c3719f47ff474e16a845786b0cce2825b7480200c19e08cd2cdc71481\"}, {\"slug\": \"anomaly-investigate\", \"role\": \"member\", \"name\": \"异常波动排查 助手\", \"evidence\": \"original_assets/anomaly-investigate/merkle_root\", \"member_merkle_root\": \"3d78c13d1dd25ccc6a0e3878188fa4af1120593036f306989518af03b330d6da\"}], \"team_lead\": \"kb-build-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/anomaly-investigate.md": "d2ae74034f0e9276b82f1b4b1cfb027bd335b9e071064e9cf4e4e8068d656fed",
+    "agents/evidence-audit-pro.md": "142519bf9f6ee2f8ff884d347c730bb99a8d7144d20eb3ccfb147cdd7a990b07",
+    "agents/kb-build-pro-team-lead.md": "3d49ee3c04f6b5b2183fd53a1f5141c5a55e3ba543947c0f357841f7e9c8684f",
+    "agents/kb-build-pro.md": "c30d8dbc4b068f0d487313f5470a209107efbcbc03927bac40b4a59443b13349",
+    "plugin.json": "ca3166d68fd99ede8a014e19ca3d4f8af0824e431d88280715a4adfbe6dbfc59",
+    "settings.json": "6719c0838215c80c5ed76c9723afac315c1ebc8fce6a907feb29ca57dc34a99b"
+  }
+}

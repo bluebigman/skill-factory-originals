@@ -1,0 +1,126 @@
+{
+  "agentName": "internal-qa-team-lead",
+  "agents": [
+    "./agents/internal-qa-team-lead.md",
+    "./agents/internal-qa.md",
+    "./agents/sop-compliance-check.md",
+    "./agents/service-sla-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 内部答疑整理",
+    "zh": "帮我处理内部答疑整理"
+  },
+  "description": "internal-qa team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内部答疑整理 end-to-end: 高频优先, 答案可查 and 分类归档. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长高频优先、答案可查与分类归档，覆盖内部答疑整理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "internal-qa Team",
+    "zh": "内部答疑整理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "internal-qa-team-lead",
+      "name": {
+        "en": "内部答疑整理主理人",
+        "zh": "内部答疑整理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/internal-qa.png",
+      "id": "internal-qa",
+      "name": {
+        "en": "internal-qa",
+        "zh": "内部答疑整理 助手"
+      },
+      "profession": {
+        "en": "internal-qa",
+        "zh": "内部答疑整理 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sop-compliance-check.png",
+      "id": "sop-compliance-check",
+      "name": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "profession": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/service-sla-pro.png",
+      "id": "service-sla-pro",
+      "name": {
+        "en": "service-sla-pro",
+        "zh": "服务承诺 时效设计 顾问"
+      },
+      "profession": {
+        "en": "service-sla-pro",
+        "zh": "服务承诺 时效设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-985",
+  "plugin": "group-team-985",
+  "profession": {
+    "en": "internal-qa Collaboration Team",
+    "zh": "内部答疑整理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内部答疑整理",
+      "zh": "帮我处理内部答疑整理"
+    },
+    {
+      "en": "Plan 流程合规",
+      "zh": "帮我规划流程合规"
+    },
+    {
+      "en": "Review 服务承诺",
+      "zh": "帮我检查服务承诺"
+    }
+  ],
+  "tags": [
+    {
+      "en": "高频优先",
+      "zh": "高频优先"
+    },
+    {
+      "en": "答案可查",
+      "zh": "答案可查"
+    },
+    {
+      "en": "分类归档",
+      "zh": "分类归档"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "internal-qa-team-lead",
+    "memberAgents": [
+      "internal-qa",
+      "sop-compliance-check",
+      "service-sla-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

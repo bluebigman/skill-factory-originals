@@ -1,0 +1,126 @@
+{
+  "agentName": "presales-support-pro-team-lead",
+  "agents": [
+    "./agents/presales-support-pro-team-lead.md",
+    "./agents/presales-support-pro.md",
+    "./agents/code-review-guide.md",
+    "./agents/churn-prevent-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 售前支持",
+    "zh": "帮我处理售前支持"
+  },
+  "description": "presales-support-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 售前支持 end-to-end: 素材沉淀, 交付交接 and 一次一审. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长素材沉淀、交付交接与一次一审，覆盖售前支持全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "presales-support-pro Team",
+    "zh": "代码评审把关专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "presales-support-pro-team-lead",
+      "name": {
+        "en": "售前支持主理人",
+        "zh": "售前支持主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/presales-support-pro.png",
+      "id": "presales-support-pro",
+      "name": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "profession": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-review-guide.png",
+      "id": "code-review-guide",
+      "name": {
+        "en": "code-review-guide",
+        "zh": "代码评审把关 顾问"
+      },
+      "profession": {
+        "en": "code-review-guide",
+        "zh": "代码评审把关 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/churn-prevent-pro.png",
+      "id": "churn-prevent-pro",
+      "name": {
+        "en": "churn-prevent-pro",
+        "zh": "客户流失 预警干预 顾问"
+      },
+      "profession": {
+        "en": "churn-prevent-pro",
+        "zh": "客户流失 预警干预 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-838",
+  "plugin": "group-team-838",
+  "profession": {
+    "en": "presales-support-pro Collaboration Team",
+    "zh": "代码评审把关专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 售前支持",
+      "zh": "帮我处理售前支持"
+    },
+    {
+      "en": "Plan 代码评审把关",
+      "zh": "帮我规划代码评审把关"
+    },
+    {
+      "en": "Review 客户流失",
+      "zh": "帮我检查客户流失"
+    }
+  ],
+  "tags": [
+    {
+      "en": "范围界定",
+      "zh": "范围界定"
+    },
+    {
+      "en": "承诺可验",
+      "zh": "承诺可验"
+    },
+    {
+      "en": "素材沉淀",
+      "zh": "素材沉淀"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "presales-support-pro-team-lead",
+    "memberAgents": [
+      "presales-support-pro",
+      "code-review-guide",
+      "churn-prevent-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

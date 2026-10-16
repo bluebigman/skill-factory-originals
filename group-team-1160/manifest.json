@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1160",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1160",
+    "kind": "team",
+    "name": "命名候选生成专家",
+    "description": "命名候选生成专家：围绕命名候选生成，覆盖先定调性／可读优先／避免歧义，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "naming-candidate-team-lead",
+        "role": "lead",
+        "name": "命名候选生成主理人",
+        "evidence": null
+      },
+      {
+        "slug": "naming-candidate",
+        "role": "member",
+        "name": "命名候选生成 顾问",
+        "evidence": "original_assets/naming-candidate/merkle_root",
+        "member_merkle_root": "f4e9cfe19d09e52037123fab4e4f7d6a1221be40899dc9f24987d781bc13a42e"
+      },
+      {
+        "slug": "content-metrics-define",
+        "role": "member",
+        "name": "内容指标定义 顾问",
+        "evidence": "original_assets/content-metrics-define/merkle_root",
+        "member_merkle_root": "e9d87c54e7d51e4e08c080ddf879f8bfc47aeae7b86286d8aad10ecd2a300229"
+      },
+      {
+        "slug": "doc-translate-polish",
+        "role": "member",
+        "name": "文档翻译润色 顾问",
+        "evidence": "original_assets/doc-translate-polish/merkle_root",
+        "member_merkle_root": "ca7fb9ae95d27962f55c17da8307bf4a732f40008e2740dcd27091e24d6cfa6d"
+      }
+    ],
+    "team_lead": "naming-candidate-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e121fd66c91d0a4e",
+  "prompt_hash": "4f8e667cd2425a89",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1160\", \"kind\": \"team\", \"name\": \"命名候选生成专家\", \"description\": \"命名候选生成专家：围绕命名候选生成，覆盖先定调性／可读优先／避免歧义，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"naming-candidate-team-lead\", \"role\": \"lead\", \"name\": \"命名候选生成主理人\", \"evidence\": null}, {\"slug\": \"naming-candidate\", \"role\": \"member\", \"name\": \"命名候选生成 顾问\", \"evidence\": \"original_assets/naming-candidate/merkle_root\", \"member_merkle_root\": \"f4e9cfe19d09e52037123fab4e4f7d6a1221be40899dc9f24987d781bc13a42e\"}, {\"slug\": \"content-metrics-define\", \"role\": \"member\", \"name\": \"内容指标定义 顾问\", \"evidence\": \"original_assets/content-metrics-define/merkle_root\", \"member_merkle_root\": \"e9d87c54e7d51e4e08c080ddf879f8bfc47aeae7b86286d8aad10ecd2a300229\"}, {\"slug\": \"doc-translate-polish\", \"role\": \"member\", \"name\": \"文档翻译润色 顾问\", \"evidence\": \"original_assets/doc-translate-polish/merkle_root\", \"member_merkle_root\": \"ca7fb9ae95d27962f55c17da8307bf4a732f40008e2740dcd27091e24d6cfa6d\"}], \"team_lead\": \"naming-candidate-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-metrics-define.md": "baaf66f300ce9c9f70dfcc33a687809cf08afc74baa36d0ab20782bf349358da",
+    "agents/doc-translate-polish.md": "310ef7ce4e82b12466625552d031fc7a619659712e4d1df6342d3fdf58a9f054",
+    "agents/naming-candidate-team-lead.md": "908f69feac2cc6e3562809769c51d39d00d2e572c577bd5dd973a92edea6def3",
+    "agents/naming-candidate.md": "880ec4906c857a461937b6660686fa37cb2394361e7d9acd0e6b32a0513bba3b",
+    "plugin.json": "fc270dca4b63b317df2e1b05b0b60474f8e2b66b69736559d62425a19b405c43",
+    "settings.json": "b56bf3ff992549eea02fada183f1be4c54bc81d803ba0e9c940fb82ac4b0111e"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-198",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-198",
+    "kind": "team",
+    "name": "旅行 合同 流程 团队",
+    "description": "旅行 合同 流程 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "travel-planning-pro-team-lead",
+        "role": "lead",
+        "name": "旅行规划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "travel-planning-pro",
+        "role": "member",
+        "name": "旅行规划 行程路线 预算清单",
+        "evidence": "original_assets/travel-planning-pro/merkle_root",
+        "member_merkle_root": "0c8582bea9d5e28db5f66dcf44f5d0916570f612f4fcdf5d61aa4d91ef95cf8f"
+      },
+      {
+        "slug": "contract-guard-pro",
+        "role": "member",
+        "name": "合同合规审查",
+        "evidence": "original_assets/contract-guard-pro/merkle_root",
+        "member_merkle_root": "d867668b246dd0cc191db7c36aa8f4d695ff89f488876cef53a22fedf4e90b3a"
+      },
+      {
+        "slug": "flow-auto-pro",
+        "role": "member",
+        "name": "流程编排自动化",
+        "evidence": "original_assets/flow-auto-pro/merkle_root",
+        "member_merkle_root": "0dbbe59a41f1538a29080ef3af53a847790d464e857c8c740dd2b6499764b0cf"
+      }
+    ],
+    "team_lead": "travel-planning-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f08d358118ed7d94",
+  "prompt_hash": "5ab71be9f2ead55c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-198\", \"kind\": \"team\", \"name\": \"旅行 合同 流程 团队\", \"description\": \"旅行 合同 流程 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"travel-planning-pro-team-lead\", \"role\": \"lead\", \"name\": \"旅行规划主理人\", \"evidence\": null}, {\"slug\": \"travel-planning-pro\", \"role\": \"member\", \"name\": \"旅行规划 行程路线 预算清单\", \"evidence\": \"original_assets/travel-planning-pro/merkle_root\", \"member_merkle_root\": \"0c8582bea9d5e28db5f66dcf44f5d0916570f612f4fcdf5d61aa4d91ef95cf8f\"}, {\"slug\": \"contract-guard-pro\", \"role\": \"member\", \"name\": \"合同合规审查\", \"evidence\": \"original_assets/contract-guard-pro/merkle_root\", \"member_merkle_root\": \"d867668b246dd0cc191db7c36aa8f4d695ff89f488876cef53a22fedf4e90b3a\"}, {\"slug\": \"flow-auto-pro\", \"role\": \"member\", \"name\": \"流程编排自动化\", \"evidence\": \"original_assets/flow-auto-pro/merkle_root\", \"member_merkle_root\": \"0dbbe59a41f1538a29080ef3af53a847790d464e857c8c740dd2b6499764b0cf\"}], \"team_lead\": \"travel-planning-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-guard-pro.md": "c259384ad256ad5ca4a6c7f215bc80e4d8a0bcd566f3f5c66df1793f553316de",
+    "agents/flow-auto-pro.md": "747c2b069b79257f4997ef935dd05c2c3518d3e00b35e4dbd0498b965acf22c0",
+    "agents/travel-planning-pro-team-lead.md": "2c03bed4d8ac741a2b65404a4b3b92b6fef0712697599c8f65416075a3aff103",
+    "agents/travel-planning-pro.md": "ba90bf65c07da6fbdc948599ca95cb19321d3214b9a27e88a762df327dce282d",
+    "plugin.json": "6440df91984619fb1dab52fede8ea380480d8b3784848c237531186061d03cab",
+    "settings.json": "93f992fd3c189d2d4f6d4ab801c33cdb4ce1961a6cba0ce0e8714fdd9ca149e9"
+  }
+}

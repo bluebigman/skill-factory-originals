@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1055",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1055",
+    "kind": "team",
+    "name": "财务文本定投测算专家",
+    "description": "财务文本定投测算专家：围绕工业服务，覆盖服务分级／时限明确／备件前置，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "finance-toolkit-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "财务文本主理人",
+        "evidence": null
+      },
+      {
+        "slug": "finance-toolkit-pro-fixed",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747"
+      },
+      {
+        "slug": "industrial-service-pro",
+        "role": "member",
+        "name": "工业服务 交付标准 顾问",
+        "evidence": "original_assets/industrial-service-pro/merkle_root",
+        "member_merkle_root": "c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d"
+      },
+      {
+        "slug": "export-doc-check",
+        "role": "member",
+        "name": "出口单据 一致性 顾问",
+        "evidence": "original_assets/export-doc-check/merkle_root",
+        "member_merkle_root": "286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d"
+      }
+    ],
+    "team_lead": "finance-toolkit-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c18b5cf7ae9e77d0",
+  "prompt_hash": "843569a172b67b24",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1055\", \"kind\": \"team\", \"name\": \"财务文本定投测算专家\", \"description\": \"财务文本定投测算专家：围绕工业服务，覆盖服务分级／时限明确／备件前置，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"finance-toolkit-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"财务文本主理人\", \"evidence\": null}, {\"slug\": \"finance-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747\"}, {\"slug\": \"industrial-service-pro\", \"role\": \"member\", \"name\": \"工业服务 交付标准 顾问\", \"evidence\": \"original_assets/industrial-service-pro/merkle_root\", \"member_merkle_root\": \"c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d\"}, {\"slug\": \"export-doc-check\", \"role\": \"member\", \"name\": \"出口单据 一致性 顾问\", \"evidence\": \"original_assets/export-doc-check/merkle_root\", \"member_merkle_root\": \"286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d\"}], \"team_lead\": \"finance-toolkit-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/export-doc-check.md": "cfc6fba9910d550abd8499182783df33d8aceb538e25d2fd5a7d9edde61893b9",
+    "agents/finance-toolkit-pro-fixed-team-lead.md": "cfb122b971cf47a217178ddaea265b73a925d179b97d89d03c306436208a0f48",
+    "agents/finance-toolkit-pro-fixed.md": "dc68a59ac651cc55d21816480ef7719c2d4cc986a3e37392c38c7efa8474ffcc",
+    "agents/industrial-service-pro.md": "1e178b6f1fec78b2979dd978f8706e5ec173bbe661079dba4d463fe6674c9a95",
+    "plugin.json": "c52c7460f3fb82447e2a8fe659de3873bba6046997263ddf7a02ccd1bc2e9bb2",
+    "settings.json": "8fc0ac95400548e99ae9e93815343c4adae0653c3044ea6b6565b19376cfb572"
+  }
+}

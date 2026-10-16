@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1173",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1173",
+    "kind": "team",
+    "name": "玩家测试专家",
+    "description": "输入可用性相关需求，输出任务脚本、出声思维、五人起步三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "playtest-method-team-lead",
+        "role": "lead",
+        "name": "可用性主理人",
+        "evidence": null
+      },
+      {
+        "slug": "playtest-method",
+        "role": "member",
+        "name": "可用性 玩家测试 顾问",
+        "evidence": "original_assets/playtest-method/merkle_root",
+        "member_merkle_root": "aa524317c7eb4c0b2abe384046a568580148b6b417c36573b180229bd82aa980"
+      },
+      {
+        "slug": "game-onboarding-pro",
+        "role": "member",
+        "name": "游戏新手 引导设计 顾问",
+        "evidence": "original_assets/game-onboarding-pro/merkle_root",
+        "member_merkle_root": "305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b"
+      },
+      {
+        "slug": "virtual-space-pro",
+        "role": "member",
+        "name": "虚拟空间 场景搭建 顾问",
+        "evidence": "original_assets/virtual-space-pro/merkle_root",
+        "member_merkle_root": "929f730b1f65614b2237b8bbb38724a79c562d4c4f08c45256b8f47496ec7d73"
+      }
+    ],
+    "team_lead": "playtest-method-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5c15106b7cda7594",
+  "prompt_hash": "c990921f5b644b03",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1173\", \"kind\": \"team\", \"name\": \"玩家测试专家\", \"description\": \"输入可用性相关需求，输出任务脚本、出声思维、五人起步三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"playtest-method-team-lead\", \"role\": \"lead\", \"name\": \"可用性主理人\", \"evidence\": null}, {\"slug\": \"playtest-method\", \"role\": \"member\", \"name\": \"可用性 玩家测试 顾问\", \"evidence\": \"original_assets/playtest-method/merkle_root\", \"member_merkle_root\": \"aa524317c7eb4c0b2abe384046a568580148b6b417c36573b180229bd82aa980\"}, {\"slug\": \"game-onboarding-pro\", \"role\": \"member\", \"name\": \"游戏新手 引导设计 顾问\", \"evidence\": \"original_assets/game-onboarding-pro/merkle_root\", \"member_merkle_root\": \"305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b\"}, {\"slug\": \"virtual-space-pro\", \"role\": \"member\", \"name\": \"虚拟空间 场景搭建 顾问\", \"evidence\": \"original_assets/virtual-space-pro/merkle_root\", \"member_merkle_root\": \"929f730b1f65614b2237b8bbb38724a79c562d4c4f08c45256b8f47496ec7d73\"}], \"team_lead\": \"playtest-method-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-onboarding-pro.md": "820c3586fe76a9b6cc6c89c919ecdc3e9b4656b6d2054739705a0685bcac163e",
+    "agents/playtest-method-team-lead.md": "922a5d1bbf571c9a9821c2ad37d3885ec32a012c112bada41afcd0dbfa83eadb",
+    "agents/playtest-method.md": "a4bb9f8d4c9b37c03423071c2ebf92ec8a034920c26f29bd0ff89c19f78050ba",
+    "agents/virtual-space-pro.md": "66975a90ecc8331c3d63a17e488fb7b03820ba165925ece4965bdf3f00c9eda5",
+    "plugin.json": "a3a5eb26d515e571ee02ceda7c8547ca0c49893f49afca3b0d03a1110b1070cf",
+    "settings.json": "0df997647652e5a8a591284d76286ab81dc5b33a8e9ae401807023021a17e0c6"
+  }
+}

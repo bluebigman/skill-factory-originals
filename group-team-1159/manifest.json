@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1159",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1159",
+    "kind": "team",
+    "name": "需求澄清专家",
+    "description": "擅长目标明确、边界界定与验收标准，覆盖需求澄清全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "requirement-clarify-pro-team-lead",
+        "role": "lead",
+        "name": "需求澄清主理人",
+        "evidence": null
+      },
+      {
+        "slug": "requirement-clarify-pro",
+        "role": "member",
+        "name": "需求澄清 边界确认 顾问",
+        "evidence": "original_assets/requirement-clarify-pro/merkle_root",
+        "member_merkle_root": "4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39"
+      },
+      {
+        "slug": "deal-review-pro",
+        "role": "member",
+        "name": "商机评审 风险把关 顾问",
+        "evidence": "original_assets/deal-review-pro/merkle_root",
+        "member_merkle_root": "872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265"
+      },
+      {
+        "slug": "sop-compliance-check",
+        "role": "member",
+        "name": "流程合规 步骤核验 顾问",
+        "evidence": "original_assets/sop-compliance-check/merkle_root",
+        "member_merkle_root": "eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f"
+      }
+    ],
+    "team_lead": "requirement-clarify-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ab2dbd08457d6a81",
+  "prompt_hash": "68c92bc0463ee981",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1159\", \"kind\": \"team\", \"name\": \"需求澄清专家\", \"description\": \"擅长目标明确、边界界定与验收标准，覆盖需求澄清全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"requirement-clarify-pro-team-lead\", \"role\": \"lead\", \"name\": \"需求澄清主理人\", \"evidence\": null}, {\"slug\": \"requirement-clarify-pro\", \"role\": \"member\", \"name\": \"需求澄清 边界确认 顾问\", \"evidence\": \"original_assets/requirement-clarify-pro/merkle_root\", \"member_merkle_root\": \"4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39\"}, {\"slug\": \"deal-review-pro\", \"role\": \"member\", \"name\": \"商机评审 风险把关 顾问\", \"evidence\": \"original_assets/deal-review-pro/merkle_root\", \"member_merkle_root\": \"872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265\"}, {\"slug\": \"sop-compliance-check\", \"role\": \"member\", \"name\": \"流程合规 步骤核验 顾问\", \"evidence\": \"original_assets/sop-compliance-check/merkle_root\", \"member_merkle_root\": \"eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f\"}], \"team_lead\": \"requirement-clarify-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/deal-review-pro.md": "3c0fa031a40ded0b3a4481e688d16f920e5a36806ed89dc417ac27ec16fe9c0a",
+    "agents/requirement-clarify-pro-team-lead.md": "c057e67bf0774cbf1a9c60976e8f74edbea475e767b9d4d9ae8ba541c8c0b8b0",
+    "agents/requirement-clarify-pro.md": "a08ddfbd8979d162f8e7d98cacb933a7791f3c2b6f2cf3dd8f4cfff6d724f260",
+    "agents/sop-compliance-check.md": "2613d69e7f19d63c095901f1c1d504b107fbd4aa37deee7660deccd78ff9c91d",
+    "plugin.json": "b60a428cf1a4bba494e5b60cd62a08c7e5481dcfa059e8163093ac802c5fc693",
+    "settings.json": "d41b9785b53ffe5ab2a84542c1eb06464e53f19f48acebe9ab7943dfd4bd0e26"
+  }
+}

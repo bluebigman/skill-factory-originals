@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-932",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-932",
+    "kind": "team",
+    "name": "文档转写专家",
+    "description": "输入验证链相关需求，输出多级校验、独立判据、拦截优先三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-06-team-lead",
+        "role": "lead",
+        "name": "文档转写主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-06",
+        "role": "member",
+        "name": "文档转写 结构化转换",
+        "evidence": "original_assets/data-clean-pro-06/merkle_root",
+        "member_merkle_root": "b6eba41cabce760412d11983b7b908b6c4e317370797cbd9da29f421a39b9b4e"
+      },
+      {
+        "slug": "agent-output-verify-chain",
+        "role": "member",
+        "name": "验证链 多级校验 顾问",
+        "evidence": "original_assets/agent-output-verify-chain/merkle_root",
+        "member_merkle_root": "37806a3ac995a1d9ba36870e32c0326d6dcb72eaefa2ce74c5ada2b6db34e5d8"
+      },
+      {
+        "slug": "sql-toolkit-pro-fixed",
+        "role": "member",
+        "name": "关系查询 HEC 方言适配",
+        "evidence": "original_assets/sql-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999"
+      }
+    ],
+    "team_lead": "data-clean-pro-06-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "06bc5d18c774bfa5",
+  "prompt_hash": "07258a0f1afa0baa",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-932\", \"kind\": \"team\", \"name\": \"文档转写专家\", \"description\": \"输入验证链相关需求，输出多级校验、独立判据、拦截优先三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-06-team-lead\", \"role\": \"lead\", \"name\": \"文档转写主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-06\", \"role\": \"member\", \"name\": \"文档转写 结构化转换\", \"evidence\": \"original_assets/data-clean-pro-06/merkle_root\", \"member_merkle_root\": \"b6eba41cabce760412d11983b7b908b6c4e317370797cbd9da29f421a39b9b4e\"}, {\"slug\": \"agent-output-verify-chain\", \"role\": \"member\", \"name\": \"验证链 多级校验 顾问\", \"evidence\": \"original_assets/agent-output-verify-chain/merkle_root\", \"member_merkle_root\": \"37806a3ac995a1d9ba36870e32c0326d6dcb72eaefa2ce74c5ada2b6db34e5d8\"}, {\"slug\": \"sql-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"关系查询 HEC 方言适配\", \"evidence\": \"original_assets/sql-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999\"}], \"team_lead\": \"data-clean-pro-06-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-verify-chain.md": "562192f2c6531c6b8ebf50c55497926e338c1830c3b1e85e7fa98a6dc724fa13",
+    "agents/data-clean-pro-06-team-lead.md": "b4a8ef634ec9e7092b35366c184da2efb50cca79b16204aa6a46aa4bd708246c",
+    "agents/data-clean-pro-06.md": "7298b071c78e851dfa7eb5e1732c3e1362da972f8972c26d0fa33f2c7aa59029",
+    "agents/sql-toolkit-pro-fixed.md": "7cdb3aefe346ae21524eba2555894f9ee6a6da43b340b7d58b51153e34af9fd0",
+    "plugin.json": "7d97957c9f48c00b603e40207ce9a035152a9e6b1e99eaf0a1c03f7be01e31b5",
+    "settings.json": "a1b29f3b8e8ffed24ec2e2afa4b1e638b0543294dad1b9b1c16cb425fc9354e3"
+  }
+}

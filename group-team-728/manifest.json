@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-728",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-728",
+    "kind": "team",
+    "name": "任务交接专家",
+    "description": "输入任务交接相关需求，输出责任明确、验收标准、回执确认三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "project-planning-expert-team-lead",
+        "role": "lead",
+        "name": "项目管理排期专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "project-planning-expert",
+        "role": "member",
+        "name": "项目管理排期专家",
+        "evidence": "original_assets/project-planning-expert/merkle_root",
+        "member_merkle_root": "a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9"
+      },
+      {
+        "slug": "agent-handoff-pro",
+        "role": "member",
+        "name": "任务交接 上下文传 顾问",
+        "evidence": "original_assets/agent-handoff-pro/merkle_root",
+        "member_merkle_root": "f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d"
+      },
+      {
+        "slug": "win-loss-analysis",
+        "role": "member",
+        "name": "赢单复盘 归因分析 顾问",
+        "evidence": "original_assets/win-loss-analysis/merkle_root",
+        "member_merkle_root": "8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd"
+      }
+    ],
+    "team_lead": "project-planning-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7f7b6df4f6544014",
+  "prompt_hash": "1d9a3f9616c6393b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-728\", \"kind\": \"team\", \"name\": \"任务交接专家\", \"description\": \"输入任务交接相关需求，输出责任明确、验收标准、回执确认三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"project-planning-expert-team-lead\", \"role\": \"lead\", \"name\": \"项目管理排期专家主理人\", \"evidence\": null}, {\"slug\": \"project-planning-expert\", \"role\": \"member\", \"name\": \"项目管理排期专家\", \"evidence\": \"original_assets/project-planning-expert/merkle_root\", \"member_merkle_root\": \"a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9\"}, {\"slug\": \"agent-handoff-pro\", \"role\": \"member\", \"name\": \"任务交接 上下文传 顾问\", \"evidence\": \"original_assets/agent-handoff-pro/merkle_root\", \"member_merkle_root\": \"f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d\"}, {\"slug\": \"win-loss-analysis\", \"role\": \"member\", \"name\": \"赢单复盘 归因分析 顾问\", \"evidence\": \"original_assets/win-loss-analysis/merkle_root\", \"member_merkle_root\": \"8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd\"}], \"team_lead\": \"project-planning-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-handoff-pro.md": "f8dd86d6c2943e29cc99c2d013f446f5ec3f3d9e0f9ee5d386d7aba61cb01d55",
+    "agents/project-planning-expert-team-lead.md": "0dd6081cb5d4e178aff9ac06652c5048aacccda11b7aaded34bb362cd79b9bb1",
+    "agents/project-planning-expert.md": "1a4d7e2402f9aed50d2900ecfce9f1d454cf175e65899659bbb595527e06e9e0",
+    "agents/win-loss-analysis.md": "5d3f4f3dfa527cae177f395c732fe9823d700d9824297470bbc9fd33fcf5ab7b",
+    "plugin.json": "f64f2e96b38524a4a44aa34e7695423cb0d735e32f17b37490e8094690713027",
+    "settings.json": "3dbb1f89df5fba76599864f66e2a7c44ec4e6bcbd5ff75dbf7d62eb6d97b62cd"
+  }
+}

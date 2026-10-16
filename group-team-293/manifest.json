@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-293",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-293",
+    "kind": "team",
+    "name": "管线时效专家",
+    "description": "擅长水位监控、超时告警与分级承诺，覆盖管线时效全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-sla-team-lead",
+        "role": "lead",
+        "name": "管线时效主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-sla",
+        "role": "member",
+        "name": "管线时效 延迟监控 顾问",
+        "evidence": "original_assets/data-pipeline-sla/merkle_root",
+        "member_merkle_root": "47f7adb5fa7c316552f4f09a0bd78259c3846d48b44e4a561a61deffd29f3040"
+      },
+      {
+        "slug": "query-cache-pro",
+        "role": "member",
+        "name": "查询缓存 命中优化 顾问",
+        "evidence": "original_assets/query-cache-pro/merkle_root",
+        "member_merkle_root": "951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf"
+      },
+      {
+        "slug": "report-automation-pro",
+        "role": "member",
+        "name": "报表自动 定时生成 顾问",
+        "evidence": "original_assets/report-automation-pro/merkle_root",
+        "member_merkle_root": "48a4feea1f986d230fd3f2739fa3ed4ce62ad8d3c2b84b2938ed926e0cf1481f"
+      }
+    ],
+    "team_lead": "data-pipeline-sla-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f9429f98c473b080",
+  "prompt_hash": "39bdbde0b4d0641d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-293\", \"kind\": \"team\", \"name\": \"管线时效专家\", \"description\": \"擅长水位监控、超时告警与分级承诺，覆盖管线时效全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-sla-team-lead\", \"role\": \"lead\", \"name\": \"管线时效主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-sla\", \"role\": \"member\", \"name\": \"管线时效 延迟监控 顾问\", \"evidence\": \"original_assets/data-pipeline-sla/merkle_root\", \"member_merkle_root\": \"47f7adb5fa7c316552f4f09a0bd78259c3846d48b44e4a561a61deffd29f3040\"}, {\"slug\": \"query-cache-pro\", \"role\": \"member\", \"name\": \"查询缓存 命中优化 顾问\", \"evidence\": \"original_assets/query-cache-pro/merkle_root\", \"member_merkle_root\": \"951847e4932a602f6714750bb82da22c1a9c15eb34b7e4efc6397dac77286edf\"}, {\"slug\": \"report-automation-pro\", \"role\": \"member\", \"name\": \"报表自动 定时生成 顾问\", \"evidence\": \"original_assets/report-automation-pro/merkle_root\", \"member_merkle_root\": \"48a4feea1f986d230fd3f2739fa3ed4ce62ad8d3c2b84b2938ed926e0cf1481f\"}], \"team_lead\": \"data-pipeline-sla-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-pipeline-sla-team-lead.md": "da63ba0f2929bc519d41ab8c19373cbfe5006836c7b088d185d29804ef95e8bd",
+    "agents/data-pipeline-sla.md": "056dfbc13a5f91c2c9d385c44b6db3b4179dd19ccd7f5c95c1c7c4b3a100271f",
+    "agents/query-cache-pro.md": "2d6e31924be549f0fdee4a2b34841cbbded650e842c5777356c7294e9b9ac7de",
+    "agents/report-automation-pro.md": "6d8f5ed8e0b2ac5e32fb53bbeca5f87a48d5883e56785445e39afae88eec4343",
+    "plugin.json": "10da044be98a19293ec3238a6671b63682d7f5554f7bb97ba7c1ac43e75ac128",
+    "settings.json": "7a8950b4ee5b2c82727daac0e69304b32bdc7801b60ae3bde20dd073f5328e26"
+  }
+}

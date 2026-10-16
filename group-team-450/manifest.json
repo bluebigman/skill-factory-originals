@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-450",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-450",
+    "kind": "team",
+    "name": "信息架构专家",
+    "description": "擅长卡片分类、交叉验证与层级克制，覆盖信息架构全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "info-architecture-team-lead",
+        "role": "lead",
+        "name": "信息架构主理人",
+        "evidence": null
+      },
+      {
+        "slug": "info-architecture",
+        "role": "member",
+        "name": "信息架构 梳理 顾问",
+        "evidence": "original_assets/info-architecture/merkle_root",
+        "member_merkle_root": "0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105"
+      },
+      {
+        "slug": "product-roadmap-pro",
+        "role": "member",
+        "name": "产品路线 优先级 顾问",
+        "evidence": "original_assets/product-roadmap-pro/merkle_root",
+        "member_merkle_root": "9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f"
+      },
+      {
+        "slug": "game-monetize-ethic",
+        "role": "member",
+        "name": "游戏内购 体验底线 顾问",
+        "evidence": "original_assets/game-monetize-ethic/merkle_root",
+        "member_merkle_root": "f10e57214f27df624a126ec2c00bbf725d2f0914fbbd9eeb28d3d0c61476c9f6"
+      }
+    ],
+    "team_lead": "info-architecture-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "aed4f2fd69b0f432",
+  "prompt_hash": "427b0e7059ddb168",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-450\", \"kind\": \"team\", \"name\": \"信息架构专家\", \"description\": \"擅长卡片分类、交叉验证与层级克制，覆盖信息架构全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"info-architecture-team-lead\", \"role\": \"lead\", \"name\": \"信息架构主理人\", \"evidence\": null}, {\"slug\": \"info-architecture\", \"role\": \"member\", \"name\": \"信息架构 梳理 顾问\", \"evidence\": \"original_assets/info-architecture/merkle_root\", \"member_merkle_root\": \"0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105\"}, {\"slug\": \"product-roadmap-pro\", \"role\": \"member\", \"name\": \"产品路线 优先级 顾问\", \"evidence\": \"original_assets/product-roadmap-pro/merkle_root\", \"member_merkle_root\": \"9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f\"}, {\"slug\": \"game-monetize-ethic\", \"role\": \"member\", \"name\": \"游戏内购 体验底线 顾问\", \"evidence\": \"original_assets/game-monetize-ethic/merkle_root\", \"member_merkle_root\": \"f10e57214f27df624a126ec2c00bbf725d2f0914fbbd9eeb28d3d0c61476c9f6\"}], \"team_lead\": \"info-architecture-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-monetize-ethic.md": "138ea75be6ec6db767569396ba772aa11b3694162c5b3df9296134057eb18169",
+    "agents/info-architecture-team-lead.md": "8b71348cd24e89e8463b4f884413fdd8d0b77736e5b0de3a25dd7264b5fc38d8",
+    "agents/info-architecture.md": "0e671357308e237343eed4a0a1455a6f1b8d62d4ef8cb801b86b602d8648d494",
+    "agents/product-roadmap-pro.md": "d01098830017e50dae02726c56a220807c3cbd40563ff090c10f55f49d21b793",
+    "plugin.json": "b8babc48c4072001f136effe84d0e63fd17d41abccaf4757eece0e2df329e831",
+    "settings.json": "01f6a6b60ae4f97eb69a40e63ad808e441f38994e589eb66c58ed13c6b262ff4"
+  }
+}

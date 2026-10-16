@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1056",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1056",
+    "kind": "team",
+    "name": "只读查询守护专家",
+    "description": "输入只读查询守护相关需求，输出强制只读、限制行数、超时保护三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-readonly-guard-team-lead",
+        "role": "lead",
+        "name": "只读查询守护主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-readonly-guard",
+        "role": "member",
+        "name": "只读查询守护 顾问",
+        "evidence": "original_assets/sql-readonly-guard/merkle_root",
+        "member_merkle_root": "7b9154345ea15c96df9a46a98cc47092891012a27938518e6d19165fddf555e2"
+      },
+      {
+        "slug": "log-correlation",
+        "role": "member",
+        "name": "日志关联追踪 助手",
+        "evidence": "original_assets/log-correlation/merkle_root",
+        "member_merkle_root": "85788f203ef52a1c5f6125d16ca8448a24a16a71099acc05fa61a16faa6c66dc"
+      },
+      {
+        "slug": "api-rate-govern",
+        "role": "member",
+        "name": "限流治理 配额分配 顾问",
+        "evidence": "original_assets/api-rate-govern/merkle_root",
+        "member_merkle_root": "9d64e671d16340e1702f788feb52fd7344f0b36eee2b08852bce8d9f94552b4a"
+      }
+    ],
+    "team_lead": "sql-readonly-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c87921836946f0b1",
+  "prompt_hash": "1917448442c88cb6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1056\", \"kind\": \"team\", \"name\": \"只读查询守护专家\", \"description\": \"输入只读查询守护相关需求，输出强制只读、限制行数、超时保护三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-readonly-guard-team-lead\", \"role\": \"lead\", \"name\": \"只读查询守护主理人\", \"evidence\": null}, {\"slug\": \"sql-readonly-guard\", \"role\": \"member\", \"name\": \"只读查询守护 顾问\", \"evidence\": \"original_assets/sql-readonly-guard/merkle_root\", \"member_merkle_root\": \"7b9154345ea15c96df9a46a98cc47092891012a27938518e6d19165fddf555e2\"}, {\"slug\": \"log-correlation\", \"role\": \"member\", \"name\": \"日志关联追踪 助手\", \"evidence\": \"original_assets/log-correlation/merkle_root\", \"member_merkle_root\": \"85788f203ef52a1c5f6125d16ca8448a24a16a71099acc05fa61a16faa6c66dc\"}, {\"slug\": \"api-rate-govern\", \"role\": \"member\", \"name\": \"限流治理 配额分配 顾问\", \"evidence\": \"original_assets/api-rate-govern/merkle_root\", \"member_merkle_root\": \"9d64e671d16340e1702f788feb52fd7344f0b36eee2b08852bce8d9f94552b4a\"}], \"team_lead\": \"sql-readonly-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-rate-govern.md": "db7eb09bfc85e3aac208811f2449b7f7795c89356e5ba9184670333e440f9f31",
+    "agents/log-correlation.md": "e3c4173068597997dc048893ceb15a165e0085f3f1af59df7496804b64685192",
+    "agents/sql-readonly-guard-team-lead.md": "35c7955b9474d0bf66b2dc28a0c18264521023ed066f33e684b0031801d15e96",
+    "agents/sql-readonly-guard.md": "b2052c0694049dfd0313026380fd4d7e14cdab7b378e1382ad5394a5867f40a9",
+    "plugin.json": "121acdb44c62719a4a918a28578046c567cb394f5047de0b85a55adec61b5b07",
+    "settings.json": "92abb9b5df2752ab131d7b47352d4ba4ec8280bf4b55c057251666f2b02da7fd"
+  }
+}

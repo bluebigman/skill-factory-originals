@@ -1,0 +1,126 @@
+{
+  "agentName": "sop-writer-pro-team-lead",
+  "agents": [
+    "./agents/sop-writer-pro-team-lead.md",
+    "./agents/sop-writer-pro.md",
+    "./agents/cross-border-listing-pro.md",
+    "./agents/handover-doc.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 流程编写",
+    "zh": "帮我处理流程编写"
+  },
+  "description": "sop-writer-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 流程编写, covers 输入输出 / 异常分支 / 先查禁售, delivering structured results and actionable checklists.",
+    "zh": "流程编写专家：围绕流程编写，覆盖输入输出／异常分支／先查禁售，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "sop-writer-pro Team",
+    "zh": "流程编写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sop-writer-pro-team-lead",
+      "name": {
+        "en": "流程编写主理人",
+        "zh": "流程编写主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sop-writer-pro.png",
+      "id": "sop-writer-pro",
+      "name": {
+        "en": "sop-writer-pro",
+        "zh": "流程编写 步骤细化 顾问"
+      },
+      "profession": {
+        "en": "sop-writer-pro",
+        "zh": "流程编写 步骤细化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cross-border-listing-pro.png",
+      "id": "cross-border-listing-pro",
+      "name": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "profession": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/handover-doc.png",
+      "id": "handover-doc",
+      "name": {
+        "en": "handover-doc",
+        "zh": "交接文档撰写 助手"
+      },
+      "profession": {
+        "en": "handover-doc",
+        "zh": "交接文档撰写 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-828",
+  "plugin": "group-team-828",
+  "profession": {
+    "en": "sop-writer-pro Collaboration Team",
+    "zh": "流程编写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 流程编写",
+      "zh": "帮我处理流程编写"
+    },
+    {
+      "en": "Plan 跨境选品",
+      "zh": "帮我规划跨境选品"
+    },
+    {
+      "en": "Review 交接文档撰写",
+      "zh": "帮我检查交接文档撰写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "步骤可执行",
+      "zh": "步骤可执行"
+    },
+    {
+      "en": "责任人",
+      "zh": "责任人"
+    },
+    {
+      "en": "输入输出",
+      "zh": "输入输出"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sop-writer-pro-team-lead",
+    "memberAgents": [
+      "sop-writer-pro",
+      "cross-border-listing-pro",
+      "handover-doc"
+    ]
+  },
+  "version": "1.0.0"
+}

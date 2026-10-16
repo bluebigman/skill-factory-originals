@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-641",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-641",
+    "kind": "team",
+    "name": "寻路设计专家",
+    "description": "寻路设计专家：围绕导视系统，覆盖层级一致／视觉连续／进度可见，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "space-wayfinding-team-lead",
+        "role": "lead",
+        "name": "导视系统主理人",
+        "evidence": null
+      },
+      {
+        "slug": "space-wayfinding",
+        "role": "member",
+        "name": "导视系统 寻路设计 顾问",
+        "evidence": "original_assets/space-wayfinding/merkle_root",
+        "member_merkle_root": "df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e"
+      },
+      {
+        "slug": "gamification-design",
+        "role": "member",
+        "name": "任务激励 系统设计 顾问",
+        "evidence": "original_assets/gamification-design/merkle_root",
+        "member_merkle_root": "3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765"
+      },
+      {
+        "slug": "mobile-gesture-pro",
+        "role": "member",
+        "name": "移动交互 手势规范 顾问",
+        "evidence": "original_assets/mobile-gesture-pro/merkle_root",
+        "member_merkle_root": "09daa380c941bfe94db42c16a5d9b8e5c0f0d0e2b891458a4987cc033ced5b43"
+      }
+    ],
+    "team_lead": "space-wayfinding-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c788e4ad99c01fb0",
+  "prompt_hash": "5276b88688f26f68",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-641\", \"kind\": \"team\", \"name\": \"寻路设计专家\", \"description\": \"寻路设计专家：围绕导视系统，覆盖层级一致／视觉连续／进度可见，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"space-wayfinding-team-lead\", \"role\": \"lead\", \"name\": \"导视系统主理人\", \"evidence\": null}, {\"slug\": \"space-wayfinding\", \"role\": \"member\", \"name\": \"导视系统 寻路设计 顾问\", \"evidence\": \"original_assets/space-wayfinding/merkle_root\", \"member_merkle_root\": \"df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e\"}, {\"slug\": \"gamification-design\", \"role\": \"member\", \"name\": \"任务激励 系统设计 顾问\", \"evidence\": \"original_assets/gamification-design/merkle_root\", \"member_merkle_root\": \"3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765\"}, {\"slug\": \"mobile-gesture-pro\", \"role\": \"member\", \"name\": \"移动交互 手势规范 顾问\", \"evidence\": \"original_assets/mobile-gesture-pro/merkle_root\", \"member_merkle_root\": \"09daa380c941bfe94db42c16a5d9b8e5c0f0d0e2b891458a4987cc033ced5b43\"}], \"team_lead\": \"space-wayfinding-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/gamification-design.md": "8bbf8bf676172cf0890585a4260f075ca370bf0790d678ae56fd03fe27cd6679",
+    "agents/mobile-gesture-pro.md": "ebbba4d744983a580e286a63e86aeeb8a6052e4dff9beb75b60a10e0e5387eaa",
+    "agents/space-wayfinding-team-lead.md": "67e5e48325b1e02e9e2126dce5d677391356fbed076c5e1788e3e6ba010aab17",
+    "agents/space-wayfinding.md": "f9a5172b0b2d9b6899b74e74e9d016ef363b743bf76f3c1a3e18ae7e603f1bec",
+    "plugin.json": "fa2ff00c469757f11c5ba5118bda55011a21397e2a38d3f7b8813189a55c9ad3",
+    "settings.json": "39d9cbaca6186343f31525c2c8476b7db2df308f290fdf78e6967f397bf9a505"
+  }
+}

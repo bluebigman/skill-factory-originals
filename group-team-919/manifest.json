@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-919",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-919",
+    "kind": "team",
+    "name": "文档转换容错转换专家",
+    "description": "输入内容排期相关需求，输出主题先行、形式搭配、复用机制三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-convert-pro-02-fixed-team-lead",
+        "role": "lead",
+        "name": "文档转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-convert-pro-02-fixed",
+        "role": "member",
+        "name": "文档转换 容错转换 标签修复",
+        "evidence": "original_assets/doc-convert-pro-02-fixed/merkle_root",
+        "member_merkle_root": "86da6bdecac82ef29cc6388b98b68acba9597ee64641a194902ee387d035d6d6"
+      },
+      {
+        "slug": "content-calendar-pro",
+        "role": "member",
+        "name": "内容排期 节奏管理 顾问",
+        "evidence": "original_assets/content-calendar-pro/merkle_root",
+        "member_merkle_root": "dd7f22f0f2d4e3c83b5fcc721e1ae74eabd3e86ff3ffee346c6c4ccd9a2cf9a5"
+      },
+      {
+        "slug": "newsletter-coach",
+        "role": "member",
+        "name": "订阅通讯 内容运营 教练",
+        "evidence": "original_assets/newsletter-coach/merkle_root",
+        "member_merkle_root": "4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c"
+      }
+    ],
+    "team_lead": "doc-convert-pro-02-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "270ae5d6ebe0826a",
+  "prompt_hash": "48f337e5db957266",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-919\", \"kind\": \"team\", \"name\": \"文档转换容错转换专家\", \"description\": \"输入内容排期相关需求，输出主题先行、形式搭配、复用机制三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-convert-pro-02-fixed-team-lead\", \"role\": \"lead\", \"name\": \"文档转换主理人\", \"evidence\": null}, {\"slug\": \"doc-convert-pro-02-fixed\", \"role\": \"member\", \"name\": \"文档转换 容错转换 标签修复\", \"evidence\": \"original_assets/doc-convert-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"86da6bdecac82ef29cc6388b98b68acba9597ee64641a194902ee387d035d6d6\"}, {\"slug\": \"content-calendar-pro\", \"role\": \"member\", \"name\": \"内容排期 节奏管理 顾问\", \"evidence\": \"original_assets/content-calendar-pro/merkle_root\", \"member_merkle_root\": \"dd7f22f0f2d4e3c83b5fcc721e1ae74eabd3e86ff3ffee346c6c4ccd9a2cf9a5\"}, {\"slug\": \"newsletter-coach\", \"role\": \"member\", \"name\": \"订阅通讯 内容运营 教练\", \"evidence\": \"original_assets/newsletter-coach/merkle_root\", \"member_merkle_root\": \"4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c\"}], \"team_lead\": \"doc-convert-pro-02-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-calendar-pro.md": "724ca4ad528e9b17fcf1c4999c40a23b06d905e1d73aae210c88b484dba1da88",
+    "agents/doc-convert-pro-02-fixed-team-lead.md": "73c1bd515fed52e0fd962769ea93fac3a7c7e3d4d138afbe90b3b067435fddad",
+    "agents/doc-convert-pro-02-fixed.md": "c4ba341a39c92828054a9aac9112d1a1ce085db1f5676103e3ad995ba7c9e2a5",
+    "agents/newsletter-coach.md": "4492feac4043e251cb5b5bd70840ffa4456e8dbf7398012ee72dc124ec91c4db",
+    "plugin.json": "7d95af5ecc13dd720429a38ac360fb7cf4149dba038ee9ae3802c76df2a26afd",
+    "settings.json": "d206d01c3991e44ee1b1d12de842bd7cbd455527eb0d944ec9d2e5ae7e69da71"
+  }
+}

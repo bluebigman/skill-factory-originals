@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1062",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1062",
+    "kind": "team",
+    "name": "全球内容专家",
+    "description": "输入全球内容相关需求，输出节庆对齐、按区发布、素材分级三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "global-content-calendar-team-lead",
+        "role": "lead",
+        "name": "全球内容主理人",
+        "evidence": null
+      },
+      {
+        "slug": "global-content-calendar",
+        "role": "member",
+        "name": "全球内容 排期协调 顾问",
+        "evidence": "original_assets/global-content-calendar/merkle_root",
+        "member_merkle_root": "e23ebe26f1331d2c7511239619168ed058a0ee6b51a318030160ec6233d9d361"
+      },
+      {
+        "slug": "writing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "文本净化 自然化改写 格式校准",
+        "evidence": "original_assets/writing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "45f6debcd20b1de0881602df43c31167689299e5b2a185308302baa124923cca"
+      },
+      {
+        "slug": "newsletter-coach",
+        "role": "member",
+        "name": "订阅通讯 内容运营 教练",
+        "evidence": "original_assets/newsletter-coach/merkle_root",
+        "member_merkle_root": "4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c"
+      }
+    ],
+    "team_lead": "global-content-calendar-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ddc8adada8515065",
+  "prompt_hash": "f7d470ef3582e70f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1062\", \"kind\": \"team\", \"name\": \"全球内容专家\", \"description\": \"输入全球内容相关需求，输出节庆对齐、按区发布、素材分级三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"global-content-calendar-team-lead\", \"role\": \"lead\", \"name\": \"全球内容主理人\", \"evidence\": null}, {\"slug\": \"global-content-calendar\", \"role\": \"member\", \"name\": \"全球内容 排期协调 顾问\", \"evidence\": \"original_assets/global-content-calendar/merkle_root\", \"member_merkle_root\": \"e23ebe26f1331d2c7511239619168ed058a0ee6b51a318030160ec6233d9d361\"}, {\"slug\": \"writing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"文本净化 自然化改写 格式校准\", \"evidence\": \"original_assets/writing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"45f6debcd20b1de0881602df43c31167689299e5b2a185308302baa124923cca\"}, {\"slug\": \"newsletter-coach\", \"role\": \"member\", \"name\": \"订阅通讯 内容运营 教练\", \"evidence\": \"original_assets/newsletter-coach/merkle_root\", \"member_merkle_root\": \"4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c\"}], \"team_lead\": \"global-content-calendar-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/global-content-calendar-team-lead.md": "1b4d453458c062f63bdb5d08ebcc00a764332eb40210695e5a51799f71ad09a7",
+    "agents/global-content-calendar.md": "15c8787d40fe424a33d39b3501433e50c1f87f39827ff622373521a98eaeb967",
+    "agents/newsletter-coach.md": "848dd78172ba4af5d88bf2fa5c8438c981205e506e13b9f4f32f21ec3d160f48",
+    "agents/writing-toolkit-pro-fixed.md": "7096cd455889d2f4b93029f1c5a2f8fdbfbbb25316375ec87867921ca27ec8b3",
+    "plugin.json": "b5dad169e829148b95a12dc684d7e5aa11a4b946b8854012ea0cf447bd598634",
+    "settings.json": "f6b895813e75685a2f17cd7471f81b9030b44e3976c3186577ae658ff122a198"
+  }
+}

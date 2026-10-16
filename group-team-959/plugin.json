@@ -1,0 +1,126 @@
+{
+  "agentName": "naming-method-team-lead",
+  "agents": [
+    "./agents/naming-method-team-lead.md",
+    "./agents/naming-method.md",
+    "./agents/doc-localization-pro.md",
+    "./agents/brand-tone-guide.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 命名方法",
+    "zh": "帮我处理命名方法"
+  },
+  "description": "naming-method team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 命名方法 requirements, output three deliverables: 先定调性, 可读优先, 避免歧义. Verifiable end-to-end, evidence per step.",
+    "zh": "输入命名方法相关需求，输出先定调性、可读优先、避免歧义三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "naming-method Team",
+    "zh": "命名方法专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "naming-method-team-lead",
+      "name": {
+        "en": "命名方法主理人",
+        "zh": "命名方法主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/naming-method.png",
+      "id": "naming-method",
+      "name": {
+        "en": "naming-method",
+        "zh": "命名方法 顾问"
+      },
+      "profession": {
+        "en": "naming-method",
+        "zh": "命名方法 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-localization-pro.png",
+      "id": "doc-localization-pro",
+      "name": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "profession": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/brand-tone-guide.png",
+      "id": "brand-tone-guide",
+      "name": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "profession": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-959",
+  "plugin": "group-team-959",
+  "profession": {
+    "en": "naming-method Collaboration Team",
+    "zh": "命名方法专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 命名方法",
+      "zh": "帮我处理命名方法"
+    },
+    {
+      "en": "Plan 文档本地",
+      "zh": "帮我规划文档本地"
+    },
+    {
+      "en": "Review 品牌语气指南",
+      "zh": "帮我检查品牌语气指南"
+    }
+  ],
+  "tags": [
+    {
+      "en": "可读优先",
+      "zh": "可读优先"
+    },
+    {
+      "en": "避免歧义",
+      "zh": "避免歧义"
+    },
+    {
+      "en": "唯一性",
+      "zh": "唯一性"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "naming-method-team-lead",
+    "memberAgents": [
+      "naming-method",
+      "doc-localization-pro",
+      "brand-tone-guide"
+    ]
+  },
+  "version": "1.0.0"
+}

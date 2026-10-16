@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-638",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-638",
+    "kind": "team",
+    "name": "学术研究资料检索专家",
+    "description": "擅长身份唯一、凭据轮换与最小暴露，覆盖身份管理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "research-ops-expert-team-lead",
+        "role": "lead",
+        "name": "学术研究主理人",
+        "evidence": null
+      },
+      {
+        "slug": "research-ops-expert",
+        "role": "member",
+        "name": "学术研究 资料检索 综述整理",
+        "evidence": "original_assets/research-ops-expert/merkle_root",
+        "member_merkle_root": "98054f0ede11b6670a1acae3c7d9db99e91344e38713ce598b265faf7f627fa4"
+      },
+      {
+        "slug": "agent-identity-manage",
+        "role": "member",
+        "name": "身份管理 凭据轮换 顾问",
+        "evidence": "original_assets/agent-identity-manage/merkle_root",
+        "member_merkle_root": "26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533"
+      },
+      {
+        "slug": "agent-red-team",
+        "role": "member",
+        "name": "对抗测试 越权探测 顾问",
+        "evidence": "original_assets/agent-red-team/merkle_root",
+        "member_merkle_root": "bab54a8701fef286bfa688a05c77f1e693cf4a907d0c6b7012cd72b1f4b92b39"
+      }
+    ],
+    "team_lead": "research-ops-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "60975c292caebc59",
+  "prompt_hash": "d5581a3a24b6922b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-638\", \"kind\": \"team\", \"name\": \"学术研究资料检索专家\", \"description\": \"擅长身份唯一、凭据轮换与最小暴露，覆盖身份管理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"research-ops-expert-team-lead\", \"role\": \"lead\", \"name\": \"学术研究主理人\", \"evidence\": null}, {\"slug\": \"research-ops-expert\", \"role\": \"member\", \"name\": \"学术研究 资料检索 综述整理\", \"evidence\": \"original_assets/research-ops-expert/merkle_root\", \"member_merkle_root\": \"98054f0ede11b6670a1acae3c7d9db99e91344e38713ce598b265faf7f627fa4\"}, {\"slug\": \"agent-identity-manage\", \"role\": \"member\", \"name\": \"身份管理 凭据轮换 顾问\", \"evidence\": \"original_assets/agent-identity-manage/merkle_root\", \"member_merkle_root\": \"26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533\"}, {\"slug\": \"agent-red-team\", \"role\": \"member\", \"name\": \"对抗测试 越权探测 顾问\", \"evidence\": \"original_assets/agent-red-team/merkle_root\", \"member_merkle_root\": \"bab54a8701fef286bfa688a05c77f1e693cf4a907d0c6b7012cd72b1f4b92b39\"}], \"team_lead\": \"research-ops-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-identity-manage.md": "2729cfcc3c66f9d08d0ffd2651613744e50698eca4057236bbe72d9a33850b5c",
+    "agents/agent-red-team.md": "aa939ae465d882560bf70ada61ec3392ac2eb1f0b03a4f174683bd966fb461a0",
+    "agents/research-ops-expert-team-lead.md": "d64293989d2cca3e508cc10fad621716b6ad8f33fd5888e684a7b8280c972100",
+    "agents/research-ops-expert.md": "c3dc3f417a742813ca27c65422548488c189adec10a1b96a4d60311480b24e6e",
+    "plugin.json": "40b71c512ee83fbaa6484e09b905f3ce76644b395ade11db8a087e9013c0453c",
+    "settings.json": "925fd9606ef12ba040a5bdc75fe1540d8bf2d997124be618809268e41803026f"
+  }
+}

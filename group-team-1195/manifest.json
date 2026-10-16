@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1195",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1195",
+    "kind": "team",
+    "name": "编辑评审流程专家",
+    "description": "擅长分级评审、角色明确与来源可查，覆盖编辑评审流程全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "editorial-review-flow-team-lead",
+        "role": "lead",
+        "name": "编辑评审流程主理人",
+        "evidence": null
+      },
+      {
+        "slug": "editorial-review-flow",
+        "role": "member",
+        "name": "编辑评审流程 顾问",
+        "evidence": "original_assets/editorial-review-flow/merkle_root",
+        "member_merkle_root": "3f783299fc712e228a394c81420bc7ddf7f6bbab245c1e07bd84d64e0380ab7c"
+      },
+      {
+        "slug": "citation-format-pro",
+        "role": "member",
+        "name": "引用规范 来源标注 顾问",
+        "evidence": "original_assets/citation-format-pro/merkle_root",
+        "member_merkle_root": "83b069281f0368a7a368d7e331009a935900223577889e8693d8b64f2d51456a"
+      },
+      {
+        "slug": "doc-batch-process",
+        "role": "member",
+        "name": "文档批处 模板套用 顾问",
+        "evidence": "original_assets/doc-batch-process/merkle_root",
+        "member_merkle_root": "1f5eb82a5d7a0122dabab8fb1360324f5685082c9676704fde1029436e6f2ed0"
+      }
+    ],
+    "team_lead": "editorial-review-flow-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "98684b6c704d5a5e",
+  "prompt_hash": "73aefc75feb3add6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1195\", \"kind\": \"team\", \"name\": \"编辑评审流程专家\", \"description\": \"擅长分级评审、角色明确与来源可查，覆盖编辑评审流程全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"editorial-review-flow-team-lead\", \"role\": \"lead\", \"name\": \"编辑评审流程主理人\", \"evidence\": null}, {\"slug\": \"editorial-review-flow\", \"role\": \"member\", \"name\": \"编辑评审流程 顾问\", \"evidence\": \"original_assets/editorial-review-flow/merkle_root\", \"member_merkle_root\": \"3f783299fc712e228a394c81420bc7ddf7f6bbab245c1e07bd84d64e0380ab7c\"}, {\"slug\": \"citation-format-pro\", \"role\": \"member\", \"name\": \"引用规范 来源标注 顾问\", \"evidence\": \"original_assets/citation-format-pro/merkle_root\", \"member_merkle_root\": \"83b069281f0368a7a368d7e331009a935900223577889e8693d8b64f2d51456a\"}, {\"slug\": \"doc-batch-process\", \"role\": \"member\", \"name\": \"文档批处 模板套用 顾问\", \"evidence\": \"original_assets/doc-batch-process/merkle_root\", \"member_merkle_root\": \"1f5eb82a5d7a0122dabab8fb1360324f5685082c9676704fde1029436e6f2ed0\"}], \"team_lead\": \"editorial-review-flow-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/citation-format-pro.md": "86ae2bade21b0effd91f708ec844fef70e33e5eb862272f017651f9648e98a3d",
+    "agents/doc-batch-process.md": "318bc1416e5318ebdd31972d23582b0e69c382d4616cb326a8bdadb6465418f8",
+    "agents/editorial-review-flow-team-lead.md": "66ad6c27920ff0e7f86be5b3d6803f1ef4fd6b367e0ddfbc1f3f22e508a6be86",
+    "agents/editorial-review-flow.md": "2a762ee50b21a4a6e47132ff6fa03b601085c3499d6b6569c58c740b4010e96f",
+    "plugin.json": "543dcf4c4a72cdced21c4aca2902c5cc2900cc434d9da23e1e3e52cdfba2a5f9",
+    "settings.json": "ed47e7de24d8961ad21ac3f70cd27e6dd287b38d28ca3aa73c4ac4faab9c25f9"
+  }
+}

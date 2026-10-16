@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1232",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1232",
+    "kind": "team",
+    "name": "值班手册编写专家",
+    "description": "值班手册编写专家：围绕值班手册，覆盖升级路径／常用命令／演练更新，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "oncall-handbook-team-lead",
+        "role": "lead",
+        "name": "值班手册主理人",
+        "evidence": null
+      },
+      {
+        "slug": "oncall-handbook",
+        "role": "member",
+        "name": "值班手册 编写",
+        "evidence": "original_assets/oncall-handbook/merkle_root",
+        "member_merkle_root": "b00967d99da50c05ed42a79531338d49cb2ca66b5fcdd9036f4f0850d5a309f8"
+      },
+      {
+        "slug": "partner-screen",
+        "role": "member",
+        "name": "合作方筛选 顾问",
+        "evidence": "original_assets/partner-screen/merkle_root",
+        "member_merkle_root": "00c3811508026f729ee2bfc9008786184fa0bcc84cc8179983b71292980bdd9f"
+      },
+      {
+        "slug": "sales-territory-pro",
+        "role": "member",
+        "name": "区域划分 覆盖策略 顾问",
+        "evidence": "original_assets/sales-territory-pro/merkle_root",
+        "member_merkle_root": "dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7"
+      }
+    ],
+    "team_lead": "oncall-handbook-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0b1438da6978d112",
+  "prompt_hash": "6598fce0948b63d4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1232\", \"kind\": \"team\", \"name\": \"值班手册编写专家\", \"description\": \"值班手册编写专家：围绕值班手册，覆盖升级路径／常用命令／演练更新，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"oncall-handbook-team-lead\", \"role\": \"lead\", \"name\": \"值班手册主理人\", \"evidence\": null}, {\"slug\": \"oncall-handbook\", \"role\": \"member\", \"name\": \"值班手册 编写\", \"evidence\": \"original_assets/oncall-handbook/merkle_root\", \"member_merkle_root\": \"b00967d99da50c05ed42a79531338d49cb2ca66b5fcdd9036f4f0850d5a309f8\"}, {\"slug\": \"partner-screen\", \"role\": \"member\", \"name\": \"合作方筛选 顾问\", \"evidence\": \"original_assets/partner-screen/merkle_root\", \"member_merkle_root\": \"00c3811508026f729ee2bfc9008786184fa0bcc84cc8179983b71292980bdd9f\"}, {\"slug\": \"sales-territory-pro\", \"role\": \"member\", \"name\": \"区域划分 覆盖策略 顾问\", \"evidence\": \"original_assets/sales-territory-pro/merkle_root\", \"member_merkle_root\": \"dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7\"}], \"team_lead\": \"oncall-handbook-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/oncall-handbook-team-lead.md": "c4b9cd6d034e5e7fa7bcc2e5fc3100f8e06d8c7663c492c4ab10c7c48b11af40",
+    "agents/oncall-handbook.md": "0084de9715e593d634668e1f1c03f9d9608bb6792b8ea3eecf09ea7edc521405",
+    "agents/partner-screen.md": "320c4637959ae6fe7bdba85f780f32c636e96a33b554a8429d36b8b1d0aede91",
+    "agents/sales-territory-pro.md": "a4e09855bce6ef9242dfc51837f4454dfac575491dae776be8d459a8603f1d95",
+    "plugin.json": "ec5d8221a55a2b24b9a2269d1e70809d03c9da96b9dadac35b72d4c289a25129",
+    "settings.json": "062c343e3360deb49fe719043499c43cbad35034a4fc56b37067def48d3e9b32"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-improve-loop-team-lead",
+  "agents": [
+    "./agents/agent-improve-loop-team-lead.md",
+    "./agents/agent-improve-loop.md",
+    "./agents/remote-team-coach.md",
+    "./agents/contract-guard-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 改进闭环",
+    "zh": "帮我处理改进闭环"
+  },
+  "description": "agent-improve-loop team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 改进闭环, covers 度量先定 / 小步验证 / 效果对照, delivering structured results and actionable checklists.",
+    "zh": "度量驱动专家：围绕改进闭环，覆盖度量先定／小步验证／效果对照，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "agent-improve-loop Team",
+    "zh": "度量驱动专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-improve-loop-team-lead",
+      "name": {
+        "en": "改进闭环主理人",
+        "zh": "改进闭环主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-improve-loop.png",
+      "id": "agent-improve-loop",
+      "name": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "profession": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/remote-team-coach.png",
+      "id": "remote-team-coach",
+      "name": {
+        "en": "remote-team-coach",
+        "zh": "远程团队 协作规范 教练"
+      },
+      "profession": {
+        "en": "remote-team-coach",
+        "zh": "远程团队 协作规范 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-guard-pro.png",
+      "id": "contract-guard-pro",
+      "name": {
+        "en": "Contract Compliance Guard",
+        "zh": "合同合规审查"
+      },
+      "profession": {
+        "en": "Contract Compliance Guard",
+        "zh": "合同合规审查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-799",
+  "plugin": "group-team-799",
+  "profession": {
+    "en": "agent-improve-loop Collaboration Team",
+    "zh": "度量驱动专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 改进闭环",
+      "zh": "帮我处理改进闭环"
+    },
+    {
+      "en": "Plan 远程团队",
+      "zh": "帮我规划远程团队"
+    },
+    {
+      "en": "Review 合同合规审查",
+      "zh": "帮我检查合同合规审查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "小步验证",
+      "zh": "小步验证"
+    },
+    {
+      "en": "效果对照",
+      "zh": "效果对照"
+    },
+    {
+      "en": "防劣化",
+      "zh": "防劣化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-improve-loop-team-lead",
+    "memberAgents": [
+      "agent-improve-loop",
+      "remote-team-coach",
+      "contract-guard-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

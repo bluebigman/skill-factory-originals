@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-139",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-139",
+    "kind": "team",
+    "name": "信息 缺失 报表 团队",
+    "description": "信息 缺失 报表 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-05-fixed-team-lead",
+        "role": "lead",
+        "name": "数据解析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-05-fixed",
+        "role": "member",
+        "name": "数据解析 信息抽取 置信标注",
+        "evidence": "original_assets/data-clean-pro-05-fixed/merkle_root",
+        "member_merkle_root": "93ac29ba69bccf69f18f34383dc9b1a3c70848c45233d189cc54deaea19014d2"
+      },
+      {
+        "slug": "data-clean-pro",
+        "role": "member",
+        "name": "数据清洗 缺失填补 异常剔除",
+        "evidence": "original_assets/data-clean-pro/merkle_root",
+        "member_merkle_root": "3618ce301b202dcea43167cec12017c5140d980f3651ced25ec7944c93a6abf9"
+      },
+      {
+        "slug": "data-viz-pro-02",
+        "role": "member",
+        "name": "数据洞察 报表分析 流程规范",
+        "evidence": "original_assets/data-viz-pro-02/merkle_root",
+        "member_merkle_root": "2bb343e89495ca740b66d73c16fb9b6742dfc4df81fd74c9e6c79e5e0b2e7cd1"
+      }
+    ],
+    "team_lead": "data-clean-pro-05-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6165a1af900cb377",
+  "prompt_hash": "567c6d259cf417eb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-139\", \"kind\": \"team\", \"name\": \"信息 缺失 报表 团队\", \"description\": \"信息 缺失 报表 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-05-fixed-team-lead\", \"role\": \"lead\", \"name\": \"数据解析主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-05-fixed\", \"role\": \"member\", \"name\": \"数据解析 信息抽取 置信标注\", \"evidence\": \"original_assets/data-clean-pro-05-fixed/merkle_root\", \"member_merkle_root\": \"93ac29ba69bccf69f18f34383dc9b1a3c70848c45233d189cc54deaea19014d2\"}, {\"slug\": \"data-clean-pro\", \"role\": \"member\", \"name\": \"数据清洗 缺失填补 异常剔除\", \"evidence\": \"original_assets/data-clean-pro/merkle_root\", \"member_merkle_root\": \"3618ce301b202dcea43167cec12017c5140d980f3651ced25ec7944c93a6abf9\"}, {\"slug\": \"data-viz-pro-02\", \"role\": \"member\", \"name\": \"数据洞察 报表分析 流程规范\", \"evidence\": \"original_assets/data-viz-pro-02/merkle_root\", \"member_merkle_root\": \"2bb343e89495ca740b66d73c16fb9b6742dfc4df81fd74c9e6c79e5e0b2e7cd1\"}], \"team_lead\": \"data-clean-pro-05-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-05-fixed-team-lead.md": "0e75926993202b18b0c698bfe8f0a7133a16d825024201fbd7938a6211ce90ae",
+    "agents/data-clean-pro-05-fixed.md": "ab8eca719c982843d807a6ef46f27a09266df1d4f7a36334efdd815cbc7218ef",
+    "agents/data-clean-pro.md": "4a98429a64850cd4242a014c70e949c62a47127d1e806bddcff7969d863ad85d",
+    "agents/data-viz-pro-02.md": "3275fcb7c41d23817ff094bb24fddb7075528058cb14fa025138a097eb06f64a",
+    "plugin.json": "24051f2dd816284fbf0c1079acd78277fd9cc90b50cac06662b7a00d8c3f2953",
+    "settings.json": "dea0f4469e563d04c5abb02b3d4c5b993be90da596a9d66a8611820b0703a051"
+  }
+}

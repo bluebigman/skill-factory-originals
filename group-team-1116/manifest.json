@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1116",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1116",
+    "kind": "team",
+    "name": "界面文案打磨专家",
+    "description": "输入界面文案打磨相关需求，输出动作明确、错误可解、语气一致三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "microcopy-craft-team-lead",
+        "role": "lead",
+        "name": "界面文案打磨主理人",
+        "evidence": null
+      },
+      {
+        "slug": "microcopy-craft",
+        "role": "member",
+        "name": "界面文案打磨 顾问",
+        "evidence": "original_assets/microcopy-craft/merkle_root",
+        "member_merkle_root": "956f1ce9f1a2ead5e2dc569cf8366e0ec6835b74b397018922f6a54a42846f9e"
+      },
+      {
+        "slug": "editorial-calendar",
+        "role": "member",
+        "name": "编辑日历编排 助手",
+        "evidence": "original_assets/editorial-calendar/merkle_root",
+        "member_merkle_root": "cb50295e09d3e30c2020ee3bfb2ab95e57fdd3ad784b77194ff51071c11545e5"
+      },
+      {
+        "slug": "doc-merge-batch",
+        "role": "member",
+        "name": "多文档合并 助手",
+        "evidence": "original_assets/doc-merge-batch/merkle_root",
+        "member_merkle_root": "2fc2217052556dd5c33c7604cebd7c4ec5c1506440bc89c602edecf6347096d1"
+      }
+    ],
+    "team_lead": "microcopy-craft-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "06fb4a7dc4cb759f",
+  "prompt_hash": "23cb9fe2c56232f1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1116\", \"kind\": \"team\", \"name\": \"界面文案打磨专家\", \"description\": \"输入界面文案打磨相关需求，输出动作明确、错误可解、语气一致三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"microcopy-craft-team-lead\", \"role\": \"lead\", \"name\": \"界面文案打磨主理人\", \"evidence\": null}, {\"slug\": \"microcopy-craft\", \"role\": \"member\", \"name\": \"界面文案打磨 顾问\", \"evidence\": \"original_assets/microcopy-craft/merkle_root\", \"member_merkle_root\": \"956f1ce9f1a2ead5e2dc569cf8366e0ec6835b74b397018922f6a54a42846f9e\"}, {\"slug\": \"editorial-calendar\", \"role\": \"member\", \"name\": \"编辑日历编排 助手\", \"evidence\": \"original_assets/editorial-calendar/merkle_root\", \"member_merkle_root\": \"cb50295e09d3e30c2020ee3bfb2ab95e57fdd3ad784b77194ff51071c11545e5\"}, {\"slug\": \"doc-merge-batch\", \"role\": \"member\", \"name\": \"多文档合并 助手\", \"evidence\": \"original_assets/doc-merge-batch/merkle_root\", \"member_merkle_root\": \"2fc2217052556dd5c33c7604cebd7c4ec5c1506440bc89c602edecf6347096d1\"}], \"team_lead\": \"microcopy-craft-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-merge-batch.md": "ce58ec0d8c528ae57cd19ff2143384abec85d669975ba136b353a442df63096b",
+    "agents/editorial-calendar.md": "32e11f8e2132718016ecc2863fe1cccc4f0541e6a13655564b81f68f1f83a6cc",
+    "agents/microcopy-craft-team-lead.md": "95dab4763333b2ac35ca2f63ac8a8a912dda93ce5faab02a428a049afa03ab4d",
+    "agents/microcopy-craft.md": "6a6c3aea875694f90dbbffe856642efacc54272e986198357928eb9d1ff28821",
+    "plugin.json": "0ece5e7dd6adf96d0676c9cd23e965cda98a0b6ffa33623ca36b78a4456e86a5",
+    "settings.json": "26bf8c842e42cf0a0115b29cbf0a533816e54e2c824f86ea9c782cd6884b0e6c"
+  }
+}

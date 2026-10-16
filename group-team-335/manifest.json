@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-335",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-335",
+    "kind": "team",
+    "name": "社群运营专家",
+    "description": "擅长规则置顶、角色分工与固定栏目，覆盖社群运营全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "community-grow-pro-team-lead",
+        "role": "lead",
+        "name": "社群运营主理人",
+        "evidence": null
+      },
+      {
+        "slug": "community-grow-pro",
+        "role": "member",
+        "name": "社群运营 活跃机制 顾问",
+        "evidence": "original_assets/community-grow-pro/merkle_root",
+        "member_merkle_root": "e0c3352933eceb5fe16b05aaa437247f8254607188e0c7bf75d431ff9fe16a9a"
+      },
+      {
+        "slug": "seo-content-pro",
+        "role": "member",
+        "name": "搜索内容 关键词布局 顾问",
+        "evidence": "original_assets/seo-content-pro/merkle_root",
+        "member_merkle_root": "cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80"
+      },
+      {
+        "slug": "audience-segment-pro",
+        "role": "member",
+        "name": "受众分层 策略匹配 顾问",
+        "evidence": "original_assets/audience-segment-pro/merkle_root",
+        "member_merkle_root": "5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1"
+      }
+    ],
+    "team_lead": "community-grow-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2e734a10ea37b52a",
+  "prompt_hash": "969ced0c5578787c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-335\", \"kind\": \"team\", \"name\": \"社群运营专家\", \"description\": \"擅长规则置顶、角色分工与固定栏目，覆盖社群运营全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"community-grow-pro-team-lead\", \"role\": \"lead\", \"name\": \"社群运营主理人\", \"evidence\": null}, {\"slug\": \"community-grow-pro\", \"role\": \"member\", \"name\": \"社群运营 活跃机制 顾问\", \"evidence\": \"original_assets/community-grow-pro/merkle_root\", \"member_merkle_root\": \"e0c3352933eceb5fe16b05aaa437247f8254607188e0c7bf75d431ff9fe16a9a\"}, {\"slug\": \"seo-content-pro\", \"role\": \"member\", \"name\": \"搜索内容 关键词布局 顾问\", \"evidence\": \"original_assets/seo-content-pro/merkle_root\", \"member_merkle_root\": \"cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80\"}, {\"slug\": \"audience-segment-pro\", \"role\": \"member\", \"name\": \"受众分层 策略匹配 顾问\", \"evidence\": \"original_assets/audience-segment-pro/merkle_root\", \"member_merkle_root\": \"5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1\"}], \"team_lead\": \"community-grow-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audience-segment-pro.md": "c446a39adb7009eff5c83945d9695cb396a83112852e38ae5079a91e52d9acee",
+    "agents/community-grow-pro-team-lead.md": "28a5c7d80cb3c6f8f5f9082bcb791bddf6e6d4bd9179fae431596e98fda34584",
+    "agents/community-grow-pro.md": "4e11cbe90d3dc53fd87ea32c6fa3c2599c4fc2f0625e055d2c51d86f6494c617",
+    "agents/seo-content-pro.md": "c6199f9cb6bf44f154092ba04030bfb42e6f2e35e9e3c3972cc2f767fd13cdc7",
+    "plugin.json": "28f4cbec37f3bf48482319ad4d815f7690a5a2e5d249a29a419090055a84eb32",
+    "settings.json": "a67fff0b58e536c117e03431944dcc238c6e543c3d53455c8174084aedc69a11"
+  }
+}

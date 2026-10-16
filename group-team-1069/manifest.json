@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1069",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1069",
+    "kind": "team",
+    "name": "招聘流程设计专家",
+    "description": "擅长流程清晰、标准统一与反馈及时，覆盖招聘流程设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "hr-recruit-flow-team-lead",
+        "role": "lead",
+        "name": "招聘流程设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "hr-recruit-flow",
+        "role": "member",
+        "name": "招聘流程设计 顾问",
+        "evidence": "original_assets/hr-recruit-flow/merkle_root",
+        "member_merkle_root": "1cada0cad845bca269251815bc82326089a7a094298d6df0eb9f500656dd7bd5"
+      },
+      {
+        "slug": "rollback-drill",
+        "role": "member",
+        "name": "回滚演练 顾问",
+        "evidence": "original_assets/rollback-drill/merkle_root",
+        "member_merkle_root": "400db811a724100dfba11861375d2865e5f3b7ac02ac6128a8344519962a2487"
+      },
+      {
+        "slug": "image-batch-expert",
+        "role": "member",
+        "name": "图片批处理 格式转换",
+        "evidence": "original_assets/image-batch-expert/merkle_root",
+        "member_merkle_root": "a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870"
+      }
+    ],
+    "team_lead": "hr-recruit-flow-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ed1bb9c736964c64",
+  "prompt_hash": "7f530f20d41bc4ba",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1069\", \"kind\": \"team\", \"name\": \"招聘流程设计专家\", \"description\": \"擅长流程清晰、标准统一与反馈及时，覆盖招聘流程设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"hr-recruit-flow-team-lead\", \"role\": \"lead\", \"name\": \"招聘流程设计主理人\", \"evidence\": null}, {\"slug\": \"hr-recruit-flow\", \"role\": \"member\", \"name\": \"招聘流程设计 顾问\", \"evidence\": \"original_assets/hr-recruit-flow/merkle_root\", \"member_merkle_root\": \"1cada0cad845bca269251815bc82326089a7a094298d6df0eb9f500656dd7bd5\"}, {\"slug\": \"rollback-drill\", \"role\": \"member\", \"name\": \"回滚演练 顾问\", \"evidence\": \"original_assets/rollback-drill/merkle_root\", \"member_merkle_root\": \"400db811a724100dfba11861375d2865e5f3b7ac02ac6128a8344519962a2487\"}, {\"slug\": \"image-batch-expert\", \"role\": \"member\", \"name\": \"图片批处理 格式转换\", \"evidence\": \"original_assets/image-batch-expert/merkle_root\", \"member_merkle_root\": \"a91d070ada74dfbf3838ef68e14c34219cd822a9ff8f13a76367d8cbefa83870\"}], \"team_lead\": \"hr-recruit-flow-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/hr-recruit-flow-team-lead.md": "c789aab0ec83c67ae75c1933e21b4ec22e9e5d1c09213a87e3786d53398fb175",
+    "agents/hr-recruit-flow.md": "70c649c84b67e2ffd0f42a97a95dcdfcee2f3ec019fc45a5bf2b286829783c3e",
+    "agents/image-batch-expert.md": "3962d8ab894acb8c7ee2bac0a58826a5ecdb1912842e11b9018e6480cc7c0e03",
+    "agents/rollback-drill.md": "c739cf6dba6b7e288f07e4c08074ed2bb0e4d01f12bf91558c58c0ce7b6d14be",
+    "plugin.json": "e7c257648a44f6bdb939dad0e85d9b10b7ace3c50756b0d5b3e3d34210e4d2ae",
+    "settings.json": "803ef4932f14f3bb18218fce0295c12c81266f77fde0f7d57d4b9706331e4732"
+  }
+}

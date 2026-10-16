@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1052",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1052",
+    "kind": "team",
+    "name": "流程编写步骤细化专家",
+    "description": "流程编写步骤细化专家：围绕流程编写，覆盖输入输出／异常分支／默认书面，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sop-writer-pro-team-lead",
+        "role": "lead",
+        "name": "流程编写主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sop-writer-pro",
+        "role": "member",
+        "name": "流程编写 步骤细化 顾问",
+        "evidence": "original_assets/sop-writer-pro/merkle_root",
+        "member_merkle_root": "062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb"
+      },
+      {
+        "slug": "remote-team-coach",
+        "role": "member",
+        "name": "远程团队 协作规范 教练",
+        "evidence": "original_assets/remote-team-coach/merkle_root",
+        "member_merkle_root": "fd153c2b120f3c771fa5b49ccf1cdc60ad2c9a6b54c34d0686013e54b205e3be"
+      },
+      {
+        "slug": "win-loss-analysis",
+        "role": "member",
+        "name": "赢单复盘 归因分析 顾问",
+        "evidence": "original_assets/win-loss-analysis/merkle_root",
+        "member_merkle_root": "8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd"
+      }
+    ],
+    "team_lead": "sop-writer-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "da1008e213ec345f",
+  "prompt_hash": "b14cbad2dcd7e727",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1052\", \"kind\": \"team\", \"name\": \"流程编写步骤细化专家\", \"description\": \"流程编写步骤细化专家：围绕流程编写，覆盖输入输出／异常分支／默认书面，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sop-writer-pro-team-lead\", \"role\": \"lead\", \"name\": \"流程编写主理人\", \"evidence\": null}, {\"slug\": \"sop-writer-pro\", \"role\": \"member\", \"name\": \"流程编写 步骤细化 顾问\", \"evidence\": \"original_assets/sop-writer-pro/merkle_root\", \"member_merkle_root\": \"062899b3b9e5393769ad19b29a059650b3f8f5c71bd5d23e1c524ab21e0d88cb\"}, {\"slug\": \"remote-team-coach\", \"role\": \"member\", \"name\": \"远程团队 协作规范 教练\", \"evidence\": \"original_assets/remote-team-coach/merkle_root\", \"member_merkle_root\": \"fd153c2b120f3c771fa5b49ccf1cdc60ad2c9a6b54c34d0686013e54b205e3be\"}, {\"slug\": \"win-loss-analysis\", \"role\": \"member\", \"name\": \"赢单复盘 归因分析 顾问\", \"evidence\": \"original_assets/win-loss-analysis/merkle_root\", \"member_merkle_root\": \"8cd463267b2b691909d039208418c9674b513b4bc218b350e54de0cd9bf538dd\"}], \"team_lead\": \"sop-writer-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/remote-team-coach.md": "d93740da0ec58c2a1d241ca756631a68da58c5ef00e001ce80eaedbd1c63226c",
+    "agents/sop-writer-pro-team-lead.md": "ce411e20bc2ab8812cd3aac2ba3f5bb6bba3fab167d3284985520390931b8d28",
+    "agents/sop-writer-pro.md": "01a7bf05b4bd6d137d8c636d12abc41fb3c8c12661eb663d32327e779b87cf48",
+    "agents/win-loss-analysis.md": "8929764083e06258507c7b5e38e7f17d31f1dc761846a2559314a5d6517b607c",
+    "plugin.json": "e42c4ea6950b700e54e028948e38859d6ec5a1a60420e8f60e43bcb62ae9a162",
+    "settings.json": "efa9dce4c7be49db32bf0d72c89f8782b11df12f0709a1834f4303027a69433e"
+  }
+}

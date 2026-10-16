@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-852",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-852",
+    "kind": "team",
+    "name": "任务队列专家",
+    "description": "任务队列专家：围绕任务队列，覆盖幂等入队／超时处理／一键脚本，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-task-queue-team-lead",
+        "role": "lead",
+        "name": "任务队列主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-task-queue",
+        "role": "member",
+        "name": "任务队列 优先级 顾问",
+        "evidence": "original_assets/agent-task-queue/merkle_root",
+        "member_merkle_root": "6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72"
+      },
+      {
+        "slug": "dev-env-bootstrap",
+        "role": "member",
+        "name": "开发环境搭建 助手",
+        "evidence": "original_assets/dev-env-bootstrap/merkle_root",
+        "member_merkle_root": "e50333f7dd2f103b47fd99e55f293a068e184bee79892eccef8939b3b885e353"
+      },
+      {
+        "slug": "funnel-analysis",
+        "role": "member",
+        "name": "转化漏斗分析 助手",
+        "evidence": "original_assets/funnel-analysis/merkle_root",
+        "member_merkle_root": "28af72e4955eec47ad4a6b05ba898149ced917859720677d20a6d8476b8b86b0"
+      }
+    ],
+    "team_lead": "agent-task-queue-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d7c2c090bbd51123",
+  "prompt_hash": "918ce6ac486b7f6c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-852\", \"kind\": \"team\", \"name\": \"任务队列专家\", \"description\": \"任务队列专家：围绕任务队列，覆盖幂等入队／超时处理／一键脚本，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-task-queue-team-lead\", \"role\": \"lead\", \"name\": \"任务队列主理人\", \"evidence\": null}, {\"slug\": \"agent-task-queue\", \"role\": \"member\", \"name\": \"任务队列 优先级 顾问\", \"evidence\": \"original_assets/agent-task-queue/merkle_root\", \"member_merkle_root\": \"6045052eec60c90162c8038b83feb71f694d8f85711029c03f16fe8bc77f1b72\"}, {\"slug\": \"dev-env-bootstrap\", \"role\": \"member\", \"name\": \"开发环境搭建 助手\", \"evidence\": \"original_assets/dev-env-bootstrap/merkle_root\", \"member_merkle_root\": \"e50333f7dd2f103b47fd99e55f293a068e184bee79892eccef8939b3b885e353\"}, {\"slug\": \"funnel-analysis\", \"role\": \"member\", \"name\": \"转化漏斗分析 助手\", \"evidence\": \"original_assets/funnel-analysis/merkle_root\", \"member_merkle_root\": \"28af72e4955eec47ad4a6b05ba898149ced917859720677d20a6d8476b8b86b0\"}], \"team_lead\": \"agent-task-queue-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-task-queue-team-lead.md": "c00b82aa14e422aaf789c6a55f226733857d6270712d637ba77acddc5e643291",
+    "agents/agent-task-queue.md": "eb45b38e0b2b0f9c9baa978467809571234b6d02b32e619f8d2efb2d888c5d0a",
+    "agents/dev-env-bootstrap.md": "b3482a50070a0420952300686b85b41e3af69c932a0e74f8963d314bffffbb64",
+    "agents/funnel-analysis.md": "828c0563810304d5b83462b342a961107c9d03d0c1d4087303a3ef2cf36ee4de",
+    "plugin.json": "ebf5de19ef2b12e68e7188d6d3b99d287abade93e4128b44a3279d109d36c134",
+    "settings.json": "c20716b3c7a3bc4ad9a602347bef4bb9caf9029c8e3aa8b184168d9561412b72"
+  }
+}

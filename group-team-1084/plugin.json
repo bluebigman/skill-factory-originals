@@ -1,0 +1,126 @@
+{
+  "agentName": "usability-test-pro-team-lead",
+  "agents": [
+    "./agents/usability-test-pro-team-lead.md",
+    "./agents/usability-test-pro.md",
+    "./agents/search-ux-pro.md",
+    "./agents/ui-pattern-library.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 可用性",
+    "zh": "帮我处理可用性"
+  },
+  "description": "usability-test-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 可用性 end-to-end: 任务导向, 出声思维 and 记录失败. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长任务导向、出声思维与记录失败，覆盖可用性全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "usability-test-pro Team",
+    "zh": "测试执行专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "usability-test-pro-team-lead",
+      "name": {
+        "en": "可用性主理人",
+        "zh": "可用性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/usability-test-pro.png",
+      "id": "usability-test-pro",
+      "name": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "profession": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/search-ux-pro.png",
+      "id": "search-ux-pro",
+      "name": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "profession": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-pattern-library.png",
+      "id": "ui-pattern-library",
+      "name": {
+        "en": "ui-pattern-library",
+        "zh": "界面模式库 顾问"
+      },
+      "profession": {
+        "en": "ui-pattern-library",
+        "zh": "界面模式库 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1084",
+  "plugin": "group-team-1084",
+  "profession": {
+    "en": "usability-test-pro Collaboration Team",
+    "zh": "测试执行专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 可用性",
+      "zh": "帮我处理可用性"
+    },
+    {
+      "en": "Plan 搜索体验",
+      "zh": "帮我规划搜索体验"
+    },
+    {
+      "en": "Review 界面模式库",
+      "zh": "帮我检查界面模式库"
+    }
+  ],
+  "tags": [
+    {
+      "en": "任务导向",
+      "zh": "任务导向"
+    },
+    {
+      "en": "出声思维",
+      "zh": "出声思维"
+    },
+    {
+      "en": "记录失败",
+      "zh": "记录失败"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "usability-test-pro-team-lead",
+    "memberAgents": [
+      "usability-test-pro",
+      "search-ux-pro",
+      "ui-pattern-library"
+    ]
+  },
+  "version": "1.0.0"
+}

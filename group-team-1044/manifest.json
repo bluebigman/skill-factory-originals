@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1044",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1044",
+    "kind": "team",
+    "name": "转公众专家",
+    "description": "输入Markdown相关需求，输出预览必查、按结构拆、命名规范三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "md-wechat-draft-team-lead",
+        "role": "lead",
+        "name": "Markdown主理人",
+        "evidence": null
+      },
+      {
+        "slug": "md-wechat-draft",
+        "role": "member",
+        "name": "Markdown 转公众号 助手",
+        "evidence": "original_assets/md-wechat-draft/merkle_root",
+        "member_merkle_root": "d5c79f56b725bc5d17cd53ffb03b343f7dc7078294a944d54bd94091f19b8fd2"
+      },
+      {
+        "slug": "doc-split-chapter",
+        "role": "member",
+        "name": "文档分章拆分 助手",
+        "evidence": "original_assets/doc-split-chapter/merkle_root",
+        "member_merkle_root": "75e847dff2ccef0a841adaf609437655107edfb88c6d53253f436bbcec7c4c44"
+      },
+      {
+        "slug": "doc-translate-polish",
+        "role": "member",
+        "name": "文档翻译润色 顾问",
+        "evidence": "original_assets/doc-translate-polish/merkle_root",
+        "member_merkle_root": "ca7fb9ae95d27962f55c17da8307bf4a732f40008e2740dcd27091e24d6cfa6d"
+      }
+    ],
+    "team_lead": "md-wechat-draft-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9206a7a37f3f5f39",
+  "prompt_hash": "2e3edbe57796bead",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1044\", \"kind\": \"team\", \"name\": \"转公众专家\", \"description\": \"输入Markdown相关需求，输出预览必查、按结构拆、命名规范三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"md-wechat-draft-team-lead\", \"role\": \"lead\", \"name\": \"Markdown主理人\", \"evidence\": null}, {\"slug\": \"md-wechat-draft\", \"role\": \"member\", \"name\": \"Markdown 转公众号 助手\", \"evidence\": \"original_assets/md-wechat-draft/merkle_root\", \"member_merkle_root\": \"d5c79f56b725bc5d17cd53ffb03b343f7dc7078294a944d54bd94091f19b8fd2\"}, {\"slug\": \"doc-split-chapter\", \"role\": \"member\", \"name\": \"文档分章拆分 助手\", \"evidence\": \"original_assets/doc-split-chapter/merkle_root\", \"member_merkle_root\": \"75e847dff2ccef0a841adaf609437655107edfb88c6d53253f436bbcec7c4c44\"}, {\"slug\": \"doc-translate-polish\", \"role\": \"member\", \"name\": \"文档翻译润色 顾问\", \"evidence\": \"original_assets/doc-translate-polish/merkle_root\", \"member_merkle_root\": \"ca7fb9ae95d27962f55c17da8307bf4a732f40008e2740dcd27091e24d6cfa6d\"}], \"team_lead\": \"md-wechat-draft-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-split-chapter.md": "7126c58d8860758c543439a1abef1bbf5bd12c77e2f9887c9adfbff9e8afdd18",
+    "agents/doc-translate-polish.md": "255be717f7753436f25787c08f10dcf375a55248d5b208621fc3735ba2d99870",
+    "agents/md-wechat-draft-team-lead.md": "c776532c827d6db4952662932902acf03f70d5eb4e431c15b202ec505c5c13d7",
+    "agents/md-wechat-draft.md": "e9061fdc76b0bc7c02a3a424914a3e1d21e1c6d31582ab8eba30be17d7356226",
+    "plugin.json": "8655c0e4286798361b1f4f4875e2cd72761e74cffbfbb1eb073004c84aa89881",
+    "settings.json": "0f231537a849385a1d2474d724146aa71cc26a31a8c99d1de00dcb4d58efbb1a"
+  }
+}

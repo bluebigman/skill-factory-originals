@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-regression-guard-team-lead",
+  "agents": [
+    "./agents/agent-regression-guard-team-lead.md",
+    "./agents/agent-regression-guard.md",
+    "./agents/pr-crisis-basic.md",
+    "./agents/agent-dependency-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 回归守护",
+    "zh": "帮我处理回归守护"
+  },
+  "description": "agent-regression-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 回归守护 requirements, output three deliverables: 基线固定, 全量回归, 差异归因. Verifiable end-to-end, evidence per step.",
+    "zh": "输入回归守护相关需求，输出基线固定、全量回归、差异归因三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-regression-guard Team",
+    "zh": "回归守护专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-regression-guard-team-lead",
+      "name": {
+        "en": "回归守护主理人",
+        "zh": "回归守护主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-regression-guard.png",
+      "id": "agent-regression-guard",
+      "name": {
+        "en": "agent-regression-guard",
+        "zh": "回归守护 基线 顾问"
+      },
+      "profession": {
+        "en": "agent-regression-guard",
+        "zh": "回归守护 基线 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pr-crisis-basic.png",
+      "id": "pr-crisis-basic",
+      "name": {
+        "en": "pr-crisis-basic",
+        "zh": "危机应对 沟通准备 顾问"
+      },
+      "profession": {
+        "en": "pr-crisis-basic",
+        "zh": "危机应对 沟通准备 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-dependency-check.png",
+      "id": "agent-dependency-check",
+      "name": {
+        "en": "agent-dependency-check",
+        "zh": "依赖检查 版本锁定 顾问"
+      },
+      "profession": {
+        "en": "agent-dependency-check",
+        "zh": "依赖检查 版本锁定 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-689",
+  "plugin": "group-team-689",
+  "profession": {
+    "en": "agent-regression-guard Collaboration Team",
+    "zh": "回归守护专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 回归守护",
+      "zh": "帮我处理回归守护"
+    },
+    {
+      "en": "Plan 危机应对",
+      "zh": "帮我规划危机应对"
+    },
+    {
+      "en": "Review 依赖检查",
+      "zh": "帮我检查依赖检查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "全量回归",
+      "zh": "全量回归"
+    },
+    {
+      "en": "差异归因",
+      "zh": "差异归因"
+    },
+    {
+      "en": "告警分级",
+      "zh": "告警分级"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-regression-guard-team-lead",
+    "memberAgents": [
+      "agent-regression-guard",
+      "pr-crisis-basic",
+      "agent-dependency-check"
+    ]
+  },
+  "version": "1.0.0"
+}

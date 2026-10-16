@@ -1,0 +1,126 @@
+{
+  "agentName": "cross-border-listing-pro-team-lead",
+  "agents": [
+    "./agents/cross-border-listing-pro-team-lead.md",
+    "./agents/cross-border-listing-pro.md",
+    "./agents/incident-triage-pro.md",
+    "./agents/project-manage-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 跨境选品",
+    "zh": "帮我处理跨境选品"
+  },
+  "description": "cross-border-listing-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 跨境选品, covers 先查禁售 / 类目准入 / 成本预判, delivering structured results and actionable checklists.",
+    "zh": "跨境选品专家：围绕跨境选品，覆盖先查禁售／类目准入／成本预判，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "cross-border-listing-pro Team",
+    "zh": "跨境选品专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "cross-border-listing-pro-team-lead",
+      "name": {
+        "en": "跨境选品主理人",
+        "zh": "跨境选品主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/cross-border-listing-pro.png",
+      "id": "cross-border-listing-pro",
+      "name": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "profession": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/incident-triage-pro.png",
+      "id": "incident-triage-pro",
+      "name": {
+        "en": "incident-triage-pro",
+        "zh": "故障分级 响应流程 顾问"
+      },
+      "profession": {
+        "en": "incident-triage-pro",
+        "zh": "故障分级 响应流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/project-manage-pro.png",
+      "id": "project-manage-pro",
+      "name": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "profession": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1229",
+  "plugin": "group-team-1229",
+  "profession": {
+    "en": "cross-border-listing-pro Collaboration Team",
+    "zh": "跨境选品专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 跨境选品",
+      "zh": "帮我处理跨境选品"
+    },
+    {
+      "en": "Plan 故障分级",
+      "zh": "帮我规划故障分级"
+    },
+    {
+      "en": "Review 项目任务管理",
+      "zh": "帮我检查项目任务管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先查禁售",
+      "zh": "先查禁售"
+    },
+    {
+      "en": "类目准入",
+      "zh": "类目准入"
+    },
+    {
+      "en": "成本预判",
+      "zh": "成本预判"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "cross-border-listing-pro-team-lead",
+    "memberAgents": [
+      "cross-border-listing-pro",
+      "incident-triage-pro",
+      "project-manage-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

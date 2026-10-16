@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1229",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1229",
+    "kind": "team",
+    "name": "跨境选品专家",
+    "description": "跨境选品专家：围绕跨境选品，覆盖先查禁售／类目准入／成本预判，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cross-border-listing-pro-team-lead",
+        "role": "lead",
+        "name": "跨境选品主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cross-border-listing-pro",
+        "role": "member",
+        "name": "跨境选品 上架合规 顾问",
+        "evidence": "original_assets/cross-border-listing-pro/merkle_root",
+        "member_merkle_root": "f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac"
+      },
+      {
+        "slug": "incident-triage-pro",
+        "role": "member",
+        "name": "故障分级 响应流程 顾问",
+        "evidence": "original_assets/incident-triage-pro/merkle_root",
+        "member_merkle_root": "3d7af40472e198a706cfcbacd5ae32c9c0ba678a00a674be871a5d81a5c9cd7d"
+      },
+      {
+        "slug": "project-manage-pro",
+        "role": "member",
+        "name": "项目任务管理 进度跟踪",
+        "evidence": "original_assets/project-manage-pro/merkle_root",
+        "member_merkle_root": "956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0"
+      }
+    ],
+    "team_lead": "cross-border-listing-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1c110b2d2b6059d8",
+  "prompt_hash": "c9a0a61b6e815cc7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1229\", \"kind\": \"team\", \"name\": \"跨境选品专家\", \"description\": \"跨境选品专家：围绕跨境选品，覆盖先查禁售／类目准入／成本预判，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cross-border-listing-pro-team-lead\", \"role\": \"lead\", \"name\": \"跨境选品主理人\", \"evidence\": null}, {\"slug\": \"cross-border-listing-pro\", \"role\": \"member\", \"name\": \"跨境选品 上架合规 顾问\", \"evidence\": \"original_assets/cross-border-listing-pro/merkle_root\", \"member_merkle_root\": \"f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac\"}, {\"slug\": \"incident-triage-pro\", \"role\": \"member\", \"name\": \"故障分级 响应流程 顾问\", \"evidence\": \"original_assets/incident-triage-pro/merkle_root\", \"member_merkle_root\": \"3d7af40472e198a706cfcbacd5ae32c9c0ba678a00a674be871a5d81a5c9cd7d\"}, {\"slug\": \"project-manage-pro\", \"role\": \"member\", \"name\": \"项目任务管理 进度跟踪\", \"evidence\": \"original_assets/project-manage-pro/merkle_root\", \"member_merkle_root\": \"956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0\"}], \"team_lead\": \"cross-border-listing-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-listing-pro-team-lead.md": "d35834ad15015f0ae46eef9d54998ab49ebf7ac0225d3a2e25cd200139c6e531",
+    "agents/cross-border-listing-pro.md": "d8db00f5af8c9262911c628037a6a43902c268527342c1d89eb4dd548ac194f7",
+    "agents/incident-triage-pro.md": "8cc1021bc915d5d17b0e2954b811870236b7000d80984667a368182e3283fa5f",
+    "agents/project-manage-pro.md": "0ea225b80b0de717482ee51cf2eae77792e3ac46ec0aee261c7ee5ba65cf7590",
+    "plugin.json": "f38f87a57666bd70fb1be0bcc90c5db3dc93cb703807e4257c174d7caab1a2b4",
+    "settings.json": "60ae113510f7273188d1f55758486ece7e31963c152fe92e9b20c2186963194b"
+  }
+}

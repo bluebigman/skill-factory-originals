@@ -1,0 +1,126 @@
+{
+  "agentName": "seo-content-pro-team-lead",
+  "agents": [
+    "./agents/seo-content-pro-team-lead.md",
+    "./agents/seo-content-pro.md",
+    "./agents/landing-page-opt.md",
+    "./agents/template-engine-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 搜索内容",
+    "zh": "帮我处理搜索内容"
+  },
+  "description": "seo-content-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 搜索内容 requirements, output three deliverables: 意图分类, 一词一页, 结构可读. Verifiable end-to-end, evidence per step.",
+    "zh": "输入搜索内容相关需求，输出意图分类、一词一页、结构可读三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "seo-content-pro Team",
+    "zh": "转化优化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "seo-content-pro-team-lead",
+      "name": {
+        "en": "搜索内容主理人",
+        "zh": "搜索内容主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/seo-content-pro.png",
+      "id": "seo-content-pro",
+      "name": {
+        "en": "seo-content-pro",
+        "zh": "搜索内容 关键词布局 顾问"
+      },
+      "profession": {
+        "en": "seo-content-pro",
+        "zh": "搜索内容 关键词布局 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/landing-page-opt.png",
+      "id": "landing-page-opt",
+      "name": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "profession": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/template-engine-pro.png",
+      "id": "template-engine-pro",
+      "name": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "profession": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-708",
+  "plugin": "group-team-708",
+  "profession": {
+    "en": "seo-content-pro Collaboration Team",
+    "zh": "转化优化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 搜索内容",
+      "zh": "帮我处理搜索内容"
+    },
+    {
+      "en": "Plan 落地页",
+      "zh": "帮我规划落地页"
+    },
+    {
+      "en": "Review 模板引擎",
+      "zh": "帮我检查模板引擎"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结构可读",
+      "zh": "结构可读"
+    },
+    {
+      "en": "内链闭环",
+      "zh": "内链闭环"
+    },
+    {
+      "en": "按数据更新",
+      "zh": "按数据更新"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "seo-content-pro-team-lead",
+    "memberAgents": [
+      "seo-content-pro",
+      "landing-page-opt",
+      "template-engine-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

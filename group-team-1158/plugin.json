@@ -1,0 +1,126 @@
+{
+  "agentName": "log-privacy-check-team-lead",
+  "agents": [
+    "./agents/log-privacy-check-team-lead.md",
+    "./agents/log-privacy-check.md",
+    "./agents/api-debug-pro.md",
+    "./agents/lsp-code-intel.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 日志隐私核验",
+    "zh": "帮我处理日志隐私核验"
+  },
+  "description": "log-privacy-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 日志隐私核验 requirements, output three deliverables: 禁打凭据, 分级输出, 采样控制. Verifiable end-to-end, evidence per step.",
+    "zh": "输入日志隐私核验相关需求，输出禁打凭据、分级输出、采样控制三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "log-privacy-check Team",
+    "zh": "日志隐私核验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "log-privacy-check-team-lead",
+      "name": {
+        "en": "日志隐私核验主理人",
+        "zh": "日志隐私核验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/log-privacy-check.png",
+      "id": "log-privacy-check",
+      "name": {
+        "en": "log-privacy-check",
+        "zh": "日志隐私核验 顾问"
+      },
+      "profession": {
+        "en": "log-privacy-check",
+        "zh": "日志隐私核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-debug-pro.png",
+      "id": "api-debug-pro",
+      "name": {
+        "en": "API Debug Workbench",
+        "zh": "接口调试 请求构造 响应解析"
+      },
+      "profession": {
+        "en": "API Debug Workbench",
+        "zh": "接口调试 请求构造 响应解析"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/lsp-code-intel.png",
+      "id": "lsp-code-intel",
+      "name": {
+        "en": "lsp-code-intel",
+        "zh": "代码语义分析 助手"
+      },
+      "profession": {
+        "en": "lsp-code-intel",
+        "zh": "代码语义分析 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1158",
+  "plugin": "group-team-1158",
+  "profession": {
+    "en": "log-privacy-check Collaboration Team",
+    "zh": "日志隐私核验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 日志隐私核验",
+      "zh": "帮我处理日志隐私核验"
+    },
+    {
+      "en": "Plan 接口调试",
+      "zh": "帮我规划接口调试"
+    },
+    {
+      "en": "Review 代码语义分析",
+      "zh": "帮我检查代码语义分析"
+    }
+  ],
+  "tags": [
+    {
+      "en": "禁打凭据",
+      "zh": "禁打凭据"
+    },
+    {
+      "en": "分级输出",
+      "zh": "分级输出"
+    },
+    {
+      "en": "采样控制",
+      "zh": "采样控制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "log-privacy-check-team-lead",
+    "memberAgents": [
+      "log-privacy-check",
+      "api-debug-pro",
+      "lsp-code-intel"
+    ]
+  },
+  "version": "1.0.0"
+}

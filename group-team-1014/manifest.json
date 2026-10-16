@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1014",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1014",
+    "kind": "team",
+    "name": "图片标准化专家",
+    "description": "输入评价回应相关需求，输出分级响应、公开简明、洞察回流三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-convert-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "图片标准化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-convert-pro-fixed",
+        "role": "member",
+        "name": "图片标准化 隐私转换 格式转换",
+        "evidence": "original_assets/doc-convert-pro-fixed/merkle_root",
+        "member_merkle_root": "ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1"
+      },
+      {
+        "slug": "review-response",
+        "role": "member",
+        "name": "评价回应 顾问",
+        "evidence": "original_assets/review-response/merkle_root",
+        "member_merkle_root": "8b9fc3143b18c343bcb1fd480e9bc421f94a028b564c9f807378fac6e931d401"
+      },
+      {
+        "slug": "audience-segment-pro",
+        "role": "member",
+        "name": "受众分层 策略匹配 顾问",
+        "evidence": "original_assets/audience-segment-pro/merkle_root",
+        "member_merkle_root": "5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1"
+      }
+    ],
+    "team_lead": "doc-convert-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b76c3d12350b5737",
+  "prompt_hash": "09f6be72da30d279",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1014\", \"kind\": \"team\", \"name\": \"图片标准化专家\", \"description\": \"输入评价回应相关需求，输出分级响应、公开简明、洞察回流三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-convert-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"图片标准化主理人\", \"evidence\": null}, {\"slug\": \"doc-convert-pro-fixed\", \"role\": \"member\", \"name\": \"图片标准化 隐私转换 格式转换\", \"evidence\": \"original_assets/doc-convert-pro-fixed/merkle_root\", \"member_merkle_root\": \"ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1\"}, {\"slug\": \"review-response\", \"role\": \"member\", \"name\": \"评价回应 顾问\", \"evidence\": \"original_assets/review-response/merkle_root\", \"member_merkle_root\": \"8b9fc3143b18c343bcb1fd480e9bc421f94a028b564c9f807378fac6e931d401\"}, {\"slug\": \"audience-segment-pro\", \"role\": \"member\", \"name\": \"受众分层 策略匹配 顾问\", \"evidence\": \"original_assets/audience-segment-pro/merkle_root\", \"member_merkle_root\": \"5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1\"}], \"team_lead\": \"doc-convert-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audience-segment-pro.md": "b2d486a3c490e46be5fe5a0b898fe188ac48c25fd77fe86645d4980a86854eb5",
+    "agents/doc-convert-pro-fixed-team-lead.md": "cc0f50d4de7b57cccaff3a9e0c022e959928f155b1f91956d4ced8fe12ed5663",
+    "agents/doc-convert-pro-fixed.md": "bd878bb5f0256a16c0708ce8040a583e2d6fff67bade6db2d69d5da6a17edc14",
+    "agents/review-response.md": "88e6ea08cfad30d680983b2adea1fea294d9bc385ad720f8c3afcae4d776f5d8",
+    "plugin.json": "201827605cd2d89f9ad436ef81f8c1874a6aa53eff341f01b309824e61b4e6fd",
+    "settings.json": "58c06f1269b42233bec1b8fd2d0fda97c2088a6ab29b1397c3adc27775587833"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1030",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1030",
+    "kind": "team",
+    "name": "视觉一致性专家",
+    "description": "擅长色板统一、字体统一与间距统一，覆盖视觉一致性全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "visual-consistency-team-lead",
+        "role": "lead",
+        "name": "视觉一致性主理人",
+        "evidence": null
+      },
+      {
+        "slug": "visual-consistency",
+        "role": "member",
+        "name": "视觉一致性 顾问",
+        "evidence": "original_assets/visual-consistency/merkle_root",
+        "member_merkle_root": "62fcdba6fdca35310e527ae003f5aa6e2d9ce7f3da34c5ec1d6724a8427344cd"
+      },
+      {
+        "slug": "ui-game-hud",
+        "role": "member",
+        "name": "游戏界面 信息层级 顾问",
+        "evidence": "original_assets/ui-game-hud/merkle_root",
+        "member_merkle_root": "fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd"
+      },
+      {
+        "slug": "handoff-design-dev",
+        "role": "member",
+        "name": "设计交付 协作规范 顾问",
+        "evidence": "original_assets/handoff-design-dev/merkle_root",
+        "member_merkle_root": "44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104"
+      }
+    ],
+    "team_lead": "visual-consistency-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b3462c7d6fd7e619",
+  "prompt_hash": "2a88eb856785a22e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1030\", \"kind\": \"team\", \"name\": \"视觉一致性专家\", \"description\": \"擅长色板统一、字体统一与间距统一，覆盖视觉一致性全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"visual-consistency-team-lead\", \"role\": \"lead\", \"name\": \"视觉一致性主理人\", \"evidence\": null}, {\"slug\": \"visual-consistency\", \"role\": \"member\", \"name\": \"视觉一致性 顾问\", \"evidence\": \"original_assets/visual-consistency/merkle_root\", \"member_merkle_root\": \"62fcdba6fdca35310e527ae003f5aa6e2d9ce7f3da34c5ec1d6724a8427344cd\"}, {\"slug\": \"ui-game-hud\", \"role\": \"member\", \"name\": \"游戏界面 信息层级 顾问\", \"evidence\": \"original_assets/ui-game-hud/merkle_root\", \"member_merkle_root\": \"fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd\"}, {\"slug\": \"handoff-design-dev\", \"role\": \"member\", \"name\": \"设计交付 协作规范 顾问\", \"evidence\": \"original_assets/handoff-design-dev/merkle_root\", \"member_merkle_root\": \"44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104\"}], \"team_lead\": \"visual-consistency-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/handoff-design-dev.md": "2e8ce0f803ebe5ce881ec1eb35955364f16b20ce3840529e14e4d8d65f0ba77f",
+    "agents/ui-game-hud.md": "6fc8e972e4f86b3c0fa4c693e1809d102f350fa6befbe22a8f78e926aee9bcda",
+    "agents/visual-consistency-team-lead.md": "3d70dc6e3ffc5307c8ada8ea02be2d3f196729104b78d60b6be281b0854f47f2",
+    "agents/visual-consistency.md": "f97175c9ec03e595261a1119bbe8c4dfcf8f311407176485c147abd5ddeccc70",
+    "plugin.json": "e57526b34237d4e80634534f3c303cfe0adafcf0fda6cf652473f2cd76fcd082",
+    "settings.json": "75755722cb23a29a57522f68b66d3b0921bccfcd5c0d52769e8e7aec923bd94b"
+  }
+}

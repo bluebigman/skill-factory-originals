@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-209",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-209",
+    "kind": "team",
+    "name": "直播 公众号 小红书 团队",
+    "description": "直播 公众号 小红书 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "live-stream-plan-team-lead",
+        "role": "lead",
+        "name": "直播带货主理人",
+        "evidence": null
+      },
+      {
+        "slug": "live-stream-plan",
+        "role": "member",
+        "name": "直播带货 脚本节奏 顾问",
+        "evidence": "original_assets/live-stream-plan/merkle_root",
+        "member_merkle_root": "5f29a13970fdf7ef2259f17e80b00bb0cb6e18ca9820145f2e698b22ebb6f3af"
+      },
+      {
+        "slug": "mp-cover-design",
+        "role": "member",
+        "name": "公众号封面 配图设计 顾问",
+        "evidence": "original_assets/mp-cover-design/merkle_root",
+        "member_merkle_root": "915943e92842add3503e99eeb233cc45a4fe523dcf6d74bb994d9e7ab353bb30"
+      },
+      {
+        "slug": "xiaohongshu-note-pro",
+        "role": "member",
+        "name": "小红书笔记 种草文案 封面文案",
+        "evidence": "original_assets/xiaohongshu-note-pro/merkle_root",
+        "member_merkle_root": "d018b86f3812ebb26f18fbf9bfca99c5698dcd2eeb53df789e5c3c786d2b502e"
+      }
+    ],
+    "team_lead": "live-stream-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f9fa9c9899f9f9c9",
+  "prompt_hash": "e68055cc06e87f1e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-209\", \"kind\": \"team\", \"name\": \"直播 公众号 小红书 团队\", \"description\": \"直播 公众号 小红书 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"live-stream-plan-team-lead\", \"role\": \"lead\", \"name\": \"直播带货主理人\", \"evidence\": null}, {\"slug\": \"live-stream-plan\", \"role\": \"member\", \"name\": \"直播带货 脚本节奏 顾问\", \"evidence\": \"original_assets/live-stream-plan/merkle_root\", \"member_merkle_root\": \"5f29a13970fdf7ef2259f17e80b00bb0cb6e18ca9820145f2e698b22ebb6f3af\"}, {\"slug\": \"mp-cover-design\", \"role\": \"member\", \"name\": \"公众号封面 配图设计 顾问\", \"evidence\": \"original_assets/mp-cover-design/merkle_root\", \"member_merkle_root\": \"915943e92842add3503e99eeb233cc45a4fe523dcf6d74bb994d9e7ab353bb30\"}, {\"slug\": \"xiaohongshu-note-pro\", \"role\": \"member\", \"name\": \"小红书笔记 种草文案 封面文案\", \"evidence\": \"original_assets/xiaohongshu-note-pro/merkle_root\", \"member_merkle_root\": \"d018b86f3812ebb26f18fbf9bfca99c5698dcd2eeb53df789e5c3c786d2b502e\"}], \"team_lead\": \"live-stream-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/live-stream-plan-team-lead.md": "45b3598afc280cf1422d6fc822d4f1e07ab23ffd4a5b3386bbce623833852e00",
+    "agents/live-stream-plan.md": "8d501c5787e503b3d90873c4bb1b485352bd3965a89769d6609ba8e7aae3c369",
+    "agents/mp-cover-design.md": "b71047932050c66f090e2b23d779b032ce3c278310afedbe6daca20e49570d23",
+    "agents/xiaohongshu-note-pro.md": "074a65b964380e0118d0a181c94a82cff75913194afdc7cd2ea98ebf78f273fa",
+    "plugin.json": "2504ad05dfbd3865058949a59aac02e01a21808e4e36424099b7c360eb1ce003",
+    "settings.json": "9ffd4e0e41ca06e32ff370d3ce263c452540030f583d978026574e2a960c50af"
+  }
+}

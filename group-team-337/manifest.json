@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-337",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-337",
+    "kind": "team",
+    "name": "动态记忆分层存储专家",
+    "description": "动态记忆分层存储专家：围绕SQL，覆盖索引匹配／避免函数／分页优化，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-perf-tune-team-lead",
+        "role": "lead",
+        "name": "SQL主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-perf-tune",
+        "role": "member",
+        "name": "SQL 调优 顾问",
+        "evidence": "original_assets/sql-perf-tune/merkle_root",
+        "member_merkle_root": "e6b662ffe52a65d1a2a2d94c00fd2ea404a3d977efb7c0256bfcaafa6537838e"
+      },
+      {
+        "slug": "agent-memory-manage",
+        "role": "member",
+        "name": "动态记忆 分层存储 顾问",
+        "evidence": "original_assets/agent-memory-manage/merkle_root",
+        "member_merkle_root": "c0441dd6f489857bdaedb77dcfbb85ce5577dc57d29641823354c16dd3dfceae"
+      },
+      {
+        "slug": "multi-agent-orchestrate-pro",
+        "role": "member",
+        "name": "多智能体 任务编排 顾问",
+        "evidence": "original_assets/multi-agent-orchestrate-pro/merkle_root",
+        "member_merkle_root": "af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571"
+      }
+    ],
+    "team_lead": "sql-perf-tune-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "bbae1a5a023d3429",
+  "prompt_hash": "d10939a291083bcf",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-337\", \"kind\": \"team\", \"name\": \"动态记忆分层存储专家\", \"description\": \"动态记忆分层存储专家：围绕SQL，覆盖索引匹配／避免函数／分页优化，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-perf-tune-team-lead\", \"role\": \"lead\", \"name\": \"SQL主理人\", \"evidence\": null}, {\"slug\": \"sql-perf-tune\", \"role\": \"member\", \"name\": \"SQL 调优 顾问\", \"evidence\": \"original_assets/sql-perf-tune/merkle_root\", \"member_merkle_root\": \"e6b662ffe52a65d1a2a2d94c00fd2ea404a3d977efb7c0256bfcaafa6537838e\"}, {\"slug\": \"agent-memory-manage\", \"role\": \"member\", \"name\": \"动态记忆 分层存储 顾问\", \"evidence\": \"original_assets/agent-memory-manage/merkle_root\", \"member_merkle_root\": \"c0441dd6f489857bdaedb77dcfbb85ce5577dc57d29641823354c16dd3dfceae\"}, {\"slug\": \"multi-agent-orchestrate-pro\", \"role\": \"member\", \"name\": \"多智能体 任务编排 顾问\", \"evidence\": \"original_assets/multi-agent-orchestrate-pro/merkle_root\", \"member_merkle_root\": \"af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571\"}], \"team_lead\": \"sql-perf-tune-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-memory-manage.md": "b13dedd6d445be6c78a8f13bd0a5f6aca1c4a5ebeb6ac1f724ec4e43417faa10",
+    "agents/multi-agent-orchestrate-pro.md": "f8d28c296a9e74884ea71ab4ec38f29c32e56b80cb807967374b0c3e36ee0f4c",
+    "agents/sql-perf-tune-team-lead.md": "8877d3198417aa956750cf195fe8e345d8ed13546e74203d6955f65169fb9e65",
+    "agents/sql-perf-tune.md": "93d0d4433a9ca3400c283504804453aac6d9c85453035765ca4ccd4cbc16f5db",
+    "plugin.json": "b8187afea0bbabdef3c5f344ad1d728c5c7e1a78de9d9fd2b26bdbd46107986f",
+    "settings.json": "b3d954513e508e07c54a4b3f9b5763a6b5aef94ce9c4b6112b87ded8ee657cc4"
+  }
+}

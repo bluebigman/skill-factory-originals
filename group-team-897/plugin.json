@@ -1,0 +1,126 @@
+{
+  "agentName": "pricing-review-team-lead",
+  "agents": [
+    "./agents/pricing-review-team-lead.md",
+    "./agents/pricing-review.md",
+    "./agents/requirement-trace-pro.md",
+    "./agents/rollback-drill.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 定价复核",
+    "zh": "帮我处理定价复核"
+  },
+  "description": "pricing-review team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 定价复核, covers 竞品锚定 / 价位习惯 / 定期复核, delivering structured results and actionable checklists.",
+    "zh": "定价复核顾问专家：围绕定价复核，覆盖竞品锚定／价位习惯／定期复核，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "pricing-review Team",
+    "zh": "定价复核顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pricing-review-team-lead",
+      "name": {
+        "en": "定价复核主理人",
+        "zh": "定价复核主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pricing-review.png",
+      "id": "pricing-review",
+      "name": {
+        "en": "pricing-review",
+        "zh": "定价复核 顾问"
+      },
+      "profession": {
+        "en": "pricing-review",
+        "zh": "定价复核 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/requirement-trace-pro.png",
+      "id": "requirement-trace-pro",
+      "name": {
+        "en": "requirement-trace-pro",
+        "zh": "需求追踪 实现映射 顾问"
+      },
+      "profession": {
+        "en": "requirement-trace-pro",
+        "zh": "需求追踪 实现映射 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/rollback-drill.png",
+      "id": "rollback-drill",
+      "name": {
+        "en": "rollback-drill",
+        "zh": "回滚演练 顾问"
+      },
+      "profession": {
+        "en": "rollback-drill",
+        "zh": "回滚演练 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-897",
+  "plugin": "group-team-897",
+  "profession": {
+    "en": "pricing-review Collaboration Team",
+    "zh": "定价复核顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 定价复核",
+      "zh": "帮我处理定价复核"
+    },
+    {
+      "en": "Plan 需求追踪",
+      "zh": "帮我规划需求追踪"
+    },
+    {
+      "en": "Review 回滚演练",
+      "zh": "帮我检查回滚演练"
+    }
+  ],
+  "tags": [
+    {
+      "en": "成本加成打底",
+      "zh": "成本加成打底"
+    },
+    {
+      "en": "竞品锚定",
+      "zh": "竞品锚定"
+    },
+    {
+      "en": "购买力分层",
+      "zh": "购买力分层"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pricing-review-team-lead",
+    "memberAgents": [
+      "pricing-review",
+      "requirement-trace-pro",
+      "rollback-drill"
+    ]
+  },
+  "version": "1.0.0"
+}

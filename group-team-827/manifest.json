@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-827",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-827",
+    "kind": "team",
+    "name": "数据血缘梳理专家",
+    "description": "擅长节点粒度、变更影响与定期更新，覆盖数据血缘梳理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-lineage-team-lead",
+        "role": "lead",
+        "name": "数据血缘梳理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-lineage",
+        "role": "member",
+        "name": "数据血缘梳理 助手",
+        "evidence": "original_assets/data-lineage/merkle_root",
+        "member_merkle_root": "fc8bf67ac001e5dd62fd00196c34d622f82d0f0f2910bed0793c72efe7faa2d8"
+      },
+      {
+        "slug": "stream-pipeline-pro",
+        "role": "member",
+        "name": "流式处理 水位控制 顾问",
+        "evidence": "original_assets/stream-pipeline-pro/merkle_root",
+        "member_merkle_root": "16f3669aea989a2ae99a9be731c489f9be89322740c3703b3bf4a45445074bfa"
+      },
+      {
+        "slug": "agent-red-team",
+        "role": "member",
+        "name": "对抗测试 越权探测 顾问",
+        "evidence": "original_assets/agent-red-team/merkle_root",
+        "member_merkle_root": "bab54a8701fef286bfa688a05c77f1e693cf4a907d0c6b7012cd72b1f4b92b39"
+      }
+    ],
+    "team_lead": "data-lineage-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2cc2914412284720",
+  "prompt_hash": "c1e29b1a49dd84b6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-827\", \"kind\": \"team\", \"name\": \"数据血缘梳理专家\", \"description\": \"擅长节点粒度、变更影响与定期更新，覆盖数据血缘梳理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-lineage-team-lead\", \"role\": \"lead\", \"name\": \"数据血缘梳理主理人\", \"evidence\": null}, {\"slug\": \"data-lineage\", \"role\": \"member\", \"name\": \"数据血缘梳理 助手\", \"evidence\": \"original_assets/data-lineage/merkle_root\", \"member_merkle_root\": \"fc8bf67ac001e5dd62fd00196c34d622f82d0f0f2910bed0793c72efe7faa2d8\"}, {\"slug\": \"stream-pipeline-pro\", \"role\": \"member\", \"name\": \"流式处理 水位控制 顾问\", \"evidence\": \"original_assets/stream-pipeline-pro/merkle_root\", \"member_merkle_root\": \"16f3669aea989a2ae99a9be731c489f9be89322740c3703b3bf4a45445074bfa\"}, {\"slug\": \"agent-red-team\", \"role\": \"member\", \"name\": \"对抗测试 越权探测 顾问\", \"evidence\": \"original_assets/agent-red-team/merkle_root\", \"member_merkle_root\": \"bab54a8701fef286bfa688a05c77f1e693cf4a907d0c6b7012cd72b1f4b92b39\"}], \"team_lead\": \"data-lineage-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-red-team.md": "4905d90cb5890106db933380579e40ba31b56b98294b0447faf9e7626a285e01",
+    "agents/data-lineage-team-lead.md": "20ba176ade48828f53414fd632791de1820728bd019314f3c4d8c291b4791bde",
+    "agents/data-lineage.md": "ae08963a556c7ce6ddbc87bd09571ce11e61319ca32aa8c5933b62d3d7d5e246",
+    "agents/stream-pipeline-pro.md": "8b6ad1c5fa594ae9d9dc1d2d5606c9786f77f3cc23b533f5a0ff7a056b81d99d",
+    "plugin.json": "76b8d88614c17776aace0af1c57612dde5b358b56770517ca5bd7694b607afff",
+    "settings.json": "297f7212158b61e51dbd7100e5f950762d22592123fd8ab47d35eb5bea985e1a"
+  }
+}

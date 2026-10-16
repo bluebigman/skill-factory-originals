@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-686",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-686",
+    "kind": "team",
+    "name": "报表自动专家",
+    "description": "报表自动专家：围绕报表自动，覆盖定时可靠／失败告警／数据就绪，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-automation-pro-team-lead",
+        "role": "lead",
+        "name": "报表自动主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-automation-pro",
+        "role": "member",
+        "name": "报表自动 定时生成 顾问",
+        "evidence": "original_assets/report-automation-pro/merkle_root",
+        "member_merkle_root": "48a4feea1f986d230fd3f2739fa3ed4ce62ad8d3c2b84b2938ed926e0cf1481f"
+      },
+      {
+        "slug": "observability-inject-pro",
+        "role": "member",
+        "name": "链路追踪 指标埋点 顾问",
+        "evidence": "original_assets/observability-inject-pro/merkle_root",
+        "member_merkle_root": "10035696f515cd25ee66be0efd6a2df22a8225eb74c73b5334d97cd29f8d6875"
+      },
+      {
+        "slug": "growth-dashboard",
+        "role": "member",
+        "name": "增长看板 指标搭建 顾问",
+        "evidence": "original_assets/growth-dashboard/merkle_root",
+        "member_merkle_root": "c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09"
+      }
+    ],
+    "team_lead": "report-automation-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d35d9a29c8ab9f2b",
+  "prompt_hash": "ae09703bed9044fd",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-686\", \"kind\": \"team\", \"name\": \"报表自动专家\", \"description\": \"报表自动专家：围绕报表自动，覆盖定时可靠／失败告警／数据就绪，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-automation-pro-team-lead\", \"role\": \"lead\", \"name\": \"报表自动主理人\", \"evidence\": null}, {\"slug\": \"report-automation-pro\", \"role\": \"member\", \"name\": \"报表自动 定时生成 顾问\", \"evidence\": \"original_assets/report-automation-pro/merkle_root\", \"member_merkle_root\": \"48a4feea1f986d230fd3f2739fa3ed4ce62ad8d3c2b84b2938ed926e0cf1481f\"}, {\"slug\": \"observability-inject-pro\", \"role\": \"member\", \"name\": \"链路追踪 指标埋点 顾问\", \"evidence\": \"original_assets/observability-inject-pro/merkle_root\", \"member_merkle_root\": \"10035696f515cd25ee66be0efd6a2df22a8225eb74c73b5334d97cd29f8d6875\"}, {\"slug\": \"growth-dashboard\", \"role\": \"member\", \"name\": \"增长看板 指标搭建 顾问\", \"evidence\": \"original_assets/growth-dashboard/merkle_root\", \"member_merkle_root\": \"c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09\"}], \"team_lead\": \"report-automation-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/growth-dashboard.md": "66332439c94039feabf29a8896819444561dd0c95f71d1176c0cae9bdc91b9eb",
+    "agents/observability-inject-pro.md": "775e9c21575775cd4fb573c7af92fcaf3ec7216ef6115231cf160826034997d3",
+    "agents/report-automation-pro-team-lead.md": "780c2abcc0e8342339287d9d3ea2697c6b991e3320968e861d827e85f3c15fe6",
+    "agents/report-automation-pro.md": "e632ad8ee18d18d86c59a1d5e3002daf5510db401613a23cc13bacc45cd7e893",
+    "plugin.json": "bc6b082caf4f2b9525d06a76217cf5df7a97caeb4cecad9edf5122492cae5c98",
+    "settings.json": "e546b109249b31ab0f4eed4a7654b238183e2f31dd80f39c6bbc690214db7e87"
+  }
+}

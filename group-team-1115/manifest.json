@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1115",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1115",
+    "kind": "team",
+    "name": "服务标准专家",
+    "description": "服务标准专家：围绕服务标准，覆盖时限明确／分级标准／违约处理，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-sla-manage-team-lead",
+        "role": "lead",
+        "name": "服务标准主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-sla-manage",
+        "role": "member",
+        "name": "服务标准 响应时限 顾问",
+        "evidence": "original_assets/agent-sla-manage/merkle_root",
+        "member_merkle_root": "04f0554579aa33842f785bd1ee6a6b0da0bca8fe9d0b1f4129b9d7c1f0552f6e"
+      },
+      {
+        "slug": "internal-qa",
+        "role": "member",
+        "name": "内部答疑整理 助手",
+        "evidence": "original_assets/internal-qa/merkle_root",
+        "member_merkle_root": "b83421909336f7c68c0d4063e10b1c66b9b76a9e29eb8a207520ebc550e704ff"
+      },
+      {
+        "slug": "churn-prevent-pro",
+        "role": "member",
+        "name": "客户流失 预警干预 顾问",
+        "evidence": "original_assets/churn-prevent-pro/merkle_root",
+        "member_merkle_root": "5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58"
+      }
+    ],
+    "team_lead": "agent-sla-manage-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b8a05e1b127fb86c",
+  "prompt_hash": "b28e08f75b93197b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1115\", \"kind\": \"team\", \"name\": \"服务标准专家\", \"description\": \"服务标准专家：围绕服务标准，覆盖时限明确／分级标准／违约处理，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-sla-manage-team-lead\", \"role\": \"lead\", \"name\": \"服务标准主理人\", \"evidence\": null}, {\"slug\": \"agent-sla-manage\", \"role\": \"member\", \"name\": \"服务标准 响应时限 顾问\", \"evidence\": \"original_assets/agent-sla-manage/merkle_root\", \"member_merkle_root\": \"04f0554579aa33842f785bd1ee6a6b0da0bca8fe9d0b1f4129b9d7c1f0552f6e\"}, {\"slug\": \"internal-qa\", \"role\": \"member\", \"name\": \"内部答疑整理 助手\", \"evidence\": \"original_assets/internal-qa/merkle_root\", \"member_merkle_root\": \"b83421909336f7c68c0d4063e10b1c66b9b76a9e29eb8a207520ebc550e704ff\"}, {\"slug\": \"churn-prevent-pro\", \"role\": \"member\", \"name\": \"客户流失 预警干预 顾问\", \"evidence\": \"original_assets/churn-prevent-pro/merkle_root\", \"member_merkle_root\": \"5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58\"}], \"team_lead\": \"agent-sla-manage-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-sla-manage-team-lead.md": "bf3037ed02ab19849729b25ac3cea3ff178ed69bee7fac1e81c67c63c11baf20",
+    "agents/agent-sla-manage.md": "1e781892e1f923779f30674c968eeb2eca281f64c591637dcdb626691574b7c6",
+    "agents/churn-prevent-pro.md": "ed1eb1d996c4b95370c6c84a221d6458d397dc43342b841d74d3f481a22e5aea",
+    "agents/internal-qa.md": "fcb226b55da5ea4fccab8c97b73dd0b30fe7f4472fb745204a34dd186575903c",
+    "plugin.json": "b8894092d893cb9ac72fe2f1065c94340ab1eda4ce77ae658894470917089eb9",
+    "settings.json": "3c941eadcbdf5b227e7f174f96ab372150f94057fed176893dd0e3e6b8c52cc9"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-cost-attribution-team-lead",
+  "agents": [
+    "./agents/agent-cost-attribution-team-lead.md",
+    "./agents/agent-cost-attribution.md",
+    "./agents/agent-feedback-loop.md",
+    "./agents/data-dict-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 成本归因",
+    "zh": "帮我处理成本归因"
+  },
+  "description": "agent-cost-attribution team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 成本归因 end-to-end: 分项核算, 异常定位 and 基线对比. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分项核算、异常定位与基线对比，覆盖成本归因全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-cost-attribution Team",
+    "zh": "成本归因专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-cost-attribution-team-lead",
+      "name": {
+        "en": "成本归因主理人",
+        "zh": "成本归因主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-cost-attribution.png",
+      "id": "agent-cost-attribution",
+      "name": {
+        "en": "agent-cost-attribution",
+        "zh": "成本归因 分项核算 顾问"
+      },
+      "profession": {
+        "en": "agent-cost-attribution",
+        "zh": "成本归因 分项核算 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-feedback-loop.png",
+      "id": "agent-feedback-loop",
+      "name": {
+        "en": "agent-feedback-loop",
+        "zh": "反馈闭环 效果回收 顾问"
+      },
+      "profession": {
+        "en": "agent-feedback-loop",
+        "zh": "反馈闭环 效果回收 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-dict-pro.png",
+      "id": "data-dict-pro",
+      "name": {
+        "en": "data-dict-pro",
+        "zh": "数据字典 字段说明 顾问"
+      },
+      "profession": {
+        "en": "data-dict-pro",
+        "zh": "数据字典 字段说明 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-317",
+  "plugin": "group-team-317",
+  "profession": {
+    "en": "agent-cost-attribution Collaboration Team",
+    "zh": "成本归因专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 成本归因",
+      "zh": "帮我处理成本归因"
+    },
+    {
+      "en": "Plan 反馈闭环",
+      "zh": "帮我规划反馈闭环"
+    },
+    {
+      "en": "Review 数据字典",
+      "zh": "帮我检查数据字典"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分项核算",
+      "zh": "分项核算"
+    },
+    {
+      "en": "异常定位",
+      "zh": "异常定位"
+    },
+    {
+      "en": "基线对比",
+      "zh": "基线对比"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-cost-attribution-team-lead",
+    "memberAgents": [
+      "agent-cost-attribution",
+      "agent-feedback-loop",
+      "data-dict-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

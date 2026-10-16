@@ -1,0 +1,126 @@
+{
+  "agentName": "key-account-plan-team-lead",
+  "agents": [
+    "./agents/key-account-plan-team-lead.md",
+    "./agents/key-account-plan.md",
+    "./agents/game-qa-method.md",
+    "./agents/intl-partner-screen.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 大客户",
+    "zh": "帮我处理大客户"
+  },
+  "description": "key-account-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 大客户 end-to-end: 关系地图, 业务对齐 and 季度节奏. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长关系地图、业务对齐与季度节奏，覆盖大客户全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "key-account-plan Team",
+    "zh": "大客户经营计划专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "key-account-plan-team-lead",
+      "name": {
+        "en": "大客户主理人",
+        "zh": "大客户主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/key-account-plan.png",
+      "id": "key-account-plan",
+      "name": {
+        "en": "key-account-plan",
+        "zh": "大客户 经营计划 顾问"
+      },
+      "profession": {
+        "en": "key-account-plan",
+        "zh": "大客户 经营计划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-qa-method.png",
+      "id": "game-qa-method",
+      "name": {
+        "en": "game-qa-method",
+        "zh": "游戏测试 用例设计 顾问"
+      },
+      "profession": {
+        "en": "game-qa-method",
+        "zh": "游戏测试 用例设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-partner-screen.png",
+      "id": "intl-partner-screen",
+      "name": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "profession": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-843",
+  "plugin": "group-team-843",
+  "profession": {
+    "en": "key-account-plan Collaboration Team",
+    "zh": "大客户经营计划专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 大客户",
+      "zh": "帮我处理大客户"
+    },
+    {
+      "en": "Plan 游戏测试",
+      "zh": "帮我规划游戏测试"
+    },
+    {
+      "en": "Review 海外伙伴",
+      "zh": "帮我检查海外伙伴"
+    }
+  ],
+  "tags": [
+    {
+      "en": "关系地图",
+      "zh": "关系地图"
+    },
+    {
+      "en": "业务对齐",
+      "zh": "业务对齐"
+    },
+    {
+      "en": "季度节奏",
+      "zh": "季度节奏"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "key-account-plan-team-lead",
+    "memberAgents": [
+      "key-account-plan",
+      "game-qa-method",
+      "intl-partner-screen"
+    ]
+  },
+  "version": "1.0.0"
+}

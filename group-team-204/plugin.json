@@ -1,0 +1,126 @@
+{
+  "agentName": "toolkit-pro-02-team-lead",
+  "agents": [
+    "./agents/toolkit-pro-02-team-lead.md",
+    "./agents/toolkit-pro-02.md",
+    "./agents/toolkit-pro-03-fixed.md",
+    "./agents/config-error-triage-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 任务治理",
+    "zh": "帮我处理任务治理"
+  },
+  "description": "综合工具 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "任务 数据 配置 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "综合工具 Suite Team",
+    "zh": "任务 数据 配置 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "toolkit-pro-02-team-lead",
+      "name": {
+        "en": "任务治理主理人",
+        "zh": "任务治理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-02.png",
+      "id": "toolkit-pro-02",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-03-fixed.png",
+      "id": "toolkit-pro-03-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据回溯 标准作业 数据保全"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据回溯 标准作业 数据保全"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/config-error-triage-expert.png",
+      "id": "config-error-triage-expert",
+      "name": {
+        "en": "Config Error Triage Expert",
+        "zh": "配置排查 报错定位"
+      },
+      "profession": {
+        "en": "Config Error Triage Expert",
+        "zh": "配置排查 报错定位"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-204",
+  "plugin": "group-team-204",
+  "profession": {
+    "en": "综合工具 Suite Collaboration Team",
+    "zh": "任务 数据 配置 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 任务治理",
+      "zh": "帮我处理任务治理"
+    },
+    {
+      "en": "Plan 数据回溯",
+      "zh": "帮我规划数据回溯"
+    },
+    {
+      "en": "Review 配置排查",
+      "zh": "帮我检查配置排查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "任务治理",
+      "zh": "任务治理"
+    },
+    {
+      "en": "数据回溯",
+      "zh": "数据回溯"
+    },
+    {
+      "en": "配置排查",
+      "zh": "配置排查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "toolkit-pro-02-team-lead",
+    "memberAgents": [
+      "toolkit-pro-02",
+      "toolkit-pro-03-fixed",
+      "config-error-triage-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "data-workflow-expert-team-lead",
+  "agents": [
+    "./agents/data-workflow-expert-team-lead.md",
+    "./agents/data-workflow-expert.md",
+    "./agents/kb-entry-organizer-pro.md",
+    "./agents/sql-toolkit-pro-02.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据分析",
+    "zh": "帮我处理数据分析"
+  },
+  "description": "DataFlow team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 分析 知识 库生 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "DataFlow Team",
+    "zh": "数据 分析 知识 库生 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-workflow-expert-team-lead",
+      "name": {
+        "en": "数据分析主理人",
+        "zh": "数据分析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-workflow-expert.png",
+      "id": "data-workflow-expert",
+      "name": {
+        "en": "DataFlow",
+        "zh": "数据分析 指标拆解"
+      },
+      "profession": {
+        "en": "DataFlow",
+        "zh": "数据分析 指标拆解"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kb-entry-organizer-pro.png",
+      "id": "kb-entry-organizer-pro",
+      "name": {
+        "en": "Knowledge Entry Organizer and Deduplicator",
+        "zh": "知识条目 去重合并 标签归类"
+      },
+      "profession": {
+        "en": "Knowledge Entry Organizer and Deduplicator",
+        "zh": "知识条目 去重合并 标签归类"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-02.png",
+      "id": "sql-toolkit-pro-02",
+      "name": {
+        "en": "SQL与数据库 Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "profession": {
+        "en": "SQL与数据库 Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-171",
+  "plugin": "group-team-171",
+  "profession": {
+    "en": "DataFlow Collaboration Team",
+    "zh": "数据 分析 知识 库生 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据分析",
+      "zh": "帮我处理数据分析"
+    },
+    {
+      "en": "Plan 知识条目",
+      "zh": "帮我规划知识条目"
+    },
+    {
+      "en": "Review SQL生成编辑",
+      "zh": "帮我检查SQL生成编辑"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据分析",
+      "zh": "数据分析"
+    },
+    {
+      "en": "知识条目",
+      "zh": "知识条目"
+    },
+    {
+      "en": "SQL生成编辑",
+      "zh": "SQL生成编辑"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-workflow-expert-team-lead",
+    "memberAgents": [
+      "data-workflow-expert",
+      "kb-entry-organizer-pro",
+      "sql-toolkit-pro-02"
+    ]
+  },
+  "version": "1.0.0"
+}

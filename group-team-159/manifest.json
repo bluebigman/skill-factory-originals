@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-159",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-159",
+    "kind": "team",
+    "name": "跨境 售后 商品 团队",
+    "description": "跨境 售后 商品 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cross-border-listing-team-lead",
+        "role": "lead",
+        "name": "跨境上架主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cross-border-listing",
+        "role": "member",
+        "name": "跨境上架 多语言 顾问",
+        "evidence": "original_assets/cross-border-listing/merkle_root",
+        "member_merkle_root": "1d74f3327ece0b256fff4669466dcb3f5d6ad01e51a6e00be5471c70bef7efc7"
+      },
+      {
+        "slug": "after-sale-coach",
+        "role": "member",
+        "name": "售后处理 退换流程 顾问",
+        "evidence": "original_assets/after-sale-coach/merkle_root",
+        "member_merkle_root": "99debf489da4fec28eeed7cf593f8ab004cd2134aab690eb0d747ab6060326e9"
+      },
+      {
+        "slug": "store-copy-coach",
+        "role": "member",
+        "name": "商品文案 卖点提炼 顾问",
+        "evidence": "original_assets/store-copy-coach/merkle_root",
+        "member_merkle_root": "6d9f1b5c1835f1d10ad6b2a8ff84a398b3d75eeeb896235d68be81a189aa5cd2"
+      }
+    ],
+    "team_lead": "cross-border-listing-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2a880563f41a9a4a",
+  "prompt_hash": "9e6cd0bac322ce84",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-159\", \"kind\": \"team\", \"name\": \"跨境 售后 商品 团队\", \"description\": \"跨境 售后 商品 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cross-border-listing-team-lead\", \"role\": \"lead\", \"name\": \"跨境上架主理人\", \"evidence\": null}, {\"slug\": \"cross-border-listing\", \"role\": \"member\", \"name\": \"跨境上架 多语言 顾问\", \"evidence\": \"original_assets/cross-border-listing/merkle_root\", \"member_merkle_root\": \"1d74f3327ece0b256fff4669466dcb3f5d6ad01e51a6e00be5471c70bef7efc7\"}, {\"slug\": \"after-sale-coach\", \"role\": \"member\", \"name\": \"售后处理 退换流程 顾问\", \"evidence\": \"original_assets/after-sale-coach/merkle_root\", \"member_merkle_root\": \"99debf489da4fec28eeed7cf593f8ab004cd2134aab690eb0d747ab6060326e9\"}, {\"slug\": \"store-copy-coach\", \"role\": \"member\", \"name\": \"商品文案 卖点提炼 顾问\", \"evidence\": \"original_assets/store-copy-coach/merkle_root\", \"member_merkle_root\": \"6d9f1b5c1835f1d10ad6b2a8ff84a398b3d75eeeb896235d68be81a189aa5cd2\"}], \"team_lead\": \"cross-border-listing-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/after-sale-coach.md": "fd490919d71d3f2d233b698bd3f39145ec6568388fe9a65f25ec6bd95cc9a2d0",
+    "agents/cross-border-listing-team-lead.md": "3698bd2452162d17738915c7c16fa5a8e7cc52e178d5bf0c8cc23a68ed10df89",
+    "agents/cross-border-listing.md": "7d50588e42dbb1d373677e25286bcf3c6b7b216f6bbca9aab8cf54ac6cf4849e",
+    "agents/store-copy-coach.md": "859c050b940781eabb26e41b44363460db48bb0c0ee15486e7773f9f02154aaa",
+    "plugin.json": "f3bb4c2f3ff8b98eb631a1f93062709fb5bb1bfcab62b1a16382033be238e30b",
+    "settings.json": "72b35ac604011c09852c0848ab1a6c275ea23e3f9fcc05f732c6195c20023541"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-206",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-206",
+    "kind": "team",
+    "name": "合同 个人 转行 团队",
+    "description": "合同 个人 转行 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "contract-legal-pro-team-lead",
+        "role": "lead",
+        "name": "合同法律风险顾问主理人",
+        "evidence": null
+      },
+      {
+        "slug": "contract-legal-pro",
+        "role": "member",
+        "name": "合同法律风险顾问",
+        "evidence": "original_assets/contract-legal-pro/merkle_root",
+        "member_merkle_root": "596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3"
+      },
+      {
+        "slug": "time-mgmt-expert",
+        "role": "member",
+        "name": "时间管理专家",
+        "evidence": "original_assets/time-mgmt-expert/merkle_root",
+        "member_merkle_root": "3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0"
+      },
+      {
+        "slug": "career-transition-pro",
+        "role": "member",
+        "name": "转行规划 简历优化 技能迁移",
+        "evidence": "original_assets/career-transition-pro/merkle_root",
+        "member_merkle_root": "3bad488f8bc50ad0bd72485b964ca0f65e77d801c1c4f13ca493b584930be6ee"
+      }
+    ],
+    "team_lead": "contract-legal-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b5407c8e5256e23b",
+  "prompt_hash": "933c368cd5fe7754",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-206\", \"kind\": \"team\", \"name\": \"合同 个人 转行 团队\", \"description\": \"合同 个人 转行 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"contract-legal-pro-team-lead\", \"role\": \"lead\", \"name\": \"合同法律风险顾问主理人\", \"evidence\": null}, {\"slug\": \"contract-legal-pro\", \"role\": \"member\", \"name\": \"合同法律风险顾问\", \"evidence\": \"original_assets/contract-legal-pro/merkle_root\", \"member_merkle_root\": \"596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3\"}, {\"slug\": \"time-mgmt-expert\", \"role\": \"member\", \"name\": \"时间管理专家\", \"evidence\": \"original_assets/time-mgmt-expert/merkle_root\", \"member_merkle_root\": \"3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0\"}, {\"slug\": \"career-transition-pro\", \"role\": \"member\", \"name\": \"转行规划 简历优化 技能迁移\", \"evidence\": \"original_assets/career-transition-pro/merkle_root\", \"member_merkle_root\": \"3bad488f8bc50ad0bd72485b964ca0f65e77d801c1c4f13ca493b584930be6ee\"}], \"team_lead\": \"contract-legal-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/career-transition-pro.md": "a21e51561504eb84e1b22f9e1a191b509ab63d1e48741a79b429d5adec84a847",
+    "agents/contract-legal-pro-team-lead.md": "a6a8f107e56d69802b066b1d8e5fa4811cc5c777cebf64f7bbd87ef6cb96ea59",
+    "agents/contract-legal-pro.md": "c66f7272cafa90d833166b81ad7a3e868e75480b4a672cb348541c9087743f50",
+    "agents/time-mgmt-expert.md": "6c338f7778364ff217844d2cc711371a71891e535504ee2fd647c6b03cac0f23",
+    "plugin.json": "5977bd0dcdee33024339c5215142cfafc9f61887c2e1449ebe8be23e32f61d13",
+    "settings.json": "73e471e7335f898db98fc993d919c664db466de1f1a8544b941d5ee0d9a780b7"
+  }
+}

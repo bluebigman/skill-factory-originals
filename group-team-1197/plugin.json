@@ -1,0 +1,126 @@
+{
+  "agentName": "customer-onboard-cs-team-lead",
+  "agents": [
+    "./agents/customer-onboard-cs-team-lead.md",
+    "./agents/customer-onboard-cs.md",
+    "./agents/safety-management.md",
+    "./agents/internal-qa.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 客户成功",
+    "zh": "帮我处理客户成功"
+  },
+  "description": "customer-onboard-cs team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 客户成功 requirements, output three deliverables: 里程碑制, 阶段回访, 分区排查. Verifiable end-to-end, evidence per step.",
+    "zh": "输入客户成功相关需求，输出里程碑制、阶段回访、分区排查三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "customer-onboard-cs Team",
+    "zh": "客户成功专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "customer-onboard-cs-team-lead",
+      "name": {
+        "en": "客户成功主理人",
+        "zh": "客户成功主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/customer-onboard-cs.png",
+      "id": "customer-onboard-cs",
+      "name": {
+        "en": "customer-onboard-cs",
+        "zh": "客户成功 上手陪跑 顾问"
+      },
+      "profession": {
+        "en": "customer-onboard-cs",
+        "zh": "客户成功 上手陪跑 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/safety-management.png",
+      "id": "safety-management",
+      "name": {
+        "en": "safety-management",
+        "zh": "安全管理 顾问"
+      },
+      "profession": {
+        "en": "safety-management",
+        "zh": "安全管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/internal-qa.png",
+      "id": "internal-qa",
+      "name": {
+        "en": "internal-qa",
+        "zh": "内部答疑整理 助手"
+      },
+      "profession": {
+        "en": "internal-qa",
+        "zh": "内部答疑整理 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1197",
+  "plugin": "group-team-1197",
+  "profession": {
+    "en": "customer-onboard-cs Collaboration Team",
+    "zh": "客户成功专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 客户成功",
+      "zh": "帮我处理客户成功"
+    },
+    {
+      "en": "Plan 安全管理",
+      "zh": "帮我规划安全管理"
+    },
+    {
+      "en": "Review 内部答疑整理",
+      "zh": "帮我检查内部答疑整理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "里程碑制",
+      "zh": "里程碑制"
+    },
+    {
+      "en": "阶段回访",
+      "zh": "阶段回访"
+    },
+    {
+      "en": "首价值先行",
+      "zh": "首价值先行"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "customer-onboard-cs-team-lead",
+    "memberAgents": [
+      "customer-onboard-cs",
+      "safety-management",
+      "internal-qa"
+    ]
+  },
+  "version": "1.0.0"
+}

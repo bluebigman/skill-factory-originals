@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-804",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-804",
+    "kind": "team",
+    "name": "接口延迟分段测量专家",
+    "description": "接口延迟分段测量专家：围绕接口延迟，覆盖分段测量／长尾关注／依赖分析，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-latency-pro-team-lead",
+        "role": "lead",
+        "name": "接口延迟主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-latency-pro",
+        "role": "member",
+        "name": "接口延迟 分段测量 顾问",
+        "evidence": "original_assets/api-latency-pro/merkle_root",
+        "member_merkle_root": "8c7691cb847c0c63afc1ff016e09bfb514609511719dbd079c9b12dcb3bbe977"
+      },
+      {
+        "slug": "ui-design-expert",
+        "role": "member",
+        "name": "界面设计 组件美化",
+        "evidence": "original_assets/ui-design-expert/merkle_root",
+        "member_merkle_root": "8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16"
+      },
+      {
+        "slug": "config-drift-detect",
+        "role": "member",
+        "name": "配置漂移 基线对比 顾问",
+        "evidence": "original_assets/config-drift-detect/merkle_root",
+        "member_merkle_root": "a861c69007923be08315df4549e574330612d9af33b6a775ff975b1083f88cd8"
+      }
+    ],
+    "team_lead": "api-latency-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "edc29c7947fa376f",
+  "prompt_hash": "0e2300e253dc89dc",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-804\", \"kind\": \"team\", \"name\": \"接口延迟分段测量专家\", \"description\": \"接口延迟分段测量专家：围绕接口延迟，覆盖分段测量／长尾关注／依赖分析，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-latency-pro-team-lead\", \"role\": \"lead\", \"name\": \"接口延迟主理人\", \"evidence\": null}, {\"slug\": \"api-latency-pro\", \"role\": \"member\", \"name\": \"接口延迟 分段测量 顾问\", \"evidence\": \"original_assets/api-latency-pro/merkle_root\", \"member_merkle_root\": \"8c7691cb847c0c63afc1ff016e09bfb514609511719dbd079c9b12dcb3bbe977\"}, {\"slug\": \"ui-design-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化\", \"evidence\": \"original_assets/ui-design-expert/merkle_root\", \"member_merkle_root\": \"8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16\"}, {\"slug\": \"config-drift-detect\", \"role\": \"member\", \"name\": \"配置漂移 基线对比 顾问\", \"evidence\": \"original_assets/config-drift-detect/merkle_root\", \"member_merkle_root\": \"a861c69007923be08315df4549e574330612d9af33b6a775ff975b1083f88cd8\"}], \"team_lead\": \"api-latency-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-latency-pro-team-lead.md": "dd4f07330a14dfe4255dd9c5a599f0bc77c7e1eb2c3f03f1d9ab41ea9ea73fb6",
+    "agents/api-latency-pro.md": "e1c2114408a9d101f3411c2093cf24da580e1e135fa4543d51fbbe9957d9a08e",
+    "agents/config-drift-detect.md": "327d2c0b672d7f2f381ce8a674dba41e989c576d3ae78f0f6d56713d5efeaab2",
+    "agents/ui-design-expert.md": "3f54485f4cde1e69207c0608e124f8a0bbab9c6afb8d5c542a9d7a731ff700c2",
+    "plugin.json": "e71aa2678c5a74ba59b62c40a5e2df2c8bd65500dcf7b934f0fbe74502df39f5",
+    "settings.json": "ae1f799ea7480664944fae670e6fa3165777d7c774fb4b1fac0358174b340f01"
+  }
+}

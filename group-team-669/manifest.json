@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-669",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-669",
+    "kind": "team",
+    "name": "界面设计组件美化专家",
+    "description": "擅长标题层级、列表一致与链接可用，覆盖Mark全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "markdown-standard-pro-team-lead",
+        "role": "lead",
+        "name": "Mark主理人",
+        "evidence": null
+      },
+      {
+        "slug": "markdown-standard-pro",
+        "role": "member",
+        "name": "Mark 规范 顾问",
+        "evidence": "original_assets/markdown-standard-pro/merkle_root",
+        "member_merkle_root": "53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1"
+      },
+      {
+        "slug": "scene-narrative-pro",
+        "role": "member",
+        "name": "场景叙事 氛围营造 顾问",
+        "evidence": "original_assets/scene-narrative-pro/merkle_root",
+        "member_merkle_root": "31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb"
+      },
+      {
+        "slug": "ui-visual-forge-expert",
+        "role": "member",
+        "name": "界面设计 组件美化 视觉产出",
+        "evidence": "original_assets/ui-visual-forge-expert/merkle_root",
+        "member_merkle_root": "e4c930a09c3a96ad42334dbde9c801fc4e3b159a0d2c03951c194f9980f589ed"
+      }
+    ],
+    "team_lead": "markdown-standard-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b060e5159c852ba9",
+  "prompt_hash": "0e5bfb6d2687601b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-669\", \"kind\": \"team\", \"name\": \"界面设计组件美化专家\", \"description\": \"擅长标题层级、列表一致与链接可用，覆盖Mark全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"markdown-standard-pro-team-lead\", \"role\": \"lead\", \"name\": \"Mark主理人\", \"evidence\": null}, {\"slug\": \"markdown-standard-pro\", \"role\": \"member\", \"name\": \"Mark 规范 顾问\", \"evidence\": \"original_assets/markdown-standard-pro/merkle_root\", \"member_merkle_root\": \"53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1\"}, {\"slug\": \"scene-narrative-pro\", \"role\": \"member\", \"name\": \"场景叙事 氛围营造 顾问\", \"evidence\": \"original_assets/scene-narrative-pro/merkle_root\", \"member_merkle_root\": \"31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb\"}, {\"slug\": \"ui-visual-forge-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化 视觉产出\", \"evidence\": \"original_assets/ui-visual-forge-expert/merkle_root\", \"member_merkle_root\": \"e4c930a09c3a96ad42334dbde9c801fc4e3b159a0d2c03951c194f9980f589ed\"}], \"team_lead\": \"markdown-standard-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/markdown-standard-pro-team-lead.md": "7dc9fd5e5fa2016adc46fe7cd58355f7ac2c157c281401aa8670cc69c7b0f8ee",
+    "agents/markdown-standard-pro.md": "20c641a0d71fe967817b1237920ef6eecb71103cee982834987f3edf0e364768",
+    "agents/scene-narrative-pro.md": "36260024b4cd2d064d2a4cbef81aeacf34224f69b7a731fb669469a802c977c5",
+    "agents/ui-visual-forge-expert.md": "d01ad2269442253d847962e61360d582c40540fbea034508a72047d3861eaa92",
+    "plugin.json": "3e50afb9a5aa0b4fbc388a2844ec710076263e034ae70ee0b42b047e509bbe6d",
+    "settings.json": "d52cb20868fc7a737c770212fb3e6559beac7dea02137b782fbd1548609ac4b6"
+  }
+}

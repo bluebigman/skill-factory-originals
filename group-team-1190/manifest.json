@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1190",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1190",
+    "kind": "team",
+    "name": "客户健康评分模型专家",
+    "description": "客户健康评分模型专家：围绕客户健康，覆盖多维输入／分档动作／人工复核，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cs-health-score-team-lead",
+        "role": "lead",
+        "name": "客户健康主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cs-health-score",
+        "role": "member",
+        "name": "客户健康 评分模型 顾问",
+        "evidence": "original_assets/cs-health-score/merkle_root",
+        "member_merkle_root": "4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2"
+      },
+      {
+        "slug": "global-payment-ops",
+        "role": "member",
+        "name": "跨境收款 流程核对 顾问",
+        "evidence": "original_assets/global-payment-ops/merkle_root",
+        "member_merkle_root": "91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0"
+      },
+      {
+        "slug": "load-test-plan",
+        "role": "member",
+        "name": "压测方案设计 顾问",
+        "evidence": "original_assets/load-test-plan/merkle_root",
+        "member_merkle_root": "27d78b760a7d0e3c847fabf5a52805b1f17d90a2d0c7268448a991f8e6d27201"
+      }
+    ],
+    "team_lead": "cs-health-score-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3ad02539297d32a5",
+  "prompt_hash": "d59da0e3b19b68b0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1190\", \"kind\": \"team\", \"name\": \"客户健康评分模型专家\", \"description\": \"客户健康评分模型专家：围绕客户健康，覆盖多维输入／分档动作／人工复核，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cs-health-score-team-lead\", \"role\": \"lead\", \"name\": \"客户健康主理人\", \"evidence\": null}, {\"slug\": \"cs-health-score\", \"role\": \"member\", \"name\": \"客户健康 评分模型 顾问\", \"evidence\": \"original_assets/cs-health-score/merkle_root\", \"member_merkle_root\": \"4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2\"}, {\"slug\": \"global-payment-ops\", \"role\": \"member\", \"name\": \"跨境收款 流程核对 顾问\", \"evidence\": \"original_assets/global-payment-ops/merkle_root\", \"member_merkle_root\": \"91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0\"}, {\"slug\": \"load-test-plan\", \"role\": \"member\", \"name\": \"压测方案设计 顾问\", \"evidence\": \"original_assets/load-test-plan/merkle_root\", \"member_merkle_root\": \"27d78b760a7d0e3c847fabf5a52805b1f17d90a2d0c7268448a991f8e6d27201\"}], \"team_lead\": \"cs-health-score-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cs-health-score-team-lead.md": "5cfc93fbc7a24ef641359d9110c8c96b476c5c7df8f91042b5b6f11a08518382",
+    "agents/cs-health-score.md": "59dda02f1204dc6c3b1a86cdaf5e527893d4f0b09c80a4a3a73ff281dc804cc9",
+    "agents/global-payment-ops.md": "002ae91e94069211c1f0234ed703d74eb340989142e7b0aa9ff68ba797e96288",
+    "agents/load-test-plan.md": "31ad891e162218ac386807716a9160f97544a544126d63eb62b59f592bfb7cad",
+    "plugin.json": "62524480d548a75d13f018dfd2793933af2ecd9471d2afc493ebabb312f74f09",
+    "settings.json": "9de2f5cdd27a0119626413baf28276bfdef0a3eb5a758dccb1ef63a93311fa90"
+  }
+}

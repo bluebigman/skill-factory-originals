@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1049",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1049",
+    "kind": "team",
+    "name": "知识库条目助手专家",
+    "description": "知识库条目助手专家：围绕知识库条目，覆盖一篇一题／相互引用／定期复核，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "kb-article-build-team-lead",
+        "role": "lead",
+        "name": "知识库条目主理人",
+        "evidence": null
+      },
+      {
+        "slug": "kb-article-build",
+        "role": "member",
+        "name": "知识库条目 助手",
+        "evidence": "original_assets/kb-article-build/merkle_root",
+        "member_merkle_root": "fc71ca09c0d065dfc3cbef6734a5859c3e5286385e7193354c9ffcd15d87da4a"
+      },
+      {
+        "slug": "content-metrics-define",
+        "role": "member",
+        "name": "内容指标定义 顾问",
+        "evidence": "original_assets/content-metrics-define/merkle_root",
+        "member_merkle_root": "e9d87c54e7d51e4e08c080ddf879f8bfc47aeae7b86286d8aad10ecd2a300229"
+      },
+      {
+        "slug": "game-story-branch",
+        "role": "member",
+        "name": "剧情分支 结构设计 顾问",
+        "evidence": "original_assets/game-story-branch/merkle_root",
+        "member_merkle_root": "b141d480969e3891a1a23bdc038231e4ebd7dd455b459194e7a60501f18294f1"
+      }
+    ],
+    "team_lead": "kb-article-build-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cfadcb97999ccff7",
+  "prompt_hash": "86dd68ae605bbae5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1049\", \"kind\": \"team\", \"name\": \"知识库条目助手专家\", \"description\": \"知识库条目助手专家：围绕知识库条目，覆盖一篇一题／相互引用／定期复核，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"kb-article-build-team-lead\", \"role\": \"lead\", \"name\": \"知识库条目主理人\", \"evidence\": null}, {\"slug\": \"kb-article-build\", \"role\": \"member\", \"name\": \"知识库条目 助手\", \"evidence\": \"original_assets/kb-article-build/merkle_root\", \"member_merkle_root\": \"fc71ca09c0d065dfc3cbef6734a5859c3e5286385e7193354c9ffcd15d87da4a\"}, {\"slug\": \"content-metrics-define\", \"role\": \"member\", \"name\": \"内容指标定义 顾问\", \"evidence\": \"original_assets/content-metrics-define/merkle_root\", \"member_merkle_root\": \"e9d87c54e7d51e4e08c080ddf879f8bfc47aeae7b86286d8aad10ecd2a300229\"}, {\"slug\": \"game-story-branch\", \"role\": \"member\", \"name\": \"剧情分支 结构设计 顾问\", \"evidence\": \"original_assets/game-story-branch/merkle_root\", \"member_merkle_root\": \"b141d480969e3891a1a23bdc038231e4ebd7dd455b459194e7a60501f18294f1\"}], \"team_lead\": \"kb-article-build-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-metrics-define.md": "8d3b849c9537fad385bab3875046eeb51e03588a841aa83b3df7217d0ce2bcf9",
+    "agents/game-story-branch.md": "b54aadcf4346a26aedb058ca478b92f05a79c9625a5800402d42c6b8d3fc506e",
+    "agents/kb-article-build-team-lead.md": "251bb679e00acd4cb93798b7b96dab0a4428eb239106ad93d7083609ba563caf",
+    "agents/kb-article-build.md": "4ec005d2a8754c5cbd9238b74d47aaac72c27e00016d86de42715dd5fcf7e6dc",
+    "plugin.json": "5c448bcc013866045081c0fd7f3340b869c6e1683639d5d4dab8a9e8d622638f",
+    "settings.json": "87c49ae35f16748c1a183dbcf8952f6154a3dd7f242b88a6b63c32d53ac38d01"
+  }
+}

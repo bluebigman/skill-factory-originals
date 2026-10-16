@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-316",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-316",
+    "kind": "team",
+    "name": "容量规划专家",
+    "description": "输入容量规划相关需求，输出基线测量、增长预测、瓶颈前置三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "capacity-planning-pro-team-lead",
+        "role": "lead",
+        "name": "容量规划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "capacity-planning-pro",
+        "role": "member",
+        "name": "容量规划 负载预测 顾问",
+        "evidence": "original_assets/capacity-planning-pro/merkle_root",
+        "member_merkle_root": "46fc50430c2460d2df8968f2f284f9733b14f28e3fcbe0a6245b1955fd453743"
+      },
+      {
+        "slug": "agent-capability-declare",
+        "role": "member",
+        "name": "能力声明 边界公示 顾问",
+        "evidence": "original_assets/agent-capability-declare/merkle_root",
+        "member_merkle_root": "3223ac0d01a23b1d8ab566f56eac249419645c6335beba00b0d80bc817440303"
+      },
+      {
+        "slug": "agent-state-manage",
+        "role": "member",
+        "name": "状态管理 断点续跑 顾问",
+        "evidence": "original_assets/agent-state-manage/merkle_root",
+        "member_merkle_root": "224c77a0917a84bab703c8615ea3c37923f9d4fbd66aa83af407b4e54ab106d3"
+      }
+    ],
+    "team_lead": "capacity-planning-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4e5ac1bb4936f3cf",
+  "prompt_hash": "e6e70500bb743b3a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-316\", \"kind\": \"team\", \"name\": \"容量规划专家\", \"description\": \"输入容量规划相关需求，输出基线测量、增长预测、瓶颈前置三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"capacity-planning-pro-team-lead\", \"role\": \"lead\", \"name\": \"容量规划主理人\", \"evidence\": null}, {\"slug\": \"capacity-planning-pro\", \"role\": \"member\", \"name\": \"容量规划 负载预测 顾问\", \"evidence\": \"original_assets/capacity-planning-pro/merkle_root\", \"member_merkle_root\": \"46fc50430c2460d2df8968f2f284f9733b14f28e3fcbe0a6245b1955fd453743\"}, {\"slug\": \"agent-capability-declare\", \"role\": \"member\", \"name\": \"能力声明 边界公示 顾问\", \"evidence\": \"original_assets/agent-capability-declare/merkle_root\", \"member_merkle_root\": \"3223ac0d01a23b1d8ab566f56eac249419645c6335beba00b0d80bc817440303\"}, {\"slug\": \"agent-state-manage\", \"role\": \"member\", \"name\": \"状态管理 断点续跑 顾问\", \"evidence\": \"original_assets/agent-state-manage/merkle_root\", \"member_merkle_root\": \"224c77a0917a84bab703c8615ea3c37923f9d4fbd66aa83af407b4e54ab106d3\"}], \"team_lead\": \"capacity-planning-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-capability-declare.md": "76a10b34d61214de2fe4edba63031aa08e9ac75865afa43f76714166838a1b40",
+    "agents/agent-state-manage.md": "cbebe323552aedbad0acd402f8f622856af24bfb25e7704a6ef5a91405e9b86b",
+    "agents/capacity-planning-pro-team-lead.md": "d82a64424ff7e9056f3ba737d5cd8392c683fd9e02e93100fe934e824ca9297a",
+    "agents/capacity-planning-pro.md": "bd183aa670f799876fc149b640dcbd91afb953e1675e499f111b0e4427138da3",
+    "plugin.json": "9d386d3438f3c6fd795fa97c2c078e1608769fc7b3adbdb9b018a785f2003d59",
+    "settings.json": "f4beb0c0a12dc4ef785e1a4dafee5cfafb1b40ff8030fd13ae71216fc0f4115a"
+  }
+}

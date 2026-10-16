@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-output-verify-chain-team-lead",
+  "agents": [
+    "./agents/agent-output-verify-chain-team-lead.md",
+    "./agents/agent-output-verify-chain.md",
+    "./agents/agent-input-sanitize.md",
+    "./agents/tech-debt-track.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 验证链",
+    "zh": "帮我处理验证链"
+  },
+  "description": "agent-output-verify-chain team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 验证链, covers 多级校验 / 独立判据 / 拦截优先, delivering structured results and actionable checklists.",
+    "zh": "多级校验专家：围绕验证链，覆盖多级校验／独立判据／拦截优先，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "agent-output-verify-chain Team",
+    "zh": "多级校验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-output-verify-chain-team-lead",
+      "name": {
+        "en": "验证链主理人",
+        "zh": "验证链主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-chain.png",
+      "id": "agent-output-verify-chain",
+      "name": {
+        "en": "agent-output-verify-chain",
+        "zh": "验证链 多级校验 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-chain",
+        "zh": "验证链 多级校验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-input-sanitize.png",
+      "id": "agent-input-sanitize",
+      "name": {
+        "en": "agent-input-sanitize",
+        "zh": "输入净化 注入防护 顾问"
+      },
+      "profession": {
+        "en": "agent-input-sanitize",
+        "zh": "输入净化 注入防护 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tech-debt-track.png",
+      "id": "tech-debt-track",
+      "name": {
+        "en": "tech-debt-track",
+        "zh": "技术债 识别登记 顾问"
+      },
+      "profession": {
+        "en": "tech-debt-track",
+        "zh": "技术债 识别登记 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1154",
+  "plugin": "group-team-1154",
+  "profession": {
+    "en": "agent-output-verify-chain Collaboration Team",
+    "zh": "多级校验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 验证链",
+      "zh": "帮我处理验证链"
+    },
+    {
+      "en": "Plan 输入净化",
+      "zh": "帮我规划输入净化"
+    },
+    {
+      "en": "Review 技术债",
+      "zh": "帮我检查技术债"
+    }
+  ],
+  "tags": [
+    {
+      "en": "独立判据",
+      "zh": "独立判据"
+    },
+    {
+      "en": "拦截优先",
+      "zh": "拦截优先"
+    },
+    {
+      "en": "误报处理",
+      "zh": "误报处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-output-verify-chain-team-lead",
+    "memberAgents": [
+      "agent-output-verify-chain",
+      "agent-input-sanitize",
+      "tech-debt-track"
+    ]
+  },
+  "version": "1.0.0"
+}

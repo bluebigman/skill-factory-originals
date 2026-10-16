@@ -1,0 +1,126 @@
+{
+  "agentName": "social-copy-pro-team-lead",
+  "agents": [
+    "./agents/social-copy-pro-team-lead.md",
+    "./agents/social-copy-pro.md",
+    "./agents/story-outline-pro.md",
+    "./agents/live-script-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 社媒文案",
+    "zh": "帮我处理社媒文案"
+  },
+  "description": "Social Copy Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "社媒 故事 直播 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Social Copy Pro Team",
+    "zh": "社媒 故事 直播 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "social-copy-pro-team-lead",
+      "name": {
+        "en": "社媒文案主理人",
+        "zh": "社媒文案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/social-copy-pro.png",
+      "id": "social-copy-pro",
+      "name": {
+        "en": "Social Copy Pro",
+        "zh": "社媒文案 平台适配 话题标签"
+      },
+      "profession": {
+        "en": "Social Copy Pro",
+        "zh": "社媒文案 平台适配 话题标签"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/story-outline-pro.png",
+      "id": "story-outline-pro",
+      "name": {
+        "en": "Story Outline Pro",
+        "zh": "故事大纲 情节设计 人物弧光"
+      },
+      "profession": {
+        "en": "Story Outline Pro",
+        "zh": "故事大纲 情节设计 人物弧光"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/live-script-pro.png",
+      "id": "live-script-pro",
+      "name": {
+        "en": "Live Script Pro",
+        "zh": "直播脚本 话术节奏 互动设计"
+      },
+      "profession": {
+        "en": "Live Script Pro",
+        "zh": "直播脚本 话术节奏 互动设计"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-213",
+  "plugin": "group-team-213",
+  "profession": {
+    "en": "Social Copy Pro Collaboration Team",
+    "zh": "社媒 故事 直播 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 社媒文案",
+      "zh": "帮我处理社媒文案"
+    },
+    {
+      "en": "Plan 故事大纲",
+      "zh": "帮我规划故事大纲"
+    },
+    {
+      "en": "Review 直播脚本",
+      "zh": "帮我检查直播脚本"
+    }
+  ],
+  "tags": [
+    {
+      "en": "社媒文案",
+      "zh": "社媒文案"
+    },
+    {
+      "en": "故事大纲",
+      "zh": "故事大纲"
+    },
+    {
+      "en": "直播脚本",
+      "zh": "直播脚本"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "social-copy-pro-team-lead",
+    "memberAgents": [
+      "social-copy-pro",
+      "story-outline-pro",
+      "live-script-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

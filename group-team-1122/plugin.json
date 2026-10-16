@@ -1,0 +1,126 @@
+{
+  "agentName": "cred-crypto-audit-pro-team-lead",
+  "agents": [
+    "./agents/cred-crypto-audit-pro-team-lead.md",
+    "./agents/cred-crypto-audit-pro.md",
+    "./agents/agent-data-qa.md",
+    "./agents/data-destruction.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 凭据与加密强度审计专家",
+    "zh": "帮我处理凭据与加密强度审计专家"
+  },
+  "description": "Credential and Crypto Strength Auditor team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据问答 requirements, output three deliverables: 检索优先, 来源标注, 口径一致. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据问答相关需求，输出检索优先、来源标注、口径一致三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Credential and Crypto Strength Auditor Team",
+    "zh": "数据问答检索增强专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "cred-crypto-audit-pro-team-lead",
+      "name": {
+        "en": "凭据与加密强度审计专家主理人",
+        "zh": "凭据与加密强度审计专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/cred-crypto-audit-pro.png",
+      "id": "cred-crypto-audit-pro",
+      "name": {
+        "en": "Credential and Crypto Strength Auditor",
+        "zh": "凭据与加密强度审计专家"
+      },
+      "profession": {
+        "en": "Credential and Crypto Strength Auditor",
+        "zh": "凭据与加密强度审计专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-data-qa.png",
+      "id": "agent-data-qa",
+      "name": {
+        "en": "agent-data-qa",
+        "zh": "数据问答 检索增强 顾问"
+      },
+      "profession": {
+        "en": "agent-data-qa",
+        "zh": "数据问答 检索增强 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-destruction.png",
+      "id": "data-destruction",
+      "name": {
+        "en": "data-destruction",
+        "zh": "数据销毁规范 顾问"
+      },
+      "profession": {
+        "en": "data-destruction",
+        "zh": "数据销毁规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1122",
+  "plugin": "group-team-1122",
+  "profession": {
+    "en": "Credential and Crypto Strength Auditor Collaboration Team",
+    "zh": "数据问答检索增强专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 凭据与加密强度审计专家",
+      "zh": "帮我处理凭据与加密强度审计专家"
+    },
+    {
+      "en": "Plan 数据问答",
+      "zh": "帮我规划数据问答"
+    },
+    {
+      "en": "Review 数据销毁规范",
+      "zh": "帮我检查数据销毁规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "凭据泄露",
+      "zh": "凭据泄露"
+    },
+    {
+      "en": "密钥暴露",
+      "zh": "密钥暴露"
+    },
+    {
+      "en": "明文扫描",
+      "zh": "明文扫描"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "cred-crypto-audit-pro-team-lead",
+    "memberAgents": [
+      "cred-crypto-audit-pro",
+      "agent-data-qa",
+      "data-destruction"
+    ]
+  },
+  "version": "1.0.0"
+}

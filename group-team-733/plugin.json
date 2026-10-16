@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-output-format-team-lead",
+  "agents": [
+    "./agents/agent-output-format-team-lead.md",
+    "./agents/agent-output-format.md",
+    "./agents/sql-toolkit-pro-01-fixed.md",
+    "./agents/agent-retry-policy.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 输出规范",
+    "zh": "帮我处理输出规范"
+  },
+  "description": "agent-output-format team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 输出规范 requirements, output three deliverables: 结构固定, 类型明确, 错误可判. Verifiable end-to-end, evidence per step.",
+    "zh": "输入输出规范相关需求，输出结构固定、类型明确、错误可判三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-output-format Team",
+    "zh": "输出规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-output-format-team-lead",
+      "name": {
+        "en": "输出规范主理人",
+        "zh": "输出规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-output-format.png",
+      "id": "agent-output-format",
+      "name": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "profession": {
+        "en": "agent-output-format",
+        "zh": "输出规范 结构化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-01-fixed.png",
+      "id": "sql-toolkit-pro-01-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "SQL转TS 自然语言转命令"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "SQL转TS 自然语言转命令"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-retry-policy.png",
+      "id": "agent-retry-policy",
+      "name": {
+        "en": "agent-retry-policy",
+        "zh": "重试策略 分类处理 顾问"
+      },
+      "profession": {
+        "en": "agent-retry-policy",
+        "zh": "重试策略 分类处理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-733",
+  "plugin": "group-team-733",
+  "profession": {
+    "en": "agent-output-format Collaboration Team",
+    "zh": "输出规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 输出规范",
+      "zh": "帮我处理输出规范"
+    },
+    {
+      "en": "Plan SQL转TS",
+      "zh": "帮我规划SQL转TS"
+    },
+    {
+      "en": "Review 重试策略",
+      "zh": "帮我检查重试策略"
+    }
+  ],
+  "tags": [
+    {
+      "en": "类型明确",
+      "zh": "类型明确"
+    },
+    {
+      "en": "错误可判",
+      "zh": "错误可判"
+    },
+    {
+      "en": "兼容演进",
+      "zh": "兼容演进"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-output-format-team-lead",
+    "memberAgents": [
+      "agent-output-format",
+      "sql-toolkit-pro-01-fixed",
+      "agent-retry-policy"
+    ]
+  },
+  "version": "1.0.0"
+}

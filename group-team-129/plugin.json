@@ -1,0 +1,126 @@
+{
+  "agentName": "mes-line-balance-pro-team-lead",
+  "agents": [
+    "./agents/mes-line-balance-pro-team-lead.md",
+    "./agents/mes-line-balance-pro.md",
+    "./agents/retail-diagnose.md",
+    "./agents/production-scheduling-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 产线节拍",
+    "zh": "帮我处理产线节拍"
+  },
+  "description": "Mes Line Balance Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "产线 零售 生产 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Mes Line Balance Pro Team",
+    "zh": "产线 零售 生产 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "mes-line-balance-pro-team-lead",
+      "name": {
+        "en": "产线节拍主理人",
+        "zh": "产线节拍主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/mes-line-balance-pro.png",
+      "id": "mes-line-balance-pro",
+      "name": {
+        "en": "Mes Line Balance Pro",
+        "zh": "产线节拍 平衡优化 顾问"
+      },
+      "profession": {
+        "en": "Mes Line Balance Pro",
+        "zh": "产线节拍 平衡优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/retail-diagnose.png",
+      "id": "retail-diagnose",
+      "name": {
+        "en": "Retail Diagnose",
+        "zh": "零售经营 客流诊断 顾问"
+      },
+      "profession": {
+        "en": "Retail Diagnose",
+        "zh": "零售经营 客流诊断 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/production-scheduling-pro.png",
+      "id": "production-scheduling-pro",
+      "name": {
+        "en": "Production Scheduling Pro",
+        "zh": "生产排程 交期保障 顾问"
+      },
+      "profession": {
+        "en": "Production Scheduling Pro",
+        "zh": "生产排程 交期保障 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-129",
+  "plugin": "group-team-129",
+  "profession": {
+    "en": "Mes Line Balance Pro Collaboration Team",
+    "zh": "产线 零售 生产 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 产线节拍",
+      "zh": "帮我处理产线节拍"
+    },
+    {
+      "en": "Plan 零售经营",
+      "zh": "帮我规划零售经营"
+    },
+    {
+      "en": "Review 生产排程",
+      "zh": "帮我检查生产排程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "产线节拍",
+      "zh": "产线节拍"
+    },
+    {
+      "en": "零售经营",
+      "zh": "零售经营"
+    },
+    {
+      "en": "生产排程",
+      "zh": "生产排程"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "mes-line-balance-pro-team-lead",
+    "memberAgents": [
+      "mes-line-balance-pro",
+      "retail-diagnose",
+      "production-scheduling-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

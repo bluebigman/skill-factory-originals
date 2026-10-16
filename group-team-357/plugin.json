@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-review-pro-team-lead",
+  "agents": [
+    "./agents/sql-review-pro-team-lead.md",
+    "./agents/sql-review-pro.md",
+    "./agents/chart-select-pro.md",
+    "./agents/data-lineage-trace.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle SQL",
+    "zh": "帮我处理SQL"
+  },
+  "description": "sql-review-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around SQL, covers 全表扫描 / 隐式转换 / 笛卡尔积, delivering structured results and actionable checklists.",
+    "zh": "图表选型专家：围绕SQL，覆盖全表扫描／隐式转换／笛卡尔积，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "sql-review-pro Team",
+    "zh": "图表选型专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-review-pro-team-lead",
+      "name": {
+        "en": "SQL主理人",
+        "zh": "SQL主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-review-pro.png",
+      "id": "sql-review-pro",
+      "name": {
+        "en": "sql-review-pro",
+        "zh": "SQL 审查 顾问"
+      },
+      "profession": {
+        "en": "sql-review-pro",
+        "zh": "SQL 审查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/chart-select-pro.png",
+      "id": "chart-select-pro",
+      "name": {
+        "en": "chart-select-pro",
+        "zh": "图表选型 配色规范 顾问"
+      },
+      "profession": {
+        "en": "chart-select-pro",
+        "zh": "图表选型 配色规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-lineage-trace.png",
+      "id": "data-lineage-trace",
+      "name": {
+        "en": "data-lineage-trace",
+        "zh": "数据血缘 链路追踪 顾问"
+      },
+      "profession": {
+        "en": "data-lineage-trace",
+        "zh": "数据血缘 链路追踪 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-357",
+  "plugin": "group-team-357",
+  "profession": {
+    "en": "sql-review-pro Collaboration Team",
+    "zh": "图表选型专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle SQL",
+      "zh": "帮我处理SQL"
+    },
+    {
+      "en": "Plan 图表选型",
+      "zh": "帮我规划图表选型"
+    },
+    {
+      "en": "Review 数据血缘",
+      "zh": "帮我检查数据血缘"
+    }
+  ],
+  "tags": [
+    {
+      "en": "全表扫描",
+      "zh": "全表扫描"
+    },
+    {
+      "en": "隐式转换",
+      "zh": "隐式转换"
+    },
+    {
+      "en": "笛卡尔积",
+      "zh": "笛卡尔积"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-review-pro-team-lead",
+    "memberAgents": [
+      "sql-review-pro",
+      "chart-select-pro",
+      "data-lineage-trace"
+    ]
+  },
+  "version": "1.0.0"
+}

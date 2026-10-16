@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-908",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-908",
+    "kind": "team",
+    "name": "安全事件响应专家",
+    "description": "输入安全事件响应相关需求，输出需求翻译、视觉规范、设计评审三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ui-design-expert-team-lead",
+        "role": "lead",
+        "name": "界面设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ui-design-expert",
+        "role": "member",
+        "name": "界面设计 组件美化",
+        "evidence": "original_assets/ui-design-expert/merkle_root",
+        "member_merkle_root": "8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16"
+      },
+      {
+        "slug": "incident-response-plan",
+        "role": "member",
+        "name": "安全事件响应 顾问",
+        "evidence": "original_assets/incident-response-plan/merkle_root",
+        "member_merkle_root": "ee5e475caa2246014e8c6d6512327afccaa5982860c3d7c20c49bd9550a0c1a6"
+      },
+      {
+        "slug": "agent-output-verify-pro",
+        "role": "member",
+        "name": "输出验证 幻觉检测 顾问",
+        "evidence": "original_assets/agent-output-verify-pro/merkle_root",
+        "member_merkle_root": "01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1"
+      }
+    ],
+    "team_lead": "ui-design-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8307b907d520dfea",
+  "prompt_hash": "e60149349e468826",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-908\", \"kind\": \"team\", \"name\": \"安全事件响应专家\", \"description\": \"输入安全事件响应相关需求，输出需求翻译、视觉规范、设计评审三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ui-design-expert-team-lead\", \"role\": \"lead\", \"name\": \"界面设计主理人\", \"evidence\": null}, {\"slug\": \"ui-design-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化\", \"evidence\": \"original_assets/ui-design-expert/merkle_root\", \"member_merkle_root\": \"8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16\"}, {\"slug\": \"incident-response-plan\", \"role\": \"member\", \"name\": \"安全事件响应 顾问\", \"evidence\": \"original_assets/incident-response-plan/merkle_root\", \"member_merkle_root\": \"ee5e475caa2246014e8c6d6512327afccaa5982860c3d7c20c49bd9550a0c1a6\"}, {\"slug\": \"agent-output-verify-pro\", \"role\": \"member\", \"name\": \"输出验证 幻觉检测 顾问\", \"evidence\": \"original_assets/agent-output-verify-pro/merkle_root\", \"member_merkle_root\": \"01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1\"}], \"team_lead\": \"ui-design-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-verify-pro.md": "ee6fa554a41f473d50bdceabb4576e79b2730b0edb3936c9d54706f87fb71ea2",
+    "agents/incident-response-plan.md": "6eb39ca258a2c2e1a957496f16823f6ae6b8b0228c294f7c16f144db40b0de20",
+    "agents/ui-design-expert-team-lead.md": "8610a732de5bdd00b5adb01107a3e47246d67b674270b11af2aac2b3a5e39a8b",
+    "agents/ui-design-expert.md": "d2b15d3378591ad3d23bcdc968573ce738c8130721990bd2cbb2c51150dafad7",
+    "plugin.json": "8569ac3896542ced4721be9a4b218827926edb221974369a1acd1804ff253b24",
+    "settings.json": "8ba1a9f5a02eab029b4da7b96343e126bd17e026ce216f0c48b78ebacd40f2c0"
+  }
+}

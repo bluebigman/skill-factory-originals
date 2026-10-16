@@ -1,0 +1,126 @@
+{
+  "agentName": "chart-data-verify-team-lead",
+  "agents": [
+    "./agents/chart-data-verify-team-lead.md",
+    "./agents/chart-data-verify.md",
+    "./agents/data-viz-pro-03.md",
+    "./agents/agent-identity-manage.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 图表核验",
+    "zh": "帮我处理图表核验"
+  },
+  "description": "chart-data-verify team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 图表核验 requirements, output three deliverables: 标注清晰, 误导识别, 身份唯一. Verifiable end-to-end, evidence per step.",
+    "zh": "输入图表核验相关需求，输出标注清晰、误导识别、身份唯一三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "chart-data-verify Team",
+    "zh": "图表核验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "chart-data-verify-team-lead",
+      "name": {
+        "en": "图表核验主理人",
+        "zh": "图表核验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/chart-data-verify.png",
+      "id": "chart-data-verify",
+      "name": {
+        "en": "chart-data-verify",
+        "zh": "图表核验 数据一致 顾问"
+      },
+      "profession": {
+        "en": "chart-data-verify",
+        "zh": "图表核验 数据一致 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-03.png",
+      "id": "data-viz-pro-03",
+      "name": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "销售报表 SVG图表开发"
+      },
+      "profession": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "销售报表 SVG图表开发"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-identity-manage.png",
+      "id": "agent-identity-manage",
+      "name": {
+        "en": "agent-identity-manage",
+        "zh": "身份管理 凭据轮换 顾问"
+      },
+      "profession": {
+        "en": "agent-identity-manage",
+        "zh": "身份管理 凭据轮换 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-980",
+  "plugin": "group-team-980",
+  "profession": {
+    "en": "chart-data-verify Collaboration Team",
+    "zh": "图表核验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 图表核验",
+      "zh": "帮我处理图表核验"
+    },
+    {
+      "en": "Plan 销售报表",
+      "zh": "帮我规划销售报表"
+    },
+    {
+      "en": "Review 身份管理",
+      "zh": "帮我检查身份管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据一致",
+      "zh": "数据一致"
+    },
+    {
+      "en": "坐标规范",
+      "zh": "坐标规范"
+    },
+    {
+      "en": "比例准确",
+      "zh": "比例准确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "chart-data-verify-team-lead",
+    "memberAgents": [
+      "chart-data-verify",
+      "data-viz-pro-03",
+      "agent-identity-manage"
+    ]
+  },
+  "version": "1.0.0"
+}

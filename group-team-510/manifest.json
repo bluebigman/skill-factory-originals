@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-510",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-510",
+    "kind": "team",
+    "name": "反馈闭环专家",
+    "description": "反馈闭环专家：围绕反馈闭环，覆盖反馈采集／归因分析／改进可验，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-feedback-loop-team-lead",
+        "role": "lead",
+        "name": "反馈闭环主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-feedback-loop",
+        "role": "member",
+        "name": "反馈闭环 效果回收 顾问",
+        "evidence": "original_assets/agent-feedback-loop/merkle_root",
+        "member_merkle_root": "18c69314bc59d0b28da9cf8d3fe5ca26995559ed382c4b44127b35eb4e46b90e"
+      },
+      {
+        "slug": "ocr-doc-parse-expert",
+        "role": "member",
+        "name": "OCR 图文识别 版面还原",
+        "evidence": "original_assets/ocr-doc-parse-expert/merkle_root",
+        "member_merkle_root": "f59361f0b4972060b4e37f471b1e345df1580bd3ae5eadab9a37f45e94f7b821"
+      },
+      {
+        "slug": "agent-toolkit-pro-01-fixed",
+        "role": "member",
+        "name": "显微成像 批量转换 流程编排",
+        "evidence": "original_assets/agent-toolkit-pro-01-fixed/merkle_root",
+        "member_merkle_root": "d936e55c9f5e25900f8b4515e09e9175f691c284ea173275be6079545bca376b"
+      }
+    ],
+    "team_lead": "agent-feedback-loop-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "540464086df078bd",
+  "prompt_hash": "ea96c75480397317",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-510\", \"kind\": \"team\", \"name\": \"反馈闭环专家\", \"description\": \"反馈闭环专家：围绕反馈闭环，覆盖反馈采集／归因分析／改进可验，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-feedback-loop-team-lead\", \"role\": \"lead\", \"name\": \"反馈闭环主理人\", \"evidence\": null}, {\"slug\": \"agent-feedback-loop\", \"role\": \"member\", \"name\": \"反馈闭环 效果回收 顾问\", \"evidence\": \"original_assets/agent-feedback-loop/merkle_root\", \"member_merkle_root\": \"18c69314bc59d0b28da9cf8d3fe5ca26995559ed382c4b44127b35eb4e46b90e\"}, {\"slug\": \"ocr-doc-parse-expert\", \"role\": \"member\", \"name\": \"OCR 图文识别 版面还原\", \"evidence\": \"original_assets/ocr-doc-parse-expert/merkle_root\", \"member_merkle_root\": \"f59361f0b4972060b4e37f471b1e345df1580bd3ae5eadab9a37f45e94f7b821\"}, {\"slug\": \"agent-toolkit-pro-01-fixed\", \"role\": \"member\", \"name\": \"显微成像 批量转换 流程编排\", \"evidence\": \"original_assets/agent-toolkit-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"d936e55c9f5e25900f8b4515e09e9175f691c284ea173275be6079545bca376b\"}], \"team_lead\": \"agent-feedback-loop-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-feedback-loop-team-lead.md": "1c03188d7f03372098366cf7e4d8e449b3aaf843b082096784540a3584b2106a",
+    "agents/agent-feedback-loop.md": "828fd2686ffa2f752122906630bda8a34ec0b6a3d68ee9285226413ea8f31c4c",
+    "agents/agent-toolkit-pro-01-fixed.md": "1ba9a008c030c9d1563b042ecf1e3f1ea1a450ac4823885e7567992f33d25b25",
+    "agents/ocr-doc-parse-expert.md": "defeb7781f5559ab28bd0ac1f93e6ed99f860c7968eb833bfa6187f9177412b7",
+    "plugin.json": "4f97a63692b1bf0c512354d34acff108520fdc2efffb2e495caf9fbab976cb49",
+    "settings.json": "fc8c76a0bd19d57b5d82310bb91ac25508a58e5bbb13ca66f50554785eaa6305"
+  }
+}

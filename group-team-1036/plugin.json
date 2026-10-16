@@ -1,0 +1,126 @@
+{
+  "agentName": "consulting-framework-team-lead",
+  "agents": [
+    "./agents/consulting-framework-team-lead.md",
+    "./agents/consulting-framework.md",
+    "./agents/import-inspection-pro.md",
+    "./agents/franchise-standard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 咨询框架",
+    "zh": "帮我处理咨询框架"
+  },
+  "description": "consulting-framework team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 咨询框架 end-to-end: 假设驱动, 数据支撑 and 边界声明. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长假设驱动、数据支撑与边界声明，覆盖咨询框架全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "consulting-framework Team",
+    "zh": "咨询框架顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "consulting-framework-team-lead",
+      "name": {
+        "en": "咨询框架主理人",
+        "zh": "咨询框架主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/consulting-framework.png",
+      "id": "consulting-framework",
+      "name": {
+        "en": "consulting-framework",
+        "zh": "咨询框架 顾问"
+      },
+      "profession": {
+        "en": "consulting-framework",
+        "zh": "咨询框架 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/import-inspection-pro.png",
+      "id": "import-inspection-pro",
+      "name": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "profession": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/franchise-standard.png",
+      "id": "franchise-standard",
+      "name": {
+        "en": "franchise-standard",
+        "zh": "连锁标准制定 顾问"
+      },
+      "profession": {
+        "en": "franchise-standard",
+        "zh": "连锁标准制定 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1036",
+  "plugin": "group-team-1036",
+  "profession": {
+    "en": "consulting-framework Collaboration Team",
+    "zh": "咨询框架顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 咨询框架",
+      "zh": "帮我处理咨询框架"
+    },
+    {
+      "en": "Plan 进口检验",
+      "zh": "帮我规划进口检验"
+    },
+    {
+      "en": "Review 连锁标准制定",
+      "zh": "帮我检查连锁标准制定"
+    }
+  ],
+  "tags": [
+    {
+      "en": "假设驱动",
+      "zh": "假设驱动"
+    },
+    {
+      "en": "数据支撑",
+      "zh": "数据支撑"
+    },
+    {
+      "en": "边界声明",
+      "zh": "边界声明"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "consulting-framework-team-lead",
+    "memberAgents": [
+      "consulting-framework",
+      "import-inspection-pro",
+      "franchise-standard"
+    ]
+  },
+  "version": "1.0.0"
+}

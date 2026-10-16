@@ -1,0 +1,126 @@
+{
+  "agentName": "cross-border-listing-pro-team-lead",
+  "agents": [
+    "./agents/cross-border-listing-pro-team-lead.md",
+    "./agents/cross-border-listing-pro.md",
+    "./agents/quotation-standard.md",
+    "./agents/renewal-playbook.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 跨境选品",
+    "zh": "帮我处理跨境选品"
+  },
+  "description": "cross-border-listing-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "跨境 报价 续约 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "cross-border-listing-pro Team",
+    "zh": "跨境 报价 续约 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "cross-border-listing-pro-team-lead",
+      "name": {
+        "en": "跨境选品主理人",
+        "zh": "跨境选品主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/cross-border-listing-pro.png",
+      "id": "cross-border-listing-pro",
+      "name": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "profession": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/quotation-standard.png",
+      "id": "quotation-standard",
+      "name": {
+        "en": "quotation-standard",
+        "zh": "报价方案 结构规范 顾问"
+      },
+      "profession": {
+        "en": "quotation-standard",
+        "zh": "报价方案 结构规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/renewal-playbook.png",
+      "id": "renewal-playbook",
+      "name": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "profession": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-252",
+  "plugin": "group-team-252",
+  "profession": {
+    "en": "cross-border-listing-pro Collaboration Team",
+    "zh": "跨境 报价 续约 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 跨境选品",
+      "zh": "帮我处理跨境选品"
+    },
+    {
+      "en": "Plan 报价方案",
+      "zh": "帮我规划报价方案"
+    },
+    {
+      "en": "Review 续约管理",
+      "zh": "帮我检查续约管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "跨境选品",
+      "zh": "跨境选品"
+    },
+    {
+      "en": "报价方案",
+      "zh": "报价方案"
+    },
+    {
+      "en": "续约管理",
+      "zh": "续约管理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "cross-border-listing-pro-team-lead",
+    "memberAgents": [
+      "cross-border-listing-pro",
+      "quotation-standard",
+      "renewal-playbook"
+    ]
+  },
+  "version": "1.0.0"
+}

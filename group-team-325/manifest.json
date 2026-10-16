@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-325",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-325",
+    "kind": "team",
+    "name": "实验分析专家",
+    "description": "擅长最小样本、多重比较与因果谨慎，覆盖实验分析全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ab-test-analysis-team-lead",
+        "role": "lead",
+        "name": "实验分析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ab-test-analysis",
+        "role": "member",
+        "name": "实验分析 显著性 顾问",
+        "evidence": "original_assets/ab-test-analysis/merkle_root",
+        "member_merkle_root": "da4d6888a267e5bf8d535a96a1e3dd4a6ab5a554490dd48be32588614fc75457"
+      },
+      {
+        "slug": "agent-conflict-resolve",
+        "role": "member",
+        "name": "冲突消解 优先级裁 顾问",
+        "evidence": "original_assets/agent-conflict-resolve/merkle_root",
+        "member_merkle_root": "97ac99ce9abe60f4d76848fad999a2617dbbeed7f69b487952a66c7262eb95b7"
+      },
+      {
+        "slug": "schema-doc-pro",
+        "role": "member",
+        "name": "表结构文 字段释义 顾问",
+        "evidence": "original_assets/schema-doc-pro/merkle_root",
+        "member_merkle_root": "f7531c41bbd2878ecdf687a2ae1898e4372460923bca11d81d6a4e2f6bdf5c6e"
+      }
+    ],
+    "team_lead": "ab-test-analysis-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ee7b17004b0d26bb",
+  "prompt_hash": "b1914b0d96673921",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-325\", \"kind\": \"team\", \"name\": \"实验分析专家\", \"description\": \"擅长最小样本、多重比较与因果谨慎，覆盖实验分析全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ab-test-analysis-team-lead\", \"role\": \"lead\", \"name\": \"实验分析主理人\", \"evidence\": null}, {\"slug\": \"ab-test-analysis\", \"role\": \"member\", \"name\": \"实验分析 显著性 顾问\", \"evidence\": \"original_assets/ab-test-analysis/merkle_root\", \"member_merkle_root\": \"da4d6888a267e5bf8d535a96a1e3dd4a6ab5a554490dd48be32588614fc75457\"}, {\"slug\": \"agent-conflict-resolve\", \"role\": \"member\", \"name\": \"冲突消解 优先级裁 顾问\", \"evidence\": \"original_assets/agent-conflict-resolve/merkle_root\", \"member_merkle_root\": \"97ac99ce9abe60f4d76848fad999a2617dbbeed7f69b487952a66c7262eb95b7\"}, {\"slug\": \"schema-doc-pro\", \"role\": \"member\", \"name\": \"表结构文 字段释义 顾问\", \"evidence\": \"original_assets/schema-doc-pro/merkle_root\", \"member_merkle_root\": \"f7531c41bbd2878ecdf687a2ae1898e4372460923bca11d81d6a4e2f6bdf5c6e\"}], \"team_lead\": \"ab-test-analysis-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ab-test-analysis-team-lead.md": "8a14c71925a8e3cd32c0e685551dd29f78826aeb4bff725d6f14312f17aaecd5",
+    "agents/ab-test-analysis.md": "49652fcfc4d60f48159e8c50d9dadb84c3df61d00f5bcdd3544e336ffc0bb928",
+    "agents/agent-conflict-resolve.md": "f043ba69e1b540e1651a38c776c948f146ef03ca7a79fbecd7d86b003deb7927",
+    "agents/schema-doc-pro.md": "f0f7858e6ab28bd01f04a8732c4c06a00f4e3004adeda8376f02f72ea97db080",
+    "plugin.json": "9c71633bac8ca03140b34ff59bb6db8877a8915f1277abc6dd3e8a64974d6c64",
+    "settings.json": "8826154f4c2f0bb7569f26adb5e6cf2a30b7546f090cecc811c5a1b4c89b4f6d"
+  }
+}

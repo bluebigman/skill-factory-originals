@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1109",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1109",
+    "kind": "team",
+    "name": "工业服务专家",
+    "description": "工业服务专家：围绕工业服务，覆盖服务分级／时限明确／备件前置，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "industrial-service-pro-team-lead",
+        "role": "lead",
+        "name": "工业服务主理人",
+        "evidence": null
+      },
+      {
+        "slug": "industrial-service-pro",
+        "role": "member",
+        "name": "工业服务 交付标准 顾问",
+        "evidence": "original_assets/industrial-service-pro/merkle_root",
+        "member_merkle_root": "c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d"
+      },
+      {
+        "slug": "franchise-standard",
+        "role": "member",
+        "name": "连锁标准制定 顾问",
+        "evidence": "original_assets/franchise-standard/merkle_root",
+        "member_merkle_root": "ab056da894b22137abcbb8af198bd823e69ba8be80e17b4fb060f909dc42e176"
+      },
+      {
+        "slug": "intl-meeting-coach",
+        "role": "member",
+        "name": "跨时区会议 组织 教练",
+        "evidence": "original_assets/intl-meeting-coach/merkle_root",
+        "member_merkle_root": "b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1"
+      }
+    ],
+    "team_lead": "industrial-service-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0241ab39f7ec23d8",
+  "prompt_hash": "957ebc4ae401905a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1109\", \"kind\": \"team\", \"name\": \"工业服务专家\", \"description\": \"工业服务专家：围绕工业服务，覆盖服务分级／时限明确／备件前置，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"industrial-service-pro-team-lead\", \"role\": \"lead\", \"name\": \"工业服务主理人\", \"evidence\": null}, {\"slug\": \"industrial-service-pro\", \"role\": \"member\", \"name\": \"工业服务 交付标准 顾问\", \"evidence\": \"original_assets/industrial-service-pro/merkle_root\", \"member_merkle_root\": \"c949289284626f84d5e207906c9d3d9e1db18fe4320988f285eb6620d020dc0d\"}, {\"slug\": \"franchise-standard\", \"role\": \"member\", \"name\": \"连锁标准制定 顾问\", \"evidence\": \"original_assets/franchise-standard/merkle_root\", \"member_merkle_root\": \"ab056da894b22137abcbb8af198bd823e69ba8be80e17b4fb060f909dc42e176\"}, {\"slug\": \"intl-meeting-coach\", \"role\": \"member\", \"name\": \"跨时区会议 组织 教练\", \"evidence\": \"original_assets/intl-meeting-coach/merkle_root\", \"member_merkle_root\": \"b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1\"}], \"team_lead\": \"industrial-service-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/franchise-standard.md": "ad8b43698210b08a5198031c68f35576d6417dac4dbd7e1e4c712a5b6af8600e",
+    "agents/industrial-service-pro-team-lead.md": "c54c2603da08b12c67f5327adc49ef6734bb114ab467ee7ae6b2e7c29e7233c7",
+    "agents/industrial-service-pro.md": "5eb29ec6b2303df00734db073465f6eab6a087a0a4d4e65ba1a87c4714f7f4cd",
+    "agents/intl-meeting-coach.md": "fee223e34b489e064520dab2b36fd4340d0313182dd1607ece8cc80e35d1fe8f",
+    "plugin.json": "828a7f6e9621efa5a728049ea2fee31858175dd414921369c8459181298ce6bb",
+    "settings.json": "c0d03898561a8913dfee03dfce01f19bffd130a97d5329729ce887c96d128b5b"
+  }
+}

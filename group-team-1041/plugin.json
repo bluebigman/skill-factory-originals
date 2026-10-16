@@ -1,0 +1,126 @@
+{
+  "agentName": "agriculture-plan-team-lead",
+  "agents": [
+    "./agents/agriculture-plan-team-lead.md",
+    "./agents/agriculture-plan.md",
+    "./agents/export-doc-check.md",
+    "./agents/intl-logistics-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 农事计划编制",
+    "zh": "帮我处理农事计划编制"
+  },
+  "description": "agriculture-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 农事计划编制 requirements, output three deliverables: 时令对齐, 资源配套, 风险预案. Verifiable end-to-end, evidence per step.",
+    "zh": "输入农事计划编制相关需求，输出时令对齐、资源配套、风险预案三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agriculture-plan Team",
+    "zh": "农事计划编制专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agriculture-plan-team-lead",
+      "name": {
+        "en": "农事计划编制主理人",
+        "zh": "农事计划编制主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agriculture-plan.png",
+      "id": "agriculture-plan",
+      "name": {
+        "en": "agriculture-plan",
+        "zh": "农事计划编制 顾问"
+      },
+      "profession": {
+        "en": "agriculture-plan",
+        "zh": "农事计划编制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/export-doc-check.png",
+      "id": "export-doc-check",
+      "name": {
+        "en": "export-doc-check",
+        "zh": "出口单据 一致性 顾问"
+      },
+      "profession": {
+        "en": "export-doc-check",
+        "zh": "出口单据 一致性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-logistics-pro.png",
+      "id": "intl-logistics-pro",
+      "name": {
+        "en": "intl-logistics-pro",
+        "zh": "国际物流 时效管理 顾问"
+      },
+      "profession": {
+        "en": "intl-logistics-pro",
+        "zh": "国际物流 时效管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1041",
+  "plugin": "group-team-1041",
+  "profession": {
+    "en": "agriculture-plan Collaboration Team",
+    "zh": "农事计划编制专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 农事计划编制",
+      "zh": "帮我处理农事计划编制"
+    },
+    {
+      "en": "Plan 出口单据",
+      "zh": "帮我规划出口单据"
+    },
+    {
+      "en": "Review 国际物流",
+      "zh": "帮我检查国际物流"
+    }
+  ],
+  "tags": [
+    {
+      "en": "时令对齐",
+      "zh": "时令对齐"
+    },
+    {
+      "en": "资源配套",
+      "zh": "资源配套"
+    },
+    {
+      "en": "风险预案",
+      "zh": "风险预案"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agriculture-plan-team-lead",
+    "memberAgents": [
+      "agriculture-plan",
+      "export-doc-check",
+      "intl-logistics-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

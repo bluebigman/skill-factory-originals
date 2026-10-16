@@ -1,0 +1,126 @@
+{
+  "agentName": "contract-legal-pro-team-lead",
+  "agents": [
+    "./agents/contract-legal-pro-team-lead.md",
+    "./agents/contract-legal-pro.md",
+    "./agents/time-mgmt-expert.md",
+    "./agents/career-transition-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 合同法律风险顾问",
+    "zh": "帮我处理合同法律风险顾问"
+  },
+  "description": "Contract Legal Advisor team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "合同 个人 转行 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Contract Legal Advisor Team",
+    "zh": "合同 个人 转行 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "contract-legal-pro-team-lead",
+      "name": {
+        "en": "合同法律风险顾问主理人",
+        "zh": "合同法律风险顾问主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/contract-legal-pro.png",
+      "id": "contract-legal-pro",
+      "name": {
+        "en": "Contract Legal Advisor",
+        "zh": "合同法律风险顾问"
+      },
+      "profession": {
+        "en": "Contract Legal Advisor",
+        "zh": "合同法律风险顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/time-mgmt-expert.png",
+      "id": "time-mgmt-expert",
+      "name": {
+        "en": "TimeMgmt",
+        "zh": "时间管理专家"
+      },
+      "profession": {
+        "en": "TimeMgmt",
+        "zh": "个人时间管理与任务规划专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/career-transition-pro.png",
+      "id": "career-transition-pro",
+      "name": {
+        "en": "Career Transition Pro",
+        "zh": "转行规划 简历优化 技能迁移"
+      },
+      "profession": {
+        "en": "Career Transition Pro",
+        "zh": "转行规划 简历优化 技能迁移"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-206",
+  "plugin": "group-team-206",
+  "profession": {
+    "en": "Contract Legal Advisor Collaboration Team",
+    "zh": "合同 个人 转行 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 合同法律风险顾问",
+      "zh": "帮我处理合同法律风险顾问"
+    },
+    {
+      "en": "Plan 个人时间管理与任务规划专家",
+      "zh": "帮我规划个人时间管理与任务规划专家"
+    },
+    {
+      "en": "Review 转行规划",
+      "zh": "帮我检查转行规划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "合同法律风险顾问",
+      "zh": "合同法律风险顾问"
+    },
+    {
+      "en": "个人时间管理与任务规划专家",
+      "zh": "个人时间管理与任务规划专家"
+    },
+    {
+      "en": "转行规划",
+      "zh": "转行规划"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "contract-legal-pro-team-lead",
+    "memberAgents": [
+      "contract-legal-pro",
+      "time-mgmt-expert",
+      "career-transition-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

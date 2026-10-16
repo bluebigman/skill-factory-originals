@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-350",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-350",
+    "kind": "team",
+    "name": "内容复用一稿多用专家",
+    "description": "内容复用一稿多用专家：围绕内容复用，覆盖先定母题／统一识别／对比效果，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-repurpose-team-lead",
+        "role": "lead",
+        "name": "内容复用主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-repurpose",
+        "role": "member",
+        "name": "内容复用 一稿多用 顾问",
+        "evidence": "original_assets/content-repurpose/merkle_root",
+        "member_merkle_root": "b189669df47abe525205d0f88fa61626521dc2f95dc482960479e194f7bb306f"
+      },
+      {
+        "slug": "localization-qa-pro",
+        "role": "member",
+        "name": "本地化翻译 质量验收 顾问",
+        "evidence": "original_assets/localization-qa-pro/merkle_root",
+        "member_merkle_root": "c48759eb100e813e894769889c97c9c4b870144e7c18a19b1b21fb322a037ecc"
+      },
+      {
+        "slug": "content-calendar-pro",
+        "role": "member",
+        "name": "内容排期 节奏管理 顾问",
+        "evidence": "original_assets/content-calendar-pro/merkle_root",
+        "member_merkle_root": "dd7f22f0f2d4e3c83b5fcc721e1ae74eabd3e86ff3ffee346c6c4ccd9a2cf9a5"
+      }
+    ],
+    "team_lead": "content-repurpose-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d3b780fe1e661141",
+  "prompt_hash": "28139df44286b038",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-350\", \"kind\": \"team\", \"name\": \"内容复用一稿多用专家\", \"description\": \"内容复用一稿多用专家：围绕内容复用，覆盖先定母题／统一识别／对比效果，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-repurpose-team-lead\", \"role\": \"lead\", \"name\": \"内容复用主理人\", \"evidence\": null}, {\"slug\": \"content-repurpose\", \"role\": \"member\", \"name\": \"内容复用 一稿多用 顾问\", \"evidence\": \"original_assets/content-repurpose/merkle_root\", \"member_merkle_root\": \"b189669df47abe525205d0f88fa61626521dc2f95dc482960479e194f7bb306f\"}, {\"slug\": \"localization-qa-pro\", \"role\": \"member\", \"name\": \"本地化翻译 质量验收 顾问\", \"evidence\": \"original_assets/localization-qa-pro/merkle_root\", \"member_merkle_root\": \"c48759eb100e813e894769889c97c9c4b870144e7c18a19b1b21fb322a037ecc\"}, {\"slug\": \"content-calendar-pro\", \"role\": \"member\", \"name\": \"内容排期 节奏管理 顾问\", \"evidence\": \"original_assets/content-calendar-pro/merkle_root\", \"member_merkle_root\": \"dd7f22f0f2d4e3c83b5fcc721e1ae74eabd3e86ff3ffee346c6c4ccd9a2cf9a5\"}], \"team_lead\": \"content-repurpose-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-calendar-pro.md": "c356f91cc669d0d0e566c2989ecfc0cd7a8f9e8a7b4f6b360c9a060282affd2c",
+    "agents/content-repurpose-team-lead.md": "8e97031dccee9d0afbbaad6bd80f5f2f2895c33a48efc1644c70870a869c7704",
+    "agents/content-repurpose.md": "442c38d31158d7c92c68a6e415efcb514309514f557b0081e597131009a744d9",
+    "agents/localization-qa-pro.md": "6a294395dd3978c808fdac7e220eecc50b582043ef2e111dc06f1a6c5612b32d",
+    "plugin.json": "21799cb75ac9d1a6c208cd005de0b34254ebc46dc207e6e8adcf19a719351df2",
+    "settings.json": "1a0adf62f89969ae1e9cb0e8b35e705aea8ebb39e2149af8719c4604c65dc9b1"
+  }
+}

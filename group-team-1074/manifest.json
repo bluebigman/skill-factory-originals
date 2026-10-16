@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1074",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1074",
+    "kind": "team",
+    "name": "中文去腔专家",
+    "description": "输入中文去AI腔相关需求，输出保留信息、版本先行、分区编辑三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "deai-taste-zh-team-lead",
+        "role": "lead",
+        "name": "中文去AI腔主理人",
+        "evidence": null
+      },
+      {
+        "slug": "deai-taste-zh",
+        "role": "member",
+        "name": "中文去AI腔 顾问",
+        "evidence": "original_assets/deai-taste-zh/merkle_root",
+        "member_merkle_root": "eb7060df563986d034074a7271d6aa4814442ccf51d85bf3baddb87bd7fd3873"
+      },
+      {
+        "slug": "doc-convert-pro-fixed",
+        "role": "member",
+        "name": "图片标准化 隐私转换 格式转换",
+        "evidence": "original_assets/doc-convert-pro-fixed/merkle_root",
+        "member_merkle_root": "ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1"
+      },
+      {
+        "slug": "doc-coauthor-flow",
+        "role": "member",
+        "name": "文档协同编辑 顾问",
+        "evidence": "original_assets/doc-coauthor-flow/merkle_root",
+        "member_merkle_root": "01cc4d675232382a226f964c24f9e524e61e3867d6231f1304f95e52bc61dc3f"
+      }
+    ],
+    "team_lead": "deai-taste-zh-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ef8294336c55b966",
+  "prompt_hash": "4cb4f19405977cfe",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1074\", \"kind\": \"team\", \"name\": \"中文去腔专家\", \"description\": \"输入中文去AI腔相关需求，输出保留信息、版本先行、分区编辑三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"deai-taste-zh-team-lead\", \"role\": \"lead\", \"name\": \"中文去AI腔主理人\", \"evidence\": null}, {\"slug\": \"deai-taste-zh\", \"role\": \"member\", \"name\": \"中文去AI腔 顾问\", \"evidence\": \"original_assets/deai-taste-zh/merkle_root\", \"member_merkle_root\": \"eb7060df563986d034074a7271d6aa4814442ccf51d85bf3baddb87bd7fd3873\"}, {\"slug\": \"doc-convert-pro-fixed\", \"role\": \"member\", \"name\": \"图片标准化 隐私转换 格式转换\", \"evidence\": \"original_assets/doc-convert-pro-fixed/merkle_root\", \"member_merkle_root\": \"ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1\"}, {\"slug\": \"doc-coauthor-flow\", \"role\": \"member\", \"name\": \"文档协同编辑 顾问\", \"evidence\": \"original_assets/doc-coauthor-flow/merkle_root\", \"member_merkle_root\": \"01cc4d675232382a226f964c24f9e524e61e3867d6231f1304f95e52bc61dc3f\"}], \"team_lead\": \"deai-taste-zh-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/deai-taste-zh-team-lead.md": "99549a859ac90dafea6c50ea7f1f68002d888c680c7145fe7ce31152b27f1347",
+    "agents/deai-taste-zh.md": "71b1879c45f17562f47a87c8c8e3743678d5918de1749dc6ed4288e7a9ce1051",
+    "agents/doc-coauthor-flow.md": "219775bb86c380e355d6991ccfafcf9f0cab4b51d8ef19ee7399e51a4093d003",
+    "agents/doc-convert-pro-fixed.md": "ad2243f0709462eb0fa741d693873b354a66228316a06c11dfc61a3ffd2698d7",
+    "plugin.json": "de983d293e71fc7d2a27fa135e9b8d1a44be1158c0f742b6452df1dd706286b9",
+    "settings.json": "495122246ba5f87c79fb98d05518c30cd00e122e3e96bd15f26e28d3df4676e4"
+  }
+}

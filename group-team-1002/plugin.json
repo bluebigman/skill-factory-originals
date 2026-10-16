@@ -1,0 +1,126 @@
+{
+  "agentName": "ops-deploy-pro-team-lead",
+  "agents": [
+    "./agents/ops-deploy-pro-team-lead.md",
+    "./agents/ops-deploy-pro.md",
+    "./agents/log-audit-trail.md",
+    "./agents/table-formula-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 缓存清理",
+    "zh": "帮我处理缓存清理"
+  },
+  "description": "运维与部署 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 日志审计留痕 requirements, output three deliverables: 必录字段, 不可篡改, 留存期限. Verifiable end-to-end, evidence per step.",
+    "zh": "输入日志审计留痕相关需求，输出必录字段、不可篡改、留存期限三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "运维与部署 Suite Team",
+    "zh": "缓存清理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ops-deploy-pro-team-lead",
+      "name": {
+        "en": "缓存清理主理人",
+        "zh": "缓存清理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro.png",
+      "id": "ops-deploy-pro",
+      "name": {
+        "en": "运维与部署 Suite",
+        "zh": "缓存清理 故障排查"
+      },
+      "profession": {
+        "en": "运维与部署 Suite",
+        "zh": "缓存清理 故障排查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/log-audit-trail.png",
+      "id": "log-audit-trail",
+      "name": {
+        "en": "log-audit-trail",
+        "zh": "日志审计留痕 顾问"
+      },
+      "profession": {
+        "en": "log-audit-trail",
+        "zh": "日志审计留痕 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/table-formula-pro.png",
+      "id": "table-formula-pro",
+      "name": {
+        "en": "table-formula-pro",
+        "zh": "表格公式 报错排查 顾问"
+      },
+      "profession": {
+        "en": "table-formula-pro",
+        "zh": "表格公式 报错排查 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1002",
+  "plugin": "group-team-1002",
+  "profession": {
+    "en": "运维与部署 Suite Collaboration Team",
+    "zh": "缓存清理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 缓存清理",
+      "zh": "帮我处理缓存清理"
+    },
+    {
+      "en": "Plan 日志审计留痕",
+      "zh": "帮我规划日志审计留痕"
+    },
+    {
+      "en": "Review 表格公式",
+      "zh": "帮我检查表格公式"
+    }
+  ],
+  "tags": [
+    {
+      "en": "磁盘空间",
+      "zh": "磁盘空间"
+    },
+    {
+      "en": "安全回收",
+      "zh": "安全回收"
+    },
+    {
+      "en": "仓库运维",
+      "zh": "仓库运维"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ops-deploy-pro-team-lead",
+    "memberAgents": [
+      "ops-deploy-pro",
+      "log-audit-trail",
+      "table-formula-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

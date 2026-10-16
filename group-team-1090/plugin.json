@@ -1,0 +1,126 @@
+{
+  "agentName": "churn-prevent-pro-team-lead",
+  "agents": [
+    "./agents/churn-prevent-pro-team-lead.md",
+    "./agents/churn-prevent-pro.md",
+    "./agents/sheet-collab-rule.md",
+    "./agents/document-control.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 客户流失",
+    "zh": "帮我处理客户流失"
+  },
+  "description": "churn-prevent-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 客户流失 end-to-end: 行为信号, 分级干预 and 归因访谈. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长行为信号、分级干预与归因访谈，覆盖客户流失全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "churn-prevent-pro Team",
+    "zh": "协作表格规范顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "churn-prevent-pro-team-lead",
+      "name": {
+        "en": "客户流失主理人",
+        "zh": "客户流失主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/churn-prevent-pro.png",
+      "id": "churn-prevent-pro",
+      "name": {
+        "en": "churn-prevent-pro",
+        "zh": "客户流失 预警干预 顾问"
+      },
+      "profession": {
+        "en": "churn-prevent-pro",
+        "zh": "客户流失 预警干预 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sheet-collab-rule.png",
+      "id": "sheet-collab-rule",
+      "name": {
+        "en": "sheet-collab-rule",
+        "zh": "协作表格规范 顾问"
+      },
+      "profession": {
+        "en": "sheet-collab-rule",
+        "zh": "协作表格规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/document-control.png",
+      "id": "document-control",
+      "name": {
+        "en": "document-control",
+        "zh": "文件受控管理 顾问"
+      },
+      "profession": {
+        "en": "document-control",
+        "zh": "文件受控管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1090",
+  "plugin": "group-team-1090",
+  "profession": {
+    "en": "churn-prevent-pro Collaboration Team",
+    "zh": "协作表格规范顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 客户流失",
+      "zh": "帮我处理客户流失"
+    },
+    {
+      "en": "Plan 协作表格规范",
+      "zh": "帮我规划协作表格规范"
+    },
+    {
+      "en": "Review 文件受控管理",
+      "zh": "帮我检查文件受控管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级干预",
+      "zh": "分级干预"
+    },
+    {
+      "en": "归因访谈",
+      "zh": "归因访谈"
+    },
+    {
+      "en": "补救具体",
+      "zh": "补救具体"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "churn-prevent-pro-team-lead",
+    "memberAgents": [
+      "churn-prevent-pro",
+      "sheet-collab-rule",
+      "document-control"
+    ]
+  },
+  "version": "1.0.0"
+}

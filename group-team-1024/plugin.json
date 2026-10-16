@@ -1,0 +1,126 @@
+{
+  "agentName": "word-track-review-team-lead",
+  "agents": [
+    "./agents/word-track-review-team-lead.md",
+    "./agents/word-track-review.md",
+    "./agents/newsletter-compose.md",
+    "./agents/template-engine-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle Word",
+    "zh": "帮我处理Word"
+  },
+  "description": "word-track-review team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers Word end-to-end: 修订可见, 批注聚焦 and 变动摘要. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长修订可见、批注聚焦与变动摘要，覆盖Word全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "word-track-review Team",
+    "zh": "修订审阅专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "word-track-review-team-lead",
+      "name": {
+        "en": "Word主理人",
+        "zh": "Word主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/word-track-review.png",
+      "id": "word-track-review",
+      "name": {
+        "en": "word-track-review",
+        "zh": "Word 修订审阅 顾问"
+      },
+      "profession": {
+        "en": "word-track-review",
+        "zh": "Word 修订审阅 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/newsletter-compose.png",
+      "id": "newsletter-compose",
+      "name": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "profession": {
+        "en": "newsletter-compose",
+        "zh": "团队周报编排 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/template-engine-pro.png",
+      "id": "template-engine-pro",
+      "name": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "profession": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1024",
+  "plugin": "group-team-1024",
+  "profession": {
+    "en": "word-track-review Collaboration Team",
+    "zh": "修订审阅专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle Word",
+      "zh": "帮我处理Word"
+    },
+    {
+      "en": "Plan 团队周报编排",
+      "zh": "帮我规划团队周报编排"
+    },
+    {
+      "en": "Review 模板引擎",
+      "zh": "帮我检查模板引擎"
+    }
+  ],
+  "tags": [
+    {
+      "en": "修订可见",
+      "zh": "修订可见"
+    },
+    {
+      "en": "批注聚焦",
+      "zh": "批注聚焦"
+    },
+    {
+      "en": "变动摘要",
+      "zh": "变动摘要"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "word-track-review-team-lead",
+    "memberAgents": [
+      "word-track-review",
+      "newsletter-compose",
+      "template-engine-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

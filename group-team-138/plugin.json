@@ -1,0 +1,126 @@
+{
+  "agentName": "finance-toolkit-pro-team-lead",
+  "agents": [
+    "./agents/finance-toolkit-pro-team-lead.md",
+    "./agents/finance-toolkit-pro.md",
+    "./agents/expense-reimburse-expert.md",
+    "./agents/annual-report-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "08-FinanceInvestment",
+  "defaultInitPrompt": {
+    "en": "Handle 财务文本",
+    "zh": "帮我处理财务文本"
+  },
+  "description": "金融与财税 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "财务 报销 年报 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "金融与财税 Suite Team",
+    "zh": "财务 报销 年报 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "finance-toolkit-pro-team-lead",
+      "name": {
+        "en": "财务文本主理人",
+        "zh": "财务文本主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/finance-toolkit-pro.png",
+      "id": "finance-toolkit-pro",
+      "name": {
+        "en": "金融与财税 Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "profession": {
+        "en": "金融与财税 Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/expense-reimburse-expert.png",
+      "id": "expense-reimburse-expert",
+      "name": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "profession": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/annual-report-expert.png",
+      "id": "annual-report-expert",
+      "name": {
+        "en": "AnnualReport",
+        "zh": "年报官"
+      },
+      "profession": {
+        "en": "AnnualReport",
+        "zh": "年报财报速读与数据整理专家"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-138",
+  "plugin": "group-team-138",
+  "profession": {
+    "en": "金融与财税 Suite Collaboration Team",
+    "zh": "财务 报销 年报 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 财务文本",
+      "zh": "帮我处理财务文本"
+    },
+    {
+      "en": "Plan 报销与费用管理专家",
+      "zh": "帮我规划报销与费用管理专家"
+    },
+    {
+      "en": "Review 年报财报速读与数据整理专家",
+      "zh": "帮我检查年报财报速读与数据整理专家"
+    }
+  ],
+  "tags": [
+    {
+      "en": "财务文本",
+      "zh": "财务文本"
+    },
+    {
+      "en": "报销与费用管理专家",
+      "zh": "报销与费用管理专家"
+    },
+    {
+      "en": "年报财报速读与数据整理专家",
+      "zh": "年报财报速读与数据整理专家"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "finance-toolkit-pro-team-lead",
+    "memberAgents": [
+      "finance-toolkit-pro",
+      "expense-reimburse-expert",
+      "annual-report-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1240",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1240",
+    "kind": "team",
+    "name": "接口限流方案专家",
+    "description": "擅长按维度限、超限提示与分级策略，覆盖接口限流方案全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-rate-limit-plan-team-lead",
+        "role": "lead",
+        "name": "接口限流方案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-rate-limit-plan",
+        "role": "member",
+        "name": "接口限流方案 顾问",
+        "evidence": "original_assets/api-rate-limit-plan/merkle_root",
+        "member_merkle_root": "afd3cf70a4ceaead836422832af7d532b687d2cbeb4b99d07cae12de29e4fae6"
+      },
+      {
+        "slug": "knowledge-conflict",
+        "role": "member",
+        "name": "知识冲突处理 顾问",
+        "evidence": "original_assets/knowledge-conflict/merkle_root",
+        "member_merkle_root": "3b8de4f094464b961901c5e633b9f67a73e6b8957931a902cd1a1becf932e28e"
+      },
+      {
+        "slug": "kpi-tree-build",
+        "role": "member",
+        "name": "指标树构建 顾问",
+        "evidence": "original_assets/kpi-tree-build/merkle_root",
+        "member_merkle_root": "ae82bfe1a80fcaa8102f8d980bcbf3fa03cd6425ebe96f705f76dcc1a2e9333c"
+      }
+    ],
+    "team_lead": "api-rate-limit-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "962f2f2906cab0f1",
+  "prompt_hash": "8029f4bad069b488",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1240\", \"kind\": \"team\", \"name\": \"接口限流方案专家\", \"description\": \"擅长按维度限、超限提示与分级策略，覆盖接口限流方案全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-rate-limit-plan-team-lead\", \"role\": \"lead\", \"name\": \"接口限流方案主理人\", \"evidence\": null}, {\"slug\": \"api-rate-limit-plan\", \"role\": \"member\", \"name\": \"接口限流方案 顾问\", \"evidence\": \"original_assets/api-rate-limit-plan/merkle_root\", \"member_merkle_root\": \"afd3cf70a4ceaead836422832af7d532b687d2cbeb4b99d07cae12de29e4fae6\"}, {\"slug\": \"knowledge-conflict\", \"role\": \"member\", \"name\": \"知识冲突处理 顾问\", \"evidence\": \"original_assets/knowledge-conflict/merkle_root\", \"member_merkle_root\": \"3b8de4f094464b961901c5e633b9f67a73e6b8957931a902cd1a1becf932e28e\"}, {\"slug\": \"kpi-tree-build\", \"role\": \"member\", \"name\": \"指标树构建 顾问\", \"evidence\": \"original_assets/kpi-tree-build/merkle_root\", \"member_merkle_root\": \"ae82bfe1a80fcaa8102f8d980bcbf3fa03cd6425ebe96f705f76dcc1a2e9333c\"}], \"team_lead\": \"api-rate-limit-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-rate-limit-plan-team-lead.md": "02ae67941a202e2fb5359198e17224449d99d060ec2907dc16f5b65ca884e19f",
+    "agents/api-rate-limit-plan.md": "f0a438aad205dddedaabbd3720ec9f8e8c2b0eaf249e775aaa4c43653b7c0ec1",
+    "agents/knowledge-conflict.md": "1202036d0cdf317d3698dab4bb62e11113caa09415a2b8a8ab40500dd3cfce6b",
+    "agents/kpi-tree-build.md": "8b7821c504f1f4897e13688411e63a1da33e01a840bf78e2d8e4c971fdfe2a65",
+    "plugin.json": "bf296176890bd09139704f2a30cd1227f93a841dff0bfc953cd129fdbab74241",
+    "settings.json": "5f5012d5fc0e6cf83b09ce96759110d240160d3a77569e147136dc0520c113c8"
+  }
+}

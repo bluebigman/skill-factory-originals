@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-toolkit-pro-03-fixed-team-lead",
+  "agents": [
+    "./agents/agent-toolkit-pro-03-fixed-team-lead.md",
+    "./agents/agent-toolkit-pro-03-fixed.md",
+    "./agents/agent-table-agent.md",
+    "./agents/agent-eval-framework.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 技能编排",
+    "zh": "帮我处理技能编排"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 表格智能 requirements, output three deliverables: 结构识别, 类型推断, 校验规则. Verifiable end-to-end, evidence per step.",
+    "zh": "输入表格智能相关需求，输出结构识别、类型推断、校验规则三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "技能编排组合专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-toolkit-pro-03-fixed-team-lead",
+      "name": {
+        "en": "技能编排主理人",
+        "zh": "技能编排主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-03-fixed.png",
+      "id": "agent-toolkit-pro-03-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "技能编排 技能组合 开发辅助"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "技能编排 技能组合 开发辅助"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-table-agent.png",
+      "id": "agent-table-agent",
+      "name": {
+        "en": "agent-table-agent",
+        "zh": "表格智能 理解 顾问"
+      },
+      "profession": {
+        "en": "agent-table-agent",
+        "zh": "表格智能 理解 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-eval-framework.png",
+      "id": "agent-eval-framework",
+      "name": {
+        "en": "agent-eval-framework",
+        "zh": "效果评测 用例设计 顾问"
+      },
+      "profession": {
+        "en": "agent-eval-framework",
+        "zh": "效果评测 用例设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-822",
+  "plugin": "group-team-822",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "技能编排技能组合专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 技能编排",
+      "zh": "帮我处理技能编排"
+    },
+    {
+      "en": "Plan 表格智能",
+      "zh": "帮我规划表格智能"
+    },
+    {
+      "en": "Review 效果评测",
+      "zh": "帮我检查效果评测"
+    }
+  ],
+  "tags": [
+    {
+      "en": "流程设计",
+      "zh": "流程设计"
+    },
+    {
+      "en": "能力增强",
+      "zh": "能力增强"
+    },
+    {
+      "en": "开发提效",
+      "zh": "开发提效"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-toolkit-pro-03-fixed-team-lead",
+    "memberAgents": [
+      "agent-toolkit-pro-03-fixed",
+      "agent-table-agent",
+      "agent-eval-framework"
+    ]
+  },
+  "version": "1.0.0"
+}

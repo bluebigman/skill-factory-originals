@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-185",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-185",
+    "kind": "team",
+    "name": "润语 界面 号手 团队",
+    "description": "润语 界面 号手 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "polish-translate-expert-team-lead",
+        "role": "lead",
+        "name": "润语主理人",
+        "evidence": null
+      },
+      {
+        "slug": "polish-translate-expert",
+        "role": "member",
+        "name": "润语 文本润色 文案优化",
+        "evidence": "original_assets/polish-translate-expert/merkle_root",
+        "member_merkle_root": "5d76d7f40e997a259a6ebea9fa79a71f3ccf428841275623a250d3f44d24481c"
+      },
+      {
+        "slug": "ui-visual-forge-expert",
+        "role": "member",
+        "name": "界面设计 组件美化 视觉产出",
+        "evidence": "original_assets/ui-visual-forge-expert/merkle_root",
+        "member_merkle_root": "e4c930a09c3a96ad42334dbde9c801fc4e3b159a0d2c03951c194f9980f589ed"
+      },
+      {
+        "slug": "wechat-content-expert",
+        "role": "member",
+        "name": "号手 公众号排版 图文美化",
+        "evidence": "original_assets/wechat-content-expert/merkle_root",
+        "member_merkle_root": "fea742789f660b4f02f790df5acc68d84d1e475ebd23c53a3d4f2225a685d7f0"
+      }
+    ],
+    "team_lead": "polish-translate-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "077f13dddc4fef42",
+  "prompt_hash": "e0db306ac63ff20a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-185\", \"kind\": \"team\", \"name\": \"润语 界面 号手 团队\", \"description\": \"润语 界面 号手 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"polish-translate-expert-team-lead\", \"role\": \"lead\", \"name\": \"润语主理人\", \"evidence\": null}, {\"slug\": \"polish-translate-expert\", \"role\": \"member\", \"name\": \"润语 文本润色 文案优化\", \"evidence\": \"original_assets/polish-translate-expert/merkle_root\", \"member_merkle_root\": \"5d76d7f40e997a259a6ebea9fa79a71f3ccf428841275623a250d3f44d24481c\"}, {\"slug\": \"ui-visual-forge-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化 视觉产出\", \"evidence\": \"original_assets/ui-visual-forge-expert/merkle_root\", \"member_merkle_root\": \"e4c930a09c3a96ad42334dbde9c801fc4e3b159a0d2c03951c194f9980f589ed\"}, {\"slug\": \"wechat-content-expert\", \"role\": \"member\", \"name\": \"号手 公众号排版 图文美化\", \"evidence\": \"original_assets/wechat-content-expert/merkle_root\", \"member_merkle_root\": \"fea742789f660b4f02f790df5acc68d84d1e475ebd23c53a3d4f2225a685d7f0\"}], \"team_lead\": \"polish-translate-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/polish-translate-expert-team-lead.md": "87a8628d4372a4b20c8059f6d6173f69c89c845faa93f3e29de3f77f3e84120b",
+    "agents/polish-translate-expert.md": "630e6aca327f31238210ef37a76b5ff8972ac9760491ad40dfa8ee68351778a4",
+    "agents/ui-visual-forge-expert.md": "c580e84a9e28d0b45ea7dd519bac5f77470b0156ae7dd6152b12587d3a69f16f",
+    "agents/wechat-content-expert.md": "fe9d586663522838d04582cd231e6d789bf12b3e9318bfc9658befb396abc7d2",
+    "plugin.json": "bc6d3758837cb40ccaab44e4ca9e06761d72847b9c969675b4f78c8fdcdbbe03",
+    "settings.json": "d9004401a3e32985080870e531c5ed3db566acb32c044a9b477145ee3d24fb0f"
+  }
+}

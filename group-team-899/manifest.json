@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-899",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-899",
+    "kind": "team",
+    "name": "文档无障碍专家",
+    "description": "擅长适度跳过、容错纠错与筛选可清，覆盖关卡难度全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "level-difficulty-curve-team-lead",
+        "role": "lead",
+        "name": "关卡难度主理人",
+        "evidence": null
+      },
+      {
+        "slug": "level-difficulty-curve",
+        "role": "member",
+        "name": "关卡难度 曲线调优 顾问",
+        "evidence": "original_assets/level-difficulty-curve/merkle_root",
+        "member_merkle_root": "d6abfd9bb8e18e370fcb898b06ca8d8653ea87d6a561d400958f059ad50f5fed"
+      },
+      {
+        "slug": "search-ux-pro",
+        "role": "member",
+        "name": "搜索体验 检索设计 顾问",
+        "evidence": "original_assets/search-ux-pro/merkle_root",
+        "member_merkle_root": "0c877a3cdef4a30e1fdc26f0a15571605522d4ed71393989d051b3f764a92818"
+      },
+      {
+        "slug": "doc-accessibility",
+        "role": "member",
+        "name": "文档无障碍 顾问",
+        "evidence": "original_assets/doc-accessibility/merkle_root",
+        "member_merkle_root": "ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e"
+      }
+    ],
+    "team_lead": "level-difficulty-curve-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2d7a129707683379",
+  "prompt_hash": "4bb2d5910c1c0d10",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-899\", \"kind\": \"team\", \"name\": \"文档无障碍专家\", \"description\": \"擅长适度跳过、容错纠错与筛选可清，覆盖关卡难度全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"level-difficulty-curve-team-lead\", \"role\": \"lead\", \"name\": \"关卡难度主理人\", \"evidence\": null}, {\"slug\": \"level-difficulty-curve\", \"role\": \"member\", \"name\": \"关卡难度 曲线调优 顾问\", \"evidence\": \"original_assets/level-difficulty-curve/merkle_root\", \"member_merkle_root\": \"d6abfd9bb8e18e370fcb898b06ca8d8653ea87d6a561d400958f059ad50f5fed\"}, {\"slug\": \"search-ux-pro\", \"role\": \"member\", \"name\": \"搜索体验 检索设计 顾问\", \"evidence\": \"original_assets/search-ux-pro/merkle_root\", \"member_merkle_root\": \"0c877a3cdef4a30e1fdc26f0a15571605522d4ed71393989d051b3f764a92818\"}, {\"slug\": \"doc-accessibility\", \"role\": \"member\", \"name\": \"文档无障碍 顾问\", \"evidence\": \"original_assets/doc-accessibility/merkle_root\", \"member_merkle_root\": \"ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e\"}], \"team_lead\": \"level-difficulty-curve-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-accessibility.md": "4c65a1e24c27e8fbed32a1ff47ab3a6bd86c777931a45ed15310e7203bdb929e",
+    "agents/level-difficulty-curve-team-lead.md": "59f22eb1e728b7da7f17fbd8a93665aff5d2754b9f0a3bfe8b5742325bfe4d57",
+    "agents/level-difficulty-curve.md": "19e8808d13e23e4c1e48339650e049980b862edf7aabafff1c1d204789e7bd93",
+    "agents/search-ux-pro.md": "9e3e28ecaf7e35f4624d5538e847c754b3572ba0ba157aa29714709aa5400abe",
+    "plugin.json": "b022a3ea5e4085492decacecdd40f03916a8b94824429fe5f03edfb75c9d426b",
+    "settings.json": "b836ae55490126b11c4573d3e0aa2f6de663a79415818ab33a1c9e4431b50c3b"
+  }
+}

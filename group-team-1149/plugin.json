@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-translate-quick-team-lead",
+  "agents": [
+    "./agents/doc-translate-quick-team-lead.md",
+    "./agents/doc-translate-quick.md",
+    "./agents/naming-candidate.md",
+    "./agents/doc-index-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档快速翻译",
+    "zh": "帮我处理文档快速翻译"
+  },
+  "description": "doc-translate-quick team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档快速翻译 requirements, output three deliverables: 先建术语, 意译优先, 长句拆分. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档快速翻译相关需求，输出先建术语、意译优先、长句拆分三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-translate-quick Team",
+    "zh": "文档快速翻译专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-translate-quick-team-lead",
+      "name": {
+        "en": "文档快速翻译主理人",
+        "zh": "文档快速翻译主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-translate-quick.png",
+      "id": "doc-translate-quick",
+      "name": {
+        "en": "doc-translate-quick",
+        "zh": "文档快速翻译 助手"
+      },
+      "profession": {
+        "en": "doc-translate-quick",
+        "zh": "文档快速翻译 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/naming-candidate.png",
+      "id": "naming-candidate",
+      "name": {
+        "en": "naming-candidate",
+        "zh": "命名候选生成 顾问"
+      },
+      "profession": {
+        "en": "naming-candidate",
+        "zh": "命名候选生成 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-index-build.png",
+      "id": "doc-index-build",
+      "name": {
+        "en": "doc-index-build",
+        "zh": "文档索引构建 助手"
+      },
+      "profession": {
+        "en": "doc-index-build",
+        "zh": "文档索引构建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1149",
+  "plugin": "group-team-1149",
+  "profession": {
+    "en": "doc-translate-quick Collaboration Team",
+    "zh": "文档快速翻译专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档快速翻译",
+      "zh": "帮我处理文档快速翻译"
+    },
+    {
+      "en": "Plan 命名候选生成",
+      "zh": "帮我规划命名候选生成"
+    },
+    {
+      "en": "Review 文档索引构建",
+      "zh": "帮我检查文档索引构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先建术语",
+      "zh": "先建术语"
+    },
+    {
+      "en": "意译优先",
+      "zh": "意译优先"
+    },
+    {
+      "en": "长句拆分",
+      "zh": "长句拆分"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-translate-quick-team-lead",
+    "memberAgents": [
+      "doc-translate-quick",
+      "naming-candidate",
+      "doc-index-build"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "kb-build-pro-team-lead",
+  "agents": [
+    "./agents/kb-build-pro-team-lead.md",
+    "./agents/kb-build-pro.md",
+    "./agents/doc-struct-pro.md",
+    "./agents/agent-toolkit-pro-02-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 知识库构建",
+    "zh": "帮我处理知识库构建"
+  },
+  "description": "Knowledge Base Builder team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 知识库构建, covers 文档章节 / 切分索引 / 抽取归并, delivering structured results and actionable checklists.",
+    "zh": "知识库构建专家：围绕知识库构建，覆盖文档章节／切分索引／抽取归并，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Knowledge Base Builder Team",
+    "zh": "知识库构建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "kb-build-pro-team-lead",
+      "name": {
+        "en": "知识库构建主理人",
+        "zh": "知识库构建主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/kb-build-pro.png",
+      "id": "kb-build-pro",
+      "name": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "profession": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-struct-pro.png",
+      "id": "doc-struct-pro",
+      "name": {
+        "en": "Doc Structure Parser",
+        "zh": "文档解构 要点提炼 结构化输出"
+      },
+      "profession": {
+        "en": "Doc Structure Parser",
+        "zh": "文档解构 要点提炼 结构化输出"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-02-fixed.png",
+      "id": "agent-toolkit-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "对话经验 截图编排 协作共享"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "对话经验 截图编排 协作共享"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-631",
+  "plugin": "group-team-631",
+  "profession": {
+    "en": "Knowledge Base Builder Collaboration Team",
+    "zh": "知识库构建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 知识库构建",
+      "zh": "帮我处理知识库构建"
+    },
+    {
+      "en": "Plan 文档解构",
+      "zh": "帮我规划文档解构"
+    },
+    {
+      "en": "Review 对话经验",
+      "zh": "帮我检查对话经验"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档章节",
+      "zh": "文档章节"
+    },
+    {
+      "en": "切分索引",
+      "zh": "切分索引"
+    },
+    {
+      "en": "检索",
+      "zh": "检索"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "kb-build-pro-team-lead",
+    "memberAgents": [
+      "kb-build-pro",
+      "doc-struct-pro",
+      "agent-toolkit-pro-02-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

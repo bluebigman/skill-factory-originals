@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-539",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-539",
+    "kind": "team",
+    "name": "视频字幕专家",
+    "description": "擅长术语统一、母语终审与语境适配，覆盖本地化翻译全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "localization-qa-pro-team-lead",
+        "role": "lead",
+        "name": "本地化翻译主理人",
+        "evidence": null
+      },
+      {
+        "slug": "localization-qa-pro",
+        "role": "member",
+        "name": "本地化翻译 质量验收 顾问",
+        "evidence": "original_assets/localization-qa-pro/merkle_root",
+        "member_merkle_root": "c48759eb100e813e894769889c97c9c4b870144e7c18a19b1b21fb322a037ecc"
+      },
+      {
+        "slug": "asset-library-pro",
+        "role": "member",
+        "name": "素材库 分类管理 顾问",
+        "evidence": "original_assets/asset-library-pro/merkle_root",
+        "member_merkle_root": "8e03670902250017634d83b44ffeca5a3ee9016eb8c166fb839e979a6ba3b780"
+      },
+      {
+        "slug": "subtitle-expert",
+        "role": "member",
+        "name": "视频字幕 语音转写 时间轴对齐",
+        "evidence": "original_assets/subtitle-expert/merkle_root",
+        "member_merkle_root": "29cc7bd9c2315c9918e026807a574de6228b906c7880f220a60c0dbe56957299"
+      }
+    ],
+    "team_lead": "localization-qa-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "56f7bea3bb9997bc",
+  "prompt_hash": "ac7618ce4278b3b8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-539\", \"kind\": \"team\", \"name\": \"视频字幕专家\", \"description\": \"擅长术语统一、母语终审与语境适配，覆盖本地化翻译全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"localization-qa-pro-team-lead\", \"role\": \"lead\", \"name\": \"本地化翻译主理人\", \"evidence\": null}, {\"slug\": \"localization-qa-pro\", \"role\": \"member\", \"name\": \"本地化翻译 质量验收 顾问\", \"evidence\": \"original_assets/localization-qa-pro/merkle_root\", \"member_merkle_root\": \"c48759eb100e813e894769889c97c9c4b870144e7c18a19b1b21fb322a037ecc\"}, {\"slug\": \"asset-library-pro\", \"role\": \"member\", \"name\": \"素材库 分类管理 顾问\", \"evidence\": \"original_assets/asset-library-pro/merkle_root\", \"member_merkle_root\": \"8e03670902250017634d83b44ffeca5a3ee9016eb8c166fb839e979a6ba3b780\"}, {\"slug\": \"subtitle-expert\", \"role\": \"member\", \"name\": \"视频字幕 语音转写 时间轴对齐\", \"evidence\": \"original_assets/subtitle-expert/merkle_root\", \"member_merkle_root\": \"29cc7bd9c2315c9918e026807a574de6228b906c7880f220a60c0dbe56957299\"}], \"team_lead\": \"localization-qa-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/asset-library-pro.md": "f568a729cc2600474a406d915f998f7831a3c43b117b5ba5349bc7b017cec95b",
+    "agents/localization-qa-pro-team-lead.md": "03637776d0359b0ccb5b15722d0a49056a71fe0beb179a4e56427e59e3e8c987",
+    "agents/localization-qa-pro.md": "cb62e5a9493de321d6c4754071b1a4593e3fd7418f702f686c0c76d2b1bb2813",
+    "agents/subtitle-expert.md": "1f968bdaa8c766b003834a6495c16f273734d76b0bdde765897e0730b98e990d",
+    "plugin.json": "69fa83e6251b2e2303b62b781dc7e6f8a544dd36e512fd370907c1a7844f395b",
+    "settings.json": "81b06e88bdeccd24539cdbc79676df181a14fd706f9408ab9e3ff09b3c7d96f7"
+  }
+}

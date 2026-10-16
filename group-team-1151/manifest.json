@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1151",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1151",
+    "kind": "team",
+    "name": "电商经营复盘专家",
+    "description": "电商经营复盘专家：围绕电商经营复盘，覆盖先看大盘／拆解归因／转化漏斗，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ecom-ops-review-team-lead",
+        "role": "lead",
+        "name": "电商经营复盘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ecom-ops-review",
+        "role": "member",
+        "name": "电商经营复盘 助手",
+        "evidence": "original_assets/ecom-ops-review/merkle_root",
+        "member_merkle_root": "63eb627261011845b05bca070944c5b6083cc151b5543372a7c100fadc21ad45"
+      },
+      {
+        "slug": "doc-version-ledger",
+        "role": "member",
+        "name": "文档版本台账 助手",
+        "evidence": "original_assets/doc-version-ledger/merkle_root",
+        "member_merkle_root": "5b6d3f871f2d04ec5356a8f203ca8c61d9e84fb71e932c68a391b72ddb4ce2cf"
+      },
+      {
+        "slug": "doc-version-diff",
+        "role": "member",
+        "name": "文档版本比对 顾问",
+        "evidence": "original_assets/doc-version-diff/merkle_root",
+        "member_merkle_root": "d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e"
+      }
+    ],
+    "team_lead": "ecom-ops-review-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f86c888ac6b1a954",
+  "prompt_hash": "1ac94e0a68c1c06c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1151\", \"kind\": \"team\", \"name\": \"电商经营复盘专家\", \"description\": \"电商经营复盘专家：围绕电商经营复盘，覆盖先看大盘／拆解归因／转化漏斗，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ecom-ops-review-team-lead\", \"role\": \"lead\", \"name\": \"电商经营复盘主理人\", \"evidence\": null}, {\"slug\": \"ecom-ops-review\", \"role\": \"member\", \"name\": \"电商经营复盘 助手\", \"evidence\": \"original_assets/ecom-ops-review/merkle_root\", \"member_merkle_root\": \"63eb627261011845b05bca070944c5b6083cc151b5543372a7c100fadc21ad45\"}, {\"slug\": \"doc-version-ledger\", \"role\": \"member\", \"name\": \"文档版本台账 助手\", \"evidence\": \"original_assets/doc-version-ledger/merkle_root\", \"member_merkle_root\": \"5b6d3f871f2d04ec5356a8f203ca8c61d9e84fb71e932c68a391b72ddb4ce2cf\"}, {\"slug\": \"doc-version-diff\", \"role\": \"member\", \"name\": \"文档版本比对 顾问\", \"evidence\": \"original_assets/doc-version-diff/merkle_root\", \"member_merkle_root\": \"d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e\"}], \"team_lead\": \"ecom-ops-review-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-version-diff.md": "fc2bad4e6d485da2a7657f0a5c09830a60f4c516c9f1feef8b060f8928076113",
+    "agents/doc-version-ledger.md": "a987391b8176bdc1d8d3e90dad2a31ed40b381da01247ce29439270e23f25558",
+    "agents/ecom-ops-review-team-lead.md": "477fab0bfd8d2668bf0a23f9fd78a8b1faca130fdd4757dba8b0ae1cbf43ac29",
+    "agents/ecom-ops-review.md": "7e3d0fa7e69991d05f975816b6dc2d656ed0d433ba8c1a8498ff9c475dc5392d",
+    "plugin.json": "8598bd40de312eaa8192136c7901bacc48c8ccd131baaf8482e25138888bc94b",
+    "settings.json": "9fe89eb39f2df6aff7ab8f2b5d00b6cf7e58642e7972213920e595a557f222a6"
+  }
+}

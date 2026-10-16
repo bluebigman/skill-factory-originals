@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1215",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1215",
+    "kind": "team",
+    "name": "演示时长控制顾问专家",
+    "description": "输入演示时长控制相关需求，输出排练计时、备份版本、真实问法三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "presentation-timing-team-lead",
+        "role": "lead",
+        "name": "演示时长控制主理人",
+        "evidence": null
+      },
+      {
+        "slug": "presentation-timing",
+        "role": "member",
+        "name": "演示时长控制 顾问",
+        "evidence": "original_assets/presentation-timing/merkle_root",
+        "member_merkle_root": "d000305d9cd648424e1c6f1d2332d09c002bae2133ca901adb76f6b78ce2aeda"
+      },
+      {
+        "slug": "faq-build-pro",
+        "role": "member",
+        "name": "常见问题库构建 助手",
+        "evidence": "original_assets/faq-build-pro/merkle_root",
+        "member_merkle_root": "d0d4fdcb8bbeb2068c9db34090a8331f415f164fa2f1ca2d830b097a6057d624"
+      },
+      {
+        "slug": "content-structure",
+        "role": "member",
+        "name": "内容结构设计 顾问",
+        "evidence": "original_assets/content-structure/merkle_root",
+        "member_merkle_root": "7a3183ab3e3f2ff6337aa8f164a19664e490315ecd4214a3b0c669352898c259"
+      }
+    ],
+    "team_lead": "presentation-timing-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ddd7dd1a590ad1cc",
+  "prompt_hash": "582c28e4ae808b49",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1215\", \"kind\": \"team\", \"name\": \"演示时长控制顾问专家\", \"description\": \"输入演示时长控制相关需求，输出排练计时、备份版本、真实问法三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"presentation-timing-team-lead\", \"role\": \"lead\", \"name\": \"演示时长控制主理人\", \"evidence\": null}, {\"slug\": \"presentation-timing\", \"role\": \"member\", \"name\": \"演示时长控制 顾问\", \"evidence\": \"original_assets/presentation-timing/merkle_root\", \"member_merkle_root\": \"d000305d9cd648424e1c6f1d2332d09c002bae2133ca901adb76f6b78ce2aeda\"}, {\"slug\": \"faq-build-pro\", \"role\": \"member\", \"name\": \"常见问题库构建 助手\", \"evidence\": \"original_assets/faq-build-pro/merkle_root\", \"member_merkle_root\": \"d0d4fdcb8bbeb2068c9db34090a8331f415f164fa2f1ca2d830b097a6057d624\"}, {\"slug\": \"content-structure\", \"role\": \"member\", \"name\": \"内容结构设计 顾问\", \"evidence\": \"original_assets/content-structure/merkle_root\", \"member_merkle_root\": \"7a3183ab3e3f2ff6337aa8f164a19664e490315ecd4214a3b0c669352898c259\"}], \"team_lead\": \"presentation-timing-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-structure.md": "cdfb6483f6e81da47c2ac8e30e4d0fcb34299165c974c2e96fdf31dfe2324a7f",
+    "agents/faq-build-pro.md": "5dfd026fa883a4fe4f12a25044aab171a58f4b47ac3b50d6056575e151a7fb09",
+    "agents/presentation-timing-team-lead.md": "628abddf8f69f99e296e9397a15b1eec3fe5064723e683c15446dab3451ec718",
+    "agents/presentation-timing.md": "b02abbd604760995bf5772758b70629690d3619d2e81dddf30a380164d08957b",
+    "plugin.json": "320a953454646c3d3700f7ea5e188038feead2f97f7f784c45ef66d47d0225b6",
+    "settings.json": "ea8588db2ddd1a0d09774c999b3695b089e9d09c4d59a3da33e26ed45afcb544"
+  }
+}

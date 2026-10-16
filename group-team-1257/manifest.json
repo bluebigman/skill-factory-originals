@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1257",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1257",
+    "kind": "team",
+    "name": "计量器具专家",
+    "description": "输入计量器具相关需求，输出台账齐全、周期强制、状态标识三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "contract-legal-pro-team-lead",
+        "role": "lead",
+        "name": "合同法律风险顾问主理人",
+        "evidence": null
+      },
+      {
+        "slug": "contract-legal-pro",
+        "role": "member",
+        "name": "合同法律风险顾问",
+        "evidence": "original_assets/contract-legal-pro/merkle_root",
+        "member_merkle_root": "596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3"
+      },
+      {
+        "slug": "calibration-manage-pro",
+        "role": "member",
+        "name": "计量器具 校准管理 顾问",
+        "evidence": "original_assets/calibration-manage-pro/merkle_root",
+        "member_merkle_root": "bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf"
+      },
+      {
+        "slug": "dev-onboarding",
+        "role": "member",
+        "name": "新人上手流程 顾问",
+        "evidence": "original_assets/dev-onboarding/merkle_root",
+        "member_merkle_root": "7146d0023c8122e544f09effae5710a7355a377748fa2e2eecfaa7814f864e8b"
+      }
+    ],
+    "team_lead": "contract-legal-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "91ccd37c0b8e2482",
+  "prompt_hash": "39a5f5025c22e7c1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1257\", \"kind\": \"team\", \"name\": \"计量器具专家\", \"description\": \"输入计量器具相关需求，输出台账齐全、周期强制、状态标识三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"contract-legal-pro-team-lead\", \"role\": \"lead\", \"name\": \"合同法律风险顾问主理人\", \"evidence\": null}, {\"slug\": \"contract-legal-pro\", \"role\": \"member\", \"name\": \"合同法律风险顾问\", \"evidence\": \"original_assets/contract-legal-pro/merkle_root\", \"member_merkle_root\": \"596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3\"}, {\"slug\": \"calibration-manage-pro\", \"role\": \"member\", \"name\": \"计量器具 校准管理 顾问\", \"evidence\": \"original_assets/calibration-manage-pro/merkle_root\", \"member_merkle_root\": \"bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf\"}, {\"slug\": \"dev-onboarding\", \"role\": \"member\", \"name\": \"新人上手流程 顾问\", \"evidence\": \"original_assets/dev-onboarding/merkle_root\", \"member_merkle_root\": \"7146d0023c8122e544f09effae5710a7355a377748fa2e2eecfaa7814f864e8b\"}], \"team_lead\": \"contract-legal-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/calibration-manage-pro.md": "05c63fe7d828da8c47cc809ce1624c54ddc5de47d4155b04d79636006efbd4c0",
+    "agents/contract-legal-pro-team-lead.md": "b7a5cfe1f362a35cf3120ba981b121d42ff196b5170c7adebeeb8e949bec8f6a",
+    "agents/contract-legal-pro.md": "842ab3fed3ef7ccd406183175bdf034e6c585b0a63ab9018d31c9edab59a39a6",
+    "agents/dev-onboarding.md": "5185015e49d514ebd7617b9af16f080832b91d1ec77b9361a61bf1c8dbf240f0",
+    "plugin.json": "68c2d811973b3ef99e3cd3415e2fb91e07d061244766bbbcb5122f6f814b5f37",
+    "settings.json": "73e471e7335f898db98fc993d919c664db466de1f1a8544b941d5ee0d9a780b7"
+  }
+}

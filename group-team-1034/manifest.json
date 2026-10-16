@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1034",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1034",
+    "kind": "team",
+    "name": "项目记忆知识卡片专家",
+    "description": "擅长选型决策、数据准备与图表达人，覆盖长文编辑打磨全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-base-pro-01-team-lead",
+        "role": "lead",
+        "name": "项目记忆主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-base-pro-01",
+        "role": "member",
+        "name": "项目记忆 知识卡片 双向链接",
+        "evidence": "original_assets/knowledge-base-pro-01/merkle_root",
+        "member_merkle_root": "9af9956964705874e112abe21b517dc6714da065efbcbcdd1d776adfece062a2"
+      },
+      {
+        "slug": "chart-builder-expert",
+        "role": "member",
+        "name": "图表可视化制作专家",
+        "evidence": "original_assets/chart-builder-expert/merkle_root",
+        "member_merkle_root": "9053966d41b5d0a710c644a2bf1044a3105bed3c27743e8e3dd2f648c6c10bd0"
+      },
+      {
+        "slug": "longform-editing",
+        "role": "member",
+        "name": "长文编辑打磨 顾问",
+        "evidence": "original_assets/longform-editing/merkle_root",
+        "member_merkle_root": "84d102d594f87b7d46cdfd09033cfa749a032c0bed2fdb1112e5766fbb33dffe"
+      }
+    ],
+    "team_lead": "knowledge-base-pro-01-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0d8025e8d8d75bae",
+  "prompt_hash": "2de43b85d08aefc3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1034\", \"kind\": \"team\", \"name\": \"项目记忆知识卡片专家\", \"description\": \"擅长选型决策、数据准备与图表达人，覆盖长文编辑打磨全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-base-pro-01-team-lead\", \"role\": \"lead\", \"name\": \"项目记忆主理人\", \"evidence\": null}, {\"slug\": \"knowledge-base-pro-01\", \"role\": \"member\", \"name\": \"项目记忆 知识卡片 双向链接\", \"evidence\": \"original_assets/knowledge-base-pro-01/merkle_root\", \"member_merkle_root\": \"9af9956964705874e112abe21b517dc6714da065efbcbcdd1d776adfece062a2\"}, {\"slug\": \"chart-builder-expert\", \"role\": \"member\", \"name\": \"图表可视化制作专家\", \"evidence\": \"original_assets/chart-builder-expert/merkle_root\", \"member_merkle_root\": \"9053966d41b5d0a710c644a2bf1044a3105bed3c27743e8e3dd2f648c6c10bd0\"}, {\"slug\": \"longform-editing\", \"role\": \"member\", \"name\": \"长文编辑打磨 顾问\", \"evidence\": \"original_assets/longform-editing/merkle_root\", \"member_merkle_root\": \"84d102d594f87b7d46cdfd09033cfa749a032c0bed2fdb1112e5766fbb33dffe\"}], \"team_lead\": \"knowledge-base-pro-01-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/chart-builder-expert.md": "f1fbe9b6edfb0c47e717c17a12d71584f27bdaf0c62e92f0113b198753175d04",
+    "agents/knowledge-base-pro-01-team-lead.md": "24d8307bc619c380813c67f55a32f31105f255ad0244db974052d9285e80b397",
+    "agents/knowledge-base-pro-01.md": "cbee25ceccccda0132ce6979ece7c17feceb408134a84e3b104d25d483c0f3ed",
+    "agents/longform-editing.md": "b5c2987c9a6615e28de3ad8c3133418a4c18ca26fc394b22d826ad7d9445a2a1",
+    "plugin.json": "b274a2d32d0c1f82de2b7ea4d52c3a83cb4b8a75063ca5100691fca933af3b55",
+    "settings.json": "7d38d20b8c50c14f755f68ee1c8165c30eaa294ad90f9a6cdbf0dc38efc19da7"
+  }
+}

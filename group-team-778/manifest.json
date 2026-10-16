@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-778",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-778",
+    "kind": "team",
+    "name": "目标拆解任务分解专家",
+    "description": "目标拆解任务分解专家：围绕目标拆解，覆盖粒度一致／依赖显式／最小可行，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-goal-decompose-pro-team-lead",
+        "role": "lead",
+        "name": "目标拆解主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-goal-decompose-pro",
+        "role": "member",
+        "name": "目标拆解 任务分解 顾问",
+        "evidence": "original_assets/agent-goal-decompose-pro/merkle_root",
+        "member_merkle_root": "2a94e4fff3d1c68ba146320ea36682ac910c685ea932b07f9c083b28726ace8c"
+      },
+      {
+        "slug": "dashboard-spec-pro",
+        "role": "member",
+        "name": "看板规格 指标选型 顾问",
+        "evidence": "original_assets/dashboard-spec-pro/merkle_root",
+        "member_merkle_root": "f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6"
+      },
+      {
+        "slug": "api-contract-test",
+        "role": "member",
+        "name": "接口契约 兼容校验 顾问",
+        "evidence": "original_assets/api-contract-test/merkle_root",
+        "member_merkle_root": "46b3ec9a1590398609de04242bcb24d1ed4b92017abc0bd17fafc0fdfdeb8b4b"
+      }
+    ],
+    "team_lead": "agent-goal-decompose-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fbdb7af66e296119",
+  "prompt_hash": "50b7a89f572fef59",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-778\", \"kind\": \"team\", \"name\": \"目标拆解任务分解专家\", \"description\": \"目标拆解任务分解专家：围绕目标拆解，覆盖粒度一致／依赖显式／最小可行，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-goal-decompose-pro-team-lead\", \"role\": \"lead\", \"name\": \"目标拆解主理人\", \"evidence\": null}, {\"slug\": \"agent-goal-decompose-pro\", \"role\": \"member\", \"name\": \"目标拆解 任务分解 顾问\", \"evidence\": \"original_assets/agent-goal-decompose-pro/merkle_root\", \"member_merkle_root\": \"2a94e4fff3d1c68ba146320ea36682ac910c685ea932b07f9c083b28726ace8c\"}, {\"slug\": \"dashboard-spec-pro\", \"role\": \"member\", \"name\": \"看板规格 指标选型 顾问\", \"evidence\": \"original_assets/dashboard-spec-pro/merkle_root\", \"member_merkle_root\": \"f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6\"}, {\"slug\": \"api-contract-test\", \"role\": \"member\", \"name\": \"接口契约 兼容校验 顾问\", \"evidence\": \"original_assets/api-contract-test/merkle_root\", \"member_merkle_root\": \"46b3ec9a1590398609de04242bcb24d1ed4b92017abc0bd17fafc0fdfdeb8b4b\"}], \"team_lead\": \"agent-goal-decompose-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-goal-decompose-pro-team-lead.md": "196d42e432e12072ca55ebc379a6ab8763fac6a27112c8a069c2d51fb55f2cff",
+    "agents/agent-goal-decompose-pro.md": "4f0e96dec4a37cd351813572e7e2583fd1ebd53019a5d2f1944f91349b35bca8",
+    "agents/api-contract-test.md": "5932b7b76b9001c57b420188f07368254d09f459078f540a76433504bd945618",
+    "agents/dashboard-spec-pro.md": "14c51ee8cfb431d66f700534ef3669f42fb479ec59cc26ea88a918431550cd1f",
+    "plugin.json": "a108969cdd6d1e36a7c0aae8736d1133545e02929c592ee9e10bd60346e52979",
+    "settings.json": "b009c514e919b18186947803afd0a5cdc132cc96465413793548e9c2de44bb52"
+  }
+}

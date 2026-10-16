@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-175",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-175",
+    "kind": "team",
+    "name": "设备 旅游 教培 团队",
+    "description": "设备 旅游 教培 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "oee-improve-pro-team-lead",
+        "role": "lead",
+        "name": "设备效率主理人",
+        "evidence": null
+      },
+      {
+        "slug": "oee-improve-pro",
+        "role": "member",
+        "name": "设备效率 损失分析 顾问",
+        "evidence": "original_assets/oee-improve-pro/merkle_root",
+        "member_merkle_root": "3675084f2a33940549806df917ce38ac42c90b13f28fd8334fa5c97101c8d8b1"
+      },
+      {
+        "slug": "travel-guide-pro",
+        "role": "member",
+        "name": "旅游攻略 自由行 行程规划",
+        "evidence": "original_assets/travel-guide-pro/merkle_root",
+        "member_merkle_root": "035a9bd761d05c7d96316051e4cdf345cfbbfed97b2f768d2e2c96346ec43049"
+      },
+      {
+        "slug": "edu-institution-diagnose",
+        "role": "member",
+        "name": "教培经营 续费率 顾问",
+        "evidence": "original_assets/edu-institution-diagnose/merkle_root",
+        "member_merkle_root": "861a7da5aafe126b4af0c9da4be6210bf70973decfcc9ae1272e6d10e20ad89d"
+      }
+    ],
+    "team_lead": "oee-improve-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ff2f54c84d69ef97",
+  "prompt_hash": "d1759b49817edcc6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-175\", \"kind\": \"team\", \"name\": \"设备 旅游 教培 团队\", \"description\": \"设备 旅游 教培 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"oee-improve-pro-team-lead\", \"role\": \"lead\", \"name\": \"设备效率主理人\", \"evidence\": null}, {\"slug\": \"oee-improve-pro\", \"role\": \"member\", \"name\": \"设备效率 损失分析 顾问\", \"evidence\": \"original_assets/oee-improve-pro/merkle_root\", \"member_merkle_root\": \"3675084f2a33940549806df917ce38ac42c90b13f28fd8334fa5c97101c8d8b1\"}, {\"slug\": \"travel-guide-pro\", \"role\": \"member\", \"name\": \"旅游攻略 自由行 行程规划\", \"evidence\": \"original_assets/travel-guide-pro/merkle_root\", \"member_merkle_root\": \"035a9bd761d05c7d96316051e4cdf345cfbbfed97b2f768d2e2c96346ec43049\"}, {\"slug\": \"edu-institution-diagnose\", \"role\": \"member\", \"name\": \"教培经营 续费率 顾问\", \"evidence\": \"original_assets/edu-institution-diagnose/merkle_root\", \"member_merkle_root\": \"861a7da5aafe126b4af0c9da4be6210bf70973decfcc9ae1272e6d10e20ad89d\"}], \"team_lead\": \"oee-improve-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/edu-institution-diagnose.md": "e60df8e805c7a44698b6a9f8784187059320b9f5a391e698947bfb44894f1016",
+    "agents/oee-improve-pro-team-lead.md": "a5691bff89e2dd76fcbf532865ffd9608a69c1678a576d8e800ba6c0fcf207f2",
+    "agents/oee-improve-pro.md": "913a5c38afb792045f2366c24d53b61eafec6481c3911f71c857f610753ef6b8",
+    "agents/travel-guide-pro.md": "f32590741a867164cacefe426cd07bf1744953053633691922c9e579db450a6e",
+    "plugin.json": "3b729f0e9ca000ac168f870b79938dccfbd55f15e13404bae78e0c2e8e64f66c",
+    "settings.json": "af1745f646278dc95a1abe96094d611b2e0b18fb197817cc92d88a58669b2b60"
+  }
+}

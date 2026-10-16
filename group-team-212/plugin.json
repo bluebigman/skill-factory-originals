@@ -1,0 +1,126 @@
+{
+  "agentName": "config-compliance-check-pro-team-lead",
+  "agents": [
+    "./agents/config-compliance-check-pro-team-lead.md",
+    "./agents/config-compliance-check-pro.md",
+    "./agents/api-perf-pro.md",
+    "./agents/cli-helper-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 敏感标注",
+    "zh": "帮我处理敏感标注"
+  },
+  "description": "Config Compliance Boundary Checker team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "敏感 接口 命令 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Config Compliance Boundary Checker Team",
+    "zh": "敏感 接口 命令 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "config-compliance-check-pro-team-lead",
+      "name": {
+        "en": "敏感标注主理人",
+        "zh": "敏感标注主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/config-compliance-check-pro.png",
+      "id": "config-compliance-check-pro",
+      "name": {
+        "en": "Config Compliance Boundary Checker",
+        "zh": "敏感标注 缺省兜底 边界约束"
+      },
+      "profession": {
+        "en": "Config Compliance Boundary Checker",
+        "zh": "敏感标注 缺省兜底 边界约束"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-perf-pro.png",
+      "id": "api-perf-pro",
+      "name": {
+        "en": "API Performance Doctor",
+        "zh": "接口响应 耗时定位 性能优化"
+      },
+      "profession": {
+        "en": "API Performance Doctor",
+        "zh": "接口响应 耗时定位 性能优化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cli-helper-expert.png",
+      "id": "cli-helper-expert",
+      "name": {
+        "en": "CmdPro",
+        "zh": "命令行助手 脚本生成"
+      },
+      "profession": {
+        "en": "CmdPro",
+        "zh": "命令行助手 脚本生成"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-212",
+  "plugin": "group-team-212",
+  "profession": {
+    "en": "Config Compliance Boundary Checker Collaboration Team",
+    "zh": "敏感 接口 命令 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 敏感标注",
+      "zh": "帮我处理敏感标注"
+    },
+    {
+      "en": "Plan 接口响应",
+      "zh": "帮我规划接口响应"
+    },
+    {
+      "en": "Review 命令行助手",
+      "zh": "帮我检查命令行助手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "敏感标注",
+      "zh": "敏感标注"
+    },
+    {
+      "en": "接口响应",
+      "zh": "接口响应"
+    },
+    {
+      "en": "命令行助手",
+      "zh": "命令行助手"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "config-compliance-check-pro-team-lead",
+    "memberAgents": [
+      "config-compliance-check-pro",
+      "api-perf-pro",
+      "cli-helper-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

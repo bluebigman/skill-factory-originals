@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-982",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-982",
+    "kind": "team",
+    "name": "文案钩子打磨顾问专家",
+    "description": "擅长痛点前置、一个卖点与行动明确，覆盖文案钩子打磨全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "media-process-pro-team-lead",
+        "role": "lead",
+        "name": "政务设计规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "media-process-pro",
+        "role": "member",
+        "name": "政务设计规范 一键成片",
+        "evidence": "original_assets/media-process-pro/merkle_root",
+        "member_merkle_root": "5dde9cc8493bd344606f88ef638a3415c90873663b772baa5235772596f0d25e"
+      },
+      {
+        "slug": "copy-hook-craft",
+        "role": "member",
+        "name": "文案钩子打磨 顾问",
+        "evidence": "original_assets/copy-hook-craft/merkle_root",
+        "member_merkle_root": "ddb9b5f7d12333ea0c3e9a52593c05dc044d1fbe239d85f4e282785eccd4f1ba"
+      },
+      {
+        "slug": "kol-selection-pro",
+        "role": "member",
+        "name": "达人筛选 匹配评估 顾问",
+        "evidence": "original_assets/kol-selection-pro/merkle_root",
+        "member_merkle_root": "2b3468f0435208beff7ae7229862b5b5b0e052dec0ad8b93a995cb00df5ef18c"
+      }
+    ],
+    "team_lead": "media-process-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "153379cb2b329c3f",
+  "prompt_hash": "e3e9508366330497",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-982\", \"kind\": \"team\", \"name\": \"文案钩子打磨顾问专家\", \"description\": \"擅长痛点前置、一个卖点与行动明确，覆盖文案钩子打磨全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"media-process-pro-team-lead\", \"role\": \"lead\", \"name\": \"政务设计规范主理人\", \"evidence\": null}, {\"slug\": \"media-process-pro\", \"role\": \"member\", \"name\": \"政务设计规范 一键成片\", \"evidence\": \"original_assets/media-process-pro/merkle_root\", \"member_merkle_root\": \"5dde9cc8493bd344606f88ef638a3415c90873663b772baa5235772596f0d25e\"}, {\"slug\": \"copy-hook-craft\", \"role\": \"member\", \"name\": \"文案钩子打磨 顾问\", \"evidence\": \"original_assets/copy-hook-craft/merkle_root\", \"member_merkle_root\": \"ddb9b5f7d12333ea0c3e9a52593c05dc044d1fbe239d85f4e282785eccd4f1ba\"}, {\"slug\": \"kol-selection-pro\", \"role\": \"member\", \"name\": \"达人筛选 匹配评估 顾问\", \"evidence\": \"original_assets/kol-selection-pro/merkle_root\", \"member_merkle_root\": \"2b3468f0435208beff7ae7229862b5b5b0e052dec0ad8b93a995cb00df5ef18c\"}], \"team_lead\": \"media-process-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/copy-hook-craft.md": "7e12b84fed0a31edd8298645329d3783da5acf33568f4bafcd3a740b922cd21e",
+    "agents/kol-selection-pro.md": "2850f0b9c2586bf24395f5458b64911c9f1230ad67d7e889eb0e216914f08bf4",
+    "agents/media-process-pro-team-lead.md": "3e9ed594e13b5e8eb80de21267a57d3a3834a225d402724868e4468f22c460d3",
+    "agents/media-process-pro.md": "8c04835ffebcb0d287f2874dd3096bcab73f35fe0aed2b67218b127f636229d1",
+    "plugin.json": "701e0fd1d970b0a5504a6e4077b824ca079474246c8da32a0a854b55e92c2a3b",
+    "settings.json": "b8066ddf38a70a357433164a5bdb5c5dd3bd356e40c61fd3a2ec4f4fd6617382"
+  }
+}

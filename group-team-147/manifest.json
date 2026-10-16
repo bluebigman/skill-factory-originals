@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-147",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-147",
+    "kind": "team",
+    "name": "过程 服务 持续 团队",
+    "description": "过程 服务 持续 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "quality-spc-pro-team-lead",
+        "role": "lead",
+        "name": "过程质量主理人",
+        "evidence": null
+      },
+      {
+        "slug": "quality-spc-pro",
+        "role": "member",
+        "name": "过程质量 控制图 顾问",
+        "evidence": "original_assets/quality-spc-pro/merkle_root",
+        "member_merkle_root": "90785d362b85fa7a97a7443f9371eb26aa2e390250f7309e127817ecb3dd50bd"
+      },
+      {
+        "slug": "sla-define",
+        "role": "member",
+        "name": "服务标准 响应时限 顾问",
+        "evidence": "original_assets/sla-define/merkle_root",
+        "member_merkle_root": "305cf99f50b89f39421335248a7b6d37b67bc8d6a7b147ccada75bf4f148396d"
+      },
+      {
+        "slug": "agent-continuous-check",
+        "role": "member",
+        "name": "持续检查 定时 顾问",
+        "evidence": "original_assets/agent-continuous-check/merkle_root",
+        "member_merkle_root": "39ea865c6f1aa1aad1af6e268e4fc2ecc69a29d9b8c378e1cb60df192857149d"
+      }
+    ],
+    "team_lead": "quality-spc-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "521b16310d78c026",
+  "prompt_hash": "0c3dbbe62569bd7e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-147\", \"kind\": \"team\", \"name\": \"过程 服务 持续 团队\", \"description\": \"过程 服务 持续 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"quality-spc-pro-team-lead\", \"role\": \"lead\", \"name\": \"过程质量主理人\", \"evidence\": null}, {\"slug\": \"quality-spc-pro\", \"role\": \"member\", \"name\": \"过程质量 控制图 顾问\", \"evidence\": \"original_assets/quality-spc-pro/merkle_root\", \"member_merkle_root\": \"90785d362b85fa7a97a7443f9371eb26aa2e390250f7309e127817ecb3dd50bd\"}, {\"slug\": \"sla-define\", \"role\": \"member\", \"name\": \"服务标准 响应时限 顾问\", \"evidence\": \"original_assets/sla-define/merkle_root\", \"member_merkle_root\": \"305cf99f50b89f39421335248a7b6d37b67bc8d6a7b147ccada75bf4f148396d\"}, {\"slug\": \"agent-continuous-check\", \"role\": \"member\", \"name\": \"持续检查 定时 顾问\", \"evidence\": \"original_assets/agent-continuous-check/merkle_root\", \"member_merkle_root\": \"39ea865c6f1aa1aad1af6e268e4fc2ecc69a29d9b8c378e1cb60df192857149d\"}], \"team_lead\": \"quality-spc-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-continuous-check.md": "05837dade1fcf3e74cc4b90f9ee499a033cf6f6097921c06d74082a2add67e04",
+    "agents/quality-spc-pro-team-lead.md": "b374dfdf754516c65d6d4a8f060b58d3d4067d7bda582d9173f6183f34915378",
+    "agents/quality-spc-pro.md": "a171c7f19969e4313e661f0891b913f90debc542e96bb9a2c885df3f34042c47",
+    "agents/sla-define.md": "9cf9533708c7f4854e4ff48a67c9084112b3d612520888d17af1cc462d043040",
+    "plugin.json": "dbe5982cee1b714fb492c9f87ddc4d6ec4ccb270a450463b9b6baa204a103eb9",
+    "settings.json": "97169505f6d75f2f65d8b48832ddecc96c495827ee031708a8fbcb5b37a9a9f8"
+  }
+}

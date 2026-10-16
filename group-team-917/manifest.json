@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-917",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-917",
+    "kind": "team",
+    "name": "行情研判专家",
+    "description": "擅长行为关联、按批次分层与看曲线，覆盖留存分层分析全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "toolkit-pro-07-fixed-team-lead",
+        "role": "lead",
+        "name": "行情研判主理人",
+        "evidence": null
+      },
+      {
+        "slug": "toolkit-pro-07-fixed",
+        "role": "member",
+        "name": "行情研判 收入筹划 图像比对",
+        "evidence": "original_assets/toolkit-pro-07-fixed/merkle_root",
+        "member_merkle_root": "f069129cb8c47b3acee22d306f7a8a9bbabf0c5b2b5fa1d0a0d2c1586628d82f"
+      },
+      {
+        "slug": "cohort-retention",
+        "role": "member",
+        "name": "留存分层分析 助手",
+        "evidence": "original_assets/cohort-retention/merkle_root",
+        "member_merkle_root": "895b369d3db4d09bda2777f5fe3178edcaa7922bc915703f654546c637bf15de"
+      },
+      {
+        "slug": "data-clean-pro-02-fixed",
+        "role": "member",
+        "name": "医疗行政 结构化输出 批量处理",
+        "evidence": "original_assets/data-clean-pro-02-fixed/merkle_root",
+        "member_merkle_root": "66c2c874ef4a708064e5c448fc3ea840cde7308dab1698a898b345df8785ffa6"
+      }
+    ],
+    "team_lead": "toolkit-pro-07-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "500d85b0678b79de",
+  "prompt_hash": "886c09979e872833",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-917\", \"kind\": \"team\", \"name\": \"行情研判专家\", \"description\": \"擅长行为关联、按批次分层与看曲线，覆盖留存分层分析全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"toolkit-pro-07-fixed-team-lead\", \"role\": \"lead\", \"name\": \"行情研判主理人\", \"evidence\": null}, {\"slug\": \"toolkit-pro-07-fixed\", \"role\": \"member\", \"name\": \"行情研判 收入筹划 图像比对\", \"evidence\": \"original_assets/toolkit-pro-07-fixed/merkle_root\", \"member_merkle_root\": \"f069129cb8c47b3acee22d306f7a8a9bbabf0c5b2b5fa1d0a0d2c1586628d82f\"}, {\"slug\": \"cohort-retention\", \"role\": \"member\", \"name\": \"留存分层分析 助手\", \"evidence\": \"original_assets/cohort-retention/merkle_root\", \"member_merkle_root\": \"895b369d3db4d09bda2777f5fe3178edcaa7922bc915703f654546c637bf15de\"}, {\"slug\": \"data-clean-pro-02-fixed\", \"role\": \"member\", \"name\": \"医疗行政 结构化输出 批量处理\", \"evidence\": \"original_assets/data-clean-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"66c2c874ef4a708064e5c448fc3ea840cde7308dab1698a898b345df8785ffa6\"}], \"team_lead\": \"toolkit-pro-07-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cohort-retention.md": "10ca02d4ed429c9d6e676d3671f7352689aa75af11003ee5b6737fb014aaf849",
+    "agents/data-clean-pro-02-fixed.md": "5f4ee30328756db61aef73593bf321baa371c2d9ebb191dc31ade5a5a0a6b9e0",
+    "agents/toolkit-pro-07-fixed-team-lead.md": "e980b717111e365bcb78eec511943f8c358dd8329dd3ba9148278b2e96997002",
+    "agents/toolkit-pro-07-fixed.md": "6d3ef376fd6bdbfc1850f4452c63c718f5d552dc0041040418e0c6fbec68f50d",
+    "plugin.json": "069cd007a1dd007cea8aa69f8e9428d49c6d00e92a6efaa813ef2812e2bff09a",
+    "settings.json": "072915c85a3065dfd25f44f2acbe0a30ab3313e84eef2656fd187c0dc8a5d6b5"
+  }
+}

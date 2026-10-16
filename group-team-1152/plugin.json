@@ -1,0 +1,126 @@
+{
+  "agentName": "presentation-timing-team-lead",
+  "agents": [
+    "./agents/presentation-timing-team-lead.md",
+    "./agents/presentation-timing.md",
+    "./agents/content-archive-plan.md",
+    "./agents/office-file-io.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 演示时长控制",
+    "zh": "帮我处理演示时长控制"
+  },
+  "description": "presentation-timing team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 演示时长控制 requirements, output three deliverables: 按页估算, 核心优先, 预留问答. Verifiable end-to-end, evidence per step.",
+    "zh": "输入演示时长控制相关需求，输出按页估算、核心优先、预留问答三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "presentation-timing Team",
+    "zh": "演示时长控制专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "presentation-timing-team-lead",
+      "name": {
+        "en": "演示时长控制主理人",
+        "zh": "演示时长控制主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/presentation-timing.png",
+      "id": "presentation-timing",
+      "name": {
+        "en": "presentation-timing",
+        "zh": "演示时长控制 顾问"
+      },
+      "profession": {
+        "en": "presentation-timing",
+        "zh": "演示时长控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-archive-plan.png",
+      "id": "content-archive-plan",
+      "name": {
+        "en": "content-archive-plan",
+        "zh": "内容归档方案 顾问"
+      },
+      "profession": {
+        "en": "content-archive-plan",
+        "zh": "内容归档方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/office-file-io.png",
+      "id": "office-file-io",
+      "name": {
+        "en": "office-file-io",
+        "zh": "Office 文件读写 助手"
+      },
+      "profession": {
+        "en": "office-file-io",
+        "zh": "Office 文件读写 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1152",
+  "plugin": "group-team-1152",
+  "profession": {
+    "en": "presentation-timing Collaboration Team",
+    "zh": "演示时长控制专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 演示时长控制",
+      "zh": "帮我处理演示时长控制"
+    },
+    {
+      "en": "Plan 内容归档方案",
+      "zh": "帮我规划内容归档方案"
+    },
+    {
+      "en": "Review Office",
+      "zh": "帮我检查Office"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按页估算",
+      "zh": "按页估算"
+    },
+    {
+      "en": "核心优先",
+      "zh": "核心优先"
+    },
+    {
+      "en": "预留问答",
+      "zh": "预留问答"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "presentation-timing-team-lead",
+    "memberAgents": [
+      "presentation-timing",
+      "content-archive-plan",
+      "office-file-io"
+    ]
+  },
+  "version": "1.0.0"
+}

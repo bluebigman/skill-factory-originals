@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-658",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-658",
+    "kind": "team",
+    "name": "国际物流时效管理专家",
+    "description": "国际物流时效管理专家：围绕跨时区会议，覆盖时区轮换／议程前置／结论留档，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "intl-meeting-coach-team-lead",
+        "role": "lead",
+        "name": "跨时区会议主理人",
+        "evidence": null
+      },
+      {
+        "slug": "intl-meeting-coach",
+        "role": "member",
+        "name": "跨时区会议 组织 教练",
+        "evidence": "original_assets/intl-meeting-coach/merkle_root",
+        "member_merkle_root": "b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1"
+      },
+      {
+        "slug": "intl-logistics-pro",
+        "role": "member",
+        "name": "国际物流 时效管理 顾问",
+        "evidence": "original_assets/intl-logistics-pro/merkle_root",
+        "member_merkle_root": "050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0"
+      },
+      {
+        "slug": "finance-toolkit-pro",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro/merkle_root",
+        "member_merkle_root": "3626d1435ab9ed2d8316f44a50811ccf8439a181c9aebfd98e215c021beac685"
+      }
+    ],
+    "team_lead": "intl-meeting-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e7e3aba8f0c41bbc",
+  "prompt_hash": "21a37418c6b6a30d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-658\", \"kind\": \"team\", \"name\": \"国际物流时效管理专家\", \"description\": \"国际物流时效管理专家：围绕跨时区会议，覆盖时区轮换／议程前置／结论留档，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"intl-meeting-coach-team-lead\", \"role\": \"lead\", \"name\": \"跨时区会议主理人\", \"evidence\": null}, {\"slug\": \"intl-meeting-coach\", \"role\": \"member\", \"name\": \"跨时区会议 组织 教练\", \"evidence\": \"original_assets/intl-meeting-coach/merkle_root\", \"member_merkle_root\": \"b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1\"}, {\"slug\": \"intl-logistics-pro\", \"role\": \"member\", \"name\": \"国际物流 时效管理 顾问\", \"evidence\": \"original_assets/intl-logistics-pro/merkle_root\", \"member_merkle_root\": \"050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0\"}, {\"slug\": \"finance-toolkit-pro\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro/merkle_root\", \"member_merkle_root\": \"3626d1435ab9ed2d8316f44a50811ccf8439a181c9aebfd98e215c021beac685\"}], \"team_lead\": \"intl-meeting-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/finance-toolkit-pro.md": "e2389c49a5ff7c013910c6c69bec74fe4e1ef1d6e700d4cfe4018d3270e1f3bc",
+    "agents/intl-logistics-pro.md": "63fadeb09e5c64ce2b015e5ad32a29da84f43d9ee1e8aaa9f8d882e9a4a62831",
+    "agents/intl-meeting-coach-team-lead.md": "f9fdc58606f5397f7015b717d9965db6d4ed4f4a11f03dabed0cd7003ba93861",
+    "agents/intl-meeting-coach.md": "e6d12bedd8aa2b260882ce3e5233fdab64c8a1a7839347fb42b607bc887ba04c",
+    "plugin.json": "16f79523ed6e2662eb308bb161c2a5416114db0be52604d68b158f674da84f47",
+    "settings.json": "565638b6707387506db5180ce428b0b40e3a672e06720ca0a72974cfc184c00e"
+  }
+}

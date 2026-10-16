@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1251",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1251",
+    "kind": "team",
+    "name": "落地页专家",
+    "description": "输入落地页相关需求，输出首屏说清、单一目标、证据支撑三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "landing-page-opt-team-lead",
+        "role": "lead",
+        "name": "落地页主理人",
+        "evidence": null
+      },
+      {
+        "slug": "landing-page-opt",
+        "role": "member",
+        "name": "落地页 转化优化 顾问",
+        "evidence": "original_assets/landing-page-opt/merkle_root",
+        "member_merkle_root": "404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87"
+      },
+      {
+        "slug": "global-content-calendar",
+        "role": "member",
+        "name": "全球内容 排期协调 顾问",
+        "evidence": "original_assets/global-content-calendar/merkle_root",
+        "member_merkle_root": "e23ebe26f1331d2c7511239619168ed058a0ee6b51a318030160ec6233d9d361"
+      },
+      {
+        "slug": "editorial-review-flow",
+        "role": "member",
+        "name": "编辑评审流程 顾问",
+        "evidence": "original_assets/editorial-review-flow/merkle_root",
+        "member_merkle_root": "3f783299fc712e228a394c81420bc7ddf7f6bbab245c1e07bd84d64e0380ab7c"
+      }
+    ],
+    "team_lead": "landing-page-opt-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d176866d5e2a4af8",
+  "prompt_hash": "e3838765bcc2e828",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1251\", \"kind\": \"team\", \"name\": \"落地页专家\", \"description\": \"输入落地页相关需求，输出首屏说清、单一目标、证据支撑三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"landing-page-opt-team-lead\", \"role\": \"lead\", \"name\": \"落地页主理人\", \"evidence\": null}, {\"slug\": \"landing-page-opt\", \"role\": \"member\", \"name\": \"落地页 转化优化 顾问\", \"evidence\": \"original_assets/landing-page-opt/merkle_root\", \"member_merkle_root\": \"404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87\"}, {\"slug\": \"global-content-calendar\", \"role\": \"member\", \"name\": \"全球内容 排期协调 顾问\", \"evidence\": \"original_assets/global-content-calendar/merkle_root\", \"member_merkle_root\": \"e23ebe26f1331d2c7511239619168ed058a0ee6b51a318030160ec6233d9d361\"}, {\"slug\": \"editorial-review-flow\", \"role\": \"member\", \"name\": \"编辑评审流程 顾问\", \"evidence\": \"original_assets/editorial-review-flow/merkle_root\", \"member_merkle_root\": \"3f783299fc712e228a394c81420bc7ddf7f6bbab245c1e07bd84d64e0380ab7c\"}], \"team_lead\": \"landing-page-opt-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/editorial-review-flow.md": "ddf4453b4cfc7f8ea1305475ec866d702548fc38dfabc9d35c9749f7406aa4dc",
+    "agents/global-content-calendar.md": "eef44942178430581a70708c462bd39e80b02e5a8835d3759184d5ac3fb8b997",
+    "agents/landing-page-opt-team-lead.md": "4b666a52d63ad1d3b2a4d57916f193a9099dd1c74ec8cf3aecbc84d7210a762a",
+    "agents/landing-page-opt.md": "4667e8fb6368796809e825349906be667f7df7f15064dcad739ebdd6cb1a1c5c",
+    "plugin.json": "76432d997ed26c9028e02502d4a28bd9f795073e812177d48a0e08322925b240",
+    "settings.json": "4a7fe435410425c34c27f58e0e553b63c5fb0bab1ac9b93a013180bda17cf4d9"
+  }
+}

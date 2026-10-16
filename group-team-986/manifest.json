@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-986",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-986",
+    "kind": "team",
+    "name": "投放管理预算护栏专家",
+    "description": "投放管理预算护栏专家：围绕用户内容，覆盖降低门槛／即时回应／激励分层，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ugc-operation-team-lead",
+        "role": "lead",
+        "name": "用户内容主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ugc-operation",
+        "role": "member",
+        "name": "用户内容 运营机制 顾问",
+        "evidence": "original_assets/ugc-operation/merkle_root",
+        "member_merkle_root": "8285e109e6c4f8cfe0eae3cfdc99410141ebbebf0d3d74595339240bb7e5b2d6"
+      },
+      {
+        "slug": "microcopy-coach",
+        "role": "member",
+        "name": "界面文案 撰写 教练",
+        "evidence": "original_assets/microcopy-coach/merkle_root",
+        "member_merkle_root": "dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2"
+      },
+      {
+        "slug": "paid-ads-guard",
+        "role": "member",
+        "name": "投放管理 预算护栏 顾问",
+        "evidence": "original_assets/paid-ads-guard/merkle_root",
+        "member_merkle_root": "c2a5da5cb35d29d25b64c70b521b0d3f7418159b5952a7bfac4a5c03e8329240"
+      }
+    ],
+    "team_lead": "ugc-operation-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "46cdea244920016d",
+  "prompt_hash": "c82c7bbcd507aeda",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-986\", \"kind\": \"team\", \"name\": \"投放管理预算护栏专家\", \"description\": \"投放管理预算护栏专家：围绕用户内容，覆盖降低门槛／即时回应／激励分层，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ugc-operation-team-lead\", \"role\": \"lead\", \"name\": \"用户内容主理人\", \"evidence\": null}, {\"slug\": \"ugc-operation\", \"role\": \"member\", \"name\": \"用户内容 运营机制 顾问\", \"evidence\": \"original_assets/ugc-operation/merkle_root\", \"member_merkle_root\": \"8285e109e6c4f8cfe0eae3cfdc99410141ebbebf0d3d74595339240bb7e5b2d6\"}, {\"slug\": \"microcopy-coach\", \"role\": \"member\", \"name\": \"界面文案 撰写 教练\", \"evidence\": \"original_assets/microcopy-coach/merkle_root\", \"member_merkle_root\": \"dd16238be6bdd18d3dc749991c2e691fd76e093bdcdfe87908627925692a71b2\"}, {\"slug\": \"paid-ads-guard\", \"role\": \"member\", \"name\": \"投放管理 预算护栏 顾问\", \"evidence\": \"original_assets/paid-ads-guard/merkle_root\", \"member_merkle_root\": \"c2a5da5cb35d29d25b64c70b521b0d3f7418159b5952a7bfac4a5c03e8329240\"}], \"team_lead\": \"ugc-operation-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/microcopy-coach.md": "b74770a40b2d28b3fb73c8532afae1bb32db11b5b7ed148a0f8a263d3f8d5d21",
+    "agents/paid-ads-guard.md": "83e2b777492942e92afc95ef2f98364e399a22820bcb21bb7e68546171a3c936",
+    "agents/ugc-operation-team-lead.md": "f703a1dcda063e8b869f2e461ec74dd98e38da1a431ec616bf4e88cbe73b6d18",
+    "agents/ugc-operation.md": "649b827a2d2a63f2aa4cffd1bb6b544612438e3835fee806fc2b7a4f56395e6a",
+    "plugin.json": "bf1ee096f223cc88bd45b716d5bec17ad36991f9d975295afa2406abda1f353d",
+    "settings.json": "0afbc446c5f12da5e1fa2d2999344ea1b8783bd4fdfec50d80b29745077101c5"
+  }
+}

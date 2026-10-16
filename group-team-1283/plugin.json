@@ -1,0 +1,126 @@
+{
+  "agentName": "report-reproduce-team-lead",
+  "agents": [
+    "./agents/report-reproduce-team-lead.md",
+    "./agents/report-reproduce.md",
+    "./agents/tool-interface-design-pro.md",
+    "./agents/insight-report-layer.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 报表可复现",
+    "zh": "帮我处理报表可复现"
+  },
+  "description": "report-reproduce team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 报表可复现, covers 环境声明 / 结果对账 / 定时执行, delivering structured results and actionable checklists.",
+    "zh": "报表可复现专家：围绕报表可复现，覆盖环境声明／结果对账／定时执行，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "report-reproduce Team",
+    "zh": "报表可复现专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "report-reproduce-team-lead",
+      "name": {
+        "en": "报表可复现主理人",
+        "zh": "报表可复现主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/report-reproduce.png",
+      "id": "report-reproduce",
+      "name": {
+        "en": "report-reproduce",
+        "zh": "报表可复现 顾问"
+      },
+      "profession": {
+        "en": "report-reproduce",
+        "zh": "报表可复现 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tool-interface-design-pro.png",
+      "id": "tool-interface-design-pro",
+      "name": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "profession": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/insight-report-layer.png",
+      "id": "insight-report-layer",
+      "name": {
+        "en": "insight-report-layer",
+        "zh": "洞察报告分层 顾问"
+      },
+      "profession": {
+        "en": "insight-report-layer",
+        "zh": "洞察报告分层 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1283",
+  "plugin": "group-team-1283",
+  "profession": {
+    "en": "report-reproduce Collaboration Team",
+    "zh": "报表可复现专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报表可复现",
+      "zh": "帮我处理报表可复现"
+    },
+    {
+      "en": "Plan 工具设计",
+      "zh": "帮我规划工具设计"
+    },
+    {
+      "en": "Review 洞察报告分层",
+      "zh": "帮我检查洞察报告分层"
+    }
+  ],
+  "tags": [
+    {
+      "en": "环境声明",
+      "zh": "环境声明"
+    },
+    {
+      "en": "结果对账",
+      "zh": "结果对账"
+    },
+    {
+      "en": "定时执行",
+      "zh": "定时执行"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "report-reproduce-team-lead",
+    "memberAgents": [
+      "report-reproduce",
+      "tool-interface-design-pro",
+      "insight-report-layer"
+    ]
+  },
+  "version": "1.0.0"
+}

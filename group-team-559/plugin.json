@@ -1,0 +1,126 @@
+{
+  "agentName": "remote-team-coach-team-lead",
+  "agents": [
+    "./agents/remote-team-coach-team-lead.md",
+    "./agents/remote-team-coach.md",
+    "./agents/cs-qbr-pro.md",
+    "./agents/pipeline-review-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 远程团队",
+    "zh": "帮我处理远程团队"
+  },
+  "description": "remote-team-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 远程团队, covers 默认书面 / 响应约定 / 异步优先, delivering structured results and actionable checklists.",
+    "zh": "客户复盘季度会议专家：围绕远程团队，覆盖默认书面／响应约定／异步优先，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "remote-team-coach Team",
+    "zh": "客户复盘季度会议专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "remote-team-coach-team-lead",
+      "name": {
+        "en": "远程团队主理人",
+        "zh": "远程团队主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/remote-team-coach.png",
+      "id": "remote-team-coach",
+      "name": {
+        "en": "remote-team-coach",
+        "zh": "远程团队 协作规范 教练"
+      },
+      "profession": {
+        "en": "remote-team-coach",
+        "zh": "远程团队 协作规范 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cs-qbr-pro.png",
+      "id": "cs-qbr-pro",
+      "name": {
+        "en": "cs-qbr-pro",
+        "zh": "客户复盘 季度会议 顾问"
+      },
+      "profession": {
+        "en": "cs-qbr-pro",
+        "zh": "客户复盘 季度会议 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pipeline-review-pro.png",
+      "id": "pipeline-review-pro",
+      "name": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "profession": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-559",
+  "plugin": "group-team-559",
+  "profession": {
+    "en": "remote-team-coach Collaboration Team",
+    "zh": "客户复盘季度会议专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 远程团队",
+      "zh": "帮我处理远程团队"
+    },
+    {
+      "en": "Plan 客户复盘",
+      "zh": "帮我规划客户复盘"
+    },
+    {
+      "en": "Review 销售漏斗",
+      "zh": "帮我检查销售漏斗"
+    }
+  ],
+  "tags": [
+    {
+      "en": "默认书面",
+      "zh": "默认书面"
+    },
+    {
+      "en": "响应约定",
+      "zh": "响应约定"
+    },
+    {
+      "en": "异步优先",
+      "zh": "异步优先"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "remote-team-coach-team-lead",
+    "memberAgents": [
+      "remote-team-coach",
+      "cs-qbr-pro",
+      "pipeline-review-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

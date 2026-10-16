@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-239",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-239",
+    "kind": "team",
+    "name": "内容 文档 场景 团队",
+    "description": "内容 文档 场景 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-repurposing-pro-team-lead",
+        "role": "lead",
+        "name": "内容复用主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-repurposing-pro",
+        "role": "member",
+        "name": "内容复用 一稿多投 顾问",
+        "evidence": "original_assets/content-repurposing-pro/merkle_root",
+        "member_merkle_root": "9be81c5fb8771f7bc8d21c9f22a164e2da2fc0617751bfd792bc6c350b106731"
+      },
+      {
+        "slug": "doc-batch-process",
+        "role": "member",
+        "name": "文档批处 模板套用 顾问",
+        "evidence": "original_assets/doc-batch-process/merkle_root",
+        "member_merkle_root": "1f5eb82a5d7a0122dabab8fb1360324f5685082c9676704fde1029436e6f2ed0"
+      },
+      {
+        "slug": "scene-narrative-pro",
+        "role": "member",
+        "name": "场景叙事 氛围营造 顾问",
+        "evidence": "original_assets/scene-narrative-pro/merkle_root",
+        "member_merkle_root": "31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb"
+      }
+    ],
+    "team_lead": "content-repurposing-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "bb8546b6e68a404d",
+  "prompt_hash": "f2747ed7b3bcc5bf",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-239\", \"kind\": \"team\", \"name\": \"内容 文档 场景 团队\", \"description\": \"内容 文档 场景 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-repurposing-pro-team-lead\", \"role\": \"lead\", \"name\": \"内容复用主理人\", \"evidence\": null}, {\"slug\": \"content-repurposing-pro\", \"role\": \"member\", \"name\": \"内容复用 一稿多投 顾问\", \"evidence\": \"original_assets/content-repurposing-pro/merkle_root\", \"member_merkle_root\": \"9be81c5fb8771f7bc8d21c9f22a164e2da2fc0617751bfd792bc6c350b106731\"}, {\"slug\": \"doc-batch-process\", \"role\": \"member\", \"name\": \"文档批处 模板套用 顾问\", \"evidence\": \"original_assets/doc-batch-process/merkle_root\", \"member_merkle_root\": \"1f5eb82a5d7a0122dabab8fb1360324f5685082c9676704fde1029436e6f2ed0\"}, {\"slug\": \"scene-narrative-pro\", \"role\": \"member\", \"name\": \"场景叙事 氛围营造 顾问\", \"evidence\": \"original_assets/scene-narrative-pro/merkle_root\", \"member_merkle_root\": \"31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb\"}], \"team_lead\": \"content-repurposing-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-repurposing-pro-team-lead.md": "60ade60b784bc6f9ff38c57a8fd3be258c82b7f3903df6045254a9a6a3ef4761",
+    "agents/content-repurposing-pro.md": "1d38d16c43b813b7e205da51d2246cfe651dc86a72ec3ab1bb86cee58a96ea84",
+    "agents/doc-batch-process.md": "34fe649ef4063ca68d294fc196227331ad80aceb3fa933a22f6041bad85dbf4d",
+    "agents/scene-narrative-pro.md": "f199d18c13591f234bf252b36e96d0432a85822e73a9e73a7d1971737b06d8cf",
+    "plugin.json": "3eea32b9ac9575d9563e9f7fab8662b627e67d026320e7984a6bd708d4e14da6",
+    "settings.json": "3c74ac6d7d9839e50b601e97bb52096a8abcf43a76ccb166fa58b4363f22b079"
+  }
+}

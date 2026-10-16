@@ -1,0 +1,126 @@
+{
+  "agentName": "data-viz-pro-03-fixed-team-lead",
+  "agents": [
+    "./agents/data-viz-pro-03-fixed-team-lead.md",
+    "./agents/data-viz-pro-03-fixed.md",
+    "./agents/agent-toolkit-pro-fixed.md",
+    "./agents/agent-toolkit-pro-03.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 销售报表",
+    "zh": "帮我处理销售报表"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 销售报表 requirements, output three deliverables: 数据叙事, 动态图表, 仪表盘. Verifiable end-to-end, evidence per step.",
+    "zh": "输入销售报表相关需求，输出数据叙事、动态图表、仪表盘三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "销售报表专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-viz-pro-03-fixed-team-lead",
+      "name": {
+        "en": "销售报表主理人",
+        "zh": "销售报表主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-03-fixed.png",
+      "id": "data-viz-pro-03-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "销售报表 SVG图表开发"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "销售报表 SVG图表开发"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-fixed.png",
+      "id": "agent-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "技能包管理 能力导航"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "技能包管理 能力导航"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-03.png",
+      "id": "agent-toolkit-pro-03",
+      "name": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "技能编排 技能组合 开发辅助"
+      },
+      "profession": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "技能编排 技能组合 开发辅助"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-218",
+  "plugin": "group-team-218",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "销售报表专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 销售报表",
+      "zh": "帮我处理销售报表"
+    },
+    {
+      "en": "Plan 技能包管理",
+      "zh": "帮我规划技能包管理"
+    },
+    {
+      "en": "Review 技能编排",
+      "zh": "帮我检查技能编排"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据可视化",
+      "zh": "数据可视化"
+    },
+    {
+      "en": "仪表盘",
+      "zh": "仪表盘"
+    },
+    {
+      "en": "大屏可视化",
+      "zh": "大屏可视化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-viz-pro-03-fixed-team-lead",
+    "memberAgents": [
+      "data-viz-pro-03-fixed",
+      "agent-toolkit-pro-fixed",
+      "agent-toolkit-pro-03"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "project-planning-expert-team-lead",
+  "agents": [
+    "./agents/project-planning-expert-team-lead.md",
+    "./agents/project-planning-expert.md",
+    "./agents/agent-handoff-pro.md",
+    "./agents/win-loss-analysis.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 项目管理排期专家",
+    "zh": "帮我处理项目管理排期专家"
+  },
+  "description": "ProjectPlanner team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 任务交接 requirements, output three deliverables: 责任明确, 验收标准, 回执确认. Verifiable end-to-end, evidence per step.",
+    "zh": "输入任务交接相关需求，输出责任明确、验收标准、回执确认三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ProjectPlanner Team",
+    "zh": "任务交接专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "project-planning-expert-team-lead",
+      "name": {
+        "en": "项目管理排期专家主理人",
+        "zh": "项目管理排期专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/project-planning-expert.png",
+      "id": "project-planning-expert",
+      "name": {
+        "en": "ProjectPlanner",
+        "zh": "项目管理排期专家"
+      },
+      "profession": {
+        "en": "ProjectPlanner",
+        "zh": "项目管理排期专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-handoff-pro.png",
+      "id": "agent-handoff-pro",
+      "name": {
+        "en": "agent-handoff-pro",
+        "zh": "任务交接 上下文传 顾问"
+      },
+      "profession": {
+        "en": "agent-handoff-pro",
+        "zh": "任务交接 上下文传 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/win-loss-analysis.png",
+      "id": "win-loss-analysis",
+      "name": {
+        "en": "win-loss-analysis",
+        "zh": "赢单复盘 归因分析 顾问"
+      },
+      "profession": {
+        "en": "win-loss-analysis",
+        "zh": "赢单复盘 归因分析 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-728",
+  "plugin": "group-team-728",
+  "profession": {
+    "en": "ProjectPlanner Collaboration Team",
+    "zh": "任务交接专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 项目管理排期专家",
+      "zh": "帮我处理项目管理排期专家"
+    },
+    {
+      "en": "Plan 任务交接",
+      "zh": "帮我规划任务交接"
+    },
+    {
+      "en": "Review 赢单复盘",
+      "zh": "帮我检查赢单复盘"
+    }
+  ],
+  "tags": [
+    {
+      "en": "任务拆解",
+      "zh": "任务拆解"
+    },
+    {
+      "en": "风险与缓冲",
+      "zh": "风险与缓冲"
+    },
+    {
+      "en": "里程碑与排期",
+      "zh": "里程碑与排期"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "project-planning-expert-team-lead",
+    "memberAgents": [
+      "project-planning-expert",
+      "agent-handoff-pro",
+      "win-loss-analysis"
+    ]
+  },
+  "version": "1.0.0"
+}

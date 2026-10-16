@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1092",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1092",
+    "kind": "team",
+    "name": "空间布局专家",
+    "description": "输入空间布局相关需求，输出入口焦点、分区清晰、回游设计三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "spatial-layout-pro-team-lead",
+        "role": "lead",
+        "name": "空间布局主理人",
+        "evidence": null
+      },
+      {
+        "slug": "spatial-layout-pro",
+        "role": "member",
+        "name": "空间布局 动线设计 顾问",
+        "evidence": "original_assets/spatial-layout-pro/merkle_root",
+        "member_merkle_root": "3b138ee5fb23a1aedbae888792ad955d2d11c9aeb737f4d38ba91e402fe2e860"
+      },
+      {
+        "slug": "game-liveops-pro",
+        "role": "member",
+        "name": "游戏运营 活动节奏 顾问",
+        "evidence": "original_assets/game-liveops-pro/merkle_root",
+        "member_merkle_root": "54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c"
+      },
+      {
+        "slug": "onboarding-product",
+        "role": "member",
+        "name": "新用户 上手引导 顾问",
+        "evidence": "original_assets/onboarding-product/merkle_root",
+        "member_merkle_root": "5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab"
+      }
+    ],
+    "team_lead": "spatial-layout-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "be08eb59d49c8489",
+  "prompt_hash": "5b377ae8b0d25957",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1092\", \"kind\": \"team\", \"name\": \"空间布局专家\", \"description\": \"输入空间布局相关需求，输出入口焦点、分区清晰、回游设计三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"spatial-layout-pro-team-lead\", \"role\": \"lead\", \"name\": \"空间布局主理人\", \"evidence\": null}, {\"slug\": \"spatial-layout-pro\", \"role\": \"member\", \"name\": \"空间布局 动线设计 顾问\", \"evidence\": \"original_assets/spatial-layout-pro/merkle_root\", \"member_merkle_root\": \"3b138ee5fb23a1aedbae888792ad955d2d11c9aeb737f4d38ba91e402fe2e860\"}, {\"slug\": \"game-liveops-pro\", \"role\": \"member\", \"name\": \"游戏运营 活动节奏 顾问\", \"evidence\": \"original_assets/game-liveops-pro/merkle_root\", \"member_merkle_root\": \"54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c\"}, {\"slug\": \"onboarding-product\", \"role\": \"member\", \"name\": \"新用户 上手引导 顾问\", \"evidence\": \"original_assets/onboarding-product/merkle_root\", \"member_merkle_root\": \"5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab\"}], \"team_lead\": \"spatial-layout-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-liveops-pro.md": "d8f75bc4f74dfd1db9a35f33e3983c9aba1f0f6ab6b033c90984d62bfe03bdaf",
+    "agents/onboarding-product.md": "78c61c400a1e5197a45afa730ba1d58bb3ba3467a32f4a798c0b21045115d266",
+    "agents/spatial-layout-pro-team-lead.md": "470630665258f451bffe01f679812191ad23051115b790efe58dc37ce2c37e94",
+    "agents/spatial-layout-pro.md": "23c545f513b6e105d2e9463c9451631ec304b39fc34419d5cf3331c1e09238cc",
+    "plugin.json": "946919056e6e8a2cc0aae2cacd6fbba2a51c413c343187aa72d0b2219312ae42",
+    "settings.json": "774b13648713171849e55bcf742aa4964542e2f9ce20c0f64a8914eadb00e17a"
+  }
+}

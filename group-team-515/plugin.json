@@ -1,0 +1,126 @@
+{
+  "agentName": "dev-toolbox-expert-team-lead",
+  "agents": [
+    "./agents/dev-toolbox-expert-team-lead.md",
+    "./agents/dev-toolbox-expert.md",
+    "./agents/agent-multimodal-route.md",
+    "./agents/chart-data-verify.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 开发工具",
+    "zh": "帮我处理开发工具"
+  },
+  "description": "ToolSmith team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 多模态路 requirements, output three deliverables: 类型识别, 能力匹配, 降级声明. Verifiable end-to-end, evidence per step.",
+    "zh": "输入多模态路相关需求，输出类型识别、能力匹配、降级声明三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ToolSmith Team",
+    "zh": "开发工具专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "dev-toolbox-expert-team-lead",
+      "name": {
+        "en": "开发工具主理人",
+        "zh": "开发工具主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/dev-toolbox-expert.png",
+      "id": "dev-toolbox-expert",
+      "name": {
+        "en": "ToolSmith",
+        "zh": "开发工具 编码调试 效率提能"
+      },
+      "profession": {
+        "en": "ToolSmith",
+        "zh": "开发工具 编码调试 效率提能"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-multimodal-route.png",
+      "id": "agent-multimodal-route",
+      "name": {
+        "en": "agent-multimodal-route",
+        "zh": "多模态路 类型识别 顾问"
+      },
+      "profession": {
+        "en": "agent-multimodal-route",
+        "zh": "多模态路 类型识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/chart-data-verify.png",
+      "id": "chart-data-verify",
+      "name": {
+        "en": "chart-data-verify",
+        "zh": "图表核验 数据一致 顾问"
+      },
+      "profession": {
+        "en": "chart-data-verify",
+        "zh": "图表核验 数据一致 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-515",
+  "plugin": "group-team-515",
+  "profession": {
+    "en": "ToolSmith Collaboration Team",
+    "zh": "开发工具专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 开发工具",
+      "zh": "帮我处理开发工具"
+    },
+    {
+      "en": "Plan 多模态路",
+      "zh": "帮我规划多模态路"
+    },
+    {
+      "en": "Review 图表核验",
+      "zh": "帮我检查图表核验"
+    }
+  ],
+  "tags": [
+    {
+      "en": "类型识别",
+      "zh": "类型识别"
+    },
+    {
+      "en": "能力匹配",
+      "zh": "能力匹配"
+    },
+    {
+      "en": "降级声明",
+      "zh": "降级声明"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "dev-toolbox-expert-team-lead",
+    "memberAgents": [
+      "dev-toolbox-expert",
+      "agent-multimodal-route",
+      "chart-data-verify"
+    ]
+  },
+  "version": "1.0.0"
+}

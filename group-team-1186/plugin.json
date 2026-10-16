@@ -1,0 +1,126 @@
+{
+  "agentName": "security-training-team-lead",
+  "agents": [
+    "./agents/security-training-team-lead.md",
+    "./agents/security-training.md",
+    "./agents/code-quality-gate.md",
+    "./agents/onboarding-doc-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 安全培训",
+    "zh": "帮我处理安全培训"
+  },
+  "description": "security-training team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 安全培训 end-to-end: 分层培训, 案例教学 and 定期演练. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分层培训、案例教学与定期演练，覆盖安全培训全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "security-training Team",
+    "zh": "安全培训专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "security-training-team-lead",
+      "name": {
+        "en": "安全培训主理人",
+        "zh": "安全培训主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/security-training.png",
+      "id": "security-training",
+      "name": {
+        "en": "security-training",
+        "zh": "安全培训 顾问"
+      },
+      "profession": {
+        "en": "security-training",
+        "zh": "安全培训 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-quality-gate.png",
+      "id": "code-quality-gate",
+      "name": {
+        "en": "code-quality-gate",
+        "zh": "代码质量门禁 顾问"
+      },
+      "profession": {
+        "en": "code-quality-gate",
+        "zh": "代码质量门禁 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/onboarding-doc-pro.png",
+      "id": "onboarding-doc-pro",
+      "name": {
+        "en": "onboarding-doc-pro",
+        "zh": "上手文档 快速开始 顾问"
+      },
+      "profession": {
+        "en": "onboarding-doc-pro",
+        "zh": "上手文档 快速开始 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1186",
+  "plugin": "group-team-1186",
+  "profession": {
+    "en": "security-training Collaboration Team",
+    "zh": "安全培训专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 安全培训",
+      "zh": "帮我处理安全培训"
+    },
+    {
+      "en": "Plan 代码质量门禁",
+      "zh": "帮我规划代码质量门禁"
+    },
+    {
+      "en": "Review 上手文档",
+      "zh": "帮我检查上手文档"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分层培训",
+      "zh": "分层培训"
+    },
+    {
+      "en": "案例教学",
+      "zh": "案例教学"
+    },
+    {
+      "en": "定期演练",
+      "zh": "定期演练"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "security-training-team-lead",
+    "memberAgents": [
+      "security-training",
+      "code-quality-gate",
+      "onboarding-doc-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

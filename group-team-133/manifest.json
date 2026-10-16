@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-133",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-133",
+    "kind": "team",
+    "name": "发布 质量 回归 团队",
+    "description": "发布 质量 回归 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "release-checklist-team-lead",
+        "role": "lead",
+        "name": "发布清单主理人",
+        "evidence": null
+      },
+      {
+        "slug": "release-checklist",
+        "role": "member",
+        "name": "发布清单 上线检查 顾问",
+        "evidence": "original_assets/release-checklist/merkle_root",
+        "member_merkle_root": "e9c7105bf6c3f4448f7be1fab17d60257a5ae84c1d3b48bf2c51856951fedef0"
+      },
+      {
+        "slug": "quality-gate-define",
+        "role": "member",
+        "name": "质量门禁 标准定义 助手",
+        "evidence": "original_assets/quality-gate-define/merkle_root",
+        "member_merkle_root": "ccde04f957ae58e01e4b496bb68cefcaa889d5b5c3314a11438f387b9471d0b2"
+      },
+      {
+        "slug": "regression-plan",
+        "role": "member",
+        "name": "回归测试 范围确定 助手",
+        "evidence": "original_assets/regression-plan/merkle_root",
+        "member_merkle_root": "fd6d10a29c07a91115493db954986cb67952cb525ece2e2b47a141d661cd3014"
+      }
+    ],
+    "team_lead": "release-checklist-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d9346dd8760b9f36",
+  "prompt_hash": "91fd602381ee3c05",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-133\", \"kind\": \"team\", \"name\": \"发布 质量 回归 团队\", \"description\": \"发布 质量 回归 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"release-checklist-team-lead\", \"role\": \"lead\", \"name\": \"发布清单主理人\", \"evidence\": null}, {\"slug\": \"release-checklist\", \"role\": \"member\", \"name\": \"发布清单 上线检查 顾问\", \"evidence\": \"original_assets/release-checklist/merkle_root\", \"member_merkle_root\": \"e9c7105bf6c3f4448f7be1fab17d60257a5ae84c1d3b48bf2c51856951fedef0\"}, {\"slug\": \"quality-gate-define\", \"role\": \"member\", \"name\": \"质量门禁 标准定义 助手\", \"evidence\": \"original_assets/quality-gate-define/merkle_root\", \"member_merkle_root\": \"ccde04f957ae58e01e4b496bb68cefcaa889d5b5c3314a11438f387b9471d0b2\"}, {\"slug\": \"regression-plan\", \"role\": \"member\", \"name\": \"回归测试 范围确定 助手\", \"evidence\": \"original_assets/regression-plan/merkle_root\", \"member_merkle_root\": \"fd6d10a29c07a91115493db954986cb67952cb525ece2e2b47a141d661cd3014\"}], \"team_lead\": \"release-checklist-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/quality-gate-define.md": "63cc949a8ff0ff55eb85e370c722f467c1f9bcbde5e7f6de3159a1e62108f1fa",
+    "agents/regression-plan.md": "6054ee3ab60c00f513fcf9ec28ed935e9c4adb82495a2ef9680a5f65201b1082",
+    "agents/release-checklist-team-lead.md": "4b14a09dfe054a9ab092562606ac3f69e5cb7a87c2924d3bfbb8852218637ae4",
+    "agents/release-checklist.md": "93ee4302820a753b6cb231bc526891863207819b55a7a96342123b52ca16fea9",
+    "plugin.json": "8510e83459a66eafccee270657f10ba7b87385b67d0f50eeb751500aa5ee0396",
+    "settings.json": "039608b52d2bbba4067f1a9548dac5e05a7880146feed824902b0e0c5e40af12"
+  }
+}

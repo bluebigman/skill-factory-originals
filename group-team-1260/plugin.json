@@ -1,0 +1,126 @@
+{
+  "agentName": "business-continuity-team-lead",
+  "agents": [
+    "./agents/business-continuity-team-lead.md",
+    "./agents/business-continuity.md",
+    "./agents/doc-version-manage.md",
+    "./agents/meeting-note-struct.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 业务连续性",
+    "zh": "帮我处理业务连续性"
+  },
+  "description": "business-continuity team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 业务连续性 requirements, output three deliverables: 影响分析, 恢复目标, 预案演练. Verifiable end-to-end, evidence per step.",
+    "zh": "输入业务连续性相关需求，输出影响分析、恢复目标、预案演练三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "business-continuity Team",
+    "zh": "业务连续性专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "business-continuity-team-lead",
+      "name": {
+        "en": "业务连续性主理人",
+        "zh": "业务连续性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/business-continuity.png",
+      "id": "business-continuity",
+      "name": {
+        "en": "business-continuity",
+        "zh": "业务连续性 顾问"
+      },
+      "profession": {
+        "en": "business-continuity",
+        "zh": "业务连续性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-version-manage.png",
+      "id": "doc-version-manage",
+      "name": {
+        "en": "doc-version-manage",
+        "zh": "文档版本 变更记录 顾问"
+      },
+      "profession": {
+        "en": "doc-version-manage",
+        "zh": "文档版本 变更记录 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/meeting-note-struct.png",
+      "id": "meeting-note-struct",
+      "name": {
+        "en": "meeting-note-struct",
+        "zh": "会议纪要结构化 助手"
+      },
+      "profession": {
+        "en": "meeting-note-struct",
+        "zh": "会议纪要结构化 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1260",
+  "plugin": "group-team-1260",
+  "profession": {
+    "en": "business-continuity Collaboration Team",
+    "zh": "业务连续性专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 业务连续性",
+      "zh": "帮我处理业务连续性"
+    },
+    {
+      "en": "Plan 文档版本",
+      "zh": "帮我规划文档版本"
+    },
+    {
+      "en": "Review 会议纪要结构化",
+      "zh": "帮我检查会议纪要结构化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "影响分析",
+      "zh": "影响分析"
+    },
+    {
+      "en": "恢复目标",
+      "zh": "恢复目标"
+    },
+    {
+      "en": "预案演练",
+      "zh": "预案演练"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "business-continuity-team-lead",
+    "memberAgents": [
+      "business-continuity",
+      "doc-version-manage",
+      "meeting-note-struct"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "kb-article-build-team-lead",
+  "agents": [
+    "./agents/kb-article-build-team-lead.md",
+    "./agents/kb-article-build.md",
+    "./agents/content-metrics-define.md",
+    "./agents/game-story-branch.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 知识库条目",
+    "zh": "帮我处理知识库条目"
+  },
+  "description": "kb-article-build team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 知识库条目, covers 一篇一题 / 相互引用 / 定期复核, delivering structured results and actionable checklists.",
+    "zh": "知识库条目助手专家：围绕知识库条目，覆盖一篇一题／相互引用／定期复核，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "kb-article-build Team",
+    "zh": "知识库条目助手专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "kb-article-build-team-lead",
+      "name": {
+        "en": "知识库条目主理人",
+        "zh": "知识库条目主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/kb-article-build.png",
+      "id": "kb-article-build",
+      "name": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "profession": {
+        "en": "kb-article-build",
+        "zh": "知识库条目 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-metrics-define.png",
+      "id": "content-metrics-define",
+      "name": {
+        "en": "content-metrics-define",
+        "zh": "内容指标定义 顾问"
+      },
+      "profession": {
+        "en": "content-metrics-define",
+        "zh": "内容指标定义 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-story-branch.png",
+      "id": "game-story-branch",
+      "name": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "profession": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1049",
+  "plugin": "group-team-1049",
+  "profession": {
+    "en": "kb-article-build Collaboration Team",
+    "zh": "知识库条目助手专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 知识库条目",
+      "zh": "帮我处理知识库条目"
+    },
+    {
+      "en": "Plan 内容指标定义",
+      "zh": "帮我规划内容指标定义"
+    },
+    {
+      "en": "Review 剧情分支",
+      "zh": "帮我检查剧情分支"
+    }
+  ],
+  "tags": [
+    {
+      "en": "一篇一题",
+      "zh": "一篇一题"
+    },
+    {
+      "en": "相互引用",
+      "zh": "相互引用"
+    },
+    {
+      "en": "定期复核",
+      "zh": "定期复核"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "kb-article-build-team-lead",
+    "memberAgents": [
+      "kb-article-build",
+      "content-metrics-define",
+      "game-story-branch"
+    ]
+  },
+  "version": "1.0.0"
+}

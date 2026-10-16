@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-833",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-833",
+    "kind": "team",
+    "name": "客户流失预警干预专家",
+    "description": "输入文档流水相关需求，输出质量抽检、行为信号、分级干预三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-doc-pipeline-team-lead",
+        "role": "lead",
+        "name": "文档流水主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-doc-pipeline",
+        "role": "member",
+        "name": "文档流水 解析 顾问",
+        "evidence": "original_assets/agent-doc-pipeline/merkle_root",
+        "member_merkle_root": "574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661"
+      },
+      {
+        "slug": "churn-prevent-pro",
+        "role": "member",
+        "name": "客户流失 预警干预 顾问",
+        "evidence": "original_assets/churn-prevent-pro/merkle_root",
+        "member_merkle_root": "5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58"
+      },
+      {
+        "slug": "sheet-collab-rule",
+        "role": "member",
+        "name": "协作表格规范 顾问",
+        "evidence": "original_assets/sheet-collab-rule/merkle_root",
+        "member_merkle_root": "d94099dd0c76627ba02898678b216076267fd4f8544eb07aed607418240645f3"
+      }
+    ],
+    "team_lead": "agent-doc-pipeline-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2c7d831f2691204c",
+  "prompt_hash": "0151e56f9a64980f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-833\", \"kind\": \"team\", \"name\": \"客户流失预警干预专家\", \"description\": \"输入文档流水相关需求，输出质量抽检、行为信号、分级干预三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-doc-pipeline-team-lead\", \"role\": \"lead\", \"name\": \"文档流水主理人\", \"evidence\": null}, {\"slug\": \"agent-doc-pipeline\", \"role\": \"member\", \"name\": \"文档流水 解析 顾问\", \"evidence\": \"original_assets/agent-doc-pipeline/merkle_root\", \"member_merkle_root\": \"574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661\"}, {\"slug\": \"churn-prevent-pro\", \"role\": \"member\", \"name\": \"客户流失 预警干预 顾问\", \"evidence\": \"original_assets/churn-prevent-pro/merkle_root\", \"member_merkle_root\": \"5d17289ac2b9069811bb5e6b22ae7e6a2ef7b0fbe07750adc56c6334b27a3b58\"}, {\"slug\": \"sheet-collab-rule\", \"role\": \"member\", \"name\": \"协作表格规范 顾问\", \"evidence\": \"original_assets/sheet-collab-rule/merkle_root\", \"member_merkle_root\": \"d94099dd0c76627ba02898678b216076267fd4f8544eb07aed607418240645f3\"}], \"team_lead\": \"agent-doc-pipeline-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-doc-pipeline-team-lead.md": "06a3383928043e1e53ae34755ecdb2227ed2112125f1035279bb4cff80cecaaf",
+    "agents/agent-doc-pipeline.md": "d4bd9fc4ed739cfb0b74f9c8b5031fc0b7f5dc0d61b26482bad554a904f369ec",
+    "agents/churn-prevent-pro.md": "662a6710957a236abf69bfd47cee163d237ec38b082061cda77c077735d0c3f1",
+    "agents/sheet-collab-rule.md": "d27cf030777193d6665d6bc1e87ac4448e05bcc8cea8c5ccfa53ecf59c8215ee",
+    "plugin.json": "1b73d25f4622546d35fb45fed63311f7b0bfa6de5f20952d3a7fe8e19e570b5e",
+    "settings.json": "7166317791adfd2e0ac528c4d9d75bbbac3a24dc6dd4c0bd63e217a53a9083e5"
+  }
+}

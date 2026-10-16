@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-873",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-873",
+    "kind": "team",
+    "name": "社群运营顾问专家",
+    "description": "社群运营顾问专家：围绕品牌出海，覆盖语气指南／双语对齐／拒绝直译，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "global-brand-tone-team-lead",
+        "role": "lead",
+        "name": "品牌出海主理人",
+        "evidence": null
+      },
+      {
+        "slug": "global-brand-tone",
+        "role": "member",
+        "name": "品牌出海 语气统一 顾问",
+        "evidence": "original_assets/global-brand-tone/merkle_root",
+        "member_merkle_root": "1f25fbfea65b2cd17f9298b96426877723dc916497d04003a140e3b74ed63954"
+      },
+      {
+        "slug": "knowledge-base-pro-01-fixed",
+        "role": "member",
+        "name": "项目记忆 知识卡片 双向链接",
+        "evidence": "original_assets/knowledge-base-pro-01-fixed/merkle_root",
+        "member_merkle_root": "2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd"
+      },
+      {
+        "slug": "community-ops",
+        "role": "member",
+        "name": "社群运营 顾问",
+        "evidence": "original_assets/community-ops/merkle_root",
+        "member_merkle_root": "42c44a945191fb7576b7e419a29b3f821ec47ad9e0ac4cca276c746ef7c982f7"
+      }
+    ],
+    "team_lead": "global-brand-tone-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3ad5383c6040cc52",
+  "prompt_hash": "129f88e242a4459a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-873\", \"kind\": \"team\", \"name\": \"社群运营顾问专家\", \"description\": \"社群运营顾问专家：围绕品牌出海，覆盖语气指南／双语对齐／拒绝直译，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"global-brand-tone-team-lead\", \"role\": \"lead\", \"name\": \"品牌出海主理人\", \"evidence\": null}, {\"slug\": \"global-brand-tone\", \"role\": \"member\", \"name\": \"品牌出海 语气统一 顾问\", \"evidence\": \"original_assets/global-brand-tone/merkle_root\", \"member_merkle_root\": \"1f25fbfea65b2cd17f9298b96426877723dc916497d04003a140e3b74ed63954\"}, {\"slug\": \"knowledge-base-pro-01-fixed\", \"role\": \"member\", \"name\": \"项目记忆 知识卡片 双向链接\", \"evidence\": \"original_assets/knowledge-base-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd\"}, {\"slug\": \"community-ops\", \"role\": \"member\", \"name\": \"社群运营 顾问\", \"evidence\": \"original_assets/community-ops/merkle_root\", \"member_merkle_root\": \"42c44a945191fb7576b7e419a29b3f821ec47ad9e0ac4cca276c746ef7c982f7\"}], \"team_lead\": \"global-brand-tone-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/community-ops.md": "67bbb88e2ede775b33a8585e040c2927a2e32ca0ff888aab1c20f8e6392a0e4c",
+    "agents/global-brand-tone-team-lead.md": "03ea62edc68c10fdc701ccf78df9b6637465abb35d419d71ee4130fde7cb4e53",
+    "agents/global-brand-tone.md": "a9b4c298dc12ef50abfd9db99169918a5c69b2bdf8f4c545eb4d3c1faf85a88e",
+    "agents/knowledge-base-pro-01-fixed.md": "d877ee6cc06764e463192848b3d769283f45be0e677ef40299f3ab2002684c11",
+    "plugin.json": "285a8cc9011fe2982b94e13d539e88a3a4f23be91b30f59bbc19e54ff67b48b6",
+    "settings.json": "5315594d00a2e47deb08a475ba9df0fe0ca7c7472309ee7df621a1bf045f2095"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-313",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-313",
+    "kind": "team",
+    "name": "模式演进专家",
+    "description": "输入模式演进相关需求，输出兼容优先、分步执行、影子验证三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "schema-evolution-pro-team-lead",
+        "role": "lead",
+        "name": "模式演进主理人",
+        "evidence": null
+      },
+      {
+        "slug": "schema-evolution-pro",
+        "role": "member",
+        "name": "模式演进 兼容变更 顾问",
+        "evidence": "original_assets/schema-evolution-pro/merkle_root",
+        "member_merkle_root": "b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335"
+      },
+      {
+        "slug": "context-window-tune",
+        "role": "member",
+        "name": "上下文优 分块策略 顾问",
+        "evidence": "original_assets/context-window-tune/merkle_root",
+        "member_merkle_root": "581bd29d61366f0766716e8ab80d229a75fc807c736f753b3eeadd67fa7bbe18"
+      },
+      {
+        "slug": "dashboard-spec-pro",
+        "role": "member",
+        "name": "看板规格 指标选型 顾问",
+        "evidence": "original_assets/dashboard-spec-pro/merkle_root",
+        "member_merkle_root": "f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6"
+      }
+    ],
+    "team_lead": "schema-evolution-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0cc733c397aacb9c",
+  "prompt_hash": "d6ace78a2c6f32fe",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-313\", \"kind\": \"team\", \"name\": \"模式演进专家\", \"description\": \"输入模式演进相关需求，输出兼容优先、分步执行、影子验证三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"schema-evolution-pro-team-lead\", \"role\": \"lead\", \"name\": \"模式演进主理人\", \"evidence\": null}, {\"slug\": \"schema-evolution-pro\", \"role\": \"member\", \"name\": \"模式演进 兼容变更 顾问\", \"evidence\": \"original_assets/schema-evolution-pro/merkle_root\", \"member_merkle_root\": \"b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335\"}, {\"slug\": \"context-window-tune\", \"role\": \"member\", \"name\": \"上下文优 分块策略 顾问\", \"evidence\": \"original_assets/context-window-tune/merkle_root\", \"member_merkle_root\": \"581bd29d61366f0766716e8ab80d229a75fc807c736f753b3eeadd67fa7bbe18\"}, {\"slug\": \"dashboard-spec-pro\", \"role\": \"member\", \"name\": \"看板规格 指标选型 顾问\", \"evidence\": \"original_assets/dashboard-spec-pro/merkle_root\", \"member_merkle_root\": \"f49d7a5798d2d89acc77ea31033157da1ad1e9fc8fd474c1e23469bac33e62d6\"}], \"team_lead\": \"schema-evolution-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/context-window-tune.md": "c44d8a6ec6c532c2b23056c3ee8b164b5b2aecf97416d5336f1602d9416d3e6f",
+    "agents/dashboard-spec-pro.md": "41f3c1cbd655be4fef82bfb6a67de713207841645185cc56a315d1812c582d5c",
+    "agents/schema-evolution-pro-team-lead.md": "80b5e6499ecf2dd839cc9580bcb2ca36767f287d83ff504749be968e1e759b8f",
+    "agents/schema-evolution-pro.md": "742168e0192a72a23c4f11b0c82b3737624f4a94c4e1ebc2d3979770797fe1c6",
+    "plugin.json": "cd67bcac44cbd07a8a01ebda13ba28538a5f32a68c4bc12226687b4097883ab0",
+    "settings.json": "2cb721be453e1ba92f0dd2a4907faff2b14a6ca497113984ab0532e0d7921020"
+  }
+}

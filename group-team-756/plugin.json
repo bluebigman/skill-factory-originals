@@ -1,0 +1,126 @@
+{
+  "agentName": "quotation-standard-team-lead",
+  "agents": [
+    "./agents/quotation-standard-team-lead.md",
+    "./agents/quotation-standard.md",
+    "./agents/crawl-file-pro.md",
+    "./agents/resume-job-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 报价方案",
+    "zh": "帮我处理报价方案"
+  },
+  "description": "quotation-standard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 报价方案, covers 三档选项 / 边界写清 / 按价值组织, delivering structured results and actionable checklists.",
+    "zh": "报价方案专家：围绕报价方案，覆盖三档选项／边界写清／按价值组织，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "quotation-standard Team",
+    "zh": "报价方案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "quotation-standard-team-lead",
+      "name": {
+        "en": "报价方案主理人",
+        "zh": "报价方案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/quotation-standard.png",
+      "id": "quotation-standard",
+      "name": {
+        "en": "quotation-standard",
+        "zh": "报价方案 结构规范 顾问"
+      },
+      "profession": {
+        "en": "quotation-standard",
+        "zh": "报价方案 结构规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/crawl-file-pro.png",
+      "id": "crawl-file-pro",
+      "name": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "profession": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/resume-job-pro.png",
+      "id": "resume-job-pro",
+      "name": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "profession": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-756",
+  "plugin": "group-team-756",
+  "profession": {
+    "en": "quotation-standard Collaboration Team",
+    "zh": "报价方案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报价方案",
+      "zh": "帮我处理报价方案"
+    },
+    {
+      "en": "Plan 文件采集",
+      "zh": "帮我规划文件采集"
+    },
+    {
+      "en": "Review 简历优化",
+      "zh": "帮我检查简历优化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按价值组织",
+      "zh": "按价值组织"
+    },
+    {
+      "en": "边界写清",
+      "zh": "边界写清"
+    },
+    {
+      "en": "标明有效期",
+      "zh": "标明有效期"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "quotation-standard-team-lead",
+    "memberAgents": [
+      "quotation-standard",
+      "crawl-file-pro",
+      "resume-job-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

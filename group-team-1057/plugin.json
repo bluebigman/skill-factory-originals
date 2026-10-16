@@ -1,0 +1,126 @@
+{
+  "agentName": "deal-review-pro-team-lead",
+  "agents": [
+    "./agents/deal-review-pro-team-lead.md",
+    "./agents/deal-review-pro.md",
+    "./agents/customer-health.md",
+    "./agents/presales-support-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 商机评审",
+    "zh": "帮我处理商机评审"
+  },
+  "description": "deal-review-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 商机评审 end-to-end: 标准统一, 独立视角 and 列出假设. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长标准统一、独立视角与列出假设，覆盖商机评审全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "deal-review-pro Team",
+    "zh": "商机评审专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "deal-review-pro-team-lead",
+      "name": {
+        "en": "商机评审主理人",
+        "zh": "商机评审主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/deal-review-pro.png",
+      "id": "deal-review-pro",
+      "name": {
+        "en": "deal-review-pro",
+        "zh": "商机评审 风险把关 顾问"
+      },
+      "profession": {
+        "en": "deal-review-pro",
+        "zh": "商机评审 风险把关 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/customer-health.png",
+      "id": "customer-health",
+      "name": {
+        "en": "customer-health",
+        "zh": "客户健康度 评估"
+      },
+      "profession": {
+        "en": "customer-health",
+        "zh": "客户健康度 评估"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/presales-support-pro.png",
+      "id": "presales-support-pro",
+      "name": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "profession": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1057",
+  "plugin": "group-team-1057",
+  "profession": {
+    "en": "deal-review-pro Collaboration Team",
+    "zh": "商机评审专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 商机评审",
+      "zh": "帮我处理商机评审"
+    },
+    {
+      "en": "Plan 客户健康度",
+      "zh": "帮我规划客户健康度"
+    },
+    {
+      "en": "Review 售前支持",
+      "zh": "帮我检查售前支持"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标准统一",
+      "zh": "标准统一"
+    },
+    {
+      "en": "独立视角",
+      "zh": "独立视角"
+    },
+    {
+      "en": "列出假设",
+      "zh": "列出假设"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "deal-review-pro-team-lead",
+    "memberAgents": [
+      "deal-review-pro",
+      "customer-health",
+      "presales-support-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

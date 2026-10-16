@@ -1,0 +1,126 @@
+{
+  "agentName": "seo-content-brief-team-lead",
+  "agents": [
+    "./agents/seo-content-brief-team-lead.md",
+    "./agents/seo-content-brief.md",
+    "./agents/pdf-content-extract.md",
+    "./agents/content-repurpose.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容选题简报",
+    "zh": "帮我处理内容选题简报"
+  },
+  "description": "seo-content-brief team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 内容选题简报 requirements, output three deliverables: 搜索意图, 结构建议, 内链规划. Verifiable end-to-end, evidence per step.",
+    "zh": "输入内容选题简报相关需求，输出搜索意图、结构建议、内链规划三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "seo-content-brief Team",
+    "zh": "内容选题简报专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "seo-content-brief-team-lead",
+      "name": {
+        "en": "内容选题简报主理人",
+        "zh": "内容选题简报主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/seo-content-brief.png",
+      "id": "seo-content-brief",
+      "name": {
+        "en": "seo-content-brief",
+        "zh": "内容选题简报 助手"
+      },
+      "profession": {
+        "en": "seo-content-brief",
+        "zh": "内容选题简报 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pdf-content-extract.png",
+      "id": "pdf-content-extract",
+      "name": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "profession": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-repurpose.png",
+      "id": "content-repurpose",
+      "name": {
+        "en": "content-repurpose",
+        "zh": "内容复用 一稿多用 顾问"
+      },
+      "profession": {
+        "en": "content-repurpose",
+        "zh": "内容复用 一稿多用 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-894",
+  "plugin": "group-team-894",
+  "profession": {
+    "en": "seo-content-brief Collaboration Team",
+    "zh": "内容选题简报专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容选题简报",
+      "zh": "帮我处理内容选题简报"
+    },
+    {
+      "en": "Plan PDF",
+      "zh": "帮我规划PDF"
+    },
+    {
+      "en": "Review 内容复用",
+      "zh": "帮我检查内容复用"
+    }
+  ],
+  "tags": [
+    {
+      "en": "搜索意图",
+      "zh": "搜索意图"
+    },
+    {
+      "en": "结构建议",
+      "zh": "结构建议"
+    },
+    {
+      "en": "内链规划",
+      "zh": "内链规划"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "seo-content-brief-team-lead",
+    "memberAgents": [
+      "seo-content-brief",
+      "pdf-content-extract",
+      "content-repurpose"
+    ]
+  },
+  "version": "1.0.0"
+}

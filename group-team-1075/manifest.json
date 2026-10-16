@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1075",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1075",
+    "kind": "team",
+    "name": "通知设计顾问专家",
+    "description": "擅长标注齐全、边界说明与资产规范，覆盖设计交付全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "handoff-design-dev-team-lead",
+        "role": "lead",
+        "name": "设计交付主理人",
+        "evidence": null
+      },
+      {
+        "slug": "handoff-design-dev",
+        "role": "member",
+        "name": "设计交付 协作规范 顾问",
+        "evidence": "original_assets/handoff-design-dev/merkle_root",
+        "member_merkle_root": "44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104"
+      },
+      {
+        "slug": "notification-design",
+        "role": "member",
+        "name": "通知设计 顾问",
+        "evidence": "original_assets/notification-design/merkle_root",
+        "member_merkle_root": "bed49a31d4529a33ce39e561b122488a8b774daa1b100436a015ea3279c3583d"
+      },
+      {
+        "slug": "prototype-method",
+        "role": "member",
+        "name": "原型验证 保真度 顾问",
+        "evidence": "original_assets/prototype-method/merkle_root",
+        "member_merkle_root": "c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3"
+      }
+    ],
+    "team_lead": "handoff-design-dev-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9addf45169508605",
+  "prompt_hash": "be40aeaa2e449acb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1075\", \"kind\": \"team\", \"name\": \"通知设计顾问专家\", \"description\": \"擅长标注齐全、边界说明与资产规范，覆盖设计交付全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"handoff-design-dev-team-lead\", \"role\": \"lead\", \"name\": \"设计交付主理人\", \"evidence\": null}, {\"slug\": \"handoff-design-dev\", \"role\": \"member\", \"name\": \"设计交付 协作规范 顾问\", \"evidence\": \"original_assets/handoff-design-dev/merkle_root\", \"member_merkle_root\": \"44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104\"}, {\"slug\": \"notification-design\", \"role\": \"member\", \"name\": \"通知设计 顾问\", \"evidence\": \"original_assets/notification-design/merkle_root\", \"member_merkle_root\": \"bed49a31d4529a33ce39e561b122488a8b774daa1b100436a015ea3279c3583d\"}, {\"slug\": \"prototype-method\", \"role\": \"member\", \"name\": \"原型验证 保真度 顾问\", \"evidence\": \"original_assets/prototype-method/merkle_root\", \"member_merkle_root\": \"c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3\"}], \"team_lead\": \"handoff-design-dev-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/handoff-design-dev-team-lead.md": "4fd926770ea5a2ccceeb09fa8fe3423e19aad001ff9134a35f7978905e144674",
+    "agents/handoff-design-dev.md": "0e1a04f3ca72a2c31ee044e897dc583512a978c2650053c1ab7d704c477f60ed",
+    "agents/notification-design.md": "ca839ab310189f03c0dcd24c637eff4665371e11f02bfb1cfb8a72e6a54766af",
+    "agents/prototype-method.md": "182c5db5c527a90ac177c1730fb0849566400197a95bd2dc0bbb793c1a2fbcb3",
+    "plugin.json": "a474ea466a75f84034a763487c029053a6901417192a20141d1bb136b4c6d0f8",
+    "settings.json": "b2e1f53526a926348325f16877980edb6423578dce6210065b0f4ed848d860ef"
+  }
+}

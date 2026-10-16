@@ -1,0 +1,126 @@
+{
+  "agentName": "ux-metrics-pro-team-lead",
+  "agents": [
+    "./agents/ux-metrics-pro-team-lead.md",
+    "./agents/ux-metrics-pro.md",
+    "./agents/info-architecture.md",
+    "./agents/prototype-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 体验度量",
+    "zh": "帮我处理体验度量"
+  },
+  "description": "ux-metrics-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 体验度量 end-to-end: 分层指标, 口径固定 and 定期复盘. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分层指标、口径固定与定期复盘，覆盖体验度量全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ux-metrics-pro Team",
+    "zh": "体验度量指标体系专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ux-metrics-pro-team-lead",
+      "name": {
+        "en": "体验度量主理人",
+        "zh": "体验度量主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ux-metrics-pro.png",
+      "id": "ux-metrics-pro",
+      "name": {
+        "en": "ux-metrics-pro",
+        "zh": "体验度量 指标体系 顾问"
+      },
+      "profession": {
+        "en": "ux-metrics-pro",
+        "zh": "体验度量 指标体系 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/info-architecture.png",
+      "id": "info-architecture",
+      "name": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "profession": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prototype-method.png",
+      "id": "prototype-method",
+      "name": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "profession": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-353",
+  "plugin": "group-team-353",
+  "profession": {
+    "en": "ux-metrics-pro Collaboration Team",
+    "zh": "体验度量指标体系专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 体验度量",
+      "zh": "帮我处理体验度量"
+    },
+    {
+      "en": "Plan 信息架构",
+      "zh": "帮我规划信息架构"
+    },
+    {
+      "en": "Review 原型验证",
+      "zh": "帮我检查原型验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分层指标",
+      "zh": "分层指标"
+    },
+    {
+      "en": "口径固定",
+      "zh": "口径固定"
+    },
+    {
+      "en": "定期复盘",
+      "zh": "定期复盘"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ux-metrics-pro-team-lead",
+    "memberAgents": [
+      "ux-metrics-pro",
+      "info-architecture",
+      "prototype-method"
+    ]
+  },
+  "version": "1.0.0"
+}

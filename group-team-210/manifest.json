@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-210",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-210",
+    "kind": "team",
+    "name": "客诉 目录 出差 团队",
+    "description": "客诉 目录 出差 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "customer-complaint-team-lead",
+        "role": "lead",
+        "name": "客诉处理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "customer-complaint",
+        "role": "member",
+        "name": "客诉处理 话术拆解 顾问",
+        "evidence": "original_assets/customer-complaint/merkle_root",
+        "member_merkle_root": "774a6d583dee6cd28e87f08965570861d8e594d37b405674a2ca6e13e5171585"
+      },
+      {
+        "slug": "dir-archive-rule",
+        "role": "member",
+        "name": "目录归档 命名规范 助手",
+        "evidence": "original_assets/dir-archive-rule/merkle_root",
+        "member_merkle_root": "f7b37675aa12e4c3fcca0fd8adf2c8854dc6066273fb317dfb7b2c19326e4b4f"
+      },
+      {
+        "slug": "business-trip-pro",
+        "role": "member",
+        "name": "出差安排 行程报销 客户拜访",
+        "evidence": "original_assets/business-trip-pro/merkle_root",
+        "member_merkle_root": "588c3e20f08f5ebb2a4f0fed8b9ff9541577b5c16dca7a61789aa2dde445b7fc"
+      }
+    ],
+    "team_lead": "customer-complaint-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5dc6511d7e953c4c",
+  "prompt_hash": "cb06c469b729f728",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-210\", \"kind\": \"team\", \"name\": \"客诉 目录 出差 团队\", \"description\": \"客诉 目录 出差 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"customer-complaint-team-lead\", \"role\": \"lead\", \"name\": \"客诉处理主理人\", \"evidence\": null}, {\"slug\": \"customer-complaint\", \"role\": \"member\", \"name\": \"客诉处理 话术拆解 顾问\", \"evidence\": \"original_assets/customer-complaint/merkle_root\", \"member_merkle_root\": \"774a6d583dee6cd28e87f08965570861d8e594d37b405674a2ca6e13e5171585\"}, {\"slug\": \"dir-archive-rule\", \"role\": \"member\", \"name\": \"目录归档 命名规范 助手\", \"evidence\": \"original_assets/dir-archive-rule/merkle_root\", \"member_merkle_root\": \"f7b37675aa12e4c3fcca0fd8adf2c8854dc6066273fb317dfb7b2c19326e4b4f\"}, {\"slug\": \"business-trip-pro\", \"role\": \"member\", \"name\": \"出差安排 行程报销 客户拜访\", \"evidence\": \"original_assets/business-trip-pro/merkle_root\", \"member_merkle_root\": \"588c3e20f08f5ebb2a4f0fed8b9ff9541577b5c16dca7a61789aa2dde445b7fc\"}], \"team_lead\": \"customer-complaint-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/business-trip-pro.md": "abd4229dcf763521dc66c69522dac195c57ea1dd68f8417e8a3e54638cc79d77",
+    "agents/customer-complaint-team-lead.md": "1a337af3381c86a1ef2d4bdfe5adb0c71f69cc8d75c698fd8052343096bcfd75",
+    "agents/customer-complaint.md": "dd5004ed578e3fd6096d1d082a97d98d0fb956b66f63b7de1c15608c9d13751d",
+    "agents/dir-archive-rule.md": "210ecb108d9af9184d102822e4ff514c51d0fe34ecc98558b04c4e5e5eca65bd",
+    "plugin.json": "e1d3192905a9e9376418b5a90e3509573ad4454984c1da38a67a9a9858ef4eb0",
+    "settings.json": "8ff65a9419771b4f75391a7739e58fc2bdc47b087434e2695b83333a1d213c7c"
+  }
+}

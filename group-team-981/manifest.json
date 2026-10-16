@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-981",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-981",
+    "kind": "team",
+    "name": "游戏测试用例设计专家",
+    "description": "擅长缓冲预留、进度可见与首问负责，覆盖任务规划全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-task-plan-team-lead",
+        "role": "lead",
+        "name": "任务规划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-task-plan",
+        "role": "member",
+        "name": "任务规划 排期 顾问",
+        "evidence": "original_assets/agent-task-plan/merkle_root",
+        "member_merkle_root": "b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a"
+      },
+      {
+        "slug": "complaint-handle-pro",
+        "role": "member",
+        "name": "客诉处理 升级机制 顾问",
+        "evidence": "original_assets/complaint-handle-pro/merkle_root",
+        "member_merkle_root": "31da8b20995b6488cc9b566c127a731df14e268c43f005347029b63d053dc2fd"
+      },
+      {
+        "slug": "game-qa-method",
+        "role": "member",
+        "name": "游戏测试 用例设计 顾问",
+        "evidence": "original_assets/game-qa-method/merkle_root",
+        "member_merkle_root": "bad1c48a48b96c47eedf6190a80e2b2d5859af97ecc4ccaf8e9b7c1d6019f884"
+      }
+    ],
+    "team_lead": "agent-task-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "02ebd2b69f2b4d16",
+  "prompt_hash": "62ee894b81b12210",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-981\", \"kind\": \"team\", \"name\": \"游戏测试用例设计专家\", \"description\": \"擅长缓冲预留、进度可见与首问负责，覆盖任务规划全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-task-plan-team-lead\", \"role\": \"lead\", \"name\": \"任务规划主理人\", \"evidence\": null}, {\"slug\": \"agent-task-plan\", \"role\": \"member\", \"name\": \"任务规划 排期 顾问\", \"evidence\": \"original_assets/agent-task-plan/merkle_root\", \"member_merkle_root\": \"b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a\"}, {\"slug\": \"complaint-handle-pro\", \"role\": \"member\", \"name\": \"客诉处理 升级机制 顾问\", \"evidence\": \"original_assets/complaint-handle-pro/merkle_root\", \"member_merkle_root\": \"31da8b20995b6488cc9b566c127a731df14e268c43f005347029b63d053dc2fd\"}, {\"slug\": \"game-qa-method\", \"role\": \"member\", \"name\": \"游戏测试 用例设计 顾问\", \"evidence\": \"original_assets/game-qa-method/merkle_root\", \"member_merkle_root\": \"bad1c48a48b96c47eedf6190a80e2b2d5859af97ecc4ccaf8e9b7c1d6019f884\"}], \"team_lead\": \"agent-task-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-task-plan-team-lead.md": "c64ec810c0182292f98c8ddfe783bd471f61392b6e3b0bc69bff56408eeba453",
+    "agents/agent-task-plan.md": "8f6eda59c3f007fc4582f6d648a18ba7a8d7661e3dc3ac62c83a137317c1155c",
+    "agents/complaint-handle-pro.md": "1b40ab1cdd22c64e13633fa89c3421da59c844b29645c76b54afba20f8739236",
+    "agents/game-qa-method.md": "11896797c2fc6479a2dee5e14a2f619a31e3b4b2d70f5649cc1a9016945d0873",
+    "plugin.json": "aaa464a1bfe581894d43501411d9e04dbf2e2bb7518c10e85ce70665e5673bef",
+    "settings.json": "a71142c6b9396f44e7fd969fd71770bd6dd6c3800eff7da2e710e08a60fc4b02"
+  }
+}

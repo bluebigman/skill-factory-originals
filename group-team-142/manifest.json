@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-142",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-142",
+    "kind": "team",
+    "name": "居家 生活 合同 团队",
+    "description": "居家 生活 合同 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "home-safety-check-pro-team-lead",
+        "role": "lead",
+        "name": "居家安全主理人",
+        "evidence": null
+      },
+      {
+        "slug": "home-safety-check-pro",
+        "role": "member",
+        "name": "居家安全 隐患排查 适老改造",
+        "evidence": "original_assets/home-safety-check-pro/merkle_root",
+        "member_merkle_root": "2a7681d2c121b59bc6bf01588a565f15a89a483f996e00901680272bc5414711"
+      },
+      {
+        "slug": "life-plan-forge-expert",
+        "role": "member",
+        "name": "生活计划 出行饮食 清单生成",
+        "evidence": "original_assets/life-plan-forge-expert/merkle_root",
+        "member_merkle_root": "3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b"
+      },
+      {
+        "slug": "contract-clause-audit-expert",
+        "role": "member",
+        "name": "合同审查 风险条款 核查助手",
+        "evidence": "original_assets/contract-clause-audit-expert/merkle_root",
+        "member_merkle_root": "ca6734d84b5253c371f965f89555fd576424fa780022c3af702033b1d9a0ecc5"
+      }
+    ],
+    "team_lead": "home-safety-check-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f70b198568ed9e9c",
+  "prompt_hash": "54eeec42a256242d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-142\", \"kind\": \"team\", \"name\": \"居家 生活 合同 团队\", \"description\": \"居家 生活 合同 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"home-safety-check-pro-team-lead\", \"role\": \"lead\", \"name\": \"居家安全主理人\", \"evidence\": null}, {\"slug\": \"home-safety-check-pro\", \"role\": \"member\", \"name\": \"居家安全 隐患排查 适老改造\", \"evidence\": \"original_assets/home-safety-check-pro/merkle_root\", \"member_merkle_root\": \"2a7681d2c121b59bc6bf01588a565f15a89a483f996e00901680272bc5414711\"}, {\"slug\": \"life-plan-forge-expert\", \"role\": \"member\", \"name\": \"生活计划 出行饮食 清单生成\", \"evidence\": \"original_assets/life-plan-forge-expert/merkle_root\", \"member_merkle_root\": \"3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b\"}, {\"slug\": \"contract-clause-audit-expert\", \"role\": \"member\", \"name\": \"合同审查 风险条款 核查助手\", \"evidence\": \"original_assets/contract-clause-audit-expert/merkle_root\", \"member_merkle_root\": \"ca6734d84b5253c371f965f89555fd576424fa780022c3af702033b1d9a0ecc5\"}], \"team_lead\": \"home-safety-check-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-clause-audit-expert.md": "cc02fa49239ac83413d9ea593af70d5d89a74c712bcc696ea7bdcca0d0521a11",
+    "agents/home-safety-check-pro-team-lead.md": "f7a3d365fbbdd152464a67b6fe5a4de9a72db7738a2923b44a1caa44269ba0ba",
+    "agents/home-safety-check-pro.md": "e6cf9301a793986e0003ecce4aecba610670e7b70f720e3c01cee93f08defcc0",
+    "agents/life-plan-forge-expert.md": "93aa667b7d64006ffec8570d227c9b5f581a8d03cb7e6750ad843ce68c744373",
+    "plugin.json": "669e345a0f499c5f89cba6b7a3719826bdcb4edcddbd4f94213e9c02c3698e80",
+    "settings.json": "fe064987258c8f8d77ba9762d51907a45589de87c8ec7e37b8757e3e2614279b"
+  }
+}

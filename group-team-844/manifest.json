@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-844",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-844",
+    "kind": "team",
+    "name": "内容提取专家",
+    "description": "内容提取专家：围绕校对审阅，覆盖分层校对／术语一致／数字核对，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "proofread-pro-team-lead",
+        "role": "lead",
+        "name": "校对审阅主理人",
+        "evidence": null
+      },
+      {
+        "slug": "proofread-pro",
+        "role": "member",
+        "name": "校对审阅 错漏检出 顾问",
+        "evidence": "original_assets/proofread-pro/merkle_root",
+        "member_merkle_root": "5260e28db683c4c169aa1a8a95c1c05af3cd3bc194be4e87ee7c2418d07e4f4c"
+      },
+      {
+        "slug": "marketing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "联盟配置审查 营销数据条款审查",
+        "evidence": "original_assets/marketing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1"
+      },
+      {
+        "slug": "pdf-content-extract",
+        "role": "member",
+        "name": "PDF 内容提取 助手",
+        "evidence": "original_assets/pdf-content-extract/merkle_root",
+        "member_merkle_root": "1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb"
+      }
+    ],
+    "team_lead": "proofread-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9e2e9ea10b926b0c",
+  "prompt_hash": "555938b624aa4e2b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-844\", \"kind\": \"team\", \"name\": \"内容提取专家\", \"description\": \"内容提取专家：围绕校对审阅，覆盖分层校对／术语一致／数字核对，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"proofread-pro-team-lead\", \"role\": \"lead\", \"name\": \"校对审阅主理人\", \"evidence\": null}, {\"slug\": \"proofread-pro\", \"role\": \"member\", \"name\": \"校对审阅 错漏检出 顾问\", \"evidence\": \"original_assets/proofread-pro/merkle_root\", \"member_merkle_root\": \"5260e28db683c4c169aa1a8a95c1c05af3cd3bc194be4e87ee7c2418d07e4f4c\"}, {\"slug\": \"marketing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"联盟配置审查 营销数据条款审查\", \"evidence\": \"original_assets/marketing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1\"}, {\"slug\": \"pdf-content-extract\", \"role\": \"member\", \"name\": \"PDF 内容提取 助手\", \"evidence\": \"original_assets/pdf-content-extract/merkle_root\", \"member_merkle_root\": \"1a2d0aaa7980bf8c52d3f1b25a4d8a99a20b0f45c2b3c71b52afcc21a2d0a8eb\"}], \"team_lead\": \"proofread-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/marketing-toolkit-pro-fixed.md": "7045c01393ccd919057bce6fd55463deac39dded2066e5e2dd2b1af7c03d2040",
+    "agents/pdf-content-extract.md": "5cf2386a38083a121ae3a907d18d0546490ee1524bd088f81681fc03ba22de91",
+    "agents/proofread-pro-team-lead.md": "4b291a0026930f5f3b3931f6575383184ec6d6e7e208418585d46749977d2419",
+    "agents/proofread-pro.md": "d0ff068bea9d5a31dc916ef492153e4aa08e7500d602530c658a6f1253d643ea",
+    "plugin.json": "df5ce641e6698bb015785ccafb2711598ed6e7a778fa9dc2d7b3b8acfff24c51",
+    "settings.json": "fd15c13ac5d364fa7ad3a467cf5e506ce2f23aabe2776b23bf7a3feaa9f7079d"
+  }
+}

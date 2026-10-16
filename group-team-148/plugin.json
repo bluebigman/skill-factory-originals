@@ -1,0 +1,126 @@
+{
+  "agentName": "permission-governance-team-lead",
+  "agents": [
+    "./agents/permission-governance-team-lead.md",
+    "./agents/permission-governance.md",
+    "./agents/partner-compliance.md",
+    "./agents/privacy-compliance.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 权限治理",
+    "zh": "帮我处理权限治理"
+  },
+  "description": "Permission Governance team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "权限 外部 隐私 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Permission Governance Team",
+    "zh": "权限 外部 隐私 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "permission-governance-team-lead",
+      "name": {
+        "en": "权限治理主理人",
+        "zh": "权限治理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/permission-governance.png",
+      "id": "permission-governance",
+      "name": {
+        "en": "Permission Governance",
+        "zh": "权限治理 最小授权 高危复核"
+      },
+      "profession": {
+        "en": "Permission Governance",
+        "zh": "权限治理 最小授权 高危复核"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/partner-compliance.png",
+      "id": "partner-compliance",
+      "name": {
+        "en": "Partner Compliance",
+        "zh": "外部合作 合规审查 顾问"
+      },
+      "profession": {
+        "en": "Partner Compliance",
+        "zh": "外部合作 合规审查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/privacy-compliance.png",
+      "id": "privacy-compliance",
+      "name": {
+        "en": "Privacy Compliance",
+        "zh": "隐私合规 数据收集 顾问"
+      },
+      "profession": {
+        "en": "Privacy Compliance",
+        "zh": "隐私合规 数据收集 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-148",
+  "plugin": "group-team-148",
+  "profession": {
+    "en": "Permission Governance Collaboration Team",
+    "zh": "权限 外部 隐私 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 权限治理",
+      "zh": "帮我处理权限治理"
+    },
+    {
+      "en": "Plan 外部合作",
+      "zh": "帮我规划外部合作"
+    },
+    {
+      "en": "Review 隐私合规",
+      "zh": "帮我检查隐私合规"
+    }
+  ],
+  "tags": [
+    {
+      "en": "权限治理",
+      "zh": "权限治理"
+    },
+    {
+      "en": "外部合作",
+      "zh": "外部合作"
+    },
+    {
+      "en": "隐私合规",
+      "zh": "隐私合规"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "permission-governance-team-lead",
+    "memberAgents": [
+      "permission-governance",
+      "partner-compliance",
+      "privacy-compliance"
+    ]
+  },
+  "version": "1.0.0"
+}

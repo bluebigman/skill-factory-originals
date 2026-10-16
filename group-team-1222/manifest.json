@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1222",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1222",
+    "kind": "team",
+    "name": "可视化搭建专家",
+    "description": "擅长场景选型、组件设计与数据接入，覆盖成本控制全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "viz-builder-expert-team-lead",
+        "role": "lead",
+        "name": "数据大屏主理人",
+        "evidence": null
+      },
+      {
+        "slug": "viz-builder-expert",
+        "role": "member",
+        "name": "数据大屏 可视化搭建",
+        "evidence": "original_assets/viz-builder-expert/merkle_root",
+        "member_merkle_root": "7a32c32295841c4f428e6bb40166c70bc5e1d531e93ce68d6bd36046912827b1"
+      },
+      {
+        "slug": "sql-toolkit-pro-02-fixed",
+        "role": "member",
+        "name": "SQL生成编辑 查询构建器",
+        "evidence": "original_assets/sql-toolkit-pro-02-fixed/merkle_root",
+        "member_merkle_root": "d62131e5e2cf6a04bc50a510633960e582e040557f3701052d5e857bfe24a4e3"
+      },
+      {
+        "slug": "token-cost-control-pro",
+        "role": "member",
+        "name": "成本控制 上下文压 顾问",
+        "evidence": "original_assets/token-cost-control-pro/merkle_root",
+        "member_merkle_root": "6d5c2086f42a3ef54cb30e4b244fe65b14a6ff17350a3af6f7d07354bc1a2983"
+      }
+    ],
+    "team_lead": "viz-builder-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8ab764315241a73c",
+  "prompt_hash": "e8c314254e6f6416",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1222\", \"kind\": \"team\", \"name\": \"可视化搭建专家\", \"description\": \"擅长场景选型、组件设计与数据接入，覆盖成本控制全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"viz-builder-expert-team-lead\", \"role\": \"lead\", \"name\": \"数据大屏主理人\", \"evidence\": null}, {\"slug\": \"viz-builder-expert\", \"role\": \"member\", \"name\": \"数据大屏 可视化搭建\", \"evidence\": \"original_assets/viz-builder-expert/merkle_root\", \"member_merkle_root\": \"7a32c32295841c4f428e6bb40166c70bc5e1d531e93ce68d6bd36046912827b1\"}, {\"slug\": \"sql-toolkit-pro-02-fixed\", \"role\": \"member\", \"name\": \"SQL生成编辑 查询构建器\", \"evidence\": \"original_assets/sql-toolkit-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"d62131e5e2cf6a04bc50a510633960e582e040557f3701052d5e857bfe24a4e3\"}, {\"slug\": \"token-cost-control-pro\", \"role\": \"member\", \"name\": \"成本控制 上下文压 顾问\", \"evidence\": \"original_assets/token-cost-control-pro/merkle_root\", \"member_merkle_root\": \"6d5c2086f42a3ef54cb30e4b244fe65b14a6ff17350a3af6f7d07354bc1a2983\"}], \"team_lead\": \"viz-builder-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/sql-toolkit-pro-02-fixed.md": "2fcecb7308d18b725783da79e123add972cbd0e459fbe183647f30d6168b6719",
+    "agents/token-cost-control-pro.md": "0e6959a8c333860a72ee2dae689c7734b2b9b6470aee35d75c9634a84e94989f",
+    "agents/viz-builder-expert-team-lead.md": "173b9d6cf7b0e8e28fc25c5e443464ccb0d8c3e601b1d3d5c6e9401e579778b4",
+    "agents/viz-builder-expert.md": "5afdee714147765e6b61d6cff6dfcfa4fa8af746ee213e7e18f774395316bc1c",
+    "plugin.json": "beea57665f91aec9e6512829891061ef46980bdcc1ff99e04e400f3d5d5963b8",
+    "settings.json": "01b3d230523d593c0282a5004f6de4f39a06446579d598b8a990794af0a22ee5"
+  }
+}

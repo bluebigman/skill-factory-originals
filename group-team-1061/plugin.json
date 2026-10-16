@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-review-checklist-team-lead",
+  "agents": [
+    "./agents/doc-review-checklist-team-lead.md",
+    "./agents/doc-review-checklist.md",
+    "./agents/rollback-safety.md",
+    "./agents/report-data-verify.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 文档评审清单",
+    "zh": "帮我处理文档评审清单"
+  },
+  "description": "doc-review-checklist team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 文档评审清单, covers 分层评审 / 问题分级 / 闭环确认, delivering structured results and actionable checklists.",
+    "zh": "文档评审清单专家：围绕文档评审清单，覆盖分层评审／问题分级／闭环确认，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "doc-review-checklist Team",
+    "zh": "文档评审清单专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-review-checklist-team-lead",
+      "name": {
+        "en": "文档评审清单主理人",
+        "zh": "文档评审清单主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-review-checklist.png",
+      "id": "doc-review-checklist",
+      "name": {
+        "en": "doc-review-checklist",
+        "zh": "文档评审清单 顾问"
+      },
+      "profession": {
+        "en": "doc-review-checklist",
+        "zh": "文档评审清单 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/rollback-safety.png",
+      "id": "rollback-safety",
+      "name": {
+        "en": "rollback-safety",
+        "zh": "回滚安全性 顾问"
+      },
+      "profession": {
+        "en": "rollback-safety",
+        "zh": "回滚安全性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-data-verify.png",
+      "id": "report-data-verify",
+      "name": {
+        "en": "report-data-verify",
+        "zh": "报告数据核验 顾问"
+      },
+      "profession": {
+        "en": "report-data-verify",
+        "zh": "报告数据核验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1061",
+  "plugin": "group-team-1061",
+  "profession": {
+    "en": "doc-review-checklist Collaboration Team",
+    "zh": "文档评审清单专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档评审清单",
+      "zh": "帮我处理文档评审清单"
+    },
+    {
+      "en": "Plan 回滚安全性",
+      "zh": "帮我规划回滚安全性"
+    },
+    {
+      "en": "Review 报告数据核验",
+      "zh": "帮我检查报告数据核验"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分层评审",
+      "zh": "分层评审"
+    },
+    {
+      "en": "问题分级",
+      "zh": "问题分级"
+    },
+    {
+      "en": "闭环确认",
+      "zh": "闭环确认"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-review-checklist-team-lead",
+    "memberAgents": [
+      "doc-review-checklist",
+      "rollback-safety",
+      "report-data-verify"
+    ]
+  },
+  "version": "1.0.0"
+}

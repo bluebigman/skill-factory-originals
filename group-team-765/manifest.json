@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-765",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-765",
+    "kind": "team",
+    "name": "权限治理最小授权专家",
+    "description": "输入命名规范相关需求，输出约定统一、语义明确、长度适度三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "naming-convention-pro-team-lead",
+        "role": "lead",
+        "name": "命名规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "naming-convention-pro",
+        "role": "member",
+        "name": "命名规范 一致约束 顾问",
+        "evidence": "original_assets/naming-convention-pro/merkle_root",
+        "member_merkle_root": "2f5c80a314a81d3ea2f93566d3e79ab164619a73bd358001eab75f873e9bfcbb"
+      },
+      {
+        "slug": "permission-governance-pro",
+        "role": "member",
+        "name": "权限治理 最小授权 顾问",
+        "evidence": "original_assets/permission-governance-pro/merkle_root",
+        "member_merkle_root": "820f551092224c12c415319488cb0e9d111874cf1e76824fb7895f461773af99"
+      },
+      {
+        "slug": "cli-helper-expert",
+        "role": "member",
+        "name": "命令行助手 脚本生成",
+        "evidence": "original_assets/cli-helper-expert/merkle_root",
+        "member_merkle_root": "b5186bf2184ffc69b49138837cd5c5777b18dd17b963e4030e0106964c15635f"
+      }
+    ],
+    "team_lead": "naming-convention-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "43bf7b9fe3ca6e5c",
+  "prompt_hash": "6b3c51ccebae00c9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-765\", \"kind\": \"team\", \"name\": \"权限治理最小授权专家\", \"description\": \"输入命名规范相关需求，输出约定统一、语义明确、长度适度三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"naming-convention-pro-team-lead\", \"role\": \"lead\", \"name\": \"命名规范主理人\", \"evidence\": null}, {\"slug\": \"naming-convention-pro\", \"role\": \"member\", \"name\": \"命名规范 一致约束 顾问\", \"evidence\": \"original_assets/naming-convention-pro/merkle_root\", \"member_merkle_root\": \"2f5c80a314a81d3ea2f93566d3e79ab164619a73bd358001eab75f873e9bfcbb\"}, {\"slug\": \"permission-governance-pro\", \"role\": \"member\", \"name\": \"权限治理 最小授权 顾问\", \"evidence\": \"original_assets/permission-governance-pro/merkle_root\", \"member_merkle_root\": \"820f551092224c12c415319488cb0e9d111874cf1e76824fb7895f461773af99\"}, {\"slug\": \"cli-helper-expert\", \"role\": \"member\", \"name\": \"命令行助手 脚本生成\", \"evidence\": \"original_assets/cli-helper-expert/merkle_root\", \"member_merkle_root\": \"b5186bf2184ffc69b49138837cd5c5777b18dd17b963e4030e0106964c15635f\"}], \"team_lead\": \"naming-convention-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cli-helper-expert.md": "602b6340b3deb4ca8e1a7b98c05ef92f36a437e4d4d4b990136246d20a1ea776",
+    "agents/naming-convention-pro-team-lead.md": "abde0883a2de74fcf54caeb3425f62b998592b1c17fd6cecdcd621c3671d6992",
+    "agents/naming-convention-pro.md": "249165e31530ddc26f60e2f1cf62b962930b84d47566299d73ffffd0a881557f",
+    "agents/permission-governance-pro.md": "33899eb2f7e30bc2f5feac47ead02c358c5dc3586051b72d5fc6ca2f811bb891",
+    "plugin.json": "95cdf8d62c0808513c514cc199d017152059fc2f093cacd84a097ef3cbf7a334",
+    "settings.json": "44b2b37e885064da6af417a93c104d06b2ed7a19b9dca477480b9dfb711d00eb"
+  }
+}

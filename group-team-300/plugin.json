@@ -1,0 +1,126 @@
+{
+  "agentName": "ops-value-pro-team-lead",
+  "agents": [
+    "./agents/ops-value-pro-team-lead.md",
+    "./agents/ops-value-pro.md",
+    "./agents/java-code-pro.md",
+    "./agents/java-sql-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 运维配置体检与规范化",
+    "zh": "帮我处理运维配置体检与规范化"
+  },
+  "description": "Ops Config Normalizer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "运维 工程 与数 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Ops Config Normalizer Team",
+    "zh": "运维 工程 与数 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ops-value-pro-team-lead",
+      "name": {
+        "en": "运维配置体检与规范化主理人",
+        "zh": "运维配置体检与规范化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ops-value-pro.png",
+      "id": "ops-value-pro",
+      "name": {
+        "en": "Ops Config Normalizer",
+        "zh": "运维配置体检与规范化"
+      },
+      "profession": {
+        "en": "Ops Config Normalizer",
+        "zh": "运维配置体检与规范化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/java-code-pro.png",
+      "id": "java-code-pro",
+      "name": {
+        "en": "Java Code Toolkit",
+        "zh": "Java 工程工具"
+      },
+      "profession": {
+        "en": "Java Code Toolkit",
+        "zh": "Java 工程工具"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/java-sql-pro.png",
+      "id": "java-sql-pro",
+      "name": {
+        "en": "Java SQL Developer",
+        "zh": "Java与SQL开发助手"
+      },
+      "profession": {
+        "en": "Java SQL Developer",
+        "zh": "Java与SQL开发助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-300",
+  "plugin": "group-team-300",
+  "profession": {
+    "en": "Ops Config Normalizer Collaboration Team",
+    "zh": "运维 工程 与数 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 运维配置体检与规范化",
+      "zh": "帮我处理运维配置体检与规范化"
+    },
+    {
+      "en": "Plan Java",
+      "zh": "帮我规划Java"
+    },
+    {
+      "en": "Review Java与SQL开发助手",
+      "zh": "帮我检查Java与SQL开发助手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "运维配置体检与规范化",
+      "zh": "运维配置体检与规范化"
+    },
+    {
+      "en": "Java",
+      "zh": "Java"
+    },
+    {
+      "en": "Java与SQL开发助手",
+      "zh": "Java与SQL开发助手"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ops-value-pro-team-lead",
+    "memberAgents": [
+      "ops-value-pro",
+      "java-code-pro",
+      "java-sql-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

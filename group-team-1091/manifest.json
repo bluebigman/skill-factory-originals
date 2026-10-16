@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1091",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1091",
+    "kind": "team",
+    "name": "品牌语气指南专家",
+    "description": "品牌语气指南专家：围绕品牌语气指南，覆盖先定语气／双语对齐／拒绝直译，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "brand-tone-guide-team-lead",
+        "role": "lead",
+        "name": "品牌语气指南主理人",
+        "evidence": null
+      },
+      {
+        "slug": "brand-tone-guide",
+        "role": "member",
+        "name": "品牌语气指南 顾问",
+        "evidence": "original_assets/brand-tone-guide/merkle_root",
+        "member_merkle_root": "e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c"
+      },
+      {
+        "slug": "content-brief-write",
+        "role": "member",
+        "name": "内容需求文档 助手",
+        "evidence": "original_assets/content-brief-write/merkle_root",
+        "member_merkle_root": "13a6427e13e9f54819b6c52984d35921eb8077b168c59504190c1a5c24bb5623"
+      },
+      {
+        "slug": "public-relations",
+        "role": "member",
+        "name": "公关传播 顾问",
+        "evidence": "original_assets/public-relations/merkle_root",
+        "member_merkle_root": "558965270d7c6f8ef518e63e23f031385dffadb244175004acf06bd1b1c5d278"
+      }
+    ],
+    "team_lead": "brand-tone-guide-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cb8eb73f65518d91",
+  "prompt_hash": "20f2459da18c679f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1091\", \"kind\": \"team\", \"name\": \"品牌语气指南专家\", \"description\": \"品牌语气指南专家：围绕品牌语气指南，覆盖先定语气／双语对齐／拒绝直译，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"brand-tone-guide-team-lead\", \"role\": \"lead\", \"name\": \"品牌语气指南主理人\", \"evidence\": null}, {\"slug\": \"brand-tone-guide\", \"role\": \"member\", \"name\": \"品牌语气指南 顾问\", \"evidence\": \"original_assets/brand-tone-guide/merkle_root\", \"member_merkle_root\": \"e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c\"}, {\"slug\": \"content-brief-write\", \"role\": \"member\", \"name\": \"内容需求文档 助手\", \"evidence\": \"original_assets/content-brief-write/merkle_root\", \"member_merkle_root\": \"13a6427e13e9f54819b6c52984d35921eb8077b168c59504190c1a5c24bb5623\"}, {\"slug\": \"public-relations\", \"role\": \"member\", \"name\": \"公关传播 顾问\", \"evidence\": \"original_assets/public-relations/merkle_root\", \"member_merkle_root\": \"558965270d7c6f8ef518e63e23f031385dffadb244175004acf06bd1b1c5d278\"}], \"team_lead\": \"brand-tone-guide-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/brand-tone-guide-team-lead.md": "e00794749c9b7014ebfedba7298df3d27b6d5fd9a65c56de5f90d56cb24bbedd",
+    "agents/brand-tone-guide.md": "efdc54b9d3fcaa44c6a603a2d98d3f20140a349c0abce6d28e754e26d3f97324",
+    "agents/content-brief-write.md": "16e92767b8d2c91eaba71570264df5140ef7fe27c2e19768473724fd5284e344",
+    "agents/public-relations.md": "c793e7250bfef75f43d8b420621350641e65b4125b2a28dde1517df39a97e5e5",
+    "plugin.json": "023f734fcd9f8ef1dbaabc4de11dec1ada003423e4affd651e58bb34a95a262c",
+    "settings.json": "2752687386c0a06b19d677aeb56b25204a4c19493067f40490a3fed97a74e6f3"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "pricing-page-ux-team-lead",
+  "agents": [
+    "./agents/pricing-page-ux-team-lead.md",
+    "./agents/pricing-page-ux.md",
+    "./agents/search-ux-pro.md",
+    "./agents/ppt-visual-tune.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 定价页面",
+    "zh": "帮我处理定价页面"
+  },
+  "description": "pricing-page-ux team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 定价页面 requirements, output three deliverables: 疑虑前置, 拒绝暗黑, 容错纠错. Verifiable end-to-end, evidence per step.",
+    "zh": "输入定价页面相关需求，输出疑虑前置、拒绝暗黑、容错纠错三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "pricing-page-ux Team",
+    "zh": "视觉调优专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pricing-page-ux-team-lead",
+      "name": {
+        "en": "定价页面主理人",
+        "zh": "定价页面主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pricing-page-ux.png",
+      "id": "pricing-page-ux",
+      "name": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "profession": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/search-ux-pro.png",
+      "id": "search-ux-pro",
+      "name": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "profession": {
+        "en": "search-ux-pro",
+        "zh": "搜索体验 检索设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ppt-visual-tune.png",
+      "id": "ppt-visual-tune",
+      "name": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "profession": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-874",
+  "plugin": "group-team-874",
+  "profession": {
+    "en": "pricing-page-ux Collaboration Team",
+    "zh": "视觉调优专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 定价页面",
+      "zh": "帮我处理定价页面"
+    },
+    {
+      "en": "Plan 搜索体验",
+      "zh": "帮我规划搜索体验"
+    },
+    {
+      "en": "Review PPT",
+      "zh": "帮我检查PPT"
+    }
+  ],
+  "tags": [
+    {
+      "en": "疑虑前置",
+      "zh": "疑虑前置"
+    },
+    {
+      "en": "拒绝暗黑",
+      "zh": "拒绝暗黑"
+    },
+    {
+      "en": "容错纠错",
+      "zh": "容错纠错"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pricing-page-ux-team-lead",
+    "memberAgents": [
+      "pricing-page-ux",
+      "search-ux-pro",
+      "ppt-visual-tune"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "ui-design-expert-team-lead",
+  "agents": [
+    "./agents/ui-design-expert-team-lead.md",
+    "./agents/ui-design-expert.md",
+    "./agents/incident-response-plan.md",
+    "./agents/agent-output-verify-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 界面设计",
+    "zh": "帮我处理界面设计"
+  },
+  "description": "UIPolishPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 安全事件响应 requirements, output three deliverables: 需求翻译, 视觉规范, 设计评审. Verifiable end-to-end, evidence per step.",
+    "zh": "输入安全事件响应相关需求，输出需求翻译、视觉规范、设计评审三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "UIPolishPro Team",
+    "zh": "安全事件响应专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ui-design-expert-team-lead",
+      "name": {
+        "en": "界面设计主理人",
+        "zh": "界面设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ui-design-expert.png",
+      "id": "ui-design-expert",
+      "name": {
+        "en": "UIPolishPro",
+        "zh": "界面设计 组件美化"
+      },
+      "profession": {
+        "en": "UIPolishPro",
+        "zh": "界面设计 组件美化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/incident-response-plan.png",
+      "id": "incident-response-plan",
+      "name": {
+        "en": "incident-response-plan",
+        "zh": "安全事件响应 顾问"
+      },
+      "profession": {
+        "en": "incident-response-plan",
+        "zh": "安全事件响应 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-pro.png",
+      "id": "agent-output-verify-pro",
+      "name": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-908",
+  "plugin": "group-team-908",
+  "profession": {
+    "en": "UIPolishPro Collaboration Team",
+    "zh": "安全事件响应专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 界面设计",
+      "zh": "帮我处理界面设计"
+    },
+    {
+      "en": "Plan 安全事件响应",
+      "zh": "帮我规划安全事件响应"
+    },
+    {
+      "en": "Review 输出验证",
+      "zh": "帮我检查输出验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "需求翻译",
+      "zh": "需求翻译"
+    },
+    {
+      "en": "视觉规范",
+      "zh": "视觉规范"
+    },
+    {
+      "en": "设计评审",
+      "zh": "设计评审"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ui-design-expert-team-lead",
+    "memberAgents": [
+      "ui-design-expert",
+      "incident-response-plan",
+      "agent-output-verify-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

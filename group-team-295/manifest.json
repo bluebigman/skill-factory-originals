@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-295",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-295",
+    "kind": "team",
+    "name": "公式审计专家",
+    "description": "公式审计专家：围绕公式审计，覆盖引用检查／类型校验／循环引用，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "formula-audit-pro-team-lead",
+        "role": "lead",
+        "name": "公式审计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "formula-audit-pro",
+        "role": "member",
+        "name": "公式审计 引用检查 顾问",
+        "evidence": "original_assets/formula-audit-pro/merkle_root",
+        "member_merkle_root": "313ee1651ec0e1c0846e731e298e18afe2a9ae0e5f866903e44915fd77bb0e6f"
+      },
+      {
+        "slug": "metric-anomaly-alert",
+        "role": "member",
+        "name": "指标异常 波动检测 顾问",
+        "evidence": "original_assets/metric-anomaly-alert/merkle_root",
+        "member_merkle_root": "1f45b6f01b947bf34d5a0b67e25611f515c498d90a1aa1c5287b486de3c81bdf"
+      },
+      {
+        "slug": "db-index-audit",
+        "role": "member",
+        "name": "索引审计 冗余识别 顾问",
+        "evidence": "original_assets/db-index-audit/merkle_root",
+        "member_merkle_root": "9fc248ef912a5d3be3b659dd778c0a397b2e1ff6846313a1ce48f201137aed80"
+      }
+    ],
+    "team_lead": "formula-audit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0f62c6a47a2dd222",
+  "prompt_hash": "dd9b7e9b2f472716",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-295\", \"kind\": \"team\", \"name\": \"公式审计专家\", \"description\": \"公式审计专家：围绕公式审计，覆盖引用检查／类型校验／循环引用，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"formula-audit-pro-team-lead\", \"role\": \"lead\", \"name\": \"公式审计主理人\", \"evidence\": null}, {\"slug\": \"formula-audit-pro\", \"role\": \"member\", \"name\": \"公式审计 引用检查 顾问\", \"evidence\": \"original_assets/formula-audit-pro/merkle_root\", \"member_merkle_root\": \"313ee1651ec0e1c0846e731e298e18afe2a9ae0e5f866903e44915fd77bb0e6f\"}, {\"slug\": \"metric-anomaly-alert\", \"role\": \"member\", \"name\": \"指标异常 波动检测 顾问\", \"evidence\": \"original_assets/metric-anomaly-alert/merkle_root\", \"member_merkle_root\": \"1f45b6f01b947bf34d5a0b67e25611f515c498d90a1aa1c5287b486de3c81bdf\"}, {\"slug\": \"db-index-audit\", \"role\": \"member\", \"name\": \"索引审计 冗余识别 顾问\", \"evidence\": \"original_assets/db-index-audit/merkle_root\", \"member_merkle_root\": \"9fc248ef912a5d3be3b659dd778c0a397b2e1ff6846313a1ce48f201137aed80\"}], \"team_lead\": \"formula-audit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/db-index-audit.md": "4406a6afb51b2a202c7879442c26112070f60597dd816fab15036f1d883e3df8",
+    "agents/formula-audit-pro-team-lead.md": "01a97ba4fb46ba29e956626abb4f5071d3a5c7d6f319c07278cee2f3c391a5b2",
+    "agents/formula-audit-pro.md": "71b6c4544da9bf866afa53d03b2756aaed39e9448d4035462322a819a9ebcd7f",
+    "agents/metric-anomaly-alert.md": "f6f790745997ec9d1a47a03ca305fbbe1099f45b45e2e47d75d210a09c2ecd4a",
+    "plugin.json": "3a65a162ecd907374cb862f2ac679d5aca20bcfbedb4d2a7c6580c05b4cf6750",
+    "settings.json": "c04ba8a3a822d51ac507d7f9e394e9969647921a9f64438abdba84d3712b0cb3"
+  }
+}

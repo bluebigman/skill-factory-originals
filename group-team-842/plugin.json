@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-pro-team-lead",
+  "agents": [
+    "./agents/data-pipeline-pro-team-lead.md",
+    "./agents/data-pipeline-pro.md",
+    "./agents/sensitive-file-guard.md",
+    "./agents/data-clean-pro-04.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 实习日志",
+    "zh": "帮我处理实习日志"
+  },
+  "description": "数据管道与批处理 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 敏感文件防护 requirements, output three deliverables: 分类标识, 访问审计, 传输加密. Verifiable end-to-end, evidence per step.",
+    "zh": "输入敏感文件防护相关需求，输出分类标识、访问审计、传输加密三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "数据管道与批处理 Suite Team",
+    "zh": "实习日志文档生成专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-pro-team-lead",
+      "name": {
+        "en": "实习日志主理人",
+        "zh": "实习日志主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro.png",
+      "id": "data-pipeline-pro",
+      "name": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "profession": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sensitive-file-guard.png",
+      "id": "sensitive-file-guard",
+      "name": {
+        "en": "sensitive-file-guard",
+        "zh": "敏感文件防护 顾问"
+      },
+      "profession": {
+        "en": "sensitive-file-guard",
+        "zh": "敏感文件防护 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-04.png",
+      "id": "data-clean-pro-04",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-842",
+  "plugin": "group-team-842",
+  "profession": {
+    "en": "数据管道与批处理 Suite Collaboration Team",
+    "zh": "实习日志文档生成专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 实习日志",
+      "zh": "帮我处理实习日志"
+    },
+    {
+      "en": "Plan 敏感文件防护",
+      "zh": "帮我规划敏感文件防护"
+    },
+    {
+      "en": "Review 数据整理",
+      "zh": "帮我检查数据整理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "批量处理",
+      "zh": "批量处理"
+    },
+    {
+      "en": "数据编译",
+      "zh": "数据编译"
+    },
+    {
+      "en": "批量转换",
+      "zh": "批量转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-pro-team-lead",
+    "memberAgents": [
+      "data-pipeline-pro",
+      "sensitive-file-guard",
+      "data-clean-pro-04"
+    ]
+  },
+  "version": "1.0.0"
+}

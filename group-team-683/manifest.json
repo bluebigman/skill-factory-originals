@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-683",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-683",
+    "kind": "team",
+    "name": "依据留痕专家",
+    "description": "依据留痕专家：围绕决策追溯，覆盖决策记录／否决留痕／版本绑定，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "decision-trace-pro-team-lead",
+        "role": "lead",
+        "name": "决策追溯主理人",
+        "evidence": null
+      },
+      {
+        "slug": "decision-trace-pro",
+        "role": "member",
+        "name": "决策追溯 依据留痕 顾问",
+        "evidence": "original_assets/decision-trace-pro/merkle_root",
+        "member_merkle_root": "eb8223b63eeb3fb40a80a7e71e1b1a3bd8f73d625c756bfd1ff3a170b8ffd20b"
+      },
+      {
+        "slug": "capacity-planning-pro",
+        "role": "member",
+        "name": "容量规划 负载预测 顾问",
+        "evidence": "original_assets/capacity-planning-pro/merkle_root",
+        "member_merkle_root": "46fc50430c2460d2df8968f2f284f9733b14f28e3fcbe0a6245b1955fd453743"
+      },
+      {
+        "slug": "sql-master-pro",
+        "role": "member",
+        "name": "数据库查询 SQL编写",
+        "evidence": "original_assets/sql-master-pro/merkle_root",
+        "member_merkle_root": "aa31790810cf37c1076e4a7001265ee29780ab606fff8a4f4b41e4d8fb6b9e53"
+      }
+    ],
+    "team_lead": "decision-trace-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "39177c3a264dc89d",
+  "prompt_hash": "dfa62f9d5c137cb0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-683\", \"kind\": \"team\", \"name\": \"依据留痕专家\", \"description\": \"依据留痕专家：围绕决策追溯，覆盖决策记录／否决留痕／版本绑定，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"decision-trace-pro-team-lead\", \"role\": \"lead\", \"name\": \"决策追溯主理人\", \"evidence\": null}, {\"slug\": \"decision-trace-pro\", \"role\": \"member\", \"name\": \"决策追溯 依据留痕 顾问\", \"evidence\": \"original_assets/decision-trace-pro/merkle_root\", \"member_merkle_root\": \"eb8223b63eeb3fb40a80a7e71e1b1a3bd8f73d625c756bfd1ff3a170b8ffd20b\"}, {\"slug\": \"capacity-planning-pro\", \"role\": \"member\", \"name\": \"容量规划 负载预测 顾问\", \"evidence\": \"original_assets/capacity-planning-pro/merkle_root\", \"member_merkle_root\": \"46fc50430c2460d2df8968f2f284f9733b14f28e3fcbe0a6245b1955fd453743\"}, {\"slug\": \"sql-master-pro\", \"role\": \"member\", \"name\": \"数据库查询 SQL编写\", \"evidence\": \"original_assets/sql-master-pro/merkle_root\", \"member_merkle_root\": \"aa31790810cf37c1076e4a7001265ee29780ab606fff8a4f4b41e4d8fb6b9e53\"}], \"team_lead\": \"decision-trace-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/capacity-planning-pro.md": "3356af4f4601524be64b3a4aadb8e93baf89ef5d92e3a695b5d2b3c144fdf538",
+    "agents/decision-trace-pro-team-lead.md": "7a47bfb18ec5431ecb2694590e8e6740d212d91fa1af1bbc5aa9046578da9485",
+    "agents/decision-trace-pro.md": "ecbca77ba2fbba72597e95e79c5886f67d5f02db67a1d5d9d0ceec7a95f033e4",
+    "agents/sql-master-pro.md": "c9925a26f48cee3ca00d243bdce8bb3848da9867f508d0ab48083b4971b101b8",
+    "plugin.json": "afeab2ac43e2e6fe87b609b85567b1c429326e4b54015bbac7ad7f157ef37a9c",
+    "settings.json": "be6001f234d00b0726512a5bd050d0294b0ad79d6e899b31ca0b05578c4134b4"
+  }
+}

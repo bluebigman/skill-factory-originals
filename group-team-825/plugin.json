@@ -1,0 +1,126 @@
+{
+  "agentName": "data-cleanse-expert-team-lead",
+  "agents": [
+    "./agents/data-cleanse-expert-team-lead.md",
+    "./agents/data-cleanse-expert.md",
+    "./agents/capacity-planning-pro.md",
+    "./agents/code-assist-pro-01-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据清洗",
+    "zh": "帮我处理数据清洗"
+  },
+  "description": "CleanData team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 容量规划 requirements, output three deliverables: 采集解析, 清洗规则, 清洗报告. Verifiable end-to-end, evidence per step.",
+    "zh": "输入容量规划相关需求，输出采集解析、清洗规则、清洗报告三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "CleanData Team",
+    "zh": "数据清洗专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-cleanse-expert-team-lead",
+      "name": {
+        "en": "数据清洗主理人",
+        "zh": "数据清洗主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-cleanse-expert.png",
+      "id": "data-cleanse-expert",
+      "name": {
+        "en": "CleanData",
+        "zh": "数据清洗 质量校验"
+      },
+      "profession": {
+        "en": "CleanData",
+        "zh": "数据清洗 质量校验"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/capacity-planning-pro.png",
+      "id": "capacity-planning-pro",
+      "name": {
+        "en": "capacity-planning-pro",
+        "zh": "容量规划 负载预测 顾问"
+      },
+      "profession": {
+        "en": "capacity-planning-pro",
+        "zh": "容量规划 负载预测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-01-fixed.png",
+      "id": "code-assist-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "Rails 批量造数 快捷生成"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "Rails 批量造数 快捷生成"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-825",
+  "plugin": "group-team-825",
+  "profession": {
+    "en": "CleanData Collaboration Team",
+    "zh": "数据清洗专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据清洗",
+      "zh": "帮我处理数据清洗"
+    },
+    {
+      "en": "Plan 容量规划",
+      "zh": "帮我规划容量规划"
+    },
+    {
+      "en": "Review Rails",
+      "zh": "帮我检查Rails"
+    }
+  ],
+  "tags": [
+    {
+      "en": "采集解析",
+      "zh": "采集解析"
+    },
+    {
+      "en": "清洗规则",
+      "zh": "清洗规则"
+    },
+    {
+      "en": "清洗报告",
+      "zh": "清洗报告"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-cleanse-expert-team-lead",
+    "memberAgents": [
+      "data-cleanse-expert",
+      "capacity-planning-pro",
+      "code-assist-pro-01-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

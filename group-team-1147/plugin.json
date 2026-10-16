@@ -1,0 +1,126 @@
+{
+  "agentName": "pii-redact-pro-team-lead",
+  "agents": [
+    "./agents/pii-redact-pro-team-lead.md",
+    "./agents/pii-redact-pro.md",
+    "./agents/ops-deploy-pro-01.md",
+    "./agents/data-visual-pick.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 隐私信息脱敏",
+    "zh": "帮我处理隐私信息脱敏"
+  },
+  "description": "pii-redact-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 隐私信息脱敏 end-to-end: 分级处理, 比较用柱 and 趋势用线. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分级处理、比较用柱与趋势用线，覆盖隐私信息脱敏全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "pii-redact-pro Team",
+    "zh": "隐私信息脱敏助手专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pii-redact-pro-team-lead",
+      "name": {
+        "en": "隐私信息脱敏主理人",
+        "zh": "隐私信息脱敏主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pii-redact-pro.png",
+      "id": "pii-redact-pro",
+      "name": {
+        "en": "pii-redact-pro",
+        "zh": "隐私信息脱敏 助手"
+      },
+      "profession": {
+        "en": "pii-redact-pro",
+        "zh": "隐私信息脱敏 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro-01.png",
+      "id": "ops-deploy-pro-01",
+      "name": {
+        "en": "运维与部署 Suite",
+        "zh": "部署配置"
+      },
+      "profession": {
+        "en": "运维与部署 Suite",
+        "zh": "部署配置"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-visual-pick.png",
+      "id": "data-visual-pick",
+      "name": {
+        "en": "data-visual-pick",
+        "zh": "图表类型选择 顾问"
+      },
+      "profession": {
+        "en": "data-visual-pick",
+        "zh": "图表类型选择 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1147",
+  "plugin": "group-team-1147",
+  "profession": {
+    "en": "pii-redact-pro Collaboration Team",
+    "zh": "隐私信息脱敏助手专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 隐私信息脱敏",
+      "zh": "帮我处理隐私信息脱敏"
+    },
+    {
+      "en": "Plan 部署配置",
+      "zh": "帮我规划部署配置"
+    },
+    {
+      "en": "Review 图表类型选择",
+      "zh": "帮我检查图表类型选择"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级处理",
+      "zh": "分级处理"
+    },
+    {
+      "en": "先识别",
+      "zh": "先识别"
+    },
+    {
+      "en": "不可逆",
+      "zh": "不可逆"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pii-redact-pro-team-lead",
+    "memberAgents": [
+      "pii-redact-pro",
+      "ops-deploy-pro-01",
+      "data-visual-pick"
+    ]
+  },
+  "version": "1.0.0"
+}

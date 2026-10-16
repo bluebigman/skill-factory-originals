@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1008",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1008",
+    "kind": "team",
+    "name": "文档版本比对顾问专家",
+    "description": "输入文档版本比对相关需求，输出差异分级、位置明确、批量汇总三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-version-diff-team-lead",
+        "role": "lead",
+        "name": "文档版本比对主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-version-diff",
+        "role": "member",
+        "name": "文档版本比对 顾问",
+        "evidence": "original_assets/doc-version-diff/merkle_root",
+        "member_merkle_root": "d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e"
+      },
+      {
+        "slug": "hospitality-service",
+        "role": "member",
+        "name": "服务标准设计 顾问",
+        "evidence": "original_assets/hospitality-service/merkle_root",
+        "member_merkle_root": "318a0b057b678e0b44edf555ab4c6f7e876b11aef8d747d5ec6e574387f1c421"
+      },
+      {
+        "slug": "security-training",
+        "role": "member",
+        "name": "安全培训 顾问",
+        "evidence": "original_assets/security-training/merkle_root",
+        "member_merkle_root": "565796de42b7032b54e212cb564d8e1d22511489c8ea02a7dfa0f143f0a54c6a"
+      }
+    ],
+    "team_lead": "doc-version-diff-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2df3e6fa504c3caf",
+  "prompt_hash": "748b16174d4033e0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1008\", \"kind\": \"team\", \"name\": \"文档版本比对顾问专家\", \"description\": \"输入文档版本比对相关需求，输出差异分级、位置明确、批量汇总三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-version-diff-team-lead\", \"role\": \"lead\", \"name\": \"文档版本比对主理人\", \"evidence\": null}, {\"slug\": \"doc-version-diff\", \"role\": \"member\", \"name\": \"文档版本比对 顾问\", \"evidence\": \"original_assets/doc-version-diff/merkle_root\", \"member_merkle_root\": \"d3c1ad2695d3300f80f7bd40b043aed29c357f649b258370219fb9a404e4370e\"}, {\"slug\": \"hospitality-service\", \"role\": \"member\", \"name\": \"服务标准设计 顾问\", \"evidence\": \"original_assets/hospitality-service/merkle_root\", \"member_merkle_root\": \"318a0b057b678e0b44edf555ab4c6f7e876b11aef8d747d5ec6e574387f1c421\"}, {\"slug\": \"security-training\", \"role\": \"member\", \"name\": \"安全培训 顾问\", \"evidence\": \"original_assets/security-training/merkle_root\", \"member_merkle_root\": \"565796de42b7032b54e212cb564d8e1d22511489c8ea02a7dfa0f143f0a54c6a\"}], \"team_lead\": \"doc-version-diff-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-version-diff-team-lead.md": "a8a4a891b3be2f955ea07f1498c38ae1e7adf50507cc81a9286dce601d3093ae",
+    "agents/doc-version-diff.md": "7cea997d5c5a4a1a4ff058ad410d53f40330e46838ac23a0330f9fda934a60b9",
+    "agents/hospitality-service.md": "3f82d388ed0f36a363a0993d3e2a80428d9a3c70112d325fa102386c60d2daa9",
+    "agents/security-training.md": "79b5603378673aafa95ba4ed8078425fa18c6639e8b70b564d01654d02e198ee",
+    "plugin.json": "215f8a28971cf611284b04a9cc5f5ecf93238e80123a6ac348053ff2a74cac94",
+    "settings.json": "7b456acab83afd2b4dfa85a028094a9921666be2e2f24e279ca50fe021e6662f"
+  }
+}

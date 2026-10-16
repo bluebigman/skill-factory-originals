@@ -1,0 +1,126 @@
+{
+  "agentName": "report-automation-pro-team-lead",
+  "agents": [
+    "./agents/report-automation-pro-team-lead.md",
+    "./agents/report-automation-pro.md",
+    "./agents/agent-red-team.md",
+    "./agents/doc-legal-boundary.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 报表自动",
+    "zh": "帮我处理报表自动"
+  },
+  "description": "report-automation-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 报表自动 requirements, output three deliverables: 定时可靠, 失败告警, 数据就绪. Verifiable end-to-end, evidence per step.",
+    "zh": "输入报表自动相关需求，输出定时可靠、失败告警、数据就绪三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "report-automation-pro Team",
+    "zh": "报表自动定时生成专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "report-automation-pro-team-lead",
+      "name": {
+        "en": "报表自动主理人",
+        "zh": "报表自动主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/report-automation-pro.png",
+      "id": "report-automation-pro",
+      "name": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "profession": {
+        "en": "report-automation-pro",
+        "zh": "报表自动 定时生成 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-red-team.png",
+      "id": "agent-red-team",
+      "name": {
+        "en": "agent-red-team",
+        "zh": "对抗测试 越权探测 顾问"
+      },
+      "profession": {
+        "en": "agent-red-team",
+        "zh": "对抗测试 越权探测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-legal-boundary.png",
+      "id": "doc-legal-boundary",
+      "name": {
+        "en": "doc-legal-boundary",
+        "zh": "文档合规边界 顾问"
+      },
+      "profession": {
+        "en": "doc-legal-boundary",
+        "zh": "文档合规边界 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1185",
+  "plugin": "group-team-1185",
+  "profession": {
+    "en": "report-automation-pro Collaboration Team",
+    "zh": "报表自动定时生成专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报表自动",
+      "zh": "帮我处理报表自动"
+    },
+    {
+      "en": "Plan 对抗测试",
+      "zh": "帮我规划对抗测试"
+    },
+    {
+      "en": "Review 文档合规边界",
+      "zh": "帮我检查文档合规边界"
+    }
+  ],
+  "tags": [
+    {
+      "en": "定时可靠",
+      "zh": "定时可靠"
+    },
+    {
+      "en": "失败告警",
+      "zh": "失败告警"
+    },
+    {
+      "en": "数据就绪",
+      "zh": "数据就绪"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "report-automation-pro-team-lead",
+    "memberAgents": [
+      "report-automation-pro",
+      "agent-red-team",
+      "doc-legal-boundary"
+    ]
+  },
+  "version": "1.0.0"
+}

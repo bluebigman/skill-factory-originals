@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-1279",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1279",
+    "kind": "team",
+    "name": "用户内容运营机制专家",
+    "description": "擅长语气自然、保留信息与降低门槛，覆盖去全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ai-flavor-remove-team-lead",
+        "role": "lead",
+        "name": "去主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ai-flavor-remove",
+        "role": "member",
+        "name": "去 AI 味改写 助手",
+        "evidence": "original_assets/ai-flavor-remove/merkle_root",
+        "member_merkle_root": "a83d41a095c06554a76b32dbb6fbde0df6e22f21b9b42ba978f2c78df230c4c2"
+      },
+      {
+        "slug": "ugc-operation",
+        "role": "member",
+        "name": "用户内容 运营机制 顾问",
+        "evidence": "original_assets/ugc-operation/merkle_root",
+        "member_merkle_root": "8285e109e6c4f8cfe0eae3cfdc99410141ebbebf0d3d74595339240bb7e5b2d6"
+      },
+      {
+        "slug": "doc-citation-format",
+        "role": "member",
+        "name": "引用格式规范 顾问",
+        "evidence": "original_assets/doc-citation-format/merkle_root",
+        "member_merkle_root": "36b3eeeae25a02bbc61676b43692204a554ebdb28de484102af4ac23d05e96df"
+      }
+    ],
+    "team_lead": "ai-flavor-remove-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4a630614c0ade660",
+  "prompt_hash": "0c0b309bd375debd",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1279\", \"kind\": \"team\", \"name\": \"用户内容运营机制专家\", \"description\": \"擅长语气自然、保留信息与降低门槛，覆盖去全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ai-flavor-remove-team-lead\", \"role\": \"lead\", \"name\": \"去主理人\", \"evidence\": null}, {\"slug\": \"ai-flavor-remove\", \"role\": \"member\", \"name\": \"去 AI 味改写 助手\", \"evidence\": \"original_assets/ai-flavor-remove/merkle_root\", \"member_merkle_root\": \"a83d41a095c06554a76b32dbb6fbde0df6e22f21b9b42ba978f2c78df230c4c2\"}, {\"slug\": \"ugc-operation\", \"role\": \"member\", \"name\": \"用户内容 运营机制 顾问\", \"evidence\": \"original_assets/ugc-operation/merkle_root\", \"member_merkle_root\": \"8285e109e6c4f8cfe0eae3cfdc99410141ebbebf0d3d74595339240bb7e5b2d6\"}, {\"slug\": \"doc-citation-format\", \"role\": \"member\", \"name\": \"引用格式规范 顾问\", \"evidence\": \"original_assets/doc-citation-format/merkle_root\", \"member_merkle_root\": \"36b3eeeae25a02bbc61676b43692204a554ebdb28de484102af4ac23d05e96df\"}], \"team_lead\": \"ai-flavor-remove-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ai-flavor-remove-team-lead.md": "26fa31d6bb0ab958f9e8a383ac011585b15a2cda4eb72beeb83fa4ce7fdcfdc9",
+    "agents/ai-flavor-remove.md": "240458358759072871f52d39ff44320449866c6a4465d665fa251ce815fba60a",
+    "agents/doc-citation-format.md": "ae5272ca8dd63b7d1f42fed38764fd458246e92b27bb5d6f8e28288a1c13ffd0",
+    "agents/ugc-operation.md": "9dcd4536ac3ecc93631b2ef42df6efe568e0f7b541e16e4f101ba0e890e13dc9",
+    "plugin.json": "47f463fd28e8c6acac0b6f2f95419fc8de8b3612d904faacfb22bab5cde8c81d",
+    "settings.json": "8bd9220604053856863a5404f29671de35632d809e6e11f1e2d0dd0f51cab4cf"
+  }
+}

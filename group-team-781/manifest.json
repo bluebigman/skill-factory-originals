@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-781",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-781",
+    "kind": "team",
+    "name": "接口模拟联调编排专家",
+    "description": "擅长模拟响应、字段编排与示例生成，覆盖接口模拟联调编排全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-mock-pro-team-lead",
+        "role": "lead",
+        "name": "接口模拟主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-mock-pro",
+        "role": "member",
+        "name": "接口模拟 联调编排 时序回放",
+        "evidence": "original_assets/api-mock-pro/merkle_root",
+        "member_merkle_root": "b42abd116ab122435193729e91f6ff6528bc04f15dd2fefeda36991824fa4917"
+      },
+      {
+        "slug": "config-error-triage-expert",
+        "role": "member",
+        "name": "配置排查 报错定位",
+        "evidence": "original_assets/config-error-triage-expert/merkle_root",
+        "member_merkle_root": "f0bc33854157bde16f03516c49046337efaf9effb4c1265bd33e3b2e18d073a1"
+      },
+      {
+        "slug": "sheet-master-pro",
+        "role": "member",
+        "name": "表格处理 Excel公式",
+        "evidence": "original_assets/sheet-master-pro/merkle_root",
+        "member_merkle_root": "3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163"
+      }
+    ],
+    "team_lead": "api-mock-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fc88d4b52605f48f",
+  "prompt_hash": "33916c3ceaf1283c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-781\", \"kind\": \"team\", \"name\": \"接口模拟联调编排专家\", \"description\": \"擅长模拟响应、字段编排与示例生成，覆盖接口模拟联调编排全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-mock-pro-team-lead\", \"role\": \"lead\", \"name\": \"接口模拟主理人\", \"evidence\": null}, {\"slug\": \"api-mock-pro\", \"role\": \"member\", \"name\": \"接口模拟 联调编排 时序回放\", \"evidence\": \"original_assets/api-mock-pro/merkle_root\", \"member_merkle_root\": \"b42abd116ab122435193729e91f6ff6528bc04f15dd2fefeda36991824fa4917\"}, {\"slug\": \"config-error-triage-expert\", \"role\": \"member\", \"name\": \"配置排查 报错定位\", \"evidence\": \"original_assets/config-error-triage-expert/merkle_root\", \"member_merkle_root\": \"f0bc33854157bde16f03516c49046337efaf9effb4c1265bd33e3b2e18d073a1\"}, {\"slug\": \"sheet-master-pro\", \"role\": \"member\", \"name\": \"表格处理 Excel公式\", \"evidence\": \"original_assets/sheet-master-pro/merkle_root\", \"member_merkle_root\": \"3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163\"}], \"team_lead\": \"api-mock-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-mock-pro-team-lead.md": "fce238140f507cc4b3515c8434d346c6290cafc2d3278e76007d399103c2109f",
+    "agents/api-mock-pro.md": "be575373aa5a1370c6be6a5f791f2c4e5f72f864828262219b1a82add120cc21",
+    "agents/config-error-triage-expert.md": "5912ba492780cf7ce2396c34e28320a4d78a5180839d6d5a4edbbae68638eaaa",
+    "agents/sheet-master-pro.md": "b1e08e6311f1b113090903023934430bb98a94acc844db1267777b0f62f85ffb",
+    "plugin.json": "b7494288111a3ab97ef4f2cb037f6f743b576f0bbf3bfbf13da03af3e221a44b",
+    "settings.json": "2165c2cc687eb28003f0d2cf88711a6d0caac2f1bcf70d0e55b4a1dae74cd6c7"
+  }
+}

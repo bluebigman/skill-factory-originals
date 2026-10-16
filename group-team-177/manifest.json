@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-177",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-177",
+    "kind": "team",
+    "name": "公众号 搜索 促销 团队",
+    "description": "公众号 搜索 促销 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "mp-title-coach-team-lead",
+        "role": "lead",
+        "name": "公众号标题主理人",
+        "evidence": null
+      },
+      {
+        "slug": "mp-title-coach",
+        "role": "member",
+        "name": "公众号标题 拟写打磨 顾问",
+        "evidence": "original_assets/mp-title-coach/merkle_root",
+        "member_merkle_root": "2642e3ed35b939ff9e0fc80c3cb1d026d13387f5111c57070d6b9811141fd703"
+      },
+      {
+        "slug": "seo-article-pro",
+        "role": "member",
+        "name": "搜索排名 关键词布局 转化率",
+        "evidence": "original_assets/seo-article-pro/merkle_root",
+        "member_merkle_root": "ad5cc7d81e089dd1983e300f2f2e6c737e3400d9f7d5a8f80ecb25cfa0d44133"
+      },
+      {
+        "slug": "promotion-planning-pro",
+        "role": "member",
+        "name": "促销活动 优惠 方案",
+        "evidence": "original_assets/promotion-planning-pro/merkle_root",
+        "member_merkle_root": "bacb704648b074bb31e010a0c0b9c611b39d2abe603064a9435cd0758645c10d"
+      }
+    ],
+    "team_lead": "mp-title-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e0e3464bb9957e45",
+  "prompt_hash": "f19f0a4bde5c025c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-177\", \"kind\": \"team\", \"name\": \"公众号 搜索 促销 团队\", \"description\": \"公众号 搜索 促销 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"mp-title-coach-team-lead\", \"role\": \"lead\", \"name\": \"公众号标题主理人\", \"evidence\": null}, {\"slug\": \"mp-title-coach\", \"role\": \"member\", \"name\": \"公众号标题 拟写打磨 顾问\", \"evidence\": \"original_assets/mp-title-coach/merkle_root\", \"member_merkle_root\": \"2642e3ed35b939ff9e0fc80c3cb1d026d13387f5111c57070d6b9811141fd703\"}, {\"slug\": \"seo-article-pro\", \"role\": \"member\", \"name\": \"搜索排名 关键词布局 转化率\", \"evidence\": \"original_assets/seo-article-pro/merkle_root\", \"member_merkle_root\": \"ad5cc7d81e089dd1983e300f2f2e6c737e3400d9f7d5a8f80ecb25cfa0d44133\"}, {\"slug\": \"promotion-planning-pro\", \"role\": \"member\", \"name\": \"促销活动 优惠 方案\", \"evidence\": \"original_assets/promotion-planning-pro/merkle_root\", \"member_merkle_root\": \"bacb704648b074bb31e010a0c0b9c611b39d2abe603064a9435cd0758645c10d\"}], \"team_lead\": \"mp-title-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/mp-title-coach-team-lead.md": "43a23298ce1a0a5876951fe02d106c8362a462f4fb679ffcc4ad9023496cddb0",
+    "agents/mp-title-coach.md": "b7f9b007f5980cdab5c2b939b8069861bb50e94613a4930d9431fa483f11e043",
+    "agents/promotion-planning-pro.md": "894d2c5acb81d09065b04f7cbcc285d213008d42c51d7c5c55b9535d02023b04",
+    "agents/seo-article-pro.md": "a3793a531e2c6aec8d339e2d89382b5e8c22efd56de7f0749f0c06138e5f1e30",
+    "plugin.json": "57fc824662a95f6f4ed187fa8b09f9556546b7b967a36adaaa52e96e63d22564",
+    "settings.json": "97d8adf1afe7de0662be755a3e00fb64a1772b8d0157ae0e705dac7106bf829a"
+  }
+}

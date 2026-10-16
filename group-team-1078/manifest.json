@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1078",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1078",
+    "kind": "team",
+    "name": "会议纪要结构化专家",
+    "description": "擅长待办到人、分歧留档与决策依据，覆盖会议纪要结构化全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "meeting-note-struct-team-lead",
+        "role": "lead",
+        "name": "会议纪要结构化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "meeting-note-struct",
+        "role": "member",
+        "name": "会议纪要结构化 助手",
+        "evidence": "original_assets/meeting-note-struct/merkle_root",
+        "member_merkle_root": "90e50cf17dfd473b2899700f2d49129a1aa8230331a9fba724112fb8bd9c8b04"
+      },
+      {
+        "slug": "renewal-playbook",
+        "role": "member",
+        "name": "续约管理 提前动作 顾问",
+        "evidence": "original_assets/renewal-playbook/merkle_root",
+        "member_merkle_root": "d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54"
+      },
+      {
+        "slug": "integration-test-env",
+        "role": "member",
+        "name": "集成测试环境 顾问",
+        "evidence": "original_assets/integration-test-env/merkle_root",
+        "member_merkle_root": "73d0ea615b2aea6ff59049a09cefedec2c93b141c84817e0609c53054656fd49"
+      }
+    ],
+    "team_lead": "meeting-note-struct-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4cd86291b4b40bdf",
+  "prompt_hash": "a968cb6e5218a2e8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1078\", \"kind\": \"team\", \"name\": \"会议纪要结构化专家\", \"description\": \"擅长待办到人、分歧留档与决策依据，覆盖会议纪要结构化全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"meeting-note-struct-team-lead\", \"role\": \"lead\", \"name\": \"会议纪要结构化主理人\", \"evidence\": null}, {\"slug\": \"meeting-note-struct\", \"role\": \"member\", \"name\": \"会议纪要结构化 助手\", \"evidence\": \"original_assets/meeting-note-struct/merkle_root\", \"member_merkle_root\": \"90e50cf17dfd473b2899700f2d49129a1aa8230331a9fba724112fb8bd9c8b04\"}, {\"slug\": \"renewal-playbook\", \"role\": \"member\", \"name\": \"续约管理 提前动作 顾问\", \"evidence\": \"original_assets/renewal-playbook/merkle_root\", \"member_merkle_root\": \"d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54\"}, {\"slug\": \"integration-test-env\", \"role\": \"member\", \"name\": \"集成测试环境 顾问\", \"evidence\": \"original_assets/integration-test-env/merkle_root\", \"member_merkle_root\": \"73d0ea615b2aea6ff59049a09cefedec2c93b141c84817e0609c53054656fd49\"}], \"team_lead\": \"meeting-note-struct-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/integration-test-env.md": "9c5c290cd7cedd62cd6d18c1d2e6e380b2ca11bafbd24af623d7d7ac5621555e",
+    "agents/meeting-note-struct-team-lead.md": "f245bc9ca1e01c3056f9e23019f93818479c2214e62b59664cacce60091fef01",
+    "agents/meeting-note-struct.md": "28b8919aff3b0f0d7ea3f7fc61c482dcaf6064afee6bd9cdcd30835f99f46d5c",
+    "agents/renewal-playbook.md": "b969b83fd6bf938e1b0cd7480b4fe17acf2180ef05f1d80460b1e654c6fb4136",
+    "plugin.json": "2926d13d71c827b00917c72b6dbfb6c28d542a658f2c5e67f2e2cded6f93ba2a",
+    "settings.json": "e7941cdeb172b0389019d25003e58925df7d489a0fffe4e6ed0d7bd62c84ceda"
+  }
+}

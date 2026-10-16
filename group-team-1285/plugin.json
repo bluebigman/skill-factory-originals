@@ -1,0 +1,126 @@
+{
+  "agentName": "editorial-review-flow-team-lead",
+  "agents": [
+    "./agents/editorial-review-flow-team-lead.md",
+    "./agents/editorial-review-flow.md",
+    "./agents/email-lifecycle-pro.md",
+    "./agents/doc-print-layout.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 编辑评审流程",
+    "zh": "帮我处理编辑评审流程"
+  },
+  "description": "editorial-review-flow team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 编辑评审流程 end-to-end: 分级评审, 角色明确 and 频率上限. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分级评审、角色明确与频率上限，覆盖编辑评审流程全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "editorial-review-flow Team",
+    "zh": "编辑评审流程顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "editorial-review-flow-team-lead",
+      "name": {
+        "en": "编辑评审流程主理人",
+        "zh": "编辑评审流程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/editorial-review-flow.png",
+      "id": "editorial-review-flow",
+      "name": {
+        "en": "editorial-review-flow",
+        "zh": "编辑评审流程 顾问"
+      },
+      "profession": {
+        "en": "editorial-review-flow",
+        "zh": "编辑评审流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/email-lifecycle-pro.png",
+      "id": "email-lifecycle-pro",
+      "name": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "profession": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-print-layout.png",
+      "id": "doc-print-layout",
+      "name": {
+        "en": "doc-print-layout",
+        "zh": "文档打印排版 顾问"
+      },
+      "profession": {
+        "en": "doc-print-layout",
+        "zh": "文档打印排版 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1285",
+  "plugin": "group-team-1285",
+  "profession": {
+    "en": "editorial-review-flow Collaboration Team",
+    "zh": "编辑评审流程顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 编辑评审流程",
+      "zh": "帮我处理编辑评审流程"
+    },
+    {
+      "en": "Plan 邮件触达",
+      "zh": "帮我规划邮件触达"
+    },
+    {
+      "en": "Review 文档打印排版",
+      "zh": "帮我检查文档打印排版"
+    }
+  ],
+  "tags": [
+    {
+      "en": "角色明确",
+      "zh": "角色明确"
+    },
+    {
+      "en": "清单化",
+      "zh": "清单化"
+    },
+    {
+      "en": "闭环",
+      "zh": "闭环"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "editorial-review-flow-team-lead",
+    "memberAgents": [
+      "editorial-review-flow",
+      "email-lifecycle-pro",
+      "doc-print-layout"
+    ]
+  },
+  "version": "1.0.0"
+}

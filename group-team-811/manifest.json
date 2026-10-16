@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-811",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-811",
+    "kind": "team",
+    "name": "续约管理提前动作专家",
+    "description": "输入续约管理相关需求，输出提前启动、价值回顾、风险早识三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "renewal-playbook-team-lead",
+        "role": "lead",
+        "name": "续约管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "renewal-playbook",
+        "role": "member",
+        "name": "续约管理 提前动作 顾问",
+        "evidence": "original_assets/renewal-playbook/merkle_root",
+        "member_merkle_root": "d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54"
+      },
+      {
+        "slug": "agent-improve-loop",
+        "role": "member",
+        "name": "改进闭环 度量驱动 顾问",
+        "evidence": "original_assets/agent-improve-loop/merkle_root",
+        "member_merkle_root": "b14c4541bcb71e6120033e9cbafd40573db5f714d74887ea5e797fdff5857f80"
+      },
+      {
+        "slug": "cs-qbr-pro",
+        "role": "member",
+        "name": "客户复盘 季度会议 顾问",
+        "evidence": "original_assets/cs-qbr-pro/merkle_root",
+        "member_merkle_root": "c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6"
+      }
+    ],
+    "team_lead": "renewal-playbook-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a55bb726ad744aeb",
+  "prompt_hash": "4ffd9e3e857bb3f8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-811\", \"kind\": \"team\", \"name\": \"续约管理提前动作专家\", \"description\": \"输入续约管理相关需求，输出提前启动、价值回顾、风险早识三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"renewal-playbook-team-lead\", \"role\": \"lead\", \"name\": \"续约管理主理人\", \"evidence\": null}, {\"slug\": \"renewal-playbook\", \"role\": \"member\", \"name\": \"续约管理 提前动作 顾问\", \"evidence\": \"original_assets/renewal-playbook/merkle_root\", \"member_merkle_root\": \"d16201f81760e2d0892d072b646a38fdce7eccee7331478ec76fab8f7f496a54\"}, {\"slug\": \"agent-improve-loop\", \"role\": \"member\", \"name\": \"改进闭环 度量驱动 顾问\", \"evidence\": \"original_assets/agent-improve-loop/merkle_root\", \"member_merkle_root\": \"b14c4541bcb71e6120033e9cbafd40573db5f714d74887ea5e797fdff5857f80\"}, {\"slug\": \"cs-qbr-pro\", \"role\": \"member\", \"name\": \"客户复盘 季度会议 顾问\", \"evidence\": \"original_assets/cs-qbr-pro/merkle_root\", \"member_merkle_root\": \"c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6\"}], \"team_lead\": \"renewal-playbook-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-improve-loop.md": "e3466f879f7d0a7f035ea521f3927b1479dd9f0086344c43479a65b4e12a7749",
+    "agents/cs-qbr-pro.md": "b84ee0f868346295b33bba4a11e971c3be4234ffc4b56eeecd519e911c2c00af",
+    "agents/renewal-playbook-team-lead.md": "4c13fb0416122eb91e7ce07dffaa1bb2dd4b4f7bc8589b273ed5b117f14373fc",
+    "agents/renewal-playbook.md": "c0bfc8e067708d5040680c1972dc42189e2e558b2422ef0668fbe189da7d7fd3",
+    "plugin.json": "02a7600e6ecf5b683545d9584e509f4ad0b515fb75d7072f91c4f71c2203fd58",
+    "settings.json": "fb6329cd270ae98b601f9ecbd3fb9516edb77186e2a4b890150a5bd49a9c490a"
+  }
+}

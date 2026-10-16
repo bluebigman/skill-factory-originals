@@ -1,0 +1,126 @@
+{
+  "agentName": "query-cache-pro-team-lead",
+  "agents": [
+    "./agents/query-cache-pro-team-lead.md",
+    "./agents/query-cache-pro.md",
+    "./agents/sheet-batch-pro.md",
+    "./agents/data-reconcile-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 查询缓存",
+    "zh": "帮我处理查询缓存"
+  },
+  "description": "query-cache-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 查询缓存 requirements, output three deliverables: 键含版本, 失效联动, 穿透防护. Verifiable end-to-end, evidence per step.",
+    "zh": "输入查询缓存相关需求，输出键含版本、失效联动、穿透防护三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "query-cache-pro Team",
+    "zh": "查询缓存命中优化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "query-cache-pro-team-lead",
+      "name": {
+        "en": "查询缓存主理人",
+        "zh": "查询缓存主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/query-cache-pro.png",
+      "id": "query-cache-pro",
+      "name": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "profession": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sheet-batch-pro.png",
+      "id": "sheet-batch-pro",
+      "name": {
+        "en": "sheet-batch-pro",
+        "zh": "表格批量 计算汇总 顾问"
+      },
+      "profession": {
+        "en": "sheet-batch-pro",
+        "zh": "表格批量 计算汇总 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-reconcile-pro.png",
+      "id": "data-reconcile-pro",
+      "name": {
+        "en": "data-reconcile-pro",
+        "zh": "数据对账 差异定位 顾问"
+      },
+      "profession": {
+        "en": "data-reconcile-pro",
+        "zh": "数据对账 差异定位 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-987",
+  "plugin": "group-team-987",
+  "profession": {
+    "en": "query-cache-pro Collaboration Team",
+    "zh": "查询缓存命中优化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 查询缓存",
+      "zh": "帮我处理查询缓存"
+    },
+    {
+      "en": "Plan 表格批量",
+      "zh": "帮我规划表格批量"
+    },
+    {
+      "en": "Review 数据对账",
+      "zh": "帮我检查数据对账"
+    }
+  ],
+  "tags": [
+    {
+      "en": "键含版本",
+      "zh": "键含版本"
+    },
+    {
+      "en": "失效联动",
+      "zh": "失效联动"
+    },
+    {
+      "en": "穿透防护",
+      "zh": "穿透防护"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "query-cache-pro-team-lead",
+    "memberAgents": [
+      "query-cache-pro",
+      "sheet-batch-pro",
+      "data-reconcile-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

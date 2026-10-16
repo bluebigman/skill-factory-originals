@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1098",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1098",
+    "kind": "team",
+    "name": "会议主持专家",
+    "description": "输入会议主持相关需求，输出议程先行、结论明确、待办到人三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "meeting-facilitation-team-lead",
+        "role": "lead",
+        "name": "会议主持主理人",
+        "evidence": null
+      },
+      {
+        "slug": "meeting-facilitation",
+        "role": "member",
+        "name": "会议主持 顾问",
+        "evidence": "original_assets/meeting-facilitation/merkle_root",
+        "member_merkle_root": "bf133268118b834ce6323ac19046efb4e637fac57030058321a507947ab9c976"
+      },
+      {
+        "slug": "objection-handle-pro",
+        "role": "member",
+        "name": "异议处理 应对准备 顾问",
+        "evidence": "original_assets/objection-handle-pro/merkle_root",
+        "member_merkle_root": "2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f"
+      },
+      {
+        "slug": "time-mgmt-expert",
+        "role": "member",
+        "name": "时间管理专家",
+        "evidence": "original_assets/time-mgmt-expert/merkle_root",
+        "member_merkle_root": "3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0"
+      }
+    ],
+    "team_lead": "meeting-facilitation-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8380486edd12076b",
+  "prompt_hash": "744e35c7fee98998",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1098\", \"kind\": \"team\", \"name\": \"会议主持专家\", \"description\": \"输入会议主持相关需求，输出议程先行、结论明确、待办到人三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"meeting-facilitation-team-lead\", \"role\": \"lead\", \"name\": \"会议主持主理人\", \"evidence\": null}, {\"slug\": \"meeting-facilitation\", \"role\": \"member\", \"name\": \"会议主持 顾问\", \"evidence\": \"original_assets/meeting-facilitation/merkle_root\", \"member_merkle_root\": \"bf133268118b834ce6323ac19046efb4e637fac57030058321a507947ab9c976\"}, {\"slug\": \"objection-handle-pro\", \"role\": \"member\", \"name\": \"异议处理 应对准备 顾问\", \"evidence\": \"original_assets/objection-handle-pro/merkle_root\", \"member_merkle_root\": \"2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f\"}, {\"slug\": \"time-mgmt-expert\", \"role\": \"member\", \"name\": \"时间管理专家\", \"evidence\": \"original_assets/time-mgmt-expert/merkle_root\", \"member_merkle_root\": \"3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0\"}], \"team_lead\": \"meeting-facilitation-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/meeting-facilitation-team-lead.md": "cd7a9292443e1a5eefcc1caf2405c33377c3a3e36d41a4473fb2861dfa0ba65d",
+    "agents/meeting-facilitation.md": "1325c59daa945324181e1f2da192fc28d9f2123ead0e91ca522d100f84fbec0e",
+    "agents/objection-handle-pro.md": "6767539ffdb39f3a7d53850a420146809aef6c3324bbe2eeddb7180a19e31a85",
+    "agents/time-mgmt-expert.md": "5547cdfaf5e6ed735a1cacd6b712d0ca4487297800b5151cbc8e254969a9cbb8",
+    "plugin.json": "d20e1917dcde4ec81d980731c0651c69ebb9d8764c774a4fa0dd35970678148f",
+    "settings.json": "41b2ae47cae6e61b22def473e75194857885452ae84a31a5a03c7afcc46978ca"
+  }
+}

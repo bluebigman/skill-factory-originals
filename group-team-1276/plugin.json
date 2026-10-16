@@ -1,0 +1,126 @@
+{
+  "agentName": "content-structure-team-lead",
+  "agents": [
+    "./agents/content-structure-team-lead.md",
+    "./agents/content-structure.md",
+    "./agents/event-planning.md",
+    "./agents/media-mix-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 内容结构设计",
+    "zh": "帮我处理内容结构设计"
+  },
+  "description": "content-structure team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内容结构设计 end-to-end: 篇幅配比, 过渡自然 and 目标单一. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长篇幅配比、过渡自然与目标单一，覆盖内容结构设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "content-structure Team",
+    "zh": "内容结构设计顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-structure-team-lead",
+      "name": {
+        "en": "内容结构设计主理人",
+        "zh": "内容结构设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-structure.png",
+      "id": "content-structure",
+      "name": {
+        "en": "content-structure",
+        "zh": "内容结构设计 顾问"
+      },
+      "profession": {
+        "en": "content-structure",
+        "zh": "内容结构设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/event-planning.png",
+      "id": "event-planning",
+      "name": {
+        "en": "event-planning",
+        "zh": "活动策划 顾问"
+      },
+      "profession": {
+        "en": "event-planning",
+        "zh": "活动策划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/media-mix-plan.png",
+      "id": "media-mix-plan",
+      "name": {
+        "en": "media-mix-plan",
+        "zh": "媒介组合规划 顾问"
+      },
+      "profession": {
+        "en": "media-mix-plan",
+        "zh": "媒介组合规划 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1276",
+  "plugin": "group-team-1276",
+  "profession": {
+    "en": "content-structure Collaboration Team",
+    "zh": "内容结构设计顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容结构设计",
+      "zh": "帮我处理内容结构设计"
+    },
+    {
+      "en": "Plan 活动策划",
+      "zh": "帮我规划活动策划"
+    },
+    {
+      "en": "Review 媒介组合规划",
+      "zh": "帮我检查媒介组合规划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分层清晰",
+      "zh": "分层清晰"
+    },
+    {
+      "en": "每节独立",
+      "zh": "每节独立"
+    },
+    {
+      "en": "篇幅配比",
+      "zh": "篇幅配比"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-structure-team-lead",
+    "memberAgents": [
+      "content-structure",
+      "event-planning",
+      "media-mix-plan"
+    ]
+  },
+  "version": "1.0.0"
+}

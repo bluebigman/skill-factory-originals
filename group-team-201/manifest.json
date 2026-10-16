@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-201",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-201",
+    "kind": "team",
+    "name": "文档 音频 字幕 团队",
+    "description": "文档 音频 字幕 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-craft-pro-team-lead",
+        "role": "lead",
+        "name": "文档排版撰写专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-craft-pro",
+        "role": "member",
+        "name": "文档排版撰写专家",
+        "evidence": "original_assets/doc-craft-pro/merkle_root",
+        "member_merkle_root": "e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18"
+      },
+      {
+        "slug": "audio-clip-expert",
+        "role": "member",
+        "name": "音频剪辑专家",
+        "evidence": "original_assets/audio-clip-expert/merkle_root",
+        "member_merkle_root": "c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8"
+      },
+      {
+        "slug": "subtitle-gen-coach",
+        "role": "member",
+        "name": "字幕生成 时间轴 助手",
+        "evidence": "original_assets/subtitle-gen-coach/merkle_root",
+        "member_merkle_root": "7e325d7c752fa5eea5045bc3e465f6558c8f1ff83e9f0c2451e9e89a987f960c"
+      }
+    ],
+    "team_lead": "doc-craft-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2b91d925ba5cc094",
+  "prompt_hash": "109769c6427ea340",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-201\", \"kind\": \"team\", \"name\": \"文档 音频 字幕 团队\", \"description\": \"文档 音频 字幕 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-craft-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档排版撰写专家主理人\", \"evidence\": null}, {\"slug\": \"doc-craft-pro\", \"role\": \"member\", \"name\": \"文档排版撰写专家\", \"evidence\": \"original_assets/doc-craft-pro/merkle_root\", \"member_merkle_root\": \"e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18\"}, {\"slug\": \"audio-clip-expert\", \"role\": \"member\", \"name\": \"音频剪辑专家\", \"evidence\": \"original_assets/audio-clip-expert/merkle_root\", \"member_merkle_root\": \"c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8\"}, {\"slug\": \"subtitle-gen-coach\", \"role\": \"member\", \"name\": \"字幕生成 时间轴 助手\", \"evidence\": \"original_assets/subtitle-gen-coach/merkle_root\", \"member_merkle_root\": \"7e325d7c752fa5eea5045bc3e465f6558c8f1ff83e9f0c2451e9e89a987f960c\"}], \"team_lead\": \"doc-craft-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audio-clip-expert.md": "595982bdc2e09eafba7bf33e7aa430486c8afc67adb9286b1f5da3ef9ad3c8e7",
+    "agents/doc-craft-pro-team-lead.md": "363da481e0647417344e839766e15e56a33e687b77b149b5b45b4bdbb082afb7",
+    "agents/doc-craft-pro.md": "e09e7705b6acd050f12dba720e236899a7d8c54ca0309db2b9817e54f9976993",
+    "agents/subtitle-gen-coach.md": "a08de24b4a5025c7d56d9274e84e45a3a9d162c95e141b97bf8fb585722436cd",
+    "plugin.json": "eb5ca17d51be88dda6c39c9d242e4ba1c170ffa666fd6a0be921cd6287b6a55a",
+    "settings.json": "de379e6b6f58d1b66479c77adc3baefe29266c9ee393ca90b41807f558953d89"
+  }
+}

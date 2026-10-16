@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-149",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-149",
+    "kind": "team",
+    "name": "产品 竞品 需求 团队",
+    "description": "产品 竞品 需求 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "product-roadmap-plan-team-lead",
+        "role": "lead",
+        "name": "产品路线图主理人",
+        "evidence": null
+      },
+      {
+        "slug": "product-roadmap-plan",
+        "role": "member",
+        "name": "产品路线图 阶段划分 顾问",
+        "evidence": "original_assets/product-roadmap-plan/merkle_root",
+        "member_merkle_root": "b3fe0ad51e7d7dff4c3a5fbbd88bca53050b852ec779dc551e4be2844f240389"
+      },
+      {
+        "slug": "competitor-analysis",
+        "role": "member",
+        "name": "竞品分析 功能对比 顾问",
+        "evidence": "original_assets/competitor-analysis/merkle_root",
+        "member_merkle_root": "cc8b6fb3717a72de298f1c172d238042c2861fc752f9eea9d950cd2c240b461c"
+      },
+      {
+        "slug": "prd-review-coach",
+        "role": "member",
+        "name": "需求评审 优先级 顾问",
+        "evidence": "original_assets/prd-review-coach/merkle_root",
+        "member_merkle_root": "7cdad3d1fe771c539a181169cfef624815e6893bf59967d620698b791e2007a6"
+      }
+    ],
+    "team_lead": "product-roadmap-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cdda6507e1c7a110",
+  "prompt_hash": "6882f4395a3af206",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-149\", \"kind\": \"team\", \"name\": \"产品 竞品 需求 团队\", \"description\": \"产品 竞品 需求 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"product-roadmap-plan-team-lead\", \"role\": \"lead\", \"name\": \"产品路线图主理人\", \"evidence\": null}, {\"slug\": \"product-roadmap-plan\", \"role\": \"member\", \"name\": \"产品路线图 阶段划分 顾问\", \"evidence\": \"original_assets/product-roadmap-plan/merkle_root\", \"member_merkle_root\": \"b3fe0ad51e7d7dff4c3a5fbbd88bca53050b852ec779dc551e4be2844f240389\"}, {\"slug\": \"competitor-analysis\", \"role\": \"member\", \"name\": \"竞品分析 功能对比 顾问\", \"evidence\": \"original_assets/competitor-analysis/merkle_root\", \"member_merkle_root\": \"cc8b6fb3717a72de298f1c172d238042c2861fc752f9eea9d950cd2c240b461c\"}, {\"slug\": \"prd-review-coach\", \"role\": \"member\", \"name\": \"需求评审 优先级 顾问\", \"evidence\": \"original_assets/prd-review-coach/merkle_root\", \"member_merkle_root\": \"7cdad3d1fe771c539a181169cfef624815e6893bf59967d620698b791e2007a6\"}], \"team_lead\": \"product-roadmap-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/competitor-analysis.md": "e83d3d2dae2062c186728d291fb68eecbf1a5faa93e94026b8be96a49191f9e0",
+    "agents/prd-review-coach.md": "4c5fafcaa70fc5e43a80f1e9d4d6e7658386f4717c163bc089ef51dc2b350457",
+    "agents/product-roadmap-plan-team-lead.md": "0f93c3052536ff4c6fa3beb5a27fdbe58135fa6779600436496b2d21424e60fd",
+    "agents/product-roadmap-plan.md": "9509ae7693e842a0b03c40d09888c7e9d139b73b880c68876039a79c4391e3f3",
+    "plugin.json": "09dc59a4a37f0d43d8113293330d852d759a052ff4dc10281f73793702010a6c",
+    "settings.json": "801b205a9abe61c5f3727f168c44021e0759aa4255f9d48d7374733bed87f793"
+  }
+}

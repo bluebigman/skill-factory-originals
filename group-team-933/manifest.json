@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-933",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-933",
+    "kind": "team",
+    "name": "反馈分类处置助手专家",
+    "description": "擅长去重合并、闭环回复与趋势观察，覆盖反馈分类处置全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "feedback-triage-team-lead",
+        "role": "lead",
+        "name": "反馈分类处置主理人",
+        "evidence": null
+      },
+      {
+        "slug": "feedback-triage",
+        "role": "member",
+        "name": "反馈分类处置 助手",
+        "evidence": "original_assets/feedback-triage/merkle_root",
+        "member_merkle_root": "f9c842e4ff007521d7bf166164697f637fffbcd249f0e90c22bd78b6319f5983"
+      },
+      {
+        "slug": "global-pm-coach",
+        "role": "member",
+        "name": "跨国项目 协同推进 教练",
+        "evidence": "original_assets/global-pm-coach/merkle_root",
+        "member_merkle_root": "d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa"
+      },
+      {
+        "slug": "project-manage-pro",
+        "role": "member",
+        "name": "项目任务管理 进度跟踪",
+        "evidence": "original_assets/project-manage-pro/merkle_root",
+        "member_merkle_root": "956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0"
+      }
+    ],
+    "team_lead": "feedback-triage-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c44e5611f016bf9b",
+  "prompt_hash": "b06d336c206b0035",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-933\", \"kind\": \"team\", \"name\": \"反馈分类处置助手专家\", \"description\": \"擅长去重合并、闭环回复与趋势观察，覆盖反馈分类处置全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"feedback-triage-team-lead\", \"role\": \"lead\", \"name\": \"反馈分类处置主理人\", \"evidence\": null}, {\"slug\": \"feedback-triage\", \"role\": \"member\", \"name\": \"反馈分类处置 助手\", \"evidence\": \"original_assets/feedback-triage/merkle_root\", \"member_merkle_root\": \"f9c842e4ff007521d7bf166164697f637fffbcd249f0e90c22bd78b6319f5983\"}, {\"slug\": \"global-pm-coach\", \"role\": \"member\", \"name\": \"跨国项目 协同推进 教练\", \"evidence\": \"original_assets/global-pm-coach/merkle_root\", \"member_merkle_root\": \"d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa\"}, {\"slug\": \"project-manage-pro\", \"role\": \"member\", \"name\": \"项目任务管理 进度跟踪\", \"evidence\": \"original_assets/project-manage-pro/merkle_root\", \"member_merkle_root\": \"956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0\"}], \"team_lead\": \"feedback-triage-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/feedback-triage-team-lead.md": "97978580797a1a9b1dc8b89fb4172b526ef960e80c491423691c17d7c44f90be",
+    "agents/feedback-triage.md": "eafc2191393c7e7c5a5111335b633bb7d762f9ee417cc438d8eb39518dc10ac6",
+    "agents/global-pm-coach.md": "23350f6a52ba30e2423ca935f56e2e3b0a12ee28c720303c67520fa7d33e4f01",
+    "agents/project-manage-pro.md": "dc00eea347f1994c9a1457594717979455e798e37ef712c219511c9a6254b38c",
+    "plugin.json": "5aed5968447c84c97e0ef18b3f6c44f662c5cd504f1d8c64bda83149e5292cf3",
+    "settings.json": "c5d82fda5437cde34be25a743be4f16b82577c7a84fd192e04029f09a85d3db2"
+  }
+}

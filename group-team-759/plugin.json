@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-structure-pro-team-lead",
+  "agents": [
+    "./agents/doc-structure-pro-team-lead.md",
+    "./agents/doc-structure-pro.md",
+    "./agents/doc-accessibility-pro.md",
+    "./agents/writing-toolkit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档结构",
+    "zh": "帮我处理文档结构"
+  },
+  "description": "doc-structure-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档结构 end-to-end: 结论先行, 层次清晰 and 一屏一义. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长结论先行、层次清晰与一屏一义，覆盖文档结构全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-structure-pro Team",
+    "zh": "文档结构大纲设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-structure-pro-team-lead",
+      "name": {
+        "en": "文档结构主理人",
+        "zh": "文档结构主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-structure-pro.png",
+      "id": "doc-structure-pro",
+      "name": {
+        "en": "doc-structure-pro",
+        "zh": "文档结构 大纲设计 顾问"
+      },
+      "profession": {
+        "en": "doc-structure-pro",
+        "zh": "文档结构 大纲设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-accessibility-pro.png",
+      "id": "doc-accessibility-pro",
+      "name": {
+        "en": "doc-accessibility-pro",
+        "zh": "文档可访 结构语义 顾问"
+      },
+      "profession": {
+        "en": "doc-accessibility-pro",
+        "zh": "文档可访 结构语义 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/writing-toolkit-pro.png",
+      "id": "writing-toolkit-pro",
+      "name": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "profession": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-759",
+  "plugin": "group-team-759",
+  "profession": {
+    "en": "doc-structure-pro Collaboration Team",
+    "zh": "文档结构大纲设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档结构",
+      "zh": "帮我处理文档结构"
+    },
+    {
+      "en": "Plan 文档可访",
+      "zh": "帮我规划文档可访"
+    },
+    {
+      "en": "Review 文本净化",
+      "zh": "帮我检查文本净化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结论先行",
+      "zh": "结论先行"
+    },
+    {
+      "en": "层次清晰",
+      "zh": "层次清晰"
+    },
+    {
+      "en": "一屏一义",
+      "zh": "一屏一义"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-structure-pro-team-lead",
+    "memberAgents": [
+      "doc-structure-pro",
+      "doc-accessibility-pro",
+      "writing-toolkit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

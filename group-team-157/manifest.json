@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-157",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-157",
+    "kind": "team",
+    "name": "学习 环境 用眼 习惯 团队",
+    "description": "学习 环境 用眼 习惯 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "home-study-env-team-lead",
+        "role": "lead",
+        "name": "学习环境主理人",
+        "evidence": null
+      },
+      {
+        "slug": "home-study-env",
+        "role": "member",
+        "name": "学习环境 书桌整理 顾问",
+        "evidence": "original_assets/home-study-env/merkle_root",
+        "member_merkle_root": "3c01bbd31066dc50223db10518a48ccdafd186ef9d529001376b51f367291e5a"
+      },
+      {
+        "slug": "eye-care-pro",
+        "role": "member",
+        "name": "用眼健康 休息节奏 护眼习惯",
+        "evidence": "original_assets/eye-care-pro/merkle_root",
+        "member_merkle_root": "22484e450e8595649fe23ae875f54a94d73ef038dcf83f8663cc92cf5becb1be"
+      },
+      {
+        "slug": "study-habit-coach",
+        "role": "member",
+        "name": "背单词 学习 专注",
+        "evidence": "original_assets/study-habit-coach/merkle_root",
+        "member_merkle_root": "87e0e41ee756fb2d32f3061723410fa523eaa99a276815d62eb5a5606704d3da"
+      }
+    ],
+    "team_lead": "home-study-env-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e0728d9644664159",
+  "prompt_hash": "7482695e3a725543",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-157\", \"kind\": \"team\", \"name\": \"学习 环境 用眼 习惯 团队\", \"description\": \"学习 环境 用眼 习惯 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"home-study-env-team-lead\", \"role\": \"lead\", \"name\": \"学习环境主理人\", \"evidence\": null}, {\"slug\": \"home-study-env\", \"role\": \"member\", \"name\": \"学习环境 书桌整理 顾问\", \"evidence\": \"original_assets/home-study-env/merkle_root\", \"member_merkle_root\": \"3c01bbd31066dc50223db10518a48ccdafd186ef9d529001376b51f367291e5a\"}, {\"slug\": \"eye-care-pro\", \"role\": \"member\", \"name\": \"用眼健康 休息节奏 护眼习惯\", \"evidence\": \"original_assets/eye-care-pro/merkle_root\", \"member_merkle_root\": \"22484e450e8595649fe23ae875f54a94d73ef038dcf83f8663cc92cf5becb1be\"}, {\"slug\": \"study-habit-coach\", \"role\": \"member\", \"name\": \"背单词 学习 专注\", \"evidence\": \"original_assets/study-habit-coach/merkle_root\", \"member_merkle_root\": \"87e0e41ee756fb2d32f3061723410fa523eaa99a276815d62eb5a5606704d3da\"}], \"team_lead\": \"home-study-env-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/eye-care-pro.md": "73c37f1a54b6bffab3d625219f636196d4ad9be206f4910deae45c58afdcbc17",
+    "agents/home-study-env-team-lead.md": "c8055505b47b2aed848ad627c6d7367122e1b54259b17d140fab4d3184b1481d",
+    "agents/home-study-env.md": "15c5fe91594de86952bd47259deb5bae3a00f45b4f43faa9f854990353c1dd10",
+    "agents/study-habit-coach.md": "02ac0d773d5bb8ceec53ab4503bdb3eb2a11ef3eef2aba9dadb00cf6749d6ba1",
+    "plugin.json": "80e93fc1aefce0f3bff440670539197ab6c61353d2341801f4e892189d5786f8",
+    "settings.json": "8a43e3d7577d385e7d4474db68f0415e412bf3ff95cc7cf1cd17d08aeff852c8"
+  }
+}

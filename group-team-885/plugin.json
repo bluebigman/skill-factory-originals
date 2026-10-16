@@ -1,0 +1,126 @@
+{
+  "agentName": "report-data-verify-team-lead",
+  "agents": [
+    "./agents/report-data-verify-team-lead.md",
+    "./agents/report-data-verify.md",
+    "./agents/sop-compliance-check.md",
+    "./agents/global-payment-ops.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 报告数据核验",
+    "zh": "帮我处理报告数据核验"
+  },
+  "description": "report-data-verify team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 报告数据核验, covers 口径先对 / 交叉验证 / 异常问因, delivering structured results and actionable checklists.",
+    "zh": "报告数据核验专家：围绕报告数据核验，覆盖口径先对／交叉验证／异常问因，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "report-data-verify Team",
+    "zh": "报告数据核验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "report-data-verify-team-lead",
+      "name": {
+        "en": "报告数据核验主理人",
+        "zh": "报告数据核验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/report-data-verify.png",
+      "id": "report-data-verify",
+      "name": {
+        "en": "report-data-verify",
+        "zh": "报告数据核验 顾问"
+      },
+      "profession": {
+        "en": "report-data-verify",
+        "zh": "报告数据核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sop-compliance-check.png",
+      "id": "sop-compliance-check",
+      "name": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "profession": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-payment-ops.png",
+      "id": "global-payment-ops",
+      "name": {
+        "en": "global-payment-ops",
+        "zh": "跨境收款 流程核对 顾问"
+      },
+      "profession": {
+        "en": "global-payment-ops",
+        "zh": "跨境收款 流程核对 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-885",
+  "plugin": "group-team-885",
+  "profession": {
+    "en": "report-data-verify Collaboration Team",
+    "zh": "报告数据核验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报告数据核验",
+      "zh": "帮我处理报告数据核验"
+    },
+    {
+      "en": "Plan 流程合规",
+      "zh": "帮我规划流程合规"
+    },
+    {
+      "en": "Review 跨境收款",
+      "zh": "帮我检查跨境收款"
+    }
+  ],
+  "tags": [
+    {
+      "en": "异常问因",
+      "zh": "异常问因"
+    },
+    {
+      "en": "来源可溯",
+      "zh": "来源可溯"
+    },
+    {
+      "en": "一致性检查",
+      "zh": "一致性检查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "report-data-verify-team-lead",
+    "memberAgents": [
+      "report-data-verify",
+      "sop-compliance-check",
+      "global-payment-ops"
+    ]
+  },
+  "version": "1.0.0"
+}

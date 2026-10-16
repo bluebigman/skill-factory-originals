@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1009",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1009",
+    "kind": "team",
+    "name": "媒体素材工程专家",
+    "description": "擅长目标对齐、受众匹配与预算分配，覆盖媒介组合规划全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "media-asset-pro-team-lead",
+        "role": "lead",
+        "name": "媒体素材工程主理人",
+        "evidence": null
+      },
+      {
+        "slug": "media-asset-pro",
+        "role": "member",
+        "name": "媒体素材工程",
+        "evidence": "original_assets/media-asset-pro/merkle_root",
+        "member_merkle_root": "03cd9214e90e98210dc0aeee56096b38c510aa06d96dd5cc29195aafd5673500"
+      },
+      {
+        "slug": "media-mix-plan",
+        "role": "member",
+        "name": "媒介组合规划 顾问",
+        "evidence": "original_assets/media-mix-plan/merkle_root",
+        "member_merkle_root": "2ac92f3a4df64482698512a76aca19bbc4b95b11232bd873e9b0346bc571c93d"
+      },
+      {
+        "slug": "doc-template-build",
+        "role": "member",
+        "name": "文档模板构建 助手",
+        "evidence": "original_assets/doc-template-build/merkle_root",
+        "member_merkle_root": "72100143c65931ac9b2b46f76787b2ff4341cc46d8befb64bbed37c31928c23a"
+      }
+    ],
+    "team_lead": "media-asset-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b4fa90671bd30d4f",
+  "prompt_hash": "6f95b76fccd53c68",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1009\", \"kind\": \"team\", \"name\": \"媒体素材工程专家\", \"description\": \"擅长目标对齐、受众匹配与预算分配，覆盖媒介组合规划全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"media-asset-pro-team-lead\", \"role\": \"lead\", \"name\": \"媒体素材工程主理人\", \"evidence\": null}, {\"slug\": \"media-asset-pro\", \"role\": \"member\", \"name\": \"媒体素材工程\", \"evidence\": \"original_assets/media-asset-pro/merkle_root\", \"member_merkle_root\": \"03cd9214e90e98210dc0aeee56096b38c510aa06d96dd5cc29195aafd5673500\"}, {\"slug\": \"media-mix-plan\", \"role\": \"member\", \"name\": \"媒介组合规划 顾问\", \"evidence\": \"original_assets/media-mix-plan/merkle_root\", \"member_merkle_root\": \"2ac92f3a4df64482698512a76aca19bbc4b95b11232bd873e9b0346bc571c93d\"}, {\"slug\": \"doc-template-build\", \"role\": \"member\", \"name\": \"文档模板构建 助手\", \"evidence\": \"original_assets/doc-template-build/merkle_root\", \"member_merkle_root\": \"72100143c65931ac9b2b46f76787b2ff4341cc46d8befb64bbed37c31928c23a\"}], \"team_lead\": \"media-asset-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-template-build.md": "39b5eb8264aa4c0925acae6b1b722e866eece1bf790f1a8abaaca767f8e375e3",
+    "agents/media-asset-pro-team-lead.md": "d83bef515105d3fcfdd82d57c87c0d1fb5dc59989d175237de3fd2e198e8a04e",
+    "agents/media-asset-pro.md": "b2f65777e166727622adf41647c93c6c5c1cf635d56b01ce9c73e724bd62bdeb",
+    "agents/media-mix-plan.md": "46b63dc8e400e8aabd1facb6a5b24ecea6bcaacdd213325176b9dd90fb36f3e9",
+    "plugin.json": "a00aec1b0e5de61da2cf43867026015c9d070341b8cf08de2906137282199c1b",
+    "settings.json": "17a37ac39728f8bafc640e68373b92d7bcd3fff0ab92e6cf45a0884be089b1cf"
+  }
+}

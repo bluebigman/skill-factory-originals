@@ -1,0 +1,126 @@
+{
+  "agentName": "newsletter-coach-team-lead",
+  "agents": [
+    "./agents/newsletter-coach-team-lead.md",
+    "./agents/newsletter-coach.md",
+    "./agents/doc-convert-pro-01-fixed.md",
+    "./agents/cn-rewrite-deaifier.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 订阅通讯",
+    "zh": "帮我处理订阅通讯"
+  },
+  "description": "newsletter-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 订阅通讯 end-to-end: 固定节奏, 单一主题 and 价值前置. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长固定节奏、单一主题与价值前置，覆盖订阅通讯全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "newsletter-coach Team",
+    "zh": "中文改写去味专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "newsletter-coach-team-lead",
+      "name": {
+        "en": "订阅通讯主理人",
+        "zh": "订阅通讯主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/newsletter-coach.png",
+      "id": "newsletter-coach",
+      "name": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "profession": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-01-fixed.png",
+      "id": "doc-convert-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文档转换 视觉美化 文本抽取"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文档转换 视觉美化 文本抽取"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cn-rewrite-deaifier.png",
+      "id": "cn-rewrite-deaifier",
+      "name": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "profession": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-834",
+  "plugin": "group-team-834",
+  "profession": {
+    "en": "newsletter-coach Collaboration Team",
+    "zh": "中文改写去味专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 订阅通讯",
+      "zh": "帮我处理订阅通讯"
+    },
+    {
+      "en": "Plan 文档转换",
+      "zh": "帮我规划文档转换"
+    },
+    {
+      "en": "Review 中文改写",
+      "zh": "帮我检查中文改写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "价值前置",
+      "zh": "价值前置"
+    },
+    {
+      "en": "适合扫读",
+      "zh": "适合扫读"
+    },
+    {
+      "en": "退订简单",
+      "zh": "退订简单"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "newsletter-coach-team-lead",
+    "memberAgents": [
+      "newsletter-coach",
+      "doc-convert-pro-01-fixed",
+      "cn-rewrite-deaifier"
+    ]
+  },
+  "version": "1.0.0"
+}

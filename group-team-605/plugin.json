@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-struct-pro-team-lead",
+  "agents": [
+    "./agents/doc-struct-pro-team-lead.md",
+    "./agents/doc-struct-pro.md",
+    "./agents/agent-cost-attribution.md",
+    "./agents/api-contract-test.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 文档解构",
+    "zh": "帮我处理文档解构"
+  },
+  "description": "Doc Structure Parser team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 成本归因 end-to-end: 优化排序, 预算联动 and 字段完备. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长优化排序、预算联动与字段完备，覆盖成本归因全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Doc Structure Parser Team",
+    "zh": "文档解构要点提炼专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-struct-pro-team-lead",
+      "name": {
+        "en": "文档解构主理人",
+        "zh": "文档解构主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-struct-pro.png",
+      "id": "doc-struct-pro",
+      "name": {
+        "en": "Doc Structure Parser",
+        "zh": "文档解构 要点提炼 结构化输出"
+      },
+      "profession": {
+        "en": "Doc Structure Parser",
+        "zh": "文档解构 要点提炼 结构化输出"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-cost-attribution.png",
+      "id": "agent-cost-attribution",
+      "name": {
+        "en": "agent-cost-attribution",
+        "zh": "成本归因 分项核算 顾问"
+      },
+      "profession": {
+        "en": "agent-cost-attribution",
+        "zh": "成本归因 分项核算 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-contract-test.png",
+      "id": "api-contract-test",
+      "name": {
+        "en": "api-contract-test",
+        "zh": "接口契约 兼容校验 顾问"
+      },
+      "profession": {
+        "en": "api-contract-test",
+        "zh": "接口契约 兼容校验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-605",
+  "plugin": "group-team-605",
+  "profession": {
+    "en": "Doc Structure Parser Collaboration Team",
+    "zh": "文档解构要点提炼专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档解构",
+      "zh": "帮我处理文档解构"
+    },
+    {
+      "en": "Plan 成本归因",
+      "zh": "帮我规划成本归因"
+    },
+    {
+      "en": "Review 接口契约",
+      "zh": "帮我检查接口契约"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档转换",
+      "zh": "文档转换"
+    },
+    {
+      "en": "数据解析",
+      "zh": "数据解析"
+    },
+    {
+      "en": "格式校验",
+      "zh": "格式校验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-struct-pro-team-lead",
+    "memberAgents": [
+      "doc-struct-pro",
+      "agent-cost-attribution",
+      "api-contract-test"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-191",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-191",
+    "kind": "team",
+    "name": "数据 医疗 实习 团队",
+    "description": "数据 医疗 实习 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-04-fixed-team-lead",
+        "role": "lead",
+        "name": "数据整理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-04-fixed",
+        "role": "member",
+        "name": "数据整理 字段还原 批量处理",
+        "evidence": "original_assets/data-clean-pro-04-fixed/merkle_root",
+        "member_merkle_root": "175fb2f1b9a75022b44579d96162eb77fae84c179f754df8c98e946091373e6c"
+      },
+      {
+        "slug": "data-clean-pro-02-fixed",
+        "role": "member",
+        "name": "医疗行政 结构化输出 批量处理",
+        "evidence": "original_assets/data-clean-pro-02-fixed/merkle_root",
+        "member_merkle_root": "66c2c874ef4a708064e5c448fc3ea840cde7308dab1698a898b345df8785ffa6"
+      },
+      {
+        "slug": "data-pipeline-pro",
+        "role": "member",
+        "name": "实习日志 文档生成",
+        "evidence": "original_assets/data-pipeline-pro/merkle_root",
+        "member_merkle_root": "bdd1f61b0f21957065260daa0b3171ea2d149689a8560e6cbb5321e4fd83970c"
+      }
+    ],
+    "team_lead": "data-clean-pro-04-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ef4087ae788ae11a",
+  "prompt_hash": "ab54c32a637c5099",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-191\", \"kind\": \"team\", \"name\": \"数据 医疗 实习 团队\", \"description\": \"数据 医疗 实习 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-04-fixed-team-lead\", \"role\": \"lead\", \"name\": \"数据整理主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-04-fixed\", \"role\": \"member\", \"name\": \"数据整理 字段还原 批量处理\", \"evidence\": \"original_assets/data-clean-pro-04-fixed/merkle_root\", \"member_merkle_root\": \"175fb2f1b9a75022b44579d96162eb77fae84c179f754df8c98e946091373e6c\"}, {\"slug\": \"data-clean-pro-02-fixed\", \"role\": \"member\", \"name\": \"医疗行政 结构化输出 批量处理\", \"evidence\": \"original_assets/data-clean-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"66c2c874ef4a708064e5c448fc3ea840cde7308dab1698a898b345df8785ffa6\"}, {\"slug\": \"data-pipeline-pro\", \"role\": \"member\", \"name\": \"实习日志 文档生成\", \"evidence\": \"original_assets/data-pipeline-pro/merkle_root\", \"member_merkle_root\": \"bdd1f61b0f21957065260daa0b3171ea2d149689a8560e6cbb5321e4fd83970c\"}], \"team_lead\": \"data-clean-pro-04-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-02-fixed.md": "2917bc77a7754f53dbcd4f4901d4bbbc7f3e4d4598e48d32509f71365b5bfa1d",
+    "agents/data-clean-pro-04-fixed-team-lead.md": "13fab5ee8d1cb6944ad7dbccad9de09c12087347d3c7c9a59f002cbd542d4090",
+    "agents/data-clean-pro-04-fixed.md": "b0ec72449fffd76b50d6f6bd1126bf59a3314a44d06840e1fab350d87cb4df07",
+    "agents/data-pipeline-pro.md": "7c62c1e6e8d86e23ca7b24efcd5f1b65e55fdf51499d2347d3ee7e2956273ab2",
+    "plugin.json": "28115670a8b4d542d849fe1a724c39607c716dabb338e587c279262140d783aa",
+    "settings.json": "e27a53af8e6224de7ae06778a0f540c8aa0634042229c3953a3671c5f7d9ac44"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1073",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1073",
+    "kind": "team",
+    "name": "过程风险专家",
+    "description": "过程风险专家：围绕过程风险，覆盖打分一致／动态更新／根因分层，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "process-fmea-pro-team-lead",
+        "role": "lead",
+        "name": "过程风险主理人",
+        "evidence": null
+      },
+      {
+        "slug": "process-fmea-pro",
+        "role": "member",
+        "name": "过程风险 预防分析 顾问",
+        "evidence": "original_assets/process-fmea-pro/merkle_root",
+        "member_merkle_root": "a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2"
+      },
+      {
+        "slug": "incident-postmortem",
+        "role": "member",
+        "name": "故障复盘 顾问",
+        "evidence": "original_assets/incident-postmortem/merkle_root",
+        "member_merkle_root": "d449117e75b70386ed1891e488170ee0d4849fc2d330d4f63eb5a11e8948d5ed"
+      },
+      {
+        "slug": "team-knowledge-base",
+        "role": "member",
+        "name": "团队知识库 顾问",
+        "evidence": "original_assets/team-knowledge-base/merkle_root",
+        "member_merkle_root": "7701e293cbf3dc82d39fd6bf82bffc600db84ea2f12a4cc2fe63467aa10cc62c"
+      }
+    ],
+    "team_lead": "process-fmea-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2c1a5ac6fc57fcaa",
+  "prompt_hash": "e95b2ba23cf24e8c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1073\", \"kind\": \"team\", \"name\": \"过程风险专家\", \"description\": \"过程风险专家：围绕过程风险，覆盖打分一致／动态更新／根因分层，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"process-fmea-pro-team-lead\", \"role\": \"lead\", \"name\": \"过程风险主理人\", \"evidence\": null}, {\"slug\": \"process-fmea-pro\", \"role\": \"member\", \"name\": \"过程风险 预防分析 顾问\", \"evidence\": \"original_assets/process-fmea-pro/merkle_root\", \"member_merkle_root\": \"a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2\"}, {\"slug\": \"incident-postmortem\", \"role\": \"member\", \"name\": \"故障复盘 顾问\", \"evidence\": \"original_assets/incident-postmortem/merkle_root\", \"member_merkle_root\": \"d449117e75b70386ed1891e488170ee0d4849fc2d330d4f63eb5a11e8948d5ed\"}, {\"slug\": \"team-knowledge-base\", \"role\": \"member\", \"name\": \"团队知识库 顾问\", \"evidence\": \"original_assets/team-knowledge-base/merkle_root\", \"member_merkle_root\": \"7701e293cbf3dc82d39fd6bf82bffc600db84ea2f12a4cc2fe63467aa10cc62c\"}], \"team_lead\": \"process-fmea-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/incident-postmortem.md": "b761d243068d0a8ea5313f3c30ae9d6356f670ff85eb4eac605f244f401f4a9f",
+    "agents/process-fmea-pro-team-lead.md": "abea71361a695c8a6cc87a669598922be4f5c802fa9cbd20771e34799f16169a",
+    "agents/process-fmea-pro.md": "658b08e7be76b3f06d166f1077b542a241553c28b1d2e2d77c07b468d84dfaec",
+    "agents/team-knowledge-base.md": "3ef29fbecc4eb901be9879003e312c8ae53807fd1660c7b619029db8fc6eb392",
+    "plugin.json": "95cc7cf6f24e76a178dfb0298abffd60243b6f6521d07d59fa2d120b980cf46f",
+    "settings.json": "f458ba63e6ad2125eb2192c09da4fbcc895bb59217910264e8347ba4c5f9c7d4"
+  }
+}

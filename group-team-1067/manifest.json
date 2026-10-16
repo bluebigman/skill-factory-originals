@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1067",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1067",
+    "kind": "team",
+    "name": "游戏策划专家",
+    "description": "游戏策划专家：围绕游戏策划，覆盖版本留痕／交叉引用／分级发送，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "game-doc-standard-team-lead",
+        "role": "lead",
+        "name": "游戏策划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "game-doc-standard",
+        "role": "member",
+        "name": "游戏策划 文档规范 顾问",
+        "evidence": "original_assets/game-doc-standard/merkle_root",
+        "member_merkle_root": "7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f"
+      },
+      {
+        "slug": "notification-design",
+        "role": "member",
+        "name": "通知设计 顾问",
+        "evidence": "original_assets/notification-design/merkle_root",
+        "member_merkle_root": "bed49a31d4529a33ce39e561b122488a8b774daa1b100436a015ea3279c3583d"
+      },
+      {
+        "slug": "game-economy-balance",
+        "role": "member",
+        "name": "游戏经济 数值平衡 顾问",
+        "evidence": "original_assets/game-economy-balance/merkle_root",
+        "member_merkle_root": "3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66"
+      }
+    ],
+    "team_lead": "game-doc-standard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b8ea2daaf94fc0ee",
+  "prompt_hash": "aec95c13e87f9d62",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1067\", \"kind\": \"team\", \"name\": \"游戏策划专家\", \"description\": \"游戏策划专家：围绕游戏策划，覆盖版本留痕／交叉引用／分级发送，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"game-doc-standard-team-lead\", \"role\": \"lead\", \"name\": \"游戏策划主理人\", \"evidence\": null}, {\"slug\": \"game-doc-standard\", \"role\": \"member\", \"name\": \"游戏策划 文档规范 顾问\", \"evidence\": \"original_assets/game-doc-standard/merkle_root\", \"member_merkle_root\": \"7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f\"}, {\"slug\": \"notification-design\", \"role\": \"member\", \"name\": \"通知设计 顾问\", \"evidence\": \"original_assets/notification-design/merkle_root\", \"member_merkle_root\": \"bed49a31d4529a33ce39e561b122488a8b774daa1b100436a015ea3279c3583d\"}, {\"slug\": \"game-economy-balance\", \"role\": \"member\", \"name\": \"游戏经济 数值平衡 顾问\", \"evidence\": \"original_assets/game-economy-balance/merkle_root\", \"member_merkle_root\": \"3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66\"}], \"team_lead\": \"game-doc-standard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-doc-standard-team-lead.md": "b2e99331cb240a517c6fbaa321d2255e8bdc6d15513018181fc8a571d0318ff7",
+    "agents/game-doc-standard.md": "5aa3c27da15080b393b34f4e18b4da6fbcf8fdcb288b3a81849570b26029e026",
+    "agents/game-economy-balance.md": "e09273ae9998dffc792ff7f93ba9641738c6e583d4661112742ef52bde40480f",
+    "agents/notification-design.md": "f7d58499d7c54b67d49a3c36b6479ff208a5da2b63d6aeaf2d3c3d8b3a89d329",
+    "plugin.json": "01e7e854bf47907ae44795b93d816c7d8d5e33e2d12b5498af86abdad646902a",
+    "settings.json": "f0e6f5f6a2a01e2bbef08972fe4b22078d3049b0cb10dcff33dc59ea1c3834ad"
+  }
+}

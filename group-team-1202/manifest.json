@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1202",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1202",
+    "kind": "team",
+    "name": "空状态设计专家",
+    "description": "空状态设计专家：围绕空状态设计，覆盖说明原因／给出动作／视觉轻盈，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "empty-state-design-team-lead",
+        "role": "lead",
+        "name": "空状态设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "empty-state-design",
+        "role": "member",
+        "name": "空状态设计 顾问",
+        "evidence": "original_assets/empty-state-design/merkle_root",
+        "member_merkle_root": "c1c9be4020ffda2a2c84cfc59e277665315572a04a25f02adaf111fc3721c723"
+      },
+      {
+        "slug": "map-visual-design",
+        "role": "member",
+        "name": "地图可视化 表达规范 顾问",
+        "evidence": "original_assets/map-visual-design/merkle_root",
+        "member_merkle_root": "682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd"
+      },
+      {
+        "slug": "virtual-space-pro",
+        "role": "member",
+        "name": "虚拟空间 场景搭建 顾问",
+        "evidence": "original_assets/virtual-space-pro/merkle_root",
+        "member_merkle_root": "929f730b1f65614b2237b8bbb38724a79c562d4c4f08c45256b8f47496ec7d73"
+      }
+    ],
+    "team_lead": "empty-state-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b5dc37ce6d58a837",
+  "prompt_hash": "da18d408670b6be7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1202\", \"kind\": \"team\", \"name\": \"空状态设计专家\", \"description\": \"空状态设计专家：围绕空状态设计，覆盖说明原因／给出动作／视觉轻盈，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"empty-state-design-team-lead\", \"role\": \"lead\", \"name\": \"空状态设计主理人\", \"evidence\": null}, {\"slug\": \"empty-state-design\", \"role\": \"member\", \"name\": \"空状态设计 顾问\", \"evidence\": \"original_assets/empty-state-design/merkle_root\", \"member_merkle_root\": \"c1c9be4020ffda2a2c84cfc59e277665315572a04a25f02adaf111fc3721c723\"}, {\"slug\": \"map-visual-design\", \"role\": \"member\", \"name\": \"地图可视化 表达规范 顾问\", \"evidence\": \"original_assets/map-visual-design/merkle_root\", \"member_merkle_root\": \"682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd\"}, {\"slug\": \"virtual-space-pro\", \"role\": \"member\", \"name\": \"虚拟空间 场景搭建 顾问\", \"evidence\": \"original_assets/virtual-space-pro/merkle_root\", \"member_merkle_root\": \"929f730b1f65614b2237b8bbb38724a79c562d4c4f08c45256b8f47496ec7d73\"}], \"team_lead\": \"empty-state-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/empty-state-design-team-lead.md": "08c01426cfe496d101ee6ae42ecc54af5860fc813f3afdb879ba6ef1cb6471fa",
+    "agents/empty-state-design.md": "07426c3492af26ef32df5cc31fa958778111736a3c8a4d0cd62c7b8e21f9ba52",
+    "agents/map-visual-design.md": "9e86f57def8044055fb73b759153898eb604585bdb8d0b151c0181ac9a8f1028",
+    "agents/virtual-space-pro.md": "727c505262566c6e66faf282ccdc1015b0b2b3e63454caa408b97c22337ecedf",
+    "plugin.json": "cbd34bb7ffa64a105527be231606952d7a38f873789ec638564aa14001b17d35",
+    "settings.json": "1a093b2598d78faa99e413f8ffddf6e09d03e78bfc3468ac11ceb8ed715bd9a6"
+  }
+}

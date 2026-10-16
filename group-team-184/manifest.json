@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-184",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-184",
+    "kind": "team",
+    "name": "数据 叙事 行情 采集 团队",
+    "description": "数据 叙事 行情 采集 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "toolkit-pro-05-team-lead",
+        "role": "lead",
+        "name": "数据叙事主理人",
+        "evidence": null
+      },
+      {
+        "slug": "toolkit-pro-05",
+        "role": "member",
+        "name": "数据叙事 构建配置 批量处理",
+        "evidence": "original_assets/toolkit-pro-05/merkle_root",
+        "member_merkle_root": "2a2fc45e91cf55090108dcda4ffbcd829fcc42d3f1e01e3849f0acc85d888410"
+      },
+      {
+        "slug": "toolkit-pro-07",
+        "role": "member",
+        "name": "行情研判 收入筹划 图像比对",
+        "evidence": "original_assets/toolkit-pro-07/merkle_root",
+        "member_merkle_root": "d6d1213f7afba0b8437a83fe97421caa0cc51489ac984a4b90d7d8282f0961f3"
+      },
+      {
+        "slug": "toolkit-pro-fixed",
+        "role": "member",
+        "name": "数据采集清洗 回放自动化",
+        "evidence": "original_assets/toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "371041468a91fd9efa68b57ce491cd5d682234b17ca47aee624e78ba1f801193"
+      }
+    ],
+    "team_lead": "toolkit-pro-05-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0886f33af9c155bf",
+  "prompt_hash": "6ad62701a9800879",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-184\", \"kind\": \"team\", \"name\": \"数据 叙事 行情 采集 团队\", \"description\": \"数据 叙事 行情 采集 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"toolkit-pro-05-team-lead\", \"role\": \"lead\", \"name\": \"数据叙事主理人\", \"evidence\": null}, {\"slug\": \"toolkit-pro-05\", \"role\": \"member\", \"name\": \"数据叙事 构建配置 批量处理\", \"evidence\": \"original_assets/toolkit-pro-05/merkle_root\", \"member_merkle_root\": \"2a2fc45e91cf55090108dcda4ffbcd829fcc42d3f1e01e3849f0acc85d888410\"}, {\"slug\": \"toolkit-pro-07\", \"role\": \"member\", \"name\": \"行情研判 收入筹划 图像比对\", \"evidence\": \"original_assets/toolkit-pro-07/merkle_root\", \"member_merkle_root\": \"d6d1213f7afba0b8437a83fe97421caa0cc51489ac984a4b90d7d8282f0961f3\"}, {\"slug\": \"toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"数据采集清洗 回放自动化\", \"evidence\": \"original_assets/toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"371041468a91fd9efa68b57ce491cd5d682234b17ca47aee624e78ba1f801193\"}], \"team_lead\": \"toolkit-pro-05-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/toolkit-pro-05-team-lead.md": "d58a9b3f0b9dc99788009aa66bc4453af2495ba272477602bbc7f061ff846a6c",
+    "agents/toolkit-pro-05.md": "7ba1c4e9992dac5f6be07749647910635ed799c76b58584f03c17a34367c0e00",
+    "agents/toolkit-pro-07.md": "26997267315524e08dc2481e145f91c9f35bc0f634df5f32cc826e5c84649900",
+    "agents/toolkit-pro-fixed.md": "73ec17e71e75ea0b51044d08abb8ea1d4e7d780692b3f0292217c824c2a78fd1",
+    "plugin.json": "73a49f853970d40a61b6c050b4249b660952c02806fc593edcdb51e37b490aa3",
+    "settings.json": "da69dfe9fa9128544b8b4ee49153b87f823009cdab39140b882368e5425ab47c"
+  }
+}

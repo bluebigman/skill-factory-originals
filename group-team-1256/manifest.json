@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1256",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1256",
+    "kind": "team",
+    "name": "沙箱策略专家",
+    "description": "沙箱策略专家：围绕沙箱策略，覆盖最小权限／网络受限／文件隔离，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-sandbox-policy-team-lead",
+        "role": "lead",
+        "name": "沙箱策略主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-sandbox-policy",
+        "role": "member",
+        "name": "沙箱策略 隔离边界 顾问",
+        "evidence": "original_assets/agent-sandbox-policy/merkle_root",
+        "member_merkle_root": "a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e"
+      },
+      {
+        "slug": "office-struct-extract",
+        "role": "member",
+        "name": "Office 结构化抽取 助手",
+        "evidence": "original_assets/office-struct-extract/merkle_root",
+        "member_merkle_root": "490261f801bafb4b1deeaba19f7c4747f648dd24beaa41396772c3b61e937688"
+      },
+      {
+        "slug": "code-query-expert",
+        "role": "member",
+        "name": "代码速查 语法示例 调试技巧",
+        "evidence": "original_assets/code-query-expert/merkle_root",
+        "member_merkle_root": "e1f01f877e534e48787774045a1ec6d76e93da1883bdf5232da3a17c0826fa17"
+      }
+    ],
+    "team_lead": "agent-sandbox-policy-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "33e184744b338d6a",
+  "prompt_hash": "36f474b4f35c6a81",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1256\", \"kind\": \"team\", \"name\": \"沙箱策略专家\", \"description\": \"沙箱策略专家：围绕沙箱策略，覆盖最小权限／网络受限／文件隔离，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-sandbox-policy-team-lead\", \"role\": \"lead\", \"name\": \"沙箱策略主理人\", \"evidence\": null}, {\"slug\": \"agent-sandbox-policy\", \"role\": \"member\", \"name\": \"沙箱策略 隔离边界 顾问\", \"evidence\": \"original_assets/agent-sandbox-policy/merkle_root\", \"member_merkle_root\": \"a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e\"}, {\"slug\": \"office-struct-extract\", \"role\": \"member\", \"name\": \"Office 结构化抽取 助手\", \"evidence\": \"original_assets/office-struct-extract/merkle_root\", \"member_merkle_root\": \"490261f801bafb4b1deeaba19f7c4747f648dd24beaa41396772c3b61e937688\"}, {\"slug\": \"code-query-expert\", \"role\": \"member\", \"name\": \"代码速查 语法示例 调试技巧\", \"evidence\": \"original_assets/code-query-expert/merkle_root\", \"member_merkle_root\": \"e1f01f877e534e48787774045a1ec6d76e93da1883bdf5232da3a17c0826fa17\"}], \"team_lead\": \"agent-sandbox-policy-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-sandbox-policy-team-lead.md": "25c728088b506d27e538941fbddba710bddc2b4922cdf83ee10b867cf7c1b74e",
+    "agents/agent-sandbox-policy.md": "40e61d598a33a3ae4d76323e28673fc9cc711e8847785cc5db9aabfebfb0f853",
+    "agents/code-query-expert.md": "0af7d836444419eafbcf80676fab5ccf96ac61574c4995d8807c4ddfe9848cde",
+    "agents/office-struct-extract.md": "7075c896826ef826891f15d6c1c174713eee390d4a2331b009669b793ef0d7bb",
+    "plugin.json": "49b6f2b9aa57864161318ba20c4a9aae2f0ba47cdd82187e6ae38a39c7369d7c",
+    "settings.json": "04061d09251baded97e1e8568fe0cd6c71b3a5e1097ab2f5d710d7cff6918520"
+  }
+}

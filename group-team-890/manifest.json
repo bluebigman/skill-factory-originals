@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-890",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-890",
+    "kind": "team",
+    "name": "味改写专家",
+    "description": "输入去相关需求，输出语气自然、保留信息、节庆对齐三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ai-flavor-remove-team-lead",
+        "role": "lead",
+        "name": "去主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ai-flavor-remove",
+        "role": "member",
+        "name": "去 AI 味改写 助手",
+        "evidence": "original_assets/ai-flavor-remove/merkle_root",
+        "member_merkle_root": "a83d41a095c06554a76b32dbb6fbde0df6e22f21b9b42ba978f2c78df230c4c2"
+      },
+      {
+        "slug": "global-content-calendar",
+        "role": "member",
+        "name": "全球内容 排期协调 顾问",
+        "evidence": "original_assets/global-content-calendar/merkle_root",
+        "member_merkle_root": "e23ebe26f1331d2c7511239619168ed058a0ee6b51a318030160ec6233d9d361"
+      },
+      {
+        "slug": "note-life-pro",
+        "role": "member",
+        "name": "笔记与生活助手",
+        "evidence": "original_assets/note-life-pro/merkle_root",
+        "member_merkle_root": "c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86"
+      }
+    ],
+    "team_lead": "ai-flavor-remove-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "929cd587aa1b1292",
+  "prompt_hash": "8f81fec3a035245a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-890\", \"kind\": \"team\", \"name\": \"味改写专家\", \"description\": \"输入去相关需求，输出语气自然、保留信息、节庆对齐三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ai-flavor-remove-team-lead\", \"role\": \"lead\", \"name\": \"去主理人\", \"evidence\": null}, {\"slug\": \"ai-flavor-remove\", \"role\": \"member\", \"name\": \"去 AI 味改写 助手\", \"evidence\": \"original_assets/ai-flavor-remove/merkle_root\", \"member_merkle_root\": \"a83d41a095c06554a76b32dbb6fbde0df6e22f21b9b42ba978f2c78df230c4c2\"}, {\"slug\": \"global-content-calendar\", \"role\": \"member\", \"name\": \"全球内容 排期协调 顾问\", \"evidence\": \"original_assets/global-content-calendar/merkle_root\", \"member_merkle_root\": \"e23ebe26f1331d2c7511239619168ed058a0ee6b51a318030160ec6233d9d361\"}, {\"slug\": \"note-life-pro\", \"role\": \"member\", \"name\": \"笔记与生活助手\", \"evidence\": \"original_assets/note-life-pro/merkle_root\", \"member_merkle_root\": \"c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86\"}], \"team_lead\": \"ai-flavor-remove-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ai-flavor-remove-team-lead.md": "d9855310d8882b41beb15f227053b67ebd0189e7d0144540d84c78ab205593c8",
+    "agents/ai-flavor-remove.md": "30a5baa2c7bd2ec00212ba3f8e3609367a9f092195e2c535d8d2ac84653be1af",
+    "agents/global-content-calendar.md": "2290d87191ed5598bb187a9725879b21a5a4593cf3f6a6aab41128f8f4fbc2b4",
+    "agents/note-life-pro.md": "9dc60ba64fb55a76aaf27a26cc23abcbe9130625f173df29cf3b9741a5393a7d",
+    "plugin.json": "96cc778d609c3aa40864ec55df4e7214ce4ea9e3984609066bee43073aa3d935",
+    "settings.json": "8bd9220604053856863a5404f29671de35632d809e6e11f1e2d0dd0f51cab4cf"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "marketing-mix-pro-team-lead",
+  "agents": [
+    "./agents/marketing-mix-pro-team-lead.md",
+    "./agents/marketing-mix-pro.md",
+    "./agents/microcopy-coach.md",
+    "./agents/community-grow-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 渠道组合",
+    "zh": "帮我处理渠道组合"
+  },
+  "description": "marketing-mix-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 渠道组合 requirements, output three deliverables: 目标倒推, 关注边际, 预留机动. Verifiable end-to-end, evidence per step.",
+    "zh": "输入渠道组合相关需求，输出目标倒推、关注边际、预留机动三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "marketing-mix-pro Team",
+    "zh": "渠道组合预算分配专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "marketing-mix-pro-team-lead",
+      "name": {
+        "en": "渠道组合主理人",
+        "zh": "渠道组合主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/marketing-mix-pro.png",
+      "id": "marketing-mix-pro",
+      "name": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "profession": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/microcopy-coach.png",
+      "id": "microcopy-coach",
+      "name": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "profession": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/community-grow-pro.png",
+      "id": "community-grow-pro",
+      "name": {
+        "en": "community-grow-pro",
+        "zh": "社群运营 活跃机制 顾问"
+      },
+      "profession": {
+        "en": "community-grow-pro",
+        "zh": "社群运营 活跃机制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-633",
+  "plugin": "group-team-633",
+  "profession": {
+    "en": "marketing-mix-pro Collaboration Team",
+    "zh": "渠道组合预算分配专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 渠道组合",
+      "zh": "帮我处理渠道组合"
+    },
+    {
+      "en": "Plan 界面文案",
+      "zh": "帮我规划界面文案"
+    },
+    {
+      "en": "Review 社群运营",
+      "zh": "帮我检查社群运营"
+    }
+  ],
+  "tags": [
+    {
+      "en": "目标倒推",
+      "zh": "目标倒推"
+    },
+    {
+      "en": "关注边际",
+      "zh": "关注边际"
+    },
+    {
+      "en": "预留机动",
+      "zh": "预留机动"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "marketing-mix-pro-team-lead",
+    "memberAgents": [
+      "marketing-mix-pro",
+      "microcopy-coach",
+      "community-grow-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-314",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-314",
+    "kind": "team",
+    "name": "接口助手专家",
+    "description": "擅长契约优先、兼容检查与示例可跑，覆盖接口助手全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-api-companion-team-lead",
+        "role": "lead",
+        "name": "接口助手主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-api-companion",
+        "role": "member",
+        "name": "接口助手 调试 契约 兼容",
+        "evidence": "original_assets/agent-api-companion/merkle_root",
+        "member_merkle_root": "6f1b68c31f25b944fd559df5e9f0500f59577168259fd1114cf5b633e1f4a0b0"
+      },
+      {
+        "slug": "agent-goal-decompose-pro",
+        "role": "member",
+        "name": "目标拆解 任务分解 顾问",
+        "evidence": "original_assets/agent-goal-decompose-pro/merkle_root",
+        "member_merkle_root": "2a94e4fff3d1c68ba146320ea36682ac910c685ea932b07f9c083b28726ace8c"
+      },
+      {
+        "slug": "agent-test-harness",
+        "role": "member",
+        "name": "测试台架 用例管理 顾问",
+        "evidence": "original_assets/agent-test-harness/merkle_root",
+        "member_merkle_root": "29e6d63378ee025afe09be7d9f7af9d2a346e6cf4c5642e457b5194956aa8220"
+      }
+    ],
+    "team_lead": "agent-api-companion-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a89793b42819e5b8",
+  "prompt_hash": "dccf57165e1d5bbb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-314\", \"kind\": \"team\", \"name\": \"接口助手专家\", \"description\": \"擅长契约优先、兼容检查与示例可跑，覆盖接口助手全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-api-companion-team-lead\", \"role\": \"lead\", \"name\": \"接口助手主理人\", \"evidence\": null}, {\"slug\": \"agent-api-companion\", \"role\": \"member\", \"name\": \"接口助手 调试 契约 兼容\", \"evidence\": \"original_assets/agent-api-companion/merkle_root\", \"member_merkle_root\": \"6f1b68c31f25b944fd559df5e9f0500f59577168259fd1114cf5b633e1f4a0b0\"}, {\"slug\": \"agent-goal-decompose-pro\", \"role\": \"member\", \"name\": \"目标拆解 任务分解 顾问\", \"evidence\": \"original_assets/agent-goal-decompose-pro/merkle_root\", \"member_merkle_root\": \"2a94e4fff3d1c68ba146320ea36682ac910c685ea932b07f9c083b28726ace8c\"}, {\"slug\": \"agent-test-harness\", \"role\": \"member\", \"name\": \"测试台架 用例管理 顾问\", \"evidence\": \"original_assets/agent-test-harness/merkle_root\", \"member_merkle_root\": \"29e6d63378ee025afe09be7d9f7af9d2a346e6cf4c5642e457b5194956aa8220\"}], \"team_lead\": \"agent-api-companion-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-api-companion-team-lead.md": "6937663c4f65d4200ad6467304fc8aa01ef8b7eb387f9c3ce6b749fa655a231a",
+    "agents/agent-api-companion.md": "bbd85a95265f3efd8d33768bb564b822129bbb6cfe8f20e08e60ef8229eccbbd",
+    "agents/agent-goal-decompose-pro.md": "8ab7fd2903e3b807bed10d5a7ca7ad54a0fa7ee92d2f0905b2cdc971ca7d68f1",
+    "agents/agent-test-harness.md": "365cc742da523da3e4fdac0f5b03eb3925d23b4ee18b28d3c32c8d0c769e406a",
+    "plugin.json": "fff2352b9093d11a7c65875032bcc2404de90dd32e076fb6e45010d40bd704a2",
+    "settings.json": "2df3fdf8a9a453f9867c5c75100a59263d16df0aff198686ad25f1e9bf71779d"
+  }
+}

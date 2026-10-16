@@ -1,0 +1,126 @@
+{
+  "agentName": "map-visual-design-team-lead",
+  "agents": [
+    "./agents/map-visual-design-team-lead.md",
+    "./agents/map-visual-design.md",
+    "./agents/doc-accessibility.md",
+    "./agents/game-doc-standard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 地图可视化",
+    "zh": "帮我处理地图可视化"
+  },
+  "description": "map-visual-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 地图可视化 end-to-end: 分级设色, 色盲友好 and 图例齐全. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分级设色、色盲友好与图例齐全，覆盖地图可视化全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "map-visual-design Team",
+    "zh": "地图可视化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "map-visual-design-team-lead",
+      "name": {
+        "en": "地图可视化主理人",
+        "zh": "地图可视化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/map-visual-design.png",
+      "id": "map-visual-design",
+      "name": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "profession": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-accessibility.png",
+      "id": "doc-accessibility",
+      "name": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "profession": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-doc-standard.png",
+      "id": "game-doc-standard",
+      "name": {
+        "en": "game-doc-standard",
+        "zh": "游戏策划 文档规范 顾问"
+      },
+      "profession": {
+        "en": "game-doc-standard",
+        "zh": "游戏策划 文档规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1252",
+  "plugin": "group-team-1252",
+  "profession": {
+    "en": "map-visual-design Collaboration Team",
+    "zh": "地图可视化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 地图可视化",
+      "zh": "帮我处理地图可视化"
+    },
+    {
+      "en": "Plan 文档无障碍",
+      "zh": "帮我规划文档无障碍"
+    },
+    {
+      "en": "Review 游戏策划",
+      "zh": "帮我检查游戏策划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级设色",
+      "zh": "分级设色"
+    },
+    {
+      "en": "色盲友好",
+      "zh": "色盲友好"
+    },
+    {
+      "en": "图例齐全",
+      "zh": "图例齐全"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "map-visual-design-team-lead",
+    "memberAgents": [
+      "map-visual-design",
+      "doc-accessibility",
+      "game-doc-standard"
+    ]
+  },
+  "version": "1.0.0"
+}

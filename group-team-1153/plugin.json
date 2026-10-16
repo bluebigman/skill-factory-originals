@@ -1,0 +1,126 @@
+{
+  "agentName": "level-difficulty-curve-team-lead",
+  "agents": [
+    "./agents/level-difficulty-curve-team-lead.md",
+    "./agents/level-difficulty-curve.md",
+    "./agents/animation-principle.md",
+    "./agents/game-community-mod.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 关卡难度",
+    "zh": "帮我处理关卡难度"
+  },
+  "description": "level-difficulty-curve team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 关卡难度 end-to-end: 适度跳过, 有因有果 and 时长短促. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长适度跳过、有因有果与时长短促，覆盖关卡难度全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "level-difficulty-curve Team",
+    "zh": "关卡难度曲线调优专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "level-difficulty-curve-team-lead",
+      "name": {
+        "en": "关卡难度主理人",
+        "zh": "关卡难度主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/level-difficulty-curve.png",
+      "id": "level-difficulty-curve",
+      "name": {
+        "en": "level-difficulty-curve",
+        "zh": "关卡难度 曲线调优 顾问"
+      },
+      "profession": {
+        "en": "level-difficulty-curve",
+        "zh": "关卡难度 曲线调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/animation-principle.png",
+      "id": "animation-principle",
+      "name": {
+        "en": "animation-principle",
+        "zh": "动效设计原则 顾问"
+      },
+      "profession": {
+        "en": "animation-principle",
+        "zh": "动效设计原则 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-community-mod.png",
+      "id": "game-community-mod",
+      "name": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "profession": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1153",
+  "plugin": "group-team-1153",
+  "profession": {
+    "en": "level-difficulty-curve Collaboration Team",
+    "zh": "关卡难度曲线调优专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 关卡难度",
+      "zh": "帮我处理关卡难度"
+    },
+    {
+      "en": "Plan 动效设计原则",
+      "zh": "帮我规划动效设计原则"
+    },
+    {
+      "en": "Review 游戏社区",
+      "zh": "帮我检查游戏社区"
+    }
+  ],
+  "tags": [
+    {
+      "en": "阶梯递进",
+      "zh": "阶梯递进"
+    },
+    {
+      "en": "失败可读",
+      "zh": "失败可读"
+    },
+    {
+      "en": "埋点看卡点",
+      "zh": "埋点看卡点"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "level-difficulty-curve-team-lead",
+    "memberAgents": [
+      "level-difficulty-curve",
+      "animation-principle",
+      "game-community-mod"
+    ]
+  },
+  "version": "1.0.0"
+}

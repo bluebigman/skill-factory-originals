@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1107",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1107",
+    "kind": "team",
+    "name": "内容钩子设计专家",
+    "description": "输入内容钩子设计相关需求，输出痛点前置、单一卖点、行动明确三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-hook-craft-team-lead",
+        "role": "lead",
+        "name": "内容钩子设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-hook-craft",
+        "role": "member",
+        "name": "内容钩子设计 顾问",
+        "evidence": "original_assets/content-hook-craft/merkle_root",
+        "member_merkle_root": "a8dd97cd78bd5e39044527392f49eb6a045f7a76d1d8a45b38a4fda8f87ea534"
+      },
+      {
+        "slug": "microcopy-craft",
+        "role": "member",
+        "name": "界面文案打磨 顾问",
+        "evidence": "original_assets/microcopy-craft/merkle_root",
+        "member_merkle_root": "956f1ce9f1a2ead5e2dc569cf8366e0ec6835b74b397018922f6a54a42846f9e"
+      },
+      {
+        "slug": "doc-coauthor-flow",
+        "role": "member",
+        "name": "文档协同编辑 顾问",
+        "evidence": "original_assets/doc-coauthor-flow/merkle_root",
+        "member_merkle_root": "01cc4d675232382a226f964c24f9e524e61e3867d6231f1304f95e52bc61dc3f"
+      }
+    ],
+    "team_lead": "content-hook-craft-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a1ccc3fb3795d1d7",
+  "prompt_hash": "7a09d077cb0b97c4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1107\", \"kind\": \"team\", \"name\": \"内容钩子设计专家\", \"description\": \"输入内容钩子设计相关需求，输出痛点前置、单一卖点、行动明确三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-hook-craft-team-lead\", \"role\": \"lead\", \"name\": \"内容钩子设计主理人\", \"evidence\": null}, {\"slug\": \"content-hook-craft\", \"role\": \"member\", \"name\": \"内容钩子设计 顾问\", \"evidence\": \"original_assets/content-hook-craft/merkle_root\", \"member_merkle_root\": \"a8dd97cd78bd5e39044527392f49eb6a045f7a76d1d8a45b38a4fda8f87ea534\"}, {\"slug\": \"microcopy-craft\", \"role\": \"member\", \"name\": \"界面文案打磨 顾问\", \"evidence\": \"original_assets/microcopy-craft/merkle_root\", \"member_merkle_root\": \"956f1ce9f1a2ead5e2dc569cf8366e0ec6835b74b397018922f6a54a42846f9e\"}, {\"slug\": \"doc-coauthor-flow\", \"role\": \"member\", \"name\": \"文档协同编辑 顾问\", \"evidence\": \"original_assets/doc-coauthor-flow/merkle_root\", \"member_merkle_root\": \"01cc4d675232382a226f964c24f9e524e61e3867d6231f1304f95e52bc61dc3f\"}], \"team_lead\": \"content-hook-craft-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-hook-craft-team-lead.md": "6d35ad84d4714f3895e294212fbbc727398ca6775153e75b9dff7c5c96ec7214",
+    "agents/content-hook-craft.md": "6ca80477aa2c628301623230d20e4940d2407b731bf50c842be3c859680f63dd",
+    "agents/doc-coauthor-flow.md": "d6cfd2c55226864312dfc2748e12463fc03d8780116fddd14882ec97d9bda98b",
+    "agents/microcopy-craft.md": "b0ab56be0fa24c85033723b23f788ee1c1c3c77d76fd211fa9537bcf90ece44c",
+    "plugin.json": "8e809c04d173c6f32b1d0637480a49fc6704f940dae673b9dfbe193ac796a55e",
+    "settings.json": "4a912226cb954936dd862d071d7ffb4c65660afebec741eef096cb00395b40a2"
+  }
+}

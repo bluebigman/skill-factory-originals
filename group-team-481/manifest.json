@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-481",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-481",
+    "kind": "team",
+    "name": "会议纪要决议提炼专家",
+    "description": "会议纪要决议提炼专家：围绕会议纪要，覆盖决议明确／截止时间／跟踪机制，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "meeting-minutes-pro-team-lead",
+        "role": "lead",
+        "name": "会议纪要主理人",
+        "evidence": null
+      },
+      {
+        "slug": "meeting-minutes-pro",
+        "role": "member",
+        "name": "会议纪要 决议提炼 顾问",
+        "evidence": "original_assets/meeting-minutes-pro/merkle_root",
+        "member_merkle_root": "e6d4d0963cfee5b2bfdf65cdbae46d706ecdcfdad5cd57a0511afc2c43b569ef"
+      },
+      {
+        "slug": "project-planning-expert",
+        "role": "member",
+        "name": "项目管理排期专家",
+        "evidence": "original_assets/project-planning-expert/merkle_root",
+        "member_merkle_root": "a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9"
+      },
+      {
+        "slug": "project-manage-pro",
+        "role": "member",
+        "name": "项目任务管理 进度跟踪",
+        "evidence": "original_assets/project-manage-pro/merkle_root",
+        "member_merkle_root": "956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0"
+      }
+    ],
+    "team_lead": "meeting-minutes-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8443fe91f9e7e2dd",
+  "prompt_hash": "cee82ffeb3bee3f2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-481\", \"kind\": \"team\", \"name\": \"会议纪要决议提炼专家\", \"description\": \"会议纪要决议提炼专家：围绕会议纪要，覆盖决议明确／截止时间／跟踪机制，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"meeting-minutes-pro-team-lead\", \"role\": \"lead\", \"name\": \"会议纪要主理人\", \"evidence\": null}, {\"slug\": \"meeting-minutes-pro\", \"role\": \"member\", \"name\": \"会议纪要 决议提炼 顾问\", \"evidence\": \"original_assets/meeting-minutes-pro/merkle_root\", \"member_merkle_root\": \"e6d4d0963cfee5b2bfdf65cdbae46d706ecdcfdad5cd57a0511afc2c43b569ef\"}, {\"slug\": \"project-planning-expert\", \"role\": \"member\", \"name\": \"项目管理排期专家\", \"evidence\": \"original_assets/project-planning-expert/merkle_root\", \"member_merkle_root\": \"a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9\"}, {\"slug\": \"project-manage-pro\", \"role\": \"member\", \"name\": \"项目任务管理 进度跟踪\", \"evidence\": \"original_assets/project-manage-pro/merkle_root\", \"member_merkle_root\": \"956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0\"}], \"team_lead\": \"meeting-minutes-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/meeting-minutes-pro-team-lead.md": "6ec19d8871e01a3d4962216d9009137eca60b9b634acef4b474e8c3d9fee2ccd",
+    "agents/meeting-minutes-pro.md": "0a599e8ecf7cd22fcf4f118a352d5f376a9d5a4d60702acacf4ff8a1d37449f1",
+    "agents/project-manage-pro.md": "56ee5a8325a9fc165bfd838676d8b359f87675683179d3874bb9d23d65a8446d",
+    "agents/project-planning-expert.md": "7c9ef51dd8a68abc9afd111f98490167a7f4e738850e6a035dcf944abf383bae",
+    "plugin.json": "2f4a9d4fc25c7c0aee95c33506f8dda2d6fd5dff2f449cd1376dbfca11305b73",
+    "settings.json": "3b4660035848badfcce3065cf8c7697724a65eae36861628d6d09335b3c6a993"
+  }
+}

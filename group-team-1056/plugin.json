@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-readonly-guard-team-lead",
+  "agents": [
+    "./agents/sql-readonly-guard-team-lead.md",
+    "./agents/sql-readonly-guard.md",
+    "./agents/log-correlation.md",
+    "./agents/api-rate-govern.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 只读查询守护",
+    "zh": "帮我处理只读查询守护"
+  },
+  "description": "sql-readonly-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 只读查询守护 requirements, output three deliverables: 强制只读, 限制行数, 超时保护. Verifiable end-to-end, evidence per step.",
+    "zh": "输入只读查询守护相关需求，输出强制只读、限制行数、超时保护三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "sql-readonly-guard Team",
+    "zh": "只读查询守护专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-readonly-guard-team-lead",
+      "name": {
+        "en": "只读查询守护主理人",
+        "zh": "只读查询守护主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-readonly-guard.png",
+      "id": "sql-readonly-guard",
+      "name": {
+        "en": "sql-readonly-guard",
+        "zh": "只读查询守护 顾问"
+      },
+      "profession": {
+        "en": "sql-readonly-guard",
+        "zh": "只读查询守护 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/log-correlation.png",
+      "id": "log-correlation",
+      "name": {
+        "en": "log-correlation",
+        "zh": "日志关联追踪 助手"
+      },
+      "profession": {
+        "en": "log-correlation",
+        "zh": "日志关联追踪 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-rate-govern.png",
+      "id": "api-rate-govern",
+      "name": {
+        "en": "api-rate-govern",
+        "zh": "限流治理 配额分配 顾问"
+      },
+      "profession": {
+        "en": "api-rate-govern",
+        "zh": "限流治理 配额分配 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1056",
+  "plugin": "group-team-1056",
+  "profession": {
+    "en": "sql-readonly-guard Collaboration Team",
+    "zh": "只读查询守护专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 只读查询守护",
+      "zh": "帮我处理只读查询守护"
+    },
+    {
+      "en": "Plan 日志关联追踪",
+      "zh": "帮我规划日志关联追踪"
+    },
+    {
+      "en": "Review 限流治理",
+      "zh": "帮我检查限流治理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "强制只读",
+      "zh": "强制只读"
+    },
+    {
+      "en": "限制行数",
+      "zh": "限制行数"
+    },
+    {
+      "en": "超时保护",
+      "zh": "超时保护"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-readonly-guard-team-lead",
+    "memberAgents": [
+      "sql-readonly-guard",
+      "log-correlation",
+      "api-rate-govern"
+    ]
+  },
+  "version": "1.0.0"
+}

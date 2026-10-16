@@ -1,0 +1,126 @@
+{
+  "agentName": "content-brief-write-team-lead",
+  "agents": [
+    "./agents/content-brief-write-team-lead.md",
+    "./agents/content-brief-write.md",
+    "./agents/tone-adaptation.md",
+    "./agents/seo-content-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容需求文档",
+    "zh": "帮我处理内容需求文档"
+  },
+  "description": "content-brief-write team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 内容需求文档 requirements, output three deliverables: 目标明确, 受众明确, 要点清单. Verifiable end-to-end, evidence per step.",
+    "zh": "输入内容需求文档相关需求，输出目标明确、受众明确、要点清单三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "content-brief-write Team",
+    "zh": "内容需求文档专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-brief-write-team-lead",
+      "name": {
+        "en": "内容需求文档主理人",
+        "zh": "内容需求文档主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-brief-write.png",
+      "id": "content-brief-write",
+      "name": {
+        "en": "content-brief-write",
+        "zh": "内容需求文档 助手"
+      },
+      "profession": {
+        "en": "content-brief-write",
+        "zh": "内容需求文档 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tone-adaptation.png",
+      "id": "tone-adaptation",
+      "name": {
+        "en": "tone-adaptation",
+        "zh": "语气适配改写 助手"
+      },
+      "profession": {
+        "en": "tone-adaptation",
+        "zh": "语气适配改写 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/seo-content-pro.png",
+      "id": "seo-content-pro",
+      "name": {
+        "en": "seo-content-pro",
+        "zh": "搜索内容 关键词布局 顾问"
+      },
+      "profession": {
+        "en": "seo-content-pro",
+        "zh": "搜索内容 关键词布局 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1233",
+  "plugin": "group-team-1233",
+  "profession": {
+    "en": "content-brief-write Collaboration Team",
+    "zh": "内容需求文档专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容需求文档",
+      "zh": "帮我处理内容需求文档"
+    },
+    {
+      "en": "Plan 语气适配改写",
+      "zh": "帮我规划语气适配改写"
+    },
+    {
+      "en": "Review 搜索内容",
+      "zh": "帮我检查搜索内容"
+    }
+  ],
+  "tags": [
+    {
+      "en": "目标明确",
+      "zh": "目标明确"
+    },
+    {
+      "en": "受众明确",
+      "zh": "受众明确"
+    },
+    {
+      "en": "要点清单",
+      "zh": "要点清单"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-brief-write-team-lead",
+    "memberAgents": [
+      "content-brief-write",
+      "tone-adaptation",
+      "seo-content-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

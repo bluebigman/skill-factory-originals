@@ -1,0 +1,126 @@
+{
+  "agentName": "error-code-registry-team-lead",
+  "agents": [
+    "./agents/error-code-registry-team-lead.md",
+    "./agents/error-code-registry.md",
+    "./agents/doc-watermark-apply.md",
+    "./agents/compliance-checklist.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 错误码注册表",
+    "zh": "帮我处理错误码注册表"
+  },
+  "description": "error-code-registry team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 错误码注册表 end-to-end: 文档同步, 对外收敛 and 分级水印. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长文档同步、对外收敛与分级水印，覆盖错误码注册表全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "error-code-registry Team",
+    "zh": "错误码注册表顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "error-code-registry-team-lead",
+      "name": {
+        "en": "错误码注册表主理人",
+        "zh": "错误码注册表主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/error-code-registry.png",
+      "id": "error-code-registry",
+      "name": {
+        "en": "error-code-registry",
+        "zh": "错误码注册表 顾问"
+      },
+      "profession": {
+        "en": "error-code-registry",
+        "zh": "错误码注册表 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-watermark-apply.png",
+      "id": "doc-watermark-apply",
+      "name": {
+        "en": "doc-watermark-apply",
+        "zh": "文档水印管理 助手"
+      },
+      "profession": {
+        "en": "doc-watermark-apply",
+        "zh": "文档水印管理 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/compliance-checklist.png",
+      "id": "compliance-checklist",
+      "name": {
+        "en": "compliance-checklist",
+        "zh": "合规自查清单 顾问"
+      },
+      "profession": {
+        "en": "compliance-checklist",
+        "zh": "合规自查清单 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1114",
+  "plugin": "group-team-1114",
+  "profession": {
+    "en": "error-code-registry Collaboration Team",
+    "zh": "错误码注册表顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 错误码注册表",
+      "zh": "帮我处理错误码注册表"
+    },
+    {
+      "en": "Plan 文档水印管理",
+      "zh": "帮我规划文档水印管理"
+    },
+    {
+      "en": "Review 合规自查清单",
+      "zh": "帮我检查合规自查清单"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分段分配",
+      "zh": "分段分配"
+    },
+    {
+      "en": "含义稳定",
+      "zh": "含义稳定"
+    },
+    {
+      "en": "文档同步",
+      "zh": "文档同步"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "error-code-registry-team-lead",
+    "memberAgents": [
+      "error-code-registry",
+      "doc-watermark-apply",
+      "compliance-checklist"
+    ]
+  },
+  "version": "1.0.0"
+}

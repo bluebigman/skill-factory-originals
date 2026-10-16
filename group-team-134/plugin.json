@@ -1,0 +1,126 @@
+{
+  "agentName": "contract-risk-read-team-lead",
+  "agents": [
+    "./agents/contract-risk-read-team-lead.md",
+    "./agents/contract-risk-read.md",
+    "./agents/mp-publish-check.md",
+    "./agents/data-classify.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 合同风险",
+    "zh": "帮我处理合同风险"
+  },
+  "description": "Contract Risk Read team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "合同 公众号 数据 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "Contract Risk Read Team",
+    "zh": "合同 公众号 数据 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "contract-risk-read-team-lead",
+      "name": {
+        "en": "合同风险主理人",
+        "zh": "合同风险主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/contract-risk-read.png",
+      "id": "contract-risk-read",
+      "name": {
+        "en": "Contract Risk Read",
+        "zh": "合同风险 条款识别 顾问"
+      },
+      "profession": {
+        "en": "Contract Risk Read",
+        "zh": "合同风险 条款识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/mp-publish-check.png",
+      "id": "mp-publish-check",
+      "name": {
+        "en": "Mp Publish Check",
+        "zh": "公众号发布 合规自检 顾问"
+      },
+      "profession": {
+        "en": "Mp Publish Check",
+        "zh": "公众号发布 合规自检 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-classify.png",
+      "id": "data-classify",
+      "name": {
+        "en": "Data Classify",
+        "zh": "数据分级 敏感识别 顾问"
+      },
+      "profession": {
+        "en": "Data Classify",
+        "zh": "数据分级 敏感识别 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-134",
+  "plugin": "group-team-134",
+  "profession": {
+    "en": "Contract Risk Read Collaboration Team",
+    "zh": "合同 公众号 数据 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 合同风险",
+      "zh": "帮我处理合同风险"
+    },
+    {
+      "en": "Plan 公众号发布",
+      "zh": "帮我规划公众号发布"
+    },
+    {
+      "en": "Review 数据分级",
+      "zh": "帮我检查数据分级"
+    }
+  ],
+  "tags": [
+    {
+      "en": "合同风险",
+      "zh": "合同风险"
+    },
+    {
+      "en": "公众号发布",
+      "zh": "公众号发布"
+    },
+    {
+      "en": "数据分级",
+      "zh": "数据分级"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "contract-risk-read-team-lead",
+    "memberAgents": [
+      "contract-risk-read",
+      "mp-publish-check",
+      "data-classify"
+    ]
+  },
+  "version": "1.0.0"
+}

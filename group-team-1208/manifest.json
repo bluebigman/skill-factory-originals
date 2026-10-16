@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1208",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1208",
+    "kind": "team",
+    "name": "中文技术写作专家",
+    "description": "中文技术写作专家：围绕中文技术写作，覆盖读者先行／术语一致／示例可跑，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "tech-writing-cn-team-lead",
+        "role": "lead",
+        "name": "中文技术写作主理人",
+        "evidence": null
+      },
+      {
+        "slug": "tech-writing-cn",
+        "role": "member",
+        "name": "中文技术写作 顾问",
+        "evidence": "original_assets/tech-writing-cn/merkle_root",
+        "member_merkle_root": "53a5b3df5e92e22407b72c67c9d771ca26814feb3f606f727ab7af0d1f56ff67"
+      },
+      {
+        "slug": "editorial-calendar",
+        "role": "member",
+        "name": "编辑日历编排 助手",
+        "evidence": "original_assets/editorial-calendar/merkle_root",
+        "member_merkle_root": "cb50295e09d3e30c2020ee3bfb2ab95e57fdd3ad784b77194ff51071c11545e5"
+      },
+      {
+        "slug": "doc-style-transfer",
+        "role": "member",
+        "name": "文档风格迁移 助手",
+        "evidence": "original_assets/doc-style-transfer/merkle_root",
+        "member_merkle_root": "5b4511a0d08ab3f441334e08f7f77a433765ca1ec9262214a6f8ee338e8ef063"
+      }
+    ],
+    "team_lead": "tech-writing-cn-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f89e6b8da5f077df",
+  "prompt_hash": "b776cfdcf71a8940",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1208\", \"kind\": \"team\", \"name\": \"中文技术写作专家\", \"description\": \"中文技术写作专家：围绕中文技术写作，覆盖读者先行／术语一致／示例可跑，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"tech-writing-cn-team-lead\", \"role\": \"lead\", \"name\": \"中文技术写作主理人\", \"evidence\": null}, {\"slug\": \"tech-writing-cn\", \"role\": \"member\", \"name\": \"中文技术写作 顾问\", \"evidence\": \"original_assets/tech-writing-cn/merkle_root\", \"member_merkle_root\": \"53a5b3df5e92e22407b72c67c9d771ca26814feb3f606f727ab7af0d1f56ff67\"}, {\"slug\": \"editorial-calendar\", \"role\": \"member\", \"name\": \"编辑日历编排 助手\", \"evidence\": \"original_assets/editorial-calendar/merkle_root\", \"member_merkle_root\": \"cb50295e09d3e30c2020ee3bfb2ab95e57fdd3ad784b77194ff51071c11545e5\"}, {\"slug\": \"doc-style-transfer\", \"role\": \"member\", \"name\": \"文档风格迁移 助手\", \"evidence\": \"original_assets/doc-style-transfer/merkle_root\", \"member_merkle_root\": \"5b4511a0d08ab3f441334e08f7f77a433765ca1ec9262214a6f8ee338e8ef063\"}], \"team_lead\": \"tech-writing-cn-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-style-transfer.md": "73179928de18b91bb4a25f8cc8a2a5d69cb965bd60ba7e75719887bf712f567d",
+    "agents/editorial-calendar.md": "4fb4f86d37a145ec616190953272555fabab68934486d75514b41696432a6ead",
+    "agents/tech-writing-cn-team-lead.md": "7424a8237e0d2c71624b0385d5230a1fb7a661b314737aeeb60524237d2950ec",
+    "agents/tech-writing-cn.md": "52405ed915142ee673d432441cd41c8b15b48f56f7959bd5862af65e88d780e0",
+    "plugin.json": "55e80b51bc4d019b687a867d1b4945b0e2f071f246777cca77a7adfda70cbdbf",
+    "settings.json": "8589885efe3178e78de048b35f5948d675ff87ab4f3490a48561722cf6c04f20"
+  }
+}

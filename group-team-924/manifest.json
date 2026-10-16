@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-924",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-924",
+    "kind": "team",
+    "name": "视觉调专家",
+    "description": "输入PPT相关需求，输出边做边教、一次一点、早期首胜三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ppt-visual-tune-team-lead",
+        "role": "lead",
+        "name": "PPT主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ppt-visual-tune",
+        "role": "member",
+        "name": "PPT 视觉调优 顾问",
+        "evidence": "original_assets/ppt-visual-tune/merkle_root",
+        "member_merkle_root": "69f3c44aecaf4ff0191b8113f0afdd08e6584b9b88b6d51067434cd435168c75"
+      },
+      {
+        "slug": "game-onboarding-pro",
+        "role": "member",
+        "name": "游戏新手 引导设计 顾问",
+        "evidence": "original_assets/game-onboarding-pro/merkle_root",
+        "member_merkle_root": "305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b"
+      },
+      {
+        "slug": "doc-accessibility",
+        "role": "member",
+        "name": "文档无障碍 顾问",
+        "evidence": "original_assets/doc-accessibility/merkle_root",
+        "member_merkle_root": "ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e"
+      }
+    ],
+    "team_lead": "ppt-visual-tune-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d0818114775ff8e0",
+  "prompt_hash": "5d98cb3c30b78f5f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-924\", \"kind\": \"team\", \"name\": \"视觉调专家\", \"description\": \"输入PPT相关需求，输出边做边教、一次一点、早期首胜三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ppt-visual-tune-team-lead\", \"role\": \"lead\", \"name\": \"PPT主理人\", \"evidence\": null}, {\"slug\": \"ppt-visual-tune\", \"role\": \"member\", \"name\": \"PPT 视觉调优 顾问\", \"evidence\": \"original_assets/ppt-visual-tune/merkle_root\", \"member_merkle_root\": \"69f3c44aecaf4ff0191b8113f0afdd08e6584b9b88b6d51067434cd435168c75\"}, {\"slug\": \"game-onboarding-pro\", \"role\": \"member\", \"name\": \"游戏新手 引导设计 顾问\", \"evidence\": \"original_assets/game-onboarding-pro/merkle_root\", \"member_merkle_root\": \"305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b\"}, {\"slug\": \"doc-accessibility\", \"role\": \"member\", \"name\": \"文档无障碍 顾问\", \"evidence\": \"original_assets/doc-accessibility/merkle_root\", \"member_merkle_root\": \"ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e\"}], \"team_lead\": \"ppt-visual-tune-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-accessibility.md": "6a27d580be1f4756e95ad38cc039ca14b23c5421b0ec52ddac8bdf490f724f89",
+    "agents/game-onboarding-pro.md": "1a6346dae3324ec71b1526d9994296a03147f94ce305f1901b5388040936bff8",
+    "agents/ppt-visual-tune-team-lead.md": "3f801109eefdd798cc594546fe2d6d39b59e186bcb657b52d6811dc0f0105410",
+    "agents/ppt-visual-tune.md": "5b58f1b35d4fe8662612134ed4e49aff9d08516f2eb2dd0e830891273f6de256",
+    "plugin.json": "77d05cbf1ff9a357f57e39eb597d8e4ba5323c5e3eff7ff9f52444a54f4c70e2",
+    "settings.json": "9116e6b243f3f306010cee2da7eaa8559a7e3793df723ab334d8e49e154a26d9"
+  }
+}

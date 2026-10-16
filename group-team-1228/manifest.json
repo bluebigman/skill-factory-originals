@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1228",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1228",
+    "kind": "team",
+    "name": "输入校验规范专家",
+    "description": "擅长目录选定、清理及时与命名可读，覆盖输入校验规范全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "input-validation-rule-team-lead",
+        "role": "lead",
+        "name": "输入校验规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "input-validation-rule",
+        "role": "member",
+        "name": "输入校验规范 顾问",
+        "evidence": "original_assets/input-validation-rule/merkle_root",
+        "member_merkle_root": "749507d365b68042ec905740e0ba018deb798979b93306713fb12bc595c80f74"
+      },
+      {
+        "slug": "git-worktree-guide",
+        "role": "member",
+        "name": "分支隔离工作区 顾问",
+        "evidence": "original_assets/git-worktree-guide/merkle_root",
+        "member_merkle_root": "25371c19c6a44f45345cef8a175a7282ca8cc41720eec90bd55bd9b824d3583a"
+      },
+      {
+        "slug": "tool-interface-design-pro",
+        "role": "member",
+        "name": "工具设计 接口契约 顾问",
+        "evidence": "original_assets/tool-interface-design-pro/merkle_root",
+        "member_merkle_root": "425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5"
+      }
+    ],
+    "team_lead": "input-validation-rule-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9479ff5c91d74a35",
+  "prompt_hash": "8213d71d620ccb25",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1228\", \"kind\": \"team\", \"name\": \"输入校验规范专家\", \"description\": \"擅长目录选定、清理及时与命名可读，覆盖输入校验规范全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"input-validation-rule-team-lead\", \"role\": \"lead\", \"name\": \"输入校验规范主理人\", \"evidence\": null}, {\"slug\": \"input-validation-rule\", \"role\": \"member\", \"name\": \"输入校验规范 顾问\", \"evidence\": \"original_assets/input-validation-rule/merkle_root\", \"member_merkle_root\": \"749507d365b68042ec905740e0ba018deb798979b93306713fb12bc595c80f74\"}, {\"slug\": \"git-worktree-guide\", \"role\": \"member\", \"name\": \"分支隔离工作区 顾问\", \"evidence\": \"original_assets/git-worktree-guide/merkle_root\", \"member_merkle_root\": \"25371c19c6a44f45345cef8a175a7282ca8cc41720eec90bd55bd9b824d3583a\"}, {\"slug\": \"tool-interface-design-pro\", \"role\": \"member\", \"name\": \"工具设计 接口契约 顾问\", \"evidence\": \"original_assets/tool-interface-design-pro/merkle_root\", \"member_merkle_root\": \"425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5\"}], \"team_lead\": \"input-validation-rule-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/git-worktree-guide.md": "d4d8eddf63d5f3f7c016b9e72cde7d7130120a0e1137c07e6a66dcc29c49eed8",
+    "agents/input-validation-rule-team-lead.md": "4f8b669c1c913f4058d42134069cbd96d036f7a1e2a369897663ae0fec0f3519",
+    "agents/input-validation-rule.md": "171b2ac6209ce02fd92cc69cd8b3a7c6de6d300970a417e69d32ca9ca4e4d81d",
+    "agents/tool-interface-design-pro.md": "426f07bcbc148cb08b8d7ffe899ee6e1d326273fbadf6142607b20b230e29160",
+    "plugin.json": "574d052f05717801b876f97019bc6d2fbb85b990a9d2fe0c6ed66b1ce684c655",
+    "settings.json": "4dd0cb910810252aedc977aa492ec94fa7c2641f87a98c6a05ef2ec706bd2cce"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "segment-analysis-team-lead",
+  "agents": [
+    "./agents/segment-analysis-team-lead.md",
+    "./agents/segment-analysis.md",
+    "./agents/dev-env-bootstrap.md",
+    "./agents/api-transmission-assurance-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 用户分群分析",
+    "zh": "帮我处理用户分群分析"
+  },
+  "description": "segment-analysis team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 用户分群分析 requirements, output three deliverables: 组间差异, 组内同质, 规模可控. Verifiable end-to-end, evidence per step.",
+    "zh": "输入用户分群分析相关需求，输出组间差异、组内同质、规模可控三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "segment-analysis Team",
+    "zh": "用户分群分析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "segment-analysis-team-lead",
+      "name": {
+        "en": "用户分群分析主理人",
+        "zh": "用户分群分析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/segment-analysis.png",
+      "id": "segment-analysis",
+      "name": {
+        "en": "segment-analysis",
+        "zh": "用户分群分析 助手"
+      },
+      "profession": {
+        "en": "segment-analysis",
+        "zh": "用户分群分析 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dev-env-bootstrap.png",
+      "id": "dev-env-bootstrap",
+      "name": {
+        "en": "dev-env-bootstrap",
+        "zh": "开发环境搭建 助手"
+      },
+      "profession": {
+        "en": "dev-env-bootstrap",
+        "zh": "开发环境搭建 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-transmission-assurance-expert.png",
+      "id": "api-transmission-assurance-expert",
+      "name": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "profession": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-867",
+  "plugin": "group-team-867",
+  "profession": {
+    "en": "segment-analysis Collaboration Team",
+    "zh": "用户分群分析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 用户分群分析",
+      "zh": "帮我处理用户分群分析"
+    },
+    {
+      "en": "Plan 开发环境搭建",
+      "zh": "帮我规划开发环境搭建"
+    },
+    {
+      "en": "Review 接口联调",
+      "zh": "帮我检查接口联调"
+    }
+  ],
+  "tags": [
+    {
+      "en": "组间差异",
+      "zh": "组间差异"
+    },
+    {
+      "en": "组内同质",
+      "zh": "组内同质"
+    },
+    {
+      "en": "规模可控",
+      "zh": "规模可控"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "segment-analysis-team-lead",
+    "memberAgents": [
+      "segment-analysis",
+      "dev-env-bootstrap",
+      "api-transmission-assurance-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

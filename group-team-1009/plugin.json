@@ -1,0 +1,126 @@
+{
+  "agentName": "media-asset-pro-team-lead",
+  "agents": [
+    "./agents/media-asset-pro-team-lead.md",
+    "./agents/media-asset-pro.md",
+    "./agents/media-mix-plan.md",
+    "./agents/doc-template-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 媒体素材工程",
+    "zh": "帮我处理媒体素材工程"
+  },
+  "description": "Media Asset Engineer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 媒介组合规划 end-to-end: 目标对齐, 受众匹配 and 预算分配. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长目标对齐、受众匹配与预算分配，覆盖媒介组合规划全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Media Asset Engineer Team",
+    "zh": "媒体素材工程专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "media-asset-pro-team-lead",
+      "name": {
+        "en": "媒体素材工程主理人",
+        "zh": "媒体素材工程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/media-asset-pro.png",
+      "id": "media-asset-pro",
+      "name": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "profession": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/media-mix-plan.png",
+      "id": "media-mix-plan",
+      "name": {
+        "en": "media-mix-plan",
+        "zh": "媒介组合规划 顾问"
+      },
+      "profession": {
+        "en": "media-mix-plan",
+        "zh": "媒介组合规划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-template-build.png",
+      "id": "doc-template-build",
+      "name": {
+        "en": "doc-template-build",
+        "zh": "文档模板构建 助手"
+      },
+      "profession": {
+        "en": "doc-template-build",
+        "zh": "文档模板构建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1009",
+  "plugin": "group-team-1009",
+  "profession": {
+    "en": "Media Asset Engineer Collaboration Team",
+    "zh": "媒体素材工程专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 媒体素材工程",
+      "zh": "帮我处理媒体素材工程"
+    },
+    {
+      "en": "Plan 媒介组合规划",
+      "zh": "帮我规划媒介组合规划"
+    },
+    {
+      "en": "Review 文档模板构建",
+      "zh": "帮我检查文档模板构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "压缩转码",
+      "zh": "压缩转码"
+    },
+    {
+      "en": "批量归档",
+      "zh": "批量归档"
+    },
+    {
+      "en": "素材归档",
+      "zh": "素材归档"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "media-asset-pro-team-lead",
+    "memberAgents": [
+      "media-asset-pro",
+      "media-mix-plan",
+      "doc-template-build"
+    ]
+  },
+  "version": "1.0.0"
+}

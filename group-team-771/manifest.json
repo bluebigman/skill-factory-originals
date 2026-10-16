@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-771",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-771",
+    "kind": "team",
+    "name": "数据质量专家",
+    "description": "数据质量专家：围绕数据质量，覆盖规则前置／异常即拦／维度覆盖，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-quality-gate-team-lead",
+        "role": "lead",
+        "name": "数据质量主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-quality-gate",
+        "role": "member",
+        "name": "数据质量 校验规则 顾问",
+        "evidence": "original_assets/data-quality-gate/merkle_root",
+        "member_merkle_root": "ac7676330f4c1a40ecd62d6fd18816a6976e6ce79951d0205a62324775661c2d"
+      },
+      {
+        "slug": "data-clean-pro-04",
+        "role": "member",
+        "name": "数据整理 字段还原 批量处理",
+        "evidence": "original_assets/data-clean-pro-04/merkle_root",
+        "member_merkle_root": "5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9"
+      },
+      {
+        "slug": "sheet-master-pro",
+        "role": "member",
+        "name": "表格处理 Excel公式",
+        "evidence": "original_assets/sheet-master-pro/merkle_root",
+        "member_merkle_root": "3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163"
+      }
+    ],
+    "team_lead": "data-quality-gate-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7b7b47745c5c5021",
+  "prompt_hash": "072a306db76e21ff",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-771\", \"kind\": \"team\", \"name\": \"数据质量专家\", \"description\": \"数据质量专家：围绕数据质量，覆盖规则前置／异常即拦／维度覆盖，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-quality-gate-team-lead\", \"role\": \"lead\", \"name\": \"数据质量主理人\", \"evidence\": null}, {\"slug\": \"data-quality-gate\", \"role\": \"member\", \"name\": \"数据质量 校验规则 顾问\", \"evidence\": \"original_assets/data-quality-gate/merkle_root\", \"member_merkle_root\": \"ac7676330f4c1a40ecd62d6fd18816a6976e6ce79951d0205a62324775661c2d\"}, {\"slug\": \"data-clean-pro-04\", \"role\": \"member\", \"name\": \"数据整理 字段还原 批量处理\", \"evidence\": \"original_assets/data-clean-pro-04/merkle_root\", \"member_merkle_root\": \"5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9\"}, {\"slug\": \"sheet-master-pro\", \"role\": \"member\", \"name\": \"表格处理 Excel公式\", \"evidence\": \"original_assets/sheet-master-pro/merkle_root\", \"member_merkle_root\": \"3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163\"}], \"team_lead\": \"data-quality-gate-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-04.md": "0592ba632973c6b1dc6c71cfc5055f4523bd947db8321f7d9e745fc21d08c4f9",
+    "agents/data-quality-gate-team-lead.md": "5a5ab3a2f1c2323f7597698ed4fdccd692ce6fbaae082dfface7955c4a12ff86",
+    "agents/data-quality-gate.md": "eb968825cc6c68f92d06ac647d1a90e051370d8b8d7bc66a5980eaf190fe592b",
+    "agents/sheet-master-pro.md": "d41f137b3995def3269e8b415f2f97b16f5d587ae79ca59324ba756e4e9d5b7b",
+    "plugin.json": "f0ab190492f9fefe5a4e6bd69af4eb25aa99148c80fa58428887643bd006d9e6",
+    "settings.json": "d0655c18351ca4a40aad5f7672a8bd69c10c6209935d7a2254b95b3a2a7b3c79"
+  }
+}

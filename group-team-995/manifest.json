@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-995",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-995",
+    "kind": "team",
+    "name": "信息架构梳理专家",
+    "description": "信息架构梳理专家：围绕信息架构，覆盖卡片分类／交叉验证／层级克制，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "info-architecture-team-lead",
+        "role": "lead",
+        "name": "信息架构主理人",
+        "evidence": null
+      },
+      {
+        "slug": "info-architecture",
+        "role": "member",
+        "name": "信息架构 梳理 顾问",
+        "evidence": "original_assets/info-architecture/merkle_root",
+        "member_merkle_root": "0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105"
+      },
+      {
+        "slug": "visual-asset-brief",
+        "role": "member",
+        "name": "视觉素材需求 助手",
+        "evidence": "original_assets/visual-asset-brief/merkle_root",
+        "member_merkle_root": "68518667fe0fa1356d6b1ee862ff02106dde5ca094d1131e9a84656fb6d97c6b"
+      },
+      {
+        "slug": "design-review-method",
+        "role": "member",
+        "name": "设计评审 决策机制 顾问",
+        "evidence": "original_assets/design-review-method/merkle_root",
+        "member_merkle_root": "f5fdf5e73c6cb889dc9b89eef6f746f739be069dcf63c1f1a86d1db04e7ae48d"
+      }
+    ],
+    "team_lead": "info-architecture-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0c84869230963753",
+  "prompt_hash": "b509d88f5b2c526b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-995\", \"kind\": \"team\", \"name\": \"信息架构梳理专家\", \"description\": \"信息架构梳理专家：围绕信息架构，覆盖卡片分类／交叉验证／层级克制，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"info-architecture-team-lead\", \"role\": \"lead\", \"name\": \"信息架构主理人\", \"evidence\": null}, {\"slug\": \"info-architecture\", \"role\": \"member\", \"name\": \"信息架构 梳理 顾问\", \"evidence\": \"original_assets/info-architecture/merkle_root\", \"member_merkle_root\": \"0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105\"}, {\"slug\": \"visual-asset-brief\", \"role\": \"member\", \"name\": \"视觉素材需求 助手\", \"evidence\": \"original_assets/visual-asset-brief/merkle_root\", \"member_merkle_root\": \"68518667fe0fa1356d6b1ee862ff02106dde5ca094d1131e9a84656fb6d97c6b\"}, {\"slug\": \"design-review-method\", \"role\": \"member\", \"name\": \"设计评审 决策机制 顾问\", \"evidence\": \"original_assets/design-review-method/merkle_root\", \"member_merkle_root\": \"f5fdf5e73c6cb889dc9b89eef6f746f739be069dcf63c1f1a86d1db04e7ae48d\"}], \"team_lead\": \"info-architecture-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-review-method.md": "22c9108c1e0ffab8c5db087884aaaa771374da7d897b35afe1e4a1ad8f9a536c",
+    "agents/info-architecture-team-lead.md": "faebfa1a534d8c333d052c75134353b8be3a908d092b66e589670974a51ab8e7",
+    "agents/info-architecture.md": "d9885f6bb24612deb63417bcbbf847fba1a09f852fdb808503f4ac3c6e2d8687",
+    "agents/visual-asset-brief.md": "49c7ce4bd4af9b98968d259e7fd95f705488c71b6a95b014c519c5c09a74b776",
+    "plugin.json": "d08ee970ec651d0df0813e1393c240289fd82d0973a3aa3d054efda568d6cfda",
+    "settings.json": "01f6a6b60ae4f97eb69a40e63ad808e441f38994e589eb66c58ed13c6b262ff4"
+  }
+}

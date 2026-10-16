@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-559",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-559",
+    "kind": "team",
+    "name": "客户复盘季度会议专家",
+    "description": "客户复盘季度会议专家：围绕远程团队，覆盖默认书面／响应约定／异步优先，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "remote-team-coach-team-lead",
+        "role": "lead",
+        "name": "远程团队主理人",
+        "evidence": null
+      },
+      {
+        "slug": "remote-team-coach",
+        "role": "member",
+        "name": "远程团队 协作规范 教练",
+        "evidence": "original_assets/remote-team-coach/merkle_root",
+        "member_merkle_root": "fd153c2b120f3c771fa5b49ccf1cdc60ad2c9a6b54c34d0686013e54b205e3be"
+      },
+      {
+        "slug": "cs-qbr-pro",
+        "role": "member",
+        "name": "客户复盘 季度会议 顾问",
+        "evidence": "original_assets/cs-qbr-pro/merkle_root",
+        "member_merkle_root": "c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6"
+      },
+      {
+        "slug": "pipeline-review-pro",
+        "role": "member",
+        "name": "销售漏斗 复盘机制 顾问",
+        "evidence": "original_assets/pipeline-review-pro/merkle_root",
+        "member_merkle_root": "9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0"
+      }
+    ],
+    "team_lead": "remote-team-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9670792f0cc06455",
+  "prompt_hash": "c555dbafd5c1ced2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-559\", \"kind\": \"team\", \"name\": \"客户复盘季度会议专家\", \"description\": \"客户复盘季度会议专家：围绕远程团队，覆盖默认书面／响应约定／异步优先，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"remote-team-coach-team-lead\", \"role\": \"lead\", \"name\": \"远程团队主理人\", \"evidence\": null}, {\"slug\": \"remote-team-coach\", \"role\": \"member\", \"name\": \"远程团队 协作规范 教练\", \"evidence\": \"original_assets/remote-team-coach/merkle_root\", \"member_merkle_root\": \"fd153c2b120f3c771fa5b49ccf1cdc60ad2c9a6b54c34d0686013e54b205e3be\"}, {\"slug\": \"cs-qbr-pro\", \"role\": \"member\", \"name\": \"客户复盘 季度会议 顾问\", \"evidence\": \"original_assets/cs-qbr-pro/merkle_root\", \"member_merkle_root\": \"c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6\"}, {\"slug\": \"pipeline-review-pro\", \"role\": \"member\", \"name\": \"销售漏斗 复盘机制 顾问\", \"evidence\": \"original_assets/pipeline-review-pro/merkle_root\", \"member_merkle_root\": \"9b6320b45214e355535be32acb01c3afe8bfab32e8107c6df7a54fc83a1cfad0\"}], \"team_lead\": \"remote-team-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cs-qbr-pro.md": "7d3029b18bd89dc53789097af5ec04babd3b8442739f1b592ca2ae2d916850f0",
+    "agents/pipeline-review-pro.md": "9c35858afe009278a3d892752ebac3cfe37c7253d5e776b504795a15faf2f9df",
+    "agents/remote-team-coach-team-lead.md": "2384179617c32f8d8aed20b8277103f27fad138baa6d65389cf251260440fabe",
+    "agents/remote-team-coach.md": "0fa5e55eed3befb504f4e80d60af3de31d71af3cd893cb0531ecd53091e8f882",
+    "plugin.json": "a7592a648cb14d905e8d56e32272c17fd41248452fad0962b43322cafbeb553b",
+    "settings.json": "134a6ac663b4ae8d202676a03f62a439b1a3cb99ded7723e57a0a191791ff4e4"
+  }
+}

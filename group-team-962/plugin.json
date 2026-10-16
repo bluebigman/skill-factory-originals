@@ -1,0 +1,126 @@
+{
+  "agentName": "ui-design-expert-team-lead",
+  "agents": [
+    "./agents/ui-design-expert-team-lead.md",
+    "./agents/ui-design-expert.md",
+    "./agents/api-address-integrity-expert.md",
+    "./agents/data-viz-pro-01.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 界面设计",
+    "zh": "帮我处理界面设计"
+  },
+  "description": "UIPolishPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 接口编码报错修 end-to-end: 需求翻译, 视觉规范 and 设计评审. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长需求翻译、视觉规范与设计评审，覆盖接口编码报错修全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "UIPolishPro Team",
+    "zh": "接口编码报错修复专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ui-design-expert-team-lead",
+      "name": {
+        "en": "界面设计主理人",
+        "zh": "界面设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ui-design-expert.png",
+      "id": "ui-design-expert",
+      "name": {
+        "en": "UIPolishPro",
+        "zh": "界面设计 组件美化"
+      },
+      "profession": {
+        "en": "UIPolishPro",
+        "zh": "界面设计 组件美化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-address-integrity-expert.png",
+      "id": "api-address-integrity-expert",
+      "name": {
+        "en": "API Address Integrity Expert",
+        "zh": "接口编码 报错修复"
+      },
+      "profession": {
+        "en": "API Address Integrity Expert",
+        "zh": "接口编码 报错修复"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-01.png",
+      "id": "data-viz-pro-01",
+      "name": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "报表数据 配置解析 快速生成"
+      },
+      "profession": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "报表数据 配置解析 快速生成"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-962",
+  "plugin": "group-team-962",
+  "profession": {
+    "en": "UIPolishPro Collaboration Team",
+    "zh": "接口编码报错修复专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 界面设计",
+      "zh": "帮我处理界面设计"
+    },
+    {
+      "en": "Plan 接口编码",
+      "zh": "帮我规划接口编码"
+    },
+    {
+      "en": "Review 报表数据",
+      "zh": "帮我检查报表数据"
+    }
+  ],
+  "tags": [
+    {
+      "en": "视觉规范",
+      "zh": "视觉规范"
+    },
+    {
+      "en": "设计评审",
+      "zh": "设计评审"
+    },
+    {
+      "en": "前端落地",
+      "zh": "前端落地"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ui-design-expert-team-lead",
+    "memberAgents": [
+      "ui-design-expert",
+      "api-address-integrity-expert",
+      "data-viz-pro-01"
+    ]
+  },
+  "version": "1.0.0"
+}

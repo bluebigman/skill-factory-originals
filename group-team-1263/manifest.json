@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1263",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1263",
+    "kind": "team",
+    "name": "跨境收款专家",
+    "description": "输入跨境收款相关需求，输出通道合规、费用透明、汇率口径三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "global-payment-ops-team-lead",
+        "role": "lead",
+        "name": "跨境收款主理人",
+        "evidence": null
+      },
+      {
+        "slug": "global-payment-ops",
+        "role": "member",
+        "name": "跨境收款 流程核对 顾问",
+        "evidence": "original_assets/global-payment-ops/merkle_root",
+        "member_merkle_root": "91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0"
+      },
+      {
+        "slug": "knowledge-contribution",
+        "role": "member",
+        "name": "知识贡献机制 顾问",
+        "evidence": "original_assets/knowledge-contribution/merkle_root",
+        "member_merkle_root": "274b52c310ea40383f56bd9f420a7688dab37b5c065f8f19c149b3519ebf8498"
+      },
+      {
+        "slug": "requirement-clarify-pro",
+        "role": "member",
+        "name": "需求澄清 边界确认 顾问",
+        "evidence": "original_assets/requirement-clarify-pro/merkle_root",
+        "member_merkle_root": "4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39"
+      }
+    ],
+    "team_lead": "global-payment-ops-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e1a2c3f9d6958a35",
+  "prompt_hash": "ff244a6e9f5bde7f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1263\", \"kind\": \"team\", \"name\": \"跨境收款专家\", \"description\": \"输入跨境收款相关需求，输出通道合规、费用透明、汇率口径三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"global-payment-ops-team-lead\", \"role\": \"lead\", \"name\": \"跨境收款主理人\", \"evidence\": null}, {\"slug\": \"global-payment-ops\", \"role\": \"member\", \"name\": \"跨境收款 流程核对 顾问\", \"evidence\": \"original_assets/global-payment-ops/merkle_root\", \"member_merkle_root\": \"91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0\"}, {\"slug\": \"knowledge-contribution\", \"role\": \"member\", \"name\": \"知识贡献机制 顾问\", \"evidence\": \"original_assets/knowledge-contribution/merkle_root\", \"member_merkle_root\": \"274b52c310ea40383f56bd9f420a7688dab37b5c065f8f19c149b3519ebf8498\"}, {\"slug\": \"requirement-clarify-pro\", \"role\": \"member\", \"name\": \"需求澄清 边界确认 顾问\", \"evidence\": \"original_assets/requirement-clarify-pro/merkle_root\", \"member_merkle_root\": \"4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39\"}], \"team_lead\": \"global-payment-ops-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/global-payment-ops-team-lead.md": "554f7add0950028331e3e512be6292eb600b928494b4fcfe49c2ed9f5dbae45f",
+    "agents/global-payment-ops.md": "81a265c32fdbec0c30d28e4577907a5c09ec453ee1c90d7e9dcdc2b672375942",
+    "agents/knowledge-contribution.md": "a404be75a4796f21fdce9c81781534e8989040db6bbea33129ee11e9fe8bff84",
+    "agents/requirement-clarify-pro.md": "76974f9143451fa6ec0163f43e6905df118584d9580d540ab3cdcf18105b7328",
+    "plugin.json": "3efb4d7269fb693a4292d6e7646fa55c6e6148e4313c14e6d153a7777a5661f6",
+    "settings.json": "e7b640b12a537d4d0d40061e0677a5db68243f141196a7ed968ef8fccd03a3b0"
+  }
+}

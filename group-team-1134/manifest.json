@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1134",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1134",
+    "kind": "team",
+    "name": "检索增强流程专家",
+    "description": "输入检索增强流程相关需求，输出检索优先、证据绑定、无据不答三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "rag-pipeline-team-lead",
+        "role": "lead",
+        "name": "检索增强流程主理人",
+        "evidence": null
+      },
+      {
+        "slug": "rag-pipeline",
+        "role": "member",
+        "name": "检索增强流程 顾问",
+        "evidence": "original_assets/rag-pipeline/merkle_root",
+        "member_merkle_root": "c84763c986dfb665ff291197c1619670ae527fb4f7529dcc95e9155c04779d56"
+      },
+      {
+        "slug": "api-latency-pro",
+        "role": "member",
+        "name": "接口延迟 分段测量 顾问",
+        "evidence": "original_assets/api-latency-pro/merkle_root",
+        "member_merkle_root": "8c7691cb847c0c63afc1ff016e09bfb514609511719dbd079c9b12dcb3bbe977"
+      },
+      {
+        "slug": "artifact-version",
+        "role": "member",
+        "name": "制品版本管理 顾问",
+        "evidence": "original_assets/artifact-version/merkle_root",
+        "member_merkle_root": "1f33b4b5d4af0b94260f59aab774f91999462fb76b14ed98c15adf10ebb16fbf"
+      }
+    ],
+    "team_lead": "rag-pipeline-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c17201e566c45af2",
+  "prompt_hash": "50d6fc552119036a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1134\", \"kind\": \"team\", \"name\": \"检索增强流程专家\", \"description\": \"输入检索增强流程相关需求，输出检索优先、证据绑定、无据不答三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"rag-pipeline-team-lead\", \"role\": \"lead\", \"name\": \"检索增强流程主理人\", \"evidence\": null}, {\"slug\": \"rag-pipeline\", \"role\": \"member\", \"name\": \"检索增强流程 顾问\", \"evidence\": \"original_assets/rag-pipeline/merkle_root\", \"member_merkle_root\": \"c84763c986dfb665ff291197c1619670ae527fb4f7529dcc95e9155c04779d56\"}, {\"slug\": \"api-latency-pro\", \"role\": \"member\", \"name\": \"接口延迟 分段测量 顾问\", \"evidence\": \"original_assets/api-latency-pro/merkle_root\", \"member_merkle_root\": \"8c7691cb847c0c63afc1ff016e09bfb514609511719dbd079c9b12dcb3bbe977\"}, {\"slug\": \"artifact-version\", \"role\": \"member\", \"name\": \"制品版本管理 顾问\", \"evidence\": \"original_assets/artifact-version/merkle_root\", \"member_merkle_root\": \"1f33b4b5d4af0b94260f59aab774f91999462fb76b14ed98c15adf10ebb16fbf\"}], \"team_lead\": \"rag-pipeline-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-latency-pro.md": "fa8ce89d096697fc08f32432c1b3ed9cff204cabc926b48518d0aabc838867b0",
+    "agents/artifact-version.md": "7b0cd6042b2d9be4cb616632914983877029a2096a64cac291fc803961432390",
+    "agents/rag-pipeline-team-lead.md": "b10513ebc1cd470dbc81f64551ed1825885e6b83423c5693596da3feba6f3dfc",
+    "agents/rag-pipeline.md": "340f7dde25c13682028e6d6bc17dd79a2d8774dd8418a68ef74a370c4dd33aa0",
+    "plugin.json": "d64d2ae654cf32759ce094aa9c611069aef8da19777feab28bafafd7e7acc4f8",
+    "settings.json": "2d7a745f95d35c79b3e884b9a40a5faac9b976f8cd575750cd22b6a50dbca1c9"
+  }
+}

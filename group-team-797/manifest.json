@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-797",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-797",
+    "kind": "team",
+    "name": "客诉处理专家",
+    "description": "擅长首问负责、分级升级与时限承诺，覆盖客诉处理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "complaint-handle-pro-team-lead",
+        "role": "lead",
+        "name": "客诉处理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "complaint-handle-pro",
+        "role": "member",
+        "name": "客诉处理 升级机制 顾问",
+        "evidence": "original_assets/complaint-handle-pro/merkle_root",
+        "member_merkle_root": "31da8b20995b6488cc9b566c127a731df14e268c43f005347029b63d053dc2fd"
+      },
+      {
+        "slug": "release-readiness-pro",
+        "role": "member",
+        "name": "发布就绪 检查清单 顾问",
+        "evidence": "original_assets/release-readiness-pro/merkle_root",
+        "member_merkle_root": "80ee289bad061528d4c264336fdc3282999291e551b370cba5239ebdc9b3727d"
+      },
+      {
+        "slug": "sales-script-coach",
+        "role": "member",
+        "name": "销售话术 场景演练 教练",
+        "evidence": "original_assets/sales-script-coach/merkle_root",
+        "member_merkle_root": "df424d622b16c5b137c729a8d683f67a334a4e5a612d316ea86cbefc37e14af6"
+      }
+    ],
+    "team_lead": "complaint-handle-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "decc587ef7753517",
+  "prompt_hash": "e862ad77b2fd36ef",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-797\", \"kind\": \"team\", \"name\": \"客诉处理专家\", \"description\": \"擅长首问负责、分级升级与时限承诺，覆盖客诉处理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"complaint-handle-pro-team-lead\", \"role\": \"lead\", \"name\": \"客诉处理主理人\", \"evidence\": null}, {\"slug\": \"complaint-handle-pro\", \"role\": \"member\", \"name\": \"客诉处理 升级机制 顾问\", \"evidence\": \"original_assets/complaint-handle-pro/merkle_root\", \"member_merkle_root\": \"31da8b20995b6488cc9b566c127a731df14e268c43f005347029b63d053dc2fd\"}, {\"slug\": \"release-readiness-pro\", \"role\": \"member\", \"name\": \"发布就绪 检查清单 顾问\", \"evidence\": \"original_assets/release-readiness-pro/merkle_root\", \"member_merkle_root\": \"80ee289bad061528d4c264336fdc3282999291e551b370cba5239ebdc9b3727d\"}, {\"slug\": \"sales-script-coach\", \"role\": \"member\", \"name\": \"销售话术 场景演练 教练\", \"evidence\": \"original_assets/sales-script-coach/merkle_root\", \"member_merkle_root\": \"df424d622b16c5b137c729a8d683f67a334a4e5a612d316ea86cbefc37e14af6\"}], \"team_lead\": \"complaint-handle-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/complaint-handle-pro-team-lead.md": "156ae04cfc743b86cb6179b88a1edd1a5d7524e72628bad0bd90bab969b12676",
+    "agents/complaint-handle-pro.md": "50ea27c92f52aa813e353d3e315b41434ce7bcd701fb972298d9c161dfd51e76",
+    "agents/release-readiness-pro.md": "ec68f38e1a739acc6a2a7ee52c55b8510a8eeae87164e4b86e168a9ea9f450fb",
+    "agents/sales-script-coach.md": "e1ee9b73402ac4a15721cd5446c29f1e79c4cf9d80080960d6bfa56ae8d3ed90",
+    "plugin.json": "33e80eead312e6f9c7f2c080a090a65ea4927cf62a3c885874a242dcfe9d69b6",
+    "settings.json": "aebc53886268d9536e7492afdc588cd2d4aa8322402c7c41363053ad93940d7d"
+  }
+}

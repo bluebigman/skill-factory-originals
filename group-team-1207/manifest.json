@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1207",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1207",
+    "kind": "team",
+    "name": "模板版本管理专家",
+    "description": "擅长变更说明、兼容声明与旧版保留，覆盖模板版本管理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-template-version-team-lead",
+        "role": "lead",
+        "name": "模板版本管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-template-version",
+        "role": "member",
+        "name": "模板版本管理 助手",
+        "evidence": "original_assets/doc-template-version/merkle_root",
+        "member_merkle_root": "1e2b5bc24e9f90d3b7667f7813ecee0a10d5e010e40c74403be6fee4b5521427"
+      },
+      {
+        "slug": "meeting-facilitation",
+        "role": "member",
+        "name": "会议主持 顾问",
+        "evidence": "original_assets/meeting-facilitation/merkle_root",
+        "member_merkle_root": "bf133268118b834ce6323ac19046efb4e637fac57030058321a507947ab9c976"
+      },
+      {
+        "slug": "doc-version-manage",
+        "role": "member",
+        "name": "文档版本 变更记录 顾问",
+        "evidence": "original_assets/doc-version-manage/merkle_root",
+        "member_merkle_root": "90ff09cdf852ce46bd244d7638227132c7c2f506333c6614e85ee4c36ceff1c2"
+      }
+    ],
+    "team_lead": "doc-template-version-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "335cb3d16f90b845",
+  "prompt_hash": "9d9f8aaf3fdbc5c7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1207\", \"kind\": \"team\", \"name\": \"模板版本管理专家\", \"description\": \"擅长变更说明、兼容声明与旧版保留，覆盖模板版本管理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-template-version-team-lead\", \"role\": \"lead\", \"name\": \"模板版本管理主理人\", \"evidence\": null}, {\"slug\": \"doc-template-version\", \"role\": \"member\", \"name\": \"模板版本管理 助手\", \"evidence\": \"original_assets/doc-template-version/merkle_root\", \"member_merkle_root\": \"1e2b5bc24e9f90d3b7667f7813ecee0a10d5e010e40c74403be6fee4b5521427\"}, {\"slug\": \"meeting-facilitation\", \"role\": \"member\", \"name\": \"会议主持 顾问\", \"evidence\": \"original_assets/meeting-facilitation/merkle_root\", \"member_merkle_root\": \"bf133268118b834ce6323ac19046efb4e637fac57030058321a507947ab9c976\"}, {\"slug\": \"doc-version-manage\", \"role\": \"member\", \"name\": \"文档版本 变更记录 顾问\", \"evidence\": \"original_assets/doc-version-manage/merkle_root\", \"member_merkle_root\": \"90ff09cdf852ce46bd244d7638227132c7c2f506333c6614e85ee4c36ceff1c2\"}], \"team_lead\": \"doc-template-version-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-template-version-team-lead.md": "c81f0c1b79055f15aafcd1d3218250b468d7568d1ba918374d8c3c7963dfc743",
+    "agents/doc-template-version.md": "974d3da5225acfbfc84138fcfe0808507cc15bf0b6e8ede94ddf2bb6bdbd0663",
+    "agents/doc-version-manage.md": "9e1f7f166126e26597b21b856d7ae89e99b9d641a67069fc38e1accca14e88f7",
+    "agents/meeting-facilitation.md": "7e1478ac2ffd873b6a458cf05c3464496be682ec9a317cbe4d38c981d4950d01",
+    "plugin.json": "faf19f0193fa4754d4c09ed7cda8962533d2aeb4f5ebf925dd2d8fe3a2467f8a",
+    "settings.json": "86120d9ba66f97979afc4ffe63bfadb0d12f4ab3ca8e307fe35de9d20ae13612"
+  }
+}

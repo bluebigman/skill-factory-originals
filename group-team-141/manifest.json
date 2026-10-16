@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-141",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-141",
+    "kind": "team",
+    "name": "容错 隐私 语音 团队",
+    "description": "容错 隐私 语音 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-convert-pro-02-team-lead",
+        "role": "lead",
+        "name": "文档转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-convert-pro-02",
+        "role": "member",
+        "name": "文档转换 容错转换 标签修复",
+        "evidence": "original_assets/doc-convert-pro-02/merkle_root",
+        "member_merkle_root": "aef0805eb15af92481e6be719e466a513f8291e4f9ccf59f8103465193bd0d0c"
+      },
+      {
+        "slug": "doc-convert-pro-fixed",
+        "role": "member",
+        "name": "图片标准化 隐私转换 格式转换",
+        "evidence": "original_assets/doc-convert-pro-fixed/merkle_root",
+        "member_merkle_root": "ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1"
+      },
+      {
+        "slug": "subtitle-expert",
+        "role": "member",
+        "name": "视频字幕 语音转写 时间轴对齐",
+        "evidence": "original_assets/subtitle-expert/merkle_root",
+        "member_merkle_root": "29cc7bd9c2315c9918e026807a574de6228b906c7880f220a60c0dbe56957299"
+      }
+    ],
+    "team_lead": "doc-convert-pro-02-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "04636fa21e386152",
+  "prompt_hash": "32750222ae38668f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-141\", \"kind\": \"team\", \"name\": \"容错 隐私 语音 团队\", \"description\": \"容错 隐私 语音 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-convert-pro-02-team-lead\", \"role\": \"lead\", \"name\": \"文档转换主理人\", \"evidence\": null}, {\"slug\": \"doc-convert-pro-02\", \"role\": \"member\", \"name\": \"文档转换 容错转换 标签修复\", \"evidence\": \"original_assets/doc-convert-pro-02/merkle_root\", \"member_merkle_root\": \"aef0805eb15af92481e6be719e466a513f8291e4f9ccf59f8103465193bd0d0c\"}, {\"slug\": \"doc-convert-pro-fixed\", \"role\": \"member\", \"name\": \"图片标准化 隐私转换 格式转换\", \"evidence\": \"original_assets/doc-convert-pro-fixed/merkle_root\", \"member_merkle_root\": \"ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1\"}, {\"slug\": \"subtitle-expert\", \"role\": \"member\", \"name\": \"视频字幕 语音转写 时间轴对齐\", \"evidence\": \"original_assets/subtitle-expert/merkle_root\", \"member_merkle_root\": \"29cc7bd9c2315c9918e026807a574de6228b906c7880f220a60c0dbe56957299\"}], \"team_lead\": \"doc-convert-pro-02-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-02-team-lead.md": "b30994b2ab05ea2d259ae2999e17924d559d49e7d20c65e9db0fa3697e9b154f",
+    "agents/doc-convert-pro-02.md": "3c747c05ab6f0670edc688846df015b769af524738ab95f2f8baf07e8d811c3f",
+    "agents/doc-convert-pro-fixed.md": "198b0a1990a570281a1a9acd1f2cdadb6150238b3125da6827aeb1532f128b87",
+    "agents/subtitle-expert.md": "e407b016fb892aac66030b5e37fd84247daae5c9712b9757e951524f52d48b11",
+    "plugin.json": "52092214eb0cfa8c40ce14f1be674d0a31556ac60d3d62f8c09be6346c1a5bd0",
+    "settings.json": "4be11ff3fbbf894661b5783819d8a449407424696a0f6be13d9ae1c8f30dc114"
+  }
+}

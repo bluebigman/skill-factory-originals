@@ -1,0 +1,126 @@
+{
+  "agentName": "sales-territory-pro-team-lead",
+  "agents": [
+    "./agents/sales-territory-pro-team-lead.md",
+    "./agents/sales-territory-pro.md",
+    "./agents/data-incident-review.md",
+    "./agents/crawl-file-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 区域划分",
+    "zh": "帮我处理区域划分"
+  },
+  "description": "sales-territory-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 区域划分 requirements, output three deliverables: 潜力均衡, 规则稳定, 归属规则. Verifiable end-to-end, evidence per step.",
+    "zh": "输入区域划分相关需求，输出潜力均衡、规则稳定、归属规则三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "sales-territory-pro Team",
+    "zh": "区域划分专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sales-territory-pro-team-lead",
+      "name": {
+        "en": "区域划分主理人",
+        "zh": "区域划分主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sales-territory-pro.png",
+      "id": "sales-territory-pro",
+      "name": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "profession": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-incident-review.png",
+      "id": "data-incident-review",
+      "name": {
+        "en": "data-incident-review",
+        "zh": "数据事故复盘 顾问"
+      },
+      "profession": {
+        "en": "data-incident-review",
+        "zh": "数据事故复盘 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/crawl-file-pro.png",
+      "id": "crawl-file-pro",
+      "name": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "profession": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1269",
+  "plugin": "group-team-1269",
+  "profession": {
+    "en": "sales-territory-pro Collaboration Team",
+    "zh": "区域划分专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 区域划分",
+      "zh": "帮我处理区域划分"
+    },
+    {
+      "en": "Plan 数据事故复盘",
+      "zh": "帮我规划数据事故复盘"
+    },
+    {
+      "en": "Review 文件采集",
+      "zh": "帮我检查文件采集"
+    }
+  ],
+  "tags": [
+    {
+      "en": "潜力均衡",
+      "zh": "潜力均衡"
+    },
+    {
+      "en": "规则稳定",
+      "zh": "规则稳定"
+    },
+    {
+      "en": "归属规则",
+      "zh": "归属规则"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sales-territory-pro-team-lead",
+    "memberAgents": [
+      "sales-territory-pro",
+      "data-incident-review",
+      "crawl-file-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

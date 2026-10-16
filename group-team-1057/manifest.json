@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1057",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1057",
+    "kind": "team",
+    "name": "商机评审专家",
+    "description": "擅长标准统一、独立视角与列出假设，覆盖商机评审全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "deal-review-pro-team-lead",
+        "role": "lead",
+        "name": "商机评审主理人",
+        "evidence": null
+      },
+      {
+        "slug": "deal-review-pro",
+        "role": "member",
+        "name": "商机评审 风险把关 顾问",
+        "evidence": "original_assets/deal-review-pro/merkle_root",
+        "member_merkle_root": "872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265"
+      },
+      {
+        "slug": "customer-health",
+        "role": "member",
+        "name": "客户健康度 评估",
+        "evidence": "original_assets/customer-health/merkle_root",
+        "member_merkle_root": "279074f39c7f3a09d0cb04e8087eb10eb27e025c53cf5b7de69ea1c7d66dd753"
+      },
+      {
+        "slug": "presales-support-pro",
+        "role": "member",
+        "name": "售前支持 方案配合 顾问",
+        "evidence": "original_assets/presales-support-pro/merkle_root",
+        "member_merkle_root": "98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e"
+      }
+    ],
+    "team_lead": "deal-review-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "511d7dc6c7f17b0d",
+  "prompt_hash": "86b33a88198db07e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1057\", \"kind\": \"team\", \"name\": \"商机评审专家\", \"description\": \"擅长标准统一、独立视角与列出假设，覆盖商机评审全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"deal-review-pro-team-lead\", \"role\": \"lead\", \"name\": \"商机评审主理人\", \"evidence\": null}, {\"slug\": \"deal-review-pro\", \"role\": \"member\", \"name\": \"商机评审 风险把关 顾问\", \"evidence\": \"original_assets/deal-review-pro/merkle_root\", \"member_merkle_root\": \"872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265\"}, {\"slug\": \"customer-health\", \"role\": \"member\", \"name\": \"客户健康度 评估\", \"evidence\": \"original_assets/customer-health/merkle_root\", \"member_merkle_root\": \"279074f39c7f3a09d0cb04e8087eb10eb27e025c53cf5b7de69ea1c7d66dd753\"}, {\"slug\": \"presales-support-pro\", \"role\": \"member\", \"name\": \"售前支持 方案配合 顾问\", \"evidence\": \"original_assets/presales-support-pro/merkle_root\", \"member_merkle_root\": \"98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e\"}], \"team_lead\": \"deal-review-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/customer-health.md": "9fee07a5150477afa45029ab767cc5ab9a0be779863db48aee5fa30a869502a4",
+    "agents/deal-review-pro-team-lead.md": "1cbb0040ab1faa412c7ffc39867ec1c46bf6b50a744e67716d7a8e9f673be33f",
+    "agents/deal-review-pro.md": "7be4a1de739e170ba1a303130955abab37143617cfb45e28b807015b0ea81268",
+    "agents/presales-support-pro.md": "e473f8317c892e598692a16304e28b69c11e4b4c8e039dfafb77caa1089b9a3f",
+    "plugin.json": "a32a159bc6ec0165d86f9a21f6f1baa0ac5f9d29f6e5ecdcf5a1f2a521616da1",
+    "settings.json": "c495a23acfa1822fee8c379545556d97819fab22f6d83a6a50db633401d601ef"
+  }
+}

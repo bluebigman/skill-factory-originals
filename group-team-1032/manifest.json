@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1032",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1032",
+    "kind": "team",
+    "name": "成本归因分项核算专家",
+    "description": "输入成本归因相关需求，输出分项核算、异常定位、基线对比三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-cost-attribution-team-lead",
+        "role": "lead",
+        "name": "成本归因主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-cost-attribution",
+        "role": "member",
+        "name": "成本归因 分项核算 顾问",
+        "evidence": "original_assets/agent-cost-attribution/merkle_root",
+        "member_merkle_root": "1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa"
+      },
+      {
+        "slug": "ui-design-expert",
+        "role": "member",
+        "name": "界面设计 组件美化",
+        "evidence": "original_assets/ui-design-expert/merkle_root",
+        "member_merkle_root": "8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16"
+      },
+      {
+        "slug": "agent-api-companion",
+        "role": "member",
+        "name": "接口助手 调试 契约 兼容",
+        "evidence": "original_assets/agent-api-companion/merkle_root",
+        "member_merkle_root": "6f1b68c31f25b944fd559df5e9f0500f59577168259fd1114cf5b633e1f4a0b0"
+      }
+    ],
+    "team_lead": "agent-cost-attribution-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5a3106f0aa17d965",
+  "prompt_hash": "4f5b6ea42d0673a3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1032\", \"kind\": \"team\", \"name\": \"成本归因分项核算专家\", \"description\": \"输入成本归因相关需求，输出分项核算、异常定位、基线对比三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-cost-attribution-team-lead\", \"role\": \"lead\", \"name\": \"成本归因主理人\", \"evidence\": null}, {\"slug\": \"agent-cost-attribution\", \"role\": \"member\", \"name\": \"成本归因 分项核算 顾问\", \"evidence\": \"original_assets/agent-cost-attribution/merkle_root\", \"member_merkle_root\": \"1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa\"}, {\"slug\": \"ui-design-expert\", \"role\": \"member\", \"name\": \"界面设计 组件美化\", \"evidence\": \"original_assets/ui-design-expert/merkle_root\", \"member_merkle_root\": \"8d9665a64c9f684caa3e8b3118c648e528879f1fa21262d24f0a3130c7cf6f16\"}, {\"slug\": \"agent-api-companion\", \"role\": \"member\", \"name\": \"接口助手 调试 契约 兼容\", \"evidence\": \"original_assets/agent-api-companion/merkle_root\", \"member_merkle_root\": \"6f1b68c31f25b944fd559df5e9f0500f59577168259fd1114cf5b633e1f4a0b0\"}], \"team_lead\": \"agent-cost-attribution-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-api-companion.md": "5df27c1f4effa20d6f090f7cffba747cadf2cf2cd2e9e28ed629b2e465374e8b",
+    "agents/agent-cost-attribution-team-lead.md": "86cdd83c6d0c2d2dd9d4c0f2b2916c7739a0797bf11c6922da2e9b5c247b740b",
+    "agents/agent-cost-attribution.md": "47b4dbbaffd89ca32e3b6b403a1a20f8348baf4fb18c8879492310e78062d67b",
+    "agents/ui-design-expert.md": "b350a3641d965ecb01a1e4e00a63fe0cf7390c1daaa91a4841029a5c0d588d4c",
+    "plugin.json": "a9d2441257084b571ab80709acd898a6685ee96ca8940baa98e83f317e4edb3a",
+    "settings.json": "9d8ad191ce888030559f2373f834703cffe8921346285f87d9bd861ce4412faf"
+  }
+}

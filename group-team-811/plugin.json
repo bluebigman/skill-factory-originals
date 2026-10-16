@@ -1,0 +1,126 @@
+{
+  "agentName": "renewal-playbook-team-lead",
+  "agents": [
+    "./agents/renewal-playbook-team-lead.md",
+    "./agents/renewal-playbook.md",
+    "./agents/agent-improve-loop.md",
+    "./agents/cs-qbr-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 续约管理",
+    "zh": "帮我处理续约管理"
+  },
+  "description": "renewal-playbook team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 续约管理 requirements, output three deliverables: 提前启动, 价值回顾, 风险早识. Verifiable end-to-end, evidence per step.",
+    "zh": "输入续约管理相关需求，输出提前启动、价值回顾、风险早识三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "renewal-playbook Team",
+    "zh": "续约管理提前动作专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "renewal-playbook-team-lead",
+      "name": {
+        "en": "续约管理主理人",
+        "zh": "续约管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/renewal-playbook.png",
+      "id": "renewal-playbook",
+      "name": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "profession": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-improve-loop.png",
+      "id": "agent-improve-loop",
+      "name": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "profession": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cs-qbr-pro.png",
+      "id": "cs-qbr-pro",
+      "name": {
+        "en": "cs-qbr-pro",
+        "zh": "客户复盘 季度会议 顾问"
+      },
+      "profession": {
+        "en": "cs-qbr-pro",
+        "zh": "客户复盘 季度会议 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-811",
+  "plugin": "group-team-811",
+  "profession": {
+    "en": "renewal-playbook Collaboration Team",
+    "zh": "续约管理提前动作专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 续约管理",
+      "zh": "帮我处理续约管理"
+    },
+    {
+      "en": "Plan 改进闭环",
+      "zh": "帮我规划改进闭环"
+    },
+    {
+      "en": "Review 客户复盘",
+      "zh": "帮我检查客户复盘"
+    }
+  ],
+  "tags": [
+    {
+      "en": "提前启动",
+      "zh": "提前启动"
+    },
+    {
+      "en": "价值回顾",
+      "zh": "价值回顾"
+    },
+    {
+      "en": "风险早识",
+      "zh": "风险早识"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "renewal-playbook-team-lead",
+    "memberAgents": [
+      "renewal-playbook",
+      "agent-improve-loop",
+      "cs-qbr-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-182",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-182",
+    "kind": "team",
+    "name": "设备 家政 库存 团队",
+    "description": "设备 家政 库存 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "equipment-maintain-pro-team-lead",
+        "role": "lead",
+        "name": "设备维保主理人",
+        "evidence": null
+      },
+      {
+        "slug": "equipment-maintain-pro",
+        "role": "member",
+        "name": "设备维保 计划编制 顾问",
+        "evidence": "original_assets/equipment-maintain-pro/merkle_root",
+        "member_merkle_root": "4f224ba92051d58a674c8a1ccd20569651a5136cbff1dace5d264cf9fdb72bae"
+      },
+      {
+        "slug": "home-service-diagnose",
+        "role": "member",
+        "name": "家政服务 排班质检 顾问",
+        "evidence": "original_assets/home-service-diagnose/merkle_root",
+        "member_merkle_root": "e28eebadf702c67342f1b69aa81fa7a03d25d752b9cd86aea60db61595a386e3"
+      },
+      {
+        "slug": "inventory-turn-pro",
+        "role": "member",
+        "name": "库存周转 呆滞清理 顾问",
+        "evidence": "original_assets/inventory-turn-pro/merkle_root",
+        "member_merkle_root": "31bf3c55fc921f65d84d36b7df2d24a783aec791c136c1542c00a3aa860a3833"
+      }
+    ],
+    "team_lead": "equipment-maintain-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "82fb07813db20a9b",
+  "prompt_hash": "6536c7740afb42c5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-182\", \"kind\": \"team\", \"name\": \"设备 家政 库存 团队\", \"description\": \"设备 家政 库存 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"equipment-maintain-pro-team-lead\", \"role\": \"lead\", \"name\": \"设备维保主理人\", \"evidence\": null}, {\"slug\": \"equipment-maintain-pro\", \"role\": \"member\", \"name\": \"设备维保 计划编制 顾问\", \"evidence\": \"original_assets/equipment-maintain-pro/merkle_root\", \"member_merkle_root\": \"4f224ba92051d58a674c8a1ccd20569651a5136cbff1dace5d264cf9fdb72bae\"}, {\"slug\": \"home-service-diagnose\", \"role\": \"member\", \"name\": \"家政服务 排班质检 顾问\", \"evidence\": \"original_assets/home-service-diagnose/merkle_root\", \"member_merkle_root\": \"e28eebadf702c67342f1b69aa81fa7a03d25d752b9cd86aea60db61595a386e3\"}, {\"slug\": \"inventory-turn-pro\", \"role\": \"member\", \"name\": \"库存周转 呆滞清理 顾问\", \"evidence\": \"original_assets/inventory-turn-pro/merkle_root\", \"member_merkle_root\": \"31bf3c55fc921f65d84d36b7df2d24a783aec791c136c1542c00a3aa860a3833\"}], \"team_lead\": \"equipment-maintain-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/equipment-maintain-pro-team-lead.md": "ba23b24ab6dc9c79b7d90475944502b89b350efebc5e2a02797c254b1f2cca8d",
+    "agents/equipment-maintain-pro.md": "e013fd4c7dee14433407653c0dab6174da82ac947c4f1a075d74844f634d00d5",
+    "agents/home-service-diagnose.md": "6c436a5d732a306c444bb6e1cacdadd1aec5e16ad2dd173fea0784534145f151",
+    "agents/inventory-turn-pro.md": "abcbc885579dc171fe84c6a985df96b370b8269c4f7e063e016b212a2efea014",
+    "plugin.json": "11db997e36e5a1d3dba3a0f86dad7aab20da571ea7ce69e40987ff829c9d860f",
+    "settings.json": "2154c5b472f77fa25ecb923850627e636667ce89b84accfbc5033b228f00a51f"
+  }
+}

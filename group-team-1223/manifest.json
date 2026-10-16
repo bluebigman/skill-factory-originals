@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1223",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1223",
+    "kind": "team",
+    "name": "运营手册编写专家",
+    "description": "运营手册编写专家：围绕运营手册，覆盖异常分支／更新机制／纪要及时，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-runbook-team-lead",
+        "role": "lead",
+        "name": "运营手册主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-runbook",
+        "role": "member",
+        "name": "运营手册 编写",
+        "evidence": "original_assets/ops-runbook/merkle_root",
+        "member_merkle_root": "2c40e17910ed424f5ed538ab66272d5bbf52b58a370546402f1e6cd5a40a0a3b"
+      },
+      {
+        "slug": "meeting-sync-pro",
+        "role": "member",
+        "name": "会议同步 纪要分发 顾问",
+        "evidence": "original_assets/meeting-sync-pro/merkle_root",
+        "member_merkle_root": "3ef001d850779fa8a91511a935b9f8d04cf42b5e879411a82f13991266b8cbbd"
+      },
+      {
+        "slug": "time-mgmt-expert",
+        "role": "member",
+        "name": "时间管理专家",
+        "evidence": "original_assets/time-mgmt-expert/merkle_root",
+        "member_merkle_root": "3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0"
+      }
+    ],
+    "team_lead": "ops-runbook-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b0aaea8f2b0d6628",
+  "prompt_hash": "bcbdf4e169b6e233",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1223\", \"kind\": \"team\", \"name\": \"运营手册编写专家\", \"description\": \"运营手册编写专家：围绕运营手册，覆盖异常分支／更新机制／纪要及时，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-runbook-team-lead\", \"role\": \"lead\", \"name\": \"运营手册主理人\", \"evidence\": null}, {\"slug\": \"ops-runbook\", \"role\": \"member\", \"name\": \"运营手册 编写\", \"evidence\": \"original_assets/ops-runbook/merkle_root\", \"member_merkle_root\": \"2c40e17910ed424f5ed538ab66272d5bbf52b58a370546402f1e6cd5a40a0a3b\"}, {\"slug\": \"meeting-sync-pro\", \"role\": \"member\", \"name\": \"会议同步 纪要分发 顾问\", \"evidence\": \"original_assets/meeting-sync-pro/merkle_root\", \"member_merkle_root\": \"3ef001d850779fa8a91511a935b9f8d04cf42b5e879411a82f13991266b8cbbd\"}, {\"slug\": \"time-mgmt-expert\", \"role\": \"member\", \"name\": \"时间管理专家\", \"evidence\": \"original_assets/time-mgmt-expert/merkle_root\", \"member_merkle_root\": \"3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0\"}], \"team_lead\": \"ops-runbook-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/meeting-sync-pro.md": "cb771475a84710d935e828060739fd220e46118c95e5ae8728601ebb4f1326dd",
+    "agents/ops-runbook-team-lead.md": "caac3f3c8e84d142ac0790a13b1f8de916d401ee9b0c94c3329caabdeeceb32f",
+    "agents/ops-runbook.md": "858a8013e583ea96611e2291ea467d051d85a48b4ba93fa950cfa412a08c5669",
+    "agents/time-mgmt-expert.md": "5a0d2a0f8b2a656e2f93783f0c9f880690d18ebec2fa88587e5f3c54e605d127",
+    "plugin.json": "18276f84f7081b2b3df2584f8faa9fd7d618c1b6bafe0499a16b070f60f7f423",
+    "settings.json": "78e5506ff74f8439555bba5a717b24cedc4373793199b6fcda9983159da7e89f"
+  }
+}

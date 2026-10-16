@@ -1,0 +1,126 @@
+{
+  "agentName": "complaint-handle-pro-team-lead",
+  "agents": [
+    "./agents/complaint-handle-pro-team-lead.md",
+    "./agents/complaint-handle-pro.md",
+    "./agents/release-readiness-pro.md",
+    "./agents/sales-script-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 客诉处理",
+    "zh": "帮我处理客诉处理"
+  },
+  "description": "complaint-handle-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 客诉处理 end-to-end: 首问负责, 分级升级 and 时限承诺. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长首问负责、分级升级与时限承诺，覆盖客诉处理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "complaint-handle-pro Team",
+    "zh": "客诉处理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "complaint-handle-pro-team-lead",
+      "name": {
+        "en": "客诉处理主理人",
+        "zh": "客诉处理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/complaint-handle-pro.png",
+      "id": "complaint-handle-pro",
+      "name": {
+        "en": "complaint-handle-pro",
+        "zh": "客诉处理 升级机制 顾问"
+      },
+      "profession": {
+        "en": "complaint-handle-pro",
+        "zh": "客诉处理 升级机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/release-readiness-pro.png",
+      "id": "release-readiness-pro",
+      "name": {
+        "en": "release-readiness-pro",
+        "zh": "发布就绪 检查清单 顾问"
+      },
+      "profession": {
+        "en": "release-readiness-pro",
+        "zh": "发布就绪 检查清单 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sales-script-coach.png",
+      "id": "sales-script-coach",
+      "name": {
+        "en": "sales-script-coach",
+        "zh": "销售话术 场景演练 教练"
+      },
+      "profession": {
+        "en": "sales-script-coach",
+        "zh": "销售话术 场景演练 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-797",
+  "plugin": "group-team-797",
+  "profession": {
+    "en": "complaint-handle-pro Collaboration Team",
+    "zh": "客诉处理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 客诉处理",
+      "zh": "帮我处理客诉处理"
+    },
+    {
+      "en": "Plan 发布就绪",
+      "zh": "帮我规划发布就绪"
+    },
+    {
+      "en": "Review 销售话术",
+      "zh": "帮我检查销售话术"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级升级",
+      "zh": "分级升级"
+    },
+    {
+      "en": "时限承诺",
+      "zh": "时限承诺"
+    },
+    {
+      "en": "补偿标准",
+      "zh": "补偿标准"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "complaint-handle-pro-team-lead",
+    "memberAgents": [
+      "complaint-handle-pro",
+      "release-readiness-pro",
+      "sales-script-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

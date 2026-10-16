@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1269",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1269",
+    "kind": "team",
+    "name": "区域划分专家",
+    "description": "输入区域划分相关需求，输出潜力均衡、规则稳定、归属规则三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sales-territory-pro-team-lead",
+        "role": "lead",
+        "name": "区域划分主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sales-territory-pro",
+        "role": "member",
+        "name": "区域划分 覆盖策略 顾问",
+        "evidence": "original_assets/sales-territory-pro/merkle_root",
+        "member_merkle_root": "dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7"
+      },
+      {
+        "slug": "data-incident-review",
+        "role": "member",
+        "name": "数据事故复盘 顾问",
+        "evidence": "original_assets/data-incident-review/merkle_root",
+        "member_merkle_root": "3545b038c2665cfe9608cd07f0d30dd230953a098313e208b420f553d23d50c5"
+      },
+      {
+        "slug": "crawl-file-pro",
+        "role": "member",
+        "name": "文件采集 素材整理",
+        "evidence": "original_assets/crawl-file-pro/merkle_root",
+        "member_merkle_root": "df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f"
+      }
+    ],
+    "team_lead": "sales-territory-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6aee1912458b62b9",
+  "prompt_hash": "a41129283df1ef8d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1269\", \"kind\": \"team\", \"name\": \"区域划分专家\", \"description\": \"输入区域划分相关需求，输出潜力均衡、规则稳定、归属规则三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sales-territory-pro-team-lead\", \"role\": \"lead\", \"name\": \"区域划分主理人\", \"evidence\": null}, {\"slug\": \"sales-territory-pro\", \"role\": \"member\", \"name\": \"区域划分 覆盖策略 顾问\", \"evidence\": \"original_assets/sales-territory-pro/merkle_root\", \"member_merkle_root\": \"dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7\"}, {\"slug\": \"data-incident-review\", \"role\": \"member\", \"name\": \"数据事故复盘 顾问\", \"evidence\": \"original_assets/data-incident-review/merkle_root\", \"member_merkle_root\": \"3545b038c2665cfe9608cd07f0d30dd230953a098313e208b420f553d23d50c5\"}, {\"slug\": \"crawl-file-pro\", \"role\": \"member\", \"name\": \"文件采集 素材整理\", \"evidence\": \"original_assets/crawl-file-pro/merkle_root\", \"member_merkle_root\": \"df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f\"}], \"team_lead\": \"sales-territory-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crawl-file-pro.md": "f2b35f627f2cf9c0f60204062ccfc2e00190ade496e4fde685b415211c74d456",
+    "agents/data-incident-review.md": "48fbfd048553b92d96fdef5df64851c8081198a9356596bbfbe0aeefd1dbb5b5",
+    "agents/sales-territory-pro-team-lead.md": "006e26209fdca2b6282e3085ec560c4f7a7bb779bf82eb45aafb93fff7fffb11",
+    "agents/sales-territory-pro.md": "75bdf2aaf4bfd1b945030fbc701b0a6a34e4e1078c21bcf65b2698b5ee2c2f2e",
+    "plugin.json": "035e4db0dee3620ce0ccb226d093392efc9b4c148fbf439899616a5f846b2845",
+    "settings.json": "c02be0567d37ac1d6e303aa849125a8693a29000d67e04e457b77377223008ab"
+  }
+}

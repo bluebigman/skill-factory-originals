@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-843",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-843",
+    "kind": "team",
+    "name": "大客户经营计划专家",
+    "description": "擅长关系地图、业务对齐与季度节奏，覆盖大客户全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "key-account-plan-team-lead",
+        "role": "lead",
+        "name": "大客户主理人",
+        "evidence": null
+      },
+      {
+        "slug": "key-account-plan",
+        "role": "member",
+        "name": "大客户 经营计划 顾问",
+        "evidence": "original_assets/key-account-plan/merkle_root",
+        "member_merkle_root": "68c33eb6f831f8869f1a9bf2ad9a250edc877be6fc476debc2d34450d3c6b347"
+      },
+      {
+        "slug": "game-qa-method",
+        "role": "member",
+        "name": "游戏测试 用例设计 顾问",
+        "evidence": "original_assets/game-qa-method/merkle_root",
+        "member_merkle_root": "bad1c48a48b96c47eedf6190a80e2b2d5859af97ecc4ccaf8e9b7c1d6019f884"
+      },
+      {
+        "slug": "intl-partner-screen",
+        "role": "member",
+        "name": "海外伙伴 尽调筛选 顾问",
+        "evidence": "original_assets/intl-partner-screen/merkle_root",
+        "member_merkle_root": "3567a84ab586e658cce8ba7caac7e888a6c86b7d38fe065dd4bdbcf0364924a7"
+      }
+    ],
+    "team_lead": "key-account-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0f62765ae8631c3e",
+  "prompt_hash": "651327ee343437bf",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-843\", \"kind\": \"team\", \"name\": \"大客户经营计划专家\", \"description\": \"擅长关系地图、业务对齐与季度节奏，覆盖大客户全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"key-account-plan-team-lead\", \"role\": \"lead\", \"name\": \"大客户主理人\", \"evidence\": null}, {\"slug\": \"key-account-plan\", \"role\": \"member\", \"name\": \"大客户 经营计划 顾问\", \"evidence\": \"original_assets/key-account-plan/merkle_root\", \"member_merkle_root\": \"68c33eb6f831f8869f1a9bf2ad9a250edc877be6fc476debc2d34450d3c6b347\"}, {\"slug\": \"game-qa-method\", \"role\": \"member\", \"name\": \"游戏测试 用例设计 顾问\", \"evidence\": \"original_assets/game-qa-method/merkle_root\", \"member_merkle_root\": \"bad1c48a48b96c47eedf6190a80e2b2d5859af97ecc4ccaf8e9b7c1d6019f884\"}, {\"slug\": \"intl-partner-screen\", \"role\": \"member\", \"name\": \"海外伙伴 尽调筛选 顾问\", \"evidence\": \"original_assets/intl-partner-screen/merkle_root\", \"member_merkle_root\": \"3567a84ab586e658cce8ba7caac7e888a6c86b7d38fe065dd4bdbcf0364924a7\"}], \"team_lead\": \"key-account-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-qa-method.md": "510c3a4b9f8a7e50a68da52e3855c67eb94d77c18e99b18e5068abbc8a03aabb",
+    "agents/intl-partner-screen.md": "b92784368ab51bba6972e1f542c5be8d13b2e7078cd4d434d9d1d723e7bd6d48",
+    "agents/key-account-plan-team-lead.md": "c3ad1a251433a1319e1e3c31246627c9b42a3585d7d96426798d203267fa1964",
+    "agents/key-account-plan.md": "7bc767bb541dbe4771a3b52f15f0ea72c876eaa6370f3101c04f5a6aeceea920",
+    "plugin.json": "083f3384f96bcf9a66d667a62639797b816d5dbc3f6d98bb29ef65a9e0f92f6f",
+    "settings.json": "cad4d0ffc990944a3f122f7ee69fecbb622075b4453e89777b4344b14d6b05c4"
+  }
+}

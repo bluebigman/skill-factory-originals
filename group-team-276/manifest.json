@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-276",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-276",
+    "kind": "team",
+    "name": "沙箱 危机 注入 团队",
+    "description": "沙箱 危机 注入 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-sandbox-policy-team-lead",
+        "role": "lead",
+        "name": "沙箱策略主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-sandbox-policy",
+        "role": "member",
+        "name": "沙箱策略 隔离边界 顾问",
+        "evidence": "original_assets/agent-sandbox-policy/merkle_root",
+        "member_merkle_root": "a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e"
+      },
+      {
+        "slug": "pr-crisis-basic",
+        "role": "member",
+        "name": "危机应对 沟通准备 顾问",
+        "evidence": "original_assets/pr-crisis-basic/merkle_root",
+        "member_merkle_root": "9de9256bc34f4e79125c45aa215caee37a8f7f52d392a75170bc119e637ccf32"
+      },
+      {
+        "slug": "agent-prompt-inject-guard",
+        "role": "member",
+        "name": "注入防护 指令隔离 顾问",
+        "evidence": "original_assets/agent-prompt-inject-guard/merkle_root",
+        "member_merkle_root": "9923a2455a31ad0d165900bd94d964605414a49b1ee522a51d93ac17c5829172"
+      }
+    ],
+    "team_lead": "agent-sandbox-policy-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d0553424dd05646e",
+  "prompt_hash": "a7e329c298817555",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-276\", \"kind\": \"team\", \"name\": \"沙箱 危机 注入 团队\", \"description\": \"沙箱 危机 注入 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-sandbox-policy-team-lead\", \"role\": \"lead\", \"name\": \"沙箱策略主理人\", \"evidence\": null}, {\"slug\": \"agent-sandbox-policy\", \"role\": \"member\", \"name\": \"沙箱策略 隔离边界 顾问\", \"evidence\": \"original_assets/agent-sandbox-policy/merkle_root\", \"member_merkle_root\": \"a9ed8bab94995aa8316d5a7f2ab7b4529e4f0e6349aa2d161c7c87e22ef91c8e\"}, {\"slug\": \"pr-crisis-basic\", \"role\": \"member\", \"name\": \"危机应对 沟通准备 顾问\", \"evidence\": \"original_assets/pr-crisis-basic/merkle_root\", \"member_merkle_root\": \"9de9256bc34f4e79125c45aa215caee37a8f7f52d392a75170bc119e637ccf32\"}, {\"slug\": \"agent-prompt-inject-guard\", \"role\": \"member\", \"name\": \"注入防护 指令隔离 顾问\", \"evidence\": \"original_assets/agent-prompt-inject-guard/merkle_root\", \"member_merkle_root\": \"9923a2455a31ad0d165900bd94d964605414a49b1ee522a51d93ac17c5829172\"}], \"team_lead\": \"agent-sandbox-policy-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-prompt-inject-guard.md": "af7d1c4286076edf333b320a87a73a1c529399c14ef502946aa8ee4fab02c833",
+    "agents/agent-sandbox-policy-team-lead.md": "17c608c91024c159fe5e27889808c32e83a1e06fc6bf796d88e6ab3468a8f251",
+    "agents/agent-sandbox-policy.md": "cb66318226b91353d6401b4499a3ad08c7a4573e324778d1b4edcd117c7033c7",
+    "agents/pr-crisis-basic.md": "8510c1888257f7cbd85979e13861e85432bd2240e5c0a2c96d67942be22e2f6e",
+    "plugin.json": "d1fe7c384d1374dd6ca697bdd377fe5691bc9222d7844383f85c418def95235a",
+    "settings.json": "04061d09251baded97e1e8568fe0cd6c71b3a5e1097ab2f5d710d7cff6918520"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-version-compat-team-lead",
+  "agents": [
+    "./agents/agent-version-compat-team-lead.md",
+    "./agents/agent-version-compat.md",
+    "./agents/data-pipeline-pro-01.md",
+    "./agents/agent-conflict-resolve.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 版本兼容",
+    "zh": "帮我处理版本兼容"
+  },
+  "description": "agent-version-compat team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 版本兼容 requirements, output three deliverables: 兼容优先, 弃用预告, 双轨过渡. Verifiable end-to-end, evidence per step.",
+    "zh": "输入版本兼容相关需求，输出兼容优先、弃用预告、双轨过渡三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-version-compat Team",
+    "zh": "版本兼容专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-version-compat-team-lead",
+      "name": {
+        "en": "版本兼容主理人",
+        "zh": "版本兼容主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-version-compat.png",
+      "id": "agent-version-compat",
+      "name": {
+        "en": "agent-version-compat",
+        "zh": "版本兼容 平滑升级 顾问"
+      },
+      "profession": {
+        "en": "agent-version-compat",
+        "zh": "版本兼容 平滑升级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro-01.png",
+      "id": "data-pipeline-pro-01",
+      "name": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "数据转换 批量整理"
+      },
+      "profession": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "数据转换 批量整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-conflict-resolve.png",
+      "id": "agent-conflict-resolve",
+      "name": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "profession": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-432",
+  "plugin": "group-team-432",
+  "profession": {
+    "en": "agent-version-compat Collaboration Team",
+    "zh": "版本兼容专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 版本兼容",
+      "zh": "帮我处理版本兼容"
+    },
+    {
+      "en": "Plan 数据转换",
+      "zh": "帮我规划数据转换"
+    },
+    {
+      "en": "Review 冲突消解",
+      "zh": "帮我检查冲突消解"
+    }
+  ],
+  "tags": [
+    {
+      "en": "兼容优先",
+      "zh": "兼容优先"
+    },
+    {
+      "en": "弃用预告",
+      "zh": "弃用预告"
+    },
+    {
+      "en": "双轨过渡",
+      "zh": "双轨过渡"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-version-compat-team-lead",
+    "memberAgents": [
+      "agent-version-compat",
+      "data-pipeline-pro-01",
+      "agent-conflict-resolve"
+    ]
+  },
+  "version": "1.0.0"
+}

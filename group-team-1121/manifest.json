@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1121",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1121",
+    "kind": "team",
+    "name": "视觉层级设计专家",
+    "description": "视觉层级设计专家：围绕视觉层级设计，覆盖主次分明／留白分隔／对齐统一，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "visual-hierarchy-team-lead",
+        "role": "lead",
+        "name": "视觉层级设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "visual-hierarchy",
+        "role": "member",
+        "name": "视觉层级设计 顾问",
+        "evidence": "original_assets/visual-hierarchy/merkle_root",
+        "member_merkle_root": "7bcbdaea8e96ab3eb32cf87959910bc6344be8f4aa795c71ccb2ae23f849c856"
+      },
+      {
+        "slug": "typography-scale",
+        "role": "member",
+        "name": "字体层级设计 顾问",
+        "evidence": "original_assets/typography-scale/merkle_root",
+        "member_merkle_root": "dd2bf7f33f96c394373f230072df8c2d77539abc7cb71776bc71b6624422977c"
+      },
+      {
+        "slug": "product-roadmap-pro",
+        "role": "member",
+        "name": "产品路线 优先级 顾问",
+        "evidence": "original_assets/product-roadmap-pro/merkle_root",
+        "member_merkle_root": "9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f"
+      }
+    ],
+    "team_lead": "visual-hierarchy-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "10637d559a2673cb",
+  "prompt_hash": "f5e89eafa7697b9c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1121\", \"kind\": \"team\", \"name\": \"视觉层级设计专家\", \"description\": \"视觉层级设计专家：围绕视觉层级设计，覆盖主次分明／留白分隔／对齐统一，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"visual-hierarchy-team-lead\", \"role\": \"lead\", \"name\": \"视觉层级设计主理人\", \"evidence\": null}, {\"slug\": \"visual-hierarchy\", \"role\": \"member\", \"name\": \"视觉层级设计 顾问\", \"evidence\": \"original_assets/visual-hierarchy/merkle_root\", \"member_merkle_root\": \"7bcbdaea8e96ab3eb32cf87959910bc6344be8f4aa795c71ccb2ae23f849c856\"}, {\"slug\": \"typography-scale\", \"role\": \"member\", \"name\": \"字体层级设计 顾问\", \"evidence\": \"original_assets/typography-scale/merkle_root\", \"member_merkle_root\": \"dd2bf7f33f96c394373f230072df8c2d77539abc7cb71776bc71b6624422977c\"}, {\"slug\": \"product-roadmap-pro\", \"role\": \"member\", \"name\": \"产品路线 优先级 顾问\", \"evidence\": \"original_assets/product-roadmap-pro/merkle_root\", \"member_merkle_root\": \"9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f\"}], \"team_lead\": \"visual-hierarchy-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/product-roadmap-pro.md": "4849861e734c4afca6698ac6dd168adccaf12a66cacb4c4cb4ed26f194e10919",
+    "agents/typography-scale.md": "e00a3b54e9da121f83fe9318d20d62543d055a99bbdf9d5987f2e36fa7693295",
+    "agents/visual-hierarchy-team-lead.md": "45eb8d82eb81491b99433697fe72946d922ffce0e0eb52b7bf80f1351c9f939a",
+    "agents/visual-hierarchy.md": "04d3b9ac9a0c2c4e95de74dbb03d66575aea59c57f10e2f3067be414926c62e7",
+    "plugin.json": "51579a62e0fbedc1b4c6810eb01e07c784bfde47ed91b6435659f9630108b7ff",
+    "settings.json": "6db66636fd19264c362d10f9c88c4447fa4126980b8516e8aa2d363e481fe4dc"
+  }
+}

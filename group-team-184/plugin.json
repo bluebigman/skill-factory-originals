@@ -1,0 +1,126 @@
+{
+  "agentName": "toolkit-pro-05-team-lead",
+  "agents": [
+    "./agents/toolkit-pro-05-team-lead.md",
+    "./agents/toolkit-pro-05.md",
+    "./agents/toolkit-pro-07.md",
+    "./agents/toolkit-pro-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据叙事",
+    "zh": "帮我处理数据叙事"
+  },
+  "description": "综合工具 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 叙事 行情 采集 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "综合工具 Suite Team",
+    "zh": "数据 叙事 行情 采集 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "toolkit-pro-05-team-lead",
+      "name": {
+        "en": "数据叙事主理人",
+        "zh": "数据叙事主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-05.png",
+      "id": "toolkit-pro-05",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "数据叙事 构建配置 批量处理"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "数据叙事 构建配置 批量处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-07.png",
+      "id": "toolkit-pro-07",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "行情研判 收入筹划 图像比对"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "行情研判 收入筹划 图像比对"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-fixed.png",
+      "id": "toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据采集清洗 回放自动化"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据采集清洗 回放自动化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-184",
+  "plugin": "group-team-184",
+  "profession": {
+    "en": "综合工具 Suite Collaboration Team",
+    "zh": "数据 叙事 行情 采集 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据叙事",
+      "zh": "帮我处理数据叙事"
+    },
+    {
+      "en": "Plan 行情研判",
+      "zh": "帮我规划行情研判"
+    },
+    {
+      "en": "Review 数据采集清洗",
+      "zh": "帮我检查数据采集清洗"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据叙事",
+      "zh": "数据叙事"
+    },
+    {
+      "en": "行情研判",
+      "zh": "行情研判"
+    },
+    {
+      "en": "数据采集清洗",
+      "zh": "数据采集清洗"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "toolkit-pro-05-team-lead",
+    "memberAgents": [
+      "toolkit-pro-05",
+      "toolkit-pro-07",
+      "toolkit-pro-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

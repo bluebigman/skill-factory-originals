@@ -1,0 +1,126 @@
+{
+  "agentName": "navigation-design-team-lead",
+  "agents": [
+    "./agents/navigation-design-team-lead.md",
+    "./agents/navigation-design.md",
+    "./agents/level-difficulty-curve.md",
+    "./agents/virtual-space-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 导航设计",
+    "zh": "帮我处理导航设计"
+  },
+  "description": "navigation-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 导航设计 requirements, output three deliverables: 位置可见, 常用前置, 命名一致. Verifiable end-to-end, evidence per step.",
+    "zh": "输入导航设计相关需求，输出位置可见、常用前置、命名一致三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "navigation-design Team",
+    "zh": "虚拟空间场景搭建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "navigation-design-team-lead",
+      "name": {
+        "en": "导航设计主理人",
+        "zh": "导航设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/navigation-design.png",
+      "id": "navigation-design",
+      "name": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "profession": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/level-difficulty-curve.png",
+      "id": "level-difficulty-curve",
+      "name": {
+        "en": "level-difficulty-curve",
+        "zh": "关卡难度 曲线调优 顾问"
+      },
+      "profession": {
+        "en": "level-difficulty-curve",
+        "zh": "关卡难度 曲线调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/virtual-space-pro.png",
+      "id": "virtual-space-pro",
+      "name": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "profession": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-814",
+  "plugin": "group-team-814",
+  "profession": {
+    "en": "navigation-design Collaboration Team",
+    "zh": "虚拟空间场景搭建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 导航设计",
+      "zh": "帮我处理导航设计"
+    },
+    {
+      "en": "Plan 关卡难度",
+      "zh": "帮我规划关卡难度"
+    },
+    {
+      "en": "Review 虚拟空间",
+      "zh": "帮我检查虚拟空间"
+    }
+  ],
+  "tags": [
+    {
+      "en": "位置可见",
+      "zh": "位置可见"
+    },
+    {
+      "en": "常用前置",
+      "zh": "常用前置"
+    },
+    {
+      "en": "命名一致",
+      "zh": "命名一致"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "navigation-design-team-lead",
+    "memberAgents": [
+      "navigation-design",
+      "level-difficulty-curve",
+      "virtual-space-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1093",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1093",
+    "kind": "team",
+    "name": "文档批量转换专家",
+    "description": "擅长格式映射、失败隔离与清单对账，覆盖文档批量转换全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-batch-convert-team-lead",
+        "role": "lead",
+        "name": "文档批量转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-batch-convert",
+        "role": "member",
+        "name": "文档批量转换 助手",
+        "evidence": "original_assets/doc-batch-convert/merkle_root",
+        "member_merkle_root": "9ec4eaa3719ba66503f3afd6adb10893f7bf8bffc84f73bb070a6fef8340e410"
+      },
+      {
+        "slug": "knowledge-conflict",
+        "role": "member",
+        "name": "知识冲突处理 顾问",
+        "evidence": "original_assets/knowledge-conflict/merkle_root",
+        "member_merkle_root": "3b8de4f094464b961901c5e633b9f67a73e6b8957931a902cd1a1becf932e28e"
+      },
+      {
+        "slug": "data-quality-score",
+        "role": "member",
+        "name": "数据质量评分 顾问",
+        "evidence": "original_assets/data-quality-score/merkle_root",
+        "member_merkle_root": "20bce0d484c55d7f9ad4ef8208717cf5aeee18052ecb1b823207f1d26f705be4"
+      }
+    ],
+    "team_lead": "doc-batch-convert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "28bf564d27e0bd82",
+  "prompt_hash": "616267705dabf997",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1093\", \"kind\": \"team\", \"name\": \"文档批量转换专家\", \"description\": \"擅长格式映射、失败隔离与清单对账，覆盖文档批量转换全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-batch-convert-team-lead\", \"role\": \"lead\", \"name\": \"文档批量转换主理人\", \"evidence\": null}, {\"slug\": \"doc-batch-convert\", \"role\": \"member\", \"name\": \"文档批量转换 助手\", \"evidence\": \"original_assets/doc-batch-convert/merkle_root\", \"member_merkle_root\": \"9ec4eaa3719ba66503f3afd6adb10893f7bf8bffc84f73bb070a6fef8340e410\"}, {\"slug\": \"knowledge-conflict\", \"role\": \"member\", \"name\": \"知识冲突处理 顾问\", \"evidence\": \"original_assets/knowledge-conflict/merkle_root\", \"member_merkle_root\": \"3b8de4f094464b961901c5e633b9f67a73e6b8957931a902cd1a1becf932e28e\"}, {\"slug\": \"data-quality-score\", \"role\": \"member\", \"name\": \"数据质量评分 顾问\", \"evidence\": \"original_assets/data-quality-score/merkle_root\", \"member_merkle_root\": \"20bce0d484c55d7f9ad4ef8208717cf5aeee18052ecb1b823207f1d26f705be4\"}], \"team_lead\": \"doc-batch-convert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-quality-score.md": "cb5029eafa6ee7e48d1c39f336e8b812392461fabc46529b11fd65c2f92c1c21",
+    "agents/doc-batch-convert-team-lead.md": "3cf3b71ef5e3b509821dc051d48ed1860d349754f38eaeff3c00de58f67dc6ed",
+    "agents/doc-batch-convert.md": "c2e920f146a480b7357ea5ae6e132d959c58965768da4dd3ddc1594378899b71",
+    "agents/knowledge-conflict.md": "38e9226338d11fa99fd8c93ea0ec46817cc2ceaf334bfd549b7b1d3e65b15499",
+    "plugin.json": "0b76fea84093203067a8ebcf01d39fa03465358208f25d7e826c5255b06af1c6",
+    "settings.json": "94e90b699464503753fe59eef60ffcb43b4193ea105ae28781e0734301c61634"
+  }
+}

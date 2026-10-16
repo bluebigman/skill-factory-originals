@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1262",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1262",
+    "kind": "team",
+    "name": "手册自动化专家",
+    "description": "手册自动化专家：围绕手册自动化，覆盖高频先做／安全护栏／执行留痕，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "runbook-automate-team-lead",
+        "role": "lead",
+        "name": "手册自动化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "runbook-automate",
+        "role": "member",
+        "name": "手册自动化 顾问",
+        "evidence": "original_assets/runbook-automate/merkle_root",
+        "member_merkle_root": "2d7650cc28336bfaf1f96541412e09ed8c229ab7c66d4c7ab36b4ade078958ea"
+      },
+      {
+        "slug": "sql-review-coach",
+        "role": "member",
+        "name": "SQL 审查 顾问",
+        "evidence": "original_assets/sql-review-coach/merkle_root",
+        "member_merkle_root": "eda67a5fc8618b82df99bdcd304960764c339bdd0fd48268cf3e37097f3aea86"
+      },
+      {
+        "slug": "sheet-master-pro",
+        "role": "member",
+        "name": "表格处理 Excel公式",
+        "evidence": "original_assets/sheet-master-pro/merkle_root",
+        "member_merkle_root": "3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163"
+      }
+    ],
+    "team_lead": "runbook-automate-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a44b9c850ea943b9",
+  "prompt_hash": "1b0fdb0e1404d260",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1262\", \"kind\": \"team\", \"name\": \"手册自动化专家\", \"description\": \"手册自动化专家：围绕手册自动化，覆盖高频先做／安全护栏／执行留痕，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"runbook-automate-team-lead\", \"role\": \"lead\", \"name\": \"手册自动化主理人\", \"evidence\": null}, {\"slug\": \"runbook-automate\", \"role\": \"member\", \"name\": \"手册自动化 顾问\", \"evidence\": \"original_assets/runbook-automate/merkle_root\", \"member_merkle_root\": \"2d7650cc28336bfaf1f96541412e09ed8c229ab7c66d4c7ab36b4ade078958ea\"}, {\"slug\": \"sql-review-coach\", \"role\": \"member\", \"name\": \"SQL 审查 顾问\", \"evidence\": \"original_assets/sql-review-coach/merkle_root\", \"member_merkle_root\": \"eda67a5fc8618b82df99bdcd304960764c339bdd0fd48268cf3e37097f3aea86\"}, {\"slug\": \"sheet-master-pro\", \"role\": \"member\", \"name\": \"表格处理 Excel公式\", \"evidence\": \"original_assets/sheet-master-pro/merkle_root\", \"member_merkle_root\": \"3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163\"}], \"team_lead\": \"runbook-automate-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/runbook-automate-team-lead.md": "47a03a8774e87c45acb68d98d2c2d744123830b7215598eb13ea1a0d57f89dc0",
+    "agents/runbook-automate.md": "9cefbc7adea0e01f7aa5cbf585b5aa2dd5a68874d458caf752179f6f8b571e52",
+    "agents/sheet-master-pro.md": "f97552eff8866a9eb252a40042a77a3a5a0bf3e66397eff37c73e3c4a11647b2",
+    "agents/sql-review-coach.md": "5782454c15f70ebc12a4af0df6f16cc80e25b3f879f68a1c0bc4ff56d7ba0fb3",
+    "plugin.json": "2c9b92864648127a939716ab751df1e5f832b48a9f02c5214609abd13c5bcf05",
+    "settings.json": "98a727615b6d36f981c2b128117cf3180aa468ad9be48b451f5f71fc7882e1bb"
+  }
+}

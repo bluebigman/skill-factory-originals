@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-review-pro-team-lead",
+  "agents": [
+    "./agents/sql-review-pro-team-lead.md",
+    "./agents/sql-review-pro.md",
+    "./agents/agent-workspace-expert.md",
+    "./agents/prompt-effect-tuning-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle SQL",
+    "zh": "帮我处理SQL"
+  },
+  "description": "sql-review-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers SQL end-to-end: 执行计划, 子查询优化 and AI提示词优化器. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长执行计划、子查询优化与AI提示词优化器，覆盖SQL全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "sql-review-pro Team",
+    "zh": "智能体配置专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-review-pro-team-lead",
+      "name": {
+        "en": "SQL主理人",
+        "zh": "SQL主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-review-pro.png",
+      "id": "sql-review-pro",
+      "name": {
+        "en": "sql-review-pro",
+        "zh": "SQL 审查 顾问"
+      },
+      "profession": {
+        "en": "sql-review-pro",
+        "zh": "SQL 审查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-workspace-expert.png",
+      "id": "agent-workspace-expert",
+      "name": {
+        "en": "Agent Workspace Expert",
+        "zh": "智能体配置 记忆管理"
+      },
+      "profession": {
+        "en": "Agent Workspace Expert",
+        "zh": "智能体配置 记忆管理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prompt-effect-tuning-expert.png",
+      "id": "prompt-effect-tuning-expert",
+      "name": {
+        "en": "Prompt Effect Tuning Expert",
+        "zh": "提示词 效果优化 调优助手"
+      },
+      "profession": {
+        "en": "Prompt Effect Tuning Expert",
+        "zh": "提示词 效果优化 调优助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-594",
+  "plugin": "group-team-594",
+  "profession": {
+    "en": "sql-review-pro Collaboration Team",
+    "zh": "智能体配置专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle SQL",
+      "zh": "帮我处理SQL"
+    },
+    {
+      "en": "Plan 智能体配置",
+      "zh": "帮我规划智能体配置"
+    },
+    {
+      "en": "Review 提示词",
+      "zh": "帮我检查提示词"
+    }
+  ],
+  "tags": [
+    {
+      "en": "笛卡尔积",
+      "zh": "笛卡尔积"
+    },
+    {
+      "en": "子查询优化",
+      "zh": "子查询优化"
+    },
+    {
+      "en": "执行计划",
+      "zh": "执行计划"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-review-pro-team-lead",
+    "memberAgents": [
+      "sql-review-pro",
+      "agent-workspace-expert",
+      "prompt-effect-tuning-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

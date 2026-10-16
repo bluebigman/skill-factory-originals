@@ -1,0 +1,126 @@
+{
+  "agentName": "cold-email-expert-team-lead",
+  "agents": [
+    "./agents/cold-email-expert-team-lead.md",
+    "./agents/cold-email-expert.md",
+    "./agents/academic-expert.md",
+    "./agents/contract-legal-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 邮件营销",
+    "zh": "帮我处理邮件营销"
+  },
+  "description": "MailPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 邮件营销, covers 场景识别 / 钩子与价值 / 得体性, delivering structured results and actionable checklists.",
+    "zh": "邮件营销专家：围绕邮件营销，覆盖场景识别／钩子与价值／得体性，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "MailPro Team",
+    "zh": "邮件营销专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "cold-email-expert-team-lead",
+      "name": {
+        "en": "邮件营销主理人",
+        "zh": "邮件营销主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/cold-email-expert.png",
+      "id": "cold-email-expert",
+      "name": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "profession": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/academic-expert.png",
+      "id": "academic-expert",
+      "name": {
+        "en": "Scholar",
+        "zh": "学术写作 文献综述 格式规范"
+      },
+      "profession": {
+        "en": "Scholar",
+        "zh": "学术写作 文献综述 格式规范"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-legal-pro.png",
+      "id": "contract-legal-pro",
+      "name": {
+        "en": "Contract Legal Advisor",
+        "zh": "合同法律风险顾问"
+      },
+      "profession": {
+        "en": "Contract Legal Advisor",
+        "zh": "合同法律风险顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-672",
+  "plugin": "group-team-672",
+  "profession": {
+    "en": "MailPro Collaboration Team",
+    "zh": "邮件营销专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 邮件营销",
+      "zh": "帮我处理邮件营销"
+    },
+    {
+      "en": "Plan 学术写作",
+      "zh": "帮我规划学术写作"
+    },
+    {
+      "en": "Review 合同法律风险顾问",
+      "zh": "帮我检查合同法律风险顾问"
+    }
+  ],
+  "tags": [
+    {
+      "en": "钩子与价值",
+      "zh": "钩子与价值"
+    },
+    {
+      "en": "得体性",
+      "zh": "得体性"
+    },
+    {
+      "en": "标题党识别",
+      "zh": "标题党识别"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "cold-email-expert-team-lead",
+    "memberAgents": [
+      "cold-email-expert",
+      "academic-expert",
+      "contract-legal-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

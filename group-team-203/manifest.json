@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-203",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-203",
+    "kind": "team",
+    "name": "懒人 数据 批量 团队",
+    "description": "懒人 数据 批量 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-03-fixed-team-lead",
+        "role": "lead",
+        "name": "懒人记录主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-03-fixed",
+        "role": "member",
+        "name": "懒人记录 字段映射 置信标注",
+        "evidence": "original_assets/data-clean-pro-03-fixed/merkle_root",
+        "member_merkle_root": "fb486b32ff640c3d90139a989d0f28809e3a310208e21ad0bde6e1997af0067d"
+      },
+      {
+        "slug": "data-clean-pro-08",
+        "role": "member",
+        "name": "数据整形 结构化转换 格式定制",
+        "evidence": "original_assets/data-clean-pro-08/merkle_root",
+        "member_merkle_root": "2efde315e54766beab0a1709dff197a6538e4b7feefb92866c3dd8c383afe2a9"
+      },
+      {
+        "slug": "data-clean-pro-10",
+        "role": "member",
+        "name": "数据汤 批量转换 结构化输出",
+        "evidence": "original_assets/data-clean-pro-10/merkle_root",
+        "member_merkle_root": "5ac76fa2fae0771383b94ddc1adaea0bf3ee8571769b408a6d056b246ae753f9"
+      }
+    ],
+    "team_lead": "data-clean-pro-03-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2b0b82fe25150c49",
+  "prompt_hash": "8d3237e5ec52edd1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-203\", \"kind\": \"team\", \"name\": \"懒人 数据 批量 团队\", \"description\": \"懒人 数据 批量 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-03-fixed-team-lead\", \"role\": \"lead\", \"name\": \"懒人记录主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-03-fixed\", \"role\": \"member\", \"name\": \"懒人记录 字段映射 置信标注\", \"evidence\": \"original_assets/data-clean-pro-03-fixed/merkle_root\", \"member_merkle_root\": \"fb486b32ff640c3d90139a989d0f28809e3a310208e21ad0bde6e1997af0067d\"}, {\"slug\": \"data-clean-pro-08\", \"role\": \"member\", \"name\": \"数据整形 结构化转换 格式定制\", \"evidence\": \"original_assets/data-clean-pro-08/merkle_root\", \"member_merkle_root\": \"2efde315e54766beab0a1709dff197a6538e4b7feefb92866c3dd8c383afe2a9\"}, {\"slug\": \"data-clean-pro-10\", \"role\": \"member\", \"name\": \"数据汤 批量转换 结构化输出\", \"evidence\": \"original_assets/data-clean-pro-10/merkle_root\", \"member_merkle_root\": \"5ac76fa2fae0771383b94ddc1adaea0bf3ee8571769b408a6d056b246ae753f9\"}], \"team_lead\": \"data-clean-pro-03-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-03-fixed-team-lead.md": "a1e557c6dfcea3352d4853ae6717c1ba0eb1c8f7e5b428de27fee4e71607e490",
+    "agents/data-clean-pro-03-fixed.md": "6814ac75220e552e03cab2ac2bda55d7bd573610de29401074338f2e2e4eeb3c",
+    "agents/data-clean-pro-08.md": "dc92e10376efd935342b0891f8c808b879da53f3077ab3f042f2484a920eca8f",
+    "agents/data-clean-pro-10.md": "8b1e1d349b7c1643153e0f79a15d396e516138a2f20c93930bcd10074cbeb451",
+    "plugin.json": "d75da2bf30ef43c35924e21e4e4ebe277aae40a751c0433dc7bc9dea0e0a5ac7",
+    "settings.json": "cbba37a76a2c1cd6608cc516cef37210822d671859c655b189327895bb75cada"
+  }
+}

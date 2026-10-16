@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-457",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-457",
+    "kind": "team",
+    "name": "幻觉拦截事实核验专家",
+    "description": "输入幻觉拦截相关需求，输出置信分层、快照复现、成本可见三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-hallucination-guard-team-lead",
+        "role": "lead",
+        "name": "幻觉拦截主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-hallucination-guard",
+        "role": "member",
+        "name": "幻觉拦截 事实核验 顾问",
+        "evidence": "original_assets/agent-hallucination-guard/merkle_root",
+        "member_merkle_root": "a7aab578c7cadd3abe9a6bd4f75edf2f398a4c8c3943bb45a3b1ffe3b73ce679"
+      },
+      {
+        "slug": "data-audit-pro",
+        "role": "member",
+        "name": "调研数据 清洗校验 分析报告",
+        "evidence": "original_assets/data-audit-pro/merkle_root",
+        "member_merkle_root": "b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3"
+      },
+      {
+        "slug": "observability-inject-pro",
+        "role": "member",
+        "name": "链路追踪 指标埋点 顾问",
+        "evidence": "original_assets/observability-inject-pro/merkle_root",
+        "member_merkle_root": "10035696f515cd25ee66be0efd6a2df22a8225eb74c73b5334d97cd29f8d6875"
+      }
+    ],
+    "team_lead": "agent-hallucination-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f935ddcb77ad0440",
+  "prompt_hash": "be5183743fb1b679",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-457\", \"kind\": \"team\", \"name\": \"幻觉拦截事实核验专家\", \"description\": \"输入幻觉拦截相关需求，输出置信分层、快照复现、成本可见三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-hallucination-guard-team-lead\", \"role\": \"lead\", \"name\": \"幻觉拦截主理人\", \"evidence\": null}, {\"slug\": \"agent-hallucination-guard\", \"role\": \"member\", \"name\": \"幻觉拦截 事实核验 顾问\", \"evidence\": \"original_assets/agent-hallucination-guard/merkle_root\", \"member_merkle_root\": \"a7aab578c7cadd3abe9a6bd4f75edf2f398a4c8c3943bb45a3b1ffe3b73ce679\"}, {\"slug\": \"data-audit-pro\", \"role\": \"member\", \"name\": \"调研数据 清洗校验 分析报告\", \"evidence\": \"original_assets/data-audit-pro/merkle_root\", \"member_merkle_root\": \"b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3\"}, {\"slug\": \"observability-inject-pro\", \"role\": \"member\", \"name\": \"链路追踪 指标埋点 顾问\", \"evidence\": \"original_assets/observability-inject-pro/merkle_root\", \"member_merkle_root\": \"10035696f515cd25ee66be0efd6a2df22a8225eb74c73b5334d97cd29f8d6875\"}], \"team_lead\": \"agent-hallucination-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-hallucination-guard-team-lead.md": "96a18efcc01c0a794b239ceaff5b543f4cbf45ac36224bd3b972557a62a7f09c",
+    "agents/agent-hallucination-guard.md": "4e92a2de192334cb8ce1693c4eb84d06eae974943e3685c93b2aaba058790d06",
+    "agents/data-audit-pro.md": "43c622ffae94bbe3a88c86fdd30f618e8f803a967b1d1a5ccc28b7edfe23d161",
+    "agents/observability-inject-pro.md": "7ec1b1e7e8cace48718fc0e2495f592d3245673f7235c6e7443b68f9a5d527a7",
+    "plugin.json": "c547f979cd6d270ffd69fe9acd956244b584d31355f2685d328b6163b36e2d56",
+    "settings.json": "bb4470d507c334c2f5939d20df8594257176e0ddde82819756d1d1c455befdf9"
+  }
+}

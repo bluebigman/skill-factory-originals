@@ -1,0 +1,126 @@
+{
+  "agentName": "pricing-review-team-lead",
+  "agents": [
+    "./agents/pricing-review-team-lead.md",
+    "./agents/pricing-review.md",
+    "./agents/meeting-note-struct.md",
+    "./agents/cs-health-score.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 定价复核",
+    "zh": "帮我处理定价复核"
+  },
+  "description": "pricing-review team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 定价复核, covers 竞品锚定 / 价位习惯 / 定期复核, delivering structured results and actionable checklists.",
+    "zh": "定价复核专家：围绕定价复核，覆盖竞品锚定／价位习惯／定期复核，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "pricing-review Team",
+    "zh": "定价复核专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pricing-review-team-lead",
+      "name": {
+        "en": "定价复核主理人",
+        "zh": "定价复核主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pricing-review.png",
+      "id": "pricing-review",
+      "name": {
+        "en": "pricing-review",
+        "zh": "定价复核 顾问"
+      },
+      "profession": {
+        "en": "pricing-review",
+        "zh": "定价复核 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/meeting-note-struct.png",
+      "id": "meeting-note-struct",
+      "name": {
+        "en": "meeting-note-struct",
+        "zh": "会议纪要结构化 助手"
+      },
+      "profession": {
+        "en": "meeting-note-struct",
+        "zh": "会议纪要结构化 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cs-health-score.png",
+      "id": "cs-health-score",
+      "name": {
+        "en": "cs-health-score",
+        "zh": "客户健康 评分模型 顾问"
+      },
+      "profession": {
+        "en": "cs-health-score",
+        "zh": "客户健康 评分模型 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-893",
+  "plugin": "group-team-893",
+  "profession": {
+    "en": "pricing-review Collaboration Team",
+    "zh": "定价复核专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 定价复核",
+      "zh": "帮我处理定价复核"
+    },
+    {
+      "en": "Plan 会议纪要结构化",
+      "zh": "帮我规划会议纪要结构化"
+    },
+    {
+      "en": "Review 客户健康",
+      "zh": "帮我检查客户健康"
+    }
+  ],
+  "tags": [
+    {
+      "en": "竞品锚定",
+      "zh": "竞品锚定"
+    },
+    {
+      "en": "价位习惯",
+      "zh": "价位习惯"
+    },
+    {
+      "en": "定期复核",
+      "zh": "定期复核"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pricing-review-team-lead",
+    "memberAgents": [
+      "pricing-review",
+      "meeting-note-struct",
+      "cs-health-score"
+    ]
+  },
+  "version": "1.0.0"
+}

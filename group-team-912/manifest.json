@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-912",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-912",
+    "kind": "team",
+    "name": "医疗行政数据专家",
+    "description": "输入医疗行政结构化相关需求，输出数据清洗、字段映射、信息萃取三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-02-team-lead",
+        "role": "lead",
+        "name": "医疗行政主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-02",
+        "role": "member",
+        "name": "医疗行政 结构化输出 批量处理",
+        "evidence": "original_assets/data-clean-pro-02/merkle_root",
+        "member_merkle_root": "e4fa4377b54cc93d3877dc8f53b2626e5b1092362f9372bc0f2d8bc8c57a0458"
+      },
+      {
+        "slug": "data-audit-pro",
+        "role": "member",
+        "name": "调研数据 清洗校验 分析报告",
+        "evidence": "original_assets/data-audit-pro/merkle_root",
+        "member_merkle_root": "b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3"
+      },
+      {
+        "slug": "api-debug-chain-pro",
+        "role": "member",
+        "name": "接口联调 鉴权核验 字段映射",
+        "evidence": "original_assets/api-debug-chain-pro/merkle_root",
+        "member_merkle_root": "3311dbb8e356611bf14d63bf804b0017523d0906a41514b3d0deeeb712360e9f"
+      }
+    ],
+    "team_lead": "data-clean-pro-02-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "25daec8c8ce1459a",
+  "prompt_hash": "dfa3282f588b12a1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-912\", \"kind\": \"team\", \"name\": \"医疗行政数据专家\", \"description\": \"输入医疗行政结构化相关需求，输出数据清洗、字段映射、信息萃取三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-02-team-lead\", \"role\": \"lead\", \"name\": \"医疗行政主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-02\", \"role\": \"member\", \"name\": \"医疗行政 结构化输出 批量处理\", \"evidence\": \"original_assets/data-clean-pro-02/merkle_root\", \"member_merkle_root\": \"e4fa4377b54cc93d3877dc8f53b2626e5b1092362f9372bc0f2d8bc8c57a0458\"}, {\"slug\": \"data-audit-pro\", \"role\": \"member\", \"name\": \"调研数据 清洗校验 分析报告\", \"evidence\": \"original_assets/data-audit-pro/merkle_root\", \"member_merkle_root\": \"b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3\"}, {\"slug\": \"api-debug-chain-pro\", \"role\": \"member\", \"name\": \"接口联调 鉴权核验 字段映射\", \"evidence\": \"original_assets/api-debug-chain-pro/merkle_root\", \"member_merkle_root\": \"3311dbb8e356611bf14d63bf804b0017523d0906a41514b3d0deeeb712360e9f\"}], \"team_lead\": \"data-clean-pro-02-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-debug-chain-pro.md": "8240fb84020e79962d2d827e9eb406cd0221488836e0a279247e4ba4a57d32a5",
+    "agents/data-audit-pro.md": "7e6d658213f1fbbe04c3d69b80ab091933b15fac154f8b081f71a29c1f28171a",
+    "agents/data-clean-pro-02-team-lead.md": "421fbea0ffff06acf1b5320c91f0d61736d334fcd5d50d3655ef56974a25b9c1",
+    "agents/data-clean-pro-02.md": "e81645ea7921c915a4a0ec9606066745bdf69227e5c437a06e7f2c0b30c59608",
+    "plugin.json": "1f9ed33faf1ff718b48663a49a3237d47a8f574fb34e0cf0f024808403b213ad",
+    "settings.json": "dbc9fb2dbac448bab04f324dade203e4368b0836f5e9938d8b9e5215635e2208"
+  }
+}

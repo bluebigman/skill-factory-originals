@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-sla-team-lead",
+  "agents": [
+    "./agents/data-pipeline-sla-team-lead.md",
+    "./agents/data-pipeline-sla.md",
+    "./agents/code-dev-pro.md",
+    "./agents/agent-data-boundary.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 管线时效",
+    "zh": "帮我处理管线时效"
+  },
+  "description": "data-pipeline-sla team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 管线时效, covers 水位监控 / 超时告警 / 分级承诺, delivering structured results and actionable checklists.",
+    "zh": "管线时效延迟监控专家：围绕管线时效，覆盖水位监控／超时告警／分级承诺，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "data-pipeline-sla Team",
+    "zh": "管线时效延迟监控专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-sla-team-lead",
+      "name": {
+        "en": "管线时效主理人",
+        "zh": "管线时效主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-sla.png",
+      "id": "data-pipeline-sla",
+      "name": {
+        "en": "data-pipeline-sla",
+        "zh": "管线时效 延迟监控 顾问"
+      },
+      "profession": {
+        "en": "data-pipeline-sla",
+        "zh": "管线时效 延迟监控 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-dev-pro.png",
+      "id": "code-dev-pro",
+      "name": {
+        "en": "Code Development Expert",
+        "zh": "代码开发 调试修复"
+      },
+      "profession": {
+        "en": "Code Development Expert",
+        "zh": "代码开发 调试修复"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-data-boundary.png",
+      "id": "agent-data-boundary",
+      "name": {
+        "en": "agent-data-boundary",
+        "zh": "数据边界 范围控制 顾问"
+      },
+      "profession": {
+        "en": "agent-data-boundary",
+        "zh": "数据边界 范围控制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-857",
+  "plugin": "group-team-857",
+  "profession": {
+    "en": "data-pipeline-sla Collaboration Team",
+    "zh": "管线时效延迟监控专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 管线时效",
+      "zh": "帮我处理管线时效"
+    },
+    {
+      "en": "Plan 代码开发",
+      "zh": "帮我规划代码开发"
+    },
+    {
+      "en": "Review 数据边界",
+      "zh": "帮我检查数据边界"
+    }
+  ],
+  "tags": [
+    {
+      "en": "超时告警",
+      "zh": "超时告警"
+    },
+    {
+      "en": "分级承诺",
+      "zh": "分级承诺"
+    },
+    {
+      "en": "瓶颈定位",
+      "zh": "瓶颈定位"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-sla-team-lead",
+    "memberAgents": [
+      "data-pipeline-sla",
+      "code-dev-pro",
+      "agent-data-boundary"
+    ]
+  },
+  "version": "1.0.0"
+}

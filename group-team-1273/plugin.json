@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-craft-pro-team-lead",
+  "agents": [
+    "./agents/doc-craft-pro-team-lead.md",
+    "./agents/doc-craft-pro.md",
+    "./agents/knowledge-base-pro-01-fixed.md",
+    "./agents/office-file-io.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档排版撰写专家",
+    "zh": "帮我处理文档排版撰写专家"
+  },
+  "description": "Document Craft Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers Office end-to-end: 格式先判, 结构保留 and 写完复核. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长格式先判、结构保留与写完复核，覆盖Office全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Document Craft Expert Team",
+    "zh": "文件读专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-craft-pro-team-lead",
+      "name": {
+        "en": "文档排版撰写专家主理人",
+        "zh": "文档排版撰写专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-craft-pro.png",
+      "id": "doc-craft-pro",
+      "name": {
+        "en": "Document Craft Expert",
+        "zh": "文档排版撰写专家"
+      },
+      "profession": {
+        "en": "Document Craft Expert",
+        "zh": "文档排版撰写专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01-fixed.png",
+      "id": "knowledge-base-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/office-file-io.png",
+      "id": "office-file-io",
+      "name": {
+        "en": "office-file-io",
+        "zh": "Office 文件读写 助手"
+      },
+      "profession": {
+        "en": "office-file-io",
+        "zh": "Office 文件读写 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1273",
+  "plugin": "group-team-1273",
+  "profession": {
+    "en": "Document Craft Expert Collaboration Team",
+    "zh": "文件读专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档排版撰写专家",
+      "zh": "帮我处理文档排版撰写专家"
+    },
+    {
+      "en": "Plan 项目记忆",
+      "zh": "帮我规划项目记忆"
+    },
+    {
+      "en": "Review Office",
+      "zh": "帮我检查Office"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档清洗",
+      "zh": "文档清洗"
+    },
+    {
+      "en": "内容重构",
+      "zh": "内容重构"
+    },
+    {
+      "en": "调研数据",
+      "zh": "调研数据"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-craft-pro-team-lead",
+    "memberAgents": [
+      "doc-craft-pro",
+      "knowledge-base-pro-01-fixed",
+      "office-file-io"
+    ]
+  },
+  "version": "1.0.0"
+}

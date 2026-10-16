@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-914",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-914",
+    "kind": "team",
+    "name": "内部沟通文案专家",
+    "description": "擅长受众先行、行动明确与语气一致，覆盖内部沟通文案全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "internal-comms-draft-team-lead",
+        "role": "lead",
+        "name": "内部沟通文案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "internal-comms-draft",
+        "role": "member",
+        "name": "内部沟通文案 助手",
+        "evidence": "original_assets/internal-comms-draft/merkle_root",
+        "member_merkle_root": "357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e"
+      },
+      {
+        "slug": "doc-convert-pro-fixed",
+        "role": "member",
+        "name": "图片标准化 隐私转换 格式转换",
+        "evidence": "original_assets/doc-convert-pro-fixed/merkle_root",
+        "member_merkle_root": "ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1"
+      },
+      {
+        "slug": "social-post-plan",
+        "role": "member",
+        "name": "社交内容排期 助手",
+        "evidence": "original_assets/social-post-plan/merkle_root",
+        "member_merkle_root": "7a99418f0791b1531f1e9922b4e6f4ffc1b95c570a56ac2b62b6d05cd74a1da6"
+      }
+    ],
+    "team_lead": "internal-comms-draft-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7b447a43cdfc8e59",
+  "prompt_hash": "21e63baa4c3ee7cb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-914\", \"kind\": \"team\", \"name\": \"内部沟通文案专家\", \"description\": \"擅长受众先行、行动明确与语气一致，覆盖内部沟通文案全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"internal-comms-draft-team-lead\", \"role\": \"lead\", \"name\": \"内部沟通文案主理人\", \"evidence\": null}, {\"slug\": \"internal-comms-draft\", \"role\": \"member\", \"name\": \"内部沟通文案 助手\", \"evidence\": \"original_assets/internal-comms-draft/merkle_root\", \"member_merkle_root\": \"357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e\"}, {\"slug\": \"doc-convert-pro-fixed\", \"role\": \"member\", \"name\": \"图片标准化 隐私转换 格式转换\", \"evidence\": \"original_assets/doc-convert-pro-fixed/merkle_root\", \"member_merkle_root\": \"ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1\"}, {\"slug\": \"social-post-plan\", \"role\": \"member\", \"name\": \"社交内容排期 助手\", \"evidence\": \"original_assets/social-post-plan/merkle_root\", \"member_merkle_root\": \"7a99418f0791b1531f1e9922b4e6f4ffc1b95c570a56ac2b62b6d05cd74a1da6\"}], \"team_lead\": \"internal-comms-draft-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-fixed.md": "8860acd10405c58980415561ab68decc77e2fbf4b9099c6fd979f6803e82beec",
+    "agents/internal-comms-draft-team-lead.md": "0e81b01612d8a01b2b8b39cf4b2981866c84c21085d6890b4624b43188941e8d",
+    "agents/internal-comms-draft.md": "458a7f04e0e2e9c1b05a468da14eb72a1f5021512f36e4b6d7d863c53eb47765",
+    "agents/social-post-plan.md": "87adea1b53abc985548599c8fdc4f22c21f23dbe25430fae6811e507e2a84e34",
+    "plugin.json": "eec765ec810d3d5ac346db50cbd4790f298af285a5523fcc953dafaa65a8c460",
+    "settings.json": "22f2036603c75e163b2e0386cdf2e406acaba3fd11d03670ca84d7bb6ca8250b"
+  }
+}

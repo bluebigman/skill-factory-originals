@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1126",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1126",
+    "kind": "team",
+    "name": "成本可见性专家",
+    "description": "擅长按维度拆、异常告警与责任到人，覆盖成本可见性全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "R包数据转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-pro-01-fixed",
+        "role": "member",
+        "name": "R包数据转换 批量整理",
+        "evidence": "original_assets/data-pipeline-pro-01-fixed/merkle_root",
+        "member_merkle_root": "6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237"
+      },
+      {
+        "slug": "cost-visibility",
+        "role": "member",
+        "name": "成本可见性 顾问",
+        "evidence": "original_assets/cost-visibility/merkle_root",
+        "member_merkle_root": "195ff4b466552286c6a68f74c0d3baf3cd0363035d9b4f080b0cc8b97b616203"
+      },
+      {
+        "slug": "data-dict-build",
+        "role": "member",
+        "name": "数据字典构建 助手",
+        "evidence": "original_assets/data-dict-build/merkle_root",
+        "member_merkle_root": "c15630acf9adec568ba079ca1c091736d02d2d344501d7b40479a0e554e2cb4b"
+      }
+    ],
+    "team_lead": "data-pipeline-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "41518ee7d7940afe",
+  "prompt_hash": "7195fe8887defa99",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1126\", \"kind\": \"team\", \"name\": \"成本可见性专家\", \"description\": \"擅长按维度拆、异常告警与责任到人，覆盖成本可见性全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"R包数据转换主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-pro-01-fixed\", \"role\": \"member\", \"name\": \"R包数据转换 批量整理\", \"evidence\": \"original_assets/data-pipeline-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237\"}, {\"slug\": \"cost-visibility\", \"role\": \"member\", \"name\": \"成本可见性 顾问\", \"evidence\": \"original_assets/cost-visibility/merkle_root\", \"member_merkle_root\": \"195ff4b466552286c6a68f74c0d3baf3cd0363035d9b4f080b0cc8b97b616203\"}, {\"slug\": \"data-dict-build\", \"role\": \"member\", \"name\": \"数据字典构建 助手\", \"evidence\": \"original_assets/data-dict-build/merkle_root\", \"member_merkle_root\": \"c15630acf9adec568ba079ca1c091736d02d2d344501d7b40479a0e554e2cb4b\"}], \"team_lead\": \"data-pipeline-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cost-visibility.md": "3465f633f4bacfd480c73bae4ccedaf6cd43992aa9e0e7a7db7e118cdb6ae9ea",
+    "agents/data-dict-build.md": "df2f4d7502a308cec7236ea6a55fe960ae9d50322b76364fc62b858364d5a537",
+    "agents/data-pipeline-pro-01-fixed-team-lead.md": "d3b7a3e6d52786b03b0e802800c4ccf60a50bf8a86e12728ee92074b2a35fc9b",
+    "agents/data-pipeline-pro-01-fixed.md": "e158c21203096078a4511319f1d8392098a7d0566036ea33a04786ea9c144c77",
+    "plugin.json": "0995083a52fdf66376873d2bc21a3daceb76019311fb1d9aa606534c94b43239",
+    "settings.json": "f56d8602761da03290a78b55110b1c6c8887dd3923b4d1d7236f7946016e4517"
+  }
+}

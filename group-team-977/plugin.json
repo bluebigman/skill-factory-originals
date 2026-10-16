@@ -1,0 +1,126 @@
+{
+  "agentName": "new-product-npi-pro-team-lead",
+  "agents": [
+    "./agents/new-product-npi-pro-team-lead.md",
+    "./agents/new-product-npi-pro.md",
+    "./agents/customer-advocacy.md",
+    "./agents/rollback-drill.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 新品导入",
+    "zh": "帮我处理新品导入"
+  },
+  "description": "new-product-npi-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 新品导入 end-to-end: 样件分级, 爬坡曲线 and 工艺固化. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长样件分级、爬坡曲线与工艺固化，覆盖新品导入全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "new-product-npi-pro Team",
+    "zh": "回滚演练顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "new-product-npi-pro-team-lead",
+      "name": {
+        "en": "新品导入主理人",
+        "zh": "新品导入主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/new-product-npi-pro.png",
+      "id": "new-product-npi-pro",
+      "name": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "profession": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/customer-advocacy.png",
+      "id": "customer-advocacy",
+      "name": {
+        "en": "customer-advocacy",
+        "zh": "客户推荐 培育路径 顾问"
+      },
+      "profession": {
+        "en": "customer-advocacy",
+        "zh": "客户推荐 培育路径 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/rollback-drill.png",
+      "id": "rollback-drill",
+      "name": {
+        "en": "rollback-drill",
+        "zh": "回滚演练 顾问"
+      },
+      "profession": {
+        "en": "rollback-drill",
+        "zh": "回滚演练 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-977",
+  "plugin": "group-team-977",
+  "profession": {
+    "en": "new-product-npi-pro Collaboration Team",
+    "zh": "回滚演练顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 新品导入",
+      "zh": "帮我处理新品导入"
+    },
+    {
+      "en": "Plan 客户推荐",
+      "zh": "帮我规划客户推荐"
+    },
+    {
+      "en": "Review 回滚演练",
+      "zh": "帮我检查回滚演练"
+    }
+  ],
+  "tags": [
+    {
+      "en": "阶段门评审",
+      "zh": "阶段门评审"
+    },
+    {
+      "en": "样件分级",
+      "zh": "样件分级"
+    },
+    {
+      "en": "爬坡曲线",
+      "zh": "爬坡曲线"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "new-product-npi-pro-team-lead",
+    "memberAgents": [
+      "new-product-npi-pro",
+      "customer-advocacy",
+      "rollback-drill"
+    ]
+  },
+  "version": "1.0.0"
+}

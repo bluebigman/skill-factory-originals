@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-state-manage-team-lead",
+  "agents": [
+    "./agents/agent-state-manage-team-lead.md",
+    "./agents/agent-state-manage.md",
+    "./agents/config-error-triage-expert.md",
+    "./agents/sql-toolkit-pro-03-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 状态管理",
+    "zh": "帮我处理状态管理"
+  },
+  "description": "agent-state-manage team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 状态管理 end-to-end: 状态落盘, 断点可续 and 幂等重入. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长状态落盘、断点可续与幂等重入，覆盖状态管理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-state-manage Team",
+    "zh": "状态管理断点续跑专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-state-manage-team-lead",
+      "name": {
+        "en": "状态管理主理人",
+        "zh": "状态管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-state-manage.png",
+      "id": "agent-state-manage",
+      "name": {
+        "en": "agent-state-manage",
+        "zh": "状态管理 断点续跑 顾问"
+      },
+      "profession": {
+        "en": "agent-state-manage",
+        "zh": "状态管理 断点续跑 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/config-error-triage-expert.png",
+      "id": "config-error-triage-expert",
+      "name": {
+        "en": "Config Error Triage Expert",
+        "zh": "配置排查 报错定位"
+      },
+      "profession": {
+        "en": "Config Error Triage Expert",
+        "zh": "配置排查 报错定位"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-03-fixed.png",
+      "id": "sql-toolkit-pro-03-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "数据转查询 自然语言转SQL"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-812",
+  "plugin": "group-team-812",
+  "profession": {
+    "en": "agent-state-manage Collaboration Team",
+    "zh": "状态管理断点续跑专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 状态管理",
+      "zh": "帮我处理状态管理"
+    },
+    {
+      "en": "Plan 配置排查",
+      "zh": "帮我规划配置排查"
+    },
+    {
+      "en": "Review 数据转查询",
+      "zh": "帮我检查数据转查询"
+    }
+  ],
+  "tags": [
+    {
+      "en": "状态落盘",
+      "zh": "状态落盘"
+    },
+    {
+      "en": "断点可续",
+      "zh": "断点可续"
+    },
+    {
+      "en": "幂等重入",
+      "zh": "幂等重入"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-state-manage-team-lead",
+    "memberAgents": [
+      "agent-state-manage",
+      "config-error-triage-expert",
+      "sql-toolkit-pro-03-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

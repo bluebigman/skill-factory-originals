@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1016",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1016",
+    "kind": "team",
+    "name": "进口检验专家",
+    "description": "进口检验专家：围绕进口检验，覆盖数据抽取／结构速读／指标解读，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "annual-report-expert-team-lead",
+        "role": "lead",
+        "name": "年报财报速读与数据整理专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "annual-report-expert",
+        "role": "member",
+        "name": "年报官",
+        "evidence": "original_assets/annual-report-expert/merkle_root",
+        "member_merkle_root": "f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2"
+      },
+      {
+        "slug": "import-inspection-pro",
+        "role": "member",
+        "name": "进口检验 标准对照 顾问",
+        "evidence": "original_assets/import-inspection-pro/merkle_root",
+        "member_merkle_root": "4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f"
+      },
+      {
+        "slug": "energy-consumption-pro",
+        "role": "member",
+        "name": "能耗管理 节能诊断 顾问",
+        "evidence": "original_assets/energy-consumption-pro/merkle_root",
+        "member_merkle_root": "6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719"
+      }
+    ],
+    "team_lead": "annual-report-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cd0aaad102dff472",
+  "prompt_hash": "368021dbf37c844b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1016\", \"kind\": \"team\", \"name\": \"进口检验专家\", \"description\": \"进口检验专家：围绕进口检验，覆盖数据抽取／结构速读／指标解读，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"annual-report-expert-team-lead\", \"role\": \"lead\", \"name\": \"年报财报速读与数据整理专家主理人\", \"evidence\": null}, {\"slug\": \"annual-report-expert\", \"role\": \"member\", \"name\": \"年报官\", \"evidence\": \"original_assets/annual-report-expert/merkle_root\", \"member_merkle_root\": \"f71eb6619d6b0b7e6736119d2f07098097041861d4f2413cf44a1f857ca4fbb2\"}, {\"slug\": \"import-inspection-pro\", \"role\": \"member\", \"name\": \"进口检验 标准对照 顾问\", \"evidence\": \"original_assets/import-inspection-pro/merkle_root\", \"member_merkle_root\": \"4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f\"}, {\"slug\": \"energy-consumption-pro\", \"role\": \"member\", \"name\": \"能耗管理 节能诊断 顾问\", \"evidence\": \"original_assets/energy-consumption-pro/merkle_root\", \"member_merkle_root\": \"6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719\"}], \"team_lead\": \"annual-report-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/annual-report-expert-team-lead.md": "222bb50656e5af838346ee244bfc61ed8a159a05709dfc9bb49fddcaab8d8a7b",
+    "agents/annual-report-expert.md": "ff3781debd33b442103314eb8ab45ed1fb4d9477a2c1906b8b68fc510126b53a",
+    "agents/energy-consumption-pro.md": "afd2344b7ecac9fb934521a6cdeb1d09708f1366026689bf0729c9b28eef95ef",
+    "agents/import-inspection-pro.md": "9883085bef8759b0c1d921feeb6b85ec6eabdc423b3f1079b29e2813405923fd",
+    "plugin.json": "4b5657a48c1a9f3998918f63507c9726804a777da6f10413afa52cc9336f3cf9",
+    "settings.json": "65a016e8eb01ca42447d9efa7b8d687090c4c1c18ea069ea622cb9bfc0e3e472"
+  }
+}

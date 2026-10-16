@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-900",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-900",
+    "kind": "team",
+    "name": "日志规范专家",
+    "description": "日志规范专家：围绕日志规范，覆盖分级明确／必含字段／敏感脱敏，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "log-standard-define-team-lead",
+        "role": "lead",
+        "name": "日志规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "log-standard-define",
+        "role": "member",
+        "name": "日志规范 制定",
+        "evidence": "original_assets/log-standard-define/merkle_root",
+        "member_merkle_root": "d0db9a571878ebf682ca131148552a08b9e059c46a2dfc2a3b76f816a9897bf6"
+      },
+      {
+        "slug": "file-ops-suite-pro",
+        "role": "member",
+        "name": "批量重命名 数据备份 文件整理",
+        "evidence": "original_assets/file-ops-suite-pro/merkle_root",
+        "member_merkle_root": "3ba919afd8f954e1daa25f8d7e6de7980b741effdfda34127af55d9cfef5119c"
+      },
+      {
+        "slug": "content-safety-review",
+        "role": "member",
+        "name": "内容安全审阅 顾问",
+        "evidence": "original_assets/content-safety-review/merkle_root",
+        "member_merkle_root": "e6726039c9717a158aaf866b0b69323ee8e556fcd1eb21d6a0fe758ab0714101"
+      }
+    ],
+    "team_lead": "log-standard-define-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "261eae601d58204c",
+  "prompt_hash": "a72ae4b163ce5b18",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-900\", \"kind\": \"team\", \"name\": \"日志规范专家\", \"description\": \"日志规范专家：围绕日志规范，覆盖分级明确／必含字段／敏感脱敏，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"log-standard-define-team-lead\", \"role\": \"lead\", \"name\": \"日志规范主理人\", \"evidence\": null}, {\"slug\": \"log-standard-define\", \"role\": \"member\", \"name\": \"日志规范 制定\", \"evidence\": \"original_assets/log-standard-define/merkle_root\", \"member_merkle_root\": \"d0db9a571878ebf682ca131148552a08b9e059c46a2dfc2a3b76f816a9897bf6\"}, {\"slug\": \"file-ops-suite-pro\", \"role\": \"member\", \"name\": \"批量重命名 数据备份 文件整理\", \"evidence\": \"original_assets/file-ops-suite-pro/merkle_root\", \"member_merkle_root\": \"3ba919afd8f954e1daa25f8d7e6de7980b741effdfda34127af55d9cfef5119c\"}, {\"slug\": \"content-safety-review\", \"role\": \"member\", \"name\": \"内容安全审阅 顾问\", \"evidence\": \"original_assets/content-safety-review/merkle_root\", \"member_merkle_root\": \"e6726039c9717a158aaf866b0b69323ee8e556fcd1eb21d6a0fe758ab0714101\"}], \"team_lead\": \"log-standard-define-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-safety-review.md": "85491078d11d043a09f1fcb17bcf6aabe5a19363d22a47196f0e8d5451acdfea",
+    "agents/file-ops-suite-pro.md": "b19e225dbbf118e540f0183329b50a6beddc70f1df6c27137a5d2f9101d52a22",
+    "agents/log-standard-define-team-lead.md": "d2e7a22df94d773f6bb2829eb3fe08b8e318022ca00348cd2992e37de8f57d29",
+    "agents/log-standard-define.md": "9b59a1c6122e3e6ac443e5e993f765ca085ca03f165a1481cf890146e210e778",
+    "plugin.json": "45b3437f5d1f49cc9fd73819e3005da138ec9a97dbb01b20d93c176d12925452",
+    "settings.json": "2e03546beffba3d3f8110ba9b7fb74f649cbf40fbe870b7a09aa526d11c2230b"
+  }
+}

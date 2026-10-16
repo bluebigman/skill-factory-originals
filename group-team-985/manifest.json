@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-985",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-985",
+    "kind": "team",
+    "name": "内部答疑整理专家",
+    "description": "擅长高频优先、答案可查与分类归档，覆盖内部答疑整理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "internal-qa-team-lead",
+        "role": "lead",
+        "name": "内部答疑整理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "internal-qa",
+        "role": "member",
+        "name": "内部答疑整理 助手",
+        "evidence": "original_assets/internal-qa/merkle_root",
+        "member_merkle_root": "b83421909336f7c68c0d4063e10b1c66b9b76a9e29eb8a207520ebc550e704ff"
+      },
+      {
+        "slug": "sop-compliance-check",
+        "role": "member",
+        "name": "流程合规 步骤核验 顾问",
+        "evidence": "original_assets/sop-compliance-check/merkle_root",
+        "member_merkle_root": "eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f"
+      },
+      {
+        "slug": "service-sla-pro",
+        "role": "member",
+        "name": "服务承诺 时效设计 顾问",
+        "evidence": "original_assets/service-sla-pro/merkle_root",
+        "member_merkle_root": "dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa"
+      }
+    ],
+    "team_lead": "internal-qa-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4458dd2c13013b43",
+  "prompt_hash": "84df8d1ba354213b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-985\", \"kind\": \"team\", \"name\": \"内部答疑整理专家\", \"description\": \"擅长高频优先、答案可查与分类归档，覆盖内部答疑整理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"internal-qa-team-lead\", \"role\": \"lead\", \"name\": \"内部答疑整理主理人\", \"evidence\": null}, {\"slug\": \"internal-qa\", \"role\": \"member\", \"name\": \"内部答疑整理 助手\", \"evidence\": \"original_assets/internal-qa/merkle_root\", \"member_merkle_root\": \"b83421909336f7c68c0d4063e10b1c66b9b76a9e29eb8a207520ebc550e704ff\"}, {\"slug\": \"sop-compliance-check\", \"role\": \"member\", \"name\": \"流程合规 步骤核验 顾问\", \"evidence\": \"original_assets/sop-compliance-check/merkle_root\", \"member_merkle_root\": \"eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f\"}, {\"slug\": \"service-sla-pro\", \"role\": \"member\", \"name\": \"服务承诺 时效设计 顾问\", \"evidence\": \"original_assets/service-sla-pro/merkle_root\", \"member_merkle_root\": \"dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa\"}], \"team_lead\": \"internal-qa-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/internal-qa-team-lead.md": "8d72df041d9931d8975d481e21680e9005484a1c0fcdfea2674e54606de16aa9",
+    "agents/internal-qa.md": "bc29b1506310dabf2daea92a4d19a78f63f63df92c5e376eee43347ef4f9f3f7",
+    "agents/service-sla-pro.md": "0949c9bb371317633b4b1ba8326ff3a1001c5c44bd42939944c9c399a203adc7",
+    "agents/sop-compliance-check.md": "707deec7889a40aa22e78fa956f483161c2fc44c38a3c40af5dc8aff474fcb58",
+    "plugin.json": "2d42524b27aef3dd5b0ca016e474e9c1664d29c24ff207da036112046274c226",
+    "settings.json": "1853e0731680940c0779a38465558d019aa99c42b8464900d5ba9d8d68cc60a1"
+  }
+}

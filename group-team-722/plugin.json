@@ -1,0 +1,126 @@
+{
+  "agentName": "crawl-file-pro-team-lead",
+  "agents": [
+    "./agents/crawl-file-pro-team-lead.md",
+    "./agents/crawl-file-pro.md",
+    "./agents/intl-talent-onboard.md",
+    "./agents/new-product-npi-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 文件采集",
+    "zh": "帮我处理文件采集"
+  },
+  "description": "Crawl File Organizer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 海外招聘 end-to-end: 合同合规, 口径明确 and 时区友好. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长合同合规、口径明确与时区友好，覆盖海外招聘全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Crawl File Organizer Team",
+    "zh": "文件采集素材整理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "crawl-file-pro-team-lead",
+      "name": {
+        "en": "文件采集主理人",
+        "zh": "文件采集主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/crawl-file-pro.png",
+      "id": "crawl-file-pro",
+      "name": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "profession": {
+        "en": "Crawl File Organizer",
+        "zh": "文件采集 素材整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-talent-onboard.png",
+      "id": "intl-talent-onboard",
+      "name": {
+        "en": "intl-talent-onboard",
+        "zh": "海外招聘 入职衔接 助手"
+      },
+      "profession": {
+        "en": "intl-talent-onboard",
+        "zh": "海外招聘 入职衔接 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/new-product-npi-pro.png",
+      "id": "new-product-npi-pro",
+      "name": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "profession": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-722",
+  "plugin": "group-team-722",
+  "profession": {
+    "en": "Crawl File Organizer Collaboration Team",
+    "zh": "文件采集素材整理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文件采集",
+      "zh": "帮我处理文件采集"
+    },
+    {
+      "en": "Plan 海外招聘",
+      "zh": "帮我规划海外招聘"
+    },
+    {
+      "en": "Review 新品导入",
+      "zh": "帮我检查新品导入"
+    }
+  ],
+  "tags": [
+    {
+      "en": "网页采集",
+      "zh": "网页采集"
+    },
+    {
+      "en": "数据提取",
+      "zh": "数据提取"
+    },
+    {
+      "en": "结构化处理",
+      "zh": "结构化处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "crawl-file-pro-team-lead",
+    "memberAgents": [
+      "crawl-file-pro",
+      "intl-talent-onboard",
+      "new-product-npi-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

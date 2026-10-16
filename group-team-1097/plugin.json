@@ -1,0 +1,126 @@
+{
+  "agentName": "build-cache-team-lead",
+  "agents": [
+    "./agents/build-cache-team-lead.md",
+    "./agents/build-cache.md",
+    "./agents/branch-protect.md",
+    "./agents/secure-code-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 构建缓存策略",
+    "zh": "帮我处理构建缓存策略"
+  },
+  "description": "build-cache team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 构建缓存策略, covers 内容哈希 / 失效策略 / 远程缓存, delivering structured results and actionable checklists.",
+    "zh": "构建缓存策略专家：围绕构建缓存策略，覆盖内容哈希／失效策略／远程缓存，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "build-cache Team",
+    "zh": "构建缓存策略专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "build-cache-team-lead",
+      "name": {
+        "en": "构建缓存策略主理人",
+        "zh": "构建缓存策略主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/build-cache.png",
+      "id": "build-cache",
+      "name": {
+        "en": "build-cache",
+        "zh": "构建缓存策略 顾问"
+      },
+      "profession": {
+        "en": "build-cache",
+        "zh": "构建缓存策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/branch-protect.png",
+      "id": "branch-protect",
+      "name": {
+        "en": "branch-protect",
+        "zh": "分支保护策略 顾问"
+      },
+      "profession": {
+        "en": "branch-protect",
+        "zh": "分支保护策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/secure-code-review.png",
+      "id": "secure-code-review",
+      "name": {
+        "en": "secure-code-review",
+        "zh": "安全编码评审 顾问"
+      },
+      "profession": {
+        "en": "secure-code-review",
+        "zh": "安全编码评审 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1097",
+  "plugin": "group-team-1097",
+  "profession": {
+    "en": "build-cache Collaboration Team",
+    "zh": "构建缓存策略专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 构建缓存策略",
+      "zh": "帮我处理构建缓存策略"
+    },
+    {
+      "en": "Plan 分支保护策略",
+      "zh": "帮我规划分支保护策略"
+    },
+    {
+      "en": "Review 安全编码评审",
+      "zh": "帮我检查安全编码评审"
+    }
+  ],
+  "tags": [
+    {
+      "en": "内容哈希",
+      "zh": "内容哈希"
+    },
+    {
+      "en": "失效策略",
+      "zh": "失效策略"
+    },
+    {
+      "en": "远程缓存",
+      "zh": "远程缓存"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "build-cache-team-lead",
+    "memberAgents": [
+      "build-cache",
+      "branch-protect",
+      "secure-code-review"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "meeting-note-struct-team-lead",
+  "agents": [
+    "./agents/meeting-note-struct-team-lead.md",
+    "./agents/meeting-note-struct.md",
+    "./agents/renewal-playbook.md",
+    "./agents/integration-test-env.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 会议纪要结构化",
+    "zh": "帮我处理会议纪要结构化"
+  },
+  "description": "meeting-note-struct team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 会议纪要结构化 end-to-end: 待办到人, 分歧留档 and 决策依据. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长待办到人、分歧留档与决策依据，覆盖会议纪要结构化全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "meeting-note-struct Team",
+    "zh": "会议纪要结构化专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "meeting-note-struct-team-lead",
+      "name": {
+        "en": "会议纪要结构化主理人",
+        "zh": "会议纪要结构化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/meeting-note-struct.png",
+      "id": "meeting-note-struct",
+      "name": {
+        "en": "meeting-note-struct",
+        "zh": "会议纪要结构化 助手"
+      },
+      "profession": {
+        "en": "meeting-note-struct",
+        "zh": "会议纪要结构化 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/renewal-playbook.png",
+      "id": "renewal-playbook",
+      "name": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "profession": {
+        "en": "renewal-playbook",
+        "zh": "续约管理 提前动作 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/integration-test-env.png",
+      "id": "integration-test-env",
+      "name": {
+        "en": "integration-test-env",
+        "zh": "集成测试环境 顾问"
+      },
+      "profession": {
+        "en": "integration-test-env",
+        "zh": "集成测试环境 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1078",
+  "plugin": "group-team-1078",
+  "profession": {
+    "en": "meeting-note-struct Collaboration Team",
+    "zh": "会议纪要结构化专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 会议纪要结构化",
+      "zh": "帮我处理会议纪要结构化"
+    },
+    {
+      "en": "Plan 续约管理",
+      "zh": "帮我规划续约管理"
+    },
+    {
+      "en": "Review 集成测试环境",
+      "zh": "帮我检查集成测试环境"
+    }
+  ],
+  "tags": [
+    {
+      "en": "待办到人",
+      "zh": "待办到人"
+    },
+    {
+      "en": "分歧留档",
+      "zh": "分歧留档"
+    },
+    {
+      "en": "决策依据",
+      "zh": "决策依据"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "meeting-note-struct-team-lead",
+    "memberAgents": [
+      "meeting-note-struct",
+      "renewal-playbook",
+      "integration-test-env"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "prd-write-coach-team-lead",
+  "agents": [
+    "./agents/prd-write-coach-team-lead.md",
+    "./agents/prd-write-coach.md",
+    "./agents/navigation-design.md",
+    "./agents/ar-vr-usability.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 需求文档撰写",
+    "zh": "帮我处理需求文档撰写"
+  },
+  "description": "prd-write-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 需求文档撰写, covers 验收可测 / 边界明确 / 依赖显式, delivering structured results and actionable checklists.",
+    "zh": "需求文档撰写专家：围绕需求文档撰写，覆盖验收可测／边界明确／依赖显式，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "prd-write-coach Team",
+    "zh": "需求文档撰写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "prd-write-coach-team-lead",
+      "name": {
+        "en": "需求文档撰写主理人",
+        "zh": "需求文档撰写主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/prd-write-coach.png",
+      "id": "prd-write-coach",
+      "name": {
+        "en": "prd-write-coach",
+        "zh": "需求文档撰写 顾问"
+      },
+      "profession": {
+        "en": "prd-write-coach",
+        "zh": "需求文档撰写 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/navigation-design.png",
+      "id": "navigation-design",
+      "name": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "profession": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ar-vr-usability.png",
+      "id": "ar-vr-usability",
+      "name": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "profession": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1100",
+  "plugin": "group-team-1100",
+  "profession": {
+    "en": "prd-write-coach Collaboration Team",
+    "zh": "需求文档撰写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 需求文档撰写",
+      "zh": "帮我处理需求文档撰写"
+    },
+    {
+      "en": "Plan 导航设计",
+      "zh": "帮我规划导航设计"
+    },
+    {
+      "en": "Review 沉浸体验",
+      "zh": "帮我检查沉浸体验"
+    }
+  ],
+  "tags": [
+    {
+      "en": "验收可测",
+      "zh": "验收可测"
+    },
+    {
+      "en": "边界明确",
+      "zh": "边界明确"
+    },
+    {
+      "en": "依赖显式",
+      "zh": "依赖显式"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "prd-write-coach-team-lead",
+    "memberAgents": [
+      "prd-write-coach",
+      "navigation-design",
+      "ar-vr-usability"
+    ]
+  },
+  "version": "1.0.0"
+}

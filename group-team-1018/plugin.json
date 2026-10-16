@@ -1,0 +1,126 @@
+{
+  "agentName": "intl-partner-screen-team-lead",
+  "agents": [
+    "./agents/intl-partner-screen-team-lead.md",
+    "./agents/intl-partner-screen.md",
+    "./agents/cs-health-score.md",
+    "./agents/requirement-trace-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 海外伙伴",
+    "zh": "帮我处理海外伙伴"
+  },
+  "description": "intl-partner-screen team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 海外伙伴 end-to-end: 资质核验, 案例验证 and 经营佐证. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长资质核验、案例验证与经营佐证，覆盖海外伙伴全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "intl-partner-screen Team",
+    "zh": "海外伙伴专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "intl-partner-screen-team-lead",
+      "name": {
+        "en": "海外伙伴主理人",
+        "zh": "海外伙伴主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/intl-partner-screen.png",
+      "id": "intl-partner-screen",
+      "name": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "profession": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cs-health-score.png",
+      "id": "cs-health-score",
+      "name": {
+        "en": "cs-health-score",
+        "zh": "客户健康 评分模型 顾问"
+      },
+      "profession": {
+        "en": "cs-health-score",
+        "zh": "客户健康 评分模型 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/requirement-trace-pro.png",
+      "id": "requirement-trace-pro",
+      "name": {
+        "en": "requirement-trace-pro",
+        "zh": "需求追踪 实现映射 顾问"
+      },
+      "profession": {
+        "en": "requirement-trace-pro",
+        "zh": "需求追踪 实现映射 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1018",
+  "plugin": "group-team-1018",
+  "profession": {
+    "en": "intl-partner-screen Collaboration Team",
+    "zh": "海外伙伴专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 海外伙伴",
+      "zh": "帮我处理海外伙伴"
+    },
+    {
+      "en": "Plan 客户健康",
+      "zh": "帮我规划客户健康"
+    },
+    {
+      "en": "Review 需求追踪",
+      "zh": "帮我检查需求追踪"
+    }
+  ],
+  "tags": [
+    {
+      "en": "资质核验",
+      "zh": "资质核验"
+    },
+    {
+      "en": "案例验证",
+      "zh": "案例验证"
+    },
+    {
+      "en": "经营佐证",
+      "zh": "经营佐证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "intl-partner-screen-team-lead",
+    "memberAgents": [
+      "intl-partner-screen",
+      "cs-health-score",
+      "requirement-trace-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

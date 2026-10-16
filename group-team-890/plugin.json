@@ -1,0 +1,126 @@
+{
+  "agentName": "ai-flavor-remove-team-lead",
+  "agents": [
+    "./agents/ai-flavor-remove-team-lead.md",
+    "./agents/ai-flavor-remove.md",
+    "./agents/global-content-calendar.md",
+    "./agents/note-life-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 去",
+    "zh": "帮我处理去"
+  },
+  "description": "ai-flavor-remove team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 去 requirements, output three deliverables: 语气自然, 保留信息, 节庆对齐. Verifiable end-to-end, evidence per step.",
+    "zh": "输入去相关需求，输出语气自然、保留信息、节庆对齐三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ai-flavor-remove Team",
+    "zh": "味改写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ai-flavor-remove-team-lead",
+      "name": {
+        "en": "去主理人",
+        "zh": "去主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ai-flavor-remove.png",
+      "id": "ai-flavor-remove",
+      "name": {
+        "en": "ai-flavor-remove",
+        "zh": "去 AI 味改写 助手"
+      },
+      "profession": {
+        "en": "ai-flavor-remove",
+        "zh": "去 AI 味改写 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-content-calendar.png",
+      "id": "global-content-calendar",
+      "name": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "profession": {
+        "en": "global-content-calendar",
+        "zh": "全球内容 排期协调 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/note-life-pro.png",
+      "id": "note-life-pro",
+      "name": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "profession": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-890",
+  "plugin": "group-team-890",
+  "profession": {
+    "en": "ai-flavor-remove Collaboration Team",
+    "zh": "味改写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 去",
+      "zh": "帮我处理去"
+    },
+    {
+      "en": "Plan 全球内容",
+      "zh": "帮我规划全球内容"
+    },
+    {
+      "en": "Review 笔记与生活助手",
+      "zh": "帮我检查笔记与生活助手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "拆长句",
+      "zh": "拆长句"
+    },
+    {
+      "en": "去套话",
+      "zh": "去套话"
+    },
+    {
+      "en": "具体化",
+      "zh": "具体化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ai-flavor-remove-team-lead",
+    "memberAgents": [
+      "ai-flavor-remove",
+      "global-content-calendar",
+      "note-life-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

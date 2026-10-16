@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-goal-decompose-pro-team-lead",
+  "agents": [
+    "./agents/agent-goal-decompose-pro-team-lead.md",
+    "./agents/agent-goal-decompose-pro.md",
+    "./agents/dashboard-spec-pro.md",
+    "./agents/api-contract-test.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 目标拆解",
+    "zh": "帮我处理目标拆解"
+  },
+  "description": "agent-goal-decompose-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 目标拆解, covers 粒度一致 / 依赖显式 / 最小可行, delivering structured results and actionable checklists.",
+    "zh": "目标拆解任务分解专家：围绕目标拆解，覆盖粒度一致／依赖显式／最小可行，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "agent-goal-decompose-pro Team",
+    "zh": "目标拆解任务分解专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-goal-decompose-pro-team-lead",
+      "name": {
+        "en": "目标拆解主理人",
+        "zh": "目标拆解主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-goal-decompose-pro.png",
+      "id": "agent-goal-decompose-pro",
+      "name": {
+        "en": "agent-goal-decompose-pro",
+        "zh": "目标拆解 任务分解 顾问"
+      },
+      "profession": {
+        "en": "agent-goal-decompose-pro",
+        "zh": "目标拆解 任务分解 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dashboard-spec-pro.png",
+      "id": "dashboard-spec-pro",
+      "name": {
+        "en": "dashboard-spec-pro",
+        "zh": "看板规格 指标选型 顾问"
+      },
+      "profession": {
+        "en": "dashboard-spec-pro",
+        "zh": "看板规格 指标选型 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-contract-test.png",
+      "id": "api-contract-test",
+      "name": {
+        "en": "api-contract-test",
+        "zh": "接口契约 兼容校验 顾问"
+      },
+      "profession": {
+        "en": "api-contract-test",
+        "zh": "接口契约 兼容校验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-778",
+  "plugin": "group-team-778",
+  "profession": {
+    "en": "agent-goal-decompose-pro Collaboration Team",
+    "zh": "目标拆解任务分解专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 目标拆解",
+      "zh": "帮我处理目标拆解"
+    },
+    {
+      "en": "Plan 看板规格",
+      "zh": "帮我规划看板规格"
+    },
+    {
+      "en": "Review 接口契约",
+      "zh": "帮我检查接口契约"
+    }
+  ],
+  "tags": [
+    {
+      "en": "粒度一致",
+      "zh": "粒度一致"
+    },
+    {
+      "en": "依赖显式",
+      "zh": "依赖显式"
+    },
+    {
+      "en": "最小可行",
+      "zh": "最小可行"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-goal-decompose-pro-team-lead",
+    "memberAgents": [
+      "agent-goal-decompose-pro",
+      "dashboard-spec-pro",
+      "api-contract-test"
+    ]
+  },
+  "version": "1.0.0"
+}

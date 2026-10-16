@@ -1,0 +1,126 @@
+{
+  "agentName": "resume-job-pro-team-lead",
+  "agents": [
+    "./agents/resume-job-pro-team-lead.md",
+    "./agents/resume-job-pro.md",
+    "./agents/calibration-manage-pro.md",
+    "./agents/life-plan-forge-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 简历优化",
+    "zh": "帮我处理简历优化"
+  },
+  "description": "Resume Job Assistant team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 计量器具, covers 台账齐全 / 周期强制 / 状态标识, delivering structured results and actionable checklists.",
+    "zh": "简历优化岗位匹配专家：围绕计量器具，覆盖台账齐全／周期强制／状态标识，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Resume Job Assistant Team",
+    "zh": "简历优化岗位匹配专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "resume-job-pro-team-lead",
+      "name": {
+        "en": "简历优化主理人",
+        "zh": "简历优化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/resume-job-pro.png",
+      "id": "resume-job-pro",
+      "name": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "profession": {
+        "en": "Resume Job Assistant",
+        "zh": "简历优化 岗位匹配 面试准备"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/calibration-manage-pro.png",
+      "id": "calibration-manage-pro",
+      "name": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "profession": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/life-plan-forge-expert.png",
+      "id": "life-plan-forge-expert",
+      "name": {
+        "en": "Life Plan Forge Expert",
+        "zh": "生活计划 出行饮食 清单生成"
+      },
+      "profession": {
+        "en": "Life Plan Forge Expert",
+        "zh": "生活计划 出行饮食 清单生成"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-719",
+  "plugin": "group-team-719",
+  "profession": {
+    "en": "Resume Job Assistant Collaboration Team",
+    "zh": "简历优化岗位匹配专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 简历优化",
+      "zh": "帮我处理简历优化"
+    },
+    {
+      "en": "Plan 计量器具",
+      "zh": "帮我规划计量器具"
+    },
+    {
+      "en": "Review 生活计划",
+      "zh": "帮我检查生活计划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "简历智造",
+      "zh": "简历智造"
+    },
+    {
+      "en": "求职优化",
+      "zh": "求职优化"
+    },
+    {
+      "en": "履历精修",
+      "zh": "履历精修"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "resume-job-pro-team-lead",
+    "memberAgents": [
+      "resume-job-pro",
+      "calibration-manage-pro",
+      "life-plan-forge-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

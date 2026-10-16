@@ -1,0 +1,126 @@
+{
+  "agentName": "dim-model-design-team-lead",
+  "agents": [
+    "./agents/dim-model-design-team-lead.md",
+    "./agents/dim-model-design.md",
+    "./agents/api-mock-pro.md",
+    "./agents/data-pipeline-pro-01-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 维度建模",
+    "zh": "帮我处理维度建模"
+  },
+  "description": "dim-model-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 维度建模 requirements, output three deliverables: 总线矩阵, 事实粒度, 缓慢变化. Verifiable end-to-end, evidence per step.",
+    "zh": "输入维度建模相关需求，输出总线矩阵、事实粒度、缓慢变化三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "dim-model-design Team",
+    "zh": "维度建模专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "dim-model-design-team-lead",
+      "name": {
+        "en": "维度建模主理人",
+        "zh": "维度建模主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/dim-model-design.png",
+      "id": "dim-model-design",
+      "name": {
+        "en": "dim-model-design",
+        "zh": "维度建模 事实维度 顾问"
+      },
+      "profession": {
+        "en": "dim-model-design",
+        "zh": "维度建模 事实维度 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-mock-pro.png",
+      "id": "api-mock-pro",
+      "name": {
+        "en": "API Mock and Replay Expert",
+        "zh": "接口模拟 联调编排 时序回放"
+      },
+      "profession": {
+        "en": "API Mock and Replay Expert",
+        "zh": "接口模拟 联调编排 时序回放"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro-01-fixed.png",
+      "id": "data-pipeline-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "R包数据转换 批量整理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-562",
+  "plugin": "group-team-562",
+  "profession": {
+    "en": "dim-model-design Collaboration Team",
+    "zh": "维度建模专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 维度建模",
+      "zh": "帮我处理维度建模"
+    },
+    {
+      "en": "Plan 接口模拟",
+      "zh": "帮我规划接口模拟"
+    },
+    {
+      "en": "Review R包数据转换",
+      "zh": "帮我检查R包数据转换"
+    }
+  ],
+  "tags": [
+    {
+      "en": "总线矩阵",
+      "zh": "总线矩阵"
+    },
+    {
+      "en": "事实粒度",
+      "zh": "事实粒度"
+    },
+    {
+      "en": "缓慢变化",
+      "zh": "缓慢变化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "dim-model-design-team-lead",
+    "memberAgents": [
+      "dim-model-design",
+      "api-mock-pro",
+      "data-pipeline-pro-01-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

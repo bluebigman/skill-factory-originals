@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-context-budget-team-lead",
+  "agents": [
+    "./agents/agent-context-budget-team-lead.md",
+    "./agents/agent-context-budget.md",
+    "./agents/data-archival-pro.md",
+    "./agents/table-merge-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 上下文预",
+    "zh": "帮我处理上下文预"
+  },
+  "description": "agent-context-budget team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "上下 数据 表格 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "agent-context-budget Team",
+    "zh": "上下 数据 表格 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-context-budget-team-lead",
+      "name": {
+        "en": "上下文预主理人",
+        "zh": "上下文预主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-context-budget.png",
+      "id": "agent-context-budget",
+      "name": {
+        "en": "agent-context-budget",
+        "zh": "上下文预 分配策略 顾问"
+      },
+      "profession": {
+        "en": "agent-context-budget",
+        "zh": "上下文预 分配策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-archival-pro.png",
+      "id": "data-archival-pro",
+      "name": {
+        "en": "data-archival-pro",
+        "zh": "数据归档 冷热分层 顾问"
+      },
+      "profession": {
+        "en": "data-archival-pro",
+        "zh": "数据归档 冷热分层 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/table-merge-pro.png",
+      "id": "table-merge-pro",
+      "name": {
+        "en": "table-merge-pro",
+        "zh": "表格合并 多表对齐 顾问"
+      },
+      "profession": {
+        "en": "table-merge-pro",
+        "zh": "表格合并 多表对齐 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-321",
+  "plugin": "group-team-321",
+  "profession": {
+    "en": "agent-context-budget Collaboration Team",
+    "zh": "上下 数据 表格 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 上下文预",
+      "zh": "帮我处理上下文预"
+    },
+    {
+      "en": "Plan 数据归档",
+      "zh": "帮我规划数据归档"
+    },
+    {
+      "en": "Review 表格合并",
+      "zh": "帮我检查表格合并"
+    }
+  ],
+  "tags": [
+    {
+      "en": "上下文预",
+      "zh": "上下文预"
+    },
+    {
+      "en": "数据归档",
+      "zh": "数据归档"
+    },
+    {
+      "en": "表格合并",
+      "zh": "表格合并"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-context-budget-team-lead",
+    "memberAgents": [
+      "agent-context-budget",
+      "data-archival-pro",
+      "table-merge-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

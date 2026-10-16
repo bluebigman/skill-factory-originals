@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-927",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-927",
+    "kind": "team",
+    "name": "仪表盘设计专家",
+    "description": "输入仪表盘设计相关需求，输出分层布局、对比基线、异常下钻三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "dashboard-design-team-lead",
+        "role": "lead",
+        "name": "仪表盘设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "dashboard-design",
+        "role": "member",
+        "name": "仪表盘设计 顾问",
+        "evidence": "original_assets/dashboard-design/merkle_root",
+        "member_merkle_root": "9bca776c16932f543f77eeb68071a50e9147d2d159d310ec25d05f05df5a5788"
+      },
+      {
+        "slug": "agent-skill-registry",
+        "role": "member",
+        "name": "技能注册 发现机制 顾问",
+        "evidence": "original_assets/agent-skill-registry/merkle_root",
+        "member_merkle_root": "3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee"
+      },
+      {
+        "slug": "agent-retry-policy",
+        "role": "member",
+        "name": "重试策略 分类处理 顾问",
+        "evidence": "original_assets/agent-retry-policy/merkle_root",
+        "member_merkle_root": "711d9a54a4a596c7c7ae9959b19a8d52d9414d6ee59ec569c3ae59768efb2d52"
+      }
+    ],
+    "team_lead": "dashboard-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a33bd7f98c5b016f",
+  "prompt_hash": "751d9b0b03578a94",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-927\", \"kind\": \"team\", \"name\": \"仪表盘设计专家\", \"description\": \"输入仪表盘设计相关需求，输出分层布局、对比基线、异常下钻三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"dashboard-design-team-lead\", \"role\": \"lead\", \"name\": \"仪表盘设计主理人\", \"evidence\": null}, {\"slug\": \"dashboard-design\", \"role\": \"member\", \"name\": \"仪表盘设计 顾问\", \"evidence\": \"original_assets/dashboard-design/merkle_root\", \"member_merkle_root\": \"9bca776c16932f543f77eeb68071a50e9147d2d159d310ec25d05f05df5a5788\"}, {\"slug\": \"agent-skill-registry\", \"role\": \"member\", \"name\": \"技能注册 发现机制 顾问\", \"evidence\": \"original_assets/agent-skill-registry/merkle_root\", \"member_merkle_root\": \"3c2a8c7efd3dffa192277715cd8c19f338864da34c00776bb0501a10777674ee\"}, {\"slug\": \"agent-retry-policy\", \"role\": \"member\", \"name\": \"重试策略 分类处理 顾问\", \"evidence\": \"original_assets/agent-retry-policy/merkle_root\", \"member_merkle_root\": \"711d9a54a4a596c7c7ae9959b19a8d52d9414d6ee59ec569c3ae59768efb2d52\"}], \"team_lead\": \"dashboard-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-retry-policy.md": "2b2885ee8697b70fc0d378e96978aff2de9d580f0f040fdc310533283eda15e1",
+    "agents/agent-skill-registry.md": "2fc78ffb5837780fd870e284b6007ad403e0d00ab9c48bf6fa213c90640b531f",
+    "agents/dashboard-design-team-lead.md": "26641210f07d092c17e431cd56499a443c87362c2371323a0d291f96c029851e",
+    "agents/dashboard-design.md": "310962148fceebf1a13151f082ae2c7fbda86018fc38a43833957e6c19180e9f",
+    "plugin.json": "148903d94bc0abde70a3e8bd499291367470ac4d4572c1ba1e61b09967279f70",
+    "settings.json": "d73db5bb88e518ff171e145dca77cc8f206c0d78d15224d0db295480e4baa033"
+  }
+}

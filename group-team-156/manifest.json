@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-156",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-156",
+    "kind": "team",
+    "name": "餐饮 物流 物料 团队",
+    "description": "餐饮 物流 物料 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "restaurant-diagnose-team-lead",
+        "role": "lead",
+        "name": "餐饮经营主理人",
+        "evidence": null
+      },
+      {
+        "slug": "restaurant-diagnose",
+        "role": "member",
+        "name": "餐饮经营 翻台率 顾问",
+        "evidence": "original_assets/restaurant-diagnose/merkle_root",
+        "member_merkle_root": "3d24ee63e0125550105effdc7218de70b62c4010dc241e0bb41f302d6c1e74cb"
+      },
+      {
+        "slug": "logistics-diagnose",
+        "role": "member",
+        "name": "物流运营 时效分析 顾问",
+        "evidence": "original_assets/logistics-diagnose/merkle_root",
+        "member_merkle_root": "2077c3dba4e768f1e799fe462c38ec87b27e9163ca4c15623f7a07282d4b2b57"
+      },
+      {
+        "slug": "mrp-param-tune-pro",
+        "role": "member",
+        "name": "物料计划 参数校准 顾问",
+        "evidence": "original_assets/mrp-param-tune-pro/merkle_root",
+        "member_merkle_root": "1681ea40c7a13a5c8b7813e37f557698981ff110abc0b5fd88334792b8bd7a3a"
+      }
+    ],
+    "team_lead": "restaurant-diagnose-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a51d972a904633f4",
+  "prompt_hash": "c510d048d20c180a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-156\", \"kind\": \"team\", \"name\": \"餐饮 物流 物料 团队\", \"description\": \"餐饮 物流 物料 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"restaurant-diagnose-team-lead\", \"role\": \"lead\", \"name\": \"餐饮经营主理人\", \"evidence\": null}, {\"slug\": \"restaurant-diagnose\", \"role\": \"member\", \"name\": \"餐饮经营 翻台率 顾问\", \"evidence\": \"original_assets/restaurant-diagnose/merkle_root\", \"member_merkle_root\": \"3d24ee63e0125550105effdc7218de70b62c4010dc241e0bb41f302d6c1e74cb\"}, {\"slug\": \"logistics-diagnose\", \"role\": \"member\", \"name\": \"物流运营 时效分析 顾问\", \"evidence\": \"original_assets/logistics-diagnose/merkle_root\", \"member_merkle_root\": \"2077c3dba4e768f1e799fe462c38ec87b27e9163ca4c15623f7a07282d4b2b57\"}, {\"slug\": \"mrp-param-tune-pro\", \"role\": \"member\", \"name\": \"物料计划 参数校准 顾问\", \"evidence\": \"original_assets/mrp-param-tune-pro/merkle_root\", \"member_merkle_root\": \"1681ea40c7a13a5c8b7813e37f557698981ff110abc0b5fd88334792b8bd7a3a\"}], \"team_lead\": \"restaurant-diagnose-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/logistics-diagnose.md": "5a31fefb40f101683d7b12e49d3664702e22c6168144a1d8139820a5751352dd",
+    "agents/mrp-param-tune-pro.md": "0fdcad3e38c4b58a1ce76326bee01f542f46471478ec0b2b9711327b4e3cbdd2",
+    "agents/restaurant-diagnose-team-lead.md": "6f4db1e4be36e88f32b5c204bd9c047028cdef1e80e6d64ebf50b5af657a44c5",
+    "agents/restaurant-diagnose.md": "46f4ce5ab0ef00e14b6f7c464bf6554cfdb3342f3bd272c53ba3f0ae9b68f35c",
+    "plugin.json": "9cbd2ee152227aed9da40112c8fad0c9e1945a0ffd6057fcb1b3f0c8140d8a79",
+    "settings.json": "ee2adf8360def575a85f66516c4bee3f71d81fa3a3b60d252d2b0973b4fd1ab1"
+  }
+}

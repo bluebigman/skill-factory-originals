@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-323",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-323",
+    "kind": "team",
+    "name": "观测看板专家",
+    "description": "观测看板专家：围绕观测看板，覆盖指标精简／层次分明／异常高亮，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-obs-dashboard-team-lead",
+        "role": "lead",
+        "name": "观测看板主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-obs-dashboard",
+        "role": "member",
+        "name": "观测看板 指标呈现 顾问",
+        "evidence": "original_assets/agent-obs-dashboard/merkle_root",
+        "member_merkle_root": "152f70bd1fac917b845d48a858e57c00feec909407cca69b549e0f8727b3dfb5"
+      },
+      {
+        "slug": "agent-schema-evolve",
+        "role": "member",
+        "name": "结构演进 兼容 顾问",
+        "evidence": "original_assets/agent-schema-evolve/merkle_root",
+        "member_merkle_root": "002d07583ffa1b05a6b8b54d7a2de2a2293250f6e85b3bb702b16f6151222b63"
+      },
+      {
+        "slug": "data-reconcile-pro",
+        "role": "member",
+        "name": "数据对账 差异定位 顾问",
+        "evidence": "original_assets/data-reconcile-pro/merkle_root",
+        "member_merkle_root": "eb00d862f27be49dceb10e647c2c73cfb947e0b363b4f153e73bc803bf840976"
+      }
+    ],
+    "team_lead": "agent-obs-dashboard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "79cff80047cf3d5e",
+  "prompt_hash": "4b7f7052dcc246bf",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-323\", \"kind\": \"team\", \"name\": \"观测看板专家\", \"description\": \"观测看板专家：围绕观测看板，覆盖指标精简／层次分明／异常高亮，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-obs-dashboard-team-lead\", \"role\": \"lead\", \"name\": \"观测看板主理人\", \"evidence\": null}, {\"slug\": \"agent-obs-dashboard\", \"role\": \"member\", \"name\": \"观测看板 指标呈现 顾问\", \"evidence\": \"original_assets/agent-obs-dashboard/merkle_root\", \"member_merkle_root\": \"152f70bd1fac917b845d48a858e57c00feec909407cca69b549e0f8727b3dfb5\"}, {\"slug\": \"agent-schema-evolve\", \"role\": \"member\", \"name\": \"结构演进 兼容 顾问\", \"evidence\": \"original_assets/agent-schema-evolve/merkle_root\", \"member_merkle_root\": \"002d07583ffa1b05a6b8b54d7a2de2a2293250f6e85b3bb702b16f6151222b63\"}, {\"slug\": \"data-reconcile-pro\", \"role\": \"member\", \"name\": \"数据对账 差异定位 顾问\", \"evidence\": \"original_assets/data-reconcile-pro/merkle_root\", \"member_merkle_root\": \"eb00d862f27be49dceb10e647c2c73cfb947e0b363b4f153e73bc803bf840976\"}], \"team_lead\": \"agent-obs-dashboard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-obs-dashboard-team-lead.md": "ca2161336e97b2230b834ffc0d58b8e2808c3501354fba9072159e2ef96027d2",
+    "agents/agent-obs-dashboard.md": "77c5efd9836306c7cfcfd1699c134862f85666a911bbb6da9dffed5471ab2008",
+    "agents/agent-schema-evolve.md": "4e1aa3129911e7a2ce80b60679bd51accb3d5310ab03528c17c8d8616432197e",
+    "agents/data-reconcile-pro.md": "df8c7657324e38cc896d8655db37db56bb7cfcb5a4e5c6c7be4df2bdf1965172",
+    "plugin.json": "4adba4ac577a3f486b44efd939b9fba8d3dcd6c8f66b3b5f294a098f86c5e5ca",
+    "settings.json": "3b0ce3ddb6489b5507c92fdcdc887e9ad000a60cadca15c9eb1d961daf632021"
+  }
+}

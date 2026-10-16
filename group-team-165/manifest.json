@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-165",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-165",
+    "kind": "team",
+    "name": "文件 项目 行动 团队",
+    "description": "文件 项目 行动 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "crawl-file-pro-team-lead",
+        "role": "lead",
+        "name": "文件采集主理人",
+        "evidence": null
+      },
+      {
+        "slug": "crawl-file-pro",
+        "role": "member",
+        "name": "文件采集 素材整理",
+        "evidence": "original_assets/crawl-file-pro/merkle_root",
+        "member_merkle_root": "df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f"
+      },
+      {
+        "slug": "project-manage-pro",
+        "role": "member",
+        "name": "项目任务管理 进度跟踪",
+        "evidence": "original_assets/project-manage-pro/merkle_root",
+        "member_merkle_root": "956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0"
+      },
+      {
+        "slug": "task-schedule-retro-ops-expert",
+        "role": "member",
+        "name": "行动项追踪 日程规划 周复盘",
+        "evidence": "original_assets/task-schedule-retro-ops-expert/merkle_root",
+        "member_merkle_root": "7c5b5261057a2a967565cfb499251e940ba4fef1631e024997991e4461aad202"
+      }
+    ],
+    "team_lead": "crawl-file-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cd7a340f4eae70e4",
+  "prompt_hash": "945db3d04cb34e63",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-165\", \"kind\": \"team\", \"name\": \"文件 项目 行动 团队\", \"description\": \"文件 项目 行动 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"crawl-file-pro-team-lead\", \"role\": \"lead\", \"name\": \"文件采集主理人\", \"evidence\": null}, {\"slug\": \"crawl-file-pro\", \"role\": \"member\", \"name\": \"文件采集 素材整理\", \"evidence\": \"original_assets/crawl-file-pro/merkle_root\", \"member_merkle_root\": \"df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f\"}, {\"slug\": \"project-manage-pro\", \"role\": \"member\", \"name\": \"项目任务管理 进度跟踪\", \"evidence\": \"original_assets/project-manage-pro/merkle_root\", \"member_merkle_root\": \"956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0\"}, {\"slug\": \"task-schedule-retro-ops-expert\", \"role\": \"member\", \"name\": \"行动项追踪 日程规划 周复盘\", \"evidence\": \"original_assets/task-schedule-retro-ops-expert/merkle_root\", \"member_merkle_root\": \"7c5b5261057a2a967565cfb499251e940ba4fef1631e024997991e4461aad202\"}], \"team_lead\": \"crawl-file-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crawl-file-pro-team-lead.md": "36071c1ba555c89d2b5ae0f4c04a37030755565755c3f5c06ef849f7c6d85fb8",
+    "agents/crawl-file-pro.md": "be614f92ba5e62b8c4861a3e60bc5a8e3250e49dadbde933c036dccb387edd45",
+    "agents/project-manage-pro.md": "2ecbb279bddae355b1caf38b04d02f53494d335c837a7e987bdb2568b60748e3",
+    "agents/task-schedule-retro-ops-expert.md": "f9287b12ef147c2d9d04b4686db9bfc78a3bcf6a681442071399a1e4f37009f4",
+    "plugin.json": "d0382addb35bf8f5f4a837f0e4abb035f3016da2fc8561c79fc8da93c4a1ba07",
+    "settings.json": "4562bc5785b8b2fe34e5b553830cc10580c75f3eb4a01e9ce8ed31159ad4ed25"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1224",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1224",
+    "kind": "team",
+    "name": "新闻稿撰写专家",
+    "description": "输入新闻稿撰写相关需求，输出倒金字塔、要素齐全、引语具体三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "press-release-draft-team-lead",
+        "role": "lead",
+        "name": "新闻稿撰写主理人",
+        "evidence": null
+      },
+      {
+        "slug": "press-release-draft",
+        "role": "member",
+        "name": "新闻稿撰写 助手",
+        "evidence": "original_assets/press-release-draft/merkle_root",
+        "member_merkle_root": "5ce4f9dfc6854094eced8f5898ec75dd71032a5cc0d1041f0559bba32b290222"
+      },
+      {
+        "slug": "report-outline-design",
+        "role": "member",
+        "name": "报告大纲设计 顾问",
+        "evidence": "original_assets/report-outline-design/merkle_root",
+        "member_merkle_root": "e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3"
+      },
+      {
+        "slug": "document-diff-pro",
+        "role": "member",
+        "name": "文档比对 版本差异 顾问",
+        "evidence": "original_assets/document-diff-pro/merkle_root",
+        "member_merkle_root": "489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935"
+      }
+    ],
+    "team_lead": "press-release-draft-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0cae9e19f58f21ed",
+  "prompt_hash": "903d687d1b6b18c1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1224\", \"kind\": \"team\", \"name\": \"新闻稿撰写专家\", \"description\": \"输入新闻稿撰写相关需求，输出倒金字塔、要素齐全、引语具体三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"press-release-draft-team-lead\", \"role\": \"lead\", \"name\": \"新闻稿撰写主理人\", \"evidence\": null}, {\"slug\": \"press-release-draft\", \"role\": \"member\", \"name\": \"新闻稿撰写 助手\", \"evidence\": \"original_assets/press-release-draft/merkle_root\", \"member_merkle_root\": \"5ce4f9dfc6854094eced8f5898ec75dd71032a5cc0d1041f0559bba32b290222\"}, {\"slug\": \"report-outline-design\", \"role\": \"member\", \"name\": \"报告大纲设计 顾问\", \"evidence\": \"original_assets/report-outline-design/merkle_root\", \"member_merkle_root\": \"e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3\"}, {\"slug\": \"document-diff-pro\", \"role\": \"member\", \"name\": \"文档比对 版本差异 顾问\", \"evidence\": \"original_assets/document-diff-pro/merkle_root\", \"member_merkle_root\": \"489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935\"}], \"team_lead\": \"press-release-draft-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/document-diff-pro.md": "821e3e38502a13655fffd8e65ce4e23a83f8fd1316e4c9195b46d9842b674ec6",
+    "agents/press-release-draft-team-lead.md": "760de3d60b3669dee1cb1833947047ffe49cfcd374bada898e361a9a838debab",
+    "agents/press-release-draft.md": "7885250c01a01cead815f0a7a7038648becceb5e5c0cfa192bdc1ccf9cce140d",
+    "agents/report-outline-design.md": "4a2694ecf9d90e337073a8c9422f069b9b4732717f7c6bdd32eb6485756a4f7a",
+    "plugin.json": "2fde46de9a81a18a52ebdb9e7a53cbd156e6d2ee431c14c8ff0a44676c0c6a71",
+    "settings.json": "3711bc5742cb1c580559ed500ca14d6a2e9661c54050cecfd82a31e015122449"
+  }
+}

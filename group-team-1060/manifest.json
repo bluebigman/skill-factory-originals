@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1060",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1060",
+    "kind": "team",
+    "name": "协议转换专家",
+    "description": "擅长粒度一致、依赖显式与最小可行，覆盖目标拆解全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-toolkit-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "协议转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-toolkit-pro-fixed",
+        "role": "member",
+        "name": "协议转换 REST",
+        "evidence": "original_assets/api-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23"
+      },
+      {
+        "slug": "agent-goal-decompose-pro",
+        "role": "member",
+        "name": "目标拆解 任务分解 顾问",
+        "evidence": "original_assets/agent-goal-decompose-pro/merkle_root",
+        "member_merkle_root": "2a94e4fff3d1c68ba146320ea36682ac910c685ea932b07f9c083b28726ace8c"
+      },
+      {
+        "slug": "cred-crypto-audit-pro",
+        "role": "member",
+        "name": "凭据与加密强度审计专家",
+        "evidence": "original_assets/cred-crypto-audit-pro/merkle_root",
+        "member_merkle_root": "c9ef475c94341153b34f2e61871a9d497bd53aa3e2f1ac33cfa04ad28466a580"
+      }
+    ],
+    "team_lead": "api-toolkit-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "92be5e6b1ba0a9c4",
+  "prompt_hash": "2002a7edbb2efc18",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1060\", \"kind\": \"team\", \"name\": \"协议转换专家\", \"description\": \"擅长粒度一致、依赖显式与最小可行，覆盖目标拆解全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-toolkit-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"协议转换主理人\", \"evidence\": null}, {\"slug\": \"api-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"协议转换 REST\", \"evidence\": \"original_assets/api-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23\"}, {\"slug\": \"agent-goal-decompose-pro\", \"role\": \"member\", \"name\": \"目标拆解 任务分解 顾问\", \"evidence\": \"original_assets/agent-goal-decompose-pro/merkle_root\", \"member_merkle_root\": \"2a94e4fff3d1c68ba146320ea36682ac910c685ea932b07f9c083b28726ace8c\"}, {\"slug\": \"cred-crypto-audit-pro\", \"role\": \"member\", \"name\": \"凭据与加密强度审计专家\", \"evidence\": \"original_assets/cred-crypto-audit-pro/merkle_root\", \"member_merkle_root\": \"c9ef475c94341153b34f2e61871a9d497bd53aa3e2f1ac33cfa04ad28466a580\"}], \"team_lead\": \"api-toolkit-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-goal-decompose-pro.md": "360c76d8d509ab511f8cad735263c498d3868905c844b3538a71d7807d2cdfa9",
+    "agents/api-toolkit-pro-fixed-team-lead.md": "1035cc59da8d7a71bcf0716d9d9397933a9d59e4746fb9a12c42e9a04ed8d05d",
+    "agents/api-toolkit-pro-fixed.md": "e0a3a900d41ca2530ac912aa73a750edc52e85a88cd7430a40f4a74a5a47c389",
+    "agents/cred-crypto-audit-pro.md": "53bb73cb87783cf935634e37bb9b7ea9c94b2b0d719d904ed3c63ffae9befd2f",
+    "plugin.json": "bd725166bf9d4a060addff2660a60df9de449470482f75bdbdd7f708d564e8e4",
+    "settings.json": "104664a438592cbcf009934b62dba910a2fc8d183e6b700af703eb10428a1e9b"
+  }
+}

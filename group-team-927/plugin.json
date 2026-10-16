@@ -1,0 +1,126 @@
+{
+  "agentName": "dashboard-design-team-lead",
+  "agents": [
+    "./agents/dashboard-design-team-lead.md",
+    "./agents/dashboard-design.md",
+    "./agents/agent-skill-registry.md",
+    "./agents/agent-retry-policy.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 仪表盘设计",
+    "zh": "帮我处理仪表盘设计"
+  },
+  "description": "dashboard-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 仪表盘设计 requirements, output three deliverables: 分层布局, 对比基线, 异常下钻. Verifiable end-to-end, evidence per step.",
+    "zh": "输入仪表盘设计相关需求，输出分层布局、对比基线、异常下钻三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "dashboard-design Team",
+    "zh": "仪表盘设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "dashboard-design-team-lead",
+      "name": {
+        "en": "仪表盘设计主理人",
+        "zh": "仪表盘设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/dashboard-design.png",
+      "id": "dashboard-design",
+      "name": {
+        "en": "dashboard-design",
+        "zh": "仪表盘设计 顾问"
+      },
+      "profession": {
+        "en": "dashboard-design",
+        "zh": "仪表盘设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-skill-registry.png",
+      "id": "agent-skill-registry",
+      "name": {
+        "en": "agent-skill-registry",
+        "zh": "技能注册 发现机制 顾问"
+      },
+      "profession": {
+        "en": "agent-skill-registry",
+        "zh": "技能注册 发现机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-retry-policy.png",
+      "id": "agent-retry-policy",
+      "name": {
+        "en": "agent-retry-policy",
+        "zh": "重试策略 分类处理 顾问"
+      },
+      "profession": {
+        "en": "agent-retry-policy",
+        "zh": "重试策略 分类处理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-927",
+  "plugin": "group-team-927",
+  "profession": {
+    "en": "dashboard-design Collaboration Team",
+    "zh": "仪表盘设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 仪表盘设计",
+      "zh": "帮我处理仪表盘设计"
+    },
+    {
+      "en": "Plan 技能注册",
+      "zh": "帮我规划技能注册"
+    },
+    {
+      "en": "Review 重试策略",
+      "zh": "帮我检查重试策略"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分层布局",
+      "zh": "分层布局"
+    },
+    {
+      "en": "对比基线",
+      "zh": "对比基线"
+    },
+    {
+      "en": "异常下钻",
+      "zh": "异常下钻"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "dashboard-design-team-lead",
+    "memberAgents": [
+      "dashboard-design",
+      "agent-skill-registry",
+      "agent-retry-policy"
+    ]
+  },
+  "version": "1.0.0"
+}

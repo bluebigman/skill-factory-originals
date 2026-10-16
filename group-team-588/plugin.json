@@ -1,0 +1,126 @@
+{
+  "agentName": "wechat-content-expert-team-lead",
+  "agents": [
+    "./agents/wechat-content-expert-team-lead.md",
+    "./agents/wechat-content-expert.md",
+    "./agents/community-grow-pro.md",
+    "./agents/content-design-system.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 号手",
+    "zh": "帮我处理号手"
+  },
+  "description": "WechatPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 社群运营 end-to-end: 排版规范, 规则置顶 and 角色分工. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长排版规范、规则置顶与角色分工，覆盖社群运营全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "WechatPro Team",
+    "zh": "号手公众号排版专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "wechat-content-expert-team-lead",
+      "name": {
+        "en": "号手主理人",
+        "zh": "号手主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/wechat-content-expert.png",
+      "id": "wechat-content-expert",
+      "name": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "profession": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/community-grow-pro.png",
+      "id": "community-grow-pro",
+      "name": {
+        "en": "community-grow-pro",
+        "zh": "社群运营 活跃机制 顾问"
+      },
+      "profession": {
+        "en": "community-grow-pro",
+        "zh": "社群运营 活跃机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-design-system.png",
+      "id": "content-design-system",
+      "name": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "profession": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-588",
+  "plugin": "group-team-588",
+  "profession": {
+    "en": "WechatPro Collaboration Team",
+    "zh": "号手公众号排版专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 号手",
+      "zh": "帮我处理号手"
+    },
+    {
+      "en": "Plan 社群运营",
+      "zh": "帮我规划社群运营"
+    },
+    {
+      "en": "Review 内容设计",
+      "zh": "帮我检查内容设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "排版规范",
+      "zh": "排版规范"
+    },
+    {
+      "en": "已有文章处理",
+      "zh": "已有文章处理"
+    },
+    {
+      "en": "规则置顶",
+      "zh": "规则置顶"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "wechat-content-expert-team-lead",
+    "memberAgents": [
+      "wechat-content-expert",
+      "community-grow-pro",
+      "content-design-system"
+    ]
+  },
+  "version": "1.0.0"
+}

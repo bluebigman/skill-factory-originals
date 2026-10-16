@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-200",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-200",
+    "kind": "team",
+    "name": "路由 部署 任务 团队",
+    "description": "路由 部署 任务 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "code-assist-pro-02-fixed-team-lead",
+        "role": "lead",
+        "name": "Web路由设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "code-assist-pro-02-fixed",
+        "role": "member",
+        "name": "Web路由设计 任务拆解",
+        "evidence": "original_assets/code-assist-pro-02-fixed/merkle_root",
+        "member_merkle_root": "7ab622ff4b637eef17527f88b83279f9c114faa6652303da183f6d700f39aae9"
+      },
+      {
+        "slug": "ops-deploy-pro-01-fixed",
+        "role": "member",
+        "name": "部署配置",
+        "evidence": "original_assets/ops-deploy-pro-01-fixed/merkle_root",
+        "member_merkle_root": "d5d618a9e0573a7134bb3dffb8139c5f364f0aaf548b35ca4b185ae8d1a57f02"
+      },
+      {
+        "slug": "toolkit-pro-02-fixed",
+        "role": "member",
+        "name": "任务治理 PR评审效能洞察",
+        "evidence": "original_assets/toolkit-pro-02-fixed/merkle_root",
+        "member_merkle_root": "681548b3f533faf77826f40c82ab56d9aba9052d96a81042923cc7d7dd735462"
+      }
+    ],
+    "team_lead": "code-assist-pro-02-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b094978d85219e3b",
+  "prompt_hash": "94dd2a10c9a45c8b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-200\", \"kind\": \"team\", \"name\": \"路由 部署 任务 团队\", \"description\": \"路由 部署 任务 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"code-assist-pro-02-fixed-team-lead\", \"role\": \"lead\", \"name\": \"Web路由设计主理人\", \"evidence\": null}, {\"slug\": \"code-assist-pro-02-fixed\", \"role\": \"member\", \"name\": \"Web路由设计 任务拆解\", \"evidence\": \"original_assets/code-assist-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"7ab622ff4b637eef17527f88b83279f9c114faa6652303da183f6d700f39aae9\"}, {\"slug\": \"ops-deploy-pro-01-fixed\", \"role\": \"member\", \"name\": \"部署配置\", \"evidence\": \"original_assets/ops-deploy-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"d5d618a9e0573a7134bb3dffb8139c5f364f0aaf548b35ca4b185ae8d1a57f02\"}, {\"slug\": \"toolkit-pro-02-fixed\", \"role\": \"member\", \"name\": \"任务治理 PR评审效能洞察\", \"evidence\": \"original_assets/toolkit-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"681548b3f533faf77826f40c82ab56d9aba9052d96a81042923cc7d7dd735462\"}], \"team_lead\": \"code-assist-pro-02-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-assist-pro-02-fixed-team-lead.md": "2f867d3d875c9448e7895e9575b6888809be3bcd3b73451b72a9b47d97d70f54",
+    "agents/code-assist-pro-02-fixed.md": "fe9bd7047fd3204868b27f19f47a621f32942a9652348d77e6156091e6d49e9f",
+    "agents/ops-deploy-pro-01-fixed.md": "03e443ef0b1498210daf9b9195d92566e53cbd59227e4902684a09b8f36149e4",
+    "agents/toolkit-pro-02-fixed.md": "a14364d4e505a4beac8330fecf1733057d68764c91874ab47b227e2af1eccc38",
+    "plugin.json": "1ffa7fffd8b0d00301b9b8db656de295056172cd8d7b14067fbf7e166c0ba734",
+    "settings.json": "7be2b8156ce2484dd49251ba481aa79ae22f789948cb57389d6b03d6e1e73900"
+  }
+}

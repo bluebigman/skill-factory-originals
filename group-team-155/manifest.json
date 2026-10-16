@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-155",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-155",
+    "kind": "team",
+    "name": "搬家 文件 简历 团队",
+    "description": "搬家 文件 简历 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "home-moving-checklist-team-lead",
+        "role": "lead",
+        "name": "搬家准备主理人",
+        "evidence": null
+      },
+      {
+        "slug": "home-moving-checklist",
+        "role": "member",
+        "name": "搬家准备 打包整理 安顿",
+        "evidence": "original_assets/home-moving-checklist/merkle_root",
+        "member_merkle_root": "f05302a578935d81acfd9e458caa5e8e7db38e838bbfa88e26b15242108370b7"
+      },
+      {
+        "slug": "file-rename-batch",
+        "role": "member",
+        "name": "文件批量 重命名 助手",
+        "evidence": "original_assets/file-rename-batch/merkle_root",
+        "member_merkle_root": "b9be3e0ac1b7189e722ccc30ae8e5050ec774d0d69e1434a57a7c123d17a4705"
+      },
+      {
+        "slug": "resume-job-pro",
+        "role": "member",
+        "name": "简历优化 岗位匹配 面试准备",
+        "evidence": "original_assets/resume-job-pro/merkle_root",
+        "member_merkle_root": "66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b"
+      }
+    ],
+    "team_lead": "home-moving-checklist-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8c394a52352ea17f",
+  "prompt_hash": "cdd8b6d8e546649f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-155\", \"kind\": \"team\", \"name\": \"搬家 文件 简历 团队\", \"description\": \"搬家 文件 简历 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"home-moving-checklist-team-lead\", \"role\": \"lead\", \"name\": \"搬家准备主理人\", \"evidence\": null}, {\"slug\": \"home-moving-checklist\", \"role\": \"member\", \"name\": \"搬家准备 打包整理 安顿\", \"evidence\": \"original_assets/home-moving-checklist/merkle_root\", \"member_merkle_root\": \"f05302a578935d81acfd9e458caa5e8e7db38e838bbfa88e26b15242108370b7\"}, {\"slug\": \"file-rename-batch\", \"role\": \"member\", \"name\": \"文件批量 重命名 助手\", \"evidence\": \"original_assets/file-rename-batch/merkle_root\", \"member_merkle_root\": \"b9be3e0ac1b7189e722ccc30ae8e5050ec774d0d69e1434a57a7c123d17a4705\"}, {\"slug\": \"resume-job-pro\", \"role\": \"member\", \"name\": \"简历优化 岗位匹配 面试准备\", \"evidence\": \"original_assets/resume-job-pro/merkle_root\", \"member_merkle_root\": \"66a15b4e4ad3d702afffd4fa05a38f139a78123c9695ed85c9f74f654a04799b\"}], \"team_lead\": \"home-moving-checklist-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/file-rename-batch.md": "e5600ecc9a27067d8c8ec17c0be68d1b872d3539e2e372cea64a8eb8054e780b",
+    "agents/home-moving-checklist-team-lead.md": "bcfaf1475905cd9bdf3b9aa8fe1b0a1be9de7b69f07ea550c937d6b069140e1a",
+    "agents/home-moving-checklist.md": "69d95d039fa50c42c6706fe6b178f6ee827b94487ea1d1eef3695ee1126bf427",
+    "agents/resume-job-pro.md": "5214b9258e45e3766b0225ba9778b1739e431e20350a6562bdc291a8700ace5a",
+    "plugin.json": "61499298990990b828058d4a43801ee47f06a26f4bc0a785ec0ccce7200d5b1c",
+    "settings.json": "a8b69abb834b93e9444c6cba25f8a7f28f11470e7312f748a90edfdb7717946a"
+  }
+}

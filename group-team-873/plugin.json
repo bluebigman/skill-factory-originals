@@ -1,0 +1,126 @@
+{
+  "agentName": "global-brand-tone-team-lead",
+  "agents": [
+    "./agents/global-brand-tone-team-lead.md",
+    "./agents/global-brand-tone.md",
+    "./agents/knowledge-base-pro-01-fixed.md",
+    "./agents/community-ops.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 品牌出海",
+    "zh": "帮我处理品牌出海"
+  },
+  "description": "global-brand-tone team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 品牌出海, covers 语气指南 / 双语对齐 / 拒绝直译, delivering structured results and actionable checklists.",
+    "zh": "社群运营顾问专家：围绕品牌出海，覆盖语气指南／双语对齐／拒绝直译，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "global-brand-tone Team",
+    "zh": "社群运营顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "global-brand-tone-team-lead",
+      "name": {
+        "en": "品牌出海主理人",
+        "zh": "品牌出海主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/global-brand-tone.png",
+      "id": "global-brand-tone",
+      "name": {
+        "en": "global-brand-tone",
+        "zh": "品牌出海 语气统一 顾问"
+      },
+      "profession": {
+        "en": "global-brand-tone",
+        "zh": "品牌出海 语气统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01-fixed.png",
+      "id": "knowledge-base-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/community-ops.png",
+      "id": "community-ops",
+      "name": {
+        "en": "community-ops",
+        "zh": "社群运营 顾问"
+      },
+      "profession": {
+        "en": "community-ops",
+        "zh": "社群运营 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-873",
+  "plugin": "group-team-873",
+  "profession": {
+    "en": "global-brand-tone Collaboration Team",
+    "zh": "社群运营顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 品牌出海",
+      "zh": "帮我处理品牌出海"
+    },
+    {
+      "en": "Plan 项目记忆",
+      "zh": "帮我规划项目记忆"
+    },
+    {
+      "en": "Review 社群运营",
+      "zh": "帮我检查社群运营"
+    }
+  ],
+  "tags": [
+    {
+      "en": "双语对齐",
+      "zh": "双语对齐"
+    },
+    {
+      "en": "拒绝直译",
+      "zh": "拒绝直译"
+    },
+    {
+      "en": "禁用词库",
+      "zh": "禁用词库"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "global-brand-tone-team-lead",
+    "memberAgents": [
+      "global-brand-tone",
+      "knowledge-base-pro-01-fixed",
+      "community-ops"
+    ]
+  },
+  "version": "1.0.0"
+}

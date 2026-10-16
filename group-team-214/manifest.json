@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-214",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-214",
+    "kind": "team",
+    "name": "数据 库转 关系 转查询 团队",
+    "description": "数据 库转 关系 转查询 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-toolkit-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "SQL转TS主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-toolkit-pro-01-fixed",
+        "role": "member",
+        "name": "SQL转TS 自然语言转命令",
+        "evidence": "original_assets/sql-toolkit-pro-01-fixed/merkle_root",
+        "member_merkle_root": "228507b3057d38b0ab1cdde107c875bde51f55e4e23f57ce8728121c95e512f0"
+      },
+      {
+        "slug": "sql-toolkit-pro-fixed",
+        "role": "member",
+        "name": "关系查询 HEC 方言适配",
+        "evidence": "original_assets/sql-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999"
+      },
+      {
+        "slug": "sql-toolkit-pro-03",
+        "role": "member",
+        "name": "数据转查询 自然语言转SQL",
+        "evidence": "original_assets/sql-toolkit-pro-03/merkle_root",
+        "member_merkle_root": "1cc6418e9b57c9cca35c22cb838ab55b40cc4db6c1920debb58b32682f2fb118"
+      }
+    ],
+    "team_lead": "sql-toolkit-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1637d38562371527",
+  "prompt_hash": "4201efc599719970",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-214\", \"kind\": \"team\", \"name\": \"数据 库转 关系 转查询 团队\", \"description\": \"数据 库转 关系 转查询 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-toolkit-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"SQL转TS主理人\", \"evidence\": null}, {\"slug\": \"sql-toolkit-pro-01-fixed\", \"role\": \"member\", \"name\": \"SQL转TS 自然语言转命令\", \"evidence\": \"original_assets/sql-toolkit-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"228507b3057d38b0ab1cdde107c875bde51f55e4e23f57ce8728121c95e512f0\"}, {\"slug\": \"sql-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"关系查询 HEC 方言适配\", \"evidence\": \"original_assets/sql-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"bee2b95d705dc5b0d5bd13bddac6ed657f7fc954dedfafa43a8c79029d776999\"}, {\"slug\": \"sql-toolkit-pro-03\", \"role\": \"member\", \"name\": \"数据转查询 自然语言转SQL\", \"evidence\": \"original_assets/sql-toolkit-pro-03/merkle_root\", \"member_merkle_root\": \"1cc6418e9b57c9cca35c22cb838ab55b40cc4db6c1920debb58b32682f2fb118\"}], \"team_lead\": \"sql-toolkit-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/sql-toolkit-pro-01-fixed-team-lead.md": "e16b528b34554b37116a6894e8e2e91d874482d67b7ca8b38ee3399d22a4798c",
+    "agents/sql-toolkit-pro-01-fixed.md": "0c476c99402a81a8265697abff81ff9257a1d6e3b9f6b1871b1a9e0934290c04",
+    "agents/sql-toolkit-pro-03.md": "66eb9ae4bcc17669f0f580214429ec386f1708c4263df6358b8a9956859999fc",
+    "agents/sql-toolkit-pro-fixed.md": "a81da6b51705955ed70fd309f8916ca64b3be76d727379006cd227efbd14ead5",
+    "plugin.json": "92984e12426d7fd43400c42fa6b4dee0b503fe95a0c0c1f70f519fb2e17ed93d",
+    "settings.json": "317d81fee62d3339d6040e6679e5513edac2832d1947bf5c730e20852d42818e"
+  }
+}

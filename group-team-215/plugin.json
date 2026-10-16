@@ -1,0 +1,126 @@
+{
+  "agentName": "compose-ops-pro-team-lead",
+  "agents": [
+    "./agents/compose-ops-pro-team-lead.md",
+    "./agents/compose-ops-pro.md",
+    "./agents/cli-env-bench-expert.md",
+    "./agents/dep-license-audit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 容器配置",
+    "zh": "帮我处理容器配置"
+  },
+  "description": "Compose Ops Verifier team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "容器 命令行 依赖 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "Compose Ops Verifier Team",
+    "zh": "容器 命令行 依赖 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "compose-ops-pro-team-lead",
+      "name": {
+        "en": "容器配置主理人",
+        "zh": "容器配置主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/compose-ops-pro.png",
+      "id": "compose-ops-pro",
+      "name": {
+        "en": "Compose Ops Verifier",
+        "zh": "容器配置 语法核验 差异提醒"
+      },
+      "profession": {
+        "en": "Compose Ops Verifier",
+        "zh": "容器配置 语法核验 差异提醒"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cli-env-bench-expert.png",
+      "id": "cli-env-bench-expert",
+      "name": {
+        "en": "CLI Env Bench Expert",
+        "zh": "命令行 环境检测 性能基准"
+      },
+      "profession": {
+        "en": "CLI Env Bench Expert",
+        "zh": "命令行 环境检测 性能基准"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dep-license-audit-pro.png",
+      "id": "dep-license-audit-pro",
+      "name": {
+        "en": "Dependency and License Compliance Auditor",
+        "zh": "依赖清单 许可证 合规检查"
+      },
+      "profession": {
+        "en": "Dependency and License Compliance Auditor",
+        "zh": "依赖清单 许可证 合规检查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-215",
+  "plugin": "group-team-215",
+  "profession": {
+    "en": "Compose Ops Verifier Collaboration Team",
+    "zh": "容器 命令行 依赖 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 容器配置",
+      "zh": "帮我处理容器配置"
+    },
+    {
+      "en": "Plan 命令行",
+      "zh": "帮我规划命令行"
+    },
+    {
+      "en": "Review 依赖清单",
+      "zh": "帮我检查依赖清单"
+    }
+  ],
+  "tags": [
+    {
+      "en": "容器配置",
+      "zh": "容器配置"
+    },
+    {
+      "en": "命令行",
+      "zh": "命令行"
+    },
+    {
+      "en": "依赖清单",
+      "zh": "依赖清单"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "compose-ops-pro-team-lead",
+    "memberAgents": [
+      "compose-ops-pro",
+      "cli-env-bench-expert",
+      "dep-license-audit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "cfg-structure-hygiene-expert-team-lead",
+  "agents": [
+    "./agents/cfg-structure-hygiene-expert-team-lead.md",
+    "./agents/cfg-structure-hygiene-expert.md",
+    "./agents/code-assist-pro-01-fixed.md",
+    "./agents/toolkit-pro-04.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 配置校验",
+    "zh": "帮我处理配置校验"
+  },
+  "description": "Config Structure Hygiene Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "配置 批量 数据 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Config Structure Hygiene Expert Team",
+    "zh": "配置 批量 数据 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "cfg-structure-hygiene-expert-team-lead",
+      "name": {
+        "en": "配置校验主理人",
+        "zh": "配置校验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/cfg-structure-hygiene-expert.png",
+      "id": "cfg-structure-hygiene-expert",
+      "name": {
+        "en": "Config Structure Hygiene Expert",
+        "zh": "配置校验 层级 多行 时间核验"
+      },
+      "profession": {
+        "en": "Config Structure Hygiene Expert",
+        "zh": "配置校验 层级 多行 时间核验"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-01-fixed.png",
+      "id": "code-assist-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "Rails 批量造数 快捷生成"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "Rails 批量造数 快捷生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-04.png",
+      "id": "toolkit-pro-04",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "数据整理 清洗转换 批量模板"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "数据整理 清洗转换 批量模板"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-172",
+  "plugin": "group-team-172",
+  "profession": {
+    "en": "Config Structure Hygiene Expert Collaboration Team",
+    "zh": "配置 批量 数据 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 配置校验",
+      "zh": "帮我处理配置校验"
+    },
+    {
+      "en": "Plan Rails",
+      "zh": "帮我规划Rails"
+    },
+    {
+      "en": "Review 数据整理",
+      "zh": "帮我检查数据整理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "配置校验",
+      "zh": "配置校验"
+    },
+    {
+      "en": "Rails",
+      "zh": "Rails"
+    },
+    {
+      "en": "数据整理",
+      "zh": "数据整理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "cfg-structure-hygiene-expert-team-lead",
+    "memberAgents": [
+      "cfg-structure-hygiene-expert",
+      "code-assist-pro-01-fixed",
+      "toolkit-pro-04"
+    ]
+  },
+  "version": "1.0.0"
+}

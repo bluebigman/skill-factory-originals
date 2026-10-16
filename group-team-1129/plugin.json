@@ -1,0 +1,126 @@
+{
+  "agentName": "typography-scale-team-lead",
+  "agents": [
+    "./agents/typography-scale-team-lead.md",
+    "./agents/typography-scale.md",
+    "./agents/ux-metrics-pro.md",
+    "./agents/multiplayer-match-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 字体层级设计",
+    "zh": "帮我处理字体层级设计"
+  },
+  "description": "typography-scale team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 字体层级设计 end-to-end: 比例统一, 行高匹配 and 中西混排. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长比例统一、行高匹配与中西混排，覆盖字体层级设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "typography-scale Team",
+    "zh": "字体层级设计顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "typography-scale-team-lead",
+      "name": {
+        "en": "字体层级设计主理人",
+        "zh": "字体层级设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/typography-scale.png",
+      "id": "typography-scale",
+      "name": {
+        "en": "typography-scale",
+        "zh": "字体层级设计 顾问"
+      },
+      "profession": {
+        "en": "typography-scale",
+        "zh": "字体层级设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ux-metrics-pro.png",
+      "id": "ux-metrics-pro",
+      "name": {
+        "en": "ux-metrics-pro",
+        "zh": "体验度量 指标体系 顾问"
+      },
+      "profession": {
+        "en": "ux-metrics-pro",
+        "zh": "体验度量 指标体系 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/multiplayer-match-pro.png",
+      "id": "multiplayer-match-pro",
+      "name": {
+        "en": "multiplayer-match-pro",
+        "zh": "对战匹配 公平性 顾问"
+      },
+      "profession": {
+        "en": "multiplayer-match-pro",
+        "zh": "对战匹配 公平性 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1129",
+  "plugin": "group-team-1129",
+  "profession": {
+    "en": "typography-scale Collaboration Team",
+    "zh": "字体层级设计顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 字体层级设计",
+      "zh": "帮我处理字体层级设计"
+    },
+    {
+      "en": "Plan 体验度量",
+      "zh": "帮我规划体验度量"
+    },
+    {
+      "en": "Review 对战匹配",
+      "zh": "帮我检查对战匹配"
+    }
+  ],
+  "tags": [
+    {
+      "en": "比例统一",
+      "zh": "比例统一"
+    },
+    {
+      "en": "层级不超五",
+      "zh": "层级不超五"
+    },
+    {
+      "en": "行高匹配",
+      "zh": "行高匹配"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "typography-scale-team-lead",
+    "memberAgents": [
+      "typography-scale",
+      "ux-metrics-pro",
+      "multiplayer-match-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

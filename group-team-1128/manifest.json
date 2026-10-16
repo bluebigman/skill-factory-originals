@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1128",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1128",
+    "kind": "team",
+    "name": "危机应对专家",
+    "description": "输入危机应对相关需求，输出快速响应、事实优先、统一口径三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "crisis-response-team-lead",
+        "role": "lead",
+        "name": "危机应对主理人",
+        "evidence": null
+      },
+      {
+        "slug": "crisis-response",
+        "role": "member",
+        "name": "危机应对 顾问",
+        "evidence": "original_assets/crisis-response/merkle_root",
+        "member_merkle_root": "410f51a6b973b7c693d3fa7469cacb8c5c7b7d949e0c3c82d5405035da84fec6"
+      },
+      {
+        "slug": "kb-article-build",
+        "role": "member",
+        "name": "知识库条目 助手",
+        "evidence": "original_assets/kb-article-build/merkle_root",
+        "member_merkle_root": "fc71ca09c0d065dfc3cbef6734a5859c3e5286385e7193354c9ffcd15d87da4a"
+      },
+      {
+        "slug": "social-listening-pro",
+        "role": "member",
+        "name": "舆情聆听 信号识别 顾问",
+        "evidence": "original_assets/social-listening-pro/merkle_root",
+        "member_merkle_root": "910f8bbab5b6609be006aa9a7448fcdc09f87bd5ff877cf6b887e57855dcfb06"
+      }
+    ],
+    "team_lead": "crisis-response-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d70a796c7c86886b",
+  "prompt_hash": "bdabffb00bbd19e0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1128\", \"kind\": \"team\", \"name\": \"危机应对专家\", \"description\": \"输入危机应对相关需求，输出快速响应、事实优先、统一口径三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"crisis-response-team-lead\", \"role\": \"lead\", \"name\": \"危机应对主理人\", \"evidence\": null}, {\"slug\": \"crisis-response\", \"role\": \"member\", \"name\": \"危机应对 顾问\", \"evidence\": \"original_assets/crisis-response/merkle_root\", \"member_merkle_root\": \"410f51a6b973b7c693d3fa7469cacb8c5c7b7d949e0c3c82d5405035da84fec6\"}, {\"slug\": \"kb-article-build\", \"role\": \"member\", \"name\": \"知识库条目 助手\", \"evidence\": \"original_assets/kb-article-build/merkle_root\", \"member_merkle_root\": \"fc71ca09c0d065dfc3cbef6734a5859c3e5286385e7193354c9ffcd15d87da4a\"}, {\"slug\": \"social-listening-pro\", \"role\": \"member\", \"name\": \"舆情聆听 信号识别 顾问\", \"evidence\": \"original_assets/social-listening-pro/merkle_root\", \"member_merkle_root\": \"910f8bbab5b6609be006aa9a7448fcdc09f87bd5ff877cf6b887e57855dcfb06\"}], \"team_lead\": \"crisis-response-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/crisis-response-team-lead.md": "fa124a806a1f034e1c6802a0c5a690a0dac22fc6ed504df35f3db867520970c9",
+    "agents/crisis-response.md": "b13df14a2ae1c5350d81ef63b2fbacffea9749094a90c46add9f00f5120abbf8",
+    "agents/kb-article-build.md": "570b3c34557eee28a923afb6d67cd470bfdfced69d9a0b48659abf2bb601ce88",
+    "agents/social-listening-pro.md": "82e103c190a9a2e342deee4e9656654d5bad111fbe1f2f1cf71bd9e9db294abb",
+    "plugin.json": "987fd17be7e9584f13df6f530603276c9ae3ac7895baa331c374dbaa2acbfb52",
+    "settings.json": "17717239fd2705e36c1653aa5b5d0837ea21cccd70f84d99253102b45c2e21fc"
+  }
+}

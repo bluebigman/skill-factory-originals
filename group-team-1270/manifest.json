@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-1270",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1270",
+    "kind": "team",
+    "name": "社群 内部 规范 团队",
+    "description": "擅长规则先行、价值供给与活跃机制，覆盖社群运营全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "community-ops-team-lead",
+        "role": "lead",
+        "name": "社群运营主理人",
+        "evidence": null
+      },
+      {
+        "slug": "community-ops",
+        "role": "member",
+        "name": "社群运营 顾问",
+        "evidence": "original_assets/community-ops/merkle_root",
+        "member_merkle_root": "42c44a945191fb7576b7e419a29b3f821ec47ad9e0ac4cca276c746ef7c982f7"
+      },
+      {
+        "slug": "internal-comms-draft",
+        "role": "member",
+        "name": "内部沟通文案 助手",
+        "evidence": "original_assets/internal-comms-draft/merkle_root",
+        "member_merkle_root": "357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e"
+      },
+      {
+        "slug": "markdown-standard-pro",
+        "role": "member",
+        "name": "Mark 规范 顾问",
+        "evidence": "original_assets/markdown-standard-pro/merkle_root",
+        "member_merkle_root": "53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1"
+      }
+    ],
+    "team_lead": "community-ops-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "965affe169be4898",
+  "prompt_hash": "3da36b3384711a94",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1270\", \"kind\": \"team\", \"name\": \"社群 内部 规范 团队\", \"description\": \"擅长规则先行、价值供给与活跃机制，覆盖社群运营全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"community-ops-team-lead\", \"role\": \"lead\", \"name\": \"社群运营主理人\", \"evidence\": null}, {\"slug\": \"community-ops\", \"role\": \"member\", \"name\": \"社群运营 顾问\", \"evidence\": \"original_assets/community-ops/merkle_root\", \"member_merkle_root\": \"42c44a945191fb7576b7e419a29b3f821ec47ad9e0ac4cca276c746ef7c982f7\"}, {\"slug\": \"internal-comms-draft\", \"role\": \"member\", \"name\": \"内部沟通文案 助手\", \"evidence\": \"original_assets/internal-comms-draft/merkle_root\", \"member_merkle_root\": \"357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e\"}, {\"slug\": \"markdown-standard-pro\", \"role\": \"member\", \"name\": \"Mark 规范 顾问\", \"evidence\": \"original_assets/markdown-standard-pro/merkle_root\", \"member_merkle_root\": \"53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1\"}], \"team_lead\": \"community-ops-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/community-ops-team-lead.md": "e58bb361a10e445a5352f6299d6f1d05faecf7ef53ad91457356a041844ec21b",
+    "agents/community-ops.md": "66ef4e64114001b32066b3e2e585ba43016a60a4704559828d9faf7f0d11f082",
+    "agents/internal-comms-draft.md": "ede3b57ab9eeb8510a1f4f4419d9f201a592b03bf6fc16fc78f372ab55655145",
+    "agents/markdown-standard-pro.md": "dfb52ef5aa5569bbd96777c7cbd6a46c3d82826bac4df00a3ec47881660edf67",
+    "plugin.json": "e70ac649ce9ecd5b81278de6c851fd574e7e21da2d6a799c5d2d75d1183f1976",
+    "settings.json": "bf0c437fbc41c21121de2b77fe78f0b497c59bf10706b838728895a74d150b0e"
+  }
+}

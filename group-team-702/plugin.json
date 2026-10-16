@@ -1,0 +1,126 @@
+{
+  "agentName": "kol-selection-pro-team-lead",
+  "agents": [
+    "./agents/kol-selection-pro-team-lead.md",
+    "./agents/kol-selection-pro.md",
+    "./agents/doc-localization-pro.md",
+    "./agents/ui-visual-forge-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 达人筛选",
+    "zh": "帮我处理达人筛选"
+  },
+  "description": "kol-selection-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 达人筛选 end-to-end: 调性匹配, 数据校验 and 小单试投. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长调性匹配、数据校验与小单试投，覆盖达人筛选全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "kol-selection-pro Team",
+    "zh": "达人筛选匹配评估专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "kol-selection-pro-team-lead",
+      "name": {
+        "en": "达人筛选主理人",
+        "zh": "达人筛选主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/kol-selection-pro.png",
+      "id": "kol-selection-pro",
+      "name": {
+        "en": "kol-selection-pro",
+        "zh": "达人筛选 匹配评估 顾问"
+      },
+      "profession": {
+        "en": "kol-selection-pro",
+        "zh": "达人筛选 匹配评估 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-localization-pro.png",
+      "id": "doc-localization-pro",
+      "name": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "profession": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-visual-forge-expert.png",
+      "id": "ui-visual-forge-expert",
+      "name": {
+        "en": "UI Visual Forge Expert",
+        "zh": "界面设计 组件美化 视觉产出"
+      },
+      "profession": {
+        "en": "UI Visual Forge Expert",
+        "zh": "界面设计 组件美化 视觉产出"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-702",
+  "plugin": "group-team-702",
+  "profession": {
+    "en": "kol-selection-pro Collaboration Team",
+    "zh": "达人筛选匹配评估专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 达人筛选",
+      "zh": "帮我处理达人筛选"
+    },
+    {
+      "en": "Plan 文档本地",
+      "zh": "帮我规划文档本地"
+    },
+    {
+      "en": "Review 界面设计",
+      "zh": "帮我检查界面设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "调性匹配",
+      "zh": "调性匹配"
+    },
+    {
+      "en": "数据校验",
+      "zh": "数据校验"
+    },
+    {
+      "en": "小单试投",
+      "zh": "小单试投"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "kol-selection-pro-team-lead",
+    "memberAgents": [
+      "kol-selection-pro",
+      "doc-localization-pro",
+      "ui-visual-forge-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

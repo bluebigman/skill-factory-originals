@@ -1,0 +1,126 @@
+{
+  "agentName": "etl-pipeline-guard-team-lead",
+  "agents": [
+    "./agents/etl-pipeline-guard-team-lead.md",
+    "./agents/etl-pipeline-guard.md",
+    "./agents/kb-build-pro.md",
+    "./agents/data-insight-attribution-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle ETL",
+    "zh": "帮我处理ETL"
+  },
+  "description": "etl-pipeline-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers ETL end-to-end: 依赖声明, 幂等重跑 and 断点续跑. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长依赖声明、幂等重跑与断点续跑，覆盖ETL全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "etl-pipeline-guard Team",
+    "zh": "文档整理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "etl-pipeline-guard-team-lead",
+      "name": {
+        "en": "ETL主理人",
+        "zh": "ETL主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/etl-pipeline-guard.png",
+      "id": "etl-pipeline-guard",
+      "name": {
+        "en": "etl-pipeline-guard",
+        "zh": "ETL 管线 顾问"
+      },
+      "profession": {
+        "en": "etl-pipeline-guard",
+        "zh": "ETL 管线 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kb-build-pro.png",
+      "id": "kb-build-pro",
+      "name": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "profession": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-insight-attribution-expert.png",
+      "id": "data-insight-attribution-expert",
+      "name": {
+        "en": "Data Insight Attribution Expert",
+        "zh": "数据洞察 指标异常 归因分析"
+      },
+      "profession": {
+        "en": "Data Insight Attribution Expert",
+        "zh": "数据洞察 指标异常 归因分析"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-823",
+  "plugin": "group-team-823",
+  "profession": {
+    "en": "etl-pipeline-guard Collaboration Team",
+    "zh": "文档整理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle ETL",
+      "zh": "帮我处理ETL"
+    },
+    {
+      "en": "Plan 知识库构建",
+      "zh": "帮我规划知识库构建"
+    },
+    {
+      "en": "Review 数据洞察",
+      "zh": "帮我检查数据洞察"
+    }
+  ],
+  "tags": [
+    {
+      "en": "依赖声明",
+      "zh": "依赖声明"
+    },
+    {
+      "en": "幂等重跑",
+      "zh": "幂等重跑"
+    },
+    {
+      "en": "断点续跑",
+      "zh": "断点续跑"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "etl-pipeline-guard-team-lead",
+    "memberAgents": [
+      "etl-pipeline-guard",
+      "kb-build-pro",
+      "data-insight-attribution-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

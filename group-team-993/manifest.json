@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-993",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-993",
+    "kind": "team",
+    "name": "施工协调专家",
+    "description": "输入团队知识库相关需求，输出一篇一题、定期复核、贡献激励三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "team-knowledge-base-team-lead",
+        "role": "lead",
+        "name": "团队知识库主理人",
+        "evidence": null
+      },
+      {
+        "slug": "team-knowledge-base",
+        "role": "member",
+        "name": "团队知识库 顾问",
+        "evidence": "original_assets/team-knowledge-base/merkle_root",
+        "member_merkle_root": "7701e293cbf3dc82d39fd6bf82bffc600db84ea2f12a4cc2fe63467aa10cc62c"
+      },
+      {
+        "slug": "construction-coordination",
+        "role": "member",
+        "name": "施工协调 顾问",
+        "evidence": "original_assets/construction-coordination/merkle_root",
+        "member_merkle_root": "00d8f73c3c9251829e2d73d7303c877dddf80262006f12b50b72c5355a4fbbce"
+      },
+      {
+        "slug": "service-sla-pro",
+        "role": "member",
+        "name": "服务承诺 时效设计 顾问",
+        "evidence": "original_assets/service-sla-pro/merkle_root",
+        "member_merkle_root": "dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa"
+      }
+    ],
+    "team_lead": "team-knowledge-base-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "bd7f0a27d2165f8b",
+  "prompt_hash": "8345dccd1bf6182f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-993\", \"kind\": \"team\", \"name\": \"施工协调专家\", \"description\": \"输入团队知识库相关需求，输出一篇一题、定期复核、贡献激励三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"team-knowledge-base-team-lead\", \"role\": \"lead\", \"name\": \"团队知识库主理人\", \"evidence\": null}, {\"slug\": \"team-knowledge-base\", \"role\": \"member\", \"name\": \"团队知识库 顾问\", \"evidence\": \"original_assets/team-knowledge-base/merkle_root\", \"member_merkle_root\": \"7701e293cbf3dc82d39fd6bf82bffc600db84ea2f12a4cc2fe63467aa10cc62c\"}, {\"slug\": \"construction-coordination\", \"role\": \"member\", \"name\": \"施工协调 顾问\", \"evidence\": \"original_assets/construction-coordination/merkle_root\", \"member_merkle_root\": \"00d8f73c3c9251829e2d73d7303c877dddf80262006f12b50b72c5355a4fbbce\"}, {\"slug\": \"service-sla-pro\", \"role\": \"member\", \"name\": \"服务承诺 时效设计 顾问\", \"evidence\": \"original_assets/service-sla-pro/merkle_root\", \"member_merkle_root\": \"dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa\"}], \"team_lead\": \"team-knowledge-base-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/construction-coordination.md": "3e4d65feae3a943f8475de35011d85ef56b1dbafce45e3d9b812d2679dc1c69b",
+    "agents/service-sla-pro.md": "07e79630f298344b5c280d0e72da9f8a3ca774a7ecc2eadd044bf0bb93ce9c94",
+    "agents/team-knowledge-base-team-lead.md": "2271ff5d56e0d2132dfb094a6d71e9c762ce8a706aefcc60b11c27d9de4d4b2d",
+    "agents/team-knowledge-base.md": "ccee5d9011cc8af141d393015017ca10966699e2f89af9dce50d3deaa9beb31e",
+    "plugin.json": "ed2fd837eee134dcde02eb0d6e1f47eb1d5851a3620f6d71f268d25e20ab31e0",
+    "settings.json": "8cf41d86edef8a14b9caef130fc178343ea2e93e8f0f3a364eb3cb1102fd8829"
+  }
+}

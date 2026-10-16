@@ -1,0 +1,126 @@
+{
+  "agentName": "backup-security-team-lead",
+  "agents": [
+    "./agents/backup-security-team-lead.md",
+    "./agents/backup-security.md",
+    "./agents/data-onboarding-doc.md",
+    "./agents/query-cost-control.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 备份安全",
+    "zh": "帮我处理备份安全"
+  },
+  "description": "backup-security team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 备份安全 end-to-end: 加密存储, 访问控制 and 异地副本. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长加密存储、访问控制与异地副本，覆盖备份安全全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "backup-security Team",
+    "zh": "备份安全专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "backup-security-team-lead",
+      "name": {
+        "en": "备份安全主理人",
+        "zh": "备份安全主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/backup-security.png",
+      "id": "backup-security",
+      "name": {
+        "en": "backup-security",
+        "zh": "备份安全 顾问"
+      },
+      "profession": {
+        "en": "backup-security",
+        "zh": "备份安全 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-onboarding-doc.png",
+      "id": "data-onboarding-doc",
+      "name": {
+        "en": "data-onboarding-doc",
+        "zh": "数据上手文档 助手"
+      },
+      "profession": {
+        "en": "data-onboarding-doc",
+        "zh": "数据上手文档 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/query-cost-control.png",
+      "id": "query-cost-control",
+      "name": {
+        "en": "query-cost-control",
+        "zh": "查询成本管控 顾问"
+      },
+      "profession": {
+        "en": "query-cost-control",
+        "zh": "查询成本管控 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1174",
+  "plugin": "group-team-1174",
+  "profession": {
+    "en": "backup-security Collaboration Team",
+    "zh": "备份安全专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 备份安全",
+      "zh": "帮我处理备份安全"
+    },
+    {
+      "en": "Plan 数据上手文档",
+      "zh": "帮我规划数据上手文档"
+    },
+    {
+      "en": "Review 查询成本管控",
+      "zh": "帮我检查查询成本管控"
+    }
+  ],
+  "tags": [
+    {
+      "en": "加密存储",
+      "zh": "加密存储"
+    },
+    {
+      "en": "访问控制",
+      "zh": "访问控制"
+    },
+    {
+      "en": "异地副本",
+      "zh": "异地副本"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "backup-security-team-lead",
+    "memberAgents": [
+      "backup-security",
+      "data-onboarding-doc",
+      "query-cost-control"
+    ]
+  },
+  "version": "1.0.0"
+}

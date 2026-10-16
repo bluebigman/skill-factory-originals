@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-790",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-790",
+    "kind": "team",
+    "name": "需求澄清边界确认专家",
+    "description": "需求澄清边界确认专家：围绕缺陷分级，覆盖分级标准／修复排期／回归验证，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "defect-triage-pro-team-lead",
+        "role": "lead",
+        "name": "缺陷分级主理人",
+        "evidence": null
+      },
+      {
+        "slug": "defect-triage-pro",
+        "role": "member",
+        "name": "缺陷分级 优先级 顾问",
+        "evidence": "original_assets/defect-triage-pro/merkle_root",
+        "member_merkle_root": "4d8b413086a3bb675b6d6c4bce49c668c7b043b4878ba4ac2b673398f99692e0"
+      },
+      {
+        "slug": "requirement-clarify-pro",
+        "role": "member",
+        "name": "需求澄清 边界确认 顾问",
+        "evidence": "original_assets/requirement-clarify-pro/merkle_root",
+        "member_merkle_root": "4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39"
+      },
+      {
+        "slug": "meeting-minutes-pro",
+        "role": "member",
+        "name": "会议纪要 决议提炼 顾问",
+        "evidence": "original_assets/meeting-minutes-pro/merkle_root",
+        "member_merkle_root": "e6d4d0963cfee5b2bfdf65cdbae46d706ecdcfdad5cd57a0511afc2c43b569ef"
+      }
+    ],
+    "team_lead": "defect-triage-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "043ace10f44ea4eb",
+  "prompt_hash": "fd32f2a5a0f06be6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-790\", \"kind\": \"team\", \"name\": \"需求澄清边界确认专家\", \"description\": \"需求澄清边界确认专家：围绕缺陷分级，覆盖分级标准／修复排期／回归验证，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"defect-triage-pro-team-lead\", \"role\": \"lead\", \"name\": \"缺陷分级主理人\", \"evidence\": null}, {\"slug\": \"defect-triage-pro\", \"role\": \"member\", \"name\": \"缺陷分级 优先级 顾问\", \"evidence\": \"original_assets/defect-triage-pro/merkle_root\", \"member_merkle_root\": \"4d8b413086a3bb675b6d6c4bce49c668c7b043b4878ba4ac2b673398f99692e0\"}, {\"slug\": \"requirement-clarify-pro\", \"role\": \"member\", \"name\": \"需求澄清 边界确认 顾问\", \"evidence\": \"original_assets/requirement-clarify-pro/merkle_root\", \"member_merkle_root\": \"4080d7b0b1882f0de8249ab0cb57090bb0e9c63c4668890f3644bb7477b05a39\"}, {\"slug\": \"meeting-minutes-pro\", \"role\": \"member\", \"name\": \"会议纪要 决议提炼 顾问\", \"evidence\": \"original_assets/meeting-minutes-pro/merkle_root\", \"member_merkle_root\": \"e6d4d0963cfee5b2bfdf65cdbae46d706ecdcfdad5cd57a0511afc2c43b569ef\"}], \"team_lead\": \"defect-triage-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/defect-triage-pro-team-lead.md": "259b2e677a748437cd5bd39a9abd945c1af5c6b4f6c483e099189ef70b7a5cd3",
+    "agents/defect-triage-pro.md": "8b4c330e65d57cccb368d07a242a887ebf4a39ff71de84f58cbd34bb86fff54e",
+    "agents/meeting-minutes-pro.md": "d73897861906adf303617406079cb7c37e0bae559cb3100e0a0a88d1464ebf12",
+    "agents/requirement-clarify-pro.md": "46690acf683aa832ca4a07df0aca851c8357673c0c251e8e401db977d2d2cefe",
+    "plugin.json": "6b0a6c0ce97568253330a2af7e618cddca601e303224d2c0533c584ceb3006c9",
+    "settings.json": "ee2b984140a8a7175a0e5fb28dd143dc5f8cf8ea7465e28fa3d4ebcf669f1429"
+  }
+}

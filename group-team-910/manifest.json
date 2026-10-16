@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-910",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-910",
+    "kind": "team",
+    "name": "活动方案专家",
+    "description": "活动方案专家：围绕活动方案，覆盖目标单一／预算留余／风险预案，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "event-plan-review-team-lead",
+        "role": "lead",
+        "name": "活动方案主理人",
+        "evidence": null
+      },
+      {
+        "slug": "event-plan-review",
+        "role": "member",
+        "name": "活动方案 评审",
+        "evidence": "original_assets/event-plan-review/merkle_root",
+        "member_merkle_root": "706d771229b494c01db5d1675a2e6f231e2901835a9326dc55288e03ffe13cb4"
+      },
+      {
+        "slug": "marketing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "联盟配置审查 营销数据条款审查",
+        "evidence": "original_assets/marketing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1"
+      },
+      {
+        "slug": "doc-format-unify",
+        "role": "member",
+        "name": "文档格式统一 助手",
+        "evidence": "original_assets/doc-format-unify/merkle_root",
+        "member_merkle_root": "8a0c9a73f4f885cf27ceb89da1cda695cfc09d4d559fa2a4b3b40536dbad9b59"
+      }
+    ],
+    "team_lead": "event-plan-review-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4da56fec0dda882e",
+  "prompt_hash": "9a8a194125f0ee9b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-910\", \"kind\": \"team\", \"name\": \"活动方案专家\", \"description\": \"活动方案专家：围绕活动方案，覆盖目标单一／预算留余／风险预案，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"event-plan-review-team-lead\", \"role\": \"lead\", \"name\": \"活动方案主理人\", \"evidence\": null}, {\"slug\": \"event-plan-review\", \"role\": \"member\", \"name\": \"活动方案 评审\", \"evidence\": \"original_assets/event-plan-review/merkle_root\", \"member_merkle_root\": \"706d771229b494c01db5d1675a2e6f231e2901835a9326dc55288e03ffe13cb4\"}, {\"slug\": \"marketing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"联盟配置审查 营销数据条款审查\", \"evidence\": \"original_assets/marketing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1\"}, {\"slug\": \"doc-format-unify\", \"role\": \"member\", \"name\": \"文档格式统一 助手\", \"evidence\": \"original_assets/doc-format-unify/merkle_root\", \"member_merkle_root\": \"8a0c9a73f4f885cf27ceb89da1cda695cfc09d4d559fa2a4b3b40536dbad9b59\"}], \"team_lead\": \"event-plan-review-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-format-unify.md": "91c1a7036eaa3e2171ee5ccb15c4278455e9d350d3a60e4fcab6854918edb28c",
+    "agents/event-plan-review-team-lead.md": "2c54af960df802cc98b41aea188f528a2c4671ba750b069744e30f0d4ad0943f",
+    "agents/event-plan-review.md": "3b2a83b189c37ca16fee89edbf7f9f00aaf8ef8083f7dab9232866ea869507f7",
+    "agents/marketing-toolkit-pro-fixed.md": "88fe3081a3b184993abe105f0d467d977bfe015fb470447018dea58f3eccc65d",
+    "plugin.json": "16bac0f759a74df05b9d8f598e96099c408e45028eb3980185b23d93deacb90a",
+    "settings.json": "3a558c770aac2d0aa4acb25893d4cf2d12ea00fe019d053483653a124d59c4f4"
+  }
+}

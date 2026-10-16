@@ -1,0 +1,126 @@
+{
+  "agentName": "toolkit-pro-03-team-lead",
+  "agents": [
+    "./agents/toolkit-pro-03-team-lead.md",
+    "./agents/toolkit-pro-03.md",
+    "./agents/file-ops-suite-pro.md",
+    "./agents/api-connectivity-diagnostics-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据回溯",
+    "zh": "帮我处理数据回溯"
+  },
+  "description": "综合工具 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据 批量 接口 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "综合工具 Suite Team",
+    "zh": "数据 批量 接口 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "toolkit-pro-03-team-lead",
+      "name": {
+        "en": "数据回溯主理人",
+        "zh": "数据回溯主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-03.png",
+      "id": "toolkit-pro-03",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "数据回溯 标准作业 数据保全"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "数据回溯 标准作业 数据保全"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/file-ops-suite-pro.png",
+      "id": "file-ops-suite-pro",
+      "name": {
+        "en": "File Ops Suite Pro",
+        "zh": "批量重命名 数据备份 文件整理"
+      },
+      "profession": {
+        "en": "File Ops Suite Pro",
+        "zh": "批量重命名 数据备份 文件整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-connectivity-diagnostics-expert.png",
+      "id": "api-connectivity-diagnostics-expert",
+      "name": {
+        "en": "API Connectivity Diagnostics Expert",
+        "zh": "接口跨域 连接异常 排查修复"
+      },
+      "profession": {
+        "en": "API Connectivity Diagnostics Expert",
+        "zh": "接口跨域 连接异常 排查修复"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-208",
+  "plugin": "group-team-208",
+  "profession": {
+    "en": "综合工具 Suite Collaboration Team",
+    "zh": "数据 批量 接口 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据回溯",
+      "zh": "帮我处理数据回溯"
+    },
+    {
+      "en": "Plan 批量重命名",
+      "zh": "帮我规划批量重命名"
+    },
+    {
+      "en": "Review 接口跨域",
+      "zh": "帮我检查接口跨域"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据回溯",
+      "zh": "数据回溯"
+    },
+    {
+      "en": "批量重命名",
+      "zh": "批量重命名"
+    },
+    {
+      "en": "接口跨域",
+      "zh": "接口跨域"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "toolkit-pro-03-team-lead",
+    "memberAgents": [
+      "toolkit-pro-03",
+      "file-ops-suite-pro",
+      "api-connectivity-diagnostics-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

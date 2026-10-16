@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-272",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-272",
+    "kind": "team",
+    "name": "依赖检查专家",
+    "description": "依赖检查专家：围绕依赖检查，覆盖版本锁定／漏洞扫描／最小依赖，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-dependency-check-team-lead",
+        "role": "lead",
+        "name": "依赖检查主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-dependency-check",
+        "role": "member",
+        "name": "依赖检查 版本锁定 顾问",
+        "evidence": "original_assets/agent-dependency-check/merkle_root",
+        "member_merkle_root": "a7d42a6390546ade10d70d151336feaf7ca418fa42297f1bfcd2edf179bc01dd"
+      },
+      {
+        "slug": "agent-instruction-clarify",
+        "role": "member",
+        "name": "指令澄清 歧义识别 顾问",
+        "evidence": "original_assets/agent-instruction-clarify/merkle_root",
+        "member_merkle_root": "6eb56e5423754167ebe23d58a288dce6dbbbf3dcd23d1537ea5051464a76a373"
+      },
+      {
+        "slug": "tech-debt-track",
+        "role": "member",
+        "name": "技术债 识别登记 顾问",
+        "evidence": "original_assets/tech-debt-track/merkle_root",
+        "member_merkle_root": "3be991882d747ef0595e8dd75c079cba6775b8e22a37b6242f7cd36ad21ab6a3"
+      }
+    ],
+    "team_lead": "agent-dependency-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4d8fd7d1fc5dfbca",
+  "prompt_hash": "8489d61ca677563d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-272\", \"kind\": \"team\", \"name\": \"依赖检查专家\", \"description\": \"依赖检查专家：围绕依赖检查，覆盖版本锁定／漏洞扫描／最小依赖，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-dependency-check-team-lead\", \"role\": \"lead\", \"name\": \"依赖检查主理人\", \"evidence\": null}, {\"slug\": \"agent-dependency-check\", \"role\": \"member\", \"name\": \"依赖检查 版本锁定 顾问\", \"evidence\": \"original_assets/agent-dependency-check/merkle_root\", \"member_merkle_root\": \"a7d42a6390546ade10d70d151336feaf7ca418fa42297f1bfcd2edf179bc01dd\"}, {\"slug\": \"agent-instruction-clarify\", \"role\": \"member\", \"name\": \"指令澄清 歧义识别 顾问\", \"evidence\": \"original_assets/agent-instruction-clarify/merkle_root\", \"member_merkle_root\": \"6eb56e5423754167ebe23d58a288dce6dbbbf3dcd23d1537ea5051464a76a373\"}, {\"slug\": \"tech-debt-track\", \"role\": \"member\", \"name\": \"技术债 识别登记 顾问\", \"evidence\": \"original_assets/tech-debt-track/merkle_root\", \"member_merkle_root\": \"3be991882d747ef0595e8dd75c079cba6775b8e22a37b6242f7cd36ad21ab6a3\"}], \"team_lead\": \"agent-dependency-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-dependency-check-team-lead.md": "e2d6f92d9f3947715a7da64ed47457696b91e071763036f07b0ebdf9b937a4e1",
+    "agents/agent-dependency-check.md": "5b6461ff79ed6828733f283444ce900bdc047188052967e24f260543496bf434",
+    "agents/agent-instruction-clarify.md": "9d9ef052c2fff159d68f553e94fc42a5b7a663c3011fdae1395a20defff25c47",
+    "agents/tech-debt-track.md": "7770d3c10220b4a4de2bd185e64abcbf704cbde49b801edcdebb3570d37062bc",
+    "plugin.json": "eaf1ad681a0882d5b1c1fc229c4335c2dbd351ad06fa242016b4eac9833d6e33",
+    "settings.json": "7f727259b22d73bd54fb453815b8755036f5e855c2118f2cc7016acfb1666d60"
+  }
+}

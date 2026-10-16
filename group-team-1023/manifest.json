@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1023",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1023",
+    "kind": "team",
+    "name": "培训材料制作专家",
+    "description": "输入培训材料制作相关需求，输出目标对齐、分层设计、示例丰富三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "training-material-team-lead",
+        "role": "lead",
+        "name": "培训材料制作主理人",
+        "evidence": null
+      },
+      {
+        "slug": "training-material",
+        "role": "member",
+        "name": "培训材料制作 助手",
+        "evidence": "original_assets/training-material/merkle_root",
+        "member_merkle_root": "b74a4ceb42c3528f3af58a412a07e1519546e727f86e138de392487b5be582a2"
+      },
+      {
+        "slug": "invoice-organize",
+        "role": "member",
+        "name": "发票整理归集 助手",
+        "evidence": "original_assets/invoice-organize/merkle_root",
+        "member_merkle_root": "2dd06747fb2937ac11b22738b06bf3d81b14d44525fb34268e77e5789f8862c2"
+      },
+      {
+        "slug": "schema-contract-test",
+        "role": "member",
+        "name": "契约测试 顾问",
+        "evidence": "original_assets/schema-contract-test/merkle_root",
+        "member_merkle_root": "7cd100bcdfe7397a5a96dc10558ba0da03eb263c0dd3e0aa09726e5c7367dd21"
+      }
+    ],
+    "team_lead": "training-material-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "06a04d84b92ab121",
+  "prompt_hash": "8fbe807ae59439a2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1023\", \"kind\": \"team\", \"name\": \"培训材料制作专家\", \"description\": \"输入培训材料制作相关需求，输出目标对齐、分层设计、示例丰富三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"training-material-team-lead\", \"role\": \"lead\", \"name\": \"培训材料制作主理人\", \"evidence\": null}, {\"slug\": \"training-material\", \"role\": \"member\", \"name\": \"培训材料制作 助手\", \"evidence\": \"original_assets/training-material/merkle_root\", \"member_merkle_root\": \"b74a4ceb42c3528f3af58a412a07e1519546e727f86e138de392487b5be582a2\"}, {\"slug\": \"invoice-organize\", \"role\": \"member\", \"name\": \"发票整理归集 助手\", \"evidence\": \"original_assets/invoice-organize/merkle_root\", \"member_merkle_root\": \"2dd06747fb2937ac11b22738b06bf3d81b14d44525fb34268e77e5789f8862c2\"}, {\"slug\": \"schema-contract-test\", \"role\": \"member\", \"name\": \"契约测试 顾问\", \"evidence\": \"original_assets/schema-contract-test/merkle_root\", \"member_merkle_root\": \"7cd100bcdfe7397a5a96dc10558ba0da03eb263c0dd3e0aa09726e5c7367dd21\"}], \"team_lead\": \"training-material-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/invoice-organize.md": "ef8794976e302c29dad68553a06f3ec2931a3b068cd76fee16c3397fba153dbe",
+    "agents/schema-contract-test.md": "1fce572005cbe2dc5a56a9483a44ccee493d9a70fc3b2d7a09360a33f0cbf612",
+    "agents/training-material-team-lead.md": "3c2a9b579b9c55bd3eada08208b0c11b041baf5bb7dc6beb03e42644010149d2",
+    "agents/training-material.md": "c05bbbdff5e0d5768ed2597b90cd12354af48121c5156c9a359daf287cc0c48b",
+    "plugin.json": "e4b07b3b4079ad0c87d02259f7ba446dd895c76a601dac1ebfd18d2905dc8203",
+    "settings.json": "621c118e25a6b90fd299457d0c07377df93a842bfd5bafe8678b456ab72e158b"
+  }
+}

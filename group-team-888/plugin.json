@@ -1,0 +1,126 @@
+{
+  "agentName": "dependency-license-team-lead",
+  "agents": [
+    "./agents/dependency-license-team-lead.md",
+    "./agents/dependency-license.md",
+    "./agents/service-health-pro.md",
+    "./agents/agent-conflict-resolve.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 依赖许可证",
+    "zh": "帮我处理依赖许可证"
+  },
+  "description": "dependency-license team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 依赖许可证 end-to-end: 全量清单, 商用兼容 and 冲突处置. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长全量清单、商用兼容与冲突处置，覆盖依赖许可证全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "dependency-license Team",
+    "zh": "依赖许可证专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "dependency-license-team-lead",
+      "name": {
+        "en": "依赖许可证主理人",
+        "zh": "依赖许可证主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/dependency-license.png",
+      "id": "dependency-license",
+      "name": {
+        "en": "dependency-license",
+        "zh": "依赖许可证 核查"
+      },
+      "profession": {
+        "en": "dependency-license",
+        "zh": "依赖许可证 核查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/service-health-pro.png",
+      "id": "service-health-pro",
+      "name": {
+        "en": "service-health-pro",
+        "zh": "服务健康 探活机制 顾问"
+      },
+      "profession": {
+        "en": "service-health-pro",
+        "zh": "服务健康 探活机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-conflict-resolve.png",
+      "id": "agent-conflict-resolve",
+      "name": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "profession": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-888",
+  "plugin": "group-team-888",
+  "profession": {
+    "en": "dependency-license Collaboration Team",
+    "zh": "依赖许可证专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 依赖许可证",
+      "zh": "帮我处理依赖许可证"
+    },
+    {
+      "en": "Plan 服务健康",
+      "zh": "帮我规划服务健康"
+    },
+    {
+      "en": "Review 冲突消解",
+      "zh": "帮我检查冲突消解"
+    }
+  ],
+  "tags": [
+    {
+      "en": "全量清单",
+      "zh": "全量清单"
+    },
+    {
+      "en": "商用兼容",
+      "zh": "商用兼容"
+    },
+    {
+      "en": "冲突处置",
+      "zh": "冲突处置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "dependency-license-team-lead",
+    "memberAgents": [
+      "dependency-license",
+      "service-health-pro",
+      "agent-conflict-resolve"
+    ]
+  },
+  "version": "1.0.0"
+}

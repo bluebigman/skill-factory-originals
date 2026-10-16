@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1111",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1111",
+    "kind": "team",
+    "name": "服务承诺设计专家",
+    "description": "擅长指标明确、例外说明与违约处理，覆盖服务承诺设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "service-sla-design-team-lead",
+        "role": "lead",
+        "name": "服务承诺设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "service-sla-design",
+        "role": "member",
+        "name": "服务承诺设计 顾问",
+        "evidence": "original_assets/service-sla-design/merkle_root",
+        "member_merkle_root": "d225d40adc5191e43744b390dcb40b259185f72ab62bd078715ccbd4811864c4"
+      },
+      {
+        "slug": "code-owner-rule",
+        "role": "member",
+        "name": "代码归属规则 顾问",
+        "evidence": "original_assets/code-owner-rule/merkle_root",
+        "member_merkle_root": "885d64b8b2be90622ac8c693be0a3abd4fe2d9e2a1090b1ffe26c54d3485f103"
+      },
+      {
+        "slug": "rollback-safety",
+        "role": "member",
+        "name": "回滚安全性 顾问",
+        "evidence": "original_assets/rollback-safety/merkle_root",
+        "member_merkle_root": "6cfa24419fde159caa4257bf9040beb646e8507ba1458f20e634cc4aa537af27"
+      }
+    ],
+    "team_lead": "service-sla-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b008b0d31828b962",
+  "prompt_hash": "7a0956be0a42f96d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1111\", \"kind\": \"team\", \"name\": \"服务承诺设计专家\", \"description\": \"擅长指标明确、例外说明与违约处理，覆盖服务承诺设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"service-sla-design-team-lead\", \"role\": \"lead\", \"name\": \"服务承诺设计主理人\", \"evidence\": null}, {\"slug\": \"service-sla-design\", \"role\": \"member\", \"name\": \"服务承诺设计 顾问\", \"evidence\": \"original_assets/service-sla-design/merkle_root\", \"member_merkle_root\": \"d225d40adc5191e43744b390dcb40b259185f72ab62bd078715ccbd4811864c4\"}, {\"slug\": \"code-owner-rule\", \"role\": \"member\", \"name\": \"代码归属规则 顾问\", \"evidence\": \"original_assets/code-owner-rule/merkle_root\", \"member_merkle_root\": \"885d64b8b2be90622ac8c693be0a3abd4fe2d9e2a1090b1ffe26c54d3485f103\"}, {\"slug\": \"rollback-safety\", \"role\": \"member\", \"name\": \"回滚安全性 顾问\", \"evidence\": \"original_assets/rollback-safety/merkle_root\", \"member_merkle_root\": \"6cfa24419fde159caa4257bf9040beb646e8507ba1458f20e634cc4aa537af27\"}], \"team_lead\": \"service-sla-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-owner-rule.md": "81b89a7f2013261e4b0ffd3d22f1bc1ca4e749940829a3429dd3dfa074e8340e",
+    "agents/rollback-safety.md": "32042c5ad752c65a71b5059c3a8b5f882e71ab690cc228f74f6596987f852188",
+    "agents/service-sla-design-team-lead.md": "3c0808146dc257b80293f2b9df073c6094e9e5397dae02bea46c54b967933a3c",
+    "agents/service-sla-design.md": "76eb5bdbb18d90774cdb35abe1584e1df577fe139b954f8f2866a5835c26a975",
+    "plugin.json": "34542085d67c1122ae2c41942b42806a7b72787df03b5b86101e0033f8c81c96",
+    "settings.json": "a72f713b998768ba65a41dfad04d05d574b679bbf3b9402c91b0ff508b9de447"
+  }
+}

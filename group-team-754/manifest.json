@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-754",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-754",
+    "kind": "team",
+    "name": "文档比对版本差异专家",
+    "description": "擅长差异分级、位置明确与批量汇总，覆盖文档比对全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-base-pro-team-lead",
+        "role": "lead",
+        "name": "文档建站主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-base-pro",
+        "role": "member",
+        "name": "文档建站 知识库搭建",
+        "evidence": "original_assets/knowledge-base-pro/merkle_root",
+        "member_merkle_root": "114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9"
+      },
+      {
+        "slug": "knowledge-base-pro-01-fixed",
+        "role": "member",
+        "name": "项目记忆 知识卡片 双向链接",
+        "evidence": "original_assets/knowledge-base-pro-01-fixed/merkle_root",
+        "member_merkle_root": "2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd"
+      },
+      {
+        "slug": "document-diff-pro",
+        "role": "member",
+        "name": "文档比对 版本差异 顾问",
+        "evidence": "original_assets/document-diff-pro/merkle_root",
+        "member_merkle_root": "489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935"
+      }
+    ],
+    "team_lead": "knowledge-base-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "eb619da4e7c0bfb6",
+  "prompt_hash": "d5ec6cc8d70913ca",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-754\", \"kind\": \"team\", \"name\": \"文档比对版本差异专家\", \"description\": \"擅长差异分级、位置明确与批量汇总，覆盖文档比对全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-base-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档建站主理人\", \"evidence\": null}, {\"slug\": \"knowledge-base-pro\", \"role\": \"member\", \"name\": \"文档建站 知识库搭建\", \"evidence\": \"original_assets/knowledge-base-pro/merkle_root\", \"member_merkle_root\": \"114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9\"}, {\"slug\": \"knowledge-base-pro-01-fixed\", \"role\": \"member\", \"name\": \"项目记忆 知识卡片 双向链接\", \"evidence\": \"original_assets/knowledge-base-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd\"}, {\"slug\": \"document-diff-pro\", \"role\": \"member\", \"name\": \"文档比对 版本差异 顾问\", \"evidence\": \"original_assets/document-diff-pro/merkle_root\", \"member_merkle_root\": \"489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935\"}], \"team_lead\": \"knowledge-base-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/document-diff-pro.md": "d3bb1e809e6271877bbc2aacf97ef9ab12040b8e10fce6bd6ea8976ea5eb996f",
+    "agents/knowledge-base-pro-01-fixed.md": "7aaf8d410c465b90cbe904ebab301a56a86392c2f9ed220defbf1b0f6a09cae9",
+    "agents/knowledge-base-pro-team-lead.md": "b824b767c5a485987883faad20bd5e0d85803208f8e24040c7826dc7a9c86a73",
+    "agents/knowledge-base-pro.md": "92cb25f45958fbe3ebd6418c097459ce5078562760a2158626a647895cc13b86",
+    "plugin.json": "45503a898e6786ef72c210b99a53ed915e5945cceef6641234353f1b5b5f0e8d",
+    "settings.json": "3d08cdcf49332a2abe2d0b44f79a5d7f4f26e3e30ac6825cf677acf4a83df29a"
+  }
+}

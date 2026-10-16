@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-937",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-937",
+    "kind": "team",
+    "name": "数据解析专家",
+    "description": "输入PDF相关需求，输出乱码兜底、抽取核对、先看请求三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-05-team-lead",
+        "role": "lead",
+        "name": "数据解析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-05",
+        "role": "member",
+        "name": "数据解析 信息抽取 置信标注",
+        "evidence": "original_assets/data-clean-pro-05/merkle_root",
+        "member_merkle_root": "cae6787ac17b521275a78da853a1efe6e374161375bcbb1dd9819507d4a97906"
+      },
+      {
+        "slug": "pdf-parse-pro",
+        "role": "member",
+        "name": "PDF 解析 顾问",
+        "evidence": "original_assets/pdf-parse-pro/merkle_root",
+        "member_merkle_root": "e65919c6f6f80bbff1f25a18d488ac7f94b9fa51e932a5962da885a2bf637c7a"
+      },
+      {
+        "slug": "api-debug-trace",
+        "role": "member",
+        "name": "接口调试追踪 助手",
+        "evidence": "original_assets/api-debug-trace/merkle_root",
+        "member_merkle_root": "aed1d5592e3f827d59d58eaf226d7d49132a08941cf5ee509dba4f5becde8e45"
+      }
+    ],
+    "team_lead": "data-clean-pro-05-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9369fe8f5824f0d4",
+  "prompt_hash": "2601c7b4dfb9f2f8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-937\", \"kind\": \"team\", \"name\": \"数据解析专家\", \"description\": \"输入PDF相关需求，输出乱码兜底、抽取核对、先看请求三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-05-team-lead\", \"role\": \"lead\", \"name\": \"数据解析主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-05\", \"role\": \"member\", \"name\": \"数据解析 信息抽取 置信标注\", \"evidence\": \"original_assets/data-clean-pro-05/merkle_root\", \"member_merkle_root\": \"cae6787ac17b521275a78da853a1efe6e374161375bcbb1dd9819507d4a97906\"}, {\"slug\": \"pdf-parse-pro\", \"role\": \"member\", \"name\": \"PDF 解析 顾问\", \"evidence\": \"original_assets/pdf-parse-pro/merkle_root\", \"member_merkle_root\": \"e65919c6f6f80bbff1f25a18d488ac7f94b9fa51e932a5962da885a2bf637c7a\"}, {\"slug\": \"api-debug-trace\", \"role\": \"member\", \"name\": \"接口调试追踪 助手\", \"evidence\": \"original_assets/api-debug-trace/merkle_root\", \"member_merkle_root\": \"aed1d5592e3f827d59d58eaf226d7d49132a08941cf5ee509dba4f5becde8e45\"}], \"team_lead\": \"data-clean-pro-05-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-debug-trace.md": "978d763fdae0c3199518f72a8aa76d1a39fc9d69504d669ee24ba2ca979fb6a3",
+    "agents/data-clean-pro-05-team-lead.md": "19b11af5b5154ae4db94741f5b982af2350c7aabaff1aef3e02ba23f235820f3",
+    "agents/data-clean-pro-05.md": "64d25357acabdbccbacabcd38204e7165d90d04bad2f75e80b24eb215cc6af55",
+    "agents/pdf-parse-pro.md": "6664b1f790e388ec0282d907de6ee7bc93c32e16d0a79839a78599effc840da8",
+    "plugin.json": "bdacd4b57c224985a1f91b431e1931425e4be31539d137d05e87ff7e6a52fde5",
+    "settings.json": "ba92bd11f9bc6d0e0f7845726fa036140676661815d0007e53218a542a29fae9"
+  }
+}

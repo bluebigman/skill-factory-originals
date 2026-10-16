@@ -1,0 +1,126 @@
+{
+  "agentName": "usability-test-pro-team-lead",
+  "agents": [
+    "./agents/usability-test-pro-team-lead.md",
+    "./agents/usability-test-pro.md",
+    "./agents/pricing-page-ux.md",
+    "./agents/user-research-synth.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 可用性",
+    "zh": "帮我处理可用性"
+  },
+  "description": "usability-test-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 可用性 requirements, output three deliverables: 任务导向, 出声思维, 记录失败. Verifiable end-to-end, evidence per step.",
+    "zh": "输入可用性相关需求，输出任务导向、出声思维、记录失败三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "usability-test-pro Team",
+    "zh": "表达清晰专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "usability-test-pro-team-lead",
+      "name": {
+        "en": "可用性主理人",
+        "zh": "可用性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/usability-test-pro.png",
+      "id": "usability-test-pro",
+      "name": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "profession": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pricing-page-ux.png",
+      "id": "pricing-page-ux",
+      "name": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "profession": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/user-research-synth.png",
+      "id": "user-research-synth",
+      "name": {
+        "en": "user-research-synth",
+        "zh": "用户研究 洞察归纳 顾问"
+      },
+      "profession": {
+        "en": "user-research-synth",
+        "zh": "用户研究 洞察归纳 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-666",
+  "plugin": "group-team-666",
+  "profession": {
+    "en": "usability-test-pro Collaboration Team",
+    "zh": "表达清晰专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 可用性",
+      "zh": "帮我处理可用性"
+    },
+    {
+      "en": "Plan 定价页面",
+      "zh": "帮我规划定价页面"
+    },
+    {
+      "en": "Review 用户研究",
+      "zh": "帮我检查用户研究"
+    }
+  ],
+  "tags": [
+    {
+      "en": "出声思维",
+      "zh": "出声思维"
+    },
+    {
+      "en": "记录失败",
+      "zh": "记录失败"
+    },
+    {
+      "en": "改后复测",
+      "zh": "改后复测"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "usability-test-pro-team-lead",
+    "memberAgents": [
+      "usability-test-pro",
+      "pricing-page-ux",
+      "user-research-synth"
+    ]
+  },
+  "version": "1.0.0"
+}

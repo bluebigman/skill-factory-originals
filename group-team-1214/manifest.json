@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1214",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1214",
+    "kind": "team",
+    "name": "客户复盘专家",
+    "description": "客户复盘专家：围绕客户复盘，覆盖数据先行／目标回顾／差距共析，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cs-qbr-pro-team-lead",
+        "role": "lead",
+        "name": "客户复盘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cs-qbr-pro",
+        "role": "member",
+        "name": "客户复盘 季度会议 顾问",
+        "evidence": "original_assets/cs-qbr-pro/merkle_root",
+        "member_merkle_root": "c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6"
+      },
+      {
+        "slug": "ops-runbook",
+        "role": "member",
+        "name": "运营手册 编写",
+        "evidence": "original_assets/ops-runbook/merkle_root",
+        "member_merkle_root": "2c40e17910ed424f5ed538ab66272d5bbf52b58a370546402f1e6cd5a40a0a3b"
+      },
+      {
+        "slug": "doc-signature-verify",
+        "role": "member",
+        "name": "文档签署核验 顾问",
+        "evidence": "original_assets/doc-signature-verify/merkle_root",
+        "member_merkle_root": "71366708bef37135dd542bea95ebba7e471e786a4b84204b730780c90dc6c35f"
+      }
+    ],
+    "team_lead": "cs-qbr-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0063b9b005de39ed",
+  "prompt_hash": "ebec1a33c5a07467",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1214\", \"kind\": \"team\", \"name\": \"客户复盘专家\", \"description\": \"客户复盘专家：围绕客户复盘，覆盖数据先行／目标回顾／差距共析，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cs-qbr-pro-team-lead\", \"role\": \"lead\", \"name\": \"客户复盘主理人\", \"evidence\": null}, {\"slug\": \"cs-qbr-pro\", \"role\": \"member\", \"name\": \"客户复盘 季度会议 顾问\", \"evidence\": \"original_assets/cs-qbr-pro/merkle_root\", \"member_merkle_root\": \"c520509290dde5fae296142c3954c733088926b5425580c229d691d3c77fdbd6\"}, {\"slug\": \"ops-runbook\", \"role\": \"member\", \"name\": \"运营手册 编写\", \"evidence\": \"original_assets/ops-runbook/merkle_root\", \"member_merkle_root\": \"2c40e17910ed424f5ed538ab66272d5bbf52b58a370546402f1e6cd5a40a0a3b\"}, {\"slug\": \"doc-signature-verify\", \"role\": \"member\", \"name\": \"文档签署核验 顾问\", \"evidence\": \"original_assets/doc-signature-verify/merkle_root\", \"member_merkle_root\": \"71366708bef37135dd542bea95ebba7e471e786a4b84204b730780c90dc6c35f\"}], \"team_lead\": \"cs-qbr-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cs-qbr-pro-team-lead.md": "00aa6c2546d8269ad78cc46e87eaf5b45bec2257ddc994172db6204305848d62",
+    "agents/cs-qbr-pro.md": "19e73c94f8b68206bc780944d982a104bcb6fd87015b04c4bba8f44416ae7db7",
+    "agents/doc-signature-verify.md": "3a2fd80322b07b6c079f4a440a7a9411618f284acfac3bb141f984ef7bc56f4f",
+    "agents/ops-runbook.md": "a908c51188902eec29dda9aa8a283d02a1b4c319000fddcbf1da6ce8bcd7f000",
+    "plugin.json": "4dd9313255e1b3f5d0ea6149f30fad8d339a9b33502ad2088d7fcfb205682bbe",
+    "settings.json": "57f635c93bf572bb543f686b5bddd5c88f7e7a15db63c5e125da8011ce568c5e"
+  }
+}

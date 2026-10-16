@@ -1,0 +1,126 @@
+{
+  "agentName": "game-onboarding-pro-team-lead",
+  "agents": [
+    "./agents/game-onboarding-pro-team-lead.md",
+    "./agents/game-onboarding-pro.md",
+    "./agents/illustration-guide.md",
+    "./agents/empty-state-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 游戏新手",
+    "zh": "帮我处理游戏新手"
+  },
+  "description": "game-onboarding-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 游戏新手 end-to-end: 边做边教, 一次一点 and 早期首胜. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长边做边教、一次一点与早期首胜，覆盖游戏新手全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "game-onboarding-pro Team",
+    "zh": "游戏新手专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "game-onboarding-pro-team-lead",
+      "name": {
+        "en": "游戏新手主理人",
+        "zh": "游戏新手主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/game-onboarding-pro.png",
+      "id": "game-onboarding-pro",
+      "name": {
+        "en": "game-onboarding-pro",
+        "zh": "游戏新手 引导设计 顾问"
+      },
+      "profession": {
+        "en": "game-onboarding-pro",
+        "zh": "游戏新手 引导设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/illustration-guide.png",
+      "id": "illustration-guide",
+      "name": {
+        "en": "illustration-guide",
+        "zh": "插画风格指南 顾问"
+      },
+      "profession": {
+        "en": "illustration-guide",
+        "zh": "插画风格指南 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/empty-state-pro.png",
+      "id": "empty-state-pro",
+      "name": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "profession": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1180",
+  "plugin": "group-team-1180",
+  "profession": {
+    "en": "game-onboarding-pro Collaboration Team",
+    "zh": "游戏新手专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 游戏新手",
+      "zh": "帮我处理游戏新手"
+    },
+    {
+      "en": "Plan 插画风格指南",
+      "zh": "帮我规划插画风格指南"
+    },
+    {
+      "en": "Review 空状态",
+      "zh": "帮我检查空状态"
+    }
+  ],
+  "tags": [
+    {
+      "en": "边做边教",
+      "zh": "边做边教"
+    },
+    {
+      "en": "一次一点",
+      "zh": "一次一点"
+    },
+    {
+      "en": "早期首胜",
+      "zh": "早期首胜"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "game-onboarding-pro-team-lead",
+    "memberAgents": [
+      "game-onboarding-pro",
+      "illustration-guide",
+      "empty-state-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "expat-relocation-pro-team-lead",
+  "agents": [
+    "./agents/expat-relocation-pro-team-lead.md",
+    "./agents/expat-relocation-pro.md",
+    "./agents/image-batch-expert.md",
+    "./agents/integration-test-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 外派安置",
+    "zh": "帮我处理外派安置"
+  },
+  "description": "expat-relocation-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 外派安置, covers 签证前置 / 过渡住房 / 教育对接, delivering structured results and actionable checklists.",
+    "zh": "集成测试专家：围绕外派安置，覆盖签证前置／过渡住房／教育对接，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "expat-relocation-pro Team",
+    "zh": "集成测试专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "expat-relocation-pro-team-lead",
+      "name": {
+        "en": "外派安置主理人",
+        "zh": "外派安置主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/expat-relocation-pro.png",
+      "id": "expat-relocation-pro",
+      "name": {
+        "en": "expat-relocation-pro",
+        "zh": "外派安置 落地支持 顾问"
+      },
+      "profession": {
+        "en": "expat-relocation-pro",
+        "zh": "外派安置 落地支持 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/image-batch-expert.png",
+      "id": "image-batch-expert",
+      "name": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "profession": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/integration-test-pro.png",
+      "id": "integration-test-pro",
+      "name": {
+        "en": "integration-test-pro",
+        "zh": "集成测试 场景覆盖 顾问"
+      },
+      "profession": {
+        "en": "integration-test-pro",
+        "zh": "集成测试 场景覆盖 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-694",
+  "plugin": "group-team-694",
+  "profession": {
+    "en": "expat-relocation-pro Collaboration Team",
+    "zh": "集成测试专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 外派安置",
+      "zh": "帮我处理外派安置"
+    },
+    {
+      "en": "Plan 图片批处理",
+      "zh": "帮我规划图片批处理"
+    },
+    {
+      "en": "Review 集成测试",
+      "zh": "帮我检查集成测试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "签证前置",
+      "zh": "签证前置"
+    },
+    {
+      "en": "过渡住房",
+      "zh": "过渡住房"
+    },
+    {
+      "en": "教育对接",
+      "zh": "教育对接"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "expat-relocation-pro-team-lead",
+    "memberAgents": [
+      "expat-relocation-pro",
+      "image-batch-expert",
+      "integration-test-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

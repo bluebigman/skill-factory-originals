@@ -1,0 +1,126 @@
+{
+  "agentName": "forecast-sanity-team-lead",
+  "agents": [
+    "./agents/forecast-sanity-team-lead.md",
+    "./agents/forecast-sanity.md",
+    "./agents/api-rate-govern.md",
+    "./agents/survey-design-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 预测结果校验",
+    "zh": "帮我处理预测结果校验"
+  },
+  "description": "forecast-sanity team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 预测结果校验 end-to-end: 区间输出, 假设显式 and 定期回测. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长区间输出、假设显式与定期回测，覆盖预测结果校验全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "forecast-sanity Team",
+    "zh": "预测结果校验顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "forecast-sanity-team-lead",
+      "name": {
+        "en": "预测结果校验主理人",
+        "zh": "预测结果校验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/forecast-sanity.png",
+      "id": "forecast-sanity",
+      "name": {
+        "en": "forecast-sanity",
+        "zh": "预测结果校验 顾问"
+      },
+      "profession": {
+        "en": "forecast-sanity",
+        "zh": "预测结果校验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-rate-govern.png",
+      "id": "api-rate-govern",
+      "name": {
+        "en": "api-rate-govern",
+        "zh": "限流治理 配额分配 顾问"
+      },
+      "profession": {
+        "en": "api-rate-govern",
+        "zh": "限流治理 配额分配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/survey-design-pro.png",
+      "id": "survey-design-pro",
+      "name": {
+        "en": "survey-design-pro",
+        "zh": "问卷设计 顾问"
+      },
+      "profession": {
+        "en": "survey-design-pro",
+        "zh": "问卷设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-925",
+  "plugin": "group-team-925",
+  "profession": {
+    "en": "forecast-sanity Collaboration Team",
+    "zh": "预测结果校验顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 预测结果校验",
+      "zh": "帮我处理预测结果校验"
+    },
+    {
+      "en": "Plan 限流治理",
+      "zh": "帮我规划限流治理"
+    },
+    {
+      "en": "Review 问卷设计",
+      "zh": "帮我检查问卷设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "区间输出",
+      "zh": "区间输出"
+    },
+    {
+      "en": "假设显式",
+      "zh": "假设显式"
+    },
+    {
+      "en": "定期回测",
+      "zh": "定期回测"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "forecast-sanity-team-lead",
+    "memberAgents": [
+      "forecast-sanity",
+      "api-rate-govern",
+      "survey-design-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

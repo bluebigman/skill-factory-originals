@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-806",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-806",
+    "kind": "team",
+    "name": "可读性核验专家",
+    "description": "输入性能剖析相关需求，输出热点定位、小步优化、复测对照三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "kb-quality-tuner-pro-team-lead",
+        "role": "lead",
+        "name": "知识库主理人",
+        "evidence": null
+      },
+      {
+        "slug": "kb-quality-tuner-pro",
+        "role": "member",
+        "name": "知识库 可读性核验 时效检查",
+        "evidence": "original_assets/kb-quality-tuner-pro/merkle_root",
+        "member_merkle_root": "fd6d62a24d8af6d8494b3292d5a975eba6adc975b77c46c33a14670f7b839f97"
+      },
+      {
+        "slug": "research-ops-expert",
+        "role": "member",
+        "name": "学术研究 资料检索 综述整理",
+        "evidence": "original_assets/research-ops-expert/merkle_root",
+        "member_merkle_root": "98054f0ede11b6670a1acae3c7d9db99e91344e38713ce598b265faf7f627fa4"
+      },
+      {
+        "slug": "perf-profile-pro",
+        "role": "member",
+        "name": "性能剖析 热点定位 顾问",
+        "evidence": "original_assets/perf-profile-pro/merkle_root",
+        "member_merkle_root": "3c0a934e3e01fecbf69b495b0f98b31d405fe5f19e639fedc1076627643ee000"
+      }
+    ],
+    "team_lead": "kb-quality-tuner-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "65b9a16233ddc725",
+  "prompt_hash": "ac89c2a36238fb05",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-806\", \"kind\": \"team\", \"name\": \"可读性核验专家\", \"description\": \"输入性能剖析相关需求，输出热点定位、小步优化、复测对照三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"kb-quality-tuner-pro-team-lead\", \"role\": \"lead\", \"name\": \"知识库主理人\", \"evidence\": null}, {\"slug\": \"kb-quality-tuner-pro\", \"role\": \"member\", \"name\": \"知识库 可读性核验 时效检查\", \"evidence\": \"original_assets/kb-quality-tuner-pro/merkle_root\", \"member_merkle_root\": \"fd6d62a24d8af6d8494b3292d5a975eba6adc975b77c46c33a14670f7b839f97\"}, {\"slug\": \"research-ops-expert\", \"role\": \"member\", \"name\": \"学术研究 资料检索 综述整理\", \"evidence\": \"original_assets/research-ops-expert/merkle_root\", \"member_merkle_root\": \"98054f0ede11b6670a1acae3c7d9db99e91344e38713ce598b265faf7f627fa4\"}, {\"slug\": \"perf-profile-pro\", \"role\": \"member\", \"name\": \"性能剖析 热点定位 顾问\", \"evidence\": \"original_assets/perf-profile-pro/merkle_root\", \"member_merkle_root\": \"3c0a934e3e01fecbf69b495b0f98b31d405fe5f19e639fedc1076627643ee000\"}], \"team_lead\": \"kb-quality-tuner-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/kb-quality-tuner-pro-team-lead.md": "cef7290276ad1b37ec7a4a96d5e205e023332b75d39a8b3c1df53ba22ccce1ee",
+    "agents/kb-quality-tuner-pro.md": "1a112ab929b72a98e5ee086aa59329a144c33eb27bf80270f8f38dac3ac1a70a",
+    "agents/perf-profile-pro.md": "76a1b0d240ccfb6810b3aedecab335f84695a7a954f3e7ed74d76f6ac099bdf1",
+    "agents/research-ops-expert.md": "d0a09cb25d06773efecb27ebb83ac001b6534db4395a8517ecd5b829b51d3133",
+    "plugin.json": "2dcdb5f6d3f3af240faed4544660c76abea46ef4a94fb38c23c3b732b23c21d2",
+    "settings.json": "76aed789bb219b1e2da7615cffd40b4808a719722a8e6dbbfb560efeb3cc3b5a"
+  }
+}

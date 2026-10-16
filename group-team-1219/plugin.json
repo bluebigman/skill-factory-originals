@@ -1,0 +1,126 @@
+{
+  "agentName": "metric-definition-team-lead",
+  "agents": [
+    "./agents/metric-definition-team-lead.md",
+    "./agents/metric-definition.md",
+    "./agents/agent-conflict-resolve.md",
+    "./agents/table-relation-map.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 指标口径定义",
+    "zh": "帮我处理指标口径定义"
+  },
+  "description": "metric-definition team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 指标口径定义 end-to-end: 分子分母, 统计周期 and 变更留痕. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分子分母、统计周期与变更留痕，覆盖指标口径定义全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "metric-definition Team",
+    "zh": "指标口径定义专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "metric-definition-team-lead",
+      "name": {
+        "en": "指标口径定义主理人",
+        "zh": "指标口径定义主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/metric-definition.png",
+      "id": "metric-definition",
+      "name": {
+        "en": "metric-definition",
+        "zh": "指标口径定义 顾问"
+      },
+      "profession": {
+        "en": "metric-definition",
+        "zh": "指标口径定义 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-conflict-resolve.png",
+      "id": "agent-conflict-resolve",
+      "name": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "profession": {
+        "en": "agent-conflict-resolve",
+        "zh": "冲突消解 优先级裁 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/table-relation-map.png",
+      "id": "table-relation-map",
+      "name": {
+        "en": "table-relation-map",
+        "zh": "表关系梳理 助手"
+      },
+      "profession": {
+        "en": "table-relation-map",
+        "zh": "表关系梳理 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1219",
+  "plugin": "group-team-1219",
+  "profession": {
+    "en": "metric-definition Collaboration Team",
+    "zh": "指标口径定义专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 指标口径定义",
+      "zh": "帮我处理指标口径定义"
+    },
+    {
+      "en": "Plan 冲突消解",
+      "zh": "帮我规划冲突消解"
+    },
+    {
+      "en": "Review 表关系梳理",
+      "zh": "帮我检查表关系梳理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分子分母",
+      "zh": "分子分母"
+    },
+    {
+      "en": "统计周期",
+      "zh": "统计周期"
+    },
+    {
+      "en": "变更留痕",
+      "zh": "变更留痕"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "metric-definition-team-lead",
+    "memberAgents": [
+      "metric-definition",
+      "agent-conflict-resolve",
+      "table-relation-map"
+    ]
+  },
+  "version": "1.0.0"
+}

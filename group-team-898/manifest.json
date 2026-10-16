@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-898",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-898",
+    "kind": "team",
+    "name": "文档比对专家",
+    "description": "输入团队周报编排相关需求，输出固定栏目、重点前置、问题不藏三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "newsletter-compose-team-lead",
+        "role": "lead",
+        "name": "团队周报编排主理人",
+        "evidence": null
+      },
+      {
+        "slug": "newsletter-compose",
+        "role": "member",
+        "name": "团队周报编排 助手",
+        "evidence": "original_assets/newsletter-compose/merkle_root",
+        "member_merkle_root": "7f3353df2d3148e7858005ecae15f0a09d984e70d81e05f466a7ba9af72b871c"
+      },
+      {
+        "slug": "document-diff-pro",
+        "role": "member",
+        "name": "文档比对 版本差异 顾问",
+        "evidence": "original_assets/document-diff-pro/merkle_root",
+        "member_merkle_root": "489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935"
+      },
+      {
+        "slug": "brand-tone-guide",
+        "role": "member",
+        "name": "品牌语气指南 顾问",
+        "evidence": "original_assets/brand-tone-guide/merkle_root",
+        "member_merkle_root": "e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c"
+      }
+    ],
+    "team_lead": "newsletter-compose-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3e7bc5a3de0a549c",
+  "prompt_hash": "3b7e5f72ce4e36fb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-898\", \"kind\": \"team\", \"name\": \"文档比对专家\", \"description\": \"输入团队周报编排相关需求，输出固定栏目、重点前置、问题不藏三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"newsletter-compose-team-lead\", \"role\": \"lead\", \"name\": \"团队周报编排主理人\", \"evidence\": null}, {\"slug\": \"newsletter-compose\", \"role\": \"member\", \"name\": \"团队周报编排 助手\", \"evidence\": \"original_assets/newsletter-compose/merkle_root\", \"member_merkle_root\": \"7f3353df2d3148e7858005ecae15f0a09d984e70d81e05f466a7ba9af72b871c\"}, {\"slug\": \"document-diff-pro\", \"role\": \"member\", \"name\": \"文档比对 版本差异 顾问\", \"evidence\": \"original_assets/document-diff-pro/merkle_root\", \"member_merkle_root\": \"489257b1af5e1057c2b0351ef8f99b182043044d9ee62ad6512d64420cdc3935\"}, {\"slug\": \"brand-tone-guide\", \"role\": \"member\", \"name\": \"品牌语气指南 顾问\", \"evidence\": \"original_assets/brand-tone-guide/merkle_root\", \"member_merkle_root\": \"e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c\"}], \"team_lead\": \"newsletter-compose-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/brand-tone-guide.md": "6c310a0b122d733980d912dd1b01d621fd791249a2456be8c0e7338c5f9d69d1",
+    "agents/document-diff-pro.md": "a64123cd0fba4203c8100269799df09796faf85afb6a839b8f478e1d70516952",
+    "agents/newsletter-compose-team-lead.md": "d8ff67dab6d577d1e6addc7f28eb0a4b01acb54a9803ade5170a21c3cba7ea87",
+    "agents/newsletter-compose.md": "1dadd0a561f16cd5d761c7ec5c90411381c5d0647e9cf3ce90d135a7ec476001",
+    "plugin.json": "34c67a6555ffffc2f358cc58cc7824621311b9a0e93208db648f93565c73c9a4",
+    "settings.json": "8dc10a456efa467a4af8ba1e738c9b226e8866baf3e1f39e28d25758e183d1c0"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "input-validation-rule-team-lead",
+  "agents": [
+    "./agents/input-validation-rule-team-lead.md",
+    "./agents/input-validation-rule.md",
+    "./agents/git-worktree-guide.md",
+    "./agents/tool-interface-design-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 输入校验规范",
+    "zh": "帮我处理输入校验规范"
+  },
+  "description": "input-validation-rule team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 输入校验规范 end-to-end: 目录选定, 清理及时 and 命名可读. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长目录选定、清理及时与命名可读，覆盖输入校验规范全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "input-validation-rule Team",
+    "zh": "输入校验规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "input-validation-rule-team-lead",
+      "name": {
+        "en": "输入校验规范主理人",
+        "zh": "输入校验规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/input-validation-rule.png",
+      "id": "input-validation-rule",
+      "name": {
+        "en": "input-validation-rule",
+        "zh": "输入校验规范 顾问"
+      },
+      "profession": {
+        "en": "input-validation-rule",
+        "zh": "输入校验规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/git-worktree-guide.png",
+      "id": "git-worktree-guide",
+      "name": {
+        "en": "git-worktree-guide",
+        "zh": "分支隔离工作区 顾问"
+      },
+      "profession": {
+        "en": "git-worktree-guide",
+        "zh": "分支隔离工作区 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tool-interface-design-pro.png",
+      "id": "tool-interface-design-pro",
+      "name": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "profession": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1228",
+  "plugin": "group-team-1228",
+  "profession": {
+    "en": "input-validation-rule Collaboration Team",
+    "zh": "输入校验规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 输入校验规范",
+      "zh": "帮我处理输入校验规范"
+    },
+    {
+      "en": "Plan 分支隔离工作区",
+      "zh": "帮我规划分支隔离工作区"
+    },
+    {
+      "en": "Review 工具设计",
+      "zh": "帮我检查工具设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "白名单优先",
+      "zh": "白名单优先"
+    },
+    {
+      "en": "边界与类型",
+      "zh": "边界与类型"
+    },
+    {
+      "en": "规范后再用",
+      "zh": "规范后再用"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "input-validation-rule-team-lead",
+    "memberAgents": [
+      "input-validation-rule",
+      "git-worktree-guide",
+      "tool-interface-design-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

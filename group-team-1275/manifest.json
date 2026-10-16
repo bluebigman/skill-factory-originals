@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1275",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1275",
+    "kind": "team",
+    "name": "素材整理专家",
+    "description": "输入报告数据核验相关需求，输出口径先对、交叉验证、异常问因三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-data-verify-team-lead",
+        "role": "lead",
+        "name": "报告数据核验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-data-verify",
+        "role": "member",
+        "name": "报告数据核验 顾问",
+        "evidence": "original_assets/report-data-verify/merkle_root",
+        "member_merkle_root": "577adfc1ad40ebc68b3efd1c7650d85b61e80dc2414dc9f73cf114da694136b4"
+      },
+      {
+        "slug": "construction-coordination",
+        "role": "member",
+        "name": "施工协调 顾问",
+        "evidence": "original_assets/construction-coordination/merkle_root",
+        "member_merkle_root": "00d8f73c3c9251829e2d73d7303c877dddf80262006f12b50b72c5355a4fbbce"
+      },
+      {
+        "slug": "crawl-file-pro",
+        "role": "member",
+        "name": "文件采集 素材整理",
+        "evidence": "original_assets/crawl-file-pro/merkle_root",
+        "member_merkle_root": "df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f"
+      }
+    ],
+    "team_lead": "report-data-verify-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "eb880c46e3100f33",
+  "prompt_hash": "a27076c08812dcee",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1275\", \"kind\": \"team\", \"name\": \"素材整理专家\", \"description\": \"输入报告数据核验相关需求，输出口径先对、交叉验证、异常问因三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-data-verify-team-lead\", \"role\": \"lead\", \"name\": \"报告数据核验主理人\", \"evidence\": null}, {\"slug\": \"report-data-verify\", \"role\": \"member\", \"name\": \"报告数据核验 顾问\", \"evidence\": \"original_assets/report-data-verify/merkle_root\", \"member_merkle_root\": \"577adfc1ad40ebc68b3efd1c7650d85b61e80dc2414dc9f73cf114da694136b4\"}, {\"slug\": \"construction-coordination\", \"role\": \"member\", \"name\": \"施工协调 顾问\", \"evidence\": \"original_assets/construction-coordination/merkle_root\", \"member_merkle_root\": \"00d8f73c3c9251829e2d73d7303c877dddf80262006f12b50b72c5355a4fbbce\"}, {\"slug\": \"crawl-file-pro\", \"role\": \"member\", \"name\": \"文件采集 素材整理\", \"evidence\": \"original_assets/crawl-file-pro/merkle_root\", \"member_merkle_root\": \"df05ce31a09ff284c124057bf432356fae337f3d0b7b46564b069faf85ee1f8f\"}], \"team_lead\": \"report-data-verify-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/construction-coordination.md": "633c88af4d5958ef2658c95a8b11cf91fdcba64906751a5b991a784875f900c1",
+    "agents/crawl-file-pro.md": "6fc07b5b6664a2ef48a686474e885a385770d366fc358fca111199a879e586df",
+    "agents/report-data-verify-team-lead.md": "ee58f818d9f1beb2226e1f54a2236172be065339a1c9dcc1afa7012a8c6b65ae",
+    "agents/report-data-verify.md": "50ac94038d6468873da6c5dc16b77a6075c567eeed515f80f78bc1b5771e61d6",
+    "plugin.json": "d49fcf3f284ebe0b0bdeca69a1eceb43c89b3fc20e6a4ad5ba579ae7956cb060",
+    "settings.json": "9a5d81f8553be3b57f8bf76832b87b423d5015665217dccc97c8a5db67b26db0"
+  }
+}

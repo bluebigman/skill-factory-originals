@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1070",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1070",
+    "kind": "team",
+    "name": "隐私转换专家",
+    "description": "隐私转换专家：围绕活动方案，覆盖目标单一／预算留余／风险预案，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-convert-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "图片标准化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-convert-pro-fixed",
+        "role": "member",
+        "name": "图片标准化 隐私转换 格式转换",
+        "evidence": "original_assets/doc-convert-pro-fixed/merkle_root",
+        "member_merkle_root": "ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1"
+      },
+      {
+        "slug": "event-plan-review",
+        "role": "member",
+        "name": "活动方案 评审",
+        "evidence": "original_assets/event-plan-review/merkle_root",
+        "member_merkle_root": "706d771229b494c01db5d1675a2e6f231e2901835a9326dc55288e03ffe13cb4"
+      },
+      {
+        "slug": "newsletter-compose",
+        "role": "member",
+        "name": "团队周报编排 助手",
+        "evidence": "original_assets/newsletter-compose/merkle_root",
+        "member_merkle_root": "7f3353df2d3148e7858005ecae15f0a09d984e70d81e05f466a7ba9af72b871c"
+      }
+    ],
+    "team_lead": "doc-convert-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fa3535e72f1e9d9f",
+  "prompt_hash": "dd06d57ef134e4e2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1070\", \"kind\": \"team\", \"name\": \"隐私转换专家\", \"description\": \"隐私转换专家：围绕活动方案，覆盖目标单一／预算留余／风险预案，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-convert-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"图片标准化主理人\", \"evidence\": null}, {\"slug\": \"doc-convert-pro-fixed\", \"role\": \"member\", \"name\": \"图片标准化 隐私转换 格式转换\", \"evidence\": \"original_assets/doc-convert-pro-fixed/merkle_root\", \"member_merkle_root\": \"ddd26f93f3dcdb03fe06207540f1e75b4ecfc13906772e4f49a1e4c4352d22d1\"}, {\"slug\": \"event-plan-review\", \"role\": \"member\", \"name\": \"活动方案 评审\", \"evidence\": \"original_assets/event-plan-review/merkle_root\", \"member_merkle_root\": \"706d771229b494c01db5d1675a2e6f231e2901835a9326dc55288e03ffe13cb4\"}, {\"slug\": \"newsletter-compose\", \"role\": \"member\", \"name\": \"团队周报编排 助手\", \"evidence\": \"original_assets/newsletter-compose/merkle_root\", \"member_merkle_root\": \"7f3353df2d3148e7858005ecae15f0a09d984e70d81e05f466a7ba9af72b871c\"}], \"team_lead\": \"doc-convert-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-fixed-team-lead.md": "2a4febc94b4c6141cf91c5eaa8a3d34af6a26d4c62621c60366d5334b1a5d0a2",
+    "agents/doc-convert-pro-fixed.md": "b84b4f03fe9e1f532ef39c6d89c09e49b72bcdd20516ab2f1cd9ae877147d5ce",
+    "agents/event-plan-review.md": "ae4ae0e25db29fb8ba0e4c85b928f0eee949ae15d00434e8d26b3bc78f9a85d2",
+    "agents/newsletter-compose.md": "166cd0d2c0818ea563821f97bf0e5cabdded60a4a8e3834372f1683dc5cb9f83",
+    "plugin.json": "75218ad53f5b3ff8e440ccb9edffdd0e418badd2a9be383b5af10f131b045f1d",
+    "settings.json": "58c06f1269b42233bec1b8fd2d0fda97c2088a6ab29b1397c3adc27775587833"
+  }
+}

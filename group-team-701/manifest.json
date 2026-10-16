@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-701",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-701",
+    "kind": "team",
+    "name": "改进闭环度量驱动专家",
+    "description": "输入发布闸门相关需求，输出清单核对、依赖锁定、回滚预演三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-release-gate-team-lead",
+        "role": "lead",
+        "name": "发布闸门主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-release-gate",
+        "role": "member",
+        "name": "发布闸门 清单 顾问",
+        "evidence": "original_assets/agent-release-gate/merkle_root",
+        "member_merkle_root": "e3090ff98ae4e413d88d863c0c9a5cec39295787a734f9dc7fe363eb3fe9c967"
+      },
+      {
+        "slug": "agent-improve-loop",
+        "role": "member",
+        "name": "改进闭环 度量驱动 顾问",
+        "evidence": "original_assets/agent-improve-loop/merkle_root",
+        "member_merkle_root": "b14c4541bcb71e6120033e9cbafd40573db5f714d74887ea5e797fdff5857f80"
+      },
+      {
+        "slug": "global-payment-ops",
+        "role": "member",
+        "name": "跨境收款 流程核对 顾问",
+        "evidence": "original_assets/global-payment-ops/merkle_root",
+        "member_merkle_root": "91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0"
+      }
+    ],
+    "team_lead": "agent-release-gate-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "9730ac337a094d2c",
+  "prompt_hash": "ae1dbc1797323138",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-701\", \"kind\": \"team\", \"name\": \"改进闭环度量驱动专家\", \"description\": \"输入发布闸门相关需求，输出清单核对、依赖锁定、回滚预演三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-release-gate-team-lead\", \"role\": \"lead\", \"name\": \"发布闸门主理人\", \"evidence\": null}, {\"slug\": \"agent-release-gate\", \"role\": \"member\", \"name\": \"发布闸门 清单 顾问\", \"evidence\": \"original_assets/agent-release-gate/merkle_root\", \"member_merkle_root\": \"e3090ff98ae4e413d88d863c0c9a5cec39295787a734f9dc7fe363eb3fe9c967\"}, {\"slug\": \"agent-improve-loop\", \"role\": \"member\", \"name\": \"改进闭环 度量驱动 顾问\", \"evidence\": \"original_assets/agent-improve-loop/merkle_root\", \"member_merkle_root\": \"b14c4541bcb71e6120033e9cbafd40573db5f714d74887ea5e797fdff5857f80\"}, {\"slug\": \"global-payment-ops\", \"role\": \"member\", \"name\": \"跨境收款 流程核对 顾问\", \"evidence\": \"original_assets/global-payment-ops/merkle_root\", \"member_merkle_root\": \"91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0\"}], \"team_lead\": \"agent-release-gate-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-improve-loop.md": "82b47121a3354ef1235c3c94ac8ec90b8a8de0a19dd1e10b5cad264ac064183c",
+    "agents/agent-release-gate-team-lead.md": "a4eb673679a5d88599402ba8de1b33d5ed98461497555e37b80a1d55e70138ab",
+    "agents/agent-release-gate.md": "e0a578a31105e730bd591931f584cb6ae37a18aecad349e544d6975d77a6f755",
+    "agents/global-payment-ops.md": "dd42595263a2542b0e348d6a72be11cf16b18f2dab45eb214cec3e6a7a759fe0",
+    "plugin.json": "c232324804c45252725b07cfbde88428e08e6aa5653080b0418d7ac4fd43dcd1",
+    "settings.json": "1d979227cb33843a1e5800be55a7cfd39e863ca759d5106cd37f92ca2a49d3f7"
+  }
+}

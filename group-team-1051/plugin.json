@@ -1,0 +1,126 @@
+{
+  "agentName": "log-to-metric-team-lead",
+  "agents": [
+    "./agents/log-to-metric-team-lead.md",
+    "./agents/log-to-metric.md",
+    "./agents/privacy-impact.md",
+    "./agents/query-cache-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 日志转指标",
+    "zh": "帮我处理日志转指标"
+  },
+  "description": "log-to-metric team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 日志转指标 end-to-end: 采样策略, 基数控制 and 聚合窗口. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长采样策略、基数控制与聚合窗口，覆盖日志转指标全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "log-to-metric Team",
+    "zh": "日志转指标专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "log-to-metric-team-lead",
+      "name": {
+        "en": "日志转指标主理人",
+        "zh": "日志转指标主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/log-to-metric.png",
+      "id": "log-to-metric",
+      "name": {
+        "en": "log-to-metric",
+        "zh": "日志转指标 顾问"
+      },
+      "profession": {
+        "en": "log-to-metric",
+        "zh": "日志转指标 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/privacy-impact.png",
+      "id": "privacy-impact",
+      "name": {
+        "en": "privacy-impact",
+        "zh": "隐私影响评估 顾问"
+      },
+      "profession": {
+        "en": "privacy-impact",
+        "zh": "隐私影响评估 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/query-cache-pro.png",
+      "id": "query-cache-pro",
+      "name": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "profession": {
+        "en": "query-cache-pro",
+        "zh": "查询缓存 命中优化 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1051",
+  "plugin": "group-team-1051",
+  "profession": {
+    "en": "log-to-metric Collaboration Team",
+    "zh": "日志转指标专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 日志转指标",
+      "zh": "帮我处理日志转指标"
+    },
+    {
+      "en": "Plan 隐私影响评估",
+      "zh": "帮我规划隐私影响评估"
+    },
+    {
+      "en": "Review 查询缓存",
+      "zh": "帮我检查查询缓存"
+    }
+  ],
+  "tags": [
+    {
+      "en": "采样策略",
+      "zh": "采样策略"
+    },
+    {
+      "en": "基数控制",
+      "zh": "基数控制"
+    },
+    {
+      "en": "聚合窗口",
+      "zh": "聚合窗口"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "log-to-metric-team-lead",
+    "memberAgents": [
+      "log-to-metric",
+      "privacy-impact",
+      "query-cache-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

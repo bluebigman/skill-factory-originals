@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-502",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-502",
+    "kind": "team",
+    "name": "数据保留分级策略专家",
+    "description": "擅长分级保留、合规优先与清理可逆，覆盖数据保留全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-retention-policy-team-lead",
+        "role": "lead",
+        "name": "数据保留主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-retention-policy",
+        "role": "member",
+        "name": "数据保留 分级策略 顾问",
+        "evidence": "original_assets/data-retention-policy/merkle_root",
+        "member_merkle_root": "f5da86f1eccb4965fc83c5dff04b07cf351fede783bda1b7668f863f131f36cc"
+      },
+      {
+        "slug": "agent-cache-strategy",
+        "role": "member",
+        "name": "缓存策略 失效控制 顾问",
+        "evidence": "original_assets/agent-cache-strategy/merkle_root",
+        "member_merkle_root": "e01cda4a083abd2a885d8ffc3efa6f7f80ef70723151cb75c0fd0797a05fa8ab"
+      },
+      {
+        "slug": "selfhost-ai-env-expert",
+        "role": "member",
+        "name": "自托管AI环境 部署核验",
+        "evidence": "original_assets/selfhost-ai-env-expert/merkle_root",
+        "member_merkle_root": "ef3d2c5cbe6e3ea985e4b6f593bd73a2525961ea7e8db0533bb4d7b3239d6392"
+      }
+    ],
+    "team_lead": "data-retention-policy-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "26440002639ded85",
+  "prompt_hash": "8eec9c80fd8fe4a8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-502\", \"kind\": \"team\", \"name\": \"数据保留分级策略专家\", \"description\": \"擅长分级保留、合规优先与清理可逆，覆盖数据保留全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-retention-policy-team-lead\", \"role\": \"lead\", \"name\": \"数据保留主理人\", \"evidence\": null}, {\"slug\": \"data-retention-policy\", \"role\": \"member\", \"name\": \"数据保留 分级策略 顾问\", \"evidence\": \"original_assets/data-retention-policy/merkle_root\", \"member_merkle_root\": \"f5da86f1eccb4965fc83c5dff04b07cf351fede783bda1b7668f863f131f36cc\"}, {\"slug\": \"agent-cache-strategy\", \"role\": \"member\", \"name\": \"缓存策略 失效控制 顾问\", \"evidence\": \"original_assets/agent-cache-strategy/merkle_root\", \"member_merkle_root\": \"e01cda4a083abd2a885d8ffc3efa6f7f80ef70723151cb75c0fd0797a05fa8ab\"}, {\"slug\": \"selfhost-ai-env-expert\", \"role\": \"member\", \"name\": \"自托管AI环境 部署核验\", \"evidence\": \"original_assets/selfhost-ai-env-expert/merkle_root\", \"member_merkle_root\": \"ef3d2c5cbe6e3ea985e4b6f593bd73a2525961ea7e8db0533bb4d7b3239d6392\"}], \"team_lead\": \"data-retention-policy-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-cache-strategy.md": "0f2ffc6d2da0cac3867ec4036a9c168b36a529834fade93f20358792544382b3",
+    "agents/data-retention-policy-team-lead.md": "16fbab8d444b2cf6e299ea3b6fa5be98826053684bd0a1ebeaa8c9b2a4db8d69",
+    "agents/data-retention-policy.md": "03f6f7bed5cd8813509ca56c7efa7f432651b5830cb5d943529d17ea9064c30f",
+    "agents/selfhost-ai-env-expert.md": "11d71631fb918920d320392eb1f90c265c1b3c434f4d02ee6a546d70a1fe7e53",
+    "plugin.json": "6af8dc2e4100e3cffff9bd09faf1330c8b8e0dae2ba87cfd69690c0b82eae088",
+    "settings.json": "268a729e831bf4b5fee78d858849909eba206ce8a69e3a031516f643573e5d17"
+  }
+}

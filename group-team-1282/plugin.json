@@ -1,0 +1,126 @@
+{
+  "agentName": "content-design-system-team-lead",
+  "agents": [
+    "./agents/content-design-system-team-lead.md",
+    "./agents/content-design-system.md",
+    "./agents/audio-clip-expert.md",
+    "./agents/microcopy-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容设计",
+    "zh": "帮我处理内容设计"
+  },
+  "description": "content-design-system team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内容设计 end-to-end: 语气维度, 定期抽审 and 字幕生成. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长语气维度、定期抽审与字幕生成，覆盖内容设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "content-design-system Team",
+    "zh": "内容设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-design-system-team-lead",
+      "name": {
+        "en": "内容设计主理人",
+        "zh": "内容设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-design-system.png",
+      "id": "content-design-system",
+      "name": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "profession": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audio-clip-expert.png",
+      "id": "audio-clip-expert",
+      "name": {
+        "en": "AudioClip",
+        "zh": "音频剪辑专家"
+      },
+      "profession": {
+        "en": "AudioClip",
+        "zh": "音频剪辑与播客后期制作专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/microcopy-coach.png",
+      "id": "microcopy-coach",
+      "name": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "profession": {
+        "en": "microcopy-coach",
+        "zh": "界面文案 撰写 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1282",
+  "plugin": "group-team-1282",
+  "profession": {
+    "en": "content-design-system Collaboration Team",
+    "zh": "内容设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容设计",
+      "zh": "帮我处理内容设计"
+    },
+    {
+      "en": "Plan 音频剪辑与播客后期制作专家",
+      "zh": "帮我规划音频剪辑与播客后期制作专家"
+    },
+    {
+      "en": "Review 界面文案",
+      "zh": "帮我检查界面文案"
+    }
+  ],
+  "tags": [
+    {
+      "en": "语气维度",
+      "zh": "语气维度"
+    },
+    {
+      "en": "定期抽审",
+      "zh": "定期抽审"
+    },
+    {
+      "en": "正反例",
+      "zh": "正反例"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-design-system-team-lead",
+    "memberAgents": [
+      "content-design-system",
+      "audio-clip-expert",
+      "microcopy-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

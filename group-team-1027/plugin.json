@@ -1,0 +1,126 @@
+{
+  "agentName": "report-narrative-team-lead",
+  "agents": [
+    "./agents/report-narrative-team-lead.md",
+    "./agents/report-narrative.md",
+    "./agents/batch-data-validate.md",
+    "./agents/data-access-request.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据叙事撰写",
+    "zh": "帮我处理数据叙事撰写"
+  },
+  "description": "report-narrative team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 数据叙事撰写 end-to-end: 结论先行, 一图一义 and 标注关键. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长结论先行、一图一义与标注关键，覆盖数据叙事撰写全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "report-narrative Team",
+    "zh": "数据叙事撰写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "report-narrative-team-lead",
+      "name": {
+        "en": "数据叙事撰写主理人",
+        "zh": "数据叙事撰写主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/report-narrative.png",
+      "id": "report-narrative",
+      "name": {
+        "en": "report-narrative",
+        "zh": "数据叙事撰写 顾问"
+      },
+      "profession": {
+        "en": "report-narrative",
+        "zh": "数据叙事撰写 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/batch-data-validate.png",
+      "id": "batch-data-validate",
+      "name": {
+        "en": "batch-data-validate",
+        "zh": "批量数据校验 助手"
+      },
+      "profession": {
+        "en": "batch-data-validate",
+        "zh": "批量数据校验 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-access-request.png",
+      "id": "data-access-request",
+      "name": {
+        "en": "data-access-request",
+        "zh": "数据取用流程 顾问"
+      },
+      "profession": {
+        "en": "data-access-request",
+        "zh": "数据取用流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1027",
+  "plugin": "group-team-1027",
+  "profession": {
+    "en": "report-narrative Collaboration Team",
+    "zh": "数据叙事撰写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据叙事撰写",
+      "zh": "帮我处理数据叙事撰写"
+    },
+    {
+      "en": "Plan 批量数据校验",
+      "zh": "帮我规划批量数据校验"
+    },
+    {
+      "en": "Review 数据取用流程",
+      "zh": "帮我检查数据取用流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结论先行",
+      "zh": "结论先行"
+    },
+    {
+      "en": "一图一义",
+      "zh": "一图一义"
+    },
+    {
+      "en": "标注关键",
+      "zh": "标注关键"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "report-narrative-team-lead",
+    "memberAgents": [
+      "report-narrative",
+      "batch-data-validate",
+      "data-access-request"
+    ]
+  },
+  "version": "1.0.0"
+}

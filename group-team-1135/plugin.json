@@ -1,0 +1,126 @@
+{
+  "agentName": "project-manage-pro-team-lead",
+  "agents": [
+    "./agents/project-manage-pro-team-lead.md",
+    "./agents/project-manage-pro.md",
+    "./agents/intl-partner-screen.md",
+    "./agents/performance-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 项目任务管理",
+    "zh": "帮我处理项目任务管理"
+  },
+  "description": "Project Management Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 海外伙伴 end-to-end: 小额试单, 退出条款 and 双向沟通. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长小额试单、退出条款与双向沟通，覆盖海外伙伴全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Project Management Expert Team",
+    "zh": "进度跟踪专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "project-manage-pro-team-lead",
+      "name": {
+        "en": "项目任务管理主理人",
+        "zh": "项目任务管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/project-manage-pro.png",
+      "id": "project-manage-pro",
+      "name": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "profession": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-partner-screen.png",
+      "id": "intl-partner-screen",
+      "name": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "profession": {
+        "en": "intl-partner-screen",
+        "zh": "海外伙伴 尽调筛选 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/performance-review.png",
+      "id": "performance-review",
+      "name": {
+        "en": "performance-review",
+        "zh": "绩效评估设计 顾问"
+      },
+      "profession": {
+        "en": "performance-review",
+        "zh": "绩效评估设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1135",
+  "plugin": "group-team-1135",
+  "profession": {
+    "en": "Project Management Expert Collaboration Team",
+    "zh": "进度跟踪专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 项目任务管理",
+      "zh": "帮我处理项目任务管理"
+    },
+    {
+      "en": "Plan 海外伙伴",
+      "zh": "帮我规划海外伙伴"
+    },
+    {
+      "en": "Review 绩效评估设计",
+      "zh": "帮我检查绩效评估设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "风险评分",
+      "zh": "风险评分"
+    },
+    {
+      "en": "置信门控",
+      "zh": "置信门控"
+    },
+    {
+      "en": "数据转换",
+      "zh": "数据转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "project-manage-pro-team-lead",
+    "memberAgents": [
+      "project-manage-pro",
+      "intl-partner-screen",
+      "performance-review"
+    ]
+  },
+  "version": "1.0.0"
+}

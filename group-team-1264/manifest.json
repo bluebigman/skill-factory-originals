@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1264",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1264",
+    "kind": "team",
+    "name": "文档格式统一助手专家",
+    "description": "擅长样式驱动、标题层级与编号自动，覆盖文档格式统一全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-format-unify-team-lead",
+        "role": "lead",
+        "name": "文档格式统一主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-format-unify",
+        "role": "member",
+        "name": "文档格式统一 助手",
+        "evidence": "original_assets/doc-format-unify/merkle_root",
+        "member_merkle_root": "8a0c9a73f4f885cf27ceb89da1cda695cfc09d4d559fa2a4b3b40536dbad9b59"
+      },
+      {
+        "slug": "landing-page-opt",
+        "role": "member",
+        "name": "落地页 转化优化 顾问",
+        "evidence": "original_assets/landing-page-opt/merkle_root",
+        "member_merkle_root": "404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87"
+      },
+      {
+        "slug": "market-intelligence-expert-v111",
+        "role": "member",
+        "name": "市场洞察 竞品追踪 情报简报",
+        "evidence": "original_assets/market-intelligence-expert-v111/merkle_root",
+        "member_merkle_root": "aa0b8aa48f1779c4d82f0696a83c493087cb17513c5ea553a6b8d96ba614e8be"
+      }
+    ],
+    "team_lead": "doc-format-unify-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "283ed304a341d13d",
+  "prompt_hash": "0a3dacb301532cda",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1264\", \"kind\": \"team\", \"name\": \"文档格式统一助手专家\", \"description\": \"擅长样式驱动、标题层级与编号自动，覆盖文档格式统一全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-format-unify-team-lead\", \"role\": \"lead\", \"name\": \"文档格式统一主理人\", \"evidence\": null}, {\"slug\": \"doc-format-unify\", \"role\": \"member\", \"name\": \"文档格式统一 助手\", \"evidence\": \"original_assets/doc-format-unify/merkle_root\", \"member_merkle_root\": \"8a0c9a73f4f885cf27ceb89da1cda695cfc09d4d559fa2a4b3b40536dbad9b59\"}, {\"slug\": \"landing-page-opt\", \"role\": \"member\", \"name\": \"落地页 转化优化 顾问\", \"evidence\": \"original_assets/landing-page-opt/merkle_root\", \"member_merkle_root\": \"404fc11d26219846016eaac41bb72aac0d86402a43732cf9ab3f1fca2c1ded87\"}, {\"slug\": \"market-intelligence-expert-v111\", \"role\": \"member\", \"name\": \"市场洞察 竞品追踪 情报简报\", \"evidence\": \"original_assets/market-intelligence-expert-v111/merkle_root\", \"member_merkle_root\": \"aa0b8aa48f1779c4d82f0696a83c493087cb17513c5ea553a6b8d96ba614e8be\"}], \"team_lead\": \"doc-format-unify-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-format-unify-team-lead.md": "e88ecef90927d6cfc4e7944ac74cd9fee50d1dfd027c10033521427440fd0636",
+    "agents/doc-format-unify.md": "40aa8e1e50d98cec562f445273c9551c450093ed636424fcb2ff372c98e80f0c",
+    "agents/landing-page-opt.md": "d19b70c9e5e5e856eac9b89f1c936f7cd24edc71f09465519bc59c784e16ac8d",
+    "agents/market-intelligence-expert-v111.md": "d53888d9c0679694437ad01376bb8df88497534f5779091f8ad9936773269048",
+    "plugin.json": "a1f023c363b51d640ade19d653af423ca23871694c89ea8cbfc80d0ea52f0ce0",
+    "settings.json": "9c484cc8273350dd299cc602e8eaea505dcaa1879956e4d023eb8b5912b7851e"
+  }
+}

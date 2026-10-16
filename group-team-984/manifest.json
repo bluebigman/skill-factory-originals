@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-984",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-984",
+    "kind": "team",
+    "name": "网页提取专家",
+    "description": "输入验证链相关需求，输出误报处理、指数退避、幂等前提三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "web-extract-pro-team-lead",
+        "role": "lead",
+        "name": "网页提取主理人",
+        "evidence": null
+      },
+      {
+        "slug": "web-extract-pro",
+        "role": "member",
+        "name": "网页提取 结构化解析",
+        "evidence": "original_assets/web-extract-pro/merkle_root",
+        "member_merkle_root": "0c86d79514fd5e4a26a868855046fba24b197d1876285a6fede8fb08ccb2eb06"
+      },
+      {
+        "slug": "agent-output-verify-chain",
+        "role": "member",
+        "name": "验证链 多级校验 顾问",
+        "evidence": "original_assets/agent-output-verify-chain/merkle_root",
+        "member_merkle_root": "37806a3ac995a1d9ba36870e32c0326d6dcb72eaefa2ce74c5ada2b6db34e5d8"
+      },
+      {
+        "slug": "retry-backoff-design",
+        "role": "member",
+        "name": "重试退避设计 顾问",
+        "evidence": "original_assets/retry-backoff-design/merkle_root",
+        "member_merkle_root": "266752ef12c36623c073ce2675a26f163bb5463a4b21da488fa1e70509748b97"
+      }
+    ],
+    "team_lead": "web-extract-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1b4549a0bc0868c9",
+  "prompt_hash": "57fc4a92f823fa8c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-984\", \"kind\": \"team\", \"name\": \"网页提取专家\", \"description\": \"输入验证链相关需求，输出误报处理、指数退避、幂等前提三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"web-extract-pro-team-lead\", \"role\": \"lead\", \"name\": \"网页提取主理人\", \"evidence\": null}, {\"slug\": \"web-extract-pro\", \"role\": \"member\", \"name\": \"网页提取 结构化解析\", \"evidence\": \"original_assets/web-extract-pro/merkle_root\", \"member_merkle_root\": \"0c86d79514fd5e4a26a868855046fba24b197d1876285a6fede8fb08ccb2eb06\"}, {\"slug\": \"agent-output-verify-chain\", \"role\": \"member\", \"name\": \"验证链 多级校验 顾问\", \"evidence\": \"original_assets/agent-output-verify-chain/merkle_root\", \"member_merkle_root\": \"37806a3ac995a1d9ba36870e32c0326d6dcb72eaefa2ce74c5ada2b6db34e5d8\"}, {\"slug\": \"retry-backoff-design\", \"role\": \"member\", \"name\": \"重试退避设计 顾问\", \"evidence\": \"original_assets/retry-backoff-design/merkle_root\", \"member_merkle_root\": \"266752ef12c36623c073ce2675a26f163bb5463a4b21da488fa1e70509748b97\"}], \"team_lead\": \"web-extract-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-verify-chain.md": "0e1b32f05cc708d7bcf1f33f9015bedd44c4e1206d7e9dd651286af513fc26f8",
+    "agents/retry-backoff-design.md": "6d0a957480a94f26e43a47b328a13ce9aed9b5f8e739a6e4f9e82a308d36fec7",
+    "agents/web-extract-pro-team-lead.md": "a15c4c9e48e53b62bd20bebe39463d46bfc7ab54853263d6fc8477326f1af618",
+    "agents/web-extract-pro.md": "661be25488cc45b01122111fac6e6887ffd52d44a9a9150ab185eba2aa9359ce",
+    "plugin.json": "231b595e81a7a6774f7e0b98c913f130d6115d35facd87a7065918c7db241764",
+    "settings.json": "bb5d20fce837ac33fe391d3633165e7e5b7764e695c1f9710542316a4b66bd5b"
+  }
+}

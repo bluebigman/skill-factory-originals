@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-631",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-631",
+    "kind": "team",
+    "name": "知识库构建专家",
+    "description": "知识库构建专家：围绕知识库构建，覆盖文档章节／切分索引／抽取归并，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "kb-build-pro-team-lead",
+        "role": "lead",
+        "name": "知识库构建主理人",
+        "evidence": null
+      },
+      {
+        "slug": "kb-build-pro",
+        "role": "member",
+        "name": "知识库构建 文档整理",
+        "evidence": "original_assets/kb-build-pro/merkle_root",
+        "member_merkle_root": "9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d"
+      },
+      {
+        "slug": "doc-struct-pro",
+        "role": "member",
+        "name": "文档解构 要点提炼 结构化输出",
+        "evidence": "original_assets/doc-struct-pro/merkle_root",
+        "member_merkle_root": "9393ea384639f7b3391cdd04d31a128922a0c84eeccfda769b91c5dbe6e1b960"
+      },
+      {
+        "slug": "agent-toolkit-pro-02-fixed",
+        "role": "member",
+        "name": "对话经验 截图编排 协作共享",
+        "evidence": "original_assets/agent-toolkit-pro-02-fixed/merkle_root",
+        "member_merkle_root": "3becfbfac76c6f36ff08621c1ce6eb23d248d26999b23dbb8a5fdf788c082237"
+      }
+    ],
+    "team_lead": "kb-build-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d1504a2bec8f3977",
+  "prompt_hash": "85f77eb3c9af1cbb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-631\", \"kind\": \"team\", \"name\": \"知识库构建专家\", \"description\": \"知识库构建专家：围绕知识库构建，覆盖文档章节／切分索引／抽取归并，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"kb-build-pro-team-lead\", \"role\": \"lead\", \"name\": \"知识库构建主理人\", \"evidence\": null}, {\"slug\": \"kb-build-pro\", \"role\": \"member\", \"name\": \"知识库构建 文档整理\", \"evidence\": \"original_assets/kb-build-pro/merkle_root\", \"member_merkle_root\": \"9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d\"}, {\"slug\": \"doc-struct-pro\", \"role\": \"member\", \"name\": \"文档解构 要点提炼 结构化输出\", \"evidence\": \"original_assets/doc-struct-pro/merkle_root\", \"member_merkle_root\": \"9393ea384639f7b3391cdd04d31a128922a0c84eeccfda769b91c5dbe6e1b960\"}, {\"slug\": \"agent-toolkit-pro-02-fixed\", \"role\": \"member\", \"name\": \"对话经验 截图编排 协作共享\", \"evidence\": \"original_assets/agent-toolkit-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"3becfbfac76c6f36ff08621c1ce6eb23d248d26999b23dbb8a5fdf788c082237\"}], \"team_lead\": \"kb-build-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-toolkit-pro-02-fixed.md": "447a2e0455e872b62c183c7090062709308a73894bf816adb79ce67588ec08e8",
+    "agents/doc-struct-pro.md": "c52f9f6d6802cdeb6f8b70fa9cd43c7776bc575eabe7a044a4f91cfb1d57b445",
+    "agents/kb-build-pro-team-lead.md": "ac56791190fa41f504f4dd81f7faca8fa0fd433ce59e71d9387d4a1951ce9ed9",
+    "agents/kb-build-pro.md": "0cbb8e7aad4a9582bedc9df34af8f433aef8cc18744f5a7004a29da25c9baf7f",
+    "plugin.json": "0ec12cecc40217736ef58cef3052a0756eed28e3451f2b463ba44e0b9a645e4b",
+    "settings.json": "6719c0838215c80c5ed76c9723afac315c1ebc8fce6a907feb29ca57dc34a99b"
+  }
+}

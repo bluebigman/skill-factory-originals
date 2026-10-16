@@ -1,0 +1,126 @@
+{
+  "agentName": "meeting-sync-pro-team-lead",
+  "agents": [
+    "./agents/meeting-sync-pro-team-lead.md",
+    "./agents/meeting-sync-pro.md",
+    "./agents/customer-onboard-cs.md",
+    "./agents/agent-release-gate.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 会议同步",
+    "zh": "帮我处理会议同步"
+  },
+  "description": "meeting-sync-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 会议同步 requirements, output three deliverables: 纪要及时, 待办到人, 分发明确. Verifiable end-to-end, evidence per step.",
+    "zh": "输入会议同步相关需求，输出纪要及时、待办到人、分发明确三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "meeting-sync-pro Team",
+    "zh": "会议同步纪要分发专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "meeting-sync-pro-team-lead",
+      "name": {
+        "en": "会议同步主理人",
+        "zh": "会议同步主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/meeting-sync-pro.png",
+      "id": "meeting-sync-pro",
+      "name": {
+        "en": "meeting-sync-pro",
+        "zh": "会议同步 纪要分发 顾问"
+      },
+      "profession": {
+        "en": "meeting-sync-pro",
+        "zh": "会议同步 纪要分发 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/customer-onboard-cs.png",
+      "id": "customer-onboard-cs",
+      "name": {
+        "en": "customer-onboard-cs",
+        "zh": "客户成功 上手陪跑 顾问"
+      },
+      "profession": {
+        "en": "customer-onboard-cs",
+        "zh": "客户成功 上手陪跑 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-release-gate.png",
+      "id": "agent-release-gate",
+      "name": {
+        "en": "agent-release-gate",
+        "zh": "发布闸门 清单 顾问"
+      },
+      "profession": {
+        "en": "agent-release-gate",
+        "zh": "发布闸门 清单 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-628",
+  "plugin": "group-team-628",
+  "profession": {
+    "en": "meeting-sync-pro Collaboration Team",
+    "zh": "会议同步纪要分发专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 会议同步",
+      "zh": "帮我处理会议同步"
+    },
+    {
+      "en": "Plan 客户成功",
+      "zh": "帮我规划客户成功"
+    },
+    {
+      "en": "Review 发布闸门",
+      "zh": "帮我检查发布闸门"
+    }
+  ],
+  "tags": [
+    {
+      "en": "纪要及时",
+      "zh": "纪要及时"
+    },
+    {
+      "en": "待办到人",
+      "zh": "待办到人"
+    },
+    {
+      "en": "分发明确",
+      "zh": "分发明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "meeting-sync-pro-team-lead",
+    "memberAgents": [
+      "meeting-sync-pro",
+      "customer-onboard-cs",
+      "agent-release-gate"
+    ]
+  },
+  "version": "1.0.0"
+}

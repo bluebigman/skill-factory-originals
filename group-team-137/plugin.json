@@ -1,0 +1,126 @@
+{
+  "agentName": "game-feedback-read-team-lead",
+  "agents": [
+    "./agents/game-feedback-read-team-lead.md",
+    "./agents/game-feedback-read.md",
+    "./agents/game-level-design.md",
+    "./agents/game-map-layout.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 玩家反馈",
+    "zh": "帮我处理玩家反馈"
+  },
+  "description": "Game Feedback Read team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "玩家 游戏 动线 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Game Feedback Read Team",
+    "zh": "玩家 游戏 动线 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "game-feedback-read-team-lead",
+      "name": {
+        "en": "玩家反馈主理人",
+        "zh": "玩家反馈主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/game-feedback-read.png",
+      "id": "game-feedback-read",
+      "name": {
+        "en": "Game Feedback Read",
+        "zh": "玩家反馈 分类归因 顾问"
+      },
+      "profession": {
+        "en": "Game Feedback Read",
+        "zh": "玩家反馈 分类归因 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-level-design.png",
+      "id": "game-level-design",
+      "name": {
+        "en": "Game Level Design",
+        "zh": "游戏关卡 难度曲线 顾问"
+      },
+      "profession": {
+        "en": "Game Level Design",
+        "zh": "游戏关卡 难度曲线 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-map-layout.png",
+      "id": "game-map-layout",
+      "name": {
+        "en": "Game Map Layout",
+        "zh": "游戏地图 动线设计 顾问"
+      },
+      "profession": {
+        "en": "Game Map Layout",
+        "zh": "游戏地图 动线设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-137",
+  "plugin": "group-team-137",
+  "profession": {
+    "en": "Game Feedback Read Collaboration Team",
+    "zh": "玩家 游戏 动线 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 玩家反馈",
+      "zh": "帮我处理玩家反馈"
+    },
+    {
+      "en": "Plan 游戏关卡",
+      "zh": "帮我规划游戏关卡"
+    },
+    {
+      "en": "Review 游戏地图",
+      "zh": "帮我检查游戏地图"
+    }
+  ],
+  "tags": [
+    {
+      "en": "玩家反馈",
+      "zh": "玩家反馈"
+    },
+    {
+      "en": "游戏关卡",
+      "zh": "游戏关卡"
+    },
+    {
+      "en": "游戏地图",
+      "zh": "游戏地图"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "game-feedback-read-team-lead",
+    "memberAgents": [
+      "game-feedback-read",
+      "game-level-design",
+      "game-map-layout"
+    ]
+  },
+  "version": "1.0.0"
+}

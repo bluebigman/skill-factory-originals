@@ -1,0 +1,126 @@
+{
+  "agentName": "multiplayer-match-pro-team-lead",
+  "agents": [
+    "./agents/multiplayer-match-pro-team-lead.md",
+    "./agents/multiplayer-match-pro.md",
+    "./agents/game-liveops-pro.md",
+    "./agents/map-visual-design.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 对战匹配",
+    "zh": "帮我处理对战匹配"
+  },
+  "description": "multiplayer-match-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 对战匹配 requirements, output three deliverables: 分段匹配, 等待权衡, 连败保护. Verifiable end-to-end, evidence per step.",
+    "zh": "输入对战匹配相关需求，输出分段匹配、等待权衡、连败保护三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "multiplayer-match-pro Team",
+    "zh": "游戏运营活动节奏专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "multiplayer-match-pro-team-lead",
+      "name": {
+        "en": "对战匹配主理人",
+        "zh": "对战匹配主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/multiplayer-match-pro.png",
+      "id": "multiplayer-match-pro",
+      "name": {
+        "en": "multiplayer-match-pro",
+        "zh": "对战匹配 公平性 顾问"
+      },
+      "profession": {
+        "en": "multiplayer-match-pro",
+        "zh": "对战匹配 公平性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-liveops-pro.png",
+      "id": "game-liveops-pro",
+      "name": {
+        "en": "game-liveops-pro",
+        "zh": "游戏运营 活动节奏 顾问"
+      },
+      "profession": {
+        "en": "game-liveops-pro",
+        "zh": "游戏运营 活动节奏 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/map-visual-design.png",
+      "id": "map-visual-design",
+      "name": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "profession": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-549",
+  "plugin": "group-team-549",
+  "profession": {
+    "en": "multiplayer-match-pro Collaboration Team",
+    "zh": "游戏运营活动节奏专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 对战匹配",
+      "zh": "帮我处理对战匹配"
+    },
+    {
+      "en": "Plan 游戏运营",
+      "zh": "帮我规划游戏运营"
+    },
+    {
+      "en": "Review 地图可视化",
+      "zh": "帮我检查地图可视化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分段匹配",
+      "zh": "分段匹配"
+    },
+    {
+      "en": "等待权衡",
+      "zh": "等待权衡"
+    },
+    {
+      "en": "连败保护",
+      "zh": "连败保护"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "multiplayer-match-pro-team-lead",
+    "memberAgents": [
+      "multiplayer-match-pro",
+      "game-liveops-pro",
+      "map-visual-design"
+    ]
+  },
+  "version": "1.0.0"
+}

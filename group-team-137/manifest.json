@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-137",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-137",
+    "kind": "team",
+    "name": "玩家 游戏 动线 团队",
+    "description": "玩家 游戏 动线 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "game-feedback-read-team-lead",
+        "role": "lead",
+        "name": "玩家反馈主理人",
+        "evidence": null
+      },
+      {
+        "slug": "game-feedback-read",
+        "role": "member",
+        "name": "玩家反馈 分类归因 顾问",
+        "evidence": "original_assets/game-feedback-read/merkle_root",
+        "member_merkle_root": "6d6a1c8e5b9e3399d464b58cecfffbff49a2bcc8bab8b180e57bcd49812a9234"
+      },
+      {
+        "slug": "game-level-design",
+        "role": "member",
+        "name": "游戏关卡 难度曲线 顾问",
+        "evidence": "original_assets/game-level-design/merkle_root",
+        "member_merkle_root": "052d87e3bf32b11634e681f6560b929d491d1f2a19e6323f9cbb3f149e95ceea"
+      },
+      {
+        "slug": "game-map-layout",
+        "role": "member",
+        "name": "游戏地图 动线设计 顾问",
+        "evidence": "original_assets/game-map-layout/merkle_root",
+        "member_merkle_root": "5a4fd6b8ad6de2adcf0c2252eebd2e552e6806d9b12771c28bec1e50685d215e"
+      }
+    ],
+    "team_lead": "game-feedback-read-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "368df830edc89edf",
+  "prompt_hash": "2b8da918df24da1f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-137\", \"kind\": \"team\", \"name\": \"玩家 游戏 动线 团队\", \"description\": \"玩家 游戏 动线 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"game-feedback-read-team-lead\", \"role\": \"lead\", \"name\": \"玩家反馈主理人\", \"evidence\": null}, {\"slug\": \"game-feedback-read\", \"role\": \"member\", \"name\": \"玩家反馈 分类归因 顾问\", \"evidence\": \"original_assets/game-feedback-read/merkle_root\", \"member_merkle_root\": \"6d6a1c8e5b9e3399d464b58cecfffbff49a2bcc8bab8b180e57bcd49812a9234\"}, {\"slug\": \"game-level-design\", \"role\": \"member\", \"name\": \"游戏关卡 难度曲线 顾问\", \"evidence\": \"original_assets/game-level-design/merkle_root\", \"member_merkle_root\": \"052d87e3bf32b11634e681f6560b929d491d1f2a19e6323f9cbb3f149e95ceea\"}, {\"slug\": \"game-map-layout\", \"role\": \"member\", \"name\": \"游戏地图 动线设计 顾问\", \"evidence\": \"original_assets/game-map-layout/merkle_root\", \"member_merkle_root\": \"5a4fd6b8ad6de2adcf0c2252eebd2e552e6806d9b12771c28bec1e50685d215e\"}], \"team_lead\": \"game-feedback-read-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-feedback-read-team-lead.md": "e032fe06a58120d512f8745607d4d73b74f9214fe46f37a5e637f8087c07d294",
+    "agents/game-feedback-read.md": "0469db3a72747415a589875699121206ee18da1b3faed185c348ac2c837feda9",
+    "agents/game-level-design.md": "1af1c97c1061187ee787337c7c20833ee5765a38fc8113f652d9527dca1abd5a",
+    "agents/game-map-layout.md": "9a036609a8f54e9d7dcb265befb47dee23cad8bf80e8d67f383e8e2906a11693",
+    "plugin.json": "0442d97b5e1f659d52569be42fa95d2d043f173e7eed22216785e77e05b4264e",
+    "settings.json": "3df41d401056106f13b650fcbd25f11fd9c4e002e3b40e43f9242ff654cba12f"
+  }
+}

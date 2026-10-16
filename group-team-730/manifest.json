@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-730",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-730",
+    "kind": "team",
+    "name": "数据转换专家",
+    "description": "擅长场景选型、组件设计与数据接入，覆盖数据转换全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-pro-01-team-lead",
+        "role": "lead",
+        "name": "数据转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-pro-01",
+        "role": "member",
+        "name": "数据转换 批量整理",
+        "evidence": "original_assets/data-pipeline-pro-01/merkle_root",
+        "member_merkle_root": "1e3c1d4f434f4aaf5f650c66366caff291696029d45e1e8ce6da742082240fdb"
+      },
+      {
+        "slug": "ocr-doc-parse-expert",
+        "role": "member",
+        "name": "OCR 图文识别 版面还原",
+        "evidence": "original_assets/ocr-doc-parse-expert/merkle_root",
+        "member_merkle_root": "f59361f0b4972060b4e37f471b1e345df1580bd3ae5eadab9a37f45e94f7b821"
+      },
+      {
+        "slug": "viz-builder-expert",
+        "role": "member",
+        "name": "数据大屏 可视化搭建",
+        "evidence": "original_assets/viz-builder-expert/merkle_root",
+        "member_merkle_root": "7a32c32295841c4f428e6bb40166c70bc5e1d531e93ce68d6bd36046912827b1"
+      }
+    ],
+    "team_lead": "data-pipeline-pro-01-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2d95e2b97f223e60",
+  "prompt_hash": "4530d2f81f951f5f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-730\", \"kind\": \"team\", \"name\": \"数据转换专家\", \"description\": \"擅长场景选型、组件设计与数据接入，覆盖数据转换全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-pro-01-team-lead\", \"role\": \"lead\", \"name\": \"数据转换主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-pro-01\", \"role\": \"member\", \"name\": \"数据转换 批量整理\", \"evidence\": \"original_assets/data-pipeline-pro-01/merkle_root\", \"member_merkle_root\": \"1e3c1d4f434f4aaf5f650c66366caff291696029d45e1e8ce6da742082240fdb\"}, {\"slug\": \"ocr-doc-parse-expert\", \"role\": \"member\", \"name\": \"OCR 图文识别 版面还原\", \"evidence\": \"original_assets/ocr-doc-parse-expert/merkle_root\", \"member_merkle_root\": \"f59361f0b4972060b4e37f471b1e345df1580bd3ae5eadab9a37f45e94f7b821\"}, {\"slug\": \"viz-builder-expert\", \"role\": \"member\", \"name\": \"数据大屏 可视化搭建\", \"evidence\": \"original_assets/viz-builder-expert/merkle_root\", \"member_merkle_root\": \"7a32c32295841c4f428e6bb40166c70bc5e1d531e93ce68d6bd36046912827b1\"}], \"team_lead\": \"data-pipeline-pro-01-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-pipeline-pro-01-team-lead.md": "4dffdd73bfe8cb98ffeaa38f1e87ac1d30805ba237d86110620efa750efabdad",
+    "agents/data-pipeline-pro-01.md": "cd4ca3c7753ad08353a80ed677c18a700fffd23aba46904de640c437d262297d",
+    "agents/ocr-doc-parse-expert.md": "1e6913c376927927e6a8df34a3f1e2120a57de58163f35a30e0041c53e5777d4",
+    "agents/viz-builder-expert.md": "5544ebab82be6f498c85780f65bab4c93e9a4bc9a89fc380c01d45f50d729c6f",
+    "plugin.json": "c2ddd956813838be2d81cf2f0b042233d90bbace4a47b7fc5f9527c23f77a7da",
+    "settings.json": "588ba7470f3abc4be220fe5a560915909f605726baa9d4ca5f8cc1efc53dc0de"
+  }
+}

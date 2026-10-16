@@ -1,0 +1,126 @@
+{
+  "agentName": "web-extract-pro-team-lead",
+  "agents": [
+    "./agents/web-extract-pro-team-lead.md",
+    "./agents/web-extract-pro.md",
+    "./agents/agent-output-verify-chain.md",
+    "./agents/retry-backoff-design.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 网页提取",
+    "zh": "帮我处理网页提取"
+  },
+  "description": "Web Extract Engineer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 验证链 requirements, output three deliverables: 误报处理, 指数退避, 幂等前提. Verifiable end-to-end, evidence per step.",
+    "zh": "输入验证链相关需求，输出误报处理、指数退避、幂等前提三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Web Extract Engineer Team",
+    "zh": "网页提取专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "web-extract-pro-team-lead",
+      "name": {
+        "en": "网页提取主理人",
+        "zh": "网页提取主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/web-extract-pro.png",
+      "id": "web-extract-pro",
+      "name": {
+        "en": "Web Extract Engineer",
+        "zh": "网页提取 结构化解析"
+      },
+      "profession": {
+        "en": "Web Extract Engineer",
+        "zh": "网页提取 结构化解析"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-chain.png",
+      "id": "agent-output-verify-chain",
+      "name": {
+        "en": "agent-output-verify-chain",
+        "zh": "验证链 多级校验 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-chain",
+        "zh": "验证链 多级校验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/retry-backoff-design.png",
+      "id": "retry-backoff-design",
+      "name": {
+        "en": "retry-backoff-design",
+        "zh": "重试退避设计 顾问"
+      },
+      "profession": {
+        "en": "retry-backoff-design",
+        "zh": "重试退避设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-984",
+  "plugin": "group-team-984",
+  "profession": {
+    "en": "Web Extract Engineer Collaboration Team",
+    "zh": "网页提取专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 网页提取",
+      "zh": "帮我处理网页提取"
+    },
+    {
+      "en": "Plan 验证链",
+      "zh": "帮我规划验证链"
+    },
+    {
+      "en": "Review 重试退避设计",
+      "zh": "帮我检查重试退避设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "网页采集",
+      "zh": "网页采集"
+    },
+    {
+      "en": "结构化转换",
+      "zh": "结构化转换"
+    },
+    {
+      "en": "批量抓取",
+      "zh": "批量抓取"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "web-extract-pro-team-lead",
+    "memberAgents": [
+      "web-extract-pro",
+      "agent-output-verify-chain",
+      "retry-backoff-design"
+    ]
+  },
+  "version": "1.0.0"
+}

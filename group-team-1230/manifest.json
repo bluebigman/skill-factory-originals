@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1230",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1230",
+    "kind": "team",
+    "name": "文件读写专家",
+    "description": "输入Office相关需求，输出格式先判、结构保留、写完复核三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "office-file-io-team-lead",
+        "role": "lead",
+        "name": "Office主理人",
+        "evidence": null
+      },
+      {
+        "slug": "office-file-io",
+        "role": "member",
+        "name": "Office 文件读写 助手",
+        "evidence": "original_assets/office-file-io/merkle_root",
+        "member_merkle_root": "d16c70da8b107dc51f0250f33d6783c5bad0dd71cc4f9577707a551da8b81654"
+      },
+      {
+        "slug": "content-hook-craft",
+        "role": "member",
+        "name": "内容钩子设计 顾问",
+        "evidence": "original_assets/content-hook-craft/merkle_root",
+        "member_merkle_root": "a8dd97cd78bd5e39044527392f49eb6a045f7a76d1d8a45b38a4fda8f87ea534"
+      },
+      {
+        "slug": "slide-speaker-note",
+        "role": "member",
+        "name": "演讲备注撰写 助手",
+        "evidence": "original_assets/slide-speaker-note/merkle_root",
+        "member_merkle_root": "1483bda6e45414469364992e71dbf32fe5e15a65073b7b9d6244aa163649f0eb"
+      }
+    ],
+    "team_lead": "office-file-io-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "97af45ceffd9dfe6",
+  "prompt_hash": "9060aa58f2be5af8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1230\", \"kind\": \"team\", \"name\": \"文件读写专家\", \"description\": \"输入Office相关需求，输出格式先判、结构保留、写完复核三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"office-file-io-team-lead\", \"role\": \"lead\", \"name\": \"Office主理人\", \"evidence\": null}, {\"slug\": \"office-file-io\", \"role\": \"member\", \"name\": \"Office 文件读写 助手\", \"evidence\": \"original_assets/office-file-io/merkle_root\", \"member_merkle_root\": \"d16c70da8b107dc51f0250f33d6783c5bad0dd71cc4f9577707a551da8b81654\"}, {\"slug\": \"content-hook-craft\", \"role\": \"member\", \"name\": \"内容钩子设计 顾问\", \"evidence\": \"original_assets/content-hook-craft/merkle_root\", \"member_merkle_root\": \"a8dd97cd78bd5e39044527392f49eb6a045f7a76d1d8a45b38a4fda8f87ea534\"}, {\"slug\": \"slide-speaker-note\", \"role\": \"member\", \"name\": \"演讲备注撰写 助手\", \"evidence\": \"original_assets/slide-speaker-note/merkle_root\", \"member_merkle_root\": \"1483bda6e45414469364992e71dbf32fe5e15a65073b7b9d6244aa163649f0eb\"}], \"team_lead\": \"office-file-io-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-hook-craft.md": "00cd51aaf39dce00032966c45a154ce4b24f74fda87ddf0a1a478aaa2443fc91",
+    "agents/office-file-io-team-lead.md": "1a41c2a7484e9480a00d5b94237d17ca30492cf3f5beec8fe03c02317debd592",
+    "agents/office-file-io.md": "c4ad4ddacf521569d4a120830bebfb10a34ef54152ac218873a4e18c4f247eee",
+    "agents/slide-speaker-note.md": "a28569b73a4605069ea0f42e716ef1f8dd9bd4c985afbfeaf36acf976d821786",
+    "plugin.json": "a14a2c4be3d0e7a178703c00134f70b5ce995346a0975b77969357bbf689ff0f",
+    "settings.json": "20c417f425e64a25eae68c4932f6b57d23db97ff8699775e3e3ff0f6d9f0f859"
+  }
+}

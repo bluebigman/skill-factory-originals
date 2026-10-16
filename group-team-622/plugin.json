@@ -1,0 +1,126 @@
+{
+  "agentName": "ugc-operation-team-lead",
+  "agents": [
+    "./agents/ugc-operation-team-lead.md",
+    "./agents/ugc-operation.md",
+    "./agents/media-asset-pro.md",
+    "./agents/audio-clip-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 用户内容",
+    "zh": "帮我处理用户内容"
+  },
+  "description": "ugc-operation team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 用户内容 requirements, output three deliverables: 降低门槛, 即时回应, 激励分层. Verifiable end-to-end, evidence per step.",
+    "zh": "输入用户内容相关需求，输出降低门槛、即时回应、激励分层三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ugc-operation Team",
+    "zh": "音频剪辑专家专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ugc-operation-team-lead",
+      "name": {
+        "en": "用户内容主理人",
+        "zh": "用户内容主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ugc-operation.png",
+      "id": "ugc-operation",
+      "name": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "profession": {
+        "en": "ugc-operation",
+        "zh": "用户内容 运营机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/media-asset-pro.png",
+      "id": "media-asset-pro",
+      "name": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "profession": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audio-clip-expert.png",
+      "id": "audio-clip-expert",
+      "name": {
+        "en": "AudioClip",
+        "zh": "音频剪辑专家"
+      },
+      "profession": {
+        "en": "AudioClip",
+        "zh": "音频剪辑与播客后期制作专家"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-622",
+  "plugin": "group-team-622",
+  "profession": {
+    "en": "ugc-operation Collaboration Team",
+    "zh": "音频剪辑专家专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 用户内容",
+      "zh": "帮我处理用户内容"
+    },
+    {
+      "en": "Plan 媒体素材工程",
+      "zh": "帮我规划媒体素材工程"
+    },
+    {
+      "en": "Review 音频剪辑与播客后期制作专家",
+      "zh": "帮我检查音频剪辑与播客后期制作专家"
+    }
+  ],
+  "tags": [
+    {
+      "en": "降低门槛",
+      "zh": "降低门槛"
+    },
+    {
+      "en": "即时回应",
+      "zh": "即时回应"
+    },
+    {
+      "en": "激励分层",
+      "zh": "激励分层"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ugc-operation-team-lead",
+    "memberAgents": [
+      "ugc-operation",
+      "media-asset-pro",
+      "audio-clip-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

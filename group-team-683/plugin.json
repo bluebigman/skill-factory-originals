@@ -1,0 +1,126 @@
+{
+  "agentName": "decision-trace-pro-team-lead",
+  "agents": [
+    "./agents/decision-trace-pro-team-lead.md",
+    "./agents/decision-trace-pro.md",
+    "./agents/capacity-planning-pro.md",
+    "./agents/sql-master-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 决策追溯",
+    "zh": "帮我处理决策追溯"
+  },
+  "description": "decision-trace-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 决策追溯, covers 决策记录 / 否决留痕 / 版本绑定, delivering structured results and actionable checklists.",
+    "zh": "依据留痕专家：围绕决策追溯，覆盖决策记录／否决留痕／版本绑定，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "decision-trace-pro Team",
+    "zh": "依据留痕专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "decision-trace-pro-team-lead",
+      "name": {
+        "en": "决策追溯主理人",
+        "zh": "决策追溯主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/decision-trace-pro.png",
+      "id": "decision-trace-pro",
+      "name": {
+        "en": "decision-trace-pro",
+        "zh": "决策追溯 依据留痕 顾问"
+      },
+      "profession": {
+        "en": "decision-trace-pro",
+        "zh": "决策追溯 依据留痕 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/capacity-planning-pro.png",
+      "id": "capacity-planning-pro",
+      "name": {
+        "en": "capacity-planning-pro",
+        "zh": "容量规划 负载预测 顾问"
+      },
+      "profession": {
+        "en": "capacity-planning-pro",
+        "zh": "容量规划 负载预测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-master-pro.png",
+      "id": "sql-master-pro",
+      "name": {
+        "en": "SQL Database Expert",
+        "zh": "数据库查询 SQL编写"
+      },
+      "profession": {
+        "en": "SQL Database Expert",
+        "zh": "数据库查询 SQL编写"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-683",
+  "plugin": "group-team-683",
+  "profession": {
+    "en": "decision-trace-pro Collaboration Team",
+    "zh": "依据留痕专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 决策追溯",
+      "zh": "帮我处理决策追溯"
+    },
+    {
+      "en": "Plan 容量规划",
+      "zh": "帮我规划容量规划"
+    },
+    {
+      "en": "Review 数据库查询",
+      "zh": "帮我检查数据库查询"
+    }
+  ],
+  "tags": [
+    {
+      "en": "版本绑定",
+      "zh": "版本绑定"
+    },
+    {
+      "en": "复盘可查",
+      "zh": "复盘可查"
+    },
+    {
+      "en": "责任可归",
+      "zh": "责任可归"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "decision-trace-pro-team-lead",
+    "memberAgents": [
+      "decision-trace-pro",
+      "capacity-planning-pro",
+      "sql-master-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

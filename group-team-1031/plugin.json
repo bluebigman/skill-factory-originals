@@ -1,0 +1,126 @@
+{
+  "agentName": "import-inspection-pro-team-lead",
+  "agents": [
+    "./agents/import-inspection-pro-team-lead.md",
+    "./agents/import-inspection-pro.md",
+    "./agents/overseas-culture-adapt.md",
+    "./agents/intl-logistics-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 进口检验",
+    "zh": "帮我处理进口检验"
+  },
+  "description": "import-inspection-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 进口检验, covers 标准对照 / 按批抽样 / 预检前置, delivering structured results and actionable checklists.",
+    "zh": "进口检验标准对照专家：围绕进口检验，覆盖标准对照／按批抽样／预检前置，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "import-inspection-pro Team",
+    "zh": "进口检验标准对照专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "import-inspection-pro-team-lead",
+      "name": {
+        "en": "进口检验主理人",
+        "zh": "进口检验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/import-inspection-pro.png",
+      "id": "import-inspection-pro",
+      "name": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "profession": {
+        "en": "import-inspection-pro",
+        "zh": "进口检验 标准对照 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/overseas-culture-adapt.png",
+      "id": "overseas-culture-adapt",
+      "name": {
+        "en": "overseas-culture-adapt",
+        "zh": "海外沟通 文化适配 顾问"
+      },
+      "profession": {
+        "en": "overseas-culture-adapt",
+        "zh": "海外沟通 文化适配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-logistics-pro.png",
+      "id": "intl-logistics-pro",
+      "name": {
+        "en": "intl-logistics-pro",
+        "zh": "国际物流 时效管理 顾问"
+      },
+      "profession": {
+        "en": "intl-logistics-pro",
+        "zh": "国际物流 时效管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1031",
+  "plugin": "group-team-1031",
+  "profession": {
+    "en": "import-inspection-pro Collaboration Team",
+    "zh": "进口检验标准对照专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 进口检验",
+      "zh": "帮我处理进口检验"
+    },
+    {
+      "en": "Plan 海外沟通",
+      "zh": "帮我规划海外沟通"
+    },
+    {
+      "en": "Review 国际物流",
+      "zh": "帮我检查国际物流"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按批抽样",
+      "zh": "按批抽样"
+    },
+    {
+      "en": "预检前置",
+      "zh": "预检前置"
+    },
+    {
+      "en": "记录可溯",
+      "zh": "记录可溯"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "import-inspection-pro-team-lead",
+    "memberAgents": [
+      "import-inspection-pro",
+      "overseas-culture-adapt",
+      "intl-logistics-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-review-pro-team-lead",
+  "agents": [
+    "./agents/sql-review-pro-team-lead.md",
+    "./agents/sql-review-pro.md",
+    "./agents/agent-eval-framework.md",
+    "./agents/ocr-quality-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle SQL",
+    "zh": "帮我处理SQL"
+  },
+  "description": "sql-review-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers SQL end-to-end: 全表扫描, 隐式转换 and 笛卡尔积. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长全表扫描、隐式转换与笛卡尔积，覆盖SQL全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "sql-review-pro Team",
+    "zh": "效果评测用例设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-review-pro-team-lead",
+      "name": {
+        "en": "SQL主理人",
+        "zh": "SQL主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-review-pro.png",
+      "id": "sql-review-pro",
+      "name": {
+        "en": "sql-review-pro",
+        "zh": "SQL 审查 顾问"
+      },
+      "profession": {
+        "en": "sql-review-pro",
+        "zh": "SQL 审查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-eval-framework.png",
+      "id": "agent-eval-framework",
+      "name": {
+        "en": "agent-eval-framework",
+        "zh": "效果评测 用例设计 顾问"
+      },
+      "profession": {
+        "en": "agent-eval-framework",
+        "zh": "效果评测 用例设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ocr-quality-pro.png",
+      "id": "ocr-quality-pro",
+      "name": {
+        "en": "ocr-quality-pro",
+        "zh": "识别质量 结果校验 顾问"
+      },
+      "profession": {
+        "en": "ocr-quality-pro",
+        "zh": "识别质量 结果校验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-375",
+  "plugin": "group-team-375",
+  "profession": {
+    "en": "sql-review-pro Collaboration Team",
+    "zh": "效果评测用例设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle SQL",
+      "zh": "帮我处理SQL"
+    },
+    {
+      "en": "Plan 效果评测",
+      "zh": "帮我规划效果评测"
+    },
+    {
+      "en": "Review 识别质量",
+      "zh": "帮我检查识别质量"
+    }
+  ],
+  "tags": [
+    {
+      "en": "隐式转换",
+      "zh": "隐式转换"
+    },
+    {
+      "en": "笛卡尔积",
+      "zh": "笛卡尔积"
+    },
+    {
+      "en": "子查询优化",
+      "zh": "子查询优化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-review-pro-team-lead",
+    "memberAgents": [
+      "sql-review-pro",
+      "agent-eval-framework",
+      "ocr-quality-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

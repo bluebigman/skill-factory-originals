@@ -1,0 +1,126 @@
+{
+  "agentName": "content-hook-craft-team-lead",
+  "agents": [
+    "./agents/content-hook-craft-team-lead.md",
+    "./agents/content-hook-craft.md",
+    "./agents/microcopy-craft.md",
+    "./agents/doc-coauthor-flow.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容钩子设计",
+    "zh": "帮我处理内容钩子设计"
+  },
+  "description": "content-hook-craft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 内容钩子设计 requirements, output three deliverables: 痛点前置, 单一卖点, 行动明确. Verifiable end-to-end, evidence per step.",
+    "zh": "输入内容钩子设计相关需求，输出痛点前置、单一卖点、行动明确三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "content-hook-craft Team",
+    "zh": "内容钩子设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-hook-craft-team-lead",
+      "name": {
+        "en": "内容钩子设计主理人",
+        "zh": "内容钩子设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-hook-craft.png",
+      "id": "content-hook-craft",
+      "name": {
+        "en": "content-hook-craft",
+        "zh": "内容钩子设计 顾问"
+      },
+      "profession": {
+        "en": "content-hook-craft",
+        "zh": "内容钩子设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/microcopy-craft.png",
+      "id": "microcopy-craft",
+      "name": {
+        "en": "microcopy-craft",
+        "zh": "界面文案打磨 顾问"
+      },
+      "profession": {
+        "en": "microcopy-craft",
+        "zh": "界面文案打磨 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-coauthor-flow.png",
+      "id": "doc-coauthor-flow",
+      "name": {
+        "en": "doc-coauthor-flow",
+        "zh": "文档协同编辑 顾问"
+      },
+      "profession": {
+        "en": "doc-coauthor-flow",
+        "zh": "文档协同编辑 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1107",
+  "plugin": "group-team-1107",
+  "profession": {
+    "en": "content-hook-craft Collaboration Team",
+    "zh": "内容钩子设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容钩子设计",
+      "zh": "帮我处理内容钩子设计"
+    },
+    {
+      "en": "Plan 界面文案打磨",
+      "zh": "帮我规划界面文案打磨"
+    },
+    {
+      "en": "Review 文档协同编辑",
+      "zh": "帮我检查文档协同编辑"
+    }
+  ],
+  "tags": [
+    {
+      "en": "痛点前置",
+      "zh": "痛点前置"
+    },
+    {
+      "en": "单一卖点",
+      "zh": "单一卖点"
+    },
+    {
+      "en": "行动明确",
+      "zh": "行动明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-hook-craft-team-lead",
+    "memberAgents": [
+      "content-hook-craft",
+      "microcopy-craft",
+      "doc-coauthor-flow"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1200",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1200",
+    "kind": "team",
+    "name": "缺陷分级专家",
+    "description": "输入缺陷分级相关需求，输出分级标准、修复排期、回归验证三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "defect-triage-pro-team-lead",
+        "role": "lead",
+        "name": "缺陷分级主理人",
+        "evidence": null
+      },
+      {
+        "slug": "defect-triage-pro",
+        "role": "member",
+        "name": "缺陷分级 优先级 顾问",
+        "evidence": "original_assets/defect-triage-pro/merkle_root",
+        "member_merkle_root": "4d8b413086a3bb675b6d6c4bce49c668c7b043b4878ba4ac2b673398f99692e0"
+      },
+      {
+        "slug": "doc-archive-strategy",
+        "role": "member",
+        "name": "文档归档策略 顾问",
+        "evidence": "original_assets/doc-archive-strategy/merkle_root",
+        "member_merkle_root": "aa07d8696edeed5e469ed2497f86fb97b1d6148ca42e5fee55c6a939002e94c7"
+      },
+      {
+        "slug": "calibration-manage-pro",
+        "role": "member",
+        "name": "计量器具 校准管理 顾问",
+        "evidence": "original_assets/calibration-manage-pro/merkle_root",
+        "member_merkle_root": "bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf"
+      }
+    ],
+    "team_lead": "defect-triage-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7a6ded7c47062e9e",
+  "prompt_hash": "9c2ba7e4e5307059",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1200\", \"kind\": \"team\", \"name\": \"缺陷分级专家\", \"description\": \"输入缺陷分级相关需求，输出分级标准、修复排期、回归验证三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"defect-triage-pro-team-lead\", \"role\": \"lead\", \"name\": \"缺陷分级主理人\", \"evidence\": null}, {\"slug\": \"defect-triage-pro\", \"role\": \"member\", \"name\": \"缺陷分级 优先级 顾问\", \"evidence\": \"original_assets/defect-triage-pro/merkle_root\", \"member_merkle_root\": \"4d8b413086a3bb675b6d6c4bce49c668c7b043b4878ba4ac2b673398f99692e0\"}, {\"slug\": \"doc-archive-strategy\", \"role\": \"member\", \"name\": \"文档归档策略 顾问\", \"evidence\": \"original_assets/doc-archive-strategy/merkle_root\", \"member_merkle_root\": \"aa07d8696edeed5e469ed2497f86fb97b1d6148ca42e5fee55c6a939002e94c7\"}, {\"slug\": \"calibration-manage-pro\", \"role\": \"member\", \"name\": \"计量器具 校准管理 顾问\", \"evidence\": \"original_assets/calibration-manage-pro/merkle_root\", \"member_merkle_root\": \"bc3d663e2e71b548a0443c9ad04b9e529b75bacfc562e870d73d32b6254270bf\"}], \"team_lead\": \"defect-triage-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/calibration-manage-pro.md": "ae883bc5264b2089f3799d9a78429b1a9785779f0f8e139d688f2ebd754a5243",
+    "agents/defect-triage-pro-team-lead.md": "939434728afbeca5294ae1ea970dedecc6eb0945fe3bbf8272d62fac27670346",
+    "agents/defect-triage-pro.md": "539d7c27c95f987212166a58a265b8059440488ee77cb003045ebd4cd189252b",
+    "agents/doc-archive-strategy.md": "c2cf55141dbf721e67a5ebd052c10e2ae95bdc5e216af2c2b9ce9790ce9dc3d8",
+    "plugin.json": "f5806ac8cd4b523c913088bcdc0c57507ace82fa6ef277653be06f5bbe1a9d09",
+    "settings.json": "ee2b984140a8a7175a0e5fb28dd143dc5f8cf8ea7465e28fa3d4ebcf669f1429"
+  }
+}

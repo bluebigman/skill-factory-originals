@@ -1,0 +1,126 @@
+{
+  "agentName": "secure-deploy-check-team-lead",
+  "agents": [
+    "./agents/secure-deploy-check-team-lead.md",
+    "./agents/secure-deploy-check.md",
+    "./agents/doc-ocr-postfix.md",
+    "./agents/agent-output-verify-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 安全部署核查",
+    "zh": "帮我处理安全部署核查"
+  },
+  "description": "secure-deploy-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 安全部署核查 requirements, output three deliverables: 默认关闭, 端口收敛, 鉴权前置. Verifiable end-to-end, evidence per step.",
+    "zh": "输入安全部署核查相关需求，输出默认关闭、端口收敛、鉴权前置三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "secure-deploy-check Team",
+    "zh": "安全部署核查专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "secure-deploy-check-team-lead",
+      "name": {
+        "en": "安全部署核查主理人",
+        "zh": "安全部署核查主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/secure-deploy-check.png",
+      "id": "secure-deploy-check",
+      "name": {
+        "en": "secure-deploy-check",
+        "zh": "安全部署核查 顾问"
+      },
+      "profession": {
+        "en": "secure-deploy-check",
+        "zh": "安全部署核查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-ocr-postfix.png",
+      "id": "doc-ocr-postfix",
+      "name": {
+        "en": "doc-ocr-postfix",
+        "zh": "OCR 结果校订 助手"
+      },
+      "profession": {
+        "en": "doc-ocr-postfix",
+        "zh": "OCR 结果校订 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-pro.png",
+      "id": "agent-output-verify-pro",
+      "name": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-pro",
+        "zh": "输出验证 幻觉检测 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1047",
+  "plugin": "group-team-1047",
+  "profession": {
+    "en": "secure-deploy-check Collaboration Team",
+    "zh": "安全部署核查专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 安全部署核查",
+      "zh": "帮我处理安全部署核查"
+    },
+    {
+      "en": "Plan OCR",
+      "zh": "帮我规划OCR"
+    },
+    {
+      "en": "Review 输出验证",
+      "zh": "帮我检查输出验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "默认关闭",
+      "zh": "默认关闭"
+    },
+    {
+      "en": "端口收敛",
+      "zh": "端口收敛"
+    },
+    {
+      "en": "鉴权前置",
+      "zh": "鉴权前置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "secure-deploy-check-team-lead",
+    "memberAgents": [
+      "secure-deploy-check",
+      "doc-ocr-postfix",
+      "agent-output-verify-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

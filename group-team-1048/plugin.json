@@ -1,0 +1,126 @@
+{
+  "agentName": "rollback-safety-team-lead",
+  "agents": [
+    "./agents/rollback-safety-team-lead.md",
+    "./agents/rollback-safety.md",
+    "./agents/data-incident-review.md",
+    "./agents/channel-partner-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 回滚安全性",
+    "zh": "帮我处理回滚安全性"
+  },
+  "description": "rollback-safety team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 回滚安全性 end-to-end: 数据兼容, 脚本就绪 and 演练定期. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长数据兼容、脚本就绪与演练定期，覆盖回滚安全性全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "rollback-safety Team",
+    "zh": "回滚安全性专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "rollback-safety-team-lead",
+      "name": {
+        "en": "回滚安全性主理人",
+        "zh": "回滚安全性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/rollback-safety.png",
+      "id": "rollback-safety",
+      "name": {
+        "en": "rollback-safety",
+        "zh": "回滚安全性 顾问"
+      },
+      "profession": {
+        "en": "rollback-safety",
+        "zh": "回滚安全性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-incident-review.png",
+      "id": "data-incident-review",
+      "name": {
+        "en": "data-incident-review",
+        "zh": "数据事故复盘 顾问"
+      },
+      "profession": {
+        "en": "data-incident-review",
+        "zh": "数据事故复盘 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/channel-partner-pro.png",
+      "id": "channel-partner-pro",
+      "name": {
+        "en": "channel-partner-pro",
+        "zh": "渠道伙伴 管理机制 顾问"
+      },
+      "profession": {
+        "en": "channel-partner-pro",
+        "zh": "渠道伙伴 管理机制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1048",
+  "plugin": "group-team-1048",
+  "profession": {
+    "en": "rollback-safety Collaboration Team",
+    "zh": "回滚安全性专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 回滚安全性",
+      "zh": "帮我处理回滚安全性"
+    },
+    {
+      "en": "Plan 数据事故复盘",
+      "zh": "帮我规划数据事故复盘"
+    },
+    {
+      "en": "Review 渠道伙伴",
+      "zh": "帮我检查渠道伙伴"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据兼容",
+      "zh": "数据兼容"
+    },
+    {
+      "en": "脚本就绪",
+      "zh": "脚本就绪"
+    },
+    {
+      "en": "演练定期",
+      "zh": "演练定期"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "rollback-safety-team-lead",
+    "memberAgents": [
+      "rollback-safety",
+      "data-incident-review",
+      "channel-partner-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

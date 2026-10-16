@@ -1,0 +1,126 @@
+{
+  "agentName": "test-combinatorial-team-lead",
+  "agents": [
+    "./agents/test-combinatorial-team-lead.md",
+    "./agents/test-combinatorial.md",
+    "./agents/presales-support-pro.md",
+    "./agents/key-account-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 组合测试设计",
+    "zh": "帮我处理组合测试设计"
+  },
+  "description": "test-combinatorial team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 组合测试设计 end-to-end: 参数建模, 两两覆盖 and 约束声明. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长参数建模、两两覆盖与约束声明，覆盖组合测试设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "test-combinatorial Team",
+    "zh": "组合测试设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "test-combinatorial-team-lead",
+      "name": {
+        "en": "组合测试设计主理人",
+        "zh": "组合测试设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/test-combinatorial.png",
+      "id": "test-combinatorial",
+      "name": {
+        "en": "test-combinatorial",
+        "zh": "组合测试设计 助手"
+      },
+      "profession": {
+        "en": "test-combinatorial",
+        "zh": "组合测试设计 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/presales-support-pro.png",
+      "id": "presales-support-pro",
+      "name": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "profession": {
+        "en": "presales-support-pro",
+        "zh": "售前支持 方案配合 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/key-account-plan.png",
+      "id": "key-account-plan",
+      "name": {
+        "en": "key-account-plan",
+        "zh": "大客户 经营计划 顾问"
+      },
+      "profession": {
+        "en": "key-account-plan",
+        "zh": "大客户 经营计划 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1204",
+  "plugin": "group-team-1204",
+  "profession": {
+    "en": "test-combinatorial Collaboration Team",
+    "zh": "组合测试设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 组合测试设计",
+      "zh": "帮我处理组合测试设计"
+    },
+    {
+      "en": "Plan 售前支持",
+      "zh": "帮我规划售前支持"
+    },
+    {
+      "en": "Review 大客户",
+      "zh": "帮我检查大客户"
+    }
+  ],
+  "tags": [
+    {
+      "en": "参数建模",
+      "zh": "参数建模"
+    },
+    {
+      "en": "两两覆盖",
+      "zh": "两两覆盖"
+    },
+    {
+      "en": "约束声明",
+      "zh": "约束声明"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "test-combinatorial-team-lead",
+    "memberAgents": [
+      "test-combinatorial",
+      "presales-support-pro",
+      "key-account-plan"
+    ]
+  },
+  "version": "1.0.0"
+}

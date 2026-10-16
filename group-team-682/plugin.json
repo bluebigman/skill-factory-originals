@@ -1,0 +1,126 @@
+{
+  "agentName": "chart-builder-expert-team-lead",
+  "agents": [
+    "./agents/chart-builder-expert-team-lead.md",
+    "./agents/chart-builder-expert.md",
+    "./agents/social-listening-pro.md",
+    "./agents/markdown-standard-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 数据图表设计与生成专家",
+    "zh": "帮我处理数据图表设计与生成专家"
+  },
+  "description": "ChartCraft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 舆情聆听 end-to-end: 选型决策, 数据准备 and 图表达人. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长选型决策、数据准备与图表达人，覆盖舆情聆听全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ChartCraft Team",
+    "zh": "舆情聆听信号识别专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "chart-builder-expert-team-lead",
+      "name": {
+        "en": "数据图表设计与生成专家主理人",
+        "zh": "数据图表设计与生成专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/chart-builder-expert.png",
+      "id": "chart-builder-expert",
+      "name": {
+        "en": "ChartCraft",
+        "zh": "图表可视化制作专家"
+      },
+      "profession": {
+        "en": "ChartCraft",
+        "zh": "数据图表设计与生成专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/social-listening-pro.png",
+      "id": "social-listening-pro",
+      "name": {
+        "en": "social-listening-pro",
+        "zh": "舆情聆听 信号识别 顾问"
+      },
+      "profession": {
+        "en": "social-listening-pro",
+        "zh": "舆情聆听 信号识别 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/markdown-standard-pro.png",
+      "id": "markdown-standard-pro",
+      "name": {
+        "en": "markdown-standard-pro",
+        "zh": "Mark 规范 顾问"
+      },
+      "profession": {
+        "en": "markdown-standard-pro",
+        "zh": "Mark 规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-682",
+  "plugin": "group-team-682",
+  "profession": {
+    "en": "ChartCraft Collaboration Team",
+    "zh": "舆情聆听信号识别专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据图表设计与生成专家",
+      "zh": "帮我处理数据图表设计与生成专家"
+    },
+    {
+      "en": "Plan 舆情聆听",
+      "zh": "帮我规划舆情聆听"
+    },
+    {
+      "en": "Review Mark",
+      "zh": "帮我检查Mark"
+    }
+  ],
+  "tags": [
+    {
+      "en": "选型决策",
+      "zh": "选型决策"
+    },
+    {
+      "en": "数据准备",
+      "zh": "数据准备"
+    },
+    {
+      "en": "图表达人",
+      "zh": "图表达人"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "chart-builder-expert-team-lead",
+    "memberAgents": [
+      "chart-builder-expert",
+      "social-listening-pro",
+      "markdown-standard-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

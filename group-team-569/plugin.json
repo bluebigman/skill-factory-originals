@@ -1,0 +1,126 @@
+{
+  "agentName": "game-economy-balance-team-lead",
+  "agents": [
+    "./agents/game-economy-balance-team-lead.md",
+    "./agents/game-economy-balance.md",
+    "./agents/design-system-pro.md",
+    "./agents/handoff-design-dev.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 游戏经济",
+    "zh": "帮我处理游戏经济"
+  },
+  "description": "game-economy-balance team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 游戏经济 end-to-end: 先定产出, 通胀监控 and 分层验证. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长先定产出、通胀监控与分层验证，覆盖游戏经济全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "game-economy-balance Team",
+    "zh": "设计交付协作规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "game-economy-balance-team-lead",
+      "name": {
+        "en": "游戏经济主理人",
+        "zh": "游戏经济主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/game-economy-balance.png",
+      "id": "game-economy-balance",
+      "name": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "profession": {
+        "en": "game-economy-balance",
+        "zh": "游戏经济 数值平衡 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/design-system-pro.png",
+      "id": "design-system-pro",
+      "name": {
+        "en": "design-system-pro",
+        "zh": "设计系统 组件规范 顾问"
+      },
+      "profession": {
+        "en": "design-system-pro",
+        "zh": "设计系统 组件规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/handoff-design-dev.png",
+      "id": "handoff-design-dev",
+      "name": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "profession": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-569",
+  "plugin": "group-team-569",
+  "profession": {
+    "en": "game-economy-balance Collaboration Team",
+    "zh": "设计交付协作规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 游戏经济",
+      "zh": "帮我处理游戏经济"
+    },
+    {
+      "en": "Plan 设计系统",
+      "zh": "帮我规划设计系统"
+    },
+    {
+      "en": "Review 设计交付",
+      "zh": "帮我检查设计交付"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定产出",
+      "zh": "先定产出"
+    },
+    {
+      "en": "通胀监控",
+      "zh": "通胀监控"
+    },
+    {
+      "en": "分层验证",
+      "zh": "分层验证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "game-economy-balance-team-lead",
+    "memberAgents": [
+      "game-economy-balance",
+      "design-system-pro",
+      "handoff-design-dev"
+    ]
+  },
+  "version": "1.0.0"
+}

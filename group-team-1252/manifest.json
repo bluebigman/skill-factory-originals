@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1252",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1252",
+    "kind": "team",
+    "name": "地图可视化专家",
+    "description": "擅长分级设色、色盲友好与图例齐全，覆盖地图可视化全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "map-visual-design-team-lead",
+        "role": "lead",
+        "name": "地图可视化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "map-visual-design",
+        "role": "member",
+        "name": "地图可视化 表达规范 顾问",
+        "evidence": "original_assets/map-visual-design/merkle_root",
+        "member_merkle_root": "682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd"
+      },
+      {
+        "slug": "doc-accessibility",
+        "role": "member",
+        "name": "文档无障碍 顾问",
+        "evidence": "original_assets/doc-accessibility/merkle_root",
+        "member_merkle_root": "ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e"
+      },
+      {
+        "slug": "game-doc-standard",
+        "role": "member",
+        "name": "游戏策划 文档规范 顾问",
+        "evidence": "original_assets/game-doc-standard/merkle_root",
+        "member_merkle_root": "7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f"
+      }
+    ],
+    "team_lead": "map-visual-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3895342adc4cb113",
+  "prompt_hash": "83c7549b6e0df41e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1252\", \"kind\": \"team\", \"name\": \"地图可视化专家\", \"description\": \"擅长分级设色、色盲友好与图例齐全，覆盖地图可视化全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"map-visual-design-team-lead\", \"role\": \"lead\", \"name\": \"地图可视化主理人\", \"evidence\": null}, {\"slug\": \"map-visual-design\", \"role\": \"member\", \"name\": \"地图可视化 表达规范 顾问\", \"evidence\": \"original_assets/map-visual-design/merkle_root\", \"member_merkle_root\": \"682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd\"}, {\"slug\": \"doc-accessibility\", \"role\": \"member\", \"name\": \"文档无障碍 顾问\", \"evidence\": \"original_assets/doc-accessibility/merkle_root\", \"member_merkle_root\": \"ddbb361a9c87ebfefe3767ebc5786c1788cecfb04057265a03d79d34f0e09c8e\"}, {\"slug\": \"game-doc-standard\", \"role\": \"member\", \"name\": \"游戏策划 文档规范 顾问\", \"evidence\": \"original_assets/game-doc-standard/merkle_root\", \"member_merkle_root\": \"7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f\"}], \"team_lead\": \"map-visual-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-accessibility.md": "b5e3c0e9b963ba10ce9b74bbce08e73ee52a6e9cd78faa55e62c07b7c0251f52",
+    "agents/game-doc-standard.md": "be63614d38c51200679cfce9bf4cd704ca0ce6b8e83409db23a4cb0559a4c8e7",
+    "agents/map-visual-design-team-lead.md": "1bbe282fb7277662f59ec49cf12691096b95b8b5c1323d9d828dd4a88463cb5d",
+    "agents/map-visual-design.md": "e64654ff0725799033c2f907436837147d7054a089bc6c98fcce521fe1e611b0",
+    "plugin.json": "d6a70515be8a9b8dea0484132c80e8b3b0bdd46aa0104656de082c4ad0f0008d",
+    "settings.json": "b20fad43544f760b3d75767cb13d9c320df4258e35aaea71eeef11f1a30a3b43"
+  }
+}

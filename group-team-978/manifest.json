@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-978",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-978",
+    "kind": "team",
+    "name": "剧情分支结构设计专家",
+    "description": "剧情分支结构设计专家：围绕受众分层，覆盖按行为分／规模可用／内容差异，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "media-process-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "政务设计规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "media-process-pro-fixed",
+        "role": "member",
+        "name": "政务设计规范 一键成片",
+        "evidence": "original_assets/media-process-pro-fixed/merkle_root",
+        "member_merkle_root": "2decbdf309d75b8ecb3d3d3756d533cdfce5ac9fdbf2d65b0694bf2bea5c45e8"
+      },
+      {
+        "slug": "audience-segment-pro",
+        "role": "member",
+        "name": "受众分层 策略匹配 顾问",
+        "evidence": "original_assets/audience-segment-pro/merkle_root",
+        "member_merkle_root": "5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1"
+      },
+      {
+        "slug": "game-story-branch",
+        "role": "member",
+        "name": "剧情分支 结构设计 顾问",
+        "evidence": "original_assets/game-story-branch/merkle_root",
+        "member_merkle_root": "b141d480969e3891a1a23bdc038231e4ebd7dd455b459194e7a60501f18294f1"
+      }
+    ],
+    "team_lead": "media-process-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6be3b03d99e535fe",
+  "prompt_hash": "e237880cffafdd70",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-978\", \"kind\": \"team\", \"name\": \"剧情分支结构设计专家\", \"description\": \"剧情分支结构设计专家：围绕受众分层，覆盖按行为分／规模可用／内容差异，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"media-process-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"政务设计规范主理人\", \"evidence\": null}, {\"slug\": \"media-process-pro-fixed\", \"role\": \"member\", \"name\": \"政务设计规范 一键成片\", \"evidence\": \"original_assets/media-process-pro-fixed/merkle_root\", \"member_merkle_root\": \"2decbdf309d75b8ecb3d3d3756d533cdfce5ac9fdbf2d65b0694bf2bea5c45e8\"}, {\"slug\": \"audience-segment-pro\", \"role\": \"member\", \"name\": \"受众分层 策略匹配 顾问\", \"evidence\": \"original_assets/audience-segment-pro/merkle_root\", \"member_merkle_root\": \"5160567513155f74e52a3da53444c5991c3047e139d3e7de7a84b373b56932a1\"}, {\"slug\": \"game-story-branch\", \"role\": \"member\", \"name\": \"剧情分支 结构设计 顾问\", \"evidence\": \"original_assets/game-story-branch/merkle_root\", \"member_merkle_root\": \"b141d480969e3891a1a23bdc038231e4ebd7dd455b459194e7a60501f18294f1\"}], \"team_lead\": \"media-process-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audience-segment-pro.md": "61e550f19e216fc75ff7c6105fe29455e4ad8e9ed74596d7dc63d844a357670d",
+    "agents/game-story-branch.md": "32a4c43516a5b8dcdf049de8e51da3a26c0dd4078a41eb264897ff0555ddf872",
+    "agents/media-process-pro-fixed-team-lead.md": "8ac91f1b1ecbf1f650c8dbbb9c2c4f627882db8edf5b303220a22f5cc4bb3b51",
+    "agents/media-process-pro-fixed.md": "045b00489aefbf550f62856ac3fb09d28b13de4f1533e0af6e5a17b8485ee903",
+    "plugin.json": "57dd243871aa10a7ffc22ccdf3a5da592980965516a7e26c52108ecac00aa813",
+    "settings.json": "2c34af9e8e93ffc219449ad27d09a2939f4689c7baf5b91fe1723d1ab8dc82f1"
+  }
+}

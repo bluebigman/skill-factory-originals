@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1193",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1193",
+    "kind": "team",
+    "name": "数据接口设计专家",
+    "description": "数据接口设计专家：围绕数据接口设计，覆盖聚合优先／分页规范／限流保护，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-api-design-team-lead",
+        "role": "lead",
+        "name": "数据接口设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-api-design",
+        "role": "member",
+        "name": "数据接口设计 顾问",
+        "evidence": "original_assets/data-api-design/merkle_root",
+        "member_merkle_root": "ae8089504a5f19306b1ed0fb6351c29f01f1b58c8627f62ba2a7cfbeb93a35ca"
+      },
+      {
+        "slug": "backup-restore-plan",
+        "role": "member",
+        "name": "备份恢复方案 顾问",
+        "evidence": "original_assets/backup-restore-plan/merkle_root",
+        "member_merkle_root": "452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e"
+      },
+      {
+        "slug": "deploy-bluegreen",
+        "role": "member",
+        "name": "蓝绿部署方案 顾问",
+        "evidence": "original_assets/deploy-bluegreen/merkle_root",
+        "member_merkle_root": "63afdac0c72c01979d97a57d43db37e31d9e251625eb07457e1b2c38163bdcc1"
+      }
+    ],
+    "team_lead": "data-api-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f7336b89a1d47f8e",
+  "prompt_hash": "3cffce14d9faf467",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1193\", \"kind\": \"team\", \"name\": \"数据接口设计专家\", \"description\": \"数据接口设计专家：围绕数据接口设计，覆盖聚合优先／分页规范／限流保护，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-api-design-team-lead\", \"role\": \"lead\", \"name\": \"数据接口设计主理人\", \"evidence\": null}, {\"slug\": \"data-api-design\", \"role\": \"member\", \"name\": \"数据接口设计 顾问\", \"evidence\": \"original_assets/data-api-design/merkle_root\", \"member_merkle_root\": \"ae8089504a5f19306b1ed0fb6351c29f01f1b58c8627f62ba2a7cfbeb93a35ca\"}, {\"slug\": \"backup-restore-plan\", \"role\": \"member\", \"name\": \"备份恢复方案 顾问\", \"evidence\": \"original_assets/backup-restore-plan/merkle_root\", \"member_merkle_root\": \"452ab8c1d6092733be2f7158ae4014c4a2fd0a315b171d52f24abee619505e1e\"}, {\"slug\": \"deploy-bluegreen\", \"role\": \"member\", \"name\": \"蓝绿部署方案 顾问\", \"evidence\": \"original_assets/deploy-bluegreen/merkle_root\", \"member_merkle_root\": \"63afdac0c72c01979d97a57d43db37e31d9e251625eb07457e1b2c38163bdcc1\"}], \"team_lead\": \"data-api-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/backup-restore-plan.md": "9009a6b27dda2a85adb14bddef4c65f502307a67b4d8b53528af73dc6b28da94",
+    "agents/data-api-design-team-lead.md": "6de69baa2528b04ee57aa23b5ef7b5ef6a5a6a309ab8b83c42b5f174d1885fcf",
+    "agents/data-api-design.md": "a69673a2c2793b4697d2ce1d7d8599845550152cb2ee238506184a126ae8cf55",
+    "agents/deploy-bluegreen.md": "55c04274c216a822fdee914f538fc5ebfd561a0d1723983a67c95bbf40fd6efc",
+    "plugin.json": "ee032d60608f404ac9e469ed21ecf2cd4a3b11e332bf1b7580ffffecad948df7",
+    "settings.json": "8b1961fbb174cad70a3de159a2104ffea311fce42716f212251c6b682f259a65"
+  }
+}

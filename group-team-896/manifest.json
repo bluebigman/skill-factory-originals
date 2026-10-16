@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-896",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-896",
+    "kind": "team",
+    "name": "工具设计接口契约专家",
+    "description": "擅长场景示例、版式识别与表格优先，覆盖工具设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "tool-interface-design-pro-team-lead",
+        "role": "lead",
+        "name": "工具设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "tool-interface-design-pro",
+        "role": "member",
+        "name": "工具设计 接口契约 顾问",
+        "evidence": "original_assets/tool-interface-design-pro/merkle_root",
+        "member_merkle_root": "425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5"
+      },
+      {
+        "slug": "pdf-parse-pro",
+        "role": "member",
+        "name": "PDF 解析 顾问",
+        "evidence": "original_assets/pdf-parse-pro/merkle_root",
+        "member_merkle_root": "e65919c6f6f80bbff1f25a18d488ac7f94b9fa51e932a5962da885a2bf637c7a"
+      },
+      {
+        "slug": "agent-toolkit-pro-01",
+        "role": "member",
+        "name": "显微成像 批量转换 流程编排",
+        "evidence": "original_assets/agent-toolkit-pro-01/merkle_root",
+        "member_merkle_root": "d7005dd8bd0cd1abddb92a46e8505795411060d0a7a386e382b66e793db141e2"
+      }
+    ],
+    "team_lead": "tool-interface-design-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6f42505c8da15e1f",
+  "prompt_hash": "c6bc0b09a7bb3b9b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-896\", \"kind\": \"team\", \"name\": \"工具设计接口契约专家\", \"description\": \"擅长场景示例、版式识别与表格优先，覆盖工具设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"tool-interface-design-pro-team-lead\", \"role\": \"lead\", \"name\": \"工具设计主理人\", \"evidence\": null}, {\"slug\": \"tool-interface-design-pro\", \"role\": \"member\", \"name\": \"工具设计 接口契约 顾问\", \"evidence\": \"original_assets/tool-interface-design-pro/merkle_root\", \"member_merkle_root\": \"425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5\"}, {\"slug\": \"pdf-parse-pro\", \"role\": \"member\", \"name\": \"PDF 解析 顾问\", \"evidence\": \"original_assets/pdf-parse-pro/merkle_root\", \"member_merkle_root\": \"e65919c6f6f80bbff1f25a18d488ac7f94b9fa51e932a5962da885a2bf637c7a\"}, {\"slug\": \"agent-toolkit-pro-01\", \"role\": \"member\", \"name\": \"显微成像 批量转换 流程编排\", \"evidence\": \"original_assets/agent-toolkit-pro-01/merkle_root\", \"member_merkle_root\": \"d7005dd8bd0cd1abddb92a46e8505795411060d0a7a386e382b66e793db141e2\"}], \"team_lead\": \"tool-interface-design-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-toolkit-pro-01.md": "a64079fbb5529c6883281215ef618c2600c8955d9ca3f13715a799e9189c9d70",
+    "agents/pdf-parse-pro.md": "d83231b3c6d47c36661c21792043250c2d695c0387e828f00364a6c270547fa0",
+    "agents/tool-interface-design-pro-team-lead.md": "da02fb8a4f92ea7869bffb1832640af855a51bac204a196dc40140cb3be91ec3",
+    "agents/tool-interface-design-pro.md": "6a82986952b92376c23864e87cc5503cbb23e3150a52a4490553291caa8b0f0b",
+    "plugin.json": "d0b3dffb01b4cd911337ffc7e3aace600c561818b8a016dd9201475a93e32c1b",
+    "settings.json": "f876bc6448d46e26f128e07a2bb933ca58541536880043795ff2d89b0c9b69a8"
+  }
+}

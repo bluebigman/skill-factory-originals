@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-1278",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1278",
+    "kind": "team",
+    "name": "契约测试专家",
+    "description": "输入契约测试相关需求，输出契约先行、双向验证、版本对齐三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "schema-contract-test-team-lead",
+        "role": "lead",
+        "name": "契约测试主理人",
+        "evidence": null
+      },
+      {
+        "slug": "schema-contract-test",
+        "role": "member",
+        "name": "契约测试 顾问",
+        "evidence": "original_assets/schema-contract-test/merkle_root",
+        "member_merkle_root": "7cd100bcdfe7397a5a96dc10558ba0da03eb263c0dd3e0aa09726e5c7367dd21"
+      },
+      {
+        "slug": "discovery-call-coach",
+        "role": "member",
+        "name": "需求挖掘 提问框架 教练",
+        "evidence": "original_assets/discovery-call-coach/merkle_root",
+        "member_merkle_root": "5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d"
+      },
+      {
+        "slug": "incident-severity",
+        "role": "member",
+        "name": "事件分级标准 顾问",
+        "evidence": "original_assets/incident-severity/merkle_root",
+        "member_merkle_root": "6709789613453d3862d8cc0dfca72d46ec524121cb69ee02cde2df3cedb325d0"
+      }
+    ],
+    "team_lead": "schema-contract-test-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "db2a0c9d3092a07d",
+  "prompt_hash": "e311fe80266d9f1f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1278\", \"kind\": \"team\", \"name\": \"契约测试专家\", \"description\": \"输入契约测试相关需求，输出契约先行、双向验证、版本对齐三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"schema-contract-test-team-lead\", \"role\": \"lead\", \"name\": \"契约测试主理人\", \"evidence\": null}, {\"slug\": \"schema-contract-test\", \"role\": \"member\", \"name\": \"契约测试 顾问\", \"evidence\": \"original_assets/schema-contract-test/merkle_root\", \"member_merkle_root\": \"7cd100bcdfe7397a5a96dc10558ba0da03eb263c0dd3e0aa09726e5c7367dd21\"}, {\"slug\": \"discovery-call-coach\", \"role\": \"member\", \"name\": \"需求挖掘 提问框架 教练\", \"evidence\": \"original_assets/discovery-call-coach/merkle_root\", \"member_merkle_root\": \"5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d\"}, {\"slug\": \"incident-severity\", \"role\": \"member\", \"name\": \"事件分级标准 顾问\", \"evidence\": \"original_assets/incident-severity/merkle_root\", \"member_merkle_root\": \"6709789613453d3862d8cc0dfca72d46ec524121cb69ee02cde2df3cedb325d0\"}], \"team_lead\": \"schema-contract-test-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/discovery-call-coach.md": "f6b7fb738e907df8b7467dea8cae0cf3b37c1afb0378adc4219d4a3fea4f2e2a",
+    "agents/incident-severity.md": "a03f10f46a3c2a8308f61c3accea5b1553928d97db59776afb4fca5f73756108",
+    "agents/schema-contract-test-team-lead.md": "9ce86b7c8ddecc4055ec42517ef4c8be4bc4c96ba4129855f20c15d49e5e43ba",
+    "agents/schema-contract-test.md": "a4971f6f5c63b836fbe04c6da985ce8a9e22741087cc3f048c39fc3b392f436e",
+    "plugin.json": "319910612a1f50c3d4a821a581a3d3cbafec1e77f1c2790c0b84ff838e376cde",
+    "settings.json": "3868a29caa63ce8872552e2ba2c85af62a30f67a59d12dd47f512d1e7bab2290"
+  }
+}

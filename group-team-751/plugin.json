@@ -1,0 +1,126 @@
+{
+  "agentName": "discovery-call-coach-team-lead",
+  "agents": [
+    "./agents/discovery-call-coach-team-lead.md",
+    "./agents/discovery-call-coach.md",
+    "./agents/cold-email-expert.md",
+    "./agents/game-team-workflow.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 需求挖掘",
+    "zh": "帮我处理需求挖掘"
+  },
+  "description": "discovery-call-coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 需求挖掘 requirements, output three deliverables: 顺序提问, 开放为主, 复述确认. Verifiable end-to-end, evidence per step.",
+    "zh": "输入需求挖掘相关需求，输出顺序提问、开放为主、复述确认三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "discovery-call-coach Team",
+    "zh": "需求挖掘提问框架专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "discovery-call-coach-team-lead",
+      "name": {
+        "en": "需求挖掘主理人",
+        "zh": "需求挖掘主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/discovery-call-coach.png",
+      "id": "discovery-call-coach",
+      "name": {
+        "en": "discovery-call-coach",
+        "zh": "需求挖掘 提问框架 教练"
+      },
+      "profession": {
+        "en": "discovery-call-coach",
+        "zh": "需求挖掘 提问框架 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cold-email-expert.png",
+      "id": "cold-email-expert",
+      "name": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "profession": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-team-workflow.png",
+      "id": "game-team-workflow",
+      "name": {
+        "en": "game-team-workflow",
+        "zh": "游戏团队 协作流程 顾问"
+      },
+      "profession": {
+        "en": "game-team-workflow",
+        "zh": "游戏团队 协作流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-751",
+  "plugin": "group-team-751",
+  "profession": {
+    "en": "discovery-call-coach Collaboration Team",
+    "zh": "需求挖掘提问框架专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 需求挖掘",
+      "zh": "帮我处理需求挖掘"
+    },
+    {
+      "en": "Plan 邮件营销",
+      "zh": "帮我规划邮件营销"
+    },
+    {
+      "en": "Review 游戏团队",
+      "zh": "帮我检查游戏团队"
+    }
+  ],
+  "tags": [
+    {
+      "en": "顺序提问",
+      "zh": "顺序提问"
+    },
+    {
+      "en": "开放为主",
+      "zh": "开放为主"
+    },
+    {
+      "en": "复述确认",
+      "zh": "复述确认"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "discovery-call-coach-team-lead",
+    "memberAgents": [
+      "discovery-call-coach",
+      "cold-email-expert",
+      "game-team-workflow"
+    ]
+  },
+  "version": "1.0.0"
+}

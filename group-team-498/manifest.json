@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-498",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-498",
+    "kind": "team",
+    "name": "异议处理专家",
+    "description": "输入异议处理相关需求，输出追问澄清、证据回应、避免争辩三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "objection-handle-pro-team-lead",
+        "role": "lead",
+        "name": "异议处理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "objection-handle-pro",
+        "role": "member",
+        "name": "异议处理 应对准备 顾问",
+        "evidence": "original_assets/objection-handle-pro/merkle_root",
+        "member_merkle_root": "2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f"
+      },
+      {
+        "slug": "deal-review-pro",
+        "role": "member",
+        "name": "商机评审 风险把关 顾问",
+        "evidence": "original_assets/deal-review-pro/merkle_root",
+        "member_merkle_root": "872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265"
+      },
+      {
+        "slug": "contract-legal-pro",
+        "role": "member",
+        "name": "合同法律风险顾问",
+        "evidence": "original_assets/contract-legal-pro/merkle_root",
+        "member_merkle_root": "596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3"
+      }
+    ],
+    "team_lead": "objection-handle-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3e7212e139c9fb8d",
+  "prompt_hash": "79b1d504e6ab33c0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-498\", \"kind\": \"team\", \"name\": \"异议处理专家\", \"description\": \"输入异议处理相关需求，输出追问澄清、证据回应、避免争辩三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"objection-handle-pro-team-lead\", \"role\": \"lead\", \"name\": \"异议处理主理人\", \"evidence\": null}, {\"slug\": \"objection-handle-pro\", \"role\": \"member\", \"name\": \"异议处理 应对准备 顾问\", \"evidence\": \"original_assets/objection-handle-pro/merkle_root\", \"member_merkle_root\": \"2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f\"}, {\"slug\": \"deal-review-pro\", \"role\": \"member\", \"name\": \"商机评审 风险把关 顾问\", \"evidence\": \"original_assets/deal-review-pro/merkle_root\", \"member_merkle_root\": \"872772485b353f6e2030a2ed4616efd21644a06bc8ef6a20c8d9fdaa9d2de265\"}, {\"slug\": \"contract-legal-pro\", \"role\": \"member\", \"name\": \"合同法律风险顾问\", \"evidence\": \"original_assets/contract-legal-pro/merkle_root\", \"member_merkle_root\": \"596c76d57fdf782de3158f2f3a69419024e4e817c441ebf5064f7c507e323bd3\"}], \"team_lead\": \"objection-handle-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/contract-legal-pro.md": "bf6c7bace8a6340d5461c413892943ef138af45a7bf48aa3aec63bb6dbdc4c79",
+    "agents/deal-review-pro.md": "4109ce50c8f26655d2cdc0f968398cd60152e3011cb84ea4c670f8ce7ce4564b",
+    "agents/objection-handle-pro-team-lead.md": "40a4b9cca35fcdd623575a143a4067a81f45e4d486735dd484e0d9f014f5fc5f",
+    "agents/objection-handle-pro.md": "48a8921d995b00efdd494b8285098c1fbd970d15db0eed073e10a06ca5b3566e",
+    "plugin.json": "23f60962f5bd0518901fe4d9ca5b7a8744a5d5547decfeafcd141bcc4daebfdd",
+    "settings.json": "10fbd936f98cdff98a548c9e6c5f15222d9c688e903491d18239073165e0ac4b"
+  }
+}

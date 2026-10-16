@@ -1,0 +1,126 @@
+{
+  "agentName": "contract-legal-pro-team-lead",
+  "agents": [
+    "./agents/contract-legal-pro-team-lead.md",
+    "./agents/contract-legal-pro.md",
+    "./agents/calibration-manage-pro.md",
+    "./agents/dev-onboarding.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 合同法律风险顾问",
+    "zh": "帮我处理合同法律风险顾问"
+  },
+  "description": "Contract Legal Advisor team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 计量器具 requirements, output three deliverables: 台账齐全, 周期强制, 状态标识. Verifiable end-to-end, evidence per step.",
+    "zh": "输入计量器具相关需求，输出台账齐全、周期强制、状态标识三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Contract Legal Advisor Team",
+    "zh": "计量器具专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "contract-legal-pro-team-lead",
+      "name": {
+        "en": "合同法律风险顾问主理人",
+        "zh": "合同法律风险顾问主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/contract-legal-pro.png",
+      "id": "contract-legal-pro",
+      "name": {
+        "en": "Contract Legal Advisor",
+        "zh": "合同法律风险顾问"
+      },
+      "profession": {
+        "en": "Contract Legal Advisor",
+        "zh": "合同法律风险顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/calibration-manage-pro.png",
+      "id": "calibration-manage-pro",
+      "name": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "profession": {
+        "en": "calibration-manage-pro",
+        "zh": "计量器具 校准管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dev-onboarding.png",
+      "id": "dev-onboarding",
+      "name": {
+        "en": "dev-onboarding",
+        "zh": "新人上手流程 顾问"
+      },
+      "profession": {
+        "en": "dev-onboarding",
+        "zh": "新人上手流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1257",
+  "plugin": "group-team-1257",
+  "profession": {
+    "en": "Contract Legal Advisor Collaboration Team",
+    "zh": "计量器具专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 合同法律风险顾问",
+      "zh": "帮我处理合同法律风险顾问"
+    },
+    {
+      "en": "Plan 计量器具",
+      "zh": "帮我规划计量器具"
+    },
+    {
+      "en": "Review 新人上手流程",
+      "zh": "帮我检查新人上手流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "内容审核",
+      "zh": "内容审核"
+    },
+    {
+      "en": "合规改写",
+      "zh": "合规改写"
+    },
+    {
+      "en": "数据核验",
+      "zh": "数据核验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "contract-legal-pro-team-lead",
+    "memberAgents": [
+      "contract-legal-pro",
+      "calibration-manage-pro",
+      "dev-onboarding"
+    ]
+  },
+  "version": "1.0.0"
+}

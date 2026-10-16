@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1146",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1146",
+    "kind": "team",
+    "name": "错误提示专家",
+    "description": "输入文档可达性核查相关需求，输出表格表头、说明原因、给出动作三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-accessibility-check-team-lead",
+        "role": "lead",
+        "name": "文档可达性核查主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-accessibility-check",
+        "role": "member",
+        "name": "文档可达性核查 顾问",
+        "evidence": "original_assets/doc-accessibility-check/merkle_root",
+        "member_merkle_root": "9c605d6dc8c51d9d17decf784dfde5ebfab4aa868ebcd2fe6de62cab1b890652"
+      },
+      {
+        "slug": "error-message-pro",
+        "role": "member",
+        "name": "错误提示 文案设计 顾问",
+        "evidence": "original_assets/error-message-pro/merkle_root",
+        "member_merkle_root": "9862f73eda48d03aa1879bb8c6d96c71a8c91c3c919a4673479220550561351a"
+      },
+      {
+        "slug": "prototype-method",
+        "role": "member",
+        "name": "原型验证 保真度 顾问",
+        "evidence": "original_assets/prototype-method/merkle_root",
+        "member_merkle_root": "c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3"
+      }
+    ],
+    "team_lead": "doc-accessibility-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "88166cd6a2473e67",
+  "prompt_hash": "06e880569e75e0ef",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1146\", \"kind\": \"team\", \"name\": \"错误提示专家\", \"description\": \"输入文档可达性核查相关需求，输出表格表头、说明原因、给出动作三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-accessibility-check-team-lead\", \"role\": \"lead\", \"name\": \"文档可达性核查主理人\", \"evidence\": null}, {\"slug\": \"doc-accessibility-check\", \"role\": \"member\", \"name\": \"文档可达性核查 顾问\", \"evidence\": \"original_assets/doc-accessibility-check/merkle_root\", \"member_merkle_root\": \"9c605d6dc8c51d9d17decf784dfde5ebfab4aa868ebcd2fe6de62cab1b890652\"}, {\"slug\": \"error-message-pro\", \"role\": \"member\", \"name\": \"错误提示 文案设计 顾问\", \"evidence\": \"original_assets/error-message-pro/merkle_root\", \"member_merkle_root\": \"9862f73eda48d03aa1879bb8c6d96c71a8c91c3c919a4673479220550561351a\"}, {\"slug\": \"prototype-method\", \"role\": \"member\", \"name\": \"原型验证 保真度 顾问\", \"evidence\": \"original_assets/prototype-method/merkle_root\", \"member_merkle_root\": \"c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3\"}], \"team_lead\": \"doc-accessibility-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-accessibility-check-team-lead.md": "4828b31f59ade036edde81b9ac0ebb5ee47c69b3ac849ecfaa0d785647508d11",
+    "agents/doc-accessibility-check.md": "8099f8aacca82bb918988c22d8c7f785dc0a528ce199c9dda5e92b669194e2a0",
+    "agents/error-message-pro.md": "59ec470098e75a1de64ddeca9ea4b0d17cc92da13cc3ddf6d8f10eb05fec6672",
+    "agents/prototype-method.md": "f8f92758124865c1e61420241de124be386d8fcf5aad1de1a4b65b6122698892",
+    "plugin.json": "1b77422ae6ee06beb8cdca7cdfc67a9bb04c93619e961024bb40f8629974d3da",
+    "settings.json": "6d43b912a92e9a85a3ba41c467456e864e37c3274466d12056bd56e7ef7876fc"
+  }
+}

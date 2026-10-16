@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1211",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1211",
+    "kind": "team",
+    "name": "跨境收款流程核对专家",
+    "description": "跨境收款流程核对专家：围绕反馈分类处置，覆盖去重合并／闭环回复／趋势观察，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "feedback-triage-team-lead",
+        "role": "lead",
+        "name": "反馈分类处置主理人",
+        "evidence": null
+      },
+      {
+        "slug": "feedback-triage",
+        "role": "member",
+        "name": "反馈分类处置 助手",
+        "evidence": "original_assets/feedback-triage/merkle_root",
+        "member_merkle_root": "f9c842e4ff007521d7bf166164697f637fffbcd249f0e90c22bd78b6319f5983"
+      },
+      {
+        "slug": "global-payment-ops",
+        "role": "member",
+        "name": "跨境收款 流程核对 顾问",
+        "evidence": "original_assets/global-payment-ops/merkle_root",
+        "member_merkle_root": "91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0"
+      },
+      {
+        "slug": "customer-advocacy",
+        "role": "member",
+        "name": "客户推荐 培育路径 顾问",
+        "evidence": "original_assets/customer-advocacy/merkle_root",
+        "member_merkle_root": "0e5288c288b1f5079f617f2f83ab786dbb4eab7cd944b333c8113b2ecd236a9e"
+      }
+    ],
+    "team_lead": "feedback-triage-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d7a77c525496fa97",
+  "prompt_hash": "420422cb786b7b89",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1211\", \"kind\": \"team\", \"name\": \"跨境收款流程核对专家\", \"description\": \"跨境收款流程核对专家：围绕反馈分类处置，覆盖去重合并／闭环回复／趋势观察，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"feedback-triage-team-lead\", \"role\": \"lead\", \"name\": \"反馈分类处置主理人\", \"evidence\": null}, {\"slug\": \"feedback-triage\", \"role\": \"member\", \"name\": \"反馈分类处置 助手\", \"evidence\": \"original_assets/feedback-triage/merkle_root\", \"member_merkle_root\": \"f9c842e4ff007521d7bf166164697f637fffbcd249f0e90c22bd78b6319f5983\"}, {\"slug\": \"global-payment-ops\", \"role\": \"member\", \"name\": \"跨境收款 流程核对 顾问\", \"evidence\": \"original_assets/global-payment-ops/merkle_root\", \"member_merkle_root\": \"91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0\"}, {\"slug\": \"customer-advocacy\", \"role\": \"member\", \"name\": \"客户推荐 培育路径 顾问\", \"evidence\": \"original_assets/customer-advocacy/merkle_root\", \"member_merkle_root\": \"0e5288c288b1f5079f617f2f83ab786dbb4eab7cd944b333c8113b2ecd236a9e\"}], \"team_lead\": \"feedback-triage-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/customer-advocacy.md": "a439c467dd483439545c6b1e819eee031095fdd4c18c03f88bfcb1dcc1216701",
+    "agents/feedback-triage-team-lead.md": "58d5f891af255246c1c1331529b9543c7fc532e2fa4d40619a473012d3953107",
+    "agents/feedback-triage.md": "21e0a994defaa01a6805c67706f2b5f083447553f8bcf729c8912d7f4b74277c",
+    "agents/global-payment-ops.md": "7088336ac213bb192fba50831f4fceaa8d6db98fa6dc20e6b8fcc666fbf4b609",
+    "plugin.json": "72e522ebb11e9d9dfdb1a986560ef26d6bb107a2601385c29b1b7263038280b9",
+    "settings.json": "c5d82fda5437cde34be25a743be4f16b82577c7a84fd192e04029f09a85d3db2"
+  }
+}

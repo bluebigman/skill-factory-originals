@@ -1,0 +1,126 @@
+{
+  "agentName": "industrial-service-pro-team-lead",
+  "agents": [
+    "./agents/industrial-service-pro-team-lead.md",
+    "./agents/industrial-service-pro.md",
+    "./agents/franchise-standard.md",
+    "./agents/intl-meeting-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 工业服务",
+    "zh": "帮我处理工业服务"
+  },
+  "description": "industrial-service-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 工业服务, covers 服务分级 / 时限明确 / 备件前置, delivering structured results and actionable checklists.",
+    "zh": "工业服务专家：围绕工业服务，覆盖服务分级／时限明确／备件前置，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "industrial-service-pro Team",
+    "zh": "工业服务专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "industrial-service-pro-team-lead",
+      "name": {
+        "en": "工业服务主理人",
+        "zh": "工业服务主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/industrial-service-pro.png",
+      "id": "industrial-service-pro",
+      "name": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "profession": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/franchise-standard.png",
+      "id": "franchise-standard",
+      "name": {
+        "en": "franchise-standard",
+        "zh": "连锁标准制定 顾问"
+      },
+      "profession": {
+        "en": "franchise-standard",
+        "zh": "连锁标准制定 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-meeting-coach.png",
+      "id": "intl-meeting-coach",
+      "name": {
+        "en": "intl-meeting-coach",
+        "zh": "跨时区会议 组织 教练"
+      },
+      "profession": {
+        "en": "intl-meeting-coach",
+        "zh": "跨时区会议 组织 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1109",
+  "plugin": "group-team-1109",
+  "profession": {
+    "en": "industrial-service-pro Collaboration Team",
+    "zh": "工业服务专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 工业服务",
+      "zh": "帮我处理工业服务"
+    },
+    {
+      "en": "Plan 连锁标准制定",
+      "zh": "帮我规划连锁标准制定"
+    },
+    {
+      "en": "Review 跨时区会议",
+      "zh": "帮我检查跨时区会议"
+    }
+  ],
+  "tags": [
+    {
+      "en": "服务分级",
+      "zh": "服务分级"
+    },
+    {
+      "en": "时限明确",
+      "zh": "时限明确"
+    },
+    {
+      "en": "备件前置",
+      "zh": "备件前置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "industrial-service-pro-team-lead",
+    "memberAgents": [
+      "industrial-service-pro",
+      "franchise-standard",
+      "intl-meeting-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

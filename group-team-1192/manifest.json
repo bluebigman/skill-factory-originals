@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1192",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1192",
+    "kind": "team",
+    "name": "界面模式库专家",
+    "description": "擅长场景匹配、版本留痕与交叉引用，覆盖界面模式库全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ui-pattern-library-team-lead",
+        "role": "lead",
+        "name": "界面模式库主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ui-pattern-library",
+        "role": "member",
+        "name": "界面模式库 顾问",
+        "evidence": "original_assets/ui-pattern-library/merkle_root",
+        "member_merkle_root": "3c30b4f060d439d7d731d202366314b8a173977d641d46cccea71d0e3e4544d4"
+      },
+      {
+        "slug": "game-doc-standard",
+        "role": "member",
+        "name": "游戏策划 文档规范 顾问",
+        "evidence": "original_assets/game-doc-standard/merkle_root",
+        "member_merkle_root": "7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f"
+      },
+      {
+        "slug": "playtest-method",
+        "role": "member",
+        "name": "可用性 玩家测试 顾问",
+        "evidence": "original_assets/playtest-method/merkle_root",
+        "member_merkle_root": "aa524317c7eb4c0b2abe384046a568580148b6b417c36573b180229bd82aa980"
+      }
+    ],
+    "team_lead": "ui-pattern-library-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f4da09423e0e59e9",
+  "prompt_hash": "6198b489f94a83af",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1192\", \"kind\": \"team\", \"name\": \"界面模式库专家\", \"description\": \"擅长场景匹配、版本留痕与交叉引用，覆盖界面模式库全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ui-pattern-library-team-lead\", \"role\": \"lead\", \"name\": \"界面模式库主理人\", \"evidence\": null}, {\"slug\": \"ui-pattern-library\", \"role\": \"member\", \"name\": \"界面模式库 顾问\", \"evidence\": \"original_assets/ui-pattern-library/merkle_root\", \"member_merkle_root\": \"3c30b4f060d439d7d731d202366314b8a173977d641d46cccea71d0e3e4544d4\"}, {\"slug\": \"game-doc-standard\", \"role\": \"member\", \"name\": \"游戏策划 文档规范 顾问\", \"evidence\": \"original_assets/game-doc-standard/merkle_root\", \"member_merkle_root\": \"7f58fc50352bb9c1e037006cf96d8f05a173cde405d9f8e4ccbe4d773794b12f\"}, {\"slug\": \"playtest-method\", \"role\": \"member\", \"name\": \"可用性 玩家测试 顾问\", \"evidence\": \"original_assets/playtest-method/merkle_root\", \"member_merkle_root\": \"aa524317c7eb4c0b2abe384046a568580148b6b417c36573b180229bd82aa980\"}], \"team_lead\": \"ui-pattern-library-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-doc-standard.md": "5aba1ea8aa9ba0e137f82977f41e6e6b96252d25aa72d9184233a378e0aa0009",
+    "agents/playtest-method.md": "c0c3883b4077317858b9c00a4290ab5f92fba1cd382a56d4d421f60cc8108f32",
+    "agents/ui-pattern-library-team-lead.md": "34636417ab23ffb3a96989439fa6590bdb4af8a11396ac4462e40dd5b9d7feec",
+    "agents/ui-pattern-library.md": "1da0138980fdf5ca0ab638479a2fec487768af3eefb75d142f1ce80d81695713",
+    "plugin.json": "3a1046b64fc290be8b2bc0e16b68b481bfffce924c37dc59118183bbf3100ee5",
+    "settings.json": "75a9a5e1d58875c2beb7db150f9ba60934fc6ae46a0f768052219ad8be7b0c2a"
+  }
+}

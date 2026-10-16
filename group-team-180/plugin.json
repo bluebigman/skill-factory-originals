@@ -1,0 +1,126 @@
+{
+  "agentName": "writing-toolkit-pro-fixed-team-lead",
+  "agents": [
+    "./agents/writing-toolkit-pro-fixed-team-lead.md",
+    "./agents/writing-toolkit-pro-fixed.md",
+    "./agents/knowledge-base-pro-01-fixed.md",
+    "./agents/wechat-article-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文本净化",
+    "zh": "帮我处理文本净化"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "自然 知识 排版 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "自然 知识 排版 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "writing-toolkit-pro-fixed-team-lead",
+      "name": {
+        "en": "文本净化主理人",
+        "zh": "文本净化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/writing-toolkit-pro-fixed.png",
+      "id": "writing-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01-fixed.png",
+      "id": "knowledge-base-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/wechat-article-pro.png",
+      "id": "wechat-article-pro",
+      "name": {
+        "en": "WeChat Article Pro",
+        "zh": "公众号文章 排版结构 完读率"
+      },
+      "profession": {
+        "en": "WeChat Article Pro",
+        "zh": "公众号文章 排版结构 完读率"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-180",
+  "plugin": "group-team-180",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "自然 知识 排版 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文本净化",
+      "zh": "帮我处理文本净化"
+    },
+    {
+      "en": "Plan 项目记忆",
+      "zh": "帮我规划项目记忆"
+    },
+    {
+      "en": "Review 公众号文章",
+      "zh": "帮我检查公众号文章"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文本净化",
+      "zh": "文本净化"
+    },
+    {
+      "en": "项目记忆",
+      "zh": "项目记忆"
+    },
+    {
+      "en": "公众号文章",
+      "zh": "公众号文章"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "writing-toolkit-pro-fixed-team-lead",
+    "memberAgents": [
+      "writing-toolkit-pro-fixed",
+      "knowledge-base-pro-01-fixed",
+      "wechat-article-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

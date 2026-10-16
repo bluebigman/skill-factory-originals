@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-495",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-495",
+    "kind": "team",
+    "name": "设计评审决策机制专家",
+    "description": "擅长分歧留档、限时评审与价值前置，覆盖设计评审全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "design-review-method-team-lead",
+        "role": "lead",
+        "name": "设计评审主理人",
+        "evidence": null
+      },
+      {
+        "slug": "design-review-method",
+        "role": "member",
+        "name": "设计评审 决策机制 顾问",
+        "evidence": "original_assets/design-review-method/merkle_root",
+        "member_merkle_root": "f5fdf5e73c6cb889dc9b89eef6f746f739be069dcf63c1f1a86d1db04e7ae48d"
+      },
+      {
+        "slug": "onboarding-product",
+        "role": "member",
+        "name": "新用户 上手引导 顾问",
+        "evidence": "original_assets/onboarding-product/merkle_root",
+        "member_merkle_root": "5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab"
+      },
+      {
+        "slug": "ux-metrics-pro",
+        "role": "member",
+        "name": "体验度量 指标体系 顾问",
+        "evidence": "original_assets/ux-metrics-pro/merkle_root",
+        "member_merkle_root": "5421e7a7ef689f103d36e0e8397d1426c4293c4efcffc590b2969d2da3146e05"
+      }
+    ],
+    "team_lead": "design-review-method-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2686d8d175d78a1e",
+  "prompt_hash": "12642325cb822780",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-495\", \"kind\": \"team\", \"name\": \"设计评审决策机制专家\", \"description\": \"擅长分歧留档、限时评审与价值前置，覆盖设计评审全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"design-review-method-team-lead\", \"role\": \"lead\", \"name\": \"设计评审主理人\", \"evidence\": null}, {\"slug\": \"design-review-method\", \"role\": \"member\", \"name\": \"设计评审 决策机制 顾问\", \"evidence\": \"original_assets/design-review-method/merkle_root\", \"member_merkle_root\": \"f5fdf5e73c6cb889dc9b89eef6f746f739be069dcf63c1f1a86d1db04e7ae48d\"}, {\"slug\": \"onboarding-product\", \"role\": \"member\", \"name\": \"新用户 上手引导 顾问\", \"evidence\": \"original_assets/onboarding-product/merkle_root\", \"member_merkle_root\": \"5c78759e46b2fcb509bb92002f3ae4499f754883a499352d0db9a67e428009ab\"}, {\"slug\": \"ux-metrics-pro\", \"role\": \"member\", \"name\": \"体验度量 指标体系 顾问\", \"evidence\": \"original_assets/ux-metrics-pro/merkle_root\", \"member_merkle_root\": \"5421e7a7ef689f103d36e0e8397d1426c4293c4efcffc590b2969d2da3146e05\"}], \"team_lead\": \"design-review-method-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-review-method-team-lead.md": "53e17c87d8d5a9a272342fb7c200ee734168c68ed4443efd6f23d1c432373045",
+    "agents/design-review-method.md": "dedc9c14140b3c60953a433607ff39582e9617ffa2b4e846b1d7a92f2bbbbd19",
+    "agents/onboarding-product.md": "b739510dc4c3799f8d2fd3c79b55dd0764e3d33fa7261caded791e07ea66bc10",
+    "agents/ux-metrics-pro.md": "78aa085d3601b08296edafddd89968f24e70f9303694e713fb77147c9fffe90f",
+    "plugin.json": "4da37a829e44864e0907ebc6ae288fbb524cdebac681da39c7492b306b8de389",
+    "settings.json": "3c08d82f1459158a2d993f7ef7d08a730db9e4b711053cc92274111c5999a3b6"
+  }
+}

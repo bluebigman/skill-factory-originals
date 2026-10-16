@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-base-pro-team-lead",
+  "agents": [
+    "./agents/knowledge-base-pro-team-lead.md",
+    "./agents/knowledge-base-pro.md",
+    "./agents/kol-selection-pro.md",
+    "./agents/scene-narrative-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档建站",
+    "zh": "帮我处理文档建站"
+  },
+  "description": "知识库与笔记 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 达人筛选, covers 调性匹配 / 数据校验 / 小单试投, delivering structured results and actionable checklists.",
+    "zh": "达人筛选专家：围绕达人筛选，覆盖调性匹配／数据校验／小单试投，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "知识库与笔记 Suite Team",
+    "zh": "达人筛选专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-base-pro-team-lead",
+      "name": {
+        "en": "文档建站主理人",
+        "zh": "文档建站主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro.png",
+      "id": "knowledge-base-pro",
+      "name": {
+        "en": "知识库与笔记 Suite",
+        "zh": "文档建站 知识库搭建"
+      },
+      "profession": {
+        "en": "知识库与笔记 Suite",
+        "zh": "文档建站 知识库搭建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kol-selection-pro.png",
+      "id": "kol-selection-pro",
+      "name": {
+        "en": "kol-selection-pro",
+        "zh": "达人筛选 匹配评估 顾问"
+      },
+      "profession": {
+        "en": "kol-selection-pro",
+        "zh": "达人筛选 匹配评估 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/scene-narrative-pro.png",
+      "id": "scene-narrative-pro",
+      "name": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "profession": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-882",
+  "plugin": "group-team-882",
+  "profession": {
+    "en": "知识库与笔记 Suite Collaboration Team",
+    "zh": "达人筛选专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档建站",
+      "zh": "帮我处理文档建站"
+    },
+    {
+      "en": "Plan 达人筛选",
+      "zh": "帮我规划达人筛选"
+    },
+    {
+      "en": "Review 场景叙事",
+      "zh": "帮我检查场景叙事"
+    }
+  ],
+  "tags": [
+    {
+      "en": "知识库搭建",
+      "zh": "知识库搭建"
+    },
+    {
+      "en": "资料整理",
+      "zh": "资料整理"
+    },
+    {
+      "en": "知识库构建",
+      "zh": "知识库构建"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-base-pro-team-lead",
+    "memberAgents": [
+      "knowledge-base-pro",
+      "kol-selection-pro",
+      "scene-narrative-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

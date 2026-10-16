@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-211",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-211",
+    "kind": "team",
+    "name": "代码 数据 关系 团队",
+    "description": "代码 数据 关系 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-clean-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "代码仓数据接入主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-clean-pro-01-fixed",
+        "role": "member",
+        "name": "代码仓数据接入 结构化转换",
+        "evidence": "original_assets/data-clean-pro-01-fixed/merkle_root",
+        "member_merkle_root": "ab0e7ef18d56f0e89c60178033fb96724b1625ff6edbcfc0d0025f642c362126"
+      },
+      {
+        "slug": "sql-toolkit-pro-01",
+        "role": "member",
+        "name": "SQL转TS 自然语言转命令",
+        "evidence": "original_assets/sql-toolkit-pro-01/merkle_root",
+        "member_merkle_root": "04df68f6f515d8fde28cbe41cda76502fc7597309de89239c71ce2dc2e04eaf4"
+      },
+      {
+        "slug": "sql-toolkit-pro",
+        "role": "member",
+        "name": "关系查询 HEC 方言适配",
+        "evidence": "original_assets/sql-toolkit-pro/merkle_root",
+        "member_merkle_root": "c12e7e8a7b49cd4458543ba462b8d6c8e7731cae5d3a6764ca9a4ce97d539714"
+      }
+    ],
+    "team_lead": "data-clean-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0d8496c052bce871",
+  "prompt_hash": "a02bad0ba17f104d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-211\", \"kind\": \"team\", \"name\": \"代码 数据 关系 团队\", \"description\": \"代码 数据 关系 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-clean-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"代码仓数据接入主理人\", \"evidence\": null}, {\"slug\": \"data-clean-pro-01-fixed\", \"role\": \"member\", \"name\": \"代码仓数据接入 结构化转换\", \"evidence\": \"original_assets/data-clean-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"ab0e7ef18d56f0e89c60178033fb96724b1625ff6edbcfc0d0025f642c362126\"}, {\"slug\": \"sql-toolkit-pro-01\", \"role\": \"member\", \"name\": \"SQL转TS 自然语言转命令\", \"evidence\": \"original_assets/sql-toolkit-pro-01/merkle_root\", \"member_merkle_root\": \"04df68f6f515d8fde28cbe41cda76502fc7597309de89239c71ce2dc2e04eaf4\"}, {\"slug\": \"sql-toolkit-pro\", \"role\": \"member\", \"name\": \"关系查询 HEC 方言适配\", \"evidence\": \"original_assets/sql-toolkit-pro/merkle_root\", \"member_merkle_root\": \"c12e7e8a7b49cd4458543ba462b8d6c8e7731cae5d3a6764ca9a4ce97d539714\"}], \"team_lead\": \"data-clean-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-01-fixed-team-lead.md": "67c0b5a0e5800fa204c8c44e335c93f16778a149ee681605a308f73e6f5efd5c",
+    "agents/data-clean-pro-01-fixed.md": "fbd635fd5ecf637850e9d47b21d69c0ab6e4643cfaef0f7f96219961ce325509",
+    "agents/sql-toolkit-pro-01.md": "048cdc973a603996a96f51d49fc1b07a384bf5422e75bc5cd1f19872452bab2c",
+    "agents/sql-toolkit-pro.md": "856586f0e64aeba661e1eb1eb6dced4341f0683dc0ddc3a93dd2e8c2c21cbbc0",
+    "plugin.json": "c4e8e76aad97625e9054d1e7ec4cd191efdfb5d443bcf1c4f630edd4088966f2",
+    "settings.json": "48af42ea08d1c6a16c75208c4c1c484ca9e509a2e3a75ce977f1ea941ea6b8e5"
+  }
+}

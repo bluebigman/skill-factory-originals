@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-598",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-598",
+    "kind": "team",
+    "name": "批量整理专家",
+    "description": "擅长批量整理、命名规范与规格转化，覆盖工具设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "R包数据转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-pro-01-fixed",
+        "role": "member",
+        "name": "R包数据转换 批量整理",
+        "evidence": "original_assets/data-pipeline-pro-01-fixed/merkle_root",
+        "member_merkle_root": "6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237"
+      },
+      {
+        "slug": "tool-interface-design-pro",
+        "role": "member",
+        "name": "工具设计 接口契约 顾问",
+        "evidence": "original_assets/tool-interface-design-pro/merkle_root",
+        "member_merkle_root": "425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5"
+      },
+      {
+        "slug": "clean-doc-pro",
+        "role": "member",
+        "name": "表单文档清洗",
+        "evidence": "original_assets/clean-doc-pro/merkle_root",
+        "member_merkle_root": "9ba590994dce85189e646959b24caf16aa3df3e47888b6b15cb77c716d607ad5"
+      }
+    ],
+    "team_lead": "data-pipeline-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "96d9f135e6d9aeb5",
+  "prompt_hash": "14c90384ee18d1b4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-598\", \"kind\": \"team\", \"name\": \"批量整理专家\", \"description\": \"擅长批量整理、命名规范与规格转化，覆盖工具设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"R包数据转换主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-pro-01-fixed\", \"role\": \"member\", \"name\": \"R包数据转换 批量整理\", \"evidence\": \"original_assets/data-pipeline-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237\"}, {\"slug\": \"tool-interface-design-pro\", \"role\": \"member\", \"name\": \"工具设计 接口契约 顾问\", \"evidence\": \"original_assets/tool-interface-design-pro/merkle_root\", \"member_merkle_root\": \"425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5\"}, {\"slug\": \"clean-doc-pro\", \"role\": \"member\", \"name\": \"表单文档清洗\", \"evidence\": \"original_assets/clean-doc-pro/merkle_root\", \"member_merkle_root\": \"9ba590994dce85189e646959b24caf16aa3df3e47888b6b15cb77c716d607ad5\"}], \"team_lead\": \"data-pipeline-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/clean-doc-pro.md": "2633755265dd149635d5db139de8bbf306ef12bc8d1e8ae45465abc6a7781b93",
+    "agents/data-pipeline-pro-01-fixed-team-lead.md": "11ecfc6b57460c6ba9df73151200c46226973cde98e40325f739908d0d533a7f",
+    "agents/data-pipeline-pro-01-fixed.md": "fcd63dba0ef3805380f0b58c73a0819d48fc03e02a5f57366c1066104e2c792c",
+    "agents/tool-interface-design-pro.md": "bc5025c1918bc97419451599ee0615c74ffeed6560523b2f7bbb61552cceb7b7",
+    "plugin.json": "f70b4312c8cc40fc9748f0a5b68d7ccc846f810653f9b3c3fd7829606672f992",
+    "settings.json": "f56d8602761da03290a78b55110b1c6c8887dd3923b4d1d7236f7946016e4517"
+  }
+}

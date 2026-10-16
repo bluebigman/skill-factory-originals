@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-731",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-731",
+    "kind": "team",
+    "name": "跨境发票专家",
+    "description": "跨境发票专家：围绕跨境发票，覆盖要素齐全／金额一致／币种明确，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cross-border-invoice-pro-team-lead",
+        "role": "lead",
+        "name": "跨境发票主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cross-border-invoice-pro",
+        "role": "member",
+        "name": "跨境发票 信息核对 助手",
+        "evidence": "original_assets/cross-border-invoice-pro/merkle_root",
+        "member_merkle_root": "8e198007bcd94c9ee4122e88ceccb66b1553e99098d3996342b8c18b773d5a27"
+      },
+      {
+        "slug": "integration-test-pro",
+        "role": "member",
+        "name": "集成测试 场景覆盖 顾问",
+        "evidence": "original_assets/integration-test-pro/merkle_root",
+        "member_merkle_root": "11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8"
+      },
+      {
+        "slug": "global-pricing-pro",
+        "role": "member",
+        "name": "全球定价 区域差异 顾问",
+        "evidence": "original_assets/global-pricing-pro/merkle_root",
+        "member_merkle_root": "8aeff3324540b5996b8ddb7e95f205322a51ba6f62a60db93f52c33390fb5040"
+      }
+    ],
+    "team_lead": "cross-border-invoice-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "50c2d1148c1507b2",
+  "prompt_hash": "a7eb3ea25f7006db",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-731\", \"kind\": \"team\", \"name\": \"跨境发票专家\", \"description\": \"跨境发票专家：围绕跨境发票，覆盖要素齐全／金额一致／币种明确，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cross-border-invoice-pro-team-lead\", \"role\": \"lead\", \"name\": \"跨境发票主理人\", \"evidence\": null}, {\"slug\": \"cross-border-invoice-pro\", \"role\": \"member\", \"name\": \"跨境发票 信息核对 助手\", \"evidence\": \"original_assets/cross-border-invoice-pro/merkle_root\", \"member_merkle_root\": \"8e198007bcd94c9ee4122e88ceccb66b1553e99098d3996342b8c18b773d5a27\"}, {\"slug\": \"integration-test-pro\", \"role\": \"member\", \"name\": \"集成测试 场景覆盖 顾问\", \"evidence\": \"original_assets/integration-test-pro/merkle_root\", \"member_merkle_root\": \"11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8\"}, {\"slug\": \"global-pricing-pro\", \"role\": \"member\", \"name\": \"全球定价 区域差异 顾问\", \"evidence\": \"original_assets/global-pricing-pro/merkle_root\", \"member_merkle_root\": \"8aeff3324540b5996b8ddb7e95f205322a51ba6f62a60db93f52c33390fb5040\"}], \"team_lead\": \"cross-border-invoice-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-invoice-pro-team-lead.md": "0c729e0ee4d2a6dce7ce518544c361c8a56c2a267e743ce9c6576e5f814f5bc5",
+    "agents/cross-border-invoice-pro.md": "8318100fb1a92829f49f927a706ad7eedbfbeca6253459daed8d7f73e54b733b",
+    "agents/global-pricing-pro.md": "f4f03834651077dd2bf01a7446c55908cfca9c49386701aada2a1442f8216f1d",
+    "agents/integration-test-pro.md": "788753957fee14c789e029a873bbc60f89aefff2b68895c4a6266d2fefdb36f5",
+    "plugin.json": "664ff49284a8bd073a1d29b75fdf531ffa7966b7f7aaef5b75e125c132eb85b5",
+    "settings.json": "b29a898bb21c59bfdada64d40a5fd31b7bb5ccd61585d177ea54fd9bb17219c6"
+  }
+}

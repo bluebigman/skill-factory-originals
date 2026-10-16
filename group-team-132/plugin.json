@@ -1,0 +1,126 @@
+{
+  "agentName": "inventory-basic-coach-team-lead",
+  "agents": [
+    "./agents/inventory-basic-coach-team-lead.md",
+    "./agents/inventory-basic-coach.md",
+    "./agents/inventory-sync-guide.md",
+    "./agents/supplier-quote-compare.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 库存管理",
+    "zh": "帮我处理库存管理"
+  },
+  "description": "Inventory Basic Coach team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "库存 管理 多仓 供应商 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每"
+  },
+  "displayName": {
+    "en": "Inventory Basic Coach Team",
+    "zh": "库存 管理 多仓 供应商 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "inventory-basic-coach-team-lead",
+      "name": {
+        "en": "库存管理主理人",
+        "zh": "库存管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/inventory-basic-coach.png",
+      "id": "inventory-basic-coach",
+      "name": {
+        "en": "Inventory Basic Coach",
+        "zh": "库存管理 补货节奏 助手"
+      },
+      "profession": {
+        "en": "Inventory Basic Coach",
+        "zh": "库存管理 补货节奏 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/inventory-sync-guide.png",
+      "id": "inventory-sync-guide",
+      "name": {
+        "en": "Inventory Sync Guide",
+        "zh": "库存多仓 同步对账 顾问"
+      },
+      "profession": {
+        "en": "Inventory Sync Guide",
+        "zh": "库存多仓 同步对账 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/supplier-quote-compare.png",
+      "id": "supplier-quote-compare",
+      "name": {
+        "en": "Supplier Quote Compare",
+        "zh": "供应商报价 比价谈判 助手"
+      },
+      "profession": {
+        "en": "Supplier Quote Compare",
+        "zh": "供应商报价 比价谈判 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-132",
+  "plugin": "group-team-132",
+  "profession": {
+    "en": "Inventory Basic Coach Collaboration Team",
+    "zh": "库存 管理 多仓 供应商 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 库存管理",
+      "zh": "帮我处理库存管理"
+    },
+    {
+      "en": "Plan 库存多仓",
+      "zh": "帮我规划库存多仓"
+    },
+    {
+      "en": "Review 供应商报价",
+      "zh": "帮我检查供应商报价"
+    }
+  ],
+  "tags": [
+    {
+      "en": "库存管理",
+      "zh": "库存管理"
+    },
+    {
+      "en": "库存多仓",
+      "zh": "库存多仓"
+    },
+    {
+      "en": "供应商报价",
+      "zh": "供应商报价"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "inventory-basic-coach-team-lead",
+    "memberAgents": [
+      "inventory-basic-coach",
+      "inventory-sync-guide",
+      "supplier-quote-compare"
+    ]
+  },
+  "version": "1.0.0"
+}

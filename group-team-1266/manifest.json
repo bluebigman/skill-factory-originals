@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1266",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1266",
+    "kind": "team",
+    "name": "文档流水解析专家",
+    "description": "输入文档流水相关需求，输出解析保真、幂等入库、异常隔离三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-doc-pipeline-team-lead",
+        "role": "lead",
+        "name": "文档流水主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-doc-pipeline",
+        "role": "member",
+        "name": "文档流水 解析 顾问",
+        "evidence": "original_assets/agent-doc-pipeline/merkle_root",
+        "member_merkle_root": "574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661"
+      },
+      {
+        "slug": "objection-handle-pro",
+        "role": "member",
+        "name": "异议处理 应对准备 顾问",
+        "evidence": "original_assets/objection-handle-pro/merkle_root",
+        "member_merkle_root": "2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f"
+      },
+      {
+        "slug": "cross-border-listing-pro",
+        "role": "member",
+        "name": "跨境选品 上架合规 顾问",
+        "evidence": "original_assets/cross-border-listing-pro/merkle_root",
+        "member_merkle_root": "f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac"
+      }
+    ],
+    "team_lead": "agent-doc-pipeline-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ea0a8b6213cb9986",
+  "prompt_hash": "490e1f6a88a82cbd",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1266\", \"kind\": \"team\", \"name\": \"文档流水解析专家\", \"description\": \"输入文档流水相关需求，输出解析保真、幂等入库、异常隔离三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-doc-pipeline-team-lead\", \"role\": \"lead\", \"name\": \"文档流水主理人\", \"evidence\": null}, {\"slug\": \"agent-doc-pipeline\", \"role\": \"member\", \"name\": \"文档流水 解析 顾问\", \"evidence\": \"original_assets/agent-doc-pipeline/merkle_root\", \"member_merkle_root\": \"574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661\"}, {\"slug\": \"objection-handle-pro\", \"role\": \"member\", \"name\": \"异议处理 应对准备 顾问\", \"evidence\": \"original_assets/objection-handle-pro/merkle_root\", \"member_merkle_root\": \"2c45abe1721ce89a2cde8e5210e643494fb6ce4ce0bdc11bcd92283c0c10647f\"}, {\"slug\": \"cross-border-listing-pro\", \"role\": \"member\", \"name\": \"跨境选品 上架合规 顾问\", \"evidence\": \"original_assets/cross-border-listing-pro/merkle_root\", \"member_merkle_root\": \"f094c0d2994b68868ae7db8d1a9adb9473502e0bf153daa5aea19eeaeba29bac\"}], \"team_lead\": \"agent-doc-pipeline-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-doc-pipeline-team-lead.md": "fe7e6e8281f9b4e76979d96f9d8ca94903037b0382619bef29dabe13707451c7",
+    "agents/agent-doc-pipeline.md": "d9f583419d5d98dbb0ccc6fe2b3fccb731c14ba53a3224644cc8ba24ece0f594",
+    "agents/cross-border-listing-pro.md": "e64097c3b64e83fdb56851e91b15ebad9625f957f1b936ea526073aed41bd9db",
+    "agents/objection-handle-pro.md": "b403bbba2c1211a9f56adced11f699a374dc8ca88fcf877a23ae3b647d0c2862",
+    "plugin.json": "954784d87fb798e7206e04198e3c635a2483a3e2408f2924226f92377b7b447b",
+    "settings.json": "7166317791adfd2e0ac528c4d9d75bbbac3a24dc6dd4c0bd63e217a53a9083e5"
+  }
+}

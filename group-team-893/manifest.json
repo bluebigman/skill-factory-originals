@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-893",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-893",
+    "kind": "team",
+    "name": "定价复核专家",
+    "description": "定价复核专家：围绕定价复核，覆盖竞品锚定／价位习惯／定期复核，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pricing-review-team-lead",
+        "role": "lead",
+        "name": "定价复核主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pricing-review",
+        "role": "member",
+        "name": "定价复核 顾问",
+        "evidence": "original_assets/pricing-review/merkle_root",
+        "member_merkle_root": "66cbd89c5b7a30902f505f5dba91ac31703c95c31249f658287bcf12bf1329f7"
+      },
+      {
+        "slug": "meeting-note-struct",
+        "role": "member",
+        "name": "会议纪要结构化 助手",
+        "evidence": "original_assets/meeting-note-struct/merkle_root",
+        "member_merkle_root": "90e50cf17dfd473b2899700f2d49129a1aa8230331a9fba724112fb8bd9c8b04"
+      },
+      {
+        "slug": "cs-health-score",
+        "role": "member",
+        "name": "客户健康 评分模型 顾问",
+        "evidence": "original_assets/cs-health-score/merkle_root",
+        "member_merkle_root": "4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2"
+      }
+    ],
+    "team_lead": "pricing-review-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0083262f445ccbd7",
+  "prompt_hash": "96150fd4af1909c3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-893\", \"kind\": \"team\", \"name\": \"定价复核专家\", \"description\": \"定价复核专家：围绕定价复核，覆盖竞品锚定／价位习惯／定期复核，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pricing-review-team-lead\", \"role\": \"lead\", \"name\": \"定价复核主理人\", \"evidence\": null}, {\"slug\": \"pricing-review\", \"role\": \"member\", \"name\": \"定价复核 顾问\", \"evidence\": \"original_assets/pricing-review/merkle_root\", \"member_merkle_root\": \"66cbd89c5b7a30902f505f5dba91ac31703c95c31249f658287bcf12bf1329f7\"}, {\"slug\": \"meeting-note-struct\", \"role\": \"member\", \"name\": \"会议纪要结构化 助手\", \"evidence\": \"original_assets/meeting-note-struct/merkle_root\", \"member_merkle_root\": \"90e50cf17dfd473b2899700f2d49129a1aa8230331a9fba724112fb8bd9c8b04\"}, {\"slug\": \"cs-health-score\", \"role\": \"member\", \"name\": \"客户健康 评分模型 顾问\", \"evidence\": \"original_assets/cs-health-score/merkle_root\", \"member_merkle_root\": \"4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2\"}], \"team_lead\": \"pricing-review-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cs-health-score.md": "9e3adccd50ab0523c9836b623a1176e98f53abd79586d6c661706df4bcefde60",
+    "agents/meeting-note-struct.md": "5d107d5ebb26a6c170cd3ae007bf6088b99a965236b32f70892cbb0aecba242f",
+    "agents/pricing-review-team-lead.md": "45c857a0b62657c8f933c22246ec2916889dc09beeee8b807119ff2161f83ee3",
+    "agents/pricing-review.md": "4e9ba546ee511e96d77b278bbc79fec84c94a6cb9ddaacaa6ef82d132a6ccb2c",
+    "plugin.json": "7fed795ef347bf3606c25ab3248ba99217591a351c3d6bb0d31b916038d4f12e",
+    "settings.json": "62a50498fa07f22de3764e4bcb3270d0a89480f385c348672493a380faf42820"
+  }
+}

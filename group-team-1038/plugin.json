@@ -1,0 +1,126 @@
+{
+  "agentName": "tech-debt-ledger-team-lead",
+  "agents": [
+    "./agents/tech-debt-ledger-team-lead.md",
+    "./agents/tech-debt-ledger.md",
+    "./agents/business-continuity.md",
+    "./agents/meeting-sync-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 技术债台账",
+    "zh": "帮我处理技术债台账"
+  },
+  "description": "tech-debt-ledger team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 技术债台账 requirements, output three deliverables: 量化影响, 来源可溯, 偿还排期. Verifiable end-to-end, evidence per step.",
+    "zh": "输入技术债台账相关需求，输出量化影响、来源可溯、偿还排期三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "tech-debt-ledger Team",
+    "zh": "技术债台账专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "tech-debt-ledger-team-lead",
+      "name": {
+        "en": "技术债台账主理人",
+        "zh": "技术债台账主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/tech-debt-ledger.png",
+      "id": "tech-debt-ledger",
+      "name": {
+        "en": "tech-debt-ledger",
+        "zh": "技术债台账 助手"
+      },
+      "profession": {
+        "en": "tech-debt-ledger",
+        "zh": "技术债台账 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/business-continuity.png",
+      "id": "business-continuity",
+      "name": {
+        "en": "business-continuity",
+        "zh": "业务连续性 顾问"
+      },
+      "profession": {
+        "en": "business-continuity",
+        "zh": "业务连续性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/meeting-sync-pro.png",
+      "id": "meeting-sync-pro",
+      "name": {
+        "en": "meeting-sync-pro",
+        "zh": "会议同步 纪要分发 顾问"
+      },
+      "profession": {
+        "en": "meeting-sync-pro",
+        "zh": "会议同步 纪要分发 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1038",
+  "plugin": "group-team-1038",
+  "profession": {
+    "en": "tech-debt-ledger Collaboration Team",
+    "zh": "技术债台账专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 技术债台账",
+      "zh": "帮我处理技术债台账"
+    },
+    {
+      "en": "Plan 业务连续性",
+      "zh": "帮我规划业务连续性"
+    },
+    {
+      "en": "Review 会议同步",
+      "zh": "帮我检查会议同步"
+    }
+  ],
+  "tags": [
+    {
+      "en": "量化影响",
+      "zh": "量化影响"
+    },
+    {
+      "en": "来源可溯",
+      "zh": "来源可溯"
+    },
+    {
+      "en": "偿还排期",
+      "zh": "偿还排期"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "tech-debt-ledger-team-lead",
+    "memberAgents": [
+      "tech-debt-ledger",
+      "business-continuity",
+      "meeting-sync-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

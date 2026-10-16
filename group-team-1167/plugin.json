@@ -1,0 +1,126 @@
+{
+  "agentName": "training-material-team-lead",
+  "agents": [
+    "./agents/training-material-team-lead.md",
+    "./agents/training-material.md",
+    "./agents/automation-audit.md",
+    "./agents/doc-review-checklist.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 培训材料制作",
+    "zh": "帮我处理培训材料制作"
+  },
+  "description": "training-material team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 培训材料制作 requirements, output three deliverables: 练习配套, 触发核对, 僵尸清理. Verifiable end-to-end, evidence per step.",
+    "zh": "输入培训材料制作相关需求，输出练习配套、触发核对、僵尸清理三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "training-material Team",
+    "zh": "文档审阅清单专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "training-material-team-lead",
+      "name": {
+        "en": "培训材料制作主理人",
+        "zh": "培训材料制作主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/training-material.png",
+      "id": "training-material",
+      "name": {
+        "en": "training-material",
+        "zh": "培训材料制作 助手"
+      },
+      "profession": {
+        "en": "training-material",
+        "zh": "培训材料制作 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/automation-audit.png",
+      "id": "automation-audit",
+      "name": {
+        "en": "automation-audit",
+        "zh": "自动化审计 顾问"
+      },
+      "profession": {
+        "en": "automation-audit",
+        "zh": "自动化审计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-review-checklist.png",
+      "id": "doc-review-checklist",
+      "name": {
+        "en": "doc-review-checklist",
+        "zh": "文档评审清单 顾问"
+      },
+      "profession": {
+        "en": "doc-review-checklist",
+        "zh": "文档评审清单 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1167",
+  "plugin": "group-team-1167",
+  "profession": {
+    "en": "training-material Collaboration Team",
+    "zh": "文档审阅清单专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 培训材料制作",
+      "zh": "帮我处理培训材料制作"
+    },
+    {
+      "en": "Plan 自动化审计",
+      "zh": "帮我规划自动化审计"
+    },
+    {
+      "en": "Review 文档评审清单",
+      "zh": "帮我检查文档评审清单"
+    }
+  ],
+  "tags": [
+    {
+      "en": "示例丰富",
+      "zh": "示例丰富"
+    },
+    {
+      "en": "练习配套",
+      "zh": "练习配套"
+    },
+    {
+      "en": "可复用",
+      "zh": "可复用"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "training-material-team-lead",
+    "memberAgents": [
+      "training-material",
+      "automation-audit",
+      "doc-review-checklist"
+    ]
+  },
+  "version": "1.0.0"
+}

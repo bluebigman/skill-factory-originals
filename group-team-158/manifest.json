@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-158",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-158",
+    "kind": "team",
+    "name": "内容 优化 投放 搜索 团队",
+    "description": "内容 优化 投放 搜索 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-optimization-pro-team-lead",
+        "role": "lead",
+        "name": "内容优化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-optimization-pro",
+        "role": "member",
+        "name": "内容优化 朋友圈文案 营销文案",
+        "evidence": "original_assets/content-optimization-pro/merkle_root",
+        "member_merkle_root": "dc682e648c22cc4ebd01860396ede1822a3eb38c322a3f85ad0b3033ac1dcbaa"
+      },
+      {
+        "slug": "ad-creative-coach",
+        "role": "member",
+        "name": "投放素材 卖点提炼 顾问",
+        "evidence": "original_assets/ad-creative-coach/merkle_root",
+        "member_merkle_root": "fe813a687c5c4ed9e0e78f58c3abbb2776b499d6c71968c89cabbe988ce39947"
+      },
+      {
+        "slug": "seo-content-plan",
+        "role": "member",
+        "name": "内容SEO 选题布局 顾问",
+        "evidence": "original_assets/seo-content-plan/merkle_root",
+        "member_merkle_root": "4fa47849d42bf6d5296a3b66b7c38e6038950fb54d2d5b608910b8a7e369c144"
+      }
+    ],
+    "team_lead": "content-optimization-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d0d3e02802189888",
+  "prompt_hash": "b8b86a73ff806182",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-158\", \"kind\": \"team\", \"name\": \"内容 优化 投放 搜索 团队\", \"description\": \"内容 优化 投放 搜索 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-optimization-pro-team-lead\", \"role\": \"lead\", \"name\": \"内容优化主理人\", \"evidence\": null}, {\"slug\": \"content-optimization-pro\", \"role\": \"member\", \"name\": \"内容优化 朋友圈文案 营销文案\", \"evidence\": \"original_assets/content-optimization-pro/merkle_root\", \"member_merkle_root\": \"dc682e648c22cc4ebd01860396ede1822a3eb38c322a3f85ad0b3033ac1dcbaa\"}, {\"slug\": \"ad-creative-coach\", \"role\": \"member\", \"name\": \"投放素材 卖点提炼 顾问\", \"evidence\": \"original_assets/ad-creative-coach/merkle_root\", \"member_merkle_root\": \"fe813a687c5c4ed9e0e78f58c3abbb2776b499d6c71968c89cabbe988ce39947\"}, {\"slug\": \"seo-content-plan\", \"role\": \"member\", \"name\": \"内容SEO 选题布局 顾问\", \"evidence\": \"original_assets/seo-content-plan/merkle_root\", \"member_merkle_root\": \"4fa47849d42bf6d5296a3b66b7c38e6038950fb54d2d5b608910b8a7e369c144\"}], \"team_lead\": \"content-optimization-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ad-creative-coach.md": "919778b54d823dee7229562b582dd7bb172aa892511a5105253edf0a01e43ecd",
+    "agents/content-optimization-pro-team-lead.md": "cb4adb9b587f95fb83dfefc0fafb815249709ee23524055eef1dcfc277ec0f00",
+    "agents/content-optimization-pro.md": "652dde5fa1ea9bc4f475cf98a7154cb315c38e7941d9f86a13805d80f133fe19",
+    "agents/seo-content-plan.md": "71873507700a0da9446ea70e563cbd2eaf8655ada31d1857e9b36189295f8317",
+    "plugin.json": "6584a895cae95eab5e09a6551f7af377026f44ef188dc73ebb6df88fbd4bde7c",
+    "settings.json": "6abf284e16a6ecd8fbc58c3c2a542785d626e1d42400658f6d6ab115c51ff22c"
+  }
+}

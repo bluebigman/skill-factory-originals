@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-176",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-176",
+    "kind": "team",
+    "name": "语言 校园 算法 团队",
+    "description": "语言 校园 算法 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "language-learning-pro-team-lead",
+        "role": "lead",
+        "name": "语言学习主理人",
+        "evidence": null
+      },
+      {
+        "slug": "language-learning-pro",
+        "role": "member",
+        "name": "语言学习 记忆方法 口语练习",
+        "evidence": "original_assets/language-learning-pro/merkle_root",
+        "member_merkle_root": "765f1598dc4e52a1794ab96366ca7aea23eebac04a97fe45d36869d9a6224b61"
+      },
+      {
+        "slug": "child-bullying-coach",
+        "role": "member",
+        "name": "校园欺凌 识别应对 教练",
+        "evidence": "original_assets/child-bullying-coach/merkle_root",
+        "member_merkle_root": "da374847c761fdff48ff0e962c4ede8e5143f3bd65060583afc5d3d4b5c5c02d"
+      },
+      {
+        "slug": "algo-practice-plan",
+        "role": "member",
+        "name": "算法刷题 计划编排 顾问",
+        "evidence": "original_assets/algo-practice-plan/merkle_root",
+        "member_merkle_root": "4bb5757159288c3f475d0727cc7e42e45510260d7f6aa51f264db1a1d1c2d5ec"
+      }
+    ],
+    "team_lead": "language-learning-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b3523fd55d192d7c",
+  "prompt_hash": "85f28a4273612540",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-176\", \"kind\": \"team\", \"name\": \"语言 校园 算法 团队\", \"description\": \"语言 校园 算法 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"language-learning-pro-team-lead\", \"role\": \"lead\", \"name\": \"语言学习主理人\", \"evidence\": null}, {\"slug\": \"language-learning-pro\", \"role\": \"member\", \"name\": \"语言学习 记忆方法 口语练习\", \"evidence\": \"original_assets/language-learning-pro/merkle_root\", \"member_merkle_root\": \"765f1598dc4e52a1794ab96366ca7aea23eebac04a97fe45d36869d9a6224b61\"}, {\"slug\": \"child-bullying-coach\", \"role\": \"member\", \"name\": \"校园欺凌 识别应对 教练\", \"evidence\": \"original_assets/child-bullying-coach/merkle_root\", \"member_merkle_root\": \"da374847c761fdff48ff0e962c4ede8e5143f3bd65060583afc5d3d4b5c5c02d\"}, {\"slug\": \"algo-practice-plan\", \"role\": \"member\", \"name\": \"算法刷题 计划编排 顾问\", \"evidence\": \"original_assets/algo-practice-plan/merkle_root\", \"member_merkle_root\": \"4bb5757159288c3f475d0727cc7e42e45510260d7f6aa51f264db1a1d1c2d5ec\"}], \"team_lead\": \"language-learning-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/algo-practice-plan.md": "b7d7b3e27f15afee941eab782b54e37ae791bce021675caa9bd6fd6718c5c85f",
+    "agents/child-bullying-coach.md": "2ee22a149f596924c4264dc7b2a29d6458f9d582cd5b1d47ab42c61769b76615",
+    "agents/language-learning-pro-team-lead.md": "25b77bdae32661623986f299f29d1fcefc50ad0fdf34429952ada3c5264dfad2",
+    "agents/language-learning-pro.md": "a52a20239a892e143711cb0330505cbd24190931442af88c05dd80946189ad91",
+    "plugin.json": "261a82432244919054ad5685c5d88f9e21cf1b57c4e1034e6c4ced8419545482",
+    "settings.json": "7cf33bf5ac465020f76249198f86bfe5e1cf960880950d5942e6eb9e89057cab"
+  }
+}

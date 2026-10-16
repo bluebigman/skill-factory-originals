@@ -1,0 +1,126 @@
+{
+  "agentName": "code-assist-pro-02-fixed-team-lead",
+  "agents": [
+    "./agents/code-assist-pro-02-fixed-team-lead.md",
+    "./agents/code-assist-pro-02-fixed.md",
+    "./agents/ops-deploy-pro-01-fixed.md",
+    "./agents/toolkit-pro-02-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle Web路由设计",
+    "zh": "帮我处理Web路由设计"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "路由 部署 任务 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "路由 部署 任务 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "code-assist-pro-02-fixed-team-lead",
+      "name": {
+        "en": "Web路由设计主理人",
+        "zh": "Web路由设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-02-fixed.png",
+      "id": "code-assist-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro-01-fixed.png",
+      "id": "ops-deploy-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "部署配置"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "部署配置"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-02-fixed.png",
+      "id": "toolkit-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-200",
+  "plugin": "group-team-200",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "路由 部署 任务 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle Web路由设计",
+      "zh": "帮我处理Web路由设计"
+    },
+    {
+      "en": "Plan 部署配置",
+      "zh": "帮我规划部署配置"
+    },
+    {
+      "en": "Review 任务治理",
+      "zh": "帮我检查任务治理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "Web路由设计",
+      "zh": "Web路由设计"
+    },
+    {
+      "en": "部署配置",
+      "zh": "部署配置"
+    },
+    {
+      "en": "任务治理",
+      "zh": "任务治理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "code-assist-pro-02-fixed-team-lead",
+    "memberAgents": [
+      "code-assist-pro-02-fixed",
+      "ops-deploy-pro-01-fixed",
+      "toolkit-pro-02-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

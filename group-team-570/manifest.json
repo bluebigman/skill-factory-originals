@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-570",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-570",
+    "kind": "team",
+    "name": "应用上线安全自查专家",
+    "description": "应用上线安全自查专家：围绕上下文预，覆盖预算分配／溢出策略／压缩质量，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ai-app-launch-safety-expert-team-lead",
+        "role": "lead",
+        "name": "AI应用上线主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ai-app-launch-safety-expert",
+        "role": "member",
+        "name": "AI应用上线 安全自查",
+        "evidence": "original_assets/ai-app-launch-safety-expert/merkle_root",
+        "member_merkle_root": "b58084af0b132ed64cd4a96df2c2753e96fc7711819d5cf6b48a4f301ec6035e"
+      },
+      {
+        "slug": "agent-context-budget",
+        "role": "member",
+        "name": "上下文预 分配策略 顾问",
+        "evidence": "original_assets/agent-context-budget/merkle_root",
+        "member_merkle_root": "77a00fd836b76f6b201b6a9baee3e639452e2d99002be9b92c374d174c1e4637"
+      },
+      {
+        "slug": "file-ops-suite-pro",
+        "role": "member",
+        "name": "批量重命名 数据备份 文件整理",
+        "evidence": "original_assets/file-ops-suite-pro/merkle_root",
+        "member_merkle_root": "3ba919afd8f954e1daa25f8d7e6de7980b741effdfda34127af55d9cfef5119c"
+      }
+    ],
+    "team_lead": "ai-app-launch-safety-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "58c106e4ea8342f5",
+  "prompt_hash": "913f3233308e373a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-570\", \"kind\": \"team\", \"name\": \"应用上线安全自查专家\", \"description\": \"应用上线安全自查专家：围绕上下文预，覆盖预算分配／溢出策略／压缩质量，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ai-app-launch-safety-expert-team-lead\", \"role\": \"lead\", \"name\": \"AI应用上线主理人\", \"evidence\": null}, {\"slug\": \"ai-app-launch-safety-expert\", \"role\": \"member\", \"name\": \"AI应用上线 安全自查\", \"evidence\": \"original_assets/ai-app-launch-safety-expert/merkle_root\", \"member_merkle_root\": \"b58084af0b132ed64cd4a96df2c2753e96fc7711819d5cf6b48a4f301ec6035e\"}, {\"slug\": \"agent-context-budget\", \"role\": \"member\", \"name\": \"上下文预 分配策略 顾问\", \"evidence\": \"original_assets/agent-context-budget/merkle_root\", \"member_merkle_root\": \"77a00fd836b76f6b201b6a9baee3e639452e2d99002be9b92c374d174c1e4637\"}, {\"slug\": \"file-ops-suite-pro\", \"role\": \"member\", \"name\": \"批量重命名 数据备份 文件整理\", \"evidence\": \"original_assets/file-ops-suite-pro/merkle_root\", \"member_merkle_root\": \"3ba919afd8f954e1daa25f8d7e6de7980b741effdfda34127af55d9cfef5119c\"}], \"team_lead\": \"ai-app-launch-safety-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-context-budget.md": "bbbe3dbc5d5ca3e96382695077d64e2f68ee18fd92bed7563221370b1d1dcfd0",
+    "agents/ai-app-launch-safety-expert-team-lead.md": "ce668dd87f81d1914d48c6d891d0154057727d4ab3c3e84a1e41b9cc333c1417",
+    "agents/ai-app-launch-safety-expert.md": "22f366f4a5d98bb334728dfbfd9ff9f1e4f8504f64ec8005dbeb837155733e8b",
+    "agents/file-ops-suite-pro.md": "a91b4a1429be9eca1dd584d4b11409003d9d8ddb6a4c4155fd9d2cf1816ca8d7",
+    "plugin.json": "6da01bb01fa091547dd9dc513be408d9c0ff70d982e857707dcbe110e59230f5",
+    "settings.json": "4f63d150720a15c3d386d53642641a784180784a0a6e0e0bf2c7f6a71d198ae0"
+  }
+}

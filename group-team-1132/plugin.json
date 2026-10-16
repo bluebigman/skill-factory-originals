@@ -1,0 +1,126 @@
+{
+  "agentName": "wechat-content-expert-team-lead",
+  "agents": [
+    "./agents/wechat-content-expert-team-lead.md",
+    "./agents/wechat-content-expert.md",
+    "./agents/note-life-pro.md",
+    "./agents/doc-index-rebuild.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 号手",
+    "zh": "帮我处理号手"
+  },
+  "description": "WechatPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档索引重建 end-to-end: 排版规范, 覆盖完整 and 层级合理. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长排版规范、覆盖完整与层级合理，覆盖文档索引重建全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "WechatPro Team",
+    "zh": "公众号排版专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "wechat-content-expert-team-lead",
+      "name": {
+        "en": "号手主理人",
+        "zh": "号手主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/wechat-content-expert.png",
+      "id": "wechat-content-expert",
+      "name": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "profession": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/note-life-pro.png",
+      "id": "note-life-pro",
+      "name": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "profession": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-index-rebuild.png",
+      "id": "doc-index-rebuild",
+      "name": {
+        "en": "doc-index-rebuild",
+        "zh": "文档索引重建 助手"
+      },
+      "profession": {
+        "en": "doc-index-rebuild",
+        "zh": "文档索引重建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1132",
+  "plugin": "group-team-1132",
+  "profession": {
+    "en": "WechatPro Collaboration Team",
+    "zh": "公众号排版专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 号手",
+      "zh": "帮我处理号手"
+    },
+    {
+      "en": "Plan 笔记与生活助手",
+      "zh": "帮我规划笔记与生活助手"
+    },
+    {
+      "en": "Review 文档索引重建",
+      "zh": "帮我检查文档索引重建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "排版规范",
+      "zh": "排版规范"
+    },
+    {
+      "en": "公众号文案",
+      "zh": "公众号文案"
+    },
+    {
+      "en": "已有文章处理",
+      "zh": "已有文章处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "wechat-content-expert-team-lead",
+    "memberAgents": [
+      "wechat-content-expert",
+      "note-life-pro",
+      "doc-index-rebuild"
+    ]
+  },
+  "version": "1.0.0"
+}

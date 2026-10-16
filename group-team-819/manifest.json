@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-819",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-819",
+    "kind": "team",
+    "name": "模式演进兼容变更专家",
+    "description": "模式演进兼容变更专家：围绕模式演进，覆盖兼容优先／分步执行／影子验证，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "schema-evolution-pro-team-lead",
+        "role": "lead",
+        "name": "模式演进主理人",
+        "evidence": null
+      },
+      {
+        "slug": "schema-evolution-pro",
+        "role": "member",
+        "name": "模式演进 兼容变更 顾问",
+        "evidence": "original_assets/schema-evolution-pro/merkle_root",
+        "member_merkle_root": "b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335"
+      },
+      {
+        "slug": "data-archival-pro",
+        "role": "member",
+        "name": "数据归档 冷热分层 顾问",
+        "evidence": "original_assets/data-archival-pro/merkle_root",
+        "member_merkle_root": "42715320d770aa0b53ab84a67d89a854edebeaf342219d8973dbc4fe8e8bb712"
+      },
+      {
+        "slug": "sheet-master-pro",
+        "role": "member",
+        "name": "表格处理 Excel公式",
+        "evidence": "original_assets/sheet-master-pro/merkle_root",
+        "member_merkle_root": "3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163"
+      }
+    ],
+    "team_lead": "schema-evolution-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "61c059991b63a6df",
+  "prompt_hash": "f18e5e6590845193",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-819\", \"kind\": \"team\", \"name\": \"模式演进兼容变更专家\", \"description\": \"模式演进兼容变更专家：围绕模式演进，覆盖兼容优先／分步执行／影子验证，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"schema-evolution-pro-team-lead\", \"role\": \"lead\", \"name\": \"模式演进主理人\", \"evidence\": null}, {\"slug\": \"schema-evolution-pro\", \"role\": \"member\", \"name\": \"模式演进 兼容变更 顾问\", \"evidence\": \"original_assets/schema-evolution-pro/merkle_root\", \"member_merkle_root\": \"b4eebb29b86b6181f19a886439cdb947503b4d426ad8611ac46f3698308ce335\"}, {\"slug\": \"data-archival-pro\", \"role\": \"member\", \"name\": \"数据归档 冷热分层 顾问\", \"evidence\": \"original_assets/data-archival-pro/merkle_root\", \"member_merkle_root\": \"42715320d770aa0b53ab84a67d89a854edebeaf342219d8973dbc4fe8e8bb712\"}, {\"slug\": \"sheet-master-pro\", \"role\": \"member\", \"name\": \"表格处理 Excel公式\", \"evidence\": \"original_assets/sheet-master-pro/merkle_root\", \"member_merkle_root\": \"3ec28559b8d3057a86ffd4008f716bed8fc43b1dd0840ef17976dd5a49991163\"}], \"team_lead\": \"schema-evolution-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-archival-pro.md": "a2923b87a7568a13525f43d9aaba4b51f1ca2a467f04526836685fac7e3ec5ab",
+    "agents/schema-evolution-pro-team-lead.md": "de5a690aed500d28d5c98161159d38ec949a1a012a15dec4f7787397782f88ef",
+    "agents/schema-evolution-pro.md": "f5c3fb50b425e69bb9bbfa110e8ad69207c6b8721281d40113104c66e402bce4",
+    "agents/sheet-master-pro.md": "219aa7edc37a0e4e88f6498ae41d7fcc6be067e560e37284d8fdb9c8c9e7ec60",
+    "plugin.json": "043e48c5e5787754cb95042492ecca70f2dff70e80008621c51f923060587607",
+    "settings.json": "2cb721be453e1ba92f0dd2a4907faff2b14a6ca497113984ab0532e0d7921020"
+  }
+}

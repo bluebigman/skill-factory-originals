@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-942",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-942",
+    "kind": "team",
+    "name": "部署配置专家",
+    "description": "输入部署配置相关需求，输出数据转换、脚本工具、部署排查三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-deploy-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "部署配置主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-deploy-pro-01-fixed",
+        "role": "member",
+        "name": "部署配置",
+        "evidence": "original_assets/ops-deploy-pro-01-fixed/merkle_root",
+        "member_merkle_root": "d5d618a9e0573a7134bb3dffb8139c5f364f0aaf548b35ca4b185ae8d1a57f02"
+      },
+      {
+        "slug": "runtime-exposure-audit-pro",
+        "role": "member",
+        "name": "线上权限 日志泄露 风险排查",
+        "evidence": "original_assets/runtime-exposure-audit-pro/merkle_root",
+        "member_merkle_root": "f9f1dd4790db69760b3aa1f13c33ba580a029f17be604c27130bc9bfd23d63cf"
+      },
+      {
+        "slug": "data-clean-pro-04",
+        "role": "member",
+        "name": "数据整理 字段还原 批量处理",
+        "evidence": "original_assets/data-clean-pro-04/merkle_root",
+        "member_merkle_root": "5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9"
+      }
+    ],
+    "team_lead": "ops-deploy-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "eacddd34f2c5a832",
+  "prompt_hash": "5c45aa99a88c4241",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-942\", \"kind\": \"team\", \"name\": \"部署配置专家\", \"description\": \"输入部署配置相关需求，输出数据转换、脚本工具、部署排查三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-deploy-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"部署配置主理人\", \"evidence\": null}, {\"slug\": \"ops-deploy-pro-01-fixed\", \"role\": \"member\", \"name\": \"部署配置\", \"evidence\": \"original_assets/ops-deploy-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"d5d618a9e0573a7134bb3dffb8139c5f364f0aaf548b35ca4b185ae8d1a57f02\"}, {\"slug\": \"runtime-exposure-audit-pro\", \"role\": \"member\", \"name\": \"线上权限 日志泄露 风险排查\", \"evidence\": \"original_assets/runtime-exposure-audit-pro/merkle_root\", \"member_merkle_root\": \"f9f1dd4790db69760b3aa1f13c33ba580a029f17be604c27130bc9bfd23d63cf\"}, {\"slug\": \"data-clean-pro-04\", \"role\": \"member\", \"name\": \"数据整理 字段还原 批量处理\", \"evidence\": \"original_assets/data-clean-pro-04/merkle_root\", \"member_merkle_root\": \"5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9\"}], \"team_lead\": \"ops-deploy-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-04.md": "f18ebca4973a2f83f72dcd5ffdca8ef30e47c243f52f7102e8859f83100105de",
+    "agents/ops-deploy-pro-01-fixed-team-lead.md": "2a2ef016661ce1327873bb1457e7984d9bd260d0ca13cb4f004f069714150e49",
+    "agents/ops-deploy-pro-01-fixed.md": "5ff70ae08fd8140a90b7c914ea9155cdd08ac19a08069903d091369156d6ab28",
+    "agents/runtime-exposure-audit-pro.md": "81c44523cb048315ce275b976a98a2f2dc51e7f8e5b76f88804b79e6059155f2",
+    "plugin.json": "f7af1d333c021889549249c79fdf616c70c15beb0eddaaf13f42779022085875",
+    "settings.json": "fa7841c897a87107e6706e76eb63181be5bf2cbf743606d6118d34bb496ffd57"
+  }
+}

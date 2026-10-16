@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1187",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1187",
+    "kind": "team",
+    "name": "订阅通讯内容运营专家",
+    "description": "订阅通讯内容运营专家：围绕订阅通讯，覆盖固定节奏／单一主题／价值前置，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "newsletter-coach-team-lead",
+        "role": "lead",
+        "name": "订阅通讯主理人",
+        "evidence": null
+      },
+      {
+        "slug": "newsletter-coach",
+        "role": "member",
+        "name": "订阅通讯 内容运营 教练",
+        "evidence": "original_assets/newsletter-coach/merkle_root",
+        "member_merkle_root": "4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c"
+      },
+      {
+        "slug": "internal-comms-draft",
+        "role": "member",
+        "name": "内部沟通文案 助手",
+        "evidence": "original_assets/internal-comms-draft/merkle_root",
+        "member_merkle_root": "357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e"
+      },
+      {
+        "slug": "copy-hook-craft",
+        "role": "member",
+        "name": "文案钩子打磨 顾问",
+        "evidence": "original_assets/copy-hook-craft/merkle_root",
+        "member_merkle_root": "ddb9b5f7d12333ea0c3e9a52593c05dc044d1fbe239d85f4e282785eccd4f1ba"
+      }
+    ],
+    "team_lead": "newsletter-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "642810c1147d3227",
+  "prompt_hash": "3f3fd3e2f27f9dbc",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1187\", \"kind\": \"team\", \"name\": \"订阅通讯内容运营专家\", \"description\": \"订阅通讯内容运营专家：围绕订阅通讯，覆盖固定节奏／单一主题／价值前置，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"newsletter-coach-team-lead\", \"role\": \"lead\", \"name\": \"订阅通讯主理人\", \"evidence\": null}, {\"slug\": \"newsletter-coach\", \"role\": \"member\", \"name\": \"订阅通讯 内容运营 教练\", \"evidence\": \"original_assets/newsletter-coach/merkle_root\", \"member_merkle_root\": \"4936b195c2be23201ce8b67a455cdb05918d35749ec2a6f88549cd10ab4c208c\"}, {\"slug\": \"internal-comms-draft\", \"role\": \"member\", \"name\": \"内部沟通文案 助手\", \"evidence\": \"original_assets/internal-comms-draft/merkle_root\", \"member_merkle_root\": \"357772334a08a1ad063f56cf409fb1645affc0d7f16a41b3462e3609fc8da42e\"}, {\"slug\": \"copy-hook-craft\", \"role\": \"member\", \"name\": \"文案钩子打磨 顾问\", \"evidence\": \"original_assets/copy-hook-craft/merkle_root\", \"member_merkle_root\": \"ddb9b5f7d12333ea0c3e9a52593c05dc044d1fbe239d85f4e282785eccd4f1ba\"}], \"team_lead\": \"newsletter-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/copy-hook-craft.md": "2062333e594d7cfd8d71b9a294d861e950925cd6571a770727850f7378ceaa33",
+    "agents/internal-comms-draft.md": "bfc467b55be4c564afabe409c61a7f116b4597b20882dcbf49d77e689032dea3",
+    "agents/newsletter-coach-team-lead.md": "676f63f503a32eb028da1c7f9b588a9aa3307334618452bac0cf4c1eaadf84f4",
+    "agents/newsletter-coach.md": "84e9fd25900646122f13d9928bd8a26002e81b7f753075734b8f61b47e941e82",
+    "plugin.json": "f068f0041b8e3b50c5398d939cd2bc89c463536ef80efbd5bc27b7d9a4401e99",
+    "settings.json": "94ca7c4dd23519327ca25626c989a5fa9d40e8c98a107b516eb715453325f967"
+  }
+}

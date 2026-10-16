@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-task-plan-team-lead",
+  "agents": [
+    "./agents/agent-task-plan-team-lead.md",
+    "./agents/agent-task-plan.md",
+    "./agents/intl-talent-onboard.md",
+    "./agents/contract-guard-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 任务规划",
+    "zh": "帮我处理任务规划"
+  },
+  "description": "agent-task-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 任务规划 end-to-end: 依赖成图, 关键路径 and 资源约束. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长依赖成图、关键路径与资源约束，覆盖任务规划全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-task-plan Team",
+    "zh": "海外招聘入职衔接专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-task-plan-team-lead",
+      "name": {
+        "en": "任务规划主理人",
+        "zh": "任务规划主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-task-plan.png",
+      "id": "agent-task-plan",
+      "name": {
+        "en": "agent-task-plan",
+        "zh": "任务规划 排期 顾问"
+      },
+      "profession": {
+        "en": "agent-task-plan",
+        "zh": "任务规划 排期 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-talent-onboard.png",
+      "id": "intl-talent-onboard",
+      "name": {
+        "en": "intl-talent-onboard",
+        "zh": "海外招聘 入职衔接 助手"
+      },
+      "profession": {
+        "en": "intl-talent-onboard",
+        "zh": "海外招聘 入职衔接 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-guard-pro.png",
+      "id": "contract-guard-pro",
+      "name": {
+        "en": "Contract Compliance Guard",
+        "zh": "合同合规审查"
+      },
+      "profession": {
+        "en": "Contract Compliance Guard",
+        "zh": "合同合规审查"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-881",
+  "plugin": "group-team-881",
+  "profession": {
+    "en": "agent-task-plan Collaboration Team",
+    "zh": "海外招聘入职衔接专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 任务规划",
+      "zh": "帮我处理任务规划"
+    },
+    {
+      "en": "Plan 海外招聘",
+      "zh": "帮我规划海外招聘"
+    },
+    {
+      "en": "Review 合同合规审查",
+      "zh": "帮我检查合同合规审查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "依赖成图",
+      "zh": "依赖成图"
+    },
+    {
+      "en": "关键路径",
+      "zh": "关键路径"
+    },
+    {
+      "en": "资源约束",
+      "zh": "资源约束"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-task-plan-team-lead",
+    "memberAgents": [
+      "agent-task-plan",
+      "intl-talent-onboard",
+      "contract-guard-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1071",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1071",
+    "kind": "team",
+    "name": "搜索体验设计专家",
+    "description": "输入搜索体验设计相关需求，输出容错处理、筛选可见、结果排序三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "search-ux-design-team-lead",
+        "role": "lead",
+        "name": "搜索体验设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "search-ux-design",
+        "role": "member",
+        "name": "搜索体验设计 顾问",
+        "evidence": "original_assets/search-ux-design/merkle_root",
+        "member_merkle_root": "cd4e5b7837e5667ee74fb734c7b4bb024ff2c4c3f6de2345d8d782a9ed451b1c"
+      },
+      {
+        "slug": "space-wayfinding",
+        "role": "member",
+        "name": "导视系统 寻路设计 顾问",
+        "evidence": "original_assets/space-wayfinding/merkle_root",
+        "member_merkle_root": "df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e"
+      },
+      {
+        "slug": "visual-asset-brief",
+        "role": "member",
+        "name": "视觉素材需求 助手",
+        "evidence": "original_assets/visual-asset-brief/merkle_root",
+        "member_merkle_root": "68518667fe0fa1356d6b1ee862ff02106dde5ca094d1131e9a84656fb6d97c6b"
+      }
+    ],
+    "team_lead": "search-ux-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "02aff1a015a069cb",
+  "prompt_hash": "9ffbcf7ac18e96e0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1071\", \"kind\": \"team\", \"name\": \"搜索体验设计专家\", \"description\": \"输入搜索体验设计相关需求，输出容错处理、筛选可见、结果排序三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"search-ux-design-team-lead\", \"role\": \"lead\", \"name\": \"搜索体验设计主理人\", \"evidence\": null}, {\"slug\": \"search-ux-design\", \"role\": \"member\", \"name\": \"搜索体验设计 顾问\", \"evidence\": \"original_assets/search-ux-design/merkle_root\", \"member_merkle_root\": \"cd4e5b7837e5667ee74fb734c7b4bb024ff2c4c3f6de2345d8d782a9ed451b1c\"}, {\"slug\": \"space-wayfinding\", \"role\": \"member\", \"name\": \"导视系统 寻路设计 顾问\", \"evidence\": \"original_assets/space-wayfinding/merkle_root\", \"member_merkle_root\": \"df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e\"}, {\"slug\": \"visual-asset-brief\", \"role\": \"member\", \"name\": \"视觉素材需求 助手\", \"evidence\": \"original_assets/visual-asset-brief/merkle_root\", \"member_merkle_root\": \"68518667fe0fa1356d6b1ee862ff02106dde5ca094d1131e9a84656fb6d97c6b\"}], \"team_lead\": \"search-ux-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/search-ux-design-team-lead.md": "44bf9093c93e09029d9a2f1ebcd3c804e739f2398b478ce22db25ac773c365fa",
+    "agents/search-ux-design.md": "566a6d2f1022efd9156dcebe6482182b3673f3aa92b57e2b8dc5855dc32d6703",
+    "agents/space-wayfinding.md": "8d1a8f55025d48df638b582b1a5e29a05e5bbb8dca8a256ec3a899a59ac63e73",
+    "agents/visual-asset-brief.md": "b1f956558542c83a90c2f06bf50830a4524583b65d64a9a566bda6db5e92a43b",
+    "plugin.json": "2491f28cfc2340d0ef2ac77f76afd22718f0fd7085911d97dfbf3ea794e87483",
+    "settings.json": "41070b1ddc9912424558538e7c84ba7c47acaaf87783836ad6932db192e5f1aa"
+  }
+}

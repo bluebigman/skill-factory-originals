@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-959",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-959",
+    "kind": "team",
+    "name": "命名方法专家",
+    "description": "输入命名方法相关需求，输出先定调性、可读优先、避免歧义三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "naming-method-team-lead",
+        "role": "lead",
+        "name": "命名方法主理人",
+        "evidence": null
+      },
+      {
+        "slug": "naming-method",
+        "role": "member",
+        "name": "命名方法 顾问",
+        "evidence": "original_assets/naming-method/merkle_root",
+        "member_merkle_root": "2ccc8b900afdea59db679f240748240edcff614db1b06d0db67580fd617e59a2"
+      },
+      {
+        "slug": "doc-localization-pro",
+        "role": "member",
+        "name": "文档本地 术语统一 顾问",
+        "evidence": "original_assets/doc-localization-pro/merkle_root",
+        "member_merkle_root": "dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd"
+      },
+      {
+        "slug": "brand-tone-guide",
+        "role": "member",
+        "name": "品牌语气指南 顾问",
+        "evidence": "original_assets/brand-tone-guide/merkle_root",
+        "member_merkle_root": "e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c"
+      }
+    ],
+    "team_lead": "naming-method-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "77ccc09d3536a934",
+  "prompt_hash": "97e778969342056b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-959\", \"kind\": \"team\", \"name\": \"命名方法专家\", \"description\": \"输入命名方法相关需求，输出先定调性、可读优先、避免歧义三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"naming-method-team-lead\", \"role\": \"lead\", \"name\": \"命名方法主理人\", \"evidence\": null}, {\"slug\": \"naming-method\", \"role\": \"member\", \"name\": \"命名方法 顾问\", \"evidence\": \"original_assets/naming-method/merkle_root\", \"member_merkle_root\": \"2ccc8b900afdea59db679f240748240edcff614db1b06d0db67580fd617e59a2\"}, {\"slug\": \"doc-localization-pro\", \"role\": \"member\", \"name\": \"文档本地 术语统一 顾问\", \"evidence\": \"original_assets/doc-localization-pro/merkle_root\", \"member_merkle_root\": \"dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd\"}, {\"slug\": \"brand-tone-guide\", \"role\": \"member\", \"name\": \"品牌语气指南 顾问\", \"evidence\": \"original_assets/brand-tone-guide/merkle_root\", \"member_merkle_root\": \"e125e6f89dd71c2ee8ff153455a2f151b68e2471b51902156d20d60858b7745c\"}], \"team_lead\": \"naming-method-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/brand-tone-guide.md": "8b8e570d57eaf35d5addf86e4c1d68be46baba6e4c7a369544e7dc6c7bf284e6",
+    "agents/doc-localization-pro.md": "3716ffe79150e533f1de71eff7538ff91f755191ee2c80c1345a872a1a09d831",
+    "agents/naming-method-team-lead.md": "f8ff4c56a22a5e51a23c8732c3a7a3269758b4b5d39d9750a5e05f0f873c9e93",
+    "agents/naming-method.md": "b5a0c4ead826224a2a5687d9ee3e181cdbd44bbb0bced128c930ba4ed6819a13",
+    "plugin.json": "3030f95d45b5e9b72259c0f9accbe44b243104dfe3d72c1b4b9fce3529893497",
+    "settings.json": "ca2a4f5ea268b3220680220f555cb95b2b4f534d18b6425aa15e637888e127ab"
+  }
+}

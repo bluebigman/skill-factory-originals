@@ -1,0 +1,126 @@
+{
+  "agentName": "content-design-system-team-lead",
+  "agents": [
+    "./agents/content-design-system-team-lead.md",
+    "./agents/content-design-system.md",
+    "./agents/report-narrative-pro.md",
+    "./agents/citation-format-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容设计",
+    "zh": "帮我处理内容设计"
+  },
+  "description": "content-design-system team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 内容设计 requirements, output three deliverables: 语气维度, 定期抽审, 结论先行. Verifiable end-to-end, evidence per step.",
+    "zh": "输入内容设计相关需求，输出语气维度、定期抽审、结论先行三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "content-design-system Team",
+    "zh": "内容设计语气体系专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-design-system-team-lead",
+      "name": {
+        "en": "内容设计主理人",
+        "zh": "内容设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-design-system.png",
+      "id": "content-design-system",
+      "name": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "profession": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-narrative-pro.png",
+      "id": "report-narrative-pro",
+      "name": {
+        "en": "report-narrative-pro",
+        "zh": "报告撰写 结论提炼 顾问"
+      },
+      "profession": {
+        "en": "report-narrative-pro",
+        "zh": "报告撰写 结论提炼 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/citation-format-pro.png",
+      "id": "citation-format-pro",
+      "name": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "profession": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-418",
+  "plugin": "group-team-418",
+  "profession": {
+    "en": "content-design-system Collaboration Team",
+    "zh": "内容设计语气体系专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容设计",
+      "zh": "帮我处理内容设计"
+    },
+    {
+      "en": "Plan 报告撰写",
+      "zh": "帮我规划报告撰写"
+    },
+    {
+      "en": "Review 引用规范",
+      "zh": "帮我检查引用规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "语气维度",
+      "zh": "语气维度"
+    },
+    {
+      "en": "正反例",
+      "zh": "正反例"
+    },
+    {
+      "en": "术语表",
+      "zh": "术语表"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-design-system-team-lead",
+    "memberAgents": [
+      "content-design-system",
+      "report-narrative-pro",
+      "citation-format-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

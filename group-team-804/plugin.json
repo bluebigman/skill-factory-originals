@@ -1,0 +1,126 @@
+{
+  "agentName": "api-latency-pro-team-lead",
+  "agents": [
+    "./agents/api-latency-pro-team-lead.md",
+    "./agents/api-latency-pro.md",
+    "./agents/ui-design-expert.md",
+    "./agents/config-drift-detect.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口延迟",
+    "zh": "帮我处理接口延迟"
+  },
+  "description": "api-latency-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 接口延迟, covers 分段测量 / 长尾关注 / 依赖分析, delivering structured results and actionable checklists.",
+    "zh": "接口延迟分段测量专家：围绕接口延迟，覆盖分段测量／长尾关注／依赖分析，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "api-latency-pro Team",
+    "zh": "接口延迟分段测量专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-latency-pro-team-lead",
+      "name": {
+        "en": "接口延迟主理人",
+        "zh": "接口延迟主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-latency-pro.png",
+      "id": "api-latency-pro",
+      "name": {
+        "en": "api-latency-pro",
+        "zh": "接口延迟 分段测量 顾问"
+      },
+      "profession": {
+        "en": "api-latency-pro",
+        "zh": "接口延迟 分段测量 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-design-expert.png",
+      "id": "ui-design-expert",
+      "name": {
+        "en": "UIPolishPro",
+        "zh": "界面设计 组件美化"
+      },
+      "profession": {
+        "en": "UIPolishPro",
+        "zh": "界面设计 组件美化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/config-drift-detect.png",
+      "id": "config-drift-detect",
+      "name": {
+        "en": "config-drift-detect",
+        "zh": "配置漂移 基线对比 顾问"
+      },
+      "profession": {
+        "en": "config-drift-detect",
+        "zh": "配置漂移 基线对比 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-804",
+  "plugin": "group-team-804",
+  "profession": {
+    "en": "api-latency-pro Collaboration Team",
+    "zh": "接口延迟分段测量专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口延迟",
+      "zh": "帮我处理接口延迟"
+    },
+    {
+      "en": "Plan 界面设计",
+      "zh": "帮我规划界面设计"
+    },
+    {
+      "en": "Review 配置漂移",
+      "zh": "帮我检查配置漂移"
+    }
+  ],
+  "tags": [
+    {
+      "en": "长尾关注",
+      "zh": "长尾关注"
+    },
+    {
+      "en": "依赖分析",
+      "zh": "依赖分析"
+    },
+    {
+      "en": "缓存前置",
+      "zh": "缓存前置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-latency-pro-team-lead",
+    "memberAgents": [
+      "api-latency-pro",
+      "ui-design-expert",
+      "config-drift-detect"
+    ]
+  },
+  "version": "1.0.0"
+}

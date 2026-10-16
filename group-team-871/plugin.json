@@ -1,0 +1,126 @@
+{
+  "agentName": "pii-redact-pro-team-lead",
+  "agents": [
+    "./agents/pii-redact-pro-team-lead.md",
+    "./agents/pii-redact-pro.md",
+    "./agents/toolkit-pro-02-fixed.md",
+    "./agents/toolkit-pro-05-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 隐私信息脱敏",
+    "zh": "帮我处理隐私信息脱敏"
+  },
+  "description": "pii-redact-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 隐私信息脱敏 requirements, output three deliverables: 分级处理, 先识别, 不可逆. Verifiable end-to-end, evidence per step.",
+    "zh": "输入隐私信息脱敏相关需求，输出分级处理、先识别、不可逆三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "pii-redact-pro Team",
+    "zh": "隐私信息脱敏专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pii-redact-pro-team-lead",
+      "name": {
+        "en": "隐私信息脱敏主理人",
+        "zh": "隐私信息脱敏主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pii-redact-pro.png",
+      "id": "pii-redact-pro",
+      "name": {
+        "en": "pii-redact-pro",
+        "zh": "隐私信息脱敏 助手"
+      },
+      "profession": {
+        "en": "pii-redact-pro",
+        "zh": "隐私信息脱敏 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-02-fixed.png",
+      "id": "toolkit-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "任务治理 PR评审效能洞察"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-05-fixed.png",
+      "id": "toolkit-pro-05-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "数据叙事 构建配置 批量处理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "数据叙事 构建配置 批量处理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-871",
+  "plugin": "group-team-871",
+  "profession": {
+    "en": "pii-redact-pro Collaboration Team",
+    "zh": "隐私信息脱敏专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 隐私信息脱敏",
+      "zh": "帮我处理隐私信息脱敏"
+    },
+    {
+      "en": "Plan 任务治理",
+      "zh": "帮我规划任务治理"
+    },
+    {
+      "en": "Review 数据叙事",
+      "zh": "帮我检查数据叙事"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级处理",
+      "zh": "分级处理"
+    },
+    {
+      "en": "不可逆",
+      "zh": "不可逆"
+    },
+    {
+      "en": "一致性",
+      "zh": "一致性"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pii-redact-pro-team-lead",
+    "memberAgents": [
+      "pii-redact-pro",
+      "toolkit-pro-02-fixed",
+      "toolkit-pro-05-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "packaging-spec-pro-team-lead",
+  "agents": [
+    "./agents/packaging-spec-pro-team-lead.md",
+    "./agents/packaging-spec-pro.md",
+    "./agents/warehouse-slot-pro.md",
+    "./agents/lean-kaizen-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 包装规范",
+    "zh": "帮我处理包装规范"
+  },
+  "description": "Packaging Spec Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "包装 仓储 精益 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Packaging Spec Pro Team",
+    "zh": "包装 仓储 精益 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "packaging-spec-pro-team-lead",
+      "name": {
+        "en": "包装规范主理人",
+        "zh": "包装规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/packaging-spec-pro.png",
+      "id": "packaging-spec-pro",
+      "name": {
+        "en": "Packaging Spec Pro",
+        "zh": "包装规范 运输防护 顾问"
+      },
+      "profession": {
+        "en": "Packaging Spec Pro",
+        "zh": "包装规范 运输防护 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/warehouse-slot-pro.png",
+      "id": "warehouse-slot-pro",
+      "name": {
+        "en": "Warehouse Slot Pro",
+        "zh": "仓储布局 拣货路径 顾问"
+      },
+      "profession": {
+        "en": "Warehouse Slot Pro",
+        "zh": "仓储布局 拣货路径 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/lean-kaizen-pro.png",
+      "id": "lean-kaizen-pro",
+      "name": {
+        "en": "Lean Kaizen Pro",
+        "zh": "精益改善 课题推进 顾问"
+      },
+      "profession": {
+        "en": "Lean Kaizen Pro",
+        "zh": "精益改善 课题推进 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-166",
+  "plugin": "group-team-166",
+  "profession": {
+    "en": "Packaging Spec Pro Collaboration Team",
+    "zh": "包装 仓储 精益 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 包装规范",
+      "zh": "帮我处理包装规范"
+    },
+    {
+      "en": "Plan 仓储布局",
+      "zh": "帮我规划仓储布局"
+    },
+    {
+      "en": "Review 精益改善",
+      "zh": "帮我检查精益改善"
+    }
+  ],
+  "tags": [
+    {
+      "en": "包装规范",
+      "zh": "包装规范"
+    },
+    {
+      "en": "仓储布局",
+      "zh": "仓储布局"
+    },
+    {
+      "en": "精益改善",
+      "zh": "精益改善"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "packaging-spec-pro-team-lead",
+    "memberAgents": [
+      "packaging-spec-pro",
+      "warehouse-slot-pro",
+      "lean-kaizen-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

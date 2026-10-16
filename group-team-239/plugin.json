@@ -1,0 +1,126 @@
+{
+  "agentName": "content-repurposing-pro-team-lead",
+  "agents": [
+    "./agents/content-repurposing-pro-team-lead.md",
+    "./agents/content-repurposing-pro.md",
+    "./agents/doc-batch-process.md",
+    "./agents/scene-narrative-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容复用",
+    "zh": "帮我处理内容复用"
+  },
+  "description": "content-repurposing-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "内容 文档 场景 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "content-repurposing-pro Team",
+    "zh": "内容 文档 场景 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-repurposing-pro-team-lead",
+      "name": {
+        "en": "内容复用主理人",
+        "zh": "内容复用主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-repurposing-pro.png",
+      "id": "content-repurposing-pro",
+      "name": {
+        "en": "content-repurposing-pro",
+        "zh": "内容复用 一稿多投 顾问"
+      },
+      "profession": {
+        "en": "content-repurposing-pro",
+        "zh": "内容复用 一稿多投 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-batch-process.png",
+      "id": "doc-batch-process",
+      "name": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "profession": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/scene-narrative-pro.png",
+      "id": "scene-narrative-pro",
+      "name": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "profession": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-239",
+  "plugin": "group-team-239",
+  "profession": {
+    "en": "content-repurposing-pro Collaboration Team",
+    "zh": "内容 文档 场景 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容复用",
+      "zh": "帮我处理内容复用"
+    },
+    {
+      "en": "Plan 文档批处",
+      "zh": "帮我规划文档批处"
+    },
+    {
+      "en": "Review 场景叙事",
+      "zh": "帮我检查场景叙事"
+    }
+  ],
+  "tags": [
+    {
+      "en": "内容复用",
+      "zh": "内容复用"
+    },
+    {
+      "en": "文档批处",
+      "zh": "文档批处"
+    },
+    {
+      "en": "场景叙事",
+      "zh": "场景叙事"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-repurposing-pro-team-lead",
+    "memberAgents": [
+      "content-repurposing-pro",
+      "doc-batch-process",
+      "scene-narrative-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-167",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-167",
+    "kind": "team",
+    "name": "久坐 知识 读书 团队",
+    "description": "久坐 知识 读书 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "posture-care-pro-team-lead",
+        "role": "lead",
+        "name": "久坐改善主理人",
+        "evidence": null
+      },
+      {
+        "slug": "posture-care-pro",
+        "role": "member",
+        "name": "久坐改善 体态调整 拉伸放松",
+        "evidence": "original_assets/posture-care-pro/merkle_root",
+        "member_merkle_root": "6aa75df3a28b8347fbc4f135c8147ceb2d17cf62c803738c0dcd3a63d2c32e35"
+      },
+      {
+        "slug": "knowledge-management-pro",
+        "role": "member",
+        "name": "知识管理 笔记体系 总结提炼",
+        "evidence": "original_assets/knowledge-management-pro/merkle_root",
+        "member_merkle_root": "90658b4608eab58c7c7fd61dc7ef443d0d35782ff9ec1e1b4bbba63cb5cc438c"
+      },
+      {
+        "slug": "reading-notes-pro",
+        "role": "member",
+        "name": "读书笔记 知识卡片 输出转化",
+        "evidence": "original_assets/reading-notes-pro/merkle_root",
+        "member_merkle_root": "cf17e7914265848af8719e842e32c8fe03b613d805f2d1e9cc13095329a73850"
+      }
+    ],
+    "team_lead": "posture-care-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3910758c1acd81fd",
+  "prompt_hash": "d438e08f537c5be6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-167\", \"kind\": \"team\", \"name\": \"久坐 知识 读书 团队\", \"description\": \"久坐 知识 读书 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"posture-care-pro-team-lead\", \"role\": \"lead\", \"name\": \"久坐改善主理人\", \"evidence\": null}, {\"slug\": \"posture-care-pro\", \"role\": \"member\", \"name\": \"久坐改善 体态调整 拉伸放松\", \"evidence\": \"original_assets/posture-care-pro/merkle_root\", \"member_merkle_root\": \"6aa75df3a28b8347fbc4f135c8147ceb2d17cf62c803738c0dcd3a63d2c32e35\"}, {\"slug\": \"knowledge-management-pro\", \"role\": \"member\", \"name\": \"知识管理 笔记体系 总结提炼\", \"evidence\": \"original_assets/knowledge-management-pro/merkle_root\", \"member_merkle_root\": \"90658b4608eab58c7c7fd61dc7ef443d0d35782ff9ec1e1b4bbba63cb5cc438c\"}, {\"slug\": \"reading-notes-pro\", \"role\": \"member\", \"name\": \"读书笔记 知识卡片 输出转化\", \"evidence\": \"original_assets/reading-notes-pro/merkle_root\", \"member_merkle_root\": \"cf17e7914265848af8719e842e32c8fe03b613d805f2d1e9cc13095329a73850\"}], \"team_lead\": \"posture-care-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/knowledge-management-pro.md": "7c4dd22dcd28c0664069274522f9ff8cecb3cdcd1801b3e9c312f61059ebde14",
+    "agents/posture-care-pro-team-lead.md": "a26ce83750a33d5f562861b07c319d9ba3dc81d4faf4ccc961f80eb21961236f",
+    "agents/posture-care-pro.md": "4810ed50c6a98f179864a413319d9ad0ffd719ec2b263947018af94e5fd9e0dc",
+    "agents/reading-notes-pro.md": "788e08ea6bfaef11a84518085cf88bf55552f83ab6a5df83fc9455490b8214e5",
+    "plugin.json": "5d6a5a0a5eeec597077b1a2612951c77157db9ebbdfa006f2d20a73e98141851",
+    "settings.json": "d1298f9e19312a5a5a1a9b249ed97e67524c40b3a87c764072681938877fb7ce"
+  }
+}

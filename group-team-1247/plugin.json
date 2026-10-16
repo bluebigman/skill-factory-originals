@@ -1,0 +1,126 @@
+{
+  "agentName": "report-data-verify-team-lead",
+  "agents": [
+    "./agents/report-data-verify-team-lead.md",
+    "./agents/report-data-verify.md",
+    "./agents/game-team-workflow.md",
+    "./agents/incident-postmortem-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 报告数据核验",
+    "zh": "帮我处理报告数据核验"
+  },
+  "description": "report-data-verify team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 报告数据核验, covers 口径先对 / 交叉验证 / 异常问因, delivering structured results and actionable checklists.",
+    "zh": "擅长口径先对、交叉验证与异常问因，覆盖报告数据核验全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "report-data-verify Team",
+    "zh": "报告数据核验顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "report-data-verify-team-lead",
+      "name": {
+        "en": "报告数据核验主理人",
+        "zh": "报告数据核验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/report-data-verify.png",
+      "id": "report-data-verify",
+      "name": {
+        "en": "report-data-verify",
+        "zh": "报告数据核验 顾问"
+      },
+      "profession": {
+        "en": "report-data-verify",
+        "zh": "报告数据核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-team-workflow.png",
+      "id": "game-team-workflow",
+      "name": {
+        "en": "game-team-workflow",
+        "zh": "游戏团队 协作流程 顾问"
+      },
+      "profession": {
+        "en": "game-team-workflow",
+        "zh": "游戏团队 协作流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/incident-postmortem-pro.png",
+      "id": "incident-postmortem-pro",
+      "name": {
+        "en": "incident-postmortem-pro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "profession": {
+        "en": "incident-postmortem-pro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1247",
+  "plugin": "group-team-1247",
+  "profession": {
+    "en": "report-data-verify Collaboration Team",
+    "zh": "报告数据核验顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报告数据核验",
+      "zh": "帮我处理报告数据核验"
+    },
+    {
+      "en": "Plan 游戏团队",
+      "zh": "帮我规划游戏团队"
+    },
+    {
+      "en": "Review 事故复盘",
+      "zh": "帮我检查事故复盘"
+    }
+  ],
+  "tags": [
+    {
+      "en": "口径先对",
+      "zh": "口径先对"
+    },
+    {
+      "en": "交叉验证",
+      "zh": "交叉验证"
+    },
+    {
+      "en": "异常问因",
+      "zh": "异常问因"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "report-data-verify-team-lead",
+    "memberAgents": [
+      "report-data-verify",
+      "game-team-workflow",
+      "incident-postmortem-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

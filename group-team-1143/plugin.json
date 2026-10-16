@@ -1,0 +1,126 @@
+{
+  "agentName": "ai-workflow-expert-team-lead",
+  "agents": [
+    "./agents/ai-workflow-expert-team-lead.md",
+    "./agents/ai-workflow-expert.md",
+    "./agents/api-transmission-assurance-expert.md",
+    "./agents/data-contract.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle AI工作流",
+    "zh": "帮我处理AI工作流"
+  },
+  "description": "FlowMaster team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据契约 requirements, output three deliverables: 字段约定, 变更流程, 质量条款. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据契约相关需求，输出字段约定、变更流程、质量条款三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "FlowMaster Team",
+    "zh": "任务流程编排专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ai-workflow-expert-team-lead",
+      "name": {
+        "en": "AI工作流主理人",
+        "zh": "AI工作流主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ai-workflow-expert.png",
+      "id": "ai-workflow-expert",
+      "name": {
+        "en": "FlowMaster",
+        "zh": "AI工作流 多步编排 自动执行"
+      },
+      "profession": {
+        "en": "FlowMaster",
+        "zh": "AI工作流 多步编排 自动执行"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-transmission-assurance-expert.png",
+      "id": "api-transmission-assurance-expert",
+      "name": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "profession": {
+        "en": "API Integration Transport Assurance",
+        "zh": "接口联调 传输校验 异步排查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-contract.png",
+      "id": "data-contract",
+      "name": {
+        "en": "data-contract",
+        "zh": "数据契约 顾问"
+      },
+      "profession": {
+        "en": "data-contract",
+        "zh": "数据契约 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1143",
+  "plugin": "group-team-1143",
+  "profession": {
+    "en": "FlowMaster Collaboration Team",
+    "zh": "多步编排专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle AI工作流",
+      "zh": "帮我处理AI工作流"
+    },
+    {
+      "en": "Plan 接口联调",
+      "zh": "帮我规划接口联调"
+    },
+    {
+      "en": "Review 数据契约",
+      "zh": "帮我检查数据契约"
+    }
+  ],
+  "tags": [
+    {
+      "en": "接口传输",
+      "zh": "接口传输"
+    },
+    {
+      "en": "证书校验",
+      "zh": "证书校验"
+    },
+    {
+      "en": "排查修复",
+      "zh": "排查修复"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ai-workflow-expert-team-lead",
+    "memberAgents": [
+      "ai-workflow-expert",
+      "api-transmission-assurance-expert",
+      "data-contract"
+    ]
+  },
+  "version": "1.0.0"
+}

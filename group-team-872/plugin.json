@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-sign-flow-team-lead",
+  "agents": [
+    "./agents/doc-sign-flow-team-lead.md",
+    "./agents/doc-sign-flow.md",
+    "./agents/sop-writer-pro.md",
+    "./agents/process-fmea-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 文档签署流程",
+    "zh": "帮我处理文档签署流程"
+  },
+  "description": "doc-sign-flow team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档签署流程 end-to-end: 先定流程, 版本冻结 and 条款对照. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长先定流程、版本冻结与条款对照，覆盖文档签署流程全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-sign-flow Team",
+    "zh": "文档签署流程专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-sign-flow-team-lead",
+      "name": {
+        "en": "文档签署流程主理人",
+        "zh": "文档签署流程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-sign-flow.png",
+      "id": "doc-sign-flow",
+      "name": {
+        "en": "doc-sign-flow",
+        "zh": "文档签署流程 顾问"
+      },
+      "profession": {
+        "en": "doc-sign-flow",
+        "zh": "文档签署流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sop-writer-pro.png",
+      "id": "sop-writer-pro",
+      "name": {
+        "en": "sop-writer-pro",
+        "zh": "流程编写 步骤细化 顾问"
+      },
+      "profession": {
+        "en": "sop-writer-pro",
+        "zh": "流程编写 步骤细化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/process-fmea-pro.png",
+      "id": "process-fmea-pro",
+      "name": {
+        "en": "process-fmea-pro",
+        "zh": "过程风险 预防分析 顾问"
+      },
+      "profession": {
+        "en": "process-fmea-pro",
+        "zh": "过程风险 预防分析 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-872",
+  "plugin": "group-team-872",
+  "profession": {
+    "en": "doc-sign-flow Collaboration Team",
+    "zh": "文档签署流程专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档签署流程",
+      "zh": "帮我处理文档签署流程"
+    },
+    {
+      "en": "Plan 流程编写",
+      "zh": "帮我规划流程编写"
+    },
+    {
+      "en": "Review 过程风险",
+      "zh": "帮我检查过程风险"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定流程",
+      "zh": "先定流程"
+    },
+    {
+      "en": "版本冻结",
+      "zh": "版本冻结"
+    },
+    {
+      "en": "条款对照",
+      "zh": "条款对照"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-sign-flow-team-lead",
+    "memberAgents": [
+      "doc-sign-flow",
+      "sop-writer-pro",
+      "process-fmea-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

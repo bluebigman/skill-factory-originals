@@ -1,0 +1,126 @@
+{
+  "agentName": "level-difficulty-curve-team-lead",
+  "agents": [
+    "./agents/level-difficulty-curve-team-lead.md",
+    "./agents/level-difficulty-curve.md",
+    "./agents/navigation-design.md",
+    "./agents/component-spec.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 关卡难度",
+    "zh": "帮我处理关卡难度"
+  },
+  "description": "level-difficulty-curve team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 关卡难度 requirements, output three deliverables: 前十分钟, 阶梯递进, 失败可读. Verifiable end-to-end, evidence per step.",
+    "zh": "输入关卡难度相关需求，输出前十分钟、阶梯递进、失败可读三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "level-difficulty-curve Team",
+    "zh": "曲线调优专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "level-difficulty-curve-team-lead",
+      "name": {
+        "en": "关卡难度主理人",
+        "zh": "关卡难度主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/level-difficulty-curve.png",
+      "id": "level-difficulty-curve",
+      "name": {
+        "en": "level-difficulty-curve",
+        "zh": "关卡难度 曲线调优 顾问"
+      },
+      "profession": {
+        "en": "level-difficulty-curve",
+        "zh": "关卡难度 曲线调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/navigation-design.png",
+      "id": "navigation-design",
+      "name": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "profession": {
+        "en": "navigation-design",
+        "zh": "导航设计 路径清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/component-spec.png",
+      "id": "component-spec",
+      "name": {
+        "en": "component-spec",
+        "zh": "组件规格定义 顾问"
+      },
+      "profession": {
+        "en": "component-spec",
+        "zh": "组件规格定义 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1188",
+  "plugin": "group-team-1188",
+  "profession": {
+    "en": "level-difficulty-curve Collaboration Team",
+    "zh": "曲线调优专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 关卡难度",
+      "zh": "帮我处理关卡难度"
+    },
+    {
+      "en": "Plan 导航设计",
+      "zh": "帮我规划导航设计"
+    },
+    {
+      "en": "Review 组件规格定义",
+      "zh": "帮我检查组件规格定义"
+    }
+  ],
+  "tags": [
+    {
+      "en": "失败可读",
+      "zh": "失败可读"
+    },
+    {
+      "en": "埋点看卡点",
+      "zh": "埋点看卡点"
+    },
+    {
+      "en": "适度跳过",
+      "zh": "适度跳过"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "level-difficulty-curve-team-lead",
+    "memberAgents": [
+      "level-difficulty-curve",
+      "navigation-design",
+      "component-spec"
+    ]
+  },
+  "version": "1.0.0"
+}

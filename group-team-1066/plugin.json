@@ -1,0 +1,126 @@
+{
+  "agentName": "style-guide-build-team-lead",
+  "agents": [
+    "./agents/style-guide-build-team-lead.md",
+    "./agents/style-guide-build.md",
+    "./agents/doc-index-rebuild.md",
+    "./agents/brand-voice-guide.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 风格指南构建",
+    "zh": "帮我处理风格指南构建"
+  },
+  "description": "style-guide-build team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 风格指南构建 end-to-end: 术语先定, 句式规范 and 标点规范. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长术语先定、句式规范与标点规范，覆盖风格指南构建全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "style-guide-build Team",
+    "zh": "风格指南构建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "style-guide-build-team-lead",
+      "name": {
+        "en": "风格指南构建主理人",
+        "zh": "风格指南构建主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/style-guide-build.png",
+      "id": "style-guide-build",
+      "name": {
+        "en": "style-guide-build",
+        "zh": "风格指南构建 顾问"
+      },
+      "profession": {
+        "en": "style-guide-build",
+        "zh": "风格指南构建 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-index-rebuild.png",
+      "id": "doc-index-rebuild",
+      "name": {
+        "en": "doc-index-rebuild",
+        "zh": "文档索引重建 助手"
+      },
+      "profession": {
+        "en": "doc-index-rebuild",
+        "zh": "文档索引重建 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/brand-voice-guide.png",
+      "id": "brand-voice-guide",
+      "name": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "profession": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1066",
+  "plugin": "group-team-1066",
+  "profession": {
+    "en": "style-guide-build Collaboration Team",
+    "zh": "风格指南构建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 风格指南构建",
+      "zh": "帮我处理风格指南构建"
+    },
+    {
+      "en": "Plan 文档索引重建",
+      "zh": "帮我规划文档索引重建"
+    },
+    {
+      "en": "Review 品牌语气",
+      "zh": "帮我检查品牌语气"
+    }
+  ],
+  "tags": [
+    {
+      "en": "术语先定",
+      "zh": "术语先定"
+    },
+    {
+      "en": "句式规范",
+      "zh": "句式规范"
+    },
+    {
+      "en": "标点规范",
+      "zh": "标点规范"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "style-guide-build-team-lead",
+    "memberAgents": [
+      "style-guide-build",
+      "doc-index-rebuild",
+      "brand-voice-guide"
+    ]
+  },
+  "version": "1.0.0"
+}

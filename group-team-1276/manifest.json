@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1276",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1276",
+    "kind": "team",
+    "name": "内容结构设计顾问专家",
+    "description": "擅长篇幅配比、过渡自然与目标单一，覆盖内容结构设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-structure-team-lead",
+        "role": "lead",
+        "name": "内容结构设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-structure",
+        "role": "member",
+        "name": "内容结构设计 顾问",
+        "evidence": "original_assets/content-structure/merkle_root",
+        "member_merkle_root": "7a3183ab3e3f2ff6337aa8f164a19664e490315ecd4214a3b0c669352898c259"
+      },
+      {
+        "slug": "event-planning",
+        "role": "member",
+        "name": "活动策划 顾问",
+        "evidence": "original_assets/event-planning/merkle_root",
+        "member_merkle_root": "9e4c1051f0185fa11f49c9e0ce645ed062c05239c52a40af6d7c6236ff468423"
+      },
+      {
+        "slug": "media-mix-plan",
+        "role": "member",
+        "name": "媒介组合规划 顾问",
+        "evidence": "original_assets/media-mix-plan/merkle_root",
+        "member_merkle_root": "2ac92f3a4df64482698512a76aca19bbc4b95b11232bd873e9b0346bc571c93d"
+      }
+    ],
+    "team_lead": "content-structure-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1c287a985a2308c0",
+  "prompt_hash": "c0ecfc91bde52d33",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1276\", \"kind\": \"team\", \"name\": \"内容结构设计顾问专家\", \"description\": \"擅长篇幅配比、过渡自然与目标单一，覆盖内容结构设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-structure-team-lead\", \"role\": \"lead\", \"name\": \"内容结构设计主理人\", \"evidence\": null}, {\"slug\": \"content-structure\", \"role\": \"member\", \"name\": \"内容结构设计 顾问\", \"evidence\": \"original_assets/content-structure/merkle_root\", \"member_merkle_root\": \"7a3183ab3e3f2ff6337aa8f164a19664e490315ecd4214a3b0c669352898c259\"}, {\"slug\": \"event-planning\", \"role\": \"member\", \"name\": \"活动策划 顾问\", \"evidence\": \"original_assets/event-planning/merkle_root\", \"member_merkle_root\": \"9e4c1051f0185fa11f49c9e0ce645ed062c05239c52a40af6d7c6236ff468423\"}, {\"slug\": \"media-mix-plan\", \"role\": \"member\", \"name\": \"媒介组合规划 顾问\", \"evidence\": \"original_assets/media-mix-plan/merkle_root\", \"member_merkle_root\": \"2ac92f3a4df64482698512a76aca19bbc4b95b11232bd873e9b0346bc571c93d\"}], \"team_lead\": \"content-structure-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-structure-team-lead.md": "06e50a21acb0ad2dbf050369aad25f6dbf52d7d809fbd4853a59bf31b4a772bc",
+    "agents/content-structure.md": "3bd64e015251cd32e69463b388ba3b17d54dc2a724acc3cb311557ff66a97a74",
+    "agents/event-planning.md": "b3b081ce225e1e12af2c18f0e92b64feee0d01366be809262aa22ae5b7adaa79",
+    "agents/media-mix-plan.md": "2f21934300665d66e3c343b528b7b9b7aedba5f400cdadb11126ed55b04396b1",
+    "plugin.json": "69e7e5b72e391adab4379acc8a62c17ad6f745848a018e8fefb85e1557897dfb",
+    "settings.json": "d8c950f41107d84021b13a0520527596742db9dc15f6280050fca42842a28f85"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "presentation-outline-pro-team-lead",
+  "agents": [
+    "./agents/presentation-outline-pro-team-lead.md",
+    "./agents/presentation-outline-pro.md",
+    "./agents/report-writing-pro.md",
+    "./agents/time-management-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 演示大纲",
+    "zh": "帮我处理演示大纲"
+  },
+  "description": "Presentation Outline Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "演示 报告 时间 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Presentation Outline Pro Team",
+    "zh": "演示 报告 时间 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "presentation-outline-pro-team-lead",
+      "name": {
+        "en": "演示大纲主理人",
+        "zh": "演示大纲主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/presentation-outline-pro.png",
+      "id": "presentation-outline-pro",
+      "name": {
+        "en": "Presentation Outline Pro",
+        "zh": "演示大纲 ppt 结构"
+      },
+      "profession": {
+        "en": "Presentation Outline Pro",
+        "zh": "演示大纲 PPT结构 叙事线"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-writing-pro.png",
+      "id": "report-writing-pro",
+      "name": {
+        "en": "Report Writing Pro",
+        "zh": "写报告 调研报告 结构"
+      },
+      "profession": {
+        "en": "Report Writing Pro",
+        "zh": "报告撰写 结构搭建 数据呈现"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/time-management-pro.png",
+      "id": "time-management-pro",
+      "name": {
+        "en": "Time Management Pro",
+        "zh": "时间管理 番茄工作 优先级"
+      },
+      "profession": {
+        "en": "Time Management Pro",
+        "zh": "时间管理 番茄工作 优先级"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-194",
+  "plugin": "group-team-194",
+  "profession": {
+    "en": "Presentation Outline Pro Collaboration Team",
+    "zh": "演示 报告 时间 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 演示大纲",
+      "zh": "帮我处理演示大纲"
+    },
+    {
+      "en": "Plan 报告撰写",
+      "zh": "帮我规划报告撰写"
+    },
+    {
+      "en": "Review 时间管理",
+      "zh": "帮我检查时间管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "演示大纲",
+      "zh": "演示大纲"
+    },
+    {
+      "en": "报告撰写",
+      "zh": "报告撰写"
+    },
+    {
+      "en": "时间管理",
+      "zh": "时间管理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "presentation-outline-pro-team-lead",
+    "memberAgents": [
+      "presentation-outline-pro",
+      "report-writing-pro",
+      "time-management-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

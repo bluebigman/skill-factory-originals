@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-style-guide-team-lead",
+  "agents": [
+    "./agents/doc-style-guide-team-lead.md",
+    "./agents/doc-style-guide.md",
+    "./agents/doc-coauthor-flow.md",
+    "./agents/doc-split-chapter.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档风格规范",
+    "zh": "帮我处理文档风格规范"
+  },
+  "description": "doc-style-guide team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档风格规范 requirements, output three deliverables: 句式克制, 标点统一, 数字规范. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档风格规范相关需求，输出句式克制、标点统一、数字规范三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-style-guide Team",
+    "zh": "文档风格规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-style-guide-team-lead",
+      "name": {
+        "en": "文档风格规范主理人",
+        "zh": "文档风格规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-style-guide.png",
+      "id": "doc-style-guide",
+      "name": {
+        "en": "doc-style-guide",
+        "zh": "文档风格规范 顾问"
+      },
+      "profession": {
+        "en": "doc-style-guide",
+        "zh": "文档风格规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-coauthor-flow.png",
+      "id": "doc-coauthor-flow",
+      "name": {
+        "en": "doc-coauthor-flow",
+        "zh": "文档协同编辑 顾问"
+      },
+      "profession": {
+        "en": "doc-coauthor-flow",
+        "zh": "文档协同编辑 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-split-chapter.png",
+      "id": "doc-split-chapter",
+      "name": {
+        "en": "doc-split-chapter",
+        "zh": "文档分章拆分 助手"
+      },
+      "profession": {
+        "en": "doc-split-chapter",
+        "zh": "文档分章拆分 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1191",
+  "plugin": "group-team-1191",
+  "profession": {
+    "en": "doc-style-guide Collaboration Team",
+    "zh": "文档风格规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档风格规范",
+      "zh": "帮我处理文档风格规范"
+    },
+    {
+      "en": "Plan 文档协同编辑",
+      "zh": "帮我规划文档协同编辑"
+    },
+    {
+      "en": "Review 文档分章拆分",
+      "zh": "帮我检查文档分章拆分"
+    }
+  ],
+  "tags": [
+    {
+      "en": "句式克制",
+      "zh": "句式克制"
+    },
+    {
+      "en": "标点统一",
+      "zh": "标点统一"
+    },
+    {
+      "en": "数字规范",
+      "zh": "数字规范"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-style-guide-team-lead",
+    "memberAgents": [
+      "doc-style-guide",
+      "doc-coauthor-flow",
+      "doc-split-chapter"
+    ]
+  },
+  "version": "1.0.0"
+}

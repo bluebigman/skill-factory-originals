@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1089",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1089",
+    "kind": "team",
+    "name": "性能预算限额专家",
+    "description": "输入性能预算相关需求，输出预算预设、优化排序、回归基线三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-perf-budget-team-lead",
+        "role": "lead",
+        "name": "性能预算主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-perf-budget",
+        "role": "member",
+        "name": "性能预算 限额 顾问",
+        "evidence": "original_assets/agent-perf-budget/merkle_root",
+        "member_merkle_root": "5086429f26b686e840361ba8dc792aec4195921b90c2a7f0e383c7a70368bf5e"
+      },
+      {
+        "slug": "data-pipeline-pro-01-fixed",
+        "role": "member",
+        "name": "R包数据转换 批量整理",
+        "evidence": "original_assets/data-pipeline-pro-01-fixed/merkle_root",
+        "member_merkle_root": "6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237"
+      },
+      {
+        "slug": "agent-output-verify-pro",
+        "role": "member",
+        "name": "输出验证 幻觉检测 顾问",
+        "evidence": "original_assets/agent-output-verify-pro/merkle_root",
+        "member_merkle_root": "01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1"
+      }
+    ],
+    "team_lead": "agent-perf-budget-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "43e591dd2f8779e0",
+  "prompt_hash": "e864f441e799f64d",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1089\", \"kind\": \"team\", \"name\": \"性能预算限额专家\", \"description\": \"输入性能预算相关需求，输出预算预设、优化排序、回归基线三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-perf-budget-team-lead\", \"role\": \"lead\", \"name\": \"性能预算主理人\", \"evidence\": null}, {\"slug\": \"agent-perf-budget\", \"role\": \"member\", \"name\": \"性能预算 限额 顾问\", \"evidence\": \"original_assets/agent-perf-budget/merkle_root\", \"member_merkle_root\": \"5086429f26b686e840361ba8dc792aec4195921b90c2a7f0e383c7a70368bf5e\"}, {\"slug\": \"data-pipeline-pro-01-fixed\", \"role\": \"member\", \"name\": \"R包数据转换 批量整理\", \"evidence\": \"original_assets/data-pipeline-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237\"}, {\"slug\": \"agent-output-verify-pro\", \"role\": \"member\", \"name\": \"输出验证 幻觉检测 顾问\", \"evidence\": \"original_assets/agent-output-verify-pro/merkle_root\", \"member_merkle_root\": \"01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1\"}], \"team_lead\": \"agent-perf-budget-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-verify-pro.md": "caa6063c4b45f8508e88ca6cd92f278df28e4e1e2d5144840bfea3bbcdaf031c",
+    "agents/agent-perf-budget-team-lead.md": "9c44e534dc2b60468b766ccf0982abf075657a310bc02d140c9423b9703b18ea",
+    "agents/agent-perf-budget.md": "0f0c116ce720963e303991ae8d7fdf11ef318bc62fd7f8051c6176366c4057fd",
+    "agents/data-pipeline-pro-01-fixed.md": "5c9fe7225651f7bee872d33f04019f741a765316db7a6eec9da14ce9e3379249",
+    "plugin.json": "e38ed62416bba19a8a44db6997b49c1609f28bac0c0d3e32100a6122f68cd918",
+    "settings.json": "3c610365fe9ce804462ac6c9d61f467ccbb612979bea96d1dd0065fb5b0f8812"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085714",
+  "slug": "group-team-1002",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1002",
+    "kind": "team",
+    "name": "缓存清理专家",
+    "description": "输入日志审计留痕相关需求，输出必录字段、不可篡改、留存期限三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-deploy-pro-team-lead",
+        "role": "lead",
+        "name": "缓存清理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-deploy-pro",
+        "role": "member",
+        "name": "缓存清理 故障排查",
+        "evidence": "original_assets/ops-deploy-pro/merkle_root",
+        "member_merkle_root": "393bd82c510b9fed7282860483bf5dce2c8b51580bd8c5c052e8471ee6c564f9"
+      },
+      {
+        "slug": "log-audit-trail",
+        "role": "member",
+        "name": "日志审计留痕 顾问",
+        "evidence": "original_assets/log-audit-trail/merkle_root",
+        "member_merkle_root": "150451266c70776be962299b62d890d91a880275c057a9cdfc526018a7424eff"
+      },
+      {
+        "slug": "table-formula-pro",
+        "role": "member",
+        "name": "表格公式 报错排查 顾问",
+        "evidence": "original_assets/table-formula-pro/merkle_root",
+        "member_merkle_root": "3dfcb4f0c33b5d38671474d39afe65dfbe1a71f6dceaa430dc47a672d5729438"
+      }
+    ],
+    "team_lead": "ops-deploy-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b485d475c975d247",
+  "prompt_hash": "9e582dde09e5c4e8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1002\", \"kind\": \"team\", \"name\": \"缓存清理专家\", \"description\": \"输入日志审计留痕相关需求，输出必录字段、不可篡改、留存期限三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-deploy-pro-team-lead\", \"role\": \"lead\", \"name\": \"缓存清理主理人\", \"evidence\": null}, {\"slug\": \"ops-deploy-pro\", \"role\": \"member\", \"name\": \"缓存清理 故障排查\", \"evidence\": \"original_assets/ops-deploy-pro/merkle_root\", \"member_merkle_root\": \"393bd82c510b9fed7282860483bf5dce2c8b51580bd8c5c052e8471ee6c564f9\"}, {\"slug\": \"log-audit-trail\", \"role\": \"member\", \"name\": \"日志审计留痕 顾问\", \"evidence\": \"original_assets/log-audit-trail/merkle_root\", \"member_merkle_root\": \"150451266c70776be962299b62d890d91a880275c057a9cdfc526018a7424eff\"}, {\"slug\": \"table-formula-pro\", \"role\": \"member\", \"name\": \"表格公式 报错排查 顾问\", \"evidence\": \"original_assets/table-formula-pro/merkle_root\", \"member_merkle_root\": \"3dfcb4f0c33b5d38671474d39afe65dfbe1a71f6dceaa430dc47a672d5729438\"}], \"team_lead\": \"ops-deploy-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/log-audit-trail.md": "605199406074cbda6cfaf5b1dc415695536ee46e8bb2d24373cbad3fd4d2512d",
+    "agents/ops-deploy-pro-team-lead.md": "1d0e7fc7c567e23970ac0fa67811504e4d0dce8ff237c715b4f00aff86d048f9",
+    "agents/ops-deploy-pro.md": "a476e3bf8c8c9b94e55845ccf8fdf2e4954b1b0318c161fb8de30065663b4459",
+    "agents/table-formula-pro.md": "7da9e939b822749df0049a149f9aa00d3143b7bfbbd32c420ddf6100cac46cfd",
+    "plugin.json": "30fc4f162eb9d91747d4472c132c34d0e86e35454a5962b180e6e18af0b44b79",
+    "settings.json": "ecfbd06aa9920991d118832f84915ec4734ff2117485fcc91c263f635c8dd08d"
+  }
+}

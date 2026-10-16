@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1218",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1218",
+    "kind": "team",
+    "name": "内容更新规划顾问专家",
+    "description": "输入内容更新规划相关需求，输出版本标注、旧版归档、目标倒推三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-update-plan-team-lead",
+        "role": "lead",
+        "name": "内容更新规划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-update-plan",
+        "role": "member",
+        "name": "内容更新规划 顾问",
+        "evidence": "original_assets/content-update-plan/merkle_root",
+        "member_merkle_root": "0c973e163f0f6e0cacaf3abc16c3d5809647fdbcc3cc689ef9fd6782ad2d754c"
+      },
+      {
+        "slug": "marketing-mix-pro",
+        "role": "member",
+        "name": "渠道组合 预算分配 顾问",
+        "evidence": "original_assets/marketing-mix-pro/merkle_root",
+        "member_merkle_root": "ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0"
+      },
+      {
+        "slug": "tone-adaptation",
+        "role": "member",
+        "name": "语气适配改写 助手",
+        "evidence": "original_assets/tone-adaptation/merkle_root",
+        "member_merkle_root": "f61d9678784086f53184e8ac85eaf1bbb353dd0af969583017e64c56fa495d91"
+      }
+    ],
+    "team_lead": "content-update-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a8691e245aaa6127",
+  "prompt_hash": "03c685ba18e5a970",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1218\", \"kind\": \"team\", \"name\": \"内容更新规划顾问专家\", \"description\": \"输入内容更新规划相关需求，输出版本标注、旧版归档、目标倒推三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-update-plan-team-lead\", \"role\": \"lead\", \"name\": \"内容更新规划主理人\", \"evidence\": null}, {\"slug\": \"content-update-plan\", \"role\": \"member\", \"name\": \"内容更新规划 顾问\", \"evidence\": \"original_assets/content-update-plan/merkle_root\", \"member_merkle_root\": \"0c973e163f0f6e0cacaf3abc16c3d5809647fdbcc3cc689ef9fd6782ad2d754c\"}, {\"slug\": \"marketing-mix-pro\", \"role\": \"member\", \"name\": \"渠道组合 预算分配 顾问\", \"evidence\": \"original_assets/marketing-mix-pro/merkle_root\", \"member_merkle_root\": \"ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0\"}, {\"slug\": \"tone-adaptation\", \"role\": \"member\", \"name\": \"语气适配改写 助手\", \"evidence\": \"original_assets/tone-adaptation/merkle_root\", \"member_merkle_root\": \"f61d9678784086f53184e8ac85eaf1bbb353dd0af969583017e64c56fa495d91\"}], \"team_lead\": \"content-update-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-update-plan-team-lead.md": "1bcd3059b20a3bd6405de2fc6ad6ce128addeeaf8aa771c39642f79dfd1dfe59",
+    "agents/content-update-plan.md": "df91ca7fb1b751cd5ece56b97f5d9c70ec0a6aff625a2a085f6ce6f1436480ee",
+    "agents/marketing-mix-pro.md": "3edd6531e234545b8d8cfd06bbf78f0ab1d7d773a54759936e45d0cc7d8e5750",
+    "agents/tone-adaptation.md": "7af30b8b90e13b76314155fb159dbfcb78e4ef6ee183d4022e5f718ed7f3e9bd",
+    "plugin.json": "ff1ec66e60e488612b5e7375df812b47d4f273253f476a303977977b4de8a0a1",
+    "settings.json": "1d645e5e6114d887c118d066c90f235351ec348f088fced151510b17662c1b15"
+  }
+}

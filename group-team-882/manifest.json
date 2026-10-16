@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-882",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-882",
+    "kind": "team",
+    "name": "达人筛选专家",
+    "description": "达人筛选专家：围绕达人筛选，覆盖调性匹配／数据校验／小单试投，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-base-pro-team-lead",
+        "role": "lead",
+        "name": "文档建站主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-base-pro",
+        "role": "member",
+        "name": "文档建站 知识库搭建",
+        "evidence": "original_assets/knowledge-base-pro/merkle_root",
+        "member_merkle_root": "114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9"
+      },
+      {
+        "slug": "kol-selection-pro",
+        "role": "member",
+        "name": "达人筛选 匹配评估 顾问",
+        "evidence": "original_assets/kol-selection-pro/merkle_root",
+        "member_merkle_root": "2b3468f0435208beff7ae7229862b5b5b0e052dec0ad8b93a995cb00df5ef18c"
+      },
+      {
+        "slug": "scene-narrative-pro",
+        "role": "member",
+        "name": "场景叙事 氛围营造 顾问",
+        "evidence": "original_assets/scene-narrative-pro/merkle_root",
+        "member_merkle_root": "31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb"
+      }
+    ],
+    "team_lead": "knowledge-base-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f2756f07713c15e7",
+  "prompt_hash": "f6830fb8231b5472",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-882\", \"kind\": \"team\", \"name\": \"达人筛选专家\", \"description\": \"达人筛选专家：围绕达人筛选，覆盖调性匹配／数据校验／小单试投，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-base-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档建站主理人\", \"evidence\": null}, {\"slug\": \"knowledge-base-pro\", \"role\": \"member\", \"name\": \"文档建站 知识库搭建\", \"evidence\": \"original_assets/knowledge-base-pro/merkle_root\", \"member_merkle_root\": \"114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9\"}, {\"slug\": \"kol-selection-pro\", \"role\": \"member\", \"name\": \"达人筛选 匹配评估 顾问\", \"evidence\": \"original_assets/kol-selection-pro/merkle_root\", \"member_merkle_root\": \"2b3468f0435208beff7ae7229862b5b5b0e052dec0ad8b93a995cb00df5ef18c\"}, {\"slug\": \"scene-narrative-pro\", \"role\": \"member\", \"name\": \"场景叙事 氛围营造 顾问\", \"evidence\": \"original_assets/scene-narrative-pro/merkle_root\", \"member_merkle_root\": \"31372f3125ec6926dae1840f9f3f964351f6cc0eac3e75fc21006979474421cb\"}], \"team_lead\": \"knowledge-base-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/knowledge-base-pro-team-lead.md": "46df81fd1b10d89d7f778671494266662b99fe095af2ea3368c641ec6e424661",
+    "agents/knowledge-base-pro.md": "e38f26f8f1c5365924b5d8a35301e66af05e28ba58dd9a3f5030bb12bc004815",
+    "agents/kol-selection-pro.md": "02d1ecfa1d43a6fcdced3d5e3a72c89926abe6f91907fba56b007d5f9b584058",
+    "agents/scene-narrative-pro.md": "373d0ff0f1bbd899fcd638b7060cdb79aa1be301ffa95e7674bf3e740e331ff2",
+    "plugin.json": "a179382d60c65f5f595e5f293bc7681cc8375970ce09c9bdef8120b297157a13",
+    "settings.json": "3d08cdcf49332a2abe2d0b44f79a5d7f4f26e3e30ac6825cf677acf4a83df29a"
+  }
+}

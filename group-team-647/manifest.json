@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-647",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-647",
+    "kind": "team",
+    "name": "项目记忆专家",
+    "description": "输入项目记忆相关需求，输出错误追踪、经验沉淀、笔记整理三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-base-pro-01-fixed-team-lead",
+        "role": "lead",
+        "name": "项目记忆主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-base-pro-01-fixed",
+        "role": "member",
+        "name": "项目记忆 知识卡片 双向链接",
+        "evidence": "original_assets/knowledge-base-pro-01-fixed/merkle_root",
+        "member_merkle_root": "2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd"
+      },
+      {
+        "slug": "media-process-pro-fixed",
+        "role": "member",
+        "name": "政务设计规范 一键成片",
+        "evidence": "original_assets/media-process-pro-fixed/merkle_root",
+        "member_merkle_root": "2decbdf309d75b8ecb3d3d3756d533cdfce5ac9fdbf2d65b0694bf2bea5c45e8"
+      },
+      {
+        "slug": "video-subtitle-pro",
+        "role": "member",
+        "name": "视频字幕 语音转写",
+        "evidence": "original_assets/video-subtitle-pro/merkle_root",
+        "member_merkle_root": "dda9415b8588836c3d75106e73e312ecd1d3de54c1beed12106ed87581708819"
+      }
+    ],
+    "team_lead": "knowledge-base-pro-01-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2fd1e8e8e6daa832",
+  "prompt_hash": "53e32e92b6ed7180",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-647\", \"kind\": \"team\", \"name\": \"项目记忆专家\", \"description\": \"输入项目记忆相关需求，输出错误追踪、经验沉淀、笔记整理三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-base-pro-01-fixed-team-lead\", \"role\": \"lead\", \"name\": \"项目记忆主理人\", \"evidence\": null}, {\"slug\": \"knowledge-base-pro-01-fixed\", \"role\": \"member\", \"name\": \"项目记忆 知识卡片 双向链接\", \"evidence\": \"original_assets/knowledge-base-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd\"}, {\"slug\": \"media-process-pro-fixed\", \"role\": \"member\", \"name\": \"政务设计规范 一键成片\", \"evidence\": \"original_assets/media-process-pro-fixed/merkle_root\", \"member_merkle_root\": \"2decbdf309d75b8ecb3d3d3756d533cdfce5ac9fdbf2d65b0694bf2bea5c45e8\"}, {\"slug\": \"video-subtitle-pro\", \"role\": \"member\", \"name\": \"视频字幕 语音转写\", \"evidence\": \"original_assets/video-subtitle-pro/merkle_root\", \"member_merkle_root\": \"dda9415b8588836c3d75106e73e312ecd1d3de54c1beed12106ed87581708819\"}], \"team_lead\": \"knowledge-base-pro-01-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/knowledge-base-pro-01-fixed-team-lead.md": "b0a5ed2a258dd7423e7087d99c54e53e25ce8789f1d15fe63c46dbb397768022",
+    "agents/knowledge-base-pro-01-fixed.md": "b495c0cb483e3fc44fe95ceae717b572bc8732c7a056f3edf07ad7fc38767f88",
+    "agents/media-process-pro-fixed.md": "69a4f2c24d5ebbc69b3777d516b185ae7f3fecb79a38b15e39e56e91d1181d4e",
+    "agents/video-subtitle-pro.md": "32eb80ceda730b43bd628ae30854a28ce4b19481a442adc8092a98d00b86541c",
+    "plugin.json": "0ed4508a2e2600b345fa73fe4473cb232333b8286613114f07e7c3b1256afb66",
+    "settings.json": "f987716af6cfb1fbd636adf3c17613389c5d63e5f9c2e26677c31204b55e3eb9"
+  }
+}

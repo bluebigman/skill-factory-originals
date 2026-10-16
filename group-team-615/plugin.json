@@ -1,0 +1,126 @@
+{
+  "agentName": "content-design-system-team-lead",
+  "agents": [
+    "./agents/content-design-system-team-lead.md",
+    "./agents/content-design-system.md",
+    "./agents/global-brand-tone.md",
+    "./agents/subtitle-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容设计",
+    "zh": "帮我处理内容设计"
+  },
+  "description": "content-design-system team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内容设计 end-to-end: 语气维度, 定期抽审 and 语气指南. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长语气维度、定期抽审与语气指南，覆盖内容设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "content-design-system Team",
+    "zh": "视频字幕语音转写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-design-system-team-lead",
+      "name": {
+        "en": "内容设计主理人",
+        "zh": "内容设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-design-system.png",
+      "id": "content-design-system",
+      "name": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "profession": {
+        "en": "content-design-system",
+        "zh": "内容设计 语气体系 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-brand-tone.png",
+      "id": "global-brand-tone",
+      "name": {
+        "en": "global-brand-tone",
+        "zh": "品牌出海 语气统一 顾问"
+      },
+      "profession": {
+        "en": "global-brand-tone",
+        "zh": "品牌出海 语气统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/subtitle-expert.png",
+      "id": "subtitle-expert",
+      "name": {
+        "en": "SubPro",
+        "zh": "视频字幕 语音转写 时间轴对齐"
+      },
+      "profession": {
+        "en": "SubPro",
+        "zh": "视频字幕 语音转写 时间轴对齐"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-615",
+  "plugin": "group-team-615",
+  "profession": {
+    "en": "content-design-system Collaboration Team",
+    "zh": "视频字幕语音转写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容设计",
+      "zh": "帮我处理内容设计"
+    },
+    {
+      "en": "Plan 品牌出海",
+      "zh": "帮我规划品牌出海"
+    },
+    {
+      "en": "Review 视频字幕",
+      "zh": "帮我检查视频字幕"
+    }
+  ],
+  "tags": [
+    {
+      "en": "正反例",
+      "zh": "正反例"
+    },
+    {
+      "en": "术语表",
+      "zh": "术语表"
+    },
+    {
+      "en": "本地化预留",
+      "zh": "本地化预留"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-design-system-team-lead",
+    "memberAgents": [
+      "content-design-system",
+      "global-brand-tone",
+      "subtitle-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

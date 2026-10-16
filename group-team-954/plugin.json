@@ -1,0 +1,126 @@
+{
+  "agentName": "audio-clip-expert-team-lead",
+  "agents": [
+    "./agents/audio-clip-expert-team-lead.md",
+    "./agents/audio-clip-expert.md",
+    "./agents/article-extract-clean.md",
+    "./agents/faq-build-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 音频剪辑与播客后期制作专家",
+    "zh": "帮我处理音频剪辑与播客后期制作专家"
+  },
+  "description": "AudioClip team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 网页正文提取 end-to-end: 字幕生成, 去噪优先 and 保留结构. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长字幕生成、去噪优先与保留结构，覆盖网页正文提取全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "AudioClip Team",
+    "zh": "网页正文提取专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "audio-clip-expert-team-lead",
+      "name": {
+        "en": "音频剪辑与播客后期制作专家主理人",
+        "zh": "音频剪辑与播客后期制作专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/audio-clip-expert.png",
+      "id": "audio-clip-expert",
+      "name": {
+        "en": "AudioClip",
+        "zh": "音频剪辑专家"
+      },
+      "profession": {
+        "en": "AudioClip",
+        "zh": "音频剪辑与播客后期制作专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/article-extract-clean.png",
+      "id": "article-extract-clean",
+      "name": {
+        "en": "article-extract-clean",
+        "zh": "网页正文提取 助手"
+      },
+      "profession": {
+        "en": "article-extract-clean",
+        "zh": "网页正文提取 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/faq-build-pro.png",
+      "id": "faq-build-pro",
+      "name": {
+        "en": "faq-build-pro",
+        "zh": "常见问题库构建 助手"
+      },
+      "profession": {
+        "en": "faq-build-pro",
+        "zh": "常见问题库构建 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-954",
+  "plugin": "group-team-954",
+  "profession": {
+    "en": "AudioClip Collaboration Team",
+    "zh": "网页正文提取专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 音频剪辑与播客后期制作专家",
+      "zh": "帮我处理音频剪辑与播客后期制作专家"
+    },
+    {
+      "en": "Plan 网页正文提取",
+      "zh": "帮我规划网页正文提取"
+    },
+    {
+      "en": "Review 常见问题库构建",
+      "zh": "帮我检查常见问题库构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "智能转写清稿",
+      "zh": "智能转写清稿"
+    },
+    {
+      "en": "结构剪辑建议",
+      "zh": "结构剪辑建议"
+    },
+    {
+      "en": "字幕生成",
+      "zh": "字幕生成"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "audio-clip-expert-team-lead",
+    "memberAgents": [
+      "audio-clip-expert",
+      "article-extract-clean",
+      "faq-build-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

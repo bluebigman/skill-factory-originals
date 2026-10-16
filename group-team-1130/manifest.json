@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1130",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1130",
+    "kind": "team",
+    "name": "办公自动化安全专家",
+    "description": "办公自动化安全专家：围绕办公自动化安全，覆盖来源可信／权限最小／避免外发，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "office-macro-safe-team-lead",
+        "role": "lead",
+        "name": "办公自动化安全主理人",
+        "evidence": null
+      },
+      {
+        "slug": "office-macro-safe",
+        "role": "member",
+        "name": "办公自动化安全 顾问",
+        "evidence": "original_assets/office-macro-safe/merkle_root",
+        "member_merkle_root": "a9df066dd3c960adb1f347b1347c5a25fdbede3c04ec1004bb42f19f42a044a2"
+      },
+      {
+        "slug": "branch-protect",
+        "role": "member",
+        "name": "分支保护策略 顾问",
+        "evidence": "original_assets/branch-protect/merkle_root",
+        "member_merkle_root": "747d68da0bb03315b6b62f2e9300bc7cd50472f36675aadc666a9ba42e9c7f8b"
+      },
+      {
+        "slug": "perf-bottleneck-pro",
+        "role": "member",
+        "name": "性能瓶颈 链路分析 顾问",
+        "evidence": "original_assets/perf-bottleneck-pro/merkle_root",
+        "member_merkle_root": "0528aeef667ca3fd38a30fbfa2bc5d21375eeb8621e5ce1e0714e249bfa12a65"
+      }
+    ],
+    "team_lead": "office-macro-safe-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2913efe313d32082",
+  "prompt_hash": "5a3f19d30dbf9687",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1130\", \"kind\": \"team\", \"name\": \"办公自动化安全专家\", \"description\": \"办公自动化安全专家：围绕办公自动化安全，覆盖来源可信／权限最小／避免外发，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"office-macro-safe-team-lead\", \"role\": \"lead\", \"name\": \"办公自动化安全主理人\", \"evidence\": null}, {\"slug\": \"office-macro-safe\", \"role\": \"member\", \"name\": \"办公自动化安全 顾问\", \"evidence\": \"original_assets/office-macro-safe/merkle_root\", \"member_merkle_root\": \"a9df066dd3c960adb1f347b1347c5a25fdbede3c04ec1004bb42f19f42a044a2\"}, {\"slug\": \"branch-protect\", \"role\": \"member\", \"name\": \"分支保护策略 顾问\", \"evidence\": \"original_assets/branch-protect/merkle_root\", \"member_merkle_root\": \"747d68da0bb03315b6b62f2e9300bc7cd50472f36675aadc666a9ba42e9c7f8b\"}, {\"slug\": \"perf-bottleneck-pro\", \"role\": \"member\", \"name\": \"性能瓶颈 链路分析 顾问\", \"evidence\": \"original_assets/perf-bottleneck-pro/merkle_root\", \"member_merkle_root\": \"0528aeef667ca3fd38a30fbfa2bc5d21375eeb8621e5ce1e0714e249bfa12a65\"}], \"team_lead\": \"office-macro-safe-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/branch-protect.md": "a02190549b8320a8626e375a369d43bf58d16425c2a626daa17eba570a8c3440",
+    "agents/office-macro-safe-team-lead.md": "aaa1923ed7776d9ceaf5a17b35a99cd895480fa13790d639617aa1f474acc7e9",
+    "agents/office-macro-safe.md": "34a69e7dbb5c5b9ffd97d8c2937812b1c98c093a4c314ddf8f5e952712408649",
+    "agents/perf-bottleneck-pro.md": "939d471cd34975faffee40fdd92f7e6cf1ce6193cda086c41e615178ef9ac861",
+    "plugin.json": "1062b016ff9a828fd2ea17974b6f47e8e41c63ac31db0a648990087c22965b13",
+    "settings.json": "f0fec8901837201b3cfd916672a2edbeb158d26da565e8f188245ecfa9cbc6a7"
+  }
+}

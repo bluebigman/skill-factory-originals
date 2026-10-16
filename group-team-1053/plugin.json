@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-batch-process-team-lead",
+  "agents": [
+    "./agents/doc-batch-process-team-lead.md",
+    "./agents/doc-batch-process.md",
+    "./agents/doc-migration-format.md",
+    "./agents/report-narrative-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档批处",
+    "zh": "帮我处理文档批处"
+  },
+  "description": "doc-batch-process team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档批处 requirements, output three deliverables: 模板先行, 变量清单, 小样验证. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档批处相关需求，输出模板先行、变量清单、小样验证三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-batch-process Team",
+    "zh": "文档批处专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-batch-process-team-lead",
+      "name": {
+        "en": "文档批处主理人",
+        "zh": "文档批处主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-batch-process.png",
+      "id": "doc-batch-process",
+      "name": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "profession": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-migration-format.png",
+      "id": "doc-migration-format",
+      "name": {
+        "en": "doc-migration-format",
+        "zh": "文档格式迁移 助手"
+      },
+      "profession": {
+        "en": "doc-migration-format",
+        "zh": "文档格式迁移 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-narrative-pro.png",
+      "id": "report-narrative-pro",
+      "name": {
+        "en": "report-narrative-pro",
+        "zh": "报告撰写 结论提炼 顾问"
+      },
+      "profession": {
+        "en": "report-narrative-pro",
+        "zh": "报告撰写 结论提炼 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1053",
+  "plugin": "group-team-1053",
+  "profession": {
+    "en": "doc-batch-process Collaboration Team",
+    "zh": "文档批处专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档批处",
+      "zh": "帮我处理文档批处"
+    },
+    {
+      "en": "Plan 文档格式迁移",
+      "zh": "帮我规划文档格式迁移"
+    },
+    {
+      "en": "Review 报告撰写",
+      "zh": "帮我检查报告撰写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "模板先行",
+      "zh": "模板先行"
+    },
+    {
+      "en": "变量清单",
+      "zh": "变量清单"
+    },
+    {
+      "en": "小样验证",
+      "zh": "小样验证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-batch-process-team-lead",
+    "memberAgents": [
+      "doc-batch-process",
+      "doc-migration-format",
+      "report-narrative-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

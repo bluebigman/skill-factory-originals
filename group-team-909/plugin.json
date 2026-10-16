@@ -1,0 +1,126 @@
+{
+  "agentName": "incident-postmortem-team-lead",
+  "agents": [
+    "./agents/incident-postmortem-team-lead.md",
+    "./agents/incident-postmortem.md",
+    "./agents/agent-task-plan.md",
+    "./agents/agent-doc-pipeline.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 故障复盘",
+    "zh": "帮我处理故障复盘"
+  },
+  "description": "incident-postmortem team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 故障复盘 end-to-end: 根因分层, 闭环跟踪 and 依赖成图. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长根因分层、闭环跟踪与依赖成图，覆盖故障复盘全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "incident-postmortem Team",
+    "zh": "故障复盘专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "incident-postmortem-team-lead",
+      "name": {
+        "en": "故障复盘主理人",
+        "zh": "故障复盘主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/incident-postmortem.png",
+      "id": "incident-postmortem",
+      "name": {
+        "en": "incident-postmortem",
+        "zh": "故障复盘 顾问"
+      },
+      "profession": {
+        "en": "incident-postmortem",
+        "zh": "故障复盘 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-task-plan.png",
+      "id": "agent-task-plan",
+      "name": {
+        "en": "agent-task-plan",
+        "zh": "任务规划 排期 顾问"
+      },
+      "profession": {
+        "en": "agent-task-plan",
+        "zh": "任务规划 排期 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-doc-pipeline.png",
+      "id": "agent-doc-pipeline",
+      "name": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "profession": {
+        "en": "agent-doc-pipeline",
+        "zh": "文档流水 解析 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-909",
+  "plugin": "group-team-909",
+  "profession": {
+    "en": "incident-postmortem Collaboration Team",
+    "zh": "故障复盘专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 故障复盘",
+      "zh": "帮我处理故障复盘"
+    },
+    {
+      "en": "Plan 任务规划",
+      "zh": "帮我规划任务规划"
+    },
+    {
+      "en": "Review 文档流水",
+      "zh": "帮我检查文档流水"
+    }
+  ],
+  "tags": [
+    {
+      "en": "根因分层",
+      "zh": "根因分层"
+    },
+    {
+      "en": "闭环跟踪",
+      "zh": "闭环跟踪"
+    },
+    {
+      "en": "对事不对人",
+      "zh": "对事不对人"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "incident-postmortem-team-lead",
+    "memberAgents": [
+      "incident-postmortem",
+      "agent-task-plan",
+      "agent-doc-pipeline"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "feedback-triage-team-lead",
+  "agents": [
+    "./agents/feedback-triage-team-lead.md",
+    "./agents/feedback-triage.md",
+    "./agents/global-pm-coach.md",
+    "./agents/project-manage-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 反馈分类处置",
+    "zh": "帮我处理反馈分类处置"
+  },
+  "description": "feedback-triage team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 反馈分类处置 end-to-end: 去重合并, 闭环回复 and 趋势观察. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长去重合并、闭环回复与趋势观察，覆盖反馈分类处置全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "feedback-triage Team",
+    "zh": "反馈分类处置助手专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "feedback-triage-team-lead",
+      "name": {
+        "en": "反馈分类处置主理人",
+        "zh": "反馈分类处置主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/feedback-triage.png",
+      "id": "feedback-triage",
+      "name": {
+        "en": "feedback-triage",
+        "zh": "反馈分类处置 助手"
+      },
+      "profession": {
+        "en": "feedback-triage",
+        "zh": "反馈分类处置 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-pm-coach.png",
+      "id": "global-pm-coach",
+      "name": {
+        "en": "global-pm-coach",
+        "zh": "跨国项目 协同推进 教练"
+      },
+      "profession": {
+        "en": "global-pm-coach",
+        "zh": "跨国项目 协同推进 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/project-manage-pro.png",
+      "id": "project-manage-pro",
+      "name": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "profession": {
+        "en": "Project Management Expert",
+        "zh": "项目任务管理 进度跟踪"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-933",
+  "plugin": "group-team-933",
+  "profession": {
+    "en": "feedback-triage Collaboration Team",
+    "zh": "反馈分类处置助手专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 反馈分类处置",
+      "zh": "帮我处理反馈分类处置"
+    },
+    {
+      "en": "Plan 跨国项目",
+      "zh": "帮我规划跨国项目"
+    },
+    {
+      "en": "Review 项目任务管理",
+      "zh": "帮我检查项目任务管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先分类",
+      "zh": "先分类"
+    },
+    {
+      "en": "去重合并",
+      "zh": "去重合并"
+    },
+    {
+      "en": "优先级",
+      "zh": "优先级"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "feedback-triage-team-lead",
+    "memberAgents": [
+      "feedback-triage",
+      "global-pm-coach",
+      "project-manage-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

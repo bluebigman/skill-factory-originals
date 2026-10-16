@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1177",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1177",
+    "kind": "team",
+    "name": "沙箱执行隔离专家",
+    "description": "擅长最小权限、网络受限与资源上限，覆盖沙箱执行隔离全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sandbox-execution-team-lead",
+        "role": "lead",
+        "name": "沙箱执行隔离主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sandbox-execution",
+        "role": "member",
+        "name": "沙箱执行隔离 顾问",
+        "evidence": "original_assets/sandbox-execution/merkle_root",
+        "member_merkle_root": "718567e840e36990955146cf8b19b369c46c56158ce8063b9069e71945da9c01"
+      },
+      {
+        "slug": "safety-production-pro",
+        "role": "member",
+        "name": "生产安全 隐患排查 顾问",
+        "evidence": "original_assets/safety-production-pro/merkle_root",
+        "member_merkle_root": "378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd"
+      },
+      {
+        "slug": "schema-migration-safe",
+        "role": "member",
+        "name": "结构变更安全 顾问",
+        "evidence": "original_assets/schema-migration-safe/merkle_root",
+        "member_merkle_root": "778311da14e0559de7a32b6d9964411091b87d2a42a6877c994992baa0075c1d"
+      }
+    ],
+    "team_lead": "sandbox-execution-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4a68da0acd56cbbc",
+  "prompt_hash": "5e7d81f1cbb23491",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1177\", \"kind\": \"team\", \"name\": \"沙箱执行隔离专家\", \"description\": \"擅长最小权限、网络受限与资源上限，覆盖沙箱执行隔离全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sandbox-execution-team-lead\", \"role\": \"lead\", \"name\": \"沙箱执行隔离主理人\", \"evidence\": null}, {\"slug\": \"sandbox-execution\", \"role\": \"member\", \"name\": \"沙箱执行隔离 顾问\", \"evidence\": \"original_assets/sandbox-execution/merkle_root\", \"member_merkle_root\": \"718567e840e36990955146cf8b19b369c46c56158ce8063b9069e71945da9c01\"}, {\"slug\": \"safety-production-pro\", \"role\": \"member\", \"name\": \"生产安全 隐患排查 顾问\", \"evidence\": \"original_assets/safety-production-pro/merkle_root\", \"member_merkle_root\": \"378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd\"}, {\"slug\": \"schema-migration-safe\", \"role\": \"member\", \"name\": \"结构变更安全 顾问\", \"evidence\": \"original_assets/schema-migration-safe/merkle_root\", \"member_merkle_root\": \"778311da14e0559de7a32b6d9964411091b87d2a42a6877c994992baa0075c1d\"}], \"team_lead\": \"sandbox-execution-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/safety-production-pro.md": "3c5db2a67e143e729428039c26bbc9b9991d856e2b9a458f023aaae48317e37c",
+    "agents/sandbox-execution-team-lead.md": "3479125ea6451203082689eee9fc5a32e2115f2ed33570b6b9aefaf86f3a2485",
+    "agents/sandbox-execution.md": "8a6f6d1946c7f5593a2b50caf1026d3613b6c37f8f5dff0c95238b20dd4d0fca",
+    "agents/schema-migration-safe.md": "61e636ff6f1ace487b961546adab01bdb14b381ab93e45e28b6d0245267f87e7",
+    "plugin.json": "fcca00a33bc900283dc4a242e4368a56d18c034c2c0643da594dd2a5299ed740",
+    "settings.json": "c4a0dc5153149360abd9bf589d9961d9009834137bf367b076dfbb59a12ebafe"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-758",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-758",
+    "kind": "team",
+    "name": "时间管理专家专家",
+    "description": "输入文档流水相关需求，输出时间排期、解析保真、幂等入库三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "time-mgmt-expert-team-lead",
+        "role": "lead",
+        "name": "个人时间管理与任务规划专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "time-mgmt-expert",
+        "role": "member",
+        "name": "时间管理专家",
+        "evidence": "original_assets/time-mgmt-expert/merkle_root",
+        "member_merkle_root": "3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0"
+      },
+      {
+        "slug": "agent-doc-pipeline",
+        "role": "member",
+        "name": "文档流水 解析 顾问",
+        "evidence": "original_assets/agent-doc-pipeline/merkle_root",
+        "member_merkle_root": "574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661"
+      },
+      {
+        "slug": "discovery-call-coach",
+        "role": "member",
+        "name": "需求挖掘 提问框架 教练",
+        "evidence": "original_assets/discovery-call-coach/merkle_root",
+        "member_merkle_root": "5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d"
+      }
+    ],
+    "team_lead": "time-mgmt-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e72979580c8377e4",
+  "prompt_hash": "31696f0a58d5d011",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-758\", \"kind\": \"team\", \"name\": \"时间管理专家专家\", \"description\": \"输入文档流水相关需求，输出时间排期、解析保真、幂等入库三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"time-mgmt-expert-team-lead\", \"role\": \"lead\", \"name\": \"个人时间管理与任务规划专家主理人\", \"evidence\": null}, {\"slug\": \"time-mgmt-expert\", \"role\": \"member\", \"name\": \"时间管理专家\", \"evidence\": \"original_assets/time-mgmt-expert/merkle_root\", \"member_merkle_root\": \"3293f1900d40aa1be4236870ac3b53f670c239b99fc0b2f9d8de7b31bdf923c0\"}, {\"slug\": \"agent-doc-pipeline\", \"role\": \"member\", \"name\": \"文档流水 解析 顾问\", \"evidence\": \"original_assets/agent-doc-pipeline/merkle_root\", \"member_merkle_root\": \"574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661\"}, {\"slug\": \"discovery-call-coach\", \"role\": \"member\", \"name\": \"需求挖掘 提问框架 教练\", \"evidence\": \"original_assets/discovery-call-coach/merkle_root\", \"member_merkle_root\": \"5f64319e1079454c1ea7ecb49858f7dba89072dd36317a4c9fc4b244e2b6c62d\"}], \"team_lead\": \"time-mgmt-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-doc-pipeline.md": "2f0e1961f5e68e799cd78c081da839c1841b6e70166c7066d144d3110a8b4400",
+    "agents/discovery-call-coach.md": "55bdabe4adb247d82fea77fe6c7ab0e05fb915fae8223b70c2330d4ba0ba5334",
+    "agents/time-mgmt-expert-team-lead.md": "59b8ac84209fac3101cb06637ff91865091446a386586369dc6abcf4251595f9",
+    "agents/time-mgmt-expert.md": "0ece853c9dadc21243e23d2a91049f8bc26c18ac744bc027e1b0b9362bef3d85",
+    "plugin.json": "1125f94f992abd2df323c72bb99e6a26be3d8c399f03ba0f31d3902099035bd7",
+    "settings.json": "0320cf2e9a13308ee996e318cb25204ec1f26c2db15567de52fc010a2d6aa60d"
+  }
+}

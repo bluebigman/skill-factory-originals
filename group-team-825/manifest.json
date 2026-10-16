@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-825",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-825",
+    "kind": "team",
+    "name": "数据清洗专家",
+    "description": "输入容量规划相关需求，输出采集解析、清洗规则、清洗报告三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-cleanse-expert-team-lead",
+        "role": "lead",
+        "name": "数据清洗主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-cleanse-expert",
+        "role": "member",
+        "name": "数据清洗 质量校验",
+        "evidence": "original_assets/data-cleanse-expert/merkle_root",
+        "member_merkle_root": "c57b6225c03ab9fbdfe97012105fac3cc271b08541c5fcc50e79d7dc495cfa06"
+      },
+      {
+        "slug": "capacity-planning-pro",
+        "role": "member",
+        "name": "容量规划 负载预测 顾问",
+        "evidence": "original_assets/capacity-planning-pro/merkle_root",
+        "member_merkle_root": "46fc50430c2460d2df8968f2f284f9733b14f28e3fcbe0a6245b1955fd453743"
+      },
+      {
+        "slug": "code-assist-pro-01-fixed",
+        "role": "member",
+        "name": "Rails 批量造数 快捷生成",
+        "evidence": "original_assets/code-assist-pro-01-fixed/merkle_root",
+        "member_merkle_root": "e6a7d1168833934a15f0f50938842b4cd7c10041d177896bfa52c4f433caadcb"
+      }
+    ],
+    "team_lead": "data-cleanse-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e85ad7761543cf7b",
+  "prompt_hash": "86a7b5700f22397e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-825\", \"kind\": \"team\", \"name\": \"数据清洗专家\", \"description\": \"输入容量规划相关需求，输出采集解析、清洗规则、清洗报告三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-cleanse-expert-team-lead\", \"role\": \"lead\", \"name\": \"数据清洗主理人\", \"evidence\": null}, {\"slug\": \"data-cleanse-expert\", \"role\": \"member\", \"name\": \"数据清洗 质量校验\", \"evidence\": \"original_assets/data-cleanse-expert/merkle_root\", \"member_merkle_root\": \"c57b6225c03ab9fbdfe97012105fac3cc271b08541c5fcc50e79d7dc495cfa06\"}, {\"slug\": \"capacity-planning-pro\", \"role\": \"member\", \"name\": \"容量规划 负载预测 顾问\", \"evidence\": \"original_assets/capacity-planning-pro/merkle_root\", \"member_merkle_root\": \"46fc50430c2460d2df8968f2f284f9733b14f28e3fcbe0a6245b1955fd453743\"}, {\"slug\": \"code-assist-pro-01-fixed\", \"role\": \"member\", \"name\": \"Rails 批量造数 快捷生成\", \"evidence\": \"original_assets/code-assist-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"e6a7d1168833934a15f0f50938842b4cd7c10041d177896bfa52c4f433caadcb\"}], \"team_lead\": \"data-cleanse-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/capacity-planning-pro.md": "c1faab7cabd15a61e4bbb45c257e96c7feed5cb005302b68d1e77f012e00db2a",
+    "agents/code-assist-pro-01-fixed.md": "c606f99dc89cbe6aa826bcee457412ecb5e05dbb15c7a4709684cb015c276ad2",
+    "agents/data-cleanse-expert-team-lead.md": "2671b0126c037016db16c0f8a97bc0e066e4ffd07ba7bccfb74f3568c4f916a8",
+    "agents/data-cleanse-expert.md": "c16a6bc94fe97e27c9e8d361b7aee8d188d04d3c3c07fc32e3e2c4a8691e0830",
+    "plugin.json": "2567afe40a5d3f833f0cfa0d5b7bc36cda14b462eb24ba9785396cfa6e4064f2",
+    "settings.json": "158f3ee5abe4bf6fa422c061a681b561c828b80f98c5718cf63708e5fcd04948"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-733",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-733",
+    "kind": "team",
+    "name": "输出规范专家",
+    "description": "输入输出规范相关需求，输出结构固定、类型明确、错误可判三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-output-format-team-lead",
+        "role": "lead",
+        "name": "输出规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-output-format",
+        "role": "member",
+        "name": "输出规范 结构化 顾问",
+        "evidence": "original_assets/agent-output-format/merkle_root",
+        "member_merkle_root": "4ebe7b3d464c66239a6b016a81aeb4b33eeb39ab8da7aa594f50569a73dbecde"
+      },
+      {
+        "slug": "sql-toolkit-pro-01-fixed",
+        "role": "member",
+        "name": "SQL转TS 自然语言转命令",
+        "evidence": "original_assets/sql-toolkit-pro-01-fixed/merkle_root",
+        "member_merkle_root": "228507b3057d38b0ab1cdde107c875bde51f55e4e23f57ce8728121c95e512f0"
+      },
+      {
+        "slug": "agent-retry-policy",
+        "role": "member",
+        "name": "重试策略 分类处理 顾问",
+        "evidence": "original_assets/agent-retry-policy/merkle_root",
+        "member_merkle_root": "711d9a54a4a596c7c7ae9959b19a8d52d9414d6ee59ec569c3ae59768efb2d52"
+      }
+    ],
+    "team_lead": "agent-output-format-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f223cfb22b6596d3",
+  "prompt_hash": "c394b05ad7f93734",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-733\", \"kind\": \"team\", \"name\": \"输出规范专家\", \"description\": \"输入输出规范相关需求，输出结构固定、类型明确、错误可判三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-output-format-team-lead\", \"role\": \"lead\", \"name\": \"输出规范主理人\", \"evidence\": null}, {\"slug\": \"agent-output-format\", \"role\": \"member\", \"name\": \"输出规范 结构化 顾问\", \"evidence\": \"original_assets/agent-output-format/merkle_root\", \"member_merkle_root\": \"4ebe7b3d464c66239a6b016a81aeb4b33eeb39ab8da7aa594f50569a73dbecde\"}, {\"slug\": \"sql-toolkit-pro-01-fixed\", \"role\": \"member\", \"name\": \"SQL转TS 自然语言转命令\", \"evidence\": \"original_assets/sql-toolkit-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"228507b3057d38b0ab1cdde107c875bde51f55e4e23f57ce8728121c95e512f0\"}, {\"slug\": \"agent-retry-policy\", \"role\": \"member\", \"name\": \"重试策略 分类处理 顾问\", \"evidence\": \"original_assets/agent-retry-policy/merkle_root\", \"member_merkle_root\": \"711d9a54a4a596c7c7ae9959b19a8d52d9414d6ee59ec569c3ae59768efb2d52\"}], \"team_lead\": \"agent-output-format-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-format-team-lead.md": "e189d40ff45aaa96de3ecb67656c797689993ac84372ab76a371562e43e87e81",
+    "agents/agent-output-format.md": "bfa4999557d8efd3100e735457f31593447eabe25b942c7a139963c5d5fce33a",
+    "agents/agent-retry-policy.md": "1b2f68ac55e73190405f37be2905d6123da7765050bb20ef3846cf96de833bed",
+    "agents/sql-toolkit-pro-01-fixed.md": "cc6b960f80b2c1a011792ca912ce06eee515458fc58e00fc6b95b890b6511783",
+    "plugin.json": "4d5383720af26c440c452b1386b426afc4a7c8667f2b59593746ff0a74057718",
+    "settings.json": "f0158ebbc095f1266a142b29475b7e312f8bfccc57cb13419ede409a0e6cb2a8"
+  }
+}

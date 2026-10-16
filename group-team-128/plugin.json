@@ -1,0 +1,126 @@
+{
+  "agentName": "home-safety-check-team-lead",
+  "agents": [
+    "./agents/home-safety-check-team-lead.md",
+    "./agents/home-safety-check.md",
+    "./agents/image-batch-expert.md",
+    "./agents/cold-email-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 居家安全",
+    "zh": "帮我处理居家安全"
+  },
+  "description": "Home Safety Check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "居家 图片 邮件 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Home Safety Check Team",
+    "zh": "居家 图片 邮件 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "home-safety-check-team-lead",
+      "name": {
+        "en": "居家安全主理人",
+        "zh": "居家安全主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/home-safety-check.png",
+      "id": "home-safety-check",
+      "name": {
+        "en": "Home Safety Check",
+        "zh": "居家安全 隐患排查 防护"
+      },
+      "profession": {
+        "en": "Home Safety Check",
+        "zh": "居家安全 隐患排查 防护"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/image-batch-expert.png",
+      "id": "image-batch-expert",
+      "name": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "profession": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cold-email-expert.png",
+      "id": "cold-email-expert",
+      "name": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "profession": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-128",
+  "plugin": "group-team-128",
+  "profession": {
+    "en": "Home Safety Check Collaboration Team",
+    "zh": "居家 图片 邮件 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 居家安全",
+      "zh": "帮我处理居家安全"
+    },
+    {
+      "en": "Plan 图片批处理",
+      "zh": "帮我规划图片批处理"
+    },
+    {
+      "en": "Review 邮件营销",
+      "zh": "帮我检查邮件营销"
+    }
+  ],
+  "tags": [
+    {
+      "en": "居家安全",
+      "zh": "居家安全"
+    },
+    {
+      "en": "图片批处理",
+      "zh": "图片批处理"
+    },
+    {
+      "en": "邮件营销",
+      "zh": "邮件营销"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "home-safety-check-team-lead",
+    "memberAgents": [
+      "home-safety-check",
+      "image-batch-expert",
+      "cold-email-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

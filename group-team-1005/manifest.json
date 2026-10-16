@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1005",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1005",
+    "kind": "team",
+    "name": "字体层级设计专家",
+    "description": "输入字体层级设计相关需求，输出比例统一、行高匹配、中西混排三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "typography-scale-team-lead",
+        "role": "lead",
+        "name": "字体层级设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "typography-scale",
+        "role": "member",
+        "name": "字体层级设计 顾问",
+        "evidence": "original_assets/typography-scale/merkle_root",
+        "member_merkle_root": "dd2bf7f33f96c394373f230072df8c2d77539abc7cb71776bc71b6624422977c"
+      },
+      {
+        "slug": "journey-map",
+        "role": "member",
+        "name": "用户旅程地图 顾问",
+        "evidence": "original_assets/journey-map/merkle_root",
+        "member_merkle_root": "9b4585bf8331889d28c975778684a5229c444d37efdc828c80dd51ce36ac0595"
+      },
+      {
+        "slug": "prd-write-coach",
+        "role": "member",
+        "name": "需求文档撰写 顾问",
+        "evidence": "original_assets/prd-write-coach/merkle_root",
+        "member_merkle_root": "5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233"
+      }
+    ],
+    "team_lead": "typography-scale-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5080cfbb3e5ce293",
+  "prompt_hash": "a7fb1eee5670ea72",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1005\", \"kind\": \"team\", \"name\": \"字体层级设计专家\", \"description\": \"输入字体层级设计相关需求，输出比例统一、行高匹配、中西混排三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"typography-scale-team-lead\", \"role\": \"lead\", \"name\": \"字体层级设计主理人\", \"evidence\": null}, {\"slug\": \"typography-scale\", \"role\": \"member\", \"name\": \"字体层级设计 顾问\", \"evidence\": \"original_assets/typography-scale/merkle_root\", \"member_merkle_root\": \"dd2bf7f33f96c394373f230072df8c2d77539abc7cb71776bc71b6624422977c\"}, {\"slug\": \"journey-map\", \"role\": \"member\", \"name\": \"用户旅程地图 顾问\", \"evidence\": \"original_assets/journey-map/merkle_root\", \"member_merkle_root\": \"9b4585bf8331889d28c975778684a5229c444d37efdc828c80dd51ce36ac0595\"}, {\"slug\": \"prd-write-coach\", \"role\": \"member\", \"name\": \"需求文档撰写 顾问\", \"evidence\": \"original_assets/prd-write-coach/merkle_root\", \"member_merkle_root\": \"5628f7ed8d8061787e87aeecf2c7b9a24c4f5c38a66c8f0e0dc58e08ff4a4233\"}], \"team_lead\": \"typography-scale-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/journey-map.md": "409e873b39e966578964288827c160f24e447e38ea8fe0260e9938e018d60898",
+    "agents/prd-write-coach.md": "a2dfafef6dc7cb5f8e6594ffdbb43a2038f5a3bde6bc83de78adf333f741bd78",
+    "agents/typography-scale-team-lead.md": "5cbbaec9ecd25374f279ef842f08b6f87bc949d69c041af68e15a2432ce96e6c",
+    "agents/typography-scale.md": "c488776a6d78d2e573d93c178f43f364500854d201a95e6412f28e0f64966952",
+    "plugin.json": "7e18c934b59bae167455976073c6a31c91a175c58c72da5b2357cc44ebee6d83",
+    "settings.json": "2b0f9bf091aa10a1f02733bd7a90d2dc4792f376bb424e84ac1590f7eb056d7f"
+  }
+}

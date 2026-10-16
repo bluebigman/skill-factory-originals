@@ -1,0 +1,126 @@
+{
+  "agentName": "brand-voice-guide-team-lead",
+  "agents": [
+    "./agents/brand-voice-guide-team-lead.md",
+    "./agents/brand-voice-guide.md",
+    "./agents/marketing-mix-pro.md",
+    "./agents/video-subtitle-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 品牌语气",
+    "zh": "帮我处理品牌语气"
+  },
+  "description": "brand-voice-guide team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 品牌语气 end-to-end: 目标倒推, 关注边际 and 预留机动. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长目标倒推、关注边际与预留机动，覆盖品牌语气全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "brand-voice-guide Team",
+    "zh": "规范手册专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "brand-voice-guide-team-lead",
+      "name": {
+        "en": "品牌语气主理人",
+        "zh": "品牌语气主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/brand-voice-guide.png",
+      "id": "brand-voice-guide",
+      "name": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "profession": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/marketing-mix-pro.png",
+      "id": "marketing-mix-pro",
+      "name": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "profession": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/video-subtitle-pro.png",
+      "id": "video-subtitle-pro",
+      "name": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "profession": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-973",
+  "plugin": "group-team-973",
+  "profession": {
+    "en": "brand-voice-guide Collaboration Team",
+    "zh": "规范手册专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 品牌语气",
+      "zh": "帮我处理品牌语气"
+    },
+    {
+      "en": "Plan 渠道组合",
+      "zh": "帮我规划渠道组合"
+    },
+    {
+      "en": "Review 视频字幕",
+      "zh": "帮我检查视频字幕"
+    }
+  ],
+  "tags": [
+    {
+      "en": "正反示例",
+      "zh": "正反示例"
+    },
+    {
+      "en": "禁用清单",
+      "zh": "禁用清单"
+    },
+    {
+      "en": "跨渠道一致",
+      "zh": "跨渠道一致"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "brand-voice-guide-team-lead",
+    "memberAgents": [
+      "brand-voice-guide",
+      "marketing-mix-pro",
+      "video-subtitle-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

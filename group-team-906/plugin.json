@@ -1,0 +1,126 @@
+{
+  "agentName": "template-engine-pro-team-lead",
+  "agents": [
+    "./agents/template-engine-pro-team-lead.md",
+    "./agents/template-engine-pro.md",
+    "./agents/event-plan-review.md",
+    "./agents/pdf-content-extract.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 模板引擎",
+    "zh": "帮我处理模板引擎"
+  },
+  "description": "template-engine-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 模板引擎, covers 变量声明 / 缺失处理 / 转义安全, delivering structured results and actionable checklists.",
+    "zh": "模板引擎专家：围绕模板引擎，覆盖变量声明／缺失处理／转义安全，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "template-engine-pro Team",
+    "zh": "模板引擎专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "template-engine-pro-team-lead",
+      "name": {
+        "en": "模板引擎主理人",
+        "zh": "模板引擎主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/template-engine-pro.png",
+      "id": "template-engine-pro",
+      "name": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "profession": {
+        "en": "template-engine-pro",
+        "zh": "模板引擎 变量替换 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/event-plan-review.png",
+      "id": "event-plan-review",
+      "name": {
+        "en": "event-plan-review",
+        "zh": "活动方案 评审"
+      },
+      "profession": {
+        "en": "event-plan-review",
+        "zh": "活动方案 评审"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pdf-content-extract.png",
+      "id": "pdf-content-extract",
+      "name": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "profession": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-906",
+  "plugin": "group-team-906",
+  "profession": {
+    "en": "template-engine-pro Collaboration Team",
+    "zh": "模板引擎专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 模板引擎",
+      "zh": "帮我处理模板引擎"
+    },
+    {
+      "en": "Plan 活动方案",
+      "zh": "帮我规划活动方案"
+    },
+    {
+      "en": "Review PDF",
+      "zh": "帮我检查PDF"
+    }
+  ],
+  "tags": [
+    {
+      "en": "缺失处理",
+      "zh": "缺失处理"
+    },
+    {
+      "en": "转义安全",
+      "zh": "转义安全"
+    },
+    {
+      "en": "批量幂等",
+      "zh": "批量幂等"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "template-engine-pro-team-lead",
+    "memberAgents": [
+      "template-engine-pro",
+      "event-plan-review",
+      "pdf-content-extract"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "live-stream-plan-team-lead",
+  "agents": [
+    "./agents/live-stream-plan-team-lead.md",
+    "./agents/live-stream-plan.md",
+    "./agents/mp-cover-design.md",
+    "./agents/xiaohongshu-note-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 直播带货",
+    "zh": "帮我处理直播带货"
+  },
+  "description": "Live Stream Plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "直播 公众号 小红书 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附"
+  },
+  "displayName": {
+    "en": "Live Stream Plan Team",
+    "zh": "直播 公众号 小红书 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "live-stream-plan-team-lead",
+      "name": {
+        "en": "直播带货主理人",
+        "zh": "直播带货主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/live-stream-plan.png",
+      "id": "live-stream-plan",
+      "name": {
+        "en": "Live Stream Plan",
+        "zh": "直播带货 脚本节奏 顾问"
+      },
+      "profession": {
+        "en": "Live Stream Plan",
+        "zh": "直播带货 脚本节奏 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/mp-cover-design.png",
+      "id": "mp-cover-design",
+      "name": {
+        "en": "Mp Cover Design",
+        "zh": "公众号封面 配图设计 顾问"
+      },
+      "profession": {
+        "en": "Mp Cover Design",
+        "zh": "公众号封面 配图设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/xiaohongshu-note-pro.png",
+      "id": "xiaohongshu-note-pro",
+      "name": {
+        "en": "Xiaohongshu Note Pro",
+        "zh": "小红书笔记 种草文案 封面文案"
+      },
+      "profession": {
+        "en": "Xiaohongshu Note Pro",
+        "zh": "小红书笔记 种草文案 封面文案"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-209",
+  "plugin": "group-team-209",
+  "profession": {
+    "en": "Live Stream Plan Collaboration Team",
+    "zh": "直播 公众号 小红书 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 直播带货",
+      "zh": "帮我处理直播带货"
+    },
+    {
+      "en": "Plan 公众号封面",
+      "zh": "帮我规划公众号封面"
+    },
+    {
+      "en": "Review 小红书笔记",
+      "zh": "帮我检查小红书笔记"
+    }
+  ],
+  "tags": [
+    {
+      "en": "直播带货",
+      "zh": "直播带货"
+    },
+    {
+      "en": "公众号封面",
+      "zh": "公众号封面"
+    },
+    {
+      "en": "小红书笔记",
+      "zh": "小红书笔记"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "live-stream-plan-team-lead",
+    "memberAgents": [
+      "live-stream-plan",
+      "mp-cover-design",
+      "xiaohongshu-note-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

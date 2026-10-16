@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-488",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-488",
+    "kind": "team",
+    "name": "数据分析专家",
+    "description": "输入图表选型相关需求，输出信息调查、配色克制、坐标规范三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-workflow-expert-team-lead",
+        "role": "lead",
+        "name": "数据分析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-workflow-expert",
+        "role": "member",
+        "name": "数据分析 指标拆解",
+        "evidence": "original_assets/data-workflow-expert/merkle_root",
+        "member_merkle_root": "3f3dd56cfe9693f860f8407b65eb2ca7025b196c5559bce23fa90327e059e316"
+      },
+      {
+        "slug": "api-connectivity-diagnostics-expert",
+        "role": "member",
+        "name": "接口跨域 连接异常 排查修复",
+        "evidence": "original_assets/api-connectivity-diagnostics-expert/merkle_root",
+        "member_merkle_root": "20fe00d85d3ed5226ef71c671c561a0364a775ab06aa1f8987bb96ff4fd12314"
+      },
+      {
+        "slug": "chart-select-pro",
+        "role": "member",
+        "name": "图表选型 配色规范 顾问",
+        "evidence": "original_assets/chart-select-pro/merkle_root",
+        "member_merkle_root": "994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e"
+      }
+    ],
+    "team_lead": "data-workflow-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b350c7a335e1950f",
+  "prompt_hash": "5897e865234e2da1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-488\", \"kind\": \"team\", \"name\": \"数据分析专家\", \"description\": \"输入图表选型相关需求，输出信息调查、配色克制、坐标规范三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-workflow-expert-team-lead\", \"role\": \"lead\", \"name\": \"数据分析主理人\", \"evidence\": null}, {\"slug\": \"data-workflow-expert\", \"role\": \"member\", \"name\": \"数据分析 指标拆解\", \"evidence\": \"original_assets/data-workflow-expert/merkle_root\", \"member_merkle_root\": \"3f3dd56cfe9693f860f8407b65eb2ca7025b196c5559bce23fa90327e059e316\"}, {\"slug\": \"api-connectivity-diagnostics-expert\", \"role\": \"member\", \"name\": \"接口跨域 连接异常 排查修复\", \"evidence\": \"original_assets/api-connectivity-diagnostics-expert/merkle_root\", \"member_merkle_root\": \"20fe00d85d3ed5226ef71c671c561a0364a775ab06aa1f8987bb96ff4fd12314\"}, {\"slug\": \"chart-select-pro\", \"role\": \"member\", \"name\": \"图表选型 配色规范 顾问\", \"evidence\": \"original_assets/chart-select-pro/merkle_root\", \"member_merkle_root\": \"994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e\"}], \"team_lead\": \"data-workflow-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-connectivity-diagnostics-expert.md": "4964a4861054af334d8ce89d1db9377b610507462265d41f5e463434b87b4792",
+    "agents/chart-select-pro.md": "7874be05002c603577191f58434f8d2444b284fbdc95dbef8335858803b359b6",
+    "agents/data-workflow-expert-team-lead.md": "ea9f9ab172fa51a88501db38857181ddf6577da47e63ee59efaee26d5a7b9062",
+    "agents/data-workflow-expert.md": "52dc45d4f392e3b4731cb591a933ee84f968da03bf4bc4a489f9496503ad6a9e",
+    "plugin.json": "402d00b1a9e5bb59d89002c5896c5622f794055c1e19911c7c14ca6478667a8b",
+    "settings.json": "b0a57baa180499ac62c39270e2c2e0d9021629b657c3f19417b373322122385c"
+  }
+}

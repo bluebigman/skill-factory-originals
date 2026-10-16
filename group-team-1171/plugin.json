@@ -1,0 +1,126 @@
+{
+  "agentName": "ops-runbook-team-lead",
+  "agents": [
+    "./agents/ops-runbook-team-lead.md",
+    "./agents/ops-runbook.md",
+    "./agents/report-certification.md",
+    "./agents/feedback-triage.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 运营手册",
+    "zh": "帮我处理运营手册"
+  },
+  "description": "ops-runbook team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 运营手册 end-to-end: 异常分支, 更新机制 and 认证标准. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长异常分支、更新机制与认证标准，覆盖运营手册全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ops-runbook Team",
+    "zh": "运营手册专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ops-runbook-team-lead",
+      "name": {
+        "en": "运营手册主理人",
+        "zh": "运营手册主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ops-runbook.png",
+      "id": "ops-runbook",
+      "name": {
+        "en": "ops-runbook",
+        "zh": "运营手册 编写"
+      },
+      "profession": {
+        "en": "ops-runbook",
+        "zh": "运营手册 编写"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-certification.png",
+      "id": "report-certification",
+      "name": {
+        "en": "report-certification",
+        "zh": "报表认证机制 顾问"
+      },
+      "profession": {
+        "en": "report-certification",
+        "zh": "报表认证机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/feedback-triage.png",
+      "id": "feedback-triage",
+      "name": {
+        "en": "feedback-triage",
+        "zh": "反馈分类处置 助手"
+      },
+      "profession": {
+        "en": "feedback-triage",
+        "zh": "反馈分类处置 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1171",
+  "plugin": "group-team-1171",
+  "profession": {
+    "en": "ops-runbook Collaboration Team",
+    "zh": "运营手册专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 运营手册",
+      "zh": "帮我处理运营手册"
+    },
+    {
+      "en": "Plan 报表认证机制",
+      "zh": "帮我规划报表认证机制"
+    },
+    {
+      "en": "Review 反馈分类处置",
+      "zh": "帮我检查反馈分类处置"
+    }
+  ],
+  "tags": [
+    {
+      "en": "异常分支",
+      "zh": "异常分支"
+    },
+    {
+      "en": "更新机制",
+      "zh": "更新机制"
+    },
+    {
+      "en": "按场景组织",
+      "zh": "按场景组织"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ops-runbook-team-lead",
+    "memberAgents": [
+      "ops-runbook",
+      "report-certification",
+      "feedback-triage"
+    ]
+  },
+  "version": "1.0.0"
+}

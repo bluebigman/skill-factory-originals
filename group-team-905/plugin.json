@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-handoff-pro-team-lead",
+  "agents": [
+    "./agents/agent-handoff-pro-team-lead.md",
+    "./agents/agent-handoff-pro.md",
+    "./agents/doc-archive-rule.md",
+    "./agents/sales-territory-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 任务交接",
+    "zh": "帮我处理任务交接"
+  },
+  "description": "agent-handoff-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 任务交接 end-to-end: 责任明确, 验收标准 and 回执确认. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长责任明确、验收标准与回执确认，覆盖任务交接全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-handoff-pro Team",
+    "zh": "文档归档规范专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-handoff-pro-team-lead",
+      "name": {
+        "en": "任务交接主理人",
+        "zh": "任务交接主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-handoff-pro.png",
+      "id": "agent-handoff-pro",
+      "name": {
+        "en": "agent-handoff-pro",
+        "zh": "任务交接 上下文传 顾问"
+      },
+      "profession": {
+        "en": "agent-handoff-pro",
+        "zh": "任务交接 上下文传 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-archive-rule.png",
+      "id": "doc-archive-rule",
+      "name": {
+        "en": "doc-archive-rule",
+        "zh": "文档归档规范 顾问"
+      },
+      "profession": {
+        "en": "doc-archive-rule",
+        "zh": "文档归档规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sales-territory-pro.png",
+      "id": "sales-territory-pro",
+      "name": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "profession": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-905",
+  "plugin": "group-team-905",
+  "profession": {
+    "en": "agent-handoff-pro Collaboration Team",
+    "zh": "文档归档规范专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 任务交接",
+      "zh": "帮我处理任务交接"
+    },
+    {
+      "en": "Plan 文档归档规范",
+      "zh": "帮我规划文档归档规范"
+    },
+    {
+      "en": "Review 区域划分",
+      "zh": "帮我检查区域划分"
+    }
+  ],
+  "tags": [
+    {
+      "en": "上下文齐全",
+      "zh": "上下文齐全"
+    },
+    {
+      "en": "责任明确",
+      "zh": "责任明确"
+    },
+    {
+      "en": "验收标准",
+      "zh": "验收标准"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-handoff-pro-team-lead",
+    "memberAgents": [
+      "agent-handoff-pro",
+      "doc-archive-rule",
+      "sales-territory-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "component-spec-team-lead",
+  "agents": [
+    "./agents/component-spec-team-lead.md",
+    "./agents/component-spec.md",
+    "./agents/empty-state-pro.md",
+    "./agents/playtest-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 组件规格定义",
+    "zh": "帮我处理组件规格定义"
+  },
+  "description": "component-spec team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 组件规格定义, covers 状态齐全 / 尺寸规范 / 间距统一, delivering structured results and actionable checklists.",
+    "zh": "组件规格定义专家：围绕组件规格定义，覆盖状态齐全／尺寸规范／间距统一，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "component-spec Team",
+    "zh": "组件规格定义专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "component-spec-team-lead",
+      "name": {
+        "en": "组件规格定义主理人",
+        "zh": "组件规格定义主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/component-spec.png",
+      "id": "component-spec",
+      "name": {
+        "en": "component-spec",
+        "zh": "组件规格定义 顾问"
+      },
+      "profession": {
+        "en": "component-spec",
+        "zh": "组件规格定义 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/empty-state-pro.png",
+      "id": "empty-state-pro",
+      "name": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "profession": {
+        "en": "empty-state-pro",
+        "zh": "空状态 异常设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/playtest-method.png",
+      "id": "playtest-method",
+      "name": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "profession": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1157",
+  "plugin": "group-team-1157",
+  "profession": {
+    "en": "component-spec Collaboration Team",
+    "zh": "组件规格定义专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 组件规格定义",
+      "zh": "帮我处理组件规格定义"
+    },
+    {
+      "en": "Plan 空状态",
+      "zh": "帮我规划空状态"
+    },
+    {
+      "en": "Review 可用性",
+      "zh": "帮我检查可用性"
+    }
+  ],
+  "tags": [
+    {
+      "en": "状态齐全",
+      "zh": "状态齐全"
+    },
+    {
+      "en": "尺寸规范",
+      "zh": "尺寸规范"
+    },
+    {
+      "en": "间距统一",
+      "zh": "间距统一"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "component-spec-team-lead",
+    "memberAgents": [
+      "component-spec",
+      "empty-state-pro",
+      "playtest-method"
+    ]
+  },
+  "version": "1.0.0"
+}

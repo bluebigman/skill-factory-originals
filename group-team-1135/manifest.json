@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1135",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1135",
+    "kind": "team",
+    "name": "进度跟踪专家",
+    "description": "擅长小额试单、退出条款与双向沟通，覆盖海外伙伴全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "project-manage-pro-team-lead",
+        "role": "lead",
+        "name": "项目任务管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "project-manage-pro",
+        "role": "member",
+        "name": "项目任务管理 进度跟踪",
+        "evidence": "original_assets/project-manage-pro/merkle_root",
+        "member_merkle_root": "956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0"
+      },
+      {
+        "slug": "intl-partner-screen",
+        "role": "member",
+        "name": "海外伙伴 尽调筛选 顾问",
+        "evidence": "original_assets/intl-partner-screen/merkle_root",
+        "member_merkle_root": "3567a84ab586e658cce8ba7caac7e888a6c86b7d38fe065dd4bdbcf0364924a7"
+      },
+      {
+        "slug": "performance-review",
+        "role": "member",
+        "name": "绩效评估设计 顾问",
+        "evidence": "original_assets/performance-review/merkle_root",
+        "member_merkle_root": "5f5a37ea828b9c3e4fcc8dae7d35711677bca54b933099e7966c9fae59bfab9c"
+      }
+    ],
+    "team_lead": "project-manage-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1b0f461c7c1e2b84",
+  "prompt_hash": "944646726f5af82f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1135\", \"kind\": \"team\", \"name\": \"进度跟踪专家\", \"description\": \"擅长小额试单、退出条款与双向沟通，覆盖海外伙伴全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"project-manage-pro-team-lead\", \"role\": \"lead\", \"name\": \"项目任务管理主理人\", \"evidence\": null}, {\"slug\": \"project-manage-pro\", \"role\": \"member\", \"name\": \"项目任务管理 进度跟踪\", \"evidence\": \"original_assets/project-manage-pro/merkle_root\", \"member_merkle_root\": \"956b3fd9345e0b8aca7cffef57944ae63582cac17714fc209309920313700aa0\"}, {\"slug\": \"intl-partner-screen\", \"role\": \"member\", \"name\": \"海外伙伴 尽调筛选 顾问\", \"evidence\": \"original_assets/intl-partner-screen/merkle_root\", \"member_merkle_root\": \"3567a84ab586e658cce8ba7caac7e888a6c86b7d38fe065dd4bdbcf0364924a7\"}, {\"slug\": \"performance-review\", \"role\": \"member\", \"name\": \"绩效评估设计 顾问\", \"evidence\": \"original_assets/performance-review/merkle_root\", \"member_merkle_root\": \"5f5a37ea828b9c3e4fcc8dae7d35711677bca54b933099e7966c9fae59bfab9c\"}], \"team_lead\": \"project-manage-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/intl-partner-screen.md": "5e1c8e410acc6aa5b54041ad74b317119e3ebd40065b867de145e825b719be59",
+    "agents/performance-review.md": "cc59246dd7aa9a721b698170d9f16563a563a30e8e7a452f70cdb771db16703e",
+    "agents/project-manage-pro-team-lead.md": "3b079ad4d07b36fc20525be5af6a6d0d73b3b2ec9f340f552505df7b7b6bcea7",
+    "agents/project-manage-pro.md": "e7148a2db9f6468ae0858c8d00bae14e40979670aa40de08f920fce67819e4f9",
+    "plugin.json": "dd5bbc2332067551b10acc700e6c142f2beb0d6c1b1e8713385e9ab8043089cc",
+    "settings.json": "a844cc10c4f6893ed21255359259cbf91c271fb3ee0548d3de0d3a9a541736fa"
+  }
+}

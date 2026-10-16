@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-base-pro-01-team-lead",
+  "agents": [
+    "./agents/knowledge-base-pro-01-team-lead.md",
+    "./agents/knowledge-base-pro-01.md",
+    "./agents/asset-library-pro.md",
+    "./agents/landing-copy-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 项目记忆",
+    "zh": "帮我处理项目记忆"
+  },
+  "description": "知识库与笔记 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 素材库 end-to-end: 分类体系, 标签完备 and 检索可用. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分类体系、标签完备与检索可用，覆盖素材库全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "知识库与笔记 Suite Team",
+    "zh": "分类管理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-base-pro-01-team-lead",
+      "name": {
+        "en": "项目记忆主理人",
+        "zh": "项目记忆主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01.png",
+      "id": "knowledge-base-pro-01",
+      "name": {
+        "en": "知识库与笔记 Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "知识库与笔记 Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/asset-library-pro.png",
+      "id": "asset-library-pro",
+      "name": {
+        "en": "asset-library-pro",
+        "zh": "素材库 分类管理 顾问"
+      },
+      "profession": {
+        "en": "asset-library-pro",
+        "zh": "素材库 分类管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/landing-copy-review.png",
+      "id": "landing-copy-review",
+      "name": {
+        "en": "landing-copy-review",
+        "zh": "落地页文案 评审"
+      },
+      "profession": {
+        "en": "landing-copy-review",
+        "zh": "落地页文案 评审"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1261",
+  "plugin": "group-team-1261",
+  "profession": {
+    "en": "知识库与笔记 Suite Collaboration Team",
+    "zh": "分类管理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 项目记忆",
+      "zh": "帮我处理项目记忆"
+    },
+    {
+      "en": "Plan 素材库",
+      "zh": "帮我规划素材库"
+    },
+    {
+      "en": "Review 落地页文案",
+      "zh": "帮我检查落地页文案"
+    }
+  ],
+  "tags": [
+    {
+      "en": "项目记忆",
+      "zh": "项目记忆"
+    },
+    {
+      "en": "错误追踪",
+      "zh": "错误追踪"
+    },
+    {
+      "en": "经验沉淀",
+      "zh": "经验沉淀"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-base-pro-01-team-lead",
+    "memberAgents": [
+      "knowledge-base-pro-01",
+      "asset-library-pro",
+      "landing-copy-review"
+    ]
+  },
+  "version": "1.0.0"
+}

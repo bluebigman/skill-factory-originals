@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1101",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1101",
+    "kind": "team",
+    "name": "转化漏斗分析专家",
+    "description": "输入转化漏斗分析相关需求，输出定义步骤、分群对比、时间维度三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "funnel-analysis-team-lead",
+        "role": "lead",
+        "name": "转化漏斗分析主理人",
+        "evidence": null
+      },
+      {
+        "slug": "funnel-analysis",
+        "role": "member",
+        "name": "转化漏斗分析 助手",
+        "evidence": "original_assets/funnel-analysis/merkle_root",
+        "member_merkle_root": "28af72e4955eec47ad4a6b05ba898149ced917859720677d20a6d8476b8b86b0"
+      },
+      {
+        "slug": "refactor-safe-plan",
+        "role": "member",
+        "name": "重构安全规划 顾问",
+        "evidence": "original_assets/refactor-safe-plan/merkle_root",
+        "member_merkle_root": "75024f16000788bb8fcf736b8d343f0b6f109f52c773560e0f6e1fb01cc3e790"
+      },
+      {
+        "slug": "ops-deploy-pro-01-fixed",
+        "role": "member",
+        "name": "部署配置",
+        "evidence": "original_assets/ops-deploy-pro-01-fixed/merkle_root",
+        "member_merkle_root": "d5d618a9e0573a7134bb3dffb8139c5f364f0aaf548b35ca4b185ae8d1a57f02"
+      }
+    ],
+    "team_lead": "funnel-analysis-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b2d0f6016afe2270",
+  "prompt_hash": "446e373e710e0a6c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1101\", \"kind\": \"team\", \"name\": \"转化漏斗分析专家\", \"description\": \"输入转化漏斗分析相关需求，输出定义步骤、分群对比、时间维度三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"funnel-analysis-team-lead\", \"role\": \"lead\", \"name\": \"转化漏斗分析主理人\", \"evidence\": null}, {\"slug\": \"funnel-analysis\", \"role\": \"member\", \"name\": \"转化漏斗分析 助手\", \"evidence\": \"original_assets/funnel-analysis/merkle_root\", \"member_merkle_root\": \"28af72e4955eec47ad4a6b05ba898149ced917859720677d20a6d8476b8b86b0\"}, {\"slug\": \"refactor-safe-plan\", \"role\": \"member\", \"name\": \"重构安全规划 顾问\", \"evidence\": \"original_assets/refactor-safe-plan/merkle_root\", \"member_merkle_root\": \"75024f16000788bb8fcf736b8d343f0b6f109f52c773560e0f6e1fb01cc3e790\"}, {\"slug\": \"ops-deploy-pro-01-fixed\", \"role\": \"member\", \"name\": \"部署配置\", \"evidence\": \"original_assets/ops-deploy-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"d5d618a9e0573a7134bb3dffb8139c5f364f0aaf548b35ca4b185ae8d1a57f02\"}], \"team_lead\": \"funnel-analysis-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/funnel-analysis-team-lead.md": "cfbb91b10af45e18e68ce596628a68bcdb6fddc484057aec545f555b4c194f1c",
+    "agents/funnel-analysis.md": "6c54a33e601d9e87dab9cff830460158bd11c15005a3660417e612baa4fda519",
+    "agents/ops-deploy-pro-01-fixed.md": "7c414111dea563768c09c5e69e8e522f0d59ba14abb8c99bedd0a2fb77f1aed3",
+    "agents/refactor-safe-plan.md": "b7b56597351726e25b2b4c4933688c4b3b92eab328b311bfd34f8429f514115b",
+    "plugin.json": "7de850544f97b157a3c3e1d70068b5fd7411bfadc71735cbc96bdb2dde3fcd2b",
+    "settings.json": "3fb1864526dfef3523a94e29eca76b39611d6f6a09a45493344ca739d9774fc3"
+  }
+}

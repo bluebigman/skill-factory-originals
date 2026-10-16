@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1246",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1246",
+    "kind": "team",
+    "name": "工具设计专家",
+    "description": "擅长字段类型、必填标注与描述充分，覆盖工具设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "tool-interface-design-pro-team-lead",
+        "role": "lead",
+        "name": "工具设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "tool-interface-design-pro",
+        "role": "member",
+        "name": "工具设计 接口契约 顾问",
+        "evidence": "original_assets/tool-interface-design-pro/merkle_root",
+        "member_merkle_root": "425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5"
+      },
+      {
+        "slug": "data-quality-score",
+        "role": "member",
+        "name": "数据质量评分 顾问",
+        "evidence": "original_assets/data-quality-score/merkle_root",
+        "member_merkle_root": "20bce0d484c55d7f9ad4ef8208717cf5aeee18052ecb1b823207f1d26f705be4"
+      },
+      {
+        "slug": "chart-select-pro",
+        "role": "member",
+        "name": "图表选型 配色规范 顾问",
+        "evidence": "original_assets/chart-select-pro/merkle_root",
+        "member_merkle_root": "994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e"
+      }
+    ],
+    "team_lead": "tool-interface-design-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "40044625aa4e8ff2",
+  "prompt_hash": "3abee8eb467df016",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1246\", \"kind\": \"team\", \"name\": \"工具设计专家\", \"description\": \"擅长字段类型、必填标注与描述充分，覆盖工具设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"tool-interface-design-pro-team-lead\", \"role\": \"lead\", \"name\": \"工具设计主理人\", \"evidence\": null}, {\"slug\": \"tool-interface-design-pro\", \"role\": \"member\", \"name\": \"工具设计 接口契约 顾问\", \"evidence\": \"original_assets/tool-interface-design-pro/merkle_root\", \"member_merkle_root\": \"425711c0f618aa66b8c07f23d308917878f6b73ee804217cba299eafeae8c2f5\"}, {\"slug\": \"data-quality-score\", \"role\": \"member\", \"name\": \"数据质量评分 顾问\", \"evidence\": \"original_assets/data-quality-score/merkle_root\", \"member_merkle_root\": \"20bce0d484c55d7f9ad4ef8208717cf5aeee18052ecb1b823207f1d26f705be4\"}, {\"slug\": \"chart-select-pro\", \"role\": \"member\", \"name\": \"图表选型 配色规范 顾问\", \"evidence\": \"original_assets/chart-select-pro/merkle_root\", \"member_merkle_root\": \"994603f667585c2fc513c5dda23d8a0e494f60adb3946c4a26313ad6c317367e\"}], \"team_lead\": \"tool-interface-design-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/chart-select-pro.md": "cdd8fcab4cabe19b040973b7c98fcb65183ad871ba382a5384184161704c5df2",
+    "agents/data-quality-score.md": "c06f00c50ecce92fdf7a62a85b77b081aee7cc91044fbb805a9ca5d2150b6427",
+    "agents/tool-interface-design-pro-team-lead.md": "60a2af258d2426a17e57bc03ca71b4c60676aadd36326c45cb7fac52d8119171",
+    "agents/tool-interface-design-pro.md": "1dfbbe742ffe89e98db6f63e80fead2b62370d6de2c53246ea6a7fb485ff1616",
+    "plugin.json": "f14fde4e578c4c1f799771cacd4fcf1a944a5e45ba7142a6e78fa83128e16a78",
+    "settings.json": "f876bc6448d46e26f128e07a2bb933ca58541536880043795ff2d89b0c9b69a8"
+  }
+}

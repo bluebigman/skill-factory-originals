@@ -1,0 +1,126 @@
+{
+  "agentName": "data-migration-audit-team-lead",
+  "agents": [
+    "./agents/data-migration-audit-team-lead.md",
+    "./agents/data-migration-audit.md",
+    "./agents/ocr-quality-pro.md",
+    "./agents/data-quality-gate.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据迁移",
+    "zh": "帮我处理数据迁移"
+  },
+  "description": "data-migration-audit team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据迁移 requirements, output three deliverables: 灰度迁移, 回滚预案, 双跑对比. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据迁移相关需求，输出灰度迁移、回滚预案、双跑对比三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "data-migration-audit Team",
+    "zh": "数据迁移专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-migration-audit-team-lead",
+      "name": {
+        "en": "数据迁移主理人",
+        "zh": "数据迁移主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-migration-audit.png",
+      "id": "data-migration-audit",
+      "name": {
+        "en": "data-migration-audit",
+        "zh": "数据迁移 完整性校 顾问"
+      },
+      "profession": {
+        "en": "data-migration-audit",
+        "zh": "数据迁移 完整性校 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ocr-quality-pro.png",
+      "id": "ocr-quality-pro",
+      "name": {
+        "en": "ocr-quality-pro",
+        "zh": "识别质量 结果校验 顾问"
+      },
+      "profession": {
+        "en": "ocr-quality-pro",
+        "zh": "识别质量 结果校验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-quality-gate.png",
+      "id": "data-quality-gate",
+      "name": {
+        "en": "data-quality-gate",
+        "zh": "数据质量 校验规则 顾问"
+      },
+      "profession": {
+        "en": "data-quality-gate",
+        "zh": "数据质量 校验规则 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-273",
+  "plugin": "group-team-273",
+  "profession": {
+    "en": "data-migration-audit Collaboration Team",
+    "zh": "数据迁移专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据迁移",
+      "zh": "帮我处理数据迁移"
+    },
+    {
+      "en": "Plan 识别质量",
+      "zh": "帮我规划识别质量"
+    },
+    {
+      "en": "Review 数据质量",
+      "zh": "帮我检查数据质量"
+    }
+  ],
+  "tags": [
+    {
+      "en": "灰度迁移",
+      "zh": "灰度迁移"
+    },
+    {
+      "en": "回滚预案",
+      "zh": "回滚预案"
+    },
+    {
+      "en": "双跑对比",
+      "zh": "双跑对比"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-migration-audit-team-lead",
+    "memberAgents": [
+      "data-migration-audit",
+      "ocr-quality-pro",
+      "data-quality-gate"
+    ]
+  },
+  "version": "1.0.0"
+}

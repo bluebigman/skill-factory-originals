@@ -1,0 +1,126 @@
+{
+  "agentName": "data-export-control-team-lead",
+  "agents": [
+    "./agents/data-export-control-team-lead.md",
+    "./agents/data-export-control.md",
+    "./agents/agent-output-verify-chain.md",
+    "./agents/api-contract-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 数据导出管控",
+    "zh": "帮我处理数据导出管控"
+  },
+  "description": "data-export-control team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 数据导出管控 end-to-end: 审批前置, 范围最小 and 水印标记. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长审批前置、范围最小与水印标记，覆盖数据导出管控全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "data-export-control Team",
+    "zh": "数据导出管控专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-export-control-team-lead",
+      "name": {
+        "en": "数据导出管控主理人",
+        "zh": "数据导出管控主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-export-control.png",
+      "id": "data-export-control",
+      "name": {
+        "en": "data-export-control",
+        "zh": "数据导出管控 顾问"
+      },
+      "profession": {
+        "en": "data-export-control",
+        "zh": "数据导出管控 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-output-verify-chain.png",
+      "id": "agent-output-verify-chain",
+      "name": {
+        "en": "agent-output-verify-chain",
+        "zh": "验证链 多级校验 顾问"
+      },
+      "profession": {
+        "en": "agent-output-verify-chain",
+        "zh": "验证链 多级校验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-contract-check.png",
+      "id": "api-contract-check",
+      "name": {
+        "en": "api-contract-check",
+        "zh": "接口契约校验 顾问"
+      },
+      "profession": {
+        "en": "api-contract-check",
+        "zh": "接口契约校验 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-884",
+  "plugin": "group-team-884",
+  "profession": {
+    "en": "data-export-control Collaboration Team",
+    "zh": "数据导出管控专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据导出管控",
+      "zh": "帮我处理数据导出管控"
+    },
+    {
+      "en": "Plan 验证链",
+      "zh": "帮我规划验证链"
+    },
+    {
+      "en": "Review 接口契约校验",
+      "zh": "帮我检查接口契约校验"
+    }
+  ],
+  "tags": [
+    {
+      "en": "审批前置",
+      "zh": "审批前置"
+    },
+    {
+      "en": "范围最小",
+      "zh": "范围最小"
+    },
+    {
+      "en": "水印标记",
+      "zh": "水印标记"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-export-control-team-lead",
+    "memberAgents": [
+      "data-export-control",
+      "agent-output-verify-chain",
+      "api-contract-check"
+    ]
+  },
+  "version": "1.0.0"
+}

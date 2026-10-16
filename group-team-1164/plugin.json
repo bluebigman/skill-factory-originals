@@ -1,0 +1,126 @@
+{
+  "agentName": "media-asset-pro-team-lead",
+  "agents": [
+    "./agents/media-asset-pro-team-lead.md",
+    "./agents/media-asset-pro.md",
+    "./agents/content-localize-checklist.md",
+    "./agents/video-subtitle-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 媒体素材工程",
+    "zh": "帮我处理媒体素材工程"
+  },
+  "description": "Media Asset Engineer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 本地化清单 requirements, output three deliverables: 文本, 图片, 格式. Verifiable end-to-end, evidence per step.",
+    "zh": "输入本地化清单相关需求，输出文本、图片、格式三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Media Asset Engineer Team",
+    "zh": "本地化清单专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "media-asset-pro-team-lead",
+      "name": {
+        "en": "媒体素材工程主理人",
+        "zh": "媒体素材工程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/media-asset-pro.png",
+      "id": "media-asset-pro",
+      "name": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "profession": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-localize-checklist.png",
+      "id": "content-localize-checklist",
+      "name": {
+        "en": "content-localize-checklist",
+        "zh": "本地化清单 顾问"
+      },
+      "profession": {
+        "en": "content-localize-checklist",
+        "zh": "本地化清单 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/video-subtitle-pro.png",
+      "id": "video-subtitle-pro",
+      "name": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "profession": {
+        "en": "Video Subtitle Pro",
+        "zh": "视频字幕 语音转写"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1164",
+  "plugin": "group-team-1164",
+  "profession": {
+    "en": "Media Asset Engineer Collaboration Team",
+    "zh": "本地化清单专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 媒体素材工程",
+      "zh": "帮我处理媒体素材工程"
+    },
+    {
+      "en": "Plan 本地化清单",
+      "zh": "帮我规划本地化清单"
+    },
+    {
+      "en": "Review 视频字幕",
+      "zh": "帮我检查视频字幕"
+    }
+  ],
+  "tags": [
+    {
+      "en": "录屏工程化",
+      "zh": "录屏工程化"
+    },
+    {
+      "en": "压缩转码",
+      "zh": "压缩转码"
+    },
+    {
+      "en": "批量归档",
+      "zh": "批量归档"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "media-asset-pro-team-lead",
+    "memberAgents": [
+      "media-asset-pro",
+      "content-localize-checklist",
+      "video-subtitle-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

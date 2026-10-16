@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-709",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-709",
+    "kind": "team",
+    "name": "索引审计专家",
+    "description": "擅长冗余检测、缺失检测与变更谨慎，覆盖索引审计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "db-index-audit-team-lead",
+        "role": "lead",
+        "name": "索引审计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "db-index-audit",
+        "role": "member",
+        "name": "索引审计 冗余识别 顾问",
+        "evidence": "original_assets/db-index-audit/merkle_root",
+        "member_merkle_root": "9fc248ef912a5d3be3b659dd778c0a397b2e1ff6846313a1ce48f201137aed80"
+      },
+      {
+        "slug": "sql-master-pro",
+        "role": "member",
+        "name": "数据库查询 SQL编写",
+        "evidence": "original_assets/sql-master-pro/merkle_root",
+        "member_merkle_root": "aa31790810cf37c1076e4a7001265ee29780ab606fff8a4f4b41e4d8fb6b9e53"
+      },
+      {
+        "slug": "growth-dashboard",
+        "role": "member",
+        "name": "增长看板 指标搭建 顾问",
+        "evidence": "original_assets/growth-dashboard/merkle_root",
+        "member_merkle_root": "c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09"
+      }
+    ],
+    "team_lead": "db-index-audit-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0c38cd75f66d3be4",
+  "prompt_hash": "951ac12f805938c3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-709\", \"kind\": \"team\", \"name\": \"索引审计专家\", \"description\": \"擅长冗余检测、缺失检测与变更谨慎，覆盖索引审计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"db-index-audit-team-lead\", \"role\": \"lead\", \"name\": \"索引审计主理人\", \"evidence\": null}, {\"slug\": \"db-index-audit\", \"role\": \"member\", \"name\": \"索引审计 冗余识别 顾问\", \"evidence\": \"original_assets/db-index-audit/merkle_root\", \"member_merkle_root\": \"9fc248ef912a5d3be3b659dd778c0a397b2e1ff6846313a1ce48f201137aed80\"}, {\"slug\": \"sql-master-pro\", \"role\": \"member\", \"name\": \"数据库查询 SQL编写\", \"evidence\": \"original_assets/sql-master-pro/merkle_root\", \"member_merkle_root\": \"aa31790810cf37c1076e4a7001265ee29780ab606fff8a4f4b41e4d8fb6b9e53\"}, {\"slug\": \"growth-dashboard\", \"role\": \"member\", \"name\": \"增长看板 指标搭建 顾问\", \"evidence\": \"original_assets/growth-dashboard/merkle_root\", \"member_merkle_root\": \"c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09\"}], \"team_lead\": \"db-index-audit-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/db-index-audit-team-lead.md": "f94ed427ac43960a583dd6c8a7022f6eedb8ed63d0979dd109396844b31120ba",
+    "agents/db-index-audit.md": "5b0d663d72bdc9b49f9da17a523385aabd0f727f5e2d92516b8c51ba09c4e778",
+    "agents/growth-dashboard.md": "639d44dce4d4ca57b59f31ce3fc0467a49c02656f5282211075c1fb558dda121",
+    "agents/sql-master-pro.md": "0096e1229acdc67bf05a247eb4cd1b52656ad5547164b09670fc8a09b6c44c6f",
+    "plugin.json": "db06f402b3cac33fa023816c43cbaae2213d19c9bfa823a0bec99eae5d63b647",
+    "settings.json": "cb6d50ae28211f844802aee5360d04758aaaebca3a04eef3ff32ff9464d0200c"
+  }
+}

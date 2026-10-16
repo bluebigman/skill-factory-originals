@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-322",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-322",
+    "kind": "team",
+    "name": "错误手册专家",
+    "description": "擅长错误分类、处置步骤与自愈建议，覆盖错误手册全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-error-playbook-team-lead",
+        "role": "lead",
+        "name": "错误手册主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-error-playbook",
+        "role": "member",
+        "name": "错误手册 分类 顾问",
+        "evidence": "original_assets/agent-error-playbook/merkle_root",
+        "member_merkle_root": "521181de4cd7f050598b73e3f0e0fc973c285329e82c3f5596016736a37909b0"
+      },
+      {
+        "slug": "agent-cache-strategy",
+        "role": "member",
+        "name": "缓存策略 失效控制 顾问",
+        "evidence": "original_assets/agent-cache-strategy/merkle_root",
+        "member_merkle_root": "e01cda4a083abd2a885d8ffc3efa6f7f80ef70723151cb75c0fd0797a05fa8ab"
+      },
+      {
+        "slug": "agent-config-guard",
+        "role": "member",
+        "name": "配置守护 漂移 顾问",
+        "evidence": "original_assets/agent-config-guard/merkle_root",
+        "member_merkle_root": "f43b79a415733d2dd744911f696bdfa6ab1f74ecc50080c2c10cd9005fdbbfa7"
+      }
+    ],
+    "team_lead": "agent-error-playbook-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "97c3cc5ab390a65b",
+  "prompt_hash": "235fd3cf0a1e0a1b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-322\", \"kind\": \"team\", \"name\": \"错误手册专家\", \"description\": \"擅长错误分类、处置步骤与自愈建议，覆盖错误手册全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-error-playbook-team-lead\", \"role\": \"lead\", \"name\": \"错误手册主理人\", \"evidence\": null}, {\"slug\": \"agent-error-playbook\", \"role\": \"member\", \"name\": \"错误手册 分类 顾问\", \"evidence\": \"original_assets/agent-error-playbook/merkle_root\", \"member_merkle_root\": \"521181de4cd7f050598b73e3f0e0fc973c285329e82c3f5596016736a37909b0\"}, {\"slug\": \"agent-cache-strategy\", \"role\": \"member\", \"name\": \"缓存策略 失效控制 顾问\", \"evidence\": \"original_assets/agent-cache-strategy/merkle_root\", \"member_merkle_root\": \"e01cda4a083abd2a885d8ffc3efa6f7f80ef70723151cb75c0fd0797a05fa8ab\"}, {\"slug\": \"agent-config-guard\", \"role\": \"member\", \"name\": \"配置守护 漂移 顾问\", \"evidence\": \"original_assets/agent-config-guard/merkle_root\", \"member_merkle_root\": \"f43b79a415733d2dd744911f696bdfa6ab1f74ecc50080c2c10cd9005fdbbfa7\"}], \"team_lead\": \"agent-error-playbook-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-cache-strategy.md": "1354b18f29d079bb3639f826ca5eb0bd3ac028aa728f9bd5b3b0c0daaa2b341f",
+    "agents/agent-config-guard.md": "b01eaf078cd6fd0a560d8567c1a85afb6506e3e78d0100839e58b5f387be7cf9",
+    "agents/agent-error-playbook-team-lead.md": "b3b79547b8835278706c31e9fa38596ea3b69ac2ce42101d6f185c8c77546f62",
+    "agents/agent-error-playbook.md": "43e34bab66830dde4f4e3b652d6b95dcb9d145abedf68a62bcfac41e2cadce1a",
+    "plugin.json": "68d29f7c82ef03b7c2a1dca9cf8cc29902a5520907034437b9144d33795eefe8",
+    "settings.json": "20e5da8722f4320fee1c0882db8e0c205b8f5bcfc455b97398bed6df5db72922"
+  }
+}

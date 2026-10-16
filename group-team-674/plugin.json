@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-version-compat-team-lead",
+  "agents": [
+    "./agents/agent-version-compat-team-lead.md",
+    "./agents/agent-version-compat.md",
+    "./agents/sql-toolkit-pro-01.md",
+    "./agents/agent-instruction-clarify.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 版本兼容",
+    "zh": "帮我处理版本兼容"
+  },
+  "description": "agent-version-compat team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 版本兼容 requirements, output three deliverables: 迁移指引, 强制截止, 歧义显式. Verifiable end-to-end, evidence per step.",
+    "zh": "输入版本兼容相关需求，输出迁移指引、强制截止、歧义显式三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-version-compat Team",
+    "zh": "版本兼容平滑升级专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-version-compat-team-lead",
+      "name": {
+        "en": "版本兼容主理人",
+        "zh": "版本兼容主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-version-compat.png",
+      "id": "agent-version-compat",
+      "name": {
+        "en": "agent-version-compat",
+        "zh": "版本兼容 平滑升级 顾问"
+      },
+      "profession": {
+        "en": "agent-version-compat",
+        "zh": "版本兼容 平滑升级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-01.png",
+      "id": "sql-toolkit-pro-01",
+      "name": {
+        "en": "SQL与数据库 Suite",
+        "zh": "SQL转TS 自然语言转命令"
+      },
+      "profession": {
+        "en": "SQL与数据库 Suite",
+        "zh": "SQL转TS 自然语言转命令"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-instruction-clarify.png",
+      "id": "agent-instruction-clarify",
+      "name": {
+        "en": "agent-instruction-clarify",
+        "zh": "指令澄清 歧义识别 顾问"
+      },
+      "profession": {
+        "en": "agent-instruction-clarify",
+        "zh": "指令澄清 歧义识别 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-674",
+  "plugin": "group-team-674",
+  "profession": {
+    "en": "agent-version-compat Collaboration Team",
+    "zh": "版本兼容平滑升级专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 版本兼容",
+      "zh": "帮我处理版本兼容"
+    },
+    {
+      "en": "Plan SQL转TS",
+      "zh": "帮我规划SQL转TS"
+    },
+    {
+      "en": "Review 指令澄清",
+      "zh": "帮我检查指令澄清"
+    }
+  ],
+  "tags": [
+    {
+      "en": "弃用预告",
+      "zh": "弃用预告"
+    },
+    {
+      "en": "双轨过渡",
+      "zh": "双轨过渡"
+    },
+    {
+      "en": "迁移指引",
+      "zh": "迁移指引"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-version-compat-team-lead",
+    "memberAgents": [
+      "agent-version-compat",
+      "sql-toolkit-pro-01",
+      "agent-instruction-clarify"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "third-party-audit-team-lead",
+  "agents": [
+    "./agents/third-party-audit-team-lead.md",
+    "./agents/third-party-audit.md",
+    "./agents/sql-readonly-guard.md",
+    "./agents/api-debug-chain-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 第三方审计",
+    "zh": "帮我处理第三方审计"
+  },
+  "description": "third-party-audit team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 第三方审计 end-to-end: 数据流向, 权限最小 and 退出策略. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长数据流向、权限最小与退出策略，覆盖第三方审计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "third-party-audit Team",
+    "zh": "第三方审计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "third-party-audit-team-lead",
+      "name": {
+        "en": "第三方审计主理人",
+        "zh": "第三方审计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/third-party-audit.png",
+      "id": "third-party-audit",
+      "name": {
+        "en": "third-party-audit",
+        "zh": "第三方审计 顾问"
+      },
+      "profession": {
+        "en": "third-party-audit",
+        "zh": "第三方审计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sql-readonly-guard.png",
+      "id": "sql-readonly-guard",
+      "name": {
+        "en": "sql-readonly-guard",
+        "zh": "只读查询守护 顾问"
+      },
+      "profession": {
+        "en": "sql-readonly-guard",
+        "zh": "只读查询守护 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-debug-chain-pro.png",
+      "id": "api-debug-chain-pro",
+      "name": {
+        "en": "API Debug Chain Expert",
+        "zh": "接口联调 鉴权核验 字段映射"
+      },
+      "profession": {
+        "en": "API Debug Chain Expert",
+        "zh": "接口联调 鉴权核验 字段映射"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1213",
+  "plugin": "group-team-1213",
+  "profession": {
+    "en": "third-party-audit Collaboration Team",
+    "zh": "第三方审计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 第三方审计",
+      "zh": "帮我处理第三方审计"
+    },
+    {
+      "en": "Plan 只读查询守护",
+      "zh": "帮我规划只读查询守护"
+    },
+    {
+      "en": "Review 接口联调",
+      "zh": "帮我检查接口联调"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据流向",
+      "zh": "数据流向"
+    },
+    {
+      "en": "权限最小",
+      "zh": "权限最小"
+    },
+    {
+      "en": "退出策略",
+      "zh": "退出策略"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "third-party-audit-team-lead",
+    "memberAgents": [
+      "third-party-audit",
+      "sql-readonly-guard",
+      "api-debug-chain-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

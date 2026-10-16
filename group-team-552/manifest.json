@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-552",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-552",
+    "kind": "team",
+    "name": "润语文本润色专家",
+    "description": "润语文本润色专家：围绕本地化翻译，覆盖精准翻译／术语统一／译文润色，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "polish-translate-expert-team-lead",
+        "role": "lead",
+        "name": "润语主理人",
+        "evidence": null
+      },
+      {
+        "slug": "polish-translate-expert",
+        "role": "member",
+        "name": "润语 文本润色 文案优化",
+        "evidence": "original_assets/polish-translate-expert/merkle_root",
+        "member_merkle_root": "5d76d7f40e997a259a6ebea9fa79a71f3ccf428841275623a250d3f44d24481c"
+      },
+      {
+        "slug": "localization-qa-pro",
+        "role": "member",
+        "name": "本地化翻译 质量验收 顾问",
+        "evidence": "original_assets/localization-qa-pro/merkle_root",
+        "member_merkle_root": "c48759eb100e813e894769889c97c9c4b870144e7c18a19b1b21fb322a037ecc"
+      },
+      {
+        "slug": "game-story-branch",
+        "role": "member",
+        "name": "剧情分支 结构设计 顾问",
+        "evidence": "original_assets/game-story-branch/merkle_root",
+        "member_merkle_root": "b141d480969e3891a1a23bdc038231e4ebd7dd455b459194e7a60501f18294f1"
+      }
+    ],
+    "team_lead": "polish-translate-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "40cf5898f91077a5",
+  "prompt_hash": "94e3eeee09b5da98",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-552\", \"kind\": \"team\", \"name\": \"润语文本润色专家\", \"description\": \"润语文本润色专家：围绕本地化翻译，覆盖精准翻译／术语统一／译文润色，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"polish-translate-expert-team-lead\", \"role\": \"lead\", \"name\": \"润语主理人\", \"evidence\": null}, {\"slug\": \"polish-translate-expert\", \"role\": \"member\", \"name\": \"润语 文本润色 文案优化\", \"evidence\": \"original_assets/polish-translate-expert/merkle_root\", \"member_merkle_root\": \"5d76d7f40e997a259a6ebea9fa79a71f3ccf428841275623a250d3f44d24481c\"}, {\"slug\": \"localization-qa-pro\", \"role\": \"member\", \"name\": \"本地化翻译 质量验收 顾问\", \"evidence\": \"original_assets/localization-qa-pro/merkle_root\", \"member_merkle_root\": \"c48759eb100e813e894769889c97c9c4b870144e7c18a19b1b21fb322a037ecc\"}, {\"slug\": \"game-story-branch\", \"role\": \"member\", \"name\": \"剧情分支 结构设计 顾问\", \"evidence\": \"original_assets/game-story-branch/merkle_root\", \"member_merkle_root\": \"b141d480969e3891a1a23bdc038231e4ebd7dd455b459194e7a60501f18294f1\"}], \"team_lead\": \"polish-translate-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-story-branch.md": "675f83a6c0856caff684d6d32891d17af406c17e97be5aa50681face7b691369",
+    "agents/localization-qa-pro.md": "94f15f25fc94646af1c928162e9f77c74bbb74e0efa2e0d63cfa9385aa8f9847",
+    "agents/polish-translate-expert-team-lead.md": "be69379626d34d0da497de8b7e9c0f0e995568e74bb8ddfae04c62f0eef5d0b4",
+    "agents/polish-translate-expert.md": "2aa85d1f1d8db4db9b18fd8b355f5e8550d1f65b192628c1787a27f4068197a5",
+    "plugin.json": "cf9da8e1eb899e68f6e7252f2b2521d82dbe791033a32e7a9962e294333caffc",
+    "settings.json": "d9004401a3e32985080870e531c5ed3db566acb32c044a9b477145ee3d24fb0f"
+  }
+}

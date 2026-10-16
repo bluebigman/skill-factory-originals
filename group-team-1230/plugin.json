@@ -1,0 +1,126 @@
+{
+  "agentName": "office-file-io-team-lead",
+  "agents": [
+    "./agents/office-file-io-team-lead.md",
+    "./agents/office-file-io.md",
+    "./agents/content-hook-craft.md",
+    "./agents/slide-speaker-note.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle Office",
+    "zh": "帮我处理Office"
+  },
+  "description": "office-file-io team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input Office requirements, output three deliverables: 格式先判, 结构保留, 写完复核. Verifiable end-to-end, evidence per step.",
+    "zh": "输入Office相关需求，输出格式先判、结构保留、写完复核三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "office-file-io Team",
+    "zh": "文件读写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "office-file-io-team-lead",
+      "name": {
+        "en": "Office主理人",
+        "zh": "Office主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/office-file-io.png",
+      "id": "office-file-io",
+      "name": {
+        "en": "office-file-io",
+        "zh": "Office 文件读写 助手"
+      },
+      "profession": {
+        "en": "office-file-io",
+        "zh": "Office 文件读写 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-hook-craft.png",
+      "id": "content-hook-craft",
+      "name": {
+        "en": "content-hook-craft",
+        "zh": "内容钩子设计 顾问"
+      },
+      "profession": {
+        "en": "content-hook-craft",
+        "zh": "内容钩子设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/slide-speaker-note.png",
+      "id": "slide-speaker-note",
+      "name": {
+        "en": "slide-speaker-note",
+        "zh": "演讲备注撰写 助手"
+      },
+      "profession": {
+        "en": "slide-speaker-note",
+        "zh": "演讲备注撰写 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1230",
+  "plugin": "group-team-1230",
+  "profession": {
+    "en": "office-file-io Collaboration Team",
+    "zh": "文件读写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle Office",
+      "zh": "帮我处理Office"
+    },
+    {
+      "en": "Plan 内容钩子设计",
+      "zh": "帮我规划内容钩子设计"
+    },
+    {
+      "en": "Review 演讲备注撰写",
+      "zh": "帮我检查演讲备注撰写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "格式先判",
+      "zh": "格式先判"
+    },
+    {
+      "en": "结构保留",
+      "zh": "结构保留"
+    },
+    {
+      "en": "写完复核",
+      "zh": "写完复核"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "office-file-io-team-lead",
+    "memberAgents": [
+      "office-file-io",
+      "content-hook-craft",
+      "slide-speaker-note"
+    ]
+  },
+  "version": "1.0.0"
+}

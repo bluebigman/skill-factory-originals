@@ -1,0 +1,126 @@
+{
+  "agentName": "paid-ads-guard-team-lead",
+  "agents": [
+    "./agents/paid-ads-guard-team-lead.md",
+    "./agents/paid-ads-guard.md",
+    "./agents/content-fact-check.md",
+    "./agents/email-lifecycle-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 投放管理",
+    "zh": "帮我处理投放管理"
+  },
+  "description": "paid-ads-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 投放管理, covers 预算上限 / 账户隔离 / 素材轮换, delivering structured results and actionable checklists.",
+    "zh": "预算护栏专家：围绕投放管理，覆盖预算上限／账户隔离／素材轮换，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "paid-ads-guard Team",
+    "zh": "预算护栏专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "paid-ads-guard-team-lead",
+      "name": {
+        "en": "投放管理主理人",
+        "zh": "投放管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/paid-ads-guard.png",
+      "id": "paid-ads-guard",
+      "name": {
+        "en": "paid-ads-guard",
+        "zh": "投放管理 预算护栏 顾问"
+      },
+      "profession": {
+        "en": "paid-ads-guard",
+        "zh": "投放管理 预算护栏 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-fact-check.png",
+      "id": "content-fact-check",
+      "name": {
+        "en": "content-fact-check",
+        "zh": "内容事实核查 顾问"
+      },
+      "profession": {
+        "en": "content-fact-check",
+        "zh": "内容事实核查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/email-lifecycle-pro.png",
+      "id": "email-lifecycle-pro",
+      "name": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "profession": {
+        "en": "email-lifecycle-pro",
+        "zh": "邮件触达 生命周期 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1058",
+  "plugin": "group-team-1058",
+  "profession": {
+    "en": "paid-ads-guard Collaboration Team",
+    "zh": "预算护栏专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 投放管理",
+      "zh": "帮我处理投放管理"
+    },
+    {
+      "en": "Plan 内容事实核查",
+      "zh": "帮我规划内容事实核查"
+    },
+    {
+      "en": "Review 邮件触达",
+      "zh": "帮我检查邮件触达"
+    }
+  ],
+  "tags": [
+    {
+      "en": "预算上限",
+      "zh": "预算上限"
+    },
+    {
+      "en": "账户隔离",
+      "zh": "账户隔离"
+    },
+    {
+      "en": "素材轮换",
+      "zh": "素材轮换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "paid-ads-guard-team-lead",
+    "memberAgents": [
+      "paid-ads-guard",
+      "content-fact-check",
+      "email-lifecycle-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

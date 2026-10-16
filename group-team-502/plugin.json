@@ -1,0 +1,126 @@
+{
+  "agentName": "data-retention-policy-team-lead",
+  "agents": [
+    "./agents/data-retention-policy-team-lead.md",
+    "./agents/data-retention-policy.md",
+    "./agents/agent-cache-strategy.md",
+    "./agents/selfhost-ai-env-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据保留",
+    "zh": "帮我处理数据保留"
+  },
+  "description": "data-retention-policy team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 数据保留 end-to-end: 分级保留, 合规优先 and 清理可逆. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分级保留、合规优先与清理可逆，覆盖数据保留全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "data-retention-policy Team",
+    "zh": "数据保留分级策略专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-retention-policy-team-lead",
+      "name": {
+        "en": "数据保留主理人",
+        "zh": "数据保留主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-retention-policy.png",
+      "id": "data-retention-policy",
+      "name": {
+        "en": "data-retention-policy",
+        "zh": "数据保留 分级策略 顾问"
+      },
+      "profession": {
+        "en": "data-retention-policy",
+        "zh": "数据保留 分级策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-cache-strategy.png",
+      "id": "agent-cache-strategy",
+      "name": {
+        "en": "agent-cache-strategy",
+        "zh": "缓存策略 失效控制 顾问"
+      },
+      "profession": {
+        "en": "agent-cache-strategy",
+        "zh": "缓存策略 失效控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/selfhost-ai-env-expert.png",
+      "id": "selfhost-ai-env-expert",
+      "name": {
+        "en": "Self-Hosted AI Environment Deployment Auditor",
+        "zh": "自托管AI环境 部署核验"
+      },
+      "profession": {
+        "en": "Self-Hosted AI Environment Deployment Auditor",
+        "zh": "自托管AI环境 部署核验"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-502",
+  "plugin": "group-team-502",
+  "profession": {
+    "en": "data-retention-policy Collaboration Team",
+    "zh": "数据保留分级策略专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据保留",
+      "zh": "帮我处理数据保留"
+    },
+    {
+      "en": "Plan 缓存策略",
+      "zh": "帮我规划缓存策略"
+    },
+    {
+      "en": "Review 自托管AI环境",
+      "zh": "帮我检查自托管AI环境"
+    }
+  ],
+  "tags": [
+    {
+      "en": "合规优先",
+      "zh": "合规优先"
+    },
+    {
+      "en": "清理可逆",
+      "zh": "清理可逆"
+    },
+    {
+      "en": "自动执行",
+      "zh": "自动执行"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-retention-policy-team-lead",
+    "memberAgents": [
+      "data-retention-policy",
+      "agent-cache-strategy",
+      "selfhost-ai-env-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

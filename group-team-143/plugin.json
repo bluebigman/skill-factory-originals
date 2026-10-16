@@ -1,0 +1,126 @@
+{
+  "agentName": "traceability-build-pro-team-lead",
+  "agents": [
+    "./agents/traceability-build-pro-team-lead.md",
+    "./agents/traceability-build-pro.md",
+    "./agents/procurement-cost-pro.md",
+    "./agents/supplier-qualify-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 追溯体系",
+    "zh": "帮我处理追溯体系"
+  },
+  "description": "Traceability Build Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "追溯 采购 供应商 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "Traceability Build Pro Team",
+    "zh": "追溯 采购 供应商 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "traceability-build-pro-team-lead",
+      "name": {
+        "en": "追溯体系主理人",
+        "zh": "追溯体系主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/traceability-build-pro.png",
+      "id": "traceability-build-pro",
+      "name": {
+        "en": "Traceability Build Pro",
+        "zh": "追溯体系 批次管理 顾问"
+      },
+      "profession": {
+        "en": "Traceability Build Pro",
+        "zh": "追溯体系 批次管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/procurement-cost-pro.png",
+      "id": "procurement-cost-pro",
+      "name": {
+        "en": "Procurement Cost Pro",
+        "zh": "采购降本 议价准备 顾问"
+      },
+      "profession": {
+        "en": "Procurement Cost Pro",
+        "zh": "采购降本 议价准备 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/supplier-qualify-pro.png",
+      "id": "supplier-qualify-pro",
+      "name": {
+        "en": "Supplier Qualify Pro",
+        "zh": "供应商 准入评估 顾问"
+      },
+      "profession": {
+        "en": "Supplier Qualify Pro",
+        "zh": "供应商 准入评估 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-143",
+  "plugin": "group-team-143",
+  "profession": {
+    "en": "Traceability Build Pro Collaboration Team",
+    "zh": "追溯 采购 供应商 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 追溯体系",
+      "zh": "帮我处理追溯体系"
+    },
+    {
+      "en": "Plan 采购降本",
+      "zh": "帮我规划采购降本"
+    },
+    {
+      "en": "Review 供应商",
+      "zh": "帮我检查供应商"
+    }
+  ],
+  "tags": [
+    {
+      "en": "追溯体系",
+      "zh": "追溯体系"
+    },
+    {
+      "en": "采购降本",
+      "zh": "采购降本"
+    },
+    {
+      "en": "供应商",
+      "zh": "供应商"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "traceability-build-pro-team-lead",
+    "memberAgents": [
+      "traceability-build-pro",
+      "procurement-cost-pro",
+      "supplier-qualify-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

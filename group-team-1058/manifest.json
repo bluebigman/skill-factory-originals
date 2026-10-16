@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1058",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1058",
+    "kind": "team",
+    "name": "预算护栏专家",
+    "description": "预算护栏专家：围绕投放管理，覆盖预算上限／账户隔离／素材轮换，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "paid-ads-guard-team-lead",
+        "role": "lead",
+        "name": "投放管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "paid-ads-guard",
+        "role": "member",
+        "name": "投放管理 预算护栏 顾问",
+        "evidence": "original_assets/paid-ads-guard/merkle_root",
+        "member_merkle_root": "c2a5da5cb35d29d25b64c70b521b0d3f7418159b5952a7bfac4a5c03e8329240"
+      },
+      {
+        "slug": "content-fact-check",
+        "role": "member",
+        "name": "内容事实核查 顾问",
+        "evidence": "original_assets/content-fact-check/merkle_root",
+        "member_merkle_root": "e8c70d6e1cfe8f0bf0d5f5dd7bce117600d7d10c9e4f3e444f920101497cd9bf"
+      },
+      {
+        "slug": "email-lifecycle-pro",
+        "role": "member",
+        "name": "邮件触达 生命周期 顾问",
+        "evidence": "original_assets/email-lifecycle-pro/merkle_root",
+        "member_merkle_root": "cc73e2ecfd7a9d275ac66870a6d67d76b7346b349483c20fac0b4e70527e325d"
+      }
+    ],
+    "team_lead": "paid-ads-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4842f866cdcbfc64",
+  "prompt_hash": "304484c661647146",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1058\", \"kind\": \"team\", \"name\": \"预算护栏专家\", \"description\": \"预算护栏专家：围绕投放管理，覆盖预算上限／账户隔离／素材轮换，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"paid-ads-guard-team-lead\", \"role\": \"lead\", \"name\": \"投放管理主理人\", \"evidence\": null}, {\"slug\": \"paid-ads-guard\", \"role\": \"member\", \"name\": \"投放管理 预算护栏 顾问\", \"evidence\": \"original_assets/paid-ads-guard/merkle_root\", \"member_merkle_root\": \"c2a5da5cb35d29d25b64c70b521b0d3f7418159b5952a7bfac4a5c03e8329240\"}, {\"slug\": \"content-fact-check\", \"role\": \"member\", \"name\": \"内容事实核查 顾问\", \"evidence\": \"original_assets/content-fact-check/merkle_root\", \"member_merkle_root\": \"e8c70d6e1cfe8f0bf0d5f5dd7bce117600d7d10c9e4f3e444f920101497cd9bf\"}, {\"slug\": \"email-lifecycle-pro\", \"role\": \"member\", \"name\": \"邮件触达 生命周期 顾问\", \"evidence\": \"original_assets/email-lifecycle-pro/merkle_root\", \"member_merkle_root\": \"cc73e2ecfd7a9d275ac66870a6d67d76b7346b349483c20fac0b4e70527e325d\"}], \"team_lead\": \"paid-ads-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-fact-check.md": "359693c97894acd0564c753f91375aef761e6a0c25d1d6733de9ff56712906ab",
+    "agents/email-lifecycle-pro.md": "25dc87ca59c6717fb4e28efcccc4ffbc42da4462648585dc68802dccbe5110aa",
+    "agents/paid-ads-guard-team-lead.md": "e2b61e54565f69485fb16232ae400cdcee03ea4b1b7a22a6f2a1be7c89423793",
+    "agents/paid-ads-guard.md": "03fd6278bd0d79fa495c5685716836160f360d37c39c673b6f256d2983ce0b05",
+    "plugin.json": "a7f0d445ab9cf63435544ddcf1076622ad690d519ab55547b96db871ac802092",
+    "settings.json": "5f3afa9152bf5d0bf1b8b5c286d282bab86755a188323151960885fc4e698e3a"
+  }
+}

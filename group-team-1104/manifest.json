@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1104",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1104",
+    "kind": "team",
+    "name": "导视系统寻路设计专家",
+    "description": "输入导视系统相关需求，输出层级一致、视觉连续、先定产出三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "space-wayfinding-team-lead",
+        "role": "lead",
+        "name": "导视系统主理人",
+        "evidence": null
+      },
+      {
+        "slug": "space-wayfinding",
+        "role": "member",
+        "name": "导视系统 寻路设计 顾问",
+        "evidence": "original_assets/space-wayfinding/merkle_root",
+        "member_merkle_root": "df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e"
+      },
+      {
+        "slug": "game-economy-balance",
+        "role": "member",
+        "name": "游戏经济 数值平衡 顾问",
+        "evidence": "original_assets/game-economy-balance/merkle_root",
+        "member_merkle_root": "3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66"
+      },
+      {
+        "slug": "ui-pattern-library",
+        "role": "member",
+        "name": "界面模式库 顾问",
+        "evidence": "original_assets/ui-pattern-library/merkle_root",
+        "member_merkle_root": "3c30b4f060d439d7d731d202366314b8a173977d641d46cccea71d0e3e4544d4"
+      }
+    ],
+    "team_lead": "space-wayfinding-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ff531f149293413c",
+  "prompt_hash": "a54370b82a4827f7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1104\", \"kind\": \"team\", \"name\": \"导视系统寻路设计专家\", \"description\": \"输入导视系统相关需求，输出层级一致、视觉连续、先定产出三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"space-wayfinding-team-lead\", \"role\": \"lead\", \"name\": \"导视系统主理人\", \"evidence\": null}, {\"slug\": \"space-wayfinding\", \"role\": \"member\", \"name\": \"导视系统 寻路设计 顾问\", \"evidence\": \"original_assets/space-wayfinding/merkle_root\", \"member_merkle_root\": \"df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e\"}, {\"slug\": \"game-economy-balance\", \"role\": \"member\", \"name\": \"游戏经济 数值平衡 顾问\", \"evidence\": \"original_assets/game-economy-balance/merkle_root\", \"member_merkle_root\": \"3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66\"}, {\"slug\": \"ui-pattern-library\", \"role\": \"member\", \"name\": \"界面模式库 顾问\", \"evidence\": \"original_assets/ui-pattern-library/merkle_root\", \"member_merkle_root\": \"3c30b4f060d439d7d731d202366314b8a173977d641d46cccea71d0e3e4544d4\"}], \"team_lead\": \"space-wayfinding-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-economy-balance.md": "29093647761b5202a90ec9a939a2a8b7df9c3d3ca3999b1882964aac1918660a",
+    "agents/space-wayfinding-team-lead.md": "90e09d2c6f899516c1efdb976576cf4cd4c7b0653de189dd5d556ea68360799e",
+    "agents/space-wayfinding.md": "efa2335489dc21f8d3ce56f60061c57529d33025484e6ad03b101ded654f0ce0",
+    "agents/ui-pattern-library.md": "e79f7cb9ae7e7eebf8cac2a0687a708a359787edcfe82e33d6f8d0ebf2f99af6",
+    "plugin.json": "324a19f2dcc646882255d878e132c6d60186352706add98a127e2adf7343f5e8",
+    "settings.json": "39d9cbaca6186343f31525c2c8476b7db2df308f290fdf78e6967f397bf9a505"
+  }
+}

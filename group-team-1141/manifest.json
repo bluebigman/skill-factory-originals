@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1141",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1141",
+    "kind": "team",
+    "name": "文档索引重建专家",
+    "description": "擅长覆盖完整、层级合理与页码准确，覆盖文档索引重建全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-index-rebuild-team-lead",
+        "role": "lead",
+        "name": "文档索引重建主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-index-rebuild",
+        "role": "member",
+        "name": "文档索引重建 助手",
+        "evidence": "original_assets/doc-index-rebuild/merkle_root",
+        "member_merkle_root": "22b289458ce1d87bb279873d29478cb5f42f9ab6b381c712e4e292c5630d8512"
+      },
+      {
+        "slug": "community-grow-pro",
+        "role": "member",
+        "name": "社群运营 活跃机制 顾问",
+        "evidence": "original_assets/community-grow-pro/merkle_root",
+        "member_merkle_root": "e0c3352933eceb5fe16b05aaa437247f8254607188e0c7bf75d431ff9fe16a9a"
+      },
+      {
+        "slug": "marketing-mix-pro",
+        "role": "member",
+        "name": "渠道组合 预算分配 顾问",
+        "evidence": "original_assets/marketing-mix-pro/merkle_root",
+        "member_merkle_root": "ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0"
+      }
+    ],
+    "team_lead": "doc-index-rebuild-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6953549a3470599a",
+  "prompt_hash": "425c90df7c30718c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1141\", \"kind\": \"team\", \"name\": \"文档索引重建专家\", \"description\": \"擅长覆盖完整、层级合理与页码准确，覆盖文档索引重建全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-index-rebuild-team-lead\", \"role\": \"lead\", \"name\": \"文档索引重建主理人\", \"evidence\": null}, {\"slug\": \"doc-index-rebuild\", \"role\": \"member\", \"name\": \"文档索引重建 助手\", \"evidence\": \"original_assets/doc-index-rebuild/merkle_root\", \"member_merkle_root\": \"22b289458ce1d87bb279873d29478cb5f42f9ab6b381c712e4e292c5630d8512\"}, {\"slug\": \"community-grow-pro\", \"role\": \"member\", \"name\": \"社群运营 活跃机制 顾问\", \"evidence\": \"original_assets/community-grow-pro/merkle_root\", \"member_merkle_root\": \"e0c3352933eceb5fe16b05aaa437247f8254607188e0c7bf75d431ff9fe16a9a\"}, {\"slug\": \"marketing-mix-pro\", \"role\": \"member\", \"name\": \"渠道组合 预算分配 顾问\", \"evidence\": \"original_assets/marketing-mix-pro/merkle_root\", \"member_merkle_root\": \"ff2340a1920df8ce9a96920c26ea2c990f706e9d443824fba1646f93dcecd8c0\"}], \"team_lead\": \"doc-index-rebuild-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/community-grow-pro.md": "5aeb60eb6aef40729c523d8114b51c56d5661237ff310ab1a7ee6057f6896d14",
+    "agents/doc-index-rebuild-team-lead.md": "4da84064f7e5ab29cea775a4c367106af9d6ea075ad8f6b3acca5e6893315f74",
+    "agents/doc-index-rebuild.md": "a2dd9c2386b690e65865bb188abda886bbb5c31a9b8cc1b66bc4bd7f6dedfa49",
+    "agents/marketing-mix-pro.md": "236ba22771294a7e45ed542f37701f4f89cfd356c331fbf1b0084437fc977447",
+    "plugin.json": "6ee604d241f7dc7c44d57c45cd988ccf445fa977b4bbc0b86f34f26271ac9b1d",
+    "settings.json": "dedd4f6a077bd0dae34922f629fbaa476692e2a16af67d57a4f1506bb9e1abc7"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-578",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-578",
+    "kind": "team",
+    "name": "日志挖掘专家",
+    "description": "擅长模式提取、异常聚类与基线上线，覆盖日志挖掘全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "log-pattern-mining-team-lead",
+        "role": "lead",
+        "name": "日志挖掘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "log-pattern-mining",
+        "role": "member",
+        "name": "日志挖掘 模式识别 顾问",
+        "evidence": "original_assets/log-pattern-mining/merkle_root",
+        "member_merkle_root": "8b74b721e49a8fa37ad104552c3b3f3c573be90c7234b05d1700095079742837"
+      },
+      {
+        "slug": "sql-toolkit-pro-03",
+        "role": "member",
+        "name": "数据转查询 自然语言转SQL",
+        "evidence": "original_assets/sql-toolkit-pro-03/merkle_root",
+        "member_merkle_root": "1cc6418e9b57c9cca35c22cb838ab55b40cc4db6c1920debb58b32682f2fb118"
+      },
+      {
+        "slug": "kb-build-pro",
+        "role": "member",
+        "name": "知识库构建 文档整理",
+        "evidence": "original_assets/kb-build-pro/merkle_root",
+        "member_merkle_root": "9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d"
+      }
+    ],
+    "team_lead": "log-pattern-mining-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "de65d154788801b4",
+  "prompt_hash": "981d56b2060b4871",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-578\", \"kind\": \"team\", \"name\": \"日志挖掘专家\", \"description\": \"擅长模式提取、异常聚类与基线上线，覆盖日志挖掘全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"log-pattern-mining-team-lead\", \"role\": \"lead\", \"name\": \"日志挖掘主理人\", \"evidence\": null}, {\"slug\": \"log-pattern-mining\", \"role\": \"member\", \"name\": \"日志挖掘 模式识别 顾问\", \"evidence\": \"original_assets/log-pattern-mining/merkle_root\", \"member_merkle_root\": \"8b74b721e49a8fa37ad104552c3b3f3c573be90c7234b05d1700095079742837\"}, {\"slug\": \"sql-toolkit-pro-03\", \"role\": \"member\", \"name\": \"数据转查询 自然语言转SQL\", \"evidence\": \"original_assets/sql-toolkit-pro-03/merkle_root\", \"member_merkle_root\": \"1cc6418e9b57c9cca35c22cb838ab55b40cc4db6c1920debb58b32682f2fb118\"}, {\"slug\": \"kb-build-pro\", \"role\": \"member\", \"name\": \"知识库构建 文档整理\", \"evidence\": \"original_assets/kb-build-pro/merkle_root\", \"member_merkle_root\": \"9ed5d0af17784f932f24174b7272022373f7d40a98be213728c61ac0b914297d\"}], \"team_lead\": \"log-pattern-mining-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/kb-build-pro.md": "00a41372d084af708984ffab658ed5270fb956378d7e8950c3e2193e0cbaf710",
+    "agents/log-pattern-mining-team-lead.md": "fc95225bb488a72ce279a32392c232854537e3b63edf260f74ea983e52e46a57",
+    "agents/log-pattern-mining.md": "7646f543877fd88ce25d08f8698e3e4777c973e5f7dd3c0642383288a3688616",
+    "agents/sql-toolkit-pro-03.md": "e1e7ac70b19cdd4d92ce1cfc97a8938d321dd9530e01483236df2ca420425351",
+    "plugin.json": "60503bf1a6882d560591fa525708b5dde9eb72072ef877d15755817f842fde65",
+    "settings.json": "f048b56ca38469d8ac7117751c4482279978f4af83e9c68f8f311e2759ad89fc"
+  }
+}

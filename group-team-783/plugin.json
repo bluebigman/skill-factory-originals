@@ -1,0 +1,126 @@
+{
+  "agentName": "data-pipeline-pro-team-lead",
+  "agents": [
+    "./agents/data-pipeline-pro-team-lead.md",
+    "./agents/data-pipeline-pro.md",
+    "./agents/data-refine-pro.md",
+    "./agents/growth-dashboard.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 实习日志",
+    "zh": "帮我处理实习日志"
+  },
+  "description": "数据管道与批处理 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 增长看板 requirements, output three deliverables: 指标分层, 口径文档, 自动采集. Verifiable end-to-end, evidence per step.",
+    "zh": "输入增长看板相关需求，输出指标分层、口径文档、自动采集三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "数据管道与批处理 Suite Team",
+    "zh": "实习日志专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-pipeline-pro-team-lead",
+      "name": {
+        "en": "实习日志主理人",
+        "zh": "实习日志主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-pipeline-pro.png",
+      "id": "data-pipeline-pro",
+      "name": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "profession": {
+        "en": "数据管道与批处理 Suite",
+        "zh": "实习日志 文档生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-refine-pro.png",
+      "id": "data-refine-pro",
+      "name": {
+        "en": "Table Data Refiner",
+        "zh": "表格清洗 字段规范 批量去重"
+      },
+      "profession": {
+        "en": "Table Data Refiner",
+        "zh": "表格清洗 字段规范 批量去重"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/growth-dashboard.png",
+      "id": "growth-dashboard",
+      "name": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "profession": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-783",
+  "plugin": "group-team-783",
+  "profession": {
+    "en": "数据管道与批处理 Suite Collaboration Team",
+    "zh": "实习日志专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 实习日志",
+      "zh": "帮我处理实习日志"
+    },
+    {
+      "en": "Plan 表格清洗",
+      "zh": "帮我规划表格清洗"
+    },
+    {
+      "en": "Review 增长看板",
+      "zh": "帮我检查增长看板"
+    }
+  ],
+  "tags": [
+    {
+      "en": "批量处理",
+      "zh": "批量处理"
+    },
+    {
+      "en": "数据编译",
+      "zh": "数据编译"
+    },
+    {
+      "en": "文档生成",
+      "zh": "文档生成"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-pipeline-pro-team-lead",
+    "memberAgents": [
+      "data-pipeline-pro",
+      "data-refine-pro",
+      "growth-dashboard"
+    ]
+  },
+  "version": "1.0.0"
+}

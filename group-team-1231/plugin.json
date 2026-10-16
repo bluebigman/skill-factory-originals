@@ -1,0 +1,126 @@
+{
+  "agentName": "code-search-pro-team-lead",
+  "agents": [
+    "./agents/code-search-pro-team-lead.md",
+    "./agents/code-search-pro.md",
+    "./agents/data-clean-pro-01-fixed.md",
+    "./agents/toolkit-pro-08-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 代码检索定位",
+    "zh": "帮我处理代码检索定位"
+  },
+  "description": "code-search-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 代码检索定位 end-to-end: 先定符号, 组合条件 and 历史追溯. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长先定符号、组合条件与历史追溯，覆盖代码检索定位全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "code-search-pro Team",
+    "zh": "代码检索定位专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "code-search-pro-team-lead",
+      "name": {
+        "en": "代码检索定位主理人",
+        "zh": "代码检索定位主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/code-search-pro.png",
+      "id": "code-search-pro",
+      "name": {
+        "en": "code-search-pro",
+        "zh": "代码检索定位 助手"
+      },
+      "profession": {
+        "en": "code-search-pro",
+        "zh": "代码检索定位 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-01-fixed.png",
+      "id": "data-clean-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "代码仓数据接入 结构化转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "代码仓数据接入 结构化转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-08-fixed.png",
+      "id": "toolkit-pro-08-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1231",
+  "plugin": "group-team-1231",
+  "profession": {
+    "en": "code-search-pro Collaboration Team",
+    "zh": "代码检索定位专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 代码检索定位",
+      "zh": "帮我处理代码检索定位"
+    },
+    {
+      "en": "Plan 代码仓数据接入",
+      "zh": "帮我规划代码仓数据接入"
+    },
+    {
+      "en": "Review UX设计",
+      "zh": "帮我检查UX设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定符号",
+      "zh": "先定符号"
+    },
+    {
+      "en": "组合条件",
+      "zh": "组合条件"
+    },
+    {
+      "en": "历史追溯",
+      "zh": "历史追溯"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "code-search-pro-team-lead",
+    "memberAgents": [
+      "code-search-pro",
+      "data-clean-pro-01-fixed",
+      "toolkit-pro-08-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

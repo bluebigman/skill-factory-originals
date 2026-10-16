@@ -1,0 +1,126 @@
+{
+  "agentName": "observability-inject-pro-team-lead",
+  "agents": [
+    "./agents/observability-inject-pro-team-lead.md",
+    "./agents/observability-inject-pro.md",
+    "./agents/agent-tool-selection.md",
+    "./agents/graceful-degrade-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 链路追踪",
+    "zh": "帮我处理链路追踪"
+  },
+  "description": "observability-inject-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 链路追踪 end-to-end: 快照复现, 成本可见 and 长尾监控. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长快照复现、成本可见与长尾监控，覆盖链路追踪全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "observability-inject-pro Team",
+    "zh": "链路追踪指标埋点专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "observability-inject-pro-team-lead",
+      "name": {
+        "en": "链路追踪主理人",
+        "zh": "链路追踪主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/observability-inject-pro.png",
+      "id": "observability-inject-pro",
+      "name": {
+        "en": "observability-inject-pro",
+        "zh": "链路追踪 指标埋点 顾问"
+      },
+      "profession": {
+        "en": "observability-inject-pro",
+        "zh": "链路追踪 指标埋点 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-tool-selection.png",
+      "id": "agent-tool-selection",
+      "name": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "profession": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/graceful-degrade-pro.png",
+      "id": "graceful-degrade-pro",
+      "name": {
+        "en": "graceful-degrade-pro",
+        "zh": "优雅降级 兜底路径 顾问"
+      },
+      "profession": {
+        "en": "graceful-degrade-pro",
+        "zh": "优雅降级 兜底路径 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-348",
+  "plugin": "group-team-348",
+  "profession": {
+    "en": "observability-inject-pro Collaboration Team",
+    "zh": "链路追踪指标埋点专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 链路追踪",
+      "zh": "帮我处理链路追踪"
+    },
+    {
+      "en": "Plan 工具选择",
+      "zh": "帮我规划工具选择"
+    },
+    {
+      "en": "Review 优雅降级",
+      "zh": "帮我检查优雅降级"
+    }
+  ],
+  "tags": [
+    {
+      "en": "快照复现",
+      "zh": "快照复现"
+    },
+    {
+      "en": "成本可见",
+      "zh": "成本可见"
+    },
+    {
+      "en": "长尾监控",
+      "zh": "长尾监控"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "observability-inject-pro-team-lead",
+    "memberAgents": [
+      "observability-inject-pro",
+      "agent-tool-selection",
+      "graceful-degrade-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

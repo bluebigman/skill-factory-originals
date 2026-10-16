@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-192",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-192",
+    "kind": "team",
+    "name": "体验 协议 测试 团队",
+    "description": "体验 协议 测试 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "toolkit-pro-08-team-lead",
+        "role": "lead",
+        "name": "UX设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "toolkit-pro-08",
+        "role": "member",
+        "name": "UX设计 样例解析 情节构建",
+        "evidence": "original_assets/toolkit-pro-08/merkle_root",
+        "member_merkle_root": "901074ac258034968bbec472a2bf040fc057eda64f55f770e8c5e39a9b9ad6e1"
+      },
+      {
+        "slug": "api-toolkit-pro",
+        "role": "member",
+        "name": "协议转换 REST",
+        "evidence": "original_assets/api-toolkit-pro/merkle_root",
+        "member_merkle_root": "98fe6a8d7943868141ebaeb4b07282d84a891da63e910b702e1ac871af0b6aed"
+      },
+      {
+        "slug": "code-assist-pro",
+        "role": "member",
+        "name": "BDD测试 性能剖析 快速交付",
+        "evidence": "original_assets/code-assist-pro/merkle_root",
+        "member_merkle_root": "cfdf769ae7b28dbf45ea85e492f4647246b26433065657a9b7a7066c9589b77a"
+      }
+    ],
+    "team_lead": "toolkit-pro-08-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e3ec21a9b5c0064b",
+  "prompt_hash": "74940a7d4e7381ed",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-192\", \"kind\": \"team\", \"name\": \"体验 协议 测试 团队\", \"description\": \"体验 协议 测试 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"toolkit-pro-08-team-lead\", \"role\": \"lead\", \"name\": \"UX设计主理人\", \"evidence\": null}, {\"slug\": \"toolkit-pro-08\", \"role\": \"member\", \"name\": \"UX设计 样例解析 情节构建\", \"evidence\": \"original_assets/toolkit-pro-08/merkle_root\", \"member_merkle_root\": \"901074ac258034968bbec472a2bf040fc057eda64f55f770e8c5e39a9b9ad6e1\"}, {\"slug\": \"api-toolkit-pro\", \"role\": \"member\", \"name\": \"协议转换 REST\", \"evidence\": \"original_assets/api-toolkit-pro/merkle_root\", \"member_merkle_root\": \"98fe6a8d7943868141ebaeb4b07282d84a891da63e910b702e1ac871af0b6aed\"}, {\"slug\": \"code-assist-pro\", \"role\": \"member\", \"name\": \"BDD测试 性能剖析 快速交付\", \"evidence\": \"original_assets/code-assist-pro/merkle_root\", \"member_merkle_root\": \"cfdf769ae7b28dbf45ea85e492f4647246b26433065657a9b7a7066c9589b77a\"}], \"team_lead\": \"toolkit-pro-08-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-toolkit-pro.md": "3952990b668c4fbf5bc08cb884fae52f1f96689dbc0162f51194b2e40fb1b346",
+    "agents/code-assist-pro.md": "33c05333988edeab5467a987b81c36b6de5ad538119e71e97c7461b60d5f05cb",
+    "agents/toolkit-pro-08-team-lead.md": "977f0d05e98d61dbe171d562c98cf1453ad1ceb213b4406f471b92a82d408be2",
+    "agents/toolkit-pro-08.md": "51968218ba21ab5a3bc990e903eb7cd469f8b730b8a99b7fa6c1930bdc270556",
+    "plugin.json": "5ef01704615e2de19616882c016d943f24c7d2bdc289d37fc2aa4d9ec76ac9ac",
+    "settings.json": "324c7ad05a88fd9ab2961da7429cfe62611c4b5689a1eb4f10d44170993d338e"
+  }
+}

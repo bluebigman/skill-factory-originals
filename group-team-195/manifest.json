@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-195",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-195",
+    "kind": "team",
+    "name": "实习 数据 文档 团队",
+    "description": "实习 数据 文档 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "实习日志主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-pro-fixed",
+        "role": "member",
+        "name": "实习日志 文档生成",
+        "evidence": "original_assets/data-pipeline-pro-fixed/merkle_root",
+        "member_merkle_root": "e07e3399193b977314f12dd1945b20994bf119da9a973d72f54f80f5757c8b93"
+      },
+      {
+        "slug": "data-clean-pro-09",
+        "role": "member",
+        "name": "数据建模 结构化转换 批量处理",
+        "evidence": "original_assets/data-clean-pro-09/merkle_root",
+        "member_merkle_root": "470df6a3379ea9bc05c8c4308b03d0a1e4bde0dde68ab71685de4c839b77e795"
+      },
+      {
+        "slug": "data-clean-pro-06",
+        "role": "member",
+        "name": "文档转写 结构化转换",
+        "evidence": "original_assets/data-clean-pro-06/merkle_root",
+        "member_merkle_root": "b6eba41cabce760412d11983b7b908b6c4e317370797cbd9da29f421a39b9b4e"
+      }
+    ],
+    "team_lead": "data-pipeline-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f49e4ce0c1b944b0",
+  "prompt_hash": "811b8c306f7b3006",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-195\", \"kind\": \"team\", \"name\": \"实习 数据 文档 团队\", \"description\": \"实习 数据 文档 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"实习日志主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-pro-fixed\", \"role\": \"member\", \"name\": \"实习日志 文档生成\", \"evidence\": \"original_assets/data-pipeline-pro-fixed/merkle_root\", \"member_merkle_root\": \"e07e3399193b977314f12dd1945b20994bf119da9a973d72f54f80f5757c8b93\"}, {\"slug\": \"data-clean-pro-09\", \"role\": \"member\", \"name\": \"数据建模 结构化转换 批量处理\", \"evidence\": \"original_assets/data-clean-pro-09/merkle_root\", \"member_merkle_root\": \"470df6a3379ea9bc05c8c4308b03d0a1e4bde0dde68ab71685de4c839b77e795\"}, {\"slug\": \"data-clean-pro-06\", \"role\": \"member\", \"name\": \"文档转写 结构化转换\", \"evidence\": \"original_assets/data-clean-pro-06/merkle_root\", \"member_merkle_root\": \"b6eba41cabce760412d11983b7b908b6c4e317370797cbd9da29f421a39b9b4e\"}], \"team_lead\": \"data-pipeline-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-06.md": "c774fca39268f59ffa3e0db1dbee6b1b523b4f8387bc3a9c902c92fee6c0e1d8",
+    "agents/data-clean-pro-09.md": "a71cd4fa40ac1f60a978c91c3fe47d6d65829c9c53df2ae7b8a1045db10879b6",
+    "agents/data-pipeline-pro-fixed-team-lead.md": "5bd5b7b59dfe8f8ad1cf3781f4c83cbbcb3802710c01ab37fdeb2af78974287b",
+    "agents/data-pipeline-pro-fixed.md": "d5c863148d8be021849500add083b9f8f3a8a3f9542e4ad4c2354ec8abba4258",
+    "plugin.json": "70c7c9891839e64892ced3da828842efebca794551a46a1c2378e8dfe66e2ab3",
+    "settings.json": "c450a1a5943e290d3199f9f3008084a7efa882fc6dc7719ad109a17a4b77a86c"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085714",
+  "slug": "group-team-1001",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1001",
+    "kind": "team",
+    "name": "财务文本专家",
+    "description": "财务文本专家：围绕行程规划，覆盖费用归类／节奏合理／备选方案，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "expense-reimburse-expert-team-lead",
+        "role": "lead",
+        "name": "报销与费用管理专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "expense-reimburse-expert",
+        "role": "member",
+        "name": "报销与费用管理专家",
+        "evidence": "original_assets/expense-reimburse-expert/merkle_root",
+        "member_merkle_root": "a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f"
+      },
+      {
+        "slug": "finance-toolkit-pro-fixed",
+        "role": "member",
+        "name": "财务文本 定投测算 专利",
+        "evidence": "original_assets/finance-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747"
+      },
+      {
+        "slug": "tourism-itinerary",
+        "role": "member",
+        "name": "行程规划 助手",
+        "evidence": "original_assets/tourism-itinerary/merkle_root",
+        "member_merkle_root": "49db793cff184331664e1e3bb6a719c8b311024afb3d2f716f19b0a78950a1b4"
+      }
+    ],
+    "team_lead": "expense-reimburse-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e93d2faf0446269b",
+  "prompt_hash": "a1c4c64842e8a4bc",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1001\", \"kind\": \"team\", \"name\": \"财务文本专家\", \"description\": \"财务文本专家：围绕行程规划，覆盖费用归类／节奏合理／备选方案，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"expense-reimburse-expert-team-lead\", \"role\": \"lead\", \"name\": \"报销与费用管理专家主理人\", \"evidence\": null}, {\"slug\": \"expense-reimburse-expert\", \"role\": \"member\", \"name\": \"报销与费用管理专家\", \"evidence\": \"original_assets/expense-reimburse-expert/merkle_root\", \"member_merkle_root\": \"a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f\"}, {\"slug\": \"finance-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"财务文本 定投测算 专利\", \"evidence\": \"original_assets/finance-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"f3b10fa5f506f64928ecae638ae4e8e835a600560cd26ec3d350acf367d03747\"}, {\"slug\": \"tourism-itinerary\", \"role\": \"member\", \"name\": \"行程规划 助手\", \"evidence\": \"original_assets/tourism-itinerary/merkle_root\", \"member_merkle_root\": \"49db793cff184331664e1e3bb6a719c8b311024afb3d2f716f19b0a78950a1b4\"}], \"team_lead\": \"expense-reimburse-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/expense-reimburse-expert-team-lead.md": "a5a8802538e9c93772e95ebceee523b986e7fe84fce8ec242e89f0393a7f6d1e",
+    "agents/expense-reimburse-expert.md": "c8aaf7f541cfc09171d047bc86812ca28e010fe05e09e93df2466c96bad9b80d",
+    "agents/finance-toolkit-pro-fixed.md": "1927790055a42388e649d6f4b3d1e44888d1074b381db489724384ff21aeb381",
+    "agents/tourism-itinerary.md": "679fd121414f1c6b164df852a4993f148b443d8aa3a6a3059b997391235c167b",
+    "plugin.json": "d0fcca050f3bd3b14b142f31ea640cf88719c7795f75595fbb87146e54b89ef7",
+    "settings.json": "9b448d1208a2647f891961629bf9ec573c19f4d1f4347fd858431d50cf4a302e"
+  }
+}

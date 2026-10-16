@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-684",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-684",
+    "kind": "team",
+    "name": "生活计划出行饮食专家",
+    "description": "输入集成测试相关需求，输出场景真实、环境隔离、数据准备三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "life-plan-forge-expert-team-lead",
+        "role": "lead",
+        "name": "生活计划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "life-plan-forge-expert",
+        "role": "member",
+        "name": "生活计划 出行饮食 清单生成",
+        "evidence": "original_assets/life-plan-forge-expert/merkle_root",
+        "member_merkle_root": "3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b"
+      },
+      {
+        "slug": "integration-test-pro",
+        "role": "member",
+        "name": "集成测试 场景覆盖 顾问",
+        "evidence": "original_assets/integration-test-pro/merkle_root",
+        "member_merkle_root": "11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8"
+      },
+      {
+        "slug": "sop-compliance-check",
+        "role": "member",
+        "name": "流程合规 步骤核验 顾问",
+        "evidence": "original_assets/sop-compliance-check/merkle_root",
+        "member_merkle_root": "eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f"
+      }
+    ],
+    "team_lead": "life-plan-forge-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3085bbc0c5721339",
+  "prompt_hash": "583c587a807bb4af",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-684\", \"kind\": \"team\", \"name\": \"生活计划出行饮食专家\", \"description\": \"输入集成测试相关需求，输出场景真实、环境隔离、数据准备三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"life-plan-forge-expert-team-lead\", \"role\": \"lead\", \"name\": \"生活计划主理人\", \"evidence\": null}, {\"slug\": \"life-plan-forge-expert\", \"role\": \"member\", \"name\": \"生活计划 出行饮食 清单生成\", \"evidence\": \"original_assets/life-plan-forge-expert/merkle_root\", \"member_merkle_root\": \"3ac0d7458168a20e2dfe893d70ef66cd5b23e82a1f5d0e0700dec69f91c39d3b\"}, {\"slug\": \"integration-test-pro\", \"role\": \"member\", \"name\": \"集成测试 场景覆盖 顾问\", \"evidence\": \"original_assets/integration-test-pro/merkle_root\", \"member_merkle_root\": \"11910bc402a29d13a3e2d432b3e99fd0ef4bc1beb26854634c3b7d0a2adc97b8\"}, {\"slug\": \"sop-compliance-check\", \"role\": \"member\", \"name\": \"流程合规 步骤核验 顾问\", \"evidence\": \"original_assets/sop-compliance-check/merkle_root\", \"member_merkle_root\": \"eae85bb970e8b511a3f48524b405042475b7d464a6a5504f5ba81fbf9c80605f\"}], \"team_lead\": \"life-plan-forge-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/integration-test-pro.md": "f5d91d865d4a3e21df9c5fd4287dbe2cbd65785177f47ca015305dec77b914c3",
+    "agents/life-plan-forge-expert-team-lead.md": "73ae8acad0f951ec130be3f1cb0d7459f46e86c4c2e8047a9c1f183db4fe3527",
+    "agents/life-plan-forge-expert.md": "1719ee9b3e446e81bd663e36df5470758071270885fb4fb7a45c3349e244ad94",
+    "agents/sop-compliance-check.md": "6a48a734d15e02ff5b57ceb9551ba80012dd9af702481d2df891f41d710fefc7",
+    "plugin.json": "f272eeb71e34a5df451b66e07d0aef6bdc7589cfb17770aa3312f7512ac426a4",
+    "settings.json": "8d8725c4731202d70598125866bc73c5f25ecee4abb0f294a34df32ffcd1775f"
+  }
+}

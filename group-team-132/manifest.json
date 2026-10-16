@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-132",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-132",
+    "kind": "team",
+    "name": "库存 管理 多仓 供应商 团队",
+    "description": "库存 管理 多仓 供应商 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "inventory-basic-coach-team-lead",
+        "role": "lead",
+        "name": "库存管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "inventory-basic-coach",
+        "role": "member",
+        "name": "库存管理 补货节奏 助手",
+        "evidence": "original_assets/inventory-basic-coach/merkle_root",
+        "member_merkle_root": "d55858a2aaffc6ef2d2e474562de2d2016dfc879b7d07775d85736056a29e23d"
+      },
+      {
+        "slug": "inventory-sync-guide",
+        "role": "member",
+        "name": "库存多仓 同步对账 顾问",
+        "evidence": "original_assets/inventory-sync-guide/merkle_root",
+        "member_merkle_root": "7cc4d7090d9feaf3dde437662104ed4be0de99c0533e0f10b3c267e1fcc71824"
+      },
+      {
+        "slug": "supplier-quote-compare",
+        "role": "member",
+        "name": "供应商报价 比价谈判 助手",
+        "evidence": "original_assets/supplier-quote-compare/merkle_root",
+        "member_merkle_root": "c1a6876486ff5d112fb4d99b1f15af62c5b66d0192d54c7d99e7f0070cf78e6c"
+      }
+    ],
+    "team_lead": "inventory-basic-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "81ed1e5931259bf7",
+  "prompt_hash": "11b6570d3ed70147",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-132\", \"kind\": \"team\", \"name\": \"库存 管理 多仓 供应商 团队\", \"description\": \"库存 管理 多仓 供应商 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"inventory-basic-coach-team-lead\", \"role\": \"lead\", \"name\": \"库存管理主理人\", \"evidence\": null}, {\"slug\": \"inventory-basic-coach\", \"role\": \"member\", \"name\": \"库存管理 补货节奏 助手\", \"evidence\": \"original_assets/inventory-basic-coach/merkle_root\", \"member_merkle_root\": \"d55858a2aaffc6ef2d2e474562de2d2016dfc879b7d07775d85736056a29e23d\"}, {\"slug\": \"inventory-sync-guide\", \"role\": \"member\", \"name\": \"库存多仓 同步对账 顾问\", \"evidence\": \"original_assets/inventory-sync-guide/merkle_root\", \"member_merkle_root\": \"7cc4d7090d9feaf3dde437662104ed4be0de99c0533e0f10b3c267e1fcc71824\"}, {\"slug\": \"supplier-quote-compare\", \"role\": \"member\", \"name\": \"供应商报价 比价谈判 助手\", \"evidence\": \"original_assets/supplier-quote-compare/merkle_root\", \"member_merkle_root\": \"c1a6876486ff5d112fb4d99b1f15af62c5b66d0192d54c7d99e7f0070cf78e6c\"}], \"team_lead\": \"inventory-basic-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/inventory-basic-coach-team-lead.md": "aec4568d78254fc5dc8a127752472191b349e9b961884fbd4491fa51feadb47f",
+    "agents/inventory-basic-coach.md": "45157786310716d925daee2f119d03c79d4e242c842f43f9638b13da0983cefe",
+    "agents/inventory-sync-guide.md": "31cdca3c36e32346686461f1015e9754197708e57dab4b19c4240e52c5314a98",
+    "agents/supplier-quote-compare.md": "aa5ba31f7cbbae7fde0fd9ab8eac1f83d4ff7ac6e2cb06e69fafb453465f2a30",
+    "plugin.json": "cbd0842d9266947d3aa056abfd0d0135f1e37745180b51eb8958247e73f74137",
+    "settings.json": "23111e4d0bda9fb1a862b8c6cc1bfa533c5c546c1588964a056b7a36a41b3e4f"
+  }
+}

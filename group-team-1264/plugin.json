@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-format-unify-team-lead",
+  "agents": [
+    "./agents/doc-format-unify-team-lead.md",
+    "./agents/doc-format-unify.md",
+    "./agents/landing-page-opt.md",
+    "./agents/market-intelligence-expert-v111.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 文档格式统一",
+    "zh": "帮我处理文档格式统一"
+  },
+  "description": "doc-format-unify team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档格式统一 end-to-end: 样式驱动, 标题层级 and 编号自动. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长样式驱动、标题层级与编号自动，覆盖文档格式统一全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-format-unify Team",
+    "zh": "文档格式统一助手专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-format-unify-team-lead",
+      "name": {
+        "en": "文档格式统一主理人",
+        "zh": "文档格式统一主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-format-unify.png",
+      "id": "doc-format-unify",
+      "name": {
+        "en": "doc-format-unify",
+        "zh": "文档格式统一 助手"
+      },
+      "profession": {
+        "en": "doc-format-unify",
+        "zh": "文档格式统一 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/landing-page-opt.png",
+      "id": "landing-page-opt",
+      "name": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "profession": {
+        "en": "landing-page-opt",
+        "zh": "落地页 转化优化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/market-intelligence-expert-v111.png",
+      "id": "market-intelligence-expert-v111",
+      "name": {
+        "en": "IntelScope",
+        "zh": "市场洞察 竞品追踪 情报简报"
+      },
+      "profession": {
+        "en": "IntelScope",
+        "zh": "市场洞察 竞品追踪 情报简报"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1264",
+  "plugin": "group-team-1264",
+  "profession": {
+    "en": "doc-format-unify Collaboration Team",
+    "zh": "文档格式统一助手专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档格式统一",
+      "zh": "帮我处理文档格式统一"
+    },
+    {
+      "en": "Plan 落地页",
+      "zh": "帮我规划落地页"
+    },
+    {
+      "en": "Review 市场洞察",
+      "zh": "帮我检查市场洞察"
+    }
+  ],
+  "tags": [
+    {
+      "en": "样式驱动",
+      "zh": "样式驱动"
+    },
+    {
+      "en": "标题层级",
+      "zh": "标题层级"
+    },
+    {
+      "en": "编号自动",
+      "zh": "编号自动"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-format-unify-team-lead",
+    "memberAgents": [
+      "doc-format-unify",
+      "landing-page-opt",
+      "market-intelligence-expert-v111"
+    ]
+  },
+  "version": "1.0.0"
+}

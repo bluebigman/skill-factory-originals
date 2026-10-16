@@ -1,0 +1,126 @@
+{
+  "agentName": "tool-interface-design-pro-team-lead",
+  "agents": [
+    "./agents/tool-interface-design-pro-team-lead.md",
+    "./agents/tool-interface-design-pro.md",
+    "./agents/data-quality-score.md",
+    "./agents/chart-select-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 工具设计",
+    "zh": "帮我处理工具设计"
+  },
+  "description": "tool-interface-design-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 工具设计 end-to-end: 字段类型, 必填标注 and 描述充分. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长字段类型、必填标注与描述充分，覆盖工具设计全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "tool-interface-design-pro Team",
+    "zh": "工具设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "tool-interface-design-pro-team-lead",
+      "name": {
+        "en": "工具设计主理人",
+        "zh": "工具设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/tool-interface-design-pro.png",
+      "id": "tool-interface-design-pro",
+      "name": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "profession": {
+        "en": "tool-interface-design-pro",
+        "zh": "工具设计 接口契约 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-quality-score.png",
+      "id": "data-quality-score",
+      "name": {
+        "en": "data-quality-score",
+        "zh": "数据质量评分 顾问"
+      },
+      "profession": {
+        "en": "data-quality-score",
+        "zh": "数据质量评分 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/chart-select-pro.png",
+      "id": "chart-select-pro",
+      "name": {
+        "en": "chart-select-pro",
+        "zh": "图表选型 配色规范 顾问"
+      },
+      "profession": {
+        "en": "chart-select-pro",
+        "zh": "图表选型 配色规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1246",
+  "plugin": "group-team-1246",
+  "profession": {
+    "en": "tool-interface-design-pro Collaboration Team",
+    "zh": "工具设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 工具设计",
+      "zh": "帮我处理工具设计"
+    },
+    {
+      "en": "Plan 数据质量评分",
+      "zh": "帮我规划数据质量评分"
+    },
+    {
+      "en": "Review 图表选型",
+      "zh": "帮我检查图表选型"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字段类型",
+      "zh": "字段类型"
+    },
+    {
+      "en": "必填标注",
+      "zh": "必填标注"
+    },
+    {
+      "en": "描述充分",
+      "zh": "描述充分"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "tool-interface-design-pro-team-lead",
+    "memberAgents": [
+      "tool-interface-design-pro",
+      "data-quality-score",
+      "chart-select-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

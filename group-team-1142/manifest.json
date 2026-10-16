@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1142",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1142",
+    "kind": "team",
+    "name": "用户旅程地图专家",
+    "description": "用户旅程地图专家：围绕用户旅程地图，覆盖阶段划分／触点明确／情绪曲线，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "journey-map-team-lead",
+        "role": "lead",
+        "name": "用户旅程地图主理人",
+        "evidence": null
+      },
+      {
+        "slug": "journey-map",
+        "role": "member",
+        "name": "用户旅程地图 顾问",
+        "evidence": "original_assets/journey-map/merkle_root",
+        "member_merkle_root": "9b4585bf8331889d28c975778684a5229c444d37efdc828c80dd51ce36ac0595"
+      },
+      {
+        "slug": "design-taste-check",
+        "role": "member",
+        "name": "设计品味核查 顾问",
+        "evidence": "original_assets/design-taste-check/merkle_root",
+        "member_merkle_root": "8819673bac2cdeaa390dc9c080081edb7970ae7f33158340b300a6e87f1250a4"
+      },
+      {
+        "slug": "onboarding-flow",
+        "role": "member",
+        "name": "上手引导流程 顾问",
+        "evidence": "original_assets/onboarding-flow/merkle_root",
+        "member_merkle_root": "c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050"
+      }
+    ],
+    "team_lead": "journey-map-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "870d372863af7aa0",
+  "prompt_hash": "e3d455ce93334d23",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1142\", \"kind\": \"team\", \"name\": \"用户旅程地图专家\", \"description\": \"用户旅程地图专家：围绕用户旅程地图，覆盖阶段划分／触点明确／情绪曲线，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"journey-map-team-lead\", \"role\": \"lead\", \"name\": \"用户旅程地图主理人\", \"evidence\": null}, {\"slug\": \"journey-map\", \"role\": \"member\", \"name\": \"用户旅程地图 顾问\", \"evidence\": \"original_assets/journey-map/merkle_root\", \"member_merkle_root\": \"9b4585bf8331889d28c975778684a5229c444d37efdc828c80dd51ce36ac0595\"}, {\"slug\": \"design-taste-check\", \"role\": \"member\", \"name\": \"设计品味核查 顾问\", \"evidence\": \"original_assets/design-taste-check/merkle_root\", \"member_merkle_root\": \"8819673bac2cdeaa390dc9c080081edb7970ae7f33158340b300a6e87f1250a4\"}, {\"slug\": \"onboarding-flow\", \"role\": \"member\", \"name\": \"上手引导流程 顾问\", \"evidence\": \"original_assets/onboarding-flow/merkle_root\", \"member_merkle_root\": \"c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050\"}], \"team_lead\": \"journey-map-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-taste-check.md": "1dab63c29e9fda2ac1c5e12917b94404bbc6c264af753b14caf3b2c2065b0e6e",
+    "agents/journey-map-team-lead.md": "d3e8f101849caf3c445ee84fdcc42b637a53c5f29820cd7e615a8c3db5a78b92",
+    "agents/journey-map.md": "c363994792a2521774cdeda1846a206fdfa3039e86bf57e313b1f0aceb568443",
+    "agents/onboarding-flow.md": "354c7cbf4d881b00b5048b2290a96469fcc409716f011209cb14b959f4e10496",
+    "plugin.json": "d3b344e3041352d600213b589c8ba36e7dff6dd1afa0333d058759a3b32edc77",
+    "settings.json": "b32fddc2928d97ed2111aefec049b05e14d0a2ea4f847bcc1b70210e51a12527"
+  }
+}

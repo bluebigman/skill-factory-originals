@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-153",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-153",
+    "kind": "team",
+    "name": "接口 联调 调试 缓存 团队",
+    "description": "接口 联调 调试 缓存 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "api-debug-chain-pro-team-lead",
+        "role": "lead",
+        "name": "接口联调主理人",
+        "evidence": null
+      },
+      {
+        "slug": "api-debug-chain-pro",
+        "role": "member",
+        "name": "接口联调 鉴权核验 字段映射",
+        "evidence": "original_assets/api-debug-chain-pro/merkle_root",
+        "member_merkle_root": "3311dbb8e356611bf14d63bf804b0017523d0906a41514b3d0deeeb712360e9f"
+      },
+      {
+        "slug": "api-debug-pro",
+        "role": "member",
+        "name": "接口调试 请求构造 响应解析",
+        "evidence": "original_assets/api-debug-pro/merkle_root",
+        "member_merkle_root": "c34cd3a1be93c931fabd47ab677114d505714b4a082f3b899564a0893b45d747"
+      },
+      {
+        "slug": "ops-deploy-pro",
+        "role": "member",
+        "name": "缓存清理 故障排查",
+        "evidence": "original_assets/ops-deploy-pro/merkle_root",
+        "member_merkle_root": "393bd82c510b9fed7282860483bf5dce2c8b51580bd8c5c052e8471ee6c564f9"
+      }
+    ],
+    "team_lead": "api-debug-chain-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5578fc7005e23055",
+  "prompt_hash": "a27309cf00825e53",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-153\", \"kind\": \"team\", \"name\": \"接口 联调 调试 缓存 团队\", \"description\": \"接口 联调 调试 缓存 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"api-debug-chain-pro-team-lead\", \"role\": \"lead\", \"name\": \"接口联调主理人\", \"evidence\": null}, {\"slug\": \"api-debug-chain-pro\", \"role\": \"member\", \"name\": \"接口联调 鉴权核验 字段映射\", \"evidence\": \"original_assets/api-debug-chain-pro/merkle_root\", \"member_merkle_root\": \"3311dbb8e356611bf14d63bf804b0017523d0906a41514b3d0deeeb712360e9f\"}, {\"slug\": \"api-debug-pro\", \"role\": \"member\", \"name\": \"接口调试 请求构造 响应解析\", \"evidence\": \"original_assets/api-debug-pro/merkle_root\", \"member_merkle_root\": \"c34cd3a1be93c931fabd47ab677114d505714b4a082f3b899564a0893b45d747\"}, {\"slug\": \"ops-deploy-pro\", \"role\": \"member\", \"name\": \"缓存清理 故障排查\", \"evidence\": \"original_assets/ops-deploy-pro/merkle_root\", \"member_merkle_root\": \"393bd82c510b9fed7282860483bf5dce2c8b51580bd8c5c052e8471ee6c564f9\"}], \"team_lead\": \"api-debug-chain-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-debug-chain-pro-team-lead.md": "36545b42c658dfdfd0bc5f5ac92bb766a4e3ed14e28c18176955c757646f2bc8",
+    "agents/api-debug-chain-pro.md": "29ff8b36e58d43a5d768ddfeb3b9ec598ce699f158fe70a8a92c0220829fc97a",
+    "agents/api-debug-pro.md": "a78b227dbcf445ab26cd2764516fc7bcd85d04cc010df6a87df62dff4a91af8f",
+    "agents/ops-deploy-pro.md": "7c97190e39f24ae4ca842237408e419f81d2dd86292a593a79c08d7330b51f3e",
+    "plugin.json": "54c39c7ca6bfd75c504d0203e1663fb17b7f790a8e1e6c359002e5d5e1b8d37e",
+    "settings.json": "1db873a82f9249790b47348ba73333a676111eb55e8d10ffb02f4f38041ba378"
+  }
+}

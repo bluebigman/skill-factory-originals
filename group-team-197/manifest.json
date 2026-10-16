@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-197",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-197",
+    "kind": "team",
+    "name": "笔记 中文 数据 团队",
+    "description": "笔记 中文 数据 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "note-life-pro-team-lead",
+        "role": "lead",
+        "name": "笔记与生活助手主理人",
+        "evidence": null
+      },
+      {
+        "slug": "note-life-pro",
+        "role": "member",
+        "name": "笔记与生活助手",
+        "evidence": "original_assets/note-life-pro/merkle_root",
+        "member_merkle_root": "c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86"
+      },
+      {
+        "slug": "cn-rewrite-deaifier",
+        "role": "member",
+        "name": "中文改写 去AI味 风格润色",
+        "evidence": "original_assets/cn-rewrite-deaifier/merkle_root",
+        "member_merkle_root": "c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167"
+      },
+      {
+        "slug": "chart-builder-expert",
+        "role": "member",
+        "name": "图表可视化制作专家",
+        "evidence": "original_assets/chart-builder-expert/merkle_root",
+        "member_merkle_root": "9053966d41b5d0a710c644a2bf1044a3105bed3c27743e8e3dd2f648c6c10bd0"
+      }
+    ],
+    "team_lead": "note-life-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8cc7c074dfc71c0b",
+  "prompt_hash": "073ac43e1c9d0152",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-197\", \"kind\": \"team\", \"name\": \"笔记 中文 数据 团队\", \"description\": \"笔记 中文 数据 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"note-life-pro-team-lead\", \"role\": \"lead\", \"name\": \"笔记与生活助手主理人\", \"evidence\": null}, {\"slug\": \"note-life-pro\", \"role\": \"member\", \"name\": \"笔记与生活助手\", \"evidence\": \"original_assets/note-life-pro/merkle_root\", \"member_merkle_root\": \"c9f99cd374ae9e58f8dd5946f04bd08a3e3a92829a20f61c5210869b74b20e86\"}, {\"slug\": \"cn-rewrite-deaifier\", \"role\": \"member\", \"name\": \"中文改写 去AI味 风格润色\", \"evidence\": \"original_assets/cn-rewrite-deaifier/merkle_root\", \"member_merkle_root\": \"c0a90c3eef092eb2b4ee08526564aeafe7ff69b3cf3e9aacc94eda2873ffc167\"}, {\"slug\": \"chart-builder-expert\", \"role\": \"member\", \"name\": \"图表可视化制作专家\", \"evidence\": \"original_assets/chart-builder-expert/merkle_root\", \"member_merkle_root\": \"9053966d41b5d0a710c644a2bf1044a3105bed3c27743e8e3dd2f648c6c10bd0\"}], \"team_lead\": \"note-life-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/chart-builder-expert.md": "e6487dc87dcc453d4ae22fa4c6717d1974775aa4fe3d4871913ed1dfb164188c",
+    "agents/cn-rewrite-deaifier.md": "3fcf73a21dd6f27eab9ca372c03c83bc9ac8868ce701c86ed18d8dab2a185969",
+    "agents/note-life-pro-team-lead.md": "1a8926e9b385c231f351953f34208b377116d809ede1ee3e8456069cc496dad4",
+    "agents/note-life-pro.md": "434b649c8c95f7ae3f5b5a232c924643947629b1045bac80ffda53c3c3bd3f0c",
+    "plugin.json": "8a3f5119e442504bd180013ec212d9ef4562ab039abf4a2351f0b576348ff044",
+    "settings.json": "55641de2d15fd420dee1704d14349adb5e2a3536ef5d0e743b339100d4bd6bab"
+  }
+}

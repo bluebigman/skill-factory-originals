@@ -1,0 +1,126 @@
+{
+  "agentName": "event-planning-team-lead",
+  "agents": [
+    "./agents/event-planning-team-lead.md",
+    "./agents/event-planning.md",
+    "./agents/doc-style-transfer.md",
+    "./agents/longform-editing.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 活动策划",
+    "zh": "帮我处理活动策划"
+  },
+  "description": "event-planning team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 活动策划 requirements, output three deliverables: 目标单一, 预算留余, 风险预案. Verifiable end-to-end, evidence per step.",
+    "zh": "输入活动策划相关需求，输出目标单一、预算留余、风险预案三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "event-planning Team",
+    "zh": "活动策划专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "event-planning-team-lead",
+      "name": {
+        "en": "活动策划主理人",
+        "zh": "活动策划主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/event-planning.png",
+      "id": "event-planning",
+      "name": {
+        "en": "event-planning",
+        "zh": "活动策划 顾问"
+      },
+      "profession": {
+        "en": "event-planning",
+        "zh": "活动策划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-style-transfer.png",
+      "id": "doc-style-transfer",
+      "name": {
+        "en": "doc-style-transfer",
+        "zh": "文档风格迁移 助手"
+      },
+      "profession": {
+        "en": "doc-style-transfer",
+        "zh": "文档风格迁移 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/longform-editing.png",
+      "id": "longform-editing",
+      "name": {
+        "en": "longform-editing",
+        "zh": "长文编辑打磨 顾问"
+      },
+      "profession": {
+        "en": "longform-editing",
+        "zh": "长文编辑打磨 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1239",
+  "plugin": "group-team-1239",
+  "profession": {
+    "en": "event-planning Collaboration Team",
+    "zh": "活动策划专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 活动策划",
+      "zh": "帮我处理活动策划"
+    },
+    {
+      "en": "Plan 文档风格迁移",
+      "zh": "帮我规划文档风格迁移"
+    },
+    {
+      "en": "Review 长文编辑打磨",
+      "zh": "帮我检查长文编辑打磨"
+    }
+  ],
+  "tags": [
+    {
+      "en": "目标单一",
+      "zh": "目标单一"
+    },
+    {
+      "en": "预算留余",
+      "zh": "预算留余"
+    },
+    {
+      "en": "风险预案",
+      "zh": "风险预案"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "event-planning-team-lead",
+    "memberAgents": [
+      "event-planning",
+      "doc-style-transfer",
+      "longform-editing"
+    ]
+  },
+  "version": "1.0.0"
+}

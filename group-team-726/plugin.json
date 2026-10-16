@@ -1,0 +1,126 @@
+{
+  "agentName": "writing-toolkit-pro-fixed-team-lead",
+  "agents": [
+    "./agents/writing-toolkit-pro-fixed-team-lead.md",
+    "./agents/writing-toolkit-pro-fixed.md",
+    "./agents/marketing-toolkit-pro-fixed.md",
+    "./agents/doc-convert-pro-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文本净化",
+    "zh": "帮我处理文本净化"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 内容格式, covers 文本净化 / 痕迹检测 / 金融论文, delivering structured results and actionable checklists.",
+    "zh": "内容格式专家：围绕内容格式，覆盖文本净化／痕迹检测／金融论文，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "内容格式专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "writing-toolkit-pro-fixed-team-lead",
+      "name": {
+        "en": "文本净化主理人",
+        "zh": "文本净化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/writing-toolkit-pro-fixed.png",
+      "id": "writing-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/marketing-toolkit-pro-fixed.png",
+      "id": "marketing-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-fixed.png",
+      "id": "doc-convert-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-726",
+  "plugin": "group-team-726",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "内容格式专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文本净化",
+      "zh": "帮我处理文本净化"
+    },
+    {
+      "en": "Plan 联盟配置审查",
+      "zh": "帮我规划联盟配置审查"
+    },
+    {
+      "en": "Review 图片标准化",
+      "zh": "帮我检查图片标准化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文本净化",
+      "zh": "文本净化"
+    },
+    {
+      "en": "痕迹检测",
+      "zh": "痕迹检测"
+    },
+    {
+      "en": "金融论文",
+      "zh": "金融论文"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "writing-toolkit-pro-fixed-team-lead",
+    "memberAgents": [
+      "writing-toolkit-pro-fixed",
+      "marketing-toolkit-pro-fixed",
+      "doc-convert-pro-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1165",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1165",
+    "kind": "team",
+    "name": "搜索体验专家",
+    "description": "擅长容错纠错、筛选可清与历史联想，覆盖搜索体验全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "search-ux-pro-team-lead",
+        "role": "lead",
+        "name": "搜索体验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "search-ux-pro",
+        "role": "member",
+        "name": "搜索体验 检索设计 顾问",
+        "evidence": "original_assets/search-ux-pro/merkle_root",
+        "member_merkle_root": "0c877a3cdef4a30e1fdc26f0a15571605522d4ed71393989d051b3f764a92818"
+      },
+      {
+        "slug": "empty-state-pro",
+        "role": "member",
+        "name": "空状态 异常设计 顾问",
+        "evidence": "original_assets/empty-state-pro/merkle_root",
+        "member_merkle_root": "9deeff72d6b55464bc44a416ebe2035e65e11c3dea6e9c7fc305a77f1088163a"
+      },
+      {
+        "slug": "prototype-method",
+        "role": "member",
+        "name": "原型验证 保真度 顾问",
+        "evidence": "original_assets/prototype-method/merkle_root",
+        "member_merkle_root": "c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3"
+      }
+    ],
+    "team_lead": "search-ux-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6191c2a2bd416f19",
+  "prompt_hash": "04c329e0af26fa3f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1165\", \"kind\": \"team\", \"name\": \"搜索体验专家\", \"description\": \"擅长容错纠错、筛选可清与历史联想，覆盖搜索体验全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"search-ux-pro-team-lead\", \"role\": \"lead\", \"name\": \"搜索体验主理人\", \"evidence\": null}, {\"slug\": \"search-ux-pro\", \"role\": \"member\", \"name\": \"搜索体验 检索设计 顾问\", \"evidence\": \"original_assets/search-ux-pro/merkle_root\", \"member_merkle_root\": \"0c877a3cdef4a30e1fdc26f0a15571605522d4ed71393989d051b3f764a92818\"}, {\"slug\": \"empty-state-pro\", \"role\": \"member\", \"name\": \"空状态 异常设计 顾问\", \"evidence\": \"original_assets/empty-state-pro/merkle_root\", \"member_merkle_root\": \"9deeff72d6b55464bc44a416ebe2035e65e11c3dea6e9c7fc305a77f1088163a\"}, {\"slug\": \"prototype-method\", \"role\": \"member\", \"name\": \"原型验证 保真度 顾问\", \"evidence\": \"original_assets/prototype-method/merkle_root\", \"member_merkle_root\": \"c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3\"}], \"team_lead\": \"search-ux-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/empty-state-pro.md": "c75673b1b408ff2045c605755223dcea7f9e3914d348d8432d9a0d354678f622",
+    "agents/prototype-method.md": "ce35f1e758dc13aa6c58b52498546676941bc59683d46082c1e306d50b6a41b2",
+    "agents/search-ux-pro-team-lead.md": "32177b908250c4cf9d475bb7d8078a575321c9eb3788da6b3a933d8d42051ab7",
+    "agents/search-ux-pro.md": "dfbf9c65e97340e71d69aba2eddfe8f97f5f5f81aa3c4912b34288003b2d0961",
+    "plugin.json": "747e68505fdfa65e29b761fd660a5e9fbe7fc2285ee2013aa51a8a1d268aae3e",
+    "settings.json": "07c666c8e18d23f7bee8edab8f5476a32862e756ae7d1db92ceb6cf6860a6200"
+  }
+}

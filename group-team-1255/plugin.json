@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-base-pro-01-fixed-team-lead",
+  "agents": [
+    "./agents/knowledge-base-pro-01-fixed-team-lead.md",
+    "./agents/knowledge-base-pro-01-fixed.md",
+    "./agents/content-performance-review.md",
+    "./agents/doc-convert-pro-01-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 项目记忆",
+    "zh": "帮我处理项目记忆"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内容效果复盘 end-to-end: 指标先定, 对比基线 and 归因克制. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长指标先定、对比基线与归因克制，覆盖内容效果复盘全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "知识卡片专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-base-pro-01-fixed-team-lead",
+      "name": {
+        "en": "项目记忆主理人",
+        "zh": "项目记忆主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-01-fixed.png",
+      "id": "knowledge-base-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "项目记忆 知识卡片 双向链接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-performance-review.png",
+      "id": "content-performance-review",
+      "name": {
+        "en": "content-performance-review",
+        "zh": "内容效果复盘 顾问"
+      },
+      "profession": {
+        "en": "content-performance-review",
+        "zh": "内容效果复盘 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-01-fixed.png",
+      "id": "doc-convert-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文档转换 视觉美化 文本抽取"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文档转换 视觉美化 文本抽取"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1255",
+  "plugin": "group-team-1255",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "知识卡片专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 项目记忆",
+      "zh": "帮我处理项目记忆"
+    },
+    {
+      "en": "Plan 内容效果复盘",
+      "zh": "帮我规划内容效果复盘"
+    },
+    {
+      "en": "Review 文档转换",
+      "zh": "帮我检查文档转换"
+    }
+  ],
+  "tags": [
+    {
+      "en": "经验沉淀",
+      "zh": "经验沉淀"
+    },
+    {
+      "en": "笔记整理",
+      "zh": "笔记整理"
+    },
+    {
+      "en": "知识卡片",
+      "zh": "知识卡片"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-base-pro-01-fixed-team-lead",
+    "memberAgents": [
+      "knowledge-base-pro-01-fixed",
+      "content-performance-review",
+      "doc-convert-pro-01-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

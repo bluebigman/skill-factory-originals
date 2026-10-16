@@ -1,0 +1,126 @@
+{
+  "agentName": "data-archive-plan-team-lead",
+  "agents": [
+    "./agents/data-archive-plan-team-lead.md",
+    "./agents/data-archive-plan.md",
+    "./agents/license-compliance.md",
+    "./agents/agent-api-companion.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 数据归档方案",
+    "zh": "帮我处理数据归档方案"
+  },
+  "description": "data-archive-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 数据归档方案, covers 冷热分离 / 归档可查 / 恢复演练, delivering structured results and actionable checklists.",
+    "zh": "数据归档方案专家：围绕数据归档方案，覆盖冷热分离／归档可查／恢复演练，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "data-archive-plan Team",
+    "zh": "数据归档方案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-archive-plan-team-lead",
+      "name": {
+        "en": "数据归档方案主理人",
+        "zh": "数据归档方案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-archive-plan.png",
+      "id": "data-archive-plan",
+      "name": {
+        "en": "data-archive-plan",
+        "zh": "数据归档方案 顾问"
+      },
+      "profession": {
+        "en": "data-archive-plan",
+        "zh": "数据归档方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/license-compliance.png",
+      "id": "license-compliance",
+      "name": {
+        "en": "license-compliance",
+        "zh": "许可证合规 顾问"
+      },
+      "profession": {
+        "en": "license-compliance",
+        "zh": "许可证合规 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-api-companion.png",
+      "id": "agent-api-companion",
+      "name": {
+        "en": "agent-api-companion",
+        "zh": "接口助手 调试 契约 兼容"
+      },
+      "profession": {
+        "en": "agent-api-companion",
+        "zh": "接口助手 调试 契约 兼容"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1118",
+  "plugin": "group-team-1118",
+  "profession": {
+    "en": "data-archive-plan Collaboration Team",
+    "zh": "数据归档方案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据归档方案",
+      "zh": "帮我处理数据归档方案"
+    },
+    {
+      "en": "Plan 许可证合规",
+      "zh": "帮我规划许可证合规"
+    },
+    {
+      "en": "Review 接口助手",
+      "zh": "帮我检查接口助手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "冷热分离",
+      "zh": "冷热分离"
+    },
+    {
+      "en": "归档可查",
+      "zh": "归档可查"
+    },
+    {
+      "en": "恢复演练",
+      "zh": "恢复演练"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-archive-plan-team-lead",
+    "memberAgents": [
+      "data-archive-plan",
+      "license-compliance",
+      "agent-api-companion"
+    ]
+  },
+  "version": "1.0.0"
+}

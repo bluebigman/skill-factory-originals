@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-style-guide-team-lead",
+  "agents": [
+    "./agents/doc-style-guide-team-lead.md",
+    "./agents/doc-style-guide.md",
+    "./agents/document-diff-pro.md",
+    "./agents/wechat-content-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档风格规范",
+    "zh": "帮我处理文档风格规范"
+  },
+  "description": "doc-style-guide team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 文档风格规范, covers 句式克制 / 标点统一 / 数字规范, delivering structured results and actionable checklists.",
+    "zh": "擅长句式克制、标点统一与数字规范，覆盖文档风格规范全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-style-guide Team",
+    "zh": "文档风格规范顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-style-guide-team-lead",
+      "name": {
+        "en": "文档风格规范主理人",
+        "zh": "文档风格规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-style-guide.png",
+      "id": "doc-style-guide",
+      "name": {
+        "en": "doc-style-guide",
+        "zh": "文档风格规范 顾问"
+      },
+      "profession": {
+        "en": "doc-style-guide",
+        "zh": "文档风格规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/document-diff-pro.png",
+      "id": "document-diff-pro",
+      "name": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "profession": {
+        "en": "document-diff-pro",
+        "zh": "文档比对 版本差异 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/wechat-content-expert.png",
+      "id": "wechat-content-expert",
+      "name": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "profession": {
+        "en": "WechatPro",
+        "zh": "号手 公众号排版 图文美化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-969",
+  "plugin": "group-team-969",
+  "profession": {
+    "en": "doc-style-guide Collaboration Team",
+    "zh": "文档风格规范顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档风格规范",
+      "zh": "帮我处理文档风格规范"
+    },
+    {
+      "en": "Plan 文档比对",
+      "zh": "帮我规划文档比对"
+    },
+    {
+      "en": "Review 号手",
+      "zh": "帮我检查号手"
+    }
+  ],
+  "tags": [
+    {
+      "en": "术语表先建",
+      "zh": "术语表先建"
+    },
+    {
+      "en": "句式克制",
+      "zh": "句式克制"
+    },
+    {
+      "en": "标点统一",
+      "zh": "标点统一"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-style-guide-team-lead",
+    "memberAgents": [
+      "doc-style-guide",
+      "document-diff-pro",
+      "wechat-content-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

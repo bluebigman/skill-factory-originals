@@ -1,0 +1,126 @@
+{
+  "agentName": "data-viz-pro-01-fixed-team-lead",
+  "agents": [
+    "./agents/data-viz-pro-01-fixed-team-lead.md",
+    "./agents/data-viz-pro-01-fixed.md",
+    "./agents/agent-toolkit-pro-01-fixed.md",
+    "./agents/data-clean-pro-07.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 报表数据",
+    "zh": "帮我处理报表数据"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "报表 显微 随机 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "报表 显微 随机 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-viz-pro-01-fixed-team-lead",
+      "name": {
+        "en": "报表数据主理人",
+        "zh": "报表数据主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-01-fixed.png",
+      "id": "data-viz-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "报表数据 配置解析 快速生成"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "报表数据 配置解析 快速生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-01-fixed.png",
+      "id": "agent-toolkit-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-07.png",
+      "id": "data-clean-pro-07",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "随机检索 结构化输出 置信标注"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "随机检索 结构化输出 置信标注"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-183",
+  "plugin": "group-team-183",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "报表 显微 随机 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报表数据",
+      "zh": "帮我处理报表数据"
+    },
+    {
+      "en": "Plan 显微成像",
+      "zh": "帮我规划显微成像"
+    },
+    {
+      "en": "Review 随机检索",
+      "zh": "帮我检查随机检索"
+    }
+  ],
+  "tags": [
+    {
+      "en": "报表数据",
+      "zh": "报表数据"
+    },
+    {
+      "en": "显微成像",
+      "zh": "显微成像"
+    },
+    {
+      "en": "随机检索",
+      "zh": "随机检索"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-viz-pro-01-fixed-team-lead",
+    "memberAgents": [
+      "data-viz-pro-01-fixed",
+      "agent-toolkit-pro-01-fixed",
+      "data-clean-pro-07"
+    ]
+  },
+  "version": "1.0.0"
+}

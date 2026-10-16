@@ -1,0 +1,126 @@
+{
+  "agentName": "cross-border-listing-team-lead",
+  "agents": [
+    "./agents/cross-border-listing-team-lead.md",
+    "./agents/cross-border-listing.md",
+    "./agents/after-sale-coach.md",
+    "./agents/store-copy-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 跨境上架",
+    "zh": "帮我处理跨境上架"
+  },
+  "description": "Cross Border Listing team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "跨境 售后 商品 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Cross Border Listing Team",
+    "zh": "跨境 售后 商品 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "cross-border-listing-team-lead",
+      "name": {
+        "en": "跨境上架主理人",
+        "zh": "跨境上架主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/cross-border-listing.png",
+      "id": "cross-border-listing",
+      "name": {
+        "en": "Cross Border Listing",
+        "zh": "跨境上架 多语言 顾问"
+      },
+      "profession": {
+        "en": "Cross Border Listing",
+        "zh": "跨境上架 多语言 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/after-sale-coach.png",
+      "id": "after-sale-coach",
+      "name": {
+        "en": "After Sale Coach",
+        "zh": "售后处理 退换流程 顾问"
+      },
+      "profession": {
+        "en": "After Sale Coach",
+        "zh": "售后处理 退换流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/store-copy-coach.png",
+      "id": "store-copy-coach",
+      "name": {
+        "en": "Store Copy Coach",
+        "zh": "商品文案 卖点提炼 顾问"
+      },
+      "profession": {
+        "en": "Store Copy Coach",
+        "zh": "商品文案 卖点提炼 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-159",
+  "plugin": "group-team-159",
+  "profession": {
+    "en": "Cross Border Listing Collaboration Team",
+    "zh": "跨境 售后 商品 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 跨境上架",
+      "zh": "帮我处理跨境上架"
+    },
+    {
+      "en": "Plan 售后处理",
+      "zh": "帮我规划售后处理"
+    },
+    {
+      "en": "Review 商品文案",
+      "zh": "帮我检查商品文案"
+    }
+  ],
+  "tags": [
+    {
+      "en": "跨境上架",
+      "zh": "跨境上架"
+    },
+    {
+      "en": "售后处理",
+      "zh": "售后处理"
+    },
+    {
+      "en": "商品文案",
+      "zh": "商品文案"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "cross-border-listing-team-lead",
+    "memberAgents": [
+      "cross-border-listing",
+      "after-sale-coach",
+      "store-copy-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

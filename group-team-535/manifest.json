@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-535",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-535",
+    "kind": "team",
+    "name": "沉浸体验舒适度专家",
+    "description": "沉浸体验舒适度专家：围绕沉浸体验，覆盖视差控制／舒适模式／单次限时，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ar-vr-usability-team-lead",
+        "role": "lead",
+        "name": "沉浸体验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ar-vr-usability",
+        "role": "member",
+        "name": "沉浸体验 舒适度 顾问",
+        "evidence": "original_assets/ar-vr-usability/merkle_root",
+        "member_merkle_root": "ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849"
+      },
+      {
+        "slug": "design-system-pro",
+        "role": "member",
+        "name": "设计系统 组件规范 顾问",
+        "evidence": "original_assets/design-system-pro/merkle_root",
+        "member_merkle_root": "600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce"
+      },
+      {
+        "slug": "space-wayfinding",
+        "role": "member",
+        "name": "导视系统 寻路设计 顾问",
+        "evidence": "original_assets/space-wayfinding/merkle_root",
+        "member_merkle_root": "df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e"
+      }
+    ],
+    "team_lead": "ar-vr-usability-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e6a84f3e1d592b20",
+  "prompt_hash": "c5c20ecd38296dfe",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-535\", \"kind\": \"team\", \"name\": \"沉浸体验舒适度专家\", \"description\": \"沉浸体验舒适度专家：围绕沉浸体验，覆盖视差控制／舒适模式／单次限时，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ar-vr-usability-team-lead\", \"role\": \"lead\", \"name\": \"沉浸体验主理人\", \"evidence\": null}, {\"slug\": \"ar-vr-usability\", \"role\": \"member\", \"name\": \"沉浸体验 舒适度 顾问\", \"evidence\": \"original_assets/ar-vr-usability/merkle_root\", \"member_merkle_root\": \"ef0d1617d4bca5808b4edc28af9412d0f4ba945fbd090c7f7002d005d1d32849\"}, {\"slug\": \"design-system-pro\", \"role\": \"member\", \"name\": \"设计系统 组件规范 顾问\", \"evidence\": \"original_assets/design-system-pro/merkle_root\", \"member_merkle_root\": \"600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce\"}, {\"slug\": \"space-wayfinding\", \"role\": \"member\", \"name\": \"导视系统 寻路设计 顾问\", \"evidence\": \"original_assets/space-wayfinding/merkle_root\", \"member_merkle_root\": \"df817e5eec2829baaae4c503b61c64b31053c200c94aad830072122ab3f4f76e\"}], \"team_lead\": \"ar-vr-usability-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ar-vr-usability-team-lead.md": "406def5c34369249333e6a8ceece2beee5cbd9dcfbb640399bdaf7251a368fdb",
+    "agents/ar-vr-usability.md": "bcffc13f82db0ab5bd74e751abb0345f7a6bf36c6e47f5b7d33cc4cf28cd0eb6",
+    "agents/design-system-pro.md": "4cb50b7d24642457f09278d89272ae56676c5d0a3e10f19560fdcd68c8304d75",
+    "agents/space-wayfinding.md": "45f735a71c9a78d834e5329c19834c70fad946ca813b3c969d7f1d291028b736",
+    "plugin.json": "7b9908d10914309c3df24e9cf551992d6596669a95cbef896189d71de51c2982",
+    "settings.json": "9fe5096bb3f946ab7c6cfb32db4667a80c06ae1f6974dfe5b223ff58de682661"
+  }
+}

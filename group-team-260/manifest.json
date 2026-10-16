@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-260",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-260",
+    "kind": "team",
+    "name": "配额守卫专家",
+    "description": "输入配额守卫相关需求，输出预算上限、失败即停、来源盘点三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-quota-guard-team-lead",
+        "role": "lead",
+        "name": "配额守卫主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-quota-guard",
+        "role": "member",
+        "name": "配额守卫 资源限额 顾问",
+        "evidence": "original_assets/agent-quota-guard/merkle_root",
+        "member_merkle_root": "4895642aee8cc689ff9d1d3066f9e27de73b1ce5f13e5dca2f75149fec0a52a6"
+      },
+      {
+        "slug": "influencer-compliance",
+        "role": "member",
+        "name": "推广合规 标识规范 顾问",
+        "evidence": "original_assets/influencer-compliance/merkle_root",
+        "member_merkle_root": "07ef56b2d69ea1e67cad6d8623ad3baeb1401883c3136c8807153bdd6045434c"
+      },
+      {
+        "slug": "agent-supervision-guard",
+        "role": "member",
+        "name": "运行监督 异常告警 顾问",
+        "evidence": "original_assets/agent-supervision-guard/merkle_root",
+        "member_merkle_root": "a81161985f5091d1e7d144e4fbf436406bfe37c06fdb126edfce8db79cdb99d2"
+      }
+    ],
+    "team_lead": "agent-quota-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d56789aff183163c",
+  "prompt_hash": "70d0fe9b3967c213",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-260\", \"kind\": \"team\", \"name\": \"配额守卫专家\", \"description\": \"输入配额守卫相关需求，输出预算上限、失败即停、来源盘点三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-quota-guard-team-lead\", \"role\": \"lead\", \"name\": \"配额守卫主理人\", \"evidence\": null}, {\"slug\": \"agent-quota-guard\", \"role\": \"member\", \"name\": \"配额守卫 资源限额 顾问\", \"evidence\": \"original_assets/agent-quota-guard/merkle_root\", \"member_merkle_root\": \"4895642aee8cc689ff9d1d3066f9e27de73b1ce5f13e5dca2f75149fec0a52a6\"}, {\"slug\": \"influencer-compliance\", \"role\": \"member\", \"name\": \"推广合规 标识规范 顾问\", \"evidence\": \"original_assets/influencer-compliance/merkle_root\", \"member_merkle_root\": \"07ef56b2d69ea1e67cad6d8623ad3baeb1401883c3136c8807153bdd6045434c\"}, {\"slug\": \"agent-supervision-guard\", \"role\": \"member\", \"name\": \"运行监督 异常告警 顾问\", \"evidence\": \"original_assets/agent-supervision-guard/merkle_root\", \"member_merkle_root\": \"a81161985f5091d1e7d144e4fbf436406bfe37c06fdb126edfce8db79cdb99d2\"}], \"team_lead\": \"agent-quota-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-quota-guard-team-lead.md": "ff47274662a79b63b734c58a92cd9d73664f21875c4c3507602715ef58dcb23f",
+    "agents/agent-quota-guard.md": "b97424a0a94a7c930af67c6959253b211d1d49f0da1dea776dd99024b90b40e1",
+    "agents/agent-supervision-guard.md": "521e8982b9fbef217bc11ef104555795fa1f96c94537632f76eab320c0147a0e",
+    "agents/influencer-compliance.md": "640112f0eb84472599cdb818cfbb2a9dd9001421bb7b548e48f1f9ff109ca1c9",
+    "plugin.json": "a82c4302ebb1bac1f1f1241a6b76b40dd8f26c2d4441298992f812841ac249e3",
+    "settings.json": "2efc2844e8255be8cd41232f78bfd2417d9360f34c19d8e2506d70a8d172d16d"
+  }
+}

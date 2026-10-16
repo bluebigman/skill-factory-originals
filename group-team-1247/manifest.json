@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1247",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1247",
+    "kind": "team",
+    "name": "报告数据核验顾问专家",
+    "description": "擅长口径先对、交叉验证与异常问因，覆盖报告数据核验全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "report-data-verify-team-lead",
+        "role": "lead",
+        "name": "报告数据核验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "report-data-verify",
+        "role": "member",
+        "name": "报告数据核验 顾问",
+        "evidence": "original_assets/report-data-verify/merkle_root",
+        "member_merkle_root": "577adfc1ad40ebc68b3efd1c7650d85b61e80dc2414dc9f73cf114da694136b4"
+      },
+      {
+        "slug": "game-team-workflow",
+        "role": "member",
+        "name": "游戏团队 协作流程 顾问",
+        "evidence": "original_assets/game-team-workflow/merkle_root",
+        "member_merkle_root": "74b7274e4168683e87965a695ea8531e3629e476ea420312d23f3aea32dfd5e5"
+      },
+      {
+        "slug": "incident-postmortem-pro",
+        "role": "member",
+        "name": "事故复盘 根因分析 顾问",
+        "evidence": "original_assets/incident-postmortem-pro/merkle_root",
+        "member_merkle_root": "19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1"
+      }
+    ],
+    "team_lead": "report-data-verify-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "42ab3ac16a16d597",
+  "prompt_hash": "c5d8f2b93aa16fe9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1247\", \"kind\": \"team\", \"name\": \"报告数据核验顾问专家\", \"description\": \"擅长口径先对、交叉验证与异常问因，覆盖报告数据核验全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"report-data-verify-team-lead\", \"role\": \"lead\", \"name\": \"报告数据核验主理人\", \"evidence\": null}, {\"slug\": \"report-data-verify\", \"role\": \"member\", \"name\": \"报告数据核验 顾问\", \"evidence\": \"original_assets/report-data-verify/merkle_root\", \"member_merkle_root\": \"577adfc1ad40ebc68b3efd1c7650d85b61e80dc2414dc9f73cf114da694136b4\"}, {\"slug\": \"game-team-workflow\", \"role\": \"member\", \"name\": \"游戏团队 协作流程 顾问\", \"evidence\": \"original_assets/game-team-workflow/merkle_root\", \"member_merkle_root\": \"74b7274e4168683e87965a695ea8531e3629e476ea420312d23f3aea32dfd5e5\"}, {\"slug\": \"incident-postmortem-pro\", \"role\": \"member\", \"name\": \"事故复盘 根因分析 顾问\", \"evidence\": \"original_assets/incident-postmortem-pro/merkle_root\", \"member_merkle_root\": \"19cef863ec59ea3e69e8a56a48e644a21004e0d83f06f779ec7044d0598b38e1\"}], \"team_lead\": \"report-data-verify-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-team-workflow.md": "ad35e9a466b4f53618b242951b5c434e5228b5fd05dea6513b8e211da823fad5",
+    "agents/incident-postmortem-pro.md": "3f9178773ace41b11952995bfc4ae10a73090bb77215cce08b0028e979b73594",
+    "agents/report-data-verify-team-lead.md": "688d5dbff8492bb88ce1bd807e3ea861ef2b7260ca245a2d5f4089d994be784b",
+    "agents/report-data-verify.md": "bb054c1f16bbe403ed133b6b14135307199c328f643e2ccf9db4f4a4a7bb6966",
+    "plugin.json": "1a882e8ba0a79ce90788bb99fa2be17b874e2a66f0723205a62be7b8b03ee5d6",
+    "settings.json": "9a5d81f8553be3b57f8bf76832b87b423d5015665217dccc97c8a5db67b26db0"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "ppt-visual-tune-team-lead",
+  "agents": [
+    "./agents/ppt-visual-tune-team-lead.md",
+    "./agents/ppt-visual-tune.md",
+    "./agents/game-onboarding-pro.md",
+    "./agents/doc-accessibility.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle PPT",
+    "zh": "帮我处理PPT"
+  },
+  "description": "ppt-visual-tune team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input PPT requirements, output three deliverables: 边做边教, 一次一点, 早期首胜. Verifiable end-to-end, evidence per step.",
+    "zh": "输入PPT相关需求，输出边做边教、一次一点、早期首胜三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "ppt-visual-tune Team",
+    "zh": "视觉调专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ppt-visual-tune-team-lead",
+      "name": {
+        "en": "PPT主理人",
+        "zh": "PPT主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ppt-visual-tune.png",
+      "id": "ppt-visual-tune",
+      "name": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "profession": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-onboarding-pro.png",
+      "id": "game-onboarding-pro",
+      "name": {
+        "en": "game-onboarding-pro",
+        "zh": "游戏新手 引导设计 顾问"
+      },
+      "profession": {
+        "en": "game-onboarding-pro",
+        "zh": "游戏新手 引导设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-accessibility.png",
+      "id": "doc-accessibility",
+      "name": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "profession": {
+        "en": "doc-accessibility",
+        "zh": "文档无障碍 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-924",
+  "plugin": "group-team-924",
+  "profession": {
+    "en": "ppt-visual-tune Collaboration Team",
+    "zh": "视觉调专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle PPT",
+      "zh": "帮我处理PPT"
+    },
+    {
+      "en": "Plan 游戏新手",
+      "zh": "帮我规划游戏新手"
+    },
+    {
+      "en": "Review 文档无障碍",
+      "zh": "帮我检查文档无障碍"
+    }
+  ],
+  "tags": [
+    {
+      "en": "对比度",
+      "zh": "对比度"
+    },
+    {
+      "en": "对齐网格",
+      "zh": "对齐网格"
+    },
+    {
+      "en": "配色不超三",
+      "zh": "配色不超三"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ppt-visual-tune-team-lead",
+    "memberAgents": [
+      "ppt-visual-tune",
+      "game-onboarding-pro",
+      "doc-accessibility"
+    ]
+  },
+  "version": "1.0.0"
+}

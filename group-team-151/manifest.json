@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-151",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-151",
+    "kind": "team",
+    "name": "数值 游戏 世界观 团队",
+    "description": "数值 游戏 世界观 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "game-balance-coach-team-lead",
+        "role": "lead",
+        "name": "数值平衡主理人",
+        "evidence": null
+      },
+      {
+        "slug": "game-balance-coach",
+        "role": "member",
+        "name": "数值平衡 强弱调整 顾问",
+        "evidence": "original_assets/game-balance-coach/merkle_root",
+        "member_merkle_root": "ff46ac254e7537195369b2046f4d2262c1312eb873f980fc932fc91636bde542"
+      },
+      {
+        "slug": "game-event-plan",
+        "role": "member",
+        "name": "游戏活动 节奏设计 顾问",
+        "evidence": "original_assets/game-event-plan/merkle_root",
+        "member_merkle_root": "8ff41999c2a66477361681ac79fcf6649e4af5be92c2ea203a7ec20c9d73bb93"
+      },
+      {
+        "slug": "game-copy-write",
+        "role": "member",
+        "name": "游戏文案 世界观 教练",
+        "evidence": "original_assets/game-copy-write/merkle_root",
+        "member_merkle_root": "7bde39ffafd2f453533c3f0a077496c182fb52528f369099a2510af3cf47f6e9"
+      }
+    ],
+    "team_lead": "game-balance-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0be92af18a7cbebb",
+  "prompt_hash": "e31b943ca28a7685",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-151\", \"kind\": \"team\", \"name\": \"数值 游戏 世界观 团队\", \"description\": \"数值 游戏 世界观 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"game-balance-coach-team-lead\", \"role\": \"lead\", \"name\": \"数值平衡主理人\", \"evidence\": null}, {\"slug\": \"game-balance-coach\", \"role\": \"member\", \"name\": \"数值平衡 强弱调整 顾问\", \"evidence\": \"original_assets/game-balance-coach/merkle_root\", \"member_merkle_root\": \"ff46ac254e7537195369b2046f4d2262c1312eb873f980fc932fc91636bde542\"}, {\"slug\": \"game-event-plan\", \"role\": \"member\", \"name\": \"游戏活动 节奏设计 顾问\", \"evidence\": \"original_assets/game-event-plan/merkle_root\", \"member_merkle_root\": \"8ff41999c2a66477361681ac79fcf6649e4af5be92c2ea203a7ec20c9d73bb93\"}, {\"slug\": \"game-copy-write\", \"role\": \"member\", \"name\": \"游戏文案 世界观 教练\", \"evidence\": \"original_assets/game-copy-write/merkle_root\", \"member_merkle_root\": \"7bde39ffafd2f453533c3f0a077496c182fb52528f369099a2510af3cf47f6e9\"}], \"team_lead\": \"game-balance-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-balance-coach-team-lead.md": "a6f29091369c31ab99e56c174a79b8bb631d6c0e4907e17d7d618a4f39aa1b80",
+    "agents/game-balance-coach.md": "e7c8483bf68763d7c8be09c3968ff6ed72e89a44ac9f464f6221ec4aa3be76f1",
+    "agents/game-copy-write.md": "98b34af227db1a85bff695dcded6f8a2c90176806900d83fdb13958ec0ad1b2f",
+    "agents/game-event-plan.md": "129ac4b4d395a62b4a4892dc86313e6996a4ad4088f51e4a04b31d63a5a326a9",
+    "plugin.json": "8a81bbe053962ac23d5e6d36f919eb978936ec25c4b321ca00ffec560dd5cd84",
+    "settings.json": "f6cfe5f524dc1b0d4180f879bd21c5afdd3b30017407618d5f31cdc461b71c73"
+  }
+}

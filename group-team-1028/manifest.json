@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1028",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1028",
+    "kind": "team",
+    "name": "文档比对合并专家",
+    "description": "文档比对合并专家：围绕文档比对合并，覆盖逐段比对／差异分级／合并策略，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-compare-merge-team-lead",
+        "role": "lead",
+        "name": "文档比对合并主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-compare-merge",
+        "role": "member",
+        "name": "文档比对合并 助手",
+        "evidence": "original_assets/doc-compare-merge/merkle_root",
+        "member_merkle_root": "309ae49206afaca4d38c5123a7964b462467feec2b6d51d47daf5bd17688d16a"
+      },
+      {
+        "slug": "remote-team-coach",
+        "role": "member",
+        "name": "远程团队 协作规范 教练",
+        "evidence": "original_assets/remote-team-coach/merkle_root",
+        "member_merkle_root": "fd153c2b120f3c771fa5b49ccf1cdc60ad2c9a6b54c34d0686013e54b205e3be"
+      },
+      {
+        "slug": "cold-email-expert",
+        "role": "member",
+        "name": "邮件营销 标题撰写 转化优化",
+        "evidence": "original_assets/cold-email-expert/merkle_root",
+        "member_merkle_root": "458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc"
+      }
+    ],
+    "team_lead": "doc-compare-merge-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a7b560d4604df1b3",
+  "prompt_hash": "0e062f385a9047ef",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1028\", \"kind\": \"team\", \"name\": \"文档比对合并专家\", \"description\": \"文档比对合并专家：围绕文档比对合并，覆盖逐段比对／差异分级／合并策略，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-compare-merge-team-lead\", \"role\": \"lead\", \"name\": \"文档比对合并主理人\", \"evidence\": null}, {\"slug\": \"doc-compare-merge\", \"role\": \"member\", \"name\": \"文档比对合并 助手\", \"evidence\": \"original_assets/doc-compare-merge/merkle_root\", \"member_merkle_root\": \"309ae49206afaca4d38c5123a7964b462467feec2b6d51d47daf5bd17688d16a\"}, {\"slug\": \"remote-team-coach\", \"role\": \"member\", \"name\": \"远程团队 协作规范 教练\", \"evidence\": \"original_assets/remote-team-coach/merkle_root\", \"member_merkle_root\": \"fd153c2b120f3c771fa5b49ccf1cdc60ad2c9a6b54c34d0686013e54b205e3be\"}, {\"slug\": \"cold-email-expert\", \"role\": \"member\", \"name\": \"邮件营销 标题撰写 转化优化\", \"evidence\": \"original_assets/cold-email-expert/merkle_root\", \"member_merkle_root\": \"458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc\"}], \"team_lead\": \"doc-compare-merge-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cold-email-expert.md": "34ea74882702652593b47fb9517b4e321a3e058bb069ae495d24a69971b350f3",
+    "agents/doc-compare-merge-team-lead.md": "1f6d821701fcffddc9f8c72afd6a9781e8e9bb58a001950e948718f7479f5679",
+    "agents/doc-compare-merge.md": "1539a974e8de90a3fbb0b6814801483b477ea1eff9dc0f77f226b0fd64470be2",
+    "agents/remote-team-coach.md": "5128efa6ce30857f1c91c4fa500b3bd76103df2d3bfb3e8d0e92aa012dd3ccff",
+    "plugin.json": "775bb8cbd35d37e86fe1bfc4e8b1ce9b15b9fbb3bdfd46ed174fba48007ceb0d",
+    "settings.json": "ba9792f98423d18bc6e7007eee4d74cb6c1f7f7b33084dae9bf3bf733a96f3d5"
+  }
+}

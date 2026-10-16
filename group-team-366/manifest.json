@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-366",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-366",
+    "kind": "team",
+    "name": "效果评测专家",
+    "description": "输入SQL相关需求，输出索引匹配、避免函数、分页优化三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-perf-tune-team-lead",
+        "role": "lead",
+        "name": "SQL主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-perf-tune",
+        "role": "member",
+        "name": "SQL 调优 顾问",
+        "evidence": "original_assets/sql-perf-tune/merkle_root",
+        "member_merkle_root": "e6b662ffe52a65d1a2a2d94c00fd2ea404a3d977efb7c0256bfcaafa6537838e"
+      },
+      {
+        "slug": "agent-eval-framework",
+        "role": "member",
+        "name": "效果评测 用例设计 顾问",
+        "evidence": "original_assets/agent-eval-framework/merkle_root",
+        "member_merkle_root": "71c0c0c1b0c3e57e2da89192fb36193a6b4069dd047e08e188bb91d1a0bbe0a8"
+      },
+      {
+        "slug": "data-lineage-trace",
+        "role": "member",
+        "name": "数据血缘 链路追踪 顾问",
+        "evidence": "original_assets/data-lineage-trace/merkle_root",
+        "member_merkle_root": "a6ef6cbb3e56720199394282bdf0e400017a23348e1c9197b79af905549bcbc8"
+      }
+    ],
+    "team_lead": "sql-perf-tune-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4f02ed5b1d52efed",
+  "prompt_hash": "b56e410d10bc64f6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-366\", \"kind\": \"team\", \"name\": \"效果评测专家\", \"description\": \"输入SQL相关需求，输出索引匹配、避免函数、分页优化三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-perf-tune-team-lead\", \"role\": \"lead\", \"name\": \"SQL主理人\", \"evidence\": null}, {\"slug\": \"sql-perf-tune\", \"role\": \"member\", \"name\": \"SQL 调优 顾问\", \"evidence\": \"original_assets/sql-perf-tune/merkle_root\", \"member_merkle_root\": \"e6b662ffe52a65d1a2a2d94c00fd2ea404a3d977efb7c0256bfcaafa6537838e\"}, {\"slug\": \"agent-eval-framework\", \"role\": \"member\", \"name\": \"效果评测 用例设计 顾问\", \"evidence\": \"original_assets/agent-eval-framework/merkle_root\", \"member_merkle_root\": \"71c0c0c1b0c3e57e2da89192fb36193a6b4069dd047e08e188bb91d1a0bbe0a8\"}, {\"slug\": \"data-lineage-trace\", \"role\": \"member\", \"name\": \"数据血缘 链路追踪 顾问\", \"evidence\": \"original_assets/data-lineage-trace/merkle_root\", \"member_merkle_root\": \"a6ef6cbb3e56720199394282bdf0e400017a23348e1c9197b79af905549bcbc8\"}], \"team_lead\": \"sql-perf-tune-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-eval-framework.md": "fc6ef950c278834b87dce684ef269143f4a6962bcc84376d3d0644a7ff813607",
+    "agents/data-lineage-trace.md": "2b98a7b51c8021ecc0c7c5c0c863d4dd913a36838e00403d969e296a2dd7b14b",
+    "agents/sql-perf-tune-team-lead.md": "08d6f4260e81c69cbd11e06ee906ee39ced27edde52f7ed48d467159be7404aa",
+    "agents/sql-perf-tune.md": "14f43f5cd1876f8f4a66848fe2e2d758c40527bfe5674e730474fd6adc82201e",
+    "plugin.json": "a1611c691474fb2bf67664fc78c909ab936551f6fc5fe4bc5b3fa24422e776ad",
+    "settings.json": "b3d954513e508e07c54a4b3f9b5763a6b5aef94ce9c4b6112b87ded8ee657cc4"
+  }
+}

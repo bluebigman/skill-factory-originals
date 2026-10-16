@@ -1,0 +1,126 @@
+{
+  "agentName": "data-clean-pro-05-team-lead",
+  "agents": [
+    "./agents/data-clean-pro-05-team-lead.md",
+    "./agents/data-clean-pro-05.md",
+    "./agents/table-formula-pro.md",
+    "./agents/doc-legal-boundary.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据解析",
+    "zh": "帮我处理数据解析"
+  },
+  "description": "数据清洗与结构化 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 表格公式 requirements, output three deliverables: 引用检查, 类型匹配, 循环引用. Verifiable end-to-end, evidence per step.",
+    "zh": "输入表格公式相关需求，输出引用检查、类型匹配、循环引用三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "数据清洗与结构化 Suite Team",
+    "zh": "数据解析信息抽取专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-clean-pro-05-team-lead",
+      "name": {
+        "en": "数据解析主理人",
+        "zh": "数据解析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-05.png",
+      "id": "data-clean-pro-05",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据解析 信息抽取 置信标注"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/table-formula-pro.png",
+      "id": "table-formula-pro",
+      "name": {
+        "en": "table-formula-pro",
+        "zh": "表格公式 报错排查 顾问"
+      },
+      "profession": {
+        "en": "table-formula-pro",
+        "zh": "表格公式 报错排查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-legal-boundary.png",
+      "id": "doc-legal-boundary",
+      "name": {
+        "en": "doc-legal-boundary",
+        "zh": "文档合规边界 顾问"
+      },
+      "profession": {
+        "en": "doc-legal-boundary",
+        "zh": "文档合规边界 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-837",
+  "plugin": "group-team-837",
+  "profession": {
+    "en": "数据清洗与结构化 Suite Collaboration Team",
+    "zh": "数据解析信息抽取专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据解析",
+      "zh": "帮我处理数据解析"
+    },
+    {
+      "en": "Plan 表格公式",
+      "zh": "帮我规划表格公式"
+    },
+    {
+      "en": "Review 文档合规边界",
+      "zh": "帮我检查文档合规边界"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据整理",
+      "zh": "数据整理"
+    },
+    {
+      "en": "置信标注",
+      "zh": "置信标注"
+    },
+    {
+      "en": "结构化转换",
+      "zh": "结构化转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-clean-pro-05-team-lead",
+    "memberAgents": [
+      "data-clean-pro-05",
+      "table-formula-pro",
+      "doc-legal-boundary"
+    ]
+  },
+  "version": "1.0.0"
+}

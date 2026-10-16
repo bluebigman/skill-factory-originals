@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1108",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1108",
+    "kind": "team",
+    "name": "视觉一致性顾问专家",
+    "description": "擅长图标统一、圆角统一与分级设色，覆盖视觉一致性全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "visual-consistency-team-lead",
+        "role": "lead",
+        "name": "视觉一致性主理人",
+        "evidence": null
+      },
+      {
+        "slug": "visual-consistency",
+        "role": "member",
+        "name": "视觉一致性 顾问",
+        "evidence": "original_assets/visual-consistency/merkle_root",
+        "member_merkle_root": "62fcdba6fdca35310e527ae003f5aa6e2d9ce7f3da34c5ec1d6724a8427344cd"
+      },
+      {
+        "slug": "map-visual-design",
+        "role": "member",
+        "name": "地图可视化 表达规范 顾问",
+        "evidence": "original_assets/map-visual-design/merkle_root",
+        "member_merkle_root": "682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd"
+      },
+      {
+        "slug": "onboarding-flow",
+        "role": "member",
+        "name": "上手引导流程 顾问",
+        "evidence": "original_assets/onboarding-flow/merkle_root",
+        "member_merkle_root": "c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050"
+      }
+    ],
+    "team_lead": "visual-consistency-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a22139ba223136b9",
+  "prompt_hash": "878e3a0146a0f48b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1108\", \"kind\": \"team\", \"name\": \"视觉一致性顾问专家\", \"description\": \"擅长图标统一、圆角统一与分级设色，覆盖视觉一致性全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"visual-consistency-team-lead\", \"role\": \"lead\", \"name\": \"视觉一致性主理人\", \"evidence\": null}, {\"slug\": \"visual-consistency\", \"role\": \"member\", \"name\": \"视觉一致性 顾问\", \"evidence\": \"original_assets/visual-consistency/merkle_root\", \"member_merkle_root\": \"62fcdba6fdca35310e527ae003f5aa6e2d9ce7f3da34c5ec1d6724a8427344cd\"}, {\"slug\": \"map-visual-design\", \"role\": \"member\", \"name\": \"地图可视化 表达规范 顾问\", \"evidence\": \"original_assets/map-visual-design/merkle_root\", \"member_merkle_root\": \"682cd543ca0b0f6ff34e8aef24b32c171cee1013ee0952a1b66690afaeb77ebd\"}, {\"slug\": \"onboarding-flow\", \"role\": \"member\", \"name\": \"上手引导流程 顾问\", \"evidence\": \"original_assets/onboarding-flow/merkle_root\", \"member_merkle_root\": \"c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050\"}], \"team_lead\": \"visual-consistency-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/map-visual-design.md": "47faf969d6a37954135d4008ec81d0893b7b561f10cc4858bc2cc4dc3f858a24",
+    "agents/onboarding-flow.md": "a80613f7f583d8ef7ca167bf5346455690ab69ca770002923b7db394159f4b2e",
+    "agents/visual-consistency-team-lead.md": "61b849d30dc5928621111d2c60720ad96bc9a4377c557e0ea86eba2be02a7a6e",
+    "agents/visual-consistency.md": "98e059578126c91837eff24d8ed04ba35b591ef427ca0bb16f58bb8fd5f73427",
+    "plugin.json": "0348da5577731492ab1e21f763b97092ab785fcebbf216ba4c744d6b251f3899",
+    "settings.json": "75755722cb23a29a57522f68b66d3b0921bccfcd5c0d52769e8e7aec923bd94b"
+  }
+}

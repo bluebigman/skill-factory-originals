@@ -1,0 +1,126 @@
+{
+  "agentName": "editorial-review-flow-team-lead",
+  "agents": [
+    "./agents/editorial-review-flow-team-lead.md",
+    "./agents/editorial-review-flow.md",
+    "./agents/citation-format-pro.md",
+    "./agents/doc-batch-process.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 编辑评审流程",
+    "zh": "帮我处理编辑评审流程"
+  },
+  "description": "editorial-review-flow team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 编辑评审流程 end-to-end: 分级评审, 角色明确 and 来源可查. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分级评审、角色明确与来源可查，覆盖编辑评审流程全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "editorial-review-flow Team",
+    "zh": "编辑评审流程专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "editorial-review-flow-team-lead",
+      "name": {
+        "en": "编辑评审流程主理人",
+        "zh": "编辑评审流程主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/editorial-review-flow.png",
+      "id": "editorial-review-flow",
+      "name": {
+        "en": "editorial-review-flow",
+        "zh": "编辑评审流程 顾问"
+      },
+      "profession": {
+        "en": "editorial-review-flow",
+        "zh": "编辑评审流程 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/citation-format-pro.png",
+      "id": "citation-format-pro",
+      "name": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "profession": {
+        "en": "citation-format-pro",
+        "zh": "引用规范 来源标注 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-batch-process.png",
+      "id": "doc-batch-process",
+      "name": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "profession": {
+        "en": "doc-batch-process",
+        "zh": "文档批处 模板套用 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1195",
+  "plugin": "group-team-1195",
+  "profession": {
+    "en": "editorial-review-flow Collaboration Team",
+    "zh": "编辑评审流程专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 编辑评审流程",
+      "zh": "帮我处理编辑评审流程"
+    },
+    {
+      "en": "Plan 引用规范",
+      "zh": "帮我规划引用规范"
+    },
+    {
+      "en": "Review 文档批处",
+      "zh": "帮我检查文档批处"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分级评审",
+      "zh": "分级评审"
+    },
+    {
+      "en": "角色明确",
+      "zh": "角色明确"
+    },
+    {
+      "en": "清单化",
+      "zh": "清单化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "editorial-review-flow-team-lead",
+    "memberAgents": [
+      "editorial-review-flow",
+      "citation-format-pro",
+      "doc-batch-process"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-810",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-810",
+    "kind": "team",
+    "name": "流式处理专家",
+    "description": "流式处理专家：围绕流式处理，覆盖水位定义／乱序容忍／重复处理，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "stream-pipeline-pro-team-lead",
+        "role": "lead",
+        "name": "流式处理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "stream-pipeline-pro",
+        "role": "member",
+        "name": "流式处理 水位控制 顾问",
+        "evidence": "original_assets/stream-pipeline-pro/merkle_root",
+        "member_merkle_root": "16f3669aea989a2ae99a9be731c489f9be89322740c3703b3bf4a45445074bfa"
+      },
+      {
+        "slug": "token-cost-control-pro",
+        "role": "member",
+        "name": "成本控制 上下文压 顾问",
+        "evidence": "original_assets/token-cost-control-pro/merkle_root",
+        "member_merkle_root": "6d5c2086f42a3ef54cb30e4b244fe65b14a6ff17350a3af6f7d07354bc1a2983"
+      },
+      {
+        "slug": "data-clean-pro-06",
+        "role": "member",
+        "name": "文档转写 结构化转换",
+        "evidence": "original_assets/data-clean-pro-06/merkle_root",
+        "member_merkle_root": "b6eba41cabce760412d11983b7b908b6c4e317370797cbd9da29f421a39b9b4e"
+      }
+    ],
+    "team_lead": "stream-pipeline-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2fc9ffdd85bf701a",
+  "prompt_hash": "fd7e2e2cad9d6590",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-810\", \"kind\": \"team\", \"name\": \"流式处理专家\", \"description\": \"流式处理专家：围绕流式处理，覆盖水位定义／乱序容忍／重复处理，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"stream-pipeline-pro-team-lead\", \"role\": \"lead\", \"name\": \"流式处理主理人\", \"evidence\": null}, {\"slug\": \"stream-pipeline-pro\", \"role\": \"member\", \"name\": \"流式处理 水位控制 顾问\", \"evidence\": \"original_assets/stream-pipeline-pro/merkle_root\", \"member_merkle_root\": \"16f3669aea989a2ae99a9be731c489f9be89322740c3703b3bf4a45445074bfa\"}, {\"slug\": \"token-cost-control-pro\", \"role\": \"member\", \"name\": \"成本控制 上下文压 顾问\", \"evidence\": \"original_assets/token-cost-control-pro/merkle_root\", \"member_merkle_root\": \"6d5c2086f42a3ef54cb30e4b244fe65b14a6ff17350a3af6f7d07354bc1a2983\"}, {\"slug\": \"data-clean-pro-06\", \"role\": \"member\", \"name\": \"文档转写 结构化转换\", \"evidence\": \"original_assets/data-clean-pro-06/merkle_root\", \"member_merkle_root\": \"b6eba41cabce760412d11983b7b908b6c4e317370797cbd9da29f421a39b9b4e\"}], \"team_lead\": \"stream-pipeline-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-06.md": "4e7f93d751ae2e9b037279cba99f7672b9bc4878851ba72d40609f23a601f15f",
+    "agents/stream-pipeline-pro-team-lead.md": "2461aaf45dac05ad4228e5053ec6c3b30ff6caced6d6c681c9519b9a9a600697",
+    "agents/stream-pipeline-pro.md": "8ea4b1374df4ab54bb1abfdd663a6037fb8b1c4acab714099d8dcafe38aed571",
+    "agents/token-cost-control-pro.md": "bea7c25c703f92defecd5cbeacb2daf2d908140639ac251988d416bce2df6283",
+    "plugin.json": "e48dfdf6476a5f90b10766628432f9771cdfc86d058a95d82c0abc585032c4d9",
+    "settings.json": "292e0142b21d9d68f3bdf7878974eafa3cba25df0a6271e07b7b2c5ac6323ad3"
+  }
+}

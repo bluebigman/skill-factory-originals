@@ -1,0 +1,126 @@
+{
+  "agentName": "api-latency-pro-team-lead",
+  "agents": [
+    "./agents/api-latency-pro-team-lead.md",
+    "./agents/api-latency-pro.md",
+    "./agents/agent-skill-registry.md",
+    "./agents/agent-version-compat.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口延迟",
+    "zh": "帮我处理接口延迟"
+  },
+  "description": "api-latency-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 接口延迟, covers 分段测量 / 长尾关注 / 依赖分析, delivering structured results and actionable checklists.",
+    "zh": "接口延迟专家：围绕接口延迟，覆盖分段测量／长尾关注／依赖分析，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "api-latency-pro Team",
+    "zh": "接口延迟专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-latency-pro-team-lead",
+      "name": {
+        "en": "接口延迟主理人",
+        "zh": "接口延迟主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-latency-pro.png",
+      "id": "api-latency-pro",
+      "name": {
+        "en": "api-latency-pro",
+        "zh": "接口延迟 分段测量 顾问"
+      },
+      "profession": {
+        "en": "api-latency-pro",
+        "zh": "接口延迟 分段测量 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-skill-registry.png",
+      "id": "agent-skill-registry",
+      "name": {
+        "en": "agent-skill-registry",
+        "zh": "技能注册 发现机制 顾问"
+      },
+      "profession": {
+        "en": "agent-skill-registry",
+        "zh": "技能注册 发现机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-version-compat.png",
+      "id": "agent-version-compat",
+      "name": {
+        "en": "agent-version-compat",
+        "zh": "版本兼容 平滑升级 顾问"
+      },
+      "profession": {
+        "en": "agent-version-compat",
+        "zh": "版本兼容 平滑升级 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-318",
+  "plugin": "group-team-318",
+  "profession": {
+    "en": "api-latency-pro Collaboration Team",
+    "zh": "接口延迟专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口延迟",
+      "zh": "帮我处理接口延迟"
+    },
+    {
+      "en": "Plan 技能注册",
+      "zh": "帮我规划技能注册"
+    },
+    {
+      "en": "Review 版本兼容",
+      "zh": "帮我检查版本兼容"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分段测量",
+      "zh": "分段测量"
+    },
+    {
+      "en": "长尾关注",
+      "zh": "长尾关注"
+    },
+    {
+      "en": "依赖分析",
+      "zh": "依赖分析"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-latency-pro-team-lead",
+    "memberAgents": [
+      "api-latency-pro",
+      "agent-skill-registry",
+      "agent-version-compat"
+    ]
+  },
+  "version": "1.0.0"
+}

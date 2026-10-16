@@ -1,0 +1,126 @@
+{
+  "agentName": "space-wayfinding-team-lead",
+  "agents": [
+    "./agents/space-wayfinding-team-lead.md",
+    "./agents/space-wayfinding.md",
+    "./agents/gamification-design.md",
+    "./agents/mobile-gesture-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 导视系统",
+    "zh": "帮我处理导视系统"
+  },
+  "description": "space-wayfinding team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 导视系统, covers 层级一致 / 视觉连续 / 进度可见, delivering structured results and actionable checklists.",
+    "zh": "寻路设计专家：围绕导视系统，覆盖层级一致／视觉连续／进度可见，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "space-wayfinding Team",
+    "zh": "寻路设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "space-wayfinding-team-lead",
+      "name": {
+        "en": "导视系统主理人",
+        "zh": "导视系统主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/space-wayfinding.png",
+      "id": "space-wayfinding",
+      "name": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "profession": {
+        "en": "space-wayfinding",
+        "zh": "导视系统 寻路设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/gamification-design.png",
+      "id": "gamification-design",
+      "name": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "profession": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/mobile-gesture-pro.png",
+      "id": "mobile-gesture-pro",
+      "name": {
+        "en": "mobile-gesture-pro",
+        "zh": "移动交互 手势规范 顾问"
+      },
+      "profession": {
+        "en": "mobile-gesture-pro",
+        "zh": "移动交互 手势规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-641",
+  "plugin": "group-team-641",
+  "profession": {
+    "en": "space-wayfinding Collaboration Team",
+    "zh": "寻路设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 导视系统",
+      "zh": "帮我处理导视系统"
+    },
+    {
+      "en": "Plan 任务激励",
+      "zh": "帮我规划任务激励"
+    },
+    {
+      "en": "Review 移动交互",
+      "zh": "帮我检查移动交互"
+    }
+  ],
+  "tags": [
+    {
+      "en": "决策点设标识",
+      "zh": "决策点设标识"
+    },
+    {
+      "en": "层级一致",
+      "zh": "层级一致"
+    },
+    {
+      "en": "视觉连续",
+      "zh": "视觉连续"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "space-wayfinding-team-lead",
+    "memberAgents": [
+      "space-wayfinding",
+      "gamification-design",
+      "mobile-gesture-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

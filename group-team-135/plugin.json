@@ -1,0 +1,126 @@
+{
+  "agentName": "product-spec-write-team-lead",
+  "agents": [
+    "./agents/product-spec-write-team-lead.md",
+    "./agents/product-spec-write.md",
+    "./agents/user-research-read.md",
+    "./agents/prototype-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 产品需求",
+    "zh": "帮我处理产品需求"
+  },
+  "description": "Product Spec Write team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "产品 用户 原型 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Product Spec Write Team",
+    "zh": "产品 用户 原型 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "product-spec-write-team-lead",
+      "name": {
+        "en": "产品需求主理人",
+        "zh": "产品需求主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/product-spec-write.png",
+      "id": "product-spec-write",
+      "name": {
+        "en": "Product Spec Write",
+        "zh": "产品需求 文档撰写 顾问"
+      },
+      "profession": {
+        "en": "Product Spec Write",
+        "zh": "产品需求 文档撰写 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/user-research-read.png",
+      "id": "user-research-read",
+      "name": {
+        "en": "User Research Read",
+        "zh": "用户调研 访谈提纲 顾问"
+      },
+      "profession": {
+        "en": "User Research Read",
+        "zh": "用户调研 访谈提纲 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prototype-review.png",
+      "id": "prototype-review",
+      "name": {
+        "en": "Prototype Review",
+        "zh": "原型评审 交互问题 助手"
+      },
+      "profession": {
+        "en": "Prototype Review",
+        "zh": "原型评审 交互问题 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-135",
+  "plugin": "group-team-135",
+  "profession": {
+    "en": "Product Spec Write Collaboration Team",
+    "zh": "产品 用户 原型 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 产品需求",
+      "zh": "帮我处理产品需求"
+    },
+    {
+      "en": "Plan 用户调研",
+      "zh": "帮我规划用户调研"
+    },
+    {
+      "en": "Review 原型评审",
+      "zh": "帮我检查原型评审"
+    }
+  ],
+  "tags": [
+    {
+      "en": "产品需求",
+      "zh": "产品需求"
+    },
+    {
+      "en": "用户调研",
+      "zh": "用户调研"
+    },
+    {
+      "en": "原型评审",
+      "zh": "原型评审"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "product-spec-write-team-lead",
+    "memberAgents": [
+      "product-spec-write",
+      "user-research-read",
+      "prototype-review"
+    ]
+  },
+  "version": "1.0.0"
+}

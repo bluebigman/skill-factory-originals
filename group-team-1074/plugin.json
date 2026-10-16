@@ -1,0 +1,126 @@
+{
+  "agentName": "deai-taste-zh-team-lead",
+  "agents": [
+    "./agents/deai-taste-zh-team-lead.md",
+    "./agents/deai-taste-zh.md",
+    "./agents/doc-convert-pro-fixed.md",
+    "./agents/doc-coauthor-flow.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 中文去AI腔",
+    "zh": "帮我处理中文去AI腔"
+  },
+  "description": "deai-taste-zh team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 中文去AI腔 requirements, output three deliverables: 保留信息, 版本先行, 分区编辑. Verifiable end-to-end, evidence per step.",
+    "zh": "输入中文去AI腔相关需求，输出保留信息、版本先行、分区编辑三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "deai-taste-zh Team",
+    "zh": "中文去腔专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "deai-taste-zh-team-lead",
+      "name": {
+        "en": "中文去AI腔主理人",
+        "zh": "中文去AI腔主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/deai-taste-zh.png",
+      "id": "deai-taste-zh",
+      "name": {
+        "en": "deai-taste-zh",
+        "zh": "中文去AI腔 顾问"
+      },
+      "profession": {
+        "en": "deai-taste-zh",
+        "zh": "中文去AI腔 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-fixed.png",
+      "id": "doc-convert-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "图片标准化 隐私转换 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-coauthor-flow.png",
+      "id": "doc-coauthor-flow",
+      "name": {
+        "en": "doc-coauthor-flow",
+        "zh": "文档协同编辑 顾问"
+      },
+      "profession": {
+        "en": "doc-coauthor-flow",
+        "zh": "文档协同编辑 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1074",
+  "plugin": "group-team-1074",
+  "profession": {
+    "en": "deai-taste-zh Collaboration Team",
+    "zh": "中文去腔专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 中文去AI腔",
+      "zh": "帮我处理中文去AI腔"
+    },
+    {
+      "en": "Plan 图片标准化",
+      "zh": "帮我规划图片标准化"
+    },
+    {
+      "en": "Review 文档协同编辑",
+      "zh": "帮我检查文档协同编辑"
+    }
+  ],
+  "tags": [
+    {
+      "en": "保留信息",
+      "zh": "保留信息"
+    },
+    {
+      "en": "删空词",
+      "zh": "删空词"
+    },
+    {
+      "en": "拆长句",
+      "zh": "拆长句"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "deai-taste-zh-team-lead",
+    "memberAgents": [
+      "deai-taste-zh",
+      "doc-convert-pro-fixed",
+      "doc-coauthor-flow"
+    ]
+  },
+  "version": "1.0.0"
+}

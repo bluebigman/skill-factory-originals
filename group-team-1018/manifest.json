@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1018",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1018",
+    "kind": "team",
+    "name": "海外伙伴专家",
+    "description": "擅长资质核验、案例验证与经营佐证，覆盖海外伙伴全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "intl-partner-screen-team-lead",
+        "role": "lead",
+        "name": "海外伙伴主理人",
+        "evidence": null
+      },
+      {
+        "slug": "intl-partner-screen",
+        "role": "member",
+        "name": "海外伙伴 尽调筛选 顾问",
+        "evidence": "original_assets/intl-partner-screen/merkle_root",
+        "member_merkle_root": "3567a84ab586e658cce8ba7caac7e888a6c86b7d38fe065dd4bdbcf0364924a7"
+      },
+      {
+        "slug": "cs-health-score",
+        "role": "member",
+        "name": "客户健康 评分模型 顾问",
+        "evidence": "original_assets/cs-health-score/merkle_root",
+        "member_merkle_root": "4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2"
+      },
+      {
+        "slug": "requirement-trace-pro",
+        "role": "member",
+        "name": "需求追踪 实现映射 顾问",
+        "evidence": "original_assets/requirement-trace-pro/merkle_root",
+        "member_merkle_root": "252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f"
+      }
+    ],
+    "team_lead": "intl-partner-screen-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "895b6dc234d967ec",
+  "prompt_hash": "4d533b151ecc4a75",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1018\", \"kind\": \"team\", \"name\": \"海外伙伴专家\", \"description\": \"擅长资质核验、案例验证与经营佐证，覆盖海外伙伴全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"intl-partner-screen-team-lead\", \"role\": \"lead\", \"name\": \"海外伙伴主理人\", \"evidence\": null}, {\"slug\": \"intl-partner-screen\", \"role\": \"member\", \"name\": \"海外伙伴 尽调筛选 顾问\", \"evidence\": \"original_assets/intl-partner-screen/merkle_root\", \"member_merkle_root\": \"3567a84ab586e658cce8ba7caac7e888a6c86b7d38fe065dd4bdbcf0364924a7\"}, {\"slug\": \"cs-health-score\", \"role\": \"member\", \"name\": \"客户健康 评分模型 顾问\", \"evidence\": \"original_assets/cs-health-score/merkle_root\", \"member_merkle_root\": \"4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2\"}, {\"slug\": \"requirement-trace-pro\", \"role\": \"member\", \"name\": \"需求追踪 实现映射 顾问\", \"evidence\": \"original_assets/requirement-trace-pro/merkle_root\", \"member_merkle_root\": \"252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f\"}], \"team_lead\": \"intl-partner-screen-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cs-health-score.md": "f6e7221bcc650e4b3fb8b8acca1250d7b17beb9521a18a666c452debaee81095",
+    "agents/intl-partner-screen-team-lead.md": "eb24fbee9f6b0e792d6dcb09038dd803e4525f8b5b43cabb422658d88b22f27a",
+    "agents/intl-partner-screen.md": "99afbf946851115b3f46fcbf4cc5e1a36c28a53af16b29e08b188dddea15b3b2",
+    "agents/requirement-trace-pro.md": "c0af66f1ff3b27f9ca3061d026653abbd84d3b828e72439ef28c2b0e868c44ff",
+    "plugin.json": "470e778876bca994e71492b9db596358d8e25c3c1a25a670b979e2c1c3516ab1",
+    "settings.json": "e51f8eae19c53d6a4a91f7b9bb7a609bfb560b22e7c14534ed3164b73de337a8"
+  }
+}

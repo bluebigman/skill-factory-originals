@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-red-team-team-lead",
+  "agents": [
+    "./agents/agent-red-team-team-lead.md",
+    "./agents/agent-red-team.md",
+    "./agents/pr-crisis-basic.md",
+    "./agents/sensitive-data-scan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 对抗测试",
+    "zh": "帮我处理对抗测试"
+  },
+  "description": "agent-red-team team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 对抗测试 end-to-end: 注入测试, 越权探测 and 边界模糊. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长注入测试、越权探测与边界模糊，覆盖对抗测试全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-red-team Team",
+    "zh": "对抗测试越权探测专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-red-team-team-lead",
+      "name": {
+        "en": "对抗测试主理人",
+        "zh": "对抗测试主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-red-team.png",
+      "id": "agent-red-team",
+      "name": {
+        "en": "agent-red-team",
+        "zh": "对抗测试 越权探测 顾问"
+      },
+      "profession": {
+        "en": "agent-red-team",
+        "zh": "对抗测试 越权探测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pr-crisis-basic.png",
+      "id": "pr-crisis-basic",
+      "name": {
+        "en": "pr-crisis-basic",
+        "zh": "危机应对 沟通准备 顾问"
+      },
+      "profession": {
+        "en": "pr-crisis-basic",
+        "zh": "危机应对 沟通准备 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sensitive-data-scan.png",
+      "id": "sensitive-data-scan",
+      "name": {
+        "en": "sensitive-data-scan",
+        "zh": "敏感识别 分级标注 顾问"
+      },
+      "profession": {
+        "en": "sensitive-data-scan",
+        "zh": "敏感识别 分级标注 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-423",
+  "plugin": "group-team-423",
+  "profession": {
+    "en": "agent-red-team Collaboration Team",
+    "zh": "对抗测试越权探测专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 对抗测试",
+      "zh": "帮我处理对抗测试"
+    },
+    {
+      "en": "Plan 危机应对",
+      "zh": "帮我规划危机应对"
+    },
+    {
+      "en": "Review 敏感识别",
+      "zh": "帮我检查敏感识别"
+    }
+  ],
+  "tags": [
+    {
+      "en": "注入测试",
+      "zh": "注入测试"
+    },
+    {
+      "en": "边界模糊",
+      "zh": "边界模糊"
+    },
+    {
+      "en": "失败即修",
+      "zh": "失败即修"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-red-team-team-lead",
+    "memberAgents": [
+      "agent-red-team",
+      "pr-crisis-basic",
+      "sensitive-data-scan"
+    ]
+  },
+  "version": "1.0.0"
+}

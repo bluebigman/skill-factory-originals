@@ -1,0 +1,126 @@
+{
+  "agentName": "context-window-tune-team-lead",
+  "agents": [
+    "./agents/context-window-tune-team-lead.md",
+    "./agents/context-window-tune.md",
+    "./agents/config-drift-detect.md",
+    "./agents/naming-convention-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 上下文优",
+    "zh": "帮我处理上下文优"
+  },
+  "description": "context-window-tune team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 上下文优 requirements, output three deliverables: 分块合理, 召回优先, 关键保真. Verifiable end-to-end, evidence per step.",
+    "zh": "输入上下文优相关需求，输出分块合理、召回优先、关键保真三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "context-window-tune Team",
+    "zh": "上下文优专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "context-window-tune-team-lead",
+      "name": {
+        "en": "上下文优主理人",
+        "zh": "上下文优主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/context-window-tune.png",
+      "id": "context-window-tune",
+      "name": {
+        "en": "context-window-tune",
+        "zh": "上下文优 分块策略 顾问"
+      },
+      "profession": {
+        "en": "context-window-tune",
+        "zh": "上下文优 分块策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/config-drift-detect.png",
+      "id": "config-drift-detect",
+      "name": {
+        "en": "config-drift-detect",
+        "zh": "配置漂移 基线对比 顾问"
+      },
+      "profession": {
+        "en": "config-drift-detect",
+        "zh": "配置漂移 基线对比 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/naming-convention-pro.png",
+      "id": "naming-convention-pro",
+      "name": {
+        "en": "naming-convention-pro",
+        "zh": "命名规范 一致约束 顾问"
+      },
+      "profession": {
+        "en": "naming-convention-pro",
+        "zh": "命名规范 一致约束 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-537",
+  "plugin": "group-team-537",
+  "profession": {
+    "en": "context-window-tune Collaboration Team",
+    "zh": "上下文优专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 上下文优",
+      "zh": "帮我处理上下文优"
+    },
+    {
+      "en": "Plan 配置漂移",
+      "zh": "帮我规划配置漂移"
+    },
+    {
+      "en": "Review 命名规范",
+      "zh": "帮我检查命名规范"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分块合理",
+      "zh": "分块合理"
+    },
+    {
+      "en": "召回优先",
+      "zh": "召回优先"
+    },
+    {
+      "en": "关键保真",
+      "zh": "关键保真"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "context-window-tune-team-lead",
+    "memberAgents": [
+      "context-window-tune",
+      "config-drift-detect",
+      "naming-convention-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-batch-convert-team-lead",
+  "agents": [
+    "./agents/doc-batch-convert-team-lead.md",
+    "./agents/doc-batch-convert.md",
+    "./agents/knowledge-conflict.md",
+    "./agents/data-quality-score.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 文档批量转换",
+    "zh": "帮我处理文档批量转换"
+  },
+  "description": "doc-batch-convert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档批量转换 end-to-end: 格式映射, 失败隔离 and 清单对账. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长格式映射、失败隔离与清单对账，覆盖文档批量转换全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-batch-convert Team",
+    "zh": "文档批量转换专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-batch-convert-team-lead",
+      "name": {
+        "en": "文档批量转换主理人",
+        "zh": "文档批量转换主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-batch-convert.png",
+      "id": "doc-batch-convert",
+      "name": {
+        "en": "doc-batch-convert",
+        "zh": "文档批量转换 助手"
+      },
+      "profession": {
+        "en": "doc-batch-convert",
+        "zh": "文档批量转换 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-conflict.png",
+      "id": "knowledge-conflict",
+      "name": {
+        "en": "knowledge-conflict",
+        "zh": "知识冲突处理 顾问"
+      },
+      "profession": {
+        "en": "knowledge-conflict",
+        "zh": "知识冲突处理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-quality-score.png",
+      "id": "data-quality-score",
+      "name": {
+        "en": "data-quality-score",
+        "zh": "数据质量评分 顾问"
+      },
+      "profession": {
+        "en": "data-quality-score",
+        "zh": "数据质量评分 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1093",
+  "plugin": "group-team-1093",
+  "profession": {
+    "en": "doc-batch-convert Collaboration Team",
+    "zh": "文档批量转换专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档批量转换",
+      "zh": "帮我处理文档批量转换"
+    },
+    {
+      "en": "Plan 知识冲突处理",
+      "zh": "帮我规划知识冲突处理"
+    },
+    {
+      "en": "Review 数据质量评分",
+      "zh": "帮我检查数据质量评分"
+    }
+  ],
+  "tags": [
+    {
+      "en": "格式映射",
+      "zh": "格式映射"
+    },
+    {
+      "en": "失败隔离",
+      "zh": "失败隔离"
+    },
+    {
+      "en": "清单对账",
+      "zh": "清单对账"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-batch-convert-team-lead",
+    "memberAgents": [
+      "doc-batch-convert",
+      "knowledge-conflict",
+      "data-quality-score"
+    ]
+  },
+  "version": "1.0.0"
+}

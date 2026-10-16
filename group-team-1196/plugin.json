@@ -1,0 +1,126 @@
+{
+  "agentName": "changelog-pro-team-lead",
+  "agents": [
+    "./agents/changelog-pro-team-lead.md",
+    "./agents/changelog-pro.md",
+    "./agents/metric-anomaly-alert.md",
+    "./agents/data-clean-pro-04.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 变更日志",
+    "zh": "帮我处理变更日志"
+  },
+  "description": "changelog-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 变更日志, covers 分类清晰 / 影响说明 / 日期明确, delivering structured results and actionable checklists.",
+    "zh": "变更日志专家：围绕变更日志，覆盖分类清晰／影响说明／日期明确，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "changelog-pro Team",
+    "zh": "变更日志专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "changelog-pro-team-lead",
+      "name": {
+        "en": "变更日志主理人",
+        "zh": "变更日志主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/changelog-pro.png",
+      "id": "changelog-pro",
+      "name": {
+        "en": "changelog-pro",
+        "zh": "变更日志 版本记录 顾问"
+      },
+      "profession": {
+        "en": "changelog-pro",
+        "zh": "变更日志 版本记录 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/metric-anomaly-alert.png",
+      "id": "metric-anomaly-alert",
+      "name": {
+        "en": "metric-anomaly-alert",
+        "zh": "指标异常 波动检测 顾问"
+      },
+      "profession": {
+        "en": "metric-anomaly-alert",
+        "zh": "指标异常 波动检测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-04.png",
+      "id": "data-clean-pro-04",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "数据整理 字段还原 批量处理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1196",
+  "plugin": "group-team-1196",
+  "profession": {
+    "en": "changelog-pro Collaboration Team",
+    "zh": "变更日志专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 变更日志",
+      "zh": "帮我处理变更日志"
+    },
+    {
+      "en": "Plan 指标异常",
+      "zh": "帮我规划指标异常"
+    },
+    {
+      "en": "Review 数据整理",
+      "zh": "帮我检查数据整理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分类清晰",
+      "zh": "分类清晰"
+    },
+    {
+      "en": "影响说明",
+      "zh": "影响说明"
+    },
+    {
+      "en": "日期明确",
+      "zh": "日期明确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "changelog-pro-team-lead",
+    "memberAgents": [
+      "changelog-pro",
+      "metric-anomaly-alert",
+      "data-clean-pro-04"
+    ]
+  },
+  "version": "1.0.0"
+}

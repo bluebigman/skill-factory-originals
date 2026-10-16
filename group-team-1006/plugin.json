@@ -1,0 +1,126 @@
+{
+  "agentName": "energy-consumption-pro-team-lead",
+  "agents": [
+    "./agents/energy-consumption-pro-team-lead.md",
+    "./agents/energy-consumption-pro.md",
+    "./agents/industrial-service-pro.md",
+    "./agents/finance-toolkit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 能耗管理",
+    "zh": "帮我处理能耗管理"
+  },
+  "description": "energy-consumption-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 能耗管理 end-to-end: 分项计量, 攻其大头 and 峰谷优化. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分项计量、攻其大头与峰谷优化，覆盖能耗管理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "energy-consumption-pro Team",
+    "zh": "能耗管理节能诊断专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "energy-consumption-pro-team-lead",
+      "name": {
+        "en": "能耗管理主理人",
+        "zh": "能耗管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/energy-consumption-pro.png",
+      "id": "energy-consumption-pro",
+      "name": {
+        "en": "energy-consumption-pro",
+        "zh": "能耗管理 节能诊断 顾问"
+      },
+      "profession": {
+        "en": "energy-consumption-pro",
+        "zh": "能耗管理 节能诊断 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/industrial-service-pro.png",
+      "id": "industrial-service-pro",
+      "name": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "profession": {
+        "en": "industrial-service-pro",
+        "zh": "工业服务 交付标准 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/finance-toolkit-pro.png",
+      "id": "finance-toolkit-pro",
+      "name": {
+        "en": "金融与财税 Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "profession": {
+        "en": "金融与财税 Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1006",
+  "plugin": "group-team-1006",
+  "profession": {
+    "en": "energy-consumption-pro Collaboration Team",
+    "zh": "能耗管理节能诊断专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 能耗管理",
+      "zh": "帮我处理能耗管理"
+    },
+    {
+      "en": "Plan 工业服务",
+      "zh": "帮我规划工业服务"
+    },
+    {
+      "en": "Review 财务文本",
+      "zh": "帮我检查财务文本"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分项计量",
+      "zh": "分项计量"
+    },
+    {
+      "en": "攻其大头",
+      "zh": "攻其大头"
+    },
+    {
+      "en": "峰谷优化",
+      "zh": "峰谷优化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "energy-consumption-pro-team-lead",
+    "memberAgents": [
+      "energy-consumption-pro",
+      "industrial-service-pro",
+      "finance-toolkit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

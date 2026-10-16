@@ -1,0 +1,126 @@
+{
+  "agentName": "accessibility-check-team-lead",
+  "agents": [
+    "./agents/accessibility-check-team-lead.md",
+    "./agents/accessibility-check.md",
+    "./agents/usability-test-pro.md",
+    "./agents/color-system-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 无障碍",
+    "zh": "帮我处理无障碍"
+  },
+  "description": "accessibility-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 无障碍, covers 对比达标 / 键盘可达 / 替代文本, delivering structured results and actionable checklists.",
+    "zh": "无障碍检查清单专家：围绕无障碍，覆盖对比达标／键盘可达／替代文本，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "accessibility-check Team",
+    "zh": "无障碍检查清单专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "accessibility-check-team-lead",
+      "name": {
+        "en": "无障碍主理人",
+        "zh": "无障碍主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/accessibility-check.png",
+      "id": "accessibility-check",
+      "name": {
+        "en": "accessibility-check",
+        "zh": "无障碍 检查清单 顾问"
+      },
+      "profession": {
+        "en": "accessibility-check",
+        "zh": "无障碍 检查清单 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/usability-test-pro.png",
+      "id": "usability-test-pro",
+      "name": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "profession": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/color-system-build.png",
+      "id": "color-system-build",
+      "name": {
+        "en": "color-system-build",
+        "zh": "配色系统构建 顾问"
+      },
+      "profession": {
+        "en": "color-system-build",
+        "zh": "配色系统构建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1169",
+  "plugin": "group-team-1169",
+  "profession": {
+    "en": "accessibility-check Collaboration Team",
+    "zh": "无障碍检查清单专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 无障碍",
+      "zh": "帮我处理无障碍"
+    },
+    {
+      "en": "Plan 可用性",
+      "zh": "帮我规划可用性"
+    },
+    {
+      "en": "Review 配色系统构建",
+      "zh": "帮我检查配色系统构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "键盘可达",
+      "zh": "键盘可达"
+    },
+    {
+      "en": "替代文本",
+      "zh": "替代文本"
+    },
+    {
+      "en": "语义正确",
+      "zh": "语义正确"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "accessibility-check-team-lead",
+    "memberAgents": [
+      "accessibility-check",
+      "usability-test-pro",
+      "color-system-build"
+    ]
+  },
+  "version": "1.0.0"
+}

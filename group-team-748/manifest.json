@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-748",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-748",
+    "kind": "team",
+    "name": "过程风险预防分析专家",
+    "description": "过程风险预防分析专家：围绕过程风险，覆盖打分一致／动态更新／分层管理，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "project-planning-expert-team-lead",
+        "role": "lead",
+        "name": "项目管理排期专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "project-planning-expert",
+        "role": "member",
+        "name": "项目管理排期专家",
+        "evidence": "original_assets/project-planning-expert/merkle_root",
+        "member_merkle_root": "a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9"
+      },
+      {
+        "slug": "process-fmea-pro",
+        "role": "member",
+        "name": "过程风险 预防分析 顾问",
+        "evidence": "original_assets/process-fmea-pro/merkle_root",
+        "member_merkle_root": "a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2"
+      },
+      {
+        "slug": "channel-partner-pro",
+        "role": "member",
+        "name": "渠道伙伴 管理机制 顾问",
+        "evidence": "original_assets/channel-partner-pro/merkle_root",
+        "member_merkle_root": "90bb7f4fbc0f6649077f913d61f10256638d3a9d71f43d38536e4262345f09f9"
+      }
+    ],
+    "team_lead": "project-planning-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6b4c32e443e0f9bf",
+  "prompt_hash": "eab7f33bce5d3412",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-748\", \"kind\": \"team\", \"name\": \"过程风险预防分析专家\", \"description\": \"过程风险预防分析专家：围绕过程风险，覆盖打分一致／动态更新／分层管理，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"project-planning-expert-team-lead\", \"role\": \"lead\", \"name\": \"项目管理排期专家主理人\", \"evidence\": null}, {\"slug\": \"project-planning-expert\", \"role\": \"member\", \"name\": \"项目管理排期专家\", \"evidence\": \"original_assets/project-planning-expert/merkle_root\", \"member_merkle_root\": \"a58e2e82b7157751f8b09a3ed817cc770ae8b391fd67e7b5eddeb8d3cc81a6c9\"}, {\"slug\": \"process-fmea-pro\", \"role\": \"member\", \"name\": \"过程风险 预防分析 顾问\", \"evidence\": \"original_assets/process-fmea-pro/merkle_root\", \"member_merkle_root\": \"a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2\"}, {\"slug\": \"channel-partner-pro\", \"role\": \"member\", \"name\": \"渠道伙伴 管理机制 顾问\", \"evidence\": \"original_assets/channel-partner-pro/merkle_root\", \"member_merkle_root\": \"90bb7f4fbc0f6649077f913d61f10256638d3a9d71f43d38536e4262345f09f9\"}], \"team_lead\": \"project-planning-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/channel-partner-pro.md": "e20acd23395b3dfcc20fcd99d578f998461afd8f66919d6e78637689d5773f52",
+    "agents/process-fmea-pro.md": "604500391d8c3e94c13ca2deeeeffa90db2ac1eaa330bff8749ca76835eff8f4",
+    "agents/project-planning-expert-team-lead.md": "302b8f1181d60b2eab48ac748afdd2c9ebf8fbc80816805ad9e53d48001aa77b",
+    "agents/project-planning-expert.md": "63aa31e62c8ed2b4121d975d06ac516ffbdd5c5af3236313dffd2ad42b699704",
+    "plugin.json": "6b240b876f11b92a08dbea9575f49928e909db5a64c4e5b097ef14c4cae51e11",
+    "settings.json": "3dbb1f89df5fba76599864f66e2a7c44ec4e6bcbd5ff75dbf7d62eb6d97b62cd"
+  }
+}

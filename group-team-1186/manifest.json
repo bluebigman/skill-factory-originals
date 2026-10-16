@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1186",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1186",
+    "kind": "team",
+    "name": "安全培训专家",
+    "description": "擅长分层培训、案例教学与定期演练，覆盖安全培训全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "security-training-team-lead",
+        "role": "lead",
+        "name": "安全培训主理人",
+        "evidence": null
+      },
+      {
+        "slug": "security-training",
+        "role": "member",
+        "name": "安全培训 顾问",
+        "evidence": "original_assets/security-training/merkle_root",
+        "member_merkle_root": "565796de42b7032b54e212cb564d8e1d22511489c8ea02a7dfa0f143f0a54c6a"
+      },
+      {
+        "slug": "code-quality-gate",
+        "role": "member",
+        "name": "代码质量门禁 顾问",
+        "evidence": "original_assets/code-quality-gate/merkle_root",
+        "member_merkle_root": "2a255cf44a9f1c8ce4e62f59c8bd425d973a333982ae93da49cebb3e9ea244de"
+      },
+      {
+        "slug": "onboarding-doc-pro",
+        "role": "member",
+        "name": "上手文档 快速开始 顾问",
+        "evidence": "original_assets/onboarding-doc-pro/merkle_root",
+        "member_merkle_root": "797b8723680bbfd624a95cbc41b047668673e4ea7354ceb82f06f9f3d42708ec"
+      }
+    ],
+    "team_lead": "security-training-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a12941beaefa5ac7",
+  "prompt_hash": "e1a93793ba37a647",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1186\", \"kind\": \"team\", \"name\": \"安全培训专家\", \"description\": \"擅长分层培训、案例教学与定期演练，覆盖安全培训全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"security-training-team-lead\", \"role\": \"lead\", \"name\": \"安全培训主理人\", \"evidence\": null}, {\"slug\": \"security-training\", \"role\": \"member\", \"name\": \"安全培训 顾问\", \"evidence\": \"original_assets/security-training/merkle_root\", \"member_merkle_root\": \"565796de42b7032b54e212cb564d8e1d22511489c8ea02a7dfa0f143f0a54c6a\"}, {\"slug\": \"code-quality-gate\", \"role\": \"member\", \"name\": \"代码质量门禁 顾问\", \"evidence\": \"original_assets/code-quality-gate/merkle_root\", \"member_merkle_root\": \"2a255cf44a9f1c8ce4e62f59c8bd425d973a333982ae93da49cebb3e9ea244de\"}, {\"slug\": \"onboarding-doc-pro\", \"role\": \"member\", \"name\": \"上手文档 快速开始 顾问\", \"evidence\": \"original_assets/onboarding-doc-pro/merkle_root\", \"member_merkle_root\": \"797b8723680bbfd624a95cbc41b047668673e4ea7354ceb82f06f9f3d42708ec\"}], \"team_lead\": \"security-training-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-quality-gate.md": "adc80b7c963451039272568f9d66306b94515ea30627daccb86477adb401dfa4",
+    "agents/onboarding-doc-pro.md": "50bcfbfdf89269258f83cf26d2eb40f9df56dd3cdfdeeaeefa1ad517a22bebf2",
+    "agents/security-training-team-lead.md": "c803778df713f19e43f08459f93a7a3ac60fc0aea329957700422c668bd4a170",
+    "agents/security-training.md": "fc19698ca2f49bfc584000abb53e4d8afadf27303416b94c50d77be083943bda",
+    "plugin.json": "593e76ce8c0e0a39cf36b50edec3a649e5c6768af02ef756f0c8d14df39fc931",
+    "settings.json": "2381ca11711705e3effdad321763931406f1bc5f611e82b3a42e229b495dd804"
+  }
+}

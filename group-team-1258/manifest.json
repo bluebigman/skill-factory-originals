@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-1258",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1258",
+    "kind": "team",
+    "name": "联盟配置审查专家",
+    "description": "擅长字幕生成、排版规范与发布包交付，覆盖联盟配置审查全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "marketing-toolkit-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "联盟配置审查主理人",
+        "evidence": null
+      },
+      {
+        "slug": "marketing-toolkit-pro-fixed",
+        "role": "member",
+        "name": "联盟配置审查 营销数据条款审查",
+        "evidence": "original_assets/marketing-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1"
+      },
+      {
+        "slug": "audio-clip-expert",
+        "role": "member",
+        "name": "音频剪辑专家",
+        "evidence": "original_assets/audio-clip-expert/merkle_root",
+        "member_merkle_root": "c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8"
+      },
+      {
+        "slug": "wechat-content-expert",
+        "role": "member",
+        "name": "号手 公众号排版 图文美化",
+        "evidence": "original_assets/wechat-content-expert/merkle_root",
+        "member_merkle_root": "fea742789f660b4f02f790df5acc68d84d1e475ebd23c53a3d4f2225a685d7f0"
+      }
+    ],
+    "team_lead": "marketing-toolkit-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "78dd4fc64e966c58",
+  "prompt_hash": "3f75f319cad453ef",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1258\", \"kind\": \"team\", \"name\": \"联盟配置审查专家\", \"description\": \"擅长字幕生成、排版规范与发布包交付，覆盖联盟配置审查全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"marketing-toolkit-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"联盟配置审查主理人\", \"evidence\": null}, {\"slug\": \"marketing-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"联盟配置审查 营销数据条款审查\", \"evidence\": \"original_assets/marketing-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"31b23fabbdb43cf89f5b7dd085a09a983237f32d3615cb48ce8a9fa60eae94e1\"}, {\"slug\": \"audio-clip-expert\", \"role\": \"member\", \"name\": \"音频剪辑专家\", \"evidence\": \"original_assets/audio-clip-expert/merkle_root\", \"member_merkle_root\": \"c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8\"}, {\"slug\": \"wechat-content-expert\", \"role\": \"member\", \"name\": \"号手 公众号排版 图文美化\", \"evidence\": \"original_assets/wechat-content-expert/merkle_root\", \"member_merkle_root\": \"fea742789f660b4f02f790df5acc68d84d1e475ebd23c53a3d4f2225a685d7f0\"}], \"team_lead\": \"marketing-toolkit-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audio-clip-expert.md": "cb2f88f6d65e9e5353004b73ebee7212b26105785cbb44e842cd29f7aaad8380",
+    "agents/marketing-toolkit-pro-fixed-team-lead.md": "71b94afc9e0ec296784996dca7f43b99aeed366334bd0700dbf6a11fec2c0179",
+    "agents/marketing-toolkit-pro-fixed.md": "2addcc18455086fc5f0dd6b93d62b033062ef83429d993c8003696ba2bc4b07c",
+    "agents/wechat-content-expert.md": "d644fd7eaffd9254a7b61068693de95e6bfb9f4428c90377d961ab0f271d3076",
+    "plugin.json": "45981ac23929be52a8671c518175686948b5a1ed111c900f5d80d29d9ef7dd8f",
+    "settings.json": "daec7e37c59a634a033ef58fc6c514bd2466d4690ccb2afa12b3aae72ed72536"
+  }
+}

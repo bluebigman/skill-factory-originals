@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-hallucination-guard-team-lead",
+  "agents": [
+    "./agents/agent-hallucination-guard-team-lead.md",
+    "./agents/agent-hallucination-guard.md",
+    "./agents/agent-task-queue.md",
+    "./agents/pdf-type-router.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 幻觉拦截",
+    "zh": "帮我处理幻觉拦截"
+  },
+  "description": "agent-hallucination-guard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 幻觉拦截 end-to-end: 置信分层, 幂等入队 and 超时处理. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长置信分层、幂等入队与超时处理，覆盖幻觉拦截全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "agent-hallucination-guard Team",
+    "zh": "幻觉拦截专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-hallucination-guard-team-lead",
+      "name": {
+        "en": "幻觉拦截主理人",
+        "zh": "幻觉拦截主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-hallucination-guard.png",
+      "id": "agent-hallucination-guard",
+      "name": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "profession": {
+        "en": "agent-hallucination-guard",
+        "zh": "幻觉拦截 事实核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-task-queue.png",
+      "id": "agent-task-queue",
+      "name": {
+        "en": "agent-task-queue",
+        "zh": "任务队列 优先级 顾问"
+      },
+      "profession": {
+        "en": "agent-task-queue",
+        "zh": "任务队列 优先级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pdf-type-router.png",
+      "id": "pdf-type-router",
+      "name": {
+        "en": "pdf-type-router",
+        "zh": "PDF 类型路由 助手"
+      },
+      "profession": {
+        "en": "pdf-type-router",
+        "zh": "PDF 类型路由 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1081",
+  "plugin": "group-team-1081",
+  "profession": {
+    "en": "agent-hallucination-guard Collaboration Team",
+    "zh": "幻觉拦截专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 幻觉拦截",
+      "zh": "帮我处理幻觉拦截"
+    },
+    {
+      "en": "Plan 任务队列",
+      "zh": "帮我规划任务队列"
+    },
+    {
+      "en": "Review PDF",
+      "zh": "帮我检查PDF"
+    }
+  ],
+  "tags": [
+    {
+      "en": "置信分层",
+      "zh": "置信分层"
+    },
+    {
+      "en": "幂等入队",
+      "zh": "幂等入队"
+    },
+    {
+      "en": "超时处理",
+      "zh": "超时处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-hallucination-guard-team-lead",
+    "memberAgents": [
+      "agent-hallucination-guard",
+      "agent-task-queue",
+      "pdf-type-router"
+    ]
+  },
+  "version": "1.0.0"
+}

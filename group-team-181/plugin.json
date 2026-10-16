@@ -1,0 +1,126 @@
+{
+  "agentName": "home-repair-guide-team-lead",
+  "agents": [
+    "./agents/home-repair-guide-team-lead.md",
+    "./agents/home-repair-guide.md",
+    "./agents/time-block-coach.md",
+    "./agents/home-air-guide.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 家居维修",
+    "zh": "帮我处理家居维修"
+  },
+  "description": "Home Repair Guide team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "家居 时间块 室内 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "Home Repair Guide Team",
+    "zh": "家居 时间块 室内 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "home-repair-guide-team-lead",
+      "name": {
+        "en": "家居维修主理人",
+        "zh": "家居维修主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/home-repair-guide.png",
+      "id": "home-repair-guide",
+      "name": {
+        "en": "Home Repair Guide",
+        "zh": "家居维修 报修沟通 对接"
+      },
+      "profession": {
+        "en": "Home Repair Guide",
+        "zh": "家居维修 报修沟通 对接"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/time-block-coach.png",
+      "id": "time-block-coach",
+      "name": {
+        "en": "Time Block Coach",
+        "zh": "时间块 日程编排 顾问"
+      },
+      "profession": {
+        "en": "Time Block Coach",
+        "zh": "时间块 日程编排 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/home-air-guide.png",
+      "id": "home-air-guide",
+      "name": {
+        "en": "Home Air Guide",
+        "zh": "室内空气 通风净化 助手"
+      },
+      "profession": {
+        "en": "Home Air Guide",
+        "zh": "室内空气 通风净化 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-181",
+  "plugin": "group-team-181",
+  "profession": {
+    "en": "Home Repair Guide Collaboration Team",
+    "zh": "家居 时间块 室内 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 家居维修",
+      "zh": "帮我处理家居维修"
+    },
+    {
+      "en": "Plan 时间块",
+      "zh": "帮我规划时间块"
+    },
+    {
+      "en": "Review 室内空气",
+      "zh": "帮我检查室内空气"
+    }
+  ],
+  "tags": [
+    {
+      "en": "家居维修",
+      "zh": "家居维修"
+    },
+    {
+      "en": "时间块",
+      "zh": "时间块"
+    },
+    {
+      "en": "室内空气",
+      "zh": "室内空气"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "home-repair-guide-team-lead",
+    "memberAgents": [
+      "home-repair-guide",
+      "time-block-coach",
+      "home-air-guide"
+    ]
+  },
+  "version": "1.0.0"
+}

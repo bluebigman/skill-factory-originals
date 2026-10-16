@@ -1,0 +1,126 @@
+{
+  "agentName": "decision-trace-pro-team-lead",
+  "agents": [
+    "./agents/decision-trace-pro-team-lead.md",
+    "./agents/decision-trace-pro.md",
+    "./agents/changelog-pro.md",
+    "./agents/agent-tool-selection.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 决策追溯",
+    "zh": "帮我处理决策追溯"
+  },
+  "description": "decision-trace-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 决策追溯, covers 决策记录 / 否决留痕 / 版本绑定, delivering structured results and actionable checklists.",
+    "zh": "决策追溯专家：围绕决策追溯，覆盖决策记录／否决留痕／版本绑定，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "decision-trace-pro Team",
+    "zh": "决策追溯专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "decision-trace-pro-team-lead",
+      "name": {
+        "en": "决策追溯主理人",
+        "zh": "决策追溯主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/decision-trace-pro.png",
+      "id": "decision-trace-pro",
+      "name": {
+        "en": "decision-trace-pro",
+        "zh": "决策追溯 依据留痕 顾问"
+      },
+      "profession": {
+        "en": "decision-trace-pro",
+        "zh": "决策追溯 依据留痕 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/changelog-pro.png",
+      "id": "changelog-pro",
+      "name": {
+        "en": "changelog-pro",
+        "zh": "变更日志 版本记录 顾问"
+      },
+      "profession": {
+        "en": "changelog-pro",
+        "zh": "变更日志 版本记录 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-tool-selection.png",
+      "id": "agent-tool-selection",
+      "name": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "profession": {
+        "en": "agent-tool-selection",
+        "zh": "工具选择 依赖排序 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-308",
+  "plugin": "group-team-308",
+  "profession": {
+    "en": "decision-trace-pro Collaboration Team",
+    "zh": "决策追溯专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 决策追溯",
+      "zh": "帮我处理决策追溯"
+    },
+    {
+      "en": "Plan 变更日志",
+      "zh": "帮我规划变更日志"
+    },
+    {
+      "en": "Review 工具选择",
+      "zh": "帮我检查工具选择"
+    }
+  ],
+  "tags": [
+    {
+      "en": "决策记录",
+      "zh": "决策记录"
+    },
+    {
+      "en": "否决留痕",
+      "zh": "否决留痕"
+    },
+    {
+      "en": "版本绑定",
+      "zh": "版本绑定"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "decision-trace-pro-team-lead",
+    "memberAgents": [
+      "decision-trace-pro",
+      "changelog-pro",
+      "agent-tool-selection"
+    ]
+  },
+  "version": "1.0.0"
+}

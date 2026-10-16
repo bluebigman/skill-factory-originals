@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-905",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-905",
+    "kind": "team",
+    "name": "文档归档规范专家",
+    "description": "擅长责任明确、验收标准与回执确认，覆盖任务交接全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-handoff-pro-team-lead",
+        "role": "lead",
+        "name": "任务交接主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-handoff-pro",
+        "role": "member",
+        "name": "任务交接 上下文传 顾问",
+        "evidence": "original_assets/agent-handoff-pro/merkle_root",
+        "member_merkle_root": "f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d"
+      },
+      {
+        "slug": "doc-archive-rule",
+        "role": "member",
+        "name": "文档归档规范 顾问",
+        "evidence": "original_assets/doc-archive-rule/merkle_root",
+        "member_merkle_root": "aebfb8a2763a9c0e90ca67c046028651271915c3eb4fb2b037305ac00873433d"
+      },
+      {
+        "slug": "sales-territory-pro",
+        "role": "member",
+        "name": "区域划分 覆盖策略 顾问",
+        "evidence": "original_assets/sales-territory-pro/merkle_root",
+        "member_merkle_root": "dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7"
+      }
+    ],
+    "team_lead": "agent-handoff-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8b9c48dd968e9162",
+  "prompt_hash": "c78b90158cf77dc9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-905\", \"kind\": \"team\", \"name\": \"文档归档规范专家\", \"description\": \"擅长责任明确、验收标准与回执确认，覆盖任务交接全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-handoff-pro-team-lead\", \"role\": \"lead\", \"name\": \"任务交接主理人\", \"evidence\": null}, {\"slug\": \"agent-handoff-pro\", \"role\": \"member\", \"name\": \"任务交接 上下文传 顾问\", \"evidence\": \"original_assets/agent-handoff-pro/merkle_root\", \"member_merkle_root\": \"f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d\"}, {\"slug\": \"doc-archive-rule\", \"role\": \"member\", \"name\": \"文档归档规范 顾问\", \"evidence\": \"original_assets/doc-archive-rule/merkle_root\", \"member_merkle_root\": \"aebfb8a2763a9c0e90ca67c046028651271915c3eb4fb2b037305ac00873433d\"}, {\"slug\": \"sales-territory-pro\", \"role\": \"member\", \"name\": \"区域划分 覆盖策略 顾问\", \"evidence\": \"original_assets/sales-territory-pro/merkle_root\", \"member_merkle_root\": \"dcb6dc3adfe047a1ccb70ab8d2663d9b0b3eabfea09e2c7e12b1a5edcc82d6f7\"}], \"team_lead\": \"agent-handoff-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-handoff-pro-team-lead.md": "00058569af4cda81333f82c16a89a1d843c054b78c1400ab3541f75adcac5252",
+    "agents/agent-handoff-pro.md": "3fee118d4cd2982bc37dc709372b6c1bc88cd4a42f3e43e9b005102211303bf2",
+    "agents/doc-archive-rule.md": "959048d067895aedc4a5857ae09e6889326abeeaf14c8a2fe2a178cb4c3b1b2b",
+    "agents/sales-territory-pro.md": "b85f4c39b4137c86d70d61646182ce9da7aaa399ff1b84ddda8bc3a2fe94011d",
+    "plugin.json": "5cac6ad93fed5ef2396e7dba9fc649340112bf948887b341c31a38b80b206294",
+    "settings.json": "66f97723d9d51de6f3954e0ef8eb5837395704f1cd40e99a2e1fdebfaf50ab3b"
+  }
+}

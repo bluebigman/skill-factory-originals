@@ -1,0 +1,126 @@
+{
+  "agentName": "stream-pipeline-pro-team-lead",
+  "agents": [
+    "./agents/stream-pipeline-pro-team-lead.md",
+    "./agents/stream-pipeline-pro.md",
+    "./agents/token-cost-control-pro.md",
+    "./agents/data-clean-pro-06.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 流式处理",
+    "zh": "帮我处理流式处理"
+  },
+  "description": "stream-pipeline-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 流式处理, covers 水位定义 / 乱序容忍 / 重复处理, delivering structured results and actionable checklists.",
+    "zh": "流式处理专家：围绕流式处理，覆盖水位定义／乱序容忍／重复处理，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "stream-pipeline-pro Team",
+    "zh": "流式处理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "stream-pipeline-pro-team-lead",
+      "name": {
+        "en": "流式处理主理人",
+        "zh": "流式处理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/stream-pipeline-pro.png",
+      "id": "stream-pipeline-pro",
+      "name": {
+        "en": "stream-pipeline-pro",
+        "zh": "流式处理 水位控制 顾问"
+      },
+      "profession": {
+        "en": "stream-pipeline-pro",
+        "zh": "流式处理 水位控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/token-cost-control-pro.png",
+      "id": "token-cost-control-pro",
+      "name": {
+        "en": "token-cost-control-pro",
+        "zh": "成本控制 上下文压 顾问"
+      },
+      "profession": {
+        "en": "token-cost-control-pro",
+        "zh": "成本控制 上下文压 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-06.png",
+      "id": "data-clean-pro-06",
+      "name": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "文档转写 结构化转换"
+      },
+      "profession": {
+        "en": "数据清洗与结构化 Suite",
+        "zh": "文档转写 结构化转换"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-810",
+  "plugin": "group-team-810",
+  "profession": {
+    "en": "stream-pipeline-pro Collaboration Team",
+    "zh": "流式处理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 流式处理",
+      "zh": "帮我处理流式处理"
+    },
+    {
+      "en": "Plan 成本控制",
+      "zh": "帮我规划成本控制"
+    },
+    {
+      "en": "Review 文档转写",
+      "zh": "帮我检查文档转写"
+    }
+  ],
+  "tags": [
+    {
+      "en": "水位定义",
+      "zh": "水位定义"
+    },
+    {
+      "en": "乱序容忍",
+      "zh": "乱序容忍"
+    },
+    {
+      "en": "重复处理",
+      "zh": "重复处理"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "stream-pipeline-pro-team-lead",
+    "memberAgents": [
+      "stream-pipeline-pro",
+      "token-cost-control-pro",
+      "data-clean-pro-06"
+    ]
+  },
+  "version": "1.0.0"
+}

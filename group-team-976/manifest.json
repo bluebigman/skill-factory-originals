@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-976",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-976",
+    "kind": "team",
+    "name": "效果归因口径统一专家",
+    "description": "输入效果归因相关需求，输出口径固定、多源对照、区分增量三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "attribution-basic-team-lead",
+        "role": "lead",
+        "name": "效果归因主理人",
+        "evidence": null
+      },
+      {
+        "slug": "attribution-basic",
+        "role": "member",
+        "name": "效果归因 口径统一 顾问",
+        "evidence": "original_assets/attribution-basic/merkle_root",
+        "member_merkle_root": "f5d005d9e236062d46347f2290e030d702c3fd4e667551c3dc11bc8db40a5d94"
+      },
+      {
+        "slug": "multi-agent-orchestrate-pro",
+        "role": "member",
+        "name": "多智能体 任务编排 顾问",
+        "evidence": "original_assets/multi-agent-orchestrate-pro/merkle_root",
+        "member_merkle_root": "af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571"
+      },
+      {
+        "slug": "error-code-design",
+        "role": "member",
+        "name": "错误码体系 设计",
+        "evidence": "original_assets/error-code-design/merkle_root",
+        "member_merkle_root": "204cf3a0bacd39639f8b6f0c1c41e5f3ee166aa7dd71053e74666431a4aaeb24"
+      }
+    ],
+    "team_lead": "attribution-basic-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2557bf1e607733f4",
+  "prompt_hash": "258717c65cb4aa34",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-976\", \"kind\": \"team\", \"name\": \"效果归因口径统一专家\", \"description\": \"输入效果归因相关需求，输出口径固定、多源对照、区分增量三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"attribution-basic-team-lead\", \"role\": \"lead\", \"name\": \"效果归因主理人\", \"evidence\": null}, {\"slug\": \"attribution-basic\", \"role\": \"member\", \"name\": \"效果归因 口径统一 顾问\", \"evidence\": \"original_assets/attribution-basic/merkle_root\", \"member_merkle_root\": \"f5d005d9e236062d46347f2290e030d702c3fd4e667551c3dc11bc8db40a5d94\"}, {\"slug\": \"multi-agent-orchestrate-pro\", \"role\": \"member\", \"name\": \"多智能体 任务编排 顾问\", \"evidence\": \"original_assets/multi-agent-orchestrate-pro/merkle_root\", \"member_merkle_root\": \"af6cb251d935491ef052c894118853c9ca38c0790c1552fde227832e8fcf2571\"}, {\"slug\": \"error-code-design\", \"role\": \"member\", \"name\": \"错误码体系 设计\", \"evidence\": \"original_assets/error-code-design/merkle_root\", \"member_merkle_root\": \"204cf3a0bacd39639f8b6f0c1c41e5f3ee166aa7dd71053e74666431a4aaeb24\"}], \"team_lead\": \"attribution-basic-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/attribution-basic-team-lead.md": "10c12ccccb72e855bdedfe7bd7302ca0d73222bbb2f0b88b7599d08fb83084e2",
+    "agents/attribution-basic.md": "512c05cc81d3e832a861c64f4f0617f7d0739523801d4990eb84572e28238b8d",
+    "agents/error-code-design.md": "ccdf9820f1b8ace0e67349c6683ef49e06a6e7b7d7b045fefb69c8ea0b708100",
+    "agents/multi-agent-orchestrate-pro.md": "475bd24a0204cfcb837b56f8374c22f9ef4ae0051424e6d421d801f521b7fe6a",
+    "plugin.json": "c4a27151eae747a804e5711f01cb4c568d6753c71e4caa474e6d4d651f8a926d",
+    "settings.json": "1c79b8e2878a737c6e275aeb132afc985636dbf1c1f9fc4fbfdec58b09dddf54"
+  }
+}

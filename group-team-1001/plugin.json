@@ -1,0 +1,126 @@
+{
+  "agentName": "expense-reimburse-expert-team-lead",
+  "agents": [
+    "./agents/expense-reimburse-expert-team-lead.md",
+    "./agents/expense-reimburse-expert.md",
+    "./agents/finance-toolkit-pro-fixed.md",
+    "./agents/tourism-itinerary.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "08-FinanceInvestment",
+  "defaultInitPrompt": {
+    "en": "Handle 报销与费用管理专家",
+    "zh": "帮我处理报销与费用管理专家"
+  },
+  "description": "ExpenseReimburse team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 行程规划, covers 费用归类 / 节奏合理 / 备选方案, delivering structured results and actionable checklists.",
+    "zh": "财务文本专家：围绕行程规划，覆盖费用归类／节奏合理／备选方案，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "ExpenseReimburse Team",
+    "zh": "财务文本专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "expense-reimburse-expert-team-lead",
+      "name": {
+        "en": "报销与费用管理专家主理人",
+        "zh": "报销与费用管理专家主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/expense-reimburse-expert.png",
+      "id": "expense-reimburse-expert",
+      "name": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "profession": {
+        "en": "ExpenseReimburse",
+        "zh": "报销与费用管理专家"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/finance-toolkit-pro-fixed.png",
+      "id": "finance-toolkit-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "财务文本 定投测算 专利"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/tourism-itinerary.png",
+      "id": "tourism-itinerary",
+      "name": {
+        "en": "tourism-itinerary",
+        "zh": "行程规划 助手"
+      },
+      "profession": {
+        "en": "tourism-itinerary",
+        "zh": "行程规划 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1001",
+  "plugin": "group-team-1001",
+  "profession": {
+    "en": "ExpenseReimburse Collaboration Team",
+    "zh": "财务文本专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 报销与费用管理专家",
+      "zh": "帮我处理报销与费用管理专家"
+    },
+    {
+      "en": "Plan 财务文本",
+      "zh": "帮我规划财务文本"
+    },
+    {
+      "en": "Review 行程规划",
+      "zh": "帮我检查行程规划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "费用归类",
+      "zh": "费用归类"
+    },
+    {
+      "en": "发票要素核验",
+      "zh": "发票要素核验"
+    },
+    {
+      "en": "报销明细输出",
+      "zh": "报销明细输出"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "expense-reimburse-expert-team-lead",
+    "memberAgents": [
+      "expense-reimburse-expert",
+      "finance-toolkit-pro-fixed",
+      "tourism-itinerary"
+    ]
+  },
+  "version": "1.0.0"
+}

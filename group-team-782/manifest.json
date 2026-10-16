@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-782",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-782",
+    "kind": "team",
+    "name": "需求追踪实现映射专家",
+    "description": "需求追踪实现映射专家：围绕需求追踪，覆盖双向追踪／覆盖验证／变更影响，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "requirement-trace-pro-team-lead",
+        "role": "lead",
+        "name": "需求追踪主理人",
+        "evidence": null
+      },
+      {
+        "slug": "requirement-trace-pro",
+        "role": "member",
+        "name": "需求追踪 实现映射 顾问",
+        "evidence": "original_assets/requirement-trace-pro/merkle_root",
+        "member_merkle_root": "252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f"
+      },
+      {
+        "slug": "cross-border-invoice-pro",
+        "role": "member",
+        "name": "跨境发票 信息核对 助手",
+        "evidence": "original_assets/cross-border-invoice-pro/merkle_root",
+        "member_merkle_root": "8e198007bcd94c9ee4122e88ceccb66b1553e99098d3996342b8c18b773d5a27"
+      },
+      {
+        "slug": "key-account-plan",
+        "role": "member",
+        "name": "大客户 经营计划 顾问",
+        "evidence": "original_assets/key-account-plan/merkle_root",
+        "member_merkle_root": "68c33eb6f831f8869f1a9bf2ad9a250edc877be6fc476debc2d34450d3c6b347"
+      }
+    ],
+    "team_lead": "requirement-trace-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a9b52645d6e1f12e",
+  "prompt_hash": "5ae65f9eadb88460",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-782\", \"kind\": \"team\", \"name\": \"需求追踪实现映射专家\", \"description\": \"需求追踪实现映射专家：围绕需求追踪，覆盖双向追踪／覆盖验证／变更影响，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"requirement-trace-pro-team-lead\", \"role\": \"lead\", \"name\": \"需求追踪主理人\", \"evidence\": null}, {\"slug\": \"requirement-trace-pro\", \"role\": \"member\", \"name\": \"需求追踪 实现映射 顾问\", \"evidence\": \"original_assets/requirement-trace-pro/merkle_root\", \"member_merkle_root\": \"252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f\"}, {\"slug\": \"cross-border-invoice-pro\", \"role\": \"member\", \"name\": \"跨境发票 信息核对 助手\", \"evidence\": \"original_assets/cross-border-invoice-pro/merkle_root\", \"member_merkle_root\": \"8e198007bcd94c9ee4122e88ceccb66b1553e99098d3996342b8c18b773d5a27\"}, {\"slug\": \"key-account-plan\", \"role\": \"member\", \"name\": \"大客户 经营计划 顾问\", \"evidence\": \"original_assets/key-account-plan/merkle_root\", \"member_merkle_root\": \"68c33eb6f831f8869f1a9bf2ad9a250edc877be6fc476debc2d34450d3c6b347\"}], \"team_lead\": \"requirement-trace-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cross-border-invoice-pro.md": "97d45c740d538800c85653de5d76ec99916e85dfdfaa6ed9074658d0c88e3c78",
+    "agents/key-account-plan.md": "51c2ee0fd738f11ba04f878f12f4f43e17f109671bf04e2f39602049741740e9",
+    "agents/requirement-trace-pro-team-lead.md": "06cb98a0775cdb33775067badecda07d9a7efd887118a3f778dc6e7a700d79f6",
+    "agents/requirement-trace-pro.md": "f108b8a67b5b523c20a7cec64dd2e07115a701c4dfc0236447bfa318866785b5",
+    "plugin.json": "8c9eb0e1613a8c571479526fa4b1fe22e78cecaba467e05dd92cda15e9ce8794",
+    "settings.json": "571cc8434d5086415262acaad8f3799e2563749a8de6abaeb03f615506d4e620"
+  }
+}

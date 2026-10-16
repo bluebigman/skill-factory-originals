@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-188",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-188",
+    "kind": "team",
+    "name": "数据 体验 协议 团队",
+    "description": "数据 体验 协议 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "toolkit-pro-team-lead",
+        "role": "lead",
+        "name": "数据采集清洗主理人",
+        "evidence": null
+      },
+      {
+        "slug": "toolkit-pro",
+        "role": "member",
+        "name": "数据采集清洗 回放自动化",
+        "evidence": "original_assets/toolkit-pro/merkle_root",
+        "member_merkle_root": "1aa70d2bc0ccb6f20fa9541f6db77de92b1bc1e4de2bf3df5b39577d2bd76518"
+      },
+      {
+        "slug": "toolkit-pro-08-fixed",
+        "role": "member",
+        "name": "UX设计 样例解析 情节构建",
+        "evidence": "original_assets/toolkit-pro-08-fixed/merkle_root",
+        "member_merkle_root": "4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6"
+      },
+      {
+        "slug": "api-toolkit-pro-fixed",
+        "role": "member",
+        "name": "协议转换 REST",
+        "evidence": "original_assets/api-toolkit-pro-fixed/merkle_root",
+        "member_merkle_root": "b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23"
+      }
+    ],
+    "team_lead": "toolkit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fcf72cc4b2d8375b",
+  "prompt_hash": "77d5887c8ce17627",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-188\", \"kind\": \"team\", \"name\": \"数据 体验 协议 团队\", \"description\": \"数据 体验 协议 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"toolkit-pro-team-lead\", \"role\": \"lead\", \"name\": \"数据采集清洗主理人\", \"evidence\": null}, {\"slug\": \"toolkit-pro\", \"role\": \"member\", \"name\": \"数据采集清洗 回放自动化\", \"evidence\": \"original_assets/toolkit-pro/merkle_root\", \"member_merkle_root\": \"1aa70d2bc0ccb6f20fa9541f6db77de92b1bc1e4de2bf3df5b39577d2bd76518\"}, {\"slug\": \"toolkit-pro-08-fixed\", \"role\": \"member\", \"name\": \"UX设计 样例解析 情节构建\", \"evidence\": \"original_assets/toolkit-pro-08-fixed/merkle_root\", \"member_merkle_root\": \"4840dc269de639bf2f0d8d117d5f6a3e0163d9d4b16ec5adf0de65a2ce49d5a6\"}, {\"slug\": \"api-toolkit-pro-fixed\", \"role\": \"member\", \"name\": \"协议转换 REST\", \"evidence\": \"original_assets/api-toolkit-pro-fixed/merkle_root\", \"member_merkle_root\": \"b9e767a072cb1fa8a4dadb889cf46523cf58d1952b72a59a97d569b6529dbf23\"}], \"team_lead\": \"toolkit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-toolkit-pro-fixed.md": "9999cf92f2c277c34a50f0ec63af4a93cfe1a0d9104f19f5dbe67cb615fc0c53",
+    "agents/toolkit-pro-08-fixed.md": "deec49a3cddd9273e25cedf76c7cdd3f4bee7895e6a3377976751f595a98d82c",
+    "agents/toolkit-pro-team-lead.md": "1905743fe5b642cac2335bb71ab13b7b4222a0f2a2c85f1b91bf3c9c2b39aefc",
+    "agents/toolkit-pro.md": "a166ab402e7699b12224833ab99e77f037f4257131c1c8b3ca9031edef984ff5",
+    "plugin.json": "27454b57a4cad9783f3634a8c659308302c9969ae138d608f5e14407327c9a88",
+    "settings.json": "8d8a2171b54685adbd74bd55345bb2a7b7c3f0d793052c020c5637fb1281957a"
+  }
+}

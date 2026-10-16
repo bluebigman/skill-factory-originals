@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1204",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1204",
+    "kind": "team",
+    "name": "组合测试设计专家",
+    "description": "擅长参数建模、两两覆盖与约束声明，覆盖组合测试设计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "test-combinatorial-team-lead",
+        "role": "lead",
+        "name": "组合测试设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "test-combinatorial",
+        "role": "member",
+        "name": "组合测试设计 助手",
+        "evidence": "original_assets/test-combinatorial/merkle_root",
+        "member_merkle_root": "1fed7029ebb653dffe05144ec8d68c161d00076660ec1eb4a635c9b67ebd5e94"
+      },
+      {
+        "slug": "presales-support-pro",
+        "role": "member",
+        "name": "售前支持 方案配合 顾问",
+        "evidence": "original_assets/presales-support-pro/merkle_root",
+        "member_merkle_root": "98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e"
+      },
+      {
+        "slug": "key-account-plan",
+        "role": "member",
+        "name": "大客户 经营计划 顾问",
+        "evidence": "original_assets/key-account-plan/merkle_root",
+        "member_merkle_root": "68c33eb6f831f8869f1a9bf2ad9a250edc877be6fc476debc2d34450d3c6b347"
+      }
+    ],
+    "team_lead": "test-combinatorial-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d11d226bb81cc31d",
+  "prompt_hash": "3466a09119fdac74",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1204\", \"kind\": \"team\", \"name\": \"组合测试设计专家\", \"description\": \"擅长参数建模、两两覆盖与约束声明，覆盖组合测试设计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"test-combinatorial-team-lead\", \"role\": \"lead\", \"name\": \"组合测试设计主理人\", \"evidence\": null}, {\"slug\": \"test-combinatorial\", \"role\": \"member\", \"name\": \"组合测试设计 助手\", \"evidence\": \"original_assets/test-combinatorial/merkle_root\", \"member_merkle_root\": \"1fed7029ebb653dffe05144ec8d68c161d00076660ec1eb4a635c9b67ebd5e94\"}, {\"slug\": \"presales-support-pro\", \"role\": \"member\", \"name\": \"售前支持 方案配合 顾问\", \"evidence\": \"original_assets/presales-support-pro/merkle_root\", \"member_merkle_root\": \"98975f4ae64684a0e928755d6c7076f37f8c915250f648810d71c56fd5a6ff6e\"}, {\"slug\": \"key-account-plan\", \"role\": \"member\", \"name\": \"大客户 经营计划 顾问\", \"evidence\": \"original_assets/key-account-plan/merkle_root\", \"member_merkle_root\": \"68c33eb6f831f8869f1a9bf2ad9a250edc877be6fc476debc2d34450d3c6b347\"}], \"team_lead\": \"test-combinatorial-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/key-account-plan.md": "00d637bf9f9810a71592185b8ef521683e432a909b26418719c442215ed9fd2a",
+    "agents/presales-support-pro.md": "86a87ba8976c00234878e8891427ebd041d884320285d852341ebb1b2dd44b46",
+    "agents/test-combinatorial-team-lead.md": "0facd10a1bb525b351f077d9d1298c510eaa74fbbe35c5cb4a21b63e2fdca48e",
+    "agents/test-combinatorial.md": "357f3daabb6b4316b0e7d0084563e83153e840b56ad6239a421af9700e9bbda5",
+    "plugin.json": "0c7a9d864b02d7efcb3aa877b84df217f4232ab3de5f4aef04bd65dcf8b7f6a3",
+    "settings.json": "0d963203273cfea810027906cf4f221bcc2836768e31fdddd5434233c07941ad"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-594",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-594",
+    "kind": "team",
+    "name": "智能体配置专家",
+    "description": "擅长执行计划、子查询优化与AI提示词优化器，覆盖SQL全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sql-review-pro-team-lead",
+        "role": "lead",
+        "name": "SQL主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sql-review-pro",
+        "role": "member",
+        "name": "SQL 审查 顾问",
+        "evidence": "original_assets/sql-review-pro/merkle_root",
+        "member_merkle_root": "578a9523d4b4f6cd9680eeeb334e028e2f5dcb600bed123ca9db5698257016c5"
+      },
+      {
+        "slug": "agent-workspace-expert",
+        "role": "member",
+        "name": "智能体配置 记忆管理",
+        "evidence": "original_assets/agent-workspace-expert/merkle_root",
+        "member_merkle_root": "27c50a6600291068168073c6daeca8d076e484cb51d32d261c6cd34a710660e5"
+      },
+      {
+        "slug": "prompt-effect-tuning-expert",
+        "role": "member",
+        "name": "提示词 效果优化 调优助手",
+        "evidence": "original_assets/prompt-effect-tuning-expert/merkle_root",
+        "member_merkle_root": "42542ae4f6bc6b755e28389604837b7ee54457ddcbfbcec2d7a88ba1cca3d121"
+      }
+    ],
+    "team_lead": "sql-review-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4fa330930102a9a0",
+  "prompt_hash": "1c235b50a4b0b2a8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-594\", \"kind\": \"team\", \"name\": \"智能体配置专家\", \"description\": \"擅长执行计划、子查询优化与AI提示词优化器，覆盖SQL全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sql-review-pro-team-lead\", \"role\": \"lead\", \"name\": \"SQL主理人\", \"evidence\": null}, {\"slug\": \"sql-review-pro\", \"role\": \"member\", \"name\": \"SQL 审查 顾问\", \"evidence\": \"original_assets/sql-review-pro/merkle_root\", \"member_merkle_root\": \"578a9523d4b4f6cd9680eeeb334e028e2f5dcb600bed123ca9db5698257016c5\"}, {\"slug\": \"agent-workspace-expert\", \"role\": \"member\", \"name\": \"智能体配置 记忆管理\", \"evidence\": \"original_assets/agent-workspace-expert/merkle_root\", \"member_merkle_root\": \"27c50a6600291068168073c6daeca8d076e484cb51d32d261c6cd34a710660e5\"}, {\"slug\": \"prompt-effect-tuning-expert\", \"role\": \"member\", \"name\": \"提示词 效果优化 调优助手\", \"evidence\": \"original_assets/prompt-effect-tuning-expert/merkle_root\", \"member_merkle_root\": \"42542ae4f6bc6b755e28389604837b7ee54457ddcbfbcec2d7a88ba1cca3d121\"}], \"team_lead\": \"sql-review-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-workspace-expert.md": "7632f0480272671c58adcafc04ebcbca4c9fa63c54c23f2b336f0035721fa70f",
+    "agents/prompt-effect-tuning-expert.md": "7cea94c1ae9b24600fa7d3263ec89dcf2ab371cf6d10bce44051d38a8bd339aa",
+    "agents/sql-review-pro-team-lead.md": "e0b1c75f1f861fedf7a73c193cc2a99b14539c35bd5aebd7e279587159012dbc",
+    "agents/sql-review-pro.md": "27e653832bec54d7fa289ab43ae5157d680da1fe5b76c9f998903067b5821df5",
+    "plugin.json": "d3ea0ada4c7e98445272316356189a5379de5c10d5d016d7d1248fc286f370cc",
+    "settings.json": "c72d74ec07c36b90fa8493bebf5a1cb7325d00aebcbe4b9c39723aa4e5a187a0"
+  }
+}

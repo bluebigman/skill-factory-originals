@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1042",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1042",
+    "kind": "team",
+    "name": "密钥安全管理专家",
+    "description": "擅长环境隔离、最小权限与轮换机制，覆盖密钥安全管理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "secrets-management-team-lead",
+        "role": "lead",
+        "name": "密钥安全管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "secrets-management",
+        "role": "member",
+        "name": "密钥安全管理 顾问",
+        "evidence": "original_assets/secrets-management/merkle_root",
+        "member_merkle_root": "8842c385e4894c4901da96a0f13e6a858751db09594d97e6062d3e459b225650"
+      },
+      {
+        "slug": "doc-content-policy",
+        "role": "member",
+        "name": "文档内容合规 顾问",
+        "evidence": "original_assets/doc-content-policy/merkle_root",
+        "member_merkle_root": "bf14a8a9ab6d08bc54ee94a6a41a8fe705c4fcac01bf8f6c091f9e2ce01c19c7"
+      },
+      {
+        "slug": "access-review-cycle",
+        "role": "member",
+        "name": "权限复核周期 顾问",
+        "evidence": "original_assets/access-review-cycle/merkle_root",
+        "member_merkle_root": "836faa9b51d072dfcb3c5fd52d3d064d16279d785cb79d6877e520b5cf04c12b"
+      }
+    ],
+    "team_lead": "secrets-management-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2159f94cea4d13ae",
+  "prompt_hash": "fdfb81732d20ecaa",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1042\", \"kind\": \"team\", \"name\": \"密钥安全管理专家\", \"description\": \"擅长环境隔离、最小权限与轮换机制，覆盖密钥安全管理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"secrets-management-team-lead\", \"role\": \"lead\", \"name\": \"密钥安全管理主理人\", \"evidence\": null}, {\"slug\": \"secrets-management\", \"role\": \"member\", \"name\": \"密钥安全管理 顾问\", \"evidence\": \"original_assets/secrets-management/merkle_root\", \"member_merkle_root\": \"8842c385e4894c4901da96a0f13e6a858751db09594d97e6062d3e459b225650\"}, {\"slug\": \"doc-content-policy\", \"role\": \"member\", \"name\": \"文档内容合规 顾问\", \"evidence\": \"original_assets/doc-content-policy/merkle_root\", \"member_merkle_root\": \"bf14a8a9ab6d08bc54ee94a6a41a8fe705c4fcac01bf8f6c091f9e2ce01c19c7\"}, {\"slug\": \"access-review-cycle\", \"role\": \"member\", \"name\": \"权限复核周期 顾问\", \"evidence\": \"original_assets/access-review-cycle/merkle_root\", \"member_merkle_root\": \"836faa9b51d072dfcb3c5fd52d3d064d16279d785cb79d6877e520b5cf04c12b\"}], \"team_lead\": \"secrets-management-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/access-review-cycle.md": "1cb2107af6a4f7d2a92d05a503f8e746c6129ea045d90a7661ecd67c17ae7c80",
+    "agents/doc-content-policy.md": "de541f453da1132ff3e109dcadc5f629a5dadf7bd5046f908ac8dd761819e6fb",
+    "agents/secrets-management-team-lead.md": "52915b8db936d4761cb7ff9171fbb69ba0af9414cfaf4090c401f6d7df00eabc",
+    "agents/secrets-management.md": "9c2688d0fa893522c89bc952c8f4a49765b72f67db6cadf8177bb20e79fee9db",
+    "plugin.json": "a84cd19e6f57f2eb64a061d015ba19eb176e2b916182ab96bdec1b5c2457f441",
+    "settings.json": "3370acf2206510fd0896914ca47f31e155a874e571112b3c122d742fe78b1788"
+  }
+}

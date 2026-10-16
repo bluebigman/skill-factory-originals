@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1196",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1196",
+    "kind": "team",
+    "name": "变更日志专家",
+    "description": "变更日志专家：围绕变更日志，覆盖分类清晰／影响说明／日期明确，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "changelog-pro-team-lead",
+        "role": "lead",
+        "name": "变更日志主理人",
+        "evidence": null
+      },
+      {
+        "slug": "changelog-pro",
+        "role": "member",
+        "name": "变更日志 版本记录 顾问",
+        "evidence": "original_assets/changelog-pro/merkle_root",
+        "member_merkle_root": "36496aadd03d734d904388dfe78b222fee895715fd79fcdb091a460e6296b1ac"
+      },
+      {
+        "slug": "metric-anomaly-alert",
+        "role": "member",
+        "name": "指标异常 波动检测 顾问",
+        "evidence": "original_assets/metric-anomaly-alert/merkle_root",
+        "member_merkle_root": "1f45b6f01b947bf34d5a0b67e25611f515c498d90a1aa1c5287b486de3c81bdf"
+      },
+      {
+        "slug": "data-clean-pro-04",
+        "role": "member",
+        "name": "数据整理 字段还原 批量处理",
+        "evidence": "original_assets/data-clean-pro-04/merkle_root",
+        "member_merkle_root": "5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9"
+      }
+    ],
+    "team_lead": "changelog-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "845da6add93fc8f9",
+  "prompt_hash": "5107f67f45308214",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1196\", \"kind\": \"team\", \"name\": \"变更日志专家\", \"description\": \"变更日志专家：围绕变更日志，覆盖分类清晰／影响说明／日期明确，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"changelog-pro-team-lead\", \"role\": \"lead\", \"name\": \"变更日志主理人\", \"evidence\": null}, {\"slug\": \"changelog-pro\", \"role\": \"member\", \"name\": \"变更日志 版本记录 顾问\", \"evidence\": \"original_assets/changelog-pro/merkle_root\", \"member_merkle_root\": \"36496aadd03d734d904388dfe78b222fee895715fd79fcdb091a460e6296b1ac\"}, {\"slug\": \"metric-anomaly-alert\", \"role\": \"member\", \"name\": \"指标异常 波动检测 顾问\", \"evidence\": \"original_assets/metric-anomaly-alert/merkle_root\", \"member_merkle_root\": \"1f45b6f01b947bf34d5a0b67e25611f515c498d90a1aa1c5287b486de3c81bdf\"}, {\"slug\": \"data-clean-pro-04\", \"role\": \"member\", \"name\": \"数据整理 字段还原 批量处理\", \"evidence\": \"original_assets/data-clean-pro-04/merkle_root\", \"member_merkle_root\": \"5940cb4ee8a3acc224a8f57576e2e74ae92510987a9afc24ed85c92312eb21c9\"}], \"team_lead\": \"changelog-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/changelog-pro-team-lead.md": "c1ecdf3415a7b99fdeb6d2adb0cb70f8ed5ee75a6fd147625104f6a1f0e06637",
+    "agents/changelog-pro.md": "383dd0a621e9649877bae53d9bece81f4c260210ece9b0c3c95dc01b5dd7986e",
+    "agents/data-clean-pro-04.md": "afbb978427b6f600568af15fa2a87d6d2afc0df617ff7fbd7c453f31bb6983e6",
+    "agents/metric-anomaly-alert.md": "8ea0a1807f1b3be02c3369e461e89cf5386091003917d35df92fc13b3dfd0bee",
+    "plugin.json": "b6aa3a7fee73160a11efb4c6d24de8bbd862629dd12141a5b0eb8dd964d584a2",
+    "settings.json": "23cece33b60b809f9b7ce1be425e379c30d8a3dd71c857a1c990c8a2cb914f46"
+  }
+}

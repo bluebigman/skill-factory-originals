@@ -1,0 +1,126 @@
+{
+  "agentName": "api-link-delivery-expert-team-lead",
+  "agents": [
+    "./agents/api-link-delivery-expert-team-lead.md",
+    "./agents/api-link-delivery-expert.md",
+    "./agents/api-integration-hygiene-expert.md",
+    "./agents/code-guard-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 接口联调",
+    "zh": "帮我处理接口联调"
+  },
+  "description": "API Integration Link Delivery Expert team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "回调 精度 缺陷 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "API Integration Link Delivery Expert Team",
+    "zh": "回调 精度 缺陷 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-link-delivery-expert-team-lead",
+      "name": {
+        "en": "接口联调主理人",
+        "zh": "接口联调主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-link-delivery-expert.png",
+      "id": "api-link-delivery-expert",
+      "name": {
+        "en": "API Integration Link Delivery Expert",
+        "zh": "接口联调 回调投递 链路核验"
+      },
+      "profession": {
+        "en": "API Integration Link Delivery Expert",
+        "zh": "接口联调 回调投递 链路核验"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-integration-hygiene-expert.png",
+      "id": "api-integration-hygiene-expert",
+      "name": {
+        "en": "API Integration Hygiene Expert",
+        "zh": "接口调试 精度 跳转 上传核验"
+      },
+      "profession": {
+        "en": "API Integration Hygiene Expert",
+        "zh": "接口调试 精度 跳转 上传核验"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-guard-pro.png",
+      "id": "code-guard-pro",
+      "name": {
+        "en": "Code Review Gatekeeper",
+        "zh": "代码审查 缺陷定位 修复建议"
+      },
+      "profession": {
+        "en": "Code Review Gatekeeper",
+        "zh": "代码审查 缺陷定位 修复建议"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-140",
+  "plugin": "group-team-140",
+  "profession": {
+    "en": "API Integration Link Delivery Expert Collaboration Team",
+    "zh": "回调 精度 缺陷 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口联调",
+      "zh": "帮我处理接口联调"
+    },
+    {
+      "en": "Plan 接口调试",
+      "zh": "帮我规划接口调试"
+    },
+    {
+      "en": "Review 代码审查",
+      "zh": "帮我检查代码审查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "接口联调",
+      "zh": "接口联调"
+    },
+    {
+      "en": "接口调试",
+      "zh": "接口调试"
+    },
+    {
+      "en": "代码审查",
+      "zh": "代码审查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-link-delivery-expert-team-lead",
+    "memberAgents": [
+      "api-link-delivery-expert",
+      "api-integration-hygiene-expert",
+      "code-guard-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1249",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1249",
+    "kind": "team",
+    "name": "断点调试专家",
+    "description": "擅长二分定位、条件断点与观察变量，覆盖断点调试全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "debug-breakpoint-pro-team-lead",
+        "role": "lead",
+        "name": "断点调试主理人",
+        "evidence": null
+      },
+      {
+        "slug": "debug-breakpoint-pro",
+        "role": "member",
+        "name": "断点调试 顾问",
+        "evidence": "original_assets/debug-breakpoint-pro/merkle_root",
+        "member_merkle_root": "51a725c9d32bf9dca693a9a998a6e830bfe21a6efc0b160d82dec8d5affe4d10"
+      },
+      {
+        "slug": "query-optimize",
+        "role": "member",
+        "name": "查询优化 助手",
+        "evidence": "original_assets/query-optimize/merkle_root",
+        "member_merkle_root": "f81b110a93ff28ca463ad2b5739dfc8902a90e14714046fbc310fa20d58a49ce"
+      },
+      {
+        "slug": "data-clean-pro-02",
+        "role": "member",
+        "name": "医疗行政 结构化输出 批量处理",
+        "evidence": "original_assets/data-clean-pro-02/merkle_root",
+        "member_merkle_root": "e4fa4377b54cc93d3877dc8f53b2626e5b1092362f9372bc0f2d8bc8c57a0458"
+      }
+    ],
+    "team_lead": "debug-breakpoint-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b050d54686639ee7",
+  "prompt_hash": "e36f8cc3417412e1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1249\", \"kind\": \"team\", \"name\": \"断点调试专家\", \"description\": \"擅长二分定位、条件断点与观察变量，覆盖断点调试全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"debug-breakpoint-pro-team-lead\", \"role\": \"lead\", \"name\": \"断点调试主理人\", \"evidence\": null}, {\"slug\": \"debug-breakpoint-pro\", \"role\": \"member\", \"name\": \"断点调试 顾问\", \"evidence\": \"original_assets/debug-breakpoint-pro/merkle_root\", \"member_merkle_root\": \"51a725c9d32bf9dca693a9a998a6e830bfe21a6efc0b160d82dec8d5affe4d10\"}, {\"slug\": \"query-optimize\", \"role\": \"member\", \"name\": \"查询优化 助手\", \"evidence\": \"original_assets/query-optimize/merkle_root\", \"member_merkle_root\": \"f81b110a93ff28ca463ad2b5739dfc8902a90e14714046fbc310fa20d58a49ce\"}, {\"slug\": \"data-clean-pro-02\", \"role\": \"member\", \"name\": \"医疗行政 结构化输出 批量处理\", \"evidence\": \"original_assets/data-clean-pro-02/merkle_root\", \"member_merkle_root\": \"e4fa4377b54cc93d3877dc8f53b2626e5b1092362f9372bc0f2d8bc8c57a0458\"}], \"team_lead\": \"debug-breakpoint-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-clean-pro-02.md": "8d60b368bdd1edbef66167fe44c2bbb6750f576e9e532075fcb5730bb188d4ac",
+    "agents/debug-breakpoint-pro-team-lead.md": "370bdec7a0453a0c54a4b86a334b68b424f626f03f8433c607352bae2bb788c2",
+    "agents/debug-breakpoint-pro.md": "93a65387ed37e7f7c03ba5b9750416211de29cb0bdf86939524d512e796385fd",
+    "agents/query-optimize.md": "57006b71e73c500cb9fee423ce816030cec6e14c0ca13dca4d1ac222a73df2d9",
+    "plugin.json": "b91c1ce7e9f3d4307c7a6f3a137e7bdf13b4189eb26febe1509fce3280cddaee",
+    "settings.json": "c262d3d3d230e1db41ea8eb9bef47646ed4220c582379dd09b320dcf0f9767f9"
+  }
+}

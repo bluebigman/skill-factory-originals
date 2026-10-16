@@ -1,0 +1,126 @@
+{
+  "agentName": "ar-vr-usability-team-lead",
+  "agents": [
+    "./agents/ar-vr-usability-team-lead.md",
+    "./agents/ar-vr-usability.md",
+    "./agents/form-design-pro.md",
+    "./agents/multiplayer-match-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 沉浸体验",
+    "zh": "帮我处理沉浸体验"
+  },
+  "description": "ar-vr-usability team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 沉浸体验 end-to-end: 视差控制, 舒适模式 and 单次限时. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长视差控制、舒适模式与单次限时，覆盖沉浸体验全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ar-vr-usability Team",
+    "zh": "沉浸体验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ar-vr-usability-team-lead",
+      "name": {
+        "en": "沉浸体验主理人",
+        "zh": "沉浸体验主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ar-vr-usability.png",
+      "id": "ar-vr-usability",
+      "name": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "profession": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/form-design-pro.png",
+      "id": "form-design-pro",
+      "name": {
+        "en": "form-design-pro",
+        "zh": "表单设计 填写体验 顾问"
+      },
+      "profession": {
+        "en": "form-design-pro",
+        "zh": "表单设计 填写体验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/multiplayer-match-pro.png",
+      "id": "multiplayer-match-pro",
+      "name": {
+        "en": "multiplayer-match-pro",
+        "zh": "对战匹配 公平性 顾问"
+      },
+      "profession": {
+        "en": "multiplayer-match-pro",
+        "zh": "对战匹配 公平性 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1117",
+  "plugin": "group-team-1117",
+  "profession": {
+    "en": "ar-vr-usability Collaboration Team",
+    "zh": "沉浸体验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 沉浸体验",
+      "zh": "帮我处理沉浸体验"
+    },
+    {
+      "en": "Plan 表单设计",
+      "zh": "帮我规划表单设计"
+    },
+    {
+      "en": "Review 对战匹配",
+      "zh": "帮我检查对战匹配"
+    }
+  ],
+  "tags": [
+    {
+      "en": "视差控制",
+      "zh": "视差控制"
+    },
+    {
+      "en": "舒适模式",
+      "zh": "舒适模式"
+    },
+    {
+      "en": "单次限时",
+      "zh": "单次限时"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ar-vr-usability-team-lead",
+    "memberAgents": [
+      "ar-vr-usability",
+      "form-design-pro",
+      "multiplayer-match-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

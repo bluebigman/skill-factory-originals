@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-857",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-857",
+    "kind": "team",
+    "name": "管线时效延迟监控专家",
+    "description": "管线时效延迟监控专家：围绕管线时效，覆盖水位监控／超时告警／分级承诺，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-pipeline-sla-team-lead",
+        "role": "lead",
+        "name": "管线时效主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-pipeline-sla",
+        "role": "member",
+        "name": "管线时效 延迟监控 顾问",
+        "evidence": "original_assets/data-pipeline-sla/merkle_root",
+        "member_merkle_root": "47f7adb5fa7c316552f4f09a0bd78259c3846d48b44e4a561a61deffd29f3040"
+      },
+      {
+        "slug": "code-dev-pro",
+        "role": "member",
+        "name": "代码开发 调试修复",
+        "evidence": "original_assets/code-dev-pro/merkle_root",
+        "member_merkle_root": "1553f4664a170903486a4f38a29ebd6db44db2c8c47c66d80b601fdd89b6c8be"
+      },
+      {
+        "slug": "agent-data-boundary",
+        "role": "member",
+        "name": "数据边界 范围控制 顾问",
+        "evidence": "original_assets/agent-data-boundary/merkle_root",
+        "member_merkle_root": "cdf727347bd633bdebce2476e9df79cce87aff810fb4861b8a487652af19d248"
+      }
+    ],
+    "team_lead": "data-pipeline-sla-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "57e91b323917f09b",
+  "prompt_hash": "af5e18af022ddb6e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-857\", \"kind\": \"team\", \"name\": \"管线时效延迟监控专家\", \"description\": \"管线时效延迟监控专家：围绕管线时效，覆盖水位监控／超时告警／分级承诺，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-pipeline-sla-team-lead\", \"role\": \"lead\", \"name\": \"管线时效主理人\", \"evidence\": null}, {\"slug\": \"data-pipeline-sla\", \"role\": \"member\", \"name\": \"管线时效 延迟监控 顾问\", \"evidence\": \"original_assets/data-pipeline-sla/merkle_root\", \"member_merkle_root\": \"47f7adb5fa7c316552f4f09a0bd78259c3846d48b44e4a561a61deffd29f3040\"}, {\"slug\": \"code-dev-pro\", \"role\": \"member\", \"name\": \"代码开发 调试修复\", \"evidence\": \"original_assets/code-dev-pro/merkle_root\", \"member_merkle_root\": \"1553f4664a170903486a4f38a29ebd6db44db2c8c47c66d80b601fdd89b6c8be\"}, {\"slug\": \"agent-data-boundary\", \"role\": \"member\", \"name\": \"数据边界 范围控制 顾问\", \"evidence\": \"original_assets/agent-data-boundary/merkle_root\", \"member_merkle_root\": \"cdf727347bd633bdebce2476e9df79cce87aff810fb4861b8a487652af19d248\"}], \"team_lead\": \"data-pipeline-sla-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-data-boundary.md": "3004460478a9ab3eb6646bbfbb12ec6e181c15f713d2069e47505b4a5b48774f",
+    "agents/code-dev-pro.md": "f51dc6eedc3e5e412fe8dcfa0eeed8dc6af27faf109266984217d02b7e016fff",
+    "agents/data-pipeline-sla-team-lead.md": "8ad397794e35eba1ac04e7e2c2c4fb3425e854696769f5b70635f46c048c86a9",
+    "agents/data-pipeline-sla.md": "5b4cfcc36474b9c3f1c02ff10c66518dfce64480efc94cc4581e612dc2d66da6",
+    "plugin.json": "e4f40e0f3eb73a5a1cb6f157a2e4d8cb19968a5c20d985e471f352917b963cd2",
+    "settings.json": "7a8950b4ee5b2c82727daac0e69304b32bdc7801b60ae3bde20dd073f5328e26"
+  }
+}

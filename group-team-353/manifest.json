@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-353",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-353",
+    "kind": "team",
+    "name": "体验度量指标体系专家",
+    "description": "擅长分层指标、口径固定与定期复盘，覆盖体验度量全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ux-metrics-pro-team-lead",
+        "role": "lead",
+        "name": "体验度量主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ux-metrics-pro",
+        "role": "member",
+        "name": "体验度量 指标体系 顾问",
+        "evidence": "original_assets/ux-metrics-pro/merkle_root",
+        "member_merkle_root": "5421e7a7ef689f103d36e0e8397d1426c4293c4efcffc590b2969d2da3146e05"
+      },
+      {
+        "slug": "info-architecture",
+        "role": "member",
+        "name": "信息架构 梳理 顾问",
+        "evidence": "original_assets/info-architecture/merkle_root",
+        "member_merkle_root": "0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105"
+      },
+      {
+        "slug": "prototype-method",
+        "role": "member",
+        "name": "原型验证 保真度 顾问",
+        "evidence": "original_assets/prototype-method/merkle_root",
+        "member_merkle_root": "c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3"
+      }
+    ],
+    "team_lead": "ux-metrics-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d79eb4275dc8d35f",
+  "prompt_hash": "f7742ab3828c94ca",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-353\", \"kind\": \"team\", \"name\": \"体验度量指标体系专家\", \"description\": \"擅长分层指标、口径固定与定期复盘，覆盖体验度量全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ux-metrics-pro-team-lead\", \"role\": \"lead\", \"name\": \"体验度量主理人\", \"evidence\": null}, {\"slug\": \"ux-metrics-pro\", \"role\": \"member\", \"name\": \"体验度量 指标体系 顾问\", \"evidence\": \"original_assets/ux-metrics-pro/merkle_root\", \"member_merkle_root\": \"5421e7a7ef689f103d36e0e8397d1426c4293c4efcffc590b2969d2da3146e05\"}, {\"slug\": \"info-architecture\", \"role\": \"member\", \"name\": \"信息架构 梳理 顾问\", \"evidence\": \"original_assets/info-architecture/merkle_root\", \"member_merkle_root\": \"0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105\"}, {\"slug\": \"prototype-method\", \"role\": \"member\", \"name\": \"原型验证 保真度 顾问\", \"evidence\": \"original_assets/prototype-method/merkle_root\", \"member_merkle_root\": \"c30403183347a34123c3c8d726041b1aba0e6de78144e69f092f6c8406952da3\"}], \"team_lead\": \"ux-metrics-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/info-architecture.md": "099313de31d44ad2a7ac14c59bea1344bf8bab344c8e9488515c4e7d55aa8a5a",
+    "agents/prototype-method.md": "6e5cbdc51cd755baa6d4d28e66d252962c6dc254496e06e62cba01b4acd69c1f",
+    "agents/ux-metrics-pro-team-lead.md": "1f0fb4c388a8b41f5d3e77dab052c3f088711bb53fd2f5c2067e8d432dff0baf",
+    "agents/ux-metrics-pro.md": "6959e956447e1d7f904d770ed566637068a547bd7fbbd6308a39777d5437720f",
+    "plugin.json": "edd4f954def01c8164c366bf8fb4014bc5d77ceb8004ff3716a7a49029566b86",
+    "settings.json": "c862b36e9736b2db101e23e08e6a909c4c1d127e2e64ba1afd9cb02018d9adf8"
+  }
+}

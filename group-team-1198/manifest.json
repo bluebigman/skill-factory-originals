@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1198",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1198",
+    "kind": "team",
+    "name": "文档分章拆分专家",
+    "description": "擅长按结构拆、命名规范与清单核对，覆盖文档分章拆分全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-split-chapter-team-lead",
+        "role": "lead",
+        "name": "文档分章拆分主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-split-chapter",
+        "role": "member",
+        "name": "文档分章拆分 助手",
+        "evidence": "original_assets/doc-split-chapter/merkle_root",
+        "member_merkle_root": "75e847dff2ccef0a841adaf609437655107edfb88c6d53253f436bbcec7c4c44"
+      },
+      {
+        "slug": "doc-template-build",
+        "role": "member",
+        "name": "文档模板构建 助手",
+        "evidence": "original_assets/doc-template-build/merkle_root",
+        "member_merkle_root": "72100143c65931ac9b2b46f76787b2ff4341cc46d8befb64bbed37c31928c23a"
+      },
+      {
+        "slug": "report-outline-design",
+        "role": "member",
+        "name": "报告大纲设计 顾问",
+        "evidence": "original_assets/report-outline-design/merkle_root",
+        "member_merkle_root": "e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3"
+      }
+    ],
+    "team_lead": "doc-split-chapter-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3143aa6a86171a96",
+  "prompt_hash": "af863e4a3548da69",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1198\", \"kind\": \"team\", \"name\": \"文档分章拆分专家\", \"description\": \"擅长按结构拆、命名规范与清单核对，覆盖文档分章拆分全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-split-chapter-team-lead\", \"role\": \"lead\", \"name\": \"文档分章拆分主理人\", \"evidence\": null}, {\"slug\": \"doc-split-chapter\", \"role\": \"member\", \"name\": \"文档分章拆分 助手\", \"evidence\": \"original_assets/doc-split-chapter/merkle_root\", \"member_merkle_root\": \"75e847dff2ccef0a841adaf609437655107edfb88c6d53253f436bbcec7c4c44\"}, {\"slug\": \"doc-template-build\", \"role\": \"member\", \"name\": \"文档模板构建 助手\", \"evidence\": \"original_assets/doc-template-build/merkle_root\", \"member_merkle_root\": \"72100143c65931ac9b2b46f76787b2ff4341cc46d8befb64bbed37c31928c23a\"}, {\"slug\": \"report-outline-design\", \"role\": \"member\", \"name\": \"报告大纲设计 顾问\", \"evidence\": \"original_assets/report-outline-design/merkle_root\", \"member_merkle_root\": \"e174e841cf78257240e78b4fca497f3cc78143df2272e918028b775d0b4726d3\"}], \"team_lead\": \"doc-split-chapter-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-split-chapter-team-lead.md": "26765e13c13f04c5e83229fda0d0af549fd96c03f778f3e25150fee8ea514384",
+    "agents/doc-split-chapter.md": "d08b92b87a1efbeb9a0eb1f0ea8cad73829ef8222f4ac0cec1316b47b111d391",
+    "agents/doc-template-build.md": "eb99180df2125757cd3410b30b9e1519cc3f2f1f638b78ac95a520785306c44f",
+    "agents/report-outline-design.md": "4b698006fc8e1e25482cd6166dbeb0bf982bc8251f4f79a95d29d9a061dc279d",
+    "plugin.json": "d109a93d0b0409bad7185f39502e364c63189f9bda8b4746c69e83007cd6be64",
+    "settings.json": "fa66dfb426dfb45c2effff7b2a1d3720462073fe8abaf614f047c454eb4dd70d"
+  }
+}

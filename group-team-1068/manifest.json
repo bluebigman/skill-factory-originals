@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1068",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1068",
+    "kind": "team",
+    "name": "查询成本管控专家",
+    "description": "输入查询成本管控相关需求，输出优化建议、最小权限、网络受限三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "query-cost-control-team-lead",
+        "role": "lead",
+        "name": "查询成本管控主理人",
+        "evidence": null
+      },
+      {
+        "slug": "query-cost-control",
+        "role": "member",
+        "name": "查询成本管控 顾问",
+        "evidence": "original_assets/query-cost-control/merkle_root",
+        "member_merkle_root": "ae3e10fea462a4d4ce16e52f8532da2e1444977d00658924ae9e44338b8735fc"
+      },
+      {
+        "slug": "sandbox-execution",
+        "role": "member",
+        "name": "沙箱执行隔离 顾问",
+        "evidence": "original_assets/sandbox-execution/merkle_root",
+        "member_merkle_root": "718567e840e36990955146cf8b19b369c46c56158ce8063b9069e71945da9c01"
+      },
+      {
+        "slug": "quality-rule-engine",
+        "role": "member",
+        "name": "质量规则引擎 顾问",
+        "evidence": "original_assets/quality-rule-engine/merkle_root",
+        "member_merkle_root": "5c9ac5a0e6c034da49ef92949cfcc5ac5c4f5260456b25f1bb45d232e89dcc0d"
+      }
+    ],
+    "team_lead": "query-cost-control-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e1d8c6083905d864",
+  "prompt_hash": "07a0efea805aa95c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1068\", \"kind\": \"team\", \"name\": \"查询成本管控专家\", \"description\": \"输入查询成本管控相关需求，输出优化建议、最小权限、网络受限三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"query-cost-control-team-lead\", \"role\": \"lead\", \"name\": \"查询成本管控主理人\", \"evidence\": null}, {\"slug\": \"query-cost-control\", \"role\": \"member\", \"name\": \"查询成本管控 顾问\", \"evidence\": \"original_assets/query-cost-control/merkle_root\", \"member_merkle_root\": \"ae3e10fea462a4d4ce16e52f8532da2e1444977d00658924ae9e44338b8735fc\"}, {\"slug\": \"sandbox-execution\", \"role\": \"member\", \"name\": \"沙箱执行隔离 顾问\", \"evidence\": \"original_assets/sandbox-execution/merkle_root\", \"member_merkle_root\": \"718567e840e36990955146cf8b19b369c46c56158ce8063b9069e71945da9c01\"}, {\"slug\": \"quality-rule-engine\", \"role\": \"member\", \"name\": \"质量规则引擎 顾问\", \"evidence\": \"original_assets/quality-rule-engine/merkle_root\", \"member_merkle_root\": \"5c9ac5a0e6c034da49ef92949cfcc5ac5c4f5260456b25f1bb45d232e89dcc0d\"}], \"team_lead\": \"query-cost-control-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/quality-rule-engine.md": "753cce7307ebddf16eefc45ce6e84d247ef246df9932e5e862d4759eea2c872a",
+    "agents/query-cost-control-team-lead.md": "ddf8c2ab461c623ec607012ea0b8a01b7f5f7aac7e59fa6405508f078b45b84e",
+    "agents/query-cost-control.md": "d7e0c8de523af76a8a58fe80cf5df1d1037401c5cce3ffc622f2fd8c98036054",
+    "agents/sandbox-execution.md": "1faefa58977523246f803dad6cc4b094420903e4b5a211f0ddb950e4336ce4c0",
+    "plugin.json": "b247685dab1b699faa1321e5dcd2d288e2ec5efcf8fcee6e6932a0027d94a668",
+    "settings.json": "a4f75006b8a7e127b854b466c58dc08da520da6f66186f792a54b2147512c7eb"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-331",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-331",
+    "kind": "team",
+    "name": "数据脱敏专家",
+    "description": "输入数据脱敏相关需求，输出规则分级、可用优先、可逆控制三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-mask-pro-team-lead",
+        "role": "lead",
+        "name": "数据脱敏主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-mask-pro",
+        "role": "member",
+        "name": "数据脱敏 规则配置 顾问",
+        "evidence": "original_assets/data-mask-pro/merkle_root",
+        "member_merkle_root": "188813c046301d5a755253e375bedc219a08c9cf53332bcb8aa12fddd321ffa7"
+      },
+      {
+        "slug": "agent-output-verify-pro",
+        "role": "member",
+        "name": "输出验证 幻觉检测 顾问",
+        "evidence": "original_assets/agent-output-verify-pro/merkle_root",
+        "member_merkle_root": "01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1"
+      },
+      {
+        "slug": "agent-quota-guard",
+        "role": "member",
+        "name": "配额守卫 资源限额 顾问",
+        "evidence": "original_assets/agent-quota-guard/merkle_root",
+        "member_merkle_root": "4895642aee8cc689ff9d1d3066f9e27de73b1ce5f13e5dca2f75149fec0a52a6"
+      }
+    ],
+    "team_lead": "data-mask-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f20eb31148f47dcb",
+  "prompt_hash": "387479cd6dac98b2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-331\", \"kind\": \"team\", \"name\": \"数据脱敏专家\", \"description\": \"输入数据脱敏相关需求，输出规则分级、可用优先、可逆控制三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-mask-pro-team-lead\", \"role\": \"lead\", \"name\": \"数据脱敏主理人\", \"evidence\": null}, {\"slug\": \"data-mask-pro\", \"role\": \"member\", \"name\": \"数据脱敏 规则配置 顾问\", \"evidence\": \"original_assets/data-mask-pro/merkle_root\", \"member_merkle_root\": \"188813c046301d5a755253e375bedc219a08c9cf53332bcb8aa12fddd321ffa7\"}, {\"slug\": \"agent-output-verify-pro\", \"role\": \"member\", \"name\": \"输出验证 幻觉检测 顾问\", \"evidence\": \"original_assets/agent-output-verify-pro/merkle_root\", \"member_merkle_root\": \"01df72fa0a0bf6856fa1b925ca499811d63f20be91c5aa3e57e93bb617e2cee1\"}, {\"slug\": \"agent-quota-guard\", \"role\": \"member\", \"name\": \"配额守卫 资源限额 顾问\", \"evidence\": \"original_assets/agent-quota-guard/merkle_root\", \"member_merkle_root\": \"4895642aee8cc689ff9d1d3066f9e27de73b1ce5f13e5dca2f75149fec0a52a6\"}], \"team_lead\": \"data-mask-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-output-verify-pro.md": "7cf74e762e15707060ba0402b5fc8c18af5fc41b0a56b484367dff520d2be751",
+    "agents/agent-quota-guard.md": "a64f62799ab3a3c889e560098fbe8e022ed83b727dc48ec35daa1ba8ab524ee4",
+    "agents/data-mask-pro-team-lead.md": "7adce1f11756c0a76c7ed43549d1f6fd75284d6f0057fa65f8ad7744ffb7f830",
+    "agents/data-mask-pro.md": "a4a031cca3ed9073d356ce3ed5331e63379f9d5dca9e421947606e7f0c26f3df",
+    "plugin.json": "6d915e1f2567a05b62e0bc7035d74e39a7c5378517613d6ad72bc88e6289a16b",
+    "settings.json": "7a51fdb0c3284ea2cb897737020d4a546e0c3e5de6c94f986bc25c4dd363084a"
+  }
+}

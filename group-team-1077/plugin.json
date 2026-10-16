@@ -1,0 +1,126 @@
+{
+  "agentName": "data-dict-build-team-lead",
+  "agents": [
+    "./agents/data-dict-build-team-lead.md",
+    "./agents/data-dict-build.md",
+    "./agents/growth-dashboard.md",
+    "./agents/secret-rotation.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据字典构建",
+    "zh": "帮我处理数据字典构建"
+  },
+  "description": "data-dict-build team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据字典构建 requirements, output three deliverables: 变更同步, 指标分层, 口径文档. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据字典构建相关需求，输出变更同步、指标分层、口径文档三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "data-dict-build Team",
+    "zh": "数据字典构建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-dict-build-team-lead",
+      "name": {
+        "en": "数据字典构建主理人",
+        "zh": "数据字典构建主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-dict-build.png",
+      "id": "data-dict-build",
+      "name": {
+        "en": "data-dict-build",
+        "zh": "数据字典构建 助手"
+      },
+      "profession": {
+        "en": "data-dict-build",
+        "zh": "数据字典构建 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/growth-dashboard.png",
+      "id": "growth-dashboard",
+      "name": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "profession": {
+        "en": "growth-dashboard",
+        "zh": "增长看板 指标搭建 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/secret-rotation.png",
+      "id": "secret-rotation",
+      "name": {
+        "en": "secret-rotation",
+        "zh": "密钥轮换流程 顾问"
+      },
+      "profession": {
+        "en": "secret-rotation",
+        "zh": "密钥轮换流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1077",
+  "plugin": "group-team-1077",
+  "profession": {
+    "en": "data-dict-build Collaboration Team",
+    "zh": "数据字典构建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据字典构建",
+      "zh": "帮我处理数据字典构建"
+    },
+    {
+      "en": "Plan 增长看板",
+      "zh": "帮我规划增长看板"
+    },
+    {
+      "en": "Review 密钥轮换流程",
+      "zh": "帮我检查密钥轮换流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "变更同步",
+      "zh": "变更同步"
+    },
+    {
+      "en": "覆盖全字段",
+      "zh": "覆盖全字段"
+    },
+    {
+      "en": "负责人",
+      "zh": "负责人"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-dict-build-team-lead",
+    "memberAgents": [
+      "data-dict-build",
+      "growth-dashboard",
+      "secret-rotation"
+    ]
+  },
+  "version": "1.0.0"
+}

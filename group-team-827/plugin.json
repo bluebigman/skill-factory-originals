@@ -1,0 +1,126 @@
+{
+  "agentName": "data-lineage-team-lead",
+  "agents": [
+    "./agents/data-lineage-team-lead.md",
+    "./agents/data-lineage.md",
+    "./agents/stream-pipeline-pro.md",
+    "./agents/agent-red-team.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 数据血缘梳理",
+    "zh": "帮我处理数据血缘梳理"
+  },
+  "description": "data-lineage team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 数据血缘梳理 end-to-end: 节点粒度, 变更影响 and 定期更新. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长节点粒度、变更影响与定期更新，覆盖数据血缘梳理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "data-lineage Team",
+    "zh": "数据血缘梳理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-lineage-team-lead",
+      "name": {
+        "en": "数据血缘梳理主理人",
+        "zh": "数据血缘梳理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-lineage.png",
+      "id": "data-lineage",
+      "name": {
+        "en": "data-lineage",
+        "zh": "数据血缘梳理 助手"
+      },
+      "profession": {
+        "en": "data-lineage",
+        "zh": "数据血缘梳理 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/stream-pipeline-pro.png",
+      "id": "stream-pipeline-pro",
+      "name": {
+        "en": "stream-pipeline-pro",
+        "zh": "流式处理 水位控制 顾问"
+      },
+      "profession": {
+        "en": "stream-pipeline-pro",
+        "zh": "流式处理 水位控制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-red-team.png",
+      "id": "agent-red-team",
+      "name": {
+        "en": "agent-red-team",
+        "zh": "对抗测试 越权探测 顾问"
+      },
+      "profession": {
+        "en": "agent-red-team",
+        "zh": "对抗测试 越权探测 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-827",
+  "plugin": "group-team-827",
+  "profession": {
+    "en": "data-lineage Collaboration Team",
+    "zh": "数据血缘梳理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据血缘梳理",
+      "zh": "帮我处理数据血缘梳理"
+    },
+    {
+      "en": "Plan 流式处理",
+      "zh": "帮我规划流式处理"
+    },
+    {
+      "en": "Review 对抗测试",
+      "zh": "帮我检查对抗测试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "节点粒度",
+      "zh": "节点粒度"
+    },
+    {
+      "en": "变更影响",
+      "zh": "变更影响"
+    },
+    {
+      "en": "定期更新",
+      "zh": "定期更新"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-lineage-team-lead",
+    "memberAgents": [
+      "data-lineage",
+      "stream-pipeline-pro",
+      "agent-red-team"
+    ]
+  },
+  "version": "1.0.0"
+}

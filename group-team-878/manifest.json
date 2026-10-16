@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-878",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-878",
+    "kind": "team",
+    "name": "标题测试专家",
+    "description": "输入标题测试相关需求，输出样本均分、指标明确、结论留存三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-base-pro-fixed-team-lead",
+        "role": "lead",
+        "name": "文档建站主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-base-pro-fixed",
+        "role": "member",
+        "name": "文档建站 知识库构建",
+        "evidence": "original_assets/knowledge-base-pro-fixed/merkle_root",
+        "member_merkle_root": "e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43"
+      },
+      {
+        "slug": "title-ab-plan",
+        "role": "member",
+        "name": "标题测试 顾问",
+        "evidence": "original_assets/title-ab-plan/merkle_root",
+        "member_merkle_root": "10f4d7130d0a7cdcdb103daf02d791827699b96c3ff1c4575b185d94ae9d7abb"
+      },
+      {
+        "slug": "copy-test-method",
+        "role": "member",
+        "name": "文案测试 方法设计 顾问",
+        "evidence": "original_assets/copy-test-method/merkle_root",
+        "member_merkle_root": "fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd"
+      }
+    ],
+    "team_lead": "knowledge-base-pro-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4220070d3667dd1f",
+  "prompt_hash": "4e00e4c9c36ea4b9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-878\", \"kind\": \"team\", \"name\": \"标题测试专家\", \"description\": \"输入标题测试相关需求，输出样本均分、指标明确、结论留存三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-base-pro-fixed-team-lead\", \"role\": \"lead\", \"name\": \"文档建站主理人\", \"evidence\": null}, {\"slug\": \"knowledge-base-pro-fixed\", \"role\": \"member\", \"name\": \"文档建站 知识库构建\", \"evidence\": \"original_assets/knowledge-base-pro-fixed/merkle_root\", \"member_merkle_root\": \"e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43\"}, {\"slug\": \"title-ab-plan\", \"role\": \"member\", \"name\": \"标题测试 顾问\", \"evidence\": \"original_assets/title-ab-plan/merkle_root\", \"member_merkle_root\": \"10f4d7130d0a7cdcdb103daf02d791827699b96c3ff1c4575b185d94ae9d7abb\"}, {\"slug\": \"copy-test-method\", \"role\": \"member\", \"name\": \"文案测试 方法设计 顾问\", \"evidence\": \"original_assets/copy-test-method/merkle_root\", \"member_merkle_root\": \"fe5b43c374002d58bec259cf4994d5bf75b2ef64b2f44cda32052136949e5afd\"}], \"team_lead\": \"knowledge-base-pro-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/copy-test-method.md": "b1a8ae96bf436376c4e75e0516a37b63aa55bff1af86cfc45a4e0798d84b1f31",
+    "agents/knowledge-base-pro-fixed-team-lead.md": "c7d493500830f4af46bd1062524f845de66a2700b4b7fe2e3955701ad64a935e",
+    "agents/knowledge-base-pro-fixed.md": "97d96e92d213b7fe5c91cf6ffb79e62c26411c9b41469f8300d0cd86cdd866f4",
+    "agents/title-ab-plan.md": "0ba475688b6217cd0a12499870b6031b7e868bd0dda0bc06bf9726eed3e5af69",
+    "plugin.json": "ac7ed586b44526cda6be6a4208734229921a3404d43983f341f5513d9dfdb7da",
+    "settings.json": "39422d1fef008a3443e9387c94a32ab21632ed655050d0fa772f42a8732f54a1"
+  }
+}

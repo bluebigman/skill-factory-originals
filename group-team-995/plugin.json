@@ -1,0 +1,126 @@
+{
+  "agentName": "info-architecture-team-lead",
+  "agents": [
+    "./agents/info-architecture-team-lead.md",
+    "./agents/info-architecture.md",
+    "./agents/visual-asset-brief.md",
+    "./agents/design-review-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 信息架构",
+    "zh": "帮我处理信息架构"
+  },
+  "description": "info-architecture team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 信息架构, covers 卡片分类 / 交叉验证 / 层级克制, delivering structured results and actionable checklists.",
+    "zh": "信息架构梳理专家：围绕信息架构，覆盖卡片分类／交叉验证／层级克制，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "info-architecture Team",
+    "zh": "信息架构梳理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "info-architecture-team-lead",
+      "name": {
+        "en": "信息架构主理人",
+        "zh": "信息架构主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/info-architecture.png",
+      "id": "info-architecture",
+      "name": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "profession": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/visual-asset-brief.png",
+      "id": "visual-asset-brief",
+      "name": {
+        "en": "visual-asset-brief",
+        "zh": "视觉素材需求 助手"
+      },
+      "profession": {
+        "en": "visual-asset-brief",
+        "zh": "视觉素材需求 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/design-review-method.png",
+      "id": "design-review-method",
+      "name": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "profession": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-995",
+  "plugin": "group-team-995",
+  "profession": {
+    "en": "info-architecture Collaboration Team",
+    "zh": "信息架构梳理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 信息架构",
+      "zh": "帮我处理信息架构"
+    },
+    {
+      "en": "Plan 视觉素材需求",
+      "zh": "帮我规划视觉素材需求"
+    },
+    {
+      "en": "Review 设计评审",
+      "zh": "帮我检查设计评审"
+    }
+  ],
+  "tags": [
+    {
+      "en": "卡片分类",
+      "zh": "卡片分类"
+    },
+    {
+      "en": "交叉验证",
+      "zh": "交叉验证"
+    },
+    {
+      "en": "用户词命名",
+      "zh": "用户词命名"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "info-architecture-team-lead",
+    "memberAgents": [
+      "info-architecture",
+      "visual-asset-brief",
+      "design-review-method"
+    ]
+  },
+  "version": "1.0.0"
+}

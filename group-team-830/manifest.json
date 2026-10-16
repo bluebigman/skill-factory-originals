@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-830",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-830",
+    "kind": "team",
+    "name": "用户故事专家",
+    "description": "擅长角色明确、价值明确与验收条件，覆盖用户故事全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "user-story-write-team-lead",
+        "role": "lead",
+        "name": "用户故事主理人",
+        "evidence": null
+      },
+      {
+        "slug": "user-story-write",
+        "role": "member",
+        "name": "用户故事 撰写",
+        "evidence": "original_assets/user-story-write/merkle_root",
+        "member_merkle_root": "c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643"
+      },
+      {
+        "slug": "game-economy-balance",
+        "role": "member",
+        "name": "游戏经济 数值平衡 顾问",
+        "evidence": "original_assets/game-economy-balance/merkle_root",
+        "member_merkle_root": "3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66"
+      },
+      {
+        "slug": "spatial-layout-pro",
+        "role": "member",
+        "name": "空间布局 动线设计 顾问",
+        "evidence": "original_assets/spatial-layout-pro/merkle_root",
+        "member_merkle_root": "3b138ee5fb23a1aedbae888792ad955d2d11c9aeb737f4d38ba91e402fe2e860"
+      }
+    ],
+    "team_lead": "user-story-write-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0638844eb0fca878",
+  "prompt_hash": "1855cd77080d9af3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-830\", \"kind\": \"team\", \"name\": \"用户故事专家\", \"description\": \"擅长角色明确、价值明确与验收条件，覆盖用户故事全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"user-story-write-team-lead\", \"role\": \"lead\", \"name\": \"用户故事主理人\", \"evidence\": null}, {\"slug\": \"user-story-write\", \"role\": \"member\", \"name\": \"用户故事 撰写\", \"evidence\": \"original_assets/user-story-write/merkle_root\", \"member_merkle_root\": \"c8e9204530821d286ff4734a86397a12bf76a514467ef8eac3747806a19d0643\"}, {\"slug\": \"game-economy-balance\", \"role\": \"member\", \"name\": \"游戏经济 数值平衡 顾问\", \"evidence\": \"original_assets/game-economy-balance/merkle_root\", \"member_merkle_root\": \"3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66\"}, {\"slug\": \"spatial-layout-pro\", \"role\": \"member\", \"name\": \"空间布局 动线设计 顾问\", \"evidence\": \"original_assets/spatial-layout-pro/merkle_root\", \"member_merkle_root\": \"3b138ee5fb23a1aedbae888792ad955d2d11c9aeb737f4d38ba91e402fe2e860\"}], \"team_lead\": \"user-story-write-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/game-economy-balance.md": "cbe168f1c920e748fc1ad6a9df3620db7273df66619129a4e82282c327118286",
+    "agents/spatial-layout-pro.md": "bc8b0fa7e0e7b5f4d07c9b3fffc05500f6a91ca46ab492353ae870fad36ffea2",
+    "agents/user-story-write-team-lead.md": "1fc856b2787999845e9e72ac0a391faf5e3ca7e490a98b144f1af06470683538",
+    "agents/user-story-write.md": "bc2ae11795909610d2ddda909918ae550be89a448d8e16222511d71aff85a270",
+    "plugin.json": "d380beb0a0d742e11e0fe7e2cbc876815a897939ed360be99a6df9cd36a682c8",
+    "settings.json": "55500ad2dd64715a24bd3e2cdb8b00774a76b3f3331c00e5223f9eda3a70a677"
+  }
+}

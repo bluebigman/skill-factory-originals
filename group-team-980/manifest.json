@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-980",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-980",
+    "kind": "team",
+    "name": "图表核验专家",
+    "description": "输入图表核验相关需求，输出标注清晰、误导识别、身份唯一三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "chart-data-verify-team-lead",
+        "role": "lead",
+        "name": "图表核验主理人",
+        "evidence": null
+      },
+      {
+        "slug": "chart-data-verify",
+        "role": "member",
+        "name": "图表核验 数据一致 顾问",
+        "evidence": "original_assets/chart-data-verify/merkle_root",
+        "member_merkle_root": "59add37e0ecfb439422211efd490c18f21ae5c341e40fde0bd07a126973959f6"
+      },
+      {
+        "slug": "data-viz-pro-03",
+        "role": "member",
+        "name": "销售报表 SVG图表开发",
+        "evidence": "original_assets/data-viz-pro-03/merkle_root",
+        "member_merkle_root": "d503f9a770a088996187ccf251d92c167aeec2bfa7f8f283cf4806fedcae20c8"
+      },
+      {
+        "slug": "agent-identity-manage",
+        "role": "member",
+        "name": "身份管理 凭据轮换 顾问",
+        "evidence": "original_assets/agent-identity-manage/merkle_root",
+        "member_merkle_root": "26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533"
+      }
+    ],
+    "team_lead": "chart-data-verify-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6e19c64b5247477c",
+  "prompt_hash": "30a5f52fb7e8356e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-980\", \"kind\": \"team\", \"name\": \"图表核验专家\", \"description\": \"输入图表核验相关需求，输出标注清晰、误导识别、身份唯一三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"chart-data-verify-team-lead\", \"role\": \"lead\", \"name\": \"图表核验主理人\", \"evidence\": null}, {\"slug\": \"chart-data-verify\", \"role\": \"member\", \"name\": \"图表核验 数据一致 顾问\", \"evidence\": \"original_assets/chart-data-verify/merkle_root\", \"member_merkle_root\": \"59add37e0ecfb439422211efd490c18f21ae5c341e40fde0bd07a126973959f6\"}, {\"slug\": \"data-viz-pro-03\", \"role\": \"member\", \"name\": \"销售报表 SVG图表开发\", \"evidence\": \"original_assets/data-viz-pro-03/merkle_root\", \"member_merkle_root\": \"d503f9a770a088996187ccf251d92c167aeec2bfa7f8f283cf4806fedcae20c8\"}, {\"slug\": \"agent-identity-manage\", \"role\": \"member\", \"name\": \"身份管理 凭据轮换 顾问\", \"evidence\": \"original_assets/agent-identity-manage/merkle_root\", \"member_merkle_root\": \"26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533\"}], \"team_lead\": \"chart-data-verify-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-identity-manage.md": "b08a7cfb4ea860c6954930663c894994033d576ca45d98e628b27d281c860170",
+    "agents/chart-data-verify-team-lead.md": "384cb53ce016c1b2017aff2bef84eb82faba3d44b605d252c85b866140a1db9b",
+    "agents/chart-data-verify.md": "0bf2aab0c555a35b15933f5527dd9be5c9961165abc19588e0de7979b52bb295",
+    "agents/data-viz-pro-03.md": "0e53e2e53b044e822cea65c69695122e03490a14849947ae26796976655598fc",
+    "plugin.json": "40f70888b74124127b4c9dd89b41556e5cfab9dc8dc1177212ba4a1e3009fb46",
+    "settings.json": "c78ace2ca8e31f8139c4f0e130dc1062f4d52625e918001e81b6decef06ec4bd"
+  }
+}

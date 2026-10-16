@@ -1,0 +1,126 @@
+{
+  "agentName": "travel-planning-pro-team-lead",
+  "agents": [
+    "./agents/travel-planning-pro-team-lead.md",
+    "./agents/travel-planning-pro.md",
+    "./agents/contract-guard-pro.md",
+    "./agents/flow-auto-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 旅行规划",
+    "zh": "帮我处理旅行规划"
+  },
+  "description": "Travel Planning Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "旅行 合同 流程 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Travel Planning Pro Team",
+    "zh": "旅行 合同 流程 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "travel-planning-pro-team-lead",
+      "name": {
+        "en": "旅行规划主理人",
+        "zh": "旅行规划主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/travel-planning-pro.png",
+      "id": "travel-planning-pro",
+      "name": {
+        "en": "Travel Planning Pro",
+        "zh": "旅行规划 行程路线 预算清单"
+      },
+      "profession": {
+        "en": "Travel Planning Pro",
+        "zh": "旅行规划 行程路线 预算清单"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-guard-pro.png",
+      "id": "contract-guard-pro",
+      "name": {
+        "en": "Contract Compliance Guard",
+        "zh": "合同合规审查"
+      },
+      "profession": {
+        "en": "Contract Compliance Guard",
+        "zh": "合同合规审查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/flow-auto-pro.png",
+      "id": "flow-auto-pro",
+      "name": {
+        "en": "Flow Automation Expert",
+        "zh": "流程编排自动化"
+      },
+      "profession": {
+        "en": "Flow Automation Expert",
+        "zh": "流程编排自动化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-198",
+  "plugin": "group-team-198",
+  "profession": {
+    "en": "Travel Planning Pro Collaboration Team",
+    "zh": "旅行 合同 流程 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 旅行规划",
+      "zh": "帮我处理旅行规划"
+    },
+    {
+      "en": "Plan 合同合规审查",
+      "zh": "帮我规划合同合规审查"
+    },
+    {
+      "en": "Review 流程编排自动化",
+      "zh": "帮我检查流程编排自动化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "旅行规划",
+      "zh": "旅行规划"
+    },
+    {
+      "en": "合同合规审查",
+      "zh": "合同合规审查"
+    },
+    {
+      "en": "流程编排自动化",
+      "zh": "流程编排自动化"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "travel-planning-pro-team-lead",
+    "memberAgents": [
+      "travel-planning-pro",
+      "contract-guard-pro",
+      "flow-auto-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

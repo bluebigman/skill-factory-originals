@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1021",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1021",
+    "kind": "team",
+    "name": "行程规划专家",
+    "description": "擅长节奏合理、备选方案与预算匹配，覆盖行程规划全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "tourism-itinerary-team-lead",
+        "role": "lead",
+        "name": "行程规划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "tourism-itinerary",
+        "role": "member",
+        "name": "行程规划 助手",
+        "evidence": "original_assets/tourism-itinerary/merkle_root",
+        "member_merkle_root": "49db793cff184331664e1e3bb6a719c8b311024afb3d2f716f19b0a78950a1b4"
+      },
+      {
+        "slug": "intl-standards-map",
+        "role": "member",
+        "name": "国际标准 对照梳理 顾问",
+        "evidence": "original_assets/intl-standards-map/merkle_root",
+        "member_merkle_root": "be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89"
+      },
+      {
+        "slug": "export-doc-check",
+        "role": "member",
+        "name": "出口单据 一致性 顾问",
+        "evidence": "original_assets/export-doc-check/merkle_root",
+        "member_merkle_root": "286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d"
+      }
+    ],
+    "team_lead": "tourism-itinerary-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3307a5ab560ced0f",
+  "prompt_hash": "99dee9f16591a20f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1021\", \"kind\": \"team\", \"name\": \"行程规划专家\", \"description\": \"擅长节奏合理、备选方案与预算匹配，覆盖行程规划全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"tourism-itinerary-team-lead\", \"role\": \"lead\", \"name\": \"行程规划主理人\", \"evidence\": null}, {\"slug\": \"tourism-itinerary\", \"role\": \"member\", \"name\": \"行程规划 助手\", \"evidence\": \"original_assets/tourism-itinerary/merkle_root\", \"member_merkle_root\": \"49db793cff184331664e1e3bb6a719c8b311024afb3d2f716f19b0a78950a1b4\"}, {\"slug\": \"intl-standards-map\", \"role\": \"member\", \"name\": \"国际标准 对照梳理 顾问\", \"evidence\": \"original_assets/intl-standards-map/merkle_root\", \"member_merkle_root\": \"be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89\"}, {\"slug\": \"export-doc-check\", \"role\": \"member\", \"name\": \"出口单据 一致性 顾问\", \"evidence\": \"original_assets/export-doc-check/merkle_root\", \"member_merkle_root\": \"286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d\"}], \"team_lead\": \"tourism-itinerary-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/export-doc-check.md": "171e7f389d265afa9865fb85a481e056eb8c664740c9f164fb299a5210a39011",
+    "agents/intl-standards-map.md": "32f394a603b642ab4fd8bf8d83eb8ad1da9cecd7d87f4464436b1a5554605d9c",
+    "agents/tourism-itinerary-team-lead.md": "8877f2b941f9dec022955781c6d17c67321c197651e534a3715735e66768aedc",
+    "agents/tourism-itinerary.md": "aa4e37405d6f557c239756459929a2e4b567e14a4fe780c7c3dd317c3e50dbe7",
+    "plugin.json": "2b205a7466f39a264621273a259a03f8213f7c2723f6b7a602c824a528aebb9c",
+    "settings.json": "a3dcd07d495647a4fcad8d4d688cbb5e7a94eb96fca24443ac695473205fae99"
+  }
+}

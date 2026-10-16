@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-146",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-146",
+    "kind": "team",
+    "name": "库存 管理 电商 预警 团队",
+    "description": "库存 管理 电商 预警 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "inventory-tracking-pro-team-lead",
+        "role": "lead",
+        "name": "库存管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "inventory-tracking-pro",
+        "role": "member",
+        "name": "库存管理 补货预警 周转率",
+        "evidence": "original_assets/inventory-tracking-pro/merkle_root",
+        "member_merkle_root": "ad010292b3e0d1989536664e1256eb67445651831c3597972c9d020a7f2342a9"
+      },
+      {
+        "slug": "ecommerce-newbie-coach",
+        "role": "member",
+        "name": "电商开店 选品思路 顾问",
+        "evidence": "original_assets/ecommerce-newbie-coach/merkle_root",
+        "member_merkle_root": "33ec36afc0a359f20f500563f855ee2720c542213fac3b84086649c83f956357"
+      },
+      {
+        "slug": "inventory-alert-coach",
+        "role": "member",
+        "name": "库存预警 补货点 助手",
+        "evidence": "original_assets/inventory-alert-coach/merkle_root",
+        "member_merkle_root": "e378c654f5225d58533c6e229fe6f7ab42c0106d3b0f051f06d3d50ca69181a1"
+      }
+    ],
+    "team_lead": "inventory-tracking-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cd834ff7ef2682c9",
+  "prompt_hash": "92553fcba887b64f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-146\", \"kind\": \"team\", \"name\": \"库存 管理 电商 预警 团队\", \"description\": \"库存 管理 电商 预警 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"inventory-tracking-pro-team-lead\", \"role\": \"lead\", \"name\": \"库存管理主理人\", \"evidence\": null}, {\"slug\": \"inventory-tracking-pro\", \"role\": \"member\", \"name\": \"库存管理 补货预警 周转率\", \"evidence\": \"original_assets/inventory-tracking-pro/merkle_root\", \"member_merkle_root\": \"ad010292b3e0d1989536664e1256eb67445651831c3597972c9d020a7f2342a9\"}, {\"slug\": \"ecommerce-newbie-coach\", \"role\": \"member\", \"name\": \"电商开店 选品思路 顾问\", \"evidence\": \"original_assets/ecommerce-newbie-coach/merkle_root\", \"member_merkle_root\": \"33ec36afc0a359f20f500563f855ee2720c542213fac3b84086649c83f956357\"}, {\"slug\": \"inventory-alert-coach\", \"role\": \"member\", \"name\": \"库存预警 补货点 助手\", \"evidence\": \"original_assets/inventory-alert-coach/merkle_root\", \"member_merkle_root\": \"e378c654f5225d58533c6e229fe6f7ab42c0106d3b0f051f06d3d50ca69181a1\"}], \"team_lead\": \"inventory-tracking-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/ecommerce-newbie-coach.md": "ec8994fd32b6151dc98ddcdd1cd8bca981eb7b5f2476a4e0d6f09ec2c1ec94ae",
+    "agents/inventory-alert-coach.md": "59458cd4fb0598980add08463b9b8fde56849a1434a1a290052b3ea3df88a07e",
+    "agents/inventory-tracking-pro-team-lead.md": "56c6344314bba14182b9ecd9e735a97518f83b1207e89db71160c789d5b2815b",
+    "agents/inventory-tracking-pro.md": "ce5bf99bccfd56efbb5322751fd2665951e71ad5a646bae0aed1ddcebb50af99",
+    "plugin.json": "995608caf8a618be69a096d4fe195c2134f346043d82841f704240e1dca8f761",
+    "settings.json": "91274d606c9a1a6b27218b30eeeef2e3c11ea9e8bdd7e4a2981162d8b6a25305"
+  }
+}

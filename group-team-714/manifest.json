@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-714",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-714",
+    "kind": "team",
+    "name": "文档转换视觉美化专家",
+    "description": "输入文档转换视觉美相关需求，输出格式迁移、内容保真、视觉美化三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-convert-pro-01-team-lead",
+        "role": "lead",
+        "name": "文档转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-convert-pro-01",
+        "role": "member",
+        "name": "文档转换 视觉美化 文本抽取",
+        "evidence": "original_assets/doc-convert-pro-01/merkle_root",
+        "member_merkle_root": "9362b55e4465cd7963b61551d1ad4010424d36e840b4cca9ee63fb71f9de6189"
+      },
+      {
+        "slug": "knowledge-base-pro-fixed",
+        "role": "member",
+        "name": "文档建站 知识库构建",
+        "evidence": "original_assets/knowledge-base-pro-fixed/merkle_root",
+        "member_merkle_root": "e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43"
+      },
+      {
+        "slug": "media-process-pro",
+        "role": "member",
+        "name": "政务设计规范 一键成片",
+        "evidence": "original_assets/media-process-pro/merkle_root",
+        "member_merkle_root": "5dde9cc8493bd344606f88ef638a3415c90873663b772baa5235772596f0d25e"
+      }
+    ],
+    "team_lead": "doc-convert-pro-01-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d4be764109444f3f",
+  "prompt_hash": "24eb7f21f1e266e2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-714\", \"kind\": \"team\", \"name\": \"文档转换视觉美化专家\", \"description\": \"输入文档转换视觉美相关需求，输出格式迁移、内容保真、视觉美化三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-convert-pro-01-team-lead\", \"role\": \"lead\", \"name\": \"文档转换主理人\", \"evidence\": null}, {\"slug\": \"doc-convert-pro-01\", \"role\": \"member\", \"name\": \"文档转换 视觉美化 文本抽取\", \"evidence\": \"original_assets/doc-convert-pro-01/merkle_root\", \"member_merkle_root\": \"9362b55e4465cd7963b61551d1ad4010424d36e840b4cca9ee63fb71f9de6189\"}, {\"slug\": \"knowledge-base-pro-fixed\", \"role\": \"member\", \"name\": \"文档建站 知识库构建\", \"evidence\": \"original_assets/knowledge-base-pro-fixed/merkle_root\", \"member_merkle_root\": \"e084baf946c980118351c5d94f2182c63379c7554cab3e60ba9daf4372684e43\"}, {\"slug\": \"media-process-pro\", \"role\": \"member\", \"name\": \"政务设计规范 一键成片\", \"evidence\": \"original_assets/media-process-pro/merkle_root\", \"member_merkle_root\": \"5dde9cc8493bd344606f88ef638a3415c90873663b772baa5235772596f0d25e\"}], \"team_lead\": \"doc-convert-pro-01-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-01-team-lead.md": "a48bcd6c9c0200e9126a7fda6c3c9a301fcf8e8f9a81d7476240d73e90f53737",
+    "agents/doc-convert-pro-01.md": "94d08f9bdd2c350d23404259e48313c528a957b09a5a5ee4eb9a96a369909e29",
+    "agents/knowledge-base-pro-fixed.md": "a80843145318026787f4efd90da5c396b4c8a015f177d0556275e94d6cdfa5a7",
+    "agents/media-process-pro.md": "0ee1254d48823151d567077e6a42596e1ab54e2ec3fbb605c1b189a001278c8a",
+    "plugin.json": "dc9e3d85c44025b6a205c6487f138c108d978ea47cdf8e50ccbd32f07559095f",
+    "settings.json": "773dbd34287a3cf49d74a08305c64dacbf07a13503b89b297ff55875a68e4c17"
+  }
+}

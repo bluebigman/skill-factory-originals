@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-174",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-174",
+    "kind": "team",
+    "name": "学术 语音 习惯 团队",
+    "description": "学术 语音 习惯 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "academic-expert-team-lead",
+        "role": "lead",
+        "name": "学术写作主理人",
+        "evidence": null
+      },
+      {
+        "slug": "academic-expert",
+        "role": "member",
+        "name": "学术写作 文献综述 格式规范",
+        "evidence": "original_assets/academic-expert/merkle_root",
+        "member_merkle_root": "57a9bfc01e3b61ee08193a96425131e66d0b0ea86b8a8e800d240ff15f6fa022"
+      },
+      {
+        "slug": "voice-note-organize",
+        "role": "member",
+        "name": "语音笔记 转写归档 助手",
+        "evidence": "original_assets/voice-note-organize/merkle_root",
+        "member_merkle_root": "00c65d5bd917dd7b0146bb23fadfc324fb893d6e0c7ecb3a6ddefdce5f718b73"
+      },
+      {
+        "slug": "habit-streak-coach",
+        "role": "member",
+        "name": "习惯打卡 连续性 助手",
+        "evidence": "original_assets/habit-streak-coach/merkle_root",
+        "member_merkle_root": "bcfd42af4789960584f299995c6cf937a6defab3725afc63b24bd24f5d5440ad"
+      }
+    ],
+    "team_lead": "academic-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e8dcc3cc0698ff4c",
+  "prompt_hash": "0c006ef8bc1663b9",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-174\", \"kind\": \"team\", \"name\": \"学术 语音 习惯 团队\", \"description\": \"学术 语音 习惯 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"academic-expert-team-lead\", \"role\": \"lead\", \"name\": \"学术写作主理人\", \"evidence\": null}, {\"slug\": \"academic-expert\", \"role\": \"member\", \"name\": \"学术写作 文献综述 格式规范\", \"evidence\": \"original_assets/academic-expert/merkle_root\", \"member_merkle_root\": \"57a9bfc01e3b61ee08193a96425131e66d0b0ea86b8a8e800d240ff15f6fa022\"}, {\"slug\": \"voice-note-organize\", \"role\": \"member\", \"name\": \"语音笔记 转写归档 助手\", \"evidence\": \"original_assets/voice-note-organize/merkle_root\", \"member_merkle_root\": \"00c65d5bd917dd7b0146bb23fadfc324fb893d6e0c7ecb3a6ddefdce5f718b73\"}, {\"slug\": \"habit-streak-coach\", \"role\": \"member\", \"name\": \"习惯打卡 连续性 助手\", \"evidence\": \"original_assets/habit-streak-coach/merkle_root\", \"member_merkle_root\": \"bcfd42af4789960584f299995c6cf937a6defab3725afc63b24bd24f5d5440ad\"}], \"team_lead\": \"academic-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/academic-expert-team-lead.md": "278d535f76aa6f6844b8ca8f61d221cc0a315e19af28d7be3ae8d2b966b00579",
+    "agents/academic-expert.md": "39aa3d9d57c001a90af76853feb11aba2a868d7459e631fbf833f9e7b7fe53d7",
+    "agents/habit-streak-coach.md": "60529c545ea27e0f387a126678aac9a2cd1944d475a7795daa5d8f4d1ddd4a90",
+    "agents/voice-note-organize.md": "3e38dc890fc3a02f14e41f7d3fd89d7c13ae27d7bfcf40cfbcd9730d9dd449cd",
+    "plugin.json": "5b5bcce2c90bf8a510579fa1bc167679315fdf86881e762ae0ca0f02549aec22",
+    "settings.json": "c010a63da1233243c1821dd9c9cee075e1d0e7488dad21bc2f5365f369f20efd"
+  }
+}

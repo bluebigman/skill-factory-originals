@@ -1,0 +1,126 @@
+{
+  "agentName": "perf-bottleneck-pro-team-lead",
+  "agents": [
+    "./agents/perf-bottleneck-pro-team-lead.md",
+    "./agents/perf-bottleneck-pro.md",
+    "./agents/service-health-pro.md",
+    "./agents/agent-concurrency-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 性能瓶颈",
+    "zh": "帮我处理性能瓶颈"
+  },
+  "description": "perf-bottleneck-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 性能瓶颈 requirements, output three deliverables: 回归验证, 探活标准, 快速失败. Verifiable end-to-end, evidence per step.",
+    "zh": "输入性能瓶颈相关需求，输出回归验证、探活标准、快速失败三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "perf-bottleneck-pro Team",
+    "zh": "性能瓶颈专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "perf-bottleneck-pro-team-lead",
+      "name": {
+        "en": "性能瓶颈主理人",
+        "zh": "性能瓶颈主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/perf-bottleneck-pro.png",
+      "id": "perf-bottleneck-pro",
+      "name": {
+        "en": "perf-bottleneck-pro",
+        "zh": "性能瓶颈 链路分析 顾问"
+      },
+      "profession": {
+        "en": "perf-bottleneck-pro",
+        "zh": "性能瓶颈 链路分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/service-health-pro.png",
+      "id": "service-health-pro",
+      "name": {
+        "en": "service-health-pro",
+        "zh": "服务健康 探活机制 顾问"
+      },
+      "profession": {
+        "en": "service-health-pro",
+        "zh": "服务健康 探活机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-concurrency-pro.png",
+      "id": "agent-concurrency-pro",
+      "name": {
+        "en": "agent-concurrency-pro",
+        "zh": "并发控制 锁策略 顾问"
+      },
+      "profession": {
+        "en": "agent-concurrency-pro",
+        "zh": "并发控制 锁策略 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-320",
+  "plugin": "group-team-320",
+  "profession": {
+    "en": "perf-bottleneck-pro Collaboration Team",
+    "zh": "性能瓶颈专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 性能瓶颈",
+      "zh": "帮我处理性能瓶颈"
+    },
+    {
+      "en": "Plan 服务健康",
+      "zh": "帮我规划服务健康"
+    },
+    {
+      "en": "Review 并发控制",
+      "zh": "帮我检查并发控制"
+    }
+  ],
+  "tags": [
+    {
+      "en": "链路定位",
+      "zh": "链路定位"
+    },
+    {
+      "en": "优化排序",
+      "zh": "优化排序"
+    },
+    {
+      "en": "回归验证",
+      "zh": "回归验证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "perf-bottleneck-pro-team-lead",
+    "memberAgents": [
+      "perf-bottleneck-pro",
+      "service-health-pro",
+      "agent-concurrency-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

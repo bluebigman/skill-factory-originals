@@ -1,0 +1,126 @@
+{
+  "agentName": "image-batch-expert-team-lead",
+  "agents": [
+    "./agents/image-batch-expert-team-lead.md",
+    "./agents/image-batch-expert.md",
+    "./agents/contract-mfg-audit-pro.md",
+    "./agents/pipeline-review-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 图片批处理",
+    "zh": "帮我处理图片批处理"
+  },
+  "description": "ImageBatchPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 代工管理 end-to-end: 参数方案, 格式转换 and 首件确认. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长参数方案、格式转换与首件确认，覆盖代工管理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ImageBatchPro Team",
+    "zh": "图片批处理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "image-batch-expert-team-lead",
+      "name": {
+        "en": "图片批处理主理人",
+        "zh": "图片批处理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/image-batch-expert.png",
+      "id": "image-batch-expert",
+      "name": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "profession": {
+        "en": "ImageBatchPro",
+        "zh": "图片批处理 格式转换"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-mfg-audit-pro.png",
+      "id": "contract-mfg-audit-pro",
+      "name": {
+        "en": "contract-mfg-audit-pro",
+        "zh": "代工管理 过程审核 顾问"
+      },
+      "profession": {
+        "en": "contract-mfg-audit-pro",
+        "zh": "代工管理 过程审核 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pipeline-review-pro.png",
+      "id": "pipeline-review-pro",
+      "name": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "profession": {
+        "en": "pipeline-review-pro",
+        "zh": "销售漏斗 复盘机制 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-525",
+  "plugin": "group-team-525",
+  "profession": {
+    "en": "ImageBatchPro Collaboration Team",
+    "zh": "图片批处理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 图片批处理",
+      "zh": "帮我处理图片批处理"
+    },
+    {
+      "en": "Plan 代工管理",
+      "zh": "帮我规划代工管理"
+    },
+    {
+      "en": "Review 销售漏斗",
+      "zh": "帮我检查销售漏斗"
+    }
+  ],
+  "tags": [
+    {
+      "en": "参数方案",
+      "zh": "参数方案"
+    },
+    {
+      "en": "格式转换",
+      "zh": "格式转换"
+    },
+    {
+      "en": "批量缩放压缩",
+      "zh": "批量缩放压缩"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "image-batch-expert-team-lead",
+    "memberAgents": [
+      "image-batch-expert",
+      "contract-mfg-audit-pro",
+      "pipeline-review-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

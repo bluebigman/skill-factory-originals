@@ -1,0 +1,126 @@
+{
+  "agentName": "handoff-design-dev-team-lead",
+  "agents": [
+    "./agents/handoff-design-dev-team-lead.md",
+    "./agents/handoff-design-dev.md",
+    "./agents/gamification-design.md",
+    "./agents/visual-hierarchy.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 设计交付",
+    "zh": "帮我处理设计交付"
+  },
+  "description": "handoff-design-dev team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 设计交付, covers 标注齐全 / 边界说明 / 资产规范, delivering structured results and actionable checklists.",
+    "zh": "设计交付专家：围绕设计交付，覆盖标注齐全／边界说明／资产规范，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "handoff-design-dev Team",
+    "zh": "设计交付专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "handoff-design-dev-team-lead",
+      "name": {
+        "en": "设计交付主理人",
+        "zh": "设计交付主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/handoff-design-dev.png",
+      "id": "handoff-design-dev",
+      "name": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "profession": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/gamification-design.png",
+      "id": "gamification-design",
+      "name": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "profession": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/visual-hierarchy.png",
+      "id": "visual-hierarchy",
+      "name": {
+        "en": "visual-hierarchy",
+        "zh": "视觉层级设计 顾问"
+      },
+      "profession": {
+        "en": "visual-hierarchy",
+        "zh": "视觉层级设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1010",
+  "plugin": "group-team-1010",
+  "profession": {
+    "en": "handoff-design-dev Collaboration Team",
+    "zh": "设计交付专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 设计交付",
+      "zh": "帮我处理设计交付"
+    },
+    {
+      "en": "Plan 任务激励",
+      "zh": "帮我规划任务激励"
+    },
+    {
+      "en": "Review 视觉层级设计",
+      "zh": "帮我检查视觉层级设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标注齐全",
+      "zh": "标注齐全"
+    },
+    {
+      "en": "边界说明",
+      "zh": "边界说明"
+    },
+    {
+      "en": "资产规范",
+      "zh": "资产规范"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "handoff-design-dev-team-lead",
+    "memberAgents": [
+      "handoff-design-dev",
+      "gamification-design",
+      "visual-hierarchy"
+    ]
+  },
+  "version": "1.0.0"
+}

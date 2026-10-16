@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085738",
+  "slug": "group-team-954",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-954",
+    "kind": "team",
+    "name": "网页正文提取专家",
+    "description": "擅长字幕生成、去噪优先与保留结构，覆盖网页正文提取全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "audio-clip-expert-team-lead",
+        "role": "lead",
+        "name": "音频剪辑与播客后期制作专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "audio-clip-expert",
+        "role": "member",
+        "name": "音频剪辑专家",
+        "evidence": "original_assets/audio-clip-expert/merkle_root",
+        "member_merkle_root": "c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8"
+      },
+      {
+        "slug": "article-extract-clean",
+        "role": "member",
+        "name": "网页正文提取 助手",
+        "evidence": "original_assets/article-extract-clean/merkle_root",
+        "member_merkle_root": "4bf58c4f18b46e14e5d4b9029c1294e7f5b0ad2ccbaa8727efd47a12a95726e9"
+      },
+      {
+        "slug": "faq-build-pro",
+        "role": "member",
+        "name": "常见问题库构建 助手",
+        "evidence": "original_assets/faq-build-pro/merkle_root",
+        "member_merkle_root": "d0d4fdcb8bbeb2068c9db34090a8331f415f164fa2f1ca2d830b097a6057d624"
+      }
+    ],
+    "team_lead": "audio-clip-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2294bbc10bb86365",
+  "prompt_hash": "cb1cebe0fe0fb1e5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-954\", \"kind\": \"team\", \"name\": \"网页正文提取专家\", \"description\": \"擅长字幕生成、去噪优先与保留结构，覆盖网页正文提取全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"audio-clip-expert-team-lead\", \"role\": \"lead\", \"name\": \"音频剪辑与播客后期制作专家主理人\", \"evidence\": null}, {\"slug\": \"audio-clip-expert\", \"role\": \"member\", \"name\": \"音频剪辑专家\", \"evidence\": \"original_assets/audio-clip-expert/merkle_root\", \"member_merkle_root\": \"c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8\"}, {\"slug\": \"article-extract-clean\", \"role\": \"member\", \"name\": \"网页正文提取 助手\", \"evidence\": \"original_assets/article-extract-clean/merkle_root\", \"member_merkle_root\": \"4bf58c4f18b46e14e5d4b9029c1294e7f5b0ad2ccbaa8727efd47a12a95726e9\"}, {\"slug\": \"faq-build-pro\", \"role\": \"member\", \"name\": \"常见问题库构建 助手\", \"evidence\": \"original_assets/faq-build-pro/merkle_root\", \"member_merkle_root\": \"d0d4fdcb8bbeb2068c9db34090a8331f415f164fa2f1ca2d830b097a6057d624\"}], \"team_lead\": \"audio-clip-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/article-extract-clean.md": "2745f55a32b02c0943d562682831cb30c5a39a34373deaf3799d7b37eabee5da",
+    "agents/audio-clip-expert-team-lead.md": "4c31708c2e95fdbeda95133a35a66cc5999286c8c55aa89ef5ed19a0f55682b5",
+    "agents/audio-clip-expert.md": "54770cbef7e070f4161d8c95366e18d06a99f0e7c1dd652d68f30cabe608f1e9",
+    "agents/faq-build-pro.md": "8544e0052b2c24c674415fa1f81b25615c7e35e7318d7e18c2c6d4e5963d9862",
+    "plugin.json": "23b199e742027e7574da9d7f8370eb6bc25398408944cd73620069040d090156",
+    "settings.json": "3ffe84ad4e8fc955ddec8809674ee1d01e9bc27bcfb0c466cc0c17372d0fec13"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "data-literacy-team-lead",
+  "agents": [
+    "./agents/data-literacy-team-lead.md",
+    "./agents/data-literacy.md",
+    "./agents/cs-qbr-pro.md",
+    "./agents/sales-script-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 数据素养培训",
+    "zh": "帮我处理数据素养培训"
+  },
+  "description": "data-literacy team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 数据素养培训 requirements, output three deliverables: 分层培训, 常见误区, 定期复训. Verifiable end-to-end, evidence per step.",
+    "zh": "输入数据素养培训相关需求，输出分层培训、常见误区、定期复训三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "data-literacy Team",
+    "zh": "数据素养培训专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "data-literacy-team-lead",
+      "name": {
+        "en": "数据素养培训主理人",
+        "zh": "数据素养培训主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/data-literacy.png",
+      "id": "data-literacy",
+      "name": {
+        "en": "data-literacy",
+        "zh": "数据素养培训 顾问"
+      },
+      "profession": {
+        "en": "data-literacy",
+        "zh": "数据素养培训 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cs-qbr-pro.png",
+      "id": "cs-qbr-pro",
+      "name": {
+        "en": "cs-qbr-pro",
+        "zh": "客户复盘 季度会议 顾问"
+      },
+      "profession": {
+        "en": "cs-qbr-pro",
+        "zh": "客户复盘 季度会议 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sales-script-coach.png",
+      "id": "sales-script-coach",
+      "name": {
+        "en": "sales-script-coach",
+        "zh": "销售话术 场景演练 教练"
+      },
+      "profession": {
+        "en": "sales-script-coach",
+        "zh": "销售话术 场景演练 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1131",
+  "plugin": "group-team-1131",
+  "profession": {
+    "en": "data-literacy Collaboration Team",
+    "zh": "数据素养培训专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 数据素养培训",
+      "zh": "帮我处理数据素养培训"
+    },
+    {
+      "en": "Plan 客户复盘",
+      "zh": "帮我规划客户复盘"
+    },
+    {
+      "en": "Review 销售话术",
+      "zh": "帮我检查销售话术"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分层培训",
+      "zh": "分层培训"
+    },
+    {
+      "en": "常见误区",
+      "zh": "常见误区"
+    },
+    {
+      "en": "定期复训",
+      "zh": "定期复训"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "data-literacy-team-lead",
+    "memberAgents": [
+      "data-literacy",
+      "cs-qbr-pro",
+      "sales-script-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

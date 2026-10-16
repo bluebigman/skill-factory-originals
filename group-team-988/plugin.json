@@ -1,0 +1,126 @@
+{
+  "agentName": "cold-email-expert-team-lead",
+  "agents": [
+    "./agents/cold-email-expert-team-lead.md",
+    "./agents/cold-email-expert.md",
+    "./agents/new-product-npi-pro.md",
+    "./agents/integration-test-env.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 邮件营销",
+    "zh": "帮我处理邮件营销"
+  },
+  "description": "MailPro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 新品导入 end-to-end: 场景识别, 样件分级 and 爬坡曲线. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长场景识别、样件分级与爬坡曲线，覆盖新品导入全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "MailPro Team",
+    "zh": "邮件营销标题撰写专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "cold-email-expert-team-lead",
+      "name": {
+        "en": "邮件营销主理人",
+        "zh": "邮件营销主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/cold-email-expert.png",
+      "id": "cold-email-expert",
+      "name": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "profession": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/new-product-npi-pro.png",
+      "id": "new-product-npi-pro",
+      "name": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "profession": {
+        "en": "new-product-npi-pro",
+        "zh": "新品导入 试产爬坡 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/integration-test-env.png",
+      "id": "integration-test-env",
+      "name": {
+        "en": "integration-test-env",
+        "zh": "集成测试环境 顾问"
+      },
+      "profession": {
+        "en": "integration-test-env",
+        "zh": "集成测试环境 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-988",
+  "plugin": "group-team-988",
+  "profession": {
+    "en": "MailPro Collaboration Team",
+    "zh": "邮件营销标题撰写专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 邮件营销",
+      "zh": "帮我处理邮件营销"
+    },
+    {
+      "en": "Plan 新品导入",
+      "zh": "帮我规划新品导入"
+    },
+    {
+      "en": "Review 集成测试环境",
+      "zh": "帮我检查集成测试环境"
+    }
+  ],
+  "tags": [
+    {
+      "en": "钩子与价值",
+      "zh": "钩子与价值"
+    },
+    {
+      "en": "得体性",
+      "zh": "得体性"
+    },
+    {
+      "en": "阶段门评审",
+      "zh": "阶段门评审"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "cold-email-expert-team-lead",
+    "memberAgents": [
+      "cold-email-expert",
+      "new-product-npi-pro",
+      "integration-test-env"
+    ]
+  },
+  "version": "1.0.0"
+}

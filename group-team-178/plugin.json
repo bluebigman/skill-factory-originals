@@ -1,0 +1,126 @@
+{
+  "agentName": "sql-toolkit-pro-02-fixed-team-lead",
+  "agents": [
+    "./agents/sql-toolkit-pro-02-fixed-team-lead.md",
+    "./agents/sql-toolkit-pro-02-fixed.md",
+    "./agents/data-viz-pro-01.md",
+    "./agents/agent-toolkit-pro-01.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle SQL生成编辑",
+    "zh": "帮我处理SQL生成编辑"
+  },
+  "description": "SQL Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "数据库 报表 显微 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "SQL Suite Team",
+    "zh": "数据库 报表 显微 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sql-toolkit-pro-02-fixed-team-lead",
+      "name": {
+        "en": "SQL生成编辑主理人",
+        "zh": "SQL生成编辑主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sql-toolkit-pro-02-fixed.png",
+      "id": "sql-toolkit-pro-02-fixed",
+      "name": {
+        "en": "SQL Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "profession": {
+        "en": "SQL Suite",
+        "zh": "SQL生成编辑 查询构建器"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-viz-pro-01.png",
+      "id": "data-viz-pro-01",
+      "name": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "报表数据 配置解析 快速生成"
+      },
+      "profession": {
+        "en": "数据可视化与报表 Suite",
+        "zh": "报表数据 配置解析 快速生成"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-toolkit-pro-01.png",
+      "id": "agent-toolkit-pro-01",
+      "name": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "profession": {
+        "en": "技能与智能体编排 Suite",
+        "zh": "显微成像 批量转换 流程编排"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-178",
+  "plugin": "group-team-178",
+  "profession": {
+    "en": "SQL Suite Collaboration Team",
+    "zh": "数据库 报表 显微 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle SQL生成编辑",
+      "zh": "帮我处理SQL生成编辑"
+    },
+    {
+      "en": "Plan 报表数据",
+      "zh": "帮我规划报表数据"
+    },
+    {
+      "en": "Review 显微成像",
+      "zh": "帮我检查显微成像"
+    }
+  ],
+  "tags": [
+    {
+      "en": "SQL生成编辑",
+      "zh": "SQL生成编辑"
+    },
+    {
+      "en": "报表数据",
+      "zh": "报表数据"
+    },
+    {
+      "en": "显微成像",
+      "zh": "显微成像"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sql-toolkit-pro-02-fixed-team-lead",
+    "memberAgents": [
+      "sql-toolkit-pro-02-fixed",
+      "data-viz-pro-01",
+      "agent-toolkit-pro-01"
+    ]
+  },
+  "version": "1.0.0"
+}

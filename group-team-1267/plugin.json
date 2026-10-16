@@ -1,0 +1,126 @@
+{
+  "agentName": "brand-voice-guide-team-lead",
+  "agents": [
+    "./agents/brand-voice-guide-team-lead.md",
+    "./agents/brand-voice-guide.md",
+    "./agents/event-planning.md",
+    "./agents/pdf-content-extract.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 品牌语气",
+    "zh": "帮我处理品牌语气"
+  },
+  "description": "brand-voice-guide team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 品牌语气 end-to-end: 三词定义, 正反示例 and 禁用清单. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长三词定义、正反示例与禁用清单，覆盖品牌语气全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "brand-voice-guide Team",
+    "zh": "品牌语气专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "brand-voice-guide-team-lead",
+      "name": {
+        "en": "品牌语气主理人",
+        "zh": "品牌语气主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/brand-voice-guide.png",
+      "id": "brand-voice-guide",
+      "name": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "profession": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/event-planning.png",
+      "id": "event-planning",
+      "name": {
+        "en": "event-planning",
+        "zh": "活动策划 顾问"
+      },
+      "profession": {
+        "en": "event-planning",
+        "zh": "活动策划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/pdf-content-extract.png",
+      "id": "pdf-content-extract",
+      "name": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "profession": {
+        "en": "pdf-content-extract",
+        "zh": "PDF 内容提取 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1267",
+  "plugin": "group-team-1267",
+  "profession": {
+    "en": "brand-voice-guide Collaboration Team",
+    "zh": "品牌语气专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 品牌语气",
+      "zh": "帮我处理品牌语气"
+    },
+    {
+      "en": "Plan 活动策划",
+      "zh": "帮我规划活动策划"
+    },
+    {
+      "en": "Review PDF",
+      "zh": "帮我检查PDF"
+    }
+  ],
+  "tags": [
+    {
+      "en": "三词定义",
+      "zh": "三词定义"
+    },
+    {
+      "en": "正反示例",
+      "zh": "正反示例"
+    },
+    {
+      "en": "禁用清单",
+      "zh": "禁用清单"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "brand-voice-guide-team-lead",
+    "memberAgents": [
+      "brand-voice-guide",
+      "event-planning",
+      "pdf-content-extract"
+    ]
+  },
+  "version": "1.0.0"
+}

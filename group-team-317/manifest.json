@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-317",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-317",
+    "kind": "team",
+    "name": "成本归因专家",
+    "description": "擅长分项核算、异常定位与基线对比，覆盖成本归因全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-cost-attribution-team-lead",
+        "role": "lead",
+        "name": "成本归因主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-cost-attribution",
+        "role": "member",
+        "name": "成本归因 分项核算 顾问",
+        "evidence": "original_assets/agent-cost-attribution/merkle_root",
+        "member_merkle_root": "1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa"
+      },
+      {
+        "slug": "agent-feedback-loop",
+        "role": "member",
+        "name": "反馈闭环 效果回收 顾问",
+        "evidence": "original_assets/agent-feedback-loop/merkle_root",
+        "member_merkle_root": "18c69314bc59d0b28da9cf8d3fe5ca26995559ed382c4b44127b35eb4e46b90e"
+      },
+      {
+        "slug": "data-dict-pro",
+        "role": "member",
+        "name": "数据字典 字段说明 顾问",
+        "evidence": "original_assets/data-dict-pro/merkle_root",
+        "member_merkle_root": "3644ee9e3921015c438da309ebea0bc8f2effd95d351a08f03cebb90bf6ff680"
+      }
+    ],
+    "team_lead": "agent-cost-attribution-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d212e2e1a29124a4",
+  "prompt_hash": "86f3dfb82a7b836b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-317\", \"kind\": \"team\", \"name\": \"成本归因专家\", \"description\": \"擅长分项核算、异常定位与基线对比，覆盖成本归因全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-cost-attribution-team-lead\", \"role\": \"lead\", \"name\": \"成本归因主理人\", \"evidence\": null}, {\"slug\": \"agent-cost-attribution\", \"role\": \"member\", \"name\": \"成本归因 分项核算 顾问\", \"evidence\": \"original_assets/agent-cost-attribution/merkle_root\", \"member_merkle_root\": \"1a1a14d5ea64ca62aecfc62fb52204b900c4ef196956be44abfcffbc83fe24aa\"}, {\"slug\": \"agent-feedback-loop\", \"role\": \"member\", \"name\": \"反馈闭环 效果回收 顾问\", \"evidence\": \"original_assets/agent-feedback-loop/merkle_root\", \"member_merkle_root\": \"18c69314bc59d0b28da9cf8d3fe5ca26995559ed382c4b44127b35eb4e46b90e\"}, {\"slug\": \"data-dict-pro\", \"role\": \"member\", \"name\": \"数据字典 字段说明 顾问\", \"evidence\": \"original_assets/data-dict-pro/merkle_root\", \"member_merkle_root\": \"3644ee9e3921015c438da309ebea0bc8f2effd95d351a08f03cebb90bf6ff680\"}], \"team_lead\": \"agent-cost-attribution-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-cost-attribution-team-lead.md": "56d0410e3447f9e2ab07ff4aa71e3b40785fad80922dc03c63c96eb522f330ff",
+    "agents/agent-cost-attribution.md": "c8b83c005744ab5eb72271a28c7eaf55b4042db22eeae28ba886868c78573bc4",
+    "agents/agent-feedback-loop.md": "073120944e436aeb40ee1d39d656f8a3e9adf9fbab07d870d684b497f0c47999",
+    "agents/data-dict-pro.md": "8c2676fc92e04954eb47a68ad266c868114edc4e88b2f1c8e37dfa17bd85f3f4",
+    "plugin.json": "f35a329b39170f245fb4ad00583aff02f2e3508ec4378860352719630eb619a7",
+    "settings.json": "9d8ad191ce888030559f2373f834703cffe8921346285f87d9bd861ce4412faf"
+  }
+}

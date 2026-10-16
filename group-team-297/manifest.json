@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-297",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-297",
+    "kind": "team",
+    "name": "知识提取专家",
+    "description": "输入知识提取相关需求，输出要点提取、来源标注、去重合并三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "knowledge-extract-pro-team-lead",
+        "role": "lead",
+        "name": "知识提取主理人",
+        "evidence": null
+      },
+      {
+        "slug": "knowledge-extract-pro",
+        "role": "member",
+        "name": "知识提取 要点归纳 顾问",
+        "evidence": "original_assets/knowledge-extract-pro/merkle_root",
+        "member_merkle_root": "5e7c837cae7778342a881620d561373a7a55fc7734b3e923a104d06ef6f9b43a"
+      },
+      {
+        "slug": "spreadsheet-audit-pro",
+        "role": "member",
+        "name": "表格审计 公式核验 顾问",
+        "evidence": "original_assets/spreadsheet-audit-pro/merkle_root",
+        "member_merkle_root": "008b8ad7370c0c5615902850c1630858cc6e52118a2227fc2d0371077050b71a"
+      },
+      {
+        "slug": "data-audit-pro",
+        "role": "member",
+        "name": "调研数据 清洗校验 分析报告",
+        "evidence": "original_assets/data-audit-pro/merkle_root",
+        "member_merkle_root": "b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3"
+      }
+    ],
+    "team_lead": "knowledge-extract-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f872122645bf2b97",
+  "prompt_hash": "13dded39e57500cb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-297\", \"kind\": \"team\", \"name\": \"知识提取专家\", \"description\": \"输入知识提取相关需求，输出要点提取、来源标注、去重合并三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"knowledge-extract-pro-team-lead\", \"role\": \"lead\", \"name\": \"知识提取主理人\", \"evidence\": null}, {\"slug\": \"knowledge-extract-pro\", \"role\": \"member\", \"name\": \"知识提取 要点归纳 顾问\", \"evidence\": \"original_assets/knowledge-extract-pro/merkle_root\", \"member_merkle_root\": \"5e7c837cae7778342a881620d561373a7a55fc7734b3e923a104d06ef6f9b43a\"}, {\"slug\": \"spreadsheet-audit-pro\", \"role\": \"member\", \"name\": \"表格审计 公式核验 顾问\", \"evidence\": \"original_assets/spreadsheet-audit-pro/merkle_root\", \"member_merkle_root\": \"008b8ad7370c0c5615902850c1630858cc6e52118a2227fc2d0371077050b71a\"}, {\"slug\": \"data-audit-pro\", \"role\": \"member\", \"name\": \"调研数据 清洗校验 分析报告\", \"evidence\": \"original_assets/data-audit-pro/merkle_root\", \"member_merkle_root\": \"b44d110e7ec85d8af9003a57fb6756df1f98be1d3a5ea3c151484bbf290822e3\"}], \"team_lead\": \"knowledge-extract-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-audit-pro.md": "f601bd145badca7418edd67eda89d191cd367474adb80670883c217dbfa0538c",
+    "agents/knowledge-extract-pro-team-lead.md": "81c270af2afd262ca5056d34eb87df70338e96a82004a7fadf7984d14381f6f8",
+    "agents/knowledge-extract-pro.md": "0a0218d98466d95437327cb92db7936ffd2e366321cc35df273f8f416bbc9f5f",
+    "agents/spreadsheet-audit-pro.md": "272d5e23d7f1ed2cb523b386e0b36e3c299964aeff4f9997bde74ff4144a5e78",
+    "plugin.json": "4b16c762a9b66cb79a0dc0ab297b96da41c4ba8c32b0692c89d1e8818f159661",
+    "settings.json": "a3607de5d170dc1e7c24cb9b26ec565d965150bcde8561a77a0a39e478b83483"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "usability-test-pro-team-lead",
+  "agents": [
+    "./agents/usability-test-pro-team-lead.md",
+    "./agents/usability-test-pro.md",
+    "./agents/design-taste-check.md",
+    "./agents/form-ux-review.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 可用性",
+    "zh": "帮我处理可用性"
+  },
+  "description": "usability-test-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 可用性, covers 任务导向 / 出声思维 / 记录失败, delivering structured results and actionable checklists.",
+    "zh": "可用性专家：围绕可用性，覆盖任务导向／出声思维／记录失败，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "usability-test-pro Team",
+    "zh": "可用性专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "usability-test-pro-team-lead",
+      "name": {
+        "en": "可用性主理人",
+        "zh": "可用性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/usability-test-pro.png",
+      "id": "usability-test-pro",
+      "name": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "profession": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/design-taste-check.png",
+      "id": "design-taste-check",
+      "name": {
+        "en": "design-taste-check",
+        "zh": "设计品味核查 顾问"
+      },
+      "profession": {
+        "en": "design-taste-check",
+        "zh": "设计品味核查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/form-ux-review.png",
+      "id": "form-ux-review",
+      "name": {
+        "en": "form-ux-review",
+        "zh": "表单体验评审 顾问"
+      },
+      "profession": {
+        "en": "form-ux-review",
+        "zh": "表单体验评审 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1184",
+  "plugin": "group-team-1184",
+  "profession": {
+    "en": "usability-test-pro Collaboration Team",
+    "zh": "可用性专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 可用性",
+      "zh": "帮我处理可用性"
+    },
+    {
+      "en": "Plan 设计品味核查",
+      "zh": "帮我规划设计品味核查"
+    },
+    {
+      "en": "Review 表单体验评审",
+      "zh": "帮我检查表单体验评审"
+    }
+  ],
+  "tags": [
+    {
+      "en": "任务导向",
+      "zh": "任务导向"
+    },
+    {
+      "en": "小样本",
+      "zh": "小样本"
+    },
+    {
+      "en": "出声思维",
+      "zh": "出声思维"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "usability-test-pro-team-lead",
+    "memberAgents": [
+      "usability-test-pro",
+      "design-taste-check",
+      "form-ux-review"
+    ]
+  },
+  "version": "1.0.0"
+}

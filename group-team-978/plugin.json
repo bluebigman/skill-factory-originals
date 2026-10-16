@@ -1,0 +1,126 @@
+{
+  "agentName": "media-process-pro-fixed-team-lead",
+  "agents": [
+    "./agents/media-process-pro-fixed-team-lead.md",
+    "./agents/media-process-pro-fixed.md",
+    "./agents/audience-segment-pro.md",
+    "./agents/game-story-branch.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 政务设计规范",
+    "zh": "帮我处理政务设计规范"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 受众分层, covers 按行为分 / 规模可用 / 内容差异, delivering structured results and actionable checklists.",
+    "zh": "剧情分支结构设计专家：围绕受众分层，覆盖按行为分／规模可用／内容差异，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "剧情分支结构设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "media-process-pro-fixed-team-lead",
+      "name": {
+        "en": "政务设计规范主理人",
+        "zh": "政务设计规范主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/media-process-pro-fixed.png",
+      "id": "media-process-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "政务设计规范 一键成片"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/audience-segment-pro.png",
+      "id": "audience-segment-pro",
+      "name": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "profession": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-story-branch.png",
+      "id": "game-story-branch",
+      "name": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "profession": {
+        "en": "game-story-branch",
+        "zh": "剧情分支 结构设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-978",
+  "plugin": "group-team-978",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "剧情分支结构设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 政务设计规范",
+      "zh": "帮我处理政务设计规范"
+    },
+    {
+      "en": "Plan 受众分层",
+      "zh": "帮我规划受众分层"
+    },
+    {
+      "en": "Review 剧情分支",
+      "zh": "帮我检查剧情分支"
+    }
+  ],
+  "tags": [
+    {
+      "en": "政务设计规范",
+      "zh": "政务设计规范"
+    },
+    {
+      "en": "审计实施",
+      "zh": "审计实施"
+    },
+    {
+      "en": "印尼数字服务",
+      "zh": "印尼数字服务"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "media-process-pro-fixed-team-lead",
+    "memberAgents": [
+      "media-process-pro-fixed",
+      "audience-segment-pro",
+      "game-story-branch"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "design-review-method-team-lead",
+  "agents": [
+    "./agents/design-review-method-team-lead.md",
+    "./agents/design-review-method.md",
+    "./agents/game-liveops-pro.md",
+    "./agents/usability-test-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 设计评审",
+    "zh": "帮我处理设计评审"
+  },
+  "description": "design-review-method team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 设计评审 requirements, output three deliverables: 分歧留档, 限时评审, 版本对齐. Verifiable end-to-end, evidence per step.",
+    "zh": "输入设计评审相关需求，输出分歧留档、限时评审、版本对齐三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "design-review-method Team",
+    "zh": "活动节奏专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "design-review-method-team-lead",
+      "name": {
+        "en": "设计评审主理人",
+        "zh": "设计评审主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/design-review-method.png",
+      "id": "design-review-method",
+      "name": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "profession": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-liveops-pro.png",
+      "id": "game-liveops-pro",
+      "name": {
+        "en": "game-liveops-pro",
+        "zh": "游戏运营 活动节奏 顾问"
+      },
+      "profession": {
+        "en": "game-liveops-pro",
+        "zh": "游戏运营 活动节奏 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/usability-test-pro.png",
+      "id": "usability-test-pro",
+      "name": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "profession": {
+        "en": "usability-test-pro",
+        "zh": "可用性 测试执行 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-577",
+  "plugin": "group-team-577",
+  "profession": {
+    "en": "design-review-method Collaboration Team",
+    "zh": "活动节奏专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 设计评审",
+      "zh": "帮我处理设计评审"
+    },
+    {
+      "en": "Plan 游戏运营",
+      "zh": "帮我规划游戏运营"
+    },
+    {
+      "en": "Review 可用性",
+      "zh": "帮我检查可用性"
+    }
+  ],
+  "tags": [
+    {
+      "en": "分歧留档",
+      "zh": "分歧留档"
+    },
+    {
+      "en": "限时评审",
+      "zh": "限时评审"
+    },
+    {
+      "en": "结论转任务",
+      "zh": "结论转任务"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "design-review-method-team-lead",
+    "memberAgents": [
+      "design-review-method",
+      "game-liveops-pro",
+      "usability-test-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

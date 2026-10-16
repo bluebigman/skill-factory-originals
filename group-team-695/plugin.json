@@ -1,0 +1,126 @@
+{
+  "agentName": "audience-segment-pro-team-lead",
+  "agents": [
+    "./agents/audience-segment-pro-team-lead.md",
+    "./agents/audience-segment-pro.md",
+    "./agents/brand-voice-guide.md",
+    "./agents/knowledge-base-pro-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 受众分层",
+    "zh": "帮我处理受众分层"
+  },
+  "description": "audience-segment-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 受众分层 requirements, output three deliverables: 按行为分, 规模可用, 内容差异. Verifiable end-to-end, evidence per step.",
+    "zh": "输入受众分层相关需求，输出按行为分、规模可用、内容差异三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "audience-segment-pro Team",
+    "zh": "品牌语气规范手册专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "audience-segment-pro-team-lead",
+      "name": {
+        "en": "受众分层主理人",
+        "zh": "受众分层主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/audience-segment-pro.png",
+      "id": "audience-segment-pro",
+      "name": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "profession": {
+        "en": "audience-segment-pro",
+        "zh": "受众分层 策略匹配 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/brand-voice-guide.png",
+      "id": "brand-voice-guide",
+      "name": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "profession": {
+        "en": "brand-voice-guide",
+        "zh": "品牌语气 规范手册 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-base-pro-fixed.png",
+      "id": "knowledge-base-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文档建站 知识库构建"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文档建站 知识库构建"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-695",
+  "plugin": "group-team-695",
+  "profession": {
+    "en": "audience-segment-pro Collaboration Team",
+    "zh": "品牌语气规范手册专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 受众分层",
+      "zh": "帮我处理受众分层"
+    },
+    {
+      "en": "Plan 品牌语气",
+      "zh": "帮我规划品牌语气"
+    },
+    {
+      "en": "Review 文档建站",
+      "zh": "帮我检查文档建站"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按行为分",
+      "zh": "按行为分"
+    },
+    {
+      "en": "规模可用",
+      "zh": "规模可用"
+    },
+    {
+      "en": "内容差异",
+      "zh": "内容差异"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "audience-segment-pro-team-lead",
+    "memberAgents": [
+      "audience-segment-pro",
+      "brand-voice-guide",
+      "knowledge-base-pro-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

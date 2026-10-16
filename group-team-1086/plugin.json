@@ -1,0 +1,126 @@
+{
+  "agentName": "knowledge-contribution-team-lead",
+  "agents": [
+    "./agents/knowledge-contribution-team-lead.md",
+    "./agents/knowledge-contribution.md",
+    "./agents/cross-border-listing-pro.md",
+    "./agents/doc-figure-table-num.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 知识贡献机制",
+    "zh": "帮我处理知识贡献机制"
+  },
+  "description": "knowledge-contribution team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 知识贡献机制 requirements, output three deliverables: 评审轻量, 署名留痕, 激励可见. Verifiable end-to-end, evidence per step.",
+    "zh": "输入知识贡献机制相关需求，输出评审轻量、署名留痕、激励可见三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "knowledge-contribution Team",
+    "zh": "知识贡献机制专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "knowledge-contribution-team-lead",
+      "name": {
+        "en": "知识贡献机制主理人",
+        "zh": "知识贡献机制主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/knowledge-contribution.png",
+      "id": "knowledge-contribution",
+      "name": {
+        "en": "knowledge-contribution",
+        "zh": "知识贡献机制 顾问"
+      },
+      "profession": {
+        "en": "knowledge-contribution",
+        "zh": "知识贡献机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cross-border-listing-pro.png",
+      "id": "cross-border-listing-pro",
+      "name": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "profession": {
+        "en": "cross-border-listing-pro",
+        "zh": "跨境选品 上架合规 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-figure-table-num.png",
+      "id": "doc-figure-table-num",
+      "name": {
+        "en": "doc-figure-table-num",
+        "zh": "图表编号管理 助手"
+      },
+      "profession": {
+        "en": "doc-figure-table-num",
+        "zh": "图表编号管理 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1086",
+  "plugin": "group-team-1086",
+  "profession": {
+    "en": "knowledge-contribution Collaboration Team",
+    "zh": "知识贡献机制专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 知识贡献机制",
+      "zh": "帮我处理知识贡献机制"
+    },
+    {
+      "en": "Plan 跨境选品",
+      "zh": "帮我规划跨境选品"
+    },
+    {
+      "en": "Review 图表编号管理",
+      "zh": "帮我检查图表编号管理"
+    }
+  ],
+  "tags": [
+    {
+      "en": "评审轻量",
+      "zh": "评审轻量"
+    },
+    {
+      "en": "署名留痕",
+      "zh": "署名留痕"
+    },
+    {
+      "en": "激励可见",
+      "zh": "激励可见"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "knowledge-contribution-team-lead",
+    "memberAgents": [
+      "knowledge-contribution",
+      "cross-border-listing-pro",
+      "doc-figure-table-num"
+    ]
+  },
+  "version": "1.0.0"
+}

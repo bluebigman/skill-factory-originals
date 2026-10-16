@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-130",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-130",
+    "kind": "team",
+    "name": "面试 学习 模拟 团队",
+    "description": "面试 学习 模拟 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "interview-answer-coach-team-lead",
+        "role": "lead",
+        "name": "面试答题主理人",
+        "evidence": null
+      },
+      {
+        "slug": "interview-answer-coach",
+        "role": "member",
+        "name": "面试答题 思路拆解 顾问",
+        "evidence": "original_assets/interview-answer-coach/merkle_root",
+        "member_merkle_root": "ae77d2edec6704189e64c6472132f21e19a45ab99a84c8fc078df20c5a40c88f"
+      },
+      {
+        "slug": "study-motivation-coach",
+        "role": "member",
+        "name": "学习动力 内驱力 教练",
+        "evidence": "original_assets/study-motivation-coach/merkle_root",
+        "member_merkle_root": "efb0cacd29ea49bdcd8c8007e652812f9bf30d37429e63c2d3b22c176d62ad50"
+      },
+      {
+        "slug": "interview-sim-eval",
+        "role": "member",
+        "name": "模拟面试 追问演练 顾问",
+        "evidence": "original_assets/interview-sim-eval/merkle_root",
+        "member_merkle_root": "85bdd8912d563d5c1ff61bdb37862143e1213fd258fb4ca7d403e0eaf316cb2e"
+      }
+    ],
+    "team_lead": "interview-answer-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5d36a29c2b8570e6",
+  "prompt_hash": "dc14db3f7b61f494",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-130\", \"kind\": \"team\", \"name\": \"面试 学习 模拟 团队\", \"description\": \"面试 学习 模拟 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"interview-answer-coach-team-lead\", \"role\": \"lead\", \"name\": \"面试答题主理人\", \"evidence\": null}, {\"slug\": \"interview-answer-coach\", \"role\": \"member\", \"name\": \"面试答题 思路拆解 顾问\", \"evidence\": \"original_assets/interview-answer-coach/merkle_root\", \"member_merkle_root\": \"ae77d2edec6704189e64c6472132f21e19a45ab99a84c8fc078df20c5a40c88f\"}, {\"slug\": \"study-motivation-coach\", \"role\": \"member\", \"name\": \"学习动力 内驱力 教练\", \"evidence\": \"original_assets/study-motivation-coach/merkle_root\", \"member_merkle_root\": \"efb0cacd29ea49bdcd8c8007e652812f9bf30d37429e63c2d3b22c176d62ad50\"}, {\"slug\": \"interview-sim-eval\", \"role\": \"member\", \"name\": \"模拟面试 追问演练 顾问\", \"evidence\": \"original_assets/interview-sim-eval/merkle_root\", \"member_merkle_root\": \"85bdd8912d563d5c1ff61bdb37862143e1213fd258fb4ca7d403e0eaf316cb2e\"}], \"team_lead\": \"interview-answer-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/interview-answer-coach-team-lead.md": "5aa2e15c680297d8b8b37f169fe40056c432fb579c6748c52728bfc3c29f0d69",
+    "agents/interview-answer-coach.md": "a0aaacde704707eec6901e11d8712b855d01778c0c892d1afa0333be46e7f0f7",
+    "agents/interview-sim-eval.md": "673a1be9065435ab4c79c28c5caa83f317f809f78e02e623eb3a8091b5ceedb2",
+    "agents/study-motivation-coach.md": "1423106953e88cae6d287e05f133944a6f6132da91a4a2297aa39d4c421128d4",
+    "plugin.json": "d44ba5110a3c0a881806d09eed0f79e08d6dfd012458e51b79cf0ffa01968718",
+    "settings.json": "ae12b5fda67e6f827a413de22cfd58a5c23e262f2c9abd3b3187b28b8face2fc"
+  }
+}

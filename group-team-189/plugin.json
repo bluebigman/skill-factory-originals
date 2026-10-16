@@ -1,0 +1,126 @@
+{
+  "agentName": "series-column-plan-team-lead",
+  "agents": [
+    "./agents/series-column-plan-team-lead.md",
+    "./agents/series-column-plan.md",
+    "./agents/visual-text-ratio.md",
+    "./agents/script-structure.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 系列栏目",
+    "zh": "帮我处理系列栏目"
+  },
+  "description": "Series Column Plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "系列 图文 脚本 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Series Column Plan Team",
+    "zh": "系列 图文 脚本 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "series-column-plan-team-lead",
+      "name": {
+        "en": "系列栏目主理人",
+        "zh": "系列栏目主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/series-column-plan.png",
+      "id": "series-column-plan",
+      "name": {
+        "en": "Series Column Plan",
+        "zh": "系列栏目 IP化 顾问"
+      },
+      "profession": {
+        "en": "Series Column Plan",
+        "zh": "系列栏目 IP化 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/visual-text-ratio.png",
+      "id": "visual-text-ratio",
+      "name": {
+        "en": "Visual Text Ratio",
+        "zh": "图文配比 排版节奏 助手"
+      },
+      "profession": {
+        "en": "Visual Text Ratio",
+        "zh": "图文配比 排版节奏 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/script-structure.png",
+      "id": "script-structure",
+      "name": {
+        "en": "Script Structure",
+        "zh": "脚本结构 节奏设计 顾问"
+      },
+      "profession": {
+        "en": "Script Structure",
+        "zh": "脚本结构 节奏设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-189",
+  "plugin": "group-team-189",
+  "profession": {
+    "en": "Series Column Plan Collaboration Team",
+    "zh": "系列 图文 脚本 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 系列栏目",
+      "zh": "帮我处理系列栏目"
+    },
+    {
+      "en": "Plan 图文配比",
+      "zh": "帮我规划图文配比"
+    },
+    {
+      "en": "Review 脚本结构",
+      "zh": "帮我检查脚本结构"
+    }
+  ],
+  "tags": [
+    {
+      "en": "系列栏目",
+      "zh": "系列栏目"
+    },
+    {
+      "en": "图文配比",
+      "zh": "图文配比"
+    },
+    {
+      "en": "脚本结构",
+      "zh": "脚本结构"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "series-column-plan-team-lead",
+    "memberAgents": [
+      "series-column-plan",
+      "visual-text-ratio",
+      "script-structure"
+    ]
+  },
+  "version": "1.0.0"
+}

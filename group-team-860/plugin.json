@@ -1,0 +1,126 @@
+{
+  "agentName": "spatial-layout-pro-team-lead",
+  "agents": [
+    "./agents/spatial-layout-pro-team-lead.md",
+    "./agents/spatial-layout-pro.md",
+    "./agents/ar-vr-usability.md",
+    "./agents/accessibility-check.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 空间布局",
+    "zh": "帮我处理空间布局"
+  },
+  "description": "spatial-layout-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 空间布局 requirements, output three deliverables: 视差控制, 舒适模式, 单次限时. Verifiable end-to-end, evidence per step.",
+    "zh": "输入空间布局相关需求，输出视差控制、舒适模式、单次限时三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "spatial-layout-pro Team",
+    "zh": "空间布局动线设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "spatial-layout-pro-team-lead",
+      "name": {
+        "en": "空间布局主理人",
+        "zh": "空间布局主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/spatial-layout-pro.png",
+      "id": "spatial-layout-pro",
+      "name": {
+        "en": "spatial-layout-pro",
+        "zh": "空间布局 动线设计 顾问"
+      },
+      "profession": {
+        "en": "spatial-layout-pro",
+        "zh": "空间布局 动线设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ar-vr-usability.png",
+      "id": "ar-vr-usability",
+      "name": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "profession": {
+        "en": "ar-vr-usability",
+        "zh": "沉浸体验 舒适度 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/accessibility-check.png",
+      "id": "accessibility-check",
+      "name": {
+        "en": "accessibility-check",
+        "zh": "无障碍 检查清单 顾问"
+      },
+      "profession": {
+        "en": "accessibility-check",
+        "zh": "无障碍 检查清单 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-860",
+  "plugin": "group-team-860",
+  "profession": {
+    "en": "spatial-layout-pro Collaboration Team",
+    "zh": "空间布局动线设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 空间布局",
+      "zh": "帮我处理空间布局"
+    },
+    {
+      "en": "Plan 沉浸体验",
+      "zh": "帮我规划沉浸体验"
+    },
+    {
+      "en": "Review 无障碍",
+      "zh": "帮我检查无障碍"
+    }
+  ],
+  "tags": [
+    {
+      "en": "主动线最短",
+      "zh": "主动线最短"
+    },
+    {
+      "en": "入口焦点",
+      "zh": "入口焦点"
+    },
+    {
+      "en": "分区清晰",
+      "zh": "分区清晰"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "spatial-layout-pro-team-lead",
+    "memberAgents": [
+      "spatial-layout-pro",
+      "ar-vr-usability",
+      "accessibility-check"
+    ]
+  },
+  "version": "1.0.0"
+}

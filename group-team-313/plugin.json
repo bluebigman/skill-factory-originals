@@ -1,0 +1,126 @@
+{
+  "agentName": "schema-evolution-pro-team-lead",
+  "agents": [
+    "./agents/schema-evolution-pro-team-lead.md",
+    "./agents/schema-evolution-pro.md",
+    "./agents/context-window-tune.md",
+    "./agents/dashboard-spec-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 模式演进",
+    "zh": "帮我处理模式演进"
+  },
+  "description": "schema-evolution-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 模式演进 requirements, output three deliverables: 兼容优先, 分步执行, 影子验证. Verifiable end-to-end, evidence per step.",
+    "zh": "输入模式演进相关需求，输出兼容优先、分步执行、影子验证三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "schema-evolution-pro Team",
+    "zh": "模式演进专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "schema-evolution-pro-team-lead",
+      "name": {
+        "en": "模式演进主理人",
+        "zh": "模式演进主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/schema-evolution-pro.png",
+      "id": "schema-evolution-pro",
+      "name": {
+        "en": "schema-evolution-pro",
+        "zh": "模式演进 兼容变更 顾问"
+      },
+      "profession": {
+        "en": "schema-evolution-pro",
+        "zh": "模式演进 兼容变更 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/context-window-tune.png",
+      "id": "context-window-tune",
+      "name": {
+        "en": "context-window-tune",
+        "zh": "上下文优 分块策略 顾问"
+      },
+      "profession": {
+        "en": "context-window-tune",
+        "zh": "上下文优 分块策略 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dashboard-spec-pro.png",
+      "id": "dashboard-spec-pro",
+      "name": {
+        "en": "dashboard-spec-pro",
+        "zh": "看板规格 指标选型 顾问"
+      },
+      "profession": {
+        "en": "dashboard-spec-pro",
+        "zh": "看板规格 指标选型 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-313",
+  "plugin": "group-team-313",
+  "profession": {
+    "en": "schema-evolution-pro Collaboration Team",
+    "zh": "模式演进专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 模式演进",
+      "zh": "帮我处理模式演进"
+    },
+    {
+      "en": "Plan 上下文优",
+      "zh": "帮我规划上下文优"
+    },
+    {
+      "en": "Review 看板规格",
+      "zh": "帮我检查看板规格"
+    }
+  ],
+  "tags": [
+    {
+      "en": "兼容优先",
+      "zh": "兼容优先"
+    },
+    {
+      "en": "分步执行",
+      "zh": "分步执行"
+    },
+    {
+      "en": "影子验证",
+      "zh": "影子验证"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "schema-evolution-pro-team-lead",
+    "memberAgents": [
+      "schema-evolution-pro",
+      "context-window-tune",
+      "dashboard-spec-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

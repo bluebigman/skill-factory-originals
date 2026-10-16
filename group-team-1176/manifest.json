@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1176",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1176",
+    "kind": "team",
+    "name": "文档本地专家",
+    "description": "输入文档本地相关需求，输出语境适配、格式保留、文化适配三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-localization-pro-team-lead",
+        "role": "lead",
+        "name": "文档本地主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-localization-pro",
+        "role": "member",
+        "name": "文档本地 术语统一 顾问",
+        "evidence": "original_assets/doc-localization-pro/merkle_root",
+        "member_merkle_root": "dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd"
+      },
+      {
+        "slug": "content-localize-checklist",
+        "role": "member",
+        "name": "本地化清单 顾问",
+        "evidence": "original_assets/content-localize-checklist/merkle_root",
+        "member_merkle_root": "e9dd8cfacefbac1d5e9844251c210a0109756ffbc57c2d358131bfdc7489331a"
+      },
+      {
+        "slug": "content-repurpose-plan",
+        "role": "member",
+        "name": "内容一稿多用 顾问",
+        "evidence": "original_assets/content-repurpose-plan/merkle_root",
+        "member_merkle_root": "65c26cdacc424777ab328d63a530337d0923c4c060fa272eb2b09f7588d60a15"
+      }
+    ],
+    "team_lead": "doc-localization-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a7fa227083637066",
+  "prompt_hash": "b384cb7e19930c41",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1176\", \"kind\": \"team\", \"name\": \"文档本地专家\", \"description\": \"输入文档本地相关需求，输出语境适配、格式保留、文化适配三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-localization-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档本地主理人\", \"evidence\": null}, {\"slug\": \"doc-localization-pro\", \"role\": \"member\", \"name\": \"文档本地 术语统一 顾问\", \"evidence\": \"original_assets/doc-localization-pro/merkle_root\", \"member_merkle_root\": \"dd3edc17caa87a904026253b2f3316c46f0700b41a9b918ab063489061e471fd\"}, {\"slug\": \"content-localize-checklist\", \"role\": \"member\", \"name\": \"本地化清单 顾问\", \"evidence\": \"original_assets/content-localize-checklist/merkle_root\", \"member_merkle_root\": \"e9dd8cfacefbac1d5e9844251c210a0109756ffbc57c2d358131bfdc7489331a\"}, {\"slug\": \"content-repurpose-plan\", \"role\": \"member\", \"name\": \"内容一稿多用 顾问\", \"evidence\": \"original_assets/content-repurpose-plan/merkle_root\", \"member_merkle_root\": \"65c26cdacc424777ab328d63a530337d0923c4c060fa272eb2b09f7588d60a15\"}], \"team_lead\": \"doc-localization-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-localize-checklist.md": "1f3046cc6fce4dfa7921f2ca86dea2f42c7656c034e0dfb41d4bd3f5a76bd45b",
+    "agents/content-repurpose-plan.md": "401ea6eb54b4bc89aa507011c8c971339a94ae0e50d946cc36cb1db55e66e74b",
+    "agents/doc-localization-pro-team-lead.md": "3b5198938757f3a066540107c3f4f7a8b25518a20f3fac329e42af2c9eefaf62",
+    "agents/doc-localization-pro.md": "66cabc14e6b0181418d1d6f9f459c6a7ef2acf055de3765f25a216cf977da20c",
+    "plugin.json": "3898003434e6c077d8cac6ef976ea79362781d050fd65ee7972fb4874a24c113",
+    "settings.json": "02aca01baba9faa6088462bae59eca15acaa3c86277d6acd7c57b00a72d08089"
+  }
+}

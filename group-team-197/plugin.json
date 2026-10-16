@@ -1,0 +1,126 @@
+{
+  "agentName": "note-life-pro-team-lead",
+  "agents": [
+    "./agents/note-life-pro-team-lead.md",
+    "./agents/note-life-pro.md",
+    "./agents/cn-rewrite-deaifier.md",
+    "./agents/chart-builder-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 笔记与生活助手",
+    "zh": "帮我处理笔记与生活助手"
+  },
+  "description": "Note Life Assistant team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "笔记 中文 数据 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Note Life Assistant Team",
+    "zh": "笔记 中文 数据 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "note-life-pro-team-lead",
+      "name": {
+        "en": "笔记与生活助手主理人",
+        "zh": "笔记与生活助手主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/note-life-pro.png",
+      "id": "note-life-pro",
+      "name": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "profession": {
+        "en": "Note Life Assistant",
+        "zh": "笔记与生活助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cn-rewrite-deaifier.png",
+      "id": "cn-rewrite-deaifier",
+      "name": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "profession": {
+        "en": "DeAIfy",
+        "zh": "中文改写 去AI味 风格润色"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/chart-builder-expert.png",
+      "id": "chart-builder-expert",
+      "name": {
+        "en": "ChartCraft",
+        "zh": "图表可视化制作专家"
+      },
+      "profession": {
+        "en": "ChartCraft",
+        "zh": "数据图表设计与生成专家"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-197",
+  "plugin": "group-team-197",
+  "profession": {
+    "en": "Note Life Assistant Collaboration Team",
+    "zh": "笔记 中文 数据 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 笔记与生活助手",
+      "zh": "帮我处理笔记与生活助手"
+    },
+    {
+      "en": "Plan 中文改写",
+      "zh": "帮我规划中文改写"
+    },
+    {
+      "en": "Review 数据图表设计与生成专家",
+      "zh": "帮我检查数据图表设计与生成专家"
+    }
+  ],
+  "tags": [
+    {
+      "en": "笔记与生活助手",
+      "zh": "笔记与生活助手"
+    },
+    {
+      "en": "中文改写",
+      "zh": "中文改写"
+    },
+    {
+      "en": "数据图表设计与生成专家",
+      "zh": "数据图表设计与生成专家"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "note-life-pro-team-lead",
+    "memberAgents": [
+      "note-life-pro",
+      "cn-rewrite-deaifier",
+      "chart-builder-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

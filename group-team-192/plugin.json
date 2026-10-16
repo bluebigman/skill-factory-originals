@@ -1,0 +1,126 @@
+{
+  "agentName": "toolkit-pro-08-team-lead",
+  "agents": [
+    "./agents/toolkit-pro-08-team-lead.md",
+    "./agents/toolkit-pro-08.md",
+    "./agents/api-toolkit-pro.md",
+    "./agents/code-assist-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle UX设计",
+    "zh": "帮我处理UX设计"
+  },
+  "description": "综合工具 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "体验 协议 测试 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "综合工具 Suite Team",
+    "zh": "体验 协议 测试 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "toolkit-pro-08-team-lead",
+      "name": {
+        "en": "UX设计主理人",
+        "zh": "UX设计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-08.png",
+      "id": "toolkit-pro-08",
+      "name": {
+        "en": "综合工具 Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "profession": {
+        "en": "综合工具 Suite",
+        "zh": "UX设计 样例解析 情节构建"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/api-toolkit-pro.png",
+      "id": "api-toolkit-pro",
+      "name": {
+        "en": "接口与协议 Suite",
+        "zh": "协议转换 REST"
+      },
+      "profession": {
+        "en": "接口与协议 Suite",
+        "zh": "协议转换 REST"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-assist-pro.png",
+      "id": "code-assist-pro",
+      "name": {
+        "en": "代码开发辅助 Suite",
+        "zh": "BDD测试 性能剖析 快速交付"
+      },
+      "profession": {
+        "en": "代码开发辅助 Suite",
+        "zh": "BDD测试 性能剖析 快速交付"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-192",
+  "plugin": "group-team-192",
+  "profession": {
+    "en": "综合工具 Suite Collaboration Team",
+    "zh": "体验 协议 测试 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle UX设计",
+      "zh": "帮我处理UX设计"
+    },
+    {
+      "en": "Plan 协议转换",
+      "zh": "帮我规划协议转换"
+    },
+    {
+      "en": "Review BDD测试",
+      "zh": "帮我检查BDD测试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "UX设计",
+      "zh": "UX设计"
+    },
+    {
+      "en": "协议转换",
+      "zh": "协议转换"
+    },
+    {
+      "en": "BDD测试",
+      "zh": "BDD测试"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "toolkit-pro-08-team-lead",
+    "memberAgents": [
+      "toolkit-pro-08",
+      "api-toolkit-pro",
+      "code-assist-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

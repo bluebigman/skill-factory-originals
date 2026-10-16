@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085725",
+  "slug": "group-team-166",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-166",
+    "kind": "team",
+    "name": "包装 仓储 精益 团队",
+    "description": "包装 仓储 精益 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "packaging-spec-pro-team-lead",
+        "role": "lead",
+        "name": "包装规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "packaging-spec-pro",
+        "role": "member",
+        "name": "包装规范 运输防护 顾问",
+        "evidence": "original_assets/packaging-spec-pro/merkle_root",
+        "member_merkle_root": "e885c13d230b7adf054bd2d63b96ea8350ed0e3a5267cd7871301ceeca1088c3"
+      },
+      {
+        "slug": "warehouse-slot-pro",
+        "role": "member",
+        "name": "仓储布局 拣货路径 顾问",
+        "evidence": "original_assets/warehouse-slot-pro/merkle_root",
+        "member_merkle_root": "9c08fab3b6697d90e5b6a3e19286cb9f1e0b022d7a0f0a2732c35352ce09936f"
+      },
+      {
+        "slug": "lean-kaizen-pro",
+        "role": "member",
+        "name": "精益改善 课题推进 顾问",
+        "evidence": "original_assets/lean-kaizen-pro/merkle_root",
+        "member_merkle_root": "8edd430702c85361fbe1619626fefc7932b6f7060b9ae73ec81396cf8c174edd"
+      }
+    ],
+    "team_lead": "packaging-spec-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "56f7fa6b98617e82",
+  "prompt_hash": "5dd8b8966e6d2b47",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-166\", \"kind\": \"team\", \"name\": \"包装 仓储 精益 团队\", \"description\": \"包装 仓储 精益 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"packaging-spec-pro-team-lead\", \"role\": \"lead\", \"name\": \"包装规范主理人\", \"evidence\": null}, {\"slug\": \"packaging-spec-pro\", \"role\": \"member\", \"name\": \"包装规范 运输防护 顾问\", \"evidence\": \"original_assets/packaging-spec-pro/merkle_root\", \"member_merkle_root\": \"e885c13d230b7adf054bd2d63b96ea8350ed0e3a5267cd7871301ceeca1088c3\"}, {\"slug\": \"warehouse-slot-pro\", \"role\": \"member\", \"name\": \"仓储布局 拣货路径 顾问\", \"evidence\": \"original_assets/warehouse-slot-pro/merkle_root\", \"member_merkle_root\": \"9c08fab3b6697d90e5b6a3e19286cb9f1e0b022d7a0f0a2732c35352ce09936f\"}, {\"slug\": \"lean-kaizen-pro\", \"role\": \"member\", \"name\": \"精益改善 课题推进 顾问\", \"evidence\": \"original_assets/lean-kaizen-pro/merkle_root\", \"member_merkle_root\": \"8edd430702c85361fbe1619626fefc7932b6f7060b9ae73ec81396cf8c174edd\"}], \"team_lead\": \"packaging-spec-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/lean-kaizen-pro.md": "65a26fe80b4726d776a115856c18f6b94eab77f1b329b0cbb0b0a555da7f464b",
+    "agents/packaging-spec-pro-team-lead.md": "e700ed09cb4a0c3bda1c37c40398bdccdd6da73aa24b4006e067b492e0acddd1",
+    "agents/packaging-spec-pro.md": "c174b12562220696f78d518350523f2b2f461eb4b5e1a3357a79f5f604491e41",
+    "agents/warehouse-slot-pro.md": "e55d50456cfedbdafb18e57d77c40c3a2cca85835e6f73bb355378e36990194f",
+    "plugin.json": "1ba25d3d14ee24f984445b544cb7c195ffc8434f7f0172bdabbbd27529d4ce18",
+    "settings.json": "84c97bbf46331cb17c6da119cf1a89976e1851cf93f8fcab9833463d2c8b8388"
+  }
+}

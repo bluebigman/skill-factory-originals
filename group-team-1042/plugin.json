@@ -1,0 +1,126 @@
+{
+  "agentName": "secrets-management-team-lead",
+  "agents": [
+    "./agents/secrets-management-team-lead.md",
+    "./agents/secrets-management.md",
+    "./agents/doc-content-policy.md",
+    "./agents/access-review-cycle.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "11-SecurityCompliance",
+  "defaultInitPrompt": {
+    "en": "Handle 密钥安全管理",
+    "zh": "帮我处理密钥安全管理"
+  },
+  "description": "secrets-management team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 密钥安全管理 end-to-end: 环境隔离, 最小权限 and 轮换机制. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长环境隔离、最小权限与轮换机制，覆盖密钥安全管理全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "secrets-management Team",
+    "zh": "密钥安全管理专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "secrets-management-team-lead",
+      "name": {
+        "en": "密钥安全管理主理人",
+        "zh": "密钥安全管理主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/secrets-management.png",
+      "id": "secrets-management",
+      "name": {
+        "en": "secrets-management",
+        "zh": "密钥安全管理 顾问"
+      },
+      "profession": {
+        "en": "secrets-management",
+        "zh": "密钥安全管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-content-policy.png",
+      "id": "doc-content-policy",
+      "name": {
+        "en": "doc-content-policy",
+        "zh": "文档内容合规 顾问"
+      },
+      "profession": {
+        "en": "doc-content-policy",
+        "zh": "文档内容合规 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/access-review-cycle.png",
+      "id": "access-review-cycle",
+      "name": {
+        "en": "access-review-cycle",
+        "zh": "权限复核周期 顾问"
+      },
+      "profession": {
+        "en": "access-review-cycle",
+        "zh": "权限复核周期 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1042",
+  "plugin": "group-team-1042",
+  "profession": {
+    "en": "secrets-management Collaboration Team",
+    "zh": "密钥安全管理专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 密钥安全管理",
+      "zh": "帮我处理密钥安全管理"
+    },
+    {
+      "en": "Plan 文档内容合规",
+      "zh": "帮我规划文档内容合规"
+    },
+    {
+      "en": "Review 权限复核周期",
+      "zh": "帮我检查权限复核周期"
+    }
+  ],
+  "tags": [
+    {
+      "en": "环境隔离",
+      "zh": "环境隔离"
+    },
+    {
+      "en": "最小权限",
+      "zh": "最小权限"
+    },
+    {
+      "en": "轮换机制",
+      "zh": "轮换机制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "secrets-management-team-lead",
+    "memberAgents": [
+      "secrets-management",
+      "doc-content-policy",
+      "access-review-cycle"
+    ]
+  },
+  "version": "1.0.0"
+}

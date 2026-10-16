@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1041",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1041",
+    "kind": "team",
+    "name": "农事计划编制专家",
+    "description": "输入农事计划编制相关需求，输出时令对齐、资源配套、风险预案三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agriculture-plan-team-lead",
+        "role": "lead",
+        "name": "农事计划编制主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agriculture-plan",
+        "role": "member",
+        "name": "农事计划编制 顾问",
+        "evidence": "original_assets/agriculture-plan/merkle_root",
+        "member_merkle_root": "07dc27c0f79f3da35f364a14a6d576b31645d9be93459fca0a9a0796c7d97159"
+      },
+      {
+        "slug": "export-doc-check",
+        "role": "member",
+        "name": "出口单据 一致性 顾问",
+        "evidence": "original_assets/export-doc-check/merkle_root",
+        "member_merkle_root": "286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d"
+      },
+      {
+        "slug": "intl-logistics-pro",
+        "role": "member",
+        "name": "国际物流 时效管理 顾问",
+        "evidence": "original_assets/intl-logistics-pro/merkle_root",
+        "member_merkle_root": "050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0"
+      }
+    ],
+    "team_lead": "agriculture-plan-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "eb3deab8664e892d",
+  "prompt_hash": "88a6ed8f02f077e5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1041\", \"kind\": \"team\", \"name\": \"农事计划编制专家\", \"description\": \"输入农事计划编制相关需求，输出时令对齐、资源配套、风险预案三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agriculture-plan-team-lead\", \"role\": \"lead\", \"name\": \"农事计划编制主理人\", \"evidence\": null}, {\"slug\": \"agriculture-plan\", \"role\": \"member\", \"name\": \"农事计划编制 顾问\", \"evidence\": \"original_assets/agriculture-plan/merkle_root\", \"member_merkle_root\": \"07dc27c0f79f3da35f364a14a6d576b31645d9be93459fca0a9a0796c7d97159\"}, {\"slug\": \"export-doc-check\", \"role\": \"member\", \"name\": \"出口单据 一致性 顾问\", \"evidence\": \"original_assets/export-doc-check/merkle_root\", \"member_merkle_root\": \"286f90cb7e32564827713400b8dbe627aa57b11023447663862b82cc2efe301d\"}, {\"slug\": \"intl-logistics-pro\", \"role\": \"member\", \"name\": \"国际物流 时效管理 顾问\", \"evidence\": \"original_assets/intl-logistics-pro/merkle_root\", \"member_merkle_root\": \"050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0\"}], \"team_lead\": \"agriculture-plan-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agriculture-plan-team-lead.md": "3c65ec065d3b318b5ec8f32042f08d39830692e3f08b035ec2fa39e55ba4f3cb",
+    "agents/agriculture-plan.md": "38230bf19ac55e51d716a24b6bce32f822f2cd2ea6ef04b7fb66a33164389f50",
+    "agents/export-doc-check.md": "0153f80a2d2a983207d823355945f55e8cc139ff89822a9648d2c98dc7ffe2de",
+    "agents/intl-logistics-pro.md": "753228c31305694e1b63884b572d592485662422aff2fc634bd832a5cb954b0e",
+    "plugin.json": "ee28e9df46f947c9bb1e7849ade975129f43eadb201585e2885d01ba3ce67519",
+    "settings.json": "1d70664a345e6b79b428dd68485810f4f4f81bee612d81bc6a19587b58468f54"
+  }
+}

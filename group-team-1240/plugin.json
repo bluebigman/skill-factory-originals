@@ -1,0 +1,126 @@
+{
+  "agentName": "api-rate-limit-plan-team-lead",
+  "agents": [
+    "./agents/api-rate-limit-plan-team-lead.md",
+    "./agents/api-rate-limit-plan.md",
+    "./agents/knowledge-conflict.md",
+    "./agents/kpi-tree-build.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 接口限流方案",
+    "zh": "帮我处理接口限流方案"
+  },
+  "description": "api-rate-limit-plan team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 接口限流方案 end-to-end: 按维度限, 超限提示 and 分级策略. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长按维度限、超限提示与分级策略，覆盖接口限流方案全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "api-rate-limit-plan Team",
+    "zh": "接口限流方案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "api-rate-limit-plan-team-lead",
+      "name": {
+        "en": "接口限流方案主理人",
+        "zh": "接口限流方案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/api-rate-limit-plan.png",
+      "id": "api-rate-limit-plan",
+      "name": {
+        "en": "api-rate-limit-plan",
+        "zh": "接口限流方案 顾问"
+      },
+      "profession": {
+        "en": "api-rate-limit-plan",
+        "zh": "接口限流方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-conflict.png",
+      "id": "knowledge-conflict",
+      "name": {
+        "en": "knowledge-conflict",
+        "zh": "知识冲突处理 顾问"
+      },
+      "profession": {
+        "en": "knowledge-conflict",
+        "zh": "知识冲突处理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/kpi-tree-build.png",
+      "id": "kpi-tree-build",
+      "name": {
+        "en": "kpi-tree-build",
+        "zh": "指标树构建 顾问"
+      },
+      "profession": {
+        "en": "kpi-tree-build",
+        "zh": "指标树构建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1240",
+  "plugin": "group-team-1240",
+  "profession": {
+    "en": "api-rate-limit-plan Collaboration Team",
+    "zh": "接口限流方案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 接口限流方案",
+      "zh": "帮我处理接口限流方案"
+    },
+    {
+      "en": "Plan 知识冲突处理",
+      "zh": "帮我规划知识冲突处理"
+    },
+    {
+      "en": "Review 指标树构建",
+      "zh": "帮我检查指标树构建"
+    }
+  ],
+  "tags": [
+    {
+      "en": "按维度限",
+      "zh": "按维度限"
+    },
+    {
+      "en": "超限提示",
+      "zh": "超限提示"
+    },
+    {
+      "en": "分级策略",
+      "zh": "分级策略"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "api-rate-limit-plan-team-lead",
+    "memberAgents": [
+      "api-rate-limit-plan",
+      "knowledge-conflict",
+      "kpi-tree-build"
+    ]
+  },
+  "version": "1.0.0"
+}

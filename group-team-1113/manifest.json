@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1113",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1113",
+    "kind": "team",
+    "name": "设计系统专家",
+    "description": "输入设计系统相关需求，输出令牌先行、职责边界、状态齐全三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "design-system-pro-team-lead",
+        "role": "lead",
+        "name": "设计系统主理人",
+        "evidence": null
+      },
+      {
+        "slug": "design-system-pro",
+        "role": "member",
+        "name": "设计系统 组件规范 顾问",
+        "evidence": "original_assets/design-system-pro/merkle_root",
+        "member_merkle_root": "600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce"
+      },
+      {
+        "slug": "game-onboarding-pro",
+        "role": "member",
+        "name": "游戏新手 引导设计 顾问",
+        "evidence": "original_assets/game-onboarding-pro/merkle_root",
+        "member_merkle_root": "305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b"
+      },
+      {
+        "slug": "product-roadmap-pro",
+        "role": "member",
+        "name": "产品路线 优先级 顾问",
+        "evidence": "original_assets/product-roadmap-pro/merkle_root",
+        "member_merkle_root": "9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f"
+      }
+    ],
+    "team_lead": "design-system-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3f213131034134b9",
+  "prompt_hash": "b1742f249a553074",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1113\", \"kind\": \"team\", \"name\": \"设计系统专家\", \"description\": \"输入设计系统相关需求，输出令牌先行、职责边界、状态齐全三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"design-system-pro-team-lead\", \"role\": \"lead\", \"name\": \"设计系统主理人\", \"evidence\": null}, {\"slug\": \"design-system-pro\", \"role\": \"member\", \"name\": \"设计系统 组件规范 顾问\", \"evidence\": \"original_assets/design-system-pro/merkle_root\", \"member_merkle_root\": \"600be365e52afe16df0149d939f3c697f7829b7c14bef1073c8ba4d2ce1311ce\"}, {\"slug\": \"game-onboarding-pro\", \"role\": \"member\", \"name\": \"游戏新手 引导设计 顾问\", \"evidence\": \"original_assets/game-onboarding-pro/merkle_root\", \"member_merkle_root\": \"305d13e12dba3487470fa45dd8501ab156679d4c4b5d5f15beba5471be53008b\"}, {\"slug\": \"product-roadmap-pro\", \"role\": \"member\", \"name\": \"产品路线 优先级 顾问\", \"evidence\": \"original_assets/product-roadmap-pro/merkle_root\", \"member_merkle_root\": \"9d05581ee97328045e46d78e16ac5b6e7b82aa6a77762fed4683211d7e07ad4f\"}], \"team_lead\": \"design-system-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-system-pro-team-lead.md": "8559e629f265279f0e946b86f2c044db84e74a64c4e66e83627d53bd3ca3e127",
+    "agents/design-system-pro.md": "508430c34acbb2819f6732ed2ec045b1adbaeb59f9e16776877d58e59d426b55",
+    "agents/game-onboarding-pro.md": "968b903a0a5ba90d9b1d360b9024f2ffa52fc3d084c0e4cbe6e9565d412a1e56",
+    "agents/product-roadmap-pro.md": "f1a7bc724877f10c0e5d167f7438eda85755072ce2e51da656142b1458e8e01b",
+    "plugin.json": "8a3be372c265c9cddeca67751e9afad80f768f698e767bce32730b0bc627f5e6",
+    "settings.json": "9ef6c9931e5a794677a7b5622505a611fff5705c95ff1ce338270ac195b78c16"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "training-material-team-lead",
+  "agents": [
+    "./agents/training-material-team-lead.md",
+    "./agents/training-material.md",
+    "./agents/invoice-organize.md",
+    "./agents/schema-contract-test.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 培训材料制作",
+    "zh": "帮我处理培训材料制作"
+  },
+  "description": "training-material team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 培训材料制作 requirements, output three deliverables: 目标对齐, 分层设计, 示例丰富. Verifiable end-to-end, evidence per step.",
+    "zh": "输入培训材料制作相关需求，输出目标对齐、分层设计、示例丰富三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "training-material Team",
+    "zh": "培训材料制作专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "training-material-team-lead",
+      "name": {
+        "en": "培训材料制作主理人",
+        "zh": "培训材料制作主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/training-material.png",
+      "id": "training-material",
+      "name": {
+        "en": "training-material",
+        "zh": "培训材料制作 助手"
+      },
+      "profession": {
+        "en": "training-material",
+        "zh": "培训材料制作 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/invoice-organize.png",
+      "id": "invoice-organize",
+      "name": {
+        "en": "invoice-organize",
+        "zh": "发票整理归集 助手"
+      },
+      "profession": {
+        "en": "invoice-organize",
+        "zh": "发票整理归集 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/schema-contract-test.png",
+      "id": "schema-contract-test",
+      "name": {
+        "en": "schema-contract-test",
+        "zh": "契约测试 顾问"
+      },
+      "profession": {
+        "en": "schema-contract-test",
+        "zh": "契约测试 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1023",
+  "plugin": "group-team-1023",
+  "profession": {
+    "en": "training-material Collaboration Team",
+    "zh": "培训材料制作专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 培训材料制作",
+      "zh": "帮我处理培训材料制作"
+    },
+    {
+      "en": "Plan 发票整理归集",
+      "zh": "帮我规划发票整理归集"
+    },
+    {
+      "en": "Review 契约测试",
+      "zh": "帮我检查契约测试"
+    }
+  ],
+  "tags": [
+    {
+      "en": "目标对齐",
+      "zh": "目标对齐"
+    },
+    {
+      "en": "分层设计",
+      "zh": "分层设计"
+    },
+    {
+      "en": "示例丰富",
+      "zh": "示例丰富"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "training-material-team-lead",
+    "memberAgents": [
+      "training-material",
+      "invoice-organize",
+      "schema-contract-test"
+    ]
+  },
+  "version": "1.0.0"
+}

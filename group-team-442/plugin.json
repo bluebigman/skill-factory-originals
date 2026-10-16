@@ -1,0 +1,126 @@
+{
+  "agentName": "ops-value-pro-team-lead",
+  "agents": [
+    "./agents/ops-value-pro-team-lead.md",
+    "./agents/ops-value-pro.md",
+    "./agents/sensitive-data-scan.md",
+    "./agents/agent-test-harness.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 运维配置体检与规范化",
+    "zh": "帮我处理运维配置体检与规范化"
+  },
+  "description": "Ops Config Normalizer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 敏感识别 end-to-end: 分级标准, 全量扫描 and 标注留痕. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分级标准、全量扫描与标注留痕，覆盖敏感识别全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Ops Config Normalizer Team",
+    "zh": "敏感识别专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ops-value-pro-team-lead",
+      "name": {
+        "en": "运维配置体检与规范化主理人",
+        "zh": "运维配置体检与规范化主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ops-value-pro.png",
+      "id": "ops-value-pro",
+      "name": {
+        "en": "Ops Config Normalizer",
+        "zh": "运维配置体检与规范化"
+      },
+      "profession": {
+        "en": "Ops Config Normalizer",
+        "zh": "运维配置体检与规范化"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sensitive-data-scan.png",
+      "id": "sensitive-data-scan",
+      "name": {
+        "en": "sensitive-data-scan",
+        "zh": "敏感识别 分级标注 顾问"
+      },
+      "profession": {
+        "en": "sensitive-data-scan",
+        "zh": "敏感识别 分级标注 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-test-harness.png",
+      "id": "agent-test-harness",
+      "name": {
+        "en": "agent-test-harness",
+        "zh": "测试台架 用例管理 顾问"
+      },
+      "profession": {
+        "en": "agent-test-harness",
+        "zh": "测试台架 用例管理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-442",
+  "plugin": "group-team-442",
+  "profession": {
+    "en": "Ops Config Normalizer Collaboration Team",
+    "zh": "敏感识别专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 运维配置体检与规范化",
+      "zh": "帮我处理运维配置体检与规范化"
+    },
+    {
+      "en": "Plan 敏感识别",
+      "zh": "帮我规划敏感识别"
+    },
+    {
+      "en": "Review 测试台架",
+      "zh": "帮我检查测试台架"
+    }
+  ],
+  "tags": [
+    {
+      "en": "运维配置",
+      "zh": "运维配置"
+    },
+    {
+      "en": "取值体检",
+      "zh": "取值体检"
+    },
+    {
+      "en": "类型校验",
+      "zh": "类型校验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ops-value-pro-team-lead",
+    "memberAgents": [
+      "ops-value-pro",
+      "sensitive-data-scan",
+      "agent-test-harness"
+    ]
+  },
+  "version": "1.0.0"
+}

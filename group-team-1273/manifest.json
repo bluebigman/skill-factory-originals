@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085724",
+  "slug": "group-team-1273",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1273",
+    "kind": "team",
+    "name": "文件读专家",
+    "description": "擅长格式先判、结构保留与写完复核，覆盖Office全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-craft-pro-team-lead",
+        "role": "lead",
+        "name": "文档排版撰写专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-craft-pro",
+        "role": "member",
+        "name": "文档排版撰写专家",
+        "evidence": "original_assets/doc-craft-pro/merkle_root",
+        "member_merkle_root": "e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18"
+      },
+      {
+        "slug": "knowledge-base-pro-01-fixed",
+        "role": "member",
+        "name": "项目记忆 知识卡片 双向链接",
+        "evidence": "original_assets/knowledge-base-pro-01-fixed/merkle_root",
+        "member_merkle_root": "2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd"
+      },
+      {
+        "slug": "office-file-io",
+        "role": "member",
+        "name": "Office 文件读写 助手",
+        "evidence": "original_assets/office-file-io/merkle_root",
+        "member_merkle_root": "d16c70da8b107dc51f0250f33d6783c5bad0dd71cc4f9577707a551da8b81654"
+      }
+    ],
+    "team_lead": "doc-craft-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0398f38dff4350f2",
+  "prompt_hash": "e1c8efce6b8c869c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1273\", \"kind\": \"team\", \"name\": \"文件读专家\", \"description\": \"擅长格式先判、结构保留与写完复核，覆盖Office全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-craft-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档排版撰写专家主理人\", \"evidence\": null}, {\"slug\": \"doc-craft-pro\", \"role\": \"member\", \"name\": \"文档排版撰写专家\", \"evidence\": \"original_assets/doc-craft-pro/merkle_root\", \"member_merkle_root\": \"e6be557b5af47f865f8c533178a8e687d4a30ef67d12d263ef4852956e12ae18\"}, {\"slug\": \"knowledge-base-pro-01-fixed\", \"role\": \"member\", \"name\": \"项目记忆 知识卡片 双向链接\", \"evidence\": \"original_assets/knowledge-base-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"2f261f1f77b7d8f77090a4d0d60e9edb0467a040079b84d45d01f6241abf8fcd\"}, {\"slug\": \"office-file-io\", \"role\": \"member\", \"name\": \"Office 文件读写 助手\", \"evidence\": \"original_assets/office-file-io/merkle_root\", \"member_merkle_root\": \"d16c70da8b107dc51f0250f33d6783c5bad0dd71cc4f9577707a551da8b81654\"}], \"team_lead\": \"doc-craft-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-craft-pro-team-lead.md": "4f429ab06e0cb3c407bd2dd2f6d32be43470ef16392548a5342738231ad35d0d",
+    "agents/doc-craft-pro.md": "6999e2db1a2e53d88d465f9dfe0efd9f7ab0324143f29ba9b56485346598cfac",
+    "agents/knowledge-base-pro-01-fixed.md": "b38890b48c9dbec15b2f56de6bc273d14403ec22df82c054d99cbe9e75574649",
+    "agents/office-file-io.md": "83b5ee10c5d9e830508d6f47da825df8a165ecce303471d765126711f870c1f0",
+    "plugin.json": "c6c3f2c9cc2404f7db6f20671f21d4a7c51ab5118425fdf03be2c59c53f6b84f",
+    "settings.json": "de379e6b6f58d1b66479c77adc3baefe29266c9ee393ca90b41807f558953d89"
+  }
+}

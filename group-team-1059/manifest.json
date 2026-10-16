@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085716",
+  "slug": "group-team-1059",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1059",
+    "kind": "team",
+    "name": "游戏界面专家",
+    "description": "输入定价页面相关需求，输出维度对齐、推荐克制、价格透明三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "pricing-page-ux-team-lead",
+        "role": "lead",
+        "name": "定价页面主理人",
+        "evidence": null
+      },
+      {
+        "slug": "pricing-page-ux",
+        "role": "member",
+        "name": "定价页面 表达清晰 顾问",
+        "evidence": "original_assets/pricing-page-ux/merkle_root",
+        "member_merkle_root": "a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248"
+      },
+      {
+        "slug": "ui-game-hud",
+        "role": "member",
+        "name": "游戏界面 信息层级 顾问",
+        "evidence": "original_assets/ui-game-hud/merkle_root",
+        "member_merkle_root": "fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd"
+      },
+      {
+        "slug": "virtual-space-pro",
+        "role": "member",
+        "name": "虚拟空间 场景搭建 顾问",
+        "evidence": "original_assets/virtual-space-pro/merkle_root",
+        "member_merkle_root": "929f730b1f65614b2237b8bbb38724a79c562d4c4f08c45256b8f47496ec7d73"
+      }
+    ],
+    "team_lead": "pricing-page-ux-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "3ed47eac35bd6890",
+  "prompt_hash": "3ed6c4fd107f02a8",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1059\", \"kind\": \"team\", \"name\": \"游戏界面专家\", \"description\": \"输入定价页面相关需求，输出维度对齐、推荐克制、价格透明三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"pricing-page-ux-team-lead\", \"role\": \"lead\", \"name\": \"定价页面主理人\", \"evidence\": null}, {\"slug\": \"pricing-page-ux\", \"role\": \"member\", \"name\": \"定价页面 表达清晰 顾问\", \"evidence\": \"original_assets/pricing-page-ux/merkle_root\", \"member_merkle_root\": \"a29d7a3538eccc893ceab5ed6d876d8c9320974d2a775533e5d676459890b248\"}, {\"slug\": \"ui-game-hud\", \"role\": \"member\", \"name\": \"游戏界面 信息层级 顾问\", \"evidence\": \"original_assets/ui-game-hud/merkle_root\", \"member_merkle_root\": \"fadaff83132767964bd46a79e41e75e35859c69809d0b04d9879da74991995cd\"}, {\"slug\": \"virtual-space-pro\", \"role\": \"member\", \"name\": \"虚拟空间 场景搭建 顾问\", \"evidence\": \"original_assets/virtual-space-pro/merkle_root\", \"member_merkle_root\": \"929f730b1f65614b2237b8bbb38724a79c562d4c4f08c45256b8f47496ec7d73\"}], \"team_lead\": \"pricing-page-ux-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/pricing-page-ux-team-lead.md": "5ac09574e507b1dab4489eaad7e8abced8c57bdf43de15ee74322b0399712c78",
+    "agents/pricing-page-ux.md": "e75737d2b1dfefdc11e7c303a00951d91832a6f459931f92aee3ed08d6082094",
+    "agents/ui-game-hud.md": "bd79e1bd878533d584630d9a8bd35e2b72fe3e7b412a992e0ff0b9430c71a536",
+    "agents/virtual-space-pro.md": "85405245a6c3e391e19926dd9b52488eba492c991d0f59f45b87e23cb1ee30bd",
+    "plugin.json": "d22782d55e6cf2827f56dde452eacbef846b47943bee4e66a552a8c2243c6d9a",
+    "settings.json": "85ddc5a50f38aed1e32d0c2e8286036edce1f743b185c1758da36f07c476871f"
+  }
+}

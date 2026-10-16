@@ -1,0 +1,126 @@
+{
+  "agentName": "project-task-split-team-lead",
+  "agents": [
+    "./agents/project-task-split-team-lead.md",
+    "./agents/project-task-split.md",
+    "./agents/incident-retro.md",
+    "./agents/project-tracking-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 项目任务",
+    "zh": "帮我处理项目任务"
+  },
+  "description": "Project Task Split team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "项目 任务 事故 跟踪 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步"
+  },
+  "displayName": {
+    "en": "Project Task Split Team",
+    "zh": "项目 任务 事故 跟踪 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "project-task-split-team-lead",
+      "name": {
+        "en": "项目任务主理人",
+        "zh": "项目任务主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/project-task-split.png",
+      "id": "project-task-split",
+      "name": {
+        "en": "Project Task Split",
+        "zh": "项目任务 拆解排期 顾问"
+      },
+      "profession": {
+        "en": "Project Task Split",
+        "zh": "项目任务 拆解排期 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/incident-retro.png",
+      "id": "incident-retro",
+      "name": {
+        "en": "Incident Retro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "profession": {
+        "en": "Incident Retro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/project-tracking-pro.png",
+      "id": "project-tracking-pro",
+      "name": {
+        "en": "Project Tracking Pro",
+        "zh": "项目跟踪 进度汇报 风险预警"
+      },
+      "profession": {
+        "en": "Project Tracking Pro",
+        "zh": "项目跟踪 进度汇报 风险预警"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-170",
+  "plugin": "group-team-170",
+  "profession": {
+    "en": "Project Task Split Collaboration Team",
+    "zh": "项目 任务 事故 跟踪 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 项目任务",
+      "zh": "帮我处理项目任务"
+    },
+    {
+      "en": "Plan 事故复盘",
+      "zh": "帮我规划事故复盘"
+    },
+    {
+      "en": "Review 项目跟踪",
+      "zh": "帮我检查项目跟踪"
+    }
+  ],
+  "tags": [
+    {
+      "en": "项目任务",
+      "zh": "项目任务"
+    },
+    {
+      "en": "事故复盘",
+      "zh": "事故复盘"
+    },
+    {
+      "en": "项目跟踪",
+      "zh": "项目跟踪"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "project-task-split-team-lead",
+    "memberAgents": [
+      "project-task-split",
+      "incident-retro",
+      "project-tracking-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

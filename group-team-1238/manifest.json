@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1238",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1238",
+    "kind": "team",
+    "name": "跨国项目专家",
+    "description": "跨国项目专家：围绕跨国项目，覆盖单一计划／本地差异／口径统一，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "global-pm-coach-team-lead",
+        "role": "lead",
+        "name": "跨国项目主理人",
+        "evidence": null
+      },
+      {
+        "slug": "global-pm-coach",
+        "role": "member",
+        "name": "跨国项目 协同推进 教练",
+        "evidence": "original_assets/global-pm-coach/merkle_root",
+        "member_merkle_root": "d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa"
+      },
+      {
+        "slug": "schema-contract-test",
+        "role": "member",
+        "name": "契约测试 顾问",
+        "evidence": "original_assets/schema-contract-test/merkle_root",
+        "member_merkle_root": "7cd100bcdfe7397a5a96dc10558ba0da03eb263c0dd3e0aa09726e5c7367dd21"
+      },
+      {
+        "slug": "service-sla-design",
+        "role": "member",
+        "name": "服务承诺设计 顾问",
+        "evidence": "original_assets/service-sla-design/merkle_root",
+        "member_merkle_root": "d225d40adc5191e43744b390dcb40b259185f72ab62bd078715ccbd4811864c4"
+      }
+    ],
+    "team_lead": "global-pm-coach-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "db14c7a40237afaf",
+  "prompt_hash": "67a0e2bec6de75ce",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1238\", \"kind\": \"team\", \"name\": \"跨国项目专家\", \"description\": \"跨国项目专家：围绕跨国项目，覆盖单一计划／本地差异／口径统一，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"global-pm-coach-team-lead\", \"role\": \"lead\", \"name\": \"跨国项目主理人\", \"evidence\": null}, {\"slug\": \"global-pm-coach\", \"role\": \"member\", \"name\": \"跨国项目 协同推进 教练\", \"evidence\": \"original_assets/global-pm-coach/merkle_root\", \"member_merkle_root\": \"d86d7caef1c379d7cd151648ed7d90dbf22196c2f6cc285580dec0d32faf85aa\"}, {\"slug\": \"schema-contract-test\", \"role\": \"member\", \"name\": \"契约测试 顾问\", \"evidence\": \"original_assets/schema-contract-test/merkle_root\", \"member_merkle_root\": \"7cd100bcdfe7397a5a96dc10558ba0da03eb263c0dd3e0aa09726e5c7367dd21\"}, {\"slug\": \"service-sla-design\", \"role\": \"member\", \"name\": \"服务承诺设计 顾问\", \"evidence\": \"original_assets/service-sla-design/merkle_root\", \"member_merkle_root\": \"d225d40adc5191e43744b390dcb40b259185f72ab62bd078715ccbd4811864c4\"}], \"team_lead\": \"global-pm-coach-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/global-pm-coach-team-lead.md": "74df11fe20264c9638281d39e3115cf4d0bfdf1f0e5c3c4ba4a6b01b9cc06db3",
+    "agents/global-pm-coach.md": "365c84792cf5fa3cc2ae42ac293c97caaf1f32c292451fbbc100c6b5dd4441ec",
+    "agents/schema-contract-test.md": "33e0a10b2ad9a2ece22abf8d5fd2602450d6ff9ab5f96c604a6e8c0328a1ca1b",
+    "agents/service-sla-design.md": "c8a288296ac7f2f6440ec744c02d67564be9e3ef3e37ac95be695733167595f5",
+    "plugin.json": "d2eb6df4f2cbdbbd9827ffd48c581499da5a126ab6d3f4ea7ab27e3b441e3b67",
+    "settings.json": "b1c82a19752c8d5fa3019ea9e17e73a12332cd7e3c3d985202f676f097e8dde4"
+  }
+}

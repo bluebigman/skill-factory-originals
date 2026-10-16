@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-577",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-577",
+    "kind": "team",
+    "name": "活动节奏专家",
+    "description": "输入设计评审相关需求，输出分歧留档、限时评审、版本对齐三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "design-review-method-team-lead",
+        "role": "lead",
+        "name": "设计评审主理人",
+        "evidence": null
+      },
+      {
+        "slug": "design-review-method",
+        "role": "member",
+        "name": "设计评审 决策机制 顾问",
+        "evidence": "original_assets/design-review-method/merkle_root",
+        "member_merkle_root": "f5fdf5e73c6cb889dc9b89eef6f746f739be069dcf63c1f1a86d1db04e7ae48d"
+      },
+      {
+        "slug": "game-liveops-pro",
+        "role": "member",
+        "name": "游戏运营 活动节奏 顾问",
+        "evidence": "original_assets/game-liveops-pro/merkle_root",
+        "member_merkle_root": "54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c"
+      },
+      {
+        "slug": "usability-test-pro",
+        "role": "member",
+        "name": "可用性 测试执行 顾问",
+        "evidence": "original_assets/usability-test-pro/merkle_root",
+        "member_merkle_root": "07a0e1b9314b6ba865758a834a52a84c9ef95090dd32994e86560306a5f64744"
+      }
+    ],
+    "team_lead": "design-review-method-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d00d06effe0672fe",
+  "prompt_hash": "2edc6411db5d72fe",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-577\", \"kind\": \"team\", \"name\": \"活动节奏专家\", \"description\": \"输入设计评审相关需求，输出分歧留档、限时评审、版本对齐三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"design-review-method-team-lead\", \"role\": \"lead\", \"name\": \"设计评审主理人\", \"evidence\": null}, {\"slug\": \"design-review-method\", \"role\": \"member\", \"name\": \"设计评审 决策机制 顾问\", \"evidence\": \"original_assets/design-review-method/merkle_root\", \"member_merkle_root\": \"f5fdf5e73c6cb889dc9b89eef6f746f739be069dcf63c1f1a86d1db04e7ae48d\"}, {\"slug\": \"game-liveops-pro\", \"role\": \"member\", \"name\": \"游戏运营 活动节奏 顾问\", \"evidence\": \"original_assets/game-liveops-pro/merkle_root\", \"member_merkle_root\": \"54bfa2d6b30211d097fea8461f5fb351284d152ef94f9a7c10c9b4b7cbc0cb9c\"}, {\"slug\": \"usability-test-pro\", \"role\": \"member\", \"name\": \"可用性 测试执行 顾问\", \"evidence\": \"original_assets/usability-test-pro/merkle_root\", \"member_merkle_root\": \"07a0e1b9314b6ba865758a834a52a84c9ef95090dd32994e86560306a5f64744\"}], \"team_lead\": \"design-review-method-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/design-review-method-team-lead.md": "b8471f7762919f103aefb5c2b687f8fc058b7809fb6c86e0250c7057ef3ad7d8",
+    "agents/design-review-method.md": "b26c9bc7435206c41dd7dc9009240bbe56884c6824cd785048af86048b672951",
+    "agents/game-liveops-pro.md": "2b631c8cb1d74ee00915df6cd617bb7cf7cfcca049f8460abffc85f3bb1770cd",
+    "agents/usability-test-pro.md": "f10e24704e2c56a26c544b1e7b224ddd84b4552807bcc03bfcc4045789ffec4c",
+    "plugin.json": "166ff833c477cc6322851f22026c3fe9f434a278acce7ec58280dc4e45e50cfb",
+    "settings.json": "3c08d82f1459158a2d993f7ef7d08a730db9e4b711053cc92274111c5999a3b6"
+  }
+}

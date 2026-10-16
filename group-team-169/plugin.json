@@ -1,0 +1,126 @@
+{
+  "agentName": "product-description-pro-team-lead",
+  "agents": [
+    "./agents/product-description-pro-team-lead.md",
+    "./agents/product-description-pro.md",
+    "./agents/customer-service-reply-pro.md",
+    "./agents/live-commerce-script-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 商品详情",
+    "zh": "帮我处理商品详情"
+  },
+  "description": "Product Description Pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "商品 客服 直播 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Product Description Pro Team",
+    "zh": "商品 客服 直播 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "product-description-pro-team-lead",
+      "name": {
+        "en": "商品详情主理人",
+        "zh": "商品详情主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/product-description-pro.png",
+      "id": "product-description-pro",
+      "name": {
+        "en": "Product Description Pro",
+        "zh": "商品详情 卖点提炼 转化文案"
+      },
+      "profession": {
+        "en": "Product Description Pro",
+        "zh": "商品详情 卖点提炼 转化文案"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/customer-service-reply-pro.png",
+      "id": "customer-service-reply-pro",
+      "name": {
+        "en": "Customer Service Reply Pro",
+        "zh": "客服回复 话术库 投诉处理"
+      },
+      "profession": {
+        "en": "Customer Service Reply Pro",
+        "zh": "客服回复 话术库 投诉处理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/live-commerce-script-pro.png",
+      "id": "live-commerce-script-pro",
+      "name": {
+        "en": "Live Commerce Script Pro",
+        "zh": "直播话术 带货文案 客服话术"
+      },
+      "profession": {
+        "en": "Live Commerce Script Pro",
+        "zh": "直播话术 带货文案 客服话术"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-169",
+  "plugin": "group-team-169",
+  "profession": {
+    "en": "Product Description Pro Collaboration Team",
+    "zh": "商品 客服 直播 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 商品详情",
+      "zh": "帮我处理商品详情"
+    },
+    {
+      "en": "Plan 客服回复",
+      "zh": "帮我规划客服回复"
+    },
+    {
+      "en": "Review 直播话术",
+      "zh": "帮我检查直播话术"
+    }
+  ],
+  "tags": [
+    {
+      "en": "商品详情",
+      "zh": "商品详情"
+    },
+    {
+      "en": "客服回复",
+      "zh": "客服回复"
+    },
+    {
+      "en": "直播话术",
+      "zh": "直播话术"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "product-description-pro-team-lead",
+    "memberAgents": [
+      "product-description-pro",
+      "customer-service-reply-pro",
+      "live-commerce-script-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

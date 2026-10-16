@@ -1,0 +1,126 @@
+{
+  "agentName": "ppt-visual-tune-team-lead",
+  "agents": [
+    "./agents/ppt-visual-tune-team-lead.md",
+    "./agents/ppt-visual-tune.md",
+    "./agents/form-design-pro.md",
+    "./agents/empty-state-design.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle PPT",
+    "zh": "帮我处理PPT"
+  },
+  "description": "ppt-visual-tune team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers PPT end-to-end: 字号下限, 对齐网格 and 留白优先. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长字号下限、对齐网格与留白优先，覆盖PPT全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ppt-visual-tune Team",
+    "zh": "表单设计填写体验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ppt-visual-tune-team-lead",
+      "name": {
+        "en": "PPT主理人",
+        "zh": "PPT主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ppt-visual-tune.png",
+      "id": "ppt-visual-tune",
+      "name": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "profession": {
+        "en": "ppt-visual-tune",
+        "zh": "PPT 视觉调优 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/form-design-pro.png",
+      "id": "form-design-pro",
+      "name": {
+        "en": "form-design-pro",
+        "zh": "表单设计 填写体验 顾问"
+      },
+      "profession": {
+        "en": "form-design-pro",
+        "zh": "表单设计 填写体验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/empty-state-design.png",
+      "id": "empty-state-design",
+      "name": {
+        "en": "empty-state-design",
+        "zh": "空状态设计 顾问"
+      },
+      "profession": {
+        "en": "empty-state-design",
+        "zh": "空状态设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1045",
+  "plugin": "group-team-1045",
+  "profession": {
+    "en": "ppt-visual-tune Collaboration Team",
+    "zh": "表单设计填写体验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle PPT",
+      "zh": "帮我处理PPT"
+    },
+    {
+      "en": "Plan 表单设计",
+      "zh": "帮我规划表单设计"
+    },
+    {
+      "en": "Review 空状态设计",
+      "zh": "帮我检查空状态设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字号下限",
+      "zh": "字号下限"
+    },
+    {
+      "en": "对齐网格",
+      "zh": "对齐网格"
+    },
+    {
+      "en": "留白优先",
+      "zh": "留白优先"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ppt-visual-tune-team-lead",
+    "memberAgents": [
+      "ppt-visual-tune",
+      "form-design-pro",
+      "empty-state-design"
+    ]
+  },
+  "version": "1.0.0"
+}

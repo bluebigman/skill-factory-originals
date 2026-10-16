@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085739",
+  "slug": "group-team-991",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-991",
+    "kind": "team",
+    "name": "能耗管理专家",
+    "description": "擅长余能回收、效果实测与节奏合理，覆盖能耗管理全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "energy-consumption-pro-team-lead",
+        "role": "lead",
+        "name": "能耗管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "energy-consumption-pro",
+        "role": "member",
+        "name": "能耗管理 节能诊断 顾问",
+        "evidence": "original_assets/energy-consumption-pro/merkle_root",
+        "member_merkle_root": "6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719"
+      },
+      {
+        "slug": "tourism-itinerary",
+        "role": "member",
+        "name": "行程规划 助手",
+        "evidence": "original_assets/tourism-itinerary/merkle_root",
+        "member_merkle_root": "49db793cff184331664e1e3bb6a719c8b311024afb3d2f716f19b0a78950a1b4"
+      },
+      {
+        "slug": "intl-logistics-pro",
+        "role": "member",
+        "name": "国际物流 时效管理 顾问",
+        "evidence": "original_assets/intl-logistics-pro/merkle_root",
+        "member_merkle_root": "050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0"
+      }
+    ],
+    "team_lead": "energy-consumption-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c0a51a6ed48cd884",
+  "prompt_hash": "876bd26aa812ff8e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-991\", \"kind\": \"team\", \"name\": \"能耗管理专家\", \"description\": \"擅长余能回收、效果实测与节奏合理，覆盖能耗管理全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"energy-consumption-pro-team-lead\", \"role\": \"lead\", \"name\": \"能耗管理主理人\", \"evidence\": null}, {\"slug\": \"energy-consumption-pro\", \"role\": \"member\", \"name\": \"能耗管理 节能诊断 顾问\", \"evidence\": \"original_assets/energy-consumption-pro/merkle_root\", \"member_merkle_root\": \"6008daa21858b60d9a9804873b7685b619ae841d5d220238e7b1dd6530513719\"}, {\"slug\": \"tourism-itinerary\", \"role\": \"member\", \"name\": \"行程规划 助手\", \"evidence\": \"original_assets/tourism-itinerary/merkle_root\", \"member_merkle_root\": \"49db793cff184331664e1e3bb6a719c8b311024afb3d2f716f19b0a78950a1b4\"}, {\"slug\": \"intl-logistics-pro\", \"role\": \"member\", \"name\": \"国际物流 时效管理 顾问\", \"evidence\": \"original_assets/intl-logistics-pro/merkle_root\", \"member_merkle_root\": \"050ef8d19096c5730233e7cc91bf1c36821575779e341af5b8b533637a3953a0\"}], \"team_lead\": \"energy-consumption-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/energy-consumption-pro-team-lead.md": "ef89455c45e4653f5885133303d145ec2558a54d778ac84960acba06d0ab5caf",
+    "agents/energy-consumption-pro.md": "419f5bdb9015c704b290a87fbfaa7b4ac6c760d2e00755f9be69c68ad79a10ac",
+    "agents/intl-logistics-pro.md": "db1acea5d5008702223b16676501f23e8bb1ca91224015742be9523e921e5444",
+    "agents/tourism-itinerary.md": "2389eb581afcf4188e6ad5754bcbc6f9ddcf690c0222808d528bd486012ae464",
+    "plugin.json": "802189f46b16ce5f1751d251ce960b89b1141c1bf6809749046754092cf0a41c",
+    "settings.json": "e3bd486a674e789f5938802689694a8c090754a25314ad9f37185c6fac04ef42"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1082",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1082",
+    "kind": "team",
+    "name": "客户健康专家",
+    "description": "客户健康专家：围绕客户健康，覆盖多维输入／分档动作／人工复核，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "cs-health-score-team-lead",
+        "role": "lead",
+        "name": "客户健康主理人",
+        "evidence": null
+      },
+      {
+        "slug": "cs-health-score",
+        "role": "member",
+        "name": "客户健康 评分模型 顾问",
+        "evidence": "original_assets/cs-health-score/merkle_root",
+        "member_merkle_root": "4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2"
+      },
+      {
+        "slug": "doc-version-ledger",
+        "role": "member",
+        "name": "文档版本台账 助手",
+        "evidence": "original_assets/doc-version-ledger/merkle_root",
+        "member_merkle_root": "5b6d3f871f2d04ec5356a8f203ca8c61d9e84fb71e932c68a391b72ddb4ce2cf"
+      },
+      {
+        "slug": "safety-management",
+        "role": "member",
+        "name": "安全管理 顾问",
+        "evidence": "original_assets/safety-management/merkle_root",
+        "member_merkle_root": "6dd3f2de179924da51d658a3dd72c50ed10b7e18e9b655f0a2304629ed999af1"
+      }
+    ],
+    "team_lead": "cs-health-score-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "98e314431c5fd7bc",
+  "prompt_hash": "71dc0b0633ff7ee2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1082\", \"kind\": \"team\", \"name\": \"客户健康专家\", \"description\": \"客户健康专家：围绕客户健康，覆盖多维输入／分档动作／人工复核，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"cs-health-score-team-lead\", \"role\": \"lead\", \"name\": \"客户健康主理人\", \"evidence\": null}, {\"slug\": \"cs-health-score\", \"role\": \"member\", \"name\": \"客户健康 评分模型 顾问\", \"evidence\": \"original_assets/cs-health-score/merkle_root\", \"member_merkle_root\": \"4756e5407c002522fc5d7c3ed959b8cd52dddba708ef180bd16e2576f3ac99b2\"}, {\"slug\": \"doc-version-ledger\", \"role\": \"member\", \"name\": \"文档版本台账 助手\", \"evidence\": \"original_assets/doc-version-ledger/merkle_root\", \"member_merkle_root\": \"5b6d3f871f2d04ec5356a8f203ca8c61d9e84fb71e932c68a391b72ddb4ce2cf\"}, {\"slug\": \"safety-management\", \"role\": \"member\", \"name\": \"安全管理 顾问\", \"evidence\": \"original_assets/safety-management/merkle_root\", \"member_merkle_root\": \"6dd3f2de179924da51d658a3dd72c50ed10b7e18e9b655f0a2304629ed999af1\"}], \"team_lead\": \"cs-health-score-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cs-health-score-team-lead.md": "ac8e496ca578150b532e3fd3dda8386578461d7899ef69fd19067e2a763a748b",
+    "agents/cs-health-score.md": "d2b837f318fc743f3eec2f4d34024fc674668b2ea5623d8e011651710215db88",
+    "agents/doc-version-ledger.md": "893e7f7fcc1f4bec77f87d03ffbe2fbef5e33e4ae88792b2391f5b03f6ae3f0d",
+    "agents/safety-management.md": "548be986af86126748eea1de5e0e20fab7fd29a604fc2bc0db70795c091ac340",
+    "plugin.json": "84c86a0f22315f0ca7558355b587192e13c80115aa0556e55c43c729c791a753",
+    "settings.json": "9de2f5cdd27a0119626413baf28276bfdef0a3eb5a758dccb1ef63a93311fa90"
+  }
+}

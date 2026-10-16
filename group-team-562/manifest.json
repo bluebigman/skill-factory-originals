@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-562",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-562",
+    "kind": "team",
+    "name": "维度建模专家",
+    "description": "输入维度建模相关需求，输出总线矩阵、事实粒度、缓慢变化三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "dim-model-design-team-lead",
+        "role": "lead",
+        "name": "维度建模主理人",
+        "evidence": null
+      },
+      {
+        "slug": "dim-model-design",
+        "role": "member",
+        "name": "维度建模 事实维度 顾问",
+        "evidence": "original_assets/dim-model-design/merkle_root",
+        "member_merkle_root": "aac49bf0cf5a4fc3753c78d140c9fd48b377e15f25b0d563873b8ab76f862655"
+      },
+      {
+        "slug": "api-mock-pro",
+        "role": "member",
+        "name": "接口模拟 联调编排 时序回放",
+        "evidence": "original_assets/api-mock-pro/merkle_root",
+        "member_merkle_root": "b42abd116ab122435193729e91f6ff6528bc04f15dd2fefeda36991824fa4917"
+      },
+      {
+        "slug": "data-pipeline-pro-01-fixed",
+        "role": "member",
+        "name": "R包数据转换 批量整理",
+        "evidence": "original_assets/data-pipeline-pro-01-fixed/merkle_root",
+        "member_merkle_root": "6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237"
+      }
+    ],
+    "team_lead": "dim-model-design-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8592840ab7c97ee6",
+  "prompt_hash": "a67b9f4bdfdfd5fe",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-562\", \"kind\": \"team\", \"name\": \"维度建模专家\", \"description\": \"输入维度建模相关需求，输出总线矩阵、事实粒度、缓慢变化三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"dim-model-design-team-lead\", \"role\": \"lead\", \"name\": \"维度建模主理人\", \"evidence\": null}, {\"slug\": \"dim-model-design\", \"role\": \"member\", \"name\": \"维度建模 事实维度 顾问\", \"evidence\": \"original_assets/dim-model-design/merkle_root\", \"member_merkle_root\": \"aac49bf0cf5a4fc3753c78d140c9fd48b377e15f25b0d563873b8ab76f862655\"}, {\"slug\": \"api-mock-pro\", \"role\": \"member\", \"name\": \"接口模拟 联调编排 时序回放\", \"evidence\": \"original_assets/api-mock-pro/merkle_root\", \"member_merkle_root\": \"b42abd116ab122435193729e91f6ff6528bc04f15dd2fefeda36991824fa4917\"}, {\"slug\": \"data-pipeline-pro-01-fixed\", \"role\": \"member\", \"name\": \"R包数据转换 批量整理\", \"evidence\": \"original_assets/data-pipeline-pro-01-fixed/merkle_root\", \"member_merkle_root\": \"6583a00e03e14a950cc01d6aa19810d9d23e0d4ee9a6cc42fd7cae2a54cd9237\"}], \"team_lead\": \"dim-model-design-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-mock-pro.md": "d773bb24fa7d1dd5896764d28c33ec789dc4addbe0270671d0cd47d00aa306cf",
+    "agents/data-pipeline-pro-01-fixed.md": "35a293faf3e53dd6925f6f31f32dab5ba506538dd7f86b22093b7104952f5136",
+    "agents/dim-model-design-team-lead.md": "40e784817efe36cff9fcd7072b257bcc636261f5665a3b7aa009be881160c6d1",
+    "agents/dim-model-design.md": "993a494833e209ab5a0e2b5988fbba3b11acb336b01143f369bdb1948e50f3bb",
+    "plugin.json": "5c88d3de6ea6dc79da6d9b39fb43c7346e1f012c2b34d171dd45bebfa2dec899",
+    "settings.json": "fdf94db49066b140ea37bc002a87c0821c934b7aba355df913c837781d1db529"
+  }
+}

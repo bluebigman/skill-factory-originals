@@ -1,0 +1,126 @@
+{
+  "agentName": "onboarding-product-team-lead",
+  "agents": [
+    "./agents/onboarding-product-team-lead.md",
+    "./agents/onboarding-product.md",
+    "./agents/design-review-method.md",
+    "./agents/game-community-mod.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 新用户",
+    "zh": "帮我处理新用户"
+  },
+  "description": "onboarding-product team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 新用户 end-to-end: 价值前置, 渐进披露 and 激活口径. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长价值前置、渐进披露与激活口径，覆盖新用户全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "onboarding-product Team",
+    "zh": "新用户上手引导专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "onboarding-product-team-lead",
+      "name": {
+        "en": "新用户主理人",
+        "zh": "新用户主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/onboarding-product.png",
+      "id": "onboarding-product",
+      "name": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "profession": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/design-review-method.png",
+      "id": "design-review-method",
+      "name": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "profession": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-community-mod.png",
+      "id": "game-community-mod",
+      "name": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "profession": {
+        "en": "game-community-mod",
+        "zh": "游戏社区 治理规则 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1063",
+  "plugin": "group-team-1063",
+  "profession": {
+    "en": "onboarding-product Collaboration Team",
+    "zh": "新用户上手引导专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 新用户",
+      "zh": "帮我处理新用户"
+    },
+    {
+      "en": "Plan 设计评审",
+      "zh": "帮我规划设计评审"
+    },
+    {
+      "en": "Review 游戏社区",
+      "zh": "帮我检查游戏社区"
+    }
+  ],
+  "tags": [
+    {
+      "en": "价值前置",
+      "zh": "价值前置"
+    },
+    {
+      "en": "渐进披露",
+      "zh": "渐进披露"
+    },
+    {
+      "en": "激活口径",
+      "zh": "激活口径"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "onboarding-product-team-lead",
+    "memberAgents": [
+      "onboarding-product",
+      "design-review-method",
+      "game-community-mod"
+    ]
+  },
+  "version": "1.0.0"
+}

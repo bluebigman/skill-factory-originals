@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-664",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-664",
+    "kind": "team",
+    "name": "任务交接上下文传专家",
+    "description": "任务交接上下文传专家：围绕任务交接，覆盖责任明确／验收标准／回执确认，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-handoff-pro-team-lead",
+        "role": "lead",
+        "name": "任务交接主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-handoff-pro",
+        "role": "member",
+        "name": "任务交接 上下文传 顾问",
+        "evidence": "original_assets/agent-handoff-pro/merkle_root",
+        "member_merkle_root": "f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d"
+      },
+      {
+        "slug": "process-fmea-pro",
+        "role": "member",
+        "name": "过程风险 预防分析 顾问",
+        "evidence": "original_assets/process-fmea-pro/merkle_root",
+        "member_merkle_root": "a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2"
+      },
+      {
+        "slug": "cold-email-expert",
+        "role": "member",
+        "name": "邮件营销 标题撰写 转化优化",
+        "evidence": "original_assets/cold-email-expert/merkle_root",
+        "member_merkle_root": "458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc"
+      }
+    ],
+    "team_lead": "agent-handoff-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a18714e32537f5ea",
+  "prompt_hash": "49392adb774d4285",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-664\", \"kind\": \"team\", \"name\": \"任务交接上下文传专家\", \"description\": \"任务交接上下文传专家：围绕任务交接，覆盖责任明确／验收标准／回执确认，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-handoff-pro-team-lead\", \"role\": \"lead\", \"name\": \"任务交接主理人\", \"evidence\": null}, {\"slug\": \"agent-handoff-pro\", \"role\": \"member\", \"name\": \"任务交接 上下文传 顾问\", \"evidence\": \"original_assets/agent-handoff-pro/merkle_root\", \"member_merkle_root\": \"f59205b695c9a20accbb5eaa218aa7ab71aba4745b6856d2b7b55ec612c3d21d\"}, {\"slug\": \"process-fmea-pro\", \"role\": \"member\", \"name\": \"过程风险 预防分析 顾问\", \"evidence\": \"original_assets/process-fmea-pro/merkle_root\", \"member_merkle_root\": \"a03bca078a962e5a30ecaff72f2f105ca2847a982004d184aece22fc944005a2\"}, {\"slug\": \"cold-email-expert\", \"role\": \"member\", \"name\": \"邮件营销 标题撰写 转化优化\", \"evidence\": \"original_assets/cold-email-expert/merkle_root\", \"member_merkle_root\": \"458a0b74c947bed7d2672021e125572228e2ca5a52676336abb404b398c711bc\"}], \"team_lead\": \"agent-handoff-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-handoff-pro-team-lead.md": "a7d31dc49cb8f2a9966198cfc50ad625dc79eadac1e70e04bfd12495fd07362b",
+    "agents/agent-handoff-pro.md": "df2298fd0999a389145bf74e00423e5d539f3fc40b39302bda83644ac0b427cb",
+    "agents/cold-email-expert.md": "60bdf070b28a34090c33a098aeaba48f3a2d8e06dd12e95aee60c7fcdccea002",
+    "agents/process-fmea-pro.md": "8c3f1dba5a32e7444bf3c5473f076d22c2ec2d9d24e3d2040d52fbb71685f14e",
+    "plugin.json": "e893eb32fad89d6ee4ff1ed2a37524818741ab3efb31db999fb0fea048d85095",
+    "settings.json": "66f97723d9d51de6f3954e0ef8eb5837395704f1cd40e99a2e1fdebfaf50ab3b"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085721",
+  "slug": "group-team-1191",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1191",
+    "kind": "team",
+    "name": "文档风格规范专家",
+    "description": "输入文档风格规范相关需求，输出句式克制、标点统一、数字规范三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-style-guide-team-lead",
+        "role": "lead",
+        "name": "文档风格规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-style-guide",
+        "role": "member",
+        "name": "文档风格规范 顾问",
+        "evidence": "original_assets/doc-style-guide/merkle_root",
+        "member_merkle_root": "3dfa9a88d5d468c716ab241657ffbbf7f68166dcef8af2290fae3229334a0a0c"
+      },
+      {
+        "slug": "doc-coauthor-flow",
+        "role": "member",
+        "name": "文档协同编辑 顾问",
+        "evidence": "original_assets/doc-coauthor-flow/merkle_root",
+        "member_merkle_root": "01cc4d675232382a226f964c24f9e524e61e3867d6231f1304f95e52bc61dc3f"
+      },
+      {
+        "slug": "doc-split-chapter",
+        "role": "member",
+        "name": "文档分章拆分 助手",
+        "evidence": "original_assets/doc-split-chapter/merkle_root",
+        "member_merkle_root": "75e847dff2ccef0a841adaf609437655107edfb88c6d53253f436bbcec7c4c44"
+      }
+    ],
+    "team_lead": "doc-style-guide-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "07f0a574e3884d3c",
+  "prompt_hash": "1e1558490a4ca5cc",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1191\", \"kind\": \"team\", \"name\": \"文档风格规范专家\", \"description\": \"输入文档风格规范相关需求，输出句式克制、标点统一、数字规范三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-style-guide-team-lead\", \"role\": \"lead\", \"name\": \"文档风格规范主理人\", \"evidence\": null}, {\"slug\": \"doc-style-guide\", \"role\": \"member\", \"name\": \"文档风格规范 顾问\", \"evidence\": \"original_assets/doc-style-guide/merkle_root\", \"member_merkle_root\": \"3dfa9a88d5d468c716ab241657ffbbf7f68166dcef8af2290fae3229334a0a0c\"}, {\"slug\": \"doc-coauthor-flow\", \"role\": \"member\", \"name\": \"文档协同编辑 顾问\", \"evidence\": \"original_assets/doc-coauthor-flow/merkle_root\", \"member_merkle_root\": \"01cc4d675232382a226f964c24f9e524e61e3867d6231f1304f95e52bc61dc3f\"}, {\"slug\": \"doc-split-chapter\", \"role\": \"member\", \"name\": \"文档分章拆分 助手\", \"evidence\": \"original_assets/doc-split-chapter/merkle_root\", \"member_merkle_root\": \"75e847dff2ccef0a841adaf609437655107edfb88c6d53253f436bbcec7c4c44\"}], \"team_lead\": \"doc-style-guide-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-coauthor-flow.md": "62d708eacf383e434ef6e7c85665d976dabd774d2494c2b64fe72ac415437f11",
+    "agents/doc-split-chapter.md": "af98710fe8939f511712aacd8d65c374c36f9365aeeb84007339164d0bbd1e5f",
+    "agents/doc-style-guide-team-lead.md": "4c261305b045f11d664d4e04b81059f1dad37d06e9449e6adf91c29a76469e37",
+    "agents/doc-style-guide.md": "0aa25ed91ccdaf9782053fe7b19ff1b3dc1ba750be2f8c34dc36af1ce1e14ef7",
+    "plugin.json": "c667adbec96306f63ebfab41bf3997e411f8ade1d62851c203423410a68e80f1",
+    "settings.json": "563278e33e750fe9b5340be385585e6e9a4843efccacee7674d4134177649fd2"
+  }
+}

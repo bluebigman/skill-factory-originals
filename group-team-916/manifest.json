@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-916",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-916",
+    "kind": "team",
+    "name": "对照梳理专家",
+    "description": "输入国际标准相关需求，输出版本溯源、差异列表、取严原则三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "intl-standards-map-team-lead",
+        "role": "lead",
+        "name": "国际标准主理人",
+        "evidence": null
+      },
+      {
+        "slug": "intl-standards-map",
+        "role": "member",
+        "name": "国际标准 对照梳理 顾问",
+        "evidence": "original_assets/intl-standards-map/merkle_root",
+        "member_merkle_root": "be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89"
+      },
+      {
+        "slug": "import-inspection-pro",
+        "role": "member",
+        "name": "进口检验 标准对照 顾问",
+        "evidence": "original_assets/import-inspection-pro/merkle_root",
+        "member_merkle_root": "4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f"
+      },
+      {
+        "slug": "intl-meeting-coach",
+        "role": "member",
+        "name": "跨时区会议 组织 教练",
+        "evidence": "original_assets/intl-meeting-coach/merkle_root",
+        "member_merkle_root": "b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1"
+      }
+    ],
+    "team_lead": "intl-standards-map-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1050e668601d8b49",
+  "prompt_hash": "9e0f1df31a468c55",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-916\", \"kind\": \"team\", \"name\": \"对照梳理专家\", \"description\": \"输入国际标准相关需求，输出版本溯源、差异列表、取严原则三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"intl-standards-map-team-lead\", \"role\": \"lead\", \"name\": \"国际标准主理人\", \"evidence\": null}, {\"slug\": \"intl-standards-map\", \"role\": \"member\", \"name\": \"国际标准 对照梳理 顾问\", \"evidence\": \"original_assets/intl-standards-map/merkle_root\", \"member_merkle_root\": \"be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89\"}, {\"slug\": \"import-inspection-pro\", \"role\": \"member\", \"name\": \"进口检验 标准对照 顾问\", \"evidence\": \"original_assets/import-inspection-pro/merkle_root\", \"member_merkle_root\": \"4cb9679934444ac97026cfb284dc4010586e9cb039fedb8f70d229ab4842fb7f\"}, {\"slug\": \"intl-meeting-coach\", \"role\": \"member\", \"name\": \"跨时区会议 组织 教练\", \"evidence\": \"original_assets/intl-meeting-coach/merkle_root\", \"member_merkle_root\": \"b370db9d37a027348ee47e94c9dba963cb8ae951464303fed856bcb270091eb1\"}], \"team_lead\": \"intl-standards-map-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/import-inspection-pro.md": "707ee9aa192f14a0e3158e830c4d4de1c6e40aa6d0dc4711a13526c6869ec2de",
+    "agents/intl-meeting-coach.md": "5b1512cf5cedc708fcfe6f4e8d9ed059aaf23a2c3d00ddbe8a7564702fddf594",
+    "agents/intl-standards-map-team-lead.md": "e2d09e0bfba623cbbadf0e815ac151499952a6407635c98dcd3668db054981de",
+    "agents/intl-standards-map.md": "445a5994548fb214563c1f7f260210d98f2b4ae4b8372839df7d3c6713513e1f",
+    "plugin.json": "ee3144c4fd5fe168364f2b16723fa0268aa541a19e77c3f5934e7b161ea9ed9d",
+    "settings.json": "234331f8667045aba4ef2ef500cb31f8de76da3d2c13a9c2377b4a92d74d4bfe"
+  }
+}

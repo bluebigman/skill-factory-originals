@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-402",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-402",
+    "kind": "team",
+    "name": "轨迹留痕专家",
+    "description": "擅长决策留痕、来源可溯与异常接管，覆盖行为审计全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-trace-audit-pro-team-lead",
+        "role": "lead",
+        "name": "行为审计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-trace-audit-pro",
+        "role": "member",
+        "name": "行为审计 轨迹留痕 顾问",
+        "evidence": "original_assets/agent-trace-audit-pro/merkle_root",
+        "member_merkle_root": "a46512022b4f394a76fabdf5bae28193d5b2d73209b584761beed1126faa9832"
+      },
+      {
+        "slug": "influencer-compliance",
+        "role": "member",
+        "name": "推广合规 标识规范 顾问",
+        "evidence": "original_assets/influencer-compliance/merkle_root",
+        "member_merkle_root": "07ef56b2d69ea1e67cad6d8623ad3baeb1401883c3136c8807153bdd6045434c"
+      },
+      {
+        "slug": "safety-production-pro",
+        "role": "member",
+        "name": "生产安全 隐患排查 顾问",
+        "evidence": "original_assets/safety-production-pro/merkle_root",
+        "member_merkle_root": "378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd"
+      }
+    ],
+    "team_lead": "agent-trace-audit-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "24c7ea45249bf9d2",
+  "prompt_hash": "e0e4f448f263f1f7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-402\", \"kind\": \"team\", \"name\": \"轨迹留痕专家\", \"description\": \"擅长决策留痕、来源可溯与异常接管，覆盖行为审计全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-trace-audit-pro-team-lead\", \"role\": \"lead\", \"name\": \"行为审计主理人\", \"evidence\": null}, {\"slug\": \"agent-trace-audit-pro\", \"role\": \"member\", \"name\": \"行为审计 轨迹留痕 顾问\", \"evidence\": \"original_assets/agent-trace-audit-pro/merkle_root\", \"member_merkle_root\": \"a46512022b4f394a76fabdf5bae28193d5b2d73209b584761beed1126faa9832\"}, {\"slug\": \"influencer-compliance\", \"role\": \"member\", \"name\": \"推广合规 标识规范 顾问\", \"evidence\": \"original_assets/influencer-compliance/merkle_root\", \"member_merkle_root\": \"07ef56b2d69ea1e67cad6d8623ad3baeb1401883c3136c8807153bdd6045434c\"}, {\"slug\": \"safety-production-pro\", \"role\": \"member\", \"name\": \"生产安全 隐患排查 顾问\", \"evidence\": \"original_assets/safety-production-pro/merkle_root\", \"member_merkle_root\": \"378cc9bdb1312288ee6c447aedac1dea2456362226d41bf8466d1a74067f16fd\"}], \"team_lead\": \"agent-trace-audit-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-trace-audit-pro-team-lead.md": "90a2adfbc764d1487e7d018068dbf122218c5fbcb2863cf7c4ce0bf7ef482a39",
+    "agents/agent-trace-audit-pro.md": "b7526eb3bcade0d8bcb42c21319ed24d03545be4b0031e47bc73493e4d2995ee",
+    "agents/influencer-compliance.md": "33750f6cc5d0d2a66e4824cc6a2b8a98069cc0d26f670360aab59c2da8e7caaa",
+    "agents/safety-production-pro.md": "3e63931551c09a0696f7de3d6abe660a11bc2ab725381150bbe0f5d305e3b587",
+    "plugin.json": "5a2a2f4ac746389eb254414f9956e9afa21d5c107210d8125eca138c381bf168",
+    "settings.json": "c8b8c621f1f165555784e9427bea7ae7e7870e7356e53622ba743931abebaba0"
+  }
+}

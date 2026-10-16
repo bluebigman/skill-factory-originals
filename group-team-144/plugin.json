@@ -1,0 +1,126 @@
+{
+  "agentName": "teen-peer-pressure-team-lead",
+  "agents": [
+    "./agents/teen-peer-pressure-team-lead.md",
+    "./agents/teen-peer-pressure.md",
+    "./agents/parent-self-care.md",
+    "./agents/study-exam-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "15-Education",
+  "defaultInitPrompt": {
+    "en": "Handle 同伴压力",
+    "zh": "帮我处理同伴压力"
+  },
+  "description": "Teen Peer Pressure team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "同伴 家长 备考 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Teen Peer Pressure Team",
+    "zh": "同伴 家长 备考 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "teen-peer-pressure-team-lead",
+      "name": {
+        "en": "同伴压力主理人",
+        "zh": "同伴压力主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/teen-peer-pressure.png",
+      "id": "teen-peer-pressure",
+      "name": {
+        "en": "Teen Peer Pressure",
+        "zh": "同伴压力 拒绝技巧 顾问"
+      },
+      "profession": {
+        "en": "Teen Peer Pressure",
+        "zh": "同伴压力 拒绝技巧 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/parent-self-care.png",
+      "id": "parent-self-care",
+      "name": {
+        "en": "Parent Self Care",
+        "zh": "家长压力 自我照顾 教练"
+      },
+      "profession": {
+        "en": "Parent Self Care",
+        "zh": "家长压力 自我照顾 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/study-exam-plan.png",
+      "id": "study-exam-plan",
+      "name": {
+        "en": "Study Exam Plan",
+        "zh": "备考计划 冲刺编排 顾问"
+      },
+      "profession": {
+        "en": "Study Exam Plan",
+        "zh": "备考计划 冲刺编排 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-144",
+  "plugin": "group-team-144",
+  "profession": {
+    "en": "Teen Peer Pressure Collaboration Team",
+    "zh": "同伴 家长 备考 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 同伴压力",
+      "zh": "帮我处理同伴压力"
+    },
+    {
+      "en": "Plan 家长压力",
+      "zh": "帮我规划家长压力"
+    },
+    {
+      "en": "Review 备考计划",
+      "zh": "帮我检查备考计划"
+    }
+  ],
+  "tags": [
+    {
+      "en": "同伴压力",
+      "zh": "同伴压力"
+    },
+    {
+      "en": "家长压力",
+      "zh": "家长压力"
+    },
+    {
+      "en": "备考计划",
+      "zh": "备考计划"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "teen-peer-pressure-team-lead",
+    "memberAgents": [
+      "teen-peer-pressure",
+      "parent-self-care",
+      "study-exam-plan"
+    ]
+  },
+  "version": "1.0.0"
+}

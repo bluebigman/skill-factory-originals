@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085736",
+  "slug": "group-team-883",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-883",
+    "kind": "team",
+    "name": "上手引导流程专家",
+    "description": "输入上手引导流程相关需求，输出卡片分类、交叉验证、层级克制三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "onboarding-flow-team-lead",
+        "role": "lead",
+        "name": "上手引导流程主理人",
+        "evidence": null
+      },
+      {
+        "slug": "onboarding-flow",
+        "role": "member",
+        "name": "上手引导流程 顾问",
+        "evidence": "original_assets/onboarding-flow/merkle_root",
+        "member_merkle_root": "c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050"
+      },
+      {
+        "slug": "info-architecture",
+        "role": "member",
+        "name": "信息架构 梳理 顾问",
+        "evidence": "original_assets/info-architecture/merkle_root",
+        "member_merkle_root": "0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105"
+      },
+      {
+        "slug": "empty-state-pro",
+        "role": "member",
+        "name": "空状态 异常设计 顾问",
+        "evidence": "original_assets/empty-state-pro/merkle_root",
+        "member_merkle_root": "9deeff72d6b55464bc44a416ebe2035e65e11c3dea6e9c7fc305a77f1088163a"
+      }
+    ],
+    "team_lead": "onboarding-flow-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8e36781d533976f5",
+  "prompt_hash": "934bd47c959af361",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-883\", \"kind\": \"team\", \"name\": \"上手引导流程专家\", \"description\": \"输入上手引导流程相关需求，输出卡片分类、交叉验证、层级克制三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"onboarding-flow-team-lead\", \"role\": \"lead\", \"name\": \"上手引导流程主理人\", \"evidence\": null}, {\"slug\": \"onboarding-flow\", \"role\": \"member\", \"name\": \"上手引导流程 顾问\", \"evidence\": \"original_assets/onboarding-flow/merkle_root\", \"member_merkle_root\": \"c120a933bb4f8ae8b35b5dc04017d5414392cd803de476af2cf94cf92fe28050\"}, {\"slug\": \"info-architecture\", \"role\": \"member\", \"name\": \"信息架构 梳理 顾问\", \"evidence\": \"original_assets/info-architecture/merkle_root\", \"member_merkle_root\": \"0bdbbb110fd70ebd94f564eafa2c80cf4f746f815cb77c01eb4af54dc4c80105\"}, {\"slug\": \"empty-state-pro\", \"role\": \"member\", \"name\": \"空状态 异常设计 顾问\", \"evidence\": \"original_assets/empty-state-pro/merkle_root\", \"member_merkle_root\": \"9deeff72d6b55464bc44a416ebe2035e65e11c3dea6e9c7fc305a77f1088163a\"}], \"team_lead\": \"onboarding-flow-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/empty-state-pro.md": "906901645771b4eccbdf885aab388fc8bfb6a41b983f0a288991ea3a5e2d385e",
+    "agents/info-architecture.md": "92dea2ab0b5a99ab9706bff01edda32e03a818b0065a0bb79e020a9d6cc61b36",
+    "agents/onboarding-flow-team-lead.md": "3677fbd512f613b61c02a4cbbfc05df16132e7cc555c6905dc73d5341c0305c8",
+    "agents/onboarding-flow.md": "f6201d5d29c22e1cdd421cae6f1d9c08b229e6619b94b0444c0af8e970547f2c",
+    "plugin.json": "feeab3a5c09075956b6f651d0b57b4e89082a96225066f08161905cc29091fe6",
+    "settings.json": "7d816df6c09340d2e068300f3509457debbfcfe693a21e8ef3fe419548dd36e7"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "visual-consistency-team-lead",
+  "agents": [
+    "./agents/visual-consistency-team-lead.md",
+    "./agents/visual-consistency.md",
+    "./agents/map-visual-design.md",
+    "./agents/onboarding-flow.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 视觉一致性",
+    "zh": "帮我处理视觉一致性"
+  },
+  "description": "visual-consistency team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 视觉一致性 end-to-end: 图标统一, 圆角统一 and 分级设色. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长图标统一、圆角统一与分级设色，覆盖视觉一致性全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "visual-consistency Team",
+    "zh": "视觉一致性顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "visual-consistency-team-lead",
+      "name": {
+        "en": "视觉一致性主理人",
+        "zh": "视觉一致性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/visual-consistency.png",
+      "id": "visual-consistency",
+      "name": {
+        "en": "visual-consistency",
+        "zh": "视觉一致性 顾问"
+      },
+      "profession": {
+        "en": "visual-consistency",
+        "zh": "视觉一致性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/map-visual-design.png",
+      "id": "map-visual-design",
+      "name": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "profession": {
+        "en": "map-visual-design",
+        "zh": "地图可视化 表达规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/onboarding-flow.png",
+      "id": "onboarding-flow",
+      "name": {
+        "en": "onboarding-flow",
+        "zh": "上手引导流程 顾问"
+      },
+      "profession": {
+        "en": "onboarding-flow",
+        "zh": "上手引导流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1108",
+  "plugin": "group-team-1108",
+  "profession": {
+    "en": "visual-consistency Collaboration Team",
+    "zh": "视觉一致性顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 视觉一致性",
+      "zh": "帮我处理视觉一致性"
+    },
+    {
+      "en": "Plan 地图可视化",
+      "zh": "帮我规划地图可视化"
+    },
+    {
+      "en": "Review 上手引导流程",
+      "zh": "帮我检查上手引导流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字体统一",
+      "zh": "字体统一"
+    },
+    {
+      "en": "间距统一",
+      "zh": "间距统一"
+    },
+    {
+      "en": "图标统一",
+      "zh": "图标统一"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "visual-consistency-team-lead",
+    "memberAgents": [
+      "visual-consistency",
+      "map-visual-design",
+      "onboarding-flow"
+    ]
+  },
+  "version": "1.0.0"
+}

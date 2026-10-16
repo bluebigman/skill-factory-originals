@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-208",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-208",
+    "kind": "team",
+    "name": "数据 批量 接口 团队",
+    "description": "数据 批量 接口 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "toolkit-pro-03-team-lead",
+        "role": "lead",
+        "name": "数据回溯主理人",
+        "evidence": null
+      },
+      {
+        "slug": "toolkit-pro-03",
+        "role": "member",
+        "name": "数据回溯 标准作业 数据保全",
+        "evidence": "original_assets/toolkit-pro-03/merkle_root",
+        "member_merkle_root": "da7ce738a68ff4039a26766e0f133e00b49906efc82877266cb525fb01f8c10a"
+      },
+      {
+        "slug": "file-ops-suite-pro",
+        "role": "member",
+        "name": "批量重命名 数据备份 文件整理",
+        "evidence": "original_assets/file-ops-suite-pro/merkle_root",
+        "member_merkle_root": "3ba919afd8f954e1daa25f8d7e6de7980b741effdfda34127af55d9cfef5119c"
+      },
+      {
+        "slug": "api-connectivity-diagnostics-expert",
+        "role": "member",
+        "name": "接口跨域 连接异常 排查修复",
+        "evidence": "original_assets/api-connectivity-diagnostics-expert/merkle_root",
+        "member_merkle_root": "20fe00d85d3ed5226ef71c671c561a0364a775ab06aa1f8987bb96ff4fd12314"
+      }
+    ],
+    "team_lead": "toolkit-pro-03-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e664bc1a965f5ccd",
+  "prompt_hash": "6afabaed3c3010ea",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-208\", \"kind\": \"team\", \"name\": \"数据 批量 接口 团队\", \"description\": \"数据 批量 接口 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"toolkit-pro-03-team-lead\", \"role\": \"lead\", \"name\": \"数据回溯主理人\", \"evidence\": null}, {\"slug\": \"toolkit-pro-03\", \"role\": \"member\", \"name\": \"数据回溯 标准作业 数据保全\", \"evidence\": \"original_assets/toolkit-pro-03/merkle_root\", \"member_merkle_root\": \"da7ce738a68ff4039a26766e0f133e00b49906efc82877266cb525fb01f8c10a\"}, {\"slug\": \"file-ops-suite-pro\", \"role\": \"member\", \"name\": \"批量重命名 数据备份 文件整理\", \"evidence\": \"original_assets/file-ops-suite-pro/merkle_root\", \"member_merkle_root\": \"3ba919afd8f954e1daa25f8d7e6de7980b741effdfda34127af55d9cfef5119c\"}, {\"slug\": \"api-connectivity-diagnostics-expert\", \"role\": \"member\", \"name\": \"接口跨域 连接异常 排查修复\", \"evidence\": \"original_assets/api-connectivity-diagnostics-expert/merkle_root\", \"member_merkle_root\": \"20fe00d85d3ed5226ef71c671c561a0364a775ab06aa1f8987bb96ff4fd12314\"}], \"team_lead\": \"toolkit-pro-03-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/api-connectivity-diagnostics-expert.md": "f2d0026ba0f80c6f01996db3401fbb51f70eb89513e32630adcf7edb7d41058e",
+    "agents/file-ops-suite-pro.md": "4d98b5ab0fb6f5abab82715508299090f2c9c81ceee9dbcf0b71691745016033",
+    "agents/toolkit-pro-03-team-lead.md": "9283454db3f9df122d645b7a0e179cbe39f46276e8ab413c3f6e44801e043004",
+    "agents/toolkit-pro-03.md": "453229978ea0e555497559930a91d4cad8f433d7941e40a2177b95788c02c634",
+    "plugin.json": "62be79dccf7ba7e0e39a7b4213db35b0b9160f9ea6b4a620947a46109eac5247",
+    "settings.json": "6e2f9b4a0b64202f6bfbb31ca5f17a31c0bbaa124271e3401217155cbad41865"
+  }
+}

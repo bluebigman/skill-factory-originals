@@ -1,0 +1,126 @@
+{
+  "agentName": "design-review-method-team-lead",
+  "agents": [
+    "./agents/design-review-method-team-lead.md",
+    "./agents/design-review-method.md",
+    "./agents/onboarding-product.md",
+    "./agents/ux-metrics-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 设计评审",
+    "zh": "帮我处理设计评审"
+  },
+  "description": "design-review-method team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 设计评审 end-to-end: 分歧留档, 限时评审 and 价值前置. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长分歧留档、限时评审与价值前置，覆盖设计评审全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "design-review-method Team",
+    "zh": "设计评审决策机制专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "design-review-method-team-lead",
+      "name": {
+        "en": "设计评审主理人",
+        "zh": "设计评审主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/design-review-method.png",
+      "id": "design-review-method",
+      "name": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "profession": {
+        "en": "design-review-method",
+        "zh": "设计评审 决策机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/onboarding-product.png",
+      "id": "onboarding-product",
+      "name": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "profession": {
+        "en": "onboarding-product",
+        "zh": "新用户 上手引导 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ux-metrics-pro.png",
+      "id": "ux-metrics-pro",
+      "name": {
+        "en": "ux-metrics-pro",
+        "zh": "体验度量 指标体系 顾问"
+      },
+      "profession": {
+        "en": "ux-metrics-pro",
+        "zh": "体验度量 指标体系 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-495",
+  "plugin": "group-team-495",
+  "profession": {
+    "en": "design-review-method Collaboration Team",
+    "zh": "设计评审决策机制专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 设计评审",
+      "zh": "帮我处理设计评审"
+    },
+    {
+      "en": "Plan 新用户",
+      "zh": "帮我规划新用户"
+    },
+    {
+      "en": "Review 体验度量",
+      "zh": "帮我检查体验度量"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先目标后方案",
+      "zh": "先目标后方案"
+    },
+    {
+      "en": "决策人明确",
+      "zh": "决策人明确"
+    },
+    {
+      "en": "分歧留档",
+      "zh": "分歧留档"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "design-review-method-team-lead",
+    "memberAgents": [
+      "design-review-method",
+      "onboarding-product",
+      "ux-metrics-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-429",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-429",
+    "kind": "team",
+    "name": "投放管理专家",
+    "description": "投放管理专家：围绕搜索内容，覆盖意图分类／一词一页／结构可读，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "seo-content-pro-team-lead",
+        "role": "lead",
+        "name": "搜索内容主理人",
+        "evidence": null
+      },
+      {
+        "slug": "seo-content-pro",
+        "role": "member",
+        "name": "搜索内容 关键词布局 顾问",
+        "evidence": "original_assets/seo-content-pro/merkle_root",
+        "member_merkle_root": "cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80"
+      },
+      {
+        "slug": "paid-ads-guard",
+        "role": "member",
+        "name": "投放管理 预算护栏 顾问",
+        "evidence": "original_assets/paid-ads-guard/merkle_root",
+        "member_merkle_root": "c2a5da5cb35d29d25b64c70b521b0d3f7418159b5952a7bfac4a5c03e8329240"
+      },
+      {
+        "slug": "polish-translate-expert",
+        "role": "member",
+        "name": "润语 文本润色 文案优化",
+        "evidence": "original_assets/polish-translate-expert/merkle_root",
+        "member_merkle_root": "5d76d7f40e997a259a6ebea9fa79a71f3ccf428841275623a250d3f44d24481c"
+      }
+    ],
+    "team_lead": "seo-content-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "dbfb81e36c4e1e7b",
+  "prompt_hash": "cdeea24bbf1f90aa",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-429\", \"kind\": \"team\", \"name\": \"投放管理专家\", \"description\": \"投放管理专家：围绕搜索内容，覆盖意图分类／一词一页／结构可读，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"seo-content-pro-team-lead\", \"role\": \"lead\", \"name\": \"搜索内容主理人\", \"evidence\": null}, {\"slug\": \"seo-content-pro\", \"role\": \"member\", \"name\": \"搜索内容 关键词布局 顾问\", \"evidence\": \"original_assets/seo-content-pro/merkle_root\", \"member_merkle_root\": \"cdc448a2fb0a878000fc2dcc22584a0b9eec33395b5a9c5322b91838cc26ad80\"}, {\"slug\": \"paid-ads-guard\", \"role\": \"member\", \"name\": \"投放管理 预算护栏 顾问\", \"evidence\": \"original_assets/paid-ads-guard/merkle_root\", \"member_merkle_root\": \"c2a5da5cb35d29d25b64c70b521b0d3f7418159b5952a7bfac4a5c03e8329240\"}, {\"slug\": \"polish-translate-expert\", \"role\": \"member\", \"name\": \"润语 文本润色 文案优化\", \"evidence\": \"original_assets/polish-translate-expert/merkle_root\", \"member_merkle_root\": \"5d76d7f40e997a259a6ebea9fa79a71f3ccf428841275623a250d3f44d24481c\"}], \"team_lead\": \"seo-content-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/paid-ads-guard.md": "a2bb544a7bf78dd92fa898c4df3090134723eda47fc56ea62d5fd054c4142636",
+    "agents/polish-translate-expert.md": "16315248104f66fda829b11665af4e836a080e168c347024c5c3f022be5e5be1",
+    "agents/seo-content-pro-team-lead.md": "36343b89c1060c31e1d66213f4a6bc75022e8982f7a551e4c315d8e7a0240787",
+    "agents/seo-content-pro.md": "3342adcdebb59ce937c3e522df4687eb077b51fbab95d2cd8644649de9d963f8",
+    "plugin.json": "3e58f3ab5035a45ecbf1aea451d7e55e0c1482d9870e98955e1f119688e6a642",
+    "settings.json": "a6655ea194523aaa368dddb078e5bd534f0b32e4360ba8f8b23b05055a1fdc71"
+  }
+}

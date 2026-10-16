@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085719",
+  "slug": "group-team-1137",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1137",
+    "kind": "team",
+    "name": "游戏经济专家",
+    "description": "输入文档可达性核查相关需求，输出标题结构、替代文本、阅读顺序三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-accessibility-check-team-lead",
+        "role": "lead",
+        "name": "文档可达性核查主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-accessibility-check",
+        "role": "member",
+        "name": "文档可达性核查 顾问",
+        "evidence": "original_assets/doc-accessibility-check/merkle_root",
+        "member_merkle_root": "9c605d6dc8c51d9d17decf784dfde5ebfab4aa868ebcd2fe6de62cab1b890652"
+      },
+      {
+        "slug": "game-economy-balance",
+        "role": "member",
+        "name": "游戏经济 数值平衡 顾问",
+        "evidence": "original_assets/game-economy-balance/merkle_root",
+        "member_merkle_root": "3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66"
+      },
+      {
+        "slug": "color-system-build",
+        "role": "member",
+        "name": "配色系统构建 顾问",
+        "evidence": "original_assets/color-system-build/merkle_root",
+        "member_merkle_root": "aac72d98398efe04ca86e82416b0d271d70d7c19fcdaf0eac9335f98af229042"
+      }
+    ],
+    "team_lead": "doc-accessibility-check-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "493cd3671b87fe01",
+  "prompt_hash": "7d98e8c46846b919",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1137\", \"kind\": \"team\", \"name\": \"游戏经济专家\", \"description\": \"输入文档可达性核查相关需求，输出标题结构、替代文本、阅读顺序三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-accessibility-check-team-lead\", \"role\": \"lead\", \"name\": \"文档可达性核查主理人\", \"evidence\": null}, {\"slug\": \"doc-accessibility-check\", \"role\": \"member\", \"name\": \"文档可达性核查 顾问\", \"evidence\": \"original_assets/doc-accessibility-check/merkle_root\", \"member_merkle_root\": \"9c605d6dc8c51d9d17decf784dfde5ebfab4aa868ebcd2fe6de62cab1b890652\"}, {\"slug\": \"game-economy-balance\", \"role\": \"member\", \"name\": \"游戏经济 数值平衡 顾问\", \"evidence\": \"original_assets/game-economy-balance/merkle_root\", \"member_merkle_root\": \"3b998db374ca4534ed6b2fbadd21a38fcbfc209787e6230f514169156d8fbb66\"}, {\"slug\": \"color-system-build\", \"role\": \"member\", \"name\": \"配色系统构建 顾问\", \"evidence\": \"original_assets/color-system-build/merkle_root\", \"member_merkle_root\": \"aac72d98398efe04ca86e82416b0d271d70d7c19fcdaf0eac9335f98af229042\"}], \"team_lead\": \"doc-accessibility-check-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/color-system-build.md": "363015d39ce9bfc7c245cd77b1ad2b9976dc9617a11f3a8f08c9ba578c786959",
+    "agents/doc-accessibility-check-team-lead.md": "805c5fe88dbdff7a94e1c99d1e8faa0a4c87187b3b2483a7c828d41775a01100",
+    "agents/doc-accessibility-check.md": "0f0b61e3aa7097842143e29967b68e3ce065a6c4c1ae8cfe27eed7b2049d4aba",
+    "agents/game-economy-balance.md": "96cbfd2629b298ab7a2b2c81aa168448b5cfce005e35a1f6bbcf8756c8eac9a7",
+    "plugin.json": "11628fab64247ed3a9d8a84a46af0dc64b0c937aab3300e85122554fcff7a292",
+    "settings.json": "6d43b912a92e9a85a3ba41c467456e864e37c3274466d12056bd56e7ef7876fc"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-829",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-829",
+    "kind": "team",
+    "name": "校对审阅错漏检出专家",
+    "description": "输入校对审阅相关需求，输出文档转换、格式迁移、内容保真三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-convert-pro-01-team-lead",
+        "role": "lead",
+        "name": "文档转换主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-convert-pro-01",
+        "role": "member",
+        "name": "文档转换 视觉美化 文本抽取",
+        "evidence": "original_assets/doc-convert-pro-01/merkle_root",
+        "member_merkle_root": "9362b55e4465cd7963b61551d1ad4010424d36e840b4cca9ee63fb71f9de6189"
+      },
+      {
+        "slug": "knowledge-base-pro",
+        "role": "member",
+        "name": "文档建站 知识库搭建",
+        "evidence": "original_assets/knowledge-base-pro/merkle_root",
+        "member_merkle_root": "114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9"
+      },
+      {
+        "slug": "proofread-pro",
+        "role": "member",
+        "name": "校对审阅 错漏检出 顾问",
+        "evidence": "original_assets/proofread-pro/merkle_root",
+        "member_merkle_root": "5260e28db683c4c169aa1a8a95c1c05af3cd3bc194be4e87ee7c2418d07e4f4c"
+      }
+    ],
+    "team_lead": "doc-convert-pro-01-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "487797a37c45c1ae",
+  "prompt_hash": "704ab62225c1fe88",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-829\", \"kind\": \"team\", \"name\": \"校对审阅错漏检出专家\", \"description\": \"输入校对审阅相关需求，输出文档转换、格式迁移、内容保真三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-convert-pro-01-team-lead\", \"role\": \"lead\", \"name\": \"文档转换主理人\", \"evidence\": null}, {\"slug\": \"doc-convert-pro-01\", \"role\": \"member\", \"name\": \"文档转换 视觉美化 文本抽取\", \"evidence\": \"original_assets/doc-convert-pro-01/merkle_root\", \"member_merkle_root\": \"9362b55e4465cd7963b61551d1ad4010424d36e840b4cca9ee63fb71f9de6189\"}, {\"slug\": \"knowledge-base-pro\", \"role\": \"member\", \"name\": \"文档建站 知识库搭建\", \"evidence\": \"original_assets/knowledge-base-pro/merkle_root\", \"member_merkle_root\": \"114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9\"}, {\"slug\": \"proofread-pro\", \"role\": \"member\", \"name\": \"校对审阅 错漏检出 顾问\", \"evidence\": \"original_assets/proofread-pro/merkle_root\", \"member_merkle_root\": \"5260e28db683c4c169aa1a8a95c1c05af3cd3bc194be4e87ee7c2418d07e4f4c\"}], \"team_lead\": \"doc-convert-pro-01-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-convert-pro-01-team-lead.md": "4fa8e8142228da96ec39bae95e3e7cb2126569dd2bc5f3b06dd66deb6288d0e1",
+    "agents/doc-convert-pro-01.md": "f8fcf05723834b84d03a0eb9e7e346216c589fbf69645944832c424056aee9b5",
+    "agents/knowledge-base-pro.md": "e261248921abb1f014546150930da4e018c0e4971c3c96fac49b25c26810900e",
+    "agents/proofread-pro.md": "89d8ccc093ca882f805bc95e0d5f761e90fbc2d3b576c12ec40754c04ced7862",
+    "plugin.json": "0f0eac13f6b972ef55338fc0603b19d8f00bbbeb4f7b22a9e611f4bc7ed1434b",
+    "settings.json": "773dbd34287a3cf49d74a08305c64dacbf07a13503b89b297ff55875a68e4c17"
+  }
+}

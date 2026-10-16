@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1066",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1066",
+    "kind": "team",
+    "name": "风格指南构建专家",
+    "description": "擅长术语先定、句式规范与标点规范，覆盖风格指南构建全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "style-guide-build-team-lead",
+        "role": "lead",
+        "name": "风格指南构建主理人",
+        "evidence": null
+      },
+      {
+        "slug": "style-guide-build",
+        "role": "member",
+        "name": "风格指南构建 顾问",
+        "evidence": "original_assets/style-guide-build/merkle_root",
+        "member_merkle_root": "b24301d8ebec65392dce22a9141b60e324d15e1ce930928f70ac407c70819ce9"
+      },
+      {
+        "slug": "doc-index-rebuild",
+        "role": "member",
+        "name": "文档索引重建 助手",
+        "evidence": "original_assets/doc-index-rebuild/merkle_root",
+        "member_merkle_root": "22b289458ce1d87bb279873d29478cb5f42f9ab6b381c712e4e292c5630d8512"
+      },
+      {
+        "slug": "brand-voice-guide",
+        "role": "member",
+        "name": "品牌语气 规范手册 顾问",
+        "evidence": "original_assets/brand-voice-guide/merkle_root",
+        "member_merkle_root": "fe9b169e37b9d27d701b6b351135a29afb8011fa0b36cb37b73c8e2ab804b05d"
+      }
+    ],
+    "team_lead": "style-guide-build-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "019c6858605c9d7e",
+  "prompt_hash": "8065fe3afce06ebc",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1066\", \"kind\": \"team\", \"name\": \"风格指南构建专家\", \"description\": \"擅长术语先定、句式规范与标点规范，覆盖风格指南构建全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"style-guide-build-team-lead\", \"role\": \"lead\", \"name\": \"风格指南构建主理人\", \"evidence\": null}, {\"slug\": \"style-guide-build\", \"role\": \"member\", \"name\": \"风格指南构建 顾问\", \"evidence\": \"original_assets/style-guide-build/merkle_root\", \"member_merkle_root\": \"b24301d8ebec65392dce22a9141b60e324d15e1ce930928f70ac407c70819ce9\"}, {\"slug\": \"doc-index-rebuild\", \"role\": \"member\", \"name\": \"文档索引重建 助手\", \"evidence\": \"original_assets/doc-index-rebuild/merkle_root\", \"member_merkle_root\": \"22b289458ce1d87bb279873d29478cb5f42f9ab6b381c712e4e292c5630d8512\"}, {\"slug\": \"brand-voice-guide\", \"role\": \"member\", \"name\": \"品牌语气 规范手册 顾问\", \"evidence\": \"original_assets/brand-voice-guide/merkle_root\", \"member_merkle_root\": \"fe9b169e37b9d27d701b6b351135a29afb8011fa0b36cb37b73c8e2ab804b05d\"}], \"team_lead\": \"style-guide-build-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/brand-voice-guide.md": "7bfdf6264de7801aac7fa5d0585bb42529e11555cbc21f5687d622bb824b440a",
+    "agents/doc-index-rebuild.md": "44f2f55a9c208f291a8713c3357a63dbd991502bc8393391eb4ae29d2efb9cbe",
+    "agents/style-guide-build-team-lead.md": "7ee5ed8cc6c93cafc66c2b96b7be83c6fe6486b48a04201ce6e2dde22baaea03",
+    "agents/style-guide-build.md": "06b6fab371f4092bfc5b2d49826c6219cf6a3290f1a71ff2596f6af9276d209e",
+    "plugin.json": "6f9b594aa7444626bfd6dbd6d63ca90cabd04aa3348e4003b7346e251c22d574",
+    "settings.json": "8d1e6e8300dc09210203582033b45ddb11c8da46611abc08cdc381d76faf3bc3"
+  }
+}

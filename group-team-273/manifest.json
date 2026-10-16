@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-273",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-273",
+    "kind": "team",
+    "name": "数据迁移专家",
+    "description": "输入数据迁移相关需求，输出灰度迁移、回滚预案、双跑对比三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-migration-audit-team-lead",
+        "role": "lead",
+        "name": "数据迁移主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-migration-audit",
+        "role": "member",
+        "name": "数据迁移 完整性校 顾问",
+        "evidence": "original_assets/data-migration-audit/merkle_root",
+        "member_merkle_root": "30652e6494ae4a6e7dbaace7bf9b590dc8838580df78ff06178b3ebca6fc35f0"
+      },
+      {
+        "slug": "ocr-quality-pro",
+        "role": "member",
+        "name": "识别质量 结果校验 顾问",
+        "evidence": "original_assets/ocr-quality-pro/merkle_root",
+        "member_merkle_root": "891b298786262e46d93a24632267e91e41192757813be416bb60be8e006b0bff"
+      },
+      {
+        "slug": "data-quality-gate",
+        "role": "member",
+        "name": "数据质量 校验规则 顾问",
+        "evidence": "original_assets/data-quality-gate/merkle_root",
+        "member_merkle_root": "ac7676330f4c1a40ecd62d6fd18816a6976e6ce79951d0205a62324775661c2d"
+      }
+    ],
+    "team_lead": "data-migration-audit-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e9f7fea59bf67d47",
+  "prompt_hash": "e2609754eb62a5e2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-273\", \"kind\": \"team\", \"name\": \"数据迁移专家\", \"description\": \"输入数据迁移相关需求，输出灰度迁移、回滚预案、双跑对比三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-migration-audit-team-lead\", \"role\": \"lead\", \"name\": \"数据迁移主理人\", \"evidence\": null}, {\"slug\": \"data-migration-audit\", \"role\": \"member\", \"name\": \"数据迁移 完整性校 顾问\", \"evidence\": \"original_assets/data-migration-audit/merkle_root\", \"member_merkle_root\": \"30652e6494ae4a6e7dbaace7bf9b590dc8838580df78ff06178b3ebca6fc35f0\"}, {\"slug\": \"ocr-quality-pro\", \"role\": \"member\", \"name\": \"识别质量 结果校验 顾问\", \"evidence\": \"original_assets/ocr-quality-pro/merkle_root\", \"member_merkle_root\": \"891b298786262e46d93a24632267e91e41192757813be416bb60be8e006b0bff\"}, {\"slug\": \"data-quality-gate\", \"role\": \"member\", \"name\": \"数据质量 校验规则 顾问\", \"evidence\": \"original_assets/data-quality-gate/merkle_root\", \"member_merkle_root\": \"ac7676330f4c1a40ecd62d6fd18816a6976e6ce79951d0205a62324775661c2d\"}], \"team_lead\": \"data-migration-audit-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-migration-audit-team-lead.md": "c4d3f83518dcc5d6750f9a24325142f1216f2a4089ceb789336b8a7acefc801b",
+    "agents/data-migration-audit.md": "05cde10fbd27310669db30094e90e316c42b41a4ec142929598f918cf4c4abd4",
+    "agents/data-quality-gate.md": "d88f7a532143a47fd990fb5870972121ac3fe0d3d2fa81fe2efb04f579707c0f",
+    "agents/ocr-quality-pro.md": "3c142a3b186d1d92fa408f7ccaf9c85f0ee7f7e1554b08012aca82b5b0650d79",
+    "plugin.json": "67d0aa1e62b8768b0acf60625bcc45f386ff8c359f49a2de0b43db4ddae39829",
+    "settings.json": "7745a76653bbe0520bf40c117c3993240f3f4a7b07fced7d43fe37f1f0d23a59"
+  }
+}

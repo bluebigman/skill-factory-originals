@@ -1,0 +1,126 @@
+{
+  "agentName": "pricing-page-ux-team-lead",
+  "agents": [
+    "./agents/pricing-page-ux-team-lead.md",
+    "./agents/pricing-page-ux.md",
+    "./agents/ui-game-hud.md",
+    "./agents/virtual-space-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 定价页面",
+    "zh": "帮我处理定价页面"
+  },
+  "description": "pricing-page-ux team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 定价页面 requirements, output three deliverables: 维度对齐, 推荐克制, 价格透明. Verifiable end-to-end, evidence per step.",
+    "zh": "输入定价页面相关需求，输出维度对齐、推荐克制、价格透明三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "pricing-page-ux Team",
+    "zh": "游戏界面专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "pricing-page-ux-team-lead",
+      "name": {
+        "en": "定价页面主理人",
+        "zh": "定价页面主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/pricing-page-ux.png",
+      "id": "pricing-page-ux",
+      "name": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "profession": {
+        "en": "pricing-page-ux",
+        "zh": "定价页面 表达清晰 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-game-hud.png",
+      "id": "ui-game-hud",
+      "name": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "profession": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/virtual-space-pro.png",
+      "id": "virtual-space-pro",
+      "name": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "profession": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1059",
+  "plugin": "group-team-1059",
+  "profession": {
+    "en": "pricing-page-ux Collaboration Team",
+    "zh": "游戏界面专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 定价页面",
+      "zh": "帮我处理定价页面"
+    },
+    {
+      "en": "Plan 游戏界面",
+      "zh": "帮我规划游戏界面"
+    },
+    {
+      "en": "Review 虚拟空间",
+      "zh": "帮我检查虚拟空间"
+    }
+  ],
+  "tags": [
+    {
+      "en": "推荐克制",
+      "zh": "推荐克制"
+    },
+    {
+      "en": "价格透明",
+      "zh": "价格透明"
+    },
+    {
+      "en": "疑虑前置",
+      "zh": "疑虑前置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "pricing-page-ux-team-lead",
+    "memberAgents": [
+      "pricing-page-ux",
+      "ui-game-hud",
+      "virtual-space-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

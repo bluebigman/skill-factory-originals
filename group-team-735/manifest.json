@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085733",
+  "slug": "group-team-735",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-735",
+    "kind": "team",
+    "name": "数据一致多源校验专家",
+    "description": "擅长单一真值、多源校验与冲突策略，覆盖数据一致全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-consistency-pro-team-lead",
+        "role": "lead",
+        "name": "数据一致主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-consistency-pro",
+        "role": "member",
+        "name": "数据一致 多源校验 顾问",
+        "evidence": "original_assets/data-consistency-pro/merkle_root",
+        "member_merkle_root": "8dfcd876d2fb3ebeb0924f66463ea8b99ede18b9775d8ecb8f24c7639c181bc5"
+      },
+      {
+        "slug": "agent-workspace-expert",
+        "role": "member",
+        "name": "智能体配置 记忆管理",
+        "evidence": "original_assets/agent-workspace-expert/merkle_root",
+        "member_merkle_root": "27c50a6600291068168073c6daeca8d076e484cb51d32d261c6cd34a710660e5"
+      },
+      {
+        "slug": "data-clean-pro-08-fixed",
+        "role": "member",
+        "name": "数据整形 结构化转换 格式定制",
+        "evidence": "original_assets/data-clean-pro-08-fixed/merkle_root",
+        "member_merkle_root": "dffaee75c9595409db6990114fe16a2cbd7e169cd25b0b55d36be407f9ca0e09"
+      }
+    ],
+    "team_lead": "data-consistency-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "bf5e8659abe3ada1",
+  "prompt_hash": "87b8e724c4d13c6e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-735\", \"kind\": \"team\", \"name\": \"数据一致多源校验专家\", \"description\": \"擅长单一真值、多源校验与冲突策略，覆盖数据一致全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-consistency-pro-team-lead\", \"role\": \"lead\", \"name\": \"数据一致主理人\", \"evidence\": null}, {\"slug\": \"data-consistency-pro\", \"role\": \"member\", \"name\": \"数据一致 多源校验 顾问\", \"evidence\": \"original_assets/data-consistency-pro/merkle_root\", \"member_merkle_root\": \"8dfcd876d2fb3ebeb0924f66463ea8b99ede18b9775d8ecb8f24c7639c181bc5\"}, {\"slug\": \"agent-workspace-expert\", \"role\": \"member\", \"name\": \"智能体配置 记忆管理\", \"evidence\": \"original_assets/agent-workspace-expert/merkle_root\", \"member_merkle_root\": \"27c50a6600291068168073c6daeca8d076e484cb51d32d261c6cd34a710660e5\"}, {\"slug\": \"data-clean-pro-08-fixed\", \"role\": \"member\", \"name\": \"数据整形 结构化转换 格式定制\", \"evidence\": \"original_assets/data-clean-pro-08-fixed/merkle_root\", \"member_merkle_root\": \"dffaee75c9595409db6990114fe16a2cbd7e169cd25b0b55d36be407f9ca0e09\"}], \"team_lead\": \"data-consistency-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-workspace-expert.md": "582815c28e819192e23c49ca1ccac8a719792af6a1a91b19087cabf362502c25",
+    "agents/data-clean-pro-08-fixed.md": "65448b27fd4d8a79db219be199742d0365281953cc17b6dad074e47464b35f3b",
+    "agents/data-consistency-pro-team-lead.md": "a463a5365c313c11d6f653478323ba8f206f2275a1a96d31cfad2145e7c9cade",
+    "agents/data-consistency-pro.md": "16b78666bf987251b71ba5eeb858482851a86bb571731ee797d5bf4440ad83ba",
+    "plugin.json": "b8adfd3b959d30387f2e043e04c67b38ee8d48fbf4c20b426bc92b25d629f40a",
+    "settings.json": "6fb8aa923529c76d4a927778d65b211c7506653bd03b3a885ac3c592650b3fa3"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-179",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-179",
+    "kind": "team",
+    "name": "数据 整理 叙事 行情 团队",
+    "description": "数据 整理 叙事 行情 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "toolkit-pro-04-fixed-team-lead",
+        "role": "lead",
+        "name": "数据整理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "toolkit-pro-04-fixed",
+        "role": "member",
+        "name": "数据整理 清洗转换 批量模板",
+        "evidence": "original_assets/toolkit-pro-04-fixed/merkle_root",
+        "member_merkle_root": "e802ea3ab096b1004ffd8a891e32426c02453351e0e20c47888a8284988cfe1a"
+      },
+      {
+        "slug": "toolkit-pro-05-fixed",
+        "role": "member",
+        "name": "数据叙事 构建配置 批量处理",
+        "evidence": "original_assets/toolkit-pro-05-fixed/merkle_root",
+        "member_merkle_root": "a75d4d312a1949ded7c7421cc5df2e73d7afaaddbf6beb1137fc830948477013"
+      },
+      {
+        "slug": "toolkit-pro-07-fixed",
+        "role": "member",
+        "name": "行情研判 收入筹划 图像比对",
+        "evidence": "original_assets/toolkit-pro-07-fixed/merkle_root",
+        "member_merkle_root": "f069129cb8c47b3acee22d306f7a8a9bbabf0c5b2b5fa1d0a0d2c1586628d82f"
+      }
+    ],
+    "team_lead": "toolkit-pro-04-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "865f8859293ccb15",
+  "prompt_hash": "888093a1c33c515a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-179\", \"kind\": \"team\", \"name\": \"数据 整理 叙事 行情 团队\", \"description\": \"数据 整理 叙事 行情 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"toolkit-pro-04-fixed-team-lead\", \"role\": \"lead\", \"name\": \"数据整理主理人\", \"evidence\": null}, {\"slug\": \"toolkit-pro-04-fixed\", \"role\": \"member\", \"name\": \"数据整理 清洗转换 批量模板\", \"evidence\": \"original_assets/toolkit-pro-04-fixed/merkle_root\", \"member_merkle_root\": \"e802ea3ab096b1004ffd8a891e32426c02453351e0e20c47888a8284988cfe1a\"}, {\"slug\": \"toolkit-pro-05-fixed\", \"role\": \"member\", \"name\": \"数据叙事 构建配置 批量处理\", \"evidence\": \"original_assets/toolkit-pro-05-fixed/merkle_root\", \"member_merkle_root\": \"a75d4d312a1949ded7c7421cc5df2e73d7afaaddbf6beb1137fc830948477013\"}, {\"slug\": \"toolkit-pro-07-fixed\", \"role\": \"member\", \"name\": \"行情研判 收入筹划 图像比对\", \"evidence\": \"original_assets/toolkit-pro-07-fixed/merkle_root\", \"member_merkle_root\": \"f069129cb8c47b3acee22d306f7a8a9bbabf0c5b2b5fa1d0a0d2c1586628d82f\"}], \"team_lead\": \"toolkit-pro-04-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/toolkit-pro-04-fixed-team-lead.md": "65b805085b07ee7823b8000ede0ae39b0a98707508e7c9177fc6adcb231efe69",
+    "agents/toolkit-pro-04-fixed.md": "383d6a0ff8482a9d6d4109ff3013767c54b1d3a865c34a0ab056873173ef6196",
+    "agents/toolkit-pro-05-fixed.md": "c520331b7072e1038dba7de351d0130daf1cc09c0ebac4617115f3d7867531c2",
+    "agents/toolkit-pro-07-fixed.md": "76ae26182c60bd30494aafe4d7ba253932cd65ff9bb01cdb3254fdf463f39ad5",
+    "plugin.json": "f1fe9df13c4e7f1f0840dcb056a7d7d27b6b50e743690dab64b0a24f6f0b7276",
+    "settings.json": "d8e922f7e64136036f009d3244a26234f2faa93404833be241d47f8fb38f2b4a"
+  }
+}

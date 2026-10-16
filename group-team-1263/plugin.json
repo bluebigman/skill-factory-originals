@@ -1,0 +1,126 @@
+{
+  "agentName": "global-payment-ops-team-lead",
+  "agents": [
+    "./agents/global-payment-ops-team-lead.md",
+    "./agents/global-payment-ops.md",
+    "./agents/knowledge-contribution.md",
+    "./agents/requirement-clarify-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 跨境收款",
+    "zh": "帮我处理跨境收款"
+  },
+  "description": "global-payment-ops team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 跨境收款 requirements, output three deliverables: 通道合规, 费用透明, 汇率口径. Verifiable end-to-end, evidence per step.",
+    "zh": "输入跨境收款相关需求，输出通道合规、费用透明、汇率口径三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "global-payment-ops Team",
+    "zh": "跨境收款专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "global-payment-ops-team-lead",
+      "name": {
+        "en": "跨境收款主理人",
+        "zh": "跨境收款主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/global-payment-ops.png",
+      "id": "global-payment-ops",
+      "name": {
+        "en": "global-payment-ops",
+        "zh": "跨境收款 流程核对 顾问"
+      },
+      "profession": {
+        "en": "global-payment-ops",
+        "zh": "跨境收款 流程核对 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/knowledge-contribution.png",
+      "id": "knowledge-contribution",
+      "name": {
+        "en": "knowledge-contribution",
+        "zh": "知识贡献机制 顾问"
+      },
+      "profession": {
+        "en": "knowledge-contribution",
+        "zh": "知识贡献机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/requirement-clarify-pro.png",
+      "id": "requirement-clarify-pro",
+      "name": {
+        "en": "requirement-clarify-pro",
+        "zh": "需求澄清 边界确认 顾问"
+      },
+      "profession": {
+        "en": "requirement-clarify-pro",
+        "zh": "需求澄清 边界确认 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1263",
+  "plugin": "group-team-1263",
+  "profession": {
+    "en": "global-payment-ops Collaboration Team",
+    "zh": "跨境收款专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 跨境收款",
+      "zh": "帮我处理跨境收款"
+    },
+    {
+      "en": "Plan 知识贡献机制",
+      "zh": "帮我规划知识贡献机制"
+    },
+    {
+      "en": "Review 需求澄清",
+      "zh": "帮我检查需求澄清"
+    }
+  ],
+  "tags": [
+    {
+      "en": "通道合规",
+      "zh": "通道合规"
+    },
+    {
+      "en": "费用透明",
+      "zh": "费用透明"
+    },
+    {
+      "en": "汇率口径",
+      "zh": "汇率口径"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "global-payment-ops-team-lead",
+    "memberAgents": [
+      "global-payment-ops",
+      "knowledge-contribution",
+      "requirement-clarify-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

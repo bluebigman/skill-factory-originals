@@ -1,0 +1,126 @@
+{
+  "agentName": "brand-tone-guide-team-lead",
+  "agents": [
+    "./agents/brand-tone-guide-team-lead.md",
+    "./agents/brand-tone-guide.md",
+    "./agents/content-brief-write.md",
+    "./agents/public-relations.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 品牌语气指南",
+    "zh": "帮我处理品牌语气指南"
+  },
+  "description": "brand-tone-guide team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 品牌语气指南, covers 先定语气 / 双语对齐 / 拒绝直译, delivering structured results and actionable checklists.",
+    "zh": "品牌语气指南专家：围绕品牌语气指南，覆盖先定语气／双语对齐／拒绝直译，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "brand-tone-guide Team",
+    "zh": "品牌语气指南专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "brand-tone-guide-team-lead",
+      "name": {
+        "en": "品牌语气指南主理人",
+        "zh": "品牌语气指南主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/brand-tone-guide.png",
+      "id": "brand-tone-guide",
+      "name": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "profession": {
+        "en": "brand-tone-guide",
+        "zh": "品牌语气指南 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-brief-write.png",
+      "id": "content-brief-write",
+      "name": {
+        "en": "content-brief-write",
+        "zh": "内容需求文档 助手"
+      },
+      "profession": {
+        "en": "content-brief-write",
+        "zh": "内容需求文档 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/public-relations.png",
+      "id": "public-relations",
+      "name": {
+        "en": "public-relations",
+        "zh": "公关传播 顾问"
+      },
+      "profession": {
+        "en": "public-relations",
+        "zh": "公关传播 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1091",
+  "plugin": "group-team-1091",
+  "profession": {
+    "en": "brand-tone-guide Collaboration Team",
+    "zh": "品牌语气指南专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 品牌语气指南",
+      "zh": "帮我处理品牌语气指南"
+    },
+    {
+      "en": "Plan 内容需求文档",
+      "zh": "帮我规划内容需求文档"
+    },
+    {
+      "en": "Review 公关传播",
+      "zh": "帮我检查公关传播"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定语气",
+      "zh": "先定语气"
+    },
+    {
+      "en": "双语对齐",
+      "zh": "双语对齐"
+    },
+    {
+      "en": "拒绝直译",
+      "zh": "拒绝直译"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "brand-tone-guide-team-lead",
+    "memberAgents": [
+      "brand-tone-guide",
+      "content-brief-write",
+      "public-relations"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1253",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1253",
+    "kind": "team",
+    "name": "内容合规专家",
+    "description": "内容合规专家：围绕内容合规，覆盖红线清单／全量扫描／风险分级，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "content-compliance-pro-team-lead",
+        "role": "lead",
+        "name": "内容合规主理人",
+        "evidence": null
+      },
+      {
+        "slug": "content-compliance-pro",
+        "role": "member",
+        "name": "内容合规 红线识别 顾问",
+        "evidence": "original_assets/content-compliance-pro/merkle_root",
+        "member_merkle_root": "9dd80bb8fb6091a01122a9f1d50c7e0003b891869315e50d6d2d85966a5751d7"
+      },
+      {
+        "slug": "doc-knowledge-builder-pro",
+        "role": "member",
+        "name": "长文档 章节拆解 要点提取",
+        "evidence": "original_assets/doc-knowledge-builder-pro/merkle_root",
+        "member_merkle_root": "c2ed5143020ac35bac8f0b908d28365853d91b7ea9d11ce24674d30b2ce6bdc4"
+      },
+      {
+        "slug": "network-fault-tolerance",
+        "role": "member",
+        "name": "网络容错设计 顾问",
+        "evidence": "original_assets/network-fault-tolerance/merkle_root",
+        "member_merkle_root": "dd7006f36eff8966eed2f8d4899ea36291b2de46d561c348a426eb941b33f37d"
+      }
+    ],
+    "team_lead": "content-compliance-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b55ef17016ad89fd",
+  "prompt_hash": "e1a6044b163de187",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1253\", \"kind\": \"team\", \"name\": \"内容合规专家\", \"description\": \"内容合规专家：围绕内容合规，覆盖红线清单／全量扫描／风险分级，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"content-compliance-pro-team-lead\", \"role\": \"lead\", \"name\": \"内容合规主理人\", \"evidence\": null}, {\"slug\": \"content-compliance-pro\", \"role\": \"member\", \"name\": \"内容合规 红线识别 顾问\", \"evidence\": \"original_assets/content-compliance-pro/merkle_root\", \"member_merkle_root\": \"9dd80bb8fb6091a01122a9f1d50c7e0003b891869315e50d6d2d85966a5751d7\"}, {\"slug\": \"doc-knowledge-builder-pro\", \"role\": \"member\", \"name\": \"长文档 章节拆解 要点提取\", \"evidence\": \"original_assets/doc-knowledge-builder-pro/merkle_root\", \"member_merkle_root\": \"c2ed5143020ac35bac8f0b908d28365853d91b7ea9d11ce24674d30b2ce6bdc4\"}, {\"slug\": \"network-fault-tolerance\", \"role\": \"member\", \"name\": \"网络容错设计 顾问\", \"evidence\": \"original_assets/network-fault-tolerance/merkle_root\", \"member_merkle_root\": \"dd7006f36eff8966eed2f8d4899ea36291b2de46d561c348a426eb941b33f37d\"}], \"team_lead\": \"content-compliance-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/content-compliance-pro-team-lead.md": "99f8525221dcf7f22d180b588a8c2f0f8b196c3a3c3f6c5b0a9d4a953f592934",
+    "agents/content-compliance-pro.md": "1262122a07775c91cad8082647b78b45fff17057ec3eae7f7db8ae2ad79a4a91",
+    "agents/doc-knowledge-builder-pro.md": "8095e732893b789a18eba983ed75707d09df43e9b4dbbb3ffcbafbf789ba3d49",
+    "agents/network-fault-tolerance.md": "3b5e1a4899fe9156b4b2806d3bd61b698cdb36dc5114a4878687c00901592018",
+    "plugin.json": "f28a95d8d4f9e7bd6ed4d96419e3b954cb4a9b1c2d0e627fdb3fba5cee1423bb",
+    "settings.json": "7aee58b2cb0901ef57b2f0615136a158ed93034546fe06629d4fa0d2e49fd8eb"
+  }
+}

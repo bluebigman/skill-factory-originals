@@ -1,0 +1,126 @@
+{
+  "agentName": "handoff-design-dev-team-lead",
+  "agents": [
+    "./agents/handoff-design-dev-team-lead.md",
+    "./agents/handoff-design-dev.md",
+    "./agents/notification-design.md",
+    "./agents/prototype-method.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 设计交付",
+    "zh": "帮我处理设计交付"
+  },
+  "description": "handoff-design-dev team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 设计交付 end-to-end: 标注齐全, 边界说明 and 资产规范. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长标注齐全、边界说明与资产规范，覆盖设计交付全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "handoff-design-dev Team",
+    "zh": "通知设计顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "handoff-design-dev-team-lead",
+      "name": {
+        "en": "设计交付主理人",
+        "zh": "设计交付主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/handoff-design-dev.png",
+      "id": "handoff-design-dev",
+      "name": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "profession": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/notification-design.png",
+      "id": "notification-design",
+      "name": {
+        "en": "notification-design",
+        "zh": "通知设计 顾问"
+      },
+      "profession": {
+        "en": "notification-design",
+        "zh": "通知设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prototype-method.png",
+      "id": "prototype-method",
+      "name": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "profession": {
+        "en": "prototype-method",
+        "zh": "原型验证 保真度 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1075",
+  "plugin": "group-team-1075",
+  "profession": {
+    "en": "handoff-design-dev Collaboration Team",
+    "zh": "通知设计顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 设计交付",
+      "zh": "帮我处理设计交付"
+    },
+    {
+      "en": "Plan 通知设计",
+      "zh": "帮我规划通知设计"
+    },
+    {
+      "en": "Review 原型验证",
+      "zh": "帮我检查原型验证"
+    }
+  ],
+  "tags": [
+    {
+      "en": "边界说明",
+      "zh": "边界说明"
+    },
+    {
+      "en": "资产规范",
+      "zh": "资产规范"
+    },
+    {
+      "en": "上线走查",
+      "zh": "上线走查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "handoff-design-dev-team-lead",
+    "memberAgents": [
+      "handoff-design-dev",
+      "notification-design",
+      "prototype-method"
+    ]
+  },
+  "version": "1.0.0"
+}

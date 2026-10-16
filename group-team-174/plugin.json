@@ -1,0 +1,126 @@
+{
+  "agentName": "academic-expert-team-lead",
+  "agents": [
+    "./agents/academic-expert-team-lead.md",
+    "./agents/academic-expert.md",
+    "./agents/voice-note-organize.md",
+    "./agents/habit-streak-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 学术写作",
+    "zh": "帮我处理学术写作"
+  },
+  "description": "Scholar team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "学术 语音 习惯 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Scholar Team",
+    "zh": "学术 语音 习惯 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "academic-expert-team-lead",
+      "name": {
+        "en": "学术写作主理人",
+        "zh": "学术写作主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/academic-expert.png",
+      "id": "academic-expert",
+      "name": {
+        "en": "Scholar",
+        "zh": "学术写作 文献综述 格式规范"
+      },
+      "profession": {
+        "en": "Scholar",
+        "zh": "学术写作 文献综述 格式规范"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/voice-note-organize.png",
+      "id": "voice-note-organize",
+      "name": {
+        "en": "Voice Note Organize",
+        "zh": "语音笔记 转写归档 助手"
+      },
+      "profession": {
+        "en": "Voice Note Organize",
+        "zh": "语音笔记 转写归档 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/habit-streak-coach.png",
+      "id": "habit-streak-coach",
+      "name": {
+        "en": "Habit Streak Coach",
+        "zh": "习惯打卡 连续性 助手"
+      },
+      "profession": {
+        "en": "Habit Streak Coach",
+        "zh": "习惯打卡 连续性 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-174",
+  "plugin": "group-team-174",
+  "profession": {
+    "en": "Scholar Collaboration Team",
+    "zh": "学术 语音 习惯 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 学术写作",
+      "zh": "帮我处理学术写作"
+    },
+    {
+      "en": "Plan 语音笔记",
+      "zh": "帮我规划语音笔记"
+    },
+    {
+      "en": "Review 习惯打卡",
+      "zh": "帮我检查习惯打卡"
+    }
+  ],
+  "tags": [
+    {
+      "en": "学术写作",
+      "zh": "学术写作"
+    },
+    {
+      "en": "语音笔记",
+      "zh": "语音笔记"
+    },
+    {
+      "en": "习惯打卡",
+      "zh": "习惯打卡"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "academic-expert-team-lead",
+    "memberAgents": [
+      "academic-expert",
+      "voice-note-organize",
+      "habit-streak-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

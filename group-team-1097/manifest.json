@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1097",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1097",
+    "kind": "team",
+    "name": "构建缓存策略专家",
+    "description": "构建缓存策略专家：围绕构建缓存策略，覆盖内容哈希／失效策略／远程缓存，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "build-cache-team-lead",
+        "role": "lead",
+        "name": "构建缓存策略主理人",
+        "evidence": null
+      },
+      {
+        "slug": "build-cache",
+        "role": "member",
+        "name": "构建缓存策略 顾问",
+        "evidence": "original_assets/build-cache/merkle_root",
+        "member_merkle_root": "3a4ef2ea4cbdc6decef51cc6fa7f088122bca85fc0b1d15928c8c9fe49f114e0"
+      },
+      {
+        "slug": "branch-protect",
+        "role": "member",
+        "name": "分支保护策略 顾问",
+        "evidence": "original_assets/branch-protect/merkle_root",
+        "member_merkle_root": "747d68da0bb03315b6b62f2e9300bc7cd50472f36675aadc666a9ba42e9c7f8b"
+      },
+      {
+        "slug": "secure-code-review",
+        "role": "member",
+        "name": "安全编码评审 顾问",
+        "evidence": "original_assets/secure-code-review/merkle_root",
+        "member_merkle_root": "e1bed5700da402ed6bcd279d33f5b9e940c15a2319f95294d3a185e713235c9f"
+      }
+    ],
+    "team_lead": "build-cache-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "cfc8ea3bf4e32690",
+  "prompt_hash": "00aca24005e6b320",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1097\", \"kind\": \"team\", \"name\": \"构建缓存策略专家\", \"description\": \"构建缓存策略专家：围绕构建缓存策略，覆盖内容哈希／失效策略／远程缓存，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"build-cache-team-lead\", \"role\": \"lead\", \"name\": \"构建缓存策略主理人\", \"evidence\": null}, {\"slug\": \"build-cache\", \"role\": \"member\", \"name\": \"构建缓存策略 顾问\", \"evidence\": \"original_assets/build-cache/merkle_root\", \"member_merkle_root\": \"3a4ef2ea4cbdc6decef51cc6fa7f088122bca85fc0b1d15928c8c9fe49f114e0\"}, {\"slug\": \"branch-protect\", \"role\": \"member\", \"name\": \"分支保护策略 顾问\", \"evidence\": \"original_assets/branch-protect/merkle_root\", \"member_merkle_root\": \"747d68da0bb03315b6b62f2e9300bc7cd50472f36675aadc666a9ba42e9c7f8b\"}, {\"slug\": \"secure-code-review\", \"role\": \"member\", \"name\": \"安全编码评审 顾问\", \"evidence\": \"original_assets/secure-code-review/merkle_root\", \"member_merkle_root\": \"e1bed5700da402ed6bcd279d33f5b9e940c15a2319f95294d3a185e713235c9f\"}], \"team_lead\": \"build-cache-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/branch-protect.md": "7446299a0cc0f667fca3b35cf6460903bfbf828dcb847da2872e4334081ae0fd",
+    "agents/build-cache-team-lead.md": "8d8a237a1c86cd8204c19dc4357dba19f403ff0dbf5e6dd534c72c9603deb25f",
+    "agents/build-cache.md": "0ba824d5002b0ba584c8bd25145b282a94ddb57375e789f90791d2611e3510d4",
+    "agents/secure-code-review.md": "c05de011c2e3fbb7aaa31a032aa8ff6a3310ee243fd60420d712ab5c7eaef1b2",
+    "plugin.json": "f3c8532cccf67cbda39d6b4280ccbd3c50bea910162785be1f57f46744a32fc3",
+    "settings.json": "229fb45dba2f8dc8a6152cad3881afeb2e420aa1ab967c3b3d4bb9f9cae7c482"
+  }
+}

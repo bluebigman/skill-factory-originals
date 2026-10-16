@@ -1,0 +1,126 @@
+{
+  "agentName": "code-assist-pro-fixed-team-lead",
+  "agents": [
+    "./agents/code-assist-pro-fixed-team-lead.md",
+    "./agents/code-assist-pro-fixed.md",
+    "./agents/code-assist-pro-02.md",
+    "./agents/ops-deploy-pro-01.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle BDD测试",
+    "zh": "帮我处理BDD测试"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "测试 路由 部署 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "测试 路由 部署 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "code-assist-pro-fixed-team-lead",
+      "name": {
+        "en": "BDD测试主理人",
+        "zh": "BDD测试主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-fixed.png",
+      "id": "code-assist-pro-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "BDD测试 性能剖析 快速交付"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "BDD测试 性能剖析 快速交付"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/code-assist-pro-02.png",
+      "id": "code-assist-pro-02",
+      "name": {
+        "en": "代码开发辅助 Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "profession": {
+        "en": "代码开发辅助 Suite",
+        "zh": "Web路由设计 任务拆解"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro-01.png",
+      "id": "ops-deploy-pro-01",
+      "name": {
+        "en": "运维与部署 Suite",
+        "zh": "部署配置"
+      },
+      "profession": {
+        "en": "运维与部署 Suite",
+        "zh": "部署配置"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-196",
+  "plugin": "group-team-196",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "测试 路由 部署 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle BDD测试",
+      "zh": "帮我处理BDD测试"
+    },
+    {
+      "en": "Plan Web路由设计",
+      "zh": "帮我规划Web路由设计"
+    },
+    {
+      "en": "Review 部署配置",
+      "zh": "帮我检查部署配置"
+    }
+  ],
+  "tags": [
+    {
+      "en": "BDD测试",
+      "zh": "BDD测试"
+    },
+    {
+      "en": "Web路由设计",
+      "zh": "Web路由设计"
+    },
+    {
+      "en": "部署配置",
+      "zh": "部署配置"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "code-assist-pro-fixed-team-lead",
+    "memberAgents": [
+      "code-assist-pro-fixed",
+      "code-assist-pro-02",
+      "ops-deploy-pro-01"
+    ]
+  },
+  "version": "1.0.0"
+}

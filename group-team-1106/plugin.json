@@ -1,0 +1,126 @@
+{
+  "agentName": "code-owner-rule-team-lead",
+  "agents": [
+    "./agents/code-owner-rule-team-lead.md",
+    "./agents/code-owner-rule.md",
+    "./agents/shift-handover.md",
+    "./agents/contract-review-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 代码归属规则",
+    "zh": "帮我处理代码归属规则"
+  },
+  "description": "code-owner-rule team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 代码归属规则, covers 目录归属 / 评审必需 / 变更通知, delivering structured results and actionable checklists.",
+    "zh": "代码归属规则专家：围绕代码归属规则，覆盖目录归属／评审必需／变更通知，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "code-owner-rule Team",
+    "zh": "代码归属规则专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "code-owner-rule-team-lead",
+      "name": {
+        "en": "代码归属规则主理人",
+        "zh": "代码归属规则主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/code-owner-rule.png",
+      "id": "code-owner-rule",
+      "name": {
+        "en": "code-owner-rule",
+        "zh": "代码归属规则 顾问"
+      },
+      "profession": {
+        "en": "code-owner-rule",
+        "zh": "代码归属规则 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/shift-handover.png",
+      "id": "shift-handover",
+      "name": {
+        "en": "shift-handover",
+        "zh": "交接班管理 顾问"
+      },
+      "profession": {
+        "en": "shift-handover",
+        "zh": "交接班管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/contract-review-expert.png",
+      "id": "contract-review-expert",
+      "name": {
+        "en": "ClauseGuard",
+        "zh": "合同条款审查专家"
+      },
+      "profession": {
+        "en": "ClauseGuard",
+        "zh": "合同条款审阅与风险提醒专家"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1106",
+  "plugin": "group-team-1106",
+  "profession": {
+    "en": "code-owner-rule Collaboration Team",
+    "zh": "代码归属规则专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 代码归属规则",
+      "zh": "帮我处理代码归属规则"
+    },
+    {
+      "en": "Plan 交接班管理",
+      "zh": "帮我规划交接班管理"
+    },
+    {
+      "en": "Review 合同条款审阅与风险提醒专家",
+      "zh": "帮我检查合同条款审阅与风险提醒专家"
+    }
+  ],
+  "tags": [
+    {
+      "en": "目录归属",
+      "zh": "目录归属"
+    },
+    {
+      "en": "评审必需",
+      "zh": "评审必需"
+    },
+    {
+      "en": "变更通知",
+      "zh": "变更通知"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "code-owner-rule-team-lead",
+    "memberAgents": [
+      "code-owner-rule",
+      "shift-handover",
+      "contract-review-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

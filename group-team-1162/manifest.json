@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085720",
+  "slug": "group-team-1162",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1162",
+    "kind": "team",
+    "name": "数据边界专家",
+    "description": "擅长最小采集、范围控制与保留期限，覆盖数据边界全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-data-boundary-team-lead",
+        "role": "lead",
+        "name": "数据边界主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-data-boundary",
+        "role": "member",
+        "name": "数据边界 范围控制 顾问",
+        "evidence": "original_assets/agent-data-boundary/merkle_root",
+        "member_merkle_root": "cdf727347bd633bdebce2476e9df79cce87aff810fb4861b8a487652af19d248"
+      },
+      {
+        "slug": "data-retention-rule",
+        "role": "member",
+        "name": "数据保留策略 顾问",
+        "evidence": "original_assets/data-retention-rule/merkle_root",
+        "member_merkle_root": "05a616b44f725afc00df746c11b902fb4b16cfa8f667a970a4a7aadb2130dd27"
+      },
+      {
+        "slug": "data-catalog",
+        "role": "member",
+        "name": "数据目录建设 顾问",
+        "evidence": "original_assets/data-catalog/merkle_root",
+        "member_merkle_root": "f3d291e51590b35e56cc3a2cca76fe231210601782f42b7552ecfcbcb21d7a74"
+      }
+    ],
+    "team_lead": "agent-data-boundary-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fd05918eccbdb07b",
+  "prompt_hash": "ead22603050be366",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1162\", \"kind\": \"team\", \"name\": \"数据边界专家\", \"description\": \"擅长最小采集、范围控制与保留期限，覆盖数据边界全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-data-boundary-team-lead\", \"role\": \"lead\", \"name\": \"数据边界主理人\", \"evidence\": null}, {\"slug\": \"agent-data-boundary\", \"role\": \"member\", \"name\": \"数据边界 范围控制 顾问\", \"evidence\": \"original_assets/agent-data-boundary/merkle_root\", \"member_merkle_root\": \"cdf727347bd633bdebce2476e9df79cce87aff810fb4861b8a487652af19d248\"}, {\"slug\": \"data-retention-rule\", \"role\": \"member\", \"name\": \"数据保留策略 顾问\", \"evidence\": \"original_assets/data-retention-rule/merkle_root\", \"member_merkle_root\": \"05a616b44f725afc00df746c11b902fb4b16cfa8f667a970a4a7aadb2130dd27\"}, {\"slug\": \"data-catalog\", \"role\": \"member\", \"name\": \"数据目录建设 顾问\", \"evidence\": \"original_assets/data-catalog/merkle_root\", \"member_merkle_root\": \"f3d291e51590b35e56cc3a2cca76fe231210601782f42b7552ecfcbcb21d7a74\"}], \"team_lead\": \"agent-data-boundary-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-data-boundary-team-lead.md": "7ddf548f79e7f6d3e0fda28898baf24041535b6ea13b41dc2a39eea666ae5b03",
+    "agents/agent-data-boundary.md": "ac3e74592862cacb9f33e0ff2662af98de73b651e795bfb327dff60cd8b6572b",
+    "agents/data-catalog.md": "6dc7ca75cde459e86e30f4c6b015212396c58c6b8d6a2fb58573218251df71d8",
+    "agents/data-retention-rule.md": "7abf51449bebd91b912ed32ea53e887583b6caf3986035f2a894e1e305c8efdf",
+    "plugin.json": "67fd3123678bbb4cafa1307f23ec4001f8a5f63ae30838347c1676fa195aa9d9",
+    "settings.json": "58c87962cb430b76250973e84369d77f5c22c3309a8340ddd258b82c9420716f"
+  }
+}

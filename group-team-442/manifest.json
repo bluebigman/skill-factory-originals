@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085729",
+  "slug": "group-team-442",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-442",
+    "kind": "team",
+    "name": "敏感识别专家",
+    "description": "擅长分级标准、全量扫描与标注留痕，覆盖敏感识别全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ops-value-pro-team-lead",
+        "role": "lead",
+        "name": "运维配置体检与规范化主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ops-value-pro",
+        "role": "member",
+        "name": "运维配置体检与规范化",
+        "evidence": "original_assets/ops-value-pro/merkle_root",
+        "member_merkle_root": "bea9de17f59b54c8bdabdf57523e677a87c0c304c7af4cdc399e1310142a17b1"
+      },
+      {
+        "slug": "sensitive-data-scan",
+        "role": "member",
+        "name": "敏感识别 分级标注 顾问",
+        "evidence": "original_assets/sensitive-data-scan/merkle_root",
+        "member_merkle_root": "bb882842d49c7ce84146218a1042386c8f0269e1418bf5b10e848ee6c6b665df"
+      },
+      {
+        "slug": "agent-test-harness",
+        "role": "member",
+        "name": "测试台架 用例管理 顾问",
+        "evidence": "original_assets/agent-test-harness/merkle_root",
+        "member_merkle_root": "29e6d63378ee025afe09be7d9f7af9d2a346e6cf4c5642e457b5194956aa8220"
+      }
+    ],
+    "team_lead": "ops-value-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0f4f06f2e87812de",
+  "prompt_hash": "2731e4607ea64623",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-442\", \"kind\": \"team\", \"name\": \"敏感识别专家\", \"description\": \"擅长分级标准、全量扫描与标注留痕，覆盖敏感识别全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ops-value-pro-team-lead\", \"role\": \"lead\", \"name\": \"运维配置体检与规范化主理人\", \"evidence\": null}, {\"slug\": \"ops-value-pro\", \"role\": \"member\", \"name\": \"运维配置体检与规范化\", \"evidence\": \"original_assets/ops-value-pro/merkle_root\", \"member_merkle_root\": \"bea9de17f59b54c8bdabdf57523e677a87c0c304c7af4cdc399e1310142a17b1\"}, {\"slug\": \"sensitive-data-scan\", \"role\": \"member\", \"name\": \"敏感识别 分级标注 顾问\", \"evidence\": \"original_assets/sensitive-data-scan/merkle_root\", \"member_merkle_root\": \"bb882842d49c7ce84146218a1042386c8f0269e1418bf5b10e848ee6c6b665df\"}, {\"slug\": \"agent-test-harness\", \"role\": \"member\", \"name\": \"测试台架 用例管理 顾问\", \"evidence\": \"original_assets/agent-test-harness/merkle_root\", \"member_merkle_root\": \"29e6d63378ee025afe09be7d9f7af9d2a346e6cf4c5642e457b5194956aa8220\"}], \"team_lead\": \"ops-value-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-test-harness.md": "c52c1ef0390764669e12ab412c7f4c51d940e59084b8e3ecb001e2dd4c0a8051",
+    "agents/ops-value-pro-team-lead.md": "0d36dea2db322a9989c778bd087a2c370e23e2cb619564007d1e65738abe2556",
+    "agents/ops-value-pro.md": "337a7ab071405f0e486019df1bf7bb8cdacc8d39085fc98e5c9364d9467e4534",
+    "agents/sensitive-data-scan.md": "941940e02b3bb5771841d8397f2eebd4bbf32e8822a7140348df6e233405878c",
+    "plugin.json": "b0ec0f93ec68fabaeb27957f1c20815582446c82f415236c0443a5f87c58e9fa",
+    "settings.json": "718c1366c03c59f6099c26acb4cfea245a137cfbb64f3a4b459a96143cdf1b9e"
+  }
+}

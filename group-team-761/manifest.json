@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-761",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-761",
+    "kind": "team",
+    "name": "需求追踪专家",
+    "description": "需求追踪专家：围绕跨境收款，覆盖通道合规／费用透明／汇率口径，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "global-payment-ops-team-lead",
+        "role": "lead",
+        "name": "跨境收款主理人",
+        "evidence": null
+      },
+      {
+        "slug": "global-payment-ops",
+        "role": "member",
+        "name": "跨境收款 流程核对 顾问",
+        "evidence": "original_assets/global-payment-ops/merkle_root",
+        "member_merkle_root": "91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0"
+      },
+      {
+        "slug": "service-sla-pro",
+        "role": "member",
+        "name": "服务承诺 时效设计 顾问",
+        "evidence": "original_assets/service-sla-pro/merkle_root",
+        "member_merkle_root": "dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa"
+      },
+      {
+        "slug": "requirement-trace-pro",
+        "role": "member",
+        "name": "需求追踪 实现映射 顾问",
+        "evidence": "original_assets/requirement-trace-pro/merkle_root",
+        "member_merkle_root": "252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f"
+      }
+    ],
+    "team_lead": "global-payment-ops-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "e7284f75954745f0",
+  "prompt_hash": "8371483b07dcf914",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-761\", \"kind\": \"team\", \"name\": \"需求追踪专家\", \"description\": \"需求追踪专家：围绕跨境收款，覆盖通道合规／费用透明／汇率口径，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"global-payment-ops-team-lead\", \"role\": \"lead\", \"name\": \"跨境收款主理人\", \"evidence\": null}, {\"slug\": \"global-payment-ops\", \"role\": \"member\", \"name\": \"跨境收款 流程核对 顾问\", \"evidence\": \"original_assets/global-payment-ops/merkle_root\", \"member_merkle_root\": \"91081538a93681b4b16c45a6d27a4384827a18400a055b6d794454b4d51bb3b0\"}, {\"slug\": \"service-sla-pro\", \"role\": \"member\", \"name\": \"服务承诺 时效设计 顾问\", \"evidence\": \"original_assets/service-sla-pro/merkle_root\", \"member_merkle_root\": \"dbe39f3ccb321f815a64a9053bf18fdfe04e751886935ea15794262925e9abfa\"}, {\"slug\": \"requirement-trace-pro\", \"role\": \"member\", \"name\": \"需求追踪 实现映射 顾问\", \"evidence\": \"original_assets/requirement-trace-pro/merkle_root\", \"member_merkle_root\": \"252a3a53bc507e08f25ee026e64bd205a704f402cc959a790af4275238d34b2f\"}], \"team_lead\": \"global-payment-ops-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/global-payment-ops-team-lead.md": "003ed47c20e6efca524f381221f84b6b8af79de9c5bb3d85d91cd5383a9c5b2d",
+    "agents/global-payment-ops.md": "12a52ab54eede936a1f8a7c9ba15c76f125a3e34b0f6401adb56af7d239ebd09",
+    "agents/requirement-trace-pro.md": "f3cd477036be2f0cbb40b1cd0832d3cb16c599eecb884f40c3dc05292865179d",
+    "agents/service-sla-pro.md": "699332328ef46fd09de6aa508f3fc4722ea6397180c2aec40bc32dc9562480f1",
+    "plugin.json": "17e51e28dabf7a80e0a01bf09a66ff30e1a4e4e2e74ee10ae7c58de19b137ffc",
+    "settings.json": "e7b640b12a537d4d0d40061e0677a5db68243f141196a7ed968ef8fccd03a3b0"
+  }
+}

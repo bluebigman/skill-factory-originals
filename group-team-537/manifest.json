@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085730",
+  "slug": "group-team-537",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-537",
+    "kind": "team",
+    "name": "上下文优专家",
+    "description": "输入上下文优相关需求，输出分块合理、召回优先、关键保真三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "context-window-tune-team-lead",
+        "role": "lead",
+        "name": "上下文优主理人",
+        "evidence": null
+      },
+      {
+        "slug": "context-window-tune",
+        "role": "member",
+        "name": "上下文优 分块策略 顾问",
+        "evidence": "original_assets/context-window-tune/merkle_root",
+        "member_merkle_root": "581bd29d61366f0766716e8ab80d229a75fc807c736f753b3eeadd67fa7bbe18"
+      },
+      {
+        "slug": "config-drift-detect",
+        "role": "member",
+        "name": "配置漂移 基线对比 顾问",
+        "evidence": "original_assets/config-drift-detect/merkle_root",
+        "member_merkle_root": "a861c69007923be08315df4549e574330612d9af33b6a775ff975b1083f88cd8"
+      },
+      {
+        "slug": "naming-convention-pro",
+        "role": "member",
+        "name": "命名规范 一致约束 顾问",
+        "evidence": "original_assets/naming-convention-pro/merkle_root",
+        "member_merkle_root": "2f5c80a314a81d3ea2f93566d3e79ab164619a73bd358001eab75f873e9bfcbb"
+      }
+    ],
+    "team_lead": "context-window-tune-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "757ddf9bd3f3291e",
+  "prompt_hash": "f38da4f150ef2edb",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-537\", \"kind\": \"team\", \"name\": \"上下文优专家\", \"description\": \"输入上下文优相关需求，输出分块合理、召回优先、关键保真三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"context-window-tune-team-lead\", \"role\": \"lead\", \"name\": \"上下文优主理人\", \"evidence\": null}, {\"slug\": \"context-window-tune\", \"role\": \"member\", \"name\": \"上下文优 分块策略 顾问\", \"evidence\": \"original_assets/context-window-tune/merkle_root\", \"member_merkle_root\": \"581bd29d61366f0766716e8ab80d229a75fc807c736f753b3eeadd67fa7bbe18\"}, {\"slug\": \"config-drift-detect\", \"role\": \"member\", \"name\": \"配置漂移 基线对比 顾问\", \"evidence\": \"original_assets/config-drift-detect/merkle_root\", \"member_merkle_root\": \"a861c69007923be08315df4549e574330612d9af33b6a775ff975b1083f88cd8\"}, {\"slug\": \"naming-convention-pro\", \"role\": \"member\", \"name\": \"命名规范 一致约束 顾问\", \"evidence\": \"original_assets/naming-convention-pro/merkle_root\", \"member_merkle_root\": \"2f5c80a314a81d3ea2f93566d3e79ab164619a73bd358001eab75f873e9bfcbb\"}], \"team_lead\": \"context-window-tune-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/config-drift-detect.md": "f6ded168fd4a99bf1f66813a876dc88b0a1779ed5db48da82f8e55ec0f08d9d6",
+    "agents/context-window-tune-team-lead.md": "593d1e6b95087236a21e6262f73d48503ea59f98e8f3eb644b123b05d812ed53",
+    "agents/context-window-tune.md": "69ff5004e2cb0bcda07d460721cada3b47ba4c533baa75744f9f0b25ee105c66",
+    "agents/naming-convention-pro.md": "31cbf4b6f509ef7c26e07cd413bbe4eaefe0c4593268c24b00e9e217b6cfe7f9",
+    "plugin.json": "5d2a9e1ce90a21d7133f3777e715ded37e57fef087c9b070b79f1428ccfe5872",
+    "settings.json": "7e0515b8a7a79849bab4f7620333655d396f4a13e9255dda25e91c46eb373f17"
+  }
+}

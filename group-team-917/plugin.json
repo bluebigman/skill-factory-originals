@@ -1,0 +1,126 @@
+{
+  "agentName": "toolkit-pro-07-fixed-team-lead",
+  "agents": [
+    "./agents/toolkit-pro-07-fixed-team-lead.md",
+    "./agents/toolkit-pro-07-fixed.md",
+    "./agents/cohort-retention.md",
+    "./agents/data-clean-pro-02-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 行情研判",
+    "zh": "帮我处理行情研判"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 留存分层分析 end-to-end: 行为关联, 按批次分层 and 看曲线. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长行为关联、按批次分层与看曲线，覆盖留存分层分析全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "行情研判专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "toolkit-pro-07-fixed-team-lead",
+      "name": {
+        "en": "行情研判主理人",
+        "zh": "行情研判主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/toolkit-pro-07-fixed.png",
+      "id": "toolkit-pro-07-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "行情研判 收入筹划 图像比对"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "行情研判 收入筹划 图像比对"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cohort-retention.png",
+      "id": "cohort-retention",
+      "name": {
+        "en": "cohort-retention",
+        "zh": "留存分层分析 助手"
+      },
+      "profession": {
+        "en": "cohort-retention",
+        "zh": "留存分层分析 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-clean-pro-02-fixed.png",
+      "id": "data-clean-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "医疗行政 结构化输出 批量处理"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-917",
+  "plugin": "group-team-917",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "行情研判专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 行情研判",
+      "zh": "帮我处理行情研判"
+    },
+    {
+      "en": "Plan 留存分层分析",
+      "zh": "帮我规划留存分层分析"
+    },
+    {
+      "en": "Review 医疗行政",
+      "zh": "帮我检查医疗行政"
+    }
+  ],
+  "tags": [
+    {
+      "en": "数据洞察",
+      "zh": "数据洞察"
+    },
+    {
+      "en": "决策参考",
+      "zh": "决策参考"
+    },
+    {
+      "en": "个税精算",
+      "zh": "个税精算"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "toolkit-pro-07-fixed-team-lead",
+    "memberAgents": [
+      "toolkit-pro-07-fixed",
+      "cohort-retention",
+      "data-clean-pro-02-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

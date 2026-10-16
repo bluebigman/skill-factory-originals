@@ -1,0 +1,126 @@
+{
+  "agentName": "sop-compliance-check-team-lead",
+  "agents": [
+    "./agents/sop-compliance-check-team-lead.md",
+    "./agents/sop-compliance-check.md",
+    "./agents/global-pm-coach.md",
+    "./agents/dev-onboarding.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 流程合规",
+    "zh": "帮我处理流程合规"
+  },
+  "description": "sop-compliance-check team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 流程合规 requirements, output three deliverables: 步骤核验, 偏差记录, 预警机制. Verifiable end-to-end, evidence per step.",
+    "zh": "输入流程合规相关需求，输出步骤核验、偏差记录、预警机制三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "sop-compliance-check Team",
+    "zh": "流程合规专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "sop-compliance-check-team-lead",
+      "name": {
+        "en": "流程合规主理人",
+        "zh": "流程合规主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/sop-compliance-check.png",
+      "id": "sop-compliance-check",
+      "name": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "profession": {
+        "en": "sop-compliance-check",
+        "zh": "流程合规 步骤核验 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-pm-coach.png",
+      "id": "global-pm-coach",
+      "name": {
+        "en": "global-pm-coach",
+        "zh": "跨国项目 协同推进 教练"
+      },
+      "profession": {
+        "en": "global-pm-coach",
+        "zh": "跨国项目 协同推进 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/dev-onboarding.png",
+      "id": "dev-onboarding",
+      "name": {
+        "en": "dev-onboarding",
+        "zh": "新人上手流程 顾问"
+      },
+      "profession": {
+        "en": "dev-onboarding",
+        "zh": "新人上手流程 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1140",
+  "plugin": "group-team-1140",
+  "profession": {
+    "en": "sop-compliance-check Collaboration Team",
+    "zh": "流程合规专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 流程合规",
+      "zh": "帮我处理流程合规"
+    },
+    {
+      "en": "Plan 跨国项目",
+      "zh": "帮我规划跨国项目"
+    },
+    {
+      "en": "Review 新人上手流程",
+      "zh": "帮我检查新人上手流程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "步骤核验",
+      "zh": "步骤核验"
+    },
+    {
+      "en": "偏差记录",
+      "zh": "偏差记录"
+    },
+    {
+      "en": "预警机制",
+      "zh": "预警机制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "sop-compliance-check-team-lead",
+    "memberAgents": [
+      "sop-compliance-check",
+      "global-pm-coach",
+      "dev-onboarding"
+    ]
+  },
+  "version": "1.0.0"
+}

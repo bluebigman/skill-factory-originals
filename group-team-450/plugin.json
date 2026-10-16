@@ -1,0 +1,126 @@
+{
+  "agentName": "info-architecture-team-lead",
+  "agents": [
+    "./agents/info-architecture-team-lead.md",
+    "./agents/info-architecture.md",
+    "./agents/product-roadmap-pro.md",
+    "./agents/game-monetize-ethic.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 信息架构",
+    "zh": "帮我处理信息架构"
+  },
+  "description": "info-architecture team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 信息架构 end-to-end: 卡片分类, 交叉验证 and 层级克制. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长卡片分类、交叉验证与层级克制，覆盖信息架构全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "info-architecture Team",
+    "zh": "信息架构专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "info-architecture-team-lead",
+      "name": {
+        "en": "信息架构主理人",
+        "zh": "信息架构主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/info-architecture.png",
+      "id": "info-architecture",
+      "name": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "profession": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/product-roadmap-pro.png",
+      "id": "product-roadmap-pro",
+      "name": {
+        "en": "product-roadmap-pro",
+        "zh": "产品路线 优先级 顾问"
+      },
+      "profession": {
+        "en": "product-roadmap-pro",
+        "zh": "产品路线 优先级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-monetize-ethic.png",
+      "id": "game-monetize-ethic",
+      "name": {
+        "en": "game-monetize-ethic",
+        "zh": "游戏内购 体验底线 顾问"
+      },
+      "profession": {
+        "en": "game-monetize-ethic",
+        "zh": "游戏内购 体验底线 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-450",
+  "plugin": "group-team-450",
+  "profession": {
+    "en": "info-architecture Collaboration Team",
+    "zh": "信息架构专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 信息架构",
+      "zh": "帮我处理信息架构"
+    },
+    {
+      "en": "Plan 产品路线",
+      "zh": "帮我规划产品路线"
+    },
+    {
+      "en": "Review 游戏内购",
+      "zh": "帮我检查游戏内购"
+    }
+  ],
+  "tags": [
+    {
+      "en": "卡片分类",
+      "zh": "卡片分类"
+    },
+    {
+      "en": "交叉验证",
+      "zh": "交叉验证"
+    },
+    {
+      "en": "层级克制",
+      "zh": "层级克制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "info-architecture-team-lead",
+    "memberAgents": [
+      "info-architecture",
+      "product-roadmap-pro",
+      "game-monetize-ethic"
+    ]
+  },
+  "version": "1.0.0"
+}

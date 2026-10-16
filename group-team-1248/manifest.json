@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1248",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1248",
+    "kind": "team",
+    "name": "邮件触达生命周期专家",
+    "description": "输入文案钩子打磨相关需求，输出痛点前置、一个卖点、行动明确三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "copy-hook-craft-team-lead",
+        "role": "lead",
+        "name": "文案钩子打磨主理人",
+        "evidence": null
+      },
+      {
+        "slug": "copy-hook-craft",
+        "role": "member",
+        "name": "文案钩子打磨 顾问",
+        "evidence": "original_assets/copy-hook-craft/merkle_root",
+        "member_merkle_root": "ddb9b5f7d12333ea0c3e9a52593c05dc044d1fbe239d85f4e282785eccd4f1ba"
+      },
+      {
+        "slug": "email-lifecycle-pro",
+        "role": "member",
+        "name": "邮件触达 生命周期 顾问",
+        "evidence": "original_assets/email-lifecycle-pro/merkle_root",
+        "member_merkle_root": "cc73e2ecfd7a9d275ac66870a6d67d76b7346b349483c20fac0b4e70527e325d"
+      },
+      {
+        "slug": "knowledge-base-pro",
+        "role": "member",
+        "name": "文档建站 知识库搭建",
+        "evidence": "original_assets/knowledge-base-pro/merkle_root",
+        "member_merkle_root": "114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9"
+      }
+    ],
+    "team_lead": "copy-hook-craft-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8cbf5c20061b1a1e",
+  "prompt_hash": "207aef01ee7d1932",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1248\", \"kind\": \"team\", \"name\": \"邮件触达生命周期专家\", \"description\": \"输入文案钩子打磨相关需求，输出痛点前置、一个卖点、行动明确三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"copy-hook-craft-team-lead\", \"role\": \"lead\", \"name\": \"文案钩子打磨主理人\", \"evidence\": null}, {\"slug\": \"copy-hook-craft\", \"role\": \"member\", \"name\": \"文案钩子打磨 顾问\", \"evidence\": \"original_assets/copy-hook-craft/merkle_root\", \"member_merkle_root\": \"ddb9b5f7d12333ea0c3e9a52593c05dc044d1fbe239d85f4e282785eccd4f1ba\"}, {\"slug\": \"email-lifecycle-pro\", \"role\": \"member\", \"name\": \"邮件触达 生命周期 顾问\", \"evidence\": \"original_assets/email-lifecycle-pro/merkle_root\", \"member_merkle_root\": \"cc73e2ecfd7a9d275ac66870a6d67d76b7346b349483c20fac0b4e70527e325d\"}, {\"slug\": \"knowledge-base-pro\", \"role\": \"member\", \"name\": \"文档建站 知识库搭建\", \"evidence\": \"original_assets/knowledge-base-pro/merkle_root\", \"member_merkle_root\": \"114ad5ca552b6d70e8c17843c149989af1bd26c7cba8c8e8b9b96162ddc4ded9\"}], \"team_lead\": \"copy-hook-craft-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/copy-hook-craft-team-lead.md": "0f8a63cf3155842177505373c89946c71180d776e9cfa194f1c0e293b4875645",
+    "agents/copy-hook-craft.md": "82afa3f1b7953fe8e489ba49793b1930afc2c9a16e1276c378a97361d996553b",
+    "agents/email-lifecycle-pro.md": "3ec2e729d56569ff86a12fa4eca03b7f42a2840068e505fdfa6a3658256e5e29",
+    "agents/knowledge-base-pro.md": "563ebcec5f35ce074e697141069b4c418c1d0604aa6f935933c758fc228c538e",
+    "plugin.json": "96cb92dc45b80135e8aed49f7da0f43907e28773fb803d5c9d805d7769722e26",
+    "settings.json": "8ab80ed9f9b6012a7bed36ceb7ed7476dc4f21702db6186437e32e09703d716e"
+  }
+}

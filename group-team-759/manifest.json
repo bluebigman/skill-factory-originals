@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085734",
+  "slug": "group-team-759",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-759",
+    "kind": "team",
+    "name": "文档结构大纲设计专家",
+    "description": "擅长结论先行、层次清晰与一屏一义，覆盖文档结构全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "doc-structure-pro-team-lead",
+        "role": "lead",
+        "name": "文档结构主理人",
+        "evidence": null
+      },
+      {
+        "slug": "doc-structure-pro",
+        "role": "member",
+        "name": "文档结构 大纲设计 顾问",
+        "evidence": "original_assets/doc-structure-pro/merkle_root",
+        "member_merkle_root": "99e288ca918e5bfe23eb5e68c5de04a2f7d7034a03c8a441d9dfb7df415cbcb7"
+      },
+      {
+        "slug": "doc-accessibility-pro",
+        "role": "member",
+        "name": "文档可访 结构语义 顾问",
+        "evidence": "original_assets/doc-accessibility-pro/merkle_root",
+        "member_merkle_root": "658a7f874de6167fced29b927a263166fdc6f43f1e37655085088c158ddbb9b3"
+      },
+      {
+        "slug": "writing-toolkit-pro",
+        "role": "member",
+        "name": "文本净化 自然化改写 格式校准",
+        "evidence": "original_assets/writing-toolkit-pro/merkle_root",
+        "member_merkle_root": "efcec4e8b32a7f2e380eb1ccd92ff497c7108d11788863ee524765346cd52c08"
+      }
+    ],
+    "team_lead": "doc-structure-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1af4e9972a8df4e1",
+  "prompt_hash": "d2e9d292cfe40f62",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-759\", \"kind\": \"team\", \"name\": \"文档结构大纲设计专家\", \"description\": \"擅长结论先行、层次清晰与一屏一义，覆盖文档结构全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"doc-structure-pro-team-lead\", \"role\": \"lead\", \"name\": \"文档结构主理人\", \"evidence\": null}, {\"slug\": \"doc-structure-pro\", \"role\": \"member\", \"name\": \"文档结构 大纲设计 顾问\", \"evidence\": \"original_assets/doc-structure-pro/merkle_root\", \"member_merkle_root\": \"99e288ca918e5bfe23eb5e68c5de04a2f7d7034a03c8a441d9dfb7df415cbcb7\"}, {\"slug\": \"doc-accessibility-pro\", \"role\": \"member\", \"name\": \"文档可访 结构语义 顾问\", \"evidence\": \"original_assets/doc-accessibility-pro/merkle_root\", \"member_merkle_root\": \"658a7f874de6167fced29b927a263166fdc6f43f1e37655085088c158ddbb9b3\"}, {\"slug\": \"writing-toolkit-pro\", \"role\": \"member\", \"name\": \"文本净化 自然化改写 格式校准\", \"evidence\": \"original_assets/writing-toolkit-pro/merkle_root\", \"member_merkle_root\": \"efcec4e8b32a7f2e380eb1ccd92ff497c7108d11788863ee524765346cd52c08\"}], \"team_lead\": \"doc-structure-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-accessibility-pro.md": "5ed6cfd4a30226c241be599aea13cc4de191d2ed37f7b3313bf90740fbc15409",
+    "agents/doc-structure-pro-team-lead.md": "2b2c4c77bcc5db809b9671028fae4c83715b8b79084754ac5a5ecc1928930423",
+    "agents/doc-structure-pro.md": "3dc61a5c58ac53787c40d70fa53bd0cb51953b851e3f08d41ce628fa3a0595af",
+    "agents/writing-toolkit-pro.md": "307672cae58cf435d2518c51ed7834659a860861e42585fd803ea1115de7f09d",
+    "plugin.json": "deb36ab41b3fe3b76d9c869a38622c3724eddf5dae1e9a000fd70918f492dbd6",
+    "settings.json": "7508c7c6fee53e20a05f35277cbd576e830306424ac8eb1b651eea322002f152"
+  }
+}

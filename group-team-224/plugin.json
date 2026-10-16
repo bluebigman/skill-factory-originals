@@ -1,0 +1,126 @@
+{
+  "agentName": "web-extract-pro-team-lead",
+  "agents": [
+    "./agents/web-extract-pro-team-lead.md",
+    "./agents/web-extract-pro.md",
+    "./agents/ocr-doc-parse-expert.md",
+    "./agents/prompt-effect-tuning-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 网页提取",
+    "zh": "帮我处理网页提取"
+  },
+  "description": "Web Extract Engineer team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "网页 识别 提示词 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "Web Extract Engineer Team",
+    "zh": "网页 识别 提示词 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "web-extract-pro-team-lead",
+      "name": {
+        "en": "网页提取主理人",
+        "zh": "网页提取主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/web-extract-pro.png",
+      "id": "web-extract-pro",
+      "name": {
+        "en": "Web Extract Engineer",
+        "zh": "网页提取 结构化解析"
+      },
+      "profession": {
+        "en": "Web Extract Engineer",
+        "zh": "网页提取 结构化解析"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ocr-doc-parse-expert.png",
+      "id": "ocr-doc-parse-expert",
+      "name": {
+        "en": "OCR Document Parsing Expert",
+        "zh": "OCR 图文识别 版面还原"
+      },
+      "profession": {
+        "en": "OCR Document Parsing Expert",
+        "zh": "OCR 图文识别 版面还原"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/prompt-effect-tuning-expert.png",
+      "id": "prompt-effect-tuning-expert",
+      "name": {
+        "en": "Prompt Effect Tuning Expert",
+        "zh": "提示词 效果优化 调优助手"
+      },
+      "profession": {
+        "en": "Prompt Effect Tuning Expert",
+        "zh": "提示词 效果优化 调优助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-224",
+  "plugin": "group-team-224",
+  "profession": {
+    "en": "Web Extract Engineer Collaboration Team",
+    "zh": "网页 识别 提示词 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 网页提取",
+      "zh": "帮我处理网页提取"
+    },
+    {
+      "en": "Plan OCR",
+      "zh": "帮我规划OCR"
+    },
+    {
+      "en": "Review 提示词",
+      "zh": "帮我检查提示词"
+    }
+  ],
+  "tags": [
+    {
+      "en": "网页提取",
+      "zh": "网页提取"
+    },
+    {
+      "en": "OCR",
+      "zh": "OCR"
+    },
+    {
+      "en": "提示词",
+      "zh": "提示词"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "web-extract-pro-team-lead",
+    "memberAgents": [
+      "web-extract-pro",
+      "ocr-doc-parse-expert",
+      "prompt-effect-tuning-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

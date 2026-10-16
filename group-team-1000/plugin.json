@@ -1,0 +1,126 @@
+{
+  "agentName": "gamification-design-team-lead",
+  "agents": [
+    "./agents/gamification-design-team-lead.md",
+    "./agents/gamification-design.md",
+    "./agents/search-ux-design.md",
+    "./agents/user-story-write.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 任务激励",
+    "zh": "帮我处理任务激励"
+  },
+  "description": "gamification-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 任务激励 end-to-end: 进度可见, 即时反馈 and 难度匹配. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长进度可见、即时反馈与难度匹配，覆盖任务激励全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "gamification-design Team",
+    "zh": "任务激励专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "gamification-design-team-lead",
+      "name": {
+        "en": "任务激励主理人",
+        "zh": "任务激励主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/gamification-design.png",
+      "id": "gamification-design",
+      "name": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "profession": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/search-ux-design.png",
+      "id": "search-ux-design",
+      "name": {
+        "en": "search-ux-design",
+        "zh": "搜索体验设计 顾问"
+      },
+      "profession": {
+        "en": "search-ux-design",
+        "zh": "搜索体验设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/user-story-write.png",
+      "id": "user-story-write",
+      "name": {
+        "en": "user-story-write",
+        "zh": "用户故事 撰写"
+      },
+      "profession": {
+        "en": "user-story-write",
+        "zh": "用户故事 撰写"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1000",
+  "plugin": "group-team-1000",
+  "profession": {
+    "en": "gamification-design Collaboration Team",
+    "zh": "任务激励专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 任务激励",
+      "zh": "帮我处理任务激励"
+    },
+    {
+      "en": "Plan 搜索体验设计",
+      "zh": "帮我规划搜索体验设计"
+    },
+    {
+      "en": "Review 用户故事",
+      "zh": "帮我检查用户故事"
+    }
+  ],
+  "tags": [
+    {
+      "en": "进度可见",
+      "zh": "进度可见"
+    },
+    {
+      "en": "即时反馈",
+      "zh": "即时反馈"
+    },
+    {
+      "en": "难度匹配",
+      "zh": "难度匹配"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "gamification-design-team-lead",
+    "memberAgents": [
+      "gamification-design",
+      "search-ux-design",
+      "user-story-write"
+    ]
+  },
+  "version": "1.0.0"
+}

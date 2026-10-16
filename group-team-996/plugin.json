@@ -1,0 +1,126 @@
+{
+  "agentName": "franchise-standard-team-lead",
+  "agents": [
+    "./agents/franchise-standard-team-lead.md",
+    "./agents/franchise-standard.md",
+    "./agents/agriculture-plan.md",
+    "./agents/intl-standards-map.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "12-IndustryConsultant",
+  "defaultInitPrompt": {
+    "en": "Handle 连锁标准制定",
+    "zh": "帮我处理连锁标准制定"
+  },
+  "description": "franchise-standard team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 连锁标准制定 requirements, output three deliverables: 标准统一, 培训体系, 督导机制. Verifiable end-to-end, evidence per step.",
+    "zh": "输入连锁标准制定相关需求，输出标准统一、培训体系、督导机制三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "franchise-standard Team",
+    "zh": "连锁标准制定专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "franchise-standard-team-lead",
+      "name": {
+        "en": "连锁标准制定主理人",
+        "zh": "连锁标准制定主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/franchise-standard.png",
+      "id": "franchise-standard",
+      "name": {
+        "en": "franchise-standard",
+        "zh": "连锁标准制定 顾问"
+      },
+      "profession": {
+        "en": "franchise-standard",
+        "zh": "连锁标准制定 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agriculture-plan.png",
+      "id": "agriculture-plan",
+      "name": {
+        "en": "agriculture-plan",
+        "zh": "农事计划编制 顾问"
+      },
+      "profession": {
+        "en": "agriculture-plan",
+        "zh": "农事计划编制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/intl-standards-map.png",
+      "id": "intl-standards-map",
+      "name": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "profession": {
+        "en": "intl-standards-map",
+        "zh": "国际标准 对照梳理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-996",
+  "plugin": "group-team-996",
+  "profession": {
+    "en": "franchise-standard Collaboration Team",
+    "zh": "连锁标准制定专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 连锁标准制定",
+      "zh": "帮我处理连锁标准制定"
+    },
+    {
+      "en": "Plan 农事计划编制",
+      "zh": "帮我规划农事计划编制"
+    },
+    {
+      "en": "Review 国际标准",
+      "zh": "帮我检查国际标准"
+    }
+  ],
+  "tags": [
+    {
+      "en": "标准统一",
+      "zh": "标准统一"
+    },
+    {
+      "en": "培训体系",
+      "zh": "培训体系"
+    },
+    {
+      "en": "督导机制",
+      "zh": "督导机制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "franchise-standard-team-lead",
+    "memberAgents": [
+      "franchise-standard",
+      "agriculture-plan",
+      "intl-standards-map"
+    ]
+  },
+  "version": "1.0.0"
+}

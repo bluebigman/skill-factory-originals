@@ -1,0 +1,126 @@
+{
+  "agentName": "content-performance-review-team-lead",
+  "agents": [
+    "./agents/content-performance-review-team-lead.md",
+    "./agents/content-performance-review.md",
+    "./agents/doc-print-layout.md",
+    "./agents/scene-narrative-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容效果复盘",
+    "zh": "帮我处理内容效果复盘"
+  },
+  "description": "content-performance-review team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内容效果复盘 end-to-end: 行动清单, 分页控制 and 页眉页脚. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长行动清单、分页控制与页眉页脚，覆盖内容效果复盘全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "content-performance-review Team",
+    "zh": "内容效果复盘专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "content-performance-review-team-lead",
+      "name": {
+        "en": "内容效果复盘主理人",
+        "zh": "内容效果复盘主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/content-performance-review.png",
+      "id": "content-performance-review",
+      "name": {
+        "en": "content-performance-review",
+        "zh": "内容效果复盘 顾问"
+      },
+      "profession": {
+        "en": "content-performance-review",
+        "zh": "内容效果复盘 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-print-layout.png",
+      "id": "doc-print-layout",
+      "name": {
+        "en": "doc-print-layout",
+        "zh": "文档打印排版 顾问"
+      },
+      "profession": {
+        "en": "doc-print-layout",
+        "zh": "文档打印排版 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/scene-narrative-pro.png",
+      "id": "scene-narrative-pro",
+      "name": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "profession": {
+        "en": "scene-narrative-pro",
+        "zh": "场景叙事 氛围营造 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-994",
+  "plugin": "group-team-994",
+  "profession": {
+    "en": "content-performance-review Collaboration Team",
+    "zh": "内容效果复盘专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容效果复盘",
+      "zh": "帮我处理内容效果复盘"
+    },
+    {
+      "en": "Plan 文档打印排版",
+      "zh": "帮我规划文档打印排版"
+    },
+    {
+      "en": "Review 场景叙事",
+      "zh": "帮我检查场景叙事"
+    }
+  ],
+  "tags": [
+    {
+      "en": "指标先定",
+      "zh": "指标先定"
+    },
+    {
+      "en": "对比基线",
+      "zh": "对比基线"
+    },
+    {
+      "en": "归因克制",
+      "zh": "归因克制"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "content-performance-review-team-lead",
+    "memberAgents": [
+      "content-performance-review",
+      "doc-print-layout",
+      "scene-narrative-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

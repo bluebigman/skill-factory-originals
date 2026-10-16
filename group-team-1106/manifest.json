@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085718",
+  "slug": "group-team-1106",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1106",
+    "kind": "team",
+    "name": "代码归属规则专家",
+    "description": "代码归属规则专家：围绕代码归属规则，覆盖目录归属／评审必需／变更通知，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "code-owner-rule-team-lead",
+        "role": "lead",
+        "name": "代码归属规则主理人",
+        "evidence": null
+      },
+      {
+        "slug": "code-owner-rule",
+        "role": "member",
+        "name": "代码归属规则 顾问",
+        "evidence": "original_assets/code-owner-rule/merkle_root",
+        "member_merkle_root": "885d64b8b2be90622ac8c693be0a3abd4fe2d9e2a1090b1ffe26c54d3485f103"
+      },
+      {
+        "slug": "shift-handover",
+        "role": "member",
+        "name": "交接班管理 顾问",
+        "evidence": "original_assets/shift-handover/merkle_root",
+        "member_merkle_root": "f5a4b33884855375ced57210d26998666cec8d1f80dbd00c08bfdb6dbc2d9442"
+      },
+      {
+        "slug": "contract-review-expert",
+        "role": "member",
+        "name": "合同条款审查专家",
+        "evidence": "original_assets/contract-review-expert/merkle_root",
+        "member_merkle_root": "03b41eaf0eb6db3fa42dbb79bf6f5b8a0196caeae3ea813f846230b4f8c4b298"
+      }
+    ],
+    "team_lead": "code-owner-rule-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f4ea02fdee643246",
+  "prompt_hash": "db334953bbf812a5",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1106\", \"kind\": \"team\", \"name\": \"代码归属规则专家\", \"description\": \"代码归属规则专家：围绕代码归属规则，覆盖目录归属／评审必需／变更通知，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"code-owner-rule-team-lead\", \"role\": \"lead\", \"name\": \"代码归属规则主理人\", \"evidence\": null}, {\"slug\": \"code-owner-rule\", \"role\": \"member\", \"name\": \"代码归属规则 顾问\", \"evidence\": \"original_assets/code-owner-rule/merkle_root\", \"member_merkle_root\": \"885d64b8b2be90622ac8c693be0a3abd4fe2d9e2a1090b1ffe26c54d3485f103\"}, {\"slug\": \"shift-handover\", \"role\": \"member\", \"name\": \"交接班管理 顾问\", \"evidence\": \"original_assets/shift-handover/merkle_root\", \"member_merkle_root\": \"f5a4b33884855375ced57210d26998666cec8d1f80dbd00c08bfdb6dbc2d9442\"}, {\"slug\": \"contract-review-expert\", \"role\": \"member\", \"name\": \"合同条款审查专家\", \"evidence\": \"original_assets/contract-review-expert/merkle_root\", \"member_merkle_root\": \"03b41eaf0eb6db3fa42dbb79bf6f5b8a0196caeae3ea813f846230b4f8c4b298\"}], \"team_lead\": \"code-owner-rule-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-owner-rule-team-lead.md": "234fb24e8d155f42192c141b3dbc6c2859a09b1741016937a25a124569ac0841",
+    "agents/code-owner-rule.md": "39372cc4123a6d125e4009ceada453a169db59cc6b186f77feacf125c06393c5",
+    "agents/contract-review-expert.md": "b9be3ac87e6747cf679877f942e52c5e467b7f9d79187200871cc4efa45fe7ee",
+    "agents/shift-handover.md": "f196a4ce0ca60cd7c6b8a6fdcbe0d1be789b687d8a7ec874c05d0128667f7db7",
+    "plugin.json": "cddb9c649c086b3473d0fff82302b0f9ed9aab359aaa4e8a4f01056062695278",
+    "settings.json": "6cbea13a442a1ac83c2bb9dcb40c273960687224779d23f1de318ea293de0ad7"
+  }
+}

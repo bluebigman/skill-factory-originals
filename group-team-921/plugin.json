@@ -1,0 +1,126 @@
+{
+  "agentName": "ab-test-analyze-team-lead",
+  "agents": [
+    "./agents/ab-test-analyze-team-lead.md",
+    "./agents/ab-test-analyze.md",
+    "./agents/doc-legal-boundary.md",
+    "./agents/anomaly-detection-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 实验分析",
+    "zh": "帮我处理实验分析"
+  },
+  "description": "ab-test-analyze team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 实验分析 end-to-end: 先定指标, 隐私脱敏 and 引用合规. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长先定指标、隐私脱敏与引用合规，覆盖实验分析全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "ab-test-analyze Team",
+    "zh": "实验分析顾问专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "ab-test-analyze-team-lead",
+      "name": {
+        "en": "实验分析主理人",
+        "zh": "实验分析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/ab-test-analyze.png",
+      "id": "ab-test-analyze",
+      "name": {
+        "en": "ab-test-analyze",
+        "zh": "实验分析 顾问"
+      },
+      "profession": {
+        "en": "ab-test-analyze",
+        "zh": "实验分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/doc-legal-boundary.png",
+      "id": "doc-legal-boundary",
+      "name": {
+        "en": "doc-legal-boundary",
+        "zh": "文档合规边界 顾问"
+      },
+      "profession": {
+        "en": "doc-legal-boundary",
+        "zh": "文档合规边界 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/anomaly-detection-pro.png",
+      "id": "anomaly-detection-pro",
+      "name": {
+        "en": "anomaly-detection-pro",
+        "zh": "异常检测 基线建模 顾问"
+      },
+      "profession": {
+        "en": "anomaly-detection-pro",
+        "zh": "异常检测 基线建模 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-921",
+  "plugin": "group-team-921",
+  "profession": {
+    "en": "ab-test-analyze Collaboration Team",
+    "zh": "实验分析顾问专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 实验分析",
+      "zh": "帮我处理实验分析"
+    },
+    {
+      "en": "Plan 文档合规边界",
+      "zh": "帮我规划文档合规边界"
+    },
+    {
+      "en": "Review 异常检测",
+      "zh": "帮我检查异常检测"
+    }
+  ],
+  "tags": [
+    {
+      "en": "先定指标",
+      "zh": "先定指标"
+    },
+    {
+      "en": "样本量前置",
+      "zh": "样本量前置"
+    },
+    {
+      "en": "显著性",
+      "zh": "显著性"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "ab-test-analyze-team-lead",
+    "memberAgents": [
+      "ab-test-analyze",
+      "doc-legal-boundary",
+      "anomaly-detection-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

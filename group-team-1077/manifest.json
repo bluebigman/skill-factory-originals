@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1077",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1077",
+    "kind": "team",
+    "name": "数据字典构建专家",
+    "description": "输入数据字典构建相关需求，输出变更同步、指标分层、口径文档三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-dict-build-team-lead",
+        "role": "lead",
+        "name": "数据字典构建主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-dict-build",
+        "role": "member",
+        "name": "数据字典构建 助手",
+        "evidence": "original_assets/data-dict-build/merkle_root",
+        "member_merkle_root": "c15630acf9adec568ba079ca1c091736d02d2d344501d7b40479a0e554e2cb4b"
+      },
+      {
+        "slug": "growth-dashboard",
+        "role": "member",
+        "name": "增长看板 指标搭建 顾问",
+        "evidence": "original_assets/growth-dashboard/merkle_root",
+        "member_merkle_root": "c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09"
+      },
+      {
+        "slug": "secret-rotation",
+        "role": "member",
+        "name": "密钥轮换流程 顾问",
+        "evidence": "original_assets/secret-rotation/merkle_root",
+        "member_merkle_root": "0e40b130c56b40e91e184b34fa8051749e2a696f80db35293fe8f26efd64543a"
+      }
+    ],
+    "team_lead": "data-dict-build-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8db04e09dedbcc5d",
+  "prompt_hash": "036fed5e835a0d8e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1077\", \"kind\": \"team\", \"name\": \"数据字典构建专家\", \"description\": \"输入数据字典构建相关需求，输出变更同步、指标分层、口径文档三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-dict-build-team-lead\", \"role\": \"lead\", \"name\": \"数据字典构建主理人\", \"evidence\": null}, {\"slug\": \"data-dict-build\", \"role\": \"member\", \"name\": \"数据字典构建 助手\", \"evidence\": \"original_assets/data-dict-build/merkle_root\", \"member_merkle_root\": \"c15630acf9adec568ba079ca1c091736d02d2d344501d7b40479a0e554e2cb4b\"}, {\"slug\": \"growth-dashboard\", \"role\": \"member\", \"name\": \"增长看板 指标搭建 顾问\", \"evidence\": \"original_assets/growth-dashboard/merkle_root\", \"member_merkle_root\": \"c4b0a3c259caab1f21cbed6c3623a5521358920b6328c3934e64737422307b09\"}, {\"slug\": \"secret-rotation\", \"role\": \"member\", \"name\": \"密钥轮换流程 顾问\", \"evidence\": \"original_assets/secret-rotation/merkle_root\", \"member_merkle_root\": \"0e40b130c56b40e91e184b34fa8051749e2a696f80db35293fe8f26efd64543a\"}], \"team_lead\": \"data-dict-build-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/data-dict-build-team-lead.md": "20d45635aa5d842dd3bc91c506ad964b841abc4e4be6d15a20dbcdf3e73f29cc",
+    "agents/data-dict-build.md": "26d660aaf0949de379de00b8f6610f29a3f713c4d890bfda018af805d91ff54c",
+    "agents/growth-dashboard.md": "56fc07d64bcb3222b493affe087a441082e574992854820d64431dbc1e704ec2",
+    "agents/secret-rotation.md": "a0d1f7783112065d0ba7e5312140e8763eb36fba28381c8d94e318ea665c7f49",
+    "plugin.json": "bc8a9e1a4626cc9a2d91811eb87d706bae903375b9abc7631976f0ca1c1ce5d2",
+    "settings.json": "32699072ce0034ebb0c15bc4bce2375f0ef69faaf1304526969f097b4323a43c"
+  }
+}

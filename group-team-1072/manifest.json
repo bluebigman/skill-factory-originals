@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085717",
+  "slug": "group-team-1072",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1072",
+    "kind": "team",
+    "name": "数据字典专家",
+    "description": "擅长字段必备、口径记录与更新同步，覆盖数据字典全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "data-dict-pro-team-lead",
+        "role": "lead",
+        "name": "数据字典主理人",
+        "evidence": null
+      },
+      {
+        "slug": "data-dict-pro",
+        "role": "member",
+        "name": "数据字典 字段说明 顾问",
+        "evidence": "original_assets/data-dict-pro/merkle_root",
+        "member_merkle_root": "3644ee9e3921015c438da309ebea0bc8f2effd95d351a08f03cebb90bf6ff680"
+      },
+      {
+        "slug": "agent-perf-budget",
+        "role": "member",
+        "name": "性能预算 限额 顾问",
+        "evidence": "original_assets/agent-perf-budget/merkle_root",
+        "member_merkle_root": "5086429f26b686e840361ba8dc792aec4195921b90c2a7f0e383c7a70368bf5e"
+      },
+      {
+        "slug": "queue-backpressure",
+        "role": "member",
+        "name": "队列背压控制 顾问",
+        "evidence": "original_assets/queue-backpressure/merkle_root",
+        "member_merkle_root": "27af16b1472cceeda9bf9aaff46ec230f108d6ed538e3be264b60da0f0a40dba"
+      }
+    ],
+    "team_lead": "data-dict-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "67de6bae3e2a7658",
+  "prompt_hash": "5df7a02a56508e02",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1072\", \"kind\": \"team\", \"name\": \"数据字典专家\", \"description\": \"擅长字段必备、口径记录与更新同步，覆盖数据字典全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"data-dict-pro-team-lead\", \"role\": \"lead\", \"name\": \"数据字典主理人\", \"evidence\": null}, {\"slug\": \"data-dict-pro\", \"role\": \"member\", \"name\": \"数据字典 字段说明 顾问\", \"evidence\": \"original_assets/data-dict-pro/merkle_root\", \"member_merkle_root\": \"3644ee9e3921015c438da309ebea0bc8f2effd95d351a08f03cebb90bf6ff680\"}, {\"slug\": \"agent-perf-budget\", \"role\": \"member\", \"name\": \"性能预算 限额 顾问\", \"evidence\": \"original_assets/agent-perf-budget/merkle_root\", \"member_merkle_root\": \"5086429f26b686e840361ba8dc792aec4195921b90c2a7f0e383c7a70368bf5e\"}, {\"slug\": \"queue-backpressure\", \"role\": \"member\", \"name\": \"队列背压控制 顾问\", \"evidence\": \"original_assets/queue-backpressure/merkle_root\", \"member_merkle_root\": \"27af16b1472cceeda9bf9aaff46ec230f108d6ed538e3be264b60da0f0a40dba\"}], \"team_lead\": \"data-dict-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-perf-budget.md": "f288fffb76f56a88d608c27226848cef7d5dbe2749ee9c9f771748f785319d10",
+    "agents/data-dict-pro-team-lead.md": "f1b0712fcdf2a8428ffc27ef1f1a6af32e33fe6b66edf6901d378cba8bb1c30d",
+    "agents/data-dict-pro.md": "921ff54d5dac6c3afb6229add1f9517d4dc06f39575e2968421f619ed0458a72",
+    "agents/queue-backpressure.md": "b42abcdf7359c7f532e3e5c1d5ededc7bc67de7b1436f8b06e06be11c231e037",
+    "plugin.json": "75569024507f6319f541a49bf7d4a12d7326d2592a50add9dc6de034a23c40d8",
+    "settings.json": "3ba2805f8ce31f5f74161cd8907819d83e83393daec181bf8927929abf0e0184"
+  }
+}

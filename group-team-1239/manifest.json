@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085723",
+  "slug": "group-team-1239",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1239",
+    "kind": "team",
+    "name": "活动策划专家",
+    "description": "输入活动策划相关需求，输出目标单一、预算留余、风险预案三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "event-planning-team-lead",
+        "role": "lead",
+        "name": "活动策划主理人",
+        "evidence": null
+      },
+      {
+        "slug": "event-planning",
+        "role": "member",
+        "name": "活动策划 顾问",
+        "evidence": "original_assets/event-planning/merkle_root",
+        "member_merkle_root": "9e4c1051f0185fa11f49c9e0ce645ed062c05239c52a40af6d7c6236ff468423"
+      },
+      {
+        "slug": "doc-style-transfer",
+        "role": "member",
+        "name": "文档风格迁移 助手",
+        "evidence": "original_assets/doc-style-transfer/merkle_root",
+        "member_merkle_root": "5b4511a0d08ab3f441334e08f7f77a433765ca1ec9262214a6f8ee338e8ef063"
+      },
+      {
+        "slug": "longform-editing",
+        "role": "member",
+        "name": "长文编辑打磨 顾问",
+        "evidence": "original_assets/longform-editing/merkle_root",
+        "member_merkle_root": "84d102d594f87b7d46cdfd09033cfa749a032c0bed2fdb1112e5766fbb33dffe"
+      }
+    ],
+    "team_lead": "event-planning-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2dbf654070cbb85c",
+  "prompt_hash": "3df0f66ea4fde024",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1239\", \"kind\": \"team\", \"name\": \"活动策划专家\", \"description\": \"输入活动策划相关需求，输出目标单一、预算留余、风险预案三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"event-planning-team-lead\", \"role\": \"lead\", \"name\": \"活动策划主理人\", \"evidence\": null}, {\"slug\": \"event-planning\", \"role\": \"member\", \"name\": \"活动策划 顾问\", \"evidence\": \"original_assets/event-planning/merkle_root\", \"member_merkle_root\": \"9e4c1051f0185fa11f49c9e0ce645ed062c05239c52a40af6d7c6236ff468423\"}, {\"slug\": \"doc-style-transfer\", \"role\": \"member\", \"name\": \"文档风格迁移 助手\", \"evidence\": \"original_assets/doc-style-transfer/merkle_root\", \"member_merkle_root\": \"5b4511a0d08ab3f441334e08f7f77a433765ca1ec9262214a6f8ee338e8ef063\"}, {\"slug\": \"longform-editing\", \"role\": \"member\", \"name\": \"长文编辑打磨 顾问\", \"evidence\": \"original_assets/longform-editing/merkle_root\", \"member_merkle_root\": \"84d102d594f87b7d46cdfd09033cfa749a032c0bed2fdb1112e5766fbb33dffe\"}], \"team_lead\": \"event-planning-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/doc-style-transfer.md": "e16bb2dd2f1b2fc2ae81adc94eb358e4e8456caa68d670b4633abe1128b3ad92",
+    "agents/event-planning-team-lead.md": "fc2e1e191c841e6f24cfc5f816cd86d4bc8b635edc726970ad6156ce2cced7a7",
+    "agents/event-planning.md": "a6978a088a5aff48563aefcd1379ff37f44089a542dfc1a3974797d4f4a36f14",
+    "agents/longform-editing.md": "a05bfa0ee1087ead494ca5e768963db4023ca9cffc9a7c8e24b4e6bc3e9ecd67",
+    "plugin.json": "0d7d2f1625bf955c9896292b9549954631bab18fac37a676920c78f528f163b9",
+    "settings.json": "f225ff96c3047da6e8e147ae97a5efeffd714ee6be6d97870673c66e2587e1bb"
+  }
+}

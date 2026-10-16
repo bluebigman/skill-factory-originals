@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1010",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1010",
+    "kind": "team",
+    "name": "设计交付专家",
+    "description": "设计交付专家：围绕设计交付，覆盖标注齐全／边界说明／资产规范，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "handoff-design-dev-team-lead",
+        "role": "lead",
+        "name": "设计交付主理人",
+        "evidence": null
+      },
+      {
+        "slug": "handoff-design-dev",
+        "role": "member",
+        "name": "设计交付 协作规范 顾问",
+        "evidence": "original_assets/handoff-design-dev/merkle_root",
+        "member_merkle_root": "44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104"
+      },
+      {
+        "slug": "gamification-design",
+        "role": "member",
+        "name": "任务激励 系统设计 顾问",
+        "evidence": "original_assets/gamification-design/merkle_root",
+        "member_merkle_root": "3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765"
+      },
+      {
+        "slug": "visual-hierarchy",
+        "role": "member",
+        "name": "视觉层级设计 顾问",
+        "evidence": "original_assets/visual-hierarchy/merkle_root",
+        "member_merkle_root": "7bcbdaea8e96ab3eb32cf87959910bc6344be8f4aa795c71ccb2ae23f849c856"
+      }
+    ],
+    "team_lead": "handoff-design-dev-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a63ac182184cac47",
+  "prompt_hash": "31f90e5b7cb88967",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1010\", \"kind\": \"team\", \"name\": \"设计交付专家\", \"description\": \"设计交付专家：围绕设计交付，覆盖标注齐全／边界说明／资产规范，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"handoff-design-dev-team-lead\", \"role\": \"lead\", \"name\": \"设计交付主理人\", \"evidence\": null}, {\"slug\": \"handoff-design-dev\", \"role\": \"member\", \"name\": \"设计交付 协作规范 顾问\", \"evidence\": \"original_assets/handoff-design-dev/merkle_root\", \"member_merkle_root\": \"44b62f528ce15863ab64982dcd7ad2f607ce8a90a4af62c5115c933acfcdc104\"}, {\"slug\": \"gamification-design\", \"role\": \"member\", \"name\": \"任务激励 系统设计 顾问\", \"evidence\": \"original_assets/gamification-design/merkle_root\", \"member_merkle_root\": \"3e8b30a1f5deb90495a44337a3ee2ec9600c3fcaf9dd17c973ad3536d3b21765\"}, {\"slug\": \"visual-hierarchy\", \"role\": \"member\", \"name\": \"视觉层级设计 顾问\", \"evidence\": \"original_assets/visual-hierarchy/merkle_root\", \"member_merkle_root\": \"7bcbdaea8e96ab3eb32cf87959910bc6344be8f4aa795c71ccb2ae23f849c856\"}], \"team_lead\": \"handoff-design-dev-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/gamification-design.md": "5742b51821487f3783e50a9c6b51d10667aaf689b3921ef1e9eaccde36cb168d",
+    "agents/handoff-design-dev-team-lead.md": "62a12962d6072794f8a1270297ae3462ba04c36c0270d9ca71a532414209d635",
+    "agents/handoff-design-dev.md": "ad7841ab9ce0969df64676589cd2771a5c841242cfd5532606e1ef09649eec3b",
+    "agents/visual-hierarchy.md": "a08e46cf420ad2e8ed9ee55dc66ffa3e3cdf44dc85863b78bf74cbc7f204822d",
+    "plugin.json": "f84af7b9a441ff56c4d8ecc42f97c9b025da521d943147c7b9709bbf7f028aa8",
+    "settings.json": "b2e1f53526a926348325f16877980edb6423578dce6210065b0f4ed848d860ef"
+  }
+}

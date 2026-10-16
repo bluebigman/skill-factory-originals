@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085731",
+  "slug": "group-team-622",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-622",
+    "kind": "team",
+    "name": "音频剪辑专家专家",
+    "description": "输入用户内容相关需求，输出降低门槛、即时回应、激励分层三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "ugc-operation-team-lead",
+        "role": "lead",
+        "name": "用户内容主理人",
+        "evidence": null
+      },
+      {
+        "slug": "ugc-operation",
+        "role": "member",
+        "name": "用户内容 运营机制 顾问",
+        "evidence": "original_assets/ugc-operation/merkle_root",
+        "member_merkle_root": "8285e109e6c4f8cfe0eae3cfdc99410141ebbebf0d3d74595339240bb7e5b2d6"
+      },
+      {
+        "slug": "media-asset-pro",
+        "role": "member",
+        "name": "媒体素材工程",
+        "evidence": "original_assets/media-asset-pro/merkle_root",
+        "member_merkle_root": "03cd9214e90e98210dc0aeee56096b38c510aa06d96dd5cc29195aafd5673500"
+      },
+      {
+        "slug": "audio-clip-expert",
+        "role": "member",
+        "name": "音频剪辑专家",
+        "evidence": "original_assets/audio-clip-expert/merkle_root",
+        "member_merkle_root": "c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8"
+      }
+    ],
+    "team_lead": "ugc-operation-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1b0c062d23f1d556",
+  "prompt_hash": "0aed99485143f49a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-622\", \"kind\": \"team\", \"name\": \"音频剪辑专家专家\", \"description\": \"输入用户内容相关需求，输出降低门槛、即时回应、激励分层三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"ugc-operation-team-lead\", \"role\": \"lead\", \"name\": \"用户内容主理人\", \"evidence\": null}, {\"slug\": \"ugc-operation\", \"role\": \"member\", \"name\": \"用户内容 运营机制 顾问\", \"evidence\": \"original_assets/ugc-operation/merkle_root\", \"member_merkle_root\": \"8285e109e6c4f8cfe0eae3cfdc99410141ebbebf0d3d74595339240bb7e5b2d6\"}, {\"slug\": \"media-asset-pro\", \"role\": \"member\", \"name\": \"媒体素材工程\", \"evidence\": \"original_assets/media-asset-pro/merkle_root\", \"member_merkle_root\": \"03cd9214e90e98210dc0aeee56096b38c510aa06d96dd5cc29195aafd5673500\"}, {\"slug\": \"audio-clip-expert\", \"role\": \"member\", \"name\": \"音频剪辑专家\", \"evidence\": \"original_assets/audio-clip-expert/merkle_root\", \"member_merkle_root\": \"c2855b3c6e0816552879a4ed9bb80cbbeb8d638f0e36514f30e57f7afeae2ae8\"}], \"team_lead\": \"ugc-operation-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/audio-clip-expert.md": "b95c2e627e233aa68266044146e70fe73f09614a6373e02c9862f989acec9a50",
+    "agents/media-asset-pro.md": "858ac617a81488b9275aad57d27293399e002303a1e07b30af89ef6558f874b8",
+    "agents/ugc-operation-team-lead.md": "691bc20fda17d764eb79196c8adce80a0aeda621d4855c2e2fd31dbd120720c2",
+    "agents/ugc-operation.md": "a45d651bc6fb0fed962a99e076d5faa5699afcefd0bf2d22f8d01f09d123deae",
+    "plugin.json": "ea18463f241a0db489a92651b5eb2726ee7e7d69991ce7dcbaef4b1c4e3bba38",
+    "settings.json": "0afbc446c5f12da5e1fa2d2999344ea1b8783bd4fdfec50d80b29745077101c5"
+  }
+}

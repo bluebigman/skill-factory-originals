@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-localization-pro-team-lead",
+  "agents": [
+    "./agents/doc-localization-pro-team-lead.md",
+    "./agents/doc-localization-pro.md",
+    "./agents/content-localize-checklist.md",
+    "./agents/content-repurpose-plan.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档本地",
+    "zh": "帮我处理文档本地"
+  },
+  "description": "doc-localization-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 文档本地 requirements, output three deliverables: 语境适配, 格式保留, 文化适配. Verifiable end-to-end, evidence per step.",
+    "zh": "输入文档本地相关需求，输出语境适配、格式保留、文化适配三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "doc-localization-pro Team",
+    "zh": "文档本地专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-localization-pro-team-lead",
+      "name": {
+        "en": "文档本地主理人",
+        "zh": "文档本地主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-localization-pro.png",
+      "id": "doc-localization-pro",
+      "name": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "profession": {
+        "en": "doc-localization-pro",
+        "zh": "文档本地 术语统一 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-localize-checklist.png",
+      "id": "content-localize-checklist",
+      "name": {
+        "en": "content-localize-checklist",
+        "zh": "本地化清单 顾问"
+      },
+      "profession": {
+        "en": "content-localize-checklist",
+        "zh": "本地化清单 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-repurpose-plan.png",
+      "id": "content-repurpose-plan",
+      "name": {
+        "en": "content-repurpose-plan",
+        "zh": "内容一稿多用 顾问"
+      },
+      "profession": {
+        "en": "content-repurpose-plan",
+        "zh": "内容一稿多用 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1176",
+  "plugin": "group-team-1176",
+  "profession": {
+    "en": "doc-localization-pro Collaboration Team",
+    "zh": "文档本地专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档本地",
+      "zh": "帮我处理文档本地"
+    },
+    {
+      "en": "Plan 本地化清单",
+      "zh": "帮我规划本地化清单"
+    },
+    {
+      "en": "Review 内容一稿多用",
+      "zh": "帮我检查内容一稿多用"
+    }
+  ],
+  "tags": [
+    {
+      "en": "语境适配",
+      "zh": "语境适配"
+    },
+    {
+      "en": "格式保留",
+      "zh": "格式保留"
+    },
+    {
+      "en": "文化适配",
+      "zh": "文化适配"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-localization-pro-team-lead",
+    "memberAgents": [
+      "doc-localization-pro",
+      "content-localize-checklist",
+      "content-repurpose-plan"
+    ]
+  },
+  "version": "1.0.0"
+}

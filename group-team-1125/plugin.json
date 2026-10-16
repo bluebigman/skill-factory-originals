@@ -1,0 +1,126 @@
+{
+  "agentName": "gamification-design-team-lead",
+  "agents": [
+    "./agents/gamification-design-team-lead.md",
+    "./agents/gamification-design.md",
+    "./agents/empty-state-design.md",
+    "./agents/info-architecture.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 任务激励",
+    "zh": "帮我处理任务激励"
+  },
+  "description": "gamification-design team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 任务激励 requirements, output three deliverables: 进度可见, 即时反馈, 难度匹配. Verifiable end-to-end, evidence per step.",
+    "zh": "输入任务激励相关需求，输出进度可见、即时反馈、难度匹配三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "gamification-design Team",
+    "zh": "任务激励系统设计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "gamification-design-team-lead",
+      "name": {
+        "en": "任务激励主理人",
+        "zh": "任务激励主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/gamification-design.png",
+      "id": "gamification-design",
+      "name": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "profession": {
+        "en": "gamification-design",
+        "zh": "任务激励 系统设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/empty-state-design.png",
+      "id": "empty-state-design",
+      "name": {
+        "en": "empty-state-design",
+        "zh": "空状态设计 顾问"
+      },
+      "profession": {
+        "en": "empty-state-design",
+        "zh": "空状态设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/info-architecture.png",
+      "id": "info-architecture",
+      "name": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "profession": {
+        "en": "info-architecture",
+        "zh": "信息架构 梳理 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1125",
+  "plugin": "group-team-1125",
+  "profession": {
+    "en": "gamification-design Collaboration Team",
+    "zh": "任务激励系统设计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 任务激励",
+      "zh": "帮我处理任务激励"
+    },
+    {
+      "en": "Plan 空状态设计",
+      "zh": "帮我规划空状态设计"
+    },
+    {
+      "en": "Review 信息架构",
+      "zh": "帮我检查信息架构"
+    }
+  ],
+  "tags": [
+    {
+      "en": "即时反馈",
+      "zh": "即时反馈"
+    },
+    {
+      "en": "难度匹配",
+      "zh": "难度匹配"
+    },
+    {
+      "en": "保留自主",
+      "zh": "保留自主"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "gamification-design-team-lead",
+    "memberAgents": [
+      "gamification-design",
+      "empty-state-design",
+      "info-architecture"
+    ]
+  },
+  "version": "1.0.0"
+}

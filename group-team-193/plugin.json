@@ -1,0 +1,126 @@
+{
+  "agentName": "topic-planning-team-lead",
+  "agents": [
+    "./agents/topic-planning-team-lead.md",
+    "./agents/topic-planning.md",
+    "./agents/viral-teardown.md",
+    "./agents/media-asset-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内容选题",
+    "zh": "帮我处理内容选题"
+  },
+  "description": "Topic Planning team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "内容 爆款 媒体 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据"
+  },
+  "displayName": {
+    "en": "Topic Planning Team",
+    "zh": "内容 爆款 媒体 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "topic-planning-team-lead",
+      "name": {
+        "en": "内容选题主理人",
+        "zh": "内容选题主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/topic-planning.png",
+      "id": "topic-planning",
+      "name": {
+        "en": "Topic Planning",
+        "zh": "内容选题 需求挖掘 助手"
+      },
+      "profession": {
+        "en": "Topic Planning",
+        "zh": "内容选题 需求挖掘 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/viral-teardown.png",
+      "id": "viral-teardown",
+      "name": {
+        "en": "Viral Teardown",
+        "zh": "爆款拆解 结构复制 顾问"
+      },
+      "profession": {
+        "en": "Viral Teardown",
+        "zh": "爆款拆解 结构复制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/media-asset-pro.png",
+      "id": "media-asset-pro",
+      "name": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "profession": {
+        "en": "Media Asset Engineer",
+        "zh": "媒体素材工程"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-193",
+  "plugin": "group-team-193",
+  "profession": {
+    "en": "Topic Planning Collaboration Team",
+    "zh": "内容 爆款 媒体 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内容选题",
+      "zh": "帮我处理内容选题"
+    },
+    {
+      "en": "Plan 爆款拆解",
+      "zh": "帮我规划爆款拆解"
+    },
+    {
+      "en": "Review 媒体素材工程",
+      "zh": "帮我检查媒体素材工程"
+    }
+  ],
+  "tags": [
+    {
+      "en": "内容选题",
+      "zh": "内容选题"
+    },
+    {
+      "en": "爆款拆解",
+      "zh": "爆款拆解"
+    },
+    {
+      "en": "媒体素材工程",
+      "zh": "媒体素材工程"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "topic-planning-team-lead",
+    "memberAgents": [
+      "topic-planning",
+      "viral-teardown",
+      "media-asset-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

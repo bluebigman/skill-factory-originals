@@ -1,0 +1,126 @@
+{
+  "agentName": "marketing-toolkit-pro-team-lead",
+  "agents": [
+    "./agents/marketing-toolkit-pro-team-lead.md",
+    "./agents/marketing-toolkit-pro.md",
+    "./agents/landing-page-review.md",
+    "./agents/private-domain-ops.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 联盟配置审查",
+    "zh": "帮我处理联盟配置审查"
+  },
+  "description": "营销与内容运营 Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Orchestrated by a lead agent, 3 specialist roles collaborate across phases and deliver structured plans with checklists.",
+    "zh": "联盟 落地页 私域 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依"
+  },
+  "displayName": {
+    "en": "营销与内容运营 Suite Team",
+    "zh": "联盟 落地页 私域 团队"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "marketing-toolkit-pro-team-lead",
+      "name": {
+        "en": "联盟配置审查主理人",
+        "zh": "联盟配置审查主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/marketing-toolkit-pro.png",
+      "id": "marketing-toolkit-pro",
+      "name": {
+        "en": "营销与内容运营 Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "profession": {
+        "en": "营销与内容运营 Suite",
+        "zh": "联盟配置审查 营销数据条款审查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/landing-page-review.png",
+      "id": "landing-page-review",
+      "name": {
+        "en": "Landing Page Review",
+        "zh": "落地页 转化路径 顾问"
+      },
+      "profession": {
+        "en": "Landing Page Review",
+        "zh": "落地页 转化路径 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/private-domain-ops.png",
+      "id": "private-domain-ops",
+      "name": {
+        "en": "Private Domain Ops",
+        "zh": "私域运营 用户分层 顾问"
+      },
+      "profession": {
+        "en": "Private Domain Ops",
+        "zh": "私域运营 用户分层 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-131",
+  "plugin": "group-team-131",
+  "profession": {
+    "en": "营销与内容运营 Suite Collaboration Team",
+    "zh": "联盟 落地页 私域 团队"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 联盟配置审查",
+      "zh": "帮我处理联盟配置审查"
+    },
+    {
+      "en": "Plan 落地页",
+      "zh": "帮我规划落地页"
+    },
+    {
+      "en": "Review 私域运营",
+      "zh": "帮我检查私域运营"
+    }
+  ],
+  "tags": [
+    {
+      "en": "联盟配置审查",
+      "zh": "联盟配置审查"
+    },
+    {
+      "en": "落地页",
+      "zh": "落地页"
+    },
+    {
+      "en": "私域运营",
+      "zh": "私域运营"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "marketing-toolkit-pro-team-lead",
+    "memberAgents": [
+      "marketing-toolkit-pro",
+      "landing-page-review",
+      "private-domain-ops"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-689",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-689",
+    "kind": "team",
+    "name": "回归守护专家",
+    "description": "输入回归守护相关需求，输出基线固定、全量回归、差异归因三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-regression-guard-team-lead",
+        "role": "lead",
+        "name": "回归守护主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-regression-guard",
+        "role": "member",
+        "name": "回归守护 基线 顾问",
+        "evidence": "original_assets/agent-regression-guard/merkle_root",
+        "member_merkle_root": "c3c7d8470e2b0e04de9d81acd717e4731ff35ccfe5628be1985a4705a2760198"
+      },
+      {
+        "slug": "pr-crisis-basic",
+        "role": "member",
+        "name": "危机应对 沟通准备 顾问",
+        "evidence": "original_assets/pr-crisis-basic/merkle_root",
+        "member_merkle_root": "9de9256bc34f4e79125c45aa215caee37a8f7f52d392a75170bc119e637ccf32"
+      },
+      {
+        "slug": "agent-dependency-check",
+        "role": "member",
+        "name": "依赖检查 版本锁定 顾问",
+        "evidence": "original_assets/agent-dependency-check/merkle_root",
+        "member_merkle_root": "a7d42a6390546ade10d70d151336feaf7ca418fa42297f1bfcd2edf179bc01dd"
+      }
+    ],
+    "team_lead": "agent-regression-guard-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "77185a0253fb00b8",
+  "prompt_hash": "ce6ba57cc5f032c0",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-689\", \"kind\": \"team\", \"name\": \"回归守护专家\", \"description\": \"输入回归守护相关需求，输出基线固定、全量回归、差异归因三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-regression-guard-team-lead\", \"role\": \"lead\", \"name\": \"回归守护主理人\", \"evidence\": null}, {\"slug\": \"agent-regression-guard\", \"role\": \"member\", \"name\": \"回归守护 基线 顾问\", \"evidence\": \"original_assets/agent-regression-guard/merkle_root\", \"member_merkle_root\": \"c3c7d8470e2b0e04de9d81acd717e4731ff35ccfe5628be1985a4705a2760198\"}, {\"slug\": \"pr-crisis-basic\", \"role\": \"member\", \"name\": \"危机应对 沟通准备 顾问\", \"evidence\": \"original_assets/pr-crisis-basic/merkle_root\", \"member_merkle_root\": \"9de9256bc34f4e79125c45aa215caee37a8f7f52d392a75170bc119e637ccf32\"}, {\"slug\": \"agent-dependency-check\", \"role\": \"member\", \"name\": \"依赖检查 版本锁定 顾问\", \"evidence\": \"original_assets/agent-dependency-check/merkle_root\", \"member_merkle_root\": \"a7d42a6390546ade10d70d151336feaf7ca418fa42297f1bfcd2edf179bc01dd\"}], \"team_lead\": \"agent-regression-guard-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-dependency-check.md": "dc1255b241eaf1b06214f8b9698a074f8344fefa70be108324956f3f0e2ee5f3",
+    "agents/agent-regression-guard-team-lead.md": "7f4e05157e94110eb1956646f705fc547fa148a408d09460ab01b82913bbf220",
+    "agents/agent-regression-guard.md": "08429acaccd664aa156e75255c9d99359383c6d97d76be094bc2dd0c9f959990",
+    "agents/pr-crisis-basic.md": "e7a0340690b498aeb782aaa481a0f695a158e8871bde2eeb6ce003e84c03cd8b",
+    "plugin.json": "186cf1c7cd85dc3951c50bffdce29323b1c8749f62aa001777b2cca1f8b83868",
+    "settings.json": "6403eb5482c67f6e4bad098feb692a0a15196324e7a6b567172a537637abc35d"
+  }
+}

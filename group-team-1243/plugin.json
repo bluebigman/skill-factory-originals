@@ -1,0 +1,126 @@
+{
+  "agentName": "deploy-bluegreen-team-lead",
+  "agents": [
+    "./agents/deploy-bluegreen-team-lead.md",
+    "./agents/deploy-bluegreen.md",
+    "./agents/data-quality-check.md",
+    "./agents/report-layer-design.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 蓝绿部署方案",
+    "zh": "帮我处理蓝绿部署方案"
+  },
+  "description": "deploy-bluegreen team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 蓝绿部署方案 end-to-end: 两套环境, 流量切换 and 健康检查. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长两套环境、流量切换与健康检查，覆盖蓝绿部署方案全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "deploy-bluegreen Team",
+    "zh": "蓝绿部署方案专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "deploy-bluegreen-team-lead",
+      "name": {
+        "en": "蓝绿部署方案主理人",
+        "zh": "蓝绿部署方案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/deploy-bluegreen.png",
+      "id": "deploy-bluegreen",
+      "name": {
+        "en": "deploy-bluegreen",
+        "zh": "蓝绿部署方案 顾问"
+      },
+      "profession": {
+        "en": "deploy-bluegreen",
+        "zh": "蓝绿部署方案 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/data-quality-check.png",
+      "id": "data-quality-check",
+      "name": {
+        "en": "data-quality-check",
+        "zh": "数据质量核验 助手"
+      },
+      "profession": {
+        "en": "data-quality-check",
+        "zh": "数据质量核验 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-layer-design.png",
+      "id": "report-layer-design",
+      "name": {
+        "en": "report-layer-design",
+        "zh": "报表层设计 顾问"
+      },
+      "profession": {
+        "en": "report-layer-design",
+        "zh": "报表层设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1243",
+  "plugin": "group-team-1243",
+  "profession": {
+    "en": "deploy-bluegreen Collaboration Team",
+    "zh": "蓝绿部署方案专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 蓝绿部署方案",
+      "zh": "帮我处理蓝绿部署方案"
+    },
+    {
+      "en": "Plan 数据质量核验",
+      "zh": "帮我规划数据质量核验"
+    },
+    {
+      "en": "Review 报表层设计",
+      "zh": "帮我检查报表层设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "两套环境",
+      "zh": "两套环境"
+    },
+    {
+      "en": "流量切换",
+      "zh": "流量切换"
+    },
+    {
+      "en": "健康检查",
+      "zh": "健康检查"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "deploy-bluegreen-team-lead",
+    "memberAgents": [
+      "deploy-bluegreen",
+      "data-quality-check",
+      "report-layer-design"
+    ]
+  },
+  "version": "1.0.0"
+}

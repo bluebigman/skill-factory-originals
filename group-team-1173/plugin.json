@@ -1,0 +1,126 @@
+{
+  "agentName": "playtest-method-team-lead",
+  "agents": [
+    "./agents/playtest-method-team-lead.md",
+    "./agents/playtest-method.md",
+    "./agents/game-onboarding-pro.md",
+    "./agents/virtual-space-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "03-GameSpatial",
+  "defaultInitPrompt": {
+    "en": "Handle 可用性",
+    "zh": "帮我处理可用性"
+  },
+  "description": "playtest-method team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 可用性 requirements, output three deliverables: 任务脚本, 出声思维, 五人起步. Verifiable end-to-end, evidence per step.",
+    "zh": "输入可用性相关需求，输出任务脚本、出声思维、五人起步三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "playtest-method Team",
+    "zh": "玩家测试专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "playtest-method-team-lead",
+      "name": {
+        "en": "可用性主理人",
+        "zh": "可用性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/playtest-method.png",
+      "id": "playtest-method",
+      "name": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "profession": {
+        "en": "playtest-method",
+        "zh": "可用性 玩家测试 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/game-onboarding-pro.png",
+      "id": "game-onboarding-pro",
+      "name": {
+        "en": "game-onboarding-pro",
+        "zh": "游戏新手 引导设计 顾问"
+      },
+      "profession": {
+        "en": "game-onboarding-pro",
+        "zh": "游戏新手 引导设计 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/virtual-space-pro.png",
+      "id": "virtual-space-pro",
+      "name": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "profession": {
+        "en": "virtual-space-pro",
+        "zh": "虚拟空间 场景搭建 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1173",
+  "plugin": "group-team-1173",
+  "profession": {
+    "en": "playtest-method Collaboration Team",
+    "zh": "玩家测试专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 可用性",
+      "zh": "帮我处理可用性"
+    },
+    {
+      "en": "Plan 游戏新手",
+      "zh": "帮我规划游戏新手"
+    },
+    {
+      "en": "Review 虚拟空间",
+      "zh": "帮我检查虚拟空间"
+    }
+  ],
+  "tags": [
+    {
+      "en": "任务脚本",
+      "zh": "任务脚本"
+    },
+    {
+      "en": "出声思维",
+      "zh": "出声思维"
+    },
+    {
+      "en": "五人起步",
+      "zh": "五人起步"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "playtest-method-team-lead",
+    "memberAgents": [
+      "playtest-method",
+      "game-onboarding-pro",
+      "virtual-space-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

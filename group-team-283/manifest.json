@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-283",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-283",
+    "kind": "team",
+    "name": "身份管理专家",
+    "description": "输入身份管理相关需求，输出身份唯一、凭据轮换、最小暴露三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "agent-identity-manage-team-lead",
+        "role": "lead",
+        "name": "身份管理主理人",
+        "evidence": null
+      },
+      {
+        "slug": "agent-identity-manage",
+        "role": "member",
+        "name": "身份管理 凭据轮换 顾问",
+        "evidence": "original_assets/agent-identity-manage/merkle_root",
+        "member_merkle_root": "26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533"
+      },
+      {
+        "slug": "agent-data-boundary",
+        "role": "member",
+        "name": "数据边界 范围控制 顾问",
+        "evidence": "original_assets/agent-data-boundary/merkle_root",
+        "member_merkle_root": "cdf727347bd633bdebce2476e9df79cce87aff810fb4861b8a487652af19d248"
+      },
+      {
+        "slug": "agent-input-sanitize",
+        "role": "member",
+        "name": "输入净化 注入防护 顾问",
+        "evidence": "original_assets/agent-input-sanitize/merkle_root",
+        "member_merkle_root": "9ef089fa0016b33f34f4a049b098160fa9f7033d151934309645bb76056ab1e7"
+      }
+    ],
+    "team_lead": "agent-identity-manage-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "583d533c22f945c9",
+  "prompt_hash": "9f889b43051eceaf",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-283\", \"kind\": \"team\", \"name\": \"身份管理专家\", \"description\": \"输入身份管理相关需求，输出身份唯一、凭据轮换、最小暴露三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"agent-identity-manage-team-lead\", \"role\": \"lead\", \"name\": \"身份管理主理人\", \"evidence\": null}, {\"slug\": \"agent-identity-manage\", \"role\": \"member\", \"name\": \"身份管理 凭据轮换 顾问\", \"evidence\": \"original_assets/agent-identity-manage/merkle_root\", \"member_merkle_root\": \"26f8faabec235ce26b7278a8a9437af8efece0d477b3e4cccd54cf54d773f533\"}, {\"slug\": \"agent-data-boundary\", \"role\": \"member\", \"name\": \"数据边界 范围控制 顾问\", \"evidence\": \"original_assets/agent-data-boundary/merkle_root\", \"member_merkle_root\": \"cdf727347bd633bdebce2476e9df79cce87aff810fb4861b8a487652af19d248\"}, {\"slug\": \"agent-input-sanitize\", \"role\": \"member\", \"name\": \"输入净化 注入防护 顾问\", \"evidence\": \"original_assets/agent-input-sanitize/merkle_root\", \"member_merkle_root\": \"9ef089fa0016b33f34f4a049b098160fa9f7033d151934309645bb76056ab1e7\"}], \"team_lead\": \"agent-identity-manage-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-data-boundary.md": "beb7ea5b98eb27fd5719da70b41b30a915dd3fdba380b283461dc2b166e881db",
+    "agents/agent-identity-manage-team-lead.md": "ea64832a43c46c0d8cdb5c7b96685bb4a31b56f0d1e1daf05bc40d4d85719a83",
+    "agents/agent-identity-manage.md": "494faec47c4592eb902bfa93c79a7578fc29c92cd7f01997f43105c251c2c063",
+    "agents/agent-input-sanitize.md": "5dae5f4c89cf531f2c3c332625e4d0f3e368617798e25e96bf626357cd2e4c18",
+    "plugin.json": "fea699d6b1656ad58f0786330dd1220817b4fe5b27e93c52011d1d69061fc111",
+    "settings.json": "5d7c93da77457a6edf7ea8282ef744dab4345a1aa6d5bf660dfb6715f0d39e3b"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1011",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1011",
+    "kind": "team",
+    "name": "咨询框架专家",
+    "description": "输入咨询框架相关需求，输出费用归类、假设驱动、数据支撑三件交付物，全流程可核验、每步附依据。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "expense-reimburse-expert-team-lead",
+        "role": "lead",
+        "name": "报销与费用管理专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "expense-reimburse-expert",
+        "role": "member",
+        "name": "报销与费用管理专家",
+        "evidence": "original_assets/expense-reimburse-expert/merkle_root",
+        "member_merkle_root": "a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f"
+      },
+      {
+        "slug": "consulting-framework",
+        "role": "member",
+        "name": "咨询框架 顾问",
+        "evidence": "original_assets/consulting-framework/merkle_root",
+        "member_merkle_root": "a379013b140de34186336295183b6588433deb9e04837dcbfbfcb384c5007eca"
+      },
+      {
+        "slug": "intl-standards-map",
+        "role": "member",
+        "name": "国际标准 对照梳理 顾问",
+        "evidence": "original_assets/intl-standards-map/merkle_root",
+        "member_merkle_root": "be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89"
+      }
+    ],
+    "team_lead": "expense-reimburse-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7c3eeebe7849fd3f",
+  "prompt_hash": "2256e480b252bcbc",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1011\", \"kind\": \"team\", \"name\": \"咨询框架专家\", \"description\": \"输入咨询框架相关需求，输出费用归类、假设驱动、数据支撑三件交付物，全流程可核验、每步附依据。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"expense-reimburse-expert-team-lead\", \"role\": \"lead\", \"name\": \"报销与费用管理专家主理人\", \"evidence\": null}, {\"slug\": \"expense-reimburse-expert\", \"role\": \"member\", \"name\": \"报销与费用管理专家\", \"evidence\": \"original_assets/expense-reimburse-expert/merkle_root\", \"member_merkle_root\": \"a804d51ecff7cff7305387a75c01e9a2e5a6bbffa66125b17b6127605e04956f\"}, {\"slug\": \"consulting-framework\", \"role\": \"member\", \"name\": \"咨询框架 顾问\", \"evidence\": \"original_assets/consulting-framework/merkle_root\", \"member_merkle_root\": \"a379013b140de34186336295183b6588433deb9e04837dcbfbfcb384c5007eca\"}, {\"slug\": \"intl-standards-map\", \"role\": \"member\", \"name\": \"国际标准 对照梳理 顾问\", \"evidence\": \"original_assets/intl-standards-map/merkle_root\", \"member_merkle_root\": \"be63b7cda0992bfeb4c74a57a60c0838933489b03ea697b8904f7504cfa37b89\"}], \"team_lead\": \"expense-reimburse-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/consulting-framework.md": "f95bfba58a54f788a0b50994ab2a94e6dce723c65b568fd41feb1b2a87d97205",
+    "agents/expense-reimburse-expert-team-lead.md": "6c538d77ca1ed017494506ab8b51ead07016e9cb421c706ea926a8710714cde6",
+    "agents/expense-reimburse-expert.md": "cf37dc5f4a838b6e34d3e3fd7bf00722c04ac15b0e525c9731acad422beb3c38",
+    "agents/intl-standards-map.md": "86f48f0047abe547a0cb9bb78897b3881b35cde249822c2c3a2cc446bea97d36",
+    "plugin.json": "9105e054b63406767642b01def688f8accfbd28dd00bbcab18a4b6631a0b9526",
+    "settings.json": "9b448d1208a2647f891961629bf9ec573c19f4d1f4347fd858431d50cf4a302e"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-280",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-280",
+    "kind": "team",
+    "name": "表格批量专家",
+    "description": "表格批量专家：围绕表格批量，覆盖批前备份／小样验证／幂等设计，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "sheet-batch-pro-team-lead",
+        "role": "lead",
+        "name": "表格批量主理人",
+        "evidence": null
+      },
+      {
+        "slug": "sheet-batch-pro",
+        "role": "member",
+        "name": "表格批量 计算汇总 顾问",
+        "evidence": "original_assets/sheet-batch-pro/merkle_root",
+        "member_merkle_root": "09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9"
+      },
+      {
+        "slug": "log-pattern-mining",
+        "role": "member",
+        "name": "日志挖掘 模式识别 顾问",
+        "evidence": "original_assets/log-pattern-mining/merkle_root",
+        "member_merkle_root": "8b74b721e49a8fa37ad104552c3b3f3c573be90c7234b05d1700095079742837"
+      },
+      {
+        "slug": "anomaly-detection-pro",
+        "role": "member",
+        "name": "异常检测 基线建模 顾问",
+        "evidence": "original_assets/anomaly-detection-pro/merkle_root",
+        "member_merkle_root": "f079af11cec343749503ccf6950fd63707a98a59aa817f1d65a2d94ac3cf6833"
+      }
+    ],
+    "team_lead": "sheet-batch-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f127383ca410feb2",
+  "prompt_hash": "576ece3e1c977f0b",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-280\", \"kind\": \"team\", \"name\": \"表格批量专家\", \"description\": \"表格批量专家：围绕表格批量，覆盖批前备份／小样验证／幂等设计，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"sheet-batch-pro-team-lead\", \"role\": \"lead\", \"name\": \"表格批量主理人\", \"evidence\": null}, {\"slug\": \"sheet-batch-pro\", \"role\": \"member\", \"name\": \"表格批量 计算汇总 顾问\", \"evidence\": \"original_assets/sheet-batch-pro/merkle_root\", \"member_merkle_root\": \"09d94747a761764e81e6cca1cc25dd17294a8a4e4c34435c3ebfc7c47b5840d9\"}, {\"slug\": \"log-pattern-mining\", \"role\": \"member\", \"name\": \"日志挖掘 模式识别 顾问\", \"evidence\": \"original_assets/log-pattern-mining/merkle_root\", \"member_merkle_root\": \"8b74b721e49a8fa37ad104552c3b3f3c573be90c7234b05d1700095079742837\"}, {\"slug\": \"anomaly-detection-pro\", \"role\": \"member\", \"name\": \"异常检测 基线建模 顾问\", \"evidence\": \"original_assets/anomaly-detection-pro/merkle_root\", \"member_merkle_root\": \"f079af11cec343749503ccf6950fd63707a98a59aa817f1d65a2d94ac3cf6833\"}], \"team_lead\": \"sheet-batch-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/anomaly-detection-pro.md": "58b026a8aa5ad95759191a2d3083d14edbd55035e58b086882adb1960e114b12",
+    "agents/log-pattern-mining.md": "4da608b26e3d17f89764213c0ede4ca0c4a64ce7739eaf91f5d8afd1dc7fdd78",
+    "agents/sheet-batch-pro-team-lead.md": "c3a7b10ee483aafea1e691671b2a4d18ccb6daac2e2194aa0aad50b22bf1084a",
+    "agents/sheet-batch-pro.md": "262ad9d27d602d5abd5ad30b711abee42b3f1ac32ef6279edae6001bbd73e8bd",
+    "plugin.json": "7788a78266d7408c23da5ac94d25a80234a78dd9a26935cb3c399f9e17e817f0",
+    "settings.json": "d7a6a96e5f1f900ed35f1abc0e95c7366ef4c40a4b67852d971e02b3a54dda5c"
+  }
+}

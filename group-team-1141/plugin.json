@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-index-rebuild-team-lead",
+  "agents": [
+    "./agents/doc-index-rebuild-team-lead.md",
+    "./agents/doc-index-rebuild.md",
+    "./agents/community-grow-pro.md",
+    "./agents/marketing-mix-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "05-MarketingGrowth",
+  "defaultInitPrompt": {
+    "en": "Handle 文档索引重建",
+    "zh": "帮我处理文档索引重建"
+  },
+  "description": "doc-index-rebuild team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 文档索引重建 end-to-end: 覆盖完整, 层级合理 and 页码准确. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长覆盖完整、层级合理与页码准确，覆盖文档索引重建全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "doc-index-rebuild Team",
+    "zh": "文档索引重建专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-index-rebuild-team-lead",
+      "name": {
+        "en": "文档索引重建主理人",
+        "zh": "文档索引重建主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-index-rebuild.png",
+      "id": "doc-index-rebuild",
+      "name": {
+        "en": "doc-index-rebuild",
+        "zh": "文档索引重建 助手"
+      },
+      "profession": {
+        "en": "doc-index-rebuild",
+        "zh": "文档索引重建 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/community-grow-pro.png",
+      "id": "community-grow-pro",
+      "name": {
+        "en": "community-grow-pro",
+        "zh": "社群运营 活跃机制 顾问"
+      },
+      "profession": {
+        "en": "community-grow-pro",
+        "zh": "社群运营 活跃机制 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/marketing-mix-pro.png",
+      "id": "marketing-mix-pro",
+      "name": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "profession": {
+        "en": "marketing-mix-pro",
+        "zh": "渠道组合 预算分配 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1141",
+  "plugin": "group-team-1141",
+  "profession": {
+    "en": "doc-index-rebuild Collaboration Team",
+    "zh": "文档索引重建专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档索引重建",
+      "zh": "帮我处理文档索引重建"
+    },
+    {
+      "en": "Plan 社群运营",
+      "zh": "帮我规划社群运营"
+    },
+    {
+      "en": "Review 渠道组合",
+      "zh": "帮我检查渠道组合"
+    }
+  ],
+  "tags": [
+    {
+      "en": "层级合理",
+      "zh": "层级合理"
+    },
+    {
+      "en": "页码准确",
+      "zh": "页码准确"
+    },
+    {
+      "en": "同义互指",
+      "zh": "同义互指"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-index-rebuild-team-lead",
+    "memberAgents": [
+      "doc-index-rebuild",
+      "community-grow-pro",
+      "marketing-mix-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

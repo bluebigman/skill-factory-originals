@@ -1,0 +1,126 @@
+{
+  "agentName": "kb-build-pro-team-lead",
+  "agents": [
+    "./agents/kb-build-pro-team-lead.md",
+    "./agents/kb-build-pro.md",
+    "./agents/evidence-audit-pro.md",
+    "./agents/anomaly-investigate.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 知识库构建",
+    "zh": "帮我处理知识库构建"
+  },
+  "description": "Knowledge Base Builder team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 异常波动排查, covers 定位切片 / 时序对比 / 外部因素, delivering structured results and actionable checklists.",
+    "zh": "异常波动排查专家：围绕异常波动排查，覆盖定位切片／时序对比／外部因素，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "Knowledge Base Builder Team",
+    "zh": "异常波动排查专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "kb-build-pro-team-lead",
+      "name": {
+        "en": "知识库构建主理人",
+        "zh": "知识库构建主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/kb-build-pro.png",
+      "id": "kb-build-pro",
+      "name": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "profession": {
+        "en": "Knowledge Base Builder",
+        "zh": "知识库构建 文档整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/evidence-audit-pro.png",
+      "id": "evidence-audit-pro",
+      "name": {
+        "en": "Evidence Audit Expert",
+        "zh": "数据核验与审计"
+      },
+      "profession": {
+        "en": "Evidence Audit Expert",
+        "zh": "数据核验与审计"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/anomaly-investigate.png",
+      "id": "anomaly-investigate",
+      "name": {
+        "en": "anomaly-investigate",
+        "zh": "异常波动排查 助手"
+      },
+      "profession": {
+        "en": "anomaly-investigate",
+        "zh": "异常波动排查 助手"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1007",
+  "plugin": "group-team-1007",
+  "profession": {
+    "en": "Knowledge Base Builder Collaboration Team",
+    "zh": "异常波动排查专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 知识库构建",
+      "zh": "帮我处理知识库构建"
+    },
+    {
+      "en": "Plan 数据核验与审计",
+      "zh": "帮我规划数据核验与审计"
+    },
+    {
+      "en": "Review 异常波动排查",
+      "zh": "帮我检查异常波动排查"
+    }
+  ],
+  "tags": [
+    {
+      "en": "文档章节",
+      "zh": "文档章节"
+    },
+    {
+      "en": "切分索引",
+      "zh": "切分索引"
+    },
+    {
+      "en": "抽取归并",
+      "zh": "抽取归并"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "kb-build-pro-team-lead",
+    "memberAgents": [
+      "kb-build-pro",
+      "evidence-audit-pro",
+      "anomaly-investigate"
+    ]
+  },
+  "version": "1.0.0"
+}

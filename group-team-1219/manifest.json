@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085722",
+  "slug": "group-team-1219",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1219",
+    "kind": "team",
+    "name": "指标口径定义专家",
+    "description": "擅长分子分母、统计周期与变更留痕，覆盖指标口径定义全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "metric-definition-team-lead",
+        "role": "lead",
+        "name": "指标口径定义主理人",
+        "evidence": null
+      },
+      {
+        "slug": "metric-definition",
+        "role": "member",
+        "name": "指标口径定义 顾问",
+        "evidence": "original_assets/metric-definition/merkle_root",
+        "member_merkle_root": "3329e9d1858be43703c4f431672368b4395b4683e8d88aa976d4b0edbf0e6429"
+      },
+      {
+        "slug": "agent-conflict-resolve",
+        "role": "member",
+        "name": "冲突消解 优先级裁 顾问",
+        "evidence": "original_assets/agent-conflict-resolve/merkle_root",
+        "member_merkle_root": "97ac99ce9abe60f4d76848fad999a2617dbbeed7f69b487952a66c7262eb95b7"
+      },
+      {
+        "slug": "table-relation-map",
+        "role": "member",
+        "name": "表关系梳理 助手",
+        "evidence": "original_assets/table-relation-map/merkle_root",
+        "member_merkle_root": "e84709221060b7bb9e8664708d6e69b8ef6ae5d85b2520131e445472d6d70b54"
+      }
+    ],
+    "team_lead": "metric-definition-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c8df1f21bc694657",
+  "prompt_hash": "e6f488e5464ebec6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1219\", \"kind\": \"team\", \"name\": \"指标口径定义专家\", \"description\": \"擅长分子分母、统计周期与变更留痕，覆盖指标口径定义全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"metric-definition-team-lead\", \"role\": \"lead\", \"name\": \"指标口径定义主理人\", \"evidence\": null}, {\"slug\": \"metric-definition\", \"role\": \"member\", \"name\": \"指标口径定义 顾问\", \"evidence\": \"original_assets/metric-definition/merkle_root\", \"member_merkle_root\": \"3329e9d1858be43703c4f431672368b4395b4683e8d88aa976d4b0edbf0e6429\"}, {\"slug\": \"agent-conflict-resolve\", \"role\": \"member\", \"name\": \"冲突消解 优先级裁 顾问\", \"evidence\": \"original_assets/agent-conflict-resolve/merkle_root\", \"member_merkle_root\": \"97ac99ce9abe60f4d76848fad999a2617dbbeed7f69b487952a66c7262eb95b7\"}, {\"slug\": \"table-relation-map\", \"role\": \"member\", \"name\": \"表关系梳理 助手\", \"evidence\": \"original_assets/table-relation-map/merkle_root\", \"member_merkle_root\": \"e84709221060b7bb9e8664708d6e69b8ef6ae5d85b2520131e445472d6d70b54\"}], \"team_lead\": \"metric-definition-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-conflict-resolve.md": "7cc508206feb1aba7d3af013c2653511608144609092b35ff6af49de2c3686ea",
+    "agents/metric-definition-team-lead.md": "6c31037171d77f26c72de7d2f3f06bfdad50409a16d2e7a041ffeef4b32c8844",
+    "agents/metric-definition.md": "6cc4ca67f9c2f544c372dd345498bbee352e48b383a89616586d00b1c8715d1e",
+    "agents/table-relation-map.md": "9b0937bc0ca52aa8695765a6b7d300e4a0efe05181be01ad7f8cd447cdfe20a8",
+    "plugin.json": "69d7f0621bb8d3571aaaf9f90f1e8ff82ff168ebbc6478e2eefb4b307babd3b0",
+    "settings.json": "cf78a0cbab5124807c03ddf94d5ddf09bb261fda5b743907d67532a58ad16e96"
+  }
+}

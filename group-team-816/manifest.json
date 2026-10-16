@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085735",
+  "slug": "group-team-816",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-816",
+    "kind": "team",
+    "name": "路由设计任务拆解专家",
+    "description": "擅长轻量框架、调试助手与架构设计，覆盖路由设计任务拆解全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "code-assist-pro-02-fixed-team-lead",
+        "role": "lead",
+        "name": "Web路由设计主理人",
+        "evidence": null
+      },
+      {
+        "slug": "code-assist-pro-02-fixed",
+        "role": "member",
+        "name": "Web路由设计 任务拆解",
+        "evidence": "original_assets/code-assist-pro-02-fixed/merkle_root",
+        "member_merkle_root": "7ab622ff4b637eef17527f88b83279f9c114faa6652303da183f6d700f39aae9"
+      },
+      {
+        "slug": "evidence-audit-pro",
+        "role": "member",
+        "name": "数据核验与审计",
+        "evidence": "original_assets/evidence-audit-pro/merkle_root",
+        "member_merkle_root": "0198cd7c3719f47ff474e16a845786b0cce2825b7480200c19e08cd2cdc71481"
+      },
+      {
+        "slug": "java-code-pro",
+        "role": "member",
+        "name": "Java 工程工具",
+        "evidence": "original_assets/java-code-pro/merkle_root",
+        "member_merkle_root": "0b5d03c9eb4d06cbd35d6c185457ae9d1d4516ee5d337f7ee009465950c14c22"
+      }
+    ],
+    "team_lead": "code-assist-pro-02-fixed-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "eb18be3c4519eb75",
+  "prompt_hash": "4cd8a16619ddfa18",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-816\", \"kind\": \"team\", \"name\": \"路由设计任务拆解专家\", \"description\": \"擅长轻量框架、调试助手与架构设计，覆盖路由设计任务拆解全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"code-assist-pro-02-fixed-team-lead\", \"role\": \"lead\", \"name\": \"Web路由设计主理人\", \"evidence\": null}, {\"slug\": \"code-assist-pro-02-fixed\", \"role\": \"member\", \"name\": \"Web路由设计 任务拆解\", \"evidence\": \"original_assets/code-assist-pro-02-fixed/merkle_root\", \"member_merkle_root\": \"7ab622ff4b637eef17527f88b83279f9c114faa6652303da183f6d700f39aae9\"}, {\"slug\": \"evidence-audit-pro\", \"role\": \"member\", \"name\": \"数据核验与审计\", \"evidence\": \"original_assets/evidence-audit-pro/merkle_root\", \"member_merkle_root\": \"0198cd7c3719f47ff474e16a845786b0cce2825b7480200c19e08cd2cdc71481\"}, {\"slug\": \"java-code-pro\", \"role\": \"member\", \"name\": \"Java 工程工具\", \"evidence\": \"original_assets/java-code-pro/merkle_root\", \"member_merkle_root\": \"0b5d03c9eb4d06cbd35d6c185457ae9d1d4516ee5d337f7ee009465950c14c22\"}], \"team_lead\": \"code-assist-pro-02-fixed-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-assist-pro-02-fixed-team-lead.md": "8022e31e5161978e7a8fc1da0e08873e241a39c05e6b1fc66bcb30bff5e0d0ff",
+    "agents/code-assist-pro-02-fixed.md": "46989c9a701f617b935a5c5740265edc1c9eda731f8b4f4b21eacd38fe8da03d",
+    "agents/evidence-audit-pro.md": "84db0c52c8f6e408d1fb70646d04191278c26f0feba009c371631685f51b8376",
+    "agents/java-code-pro.md": "4966f2ec059b5d66f61a655e8d13476818799787a8cd1fcb5aec3a41cef0792c",
+    "plugin.json": "ddd1248212246699b60810971f8ad8e3d49ef4ea7696597fbb323bc300dec9da",
+    "settings.json": "7be2b8156ce2484dd49251ba481aa79ae22f789948cb57389d6b03d6e1e73900"
+  }
+}

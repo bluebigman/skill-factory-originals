@@ -1,0 +1,126 @@
+{
+  "agentName": "internal-comms-draft-team-lead",
+  "agents": [
+    "./agents/internal-comms-draft-team-lead.md",
+    "./agents/internal-comms-draft.md",
+    "./agents/agent-doc-index.md",
+    "./agents/writing-toolkit-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 内部沟通文案",
+    "zh": "帮我处理内部沟通文案"
+  },
+  "description": "internal-comms-draft team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 内部沟通文案 end-to-end: 附件清单, 索引完整 and 语义检索. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长附件清单、索引完整与语义检索，覆盖内部沟通文案全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "internal-comms-draft Team",
+    "zh": "文档索引专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "internal-comms-draft-team-lead",
+      "name": {
+        "en": "内部沟通文案主理人",
+        "zh": "内部沟通文案主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/internal-comms-draft.png",
+      "id": "internal-comms-draft",
+      "name": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "profession": {
+        "en": "internal-comms-draft",
+        "zh": "内部沟通文案 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-doc-index.png",
+      "id": "agent-doc-index",
+      "name": {
+        "en": "agent-doc-index",
+        "zh": "文档索引 检索 顾问"
+      },
+      "profession": {
+        "en": "agent-doc-index",
+        "zh": "文档索引 检索 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/writing-toolkit-pro.png",
+      "id": "writing-toolkit-pro",
+      "name": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "profession": {
+        "en": "文本写作与润色 Suite",
+        "zh": "文本净化 自然化改写 格式校准"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-949",
+  "plugin": "group-team-949",
+  "profession": {
+    "en": "internal-comms-draft Collaboration Team",
+    "zh": "文档索引专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 内部沟通文案",
+      "zh": "帮我处理内部沟通文案"
+    },
+    {
+      "en": "Plan 文档索引",
+      "zh": "帮我规划文档索引"
+    },
+    {
+      "en": "Review 文本净化",
+      "zh": "帮我检查文本净化"
+    }
+  ],
+  "tags": [
+    {
+      "en": "结论在首段",
+      "zh": "结论在首段"
+    },
+    {
+      "en": "行动明确",
+      "zh": "行动明确"
+    },
+    {
+      "en": "语气一致",
+      "zh": "语气一致"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "internal-comms-draft-team-lead",
+    "memberAgents": [
+      "internal-comms-draft",
+      "agent-doc-index",
+      "writing-toolkit-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

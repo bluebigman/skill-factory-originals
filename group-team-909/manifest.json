@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085737",
+  "slug": "group-team-909",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-909",
+    "kind": "team",
+    "name": "故障复盘专家",
+    "description": "擅长根因分层、闭环跟踪与依赖成图，覆盖故障复盘全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "incident-postmortem-team-lead",
+        "role": "lead",
+        "name": "故障复盘主理人",
+        "evidence": null
+      },
+      {
+        "slug": "incident-postmortem",
+        "role": "member",
+        "name": "故障复盘 顾问",
+        "evidence": "original_assets/incident-postmortem/merkle_root",
+        "member_merkle_root": "d449117e75b70386ed1891e488170ee0d4849fc2d330d4f63eb5a11e8948d5ed"
+      },
+      {
+        "slug": "agent-task-plan",
+        "role": "member",
+        "name": "任务规划 排期 顾问",
+        "evidence": "original_assets/agent-task-plan/merkle_root",
+        "member_merkle_root": "b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a"
+      },
+      {
+        "slug": "agent-doc-pipeline",
+        "role": "member",
+        "name": "文档流水 解析 顾问",
+        "evidence": "original_assets/agent-doc-pipeline/merkle_root",
+        "member_merkle_root": "574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661"
+      }
+    ],
+    "team_lead": "incident-postmortem-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f7cd1821b5a88e51",
+  "prompt_hash": "70cd2959a2da637c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-909\", \"kind\": \"team\", \"name\": \"故障复盘专家\", \"description\": \"擅长根因分层、闭环跟踪与依赖成图，覆盖故障复盘全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"incident-postmortem-team-lead\", \"role\": \"lead\", \"name\": \"故障复盘主理人\", \"evidence\": null}, {\"slug\": \"incident-postmortem\", \"role\": \"member\", \"name\": \"故障复盘 顾问\", \"evidence\": \"original_assets/incident-postmortem/merkle_root\", \"member_merkle_root\": \"d449117e75b70386ed1891e488170ee0d4849fc2d330d4f63eb5a11e8948d5ed\"}, {\"slug\": \"agent-task-plan\", \"role\": \"member\", \"name\": \"任务规划 排期 顾问\", \"evidence\": \"original_assets/agent-task-plan/merkle_root\", \"member_merkle_root\": \"b3fbc49da08d3eb3fa52a6924cb2526c184e3b17db947fc23b6bd3aeba12245a\"}, {\"slug\": \"agent-doc-pipeline\", \"role\": \"member\", \"name\": \"文档流水 解析 顾问\", \"evidence\": \"original_assets/agent-doc-pipeline/merkle_root\", \"member_merkle_root\": \"574feb40262ffe987ffd8268c0774e399c3a68477c56205ae426e7f8eb32a661\"}], \"team_lead\": \"incident-postmortem-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-doc-pipeline.md": "93f3e2edd045e0d09450595802a11a6f4f8e0fd830db879779769783d036805e",
+    "agents/agent-task-plan.md": "1d39cf3f90fbb4765a9c34d44feaa7e9cbd428b02bf25eda9d658cf9d142fac8",
+    "agents/incident-postmortem-team-lead.md": "e60305bfe5c77326cc753ffc205ca2eb0f2baa32728f58c382fa00c08a906df9",
+    "agents/incident-postmortem.md": "c158de96f319c50e597a12870be6cf4ee5fcaad613abedb555165549d831abbd",
+    "plugin.json": "0e467adbd430cdfe6916e411930cc4d36cdb0013cf64fe7b515328ad2be1ca95",
+    "settings.json": "f25784e13750768e00d270c19aa77da721f71761c43f49aba04681626868e725"
+  }
+}

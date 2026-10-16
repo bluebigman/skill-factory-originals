@@ -1,0 +1,126 @@
+{
+  "agentName": "overseas-support-pro-team-lead",
+  "agents": [
+    "./agents/overseas-support-pro-team-lead.md",
+    "./agents/overseas-support-pro.md",
+    "./agents/key-account-plan.md",
+    "./agents/sales-territory-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "07-SalesCommerce",
+  "defaultInitPrompt": {
+    "en": "Handle 海外客服",
+    "zh": "帮我处理海外客服"
+  },
+  "description": "overseas-support-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 海外客服 end-to-end: 时段覆盖, 问题分级 and 升级路径. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长时段覆盖、问题分级与升级路径，覆盖海外客服全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "overseas-support-pro Team",
+    "zh": "大客户专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "overseas-support-pro-team-lead",
+      "name": {
+        "en": "海外客服主理人",
+        "zh": "海外客服主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/overseas-support-pro.png",
+      "id": "overseas-support-pro",
+      "name": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "profession": {
+        "en": "overseas-support-pro",
+        "zh": "海外客服 多语支持 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/key-account-plan.png",
+      "id": "key-account-plan",
+      "name": {
+        "en": "key-account-plan",
+        "zh": "大客户 经营计划 顾问"
+      },
+      "profession": {
+        "en": "key-account-plan",
+        "zh": "大客户 经营计划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/sales-territory-pro.png",
+      "id": "sales-territory-pro",
+      "name": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "profession": {
+        "en": "sales-territory-pro",
+        "zh": "区域划分 覆盖策略 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-943",
+  "plugin": "group-team-943",
+  "profession": {
+    "en": "overseas-support-pro Collaboration Team",
+    "zh": "大客户专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 海外客服",
+      "zh": "帮我处理海外客服"
+    },
+    {
+      "en": "Plan 大客户",
+      "zh": "帮我规划大客户"
+    },
+    {
+      "en": "Review 区域划分",
+      "zh": "帮我检查区域划分"
+    }
+  ],
+  "tags": [
+    {
+      "en": "问题分级",
+      "zh": "问题分级"
+    },
+    {
+      "en": "升级路径",
+      "zh": "升级路径"
+    },
+    {
+      "en": "知识同步",
+      "zh": "知识同步"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "overseas-support-pro-team-lead",
+    "memberAgents": [
+      "overseas-support-pro",
+      "key-account-plan",
+      "sales-territory-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

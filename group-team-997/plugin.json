@@ -1,0 +1,126 @@
+{
+  "agentName": "schema-doc-pro-team-lead",
+  "agents": [
+    "./agents/schema-doc-pro-team-lead.md",
+    "./agents/schema-doc-pro.md",
+    "./agents/errlog-analyze-pro.md",
+    "./agents/report-layer-design.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 表结构文",
+    "zh": "帮我处理表结构文"
+  },
+  "description": "schema-doc-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 表结构文 end-to-end: 字段完整, 口径记录 and 变更同步. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长字段完整、口径记录与变更同步，覆盖表结构文全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "schema-doc-pro Team",
+    "zh": "表结构文专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "schema-doc-pro-team-lead",
+      "name": {
+        "en": "表结构文主理人",
+        "zh": "表结构文主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/schema-doc-pro.png",
+      "id": "schema-doc-pro",
+      "name": {
+        "en": "schema-doc-pro",
+        "zh": "表结构文 字段释义 顾问"
+      },
+      "profession": {
+        "en": "schema-doc-pro",
+        "zh": "表结构文 字段释义 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/errlog-analyze-pro.png",
+      "id": "errlog-analyze-pro",
+      "name": {
+        "en": "errlog-analyze-pro",
+        "zh": "错误日志分析 助手"
+      },
+      "profession": {
+        "en": "errlog-analyze-pro",
+        "zh": "错误日志分析 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/report-layer-design.png",
+      "id": "report-layer-design",
+      "name": {
+        "en": "report-layer-design",
+        "zh": "报表层设计 顾问"
+      },
+      "profession": {
+        "en": "report-layer-design",
+        "zh": "报表层设计 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-997",
+  "plugin": "group-team-997",
+  "profession": {
+    "en": "schema-doc-pro Collaboration Team",
+    "zh": "表结构文专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 表结构文",
+      "zh": "帮我处理表结构文"
+    },
+    {
+      "en": "Plan 错误日志分析",
+      "zh": "帮我规划错误日志分析"
+    },
+    {
+      "en": "Review 报表层设计",
+      "zh": "帮我检查报表层设计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "字段完整",
+      "zh": "字段完整"
+    },
+    {
+      "en": "口径记录",
+      "zh": "口径记录"
+    },
+    {
+      "en": "负责人",
+      "zh": "负责人"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "schema-doc-pro-team-lead",
+    "memberAgents": [
+      "schema-doc-pro",
+      "errlog-analyze-pro",
+      "report-layer-design"
+    ]
+  },
+  "version": "1.0.0"
+}

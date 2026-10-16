@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085726",
+  "slug": "group-team-186",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-186",
+    "kind": "team",
+    "name": "自律 简历 会议 团队",
+    "description": "自律 简历 会议 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "self-discipline-pro-team-lead",
+        "role": "lead",
+        "name": "自律养成主理人",
+        "evidence": null
+      },
+      {
+        "slug": "self-discipline-pro",
+        "role": "member",
+        "name": "自律养成 时间安排 目标管理",
+        "evidence": "original_assets/self-discipline-pro/merkle_root",
+        "member_merkle_root": "8535ca1933dd230c6467ab8768e35d479f1d97e68b349f5cc34b8a06bd759aab"
+      },
+      {
+        "slug": "resume-tailor",
+        "role": "member",
+        "name": "简历定制 岗位匹配 顾问",
+        "evidence": "original_assets/resume-tailor/merkle_root",
+        "member_merkle_root": "d253f1ab600d04dd286910de35ad43404a7581264650e8daa46dd8a8386d4c26"
+      },
+      {
+        "slug": "meeting-notes-pro",
+        "role": "member",
+        "name": "会议纪要 行动项 决议跟踪",
+        "evidence": "original_assets/meeting-notes-pro/merkle_root",
+        "member_merkle_root": "1b139d9808f1ba5c5121817b73382bfb21a61ba2895dd328dd17710af34b59cb"
+      }
+    ],
+    "team_lead": "self-discipline-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1b153e91f3700ce4",
+  "prompt_hash": "b1e8c983ce4bb569",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-186\", \"kind\": \"team\", \"name\": \"自律 简历 会议 团队\", \"description\": \"自律 简历 会议 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依据\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"self-discipline-pro-team-lead\", \"role\": \"lead\", \"name\": \"自律养成主理人\", \"evidence\": null}, {\"slug\": \"self-discipline-pro\", \"role\": \"member\", \"name\": \"自律养成 时间安排 目标管理\", \"evidence\": \"original_assets/self-discipline-pro/merkle_root\", \"member_merkle_root\": \"8535ca1933dd230c6467ab8768e35d479f1d97e68b349f5cc34b8a06bd759aab\"}, {\"slug\": \"resume-tailor\", \"role\": \"member\", \"name\": \"简历定制 岗位匹配 顾问\", \"evidence\": \"original_assets/resume-tailor/merkle_root\", \"member_merkle_root\": \"d253f1ab600d04dd286910de35ad43404a7581264650e8daa46dd8a8386d4c26\"}, {\"slug\": \"meeting-notes-pro\", \"role\": \"member\", \"name\": \"会议纪要 行动项 决议跟踪\", \"evidence\": \"original_assets/meeting-notes-pro/merkle_root\", \"member_merkle_root\": \"1b139d9808f1ba5c5121817b73382bfb21a61ba2895dd328dd17710af34b59cb\"}], \"team_lead\": \"self-discipline-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/meeting-notes-pro.md": "29950a36e9899b23433026d490109eaccb0a852e3c3bbe27ab777b06e3ef25ca",
+    "agents/resume-tailor.md": "ea8609f0bcf61e84bdf7c4e6bd24508727e09425a3ced95f79eee978a0a7bf7b",
+    "agents/self-discipline-pro-team-lead.md": "73953dbf66a1dedd87b80882613bcbeea54053280f58ade894c15cb9641cfd38",
+    "agents/self-discipline-pro.md": "b56a34aa1f6b2db5be9f0b1e25e41a79ecd080d59dd1bc431d83af92e725f0eb",
+    "plugin.json": "d8134f784112705e34fde439db5b4bd9e9b64e542931ee25aa28bc1e95391e31",
+    "settings.json": "0d0688b93ba652a1cc11b45301d2e703cfca5f90d1bf0ff89a79751483dd695a"
+  }
+}

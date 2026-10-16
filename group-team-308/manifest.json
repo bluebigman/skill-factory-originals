@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085728",
+  "slug": "group-team-308",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-308",
+    "kind": "team",
+    "name": "决策追溯专家",
+    "description": "决策追溯专家：围绕决策追溯，覆盖决策记录／否决留痕／版本绑定，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "decision-trace-pro-team-lead",
+        "role": "lead",
+        "name": "决策追溯主理人",
+        "evidence": null
+      },
+      {
+        "slug": "decision-trace-pro",
+        "role": "member",
+        "name": "决策追溯 依据留痕 顾问",
+        "evidence": "original_assets/decision-trace-pro/merkle_root",
+        "member_merkle_root": "eb8223b63eeb3fb40a80a7e71e1b1a3bd8f73d625c756bfd1ff3a170b8ffd20b"
+      },
+      {
+        "slug": "changelog-pro",
+        "role": "member",
+        "name": "变更日志 版本记录 顾问",
+        "evidence": "original_assets/changelog-pro/merkle_root",
+        "member_merkle_root": "36496aadd03d734d904388dfe78b222fee895715fd79fcdb091a460e6296b1ac"
+      },
+      {
+        "slug": "agent-tool-selection",
+        "role": "member",
+        "name": "工具选择 依赖排序 顾问",
+        "evidence": "original_assets/agent-tool-selection/merkle_root",
+        "member_merkle_root": "d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb"
+      }
+    ],
+    "team_lead": "decision-trace-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a050a84a0c64d320",
+  "prompt_hash": "9308374aebdc0b52",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-308\", \"kind\": \"team\", \"name\": \"决策追溯专家\", \"description\": \"决策追溯专家：围绕决策追溯，覆盖决策记录／否决留痕／版本绑定，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"decision-trace-pro-team-lead\", \"role\": \"lead\", \"name\": \"决策追溯主理人\", \"evidence\": null}, {\"slug\": \"decision-trace-pro\", \"role\": \"member\", \"name\": \"决策追溯 依据留痕 顾问\", \"evidence\": \"original_assets/decision-trace-pro/merkle_root\", \"member_merkle_root\": \"eb8223b63eeb3fb40a80a7e71e1b1a3bd8f73d625c756bfd1ff3a170b8ffd20b\"}, {\"slug\": \"changelog-pro\", \"role\": \"member\", \"name\": \"变更日志 版本记录 顾问\", \"evidence\": \"original_assets/changelog-pro/merkle_root\", \"member_merkle_root\": \"36496aadd03d734d904388dfe78b222fee895715fd79fcdb091a460e6296b1ac\"}, {\"slug\": \"agent-tool-selection\", \"role\": \"member\", \"name\": \"工具选择 依赖排序 顾问\", \"evidence\": \"original_assets/agent-tool-selection/merkle_root\", \"member_merkle_root\": \"d835b0e1df07ebb895362e5629dcef1c353d212e3288787848685cd98191afcb\"}], \"team_lead\": \"decision-trace-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/agent-tool-selection.md": "aafc7cc186b689f9e7478a2a9d3754237e127dbad69c05cb2a2a644418b9ec36",
+    "agents/changelog-pro.md": "dd6d57cd8af1191d2306a5cf54ba27e664ff317ad437b0ff5d30e99ee5383506",
+    "agents/decision-trace-pro-team-lead.md": "c9b17ef4765e03ab39bc99529cef086bd1c24a07acebe150fc6cb150f913db31",
+    "agents/decision-trace-pro.md": "978ae49c01477d84a6182cfabd414766d5b14e704f996f09384397b7476e0564",
+    "plugin.json": "7e4b255a84ef95a272f49df43c2680ea3e22e10cd8ab5b382f744a4c6b40bf59",
+    "settings.json": "be6001f234d00b0726512a5bd050d0294b0ad79d6e899b31ca0b05578c4134b4"
+  }
+}

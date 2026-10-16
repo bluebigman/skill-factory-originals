@@ -1,0 +1,126 @@
+{
+  "agentName": "visual-consistency-team-lead",
+  "agents": [
+    "./agents/visual-consistency-team-lead.md",
+    "./agents/visual-consistency.md",
+    "./agents/ui-game-hud.md",
+    "./agents/handoff-design-dev.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "01-ProductDesign",
+  "defaultInitPrompt": {
+    "en": "Handle 视觉一致性",
+    "zh": "帮我处理视觉一致性"
+  },
+  "description": "visual-consistency team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 视觉一致性 end-to-end: 色板统一, 字体统一 and 间距统一. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长色板统一、字体统一与间距统一，覆盖视觉一致性全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "visual-consistency Team",
+    "zh": "视觉一致性专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "visual-consistency-team-lead",
+      "name": {
+        "en": "视觉一致性主理人",
+        "zh": "视觉一致性主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/visual-consistency.png",
+      "id": "visual-consistency",
+      "name": {
+        "en": "visual-consistency",
+        "zh": "视觉一致性 顾问"
+      },
+      "profession": {
+        "en": "visual-consistency",
+        "zh": "视觉一致性 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ui-game-hud.png",
+      "id": "ui-game-hud",
+      "name": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "profession": {
+        "en": "ui-game-hud",
+        "zh": "游戏界面 信息层级 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/handoff-design-dev.png",
+      "id": "handoff-design-dev",
+      "name": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "profession": {
+        "en": "handoff-design-dev",
+        "zh": "设计交付 协作规范 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1030",
+  "plugin": "group-team-1030",
+  "profession": {
+    "en": "visual-consistency Collaboration Team",
+    "zh": "视觉一致性专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 视觉一致性",
+      "zh": "帮我处理视觉一致性"
+    },
+    {
+      "en": "Plan 游戏界面",
+      "zh": "帮我规划游戏界面"
+    },
+    {
+      "en": "Review 设计交付",
+      "zh": "帮我检查设计交付"
+    }
+  ],
+  "tags": [
+    {
+      "en": "色板统一",
+      "zh": "色板统一"
+    },
+    {
+      "en": "字体统一",
+      "zh": "字体统一"
+    },
+    {
+      "en": "间距统一",
+      "zh": "间距统一"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "visual-consistency-team-lead",
+    "memberAgents": [
+      "visual-consistency",
+      "ui-game-hud",
+      "handoff-design-dev"
+    ]
+  },
+  "version": "1.0.0"
+}

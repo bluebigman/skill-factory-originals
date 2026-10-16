@@ -1,0 +1,126 @@
+{
+  "agentName": "kb-quality-tuner-pro-team-lead",
+  "agents": [
+    "./agents/kb-quality-tuner-pro-team-lead.md",
+    "./agents/kb-quality-tuner-pro.md",
+    "./agents/research-ops-expert.md",
+    "./agents/perf-profile-pro.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 知识库",
+    "zh": "帮我处理知识库"
+  },
+  "description": "Knowledge Quality Tuner team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 性能剖析 requirements, output three deliverables: 热点定位, 小步优化, 复测对照. Verifiable end-to-end, evidence per step.",
+    "zh": "输入性能剖析相关需求，输出热点定位、小步优化、复测对照三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Knowledge Quality Tuner Team",
+    "zh": "可读性核验专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "kb-quality-tuner-pro-team-lead",
+      "name": {
+        "en": "知识库主理人",
+        "zh": "知识库主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/kb-quality-tuner-pro.png",
+      "id": "kb-quality-tuner-pro",
+      "name": {
+        "en": "Knowledge Quality Tuner",
+        "zh": "知识库 可读性核验 时效检查"
+      },
+      "profession": {
+        "en": "Knowledge Quality Tuner",
+        "zh": "知识库 可读性核验 时效检查"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/research-ops-expert.png",
+      "id": "research-ops-expert",
+      "name": {
+        "en": "Academic Research Ops Expert",
+        "zh": "学术研究 资料检索 综述整理"
+      },
+      "profession": {
+        "en": "Academic Research Ops Expert",
+        "zh": "学术研究 资料检索 综述整理"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/perf-profile-pro.png",
+      "id": "perf-profile-pro",
+      "name": {
+        "en": "perf-profile-pro",
+        "zh": "性能剖析 热点定位 顾问"
+      },
+      "profession": {
+        "en": "perf-profile-pro",
+        "zh": "性能剖析 热点定位 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-806",
+  "plugin": "group-team-806",
+  "profession": {
+    "en": "Knowledge Quality Tuner Collaboration Team",
+    "zh": "可读性核验专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 知识库",
+      "zh": "帮我处理知识库"
+    },
+    {
+      "en": "Plan 学术研究",
+      "zh": "帮我规划学术研究"
+    },
+    {
+      "en": "Review 性能剖析",
+      "zh": "帮我检查性能剖析"
+    }
+  ],
+  "tags": [
+    {
+      "en": "段落评分",
+      "zh": "段落评分"
+    },
+    {
+      "en": "知识条目",
+      "zh": "知识条目"
+    },
+    {
+      "en": "时效核验",
+      "zh": "时效核验"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "kb-quality-tuner-pro-team-lead",
+    "memberAgents": [
+      "kb-quality-tuner-pro",
+      "research-ops-expert",
+      "perf-profile-pro"
+    ]
+  },
+  "version": "1.0.0"
+}

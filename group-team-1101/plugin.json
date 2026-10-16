@@ -1,0 +1,126 @@
+{
+  "agentName": "funnel-analysis-team-lead",
+  "agents": [
+    "./agents/funnel-analysis-team-lead.md",
+    "./agents/funnel-analysis.md",
+    "./agents/refactor-safe-plan.md",
+    "./agents/ops-deploy-pro-01-fixed.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "en": "Handle 转化漏斗分析",
+    "zh": "帮我处理转化漏斗分析"
+  },
+  "description": "funnel-analysis team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 转化漏斗分析 requirements, output three deliverables: 定义步骤, 分群对比, 时间维度. Verifiable end-to-end, evidence per step.",
+    "zh": "输入转化漏斗分析相关需求，输出定义步骤、分群对比、时间维度三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "funnel-analysis Team",
+    "zh": "转化漏斗分析专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "funnel-analysis-team-lead",
+      "name": {
+        "en": "转化漏斗分析主理人",
+        "zh": "转化漏斗分析主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/funnel-analysis.png",
+      "id": "funnel-analysis",
+      "name": {
+        "en": "funnel-analysis",
+        "zh": "转化漏斗分析 助手"
+      },
+      "profession": {
+        "en": "funnel-analysis",
+        "zh": "转化漏斗分析 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/refactor-safe-plan.png",
+      "id": "refactor-safe-plan",
+      "name": {
+        "en": "refactor-safe-plan",
+        "zh": "重构安全规划 顾问"
+      },
+      "profession": {
+        "en": "refactor-safe-plan",
+        "zh": "重构安全规划 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/ops-deploy-pro-01-fixed.png",
+      "id": "ops-deploy-pro-01-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "部署配置"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "部署配置"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1101",
+  "plugin": "group-team-1101",
+  "profession": {
+    "en": "funnel-analysis Collaboration Team",
+    "zh": "转化漏斗分析专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 转化漏斗分析",
+      "zh": "帮我处理转化漏斗分析"
+    },
+    {
+      "en": "Plan 重构安全规划",
+      "zh": "帮我规划重构安全规划"
+    },
+    {
+      "en": "Review 部署配置",
+      "zh": "帮我检查部署配置"
+    }
+  ],
+  "tags": [
+    {
+      "en": "定义步骤",
+      "zh": "定义步骤"
+    },
+    {
+      "en": "分群对比",
+      "zh": "分群对比"
+    },
+    {
+      "en": "时间维度",
+      "zh": "时间维度"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "funnel-analysis-team-lead",
+    "memberAgents": [
+      "funnel-analysis",
+      "refactor-safe-plan",
+      "ops-deploy-pro-01-fixed"
+    ]
+  },
+  "version": "1.0.0"
+}

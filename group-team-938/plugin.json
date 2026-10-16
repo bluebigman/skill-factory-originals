@@ -1,0 +1,126 @@
+{
+  "agentName": "incident-postmortem-pro-team-lead",
+  "agents": [
+    "./agents/incident-postmortem-pro-team-lead.md",
+    "./agents/incident-postmortem-pro.md",
+    "./agents/handover-training.md",
+    "./agents/global-pm-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 事故复盘",
+    "zh": "帮我处理事故复盘"
+  },
+  "description": "incident-postmortem-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Covers 事故复盘 end-to-end: 无责复盘, 根因到底 and 闭环跟踪. Delivers ready-to-use plans with self-check lists.",
+    "zh": "擅长无责复盘、根因到底与闭环跟踪，覆盖事故复盘全流程，输出可直接落地的方案与自查清单。"
+  },
+  "displayName": {
+    "en": "incident-postmortem-pro Team",
+    "zh": "客户培训交付专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "incident-postmortem-pro-team-lead",
+      "name": {
+        "en": "事故复盘主理人",
+        "zh": "事故复盘主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/incident-postmortem-pro.png",
+      "id": "incident-postmortem-pro",
+      "name": {
+        "en": "incident-postmortem-pro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "profession": {
+        "en": "incident-postmortem-pro",
+        "zh": "事故复盘 根因分析 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/handover-training.png",
+      "id": "handover-training",
+      "name": {
+        "en": "handover-training",
+        "zh": "客户培训交付 助手"
+      },
+      "profession": {
+        "en": "handover-training",
+        "zh": "客户培训交付 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-pm-coach.png",
+      "id": "global-pm-coach",
+      "name": {
+        "en": "global-pm-coach",
+        "zh": "跨国项目 协同推进 教练"
+      },
+      "profession": {
+        "en": "global-pm-coach",
+        "zh": "跨国项目 协同推进 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-938",
+  "plugin": "group-team-938",
+  "profession": {
+    "en": "incident-postmortem-pro Collaboration Team",
+    "zh": "客户培训交付专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 事故复盘",
+      "zh": "帮我处理事故复盘"
+    },
+    {
+      "en": "Plan 客户培训交付",
+      "zh": "帮我规划客户培训交付"
+    },
+    {
+      "en": "Review 跨国项目",
+      "zh": "帮我检查跨国项目"
+    }
+  ],
+  "tags": [
+    {
+      "en": "无责复盘",
+      "zh": "无责复盘"
+    },
+    {
+      "en": "根因到底",
+      "zh": "根因到底"
+    },
+    {
+      "en": "改进可执行",
+      "zh": "改进可执行"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "incident-postmortem-pro-team-lead",
+    "memberAgents": [
+      "incident-postmortem-pro",
+      "handover-training",
+      "global-pm-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

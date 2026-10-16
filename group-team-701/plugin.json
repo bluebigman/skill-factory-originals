@@ -1,0 +1,126 @@
+{
+  "agentName": "agent-release-gate-team-lead",
+  "agents": [
+    "./agents/agent-release-gate-team-lead.md",
+    "./agents/agent-release-gate.md",
+    "./agents/agent-improve-loop.md",
+    "./agents/global-payment-ops.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "10-ProjectQuality",
+  "defaultInitPrompt": {
+    "en": "Handle 发布闸门",
+    "zh": "帮我处理发布闸门"
+  },
+  "description": "agent-release-gate team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 发布闸门 requirements, output three deliverables: 清单核对, 依赖锁定, 回滚预演. Verifiable end-to-end, evidence per step.",
+    "zh": "输入发布闸门相关需求，输出清单核对、依赖锁定、回滚预演三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "agent-release-gate Team",
+    "zh": "改进闭环度量驱动专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "agent-release-gate-team-lead",
+      "name": {
+        "en": "发布闸门主理人",
+        "zh": "发布闸门主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/agent-release-gate.png",
+      "id": "agent-release-gate",
+      "name": {
+        "en": "agent-release-gate",
+        "zh": "发布闸门 清单 顾问"
+      },
+      "profession": {
+        "en": "agent-release-gate",
+        "zh": "发布闸门 清单 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/agent-improve-loop.png",
+      "id": "agent-improve-loop",
+      "name": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "profession": {
+        "en": "agent-improve-loop",
+        "zh": "改进闭环 度量驱动 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/global-payment-ops.png",
+      "id": "global-payment-ops",
+      "name": {
+        "en": "global-payment-ops",
+        "zh": "跨境收款 流程核对 顾问"
+      },
+      "profession": {
+        "en": "global-payment-ops",
+        "zh": "跨境收款 流程核对 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-701",
+  "plugin": "group-team-701",
+  "profession": {
+    "en": "agent-release-gate Collaboration Team",
+    "zh": "改进闭环度量驱动专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 发布闸门",
+      "zh": "帮我处理发布闸门"
+    },
+    {
+      "en": "Plan 改进闭环",
+      "zh": "帮我规划改进闭环"
+    },
+    {
+      "en": "Review 跨境收款",
+      "zh": "帮我检查跨境收款"
+    }
+  ],
+  "tags": [
+    {
+      "en": "清单核对",
+      "zh": "清单核对"
+    },
+    {
+      "en": "依赖锁定",
+      "zh": "依赖锁定"
+    },
+    {
+      "en": "回滚预演",
+      "zh": "回滚预演"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "agent-release-gate-team-lead",
+    "memberAgents": [
+      "agent-release-gate",
+      "agent-improve-loop",
+      "global-payment-ops"
+    ]
+  },
+  "version": "1.0.0"
+}

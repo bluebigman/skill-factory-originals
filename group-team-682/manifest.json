@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085732",
+  "slug": "group-team-682",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-682",
+    "kind": "team",
+    "name": "舆情聆听信号识别专家",
+    "description": "擅长选型决策、数据准备与图表达人，覆盖舆情聆听全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "chart-builder-expert-team-lead",
+        "role": "lead",
+        "name": "数据图表设计与生成专家主理人",
+        "evidence": null
+      },
+      {
+        "slug": "chart-builder-expert",
+        "role": "member",
+        "name": "图表可视化制作专家",
+        "evidence": "original_assets/chart-builder-expert/merkle_root",
+        "member_merkle_root": "9053966d41b5d0a710c644a2bf1044a3105bed3c27743e8e3dd2f648c6c10bd0"
+      },
+      {
+        "slug": "social-listening-pro",
+        "role": "member",
+        "name": "舆情聆听 信号识别 顾问",
+        "evidence": "original_assets/social-listening-pro/merkle_root",
+        "member_merkle_root": "910f8bbab5b6609be006aa9a7448fcdc09f87bd5ff877cf6b887e57855dcfb06"
+      },
+      {
+        "slug": "markdown-standard-pro",
+        "role": "member",
+        "name": "Mark 规范 顾问",
+        "evidence": "original_assets/markdown-standard-pro/merkle_root",
+        "member_merkle_root": "53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1"
+      }
+    ],
+    "team_lead": "chart-builder-expert-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8b18d2eace355dcb",
+  "prompt_hash": "8a28f4b80fb49861",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-682\", \"kind\": \"team\", \"name\": \"舆情聆听信号识别专家\", \"description\": \"擅长选型决策、数据准备与图表达人，覆盖舆情聆听全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"chart-builder-expert-team-lead\", \"role\": \"lead\", \"name\": \"数据图表设计与生成专家主理人\", \"evidence\": null}, {\"slug\": \"chart-builder-expert\", \"role\": \"member\", \"name\": \"图表可视化制作专家\", \"evidence\": \"original_assets/chart-builder-expert/merkle_root\", \"member_merkle_root\": \"9053966d41b5d0a710c644a2bf1044a3105bed3c27743e8e3dd2f648c6c10bd0\"}, {\"slug\": \"social-listening-pro\", \"role\": \"member\", \"name\": \"舆情聆听 信号识别 顾问\", \"evidence\": \"original_assets/social-listening-pro/merkle_root\", \"member_merkle_root\": \"910f8bbab5b6609be006aa9a7448fcdc09f87bd5ff877cf6b887e57855dcfb06\"}, {\"slug\": \"markdown-standard-pro\", \"role\": \"member\", \"name\": \"Mark 规范 顾问\", \"evidence\": \"original_assets/markdown-standard-pro/merkle_root\", \"member_merkle_root\": \"53d2fcfca5d89ebd31bcb5e11cddfaff5df6c47411eae96455ada59ac694f2d1\"}], \"team_lead\": \"chart-builder-expert-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/chart-builder-expert-team-lead.md": "29cee4de08e0f1a3a7bcdc8545ba9228ea4097bf9bb3841fc0105163e40d5e4f",
+    "agents/chart-builder-expert.md": "c5ce4855b44b558bfd937a84ec8258bebb2b0241b47814190dd66e0f9d39ae7b",
+    "agents/markdown-standard-pro.md": "6947d73042ab9884d447a407d4ed85c13fde13689938d38d80215ab1cc1a7932",
+    "agents/social-listening-pro.md": "340ae765d853a7d5d9f7af53e2924736787d1f7b465a60cd4a368eaa91823d23",
+    "plugin.json": "d61fa87c6f4e08a912e9c1dc4750b262b4b1d30049e0dfb4d4a6fe168c009569",
+    "settings.json": "e80024bbbf832dd5574f36ef9d8692e18d6fd17c4bb955327e06a5817267e8e1"
+  }
+}

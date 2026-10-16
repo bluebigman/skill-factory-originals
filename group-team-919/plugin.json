@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-convert-pro-02-fixed-team-lead",
+  "agents": [
+    "./agents/doc-convert-pro-02-fixed-team-lead.md",
+    "./agents/doc-convert-pro-02-fixed.md",
+    "./agents/content-calendar-pro.md",
+    "./agents/newsletter-coach.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "en": "Handle 文档转换",
+    "zh": "帮我处理文档转换"
+  },
+  "description": "Suite team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Input 内容排期 requirements, output three deliverables: 主题先行, 形式搭配, 复用机制. Verifiable end-to-end, evidence per step.",
+    "zh": "输入内容排期相关需求，输出主题先行、形式搭配、复用机制三件交付物，全流程可核验、每步附依据。"
+  },
+  "displayName": {
+    "en": "Suite Team",
+    "zh": "文档转换容错转换专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-convert-pro-02-fixed-team-lead",
+      "name": {
+        "en": "文档转换主理人",
+        "zh": "文档转换主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-convert-pro-02-fixed.png",
+      "id": "doc-convert-pro-02-fixed",
+      "name": {
+        "en": "Suite",
+        "zh": "文档转换 容错转换 标签修复"
+      },
+      "profession": {
+        "en": "Suite",
+        "zh": "文档转换 容错转换 标签修复"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/content-calendar-pro.png",
+      "id": "content-calendar-pro",
+      "name": {
+        "en": "content-calendar-pro",
+        "zh": "内容排期 节奏管理 顾问"
+      },
+      "profession": {
+        "en": "content-calendar-pro",
+        "zh": "内容排期 节奏管理 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/newsletter-coach.png",
+      "id": "newsletter-coach",
+      "name": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "profession": {
+        "en": "newsletter-coach",
+        "zh": "订阅通讯 内容运营 教练"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-919",
+  "plugin": "group-team-919",
+  "profession": {
+    "en": "Suite Collaboration Team",
+    "zh": "文档转换容错转换专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档转换",
+      "zh": "帮我处理文档转换"
+    },
+    {
+      "en": "Plan 内容排期",
+      "zh": "帮我规划内容排期"
+    },
+    {
+      "en": "Review 订阅通讯",
+      "zh": "帮我检查订阅通讯"
+    }
+  ],
+  "tags": [
+    {
+      "en": "表格还原",
+      "zh": "表格还原"
+    },
+    {
+      "en": "格式保留",
+      "zh": "格式保留"
+    },
+    {
+      "en": "容错转换",
+      "zh": "容错转换"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-convert-pro-02-fixed-team-lead",
+    "memberAgents": [
+      "doc-convert-pro-02-fixed",
+      "content-calendar-pro",
+      "newsletter-coach"
+    ]
+  },
+  "version": "1.0.0"
+}

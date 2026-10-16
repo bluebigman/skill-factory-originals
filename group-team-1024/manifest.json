@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1024",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1024",
+    "kind": "team",
+    "name": "修订审阅专家",
+    "description": "擅长修订可见、批注聚焦与变动摘要，覆盖Word全流程，输出可直接落地的方案与自查清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "word-track-review-team-lead",
+        "role": "lead",
+        "name": "Word主理人",
+        "evidence": null
+      },
+      {
+        "slug": "word-track-review",
+        "role": "member",
+        "name": "Word 修订审阅 顾问",
+        "evidence": "original_assets/word-track-review/merkle_root",
+        "member_merkle_root": "8c3e7c21670f92aa52452bca622d072fe1efbe710bd9a8c15fe19c97a6bdecfc"
+      },
+      {
+        "slug": "newsletter-compose",
+        "role": "member",
+        "name": "团队周报编排 助手",
+        "evidence": "original_assets/newsletter-compose/merkle_root",
+        "member_merkle_root": "7f3353df2d3148e7858005ecae15f0a09d984e70d81e05f466a7ba9af72b871c"
+      },
+      {
+        "slug": "template-engine-pro",
+        "role": "member",
+        "name": "模板引擎 变量替换 顾问",
+        "evidence": "original_assets/template-engine-pro/merkle_root",
+        "member_merkle_root": "d22b505294457fd9a3aa4fc618bdee66d9f0ef2d1b5585cb77f460b6b2233860"
+      }
+    ],
+    "team_lead": "word-track-review-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "868b97a0a0d97f5e",
+  "prompt_hash": "881d7fbe89f3e48e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1024\", \"kind\": \"team\", \"name\": \"修订审阅专家\", \"description\": \"擅长修订可见、批注聚焦与变动摘要，覆盖Word全流程，输出可直接落地的方案与自查清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"word-track-review-team-lead\", \"role\": \"lead\", \"name\": \"Word主理人\", \"evidence\": null}, {\"slug\": \"word-track-review\", \"role\": \"member\", \"name\": \"Word 修订审阅 顾问\", \"evidence\": \"original_assets/word-track-review/merkle_root\", \"member_merkle_root\": \"8c3e7c21670f92aa52452bca622d072fe1efbe710bd9a8c15fe19c97a6bdecfc\"}, {\"slug\": \"newsletter-compose\", \"role\": \"member\", \"name\": \"团队周报编排 助手\", \"evidence\": \"original_assets/newsletter-compose/merkle_root\", \"member_merkle_root\": \"7f3353df2d3148e7858005ecae15f0a09d984e70d81e05f466a7ba9af72b871c\"}, {\"slug\": \"template-engine-pro\", \"role\": \"member\", \"name\": \"模板引擎 变量替换 顾问\", \"evidence\": \"original_assets/template-engine-pro/merkle_root\", \"member_merkle_root\": \"d22b505294457fd9a3aa4fc618bdee66d9f0ef2d1b5585cb77f460b6b2233860\"}], \"team_lead\": \"word-track-review-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/newsletter-compose.md": "f0778507a4a3fa1a83b4932f9429558901b2648fe8bace37ac68b9fbc05bc3a5",
+    "agents/template-engine-pro.md": "b45fdc8a397ceac742f33c5c47b63aab3aea19640724d8cc59eeb386c122b6a3",
+    "agents/word-track-review-team-lead.md": "584954827233e830b5aae4aa1b41d8dec881da4fc0aa9fbc569acb9b292bdc83",
+    "agents/word-track-review.md": "1ad49655ccc2d9cc142f9bbc8982406fb6f729c937a2f1665e43cf1d1af29e8c",
+    "plugin.json": "6f7b57dca173443d2f2cf7eaa3e3673f059f3aaf7a607f2f638191497eca250e",
+    "settings.json": "9db02d7af25efc9afeff77e733429cb0ec50fcbc8437de13285578577824993e"
+  }
+}

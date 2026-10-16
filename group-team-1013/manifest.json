@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085715",
+  "slug": "group-team-1013",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-1013",
+    "kind": "team",
+    "name": "质量检验规范专家",
+    "description": "质量检验规范专家：围绕质量检验规范，覆盖标准明确／抽样方法／判定规则，交付结构化成果与可执行清单。",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "quality-inspection-team-lead",
+        "role": "lead",
+        "name": "质量检验规范主理人",
+        "evidence": null
+      },
+      {
+        "slug": "quality-inspection",
+        "role": "member",
+        "name": "质量检验规范 顾问",
+        "evidence": "original_assets/quality-inspection/merkle_root",
+        "member_merkle_root": "9d594a977a0ab9338d8296a8dff6949efe8afc3d9fd7333731c34f6f3ddff3b3"
+      },
+      {
+        "slug": "performance-review",
+        "role": "member",
+        "name": "绩效评估设计 顾问",
+        "evidence": "original_assets/performance-review/merkle_root",
+        "member_merkle_root": "5f5a37ea828b9c3e4fcc8dae7d35711677bca54b933099e7966c9fae59bfab9c"
+      },
+      {
+        "slug": "code-quality-gate",
+        "role": "member",
+        "name": "代码质量门禁 顾问",
+        "evidence": "original_assets/code-quality-gate/merkle_root",
+        "member_merkle_root": "2a255cf44a9f1c8ce4e62f59c8bd425d973a333982ae93da49cebb3e9ea244de"
+      }
+    ],
+    "team_lead": "quality-inspection-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ffcbc65e12f66dd9",
+  "prompt_hash": "998feb04b6e7d6ef",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-1013\", \"kind\": \"team\", \"name\": \"质量检验规范专家\", \"description\": \"质量检验规范专家：围绕质量检验规范，覆盖标准明确／抽样方法／判定规则，交付结构化成果与可执行清单。\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"quality-inspection-team-lead\", \"role\": \"lead\", \"name\": \"质量检验规范主理人\", \"evidence\": null}, {\"slug\": \"quality-inspection\", \"role\": \"member\", \"name\": \"质量检验规范 顾问\", \"evidence\": \"original_assets/quality-inspection/merkle_root\", \"member_merkle_root\": \"9d594a977a0ab9338d8296a8dff6949efe8afc3d9fd7333731c34f6f3ddff3b3\"}, {\"slug\": \"performance-review\", \"role\": \"member\", \"name\": \"绩效评估设计 顾问\", \"evidence\": \"original_assets/performance-review/merkle_root\", \"member_merkle_root\": \"5f5a37ea828b9c3e4fcc8dae7d35711677bca54b933099e7966c9fae59bfab9c\"}, {\"slug\": \"code-quality-gate\", \"role\": \"member\", \"name\": \"代码质量门禁 顾问\", \"evidence\": \"original_assets/code-quality-gate/merkle_root\", \"member_merkle_root\": \"2a255cf44a9f1c8ce4e62f59c8bd425d973a333982ae93da49cebb3e9ea244de\"}], \"team_lead\": \"quality-inspection-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/code-quality-gate.md": "2aa4211a7e6f885953df9ba926d498952a046f87209fee3ae5203cf5c0238ced",
+    "agents/performance-review.md": "6fcaff9f965dee21cc8ee40453444a5e152c16dc0233e4775b959f379daa85d1",
+    "agents/quality-inspection-team-lead.md": "c72641ce55d7785af9291678c288c6b291db72ae5e1c39f24218f4732c869293",
+    "agents/quality-inspection.md": "39cc1e33b8490be098c393b52fb37264ed882072ea2bb1ca377216c09620d77e",
+    "plugin.json": "07b75f2136391cb2a89d3f3e62856f3c84dd5b76fcf8316530a52f5b391e2eed",
+    "settings.json": "a8efb879d3def49c1eda55f24f2640069f867e0b49e16b96d588454a078f6902"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "agentName": "doc-compare-merge-team-lead",
+  "agents": [
+    "./agents/doc-compare-merge-team-lead.md",
+    "./agents/doc-compare-merge.md",
+    "./agents/remote-team-coach.md",
+    "./agents/cold-email-expert.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "en": "Handle 文档比对合并",
+    "zh": "帮我处理文档比对合并"
+  },
+  "description": "doc-compare-merge team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 文档比对合并, covers 逐段比对 / 差异分级 / 合并策略, delivering structured results and actionable checklists.",
+    "zh": "文档比对合并专家：围绕文档比对合并，覆盖逐段比对／差异分级／合并策略，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "doc-compare-merge Team",
+    "zh": "文档比对合并专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "doc-compare-merge-team-lead",
+      "name": {
+        "en": "文档比对合并主理人",
+        "zh": "文档比对合并主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/doc-compare-merge.png",
+      "id": "doc-compare-merge",
+      "name": {
+        "en": "doc-compare-merge",
+        "zh": "文档比对合并 助手"
+      },
+      "profession": {
+        "en": "doc-compare-merge",
+        "zh": "文档比对合并 助手"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/remote-team-coach.png",
+      "id": "remote-team-coach",
+      "name": {
+        "en": "remote-team-coach",
+        "zh": "远程团队 协作规范 教练"
+      },
+      "profession": {
+        "en": "remote-team-coach",
+        "zh": "远程团队 协作规范 教练"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/cold-email-expert.png",
+      "id": "cold-email-expert",
+      "name": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "profession": {
+        "en": "MailPro",
+        "zh": "邮件营销 标题撰写 转化优化"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-1028",
+  "plugin": "group-team-1028",
+  "profession": {
+    "en": "doc-compare-merge Collaboration Team",
+    "zh": "文档比对合并专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 文档比对合并",
+      "zh": "帮我处理文档比对合并"
+    },
+    {
+      "en": "Plan 远程团队",
+      "zh": "帮我规划远程团队"
+    },
+    {
+      "en": "Review 邮件营销",
+      "zh": "帮我检查邮件营销"
+    }
+  ],
+  "tags": [
+    {
+      "en": "逐段比对",
+      "zh": "逐段比对"
+    },
+    {
+      "en": "差异分级",
+      "zh": "差异分级"
+    },
+    {
+      "en": "合并策略",
+      "zh": "合并策略"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "doc-compare-merge-team-lead",
+    "memberAgents": [
+      "doc-compare-merge",
+      "remote-team-coach",
+      "cold-email-expert"
+    ]
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "20261016_085727",
+  "slug": "group-team-215",
+  "kind": "team",
+  "spec": {
+    "slug": "group-team-215",
+    "kind": "team",
+    "name": "容器 命令行 依赖 团队",
+    "description": "容器 命令行 依赖 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依",
+    "composition": "member-agents",
+    "member_count": 4,
+    "members": [
+      {
+        "slug": "compose-ops-pro-team-lead",
+        "role": "lead",
+        "name": "容器配置主理人",
+        "evidence": null
+      },
+      {
+        "slug": "compose-ops-pro",
+        "role": "member",
+        "name": "容器配置 语法核验 差异提醒",
+        "evidence": "original_assets/compose-ops-pro/merkle_root",
+        "member_merkle_root": "cfe0d0f4b20268437ee65c67508ac699dd06646e2448480f6b6f6c1838741a91"
+      },
+      {
+        "slug": "cli-env-bench-expert",
+        "role": "member",
+        "name": "命令行 环境检测 性能基准",
+        "evidence": "original_assets/cli-env-bench-expert/merkle_root",
+        "member_merkle_root": "c08577e100d61b4d7b5ecad3752689aa71e71cf4e6ac92b1779f68e84ae25926"
+      },
+      {
+        "slug": "dep-license-audit-pro",
+        "role": "member",
+        "name": "依赖清单 许可证 合规检查",
+        "evidence": "original_assets/dep-license-audit-pro/merkle_root",
+        "member_merkle_root": "4f9325aec0f05b008022a75990ab49cc3ff0daba2a89b806cf53612356d110e7"
+      }
+    ],
+    "team_lead": "compose-ops-pro-team-lead",
+    "derivation": "original-work-composition",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "6cfa6f7f1be7e05f",
+  "prompt_hash": "2023f279f6a61957",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"group-team-215\", \"kind\": \"team\", \"name\": \"容器 命令行 依赖 团队\", \"description\": \"容器 命令行 依赖 团队：主理人调度 3 位专业角色分阶段协作，输出结构化方案与可执行清单，每步附依\", \"composition\": \"member-agents\", \"member_count\": 4, \"members\": [{\"slug\": \"compose-ops-pro-team-lead\", \"role\": \"lead\", \"name\": \"容器配置主理人\", \"evidence\": null}, {\"slug\": \"compose-ops-pro\", \"role\": \"member\", \"name\": \"容器配置 语法核验 差异提醒\", \"evidence\": \"original_assets/compose-ops-pro/merkle_root\", \"member_merkle_root\": \"cfe0d0f4b20268437ee65c67508ac699dd06646e2448480f6b6f6c1838741a91\"}, {\"slug\": \"cli-env-bench-expert\", \"role\": \"member\", \"name\": \"命令行 环境检测 性能基准\", \"evidence\": \"original_assets/cli-env-bench-expert/merkle_root\", \"member_merkle_root\": \"c08577e100d61b4d7b5ecad3752689aa71e71cf4e6ac92b1779f68e84ae25926\"}, {\"slug\": \"dep-license-audit-pro\", \"role\": \"member\", \"name\": \"依赖清单 许可证 合规检查\", \"evidence\": \"original_assets/dep-license-audit-pro/merkle_root\", \"member_merkle_root\": \"4f9325aec0f05b008022a75990ab49cc3ff0daba2a89b806cf53612356d110e7\"}], \"team_lead\": \"compose-ops-pro-team-lead\", \"derivation\": \"original-work-composition\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "agents/cli-env-bench-expert.md": "a74a0e61b5d1d9715e78bb00a1c302e3601ae3970f6f2c66feef510e6253cc77",
+    "agents/compose-ops-pro-team-lead.md": "76b1e249a5a97db28526fdadc5b29f3ff06d0d3744565d25822ac852a507a12c",
+    "agents/compose-ops-pro.md": "8e77351c9c768994b32c9c3d64a8c71a9213f5a7e12097373b01e03f3102b41e",
+    "agents/dep-license-audit-pro.md": "1605660e05e41b75acd4b92113cc6177ee1c3786ee0d7421e4ab1e3601eccff8",
+    "plugin.json": "20cacd6bb662581b5d5b789ce573047324ab9a0e49ff6c3a989281d104ed8dc2",
+    "settings.json": "0d1a82a58e05fe69c5fa45a3c28e4f53f0baef6777adfec3cb7c9f3669b97aa9"
+  }
+}

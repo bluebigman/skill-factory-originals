@@ -1,0 +1,126 @@
+{
+  "agentName": "formula-audit-pro-team-lead",
+  "agents": [
+    "./agents/formula-audit-pro-team-lead.md",
+    "./agents/formula-audit-pro.md",
+    "./agents/metric-anomaly-alert.md",
+    "./agents/db-index-audit.md"
+  ],
+  "author": {
+    "email": "",
+    "name": "user_2fd890c9"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "04-DataAI",
+  "defaultInitPrompt": {
+    "en": "Handle 公式审计",
+    "zh": "帮我处理公式审计"
+  },
+  "description": "formula-audit-pro team with 3 specialist roles in a structured SOP.",
+  "displayDescription": {
+    "en": "Around 公式审计, covers 引用检查 / 类型校验 / 循环引用, delivering structured results and actionable checklists.",
+    "zh": "公式审计专家：围绕公式审计，覆盖引用检查／类型校验／循环引用，交付结构化成果与可执行清单。"
+  },
+  "displayName": {
+    "en": "formula-audit-pro Team",
+    "zh": "公式审计专家"
+  },
+  "expertType": "team",
+  "members": [
+    {
+      "avatar": "avatars/team-lead.png",
+      "id": "formula-audit-pro-team-lead",
+      "name": {
+        "en": "公式审计主理人",
+        "zh": "公式审计主理人"
+      },
+      "profession": {
+        "en": "Team Lead & Orchestrator",
+        "zh": "主理人"
+      },
+      "role": "lead"
+    },
+    {
+      "avatar": "avatars/formula-audit-pro.png",
+      "id": "formula-audit-pro",
+      "name": {
+        "en": "formula-audit-pro",
+        "zh": "公式审计 引用检查 顾问"
+      },
+      "profession": {
+        "en": "formula-audit-pro",
+        "zh": "公式审计 引用检查 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/metric-anomaly-alert.png",
+      "id": "metric-anomaly-alert",
+      "name": {
+        "en": "metric-anomaly-alert",
+        "zh": "指标异常 波动检测 顾问"
+      },
+      "profession": {
+        "en": "metric-anomaly-alert",
+        "zh": "指标异常 波动检测 顾问"
+      },
+      "role": "member"
+    },
+    {
+      "avatar": "avatars/db-index-audit.png",
+      "id": "db-index-audit",
+      "name": {
+        "en": "db-index-audit",
+        "zh": "索引审计 冗余识别 顾问"
+      },
+      "profession": {
+        "en": "db-index-audit",
+        "zh": "索引审计 冗余识别 顾问"
+      },
+      "role": "member"
+    }
+  ],
+  "name": "group-team-295",
+  "plugin": "group-team-295",
+  "profession": {
+    "en": "formula-audit-pro Collaboration Team",
+    "zh": "公式审计专家"
+  },
+  "quickPrompts": [
+    {
+      "en": "Handle 公式审计",
+      "zh": "帮我处理公式审计"
+    },
+    {
+      "en": "Plan 指标异常",
+      "zh": "帮我规划指标异常"
+    },
+    {
+      "en": "Review 索引审计",
+      "zh": "帮我检查索引审计"
+    }
+  ],
+  "tags": [
+    {
+      "en": "引用检查",
+      "zh": "引用检查"
+    },
+    {
+      "en": "类型校验",
+      "zh": "类型校验"
+    },
+    {
+      "en": "循环引用",
+      "zh": "循环引用"
+    }
+  ],
+  "teamInfo": {
+    "leadAgent": "formula-audit-pro-team-lead",
+    "memberAgents": [
+      "formula-audit-pro",
+      "metric-anomaly-alert",
+      "db-index-audit"
+    ]
+  },
+  "version": "1.0.0"
+}
