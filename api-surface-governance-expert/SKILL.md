@@ -4,6 +4,7 @@ slug: api-credential-carrier-check
 displayName: 调用凭证 传递载体 存放位置
 description: 调用凭证 传递载体 存放位置处理工具。支持 核验调用凭证的传递载体与存放位置，检出载体缺失或非法、载体落在查询串、存活期缺失或非正、同凭证多载体并存、明文留存、与共享缓存声明冲突并分级输出整改清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

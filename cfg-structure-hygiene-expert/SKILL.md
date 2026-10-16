@@ -4,6 +4,7 @@ slug: cfg-datetime-validity-check
 displayName: 配置时间取值 有效期 时区核验
 description: 核验配置中日期时间取值，找出已过期、时区缺失与时间窗倒置。支持 核验配置中时间与日期取值的有效性，检出已过期取值、时区缺失或非法、时间窗倒置、时长缺单位与跨文件取值分歧并分级输出。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

@@ -4,6 +4,7 @@ slug: api-deprecation-migration-check
 displayName: 接口下线 迁移路径 残留调用核对
 description: 核对接口废弃标注与下线日期，找出仍在被调用的老接口。支持 核验端点废弃标注、下线日期与替代路径闭合性，对账残存调用量并分级输出迁移整改清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

@@ -4,6 +4,7 @@ slug: api-response-exposure-auditor
 displayName: 响应字段 敏感暴露 脱敏清单
 description: 核验响应字段敏感信息暴露面、输出待脱敏字段与处置优先级。支持 核验接口响应字段的敏感信息暴露面，输出待脱敏字段与处置优先级。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

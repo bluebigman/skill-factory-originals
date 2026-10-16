@@ -4,6 +4,7 @@ slug: api-cache-verifier-auditor
 displayName: 接口缓存 复验条件 排查修复
 description: 接口缓存 复验条件 排查修复处理工具。支持 核验接口条件请求验证器与复验语义，检出验证器缺失或取值缺失、弱验证器按强校验声明、内容时点缺失或非法、新鲜度时效为负并分级输出整改清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

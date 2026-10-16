@@ -6,7 +6,7 @@ license: MIT
 ai_generated: true
 disclaimer: 本Skill由AI辅助生成，仅供学习参考，使用风险自负
 source_project: original
-copyright_holder: 原创作者（自持版权）
+copyright_holder: SkillForge Lab
 
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agency-agents
 author: user_2fd890c9

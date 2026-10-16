@@ -1,10 +1,10 @@
 🔍 运行自检测试...
 
 [准备] 启动本地测试服务器...
-  ✅ 本地服务器已启动: http://127.0.0.1:2445
+  ✅ 本地服务器已启动: http://127.0.0.1:6279
 
 [测试1] URL参数拼接
-  ✅ URL拼接正确: http://127.0.0.1:2445/get?page=1&size=20
+  ✅ URL拼接正确: http://127.0.0.1:6279/get?page=1&size=20
 
 [测试2] JSON请求体准备
   ✅ JSON请求体正确: b'{"name":"test"}'
@@ -25,13 +25,13 @@
   ✅ 非JSON格式化正确
 
 [测试8] 原子文件写入
-  ✅ 原子写入正确: C:\Users\ThinkPad\AppData\Local\Temp\tmpfn686ecw.txt
+  ✅ 原子写入正确: C:\Users\ThinkPad\AppData\Local\Temp\tmpeb43o924.txt
 
 [测试9] 无效URL错误处理
   ✅ 错误处理正确: 网络错误: <urlopen error Tunnel connection failed: 502...
 
 [测试10] 重试机制验证
-  ✅ 重试机制正确 (重试次数: 2, 耗时: 3.08s)
+  ✅ 重试机制正确 (重试次数: 2, 耗时: 3.07s)
 
 [测试11] HTTP错误处理
   ✅ HTTP错误处理正确 (状态码: 404)

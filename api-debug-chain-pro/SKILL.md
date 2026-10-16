@@ -4,6 +4,7 @@ slug: api-auth-element-checker
 displayName: 接口鉴权 要素核验 时效声明
 description: 核验接口鉴权声明要素齐全度、摘要算法强度与时效窗口、输出分级整改优先级。支持 核验接口鉴权声明的要素齐全度、算法强度与时效声明，输出分级问题清单与整改优先级。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

@@ -10,14 +10,6 @@
 """
 import argparse, json, os, re, sys
 
-# WB 依赖降级注入（2026-09-13）：网络调用默认 8s 超时，防 hang 死（无产出）
-try:
-    import socket as _wb_sock
-    _wb_sock.setdefaulttimeout(8)
-except Exception:
-    pass
-
-
 VERSION = "1.0.0"
 
 

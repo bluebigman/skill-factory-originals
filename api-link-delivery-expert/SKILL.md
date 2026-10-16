@@ -4,6 +4,7 @@ slug: callback-delivery-auditor
 displayName: 回调投递 验签算法 投递核验
 description: 核验出站回调的地址协议、验签、重放窗口与死信声明。支持 核验出站回调的投递与验签声明，检出地址非 https、验签算法缺失或用弱算法、重放窗口缺失、重试超限且无退避、密钥轮换缺失与死信去向缺失并分级输出。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

@@ -4,6 +4,7 @@ slug: artifact-provenance-verifier
 displayName: 构建产物 来源追溯 签名核验
 description: 核验产物来源地址、内容摘要与署名、输出追溯缺口与分级整改清单。支持 核验构建产物的来源地址、内容摘要、署名与版本锁定情况，输出追溯缺口与分级整改清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

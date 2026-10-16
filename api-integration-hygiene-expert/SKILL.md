@@ -4,6 +4,7 @@ slug: api-number-scale-check
 displayName: 接口数值精度 小数位 舍入核验
 description: 核验接口数值字段的小数位与舍入口径，找出精度丢失与千分位混入。支持 核验接口数值字段的标度、舍入模式与千分位口径是否自洽，检出小数位超限、千分位混入、科学计数法、引号包裹数字与同端点舍入模式混用并分级输出。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

@@ -4,6 +4,7 @@ slug: cfg-list-value-hygiene-check
 displayName: 配置列表 分隔符 重复项核对
 description: 核对多值配置的分隔符、空项与重复项，避免合并结果出错。支持 核验列表型取值的分隔符纪律、空项与重复项、跨定义顺序稳定性，检出合并结果依赖加载次序的风险并分级输出整改清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

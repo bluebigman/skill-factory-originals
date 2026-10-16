@@ -4,6 +4,7 @@ slug: config-bound-relation-auditor
 displayName: 配置解析 数值边界 关联约束
 description: 配置解析 数值边界 关联约束处理工具。支持 核验数值型配置的上下界与键间关联约束，检出取值越界、边界声明倒置、取值类型非数值与关联约束不满足并分级输出。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

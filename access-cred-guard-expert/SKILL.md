@@ -4,6 +4,7 @@ slug: authz-scope-auditor
 displayName: 权限配置 越权排查 角色继承
 description: 权限配置 越权排查 角色继承核验工具。支持 核验角色继承链、资源通配与操作级别上限，检出越权授予与职责分离冲突并分级输出授权收敛清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

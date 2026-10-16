@@ -4,6 +4,7 @@ slug: api-cache-directive-auditor
 displayName: 接口调试 缓存指令 自洽核验
 description: 接口调试 缓存指令 自洽核验处理工具。支持 核验接口响应缓存指令的自洽性，检出敏感端点被声明公共可缓存、no-store 与 max_age 冲突、校验器缺失与 vary 缺位并分级输出。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

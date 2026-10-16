@@ -4,6 +4,7 @@ slug: api-error-catalog-auditor
 displayName: 接口错误码 取值唯一 作用域核对
 description: 核验错误码唯一性与作用域。支持 核验错误码取值唯一性与作用域归属，检出取值重复跨域撞值、取值缺失或形态非法、作用域缺失与名称书写风格混用并分级输出整改清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

@@ -4,6 +4,7 @@ slug: api-async-job-lifecycle
 displayName: 异步任务 提交取回 排查修复
 description: 核验异步任务提交与取回生命周期，检出轮询预算超限、结果与取消通道缺失。支持 核验异步任务的提交、轮询、取回与取消声明闭合性，检出环节缺失、轮询合计超预算、结果保留期缺失与取消语义缺失并分级输出。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

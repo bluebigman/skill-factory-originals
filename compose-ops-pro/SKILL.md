@@ -1,10 +1,10 @@
 ---
 name: compose-service-verifier
-display_name: 编排依赖 服务核验 端口冲突
 slug: compose-service-verifier
 displayName: 编排依赖 服务核验 端口冲突
 description: 解析 compose 服务块，核验依赖缺失、依赖环与端口冲突。支持 解析 Nginx/邮件/网络/仓库等配置文本，抽取关键指令、做重复与冲突检查、输出结构化清单。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original

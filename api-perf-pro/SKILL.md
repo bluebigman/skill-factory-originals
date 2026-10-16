@@ -5,6 +5,7 @@ slug: api-latency-profiler
 displayName: 接口延迟 分位统计 慢点定位
 description: 离线统计接口延迟采样分位数与区间分布，输出慢接口排行。支持 构造 HTTP 请求、解析响应、生成可复现的 curl/代码片段、做字段级差异比对。
 license: MIT License
+copyright_holder: SkillForge Lab
 version: 1.0.0
 author: user_2fd890c9
 source_project: original
