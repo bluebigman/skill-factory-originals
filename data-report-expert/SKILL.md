@@ -9,7 +9,7 @@ version: 2.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/data-visual-report
-copyright_holder: DataCraft Studio
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
