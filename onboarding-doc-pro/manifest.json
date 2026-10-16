@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261004_103536",
+  "timestamp": "20261016_122756",
   "slug": "onboarding-doc-pro",
   "spec": {
     "slug": "onboarding-doc-pro",
@@ -28,7 +28,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"onboarding-doc-pro\", \"name\": \"ab-test-design-3\", \"description\": \"需求缺口驱动原创：探测词[实验设计/单变量/先定主指标] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"实验设计\", \"单变量\", \"先定主指标\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "75824361da13e732921850e480a1469ed745170433b77f931ad3d748627ccc5e",
-    "main_py_sha256": "22c55eb992f480123eb84632c07bb96f0a4499b295c6ccb151c6c3fcfd6088df"
+    "skill_md_sha256": "6c15ca9f81d0d6984b4d88aa89f145da92483221cebc179c18bf7f392ef497b1",
+    "main_py_sha256": "f51b25d1ae9a82f95eeacb1a5d82a8be39561b65ecd9e8be0cbb0bd72d45777a"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261004_192054",
+  "timestamp": "20261016_122851",
   "slug": "third-party-risk",
   "spec": {
     "slug": "third-party-risk",
@@ -28,7 +28,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"third-party-risk\", \"name\": \"ab-test-design-3\", \"description\": \"需求缺口驱动原创：探测词[实验设计/单变量/先定主指标] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"实验设计\", \"单变量\", \"先定主指标\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "df6832e75c55a7616cd03d196f622786ed5cc8a3686d40e5a3644377008e335b",
-    "main_py_sha256": "5e8e3bb327c8667d1685c1f9c661d3aad4813347e3373679c10754f8769e31d0"
+    "skill_md_sha256": "e1fd0ae1505f1ac3d7cb797860565d57dbac9dbb5de4ba0f8e9f64a2f74149d6",
+    "main_py_sha256": "ed24c620e7876a415f3e1b4eabbf60791f444aab2d12a4d965ed9c22c4d5e0e5"
   }
 }

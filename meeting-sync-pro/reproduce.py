@@ -1,47 +1,54 @@
 #!/usr/bin/env python3
-"""可复现性验证脚本 —— 在冻结环境下校验内容哈希与 Merkle 根是否一致。
+"""可复现性验证脚本 —— 校验本目录内容的 Merkle 根是否与 merkle_root 一致。
+
+★ 算法与 `_reseal_merkle.py` 的 `merkle_of()` **逐字一致**（2026-10-16 对齐）：
+  · 取 `os.walk` 下**全部文件**，排除 `merkle_root` / `prev_hash` / `README.md`
+  · 各文件 sha256 → **排序** → 逐层两两拼接再 sha256，直至单根
+  （注：本脚本文本模式写入时曾致 CRLF 化而毁链，故仓库已锁 `.gitattributes = * -text`）
 
 用法：
-  python reproduce.py          # 校验当前内容与 manifest/merkle 是否一致
-  python reproduce.py --llm    # （可选）重新调用 LLM 生成并对比 hash，需 API Key
+  python reproduce.py          # 校验（退出码 0=一致 / 1=不一致）
 """
 from __future__ import annotations
-import hashlib, json, sys
-from pathlib import Path
+import hashlib
+import os
+import sys
 
-HERE = Path(__file__).resolve().parent
-manifest = json.loads((HERE / "manifest.json").read_text(encoding="utf-8"))
-merkle_expected = (HERE / "merkle_root").read_text(encoding="utf-8").strip()
+HERE = os.path.dirname(os.path.abspath(__file__))
+EXCL = ("merkle_root", "prev_hash", "README.md")
 
 
 def h(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
-def main() -> int:
-    ok = True
-    md = (HERE / "SKILL.md").read_bytes()
-    mp = (HERE / "scripts" / "main.py").read_bytes()
-    for label, got, want in [
-        ("SKILL.md", h(md), manifest["outputs"]["skill_md_sha256"]),
-        ("scripts/main.py", h(mp), manifest["outputs"]["main_py_sha256"]),
-    ]:
-        same = got == want
-        ok &= same
-        print(("  ✅ " if same else "  🔴 ") + f"{label} sha256 {'一致' if same else '不一致'}")
-    leaves = [h(md), h(mp), h(json.dumps(manifest, ensure_ascii=False, sort_keys=True).encode("utf-8"))]
+def merkle_of(d: str) -> str:
+    files = [p for p in (os.path.join(dp, f) for dp, _, fs in os.walk(d) for f in fs)
+             if os.path.basename(p) not in EXCL]
+    leaves = sorted(h(open(f, "rb").read()) for f in files)
     while len(leaves) > 1:
         nxt = []
         for i in range(0, len(leaves), 2):
-            a = leaves[i]
-            b = leaves[i + 1] if i + 1 < len(leaves) else a
-            nxt.append(h((a + b).encode("utf-8")))
+            nxt.append(h((leaves[i] + leaves[i + 1]).encode())
+                       if i + 1 < len(leaves) else leaves[i])
         leaves = nxt
-    same = leaves[0] == merkle_expected
-    ok &= same
-    print(("  ✅ " if same else "  🔴 ") + f"merkle_root {'一致' if same else '不一致'}")
-    print("\n可复现性验证:", "PASS" if ok else "FAIL")
-    return 0 if ok else 1
+    return leaves[0] if leaves else ""
+
+
+def main() -> int:
+    mp = os.path.join(HERE, "merkle_root")
+    if not os.path.isfile(mp):
+        print("  🔴 缺 merkle_root")
+        return 1
+    want = open(mp, encoding="utf-8").read().strip()
+    got = merkle_of(HERE)
+    same = got == want
+    print(("  ✅ " if same else "  🔴 ") + "merkle_root %s" % ("一致" if same else "不一致"))
+    if not same:
+        print("     期望: %s" % want)
+        print("     实算: %s" % got)
+    print("\n可复现性验证:", "PASS" if same else "FAIL")
+    return 0 if same else 1
 
 
 if __name__ == "__main__":

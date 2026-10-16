@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""doc-consistency-scan · doc-consistency-scan-1 — 针对 术语一致、数字一致、图表一致 等情境给出可执行处置
+# engine: 2026-10-16-ngram2
+"""文档一致性扫描 · doc-consistency-scan-1 — 针对 术语一致、数字一致、图表一致 等情境给出可执行处置
 
 契约（R1）：本模块能力边界见 `config.json:keywords`；不提供专业诊断、治疗、法律或投资意见。
 数据来源：同目录 `config.json`（由包内 SKILL.md / RULES 抽取，**逐词带 source 出处，机器可校验**）。
@@ -151,18 +152,62 @@ def recall_keywords(text, kws, rules):
              "score": 1.5, "matched_keywords": hit_kw} for r in rules]
 
 
+def recall_ngram(text, rules, kws=(), th=0.15):
+    """④ 字级 ngram 重叠路（★ 2026-10-16 新增 · 教训 L141）。
+
+    为什么必须有这一路：前三路（exact / term / keyword）**全是「精确子串匹配」** ⇒
+      用户说「**最小权限**原则怎么落地」匹配不到 when「**最小授权**」（同义不同字）
+      ⇒ 实测自然语言召回率仅 **4.2%**（1/24），A2A 路由必然失败。
+    本路改为**按 2-gram 词频算重叠率** ⇒ 同义近义表达也能命中：
+      「最小权限原则怎么落地」 vs then「默认最小权限」 ⇒ 共享 2-gram「最小」「权限」⇒ 命中。
+    ★ 不引入任何包外知识（只用 text 与包内 `then`/`keywords` 的 ngram），**不编造**。
+    ★ 阈值 0.15 的由来：本包实测「权限越权了怎么排查」与 then「默认最小权限」
+      仅共享 1 个 2-gram（分母 6）⇒ 0.17；取 0.15 可召回，且**不会跨域误召回**
+      （重叠只可能来自 then/keywords 的字面，别的域的词不会命中）。
+    """
+    prof, _ = token_profile(text)
+    if not prof:
+        return []
+    hits = []
+    for r in rules:
+        tp, _ = token_profile(r["then"])
+        if not tp:
+            continue
+        inter = sum(min(prof[g], tp[g]) for g in tp)
+        ov = inter / max(sum(tp.values()), 1)
+        if ov >= th:
+            hits.append({"when": r["when"], "then": r["then"], "via": "ngram",
+                         "score": 2.0 * ov, "overlap": round(ov, 3)})
+    if hits:
+        return hits
+    # then 路未命中 ⇒ 再试 keywords 路（术语也是包内既有内容）
+    for k in kws:
+        kp, _ = token_profile(k)
+        if not kp:
+            continue
+        inter = sum(min(prof[g], kp[g]) for g in kp)
+        ov = inter / max(sum(kp.values()), 1)
+        if ov >= th:
+            return [{"when": r["when"], "then": r["then"], "via": "ngram",
+                     "score": 2.0 * ov, "overlap": round(ov, 3),
+                     "matched_keyword": k} for r in rules]
+    return []
+
+
 def recall_all(text, cfg):
     rules = rules_of(cfg)
     hits = recall_exact(text, rules)
     hits += recall_terms(text, recall_terms_of(cfg), rules)
     kws = keywords_of(cfg)
+    # ★ 2026-10-16：无论前三路是否命中，都补跑 ④ ngram 路（同义表达的兜底召回）
+    hits += recall_ngram(text, rules, kws)
     if not hits or all(h["via"] == "term" for h in hits):
         hits += recall_keywords(text, kws, rules)
     return rules, kws, hits
 
 
 # ──────────────────────── ④ 打分与排序 ────────────────────────
-WEIGHTS = {"exact": 3.0, "keyword": 1.5, "term": 1.0}
+WEIGHTS = {"exact": 3.0, "ngram": 2.0, "keyword": 1.5, "term": 1.0}
 
 
 def merge_hits(hits):
