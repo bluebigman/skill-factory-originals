@@ -1,0 +1,72 @@
+{
+ "name": "longform-editing-1",
+ "version": "2.0.0",
+ "domain": "长文编辑打磨",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构先行",
+   "then": "先理顺结构再抠字句",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "删冗余",
+   "then": "删重复与离题段落",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "段落短化",
+   "then": "每段不超过五句",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "过渡自然",
+   "then": "段间加过渡",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结尾收束",
+   "then": "结尾回扣主题",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "删冗余",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "段落短化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过渡自然",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾收束",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

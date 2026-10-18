@@ -1,0 +1,67 @@
+{
+ "name": "Db Schema Review",
+ "description": "数据库设计专家：覆盖 字段可空、索引有据、命名统一 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/db-schema-review",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/db-schema-review",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "db-schema-review-1",
+   "name": "针对 字段可空、索引有据 等情境给出可执行处置",
+   "description": "针对 字段可空、索引有据 等情境给出可执行处置",
+   "tags": [
+    "字段可空",
+    "索引有据"
+   ],
+   "examples": [
+    "遇到字段可空",
+    "遇到索引有据",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "db-schema-review-2",
+   "name": "针对 命名统一、预留变更 等情境给出可执行处置",
+   "description": "针对 命名统一、预留变更 等情境给出可执行处置",
+   "tags": [
+    "命名统一",
+    "预留变更"
+   ],
+   "examples": [
+    "遇到命名统一",
+    "遇到预留变更",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "db-schema-review-3",
+   "name": "针对 不存冗余 等情境给出可执行处置",
+   "description": "针对 不存冗余 等情境给出可执行处置",
+   "tags": [
+    "不存冗余"
+   ],
+   "examples": [
+    "遇到不存冗余",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "数据库设计专家"
+}

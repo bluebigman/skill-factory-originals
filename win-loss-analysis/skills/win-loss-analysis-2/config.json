@@ -1,0 +1,72 @@
+{
+ "name": "win-loss-analysis-2",
+ "version": "2.0.0",
+ "domain": "赢单复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "双向复盘",
+   "then": "赢单与丢单都要复盘",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "客观归因",
+   "then": "区分可控因素与不可控因素",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "样本阈值",
+   "then": "样本不足时不下结论",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "转为动作",
+   "then": "结论转为可执行改进动作",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期发布",
+   "then": "定期对内发布复盘结论",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "双向复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "客观归因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样本阈值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转为动作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期发布",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

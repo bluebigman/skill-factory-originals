@@ -1,0 +1,121 @@
+{
+ "name": "standard",
+ "version": "2.0.0",
+ "domain": "数据规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "命名随意",
+   "then": "统一命名规则（小写+下划线/驼峰二选一），混用必致混乱",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "类型不统一",
+   "then": "同一字段固定类型（日期/数值/文本），混排会让计算全错",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "全半角",
+   "then": "统一全角/半角与空格，隐形字符是最难查的问题",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无字典",
+   "then": "建立字段字典（含义/类型/取值范围/示例），无字典必产生歧义",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本",
+   "then": "规范变更须记版本与生效日期，静默变更会让历史数据不可比",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数据规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名随意",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类型不统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全半角",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无字典",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "变更",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留痕",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "周期",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

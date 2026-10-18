@@ -1,0 +1,99 @@
+{
+ "name": "WeChat Article Pro",
+ "description": "公众号文章专家：长文的结构与节奏；公众号文章的入口优化；完读与转发的优化。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/wechat-article-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/wechat-article-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "body-structure",
+   "name": "长文的结构与节奏",
+   "description": "长文的结构与节奏",
+   "tags": [
+    "结构",
+    "小标题",
+    "节奏",
+    "长文"
+   ],
+   "examples": [
+    "遇到无小标题",
+    "遇到段落过长",
+    "遇到无案例",
+    "遇到无金句",
+    "遇到结尾无行动"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "body-structure",
+    "to": "body-structure",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "opening",
+   "name": "公众号文章的入口优化",
+   "description": "公众号文章的入口优化",
+   "tags": [
+    "标题",
+    "开头",
+    "打开率",
+    "摘要"
+   ],
+   "examples": [
+    "遇到标题无悬念",
+    "遇到摘要浪费",
+    "遇到开头绕",
+    "遇到无配图",
+    "遇到排版密"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "opening",
+    "to": "opening",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "read-rate",
+   "name": "完读与转发的优化",
+   "description": "完读与转发的优化",
+   "tags": [
+    "完读率",
+    "转发",
+    "收藏",
+    "互动"
+   ],
+   "examples": [
+    "遇到信息密度低",
+    "遇到无利益点",
+    "遇到无互动设计",
+    "遇到发布时间",
+    "遇到排版元素"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "read-rate",
+    "to": "read-rate",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "公众号文章专家"
+}

@@ -1,0 +1,54 @@
+{
+ "name": "user-research-read-1",
+ "version": "2.0.0",
+ "domain": "用户调研",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "问过去不问将来",
+   "then": "问「上次你怎么做的」而不是「你会不会用」",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "少问多听",
+   "then": "访谈者发言占比不超三成",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "问过去不问将来",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "少问多听",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "占比",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "超三",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

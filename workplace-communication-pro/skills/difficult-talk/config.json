@@ -1,0 +1,121 @@
+{
+ "name": "difficult-talk",
+ "version": "2.0.0",
+ "domain": "职场沟通",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "怕得罪人",
+   "then": "反馈只谈行为与影响，不评价人格（你总是……→ 上周三的方案漏了……）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "当场争执",
+   "then": "先私下沟通，公开对抗会让对方为面子而死守立场",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不会拒绝",
+   "then": "拒绝须给替代方案，纯拒绝会损伤关系",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "情绪失控",
+   "then": "情绪上头时暂停，事后单独修复比当场硬扛更有效",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "重复问题",
+   "then": "同一问题重复出现说明机制缺失，须改流程而非反复提醒",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "反馈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批评",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒绝",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "怕得罪人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "当场争执",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不会拒绝",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "情绪失控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复问题",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "流程",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

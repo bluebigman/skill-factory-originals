@@ -1,0 +1,72 @@
+{
+ "name": "doc-migration-format-3",
+ "version": "2.0.0",
+ "domain": "文档格式迁移",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "源格式解析",
+   "then": "先解析源结构再映射",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样式映射表",
+   "then": "建立源样式到目标样式映射",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "特殊元素单列",
+   "then": "脚注与批注单独处理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "迁移后抽检",
+   "then": "抽查关键章节保真度",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "清单对账",
+   "then": "统计元素数量前后一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "源格式解析",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样式映射表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "特殊元素单列",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "迁移后抽检",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单对账",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

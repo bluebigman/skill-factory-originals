@@ -1,0 +1,74 @@
+{
+ "name": "home-repair-guide-2",
+ "version": "2.0.0",
+ "domain": "家居维修",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "验收",
+   "then": "当场试用到正常状态并留影",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "费用",
+   "then": "要求提前报价并确认为上限",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "验收",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "费用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "上限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "比价",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "当场",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "正常",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "状态",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

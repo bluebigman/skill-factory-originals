@@ -1,0 +1,72 @@
+{
+ "name": "service-sla-pro-2",
+ "version": "2.0.0",
+ "domain": "服务承诺",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级承诺",
+   "then": "按客户分层设置承诺等级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "承诺可达成",
+   "then": "承诺须经能力验证可达成",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "例外写明",
+   "then": "不可控情形写入例外条款",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "计量口径",
+   "then": "起止时刻与暂停规则明确",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "未达复盘",
+   "then": "未达标必须复盘并改进",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "承诺可达成",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "例外写明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "计量口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "未达复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

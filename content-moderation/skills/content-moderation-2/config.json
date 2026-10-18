@@ -1,0 +1,66 @@
+{
+ "name": "content-moderation-2",
+ "version": "2.0.0",
+ "domain": "内容审核",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "留痕",
+   "then": "审核结论与依据留档",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "快速下架",
+   "then": "发现问题先下架再核实",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "快速下架",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留档",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "复核",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

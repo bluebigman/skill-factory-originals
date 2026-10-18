@@ -1,0 +1,78 @@
+{
+ "name": "fitness-progress-log-2",
+ "version": "2.0.0",
+ "domain": "健身记录",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "体重看趋势",
+   "then": "体重看 7 日均值，不看单日",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拍照留档",
+   "then": "同角度同光线每月留档",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "体重看趋势",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拍照留档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "周期",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每月",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "其余",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "次数",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "波动",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "进度",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "单日",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "name": "SEO Article Pro",
+ "description": "SEO文章 关键词布局 搜索意图：关键词的选取与布局；内容质量的底线核查；利于抓取的内容结构。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/seo-article-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/seo-article-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "keyword-plan",
+   "name": "关键词的选取与布局",
+   "description": "关键词的选取与布局",
+   "tags": [
+    "关键词",
+    "选词",
+    "布局",
+    "密度"
+   ],
+   "examples": [
+    "遇到选词错位",
+    "遇到密度堆砌",
+    "遇到无长尾",
+    "遇到布局缺失",
+    "遇到同义词"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "keyword-plan",
+    "to": "keyword-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "quality-check",
+   "name": "内容质量的底线核查",
+   "description": "内容质量的底线核查",
+   "tags": [
+    "原创",
+    "质量",
+    "时效",
+    "用户体验"
+   ],
+   "examples": [
+    "遇到抄袭",
+    "遇到无深度",
+    "遇到标题与内容不符",
+    "遇到移动体验",
+    "遇到数据过时"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "quality-check",
+    "to": "quality-check",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "structure-seo",
+   "name": "利于抓取的内容结构",
+   "description": "利于抓取的内容结构",
+   "tags": [
+    "结构",
+    "标题层级",
+    "内链",
+    "抓取"
+   ],
+   "examples": [
+    "遇到层级混乱",
+    "遇到无内链",
+    "遇到无摘要",
+    "遇到无FAQ",
+    "遇到更新滞后"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "structure-seo",
+    "to": "structure-seo",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "搜索排名专家"
+}

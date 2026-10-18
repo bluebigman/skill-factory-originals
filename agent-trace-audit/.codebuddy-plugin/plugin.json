@@ -1,0 +1,74 @@
+{
+ "name": "agent-trace-audit",
+ "version": "1.0.0",
+ "plugin": "agent-trace-audit",
+ "description": "Agent Behavior Audit for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-trace-audit.md"
+ ],
+ "skills": [
+  "./skills/agent-trace-audit-1",
+  "./skills/agent-trace-audit-2",
+  "./skills/agent-trace-audit-3"
+ ],
+ "expertType": "agent",
+ "agentName": "agent-trace-audit",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Agent Behavior Audit",
+  "zh": "行为审计 决策无记录"
+ },
+ "profession": {
+  "en": "Agent Behavior Audit",
+  "zh": "行为审计 轨迹留痕 越权接管"
+ },
+ "displayDescription": {
+  "en": "Handles Agent Behavior Audit tasks end-to-end with built-in professional skills.",
+  "zh": "行为审计 轨迹留痕 越权接管：覆盖 决策无记录、来源不可溯 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "行为审计"
+  },
+  {
+   "en": "practical capability",
+   "zh": "轨迹留痕"
+  },
+  {
+   "en": "practical capability",
+   "zh": "越权接管"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到行为审计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到轨迹留痕怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到越权接管怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到行为审计怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:29",
+  "from": "行为审计专家",
+  "to": "行为审计 决策无记录",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

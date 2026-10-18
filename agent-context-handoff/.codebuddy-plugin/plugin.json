@@ -1,0 +1,74 @@
+{
+ "name": "agent-context-handoff",
+ "version": "1.0.0",
+ "plugin": "agent-context-handoff",
+ "description": "Agent Context Handoff for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-context-handoff.md"
+ ],
+ "skills": [
+  "./skills/agent-context-handoff-1",
+  "./skills/agent-context-handoff-2",
+  "./skills/agent-context-handoff-3"
+ ],
+ "expertType": "agent",
+ "agentName": "agent-context-handoff",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Agent Context Handoff",
+  "zh": "上下文交 摘要保真 决策继承"
+ },
+ "profession": {
+  "en": "Agent Context Handoff",
+  "zh": "上下文交 摘要 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Agent Context Handoff tasks end-to-end with built-in professional skills.",
+  "zh": "上下文交 摘要 顾问：覆盖 摘要保真、决策继承、状态一致 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "上下文交",
+   "en": "agent-context-handoff"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "交接摘要丢了关键约束，怎么补",
+   "en": "Handoff summary lost key constraints, how to recover"
+  },
+  {
+   "zh": "接手人不知道上一个决策的理由，怎么办",
+   "en": "Successor lacks the rationale of prior decisions"
+  },
+  {
+   "zh": "多轮交接后状态对不上，如何核对",
+   "en": "State mismatch after multiple handoffs, how to reconcile"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "交接摘要丢了关键约束，怎么补",
+  "en": "Handoff summary lost key constraints, how to recover"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "上下文交专家",
+  "to": "上下文交 摘要保真 决策继承",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

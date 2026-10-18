@@ -1,0 +1,72 @@
+{
+ "name": "sheet-formula-build-3",
+ "version": "2.0.0",
+ "domain": "表格公式构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先验数据",
+   "then": "公式前先确认列类型与空值分布",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "绝对引用",
+   "then": "跨列引用一律加 $ 防拖拽错位",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "错误兜底",
+   "then": "用 IFERROR 包裹，避免整列报错",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分步验证",
+   "then": "长公式拆中间列逐段验证",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "命名区域",
+   "then": "复杂表用命名区域替代坐标",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先验数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "绝对引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分步验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名区域",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

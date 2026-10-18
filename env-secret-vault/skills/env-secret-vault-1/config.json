@@ -1,0 +1,72 @@
+{
+ "name": "env-secret-vault-1",
+ "version": "2.0.0",
+ "domain": "环境变量密钥",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不入库",
+   "then": "密钥不入版本库与日志",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分离存放",
+   "then": "配置与密钥分开",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "按环境隔离",
+   "then": "不同环境不同密钥",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "轮换记录",
+   "then": "轮换周期与记录",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "最小可见",
+   "then": "仅相关服务可读",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不入库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分离存放",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按环境隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "轮换记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小可见",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

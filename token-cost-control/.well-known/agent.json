@@ -1,0 +1,75 @@
+{
+ "name": "Token Cost Control",
+ "description": "成本控制专家：覆盖 无预算、循环烧量 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/token-cost-control",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/token-cost-control",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "token-cost-control-1",
+   "name": "针对 无预算、循环烧量 等情境给出可执行处置",
+   "description": "针对 无预算、循环烧量 等情境给出可执行处置",
+   "tags": [
+    "无预算",
+    "循环烧量",
+    "成本不可见"
+   ],
+   "examples": [
+    "遇到无预算",
+    "遇到循环烧量",
+    "遇到成本不可见",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "token-cost-control-2",
+   "name": "针对 全文回灌、历史膨胀 等情境给出可执行处置",
+   "description": "针对 全文回灌、历史膨胀 等情境给出可执行处置",
+   "tags": [
+    "全文回灌",
+    "历史膨胀",
+    "重复上下文"
+   ],
+   "examples": [
+    "遇到全文回灌",
+    "遇到历史膨胀",
+    "遇到重复上下文",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "token-cost-control-3",
+   "name": "针对 大材小用、降级无底线 等情境给出可执行处置",
+   "description": "针对 大材小用、降级无底线 等情境给出可执行处置",
+   "tags": [
+    "大材小用",
+    "降级无底线",
+    "质量无校验"
+   ],
+   "examples": [
+    "遇到大材小用",
+    "遇到降级无底线",
+    "遇到质量无校验",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "成本控制专家"
+}

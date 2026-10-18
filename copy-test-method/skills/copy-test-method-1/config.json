@@ -1,0 +1,72 @@
+{
+ "name": "copy-test-method-1",
+ "version": "2.0.0",
+ "domain": "文案测试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单要素对照",
+   "then": "一次测一个要素",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样本充足",
+   "then": "样本不足不下结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "看下游指标",
+   "then": "不只看点击要看转化",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分群交叉",
+   "then": "分群交叉检验避免误判",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果留档",
+   "then": "测试结果与结论留档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单要素对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样本充足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看下游指标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分群交叉",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果留档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

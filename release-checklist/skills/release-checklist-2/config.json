@@ -1,0 +1,70 @@
+{
+ "name": "release-checklist-2",
+ "version": "2.0.0",
+ "domain": "发布清单",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "低峰发布",
+   "then": "选择业务低峰期发布",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "有人值守",
+   "then": "发布后安排值守窗口，不发布完就散",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "低峰发布",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "有人值守",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "方案",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "安排",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "选择",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写成",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "每次",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "窗口",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

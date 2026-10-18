@@ -1,0 +1,121 @@
+{
+ "name": "path",
+ "version": "2.0.0",
+ "domain": "职业规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只凭兴趣",
+   "then": "先做 20 小时真实任务再决定，兴趣与职业现实差距极大",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一步到位",
+   "then": "优先平移（行业换岗位不换 或 岗位换行业不换），双换成功率低",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无时限",
+   "then": "每个阶段设明确时限与验证标准，无时限的计划会无限延后",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "信息不足",
+   "then": "找 3 位目标岗位从业者做信息访谈，二手信息不可信",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "闭门造车",
+   "then": "尽早进入目标社群做真实反馈，独自准备必偏航",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "职业规划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "路径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "选择",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "方向",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只凭兴趣",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一步到位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无时限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭门造车",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "计划",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

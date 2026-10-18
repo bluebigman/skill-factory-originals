@@ -1,0 +1,72 @@
+{
+ "name": "internal-qa-2",
+ "version": "2.0.0",
+ "domain": "内部答疑整理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "高频优先",
+   "then": "先整理高频问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "答案可查",
+   "then": "答案含出处链接",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分类归档",
+   "then": "按部门或系统分类",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "定期更新",
+   "then": "答案随制度更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "提问渠道",
+   "then": "统一收集入口",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "高频优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "答案可查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分类归档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期更新",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提问渠道",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

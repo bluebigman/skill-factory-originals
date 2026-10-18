@@ -1,0 +1,72 @@
+{
+ "name": "idempotent-migration-1",
+ "version": "2.0.0",
+ "domain": "幂等迁移设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "唯一键",
+   "then": "用业务唯一键防重",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "状态机",
+   "then": "按状态判断可否重跑",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "批次记录",
+   "then": "每批记录处理范围",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "重跑安全",
+   "then": "中断后可从断点重跑",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "对账验证",
+   "then": "迁移后对账",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "唯一键",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "状态机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批次记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重跑安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对账验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

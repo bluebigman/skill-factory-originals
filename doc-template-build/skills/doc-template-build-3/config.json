@@ -1,0 +1,72 @@
+{
+ "name": "doc-template-build-3",
+ "version": "2.0.0",
+ "domain": "文档模板构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "占位清晰",
+   "then": "占位符用方括号包裹",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "使用说明",
+   "then": "模板首附填写说明",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "样式内置",
+   "then": "标题正文样式预置好",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "示例保留",
+   "then": "留一份已填示例",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本管理",
+   "then": "模板本身记录版本与修订点",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "占位清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "使用说明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样式内置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例保留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本管理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

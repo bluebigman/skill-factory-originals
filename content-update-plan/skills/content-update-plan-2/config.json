@@ -1,0 +1,72 @@
+{
+ "name": "content-update-plan-2",
+ "version": "2.0.0",
+ "domain": "内容更新规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按数据排",
+   "then": "按表现排优先级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按时效排",
+   "then": "时效性强优先更新",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "增量更新",
+   "then": "在原内容上升级而非重发",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "版本标注",
+   "then": "标注更新日期",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "旧版归档",
+   "then": "旧版保留归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按数据排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按时效排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "增量更新",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "旧版归档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

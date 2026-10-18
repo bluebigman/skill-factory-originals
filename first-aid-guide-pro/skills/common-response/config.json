@@ -1,0 +1,105 @@
+{
+ "name": "common-response",
+ "version": "2.0.0",
+ "domain": "家庭急救",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "烫伤",
+   "then": "立即冷水冲 15-20 分钟，切勿涂牙膏/酱油/冰敷",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "割伤",
+   "then": "清洁后压迫止血并包扎，深长伤口或无法止血须就医",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "扭伤",
+   "then": "保护-休息-冰敷-加压-抬高，48 小时内禁热敷揉搓",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "流鼻血",
+   "then": "身体前倾捏鼻翼 10 分钟，仰头会使血液流入气道",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "异物卡喉",
+   "then": "完全梗阻立即实施海姆立克并呼叫急救",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "烫伤",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "割伤",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "扭伤",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流鼻血",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异物卡喉",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "就医",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "本工",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "时内",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

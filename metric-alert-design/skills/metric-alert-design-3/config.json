@@ -1,0 +1,72 @@
+{
+ "name": "metric-alert-design-3",
+ "version": "2.0.0",
+ "domain": "指标告警设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按影响定级",
+   "then": "影响收入或体验的优先",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "阈值来源",
+   "then": "基于历史分布而非拍脑袋",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "避免抖动",
+   "then": "连续若干周期超阈才告警",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "告警可达",
+   "then": "确认送达责任人",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "带上下钻",
+   "then": "告警附定位信息",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按影响定级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阈值来源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免抖动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警可达",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "带上下钻",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

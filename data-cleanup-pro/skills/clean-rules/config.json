@@ -1,0 +1,121 @@
+{
+ "name": "clean-rules",
+ "version": "2.0.0",
+ "domain": "数据清洗",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "手工修改",
+   "then": "所有清洗必须脚本化，手工改无法复现也无法追溯",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "覆盖原表",
+   "then": "保留原始表只读备份，清洗结果另存",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "步骤不明",
+   "then": "记录每一步处理与影响行数，便于回溯",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "口径漂移",
+   "then": "同一指标在不同表的口径须显式对齐并写清",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "一次性",
+   "then": "清洗脚本入库，下次增量数据可直接复用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "清洗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手工修改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖原表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "步骤不明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径漂移",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一次性",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "备份",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "显式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写清",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "复用",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

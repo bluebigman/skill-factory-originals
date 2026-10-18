@@ -1,0 +1,72 @@
+{
+ "name": "doc-citation-format-1",
+ "version": "2.0.0",
+ "domain": "引用格式规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "统一风格",
+   "then": "全文统一引用格式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "信息完整",
+   "then": "作者年份来源齐全",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "正文对应",
+   "then": "正文标注与文献表一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "链接可访问",
+   "then": "在线来源验证可访",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "自引克制",
+   "then": "避免过度自引",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "统一风格",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息完整",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "正文对应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "链接可访问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自引克制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

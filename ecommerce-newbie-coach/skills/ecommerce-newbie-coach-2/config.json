@@ -1,0 +1,78 @@
+{
+ "name": "ecommerce-newbie-coach-2",
+ "version": "2.0.0",
+ "domain": "电商开店",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "详情按链路",
+   "then": "痛点-方案-证据-信任-行动",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "合规前置",
+   "then": "极限词与资质先查",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "详情按链路",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规前置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "极限词",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "集中",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "信任",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "痛点",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "长尾",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

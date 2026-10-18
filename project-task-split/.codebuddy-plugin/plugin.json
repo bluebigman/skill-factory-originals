@@ -1,0 +1,74 @@
+{
+ "name": "project-task-split",
+ "version": "1.0.0",
+ "plugin": "project-task-split",
+ "description": "Project Task Split for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/project-task-split.md"
+ ],
+ "skills": [
+  "./skills/project-task-split-1",
+  "./skills/project-task-split-2",
+  "./skills/project-task-split-3"
+ ],
+ "expertType": "agent",
+ "agentName": "project-task-split",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Project Task Split",
+  "zh": "项目任务 拆到可交付"
+ },
+ "profession": {
+  "en": "Project Task Split",
+  "zh": "项目任务 拆解排期 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Project Task Split tasks end-to-end with built-in professional skills.",
+  "zh": "项目任务 拆解排期 顾问：覆盖 拆到可交付、明确负责人 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "拆到可交付"
+  },
+  {
+   "en": "practical capability",
+   "zh": "明确负责人"
+  },
+  {
+   "en": "practical capability",
+   "zh": "依赖排序"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到拆到可交付怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到明确负责人怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到依赖排序怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到拆到可交付怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "项目任务专家",
+  "to": "项目任务 拆到可交付",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "deploy-bluegreen-1",
+ "version": "2.0.0",
+ "domain": "蓝绿部署方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "两套环境",
+   "then": "新旧环境并行",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "流量切换",
+   "then": "按比例渐进切流",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "健康检查",
+   "then": "切换前验证健康",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "快速回切",
+   "then": "保留即时回切能力",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "数据兼容",
+   "then": "新老版本数据结构兼容",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "两套环境",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流量切换",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "健康检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "快速回切",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

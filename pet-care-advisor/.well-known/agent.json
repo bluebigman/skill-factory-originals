@@ -1,0 +1,99 @@
+{
+ "name": "Pet Care Advisor",
+ "description": "宠物养护专家：常见行为问题的训练方法；宠物日常照护的规范流程；宠物健康档案与就医准备。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/pet-care-advisor",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/pet-care-advisor",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "behavior-train",
+   "name": "常见行为问题的训练方法",
+   "description": "常见行为问题的训练方法",
+   "tags": [
+    "拆家",
+    "乱叫",
+    "随地大小便",
+    "咬人"
+   ],
+   "examples": [
+    "遇到拆家",
+    "遇到乱叫",
+    "遇到随地大小便",
+    "遇到咬人",
+    "遇到训练反复"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "behavior-train",
+    "to": "behavior-train",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "daily-care",
+   "name": "宠物日常照护的规范流程",
+   "description": "宠物日常照护的规范流程",
+   "tags": [
+    "喂养",
+    "洗澡",
+    "驱虫",
+    "日常"
+   ],
+   "examples": [
+    "遇到喂养混乱",
+    "遇到饮水不足",
+    "遇到驱虫遗忘",
+    "遇到洗澡过度",
+    "遇到异常判断"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "daily-care",
+    "to": "daily-care",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "health-record",
+   "name": "宠物健康档案与就医准备",
+   "description": "宠物健康档案与就医准备",
+   "tags": [
+    "健康记录",
+    "疫苗",
+    "就诊",
+    "档案"
+   ],
+   "examples": [
+    "遇到记录缺失",
+    "遇到体重趋势",
+    "遇到就诊准备",
+    "遇到用药",
+    "遇到紧急情况"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "health-record",
+    "to": "health-record",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "宠物养护专家"
+}

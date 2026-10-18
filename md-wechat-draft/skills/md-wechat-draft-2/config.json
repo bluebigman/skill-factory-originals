@@ -1,0 +1,72 @@
+{
+ "name": "md-wechat-draft-2",
+ "version": "2.0.0",
+ "domain": "Markdown",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定主题",
+   "then": "配色与字号先定一套再全文统一",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "段落短化",
+   "then": "每段不超过三行，适配手机阅读",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "图片配文案",
+   "then": "每图配一句说明，避免裸图",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标题序号",
+   "then": "小节用统一序号层级",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预览必查",
+   "then": "发布前逐段预览，检查代码块与表格",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定主题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "段落短化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图片配文案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题序号",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预览必查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

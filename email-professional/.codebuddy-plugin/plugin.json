@@ -1,0 +1,74 @@
+{
+ "name": "email-professional",
+ "version": "1.0.0",
+ "plugin": "email-professional",
+ "description": "email-professional — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for email-professional tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/email-professional.md"
+ ],
+ "agentName": "email-professional",
+ "displayName": {
+  "zh": "商务邮件撰写 主题具体",
+  "en": "email-professional"
+ },
+ "profession": {
+  "zh": "商务邮件撰写 顾问",
+  "en": "email-professional"
+ },
+ "displayDescription": {
+  "zh": "商务邮件撰写 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "email-professional: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "商务邮件撰写",
+   "en": "email-professional"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到商务邮件撰写怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划商务邮件撰写",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查商务邮件撰写",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到商务邮件撰写怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/email-professional-1/",
+  "./skills/email-professional-2/",
+  "./skills/email-professional-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:37",
+  "from": "商务邮件撰写专家",
+  "to": "商务邮件撰写 主题具体",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

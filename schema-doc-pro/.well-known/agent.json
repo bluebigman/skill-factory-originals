@@ -1,0 +1,85 @@
+{
+ "name": "Ab Test Design",
+ "description": "实验设计 指标定义 顾问：覆盖 单变量、先定主指标、算样本量 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/ab-test-design",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/ab-test-design",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "schema-doc-pro-1",
+   "name": "针对 单变量、先定主指标 等情境给出可执行处置",
+   "description": "针对 单变量、先定主指标 等情境给出可执行处置",
+   "tags": [
+    "单变量",
+    "先定主指标"
+   ],
+   "examples": [
+    "遇到单变量",
+    "遇到先定主指标",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:51",
+    "from": "ab-test-design-1",
+    "to": "schema-doc-pro-1",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "schema-doc-pro-2",
+   "name": "针对 算样本量、跑满周期 等情境给出可执行处置",
+   "description": "针对 算样本量、跑满周期 等情境给出可执行处置",
+   "tags": [
+    "算样本量",
+    "跑满周期"
+   ],
+   "examples": [
+    "遇到算样本量",
+    "遇到跑满周期",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:51",
+    "from": "ab-test-design-2",
+    "to": "schema-doc-pro-2",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "schema-doc-pro-3",
+   "name": "针对 结论分档 等情境给出可执行处置",
+   "description": "针对 结论分档 等情境给出可执行处置",
+   "tags": [
+    "结论分档"
+   ],
+   "examples": [
+    "遇到结论分档",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:51",
+    "from": "ab-test-design-3",
+    "to": "schema-doc-pro-3",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "实验设计 指标定义 顾问"
+}

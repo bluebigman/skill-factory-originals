@@ -1,0 +1,72 @@
+{
+ "name": "knowledge-conflict-2",
+ "version": "2.0.0",
+ "domain": "知识冲突处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先识别",
+   "then": "识别冲突条目",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "时效优先",
+   "then": "新版本优先",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "来源可信度",
+   "then": "按来源可信度取舍",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "冲突留痕",
+   "then": "冲突记录保留",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "人工裁决",
+   "then": "关键冲突人工裁",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源可信度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "人工裁决",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

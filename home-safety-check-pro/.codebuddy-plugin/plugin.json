@@ -1,0 +1,74 @@
+{
+ "name": "home-safety-check-pro",
+ "version": "1.0.0",
+ "plugin": "home-safety-check-pro",
+ "description": "Home Safety Check Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-safety-check-pro.md"
+ ],
+ "skills": [
+  "./skills/child-proof",
+  "./skills/emergency-prep",
+  "./skills/hazard-scan"
+ ],
+ "expertType": "agent",
+ "agentName": "home-safety-check-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Safety Check Pro",
+  "zh": "居家安全 误食 窗户"
+ },
+ "profession": {
+  "en": "Home Safety Check Pro",
+  "zh": "居家安全 隐患排查 适老适幼改造"
+ },
+ "displayDescription": {
+  "en": "Handles Home Safety Check Pro tasks end-to-end with built-in professional skills.",
+  "zh": "居家安全 隐患排查 适老适幼改造：针对 常见 等常见情境，给出可直接执行的处置建议与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "误食"
+  },
+  {
+   "en": "practical capability",
+   "zh": "窗户"
+  },
+  {
+   "en": "practical capability",
+   "zh": "插座"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到误食怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到窗户怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到插座怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到误食怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "居家安全专家",
+  "to": "居家安全 误食 窗户",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,99 @@
+{
+ "name": "Career Transition Pro",
+ "description": "转行规划专家：转行的分阶段落地；转行方向的可行性评估；转行简历的能力翻译。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/career-transition-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/career-transition-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "action-plan",
+   "name": "转行的分阶段落地",
+   "description": "转行的分阶段落地",
+   "tags": [
+    "计划",
+    "学习",
+    "作品",
+    "求职"
+   ],
+   "examples": [
+    "遇到只学不产",
+    "遇到闭门造车",
+    "遇到全脱产",
+    "遇到投递无差别",
+    "遇到无里程碑"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "action-plan",
+    "to": "action-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "direction",
+   "name": "转行方向的可行性评估",
+   "description": "转行方向的可行性评估",
+   "tags": [
+    "转行",
+    "方向",
+    "可行性",
+    "评估"
+   ],
+   "examples": [
+    "遇到凭兴趣转",
+    "遇到一步到位",
+    "遇到信息不足",
+    "遇到沉没成本",
+    "遇到周期预期"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "direction",
+    "to": "direction",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "resume-rebuild",
+   "name": "转行简历的能力翻译",
+   "description": "转行简历的能力翻译",
+   "tags": [
+    "简历",
+    "改写",
+    "经验",
+    "匹配"
+   ],
+   "examples": [
+    "遇到经历不对口",
+    "遇到无相关经验",
+    "遇到堆砌职责",
+    "遇到篇幅过长",
+    "遇到技能栏空洞"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "resume-rebuild",
+    "to": "resume-rebuild",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "转行规划专家"
+}

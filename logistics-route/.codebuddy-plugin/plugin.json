@@ -1,0 +1,74 @@
+{
+ "name": "logistics-route",
+ "version": "1.0.0",
+ "plugin": "logistics-route",
+ "description": "logistics-route — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for logistics-route tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/logistics-route.md"
+ ],
+ "agentName": "logistics-route",
+ "displayName": {
+  "zh": "物流路线规划 约束先行",
+  "en": "logistics-route"
+ },
+ "profession": {
+  "zh": "物流路线规划 助手",
+  "en": "logistics-route"
+ },
+ "displayDescription": {
+  "zh": "物流路线规划 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "logistics-route: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "物流路线规划",
+   "en": "logistics-route"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到物流路线规划怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划物流路线规划",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查物流路线规划",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到物流路线规划怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/logistics-route-1",
+  "./skills/logistics-route-2",
+  "./skills/logistics-route-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:43",
+  "from": "物流路线规划专家",
+  "to": "物流路线规划 约束先行",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

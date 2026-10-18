@@ -1,0 +1,74 @@
+{
+ "name": "doc-version-diff",
+ "version": "1.0.0",
+ "plugin": "doc-version-diff",
+ "description": "doc-version-diff — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for doc-version-diff tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/doc-version-diff.md"
+ ],
+ "agentName": "doc-version-diff",
+ "displayName": {
+  "zh": "文档版本比对 差异分级",
+  "en": "doc-version-diff"
+ },
+ "profession": {
+  "zh": "文档版本比对 顾问",
+  "en": "doc-version-diff"
+ },
+ "displayDescription": {
+  "zh": "文档版本比对 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "doc-version-diff: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "文档版本比对",
+   "en": "doc-version-diff"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到文档版本比对怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划文档版本比对",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查文档版本比对",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到文档版本比对怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/doc-version-diff-1/",
+  "./skills/doc-version-diff-2/",
+  "./skills/doc-version-diff-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:36",
+  "from": "文档版本比对专家",
+  "to": "文档版本比对 差异分级",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

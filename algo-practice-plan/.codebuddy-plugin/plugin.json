@@ -1,0 +1,74 @@
+{
+ "name": "algo-practice-plan",
+ "version": "1.0.0",
+ "plugin": "algo-practice-plan",
+ "description": "Algo Practice Plan for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/algo-practice-plan.md"
+ ],
+ "skills": [
+  "./skills/algo-practice-plan-1",
+  "./skills/algo-practice-plan-2",
+  "./skills/algo-practice-plan-3"
+ ],
+ "expertType": "agent",
+ "agentName": "algo-practice-plan",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Algo Practice Plan",
+  "zh": "算法刷题 按类刷 限时"
+ },
+ "profession": {
+  "en": "Algo Practice Plan",
+  "zh": "算法刷题 计划编排 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Algo Practice Plan tasks end-to-end with built-in professional skills.",
+  "zh": "算法刷题 计划编排 顾问：覆盖 按类刷、限时、手写板、错题本 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "按类刷"
+  },
+  {
+   "en": "practical capability",
+   "zh": "限时"
+  },
+  {
+   "en": "practical capability",
+   "zh": "手写板"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到按类刷怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到限时怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到手写板怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到按类刷怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:29",
+  "from": "算法刷题专家",
+  "to": "算法刷题 按类刷 限时",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

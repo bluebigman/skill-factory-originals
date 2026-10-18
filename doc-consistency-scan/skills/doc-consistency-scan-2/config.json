@@ -1,0 +1,72 @@
+{
+ "name": "doc-consistency-scan-2",
+ "version": "2.0.0",
+ "domain": "文档一致性扫描",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "术语一致",
+   "then": "同一概念同一表述",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数字一致",
+   "then": "正文与表格数字核对",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "图表一致",
+   "then": "图表编号与引用对应",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "格式一致",
+   "then": "同级标题同格式",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "扫描留痕",
+   "then": "输出不一致清单",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "术语一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数字一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图表一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "扫描留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

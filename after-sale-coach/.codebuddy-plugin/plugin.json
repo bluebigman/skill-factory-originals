@@ -1,0 +1,74 @@
+{
+ "name": "after-sale-coach",
+ "version": "1.0.0",
+ "plugin": "after-sale-coach",
+ "description": "After Sale Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/after-sale-coach.md"
+ ],
+ "skills": [
+  "./skills/after-sale-coach-1",
+  "./skills/after-sale-coach-2",
+  "./skills/after-sale-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "after-sale-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "After Sale Coach",
+  "zh": "售后处理 及时响应 标准统一"
+ },
+ "profession": {
+  "en": "After Sale Coach",
+  "zh": "售后处理 退换流程 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles After Sale Coach tasks end-to-end with built-in professional skills.",
+  "zh": "售后处理 退换流程 顾问：覆盖 及时响应、标准统一、留痕 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "及时响应"
+  },
+  {
+   "en": "practical capability",
+   "zh": "标准统一"
+  },
+  {
+   "en": "practical capability",
+   "zh": "留痕"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到及时响应怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到标准统一怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到留痕怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到及时响应怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "售后处理专家",
+  "to": "售后处理 及时响应 标准统一",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

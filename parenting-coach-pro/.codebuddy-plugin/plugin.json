@@ -1,0 +1,74 @@
+{
+ "name": "parenting-coach-pro",
+ "version": "1.0.0",
+ "plugin": "parenting-coach-pro",
+ "description": "Parenting Coach Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/parenting-coach-pro.md"
+ ],
+ "skills": [
+  "./skills/behavior-diagnose",
+  "./skills/communication-script",
+  "./skills/emotion-coach"
+ ],
+ "expertType": "agent",
+ "agentName": "parenting-coach-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Parenting Coach Pro",
+  "zh": "家庭教育 沉迷手机 厌学"
+ },
+ "profession": {
+  "en": "Parenting Coach Pro",
+  "zh": "家庭教育 亲子沟通 情绪引导"
+ },
+ "displayDescription": {
+  "en": "Handles Parenting Coach Pro tasks end-to-end with built-in professional skills.",
+  "zh": "家庭教育 亲子沟通 情绪引导：诊断孩子行为问题背后的家庭因素；给家长可直接使用的话术模板。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "沉迷手机"
+  },
+  {
+   "en": "practical capability",
+   "zh": "厌学"
+  },
+  {
+   "en": "practical capability",
+   "zh": "顶嘴"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到沉迷手机怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到厌学怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顶嘴怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到沉迷手机怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "家庭教育专家",
+  "to": "家庭教育 沉迷手机 厌学",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

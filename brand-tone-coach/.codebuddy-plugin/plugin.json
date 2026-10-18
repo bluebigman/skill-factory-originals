@@ -1,0 +1,74 @@
+{
+ "name": "brand-tone-coach",
+ "version": "1.0.0",
+ "plugin": "brand-tone-coach",
+ "description": "Brand Tone Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/brand-tone-coach.md"
+ ],
+ "skills": [
+  "./skills/brand-tone-coach-1",
+  "./skills/brand-tone-coach-2",
+  "./skills/brand-tone-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "brand-tone-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Brand Tone Coach",
+  "zh": "品牌调性 写下来 给正反例"
+ },
+ "profession": {
+  "en": "Brand Tone Coach",
+  "zh": "品牌调性 表达统一 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Brand Tone Coach tasks end-to-end with built-in professional skills.",
+  "zh": "品牌调性 表达统一 教练：覆盖 写下来、给正反例、跨渠道对齐 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "品牌调性",
+   "en": "brand-tone-coach"
+  },
+  {
+   "en": "MarketingGrowth",
+   "zh": "MarketingGrowth"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到品牌调性怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到表达统一怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到教练怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到品牌调性怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:29",
+  "from": "品牌调性专家",
+  "to": "品牌调性 写下来 给正反例",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

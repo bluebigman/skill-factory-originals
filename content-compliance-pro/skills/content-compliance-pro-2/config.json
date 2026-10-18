@@ -1,0 +1,72 @@
+{
+ "name": "content-compliance-pro-2",
+ "version": "2.0.0",
+ "domain": "内容合规",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "红线清单",
+   "then": "先建行业红线清单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "全量扫描",
+   "then": "扫描全部内容而非抽样",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "风险分级",
+   "then": "按严重程度分级",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "改写建议",
+   "then": "命中须给替换建议",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕可查",
+   "then": "审核过程留痕",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "红线清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全量扫描",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改写建议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕可查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

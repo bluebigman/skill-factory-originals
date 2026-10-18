@@ -1,0 +1,72 @@
+{
+ "name": "schema-design-review-2",
+ "version": "2.0.0",
+ "domain": "表结构设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "范式权衡",
+   "then": "分析库适度反范式换查询性能",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "主键稳定",
+   "then": "选不变字段作主键",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "索引克制",
+   "then": "按查询模式建索引不过度",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "空值语义",
+   "then": "区分未知与不适用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更兼容",
+   "then": "新增列给默认值避免锁表",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "范式权衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主键稳定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "空值语义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

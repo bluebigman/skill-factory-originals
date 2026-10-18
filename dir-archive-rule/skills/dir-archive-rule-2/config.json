@@ -1,0 +1,78 @@
+{
+ "name": "dir-archive-rule-2",
+ "version": "2.0.0",
+ "domain": "目录归档",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "归档即封存",
+   "then": "已归档目录只读，不再改",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "顶层固定",
+   "then": "顶层目录不随项目随意增",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "归档即封存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "顶层固定",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "命名",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "随意",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "层级",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "超三",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "检索",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

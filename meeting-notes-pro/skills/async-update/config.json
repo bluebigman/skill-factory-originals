@@ -1,0 +1,121 @@
+{
+ "name": "async-update",
+ "version": "2.0.0",
+ "domain": "会议纪要",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "会议过多",
+   "then": "能用书面同步的议题不开会，只保留需决策的议题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "信息断层",
+   "then": "固定节奏（周报/日报）比临时通知更可靠",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "汇报冗长",
+   "then": "进度汇报用「结论-依据-需求」倒金字塔结构",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "坏消息延迟",
+   "then": "风险须第一时间上报，延迟上报的成本远大于误报",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "跨部门",
+   "then": "跨部门同步须明确对接人与响应时限",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "周报",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "汇报",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "进度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "会议过多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息断层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "汇报冗长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坏消息延迟",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跨部门",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "持续",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "完成",
+   "source": "SKILL.md#L40"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

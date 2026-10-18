@@ -1,0 +1,72 @@
+{
+ "name": "third-party-audit-3",
+ "version": "2.0.0",
+ "domain": "第三方审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "清单",
+   "then": "列出全部外部依赖",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数据流向",
+   "then": "明确数据流出",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "权限最小",
+   "then": "最小化第三方权限",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "退出策略",
+   "then": "可替换可回退",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复审",
+   "then": "按周期复审",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据流向",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限最小",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退出策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复审",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

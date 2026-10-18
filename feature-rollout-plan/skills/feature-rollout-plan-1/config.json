@@ -1,0 +1,72 @@
+{
+ "name": "feature-rollout-plan-1",
+ "version": "2.0.0",
+ "domain": "功能放量方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "灰度阶梯",
+   "then": "按比例逐步放量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "指标护栏",
+   "then": "设护栏指标",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "自动停止",
+   "then": "护栏触发自动停",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回滚预演",
+   "then": "放量前演练回滚",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "放量留痕",
+   "then": "记录各阶段数据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "灰度阶梯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指标护栏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自动停止",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回滚预演",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "放量留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

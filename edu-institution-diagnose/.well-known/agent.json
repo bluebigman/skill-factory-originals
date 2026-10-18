@@ -1,0 +1,67 @@
+{
+ "name": "Edu Institution Diagnose",
+ "description": "教培经营专家：覆盖 先看续费、试听转化、师资稳定 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/edu-institution-diagnose",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/edu-institution-diagnose",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "edu-institution-diagnose-1",
+   "name": "针对 先看续费、试听转化 等情境给出可执行处置",
+   "description": "针对 先看续费、试听转化 等情境给出可执行处置",
+   "tags": [
+    "先看续费",
+    "试听转化"
+   ],
+   "examples": [
+    "遇到先看续费",
+    "遇到试听转化",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "edu-institution-diagnose-2",
+   "name": "针对 师资稳定、分层教学 等情境给出可执行处置",
+   "description": "针对 师资稳定、分层教学 等情境给出可执行处置",
+   "tags": [
+    "师资稳定",
+    "分层教学"
+   ],
+   "examples": [
+    "遇到师资稳定",
+    "遇到分层教学",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "edu-institution-diagnose-3",
+   "name": "针对 口碑优先 等情境给出可执行处置",
+   "description": "针对 口碑优先 等情境给出可执行处置",
+   "tags": [
+    "口碑优先"
+   ],
+   "examples": [
+    "遇到口碑优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "教培经营专家"
+}

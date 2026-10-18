@@ -1,0 +1,66 @@
+{
+ "name": "sleep-routine-pro",
+ "version": "1.0.0",
+ "plugin": "sleep-routine-pro",
+ "description": "Sleep Routine Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/sleep-routine-pro.md"
+ ],
+ "skills": [
+  "./skills/bedtime-ritual",
+  "./skills/env",
+  "./skills/rhythm"
+ ],
+ "expertType": "agent",
+ "agentName": "sleep-routine-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Sleep Routine Pro",
+  "zh": "作息 睡眠 早睡"
+ },
+ "profession": {
+  "en": "Sleep Routine Pro",
+  "zh": "睡眠作息 睡前习惯 环境优化"
+ },
+ "displayDescription": {
+  "en": "Handles Sleep Routine Pro tasks end-to-end with built-in professional skills.",
+  "zh": "睡眠作息 睡前习惯 环境优化：睡前的固定流程设计；卧室环境的调整；稳定生物钟的调整方法。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "睡前刷手机"
+  },
+  {
+   "en": "practical capability",
+   "zh": "温度"
+  },
+  {
+   "en": "practical capability",
+   "zh": "咖啡因"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到睡前刷手机怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到温度怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到咖啡因怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到睡前刷手机怎么办"
+ }
+}

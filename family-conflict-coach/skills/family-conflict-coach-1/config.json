@@ -1,0 +1,62 @@
+{
+ "name": "family-conflict-coach-1",
+ "version": "2.0.0",
+ "domain": "家庭矛盾",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分开听",
+   "then": "先分别听再一起谈",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "谈行为不谈人格",
+   "then": "描述具体事件",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分开听",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "谈行为不谈人格",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "矛盾",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "事件",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

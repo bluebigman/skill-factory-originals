@@ -1,0 +1,99 @@
+{
+ "name": "Teen Communication Pro",
+ "description": "青春期沟通专家：与青春期孩子协商规则的方法；识别青春期情绪波动与背后需求；从外部逼迫转向内在动机。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/teen-communication-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-communication-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-boundary-negotiate",
+   "name": "与青春期孩子协商规则的方法",
+   "description": "与青春期孩子协商规则的方法",
+   "tags": [
+    "手机时间",
+    "回家时间",
+    "交友",
+    "隐私"
+   ],
+   "examples": [
+    "遇到手机时间",
+    "遇到回家时间",
+    "遇到交友",
+    "遇到隐私",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:54",
+    "from": "teen-boundary-negotiate",
+    "to": "teen-boundary-negotiate",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "teen-emotion-map",
+   "name": "识别青春期情绪波动与背后需求",
+   "description": "识别青春期情绪波动与背后需求",
+   "tags": [
+    "沉默",
+    "暴躁",
+    "顶嘴",
+    "关门"
+   ],
+   "examples": [
+    "遇到沉默",
+    "遇到暴躁",
+    "遇到顶嘴",
+    "遇到关门",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:54",
+    "from": "teen-emotion-map",
+    "to": "teen-emotion-map",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "teen-motivation",
+   "name": "从外部逼迫转向内在动机",
+   "description": "从外部逼迫转向内在动机",
+   "tags": [
+    "不想学",
+    "没动力",
+    "躺平",
+    "迷茫"
+   ],
+   "examples": [
+    "遇到不想学",
+    "遇到没动力",
+    "遇到躺平",
+    "遇到迷茫",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:54",
+    "from": "teen-motivation",
+    "to": "teen-motivation",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "青春期沟通专家"
+}

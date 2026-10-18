@@ -1,0 +1,72 @@
+{
+ "name": "data-migration-audit-1",
+ "version": "2.0.0",
+ "domain": "数据迁移",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "迁移前盘点",
+   "then": "源与目标结构差异先列清",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "完整性校验",
+   "then": "行数与关键字段双向核对",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "灰度迁移",
+   "then": "先小批验证再全量",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回滚预案",
+   "then": "迁移前准备回滚方案",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "双跑对比",
+   "then": "关键期新旧并行比对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "迁移前盘点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "完整性校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "灰度迁移",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回滚预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双跑对比",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

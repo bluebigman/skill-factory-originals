@@ -1,0 +1,72 @@
+{
+ "name": "errlog-analyze-pro-2",
+ "version": "2.0.0",
+ "domain": "错误日志分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "时间对齐",
+   "then": "先对齐各节点时间戳与时钟偏移",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "聚类去重",
+   "then": "同类错误归并计数",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "首次出现",
+   "then": "定位首次出现时间点",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "上下文窗口",
+   "then": "取错误前后若干行看完整链路",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "关联变更",
+   "then": "与最近发布或配置变更比对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "时间对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "聚类去重",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "首次出现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上下文窗口",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关联变更",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

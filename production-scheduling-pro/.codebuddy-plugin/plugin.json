@@ -1,0 +1,74 @@
+{
+ "name": "production-scheduling-pro",
+ "version": "1.0.0",
+ "plugin": "production-scheduling-pro",
+ "description": "Production Scheduling Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/production-scheduling-pro.md"
+ ],
+ "skills": [
+  "./skills/production-scheduling-pro-1",
+  "./skills/production-scheduling-pro-2",
+  "./skills/production-scheduling-pro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "production-scheduling-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Production Scheduling Pro",
+  "zh": "生产排程 交期倒排 瓶颈排程"
+ },
+ "profession": {
+  "en": "Production Scheduling Pro",
+  "zh": "生产排程 交期保障 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Production Scheduling Pro tasks end-to-end with built-in professional skills.",
+  "zh": "生产排程 交期保障 顾问：覆盖 交期倒排、瓶颈排程、同族合并 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "生产排程",
+   "en": "production-scheduling-pro"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到生产排程怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到交期保障怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到生产排程怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "生产排程专家",
+  "to": "生产排程 交期倒排 瓶颈排程",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

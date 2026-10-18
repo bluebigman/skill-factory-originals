@@ -1,0 +1,75 @@
+{
+ "name": "Product Spec Write",
+ "description": "产品需求专家：覆盖 目标先写、验收可测、边界显式 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/product-spec-write",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/product-spec-write",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "product-spec-write-1",
+   "name": "针对 目标先写、验收可测 等情境给出可执行处置",
+   "description": "针对 目标先写、验收可测 等情境给出可执行处置",
+   "tags": [
+    "目标先写",
+    "验收可测"
+   ],
+   "examples": [
+    "遇到目标先写",
+    "遇到验收可测",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "product-spec-write-2",
+   "name": "针对 边界显式、用户语言 等情境给出可执行处置",
+   "description": "针对 边界显式、用户语言 等情境给出可执行处置",
+   "tags": [
+    "边界显式",
+    "用户语言"
+   ],
+   "examples": [
+    "遇到边界显式",
+    "遇到用户语言",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "product-spec-write-3",
+   "name": "针对 变更留痕 等情境给出可执行处置",
+   "description": "针对 变更留痕 等情境给出可执行处置",
+   "tags": [
+    "变更留痕"
+   ],
+   "examples": [
+    "遇到变更留痕",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "产品需求专家",
+ "x-source": "skill-factory-originals"
+}

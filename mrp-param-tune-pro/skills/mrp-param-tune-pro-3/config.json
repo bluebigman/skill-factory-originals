@@ -1,0 +1,65 @@
+{
+ "name": "mrp-param-tune-pro-3",
+ "version": "2.0.0",
+ "domain": "物料计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "变更留痕",
+   "then": "参数变更须留痕可追",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "提前",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分层",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "参数",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "实测",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "层级",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "均值",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

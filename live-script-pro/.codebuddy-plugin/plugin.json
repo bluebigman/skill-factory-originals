@@ -1,0 +1,74 @@
+{
+ "name": "live-script-pro",
+ "version": "1.0.0",
+ "plugin": "live-script-pro",
+ "description": "Live Script Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/live-script-pro.md"
+ ],
+ "skills": [
+  "./skills/compliance",
+  "./skills/script-flow",
+  "./skills/talk-track"
+ ],
+ "expertType": "agent",
+ "agentName": "live-script-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Live Script Pro",
+  "zh": "直播脚本 极限词 功效宣称"
+ },
+ "profession": {
+  "en": "Live Script Pro",
+  "zh": "直播脚本 话术节奏 互动设计"
+ },
+ "displayDescription": {
+  "en": "Handles Live Script Pro tasks end-to-end with built-in professional skills.",
+  "zh": "直播脚本 话术节奏 互动设计：直播中的合规红线；直播流程与脚本编排；关键话术的组织。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "极限词"
+  },
+  {
+   "en": "practical capability",
+   "zh": "功效宣称"
+  },
+  {
+   "en": "practical capability",
+   "zh": "虚假促销"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到极限词怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到功效宣称怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到虚假促销怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到极限词怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "直播脚本专家",
+  "to": "直播脚本 极限词 功效宣称",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

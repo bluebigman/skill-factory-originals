@@ -1,0 +1,72 @@
+{
+ "name": "editorial-review-flow-2",
+ "version": "2.0.0",
+ "domain": "编辑评审流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级评审",
+   "then": "按重要度定流程",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "角色明确",
+   "then": "作者编辑审核各司其职",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "清单化",
+   "then": "评审项清单打勾",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "闭环",
+   "then": "问题修改后回评审",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "评审记录归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级评审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "角色明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

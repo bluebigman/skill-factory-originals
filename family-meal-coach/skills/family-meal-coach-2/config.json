@@ -1,0 +1,78 @@
+{
+ "name": "family-meal-coach-2",
+ "version": "2.0.0",
+ "domain": "一周菜单",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按耗时分级",
+   "then": "工作日 30 分钟菜",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "预处理",
+   "then": "周末洗切分装",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按耗时分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预处理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "工作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "周末",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "切分",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "采购",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "搭配",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "作日",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

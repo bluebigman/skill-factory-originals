@@ -1,0 +1,113 @@
+{
+ "name": "debug",
+ "version": "2.0.0",
+ "domain": "表格公式",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "#N/A",
+   "then": "先核对查找值与被查找值类型（文本 vs 数值）是否一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "#VALUE!",
+   "then": "逐段拆解公式定位出错项，用 F9 观察中间结果",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "#REF!",
+   "then": "删除行列导致引用失效，改用整列引用或命名区域",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "循环引用",
+   "then": "定位自引用单元格，必要时开启迭代计算并设上限",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果不符",
+   "then": "核对绝对/相对引用，区域下拉错位是最高频错误",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "报错",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "#N/A",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "#VALUE",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "循环引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "#VALUE!",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "#REF!",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果不符",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "上限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "拆解",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "导致",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "最高",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "命名",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "删除",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

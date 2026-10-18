@@ -1,0 +1,78 @@
+{
+ "name": "fitness-plan-coach-2",
+ "version": "2.0.0",
+ "domain": "健身计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "推拉平衡",
+   "then": "推与拉的动作量保持接近",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "恢复优先",
+   "then": "同一肌群间隔 48 小时",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "推拉平衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "评估",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "质量",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "保持",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "渐进",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

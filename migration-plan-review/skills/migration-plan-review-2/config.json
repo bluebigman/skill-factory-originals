@@ -1,0 +1,72 @@
+{
+ "name": "migration-plan-review-2",
+ "version": "2.0.0",
+ "domain": "数据迁移方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只读演练",
+   "then": "先在副本上演练完整流程",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分批迁移",
+   "then": "按业务单元分批而非一次全量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "校验对账",
+   "then": "迁移后逐表核对条数与合计",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回退可行",
+   "then": "保留回退窗口与回退脚本",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "窗口沟通",
+   "then": "迁移窗口提前通知相关方",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "只读演练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分批迁移",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "校验对账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回退可行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "窗口沟通",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

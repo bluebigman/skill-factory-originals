@@ -1,0 +1,74 @@
+{
+ "name": "agent-perf-budget",
+ "version": "1.0.0",
+ "plugin": "agent-perf-budget",
+ "description": "agent-perf-budget — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for agent-perf-budget tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-perf-budget.md"
+ ],
+ "agentName": "agent-perf-budget",
+ "displayName": {
+  "zh": "性能预算 预算预设 超预算告警",
+  "en": "agent-perf-budget"
+ },
+ "profession": {
+  "zh": "性能预算 限额 顾问",
+  "en": "agent-perf-budget"
+ },
+ "displayDescription": {
+  "zh": "性能预算 限额 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "agent-perf-budget: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "性能预算",
+   "en": "agent-perf-budget"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到性能预算怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划性能预算",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查性能预算",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到性能预算怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/agent-perf-budget-1/",
+  "./skills/agent-perf-budget-2/",
+  "./skills/agent-perf-budget-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "性能预算专家",
+  "to": "性能预算 预算预设 超预算告警",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

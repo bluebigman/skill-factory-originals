@@ -1,0 +1,72 @@
+{
+ "name": "log-privacy-check-1",
+ "version": "2.0.0",
+ "domain": "日志隐私核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "禁打凭据",
+   "then": "密码与令牌绝不入日志",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "个人信息脱敏",
+   "then": "手机与证件脱敏",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分级输出",
+   "then": "调试日志生产默认关",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "采样控制",
+   "then": "高频日志采样",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留存期",
+   "then": "日志按规留存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "禁打凭据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "个人信息脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "采样控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留存期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

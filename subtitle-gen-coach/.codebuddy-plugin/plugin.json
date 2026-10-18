@@ -1,0 +1,74 @@
+{
+ "name": "subtitle-gen-coach",
+ "version": "1.0.0",
+ "plugin": "subtitle-gen-coach",
+ "description": "Subtitle Gen Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/subtitle-gen-coach.md"
+ ],
+ "skills": [
+  "./skills/subtitle-gen-coach-1",
+  "./skills/subtitle-gen-coach-2",
+  "./skills/subtitle-gen-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "subtitle-gen-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Subtitle Gen Coach",
+  "zh": "字幕生成 单行字数 断句按语义"
+ },
+ "profession": {
+  "en": "Subtitle Gen Coach",
+  "zh": "字幕生成 时间轴 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Subtitle Gen Coach tasks end-to-end with built-in professional skills.",
+  "zh": "字幕生成 时间轴 助手：覆盖 单行字数、断句按语义、最短时长 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "单行字数"
+  },
+  {
+   "en": "practical capability",
+   "zh": "断句按语义"
+  },
+  {
+   "en": "practical capability",
+   "zh": "最短时长"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到单行字数怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到断句按语义怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到最短时长怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到单行字数怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "字幕生成专家",
+  "to": "字幕生成 单行字数 断句按语义",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

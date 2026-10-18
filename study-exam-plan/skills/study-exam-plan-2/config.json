@@ -1,0 +1,70 @@
+{
+ "name": "study-exam-plan-2",
+ "version": "2.0.0",
+ "domain": "备考计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "错题驱动",
+   "then": "每天以错题为主推进",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "科目轮换",
+   "then": "长周期备考科目交替防疲劳",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "错题驱动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "科目轮换",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每天",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "周期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "疲劳",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

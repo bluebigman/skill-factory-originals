@@ -1,0 +1,74 @@
+{
+ "name": "meal-planning-pro",
+ "version": "1.0.0",
+ "plugin": "meal-planning-pro",
+ "description": "Meal Planning Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-planning-pro.md"
+ ],
+ "skills": [
+  "./skills/balance-check",
+  "./skills/prep-batch",
+  "./skills/weekly-menu"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-planning-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Meal Planning Pro",
+  "zh": "家庭餐食 外卖偏多 挑食"
+ },
+ "profession": {
+  "en": "Meal Planning Pro",
+  "zh": "家庭餐食 一周菜单 营养搭配"
+ },
+ "displayDescription": {
+  "en": "Handles Meal Planning Pro tasks end-to-end with built-in professional skills.",
+  "zh": "家庭餐食 一周菜单 营养搭配：餐食结构的基本均衡核查；批量备菜与保鲜；家庭周度餐食计划。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "外卖偏多"
+  },
+  {
+   "en": "practical capability",
+   "zh": "挑食"
+  },
+  {
+   "en": "practical capability",
+   "zh": "早餐缺失"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到外卖偏多怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到挑食怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到早餐缺失怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到外卖偏多怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:43",
+  "from": "家庭餐食专家",
+  "to": "家庭餐食 外卖偏多 挑食",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

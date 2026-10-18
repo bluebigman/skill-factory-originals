@@ -1,0 +1,72 @@
+{
+ "name": "log-pattern-mining-2",
+ "version": "2.0.0",
+ "domain": "日志挖掘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "模式提取",
+   "then": "从海量日志提取模板",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常聚类",
+   "then": "相似异常归为一类",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "基线上线",
+   "then": "建立正常日志基线",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "突变检测",
+   "then": "偏离基线即告警",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "根因关联",
+   "then": "关联上下游日志定位根因",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "模式提取",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常聚类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "基线上线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "突变检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "根因关联",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

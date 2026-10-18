@@ -1,0 +1,121 @@
+{
+ "name": "summarize",
+ "version": "2.0.0",
+ "domain": "知识管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "流水账",
+   "then": "总结按「结论-依据-下一步」倒金字塔结构",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无结论",
+   "then": "总结必须给出明确判断，罗列事实不叫总结",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "只报喜",
+   "then": "问题与偏差须显式写入，只写成绩的总结无价值",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无动作",
+   "then": "每次总结定 1-2 个改进项，过多则无一落实",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "周期",
+   "then": "固定节奏（周/月）复盘，临时想起来做必流于形式",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "总结",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提炼",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流水账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无结论",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只报喜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无动作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "次只",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

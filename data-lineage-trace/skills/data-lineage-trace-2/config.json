@@ -1,0 +1,72 @@
+{
+ "name": "data-lineage-trace-2",
+ "version": "2.0.0",
+ "domain": "数据血缘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "上下游登记",
+   "then": "每个字段登记来源与去向",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变更影响",
+   "then": "改字段前先算影响面",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "断链告警",
+   "then": "血缘断裂须告警",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "口径统一",
+   "then": "同名字段口径必须一致",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本记录",
+   "then": "血缘关系变更须留版本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "上下游登记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更影响",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "断链告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本记录",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

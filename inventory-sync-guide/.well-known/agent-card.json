@@ -1,0 +1,75 @@
+{
+ "name": "Inventory Sync Guide",
+ "description": "库存多仓专家：覆盖 日清差异、差异分类、单一主账、盘点节奏、责任到单 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/inventory-sync-guide",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/inventory-sync-guide",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "inventory-sync-guide-1",
+   "name": "针对 日清差异、差异分类 等情境给出可执行处置",
+   "description": "针对 日清差异、差异分类 等情境给出可执行处置",
+   "tags": [
+    "日清差异",
+    "差异分类"
+   ],
+   "examples": [
+    "遇到日清差异",
+    "遇到差异分类",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "inventory-sync-guide-2",
+   "name": "针对 单一主账、盘点节奏 等情境给出可执行处置",
+   "description": "针对 单一主账、盘点节奏 等情境给出可执行处置",
+   "tags": [
+    "单一主账",
+    "盘点节奏"
+   ],
+   "examples": [
+    "遇到单一主账",
+    "遇到盘点节奏",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "inventory-sync-guide-3",
+   "name": "针对 责任到单 等情境给出可执行处置",
+   "description": "针对 责任到单 等情境给出可执行处置",
+   "tags": [
+    "责任到单"
+   ],
+   "examples": [
+    "遇到责任到单",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "库存多仓专家",
+ "x-source": "skill-factory-originals"
+}

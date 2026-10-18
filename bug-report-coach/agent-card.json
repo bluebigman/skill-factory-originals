@@ -1,0 +1,75 @@
+{
+ "name": "Bug Report Coach",
+ "description": "缺陷报告专家：覆盖 复现优先、含环境、单一现象 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/bug-report-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/bug-report-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "bug-report-coach-1",
+   "name": "针对 复现优先、含环境 等情境给出可执行处置",
+   "description": "针对 复现优先、含环境 等情境给出可执行处置",
+   "tags": [
+    "复现优先",
+    "含环境"
+   ],
+   "examples": [
+    "遇到复现优先",
+    "遇到含环境",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "bug-report-coach-2",
+   "name": "针对 单一现象、附证据 等情境给出可执行处置",
+   "description": "针对 单一现象、附证据 等情境给出可执行处置",
+   "tags": [
+    "单一现象",
+    "附证据"
+   ],
+   "examples": [
+    "遇到单一现象",
+    "遇到附证据",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "bug-report-coach-3",
+   "name": "针对 归因分层 等情境给出可执行处置",
+   "description": "针对 归因分层 等情境给出可执行处置",
+   "tags": [
+    "归因分层"
+   ],
+   "examples": [
+    "遇到归因分层",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "缺陷报告专家",
+ "x-source": "skill-factory-originals"
+}

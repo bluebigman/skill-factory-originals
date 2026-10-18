@@ -1,0 +1,74 @@
+{
+ "name": "home-organization-coach",
+ "version": "1.0.0",
+ "plugin": "home-organization-coach",
+ "description": "Home Organization Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-organization-coach.md"
+ ],
+ "skills": [
+  "./skills/home-organization-coach-1",
+  "./skills/home-organization-coach-2",
+  "./skills/home-organization-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-organization-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Organization Coach",
+  "zh": "收纳规则 动作结束点设容身位"
+ },
+ "profession": {
+  "en": "Home Organization Coach",
+  "zh": "收纳规则 场景分区 一进一出"
+ },
+ "displayDescription": {
+  "en": "Handles Home Organization Coach tasks end-to-end with built-in professional skills.",
+  "zh": "收纳规则 场景分区 一进一出：覆盖 动作结束点设容身位 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "动作结束点设容身位"
+  },
+  {
+   "en": "practical capability",
+   "zh": "按场景分区"
+  },
+  {
+   "en": "practical capability",
+   "zh": "高频占优"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到动作结束点设容身位怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到按场景分区怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到高频占优怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到动作结束点设容身位怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "收纳规则专家",
+  "to": "收纳规则 动作结束点设容身位",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

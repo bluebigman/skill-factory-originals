@@ -1,0 +1,78 @@
+{
+ "name": "kanban-flow-coach-2",
+ "version": "2.0.0",
+ "domain": "看板流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先通瓶颈",
+   "then": "优先优化瓶颈环节，其余暂缓",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "减少批量",
+   "then": "小批量流转缩短周期",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先通瓶颈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "减少批量",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "周期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "其余",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "环节",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

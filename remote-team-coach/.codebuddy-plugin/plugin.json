@@ -1,0 +1,74 @@
+{
+ "name": "remote-team-coach",
+ "version": "1.0.0",
+ "plugin": "remote-team-coach",
+ "description": "remote-team-coach — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for remote-team-coach tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/remote-team-coach.md"
+ ],
+ "agentName": "remote-team-coach",
+ "displayName": {
+  "zh": "远程团队 默认书面 单一事实源",
+  "en": "remote-team-coach"
+ },
+ "profession": {
+  "zh": "远程团队 协作规范 教练",
+  "en": "remote-team-coach"
+ },
+ "displayDescription": {
+  "zh": "远程团队 协作规范 教练：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "remote-team-coach: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "远程团队",
+   "en": "remote-team-coach"
+  },
+  {
+   "en": "OperationsHR",
+   "zh": "OperationsHR"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到远程团队怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划远程团队",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查远程团队",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到远程团队怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/remote-team-coach-1",
+  "./skills/remote-team-coach-2",
+  "./skills/remote-team-coach-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "远程团队专家",
+  "to": "远程团队 默认书面 单一事实源",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

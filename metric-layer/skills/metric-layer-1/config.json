@@ -1,0 +1,72 @@
+{
+ "name": "metric-layer-1",
+ "version": "2.0.0",
+ "domain": "指标层建设",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "口径唯一",
+   "then": "同一指标唯一口径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "定义可执行",
+   "then": "用公式定义",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分层组织",
+   "then": "原子指标与派生指标分层",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "口径变更记录",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "复用优先",
+   "then": "新指标先查是否已有",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口径唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定义可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复用优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

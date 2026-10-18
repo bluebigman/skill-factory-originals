@@ -1,0 +1,121 @@
+{
+ "name": "daily-care",
+ "version": "2.0.0",
+ "domain": "宠物养护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "喂养混乱",
+   "then": "固定时间与定量喂食，自由采食易致肥胖与挑食",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "饮水不足",
+   "then": "猫用流动水并远离食盆，位置影响饮水量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "驱虫遗忘",
+   "then": "建免疫驱虫日历并设提醒，凭记忆必漏",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "洗澡过度",
+   "then": "犬类 2-4 周一次即可，过频破坏皮脂屏障",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "异常判断",
+   "then": "进食饮水排泄突变超 24 小时即就医，本工具不做诊断",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "喂养",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "洗澡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "驱虫",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "日常",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "喂养混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "饮水不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "驱虫遗忘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "洗澡过度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常判断",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "高频",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

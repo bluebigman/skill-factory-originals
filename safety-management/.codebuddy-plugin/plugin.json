@@ -1,0 +1,74 @@
+{
+ "name": "safety-management",
+ "version": "1.0.0",
+ "plugin": "safety-management",
+ "description": "safety-management — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for safety-management tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/safety-management.md"
+ ],
+ "agentName": "safety-management",
+ "displayName": {
+  "zh": "安全管理 分区排查 高危优先",
+  "en": "safety-management"
+ },
+ "profession": {
+  "zh": "安全管理 顾问",
+  "en": "safety-management"
+ },
+ "displayDescription": {
+  "zh": "安全管理 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。。",
+  "en": "safety-management: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "安全管理",
+   "en": "safety-management"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到安全管理怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划安全管理",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查安全管理",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到安全管理怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/safety-management-1",
+  "./skills/safety-management-2",
+  "./skills/safety-management-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:49",
+  "from": "安全管理专家",
+  "to": "安全管理 分区排查 高危优先",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

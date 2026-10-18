@@ -1,0 +1,74 @@
+{
+ "name": "sibling-conflict-pro",
+ "version": "1.0.0",
+ "plugin": "sibling-conflict-pro",
+ "description": "Sibling Conflict Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/sibling-conflict-pro.md"
+ ],
+ "skills": [
+  "./skills/conflict-attribution",
+  "./skills/fairness-script",
+  "./skills/team-building"
+ ],
+ "expertType": "agent",
+ "agentName": "sibling-conflict-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Sibling Conflict Pro",
+  "zh": "二孩冲突 抢玩具 打架"
+ },
+ "profession": {
+  "en": "Sibling Conflict Pro",
+  "zh": "二孩冲突 手足关系 公平沟通"
+ },
+ "displayDescription": {
+  "en": "Handles Sibling Conflict Pro tasks end-to-end with built-in professional skills.",
+  "zh": "二孩冲突 手足关系 公平沟通：分辨冲突是资源争夺还是关注争夺；避免比较的沟通模板。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "抢玩具"
+  },
+  {
+   "en": "practical capability",
+   "zh": "打架"
+  },
+  {
+   "en": "practical capability",
+   "zh": "告状"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到抢玩具怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到打架怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到告状怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到抢玩具怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "二孩冲突专家",
+  "to": "二孩冲突 抢玩具 打架",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

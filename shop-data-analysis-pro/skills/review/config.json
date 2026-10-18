@@ -1,0 +1,121 @@
+{
+ "name": "review",
+ "version": "2.0.0",
+ "domain": "店铺数据分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无节奏",
+   "then": "固定每周一次复盘，临时想起来做必流于形式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "只报数据",
+   "then": "复盘须给结论与下周动作，纯报数无效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "动作过多",
+   "then": "每次复盘只定 1-2 个改进项，过多则无一落实",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不看竞品",
+   "then": "定期对标竞品价格、主图与活动节奏",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "长期",
+   "then": "按月看趋势，单周波动不作为战略调整依据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "经营",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只报数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动作过多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不看竞品",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "趋势",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

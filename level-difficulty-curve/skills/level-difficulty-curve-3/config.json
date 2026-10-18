@@ -1,0 +1,72 @@
+{
+ "name": "level-difficulty-curve-3",
+ "version": "2.0.0",
+ "domain": "关卡难度",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "前十分钟",
+   "then": "开场十分钟内必须给到成功体验",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "阶梯递进",
+   "then": "难度阶梯上升并在高峰后给休息点",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败可读",
+   "then": "失败必须给可理解的反馈",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "埋点看卡点",
+   "then": "埋点统计卡点分布再调",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "适度跳过",
+   "then": "高难段提供适度跳过",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "前十分钟",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阶梯递进",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "埋点看卡点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "适度跳过",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

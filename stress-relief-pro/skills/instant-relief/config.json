@@ -1,0 +1,121 @@
+{
+ "name": "instant-relief",
+ "version": "2.0.0",
+ "domain": "压力缓解",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "呼吸急促",
+   "then": "用 4-7-8 呼吸（吸4秒-屏7秒-呼8秒）重复 4 轮",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "肌肉紧张",
+   "then": "渐进式肌肉放松：逐组绷紧 5 秒再放松 10 秒",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "思绪反刍",
+   "then": "用纸写下最坏结果与应对方案，书写可显著降低反刍",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "心跳加速",
+   "then": "冷水洗脸或握冰可快速激活迷走神经",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "现场失控",
+   "then": "离开现场 5 分钟，物理位移比强行克制更有效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "压力大",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "紧张",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "心跳快",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "平复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "呼吸急促",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "肌肉紧张",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "思绪反刍",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "心跳加速",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "现场失控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "避免",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "table-schema-infer",
+ "version": "1.0.0",
+ "plugin": "table-schema-infer",
+ "description": "table-schema-infer — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for table-schema-infer tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/table-schema-infer.md"
+ ],
+ "agentName": "table-schema-infer",
+ "displayName": {
+  "zh": "表结构推断 抽样推断 异常容忍",
+  "en": "table-schema-infer"
+ },
+ "profession": {
+  "zh": "表结构推断 助手",
+  "en": "table-schema-infer"
+ },
+ "displayDescription": {
+  "zh": "表结构推断 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "table-schema-infer: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "表结构推断",
+   "en": "table-schema-infer"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到表结构推断怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划表结构推断",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查表结构推断",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到表结构推断怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/table-schema-infer-1",
+  "./skills/table-schema-infer-2",
+  "./skills/table-schema-infer-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "表结构推断专家",
+  "to": "表结构推断 抽样推断 异常容忍",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

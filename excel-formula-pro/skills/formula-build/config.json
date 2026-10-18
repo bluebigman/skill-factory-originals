@@ -1,0 +1,121 @@
+{
+ "name": "formula-build",
+ "version": "2.0.0",
+ "domain": "表格公式",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "查找匹配",
+   "then": "查找函数优先用 XLOOKUP/INDEX-MATCH，VLOOKUP 列插入即失效",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "条件统计",
+   "then": "多条件统计用 SUMIFS/COUNTIFS，注意条件区域等长",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "文本处理",
+   "then": "拆分与拼接用 TEXTSPLIT/TEXTJOIN，比手工分列稳",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "日期计算",
+   "then": "日期用 DATEDIF/NETWORKDAYS，直接相减会陷格式陷阱",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "数组公式",
+   "then": "动态数组需注意版本兼容，旧版本会显示溢出错误",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "公式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "函数",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "查找",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "查找匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条件统计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文本处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "日期计算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数组公式",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "高频",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "导致",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "最高",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

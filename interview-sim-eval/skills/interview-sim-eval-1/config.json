@@ -1,0 +1,58 @@
+{
+ "name": "interview-sim-eval-1",
+ "version": "2.0.0",
+ "domain": "模拟面试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按简历追问",
+   "then": "以简历细节为主线追问",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "追问三层",
+   "then": "每个回答至少追两层为什么",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按简历追问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "追问三层",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回答",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "演练",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

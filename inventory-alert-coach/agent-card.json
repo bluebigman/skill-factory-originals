@@ -1,0 +1,75 @@
+{
+ "name": "Inventory Alert Coach",
+ "description": "库存预警专家：覆盖 安全库存、再订货点、分级、提前期波动、滞销清单 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/inventory-alert-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/inventory-alert-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "inventory-alert-coach-1",
+   "name": "针对 安全库存、再订货点 等情境给出可执行处置",
+   "description": "针对 安全库存、再订货点 等情境给出可执行处置",
+   "tags": [
+    "安全库存",
+    "再订货点"
+   ],
+   "examples": [
+    "遇到安全库存",
+    "遇到再订货点",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "inventory-alert-coach-2",
+   "name": "针对 分级、提前期波动 等情境给出可执行处置",
+   "description": "针对 分级、提前期波动 等情境给出可执行处置",
+   "tags": [
+    "分级",
+    "提前期波动"
+   ],
+   "examples": [
+    "遇到分级",
+    "遇到提前期波动",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "inventory-alert-coach-3",
+   "name": "针对 滞销清单 等情境给出可执行处置",
+   "description": "针对 滞销清单 等情境给出可执行处置",
+   "tags": [
+    "滞销清单"
+   ],
+   "examples": [
+    "遇到滞销清单",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "库存预警专家",
+ "x-source": "skill-factory-originals"
+}

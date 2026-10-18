@@ -1,0 +1,121 @@
+{
+ "name": "daily-support",
+ "version": "2.0.0",
+ "domain": "养老规划",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "全落一人",
+   "then": "把照护任务拆到具体动作并排班，模糊轮值必落单人",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "照护疲劳",
+   "then": "排班必须含整块休息期，照护者先崩溃则全盘瓦解",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异地照护",
+   "then": "异地者承担可远程项（费用/预约/物资），避免仅出钱不出力争议",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "费用分摊",
+   "then": "按能力协商并书面记录，口头约定后期必生争议",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "尊严",
+   "then": "协助时保留自主选择空间，过度代劳会加速功能退化",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "照护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "陪护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "独居",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "生活协助",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全落一人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "照护疲劳",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异地照护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "费用分摊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "尊严",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

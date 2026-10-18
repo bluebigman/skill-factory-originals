@@ -1,0 +1,121 @@
+{
+ "name": "detail",
+ "version": "2.0.0",
+ "domain": "电商上架",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "首图弱",
+   "then": "主图第一张决定点击，须给最强卖点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无痛点",
+   "then": "详情按痛点-方案-证据-信任-行动的链路组织",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "参数堆砌",
+   "then": "参数须带解读，纯罗列无人阅读",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无信任",
+   "then": "插入资质、检测报告、销量与评价等信任元素",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无售后",
+   "then": "明确退换与售后承诺，降低决策门槛",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "详情",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "卖点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "首图弱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无痛点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "参数堆砌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无信任",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无售后",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

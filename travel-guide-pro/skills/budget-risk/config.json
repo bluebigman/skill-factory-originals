@@ -1,0 +1,117 @@
+{
+ "name": "budget-risk",
+ "version": "2.0.0",
+ "domain": "旅游攻略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "预算漏项",
+   "then": "须含交通/住宿/餐饮/门票/购物/应急六项",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "应急金",
+   "then": "预留总额 10% 作为应急金",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "保险",
+   "then": "按目的地与活动风险配置，高风险活动须专项",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "证件",
+   "then": "证件拍照备份并与原件分开存放",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "失联",
+   "then": "提前确认网络与应急联络方式，失联是常见风险",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "花费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算漏项",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "应急金",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "证件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失联",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "风险",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "备份",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "预留",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "按目",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

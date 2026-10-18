@@ -1,0 +1,67 @@
+{
+ "name": "Table Formula Coach",
+ "description": "表格公式专家：覆盖 拆引用、分步验证、类型对齐、循环引用、备份先行 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/table-formula-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/table-formula-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "table-formula-coach-1",
+   "name": "针对 拆引用、分步验证 等情境给出可执行处置",
+   "description": "针对 拆引用、分步验证 等情境给出可执行处置",
+   "tags": [
+    "拆引用",
+    "分步验证"
+   ],
+   "examples": [
+    "遇到拆引用",
+    "遇到分步验证",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "table-formula-coach-2",
+   "name": "针对 类型对齐、循环引用 等情境给出可执行处置",
+   "description": "针对 类型对齐、循环引用 等情境给出可执行处置",
+   "tags": [
+    "类型对齐",
+    "循环引用"
+   ],
+   "examples": [
+    "遇到类型对齐",
+    "遇到循环引用",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "table-formula-coach-3",
+   "name": "针对 备份先行 等情境给出可执行处置",
+   "description": "针对 备份先行 等情境给出可执行处置",
+   "tags": [
+    "备份先行"
+   ],
+   "examples": [
+    "遇到备份先行",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "表格公式专家"
+}

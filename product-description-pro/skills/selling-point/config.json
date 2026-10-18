@@ -1,0 +1,121 @@
+{
+ "name": "selling-point",
+ "version": "2.0.0",
+ "domain": "商品详情",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "自说自话",
+   "then": "卖点须对应买家痛点，而非产品功能罗列",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无差异化",
+   "then": "与竞品对比找出唯一差异点并放大",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "排序混乱",
+   "then": "按买家决策顺序排：第一眼最关心的放最前",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无证据",
+   "then": "每个卖点配证据（参数/认证/实测/口碑）",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "卖点过多",
+   "then": "主卖点不超 3 个，过多等于没有",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "卖点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优势",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提炼",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自说自话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无差异化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排序混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无证据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "卖点过多",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "承诺",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "依据",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "价格",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "极限词",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "禁用",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

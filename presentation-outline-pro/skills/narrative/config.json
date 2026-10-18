@@ -1,0 +1,121 @@
+{
+ "name": "narrative",
+ "version": "2.0.0",
+ "domain": "演示大纲",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不知讲什么",
+   "then": "先写一句话结论，全篇只服务这一句",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "开头无效",
+   "then": "开场 30 秒内抛出结论或冲突，铺垫式开场必流失注意力",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结构松散",
+   "then": "用 SCQA（情境-冲突-问题-答案）组织，叙事有张力",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "信息过载",
+   "then": "每页一个观点，超出即拆页",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结尾无力",
+   "then": "结尾必须给明确诉求（要什么决策/资源），不结束于总结",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "叙事",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逻辑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不知讲什么",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头无效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构松散",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息过载",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾无力",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "流失",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "组织",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "注意",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "给明确",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "开场",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "观点",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

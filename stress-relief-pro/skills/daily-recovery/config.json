@@ -1,0 +1,121 @@
+{
+ "name": "daily-recovery",
+ "version": "2.0.0",
+ "domain": "压力缓解",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "睡眠不足",
+   "then": "固定起床时间并保证 7 小时以上，睡不足会放大所有压力反应",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "运动缺失",
+   "then": "每周 150 分钟中等强度运动，抗压效果优于被动放松",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "社交隔离",
+   "then": "每周至少一次面对面社交，线上互动作用有限",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "咖啡因过量",
+   "then": "下午后避免咖啡因，半衰期长会影响夜间恢复",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无边界",
+   "then": "工作日设固定断联时段，随时在线会持续激活应激",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "作息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "睡眠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "运动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "睡眠不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "运动缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "社交隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "咖啡因过量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

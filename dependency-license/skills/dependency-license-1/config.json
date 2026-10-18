@@ -1,0 +1,72 @@
+{
+ "name": "dependency-license-1",
+ "version": "2.0.0",
+ "domain": "依赖许可证",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全量清单",
+   "then": "列出直接与传递依赖",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "许可证归类",
+   "then": "按宽松与传染性分类",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "商用兼容",
+   "then": "确认与商用兼容",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "冲突处置",
+   "then": "有冲突则替换或隔离",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "随版本更新",
+   "then": "依赖升级时重查",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全量清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "许可证归类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "商用兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突处置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "随版本更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

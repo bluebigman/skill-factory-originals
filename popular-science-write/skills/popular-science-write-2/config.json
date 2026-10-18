@@ -1,0 +1,78 @@
+{
+ "name": "popular-science-write-2",
+ "version": "2.0.0",
+ "domain": "科普写作",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先给结论",
+   "then": "先给结论再补原理，符合阅读习惯",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "关键术语",
+   "then": "核心术语必须给准确定义",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先给结论",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键术语",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表达",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "定义",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "确定",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

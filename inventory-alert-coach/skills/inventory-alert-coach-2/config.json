@@ -1,0 +1,78 @@
+{
+ "name": "inventory-alert-coach-2",
+ "version": "2.0.0",
+ "domain": "库存预警",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级",
+   "then": "按动销速度分级管理，不搞一刀切",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "提前期波动",
+   "then": "提前期不稳定时按上限备货",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提前期波动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "安全",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "上限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "缓冲",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "周期",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "库存",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

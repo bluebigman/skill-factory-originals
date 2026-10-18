@@ -1,0 +1,72 @@
+{
+ "name": "pr-crisis-basic-1",
+ "version": "2.0.0",
+ "domain": "危机应对",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "预案先行",
+   "then": "提前准备分级应对预案",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "出口唯一",
+   "then": "指定唯一对外发言人",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "事实先行",
+   "then": "先核实事实再表态",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "及时回应",
+   "then": "及时回应避免拖延发酵",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "进展闭环",
+   "then": "整改进展持续对外同步",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预案先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "出口唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "事实先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "及时回应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "进展闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

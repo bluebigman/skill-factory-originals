@@ -1,0 +1,70 @@
+{
+ "name": "access-audit-2",
+ "version": "2.0.0",
+ "domain": "权限审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小权限",
+   "then": "新开权限按需申请，不默认给全量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "共享账号禁止",
+   "then": "禁止多人共用同一账号",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小权限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "共享账号禁止",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "定期",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "全部",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "每季度",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "全量",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "用同",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回收",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "platform-fit",
+ "version": "2.0.0",
+ "domain": "社媒文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一套多投",
+   "then": "各平台调性不同，一稿多投效果普遍打折",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "格式忽略",
+   "then": "按平台调整段落长度与表情使用，格式即观感",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标签随意",
+   "then": "标签须与内容强相关，堆砌无关标签会降低推荐",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "发布时机",
+   "then": "按目标人群活跃时段发布，时间可显著影响初始流量",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "违规词",
+   "then": "发布前自查极限词与敏感词，违规会限流",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "平台",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "适配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字数",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一套多投",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式忽略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标签随意",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "发布时机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "违规词",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

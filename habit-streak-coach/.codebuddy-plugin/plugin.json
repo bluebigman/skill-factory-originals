@@ -1,0 +1,74 @@
+{
+ "name": "habit-streak-coach",
+ "version": "1.0.0",
+ "plugin": "habit-streak-coach",
+ "description": "Habit Streak Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/habit-streak-coach.md"
+ ],
+ "skills": [
+  "./skills/habit-streak-coach-1",
+  "./skills/habit-streak-coach-2",
+  "./skills/habit-streak-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "habit-streak-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Habit Streak Coach",
+  "zh": "习惯打卡 最小版本 不连断两次"
+ },
+ "profession": {
+  "en": "Habit Streak Coach",
+  "zh": "习惯打卡 连续性 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Habit Streak Coach tasks end-to-end with built-in professional skills.",
+  "zh": "习惯打卡 连续性 助手：覆盖 最小版本、不连断两次、固定触发 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "最小版本"
+  },
+  {
+   "en": "practical capability",
+   "zh": "不连断两次"
+  },
+  {
+   "en": "practical capability",
+   "zh": "固定触发"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到最小版本怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不连断两次怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到固定触发怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到最小版本怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "习惯打卡专家",
+  "to": "习惯打卡 最小版本 不连断两次",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

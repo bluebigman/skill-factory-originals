@@ -1,0 +1,63 @@
+{
+ "name": "build-cache-3",
+ "version": "2.0.0",
+ "domain": "构建缓存策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "内容哈希",
+   "then": "按内容哈希做键",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "失效策略",
+   "then": "正确失效防脏读",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "远程缓存",
+   "then": "团队共享远程缓存",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "命中率监控",
+   "then": "监控缓存命中率",
+   "source": "scripts/main.py#RULES[3]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "内容哈希",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失效策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "远程缓存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命中率监控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

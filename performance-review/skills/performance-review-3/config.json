@@ -1,0 +1,72 @@
+{
+ "name": "performance-review-3",
+ "version": "2.0.0",
+ "domain": "绩效评估设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "指标可量化",
+   "then": "指标尽量可量化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "过程与结果",
+   "then": "两者兼顾",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "双向沟通",
+   "then": "评估双向沟通",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "申诉机制",
+   "then": "提供申诉渠道",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果应用",
+   "then": "明确结果用途",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "指标可量化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过程与结果",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双向沟通",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "申诉机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果应用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

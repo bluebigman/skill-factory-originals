@@ -1,0 +1,74 @@
+{
+ "name": "quality-inspection",
+ "version": "1.0.0",
+ "plugin": "quality-inspection",
+ "description": "quality-inspection — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for quality-inspection tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/quality-inspection.md"
+ ],
+ "agentName": "quality-inspection",
+ "displayName": {
+  "zh": "质量检验规范 标准明确",
+  "en": "quality-inspection"
+ },
+ "profession": {
+  "zh": "质量检验规范 顾问",
+  "en": "quality-inspection"
+ },
+ "displayDescription": {
+  "zh": "质量检验规范 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "quality-inspection: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "质量检验规范",
+   "en": "quality-inspection"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到质量检验规范怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划质量检验规范",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查质量检验规范",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到质量检验规范怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/quality-inspection-1/",
+  "./skills/quality-inspection-2/",
+  "./skills/quality-inspection-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "质量检验规范专家",
+  "to": "质量检验规范 标准明确",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

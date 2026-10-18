@@ -1,0 +1,99 @@
+{
+ "name": "Travel Guide Pro",
+ "description": "旅游攻略专家：旅行预算与风险准备；行程节奏与动线设计；目的地信息的收集与筛选。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/travel-guide-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/travel-guide-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "budget-risk",
+   "name": "旅行预算与风险准备",
+   "description": "旅行预算与风险准备",
+   "tags": [
+    "预算",
+    "花费",
+    "保险",
+    "安全"
+   ],
+   "examples": [
+    "遇到预算漏项",
+    "遇到应急金",
+    "遇到保险",
+    "遇到证件",
+    "遇到失联"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "budget-risk",
+    "to": "budget-risk",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "itinerary",
+   "name": "行程节奏与动线设计",
+   "description": "行程节奏与动线设计",
+   "tags": [
+    "行程安排",
+    "动线",
+    "赶场",
+    "节奏"
+   ],
+   "examples": [
+    "遇到行程过满",
+    "遇到动线混乱",
+    "遇到无缓冲",
+    "遇到体力透支",
+    "遇到备选方案"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "itinerary",
+    "to": "itinerary",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "research",
+   "name": "目的地信息的收集与筛选",
+   "description": "目的地信息的收集与筛选",
+   "tags": [
+    "旅游攻略",
+    "自由行",
+    "踩坑",
+    "避雷"
+   ],
+   "examples": [
+    "遇到信息过载",
+    "遇到过时信息",
+    "遇到软文陷阱",
+    "遇到季节",
+    "遇到预约制"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "research",
+    "to": "research",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "旅游攻略专家"
+}

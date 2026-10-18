@@ -1,0 +1,72 @@
+{
+ "name": "search-ux-pro-3",
+ "version": "2.0.0",
+ "domain": "搜索体验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "容错纠错",
+   "then": "支持错别字与近义词",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无结果兜底",
+   "then": "无结果时给替代推荐",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "排序可解释",
+   "then": "排序规则可被理解",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "筛选可清",
+   "then": "筛选状态可见且可一键清空",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "历史联想",
+   "then": "提供历史记录与联想词",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "容错纠错",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无结果兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排序可解释",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "筛选可清",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "历史联想",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

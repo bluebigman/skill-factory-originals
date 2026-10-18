@@ -1,0 +1,72 @@
+{
+ "name": "slide-speaker-note-3",
+ "version": "2.0.0",
+ "domain": "演讲备注撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一页一句",
+   "then": "每页备注有核心句",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "提示而非全文",
+   "then": "只写关键词与转场句",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时间标记",
+   "then": "标注该页预计用时",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "救场预案",
+   "then": "准备被追问的回答要点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "衔接明确",
+   "then": "备注含与下页的过渡句",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一页一句",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提示而非全文",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间标记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "救场预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "衔接明确",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "moving-relocation-pro",
+ "version": "1.0.0",
+ "plugin": "moving-relocation-pro",
+ "description": "Moving Relocation Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/moving-relocation-pro.md"
+ ],
+ "skills": [
+  "./skills/handover-check",
+  "./skills/move-plan",
+  "./skills/settle-in"
+ ],
+ "expertType": "agent",
+ "agentName": "moving-relocation-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Moving Relocation Pro",
+  "zh": "搬迁清单 押金争议 验收扯皮"
+ },
+ "profession": {
+  "en": "Moving Relocation Pro",
+  "zh": "搬家 搬迁清单 租房交接"
+ },
+ "displayDescription": {
+  "en": "Handles Moving Relocation Pro tasks end-to-end with built-in professional skills.",
+  "zh": "搬家 搬迁清单 租房交接：租退与房屋交接的核验；搬家全流程的时间线管理；搬入后的生活重建。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "押金争议"
+  },
+  {
+   "en": "practical capability",
+   "zh": "验收扯皮"
+  },
+  {
+   "en": "practical capability",
+   "zh": "费用结清"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到押金争议怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到验收扯皮怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到费用结清怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到押金争议怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "搬迁清单专家",
+  "to": "搬迁清单 押金争议 验收扯皮",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

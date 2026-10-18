@@ -1,0 +1,72 @@
+{
+ "name": "microcopy-craft-2",
+ "version": "2.0.0",
+ "domain": "界面文案打磨",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "动作明确",
+   "then": "按钮写动词不写确定",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "错误可解",
+   "then": "错误提示含解决方式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "语气一致",
+   "then": "全文语气统一",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "简短有力",
+   "then": "界面文案尽量短",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "避免术语",
+   "then": "面向用户不写内部术语",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "动作明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误可解",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "语气一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "简短有力",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免术语",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

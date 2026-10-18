@@ -1,0 +1,113 @@
+{
+ "name": "list-plan",
+ "version": "2.0.0",
+ "domain": "家庭买菜",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "重复购买",
+   "then": "采购前先拍现有库存照片，凭照片下单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "遗漏",
+   "then": "按固定品类顺序列清单（蔬果/蛋白/主食/日用），凭记忆必漏",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "临时采购",
+   "then": "设常备清单并划最低库存线，触线即补不等用完",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "临时起意",
+   "then": "非清单物品放待购区静置 24 小时再决定",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分层采购",
+   "then": "按频率分周采与月采，混在一起必浪费",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "买菜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复购买",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "遗漏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "临时采购",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "临时起意",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层采购",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每周",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

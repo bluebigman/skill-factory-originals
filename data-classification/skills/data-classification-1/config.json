@@ -1,0 +1,72 @@
+{
+ "name": "data-classification-1",
+ "version": "2.0.0",
+ "domain": "数据分类分级",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分类维度",
+   "then": "按业务与敏感度分类",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级标准",
+   "then": "定级标准明确",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标注执行",
+   "then": "落地标注",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "对应措施",
+   "then": "每级对应保护措施",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "定期复核定级",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分类维度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标注执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对应措施",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

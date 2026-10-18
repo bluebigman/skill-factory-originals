@@ -1,0 +1,121 @@
+{
+ "name": "activity-design",
+ "version": "2.0.0",
+ "domain": "亲子活动",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "不知玩什么",
+   "then": "按年龄段给活动库：3-6 岁动作类，7-12 岁规则类，13+ 项目类",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "孩子嫌幼稚",
+   "then": "让孩子主导选活动并承担组织角色，参与感来自掌控感",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时间碎片",
+   "then": "每天固定 15 分钟一对一专属时间，胜过周末全天打折陪伴",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "陪伴变监督",
+   "then": "陪伴时禁查作业/提要求，一旦附带考核即失去陪伴意义",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "二孩偏心",
+   "then": "一对一专属时间须分头进行，同场必然产生比较",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "亲子活动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周末",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "陪玩",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无聊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不知玩什么",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "孩子嫌幼稚",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间碎片",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "陪伴变监督",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "二孩偏心",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

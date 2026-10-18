@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "多变量混杂",
+   "then": "收敛为单变量并固定其余条件"
+  },
+  {
+   "when": "无对照组",
+   "then": "补同期对照组"
+  }
+ ],
+ "keywords": [
+  "单变量",
+  "可归因",
+  "对照"
+ ],
+ "boundary": "把混杂因素收敛到单变量，保证可归因",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

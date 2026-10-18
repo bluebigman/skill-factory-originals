@@ -1,0 +1,54 @@
+{
+ "name": "private-domain-ops-1",
+ "version": "2.0.0",
+ "domain": "私域运营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按价值分层",
+   "then": "按消费频次与金额分层，不群发所有人",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "控制频次",
+   "then": "同一用户每周触达不超两次，防取关",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按价值分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "控制频次",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "消费",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

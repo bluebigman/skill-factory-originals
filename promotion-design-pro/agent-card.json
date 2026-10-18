@@ -1,0 +1,107 @@
+{
+ "name": "Promotion Design Pro",
+ "description": "活动方案专家：活动效果的测算与复盘；促销机制的规则设计；活动方案的完整度。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/promotion-design-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/promotion-design-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "forecast",
+   "name": "活动效果的测算与复盘",
+   "description": "活动效果的测算与复盘",
+   "tags": [
+    "预估",
+    "ROI",
+    "复盘",
+    "测算"
+   ],
+   "examples": [
+    "遇到凭感觉",
+    "遇到忽略成本",
+    "遇到乐观偏差",
+    "遇到无对照",
+    "遇到不复盘"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "forecast",
+    "to": "forecast",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "mechanism",
+   "name": "促销机制的规则设计",
+   "description": "促销机制的规则设计",
+   "tags": [
+    "优惠",
+    "满减",
+    "折扣",
+    "机制"
+   ],
+   "examples": [
+    "遇到无目标",
+    "遇到规则复杂",
+    "遇到门槛失当",
+    "遇到无止损",
+    "遇到虚假比价"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "mechanism",
+    "to": "mechanism",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "plan",
+   "name": "活动方案的完整度",
+   "description": "活动方案的完整度",
+   "tags": [
+    "活动方案",
+    "策划",
+    "执行",
+    "预案"
+   ],
+   "examples": [
+    "遇到无时间轴",
+    "遇到无分工",
+    "遇到无物料",
+    "遇到无预案",
+    "遇到无公示"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "plan",
+    "to": "plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "活动方案专家",
+ "x-source": "skill-factory-originals"
+}

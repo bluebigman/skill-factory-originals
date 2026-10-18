@@ -1,0 +1,83 @@
+{
+ "name": "Agent Behavior Audit",
+ "description": "行为审计专家：覆盖 决策无记录、来源不可溯 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/agent-trace-audit",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/agent-trace-audit",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "agent-trace-audit-1",
+   "name": "针对 决策无记录、来源不可溯 等情境给出可执行处置",
+   "description": "针对 决策无记录、来源不可溯 等情境给出可执行处置",
+   "tags": [
+    "决策无记录",
+    "来源不可溯",
+    "链路断裂"
+   ],
+   "examples": [
+    "遇到决策无记录",
+    "遇到来源不可溯",
+    "遇到链路断裂",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-trace-audit-2",
+   "name": "针对 静默失败、多来源并发 等情境给出可执行处置",
+   "description": "针对 静默失败、多来源并发 等情境给出可执行处置",
+   "tags": [
+    "静默失败",
+    "多来源并发",
+    "假绿"
+   ],
+   "examples": [
+    "遇到静默失败",
+    "遇到多来源并发",
+    "遇到假绿",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-trace-audit-3",
+   "name": "针对 越权扩张、失控循环 等情境给出可执行处置",
+   "description": "针对 越权扩张、失控循环 等情境给出可执行处置",
+   "tags": [
+    "越权扩张",
+    "失控循环",
+    "接管阈值"
+   ],
+   "examples": [
+    "遇到越权扩张",
+    "遇到失控循环",
+    "遇到接管阈值",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "行为审计专家",
+ "x-source": "skill-factory-originals"
+}

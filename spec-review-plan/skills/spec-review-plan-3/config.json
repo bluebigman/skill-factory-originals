@@ -1,0 +1,72 @@
+{
+ "name": "spec-review-plan-3",
+ "version": "2.0.0",
+ "domain": "方案评审把关",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先共识标准",
+   "then": "评审前统一通过标准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按风险排序",
+   "then": "高风险项先评审",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "质疑必回",
+   "then": "每条质疑须有回应或记录待办",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "限时评审",
+   "then": "单次不超一小时防疲劳",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论转任务",
+   "then": "评审结论当场转成待办",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先共识标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按风险排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质疑必回",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "限时评审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论转任务",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "sheet-data-validate-2",
+ "version": "2.0.0",
+ "domain": "表格数据校验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "规则清单",
+   "then": "必填类型范围唯一性",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "校验前置",
+   "then": "入库前全量校验",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "错误定位",
+   "then": "给出单元格位置与原因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "批量修复建议",
+   "then": "给修复方案而非直接改",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "校验留痕",
+   "then": "输出校验报告",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "规则清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "校验前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批量修复建议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "校验留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

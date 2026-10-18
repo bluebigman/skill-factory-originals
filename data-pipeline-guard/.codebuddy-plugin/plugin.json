@@ -1,0 +1,74 @@
+{
+ "name": "data-pipeline-guard",
+ "version": "1.0.0",
+ "plugin": "data-pipeline-guard",
+ "description": "data-pipeline-guard — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for data-pipeline-guard tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/data-pipeline-guard.md"
+ ],
+ "agentName": "data-pipeline-guard",
+ "displayName": {
+  "zh": "数据管道守护 幂等写入",
+  "en": "data-pipeline-guard"
+ },
+ "profession": {
+  "zh": "数据管道守护 顾问",
+  "en": "data-pipeline-guard"
+ },
+ "displayDescription": {
+  "zh": "数据管道守护 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "data-pipeline-guard: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据管道守护",
+   "en": "data-pipeline-guard"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到数据管道守护怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划数据管道守护",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查数据管道守护",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到数据管道守护怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/data-pipeline-guard-1/",
+  "./skills/data-pipeline-guard-2/",
+  "./skills/data-pipeline-guard-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:34",
+  "from": "数据管道守护专家",
+  "to": "数据管道守护 幂等写入",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

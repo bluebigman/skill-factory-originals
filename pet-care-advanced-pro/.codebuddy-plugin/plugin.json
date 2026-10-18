@@ -1,0 +1,74 @@
+{
+ "name": "pet-care-advanced-pro",
+ "version": "1.0.0",
+ "plugin": "pet-care-advanced-pro",
+ "description": "Pet Care Advanced Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/pet-care-advanced-pro.md"
+ ],
+ "skills": [
+  "./skills/cat-care",
+  "./skills/dog-care",
+  "./skills/health-record"
+ ],
+ "expertType": "agent",
+ "agentName": "pet-care-advanced-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Pet Care Advanced Pro",
+  "zh": "行为训练 猫砂 抓家具"
+ },
+ "profession": {
+  "en": "Pet Care Advanced Pro",
+  "zh": "猫狗养护 行为训练 健康管理"
+ },
+ "displayDescription": {
+  "en": "Handles Pet Care Advanced Pro tasks end-to-end with built-in professional skills.",
+  "zh": "猫狗养护 行为训练 健康管理：猫只环境与行为管理；犬只日常喂养与运动管理；宠物健康记录与就医准备。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "猫砂"
+  },
+  {
+   "en": "practical capability",
+   "zh": "抓家具"
+  },
+  {
+   "en": "practical capability",
+   "zh": "应激"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到猫砂怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到抓家具怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到应激怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到猫砂怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "行为训练专家",
+  "to": "行为训练 猫砂 抓家具",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

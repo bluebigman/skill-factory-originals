@@ -1,0 +1,83 @@
+{
+ "name": "Observability Injection",
+ "description": "链路追踪专家：覆盖 黑盒执行、无法复现 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/observability-inject",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/observability-inject",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "observability-inject-1",
+   "name": "针对 黑盒执行、无法复现 等情境给出可执行处置",
+   "description": "针对 黑盒执行、无法复现 等情境给出可执行处置",
+   "tags": [
+    "黑盒执行",
+    "无法复现",
+    "上下文丢失"
+   ],
+   "examples": [
+    "遇到黑盒执行",
+    "遇到无法复现",
+    "遇到上下文丢失",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "observability-inject-2",
+   "name": "针对 成本不可见、成功率无统计 等情境给出可执行处置",
+   "description": "针对 成本不可见、成功率无统计 等情境给出可执行处置",
+   "tags": [
+    "成本不可见",
+    "成功率无统计",
+    "延迟盲区"
+   ],
+   "examples": [
+    "遇到成本不可见",
+    "遇到成功率无统计",
+    "遇到延迟盲区",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "observability-inject-3",
+   "name": "针对 无阈值、告警风暴 等情境给出可执行处置",
+   "description": "针对 无阈值、告警风暴 等情境给出可执行处置",
+   "tags": [
+    "无阈值",
+    "告警风暴",
+    "静默异常"
+   ],
+   "examples": [
+    "遇到无阈值",
+    "遇到告警风暴",
+    "遇到静默异常",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "链路追踪专家",
+ "x-source": "skill-factory-originals"
+}

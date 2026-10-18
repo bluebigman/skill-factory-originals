@@ -1,0 +1,72 @@
+{
+ "name": "style-guide-build-2",
+ "version": "2.0.0",
+ "domain": "风格指南构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "术语先定",
+   "then": "先建术语表",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "句式规范",
+   "then": "给正反例",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标点规范",
+   "then": "中英标点各按语种",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数字规范",
+   "then": "数字与单位规范",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "配例说明",
+   "then": "每条规则配示例",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "术语先定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "句式规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标点规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数字规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配例说明",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "home-pest-guide",
+ "version": "1.0.0",
+ "plugin": "home-pest-guide",
+ "description": "Home Pest Guide for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-pest-guide.md"
+ ],
+ "skills": [
+  "./skills/home-pest-guide-1",
+  "./skills/home-pest-guide-2",
+  "./skills/home-pest-guide-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-pest-guide",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Pest Guide",
+  "zh": "家庭防虫 源头治理 封堵"
+ },
+ "profession": {
+  "en": "Home Pest Guide",
+  "zh": "家庭防虫 清洁消毒 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Home Pest Guide tasks end-to-end with built-in professional skills.",
+  "zh": "家庭防虫 清洁消毒 助手：覆盖 源头治理、封堵、食物密封 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "源头治理"
+  },
+  {
+   "en": "practical capability",
+   "zh": "封堵"
+  },
+  {
+   "en": "practical capability",
+   "zh": "食物密封"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到源头治理怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到封堵怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到食物密封怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到源头治理怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "家庭防虫专家",
+  "to": "家庭防虫 源头治理 封堵",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

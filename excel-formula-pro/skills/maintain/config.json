@@ -1,0 +1,121 @@
+{
+ "name": "maintain",
+ "version": "2.0.0",
+ "domain": "表格公式",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构混乱",
+   "then": "原始数据/计算/呈现分离到不同工作表，混算必失控",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "硬编码",
+   "then": "参数与阈值集中放参数表，散落在公式里无法统一调整",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "公式冗长",
+   "then": "超过三层的嵌套须拆为辅助列，可读性优先",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "误删",
+   "then": "关键区域加保护，并保留每日备份",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "权限",
+   "then": "按最小权限分配编辑权，全开放必有误改",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "维护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "协作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "硬编码",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "公式冗长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误删",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "高频",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "每日",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

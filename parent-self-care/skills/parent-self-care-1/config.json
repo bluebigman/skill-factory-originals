@@ -1,0 +1,70 @@
+{
+ "name": "parent-self-care-1",
+ "version": "2.0.0",
+ "domain": "家长压力",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "允许不完美",
+   "then": "降低自我要求",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "留独处时间",
+   "then": "设固定休息权",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "允许不完美",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留独处时间",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "家长",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "压力",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "休息",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "ai-flavor-remove-3",
+ "version": "2.0.0",
+ "domain": "去",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拆长句",
+   "then": "把长复句拆成短句",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "去套话",
+   "then": "删首先其次最后这类连接",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "具体化",
+   "then": "抽象表述换成具体例子",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "语气自然",
+   "then": "避免过度整齐的排比",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "保留信息",
+   "then": "改写不减信息量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拆长句",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "去套话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "具体化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "语气自然",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留信息",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

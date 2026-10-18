@@ -1,0 +1,72 @@
+{
+ "name": "data-consistency-check-2",
+ "version": "2.0.0",
+ "domain": "数据一致性核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定义口径",
+   "then": "先统一定义再比对",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "抽样与全量",
+   "then": "先抽样定位再全量核对",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "双向比对",
+   "then": "差异在两个方向都验一次",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "差异分级",
+   "then": "按金额或条数分级",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "修复留痕",
+   "then": "修复记录与原因归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定义口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽样与全量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双向比对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "修复留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

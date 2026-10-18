@@ -1,0 +1,72 @@
+{
+ "name": "empty-state-design-3",
+ "version": "2.0.0",
+ "domain": "空状态设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "说明原因",
+   "then": "说明为何没有内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "给出动作",
+   "then": "提供下一步动作",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "视觉轻盈",
+   "then": "避免大面积空白",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "区分类型",
+   "then": "首次与异常区分",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "保持一致",
+   "then": "同类空状态风格统一",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "说明原因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "给出动作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "视觉轻盈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "区分类型",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保持一致",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "job-interview-pro",
+ "version": "1.0.0",
+ "plugin": "job-interview-pro",
+ "description": "Job Interview Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/job-interview-pro.md"
+ ],
+ "skills": [
+  "./skills/qa-drill",
+  "./skills/reverse-ask",
+  "./skills/self-intro"
+ ],
+ "expertType": "agent",
+ "agentName": "job-interview-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Job Interview Pro",
+  "zh": "面试准备 离职原因 缺点"
+ },
+ "profession": {
+  "en": "Job Interview Pro",
+  "zh": "面试准备 自我介绍 问答演练"
+ },
+ "displayDescription": {
+  "en": "Handles Job Interview Pro tasks end-to-end with built-in professional skills.",
+  "zh": "面试准备 自我介绍 问答演练：高频问题与应对框架；面试收尾的提问策略；针对性自我介绍的构建。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "离职原因"
+  },
+  {
+   "en": "practical capability",
+   "zh": "缺点"
+  },
+  {
+   "en": "practical capability",
+   "zh": "失败经历"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到离职原因怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到缺点怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到失败经历怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到离职原因怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "面试准备专家",
+  "to": "面试准备 离职原因 缺点",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

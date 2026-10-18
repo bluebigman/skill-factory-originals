@@ -1,0 +1,67 @@
+{
+ "name": "Traceability Build Pro",
+ "description": "追溯体系专家：覆盖 编码唯一、正反可追、数据同步 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/traceability-build-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/traceability-build-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "traceability-build-pro-1",
+   "name": "针对 编码唯一、正反可追 等情境给出可执行处置",
+   "description": "针对 编码唯一、正反可追 等情境给出可执行处置",
+   "tags": [
+    "编码唯一",
+    "正反可追"
+   ],
+   "examples": [
+    "遇到编码唯一",
+    "遇到正反可追",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "traceability-build-pro-2",
+   "name": "针对 数据同步、留样管理 等情境给出可执行处置",
+   "description": "针对 数据同步、留样管理 等情境给出可执行处置",
+   "tags": [
+    "数据同步",
+    "留样管理"
+   ],
+   "examples": [
+    "遇到数据同步",
+    "遇到留样管理",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "traceability-build-pro-3",
+   "name": "针对 演练验证 等情境给出可执行处置",
+   "description": "针对 演练验证 等情境给出可执行处置",
+   "tags": [
+    "演练验证"
+   ],
+   "examples": [
+    "遇到演练验证",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "追溯体系专家"
+}

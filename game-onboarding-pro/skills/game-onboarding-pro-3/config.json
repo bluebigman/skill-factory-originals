@@ -1,0 +1,72 @@
+{
+ "name": "game-onboarding-pro-3",
+ "version": "2.0.0",
+ "domain": "游戏新手",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "边做边教",
+   "then": "用操作替代大段说明文字",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一次一点",
+   "then": "单次只引入一个机制",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可跳过",
+   "then": "熟手可跳过引导",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "早期首胜",
+   "then": "设置早期必得的小胜利",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回流引导",
+   "then": "回流玩家使用单独引导",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "边做边教",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一次一点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可跳过",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "早期首胜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回流引导",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

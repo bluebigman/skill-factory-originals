@@ -1,0 +1,105 @@
+{
+ "name": "communication-script",
+ "version": "2.0.0",
+ "domain": "家庭教育",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "怎么说",
+   "then": "用我观察到……我感到……我希望……三段式，避免你总是式指责",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "话术",
+   "then": "给3条可直接念出口的句子，覆盖开场/中场/收尾",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "沟通",
+   "then": "选低干扰时机（睡前/散步），避免在冲突当下谈规则",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "对话",
+   "then": "一次只谈一件事，谈完给出明确下一步",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "开场",
+   "then": "用共同目标开场（我们都希望你能轻松点），避免以指责开场",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "怎么说",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "话术",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沟通",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开场",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

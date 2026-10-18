@@ -1,0 +1,72 @@
+{
+ "name": "content-lifecycle-3",
+ "version": "2.0.0",
+ "domain": "内容生命周期",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "发布期",
+   "then": "首发期集中推广",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "成长期",
+   "then": "按数据优化标题与首图",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "衰退期",
+   "then": "识别衰退并决定更新或下线",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "复用期",
+   "then": "旧内容改版复用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "归档期",
+   "then": "长期无效应归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "发布期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成长期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "衰退期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复用期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归档期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

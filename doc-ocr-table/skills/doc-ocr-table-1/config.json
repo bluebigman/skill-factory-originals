@@ -1,0 +1,72 @@
+{
+ "name": "doc-ocr-table-1",
+ "version": "2.0.0",
+ "domain": "表格图像转数据",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "行列还原",
+   "then": "先识别行列结构",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "表头识别",
+   "then": "识别多级表头",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "合并单元处理",
+   "then": "还原合并单元格语义",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数字校对",
+   "then": "数字列重点复核",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "输出结构化",
+   "then": "输出可计算的结构化表",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "行列还原",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "表头识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合并单元处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数字校对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出结构化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "deal-review-pro",
+ "version": "1.0.0",
+ "plugin": "deal-review-pro",
+ "description": "deal-review-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for deal-review-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/deal-review-pro.md"
+ ],
+ "agentName": "deal-review-pro",
+ "displayName": {
+  "zh": "商机评审 标准统一 独立视角",
+  "en": "deal-review-pro"
+ },
+ "profession": {
+  "zh": "商机评审 风险把关 顾问",
+  "en": "deal-review-pro"
+ },
+ "displayDescription": {
+  "zh": "商机评审 风险把关 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "deal-review-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "商机评审",
+   "en": "deal-review-pro"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到商机评审怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划商机评审",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查商机评审",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到商机评审怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/deal-review-pro-1/",
+  "./skills/deal-review-pro-2/",
+  "./skills/deal-review-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:34",
+  "from": "商机评审专家",
+  "to": "商机评审 标准统一 独立视角",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

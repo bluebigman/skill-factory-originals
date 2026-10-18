@@ -1,0 +1,75 @@
+{
+ "name": "Quality Gate Define",
+ "description": "质量门禁专家：覆盖 先定标准、自动执行、不过不发 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/quality-gate-define",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/quality-gate-define",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "quality-gate-define-1",
+   "name": "针对 先定标准、自动执行 等情境给出可执行处置",
+   "description": "针对 先定标准、自动执行 等情境给出可执行处置",
+   "tags": [
+    "先定标准",
+    "自动执行"
+   ],
+   "examples": [
+    "遇到先定标准",
+    "遇到自动执行",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "quality-gate-define-2",
+   "name": "针对 不过不发、记录依据 等情境给出可执行处置",
+   "description": "针对 不过不发、记录依据 等情境给出可执行处置",
+   "tags": [
+    "不过不发",
+    "记录依据"
+   ],
+   "examples": [
+    "遇到不过不发",
+    "遇到记录依据",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "quality-gate-define-3",
+   "name": "针对 定期松紧 等情境给出可执行处置",
+   "description": "针对 定期松紧 等情境给出可执行处置",
+   "tags": [
+    "定期松紧"
+   ],
+   "examples": [
+    "遇到定期松紧",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "质量门禁专家",
+ "x-source": "skill-factory-originals"
+}

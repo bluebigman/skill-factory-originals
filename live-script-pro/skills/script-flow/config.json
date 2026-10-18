@@ -1,0 +1,121 @@
+{
+ "name": "script-flow",
+ "version": "2.0.0",
+ "domain": "直播脚本",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无流程",
+   "then": "按分钟切分流程（开场-留人-讲品-逼单-收尾），无流程必冷场",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "开场弱",
+   "then": "开场 3 分钟必须给留人理由（福利/悬念）",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "讲品冗长",
+   "then": "单品讲解控制在 5-8 分钟，过长会流失",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "节奏单一",
+   "then": "每 10-15 分钟设一次互动或福利节点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "收尾",
+   "then": "收尾预告下场并给关注理由",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脚本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开场",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开场弱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "讲品冗长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏单一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "收尾",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "最高",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "价格",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "库存",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

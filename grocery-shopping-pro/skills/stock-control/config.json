@@ -1,0 +1,117 @@
+{
+ "name": "stock-control",
+ "version": "2.0.0",
+ "domain": "家庭买菜",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "过期货",
+   "then": "按消耗速度定采购量（周耗×1.5），不按促销力度定",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变质",
+   "then": "生鲜按 3 天量采购，叶菜不预洗、用厨房纸包裹",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "空间占用",
+   "then": "囤货总量不超储物区容量，超量必然堆积过期",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "价格",
+   "then": "只对高频三类商品比价，全品类比价时间成本不值",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "清单化",
+   "then": "库存贴标签按到期日排序，先进先出",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "备货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "囤货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变质",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过期货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "空间占用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "价格",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每周",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

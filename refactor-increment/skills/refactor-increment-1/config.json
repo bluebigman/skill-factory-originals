@@ -1,0 +1,72 @@
+{
+ "name": "refactor-increment-1",
+ "version": "2.0.0",
+ "domain": "增量重构",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "小步前进",
+   "then": "每次改动保持可运行",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "测试护栏",
+   "then": "重构前补齐测试",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "行为不变",
+   "then": "只改结构不改行为",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "接口兼容",
+   "then": "对外接口走过渡期",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可回退",
+   "then": "每步可独立回退",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "小步前进",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "测试护栏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行为不变",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "接口兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可回退",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,96 @@
+{
+ "name": "conflict-attribution",
+ "version": "2.0.0",
+ "domain": "二孩冲突",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "抢玩具",
+   "then": "不裁决对错，先给双方选择（轮流或换一个）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "打架",
+   "then": "分开降温，事后单独各自复盘，不当众审问",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "告状",
+   "then": "不即时裁判，教双方先说需求而非控诉对方",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "偏心",
+   "then": "给专属时间而非平均分配，各人有各人的陪伴",
+   "source": "scripts/main.py#RULES[3]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "抢玩具",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打架",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告状",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "偏心",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "选择",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "单独",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先给",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "各自",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "即时",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

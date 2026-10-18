@@ -1,0 +1,74 @@
+{
+ "name": "table-formula-coach",
+ "version": "1.0.0",
+ "plugin": "table-formula-coach",
+ "description": "Table Formula Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/table-formula-coach.md"
+ ],
+ "skills": [
+  "./skills/table-formula-coach-1",
+  "./skills/table-formula-coach-2",
+  "./skills/table-formula-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "table-formula-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Table Formula Coach",
+  "zh": "表格公式 拆引用 分步验证"
+ },
+ "profession": {
+  "en": "Table Formula Coach",
+  "zh": "表格公式 报错排查 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Table Formula Coach tasks end-to-end with built-in professional skills.",
+  "zh": "表格公式 报错排查 顾问：覆盖 拆引用、分步验证、类型对齐 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "拆引用"
+  },
+  {
+   "en": "practical capability",
+   "zh": "分步验证"
+  },
+  {
+   "en": "practical capability",
+   "zh": "类型对齐"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到拆引用怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到分步验证怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到类型对齐怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到拆引用怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "表格公式专家",
+  "to": "表格公式 拆引用 分步验证",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

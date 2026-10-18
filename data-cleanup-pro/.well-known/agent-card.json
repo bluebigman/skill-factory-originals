@@ -1,0 +1,107 @@
+{
+ "name": "Data Cleanup Pro",
+ "description": "数据清洗专家：可复现的清洗流程；清洗结果的交付标准；脏数据的识别方法。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/data-cleanup-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/data-cleanup-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "clean-rules",
+   "name": "可复现的清洗流程",
+   "description": "可复现的清洗流程",
+   "tags": [
+    "清洗",
+    "规则",
+    "流程",
+    "复现"
+   ],
+   "examples": [
+    "遇到手工修改",
+    "遇到覆盖原表",
+    "遇到步骤不明",
+    "遇到口径漂移",
+    "遇到一次性"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:39",
+    "from": "clean-rules",
+    "to": "clean-rules",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "deliver",
+   "name": "清洗结果的交付标准",
+   "description": "清洗结果的交付标准",
+   "tags": [
+    "交付",
+    "验收",
+    "说明",
+    "字段"
+   ],
+   "examples": [
+    "遇到无说明",
+    "遇到口径不清",
+    "遇到验收缺失",
+    "遇到敏感字段",
+    "遇到版本"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:39",
+    "from": "deliver",
+    "to": "deliver",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "inspect",
+   "name": "脏数据的识别方法",
+   "description": "脏数据的识别方法",
+   "tags": [
+    "脏数据",
+    "重复",
+    "缺失",
+    "格式"
+   ],
+   "examples": [
+    "遇到重复行",
+    "遇到空值",
+    "遇到格式不一",
+    "遇到全半角",
+    "遇到异常值"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:39",
+    "from": "inspect",
+    "to": "inspect",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "数据清洗专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,61 @@
+{
+ "name": "supplier-quote-compare-3",
+ "version": "2.0.0",
+ "domain": "供应商报价",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "双供底线",
+   "then": "关键物料保持至少两家合格供方",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "双供底线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "比价",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "保持",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

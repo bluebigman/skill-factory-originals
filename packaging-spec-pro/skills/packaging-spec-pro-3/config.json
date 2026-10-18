@@ -1,0 +1,49 @@
+{
+ "name": "packaging-spec-pro-3",
+ "version": "2.0.0",
+ "domain": "包装规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "成本平衡",
+   "then": "防护强度与包装成本取平衡",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "成本平衡",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "强度",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

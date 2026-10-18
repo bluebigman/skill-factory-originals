@@ -1,0 +1,72 @@
+{
+ "name": "prompt-injection-scan-1",
+ "version": "2.0.0",
+ "domain": "提示注入扫描",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "输入分区",
+   "then": "外部内容与指令分区",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "越权识别",
+   "then": "识别角色扮演与越权诱导",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "指令优先级",
+   "then": "系统指令高于外部内容",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "输出校验",
+   "then": "输出前校验越界",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "告警留痕",
+   "then": "命中即告警并留档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "输入分区",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "越权识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指令优先级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

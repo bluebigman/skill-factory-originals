@@ -1,0 +1,107 @@
+{
+ "name": "Household Ops Pro",
+ "description": "家庭事务专家：家庭成员的日常事务分配；家庭日常收支的记录与结构分析；家庭采购的计划与执行。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/household-ops-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/household-ops-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "chore-plan",
+   "name": "家庭成员的日常事务分配",
+   "description": "家庭成员的日常事务分配",
+   "tags": [
+    "家务",
+    "分工",
+    "懒",
+    "一个人干"
+   ],
+   "examples": [
+    "遇到一人全包",
+    "遇到拒不执行",
+    "遇到质量标准不一",
+    "遇到孩子不参与",
+    "遇到外包决策"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "chore-plan",
+    "to": "chore-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "expense-book",
+   "name": "家庭日常收支的记录与结构分析",
+   "description": "家庭日常收支的记录与结构分析",
+   "tags": [
+    "记账",
+    "月度支出",
+    "超支",
+    "账单"
+   ],
+   "examples": [
+    "遇到记不下去",
+    "遇到超支",
+    "遇到账目对不上",
+    "遇到固定支出",
+    "遇到隐私"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "expense-book",
+    "to": "expense-book",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "shopping-list",
+   "name": "家庭采购的计划与执行",
+   "description": "家庭采购的计划与执行",
+   "tags": [
+    "采购",
+    "囤货",
+    "清单",
+    "重复购买"
+   ],
+   "examples": [
+    "遇到重复购买",
+    "遇到囤货过期",
+    "遇到临时缺料",
+    "遇到比价耗时",
+    "遇到冲动消费"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "shopping-list",
+    "to": "shopping-list",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭事务专家",
+ "x-source": "skill-factory-originals"
+}

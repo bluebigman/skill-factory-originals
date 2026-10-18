@@ -1,0 +1,99 @@
+{
+ "name": "Meeting Notes Pro",
+ "description": "会议纪要专家：行动项的闭环跟踪；会议之外的信息同步；高质量会议纪要的结构化写法。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/meeting-notes-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/meeting-notes-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "action-tracking",
+   "name": "行动项的闭环跟踪",
+   "description": "行动项的闭环跟踪",
+   "tags": [
+    "行动项",
+    "跟踪",
+    "落实",
+    "催办"
+   ],
+   "examples": [
+    "遇到无人认领",
+    "遇到无期限",
+    "遇到跟踪失效",
+    "遇到逾期无后果",
+    "遇到完成判定"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:47",
+    "from": "action-tracking",
+    "to": "action-tracking",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "async-update",
+   "name": "会议之外的信息同步",
+   "description": "会议之外的信息同步",
+   "tags": [
+    "周报",
+    "同步",
+    "汇报",
+    "进度"
+   ],
+   "examples": [
+    "遇到会议过多",
+    "遇到信息断层",
+    "遇到汇报冗长",
+    "遇到坏消息延迟",
+    "遇到跨部门"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:47",
+    "from": "async-update",
+    "to": "async-update",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "note-structure",
+   "name": "高质量会议纪要的结构化写法",
+   "description": "高质量会议纪要的结构化写法",
+   "tags": [
+    "纪要",
+    "结构",
+    "记录",
+    "重点"
+   ],
+   "examples": [
+    "遇到记成流水账",
+    "遇到重点丢失",
+    "遇到格式不一",
+    "遇到来不及记",
+    "遇到争议记录"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:47",
+    "from": "note-structure",
+    "to": "note-structure",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "会议纪要专家"
+}

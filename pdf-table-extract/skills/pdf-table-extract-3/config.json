@@ -1,0 +1,61 @@
+{
+ "name": "pdf-table-extract-3",
+ "version": "2.0.0",
+ "domain": "文档表格",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "异常标记",
+   "then": "可疑单元格标记待人工复核",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "异常标记",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "确定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "文档",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "复核",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

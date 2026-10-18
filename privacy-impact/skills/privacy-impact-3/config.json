@@ -1,0 +1,72 @@
+{
+ "name": "privacy-impact-3",
+ "version": "2.0.0",
+ "domain": "隐私影响评估",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "数据清单",
+   "then": "列出处理的数据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "目的限定",
+   "then": "说明处理目的",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "最小必要",
+   "then": "只处理必要数据",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "风险识别",
+   "then": "识别隐私风险",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "缓解措施",
+   "then": "给出缓解措施",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数据清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目的限定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小必要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缓解措施",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

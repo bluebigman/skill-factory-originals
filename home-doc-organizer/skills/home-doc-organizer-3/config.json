@@ -1,0 +1,69 @@
+{
+ "name": "home-doc-organizer-3",
+ "version": "2.0.0",
+ "domain": "家庭证件",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "隐私",
+   "then": "敏感证件不拍照上传云端",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "隐私",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "备份",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "敏感",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "归档",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "证件",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "拍照",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分区",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "四类",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

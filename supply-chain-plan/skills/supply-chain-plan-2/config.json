@@ -1,0 +1,72 @@
+{
+ "name": "supply-chain-plan-2",
+ "version": "2.0.0",
+ "domain": "供应计划编制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "需求先行",
+   "then": "先预测需求",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "安全库存",
+   "then": "设安全库存",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "提前期",
+   "then": "考虑供应提前期",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常预案",
+   "then": "断供应急预案",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "按周期复核",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "需求先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全库存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提前期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

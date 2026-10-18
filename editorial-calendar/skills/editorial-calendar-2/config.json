@@ -1,0 +1,72 @@
+{
+ "name": "editorial-calendar-2",
+ "version": "2.0.0",
+ "domain": "编辑日历编排",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主题成组",
+   "then": "按主题分批",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "节奏稳定",
+   "then": "固定更新频率",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "提前备稿",
+   "then": "预留余量防断更",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "复用标注",
+   "then": "标注可复用内容",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "效果回填",
+   "then": "发布后回填数据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主题成组",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏稳定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提前备稿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复用标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果回填",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

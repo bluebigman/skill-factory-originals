@@ -1,0 +1,78 @@
+{
+ "name": "elder-medication-coach-2",
+ "version": "2.0.0",
+ "domain": "老人用药",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "漏服处理",
+   "then": "不双倍补服，按医嘱处理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "复查提醒",
+   "then": "设固定复查节点",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "漏服处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复查提醒",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "全部",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "口头",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "用药",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "就诊",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "节点",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分装",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

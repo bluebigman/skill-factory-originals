@@ -1,0 +1,75 @@
+{
+ "name": "Customer Complaint",
+ "description": "客诉处理专家：覆盖 先接情绪、不辩解、给时限 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/customer-complaint",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/customer-complaint",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "customer-complaint-1",
+   "name": "针对 先接情绪、不辩解 等情境给出可执行处置",
+   "description": "针对 先接情绪、不辩解 等情境给出可执行处置",
+   "tags": [
+    "先接情绪",
+    "不辩解"
+   ],
+   "examples": [
+    "遇到先接情绪",
+    "遇到不辩解",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "customer-complaint-2",
+   "name": "针对 给时限、升级路径 等情境给出可执行处置",
+   "description": "针对 给时限、升级路径 等情境给出可执行处置",
+   "tags": [
+    "给时限",
+    "升级路径"
+   ],
+   "examples": [
+    "遇到给时限",
+    "遇到升级路径",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "customer-complaint-3",
+   "name": "针对 回归复盘 等情境给出可执行处置",
+   "description": "针对 回归复盘 等情境给出可执行处置",
+   "tags": [
+    "回归复盘"
+   ],
+   "examples": [
+    "遇到回归复盘",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "客诉处理专家",
+ "x-source": "skill-factory-originals"
+}

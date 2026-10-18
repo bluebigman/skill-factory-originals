@@ -1,0 +1,62 @@
+{
+ "name": "audio-meeting-minutes-1",
+ "version": "2.0.0",
+ "domain": "会议录音",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先分离说话人",
+   "then": "未分离说话人无法定责",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "三段式",
+   "then": "决议/待办/待定三段，其余压缩",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先分离说话人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "三段式",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "其余",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "会议",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

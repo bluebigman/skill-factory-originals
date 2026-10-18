@@ -1,0 +1,87 @@
+{
+ "name": "permission-governance-1",
+ "version": "2.0.0",
+ "domain": "权限治理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "权限过宽",
+   "then": "按任务最小必要授权，不预授未来可能用到的权限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "长期有效",
+   "then": "临时授权须带过期时间，用完即回收",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "共享凭据",
+   "then": "凭据按用途隔离，禁止一套通吃的全局凭据",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "权限过宽",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长期有效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "共享凭据",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "临时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "最小",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "复核",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "回收",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "隔离",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

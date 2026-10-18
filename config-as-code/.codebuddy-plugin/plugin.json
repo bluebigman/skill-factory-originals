@@ -1,0 +1,74 @@
+{
+ "name": "config-as-code",
+ "version": "1.0.0",
+ "plugin": "config-as-code",
+ "description": "config-as-code — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for config-as-code tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/config-as-code.md"
+ ],
+ "agentName": "config-as-code",
+ "displayName": {
+  "zh": "配置即代码 配置入库 环境分离",
+  "en": "config-as-code"
+ },
+ "profession": {
+  "zh": "配置即代码 顾问",
+  "en": "config-as-code"
+ },
+ "displayDescription": {
+  "zh": "配置即代码 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "config-as-code: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "配置即代码",
+   "en": "config-as-code"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到配置即代码怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划配置即代码",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查配置即代码",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到配置即代码怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/config-as-code-1",
+  "./skills/config-as-code-2",
+  "./skills/config-as-code-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:31",
+  "from": "配置即代码专家",
+  "to": "配置即代码 配置入库 环境分离",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "security-baseline-2",
+ "version": "2.0.0",
+ "domain": "安全基线配置",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小权限",
+   "then": "默认拒绝按需授权",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "默认安全",
+   "then": "安全选项默认开启",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "关闭调试",
+   "then": "生产关闭调试接口",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "日志脱敏",
+   "then": "日志不含敏感信息",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "基线核查",
+   "then": "定期核查基线",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小权限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "默认安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关闭调试",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "日志脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "基线核查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

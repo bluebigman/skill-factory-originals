@@ -1,0 +1,74 @@
+{
+ "name": "career-transition-pro",
+ "version": "1.0.0",
+ "plugin": "career-transition-pro",
+ "description": "Career Transition Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/career-transition-pro.md"
+ ],
+ "skills": [
+  "./skills/action-plan",
+  "./skills/direction",
+  "./skills/resume-rebuild"
+ ],
+ "expertType": "agent",
+ "agentName": "career-transition-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Career Transition Pro",
+  "zh": "转行规划 只学不产 闭门造车"
+ },
+ "profession": {
+  "en": "Career Transition Pro",
+  "zh": "转行规划 简历优化 技能迁移"
+ },
+ "displayDescription": {
+  "en": "Handles Career Transition Pro tasks end-to-end with built-in professional skills.",
+  "zh": "转行规划 简历优化 技能迁移：转行的分阶段落地；转行方向的可行性评估；转行简历的能力翻译。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "只学不产"
+  },
+  {
+   "en": "practical capability",
+   "zh": "闭门造车"
+  },
+  {
+   "en": "practical capability",
+   "zh": "全脱产"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只学不产怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到闭门造车怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到全脱产怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到只学不产怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "转行规划专家",
+  "to": "转行规划 只学不产 闭门造车",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

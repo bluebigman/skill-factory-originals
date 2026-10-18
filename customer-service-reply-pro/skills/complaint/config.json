@@ -1,0 +1,121 @@
+{
+ "name": "complaint",
+ "version": "2.0.0",
+ "domain": "客服回复",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "辩解",
+   "then": "先道歉（对体验而非对责任）再核查，辩解会激化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拖延",
+   "then": "投诉须在承诺时限内给出明确答复，拖延是差评主因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无授权",
+   "then": "一线须有小额赔付授权，层层上报会恶化体验",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "超出承诺",
+   "then": "不承诺无法兑现的方案，二次失约是致命伤",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "所有沟通留痕，纠纷处置以记录为依据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "投诉",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差评",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "纠纷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "赔偿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "辩解",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拖延",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无授权",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超出承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "责任",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "升级",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "话术",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

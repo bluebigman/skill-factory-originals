@@ -1,0 +1,58 @@
+{
+ "name": "subtitle-gen-coach-2",
+ "version": "2.0.0",
+ "domain": "字幕生成",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最短时长",
+   "then": "单条字幕不短于 1 秒",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "术语统一",
+   "then": "全片术语与专名写法统一",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最短时长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "术语统一",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写法",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

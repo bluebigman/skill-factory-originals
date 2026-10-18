@@ -1,0 +1,121 @@
+{
+ "name": "load-balance",
+ "version": "2.0.0",
+ "domain": "家庭日程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全员过载",
+   "then": "列出全部固定承诺并做减法，先删除再优化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "碎片化",
+   "then": "把同类事务批量合并到固定时段处理",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无休息",
+   "then": "每周预设一段不可侵占的家庭休息时段",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "临时加塞",
+   "then": "新事项加入前必须先删一项，防止无限叠加",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "孩子课外班",
+   "then": "按接送成本通盘规划，单看课程质量必致全家疲于奔命",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "太忙",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "没时间",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "负荷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "减负",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全员过载",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "碎片化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无休息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "临时加塞",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "孩子课外班",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "name": "home-moving-checklist-1",
+ "version": "2.0.0",
+ "domain": "搬家准备",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "倒序打包",
+   "then": "最后用的先装并标注",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "随身箱",
+   "then": "贵重与证件随身",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "倒序打包",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "随身箱",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "准备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证件",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

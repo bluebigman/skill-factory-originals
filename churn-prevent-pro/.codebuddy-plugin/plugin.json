@@ -1,0 +1,74 @@
+{
+ "name": "churn-prevent-pro",
+ "version": "1.0.0",
+ "plugin": "churn-prevent-pro",
+ "description": "churn-prevent-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for churn-prevent-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/churn-prevent-pro.md"
+ ],
+ "agentName": "churn-prevent-pro",
+ "displayName": {
+  "zh": "客户流失 行为信号 分级干预",
+  "en": "churn-prevent-pro"
+ },
+ "profession": {
+  "zh": "客户流失 预警干预 顾问",
+  "en": "churn-prevent-pro"
+ },
+ "displayDescription": {
+  "zh": "客户流失 预警干预 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "churn-prevent-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "客户流失",
+   "en": "churn-prevent-pro"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到客户流失怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划客户流失",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查客户流失",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到客户流失怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/churn-prevent-pro-1/",
+  "./skills/churn-prevent-pro-2/",
+  "./skills/churn-prevent-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "客户流失专家",
+  "to": "客户流失 行为信号 分级干预",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

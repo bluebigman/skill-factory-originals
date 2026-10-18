@@ -1,0 +1,74 @@
+{
+ "name": "customer-health",
+ "version": "1.0.0",
+ "plugin": "customer-health",
+ "description": "customer-health — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for customer-health tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/customer-health.md"
+ ],
+ "agentName": "customer-health",
+ "displayName": {
+  "zh": "客户健康度 多维输入",
+  "en": "customer-health"
+ },
+ "profession": {
+  "zh": "客户健康度 评估",
+  "en": "customer-health"
+ },
+ "displayDescription": {
+  "zh": "客户健康度 评估：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "customer-health: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "客户健康度",
+   "en": "customer-health"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到客户健康度怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划客户健康度",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查客户健康度",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到客户健康度怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/customer-health-1",
+  "./skills/customer-health-2",
+  "./skills/customer-health-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:32",
+  "from": "客户健康度专家",
+  "to": "客户健康度 多维输入",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

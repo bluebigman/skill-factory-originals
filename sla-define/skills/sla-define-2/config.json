@@ -1,0 +1,78 @@
+{
+ "name": "sla-define-2",
+ "version": "2.0.0",
+ "domain": "服务标准",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "写清例外",
+   "then": "明确写出不适用的情况",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "记录实际",
+   "then": "记录实际达成率并定期公布",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "写清例外",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录实际",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "承诺",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "分层",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "定义",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时限",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "度分",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "达成",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

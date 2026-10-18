@@ -1,0 +1,113 @@
+{
+ "name": "rehearsal",
+ "version": "2.0.0",
+ "domain": "演示大纲",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "超时",
+   "then": "按分钟切分内容并标必讲/可删，现场按标记弹性裁剪",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "被问倒",
+   "then": "预设 5 个最尖锐问题并准备答案",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "紧张",
+   "then": "提前到场熟悉设备与走位，紧张多来自不确定",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "设备故障",
+   "then": "备份 PDF 与离线文件并提前试投",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "打断",
+   "then": "被打断先记录再继续，勿与提问者当场争论",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "演练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "紧张",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "被问倒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "设备故障",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打断",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "现场",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

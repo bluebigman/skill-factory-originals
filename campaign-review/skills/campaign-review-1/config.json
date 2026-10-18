@@ -1,0 +1,62 @@
+{
+ "name": "campaign-review-1",
+ "version": "2.0.0",
+ "domain": "活动复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先对齐目标",
+   "then": "按活动前定的目标复盘，不看后补的目标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拆环节",
+   "then": "按曝光-点击-参与-转化逐环节看流失",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先对齐目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拆环节",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "转化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流失",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "点击",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

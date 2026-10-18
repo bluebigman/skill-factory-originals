@@ -1,0 +1,113 @@
+{
+ "name": "risk",
+ "version": "2.0.0",
+ "domain": "旅行规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "证件",
+   "then": "证件拍照备份并与原件分开存放",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保险",
+   "then": "按目的地与活动风险配置，高风险活动须专项",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "医疗",
+   "then": "了解当地就医与急救电话，慢性病带足药品与处方",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "通讯",
+   "then": "提前确认网络与应急联络方式，失联是常见风险",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "天气",
+   "then": "出行前 3 天复核天气并准备备选方案",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "风险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "证件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "医疗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "通讯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "天气",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "就医",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每日",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

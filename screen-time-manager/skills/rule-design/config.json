@@ -1,0 +1,121 @@
+{
+ "name": "rule-design",
+ "version": "2.0.0",
+ "domain": "屏幕时间",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "规则失效",
+   "then": "把规则写下来并双方签字，模糊口头约定必失效",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "时长达标难",
+   "then": "用计时器可视化倒计时，比家长口头催更少冲突",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "规则执行不到位",
+   "then": "把设备放在公共区域充电，物理环境优先于自控力",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "破例",
+   "then": "预先写清例外条件（假期/生病），事后补例会摧毁规则",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "年龄差异",
+   "then": "学龄前单次≤15分钟，学龄≤30分钟，且须分段",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "屏幕时间",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "约定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则失效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时长达标难",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则执行不到位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "破例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "年龄差异",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "孩子",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

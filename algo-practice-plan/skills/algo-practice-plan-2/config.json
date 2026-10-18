@@ -1,0 +1,78 @@
+{
+ "name": "algo-practice-plan-2",
+ "version": "2.0.0",
+ "domain": "算法刷题",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "手写板",
+   "then": "白板手写不依赖补全，贴近面试环境",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "错题本",
+   "then": "记录失败原因分类（思路/边界/复杂度）",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "手写板",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错题本",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "同类",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "类型",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "复杂",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "限时",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

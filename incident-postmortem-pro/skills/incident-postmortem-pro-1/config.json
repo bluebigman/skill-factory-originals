@@ -1,0 +1,72 @@
+{
+ "name": "incident-postmortem-pro-1",
+ "version": "2.0.0",
+ "domain": "事故复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无责复盘",
+   "then": "聚焦系统而非个人",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "根因到底",
+   "then": "连续追问直到系统原因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "改进可执行",
+   "then": "改进项必须可验证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "闭环跟踪",
+   "then": "改进项纳入跟踪",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "知识沉淀",
+   "then": "复盘结论进知识库",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "无责复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "根因到底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改进可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环跟踪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "知识沉淀",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

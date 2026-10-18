@@ -1,0 +1,99 @@
+{
+ "name": "Xiaohongshu Note Pro",
+ "description": "小红书笔记专家：平台规则与广告合规；种草笔记的内容组织；笔记标题与封面的设计。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/xiaohongshu-note-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/xiaohongshu-note-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "compliance",
+   "name": "平台规则与广告合规",
+   "description": "平台规则与广告合规",
+   "tags": [
+    "违规",
+    "限流",
+    "广告",
+    "合规"
+   ],
+   "examples": [
+    "遇到极限词",
+    "遇到功效宣称",
+    "遇到引流",
+    "遇到未标广告",
+    "遇到医疗美容"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "compliance",
+    "to": "compliance",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "note-structure",
+   "name": "种草笔记的内容组织",
+   "description": "种草笔记的内容组织",
+   "tags": [
+    "笔记",
+    "结构",
+    "正文",
+    "标签"
+   ],
+   "examples": [
+    "遇到开头无钩",
+    "遇到无干货",
+    "遇到无场景",
+    "遇到标签随意",
+    "遇到排版密"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "note-structure",
+    "to": "note-structure",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "title-cover",
+   "name": "笔记标题与封面的设计",
+   "description": "笔记标题与封面的设计",
+   "tags": [
+    "标题",
+    "封面",
+    "点击率",
+    "笔记"
+   ],
+   "examples": [
+    "遇到标题无痛点",
+    "遇到封面文字过多",
+    "遇到无对比",
+    "遇到标题党",
+    "遇到统一风格"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "title-cover",
+    "to": "title-cover",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "小红书笔记专家"
+}

@@ -1,0 +1,121 @@
+{
+ "name": "goal-setting",
+ "version": "2.0.0",
+ "domain": "自律养成",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标过大",
+   "then": "把目标拆到 2 分钟内可启动的动作，过大必放弃",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无衡量",
+   "then": "目标须可验证（数量/时间/交付物），模糊目标无法判断进度",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "多重目标",
+   "then": "一次只攻一个主要目标，多目标互相稀释",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "只定不拆",
+   "then": "拆到周计划与日动作，只有年度目标等于没有",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无回顾",
+   "then": "每周检查一次达成率并调整，不检查的目标会自然死亡",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标管理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "空想",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "半途而废",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目标过大",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无衡量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多重目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只定不拆",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无回顾",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "安排",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

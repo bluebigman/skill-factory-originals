@@ -1,0 +1,72 @@
+{
+ "name": "training-material-1",
+ "version": "2.0.0",
+ "domain": "培训材料制作",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标对齐",
+   "then": "与培训目标对齐",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分层设计",
+   "then": "按水平分层",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "示例丰富",
+   "then": "配真实示例",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "练习配套",
+   "then": "配练习题",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可复用",
+   "then": "模块化便于复用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例丰富",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "练习配套",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

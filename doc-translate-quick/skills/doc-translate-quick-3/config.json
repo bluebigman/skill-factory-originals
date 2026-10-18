@@ -1,0 +1,72 @@
+{
+ "name": "doc-translate-quick-3",
+ "version": "2.0.0",
+ "domain": "文档快速翻译",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先建术语",
+   "then": "先统一术语再翻",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "意译优先",
+   "then": "按目标语习惯重组",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "长句拆分",
+   "then": "中文长句拆短",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "保留原词",
+   "then": "专名首次附原文",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回读校验",
+   "then": "反向回读查漏",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先建术语",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "意译优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长句拆分",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留原词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回读校验",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

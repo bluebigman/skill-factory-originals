@@ -1,0 +1,74 @@
+{
+ "name": "file-rename-batch-2",
+ "version": "2.0.0",
+ "domain": "文件批量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "零填充",
+   "then": "序号补零，避免 10 排在 2 前面",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "去非法字符",
+   "then": "清除系统非法字符与超长名",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "零填充",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "去非法字符",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "模板",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "日期",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "命名",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "主题",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "name": "pet-health-record-1",
+ "version": "2.0.0",
+ "domain": "宠物健康",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "四类记录",
+   "then": "疫苗/驱虫/体重/就诊统一记录",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "体重趋势",
+   "then": "每月称重，突变比单次读数有价值",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "四类记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "体重趋势",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "价值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每月",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "健康",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "就诊",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "宠物",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "称重",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

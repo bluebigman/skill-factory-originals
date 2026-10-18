@@ -1,0 +1,71 @@
+{
+ "name": "observability-inject-1",
+ "version": "2.0.0",
+ "domain": "链路追踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "黑盒执行",
+   "then": "每次调用生成 trace id 并贯穿全链路",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无法复现",
+   "then": "记录足以复现的输入快照与依赖版本",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "上下文丢失",
+   "then": "跨服务传递须保留 trace 上下文",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "黑盒执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无法复现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上下文丢失",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "版本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每次",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "指标",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "链路",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

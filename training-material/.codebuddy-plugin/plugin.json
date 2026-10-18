@@ -1,0 +1,74 @@
+{
+ "name": "training-material",
+ "version": "1.0.0",
+ "plugin": "training-material",
+ "description": "training-material — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for training-material tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/training-material.md"
+ ],
+ "agentName": "training-material",
+ "displayName": {
+  "zh": "培训材料制作 目标对齐",
+  "en": "training-material"
+ },
+ "profession": {
+  "zh": "培训材料制作 助手",
+  "en": "training-material"
+ },
+ "displayDescription": {
+  "zh": "培训材料制作 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "training-material: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "培训材料制作",
+   "en": "training-material"
+  },
+  {
+   "en": "OperationsHR",
+   "zh": "OperationsHR"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到培训材料制作怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划培训材料制作",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查培训材料制作",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到培训材料制作怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/training-material-1/",
+  "./skills/training-material-2/",
+  "./skills/training-material-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "培训材料制作专家",
+  "to": "培训材料制作 目标对齐",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

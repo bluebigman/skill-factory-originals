@@ -1,0 +1,72 @@
+{
+ "name": "doc-form-fill-1",
+ "version": "2.0.0",
+ "domain": "表单填写核对",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字段映射",
+   "then": "明确源字段到表单字段",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "必填优先",
+   "then": "必填项先填",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "格式匹配",
+   "then": "按表单要求格式化",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "填后复核",
+   "then": "逐字段复核",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留空标注",
+   "then": "无法填的标空说明",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字段映射",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "必填优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "填后复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留空标注",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

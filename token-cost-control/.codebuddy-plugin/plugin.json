@@ -1,0 +1,74 @@
+{
+ "name": "token-cost-control",
+ "version": "1.0.0",
+ "plugin": "token-cost-control",
+ "description": "Token Cost Control for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/token-cost-control.md"
+ ],
+ "skills": [
+  "./skills/token-cost-control-1",
+  "./skills/token-cost-control-2",
+  "./skills/token-cost-control-3"
+ ],
+ "expertType": "agent",
+ "agentName": "token-cost-control",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Token Cost Control",
+  "zh": "成本控制 无预算 循环烧量"
+ },
+ "profession": {
+  "en": "Token Cost Control",
+  "zh": "成本控制 上下文压缩 模型降级"
+ },
+ "displayDescription": {
+  "en": "Handles Token Cost Control tasks end-to-end with built-in professional skills.",
+  "zh": "成本控制 上下文压缩 模型降级：覆盖 无预算、循环烧量 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "成本控制"
+  },
+  {
+   "en": "practical capability",
+   "zh": "上下文压缩"
+  },
+  {
+   "en": "practical capability",
+   "zh": "模型降级"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到成本控制怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到上下文压缩怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到模型降级怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到成本控制怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "成本控制专家",
+  "to": "成本控制 无预算 循环烧量",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

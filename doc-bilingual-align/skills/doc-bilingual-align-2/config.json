@@ -1,0 +1,72 @@
+{
+ "name": "doc-bilingual-align-2",
+ "version": "2.0.0",
+ "domain": "双语文档对齐",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "术语表先行",
+   "then": "先建中英术语对照",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "语义对齐",
+   "then": "按含义而非字面对应",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "格式同步",
+   "then": "两版格式保持一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "版本同步",
+   "then": "单版变更须同步另一版",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "终稿校对",
+   "then": "母语者终校",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "术语表先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "语义对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "终稿校对",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

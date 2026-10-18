@@ -1,0 +1,67 @@
+{
+ "name": "Child Reading Coach",
+ "description": "儿童阅读专家：覆盖 每日固定、自主选择、不考核、家长同读、阅读记录 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/child-reading-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-reading-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-reading-coach-1",
+   "name": "针对 每日固定、自主选择 等情境给出可执行处置",
+   "description": "针对 每日固定、自主选择 等情境给出可执行处置",
+   "tags": [
+    "每日固定",
+    "自主选择"
+   ],
+   "examples": [
+    "遇到每日固定",
+    "遇到自主选择",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-reading-coach-2",
+   "name": "针对 不考核、家长同读 等情境给出可执行处置",
+   "description": "针对 不考核、家长同读 等情境给出可执行处置",
+   "tags": [
+    "不考核",
+    "家长同读"
+   ],
+   "examples": [
+    "遇到不考核",
+    "遇到家长同读",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-reading-coach-3",
+   "name": "针对 阅读记录 等情境给出可执行处置",
+   "description": "针对 阅读记录 等情境给出可执行处置",
+   "tags": [
+    "阅读记录"
+   ],
+   "examples": [
+    "遇到阅读记录",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "儿童阅读专家"
+}

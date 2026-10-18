@@ -1,0 +1,74 @@
+{
+ "name": "pet-training-coach-1",
+ "version": "2.0.0",
+ "domain": "宠物训练",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拆家",
+   "then": "先排除运动量与分离焦虑",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "乱叫",
+   "then": "记录触发场景再训练，盲目制止加重焦虑",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拆家",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "乱叫",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "训练",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "焦虑",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "运动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先排",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分离",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "宠物",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "加重",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

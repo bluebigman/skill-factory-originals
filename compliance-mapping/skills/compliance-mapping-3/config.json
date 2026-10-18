@@ -1,0 +1,72 @@
+{
+ "name": "compliance-mapping-3",
+ "version": "2.0.0",
+ "domain": "合规映射",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标准对齐",
+   "then": "对齐适用标准条款",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "逐条映射",
+   "then": "逐条映射到控制措施",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "证据留存",
+   "then": "每项配证据",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "缺口整改",
+   "then": "缺口纳入整改",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "标准更新后复核",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标准对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逐条映射",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "证据留存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺口整改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

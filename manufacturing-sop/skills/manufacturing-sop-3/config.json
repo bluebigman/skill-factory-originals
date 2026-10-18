@@ -1,0 +1,72 @@
+{
+ "name": "manufacturing-sop-3",
+ "version": "2.0.0",
+ "domain": "生产作业规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "步骤可执行",
+   "then": "每步含输入输出",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "关键控制点",
+   "then": "标出关键控制点",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异常处理",
+   "then": "写清异常分支",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "记录留痕",
+   "then": "执行记录可查",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期更新",
+   "then": "工艺变更后更新",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "步骤可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键控制点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

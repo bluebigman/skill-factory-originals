@@ -1,0 +1,78 @@
+{
+ "name": "perf-optimize-coach-2",
+ "version": "2.0.0",
+ "domain": "性能优化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单点改",
+   "then": "一次只改一处，便于归因收益",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "看长尾",
+   "then": "除均值外必须看 P95/P99",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单点改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看长尾",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "次只",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "优化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "感觉",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "耗时",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "收益",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "瓶颈",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "凭感",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "sql-readonly-guard",
+ "version": "1.0.0",
+ "plugin": "sql-readonly-guard",
+ "description": "sql-readonly-guard — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for sql-readonly-guard tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/sql-readonly-guard.md"
+ ],
+ "agentName": "sql-readonly-guard",
+ "displayName": {
+  "zh": "只读查询守护 强制只读",
+  "en": "sql-readonly-guard"
+ },
+ "profession": {
+  "zh": "只读查询守护 顾问",
+  "en": "sql-readonly-guard"
+ },
+ "displayDescription": {
+  "zh": "只读查询守护 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "sql-readonly-guard: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "只读查询守护",
+   "en": "sql-readonly-guard"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到只读查询守护怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划只读查询守护",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查只读查询守护",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到只读查询守护怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/sql-readonly-guard-1/",
+  "./skills/sql-readonly-guard-2/",
+  "./skills/sql-readonly-guard-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "只读查询守护专家",
+  "to": "只读查询守护 强制只读",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "agent-instruction-clarify-3",
+ "version": "2.0.0",
+ "domain": "指令澄清",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "歧义显式",
+   "then": "发现歧义先提问不猜",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "边界确认",
+   "then": "明确做什么不做什么",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "成功标准",
+   "then": "先定判定标准",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "停止条件",
+   "then": "说明何时该停",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "假设声明",
+   "then": "把假设写出来",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "歧义显式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成功标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "停止条件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "假设声明",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

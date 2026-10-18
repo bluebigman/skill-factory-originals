@@ -1,0 +1,78 @@
+{
+ "name": "prototype-review-2",
+ "version": "2.0.0",
+ "domain": "原型评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "记录问题",
+   "then": "问题按严重度分级记录，不混在一起说",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "关注反馈",
+   "then": "每个操作都要有及时可见的反馈",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "记录问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关注反馈",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "重度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "分级",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "操作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "度分",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "严重",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "角色",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

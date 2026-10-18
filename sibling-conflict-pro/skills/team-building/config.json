@@ -1,0 +1,87 @@
+{
+ "name": "team-building",
+ "version": "2.0.0",
+ "domain": "二孩冲突",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "合作",
+   "then": "设计需两人配合才能完成的任务，成功共享奖励",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一起做",
+   "then": "给明确分工且都有不可替代角色",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "共同目标",
+   "then": "用家庭挑战（如一起完成拼图）替代竞争性游戏",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "合作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一起做",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "共同目标",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "家庭",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "设计",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L62"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

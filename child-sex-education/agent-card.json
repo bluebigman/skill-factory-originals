@@ -1,0 +1,75 @@
+{
+ "name": "Child Sex Education",
+ "description": "儿童性教育专家：覆盖 用正确名称、身体权、安全触碰、可拒绝、专业边界 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-sex-education",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-sex-education",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-sex-education-1",
+   "name": "针对 用正确名称、身体权 等情境给出可执行处置",
+   "description": "针对 用正确名称、身体权 等情境给出可执行处置",
+   "tags": [
+    "用正确名称",
+    "身体权"
+   ],
+   "examples": [
+    "遇到用正确名称",
+    "遇到身体权",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-sex-education-2",
+   "name": "针对 安全触碰、可拒绝 等情境给出可执行处置",
+   "description": "针对 安全触碰、可拒绝 等情境给出可执行处置",
+   "tags": [
+    "安全触碰",
+    "可拒绝"
+   ],
+   "examples": [
+    "遇到安全触碰",
+    "遇到可拒绝",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-sex-education-3",
+   "name": "针对 专业边界 等情境给出可执行处置",
+   "description": "针对 专业边界 等情境给出可执行处置",
+   "tags": [
+    "专业边界"
+   ],
+   "examples": [
+    "遇到专业边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "儿童性教育专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "handover-doc-2",
+ "version": "2.0.0",
+ "domain": "交接文档撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "现状清晰",
+   "then": "写清当前进展与未完成项",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "联系人在册",
+   "then": "列出关键干系人与联系方式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "风险提示",
+   "then": "列出已知风险与临时方案",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "操作手册",
+   "then": "重复性工作写清操作步骤",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "交接确认",
+   "then": "双方签字确认交接清单",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "现状清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "联系人在册",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险提示",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "操作手册",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交接确认",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

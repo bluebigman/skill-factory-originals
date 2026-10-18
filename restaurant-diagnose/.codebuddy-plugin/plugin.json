@@ -1,0 +1,74 @@
+{
+ "name": "restaurant-diagnose",
+ "version": "1.0.0",
+ "plugin": "restaurant-diagnose",
+ "description": "Restaurant Diagnose for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/restaurant-diagnose.md"
+ ],
+ "skills": [
+  "./skills/restaurant-diagnose-1",
+  "./skills/restaurant-diagnose-2",
+  "./skills/restaurant-diagnose-3"
+ ],
+ "expertType": "agent",
+ "agentName": "restaurant-diagnose",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Restaurant Diagnose",
+  "zh": "餐饮经营 算翻台 菜品结构"
+ },
+ "profession": {
+  "en": "Restaurant Diagnose",
+  "zh": "餐饮经营 翻台率 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Restaurant Diagnose tasks end-to-end with built-in professional skills.",
+  "zh": "餐饮经营 翻台率 顾问：覆盖 算翻台、菜品结构、损耗优先 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "餐饮经营",
+   "en": "restaurant-diagnose"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到餐饮经营怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到翻台率怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到餐饮经营怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:49",
+  "from": "餐饮经营专家",
+  "to": "餐饮经营 算翻台 菜品结构",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

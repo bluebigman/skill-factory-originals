@@ -1,0 +1,72 @@
+{
+ "name": "mcp-server-scan-3",
+ "version": "2.0.0",
+ "domain": "MCP",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "工具清单",
+   "then": "列出全部暴露工具",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "权限审查",
+   "then": "审查每个工具权限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "输入校验",
+   "then": "校验外部输入",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "凭据处理",
+   "then": "凭据不落日志",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本审查",
+   "then": "审查版本与依赖",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "工具清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限审查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输入校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭据处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本审查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

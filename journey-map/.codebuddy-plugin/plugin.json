@@ -1,0 +1,74 @@
+{
+ "name": "journey-map",
+ "version": "1.0.0",
+ "plugin": "journey-map",
+ "description": "journey-map — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for journey-map tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/journey-map.md"
+ ],
+ "agentName": "journey-map",
+ "displayName": {
+  "zh": "用户旅程地图 阶段划分",
+  "en": "journey-map"
+ },
+ "profession": {
+  "zh": "用户旅程地图 顾问",
+  "en": "journey-map"
+ },
+ "displayDescription": {
+  "zh": "用户旅程地图 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "journey-map: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "用户旅程地图",
+   "en": "journey-map"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到用户旅程地图怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划用户旅程地图",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查用户旅程地图",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到用户旅程地图怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/journey-map-1/",
+  "./skills/journey-map-2/",
+  "./skills/journey-map-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "用户旅程地图专家",
+  "to": "用户旅程地图 阶段划分",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

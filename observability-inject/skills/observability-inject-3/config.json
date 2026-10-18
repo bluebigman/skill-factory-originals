@@ -1,0 +1,87 @@
+{
+ "name": "observability-inject-3",
+ "version": "2.0.0",
+ "domain": "链路追踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无阈值",
+   "then": "关键指标必须设阈值与告警，靠人肉看日志不算监控",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "告警风暴",
+   "then": "同类告警聚合去重，避免淹没关键信号",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "静默异常",
+   "then": "「无输出」也是一种异常（超时/空返回），必须告警",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "无阈值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警风暴",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "静默异常",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "每次",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "同类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "指标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信号",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "链路",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "search-ux-design",
+ "version": "1.0.0",
+ "plugin": "search-ux-design",
+ "description": "search-ux-design — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for search-ux-design tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/search-ux-design.md"
+ ],
+ "agentName": "search-ux-design",
+ "displayName": {
+  "zh": "搜索体验设计 零结果有解",
+  "en": "search-ux-design"
+ },
+ "profession": {
+  "zh": "搜索体验设计 顾问",
+  "en": "search-ux-design"
+ },
+ "displayDescription": {
+  "zh": "搜索体验设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "search-ux-design: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "搜索体验设计",
+   "en": "search-ux-design"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到搜索体验设计怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划搜索体验设计",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查搜索体验设计",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到搜索体验设计怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/search-ux-design-1/",
+  "./skills/search-ux-design-2/",
+  "./skills/search-ux-design-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:49",
+  "from": "搜索体验设计专家",
+  "to": "搜索体验设计 零结果有解",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

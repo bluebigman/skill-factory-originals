@@ -1,0 +1,78 @@
+{
+ "name": "home-service-diagnose-2",
+ "version": "2.0.0",
+ "domain": "家政服务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "换人成本",
+   "then": "频繁换人导致流失，优先稳服务人员",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "复购驱动",
+   "then": "复购率靠服务一致性，不靠促销",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "换人成本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复购驱动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "时段",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "减少",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "写成",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "导致",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

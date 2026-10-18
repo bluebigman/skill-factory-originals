@@ -1,0 +1,72 @@
+{
+ "name": "doc-compare-merge-1",
+ "version": "2.0.0",
+ "domain": "文档比对合并",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "逐段比对",
+   "then": "按段落对齐比对",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "差异分级",
+   "then": "实质与格式分级",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "合并策略",
+   "then": "冲突处标注待裁决",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "结果留痕",
+   "then": "输出合并日志",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "合并后复核",
+   "then": "抽查关键段落",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "逐段比对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合并策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合并后复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

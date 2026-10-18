@@ -1,0 +1,75 @@
+{
+ "name": "Mp Article Format",
+ "description": "公众号文章专家：覆盖 留白优先、三段一图、字号统一、首图定调、手机优先 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/mp-article-format",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/mp-article-format",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "mp-article-format-1",
+   "name": "针对 留白优先、三段一图 等情境给出可执行处置",
+   "description": "针对 留白优先、三段一图 等情境给出可执行处置",
+   "tags": [
+    "留白优先",
+    "三段一图"
+   ],
+   "examples": [
+    "遇到留白优先",
+    "遇到三段一图",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mp-article-format-2",
+   "name": "针对 字号统一、首图定调 等情境给出可执行处置",
+   "description": "针对 字号统一、首图定调 等情境给出可执行处置",
+   "tags": [
+    "字号统一",
+    "首图定调"
+   ],
+   "examples": [
+    "遇到字号统一",
+    "遇到首图定调",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mp-article-format-3",
+   "name": "针对 手机优先 等情境给出可执行处置",
+   "description": "针对 手机优先 等情境给出可执行处置",
+   "tags": [
+    "手机优先"
+   ],
+   "examples": [
+    "遇到手机优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "公众号文章专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,66 @@
+{
+ "name": "data-classify-1",
+ "version": "2.0.0",
+ "domain": "数据分级",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先分类",
+   "then": "先把数据按敏感度分类再定管控",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "最小授权",
+   "then": "按岗位需要授予最小权限",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小授权",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "敏感",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分级",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "度分",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "岗位",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "权限",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

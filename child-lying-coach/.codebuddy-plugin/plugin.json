@@ -1,0 +1,74 @@
+{
+ "name": "child-lying-coach",
+ "version": "1.0.0",
+ "plugin": "child-lying-coach",
+ "description": "Child Lying Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-lying-coach.md"
+ ],
+ "skills": [
+  "./skills/child-lying-coach-1",
+  "./skills/child-lying-coach-2",
+  "./skills/child-lying-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-lying-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Child Lying Coach",
+  "zh": "儿童说谎 降低承认成本"
+ },
+ "profession": {
+  "en": "Child Lying Coach",
+  "zh": "儿童说谎 归因引导 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Child Lying Coach tasks end-to-end with built-in professional skills.",
+  "zh": "儿童说谎 归因引导 教练：覆盖 降低承认成本、区分想象 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "降低承认成本"
+  },
+  {
+   "en": "practical capability",
+   "zh": "区分想象"
+  },
+  {
+   "en": "practical capability",
+   "zh": "不贴标签"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到降低承认成本怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到区分想象怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不贴标签怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到降低承认成本怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "儿童说谎专家",
+  "to": "儿童说谎 降低承认成本",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

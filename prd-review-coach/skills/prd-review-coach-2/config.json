@@ -1,0 +1,78 @@
+{
+ "name": "prd-review-coach-2",
+ "version": "2.0.0",
+ "domain": "需求评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "争议标记",
+   "then": "当场争不清的标记待办，不占用评审时间",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拆到可估",
+   "then": "拆到能估工作量的粒度才算评审通过",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "争议标记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拆到可估",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "避免",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "理解",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "工作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前先",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "当场",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

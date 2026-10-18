@@ -1,0 +1,67 @@
+{
+ "name": "Study Motivation Coach",
+ "description": "学习动力专家：覆盖 找意义、小成就、给自主、少奖惩、看进步 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/study-motivation-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/study-motivation-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "study-motivation-coach-1",
+   "name": "针对 找意义、小成就 等情境给出可执行处置",
+   "description": "针对 找意义、小成就 等情境给出可执行处置",
+   "tags": [
+    "找意义",
+    "小成就"
+   ],
+   "examples": [
+    "遇到找意义",
+    "遇到小成就",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "study-motivation-coach-2",
+   "name": "针对 给自主、少奖惩 等情境给出可执行处置",
+   "description": "针对 给自主、少奖惩 等情境给出可执行处置",
+   "tags": [
+    "给自主",
+    "少奖惩"
+   ],
+   "examples": [
+    "遇到给自主",
+    "遇到少奖惩",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "study-motivation-coach-3",
+   "name": "针对 看进步 等情境给出可执行处置",
+   "description": "针对 看进步 等情境给出可执行处置",
+   "tags": [
+    "看进步"
+   ],
+   "examples": [
+    "遇到看进步",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "学习动力专家"
+}

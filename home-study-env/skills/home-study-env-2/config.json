@@ -1,0 +1,74 @@
+{
+ "name": "home-study-env-2",
+ "version": "2.0.0",
+ "domain": "学习环境",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "固定位置",
+   "then": "固定座位建立条件反射",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "光线",
+   "then": "阅读光源侧前方并避免直射",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "固定位置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "光线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "建立",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "学习",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "产品",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "干扰",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

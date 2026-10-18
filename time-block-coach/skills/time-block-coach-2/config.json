@@ -1,0 +1,78 @@
+{
+ "name": "time-block-coach-2",
+ "version": "2.0.0",
+ "domain": "时间块",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "同类合并",
+   "then": "同类事务合并到同一时段",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保护专注块",
+   "then": "专注块设免打扰并对外可见",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "同类合并",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保护专注块",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "缓冲",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先排",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "留缓",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

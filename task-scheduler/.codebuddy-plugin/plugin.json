@@ -1,0 +1,74 @@
+{
+ "name": "task-scheduler",
+ "version": "1.0.0",
+ "plugin": "task-scheduler",
+ "description": "task-scheduler — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for task-scheduler tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/task-scheduler.md"
+ ],
+ "agentName": "task-scheduler",
+ "displayName": {
+  "zh": "定时任务编排 错峰执行",
+  "en": "task-scheduler"
+ },
+ "profession": {
+  "zh": "定时任务编排 顾问",
+  "en": "task-scheduler"
+ },
+ "displayDescription": {
+  "zh": "定时任务编排 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "task-scheduler: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "定时任务编排",
+   "en": "task-scheduler"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到定时任务编排怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划定时任务编排",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查定时任务编排",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到定时任务编排怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/task-scheduler-1",
+  "./skills/task-scheduler-2",
+  "./skills/task-scheduler-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "定时任务编排专家",
+  "to": "定时任务编排 错峰执行",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,66 @@
+{
+ "name": "oee-improve-pro-1",
+ "version": "2.0.0",
+ "domain": "设备效率",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "损失分类",
+   "then": "按停机/换型/小停/降速/不良分类统计",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "攻其大者",
+   "then": "先攻占比最大的一类损失",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "损失分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "攻其大者",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "最大",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "效率",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "统计",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "占比",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

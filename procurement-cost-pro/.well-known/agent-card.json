@@ -1,0 +1,75 @@
+{
+ "name": "Procurement Cost Pro",
+ "description": "采购降本专家：覆盖 成本拆解、多方比价、集中需求 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/procurement-cost-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/procurement-cost-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "procurement-cost-pro-1",
+   "name": "针对 成本拆解、多方比价 等情境给出可执行处置",
+   "description": "针对 成本拆解、多方比价 等情境给出可执行处置",
+   "tags": [
+    "成本拆解",
+    "多方比价"
+   ],
+   "examples": [
+    "遇到成本拆解",
+    "遇到多方比价",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "procurement-cost-pro-2",
+   "name": "针对 集中需求、替代方案 等情境给出可执行处置",
+   "description": "针对 集中需求、替代方案 等情境给出可执行处置",
+   "tags": [
+    "集中需求",
+    "替代方案"
+   ],
+   "examples": [
+    "遇到集中需求",
+    "遇到替代方案",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "procurement-cost-pro-3",
+   "name": "针对 承诺谨慎 等情境给出可执行处置",
+   "description": "针对 承诺谨慎 等情境给出可执行处置",
+   "tags": [
+    "承诺谨慎"
+   ],
+   "examples": [
+    "遇到承诺谨慎",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "采购降本专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "home-study-env",
+ "version": "1.0.0",
+ "plugin": "home-study-env",
+ "description": "Home Study Env for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-study-env.md"
+ ],
+ "skills": [
+  "./skills/home-study-env-1",
+  "./skills/home-study-env-2",
+  "./skills/home-study-env-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-study-env",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Study Env",
+  "zh": "学习环境 桌面清空 视线无干扰"
+ },
+ "profession": {
+  "en": "Home Study Env",
+  "zh": "学习环境 书桌整理 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Home Study Env tasks end-to-end with built-in professional skills.",
+  "zh": "学习环境 书桌整理 顾问：覆盖 桌面清空、视线无干扰、固定位置 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "桌面清空"
+  },
+  {
+   "en": "practical capability",
+   "zh": "视线无干扰"
+  },
+  {
+   "en": "practical capability",
+   "zh": "固定位置"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到桌面清空怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到视线无干扰怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到固定位置怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到桌面清空怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "学习环境专家",
+  "to": "学习环境 桌面清空 视线无干扰",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,57 @@
+{
+ "name": "brand-tone-coach-3",
+ "version": "2.0.0",
+ "domain": "品牌调性",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定期校准",
+   "then": "每季度校准一次，防风格漂移",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定期校准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "每条",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "表达",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每季度",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "需求模糊",
+   "then": "列出可测量指标与判定口径"
+  },
+  {
+   "when": "边界不清",
+   "then": "写清不做什么、不覆盖什么"
+  }
+ ],
+ "keywords": [
+  "可测量",
+  "边界",
+  "前置确认"
+ ],
+ "boundary": "把模糊需求转成可测量、可判定的验收标准",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

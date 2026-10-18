@@ -1,0 +1,72 @@
+{
+ "name": "agent-eval-framework-3",
+ "version": "2.0.0",
+ "domain": "效果评测",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "用例覆盖",
+   "then": "覆盖正常与边界与对抗",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "基准固定",
+   "then": "评测基准不得随改随换",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "回归必跑",
+   "then": "每次变更跑全量回归",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "人工抽检",
+   "then": "自动评测须配人工抽检",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "失败归因",
+   "then": "失败用例须归因到具体环节",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "用例覆盖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "基准固定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归必跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "人工抽检",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败归因",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

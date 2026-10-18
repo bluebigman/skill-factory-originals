@@ -1,0 +1,99 @@
+{
+ "name": "Live Script Pro",
+ "description": "直播脚本专家：直播中的合规红线；直播流程与脚本编排；关键话术的组织。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/live-script-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/live-script-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "compliance",
+   "name": "直播中的合规红线",
+   "description": "直播中的合规红线",
+   "tags": [
+    "合规",
+    "违规",
+    "禁用词",
+    "承诺"
+   ],
+   "examples": [
+    "遇到极限词",
+    "遇到功效宣称",
+    "遇到虚假促销",
+    "遇到引导私下交易",
+    "遇到特殊品类"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "compliance",
+    "to": "compliance",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "script-flow",
+   "name": "直播流程与脚本编排",
+   "description": "直播流程与脚本编排",
+   "tags": [
+    "流程",
+    "脚本",
+    "开场",
+    "节奏"
+   ],
+   "examples": [
+    "遇到无流程",
+    "遇到开场弱",
+    "遇到讲品冗长",
+    "遇到节奏单一",
+    "遇到收尾"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "script-flow",
+    "to": "script-flow",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "talk-track",
+   "name": "关键话术的组织",
+   "description": "关键话术的组织",
+   "tags": [
+    "话术",
+    "逼单",
+    "留人",
+    "转化"
+   ],
+   "examples": [
+    "遇到无留人话术",
+    "遇到无信任",
+    "遇到逼单生硬",
+    "遇到无异议处理",
+    "遇到重复话术"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "talk-track",
+    "to": "talk-track",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "直播脚本专家"
+}

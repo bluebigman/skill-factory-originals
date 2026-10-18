@@ -1,0 +1,78 @@
+{
+ "name": "mrp-param-tune-pro-2",
+ "version": "2.0.0",
+ "domain": "物料计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "批量规则",
+   "then": "按经济批量与实际包装倍数定批量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常月核",
+   "then": "每月核对参数异常项并修正",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "批量规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常月核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "提前",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分层",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每月",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "参数",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "实测",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "层级",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "均值",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

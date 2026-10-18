@@ -1,0 +1,62 @@
+{
+ "name": "home-organization-coach-1",
+ "version": "2.0.0",
+ "domain": "收纳规则",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "动作结束点设容身位",
+   "then": "玄关放钥匙，不靠自律",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按场景分区",
+   "then": "场景检索比按类别更符合直觉",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "动作结束点设容身位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按场景分区",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "检索",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "按类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "收纳",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "类别",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

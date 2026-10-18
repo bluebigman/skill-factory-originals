@@ -1,0 +1,72 @@
+{
+ "name": "new-product-npi-pro-3",
+ "version": "2.0.0",
+ "domain": "新品导入",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "阶段门评审",
+   "then": "设阶段门，未过不进下一阶段",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样件分级",
+   "then": "样件按验证目的分级",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "爬坡曲线",
+   "then": "产出按爬坡曲线逐段验证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "工艺固化",
+   "then": "转量产前工艺必须固化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "移交清单",
+   "then": "转量产须有移交清单与验收",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "阶段门评审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样件分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "爬坡曲线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "工艺固化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "移交清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "name": "packaging-spec-pro-1",
+ "version": "2.0.0",
+ "domain": "包装规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按运距定级",
+   "then": "按运输方式与距离定防护等级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "跌落堆码",
+   "then": "做跌落与堆码试验验证",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按运距定级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跌落堆码",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

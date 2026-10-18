@@ -1,0 +1,121 @@
+{
+ "name": "vocab",
+ "version": "2.0.0",
+ "domain": "语言学习",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只背词表",
+   "then": "词表脱离语境，须在句子与场景中记",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不复习",
+   "then": "按间隔重复安排复习（1天/3天/7天/30天）",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "追求数量",
+   "then": "以能用为标准，能用的 1000 词胜过认得的 10000 词",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "只看不读",
+   "then": "配合发音记忆，多感官编码提升留存",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无输出",
+   "then": "每记一个新词即造一个句子",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "背单词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记不住",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "遗忘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "词汇量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只背词表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不复习",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "追求数量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只看不读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无输出",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "时段",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "每天",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "长期",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "安排",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理解",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

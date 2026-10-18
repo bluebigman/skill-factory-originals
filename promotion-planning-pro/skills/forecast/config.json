@@ -1,0 +1,121 @@
+{
+ "name": "forecast",
+ "version": "2.0.0",
+ "domain": "促销活动",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "凭感觉",
+   "then": "按历史活动提升比例测算并扣减自然流量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "忽略成本",
+   "then": "必须计入折扣、赠品、物流与平台费用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "乐观偏差",
+   "then": "预估按保守值，实际常低于预期",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无对照",
+   "then": "设对照组或与同期对比，否则无法归因",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "看后即忘",
+   "then": "活动后 3 天内复盘数据并归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预估",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "销量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "测算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "ROI",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭感觉",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "忽略成本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "乐观偏差",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看后即忘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "方案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "无效",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "承诺",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "name": "Promotion Planning Pro",
+ "description": "促销活动专家：促销活动的合规要求；活动效果的测算；促销方案的结构。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/promotion-planning-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/promotion-planning-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "compliance",
+   "name": "促销活动的合规要求",
+   "description": "促销活动的合规要求",
+   "tags": [
+    "合规",
+    "违规",
+    "价格",
+    "宣传"
+   ],
+   "examples": [
+    "遇到虚假比价",
+    "遇到极限词",
+    "遇到赠品",
+    "遇到库存",
+    "遇到规则公示"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "compliance",
+    "to": "compliance",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "forecast",
+   "name": "活动效果的测算",
+   "description": "活动效果的测算",
+   "tags": [
+    "预估",
+    "销量",
+    "测算",
+    "ROI"
+   ],
+   "examples": [
+    "遇到凭感觉",
+    "遇到忽略成本",
+    "遇到乐观偏差",
+    "遇到无对照",
+    "遇到看后即忘"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "forecast",
+    "to": "forecast",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "plan-design",
+   "name": "促销方案的结构",
+   "description": "促销方案的结构",
+   "tags": [
+    "方案",
+    "促销",
+    "活动",
+    "机制"
+   ],
+   "examples": [
+    "遇到无目标",
+    "遇到机制复杂",
+    "遇到无门槛设计",
+    "遇到无止损",
+    "遇到无预案"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "plan-design",
+    "to": "plan-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "促销活动专家"
+}

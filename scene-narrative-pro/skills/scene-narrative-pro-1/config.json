@@ -1,0 +1,72 @@
+{
+ "name": "scene-narrative-pro-1",
+ "version": "2.0.0",
+ "domain": "场景叙事",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "环境讲故事",
+   "then": "用环境细节替代直白对白",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "光线引导",
+   "then": "用光线与色彩引导视线",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "声音铺底",
+   "then": "先用声音建立氛围",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "信息留白",
+   "then": "关键信息留白让玩家推断",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "设定一致",
+   "then": "所有细节须与世界观一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "环境讲故事",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "光线引导",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "声音铺底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息留白",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "设定一致",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

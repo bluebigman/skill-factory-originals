@@ -1,0 +1,99 @@
+{
+ "name": "Office Suite Pro",
+ "description": "excel 公式 ppt：表格数据的整理与分析；常用公式与查找函数；PPT 的结构与呈现。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/office-suite-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/office-suite-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "data-process",
+   "name": "表格数据的整理与分析",
+   "description": "表格数据的整理与分析",
+   "tags": [
+    "数据整理",
+    "透视表",
+    "排序",
+    "筛选"
+   ],
+   "examples": [
+    "遇到原始与计算混放",
+    "遇到硬编码",
+    "遇到重复行",
+    "遇到公式冗长",
+    "遇到版本"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "data-process",
+    "to": "data-process",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "formula",
+   "name": "常用公式与查找函数",
+   "description": "常用公式与查找函数",
+   "tags": [
+    "VLOOKUP",
+    "公式",
+    "查找",
+    "函数"
+   ],
+   "examples": [
+    "遇到查找匹配",
+    "遇到VLOOKUP 报错",
+    "遇到#N/A",
+    "遇到绝对引用",
+    "遇到多条件"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "formula",
+    "to": "formula",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "presentation",
+   "name": "PPT 的结构与呈现",
+   "description": "PPT 的结构与呈现",
+   "tags": [
+    "ppt",
+    "演示",
+    "排版",
+    "汇报"
+   ],
+   "examples": [
+    "遇到文字过多",
+    "遇到无结论页",
+    "遇到配色刺眼",
+    "遇到字号过小",
+    "遇到对齐随意"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "presentation",
+    "to": "presentation",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "excel 公式 ppt"
+}

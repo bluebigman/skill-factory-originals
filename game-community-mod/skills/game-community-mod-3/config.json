@@ -1,0 +1,72 @@
+{
+ "name": "game-community-mod-3",
+ "version": "2.0.0",
+ "domain": "游戏社区",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "规则前置",
+   "then": "规则在入口与发言处可见",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级处罚",
+   "then": "按严重度分级而不是一刀切封禁",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "申诉通道",
+   "then": "提供申诉与复核通道",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "公示案例",
+   "then": "对典型案例做公示",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "工具辅助",
+   "then": "用工具辅助筛查而非全靠人工",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "规则前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级处罚",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "申诉通道",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "公示案例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "工具辅助",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

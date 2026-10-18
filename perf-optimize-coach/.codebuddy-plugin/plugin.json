@@ -1,0 +1,74 @@
+{
+ "name": "perf-optimize-coach",
+ "version": "1.0.0",
+ "plugin": "perf-optimize-coach",
+ "description": "Perf Optimize Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/perf-optimize-coach.md"
+ ],
+ "skills": [
+  "./skills/perf-optimize-coach-1",
+  "./skills/perf-optimize-coach-2",
+  "./skills/perf-optimize-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "perf-optimize-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Perf Optimize Coach",
+  "zh": "性能优化 先测量 找瓶颈"
+ },
+ "profession": {
+  "en": "Perf Optimize Coach",
+  "zh": "性能优化 瓶颈定位 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Perf Optimize Coach tasks end-to-end with built-in professional skills.",
+  "zh": "性能优化 瓶颈定位 顾问：覆盖 先测量、找瓶颈、单点改、看长尾 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "性能优化",
+   "en": "perf-optimize-coach"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到性能优化怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到瓶颈定位怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到性能优化怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "性能优化专家",
+  "to": "性能优化 先测量 找瓶颈",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "data-dict-build-3",
+ "version": "2.0.0",
+ "domain": "数据字典构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "覆盖全字段",
+   "then": "表与字段与枚举全覆盖",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "含类型与含义",
+   "then": "类型长度取值范围",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "负责人",
+   "then": "标注维护人",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变更同步",
+   "then": "结构变更同步更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可检索",
+   "then": "支持按关键词查询",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "覆盖全字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "含类型与含义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "负责人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可检索",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

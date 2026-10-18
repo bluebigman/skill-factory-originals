@@ -1,0 +1,72 @@
+{
+ "name": "requirement-trace-1",
+ "version": "2.0.0",
+ "domain": "需求追踪建表",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "双向可追",
+   "then": "需求到用例到缺陷三者互链",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "状态唯一",
+   "then": "同一需求只有一个当前状态",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "变更记录原因与影响面",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "覆盖率统计",
+   "then": "定期统计需求覆盖率",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "关闭条件",
+   "then": "关闭须有验收证据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "双向可追",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "状态唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖率统计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关闭条件",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

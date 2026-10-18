@@ -1,0 +1,72 @@
+{
+ "name": "cross-border-invoice-pro-1",
+ "version": "2.0.0",
+ "domain": "跨境发票",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "要素齐全",
+   "then": "发票必备要素逐项核对",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "金额一致",
+   "then": "金额与订单及收款一致",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "币种明确",
+   "then": "币种与折算汇率写明",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "抬头一致",
+   "then": "抬头与合同主体一致",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "按主体归档",
+   "then": "按主体与期间归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "要素齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "金额一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "币种明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抬头一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按主体归档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

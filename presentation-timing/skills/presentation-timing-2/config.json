@@ -1,0 +1,72 @@
+{
+ "name": "presentation-timing-2",
+ "version": "2.0.0",
+ "domain": "演示时长控制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按页估算",
+   "then": "每分钟一页为基准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "核心优先",
+   "then": "超时先删非核心页",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "预留问答",
+   "then": "留出问答时间",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "排练计时",
+   "then": "实际排练校验",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "备份版本",
+   "then": "准备长短两版",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按页估算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "核心优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预留问答",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排练计时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "备份版本",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "perf-profile-pro",
+ "version": "1.0.0",
+ "plugin": "perf-profile-pro",
+ "description": "perf-profile-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for perf-profile-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/perf-profile-pro.md"
+ ],
+ "agentName": "perf-profile-pro",
+ "displayName": {
+  "zh": "性能剖析 先测量 热点定位",
+  "en": "perf-profile-pro"
+ },
+ "profession": {
+  "zh": "性能剖析 热点定位 顾问",
+  "en": "perf-profile-pro"
+ },
+ "displayDescription": {
+  "zh": "性能剖析 热点定位 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "perf-profile-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "性能剖析",
+   "en": "perf-profile-pro"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到性能剖析怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划性能剖析",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查性能剖析",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到性能剖析怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/perf-profile-pro-1/",
+  "./skills/perf-profile-pro-2/",
+  "./skills/perf-profile-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "性能剖析专家",
+  "to": "性能剖析 先测量 热点定位",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

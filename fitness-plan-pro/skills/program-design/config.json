@@ -1,0 +1,121 @@
+{
+ "name": "program-design",
+ "version": "2.0.0",
+ "domain": "健身计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无计划",
+   "then": "按周编排并记录负荷，无记录无法渐进超负荷",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "训练过频",
+   "then": "同一肌群间隔 48 小时以上，过频恢复不足",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "只练喜欢的",
+   "then": "推拉腿均衡搭配，偏科会致体态与损伤问题",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无渐进",
+   "then": "每 2 周小幅增加重量或次数，无渐进则无进步",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "有氧过量",
+   "then": "力量与有氧分开时段或间隔 6 小时以上",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "训练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "组数",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "频率",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "训练过频",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只练喜欢的",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无渐进",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "有氧过量",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "安排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "编排",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "保持",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

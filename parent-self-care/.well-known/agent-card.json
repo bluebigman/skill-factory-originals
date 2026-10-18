@@ -1,0 +1,75 @@
+{
+ "name": "Parent Self Care",
+ "description": "家长压力专家：覆盖 允许不完美、留独处时间、求助、情绪出口、专业边界 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/parent-self-care",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/parent-self-care",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "parent-self-care-1",
+   "name": "针对 允许不完美、留独处时间 等情境给出可执行处置",
+   "description": "针对 允许不完美、留独处时间 等情境给出可执行处置",
+   "tags": [
+    "允许不完美",
+    "留独处时间"
+   ],
+   "examples": [
+    "遇到允许不完美",
+    "遇到留独处时间",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "parent-self-care-2",
+   "name": "针对 求助、情绪出口 等情境给出可执行处置",
+   "description": "针对 求助、情绪出口 等情境给出可执行处置",
+   "tags": [
+    "求助",
+    "情绪出口"
+   ],
+   "examples": [
+    "遇到求助",
+    "遇到情绪出口",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "parent-self-care-3",
+   "name": "针对 专业边界 等情境给出可执行处置",
+   "description": "针对 专业边界 等情境给出可执行处置",
+   "tags": [
+    "专业边界"
+   ],
+   "examples": [
+    "遇到专业边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家长压力专家",
+ "x-source": "skill-factory-originals"
+}

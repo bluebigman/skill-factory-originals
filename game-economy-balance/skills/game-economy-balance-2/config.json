@@ -1,0 +1,72 @@
+{
+ "name": "game-economy-balance-2",
+ "version": "2.0.0",
+ "domain": "游戏经济",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定产出",
+   "then": "先定产出速率再定消耗速率",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "通胀监控",
+   "then": "监控货币总量与人均持有增速",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分层验证",
+   "then": "按新手/中层/顶层分别验证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "沙盒试算",
+   "then": "改动前先沙盒模拟跑长期曲线",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "灰度上线",
+   "then": "先小比例灰度再全量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定产出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "通胀监控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沙盒试算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "灰度上线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "supply-chain-scan-1",
+ "version": "2.0.0",
+ "domain": "供应链扫描",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "来源可信",
+   "then": "只用可信来源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "完整性校验",
+   "then": "校验哈希与签名",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "版本锁定",
+   "then": "锁定版本防投毒",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "构建隔离",
+   "then": "构建环境干净",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更审计",
+   "then": "依赖变更审计",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "来源可信",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "完整性校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本锁定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "构建隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更审计",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

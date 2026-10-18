@@ -1,0 +1,78 @@
+{
+ "name": "shop-review-coach-2",
+ "version": "2.0.0",
+ "domain": "店铺数据",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看 7 日均值",
+   "then": "单日不构成趋势",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "对照组",
+   "then": "与上周同期比",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看 7 日均值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对照组",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "趋势",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "点击",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "同期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "详情",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "单日",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "主图",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

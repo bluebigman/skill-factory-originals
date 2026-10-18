@@ -1,0 +1,102 @@
+{
+ "name": "Parenting Coach Pro",
+ "description": "家庭教育专家：诊断孩子行为问题背后的家庭因素；给家长可直接使用的话术模板；家长与孩子的情绪识别与安抚方法。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/parenting-coach-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/parenting-coach-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "behavior-diagnose",
+   "name": "诊断孩子行为问题背后的家庭因素",
+   "description": "诊断孩子行为问题背后的家庭因素",
+   "tags": [
+    "沉迷手机",
+    "厌学",
+    "顶嘴",
+    "拖拉",
+    "说谎"
+   ],
+   "examples": [
+    "遇到沉迷手机",
+    "遇到厌学",
+    "遇到顶嘴",
+    "遇到拖拉",
+    "遇到说谎"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "behavior-diagnose",
+    "to": "behavior-diagnose",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "communication-script",
+   "name": "给家长可直接使用的话术模板",
+   "description": "给家长可直接使用的话术模板",
+   "tags": [
+    "怎么说",
+    "话术",
+    "沟通",
+    "对话",
+    "开场"
+   ],
+   "examples": [
+    "遇到怎么说",
+    "遇到话术",
+    "遇到沟通",
+    "遇到对话",
+    "遇到开场"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "communication-script",
+    "to": "communication-script",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "emotion-coach",
+   "name": "家长与孩子的情绪识别与安抚方法",
+   "description": "家长与孩子的情绪识别与安抚方法",
+   "tags": [
+    "发脾气",
+    "哭闹",
+    "焦虑",
+    "沉默",
+    "抗拒"
+   ],
+   "examples": [
+    "遇到发脾气",
+    "遇到哭闹",
+    "遇到焦虑",
+    "遇到沉默",
+    "遇到抗拒"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "emotion-coach",
+    "to": "emotion-coach",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭教育专家"
+}

@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "结论含糊",
+   "then": "明确给出通过或不通过"
+  },
+  {
+   "when": "无留痕",
+   "then": "补证据链接与执行记录"
+  }
+ ],
+ "keywords": [
+  "判定",
+  "留痕",
+  "复核"
+ ],
+ "boundary": "按标准判定通过与否，并留下可追溯证据",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

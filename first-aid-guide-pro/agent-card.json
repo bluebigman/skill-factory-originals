@@ -1,0 +1,107 @@
+{
+ "name": "First Aid Guide Pro",
+ "description": "家庭急救专家：必须立即就医的警示信号；家庭常见意外的初步处理；家庭急救物资与知识储备。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/first-aid-guide-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/first-aid-guide-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "call-boundary",
+   "name": "必须立即就医的警示信号",
+   "description": "必须立即就医的警示信号",
+   "tags": [
+    "何时就医",
+    "昏迷",
+    "呼吸困难",
+    "急症"
+   ],
+   "examples": [
+    "遇到意识改变",
+    "遇到呼吸循环",
+    "遇到中毒",
+    "遇到高热",
+    "遇到本工具边界"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "call-boundary",
+    "to": "call-boundary",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "common-response",
+   "name": "家庭常见意外的初步处理",
+   "description": "家庭常见意外的初步处理",
+   "tags": [
+    "烫伤",
+    "割伤",
+    "扭伤",
+    "流鼻血"
+   ],
+   "examples": [
+    "遇到烫伤",
+    "遇到割伤",
+    "遇到扭伤",
+    "遇到流鼻血",
+    "遇到异物卡喉"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "common-response",
+    "to": "common-response",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "kit-prep",
+   "name": "家庭急救物资与知识储备",
+   "description": "家庭急救物资与知识储备",
+   "tags": [
+    "急救箱",
+    "物资",
+    "准备",
+    "应急"
+   ],
+   "examples": [
+    "遇到物资缺失",
+    "遇到过期未查",
+    "遇到位置不便",
+    "遇到知识空白",
+    "遇到信息卡"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "kit-prep",
+    "to": "kit-prep",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭急救专家",
+ "x-source": "skill-factory-originals"
+}

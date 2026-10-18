@@ -1,0 +1,50 @@
+{
+ "name": "db-schema-review-1",
+ "version": "2.0.0",
+ "domain": "数据库设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字段可空",
+   "then": "能设为不可空的字段就不要可空",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "索引有据",
+   "then": "每个索引都要说出对应哪个查询",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字段可空",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引有据",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

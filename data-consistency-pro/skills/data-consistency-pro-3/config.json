@@ -1,0 +1,72 @@
+{
+ "name": "data-consistency-pro-3",
+ "version": "2.0.0",
+ "domain": "数据一致",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单一真值",
+   "then": "明确哪份是主数据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "多源校验",
+   "then": "关键数据多源比对",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "冲突策略",
+   "then": "冲突时的取舍规则",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "同步延迟",
+   "then": "容忍同步延迟窗口",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "一致性可测",
+   "then": "一致性可度量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单一真值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多源校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "同步延迟",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一致性可测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

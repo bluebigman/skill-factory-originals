@@ -1,0 +1,121 @@
+{
+ "name": "speaking",
+ "version": "2.0.0",
+ "domain": "语言学习",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "怕说错",
+   "then": "先求流利再求正确，纠错过度会阻断开口",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无环境",
+   "then": "影子跟读（跟读原声并同步）是最低成本的训练法",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "只在脑内",
+   "then": "必须出声，默读无法建立发音肌肉记忆",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无复盘",
+   "then": "录音回听并标记卡点，无复盘进步缓慢",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "频率",
+   "then": "每天 15 分钟胜过每周 2 小时，频率优先",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口语",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开口",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "发音",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "练习",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "怕说错",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无环境",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只在脑内",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "频率",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

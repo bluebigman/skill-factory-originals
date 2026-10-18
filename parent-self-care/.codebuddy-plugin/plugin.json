@@ -1,0 +1,74 @@
+{
+ "name": "parent-self-care",
+ "version": "1.0.0",
+ "plugin": "parent-self-care",
+ "description": "Parent Self Care for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/parent-self-care.md"
+ ],
+ "skills": [
+  "./skills/parent-self-care-1",
+  "./skills/parent-self-care-2",
+  "./skills/parent-self-care-3"
+ ],
+ "expertType": "agent",
+ "agentName": "parent-self-care",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Parent Self Care",
+  "zh": "家长压力 允许不完美"
+ },
+ "profession": {
+  "en": "Parent Self Care",
+  "zh": "家长压力 自我照顾 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Parent Self Care tasks end-to-end with built-in professional skills.",
+  "zh": "家长压力 自我照顾 教练：覆盖 允许不完美、留独处时间、求助 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "允许不完美"
+  },
+  {
+   "en": "practical capability",
+   "zh": "留独处时间"
+  },
+  {
+   "en": "practical capability",
+   "zh": "求助"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到允许不完美怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到留独处时间怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到求助怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到允许不完美怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "家长压力专家",
+  "to": "家长压力 允许不完美",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

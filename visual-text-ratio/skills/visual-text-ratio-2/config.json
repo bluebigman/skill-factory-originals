@@ -1,0 +1,78 @@
+{
+ "name": "visual-text-ratio-2",
+ "version": "2.0.0",
+ "domain": "图文配比",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "留白优先",
+   "then": "段间距大于行距，阅读更顺",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "重点突出",
+   "then": "每屏只突出一个重点",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "留白优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重点突出",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文字",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "疲劳",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "三段",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "排版",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

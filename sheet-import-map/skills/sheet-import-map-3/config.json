@@ -1,0 +1,61 @@
+{
+ "name": "sheet-import-map-3",
+ "version": "2.0.0",
+ "domain": "表格导入",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "幂等导入",
+   "then": "设计可重复导入而不重复计数",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "幂等导入",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "单独",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "留存",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "先看",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "前确认",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

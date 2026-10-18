@@ -1,0 +1,72 @@
+{
+ "name": "article-extract-clean-3",
+ "version": "2.0.0",
+ "domain": "网页正文提取",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "去噪优先",
+   "then": "剥离导航广告与评论区",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保留结构",
+   "then": "保留标题与段落层级",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "元数据附带",
+   "then": "标题作者时间一并给出",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "来源标注",
+   "then": "附原文链接",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "失败可读",
+   "then": "无法提取时说明原因",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "去噪优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "元数据附带",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败可读",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

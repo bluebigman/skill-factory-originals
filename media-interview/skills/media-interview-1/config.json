@@ -1,0 +1,72 @@
+{
+ "name": "media-interview-1",
+ "version": "2.0.0",
+ "domain": "媒体沟通",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "口径统一",
+   "then": "对外口径统一",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "事实清晰",
+   "then": "只讲事实",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "边界明确",
+   "then": "不越权表态",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "预案准备",
+   "then": "预设问题准备",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "沟通记录留存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口径统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "事实清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预案准备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

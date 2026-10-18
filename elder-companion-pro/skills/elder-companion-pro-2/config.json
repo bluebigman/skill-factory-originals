@@ -1,0 +1,78 @@
+{
+ "name": "elder-companion-pro-2",
+ "version": "2.0.0",
+ "domain": "独居老人",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "居家安全",
+   "then": "优先地面防滑与夜间照明",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "用药提醒",
+   "then": "分装药盒按日配好，优于口头提醒",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "居家安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用药提醒",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "时段",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "口头",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日常",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "失效",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "sop-compliance-check-2",
+ "version": "2.0.0",
+ "domain": "流程合规",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "步骤核验",
+   "then": "逐步骤核对执行情况",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "偏差记录",
+   "then": "偏差必须记录",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "预警机制",
+   "then": "偏离即预警",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "例外管理",
+   "then": "例外须审批",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "改进闭环",
+   "then": "偏差须改进",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "步骤核验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "偏差记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预警机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "例外管理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改进闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

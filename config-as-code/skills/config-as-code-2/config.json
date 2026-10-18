@@ -1,0 +1,72 @@
+{
+ "name": "config-as-code-2",
+ "version": "2.0.0",
+ "domain": "配置即代码",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "配置入库",
+   "then": "配置纳入版本管理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "环境分离",
+   "then": "各环境配置分离",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "敏感外置",
+   "then": "密钥走密钥管理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变更评审",
+   "then": "配置变更走评审",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回滚可行",
+   "then": "配置可快速回滚",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "配置入库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境分离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感外置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更评审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回滚可行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Warehouse Slot Pro",
+ "description": "仓储布局专家：覆盖 动线优先、ABC 分区 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/warehouse-slot-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/warehouse-slot-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "warehouse-slot-pro-1",
+   "name": "针对 动线优先、ABC 分区 等情境给出可执行处置",
+   "description": "针对 动线优先、ABC 分区 等情境给出可执行处置",
+   "tags": [
+    "动线优先",
+    "ABC 分区"
+   ],
+   "examples": [
+    "遇到动线优先",
+    "遇到ABC 分区",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "warehouse-slot-pro-2",
+   "name": "针对 路径合并、循环盘点 等情境给出可执行处置",
+   "description": "针对 路径合并、循环盘点 等情境给出可执行处置",
+   "tags": [
+    "路径合并",
+    "循环盘点"
+   ],
+   "examples": [
+    "遇到路径合并",
+    "遇到循环盘点",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "warehouse-slot-pro-3",
+   "name": "针对 标识唯一 等情境给出可执行处置",
+   "description": "针对 标识唯一 等情境给出可执行处置",
+   "tags": [
+    "标识唯一"
+   ],
+   "examples": [
+    "遇到标识唯一",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "仓储布局专家",
+ "x-source": "skill-factory-originals"
+}

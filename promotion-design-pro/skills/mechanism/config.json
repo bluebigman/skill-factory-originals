@@ -1,0 +1,121 @@
+{
+ "name": "mechanism",
+ "version": "2.0.0",
+ "domain": "活动方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无目标",
+   "then": "先定目标（清库存/拉新/提客单），目标不同机制完全不同",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "规则复杂",
+   "then": "规则不超两层，复杂规则会降低参与率",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "门槛失当",
+   "then": "满减门槛按客单价上浮 10-20% 设置",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无止损",
+   "then": "设预算上限与止损线，无止损的活动可能亏损",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "虚假比价",
+   "then": "划线价须真实可查，虚假比价属价格欺诈",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "优惠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "满减",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "折扣",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则复杂",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "门槛失当",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无止损",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "虚假比价",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "上限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

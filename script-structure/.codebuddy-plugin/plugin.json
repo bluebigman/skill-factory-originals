@@ -1,0 +1,74 @@
+{
+ "name": "script-structure",
+ "version": "1.0.0",
+ "plugin": "script-structure",
+ "description": "Script Structure for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/script-structure.md"
+ ],
+ "skills": [
+  "./skills/script-structure-1",
+  "./skills/script-structure-2",
+  "./skills/script-structure-3"
+ ],
+ "expertType": "agent",
+ "agentName": "script-structure",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Script Structure",
+  "zh": "脚本结构 开头给钩子 单点展开"
+ },
+ "profession": {
+  "en": "Script Structure",
+  "zh": "脚本结构 节奏设计 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Script Structure tasks end-to-end with built-in professional skills.",
+  "zh": "脚本结构 节奏设计 顾问：覆盖 开头给钩子、单点展开 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "脚本结构",
+   "en": "script-structure"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到脚本结构怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到节奏设计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到脚本结构怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:49",
+  "from": "脚本结构专家",
+  "to": "脚本结构 开头给钩子 单点展开",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

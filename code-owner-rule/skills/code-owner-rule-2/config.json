@@ -1,0 +1,72 @@
+{
+ "name": "code-owner-rule-2",
+ "version": "2.0.0",
+ "domain": "代码归属规则",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目录归属",
+   "then": "按目录指定负责人",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "评审必需",
+   "then": "关键目录变更需评审",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "变更通知",
+   "then": "变更自动通知归属人",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "归属更新",
+   "then": "人员变动及时更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "例外记录",
+   "then": "例外情况记录说明",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目录归属",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "评审必需",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更通知",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归属更新",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "例外记录",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

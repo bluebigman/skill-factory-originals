@@ -1,0 +1,74 @@
+{
+ "name": "packaging-spec-pro",
+ "version": "1.0.0",
+ "plugin": "packaging-spec-pro",
+ "description": "Packaging Spec Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/packaging-spec-pro.md"
+ ],
+ "skills": [
+  "./skills/packaging-spec-pro-1",
+  "./skills/packaging-spec-pro-2",
+  "./skills/packaging-spec-pro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "packaging-spec-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Packaging Spec Pro",
+  "zh": "包装规范 按运距定级 跌落堆码"
+ },
+ "profession": {
+  "en": "Packaging Spec Pro",
+  "zh": "包装规范 运输防护 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Packaging Spec Pro tasks end-to-end with built-in professional skills.",
+  "zh": "包装规范 运输防护 顾问：覆盖 按运距定级、跌落堆码、材料匹配 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "包装规范",
+   "en": "packaging-spec-pro"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到包装规范怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到运输防护怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到包装规范怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "包装规范专家",
+  "to": "包装规范 按运距定级 跌落堆码",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "name": "language-learning-pro",
+ "version": "1.0.0",
+ "plugin": "language-learning-pro",
+ "description": "Language Learning Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/language-learning-pro.md"
+ ],
+ "skills": [
+  "./skills/input",
+  "./skills/speaking",
+  "./skills/vocab"
+ ],
+ "expertType": "agent",
+ "agentName": "language-learning-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Language Learning Pro",
+  "zh": "语言学习 材料过难 无字幕"
+ },
+ "profession": {
+  "en": "Language Learning Pro",
+  "zh": "语言学习 记忆方法 口语练习"
+ },
+ "displayDescription": {
+  "en": "Handles Language Learning Pro tasks end-to-end with built-in professional skills.",
+  "zh": "语言学习 记忆方法 口语练习：可理解输入的组织；口语的可执行练习法；词汇的高效记忆方法。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "材料过难"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无字幕"
+  },
+  {
+   "en": "practical capability",
+   "zh": "只输入不输出"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到材料过难怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无字幕怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只输入不输出怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到材料过难怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "语言学习专家",
+  "to": "语言学习 材料过难 无字幕",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

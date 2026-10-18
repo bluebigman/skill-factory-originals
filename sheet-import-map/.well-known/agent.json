@@ -1,0 +1,67 @@
+{
+ "name": "Sheet Import Map",
+ "description": "表格导入专家：覆盖 先看头、映射表、编码统一、脏数据隔离、幂等导入 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/sheet-import-map",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/sheet-import-map",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "sheet-import-map-1",
+   "name": "针对 先看头、映射表 等情境给出可执行处置",
+   "description": "针对 先看头、映射表 等情境给出可执行处置",
+   "tags": [
+    "先看头",
+    "映射表"
+   ],
+   "examples": [
+    "遇到先看头",
+    "遇到映射表",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sheet-import-map-2",
+   "name": "针对 编码统一、脏数据隔离 等情境给出可执行处置",
+   "description": "针对 编码统一、脏数据隔离 等情境给出可执行处置",
+   "tags": [
+    "编码统一",
+    "脏数据隔离"
+   ],
+   "examples": [
+    "遇到编码统一",
+    "遇到脏数据隔离",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sheet-import-map-3",
+   "name": "针对 幂等导入 等情境给出可执行处置",
+   "description": "针对 幂等导入 等情境给出可执行处置",
+   "tags": [
+    "幂等导入"
+   ],
+   "examples": [
+    "遇到幂等导入",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "表格导入专家"
+}

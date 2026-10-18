@@ -1,0 +1,72 @@
+{
+ "name": "growth-dashboard-3",
+ "version": "2.0.0",
+ "domain": "增长看板",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "指标分层",
+   "then": "设北极星指标与过程指标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "口径文档",
+   "then": "口径写入文档统一维护",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "自动采集",
+   "then": "尽量自动采集减少人工",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常告警",
+   "then": "设置阈值告警",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "定期复核指标是否仍有效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "指标分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径文档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自动采集",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "quality-check",
+ "version": "2.0.0",
+ "domain": "搜索排名",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "抄袭",
+   "then": "复制内容无效且有害，必须原创或深度改写",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无深度",
+   "then": "内容须超过竞品的信息增量，同质化无排名",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标题与内容不符",
+   "then": "标题党会被降低质量评分",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "移动体验",
+   "then": "按移动端阅读习惯排版（短段、多小标题）",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "数据过时",
+   "then": "引用数据须标年份与出处，过时数据会损害可信度",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "原创",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用户体验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抄袭",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无深度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题与内容不符",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "移动体验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据过时",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表达",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "堆砌",
+   "source": "SKILL.md#L37"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

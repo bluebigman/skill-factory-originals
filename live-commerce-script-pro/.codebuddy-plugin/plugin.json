@@ -1,0 +1,74 @@
+{
+ "name": "live-commerce-script-pro",
+ "version": "1.0.0",
+ "plugin": "live-commerce-script-pro",
+ "description": "Live Commerce Script Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/live-commerce-script-pro.md"
+ ],
+ "skills": [
+  "./skills/live-flow",
+  "./skills/sell-talk",
+  "./skills/service-reply"
+ ],
+ "expertType": "agent",
+ "agentName": "live-commerce-script-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Live Commerce Script Pro",
+  "zh": "直播话术 无流程 开场弱"
+ },
+ "profession": {
+  "en": "Live Commerce Script Pro",
+  "zh": "直播话术 带货文案 客服话术"
+ },
+ "displayDescription": {
+  "en": "Handles Live Commerce Script Pro tasks end-to-end with built-in professional skills.",
+  "zh": "直播话术 带货文案 客服话术：直播脚本的流程与节奏；转化话术的组织；售前售后的话术库。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "无流程"
+  },
+  {
+   "en": "practical capability",
+   "zh": "开场弱"
+  },
+  {
+   "en": "practical capability",
+   "zh": "讲品冗长"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无流程怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到开场弱怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到讲品冗长怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到无流程怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "直播话术专家",
+  "to": "直播话术 无流程 开场弱",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

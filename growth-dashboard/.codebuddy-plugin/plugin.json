@@ -1,0 +1,74 @@
+{
+ "name": "growth-dashboard",
+ "version": "1.0.0",
+ "plugin": "growth-dashboard",
+ "description": "growth-dashboard — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for growth-dashboard tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/growth-dashboard.md"
+ ],
+ "agentName": "growth-dashboard",
+ "displayName": {
+  "zh": "增长看板 指标分层 口径文档",
+  "en": "growth-dashboard"
+ },
+ "profession": {
+  "zh": "增长看板 指标搭建 顾问",
+  "en": "growth-dashboard"
+ },
+ "displayDescription": {
+  "zh": "增长看板 指标搭建 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "growth-dashboard: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "增长看板",
+   "en": "growth-dashboard"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到增长看板怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划增长看板",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查增长看板",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到增长看板怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/growth-dashboard-1",
+  "./skills/growth-dashboard-2",
+  "./skills/growth-dashboard-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "增长看板专家",
+  "to": "增长看板 指标分层 口径文档",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

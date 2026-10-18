@@ -1,0 +1,121 @@
+{
+ "name": "content-curation",
+ "version": "2.0.0",
+ "domain": "屏幕时间",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "短视频刷不停",
+   "then": "改为选集播放（关闭自动连播），从机制上断开无限流",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "游戏沉迷",
+   "then": "先了解游戏提供的满足（成就感/社交），再补真实替代",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "内容不适龄",
+   "then": "用共同观看替代审查式拦截，边看边聊建立判断力",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "算法推荐",
+   "then": "主动搜索替代被动推荐，训练目标式使用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "广告诱导",
+   "then": "与孩子约定遇内购先截图给家长，不即时决策",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "内容筛选",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "适龄",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "短视频",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "游戏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "短视频刷不停",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "游戏沉迷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "内容不适龄",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "算法推荐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "广告诱导",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "孩子",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家长",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "建立",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

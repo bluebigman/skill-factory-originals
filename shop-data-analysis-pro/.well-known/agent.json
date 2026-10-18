@@ -1,0 +1,99 @@
+{
+ "name": "Shop Data Analysis Pro",
+ "description": "店铺数据分析专家：数据异常的原因定位；漏斗各环节的分析；周期性经营复盘。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/shop-data-analysis-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/shop-data-analysis-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "diagnose",
+   "name": "数据异常的原因定位",
+   "description": "数据异常的原因定位",
+   "tags": [
+    "数据异常",
+    "下滑",
+    "波动",
+    "诊断"
+   ],
+   "examples": [
+    "遇到单日波动",
+    "遇到归因单一",
+    "遇到对比缺失",
+    "遇到样本过小",
+    "遇到外部因素"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "diagnose",
+    "to": "diagnose",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "funnel",
+   "name": "漏斗各环节的分析",
+   "description": "漏斗各环节的分析",
+   "tags": [
+    "转化率",
+    "漏斗",
+    "流量",
+    "跳失"
+   ],
+   "examples": [
+    "遇到只看成交",
+    "遇到流量问题",
+    "遇到转化问题",
+    "遇到跳失高",
+    "遇到口径"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "funnel",
+    "to": "funnel",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "review",
+   "name": "周期性经营复盘",
+   "description": "周期性经营复盘",
+   "tags": [
+    "复盘",
+    "经营",
+    "调整",
+    "策略"
+   ],
+   "examples": [
+    "遇到无节奏",
+    "遇到只报数据",
+    "遇到动作过多",
+    "遇到不看竞品",
+    "遇到长期"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "review",
+    "to": "review",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "店铺数据分析专家"
+}

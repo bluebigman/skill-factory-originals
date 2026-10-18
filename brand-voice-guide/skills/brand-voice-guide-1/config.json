@@ -1,0 +1,72 @@
+{
+ "name": "brand-voice-guide-1",
+ "version": "2.0.0",
+ "domain": "品牌语气",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "三词定义",
+   "then": "用三个词定义品牌语气",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "正反示例",
+   "then": "每个场景配正反例",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "禁用清单",
+   "then": "列出禁用表达与口吻",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "跨渠道一致",
+   "then": "各渠道保持一致",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "按反馈校准",
+   "then": "按受众反馈定期校准",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "三词定义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "正反示例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "禁用清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跨渠道一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按反馈校准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "threat-model-2",
+ "version": "2.0.0",
+ "domain": "威胁建模",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "资产识别",
+   "then": "先列资产",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "威胁枚举",
+   "then": "按类别枚举威胁",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "风险评估",
+   "then": "评估可能性与影响",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "控制措施",
+   "then": "给对应控制",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期更新",
+   "then": "架构变更后更新",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "资产识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "威胁枚举",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险评估",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "控制措施",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

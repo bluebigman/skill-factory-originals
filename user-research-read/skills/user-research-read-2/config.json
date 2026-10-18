@@ -1,0 +1,74 @@
+{
+ "name": "user-research-read-2",
+ "version": "2.0.0",
+ "domain": "用户调研",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "追问具体",
+   "then": "遇到模糊回答追问到具体场景与数字",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样本分层",
+   "then": "覆盖重度/轻度/流失三类用户",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "追问具体",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样本分层",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "重度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流失",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "数字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "三类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回答",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "占比",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "超三",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

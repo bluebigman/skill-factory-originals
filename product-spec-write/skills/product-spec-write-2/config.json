@@ -1,0 +1,78 @@
+{
+ "name": "product-spec-write-2",
+ "version": "2.0.0",
+ "domain": "产品需求",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "边界显式",
+   "then": "明确写出不做什么，比写做什么更能防返工",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "用户语言",
+   "then": "需求描述用用户能懂的话，术语另附词汇表",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "边界显式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用户语言",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "每条",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "判定",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "写清",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "验收",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "产品",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "文档",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

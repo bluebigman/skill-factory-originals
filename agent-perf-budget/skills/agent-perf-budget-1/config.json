@@ -1,0 +1,72 @@
+{
+ "name": "agent-perf-budget-1",
+ "version": "2.0.0",
+ "domain": "性能预算",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "预算预设",
+   "then": "预设性能预算",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "超预算告警",
+   "then": "超标即告警",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "优化排序",
+   "then": "按收益排序",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回归基线",
+   "then": "建立性能基线",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "防劣化",
+   "then": "变更须过性能门",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预算预设",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超预算告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优化排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归基线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防劣化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

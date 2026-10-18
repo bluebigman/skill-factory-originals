@@ -1,0 +1,74 @@
+{
+ "name": "doc-redact-review",
+ "version": "1.0.0",
+ "plugin": "doc-redact-review",
+ "description": "doc-redact-review — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for doc-redact-review tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/doc-redact-review.md"
+ ],
+ "agentName": "doc-redact-review",
+ "displayName": {
+  "zh": "文档脱敏审阅 先识别 分级处理",
+  "en": "doc-redact-review"
+ },
+ "profession": {
+  "zh": "文档脱敏审阅 顾问",
+  "en": "doc-redact-review"
+ },
+ "displayDescription": {
+  "zh": "文档脱敏审阅 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "doc-redact-review: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "文档脱敏审阅",
+   "en": "doc-redact-review"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到文档脱敏审阅怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划文档脱敏审阅",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查文档脱敏审阅",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到文档脱敏审阅怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/doc-redact-review-1",
+  "./skills/doc-redact-review-2",
+  "./skills/doc-redact-review-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:36",
+  "from": "文档脱敏审阅专家",
+  "to": "文档脱敏审阅 先识别 分级处理",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

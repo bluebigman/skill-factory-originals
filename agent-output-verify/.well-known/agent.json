@@ -1,0 +1,75 @@
+{
+ "name": "Agent Output Verification",
+ "description": "输出验证专家：覆盖 无来源断言、数字不可核 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/agent-output-verify",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/agent-output-verify",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "agent-output-verify-1",
+   "name": "针对 无来源断言、数字不可核 等情境给出可执行处置",
+   "description": "针对 无来源断言、数字不可核 等情境给出可执行处置",
+   "tags": [
+    "无来源断言",
+    "数字不可核",
+    "结论先行"
+   ],
+   "examples": [
+    "遇到无来源断言",
+    "遇到数字不可核",
+    "遇到结论先行",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-output-verify-2",
+   "name": "针对 编造引用、细节过度具体 等情境给出可执行处置",
+   "description": "针对 编造引用、细节过度具体 等情境给出可执行处置",
+   "tags": [
+    "编造引用",
+    "细节过度具体",
+    "自相矛盾"
+   ],
+   "examples": [
+    "遇到编造引用",
+    "遇到细节过度具体",
+    "遇到自相矛盾",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-output-verify-3",
+   "name": "针对 一刀切确信、回避不确定性 等情境给出可执行处置",
+   "description": "针对 一刀切确信、回避不确定性 等情境给出可执行处置",
+   "tags": [
+    "一刀切确信",
+    "回避不确定性",
+    "幸存者偏差"
+   ],
+   "examples": [
+    "遇到一刀切确信",
+    "遇到回避不确定性",
+    "遇到幸存者偏差",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "输出验证专家"
+}

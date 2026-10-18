@@ -1,0 +1,74 @@
+{
+ "name": "screen-time-manager",
+ "version": "1.0.0",
+ "plugin": "screen-time-manager",
+ "description": "Screen Time Manager for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/screen-time-manager.md"
+ ],
+ "skills": [
+  "./skills/content-curation",
+  "./skills/rule-design",
+  "./skills/withdraw-plan"
+ ],
+ "expertType": "agent",
+ "agentName": "screen-time-manager",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Screen Time Manager",
+  "zh": "屏幕时间 短视频刷不停"
+ },
+ "profession": {
+  "en": "Screen Time Manager",
+  "zh": "屏幕时间 手机管理 家庭规则"
+ },
+ "displayDescription": {
+  "en": "Handles Screen Time Manager tasks end-to-end with built-in professional skills.",
+  "zh": "屏幕时间 手机管理 家庭规则：判断哪些内容适合孩子看；家庭屏幕使用规则的制定与达成。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "短视频刷不停"
+  },
+  {
+   "en": "practical capability",
+   "zh": "游戏沉迷"
+  },
+  {
+   "en": "practical capability",
+   "zh": "内容不适龄"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到短视频刷不停怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到游戏沉迷怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到内容不适龄怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到短视频刷不停怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:49",
+  "from": "屏幕时间专家",
+  "to": "屏幕时间 短视频刷不停",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

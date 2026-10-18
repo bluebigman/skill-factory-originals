@@ -1,0 +1,74 @@
+{
+ "name": "doc-retrieval-eval",
+ "version": "1.0.0",
+ "plugin": "doc-retrieval-eval",
+ "description": "doc-retrieval-eval — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for doc-retrieval-eval tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/doc-retrieval-eval.md"
+ ],
+ "agentName": "doc-retrieval-eval",
+ "displayName": {
+  "zh": "检索效果评测 评测集 指标",
+  "en": "doc-retrieval-eval"
+ },
+ "profession": {
+  "zh": "检索效果评测 顾问",
+  "en": "doc-retrieval-eval"
+ },
+ "displayDescription": {
+  "zh": "检索效果评测 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "doc-retrieval-eval: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "检索效果评测",
+   "en": "doc-retrieval-eval"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到检索效果评测怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划检索效果评测",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查检索效果评测",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到检索效果评测怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/doc-retrieval-eval-1",
+  "./skills/doc-retrieval-eval-2",
+  "./skills/doc-retrieval-eval-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:36",
+  "from": "检索效果评测专家",
+  "to": "检索效果评测 评测集 指标",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,70 @@
+{
+ "name": "live-stream-plan-2",
+ "version": "2.0.0",
+ "domain": "直播带货",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "价格口径",
+   "then": "一口价与实际成交必须一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "合规红线",
+   "then": "绝对化用语与功效宣称禁用",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "价格口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规红线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "禁用",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "话术",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "功效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "效宣称",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

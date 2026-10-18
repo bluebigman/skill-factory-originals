@@ -1,0 +1,121 @@
+{
+ "name": "kit-prep",
+ "version": "2.0.0",
+ "domain": "家庭急救",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "物资缺失",
+   "then": "基础箱：创可贴/纱布/消毒液/绷带/体温计/手套/剪刀",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "过期未查",
+   "then": "每半年检查一次有效期并补齐，过期物资等于没有",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "位置不便",
+   "then": "急救箱放固定且全家知晓的位置，分散存放等于没有",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "知识空白",
+   "then": "家庭成员至少一人完成正规急救培训",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "信息卡",
+   "then": "冰箱贴留存紧急联系人、过敏史与常用药清单",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "急救箱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "物资",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "应急",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "物资缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过期未查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "位置不便",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "知识空白",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息卡",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "就医",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "本工",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "留存",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "data-destruction",
+ "version": "1.0.0",
+ "plugin": "data-destruction",
+ "description": "data-destruction — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for data-destruction tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/data-destruction.md"
+ ],
+ "agentName": "data-destruction",
+ "displayName": {
+  "zh": "数据销毁规范 按级销毁",
+  "en": "data-destruction"
+ },
+ "profession": {
+  "zh": "数据销毁规范 顾问",
+  "en": "data-destruction"
+ },
+ "displayDescription": {
+  "zh": "数据销毁规范 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "data-destruction: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据销毁规范",
+   "en": "data-destruction"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到数据销毁规范怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划数据销毁规范",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查数据销毁规范",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到数据销毁规范怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/data-destruction-1/",
+  "./skills/data-destruction-2/",
+  "./skills/data-destruction-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:33",
+  "from": "数据销毁规范专家",
+  "to": "数据销毁规范 按级销毁",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

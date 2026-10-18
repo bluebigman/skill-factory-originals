@@ -1,0 +1,72 @@
+{
+ "name": "sales-territory-pro-3",
+ "version": "2.0.0",
+ "domain": "区域划分",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "潜力均衡",
+   "then": "按市场潜力而非人数划分",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "规则稳定",
+   "then": "划分规则年度内保持稳定",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "归属规则",
+   "then": "明确交叉线索的归属规则",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "覆盖密度",
+   "then": "评估覆盖密度并补盲区",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "数据调整",
+   "then": "按数据定期小幅调整",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "潜力均衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则稳定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归属规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖密度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据调整",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

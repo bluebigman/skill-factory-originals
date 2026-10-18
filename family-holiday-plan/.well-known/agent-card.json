@@ -1,0 +1,75 @@
+{
+ "name": "Family Holiday Plan",
+ "description": "假期安排专家：覆盖 作息不崩、平衡安排、共同定计划、限屏、留白 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/family-holiday-plan",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-holiday-plan",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "family-holiday-plan-1",
+   "name": "针对 作息不崩、平衡安排 等情境给出可执行处置",
+   "description": "针对 作息不崩、平衡安排 等情境给出可执行处置",
+   "tags": [
+    "作息不崩",
+    "平衡安排"
+   ],
+   "examples": [
+    "遇到作息不崩",
+    "遇到平衡安排",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-holiday-plan-2",
+   "name": "针对 共同定计划、限屏 等情境给出可执行处置",
+   "description": "针对 共同定计划、限屏 等情境给出可执行处置",
+   "tags": [
+    "共同定计划",
+    "限屏"
+   ],
+   "examples": [
+    "遇到共同定计划",
+    "遇到限屏",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-holiday-plan-3",
+   "name": "针对 留白 等情境给出可执行处置",
+   "description": "针对 留白 等情境给出可执行处置",
+   "tags": [
+    "留白"
+   ],
+   "examples": [
+    "遇到留白",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "假期安排专家",
+ "x-source": "skill-factory-originals"
+}

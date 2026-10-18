@@ -1,0 +1,63 @@
+{
+ "name": "Acceptance Criteria",
+ "description": "可测量、写清边界、前置确认",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/forge-demo-acceptance",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/forge-demo-acceptance",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "forge-demo-acceptance-1",
+   "name": "验收标准制定",
+   "description": "验收标准制定：可测量、写清边界、前置确认",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "forge-demo-acceptance-2",
+   "name": "验收用例编写",
+   "description": "验收用例编写：可测量、写清边界、前置确认",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "forge-demo-acceptance-3",
+   "name": "验收结果判定",
+   "description": "验收结果判定：可测量、写清边界、前置确认",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

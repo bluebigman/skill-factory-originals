@@ -1,0 +1,87 @@
+{
+ "name": "multi-agent-orchestrate-3",
+ "version": "2.0.0",
+ "domain": "多智能体",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单点拖垮全局",
+   "then": "成员失败不得阻塞全局，须有超时与兜底路径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "错误传染",
+   "then": "成员输出的可信度分层，未验证的不得直接下游使用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无兜底",
+   "then": "关键环节必须有降级方案，禁止「全都成功才行」",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单点拖垮全局",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误传染",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "混乱",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "分层",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "pdf-table-extract",
+ "version": "1.0.0",
+ "plugin": "pdf-table-extract",
+ "description": "Pdf Table Extract for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/pdf-table-extract.md"
+ ],
+ "skills": [
+  "./skills/pdf-table-extract-1",
+  "./skills/pdf-table-extract-2",
+  "./skills/pdf-table-extract-3"
+ ],
+ "expertType": "agent",
+ "agentName": "pdf-table-extract",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Pdf Table Extract",
+  "zh": "文档表格 先定表头 合并还原"
+ },
+ "profession": {
+  "en": "Pdf Table Extract",
+  "zh": "文档表格 还原提取 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Pdf Table Extract tasks end-to-end with built-in professional skills.",
+  "zh": "文档表格 还原提取 助手：覆盖 先定表头、合并还原、数值净化 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "文档表格",
+   "en": "pdf-table-extract"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到文档表格怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到还原提取怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到文档表格怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "文档表格专家",
+  "to": "文档表格 先定表头 合并还原",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

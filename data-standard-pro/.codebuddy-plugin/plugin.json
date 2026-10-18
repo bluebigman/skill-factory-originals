@@ -1,0 +1,74 @@
+{
+ "name": "data-standard-pro",
+ "version": "1.0.0",
+ "plugin": "data-standard-pro",
+ "description": "Data Standard Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/data-standard-pro.md"
+ ],
+ "skills": [
+  "./skills/caliber",
+  "./skills/governance",
+  "./skills/standard"
+ ],
+ "expertType": "agent",
+ "agentName": "data-standard-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Data Standard Pro",
+  "zh": "数据规范 口径漂移 分母不明"
+ },
+ "profession": {
+  "en": "Data Standard Pro",
+  "zh": "数据规范 表格标准 字段治理"
+ },
+ "displayDescription": {
+  "en": "Handles Data Standard Pro tasks end-to-end with built-in professional skills.",
+  "zh": "数据规范 表格标准 字段治理：指标口径的对齐；数据质量的持续治理；数据字段与命名规范的建立。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "口径漂移"
+  },
+  {
+   "en": "practical capability",
+   "zh": "分母不明"
+  },
+  {
+   "en": "practical capability",
+   "zh": "时间范围"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到口径漂移怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到分母不明怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到时间范围怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到口径漂移怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:34",
+  "from": "数据规范专家",
+  "to": "数据规范 口径漂移 分母不明",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

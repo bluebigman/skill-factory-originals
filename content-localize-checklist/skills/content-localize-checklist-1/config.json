@@ -1,0 +1,72 @@
+{
+ "name": "content-localize-checklist-1",
+ "version": "2.0.0",
+ "domain": "本地化清单",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "文本",
+   "then": "全部界面文本已翻译",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "图片",
+   "then": "含文字的图片已替换",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "格式",
+   "then": "日期数字货币格式适配",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "文化",
+   "then": "文化禁忌已审查",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "合规",
+   "then": "符合当地法规",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "文本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图片",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

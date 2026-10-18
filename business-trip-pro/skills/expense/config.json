@@ -1,0 +1,121 @@
+{
+ "name": "expense",
+ "version": "2.0.0",
+ "domain": "出差安排",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "票据缺失",
+   "then": "当场索票并拍照备份，回程后补票成功率极低",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "超标准",
+   "then": "提前确认标准（住宿/交通等级），超标部分须提前审批",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "混同",
+   "then": "公私费用分开记录，混同极易触发审计问题",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "时效",
+   "then": "按单位时限提交，超期不予受理是常见规则",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "凭证规范",
+   "then": "按财务要求整理（发票+行程+审批单），缺一即退回",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "报销",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "发票",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "费用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "票据缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "混同",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭证规范",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

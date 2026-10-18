@@ -1,0 +1,74 @@
+{
+ "name": "product-description-pro",
+ "version": "1.0.0",
+ "plugin": "product-description-pro",
+ "description": "Product Description Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/product-description-pro.md"
+ ],
+ "skills": [
+  "./skills/compliance",
+  "./skills/detail-structure",
+  "./skills/selling-point"
+ ],
+ "expertType": "agent",
+ "agentName": "product-description-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Product Description Pro",
+  "zh": "商品详情 极限词 功效宣称"
+ },
+ "profession": {
+  "en": "Product Description Pro",
+  "zh": "商品详情 卖点提炼 转化文案"
+ },
+ "displayDescription": {
+  "en": "Handles Product Description Pro tasks end-to-end with built-in professional skills.",
+  "zh": "商品详情 卖点提炼 转化文案：详情页的合规红线；详情页的内容编排；产品卖点的梳理与排序。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "极限词"
+  },
+  {
+   "en": "practical capability",
+   "zh": "功效宣称"
+  },
+  {
+   "en": "practical capability",
+   "zh": "虚假承诺"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到极限词怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到功效宣称怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到虚假承诺怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到极限词怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "商品详情专家",
+  "to": "商品详情 极限词 功效宣称",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

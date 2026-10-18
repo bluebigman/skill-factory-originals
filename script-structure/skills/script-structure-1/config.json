@@ -1,0 +1,66 @@
+{
+ "name": "script-structure-1",
+ "version": "2.0.0",
+ "domain": "脚本结构",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "开头给钩子",
+   "then": "前 3 秒给冲突、结论或悬念",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "单点展开",
+   "then": "一条内容只讲一个点，讲透",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "开头给钩子",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单点展开",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "悬念",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只讲",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

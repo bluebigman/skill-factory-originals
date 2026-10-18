@@ -1,0 +1,72 @@
+{
+ "name": "sql-perf-tune-2",
+ "version": "2.0.0",
+ "domain": "SQL",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看执行计划",
+   "then": "调优前必看执行计划",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "索引匹配",
+   "then": "检查索引是否命中",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "避免函数",
+   "then": "索引列上避免函数",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分页优化",
+   "then": "大偏移分页须优化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "复测验证",
+   "then": "调优后必须复测",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看执行计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免函数",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分页优化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复测验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

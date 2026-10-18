@@ -1,0 +1,74 @@
+{
+ "name": "multi-source-merge",
+ "version": "1.0.0",
+ "plugin": "multi-source-merge",
+ "description": "multi-source-merge — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for multi-source-merge tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/multi-source-merge.md"
+ ],
+ "agentName": "multi-source-merge",
+ "displayName": {
+  "zh": "多源数据合并 主键对齐",
+  "en": "multi-source-merge"
+ },
+ "profession": {
+  "zh": "多源数据合并 顾问",
+  "en": "multi-source-merge"
+ },
+ "displayDescription": {
+  "zh": "多源数据合并 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "multi-source-merge: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "多源数据合并",
+   "en": "multi-source-merge"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到多源数据合并怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划多源数据合并",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查多源数据合并",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到多源数据合并怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/multi-source-merge-1",
+  "./skills/multi-source-merge-2",
+  "./skills/multi-source-merge-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "多源数据合并专家",
+  "to": "多源数据合并 主键对齐",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

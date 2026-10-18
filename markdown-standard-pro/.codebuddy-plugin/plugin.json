@@ -1,0 +1,74 @@
+{
+ "name": "markdown-standard-pro",
+ "version": "1.0.0",
+ "plugin": "markdown-standard-pro",
+ "description": "markdown-standard-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for markdown-standard-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/markdown-standard-pro.md"
+ ],
+ "agentName": "markdown-standard-pro",
+ "displayName": {
+  "zh": "Markdown规范 标题层级",
+  "en": "markdown-standard-pro"
+ },
+ "profession": {
+  "zh": "Mark 规范 顾问",
+  "en": "markdown-standard-pro"
+ },
+ "displayDescription": {
+  "zh": "Mark 规范 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "markdown-standard-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "Mark",
+   "en": "markdown-standard-pro"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到Mark怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划Mark",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查Mark",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到Mark怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/markdown-standard-pro-1",
+  "./skills/markdown-standard-pro-2",
+  "./skills/markdown-standard-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:43",
+  "from": "Markdown规范专家",
+  "to": "Markdown规范 标题层级",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

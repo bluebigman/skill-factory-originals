@@ -1,0 +1,72 @@
+{
+ "name": "import-inspection-pro-1",
+ "version": "2.0.0",
+ "domain": "进口检验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标准对照",
+   "then": "逐项对照目的地标准要求",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按批抽样",
+   "then": "按批量确定抽样方案",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不合格处置",
+   "then": "明确退运、销毁或整改路径",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "预检前置",
+   "then": "尽量在装运前完成预检",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "记录可溯",
+   "then": "检验记录完整可追溯",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标准对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按批抽样",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不合格处置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预检前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

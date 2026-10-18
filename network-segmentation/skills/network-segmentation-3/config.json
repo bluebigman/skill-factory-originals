@@ -1,0 +1,72 @@
+{
+ "name": "network-segmentation-3",
+ "version": "2.0.0",
+ "domain": "网络分区",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按信任域",
+   "then": "按信任级别分区",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "最小连通",
+   "then": "只开必要通路",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "边界防护",
+   "then": "边界设防护",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "流量审计",
+   "then": "审计跨区流量",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期评估",
+   "then": "定期评估分区",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按信任域",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小连通",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界防护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流量审计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期评估",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

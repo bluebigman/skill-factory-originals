@@ -1,0 +1,72 @@
+{
+ "name": "handover-training-1",
+ "version": "2.0.0",
+ "domain": "客户培训交付",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层培训",
+   "then": "按角色分培训内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "场景化",
+   "then": "按真实场景演练",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可回看",
+   "then": "提供录屏与文档",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "考核简单",
+   "then": "用简单任务验证掌握",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "反馈收集",
+   "then": "培训后收集反馈",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层培训",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "场景化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可回看",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "考核简单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反馈收集",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

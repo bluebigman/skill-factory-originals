@@ -1,0 +1,75 @@
+{
+ "name": "Access Audit",
+ "description": "权限审计专家：覆盖 定期清查、离职即收、最小权限 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/access-audit",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/access-audit",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "access-audit-1",
+   "name": "针对 定期清查、离职即收 等情境给出可执行处置",
+   "description": "针对 定期清查、离职即收 等情境给出可执行处置",
+   "tags": [
+    "定期清查",
+    "离职即收"
+   ],
+   "examples": [
+    "遇到定期清查",
+    "遇到离职即收",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "access-audit-2",
+   "name": "针对 最小权限、共享账号禁止 等情境给出可执行处置",
+   "description": "针对 最小权限、共享账号禁止 等情境给出可执行处置",
+   "tags": [
+    "最小权限",
+    "共享账号禁止"
+   ],
+   "examples": [
+    "遇到最小权限",
+    "遇到共享账号禁止",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "access-audit-3",
+   "name": "针对 留审计日志 等情境给出可执行处置",
+   "description": "针对 留审计日志 等情境给出可执行处置",
+   "tags": [
+    "留审计日志"
+   ],
+   "examples": [
+    "遇到留审计日志",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "权限审计专家",
+ "x-source": "skill-factory-originals"
+}

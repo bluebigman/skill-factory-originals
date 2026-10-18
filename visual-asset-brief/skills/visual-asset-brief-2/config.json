@@ -1,0 +1,72 @@
+{
+ "name": "visual-asset-brief-2",
+ "version": "2.0.0",
+ "domain": "视觉素材需求",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "用途明确",
+   "then": "说明用途与尺寸",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "风格一致",
+   "then": "与既有风格一致",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "版权清晰",
+   "then": "确认授权范围",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "格式规范",
+   "then": "给交付格式要求",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变体预留",
+   "then": "预留多尺寸变体",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "用途明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风格一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版权清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变体预留",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

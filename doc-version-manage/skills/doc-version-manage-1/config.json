@@ -1,0 +1,72 @@
+{
+ "name": "doc-version-manage-1",
+ "version": "2.0.0",
+ "domain": "文档版本",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版本化",
+   "then": "文档纳入版本管理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变更记录",
+   "then": "每次变更记原因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "协同冲突",
+   "then": "并发编辑冲突处理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "审批流",
+   "then": "重要文档须审批",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "归档策略",
+   "then": "历史版本归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版本化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "协同冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审批流",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归档策略",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

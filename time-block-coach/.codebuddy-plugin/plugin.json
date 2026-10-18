@@ -1,0 +1,74 @@
+{
+ "name": "time-block-coach",
+ "version": "1.0.0",
+ "plugin": "time-block-coach",
+ "description": "Time Block Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/time-block-coach.md"
+ ],
+ "skills": [
+  "./skills/time-block-coach-1",
+  "./skills/time-block-coach-2",
+  "./skills/time-block-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "time-block-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Time Block Coach",
+  "zh": "时间块 先排固定 留缓冲"
+ },
+ "profession": {
+  "en": "Time Block Coach",
+  "zh": "时间块 日程编排 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Time Block Coach tasks end-to-end with built-in professional skills.",
+  "zh": "时间块 日程编排 顾问：覆盖 先排固定、留缓冲、同类合并 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先排固定"
+  },
+  {
+   "en": "practical capability",
+   "zh": "留缓冲"
+  },
+  {
+   "en": "practical capability",
+   "zh": "同类合并"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先排固定怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到留缓冲怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到同类合并怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先排固定怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "时间块专家",
+  "to": "时间块 先排固定 留缓冲",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

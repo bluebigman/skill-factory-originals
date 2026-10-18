@@ -1,0 +1,69 @@
+{
+ "name": "game-balance-coach-3",
+ "version": "2.0.0",
+ "domain": "数值平衡",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "公开变更",
+   "then": "数值变更对玩家公开说明调整理由",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "公开变更",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "再谈",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "理由",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "数值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "观察",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "先建",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "平衡",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

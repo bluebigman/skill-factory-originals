@@ -1,0 +1,121 @@
+{
+ "name": "slide-design",
+ "version": "2.0.0",
+ "domain": "演示大纲",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "文字过多",
+   "then": "每页正文不超过 6 行，讲稿放备注不入页面",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "图示混乱",
+   "then": "图先于字：能用图说明就不写文字",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "配色刺眼",
+   "then": "全篇配色不超三色，且保证投影环境可读",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "字号过小",
+   "then": "正文字号不低于 18pt，投影会缩小视觉尺寸",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "对齐随意",
+   "then": "统一左对齐与边距，对齐是最低成本的质感提升",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "排版",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字体",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配色",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图示",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文字过多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图示混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配色刺眼",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字号过小",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对齐随意",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "无效",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "流失",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

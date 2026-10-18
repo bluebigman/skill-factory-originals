@@ -1,0 +1,78 @@
+{
+ "name": "sheet-import-map-2",
+ "version": "2.0.0",
+ "domain": "表格导入",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "编码统一",
+   "then": "统一 UTF-8，避免乱码后返工",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "脏数据隔离",
+   "then": "异常行另存待确认，不直接删",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "编码统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脏数据隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "单独",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "留存",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "先看",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "返工",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前确认",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "另存",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

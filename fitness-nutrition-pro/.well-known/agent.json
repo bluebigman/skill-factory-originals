@@ -1,0 +1,99 @@
+{
+ "name": "Fitness Nutrition Pro",
+ "description": "增肌减脂专家：减脂期餐食结构与配比；健身餐的批量备餐；增肌期训练与营养安排。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/fitness-nutrition-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/fitness-nutrition-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "fat-loss-meal",
+   "name": "减脂期餐食结构与配比",
+   "description": "减脂期餐食结构与配比",
+   "tags": [
+    "减脂餐",
+    "控卡",
+    "轻食",
+    "饱腹"
+   ],
+   "examples": [
+    "遇到结构优先",
+    "遇到蛋白保留",
+    "遇到主食选择",
+    "遇到隐形热量",
+    "遇到速度预期"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "fat-loss-meal",
+    "to": "fat-loss-meal",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "meal-prep",
+   "name": "健身餐的批量备餐",
+   "description": "健身餐的批量备餐",
+   "tags": [
+    "备餐",
+    "便当",
+    "一周菜单",
+    "分装"
+   ],
+   "examples": [
+    "遇到备餐负担",
+    "遇到口味单调",
+    "遇到外食",
+    "遇到记录",
+    "遇到边界"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "meal-prep",
+    "to": "meal-prep",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "muscle-gain",
+   "name": "增肌期训练与营养安排",
+   "description": "增肌期训练与营养安排",
+   "tags": [
+    "增肌",
+    "力量训练",
+    "蛋白质",
+    "增重"
+   ],
+   "examples": [
+    "遇到热量不足",
+    "遇到蛋白不足",
+    "遇到训练容量",
+    "遇到渐进超负荷",
+    "遇到恢复不足"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "muscle-gain",
+    "to": "muscle-gain",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "增肌减脂专家"
+}

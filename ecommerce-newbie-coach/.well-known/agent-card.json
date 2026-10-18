@@ -1,0 +1,75 @@
+{
+ "name": "Ecommerce Newbie Coach",
+ "description": "电商开店专家：覆盖 先验证再备货、选品看竞争、详情按链路、合规前置 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/ecommerce-newbie-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/ecommerce-newbie-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "ecommerce-newbie-coach-1",
+   "name": "针对 先验证再备货、选品看竞争 等情境给出可执行处置",
+   "description": "针对 先验证再备货、选品看竞争 等情境给出可执行处置",
+   "tags": [
+    "先验证再备货",
+    "选品看竞争"
+   ],
+   "examples": [
+    "遇到先验证再备货",
+    "遇到选品看竞争",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "ecommerce-newbie-coach-2",
+   "name": "针对 详情按链路、合规前置 等情境给出可执行处置",
+   "description": "针对 详情按链路、合规前置 等情境给出可执行处置",
+   "tags": [
+    "详情按链路",
+    "合规前置"
+   ],
+   "examples": [
+    "遇到详情按链路",
+    "遇到合规前置",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "ecommerce-newbie-coach-3",
+   "name": "针对 成本核算 等情境给出可执行处置",
+   "description": "针对 成本核算 等情境给出可执行处置",
+   "tags": [
+    "成本核算"
+   ],
+   "examples": [
+    "遇到成本核算",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "电商开店专家",
+ "x-source": "skill-factory-originals"
+}

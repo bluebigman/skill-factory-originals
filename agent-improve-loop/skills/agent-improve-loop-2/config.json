@@ -1,0 +1,72 @@
+{
+ "name": "agent-improve-loop-2",
+ "version": "2.0.0",
+ "domain": "改进闭环",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "度量先定",
+   "then": "先定度量指标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "小步验证",
+   "then": "小步改进快速验证",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "效果对照",
+   "then": "改进前后对照",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "防劣化",
+   "then": "防改进引入退化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "沉淀复用",
+   "then": "有效改进沉淀复用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "度量先定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小步验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防劣化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沉淀复用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "mp-article-format",
+ "version": "1.0.0",
+ "plugin": "mp-article-format",
+ "description": "Mp Article Format for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/mp-article-format.md"
+ ],
+ "skills": [
+  "./skills/mp-article-format-1",
+  "./skills/mp-article-format-2",
+  "./skills/mp-article-format-3"
+ ],
+ "expertType": "agent",
+ "agentName": "mp-article-format",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Mp Article Format",
+  "zh": "公众号文章 留白优先 三段一图"
+ },
+ "profession": {
+  "en": "Mp Article Format",
+  "zh": "公众号文章 图文排版 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Mp Article Format tasks end-to-end with built-in professional skills.",
+  "zh": "公众号文章 图文排版 助手：覆盖 留白优先、三段一图、字号统一 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "留白优先"
+  },
+  {
+   "en": "practical capability",
+   "zh": "三段一图"
+  },
+  {
+   "en": "practical capability",
+   "zh": "字号统一"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到留白优先怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到三段一图怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到字号统一怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到留白优先怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "公众号文章专家",
+  "to": "公众号文章 留白优先 三段一图",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

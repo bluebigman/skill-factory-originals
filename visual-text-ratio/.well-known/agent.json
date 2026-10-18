@@ -1,0 +1,67 @@
+{
+ "name": "Visual Text Ratio",
+ "description": "图文配比专家：覆盖 三段一图、图有信息、留白优先 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/visual-text-ratio",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/visual-text-ratio",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "visual-text-ratio-1",
+   "name": "针对 三段一图、图有信息 等情境给出可执行处置",
+   "description": "针对 三段一图、图有信息 等情境给出可执行处置",
+   "tags": [
+    "三段一图",
+    "图有信息"
+   ],
+   "examples": [
+    "遇到三段一图",
+    "遇到图有信息",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "visual-text-ratio-2",
+   "name": "针对 留白优先、重点突出 等情境给出可执行处置",
+   "description": "针对 留白优先、重点突出 等情境给出可执行处置",
+   "tags": [
+    "留白优先",
+    "重点突出"
+   ],
+   "examples": [
+    "遇到留白优先",
+    "遇到重点突出",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "visual-text-ratio-3",
+   "name": "针对 手机优先 等情境给出可执行处置",
+   "description": "针对 手机优先 等情境给出可执行处置",
+   "tags": [
+    "手机优先"
+   ],
+   "examples": [
+    "遇到手机优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "图文配比专家"
+}

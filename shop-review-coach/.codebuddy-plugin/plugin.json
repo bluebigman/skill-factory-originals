@@ -1,0 +1,74 @@
+{
+ "name": "shop-review-coach",
+ "version": "1.0.0",
+ "plugin": "shop-review-coach",
+ "description": "Shop Review Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/shop-review-coach.md"
+ ],
+ "skills": [
+  "./skills/shop-review-coach-1",
+  "./skills/shop-review-coach-2",
+  "./skills/shop-review-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "shop-review-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Shop Review Coach",
+  "zh": "店铺数据 漏斗拆解"
+ },
+ "profession": {
+  "en": "Shop Review Coach",
+  "zh": "店铺数据 转化漏斗 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Shop Review Coach tasks end-to-end with built-in professional skills.",
+  "zh": "店铺数据 转化漏斗 顾问：覆盖 漏斗拆解、点击低改主图 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "漏斗拆解"
+  },
+  {
+   "en": "practical capability",
+   "zh": "点击低改主图"
+  },
+  {
+   "en": "practical capability",
+   "zh": "看 7 日均值"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到漏斗拆解怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到点击低改主图怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到看 7 日均值怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到漏斗拆解怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "店铺数据专家",
+  "to": "店铺数据 漏斗拆解",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

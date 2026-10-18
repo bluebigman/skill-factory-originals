@@ -1,0 +1,67 @@
+{
+ "name": "After Sale Coach",
+ "description": "售后处理专家：覆盖 及时响应、标准统一、留痕、按规则、复盘 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/after-sale-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/after-sale-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "after-sale-coach-1",
+   "name": "针对 及时响应、标准统一 等情境给出可执行处置",
+   "description": "针对 及时响应、标准统一 等情境给出可执行处置",
+   "tags": [
+    "及时响应",
+    "标准统一"
+   ],
+   "examples": [
+    "遇到及时响应",
+    "遇到标准统一",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "after-sale-coach-2",
+   "name": "针对 留痕、按规则 等情境给出可执行处置",
+   "description": "针对 留痕、按规则 等情境给出可执行处置",
+   "tags": [
+    "留痕",
+    "按规则"
+   ],
+   "examples": [
+    "遇到留痕",
+    "遇到按规则",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "after-sale-coach-3",
+   "name": "针对 复盘 等情境给出可执行处置",
+   "description": "针对 复盘 等情境给出可执行处置",
+   "tags": [
+    "复盘"
+   ],
+   "examples": [
+    "遇到复盘",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "售后处理专家"
+}

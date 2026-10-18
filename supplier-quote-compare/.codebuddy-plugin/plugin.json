@@ -1,0 +1,74 @@
+{
+ "name": "supplier-quote-compare",
+ "version": "1.0.0",
+ "plugin": "supplier-quote-compare",
+ "description": "Supplier Quote Compare for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/supplier-quote-compare.md"
+ ],
+ "skills": [
+  "./skills/supplier-quote-compare-1",
+  "./skills/supplier-quote-compare-2",
+  "./skills/supplier-quote-compare-3"
+ ],
+ "expertType": "agent",
+ "agentName": "supplier-quote-compare",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Supplier Quote Compare",
+  "zh": "供应商报价 统一口径 算总成本"
+ },
+ "profession": {
+  "en": "Supplier Quote Compare",
+  "zh": "供应商报价 比价谈判 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Supplier Quote Compare tasks end-to-end with built-in professional skills.",
+  "zh": "供应商报价 比价谈判 助手：覆盖 统一口径、算总成本、分批报价 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "供应商报价",
+   "en": "supplier-quote-compare"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到供应商报价怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到比价谈判怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到供应商报价怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "供应商报价专家",
+  "to": "供应商报价 统一口径 算总成本",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

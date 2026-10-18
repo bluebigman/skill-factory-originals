@@ -1,0 +1,65 @@
+{
+ "name": "channel-evaluate-3",
+ "version": "2.0.0",
+ "domain": "渠道评估",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "季度重估",
+   "then": "每季度重估一次，渠道效果会衰减",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "季度重估",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "评估",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每季度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只看",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "收益",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

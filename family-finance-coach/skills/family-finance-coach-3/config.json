@@ -1,0 +1,69 @@
+{
+ "name": "family-finance-coach-3",
+ "version": "2.0.0",
+ "domain": "家庭财务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "边界",
+   "then": "不提供投资建议",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分类",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "比例",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "三类",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "规划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "预算",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "弹性",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

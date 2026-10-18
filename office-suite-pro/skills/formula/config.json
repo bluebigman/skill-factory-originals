@@ -1,0 +1,121 @@
+{
+ "name": "formula",
+ "version": "2.0.0",
+ "domain": "excel",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "查找匹配",
+   "then": "查找优先用 XLOOKUP/INDEX-MATCH，VLOOKUP 列插入即失效",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "VLOOKUP 报错",
+   "then": "先核对查找值与被查找值类型（文本 vs 数值）是否一致",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "#N/A",
+   "then": "多为名称前后有空格或格式不符，用 TRIM 清理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "绝对引用",
+   "then": "核对绝对/相对引用，区域下拉错位是最高频错误",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "多条件",
+   "then": "多条件统计用 SUMIFS/COUNTIFS，注意条件区域等长",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "VLOOKUP",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "公式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "查找",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "函数",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "查找匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "VLOOKUP 报错",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "#N/A",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "绝对引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多条件",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "调整",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "日期",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "工作",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "失控",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

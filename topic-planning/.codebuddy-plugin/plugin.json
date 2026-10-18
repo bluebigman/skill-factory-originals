@@ -1,0 +1,74 @@
+{
+ "name": "topic-planning",
+ "version": "1.0.0",
+ "plugin": "topic-planning",
+ "description": "Topic Planning for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/topic-planning.md"
+ ],
+ "skills": [
+  "./skills/topic-planning-1",
+  "./skills/topic-planning-2",
+  "./skills/topic-planning-3"
+ ],
+ "expertType": "agent",
+ "agentName": "topic-planning",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Topic Planning",
+  "zh": "内容选题 从问题找 验证需求"
+ },
+ "profession": {
+  "en": "Topic Planning",
+  "zh": "内容选题 需求挖掘 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Topic Planning tasks end-to-end with built-in professional skills.",
+  "zh": "内容选题 需求挖掘 助手：覆盖 从问题找、验证需求、成系列 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "内容选题",
+   "en": "topic-planning"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到内容选题怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到需求挖掘怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到内容选题怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "内容选题专家",
+  "to": "内容选题 从问题找 验证需求",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

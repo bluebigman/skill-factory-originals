@@ -1,0 +1,72 @@
+{
+ "name": "batch-data-validate-3",
+ "version": "2.0.0",
+ "domain": "批量数据校验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "校验清单化",
+   "then": "必填类型范围唯一性",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "先校验后入库",
+   "then": "不合法整批拒收",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "错误报告",
+   "then": "给出行号与原因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "抽样复核",
+   "then": "通过后抽检",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可重跑",
+   "then": "修正后可重跑",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "校验清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "先校验后入库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误报告",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽样复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可重跑",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

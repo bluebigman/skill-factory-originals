@@ -1,0 +1,72 @@
+{
+ "name": "info-architecture-2",
+ "version": "2.0.0",
+ "domain": "信息架构",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "卡片分类",
+   "then": "用卡片分类获得用户心智分类",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "交叉验证",
+   "then": "自上而下与自下而上两法互验",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "用户词命名",
+   "then": "用用户自己的词做命名",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "层级克制",
+   "then": "层级深度控制在三层内",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "搜索兜底",
+   "then": "提供搜索兜底入口",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "卡片分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交叉验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用户词命名",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层级克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "搜索兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

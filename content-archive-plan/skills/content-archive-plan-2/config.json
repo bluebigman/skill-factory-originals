@@ -1,0 +1,72 @@
+{
+ "name": "content-archive-plan-2",
+ "version": "2.0.0",
+ "domain": "内容归档方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分类归档",
+   "then": "按主题与时间归档",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保留价值",
+   "then": "标注是否可复用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "索引可查",
+   "then": "建立检索索引",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "定期清理",
+   "then": "长期无效应清理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本留痕",
+   "then": "保留历史版本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分类归档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留价值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引可查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期清理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

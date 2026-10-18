@@ -1,0 +1,78 @@
+{
+ "name": "mes-line-balance-pro-2",
+ "version": "2.0.0",
+ "domain": "产线节拍",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "在制上限",
+   "then": "设 WIP 上限，防在制品掩盖瓶颈",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "换型压缩",
+   "then": "缩短换型时间通常优于提高单站速度",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "在制上限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "换型压缩",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "避免",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "优化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "堆积",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "速度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "瓶颈",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平衡",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

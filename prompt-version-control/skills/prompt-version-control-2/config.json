@@ -1,0 +1,72 @@
+{
+ "name": "prompt-version-control-2",
+ "version": "2.0.0",
+ "domain": "提示版本",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版本化",
+   "then": "提示词纳入版本管理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "每次改动记录原因与预期",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "回归测试",
+   "then": "改提示必跑回归用例",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "效果可测",
+   "then": "建立提示效果基线",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回滚可控",
+   "then": "保留可回滚的历史版本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版本化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归测试",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果可测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回滚可控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

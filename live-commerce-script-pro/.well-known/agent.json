@@ -1,0 +1,99 @@
+{
+ "name": "Live Commerce Script Pro",
+ "description": "直播话术专家：直播脚本的流程与节奏；转化话术的组织；售前售后的话术库。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/live-commerce-script-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/live-commerce-script-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "live-flow",
+   "name": "直播脚本的流程与节奏",
+   "description": "直播脚本的流程与节奏",
+   "tags": [
+    "直播话术",
+    "留人",
+    "节奏",
+    "冷场"
+   ],
+   "examples": [
+    "遇到无流程",
+    "遇到开场弱",
+    "遇到讲品冗长",
+    "遇到节奏单一",
+    "遇到收尾"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "live-flow",
+    "to": "live-flow",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "sell-talk",
+   "name": "转化话术的组织",
+   "description": "转化话术的组织",
+   "tags": [
+    "带货",
+    "逼单",
+    "转化",
+    "信任"
+   ],
+   "examples": [
+    "遇到无信任",
+    "遇到逼单生硬",
+    "遇到异议处理",
+    "遇到重复话术",
+    "遇到禁用词"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "sell-talk",
+    "to": "sell-talk",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "service-reply",
+   "name": "售前售后的话术库",
+   "description": "售前售后的话术库",
+   "tags": [
+    "客服话术",
+    "回复",
+    "投诉",
+    "售后"
+   ],
+   "examples": [
+    "遇到回复慢",
+    "遇到模板味",
+    "遇到答非所问",
+    "遇到投诉激化",
+    "遇到留痕"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "service-reply",
+    "to": "service-reply",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "直播话术专家"
+}

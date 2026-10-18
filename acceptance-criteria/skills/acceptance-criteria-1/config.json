@@ -1,0 +1,66 @@
+{
+ "name": "acceptance-criteria-1",
+ "version": "2.0.0",
+ "domain": "验收标准",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "可测量",
+   "then": "每条标准都要能被第三方独立判定",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "写清边界",
+   "then": "明确写出不包含哪些情况",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "可测量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "写清边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "每条",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定义",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "判定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "独立",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验收",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

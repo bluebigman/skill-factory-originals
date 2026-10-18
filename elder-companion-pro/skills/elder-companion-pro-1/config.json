@@ -1,0 +1,78 @@
+{
+ "name": "elder-companion-pro-1",
+ "version": "2.0.0",
+ "domain": "独居老人",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "日常联络",
+   "then": "固定时段通话，稳定节奏优于频繁打扰",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "紧急呼叫",
+   "then": "一键呼叫（大字/语音），复杂操作紧急时必失效",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "日常联络",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "紧急呼叫",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "失效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "稳定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "操作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "复杂",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

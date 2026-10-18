@@ -1,0 +1,72 @@
+{
+ "name": "regex-build-help-3",
+ "version": "2.0.0",
+ "domain": "正则表达式构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先明确原子",
+   "then": "列出必须匹配与必须排除的样例",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "从简到繁",
+   "then": "先写最小可用再逐步加约束",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "锚定边界",
+   "then": "用行首行尾锚定防部分匹配",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "贪婪与否",
+   "then": "明确是否需要非贪婪",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "样例回归",
+   "then": "用正反样例集回归验证",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先明确原子",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "从简到繁",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "锚定边界",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "贪婪与否",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样例回归",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

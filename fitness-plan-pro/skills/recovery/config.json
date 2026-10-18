@@ -1,0 +1,117 @@
+{
+ "name": "recovery",
+ "version": "2.0.0",
+ "domain": "健身计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "睡眠不足",
+   "then": "睡眠是恢复核心，长期不足会抵消训练效果",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "延迟酸痛",
+   "then": "24-72 小时酸痛属正常，超时或剧痛须就医",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "拉伸",
+   "then": "训练后做静态拉伸，训练前做动态热身",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "饮食",
+   "then": "蛋白质按每公斤体重 1.6-2.0 克，碳水支撑训练强度",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "就医边界",
+   "then": "关节弹响伴疼痛、持续麻木须停止训练并就医",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "恢复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "酸痛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "睡眠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拉伸",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "睡眠不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "延迟酸痛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "饮食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就医边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "安排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "长期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

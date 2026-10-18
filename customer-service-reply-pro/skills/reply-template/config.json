@@ -1,0 +1,121 @@
+{
+ "name": "reply-template",
+ "version": "2.0.0",
+ "domain": "客服回复",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "回复慢",
+   "then": "首次响应控制在 30 秒内，响应时长直接影响转化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "模板味",
+   "then": "模板须个性化（称呼+具体问题），纯模板会被感知为敷衍",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "答非所问",
+   "then": "先复述客户问题再回答，确认理解一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无行动",
+   "then": "回复须给下一步动作与时间点，模糊回复会引发追问",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "情绪",
+   "then": "先处理情绪再处理问题，对抗会升级为投诉",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "话术",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "咨询",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "客户",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回复慢",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "模板味",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "答非所问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无行动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "情绪",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "承诺",
+   "source": "SKILL.md#L39"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

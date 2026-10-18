@@ -1,0 +1,87 @@
+{
+ "name": "multi-agent-orchestrate-2",
+ "version": "2.0.0",
+ "domain": "多智能体",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结论互斥",
+   "then": "冲突必须显式暴露并交裁决，禁止静默取其一",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "重复劳动",
+   "then": "公共结果集中产出并共享，避免各 Agent 重复计算",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "信息不同步",
+   "then": "共享状态须有单一真值源，禁止各自维护副本",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结论互斥",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复劳动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息不同步",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "混乱",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "显式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "校验",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

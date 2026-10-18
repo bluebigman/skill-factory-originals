@@ -1,0 +1,74 @@
+{
+ "name": "overseas-culture-adapt",
+ "version": "1.0.0",
+ "plugin": "overseas-culture-adapt",
+ "description": "overseas-culture-adapt — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for overseas-culture-adapt tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/overseas-culture-adapt.md"
+ ],
+ "agentName": "overseas-culture-adapt",
+ "displayName": {
+  "zh": "海外沟通 称谓先行 直曲有别",
+  "en": "overseas-culture-adapt"
+ },
+ "profession": {
+  "zh": "海外沟通 文化适配 顾问",
+  "en": "overseas-culture-adapt"
+ },
+ "displayDescription": {
+  "zh": "海外沟通 文化适配 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "overseas-culture-adapt: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "14-WorldWise",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "海外沟通",
+   "en": "overseas-culture-adapt"
+  },
+  {
+   "en": "WorldWise",
+   "zh": "WorldWise"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到海外沟通怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划海外沟通",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查海外沟通",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到海外沟通怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/overseas-culture-adapt-1/",
+  "./skills/overseas-culture-adapt-2/",
+  "./skills/overseas-culture-adapt-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "海外沟通专家",
+  "to": "海外沟通 称谓先行 直曲有别",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

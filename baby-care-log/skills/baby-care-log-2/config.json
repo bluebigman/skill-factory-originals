@@ -1,0 +1,78 @@
+{
+ "name": "baby-care-log-2",
+ "version": "2.0.0",
+ "domain": "婴儿照护",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "异常阈值",
+   "then": "设定异常阈值并明确就医条件",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "全家同步",
+   "then": "照护记录全家共享，避免交接遗漏",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "异常阈值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全家同步",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L78"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

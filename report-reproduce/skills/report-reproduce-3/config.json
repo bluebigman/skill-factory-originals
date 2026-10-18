@@ -1,0 +1,72 @@
+{
+ "name": "report-reproduce-3",
+ "version": "2.0.0",
+ "domain": "报表可复现",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "取数脚本化",
+   "then": "不手工取数",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "参数化",
+   "then": "时间与范围作为参数",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "环境声明",
+   "then": "依赖与版本写清",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "结果对账",
+   "then": "能对上历史结果",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定时执行",
+   "then": "尽可能自动化",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "取数脚本化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "参数化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果对账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定时执行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

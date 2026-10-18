@@ -1,0 +1,99 @@
+{
+ "name": "Project Tracking Pro",
+ "description": "项目跟踪专家：项目任务的可执行拆解；项目进度的汇报方法；风险的识别与应对。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/project-tracking-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/project-tracking-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "plan-breakdown",
+   "name": "项目任务的可执行拆解",
+   "description": "项目任务的可执行拆解",
+   "tags": [
+    "拆解",
+    "WBS",
+    "任务",
+    "里程碑"
+   ],
+   "examples": [
+    "遇到任务过大",
+    "遇到无里程碑",
+    "遇到依赖不清",
+    "遇到估时拍脑袋",
+    "遇到范围蔓延"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "plan-breakdown",
+    "to": "plan-breakdown",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "progress-report",
+   "name": "项目进度的汇报方法",
+   "description": "项目进度的汇报方法",
+   "tags": [
+    "汇报",
+    "进度",
+    "完成度",
+    "偏差"
+   ],
+   "examples": [
+    "遇到完成度失真",
+    "遇到报喜不报忧",
+    "遇到无对比",
+    "遇到口径不一",
+    "遇到超期隐瞒"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "progress-report",
+    "to": "progress-report",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "risk-control",
+   "name": "风险的识别与应对",
+   "description": "风险的识别与应对",
+   "tags": [
+    "风险",
+    "预案",
+    "阻塞",
+    "应对"
+   ],
+   "examples": [
+    "遇到无预案",
+    "遇到风险积压",
+    "遇到关键人依赖",
+    "遇到阻塞上报",
+    "遇到外部依赖"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "risk-control",
+    "to": "risk-control",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "项目跟踪专家"
+}

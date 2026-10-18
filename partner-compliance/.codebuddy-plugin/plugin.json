@@ -1,0 +1,74 @@
+{
+ "name": "partner-compliance",
+ "version": "1.0.0",
+ "plugin": "partner-compliance",
+ "description": "Partner Compliance for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/partner-compliance.md"
+ ],
+ "skills": [
+  "./skills/partner-compliance-1",
+  "./skills/partner-compliance-2",
+  "./skills/partner-compliance-3"
+ ],
+ "expertType": "agent",
+ "agentName": "partner-compliance",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Partner Compliance",
+  "zh": "外部合作 先审资质 条款明确"
+ },
+ "profession": {
+  "en": "Partner Compliance",
+  "zh": "外部合作 合规审查 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Partner Compliance tasks end-to-end with built-in professional skills.",
+  "zh": "外部合作 合规审查 顾问：覆盖 先审资质、条款明确、禁转授权 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "外部合作",
+   "en": "partner-compliance"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到外部合作怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到合规审查怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到外部合作怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "外部合作专家",
+  "to": "外部合作 先审资质 条款明确",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

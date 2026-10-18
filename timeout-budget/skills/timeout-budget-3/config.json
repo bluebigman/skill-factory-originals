@@ -1,0 +1,72 @@
+{
+ "name": "timeout-budget-3",
+ "version": "2.0.0",
+ "domain": "超时预算设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "总额分配",
+   "then": "按调用链分配超时",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "逐层递减",
+   "then": "下游超时小于上游",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重试含内",
+   "then": "重试总时长含在预算内",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "超时即断",
+   "then": "超时立即中断不等待",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "监控超时率",
+   "then": "超时率超阈告警",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "总额分配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逐层递减",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重试含内",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超时即断",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "监控超时率",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

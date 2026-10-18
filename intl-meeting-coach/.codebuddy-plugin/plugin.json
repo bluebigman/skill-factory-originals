@@ -1,0 +1,74 @@
+{
+ "name": "intl-meeting-coach",
+ "version": "1.0.0",
+ "plugin": "intl-meeting-coach",
+ "description": "intl-meeting-coach — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for intl-meeting-coach tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/intl-meeting-coach.md"
+ ],
+ "agentName": "intl-meeting-coach",
+ "displayName": {
+  "zh": "跨时区会议 时区轮换 议程前置",
+  "en": "intl-meeting-coach"
+ },
+ "profession": {
+  "zh": "跨时区会议 组织 教练",
+  "en": "intl-meeting-coach"
+ },
+ "displayDescription": {
+  "zh": "跨时区会议 组织 教练：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "intl-meeting-coach: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "14-WorldWise",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "跨时区会议",
+   "en": "intl-meeting-coach"
+  },
+  {
+   "en": "WorldWise",
+   "zh": "WorldWise"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到跨时区会议怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划跨时区会议",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查跨时区会议",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到跨时区会议怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/intl-meeting-coach-1/",
+  "./skills/intl-meeting-coach-2/",
+  "./skills/intl-meeting-coach-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:41",
+  "from": "跨时区会议专家",
+  "to": "跨时区会议 时区轮换 议程前置",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

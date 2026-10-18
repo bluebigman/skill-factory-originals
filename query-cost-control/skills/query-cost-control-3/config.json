@@ -1,0 +1,72 @@
+{
+ "name": "query-cost-control-3",
+ "version": "2.0.0",
+ "domain": "查询成本管控",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "限额",
+   "then": "按用户或团队设限额",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "预检",
+   "then": "大查询先预检",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "缓存",
+   "then": "高频查询结果缓存",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "监控",
+   "then": "监控查询成本",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "优化建议",
+   "then": "给优化建议",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "限额",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预检",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缓存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "监控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优化建议",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

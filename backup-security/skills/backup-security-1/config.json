@@ -1,0 +1,72 @@
+{
+ "name": "backup-security-1",
+ "version": "2.0.0",
+ "domain": "备份安全",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "加密存储",
+   "then": "备份加密",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "访问控制",
+   "then": "限制备份访问",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异地副本",
+   "then": "异地保存",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "恢复演练",
+   "then": "定期演练恢复",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "保留策略",
+   "then": "按合规留存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "加密存储",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "访问控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异地副本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复演练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留策略",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

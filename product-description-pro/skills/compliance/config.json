@@ -1,0 +1,117 @@
+{
+ "name": "compliance",
+ "version": "2.0.0",
+ "domain": "商品详情",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "极限词",
+   "then": "禁用最/第一/国家级等极限词",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "功效宣称",
+   "then": "普通商品禁宣称治疗/预防疾病等医疗功效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "虚假承诺",
+   "then": "不得承诺绝对效果与无依据数据",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "对比贬低",
+   "then": "禁止贬低竞品或使用其商标",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "价格",
+   "then": "价格与优惠信息须与实际一致，虚假促销属违规",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "违规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "极限词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "宣传",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "功效宣称",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "虚假承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比贬低",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "价格",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁用",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "促销",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "商品",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

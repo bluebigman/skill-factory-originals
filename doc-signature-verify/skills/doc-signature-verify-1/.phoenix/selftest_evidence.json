@@ -1,0 +1,9 @@
+{
+ "schema": "selftest_evidence/v1",
+ "at": "2026-10-18T19:57:33",
+ "skill": "doc-signature-verify-1",
+ "slug": "doc-signature-verify",
+ "passed": true,
+ "output": "SELFTEST PASS",
+ "note": "由 _reseal_evidence.py 真跑生成（原文件为他资产残留的 SELFTEST OK）"
+}

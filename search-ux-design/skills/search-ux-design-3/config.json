@@ -1,0 +1,72 @@
+{
+ "name": "search-ux-design-3",
+ "version": "2.0.0",
+ "domain": "搜索体验设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "零结果有解",
+   "then": "无结果时给建议",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "容错处理",
+   "then": "拼写错误可容错",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "筛选可见",
+   "then": "筛选条件可见可清",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "结果排序",
+   "then": "排序规则明确",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "历史保留",
+   "then": "保留最近搜索",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "零结果有解",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "容错处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "筛选可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "历史保留",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

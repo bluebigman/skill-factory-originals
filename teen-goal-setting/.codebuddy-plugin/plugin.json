@@ -1,0 +1,74 @@
+{
+ "name": "teen-goal-setting",
+ "version": "1.0.0",
+ "plugin": "teen-goal-setting",
+ "description": "Teen Goal Setting for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/teen-goal-setting.md"
+ ],
+ "skills": [
+  "./skills/teen-goal-setting-1",
+  "./skills/teen-goal-setting-2",
+  "./skills/teen-goal-setting-3"
+ ],
+ "expertType": "agent",
+ "agentName": "teen-goal-setting",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Teen Goal Setting",
+  "zh": "青少年 具体可衡量 拆解"
+ },
+ "profession": {
+  "en": "Teen Goal Setting",
+  "zh": "青少年 目标设定 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Teen Goal Setting tasks end-to-end with built-in professional skills.",
+  "zh": "青少年 目标设定 顾问：覆盖 具体可衡量、拆解、书面化 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "具体可衡量"
+  },
+  {
+   "en": "practical capability",
+   "zh": "拆解"
+  },
+  {
+   "en": "practical capability",
+   "zh": "书面化"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到具体可衡量怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到拆解怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到书面化怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到具体可衡量怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "青少年专家",
+  "to": "青少年 具体可衡量 拆解",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

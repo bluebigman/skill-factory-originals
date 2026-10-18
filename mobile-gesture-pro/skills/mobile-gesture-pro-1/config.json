@@ -1,0 +1,72 @@
+{
+ "name": "mobile-gesture-pro-1",
+ "version": "2.0.0",
+ "domain": "移动交互",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "避让系统",
+   "then": "避开系统级手势区域",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可发现",
+   "then": "新手势必须有引导",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "一义一势",
+   "then": "同一手势不承载多重含义",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "提供替代",
+   "then": "手势操作须有按钮替代",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "防误触",
+   "then": "危险操作需二次确认",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "避让系统",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可发现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一义一势",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提供替代",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防误触",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

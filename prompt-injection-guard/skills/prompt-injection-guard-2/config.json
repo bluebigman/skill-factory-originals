@@ -1,0 +1,72 @@
+{
+ "name": "prompt-injection-guard-2",
+ "version": "2.0.0",
+ "domain": "提示注入防护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "输入隔离",
+   "then": "外部内容与指令分区",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "指令优先",
+   "then": "系统指令高于外部内容",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可疑识别",
+   "then": "识别越权与角色扮演诱导",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "输出校验",
+   "then": "输出前校验是否越界",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "最小工具",
+   "then": "只暴露必需工具权限",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "输入隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指令优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可疑识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小工具",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

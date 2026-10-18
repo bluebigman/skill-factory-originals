@@ -1,0 +1,72 @@
+{
+ "name": "doc-redact-review-1",
+ "version": "2.0.0",
+ "domain": "文档脱敏审阅",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先识别",
+   "then": "列出需脱敏字段",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级处理",
+   "then": "按敏感度选掩码或删除",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不可逆",
+   "then": "脱敏后不可反推",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "一致性",
+   "then": "同一实体脱敏结果一致",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "脱敏记录归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不可逆",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一致性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

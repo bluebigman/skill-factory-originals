@@ -1,0 +1,72 @@
+{
+ "name": "ugc-operation-2",
+ "version": "2.0.0",
+ "domain": "用户内容",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "降低门槛",
+   "then": "提供模板与话题降低参与门槛",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "即时回应",
+   "then": "对参与内容及时反馈",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "激励分层",
+   "then": "按质量分层激励",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "先授权",
+   "then": "使用前取得明确授权",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "先审后发",
+   "then": "建立审核机制再放开",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "降低门槛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "即时回应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "激励分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "先授权",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "先审后发",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

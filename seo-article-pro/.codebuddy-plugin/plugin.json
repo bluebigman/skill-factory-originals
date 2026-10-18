@@ -1,0 +1,74 @@
+{
+ "name": "seo-article-pro",
+ "version": "1.0.0",
+ "plugin": "seo-article-pro",
+ "description": "SEO Article Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/seo-article-pro.md"
+ ],
+ "skills": [
+  "./skills/keyword-plan",
+  "./skills/quality-check",
+  "./skills/structure-seo"
+ ],
+ "expertType": "agent",
+ "agentName": "seo-article-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "SEO Article Pro",
+  "zh": "搜索排名 选词错位 密度堆砌"
+ },
+ "profession": {
+  "en": "SEO Article Pro",
+  "zh": "SEO文章 关键词布局 搜索意图"
+ },
+ "displayDescription": {
+  "en": "Handles SEO Article Pro tasks end-to-end with built-in professional skills.",
+  "zh": "SEO文章 关键词布局 搜索意图：关键词的选取与布局；内容质量的底线核查；利于抓取的内容结构。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "选词错位"
+  },
+  {
+   "en": "practical capability",
+   "zh": "密度堆砌"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无长尾"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到选词错位怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到密度堆砌怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无长尾怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到选词错位怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:50",
+  "from": "搜索排名专家",
+  "to": "搜索排名 选词错位 密度堆砌",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

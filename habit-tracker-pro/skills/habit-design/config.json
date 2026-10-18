@@ -1,0 +1,121 @@
+{
+ "name": "habit-design",
+ "version": "2.0.0",
+ "domain": "习惯养成",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标过大",
+   "then": "把习惯压到 2 分钟内可完成（每天 1 个俯卧撑），过大必放弃",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无触发",
+   "then": "绑定既有动作（刷牙后立刻做），靠提醒不可持续",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "动机依赖",
+   "then": "设计不依赖情绪强度的动作，动机必然波动",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "多重习惯",
+   "then": "一次只培养一个，同时多个成功率极低",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "环境支持",
+   "then": "把道具放到必经路径上，物理提示优于意志力",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "习惯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开始",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坚持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小行动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目标过大",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无触发",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动机依赖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多重习惯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境支持",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每天",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "情绪",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "次只",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提醒",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "agent-quota-guard-2",
+ "version": "2.0.0",
+ "domain": "配额守卫",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全局唯一入口",
+   "then": "同一资源只允许一个操作入口",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "并发锁",
+   "then": "多实例并发必冲突须加锁",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "预算上限",
+   "then": "预设调用与成本预算触顶即停",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "失败即停",
+   "then": "失败也消耗配额时不得重试",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "来源盘点",
+   "then": "动手前先盘清所有调用来源",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全局唯一入口",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "并发锁",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算上限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败即停",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源盘点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "skill-install-audit-1",
+ "version": "2.0.0",
+ "domain": "技能安装审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "来源核验",
+   "then": "核实来源可信",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "静态扫描",
+   "then": "扫描提示注入与恶意载荷",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "权限检查",
+   "then": "检查申请权限是否必要",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "沙箱试跑",
+   "then": "沙箱内先试跑",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "安装留痕",
+   "then": "记录安装来源与时间",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "来源核验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "静态扫描",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沙箱试跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安装留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "self-assess",
+ "version": "2.0.0",
+ "domain": "职业规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "自我评估失真",
+   "then": "用交付物与外部反馈校准，纯自评偏差大",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无对标",
+   "then": "对照目标岗位 JD 逐项打分，找出真实差距",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "忽视可迁移",
+   "then": "区分可迁移能力（沟通/项目/分析）与岗位专属技能",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "只补短板",
+   "then": "资源优先投在优势上，短板补到及格即可",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "一次性",
+   "then": "能力盘点每半年一次，市场与自身都在变",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "能力盘点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优势",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "短板",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自我评估失真",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无对标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "忽视可迁移",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只补短板",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一次性",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "决定",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "data-cleanup-pro",
+ "version": "1.0.0",
+ "plugin": "data-cleanup-pro",
+ "description": "Data Cleanup Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/data-cleanup-pro.md"
+ ],
+ "skills": [
+  "./skills/clean-rules",
+  "./skills/deliver",
+  "./skills/inspect"
+ ],
+ "expertType": "agent",
+ "agentName": "data-cleanup-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Data Cleanup Pro",
+  "zh": "数据清洗 手工修改 覆盖原表"
+ },
+ "profession": {
+  "en": "Data Cleanup Pro",
+  "zh": "数据清洗 表格整理 去重规范"
+ },
+ "displayDescription": {
+  "en": "Handles Data Cleanup Pro tasks end-to-end with built-in professional skills.",
+  "zh": "数据清洗 表格整理 去重规范：可复现的清洗流程；清洗结果的交付标准；脏数据的识别方法。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "手工修改"
+  },
+  {
+   "en": "practical capability",
+   "zh": "覆盖原表"
+  },
+  {
+   "en": "practical capability",
+   "zh": "步骤不明"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到手工修改怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到覆盖原表怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到步骤不明怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到手工修改怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:33",
+  "from": "数据清洗专家",
+  "to": "数据清洗 手工修改 覆盖原表",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

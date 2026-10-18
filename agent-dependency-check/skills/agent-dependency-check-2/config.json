@@ -1,0 +1,72 @@
+{
+ "name": "agent-dependency-check-2",
+ "version": "2.0.0",
+ "domain": "依赖检查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版本锁定",
+   "then": "依赖版本必须锁定",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "漏洞扫描",
+   "then": "定期扫描已知漏洞",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "最小依赖",
+   "then": "不引入无用依赖",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "许可合规",
+   "then": "检查开源许可",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "升级预案",
+   "then": "依赖升级须有预案",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版本锁定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "漏洞扫描",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小依赖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "许可合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "升级预案",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

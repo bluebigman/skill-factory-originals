@@ -1,0 +1,78 @@
+{
+ "name": "product-roadmap-plan-2",
+ "version": "2.0.0",
+ "domain": "产品路线图",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "留缓冲",
+   "then": "每阶段预留两成缓冲给突发需求",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标注依赖",
+   "then": "跨团队依赖显式标出并提前对齐",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "留缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标注依赖",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "显式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "预留",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "按目",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "排序",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "产品",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "达成",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

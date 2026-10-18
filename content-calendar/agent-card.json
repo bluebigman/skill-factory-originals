@@ -1,0 +1,75 @@
+{
+ "name": "Content Calendar",
+ "description": "内容日历专家：覆盖 先排固定、提前两周、标注状态 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/content-calendar",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/content-calendar",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "content-calendar-1",
+   "name": "针对 先排固定、提前两周 等情境给出可执行处置",
+   "description": "针对 先排固定、提前两周 等情境给出可执行处置",
+   "tags": [
+    "先排固定",
+    "提前两周"
+   ],
+   "examples": [
+    "遇到先排固定",
+    "遇到提前两周",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "content-calendar-2",
+   "name": "针对 标注状态、留缓冲 等情境给出可执行处置",
+   "description": "针对 标注状态、留缓冲 等情境给出可执行处置",
+   "tags": [
+    "标注状态",
+    "留缓冲"
+   ],
+   "examples": [
+    "遇到标注状态",
+    "遇到留缓冲",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "content-calendar-3",
+   "name": "针对 按数据调 等情境给出可执行处置",
+   "description": "针对 按数据调 等情境给出可执行处置",
+   "tags": [
+    "按数据调"
+   ],
+   "examples": [
+    "遇到按数据调",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "内容日历专家",
+ "x-source": "skill-factory-originals"
+}

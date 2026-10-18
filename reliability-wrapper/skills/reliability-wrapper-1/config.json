@@ -1,0 +1,71 @@
+{
+ "name": "reliability-wrapper-1",
+ "version": "2.0.0",
+ "domain": "重试熔断",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无条件重试",
+   "then": "先判断失败是否「可重试」，不可重试类立即停",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "退避缺失",
+   "then": "重试必须指数退避 + 抖动，禁止紧循环",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重试烧配额",
+   "then": "重试也消耗配额时，改为「失败即停 + 人工确认」",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "无条件重试",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退避缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重试烧配额",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "消耗",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降级",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "即停",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

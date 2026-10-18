@@ -1,0 +1,72 @@
+{
+ "name": "content-calendar-pro-3",
+ "version": "2.0.0",
+ "domain": "内容排期",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主题先行",
+   "then": "先定季度主题再拆选题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "形式搭配",
+   "then": "长短内容与图文视频搭配",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "复用机制",
+   "then": "一条素材多形态复用",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "预留缓冲",
+   "then": "预留应急位应对热点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "按数据调",
+   "then": "按表现数据调整排期",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主题先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "形式搭配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复用机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预留缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按数据调",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

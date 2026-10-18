@@ -1,0 +1,121 @@
+{
+ "name": "time-arrange",
+ "version": "2.0.0",
+ "domain": "自律养成",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "满排",
+   "then": "日程留 20% 空白，满排必连锁延误",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "最难后置",
+   "then": "最难的放精力最好的时段，而非按清单顺序",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无缓冲",
+   "then": "任务间留 10 分钟过渡，切换成本常被低估",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "碎片化",
+   "then": "同类事务批量合并到固定时段处理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "只做紧急",
+   "then": "每天留一段固定时间做重要不紧急的事，否则长期被救火占据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "时间安排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "日程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "没时间",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "满排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最难后置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "碎片化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只做紧急",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "supplier-qualify-pro",
+ "version": "1.0.0",
+ "plugin": "supplier-qualify-pro",
+ "description": "Supplier Qualify Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/supplier-qualify-pro.md"
+ ],
+ "skills": [
+  "./skills/supplier-qualify-pro-1",
+  "./skills/supplier-qualify-pro-2",
+  "./skills/supplier-qualify-pro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "supplier-qualify-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Supplier Qualify Pro",
+  "zh": "供应商 分级准入 现场审核"
+ },
+ "profession": {
+  "en": "Supplier Qualify Pro",
+  "zh": "供应商 准入评估 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Supplier Qualify Pro tasks end-to-end with built-in professional skills.",
+  "zh": "供应商 准入评估 顾问：覆盖 分级准入、现场审核、试产验证 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "供应商",
+   "en": "supplier-qualify-pro"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到供应商怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到准入评估怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到供应商怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "供应商专家",
+  "to": "供应商 分级准入 现场审核",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

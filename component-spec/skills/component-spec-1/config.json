@@ -1,0 +1,72 @@
+{
+ "name": "component-spec-1",
+ "version": "2.0.0",
+ "domain": "组件规格定义",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "状态齐全",
+   "then": "默认悬停禁用加载齐全",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "尺寸规范",
+   "then": "尺寸按栅格",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "间距统一",
+   "then": "内外间距统一",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可组合",
+   "then": "组件可组合复用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "文档示例",
+   "then": "配使用示例与禁忌",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "状态齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "尺寸规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "间距统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可组合",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文档示例",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

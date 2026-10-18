@@ -1,0 +1,121 @@
+{
+ "name": "meeting",
+ "version": "2.0.0",
+ "domain": "项目管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "流水账",
+   "then": "只记三类：决议、行动项、待决项，讨论过程不入纪要",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无人认领",
+   "then": "行动项必须落到具名个人并给具体日期，落部门等于没人做",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "跟踪失效",
+   "then": "下次会议首项议程固定为上次行动项核对",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无争议记录",
+   "then": "有异议须如实记入并标注，粉饰纪要会在执行时爆雷",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时效",
+   "then": "会后 2 小时内发出，延迟越久失真越多",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "会议记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "纪要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行动项",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "决议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流水账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无人认领",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跟踪失效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无争议记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只记",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "三类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时内",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

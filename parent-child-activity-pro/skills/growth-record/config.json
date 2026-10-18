@@ -1,0 +1,121 @@
+{
+ "name": "growth-record",
+ "version": "2.0.0",
+ "domain": "亲子活动",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "记录散乱",
+   "then": "按年建目录（作品/照片/身高/关键事件），统一命名规则",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "作品堆积",
+   "then": "拍照留存后原物限量保留，避免收纳失控",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "记录断档",
+   "then": "用固定节点（生日/开学/期末）批量补录，降低维护成本",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "隐私风险",
+   "then": "公开分享前遮盖校名、地址、门牌等可定位信息",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "只记成绩",
+   "then": "记录须含过程与情绪，纯成绩记录会制造压力",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "成长记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "作品",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "相册",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "身高体重",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录散乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "作品堆积",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录断档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐私风险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只记成绩",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

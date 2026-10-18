@@ -1,0 +1,72 @@
+{
+ "name": "data-access-request-2",
+ "version": "2.0.0",
+ "domain": "数据取用流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "申请先行",
+   "then": "先申请后取用",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "用途明确",
+   "then": "说明用途与范围",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "审批分级",
+   "then": "按敏感度分级审批",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "留痕审计",
+   "then": "取用记录可审计",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "定期复核权限",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "申请先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用途明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审批分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕审计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

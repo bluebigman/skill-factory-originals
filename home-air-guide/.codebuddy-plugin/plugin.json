@@ -1,0 +1,74 @@
+{
+ "name": "home-air-guide",
+ "version": "1.0.0",
+ "plugin": "home-air-guide",
+ "description": "Home Air Guide for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-air-guide.md"
+ ],
+ "skills": [
+  "./skills/home-air-guide-1",
+  "./skills/home-air-guide-2",
+  "./skills/home-air-guide-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-air-guide",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Air Guide",
+  "zh": "室内空气 定时通风 新家具"
+ },
+ "profession": {
+  "en": "Home Air Guide",
+  "zh": "室内空气 通风净化 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Home Air Guide tasks end-to-end with built-in professional skills.",
+  "zh": "室内空气 通风净化 助手：覆盖 定时通风、新家具、净化器、湿度 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "定时通风"
+  },
+  {
+   "en": "practical capability",
+   "zh": "新家具"
+  },
+  {
+   "en": "practical capability",
+   "zh": "净化器"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到定时通风怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到新家具怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到净化器怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到定时通风怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "室内空气专家",
+  "to": "室内空气 定时通风 新家具",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "name": "fat-loss-meal",
+ "version": "2.0.0",
+ "domain": "增肌减脂",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构优先",
+   "then": "用半盘蔬菜+四分蛋白+四分主食配餐，比记热量更易执行",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "蛋白保留",
+   "then": "减脂期蛋白不减量，否则掉肌肉",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "主食选择",
+   "then": "优先粗粮杂豆，升糖平稳更耐饿",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "隐形热量",
+   "then": "酱料单独放置蘸取，量比直接淋入少一半",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "速度预期",
+   "then": "每周减重不超体重 1%，超速必反弹",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "减脂餐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "控卡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "轻食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "饱腹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "蛋白保留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主食选择",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐形热量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "速度预期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "单独",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "体重",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "训练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "否则",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "更易",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "反弹",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

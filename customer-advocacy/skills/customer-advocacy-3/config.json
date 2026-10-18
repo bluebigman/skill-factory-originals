@@ -1,0 +1,72 @@
+{
+ "name": "customer-advocacy-3",
+ "version": "2.0.0",
+ "domain": "客户推荐",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先出结果",
+   "then": "先有可量化成果再谈推荐",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分阶段邀请",
+   "then": "从轻到重分阶段邀请",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "尊重意愿",
+   "then": "不施压不捆绑利益",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "授权明确",
+   "then": "案例与肖像授权明确",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "双向回馈",
+   "then": "给推荐人实际价值回馈",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先出结果",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分阶段邀请",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "尊重意愿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "授权明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双向回馈",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

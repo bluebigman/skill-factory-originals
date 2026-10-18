@@ -1,0 +1,121 @@
+{
+ "name": "desk-setup",
+ "version": "2.0.0",
+ "domain": "久坐改善",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "颈椎前伸",
+   "then": "显示器上沿调至视线水平，低头是颈肩痛首要诱因",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "坐姿塌陷",
+   "then": "腰靠支撑腰曲，臀部坐满椅面，半坐姿必致腰痛",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "手臂悬空",
+   "then": "肘部保持 90-100 度并有支撑，悬空必致肩颈紧张",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "久坐不动",
+   "then": "每 45 分钟起身 2 分钟，定时比靠意志更可靠",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "鼠标位置",
+   "then": "鼠标置于身体前方而非侧面，减少肩部外展",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "工位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "椅子",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "显示器",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "久坐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "颈椎前伸",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坐姿塌陷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手臂悬空",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "久坐不动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "鼠标位置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "减少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设置",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "保持",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "身体",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "水平",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

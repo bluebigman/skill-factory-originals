@@ -1,0 +1,74 @@
+{
+ "name": "stress-relief-pro",
+ "version": "1.0.0",
+ "plugin": "stress-relief-pro",
+ "description": "Stress Relief Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/stress-relief-pro.md"
+ ],
+ "skills": [
+  "./skills/daily-recovery",
+  "./skills/instant-relief",
+  "./skills/professional-boundary"
+ ],
+ "expertType": "agent",
+ "agentName": "stress-relief-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Stress Relief Pro",
+  "zh": "压力缓解 睡眠不足 运动缺失"
+ },
+ "profession": {
+  "en": "Stress Relief Pro",
+  "zh": "压力缓解 放松方法 情绪调节"
+ },
+ "displayDescription": {
+  "en": "Handles Stress Relief Pro tasks end-to-end with built-in professional skills.",
+  "zh": "压力缓解 放松方法 情绪调节：长期压力的日常管理；压力高峰的快速平复方法；需要心理专业介入的情形。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "睡眠不足"
+  },
+  {
+   "en": "practical capability",
+   "zh": "运动缺失"
+  },
+  {
+   "en": "practical capability",
+   "zh": "社交隔离"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到睡眠不足怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到运动缺失怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到社交隔离怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到睡眠不足怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "压力缓解专家",
+  "to": "压力缓解 睡眠不足 运动缺失",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

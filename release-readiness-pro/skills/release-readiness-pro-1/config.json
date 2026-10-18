@@ -1,0 +1,72 @@
+{
+ "name": "release-readiness-pro-1",
+ "version": "2.0.0",
+ "domain": "发布就绪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "清单化",
+   "then": "发布前逐项核对清单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "依赖确认",
+   "then": "上游依赖版本已锁定",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "回滚预案",
+   "then": "回滚路径必须预演",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "灰度发布",
+   "then": "先小流量再全量",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "观测就绪",
+   "then": "发布后观测指标已就位",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回滚预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "灰度发布",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "观测就绪",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

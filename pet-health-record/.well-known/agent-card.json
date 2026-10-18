@@ -1,0 +1,75 @@
+{
+ "name": "Pet Health Record",
+ "description": "宠物健康专家：覆盖 四类记录、体重趋势、就诊准备、用药、急症 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/pet-health-record",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/pet-health-record",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "pet-health-record-1",
+   "name": "针对 四类记录、体重趋势 等情境给出可执行处置",
+   "description": "针对 四类记录、体重趋势 等情境给出可执行处置",
+   "tags": [
+    "四类记录",
+    "体重趋势"
+   ],
+   "examples": [
+    "遇到四类记录",
+    "遇到体重趋势",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pet-health-record-2",
+   "name": "针对 就诊准备、用药 等情境给出可执行处置",
+   "description": "针对 就诊准备、用药 等情境给出可执行处置",
+   "tags": [
+    "就诊准备",
+    "用药"
+   ],
+   "examples": [
+    "遇到就诊准备",
+    "遇到用药",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pet-health-record-3",
+   "name": "针对 急症 等情境给出可执行处置",
+   "description": "针对 急症 等情境给出可执行处置",
+   "tags": [
+    "急症"
+   ],
+   "examples": [
+    "遇到急症",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "宠物健康专家",
+ "x-source": "skill-factory-originals"
+}

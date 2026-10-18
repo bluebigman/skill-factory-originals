@@ -1,0 +1,62 @@
+{
+ "name": "release-checklist-1",
+ "version": "2.0.0",
+ "domain": "发布清单",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "清单化",
+   "then": "发布步骤写成清单，逐项打勾",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "含回滚",
+   "then": "每次发布必须包含回滚方案与触发条件",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "含回滚",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每次",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "发布",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

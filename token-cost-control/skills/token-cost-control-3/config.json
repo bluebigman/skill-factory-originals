@@ -1,0 +1,87 @@
+{
+ "name": "token-cost-control-3",
+ "version": "2.0.0",
+ "domain": "成本控制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "大材小用",
+   "then": "简单任务用小模型，复杂推理才上大模型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "降级无底线",
+   "then": "降级须设质量下限，低于阈值宁可失败也不硬凑",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "质量无校验",
+   "then": "降级后必须抽样质检，确认质量未破线",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "大材小用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "降级无底线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量无校验",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "最大",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "预算",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "阈值",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

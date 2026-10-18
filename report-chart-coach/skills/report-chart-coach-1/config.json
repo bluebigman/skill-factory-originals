@@ -1,0 +1,58 @@
+{
+ "name": "report-chart-coach-1",
+ "version": "2.0.0",
+ "domain": "报表图表",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按关系选型",
+   "then": "看趋势/比大小/看构成分别选线柱条",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不双轴",
+   "then": "避免双轴误导，必要时拆成两张",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按关系选型",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不双轴",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "趋势",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "看趋",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

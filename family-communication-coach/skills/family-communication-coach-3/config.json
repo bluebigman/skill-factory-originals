@@ -1,0 +1,69 @@
+{
+ "name": "family-communication-coach-3",
+ "version": "2.0.0",
+ "domain": "家庭沟通",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "情绪暂停",
+   "then": "冲突时物理暂停 20 分钟",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "情绪暂停",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "当场",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "复述",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "物理",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

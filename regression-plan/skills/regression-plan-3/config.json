@@ -1,0 +1,65 @@
+{
+ "name": "regression-plan-3",
+ "version": "2.0.0",
+ "domain": "回归测试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "记录基线",
+   "then": "记录每次回归结果作为对比基线",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "记录基线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每次",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "确定",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "链路",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

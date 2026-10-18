@@ -1,0 +1,50 @@
+{
+ "name": "agent-context-handoff-1",
+ "version": "2.0.0",
+ "domain": "上下文交",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "摘要保真",
+   "then": "摘要不得丢关键约束",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "决策继承",
+   "then": "继承前序决策与理由",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "摘要保真",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "决策继承",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "理由",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

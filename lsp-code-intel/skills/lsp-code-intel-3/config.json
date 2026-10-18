@@ -1,0 +1,72 @@
+{
+ "name": "lsp-code-intel-3",
+ "version": "2.0.0",
+ "domain": "代码语义分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "符号优先",
+   "then": "按符号而非文本检索",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "影响面分析",
+   "then": "查引用评估影响",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "改名安全",
+   "then": "改名走语义重命名",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "类型检查",
+   "then": "用类型信息辅助判断",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果可跳转",
+   "then": "结果带位置信息",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "符号优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "影响面分析",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改名安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类型检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果可跳转",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

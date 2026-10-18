@@ -1,0 +1,72 @@
+{
+ "name": "pdf-content-extract-1",
+ "version": "2.0.0",
+ "domain": "PDF",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版式优先",
+   "then": "先判单栏双栏再提取，双栏按栏读否则串行",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "表格独立",
+   "then": "表格单独抽取并保留表头",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "页码标注",
+   "then": "每段标注来源页码，便于回查",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "乱码处理",
+   "then": "遇乱码先试编码再考虑 OCR",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "元数据保留",
+   "then": "标题作者日期一并提取",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版式优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "表格独立",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "页码标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "乱码处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "元数据保留",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

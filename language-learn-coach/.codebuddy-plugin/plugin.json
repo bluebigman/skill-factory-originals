@@ -1,0 +1,74 @@
+{
+ "name": "language-learn-coach",
+ "version": "1.0.0",
+ "plugin": "language-learn-coach",
+ "description": "Language Learn Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/language-learn-coach.md"
+ ],
+ "skills": [
+  "./skills/language-learn-coach-1",
+  "./skills/language-learn-coach-2",
+  "./skills/language-learn-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "language-learn-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Language Learn Coach",
+  "zh": "外语学习 先输入 高频优先"
+ },
+ "profession": {
+  "en": "Language Learn Coach",
+  "zh": "外语学习 记忆方法 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Language Learn Coach tasks end-to-end with built-in professional skills.",
+  "zh": "外语学习 记忆方法 教练：覆盖 先输入、高频优先、间隔重复 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "14-WorldWise",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "外语学习",
+   "en": "language-learn-coach"
+  },
+  {
+   "en": "WorldWise",
+   "zh": "WorldWise"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到外语学习怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到记忆方法怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到教练怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到外语学习怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "外语学习专家",
+  "to": "外语学习 先输入 高频优先",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

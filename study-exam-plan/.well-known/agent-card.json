@@ -1,0 +1,75 @@
+{
+ "name": "Study Exam Plan",
+ "description": "备考计划专家：覆盖 倒排、真题优先、错题驱动 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/study-exam-plan",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/study-exam-plan",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "study-exam-plan-1",
+   "name": "针对 倒排、真题优先 等情境给出可执行处置",
+   "description": "针对 倒排、真题优先 等情境给出可执行处置",
+   "tags": [
+    "倒排",
+    "真题优先"
+   ],
+   "examples": [
+    "遇到倒排",
+    "遇到真题优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "study-exam-plan-2",
+   "name": "针对 错题驱动、科目轮换 等情境给出可执行处置",
+   "description": "针对 错题驱动、科目轮换 等情境给出可执行处置",
+   "tags": [
+    "错题驱动",
+    "科目轮换"
+   ],
+   "examples": [
+    "遇到错题驱动",
+    "遇到科目轮换",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "study-exam-plan-3",
+   "name": "针对 周复盘 等情境给出可执行处置",
+   "description": "针对 周复盘 等情境给出可执行处置",
+   "tags": [
+    "周复盘"
+   ],
+   "examples": [
+    "遇到周复盘",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "备考计划专家",
+ "x-source": "skill-factory-originals"
+}

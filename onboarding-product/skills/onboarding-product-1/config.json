@@ -1,0 +1,72 @@
+{
+ "name": "onboarding-product-1",
+ "version": "2.0.0",
+ "domain": "新用户",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "价值前置",
+   "then": "先给价值再索取信息",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "渐进披露",
+   "then": "复杂功能延后暴露",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "空状态设计",
+   "then": "空状态必须给下一步",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可跳过",
+   "then": "引导允许跳过",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "激活口径",
+   "then": "明确定义激活指标与口径",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "价值前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "渐进披露",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "空状态设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可跳过",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "激活口径",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

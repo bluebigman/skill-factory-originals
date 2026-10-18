@@ -1,0 +1,72 @@
+{
+ "name": "export-doc-check-1",
+ "version": "2.0.0",
+ "domain": "出口单据",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单单一致",
+   "then": "单据之间的数据必须一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "单证一致",
+   "then": "单据与信用证条款逐条核对",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "申报规范",
+   "then": "品名与编码按规申报",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "出单预审",
+   "then": "出单前内部预审",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "全套归档",
+   "then": "全套单据留底归档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单单一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单证一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "申报规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "出单预审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全套归档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

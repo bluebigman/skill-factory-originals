@@ -1,0 +1,72 @@
+{
+ "name": "network-fault-tolerance-1",
+ "version": "2.0.0",
+ "domain": "网络容错设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "超时必设",
+   "then": "所有网络调用设超时",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "重试退避",
+   "then": "指数退避加抖动",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "多路冗余",
+   "then": "关键路径多路",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "降级兜底",
+   "then": "有兜底数据或提示",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "故障演练",
+   "then": "定期模拟网络故障",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "超时必设",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重试退避",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多路冗余",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "降级兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "故障演练",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

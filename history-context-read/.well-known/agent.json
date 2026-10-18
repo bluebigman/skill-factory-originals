@@ -1,0 +1,67 @@
+{
+ "name": "History Context Read",
+ "description": "历史脉络专家：覆盖 先看地理、看同时期、区分史料 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/history-context-read",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/history-context-read",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "history-context-read-1",
+   "name": "针对 先看地理、看同时期 等情境给出可执行处置",
+   "description": "针对 先看地理、看同时期 等情境给出可执行处置",
+   "tags": [
+    "先看地理",
+    "看同时期"
+   ],
+   "examples": [
+    "遇到先看地理",
+    "遇到看同时期",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "history-context-read-2",
+   "name": "针对 区分史料、避免以今度古 等情境给出可执行处置",
+   "description": "针对 区分史料、避免以今度古 等情境给出可执行处置",
+   "tags": [
+    "区分史料",
+    "避免以今度古"
+   ],
+   "examples": [
+    "遇到区分史料",
+    "遇到避免以今度古",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "history-context-read-3",
+   "name": "针对 多视角 等情境给出可执行处置",
+   "description": "针对 多视角 等情境给出可执行处置",
+   "tags": [
+    "多视角"
+   ],
+   "examples": [
+    "遇到多视角",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "历史脉络专家"
+}

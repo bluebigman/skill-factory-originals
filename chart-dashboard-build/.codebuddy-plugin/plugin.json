@@ -1,0 +1,74 @@
+{
+ "name": "chart-dashboard-build",
+ "version": "1.0.0",
+ "plugin": "chart-dashboard-build",
+ "description": "Chart Dashboard Build for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/chart-dashboard-build.md"
+ ],
+ "skills": [
+  "./skills/chart-dashboard-build-1",
+  "./skills/chart-dashboard-build-2",
+  "./skills/chart-dashboard-build-3"
+ ],
+ "expertType": "agent",
+ "agentName": "chart-dashboard-build",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Chart Dashboard Build",
+  "zh": "数据可视化 一屏一主题"
+ },
+ "profession": {
+  "en": "Chart Dashboard Build",
+  "zh": "数据可视化 仪表盘 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Chart Dashboard Build tasks end-to-end with built-in professional skills.",
+  "zh": "数据可视化 仪表盘 顾问：覆盖 一屏一主题、指标分层、图型克制 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据可视化",
+   "en": "chart-dashboard-build"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到数据可视化怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到仪表盘怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到数据可视化怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "数据可视化专家",
+  "to": "数据可视化 一屏一主题",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

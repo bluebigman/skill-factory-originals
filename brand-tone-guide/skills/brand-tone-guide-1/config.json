@@ -1,0 +1,72 @@
+{
+ "name": "brand-tone-guide-1",
+ "version": "2.0.0",
+ "domain": "品牌语气指南",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定语气",
+   "then": "正式亲切或专业",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "双语对齐",
+   "then": "多语言版本含义一致",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "拒绝直译",
+   "then": "按目标语习惯改写",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "禁用词库",
+   "then": "建立禁用与敏感词",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期审校",
+   "then": "定期回看历史物料",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定语气",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双语对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒绝直译",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "禁用词库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期审校",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "name": "live-stream-plan-3",
+ "version": "2.0.0",
+ "domain": "直播带货",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "复盘看三数",
+   "then": "停留-转化-复购三项复盘",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复盘看三数",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "转化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "话术",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "复购",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "sheet-clean-batch-1",
+ "version": "2.0.0",
+ "domain": "表格批量清洗",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先备份",
+   "then": "清洗前留原表副本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "规则留痕",
+   "then": "每步清洗记录规则与影响行数",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "空值策略",
+   "then": "空值分删除/填充/保留三类分别处理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "格式统一",
+   "then": "日期数字文本三列分别标准化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "清洗后核",
+   "then": "对比清洗前后行数与关键合计",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先备份",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "空值策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清洗后核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

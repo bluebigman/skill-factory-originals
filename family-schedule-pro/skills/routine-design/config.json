@@ -1,0 +1,117 @@
+{
+ "name": "routine-design",
+ "version": "2.0.0",
+ "domain": "家庭日程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "晚睡",
+   "then": "固定起床时间而非就寝时间，起床时间是节律锚点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "早晨混乱",
+   "then": "前一晚完成打包（书包/衣物/早餐），早晨只做执行",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "周末错乱",
+   "then": "周末起床时间与工作日差不超过 1 小时",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "作业拖延",
+   "then": "固定作业启动时间与固定位置，靠提醒不如靠固定",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "全家冲突",
+   "then": "卫生间等高争用资源的时段错开排布",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "作息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "早起",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "晚睡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "早晨混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周末错乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "作业拖延",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全家冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "缓冲",
+   "source": "SKILL.md#L40"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "game-onboarding-pro",
+ "version": "1.0.0",
+ "plugin": "game-onboarding-pro",
+ "description": "game-onboarding-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for game-onboarding-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/game-onboarding-pro.md"
+ ],
+ "agentName": "game-onboarding-pro",
+ "displayName": {
+  "zh": "游戏新手 边做边教 一次一点",
+  "en": "game-onboarding-pro"
+ },
+ "profession": {
+  "zh": "游戏新手 引导设计 顾问",
+  "en": "game-onboarding-pro"
+ },
+ "displayDescription": {
+  "zh": "游戏新手 引导设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "game-onboarding-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "游戏新手",
+   "en": "game-onboarding-pro"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到游戏新手怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划游戏新手",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查游戏新手",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到游戏新手怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/game-onboarding-pro-1/",
+  "./skills/game-onboarding-pro-2/",
+  "./skills/game-onboarding-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "游戏新手专家",
+  "to": "游戏新手 边做边教 一次一点",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

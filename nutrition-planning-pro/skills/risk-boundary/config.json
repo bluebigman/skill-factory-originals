@@ -1,0 +1,121 @@
+{
+ "name": "risk-boundary",
+ "version": "2.0.0",
+ "domain": "膳食搭配",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "快速减重",
+   "then": "每周减重超体重 1% 不可持续，且易反弹",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "极端饮食",
+   "then": "断食/极低碳需医师或营养师评估后执行",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "慢病",
+   "then": "糖尿病/肾病/高血脂等必须遵医嘱方案，本工具不适用",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "孕期哺乳",
+   "then": "此阶段营养需求特殊，务必遵医嘱",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "补充剂",
+   "then": "补充剂不替代均衡膳食，剂量与禁忌须咨询专业人士",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "减脂",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "控糖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "血糖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "慢性病",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "快速减重",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "极端饮食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "慢病",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "孕期哺乳",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "补充剂",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "review",
+ "version": "2.0.0",
+ "domain": "报告撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "错别字",
+   "then": "通读一遍并对关键数字做二次核对",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "前后矛盾",
+   "then": "核对摘要与正文数字一致，不一致是最高频事故",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "责任模糊",
+   "then": "行动建议须写明责任方与时间",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "敏感信息",
+   "then": "外发前检查客户名、内部代号、成本数据是否需脱敏",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本混乱",
+   "then": "文件名带版本与日期，并用最终版统一替换旧版",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交付",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错别字",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "前后矛盾",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任模糊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感信息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "标题",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

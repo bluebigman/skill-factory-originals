@@ -1,0 +1,74 @@
+{
+ "name": "mp-title-coach",
+ "version": "1.0.0",
+ "plugin": "mp-title-coach",
+ "description": "Mp Title Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/mp-title-coach.md"
+ ],
+ "skills": [
+  "./skills/mp-title-coach-1",
+  "./skills/mp-title-coach-2",
+  "./skills/mp-title-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "mp-title-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Mp Title Coach",
+  "zh": "公众号标题 具体胜抽象"
+ },
+ "profession": {
+  "en": "Mp Title Coach",
+  "zh": "公众号标题 拟写打磨 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Mp Title Coach tasks end-to-end with built-in professional skills.",
+  "zh": "公众号标题 拟写打磨 顾问：覆盖 具体胜抽象、前置价值、不夸大 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "具体胜抽象"
+  },
+  {
+   "en": "practical capability",
+   "zh": "前置价值"
+  },
+  {
+   "en": "practical capability",
+   "zh": "不夸大"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到具体胜抽象怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到前置价值怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不夸大怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到具体胜抽象怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "公众号标题专家",
+  "to": "公众号标题 具体胜抽象",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

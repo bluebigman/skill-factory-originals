@@ -1,0 +1,72 @@
+{
+ "name": "visual-hierarchy-2",
+ "version": "2.0.0",
+ "domain": "视觉层级设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主次分明",
+   "then": "一眼看出主次",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "留白分隔",
+   "then": "用留白而非线条分隔",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "对齐统一",
+   "then": "所有元素对齐网格",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "色彩引导",
+   "then": "用色彩引导视线",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "克制强调",
+   "then": "强调不超过两处",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主次分明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留白分隔",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对齐统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "色彩引导",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "克制强调",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

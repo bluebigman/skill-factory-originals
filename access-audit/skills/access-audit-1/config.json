@@ -1,0 +1,62 @@
+{
+ "name": "access-audit-1",
+ "version": "2.0.0",
+ "domain": "权限审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定期清查",
+   "then": "每季度清查一次账号与权限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "离职即收",
+   "then": "离职当天回收全部权限",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定期清查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "离职即收",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每季度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "权限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回收",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

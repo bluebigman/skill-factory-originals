@@ -1,0 +1,74 @@
+{
+ "name": "fitness-progress-log-1",
+ "version": "2.0.0",
+ "domain": "健身记录",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "记三项",
+   "then": "重量-次数-组数，其余可省",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "周期对比",
+   "then": "按 4 周周期对比，避免单次波动误判",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "记三项",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周期对比",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "其余",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "次数",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "波动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "进度",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "健身",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "重量",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

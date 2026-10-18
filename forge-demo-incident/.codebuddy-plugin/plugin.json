@@ -1,0 +1,61 @@
+{
+ "name": "forge-demo-incident",
+ "version": "1.0.0",
+ "plugin": "forge-demo-incident",
+ "description": "Incident Review",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "SkillForge Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/forge-demo-incident.md"
+ ],
+ "expertType": "agent",
+ "agentName": "forge-demo-incident",
+ "displayName": {
+  "en": "Incident Review",
+  "zh": "故障复盘 时间线还原 根因定位"
+ },
+ "profession": {
+  "en": "Incident Review",
+  "zh": "故障复盘 顾问"
+ },
+ "displayDescription": {
+  "en": "时间线、根因、固化措施",
+  "zh": "故障复盘：覆盖时间线、根因、固化措施等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "forge demo incident 1",
+   "zh": "forge demo incident 1"
+  },
+  {
+   "en": "forge demo incident 2",
+   "zh": "forge demo incident 2"
+  },
+  {
+   "en": "forge demo incident 3",
+   "zh": "forge demo incident 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with forge-demo-incident-1",
+   "zh": "forge demo incident 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in forge-demo-incident-1",
+   "zh": "forge demo incident 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with forge-demo-incident-1",
+  "zh": "forge demo incident 1 第一步该怎么做"
+ }
+}

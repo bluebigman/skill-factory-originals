@@ -1,0 +1,69 @@
+{
+ "name": "family-budget-coach-3",
+ "version": "2.0.0",
+ "domain": "家庭收支",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "复盘",
+   "then": "每季度复盘结构而非逐笔",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每季度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只记",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "三类",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "全量",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "放弃",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

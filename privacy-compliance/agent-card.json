@@ -1,0 +1,75 @@
+{
+ "name": "Privacy Compliance",
+ "description": "隐私合规专家：覆盖 最小必要、明示用途、可撤回 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/privacy-compliance",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/privacy-compliance",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "privacy-compliance-1",
+   "name": "针对 最小必要、明示用途 等情境给出可执行处置",
+   "description": "针对 最小必要、明示用途 等情境给出可执行处置",
+   "tags": [
+    "最小必要",
+    "明示用途"
+   ],
+   "examples": [
+    "遇到最小必要",
+    "遇到明示用途",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "privacy-compliance-2",
+   "name": "针对 可撤回、分级保护 等情境给出可执行处置",
+   "description": "针对 可撤回、分级保护 等情境给出可执行处置",
+   "tags": [
+    "可撤回",
+    "分级保护"
+   ],
+   "examples": [
+    "遇到可撤回",
+    "遇到分级保护",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "privacy-compliance-3",
+   "name": "针对 专业边界 等情境给出可执行处置",
+   "description": "针对 专业边界 等情境给出可执行处置",
+   "tags": [
+    "专业边界"
+   ],
+   "examples": [
+    "遇到专业边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "隐私合规专家",
+ "x-source": "skill-factory-originals"
+}

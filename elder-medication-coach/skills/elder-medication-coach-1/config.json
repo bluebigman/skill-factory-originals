@@ -1,0 +1,70 @@
+{
+ "name": "elder-medication-coach-1",
+ "version": "2.0.0",
+ "domain": "老人用药",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分装药盒",
+   "then": "按日配好，优于口头提醒",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "用药清单",
+   "then": "就诊时出示全部在服药物含保健品",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分装药盒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用药清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提醒",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "口头",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "就诊",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "老人",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

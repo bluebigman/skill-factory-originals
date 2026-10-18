@@ -1,0 +1,121 @@
+{
+ "name": "body-structure",
+ "version": "2.0.0",
+ "domain": "公众号文章",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无小标题",
+   "then": "每 300-500 字设小标题，便于扫读",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "段落过长",
+   "then": "单段不超 5 行，手机端长段落阅读压力大",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无案例",
+   "then": "观点须配案例，纯论述说服力弱",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无金句",
+   "then": "每部分留一句可引用的话，便于传播",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结尾无行动",
+   "then": "结尾给明确行动（留言话题/转发理由）",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小标题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长文",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无小标题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "段落过长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无案例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无金句",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾无行动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "手机",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理由",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "压力",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "给明确",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "观点",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "引用",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "公众号",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

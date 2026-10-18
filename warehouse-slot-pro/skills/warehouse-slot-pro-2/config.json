@@ -1,0 +1,78 @@
+{
+ "name": "warehouse-slot-pro-2",
+ "version": "2.0.0",
+ "domain": "仓储布局",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "路径合并",
+   "then": "合并拣货路径减少行走距离",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "循环盘点",
+   "then": "用循环盘点替代全量盘点",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "路径合并",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "循环盘点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "高频",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "减少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "动线",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "全量",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分区",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "原则",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

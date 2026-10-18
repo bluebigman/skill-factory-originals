@@ -1,0 +1,72 @@
+{
+ "name": "metric-definition-2",
+ "version": "2.0.0",
+ "domain": "指标口径定义",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一句话定义",
+   "then": "用一句无歧义的话定义",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分子分母",
+   "then": "明确计算式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "统计周期",
+   "then": "明确时间窗口与时区",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数据源",
+   "then": "指明取数表与字段",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "口径变更记录版本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一句话定义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分子分母",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "统计周期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

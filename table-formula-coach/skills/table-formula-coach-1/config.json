@@ -1,0 +1,66 @@
+{
+ "name": "table-formula-coach-1",
+ "version": "2.0.0",
+ "domain": "表格公式",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拆引用",
+   "then": "先定位 #REF!/#VALUE! 出自哪一层引用，别整表重写",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分步验证",
+   "then": "把复合公式拆成单步，逐段确认中间值",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拆引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分步验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "排查",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "公式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "报错",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "family-schedule-pro",
+ "version": "1.0.0",
+ "plugin": "family-schedule-pro",
+ "description": "Family Schedule Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/family-schedule-pro.md"
+ ],
+ "skills": [
+  "./skills/calendar-unify",
+  "./skills/load-balance",
+  "./skills/routine-design"
+ ],
+ "expertType": "agent",
+ "agentName": "family-schedule-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Family Schedule Pro",
+  "zh": "家庭日程 日程分散 接送冲突"
+ },
+ "profession": {
+  "en": "Family Schedule Pro",
+  "zh": "家庭日程 接送安排 时间统筹"
+ },
+ "displayDescription": {
+  "en": "Handles Family Schedule Pro tasks end-to-end with built-in professional skills.",
+  "zh": "家庭日程 接送安排 时间统筹：全家日程的集中与冲突检测；家庭时间负荷的分配与减负。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "日程分散"
+  },
+  {
+   "en": "practical capability",
+   "zh": "接送冲突"
+  },
+  {
+   "en": "practical capability",
+   "zh": "忘记事项"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到日程分散怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到接送冲突怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到忘记事项怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到日程分散怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭日程专家",
+  "to": "家庭日程 日程分散 接送冲突",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

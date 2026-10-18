@@ -1,0 +1,113 @@
+{
+ "name": "call-boundary",
+ "version": "2.0.0",
+ "domain": "家庭急救",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "意识改变",
+   "then": "昏迷、抽搐、意识模糊立即拨打急救电话",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "呼吸循环",
+   "then": "呼吸困难、胸痛、大出血属急症，立即就医",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "中毒",
+   "then": "误服药物或化学品须立即就医并携带原包装",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "高热",
+   "then": "婴幼儿高热伴精神差须立即就医",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "本工具边界",
+   "then": "本工具仅提供通用常识，任何实际伤情以专业医护判断为准",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "何时就医",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "昏迷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "呼吸困难",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "急症",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "意识改变",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "呼吸循环",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "中毒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高热",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "本工具边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "信号",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "即就医",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "电话",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "立即就",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "常识",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "name": "family-photo-manage-2",
+ "version": "2.0.0",
+ "domain": "家庭相册",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "备份",
+   "then": "本地+云端双备份",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "关键节点",
+   "then": "生日/开学/毕业单独建目录",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "备份",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键节点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "日期",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "单独",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事件",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

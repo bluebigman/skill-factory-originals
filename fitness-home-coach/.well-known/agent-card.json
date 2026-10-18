@@ -1,0 +1,75 @@
+{
+ "name": "Fitness Home Coach",
+ "description": "居家健身专家：覆盖 无器械方案、渐进超负荷、训练频率、动作优先 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/fitness-home-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/fitness-home-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "fitness-home-coach-1",
+   "name": "针对 无器械方案、渐进超负荷 等情境给出可执行处置",
+   "description": "针对 无器械方案、渐进超负荷 等情境给出可执行处置",
+   "tags": [
+    "无器械方案",
+    "渐进超负荷"
+   ],
+   "examples": [
+    "遇到无器械方案",
+    "遇到渐进超负荷",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "fitness-home-coach-2",
+   "name": "针对 训练频率、动作优先 等情境给出可执行处置",
+   "description": "针对 训练频率、动作优先 等情境给出可执行处置",
+   "tags": [
+    "训练频率",
+    "动作优先"
+   ],
+   "examples": [
+    "遇到训练频率",
+    "遇到动作优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "fitness-home-coach-3",
+   "name": "针对 就医边界 等情境给出可执行处置",
+   "description": "针对 就医边界 等情境给出可执行处置",
+   "tags": [
+    "就医边界"
+   ],
+   "examples": [
+    "遇到就医边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "居家健身专家",
+ "x-source": "skill-factory-originals"
+}

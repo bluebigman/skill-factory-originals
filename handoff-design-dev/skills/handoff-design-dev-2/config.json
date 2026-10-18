@@ -1,0 +1,72 @@
+{
+ "name": "handoff-design-dev-2",
+ "version": "2.0.0",
+ "domain": "设计交付",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标注齐全",
+   "then": "间距、层级与状态标注完整",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "边界说明",
+   "then": "异常与极端情况需说明",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "资产规范",
+   "then": "切图命名与目录规范",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "上线走查",
+   "then": "上线前必须设计走查",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "问题闭环",
+   "then": "走查问题闭环跟踪",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标注齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界说明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资产规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上线走查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问题闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

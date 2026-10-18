@@ -1,0 +1,78 @@
+{
+ "name": "game-level-design-1",
+ "version": "2.0.0",
+ "domain": "游戏关卡",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先教后考",
+   "then": "新机制先给安全场景教学，再上强度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "难度锯齿",
+   "then": "难度总体上升但穿插回落，避免持续加压",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先教后考",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "难度锯齿",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "安全",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先给",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "强度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "机制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "游戏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "回落",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

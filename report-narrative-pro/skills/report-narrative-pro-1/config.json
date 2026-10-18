@@ -1,0 +1,72 @@
+{
+ "name": "report-narrative-pro-1",
+ "version": "2.0.0",
+ "domain": "报告撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结论先行",
+   "then": "开头给核心结论",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数据支撑",
+   "then": "每个判断有数据",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "口径一致",
+   "then": "全文指标口径统一",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "图表配合",
+   "then": "图表与正文互相印证",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "建议可执行",
+   "then": "建议必须具体可落地",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据支撑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图表配合",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "建议可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

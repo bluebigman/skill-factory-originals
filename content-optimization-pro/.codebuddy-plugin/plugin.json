@@ -1,0 +1,74 @@
+{
+ "name": "content-optimization-pro",
+ "version": "1.0.0",
+ "plugin": "content-optimization-pro",
+ "description": "Content Optimization Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/content-optimization-pro.md"
+ ],
+ "skills": [
+  "./skills/marketing-copy",
+  "./skills/moments",
+  "./skills/optimize"
+ ],
+ "expertType": "agent",
+ "agentName": "content-optimization-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Content Optimization Pro",
+  "zh": "内容优化 自说自话 无差异化"
+ },
+ "profession": {
+  "en": "Content Optimization Pro",
+  "zh": "内容优化 朋友圈文案 营销文案"
+ },
+ "displayDescription": {
+  "en": "Handles Content Optimization Pro tasks end-to-end with built-in professional skills.",
+  "zh": "内容优化 朋友圈文案 营销文案：营销场景的文案结构；社交场景的文案写法；已有内容的优化方法。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "自说自话"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无差异化"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无证据"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到自说自话怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无差异化怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无证据怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到自说自话怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:32",
+  "from": "内容优化专家",
+  "to": "内容优化 自说自话 无差异化",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

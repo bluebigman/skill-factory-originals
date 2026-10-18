@@ -1,0 +1,83 @@
+{
+ "name": "Reliability Wrapper",
+ "description": "重试熔断专家：覆盖 无条件重试、退避缺失 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/reliability-wrapper",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/reliability-wrapper",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "reliability-wrapper-1",
+   "name": "针对 无条件重试、退避缺失 等情境给出可执行处置",
+   "description": "针对 无条件重试、退避缺失 等情境给出可执行处置",
+   "tags": [
+    "无条件重试",
+    "退避缺失",
+    "重试烧配额"
+   ],
+   "examples": [
+    "遇到无条件重试",
+    "遇到退避缺失",
+    "遇到重试烧配额",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "reliability-wrapper-2",
+   "name": "针对 雪崩传染、降级无声明 等情境给出可执行处置",
+   "description": "针对 雪崩传染、降级无声明 等情境给出可执行处置",
+   "tags": [
+    "雪崩传染",
+    "降级无声明",
+    "超时缺失"
+   ],
+   "examples": [
+    "遇到雪崩传染",
+    "遇到降级无声明",
+    "遇到超时缺失",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "reliability-wrapper-3",
+   "name": "针对 重复执行副作用、状态不一致 等情境给出可执行处置",
+   "description": "针对 重复执行副作用、状态不一致 等情境给出可执行处置",
+   "tags": [
+    "重复执行副作用",
+    "状态不一致",
+    "断点丢失"
+   ],
+   "examples": [
+    "遇到重复执行副作用",
+    "遇到状态不一致",
+    "遇到断点丢失",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "重试熔断专家",
+ "x-source": "skill-factory-originals"
+}

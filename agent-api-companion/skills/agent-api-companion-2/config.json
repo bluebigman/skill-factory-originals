@@ -1,0 +1,72 @@
+{
+ "name": "agent-api-companion-2",
+ "version": "2.0.0",
+ "domain": "接口助手",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "契约优先",
+   "then": "先看契约再调试",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "错误码解读",
+   "then": "解读错误码含义",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "兼容检查",
+   "then": "检查兼容性",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "示例可跑",
+   "then": "提供可运行示例",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回归提醒",
+   "then": "提示需回归的范围",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "契约优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误码解读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "兼容检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例可跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归提醒",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "name": "seo-content-plan-2",
+ "version": "2.0.0",
+ "domain": "内容SEO",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "内链结构",
+   "then": "用内链把同主题页聚成簇",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标题兑现",
+   "then": "标题承诺的内容正文必须给足",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "内链结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题兑现",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "承诺",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "主题",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "正文",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "搜索",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先查",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

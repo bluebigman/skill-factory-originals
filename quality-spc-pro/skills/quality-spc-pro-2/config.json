@@ -1,0 +1,54 @@
+{
+ "name": "quality-spc-pro-2",
+ "version": "2.0.0",
+ "domain": "过程质量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "失控先查",
+   "then": "失控先查原因，不得直接调限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "能力门槛",
+   "then": "过程能力不足时不得放量",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "失控先查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "能力门槛",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "控制",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "质量",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

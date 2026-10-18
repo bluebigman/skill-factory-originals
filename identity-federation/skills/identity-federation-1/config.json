@@ -1,0 +1,72 @@
+{
+ "name": "identity-federation-1",
+ "version": "2.0.0",
+ "domain": "身份联邦",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "统一身份源",
+   "then": "统一身份来源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "单点登录",
+   "then": "集中认证",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "会话控制",
+   "then": "统一会话策略",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "权限同步",
+   "then": "权限集中管理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "注销联动",
+   "then": "注销全网生效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "统一身份源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单点登录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "会话控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "注销联动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

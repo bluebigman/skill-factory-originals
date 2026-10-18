@@ -1,0 +1,72 @@
+{
+ "name": "agent-hallucination-guard-3",
+ "version": "2.0.0",
+ "domain": "幻觉拦截",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "细节过细",
+   "then": "粒度细到无法核实即提高警觉",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "来源缺失",
+   "then": "无来源信息不得进结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "置信分层",
+   "then": "输出必须带置信级别",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "复述检测",
+   "then": "模型复述任务时检查是否偷换范围",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "边界外推",
+   "then": "超出训练范围的问题要求声明不知道",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "细节过细",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "置信分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复述检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界外推",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

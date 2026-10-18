@@ -1,0 +1,72 @@
+{
+ "name": "security-training-3",
+ "version": "2.0.0",
+ "domain": "安全培训",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层培训",
+   "then": "按角色定内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "案例教学",
+   "then": "用真实案例",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "定期演练",
+   "then": "钓鱼演练等",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "考核",
+   "then": "简单考核验证",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "持续更新",
+   "then": "随威胁变化更新",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层培训",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "案例教学",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期演练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "考核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "持续更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

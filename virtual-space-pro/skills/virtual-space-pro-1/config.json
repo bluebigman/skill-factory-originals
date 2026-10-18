@@ -1,0 +1,72 @@
+{
+ "name": "virtual-space-pro-1",
+ "version": "2.0.0",
+ "domain": "虚拟空间",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "尺度统一",
+   "then": "先统一尺度与单位",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "光照基调",
+   "then": "先定光照基调再堆细节",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "资源规范",
+   "then": "模型面数与贴图规格统一",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "性能预算",
+   "then": "帧率预算前置约束美术",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "交互一致",
+   "then": "同类物体交互反馈一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "尺度统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "光照基调",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资源规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "性能预算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交互一致",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

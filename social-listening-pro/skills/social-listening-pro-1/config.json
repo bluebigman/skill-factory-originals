@@ -1,0 +1,72 @@
+{
+ "name": "social-listening-pro-1",
+ "version": "2.0.0",
+ "domain": "舆情聆听",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "词表维护",
+   "then": "关键词表定期更新",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级响应",
+   "then": "按影响面分级响应",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "先核实",
+   "then": "回应前先核实事实",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不删差评",
+   "then": "不删除合理的负面评价",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "洞察回流",
+   "then": "把洞察反馈给产品团队",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "词表维护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级响应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "先核实",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不删差评",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "洞察回流",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

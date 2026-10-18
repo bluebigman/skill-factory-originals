@@ -1,0 +1,72 @@
+{
+ "name": "prototype-method-1",
+ "version": "2.0.0",
+ "domain": "原型验证",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "匹配问题",
+   "then": "保真度匹配要验证的问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "低保真先行",
+   "then": "先用低保真排除方向错误",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可点可测",
+   "then": "原型必须可点击可测量",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "只测关键",
+   "then": "只验证关键假设不贪多",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论留档",
+   "then": "结论与证据一并留档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "匹配问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "低保真先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可点可测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只测关键",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论留档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

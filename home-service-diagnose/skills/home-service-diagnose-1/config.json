@@ -1,0 +1,78 @@
+{
+ "name": "home-service-diagnose-1",
+ "version": "2.0.0",
+ "domain": "家政服务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "排班先定",
+   "then": "先按客户固定时段排班，减少临时调度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "质检标准",
+   "then": "服务质检项写成可勾选清单",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "排班先定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质检标准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "减少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "临时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "客户",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先按",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

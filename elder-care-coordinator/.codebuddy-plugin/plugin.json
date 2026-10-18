@@ -1,0 +1,74 @@
+{
+ "name": "elder-care-coordinator",
+ "version": "1.0.0",
+ "plugin": "elder-care-coordinator",
+ "description": "Elder Care Coordinator for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/elder-care-coordinator.md"
+ ],
+ "skills": [
+  "./skills/care-plan",
+  "./skills/companion-visit",
+  "./skills/home-adapt"
+ ],
+ "expertType": "agent",
+ "agentName": "elder-care-coordinator",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Elder Care Coordinator",
+  "zh": "老人照护 全落一人 异地照护"
+ },
+ "profession": {
+  "en": "Elder Care Coordinator",
+  "zh": "老人照护 家庭分工 就医陪同"
+ },
+ "displayDescription": {
+  "en": "Handles Elder Care Coordinator tasks end-to-end with built-in professional skills.",
+  "zh": "老人照护 家庭分工 就医陪同：家庭照护分工与资源协调；陪诊流程与信息准备；居家环境的安全与便利改造。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "全落一人"
+  },
+  {
+   "en": "practical capability",
+   "zh": "异地照护"
+  },
+  {
+   "en": "practical capability",
+   "zh": "照护疲劳"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到全落一人怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到异地照护怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到照护疲劳怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到全落一人怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:37",
+  "from": "老人照护专家",
+  "to": "老人照护 全落一人 异地照护",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

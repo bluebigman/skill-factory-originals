@@ -1,0 +1,66 @@
+{
+ "name": "partner-compliance-2",
+ "version": "2.0.0",
+ "domain": "外部合作",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "禁转授权",
+   "then": "明确不得转授权与二次分发",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "留存凭证",
+   "then": "审查过程与结论留档",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "禁转授权",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留存凭证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "前先",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "写清",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "留档",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "二次",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先核",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

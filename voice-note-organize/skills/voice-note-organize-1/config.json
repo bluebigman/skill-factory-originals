@@ -1,0 +1,74 @@
+{
+ "name": "voice-note-organize-1",
+ "version": "2.0.0",
+ "domain": "语音笔记",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "随手转写",
+   "then": "录完即转，避免堆积",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标题即结论",
+   "then": "标题写成一句话结论便于检索",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "随手转写",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题即结论",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "笔记",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "堆积",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "检索",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "归档",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

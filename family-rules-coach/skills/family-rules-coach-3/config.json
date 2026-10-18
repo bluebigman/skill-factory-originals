@@ -1,0 +1,61 @@
+{
+ "name": "family-rules-coach-3",
+ "version": "2.0.0",
+ "domain": "家庭规则",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "家长同守",
+   "then": "家长同样遵守",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "家长同守",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "书面",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "双方",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "制定",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

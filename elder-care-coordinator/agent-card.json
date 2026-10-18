@@ -1,0 +1,107 @@
+{
+ "name": "Elder Care Coordinator",
+ "description": "老人照护专家：家庭照护分工与资源协调；陪诊流程与信息准备；居家环境的安全与便利改造。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/elder-care-coordinator",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/elder-care-coordinator",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "care-plan",
+   "name": "家庭照护分工与资源协调",
+   "description": "家庭照护分工与资源协调",
+   "tags": [
+    "照护",
+    "轮流",
+    "照护分工",
+    "精力"
+   ],
+   "examples": [
+    "遇到全落一人",
+    "遇到异地照护",
+    "遇到照护疲劳",
+    "遇到多人意见",
+    "遇到费用分摊"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "care-plan",
+    "to": "care-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "companion-visit",
+   "name": "陪诊流程与信息准备",
+   "description": "陪诊流程与信息准备",
+   "tags": [
+    "陪诊",
+    "就医",
+    "挂号",
+    "用药"
+   ],
+   "examples": [
+    "遇到信息不全",
+    "遇到听不清医嘱",
+    "遇到多科就诊",
+    "遇到用药冲突",
+    "遇到诊断疑问"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "companion-visit",
+    "to": "companion-visit",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "home-adapt",
+   "name": "居家环境的安全与便利改造",
+   "description": "居家环境的安全与便利改造",
+   "tags": [
+    "适老化",
+    "防滑",
+    "扶手",
+    "照明"
+   ],
+   "examples": [
+    "遇到跌倒",
+    "遇到如厕",
+    "遇到动线",
+    "遇到紧急联络",
+    "遇到适老改造"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "home-adapt",
+    "to": "home-adapt",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "老人照护专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "cross-border-listing-pro",
+ "version": "1.0.0",
+ "plugin": "cross-border-listing-pro",
+ "description": "cross-border-listing-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for cross-border-listing-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/cross-border-listing-pro.md"
+ ],
+ "agentName": "cross-border-listing-pro",
+ "displayName": {
+  "zh": "跨境选品 先查禁售 类目准入",
+  "en": "cross-border-listing-pro"
+ },
+ "profession": {
+  "zh": "跨境选品 上架合规 顾问",
+  "en": "cross-border-listing-pro"
+ },
+ "displayDescription": {
+  "zh": "跨境选品 上架合规 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "cross-border-listing-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "跨境选品",
+   "en": "cross-border-listing-pro"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到跨境选品怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划跨境选品",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查跨境选品",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到跨境选品怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/cross-border-listing-pro-1/",
+  "./skills/cross-border-listing-pro-2/",
+  "./skills/cross-border-listing-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:32",
+  "from": "跨境选品专家",
+  "to": "跨境选品 先查禁售 类目准入",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

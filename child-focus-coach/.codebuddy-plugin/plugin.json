@@ -1,0 +1,74 @@
+{
+ "name": "child-focus-coach",
+ "version": "1.0.0",
+ "plugin": "child-focus-coach",
+ "description": "Child Focus Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-focus-coach.md"
+ ],
+ "skills": [
+  "./skills/child-focus-coach-1",
+  "./skills/child-focus-coach-2",
+  "./skills/child-focus-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-focus-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Child Focus Coach",
+  "zh": "儿童专注力 时长匹配 不打断"
+ },
+ "profession": {
+  "en": "Child Focus Coach",
+  "zh": "儿童专注力 训练方法 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Child Focus Coach tasks end-to-end with built-in professional skills.",
+  "zh": "儿童专注力 训练方法 教练：覆盖 时长匹配、不打断、单任务 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "时长匹配"
+  },
+  {
+   "en": "practical capability",
+   "zh": "不打断"
+  },
+  {
+   "en": "practical capability",
+   "zh": "单任务"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到时长匹配怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不打断怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到单任务怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到时长匹配怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "儿童专注力专家",
+  "to": "儿童专注力 时长匹配 不打断",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

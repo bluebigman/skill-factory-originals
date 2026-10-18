@@ -1,0 +1,121 @@
+{
+ "name": "title",
+ "version": "2.0.0",
+ "domain": "电商上架",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "堆砌词",
+   "then": "标题按核心词+属性词+场景词+人群词组合，堆砌无关词会降权",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无核心词",
+   "then": "核心词必须前置，搜索引擎权重递减",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重复词",
+   "then": "同一词不重复出现，浪费有限字符",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "忽略长尾",
+   "then": "补充长尾属性词，长尾是新品获取初始流量的关键",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "违规词",
+   "then": "禁用极限词与品牌侵权词，违规直接下架",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "搜索",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上架",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "堆砌词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无核心词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "忽略长尾",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "违规词",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "前置",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "价格",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "判定",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

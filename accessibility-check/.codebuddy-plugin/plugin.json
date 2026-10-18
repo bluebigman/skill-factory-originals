@@ -1,0 +1,74 @@
+{
+ "name": "accessibility-check",
+ "version": "1.0.0",
+ "plugin": "accessibility-check",
+ "description": "accessibility-check — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for accessibility-check tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/accessibility-check.md"
+ ],
+ "agentName": "accessibility-check",
+ "displayName": {
+  "zh": "无障碍 对比达标 键盘可达",
+  "en": "accessibility-check"
+ },
+ "profession": {
+  "zh": "无障碍 检查清单 顾问",
+  "en": "accessibility-check"
+ },
+ "displayDescription": {
+  "zh": "无障碍 检查清单 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "accessibility-check: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "无障碍",
+   "en": "accessibility-check"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到无障碍怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划无障碍",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查无障碍",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到无障碍怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/accessibility-check-1/",
+  "./skills/accessibility-check-2/",
+  "./skills/accessibility-check-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "无障碍专家",
+  "to": "无障碍 对比达标 键盘可达",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

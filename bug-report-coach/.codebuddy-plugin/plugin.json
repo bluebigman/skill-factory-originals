@@ -1,0 +1,74 @@
+{
+ "name": "bug-report-coach",
+ "version": "1.0.0",
+ "plugin": "bug-report-coach",
+ "description": "Bug Report Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/bug-report-coach.md"
+ ],
+ "skills": [
+  "./skills/bug-report-coach-1",
+  "./skills/bug-report-coach-2",
+  "./skills/bug-report-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "bug-report-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Bug Report Coach",
+  "zh": "缺陷报告 复现优先 含环境"
+ },
+ "profession": {
+  "en": "Bug Report Coach",
+  "zh": "缺陷报告 复现步骤 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Bug Report Coach tasks end-to-end with built-in professional skills.",
+  "zh": "缺陷报告 复现步骤 助手：覆盖 复现优先、含环境、单一现象 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "缺陷报告",
+   "en": "bug-report-coach"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到缺陷报告怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到复现步骤怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到缺陷报告怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:29",
+  "from": "缺陷报告专家",
+  "to": "缺陷报告 复现优先 含环境",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

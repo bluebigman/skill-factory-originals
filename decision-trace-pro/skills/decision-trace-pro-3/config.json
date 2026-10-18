@@ -1,0 +1,72 @@
+{
+ "name": "decision-trace-pro-3",
+ "version": "2.0.0",
+ "domain": "决策追溯",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "决策记录",
+   "then": "每个决策点记录候选与理由",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "否决留痕",
+   "then": "被否方案也要记录原因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "版本绑定",
+   "then": "决策须绑定当时的输入版本",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "复盘可查",
+   "then": "事后能还原决策现场",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "责任可归",
+   "then": "能回答谁在何时基于什么做的决定",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "决策记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "否决留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本绑定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘可查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任可归",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

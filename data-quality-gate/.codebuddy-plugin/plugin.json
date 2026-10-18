@@ -1,0 +1,74 @@
+{
+ "name": "data-quality-gate",
+ "version": "1.0.0",
+ "plugin": "data-quality-gate",
+ "description": "data-quality-gate — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for data-quality-gate tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/data-quality-gate.md"
+ ],
+ "agentName": "data-quality-gate",
+ "displayName": {
+  "zh": "数据质量 规则前置 异常即拦",
+  "en": "data-quality-gate"
+ },
+ "profession": {
+  "zh": "数据质量 校验规则 顾问",
+  "en": "data-quality-gate"
+ },
+ "displayDescription": {
+  "zh": "数据质量 校验规则 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "data-quality-gate: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据质量",
+   "en": "data-quality-gate"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到数据质量怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划数据质量",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查数据质量",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到数据质量怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/data-quality-gate-1/",
+  "./skills/data-quality-gate-2/",
+  "./skills/data-quality-gate-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:34",
+  "from": "数据质量专家",
+  "to": "数据质量 规则前置 异常即拦",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

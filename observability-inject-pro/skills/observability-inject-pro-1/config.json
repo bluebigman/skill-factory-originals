@@ -1,0 +1,72 @@
+{
+ "name": "observability-inject-pro-1",
+ "version": "2.0.0",
+ "domain": "链路追踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "trace 贯穿",
+   "then": "每次调用生成 trace id 贯穿全链",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "快照复现",
+   "then": "记录足以复现的输入与版本",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "成本可见",
+   "then": "按调用记录消耗并实时可见",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "长尾监控",
+   "then": "记录 P95 而非只看均值",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "上下文透传",
+   "then": "跨服务保留 trace 上下文",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "trace 贯穿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "快照复现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长尾监控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上下文透传",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

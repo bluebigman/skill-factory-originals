@@ -1,0 +1,72 @@
+{
+ "name": "space-wayfinding-2",
+ "version": "2.0.0",
+ "domain": "导视系统",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "决策点设标识",
+   "then": "在岔路口而非长直道设标识",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "层级一致",
+   "then": "标识层级与信息量统一",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "视觉连续",
+   "then": "沿路径保持标识连续可见",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "多模态",
+   "then": "文字与图形并用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无障碍",
+   "then": "考虑视障与色觉障碍可达",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "决策点设标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层级一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "视觉连续",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多模态",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无障碍",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

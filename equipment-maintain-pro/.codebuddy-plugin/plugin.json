@@ -1,0 +1,74 @@
+{
+ "name": "equipment-maintain-pro",
+ "version": "1.0.0",
+ "plugin": "equipment-maintain-pro",
+ "description": "Equipment Maintain Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/equipment-maintain-pro.md"
+ ],
+ "skills": [
+  "./skills/equipment-maintain-pro-1",
+  "./skills/equipment-maintain-pro-2",
+  "./skills/equipment-maintain-pro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "equipment-maintain-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Equipment Maintain Pro",
+  "zh": "设备维保 分级维保 点检可量"
+ },
+ "profession": {
+  "en": "Equipment Maintain Pro",
+  "zh": "设备维保 计划编制 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Equipment Maintain Pro tasks end-to-end with built-in professional skills.",
+  "zh": "设备维保 计划编制 顾问：覆盖 分级维保、点检可量、备件策略 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "设备维保",
+   "en": "equipment-maintain-pro"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到设备维保怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到计划编制怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到设备维保怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:37",
+  "from": "设备维保专家",
+  "to": "设备维保 分级维保 点检可量",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

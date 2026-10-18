@@ -1,0 +1,67 @@
+{
+ "name": "Pdf Table Extract",
+ "description": "文档表格专家：覆盖 先定表头、合并还原、数值净化 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/pdf-table-extract",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/pdf-table-extract",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "pdf-table-extract-1",
+   "name": "针对 先定表头、合并还原 等情境给出可执行处置",
+   "description": "针对 先定表头、合并还原 等情境给出可执行处置",
+   "tags": [
+    "先定表头",
+    "合并还原"
+   ],
+   "examples": [
+    "遇到先定表头",
+    "遇到合并还原",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pdf-table-extract-2",
+   "name": "针对 数值净化、行数对账 等情境给出可执行处置",
+   "description": "针对 数值净化、行数对账 等情境给出可执行处置",
+   "tags": [
+    "数值净化",
+    "行数对账"
+   ],
+   "examples": [
+    "遇到数值净化",
+    "遇到行数对账",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pdf-table-extract-3",
+   "name": "针对 异常标记 等情境给出可执行处置",
+   "description": "针对 异常标记 等情境给出可执行处置",
+   "tags": [
+    "异常标记"
+   ],
+   "examples": [
+    "遇到异常标记",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "文档表格专家"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "integration-test-env-3",
+ "version": "2.0.0",
+ "domain": "集成测试环境",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "环境隔离",
+   "then": "各分支独立环境",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数据脱敏",
+   "then": "测试数据脱敏",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "按需创建",
+   "then": "用完即销毁",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "版本对齐",
+   "then": "与被测版本严格对齐",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可用性监控",
+   "then": "监控环境可用性",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "环境隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按需创建",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可用性监控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

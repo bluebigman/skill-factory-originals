@@ -1,0 +1,65 @@
+{
+ "name": "tech-review-coach-3",
+ "version": "2.0.0",
+ "domain": "技术方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "小步验证",
+   "then": "先小流量验证再全量，不一次性切换",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "小步验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "方案",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "至少",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "理由",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "全量",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流量",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "次性",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

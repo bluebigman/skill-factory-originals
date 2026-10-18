@@ -1,0 +1,107 @@
+{
+ "name": "Inventory Tracking Pro",
+ "description": "库存管理专家：库存相关风险防范；库存水平的管理方法；周转率的提升。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/inventory-tracking-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/inventory-tracking-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "risk",
+   "name": "库存相关风险防范",
+   "description": "库存相关风险防范",
+   "tags": [
+    "风险",
+    "损耗",
+    "过季",
+    "退货"
+   ],
+   "examples": [
+    "遇到损耗",
+    "遇到过季",
+    "遇到退货积压",
+    "遇到资金",
+    "遇到断供"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "risk",
+    "to": "risk",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "stock-control",
+   "name": "库存水平的管理方法",
+   "description": "库存水平的管理方法",
+   "tags": [
+    "库存",
+    "断货",
+    "压货",
+    "周转"
+   ],
+   "examples": [
+    "遇到断货",
+    "遇到压货",
+    "遇到凭感觉补",
+    "遇到季节性",
+    "遇到多仓"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "stock-control",
+    "to": "stock-control",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "turnover",
+   "name": "周转率的提升",
+   "description": "周转率的提升",
+   "tags": [
+    "周转率",
+    "动销",
+    "滞销",
+    "结构"
+   ],
+   "examples": [
+    "遇到全品平均",
+    "遇到SKU 过多",
+    "遇到定价",
+    "遇到预售",
+    "遇到盘点"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "turnover",
+    "to": "turnover",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "库存管理专家",
+ "x-source": "skill-factory-originals"
+}

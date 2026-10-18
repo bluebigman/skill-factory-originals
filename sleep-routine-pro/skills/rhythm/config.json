@@ -1,0 +1,121 @@
+{
+ "name": "rhythm",
+ "version": "2.0.0",
+ "domain": "作息",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "晚睡强迫",
+   "then": "固定起床时间比固定入睡时间有效，起床是节律锚点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "周末补觉",
+   "then": "补觉不超过 1 小时，大幅补觉会打乱节律",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "躺床不睡",
+   "then": "卧床 20 分钟未入睡即起身，避免建立床上清醒的条件反射",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "午睡",
+   "then": "午睡控制 20 分钟内并避开下午 3 点后",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "光照",
+   "then": "晨起接受自然光 15 分钟，有助锚定节律",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "作息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "早睡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "起床",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "生物钟",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "晚睡强迫",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周末补觉",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "躺床不睡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "午睡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "光照",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

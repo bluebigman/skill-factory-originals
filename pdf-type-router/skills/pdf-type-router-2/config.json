@@ -1,0 +1,72 @@
+{
+ "name": "pdf-type-router-2",
+ "version": "2.0.0",
+ "domain": "PDF",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先判类型",
+   "then": "扫描件与文本件走不同路径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "文本优先",
+   "then": "有文本层不用 OCR",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "页级判定",
+   "then": "同一文件不同页可分别处理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "失败回退",
+   "then": "文本抽取失败再试 OCR",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "抽后校验",
+   "then": "统计页数与实际抽取页比对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先判类型",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文本优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "页级判定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败回退",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽后校验",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

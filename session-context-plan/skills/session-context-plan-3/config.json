@@ -1,0 +1,72 @@
+{
+ "name": "session-context-plan-3",
+ "version": "2.0.0",
+ "domain": "会话上下文管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层组织",
+   "then": "系统指令与历史分层",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "压缩优先",
+   "then": "长历史先摘要压缩",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "关键保留",
+   "then": "关键决策与约束保留原文",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "过期清理",
+   "then": "过期上下文清理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "成本可控",
+   "then": "控制 token 成本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "压缩优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键保留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过期清理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本可控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

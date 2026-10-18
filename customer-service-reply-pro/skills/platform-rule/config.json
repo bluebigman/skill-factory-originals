@@ -1,0 +1,121 @@
+{
+ "name": "platform-rule",
+ "version": "2.0.0",
+ "domain": "客服回复",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无凭证",
+   "then": "发货、沟通、承诺须留凭证，仲裁以证据为准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "引导站外",
+   "then": "禁止引导脱离平台的交易与沟通",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "辱骂",
+   "then": "禁止与客户对骂，会被平台处罚且影响店铺权重",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "承诺违规",
+   "then": "不得承诺平台不支持的服务（如无限期无理由退换）",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时效",
+   "then": "在平台规定时限内响应，超时会被计违规",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "平台规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "仲裁",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "违规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无凭证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引导站外",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "辱骂",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "承诺违规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留痕",
+   "source": "SKILL.md#L40"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

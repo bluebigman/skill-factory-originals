@@ -1,0 +1,78 @@
+{
+ "name": "competitor-analysis-2",
+ "version": "2.0.0",
+ "domain": "竞品分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看差评",
+   "then": "竞品差评是最有价值的差异化线索",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结论可动",
+   "then": "每条分析落到一个可执行动作",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看差评",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论可动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "价值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每条",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "差异",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只看",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "维度",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "竞品",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

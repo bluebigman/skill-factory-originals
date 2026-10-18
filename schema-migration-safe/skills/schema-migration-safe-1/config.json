@@ -1,0 +1,72 @@
+{
+ "name": "schema-migration-safe-1",
+ "version": "2.0.0",
+ "domain": "结构变更安全",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "向后兼容",
+   "then": "新增列给默认值",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分步执行",
+   "then": "大变更拆多步",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "双写过渡",
+   "then": "必要时双写过渡",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回滚可行",
+   "then": "保留回滚脚本",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "低峰执行",
+   "then": "避开业务高峰",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "向后兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分步执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双写过渡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回滚可行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "低峰执行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

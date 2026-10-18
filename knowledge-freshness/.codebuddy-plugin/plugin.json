@@ -1,0 +1,74 @@
+{
+ "name": "knowledge-freshness",
+ "version": "1.0.0",
+ "plugin": "knowledge-freshness",
+ "description": "knowledge-freshness — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for knowledge-freshness tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/knowledge-freshness.md"
+ ],
+ "agentName": "knowledge-freshness",
+ "displayName": {
+  "zh": "知识时效管理 标注时效",
+  "en": "knowledge-freshness"
+ },
+ "profession": {
+  "zh": "知识时效管理 顾问",
+  "en": "knowledge-freshness"
+ },
+ "displayDescription": {
+  "zh": "知识时效管理 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "knowledge-freshness: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "知识时效管理",
+   "en": "knowledge-freshness"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到知识时效管理怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划知识时效管理",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查知识时效管理",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到知识时效管理怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/knowledge-freshness-1",
+  "./skills/knowledge-freshness-2",
+  "./skills/knowledge-freshness-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "知识时效管理专家",
+  "to": "知识时效管理 标注时效",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

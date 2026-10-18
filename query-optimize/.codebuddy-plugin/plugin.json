@@ -1,0 +1,74 @@
+{
+ "name": "query-optimize",
+ "version": "1.0.0",
+ "plugin": "query-optimize",
+ "description": "query-optimize — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for query-optimize tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/query-optimize.md"
+ ],
+ "agentName": "query-optimize",
+ "displayName": {
+  "zh": "查询优化 先看计划 索引匹配",
+  "en": "query-optimize"
+ },
+ "profession": {
+  "zh": "查询优化 助手",
+  "en": "query-optimize"
+ },
+ "displayDescription": {
+  "zh": "查询优化 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。。",
+  "en": "query-optimize: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "查询优化",
+   "en": "query-optimize"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到查询优化怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划查询优化",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查查询优化",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到查询优化怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/query-optimize-1",
+  "./skills/query-optimize-2",
+  "./skills/query-optimize-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "查询优化专家",
+  "to": "查询优化 先看计划 索引匹配",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

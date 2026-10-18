@@ -1,0 +1,74 @@
+{
+ "name": "product-spec-write",
+ "version": "1.0.0",
+ "plugin": "product-spec-write",
+ "description": "Product Spec Write for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/product-spec-write.md"
+ ],
+ "skills": [
+  "./skills/product-spec-write-1",
+  "./skills/product-spec-write-2",
+  "./skills/product-spec-write-3"
+ ],
+ "expertType": "agent",
+ "agentName": "product-spec-write",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Product Spec Write",
+  "zh": "产品需求 目标先写 验收可测"
+ },
+ "profession": {
+  "en": "Product Spec Write",
+  "zh": "产品需求 文档撰写 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Product Spec Write tasks end-to-end with built-in professional skills.",
+  "zh": "产品需求 文档撰写 顾问：覆盖 目标先写、验收可测、边界显式 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "产品需求",
+   "en": "product-spec-write"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到产品需求怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到文档撰写怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到产品需求怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "产品需求专家",
+  "to": "产品需求 目标先写 验收可测",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

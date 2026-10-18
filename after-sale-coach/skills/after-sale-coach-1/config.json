@@ -1,0 +1,74 @@
+{
+ "name": "after-sale-coach-1",
+ "version": "2.0.0",
+ "domain": "售后处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "及时响应",
+   "then": "拖延会升级为平台介入",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标准统一",
+   "then": "建判定标准",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "及时响应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标准统一",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "流程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "平台",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "判定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "拖延",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "升级",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "售后",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "介入",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

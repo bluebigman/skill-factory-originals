@@ -1,0 +1,72 @@
+{
+ "name": "remote-team-coach-3",
+ "version": "2.0.0",
+ "domain": "远程团队",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "默认书面",
+   "then": "默认书面沟通，口头结论当日落字",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "单一事实源",
+   "then": "同一信息只在一处维护",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "响应约定",
+   "then": "按紧急度约定响应时限",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异步优先",
+   "then": "减少对同步会议的依赖",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "交接模板",
+   "then": "交接使用固定模板不口头交接",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "默认书面",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单一事实源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "响应约定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异步优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交接模板",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

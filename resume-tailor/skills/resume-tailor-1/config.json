@@ -1,0 +1,74 @@
+{
+ "name": "resume-tailor-1",
+ "version": "2.0.0",
+ "domain": "简历定制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按岗改",
+   "then": "按目标岗位描述逐条对齐关键词",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结果导向",
+   "then": "每条写清动作与量化结果",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按岗改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果导向",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每条",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写清",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "按目",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "量化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "岗位",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "逐条",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

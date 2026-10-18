@@ -1,0 +1,74 @@
+{
+ "name": "store-copy-coach",
+ "version": "1.0.0",
+ "plugin": "store-copy-coach",
+ "description": "Store Copy Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/store-copy-coach.md"
+ ],
+ "skills": [
+  "./skills/store-copy-coach-1",
+  "./skills/store-copy-coach-2",
+  "./skills/store-copy-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "store-copy-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Store Copy Coach",
+  "zh": "商品文案 痛点对齐 差异化"
+ },
+ "profession": {
+  "en": "Store Copy Coach",
+  "zh": "商品文案 卖点提炼 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Store Copy Coach tasks end-to-end with built-in professional skills.",
+  "zh": "商品文案 卖点提炼 顾问：覆盖 痛点对齐、差异化、证据支撑 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "痛点对齐"
+  },
+  {
+   "en": "practical capability",
+   "zh": "差异化"
+  },
+  {
+   "en": "practical capability",
+   "zh": "证据支撑"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到痛点对齐怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到差异化怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到证据支撑怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到痛点对齐怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "商品文案专家",
+  "to": "商品文案 痛点对齐 差异化",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

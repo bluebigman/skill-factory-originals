@@ -1,0 +1,75 @@
+{
+ "name": "Logistics Diagnose",
+ "description": "物流运营专家：覆盖 按环节拆、找瓶颈、异常归类 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/logistics-diagnose",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/logistics-diagnose",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "logistics-diagnose-1",
+   "name": "针对 按环节拆、找瓶颈 等情境给出可执行处置",
+   "description": "针对 按环节拆、找瓶颈 等情境给出可执行处置",
+   "tags": [
+    "按环节拆",
+    "找瓶颈"
+   ],
+   "examples": [
+    "遇到按环节拆",
+    "遇到找瓶颈",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "logistics-diagnose-2",
+   "name": "针对 异常归类、看成本单件 等情境给出可执行处置",
+   "description": "针对 异常归类、看成本单件 等情境给出可执行处置",
+   "tags": [
+    "异常归类",
+    "看成本单件"
+   ],
+   "examples": [
+    "遇到异常归类",
+    "遇到看成本单件",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "logistics-diagnose-3",
+   "name": "针对 留缓冲 等情境给出可执行处置",
+   "description": "针对 留缓冲 等情境给出可执行处置",
+   "tags": [
+    "留缓冲"
+   ],
+   "examples": [
+    "遇到留缓冲",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "物流运营专家",
+ "x-source": "skill-factory-originals"
+}

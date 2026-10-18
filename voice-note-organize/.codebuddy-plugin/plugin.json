@@ -1,0 +1,74 @@
+{
+ "name": "voice-note-organize",
+ "version": "1.0.0",
+ "plugin": "voice-note-organize",
+ "description": "Voice Note Organize for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/voice-note-organize.md"
+ ],
+ "skills": [
+  "./skills/voice-note-organize-1",
+  "./skills/voice-note-organize-2",
+  "./skills/voice-note-organize-3"
+ ],
+ "expertType": "agent",
+ "agentName": "voice-note-organize",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Voice Note Organize",
+  "zh": "语音笔记 随手转写 标题即结论"
+ },
+ "profession": {
+  "en": "Voice Note Organize",
+  "zh": "语音笔记 转写归档 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Voice Note Organize tasks end-to-end with built-in professional skills.",
+  "zh": "语音笔记 转写归档 助手：覆盖 随手转写、标题即结论、双标签 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "随手转写"
+  },
+  {
+   "en": "practical capability",
+   "zh": "标题即结论"
+  },
+  {
+   "en": "practical capability",
+   "zh": "双标签"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到随手转写怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到标题即结论怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到双标签怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到随手转写怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "语音笔记专家",
+  "to": "语音笔记 随手转写 标题即结论",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

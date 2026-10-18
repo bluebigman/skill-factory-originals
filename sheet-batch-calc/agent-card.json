@@ -1,0 +1,75 @@
+{
+ "name": "Sheet Batch Calc",
+ "description": "表格批量专家：覆盖 先定口径、辅助列、整列引用、分块计算、结果自检 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/sheet-batch-calc",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/sheet-batch-calc",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "sheet-batch-calc-1",
+   "name": "针对 先定口径、辅助列 等情境给出可执行处置",
+   "description": "针对 先定口径、辅助列 等情境给出可执行处置",
+   "tags": [
+    "先定口径",
+    "辅助列"
+   ],
+   "examples": [
+    "遇到先定口径",
+    "遇到辅助列",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sheet-batch-calc-2",
+   "name": "针对 整列引用、分块计算 等情境给出可执行处置",
+   "description": "针对 整列引用、分块计算 等情境给出可执行处置",
+   "tags": [
+    "整列引用",
+    "分块计算"
+   ],
+   "examples": [
+    "遇到整列引用",
+    "遇到分块计算",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sheet-batch-calc-3",
+   "name": "针对 结果自检 等情境给出可执行处置",
+   "description": "针对 结果自检 等情境给出可执行处置",
+   "tags": [
+    "结果自检"
+   ],
+   "examples": [
+    "遇到结果自检",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "表格批量专家",
+ "x-source": "skill-factory-originals"
+}

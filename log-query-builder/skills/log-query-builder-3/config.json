@@ -1,0 +1,72 @@
+{
+ "name": "log-query-builder-3",
+ "version": "2.0.0",
+ "domain": "日志检索构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先缩小范围",
+   "then": "按时间与服务过滤",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "关键词组合",
+   "then": "用与或非组合缩小",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结构化字段",
+   "then": "优先按字段过滤而非全文",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "结果导出",
+   "then": "保留原始结果便于复核",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "查询复用",
+   "then": "常用查询固化为模板",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先缩小范围",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键词组合",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构化字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果导出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "查询复用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

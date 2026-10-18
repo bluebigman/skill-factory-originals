@@ -1,0 +1,75 @@
+{
+ "name": "Multi-Agent Orchestration",
+ "description": "多智能体专家：覆盖 职责重叠、依赖混乱 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/multi-agent-orchestrate",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/multi-agent-orchestrate",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "multi-agent-orchestrate-1",
+   "name": "针对 职责重叠、依赖混乱 等情境给出可执行处置",
+   "description": "针对 职责重叠、依赖混乱 等情境给出可执行处置",
+   "tags": [
+    "职责重叠",
+    "依赖混乱",
+    "串并行不当"
+   ],
+   "examples": [
+    "遇到职责重叠",
+    "遇到依赖混乱",
+    "遇到串并行不当",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "multi-agent-orchestrate-2",
+   "name": "针对 结论互斥、重复劳动 等情境给出可执行处置",
+   "description": "针对 结论互斥、重复劳动 等情境给出可执行处置",
+   "tags": [
+    "结论互斥",
+    "重复劳动",
+    "信息不同步"
+   ],
+   "examples": [
+    "遇到结论互斥",
+    "遇到重复劳动",
+    "遇到信息不同步",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "multi-agent-orchestrate-3",
+   "name": "针对 单点拖垮全局、错误传染 等情境给出可执行处置",
+   "description": "针对 单点拖垮全局、错误传染 等情境给出可执行处置",
+   "tags": [
+    "单点拖垮全局",
+    "错误传染",
+    "无兜底"
+   ],
+   "examples": [
+    "遇到单点拖垮全局",
+    "遇到错误传染",
+    "遇到无兜底",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "多智能体专家"
+}

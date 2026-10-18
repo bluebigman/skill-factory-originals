@@ -1,0 +1,121 @@
+{
+ "name": "funnel",
+ "version": "2.0.0",
+ "domain": "店铺数据分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只看成交",
+   "then": "按曝光-点击-加购-下单-支付拆解，单看结果无法定位问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "流量问题",
+   "then": "点击率低优先改主图与标题，改详情无效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "转化问题",
+   "then": "转化低优先查价格、评价与详情，流量再多也白费",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "跳失高",
+   "then": "跳失高查首屏与加载速度，首屏决定去留",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "口径",
+   "then": "所有比例须写清分母，口径不一是分析最大陷阱",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "转化率",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "漏斗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跳失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只看成交",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流量问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转化问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跳失高",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "拆解",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "趋势",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "平台",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

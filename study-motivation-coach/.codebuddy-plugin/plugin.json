@@ -1,0 +1,74 @@
+{
+ "name": "study-motivation-coach",
+ "version": "1.0.0",
+ "plugin": "study-motivation-coach",
+ "description": "Study Motivation Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/study-motivation-coach.md"
+ ],
+ "skills": [
+  "./skills/study-motivation-coach-1",
+  "./skills/study-motivation-coach-2",
+  "./skills/study-motivation-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "study-motivation-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Study Motivation Coach",
+  "zh": "学习动力 找意义 小成就"
+ },
+ "profession": {
+  "en": "Study Motivation Coach",
+  "zh": "学习动力 内驱力 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Study Motivation Coach tasks end-to-end with built-in professional skills.",
+  "zh": "学习动力 内驱力 教练：覆盖 找意义、小成就、给自主、少奖惩 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "找意义"
+  },
+  {
+   "en": "practical capability",
+   "zh": "小成就"
+  },
+  {
+   "en": "practical capability",
+   "zh": "给自主"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到找意义怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到小成就怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到给自主怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到找意义怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "学习动力专家",
+  "to": "学习动力 找意义 小成就",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

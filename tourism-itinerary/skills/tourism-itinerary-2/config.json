@@ -1,0 +1,72 @@
+{
+ "name": "tourism-itinerary-2",
+ "version": "2.0.0",
+ "domain": "行程规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "节奏合理",
+   "then": "避免过度紧凑",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "备选方案",
+   "then": "准备备选",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "预算匹配",
+   "then": "匹配预算",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "安全提示",
+   "then": "含安全提示",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可调整",
+   "then": "便于临时调整",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "节奏合理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "备选方案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全提示",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可调整",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "test-combinatorial",
+ "version": "1.0.0",
+ "plugin": "test-combinatorial",
+ "description": "test-combinatorial — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for test-combinatorial tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/test-combinatorial.md"
+ ],
+ "agentName": "test-combinatorial",
+ "displayName": {
+  "zh": "组合测试设计 参数建模",
+  "en": "test-combinatorial"
+ },
+ "profession": {
+  "zh": "组合测试设计 助手",
+  "en": "test-combinatorial"
+ },
+ "displayDescription": {
+  "zh": "组合测试设计 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "test-combinatorial: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "组合测试设计",
+   "en": "test-combinatorial"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到组合测试设计怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划组合测试设计",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查组合测试设计",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到组合测试设计怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/test-combinatorial-1/",
+  "./skills/test-combinatorial-2/",
+  "./skills/test-combinatorial-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "组合测试设计专家",
+  "to": "组合测试设计 参数建模",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

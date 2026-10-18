@@ -1,0 +1,53 @@
+{
+ "name": "incident-retro-3",
+ "version": "2.0.0",
+ "domain": "事故复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "沉淀监控",
+   "then": "把事故信号补成监控项，下次自动发现",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "沉淀监控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "流程",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "信号",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "恢复",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "聚焦",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

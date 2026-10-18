@@ -1,0 +1,58 @@
+{
+ "name": "logistics-diagnose-1",
+ "version": "2.0.0",
+ "domain": "物流运营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按环节拆",
+   "then": "按揽收-中转-派送逐环节看时效",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "找瓶颈",
+   "then": "只优化最慢的那个环节",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按环节拆",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "找瓶颈",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "物流",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

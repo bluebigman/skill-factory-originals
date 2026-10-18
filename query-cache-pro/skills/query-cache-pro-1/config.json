@@ -1,0 +1,72 @@
+{
+ "name": "query-cache-pro-1",
+ "version": "2.0.0",
+ "domain": "查询缓存",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "键含版本",
+   "then": "缓存键须含数据版本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "失效联动",
+   "then": "数据变更即失效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "穿透防护",
+   "then": "防穿透查询",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "命中度量",
+   "then": "命中率可观测",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预热热点",
+   "then": "热点查询预热",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "键含版本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失效联动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "穿透防护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命中度量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预热热点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

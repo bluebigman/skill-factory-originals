@@ -1,0 +1,65 @@
+{
+ "name": "mp-publish-check-3",
+ "version": "2.0.0",
+ "domain": "公众号发布",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "留档",
+   "then": "发布前存档终版，便于事后比对",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "留档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "极限词",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "事实",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "敏感",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "发布",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "公众号",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "逐条",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

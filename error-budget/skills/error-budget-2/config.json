@@ -1,0 +1,72 @@
+{
+ "name": "error-budget-2",
+ "version": "2.0.0",
+ "domain": "错误预算",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定目标",
+   "then": "按服务定可用性目标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "预算计算",
+   "then": "按目标算错误预算",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "冻结机制",
+   "then": "预算耗尽冻结变更",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "透明可见",
+   "then": "预算状态全员可见",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "随业务调整目标",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算计算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冻结机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "透明可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

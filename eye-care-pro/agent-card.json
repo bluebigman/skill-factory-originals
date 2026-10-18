@@ -1,0 +1,107 @@
+{
+ "name": "Eye Care Pro",
+ "description": "用眼健康专家：照明与阅读环境设置；屏幕使用的护眼设置与节奏；需要眼科就诊的信号。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/eye-care-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/eye-care-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "environment",
+   "name": "照明与阅读环境设置",
+   "description": "照明与阅读环境设置",
+   "tags": [
+    "照明",
+    "台灯",
+    "阅读",
+    "环境光"
+   ],
+   "examples": [
+    "遇到单光源",
+    "遇到直射眩光",
+    "遇到阅读距离",
+    "遇到字体过小",
+    "遇到户外光照"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "environment",
+    "to": "environment",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "screen-habit",
+   "name": "屏幕使用的护眼设置与节奏",
+   "description": "屏幕使用的护眼设置与节奏",
+   "tags": [
+    "屏幕",
+    "亮度",
+    "蓝光",
+    "距离"
+   ],
+   "examples": [
+    "遇到亮度过高",
+    "遇到距离过近",
+    "遇到持续用眼",
+    "遇到夜间使用",
+    "遇到眨眼减少"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "screen-habit",
+    "to": "screen-habit",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "vision-boundary",
+   "name": "需要眼科就诊的信号",
+   "description": "需要眼科就诊的信号",
+   "tags": [
+    "视力下降",
+    "模糊",
+    "眼痛",
+    "就诊"
+   ],
+   "examples": [
+    "遇到突然模糊",
+    "遇到持续眼痛",
+    "遇到飞蚊增多",
+    "遇到儿童视力",
+    "遇到本工具边界"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "vision-boundary",
+    "to": "vision-boundary",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "用眼健康专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,107 @@
+{
+ "name": "Parent-Child Activity Pro",
+ "description": "亲子活动专家：分龄亲子活动与陪伴质量提升；作品与关键节点的记录方法；提升日常对话的进入方式。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/parent-child-activity-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/parent-child-activity-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "activity-design",
+   "name": "分龄亲子活动与陪伴质量提升",
+   "description": "分龄亲子活动与陪伴质量提升",
+   "tags": [
+    "亲子活动",
+    "周末",
+    "陪玩",
+    "无聊"
+   ],
+   "examples": [
+    "遇到不知玩什么",
+    "遇到孩子嫌幼稚",
+    "遇到时间碎片",
+    "遇到陪伴变监督",
+    "遇到二孩偏心"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "activity-design",
+    "to": "activity-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "growth-record",
+   "name": "作品与关键节点的记录方法",
+   "description": "作品与关键节点的记录方法",
+   "tags": [
+    "成长记录",
+    "作品",
+    "相册",
+    "身高体重"
+   ],
+   "examples": [
+    "遇到记录散乱",
+    "遇到作品堆积",
+    "遇到记录断档",
+    "遇到隐私风险",
+    "遇到只记成绩"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "growth-record",
+    "to": "growth-record",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "quality-talk",
+   "name": "提升日常对话的进入方式",
+   "description": "提升日常对话的进入方式",
+   "tags": [
+    "聊天",
+    "不说话",
+    "敷衍",
+    "问答终结"
+   ],
+   "examples": [
+    "遇到问什么都说还行",
+    "遇到只顾说教",
+    "遇到不回应",
+    "遇到负面开头",
+    "遇到敷衍回答"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "quality-talk",
+    "to": "quality-talk",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "亲子活动专家",
+ "x-source": "skill-factory-originals"
+}

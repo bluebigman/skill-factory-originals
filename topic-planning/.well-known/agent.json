@@ -1,0 +1,67 @@
+{
+ "name": "Topic Planning",
+ "description": "内容选题专家：覆盖 从问题找、验证需求、成系列 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/topic-planning",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/topic-planning",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "topic-planning-1",
+   "name": "针对 从问题找、验证需求 等情境给出可执行处置",
+   "description": "针对 从问题找、验证需求 等情境给出可执行处置",
+   "tags": [
+    "从问题找",
+    "验证需求"
+   ],
+   "examples": [
+    "遇到从问题找",
+    "遇到验证需求",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "topic-planning-2",
+   "name": "针对 成系列、留余量 等情境给出可执行处置",
+   "description": "针对 成系列、留余量 等情境给出可执行处置",
+   "tags": [
+    "成系列",
+    "留余量"
+   ],
+   "examples": [
+    "遇到成系列",
+    "遇到留余量",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "topic-planning-3",
+   "name": "针对 按数据调 等情境给出可执行处置",
+   "description": "针对 按数据调 等情境给出可执行处置",
+   "tags": [
+    "按数据调"
+   ],
+   "examples": [
+    "遇到按数据调",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "内容选题专家"
+}

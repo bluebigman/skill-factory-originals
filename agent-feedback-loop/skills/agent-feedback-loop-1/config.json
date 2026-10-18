@@ -1,0 +1,72 @@
+{
+ "name": "agent-feedback-loop-1",
+ "version": "2.0.0",
+ "domain": "反馈闭环",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "反馈采集",
+   "then": "建立反馈采集通道",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "归因分析",
+   "then": "反馈须归因到具体环节",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "改进可验",
+   "then": "改进项必须可验证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "闭环跟踪",
+   "then": "跟踪到效果确认",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "知识沉淀",
+   "then": "结论进知识库",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "反馈采集",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归因分析",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改进可验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环跟踪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "知识沉淀",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "excel-model-build-3",
+ "version": "2.0.0",
+ "domain": "表格模型搭建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层建表",
+   "then": "输入层-计算层-展示层分离",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "公式唯一",
+   "then": "同一计算只有一处",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "参数集中",
+   "then": "假设参数集中放一处",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "校验列",
+   "then": "关键结果加合理性校验",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本留档",
+   "then": "重要版本另存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层建表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "公式唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "参数集中",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "校验列",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本留档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

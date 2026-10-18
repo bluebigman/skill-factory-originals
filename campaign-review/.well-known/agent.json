@@ -1,0 +1,67 @@
+{
+ "name": "Campaign Review",
+ "description": "活动复盘专家：覆盖 先对齐目标、拆环节、找最关键 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/campaign-review",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/campaign-review",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "campaign-review-1",
+   "name": "针对 先对齐目标、拆环节 等情境给出可执行处置",
+   "description": "针对 先对齐目标、拆环节 等情境给出可执行处置",
+   "tags": [
+    "先对齐目标",
+    "拆环节"
+   ],
+   "examples": [
+    "遇到先对齐目标",
+    "遇到拆环节",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "campaign-review-2",
+   "name": "针对 找最关键、可复现 等情境给出可执行处置",
+   "description": "针对 找最关键、可复现 等情境给出可执行处置",
+   "tags": [
+    "找最关键",
+    "可复现"
+   ],
+   "examples": [
+    "遇到找最关键",
+    "遇到可复现",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "campaign-review-3",
+   "name": "针对 弃无效 等情境给出可执行处置",
+   "description": "针对 弃无效 等情境给出可执行处置",
+   "tags": [
+    "弃无效"
+   ],
+   "examples": [
+    "遇到弃无效",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "活动复盘专家"
+}

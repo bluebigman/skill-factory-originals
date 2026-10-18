@@ -1,0 +1,78 @@
+{
+ "name": "interview-sim-eval-2",
+ "version": "2.0.0",
+ "domain": "模拟面试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "打分维度",
+   "then": "结构/证据/量化/表达四项打分",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "限时",
+   "then": "单题限时贴近真实面试节奏",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "打分维度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "限时",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "至少",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "证据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表达",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "追问",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "回答",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "演练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "量化",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

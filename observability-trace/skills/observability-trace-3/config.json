@@ -1,0 +1,72 @@
+{
+ "name": "observability-trace-3",
+ "version": "2.0.0",
+ "domain": "可观测性追踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "三支柱",
+   "then": "日志指标链路齐备",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "统一标识",
+   "then": "跨服务统一链路标识",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "采样策略",
+   "then": "按重要性采样",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "告警关联",
+   "then": "告警关联到链路",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "成本可控",
+   "then": "控制采集成本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "三支柱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "统一标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "采样策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警关联",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本可控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

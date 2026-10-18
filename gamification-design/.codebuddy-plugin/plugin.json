@@ -1,0 +1,74 @@
+{
+ "name": "gamification-design",
+ "version": "1.0.0",
+ "plugin": "gamification-design",
+ "description": "gamification-design — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for gamification-design tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/gamification-design.md"
+ ],
+ "agentName": "gamification-design",
+ "displayName": {
+  "zh": "任务激励 进度可见 即时反馈",
+  "en": "gamification-design"
+ },
+ "profession": {
+  "zh": "任务激励 系统设计 顾问",
+  "en": "gamification-design"
+ },
+ "displayDescription": {
+  "zh": "任务激励 系统设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "gamification-design: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "任务激励",
+   "en": "gamification-design"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到任务激励怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划任务激励",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查任务激励",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到任务激励怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/gamification-design-1/",
+  "./skills/gamification-design-2/",
+  "./skills/gamification-design-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "任务激励专家",
+  "to": "任务激励 进度可见 即时反馈",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

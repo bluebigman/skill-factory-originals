@@ -1,0 +1,72 @@
+{
+ "name": "ppt-visual-tune-1",
+ "version": "2.0.0",
+ "domain": "PPT",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字号下限",
+   "then": "正文不小于十八号，小于即删内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "对比度",
+   "then": "深浅对比至少四级，浅灰字必改",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "对齐网格",
+   "then": "所有元素对齐同一网格",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "配色不超三",
+   "then": "主色辅色点缀色各一",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留白优先",
+   "then": "每页留白不少于三成",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字号下限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对齐网格",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配色不超三",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留白优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

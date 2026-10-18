@@ -1,0 +1,72 @@
+{
+ "name": "doc-legal-boundary-1",
+ "version": "2.0.0",
+ "domain": "文档合规边界",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不越界",
+   "then": "不替代法律意见，涉法事项提示咨询专业人士",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "隐私脱敏",
+   "then": "对外文档剥离个人信息",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "引用合规",
+   "then": "引用他人内容注明出处与授权",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "免责声明",
+   "then": "方法与建议类文档附免责声明",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕可溯",
+   "then": "重要文档保留修改记录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不越界",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐私脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引用合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "免责声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

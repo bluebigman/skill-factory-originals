@@ -1,0 +1,72 @@
+{
+ "name": "ui-game-hud-2",
+ "version": "2.0.0",
+ "domain": "游戏界面",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "战斗中极简",
+   "then": "战斗中只保留生存与目标信息",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可读优先",
+   "then": "字号与对比度优先于美观",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可自定义",
+   "then": "提供布局与缩放自定义",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "避开遮挡",
+   "then": "避开手部与设备遮挡区",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "图标统一",
+   "then": "跨界面图标语义统一",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "战斗中极简",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可读优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可自定义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避开遮挡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图标统一",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

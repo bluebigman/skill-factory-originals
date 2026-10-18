@@ -1,0 +1,74 @@
+{
+ "name": "pet-health-record",
+ "version": "1.0.0",
+ "plugin": "pet-health-record",
+ "description": "Pet Health Record for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/pet-health-record.md"
+ ],
+ "skills": [
+  "./skills/pet-health-record-1",
+  "./skills/pet-health-record-2",
+  "./skills/pet-health-record-3"
+ ],
+ "expertType": "agent",
+ "agentName": "pet-health-record",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Pet Health Record",
+  "zh": "宠物健康 四类记录 体重趋势"
+ },
+ "profession": {
+  "en": "Pet Health Record",
+  "zh": "宠物健康 疫苗驱虫 档案"
+ },
+ "displayDescription": {
+  "en": "Handles Pet Health Record tasks end-to-end with built-in professional skills.",
+  "zh": "宠物健康 疫苗驱虫 档案：覆盖 四类记录、体重趋势、就诊准备 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "四类记录"
+  },
+  {
+   "en": "practical capability",
+   "zh": "体重趋势"
+  },
+  {
+   "en": "practical capability",
+   "zh": "就诊准备"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到四类记录怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到体重趋势怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到就诊准备怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到四类记录怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "宠物健康专家",
+  "to": "宠物健康 四类记录 体重趋势",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

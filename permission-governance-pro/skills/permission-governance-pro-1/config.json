@@ -1,0 +1,72 @@
+{
+ "name": "permission-governance-pro-1",
+ "version": "2.0.0",
+ "domain": "权限治理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小必要",
+   "then": "按任务最小授权不预授",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "临时过期",
+   "then": "临时授权须带过期时间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "凭据隔离",
+   "then": "按用途隔离凭据",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "高危复核",
+   "then": "删除发布支付外发须人工确认",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "越界告警",
+   "then": "实际访问与授权范围定期比对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小必要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "临时过期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭据隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高危复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "越界告警",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

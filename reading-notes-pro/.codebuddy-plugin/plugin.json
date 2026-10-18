@@ -1,0 +1,74 @@
+{
+ "name": "reading-notes-pro",
+ "version": "1.0.0",
+ "plugin": "reading-notes-pro",
+ "description": "Reading Notes Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/reading-notes-pro.md"
+ ],
+ "skills": [
+  "./skills/capture",
+  "./skills/card-system",
+  "./skills/output"
+ ],
+ "expertType": "agent",
+ "agentName": "reading-notes-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Reading Notes Pro",
+  "zh": "读书笔记 只划线 全量摘抄"
+ },
+ "profession": {
+  "en": "Reading Notes Pro",
+  "zh": "读书笔记 知识卡片 输出转化"
+ },
+ "displayDescription": {
+  "en": "Handles Reading Notes Pro tasks end-to-end with built-in professional skills.",
+  "zh": "读书笔记 知识卡片 输出转化：阅读时的信息捕捉方法；知识卡片的组织与关联；把笔记转为可用成果。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "只划线"
+  },
+  {
+   "en": "practical capability",
+   "zh": "全量摘抄"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无出处"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只划线怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到全量摘抄怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无出处怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到只划线怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "读书笔记专家",
+  "to": "读书笔记 只划线 全量摘抄",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "code-review-guide-3",
+ "version": "2.0.0",
+ "domain": "代码评审把关",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按风险排序",
+   "then": "先看核心逻辑与边界",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一次一审",
+   "then": "单次评审规模控制在一屏",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "意见分级",
+   "then": "阻塞项与建议项分开标注",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "要理由",
+   "then": "提出修改须说明原因",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论闭环",
+   "then": "每条意见有回应或待办",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按风险排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一次一审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "意见分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "要理由",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

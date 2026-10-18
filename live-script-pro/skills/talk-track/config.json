@@ -1,0 +1,121 @@
+{
+ "name": "talk-track",
+ "version": "2.0.0",
+ "domain": "直播脚本",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无留人话术",
+   "then": "用「接下来讲XX」预告留住观众",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无信任",
+   "then": "先给专业判断再讲价格，纯低价无长期转化",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "逼单生硬",
+   "then": "给紧迫理由（限量/限时）须真实，虚假会反噬",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无异议处理",
+   "then": "预设价格贵/不需要等异议并准备回应",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "重复话术",
+   "then": "同一话术 30 分钟以上须换表达，重复会流失",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "话术",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逼单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无留人话术",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无信任",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逼单生硬",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无异议处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复话术",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "长期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "价格",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

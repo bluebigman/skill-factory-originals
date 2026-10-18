@@ -1,0 +1,121 @@
+{
+ "name": "direction",
+ "version": "2.0.0",
+ "domain": "转行规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "凭兴趣转",
+   "then": "先做 20 小时真实任务再决定，兴趣与职业现实差距极大",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一步到位",
+   "then": "优先平移（行业换岗位不换 或 岗位换行业不换），双换成功率低",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "信息不足",
+   "then": "找 3 位目标岗位从业者做信息访谈，二手信息不可信",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "沉没成本",
+   "then": "不因已投入年限而拒绝转向，已投入无法回收",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "周期预期",
+   "then": "转行准备期按 6-12 个月规划，短期速成预期会导致中途放弃",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "转行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "方向",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可行性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "评估",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭兴趣转",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一步到位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沉没成本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周期预期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "定期",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

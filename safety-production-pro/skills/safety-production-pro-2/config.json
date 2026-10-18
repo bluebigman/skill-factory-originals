@@ -1,0 +1,72 @@
+{
+ "name": "safety-production-pro-2",
+ "version": "2.0.0",
+ "domain": "生产安全",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分区排查",
+   "then": "按区域与工序划分排查网格",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "高危优先",
+   "then": "危化、高处、有限空间优先",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "闭环整改",
+   "then": "隐患整改必须闭环验收",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "岗位培训",
+   "then": "按岗位做针对性培训",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "应急演练",
+   "then": "定期组织应急演练",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分区排查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高危优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环整改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "岗位培训",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "应急演练",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

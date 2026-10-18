@@ -1,0 +1,74 @@
+{
+ "name": "lsp-code-intel",
+ "version": "1.0.0",
+ "plugin": "lsp-code-intel",
+ "description": "lsp-code-intel — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for lsp-code-intel tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/lsp-code-intel.md"
+ ],
+ "agentName": "lsp-code-intel",
+ "displayName": {
+  "zh": "代码语义分析 符号优先",
+  "en": "lsp-code-intel"
+ },
+ "profession": {
+  "zh": "代码语义分析 助手",
+  "en": "lsp-code-intel"
+ },
+ "displayDescription": {
+  "zh": "代码语义分析 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "lsp-code-intel: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "代码语义分析",
+   "en": "lsp-code-intel"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到代码语义分析怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划代码语义分析",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查代码语义分析",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到代码语义分析怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/lsp-code-intel-1",
+  "./skills/lsp-code-intel-2",
+  "./skills/lsp-code-intel-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:43",
+  "from": "代码语义分析专家",
+  "to": "代码语义分析 符号优先",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

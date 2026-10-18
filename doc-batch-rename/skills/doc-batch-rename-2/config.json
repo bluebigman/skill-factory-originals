@@ -1,0 +1,72 @@
+{
+ "name": "doc-batch-rename-2",
+ "version": "2.0.0",
+ "domain": "文档批量重命名",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "预览先行",
+   "then": "先出重命名预览",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "规则可读",
+   "then": "命名规则含业务含义",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "冲突检测",
+   "then": "重名自动加序号",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可回滚",
+   "then": "保留原文件名映射",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分批执行",
+   "then": "每批后抽检",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预览先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可回滚",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分批执行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

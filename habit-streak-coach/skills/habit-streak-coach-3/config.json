@@ -1,0 +1,65 @@
+{
+ "name": "habit-streak-coach-3",
+ "version": "2.0.0",
+ "domain": "习惯打卡",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "降级不放弃",
+   "then": "难以完成时降级执行而非跳过",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "降级不放弃",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "允许",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "最小",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "习惯",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "连续",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

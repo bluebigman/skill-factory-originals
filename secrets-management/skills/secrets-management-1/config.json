@@ -1,0 +1,72 @@
+{
+ "name": "secrets-management-1",
+ "version": "2.0.0",
+ "domain": "密钥安全管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不入库",
+   "then": "密钥不写入代码与版本库",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "环境隔离",
+   "then": "各环境独立密钥",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "最小权限",
+   "then": "按需授予最小权限",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "轮换机制",
+   "then": "定期轮换并记录",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "泄露处置",
+   "then": "发现泄露立即轮换并排查调用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不入库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小权限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "轮换机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "泄露处置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

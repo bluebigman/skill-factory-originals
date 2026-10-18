@@ -1,0 +1,117 @@
+{
+ "name": "budget",
+ "version": "2.0.0",
+ "domain": "家庭买菜",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无预算",
+   "then": "按周设食材预算上限并设 80% 预警线",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "浪费",
+   "then": "每周盘点丢弃量，浪费额直接反映采购不当",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "性价比",
+   "then": "按单位营养成本而非单价比较",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "替代",
+   "then": "蛋白来源可替换（豆制品/蛋/禽肉），不必固定",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "记录",
+   "then": "只记总额与浪费额，逐笔记账难坚持",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "省钱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "性价比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超支",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无预算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "浪费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "上限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只记",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "盘点",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

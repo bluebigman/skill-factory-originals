@@ -1,0 +1,74 @@
+{
+ "name": "template-engine-pro",
+ "version": "1.0.0",
+ "plugin": "template-engine-pro",
+ "description": "template-engine-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for template-engine-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/template-engine-pro.md"
+ ],
+ "agentName": "template-engine-pro",
+ "displayName": {
+  "zh": "模板引擎 变量声明 缺失处理",
+  "en": "template-engine-pro"
+ },
+ "profession": {
+  "zh": "模板引擎 变量替换 顾问",
+  "en": "template-engine-pro"
+ },
+ "displayDescription": {
+  "zh": "模板引擎 变量替换 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "template-engine-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "模板引擎",
+   "en": "template-engine-pro"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到模板引擎怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划模板引擎",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查模板引擎",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到模板引擎怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/template-engine-pro-1",
+  "./skills/template-engine-pro-2",
+  "./skills/template-engine-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "模板引擎专家",
+  "to": "模板引擎 变量声明 缺失处理",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

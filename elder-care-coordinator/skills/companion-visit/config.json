@@ -1,0 +1,121 @@
+{
+ "name": "companion-visit",
+ "version": "2.0.0",
+ "domain": "老人照护",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "信息不全",
+   "then": "提前整理用药清单与既往病史一页纸，现场回忆必遗漏",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "听不清医嘱",
+   "then": "现场录音并当场复述确认，回去再回忆必出错",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "多科就诊",
+   "then": "整理时间线（何时起病/何药无效），按时间顺序陈述",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "用药冲突",
+   "then": "就诊时出示全部在服药物（含保健品），避免重复用药",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "诊断疑问",
+   "then": "本工具不提供判断，只协助组织信息，诊断一律以医生为准",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "陪诊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就医",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "挂号",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用药",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息不全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "听不清医嘱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多科就诊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用药冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "诊断疑问",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

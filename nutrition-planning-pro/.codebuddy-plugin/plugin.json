@@ -1,0 +1,74 @@
+{
+ "name": "nutrition-planning-pro",
+ "version": "1.0.0",
+ "plugin": "nutrition-planning-pro",
+ "description": "Nutrition Planning Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/nutrition-planning-pro.md"
+ ],
+ "skills": [
+  "./skills/meal-prep",
+  "./skills/plate-model",
+  "./skills/risk-boundary"
+ ],
+ "expertType": "agent",
+ "agentName": "nutrition-planning-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Nutrition Planning Pro",
+  "zh": "膳食搭配 外卖偏多 时间不足"
+ },
+ "profession": {
+  "en": "Nutrition Planning Pro",
+  "zh": "膳食搭配 营养均衡 控糖控油"
+ },
+ "displayDescription": {
+  "en": "Handles Nutrition Planning Pro tasks end-to-end with built-in professional skills.",
+  "zh": "膳食搭配 营养均衡 控糖控油：按周执行的备餐方法；一餐结构的可视化搭配法；需要专业介入的边界情形。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "外卖偏多"
+  },
+  {
+   "en": "practical capability",
+   "zh": "时间不足"
+  },
+  {
+   "en": "practical capability",
+   "zh": "口味单调"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到外卖偏多怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到时间不足怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到口味单调怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到外卖偏多怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "膳食搭配专家",
+  "to": "膳食搭配 外卖偏多 时间不足",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

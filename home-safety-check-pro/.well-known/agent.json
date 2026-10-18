@@ -1,0 +1,99 @@
+{
+ "name": "Home Safety Check Pro",
+ "description": "居家安全 隐患排查 适老适幼改造：分龄儿童居家防护要点；家庭应急物资与流程；分区域的家庭安全隐患排查。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/home-safety-check-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-safety-check-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-proof",
+   "name": "分龄儿童居家防护要点",
+   "description": "分龄儿童居家防护要点",
+   "tags": [
+    "儿童防护",
+    "插座",
+    "窗户",
+    "误食"
+   ],
+   "examples": [
+    "遇到误食",
+    "遇到窗户",
+    "遇到插座",
+    "遇到家具",
+    "遇到分工"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "child-proof",
+    "to": "child-proof",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "emergency-prep",
+   "name": "家庭应急物资与流程",
+   "description": "家庭应急物资与流程",
+   "tags": [
+    "应急",
+    "急救箱",
+    "逃生",
+    "预案"
+   ],
+   "examples": [
+    "遇到无预案",
+    "遇到物资过期",
+    "遇到燃气泄漏",
+    "遇到火灾",
+    "遇到急救"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "emergency-prep",
+    "to": "emergency-prep",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "hazard-scan",
+   "name": "分区域的家庭安全隐患排查",
+   "description": "分区域的家庭安全隐患排查",
+   "tags": [
+    "隐患",
+    "安全检查",
+    "防护",
+    "风险"
+   ],
+   "examples": [
+    "遇到儿童风险",
+    "遇到燃气",
+    "遇到用电",
+    "遇到坠物",
+    "遇到滑倒"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "hazard-scan",
+    "to": "hazard-scan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "居家安全专家"
+}

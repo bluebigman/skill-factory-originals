@@ -1,0 +1,72 @@
+{
+ "name": "discovery-call-coach-2",
+ "version": "2.0.0",
+ "domain": "需求挖掘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "顺序提问",
+   "then": "按现状、问题、影响的顺序展开",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "开放为主",
+   "then": "少用是非题获取信息",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "复述确认",
+   "then": "复述对方原话确认理解",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不早报价",
+   "then": "需求未明前不报价",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "记录原话",
+   "then": "原话逐条记录用于复盘",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "顺序提问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开放为主",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复述确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不早报价",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录原话",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

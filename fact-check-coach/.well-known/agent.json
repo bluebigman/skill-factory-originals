@@ -1,0 +1,67 @@
+{
+ "name": "Fact Check Coach",
+ "description": "常识核查专家：覆盖 先找源头、看时间、多源交叉 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/fact-check-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/fact-check-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "fact-check-coach-1",
+   "name": "针对 先找源头、看时间 等情境给出可执行处置",
+   "description": "针对 先找源头、看时间 等情境给出可执行处置",
+   "tags": [
+    "先找源头",
+    "看时间"
+   ],
+   "examples": [
+    "遇到先找源头",
+    "遇到看时间",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "fact-check-coach-2",
+   "name": "针对 多源交叉、区分事实 等情境给出可执行处置",
+   "description": "针对 多源交叉、区分事实 等情境给出可执行处置",
+   "tags": [
+    "多源交叉",
+    "区分事实"
+   ],
+   "examples": [
+    "遇到多源交叉",
+    "遇到区分事实",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "fact-check-coach-3",
+   "name": "针对 存疑即标 等情境给出可执行处置",
+   "description": "针对 存疑即标 等情境给出可执行处置",
+   "tags": [
+    "存疑即标"
+   ],
+   "examples": [
+    "遇到存疑即标",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "常识核查专家"
+}

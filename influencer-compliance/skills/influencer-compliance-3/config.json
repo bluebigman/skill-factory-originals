@@ -1,0 +1,72 @@
+{
+ "name": "influencer-compliance-3",
+ "version": "2.0.0",
+ "domain": "推广合规",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "明确标识",
+   "then": "商业推广内容须明确标识",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "禁用绝对化",
+   "then": "禁用绝对化用语与功效承诺",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "数据可溯",
+   "then": "引用数据须可溯源",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "授权留档",
+   "then": "肖像与内容授权须留档",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "遵守平台规则",
+   "then": "逐平台核对发布规则",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "明确标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "禁用绝对化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "授权留档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "遵守平台规则",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

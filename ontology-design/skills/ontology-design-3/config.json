@@ -1,0 +1,72 @@
+{
+ "name": "ontology-design-3",
+ "version": "2.0.0",
+ "domain": "本体设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "范围收敛",
+   "then": "只建业务需要的概念",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "关系明确",
+   "then": "关系类型清晰",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "复用标准",
+   "then": "优先复用行业标准",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可演进",
+   "then": "支持逐步扩展",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "文档配套",
+   "then": "配概念说明",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "范围收敛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关系明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复用标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可演进",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文档配套",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

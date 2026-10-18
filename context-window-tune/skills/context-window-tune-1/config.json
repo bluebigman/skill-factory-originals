@@ -1,0 +1,72 @@
+{
+ "name": "context-window-tune-1",
+ "version": "2.0.0",
+ "domain": "上下文优",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分块合理",
+   "then": "按语义边界分块不硬切",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "召回优先",
+   "then": "先提召回再提精度",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "去冗余",
+   "then": "重复上下文合并",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "关键保真",
+   "then": "关键约束不得在压缩中丢失",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "长文处理",
+   "then": "超长文档用检索而非全文注入",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分块合理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "召回优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "去冗余",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键保真",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长文处理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "name": "agent-output-verify-3",
+ "version": "2.0.0",
+ "domain": "输出验证",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一刀切确信",
+   "then": "强制给出置信区间或影响权重，禁止无差别「一定/必然」",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "回避不确定性",
+   "then": "要求显式列出未知项与假设前提",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "幸存者偏差",
+   "then": "检查样本是否只含成功案例，要求补失败样本",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一刀切确信",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回避不确定性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "幸存者偏差",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "显式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成功",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

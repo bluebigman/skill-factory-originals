@@ -1,0 +1,74 @@
+{
+ "name": "tool-interface-design",
+ "version": "1.0.0",
+ "plugin": "tool-interface-design",
+ "description": "Tool Interface Design for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/tool-interface-design.md"
+ ],
+ "skills": [
+  "./skills/tool-interface-design-1",
+  "./skills/tool-interface-design-2",
+  "./skills/tool-interface-design-3"
+ ],
+ "expertType": "agent",
+ "agentName": "tool-interface-design",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Tool Interface Design",
+  "zh": "工具设计 字段类型含糊"
+ },
+ "profession": {
+  "en": "Tool Interface Design",
+  "zh": "工具设计 接口契约 描述规范"
+ },
+ "displayDescription": {
+  "en": "Handles Tool Interface Design tasks end-to-end with built-in professional skills.",
+  "zh": "工具设计 接口契约 描述规范：覆盖 字段类型含糊、必填缺失 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "工具设计"
+  },
+  {
+   "en": "practical capability",
+   "zh": "接口契约"
+  },
+  {
+   "en": "practical capability",
+   "zh": "描述规范"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到工具设计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到接口契约怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到描述规范怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到工具设计怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "工具设计专家",
+  "to": "工具设计 字段类型含糊",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

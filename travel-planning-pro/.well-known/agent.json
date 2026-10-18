@@ -1,0 +1,99 @@
+{
+ "name": "Travel Planning Pro",
+ "description": "旅行规划专家：旅行预算的分配与节省；行程的节奏与动线设计；出行前的风险准备。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/travel-planning-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/travel-planning-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "budget",
+   "name": "旅行预算的分配与节省",
+   "description": "旅行预算的分配与节省",
+   "tags": [
+    "预算",
+    "花费",
+    "省钱",
+    "性价比"
+   ],
+   "examples": [
+    "遇到只算大头",
+    "遇到应急缺失",
+    "遇到比价耗时",
+    "遇到汇率",
+    "遇到记账"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "budget",
+    "to": "budget",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "itinerary",
+   "name": "行程的节奏与动线设计",
+   "description": "行程的节奏与动线设计",
+   "tags": [
+    "行程",
+    "攻略",
+    "路线",
+    "景点"
+   ],
+   "examples": [
+    "遇到行程过满",
+    "遇到动线混乱",
+    "遇到无缓冲",
+    "遇到忽略体力",
+    "遇到忽略闭馆"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "itinerary",
+    "to": "itinerary",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "risk",
+   "name": "出行前的风险准备",
+   "description": "出行前的风险准备",
+   "tags": [
+    "风险",
+    "安全",
+    "保险",
+    "证件"
+   ],
+   "examples": [
+    "遇到证件",
+    "遇到保险",
+    "遇到医疗",
+    "遇到通讯",
+    "遇到天气"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "risk",
+    "to": "risk",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "旅行规划专家"
+}

@@ -1,0 +1,69 @@
+{
+ "name": "game-feedback-read-3",
+ "version": "2.0.0",
+ "domain": "玩家反馈",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不承诺",
+   "then": "未定的事不承诺，避免二次伤害",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "决定",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "分类",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "三类",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "反馈",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "数值",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "二次",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

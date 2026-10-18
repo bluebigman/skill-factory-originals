@@ -1,0 +1,74 @@
+{
+ "name": "baby-care-log",
+ "version": "1.0.0",
+ "plugin": "baby-care-log",
+ "description": "Baby Care Log for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/baby-care-log.md"
+ ],
+ "skills": [
+  "./skills/baby-care-log-1",
+  "./skills/baby-care-log-2",
+  "./skills/baby-care-log-3"
+ ],
+ "expertType": "agent",
+ "agentName": "baby-care-log",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Baby Care Log",
+  "zh": "婴儿照护 记四项 看趋势"
+ },
+ "profession": {
+  "en": "Baby Care Log",
+  "zh": "婴儿照护 喂养记录 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Baby Care Log tasks end-to-end with built-in professional skills.",
+  "zh": "婴儿照护 喂养记录 顾问：覆盖 记四项、看趋势、异常阈值 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "记四项"
+  },
+  {
+   "en": "practical capability",
+   "zh": "看趋势"
+  },
+  {
+   "en": "practical capability",
+   "zh": "异常阈值"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到记四项怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到看趋势怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到异常阈值怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到记四项怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:29",
+  "from": "婴儿照护专家",
+  "to": "婴儿照护 记四项 看趋势",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

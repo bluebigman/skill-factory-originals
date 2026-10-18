@@ -1,0 +1,72 @@
+{
+ "name": "metric-anomaly-root-1",
+ "version": "2.0.0",
+ "domain": "指标异常定位",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先排数据",
+   "then": "先排除采集与口径问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "逐维下钻",
+   "then": "按维度逐层定位",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "同期对比",
+   "then": "与历史同期比",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "外部因素",
+   "then": "结合活动与季节",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论标置信",
+   "then": "不确定标待验证",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先排数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逐维下钻",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "同期对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外部因素",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论标置信",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

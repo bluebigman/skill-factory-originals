@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "结果未达显著",
+   "then": "如实报无差异，不做二次挖掘"
+  },
+  {
+   "when": "事后改口径",
+   "then": "标注为探索性结论，不作决策依据"
+  }
+ ],
+ "keywords": [
+  "判读",
+  "预设",
+  "显著性"
+ ],
+ "boundary": "按预先设定的口径判读结果，避免事后挑选",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,58 @@
+{
+ "name": "mrp-param-tune-pro-1",
+ "version": "2.0.0",
+ "domain": "物料计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "参数分层",
+   "then": "按物料层级与关键度设参数",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "提前期实测",
+   "then": "提前期用实测均值，不用合同值",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "参数分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提前期实测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "层级",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "均值",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

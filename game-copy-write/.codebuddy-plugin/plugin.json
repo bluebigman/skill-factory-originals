@@ -1,0 +1,74 @@
+{
+ "name": "game-copy-write",
+ "version": "1.0.0",
+ "plugin": "game-copy-write",
+ "description": "Game Copy Write for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/game-copy-write.md"
+ ],
+ "skills": [
+  "./skills/game-copy-write-1",
+  "./skills/game-copy-write-2",
+  "./skills/game-copy-write-3"
+ ],
+ "expertType": "agent",
+ "agentName": "game-copy-write",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Game Copy Write",
+  "zh": "游戏文案 先定语气 术语统一"
+ },
+ "profession": {
+  "en": "Game Copy Write",
+  "zh": "游戏文案 世界观 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Game Copy Write tasks end-to-end with built-in professional skills.",
+  "zh": "游戏文案 世界观 教练：覆盖 先定语气、术语统一、简短优先 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "游戏文案",
+   "en": "game-copy-write"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到游戏文案怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到世界观怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到教练怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到游戏文案怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "游戏文案专家",
+  "to": "游戏文案 先定语气 术语统一",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "pipeline-review-pro-1",
+ "version": "2.0.0",
+ "domain": "销售漏斗",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "退出标准",
+   "then": "每个阶段定义明确退出标准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "金额概率分开",
+   "then": "金额与赢率分开统计",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "停滞预警",
+   "then": "超期未推进自动预警",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "复盘到动作",
+   "then": "复盘必须落到下一步动作",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "口径统一",
+   "then": "全团队阶段口径一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "退出标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "金额概率分开",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "停滞预警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘到动作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径统一",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

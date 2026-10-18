@@ -1,0 +1,78 @@
+{
+ "name": "after-sale-coach-2",
+ "version": "2.0.0",
+ "domain": "售后处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "留痕",
+   "then": "沟通留证据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按规则",
+   "then": "无原则让步招恶意退换",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按规则",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "流程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "证据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平台",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "判定",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "拖延",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "升级",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "原则",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "售后",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

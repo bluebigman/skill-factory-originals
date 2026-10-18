@@ -1,0 +1,75 @@
+{
+ "name": "Regression Plan",
+ "description": "回归测试专家：覆盖 按影响面、核心必跑、沉淀用例 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/regression-plan",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/regression-plan",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "regression-plan-1",
+   "name": "针对 按影响面、核心必跑 等情境给出可执行处置",
+   "description": "针对 按影响面、核心必跑 等情境给出可执行处置",
+   "tags": [
+    "按影响面",
+    "核心必跑"
+   ],
+   "examples": [
+    "遇到按影响面",
+    "遇到核心必跑",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "regression-plan-2",
+   "name": "针对 沉淀用例、自动化优先 等情境给出可执行处置",
+   "description": "针对 沉淀用例、自动化优先 等情境给出可执行处置",
+   "tags": [
+    "沉淀用例",
+    "自动化优先"
+   ],
+   "examples": [
+    "遇到沉淀用例",
+    "遇到自动化优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "regression-plan-3",
+   "name": "针对 记录基线 等情境给出可执行处置",
+   "description": "针对 记录基线 等情境给出可执行处置",
+   "tags": [
+    "记录基线"
+   ],
+   "examples": [
+    "遇到记录基线",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "回归测试专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "data-classify",
+ "version": "1.0.0",
+ "plugin": "data-classify",
+ "description": "Data Classify for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/data-classify.md"
+ ],
+ "skills": [
+  "./skills/data-classify-1",
+  "./skills/data-classify-2",
+  "./skills/data-classify-3"
+ ],
+ "expertType": "agent",
+ "agentName": "data-classify",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Data Classify",
+  "zh": "数据分级 先分类 最小授权"
+ },
+ "profession": {
+  "en": "Data Classify",
+  "zh": "数据分级 敏感识别 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Data Classify tasks end-to-end with built-in professional skills.",
+  "zh": "数据分级 敏感识别 顾问：覆盖 先分类、最小授权、流转留痕 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据分级",
+   "en": "data-classify"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到数据分级怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到敏感识别怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到数据分级怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:33",
+  "from": "数据分级专家",
+  "to": "数据分级 先分类 最小授权",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "defect-triage-pro-2",
+ "version": "2.0.0",
+ "domain": "缺陷分级",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级标准",
+   "then": "按影响面分级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "优先级",
+   "then": "优先级与严重度区分",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "修复排期",
+   "then": "纳入迭代排期",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回归验证",
+   "then": "修复后必须回归",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "根因分析",
+   "then": "重复缺陷查根因",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优先级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "修复排期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "根因分析",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

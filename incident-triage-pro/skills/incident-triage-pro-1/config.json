@@ -1,0 +1,72 @@
+{
+ "name": "incident-triage-pro-1",
+ "version": "2.0.0",
+ "domain": "故障分级",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级标准",
+   "then": "明确定义故障级别",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "响应时限",
+   "then": "按级别定响应时限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "沟通机制",
+   "then": "明确通报节奏",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "止损优先",
+   "then": "先止损再定位根因",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "复盘闭环",
+   "then": "必须复盘并改进",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "响应时限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沟通机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "止损优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

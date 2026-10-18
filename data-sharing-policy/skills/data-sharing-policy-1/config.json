@@ -1,0 +1,72 @@
+{
+ "name": "data-sharing-policy-1",
+ "version": "2.0.0",
+ "domain": "数据共享策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级共享",
+   "then": "按敏感度分级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "最小必要",
+   "then": "只共享必要字段",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "协议先行",
+   "then": "签共享协议",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "留痕审计",
+   "then": "共享记录可审计",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "定期复核共享范围",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级共享",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小必要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "协议先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕审计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "data-quality-gate-3",
+ "version": "2.0.0",
+ "domain": "数据质量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "规则前置",
+   "then": "质量规则写在入口",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常即拦",
+   "then": "不合格数据不得入仓",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "维度覆盖",
+   "then": "完整性准确性时效性一致性",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "告警分级",
+   "then": "按影响面分级告警",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "修复闭环",
+   "then": "异常数据须有修复流程",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "规则前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常即拦",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "维度覆盖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "修复闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

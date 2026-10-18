@@ -1,0 +1,117 @@
+{
+ "name": "shopping-list",
+ "version": "2.0.0",
+ "domain": "家庭事务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "重复购买",
+   "then": "采购前先拍现有库存照片，凭照片下单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "囤货过期",
+   "then": "按消耗速度定采购量（周耗×1.5），不按促销力度定",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "临时缺料",
+   "then": "建常备清单并设最低库存线，触线即补不等用完",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "比价耗时",
+   "then": "只对高频三类商品比价，全品类比价时间成本不值",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "冲动消费",
+   "then": "非清单物品加入待购区静置 72 小时再决定",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "采购",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "囤货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复购买",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "囤货过期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "临时缺料",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "比价耗时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲动消费",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

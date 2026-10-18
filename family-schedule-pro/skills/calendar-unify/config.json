@@ -1,0 +1,121 @@
+{
+ "name": "calendar-unify",
+ "version": "2.0.0",
+ "domain": "家庭日程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "日程分散",
+   "then": "所有事项入同一日历并共享，分散在多处必然冲突",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "接送冲突",
+   "then": "提前一周检查重叠项并预设备用接送人",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "忘记事项",
+   "then": "只对需要行动的事项设提醒，全量提醒会被忽略",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "临时变更",
+   "then": "变更须立即同步到日历，口头通知等于没通知",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "缓冲不足",
+   "then": "行程间预留 15 分钟缓冲，零缓冲会连锁崩盘",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "日程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "忘记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提醒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "日程分散",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "接送冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "忘记事项",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "临时变更",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缓冲不足",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "安排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "同步",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "口头",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "忽略",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

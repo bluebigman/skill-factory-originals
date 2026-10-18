@@ -1,0 +1,72 @@
+{
+ "name": "workflow-design-3",
+ "version": "2.0.0",
+ "domain": "工作流设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "触发器先行",
+   "then": "先定触发条件",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "步骤幂等",
+   "then": "每步可安全重跑",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败分支",
+   "then": "每步定义失败处理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "超时与重试",
+   "then": "设超时与重试上限",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可观测",
+   "then": "每步留执行记录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "触发器先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "步骤幂等",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败分支",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超时与重试",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可观测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "onboarding-narrative-1",
+ "version": "2.0.0",
+ "domain": "引导叙事设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "首价值前置",
+   "then": "尽快让用户体验价值",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "步数精简",
+   "then": "引导不超过四步",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可跳过",
+   "then": "允许跳过",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "进度可见",
+   "then": "展示完成度",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "流失补救",
+   "then": "未完成用户跟进",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "首价值前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "步数精简",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可跳过",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "进度可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流失补救",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

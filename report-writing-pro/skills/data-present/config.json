@@ -1,0 +1,121 @@
+{
+ "name": "data-present",
+ "version": "2.0.0",
+ "domain": "报告撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "图表堆砌",
+   "then": "每图只表达一个结论并在标题写明该结论",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "比例失真",
+   "then": "柱状图纵轴必须从 0 起，截断纵轴属误导",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "口径不明",
+   "then": "所有数据标注口径、时间范围与来源",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无对比",
+   "then": "孤立数字无意义，须给出同比/环比或基准",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "精度过度",
+   "then": "结论层用整数与百分比，原始精度放附录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "图表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "呈现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可视化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图表堆砌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "比例失真",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径不明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "精度过度",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "表达",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "数字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "意义",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

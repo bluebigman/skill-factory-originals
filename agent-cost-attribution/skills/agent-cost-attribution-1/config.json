@@ -1,0 +1,72 @@
+{
+ "name": "agent-cost-attribution-1",
+ "version": "2.0.0",
+ "domain": "成本归因",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分项核算",
+   "then": "按任务环节分项统计",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常定位",
+   "then": "成本异常须定位到环节",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "基线对比",
+   "then": "与历史基线对比",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "优化排序",
+   "then": "按收益排序优化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预算联动",
+   "then": "成本与预算联动",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分项核算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "基线对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优化排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算联动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "doc-split-chapter-1",
+ "version": "2.0.0",
+ "domain": "文档分章拆分",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按结构拆",
+   "then": "按标题层级拆分",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保留上下文",
+   "then": "拆分点保留必要上下文",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "命名规范",
+   "then": "按章节号命名",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "清单核对",
+   "then": "输出拆分清单",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "链接修正",
+   "then": "修正跨文件引用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按结构拆",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留上下文",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单核对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "链接修正",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "presales-support-pro-3",
+ "version": "2.0.0",
+ "domain": "售前支持",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "需求转译",
+   "then": "把业务需求转成技术语言",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "范围界定",
+   "then": "方案边界明确写清",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "承诺可验",
+   "then": "所有承诺必须可验证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "素材沉淀",
+   "then": "方案沉淀为可复用素材",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "交付交接",
+   "then": "与交付团队正式交接",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "需求转译",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "范围界定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "承诺可验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "素材沉淀",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交付交接",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "name": "agent-output-verify-2",
+ "version": "2.0.0",
+ "domain": "输出验证",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "编造引用",
+   "then": "凡引用文献/法规/数据，逐条核验存在性；不存在即判幻觉",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "细节过度具体",
+   "then": "粒度细到无法核实（精确到小数点的孤立数字）时提高警觉，要求给出可复算过程",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "自相矛盾",
+   "then": "跨轮次比同一事实的表述，不一致处全部标注待查",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "编造引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "细节过度具体",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自相矛盾",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "数字",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

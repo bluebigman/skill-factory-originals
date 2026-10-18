@@ -1,0 +1,72 @@
+{
+ "name": "knowledge-contribution-1",
+ "version": "2.0.0",
+ "domain": "知识贡献机制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "门槛低",
+   "then": "便于快速贡献",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "模板化",
+   "then": "提供模板",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "评审轻量",
+   "then": "轻量评审不阻塞",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "署名留痕",
+   "then": "贡献者署名",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "激励可见",
+   "then": "贡献排名可见",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "门槛低",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "模板化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "评审轻量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "署名留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "激励可见",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "ecommerce-data-read-2",
+ "version": "2.0.0",
+ "domain": "电商数据",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "对比基准",
+   "then": "所有指标都要有对照基准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分人群",
+   "then": "按新老客拆分看，混在一起会误判",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "对比基准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分人群",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "转化",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "次只",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "点击",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "指标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先看",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "复购",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "只改",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

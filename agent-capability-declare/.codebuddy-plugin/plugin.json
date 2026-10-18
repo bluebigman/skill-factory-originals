@@ -1,0 +1,74 @@
+{
+ "name": "agent-capability-declare",
+ "version": "1.0.0",
+ "plugin": "agent-capability-declare",
+ "description": "agent-capability-declare — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for agent-capability-declare tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-capability-declare.md"
+ ],
+ "agentName": "agent-capability-declare",
+ "displayName": {
+  "zh": "能力声明 能做什么 不能做什么",
+  "en": "agent-capability-declare"
+ },
+ "profession": {
+  "zh": "能力声明 边界公示 顾问",
+  "en": "agent-capability-declare"
+ },
+ "displayDescription": {
+  "zh": "能力声明 边界公示 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "agent-capability-declare: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "能力声明",
+   "en": "agent-capability-declare"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到能力声明怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划能力声明",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查能力声明",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到能力声明怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/agent-capability-declare-1/",
+  "./skills/agent-capability-declare-2/",
+  "./skills/agent-capability-declare-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "能力声明专家",
+  "to": "能力声明 能做什么 不能做什么",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

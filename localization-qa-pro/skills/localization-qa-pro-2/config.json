@@ -1,0 +1,72 @@
+{
+ "name": "localization-qa-pro-2",
+ "version": "2.0.0",
+ "domain": "本地化翻译",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "术语统一",
+   "then": "先建并锁定术语表",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "母语终审",
+   "then": "终审必须由目标语母语者做",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "语境适配",
+   "then": "按界面长度与场景调整表达",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "文化核查",
+   "then": "核查文化敏感与禁忌",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "抽检留痕",
+   "then": "按比例抽检并留记录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "术语统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "母语终审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "语境适配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文化核查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽检留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

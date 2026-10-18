@@ -1,0 +1,72 @@
+{
+ "name": "story-framework-2",
+ "version": "2.0.0",
+ "domain": "故事框架设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主角明确",
+   "then": "明确主角与目标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "冲突驱动",
+   "then": "冲突推动情节",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "转折合理",
+   "then": "转折需前文铺垫",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "节奏控制",
+   "then": "长短句交替",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结尾落点",
+   "then": "结尾落回主题",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主角明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突驱动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转折合理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾落点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

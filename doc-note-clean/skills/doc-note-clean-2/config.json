@@ -1,0 +1,72 @@
+{
+ "name": "doc-note-clean-2",
+ "version": "2.0.0",
+ "domain": "笔记清洗整理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一页一题",
+   "then": "超长按主题拆",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "去冗余",
+   "then": "删重复与口水话",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "建索引",
+   "then": "首页维护目录",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标签收敛",
+   "then": "标签控制数量",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "行动项单列",
+   "then": "末尾列待办",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一页一题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "去冗余",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "建索引",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标签收敛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行动项单列",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

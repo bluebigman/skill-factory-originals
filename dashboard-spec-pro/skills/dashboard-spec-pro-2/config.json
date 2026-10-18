@@ -1,0 +1,72 @@
+{
+ "name": "dashboard-spec-pro-2",
+ "version": "2.0.0",
+ "domain": "看板规格",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "受众优先",
+   "then": "先定看板给谁看",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "指标精简",
+   "then": "一屏只放关键指标",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "层次分明",
+   "then": "总览到明细的逻辑层次",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "刷新策略",
+   "then": "明确刷新频率与口径",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "异常高亮",
+   "then": "异常值必须视觉突出",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "受众优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指标精简",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层次分明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "刷新策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常高亮",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

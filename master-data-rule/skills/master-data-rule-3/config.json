@@ -1,0 +1,72 @@
+{
+ "name": "master-data-rule-3",
+ "version": "2.0.0",
+ "domain": "主数据管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "唯一来源",
+   "then": "每类主数据唯一权威源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "编码规则",
+   "then": "统一编码规则",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "变更审批",
+   "then": "主数据变更需审批",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分发同步",
+   "then": "变更后同步各系统",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "质量监控",
+   "then": "持续监控主数据质量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "唯一来源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "编码规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更审批",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分发同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量监控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

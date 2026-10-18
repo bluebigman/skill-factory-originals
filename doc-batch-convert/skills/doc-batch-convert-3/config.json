@@ -1,0 +1,72 @@
+{
+ "name": "doc-batch-convert-3",
+ "version": "2.0.0",
+ "domain": "文档批量转换",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先小样",
+   "then": "先用小批量试转换",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "格式映射",
+   "then": "建立源目标格式映射",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败隔离",
+   "then": "失败件单独列出不中断",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "转换后抽检",
+   "then": "按比例抽检保真",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "清单对账",
+   "then": "统计转换成功数",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先小样",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式映射",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转换后抽检",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单对账",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

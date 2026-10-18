@@ -1,0 +1,74 @@
+{
+ "name": "competitor-analysis",
+ "version": "1.0.0",
+ "plugin": "competitor-analysis",
+ "description": "Competitor Analysis for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/competitor-analysis.md"
+ ],
+ "skills": [
+  "./skills/competitor-analysis-1",
+  "./skills/competitor-analysis-2",
+  "./skills/competitor-analysis-3"
+ ],
+ "expertType": "agent",
+ "agentName": "competitor-analysis",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Competitor Analysis",
+  "zh": "竞品分析 先定维度 试用为准"
+ },
+ "profession": {
+  "en": "Competitor Analysis",
+  "zh": "竞品分析 功能对比 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Competitor Analysis tasks end-to-end with built-in professional skills.",
+  "zh": "竞品分析 功能对比 顾问：覆盖 先定维度、试用为准、看差评 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "竞品分析",
+   "en": "competitor-analysis"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到竞品分析怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到功能对比怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到竞品分析怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:31",
+  "from": "竞品分析专家",
+  "to": "竞品分析 先定维度 试用为准",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

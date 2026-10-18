@@ -1,0 +1,72 @@
+{
+ "name": "template-engine-pro-1",
+ "version": "2.0.0",
+ "domain": "模板引擎",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "变量声明",
+   "then": "模板变量必须有默认值",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "缺失处理",
+   "then": "缺失变量不得静默留空",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "转义安全",
+   "then": "用户输入必须转义",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "批量幂等",
+   "then": "重跑覆盖而非追加",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预览校验",
+   "then": "生成前提供预览",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "变量声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺失处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转义安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批量幂等",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预览校验",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

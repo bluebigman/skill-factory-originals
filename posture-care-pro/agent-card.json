@@ -1,0 +1,107 @@
+{
+ "name": "Posture Care Pro",
+ "description": "久坐改善专家：久坐环境的工位设置；碎片化的活动与拉伸；正常酸胀与需就医的区分。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/posture-care-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/posture-care-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "desk-setup",
+   "name": "久坐环境的工位设置",
+   "description": "久坐环境的工位设置",
+   "tags": [
+    "工位",
+    "椅子",
+    "显示器",
+    "久坐"
+   ],
+   "examples": [
+    "遇到颈椎前伸",
+    "遇到坐姿塌陷",
+    "遇到手臂悬空",
+    "遇到久坐不动",
+    "遇到鼠标位置"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "desk-setup",
+    "to": "desk-setup",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "micro-break",
+   "name": "碎片化的活动与拉伸",
+   "description": "碎片化的活动与拉伸",
+   "tags": [
+    "拉伸",
+    "活动",
+    "僵硬",
+    "放松"
+   ],
+   "examples": [
+    "遇到肩颈僵硬",
+    "遇到腰背不适",
+    "遇到眼睛疲劳",
+    "遇到手腕不适",
+    "遇到运动量"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "micro-break",
+    "to": "micro-break",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "pain-boundary",
+   "name": "正常酸胀与需就医的区分",
+   "description": "正常酸胀与需就医的区分",
+   "tags": [
+    "疼痛",
+    "麻木",
+    "头晕",
+    "就医"
+   ],
+   "examples": [
+    "遇到肌肉酸胀",
+    "遇到放射痛",
+    "遇到麻木无力",
+    "遇到头晕",
+    "遇到急性损伤"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "pain-boundary",
+    "to": "pain-boundary",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "久坐改善专家",
+ "x-source": "skill-factory-originals"
+}

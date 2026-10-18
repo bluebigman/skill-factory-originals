@@ -1,0 +1,121 @@
+{
+ "name": "structure-seo",
+ "version": "2.0.0",
+ "domain": "搜索排名",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "层级混乱",
+   "then": "标题层级严格按 H1-H2-H3 嵌套，跳级影响理解",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无内链",
+   "then": "相关内容互相内链，提升整站权重",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无摘要",
+   "then": "首段 100 字内给出直接答案，便于被摘要采纳",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无FAQ",
+   "then": "补充常见问题区块，匹配问答型搜索",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "更新滞后",
+   "then": "定期更新时间与数据，过期内容会掉排名",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题层级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "内链",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抓取",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层级混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无内链",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无摘要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无FAQ",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "更新滞后",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理解",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表达",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

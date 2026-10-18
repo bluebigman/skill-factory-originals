@@ -1,0 +1,75 @@
+{
+ "name": "Agent Context Handoff",
+ "description": "上下文交专家：覆盖 摘要保真、决策继承、状态一致 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/agent-context-handoff",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/agent-context-handoff",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "agent-context-handoff-1",
+   "name": "针对 摘要保真、决策继承 等情境给出可执行处置",
+   "description": "针对 摘要保真、决策继承 等情境给出可执行处置",
+   "tags": [
+    "摘要保真",
+    "决策继承"
+   ],
+   "examples": [
+    "遇到摘要保真",
+    "遇到决策继承",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-context-handoff-2",
+   "name": "针对 状态一致、可回溯 等情境给出可执行处置",
+   "description": "针对 状态一致、可回溯 等情境给出可执行处置",
+   "tags": [
+    "状态一致",
+    "可回溯"
+   ],
+   "examples": [
+    "遇到状态一致",
+    "遇到可回溯",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-context-handoff-3",
+   "name": "针对 验证续接 等情境给出可执行处置",
+   "description": "针对 验证续接 等情境给出可执行处置",
+   "tags": [
+    "验证续接"
+   ],
+   "examples": [
+    "遇到验证续接",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "上下文交专家",
+ "x-source": "skill-factory-originals"
+}

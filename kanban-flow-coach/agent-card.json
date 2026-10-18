@@ -1,0 +1,75 @@
+{
+ "name": "Kanban Flow Coach",
+ "description": "看板流程专家：覆盖 限在制、找堵点、先通瓶颈、减少批量、度量周期 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/kanban-flow-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/kanban-flow-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "kanban-flow-coach-1",
+   "name": "针对 限在制、找堵点 等情境给出可执行处置",
+   "description": "针对 限在制、找堵点 等情境给出可执行处置",
+   "tags": [
+    "限在制",
+    "找堵点"
+   ],
+   "examples": [
+    "遇到限在制",
+    "遇到找堵点",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "kanban-flow-coach-2",
+   "name": "针对 先通瓶颈、减少批量 等情境给出可执行处置",
+   "description": "针对 先通瓶颈、减少批量 等情境给出可执行处置",
+   "tags": [
+    "先通瓶颈",
+    "减少批量"
+   ],
+   "examples": [
+    "遇到先通瓶颈",
+    "遇到减少批量",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "kanban-flow-coach-3",
+   "name": "针对 度量周期 等情境给出可执行处置",
+   "description": "针对 度量周期 等情境给出可执行处置",
+   "tags": [
+    "度量周期"
+   ],
+   "examples": [
+    "遇到度量周期",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "看板流程专家",
+ "x-source": "skill-factory-originals"
+}

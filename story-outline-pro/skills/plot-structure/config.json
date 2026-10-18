@@ -1,0 +1,121 @@
+{
+ "name": "plot-structure",
+ "version": "2.0.0",
+ "domain": "故事大纲",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无结构",
+   "then": "用三幕或起承转合搭骨架，无骨架必烂尾",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "转折生硬",
+   "then": "转折须有前置铺垫，突转等于突兀",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "中段塌陷",
+   "then": "中段靠升级冲突与新信息维持动力",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "高潮无力",
+   "then": "高潮须解决核心冲突并支付最大代价",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结尾",
+   "then": "结尾回应开篇的问题，形成闭合",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "三幕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转折",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转折生硬",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "中段塌陷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高潮无力",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理解",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

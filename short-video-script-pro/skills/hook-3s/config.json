@@ -1,0 +1,121 @@
+{
+ "name": "hook-3s",
+ "version": "2.0.0",
+ "domain": "短视频脚本",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "开头拖沓",
+   "then": "3 秒内出现核心冲突或结果，片头 logo 是留存杀手",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无悬念",
+   "then": "用结果前置+过程反问的结构锁住留存",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "音画不同步",
+   "then": "首帧画面必须与台词强相关，无关画面导致秒划",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "字幕缺失",
+   "then": "全程配字幕，静音观看场景占比极高",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "节奏慢",
+   "then": "前 15 秒不留停顿，节奏直接决定完播率",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "开头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "3秒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "完播",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头拖沓",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无悬念",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "音画不同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字幕缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏慢",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前置",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "导致",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "占比",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "秒内",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

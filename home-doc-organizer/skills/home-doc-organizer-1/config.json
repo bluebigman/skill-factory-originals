@@ -1,0 +1,70 @@
+{
+ "name": "home-doc-organizer-1",
+ "version": "2.0.0",
+ "domain": "家庭证件",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "统一归档",
+   "then": "证件/合同/保单/医疗四类分区",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "电子备份",
+   "then": "拍照存加密目录并异地备份",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "统一归档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "电子备份",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "证件",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分区",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "拍照",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "四类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "收纳",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

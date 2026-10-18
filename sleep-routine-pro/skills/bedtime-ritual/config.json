@@ -1,0 +1,121 @@
+{
+ "name": "bedtime-ritual",
+ "version": "2.0.0",
+ "domain": "作息",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "睡前刷手机",
+   "then": "睡前 1 小时远离屏幕，蓝光与信息刺激双重影响入睡",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "温度",
+   "then": "睡前 1-2 小时温水沐浴，体温回落促进入睡",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "咖啡因",
+   "then": "午后避免咖啡因，半衰期 5 小时以上",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "饮酒",
+   "then": "酒精助眠是错觉，会破坏深睡与后半夜睡眠",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "固定程序",
+   "then": "建立固定 3 步程序（洗漱-阅读-关灯），程序本身即信号",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "睡前",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "仪式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "放松",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "睡前刷手机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "温度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "咖啡因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "饮酒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "固定程序",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "建立",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

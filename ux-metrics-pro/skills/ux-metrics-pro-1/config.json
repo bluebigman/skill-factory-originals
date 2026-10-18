@@ -1,0 +1,72 @@
+{
+ "name": "ux-metrics-pro-1",
+ "version": "2.0.0",
+ "domain": "体验度量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层指标",
+   "then": "设北极星指标与过程指标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可归因",
+   "then": "指标能归因到具体改动",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "防刷",
+   "then": "设计防刷与防污染机制",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "口径固定",
+   "then": "口径一旦确定不随改随换",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复盘",
+   "then": "定期看趋势而非单点值",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层指标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可归因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防刷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径固定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

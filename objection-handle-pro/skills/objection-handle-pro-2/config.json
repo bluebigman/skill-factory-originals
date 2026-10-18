@@ -1,0 +1,72 @@
+{
+ "name": "objection-handle-pro-2",
+ "version": "2.0.0",
+ "domain": "异议处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先认同",
+   "then": "先承认顾虑的合理性",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "追问澄清",
+   "then": "追问具体指向而非直接反驳",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "证据回应",
+   "then": "用案例与数据而非形容词",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "避免争辩",
+   "then": "不在观点上争输赢",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留决策空间",
+   "then": "给对方体面的决策空间",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先认同",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "追问澄清",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "证据回应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免争辩",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留决策空间",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

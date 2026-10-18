@@ -1,0 +1,96 @@
+{
+ "name": "anxiety-scan",
+ "version": "2.0.0",
+ "domain": "考试焦虑",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "失眠",
+   "then": "固定起床时间比固定入睡更重要，睡前1小时离屏",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "心慌",
+   "then": "用4-7-8呼吸法（吸4秒-屏7秒-呼8秒）2轮",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "手抖",
+   "then": "握拳5秒再放松，重复3次，交替换手",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "烦躁",
+   "then": "把担心写下来分类，只处理可控项",
+   "source": "scripts/main.py#RULES[3]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "失眠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "心慌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手抖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "烦躁",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L84"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

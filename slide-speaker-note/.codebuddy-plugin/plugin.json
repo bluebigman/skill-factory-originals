@@ -1,0 +1,74 @@
+{
+ "name": "slide-speaker-note",
+ "version": "1.0.0",
+ "plugin": "slide-speaker-note",
+ "description": "slide-speaker-note — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for slide-speaker-note tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/slide-speaker-note.md"
+ ],
+ "agentName": "slide-speaker-note",
+ "displayName": {
+  "zh": "演讲备注撰写 一页一句",
+  "en": "slide-speaker-note"
+ },
+ "profession": {
+  "zh": "演讲备注撰写 助手",
+  "en": "slide-speaker-note"
+ },
+ "displayDescription": {
+  "zh": "演讲备注撰写 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "slide-speaker-note: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "演讲备注撰写",
+   "en": "slide-speaker-note"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到演讲备注撰写怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划演讲备注撰写",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查演讲备注撰写",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到演讲备注撰写怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/slide-speaker-note-1",
+  "./skills/slide-speaker-note-2",
+  "./skills/slide-speaker-note-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "演讲备注撰写专家",
+  "to": "演讲备注撰写 一页一句",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

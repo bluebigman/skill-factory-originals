@@ -1,0 +1,121 @@
+{
+ "name": "turnover",
+ "version": "2.0.0",
+ "domain": "库存管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全品平均",
+   "then": "按单品看周转，平均会掩盖滞销品",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "SKU 过多",
+   "then": "砍掉低动销 SKU，SKU 数量与库存压力正相关",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "定价",
+   "then": "滞销品优先降价而非囤着，库存占用的资金成本持续累积",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "预售",
+   "then": "新品可用预售验证需求再批量备货",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "盘点",
+   "then": "每月盘点一次账实差异，差异长期不查会失控",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "周转率",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动销",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "滞销",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全品平均",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "SKU 过多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定价",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预售",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "盘点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "决定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

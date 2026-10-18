@@ -1,0 +1,121 @@
+{
+ "name": "handover-check",
+ "version": "2.0.0",
+ "domain": "搬家",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "押金争议",
+   "then": "入住时拍全屋视频留档，退租时逐项比对",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "验收扯皮",
+   "then": "交接单逐项签字确认，口头确认无凭据",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "费用结清",
+   "then": "结清水电燃气物业并留存缴费凭证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "损坏认定",
+   "then": "区分自然损耗与人为损坏，正常使用磨损不应扣押金",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "争议解决",
+   "then": "合同条款与留档证据是唯一依据，协商不成走法定途径",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "交接",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "押金",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "验收",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "水电",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "押金争议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "验收扯皮",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "费用结清",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "损坏认定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "争议解决",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "证据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "区分",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "口头",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留存",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "自然",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留档",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "正常",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

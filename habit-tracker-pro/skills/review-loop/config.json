@@ -1,0 +1,121 @@
+{
+ "name": "review-loop",
+ "version": "2.0.0",
+ "domain": "习惯养成",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只做不看",
+   "then": "每月检视一次是否达到预期效果，无效习惯应替换",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "归因错误",
+   "then": "区分是习惯本身无效还是执行不足，两者对策不同",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "全或无",
+   "then": "允许 80% 达标率，追求 100% 会因一次失守而全面放弃",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "叠加",
+   "then": "已稳定的习惯可作为新习惯的触发器，逐步叠加",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "长期",
+   "then": "以 90 天为观察窗口，21 天养成是流传的误读",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坚持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只做不看",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归因错误",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全或无",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "叠加",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "持续",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "每天",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "情绪",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "次只",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "contract-mfg-audit-pro-2",
+ "version": "2.0.0",
+ "domain": "代工管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "首件确认",
+   "then": "量产前必须首件确认",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "过程巡线",
+   "then": "定期巡线抽查关键工序",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "变更管控",
+   "then": "代工方工艺变更须报批",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "出货检验",
+   "then": "出货前按方案抽检",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "绩效评级",
+   "then": "按质量与交期做季度评级",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "首件确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过程巡线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更管控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "出货检验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "绩效评级",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

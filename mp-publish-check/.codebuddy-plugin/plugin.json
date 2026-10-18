@@ -1,0 +1,74 @@
+{
+ "name": "mp-publish-check",
+ "version": "1.0.0",
+ "plugin": "mp-publish-check",
+ "description": "Mp Publish Check for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/mp-publish-check.md"
+ ],
+ "skills": [
+  "./skills/mp-publish-check-1",
+  "./skills/mp-publish-check-2",
+  "./skills/mp-publish-check-3"
+ ],
+ "expertType": "agent",
+ "agentName": "mp-publish-check",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Mp Publish Check",
+  "zh": "公众号发布 事实核对 敏感词"
+ },
+ "profession": {
+  "en": "Mp Publish Check",
+  "zh": "公众号发布 合规自检 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Mp Publish Check tasks end-to-end with built-in professional skills.",
+  "zh": "公众号发布 合规自检 顾问：覆盖 事实核对、敏感词、图片版权 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "公众号发布",
+   "en": "mp-publish-check"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到公众号发布怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到合规自检怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到公众号发布怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "公众号发布专家",
+  "to": "公众号发布 事实核对 敏感词",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

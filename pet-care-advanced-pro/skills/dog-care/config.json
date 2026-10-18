@@ -1,0 +1,113 @@
+{
+ "name": "dog-care",
+ "version": "2.0.0",
+ "domain": "养狗",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "遛狗时长",
+   "then": "按体型定运动量：小型 30 分钟/次，中大型 60 分钟以上，不足必然拆家",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拆家",
+   "then": "先排除运动不足与分离焦虑，训练前必须满足体能需求",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "乱叫",
+   "then": "记录触发场景再训练，盲目制止会加重焦虑",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "掉毛",
+   "then": "换毛季每日梳毛并调整洗护频率，季节性掉毛属正常",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "驱虫免疫",
+   "then": "按日历执行并留档，凭记忆必漏",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "养狗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "遛狗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拆家",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "乱叫",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "掉毛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "遛狗时长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "驱虫免疫",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定期",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "无效",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "每日",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

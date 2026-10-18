@@ -1,0 +1,72 @@
+{
+ "name": "review-response-1",
+ "version": "2.0.0",
+ "domain": "评价回应",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先核实",
+   "then": "回应前核实事实",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不删差评",
+   "then": "保留真实反馈",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分级响应",
+   "then": "按影响分级处理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "公开简明",
+   "then": "公开回应简短专业",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "洞察回流",
+   "then": "反馈汇总给产品",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先核实",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不删差评",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级响应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "公开简明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "洞察回流",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

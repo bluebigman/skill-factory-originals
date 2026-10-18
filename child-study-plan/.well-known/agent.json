@@ -1,0 +1,67 @@
+{
+ "name": "Child Study Plan",
+ "description": "儿童学习专家：覆盖 固定时段、番茄法、任务拆小、先难后易、不陪写 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/child-study-plan",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-study-plan",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-study-plan-1",
+   "name": "针对 固定时段、番茄法 等情境给出可执行处置",
+   "description": "针对 固定时段、番茄法 等情境给出可执行处置",
+   "tags": [
+    "固定时段",
+    "番茄法"
+   ],
+   "examples": [
+    "遇到固定时段",
+    "遇到番茄法",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-study-plan-2",
+   "name": "针对 任务拆小、先难后易 等情境给出可执行处置",
+   "description": "针对 任务拆小、先难后易 等情境给出可执行处置",
+   "tags": [
+    "任务拆小",
+    "先难后易"
+   ],
+   "examples": [
+    "遇到任务拆小",
+    "遇到先难后易",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-study-plan-3",
+   "name": "针对 不陪写 等情境给出可执行处置",
+   "description": "针对 不陪写 等情境给出可执行处置",
+   "tags": [
+    "不陪写"
+   ],
+   "examples": [
+    "遇到不陪写",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "儿童学习专家"
+}

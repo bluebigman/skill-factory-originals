@@ -1,0 +1,69 @@
+{
+ "name": "teen-independence-guide-3",
+ "version": "2.0.0",
+ "domain": "青春期独立",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "不收回",
+   "then": "已交出的权利不随意收回",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不收回",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "重度",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L78"
+  },
+  {
+   "term": "安全",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

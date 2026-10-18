@@ -1,0 +1,72 @@
+{
+ "name": "global-content-calendar-3",
+ "version": "2.0.0",
+ "domain": "全球内容",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "节庆对齐",
+   "then": "对齐目标市场节庆与旺季",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按区发布",
+   "then": "按目标时区安排发布时间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "素材分级",
+   "then": "素材按区域做分级复用",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "一次多产",
+   "then": "一次生产多区域复用降本",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分区复盘",
+   "then": "按区域分别复盘效果",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "节庆对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按区发布",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "素材分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一次多产",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分区复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

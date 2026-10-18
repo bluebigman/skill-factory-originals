@@ -1,0 +1,121 @@
+{
+ "name": "input",
+ "version": "2.0.0",
+ "domain": "语言学习",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "材料过难",
+   "then": "选能理解 80% 以上的材料，过难会挫败",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无字幕",
+   "then": "先带字幕理解再脱字幕，直接裸听效率低",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "只输入不输出",
+   "then": "输入输出比约 7:3，只输入难以激活",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无主题聚焦",
+   "then": "围绕固定主题积累，散点式学习难以形成能力",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "中断",
+   "then": "每天固定时段，长期中断会让水平快速回退",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "输入",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "听力",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "材料",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "材料过难",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无字幕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只输入不输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无主题聚焦",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "中断",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每天",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "长期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理解",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "学习",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "组织",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

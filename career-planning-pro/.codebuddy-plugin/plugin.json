@@ -1,0 +1,74 @@
+{
+ "name": "career-planning-pro",
+ "version": "1.0.0",
+ "plugin": "career-planning-pro",
+ "description": "Career Planning Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/career-planning-pro.md"
+ ],
+ "skills": [
+  "./skills/path",
+  "./skills/self-assess",
+  "./skills/transition"
+ ],
+ "expertType": "agent",
+ "agentName": "career-planning-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Career Planning Pro",
+  "zh": "职业规划 只凭兴趣 一步到位"
+ },
+ "profession": {
+  "en": "Career Planning Pro",
+  "zh": "职业规划 转行路径 能力盘点"
+ },
+ "displayDescription": {
+  "en": "Handles Career Planning Pro tasks end-to-end with built-in professional skills.",
+  "zh": "职业规划 转行路径 能力盘点：职业路径的规划与选择；个人能力与市场的对齐；转行的分阶段落地。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "只凭兴趣"
+  },
+  {
+   "en": "practical capability",
+   "zh": "一步到位"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无时限"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只凭兴趣怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到一步到位怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无时限怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到只凭兴趣怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "职业规划专家",
+  "to": "职业规划 只凭兴趣 一步到位",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

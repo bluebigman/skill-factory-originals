@@ -1,0 +1,121 @@
+{
+ "name": "interaction",
+ "version": "2.0.0",
+ "domain": "社媒文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无引导",
+   "then": "结尾须给明确动作（评论区扣1/点击链接），无引导则无转化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "硬广",
+   "then": "先提供价值再引导，纯推销会被折叠",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不回复",
+   "then": "前 30 分钟回复评论可显著提升推荐权重",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "差评",
+   "then": "负面评论优先公开回复并给解决路径，删除会放大危机",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "转化漏斗",
+   "then": "引导动作与目标匹配（涨粉就引导关注，成交就引导私信）",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "互动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "评论",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引导",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无引导",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "硬广",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不回复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差评",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转化漏斗",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "模板",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

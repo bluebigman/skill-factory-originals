@@ -1,0 +1,72 @@
+{
+ "name": "design-system-pro-1",
+ "version": "2.0.0",
+ "domain": "设计系统",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "令牌先行",
+   "then": "先定义颜色与间距令牌",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "职责边界",
+   "then": "明确每个组件的职责边界",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "状态齐全",
+   "then": "覆盖默认/悬停/禁用/错误状态",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "文档同步",
+   "then": "组件文档与代码同步更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更评审",
+   "then": "组件变更走评审流程",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "令牌先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "职责边界",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "状态齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文档同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更评审",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

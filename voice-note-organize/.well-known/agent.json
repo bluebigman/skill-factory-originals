@@ -1,0 +1,67 @@
+{
+ "name": "Voice Note Organize",
+ "description": "语音笔记专家：覆盖 随手转写、标题即结论、双标签、周归档、敏感隔离 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/voice-note-organize",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/voice-note-organize",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "voice-note-organize-1",
+   "name": "针对 随手转写、标题即结论 等情境给出可执行处置",
+   "description": "针对 随手转写、标题即结论 等情境给出可执行处置",
+   "tags": [
+    "随手转写",
+    "标题即结论"
+   ],
+   "examples": [
+    "遇到随手转写",
+    "遇到标题即结论",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "voice-note-organize-2",
+   "name": "针对 双标签、周归档 等情境给出可执行处置",
+   "description": "针对 双标签、周归档 等情境给出可执行处置",
+   "tags": [
+    "双标签",
+    "周归档"
+   ],
+   "examples": [
+    "遇到双标签",
+    "遇到周归档",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "voice-note-organize-3",
+   "name": "针对 敏感隔离 等情境给出可执行处置",
+   "description": "针对 敏感隔离 等情境给出可执行处置",
+   "tags": [
+    "敏感隔离"
+   ],
+   "examples": [
+    "遇到敏感隔离",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "语音笔记专家"
+}

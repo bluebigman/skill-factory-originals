@@ -1,0 +1,107 @@
+{
+ "name": "Data Standard Pro",
+ "description": "数据规范专家：指标口径的对齐；数据质量的持续治理；数据字段与命名规范的建立。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/data-standard-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/data-standard-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "caliber",
+   "name": "指标口径的对齐",
+   "description": "指标口径的对齐",
+   "tags": [
+    "口径",
+    "指标",
+    "定义",
+    "对齐"
+   ],
+   "examples": [
+    "遇到口径漂移",
+    "遇到分母不明",
+    "遇到时间范围",
+    "遇到过滤条件",
+    "遇到变更留痕"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:40",
+    "from": "caliber",
+    "to": "caliber",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "governance",
+   "name": "数据质量的持续治理",
+   "description": "数据质量的持续治理",
+   "tags": [
+    "数据治理",
+    "质量",
+    "校验",
+    "责任人"
+   ],
+   "examples": [
+    "遇到无责任人",
+    "遇到无校验",
+    "遇到异常值",
+    "遇到保留原表",
+    "遇到敏感数据"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:40",
+    "from": "governance",
+    "to": "governance",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "standard",
+   "name": "数据字段与命名规范的建立",
+   "description": "数据字段与命名规范的建立",
+   "tags": [
+    "数据规范",
+    "字段",
+    "命名",
+    "标准"
+   ],
+   "examples": [
+    "遇到命名随意",
+    "遇到类型不统一",
+    "遇到全半角",
+    "遇到无字典",
+    "遇到版本"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:40",
+    "from": "standard",
+    "to": "standard",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "数据规范专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,121 @@
+{
+ "name": "professional-boundary",
+ "version": "2.0.0",
+ "domain": "压力缓解",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "持续两周以上",
+   "then": "情绪低落或兴趣丧失持续两周以上须寻求专业评估",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "功能受损",
+   "then": "影响工作生活基本功能时须专业介入",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "躯体症状",
+   "then": "持续失眠、食欲剧变、体重明显变化须就医",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "自伤念头",
+   "then": "出现任何自伤念头请立即联系专业机构或急救电话",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "本工具边界",
+   "then": "本工具提供通用减压方法，不构成心理诊断或治疗",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "持续低落",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失眠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "焦虑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "求助",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "持续两周以上",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "功能受损",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "躯体症状",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自伤念头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "本工具边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "避免",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "专业机构",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "心理",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

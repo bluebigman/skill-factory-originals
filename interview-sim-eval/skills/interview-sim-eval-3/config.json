@@ -1,0 +1,61 @@
+{
+ "name": "interview-sim-eval-3",
+ "version": "2.0.0",
+ "domain": "模拟面试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "改进清单",
+   "then": "结束后输出三条可执行改进",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "改进清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "至少",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "追问",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "回答",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "演练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "三层",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "结束",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

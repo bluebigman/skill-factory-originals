@@ -1,0 +1,69 @@
+{
+ "name": "inventory-turn-pro-3",
+ "version": "2.0.0",
+ "domain": "库存周转",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "周转监控",
+   "then": "月度跟踪周转天数与呆滞额",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "周转监控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "管理",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "安全",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "库存",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "分类",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "差异",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "清理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "波动",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "感觉",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

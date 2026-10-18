@@ -1,0 +1,74 @@
+{
+ "name": "interview-answer-coach-1",
+ "version": "2.0.0",
+ "domain": "面试答题",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先给结论",
+   "then": "开门见山，再补依据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "STAR 结构",
+   "then": "情境-任务-行动-结果，控制在 90 秒内",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先给结论",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "STAR 结构",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "再补",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "秒内",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "思路",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

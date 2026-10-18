@@ -1,0 +1,72 @@
+{
+ "name": "doc-template-version-2",
+ "version": "2.0.0",
+ "domain": "模板版本管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版本号",
+   "then": "模板本身带版本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变更说明",
+   "then": "每版列改动点",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "兼容声明",
+   "then": "说明兼容范围",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "旧版保留",
+   "then": "旧版归档不删",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "使用统计",
+   "then": "统计模板使用情况",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版本号",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更说明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "兼容声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "旧版保留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "使用统计",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

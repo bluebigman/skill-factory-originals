@@ -1,0 +1,72 @@
+{
+ "name": "log-standard-define-3",
+ "version": "2.0.0",
+ "domain": "日志规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构化",
+   "then": "统一键值格式便于检索",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级明确",
+   "then": "各级别使用场景写清",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "必含字段",
+   "then": "时间服务等级与链路标识",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "敏感脱敏",
+   "then": "禁止打印凭据与个人信息",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "采样控制",
+   "then": "高频日志采样打印",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "必含字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "采样控制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

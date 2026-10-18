@@ -1,0 +1,107 @@
+{
+ "name": "Business Trip Pro",
+ "description": "出差安排专家：拜访的会前与会中管理；差旅费用的合规与效率；出差行程的高效编排。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/business-trip-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/business-trip-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "client-visit",
+   "name": "拜访的会前与会中管理",
+   "description": "拜访的会前与会中管理",
+   "tags": [
+    "拜访",
+    "客户",
+    "会面",
+    "目标"
+   ],
+   "examples": [
+    "遇到无目标",
+    "遇到只讲产品",
+    "遇到承诺随意",
+    "遇到无记录",
+    "遇到关系断档"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:36",
+    "from": "client-visit",
+    "to": "client-visit",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "expense",
+   "name": "差旅费用的合规与效率",
+   "description": "差旅费用的合规与效率",
+   "tags": [
+    "报销",
+    "发票",
+    "费用",
+    "合规"
+   ],
+   "examples": [
+    "遇到票据缺失",
+    "遇到超标准",
+    "遇到混同",
+    "遇到时效",
+    "遇到凭证规范"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:36",
+    "from": "expense",
+    "to": "expense",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "trip-plan",
+   "name": "出差行程的高效编排",
+   "description": "出差行程的高效编排",
+   "tags": [
+    "行程",
+    "出差",
+    "交通",
+    "住宿"
+   ],
+   "examples": [
+    "遇到行程过密",
+    "遇到交通风险",
+    "遇到住宿位置",
+    "遇到资料不全",
+    "遇到时差"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:36",
+    "from": "trip-plan",
+    "to": "trip-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "出差安排专家",
+ "x-source": "skill-factory-originals"
+}

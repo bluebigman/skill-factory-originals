@@ -1,0 +1,72 @@
+{
+ "name": "form-design-pro-2",
+ "version": "2.0.0",
+ "domain": "表单设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "必填最少",
+   "then": "只留真正必要的字段",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "即时校验",
+   "then": "失焦即校验而非提交才报错",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "错误可改",
+   "then": "错误提示给出修改建议",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "长表分步",
+   "then": "长表单拆步并显示进度",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "保留输入",
+   "then": "提交失败保留已填内容",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "必填最少",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "即时校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误可改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长表分步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留输入",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

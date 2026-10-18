@@ -1,0 +1,72 @@
+{
+ "name": "feature-flag-plan-3",
+ "version": "2.0.0",
+ "domain": "功能开关方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "开关命名",
+   "then": "按功能与作用域命名",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "默认关闭",
+   "then": "新功能默认关谨慎放量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "灰度阶梯",
+   "then": "按比例或人群逐步放量",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "清理机制",
+   "then": "上线稳定后移除开关",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "开关可观测",
+   "then": "记录开关状态与生效范围",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "开关命名",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "默认关闭",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "灰度阶梯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清理机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开关可观测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

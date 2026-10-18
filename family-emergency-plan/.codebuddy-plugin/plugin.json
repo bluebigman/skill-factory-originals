@@ -1,0 +1,74 @@
+{
+ "name": "family-emergency-plan",
+ "version": "1.0.0",
+ "plugin": "family-emergency-plan",
+ "description": "Family Emergency Plan for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/family-emergency-plan.md"
+ ],
+ "skills": [
+  "./skills/family-emergency-plan-1",
+  "./skills/family-emergency-plan-2",
+  "./skills/family-emergency-plan-3"
+ ],
+ "expertType": "agent",
+ "agentName": "family-emergency-plan",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Family Emergency Plan",
+  "zh": "家庭应急 逃生演练 物资清单"
+ },
+ "profession": {
+  "en": "Family Emergency Plan",
+  "zh": "家庭应急 预案准备 物资"
+ },
+ "displayDescription": {
+  "en": "Handles Family Emergency Plan tasks end-to-end with built-in professional skills.",
+  "zh": "家庭应急 预案准备 物资：覆盖 逃生演练、物资清单、有效期检查 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "逃生演练"
+  },
+  {
+   "en": "practical capability",
+   "zh": "物资清单"
+  },
+  {
+   "en": "practical capability",
+   "zh": "有效期检查"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到逃生演练怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到物资清单怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到有效期检查怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到逃生演练怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭应急专家",
+  "to": "家庭应急 逃生演练 物资清单",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

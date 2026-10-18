@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "forge-demo-abtest",
+ "name": "实验设计 单变量、先定主指标、算样本量",
+ "description": "实验设计：单变量、先定主指标、算样本量",
+ "kind": "expert",
+ "tags": [
+  "forge-demo-abtest-1",
+  "forge-demo-abtest-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "forge-demo-abtest-core",
+   "name": "实验设计",
+   "role": "core",
+   "items": [
+    {
+     "id": "forge-demo-abtest-1",
+     "name": "实验变量设计",
+     "summary": "单变量、先定主指标、算样本量"
+    },
+    {
+     "id": "forge-demo-abtest-2",
+     "name": "主指标与样本量",
+     "summary": "单变量、先定主指标、算样本量"
+    },
+    {
+     "id": "forge-demo-abtest-3",
+     "name": "结果判读",
+     "summary": "单变量、先定主指标、算样本量"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

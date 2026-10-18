@@ -1,0 +1,62 @@
+{
+ "name": "restaurant-diagnose-2",
+ "version": "2.0.0",
+ "domain": "餐饮经营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "损耗优先",
+   "then": "食材损耗是最大隐性成本，先治这个",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "高峰动线",
+   "then": "优化高峰期出餐动线",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "损耗优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高峰动线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "区分",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "最大",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优化",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

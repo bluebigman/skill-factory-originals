@@ -1,0 +1,72 @@
+{
+ "name": "env-config-parity-3",
+ "version": "2.0.0",
+ "domain": "环境配置对齐",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "配置清单化",
+   "then": "列出全部配置项与来源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "差异显式",
+   "then": "环境间差异逐项列出",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "默认值明确",
+   "then": "未配置时的行为写清",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "启动自检",
+   "then": "启动时校验必需配置",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更同步",
+   "then": "变更同步至全部环境",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "配置清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异显式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "默认值明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "启动自检",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更同步",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,61 @@
+{
+ "name": "bug-report-coach-3",
+ "version": "2.0.0",
+ "domain": "缺陷报告",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "归因分层",
+   "then": "区分前端/后端/数据/需求问题再分派",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "归因分层",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "区分",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "稳定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "报告",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

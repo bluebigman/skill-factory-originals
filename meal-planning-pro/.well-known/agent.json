@@ -1,0 +1,99 @@
+{
+ "name": "Meal Planning Pro",
+ "description": "家庭餐食专家：餐食结构的基本均衡核查；批量备菜与保鲜；家庭周度餐食计划。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/meal-planning-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/meal-planning-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "balance-check",
+   "name": "餐食结构的基本均衡核查",
+   "description": "餐食结构的基本均衡核查",
+   "tags": [
+    "营养",
+    "搭配",
+    "挑食",
+    "外卖多"
+   ],
+   "examples": [
+    "遇到外卖偏多",
+    "遇到挑食",
+    "遇到早餐缺失",
+    "遇到饮水不足",
+    "遇到营养疑问"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:47",
+    "from": "balance-check",
+    "to": "balance-check",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "prep-batch",
+   "name": "批量备菜与保鲜",
+   "description": "批量备菜与保鲜",
+   "tags": [
+    "备菜",
+    "预处理",
+    "保鲜",
+    "冷冻"
+   ],
+   "examples": [
+    "遇到工作日没时间",
+    "遇到变质浪费",
+    "遇到冷冻串味",
+    "遇到叶菜发黄",
+    "遇到剩菜"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:47",
+    "from": "prep-batch",
+    "to": "prep-batch",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "weekly-menu",
+   "name": "家庭周度餐食计划",
+   "description": "家庭周度餐食计划",
+   "tags": [
+    "菜单",
+    "吃什么",
+    "每天纠结",
+    "重复"
+   ],
+   "examples": [
+    "遇到每天纠结",
+    "遇到口味不合",
+    "遇到重复单调",
+    "遇到做不完浪费",
+    "遇到时间不够"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:47",
+    "from": "weekly-menu",
+    "to": "weekly-menu",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭餐食专家"
+}

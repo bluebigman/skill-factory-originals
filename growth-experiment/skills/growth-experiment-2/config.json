@@ -1,0 +1,78 @@
+{
+ "name": "growth-experiment-2",
+ "version": "2.0.0",
+ "domain": "增长实验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单变量",
+   "then": "一次只改一处，便于归因",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "设止损",
+   "then": "约定无效即停的条件，不恋战",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单变量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "设止损",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "次只",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "约定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先写",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "只改",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "即停",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

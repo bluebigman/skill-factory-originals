@@ -1,0 +1,74 @@
+{
+ "name": "data-classification",
+ "version": "1.0.0",
+ "plugin": "data-classification",
+ "description": "data-classification — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for data-classification tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/data-classification.md"
+ ],
+ "agentName": "data-classification",
+ "displayName": {
+  "zh": "数据分类分级 分类维度",
+  "en": "data-classification"
+ },
+ "profession": {
+  "zh": "数据分类分级 顾问",
+  "en": "data-classification"
+ },
+ "displayDescription": {
+  "zh": "数据分类分级 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "data-classification: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据分类分级",
+   "en": "data-classification"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到数据分类分级怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划数据分类分级",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查数据分类分级",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到数据分类分级怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/data-classification-1",
+  "./skills/data-classification-2",
+  "./skills/data-classification-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:33",
+  "from": "数据分类分级专家",
+  "to": "数据分类分级 分类维度",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

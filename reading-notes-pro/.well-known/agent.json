@@ -1,0 +1,99 @@
+{
+ "name": "Reading Notes Pro",
+ "description": "读书笔记专家：阅读时的信息捕捉方法；知识卡片的组织与关联；把笔记转为可用成果。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/reading-notes-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/reading-notes-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "capture",
+   "name": "阅读时的信息捕捉方法",
+   "description": "阅读时的信息捕捉方法",
+   "tags": [
+    "读书",
+    "笔记",
+    "划线",
+    "摘抄"
+   ],
+   "examples": [
+    "遇到只划线",
+    "遇到全量摘抄",
+    "遇到无出处",
+    "遇到读完即忘",
+    "遇到贪多"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "capture",
+    "to": "capture",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "card-system",
+   "name": "知识卡片的组织与关联",
+   "description": "知识卡片的组织与关联",
+   "tags": [
+    "卡片",
+    "笔记法",
+    "知识库",
+    "关联"
+   ],
+   "examples": [
+    "遇到无索引",
+    "遇到孤立",
+    "遇到分类太重",
+    "遇到原文堆砌",
+    "遇到数量焦虑"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "card-system",
+    "to": "card-system",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "output",
+   "name": "把笔记转为可用成果",
+   "description": "把笔记转为可用成果",
+   "tags": [
+    "输出",
+    "写作",
+    "应用",
+    "复盘"
+   ],
+   "examples": [
+    "遇到只进不出",
+    "遇到不实践",
+    "遇到无法检索",
+    "遇到输出拖延",
+    "遇到过度整理"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "output",
+    "to": "output",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "读书笔记专家"
+}

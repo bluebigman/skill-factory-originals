@@ -1,0 +1,67 @@
+{
+ "name": "Family Budget Coach",
+ "description": "家庭收支专家：覆盖 简化记账、设上限、固定支出、应急金、复盘 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/family-budget-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-budget-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "family-budget-coach-1",
+   "name": "针对 简化记账、设上限 等情境给出可执行处置",
+   "description": "针对 简化记账、设上限 等情境给出可执行处置",
+   "tags": [
+    "简化记账",
+    "设上限"
+   ],
+   "examples": [
+    "遇到简化记账",
+    "遇到设上限",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-budget-coach-2",
+   "name": "针对 固定支出、应急金 等情境给出可执行处置",
+   "description": "针对 固定支出、应急金 等情境给出可执行处置",
+   "tags": [
+    "固定支出",
+    "应急金"
+   ],
+   "examples": [
+    "遇到固定支出",
+    "遇到应急金",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-budget-coach-3",
+   "name": "针对 复盘 等情境给出可执行处置",
+   "description": "针对 复盘 等情境给出可执行处置",
+   "tags": [
+    "复盘"
+   ],
+   "examples": [
+    "遇到复盘",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家庭收支专家"
+}

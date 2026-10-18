@@ -1,0 +1,107 @@
+{
+ "name": "E-commerce Listing Pro",
+ "description": "电商上架专家：上架环节的合规要点；详情页的内容编排；商品标题的结构化写法。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/ecommerce-listing-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/ecommerce-listing-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "compliance",
+   "name": "上架环节的合规要点",
+   "description": "上架环节的合规要点",
+   "tags": [
+    "合规",
+    "违规",
+    "资质",
+    "类目"
+   ],
+   "examples": [
+    "遇到类目错放",
+    "遇到资质缺失",
+    "遇到侵权",
+    "遇到虚假宣传",
+    "遇到价格"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "compliance",
+    "to": "compliance",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "detail",
+   "name": "详情页的内容编排",
+   "description": "详情页的内容编排",
+   "tags": [
+    "详情",
+    "卖点",
+    "主图",
+    "转化"
+   ],
+   "examples": [
+    "遇到首图弱",
+    "遇到无痛点",
+    "遇到参数堆砌",
+    "遇到无信任",
+    "遇到无售后"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "detail",
+    "to": "detail",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "title",
+   "name": "商品标题的结构化写法",
+   "description": "商品标题的结构化写法",
+   "tags": [
+    "标题",
+    "关键词",
+    "搜索",
+    "上架"
+   ],
+   "examples": [
+    "遇到堆砌词",
+    "遇到无核心词",
+    "遇到重复词",
+    "遇到忽略长尾",
+    "遇到违规词"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "title",
+    "to": "title",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "电商上架专家",
+ "x-source": "skill-factory-originals"
+}

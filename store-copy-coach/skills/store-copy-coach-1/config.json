@@ -1,0 +1,62 @@
+{
+ "name": "store-copy-coach-1",
+ "version": "2.0.0",
+ "domain": "商品文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "痛点对齐",
+   "then": "卖点对应痛点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "差异化",
+   "then": "找唯一差异点放大",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "痛点对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "文案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "商品",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "放大",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "卖点",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

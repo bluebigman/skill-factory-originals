@@ -1,0 +1,72 @@
+{
+ "name": "doc-format-unify-1",
+ "version": "2.0.0",
+ "domain": "文档格式统一",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "样式驱动",
+   "then": "用样式表统一而非逐段改",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标题层级",
+   "then": "按大纲级别设标题不靠加粗",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "编号自动",
+   "then": "用自动编号替代手打",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "页眉页脚",
+   "then": "一次设置全文一致",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "终稿检查",
+   "then": "用导航窗格逐级检查结构",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "样式驱动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题层级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "编号自动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "页眉页脚",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "终稿检查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

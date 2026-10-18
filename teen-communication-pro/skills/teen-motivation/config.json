@@ -1,0 +1,96 @@
+{
+ "name": "teen-motivation",
+ "version": "2.0.0",
+ "domain": "青春期沟通",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "不想学",
+   "then": "先问哪一步卡住了，拆到能完成的粒度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "没动力",
+   "then": "找他愿意投入的事做能力迁移，而非直接谈学习",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "躺平",
+   "then": "降低单次任务门槛，创造一次成功体验",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "迷茫",
+   "then": "用职业/兴趣探索替代说教，给具体信息",
+   "source": "scripts/main.py#RULES[3]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不想学",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "没动力",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "躺平",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "迷茫",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "心理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "提供心",
+   "source": "SKILL.md#L84"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

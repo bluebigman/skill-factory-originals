@@ -1,0 +1,72 @@
+{
+ "name": "empty-state-pro-2",
+ "version": "2.0.0",
+ "domain": "空状态",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "说明原因",
+   "then": "说明为什么没有内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "给下一步",
+   "then": "给出可执行的动作入口",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "区分场景",
+   "then": "区分首次使用、无结果、加载失败",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不甩锅",
+   "then": "不把系统问题表达成用户错误",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "风格一致",
+   "then": "与整体视觉语言一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "说明原因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "给下一步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "区分场景",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不甩锅",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风格一致",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "doc-accessibility-check-1",
+ "version": "2.0.0",
+ "domain": "文档可达性核查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标题结构",
+   "then": "用真实标题层级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "替代文本",
+   "then": "图片配替代文本",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "对比度",
+   "then": "正文对比度达标",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "阅读顺序",
+   "then": "确保逻辑阅读顺序",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "表格表头",
+   "then": "表格设置表头行",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标题结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "替代文本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阅读顺序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "表格表头",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

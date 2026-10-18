@@ -1,0 +1,72 @@
+{
+ "name": "global-brand-tone-2",
+ "version": "2.0.0",
+ "domain": "品牌出海",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "语气指南",
+   "then": "先定语气与风格指南",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "双语对齐",
+   "then": "中英版本含义对齐而非字面对应",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "拒绝直译",
+   "then": "避免逐字直译造成歧义",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "禁用词库",
+   "then": "建立禁用与敏感词库",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期审校",
+   "then": "定期回看历史物料并修订",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "语气指南",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双语对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒绝直译",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "禁用词库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期审校",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

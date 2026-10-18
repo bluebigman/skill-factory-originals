@@ -1,0 +1,69 @@
+{
+ "name": "nutrition-meal-coach-3",
+ "version": "2.0.0",
+ "domain": "营养搭配",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "边界",
+   "then": "慢病/孕期须遵医嘱",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "比例",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "蛋白",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "搭配",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "医嘱",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "营养",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "主食",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

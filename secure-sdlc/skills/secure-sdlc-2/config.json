@@ -1,0 +1,72 @@
+{
+ "name": "secure-sdlc-2",
+ "version": "2.0.0",
+ "domain": "安全开发流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "需求阶段",
+   "then": "纳入安全需求",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "设计阶段",
+   "then": "威胁建模",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "编码阶段",
+   "then": "安全编码规范",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "测试阶段",
+   "then": "安全测试",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "发布阶段",
+   "then": "上线前扫描",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "需求阶段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "设计阶段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "编码阶段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "测试阶段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "发布阶段",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

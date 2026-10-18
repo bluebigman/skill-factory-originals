@@ -1,0 +1,74 @@
+{
+ "name": "press-release-draft",
+ "version": "1.0.0",
+ "plugin": "press-release-draft",
+ "description": "press-release-draft — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for press-release-draft tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/press-release-draft.md"
+ ],
+ "agentName": "press-release-draft",
+ "displayName": {
+  "zh": "新闻稿撰写 倒金字塔 要素齐全",
+  "en": "press-release-draft"
+ },
+ "profession": {
+  "zh": "新闻稿撰写 助手",
+  "en": "press-release-draft"
+ },
+ "displayDescription": {
+  "zh": "新闻稿撰写 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "press-release-draft: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "新闻稿撰写",
+   "en": "press-release-draft"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到新闻稿撰写怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划新闻稿撰写",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查新闻稿撰写",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到新闻稿撰写怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/press-release-draft-1/",
+  "./skills/press-release-draft-2/",
+  "./skills/press-release-draft-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "新闻稿撰写专家",
+  "to": "新闻稿撰写 倒金字塔 要素齐全",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

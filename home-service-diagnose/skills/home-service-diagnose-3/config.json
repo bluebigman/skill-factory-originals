@@ -1,0 +1,69 @@
+{
+ "name": "home-service-diagnose-3",
+ "version": "2.0.0",
+ "domain": "家政服务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "投诉前置",
+   "then": "差评先回访再处理，避免升级",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "投诉前置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "时段",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "减少",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "写成",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "临时",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

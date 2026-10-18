@@ -1,0 +1,67 @@
+{
+ "name": "Home Study Env",
+ "description": "学习环境专家：覆盖 桌面清空、视线无干扰、固定位置、光线、噪音 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/home-study-env",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-study-env",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "home-study-env-1",
+   "name": "针对 桌面清空、视线无干扰 等情境给出可执行处置",
+   "description": "针对 桌面清空、视线无干扰 等情境给出可执行处置",
+   "tags": [
+    "桌面清空",
+    "视线无干扰"
+   ],
+   "examples": [
+    "遇到桌面清空",
+    "遇到视线无干扰",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-study-env-2",
+   "name": "针对 固定位置、光线 等情境给出可执行处置",
+   "description": "针对 固定位置、光线 等情境给出可执行处置",
+   "tags": [
+    "固定位置",
+    "光线"
+   ],
+   "examples": [
+    "遇到固定位置",
+    "遇到光线",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-study-env-3",
+   "name": "针对 噪音 等情境给出可执行处置",
+   "description": "针对 噪音 等情境给出可执行处置",
+   "tags": [
+    "噪音"
+   ],
+   "examples": [
+    "遇到噪音",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "学习环境专家"
+}

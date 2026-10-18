@@ -1,0 +1,107 @@
+{
+ "name": "Nutrition Planning Pro",
+ "description": "膳食搭配专家：按周执行的备餐方法；一餐结构的可视化搭配法；需要专业介入的边界情形。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/nutrition-planning-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/nutrition-planning-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "meal-prep",
+   "name": "按周执行的备餐方法",
+   "description": "按周执行的备餐方法",
+   "tags": [
+    "备餐",
+    "便当",
+    "午餐",
+    "外食"
+   ],
+   "examples": [
+    "遇到外卖偏多",
+    "遇到时间不足",
+    "遇到口味单调",
+    "遇到食堂选择",
+    "遇到记录负担"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "meal-prep",
+    "to": "meal-prep",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "plate-model",
+   "name": "一餐结构的可视化搭配法",
+   "description": "一餐结构的可视化搭配法",
+   "tags": [
+    "搭配",
+    "吃什么",
+    "营养",
+    "均衡"
+   ],
+   "examples": [
+    "遇到结构失衡",
+    "遇到主食过量",
+    "遇到蛋白质不足",
+    "遇到隐形油糖",
+    "遇到执行困难"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "plate-model",
+    "to": "plate-model",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "risk-boundary",
+   "name": "需要专业介入的边界情形",
+   "description": "需要专业介入的边界情形",
+   "tags": [
+    "减脂",
+    "控糖",
+    "血糖",
+    "慢性病"
+   ],
+   "examples": [
+    "遇到快速减重",
+    "遇到极端饮食",
+    "遇到慢病",
+    "遇到孕期哺乳",
+    "遇到补充剂"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "risk-boundary",
+    "to": "risk-boundary",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "膳食搭配专家",
+ "x-source": "skill-factory-originals"
+}

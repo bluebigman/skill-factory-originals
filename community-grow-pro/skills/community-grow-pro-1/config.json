@@ -1,0 +1,72 @@
+{
+ "name": "community-grow-pro-1",
+ "version": "2.0.0",
+ "domain": "社群运营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "规则置顶",
+   "then": "群规置顶且简明",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "角色分工",
+   "then": "设管理员与活跃分子角色",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "固定栏目",
+   "then": "设置固定内容栏目",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "沉淀归档",
+   "then": "讨论成果沉淀成可查文档",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "管控刷屏",
+   "then": "明确广告与刷屏处理",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "规则置顶",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "角色分工",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "固定栏目",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沉淀归档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "管控刷屏",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

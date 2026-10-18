@@ -1,0 +1,99 @@
+{
+ "name": "Sleep Routine Pro",
+ "description": "作息 睡眠 早睡：睡前的固定流程设计；卧室环境的调整；稳定生物钟的调整方法。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/sleep-routine-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/sleep-routine-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "bedtime-ritual",
+   "name": "睡前的固定流程设计",
+   "description": "睡前的固定流程设计",
+   "tags": [
+    "睡前",
+    "仪式",
+    "放松",
+    "手机"
+   ],
+   "examples": [
+    "遇到睡前刷手机",
+    "遇到温度",
+    "遇到咖啡因",
+    "遇到饮酒",
+    "遇到固定程序"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "bedtime-ritual",
+    "to": "bedtime-ritual",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "env",
+   "name": "卧室环境的调整",
+   "description": "卧室环境的调整",
+   "tags": [
+    "环境",
+    "床垫",
+    "噪音",
+    "光线"
+   ],
+   "examples": [
+    "遇到光线",
+    "遇到噪音",
+    "遇到温度",
+    "遇到床只用于睡",
+    "遇到就医边界"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "env",
+    "to": "env",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "rhythm",
+   "name": "稳定生物钟的调整方法",
+   "description": "稳定生物钟的调整方法",
+   "tags": [
+    "作息",
+    "早睡",
+    "起床",
+    "生物钟"
+   ],
+   "examples": [
+    "遇到晚睡强迫",
+    "遇到周末补觉",
+    "遇到躺床不睡",
+    "遇到午睡",
+    "遇到光照"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "rhythm",
+    "to": "rhythm",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "作息 睡眠 早睡"
+}

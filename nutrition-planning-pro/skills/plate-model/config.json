@@ -1,0 +1,121 @@
+{
+ "name": "plate-model",
+ "version": "2.0.0",
+ "domain": "膳食搭配",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构失衡",
+   "then": "用半盘蔬菜+四分蛋白+四分主食的比例配餐，比记热量更易执行",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "主食过量",
+   "then": "主食按拳头大小定量，外食时先吃菜与蛋白再吃主食",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "蛋白质不足",
+   "then": "每餐固定一份蛋白（蛋/奶/豆/肉/鱼任一手掌大小）",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "隐形油糖",
+   "then": "酱料单独放置，蘸取量比直接淋入少一半",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "执行困难",
+   "then": "先改一餐（早餐）并稳定 2 周，同时改三餐必失败",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "搭配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "吃什么",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "营养",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "均衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构失衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主食过量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "蛋白质不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐形油糖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "执行困难",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "每周",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "现场",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "选择",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "工作",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

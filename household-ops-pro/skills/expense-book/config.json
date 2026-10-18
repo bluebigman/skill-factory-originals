@@ -1,0 +1,117 @@
+{
+ "name": "expense-book",
+ "version": "2.0.0",
+ "domain": "家庭事务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "记不下去",
+   "then": "只记三类（固定支出/大额/现金），全量记账 2 周内必放弃",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "超支",
+   "then": "按类别设月度上限并设 80% 预警线，事后复盘无用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "账目对不上",
+   "then": "每笔当日录入，周末补记必然漏项",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "固定支出",
+   "then": "每年重签一次订阅/保险清单，防止遗忘型扣费",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "隐私",
+   "then": "账本含真实资产数据时不上传云端，本地加密留存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "记账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "月度支出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超支",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "账单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记不下去",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "账目对不上",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "固定支出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐私",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "孩子",
+   "source": "SKILL.md#L39"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

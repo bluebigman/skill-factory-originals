@@ -1,0 +1,75 @@
+{
+ "name": "Home Service Diagnose",
+ "description": "家政服务专家：覆盖 排班先定、质检标准、换人成本 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/home-service-diagnose",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-service-diagnose",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "home-service-diagnose-1",
+   "name": "针对 排班先定、质检标准 等情境给出可执行处置",
+   "description": "针对 排班先定、质检标准 等情境给出可执行处置",
+   "tags": [
+    "排班先定",
+    "质检标准"
+   ],
+   "examples": [
+    "遇到排班先定",
+    "遇到质检标准",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-service-diagnose-2",
+   "name": "针对 换人成本、复购驱动 等情境给出可执行处置",
+   "description": "针对 换人成本、复购驱动 等情境给出可执行处置",
+   "tags": [
+    "换人成本",
+    "复购驱动"
+   ],
+   "examples": [
+    "遇到换人成本",
+    "遇到复购驱动",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-service-diagnose-3",
+   "name": "针对 投诉前置 等情境给出可执行处置",
+   "description": "针对 投诉前置 等情境给出可执行处置",
+   "tags": [
+    "投诉前置"
+   ],
+   "examples": [
+    "遇到投诉前置",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家政服务专家",
+ "x-source": "skill-factory-originals"
+}

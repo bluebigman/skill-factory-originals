@@ -1,0 +1,78 @@
+{
+ "name": "game-event-plan-2",
+ "version": "2.0.0",
+ "domain": "游戏活动",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "防刷设计",
+   "then": "提前设计防刷与异常限制",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "时间窗",
+   "then": "活动时长与核心玩家的作息匹配",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "防刷设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间窗",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分层",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时长",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "key-account-plan-2",
+ "version": "2.0.0",
+ "domain": "大客户",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "关系地图",
+   "then": "绘制决策链与影响者地图",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "业务对齐",
+   "then": "对齐客户的业务目标而非我方产品",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "季度节奏",
+   "then": "按季度设定经营节奏",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "单点预警",
+   "then": "识别单点依赖并准备备份关系",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "高层互动",
+   "then": "保持固定频率的高层互动",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "关系地图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "业务对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "季度节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单点预警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高层互动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

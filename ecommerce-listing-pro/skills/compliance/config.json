@@ -1,0 +1,121 @@
+{
+ "name": "compliance",
+ "version": "2.0.0",
+ "domain": "电商上架",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "类目错放",
+   "then": "类目错放会影响流量与售后判定，须精确匹配",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "资质缺失",
+   "then": "特殊类目须提前准备资质，无资质上架会被下架",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "侵权",
+   "then": "图片、文案、品牌词均须无侵权风险",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "虚假宣传",
+   "then": "参数与功效描述须与实物一致，虚假宣传属违规",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "价格",
+   "then": "划线价与促销信息须真实可查",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "违规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资质",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类目",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类目错放",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资质缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "侵权",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "虚假宣传",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "价格",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标题",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "判定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "促销",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

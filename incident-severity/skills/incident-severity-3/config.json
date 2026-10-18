@@ -1,0 +1,72 @@
+{
+ "name": "incident-severity-3",
+ "version": "2.0.0",
+ "domain": "事件分级标准",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按影响分级",
+   "then": "按用户影响面定级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "响应时限",
+   "then": "各级别响应时限明确",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "升级路径",
+   "then": "写清何时升级",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "通告范围",
+   "then": "各级别通告范围",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "复盘要求",
+   "then": "高级别必须复盘",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按影响分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "响应时限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "升级路径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "通告范围",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘要求",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

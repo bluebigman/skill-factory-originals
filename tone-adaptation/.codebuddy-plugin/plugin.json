@@ -1,0 +1,74 @@
+{
+ "name": "tone-adaptation",
+ "version": "1.0.0",
+ "plugin": "tone-adaptation",
+ "description": "tone-adaptation — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for tone-adaptation tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/tone-adaptation.md"
+ ],
+ "agentName": "tone-adaptation",
+ "displayName": {
+  "zh": "语气适配改写 读者先行",
+  "en": "tone-adaptation"
+ },
+ "profession": {
+  "zh": "语气适配改写 助手",
+  "en": "tone-adaptation"
+ },
+ "displayDescription": {
+  "zh": "语气适配改写 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "tone-adaptation: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "语气适配改写",
+   "en": "tone-adaptation"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到语气适配改写怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划语气适配改写",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查语气适配改写",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到语气适配改写怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/tone-adaptation-1",
+  "./skills/tone-adaptation-2",
+  "./skills/tone-adaptation-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "语气适配改写专家",
+  "to": "语气适配改写 读者先行",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

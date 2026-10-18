@@ -1,0 +1,78 @@
+{
+ "name": "chart-dashboard-build-2",
+ "version": "2.0.0",
+ "domain": "数据可视化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "图型克制",
+   "then": "趋势用线、对比用柱、占比用条",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "口径可见",
+   "then": "每个指标标口径与更新时间",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "图型克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径可见",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "分层",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "趋势",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "指标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回答",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "占比",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "主题",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

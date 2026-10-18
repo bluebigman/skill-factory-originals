@@ -1,0 +1,121 @@
+{
+ "name": "chore-plan",
+ "version": "2.0.0",
+ "domain": "家庭事务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一人全包",
+   "then": "把家务拆到最小动作并分配到人，模糊的帮忙必落单人",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拒不执行",
+   "then": "用固定时段（晚饭后 20 分钟）集体做，比各自催更有效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "质量标准不一",
+   "then": "先定义可接受标准（碗无水渍即可），完美主义激化冲突",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "孩子不参与",
+   "then": "按年龄分配可完成项，并删除家长的二次返工",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "外包决策",
+   "then": "按时间成本判断：小时工资高于外包价的必须外包",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "家务",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分工",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "懒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一个人干",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一人全包",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒不执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量标准不一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "孩子不参与",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外包决策",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

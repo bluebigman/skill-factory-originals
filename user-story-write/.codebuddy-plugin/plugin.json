@@ -1,0 +1,74 @@
+{
+ "name": "user-story-write",
+ "version": "1.0.0",
+ "plugin": "user-story-write",
+ "description": "user-story-write — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for user-story-write tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/user-story-write.md"
+ ],
+ "agentName": "user-story-write",
+ "displayName": {
+  "zh": "用户故事 角色明确 价值明确",
+  "en": "user-story-write"
+ },
+ "profession": {
+  "zh": "用户故事 撰写",
+  "en": "user-story-write"
+ },
+ "displayDescription": {
+  "zh": "用户故事 撰写：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。。",
+  "en": "user-story-write: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "用户故事",
+   "en": "user-story-write"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到用户故事怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划用户故事",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查用户故事",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到用户故事怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/user-story-write-1/",
+  "./skills/user-story-write-2/",
+  "./skills/user-story-write-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "用户故事专家",
+  "to": "用户故事 角色明确 价值明确",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Exam Prep Coach",
+ "description": "考前复习专家：覆盖 按分值排序、模拟实战、错题归因、睡眠保障、考场策略 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/exam-prep-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/exam-prep-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "exam-prep-coach-1",
+   "name": "针对 按分值排序、模拟实战 等情境给出可执行处置",
+   "description": "针对 按分值排序、模拟实战 等情境给出可执行处置",
+   "tags": [
+    "按分值排序",
+    "模拟实战"
+   ],
+   "examples": [
+    "遇到按分值排序",
+    "遇到模拟实战",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "exam-prep-coach-2",
+   "name": "针对 错题归因、睡眠保障 等情境给出可执行处置",
+   "description": "针对 错题归因、睡眠保障 等情境给出可执行处置",
+   "tags": [
+    "错题归因",
+    "睡眠保障"
+   ],
+   "examples": [
+    "遇到错题归因",
+    "遇到睡眠保障",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "exam-prep-coach-3",
+   "name": "针对 考场策略 等情境给出可执行处置",
+   "description": "针对 考场策略 等情境给出可执行处置",
+   "tags": [
+    "考场策略"
+   ],
+   "examples": [
+    "遇到考场策略",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "考前复习专家",
+ "x-source": "skill-factory-originals"
+}

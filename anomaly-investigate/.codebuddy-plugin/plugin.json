@@ -1,0 +1,74 @@
+{
+ "name": "anomaly-investigate",
+ "version": "1.0.0",
+ "plugin": "anomaly-investigate",
+ "description": "anomaly-investigate — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for anomaly-investigate tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/anomaly-investigate.md"
+ ],
+ "agentName": "anomaly-investigate",
+ "displayName": {
+  "zh": "异常波动排查 先确认数据",
+  "en": "anomaly-investigate"
+ },
+ "profession": {
+  "zh": "异常波动排查 助手",
+  "en": "anomaly-investigate"
+ },
+ "displayDescription": {
+  "zh": "异常波动排查 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "anomaly-investigate: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "异常波动排查",
+   "en": "anomaly-investigate"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到异常波动排查怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划异常波动排查",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查异常波动排查",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到异常波动排查怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/anomaly-investigate-1/",
+  "./skills/anomaly-investigate-2/",
+  "./skills/anomaly-investigate-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:29",
+  "from": "异常波动排查专家",
+  "to": "异常波动排查 先确认数据",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

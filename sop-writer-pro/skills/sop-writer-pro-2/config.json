@@ -1,0 +1,72 @@
+{
+ "name": "sop-writer-pro-2",
+ "version": "2.0.0",
+ "domain": "流程编写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "步骤可执行",
+   "then": "每步都是可执行动作",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "责任人",
+   "then": "每步有明确责任人",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "输入输出",
+   "then": "每步标明输入输出",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常分支",
+   "then": "异常情况如何处理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可验证",
+   "then": "流程结果可检验",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "步骤可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输入输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常分支",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

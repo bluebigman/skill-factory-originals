@@ -1,0 +1,78 @@
+{
+ "name": "ad-creative-coach-2",
+ "version": "2.0.0",
+ "domain": "投放素材",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "多版本测",
+   "then": "一次产出多版素材做 A/B，不押单版",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "看前段",
+   "then": "关注前 3 秒完播率，这是素材生死线",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "多版本测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看前段",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "单点",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "堆砌",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "人群",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "只讲",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "卖点",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

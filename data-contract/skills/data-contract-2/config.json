@@ -1,0 +1,72 @@
+{
+ "name": "data-contract-2",
+ "version": "2.0.0",
+ "domain": "数据契约",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字段约定",
+   "then": "字段类型与含义约定",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变更流程",
+   "then": "结构变更走流程",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "质量条款",
+   "then": "约定质量门槛",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "违约处理",
+   "then": "不达标如何处理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本管理",
+   "then": "契约版本化管理",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字段约定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量条款",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "违约处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本管理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

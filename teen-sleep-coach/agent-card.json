@@ -1,0 +1,75 @@
+{
+ "name": "Teen Sleep Coach",
+ "description": "青少年睡眠专家：覆盖 固定起床、睡前离屏、午睡限时、咖啡因、就医边界 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/teen-sleep-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-sleep-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-sleep-coach-1",
+   "name": "针对 固定起床、睡前离屏 等情境给出可执行处置",
+   "description": "针对 固定起床、睡前离屏 等情境给出可执行处置",
+   "tags": [
+    "固定起床",
+    "睡前离屏"
+   ],
+   "examples": [
+    "遇到固定起床",
+    "遇到睡前离屏",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-sleep-coach-2",
+   "name": "针对 午睡限时、咖啡因 等情境给出可执行处置",
+   "description": "针对 午睡限时、咖啡因 等情境给出可执行处置",
+   "tags": [
+    "午睡限时",
+    "咖啡因"
+   ],
+   "examples": [
+    "遇到午睡限时",
+    "遇到咖啡因",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-sleep-coach-3",
+   "name": "针对 就医边界 等情境给出可执行处置",
+   "description": "针对 就医边界 等情境给出可执行处置",
+   "tags": [
+    "就医边界"
+   ],
+   "examples": [
+    "遇到就医边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "青少年睡眠专家",
+ "x-source": "skill-factory-originals"
+}

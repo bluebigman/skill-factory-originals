@@ -1,0 +1,74 @@
+{
+ "name": "visual-text-ratio",
+ "version": "1.0.0",
+ "plugin": "visual-text-ratio",
+ "description": "Visual Text Ratio for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/visual-text-ratio.md"
+ ],
+ "skills": [
+  "./skills/visual-text-ratio-1",
+  "./skills/visual-text-ratio-2",
+  "./skills/visual-text-ratio-3"
+ ],
+ "expertType": "agent",
+ "agentName": "visual-text-ratio",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Visual Text Ratio",
+  "zh": "图文配比 三段一图 图有信息"
+ },
+ "profession": {
+  "en": "Visual Text Ratio",
+  "zh": "图文配比 排版节奏 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Visual Text Ratio tasks end-to-end with built-in professional skills.",
+  "zh": "图文配比 排版节奏 助手：覆盖 三段一图、图有信息、留白优先 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "图文配比",
+   "en": "visual-text-ratio"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到图文配比怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到排版节奏怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到图文配比怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "图文配比专家",
+  "to": "图文配比 三段一图 图有信息",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "quotation-standard-2",
+ "version": "2.0.0",
+ "domain": "报价方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "三档选项",
+   "then": "提供三档而非单一价格",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按价值组织",
+   "then": "按客户价值而非功能罗列",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "边界写清",
+   "then": "包含与不包含必须写清",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标明有效期",
+   "then": "标注报价有效期",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "同客同口径",
+   "then": "同一客户历史口径一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "三档选项",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按价值组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界写清",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标明有效期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "同客同口径",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

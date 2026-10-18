@@ -1,0 +1,74 @@
+{
+ "name": "incident-retro",
+ "version": "1.0.0",
+ "plugin": "incident-retro",
+ "description": "Incident Retro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/incident-retro.md"
+ ],
+ "skills": [
+  "./skills/incident-retro-1",
+  "./skills/incident-retro-2",
+  "./skills/incident-retro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "incident-retro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Incident Retro",
+  "zh": "事故复盘 先止损后复盘"
+ },
+ "profession": {
+  "en": "Incident Retro",
+  "zh": "事故复盘 根因分析 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Incident Retro tasks end-to-end with built-in professional skills.",
+  "zh": "事故复盘 根因分析 顾问：覆盖 先止损后复盘、对事不对人 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "事故复盘",
+   "en": "incident-retro"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到事故复盘怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到根因分析怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到事故复盘怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:41",
+  "from": "事故复盘专家",
+  "to": "事故复盘 先止损后复盘",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

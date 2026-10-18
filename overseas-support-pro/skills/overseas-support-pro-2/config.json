@@ -1,0 +1,72 @@
+{
+ "name": "overseas-support-pro-2",
+ "version": "2.0.0",
+ "domain": "海外客服",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "时段覆盖",
+   "then": "按主要市场时区排班",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "问题分级",
+   "then": "按问题类型分级话术与权限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "升级路径",
+   "then": "明确升级条件与接手人",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "知识同步",
+   "then": "多语知识库内容同步更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "关键回访",
+   "then": "关键工单闭环后回访",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "时段覆盖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问题分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "升级路径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "知识同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键回访",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

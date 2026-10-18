@@ -1,0 +1,67 @@
+{
+ "name": "Agent Health Score",
+ "description": "健康评分专家：覆盖 维度明确、权重公开、趋势关注 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/agent-health-score",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/agent-health-score",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "agent-health-score-1",
+   "name": "针对 维度明确、权重公开 等情境给出可执行处置",
+   "description": "针对 维度明确、权重公开 等情境给出可执行处置",
+   "tags": [
+    "维度明确",
+    "权重公开"
+   ],
+   "examples": [
+    "遇到维度明确",
+    "遇到权重公开",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-health-score-2",
+   "name": "针对 趋势关注、异常定位 等情境给出可执行处置",
+   "description": "针对 趋势关注、异常定位 等情境给出可执行处置",
+   "tags": [
+    "趋势关注",
+    "异常定位"
+   ],
+   "examples": [
+    "遇到趋势关注",
+    "遇到异常定位",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "agent-health-score-3",
+   "name": "针对 改进联动 等情境给出可执行处置",
+   "description": "针对 改进联动 等情境给出可执行处置",
+   "tags": [
+    "改进联动"
+   ],
+   "examples": [
+    "遇到改进联动",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "健康评分专家"
+}

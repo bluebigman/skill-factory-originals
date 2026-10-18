@@ -1,0 +1,72 @@
+{
+ "name": "data-anomaly-monitor-3",
+ "version": "2.0.0",
+ "domain": "数据异常监控",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "基线建立",
+   "then": "基于历史建基线",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "波动阈值",
+   "then": "按波动定阈值",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "根因提示",
+   "then": "告警附可能原因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "误报收敛",
+   "then": "持续收敛误报",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分级通知",
+   "then": "按影响分级通知",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "基线建立",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "波动阈值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "根因提示",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误报收敛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级通知",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

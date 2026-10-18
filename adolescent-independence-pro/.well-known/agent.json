@@ -1,0 +1,99 @@
+{
+ "name": "Adolescent Independence Coach",
+ "description": "青春期独立专家：按年龄梯度交出自主权；青春期可接受的边界与让渡范围；对抗升级时的现场处理。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/adolescent-independence-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/adolescent-independence-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "autonomy-release",
+   "name": "按年龄梯度交出自主权",
+   "description": "按年龄梯度交出自主权",
+   "tags": [
+    "放手",
+    "自主",
+    "决策权",
+    "试错"
+   ],
+   "examples": [
+    "遇到决策包办",
+    "遇到试错机会",
+    "遇到经济自主",
+    "遇到学业代管",
+    "遇到放权反复"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:35",
+    "from": "autonomy-release",
+    "to": "autonomy-release",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "boundary-setting",
+   "name": "青春期可接受的边界与让渡范围",
+   "description": "青春期可接受的边界与让渡范围",
+   "tags": [
+    "边界",
+    "隐私",
+    "交友",
+    "作息"
+   ],
+   "examples": [
+    "遇到翻看隐私",
+    "遇到交友干预",
+    "遇到作息冲突",
+    "遇到外出报备",
+    "遇到边界被试探"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:35",
+    "from": "boundary-setting",
+    "to": "boundary-setting",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "conflict-deescalate",
+   "name": "对抗升级时的现场处理",
+   "description": "对抗升级时的现场处理",
+   "tags": [
+    "对抗",
+    "冷战",
+    "顶撞",
+    "离家"
+   ],
+   "examples": [
+    "遇到对骂升级",
+    "遇到冷战",
+    "遇到离家出走",
+    "遇到翻旧账",
+    "遇到道歉"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:35",
+    "from": "conflict-deescalate",
+    "to": "conflict-deescalate",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "青春期独立专家"
+}

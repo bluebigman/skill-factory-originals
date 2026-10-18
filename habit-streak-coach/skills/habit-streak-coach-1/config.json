@@ -1,0 +1,66 @@
+{
+ "name": "habit-streak-coach-1",
+ "version": "2.0.0",
+ "domain": "习惯打卡",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小版本",
+   "then": "设一个忙时也能完成的版本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不连断两次",
+   "then": "允许缺一次，但绝不断两次",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小版本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不连断两次",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "允许",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "习惯",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "连续",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

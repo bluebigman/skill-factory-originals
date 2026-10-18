@@ -1,0 +1,75 @@
+{
+ "name": "Release Checklist",
+ "description": "发布清单专家：覆盖 清单化、含回滚、低峰发布 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/release-checklist",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/release-checklist",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "release-checklist-1",
+   "name": "针对 清单化、含回滚 等情境给出可执行处置",
+   "description": "针对 清单化、含回滚 等情境给出可执行处置",
+   "tags": [
+    "清单化",
+    "含回滚"
+   ],
+   "examples": [
+    "遇到清单化",
+    "遇到含回滚",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "release-checklist-2",
+   "name": "针对 低峰发布、有人值守 等情境给出可执行处置",
+   "description": "针对 低峰发布、有人值守 等情境给出可执行处置",
+   "tags": [
+    "低峰发布",
+    "有人值守"
+   ],
+   "examples": [
+    "遇到低峰发布",
+    "遇到有人值守",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "release-checklist-3",
+   "name": "针对 复盘留档 等情境给出可执行处置",
+   "description": "针对 复盘留档 等情境给出可执行处置",
+   "tags": [
+    "复盘留档"
+   ],
+   "examples": [
+    "遇到复盘留档",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "发布清单专家",
+ "x-source": "skill-factory-originals"
+}

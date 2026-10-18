@@ -1,0 +1,72 @@
+{
+ "name": "playtest-method-3",
+ "version": "2.0.0",
+ "domain": "可用性",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "任务脚本",
+   "then": "给任务不给操作指引",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "出声思维",
+   "then": "让玩家边操作边说出想法",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "五人起步",
+   "then": "小样本即可暴露多数问题",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "记录卡点",
+   "then": "记录卡点位置与情绪反应",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "改后复测",
+   "then": "修改后必须复测",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "任务脚本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "出声思维",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "五人起步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录卡点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改后复测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

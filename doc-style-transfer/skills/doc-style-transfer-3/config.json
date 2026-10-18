@@ -1,0 +1,72 @@
+{
+ "name": "doc-style-transfer-3",
+ "version": "2.0.0",
+ "domain": "文档风格迁移",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先提风格",
+   "then": "从参考文档提取语气与句式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保留信息",
+   "then": "迁移只改表达不改事实",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "术语不换",
+   "then": "专业术语保持原样",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "适配读者",
+   "then": "按目标读者调难度",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "迁移后比对",
+   "then": "与原文逐段核对信息量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先提风格",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留信息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "术语不换",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "适配读者",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "迁移后比对",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

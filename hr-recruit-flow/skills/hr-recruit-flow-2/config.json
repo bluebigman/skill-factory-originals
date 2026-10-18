@@ -1,0 +1,72 @@
+{
+ "name": "hr-recruit-flow-2",
+ "version": "2.0.0",
+ "domain": "招聘流程设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "流程清晰",
+   "then": "各环节定义明确",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标准统一",
+   "then": "评价标准统一",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "反馈及时",
+   "then": "限时给候选人反馈",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "留痕",
+   "then": "面试记录归档",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "体验优先",
+   "then": "尊重候选人",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "流程清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标准统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反馈及时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "体验优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

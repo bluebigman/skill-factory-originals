@@ -1,0 +1,72 @@
+{
+ "name": "text-extract-schema-3",
+ "version": "2.0.0",
+ "domain": "文本抽取模式",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定模式",
+   "then": "定义抽取字段与类型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样例驱动",
+   "then": "先标少量样例",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "置信标注",
+   "then": "低置信标注待确认",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "抽后抽检",
+   "then": "按比例抽检",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "不猜填",
+   "then": "缺失标空不臆测",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定模式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样例驱动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "置信标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽后抽检",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不猜填",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

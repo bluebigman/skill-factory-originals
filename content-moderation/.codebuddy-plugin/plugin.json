@@ -1,0 +1,74 @@
+{
+ "name": "content-moderation",
+ "version": "1.0.0",
+ "plugin": "content-moderation",
+ "description": "Content Moderation for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/content-moderation.md"
+ ],
+ "skills": [
+  "./skills/content-moderation-1",
+  "./skills/content-moderation-2",
+  "./skills/content-moderation-3"
+ ],
+ "expertType": "agent",
+ "agentName": "content-moderation",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Content Moderation",
+  "zh": "内容审核 先定红线 双人复核"
+ },
+ "profession": {
+  "en": "Content Moderation",
+  "zh": "内容审核 红线识别 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Content Moderation tasks end-to-end with built-in professional skills.",
+  "zh": "内容审核 红线识别 顾问：覆盖 先定红线、双人复核、留痕 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "内容审核",
+   "en": "content-moderation"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到内容审核怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到红线识别怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到内容审核怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:32",
+  "from": "内容审核专家",
+  "to": "内容审核 先定红线 双人复核",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

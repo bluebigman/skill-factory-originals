@@ -1,0 +1,66 @@
+{
+ "name": "family-education-plan-1",
+ "version": "2.0.0",
+ "domain": "家庭教育",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按阶段定目标",
+   "then": "学前习惯/小学方法/中学自主",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不越界",
+   "then": "家长定边界不给答案",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按阶段定目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不越界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "家长",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "习惯",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "答案",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

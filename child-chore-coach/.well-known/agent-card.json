@@ -1,0 +1,75 @@
+{
+ "name": "Child Chore Coach",
+ "description": "儿童家务专家：覆盖 按年龄分配、不返工、一起做、具体指令、不做交易 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-chore-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-chore-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-chore-coach-1",
+   "name": "针对 按年龄分配、不返工 等情境给出可执行处置",
+   "description": "针对 按年龄分配、不返工 等情境给出可执行处置",
+   "tags": [
+    "按年龄分配",
+    "不返工"
+   ],
+   "examples": [
+    "遇到按年龄分配",
+    "遇到不返工",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-chore-coach-2",
+   "name": "针对 一起做、具体指令 等情境给出可执行处置",
+   "description": "针对 一起做、具体指令 等情境给出可执行处置",
+   "tags": [
+    "一起做",
+    "具体指令"
+   ],
+   "examples": [
+    "遇到一起做",
+    "遇到具体指令",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-chore-coach-3",
+   "name": "针对 不做交易 等情境给出可执行处置",
+   "description": "针对 不做交易 等情境给出可执行处置",
+   "tags": [
+    "不做交易"
+   ],
+   "examples": [
+    "遇到不做交易",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "儿童家务专家",
+ "x-source": "skill-factory-originals"
+}

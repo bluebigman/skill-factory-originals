@@ -1,0 +1,72 @@
+{
+ "name": "doc-version-ledger-3",
+ "version": "2.0.0",
+ "domain": "文档版本台账",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版本号规则",
+   "then": "主次修订三级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变更摘要",
+   "then": "每版写明改了什么",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "责任人",
+   "then": "每版记录作者与审核人",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "归档策略",
+   "then": "旧版归档不删除",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "台账可查",
+   "then": "支持按项目与时间查询",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版本号规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更摘要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归档策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "台账可查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

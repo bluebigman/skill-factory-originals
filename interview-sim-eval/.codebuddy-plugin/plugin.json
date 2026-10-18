@@ -1,0 +1,74 @@
+{
+ "name": "interview-sim-eval",
+ "version": "1.0.0",
+ "plugin": "interview-sim-eval",
+ "description": "Interview Sim Eval for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/interview-sim-eval.md"
+ ],
+ "skills": [
+  "./skills/interview-sim-eval-1",
+  "./skills/interview-sim-eval-2",
+  "./skills/interview-sim-eval-3"
+ ],
+ "expertType": "agent",
+ "agentName": "interview-sim-eval",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Interview Sim Eval",
+  "zh": "模拟面试 按简历追问 追问三层"
+ },
+ "profession": {
+  "en": "Interview Sim Eval",
+  "zh": "模拟面试 追问演练 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Interview Sim Eval tasks end-to-end with built-in professional skills.",
+  "zh": "模拟面试 追问演练 顾问：覆盖 按简历追问、追问三层、打分维度 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "模拟面试",
+   "en": "interview-sim-eval"
+  },
+  {
+   "en": "Education",
+   "zh": "Education"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到模拟面试怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到追问演练怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到模拟面试怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:41",
+  "from": "模拟面试专家",
+  "to": "模拟面试 按简历追问 追问三层",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

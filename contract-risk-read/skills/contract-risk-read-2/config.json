@@ -1,0 +1,70 @@
+{
+ "name": "contract-risk-read-2",
+ "version": "2.0.0",
+ "domain": "合同风险",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "付款节点",
+   "then": "付款与交付节点必须可验证",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "争议解决",
+   "then": "关注管辖地与适用法律",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "付款节点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "争议解决",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "责任",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "交付",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先看",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "重点",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

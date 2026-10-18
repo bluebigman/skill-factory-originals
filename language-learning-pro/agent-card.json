@@ -1,0 +1,107 @@
+{
+ "name": "Language Learning Pro",
+ "description": "语言学习专家：可理解输入的组织；口语的可执行练习法；词汇的高效记忆方法。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/language-learning-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/language-learning-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "input",
+   "name": "可理解输入的组织",
+   "description": "可理解输入的组织",
+   "tags": [
+    "输入",
+    "听力",
+    "阅读",
+    "材料"
+   ],
+   "examples": [
+    "遇到材料过难",
+    "遇到无字幕",
+    "遇到只输入不输出",
+    "遇到无主题聚焦",
+    "遇到中断"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "input",
+    "to": "input",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "speaking",
+   "name": "口语的可执行练习法",
+   "description": "口语的可执行练习法",
+   "tags": [
+    "口语",
+    "开口",
+    "发音",
+    "练习"
+   ],
+   "examples": [
+    "遇到怕说错",
+    "遇到无环境",
+    "遇到只在脑内",
+    "遇到无复盘",
+    "遇到频率"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "speaking",
+    "to": "speaking",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "vocab",
+   "name": "词汇的高效记忆方法",
+   "description": "词汇的高效记忆方法",
+   "tags": [
+    "背单词",
+    "记不住",
+    "遗忘",
+    "词汇量"
+   ],
+   "examples": [
+    "遇到只背词表",
+    "遇到不复习",
+    "遇到追求数量",
+    "遇到只看不读",
+    "遇到无输出"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "vocab",
+    "to": "vocab",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "语言学习专家",
+ "x-source": "skill-factory-originals"
+}

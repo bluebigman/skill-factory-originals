@@ -1,0 +1,70 @@
+{
+ "name": "agent-health-score-2",
+ "version": "2.0.0",
+ "domain": "健康评分",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "趋势关注",
+   "then": "看趋势而非单点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常定位",
+   "then": "低分须定位原因",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "趋势关注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常定位",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "单点",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "健康",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "权重",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "看趋势",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "公开",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "维度",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

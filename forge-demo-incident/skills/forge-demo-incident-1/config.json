@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "只说现象",
+   "then": "补齐时间点、操作人、系统状态"
+  },
+  {
+   "when": "时间线断裂",
+   "then": "用日志补齐缺失区间"
+  }
+ ],
+ "keywords": [
+  "时间线",
+  "客观",
+  "处置"
+ ],
+ "boundary": "按客观时间线还原故障发生与处置过程",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

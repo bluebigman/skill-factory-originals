@@ -1,0 +1,62 @@
+{
+ "name": "retail-diagnose-1",
+ "version": "2.0.0",
+ "domain": "零售经营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看转化",
+   "then": "按进店-试穿-成交逐环节看流失",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "动线优先",
+   "then": "先优化动线，再谈陈列",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看转化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动线优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "流失",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "再谈",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "环节",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

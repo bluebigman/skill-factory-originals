@@ -1,0 +1,121 @@
+{
+ "name": "risk-control",
+ "version": "2.0.0",
+ "domain": "项目跟踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无预案",
+   "then": "每个高风险项准备 B 方案，无预案等于把项目交给运气",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "风险积压",
+   "then": "风险清单每周更新并指定责任人",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "关键人依赖",
+   "then": "单人依赖项须文档化并设替补",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "阻塞上报",
+   "then": "阻塞超 24 小时必须升级，自行硬扛成本最高",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "外部依赖",
+   "then": "外部供应商须留缓冲期并定期确认进展",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "风险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阻塞",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "应对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险积压",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键人依赖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阻塞上报",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外部依赖",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "feedback-triage-2",
+ "version": "2.0.0",
+ "domain": "反馈分类处置",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先分类",
+   "then": "按问题类型与严重度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "去重合并",
+   "then": "同类反馈合并计数",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "优先级",
+   "then": "影响面与严重度加权",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "闭环回复",
+   "then": "每条有归属与结论",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "趋势观察",
+   "then": "定期看反馈趋势",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "去重合并",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优先级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环回复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "趋势观察",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

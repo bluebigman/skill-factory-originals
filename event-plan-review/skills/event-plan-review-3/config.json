@@ -1,0 +1,72 @@
+{
+ "name": "event-plan-review-3",
+ "version": "2.0.0",
+ "domain": "活动方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标单一",
+   "then": "一次活动一个主目标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "预算留余",
+   "then": "预留应急预算",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "风险预案",
+   "then": "列出主要风险与应对",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数据埋点",
+   "then": "上线前埋好关键点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "复盘机制",
+   "then": "活动后按指标复盘",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标单一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算留余",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据埋点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

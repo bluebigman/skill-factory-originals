@@ -1,0 +1,69 @@
+{
+ "name": "cross-border-listing-3",
+ "version": "2.0.0",
+ "domain": "跨境上架",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "图片合规",
+   "then": "主图背景与文字按平台规则",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "图片合规",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "平台",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "按目",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "文字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "语言",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先查",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "主图",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "台规",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

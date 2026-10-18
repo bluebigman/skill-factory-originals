@@ -1,0 +1,67 @@
+{
+ "name": "Live Stream Plan",
+ "description": "直播带货专家：覆盖 排品有节奏、话术卡点、价格口径 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/live-stream-plan",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/live-stream-plan",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "live-stream-plan-1",
+   "name": "针对 排品有节奏、话术卡点 等情境给出可执行处置",
+   "description": "针对 排品有节奏、话术卡点 等情境给出可执行处置",
+   "tags": [
+    "排品有节奏",
+    "话术卡点"
+   ],
+   "examples": [
+    "遇到排品有节奏",
+    "遇到话术卡点",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "live-stream-plan-2",
+   "name": "针对 价格口径、合规红线 等情境给出可执行处置",
+   "description": "针对 价格口径、合规红线 等情境给出可执行处置",
+   "tags": [
+    "价格口径",
+    "合规红线"
+   ],
+   "examples": [
+    "遇到价格口径",
+    "遇到合规红线",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "live-stream-plan-3",
+   "name": "针对 复盘看三数 等情境给出可执行处置",
+   "description": "针对 复盘看三数 等情境给出可执行处置",
+   "tags": [
+    "复盘看三数"
+   ],
+   "examples": [
+    "遇到复盘看三数",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "直播带货专家"
+}

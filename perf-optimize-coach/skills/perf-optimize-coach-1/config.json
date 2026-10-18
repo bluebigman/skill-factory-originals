@@ -1,0 +1,66 @@
+{
+ "name": "perf-optimize-coach-1",
+ "version": "2.0.0",
+ "domain": "性能优化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先测量",
+   "then": "先测量再优化，禁止凭感觉改代码",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "找瓶颈",
+   "then": "用火焰图或耗时分布定位真实瓶颈",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先测量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "找瓶颈",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "感觉",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "耗时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "凭感",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

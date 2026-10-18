@@ -1,0 +1,107 @@
+{
+ "name": "Grocery Shopping Pro",
+ "description": "家庭买菜专家：家庭食材支出的管理；按库存与消耗制定采购清单；家庭囤货的量与节奏。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/grocery-shopping-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/grocery-shopping-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "budget",
+   "name": "家庭食材支出的管理",
+   "description": "家庭食材支出的管理",
+   "tags": [
+    "预算",
+    "省钱",
+    "性价比",
+    "超支"
+   ],
+   "examples": [
+    "遇到无预算",
+    "遇到浪费",
+    "遇到性价比",
+    "遇到替代",
+    "遇到记录"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:44",
+    "from": "budget",
+    "to": "budget",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "list-plan",
+   "name": "按库存与消耗制定采购清单",
+   "description": "按库存与消耗制定采购清单",
+   "tags": [
+    "买菜",
+    "清单",
+    "重复购买",
+    "遗漏"
+   ],
+   "examples": [
+    "遇到重复购买",
+    "遇到遗漏",
+    "遇到临时采购",
+    "遇到临时起意",
+    "遇到分层采购"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:44",
+    "from": "list-plan",
+    "to": "list-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "stock-control",
+   "name": "家庭囤货的量与节奏",
+   "description": "家庭囤货的量与节奏",
+   "tags": [
+    "备货",
+    "囤货",
+    "过期",
+    "变质"
+   ],
+   "examples": [
+    "遇到过期货",
+    "遇到变质",
+    "遇到空间占用",
+    "遇到价格",
+    "遇到清单化"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:44",
+    "from": "stock-control",
+    "to": "stock-control",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭买菜专家",
+ "x-source": "skill-factory-originals"
+}

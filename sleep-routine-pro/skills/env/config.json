@@ -1,0 +1,113 @@
+{
+ "name": "env",
+ "version": "2.0.0",
+ "domain": "作息",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "光线",
+   "then": "全黑或使用遮光帘，微光也会抑制褪黑素",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "噪音",
+   "then": "持续白噪音优于间断噪音",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "温度",
+   "then": "卧室偏凉（约 18-20 度）更利入睡",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "床只用于睡",
+   "then": "不在床上工作吃饭，建立床与睡眠的唯一关联",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "就医边界",
+   "then": "持续失眠超一个月、伴呼吸暂停或白天功能受损须就医",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "环境",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "床垫",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "噪音",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "光线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "温度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "床只用于睡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就医边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

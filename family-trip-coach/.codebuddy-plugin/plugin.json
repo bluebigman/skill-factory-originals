@@ -1,0 +1,74 @@
+{
+ "name": "family-trip-coach",
+ "version": "1.0.0",
+ "plugin": "family-trip-coach",
+ "description": "Family Trip Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/family-trip-coach.md"
+ ],
+ "skills": [
+  "./skills/family-trip-coach-1",
+  "./skills/family-trip-coach-2",
+  "./skills/family-trip-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "family-trip-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Family Trip Coach",
+  "zh": "家庭旅行 节奏放缓 动线聚类"
+ },
+ "profession": {
+  "en": "Family Trip Coach",
+  "zh": "家庭旅行 行程规划 亲子游"
+ },
+ "displayDescription": {
+  "en": "Handles Family Trip Coach tasks end-to-end with built-in professional skills.",
+  "zh": "家庭旅行 行程规划 亲子游：覆盖 节奏放缓、动线聚类、留缓冲 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "节奏放缓"
+  },
+  {
+   "en": "practical capability",
+   "zh": "动线聚类"
+  },
+  {
+   "en": "practical capability",
+   "zh": "留缓冲"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到节奏放缓怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到动线聚类怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到留缓冲怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到节奏放缓怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭旅行专家",
+  "to": "家庭旅行 节奏放缓 动线聚类",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

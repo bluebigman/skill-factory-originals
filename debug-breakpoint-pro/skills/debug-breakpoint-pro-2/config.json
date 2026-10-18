@@ -1,0 +1,72 @@
+{
+ "name": "debug-breakpoint-pro-2",
+ "version": "2.0.0",
+ "domain": "断点调试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先复现再调试",
+   "then": "无法稳定复现先加日志",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "二分定位",
+   "then": "按调用链中段下断点减半排查",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "条件断点",
+   "then": "循环内用条件断点避免手点",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "观察变量",
+   "then": "只盯相关变量避免信息过载",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "栈回溯",
+   "then": "从异常栈顶向下逐层看参数",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先复现再调试",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "二分定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条件断点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "观察变量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "栈回溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

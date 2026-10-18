@@ -1,0 +1,74 @@
+{
+ "name": "eye-care-pro",
+ "version": "1.0.0",
+ "plugin": "eye-care-pro",
+ "description": "Eye Care Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/eye-care-pro.md"
+ ],
+ "skills": [
+  "./skills/environment",
+  "./skills/screen-habit",
+  "./skills/vision-boundary"
+ ],
+ "expertType": "agent",
+ "agentName": "eye-care-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Eye Care Pro",
+  "zh": "用眼健康 单光源 直射眩光"
+ },
+ "profession": {
+  "en": "Eye Care Pro",
+  "zh": "用眼健康 休息节奏 护眼习惯"
+ },
+ "displayDescription": {
+  "en": "Handles Eye Care Pro tasks end-to-end with built-in professional skills.",
+  "zh": "用眼健康 休息节奏 护眼习惯：照明与阅读环境设置；屏幕使用的护眼设置与节奏；需要眼科就诊的信号。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "单光源"
+  },
+  {
+   "en": "practical capability",
+   "zh": "直射眩光"
+  },
+  {
+   "en": "practical capability",
+   "zh": "阅读距离"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到单光源怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到直射眩光怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到阅读距离怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到单光源怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "用眼健康专家",
+  "to": "用眼健康 单光源 直射眩光",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "name": "Home Air Guide",
+ "description": "室内空气专家：覆盖 定时通风、新家具、净化器、湿度、异味源 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/home-air-guide",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-air-guide",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "home-air-guide-1",
+   "name": "针对 定时通风、新家具 等情境给出可执行处置",
+   "description": "针对 定时通风、新家具 等情境给出可执行处置",
+   "tags": [
+    "定时通风",
+    "新家具"
+   ],
+   "examples": [
+    "遇到定时通风",
+    "遇到新家具",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-air-guide-2",
+   "name": "针对 净化器、湿度 等情境给出可执行处置",
+   "description": "针对 净化器、湿度 等情境给出可执行处置",
+   "tags": [
+    "净化器",
+    "湿度"
+   ],
+   "examples": [
+    "遇到净化器",
+    "遇到湿度",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-air-guide-3",
+   "name": "针对 异味源 等情境给出可执行处置",
+   "description": "针对 异味源 等情境给出可执行处置",
+   "tags": [
+    "异味源"
+   ],
+   "examples": [
+    "遇到异味源",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "室内空气专家"
+}

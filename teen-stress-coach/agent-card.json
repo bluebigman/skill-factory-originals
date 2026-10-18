@@ -1,0 +1,75 @@
+{
+ "name": "Teen Stress Coach",
+ "description": "青春期压力专家：覆盖 先听后说、不否定、提供选项、规律作息、专业边界 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/teen-stress-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-stress-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-stress-coach-1",
+   "name": "针对 先听后说、不否定 等情境给出可执行处置",
+   "description": "针对 先听后说、不否定 等情境给出可执行处置",
+   "tags": [
+    "先听后说",
+    "不否定"
+   ],
+   "examples": [
+    "遇到先听后说",
+    "遇到不否定",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-stress-coach-2",
+   "name": "针对 提供选项、规律作息 等情境给出可执行处置",
+   "description": "针对 提供选项、规律作息 等情境给出可执行处置",
+   "tags": [
+    "提供选项",
+    "规律作息"
+   ],
+   "examples": [
+    "遇到提供选项",
+    "遇到规律作息",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-stress-coach-3",
+   "name": "针对 专业边界 等情境给出可执行处置",
+   "description": "针对 专业边界 等情境给出可执行处置",
+   "tags": [
+    "专业边界"
+   ],
+   "examples": [
+    "遇到专业边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "青春期压力专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "changelog-pro-2",
+ "version": "2.0.0",
+ "domain": "变更日志",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按版本组织",
+   "then": "每个版本独立成节",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分类清晰",
+   "then": "新增修复变更分类列示",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "影响说明",
+   "then": "破坏性变更必须显著标注",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "日期明确",
+   "then": "每个版本带发布日期",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可追溯",
+   "then": "变更可关联到具体提交",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按版本组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分类清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "影响说明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "日期明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可追溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

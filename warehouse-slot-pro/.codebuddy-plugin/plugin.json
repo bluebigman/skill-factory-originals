@@ -1,0 +1,74 @@
+{
+ "name": "warehouse-slot-pro",
+ "version": "1.0.0",
+ "plugin": "warehouse-slot-pro",
+ "description": "Warehouse Slot Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/warehouse-slot-pro.md"
+ ],
+ "skills": [
+  "./skills/warehouse-slot-pro-1",
+  "./skills/warehouse-slot-pro-2",
+  "./skills/warehouse-slot-pro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "warehouse-slot-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Warehouse Slot Pro",
+  "zh": "仓储布局 动线优先"
+ },
+ "profession": {
+  "en": "Warehouse Slot Pro",
+  "zh": "仓储布局 拣货路径 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Warehouse Slot Pro tasks end-to-end with built-in professional skills.",
+  "zh": "仓储布局 拣货路径 顾问：覆盖 动线优先、ABC 分区 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "仓储布局",
+   "en": "warehouse-slot-pro"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到仓储布局怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到拣货路径怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到仓储布局怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "仓储布局专家",
+  "to": "仓储布局 动线优先",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

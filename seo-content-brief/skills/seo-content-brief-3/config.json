@@ -1,0 +1,72 @@
+{
+ "name": "seo-content-brief-3",
+ "version": "2.0.0",
+ "domain": "内容选题简报",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "搜索意图",
+   "then": "先判断用户意图类型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "覆盖子问题",
+   "then": "列出必须回答的子问题",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结构建议",
+   "then": "给标题层级建议",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "内链规划",
+   "then": "关联已有内容",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "更新周期",
+   "then": "标注需定期更新的点",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "搜索意图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖子问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构建议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "内链规划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "更新周期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "data-reconcile-pro-2",
+ "version": "2.0.0",
+ "domain": "数据对账",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "口径对齐",
+   "then": "对账前先对齐口径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "全量比对",
+   "then": "关键数据全量比",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "差异分类",
+   "then": "差异须分类归因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "修复闭环",
+   "then": "差异须修复并复验",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "对账过程留痕",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口径对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全量比对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "修复闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "kanban-flow-coach",
+ "version": "1.0.0",
+ "plugin": "kanban-flow-coach",
+ "description": "Kanban Flow Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/kanban-flow-coach.md"
+ ],
+ "skills": [
+  "./skills/kanban-flow-coach-1",
+  "./skills/kanban-flow-coach-2",
+  "./skills/kanban-flow-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "kanban-flow-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Kanban Flow Coach",
+  "zh": "看板流程 限在制 找堵点"
+ },
+ "profession": {
+  "en": "Kanban Flow Coach",
+  "zh": "看板流程 瓶颈识别 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Kanban Flow Coach tasks end-to-end with built-in professional skills.",
+  "zh": "看板流程 瓶颈识别 顾问：覆盖 限在制、找堵点、先通瓶颈 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "限在制"
+  },
+  {
+   "en": "practical capability",
+   "zh": "找堵点"
+  },
+  {
+   "en": "practical capability",
+   "zh": "先通瓶颈"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到限在制怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到找堵点怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先通瓶颈怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到限在制怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "看板流程专家",
+  "to": "看板流程 限在制 找堵点",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "insight-report-layer-3",
+ "version": "2.0.0",
+ "domain": "洞察报告分层",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "三层结构",
+   "then": "结论-依据-明细",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结论先行",
+   "then": "首段给结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可下钻",
+   "then": "结论可下钻到明细",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "口径标注",
+   "then": "标注统计口径",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "行动建议",
+   "then": "每条结论配建议",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "三层结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可下钻",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行动建议",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "invoice-organize-3",
+ "version": "2.0.0",
+ "domain": "发票整理归集",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按类归档",
+   "then": "按费用类型分目录，不按月份",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "命名规范",
+   "then": "日期-类型-金额-单位",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "联次核对",
+   "then": "核对发票联与抵扣联是否齐全",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "重复检测",
+   "then": "按号码去重防重复报销",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "汇总清单",
+   "then": "输出可核对的汇总表与缺失清单",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按类归档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "联次核对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "汇总清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "name": "mp-publish-check-1",
+ "version": "2.0.0",
+ "domain": "公众号发布",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "事实核对",
+   "then": "数据与引述逐条核对来源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "敏感词",
+   "then": "过违禁词与极限词清单",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "事实核对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感词",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "极限词",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "发布",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "公众号",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "逐条",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

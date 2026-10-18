@@ -1,0 +1,74 @@
+{
+ "name": "session-context-plan",
+ "version": "1.0.0",
+ "plugin": "session-context-plan",
+ "description": "session-context-plan — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for session-context-plan tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/session-context-plan.md"
+ ],
+ "agentName": "session-context-plan",
+ "displayName": {
+  "zh": "会话上下文管理 分层组织",
+  "en": "session-context-plan"
+ },
+ "profession": {
+  "zh": "会话上下文管理 顾问",
+  "en": "session-context-plan"
+ },
+ "displayDescription": {
+  "zh": "会话上下文管理 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "session-context-plan: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "会话上下文管理",
+   "en": "session-context-plan"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到会话上下文管理怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划会话上下文管理",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查会话上下文管理",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到会话上下文管理怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/session-context-plan-1",
+  "./skills/session-context-plan-2",
+  "./skills/session-context-plan-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:50",
+  "from": "会话上下文管理专家",
+  "to": "会话上下文管理 分层组织",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

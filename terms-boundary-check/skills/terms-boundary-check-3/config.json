@@ -1,0 +1,72 @@
+{
+ "name": "terms-boundary-check-3",
+ "version": "2.0.0",
+ "domain": "条款边界核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "边界声明",
+   "then": "明确不提供专业意见",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "免责到位",
+   "then": "方法与建议类附免责",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不越界",
+   "then": "涉法涉医涉投资提示转专业",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标识合规",
+   "then": "AI 生成显式披露",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "来源标注",
+   "then": "引用他人内容注明",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "边界声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "免责到位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不越界",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标识合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源标注",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

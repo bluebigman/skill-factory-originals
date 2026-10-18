@@ -1,0 +1,121 @@
+{
+ "name": "logistics",
+ "version": "2.0.0",
+ "domain": "订单处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单一物流",
+   "then": "至少备两家承运商，单点故障会全面延误",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "运费失控",
+   "then": "按重量与区域核算运费并定期复盘",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "丢件",
+   "then": "丢件按平台规则走理赔并主动补发",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "偏远地区",
+   "then": "偏远地区提前公示时效，避免预期落差",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时效承诺",
+   "then": "承诺时效须留缓冲，卡点承诺必被打脸",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "物流",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "快递",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "运费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单一物流",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "运费失控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "丢件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "偏远地区",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "缓冲",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "shell-script-harden-2",
+ "version": "2.0.0",
+ "domain": "脚本健壮性加固",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "失败即停",
+   "then": "默认遇错终止",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变量引用",
+   "then": "变量加引号防分词",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "临时文件",
+   "then": "用后清理不残留",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "路径规范",
+   "then": "用绝对路径避免歧义",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "幂等可重跑",
+   "then": "重复执行结果一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "失败即停",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变量引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "临时文件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "路径规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "幂等可重跑",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

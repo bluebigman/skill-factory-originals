@@ -1,0 +1,69 @@
+{
+ "name": "resume-tailor-3",
+ "version": "2.0.0",
+ "domain": "简历定制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "真实底线",
+   "then": "不虚构经历与时间线",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "真实底线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "每条",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "写清",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "按目",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "量化",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "岗位",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "逐条",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

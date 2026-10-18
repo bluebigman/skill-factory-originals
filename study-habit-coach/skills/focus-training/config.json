@@ -1,0 +1,87 @@
+{
+ "name": "focus-training",
+ "version": "2.0.0",
+ "domain": "背单词",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "注意力",
+   "then": "从15分钟起步逐周加5分钟，配计时器可视化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "坐不住",
+   "then": "允许站立/走动式学习，不强制静坐",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "走神",
+   "then": "走神时记录打断内容，事后统一处理",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "注意力",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坐不住",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "走神",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "允许",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时长",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "学习",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "视化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "专注",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

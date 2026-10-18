@@ -1,0 +1,72 @@
+{
+ "name": "resource-quota-1",
+ "version": "2.0.0",
+ "domain": "资源配额管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按服务配额",
+   "then": "按服务重要性分配",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "上限兜底",
+   "then": "设硬上限防失控",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "监控超限",
+   "then": "超限即告警",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "弹性回收",
+   "then": "闲置资源回收",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "配额变更留痕",
+   "then": "变更记录原因",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按服务配额",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上限兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "监控超限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "弹性回收",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配额变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

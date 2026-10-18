@@ -1,0 +1,72 @@
+{
+ "name": "press-release-draft-2",
+ "version": "2.0.0",
+ "domain": "新闻稿撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "倒金字塔",
+   "then": "首段写清核心信息",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "要素齐全",
+   "then": "时间地点人物事件",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "引语具体",
+   "then": "引语含具体观点",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "避免形容词",
+   "then": "用事实替代夸张",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "联系方式",
+   "then": "附媒体联系方式",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "倒金字塔",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "要素齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引语具体",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免形容词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "联系方式",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

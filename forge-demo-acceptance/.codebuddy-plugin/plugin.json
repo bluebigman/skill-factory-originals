@@ -1,0 +1,61 @@
+{
+ "name": "forge-demo-acceptance",
+ "version": "1.0.0",
+ "plugin": "forge-demo-acceptance",
+ "description": "Acceptance Criteria",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "SkillForge Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/forge-demo-acceptance.md"
+ ],
+ "expertType": "agent",
+ "agentName": "forge-demo-acceptance",
+ "displayName": {
+  "en": "Acceptance Criteria",
+  "zh": "验收标准 验收标准制定"
+ },
+ "profession": {
+  "en": "Acceptance Criteria",
+  "zh": "验收标准 顾问"
+ },
+ "displayDescription": {
+  "en": "可测量、写清边界、前置确认",
+  "zh": "验收标准：覆盖可测量、写清边界、前置确认等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "forge demo acceptance 1",
+   "zh": "forge demo acceptance 1"
+  },
+  {
+   "en": "forge demo acceptance 2",
+   "zh": "forge demo acceptance 2"
+  },
+  {
+   "en": "forge demo acceptance 3",
+   "zh": "forge demo acceptance 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with forge-demo-acceptance-1",
+   "zh": "forge demo acceptance 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in forge-demo-acceptance-1",
+   "zh": "forge demo acceptance 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with forge-demo-acceptance-1",
+  "zh": "forge demo acceptance 1 第一步该怎么做"
+ }
+}

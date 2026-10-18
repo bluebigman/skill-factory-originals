@@ -1,0 +1,78 @@
+{
+ "name": "ab-test-design-2",
+ "version": "2.0.0",
+ "domain": "实验设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "算样本量",
+   "then": "先算所需样本量，避免中途看结果草率叫停",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "跑满周期",
+   "then": "至少覆盖一个完整周期（含周末）",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "算样本量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跑满周期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "次只",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定义",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "判定",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

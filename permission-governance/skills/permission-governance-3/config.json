@@ -1,0 +1,87 @@
+{
+ "name": "permission-governance-3",
+ "version": "2.0.0",
+ "domain": "权限治理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "范围漂移",
+   "then": "定期比对「实际访问的资源」与「授权范围」，越界即告警",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "静默扩权",
+   "then": "权限变更必须留痕并可追溯，禁止静默提权",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "审计盲区",
+   "then": "每次高危访问都要可回答「谁在何时以何权限做了什么」",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "范围漂移",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "静默扩权",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审计盲区",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "长期",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "变更",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每次",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

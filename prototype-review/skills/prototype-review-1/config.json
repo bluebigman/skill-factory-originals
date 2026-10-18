@@ -1,0 +1,50 @@
+{
+ "name": "prototype-review-1",
+ "version": "2.0.0",
+ "domain": "原型评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先走主流程",
+   "then": "先走通主流程再看边界情况",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按角色走",
+   "then": "按不同用户角色各走一遍路径",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先走主流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按角色走",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

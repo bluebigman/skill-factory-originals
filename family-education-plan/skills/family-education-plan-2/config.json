@@ -1,0 +1,78 @@
+{
+ "name": "family-education-plan-2",
+ "version": "2.0.0",
+ "domain": "家庭教育",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "过程肯定",
+   "then": "肯定努力而非结果",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "试错空间",
+   "then": "允许低代价试错",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "过程肯定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "试错空间",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "家长",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "允许",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "习惯",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "阶段",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "答案",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

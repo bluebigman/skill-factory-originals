@@ -1,0 +1,66 @@
+{
+ "name": "api-doc-writer-1",
+ "version": "2.0.0",
+ "domain": "接口文档",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "请求响应成对",
+   "then": "每个接口必须给出请求与响应示例",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "错误码齐全",
+   "then": "列出全部错误码及处理建议",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "请求响应成对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误码齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "文档",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "列出",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "api-latency-pro-2",
+ "version": "2.0.0",
+ "domain": "接口延迟",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分段测量",
+   "then": "按环节分段测耗时",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "长尾关注",
+   "then": "看 P95 而非均值",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "依赖分析",
+   "then": "定位慢依赖",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "缓存前置",
+   "then": "可缓存的提前缓存",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回归基线",
+   "then": "建立延迟基线",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分段测量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长尾关注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖分析",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缓存前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归基线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "doc-index-shard-1",
+ "version": "2.0.0",
+ "domain": "索引分片策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按量分片",
+   "then": "按数据量定分片数",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "键设计",
+   "then": "分片键选高基数",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "热点避免",
+   "then": "避免单分片热点",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "扩容可行",
+   "then": "预留扩容能力",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "监控倾斜",
+   "then": "监控分片倾斜",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按量分片",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "键设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "热点避免",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "扩容可行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "监控倾斜",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "name": "Tech Review Coach",
+ "description": "技术方案专家：覆盖 先讲约束、方案对比、风险显式 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/tech-review-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/tech-review-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "tech-review-coach-1",
+   "name": "针对 先讲约束、方案对比 等情境给出可执行处置",
+   "description": "针对 先讲约束、方案对比 等情境给出可执行处置",
+   "tags": [
+    "先讲约束",
+    "方案对比"
+   ],
+   "examples": [
+    "遇到先讲约束",
+    "遇到方案对比",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "tech-review-coach-2",
+   "name": "针对 风险显式、可回滚 等情境给出可执行处置",
+   "description": "针对 风险显式、可回滚 等情境给出可执行处置",
+   "tags": [
+    "风险显式",
+    "可回滚"
+   ],
+   "examples": [
+    "遇到风险显式",
+    "遇到可回滚",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "tech-review-coach-3",
+   "name": "针对 小步验证 等情境给出可执行处置",
+   "description": "针对 小步验证 等情境给出可执行处置",
+   "tags": [
+    "小步验证"
+   ],
+   "examples": [
+    "遇到小步验证",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "技术方案专家"
+}

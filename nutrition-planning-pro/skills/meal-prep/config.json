@@ -1,0 +1,121 @@
+{
+ "name": "meal-prep",
+ "version": "2.0.0",
+ "domain": "膳食搭配",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "外卖偏多",
+   "then": "外食按蒸煮烤优先，油炸类每周不超 2 次",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "时间不足",
+   "then": "周末预处理蔬菜与主食分装，工作日仅组合",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "口味单调",
+   "then": "用调味变化而非换食材维持多样性，醋/柠檬/香辛料零热量",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "食堂选择",
+   "then": "按固定窗口建立白名单，现场决策最易选高油高糖",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "记录负担",
+   "then": "只记结构与份数，不逐克称重，记录成本高必放弃",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "备餐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "便当",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "午餐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外卖偏多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口味单调",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "食堂选择",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录负担",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "现场",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "工作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "建立",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只记",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

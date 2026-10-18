@@ -1,0 +1,83 @@
+{
+ "name": "Tool Interface Design",
+ "description": "工具设计专家：覆盖 字段类型含糊、必填缺失 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/tool-interface-design",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/tool-interface-design",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "tool-interface-design-1",
+   "name": "针对 字段类型含糊、必填缺失 等情境给出可执行处置",
+   "description": "针对 字段类型含糊、必填缺失 等情境给出可执行处置",
+   "tags": [
+    "字段类型含糊",
+    "必填缺失",
+    "默认值不明"
+   ],
+   "examples": [
+    "遇到字段类型含糊",
+    "遇到必填缺失",
+    "遇到默认值不明",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "tool-interface-design-2",
+   "name": "针对 描述太短、术语黑话 等情境给出可执行处置",
+   "description": "针对 描述太短、术语黑话 等情境给出可执行处置",
+   "tags": [
+    "描述太短",
+    "术语黑话",
+    "场景缺失"
+   ],
+   "examples": [
+    "遇到描述太短",
+    "遇到术语黑话",
+    "遇到场景缺失",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "tool-interface-design-3",
+   "name": "针对 改产出不看消费方、路径格式 等情境给出可执行处置",
+   "description": "针对 改产出不看消费方、路径格式 等情境给出可执行处置",
+   "tags": [
+    "改产出不看消费方",
+    "路径格式",
+    "静默不兼容"
+   ],
+   "examples": [
+    "遇到改产出不看消费方",
+    "遇到路径格式",
+    "遇到静默不兼容",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "工具设计专家",
+ "x-source": "skill-factory-originals"
+}

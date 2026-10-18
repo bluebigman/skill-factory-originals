@@ -1,0 +1,74 @@
+{
+ "name": "prototype-review",
+ "version": "1.0.0",
+ "plugin": "prototype-review",
+ "description": "Prototype Review for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/prototype-review.md"
+ ],
+ "skills": [
+  "./skills/prototype-review-1",
+  "./skills/prototype-review-2",
+  "./skills/prototype-review-3"
+ ],
+ "expertType": "agent",
+ "agentName": "prototype-review",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Prototype Review",
+  "zh": "原型评审 先走主流程 按角色走"
+ },
+ "profession": {
+  "en": "Prototype Review",
+  "zh": "原型评审 交互问题 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Prototype Review tasks end-to-end with built-in professional skills.",
+  "zh": "原型评审 交互问题 助手：覆盖 先走主流程、按角色走、记录问题 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "原型评审",
+   "en": "prototype-review"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到原型评审怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到交互问题怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到原型评审怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "原型评审专家",
+  "to": "原型评审 先走主流程 按角色走",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

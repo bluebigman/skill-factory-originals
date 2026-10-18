@@ -1,0 +1,72 @@
+{
+ "name": "multi-source-merge-1",
+ "version": "2.0.0",
+ "domain": "多源数据合并",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主键对齐",
+   "then": "先确定主键映射",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "优先级规则",
+   "then": "冲突时以哪源为准",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时间对齐",
+   "then": "按时间窗口对齐",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "重复识别",
+   "then": "同实体不同源去重",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "合并留痕",
+   "then": "记录合并规则与影响",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主键对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优先级规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合并留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

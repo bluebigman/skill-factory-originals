@@ -1,0 +1,54 @@
+{
+ "name": "quality-spc-pro-1",
+ "version": "2.0.0",
+ "domain": "过程质量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先稳后控",
+   "then": "先消除特殊原因再计算控制限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "合理分组",
+   "then": "子组内同质、子组间可辨",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先稳后控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合理分组",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "质量",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

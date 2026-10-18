@@ -1,0 +1,99 @@
+{
+ "name": "Habit Tracker Pro",
+ "description": "习惯养成专家：新习惯的最小化设计；习惯效果的定期检视；中断与恢复的处理。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/habit-tracker-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/habit-tracker-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "habit-design",
+   "name": "新习惯的最小化设计",
+   "description": "新习惯的最小化设计",
+   "tags": [
+    "习惯",
+    "开始",
+    "坚持",
+    "最小行动"
+   ],
+   "examples": [
+    "遇到目标过大",
+    "遇到无触发",
+    "遇到动机依赖",
+    "遇到多重习惯",
+    "遇到环境支持"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:44",
+    "from": "habit-design",
+    "to": "habit-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "review-loop",
+   "name": "习惯效果的定期检视",
+   "description": "习惯效果的定期检视",
+   "tags": [
+    "复盘",
+    "效果",
+    "调整",
+    "坚持"
+   ],
+   "examples": [
+    "遇到只做不看",
+    "遇到归因错误",
+    "遇到全或无",
+    "遇到叠加",
+    "遇到长期"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:44",
+    "from": "review-loop",
+    "to": "review-loop",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "streak-manage",
+   "name": "中断与恢复的处理",
+   "description": "中断与恢复的处理",
+   "tags": [
+    "打卡",
+    "中断",
+    "破功",
+    "恢复"
+   ],
+   "examples": [
+    "遇到断一天就放弃",
+    "遇到打卡焦虑",
+    "遇到补偿心态",
+    "遇到记录方式",
+    "遇到周期复盘"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:44",
+    "from": "streak-manage",
+    "to": "streak-manage",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "习惯养成专家"
+}

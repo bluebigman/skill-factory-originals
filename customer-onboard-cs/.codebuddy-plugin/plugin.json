@@ -1,0 +1,74 @@
+{
+ "name": "customer-onboard-cs",
+ "version": "1.0.0",
+ "plugin": "customer-onboard-cs",
+ "description": "customer-onboard-cs — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for customer-onboard-cs tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/customer-onboard-cs.md"
+ ],
+ "agentName": "customer-onboard-cs",
+ "displayName": {
+  "zh": "客户成功 里程碑制 首价值先行",
+  "en": "customer-onboard-cs"
+ },
+ "profession": {
+  "zh": "客户成功 上手陪跑 顾问",
+  "en": "customer-onboard-cs"
+ },
+ "displayDescription": {
+  "zh": "客户成功 上手陪跑 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "customer-onboard-cs: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "客户成功",
+   "en": "customer-onboard-cs"
+  },
+  {
+   "en": "OperationsHR",
+   "zh": "OperationsHR"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到客户成功怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划客户成功",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查客户成功",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到客户成功怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/customer-onboard-cs-1/",
+  "./skills/customer-onboard-cs-2/",
+  "./skills/customer-onboard-cs-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:32",
+  "from": "客户成功专家",
+  "to": "客户成功 里程碑制 首价值先行",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

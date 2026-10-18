@@ -1,0 +1,107 @@
+{
+ "name": "Time Management Pro",
+ "description": "时间管理专家：深度工作的执行方法；任务优先级的判定；时间使用的检视。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/time-management-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/time-management-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "focus",
+   "name": "深度工作的执行方法",
+   "description": "深度工作的执行方法",
+   "tags": [
+    "专注",
+    "分心",
+    "番茄钟",
+    "效率"
+   ],
+   "examples": [
+    "遇到频繁打断",
+    "遇到多任务",
+    "遇到从难的做起",
+    "遇到分心冲动",
+    "遇到手机在场"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:54",
+    "from": "focus",
+    "to": "focus",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "priority",
+   "name": "任务优先级的判定",
+   "description": "任务优先级的判定",
+   "tags": [
+    "优先级",
+    "重要紧急",
+    "排序",
+    "选择"
+   ],
+   "examples": [
+    "遇到全都很急",
+    "遇到只做紧急",
+    "遇到不写下来",
+    "遇到清单过长",
+    "遇到预估缺失"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:54",
+    "from": "priority",
+    "to": "priority",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "review-time",
+   "name": "时间使用的检视",
+   "description": "时间使用的检视",
+   "tags": [
+    "复盘",
+    "时间浪费",
+    "记录",
+    "调整"
+   ],
+   "examples": [
+    "遇到无记录",
+    "遇到归因外部",
+    "遇到过度规划",
+    "遇到无缓冲",
+    "遇到定期复盘"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:54",
+    "from": "review-time",
+    "to": "review-time",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "时间管理专家",
+ "x-source": "skill-factory-originals"
+}

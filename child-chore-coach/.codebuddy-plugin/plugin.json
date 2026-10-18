@@ -1,0 +1,74 @@
+{
+ "name": "child-chore-coach",
+ "version": "1.0.0",
+ "plugin": "child-chore-coach",
+ "description": "Child Chore Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-chore-coach.md"
+ ],
+ "skills": [
+  "./skills/child-chore-coach-1",
+  "./skills/child-chore-coach-2",
+  "./skills/child-chore-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-chore-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Child Chore Coach",
+  "zh": "儿童家务 按年龄分配 不返工"
+ },
+ "profession": {
+  "en": "Child Chore Coach",
+  "zh": "儿童家务 责任培养 习惯"
+ },
+ "displayDescription": {
+  "en": "Handles Child Chore Coach tasks end-to-end with built-in professional skills.",
+  "zh": "儿童家务 责任培养 习惯：覆盖 按年龄分配、不返工、一起做 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "按年龄分配"
+  },
+  {
+   "en": "practical capability",
+   "zh": "不返工"
+  },
+  {
+   "en": "practical capability",
+   "zh": "一起做"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到按年龄分配怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不返工怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到一起做怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到按年龄分配怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "儿童家务专家",
+  "to": "儿童家务 按年龄分配 不返工",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

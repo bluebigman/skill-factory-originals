@@ -1,0 +1,74 @@
+{
+ "name": "retry-backoff-design",
+ "version": "1.0.0",
+ "plugin": "retry-backoff-design",
+ "description": "retry-backoff-design — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for retry-backoff-design tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/retry-backoff-design.md"
+ ],
+ "agentName": "retry-backoff-design",
+ "displayName": {
+  "zh": "重试退避设计 只重试可重试",
+  "en": "retry-backoff-design"
+ },
+ "profession": {
+  "zh": "重试退避设计 顾问",
+  "en": "retry-backoff-design"
+ },
+ "displayDescription": {
+  "zh": "重试退避设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "retry-backoff-design: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "重试退避设计",
+   "en": "retry-backoff-design"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到重试退避设计怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划重试退避设计",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查重试退避设计",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到重试退避设计怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/retry-backoff-design-1",
+  "./skills/retry-backoff-design-2",
+  "./skills/retry-backoff-design-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:49",
+  "from": "重试退避设计专家",
+  "to": "重试退避设计 只重试可重试",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

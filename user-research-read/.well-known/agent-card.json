@@ -1,0 +1,75 @@
+{
+ "name": "User Research Read",
+ "description": "用户调研专家：覆盖 问过去不问将来、少问多听 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/user-research-read",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/user-research-read",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "user-research-read-1",
+   "name": "针对 问过去不问将来、少问多听 等情境给出可执行处置",
+   "description": "针对 问过去不问将来、少问多听 等情境给出可执行处置",
+   "tags": [
+    "问过去不问将来",
+    "少问多听"
+   ],
+   "examples": [
+    "遇到问过去不问将来",
+    "遇到少问多听",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "user-research-read-2",
+   "name": "针对 追问具体、样本分层 等情境给出可执行处置",
+   "description": "针对 追问具体、样本分层 等情境给出可执行处置",
+   "tags": [
+    "追问具体",
+    "样本分层"
+   ],
+   "examples": [
+    "遇到追问具体",
+    "遇到样本分层",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "user-research-read-3",
+   "name": "针对 结论附证据 等情境给出可执行处置",
+   "description": "针对 结论附证据 等情境给出可执行处置",
+   "tags": [
+    "结论附证据"
+   ],
+   "examples": [
+    "遇到结论附证据",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "用户调研专家",
+ "x-source": "skill-factory-originals"
+}

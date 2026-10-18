@@ -1,0 +1,61 @@
+{
+ "name": "mp-cover-design-3",
+ "version": "2.0.0",
+ "domain": "公众号封面",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版权清晰",
+   "then": "只用可商用素材并留存授权",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版权清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "安全",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "留存",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "超三",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "公众号",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

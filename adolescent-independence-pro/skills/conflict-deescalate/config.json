@@ -1,0 +1,117 @@
+{
+ "name": "conflict-deescalate",
+ "version": "2.0.0",
+ "domain": "青春期独立",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "对骂升级",
+   "then": "物理暂停（各自回房 20 分钟），先降温再谈",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "冷战",
+   "then": "用非对抗渠道破冰（写字条/一起做事），不逼当场和解",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "离家出走",
+   "then": "确保安全前提下不追不堵，事后只谈安全底线不谈对错",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "翻旧账",
+   "then": "一次只谈一件事，禁提以往全部旧事",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "道歉",
+   "then": "家长有错须明确道歉，示范承担责任比要求孩子认错更有效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "对抗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冷战",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "顶撞",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "离家",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对骂升级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "离家出走",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "翻旧账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "道歉",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "name": "Screen Time Manager",
+ "description": "屏幕时间专家：判断哪些内容适合孩子看；家庭屏幕使用规则的制定与达成；屏幕时间超标后的渐进调整。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/screen-time-manager",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/screen-time-manager",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "content-curation",
+   "name": "判断哪些内容适合孩子看",
+   "description": "判断哪些内容适合孩子看",
+   "tags": [
+    "内容筛选",
+    "适龄",
+    "短视频",
+    "游戏"
+   ],
+   "examples": [
+    "遇到短视频刷不停",
+    "遇到游戏沉迷",
+    "遇到内容不适龄",
+    "遇到算法推荐",
+    "遇到广告诱导"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "content-curation",
+    "to": "content-curation",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "rule-design",
+   "name": "家庭屏幕使用规则的制定与达成",
+   "description": "家庭屏幕使用规则的制定与达成",
+   "tags": [
+    "屏幕时间",
+    "规则",
+    "约定",
+    "执行"
+   ],
+   "examples": [
+    "遇到规则失效",
+    "遇到时长达标难",
+    "遇到规则执行不到位",
+    "遇到破例",
+    "遇到年龄差异"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "rule-design",
+    "to": "rule-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "withdraw-plan",
+   "name": "屏幕时间超标后的渐进调整",
+   "description": "屏幕时间超标后的渐进调整",
+   "tags": [
+    "戒断",
+    "替代活动",
+    "反弹",
+    "情绪对抗"
+   ],
+   "examples": [
+    "遇到直接没收",
+    "遇到反弹",
+    "遇到无聊哭闹",
+    "遇到家长自己刷",
+    "遇到反复回退"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "withdraw-plan",
+    "to": "withdraw-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "屏幕时间专家"
+}

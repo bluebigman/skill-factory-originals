@@ -1,0 +1,72 @@
+{
+ "name": "typography-scale-2",
+ "version": "2.0.0",
+ "domain": "字体层级设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "比例统一",
+   "then": "字号按统一比例递增",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "层级不超五",
+   "then": "层级过多难辨识",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "行高匹配",
+   "then": "行高随字号调整",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "中西混排",
+   "then": "中西文混排需留间距",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "最小字号",
+   "then": "正文不小于可读下限",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "比例统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层级不超五",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行高匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "中西混排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小字号",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

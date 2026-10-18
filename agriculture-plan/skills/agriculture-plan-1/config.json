@@ -1,0 +1,72 @@
+{
+ "name": "agriculture-plan-1",
+ "version": "2.0.0",
+ "domain": "农事计划编制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "时令对齐",
+   "then": "按节气与气候安排",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "资源配套",
+   "then": "水肥药配套计划",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "风险预案",
+   "then": "病虫害与灾害预案",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "记录留痕",
+   "then": "农事记录",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复盘",
+   "then": "按季复盘",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "时令对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资源配套",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

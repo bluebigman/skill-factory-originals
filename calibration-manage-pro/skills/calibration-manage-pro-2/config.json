@@ -1,0 +1,72 @@
+{
+ "name": "calibration-manage-pro-2",
+ "version": "2.0.0",
+ "domain": "计量器具",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "台账齐全",
+   "then": "器具台账含编号与周期",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "周期强制",
+   "then": "按周期强制校准不延期",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "状态标识",
+   "then": "合格/停用标识清晰可见",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "超期停用",
+   "then": "超期立即停用并隔离",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "溯源有效",
+   "then": "校准结果可溯源到标准",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "台账齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周期强制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "状态标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超期停用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "溯源有效",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

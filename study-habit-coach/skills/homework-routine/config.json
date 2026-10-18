@@ -1,0 +1,96 @@
+{
+ "name": "homework-routine",
+ "version": "2.0.0",
+ "domain": "背单词",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拖拉",
+   "then": "用15分钟番茄块+即时反馈，避免快点空指令",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分心",
+   "then": "清空桌面与电子设备，一次只留当前科目",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "磨蹭",
+   "then": "先做最容易的一题启动，破启动阻力",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "写不完",
+   "then": "按难度排序，先做会做的，标记卡住的",
+   "source": "scripts/main.py#RULES[3]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拖拉",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分心",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "磨蹭",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "写不完",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "次只",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "允许",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "提升",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时长",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "学习",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

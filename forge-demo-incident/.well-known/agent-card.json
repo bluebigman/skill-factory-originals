@@ -1,0 +1,63 @@
+{
+ "name": "Incident Review",
+ "description": "时间线、根因、固化措施",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/forge-demo-incident",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/forge-demo-incident",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "forge-demo-incident-1",
+   "name": "时间线还原",
+   "description": "时间线还原：时间线、根因、固化措施",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "forge-demo-incident-2",
+   "name": "根因定位",
+   "description": "根因定位：时间线、根因、固化措施",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "forge-demo-incident-3",
+   "name": "固化措施",
+   "description": "固化措施：时间线、根因、固化措施",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

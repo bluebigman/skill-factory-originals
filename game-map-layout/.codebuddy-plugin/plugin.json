@@ -1,0 +1,74 @@
+{
+ "name": "game-map-layout",
+ "version": "1.0.0",
+ "plugin": "game-map-layout",
+ "description": "Game Map Layout for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/game-map-layout.md"
+ ],
+ "skills": [
+  "./skills/game-map-layout-1",
+  "./skills/game-map-layout-2",
+  "./skills/game-map-layout-3"
+ ],
+ "expertType": "agent",
+ "agentName": "game-map-layout",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Game Map Layout",
+  "zh": "游戏地图 主路明显 岔路有奖"
+ },
+ "profession": {
+  "en": "Game Map Layout",
+  "zh": "游戏地图 动线设计 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Game Map Layout tasks end-to-end with built-in professional skills.",
+  "zh": "游戏地图 动线设计 顾问：覆盖 主路明显、岔路有奖、视距管理 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "游戏地图",
+   "en": "game-map-layout"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到游戏地图怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到动线设计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到游戏地图怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "游戏地图专家",
+  "to": "游戏地图 主路明显 岔路有奖",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

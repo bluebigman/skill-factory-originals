@@ -1,0 +1,78 @@
+{
+ "name": "log-troubleshoot-2",
+ "version": "2.0.0",
+ "domain": "日志排查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "关联链路",
+   "then": "按同一请求链路串联上下游日志",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "对比基线",
+   "then": "与正常时段的同一指标对比",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "关联链路",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比基线",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "排查",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "指标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "正常",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "报错",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "tool-interface-design-pro-2",
+ "version": "2.0.0",
+ "domain": "工具设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字段类型",
+   "then": "每字段显式声明类型与取值域",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "必填标注",
+   "then": "列出全部必填并给错误码",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "默认值",
+   "then": "默认值必须写进 schema",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "描述充分",
+   "then": "docstring 要够不看源码也能调用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "场景示例",
+   "then": "至少给 3 个什么时候用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字段类型",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "必填标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "默认值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "描述充分",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "场景示例",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "name": "File Rename Batch",
+ "description": "文件批量专家：覆盖 先预览、命名模板、零填充 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/file-rename-batch",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/file-rename-batch",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "file-rename-batch-1",
+   "name": "针对 先预览、命名模板 等情境给出可执行处置",
+   "description": "针对 先预览、命名模板 等情境给出可执行处置",
+   "tags": [
+    "先预览",
+    "命名模板"
+   ],
+   "examples": [
+    "遇到先预览",
+    "遇到命名模板",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "file-rename-batch-2",
+   "name": "针对 零填充、去非法字符 等情境给出可执行处置",
+   "description": "针对 零填充、去非法字符 等情境给出可执行处置",
+   "tags": [
+    "零填充",
+    "去非法字符"
+   ],
+   "examples": [
+    "遇到零填充",
+    "遇到去非法字符",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "file-rename-batch-3",
+   "name": "针对 可回退 等情境给出可执行处置",
+   "description": "针对 可回退 等情境给出可执行处置",
+   "tags": [
+    "可回退"
+   ],
+   "examples": [
+    "遇到可回退",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "文件批量专家",
+ "x-source": "skill-factory-originals"
+}

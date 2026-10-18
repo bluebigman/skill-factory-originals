@@ -1,0 +1,72 @@
+{
+ "name": "metric-drill-down-3",
+ "version": "2.0.0",
+ "domain": "指标下钻分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "维度有序",
+   "then": "按业务层级下钻",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "每层看占比",
+   "then": "关注贡献度",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异常优先",
+   "then": "偏离最大的分支优先",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "停止条件",
+   "then": "找到可行动粒度即停",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论回填",
+   "then": "下钻结论回到上层",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "维度有序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "每层看占比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "停止条件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论回填",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

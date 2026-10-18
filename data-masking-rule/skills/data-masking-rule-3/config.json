@@ -1,0 +1,72 @@
+{
+ "name": "data-masking-rule-3",
+ "version": "2.0.0",
+ "domain": "数据脱敏规则",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分类分级",
+   "then": "先对数据分类分级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按需脱敏",
+   "then": "按角色决定是否脱敏",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "格式保持",
+   "then": "脱敏后仍满足格式",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "关联保持",
+   "then": "关联关系可用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可配置",
+   "then": "规则可配置可审计",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分类分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按需脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式保持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关联保持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可配置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

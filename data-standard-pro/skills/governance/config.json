@@ -1,0 +1,121 @@
+{
+ "name": "governance",
+ "version": "2.0.0",
+ "domain": "数据规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无责任人",
+   "then": "每个数据表指定责任人，无主数据必然腐化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无校验",
+   "then": "关键字段设校验规则（非空/范围/枚举），事后清理成本高",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异常值",
+   "then": "异常值先核实来源，勿直接删除，可能是真实业务信号",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "保留原表",
+   "then": "原始表只读备份，清洗结果另存",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "敏感数据",
+   "then": "含个人信息的数据须脱敏或按授权范围交付",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数据治理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无责任人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留原表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感数据",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "变更",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "留痕",
+   "source": "SKILL.md#L40"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

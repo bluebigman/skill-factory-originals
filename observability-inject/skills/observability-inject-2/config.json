@@ -1,0 +1,87 @@
+{
+ "name": "observability-inject-2",
+ "version": "2.0.0",
+ "domain": "链路追踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "成本不可见",
+   "then": "按调用记录 token/配额消耗，实时可见",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "成功率无统计",
+   "then": "分维度统计成功率（按工具/按场景），不只看总体",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "延迟盲区",
+   "then": "记录 P50/P95 而非均值，避免长尾被平均掩盖",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "成本不可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成功率无统计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "延迟盲区",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "工具",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每次",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "指标",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "消耗",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只看",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

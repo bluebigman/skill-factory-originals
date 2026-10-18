@@ -1,0 +1,67 @@
+{
+ "name": "Teen Goal Setting",
+ "description": "青少年专家：覆盖 具体可衡量、拆解、书面化、定期复盘、不代定 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/teen-goal-setting",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-goal-setting",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-goal-setting-1",
+   "name": "针对 具体可衡量、拆解 等情境给出可执行处置",
+   "description": "针对 具体可衡量、拆解 等情境给出可执行处置",
+   "tags": [
+    "具体可衡量",
+    "拆解"
+   ],
+   "examples": [
+    "遇到具体可衡量",
+    "遇到拆解",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-goal-setting-2",
+   "name": "针对 书面化、定期复盘 等情境给出可执行处置",
+   "description": "针对 书面化、定期复盘 等情境给出可执行处置",
+   "tags": [
+    "书面化",
+    "定期复盘"
+   ],
+   "examples": [
+    "遇到书面化",
+    "遇到定期复盘",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-goal-setting-3",
+   "name": "针对 不代定 等情境给出可执行处置",
+   "description": "针对 不代定 等情境给出可执行处置",
+   "tags": [
+    "不代定"
+   ],
+   "examples": [
+    "遇到不代定",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "青少年专家"
+}

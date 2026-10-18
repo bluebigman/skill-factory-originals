@@ -1,0 +1,74 @@
+{
+ "name": "space-wayfinding",
+ "version": "1.0.0",
+ "plugin": "space-wayfinding",
+ "description": "space-wayfinding — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for space-wayfinding tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/space-wayfinding.md"
+ ],
+ "agentName": "space-wayfinding",
+ "displayName": {
+  "zh": "导视系统 决策点设标识",
+  "en": "space-wayfinding"
+ },
+ "profession": {
+  "zh": "导视系统 寻路设计 顾问",
+  "en": "space-wayfinding"
+ },
+ "displayDescription": {
+  "zh": "导视系统 寻路设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "space-wayfinding: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "导视系统",
+   "en": "space-wayfinding"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到导视系统怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划导视系统",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查导视系统",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到导视系统怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/space-wayfinding-1/",
+  "./skills/space-wayfinding-2/",
+  "./skills/space-wayfinding-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "导视系统专家",
+  "to": "导视系统 决策点设标识",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

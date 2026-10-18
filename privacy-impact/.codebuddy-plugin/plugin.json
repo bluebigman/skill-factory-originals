@@ -1,0 +1,74 @@
+{
+ "name": "privacy-impact",
+ "version": "1.0.0",
+ "plugin": "privacy-impact",
+ "description": "privacy-impact — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for privacy-impact tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/privacy-impact.md"
+ ],
+ "agentName": "privacy-impact",
+ "displayName": {
+  "zh": "隐私影响评估 数据清单",
+  "en": "privacy-impact"
+ },
+ "profession": {
+  "zh": "隐私影响评估 顾问",
+  "en": "privacy-impact"
+ },
+ "displayDescription": {
+  "zh": "隐私影响评估 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "privacy-impact: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "隐私影响评估",
+   "en": "privacy-impact"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到隐私影响评估怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划隐私影响评估",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查隐私影响评估",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到隐私影响评估怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/privacy-impact-1",
+  "./skills/privacy-impact-2",
+  "./skills/privacy-impact-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "隐私影响评估专家",
+  "to": "隐私影响评估 数据清单",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

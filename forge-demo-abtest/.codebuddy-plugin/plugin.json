@@ -1,0 +1,61 @@
+{
+ "name": "forge-demo-abtest",
+ "version": "1.0.0",
+ "plugin": "forge-demo-abtest",
+ "description": "Experiment Design",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "SkillForge Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/forge-demo-abtest.md"
+ ],
+ "expertType": "agent",
+ "agentName": "forge-demo-abtest",
+ "displayName": {
+  "en": "Experiment Design",
+  "zh": "实验设计 实验变量设计"
+ },
+ "profession": {
+  "en": "Experiment Design",
+  "zh": "实验设计 顾问"
+ },
+ "displayDescription": {
+  "en": "单变量、先定主指标、算样本量",
+  "zh": "实验设计：覆盖单变量、先定主指标、算样本量等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "forge demo abtest 1",
+   "zh": "forge demo abtest 1"
+  },
+  {
+   "en": "forge demo abtest 2",
+   "zh": "forge demo abtest 2"
+  },
+  {
+   "en": "forge demo abtest 3",
+   "zh": "forge demo abtest 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with forge-demo-abtest-1",
+   "zh": "forge demo abtest 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in forge-demo-abtest-1",
+   "zh": "forge demo abtest 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with forge-demo-abtest-1",
+  "zh": "forge demo abtest 1 第一步该怎么做"
+ }
+}

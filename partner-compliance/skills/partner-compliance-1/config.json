@@ -1,0 +1,58 @@
+{
+ "name": "partner-compliance-1",
+ "version": "2.0.0",
+ "domain": "外部合作",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先审资质",
+   "then": "合作前先核验对方资质与许可",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "条款明确",
+   "then": "数据与知识产权归属写清",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先审资质",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条款明确",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "前先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写清",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先核",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

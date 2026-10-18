@@ -1,0 +1,72 @@
+{
+ "name": "deal-review-pro-3",
+ "version": "2.0.0",
+ "domain": "商机评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标准统一",
+   "then": "全公司统一评审标准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "独立视角",
+   "then": "引入非本方人员挑战假设",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "列出假设",
+   "then": "明确列出关键假设",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "条件放行",
+   "then": "带条件放行须写明条件与时限",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论留痕",
+   "then": "评审结论与依据留痕",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标准统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "独立视角",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "列出假设",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条件放行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

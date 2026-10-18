@@ -1,0 +1,74 @@
+{
+ "name": "faq-build-pro",
+ "version": "1.0.0",
+ "plugin": "faq-build-pro",
+ "description": "faq-build-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for faq-build-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/faq-build-pro.md"
+ ],
+ "agentName": "faq-build-pro",
+ "displayName": {
+  "zh": "常见问题库构建 真实问法",
+  "en": "faq-build-pro"
+ },
+ "profession": {
+  "zh": "常见问题库构建 助手",
+  "en": "faq-build-pro"
+ },
+ "displayDescription": {
+  "zh": "常见问题库构建 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "faq-build-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "常见问题库构建",
+   "en": "faq-build-pro"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到常见问题库构建怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划常见问题库构建",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查常见问题库构建",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到常见问题库构建怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/faq-build-pro-1",
+  "./skills/faq-build-pro-2",
+  "./skills/faq-build-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "常见问题库构建专家",
+  "to": "常见问题库构建 真实问法",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "name": "story-outline-pro",
+ "version": "1.0.0",
+ "plugin": "story-outline-pro",
+ "description": "Story Outline Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/story-outline-pro.md"
+ ],
+ "skills": [
+  "./skills/character-arc",
+  "./skills/plot-structure",
+  "./skills/premise"
+ ],
+ "expertType": "agent",
+ "agentName": "story-outline-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Story Outline Pro",
+  "zh": "故事大纲 人物扁平 动机不明"
+ },
+ "profession": {
+  "en": "Story Outline Pro",
+  "zh": "故事大纲 情节设计 人物弧光"
+ },
+ "displayDescription": {
+  "en": "Handles Story Outline Pro tasks end-to-end with built-in professional skills.",
+  "zh": "故事大纲 情节设计 人物弧光：人物的成长轨迹设计；故事的结构与节奏；故事前提与冲突设计。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "人物扁平"
+  },
+  {
+   "en": "practical capability",
+   "zh": "动机不明"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无变化"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到人物扁平怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到动机不明怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无变化怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到人物扁平怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "故事大纲专家",
+  "to": "故事大纲 人物扁平 动机不明",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "persona-build-3",
+ "version": "2.0.0",
+ "domain": "用户画像构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "基于数据",
+   "then": "画像基于真实数据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "维度适度",
+   "then": "维度不超六个",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可行动",
+   "then": "每类画像对应具体动作",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "定期更新",
+   "then": "随用户变化更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "避免刻板",
+   "then": "避免过度简化",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "基于数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "维度适度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可行动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期更新",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免刻板",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

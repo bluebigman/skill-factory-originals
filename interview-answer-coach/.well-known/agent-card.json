@@ -1,0 +1,75 @@
+{
+ "name": "Interview Answer Coach",
+ "description": "面试答题专家：覆盖 先给结论、STAR 结构、量化结果、预设追问 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/interview-answer-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/interview-answer-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "interview-answer-coach-1",
+   "name": "针对 先给结论、STAR 结构 等情境给出可执行处置",
+   "description": "针对 先给结论、STAR 结构 等情境给出可执行处置",
+   "tags": [
+    "先给结论",
+    "STAR 结构"
+   ],
+   "examples": [
+    "遇到先给结论",
+    "遇到STAR 结构",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "interview-answer-coach-2",
+   "name": "针对 量化结果、预设追问 等情境给出可执行处置",
+   "description": "针对 量化结果、预设追问 等情境给出可执行处置",
+   "tags": [
+    "量化结果",
+    "预设追问"
+   ],
+   "examples": [
+    "遇到量化结果",
+    "遇到预设追问",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "interview-answer-coach-3",
+   "name": "针对 诚实边界 等情境给出可执行处置",
+   "description": "针对 诚实边界 等情境给出可执行处置",
+   "tags": [
+    "诚实边界"
+   ],
+   "examples": [
+    "遇到诚实边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "面试答题专家",
+ "x-source": "skill-factory-originals"
+}

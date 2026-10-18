@@ -1,0 +1,67 @@
+{
+ "name": "Sheet Report Render",
+ "description": "表格报表专家：覆盖 一页一结论、图表从简、标注口径、对比优先、留原始表 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/sheet-report-render",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/sheet-report-render",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "sheet-report-render-1",
+   "name": "针对 一页一结论、图表从简 等情境给出可执行处置",
+   "description": "针对 一页一结论、图表从简 等情境给出可执行处置",
+   "tags": [
+    "一页一结论",
+    "图表从简"
+   ],
+   "examples": [
+    "遇到一页一结论",
+    "遇到图表从简",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sheet-report-render-2",
+   "name": "针对 标注口径、对比优先 等情境给出可执行处置",
+   "description": "针对 标注口径、对比优先 等情境给出可执行处置",
+   "tags": [
+    "标注口径",
+    "对比优先"
+   ],
+   "examples": [
+    "遇到标注口径",
+    "遇到对比优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sheet-report-render-3",
+   "name": "针对 留原始表 等情境给出可执行处置",
+   "description": "针对 留原始表 等情境给出可执行处置",
+   "tags": [
+    "留原始表"
+   ],
+   "examples": [
+    "遇到留原始表",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "表格报表专家"
+}

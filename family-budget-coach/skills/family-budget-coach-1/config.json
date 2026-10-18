@@ -1,0 +1,78 @@
+{
+ "name": "family-budget-coach-1",
+ "version": "2.0.0",
+ "domain": "家庭收支",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "简化记账",
+   "then": "只记三类，全量记账必放弃",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "设上限",
+   "then": "按类别设月度上限并设 80% 预警",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "简化记账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "设上限",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "只记",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "三类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "全量",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "放弃",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "预算",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "按类",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "name": "family-rules-coach-1",
+ "version": "2.0.0",
+ "domain": "家庭规则",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "写下来",
+   "then": "规则须书面并双方签字",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "少而精",
+   "then": "核心规则不超 5 条",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "写下来",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "少而精",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "书面",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "双方",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "制定",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

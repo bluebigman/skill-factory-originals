@@ -1,0 +1,67 @@
+{
+ "name": "Api Doc Writer",
+ "description": "接口文档专家：覆盖 请求响应成对、错误码齐全 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/api-doc-writer",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/api-doc-writer",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "api-doc-writer-1",
+   "name": "针对 请求响应成对、错误码齐全 等情境给出可执行处置",
+   "description": "针对 请求响应成对、错误码齐全 等情境给出可执行处置",
+   "tags": [
+    "请求响应成对",
+    "错误码齐全"
+   ],
+   "examples": [
+    "遇到请求响应成对",
+    "遇到错误码齐全",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "api-doc-writer-2",
+   "name": "针对 参数说明、示例可跑 等情境给出可执行处置",
+   "description": "针对 参数说明、示例可跑 等情境给出可执行处置",
+   "tags": [
+    "参数说明",
+    "示例可跑"
+   ],
+   "examples": [
+    "遇到参数说明",
+    "遇到示例可跑",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "api-doc-writer-3",
+   "name": "针对 变更记录 等情境给出可执行处置",
+   "description": "针对 变更记录 等情境给出可执行处置",
+   "tags": [
+    "变更记录"
+   ],
+   "examples": [
+    "遇到变更记录",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "接口文档专家"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "knowledge-extract-pro",
+ "version": "1.0.0",
+ "plugin": "knowledge-extract-pro",
+ "description": "knowledge-extract-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for knowledge-extract-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/knowledge-extract-pro.md"
+ ],
+ "agentName": "knowledge-extract-pro",
+ "displayName": {
+  "zh": "知识提取 要点提取 结构化",
+  "en": "knowledge-extract-pro"
+ },
+ "profession": {
+  "zh": "知识提取 要点归纳 顾问",
+  "en": "knowledge-extract-pro"
+ },
+ "displayDescription": {
+  "zh": "知识提取 要点归纳 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "knowledge-extract-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "知识提取",
+   "en": "knowledge-extract-pro"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到知识提取怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划知识提取",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查知识提取",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到知识提取怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/knowledge-extract-pro-1/",
+  "./skills/knowledge-extract-pro-2/",
+  "./skills/knowledge-extract-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "知识提取专家",
+  "to": "知识提取 要点提取 结构化",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

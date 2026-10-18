@@ -1,0 +1,72 @@
+{
+ "name": "expat-relocation-pro-1",
+ "version": "2.0.0",
+ "domain": "外派安置",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "签证前置",
+   "then": "签证与工作许可先行办理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "过渡住房",
+   "then": "提供落地初期过渡住房",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "教育对接",
+   "then": "提前对接随行子女教育信息",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "语言支持",
+   "then": "提供基础语言与生活培训",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "家属融入",
+   "then": "关注随行家属适应情况",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "签证前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过渡住房",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "教育对接",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "语言支持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "家属融入",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

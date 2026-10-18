@@ -1,0 +1,121 @@
+{
+ "name": "prep-batch",
+ "version": "2.0.0",
+ "domain": "家庭餐食",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "工作日没时间",
+   "then": "周末集中预处理（洗切分装），工作日只做加热与调味",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变质浪费",
+   "then": "分装按单次用量，反复解冻是变质主因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "冷冻串味",
+   "then": "按类别分区并标日期，生熟分层",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "叶菜发黄",
+   "then": "叶菜不预洗，用厨房纸包裹冷藏，洗后即烂",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "剩菜",
+   "then": "剩菜 24 小时内复热一次，超时不留",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "备菜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保鲜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冷冻",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "工作日没时间",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变质浪费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冷冻串味",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "叶菜发黄",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "剩菜",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "长期",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,107 @@
+{
+ "name": "Product Description Pro",
+ "description": "商品详情专家：详情页的合规红线；详情页的内容编排；产品卖点的梳理与排序。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/product-description-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/product-description-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "compliance",
+   "name": "详情页的合规红线",
+   "description": "详情页的合规红线",
+   "tags": [
+    "合规",
+    "违规",
+    "极限词",
+    "宣传"
+   ],
+   "examples": [
+    "遇到极限词",
+    "遇到功效宣称",
+    "遇到虚假承诺",
+    "遇到对比贬低",
+    "遇到价格"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "compliance",
+    "to": "compliance",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "detail-structure",
+   "name": "详情页的内容编排",
+   "description": "详情页的内容编排",
+   "tags": [
+    "详情",
+    "结构",
+    "首屏",
+    "排版"
+   ],
+   "examples": [
+    "遇到首屏弱",
+    "遇到无场景",
+    "遇到参数堆砌",
+    "遇到无信任",
+    "遇到无行动"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "detail-structure",
+    "to": "detail-structure",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "selling-point",
+   "name": "产品卖点的梳理与排序",
+   "description": "产品卖点的梳理与排序",
+   "tags": [
+    "卖点",
+    "优势",
+    "提炼",
+    "差异化"
+   ],
+   "examples": [
+    "遇到自说自话",
+    "遇到无差异化",
+    "遇到排序混乱",
+    "遇到无证据",
+    "遇到卖点过多"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "selling-point",
+    "to": "selling-point",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "商品详情专家",
+ "x-source": "skill-factory-originals"
+}

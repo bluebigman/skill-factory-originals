@@ -1,0 +1,72 @@
+{
+ "name": "tech-writing-cn-1",
+ "version": "2.0.0",
+ "domain": "中文技术写作",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "读者先行",
+   "then": "按读者水平决定解释深度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "术语一致",
+   "then": "全文统一术语表",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "示例可跑",
+   "then": "代码示例须可直接运行",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "短句优先",
+   "then": "一句话表达一个意思",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结构清晰",
+   "then": "标题层级不超过三级",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "读者先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "术语一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例可跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "短句优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

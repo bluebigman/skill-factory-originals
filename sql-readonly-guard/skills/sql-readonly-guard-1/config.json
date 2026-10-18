@@ -1,0 +1,72 @@
+{
+ "name": "sql-readonly-guard-1",
+ "version": "2.0.0",
+ "domain": "只读查询守护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "强制只读",
+   "then": "连接层限制为只读",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "限制行数",
+   "then": "默认加行数上限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "超时保护",
+   "then": "设置查询超时",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "敏感列排除",
+   "then": "屏蔽敏感字段",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "审计留痕",
+   "then": "记录查询人与语句",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "强制只读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "限制行数",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超时保护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感列排除",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审计留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "name": "geography-knowledge-3",
+ "version": "2.0.0",
+ "domain": "地理常识",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看地图",
+   "then": "结论必须能在实际地图上验证",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看地图",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先看",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "地理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "常识",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

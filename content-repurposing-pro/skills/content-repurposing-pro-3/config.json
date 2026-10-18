@@ -1,0 +1,72 @@
+{
+ "name": "content-repurposing-pro-3",
+ "version": "2.0.0",
+ "domain": "内容复用",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一源多形",
+   "then": "一套内容多种形态",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "平台适配",
+   "then": "按平台调格式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "核心复用",
+   "then": "核心观点保持一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "避免重复",
+   "then": "避免自我重复",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "效果分测",
+   "then": "分平台测效果",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一源多形",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "平台适配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "核心复用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免重复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果分测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

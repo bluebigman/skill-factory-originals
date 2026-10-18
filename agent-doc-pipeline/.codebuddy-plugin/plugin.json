@@ -1,0 +1,74 @@
+{
+ "name": "agent-doc-pipeline",
+ "version": "1.0.0",
+ "plugin": "agent-doc-pipeline",
+ "description": "agent-doc-pipeline — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for agent-doc-pipeline tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-doc-pipeline.md"
+ ],
+ "agentName": "agent-doc-pipeline",
+ "displayName": {
+  "zh": "文档流水 解析保真 结构化",
+  "en": "agent-doc-pipeline"
+ },
+ "profession": {
+  "zh": "文档流水 解析 顾问",
+  "en": "agent-doc-pipeline"
+ },
+ "displayDescription": {
+  "zh": "文档流水 解析 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "agent-doc-pipeline: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "文档流水",
+   "en": "agent-doc-pipeline"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到文档流水怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划文档流水",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查文档流水",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到文档流水怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/agent-doc-pipeline-1/",
+  "./skills/agent-doc-pipeline-2/",
+  "./skills/agent-doc-pipeline-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "文档流水专家",
+  "to": "文档流水 解析保真 结构化",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

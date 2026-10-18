@@ -1,0 +1,72 @@
+{
+ "name": "doc-accessibility-pro-3",
+ "version": "2.0.0",
+ "domain": "文档可访",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构语义",
+   "then": "用语义化结构",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "替代文本",
+   "then": "图片须有替代文本",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "对比度",
+   "then": "文字对比度达标",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可导航",
+   "then": "支持键盘导航",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "表格说明",
+   "then": "复杂表格加说明",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构语义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "替代文本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可导航",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "表格说明",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

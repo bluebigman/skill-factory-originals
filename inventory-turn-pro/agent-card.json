@@ -1,0 +1,75 @@
+{
+ "name": "Inventory Turn Pro",
+ "description": "库存周转专家：覆盖 ABC 分类、安全库存 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/inventory-turn-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/inventory-turn-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "inventory-turn-pro-1",
+   "name": "针对 ABC 分类、安全库存 等情境给出可执行处置",
+   "description": "针对 ABC 分类、安全库存 等情境给出可执行处置",
+   "tags": [
+    "ABC 分类",
+    "安全库存"
+   ],
+   "examples": [
+    "遇到ABC 分类",
+    "遇到安全库存",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "inventory-turn-pro-2",
+   "name": "针对 呆滞口径、处置优先 等情境给出可执行处置",
+   "description": "针对 呆滞口径、处置优先 等情境给出可执行处置",
+   "tags": [
+    "呆滞口径",
+    "处置优先"
+   ],
+   "examples": [
+    "遇到呆滞口径",
+    "遇到处置优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "inventory-turn-pro-3",
+   "name": "针对 周转监控 等情境给出可执行处置",
+   "description": "针对 周转监控 等情境给出可执行处置",
+   "tags": [
+    "周转监控"
+   ],
+   "examples": [
+    "遇到周转监控",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "库存周转专家",
+ "x-source": "skill-factory-originals"
+}

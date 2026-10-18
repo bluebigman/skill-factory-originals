@@ -1,0 +1,58 @@
+{
+ "name": "family-meal-coach-1",
+ "version": "2.0.0",
+ "domain": "一周菜单",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "周末定菜",
+   "then": "一次定 7 天并生成采购清单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "主料轮换",
+   "then": "六类主料轮换",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "周末定菜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主料轮换",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "流程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "采购",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "搭配",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

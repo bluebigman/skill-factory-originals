@@ -1,0 +1,75 @@
+{
+ "name": "Pdf To Md",
+ "description": "转换解析专家：覆盖 分版式、表格优先、不臆造 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/pdf-to-md",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/pdf-to-md",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "pdf-to-md-1",
+   "name": "针对 分版式、表格优先 等情境给出可执行处置",
+   "description": "针对 分版式、表格优先 等情境给出可执行处置",
+   "tags": [
+    "分版式",
+    "表格优先"
+   ],
+   "examples": [
+    "遇到分版式",
+    "遇到表格优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pdf-to-md-2",
+   "name": "针对 不臆造、双列小心 等情境给出可执行处置",
+   "description": "针对 不臆造、双列小心 等情境给出可执行处置",
+   "tags": [
+    "不臆造",
+    "双列小心"
+   ],
+   "examples": [
+    "遇到不臆造",
+    "遇到双列小心",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pdf-to-md-3",
+   "name": "针对 抽样校验 等情境给出可执行处置",
+   "description": "针对 抽样校验 等情境给出可执行处置",
+   "tags": [
+    "抽样校验"
+   ],
+   "examples": [
+    "遇到抽样校验",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "转换解析专家",
+ "x-source": "skill-factory-originals"
+}

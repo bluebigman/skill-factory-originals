@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "forge-demo-acceptance",
+ "name": "验收标准 可测量、写清边界、前置确认",
+ "description": "验收标准：可测量、写清边界、前置确认",
+ "kind": "expert",
+ "tags": [
+  "forge-demo-acceptance-1",
+  "forge-demo-acceptance-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "forge-demo-acceptance-core",
+   "name": "验收标准",
+   "role": "core",
+   "items": [
+    {
+     "id": "forge-demo-acceptance-1",
+     "name": "验收标准制定",
+     "summary": "可测量、写清边界、前置确认"
+    },
+    {
+     "id": "forge-demo-acceptance-2",
+     "name": "验收用例编写",
+     "summary": "可测量、写清边界、前置确认"
+    },
+    {
+     "id": "forge-demo-acceptance-3",
+     "name": "验收结果判定",
+     "summary": "可测量、写清边界、前置确认"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

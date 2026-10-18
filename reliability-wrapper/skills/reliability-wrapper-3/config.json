@@ -1,0 +1,79 @@
+{
+ "name": "reliability-wrapper-3",
+ "version": "2.0.0",
+ "domain": "重试熔断",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "重复执行副作用",
+   "then": "写操作须带幂等键，重复执行结果一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "状态不一致",
+   "then": "中断后可断点续跑，且续跑不产生重复副作用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "断点丢失",
+   "then": "进度必须落盘，内存态进度视同没有",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "重复执行副作用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "状态不一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "断点丢失",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "消耗",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "操作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "进度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降级",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "即停",
+   "source": "SKILL.md#L59"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

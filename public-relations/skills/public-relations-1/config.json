@@ -1,0 +1,72 @@
+{
+ "name": "public-relations-1",
+ "version": "2.0.0",
+ "domain": "公关传播",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "信息一致",
+   "then": "多方信息一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分层传播",
+   "then": "按受众分层",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时机把握",
+   "then": "把握发布时机",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "效果监测",
+   "then": "监测传播效果",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "风险预案",
+   "then": "负面预案",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "信息一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层传播",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时机把握",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果监测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险预案",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

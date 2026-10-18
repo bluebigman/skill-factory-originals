@@ -1,0 +1,78 @@
+{
+ "name": "history-context-read-2",
+ "version": "2.0.0",
+ "domain": "历史脉络",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "区分史料",
+   "then": "区分一手史料与后世叙述",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "避免以今度古",
+   "then": "不用当代价值观直接评判古人选择",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "区分史料",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免以今度古",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "理解",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "选择",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "价值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "历史",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先看",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "地理",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "同时",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "incident-severity",
+ "version": "1.0.0",
+ "plugin": "incident-severity",
+ "description": "incident-severity — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for incident-severity tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/incident-severity.md"
+ ],
+ "agentName": "incident-severity",
+ "displayName": {
+  "zh": "事件分级标准 按影响分级",
+  "en": "incident-severity"
+ },
+ "profession": {
+  "zh": "事件分级标准 顾问",
+  "en": "incident-severity"
+ },
+ "displayDescription": {
+  "zh": "事件分级标准 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "incident-severity: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "事件分级标准",
+   "en": "incident-severity"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到事件分级标准怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划事件分级标准",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查事件分级标准",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到事件分级标准怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/incident-severity-1/",
+  "./skills/incident-severity-2/",
+  "./skills/incident-severity-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:41",
+  "from": "事件分级标准专家",
+  "to": "事件分级标准 按影响分级",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

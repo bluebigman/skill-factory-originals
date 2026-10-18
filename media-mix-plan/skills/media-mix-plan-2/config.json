@@ -1,0 +1,72 @@
+{
+ "name": "media-mix-plan-2",
+ "version": "2.0.0",
+ "domain": "媒介组合规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标对齐",
+   "then": "按目标选媒介",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "受众匹配",
+   "then": "按受众习惯选",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "预算分配",
+   "then": "核心媒介占大头",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "效果可测",
+   "then": "每种媒介可测",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期优化",
+   "then": "按数据调整组合",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "受众匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算分配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果可测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期优化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

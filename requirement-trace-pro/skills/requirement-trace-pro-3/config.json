@@ -1,0 +1,72 @@
+{
+ "name": "requirement-trace-pro-3",
+ "version": "2.0.0",
+ "domain": "需求追踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "双向追踪",
+   "then": "需求到实现双向可追",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "覆盖验证",
+   "then": "每条需求有实现",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "变更影响",
+   "then": "需求变更算影响面",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "验收对齐",
+   "then": "验收与需求对应",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "追踪过程留痕",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "双向追踪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更影响",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "验收对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

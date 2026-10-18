@@ -1,0 +1,72 @@
+{
+ "name": "agent-version-compat-3",
+ "version": "2.0.0",
+ "domain": "版本兼容",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "兼容优先",
+   "then": "优先兼容式变更",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "弃用预告",
+   "then": "弃用须提前公告",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "双轨过渡",
+   "then": "新旧并行一段时间",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "迁移指引",
+   "then": "给出迁移步骤",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "强制截止",
+   "then": "设强制下线时间",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "兼容优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "弃用预告",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双轨过渡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "迁移指引",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "强制截止",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

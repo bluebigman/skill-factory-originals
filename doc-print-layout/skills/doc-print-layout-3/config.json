@@ -1,0 +1,72 @@
+{
+ "name": "doc-print-layout-3",
+ "version": "2.0.0",
+ "domain": "文档打印排版",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "页边距统一",
+   "then": "全文统一页边距",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分页控制",
+   "then": "避免标题孤立在页尾",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "页眉页脚",
+   "then": "含页码与文档标识",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "黑白可读",
+   "then": "确保黑白打印可辨",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "打印预览",
+   "then": "逐页检查分页",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "页边距统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分页控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "页眉页脚",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "黑白可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打印预览",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

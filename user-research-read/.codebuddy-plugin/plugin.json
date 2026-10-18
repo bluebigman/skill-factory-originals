@@ -1,0 +1,74 @@
+{
+ "name": "user-research-read",
+ "version": "1.0.0",
+ "plugin": "user-research-read",
+ "description": "User Research Read for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/user-research-read.md"
+ ],
+ "skills": [
+  "./skills/user-research-read-1",
+  "./skills/user-research-read-2",
+  "./skills/user-research-read-3"
+ ],
+ "expertType": "agent",
+ "agentName": "user-research-read",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "User Research Read",
+  "zh": "用户调研 问过去不问将来"
+ },
+ "profession": {
+  "en": "User Research Read",
+  "zh": "用户调研 访谈提纲 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles User Research Read tasks end-to-end with built-in professional skills.",
+  "zh": "用户调研 访谈提纲 顾问：覆盖 问过去不问将来、少问多听 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "用户调研",
+   "en": "user-research-read"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到用户调研怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到访谈提纲怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到用户调研怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "用户调研专家",
+  "to": "用户调研 问过去不问将来",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

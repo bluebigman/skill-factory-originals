@@ -1,0 +1,72 @@
+{
+ "name": "query-optimize-3",
+ "version": "2.0.0",
+ "domain": "查询优化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看计划",
+   "then": "未看执行计划不优化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "索引匹配",
+   "then": "确认条件走索引",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "避免函数包裹",
+   "then": "条件列上不用函数",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "小结果验证",
+   "then": "先限量试跑",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "改写对比",
+   "then": "改写后对比耗时",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免函数包裹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小结果验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改写对比",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

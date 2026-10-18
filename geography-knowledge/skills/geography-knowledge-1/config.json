@@ -1,0 +1,58 @@
+{
+ "name": "geography-knowledge-1",
+ "version": "2.0.0",
+ "domain": "地理常识",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看纬度",
+   "then": "纬度决定基础气候带",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "海陆位置",
+   "then": "海陆位置决定降水与温差",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看纬度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "海陆位置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "地理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "常识",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "name": "fairness-script",
+ "version": "2.0.0",
+ "domain": "二孩冲突",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "比较",
+   "then": "只跟自己的过去比，禁止横向比较具体化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "你看哥哥",
+   "then": "改为你上次这件事是怎么解决的？",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "偏心",
+   "then": "承认差异（年龄/性格），但保证时间与情感投入可见",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "比较",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "你看哥哥",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "偏心",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L62"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "选择",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "自己",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "差异",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "单独",
+   "source": "SKILL.md#L62"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

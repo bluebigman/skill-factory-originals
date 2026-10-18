@@ -1,0 +1,74 @@
+{
+ "name": "script-structure-2",
+ "version": "2.0.0",
+ "domain": "脚本结构",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "中段给证据",
+   "then": "中段用案例或数据支撑主张",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结尾给动作",
+   "then": "结尾明确让观众下一步做什么",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "中段给证据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾给动作",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "单点",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "悬念",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "只讲",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

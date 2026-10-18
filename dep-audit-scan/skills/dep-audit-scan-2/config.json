@@ -1,0 +1,72 @@
+{
+ "name": "dep-audit-scan-2",
+ "version": "2.0.0",
+ "domain": "依赖安全审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "仅用直接依赖",
+   "then": "传递依赖锁版本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "漏洞比对",
+   "then": "对照公开漏洞库按严重度排序",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "许可证核查",
+   "then": "确认许可证与商用兼容",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "升级影响",
+   "then": "升级前看变更日志与破坏性改动",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可复现构建",
+   "then": "锁定文件入库",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "仅用直接依赖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "漏洞比对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "许可证核查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "升级影响",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复现构建",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

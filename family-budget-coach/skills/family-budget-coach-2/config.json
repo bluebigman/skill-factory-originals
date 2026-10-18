@@ -1,0 +1,78 @@
+{
+ "name": "family-budget-coach-2",
+ "version": "2.0.0",
+ "domain": "家庭收支",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "固定支出",
+   "then": "每年重签订阅清单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "应急金",
+   "then": "预留 3-6 个月支出",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "固定支出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "应急金",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "只记",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "三类",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "预留",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "全量",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "放弃",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

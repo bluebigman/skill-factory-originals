@@ -1,0 +1,78 @@
+{
+ "name": "sheet-batch-calc-2",
+ "version": "2.0.0",
+ "domain": "表格批量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "整列引用",
+   "then": "整列引用比逐格快，但避开空行污染",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分块计算",
+   "then": "大表按区块分段算，便于定位异常块",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "整列引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分块计算",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "返工",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

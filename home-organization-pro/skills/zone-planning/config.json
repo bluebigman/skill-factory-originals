@@ -1,0 +1,113 @@
+{
+ "name": "zone-planning",
+ "version": "2.0.0",
+ "domain": "家庭收纳",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "随手乱放",
+   "then": "在动作结束点设置容身位（玄关放钥匙），不要靠自律",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "找不到",
+   "then": "按使用场景分区而非按物品类别，场景检索更符合直觉",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "高频占优",
+   "then": "最高频物品放 60cm 触手区，低频上高处",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "动线冲突",
+   "then": "先记录一周动线再定收纳位，凭想象必然返工",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "重复购买",
+   "then": "同品类集中一处并贴标签，散放必重复购买",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "收纳",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分区",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "随手乱放",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "找不到",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高频占优",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动线冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复购买",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "依据",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "自己",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "最高",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理由",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "集中",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

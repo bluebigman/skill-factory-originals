@@ -1,0 +1,72 @@
+{
+ "name": "metric-definition-pro-2",
+ "version": "2.0.0",
+ "domain": "指标定义",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "口径唯一",
+   "then": "一个指标只有一个口径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可复算",
+   "then": "任何人能按口径复算",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "维度明确",
+   "then": "指标的统计维度必须写明",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "陷阱标注",
+   "then": "常见误读须标注",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "口径变更须记录影响",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口径唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "维度明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "陷阱标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

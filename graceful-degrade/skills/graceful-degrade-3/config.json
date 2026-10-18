@@ -1,0 +1,72 @@
+{
+ "name": "graceful-degrade-3",
+ "version": "2.0.0",
+ "domain": "服务降级方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级降级",
+   "then": "按重要度分级降级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "降级开关",
+   "then": "可快速开关",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "默认安全",
+   "then": "降级后仍安全可用",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "用户可见",
+   "then": "告知用户当前状态",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "恢复自动",
+   "then": "条件恢复自动回升",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级降级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "降级开关",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "默认安全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用户可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复自动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

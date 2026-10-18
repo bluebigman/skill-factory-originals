@@ -1,0 +1,74 @@
+{
+ "name": "time-management-pro",
+ "version": "1.0.0",
+ "plugin": "time-management-pro",
+ "description": "Time Management Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/time-management-pro.md"
+ ],
+ "skills": [
+  "./skills/focus",
+  "./skills/priority",
+  "./skills/review-time"
+ ],
+ "expertType": "agent",
+ "agentName": "time-management-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Time Management Pro",
+  "zh": "时间管理 频繁打断 多任务"
+ },
+ "profession": {
+  "en": "Time Management Pro",
+  "zh": "时间管理 番茄工作 优先级"
+ },
+ "displayDescription": {
+  "en": "Handles Time Management Pro tasks end-to-end with built-in professional skills.",
+  "zh": "时间管理 番茄工作 优先级：深度工作的执行方法；任务优先级的判定；时间使用的检视。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "频繁打断"
+  },
+  {
+   "en": "practical capability",
+   "zh": "多任务"
+  },
+  {
+   "en": "practical capability",
+   "zh": "从难的做起"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到频繁打断怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到多任务怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到从难的做起怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到频繁打断怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "时间管理专家",
+  "to": "时间管理 频繁打断 多任务",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

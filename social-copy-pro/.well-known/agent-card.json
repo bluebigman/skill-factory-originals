@@ -1,0 +1,107 @@
+{
+ "name": "Social Copy Pro",
+ "description": "社媒文案专家：抓注意力的开头写法；评论与转化的引导设计；不同平台的内容适配。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/social-copy-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/social-copy-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "hook-writing",
+   "name": "抓注意力的开头写法",
+   "description": "抓注意力的开头写法",
+   "tags": [
+    "开头",
+    "标题",
+    "吸引",
+    "划走"
+   ],
+   "examples": [
+    "遇到开头平淡",
+    "遇到自嗨",
+    "遇到信息模糊",
+    "遇到太长",
+    "遇到套路化"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "hook-writing",
+    "to": "hook-writing",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "interaction",
+   "name": "评论与转化的引导设计",
+   "description": "评论与转化的引导设计",
+   "tags": [
+    "互动",
+    "评论",
+    "转化",
+    "引导"
+   ],
+   "examples": [
+    "遇到无引导",
+    "遇到硬广",
+    "遇到不回复",
+    "遇到差评",
+    "遇到转化漏斗"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "interaction",
+    "to": "interaction",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "platform-fit",
+   "name": "不同平台的内容适配",
+   "description": "不同平台的内容适配",
+   "tags": [
+    "平台",
+    "适配",
+    "格式",
+    "字数"
+   ],
+   "examples": [
+    "遇到一套多投",
+    "遇到格式忽略",
+    "遇到标签随意",
+    "遇到发布时机",
+    "遇到违规词"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "platform-fit",
+    "to": "platform-fit",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "社媒文案专家",
+ "x-source": "skill-factory-originals"
+}

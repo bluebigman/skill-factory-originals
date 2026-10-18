@@ -1,0 +1,121 @@
+{
+ "name": "hazard-scan",
+ "version": "2.0.0",
+ "domain": "居家安全",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "儿童风险",
+   "then": "按高度排查：地面（插座/桌角）-1米（窗/灶）-1米以上（柜/重物）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "燃气",
+   "then": "厨房装燃气报警器并定期换电池，嗅觉不可靠",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "用电",
+   "then": "大功率电器独立插座，拖线板串接是首要起火源",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "坠物",
+   "then": "高柜须墙体固定，未固定的高柜在地震或攀爬时必倒",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "滑倒",
+   "then": "湿区防滑与夜间照明是跌倒的两大主因",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "隐患",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "儿童风险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "燃气",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用电",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坠物",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "滑倒",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

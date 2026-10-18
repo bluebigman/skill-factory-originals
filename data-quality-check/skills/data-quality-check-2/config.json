@@ -1,0 +1,72 @@
+{
+ "name": "data-quality-check-2",
+ "version": "2.0.0",
+ "domain": "数据质量核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "完整性",
+   "then": "关键字段缺失率",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "唯一性",
+   "then": "主键与业务键去重检查",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "一致性",
+   "then": "跨表关联字段口径一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "时效性",
+   "then": "数据延迟是否达标",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "异常值",
+   "then": "分布外的值人工复核",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "完整性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "唯一性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一致性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常值",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

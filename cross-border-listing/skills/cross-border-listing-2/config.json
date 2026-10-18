@@ -1,0 +1,62 @@
+{
+ "name": "cross-border-listing-2",
+ "version": "2.0.0",
+ "domain": "跨境上架",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标题本地写",
+   "then": "标题用当地人搜的词，不直译",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "合规标识",
+   "then": "认证标识与警示语按当地法规",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标题本地写",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规标识",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "按目",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "语言",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先查",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

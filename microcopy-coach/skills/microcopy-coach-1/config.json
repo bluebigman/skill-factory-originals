@@ -1,0 +1,72 @@
+{
+ "name": "microcopy-coach-1",
+ "version": "2.0.0",
+ "domain": "界面文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "动词开头",
+   "then": "按钮文案用动词开头",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "说人话",
+   "then": "避免术语堆叠与内部黑话",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "称谓统一",
+   "then": "全文称谓与语气统一",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "场景匹配",
+   "then": "错误文案要给解决路径",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "长度克制",
+   "then": "按控件可容纳长度撰写",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "动词开头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说人话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "称谓统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "场景匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长度克制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

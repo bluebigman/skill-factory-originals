@@ -1,0 +1,74 @@
+{
+ "name": "seo-content-plan",
+ "version": "1.0.0",
+ "plugin": "seo-content-plan",
+ "description": "Seo Content Plan for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/seo-content-plan.md"
+ ],
+ "skills": [
+  "./skills/seo-content-plan-1",
+  "./skills/seo-content-plan-2",
+  "./skills/seo-content-plan-3"
+ ],
+ "expertType": "agent",
+ "agentName": "seo-content-plan",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Seo Content Plan",
+  "zh": "选题布局 需求优先 一页一意图"
+ },
+ "profession": {
+  "en": "Seo Content Plan",
+  "zh": "内容SEO 选题布局 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Seo Content Plan tasks end-to-end with built-in professional skills.",
+  "zh": "内容SEO 选题布局 顾问：覆盖 需求优先、一页一意图 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "需求优先"
+  },
+  {
+   "en": "practical capability",
+   "zh": "一页一意图"
+  },
+  {
+   "en": "practical capability",
+   "zh": "内链结构"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到需求优先怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到一页一意图怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到内链结构怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到需求优先怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:50",
+  "from": "选题布局专家",
+  "to": "选题布局 需求优先 一页一意图",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

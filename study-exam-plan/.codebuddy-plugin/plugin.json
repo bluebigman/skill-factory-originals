@@ -1,0 +1,74 @@
+{
+ "name": "study-exam-plan",
+ "version": "1.0.0",
+ "plugin": "study-exam-plan",
+ "description": "Study Exam Plan for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/study-exam-plan.md"
+ ],
+ "skills": [
+  "./skills/study-exam-plan-1",
+  "./skills/study-exam-plan-2",
+  "./skills/study-exam-plan-3"
+ ],
+ "expertType": "agent",
+ "agentName": "study-exam-plan",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Study Exam Plan",
+  "zh": "备考计划 倒排 真题优先"
+ },
+ "profession": {
+  "en": "Study Exam Plan",
+  "zh": "备考计划 冲刺编排 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Study Exam Plan tasks end-to-end with built-in professional skills.",
+  "zh": "备考计划 冲刺编排 顾问：覆盖 倒排、真题优先、错题驱动 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "备考计划",
+   "en": "study-exam-plan"
+  },
+  {
+   "en": "Education",
+   "zh": "Education"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到备考计划怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到冲刺编排怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到备考计划怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "备考计划专家",
+  "to": "备考计划 倒排 真题优先",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

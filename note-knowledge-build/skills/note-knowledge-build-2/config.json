@@ -1,0 +1,78 @@
+{
+ "name": "note-knowledge-build-2",
+ "version": "2.0.0",
+ "domain": "笔记知识库",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "命名规范",
+   "then": "标题即结论，便于搜索命中",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "来源标注",
+   "then": "每条外部观点标来源与日期",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "命名规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源标注",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "替代",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每条",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "件事",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "笔记",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "观点",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "链接",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

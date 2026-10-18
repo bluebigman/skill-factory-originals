@@ -1,0 +1,75 @@
+{
+ "name": "Mes Line Balance Pro",
+ "description": "产线节拍专家：覆盖 瓶颈优先、节拍对齐、在制上限 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/mes-line-balance-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/mes-line-balance-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "mes-line-balance-pro-1",
+   "name": "针对 瓶颈优先、节拍对齐 等情境给出可执行处置",
+   "description": "针对 瓶颈优先、节拍对齐 等情境给出可执行处置",
+   "tags": [
+    "瓶颈优先",
+    "节拍对齐"
+   ],
+   "examples": [
+    "遇到瓶颈优先",
+    "遇到节拍对齐",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mes-line-balance-pro-2",
+   "name": "针对 在制上限、换型压缩 等情境给出可执行处置",
+   "description": "针对 在制上限、换型压缩 等情境给出可执行处置",
+   "tags": [
+    "在制上限",
+    "换型压缩"
+   ],
+   "examples": [
+    "遇到在制上限",
+    "遇到换型压缩",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mes-line-balance-pro-3",
+   "name": "针对 实测验证 等情境给出可执行处置",
+   "description": "针对 实测验证 等情境给出可执行处置",
+   "tags": [
+    "实测验证"
+   ],
+   "examples": [
+    "遇到实测验证",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "产线节拍专家",
+ "x-source": "skill-factory-originals"
+}

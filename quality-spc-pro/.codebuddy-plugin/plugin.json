@@ -1,0 +1,74 @@
+{
+ "name": "quality-spc-pro",
+ "version": "1.0.0",
+ "plugin": "quality-spc-pro",
+ "description": "Quality Spc Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/quality-spc-pro.md"
+ ],
+ "skills": [
+  "./skills/quality-spc-pro-1",
+  "./skills/quality-spc-pro-2",
+  "./skills/quality-spc-pro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "quality-spc-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Quality Spc Pro",
+  "zh": "过程质量 先稳后控 合理分组"
+ },
+ "profession": {
+  "en": "Quality Spc Pro",
+  "zh": "过程质量 控制图 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Quality Spc Pro tasks end-to-end with built-in professional skills.",
+  "zh": "过程质量 控制图 顾问：覆盖 先稳后控、合理分组、失控先查 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "过程质量",
+   "en": "quality-spc-pro"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到过程质量怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到控制图怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到过程质量怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "过程质量专家",
+  "to": "过程质量 先稳后控 合理分组",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

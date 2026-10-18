@@ -1,0 +1,72 @@
+{
+ "name": "map-visual-design-3",
+ "version": "2.0.0",
+ "domain": "地图可视化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级设色",
+   "then": "按数值分级而非连续插值",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "色盲友好",
+   "then": "避免仅靠红绿区分",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "图例齐全",
+   "then": "图例、单位与范围必须标注",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "投影统一",
+   "then": "同一组图统一投影与范围",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "不误导",
+   "then": "视觉面积与数值关系不得夸大",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级设色",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "色盲友好",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图例齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "投影统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不误导",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

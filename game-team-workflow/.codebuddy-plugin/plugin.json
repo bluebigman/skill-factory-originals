@@ -1,0 +1,74 @@
+{
+ "name": "game-team-workflow",
+ "version": "1.0.0",
+ "plugin": "game-team-workflow",
+ "description": "game-team-workflow — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for game-team-workflow tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/game-team-workflow.md"
+ ],
+ "agentName": "game-team-workflow",
+ "displayName": {
+  "zh": "游戏团队 里程碑制 资产管线",
+  "en": "game-team-workflow"
+ },
+ "profession": {
+  "zh": "游戏团队 协作流程 顾问",
+  "en": "game-team-workflow"
+ },
+ "displayDescription": {
+  "zh": "游戏团队 协作流程 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "game-team-workflow: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "游戏团队",
+   "en": "game-team-workflow"
+  },
+  {
+   "en": "OperationsHR",
+   "zh": "OperationsHR"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到游戏团队怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划游戏团队",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查游戏团队",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到游戏团队怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/game-team-workflow-1",
+  "./skills/game-team-workflow-2",
+  "./skills/game-team-workflow-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "游戏团队专家",
+  "to": "游戏团队 里程碑制 资产管线",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

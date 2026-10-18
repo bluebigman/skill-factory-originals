@@ -1,0 +1,72 @@
+{
+ "name": "cross-border-listing-pro-2",
+ "version": "2.0.0",
+ "domain": "跨境选品",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先查禁售",
+   "then": "先查目的地禁售与认证要求",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "类目准入",
+   "then": "确认类目准入与资质门槛",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "成本预判",
+   "then": "预判关税、合规与退货成本",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "描述本地化",
+   "then": "描述与计量单位本地化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "小单验证",
+   "then": "先小批量试单再放量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先查禁售",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类目准入",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本预判",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "描述本地化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小单验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "doc-coauthor-flow-1",
+ "version": "2.0.0",
+ "domain": "文档协同编辑",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版本先行",
+   "then": "编辑前先同步最新版本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分区编辑",
+   "then": "按章节分工避免冲突",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "开启修订记录",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "合并规则",
+   "then": "冲突时以最新为准并标注",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定稿冻结",
+   "then": "定稿后只读",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版本先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分区编辑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合并规则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定稿冻结",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "file-organize-rules",
+ "version": "1.0.0",
+ "plugin": "file-organize-rules",
+ "description": "file-organize-rules — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for file-organize-rules tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/file-organize-rules.md"
+ ],
+ "agentName": "file-organize-rules",
+ "displayName": {
+  "zh": "文件归集整理 先分类后移动",
+  "en": "file-organize-rules"
+ },
+ "profession": {
+  "zh": "文件归集整理 助手",
+  "en": "file-organize-rules"
+ },
+ "displayDescription": {
+  "zh": "文件归集整理 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "file-organize-rules: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "文件归集整理",
+   "en": "file-organize-rules"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到文件归集整理怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划文件归集整理",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查文件归集整理",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到文件归集整理怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/file-organize-rules-1/",
+  "./skills/file-organize-rules-2/",
+  "./skills/file-organize-rules-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "文件归集整理专家",
+  "to": "文件归集整理 先分类后移动",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

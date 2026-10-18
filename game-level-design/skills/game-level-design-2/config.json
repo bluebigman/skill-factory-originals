@@ -1,0 +1,78 @@
+{
+ "name": "game-level-design-2",
+ "version": "2.0.0",
+ "domain": "游戏关卡",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "给反馈",
+   "then": "每次失败都要让玩家知道输在哪",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "多路径",
+   "then": "关键关卡至少给两种通关思路",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "给反馈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多路径",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "安全",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "持续",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每次",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先给",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "强度",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "机制",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

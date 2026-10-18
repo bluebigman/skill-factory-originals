@@ -1,0 +1,74 @@
+{
+ "name": "secrets-management",
+ "version": "1.0.0",
+ "plugin": "secrets-management",
+ "description": "secrets-management — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for secrets-management tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/secrets-management.md"
+ ],
+ "agentName": "secrets-management",
+ "displayName": {
+  "zh": "密钥安全管理 不入库 环境隔离",
+  "en": "secrets-management"
+ },
+ "profession": {
+  "zh": "密钥安全管理 顾问",
+  "en": "secrets-management"
+ },
+ "displayDescription": {
+  "zh": "密钥安全管理 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "secrets-management: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "密钥安全管理",
+   "en": "secrets-management"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到密钥安全管理怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划密钥安全管理",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查密钥安全管理",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到密钥安全管理怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/secrets-management-1/",
+  "./skills/secrets-management-2/",
+  "./skills/secrets-management-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:49",
+  "from": "密钥安全管理专家",
+  "to": "密钥安全管理 不入库 环境隔离",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

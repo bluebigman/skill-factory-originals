@@ -1,0 +1,53 @@
+{
+ "name": "home-moving-checklist-3",
+ "version": "2.0.0",
+ "domain": "搬家准备",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "入住前置",
+   "then": "入住前开通水电燃气网络",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "入住前置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "准备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "证件",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "燃气",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

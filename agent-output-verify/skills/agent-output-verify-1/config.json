@@ -1,0 +1,87 @@
+{
+ "name": "agent-output-verify-1",
+ "version": "2.0.0",
+ "domain": "输出验证",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无来源断言",
+   "then": "要求提供来源或降级为「待核验」，不得直接采信",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数字不可核",
+   "then": "标记为不可核验，禁止用于决策；能重算的必须重算",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结论先行",
+   "then": "回溯证据链，检查是否为「先定结论再补理由」",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "无来源断言",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数字不可核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "证据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理由",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标记",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "再补",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

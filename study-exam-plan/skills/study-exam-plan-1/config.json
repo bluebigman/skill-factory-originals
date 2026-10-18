@@ -1,0 +1,54 @@
+{
+ "name": "study-exam-plan-1",
+ "version": "2.0.0",
+ "domain": "备考计划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "倒排",
+   "then": "从现在倒排到考试日",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "真题优先",
+   "then": "真题优先于模拟题",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "倒排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "真题优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "rollback-safety-2",
+ "version": "2.0.0",
+ "domain": "回滚安全性",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "数据兼容",
+   "then": "回滚后数据结构兼容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "脚本就绪",
+   "then": "回滚脚本与发布同步准备",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "演练定期",
+   "then": "定期演练回滚",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "判定量化",
+   "then": "写清触发回滚的条件",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时长可控",
+   "then": "明确回滚所需时间",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数据兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脚本就绪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "演练定期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "判定量化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时长可控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

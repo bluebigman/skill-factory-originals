@@ -1,0 +1,121 @@
+{
+ "name": "digital",
+ "version": "2.0.0",
+ "domain": "极简整理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "相册爆满",
+   "then": "按事件批量筛选，重复连拍只留最佳一张",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "通知轰炸",
+   "then": "关闭全部非必要通知，需要时才打开",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "文件混乱",
+   "then": "按项目建目录并统一命名（日期-主题-版本）",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "订阅失控",
+   "then": "每年盘点一次订阅清单并取消近 3 个月未用项",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "聊天堆积",
+   "then": "无保留价值的群聊定期退出，注意力是稀缺资源",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数字整理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "照片",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "相册爆满",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "通知轰炸",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文件混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "订阅失控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "聊天堆积",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "价值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "命名",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "注意",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "主题",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "physical",
+ "version": "2.0.0",
+ "domain": "极简整理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "舍不得",
+   "then": "以是否一年内使用为硬线，情感物品限量设箱",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一次性全扔",
+   "then": "分批处理，一次性大清理往往后悔并报复性回购",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "只看价格",
+   "then": "已支付成本不可回收，保留不构成省钱",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "待定堆积",
+   "then": "待定箱封存 90 天，未开箱即可处理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "替代购买",
+   "then": "已在用的功能重复品先处理旧的再考虑新增",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "断舍离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "扔东西",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "囤积",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "取舍",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "舍不得",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一次性全扔",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只看价格",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "待定堆积",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "替代购买",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定期",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "日期",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "混乱",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "失控",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "全部",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "价值",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

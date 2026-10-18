@@ -1,0 +1,66 @@
+{
+ "name": "game-copy-write-1",
+ "version": "2.0.0",
+ "domain": "游戏文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定语气",
+   "then": "先定整体语气基调并写成示例",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "术语统一",
+   "then": "同一事物全文用同一名称",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定语气",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "术语统一",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "游戏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "用同",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

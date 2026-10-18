@@ -1,0 +1,72 @@
+{
+ "name": "input-validation-rule-3",
+ "version": "2.0.0",
+ "domain": "输入校验规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "白名单优先",
+   "then": "允许列表优于黑名单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "边界与类型",
+   "then": "长度类型范围",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "规范后再用",
+   "then": "规范化后再校验",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "服务端必验",
+   "then": "前端校验不可信",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "错误不泄露",
+   "then": "错误信息不含内部细节",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "白名单优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界与类型",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规范后再用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "服务端必验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误不泄露",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

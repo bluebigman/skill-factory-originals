@@ -1,0 +1,74 @@
+{
+ "name": "spatial-layout-pro",
+ "version": "1.0.0",
+ "plugin": "spatial-layout-pro",
+ "description": "spatial-layout-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for spatial-layout-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/spatial-layout-pro.md"
+ ],
+ "agentName": "spatial-layout-pro",
+ "displayName": {
+  "zh": "空间布局 主动线最短 入口焦点",
+  "en": "spatial-layout-pro"
+ },
+ "profession": {
+  "zh": "空间布局 动线设计 顾问",
+  "en": "spatial-layout-pro"
+ },
+ "displayDescription": {
+  "zh": "空间布局 动线设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "spatial-layout-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "空间布局",
+   "en": "spatial-layout-pro"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到空间布局怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划空间布局",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查空间布局",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到空间布局怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/spatial-layout-pro-1/",
+  "./skills/spatial-layout-pro-2/",
+  "./skills/spatial-layout-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "空间布局专家",
+  "to": "空间布局 主动线最短 入口焦点",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

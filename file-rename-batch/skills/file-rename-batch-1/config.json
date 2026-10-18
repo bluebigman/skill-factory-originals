@@ -1,0 +1,62 @@
+{
+ "name": "file-rename-batch-1",
+ "version": "2.0.0",
+ "domain": "文件批量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先预览",
+   "then": "先出预览清单确认无误再执行",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "命名模板",
+   "then": "统一模板：日期_主题_版本",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先预览",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名模板",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "主题",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

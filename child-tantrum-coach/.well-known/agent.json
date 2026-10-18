@@ -1,0 +1,67 @@
+{
+ "name": "Child Tantrum Coach",
+ "description": "幼儿情绪专家：覆盖 理解发展、保证安全、短句低音、给选择、预先告知 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/child-tantrum-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-tantrum-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-tantrum-coach-1",
+   "name": "针对 理解发展、保证安全 等情境给出可执行处置",
+   "description": "针对 理解发展、保证安全 等情境给出可执行处置",
+   "tags": [
+    "理解发展",
+    "保证安全"
+   ],
+   "examples": [
+    "遇到理解发展",
+    "遇到保证安全",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-tantrum-coach-2",
+   "name": "针对 短句低音、给选择 等情境给出可执行处置",
+   "description": "针对 短句低音、给选择 等情境给出可执行处置",
+   "tags": [
+    "短句低音",
+    "给选择"
+   ],
+   "examples": [
+    "遇到短句低音",
+    "遇到给选择",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-tantrum-coach-3",
+   "name": "针对 预先告知 等情境给出可执行处置",
+   "description": "针对 预先告知 等情境给出可执行处置",
+   "tags": [
+    "预先告知"
+   ],
+   "examples": [
+    "遇到预先告知",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "幼儿情绪专家"
+}

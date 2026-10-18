@@ -1,0 +1,72 @@
+{
+ "name": "doc-sign-flow-3",
+ "version": "2.0.0",
+ "domain": "文档签署流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定流程",
+   "then": "明确签署方与顺序",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "版本冻结",
+   "then": "送签即冻结版本",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "条款对照",
+   "then": "送签前逐条对照审核意见",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "留痕归档",
+   "then": "签署记录与终稿一并归档",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时限提醒",
+   "then": "为各签署方设提醒时限",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本冻结",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条款对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕归档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时限提醒",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

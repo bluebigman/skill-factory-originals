@@ -1,0 +1,72 @@
+{
+ "name": "task-scheduler-3",
+ "version": "2.0.0",
+ "domain": "定时任务编排",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "错峰执行",
+   "then": "避开资源高峰",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "幂等保证",
+   "then": "重复触发不产生副作用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败告警",
+   "then": "连续失败即告警",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "执行留痕",
+   "then": "记录开始结束与结果",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "依赖等待",
+   "then": "前置任务未完成则等待",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "错峰执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "幂等保证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "执行留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖等待",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "kb-article-build-1",
+ "version": "2.0.0",
+ "domain": "知识库条目",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一篇一题",
+   "then": "一条只解决一个问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标题即问题",
+   "then": "标题写成用户会搜的问句",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "步骤可复现",
+   "then": "操作步骤含前置条件与预期结果",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "相互引用",
+   "then": "相关条目建立双向链接",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "标注最后复核日期",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一篇一题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题即问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "步骤可复现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "相互引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

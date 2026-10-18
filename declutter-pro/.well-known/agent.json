@@ -1,0 +1,99 @@
+{
+ "name": "Declutter Pro",
+ "description": "极简整理专家：数字空间的整理；长期维持的机制；实体物品的去留判断。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/declutter-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/declutter-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "digital",
+   "name": "数字空间的整理",
+   "description": "数字空间的整理",
+   "tags": [
+    "数字整理",
+    "手机",
+    "文件",
+    "照片"
+   ],
+   "examples": [
+    "遇到相册爆满",
+    "遇到通知轰炸",
+    "遇到文件混乱",
+    "遇到订阅失控",
+    "遇到聊天堆积"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:40",
+    "from": "digital",
+    "to": "digital",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "maintain",
+   "name": "长期维持的机制",
+   "description": "长期维持的机制",
+   "tags": [
+    "维持",
+    "反弹",
+    "复乱",
+    "习惯"
+   ],
+   "examples": [
+    "遇到反弹",
+    "遇到无位置",
+    "遇到间歇清理",
+    "遇到他人物品",
+    "遇到标准过严"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:40",
+    "from": "maintain",
+    "to": "maintain",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "physical",
+   "name": "实体物品的去留判断",
+   "description": "实体物品的去留判断",
+   "tags": [
+    "断舍离",
+    "扔东西",
+    "囤积",
+    "取舍"
+   ],
+   "examples": [
+    "遇到舍不得",
+    "遇到一次性全扔",
+    "遇到只看价格",
+    "遇到待定堆积",
+    "遇到替代购买"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:40",
+    "from": "physical",
+    "to": "physical",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "极简整理专家"
+}

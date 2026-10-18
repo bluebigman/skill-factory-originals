@@ -1,0 +1,65 @@
+{
+ "name": "topic-planning-3",
+ "version": "2.0.0",
+ "domain": "内容选题",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按数据调",
+   "then": "每月看一次数据，淘汰无人看的方向",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按数据调",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每月",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "同类",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "次数",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方向",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无人",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Dir Archive Rule",
+ "description": "目录归档专家：覆盖 三层上限、单一归属、归档即封存 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/dir-archive-rule",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/dir-archive-rule",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "dir-archive-rule-1",
+   "name": "针对 三层上限、单一归属 等情境给出可执行处置",
+   "description": "针对 三层上限、单一归属 等情境给出可执行处置",
+   "tags": [
+    "三层上限",
+    "单一归属"
+   ],
+   "examples": [
+    "遇到三层上限",
+    "遇到单一归属",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "dir-archive-rule-2",
+   "name": "针对 归档即封存、顶层固定 等情境给出可执行处置",
+   "description": "针对 归档即封存、顶层固定 等情境给出可执行处置",
+   "tags": [
+    "归档即封存",
+    "顶层固定"
+   ],
+   "examples": [
+    "遇到归档即封存",
+    "遇到顶层固定",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "dir-archive-rule-3",
+   "name": "针对 索引文件 等情境给出可执行处置",
+   "description": "针对 索引文件 等情境给出可执行处置",
+   "tags": [
+    "索引文件"
+   ],
+   "examples": [
+    "遇到索引文件",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "目录归档专家",
+ "x-source": "skill-factory-originals"
+}

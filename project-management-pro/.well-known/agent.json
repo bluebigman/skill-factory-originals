@@ -1,0 +1,99 @@
+{
+ "name": "Project Management Pro",
+ "description": "项目管理专家：会议纪要的结构与跟踪；项目任务的可执行拆解；进度的跟踪与汇报。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/project-management-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/project-management-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "meeting",
+   "name": "会议纪要的结构与跟踪",
+   "description": "会议纪要的结构与跟踪",
+   "tags": [
+    "会议记录",
+    "纪要",
+    "行动项",
+    "决议"
+   ],
+   "examples": [
+    "遇到流水账",
+    "遇到无人认领",
+    "遇到跟踪失效",
+    "遇到无争议记录",
+    "遇到时效"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "meeting",
+    "to": "meeting",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "plan",
+   "name": "项目任务的可执行拆解",
+   "description": "项目任务的可执行拆解",
+   "tags": [
+    "项目管理",
+    "拆解",
+    "任务",
+    "里程碑"
+   ],
+   "examples": [
+    "遇到任务过大",
+    "遇到无里程碑",
+    "遇到依赖不清",
+    "遇到估时拍脑袋",
+    "遇到范围蔓延"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "plan",
+    "to": "plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "track",
+   "name": "进度的跟踪与汇报",
+   "description": "进度的跟踪与汇报",
+   "tags": [
+    "进度跟踪",
+    "汇报",
+    "偏差",
+    "超期"
+   ],
+   "examples": [
+    "遇到完成度失真",
+    "遇到报喜不报忧",
+    "遇到无对比",
+    "遇到口径不一",
+    "遇到超期隐瞒"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:50",
+    "from": "track",
+    "to": "track",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "项目管理专家"
+}

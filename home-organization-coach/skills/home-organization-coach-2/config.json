@@ -1,0 +1,78 @@
+{
+ "name": "home-organization-coach-2",
+ "version": "2.0.0",
+ "domain": "收纳规则",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "高频占优",
+   "then": "60cm 触手区放最高频物品",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "进一出",
+   "then": "新物品进门先定位置",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "高频占优",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "进一出",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "最高",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "物品",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分区",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "检索",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "按类",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "定位置",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "结束",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

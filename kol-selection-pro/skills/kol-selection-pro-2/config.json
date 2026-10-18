@@ -1,0 +1,72 @@
+{
+ "name": "kol-selection-pro-2",
+ "version": "2.0.0",
+ "domain": "达人筛选",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "调性匹配",
+   "then": "先看受众结构与内容调性",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数据校验",
+   "then": "校验互动真实性剔除水分",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "小单试投",
+   "then": "先小额试投验证效果",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "内容共创",
+   "then": "给方向不给逐字稿",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "专属归因",
+   "then": "用专属链接或码做归因",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "调性匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小单试投",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "内容共创",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "专属归因",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

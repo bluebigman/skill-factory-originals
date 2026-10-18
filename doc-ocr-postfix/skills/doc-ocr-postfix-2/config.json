@@ -1,0 +1,72 @@
+{
+ "name": "doc-ocr-postfix-2",
+ "version": "2.0.0",
+ "domain": "OCR",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "置信分层",
+   "then": "按置信度分层复核",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "低置信标注",
+   "then": "低置信字符标注待确认",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "上下文纠错",
+   "then": "按上下文修正明显错字",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数字重核",
+   "then": "金额日期重点复核",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "不猜填",
+   "then": "无法确定的留空标注",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "置信分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "低置信标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上下文纠错",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数字重核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不猜填",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

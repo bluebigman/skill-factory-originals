@@ -1,0 +1,72 @@
+{
+ "name": "table-schema-infer-2",
+ "version": "2.0.0",
+ "domain": "表结构推断",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "抽样推断",
+   "then": "抽样推断字段类型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常容忍",
+   "then": "容忍脏数据不误判",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "人工复核",
+   "then": "推断结果人工复核",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "注释建议",
+   "then": "给字段含义建议",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "输出可执行",
+   "then": "输出建表语句",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "抽样推断",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常容忍",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "人工复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "注释建议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

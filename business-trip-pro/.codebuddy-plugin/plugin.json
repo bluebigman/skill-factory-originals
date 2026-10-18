@@ -1,0 +1,74 @@
+{
+ "name": "business-trip-pro",
+ "version": "1.0.0",
+ "plugin": "business-trip-pro",
+ "description": "Business Trip Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/business-trip-pro.md"
+ ],
+ "skills": [
+  "./skills/client-visit",
+  "./skills/expense",
+  "./skills/trip-plan"
+ ],
+ "expertType": "agent",
+ "agentName": "business-trip-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Business Trip Pro",
+  "zh": "出差安排 无目标 只讲产品"
+ },
+ "profession": {
+  "en": "Business Trip Pro",
+  "zh": "出差安排 行程报销 客户拜访"
+ },
+ "displayDescription": {
+  "en": "Handles Business Trip Pro tasks end-to-end with built-in professional skills.",
+  "zh": "出差安排 行程报销 客户拜访：拜访的会前与会中管理；差旅费用的合规与效率；出差行程的高效编排。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "无目标"
+  },
+  {
+   "en": "practical capability",
+   "zh": "只讲产品"
+  },
+  {
+   "en": "practical capability",
+   "zh": "承诺随意"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无目标怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只讲产品怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到承诺随意怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到无目标怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "出差安排专家",
+  "to": "出差安排 无目标 只讲产品",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

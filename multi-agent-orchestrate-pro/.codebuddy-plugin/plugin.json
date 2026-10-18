@@ -1,0 +1,74 @@
+{
+ "name": "multi-agent-orchestrate-pro",
+ "version": "1.0.0",
+ "plugin": "multi-agent-orchestrate-pro",
+ "description": "multi-agent-orchestrate-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for multi-agent-orchestrate-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/multi-agent-orchestrate-pro.md"
+ ],
+ "agentName": "multi-agent-orchestrate-pro",
+ "displayName": {
+  "zh": "多智能体 职责互斥 依赖成图",
+  "en": "multi-agent-orchestrate-pro"
+ },
+ "profession": {
+  "zh": "多智能体 任务编排 顾问",
+  "en": "multi-agent-orchestrate-pro"
+ },
+ "displayDescription": {
+  "zh": "多智能体 任务编排 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "multi-agent-orchestrate-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "多智能体",
+   "en": "multi-agent-orchestrate-pro"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到多智能体怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划多智能体",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查多智能体",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到多智能体怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/multi-agent-orchestrate-pro-1/",
+  "./skills/multi-agent-orchestrate-pro-2/",
+  "./skills/multi-agent-orchestrate-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "多智能体专家",
+  "to": "多智能体 职责互斥 依赖成图",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

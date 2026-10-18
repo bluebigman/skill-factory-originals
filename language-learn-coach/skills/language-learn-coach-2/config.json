@@ -1,0 +1,78 @@
+{
+ "name": "language-learn-coach-2",
+ "version": "2.0.0",
+ "domain": "外语学习",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "间隔重复",
+   "then": "用间隔重复而非一次背到会",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "场景记忆",
+   "then": "按场景记整句，不孤立背单词",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "间隔重复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "场景记忆",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "高频",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "理解",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "最高",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "学习",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "再谈",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "孤立",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

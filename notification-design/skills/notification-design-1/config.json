@@ -1,0 +1,72 @@
+{
+ "name": "notification-design-1",
+ "version": "2.0.0",
+ "domain": "通知设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级发送",
+   "then": "按重要度分级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可配置",
+   "then": "用户可配置开关",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "聚合防扰",
+   "then": "同类通知聚合",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "行动明确",
+   "then": "通知含明确动作",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时机合适",
+   "then": "避免打扰时段",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级发送",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可配置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "聚合防扰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行动明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时机合适",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

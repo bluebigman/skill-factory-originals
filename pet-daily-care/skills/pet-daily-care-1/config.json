@@ -1,0 +1,70 @@
+{
+ "name": "pet-daily-care-1",
+ "version": "2.0.0",
+ "domain": "宠物日常",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定量喂食",
+   "then": "固定时间与定量，自由采食致肥胖",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "饮水",
+   "then": "猫用流动水并远离食盆",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定量喂食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "饮水",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日常",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "宠物",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "远离",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

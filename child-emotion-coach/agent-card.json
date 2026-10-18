@@ -1,0 +1,108 @@
+{
+ "name": "Child Emotion Coach",
+ "description": "儿童情绪专家：识别孩子哭闹背后的真实需求；帮孩子建立情绪词汇与表达能力；不同年龄段的有效安抚方式。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-emotion-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-emotion-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "emotion-identify",
+   "name": "识别孩子哭闹背后的真实需求",
+   "description": "识别孩子哭闹背后的真实需求",
+   "tags": [
+    "哭闹",
+    "发脾气",
+    "打滚",
+    "尖叫",
+    "憋屈"
+   ],
+   "examples": [
+    "遇到哭闹",
+    "遇到发脾气",
+    "遇到打滚",
+    "遇到尖叫",
+    "遇到憋屈不说"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "emotion-identify",
+    "to": "emotion-identify",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "emotion-naming",
+   "name": "帮孩子建立情绪词汇与表达能力",
+   "description": "帮孩子建立情绪词汇与表达能力",
+   "tags": [
+    "情绪命名",
+    "说不清",
+    "闷着",
+    "委屈"
+   ],
+   "examples": [
+    "遇到说不出",
+    "遇到闷着",
+    "遇到委屈",
+    "遇到迁怒",
+    "遇到情绪回放"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "emotion-naming",
+    "to": "emotion-naming",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "soothe-method",
+   "name": "不同年龄段的有效安抚方式",
+   "description": "不同年龄段的有效安抚方式",
+   "tags": [
+    "安抚",
+    "哄不好",
+    "越哄越哭",
+    "崩溃"
+   ],
+   "examples": [
+    "遇到越哄越哭",
+    "遇到崩溃大哭",
+    "遇到睡前闹",
+    "遇到分离哭",
+    "遇到转移无效"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "soothe-method",
+    "to": "soothe-method",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "儿童情绪专家",
+ "x-source": "skill-factory-originals"
+}

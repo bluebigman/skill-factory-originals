@@ -1,0 +1,74 @@
+{
+ "name": "git-worktree-guide",
+ "version": "1.0.0",
+ "plugin": "git-worktree-guide",
+ "description": "git-worktree-guide — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for git-worktree-guide tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/git-worktree-guide.md"
+ ],
+ "agentName": "git-worktree-guide",
+ "displayName": {
+  "zh": "分支隔离工作区 一任务一工作区",
+  "en": "git-worktree-guide"
+ },
+ "profession": {
+  "zh": "分支隔离工作区 顾问",
+  "en": "git-worktree-guide"
+ },
+ "displayDescription": {
+  "zh": "分支隔离工作区 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "git-worktree-guide: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "分支隔离工作区",
+   "en": "git-worktree-guide"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到分支隔离工作区怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划分支隔离工作区",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查分支隔离工作区",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到分支隔离工作区怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/git-worktree-guide-1",
+  "./skills/git-worktree-guide-2",
+  "./skills/git-worktree-guide-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "分支隔离工作区专家",
+  "to": "分支隔离工作区 一任务一工作区",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

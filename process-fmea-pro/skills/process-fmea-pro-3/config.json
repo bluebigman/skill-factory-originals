@@ -1,0 +1,72 @@
+{
+ "name": "process-fmea-pro-3",
+ "version": "2.0.0",
+ "domain": "过程风险",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全流程展开",
+   "then": "按工序逐步展开不遗漏",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "打分一致",
+   "then": "严重度与频度打分标准统一",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "高风险优先",
+   "then": "优先处理高风险项",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "措施可验证",
+   "then": "措施须可验证有效性",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "动态更新",
+   "then": "工艺变更后必须更新",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全流程展开",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打分一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高风险优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "措施可验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动态更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Home Moving Checklist",
+ "description": "搬家准备专家：覆盖 倒序打包、随身箱、提前 4 周、费用确认、入住前置 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/home-moving-checklist",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-moving-checklist",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "home-moving-checklist-1",
+   "name": "针对 倒序打包、随身箱 等情境给出可执行处置",
+   "description": "针对 倒序打包、随身箱 等情境给出可执行处置",
+   "tags": [
+    "倒序打包",
+    "随身箱"
+   ],
+   "examples": [
+    "遇到倒序打包",
+    "遇到随身箱",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-moving-checklist-2",
+   "name": "针对 提前 4 周、费用确认 等情境给出可执行处置",
+   "description": "针对 提前 4 周、费用确认 等情境给出可执行处置",
+   "tags": [
+    "提前 4 周",
+    "费用确认"
+   ],
+   "examples": [
+    "遇到提前 4 周",
+    "遇到费用确认",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-moving-checklist-3",
+   "name": "针对 入住前置 等情境给出可执行处置",
+   "description": "针对 入住前置 等情境给出可执行处置",
+   "tags": [
+    "入住前置"
+   ],
+   "examples": [
+    "遇到入住前置",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "搬家准备专家",
+ "x-source": "skill-factory-originals"
+}

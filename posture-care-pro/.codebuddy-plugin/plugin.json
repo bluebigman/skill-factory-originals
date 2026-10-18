@@ -1,0 +1,74 @@
+{
+ "name": "posture-care-pro",
+ "version": "1.0.0",
+ "plugin": "posture-care-pro",
+ "description": "Posture Care Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/posture-care-pro.md"
+ ],
+ "skills": [
+  "./skills/desk-setup",
+  "./skills/micro-break",
+  "./skills/pain-boundary"
+ ],
+ "expertType": "agent",
+ "agentName": "posture-care-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Posture Care Pro",
+  "zh": "久坐改善 颈椎前伸 坐姿塌陷"
+ },
+ "profession": {
+  "en": "Posture Care Pro",
+  "zh": "久坐改善 体态调整 拉伸放松"
+ },
+ "displayDescription": {
+  "en": "Handles Posture Care Pro tasks end-to-end with built-in professional skills.",
+  "zh": "久坐改善 体态调整 拉伸放松：久坐环境的工位设置；碎片化的活动与拉伸；正常酸胀与需就医的区分。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "颈椎前伸"
+  },
+  {
+   "en": "practical capability",
+   "zh": "坐姿塌陷"
+  },
+  {
+   "en": "practical capability",
+   "zh": "手臂悬空"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到颈椎前伸怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到坐姿塌陷怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到手臂悬空怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到颈椎前伸怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "久坐改善专家",
+  "to": "久坐改善 颈椎前伸 坐姿塌陷",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

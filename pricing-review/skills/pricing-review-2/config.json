@@ -1,0 +1,72 @@
+{
+ "name": "pricing-review-2",
+ "version": "2.0.0",
+ "domain": "定价复核",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "成本加成打底",
+   "then": "先算成本底线",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "竞品锚定",
+   "then": "参考同类定价",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "购买力分层",
+   "then": "按目标市场分层",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "价位习惯",
+   "then": "符合当地价位习惯",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "按周期复核",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "成本加成打底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "竞品锚定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "购买力分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "价位习惯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

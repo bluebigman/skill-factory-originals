@@ -1,0 +1,69 @@
+{
+ "name": "fact-check-coach-3",
+ "version": "2.0.0",
+ "domain": "常识核查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "存疑即标",
+   "then": "无法确证时明确标注存疑",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "存疑即标",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "陷阱",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "常识",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "核查",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

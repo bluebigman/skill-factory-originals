@@ -1,0 +1,74 @@
+{
+ "name": "promotion-design-pro",
+ "version": "1.0.0",
+ "plugin": "promotion-design-pro",
+ "description": "Promotion Design Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/promotion-design-pro.md"
+ ],
+ "skills": [
+  "./skills/forecast",
+  "./skills/mechanism",
+  "./skills/plan"
+ ],
+ "expertType": "agent",
+ "agentName": "promotion-design-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Promotion Design Pro",
+  "zh": "活动方案 凭感觉 忽略成本"
+ },
+ "profession": {
+  "en": "Promotion Design Pro",
+  "zh": "活动方案 优惠设计 促销策划"
+ },
+ "displayDescription": {
+  "en": "Handles Promotion Design Pro tasks end-to-end with built-in professional skills.",
+  "zh": "活动方案 优惠设计 促销策划：活动效果的测算与复盘；促销机制的规则设计；活动方案的完整度。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "凭感觉"
+  },
+  {
+   "en": "practical capability",
+   "zh": "忽略成本"
+  },
+  {
+   "en": "practical capability",
+   "zh": "乐观偏差"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到凭感觉怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到忽略成本怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到乐观偏差怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到凭感觉怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "活动方案专家",
+  "to": "活动方案 凭感觉 忽略成本",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

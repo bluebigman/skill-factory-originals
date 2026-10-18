@@ -1,0 +1,72 @@
+{
+ "name": "multi-agent-orchestrate-pro-3",
+ "version": "2.0.0",
+ "domain": "多智能体",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "职责互斥",
+   "then": "每个 Agent 边界互不重叠",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "依赖成图",
+   "then": "先画依赖图再定串并行",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "冲突暴露",
+   "then": "结论互斥须显式裁决",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "共享真值",
+   "then": "公共状态须单一真值源",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "失败隔离",
+   "then": "成员失败不阻塞全局",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "职责互斥",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖成图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突暴露",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "共享真值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

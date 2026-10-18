@@ -1,0 +1,78 @@
+{
+ "name": "campaign-review-2",
+ "version": "2.0.0",
+ "domain": "活动复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "找最关键",
+   "then": "只找最大流失环节，不面面俱到",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可复现",
+   "then": "把有效动作写成可复现清单",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "找最关键",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复现",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "活动",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流失",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "点击",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "最大",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "环节",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

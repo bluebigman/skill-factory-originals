@@ -1,0 +1,72 @@
+{
+ "name": "incident-playbook-sec-1",
+ "version": "2.0.0",
+ "domain": "安全事件手册",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级响应",
+   "then": "按影响分级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "遏制优先",
+   "then": "先止损再溯源",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "证据保全",
+   "then": "保留日志现场",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "通报机制",
+   "then": "按规通报",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "复盘改进",
+   "then": "事件后更新预案",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级响应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "遏制优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "证据保全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "通报机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘改进",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

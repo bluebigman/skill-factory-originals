@@ -1,0 +1,78 @@
+{
+ "name": "sheet-batch-calc-1",
+ "version": "2.0.0",
+ "domain": "表格批量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定口径",
+   "then": "汇总口径写成一行说明，避免反复返工",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "辅助列",
+   "then": "用辅助列替代单条超长公式，易查错",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "辅助列",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "返工",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "反复",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "公式",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

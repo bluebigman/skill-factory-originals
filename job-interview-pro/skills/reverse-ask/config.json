@@ -1,0 +1,117 @@
+{
+ "name": "reverse-ask",
+ "version": "2.0.0",
+ "domain": "面试准备",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无提问",
+   "then": "不问问题等于无意向，须准备 3 个以上",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "只问福利",
+   "then": "第一轮聚焦岗位挑战与团队目标，薪资福利放后续",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "假大空",
+   "then": "问具体业务问题（当前最大挑战/成功标准），体现真实调研",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "过早谈条件",
+   "then": "意向未明确前不谈条件，顺序错了会直接出局",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "收尾",
+   "then": "明确表达意向并问清下一步时间点",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "反问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "收尾",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "意向",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无提问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只问福利",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "假大空",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过早谈条件",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "高频",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "依据",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "责任",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "最高",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "成功",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

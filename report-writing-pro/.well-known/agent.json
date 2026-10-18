@@ -1,0 +1,99 @@
+{
+ "name": "Report Writing Pro",
+ "description": "写报告专家：数据与图表的表达规范；报告交付前的自检清单；专业报告的金字塔结构。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/report-writing-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/report-writing-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "data-present",
+   "name": "数据与图表的表达规范",
+   "description": "数据与图表的表达规范",
+   "tags": [
+    "图表",
+    "数据",
+    "呈现",
+    "可视化"
+   ],
+   "examples": [
+    "遇到图表堆砌",
+    "遇到比例失真",
+    "遇到口径不明",
+    "遇到无对比",
+    "遇到精度过度"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:51",
+    "from": "data-present",
+    "to": "data-present",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "review",
+   "name": "报告交付前的自检清单",
+   "description": "报告交付前的自检清单",
+   "tags": [
+    "复核",
+    "检查",
+    "错误",
+    "交付"
+   ],
+   "examples": [
+    "遇到错别字",
+    "遇到前后矛盾",
+    "遇到责任模糊",
+    "遇到敏感信息",
+    "遇到版本混乱"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:51",
+    "from": "review",
+    "to": "review",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "structure",
+   "name": "专业报告的金字塔结构",
+   "description": "专业报告的金字塔结构",
+   "tags": [
+    "结构",
+    "大纲",
+    "逻辑",
+    "开头"
+   ],
+   "examples": [
+    "遇到不知从何下手",
+    "遇到逻辑混乱",
+    "遇到篇幅失控",
+    "遇到读者错位",
+    "遇到开头冗长"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:51",
+    "from": "structure",
+    "to": "structure",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "写报告专家"
+}

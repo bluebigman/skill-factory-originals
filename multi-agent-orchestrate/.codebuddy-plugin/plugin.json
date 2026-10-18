@@ -1,0 +1,74 @@
+{
+ "name": "multi-agent-orchestrate",
+ "version": "1.0.0",
+ "plugin": "multi-agent-orchestrate",
+ "description": "Multi-Agent Orchestration for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/multi-agent-orchestrate.md"
+ ],
+ "skills": [
+  "./skills/multi-agent-orchestrate-1",
+  "./skills/multi-agent-orchestrate-2",
+  "./skills/multi-agent-orchestrate-3"
+ ],
+ "expertType": "agent",
+ "agentName": "multi-agent-orchestrate",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Multi-Agent Orchestration",
+  "zh": "多智能体 职责重叠 依赖混乱"
+ },
+ "profession": {
+  "en": "Multi-Agent Orchestration",
+  "zh": "多智能体 任务编排 冲突校验"
+ },
+ "displayDescription": {
+  "en": "Handles Multi-Agent Orchestration tasks end-to-end with built-in professional skills.",
+  "zh": "多智能体 任务编排 冲突校验：覆盖 职责重叠、依赖混乱 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "多智能体"
+  },
+  {
+   "en": "practical capability",
+   "zh": "任务编排"
+  },
+  {
+   "en": "practical capability",
+   "zh": "冲突校验"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到多智能体怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到任务编排怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到冲突校验怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到多智能体怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "多智能体专家",
+  "to": "多智能体 职责重叠 依赖混乱",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

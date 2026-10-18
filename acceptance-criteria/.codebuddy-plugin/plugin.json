@@ -1,0 +1,74 @@
+{
+ "name": "acceptance-criteria",
+ "version": "1.0.0",
+ "plugin": "acceptance-criteria",
+ "description": "Acceptance Criteria for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/acceptance-criteria.md"
+ ],
+ "skills": [
+  "./skills/acceptance-criteria-1",
+  "./skills/acceptance-criteria-2",
+  "./skills/acceptance-criteria-3"
+ ],
+ "expertType": "agent",
+ "agentName": "acceptance-criteria",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Acceptance Criteria",
+  "zh": "验收标准 可测量 写清边界"
+ },
+ "profession": {
+  "en": "Acceptance Criteria",
+  "zh": "验收标准 可测定义 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Acceptance Criteria tasks end-to-end with built-in professional skills.",
+  "zh": "验收标准 可测定义 顾问：覆盖 可测量、写清边界、前置确认 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "验收标准",
+   "en": "acceptance-criteria"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到验收标准怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到可测定义怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到验收标准怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:27",
+  "from": "验收标准专家",
+  "to": "验收标准 可测量 写清边界",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "name": "compliance",
+ "version": "2.0.0",
+ "domain": "小红书笔记",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "极限词",
+   "then": "禁用最/第一/100% 等极限词，会被判违规",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "功效宣称",
+   "then": "普通商品不得宣称医疗或绝对功效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "引流",
+   "then": "站外引流（微信/电话）会触发限流",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "未标广告",
+   "then": "商业合作须按平台要求标注，隐瞒会导致处罚",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "医疗美容",
+   "then": "涉及医疗、药品、医美内容须持资质，无资质不做",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "违规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "限流",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "广告",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "极限词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "功效宣称",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引流",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "未标广告",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "医疗美容",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平台",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "导致",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁用",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "笔记",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "电话",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "隐瞒",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

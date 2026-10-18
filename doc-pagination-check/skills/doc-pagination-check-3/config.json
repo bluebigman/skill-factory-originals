@@ -1,0 +1,72 @@
+{
+ "name": "doc-pagination-check-3",
+ "version": "2.0.0",
+ "domain": "分页排版检查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "孤立标题",
+   "then": "标题不单独留在页尾",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "表格不断页",
+   "then": "跨页表格重复表头",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "图片位置",
+   "then": "图片跟随引用段落",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "页码连续",
+   "then": "检查页码连续性",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "目录更新",
+   "then": "分页变化后更新目录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "孤立标题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "表格不断页",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图片位置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "页码连续",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目录更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

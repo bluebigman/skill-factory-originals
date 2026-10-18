@@ -1,0 +1,75 @@
+{
+ "name": "Audio Meeting Minutes",
+ "description": "会议录音专家：覆盖 先分离说话人、三段式、待办带主责、决议原文留痕 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/audio-meeting-minutes",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/audio-meeting-minutes",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "audio-meeting-minutes-1",
+   "name": "针对 先分离说话人、三段式 等情境给出可执行处置",
+   "description": "针对 先分离说话人、三段式 等情境给出可执行处置",
+   "tags": [
+    "先分离说话人",
+    "三段式"
+   ],
+   "examples": [
+    "遇到先分离说话人",
+    "遇到三段式",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "audio-meeting-minutes-2",
+   "name": "针对 待办带主责、决议原文留痕 等情境给出可执行处置",
+   "description": "针对 待办带主责、决议原文留痕 等情境给出可执行处置",
+   "tags": [
+    "待办带主责",
+    "决议原文留痕"
+   ],
+   "examples": [
+    "遇到待办带主责",
+    "遇到决议原文留痕",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "audio-meeting-minutes-3",
+   "name": "针对 时效 等情境给出可执行处置",
+   "description": "针对 时效 等情境给出可执行处置",
+   "tags": [
+    "时效"
+   ],
+   "examples": [
+    "遇到时效",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "会议录音专家",
+ "x-source": "skill-factory-originals"
+}

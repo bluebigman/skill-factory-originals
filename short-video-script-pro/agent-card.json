@@ -1,0 +1,107 @@
+{
+ "name": "Short Video Script Pro",
+ "description": "短视频脚本专家：开头三秒的留存设计；完播率的提升手段；脚本与镜头的对应。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/short-video-script-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/short-video-script-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "hook-3s",
+   "name": "开头三秒的留存设计",
+   "description": "开头三秒的留存设计",
+   "tags": [
+    "开头",
+    "3秒",
+    "留存",
+    "完播"
+   ],
+   "examples": [
+    "遇到开头拖沓",
+    "遇到无悬念",
+    "遇到音画不同步",
+    "遇到字幕缺失",
+    "遇到节奏慢"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "hook-3s",
+    "to": "hook-3s",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "retention",
+   "name": "完播率的提升手段",
+   "description": "完播率的提升手段",
+   "tags": [
+    "完播",
+    "留存",
+    "节奏",
+    "长度"
+   ],
+   "examples": [
+    "遇到时长过长",
+    "遇到中段流失",
+    "遇到结尾拖沓",
+    "遇到循环设计",
+    "遇到数据复盘"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "retention",
+    "to": "retention",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "shot-design",
+   "name": "脚本与镜头的对应",
+   "description": "脚本与镜头的对应",
+   "tags": [
+    "分镜",
+    "镜头",
+    "脚本",
+    "画面"
+   ],
+   "examples": [
+    "遇到无分镜",
+    "遇到一镜到底",
+    "遇到口播过长",
+    "遇到B-roll 缺失",
+    "遇到结尾"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "shot-design",
+    "to": "shot-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "短视频脚本专家",
+ "x-source": "skill-factory-originals"
+}

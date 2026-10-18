@@ -1,0 +1,72 @@
+{
+ "name": "worksheet-template-1",
+ "version": "2.0.0",
+ "domain": "工作表模板设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层设计",
+   "then": "输入-计算-展示分离",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保护公式",
+   "then": "锁定计算区",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "校验内置",
+   "then": "关键列加验证规则",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "说明页",
+   "then": "首附使用说明",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "示例保留",
+   "then": "留一份已填示例",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保护公式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "校验内置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说明页",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例保留",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

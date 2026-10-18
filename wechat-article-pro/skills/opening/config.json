@@ -1,0 +1,121 @@
+{
+ "name": "opening",
+ "version": "2.0.0",
+ "domain": "公众号文章",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标题无悬念",
+   "then": "标题给出信息缺口（为什么/如何/揭秘），平铺直叙打开率低",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "摘要浪费",
+   "then": "摘要补充利益点而非重复标题",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "开头绕",
+   "then": "前三段内进入正题，长铺垫会大幅流失",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无配图",
+   "then": "首屏配图影响观感与停留，纯文字首屏流失明显",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "排版密",
+   "then": "段间距与字号决定可读性，密排是完读率第一杀手",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打开率",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "摘要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题无悬念",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "摘要浪费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头绕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无配图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排版密",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "阅读",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "手机",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "流失",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理由",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

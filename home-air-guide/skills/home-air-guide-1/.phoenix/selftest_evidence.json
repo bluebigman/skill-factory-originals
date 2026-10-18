@@ -1,0 +1,9 @@
+{
+ "schema": "selftest_evidence/v1",
+ "at": "2026-10-18T20:00:37",
+ "skill": "home-air-guide-1",
+ "slug": "home-air-guide",
+ "passed": true,
+ "output": "SELFTEST PASS",
+ "note": "由 _reseal_evidence.py 真跑生成（原文件为他资产残留的 SELFTEST OK）"
+}

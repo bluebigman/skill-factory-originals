@@ -1,0 +1,58 @@
+{
+ "name": "pdf-to-md-1",
+ "version": "2.0.0",
+ "domain": "文档PDF",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分版式",
+   "then": "先判扫描件还是文本层，路径完全不同",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "表格优先",
+   "then": "表格是最易丢元素，优先校验",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分版式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "表格优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "校验",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文档",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

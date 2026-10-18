@@ -1,0 +1,72 @@
+{
+ "name": "doc-outline-revise-3",
+ "version": "2.0.0",
+ "domain": "大纲修订咨询",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "层级检查",
+   "then": "检查层级是否合理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "逻辑链",
+   "then": "章节间逻辑是否连贯",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "篇幅配比",
+   "then": "核心章节占比合理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标题即结论",
+   "then": "标题写结论非话题",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可独立阅读",
+   "then": "每节可单独理解",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "层级检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逻辑链",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "篇幅配比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题即结论",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可独立阅读",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

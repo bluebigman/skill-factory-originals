@@ -1,0 +1,72 @@
+{
+ "name": "headline-test-3",
+ "version": "2.0.0",
+ "domain": "标题测试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单变量",
+   "then": "一次只测一个变量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样本均分",
+   "then": "流量均分",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "指标先定",
+   "then": "先定判定指标",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不早停",
+   "then": "达样本量再判定",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "规律沉淀",
+   "then": "沉淀胜出规律",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单变量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样本均分",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指标先定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不早停",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规律沉淀",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

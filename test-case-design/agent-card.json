@@ -1,0 +1,75 @@
+{
+ "name": "Test Case Design",
+ "description": "测试用例专家：覆盖 先正常后异常、边界必测 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/test-case-design",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/test-case-design",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "test-case-design-1",
+   "name": "针对 先正常后异常、边界必测 等情境给出可执行处置",
+   "description": "针对 先正常后异常、边界必测 等情境给出可执行处置",
+   "tags": [
+    "先正常后异常",
+    "边界必测"
+   ],
+   "examples": [
+    "遇到先正常后异常",
+    "遇到边界必测",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "test-case-design-2",
+   "name": "针对 幂等校验、可复用 等情境给出可执行处置",
+   "description": "针对 幂等校验、可复用 等情境给出可执行处置",
+   "tags": [
+    "幂等校验",
+    "可复用"
+   ],
+   "examples": [
+    "遇到幂等校验",
+    "遇到可复用",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "test-case-design-3",
+   "name": "针对 回归集 等情境给出可执行处置",
+   "description": "针对 回归集 等情境给出可执行处置",
+   "tags": [
+    "回归集"
+   ],
+   "examples": [
+    "遇到回归集",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "测试用例专家",
+ "x-source": "skill-factory-originals"
+}

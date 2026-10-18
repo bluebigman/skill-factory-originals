@@ -1,0 +1,67 @@
+{
+ "name": "Teen Independence Guide",
+ "description": "青春期独立专家：覆盖 按龄交权、隐私底线、只设安全边界、允许试错 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/teen-independence-guide",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-independence-guide",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-independence-guide-1",
+   "name": "针对 按龄交权、隐私底线 等情境给出可执行处置",
+   "description": "针对 按龄交权、隐私底线 等情境给出可执行处置",
+   "tags": [
+    "按龄交权",
+    "隐私底线"
+   ],
+   "examples": [
+    "遇到按龄交权",
+    "遇到隐私底线",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-independence-guide-2",
+   "name": "针对 只设安全边界、允许试错 等情境给出可执行处置",
+   "description": "针对 只设安全边界、允许试错 等情境给出可执行处置",
+   "tags": [
+    "只设安全边界",
+    "允许试错"
+   ],
+   "examples": [
+    "遇到只设安全边界",
+    "遇到允许试错",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-independence-guide-3",
+   "name": "针对 不收回 等情境给出可执行处置",
+   "description": "针对 不收回 等情境给出可执行处置",
+   "tags": [
+    "不收回"
+   ],
+   "examples": [
+    "遇到不收回",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "青春期独立专家"
+}

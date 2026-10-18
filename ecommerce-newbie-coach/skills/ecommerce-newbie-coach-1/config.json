@@ -1,0 +1,58 @@
+{
+ "name": "ecommerce-newbie-coach-1",
+ "version": "2.0.0",
+ "domain": "电商开店",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先验证再备货",
+   "then": "预售或小批量验证",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "选品看竞争",
+   "then": "避头部集中找长尾",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先验证再备货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "选品看竞争",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "集中",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "长尾",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "思路",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

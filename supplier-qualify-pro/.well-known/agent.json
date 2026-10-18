@@ -1,0 +1,67 @@
+{
+ "name": "Supplier Qualify Pro",
+ "description": "供应商专家：覆盖 分级准入、现场审核、试产验证 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/supplier-qualify-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/supplier-qualify-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "supplier-qualify-pro-1",
+   "name": "针对 分级准入、现场审核 等情境给出可执行处置",
+   "description": "针对 分级准入、现场审核 等情境给出可执行处置",
+   "tags": [
+    "分级准入",
+    "现场审核"
+   ],
+   "examples": [
+    "遇到分级准入",
+    "遇到现场审核",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "supplier-qualify-pro-2",
+   "name": "针对 试产验证、双源供货 等情境给出可执行处置",
+   "description": "针对 试产验证、双源供货 等情境给出可执行处置",
+   "tags": [
+    "试产验证",
+    "双源供货"
+   ],
+   "examples": [
+    "遇到试产验证",
+    "遇到双源供货",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "supplier-qualify-pro-3",
+   "name": "针对 年度复评 等情境给出可执行处置",
+   "description": "针对 年度复评 等情境给出可执行处置",
+   "tags": [
+    "年度复评"
+   ],
+   "examples": [
+    "遇到年度复评",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "供应商专家"
+}

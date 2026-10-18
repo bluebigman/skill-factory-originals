@@ -1,0 +1,72 @@
+{
+ "name": "ocr-quality-pro-2",
+ "version": "2.0.0",
+ "domain": "识别质量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "置信标注",
+   "then": "低置信字符必须标注",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不猜原则",
+   "then": "无法识别的保留占位不臆造",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "后处理词典",
+   "then": "用领域词典纠错",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "布局还原",
+   "then": "保留原始版式",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "人工复核",
+   "then": "高风险场景须人工复核",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "置信标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不猜原则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "后处理词典",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "布局还原",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "人工复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

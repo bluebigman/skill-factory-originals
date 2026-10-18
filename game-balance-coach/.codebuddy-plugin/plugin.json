@@ -1,0 +1,74 @@
+{
+ "name": "game-balance-coach",
+ "version": "1.0.0",
+ "plugin": "game-balance-coach",
+ "description": "Game Balance Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/game-balance-coach.md"
+ ],
+ "skills": [
+  "./skills/game-balance-coach-1",
+  "./skills/game-balance-coach-2",
+  "./skills/game-balance-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "game-balance-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Game Balance Coach",
+  "zh": "数值平衡 先建基线 小步调整"
+ },
+ "profession": {
+  "en": "Game Balance Coach",
+  "zh": "数值平衡 强弱调整 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Game Balance Coach tasks end-to-end with built-in professional skills.",
+  "zh": "数值平衡 强弱调整 顾问：覆盖 先建基线、小步调整、看数据 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数值平衡",
+   "en": "game-balance-coach"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到数值平衡怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到强弱调整怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到数值平衡怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "数值平衡专家",
+  "to": "数值平衡 先建基线 小步调整",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

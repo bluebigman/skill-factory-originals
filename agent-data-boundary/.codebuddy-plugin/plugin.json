@@ -1,0 +1,74 @@
+{
+ "name": "agent-data-boundary",
+ "version": "1.0.0",
+ "plugin": "agent-data-boundary",
+ "description": "agent-data-boundary — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for agent-data-boundary tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-data-boundary.md"
+ ],
+ "agentName": "agent-data-boundary",
+ "displayName": {
+  "zh": "数据边界 最小采集 范围控制",
+  "en": "agent-data-boundary"
+ },
+ "profession": {
+  "zh": "数据边界 范围控制 顾问",
+  "en": "agent-data-boundary"
+ },
+ "displayDescription": {
+  "zh": "数据边界 范围控制 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "agent-data-boundary: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据边界",
+   "en": "agent-data-boundary"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到数据边界怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划数据边界",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查数据边界",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到数据边界怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/agent-data-boundary-1/",
+  "./skills/agent-data-boundary-2/",
+  "./skills/agent-data-boundary-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "数据边界专家",
+  "to": "数据边界 最小采集 范围控制",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

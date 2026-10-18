@@ -1,0 +1,72 @@
+{
+ "name": "cs-health-score-2",
+ "version": "2.0.0",
+ "domain": "客户健康",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "多维输入",
+   "then": "使用行为、关系与结果三类输入",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "权重可解释",
+   "then": "权重设定可解释可追溯",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分档动作",
+   "then": "不同分档对应不同动作",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "人工复核",
+   "then": "高风险判定需人工复核",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "按样本校准",
+   "then": "按实际流失样本校准模型",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "多维输入",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权重可解释",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分档动作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "人工复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按样本校准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

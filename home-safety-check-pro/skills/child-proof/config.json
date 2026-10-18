@@ -1,0 +1,109 @@
+{
+ "name": "child-proof",
+ "version": "2.0.0",
+ "domain": "居家安全",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "误食",
+   "then": "药品清洁剂全部上锁并置于高处，矮柜放置必然被打开",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "窗户",
+   "then": "装限位器而非仅关窗，纱窗不承重",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "插座",
+   "then": "未使用插座加保护盖，改造为首选",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "家具",
+   "then": "尖角加护角，但根本上应减少硬直角家具",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分工",
+   "then": "防护是持续动作，需固定每周复查一次",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "儿童防护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "插座",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "窗户",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "家具",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分工",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Child Lying Coach",
+ "description": "儿童说谎专家：覆盖 降低承认成本、区分想象、不贴标签、找需求、示范诚实 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-lying-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-lying-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-lying-coach-1",
+   "name": "针对 降低承认成本、区分想象 等情境给出可执行处置",
+   "description": "针对 降低承认成本、区分想象 等情境给出可执行处置",
+   "tags": [
+    "降低承认成本",
+    "区分想象"
+   ],
+   "examples": [
+    "遇到降低承认成本",
+    "遇到区分想象",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-lying-coach-2",
+   "name": "针对 不贴标签、找需求 等情境给出可执行处置",
+   "description": "针对 不贴标签、找需求 等情境给出可执行处置",
+   "tags": [
+    "不贴标签",
+    "找需求"
+   ],
+   "examples": [
+    "遇到不贴标签",
+    "遇到找需求",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-lying-coach-3",
+   "name": "针对 示范诚实 等情境给出可执行处置",
+   "description": "针对 示范诚实 等情境给出可执行处置",
+   "tags": [
+    "示范诚实"
+   ],
+   "examples": [
+    "遇到示范诚实",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "儿童说谎专家",
+ "x-source": "skill-factory-originals"
+}

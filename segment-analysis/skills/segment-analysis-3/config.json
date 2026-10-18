@@ -1,0 +1,72 @@
+{
+ "name": "segment-analysis-3",
+ "version": "2.0.0",
+ "domain": "用户分群分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "维度有意义",
+   "then": "分群维度与业务目标相关",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "组间差异",
+   "then": "组间差异显著才有价值",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "组内同质",
+   "then": "组内特征尽量一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "规模可控",
+   "then": "每群有足够样本",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可运营",
+   "then": "每群能对应到具体动作",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "维度有意义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "组间差异",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "组内同质",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规模可控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可运营",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

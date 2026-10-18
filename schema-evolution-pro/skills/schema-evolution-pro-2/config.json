@@ -1,0 +1,72 @@
+{
+ "name": "schema-evolution-pro-2",
+ "version": "2.0.0",
+ "domain": "模式演进",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "兼容优先",
+   "then": "优先做兼容性变更",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分步执行",
+   "then": "大变更拆成多步",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "脚本可回滚",
+   "then": "迁移脚本必须可回滚",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "影子验证",
+   "then": "新结构先影子写入",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "消费方通知",
+   "then": "结构变更须通知消费方",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "兼容优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分步执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脚本可回滚",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "影子验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "消费方通知",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

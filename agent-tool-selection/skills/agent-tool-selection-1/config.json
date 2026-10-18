@@ -1,0 +1,72 @@
+{
+ "name": "agent-tool-selection-1",
+ "version": "2.0.0",
+ "domain": "工具选择",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "选择逻辑",
+   "then": "明确何时提供哪些工具",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "依赖顺序",
+   "then": "工具间依赖必须显式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "成本权衡",
+   "then": "每次调用权衡收益与代价",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "备选策略",
+   "then": "主工具不可用时的替代",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "误选防护",
+   "then": "描述清晰降低误选率",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "选择逻辑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖顺序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本权衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "备选策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误选防护",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "release-readiness-pro",
+ "version": "1.0.0",
+ "plugin": "release-readiness-pro",
+ "description": "release-readiness-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for release-readiness-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/release-readiness-pro.md"
+ ],
+ "agentName": "release-readiness-pro",
+ "displayName": {
+  "zh": "发布就绪 清单化 依赖确认",
+  "en": "release-readiness-pro"
+ },
+ "profession": {
+  "zh": "发布就绪 检查清单 顾问",
+  "en": "release-readiness-pro"
+ },
+ "displayDescription": {
+  "zh": "发布就绪 检查清单 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "release-readiness-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "发布就绪",
+   "en": "release-readiness-pro"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到发布就绪怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划发布就绪",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查发布就绪",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到发布就绪怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/release-readiness-pro-1",
+  "./skills/release-readiness-pro-2",
+  "./skills/release-readiness-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "发布就绪专家",
+  "to": "发布就绪 清单化 依赖确认",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

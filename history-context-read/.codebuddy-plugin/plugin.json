@@ -1,0 +1,74 @@
+{
+ "name": "history-context-read",
+ "version": "1.0.0",
+ "plugin": "history-context-read",
+ "description": "History Context Read for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/history-context-read.md"
+ ],
+ "skills": [
+  "./skills/history-context-read-1",
+  "./skills/history-context-read-2",
+  "./skills/history-context-read-3"
+ ],
+ "expertType": "agent",
+ "agentName": "history-context-read",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "History Context Read",
+  "zh": "历史脉络 先看地理 看同时期"
+ },
+ "profession": {
+  "en": "History Context Read",
+  "zh": "历史脉络 背景理解 教练"
+ },
+ "displayDescription": {
+  "en": "Handles History Context Read tasks end-to-end with built-in professional skills.",
+  "zh": "历史脉络 背景理解 教练：覆盖 先看地理、看同时期、区分史料 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "14-WorldWise",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "历史脉络",
+   "en": "history-context-read"
+  },
+  {
+   "en": "WorldWise",
+   "zh": "WorldWise"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到历史脉络怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到背景理解怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到教练怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到历史脉络怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "历史脉络专家",
+  "to": "历史脉络 先看地理 看同时期",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

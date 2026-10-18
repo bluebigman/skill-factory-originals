@@ -1,0 +1,107 @@
+{
+ "name": "Customer Service Reply Pro",
+ "description": "客服回复专家：投诉的升级处理流程；平台仲裁与规则的遵守；高频场景的回复结构。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/customer-service-reply-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/customer-service-reply-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "complaint",
+   "name": "投诉的升级处理流程",
+   "description": "投诉的升级处理流程",
+   "tags": [
+    "投诉",
+    "差评",
+    "纠纷",
+    "赔偿"
+   ],
+   "examples": [
+    "遇到辩解",
+    "遇到拖延",
+    "遇到无授权",
+    "遇到超出承诺",
+    "遇到留痕"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:39",
+    "from": "complaint",
+    "to": "complaint",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "platform-rule",
+   "name": "平台仲裁与规则的遵守",
+   "description": "平台仲裁与规则的遵守",
+   "tags": [
+    "平台规则",
+    "仲裁",
+    "凭证",
+    "违规"
+   ],
+   "examples": [
+    "遇到无凭证",
+    "遇到引导站外",
+    "遇到辱骂",
+    "遇到承诺违规",
+    "遇到时效"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:39",
+    "from": "platform-rule",
+    "to": "platform-rule",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "reply-template",
+   "name": "高频场景的回复结构",
+   "description": "高频场景的回复结构",
+   "tags": [
+    "话术",
+    "回复",
+    "咨询",
+    "客户"
+   ],
+   "examples": [
+    "遇到回复慢",
+    "遇到模板味",
+    "遇到答非所问",
+    "遇到无行动",
+    "遇到情绪"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:39",
+    "from": "reply-template",
+    "to": "reply-template",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "客服回复专家",
+ "x-source": "skill-factory-originals"
+}

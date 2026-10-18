@@ -1,0 +1,72 @@
+{
+ "name": "overseas-culture-adapt-2",
+ "version": "2.0.0",
+ "domain": "海外沟通",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "称谓先行",
+   "then": "先确认称谓与敬语习惯",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "直曲有别",
+   "then": "区分低语境与高语境表达方式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时间观念",
+   "then": "确认对方作息与假期习惯",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "书面确认",
+   "then": "口头约定必须书面确认",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "话题避让",
+   "then": "避开宗教与政治敏感话题",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "称谓先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "直曲有别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间观念",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "书面确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "话题避让",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

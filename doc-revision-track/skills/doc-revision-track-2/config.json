@@ -1,0 +1,72 @@
+{
+ "name": "doc-revision-track-2",
+ "version": "2.0.0",
+ "domain": "修订追踪管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全员可见",
+   "then": "修订对相关方可见",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "接受前复核",
+   "then": "接受前逐条核对",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "批注归类",
+   "then": "按类型归类批注",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "终稿清理",
+   "then": "定稿后接受全部并清理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留档对比",
+   "then": "保留修订前后版本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全员可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "接受前复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批注归类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "终稿清理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留档对比",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

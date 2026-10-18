@@ -1,0 +1,72 @@
+{
+ "name": "office-macro-safe-1",
+ "version": "2.0.0",
+ "domain": "办公自动化安全",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "来源可信",
+   "then": "只运行可信来源的宏",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "权限最小",
+   "then": "脚本权限最小化",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "避免外发",
+   "then": "不在文档中嵌入可执行外链",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数据脱敏",
+   "then": "示例数据不含真实个人信息",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "审计留痕",
+   "then": "自动化操作记录可追",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "来源可信",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限最小",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免外发",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审计留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

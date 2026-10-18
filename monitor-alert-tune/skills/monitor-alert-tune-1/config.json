@@ -1,0 +1,72 @@
+{
+ "name": "monitor-alert-tune-1",
+ "version": "2.0.0",
+ "domain": "监控告警调优",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按影响定级",
+   "then": "区分影响用户与仅指标波动",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "减少噪音",
+   "then": "同一根因合并为一条",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "阈值分层",
+   "then": "警告与严重分阈值",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "抑制机制",
+   "then": "故障期间抑制衍生告警",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "告警可达",
+   "then": "确认告警能送达责任人",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按影响定级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "减少噪音",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阈值分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抑制机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警可达",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

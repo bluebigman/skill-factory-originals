@@ -1,0 +1,74 @@
+{
+ "name": "family-rules-coach",
+ "version": "1.0.0",
+ "plugin": "family-rules-coach",
+ "description": "Family Rules Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/family-rules-coach.md"
+ ],
+ "skills": [
+  "./skills/family-rules-coach-1",
+  "./skills/family-rules-coach-2",
+  "./skills/family-rules-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "family-rules-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Family Rules Coach",
+  "zh": "家庭规则 写下来 少而精"
+ },
+ "profession": {
+  "en": "Family Rules Coach",
+  "zh": "家庭规则 制定执行 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Family Rules Coach tasks end-to-end with built-in professional skills.",
+  "zh": "家庭规则 制定执行 助手：覆盖 写下来、少而精、一致执行 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "写下来"
+  },
+  {
+   "en": "practical capability",
+   "zh": "少而精"
+  },
+  {
+   "en": "practical capability",
+   "zh": "一致执行"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到写下来怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到少而精怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到一致执行怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到写下来怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭规则专家",
+  "to": "家庭规则 写下来 少而精",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

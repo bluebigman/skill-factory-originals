@@ -1,0 +1,66 @@
+{
+ "name": "algo-practice-plan-1",
+ "version": "2.0.0",
+ "domain": "算法刷题",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按类刷",
+   "then": "同类型连做 5 题再换，形成模式识别",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "限时",
+   "then": "单题限时 30 分钟，超时看题解并重写",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按类刷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "限时",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "同类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "类型",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

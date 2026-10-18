@@ -1,0 +1,72 @@
+{
+ "name": "report-narrative-2",
+ "version": "2.0.0",
+ "domain": "数据叙事撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结论先行",
+   "then": "首段给结论",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一图一义",
+   "then": "每图只支撑一个论点",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标注关键",
+   "then": "标出拐点与异常",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "口径备注",
+   "then": "图表下方标注口径",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "附录留数",
+   "then": "明细放附录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一图一义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标注关键",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径备注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "附录留数",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "forecast-sanity-2",
+ "version": "2.0.0",
+ "domain": "预测结果校验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看历史拟合",
+   "then": "历史回测误差",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "区间输出",
+   "then": "给点估计与区间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "假设显式",
+   "then": "列出关键假设",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "敏感性",
+   "then": "说明假设变动的影响",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期回测",
+   "then": "上线后持续用真实值回测",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看历史拟合",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "区间输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "假设显式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期回测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "queue-backpressure-3",
+ "version": "2.0.0",
+ "domain": "队列背压控制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "容量上限",
+   "then": "队列设上限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拒收策略",
+   "then": "满时拒收而非堆积",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "速率控制",
+   "then": "生产端限速",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "优先级",
+   "then": "按重要性分队列",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "监控积压",
+   "then": "积压即告警",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "容量上限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒收策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "速率控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优先级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "监控积压",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

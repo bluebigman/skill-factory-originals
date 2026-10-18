@@ -1,0 +1,117 @@
+{
+ "name": "pain-boundary",
+ "version": "2.0.0",
+ "domain": "久坐改善",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "肌肉酸胀",
+   "then": "延迟性酸胀 24-72 小时属正常范围",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "放射痛",
+   "then": "疼痛向下肢/上肢放射提示神经受压，须就医评估",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "麻木无力",
+   "then": "持续麻木或肌力下降不可自行拉伸，须就诊",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "头晕",
+   "then": "活动时出现头晕须停止并就医排查",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "急性损伤",
+   "then": "急性外伤先固定冷敷并就医，本工具不提供医疗处置",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "疼痛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "麻木",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "头晕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就医",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "肌肉酸胀",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "放射痛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "麻木无力",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "急性损伤",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "减少",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

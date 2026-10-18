@@ -1,0 +1,72 @@
+{
+ "name": "data-leak-prevent-1",
+ "version": "2.0.0",
+ "domain": "数据泄露防护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "敏感识别",
+   "then": "识别敏感数据类别",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "出口管控",
+   "then": "控制数据出口",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "水印溯源",
+   "then": "外发加水印",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "审计留痕",
+   "then": "访问与导出记录",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "告警机制",
+   "then": "异常导出即告警",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "敏感识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "出口管控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "水印溯源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审计留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "test-case-design-2",
+ "version": "2.0.0",
+ "domain": "测试用例",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "幂等校验",
+   "then": "重复提交场景必须验证",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可复用",
+   "then": "用例写成可复用检查表，不写一次性脚本",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "幂等校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "正常",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "再补",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "次性",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "name": "Home Organization Pro",
+ "description": "家庭收纳专家：物品去留的判断标准与流程；整理后的长期维持；按使用频率的家庭空间分区。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/home-organization-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-organization-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "declutter-rules",
+   "name": "物品去留的判断标准与流程",
+   "description": "物品去留的判断标准与流程",
+   "tags": [
+    "断舍离",
+    "舍不得扔",
+    "囤积",
+    "情绪物品"
+   ],
+   "examples": [
+    "遇到舍不得",
+    "遇到决策疲劳",
+    "遇到家人不配合",
+    "遇到扔了再用",
+    "遇到贬值焦虑"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "declutter-rules",
+    "to": "declutter-rules",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "maintain-system",
+   "name": "整理后的长期维持",
+   "description": "整理后的长期维持",
+   "tags": [
+    "维持",
+    "又乱了",
+    "反弹",
+    "复乱"
+   ],
+   "examples": [
+    "遇到又乱了",
+    "遇到反弹",
+    "遇到标签失效",
+    "遇到采购破坏",
+    "遇到季节收纳"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "maintain-system",
+    "to": "maintain-system",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "zone-planning",
+   "name": "按使用频率的家庭空间分区",
+   "description": "按使用频率的家庭空间分区",
+   "tags": [
+    "收纳",
+    "分区",
+    "随手乱放",
+    "找不到"
+   ],
+   "examples": [
+    "遇到随手乱放",
+    "遇到找不到",
+    "遇到高频占优",
+    "遇到动线冲突",
+    "遇到重复购买"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:45",
+    "from": "zone-planning",
+    "to": "zone-planning",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭收纳专家"
+}

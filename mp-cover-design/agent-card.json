@@ -1,0 +1,75 @@
+{
+ "name": "Mp Cover Design",
+ "description": "公众号封面专家：覆盖 主体居中、三色上限、字少字大 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/mp-cover-design",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/mp-cover-design",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "mp-cover-design-1",
+   "name": "针对 主体居中、三色上限 等情境给出可执行处置",
+   "description": "针对 主体居中、三色上限 等情境给出可执行处置",
+   "tags": [
+    "主体居中",
+    "三色上限"
+   ],
+   "examples": [
+    "遇到主体居中",
+    "遇到三色上限",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mp-cover-design-2",
+   "name": "针对 字少字大、系列一致 等情境给出可执行处置",
+   "description": "针对 字少字大、系列一致 等情境给出可执行处置",
+   "tags": [
+    "字少字大",
+    "系列一致"
+   ],
+   "examples": [
+    "遇到字少字大",
+    "遇到系列一致",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mp-cover-design-3",
+   "name": "针对 版权清晰 等情境给出可执行处置",
+   "description": "针对 版权清晰 等情境给出可执行处置",
+   "tags": [
+    "版权清晰"
+   ],
+   "examples": [
+    "遇到版权清晰",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "公众号封面专家",
+ "x-source": "skill-factory-originals"
+}

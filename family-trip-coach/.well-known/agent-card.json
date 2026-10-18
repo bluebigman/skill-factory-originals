@@ -1,0 +1,75 @@
+{
+ "name": "Family Trip Coach",
+ "description": "家庭旅行专家：覆盖 节奏放缓、动线聚类、留缓冲、儿童优先、备选方案 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/family-trip-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-trip-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "family-trip-coach-1",
+   "name": "针对 节奏放缓、动线聚类 等情境给出可执行处置",
+   "description": "针对 节奏放缓、动线聚类 等情境给出可执行处置",
+   "tags": [
+    "节奏放缓",
+    "动线聚类"
+   ],
+   "examples": [
+    "遇到节奏放缓",
+    "遇到动线聚类",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-trip-coach-2",
+   "name": "针对 留缓冲、儿童优先 等情境给出可执行处置",
+   "description": "针对 留缓冲、儿童优先 等情境给出可执行处置",
+   "tags": [
+    "留缓冲",
+    "儿童优先"
+   ],
+   "examples": [
+    "遇到留缓冲",
+    "遇到儿童优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-trip-coach-3",
+   "name": "针对 备选方案 等情境给出可执行处置",
+   "description": "针对 备选方案 等情境给出可执行处置",
+   "tags": [
+    "备选方案"
+   ],
+   "examples": [
+    "遇到备选方案",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家庭旅行专家",
+ "x-source": "skill-factory-originals"
+}

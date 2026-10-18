@@ -1,0 +1,67 @@
+{
+ "name": "Shop Review Coach",
+ "description": "店铺数据专家：覆盖 漏斗拆解、点击低改主图、看 7 日均值、对照组 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/shop-review-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/shop-review-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "shop-review-coach-1",
+   "name": "针对 漏斗拆解、点击低改主图 等情境给出可执行处置",
+   "description": "针对 漏斗拆解、点击低改主图 等情境给出可执行处置",
+   "tags": [
+    "漏斗拆解",
+    "点击低改主图"
+   ],
+   "examples": [
+    "遇到漏斗拆解",
+    "遇到点击低改主图",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "shop-review-coach-2",
+   "name": "针对 看 7 日均值、对照组 等情境给出可执行处置",
+   "description": "针对 看 7 日均值、对照组 等情境给出可执行处置",
+   "tags": [
+    "看 7 日均值",
+    "对照组"
+   ],
+   "examples": [
+    "遇到看 7 日均值",
+    "遇到对照组",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "shop-review-coach-3",
+   "name": "针对 动作≤2 等情境给出可执行处置",
+   "description": "针对 动作≤2 等情境给出可执行处置",
+   "tags": [
+    "动作≤2"
+   ],
+   "examples": [
+    "遇到动作≤2",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "店铺数据专家"
+}

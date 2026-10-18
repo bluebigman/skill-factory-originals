@@ -1,0 +1,78 @@
+{
+ "name": "channel-evaluate-2",
+ "version": "2.0.0",
+ "domain": "渠道评估",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看增量",
+   "then": "用增量而非总量评估，避免抢自然量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分层测试",
+   "then": "新渠道先小额测试再加码",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看增量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层测试",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "评估",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "自然",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只看",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "收益",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "data-incident-review-2",
+ "version": "2.0.0",
+ "domain": "数据事故复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "时间线",
+   "then": "还原事件时间线",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "根因分层",
+   "then": "区分直接与系统原因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "影响量化",
+   "then": "量化影响范围",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "改进项",
+   "then": "每项有责任人与期限",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "闭环跟踪",
+   "then": "纳入常规跟踪",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "时间线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "根因分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "影响量化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改进项",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环跟踪",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

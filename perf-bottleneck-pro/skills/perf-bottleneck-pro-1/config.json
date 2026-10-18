@@ -1,0 +1,72 @@
+{
+ "name": "perf-bottleneck-pro-1",
+ "version": "2.0.0",
+ "domain": "性能瓶颈",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "指标先行",
+   "then": "先量化再优化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "链路定位",
+   "then": "按耗时排序定位瓶颈",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "优化排序",
+   "then": "收益最大的先做",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回归验证",
+   "then": "优化后必须复测",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "防劣化",
+   "then": "建立性能回归基线",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "指标先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "链路定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优化排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防劣化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

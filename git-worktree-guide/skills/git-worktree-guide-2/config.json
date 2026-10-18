@@ -1,0 +1,72 @@
+{
+ "name": "git-worktree-guide-2",
+ "version": "2.0.0",
+ "domain": "分支隔离工作区",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一任务一工作区",
+   "then": "并行任务用独立工作区防互相污染",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "目录选定",
+   "then": "工作区放在主仓同级非仓内",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "清理及时",
+   "then": "任务结束即删除工作区",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "命名可读",
+   "then": "工作区名含任务标识",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "安全检查",
+   "then": "删前确认无未提交改动",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一任务一工作区",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目录选定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清理及时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全检查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

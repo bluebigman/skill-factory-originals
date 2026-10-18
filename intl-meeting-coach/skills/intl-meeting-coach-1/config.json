@@ -1,0 +1,72 @@
+{
+ "name": "intl-meeting-coach-1",
+ "version": "2.0.0",
+ "domain": "跨时区会议",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "时区轮换",
+   "then": "会议时间轮流迁就，固定一方熬夜必致抵触",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "议程前置",
+   "then": "议程与材料提前发出",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结论留档",
+   "then": "结论与待办当场留档",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异步优先",
+   "then": "能异步解决就不开会",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "角色明确",
+   "then": "指定主持人与跟进人",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "时区轮换",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "议程前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论留档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异步优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "角色明确",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

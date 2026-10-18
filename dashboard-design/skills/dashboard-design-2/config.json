@@ -1,0 +1,72 @@
+{
+ "name": "dashboard-design-2",
+ "version": "2.0.0",
+ "domain": "仪表盘设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "指标口径先行",
+   "then": "口径不清不画图",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分层布局",
+   "then": "首屏核心健康指标",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "对比基线",
+   "then": "每指标配对比或目标线",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常下钻",
+   "then": "支持从汇总下钻明细",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "刷新与权限",
+   "then": "明确刷新节奏与可见范围",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "指标口径先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层布局",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比基线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常下钻",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "刷新与权限",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

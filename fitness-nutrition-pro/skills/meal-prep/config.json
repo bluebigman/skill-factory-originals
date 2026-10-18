@@ -1,0 +1,121 @@
+{
+ "name": "meal-prep",
+ "version": "2.0.0",
+ "domain": "增肌减脂",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "备餐负担",
+   "then": "周末预处理主食与蛋白分装，工作日只做组合",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "口味单调",
+   "then": "用调味变化而非换食材，醋/柠檬/香辛料零热量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "外食",
+   "then": "外食按蒸煮烤优先，油炸类每周不超 2 次",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "记录",
+   "then": "只记结构与份数，逐克称重成本高必放弃",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "边界",
+   "then": "慢性病、孕期哺乳期须遵医嘱，本工具不适用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "备餐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "便当",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一周菜单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分装",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "备餐负担",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口味单调",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "工具",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "选择",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "工作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "单独",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

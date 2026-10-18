@@ -1,0 +1,54 @@
+{
+ "name": "warehouse-slot-pro-1",
+ "version": "2.0.0",
+ "domain": "仓储布局",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "动线优先",
+   "then": "按动线最短原则布局",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "ABC 分区",
+   "then": "高频货品靠近出货口",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "动线优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "ABC 分区",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "原则",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

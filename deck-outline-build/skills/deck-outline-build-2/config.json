@@ -1,0 +1,72 @@
+{
+ "name": "deck-outline-build-2",
+ "version": "2.0.0",
+ "domain": "演示文稿大纲",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一页一义",
+   "then": "每页只讲一个观点，多观点必拆页",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结论前置",
+   "then": "每页标题写结论而非话题",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "三幕结构",
+   "then": "背景-冲突-方案，缺一则听众失焦",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "图表配一句",
+   "then": "图表下必配一句话结论",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "页数与时长",
+   "then": "按每分钟一页估算，超时即删非核心页",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一页一义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "三幕结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图表配一句",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "页数与时长",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

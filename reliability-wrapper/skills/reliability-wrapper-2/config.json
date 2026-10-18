@@ -1,0 +1,87 @@
+{
+ "name": "reliability-wrapper-2",
+ "version": "2.0.0",
+ "domain": "重试熔断",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "雪崩传染",
+   "then": "连续失败达阈值即熔断，给冷却窗口，不持续打穿下游",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "降级无声明",
+   "then": "任何降级必须显式声明降级后的能力边界",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "超时缺失",
+   "then": "所有外部调用必须带超时，禁止无限等待",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "雪崩传染",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "降级无声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超时缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "显式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "连续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "阈值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "消耗",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "即停",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "窗口",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

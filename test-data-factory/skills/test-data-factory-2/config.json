@@ -1,0 +1,72 @@
+{
+ "name": "test-data-factory-2",
+ "version": "2.0.0",
+ "domain": "测试数据构造",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "真实感",
+   "then": "数据符合真实分布",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "脱敏优先",
+   "then": "不用真实个人信息",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可复现",
+   "then": "同种子生成同数据",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "按需生成",
+   "then": "按用例需求生成",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "清理机制",
+   "then": "用后清理不留垃圾",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "真实感",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脱敏优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按需生成",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清理机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

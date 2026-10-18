@@ -1,0 +1,72 @@
+{
+ "name": "csv-quick-analyze-1",
+ "version": "2.0.0",
+ "domain": "CSV",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看结构",
+   "then": "行列数与字段类型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "缺失统计",
+   "then": "各列缺失率排序",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分布概览",
+   "then": "数值列看分位与异常",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "相关性",
+   "then": "关注强相关组合",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论落表",
+   "then": "关键发现整理成表",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺失统计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分布概览",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "相关性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论落表",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

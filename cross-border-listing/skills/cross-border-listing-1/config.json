@@ -1,0 +1,58 @@
+{
+ "name": "cross-border-listing-1",
+ "version": "2.0.0",
+ "domain": "跨境上架",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先查禁售",
+   "then": "按目标市场先查禁限售清单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "本地化度量",
+   "then": "单位/尺码/电压按当地标准换算",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先查禁售",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "本地化度量",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "按目",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "语言",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

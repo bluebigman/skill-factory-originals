@@ -1,0 +1,109 @@
+{
+ "name": "Pet Care Advanced Pro",
+ "description": "行为训练专家：猫只环境与行为管理；犬只日常喂养与运动管理；宠物健康记录与就医准备。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/pet-care-advanced-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/pet-care-advanced-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "cat-care",
+   "name": "猫只环境与行为管理",
+   "description": "猫只环境与行为管理",
+   "tags": [
+    "养猫",
+    "猫砂",
+    "应激",
+    "抓家具",
+    "饮水"
+   ],
+   "examples": [
+    "遇到猫砂",
+    "遇到抓家具",
+    "遇到应激",
+    "遇到饮水不足",
+    "遇到乱尿"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "cat-care",
+    "to": "cat-care",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "dog-care",
+   "name": "犬只日常喂养与运动管理",
+   "description": "犬只日常喂养与运动管理",
+   "tags": [
+    "养狗",
+    "遛狗",
+    "拆家",
+    "乱叫",
+    "掉毛"
+   ],
+   "examples": [
+    "遇到遛狗时长",
+    "遇到拆家",
+    "遇到乱叫",
+    "遇到掉毛",
+    "遇到驱虫免疫"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "dog-care",
+    "to": "dog-care",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "health-record",
+   "name": "宠物健康记录与就医准备",
+   "description": "宠物健康记录与就医准备",
+   "tags": [
+    "健康记录",
+    "疫苗",
+    "就诊",
+    "驱虫"
+   ],
+   "examples": [
+    "遇到记录缺失",
+    "遇到体重趋势",
+    "遇到就诊准备",
+    "遇到用药",
+    "遇到急症"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "health-record",
+    "to": "health-record",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "行为训练专家",
+ "x-source": "skill-factory-originals"
+}

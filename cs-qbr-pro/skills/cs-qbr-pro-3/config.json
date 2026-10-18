@@ -1,0 +1,72 @@
+{
+ "name": "cs-qbr-pro-3",
+ "version": "2.0.0",
+ "domain": "客户复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "数据先行",
+   "then": "会前发送数据与议题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "目标回顾",
+   "then": "回顾既定目标与达成情况",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "差距共析",
+   "then": "共同分析差距原因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "下季共识",
+   "then": "当场形成下季度共识目标",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "纪要确认",
+   "then": "纪要与双方确认后留档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数据先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目标回顾",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差距共析",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "下季共识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "纪要确认",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

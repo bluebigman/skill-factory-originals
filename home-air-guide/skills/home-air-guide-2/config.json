@@ -1,0 +1,74 @@
+{
+ "name": "home-air-guide-2",
+ "version": "2.0.0",
+ "domain": "室内空气",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "净化器",
+   "then": "按房间面积选 CADR 值",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "湿度",
+   "then": "保持 40-60% 抑制霉菌",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "净化器",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "湿度",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每日",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "每次",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "保持",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "房间",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

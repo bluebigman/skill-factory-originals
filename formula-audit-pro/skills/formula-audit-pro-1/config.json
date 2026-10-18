@@ -1,0 +1,72 @@
+{
+ "name": "formula-audit-pro-1",
+ "version": "2.0.0",
+ "domain": "公式审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "引用检查",
+   "then": "检查绝对相对引用",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "类型校验",
+   "then": "检查数据类型",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "循环引用",
+   "then": "检测循环引用",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "边界值",
+   "then": "空值除零处理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果验证",
+   "then": "关键结果交叉验证",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "引用检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类型校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "循环引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

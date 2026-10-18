@@ -1,0 +1,74 @@
+{
+ "name": "household-ops-pro",
+ "version": "1.0.0",
+ "plugin": "household-ops-pro",
+ "description": "Household Ops Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/household-ops-pro.md"
+ ],
+ "skills": [
+  "./skills/chore-plan",
+  "./skills/expense-book",
+  "./skills/shopping-list"
+ ],
+ "expertType": "agent",
+ "agentName": "household-ops-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Household Ops Pro",
+  "zh": "家庭事务 一人全包 拒不执行"
+ },
+ "profession": {
+  "en": "Household Ops Pro",
+  "zh": "家庭事务 收支记账 采购清单"
+ },
+ "displayDescription": {
+  "en": "Handles Household Ops Pro tasks end-to-end with built-in professional skills.",
+  "zh": "家庭事务 收支记账 采购清单：家庭成员的日常事务分配；家庭日常收支的记录与结构分析。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "一人全包"
+  },
+  {
+   "en": "practical capability",
+   "zh": "拒不执行"
+  },
+  {
+   "en": "practical capability",
+   "zh": "质量标准不一"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到一人全包怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到拒不执行怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到质量标准不一怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到一人全包怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "家庭事务专家",
+  "to": "家庭事务 一人全包 拒不执行",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

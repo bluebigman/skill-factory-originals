@@ -1,0 +1,72 @@
+{
+ "name": "api-contract-check-2",
+ "version": "2.0.0",
+ "domain": "接口契约校验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "契约先行",
+   "then": "先定请求响应结构再实现",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "必填可选",
+   "then": "明确字段必填性与默认值",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "版本策略",
+   "then": "破坏性变更升主版本",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "兼容检查",
+   "then": "新增可选字段视为兼容",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "契约测试",
+   "then": "按契约生成用例并回归",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "契约先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "必填可选",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "兼容检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "契约测试",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

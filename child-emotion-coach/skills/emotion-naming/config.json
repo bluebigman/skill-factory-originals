@@ -1,0 +1,113 @@
+{
+ "name": "emotion-naming",
+ "version": "2.0.0",
+ "domain": "儿童情绪",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "说不出",
+   "then": "替他说出感受（你现在很失望），命名本身即降低强度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "闷着",
+   "then": "用图画/颜色/表情卡代替语言表达，降低表达门槛",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "委屈",
+   "then": "先确认事实再表态，勿在未听清前下判断",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "迁怒",
+   "then": "区分情绪与行为：情绪可以，打人不可以",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "情绪回放",
+   "then": "事后复盘（刚才发生了什么）放在平静时段做，勿在高峰",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "情绪命名",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说不清",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闷着",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "委屈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说不出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "迁怒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "情绪回放",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

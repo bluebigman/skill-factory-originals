@@ -1,0 +1,72 @@
+{
+ "name": "marketing-mix-pro-3",
+ "version": "2.0.0",
+ "domain": "渠道组合",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标倒推",
+   "then": "按目标倒推所需投入",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "小预算试新",
+   "then": "新渠道先用小预算测试",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "关注边际",
+   "then": "关注边际效果递减",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "定期再平衡",
+   "then": "按数据定期再分配",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预留机动",
+   "then": "保留机动预算应对机会",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标倒推",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小预算试新",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关注边际",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期再平衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预留机动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

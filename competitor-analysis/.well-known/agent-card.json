@@ -1,0 +1,75 @@
+{
+ "name": "Competitor Analysis",
+ "description": "竞品分析专家：覆盖 先定维度、试用为准、看差评 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/competitor-analysis",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/competitor-analysis",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "competitor-analysis-1",
+   "name": "针对 先定维度、试用为准 等情境给出可执行处置",
+   "description": "针对 先定维度、试用为准 等情境给出可执行处置",
+   "tags": [
+    "先定维度",
+    "试用为准"
+   ],
+   "examples": [
+    "遇到先定维度",
+    "遇到试用为准",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "competitor-analysis-2",
+   "name": "针对 看差评、结论可动 等情境给出可执行处置",
+   "description": "针对 看差评、结论可动 等情境给出可执行处置",
+   "tags": [
+    "看差评",
+    "结论可动"
+   ],
+   "examples": [
+    "遇到看差评",
+    "遇到结论可动",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "competitor-analysis-3",
+   "name": "针对 定期更新 等情境给出可执行处置",
+   "description": "针对 定期更新 等情境给出可执行处置",
+   "tags": [
+    "定期更新"
+   ],
+   "examples": [
+    "遇到定期更新",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "竞品分析专家",
+ "x-source": "skill-factory-originals"
+}

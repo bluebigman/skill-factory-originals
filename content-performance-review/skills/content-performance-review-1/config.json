@@ -1,0 +1,72 @@
+{
+ "name": "content-performance-review-1",
+ "version": "2.0.0",
+ "domain": "内容效果复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "指标先定",
+   "then": "先定核心指标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "对比基线",
+   "then": "与历史或目标对比",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "归因克制",
+   "then": "归因标注局限",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可复用结论",
+   "then": "沉淀可复用规律",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "行动清单",
+   "then": "每条结论配动作",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "指标先定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比基线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归因克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复用结论",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行动清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

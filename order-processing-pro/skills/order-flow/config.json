@@ -1,0 +1,121 @@
+{
+ "name": "order-flow",
+ "version": "2.0.0",
+ "domain": "订单处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "发货慢",
+   "then": "承诺时效内发货，超时是差评与违规的主要来源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "错发漏发",
+   "then": "发货前双人核对或扫码校验，人工核对必出错",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "改址",
+   "then": "已发货改址须与物流确认，擅自承诺会担责",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常件",
+   "then": "物流异常超 48 小时须主动联系客户说明",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "签收",
+   "then": "高价值订单建议签收确认，减少纠纷",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "订单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "发货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "发货慢",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错发漏发",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改址",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "签收",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "每周",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "承诺",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "减少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "价值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平台",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

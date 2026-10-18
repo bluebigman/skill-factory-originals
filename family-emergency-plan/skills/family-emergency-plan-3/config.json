@@ -1,0 +1,65 @@
+{
+ "name": "family-emergency-plan-3",
+ "version": "2.0.0",
+ "domain": "家庭应急",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "燃气泄漏",
+   "then": "先开窗关阀撤离再报警",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "燃气泄漏",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "约定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "预案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "演练",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "物资",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "全家",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

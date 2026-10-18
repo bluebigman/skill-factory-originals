@@ -1,0 +1,62 @@
+{
+ "name": "sheet-import-map-1",
+ "version": "2.0.0",
+ "domain": "表格导入",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看头",
+   "then": "导入前确认表头行位置与合并单元格",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "映射表",
+   "then": "字段映射单独列一页对照表并留存",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "映射表",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "单独",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留存",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前确认",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

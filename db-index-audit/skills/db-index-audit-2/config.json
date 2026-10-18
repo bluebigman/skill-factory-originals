@@ -1,0 +1,72 @@
+{
+ "name": "db-index-audit-2",
+ "version": "2.0.0",
+ "domain": "索引审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "冗余检测",
+   "then": "识别重复索引",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "缺失检测",
+   "then": "识别缺失索引",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "写代价",
+   "then": "评估索引写代价",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变更谨慎",
+   "then": "索引变更须评估",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "效果验证",
+   "then": "变更后验证效果",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "冗余检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺失检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "写代价",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更谨慎",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

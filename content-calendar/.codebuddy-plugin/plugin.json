@@ -1,0 +1,74 @@
+{
+ "name": "content-calendar",
+ "version": "1.0.0",
+ "plugin": "content-calendar",
+ "description": "Content Calendar for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/content-calendar.md"
+ ],
+ "skills": [
+  "./skills/content-calendar-1",
+  "./skills/content-calendar-2",
+  "./skills/content-calendar-3"
+ ],
+ "expertType": "agent",
+ "agentName": "content-calendar",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Content Calendar",
+  "zh": "内容日历 先排固定 提前两周"
+ },
+ "profession": {
+  "en": "Content Calendar",
+  "zh": "内容日历 排期管理 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Content Calendar tasks end-to-end with built-in professional skills.",
+  "zh": "内容日历 排期管理 顾问：覆盖 先排固定、提前两周、标注状态 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "内容日历",
+   "en": "content-calendar"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到内容日历怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到排期管理怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到内容日历怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:31",
+  "from": "内容日历专家",
+  "to": "内容日历 先排固定 提前两周",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

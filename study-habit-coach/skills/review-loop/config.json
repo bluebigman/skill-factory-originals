@@ -1,0 +1,87 @@
+{
+ "name": "review-loop",
+ "version": "2.0.0",
+ "domain": "背单词",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "记不住",
+   "then": "按1天/3天/7天三次复习，用自测而非重读",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "复习",
+   "then": "先合书自述，再翻书核对缺口",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "遗忘",
+   "then": "把错的题单独建错题本，每周重做",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "记不住",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复习",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "遗忘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "允许",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "提升",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时长",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "学习",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "单独",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

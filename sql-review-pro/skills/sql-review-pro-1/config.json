@@ -1,0 +1,72 @@
+{
+ "name": "sql-review-pro-1",
+ "version": "2.0.0",
+ "domain": "SQL",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全表扫描",
+   "then": "检测无索引的大表扫描",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "隐式转换",
+   "then": "检测字段类型不匹配",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "笛卡尔积",
+   "then": "检测多表关联遗漏条件",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "子查询优化",
+   "then": "深层嵌套建议改写",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "执行计划",
+   "then": "关键查询须看执行计划",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全表扫描",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐式转换",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "笛卡尔积",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "子查询优化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "执行计划",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

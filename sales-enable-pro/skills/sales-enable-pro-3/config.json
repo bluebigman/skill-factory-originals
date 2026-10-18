@@ -1,0 +1,72 @@
+{
+ "name": "sales-enable-pro-3",
+ "version": "2.0.0",
+ "domain": "销售赋能",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按场景组织",
+   "then": "素材按销售场景组织而非按产品",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可检索",
+   "then": "统一标签与检索入口",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "过期下架",
+   "then": "过期与失效内容及时下架",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "收集反馈",
+   "then": "收集一线使用反馈",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "培训配套",
+   "then": "素材配套使用培训",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按场景组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可检索",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过期下架",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "收集反馈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "培训配套",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

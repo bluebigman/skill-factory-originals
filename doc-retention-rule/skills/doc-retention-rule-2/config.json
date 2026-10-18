@@ -1,0 +1,72 @@
+{
+ "name": "doc-retention-rule-2",
+ "version": "2.0.0",
+ "domain": "文档保留规则",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按类型分级",
+   "then": "不同文档不同期限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "最短必要",
+   "then": "只留业务必需",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "到期处理",
+   "then": "到期销毁或归档",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "销毁留痕",
+   "then": "销毁记录可审计",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "合规优先",
+   "then": "法规要求优先",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按类型分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最短必要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "到期处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "销毁留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

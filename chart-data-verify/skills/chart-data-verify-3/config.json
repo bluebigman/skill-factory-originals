@@ -1,0 +1,72 @@
+{
+ "name": "chart-data-verify-3",
+ "version": "2.0.0",
+ "domain": "图表核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "数据一致",
+   "then": "图表与源数据一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "坐标规范",
+   "then": "纵轴截断须标注",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "比例准确",
+   "then": "面积长度比例准确",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标注清晰",
+   "then": "单位与图例齐全",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "误导识别",
+   "then": "识别夸大或掩盖",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数据一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坐标规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "比例准确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标注清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误导识别",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "note-structure",
+ "version": "2.0.0",
+ "domain": "小红书笔记",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "开头无钩",
+   "then": "前两行必须给结论或反转，铺垫式开头会被折叠",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无干货",
+   "then": "纯情绪无信息量难被收藏，须给可执行内容",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无场景",
+   "then": "结合真实使用场景，抽象描述没有代入感",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标签随意",
+   "then": "标签按大词+精准词+长尾词三层搭配",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "排版密",
+   "then": "分段+小标题+适度表情，密排文字阅读完成率低",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "笔记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "正文",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标签",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头无钩",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无干货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无场景",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标签随意",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排版密",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "情绪",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平台",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "导致",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

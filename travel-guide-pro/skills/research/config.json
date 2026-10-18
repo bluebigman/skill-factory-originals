@@ -1,0 +1,121 @@
+{
+ "name": "research",
+ "version": "2.0.0",
+ "domain": "旅游攻略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "信息过载",
+   "then": "按交通/住宿/景点/餐饮四类各留 2 个信源，过多无法决策",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "过时信息",
+   "then": "核对最近 3 个月内的攻略，闭馆与票价变动频繁",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "软文陷阱",
+   "then": "警惕通篇推荐的单一商家内容，交叉验证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "季节",
+   "then": "确认最佳季节与雨季/台风期，错季体验差异极大",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预约制",
+   "then": "热门景点须提前预约，现场排队常无票",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "旅游攻略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自由行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "踩坑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避雷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息过载",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过时信息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "软文陷阱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "季节",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预约制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "现场",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "备份",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

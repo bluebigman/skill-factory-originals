@@ -1,0 +1,95 @@
+{
+ "name": "Study Habit Coach",
+ "description": "背单词专家：提升专注时长的具体方法；建立可执行的作业流程；遗忘曲线驱动的复习安排。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/study-habit-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/study-habit-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "focus-training",
+   "name": "提升专注时长的具体方法",
+   "description": "提升专注时长的具体方法",
+   "tags": [
+    "注意力",
+    "坐不住",
+    "走神"
+   ],
+   "examples": [
+    "遇到注意力",
+    "遇到坐不住",
+    "遇到走神",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "focus-training",
+    "to": "focus-training",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "homework-routine",
+   "name": "建立可执行的作业流程",
+   "description": "建立可执行的作业流程",
+   "tags": [
+    "拖拉",
+    "分心",
+    "磨蹭",
+    "写不完"
+   ],
+   "examples": [
+    "遇到拖拉",
+    "遇到分心",
+    "遇到磨蹭",
+    "遇到写不完",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "homework-routine",
+    "to": "homework-routine",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "review-loop",
+   "name": "遗忘曲线驱动的复习安排",
+   "description": "遗忘曲线驱动的复习安排",
+   "tags": [
+    "记不住",
+    "复习",
+    "遗忘"
+   ],
+   "examples": [
+    "遇到记不住",
+    "遇到复习",
+    "遇到遗忘",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "review-loop",
+    "to": "review-loop",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "背单词专家"
+}

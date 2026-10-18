@@ -1,0 +1,72 @@
+{
+ "name": "anomaly-investigate-2",
+ "version": "2.0.0",
+ "domain": "异常波动排查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先确认数据",
+   "then": "排除采集与口径变更",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "定位切片",
+   "then": "按维度逐层定位",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时序对比",
+   "then": "与历史同期与环比对比",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "外部因素",
+   "then": "结合活动与季节",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论标注置信",
+   "then": "不确定的标注待验证",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先确认数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定位切片",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时序对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外部因素",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论标注置信",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

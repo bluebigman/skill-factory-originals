@@ -1,0 +1,72 @@
+{
+ "name": "pricing-page-ux-3",
+ "version": "2.0.0",
+ "domain": "定价页面",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "维度对齐",
+   "then": "各方案对比维度保持一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "推荐克制",
+   "then": "推荐项不得误导性放大",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "价格透明",
+   "then": "单位与计费周期明确",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "疑虑前置",
+   "then": "高频疑问在页面内解答",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "拒绝暗黑",
+   "then": "不做诱导性默认勾选",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "维度对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "推荐克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "价格透明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "疑虑前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒绝暗黑",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

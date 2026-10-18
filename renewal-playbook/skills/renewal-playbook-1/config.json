@@ -1,0 +1,72 @@
+{
+ "name": "renewal-playbook-1",
+ "version": "2.0.0",
+ "domain": "续约管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "提前启动",
+   "then": "在到期前足够时间启动续约",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "价值回顾",
+   "then": "用可量化价值做回顾",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "风险早识",
+   "then": "早期识别降配与流失信号",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "多方确认",
+   "then": "确认多角色意愿而非单一联系人",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "条款前置",
+   "then": "条款调整提前谈不压线",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "提前启动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "价值回顾",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "风险早识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多方确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条款前置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

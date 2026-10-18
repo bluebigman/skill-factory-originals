@@ -1,0 +1,78 @@
+{
+ "name": "game-balance-coach-2",
+ "version": "2.0.0",
+ "domain": "数值平衡",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看数据",
+   "then": "以实际使用率与胜率为准，不看主观强弱",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "避免连锁",
+   "then": "调整前评估对关联数值的连锁影响",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免连锁",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "评估",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "再谈",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "数值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "观察",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "先建",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

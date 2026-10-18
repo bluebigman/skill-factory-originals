@@ -1,0 +1,72 @@
+{
+ "name": "office-file-io-3",
+ "version": "2.0.0",
+ "domain": "Office",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "格式先判",
+   "then": "先识别 docx/xlsx/pptx 再选读写路径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结构保留",
+   "then": "读写时保留样式与层级",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "批处理分批",
+   "then": "大文件分批读写防内存溢出",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "写完复核",
+   "then": "写后重读关键字段确认",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "模板优先",
+   "then": "同类任务先套模板再填充",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "格式先判",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构保留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批处理分批",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "写完复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "模板优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

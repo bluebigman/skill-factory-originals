@@ -1,0 +1,75 @@
+{
+ "name": "Teen Time Coach",
+ "description": "青少年专家：覆盖 共同制定、可视化、留白、只抓关键 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/teen-time-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-time-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-time-coach-1",
+   "name": "针对 共同制定、可视化 等情境给出可执行处置",
+   "description": "针对 共同制定、可视化 等情境给出可执行处置",
+   "tags": [
+    "共同制定",
+    "可视化"
+   ],
+   "examples": [
+    "遇到共同制定",
+    "遇到可视化",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-time-coach-2",
+   "name": "针对 留白、只抓关键 等情境给出可执行处置",
+   "description": "针对 留白、只抓关键 等情境给出可执行处置",
+   "tags": [
+    "留白",
+    "只抓关键"
+   ],
+   "examples": [
+    "遇到留白",
+    "遇到只抓关键",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-time-coach-3",
+   "name": "针对 不包办 等情境给出可执行处置",
+   "description": "针对 不包办 等情境给出可执行处置",
+   "tags": [
+    "不包办"
+   ],
+   "examples": [
+    "遇到不包办",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "青少年专家",
+ "x-source": "skill-factory-originals"
+}

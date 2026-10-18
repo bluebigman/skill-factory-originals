@@ -1,0 +1,74 @@
+{
+ "name": "db-schema-review",
+ "version": "1.0.0",
+ "plugin": "db-schema-review",
+ "description": "Db Schema Review for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/db-schema-review.md"
+ ],
+ "skills": [
+  "./skills/db-schema-review-1",
+  "./skills/db-schema-review-2",
+  "./skills/db-schema-review-3"
+ ],
+ "expertType": "agent",
+ "agentName": "db-schema-review",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Db Schema Review",
+  "zh": "数据库设计 字段可空 索引有据"
+ },
+ "profession": {
+  "en": "Db Schema Review",
+  "zh": "数据库设计 表结构 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Db Schema Review tasks end-to-end with built-in professional skills.",
+  "zh": "数据库设计 表结构 顾问：覆盖 字段可空、索引有据、命名统一 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "数据库设计",
+   "en": "db-schema-review"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到数据库设计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到表结构怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到数据库设计怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:34",
+  "from": "数据库设计专家",
+  "to": "数据库设计 字段可空 索引有据",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

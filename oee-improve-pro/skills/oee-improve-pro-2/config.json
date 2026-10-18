@@ -1,0 +1,78 @@
+{
+ "name": "oee-improve-pro-2",
+ "version": "2.0.0",
+ "domain": "设备效率",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "自动采集",
+   "then": "优先自动采集，人工记录失真大",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "根因分层",
+   "then": "用连续追问挖到可执行层",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "自动采集",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "根因分层",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分类",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "最大",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "追问",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "效率",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "连续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "统计",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

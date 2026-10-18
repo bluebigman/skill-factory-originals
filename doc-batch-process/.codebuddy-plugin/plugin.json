@@ -1,0 +1,74 @@
+{
+ "name": "doc-batch-process",
+ "version": "1.0.0",
+ "plugin": "doc-batch-process",
+ "description": "doc-batch-process — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for doc-batch-process tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/doc-batch-process.md"
+ ],
+ "agentName": "doc-batch-process",
+ "displayName": {
+  "zh": "文档批处 模板先行 变量清单",
+  "en": "doc-batch-process"
+ },
+ "profession": {
+  "zh": "文档批处 模板套用 顾问",
+  "en": "doc-batch-process"
+ },
+ "displayDescription": {
+  "zh": "文档批处 模板套用 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "doc-batch-process: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "文档批处",
+   "en": "doc-batch-process"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到文档批处怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划文档批处",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查文档批处",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到文档批处怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/doc-batch-process-1/",
+  "./skills/doc-batch-process-2/",
+  "./skills/doc-batch-process-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:35",
+  "from": "文档批处专家",
+  "to": "文档批处 模板先行 变量清单",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

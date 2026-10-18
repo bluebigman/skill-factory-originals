@@ -1,0 +1,99 @@
+{
+ "name": "Stress Relief Pro",
+ "description": "压力缓解专家：长期压力的日常管理；压力高峰的快速平复方法；需要心理专业介入的情形。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/stress-relief-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/stress-relief-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "daily-recovery",
+   "name": "长期压力的日常管理",
+   "description": "长期压力的日常管理",
+   "tags": [
+    "作息",
+    "睡眠",
+    "运动",
+    "恢复"
+   ],
+   "examples": [
+    "遇到睡眠不足",
+    "遇到运动缺失",
+    "遇到社交隔离",
+    "遇到咖啡因过量",
+    "遇到无边界"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "daily-recovery",
+    "to": "daily-recovery",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "instant-relief",
+   "name": "压力高峰的快速平复方法",
+   "description": "压力高峰的快速平复方法",
+   "tags": [
+    "压力大",
+    "紧张",
+    "心跳快",
+    "平复"
+   ],
+   "examples": [
+    "遇到呼吸急促",
+    "遇到肌肉紧张",
+    "遇到思绪反刍",
+    "遇到心跳加速",
+    "遇到现场失控"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "instant-relief",
+    "to": "instant-relief",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "professional-boundary",
+   "name": "需要心理专业介入的情形",
+   "description": "需要心理专业介入的情形",
+   "tags": [
+    "持续低落",
+    "失眠",
+    "焦虑",
+    "求助"
+   ],
+   "examples": [
+    "遇到持续两周以上",
+    "遇到功能受损",
+    "遇到躯体症状",
+    "遇到自伤念头",
+    "遇到本工具边界"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "professional-boundary",
+    "to": "professional-boundary",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "压力缓解专家"
+}

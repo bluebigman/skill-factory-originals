@@ -1,0 +1,72 @@
+{
+ "name": "privacy-by-design-1",
+ "version": "2.0.0",
+ "domain": "隐私设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "默认最小",
+   "then": "默认收集最少",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "目的限定",
+   "then": "只为声明目的使用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "用户可控",
+   "then": "用户可查可删",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "透明告知",
+   "then": "明确告知处理方式",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "全周期",
+   "then": "覆盖全生命周期",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "默认最小",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目的限定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用户可控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "透明告知",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全周期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

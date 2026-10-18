@@ -1,0 +1,74 @@
+{
+ "name": "event-planning",
+ "version": "1.0.0",
+ "plugin": "event-planning",
+ "description": "event-planning — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for event-planning tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/event-planning.md"
+ ],
+ "agentName": "event-planning",
+ "displayName": {
+  "zh": "活动策划 目标单一 预算留余",
+  "en": "event-planning"
+ },
+ "profession": {
+  "zh": "活动策划 顾问",
+  "en": "event-planning"
+ },
+ "displayDescription": {
+  "zh": "活动策划 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。。",
+  "en": "event-planning: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "活动策划",
+   "en": "event-planning"
+  },
+  {
+   "en": "MarketingGrowth",
+   "zh": "MarketingGrowth"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到活动策划怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划活动策划",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查活动策划",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到活动策划怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/event-planning-1/",
+  "./skills/event-planning-2/",
+  "./skills/event-planning-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:37",
+  "from": "活动策划专家",
+  "to": "活动策划 目标单一 预算留余",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

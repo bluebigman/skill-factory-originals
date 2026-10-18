@@ -1,0 +1,107 @@
+{
+ "name": "Elderly Care Plan Pro",
+ "description": "养老规划专家：居家养老的日常照护安排；家庭养老方案的制定；适老化环境与安全防护。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/elderly-care-plan-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/elderly-care-plan-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "daily-support",
+   "name": "居家养老的日常照护安排",
+   "description": "居家养老的日常照护安排",
+   "tags": [
+    "照护",
+    "陪护",
+    "独居",
+    "生活协助"
+   ],
+   "examples": [
+    "遇到全落一人",
+    "遇到照护疲劳",
+    "遇到异地照护",
+    "遇到费用分摊",
+    "遇到尊严"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "daily-support",
+    "to": "daily-support",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "plan-design",
+   "name": "家庭养老方案的制定",
+   "description": "家庭养老方案的制定",
+   "tags": [
+    "养老",
+    "规划",
+    "独居",
+    "同住"
+   ],
+   "examples": [
+    "遇到无规划",
+    "遇到意愿忽略",
+    "遇到经济准备",
+    "遇到医疗安排",
+    "遇到预案"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "plan-design",
+    "to": "plan-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "safety",
+   "name": "适老化环境与安全防护",
+   "description": "适老化环境与安全防护",
+   "tags": [
+    "防滑",
+    "扶手",
+    "照明",
+    "跌倒"
+   ],
+   "examples": [
+    "遇到跌倒",
+    "遇到如厕",
+    "遇到动线",
+    "遇到紧急联络",
+    "遇到就医"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:42",
+    "from": "safety",
+    "to": "safety",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "养老规划专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "dependency-upgrade-3",
+ "version": "2.0.0",
+ "domain": "依赖升级",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看变更",
+   "then": "读变更日志找破坏性改动",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "小步升级",
+   "then": "分批升级便于定位",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "测试覆盖",
+   "then": "升级前确认关键路径有测试",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "锁版本",
+   "then": "升级后锁定版本",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可回退",
+   "then": "保留回退版本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看变更",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小步升级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "测试覆盖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "锁版本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可回退",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

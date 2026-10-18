@@ -1,0 +1,121 @@
+{
+ "name": "optimize",
+ "version": "2.0.0",
+ "domain": "内容优化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "开头弱",
+   "then": "前 10 字须给冲突/悬念/利益点，铺垫式开头必被划走",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "信息密度低",
+   "then": "删掉所有可删的形容词，密度决定耐心",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无利益点",
+   "then": "读者需要明确获得（方法/清单/模板）",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无行动",
+   "then": "结尾给明确动作（评论/点击/关注），无引导则无转化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "同质化",
+   "then": "加入独特数据或亲历细节，同质内容无传播力",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "内容优化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改稿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转化低",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "完读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头弱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息密度低",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无利益点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无行动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "同质化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "模板",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "差异",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "价格",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "极限词",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "引导",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "seo-content-pro-2",
+ "version": "2.0.0",
+ "domain": "搜索内容",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "意图分类",
+   "then": "按搜索意图分类再组织内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一词一页",
+   "then": "一个页面聚焦一个主词",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结构可读",
+   "then": "标题层级与段落结构清晰",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "内链闭环",
+   "then": "相关页之间互相链接",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "按数据更新",
+   "then": "按搜索数据定期更新内容",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "意图分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一词一页",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "内链闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按数据更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

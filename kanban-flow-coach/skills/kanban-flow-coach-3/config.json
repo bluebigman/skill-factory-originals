@@ -1,0 +1,69 @@
+{
+ "name": "kanban-flow-coach-3",
+ "version": "2.0.0",
+ "domain": "看板流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "度量周期",
+   "then": "用前置时间而非忙闲判断效率",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "度量周期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "前置",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "效率",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "堆积",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "瓶颈",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

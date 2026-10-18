@@ -1,0 +1,72 @@
+{
+ "name": "agent-output-verify-pro-1",
+ "version": "2.0.0",
+ "domain": "输出验证",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无来源断言",
+   "then": "要求补来源，否则降级为待核验",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数字不可核",
+   "then": "标记不可核验，能重算的必须重算",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结论先行",
+   "then": "回溯证据链查是否为先定结论",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "引用核验",
+   "then": "文献法规逐条查存在性",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "矛盾检测",
+   "then": "跨轮比同一事实表述，不一致全标待查",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "无来源断言",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数字不可核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引用核验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "矛盾检测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

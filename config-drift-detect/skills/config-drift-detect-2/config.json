@@ -1,0 +1,72 @@
+{
+ "name": "config-drift-detect-2",
+ "version": "2.0.0",
+ "domain": "配置漂移",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "基线固化",
+   "then": "关键配置基线化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "定时比对",
+   "then": "定期比对实际与基线",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "差异分级",
+   "then": "按影响面分级差异",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变更审批",
+   "then": "生产配置变更须审批",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回滚可用",
+   "then": "配置变更保留回滚路径",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "基线固化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定时比对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更审批",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回滚可用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

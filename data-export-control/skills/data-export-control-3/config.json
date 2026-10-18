@@ -1,0 +1,72 @@
+{
+ "name": "data-export-control-3",
+ "version": "2.0.0",
+ "domain": "数据导出管控",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "审批前置",
+   "then": "导出需审批",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "范围最小",
+   "then": "只导必需字段",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "水印标记",
+   "then": "导出文件加水印",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "留痕审计",
+   "then": "记录导出人与内容",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期回收",
+   "then": "对外文件定期回收",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "审批前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "范围最小",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "水印标记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕审计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期回收",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

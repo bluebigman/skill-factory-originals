@@ -1,0 +1,67 @@
+{
+ "name": "Family Schedule Coach",
+ "description": "家庭日程专家：覆盖 统一日历、提前一周、只提醒行动项、留缓冲、变更同步 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/family-schedule-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-schedule-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "family-schedule-coach-1",
+   "name": "针对 统一日历、提前一周 等情境给出可执行处置",
+   "description": "针对 统一日历、提前一周 等情境给出可执行处置",
+   "tags": [
+    "统一日历",
+    "提前一周"
+   ],
+   "examples": [
+    "遇到统一日历",
+    "遇到提前一周",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-schedule-coach-2",
+   "name": "针对 只提醒行动项、留缓冲 等情境给出可执行处置",
+   "description": "针对 只提醒行动项、留缓冲 等情境给出可执行处置",
+   "tags": [
+    "只提醒行动项",
+    "留缓冲"
+   ],
+   "examples": [
+    "遇到只提醒行动项",
+    "遇到留缓冲",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-schedule-coach-3",
+   "name": "针对 变更同步 等情境给出可执行处置",
+   "description": "针对 变更同步 等情境给出可执行处置",
+   "tags": [
+    "变更同步"
+   ],
+   "examples": [
+    "遇到变更同步",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家庭日程专家"
+}

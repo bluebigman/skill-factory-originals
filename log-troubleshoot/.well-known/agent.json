@@ -1,0 +1,67 @@
+{
+ "name": "Log Troubleshoot",
+ "description": "日志排查专家：覆盖 先定时间窗、找首个异常 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/log-troubleshoot",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/log-troubleshoot",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "log-troubleshoot-1",
+   "name": "针对 先定时间窗、找首个异常 等情境给出可执行处置",
+   "description": "针对 先定时间窗、找首个异常 等情境给出可执行处置",
+   "tags": [
+    "先定时间窗",
+    "找首个异常"
+   ],
+   "examples": [
+    "遇到先定时间窗",
+    "遇到找首个异常",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "log-troubleshoot-2",
+   "name": "针对 关联链路、对比基线 等情境给出可执行处置",
+   "description": "针对 关联链路、对比基线 等情境给出可执行处置",
+   "tags": [
+    "关联链路",
+    "对比基线"
+   ],
+   "examples": [
+    "遇到关联链路",
+    "遇到对比基线",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "log-troubleshoot-3",
+   "name": "针对 复盘闭环 等情境给出可执行处置",
+   "description": "针对 复盘闭环 等情境给出可执行处置",
+   "tags": [
+    "复盘闭环"
+   ],
+   "examples": [
+    "遇到复盘闭环",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "日志排查专家"
+}

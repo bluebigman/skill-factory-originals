@@ -1,0 +1,74 @@
+{
+ "name": "permission-governance-pro",
+ "version": "1.0.0",
+ "plugin": "permission-governance-pro",
+ "description": "permission-governance-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for permission-governance-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/permission-governance-pro.md"
+ ],
+ "agentName": "permission-governance-pro",
+ "displayName": {
+  "zh": "权限治理 最小必要 临时过期",
+  "en": "permission-governance-pro"
+ },
+ "profession": {
+  "zh": "权限治理 最小授权 顾问",
+  "en": "permission-governance-pro"
+ },
+ "displayDescription": {
+  "zh": "权限治理 最小授权 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "permission-governance-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "权限治理",
+   "en": "permission-governance-pro"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到权限治理怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划权限治理",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查权限治理",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到权限治理怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/permission-governance-pro-1",
+  "./skills/permission-governance-pro-2",
+  "./skills/permission-governance-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "权限治理专家",
+  "to": "权限治理 最小必要 临时过期",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

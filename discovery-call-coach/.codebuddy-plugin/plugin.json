@@ -1,0 +1,74 @@
+{
+ "name": "discovery-call-coach",
+ "version": "1.0.0",
+ "plugin": "discovery-call-coach",
+ "description": "discovery-call-coach — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for discovery-call-coach tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/discovery-call-coach.md"
+ ],
+ "agentName": "discovery-call-coach",
+ "displayName": {
+  "zh": "需求挖掘 顺序提问 开放为主",
+  "en": "discovery-call-coach"
+ },
+ "profession": {
+  "zh": "需求挖掘 提问框架 教练",
+  "en": "discovery-call-coach"
+ },
+ "displayDescription": {
+  "zh": "需求挖掘 提问框架 教练：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "discovery-call-coach: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "需求挖掘",
+   "en": "discovery-call-coach"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到需求挖掘怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划需求挖掘",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查需求挖掘",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到需求挖掘怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/discovery-call-coach-1",
+  "./skills/discovery-call-coach-2",
+  "./skills/discovery-call-coach-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:35",
+  "from": "需求挖掘专家",
+  "to": "需求挖掘 顺序提问 开放为主",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

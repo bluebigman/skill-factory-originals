@@ -1,0 +1,74 @@
+{
+ "name": "fitness-plan-coach",
+ "version": "1.0.0",
+ "plugin": "fitness-plan-coach",
+ "description": "Fitness Plan Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/fitness-plan-coach.md"
+ ],
+ "skills": [
+  "./skills/fitness-plan-coach-1",
+  "./skills/fitness-plan-coach-2",
+  "./skills/fitness-plan-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "fitness-plan-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Fitness Plan Coach",
+  "zh": "健身计划 先评估 渐进超负荷"
+ },
+ "profession": {
+  "en": "Fitness Plan Coach",
+  "zh": "健身计划 动作编排 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Fitness Plan Coach tasks end-to-end with built-in professional skills.",
+  "zh": "健身计划 动作编排 顾问：覆盖 先评估、渐进超负荷、推拉平衡 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先评估"
+  },
+  {
+   "en": "practical capability",
+   "zh": "渐进超负荷"
+  },
+  {
+   "en": "practical capability",
+   "zh": "推拉平衡"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先评估怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到渐进超负荷怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到推拉平衡怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先评估怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "健身计划专家",
+  "to": "健身计划 先评估 渐进超负荷",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

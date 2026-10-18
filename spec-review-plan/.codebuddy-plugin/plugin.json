@@ -1,0 +1,74 @@
+{
+ "name": "spec-review-plan",
+ "version": "1.0.0",
+ "plugin": "spec-review-plan",
+ "description": "spec-review-plan — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for spec-review-plan tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/spec-review-plan.md"
+ ],
+ "agentName": "spec-review-plan",
+ "displayName": {
+  "zh": "方案评审把关 先共识标准",
+  "en": "spec-review-plan"
+ },
+ "profession": {
+  "zh": "方案评审把关 顾问",
+  "en": "spec-review-plan"
+ },
+ "displayDescription": {
+  "zh": "方案评审把关 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "spec-review-plan: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "方案评审把关",
+   "en": "spec-review-plan"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到方案评审把关怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划方案评审把关",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查方案评审把关",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到方案评审把关怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/spec-review-plan-1",
+  "./skills/spec-review-plan-2",
+  "./skills/spec-review-plan-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "方案评审把关专家",
+  "to": "方案评审把关 先共识标准",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

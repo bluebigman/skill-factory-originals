@@ -1,0 +1,66 @@
+{
+ "name": "content-calendar-1",
+ "version": "2.0.0",
+ "domain": "内容日历",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先排固定",
+   "then": "固定栏目先占位，再填临时内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "提前两周",
+   "then": "至少提前两周备稿，防断更",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先排固定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提前两周",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "临时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时内",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日历",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

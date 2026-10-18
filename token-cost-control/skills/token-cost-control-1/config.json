@@ -1,0 +1,87 @@
+{
+ "name": "token-cost-control-1",
+ "version": "2.0.0",
+ "domain": "成本控制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无预算",
+   "then": "每个任务预设 token/调用预算，触顶即停",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "循环烧量",
+   "then": "设最大迭代次数，禁止无上限的自主循环",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "成本不可见",
+   "then": "按任务维度统计消耗并实时可见",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "无预算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "循环烧量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本不可见",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "最大",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "统计",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "消耗",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "次数",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,109 @@
+{
+ "name": "unified-message",
+ "version": "2.0.0",
+ "domain": "夫妻育儿",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "孩子钻空子",
+   "then": "被拒绝后转向另一方时，另一方须先问清原由再答",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "两头讨好",
+   "then": "禁止用另一方当坏人（爸爸不让），家长须共同承担拒绝",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "规则变更",
+   "then": "变更规则须双方共同宣布，单方宣布必被质疑",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "承诺不一致",
+   "then": "兑现承诺前先口头确认，避免重复奖励或都不兑现",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "冲突后修复",
+   "then": "当着孩子面和好并说明分歧已解决，示范冲突的健康处理",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "孩子钻空子",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "两头讨好",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则变更",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "承诺不一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突后修复",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

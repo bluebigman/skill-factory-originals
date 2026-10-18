@@ -1,0 +1,74 @@
+{
+ "name": "ab-test-analysis",
+ "version": "1.0.0",
+ "plugin": "ab-test-analysis",
+ "description": "ab-test-analysis — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for ab-test-analysis tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/ab-test-analysis.md"
+ ],
+ "agentName": "ab-test-analysis",
+ "displayName": {
+  "zh": "实验分析 最小样本 随机性检验",
+  "en": "ab-test-analysis"
+ },
+ "profession": {
+  "zh": "实验分析 显著性 顾问",
+  "en": "ab-test-analysis"
+ },
+ "displayDescription": {
+  "zh": "实验分析 显著性 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "ab-test-analysis: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "实验分析",
+   "en": "ab-test-analysis"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到实验分析怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划实验分析",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查实验分析",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到实验分析怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/ab-test-analysis-1/",
+  "./skills/ab-test-analysis-2/",
+  "./skills/ab-test-analysis-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:27",
+  "from": "实验分析专家",
+  "to": "实验分析 最小样本 随机性检验",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "study-motivation-coach-3",
+ "version": "2.0.0",
+ "domain": "学习动力",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看进步",
+   "then": "与过去自己比而非与别人比",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看进步",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "自己",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成功",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "学习",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "意义",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "达成",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "体验",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

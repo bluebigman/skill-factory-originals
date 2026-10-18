@@ -1,0 +1,72 @@
+{
+ "name": "gamification-design-2",
+ "version": "2.0.0",
+ "domain": "任务激励",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "进度可见",
+   "then": "目标与进度始终可见",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "即时反馈",
+   "then": "行为后即时给正反馈",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "难度匹配",
+   "then": "任务难度与当前能力匹配",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "保留自主",
+   "then": "保留自主选择而非强制指派",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "防疲劳",
+   "then": "设每日上限防刷取疲劳",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "进度可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "即时反馈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "难度匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留自主",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防疲劳",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

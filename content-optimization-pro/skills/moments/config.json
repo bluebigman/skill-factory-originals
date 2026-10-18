@@ -1,0 +1,121 @@
+{
+ "name": "moments",
+ "version": "2.0.0",
+ "domain": "内容优化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "自嗨",
+   "then": "写他人关心而非你想说的，自嗨文案无传播力",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "硬广",
+   "then": "先提供价值再引导，纯推销会被折叠",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "过长",
+   "then": "移动端首屏只显示两行，核心信息必须前置",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无配图",
+   "then": "图文匹配度影响停留，图与文无关会削弱可信度",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "频率",
+   "then": "同质内容连续刷屏会招致屏蔽，控制节奏",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "朋友圈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "社交文案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "点赞",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转发",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自嗨",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "硬广",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无配图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "频率",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "价值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前置",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

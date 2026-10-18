@@ -1,0 +1,72 @@
+{
+ "name": "ab-test-analysis-1",
+ "version": "2.0.0",
+ "domain": "实验分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小样本",
+   "then": "先算最小样本量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "随机性检验",
+   "then": "检验分组随机性",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "显著性",
+   "then": "给出置信区间",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "多重比较",
+   "then": "校正多重比较",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "因果谨慎",
+   "then": "相关不等于因果",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小样本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "随机性检验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "显著性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多重比较",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "因果谨慎",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

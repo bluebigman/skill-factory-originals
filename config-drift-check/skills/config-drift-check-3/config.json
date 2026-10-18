@@ -1,0 +1,72 @@
+{
+ "name": "config-drift-check-3",
+ "version": "2.0.0",
+ "domain": "配置漂移核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "基线比对",
+   "then": "与标准配置逐项比对",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "环境隔离",
+   "then": "各环境配置独立管理",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "敏感分离",
+   "then": "密钥与配置分离存放",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "每次变更记录人与原因",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "生效验证",
+   "then": "变更后验证实际生效值",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "基线比对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感分离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "生效验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

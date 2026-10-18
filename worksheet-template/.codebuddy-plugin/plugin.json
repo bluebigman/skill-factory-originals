@@ -1,0 +1,74 @@
+{
+ "name": "worksheet-template",
+ "version": "1.0.0",
+ "plugin": "worksheet-template",
+ "description": "worksheet-template — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for worksheet-template tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/worksheet-template.md"
+ ],
+ "agentName": "worksheet-template",
+ "displayName": {
+  "zh": "工作表模板设计 分层设计",
+  "en": "worksheet-template"
+ },
+ "profession": {
+  "zh": "工作表模板设计 顾问",
+  "en": "worksheet-template"
+ },
+ "displayDescription": {
+  "zh": "工作表模板设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "worksheet-template: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "工作表模板设计",
+   "en": "worksheet-template"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到工作表模板设计怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划工作表模板设计",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查工作表模板设计",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到工作表模板设计怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/worksheet-template-1",
+  "./skills/worksheet-template-2",
+  "./skills/worksheet-template-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "工作表模板设计专家",
+  "to": "工作表模板设计 分层设计",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

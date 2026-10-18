@@ -1,0 +1,75 @@
+{
+ "name": "Pet Training Coach",
+ "description": "宠物训练专家：覆盖 拆家、乱叫、定点排泄、换牙咬人、社交训练 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/pet-training-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/pet-training-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "pet-training-coach-1",
+   "name": "针对 拆家、乱叫 等情境给出可执行处置",
+   "description": "针对 拆家、乱叫 等情境给出可执行处置",
+   "tags": [
+    "拆家",
+    "乱叫"
+   ],
+   "examples": [
+    "遇到拆家",
+    "遇到乱叫",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pet-training-coach-2",
+   "name": "针对 定点排泄、换牙咬人 等情境给出可执行处置",
+   "description": "针对 定点排泄、换牙咬人 等情境给出可执行处置",
+   "tags": [
+    "定点排泄",
+    "换牙咬人"
+   ],
+   "examples": [
+    "遇到定点排泄",
+    "遇到换牙咬人",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pet-training-coach-3",
+   "name": "针对 社交训练 等情境给出可执行处置",
+   "description": "针对 社交训练 等情境给出可执行处置",
+   "tags": [
+    "社交训练"
+   ],
+   "examples": [
+    "遇到社交训练",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "宠物训练专家",
+ "x-source": "skill-factory-originals"
+}

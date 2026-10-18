@@ -1,0 +1,78 @@
+{
+ "name": "regression-plan-2",
+ "version": "2.0.0",
+ "domain": "回归测试",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "沉淀用例",
+   "then": "历史线上问题沉淀为固定回归项",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "自动化优先",
+   "then": "能自动化的回归项一律自动化",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "沉淀用例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自动化优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每次",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "历史",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "确定",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

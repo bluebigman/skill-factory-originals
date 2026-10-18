@@ -1,0 +1,121 @@
+{
+ "name": "hook-writing",
+ "version": "2.0.0",
+ "domain": "社媒文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "开头平淡",
+   "then": "前 10 字须给冲突/悬念/利益点，铺垫式开头必被划走",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "自嗨",
+   "then": "写用户关心而非你想说的，自嗨文案无传播力",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "信息模糊",
+   "then": "模糊表述（提升效率）无用，给具体结果与数字",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "太长",
+   "then": "移动端首屏只显示两行，核心信息必须前置",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "套路化",
+   "then": "同一开头模板连续使用会快速衰减，需轮换",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "开头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "吸引",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "划走",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头平淡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自嗨",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "信息模糊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "太长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "套路化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "模板",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前置",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平台",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "数字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标签",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

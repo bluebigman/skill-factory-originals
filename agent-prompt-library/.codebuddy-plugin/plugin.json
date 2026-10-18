@@ -1,0 +1,74 @@
+{
+ "name": "agent-prompt-library",
+ "version": "1.0.0",
+ "plugin": "agent-prompt-library",
+ "description": "Agent Prompt Library for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-prompt-library.md"
+ ],
+ "skills": [
+  "./skills/agent-prompt-library-1",
+  "./skills/agent-prompt-library-2",
+  "./skills/agent-prompt-library-3"
+ ],
+ "expertType": "agent",
+ "agentName": "agent-prompt-library",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Agent Prompt Library",
+  "zh": "提示库 模板化 变量清晰"
+ },
+ "profession": {
+  "en": "Agent Prompt Library",
+  "zh": "提示库 模板 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Agent Prompt Library tasks end-to-end with built-in professional skills.",
+  "zh": "提示库 模板 顾问：覆盖 模板化、变量清晰、版本管理、效果标注 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "提示库",
+   "en": "agent-prompt-library"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到提示库怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到模板怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到提示库怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "提示库专家",
+  "to": "提示库 模板化 变量清晰",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

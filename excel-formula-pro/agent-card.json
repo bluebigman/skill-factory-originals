@@ -1,0 +1,107 @@
+{
+ "name": "Spreadsheet Formula Pro",
+ "description": "表格公式专家：公式报错的定位方法；常用公式的构造思路；多人协作表格的维护。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/excel-formula-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/excel-formula-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "debug",
+   "name": "公式报错的定位方法",
+   "description": "公式报错的定位方法",
+   "tags": [
+    "报错",
+    "#N/A",
+    "#VALUE",
+    "循环引用"
+   ],
+   "examples": [
+    "遇到#N/A",
+    "遇到#VALUE!",
+    "遇到#REF!",
+    "遇到循环引用",
+    "遇到结果不符"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "debug",
+    "to": "debug",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "formula-build",
+   "name": "常用公式的构造思路",
+   "description": "常用公式的构造思路",
+   "tags": [
+    "公式",
+    "函数",
+    "查找",
+    "条件"
+   ],
+   "examples": [
+    "遇到查找匹配",
+    "遇到条件统计",
+    "遇到文本处理",
+    "遇到日期计算",
+    "遇到数组公式"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "formula-build",
+    "to": "formula-build",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "maintain",
+   "name": "多人协作表格的维护",
+   "description": "多人协作表格的维护",
+   "tags": [
+    "维护",
+    "协作",
+    "结构",
+    "规范"
+   ],
+   "examples": [
+    "遇到结构混乱",
+    "遇到硬编码",
+    "遇到公式冗长",
+    "遇到误删",
+    "遇到权限"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "maintain",
+    "to": "maintain",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "表格公式专家",
+ "x-source": "skill-factory-originals"
+}

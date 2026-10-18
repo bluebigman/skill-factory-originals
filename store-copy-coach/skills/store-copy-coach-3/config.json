@@ -1,0 +1,69 @@
+{
+ "name": "store-copy-coach-3",
+ "version": "2.0.0",
+ "domain": "商品文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "合规表述",
+   "then": "禁极限词与虚假功效",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "合规表述",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "差异",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "极限词",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "虚假",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "痛点",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "功效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "商品",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "放大",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

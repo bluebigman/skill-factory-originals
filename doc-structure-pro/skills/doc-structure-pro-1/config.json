@@ -1,0 +1,72 @@
+{
+ "name": "doc-structure-pro-1",
+ "version": "2.0.0",
+ "domain": "文档结构",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结论先行",
+   "then": "重要结论放前面",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "层次清晰",
+   "then": "不超过三层标题",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "一屏一义",
+   "then": "每节只讲一件事",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "索引可跳",
+   "then": "长文必须有目录",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "冗余剔除",
+   "then": "删除重复表述",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层次清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一屏一义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引可跳",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冗余剔除",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

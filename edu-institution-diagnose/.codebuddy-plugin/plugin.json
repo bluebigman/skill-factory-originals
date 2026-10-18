@@ -1,0 +1,74 @@
+{
+ "name": "edu-institution-diagnose",
+ "version": "1.0.0",
+ "plugin": "edu-institution-diagnose",
+ "description": "Edu Institution Diagnose for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/edu-institution-diagnose.md"
+ ],
+ "skills": [
+  "./skills/edu-institution-diagnose-1",
+  "./skills/edu-institution-diagnose-2",
+  "./skills/edu-institution-diagnose-3"
+ ],
+ "expertType": "agent",
+ "agentName": "edu-institution-diagnose",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Edu Institution Diagnose",
+  "zh": "教培经营 先看续费 试听转化"
+ },
+ "profession": {
+  "en": "Edu Institution Diagnose",
+  "zh": "教培经营 续费率 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Edu Institution Diagnose tasks end-to-end with built-in professional skills.",
+  "zh": "教培经营 续费率 顾问：覆盖 先看续费、试听转化、师资稳定 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "教培经营",
+   "en": "edu-institution-diagnose"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到教培经营怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到续费率怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到教培经营怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:37",
+  "from": "教培经营专家",
+  "to": "教培经营 先看续费 试听转化",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

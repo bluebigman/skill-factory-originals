@@ -1,0 +1,61 @@
+{
+ "name": "file-rename-batch-3",
+ "version": "2.0.0",
+ "domain": "文件批量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "可回退",
+   "then": "保留原名映射表，支持一键还原",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "可回退",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "模板",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "日期",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "命名",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "主题",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

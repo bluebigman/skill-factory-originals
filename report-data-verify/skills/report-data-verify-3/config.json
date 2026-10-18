@@ -1,0 +1,72 @@
+{
+ "name": "report-data-verify-3",
+ "version": "2.0.0",
+ "domain": "报告数据核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "口径先对",
+   "then": "先确认指标定义一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "交叉验证",
+   "then": "关键数字用第二种方式复算",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异常问因",
+   "then": "异常值先问原因再决定取舍",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "来源可溯",
+   "then": "每个数字标注来源",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "一致性检查",
+   "then": "正文与图表数字一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口径先对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交叉验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常问因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一致性检查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

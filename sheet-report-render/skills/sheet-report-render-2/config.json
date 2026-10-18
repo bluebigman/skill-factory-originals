@@ -1,0 +1,78 @@
+{
+ "name": "sheet-report-render-2",
+ "version": "2.0.0",
+ "domain": "表格报表",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标注口径",
+   "then": "图表下方标口径与数据截止日",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "对比优先",
+   "then": "优先给同比/环比而非孤立数值",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标注口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对比优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "同类",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "先给",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "指标",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "数值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "视化",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

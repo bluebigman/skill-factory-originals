@@ -1,0 +1,72 @@
+{
+ "name": "tech-debt-track-2",
+ "version": "2.0.0",
+ "domain": "技术债",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "识别标准",
+   "then": "定义什么算技术债",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "登记在册",
+   "then": "债项必须登记",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "影响量化",
+   "then": "按影响面排优先级",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "偿还计划",
+   "then": "排入迭代而非无限延后",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "防新增",
+   "then": "新代码不得引入新债",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "识别标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "登记在册",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "影响量化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "偿还计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防新增",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

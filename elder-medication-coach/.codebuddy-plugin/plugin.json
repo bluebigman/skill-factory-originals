@@ -1,0 +1,74 @@
+{
+ "name": "elder-medication-coach",
+ "version": "1.0.0",
+ "plugin": "elder-medication-coach",
+ "description": "Elder Medication Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/elder-medication-coach.md"
+ ],
+ "skills": [
+  "./skills/elder-medication-coach-1",
+  "./skills/elder-medication-coach-2",
+  "./skills/elder-medication-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "elder-medication-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Elder Medication Coach",
+  "zh": "老人用药 分装药盒 用药清单"
+ },
+ "profession": {
+  "en": "Elder Medication Coach",
+  "zh": "老人用药 提醒管理 复查"
+ },
+ "displayDescription": {
+  "en": "Handles Elder Medication Coach tasks end-to-end with built-in professional skills.",
+  "zh": "老人用药 提醒管理 复查：覆盖 分装药盒、用药清单、漏服处理 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "分装药盒"
+  },
+  {
+   "en": "practical capability",
+   "zh": "用药清单"
+  },
+  {
+   "en": "practical capability",
+   "zh": "漏服处理"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到分装药盒怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到用药清单怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到漏服处理怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到分装药盒怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:37",
+  "from": "老人用药专家",
+  "to": "老人用药 分装药盒 用药清单",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

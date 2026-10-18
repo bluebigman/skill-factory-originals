@@ -1,0 +1,72 @@
+{
+ "name": "game-doc-standard-1",
+ "version": "2.0.0",
+ "domain": "游戏策划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单一事实源",
+   "then": "数值只在唯一处维护",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "版本留痕",
+   "then": "每次改动留版本与原因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可执行",
+   "then": "描述应可直接被程序实现",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "附验收标准",
+   "then": "每个功能附验收标准",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "交叉引用",
+   "then": "模块间引用关系清晰",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单一事实源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "附验收标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交叉引用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,103 @@
+{
+ "name": "Sibling Conflict Pro",
+ "description": "二孩冲突专家：分辨冲突是资源争夺还是关注争夺；避免比较的沟通模板；把对立转成合作的任务设计。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/sibling-conflict-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/sibling-conflict-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "conflict-attribution",
+   "name": "分辨冲突是资源争夺还是关注争夺",
+   "description": "分辨冲突是资源争夺还是关注争夺",
+   "tags": [
+    "抢玩具",
+    "打架",
+    "告状",
+    "偏心"
+   ],
+   "examples": [
+    "遇到抢玩具",
+    "遇到打架",
+    "遇到告状",
+    "遇到偏心",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "conflict-attribution",
+    "to": "conflict-attribution",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "fairness-script",
+   "name": "避免比较的沟通模板",
+   "description": "避免比较的沟通模板",
+   "tags": [
+    "比较",
+    "你看哥哥",
+    "偏心"
+   ],
+   "examples": [
+    "遇到比较",
+    "遇到你看哥哥",
+    "遇到偏心",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "fairness-script",
+    "to": "fairness-script",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "team-building",
+   "name": "把对立转成合作的任务设计",
+   "description": "把对立转成合作的任务设计",
+   "tags": [
+    "合作",
+    "一起做",
+    "共同目标"
+   ],
+   "examples": [
+    "遇到合作",
+    "遇到一起做",
+    "遇到共同目标",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "team-building",
+    "to": "team-building",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "二孩冲突专家",
+ "x-source": "skill-factory-originals"
+}

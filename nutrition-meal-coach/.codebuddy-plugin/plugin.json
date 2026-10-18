@@ -1,0 +1,74 @@
+{
+ "name": "nutrition-meal-coach",
+ "version": "1.0.0",
+ "plugin": "nutrition-meal-coach",
+ "description": "Nutrition Meal Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/nutrition-meal-coach.md"
+ ],
+ "skills": [
+  "./skills/nutrition-meal-coach-1",
+  "./skills/nutrition-meal-coach-2",
+  "./skills/nutrition-meal-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "nutrition-meal-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Nutrition Meal Coach",
+  "zh": "营养搭配 餐盘比例 蛋白固定"
+ },
+ "profession": {
+  "en": "Nutrition Meal Coach",
+  "zh": "营养搭配 一周食谱 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Nutrition Meal Coach tasks end-to-end with built-in professional skills.",
+  "zh": "营养搭配 一周食谱 教练：覆盖 餐盘比例、蛋白固定、挑食替代 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "餐盘比例"
+  },
+  {
+   "en": "practical capability",
+   "zh": "蛋白固定"
+  },
+  {
+   "en": "practical capability",
+   "zh": "挑食替代"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到餐盘比例怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到蛋白固定怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到挑食替代怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到餐盘比例怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "营养搭配专家",
+  "to": "营养搭配 餐盘比例 蛋白固定",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

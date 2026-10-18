@@ -1,0 +1,87 @@
+{
+ "name": "agent-trace-audit-3",
+ "version": "2.0.0",
+ "domain": "行为审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "越权扩张",
+   "then": "动作超出授权范围时立即中止，不做「顺手做了」",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "失控循环",
+   "then": "设定重试上限与成本上限，触顶即停并上报",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "接管阈值",
+   "then": "预定义「必须人工接管」的条件，命中即停不商量",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "越权扩张",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失控循环",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "接管阈值",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "上限",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "留痕",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "定义",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回答",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "设定",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

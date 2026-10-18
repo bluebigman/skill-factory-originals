@@ -1,0 +1,87 @@
+{
+ "name": "permission-governance-2",
+ "version": "2.0.0",
+ "domain": "权限治理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "高危无复核",
+   "then": "删除/发布/支付/外发类动作必须先过人工确认",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "动作不可逆",
+   "then": "不可逆操作前强制备份或预演，能回滚的优先",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "批量放大",
+   "then": "批量操作先小样验证，通过再放量",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "高危无复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动作不可逆",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批量放大",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "长期",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "备份",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "临时",
+   "source": "SKILL.md#L60"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

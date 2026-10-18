@@ -1,0 +1,72 @@
+{
+ "name": "data-catalog-3",
+ "version": "2.0.0",
+ "domain": "数据目录建设",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全量登记",
+   "then": "表与字段全登记",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "含口径",
+   "then": "标注统计口径",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "负责人",
+   "then": "每张表有负责人",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "血缘关联",
+   "then": "关联上下游",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "检索友好",
+   "then": "支持关键词检索",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全量登记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "含口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "负责人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "血缘关联",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "检索友好",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

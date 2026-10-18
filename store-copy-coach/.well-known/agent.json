@@ -1,0 +1,67 @@
+{
+ "name": "Store Copy Coach",
+ "description": "商品文案专家：覆盖 痛点对齐、差异化、证据支撑、主卖点≤3、合规表述 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/store-copy-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/store-copy-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "store-copy-coach-1",
+   "name": "针对 痛点对齐、差异化 等情境给出可执行处置",
+   "description": "针对 痛点对齐、差异化 等情境给出可执行处置",
+   "tags": [
+    "痛点对齐",
+    "差异化"
+   ],
+   "examples": [
+    "遇到痛点对齐",
+    "遇到差异化",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "store-copy-coach-2",
+   "name": "针对 证据支撑、主卖点≤3 等情境给出可执行处置",
+   "description": "针对 证据支撑、主卖点≤3 等情境给出可执行处置",
+   "tags": [
+    "证据支撑",
+    "主卖点≤3"
+   ],
+   "examples": [
+    "遇到证据支撑",
+    "遇到主卖点≤3",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "store-copy-coach-3",
+   "name": "针对 合规表述 等情境给出可执行处置",
+   "description": "针对 合规表述 等情境给出可执行处置",
+   "tags": [
+    "合规表述"
+   ],
+   "examples": [
+    "遇到合规表述",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "商品文案专家"
+}

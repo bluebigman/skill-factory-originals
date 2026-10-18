@@ -1,0 +1,99 @@
+{
+ "name": "Order Processing Pro",
+ "description": "订单处理专家：退换货与售后的流程；物流选择与异常处理；从下单到签收的流程管理。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/order-processing-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/order-processing-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "after-sale",
+   "name": "退换货与售后的流程",
+   "description": "退换货与售后的流程",
+   "tags": [
+    "售后",
+    "退换货",
+    "退款",
+    "纠纷"
+   ],
+   "examples": [
+    "遇到拖延",
+    "遇到无标准",
+    "遇到过度让步",
+    "遇到凭证",
+    "遇到复盘"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "after-sale",
+    "to": "after-sale",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "logistics",
+   "name": "物流选择与异常处理",
+   "description": "物流选择与异常处理",
+   "tags": [
+    "物流",
+    "快递",
+    "时效",
+    "运费"
+   ],
+   "examples": [
+    "遇到单一物流",
+    "遇到运费失控",
+    "遇到丢件",
+    "遇到偏远地区",
+    "遇到时效承诺"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "logistics",
+    "to": "logistics",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "order-flow",
+   "name": "从下单到签收的流程管理",
+   "description": "从下单到签收的流程管理",
+   "tags": [
+    "订单",
+    "发货",
+    "流程",
+    "时效"
+   ],
+   "examples": [
+    "遇到发货慢",
+    "遇到错发漏发",
+    "遇到改址",
+    "遇到异常件",
+    "遇到签收"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "order-flow",
+    "to": "order-flow",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "订单处理专家"
+}

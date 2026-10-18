@@ -1,0 +1,72 @@
+{
+ "name": "api-rate-limit-plan-3",
+ "version": "2.0.0",
+ "domain": "接口限流方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按维度限",
+   "then": "按用户与接口与来源分别限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "令牌桶",
+   "then": "突发用令牌桶平滑用漏桶",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "超限提示",
+   "then": "返回明确提示与建议重试时间",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分级策略",
+   "then": "核心接口与查询接口不同配额",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "限流可观测",
+   "then": "统计触发次数并告警",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按维度限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "令牌桶",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超限提示",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "限流可观测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

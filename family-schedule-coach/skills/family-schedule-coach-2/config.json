@@ -1,0 +1,78 @@
+{
+ "name": "family-schedule-coach-2",
+ "version": "2.0.0",
+ "domain": "家庭日程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只提醒行动项",
+   "then": "全量提醒被忽略",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "留缓冲",
+   "then": "行程间留 15 分钟",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "只提醒行动项",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "安排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "忽略",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "全量",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设备",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "日历",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

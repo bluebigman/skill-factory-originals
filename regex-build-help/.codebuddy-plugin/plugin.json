@@ -1,0 +1,74 @@
+{
+ "name": "regex-build-help",
+ "version": "1.0.0",
+ "plugin": "regex-build-help",
+ "description": "regex-build-help — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for regex-build-help tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/regex-build-help.md"
+ ],
+ "agentName": "regex-build-help",
+ "displayName": {
+  "zh": "正则表达式构建 先明确原子",
+  "en": "regex-build-help"
+ },
+ "profession": {
+  "zh": "正则表达式构建 助手",
+  "en": "regex-build-help"
+ },
+ "displayDescription": {
+  "zh": "正则表达式构建 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "regex-build-help: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "正则表达式构建",
+   "en": "regex-build-help"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到正则表达式构建怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划正则表达式构建",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查正则表达式构建",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到正则表达式构建怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/regex-build-help-1",
+  "./skills/regex-build-help-2",
+  "./skills/regex-build-help-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "正则表达式构建专家",
+  "to": "正则表达式构建 先明确原子",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

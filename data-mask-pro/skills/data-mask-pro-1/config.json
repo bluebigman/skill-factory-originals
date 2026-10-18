@@ -1,0 +1,72 @@
+{
+ "name": "data-mask-pro-1",
+ "version": "2.0.0",
+ "domain": "数据脱敏",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "规则分级",
+   "then": "按敏感级别定规则",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可用优先",
+   "then": "脱敏后仍可用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可逆控制",
+   "then": "可逆脱敏须受控",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "全链路",
+   "then": "全链路统一脱敏",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "审计",
+   "then": "脱敏操作留痕",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "规则分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可用优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可逆控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全链路",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审计",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

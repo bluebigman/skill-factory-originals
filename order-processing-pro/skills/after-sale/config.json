@@ -1,0 +1,121 @@
+{
+ "name": "after-sale",
+ "version": "2.0.0",
+ "domain": "订单处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拖延",
+   "then": "售后响应须及时，拖延会把小问题变成平台介入",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无标准",
+   "then": "建立退换判定标准，个案裁量会引发不公平质疑",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "过度让步",
+   "then": "按规则处理，无原则让步会招致恶意退换",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "凭证",
+   "then": "退货验收须留证，无证据无法主张",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "复盘",
+   "then": "每周复盘售后原因并反推产品与描述问题",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "售后",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退换货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退款",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "纠纷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拖延",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过度让步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "证据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平台",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "建立",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "判定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "引发",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

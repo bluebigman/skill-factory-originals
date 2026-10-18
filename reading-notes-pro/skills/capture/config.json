@@ -1,0 +1,121 @@
+{
+ "name": "capture",
+ "version": "2.0.0",
+ "domain": "读书笔记",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只划线",
+   "then": "划线不等于记住，必须用自己的话复述一遍",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "全量摘抄",
+   "then": "只记触动点（意外/反常识/能立刻用），全量摘抄等于没记",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无出处",
+   "then": "随手标页码与位置，便于回查",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "读完即忘",
+   "then": "读后 24 小时内写 3 句总结，延迟越久遗忘越多",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "贪多",
+   "then": "一次只抓 3 个核心点，贪多导致全部记不住",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "读书",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "笔记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "划线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "摘抄",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只划线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全量摘抄",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无出处",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "读完即忘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "贪多",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "次只",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "自己",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "阅读",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

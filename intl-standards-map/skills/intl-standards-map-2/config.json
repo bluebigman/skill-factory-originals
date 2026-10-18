@@ -1,0 +1,72 @@
+{
+ "name": "intl-standards-map-2",
+ "version": "2.0.0",
+ "domain": "国际标准",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版本溯源",
+   "then": "引用标准必须标明版本与年份",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "差异列表",
+   "then": "逐条列出与本地标准差异",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "取严原则",
+   "then": "冲突处按更严要求执行",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "周期预留",
+   "then": "认证与检测周期提前预留",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更跟踪",
+   "then": "跟踪标准更新并评估影响",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版本溯源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异列表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "取严原则",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周期预留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更跟踪",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

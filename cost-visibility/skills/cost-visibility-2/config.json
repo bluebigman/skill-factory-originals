@@ -1,0 +1,72 @@
+{
+ "name": "cost-visibility-2",
+ "version": "2.0.0",
+ "domain": "成本可见性",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按维度拆",
+   "then": "按服务与环境拆成本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常告警",
+   "then": "成本突增即告警",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "责任到人",
+   "then": "每项成本有归属",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "优化建议",
+   "then": "给具体优化动作",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预算对比",
+   "then": "与预算定期对比",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按维度拆",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任到人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "优化建议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预算对比",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

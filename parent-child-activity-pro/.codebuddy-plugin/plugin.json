@@ -1,0 +1,74 @@
+{
+ "name": "parent-child-activity-pro",
+ "version": "1.0.0",
+ "plugin": "parent-child-activity-pro",
+ "description": "Parent-Child Activity Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/parent-child-activity-pro.md"
+ ],
+ "skills": [
+  "./skills/activity-design",
+  "./skills/growth-record",
+  "./skills/quality-talk"
+ ],
+ "expertType": "agent",
+ "agentName": "parent-child-activity-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Parent-Child Activity Pro",
+  "zh": "亲子活动 不知玩什么"
+ },
+ "profession": {
+  "en": "Parent-Child Activity Pro",
+  "zh": "亲子活动 家庭陪伴 成长记录"
+ },
+ "displayDescription": {
+  "en": "Handles Parent-Child Activity Pro tasks end-to-end with built-in professional skills.",
+  "zh": "亲子活动 家庭陪伴 成长记录：分龄亲子活动与陪伴质量提升；作品与关键节点的记录方法。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "不知玩什么"
+  },
+  {
+   "en": "practical capability",
+   "zh": "孩子嫌幼稚"
+  },
+  {
+   "en": "practical capability",
+   "zh": "时间碎片"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不知玩什么怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到孩子嫌幼稚怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到时间碎片怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到不知玩什么怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "亲子活动专家",
+  "to": "亲子活动 不知玩什么",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

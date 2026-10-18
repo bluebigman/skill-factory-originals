@@ -1,0 +1,65 @@
+{
+ "name": "chart-dashboard-build-3",
+ "version": "2.0.0",
+ "domain": "数据可视化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "少而准",
+   "then": "首屏指标不超 6 个",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "少而准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "核心",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "分层",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "指标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回答",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "主题",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "视化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "首屏",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

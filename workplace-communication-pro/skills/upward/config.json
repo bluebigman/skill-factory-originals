@@ -1,0 +1,121 @@
+{
+ "name": "upward",
+ "version": "2.0.0",
+ "domain": "职场沟通",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只报问题",
+   "then": "带方案汇报：问题+两三个选项+建议，只抛问题会被视为无能",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "越级",
+   "then": "先走直属，越级沟通会破坏信任并反噬",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不懂意图",
+   "then": "先确认目标与优先级再执行，埋头苦干易做无用功",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "报忧恐惧",
+   "then": "风险早报是加分项，隐瞒酿大祸才是失职",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "要资源",
+   "then": "要资源须给投入产出与不做会怎样，两条都要说",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "向上管理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "汇报",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "领导",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "争取资源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只报问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "越级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不懂意图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "报忧恐惧",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "要资源",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "承诺",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "责任",
+   "source": "SKILL.md#L38"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

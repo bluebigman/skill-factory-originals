@@ -1,0 +1,71 @@
+{
+ "name": "agent-trace-audit-1",
+ "version": "2.0.0",
+ "domain": "行为审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "决策无记录",
+   "then": "每一步决策必须落盘：输入、依据、输出、时间戳，缺一不可",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "来源不可溯",
+   "then": "凡结论必须能回答「依据是什么、来自哪次调用」",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "链路断裂",
+   "then": "跨步骤传递须带前序指纹，断链即视为不可信",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "决策无记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源不可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "链路断裂",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留痕",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "回答",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

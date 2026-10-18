@@ -1,0 +1,54 @@
+{
+ "name": "traceability-build-pro-1",
+ "version": "2.0.0",
+ "domain": "追溯体系",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "编码唯一",
+   "then": "批次编码全链唯一",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "正反可追",
+   "then": "正向可查去向，反向可查来源",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "编码唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "正反可追",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "追溯",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

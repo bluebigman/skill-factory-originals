@@ -1,0 +1,72 @@
+{
+ "name": "sandbox-execution-1",
+ "version": "2.0.0",
+ "domain": "沙箱执行隔离",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小权限",
+   "then": "沙箱内不授予宿主权限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "网络受限",
+   "then": "默认禁网络按需开",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "资源上限",
+   "then": "限制 CPU 内存与时长",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "只读挂载",
+   "then": "外部资源只读",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "不留残留",
+   "then": "执行后清理现场",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小权限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "网络受限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资源上限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只读挂载",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不留残留",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

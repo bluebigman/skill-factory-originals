@@ -1,0 +1,74 @@
+{
+ "name": "prd-review-coach-1",
+ "version": "2.0.0",
+ "domain": "需求评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先对齐目标",
+   "then": "评审前先确认大家对目标的理解一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一次一个",
+   "then": "逐条过，不跳条目，避免遗漏",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先对齐目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一次一个",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "理解",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "逐条",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "遗漏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先级",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

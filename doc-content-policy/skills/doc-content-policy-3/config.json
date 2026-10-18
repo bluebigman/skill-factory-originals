@@ -1,0 +1,72 @@
+{
+ "name": "doc-content-policy-3",
+ "version": "2.0.0",
+ "domain": "文档内容合规",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "边界声明",
+   "then": "方法类附免责声明",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不替代专业意见",
+   "then": "涉法涉医提示转专业",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "AI 标识",
+   "then": "AI 生成内容显式披露",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "来源标注",
+   "then": "引用注明来源",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "敏感词自查",
+   "then": "发布前敏感词自查",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "边界声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不替代专业意见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "AI 标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感词自查",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

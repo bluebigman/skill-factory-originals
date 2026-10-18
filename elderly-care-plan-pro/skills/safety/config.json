@@ -1,0 +1,117 @@
+{
+ "name": "safety",
+ "version": "2.0.0",
+ "domain": "养老规划",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "跌倒",
+   "then": "优先处理地面（防滑垫/去门槛）与照明（夜灯），成本最低收益最高",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "如厕",
+   "then": "卫生间加装扶手是第一优先改造项",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "动线",
+   "then": "清除主要动线上的杂物与电线，通道净宽保持 80cm 以上",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "紧急联络",
+   "then": "设置一键呼叫（大字/语音），复杂操作在紧急时必然失效",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "就医",
+   "then": "严重不适立即就医，本工具不提供任何医疗判断",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "防滑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "扶手",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "照明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跌倒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "如厕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "紧急联络",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就医",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

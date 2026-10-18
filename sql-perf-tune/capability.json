@@ -1,0 +1,143 @@
+{
+ "contractVersion": "1.0",
+ "id": "sql-perf-tune",
+ "name": "SQL调优专家",
+ "description": "SQL调优专家：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+ "kind": "expert",
+ "tags": [
+  "SQL",
+  "调优"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "sql-perf-tune-core",
+   "name": "SQL调优专家",
+   "role": "core",
+   "items": []
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room"
+ },
+ "inputSchema": {
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "CapabilityRequest",
+  "type": "object",
+  "required": [
+   "task"
+  ],
+  "additionalProperties": false,
+  "properties": {
+   "task": {
+    "type": "string",
+    "minLength": 1,
+    "description": "要完成的任务（必填）"
+   },
+   "context": {
+    "type": "string",
+    "description": "背景材料原文；缺省时由执行方追问"
+   },
+   "constraints": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    },
+    "description": "硬性约束，违反即视为失败"
+   },
+   "output_format": {
+    "type": "string",
+    "enum": [
+     "markdown",
+     "json",
+     "table"
+    ],
+    "default": "markdown"
+   },
+   "locale": {
+    "type": "string",
+    "default": "zh-CN"
+   }
+  }
+ },
+ "outputSchema": {
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "CapabilityResult",
+  "type": "object",
+  "required": [
+   "result",
+   "evidence",
+   "open_questions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+   "result": {
+    "type": "string",
+    "description": "主交付物"
+   },
+   "evidence": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    },
+    "description": "结论依据；无依据的结论不得放入 result"
+   },
+   "open_questions": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    }
+   },
+   "confidence": {
+    "type": "number",
+    "minimum": 0,
+    "maximum": 1
+   },
+   "followups": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "preconditions": [
+  "调用方需提供 task",
+  "涉外部写入须先取得授权",
+  "不得替代持牌专业意见（法律/医疗/投资/审计）"
+ ],
+ "failureModes": [
+  {
+   "code": "MISSING_CONTEXT",
+   "meaning": "缺必要背景",
+   "action": "回问补齐后重试"
+  },
+  {
+   "code": "OUT_OF_SCOPE",
+   "meaning": "超出职责边界",
+   "action": "改用更匹配能力"
+  },
+  {
+   "code": "AMBIGUOUS_GOAL",
+   "meaning": "目标有多种解读",
+   "action": "列候选请调用方裁决"
+  },
+  {
+   "code": "EVIDENCE_GAP",
+   "meaning": "关键结论缺依据",
+   "action": "移入 open_questions 不编造"
+  },
+  {
+   "code": "CONSTRAINT_VIOLATION",
+   "meaning": "唯一路径违反约束",
+   "action": "停止并说明冲突"
+  }
+ ]
+}

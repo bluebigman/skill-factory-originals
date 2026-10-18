@@ -1,0 +1,72 @@
+{
+ "name": "sensitive-file-guard-3",
+ "version": "2.0.0",
+ "domain": "敏感文件防护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分类标识",
+   "then": "按敏感度分类",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "访问审计",
+   "then": "记录访问人与时间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "传输加密",
+   "then": "外发加密",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "水印溯源",
+   "then": "外发加水印",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期清理",
+   "then": "过期文件按期处理",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分类标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "访问审计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "传输加密",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "水印溯源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期清理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

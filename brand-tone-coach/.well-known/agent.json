@@ -1,0 +1,67 @@
+{
+ "name": "Brand Tone Coach",
+ "description": "品牌调性专家：覆盖 写下来、给正反例、跨渠道对齐 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/brand-tone-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/brand-tone-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "brand-tone-coach-1",
+   "name": "针对 写下来、给正反例 等情境给出可执行处置",
+   "description": "针对 写下来、给正反例 等情境给出可执行处置",
+   "tags": [
+    "写下来",
+    "给正反例"
+   ],
+   "examples": [
+    "遇到写下来",
+    "遇到给正反例",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "brand-tone-coach-2",
+   "name": "针对 跨渠道对齐、统一审校 等情境给出可执行处置",
+   "description": "针对 跨渠道对齐、统一审校 等情境给出可执行处置",
+   "tags": [
+    "跨渠道对齐",
+    "统一审校"
+   ],
+   "examples": [
+    "遇到跨渠道对齐",
+    "遇到统一审校",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "brand-tone-coach-3",
+   "name": "针对 定期校准 等情境给出可执行处置",
+   "description": "针对 定期校准 等情境给出可执行处置",
+   "tags": [
+    "定期校准"
+   ],
+   "examples": [
+    "遇到定期校准",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "品牌调性专家"
+}

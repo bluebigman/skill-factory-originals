@@ -1,0 +1,72 @@
+{
+ "name": "prd-write-coach-3",
+ "version": "2.0.0",
+ "domain": "需求文档撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "问题先于方案",
+   "then": "先写清问题再给方案",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "验收可测",
+   "then": "每条需求配可验证的验收条件",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "边界明确",
+   "then": "写清不做什么与异常流",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "依赖显式",
+   "then": "列出前置依赖与外部接口",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "需求变更记录版本与原因",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "问题先于方案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "验收可测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖显式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

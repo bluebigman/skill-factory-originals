@@ -1,0 +1,78 @@
+{
+ "name": "logistics-diagnose-2",
+ "version": "2.0.0",
+ "domain": "物流运营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "异常归类",
+   "then": "把异常按原因分类再对症",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "看成本单件",
+   "then": "按单件成本而非总成本评估",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "异常归类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看成本单件",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "评估",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优化",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "环节",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "物流",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "时效",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "瓶颈",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "按单",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

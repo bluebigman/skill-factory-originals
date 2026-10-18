@@ -1,0 +1,74 @@
+{
+ "name": "longform-editing",
+ "version": "1.0.0",
+ "plugin": "longform-editing",
+ "description": "longform-editing — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for longform-editing tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/longform-editing.md"
+ ],
+ "agentName": "longform-editing",
+ "displayName": {
+  "zh": "长文编辑打磨 结构先行 删冗余",
+  "en": "longform-editing"
+ },
+ "profession": {
+  "zh": "长文编辑打磨 顾问",
+  "en": "longform-editing"
+ },
+ "displayDescription": {
+  "zh": "长文编辑打磨 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "longform-editing: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "长文编辑打磨",
+   "en": "longform-editing"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到长文编辑打磨怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划长文编辑打磨",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查长文编辑打磨",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到长文编辑打磨怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/longform-editing-1",
+  "./skills/longform-editing-2",
+  "./skills/longform-editing-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:43",
+  "from": "长文编辑打磨专家",
+  "to": "长文编辑打磨 结构先行 删冗余",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

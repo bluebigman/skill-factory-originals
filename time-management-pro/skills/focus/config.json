@@ -1,0 +1,121 @@
+{
+ "name": "focus",
+ "version": "2.0.0",
+ "domain": "时间管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "频繁打断",
+   "then": "设 25-50 分钟专注段并静音通知，被打断后重入成本高",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "多任务",
+   "then": "禁止并行处理认知类任务，切换成本被严重低估",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "从难的做起",
+   "then": "最难的放精力最好的时段，而非按清单顺序",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分心冲动",
+   "then": "记录分心念头再继续，写下来即可显著降低干扰",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "手机在场",
+   "then": "手机放视线外，仅在视线内就会降低认知容量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "专注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分心",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "番茄钟",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效率",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "频繁打断",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多任务",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "从难的做起",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分心冲动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手机在场",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

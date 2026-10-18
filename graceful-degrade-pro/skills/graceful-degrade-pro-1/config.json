@@ -1,0 +1,72 @@
+{
+ "name": "graceful-degrade-pro-1",
+ "version": "2.0.0",
+ "domain": "优雅降级",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "降级声明",
+   "then": "降级必须显式声明能力边界",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "兜底路径",
+   "then": "关键环节必须有备选",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "质量下限",
+   "then": "降级须设质量底线",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "抽样质检",
+   "then": "降级后抽样确认未破线",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "恢复探测",
+   "then": "主路径恢复后自动切回",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "降级声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "兜底路径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量下限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽样质检",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复探测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

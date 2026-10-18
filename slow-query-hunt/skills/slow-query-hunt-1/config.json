@@ -1,0 +1,72 @@
+{
+ "name": "slow-query-hunt-1",
+ "version": "2.0.0",
+ "domain": "慢查询排查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先取样本",
+   "then": "按耗时取头部样本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "看计划",
+   "then": "分析扫描行数与是否回表",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "索引命中",
+   "then": "确认条件与排序是否走索引",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "改写验证",
+   "then": "改写后对比耗时",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回归防复发",
+   "then": "加监控阈值",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先取样本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引命中",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "改写验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回归防复发",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

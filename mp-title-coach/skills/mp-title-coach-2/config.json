@@ -1,0 +1,78 @@
+{
+ "name": "mp-title-coach-2",
+ "version": "2.0.0",
+ "domain": "公众号标题",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不夸大",
+   "then": "标题承诺正文必须兑现",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "多版本",
+   "then": "一次拟 5 版再筛，不写一版就定",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不夸大",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多版本",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "承诺",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前置",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "价值",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "数字",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "读者",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "正文",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

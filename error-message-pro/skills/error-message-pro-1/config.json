@@ -1,0 +1,72 @@
+{
+ "name": "error-message-pro-1",
+ "version": "2.0.0",
+ "domain": "错误提示",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不用错误码",
+   "then": "错误码不能作为正文",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "说明原因",
+   "then": "说明可能的原因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "给出动作",
+   "then": "给可执行的下一步",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不丢数据",
+   "then": "不得丢失用户已输入内容",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分级呈现",
+   "then": "按严重度差异化样式",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不用错误码",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说明原因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "给出动作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不丢数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级呈现",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

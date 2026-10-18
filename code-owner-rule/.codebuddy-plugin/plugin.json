@@ -1,0 +1,74 @@
+{
+ "name": "code-owner-rule",
+ "version": "1.0.0",
+ "plugin": "code-owner-rule",
+ "description": "code-owner-rule — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for code-owner-rule tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/code-owner-rule.md"
+ ],
+ "agentName": "code-owner-rule",
+ "displayName": {
+  "zh": "代码归属规则 目录归属",
+  "en": "code-owner-rule"
+ },
+ "profession": {
+  "zh": "代码归属规则 顾问",
+  "en": "code-owner-rule"
+ },
+ "displayDescription": {
+  "zh": "代码归属规则 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "code-owner-rule: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "代码归属规则",
+   "en": "code-owner-rule"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到代码归属规则怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划代码归属规则",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查代码归属规则",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到代码归属规则怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/code-owner-rule-1/",
+  "./skills/code-owner-rule-2/",
+  "./skills/code-owner-rule-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:31",
+  "from": "代码归属规则专家",
+  "to": "代码归属规则 目录归属",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

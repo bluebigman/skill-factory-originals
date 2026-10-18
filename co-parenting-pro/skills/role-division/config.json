@@ -1,0 +1,117 @@
+{
+ "name": "role-division",
+ "version": "2.0.0",
+ "domain": "夫妻育儿",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "任务不均",
+   "then": "按可支配时间而非性别分工，并把任务写清到具体动作",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "丧偶式育儿",
+   "then": "把不可替代任务（每日陪睡/接送）明确指派，模糊分工必落单人",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "抱怨累积",
+   "then": "每周一次 15 分钟对齐会，只谈下周安排不翻旧账",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "一方过劳",
+   "then": "设置休息权：轮流有整块独处时间，无休息必先崩溃",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "互相指责",
+   "then": "只描述事实与需求（我需要你接手睡前），禁止人格评价",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分工",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "丧偶式育儿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全包",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "累",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "任务不均",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抱怨累积",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一方过劳",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "互相指责",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

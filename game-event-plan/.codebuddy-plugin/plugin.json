@@ -1,0 +1,74 @@
+{
+ "name": "game-event-plan",
+ "version": "1.0.0",
+ "plugin": "game-event-plan",
+ "description": "Game Event Plan for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/game-event-plan.md"
+ ],
+ "skills": [
+  "./skills/game-event-plan-1",
+  "./skills/game-event-plan-2",
+  "./skills/game-event-plan-3"
+ ],
+ "expertType": "agent",
+ "agentName": "game-event-plan",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Game Event Plan",
+  "zh": "游戏活动 先定目标 门槛分层"
+ },
+ "profession": {
+  "en": "Game Event Plan",
+  "zh": "游戏活动 节奏设计 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Game Event Plan tasks end-to-end with built-in professional skills.",
+  "zh": "游戏活动 节奏设计 顾问：覆盖 先定目标、门槛分层、防刷设计 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "游戏活动",
+   "en": "game-event-plan"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到游戏活动怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到节奏设计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到游戏活动怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "游戏活动专家",
+  "to": "游戏活动 先定目标 门槛分层",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

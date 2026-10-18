@@ -1,0 +1,70 @@
+{
+ "name": "study-motivation-coach-1",
+ "version": "2.0.0",
+ "domain": "学习动力",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "找意义",
+   "then": "把学习与个人目标连接",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "小成就",
+   "then": "设可达成的小目标积累成功体验",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "找意义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小成就",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "成功",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "学习",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "达成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "体验",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

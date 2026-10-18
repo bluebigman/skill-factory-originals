@@ -1,0 +1,121 @@
+{
+ "name": "daily-talk",
+ "version": "2.0.0",
+ "domain": "家庭沟通",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "封闭提问",
+   "then": "改「今天怎么样」为具体场景提问（今天哪件事最麻烦）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "说教过多",
+   "then": "对话中家长发言占比控制在三分之一以内",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "正面质问",
+   "then": "并肩做事时对话（开车/散步）比面对面质问更易开口",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "情绪高峰",
+   "then": "冲突时先物理暂停 20 分钟，降温后再谈",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "负面开场",
+   "then": "开场禁用成绩与问题清单，先建立连接再谈事",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "沟通技巧",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不说话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敷衍",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "顶嘴",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "封闭提问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说教过多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "正面质问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "情绪高峰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "负面开场",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

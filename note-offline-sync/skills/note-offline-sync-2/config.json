@@ -1,0 +1,78 @@
+{
+ "name": "note-offline-sync-2",
+ "version": "2.0.0",
+ "domain": "笔记离线",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "同步前提交",
+   "then": "同步前先本地固化，避免半同步状态",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "版本回溯",
+   "then": "开启历史版本，冲突后按时间线比对",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "同步前提交",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本回溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "历史",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "其余",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "笔记",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "状态",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "multiplayer-match-pro-1",
+ "version": "2.0.0",
+ "domain": "对战匹配",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分段匹配",
+   "then": "按水平分段并限制段位差",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "等待权衡",
+   "then": "在等待时长与公平间明确取舍",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "连败保护",
+   "then": "设连败后的保护机制",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常识别",
+   "then": "识别挂机、代打与恶意行为",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "数据复盘",
+   "then": "定期复盘胜率分布是否失衡",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分段匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "等待权衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "连败保护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

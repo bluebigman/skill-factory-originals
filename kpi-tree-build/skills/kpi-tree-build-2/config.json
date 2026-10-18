@@ -1,0 +1,72 @@
+{
+ "name": "kpi-tree-build-2",
+ "version": "2.0.0",
+ "domain": "指标树构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "北极星唯一",
+   "then": "顶层指标唯一",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可拆解",
+   "then": "每层能向下拆成公式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无重叠",
+   "then": "同一层指标不互相包含",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "到可行动",
+   "then": "叶子指标能被具体动作影响",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "业务变化后重审树",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "北极星唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可拆解",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无重叠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "到可行动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

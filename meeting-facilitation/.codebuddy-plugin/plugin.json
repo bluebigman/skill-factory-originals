@@ -1,0 +1,74 @@
+{
+ "name": "meeting-facilitation",
+ "version": "1.0.0",
+ "plugin": "meeting-facilitation",
+ "description": "meeting-facilitation — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for meeting-facilitation tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meeting-facilitation.md"
+ ],
+ "agentName": "meeting-facilitation",
+ "displayName": {
+  "zh": "会议主持 议程先行 时间盒",
+  "en": "meeting-facilitation"
+ },
+ "profession": {
+  "zh": "会议主持 顾问",
+  "en": "meeting-facilitation"
+ },
+ "displayDescription": {
+  "zh": "会议主持 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。。",
+  "en": "meeting-facilitation: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "会议主持",
+   "en": "meeting-facilitation"
+  },
+  {
+   "en": "OperationsHR",
+   "zh": "OperationsHR"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到会议主持怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划会议主持",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查会议主持",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到会议主持怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/meeting-facilitation-1/",
+  "./skills/meeting-facilitation-2/",
+  "./skills/meeting-facilitation-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:43",
+  "from": "会议主持专家",
+  "to": "会议主持 议程先行 时间盒",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

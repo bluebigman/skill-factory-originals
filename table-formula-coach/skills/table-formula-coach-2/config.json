@@ -1,0 +1,78 @@
+{
+ "name": "table-formula-coach-2",
+ "version": "2.0.0",
+ "domain": "表格公式",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "类型对齐",
+   "then": "文本型数字与数值混算必错，先统一类型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "循环引用",
+   "then": "先断开自引用链，再重建计算顺序",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "类型对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "循环引用",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "数字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "排查",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "数值",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "公式",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "报错",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

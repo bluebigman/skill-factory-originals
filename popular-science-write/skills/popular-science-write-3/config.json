@@ -1,0 +1,65 @@
+{
+ "name": "popular-science-write-3",
+ "version": "2.0.0",
+ "domain": "科普写作",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "避免绝对",
+   "then": "科学表述避免「一定」「绝对」",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "避免绝对",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "表达",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "确定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "读者",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "水平",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

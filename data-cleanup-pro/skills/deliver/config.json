@@ -1,0 +1,121 @@
+{
+ "name": "deliver",
+ "version": "2.0.0",
+ "domain": "数据清洗",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无说明",
+   "then": "交付须含字段说明表与处理日志",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "口径不清",
+   "then": "每个指标写明计算公式与过滤条件",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "验收缺失",
+   "then": "约定验收标准（行数/抽样比对）后再交付",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "敏感字段",
+   "then": "含个人信息的数据须脱敏或按授权范围交付",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本",
+   "then": "交付文件带版本号与生成时间戳",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "交付",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "验收",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无说明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径不清",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "验收缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "备份",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

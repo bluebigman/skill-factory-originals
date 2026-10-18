@@ -1,0 +1,121 @@
+{
+ "name": "review-time",
+ "version": "2.0.0",
+ "domain": "时间管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无记录",
+   "then": "先记录一周实际用时，凭感觉判断必然失真",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "归因外部",
+   "then": "先看可控项（会议/打扰/拖延），外部归因无法改进",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "过度规划",
+   "then": "规划占时间不超 10 分钟，过度规划是变相拖延",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无缓冲",
+   "then": "日程留 20% 空白，满排必然连锁延误",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复盘",
+   "then": "每周复盘一次并调整下周安排，只记录不调整等于白记",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间浪费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归因外部",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过度规划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "降低",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

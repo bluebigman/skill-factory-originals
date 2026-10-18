@@ -1,0 +1,75 @@
+{
+ "name": "Data Classify",
+ "description": "数据分级专家：覆盖 先分类、最小授权、流转留痕 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/data-classify",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/data-classify",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "data-classify-1",
+   "name": "针对 先分类、最小授权 等情境给出可执行处置",
+   "description": "针对 先分类、最小授权 等情境给出可执行处置",
+   "tags": [
+    "先分类",
+    "最小授权"
+   ],
+   "examples": [
+    "遇到先分类",
+    "遇到最小授权",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "data-classify-2",
+   "name": "针对 流转留痕、脱敏优先 等情境给出可执行处置",
+   "description": "针对 流转留痕、脱敏优先 等情境给出可执行处置",
+   "tags": [
+    "流转留痕",
+    "脱敏优先"
+   ],
+   "examples": [
+    "遇到流转留痕",
+    "遇到脱敏优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "data-classify-3",
+   "name": "针对 定期复核 等情境给出可执行处置",
+   "description": "针对 定期复核 等情境给出可执行处置",
+   "tags": [
+    "定期复核"
+   ],
+   "examples": [
+    "遇到定期复核",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "数据分级专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "doc-figure-table-num-2",
+ "version": "2.0.0",
+ "domain": "图表编号管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "统一编号",
+   "then": "全文统一编号规则",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "引用同步",
+   "then": "正文引用随编号更新",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "顺序正确",
+   "then": "按出现顺序编号",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标题格式",
+   "then": "图题在下表题在上",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "清单核对",
+   "then": "生成图表清单核对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "统一编号",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引用同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "顺序正确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单核对",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

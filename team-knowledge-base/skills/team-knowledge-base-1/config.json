@@ -1,0 +1,72 @@
+{
+ "name": "team-knowledge-base-1",
+ "version": "2.0.0",
+ "domain": "团队知识库",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一篇一题",
+   "then": "一条解决一个问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标题即问题",
+   "then": "标题写成搜索问句",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可检索",
+   "then": "结构统一便于检索",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "定期复核",
+   "then": "标注最后复核日期",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "贡献激励",
+   "then": "鼓励贡献并留名",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一篇一题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题即问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可检索",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "贡献激励",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

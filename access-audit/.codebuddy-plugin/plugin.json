@@ -1,0 +1,74 @@
+{
+ "name": "access-audit",
+ "version": "1.0.0",
+ "plugin": "access-audit",
+ "description": "Access Audit for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/access-audit.md"
+ ],
+ "skills": [
+  "./skills/access-audit-1",
+  "./skills/access-audit-2",
+  "./skills/access-audit-3"
+ ],
+ "expertType": "agent",
+ "agentName": "access-audit",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Access Audit",
+  "zh": "权限审计 定期清查 离职即收"
+ },
+ "profession": {
+  "en": "Access Audit",
+  "zh": "权限审计 账号清查 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Access Audit tasks end-to-end with built-in professional skills.",
+  "zh": "权限审计 账号清查 顾问：覆盖 定期清查、离职即收、最小权限 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "权限审计",
+   "en": "access-audit"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到权限审计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到账号清查怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到权限审计怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "权限审计专家",
+  "to": "权限审计 定期清查 离职即收",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

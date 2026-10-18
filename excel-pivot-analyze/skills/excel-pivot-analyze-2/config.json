@@ -1,0 +1,72 @@
+{
+ "name": "excel-pivot-analyze-2",
+ "version": "2.0.0",
+ "domain": "透视分析构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "源表规范",
+   "then": "源表必须单行表头无合并单元格",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "维度度量分离",
+   "then": "先分维度后放度量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "口径标注",
+   "then": "每个数值标注统计口径",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常先看",
+   "then": "分析前先看最大值最小值是否合理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "刷新机制",
+   "then": "数据变动后手动刷新并记录时间",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "源表规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "维度度量分离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常先看",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "刷新机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

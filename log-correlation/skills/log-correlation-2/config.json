@@ -1,0 +1,72 @@
+{
+ "name": "log-correlation-2",
+ "version": "2.0.0",
+ "domain": "日志关联追踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "链路标识",
+   "then": "全链路统一请求标识",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "时间对齐",
+   "then": "对齐各服务时间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "采样策略",
+   "then": "高频日志采样",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "级别规范",
+   "then": "统一日志级别",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "检索友好",
+   "then": "结构化便于检索",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "链路标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "采样策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "级别规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "检索友好",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "name": "live-stream-plan-1",
+ "version": "2.0.0",
+ "domain": "直播带货",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "排品有节奏",
+   "then": "引流品-利润品-福利品交替",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "话术卡点",
+   "then": "每 15 分钟一个留人动作",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "排品有节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "话术卡点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

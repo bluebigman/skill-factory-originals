@@ -1,0 +1,72 @@
+{
+ "name": "table-to-chart-3",
+ "version": "2.0.0",
+ "domain": "表格转图表",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定意图",
+   "then": "比较趋势还是构成决定图型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一图一义",
+   "then": "一张图只讲一个结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "刻度不截断",
+   "then": "柱状图纵轴从零开始",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标注极值",
+   "then": "标出最大最小与拐点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "配色克制",
+   "then": "同类同色系，强调项用对比色",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定意图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一图一义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "刻度不截断",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标注极值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配色克制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

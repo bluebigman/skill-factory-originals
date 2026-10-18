@@ -1,0 +1,72 @@
+{
+ "name": "agent-identity-manage-2",
+ "version": "2.0.0",
+ "domain": "身份管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "身份唯一",
+   "then": "每个 Agent 独立身份",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "凭据轮换",
+   "then": "定期轮换凭据",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "最小暴露",
+   "then": "凭据不明文落盘",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "权限绑定",
+   "then": "权限与身份绑定",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "吊销机制",
+   "then": "可即时吊销",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "身份唯一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭据轮换",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小暴露",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限绑定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "吊销机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

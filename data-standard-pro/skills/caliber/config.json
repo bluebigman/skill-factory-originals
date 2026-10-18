@@ -1,0 +1,121 @@
+{
+ "name": "caliber",
+ "version": "2.0.0",
+ "domain": "数据规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "口径漂移",
+   "then": "同一指标在不同表的口径须显式对齐并写清",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分母不明",
+   "then": "所有比例须写明分母，口径不一是分析最大陷阱",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时间范围",
+   "then": "明确统计周期与截止时点，跨时区须标时区",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "过滤条件",
+   "then": "写明过滤条件（是否含测试数据/退款/内部单）",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "口径变更须留痕并标注生效日期",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径漂移",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分母不明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间范围",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过滤条件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "周期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "显式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "比例",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写清",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

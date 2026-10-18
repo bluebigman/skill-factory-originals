@@ -1,0 +1,58 @@
+{
+ "name": "viral-teardown-1",
+ "version": "2.0.0",
+ "domain": "爆款拆解",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拆结构不抄内容",
+   "then": "只学结构，不抄表达",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "找共性",
+   "then": "至少拆 10 条找共性，别拿个例当规律",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拆结构不抄内容",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "找共性",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "表达",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

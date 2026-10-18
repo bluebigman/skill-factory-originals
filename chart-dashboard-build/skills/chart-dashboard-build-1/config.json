@@ -1,0 +1,58 @@
+{
+ "name": "chart-dashboard-build-1",
+ "version": "2.0.0",
+ "domain": "数据可视化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一屏一主题",
+   "then": "单屏只回答一个问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "指标分层",
+   "then": "核心指标置顶，明细下沉",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一屏一主题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指标分层",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回答",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "视化",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

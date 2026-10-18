@@ -1,0 +1,107 @@
+{
+ "name": "Story Outline Pro",
+ "description": "故事大纲专家：人物的成长轨迹设计；故事的结构与节奏；故事前提与冲突设计。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/story-outline-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/story-outline-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "character-arc",
+   "name": "人物的成长轨迹设计",
+   "description": "人物的成长轨迹设计",
+   "tags": [
+    "人物",
+    "弧光",
+    "动机",
+    "成长"
+   ],
+   "examples": [
+    "遇到人物扁平",
+    "遇到动机不明",
+    "遇到无变化",
+    "遇到配角工具化",
+    "遇到关系张力"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "character-arc",
+    "to": "character-arc",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "plot-structure",
+   "name": "故事的结构与节奏",
+   "description": "故事的结构与节奏",
+   "tags": [
+    "结构",
+    "三幕",
+    "转折",
+    "节奏"
+   ],
+   "examples": [
+    "遇到无结构",
+    "遇到转折生硬",
+    "遇到中段塌陷",
+    "遇到高潮无力",
+    "遇到结尾"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "plot-structure",
+    "to": "plot-structure",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "premise",
+   "name": "故事前提与冲突设计",
+   "description": "故事前提与冲突设计",
+   "tags": [
+    "设定",
+    "前提",
+    "冲突",
+    "主题"
+   ],
+   "examples": [
+    "遇到无冲突",
+    "遇到主角被动",
+    "遇到设定堆砌",
+    "遇到主题模糊",
+    "遇到无代价"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:53",
+    "from": "premise",
+    "to": "premise",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "故事大纲专家",
+ "x-source": "skill-factory-originals"
+}

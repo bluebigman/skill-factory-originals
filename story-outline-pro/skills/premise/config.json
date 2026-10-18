@@ -1,0 +1,121 @@
+{
+ "name": "premise",
+ "version": "2.0.0",
+ "domain": "故事大纲",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无冲突",
+   "then": "没有冲突就没有故事，先定核心矛盾",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "主角被动",
+   "then": "主角必须有明确欲望并主动行动，被动主角无吸引力",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "设定堆砌",
+   "then": "设定只服务于冲突，无关设定会拖垮节奏",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "主题模糊",
+   "then": "主题用一个问题表达（人能否被原谅），模糊则散",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无代价",
+   "then": "选择的代价决定张力，无代价的抉择不成立",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "设定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "前提",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主角被动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "设定堆砌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主题模糊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无代价",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理解",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

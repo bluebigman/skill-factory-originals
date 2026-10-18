@@ -1,0 +1,72 @@
+{
+ "name": "industrial-service-pro-2",
+ "version": "2.0.0",
+ "domain": "工业服务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "服务分级",
+   "then": "按设备关键度定响应等级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "时限明确",
+   "then": "响应与修复时限写入合同",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "备件前置",
+   "then": "高频备件前置到现场",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "过程留档",
+   "then": "服务过程与更换件留档",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "交付回访",
+   "then": "交付后回访确认可用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "服务分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时限明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "备件前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过程留档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交付回访",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

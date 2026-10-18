@@ -1,0 +1,121 @@
+{
+ "name": "structure",
+ "version": "2.0.0",
+ "domain": "报告撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不知从何下手",
+   "then": "先写结论页，再补论据，最后写背景，避免边想边写",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "逻辑混乱",
+   "then": "用金字塔原则：结论先行-以上统下-归类分组-逻辑递进",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "篇幅失控",
+   "then": "每页一个核心论点，承载两个以上论点即拆分",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "读者错位",
+   "then": "按读者决策需求裁剪，技术细节放附录而非正文",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "开头冗长",
+   "then": "背景控制在一页内，决策者只关心结论与风险",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "大纲",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逻辑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不知从何下手",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逻辑混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "篇幅失控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "读者错位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "开头冗长",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "风险",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "标题",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

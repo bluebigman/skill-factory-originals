@@ -1,0 +1,78 @@
+{
+ "name": "exam-prep-coach-2",
+ "version": "2.0.0",
+ "domain": "考前复习",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "错题归因",
+   "then": "分不会/粗心/时间不够",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "睡眠保障",
+   "then": "考前一晚不熬夜",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "错题归因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "睡眠保障",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优先",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "决定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "调整",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "排序",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "掌握",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "限时",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

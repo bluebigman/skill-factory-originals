@@ -1,0 +1,69 @@
+{
+ "name": "oee-improve-pro-3",
+ "version": "2.0.0",
+ "domain": "设备效率",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标分阶",
+   "then": "改善目标分阶段设定",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标分阶",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分类",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "最大",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "效率",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "统计",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "占比",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "阶段",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

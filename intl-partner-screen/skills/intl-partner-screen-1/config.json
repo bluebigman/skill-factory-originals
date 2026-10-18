@@ -1,0 +1,72 @@
+{
+ "name": "intl-partner-screen-1",
+ "version": "2.0.0",
+ "domain": "海外伙伴",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "资质核验",
+   "then": "核验注册信息与经营资质",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "案例验证",
+   "then": "要求提供可联系的过往案例",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "经营佐证",
+   "then": "要求提供基本经营与履约证明",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "小额试单",
+   "then": "先小额试单验证履约",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "退出条款",
+   "then": "合同设明确退出与违约责任",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "资质核验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "案例验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "经营佐证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小额试单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退出条款",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

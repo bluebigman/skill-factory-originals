@@ -1,0 +1,54 @@
+{
+ "name": "seo-content-plan-1",
+ "version": "2.0.0",
+ "domain": "内容SEO",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "需求优先",
+   "then": "先查搜索需求再定选题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一页一意图",
+   "then": "单页对应一个搜索意图",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "需求优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一页一意图",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "搜索",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先查",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

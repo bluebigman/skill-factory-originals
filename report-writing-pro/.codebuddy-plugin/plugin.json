@@ -1,0 +1,74 @@
+{
+ "name": "report-writing-pro",
+ "version": "1.0.0",
+ "plugin": "report-writing-pro",
+ "description": "Report Writing Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/report-writing-pro.md"
+ ],
+ "skills": [
+  "./skills/data-present",
+  "./skills/review",
+  "./skills/structure"
+ ],
+ "expertType": "agent",
+ "agentName": "report-writing-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Report Writing Pro",
+  "zh": "写报告 图表堆砌 比例失真"
+ },
+ "profession": {
+  "en": "Report Writing Pro",
+  "zh": "报告撰写 结构搭建 数据呈现"
+ },
+ "displayDescription": {
+  "en": "Handles Report Writing Pro tasks end-to-end with built-in professional skills.",
+  "zh": "报告撰写 结构搭建 数据呈现：数据与图表的表达规范；报告交付前的自检清单；专业报告的金字塔结构。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "图表堆砌"
+  },
+  {
+   "en": "practical capability",
+   "zh": "比例失真"
+  },
+  {
+   "en": "practical capability",
+   "zh": "口径不明"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到图表堆砌怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到比例失真怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到口径不明怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到图表堆砌怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "写报告专家",
+  "to": "写报告 图表堆砌 比例失真",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

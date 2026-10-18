@@ -1,0 +1,67 @@
+{
+ "name": "Sla Define",
+ "description": "服务标准专家：覆盖 分层定义、可兑现、写清例外 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/sla-define",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/sla-define",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "sla-define-1",
+   "name": "针对 分层定义、可兑现 等情境给出可执行处置",
+   "description": "针对 分层定义、可兑现 等情境给出可执行处置",
+   "tags": [
+    "分层定义",
+    "可兑现"
+   ],
+   "examples": [
+    "遇到分层定义",
+    "遇到可兑现",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sla-define-2",
+   "name": "针对 写清例外、记录实际 等情境给出可执行处置",
+   "description": "针对 写清例外、记录实际 等情境给出可执行处置",
+   "tags": [
+    "写清例外",
+    "记录实际"
+   ],
+   "examples": [
+    "遇到写清例外",
+    "遇到记录实际",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "sla-define-3",
+   "name": "针对 定期校准 等情境给出可执行处置",
+   "description": "针对 定期校准 等情境给出可执行处置",
+   "tags": [
+    "定期校准"
+   ],
+   "examples": [
+    "遇到定期校准",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "服务标准专家"
+}

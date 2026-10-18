@@ -1,0 +1,74 @@
+{
+ "name": "agent-output-format",
+ "version": "1.0.0",
+ "plugin": "agent-output-format",
+ "description": "agent-output-format — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for agent-output-format tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-output-format.md"
+ ],
+ "agentName": "agent-output-format",
+ "displayName": {
+  "zh": "输出规范 结构固定 类型明确",
+  "en": "agent-output-format"
+ },
+ "profession": {
+  "zh": "输出规范 结构化 顾问",
+  "en": "agent-output-format"
+ },
+ "displayDescription": {
+  "zh": "输出规范 结构化 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "agent-output-format: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "输出规范",
+   "en": "agent-output-format"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到输出规范怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划输出规范",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查输出规范",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到输出规范怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/agent-output-format-1/",
+  "./skills/agent-output-format-2/",
+  "./skills/agent-output-format-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "输出规范专家",
+  "to": "输出规范 结构固定 类型明确",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

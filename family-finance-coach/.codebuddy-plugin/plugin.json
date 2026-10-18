@@ -1,0 +1,74 @@
+{
+ "name": "family-finance-coach",
+ "version": "1.0.0",
+ "plugin": "family-finance-coach",
+ "description": "Family Finance Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/family-finance-coach.md"
+ ],
+ "skills": [
+  "./skills/family-finance-coach-1",
+  "./skills/family-finance-coach-2",
+  "./skills/family-finance-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "family-finance-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Family Finance Coach",
+  "zh": "家庭财务 先储蓄后消费"
+ },
+ "profession": {
+  "en": "Family Finance Coach",
+  "zh": "家庭财务 收支规划 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Family Finance Coach tasks end-to-end with built-in professional skills.",
+  "zh": "家庭财务 收支规划 顾问：覆盖 先储蓄后消费、分类预算 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先储蓄后消费"
+  },
+  {
+   "en": "practical capability",
+   "zh": "分类预算"
+  },
+  {
+   "en": "practical capability",
+   "zh": "大额共决"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先储蓄后消费怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到分类预算怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到大额共决怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先储蓄后消费怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭财务专家",
+  "to": "家庭财务 先储蓄后消费",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

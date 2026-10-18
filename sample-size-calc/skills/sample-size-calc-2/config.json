@@ -1,0 +1,72 @@
+{
+ "name": "sample-size-calc-2",
+ "version": "2.0.0",
+ "domain": "样本量估算",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定效应量",
+   "then": "最小可察觉差异",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "显著性与功效",
+   "then": "通常取常规取值",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "考虑流失",
+   "then": "预估流失率上浮样本",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分层抽样",
+   "then": "按关键分层分配",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "样本量写入方案",
+   "then": "实验前固定不中途改",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定效应量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "显著性与功效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "考虑流失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层抽样",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样本量写入方案",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

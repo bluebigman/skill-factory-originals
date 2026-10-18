@@ -1,0 +1,72 @@
+{
+ "name": "data-pipeline-sla-1",
+ "version": "2.0.0",
+ "domain": "管线时效",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "水位监控",
+   "then": "监控数据延迟水位",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "超时告警",
+   "then": "超时即告警",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分级承诺",
+   "then": "按重要性分级承诺",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "瓶颈定位",
+   "then": "定位延迟环节",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "补偿机制",
+   "then": "延迟须有补偿",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "水位监控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超时告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "瓶颈定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "补偿机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

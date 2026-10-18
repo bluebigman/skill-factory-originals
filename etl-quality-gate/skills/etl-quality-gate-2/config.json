@@ -1,0 +1,72 @@
+{
+ "name": "etl-quality-gate-2",
+ "version": "2.0.0",
+ "domain": "数据入仓质量闸",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "校验前置",
+   "then": "入仓前全量校验",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拒绝策略",
+   "then": "不合法整批拒绝",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "错误可定位",
+   "then": "给出行与原因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "允许修正重跑",
+   "then": "修正后可重跑",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "质量报告留存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "校验前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒绝策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误可定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "允许修正重跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

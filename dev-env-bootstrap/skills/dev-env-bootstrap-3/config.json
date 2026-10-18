@@ -1,0 +1,72 @@
+{
+ "name": "dev-env-bootstrap-3",
+ "version": "2.0.0",
+ "domain": "开发环境搭建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一键脚本",
+   "then": "提供一键初始化脚本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "前置检查",
+   "then": "先检查系统版本与依赖",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败可读",
+   "then": "失败给出明确原因与修复建议",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "离线可用",
+   "then": "关键依赖本地缓存",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "文档同步",
+   "then": "步骤与脚本保持同步",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一键脚本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "前置检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "离线可用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文档同步",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

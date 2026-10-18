@@ -1,0 +1,67 @@
+{
+ "name": "Equipment Maintain Pro",
+ "description": "设备维保专家：覆盖 分级维保、点检可量、备件策略 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/equipment-maintain-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/equipment-maintain-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "equipment-maintain-pro-1",
+   "name": "针对 分级维保、点检可量 等情境给出可执行处置",
+   "description": "针对 分级维保、点检可量 等情境给出可执行处置",
+   "tags": [
+    "分级维保",
+    "点检可量"
+   ],
+   "examples": [
+    "遇到分级维保",
+    "遇到点检可量",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "equipment-maintain-pro-2",
+   "name": "针对 备件策略、故障归集 等情境给出可执行处置",
+   "description": "针对 备件策略、故障归集 等情境给出可执行处置",
+   "tags": [
+    "备件策略",
+    "故障归集"
+   ],
+   "examples": [
+    "遇到备件策略",
+    "遇到故障归集",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "equipment-maintain-pro-3",
+   "name": "针对 计划入排产 等情境给出可执行处置",
+   "description": "针对 计划入排产 等情境给出可执行处置",
+   "tags": [
+    "计划入排产"
+   ],
+   "examples": [
+    "遇到计划入排产",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "设备维保专家"
+}

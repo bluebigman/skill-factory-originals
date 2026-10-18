@@ -1,0 +1,67 @@
+{
+ "name": "Contract Risk Read",
+ "description": "合同风险专家：覆盖 先看四要件、违约责任、付款节点 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/contract-risk-read",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/contract-risk-read",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "contract-risk-read-1",
+   "name": "针对 先看四要件、违约责任 等情境给出可执行处置",
+   "description": "针对 先看四要件、违约责任 等情境给出可执行处置",
+   "tags": [
+    "先看四要件",
+    "违约责任"
+   ],
+   "examples": [
+    "遇到先看四要件",
+    "遇到违约责任",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "contract-risk-read-2",
+   "name": "针对 付款节点、争议解决 等情境给出可执行处置",
+   "description": "针对 付款节点、争议解决 等情境给出可执行处置",
+   "tags": [
+    "付款节点",
+    "争议解决"
+   ],
+   "examples": [
+    "遇到付款节点",
+    "遇到争议解决",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "contract-risk-read-3",
+   "name": "针对 专业边界 等情境给出可执行处置",
+   "description": "针对 专业边界 等情境给出可执行处置",
+   "tags": [
+    "专业边界"
+   ],
+   "examples": [
+    "遇到专业边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "合同风险专家"
+}

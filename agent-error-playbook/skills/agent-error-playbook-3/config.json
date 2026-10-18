@@ -1,0 +1,72 @@
+{
+ "name": "agent-error-playbook-3",
+ "version": "2.0.0",
+ "domain": "错误手册",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "错误分类",
+   "then": "按类型分类错误",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "处置步骤",
+   "then": "每类给处置步骤",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "自愈建议",
+   "then": "给出可自愈建议",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "升级路径",
+   "then": "无法自愈的升级路径",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "案例沉淀",
+   "then": "案例进手册",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "错误分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "处置步骤",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自愈建议",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "升级路径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "案例沉淀",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "pet-training-coach-2",
+ "version": "2.0.0",
+ "domain": "宠物训练",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定点排泄",
+   "then": "固定点位+即时奖励，事后惩罚无效",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "换牙咬人",
+   "then": "提供替代咬物，用手逗玩强化咬手",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定点排泄",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "换牙咬人",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "训练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "焦虑",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "运动",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先排",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

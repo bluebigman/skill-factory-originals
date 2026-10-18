@@ -1,0 +1,74 @@
+{
+ "name": "pipeline-review-pro",
+ "version": "1.0.0",
+ "plugin": "pipeline-review-pro",
+ "description": "pipeline-review-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for pipeline-review-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/pipeline-review-pro.md"
+ ],
+ "agentName": "pipeline-review-pro",
+ "displayName": {
+  "zh": "销售漏斗 退出标准",
+  "en": "pipeline-review-pro"
+ },
+ "profession": {
+  "zh": "销售漏斗 复盘机制 顾问",
+  "en": "pipeline-review-pro"
+ },
+ "displayDescription": {
+  "zh": "销售漏斗 复盘机制 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "pipeline-review-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "销售漏斗",
+   "en": "pipeline-review-pro"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到销售漏斗怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划销售漏斗",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查销售漏斗",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到销售漏斗怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/pipeline-review-pro-1",
+  "./skills/pipeline-review-pro-2",
+  "./skills/pipeline-review-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "销售漏斗专家",
+  "to": "销售漏斗 退出标准",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

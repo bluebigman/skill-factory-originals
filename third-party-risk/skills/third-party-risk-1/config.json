@@ -1,0 +1,72 @@
+{
+ "name": "third-party-risk-1",
+ "version": "2.0.0",
+ "domain": "第三方风险",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "接口清单",
+   "then": "列出全部外部依赖",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数据流向",
+   "then": "明确数据流出范围",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "权限范围",
+   "then": "最小化第三方权限",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "退出策略",
+   "then": "可替换与可回退",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复审",
+   "then": "按周期复审",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "接口清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据流向",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权限范围",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退出策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复审",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

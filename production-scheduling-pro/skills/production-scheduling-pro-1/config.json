@@ -1,0 +1,45 @@
+{
+ "name": "production-scheduling-pro-1",
+ "version": "2.0.0",
+ "domain": "生产排程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "交期倒排",
+   "then": "按交期倒排工序与投料时点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "瓶颈排程",
+   "then": "排程以瓶颈资源为准",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "交期倒排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "瓶颈排程",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

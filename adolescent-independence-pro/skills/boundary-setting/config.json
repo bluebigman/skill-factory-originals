@@ -1,0 +1,121 @@
+{
+ "name": "boundary-setting",
+ "version": "2.0.0",
+ "domain": "青春期独立",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "翻看隐私",
+   "then": "隐私是信任底线，翻手机/日记会永久损伤关系",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "交友干预",
+   "then": "只对安全风险设硬边界（涉毒/涉法），其它用倾听替代否决",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "作息冲突",
+   "then": "协商固定底线（如 23 点前回房）而非全程管控",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "外出报备",
+   "then": "要求报备定位与同伴，但不得实时追查行踪",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "边界被试探",
+   "then": "守住已声明底线的一致执行，比严厉更有效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "边界",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐私",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交友",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "作息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "翻看隐私",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交友干预",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "作息冲突",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外出报备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界被试探",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

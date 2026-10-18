@@ -1,0 +1,74 @@
+{
+ "name": "declutter-pro",
+ "version": "1.0.0",
+ "plugin": "declutter-pro",
+ "description": "Declutter Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/declutter-pro.md"
+ ],
+ "skills": [
+  "./skills/digital",
+  "./skills/maintain",
+  "./skills/physical"
+ ],
+ "expertType": "agent",
+ "agentName": "declutter-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Declutter Pro",
+  "zh": "极简整理 相册爆满 通知轰炸"
+ },
+ "profession": {
+  "en": "Declutter Pro",
+  "zh": "极简整理 物品取舍 数字断舍离"
+ },
+ "displayDescription": {
+  "en": "Handles Declutter Pro tasks end-to-end with built-in professional skills.",
+  "zh": "极简整理 物品取舍 数字断舍离：数字空间的整理；长期维持的机制；实体物品的去留判断。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "相册爆满"
+  },
+  {
+   "en": "practical capability",
+   "zh": "通知轰炸"
+  },
+  {
+   "en": "practical capability",
+   "zh": "文件混乱"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到相册爆满怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到通知轰炸怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到文件混乱怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到相册爆满怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:34",
+  "from": "极简整理专家",
+  "to": "极简整理 相册爆满 通知轰炸",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

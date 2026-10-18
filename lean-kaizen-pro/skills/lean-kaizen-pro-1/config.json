@@ -1,0 +1,62 @@
+{
+ "name": "lean-kaizen-pro-1",
+ "version": "2.0.0",
+ "domain": "精益改善",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "课题聚焦",
+   "then": "一次只推一个课题，不铺开",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数据说话",
+   "then": "改善前后用同口径同口径数据对比",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "课题聚焦",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据说话",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "口径",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "次只",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "用同",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前后",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

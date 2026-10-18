@@ -1,0 +1,67 @@
+{
+ "name": "Teen Peer Pressure",
+ "description": "同伴压力专家：覆盖 情景演练、给替代方案、不评判朋友、底线清单 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/teen-peer-pressure",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-peer-pressure",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-peer-pressure-1",
+   "name": "针对 情景演练、给替代方案 等情境给出可执行处置",
+   "description": "针对 情景演练、给替代方案 等情境给出可执行处置",
+   "tags": [
+    "情景演练",
+    "给替代方案"
+   ],
+   "examples": [
+    "遇到情景演练",
+    "遇到给替代方案",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-peer-pressure-2",
+   "name": "针对 不评判朋友、底线清单 等情境给出可执行处置",
+   "description": "针对 不评判朋友、底线清单 等情境给出可执行处置",
+   "tags": [
+    "不评判朋友",
+    "底线清单"
+   ],
+   "examples": [
+    "遇到不评判朋友",
+    "遇到底线清单",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-peer-pressure-3",
+   "name": "针对 后援通道 等情境给出可执行处置",
+   "description": "针对 后援通道 等情境给出可执行处置",
+   "tags": [
+    "后援通道"
+   ],
+   "examples": [
+    "遇到后援通道",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "同伴压力专家"
+}

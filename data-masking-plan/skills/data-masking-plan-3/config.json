@@ -1,0 +1,72 @@
+{
+ "name": "data-masking-plan-3",
+ "version": "2.0.0",
+ "domain": "数据掩码方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "生产不入测",
+   "then": "测试环境禁用真实数据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按需掩码",
+   "then": "按角色决定是否掩码",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "保持格式",
+   "then": "掩码后仍满足格式校验",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "关联保持",
+   "then": "掩码后关联关系仍可用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可配置",
+   "then": "掩码规则可配置可审计",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "生产不入测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按需掩码",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保持格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关联保持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可配置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

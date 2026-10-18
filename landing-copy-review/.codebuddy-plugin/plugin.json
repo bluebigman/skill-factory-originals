@@ -1,0 +1,74 @@
+{
+ "name": "landing-copy-review",
+ "version": "1.0.0",
+ "plugin": "landing-copy-review",
+ "description": "landing-copy-review — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for landing-copy-review tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/landing-copy-review.md"
+ ],
+ "agentName": "landing-copy-review",
+ "displayName": {
+  "zh": "落地页文案 首屏说清 单一目标",
+  "en": "landing-copy-review"
+ },
+ "profession": {
+  "zh": "落地页文案 评审",
+  "en": "landing-copy-review"
+ },
+ "displayDescription": {
+  "zh": "落地页文案 评审：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "landing-copy-review: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "落地页文案",
+   "en": "landing-copy-review"
+  },
+  {
+   "en": "MarketingGrowth",
+   "zh": "MarketingGrowth"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到落地页文案怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划落地页文案",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查落地页文案",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到落地页文案怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/landing-copy-review-1",
+  "./skills/landing-copy-review-2",
+  "./skills/landing-copy-review-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "落地页文案专家",
+  "to": "落地页文案 首屏说清 单一目标",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

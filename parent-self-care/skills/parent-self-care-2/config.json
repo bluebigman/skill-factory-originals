@@ -1,0 +1,78 @@
+{
+ "name": "parent-self-care-2",
+ "version": "2.0.0",
+ "domain": "家长压力",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "求助",
+   "then": "向伴侣/家人求助而非硬扛",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "情绪出口",
+   "then": "找成人倾诉对象",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "求助",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "情绪出口",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "降低",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "家长",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "允许",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "压力",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "休息",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

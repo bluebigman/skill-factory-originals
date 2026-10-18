@@ -1,0 +1,117 @@
+{
+ "name": "anti-procrastination",
+ "version": "2.0.0",
+ "domain": "自律养成",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "启动难",
+   "then": "只要求自己做 2 分钟，启动后惯性会接管",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分心冲动",
+   "then": "记录分心念头再继续，写下来即可显著降低干扰",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "手机在场",
+   "then": "手机放视线外，仅在视线内就会降低认知容量",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "完美主义",
+   "then": "允许先出糙版再迭代，追求一次到位是拖延的伪装",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "自责循环",
+   "then": "中断后不补偿性加倍，按原计划继续即可",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拖延",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "启动难",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分心",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分心冲动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手机在场",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "完美主义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自责循环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "计划",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "安排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "允许",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

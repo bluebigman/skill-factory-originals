@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "停在人为失误",
+   "then": "继续追问为何流程允许该操作"
+  },
+  {
+   "when": "多因素交织",
+   "then": "区分触发因素与放大因素"
+  }
+ ],
+ "keywords": [
+  "根因",
+  "系统性",
+  "五问"
+ ],
+ "boundary": "从直接原因追到系统性根因",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

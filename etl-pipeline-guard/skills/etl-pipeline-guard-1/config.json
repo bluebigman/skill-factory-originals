@@ -1,0 +1,72 @@
+{
+ "name": "etl-pipeline-guard-1",
+ "version": "2.0.0",
+ "domain": "ETL",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "依赖声明",
+   "then": "任务依赖必须显式声明",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "幂等重跑",
+   "then": "重跑不得产生重复数据",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "断点续跑",
+   "then": "中断后可从断点恢复",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "失败隔离",
+   "then": "单任务失败不影响无关链路",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "水位监控",
+   "then": "监控数据延迟水位",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "依赖声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "幂等重跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "断点续跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "水位监控",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

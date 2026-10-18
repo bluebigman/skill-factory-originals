@@ -1,0 +1,87 @@
+{
+ "name": "parent-support",
+ "version": "2.0.0",
+ "domain": "考试焦虑",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "怎么说",
+   "then": "说我看到你在努力，不说考不好也没关系",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "别紧张",
+   "then": "改为紧张是正常的，说明你在乎",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "加油",
+   "then": "改为具体支持（我去准备夜宵/我陪你走走）",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "怎么说",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "别紧张",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "加油",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L84"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

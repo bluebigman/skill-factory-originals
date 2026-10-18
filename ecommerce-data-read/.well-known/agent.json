@@ -1,0 +1,67 @@
+{
+ "name": "Ecommerce Data Read",
+ "description": "电商数据专家：覆盖 先看漏斗、单一变量、对比基准、分人群、结论可动 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/ecommerce-data-read",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/ecommerce-data-read",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "ecommerce-data-read-1",
+   "name": "针对 先看漏斗、单一变量 等情境给出可执行处置",
+   "description": "针对 先看漏斗、单一变量 等情境给出可执行处置",
+   "tags": [
+    "先看漏斗",
+    "单一变量"
+   ],
+   "examples": [
+    "遇到先看漏斗",
+    "遇到单一变量",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "ecommerce-data-read-2",
+   "name": "针对 对比基准、分人群 等情境给出可执行处置",
+   "description": "针对 对比基准、分人群 等情境给出可执行处置",
+   "tags": [
+    "对比基准",
+    "分人群"
+   ],
+   "examples": [
+    "遇到对比基准",
+    "遇到分人群",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "ecommerce-data-read-3",
+   "name": "针对 结论可动 等情境给出可执行处置",
+   "description": "针对 结论可动 等情境给出可执行处置",
+   "tags": [
+    "结论可动"
+   ],
+   "examples": [
+    "遇到结论可动",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "电商数据专家"
+}

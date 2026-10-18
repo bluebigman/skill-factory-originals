@@ -1,0 +1,69 @@
+{
+ "name": "retail-diagnose-3",
+ "version": "2.0.0",
+ "domain": "零售经营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单点改善",
+   "then": "一次只改一处，便于归因",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "单点改善",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "次只",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流失",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "动线",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "再谈",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "优化",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "先看",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "short-video-script",
+ "version": "1.0.0",
+ "plugin": "short-video-script",
+ "description": "Short Video Script for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/short-video-script.md"
+ ],
+ "skills": [
+  "./skills/short-video-script-1",
+  "./skills/short-video-script-2",
+  "./skills/short-video-script-3"
+ ],
+ "expertType": "agent",
+ "agentName": "short-video-script",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Short Video Script",
+  "zh": "短视频 前 3 秒钩子 单点"
+ },
+ "profession": {
+  "en": "Short Video Script",
+  "zh": "短视频 脚本拆解 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Short Video Script tasks end-to-end with built-in professional skills.",
+  "zh": "短视频 脚本拆解 顾问：覆盖 前 3 秒钩子、单点、口语化 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "前 3 秒钩子"
+  },
+  {
+   "en": "practical capability",
+   "zh": "单点"
+  },
+  {
+   "en": "practical capability",
+   "zh": "口语化"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到前 3 秒钩子怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到单点怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到口语化怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到前 3 秒钩子怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "短视频专家",
+  "to": "短视频 前 3 秒钩子 单点",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,70 @@
+{
+ "name": "doc-transcribe-struct-2",
+ "version": "2.0.0",
+ "domain": "文档转写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不确定留标记",
+   "then": "听不清处标 [?] 不臆测",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可信标注",
+   "then": "外部事实标来源，推断标推断",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不确定留标记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可信标注",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "标题",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "事实",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文档",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "层级",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "project-task-split-1",
+ "version": "2.0.0",
+ "domain": "项目任务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拆到可交付",
+   "then": "任务拆到能独立验收的粒度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "明确负责人",
+   "then": "一事一人，避免共同负责",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拆到可交付",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "明确负责人",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "共同",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "独立",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "粒度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "务拆",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验收",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "channel-evaluate",
+ "version": "1.0.0",
+ "plugin": "channel-evaluate",
+ "description": "Channel Evaluate for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/channel-evaluate.md"
+ ],
+ "skills": [
+  "./skills/channel-evaluate-1",
+  "./skills/channel-evaluate-2",
+  "./skills/channel-evaluate-3"
+ ],
+ "expertType": "agent",
+ "agentName": "channel-evaluate",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Channel Evaluate",
+  "zh": "渠道评估 统一口径 算全成本"
+ },
+ "profession": {
+  "en": "Channel Evaluate",
+  "zh": "渠道评估 ROI 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Channel Evaluate tasks end-to-end with built-in professional skills.",
+  "zh": "渠道评估 ROI 顾问：覆盖 统一口径、算全成本、看增量 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "渠道评估",
+   "en": "channel-evaluate"
+  },
+  {
+   "en": "MarketingGrowth",
+   "zh": "MarketingGrowth"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到渠道评估怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到ROI怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到渠道评估怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "渠道评估专家",
+  "to": "渠道评估 统一口径 算全成本",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

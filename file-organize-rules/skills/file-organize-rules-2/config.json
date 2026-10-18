@@ -1,0 +1,72 @@
+{
+ "name": "file-organize-rules-2",
+ "version": "2.0.0",
+ "domain": "文件归集整理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先分类后移动",
+   "then": "先出分类方案再动手",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保留原路径",
+   "then": "移动前记录原路径便于回滚",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重名处理",
+   "then": "重名加序号不覆盖",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "只增不删",
+   "then": "整理只做移动与改名，删除须确认",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "整理报告",
+   "then": "输出移动明细供核对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先分类后移动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留原路径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重名处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只增不删",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "整理报告",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

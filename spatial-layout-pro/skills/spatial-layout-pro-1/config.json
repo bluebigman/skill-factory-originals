@@ -1,0 +1,72 @@
+{
+ "name": "spatial-layout-pro-1",
+ "version": "2.0.0",
+ "domain": "空间布局",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主动线最短",
+   "then": "按主要人流方向布置关键节点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "入口焦点",
+   "then": "入口设视觉焦点建立方向感",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分区清晰",
+   "then": "功能分区边界清晰",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "回游设计",
+   "then": "设置回游避免出现死角",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无障碍",
+   "then": "预留无障碍通行与视距",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主动线最短",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "入口焦点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分区清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回游设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无障碍",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

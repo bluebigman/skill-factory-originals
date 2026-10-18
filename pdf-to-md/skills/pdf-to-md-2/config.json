@@ -1,0 +1,78 @@
+{
+ "name": "pdf-to-md-2",
+ "version": "2.0.0",
+ "domain": "文档PDF",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不臆造",
+   "then": "无法识别的字符保留占位不猜测",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "双列小心",
+   "then": "双栏版面需按栏切分，否则串行",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不臆造",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双列小心",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "校验",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "否则",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文档",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "切分",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

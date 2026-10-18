@@ -1,0 +1,121 @@
+{
+ "name": "inspect",
+ "version": "2.0.0",
+ "domain": "数据清洗",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "重复行",
+   "then": "先按主键去重再分析，不去重会导致所有指标虚高",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "空值",
+   "then": "先统计空值比例再决定填充还是剔除，隐瞒空值会污染结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "格式不一",
+   "then": "统一日期与数字格式，混排格式会让排序与计算全错",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "全半角",
+   "then": "统一全角/半角与空格，隐形字符是最难查的问题",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "异常值",
+   "then": "异常值先核实来源，勿直接删除，可能是真实业务信号",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "脏数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "空值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式不一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全半角",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常值",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "影响",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "口径",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

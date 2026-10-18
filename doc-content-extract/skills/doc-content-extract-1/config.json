@@ -1,0 +1,72 @@
+{
+ "name": "doc-content-extract-1",
+ "version": "2.0.0",
+ "domain": "文档要点抽取",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构优先",
+   "then": "按标题层级抽要点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保留出处",
+   "then": "每个要点标章节",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "层级输出",
+   "then": "要点按重要性排序",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "长度可控",
+   "then": "支持摘要与详版",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "不臆测",
+   "then": "原文没有的不补",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留出处",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层级输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长度可控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不臆测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

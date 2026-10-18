@@ -1,0 +1,72 @@
+{
+ "name": "onboarding-doc-pro-2",
+ "version": "2.0.0",
+ "domain": "上手文档",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "五分钟可用",
+   "then": "开头给最短可用路径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "环境前置",
+   "then": "列清前置条件",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "示例可跑",
+   "then": "示例必须真实可运行",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "常见坑",
+   "then": "列出新手易错点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "进阶索引",
+   "then": "给出深入学习路径",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "五分钟可用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例可跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "常见坑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "进阶索引",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "regression-plan",
+ "version": "1.0.0",
+ "plugin": "regression-plan",
+ "description": "Regression Plan for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/regression-plan.md"
+ ],
+ "skills": [
+  "./skills/regression-plan-1",
+  "./skills/regression-plan-2",
+  "./skills/regression-plan-3"
+ ],
+ "expertType": "agent",
+ "agentName": "regression-plan",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Regression Plan",
+  "zh": "回归测试 按影响面 核心必跑"
+ },
+ "profession": {
+  "en": "Regression Plan",
+  "zh": "回归测试 范围确定 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Regression Plan tasks end-to-end with built-in professional skills.",
+  "zh": "回归测试 范围确定 助手：覆盖 按影响面、核心必跑、沉淀用例 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "回归测试",
+   "en": "regression-plan"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到回归测试怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到范围确定怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到回归测试怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "回归测试专家",
+  "to": "回归测试 按影响面 核心必跑",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "name": "trip-plan",
+ "version": "2.0.0",
+ "domain": "出差安排",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "行程过密",
+   "then": "重要会议前留 1 小时缓冲，赶场式行程必影响状态",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "交通风险",
+   "then": "跨城当日往返须留备选车次，单点依赖风险极高",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "住宿位置",
+   "then": "住宿按次日第一个目的地就近选，而非按价格",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "资料不全",
+   "then": "按会议议程提前准备一页纸材料并打印备用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时差",
+   "then": "跨时区提前 2 天调整作息，硬扛会毁掉关键谈判",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "行程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "出差",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交通",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "住宿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行程过密",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交通风险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "住宿位置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资料不全",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时差",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,109 @@
+{
+ "name": "qa-drill",
+ "version": "2.0.0",
+ "domain": "面试准备",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "离职原因",
+   "then": "只谈发展诉求，负面评价前雇主是最高频减分项",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "缺点",
+   "then": "说真实且已在改进的项，并附改进动作",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败经历",
+   "then": "用 STAR 讲清责任归属与复盘结论，推责必减分",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "薪资",
+   "then": "先给区间并说明依据，被追问再给底线",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "不会的问题",
+   "then": "承认边界并给出获取答案的路径，硬编必被识破",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "面试问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "离职原因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "薪资",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败经历",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不会的问题",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "准备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "责任",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "最高",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "底线",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先给",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "追问",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

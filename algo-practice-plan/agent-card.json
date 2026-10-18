@@ -1,0 +1,75 @@
+{
+ "name": "Algo Practice Plan",
+ "description": "算法刷题专家：覆盖 按类刷、限时、手写板、错题本、周期复刷 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/algo-practice-plan",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/algo-practice-plan",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "algo-practice-plan-1",
+   "name": "针对 按类刷、限时 等情境给出可执行处置",
+   "description": "针对 按类刷、限时 等情境给出可执行处置",
+   "tags": [
+    "按类刷",
+    "限时"
+   ],
+   "examples": [
+    "遇到按类刷",
+    "遇到限时",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "algo-practice-plan-2",
+   "name": "针对 手写板、错题本 等情境给出可执行处置",
+   "description": "针对 手写板、错题本 等情境给出可执行处置",
+   "tags": [
+    "手写板",
+    "错题本"
+   ],
+   "examples": [
+    "遇到手写板",
+    "遇到错题本",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "algo-practice-plan-3",
+   "name": "针对 周期复刷 等情境给出可执行处置",
+   "description": "针对 周期复刷 等情境给出可执行处置",
+   "tags": [
+    "周期复刷"
+   ],
+   "examples": [
+    "遇到周期复刷",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "算法刷题专家",
+ "x-source": "skill-factory-originals"
+}

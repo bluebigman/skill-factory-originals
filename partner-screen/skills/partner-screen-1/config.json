@@ -1,0 +1,72 @@
+{
+ "name": "partner-screen-1",
+ "version": "2.0.0",
+ "domain": "合作方筛选",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标准先行",
+   "then": "先定硬性门槛",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "多维评分",
+   "then": "能力与信誉与匹配度",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "尽职核验",
+   "then": "关键信息需佐证",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "试用期",
+   "then": "设短期验证期",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "退出条款",
+   "then": "约定终止条件",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标准先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多维评分",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "尽职核验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "试用期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退出条款",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "capacity-planning-pro-2",
+ "version": "2.0.0",
+ "domain": "容量规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "基线测量",
+   "then": "先测当前真实容量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "增长预测",
+   "then": "按业务增长外推",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "瓶颈前置",
+   "then": "提前识别下一个瓶颈",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "扩容预案",
+   "then": "扩容步骤预演",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "成本权衡",
+   "then": "扩容方案须对比成本",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "基线测量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "增长预测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "瓶颈前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "扩容预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本权衡",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

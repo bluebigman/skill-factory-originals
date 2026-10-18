@@ -1,0 +1,121 @@
+{
+ "name": "health-record",
+ "version": "2.0.0",
+ "domain": "宠物养护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "记录缺失",
+   "then": "统一记录疫苗/驱虫/体重/就诊四类，就诊时直接出示",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "体重趋势",
+   "then": "每月称重，体重突变比单次读数更有诊断价值",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "就诊准备",
+   "then": "提前记录症状起始时间与变化，现场描述越具体越有效",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "用药",
+   "then": "严格按兽医剂量，人用药对宠物可能致命",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "紧急情况",
+   "then": "中毒/外伤/无法排尿属急症，立即就医，勿自行处理",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "健康记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "疫苗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就诊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "档案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "体重趋势",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就诊准备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用药",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "紧急情况",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "高频",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "事后",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

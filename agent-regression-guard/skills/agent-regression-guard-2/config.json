@@ -1,0 +1,72 @@
+{
+ "name": "agent-regression-guard-2",
+ "version": "2.0.0",
+ "domain": "回归守护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "基线固定",
+   "then": "回归基线不得随改随换",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "全量回归",
+   "then": "变更跑全量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "差异归因",
+   "then": "差异须归因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "告警分级",
+   "then": "按影响分级",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "修复闭环",
+   "then": "退化须修复",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "基线固定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全量回归",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异归因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "修复闭环",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "pet-health-record-2",
+ "version": "2.0.0",
+ "domain": "宠物健康",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "就诊准备",
+   "then": "记录症状起始时间与变化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "用药",
+   "then": "严格按兽医剂量，人用药可能致命",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "就诊准备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用药",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "价值",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "趋势",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每月",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "体重",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "变化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "健康",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "宠物",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

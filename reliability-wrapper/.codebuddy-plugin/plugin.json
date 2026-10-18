@@ -1,0 +1,74 @@
+{
+ "name": "reliability-wrapper",
+ "version": "1.0.0",
+ "plugin": "reliability-wrapper",
+ "description": "Reliability Wrapper for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/reliability-wrapper.md"
+ ],
+ "skills": [
+  "./skills/reliability-wrapper-1",
+  "./skills/reliability-wrapper-2",
+  "./skills/reliability-wrapper-3"
+ ],
+ "expertType": "agent",
+ "agentName": "reliability-wrapper",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Reliability Wrapper",
+  "zh": "重试熔断 无条件重试 退避缺失"
+ },
+ "profession": {
+  "en": "Reliability Wrapper",
+  "zh": "重试熔断 超时降级 幂等保障"
+ },
+ "displayDescription": {
+  "en": "Handles Reliability Wrapper tasks end-to-end with built-in professional skills.",
+  "zh": "重试熔断 超时降级 幂等保障：覆盖 无条件重试、退避缺失 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "重试熔断"
+  },
+  {
+   "en": "practical capability",
+   "zh": "超时降级"
+  },
+  {
+   "en": "practical capability",
+   "zh": "幂等保障"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到重试熔断怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到超时降级怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到幂等保障怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到重试熔断怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "重试熔断专家",
+  "to": "重试熔断 无条件重试 退避缺失",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

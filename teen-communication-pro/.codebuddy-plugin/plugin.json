@@ -1,0 +1,74 @@
+{
+ "name": "teen-communication-pro",
+ "version": "1.0.0",
+ "plugin": "teen-communication-pro",
+ "description": "Teen Communication Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/teen-communication-pro.md"
+ ],
+ "skills": [
+  "./skills/teen-boundary-negotiate",
+  "./skills/teen-emotion-map",
+  "./skills/teen-motivation"
+ ],
+ "expertType": "agent",
+ "agentName": "teen-communication-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Teen Communication Pro",
+  "zh": "青春期沟通 手机时间 回家时间"
+ },
+ "profession": {
+  "en": "Teen Communication Pro",
+  "zh": "青春期沟通 亲子关系 心理疏导"
+ },
+ "displayDescription": {
+  "en": "Handles Teen Communication Pro tasks end-to-end with built-in professional skills.",
+  "zh": "青春期沟通 亲子关系 心理疏导：与青春期孩子协商规则的方法；识别青春期情绪波动与背后需求。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "手机时间"
+  },
+  {
+   "en": "practical capability",
+   "zh": "回家时间"
+  },
+  {
+   "en": "practical capability",
+   "zh": "交友"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到手机时间怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到回家时间怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到交友怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到手机时间怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "青春期沟通专家",
+  "to": "青春期沟通 手机时间 回家时间",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "name": "Travel Itinerary",
+ "description": "出行行程专家：覆盖 先定硬约束、动线就近、留弹性 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/travel-itinerary",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/travel-itinerary",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "travel-itinerary-1",
+   "name": "针对 先定硬约束、动线就近 等情境给出可执行处置",
+   "description": "针对 先定硬约束、动线就近 等情境给出可执行处置",
+   "tags": [
+    "先定硬约束",
+    "动线就近"
+   ],
+   "examples": [
+    "遇到先定硬约束",
+    "遇到动线就近",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "travel-itinerary-2",
+   "name": "针对 留弹性、离线备份 等情境给出可执行处置",
+   "description": "针对 留弹性、离线备份 等情境给出可执行处置",
+   "tags": [
+    "留弹性",
+    "离线备份"
+   ],
+   "examples": [
+    "遇到留弹性",
+    "遇到离线备份",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "travel-itinerary-3",
+   "name": "针对 应急信息 等情境给出可执行处置",
+   "description": "针对 应急信息 等情境给出可执行处置",
+   "tags": [
+    "应急信息"
+   ],
+   "examples": [
+    "遇到应急信息",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "出行行程专家"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "family-communication-coach",
+ "version": "1.0.0",
+ "plugin": "family-communication-coach",
+ "description": "Family Communication Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/family-communication-coach.md"
+ ],
+ "skills": [
+  "./skills/family-communication-coach-1",
+  "./skills/family-communication-coach-2",
+  "./skills/family-communication-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "family-communication-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Family Communication Coach",
+  "zh": "家庭沟通 先听后说 不当场争"
+ },
+ "profession": {
+  "en": "Family Communication Coach",
+  "zh": "家庭沟通 冲突化解 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Family Communication Coach tasks end-to-end with built-in professional skills.",
+  "zh": "家庭沟通 冲突化解 教练：覆盖 先听后说、不当场争、具体提问 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先听后说"
+  },
+  {
+   "en": "practical capability",
+   "zh": "不当场争"
+  },
+  {
+   "en": "practical capability",
+   "zh": "具体提问"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先听后说怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不当场争怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到具体提问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先听后说怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭沟通专家",
+  "to": "家庭沟通 先听后说 不当场争",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

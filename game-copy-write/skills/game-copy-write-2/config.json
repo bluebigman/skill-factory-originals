@@ -1,0 +1,78 @@
+{
+ "name": "game-copy-write-2",
+ "version": "2.0.0",
+ "domain": "游戏文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "简短优先",
+   "then": "按钮与提示尽量短句，避免长段落",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "角色一致",
+   "then": "不同角色的说话方式要有区分度",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "简短优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "角色一致",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "区分",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "写成",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "文案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "段落",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "术语",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "sheet-batch-pro-3",
+ "version": "2.0.0",
+ "domain": "表格批量",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "批前备份",
+   "then": "批量操作前备份原表",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "小样验证",
+   "then": "先小批跑通再全量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "幂等设计",
+   "then": "重复执行结果一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常隔离",
+   "then": "单行失败不影响整体",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果对账",
+   "then": "批后核对行数与关键合计",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "批前备份",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小样验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "幂等设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果对账",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

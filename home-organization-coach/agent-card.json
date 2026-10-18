@@ -1,0 +1,75 @@
+{
+ "name": "Home Organization Coach",
+ "description": "家庭收纳 空间整理 断舍离：覆盖 动作结束点设容身位、按场景分区、高频占优、进一出 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/home-organization-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-organization-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "home-organization-coach-1",
+   "name": "针对 动作结束点设容身位、按场景分区 等情境给出可执行处置",
+   "description": "针对 动作结束点设容身位、按场景分区 等情境给出可执行处置",
+   "tags": [
+    "动作结束点设容身位",
+    "按场景分区"
+   ],
+   "examples": [
+    "遇到动作结束点设容身位",
+    "遇到按场景分区",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-organization-coach-2",
+   "name": "针对 高频占优、进一出 等情境给出可执行处置",
+   "description": "针对 高频占优、进一出 等情境给出可执行处置",
+   "tags": [
+    "高频占优",
+    "进一出"
+   ],
+   "examples": [
+    "遇到高频占优",
+    "遇到进一出",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-organization-coach-3",
+   "name": "针对 限量保存 等情境给出可执行处置",
+   "description": "针对 限量保存 等情境给出可执行处置",
+   "tags": [
+    "限量保存"
+   ],
+   "examples": [
+    "遇到限量保存",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家庭收纳 空间整理 断舍离",
+ "x-source": "skill-factory-originals"
+}

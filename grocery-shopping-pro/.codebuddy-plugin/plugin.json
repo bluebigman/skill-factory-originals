@@ -1,0 +1,74 @@
+{
+ "name": "grocery-shopping-pro",
+ "version": "1.0.0",
+ "plugin": "grocery-shopping-pro",
+ "description": "Grocery Shopping Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/grocery-shopping-pro.md"
+ ],
+ "skills": [
+  "./skills/budget",
+  "./skills/list-plan",
+  "./skills/stock-control"
+ ],
+ "expertType": "agent",
+ "agentName": "grocery-shopping-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Grocery Shopping Pro",
+  "zh": "家庭买菜 无预算 浪费"
+ },
+ "profession": {
+  "en": "Grocery Shopping Pro",
+  "zh": "家庭买菜 采购清单 备货管理"
+ },
+ "displayDescription": {
+  "en": "Handles Grocery Shopping Pro tasks end-to-end with built-in professional skills.",
+  "zh": "家庭买菜 采购清单 备货管理：家庭食材支出的管理；按库存与消耗制定采购清单；家庭囤货的量与节奏。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "无预算"
+  },
+  {
+   "en": "practical capability",
+   "zh": "浪费"
+  },
+  {
+   "en": "practical capability",
+   "zh": "性价比"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无预算怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到浪费怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到性价比怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到无预算怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "家庭买菜专家",
+  "to": "家庭买菜 无预算 浪费",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

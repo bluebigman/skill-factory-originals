@@ -1,0 +1,121 @@
+{
+ "name": "detail-structure",
+ "version": "2.0.0",
+ "domain": "商品详情",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "首屏弱",
+   "then": "首屏给最强卖点+核心场景图，首屏决定停留",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无场景",
+   "then": "买家看场景不看参数，先给使用场景",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "参数堆砌",
+   "then": "参数放中后段并做解读，纯罗列无人细读",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无信任",
+   "then": "插入资质/销量/评价截图等信任背书",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无行动",
+   "then": "结尾给明确行动与售后承诺，降低决策门槛",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "详情",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "首屏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排版",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "首屏弱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无场景",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "参数堆砌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无信任",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无行动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "承诺",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "核心",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

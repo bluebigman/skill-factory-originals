@@ -1,0 +1,107 @@
+{
+ "name": "Job Interview Pro",
+ "description": "面试准备专家：高频问题与应对框架；面试收尾的提问策略；针对性自我介绍的构建。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/job-interview-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/job-interview-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "qa-drill",
+   "name": "高频问题与应对框架",
+   "description": "高频问题与应对框架",
+   "tags": [
+    "面试问题",
+    "离职原因",
+    "缺点",
+    "薪资"
+   ],
+   "examples": [
+    "遇到离职原因",
+    "遇到缺点",
+    "遇到失败经历",
+    "遇到薪资",
+    "遇到不会的问题"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "qa-drill",
+    "to": "qa-drill",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "reverse-ask",
+   "name": "面试收尾的提问策略",
+   "description": "面试收尾的提问策略",
+   "tags": [
+    "反问",
+    "提问",
+    "收尾",
+    "意向"
+   ],
+   "examples": [
+    "遇到无提问",
+    "遇到只问福利",
+    "遇到假大空",
+    "遇到过早谈条件",
+    "遇到收尾"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "reverse-ask",
+    "to": "reverse-ask",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "self-intro",
+   "name": "针对性自我介绍的构建",
+   "description": "针对性自我介绍的构建",
+   "tags": [
+    "自我介绍",
+    "开场",
+    "亮点",
+    "经验"
+   ],
+   "examples": [
+    "遇到流水账",
+    "遇到无针对性",
+    "遇到无量化",
+    "遇到与简历重复",
+    "遇到过度谦让"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:46",
+    "from": "self-intro",
+    "to": "self-intro",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "面试准备专家",
+ "x-source": "skill-factory-originals"
+}

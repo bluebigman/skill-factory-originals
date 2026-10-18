@@ -1,0 +1,78 @@
+{
+ "name": "mp-article-format-2",
+ "version": "2.0.0",
+ "domain": "公众号文章",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字号统一",
+   "then": "正文字号统一，重点用加粗不靠变色",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "首图定调",
+   "then": "首图决定点击，与标题强相关",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字号统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "首图定调",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "阅读",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "点击",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "正文",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

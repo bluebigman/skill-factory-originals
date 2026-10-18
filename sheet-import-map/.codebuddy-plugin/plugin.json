@@ -1,0 +1,74 @@
+{
+ "name": "sheet-import-map",
+ "version": "1.0.0",
+ "plugin": "sheet-import-map",
+ "description": "Sheet Import Map for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/sheet-import-map.md"
+ ],
+ "skills": [
+  "./skills/sheet-import-map-1",
+  "./skills/sheet-import-map-2",
+  "./skills/sheet-import-map-3"
+ ],
+ "expertType": "agent",
+ "agentName": "sheet-import-map",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Sheet Import Map",
+  "zh": "表格导入 先看头 映射表"
+ },
+ "profession": {
+  "en": "Sheet Import Map",
+  "zh": "表格导入 字段映射 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Sheet Import Map tasks end-to-end with built-in professional skills.",
+  "zh": "表格导入 字段映射 顾问：覆盖 先看头、映射表、编码统一 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先看头"
+  },
+  {
+   "en": "practical capability",
+   "zh": "映射表"
+  },
+  {
+   "en": "practical capability",
+   "zh": "编码统一"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先看头怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到映射表怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到编码统一怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先看头怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:50",
+  "from": "表格导入专家",
+  "to": "表格导入 先看头 映射表",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

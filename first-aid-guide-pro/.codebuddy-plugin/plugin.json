@@ -1,0 +1,74 @@
+{
+ "name": "first-aid-guide-pro",
+ "version": "1.0.0",
+ "plugin": "first-aid-guide-pro",
+ "description": "First Aid Guide Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/first-aid-guide-pro.md"
+ ],
+ "skills": [
+  "./skills/call-boundary",
+  "./skills/common-response",
+  "./skills/kit-prep"
+ ],
+ "expertType": "agent",
+ "agentName": "first-aid-guide-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "First Aid Guide Pro",
+  "zh": "家庭急救 意识改变 呼吸循环"
+ },
+ "profession": {
+  "en": "First Aid Guide Pro",
+  "zh": "家庭急救 应急处理 就医判断"
+ },
+ "displayDescription": {
+  "en": "Handles First Aid Guide Pro tasks end-to-end with built-in professional skills.",
+  "zh": "家庭急救 应急处理 就医判断：针对 常见 等常见情境，给出可直接执行的处置建议与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "意识改变"
+  },
+  {
+   "en": "practical capability",
+   "zh": "呼吸循环"
+  },
+  {
+   "en": "practical capability",
+   "zh": "中毒"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到意识改变怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到呼吸循环怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到中毒怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到意识改变怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭急救专家",
+  "to": "家庭急救 意识改变 呼吸循环",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "name": "project-management-pro",
+ "version": "1.0.0",
+ "plugin": "project-management-pro",
+ "description": "Project Management Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/project-management-pro.md"
+ ],
+ "skills": [
+  "./skills/meeting",
+  "./skills/plan",
+  "./skills/track"
+ ],
+ "expertType": "agent",
+ "agentName": "project-management-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Project Management Pro",
+  "zh": "项目管理 流水账 无人认领"
+ },
+ "profession": {
+  "en": "Project Management Pro",
+  "zh": "项目管理 进度跟踪 会议记录"
+ },
+ "displayDescription": {
+  "en": "Handles Project Management Pro tasks end-to-end with built-in professional skills.",
+  "zh": "项目管理 进度跟踪 会议记录：会议纪要的结构与跟踪；项目任务的可执行拆解；进度的跟踪与汇报。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "流水账"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无人认领"
+  },
+  {
+   "en": "practical capability",
+   "zh": "跟踪失效"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到流水账怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无人认领怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到跟踪失效怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到流水账怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "项目管理专家",
+  "to": "项目管理 流水账 无人认领",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "agent-output-format-2",
+ "version": "2.0.0",
+ "domain": "输出规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构固定",
+   "then": "输出结构必须稳定",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "类型明确",
+   "then": "字段类型必须明确",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "错误可判",
+   "then": "错误须有可判别标识",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "兼容演进",
+   "then": "新增字段不破坏解析",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "示例齐全",
+   "then": "提供完整示例",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构固定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类型明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误可判",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "兼容演进",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例齐全",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

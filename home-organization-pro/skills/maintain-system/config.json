@@ -1,0 +1,113 @@
+{
+ "name": "maintain-system",
+ "version": "2.0.0",
+ "domain": "家庭收纳",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "又乱了",
+   "then": "设每日 5 分钟归位时段，集中大扫除模式必反弹",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "反弹",
+   "then": "每新增一件须淘汰一件，总量守恒是唯一有效机制",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标签失效",
+   "then": "标签按使用者语言写（孩子的零食区），专业分类词无效",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "采购破坏",
+   "then": "进件前先定位置，没有位置的物品不进家门",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "季节收纳",
+   "then": "换季时同步筛选，换季是天然的去留决策点",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "维持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "又乱了",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反弹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标签失效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "采购破坏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "季节收纳",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "孩子",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时段",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "content-repurpose-plan-2",
+ "version": "2.0.0",
+ "domain": "内容一稿多用",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定母题",
+   "then": "一次定核心观点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "按平台适配",
+   "then": "按平台调长度语气",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "拒绝搬运",
+   "then": "跨平台改写而非复制",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "统一标识",
+   "then": "保留统一署名",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "效果对比",
+   "then": "记录各平台表现",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定母题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按平台适配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拒绝搬运",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "统一标识",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果对比",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

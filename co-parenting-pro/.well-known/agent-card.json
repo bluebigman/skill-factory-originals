@@ -1,0 +1,106 @@
+{
+ "name": "Co-Parenting Coach",
+ "description": "夫妻育儿专家：夫妻教养观念分歧的处理；育儿任务的合理分工；对外传递统一的家庭规则。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/co-parenting-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/co-parenting-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "disagreement-align",
+   "name": "夫妻教养观念分歧的处理",
+   "description": "夫妻教养观念分歧的处理",
+   "tags": [
+    "教养分歧",
+    "一个唱白脸",
+    "拆台",
+    "标准不一"
+   ],
+   "examples": [
+    "遇到当面拆台",
+    "遇到标准不一",
+    "遇到争论循环",
+    "遇到一方缺席",
+    "遇到老人插手"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "disagreement-align",
+    "to": "disagreement-align",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "role-division",
+   "name": "育儿任务的合理分工",
+   "description": "育儿任务的合理分工",
+   "tags": [
+    "分工",
+    "丧偶式育儿",
+    "全包",
+    "累"
+   ],
+   "examples": [
+    "遇到任务不均",
+    "遇到丧偶式育儿",
+    "遇到抱怨累积",
+    "遇到一方过劳",
+    "遇到互相指责"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "role-division",
+    "to": "role-division",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "unified-message",
+   "name": "对外传递统一的家庭规则",
+   "description": "对外传递统一的家庭规则",
+   "tags": [
+    "一致",
+    "孩子钻空子",
+    "两头讨好"
+   ],
+   "examples": [
+    "遇到孩子钻空子",
+    "遇到两头讨好",
+    "遇到规则变更",
+    "遇到承诺不一致",
+    "遇到冲突后修复"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "unified-message",
+    "to": "unified-message",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "夫妻育儿专家",
+ "x-source": "skill-factory-originals"
+}

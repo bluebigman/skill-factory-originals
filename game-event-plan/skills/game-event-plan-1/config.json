@@ -1,0 +1,70 @@
+{
+ "name": "game-event-plan-1",
+ "version": "2.0.0",
+ "domain": "游戏活动",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定目标",
+   "then": "活动先定目标（拉新/留存/付费）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "门槛分层",
+   "then": "奖励门槛分层，让免费玩家也有参与感",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "门槛分层",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "留存",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "游戏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "奖励",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

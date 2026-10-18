@@ -1,0 +1,74 @@
+{
+ "name": "teen-money-coach",
+ "version": "1.0.0",
+ "plugin": "teen-money-coach",
+ "description": "Teen Money Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/teen-money-coach.md"
+ ],
+ "skills": [
+  "./skills/teen-money-coach-1",
+  "./skills/teen-money-coach-2",
+  "./skills/teen-money-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "teen-money-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Teen Money Coach",
+  "zh": "青少年 固定额度 超支不补"
+ },
+ "profession": {
+  "en": "Teen Money Coach",
+  "zh": "青少年 零花钱 消费观念"
+ },
+ "displayDescription": {
+  "en": "Handles Teen Money Coach tasks end-to-end with built-in professional skills.",
+  "zh": "青少年 零花钱 消费观念：覆盖 固定额度、超支不补、三类分配 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "固定额度"
+  },
+  {
+   "en": "practical capability",
+   "zh": "超支不补"
+  },
+  {
+   "en": "practical capability",
+   "zh": "三类分配"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到固定额度怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到超支不补怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到三类分配怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到固定额度怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "青少年专家",
+  "to": "青少年 固定额度 超支不补",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

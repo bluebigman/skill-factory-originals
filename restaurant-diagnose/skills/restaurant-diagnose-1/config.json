@@ -1,0 +1,50 @@
+{
+ "name": "restaurant-diagnose-1",
+ "version": "2.0.0",
+ "domain": "餐饮经营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "算翻台",
+   "then": "先算清翻台率与客单价",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "菜品结构",
+   "then": "区分引流菜与利润菜",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "算翻台",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "菜品结构",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "区分",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

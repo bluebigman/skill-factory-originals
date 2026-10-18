@@ -1,0 +1,99 @@
+{
+ "name": "Workplace Communication Pro",
+ "description": "职场沟通专家：跨部门推进的方法；负面反馈与冲突的处理；与上级的高效沟通方式。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/workplace-communication-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/workplace-communication-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "cross-team",
+   "name": "跨部门推进的方法",
+   "description": "跨部门推进的方法",
+   "tags": [
+    "跨部门",
+    "协作",
+    "推不动",
+    "协调"
+   ],
+   "examples": [
+    "遇到推不动",
+    "遇到口头承诺",
+    "遇到责任模糊",
+    "遇到冲突升级",
+    "遇到对方拖延"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "cross-team",
+    "to": "cross-team",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "difficult-talk",
+   "name": "负面反馈与冲突的处理",
+   "description": "负面反馈与冲突的处理",
+   "tags": [
+    "反馈",
+    "批评",
+    "冲突",
+    "拒绝"
+   ],
+   "examples": [
+    "遇到怕得罪人",
+    "遇到当场争执",
+    "遇到不会拒绝",
+    "遇到情绪失控",
+    "遇到重复问题"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "difficult-talk",
+    "to": "difficult-talk",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "upward",
+   "name": "与上级的高效沟通方式",
+   "description": "与上级的高效沟通方式",
+   "tags": [
+    "向上管理",
+    "汇报",
+    "领导",
+    "争取资源"
+   ],
+   "examples": [
+    "遇到只报问题",
+    "遇到越级",
+    "遇到不懂意图",
+    "遇到报忧恐惧",
+    "遇到要资源"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:55",
+    "from": "upward",
+    "to": "upward",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "职场沟通专家"
+}

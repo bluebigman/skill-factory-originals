@@ -1,0 +1,72 @@
+{
+ "name": "data-retention-rule-3",
+ "version": "2.0.0",
+ "domain": "数据保留策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按类型分级",
+   "then": "不同数据不同期限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "最短必要",
+   "then": "只保留业务必需时长",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "到期处理",
+   "then": "到期删除或匿名化",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "审计留痕",
+   "then": "删除记录可审计",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "合规优先",
+   "then": "法规要求高于业务偏好",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按类型分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最短必要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "到期处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审计留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

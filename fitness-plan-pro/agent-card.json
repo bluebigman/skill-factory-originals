@@ -1,0 +1,107 @@
+{
+ "name": "Fitness Plan Pro",
+ "description": "健身计划专家：常见动作的规范要点；训练计划的编排原则；训练外的恢复要点。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/fitness-plan-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/fitness-plan-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "form-check",
+   "name": "常见动作的规范要点",
+   "description": "常见动作的规范要点",
+   "tags": [
+    "动作",
+    "姿势",
+    "标准",
+    "姿势错误"
+   ],
+   "examples": [
+    "遇到深蹲",
+    "遇到硬拉",
+    "遇到卧推",
+    "遇到跑姿",
+    "遇到宁轻勿假"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "form-check",
+    "to": "form-check",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "program-design",
+   "name": "训练计划的编排原则",
+   "description": "训练计划的编排原则",
+   "tags": [
+    "计划",
+    "训练",
+    "组数",
+    "频率"
+   ],
+   "examples": [
+    "遇到无计划",
+    "遇到训练过频",
+    "遇到只练喜欢的",
+    "遇到无渐进",
+    "遇到有氧过量"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "program-design",
+    "to": "program-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "recovery",
+   "name": "训练外的恢复要点",
+   "description": "训练外的恢复要点",
+   "tags": [
+    "恢复",
+    "酸痛",
+    "睡眠",
+    "拉伸"
+   ],
+   "examples": [
+    "遇到睡眠不足",
+    "遇到延迟酸痛",
+    "遇到拉伸",
+    "遇到饮食",
+    "遇到就医边界"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "recovery",
+    "to": "recovery",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "健身计划专家",
+ "x-source": "skill-factory-originals"
+}

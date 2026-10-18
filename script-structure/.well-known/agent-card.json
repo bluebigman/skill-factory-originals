@@ -1,0 +1,75 @@
+{
+ "name": "Script Structure",
+ "description": "脚本结构专家：覆盖 开头给钩子、单点展开 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/script-structure",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/script-structure",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "script-structure-1",
+   "name": "针对 开头给钩子、单点展开 等情境给出可执行处置",
+   "description": "针对 开头给钩子、单点展开 等情境给出可执行处置",
+   "tags": [
+    "开头给钩子",
+    "单点展开"
+   ],
+   "examples": [
+    "遇到开头给钩子",
+    "遇到单点展开",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "script-structure-2",
+   "name": "针对 中段给证据、结尾给动作 等情境给出可执行处置",
+   "description": "针对 中段给证据、结尾给动作 等情境给出可执行处置",
+   "tags": [
+    "中段给证据",
+    "结尾给动作"
+   ],
+   "examples": [
+    "遇到中段给证据",
+    "遇到结尾给动作",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "script-structure-3",
+   "name": "针对 写成口语 等情境给出可执行处置",
+   "description": "针对 写成口语 等情境给出可执行处置",
+   "tags": [
+    "写成口语"
+   ],
+   "examples": [
+    "遇到写成口语",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "脚本结构专家",
+ "x-source": "skill-factory-originals"
+}

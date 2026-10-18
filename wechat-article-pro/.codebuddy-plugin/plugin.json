@@ -1,0 +1,74 @@
+{
+ "name": "wechat-article-pro",
+ "version": "1.0.0",
+ "plugin": "wechat-article-pro",
+ "description": "WeChat Article Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/wechat-article-pro.md"
+ ],
+ "skills": [
+  "./skills/body-structure",
+  "./skills/opening",
+  "./skills/read-rate"
+ ],
+ "expertType": "agent",
+ "agentName": "wechat-article-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "WeChat Article Pro",
+  "zh": "公众号文章 无小标题 段落过长"
+ },
+ "profession": {
+  "en": "WeChat Article Pro",
+  "zh": "公众号文章 排版结构 完读率"
+ },
+ "displayDescription": {
+  "en": "Handles WeChat Article Pro tasks end-to-end with built-in professional skills.",
+  "zh": "公众号文章 排版结构 完读率：长文的结构与节奏；公众号文章的入口优化；完读与转发的优化。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "无小标题"
+  },
+  {
+   "en": "practical capability",
+   "zh": "段落过长"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无案例"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无小标题怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到段落过长怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无案例怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到无小标题怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "公众号文章专家",
+  "to": "公众号文章 无小标题 段落过长",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Time Block Coach",
+ "description": "时间块专家：覆盖 先排固定、留缓冲、同类合并、保护专注块、每日复盘 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/time-block-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/time-block-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "time-block-coach-1",
+   "name": "针对 先排固定、留缓冲 等情境给出可执行处置",
+   "description": "针对 先排固定、留缓冲 等情境给出可执行处置",
+   "tags": [
+    "先排固定",
+    "留缓冲"
+   ],
+   "examples": [
+    "遇到先排固定",
+    "遇到留缓冲",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "time-block-coach-2",
+   "name": "针对 同类合并、保护专注块 等情境给出可执行处置",
+   "description": "针对 同类合并、保护专注块 等情境给出可执行处置",
+   "tags": [
+    "同类合并",
+    "保护专注块"
+   ],
+   "examples": [
+    "遇到同类合并",
+    "遇到保护专注块",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "time-block-coach-3",
+   "name": "针对 每日复盘 等情境给出可执行处置",
+   "description": "针对 每日复盘 等情境给出可执行处置",
+   "tags": [
+    "每日复盘"
+   ],
+   "examples": [
+    "遇到每日复盘",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "时间块专家",
+ "x-source": "skill-factory-originals"
+}

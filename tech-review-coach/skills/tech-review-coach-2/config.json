@@ -1,0 +1,74 @@
+{
+ "name": "tech-review-coach-2",
+ "version": "2.0.0",
+ "domain": "技术方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "风险显式",
+   "then": "列出最大风险点与应对预案",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可回滚",
+   "then": "上线方案必须包含回滚路径",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "风险显式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可回滚",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "至少",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "理由",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "最大",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "预案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "列出",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

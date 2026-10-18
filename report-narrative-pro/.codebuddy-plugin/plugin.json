@@ -1,0 +1,74 @@
+{
+ "name": "report-narrative-pro",
+ "version": "1.0.0",
+ "plugin": "report-narrative-pro",
+ "description": "report-narrative-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for report-narrative-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/report-narrative-pro.md"
+ ],
+ "agentName": "report-narrative-pro",
+ "displayName": {
+  "zh": "报告撰写 结论先行 数据支撑",
+  "en": "report-narrative-pro"
+ },
+ "profession": {
+  "zh": "报告撰写 结论提炼 顾问",
+  "en": "report-narrative-pro"
+ },
+ "displayDescription": {
+  "zh": "报告撰写 结论提炼 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "report-narrative-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "报告撰写",
+   "en": "report-narrative-pro"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到报告撰写怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划报告撰写",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查报告撰写",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到报告撰写怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/report-narrative-pro-1",
+  "./skills/report-narrative-pro-2",
+  "./skills/report-narrative-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:48",
+  "from": "报告撰写专家",
+  "to": "报告撰写 结论先行 数据支撑",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

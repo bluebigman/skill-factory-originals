@@ -1,0 +1,14 @@
+{
+ "schema": "originality/v1",
+ "generated_at": "2026-10-02T08:38:23",
+ "claim": "original_work",
+ "no_copy_statement": "本文档及其代码为独立撰写，未复制任何受版权保护的原文",
+ "differentiators": [
+  "面向中文场景的规则化处置建议（非翻译/搬运）",
+  "内置结构化输出（JSON 摘要）与错误码自愈建议",
+  "边界声明：不构成专业诊断，重度情形转介"
+ ],
+ "copyright_holder": "SkillForge Lab",
+ "author": "user_2fd890c9",
+ "dupcheck_ref": "wb_forge_dupcheck.py"
+}

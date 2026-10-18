@@ -1,0 +1,83 @@
+{
+ "name": "tool-interface-design-1",
+ "version": "2.0.0",
+ "domain": "工具设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字段类型含糊",
+   "then": "每个字段显式声明类型、取值范围、是否必填",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "必填缺失",
+   "then": "列出全部必填项并给出缺失时的错误码",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "默认值不明",
+   "then": "默认值必须写进 schema，不靠「文档里提过」",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字段类型含糊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "必填缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "默认值不明",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "显式",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "列出",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "文档",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

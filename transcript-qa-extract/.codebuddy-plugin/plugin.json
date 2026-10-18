@@ -1,0 +1,74 @@
+{
+ "name": "transcript-qa-extract",
+ "version": "1.0.0",
+ "plugin": "transcript-qa-extract",
+ "description": "Transcript Qa Extract for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/transcript-qa-extract.md"
+ ],
+ "skills": [
+  "./skills/transcript-qa-extract-1",
+  "./skills/transcript-qa-extract-2",
+  "./skills/transcript-qa-extract-3"
+ ],
+ "expertType": "agent",
+ "agentName": "transcript-qa-extract",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Transcript Qa Extract",
+  "zh": "转写稿 先定问题 按问题取段"
+ },
+ "profession": {
+  "en": "Transcript Qa Extract",
+  "zh": "转写稿 要点抽取 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Transcript Qa Extract tasks end-to-end with built-in professional skills.",
+  "zh": "转写稿 要点抽取 助手：覆盖 先定问题、按问题取段、保留出处 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先定问题"
+  },
+  {
+   "en": "practical capability",
+   "zh": "按问题取段"
+  },
+  {
+   "en": "practical capability",
+   "zh": "保留出处"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先定问题怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到按问题取段怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到保留出处怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先定问题怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "转写稿专家",
+  "to": "转写稿 先定问题 按问题取段",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

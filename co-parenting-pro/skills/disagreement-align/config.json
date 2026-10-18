@@ -1,0 +1,117 @@
+{
+ "name": "disagreement-align",
+ "version": "2.0.0",
+ "domain": "夫妻育儿",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "当面拆台",
+   "then": "分歧绝不当孩子面争论，先按当下者的规则执行，事后私下再议",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标准不一",
+   "then": "列出 3 条绝不能不一致的底线（安全/作息/礼貌），其余允许差异",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "争论循环",
+   "then": "会谈按规则进行：轮流说 3 分钟不打断，再各自复述对方观点",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "一方缺席",
+   "then": "由在场者全权决定并事后告知，勿打电话请示造成拉锯",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "老人插手",
+   "then": "三代同堂须先由夫妻统一口径，再由各自对原生家庭沟通",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "教养分歧",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一个唱白脸",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拆台",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标准不一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "当面拆台",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "争论循环",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一方缺席",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "老人插手",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

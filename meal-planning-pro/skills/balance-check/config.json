@@ -1,0 +1,117 @@
+{
+ "name": "balance-check",
+ "version": "2.0.0",
+ "domain": "家庭餐食",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "外卖偏多",
+   "then": "外卖下单按主食+蛋白+蔬菜三类各点一样，避免单一碳水",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "挑食",
+   "then": "同营养素做替代选择而非强制，强制进食会长期恶化",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "早餐缺失",
+   "then": "早餐固定模板（蛋白+主食+水果）比每天设计更易坚持",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "饮水不足",
+   "then": "按体重记目标并在固定位置放水杯，靠提醒不如靠可见",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "营养疑问",
+   "then": "涉及疾病饮食（糖尿病/肾病等）必须遵医嘱，本工具不适用",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "营养",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "搭配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "挑食",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外卖多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "外卖偏多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "早餐缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "饮水不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "营养疑问",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "长期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每天",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

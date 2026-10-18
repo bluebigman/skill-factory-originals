@@ -1,0 +1,74 @@
+{
+ "name": "customer-advocacy",
+ "version": "1.0.0",
+ "plugin": "customer-advocacy",
+ "description": "customer-advocacy — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for customer-advocacy tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/customer-advocacy.md"
+ ],
+ "agentName": "customer-advocacy",
+ "displayName": {
+  "zh": "客户推荐 先出结果 分阶段邀请",
+  "en": "customer-advocacy"
+ },
+ "profession": {
+  "zh": "客户推荐 培育路径 顾问",
+  "en": "customer-advocacy"
+ },
+ "displayDescription": {
+  "zh": "客户推荐 培育路径 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "customer-advocacy: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "客户推荐",
+   "en": "customer-advocacy"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到客户推荐怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划客户推荐",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查客户推荐",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到客户推荐怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/customer-advocacy-1",
+  "./skills/customer-advocacy-2",
+  "./skills/customer-advocacy-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:32",
+  "from": "客户推荐专家",
+  "to": "客户推荐 先出结果 分阶段邀请",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

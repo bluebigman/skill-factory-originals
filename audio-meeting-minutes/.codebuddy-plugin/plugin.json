@@ -1,0 +1,74 @@
+{
+ "name": "audio-meeting-minutes",
+ "version": "1.0.0",
+ "plugin": "audio-meeting-minutes",
+ "description": "Audio Meeting Minutes for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/audio-meeting-minutes.md"
+ ],
+ "skills": [
+  "./skills/audio-meeting-minutes-1",
+  "./skills/audio-meeting-minutes-2",
+  "./skills/audio-meeting-minutes-3"
+ ],
+ "expertType": "agent",
+ "agentName": "audio-meeting-minutes",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Audio Meeting Minutes",
+  "zh": "会议录音 先分离说话人 三段式"
+ },
+ "profession": {
+  "en": "Audio Meeting Minutes",
+  "zh": "会议录音 转写纪要 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Audio Meeting Minutes tasks end-to-end with built-in professional skills.",
+  "zh": "会议录音 转写纪要 助手：覆盖 先分离说话人、三段式 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先分离说话人"
+  },
+  {
+   "en": "practical capability",
+   "zh": "三段式"
+  },
+  {
+   "en": "practical capability",
+   "zh": "待办带主责"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先分离说话人怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到三段式怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到待办带主责怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先分离说话人怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:29",
+  "from": "会议录音专家",
+  "to": "会议录音 先分离说话人 三段式",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

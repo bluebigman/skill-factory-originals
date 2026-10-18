@@ -1,0 +1,72 @@
+{
+ "name": "knowledge-extract-pro-3",
+ "version": "2.0.0",
+ "domain": "知识提取",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "要点提取",
+   "then": "提取核心要点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结构化",
+   "then": "输出结构化知识",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "来源标注",
+   "then": "标注内容来源",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "去重合并",
+   "then": "重复知识合并",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可验证",
+   "then": "要点可回溯原文",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "要点提取",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "去重合并",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "product-roadmap-pro",
+ "version": "1.0.0",
+ "plugin": "product-roadmap-pro",
+ "description": "product-roadmap-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for product-roadmap-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/product-roadmap-pro.md"
+ ],
+ "agentName": "product-roadmap-pro",
+ "displayName": {
+  "zh": "产品路线 价值成本比 禁止插队",
+  "en": "product-roadmap-pro"
+ },
+ "profession": {
+  "zh": "产品路线 优先级 顾问",
+  "en": "product-roadmap-pro"
+ },
+ "displayDescription": {
+  "zh": "产品路线 优先级 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "product-roadmap-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "产品路线",
+   "en": "product-roadmap-pro"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到产品路线怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划产品路线",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查产品路线",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到产品路线怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/product-roadmap-pro-1",
+  "./skills/product-roadmap-pro-2",
+  "./skills/product-roadmap-pro-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "产品路线专家",
+  "to": "产品路线 价值成本比 禁止插队",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

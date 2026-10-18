@@ -1,0 +1,66 @@
+{
+ "name": "family-emergency-plan-1",
+ "version": "2.0.0",
+ "domain": "家庭应急",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "逃生演练",
+   "then": "全家演练一次并约定集合点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "物资清单",
+   "then": "水/食物/药品/手电/收音机",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "逃生演练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "物资清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "约定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "预案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "全家",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

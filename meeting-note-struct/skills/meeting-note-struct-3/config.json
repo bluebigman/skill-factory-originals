@@ -1,0 +1,72 @@
+{
+ "name": "meeting-note-struct-3",
+ "version": "2.0.0",
+ "domain": "会议纪要结构化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "三段式",
+   "then": "结论-待办-待议，不按发言顺序流水账",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "待办到人",
+   "then": "每条待办必有责任人与期限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分歧留档",
+   "then": "未达成一致的点单独列出",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "决策依据",
+   "then": "记录决策时的关键理由",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分发明确",
+   "then": "纪要发出即指定回执人",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "三段式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "待办到人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分歧留档",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "决策依据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分发明确",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

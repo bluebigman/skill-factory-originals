@@ -1,0 +1,74 @@
+{
+ "name": "adolescent-independence-pro",
+ "version": "1.0.0",
+ "plugin": "adolescent-independence-pro",
+ "description": "Adolescent Independence Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/adolescent-independence-pro.md"
+ ],
+ "skills": [
+  "./skills/autonomy-release",
+  "./skills/boundary-setting",
+  "./skills/conflict-deescalate"
+ ],
+ "expertType": "agent",
+ "agentName": "adolescent-independence-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Adolescent Independence Coach",
+  "zh": "青春期独立 决策包办 试错机会"
+ },
+ "profession": {
+  "en": "Adolescent Independence Coach",
+  "zh": "青春期独立 边界设定 放手指南"
+ },
+ "displayDescription": {
+  "en": "Handles Adolescent Independence Coach tasks end-to-end with built-in professional skills.",
+  "zh": "青春期独立 边界设定 放手指南：按年龄梯度交出自主权；青春期可接受的边界与让渡范围。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "决策包办"
+  },
+  {
+   "en": "practical capability",
+   "zh": "试错机会"
+  },
+  {
+   "en": "practical capability",
+   "zh": "经济自主"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到决策包办怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到试错机会怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到经济自主怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到决策包办怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "青春期独立专家",
+  "to": "青春期独立 决策包办 试错机会",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

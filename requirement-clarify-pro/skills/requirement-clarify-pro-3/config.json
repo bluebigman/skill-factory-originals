@@ -1,0 +1,72 @@
+{
+ "name": "requirement-clarify-pro-3",
+ "version": "2.0.0",
+ "domain": "需求澄清",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标明确",
+   "then": "先说清要解决什么问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "边界界定",
+   "then": "明确不做什么",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "验收标准",
+   "then": "可验证的验收条件",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "干系人",
+   "then": "列出受影响方",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更机制",
+   "then": "需求变更须走流程",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界界定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "验收标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "干系人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

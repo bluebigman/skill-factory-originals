@@ -1,0 +1,62 @@
+{
+ "name": "viral-teardown-2",
+ "version": "2.0.0",
+ "domain": "爆款拆解",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看适配",
+   "then": "判断该结构是否适配自己的领域",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "小步试",
+   "then": "先试一两条看数据，不批量套用",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看适配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小步试",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "至少",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "自己",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表达",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

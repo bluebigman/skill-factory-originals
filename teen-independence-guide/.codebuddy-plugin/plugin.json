@@ -1,0 +1,74 @@
+{
+ "name": "teen-independence-guide",
+ "version": "1.0.0",
+ "plugin": "teen-independence-guide",
+ "description": "Teen Independence Guide for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/teen-independence-guide.md"
+ ],
+ "skills": [
+  "./skills/teen-independence-guide-1",
+  "./skills/teen-independence-guide-2",
+  "./skills/teen-independence-guide-3"
+ ],
+ "expertType": "agent",
+ "agentName": "teen-independence-guide",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Teen Independence Guide",
+  "zh": "青春期独立 按龄交权 隐私底线"
+ },
+ "profession": {
+  "en": "Teen Independence Guide",
+  "zh": "青春期独立 边界设定 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Teen Independence Guide tasks end-to-end with built-in professional skills.",
+  "zh": "青春期独立 边界设定 教练：覆盖 按龄交权、隐私底线 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "按龄交权"
+  },
+  {
+   "en": "practical capability",
+   "zh": "隐私底线"
+  },
+  {
+   "en": "practical capability",
+   "zh": "只设安全边界"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到按龄交权怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到隐私底线怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只设安全边界怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到按龄交权怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "青春期独立专家",
+  "to": "青春期独立 按龄交权 隐私底线",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

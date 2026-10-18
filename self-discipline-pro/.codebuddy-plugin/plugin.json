@@ -1,0 +1,74 @@
+{
+ "name": "self-discipline-pro",
+ "version": "1.0.0",
+ "plugin": "self-discipline-pro",
+ "description": "Self Discipline Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/self-discipline-pro.md"
+ ],
+ "skills": [
+  "./skills/anti-procrastination",
+  "./skills/goal-setting",
+  "./skills/time-arrange"
+ ],
+ "expertType": "agent",
+ "agentName": "self-discipline-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Self Discipline Pro",
+  "zh": "自律养成 启动难 分心冲动"
+ },
+ "profession": {
+  "en": "Self Discipline Pro",
+  "zh": "自律养成 时间安排 目标管理"
+ },
+ "displayDescription": {
+  "en": "Handles Self Discipline Pro tasks end-to-end with built-in professional skills.",
+  "zh": "自律养成 时间安排 目标管理：拖延的识别与处理；可执行的目标拆解；日常时间的编排。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "启动难"
+  },
+  {
+   "en": "practical capability",
+   "zh": "分心冲动"
+  },
+  {
+   "en": "practical capability",
+   "zh": "手机在场"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到启动难怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到分心冲动怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到手机在场怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到启动难怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:50",
+  "from": "自律养成专家",
+  "to": "自律养成 启动难 分心冲动",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

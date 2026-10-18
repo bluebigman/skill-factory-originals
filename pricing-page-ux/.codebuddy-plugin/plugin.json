@@ -1,0 +1,74 @@
+{
+ "name": "pricing-page-ux",
+ "version": "1.0.0",
+ "plugin": "pricing-page-ux",
+ "description": "pricing-page-ux — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for pricing-page-ux tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/pricing-page-ux.md"
+ ],
+ "agentName": "pricing-page-ux",
+ "displayName": {
+  "zh": "定价页面 维度对齐 推荐克制",
+  "en": "pricing-page-ux"
+ },
+ "profession": {
+  "zh": "定价页面 表达清晰 顾问",
+  "en": "pricing-page-ux"
+ },
+ "displayDescription": {
+  "zh": "定价页面 表达清晰 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "pricing-page-ux: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "定价页面",
+   "en": "pricing-page-ux"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到定价页面怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划定价页面",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查定价页面",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到定价页面怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/pricing-page-ux-1/",
+  "./skills/pricing-page-ux-2/",
+  "./skills/pricing-page-ux-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "定价页面专家",
+  "to": "定价页面 维度对齐 推荐克制",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

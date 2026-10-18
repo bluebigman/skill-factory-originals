@@ -1,0 +1,61 @@
+{
+ "name": "logistics-diagnose-3",
+ "version": "2.0.0",
+ "domain": "物流运营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "留缓冲",
+   "then": "承诺时效须留出合理缓冲",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "留缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "承诺",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "优化",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "环节",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "时效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "物流",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "瓶颈",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

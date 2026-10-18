@@ -1,0 +1,74 @@
+{
+ "name": "promotion-planning-pro",
+ "version": "1.0.0",
+ "plugin": "promotion-planning-pro",
+ "description": "Promotion Planning Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/promotion-planning-pro.md"
+ ],
+ "skills": [
+  "./skills/compliance",
+  "./skills/forecast",
+  "./skills/plan-design"
+ ],
+ "expertType": "agent",
+ "agentName": "promotion-planning-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Promotion Planning Pro",
+  "zh": "促销活动 虚假比价 极限词"
+ },
+ "profession": {
+  "en": "Promotion Planning Pro",
+  "zh": "促销活动 方案设计 效果预估"
+ },
+ "displayDescription": {
+  "en": "Handles Promotion Planning Pro tasks end-to-end with built-in professional skills.",
+  "zh": "促销活动 方案设计 效果预估：促销活动的合规要求；活动效果的测算；促销方案的结构。"
+ },
+ "categoryId": "05-MarketingGrowth",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "虚假比价"
+  },
+  {
+   "en": "practical capability",
+   "zh": "极限词"
+  },
+  {
+   "en": "practical capability",
+   "zh": "赠品"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到虚假比价怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到极限词怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到赠品怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到虚假比价怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "促销活动专家",
+  "to": "促销活动 虚假比价 极限词",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

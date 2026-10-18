@@ -1,0 +1,99 @@
+{
+ "name": "Family Communication Pro",
+ "description": "家庭沟通专家：家庭成员间的教养一致性；家庭对话的进入方式与质量；高质量陪伴的时间设计。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/family-communication-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-communication-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "consistency",
+   "name": "家庭成员间的教养一致性",
+   "description": "家庭成员间的教养一致性",
+   "tags": [
+    "育儿一致",
+    "拆台",
+    "标准不一",
+    "老人插手"
+   ],
+   "examples": [
+    "遇到当面拆台",
+    "遇到标准不一",
+    "遇到老人插手",
+    "遇到叛逆对抗",
+    "遇到修复示范"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "consistency",
+    "to": "consistency",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "daily-talk",
+   "name": "家庭对话的进入方式与质量",
+   "description": "家庭对话的进入方式与质量",
+   "tags": [
+    "沟通技巧",
+    "不说话",
+    "敷衍",
+    "顶嘴"
+   ],
+   "examples": [
+    "遇到封闭提问",
+    "遇到说教过多",
+    "遇到正面质问",
+    "遇到情绪高峰",
+    "遇到负面开场"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "daily-talk",
+    "to": "daily-talk",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "quality-time",
+   "name": "高质量陪伴的时间设计",
+   "description": "高质量陪伴的时间设计",
+   "tags": [
+    "亲子时间",
+    "陪伴",
+    "没时间",
+    "陪玩"
+   ],
+   "examples": [
+    "遇到时间碎片",
+    "遇到陪伴变监督",
+    "遇到二孩冲突",
+    "遇到不知道玩什么",
+    "遇到敷衍感"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "quality-time",
+    "to": "quality-time",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭沟通专家"
+}

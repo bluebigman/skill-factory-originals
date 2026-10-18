@@ -1,0 +1,87 @@
+{
+ "name": "study-plan-calm",
+ "version": "2.0.0",
+ "domain": "考试焦虑",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "复习不完",
+   "then": "按高频考点×掌握度二维排序，砍掉低分项",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "时间不够",
+   "then": "只保三件事：错题、公式、答题模板",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "抓不住重点",
+   "then": "用真题反推考点频率，按频次排序",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复习不完",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间不够",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抓不住重点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L61"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L84"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

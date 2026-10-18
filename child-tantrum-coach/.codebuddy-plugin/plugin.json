@@ -1,0 +1,74 @@
+{
+ "name": "child-tantrum-coach",
+ "version": "1.0.0",
+ "plugin": "child-tantrum-coach",
+ "description": "Child Tantrum Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-tantrum-coach.md"
+ ],
+ "skills": [
+  "./skills/child-tantrum-coach-1",
+  "./skills/child-tantrum-coach-2",
+  "./skills/child-tantrum-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-tantrum-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Child Tantrum Coach",
+  "zh": "幼儿情绪 理解发展 保证安全"
+ },
+ "profession": {
+  "en": "Child Tantrum Coach",
+  "zh": "幼儿情绪 发脾气 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Child Tantrum Coach tasks end-to-end with built-in professional skills.",
+  "zh": "幼儿情绪 发脾气 教练：覆盖 理解发展、保证安全、短句低音 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "理解发展"
+  },
+  {
+   "en": "practical capability",
+   "zh": "保证安全"
+  },
+  {
+   "en": "practical capability",
+   "zh": "短句低音"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到理解发展怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到保证安全怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到短句低音怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到理解发展怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "幼儿情绪专家",
+  "to": "幼儿情绪 理解发展 保证安全",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

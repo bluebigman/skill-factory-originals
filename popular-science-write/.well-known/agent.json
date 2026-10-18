@@ -1,0 +1,67 @@
+{
+ "name": "Popular Science Write",
+ "description": "科普写作专家：覆盖 先定读者、类比要准、先给结论 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/popular-science-write",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/popular-science-write",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "popular-science-write-1",
+   "name": "针对 先定读者、类比要准 等情境给出可执行处置",
+   "description": "针对 先定读者、类比要准 等情境给出可执行处置",
+   "tags": [
+    "先定读者",
+    "类比要准"
+   ],
+   "examples": [
+    "遇到先定读者",
+    "遇到类比要准",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "popular-science-write-2",
+   "name": "针对 先给结论、关键术语 等情境给出可执行处置",
+   "description": "针对 先给结论、关键术语 等情境给出可执行处置",
+   "tags": [
+    "先给结论",
+    "关键术语"
+   ],
+   "examples": [
+    "遇到先给结论",
+    "遇到关键术语",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "popular-science-write-3",
+   "name": "针对 避免绝对 等情境给出可执行处置",
+   "description": "针对 避免绝对 等情境给出可执行处置",
+   "tags": [
+    "避免绝对"
+   ],
+   "examples": [
+    "遇到避免绝对",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "科普写作专家"
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Family Photo Manage",
+ "description": "家庭相册专家：覆盖 按事件分组、去重、备份、关键节点、隐私 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/family-photo-manage",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-photo-manage",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "family-photo-manage-1",
+   "name": "针对 按事件分组、去重 等情境给出可执行处置",
+   "description": "针对 按事件分组、去重 等情境给出可执行处置",
+   "tags": [
+    "按事件分组",
+    "去重"
+   ],
+   "examples": [
+    "遇到按事件分组",
+    "遇到去重",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-photo-manage-2",
+   "name": "针对 备份、关键节点 等情境给出可执行处置",
+   "description": "针对 备份、关键节点 等情境给出可执行处置",
+   "tags": [
+    "备份",
+    "关键节点"
+   ],
+   "examples": [
+    "遇到备份",
+    "遇到关键节点",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-photo-manage-3",
+   "name": "针对 隐私 等情境给出可执行处置",
+   "description": "针对 隐私 等情境给出可执行处置",
+   "tags": [
+    "隐私"
+   ],
+   "examples": [
+    "遇到隐私",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家庭相册专家",
+ "x-source": "skill-factory-originals"
+}

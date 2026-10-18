@@ -1,0 +1,74 @@
+{
+ "name": "tool-schema-validator",
+ "version": "1.0.0",
+ "plugin": "tool-schema-validator",
+ "description": "tool-schema-validator — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for tool-schema-validator tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/tool-schema-validator.md"
+ ],
+ "agentName": "tool-schema-validator",
+ "displayName": {
+  "zh": "工具接口校验 改产出先看消费方",
+  "en": "tool-schema-validator"
+ },
+ "profession": {
+  "zh": "工具契约 结构校验 顾问",
+  "en": "tool-schema-validator"
+ },
+ "displayDescription": {
+  "zh": "工具契约 结构校验 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "tool-schema-validator: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "工具契约",
+   "en": "tool-schema-validator"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到工具契约怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划工具契约",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查工具契约",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到工具契约怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/tool-schema-validator-1",
+  "./skills/tool-schema-validator-2",
+  "./skills/tool-schema-validator-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "工具接口校验专家",
+  "to": "工具接口校验 改产出先看消费方",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

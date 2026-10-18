@@ -1,0 +1,72 @@
+{
+ "name": "document-diff-pro-2",
+ "version": "2.0.0",
+ "domain": "文档比对",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "忽略格式",
+   "then": "比对前归一格式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "差异分级",
+   "then": "按重要性分级差异",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "位置明确",
+   "then": "差异须定位到段落",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "批量汇总",
+   "then": "多版本批量比对",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "确认机制",
+   "then": "差异须人工确认",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "忽略格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "差异分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "位置明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批量汇总",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "确认机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

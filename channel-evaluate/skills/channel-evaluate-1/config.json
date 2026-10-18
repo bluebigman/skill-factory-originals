@@ -1,0 +1,62 @@
+{
+ "name": "channel-evaluate-1",
+ "version": "2.0.0",
+ "domain": "渠道评估",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "统一口径",
+   "then": "所有渠道按同一口径算成本与收益",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "算全成本",
+   "then": "含人力与工具成本，不只看投放费",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "统一口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "算全成本",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "工具",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "评估",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "只看",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "收益",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

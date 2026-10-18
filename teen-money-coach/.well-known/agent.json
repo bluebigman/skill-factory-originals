@@ -1,0 +1,67 @@
+{
+ "name": "Teen Money Coach",
+ "description": "青少年专家：覆盖 固定额度、超支不补、三类分配、记账习惯、不惩罚错误 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/teen-money-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/teen-money-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "teen-money-coach-1",
+   "name": "针对 固定额度、超支不补 等情境给出可执行处置",
+   "description": "针对 固定额度、超支不补 等情境给出可执行处置",
+   "tags": [
+    "固定额度",
+    "超支不补"
+   ],
+   "examples": [
+    "遇到固定额度",
+    "遇到超支不补",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-money-coach-2",
+   "name": "针对 三类分配、记账习惯 等情境给出可执行处置",
+   "description": "针对 三类分配、记账习惯 等情境给出可执行处置",
+   "tags": [
+    "三类分配",
+    "记账习惯"
+   ],
+   "examples": [
+    "遇到三类分配",
+    "遇到记账习惯",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "teen-money-coach-3",
+   "name": "针对 不惩罚错误 等情境给出可执行处置",
+   "description": "针对 不惩罚错误 等情境给出可执行处置",
+   "tags": [
+    "不惩罚错误"
+   ],
+   "examples": [
+    "遇到不惩罚错误",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "青少年专家"
+}

@@ -1,0 +1,67 @@
+{
+ "name": "Elder Companion Pro",
+ "description": "独居老人专家：覆盖 日常联络、紧急呼叫、居家安全、用药提醒、就医陪诊 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/elder-companion-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/elder-companion-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "elder-companion-pro-1",
+   "name": "针对 日常联络、紧急呼叫 等情境给出可执行处置",
+   "description": "针对 日常联络、紧急呼叫 等情境给出可执行处置",
+   "tags": [
+    "日常联络",
+    "紧急呼叫"
+   ],
+   "examples": [
+    "遇到日常联络",
+    "遇到紧急呼叫",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "elder-companion-pro-2",
+   "name": "针对 居家安全、用药提醒 等情境给出可执行处置",
+   "description": "针对 居家安全、用药提醒 等情境给出可执行处置",
+   "tags": [
+    "居家安全",
+    "用药提醒"
+   ],
+   "examples": [
+    "遇到居家安全",
+    "遇到用药提醒",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "elder-companion-pro-3",
+   "name": "针对 就医陪诊 等情境给出可执行处置",
+   "description": "针对 就医陪诊 等情境给出可执行处置",
+   "tags": [
+    "就医陪诊"
+   ],
+   "examples": [
+    "遇到就医陪诊",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "独居老人专家"
+}

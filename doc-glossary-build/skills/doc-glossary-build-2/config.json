@@ -1,0 +1,72 @@
+{
+ "name": "doc-glossary-build-2",
+ "version": "2.0.0",
+ "domain": "术语表构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "来源统一",
+   "then": "术语取自权威来源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "定义简明",
+   "then": "一句话说清",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "含禁用写法",
+   "then": "列出常见错误写法",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "双语对照",
+   "then": "必要时附译文",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期更新",
+   "then": "随项目更新",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "来源统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定义简明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "含禁用写法",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双语对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期更新",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

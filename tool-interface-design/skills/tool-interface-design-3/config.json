@@ -1,0 +1,87 @@
+{
+ "name": "tool-interface-design-3",
+ "version": "2.0.0",
+ "domain": "工具设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "改产出不看消费方",
+   "then": "改任何交给下游的字段前，先读消费方代码确认格式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "路径格式",
+   "then": "路径类字段一律绝对路径，相对路径在换工作目录时必崩",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "静默不兼容",
+   "then": "破坏性变更必须升版本并显式报错，禁止静默降级",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "改产出不看消费方",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "路径格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "静默不兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "变更",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "全部",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "工作",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

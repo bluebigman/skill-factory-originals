@@ -1,0 +1,72 @@
+{
+ "name": "game-team-workflow-2",
+ "version": "2.0.0",
+ "domain": "游戏团队",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "里程碑制",
+   "then": "按可验证里程碑推进",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "资产管线",
+   "then": "统一资源命名与提交规范",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "每日可玩",
+   "then": "保持每日可运行的构建",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变更冻结",
+   "then": "临近发布冻结高风险改动",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本复盘",
+   "then": "每个版本做复盘并留档",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "里程碑制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资产管线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "每日可玩",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更冻结",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "habit-tracker-pro",
+ "version": "1.0.0",
+ "plugin": "habit-tracker-pro",
+ "description": "Habit Tracker Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/habit-tracker-pro.md"
+ ],
+ "skills": [
+  "./skills/habit-design",
+  "./skills/review-loop",
+  "./skills/streak-manage"
+ ],
+ "expertType": "agent",
+ "agentName": "habit-tracker-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Habit Tracker Pro",
+  "zh": "习惯养成 目标过大 无触发"
+ },
+ "profession": {
+  "en": "Habit Tracker Pro",
+  "zh": "习惯养成 打卡复盘 复利设计"
+ },
+ "displayDescription": {
+  "en": "Handles Habit Tracker Pro tasks end-to-end with built-in professional skills.",
+  "zh": "习惯养成 打卡复盘 复利设计：新习惯的最小化设计；习惯效果的定期检视；中断与恢复的处理。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "目标过大"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无触发"
+  },
+  {
+   "en": "practical capability",
+   "zh": "动机依赖"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到目标过大怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无触发怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到动机依赖怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到目标过大怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "习惯养成专家",
+  "to": "习惯养成 目标过大 无触发",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

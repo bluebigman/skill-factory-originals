@@ -1,0 +1,58 @@
+{
+ "name": "travel-itinerary-1",
+ "version": "2.0.0",
+ "domain": "出行行程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定硬约束",
+   "then": "先定往返与住宿，再填景点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "动线就近",
+   "then": "同一天景点按地理聚类",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定硬约束",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动线就近",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "行程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "地理",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

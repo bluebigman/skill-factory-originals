@@ -1,0 +1,74 @@
+{
+ "name": "agent-quota-guard",
+ "version": "1.0.0",
+ "plugin": "agent-quota-guard",
+ "description": "agent-quota-guard — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for agent-quota-guard tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-quota-guard.md"
+ ],
+ "agentName": "agent-quota-guard",
+ "displayName": {
+  "zh": "配额守卫 全局唯一入口 并发锁",
+  "en": "agent-quota-guard"
+ },
+ "profession": {
+  "zh": "配额守卫 资源限额 顾问",
+  "en": "agent-quota-guard"
+ },
+ "displayDescription": {
+  "zh": "配额守卫 资源限额 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "agent-quota-guard: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "配额守卫",
+   "en": "agent-quota-guard"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到配额守卫怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划配额守卫",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查配额守卫",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到配额守卫怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/agent-quota-guard-1/",
+  "./skills/agent-quota-guard-2/",
+  "./skills/agent-quota-guard-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "配额守卫专家",
+  "to": "配额守卫 全局唯一入口 并发锁",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

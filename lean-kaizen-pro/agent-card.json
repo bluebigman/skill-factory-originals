@@ -1,0 +1,75 @@
+{
+ "name": "Lean Kaizen Pro",
+ "description": "精益改善专家：覆盖 课题聚焦、数据说话、现场确认 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/lean-kaizen-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/lean-kaizen-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "lean-kaizen-pro-1",
+   "name": "针对 课题聚焦、数据说话 等情境给出可执行处置",
+   "description": "针对 课题聚焦、数据说话 等情境给出可执行处置",
+   "tags": [
+    "课题聚焦",
+    "数据说话"
+   ],
+   "examples": [
+    "遇到课题聚焦",
+    "遇到数据说话",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "lean-kaizen-pro-2",
+   "name": "针对 现场确认、标准固化 等情境给出可执行处置",
+   "description": "针对 现场确认、标准固化 等情境给出可执行处置",
+   "tags": [
+    "现场确认",
+    "标准固化"
+   ],
+   "examples": [
+    "遇到现场确认",
+    "遇到标准固化",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "lean-kaizen-pro-3",
+   "name": "针对 横向展开 等情境给出可执行处置",
+   "description": "针对 横向展开 等情境给出可执行处置",
+   "tags": [
+    "横向展开"
+   ],
+   "examples": [
+    "遇到横向展开",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "精益改善专家",
+ "x-source": "skill-factory-originals"
+}

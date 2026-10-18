@@ -1,0 +1,75 @@
+{
+ "name": "Nutrition Meal Coach",
+ "description": "营养搭配专家：覆盖 餐盘比例、蛋白固定、挑食替代、隐形油糖、边界 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/nutrition-meal-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/nutrition-meal-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "nutrition-meal-coach-1",
+   "name": "针对 餐盘比例、蛋白固定 等情境给出可执行处置",
+   "description": "针对 餐盘比例、蛋白固定 等情境给出可执行处置",
+   "tags": [
+    "餐盘比例",
+    "蛋白固定"
+   ],
+   "examples": [
+    "遇到餐盘比例",
+    "遇到蛋白固定",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "nutrition-meal-coach-2",
+   "name": "针对 挑食替代、隐形油糖 等情境给出可执行处置",
+   "description": "针对 挑食替代、隐形油糖 等情境给出可执行处置",
+   "tags": [
+    "挑食替代",
+    "隐形油糖"
+   ],
+   "examples": [
+    "遇到挑食替代",
+    "遇到隐形油糖",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "nutrition-meal-coach-3",
+   "name": "针对 边界 等情境给出可执行处置",
+   "description": "针对 边界 等情境给出可执行处置",
+   "tags": [
+    "边界"
+   ],
+   "examples": [
+    "遇到边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "营养搭配专家",
+ "x-source": "skill-factory-originals"
+}

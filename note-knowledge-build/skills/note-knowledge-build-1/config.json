@@ -1,0 +1,62 @@
+{
+ "name": "note-knowledge-build-1",
+ "version": "2.0.0",
+ "domain": "笔记知识库",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "原子化",
+   "then": "一条笔记只讲一件事",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "双向链接",
+   "then": "用链接替代多层文件夹，便于发现关联",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "原子化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双向链接",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "件事",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "笔记",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只讲",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

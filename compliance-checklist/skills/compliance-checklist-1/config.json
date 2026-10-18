@@ -1,0 +1,72 @@
+{
+ "name": "compliance-checklist-1",
+ "version": "2.0.0",
+ "domain": "合规自查清单",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "清单覆盖",
+   "then": "覆盖许可与隐私与免责",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "逐项打勾",
+   "then": "有证据才算过",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "周期性",
+   "then": "按周期复核",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "责任人",
+   "then": "每项有负责人",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "缺口整改",
+   "then": "缺口纳入整改跟踪",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "清单覆盖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逐项打勾",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周期性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺口整改",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "sheet-report-render-1",
+ "version": "2.0.0",
+ "domain": "表格报表",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一页一结论",
+   "then": "单页只讲一个结论，避免堆指标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "图表从简",
+   "then": "同类数据只用一种图型",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一页一结论",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图表从简",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "同类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "指标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "视化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "只讲",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

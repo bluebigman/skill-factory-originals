@@ -1,0 +1,66 @@
+{
+ "name": "ad-creative-coach-1",
+ "version": "2.0.0",
+ "domain": "投放素材",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定人群",
+   "then": "素材开头三秒必须点名目标人群",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "单点主张",
+   "then": "一条素材只讲一个卖点，不堆砌",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定人群",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单点主张",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "开头",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "堆砌",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只讲",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "卖点",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

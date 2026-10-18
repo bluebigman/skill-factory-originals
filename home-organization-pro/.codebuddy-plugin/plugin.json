@@ -1,0 +1,74 @@
+{
+ "name": "home-organization-pro",
+ "version": "1.0.0",
+ "plugin": "home-organization-pro",
+ "description": "Home Organization Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-organization-pro.md"
+ ],
+ "skills": [
+  "./skills/declutter-rules",
+  "./skills/maintain-system",
+  "./skills/zone-planning"
+ ],
+ "expertType": "agent",
+ "agentName": "home-organization-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Organization Pro",
+  "zh": "家庭收纳 舍不得 决策疲劳"
+ },
+ "profession": {
+  "en": "Home Organization Pro",
+  "zh": "家庭收纳 空间整理 断舍离"
+ },
+ "displayDescription": {
+  "en": "Handles Home Organization Pro tasks end-to-end with built-in professional skills.",
+  "zh": "家庭收纳 空间整理 断舍离：物品去留的判断标准与流程；整理后的长期维持；按使用频率的家庭空间分区。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "舍不得"
+  },
+  {
+   "en": "practical capability",
+   "zh": "决策疲劳"
+  },
+  {
+   "en": "practical capability",
+   "zh": "家人不配合"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到舍不得怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到决策疲劳怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到家人不配合怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到舍不得怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "家庭收纳专家",
+  "to": "家庭收纳 舍不得 决策疲劳",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

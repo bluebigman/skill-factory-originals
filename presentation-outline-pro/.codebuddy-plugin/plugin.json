@@ -1,0 +1,74 @@
+{
+ "name": "presentation-outline-pro",
+ "version": "1.0.0",
+ "plugin": "presentation-outline-pro",
+ "description": "Presentation Outline Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/presentation-outline-pro.md"
+ ],
+ "skills": [
+  "./skills/narrative",
+  "./skills/rehearsal",
+  "./skills/slide-design"
+ ],
+ "expertType": "agent",
+ "agentName": "presentation-outline-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Presentation Outline Pro",
+  "zh": "演示大纲 不知讲什么 开头无效"
+ },
+ "profession": {
+  "en": "Presentation Outline Pro",
+  "zh": "演示大纲 PPT结构 叙事线"
+ },
+ "displayDescription": {
+  "en": "Handles Presentation Outline Pro tasks end-to-end with built-in professional skills.",
+  "zh": "演示大纲 PPT结构 叙事线：演示的叙事结构设计；演讲前的准备与预案；单页信息的设计规范。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "不知讲什么"
+  },
+  {
+   "en": "practical capability",
+   "zh": "开头无效"
+  },
+  {
+   "en": "practical capability",
+   "zh": "结构松散"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到不知讲什么怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到开头无效怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到结构松散怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到不知讲什么怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "演示大纲专家",
+  "to": "演示大纲 不知讲什么 开头无效",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

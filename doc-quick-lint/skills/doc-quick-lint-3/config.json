@@ -1,0 +1,72 @@
+{
+ "name": "doc-quick-lint-3",
+ "version": "2.0.0",
+ "domain": "文档快速体检",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结构",
+   "then": "检查标题层级与目录",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "格式",
+   "then": "检查字体字号间距统一",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "内容",
+   "then": "检查空段落与占位符",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "引用",
+   "then": "检查图表引用有效",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "输出清单",
+   "then": "给出问题位置清单",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "内容",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

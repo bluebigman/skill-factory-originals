@@ -1,0 +1,72 @@
+{
+ "name": "report-certification-1",
+ "version": "2.0.0",
+ "domain": "报表认证机制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "认证标准",
+   "then": "定义认证通过标准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "口径审核",
+   "then": "口径经审核",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "认证标记",
+   "then": "认证报表加标记",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "定期复审",
+   "then": "定期复审认证",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "撤销机制",
+   "then": "不达标撤销认证",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "认证标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径审核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "认证标记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复审",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "撤销机制",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

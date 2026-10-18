@@ -1,0 +1,75 @@
+{
+ "name": "Growth Experiment",
+ "description": "增长实验专家：覆盖 先写假设、定基线、单变量 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/growth-experiment",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/growth-experiment",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "growth-experiment-1",
+   "name": "针对 先写假设、定基线 等情境给出可执行处置",
+   "description": "针对 先写假设、定基线 等情境给出可执行处置",
+   "tags": [
+    "先写假设",
+    "定基线"
+   ],
+   "examples": [
+    "遇到先写假设",
+    "遇到定基线",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "growth-experiment-2",
+   "name": "针对 单变量、设止损 等情境给出可执行处置",
+   "description": "针对 单变量、设止损 等情境给出可执行处置",
+   "tags": [
+    "单变量",
+    "设止损"
+   ],
+   "examples": [
+    "遇到单变量",
+    "遇到设止损",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "growth-experiment-3",
+   "name": "针对 沉淀结论 等情境给出可执行处置",
+   "description": "针对 沉淀结论 等情境给出可执行处置",
+   "tags": [
+    "沉淀结论"
+   ],
+   "examples": [
+    "遇到沉淀结论",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "增长实验专家",
+ "x-source": "skill-factory-originals"
+}

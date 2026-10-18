@@ -1,0 +1,72 @@
+{
+ "name": "quality-rule-engine-2",
+ "version": "2.0.0",
+ "domain": "质量规则引擎",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "规则可配",
+   "then": "规则可配置不写死",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级告警",
+   "then": "按严重度分级",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "误报处理",
+   "then": "误报可标记",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "覆盖统计",
+   "then": "统计规则覆盖字段",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复盘",
+   "then": "定期复核规则有效性",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "规则可配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误报处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖统计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

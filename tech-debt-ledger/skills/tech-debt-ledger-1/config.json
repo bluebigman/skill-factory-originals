@@ -1,0 +1,72 @@
+{
+ "name": "tech-debt-ledger-1",
+ "version": "2.0.0",
+ "domain": "技术债台账",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "量化影响",
+   "then": "按修复成本与风险分级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "来源可溯",
+   "then": "记录产生原因与时间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "偿还排期",
+   "then": "纳入迭代排期而非无限延后",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "防止新增",
+   "then": "新增债须评审通过",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期盘点",
+   "then": "按迭代回顾更新台账",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "量化影响",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "偿还排期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防止新增",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期盘点",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

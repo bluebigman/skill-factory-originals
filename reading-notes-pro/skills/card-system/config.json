@@ -1,0 +1,121 @@
+{
+ "name": "card-system",
+ "version": "2.0.0",
+ "domain": "读书笔记",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无索引",
+   "then": "每张卡只写一个观点并给可检索标题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "孤立",
+   "then": "新卡必须链接至少一张旧卡，孤立卡片等于垃圾",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分类太重",
+   "then": "按主题标签而非文件夹层级，层级过深无法维护",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "原文堆砌",
+   "then": "卡片写自己的理解，原文另存附件",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "数量焦虑",
+   "then": "卡片价值在复用，不在数量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "卡片",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "笔记法",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "知识库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关联",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无索引",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "孤立",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分类太重",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "原文堆砌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数量焦虑",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "小时",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "次只",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "标题",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

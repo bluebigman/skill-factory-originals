@@ -1,0 +1,72 @@
+{
+ "name": "secure-code-review-1",
+ "version": "2.0.0",
+ "domain": "安全编码评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "输入校验",
+   "then": "所有外部输入在边界校验",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "参数化",
+   "then": "数据库访问一律参数化",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "输出转义",
+   "then": "渲染前按上下文转义",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "最小权限",
+   "then": "服务账号只给必需权限",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "失败安全",
+   "then": "异常时不泄露内部细节",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "输入校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "参数化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出转义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "最小权限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败安全",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

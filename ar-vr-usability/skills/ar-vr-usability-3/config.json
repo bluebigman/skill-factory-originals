@@ -1,0 +1,72 @@
+{
+ "name": "ar-vr-usability-3",
+ "version": "2.0.0",
+ "domain": "沉浸体验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "视差控制",
+   "then": "控制视觉与前庭感知的不一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "舒适模式",
+   "then": "提供瞬移与降低加速度的舒适模式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "单次限时",
+   "then": "控制单次连续体验时长",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "安全边界",
+   "then": "设置物理安全区提示",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "敏感提示",
+   "then": "对易眩晕人群做前置提示",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "视差控制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "舒适模式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单次限时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全边界",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感提示",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

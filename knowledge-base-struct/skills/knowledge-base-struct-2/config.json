@@ -1,0 +1,72 @@
+{
+ "name": "knowledge-base-struct-2",
+ "version": "2.0.0",
+ "domain": "知识库结构设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "一篇一题",
+   "then": "一条只解决一个问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "层级克制",
+   "then": "目录层级不超三层",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "命名一致",
+   "then": "命名规则统一",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "双向链接",
+   "then": "相关条目互链",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复核",
+   "then": "标注复核日期",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "一篇一题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层级克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双向链接",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

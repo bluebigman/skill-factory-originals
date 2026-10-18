@@ -1,0 +1,72 @@
+{
+ "name": "ecom-ops-review-3",
+ "version": "2.0.0",
+ "domain": "电商经营复盘",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看大盘",
+   "then": "销售额与订单量与客单价",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "拆解归因",
+   "then": "按渠道与品类拆",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "转化漏斗",
+   "then": "曝光到下单逐层看流失",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常定位",
+   "then": "异常波动先定位到具体品类",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "行动清单",
+   "then": "每条洞察配一个动作",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看大盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拆解归因",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转化漏斗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行动清单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

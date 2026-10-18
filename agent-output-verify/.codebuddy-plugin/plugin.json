@@ -1,0 +1,74 @@
+{
+ "name": "agent-output-verify",
+ "version": "1.0.0",
+ "plugin": "agent-output-verify",
+ "description": "Agent Output Verification for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-output-verify.md"
+ ],
+ "skills": [
+  "./skills/agent-output-verify-1",
+  "./skills/agent-output-verify-2",
+  "./skills/agent-output-verify-3"
+ ],
+ "expertType": "agent",
+ "agentName": "agent-output-verify",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Agent Output Verification",
+  "zh": "输出验证 无来源断言"
+ },
+ "profession": {
+  "en": "Agent Output Verification",
+  "zh": "输出验证 幻觉检测 置信标注"
+ },
+ "displayDescription": {
+  "en": "Handles Agent Output Verification tasks end-to-end with built-in professional skills.",
+  "zh": "输出验证 幻觉检测 置信标注：覆盖 无来源断言、数字不可核 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "输出验证"
+  },
+  {
+   "en": "practical capability",
+   "zh": "幻觉检测"
+  },
+  {
+   "en": "practical capability",
+   "zh": "置信标注"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到输出验证怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到幻觉检测怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到置信标注怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到输出验证怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "输出验证专家",
+  "to": "输出验证 无来源断言",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "name": "ecommerce-listing-pro",
+ "version": "1.0.0",
+ "plugin": "ecommerce-listing-pro",
+ "description": "E-commerce Listing Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/ecommerce-listing-pro.md"
+ ],
+ "skills": [
+  "./skills/compliance",
+  "./skills/detail",
+  "./skills/title"
+ ],
+ "expertType": "agent",
+ "agentName": "ecommerce-listing-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "E-commerce Listing Pro",
+  "zh": "电商上架 类目错放 资质缺失"
+ },
+ "profession": {
+  "en": "E-commerce Listing Pro",
+  "zh": "电商上架 标题优化 详情结构"
+ },
+ "displayDescription": {
+  "en": "Handles E-commerce Listing Pro tasks end-to-end with built-in professional skills.",
+  "zh": "电商上架 标题优化 详情结构：上架环节的合规要点；详情页的内容编排；商品标题的结构化写法。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "类目错放"
+  },
+  {
+   "en": "practical capability",
+   "zh": "资质缺失"
+  },
+  {
+   "en": "practical capability",
+   "zh": "侵权"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到类目错放怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到资质缺失怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到侵权怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到类目错放怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:37",
+  "from": "电商上架专家",
+  "to": "电商上架 类目错放 资质缺失",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

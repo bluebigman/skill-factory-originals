@@ -1,0 +1,63 @@
+{
+ "name": "Experiment Design",
+ "description": "单变量、先定主指标、算样本量",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/forge-demo-abtest",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/forge-demo-abtest",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "forge-demo-abtest-1",
+   "name": "实验变量设计",
+   "description": "实验变量设计：单变量、先定主指标、算样本量",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "forge-demo-abtest-2",
+   "name": "主指标与样本量",
+   "description": "主指标与样本量：单变量、先定主指标、算样本量",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "forge-demo-abtest-3",
+   "name": "结果判读",
+   "description": "结果判读：单变量、先定主指标、算样本量",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

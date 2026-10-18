@@ -1,0 +1,72 @@
+{
+ "name": "ui-pattern-library-3",
+ "version": "2.0.0",
+ "domain": "界面模式库",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "场景匹配",
+   "then": "按场景选合适模式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一致性",
+   "then": "同类交互用同一模式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可访问",
+   "then": "符合可达性要求",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "响应式",
+   "then": "适配不同屏幕",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可扩展",
+   "then": "便于后续扩展",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "场景匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一致性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可访问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "响应式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可扩展",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

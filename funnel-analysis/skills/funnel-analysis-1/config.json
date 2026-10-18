@@ -1,0 +1,72 @@
+{
+ "name": "funnel-analysis-1",
+ "version": "2.0.0",
+ "domain": "转化漏斗分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定义步骤",
+   "then": "每步的进入与完成口径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "看流失",
+   "then": "定位流失最大的环节",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分群对比",
+   "then": "按渠道或人群对比",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "时间维度",
+   "then": "看漏斗随时间的改善",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "归因谨慎",
+   "then": "相关不等于因果",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定义步骤",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看流失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分群对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间维度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归因谨慎",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

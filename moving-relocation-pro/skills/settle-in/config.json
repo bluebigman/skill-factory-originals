@@ -1,0 +1,121 @@
+{
+ "name": "settle-in",
+ "version": "2.0.0",
+ "domain": "搬家",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "找不到东西",
+   "then": "先建临时归位区并记录，全部就位再精修布局",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "生活不便",
+   "then": "第一周优先解决睡眠、洗浴、做饭三件事",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "周边不熟",
+   "then": "第一周实地确认医院、超市、交通三点位",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "邻里关系",
+   "then": "主动拜访相邻两户并留联系方式",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "长期凌乱",
+   "then": "入住 2 周内完成收纳位定义，逾期将长期搁置",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "入住",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安顿",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "生活重建",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "找不到东西",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "生活不便",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周边不熟",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "邻里关系",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长期凌乱",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "区分",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "依据",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "全部",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "口头",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "定义",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

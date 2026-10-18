@@ -1,0 +1,121 @@
+{
+ "name": "itinerary",
+ "version": "2.0.0",
+ "domain": "旅游攻略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "行程过满",
+   "then": "每天主项目不超 2 个，赶场式行程没有体验",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "动线混乱",
+   "then": "按地理位置聚类安排，来回折返浪费大量时间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无缓冲",
+   "then": "每日预留 2 小时弹性，交通延误是旅行常态",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "体力透支",
+   "then": "连续高强度后必须插入休整日",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "备选方案",
+   "then": "每个必去点准备一个替代点，遇闭馆可即时替换",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "行程安排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "赶场",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行程过满",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动线混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "体力透支",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "备选方案",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每天",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "SKILL.md#L65"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

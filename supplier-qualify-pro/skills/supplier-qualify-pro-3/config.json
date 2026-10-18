@@ -1,0 +1,65 @@
+{
+ "name": "supplier-qualify-pro-3",
+ "version": "2.0.0",
+ "domain": "供应商",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "年度复评",
+   "then": "每年复评绩效并留档",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "年度复评",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "现场",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "评估",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分级",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "留档",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "度分",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "报告",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "每年",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

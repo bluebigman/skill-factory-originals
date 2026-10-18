@@ -1,0 +1,74 @@
+{
+ "name": "inventory-alert-coach",
+ "version": "1.0.0",
+ "plugin": "inventory-alert-coach",
+ "description": "Inventory Alert Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/inventory-alert-coach.md"
+ ],
+ "skills": [
+  "./skills/inventory-alert-coach-1",
+  "./skills/inventory-alert-coach-2",
+  "./skills/inventory-alert-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "inventory-alert-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Inventory Alert Coach",
+  "zh": "库存预警 安全库存 再订货点"
+ },
+ "profession": {
+  "en": "Inventory Alert Coach",
+  "zh": "库存预警 补货点 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Inventory Alert Coach tasks end-to-end with built-in professional skills.",
+  "zh": "库存预警 补货点 助手：覆盖 安全库存、再订货点、分级 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "安全库存"
+  },
+  {
+   "en": "practical capability",
+   "zh": "再订货点"
+  },
+  {
+   "en": "practical capability",
+   "zh": "分级"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到安全库存怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到再订货点怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到分级怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到安全库存怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:41",
+  "from": "库存预警专家",
+  "to": "库存预警 安全库存 再订货点",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

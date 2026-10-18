@@ -1,0 +1,72 @@
+{
+ "name": "doc-watermark-apply-3",
+ "version": "2.0.0",
+ "domain": "文档水印管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级水印",
+   "then": "按密级设置不同水印",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "含溯源信息",
+   "then": "水印含分发对象标识",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不可轻易移除",
+   "then": "水印与内容交织",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "位置合理",
+   "then": "不遮挡关键内容",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "发放登记",
+   "then": "记录水印与对应接收方",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级水印",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "含溯源信息",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不可轻易移除",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "位置合理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "发放登记",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

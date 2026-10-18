@@ -1,0 +1,65 @@
+{
+ "name": "inventory-sync-guide-3",
+ "version": "2.0.0",
+ "domain": "库存多仓",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "责任到单",
+   "then": "差异必须落到具体单据",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "责任到单",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "每日",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "同步",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "差异",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分类",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "库存",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "三类",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "物流",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

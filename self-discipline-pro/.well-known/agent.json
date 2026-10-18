@@ -1,0 +1,99 @@
+{
+ "name": "Self Discipline Pro",
+ "description": "自律养成专家：拖延的识别与处理；可执行的目标拆解；日常时间的编排。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/self-discipline-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/self-discipline-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "anti-procrastination",
+   "name": "拖延的识别与处理",
+   "description": "拖延的识别与处理",
+   "tags": [
+    "拖延",
+    "启动难",
+    "分心",
+    "手机"
+   ],
+   "examples": [
+    "遇到启动难",
+    "遇到分心冲动",
+    "遇到手机在场",
+    "遇到完美主义",
+    "遇到自责循环"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "anti-procrastination",
+    "to": "anti-procrastination",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "goal-setting",
+   "name": "可执行的目标拆解",
+   "description": "可执行的目标拆解",
+   "tags": [
+    "目标管理",
+    "计划",
+    "空想",
+    "半途而废"
+   ],
+   "examples": [
+    "遇到目标过大",
+    "遇到无衡量",
+    "遇到多重目标",
+    "遇到只定不拆",
+    "遇到无回顾"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "goal-setting",
+    "to": "goal-setting",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "time-arrange",
+   "name": "日常时间的编排",
+   "description": "日常时间的编排",
+   "tags": [
+    "时间安排",
+    "日程",
+    "排期",
+    "没时间"
+   ],
+   "examples": [
+    "遇到满排",
+    "遇到最难后置",
+    "遇到无缓冲",
+    "遇到碎片化",
+    "遇到只做紧急"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:52",
+    "from": "time-arrange",
+    "to": "time-arrange",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "自律养成专家"
+}

@@ -1,0 +1,67 @@
+{
+ "name": "Game Feedback Read",
+ "description": "玩家反馈专家：覆盖 先分类、看重复率、区分玩家 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/game-feedback-read",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/game-feedback-read",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "game-feedback-read-1",
+   "name": "针对 先分类、看重复率 等情境给出可执行处置",
+   "description": "针对 先分类、看重复率 等情境给出可执行处置",
+   "tags": [
+    "先分类",
+    "看重复率"
+   ],
+   "examples": [
+    "遇到先分类",
+    "遇到看重复率",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "game-feedback-read-2",
+   "name": "针对 区分玩家、回应节奏 等情境给出可执行处置",
+   "description": "针对 区分玩家、回应节奏 等情境给出可执行处置",
+   "tags": [
+    "区分玩家",
+    "回应节奏"
+   ],
+   "examples": [
+    "遇到区分玩家",
+    "遇到回应节奏",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "game-feedback-read-3",
+   "name": "针对 不承诺 等情境给出可执行处置",
+   "description": "针对 不承诺 等情境给出可执行处置",
+   "tags": [
+    "不承诺"
+   ],
+   "examples": [
+    "遇到不承诺",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "玩家反馈专家"
+}

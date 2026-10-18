@@ -1,0 +1,75 @@
+{
+ "name": "Subtitle Gen Coach",
+ "description": "字幕生成专家：覆盖 单行字数、断句按语义、最短时长、术语统一 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/subtitle-gen-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/subtitle-gen-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "subtitle-gen-coach-1",
+   "name": "针对 单行字数、断句按语义 等情境给出可执行处置",
+   "description": "针对 单行字数、断句按语义 等情境给出可执行处置",
+   "tags": [
+    "单行字数",
+    "断句按语义"
+   ],
+   "examples": [
+    "遇到单行字数",
+    "遇到断句按语义",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "subtitle-gen-coach-2",
+   "name": "针对 最短时长、术语统一 等情境给出可执行处置",
+   "description": "针对 最短时长、术语统一 等情境给出可执行处置",
+   "tags": [
+    "最短时长",
+    "术语统一"
+   ],
+   "examples": [
+    "遇到最短时长",
+    "遇到术语统一",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "subtitle-gen-coach-3",
+   "name": "针对 overlap 检查 等情境给出可执行处置",
+   "description": "针对 overlap 检查 等情境给出可执行处置",
+   "tags": [
+    "overlap 检查"
+   ],
+   "examples": [
+    "遇到overlap 检查",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "字幕生成专家",
+ "x-source": "skill-factory-originals"
+}

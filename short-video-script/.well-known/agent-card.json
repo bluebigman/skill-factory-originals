@@ -1,0 +1,75 @@
+{
+ "name": "Short Video Script",
+ "description": "短视频专家：覆盖 前 3 秒钩子、单点、口语化、结构模板、复用库 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/short-video-script",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/short-video-script",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "short-video-script-1",
+   "name": "针对 前 3 秒钩子、单点 等情境给出可执行处置",
+   "description": "针对 前 3 秒钩子、单点 等情境给出可执行处置",
+   "tags": [
+    "前 3 秒钩子",
+    "单点"
+   ],
+   "examples": [
+    "遇到前 3 秒钩子",
+    "遇到单点",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "short-video-script-2",
+   "name": "针对 口语化、结构模板 等情境给出可执行处置",
+   "description": "针对 口语化、结构模板 等情境给出可执行处置",
+   "tags": [
+    "口语化",
+    "结构模板"
+   ],
+   "examples": [
+    "遇到口语化",
+    "遇到结构模板",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "short-video-script-3",
+   "name": "针对 复用库 等情境给出可执行处置",
+   "description": "针对 复用库 等情境给出可执行处置",
+   "tags": [
+    "复用库"
+   ],
+   "examples": [
+    "遇到复用库",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "短视频专家",
+ "x-source": "skill-factory-originals"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "sheet-data-validate",
+ "version": "1.0.0",
+ "plugin": "sheet-data-validate",
+ "description": "sheet-data-validate — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for sheet-data-validate tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/sheet-data-validate.md"
+ ],
+ "agentName": "sheet-data-validate",
+ "displayName": {
+  "zh": "表格数据校验 规则清单",
+  "en": "sheet-data-validate"
+ },
+ "profession": {
+  "zh": "表格数据校验 助手",
+  "en": "sheet-data-validate"
+ },
+ "displayDescription": {
+  "zh": "表格数据校验 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "sheet-data-validate: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "表格数据校验",
+   "en": "sheet-data-validate"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到表格数据校验怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划表格数据校验",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查表格数据校验",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到表格数据校验怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/sheet-data-validate-1",
+  "./skills/sheet-data-validate-2",
+  "./skills/sheet-data-validate-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:50",
+  "from": "表格数据校验专家",
+  "to": "表格数据校验 规则清单",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

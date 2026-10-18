@@ -1,0 +1,72 @@
+{
+ "name": "presentation-narrative-2",
+ "version": "2.0.0",
+ "domain": "演示叙事设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "故事线",
+   "then": "按冲突-转折-解法组织",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一页一意",
+   "then": "每页只承载一个观点",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "数据图表化",
+   "then": "数字转图表不堆表格",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "视觉锚点",
+   "then": "每页一个视觉焦点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结尾行动",
+   "then": "末页给明确行动",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "故事线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一页一意",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据图表化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "视觉锚点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾行动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

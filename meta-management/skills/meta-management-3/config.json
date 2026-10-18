@@ -1,0 +1,72 @@
+{
+ "name": "meta-management-3",
+ "version": "2.0.0",
+ "domain": "元数据管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "自动采集",
+   "then": "尽可能自动采集",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "技术业务双元数据",
+   "then": "两者都覆盖",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "关联血缘",
+   "then": "与血缘关联",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "检索友好",
+   "then": "支持搜索",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更留痕",
+   "then": "元数据变更记录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "自动采集",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "技术业务双元数据",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关联血缘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "检索友好",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

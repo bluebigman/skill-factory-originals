@@ -1,0 +1,121 @@
+{
+ "name": "shot-design",
+ "version": "2.0.0",
+ "domain": "短视频脚本",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无分镜",
+   "then": "按秒切分镜头并写明画面与台词，无分镜的拍摄必然返工",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "一镜到底",
+   "then": "30 秒以上须有 3 个以上镜头变化维持注意力",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "口播过长",
+   "then": "单段口播不超 8 秒，过长必须插入画面切换",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "B-roll 缺失",
+   "then": "关键信息须配画面佐证，纯口播说服力弱",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结尾",
+   "then": "结尾设引导动作（关注/评论/主页）并留 1 秒余量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分镜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "镜头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脚本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "画面",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无分镜",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一镜到底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口播过长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "B-roll 缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L40"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "决定",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "同步",
+   "source": "SKILL.md#L38"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "game-map-layout-1",
+ "version": "2.0.0",
+ "domain": "游戏地图",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主路明显",
+   "then": "主路径用光照与地标引导，不靠箭头",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "岔路有奖",
+   "then": "每条岔路给明确收益，避免无效探索",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主路明显",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "岔路有奖",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每条",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "引导",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "动线",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "给明确",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "游戏",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

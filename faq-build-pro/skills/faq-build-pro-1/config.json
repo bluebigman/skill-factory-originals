@@ -1,0 +1,72 @@
+{
+ "name": "faq-build-pro-1",
+ "version": "2.0.0",
+ "domain": "常见问题库构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "真实问法",
+   "then": "用用户原话而非官方术语",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分层组织",
+   "then": "按场景分组而非按功能",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "答在首句",
+   "then": "先给答案再给解释",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "关联链接",
+   "then": "相关条目互相引用",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "命中统计",
+   "then": "按访问量排序定期重排",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "真实问法",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "答在首句",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关联链接",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命中统计",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

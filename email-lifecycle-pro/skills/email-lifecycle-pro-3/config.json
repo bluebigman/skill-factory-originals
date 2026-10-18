@@ -1,0 +1,72 @@
+{
+ "name": "email-lifecycle-pro-3",
+ "version": "2.0.0",
+ "domain": "邮件触达",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分阶段分层",
+   "then": "按用户生命周期分层触达",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "频率上限",
+   "then": "设置触达频率上限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "退订友好",
+   "then": "退订入口清晰且一步可达",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标题诚实",
+   "then": "标题不夸大不误导",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "分项看",
+   "then": "分别看送达、打开与点击",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分阶段分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "频率上限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退订友好",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题诚实",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分项看",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "name": "Home Repair Guide",
+ "description": "家居维修专家：覆盖 描述问题、比价、验收、费用、保修 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/home-repair-guide",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/home-repair-guide",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "home-repair-guide-1",
+   "name": "针对 描述问题、比价 等情境给出可执行处置",
+   "description": "针对 描述问题、比价 等情境给出可执行处置",
+   "tags": [
+    "描述问题",
+    "比价"
+   ],
+   "examples": [
+    "遇到描述问题",
+    "遇到比价",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-repair-guide-2",
+   "name": "针对 验收、费用 等情境给出可执行处置",
+   "description": "针对 验收、费用 等情境给出可执行处置",
+   "tags": [
+    "验收",
+    "费用"
+   ],
+   "examples": [
+    "遇到验收",
+    "遇到费用",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "home-repair-guide-3",
+   "name": "针对 保修 等情境给出可执行处置",
+   "description": "针对 保修 等情境给出可执行处置",
+   "tags": [
+    "保修"
+   ],
+   "examples": [
+    "遇到保修",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家居维修专家",
+ "x-source": "skill-factory-originals"
+}

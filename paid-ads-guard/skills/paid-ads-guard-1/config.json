@@ -1,0 +1,72 @@
+{
+ "name": "paid-ads-guard-1",
+ "version": "2.0.0",
+ "domain": "投放管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "预算上限",
+   "then": "设置日与总预算上限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "账户隔离",
+   "then": "测试账户与正式账户隔离",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "素材轮换",
+   "then": "定期更换素材防疲劳",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常熔断",
+   "then": "成本异常时自动暂停",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "先审后投",
+   "then": "素材先审合规再投放",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预算上限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "账户隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "素材轮换",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常熔断",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "先审后投",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "name": "lean-kaizen-pro-2",
+ "version": "2.0.0",
+ "domain": "精益改善",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "现场确认",
+   "then": "结论必须到现场确认",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "标准固化",
+   "then": "改善后写入作业标准与点检项",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "现场确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标准固化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "口径",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "次只",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "用同",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "聚焦",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "前后",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "作业",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

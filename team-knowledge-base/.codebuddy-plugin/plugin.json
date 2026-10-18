@@ -1,0 +1,74 @@
+{
+ "name": "team-knowledge-base",
+ "version": "1.0.0",
+ "plugin": "team-knowledge-base",
+ "description": "team-knowledge-base — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for team-knowledge-base tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/team-knowledge-base.md"
+ ],
+ "agentName": "team-knowledge-base",
+ "displayName": {
+  "zh": "团队知识库 一篇一题",
+  "en": "team-knowledge-base"
+ },
+ "profession": {
+  "zh": "团队知识库 顾问",
+  "en": "team-knowledge-base"
+ },
+ "displayDescription": {
+  "zh": "团队知识库 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "team-knowledge-base: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "团队知识库",
+   "en": "team-knowledge-base"
+  },
+  {
+   "en": "OperationsHR",
+   "zh": "OperationsHR"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到团队知识库怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划团队知识库",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查团队知识库",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到团队知识库怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/team-knowledge-base-1",
+  "./skills/team-knowledge-base-2",
+  "./skills/team-knowledge-base-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "团队知识库专家",
+  "to": "团队知识库 一篇一题",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "name": "user-research-read-3",
+ "version": "2.0.0",
+ "domain": "用户调研",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结论附证据",
+   "then": "每条结论附原话或数据，不写感受性总结",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结论附证据",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "每条",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "占比",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "超三",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "感受",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

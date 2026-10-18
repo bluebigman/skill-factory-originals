@@ -1,0 +1,74 @@
+{
+ "name": "hr-recruit-flow",
+ "version": "1.0.0",
+ "plugin": "hr-recruit-flow",
+ "description": "hr-recruit-flow — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for hr-recruit-flow tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/hr-recruit-flow.md"
+ ],
+ "agentName": "hr-recruit-flow",
+ "displayName": {
+  "zh": "招聘流程设计 流程清晰",
+  "en": "hr-recruit-flow"
+ },
+ "profession": {
+  "zh": "招聘流程设计 顾问",
+  "en": "hr-recruit-flow"
+ },
+ "displayDescription": {
+  "zh": "招聘流程设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "hr-recruit-flow: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "招聘流程设计",
+   "en": "hr-recruit-flow"
+  },
+  {
+   "en": "OperationsHR",
+   "zh": "OperationsHR"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到招聘流程设计怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划招聘流程设计",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查招聘流程设计",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到招聘流程设计怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/hr-recruit-flow-1/",
+  "./skills/hr-recruit-flow-2/",
+  "./skills/hr-recruit-flow-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "招聘流程设计专家",
+  "to": "招聘流程设计 流程清晰",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

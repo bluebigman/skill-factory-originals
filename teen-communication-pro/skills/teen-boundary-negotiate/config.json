@@ -1,0 +1,96 @@
+{
+ "name": "teen-boundary-negotiate",
+ "version": "2.0.0",
+ "domain": "青春期沟通",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "手机时间",
+   "then": "共同定上限并书面确认，违反时按约定而非临场发火",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "回家时间",
+   "then": "给区间而非点，并说明担心的具体理由",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "交友",
+   "then": "只谈安全和尊重底线，不评判朋友本人",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "隐私",
+   "then": "明确哪些必须知情（安全项），其余尊重",
+   "source": "scripts/main.py#RULES[3]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "手机时间",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回家时间",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "交友",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隐私",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "重度",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "心理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "提供心",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L84"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

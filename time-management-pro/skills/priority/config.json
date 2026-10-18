@@ -1,0 +1,121 @@
+{
+ "name": "priority",
+ "version": "2.0.0",
+ "domain": "时间管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全都很急",
+   "then": "每天只定 3 件必做，超出即为虚假优先级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "只做紧急",
+   "then": "每日留一段固定时间做重要不紧急的事，否则长期被救火占据",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不写下来",
+   "then": "所有任务必须外化到清单，靠记忆必然遗漏",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "清单过长",
+   "then": "待办超 10 项须分流到将来/删除，长清单导致瘫痪",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预估缺失",
+   "then": "每项标预估时长，无预估的清单无法排布",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "优先级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重要紧急",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "选择",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全都很急",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只做紧急",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不写下来",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "清单过长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预估缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "任务",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

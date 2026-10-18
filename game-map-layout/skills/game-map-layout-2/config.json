@@ -1,0 +1,78 @@
+{
+ "name": "game-map-layout-2",
+ "version": "2.0.0",
+ "domain": "游戏地图",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "视距管理",
+   "then": "用遮挡与地形控制信息暴露节奏",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "回环设计",
+   "then": "关键区域做回环，减少折返枯燥",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "视距管理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回环设计",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "减少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每条",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "引导",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

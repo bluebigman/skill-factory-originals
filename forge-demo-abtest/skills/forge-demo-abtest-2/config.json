@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "指标过多",
+   "then": "只留一个主指标，其余为护栏指标"
+  },
+  {
+   "when": "样本不足",
+   "then": "延长周期或提高最小可检测效应"
+  }
+ ],
+ "keywords": [
+  "主指标",
+  "样本量",
+  "周期"
+ ],
+ "boundary": "先定唯一主指标，再算所需样本量与周期",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

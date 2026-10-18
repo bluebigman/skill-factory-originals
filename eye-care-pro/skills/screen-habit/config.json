@@ -1,0 +1,121 @@
+{
+ "name": "screen-habit",
+ "version": "2.0.0",
+ "domain": "用眼健康",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "亮度过高",
+   "then": "屏幕亮度与环境光匹配，夜间避免唯一强光源",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "距离过近",
+   "then": "屏幕距离保持一臂长，字体调大而非凑近",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "持续用眼",
+   "then": "遵循 20-20-20 规则，定时提醒比自我感知可靠",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "夜间使用",
+   "then": "睡前 1 小时降低亮度并减少使用，影响入睡节律",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "眨眼减少",
+   "then": "专注时眨眼频次下降，可有意识增加眨眼",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "屏幕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "亮度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "蓝光",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "距离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "亮度过高",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "距离过近",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "持续用眼",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "夜间使用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "眨眼减少",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每日",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "content-structure-3",
+ "version": "2.0.0",
+ "domain": "内容结构设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "结论先行",
+   "then": "首段给结论",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分层清晰",
+   "then": "标题层级合理",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "每节独立",
+   "then": "每节可单独阅读",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "篇幅配比",
+   "then": "核心章节占多数",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "过渡自然",
+   "then": "章节间有过渡",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "每节独立",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "篇幅配比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过渡自然",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

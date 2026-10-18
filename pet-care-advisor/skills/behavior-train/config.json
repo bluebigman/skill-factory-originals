@@ -1,0 +1,105 @@
+{
+ "name": "behavior-train",
+ "version": "2.0.0",
+ "domain": "宠物养护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "拆家",
+   "then": "先排除运动量与分离焦虑，训练前先满足体能需求",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "乱叫",
+   "then": "记录触发场景再训练，盲目制止会加重焦虑",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "随地大小便",
+   "then": "固定点位+即时奖励，事后惩罚完全无效",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "咬人",
+   "then": "幼犬换牙期提供替代咬物，用手逗玩会强化咬手",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "训练反复",
+   "then": "单次 5 分钟高频重复，长时间训练效率反而低",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拆家",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "乱叫",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "随地大小便",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "咬人",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "训练反复",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "前先",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

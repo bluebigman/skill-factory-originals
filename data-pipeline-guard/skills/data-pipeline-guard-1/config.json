@@ -1,0 +1,72 @@
+{
+ "name": "data-pipeline-guard-1",
+ "version": "2.0.0",
+ "domain": "数据管道守护",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "幂等写入",
+   "then": "同批次重复执行不重复写",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "断点续跑",
+   "then": "记录进度支持续跑",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "质量校验",
+   "then": "入库前校验数据质量",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "对账机制",
+   "then": "结束后对账条数",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "失败隔离",
+   "then": "单条失败不中断整批",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "幂等写入",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "断点续跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "质量校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对账机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

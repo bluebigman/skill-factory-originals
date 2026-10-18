@@ -1,0 +1,72 @@
+{
+ "name": "content-design-system-1",
+ "version": "2.0.0",
+ "domain": "内容设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "语气维度",
+   "then": "定义正式度与温度等语气维度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "正反例",
+   "then": "每个场景给出正反示例",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "术语表",
+   "then": "维护术语与标准写法",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "本地化预留",
+   "then": "预留翻译带来的长度冗余",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期抽审",
+   "then": "定期抽审线上文案",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "语气维度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "正反例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "术语表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "本地化预留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期抽审",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

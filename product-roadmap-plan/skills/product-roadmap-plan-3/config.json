@@ -1,0 +1,69 @@
+{
+ "name": "product-roadmap-plan-3",
+ "version": "2.0.0",
+ "domain": "产品路线图",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定期重排",
+   "then": "每季度重排一次，不把旧计划当真理",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定期重排",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "计划",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每季度",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "按目",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "排序",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "产品",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "达成",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "阶段",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

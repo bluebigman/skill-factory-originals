@@ -1,0 +1,72 @@
+{
+ "name": "markdown-standard-pro-2",
+ "version": "2.0.0",
+ "domain": "Mark",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标题层级",
+   "then": "标题层级不得跳级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "列表一致",
+   "then": "同层列表符号统一",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "代码块标注",
+   "then": "代码块须标语言",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "链接可用",
+   "then": "链接必须可访问",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "渲染验证",
+   "then": "提交前验证渲染",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标题层级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "列表一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "代码块标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "链接可用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "渲染验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

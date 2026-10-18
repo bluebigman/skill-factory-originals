@@ -1,0 +1,74 @@
+{
+ "name": "short-video-script-pro",
+ "version": "1.0.0",
+ "plugin": "short-video-script-pro",
+ "description": "Short Video Script Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/short-video-script-pro.md"
+ ],
+ "skills": [
+  "./skills/hook-3s",
+  "./skills/retention",
+  "./skills/shot-design"
+ ],
+ "expertType": "agent",
+ "agentName": "short-video-script-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Short Video Script Pro",
+  "zh": "短视频脚本 开头拖沓 无悬念"
+ },
+ "profession": {
+  "en": "Short Video Script Pro",
+  "zh": "短视频脚本 分镜设计 黄金3秒"
+ },
+ "displayDescription": {
+  "en": "Handles Short Video Script Pro tasks end-to-end with built-in professional skills.",
+  "zh": "短视频脚本 分镜设计 黄金3秒：开头三秒的留存设计；完播率的提升手段；脚本与镜头的对应。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "开头拖沓"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无悬念"
+  },
+  {
+   "en": "practical capability",
+   "zh": "音画不同步"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到开头拖沓怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无悬念怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到音画不同步怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到开头拖沓怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "短视频脚本专家",
+  "to": "短视频脚本 开头拖沓 无悬念",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

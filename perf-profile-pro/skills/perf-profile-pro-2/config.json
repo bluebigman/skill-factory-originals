@@ -1,0 +1,72 @@
+{
+ "name": "perf-profile-pro-2",
+ "version": "2.0.0",
+ "domain": "性能剖析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先测量",
+   "then": "不测量不优化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "热点定位",
+   "then": "按耗时排序定位",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "小步优化",
+   "then": "每次只改一处",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "复测对照",
+   "then": "优化前后对照",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "防劣化",
+   "then": "建立回归基线",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先测量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "热点定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小步优化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复测对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防劣化",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

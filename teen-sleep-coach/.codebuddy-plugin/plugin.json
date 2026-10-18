@@ -1,0 +1,74 @@
+{
+ "name": "teen-sleep-coach",
+ "version": "1.0.0",
+ "plugin": "teen-sleep-coach",
+ "description": "Teen Sleep Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/teen-sleep-coach.md"
+ ],
+ "skills": [
+  "./skills/teen-sleep-coach-1",
+  "./skills/teen-sleep-coach-2",
+  "./skills/teen-sleep-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "teen-sleep-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Teen Sleep Coach",
+  "zh": "青少年睡眠 固定起床 睡前离屏"
+ },
+ "profession": {
+  "en": "Teen Sleep Coach",
+  "zh": "青少年睡眠 作息调整 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Teen Sleep Coach tasks end-to-end with built-in professional skills.",
+  "zh": "青少年睡眠 作息调整 教练：覆盖 固定起床、睡前离屏、午睡限时 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "固定起床"
+  },
+  {
+   "en": "practical capability",
+   "zh": "睡前离屏"
+  },
+  {
+   "en": "practical capability",
+   "zh": "午睡限时"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到固定起床怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到睡前离屏怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到午睡限时怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到固定起床怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "青少年睡眠专家",
+  "to": "青少年睡眠 固定起床 睡前离屏",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

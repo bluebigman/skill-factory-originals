@@ -1,0 +1,107 @@
+{
+ "name": "Family Schedule Pro",
+ "description": "家庭日程专家：全家日程的集中与冲突检测；家庭时间负荷的分配与减负；家庭固定作息的设计。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/family-schedule-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-schedule-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "calendar-unify",
+   "name": "全家日程的集中与冲突检测",
+   "description": "全家日程的集中与冲突检测",
+   "tags": [
+    "日程",
+    "冲突",
+    "忘记",
+    "提醒"
+   ],
+   "examples": [
+    "遇到日程分散",
+    "遇到接送冲突",
+    "遇到忘记事项",
+    "遇到临时变更",
+    "遇到缓冲不足"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "calendar-unify",
+    "to": "calendar-unify",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "load-balance",
+   "name": "家庭时间负荷的分配与减负",
+   "description": "家庭时间负荷的分配与减负",
+   "tags": [
+    "太忙",
+    "没时间",
+    "负荷",
+    "减负"
+   ],
+   "examples": [
+    "遇到全员过载",
+    "遇到碎片化",
+    "遇到无休息",
+    "遇到临时加塞",
+    "遇到孩子课外班"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "load-balance",
+    "to": "load-balance",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "routine-design",
+   "name": "家庭固定作息的设计",
+   "description": "家庭固定作息的设计",
+   "tags": [
+    "作息",
+    "早起",
+    "晚睡",
+    "节奏"
+   ],
+   "examples": [
+    "遇到晚睡",
+    "遇到早晨混乱",
+    "遇到周末错乱",
+    "遇到作业拖延",
+    "遇到全家冲突"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "routine-design",
+    "to": "routine-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "家庭日程专家",
+ "x-source": "skill-factory-originals"
+}

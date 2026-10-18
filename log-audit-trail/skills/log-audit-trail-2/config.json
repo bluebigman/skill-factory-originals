@@ -1,0 +1,72 @@
+{
+ "name": "log-audit-trail-2",
+ "version": "2.0.0",
+ "domain": "日志审计留痕",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "必录字段",
+   "then": "操作人时间对象结果",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不可篡改",
+   "then": "只追加不改",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "留存期限",
+   "then": "按合规要求",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可检索",
+   "then": "支持多维检索",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "敏感脱敏",
+   "then": "审计内容不泄密",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "必录字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不可篡改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留存期限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可检索",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感脱敏",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

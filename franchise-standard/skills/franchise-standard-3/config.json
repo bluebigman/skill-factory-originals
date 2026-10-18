@@ -1,0 +1,72 @@
+{
+ "name": "franchise-standard-3",
+ "version": "2.0.0",
+ "domain": "连锁标准制定",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标准统一",
+   "then": "核心标准统一",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可复制",
+   "then": "操作可复制",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "培训体系",
+   "then": "配套培训",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "督导机制",
+   "then": "定期督导",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "本地适配",
+   "then": "允许必要本地化",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标准统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可复制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "培训体系",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "督导机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "本地适配",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

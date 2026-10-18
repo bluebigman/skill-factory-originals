@@ -1,0 +1,66 @@
+{
+ "name": "inventory-basic-coach-1",
+ "version": "2.0.0",
+ "domain": "库存管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "安全库存",
+   "then": "日均×周期×1.5",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "滞销清理",
+   "then": "60 天未动销即处理",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "安全库存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "滞销清理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "周期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日均",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

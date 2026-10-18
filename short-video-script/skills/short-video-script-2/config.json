@@ -1,0 +1,74 @@
+{
+ "name": "short-video-script-2",
+ "version": "2.0.0",
+ "domain": "短视频",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "口语化",
+   "then": "写成口语再读一遍改拗口处",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结构模板",
+   "then": "钩子-展开-转折-收尾四段",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "口语化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构模板",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "单点",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "收尾",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只讲",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

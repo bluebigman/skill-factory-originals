@@ -1,0 +1,72 @@
+{
+ "name": "taxonomy-build-1",
+ "version": "2.0.0",
+ "domain": "分类体系构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "互斥完备",
+   "then": "类别互斥且完备",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "粒度一致",
+   "then": "同层粒度一致",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "可扩展",
+   "then": "预留扩展位",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "命名规范",
+   "then": "类别命名统一",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "配定义",
+   "then": "每类配判定标准",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "互斥完备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "粒度一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可扩展",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配定义",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "home-doc-organizer-2",
+ "version": "2.0.0",
+ "domain": "家庭证件",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "有效期提醒",
+   "then": "身份证/驾照/保单设到期提醒",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "取用留位",
+   "then": "借用后立即归位",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "有效期提醒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "取用留位",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "备份",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "归档",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "证件",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "分区",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "拍照",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "四类",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "收纳",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

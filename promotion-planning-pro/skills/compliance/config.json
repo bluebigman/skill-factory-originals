@@ -1,0 +1,121 @@
+{
+ "name": "compliance",
+ "version": "2.0.0",
+ "domain": "促销活动",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "虚假比价",
+   "then": "划线价须真实可查，虚假比价属价格欺诈",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "极限词",
+   "then": "禁用最/第一/国家级等极限词",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "赠品",
+   "then": "赠品须明确数量与条件，模糊赠送易生纠纷",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "库存",
+   "then": "活动库存须与承诺一致，售罄后须及时说明",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "规则公示",
+   "then": "活动规则须提前公示，事后解释无效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "违规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "价格",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "宣传",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "虚假比价",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "极限词",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "赠品",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "库存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则公示",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "承诺",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁用",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "促销",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "doc-style-guide-3",
+ "version": "2.0.0",
+ "domain": "文档风格规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "术语表先建",
+   "then": "统一术语后写正文",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "句式克制",
+   "then": "避免长定语与多重否定",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标点统一",
+   "then": "中英文标点各按语种",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数字规范",
+   "then": "数字与单位间加空格",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "示例优先",
+   "then": "抽象规则配具体示例",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "术语表先建",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "句式克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标点统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数字规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

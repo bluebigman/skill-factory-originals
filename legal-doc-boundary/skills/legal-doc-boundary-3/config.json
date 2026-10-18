@@ -1,0 +1,72 @@
+{
+ "name": "legal-doc-boundary-3",
+ "version": "2.0.0",
+ "domain": "法律文档边界",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不提供法律意见",
+   "then": "只做格式化处理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "提示咨询专业人士",
+   "then": "涉法提示转专业",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "条款对照",
+   "then": "对照模板检查完整性",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "免责声明",
+   "then": "附必要声明",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕",
+   "then": "处理记录留存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不提供法律意见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "提示咨询专业人士",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "条款对照",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "免责声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "service-health-pro-2",
+ "version": "2.0.0",
+ "domain": "服务健康",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "探活标准",
+   "then": "定义健康判据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "快速失败",
+   "then": "不健康即摘除",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "隔离故障",
+   "then": "故障实例隔离",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "自动恢复",
+   "then": "恢复后自动加回",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "健康可观测",
+   "then": "健康状态可见",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "探活标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "快速失败",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "隔离故障",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自动恢复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "健康可观测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

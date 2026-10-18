@@ -1,0 +1,74 @@
+{
+ "name": "observability-inject",
+ "version": "1.0.0",
+ "plugin": "observability-inject",
+ "description": "Observability Injection for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/observability-inject.md"
+ ],
+ "skills": [
+  "./skills/observability-inject-1",
+  "./skills/observability-inject-2",
+  "./skills/observability-inject-3"
+ ],
+ "expertType": "agent",
+ "agentName": "observability-inject",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Observability Injection",
+  "zh": "链路追踪 黑盒执行 无法复现"
+ },
+ "profession": {
+  "en": "Observability Injection",
+  "zh": "链路追踪 指标埋点 异常告警"
+ },
+ "displayDescription": {
+  "en": "Handles Observability Injection tasks end-to-end with built-in professional skills.",
+  "zh": "链路追踪 指标埋点 异常告警：覆盖 黑盒执行、无法复现 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "链路追踪"
+  },
+  {
+   "en": "practical capability",
+   "zh": "指标埋点"
+  },
+  {
+   "en": "practical capability",
+   "zh": "异常告警"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到链路追踪怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到指标埋点怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到异常告警怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到链路追踪怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "链路追踪专家",
+  "to": "链路追踪 黑盒执行 无法复现",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

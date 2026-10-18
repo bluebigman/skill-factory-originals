@@ -1,0 +1,58 @@
+{
+ "name": "series-column-plan-1",
+ "version": "2.0.0",
+ "domain": "系列栏目",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定栏目",
+   "then": "栏目名要能一眼看懂讲什么",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "固定结构",
+   "then": "每期结构固定，降低读者认知成本",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定栏目",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "固定结构",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "读者",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

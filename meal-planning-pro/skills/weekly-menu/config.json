@@ -1,0 +1,117 @@
+{
+ "name": "weekly-menu",
+ "version": "2.0.0",
+ "domain": "家庭餐食",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "每天纠结",
+   "then": "周末一次定 7 天菜单并生成采购清单，决策次数从 21 降到 1",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "口味不合",
+   "then": "按人头各留 1 天独食日，全员迁就必引发抱怨",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重复单调",
+   "then": "主料轮换（鸡/猪/牛/鱼/蛋/豆），主食与烹饪法交叉搭配",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "做不完浪费",
+   "then": "按现有库存定菜单而非反向采购，先清库存再下单",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "时间不够",
+   "then": "按耗时分级：工作日 30 分钟菜，周末做费时菜",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "菜单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "吃什么",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "每天纠结",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口味不合",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复单调",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "做不完浪费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间不够",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "替代",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "长期",
+   "source": "SKILL.md#L64"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

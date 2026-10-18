@@ -1,0 +1,58 @@
+{
+ "name": "competitor-analysis-1",
+ "version": "2.0.0",
+ "domain": "竞品分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定维度",
+   "then": "先定对比维度再采集，避免堆截图",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "试用为准",
+   "then": "以亲自试用为准，不只看官网宣传",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定维度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "试用为准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "只看",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "竞品",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

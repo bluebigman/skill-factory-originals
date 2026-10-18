@@ -1,0 +1,72 @@
+{
+ "name": "runbook-automate-1",
+ "version": "2.0.0",
+ "domain": "手册自动化",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "高频先做",
+   "then": "先自动化高频操作",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "保留人工确认",
+   "then": "关键步骤人工确认",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "安全护栏",
+   "then": "危险命令二次确认",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "执行留痕",
+   "then": "操作记录可查",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期演练",
+   "then": "自动化步骤定期演练",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "高频先做",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留人工确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全护栏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "执行留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期演练",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

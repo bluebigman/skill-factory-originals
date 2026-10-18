@@ -1,0 +1,72 @@
+{
+ "name": "sales-script-coach-2",
+ "version": "2.0.0",
+ "domain": "销售话术",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按场景分类",
+   "then": "按客户异议与阶段分类编写",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "讲人话",
+   "then": "避免术语轰炸与自嗨",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "演练固化",
+   "then": "靠角色演练而非背诵",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "配反例",
+   "then": "同时给出错误示范",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "按实战迭代",
+   "then": "按真实反馈定期更新",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按场景分类",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "讲人话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "演练固化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配反例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按实战迭代",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

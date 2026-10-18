@@ -1,0 +1,74 @@
+{
+ "name": "content-qa-checklist",
+ "version": "1.0.0",
+ "plugin": "content-qa-checklist",
+ "description": "content-qa-checklist — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for content-qa-checklist tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/content-qa-checklist.md"
+ ],
+ "agentName": "content-qa-checklist",
+ "displayName": {
+  "zh": "内容质检清单 事实 结构",
+  "en": "content-qa-checklist"
+ },
+ "profession": {
+  "zh": "内容质检清单 顾问",
+  "en": "content-qa-checklist"
+ },
+ "displayDescription": {
+  "zh": "内容质检清单 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "content-qa-checklist: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "内容质检清单",
+   "en": "content-qa-checklist"
+  },
+  {
+   "en": "ProjectQuality",
+   "zh": "ProjectQuality"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到内容质检清单怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划内容质检清单",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查内容质检清单",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到内容质检清单怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/content-qa-checklist-1",
+  "./skills/content-qa-checklist-2",
+  "./skills/content-qa-checklist-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:32",
+  "from": "内容质检清单专家",
+  "to": "内容质检清单 事实 结构",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

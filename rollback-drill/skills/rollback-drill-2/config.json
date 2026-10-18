@@ -1,0 +1,72 @@
+{
+ "name": "rollback-drill-2",
+ "version": "2.0.0",
+ "domain": "回滚演练",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "预演常用",
+   "then": "回滚路径定期演练",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "数据兼容",
+   "then": "确认回滚后数据结构兼容",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "脚本就绪",
+   "then": "回滚脚本与发布脚本同时准备",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "时间可控",
+   "then": "明确回滚所需时长",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "决策门槛",
+   "then": "写清触发回滚的量化条件",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预演常用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据兼容",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脚本就绪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间可控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "决策门槛",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

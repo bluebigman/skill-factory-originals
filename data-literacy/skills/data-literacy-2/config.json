@@ -1,0 +1,72 @@
+{
+ "name": "data-literacy-2",
+ "version": "2.0.0",
+ "domain": "数据素养培训",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层培训",
+   "then": "按角色定内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "场景化",
+   "then": "用真实场景教学",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "常见误区",
+   "then": "列出常见误读",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "练习",
+   "then": "配练习题",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期复训",
+   "then": "按周期复训",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层培训",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "场景化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "常见误区",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "练习",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期复训",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

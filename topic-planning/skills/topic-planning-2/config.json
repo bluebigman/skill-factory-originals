@@ -1,0 +1,70 @@
+{
+ "name": "topic-planning-2",
+ "version": "2.0.0",
+ "domain": "内容选题",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "成系列",
+   "then": "选题排成系列，单篇难积累，系列才有复利",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "留余量",
+   "then": "每月预留两成档期给突发热点",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "成系列",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留余量",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "验证",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每月",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "同类",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "预留",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "突发",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "nonprofit-program-1",
+ "version": "2.0.0",
+ "domain": "公益项目设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标明确",
+   "then": "目标可衡量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "受益清晰",
+   "then": "明确受益群体",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "执行可行",
+   "then": "执行路径可行",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "效果评估",
+   "then": "设评估方式",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "透明公开",
+   "then": "过程透明",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "受益清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "执行可行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果评估",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "透明公开",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

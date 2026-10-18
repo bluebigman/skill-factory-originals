@@ -1,0 +1,72 @@
+{
+ "name": "retry-backoff-design-2",
+ "version": "2.0.0",
+ "domain": "重试退避设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只重试可重试",
+   "then": "区分瞬时故障与永久失败",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "指数退避",
+   "then": "间隔逐次翻倍并加上限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "抖动",
+   "then": "加随机抖动避免同时重试",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "幂等前提",
+   "then": "重试前确认操作幂等",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "重试上限",
+   "then": "设次数与总时长双上限",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "只重试可重试",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指数退避",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抖动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "幂等前提",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重试上限",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

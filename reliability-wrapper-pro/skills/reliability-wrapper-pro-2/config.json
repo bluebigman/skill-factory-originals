@@ -1,0 +1,72 @@
+{
+ "name": "reliability-wrapper-pro-2",
+ "version": "2.0.0",
+ "domain": "重试熔断",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "可重试判定",
+   "then": "先判断失败类型再决定重试",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "指数退避",
+   "then": "重试须退避加抖动",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "熔断开窗",
+   "then": "连续失败达阈值熔断冷却",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "超时必备",
+   "then": "外部调用必须带超时",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "幂等键",
+   "then": "写操作须幂等，重跑结果一致",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "可重试判定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "指数退避",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "熔断开窗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超时必备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "幂等键",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

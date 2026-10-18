@@ -1,0 +1,72 @@
+{
+ "name": "user-research-plan-1",
+ "version": "2.0.0",
+ "domain": "用户调研方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标明确",
+   "then": "先写清想验证什么",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样本代表",
+   "then": "样本具代表性",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "问题中立",
+   "then": "问题不引导",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "记录规范",
+   "then": "统一记录格式",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论有据",
+   "then": "结论基于原始记录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样本代表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问题中立",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论有据",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

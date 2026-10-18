@@ -1,0 +1,74 @@
+{
+ "name": "office-file-io",
+ "version": "1.0.0",
+ "plugin": "office-file-io",
+ "description": "office-file-io — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for office-file-io tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/office-file-io.md"
+ ],
+ "agentName": "office-file-io",
+ "displayName": {
+  "zh": "文件读写 格式先判 结构保留",
+  "en": "office-file-io"
+ },
+ "profession": {
+  "zh": "Office 文件读写 助手",
+  "en": "office-file-io"
+ },
+ "displayDescription": {
+  "zh": "Office 文件读写 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "office-file-io: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "Office",
+   "en": "office-file-io"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到Office怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划Office",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查Office",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到Office怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/office-file-io-1/",
+  "./skills/office-file-io-2/",
+  "./skills/office-file-io-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "文件读写专家",
+  "to": "文件读写 格式先判 结构保留",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

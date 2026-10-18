@@ -1,0 +1,72 @@
+{
+ "name": "stream-pipeline-pro-3",
+ "version": "2.0.0",
+ "domain": "流式处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "水位定义",
+   "then": "明确事件时间水位",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "乱序容忍",
+   "then": "容忍窗口内乱序",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重复处理",
+   "then": "幂等处理重复数据",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "背压机制",
+   "then": "下游慢时背压",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "监控延迟",
+   "then": "端到端延迟可观测",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "水位定义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "乱序容忍",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "背压机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "监控延迟",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

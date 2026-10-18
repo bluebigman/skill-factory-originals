@@ -1,0 +1,75 @@
+{
+ "name": "Child Bullying Coach",
+ "description": "校园欺凌专家：覆盖 认真对待、保留证据、联系学校、不教以暴制暴 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-bullying-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-bullying-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-bullying-coach-1",
+   "name": "针对 认真对待、保留证据 等情境给出可执行处置",
+   "description": "针对 认真对待、保留证据 等情境给出可执行处置",
+   "tags": [
+    "认真对待",
+    "保留证据"
+   ],
+   "examples": [
+    "遇到认真对待",
+    "遇到保留证据",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-bullying-coach-2",
+   "name": "针对 联系学校、不教以暴制暴 等情境给出可执行处置",
+   "description": "针对 联系学校、不教以暴制暴 等情境给出可执行处置",
+   "tags": [
+    "联系学校",
+    "不教以暴制暴"
+   ],
+   "examples": [
+    "遇到联系学校",
+    "遇到不教以暴制暴",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "child-bullying-coach-3",
+   "name": "针对 专业支持 等情境给出可执行处置",
+   "description": "针对 专业支持 等情境给出可执行处置",
+   "tags": [
+    "专业支持"
+   ],
+   "examples": [
+    "遇到专业支持",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "校园欺凌专家",
+ "x-source": "skill-factory-originals"
+}

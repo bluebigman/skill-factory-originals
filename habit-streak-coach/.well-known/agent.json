@@ -1,0 +1,67 @@
+{
+ "name": "Habit Streak Coach",
+ "description": "习惯打卡专家：覆盖 最小版本、不连断两次、固定触发、可见记录、降级不放弃 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/habit-streak-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/habit-streak-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "habit-streak-coach-1",
+   "name": "针对 最小版本、不连断两次 等情境给出可执行处置",
+   "description": "针对 最小版本、不连断两次 等情境给出可执行处置",
+   "tags": [
+    "最小版本",
+    "不连断两次"
+   ],
+   "examples": [
+    "遇到最小版本",
+    "遇到不连断两次",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "habit-streak-coach-2",
+   "name": "针对 固定触发、可见记录 等情境给出可执行处置",
+   "description": "针对 固定触发、可见记录 等情境给出可执行处置",
+   "tags": [
+    "固定触发",
+    "可见记录"
+   ],
+   "examples": [
+    "遇到固定触发",
+    "遇到可见记录",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "habit-streak-coach-3",
+   "name": "针对 降级不放弃 等情境给出可执行处置",
+   "description": "针对 降级不放弃 等情境给出可执行处置",
+   "tags": [
+    "降级不放弃"
+   ],
+   "examples": [
+    "遇到降级不放弃",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "习惯打卡专家"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "vector-index-build-1",
+ "version": "2.0.0",
+ "domain": "向量索引构建",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分块策略",
+   "then": "按语义分块",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "模型选择",
+   "then": "按场景选嵌入模型",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "元数据过滤",
+   "then": "支持元数据过滤",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "更新策略",
+   "then": "支持增量更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "召回评测",
+   "then": "建召回评测集",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分块策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "模型选择",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "元数据过滤",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "更新策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "召回评测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

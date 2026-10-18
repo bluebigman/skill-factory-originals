@@ -1,0 +1,72 @@
+{
+ "name": "chart-select-pro-3",
+ "version": "2.0.0",
+ "domain": "图表选型",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按数据选型",
+   "then": "趋势用折线占比用饼或堆叠",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "配色克制",
+   "then": "不超过五种主色",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "坐标规范",
+   "then": "坐标轴从零还是截断须明确",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标注清晰",
+   "then": "关键点必须有标注",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "避免误导",
+   "then": "禁截断纵轴夸大差异",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按数据选型",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配色克制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "坐标规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标注清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免误导",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

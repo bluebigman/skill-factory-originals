@@ -1,0 +1,75 @@
+{
+ "name": "Private Domain Ops",
+ "description": "私域运营专家：覆盖 按价值分层、控制频次、给理由 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/private-domain-ops",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/private-domain-ops",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "private-domain-ops-1",
+   "name": "针对 按价值分层、控制频次 等情境给出可执行处置",
+   "description": "针对 按价值分层、控制频次 等情境给出可执行处置",
+   "tags": [
+    "按价值分层",
+    "控制频次"
+   ],
+   "examples": [
+    "遇到按价值分层",
+    "遇到控制频次",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "private-domain-ops-2",
+   "name": "针对 给理由、标签沉淀 等情境给出可执行处置",
+   "description": "针对 给理由、标签沉淀 等情境给出可执行处置",
+   "tags": [
+    "给理由",
+    "标签沉淀"
+   ],
+   "examples": [
+    "遇到给理由",
+    "遇到标签沉淀",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "private-domain-ops-3",
+   "name": "针对 看取关率 等情境给出可执行处置",
+   "description": "针对 看取关率 等情境给出可执行处置",
+   "tags": [
+    "看取关率"
+   ],
+   "examples": [
+    "遇到看取关率",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "私域运营专家",
+ "x-source": "skill-factory-originals"
+}

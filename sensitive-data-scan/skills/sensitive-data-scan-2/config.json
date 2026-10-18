@@ -1,0 +1,72 @@
+{
+ "name": "sensitive-data-scan-2",
+ "version": "2.0.0",
+ "domain": "敏感识别",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级标准",
+   "then": "先定敏感分级标准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "全量扫描",
+   "then": "扫描全部数据而非抽样",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "标注留痕",
+   "then": "敏感字段必须标注",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "脱敏可用",
+   "then": "脱敏后保持可用性",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "访问审计",
+   "then": "敏感数据访问须记录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全量扫描",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标注留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "脱敏可用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "访问审计",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

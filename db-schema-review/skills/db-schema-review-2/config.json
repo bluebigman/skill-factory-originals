@@ -1,0 +1,70 @@
+{
+ "name": "db-schema-review-2",
+ "version": "2.0.0",
+ "domain": "数据库设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "命名统一",
+   "then": "表与字段命名统一风格并写进规范",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "预留变更",
+   "then": "字段变更方案要先评估对存量数据的影响",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "命名统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预留变更",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "评估",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规范",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "索引",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

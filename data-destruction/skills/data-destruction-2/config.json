@@ -1,0 +1,72 @@
+{
+ "name": "data-destruction-2",
+ "version": "2.0.0",
+ "domain": "数据销毁规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按级销毁",
+   "then": "按密级选销毁方式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不可恢复",
+   "then": "销毁后不可恢复",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "见证留痕",
+   "then": "销毁过程留痕",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "介质处理",
+   "then": "介质单独处理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "合规优先",
+   "then": "符合法规要求",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按级销毁",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不可恢复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "见证留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "介质处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规优先",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

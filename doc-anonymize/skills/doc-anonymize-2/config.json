@@ -1,0 +1,72 @@
+{
+ "name": "doc-anonymize-2",
+ "version": "2.0.0",
+ "domain": "文档匿名化处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全字段覆盖",
+   "then": "姓名机构地点全处理",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "代称一致",
+   "then": "同一实体代称一致",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "保留可读",
+   "then": "匿名后仍可理解",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不可反推",
+   "then": "防通过组合信息反推",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "处理记录",
+   "then": "记录匿名规则",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全字段覆盖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "代称一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不可反推",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "处理记录",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

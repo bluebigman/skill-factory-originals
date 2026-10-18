@@ -1,0 +1,69 @@
+{
+ "name": "game-copy-write-3",
+ "version": "2.0.0",
+ "domain": "游戏文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "本地化预留",
+   "then": "文案避免谐音梗，便于本地化",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "本地化预留",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "教练",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "写成",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "文案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "术语",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "游戏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "用同",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

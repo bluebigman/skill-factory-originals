@@ -1,0 +1,72 @@
+{
+ "name": "user-research-synth-3",
+ "version": "2.0.0",
+ "domain": "用户研究",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "原始引语",
+   "then": "先贴原始引语再归纳",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "聚类成题",
+   "then": "按主题聚类成洞察",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "保留反例",
+   "then": "保留与主流相反的证据",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "区分事实解释",
+   "then": "事实与解释分开标注",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "落到决策",
+   "then": "每条洞察对应一个行动",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "原始引语",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "聚类成题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留反例",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "区分事实解释",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "落到决策",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

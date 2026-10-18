@@ -1,0 +1,74 @@
+{
+ "name": "game-economy-balance",
+ "version": "1.0.0",
+ "plugin": "game-economy-balance",
+ "description": "game-economy-balance — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for game-economy-balance tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/game-economy-balance.md"
+ ],
+ "agentName": "game-economy-balance",
+ "displayName": {
+  "zh": "游戏经济 先定产出 通胀监控",
+  "en": "game-economy-balance"
+ },
+ "profession": {
+  "zh": "游戏经济 数值平衡 顾问",
+  "en": "game-economy-balance"
+ },
+ "displayDescription": {
+  "zh": "游戏经济 数值平衡 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "game-economy-balance: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "03-GameSpatial",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "游戏经济",
+   "en": "game-economy-balance"
+  },
+  {
+   "en": "GameSpatial",
+   "zh": "GameSpatial"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到游戏经济怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划游戏经济",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查游戏经济",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到游戏经济怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/game-economy-balance-1/",
+  "./skills/game-economy-balance-2/",
+  "./skills/game-economy-balance-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "游戏经济专家",
+  "to": "游戏经济 先定产出 通胀监控",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

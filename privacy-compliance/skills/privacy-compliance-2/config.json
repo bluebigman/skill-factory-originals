@@ -1,0 +1,66 @@
+{
+ "name": "privacy-compliance-2",
+ "version": "2.0.0",
+ "domain": "隐私合规",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "可撤回",
+   "then": "提供撤回同意与删除的路径",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级保护",
+   "then": "按敏感度分级并采取相应保护",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "可撤回",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级保护",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "删除",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "最小",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "隐私",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "敏感",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "度分",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

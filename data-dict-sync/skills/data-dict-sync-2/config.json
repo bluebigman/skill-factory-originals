@@ -1,0 +1,72 @@
+{
+ "name": "data-dict-sync-2",
+ "version": "2.0.0",
+ "domain": "数据字典同步",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "自动采集",
+   "then": "从元数据自动采集",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变更检测",
+   "then": "检测结构变更",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "同步通知",
+   "then": "变更通知使用方",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "版本留痕",
+   "then": "字典版本化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "覆盖完整",
+   "then": "覆盖全部表与字段",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "自动采集",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "同步通知",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖完整",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

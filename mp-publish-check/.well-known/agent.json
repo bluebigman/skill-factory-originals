@@ -1,0 +1,67 @@
+{
+ "name": "Mp Publish Check",
+ "description": "公众号发布专家：覆盖 事实核对、敏感词、图片版权 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/mp-publish-check",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/mp-publish-check",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "mp-publish-check-1",
+   "name": "针对 事实核对、敏感词 等情境给出可执行处置",
+   "description": "针对 事实核对、敏感词 等情境给出可执行处置",
+   "tags": [
+    "事实核对",
+    "敏感词"
+   ],
+   "examples": [
+    "遇到事实核对",
+    "遇到敏感词",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mp-publish-check-2",
+   "name": "针对 图片版权、链接校验 等情境给出可执行处置",
+   "description": "针对 图片版权、链接校验 等情境给出可执行处置",
+   "tags": [
+    "图片版权",
+    "链接校验"
+   ],
+   "examples": [
+    "遇到图片版权",
+    "遇到链接校验",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "mp-publish-check-3",
+   "name": "针对 留档 等情境给出可执行处置",
+   "description": "针对 留档 等情境给出可执行处置",
+   "tags": [
+    "留档"
+   ],
+   "examples": [
+    "遇到留档",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "公众号发布专家"
+}

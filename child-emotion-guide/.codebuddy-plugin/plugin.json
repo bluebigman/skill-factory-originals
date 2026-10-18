@@ -1,0 +1,74 @@
+{
+ "name": "child-emotion-guide",
+ "version": "1.0.0",
+ "plugin": "child-emotion-guide",
+ "description": "Child Emotion Guide for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-emotion-guide.md"
+ ],
+ "skills": [
+  "./skills/child-emotion-guide-1",
+  "./skills/child-emotion-guide-2",
+  "./skills/child-emotion-guide-3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-emotion-guide",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Child Emotion Guide",
+  "zh": "儿童情绪 先排生理 降低刺激"
+ },
+ "profession": {
+  "en": "Child Emotion Guide",
+  "zh": "儿童情绪 哭闹安抚 引导"
+ },
+ "displayDescription": {
+  "en": "Handles Child Emotion Guide tasks end-to-end with built-in professional skills.",
+  "zh": "儿童情绪 哭闹安抚 引导：覆盖 先排生理、降低刺激、情绪命名 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先排生理"
+  },
+  {
+   "en": "practical capability",
+   "zh": "降低刺激"
+  },
+  {
+   "en": "practical capability",
+   "zh": "情绪命名"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先排生理怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到降低刺激怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到情绪命名怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先排生理怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "儿童情绪专家",
+  "to": "儿童情绪 先排生理 降低刺激",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

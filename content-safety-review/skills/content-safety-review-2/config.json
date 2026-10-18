@@ -1,0 +1,72 @@
+{
+ "name": "content-safety-review-2",
+ "version": "2.0.0",
+ "domain": "内容安全审阅",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分级审阅",
+   "then": "按风险分级确定流程",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "敏感识别",
+   "then": "识别违规与侵权风险",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "边界声明",
+   "then": "不生成违规内容",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "来源核验",
+   "then": "事实性内容核验来源",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "留痕可溯",
+   "then": "审阅记录保留",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分级审阅",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敏感识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来源核验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

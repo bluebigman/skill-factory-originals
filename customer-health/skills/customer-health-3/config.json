@@ -1,0 +1,72 @@
+{
+ "name": "customer-health-3",
+ "version": "2.0.0",
+ "domain": "客户健康度",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "多维输入",
+   "then": "使用频次与深度与工单",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "权重可解释",
+   "then": "每项权重有依据",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分档动作",
+   "then": "每档对应具体动作",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "人工复核",
+   "then": "低分自动复核",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "按样本校准",
+   "then": "定期用真实续约校准",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "多维输入",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权重可解释",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分档动作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "人工复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "按样本校准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

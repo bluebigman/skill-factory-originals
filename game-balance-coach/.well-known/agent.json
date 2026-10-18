@@ -1,0 +1,67 @@
+{
+ "name": "Game Balance Coach",
+ "description": "数值平衡专家：覆盖 先建基线、小步调整、看数据 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/game-balance-coach",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/game-balance-coach",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "game-balance-coach-1",
+   "name": "针对 先建基线、小步调整 等情境给出可执行处置",
+   "description": "针对 先建基线、小步调整 等情境给出可执行处置",
+   "tags": [
+    "先建基线",
+    "小步调整"
+   ],
+   "examples": [
+    "遇到先建基线",
+    "遇到小步调整",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "game-balance-coach-2",
+   "name": "针对 看数据、避免连锁 等情境给出可执行处置",
+   "description": "针对 看数据、避免连锁 等情境给出可执行处置",
+   "tags": [
+    "看数据",
+    "避免连锁"
+   ],
+   "examples": [
+    "遇到看数据",
+    "遇到避免连锁",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "game-balance-coach-3",
+   "name": "针对 公开变更 等情境给出可执行处置",
+   "description": "针对 公开变更 等情境给出可执行处置",
+   "tags": [
+    "公开变更"
+   ],
+   "examples": [
+    "遇到公开变更",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "数值平衡专家"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "customer-service-reply-pro",
+ "version": "1.0.0",
+ "plugin": "customer-service-reply-pro",
+ "description": "Customer Service Reply Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/customer-service-reply-pro.md"
+ ],
+ "skills": [
+  "./skills/complaint",
+  "./skills/platform-rule",
+  "./skills/reply-template"
+ ],
+ "expertType": "agent",
+ "agentName": "customer-service-reply-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Customer Service Reply Pro",
+  "zh": "客服回复 辩解 拖延"
+ },
+ "profession": {
+  "en": "Customer Service Reply Pro",
+  "zh": "客服回复 话术库 投诉处理"
+ },
+ "displayDescription": {
+  "en": "Handles Customer Service Reply Pro tasks end-to-end with built-in professional skills.",
+  "zh": "客服回复 话术库 投诉处理：投诉的升级处理流程；平台仲裁与规则的遵守；高频场景的回复结构。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "辩解"
+  },
+  {
+   "en": "practical capability",
+   "zh": "拖延"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无授权"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到辩解怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到拖延怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无授权怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到辩解怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:33",
+  "from": "客服回复专家",
+  "to": "客服回复 辩解 拖延",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

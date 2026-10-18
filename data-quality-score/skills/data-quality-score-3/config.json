@@ -1,0 +1,72 @@
+{
+ "name": "data-quality-score-3",
+ "version": "2.0.0",
+ "domain": "数据质量评分",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "多维评分",
+   "then": "完整性准确性时效性",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "权重合理",
+   "then": "权重有依据",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分层统计",
+   "then": "按表与域分层",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "趋势监控",
+   "then": "监控分数趋势",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "闭环整改",
+   "then": "低分项进入整改",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "多维评分",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "权重合理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分层统计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "趋势监控",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环整改",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

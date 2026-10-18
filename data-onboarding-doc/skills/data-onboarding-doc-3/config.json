@@ -1,0 +1,72 @@
+{
+ "name": "data-onboarding-doc-3",
+ "version": "2.0.0",
+ "domain": "数据上手文档",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层组织",
+   "then": "按角色分内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "示例可跑",
+   "then": "给可运行查询示例",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "常见问题",
+   "then": "列常见问题",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "更新及时",
+   "then": "随结构更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "检索友好",
+   "then": "标题即可搜",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例可跑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "常见问题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "更新及时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "检索友好",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

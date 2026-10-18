@@ -1,0 +1,72 @@
+{
+ "name": "data-sample-review-2",
+ "version": "2.0.0",
+ "domain": "数据抽样复核",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "抽样方法",
+   "then": "随机或分层抽样",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "样本量",
+   "then": "按置信度定样本量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "复核记录",
+   "then": "记录复核结论",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "问题回溯",
+   "then": "问题回溯到源头",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期执行",
+   "then": "按周期执行",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "抽样方法",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "样本量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复核记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问题回溯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期执行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

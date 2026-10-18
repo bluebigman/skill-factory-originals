@@ -1,0 +1,87 @@
+{
+ "name": "token-cost-control-2",
+ "version": "2.0.0",
+ "domain": "成本控制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全文回灌",
+   "then": "只回灌相关片段，不做全文重投",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "历史膨胀",
+   "then": "长会话按重要性压缩，保留决策与结论而非原始对话",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重复上下文",
+   "then": "稳定前缀做缓存复用，避免重复计费",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全文回灌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "历史膨胀",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复上下文",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "控制",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "上限",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "禁止",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "最大",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "复用",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "load-test-plan-1",
+ "version": "2.0.0",
+ "domain": "压测方案设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "目标明确",
+   "then": "明确压测目标指标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "场景真实",
+   "then": "场景贴近真实流量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "数据隔离",
+   "then": "压测数据与生产隔离",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "逐步加压",
+   "then": "阶梯加压找拐点",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果留档",
+   "then": "压测报告留存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "目标明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "场景真实",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逐步加压",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果留档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "declutter-rules",
+ "version": "2.0.0",
+ "domain": "家庭收纳",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "舍不得",
+   "then": "设一年未使用为硬线，纪念品限量一箱超箱即筛选",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "决策疲劳",
+   "then": "按类别而非房间整理，一次一类集中决策效率最高",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "家人不配合",
+   "then": "只处理自己的物品与他人区域，代扔必引发激烈冲突",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "扔了再用",
+   "then": "不确定项设待定箱封存 6 个月，未开箱即处理",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "贬值焦虑",
+   "then": "买入价不计入处置依据，沉没成本不是保留理由",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "断舍离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "舍不得扔",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "囤积",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "情绪物品",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "舍不得",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "决策疲劳",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "家人不配合",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "扔了再用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "贬值焦虑",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "依据",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "自己",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "最高",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "理由",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

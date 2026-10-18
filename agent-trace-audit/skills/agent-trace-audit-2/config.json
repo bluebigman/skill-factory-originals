@@ -1,0 +1,87 @@
+{
+ "name": "agent-trace-audit-2",
+ "version": "2.0.0",
+ "domain": "行为审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "静默失败",
+   "then": "「成功」判定必须来自下游复读，不接受「命令没报错」",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "多来源并发",
+   "then": "同一资源的并发操作必须先盘清所有来源，否则配额/锁必冲突",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "假绿",
+   "then": "检查器本身要能被反向验证：真违规必拦 + 误报必放",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "静默失败",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多来源并发",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "假绿",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "依据",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "留痕",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "成功",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "判定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "回答",
+   "source": "SKILL.md#L60"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

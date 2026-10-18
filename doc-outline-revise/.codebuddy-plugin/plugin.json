@@ -1,0 +1,74 @@
+{
+ "name": "doc-outline-revise",
+ "version": "1.0.0",
+ "plugin": "doc-outline-revise",
+ "description": "doc-outline-revise — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for doc-outline-revise tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/doc-outline-revise.md"
+ ],
+ "agentName": "doc-outline-revise",
+ "displayName": {
+  "zh": "大纲修订咨询 层级检查 逻辑链",
+  "en": "doc-outline-revise"
+ },
+ "profession": {
+  "zh": "大纲修订咨询 顾问",
+  "en": "doc-outline-revise"
+ },
+ "displayDescription": {
+  "zh": "大纲修订咨询 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "doc-outline-revise: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "大纲修订咨询",
+   "en": "doc-outline-revise"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到大纲修订咨询怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划大纲修订咨询",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查大纲修订咨询",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到大纲修订咨询怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/doc-outline-revise-1",
+  "./skills/doc-outline-revise-2",
+  "./skills/doc-outline-revise-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:36",
+  "from": "大纲修订咨询专家",
+  "to": "大纲修订咨询 层级检查 逻辑链",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

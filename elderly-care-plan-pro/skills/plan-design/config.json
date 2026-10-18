@@ -1,0 +1,121 @@
+{
+ "name": "plan-design",
+ "version": "2.0.0",
+ "domain": "养老规划",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "无规划",
+   "then": "提前明确居住方式（独居/同住/机构）并和家人达成一致",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "意愿忽略",
+   "then": "以老人本人意愿为首要，替其决定会引发长期抵触",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "经济准备",
+   "then": "估算养老金与照护支出的缺口，越早准备压力越小",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "医疗安排",
+   "then": "明确就近医院与常用药获取渠道，突发时不慌乱",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预案",
+   "then": "设突发情况联络链与决策人，紧急时集体讨论必然延误",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "养老",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "独居",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "同住",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无规划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "意愿忽略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "经济准备",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "医疗安排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预案",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "机构",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "child-emotion-coach",
+ "version": "1.0.0",
+ "plugin": "child-emotion-coach",
+ "description": "Child Emotion Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-emotion-coach.md"
+ ],
+ "skills": [
+  "./skills/emotion-identify",
+  "./skills/emotion-naming",
+  "./skills/soothe-method"
+ ],
+ "expertType": "agent",
+ "agentName": "child-emotion-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Child Emotion Coach",
+  "zh": "儿童情绪 哭闹 发脾气"
+ },
+ "profession": {
+  "en": "Child Emotion Coach",
+  "zh": "儿童情绪 哭闹安抚 情绪识别"
+ },
+ "displayDescription": {
+  "en": "Handles Child Emotion Coach tasks end-to-end with built-in professional skills.",
+  "zh": "儿童情绪 哭闹安抚 情绪识别：识别孩子哭闹背后的真实需求；帮孩子建立情绪词汇与表达能力。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "crying",
+   "zh": "哭闹"
+  },
+  {
+   "en": "tantrum",
+   "zh": "发脾气"
+  },
+  {
+   "en": "practical capability",
+   "zh": "打滚"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "Help me with crying",
+   "zh": "帮我哭闹"
+  },
+  {
+   "en": "Help me with tantrum",
+   "zh": "帮我发脾气"
+  },
+  {
+   "en": "Help me with practical capability",
+   "zh": "帮我打滚"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "Help me with crying",
+  "zh": "帮我哭闹"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:30",
+  "from": "儿童情绪专家",
+  "to": "儿童情绪 哭闹 发脾气",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

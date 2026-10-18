@@ -1,0 +1,72 @@
+{
+ "name": "consulting-framework-2",
+ "version": "2.0.0",
+ "domain": "咨询框架",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "问题树",
+   "then": "先拆解问题树",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "假设驱动",
+   "then": "提出假设再验证",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "数据支撑",
+   "then": "结论有数据支撑",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "可落地",
+   "then": "给可执行建议",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "边界声明",
+   "then": "不替代专业意见",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "问题树",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "假设驱动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据支撑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可落地",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "边界声明",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

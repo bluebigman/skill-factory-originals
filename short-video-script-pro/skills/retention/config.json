@@ -1,0 +1,121 @@
+{
+ "name": "retention",
+ "version": "2.0.0",
+ "domain": "短视频脚本",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "时长过长",
+   "then": "信息量决定时长，30 秒能讲清就别做 3 分钟",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "中段流失",
+   "then": "每 10 秒设一个信息点或转场，防中段流失",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "结尾拖沓",
+   "then": "结论说完立即结束，冗长收尾会拉低完播",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "循环设计",
+   "then": "首尾呼应可引导二次播放，提升完播数据",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "数据复盘",
+   "then": "按 3 秒/10 秒/完播三个节点看流失，定位问题段落",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "完播",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "长度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时长过长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "中段流失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结尾拖沓",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "循环设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "核心",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "开头",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "word-track-review-3",
+ "version": "2.0.0",
+ "domain": "Word",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "修订可见",
+   "then": "先开修订模式再改，直接改原文会让作者无法分辨",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "批注聚焦",
+   "then": "批注只写问题与建议，不替作者下结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "变动摘要",
+   "then": "末尾给改动清单，逐条对应页码",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "接受前复核",
+   "then": "接受全部修订前先逐条比对关键数字",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本留痕",
+   "then": "保留原文件副本，改名加日期",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "修订可见",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "批注聚焦",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变动摘要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "接受前复核",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

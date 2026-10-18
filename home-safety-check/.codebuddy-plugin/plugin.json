@@ -1,0 +1,74 @@
+{
+ "name": "home-safety-check",
+ "version": "1.0.0",
+ "plugin": "home-safety-check",
+ "description": "Home Safety Check for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-safety-check.md"
+ ],
+ "skills": [
+  "./skills/home-safety-check-1",
+  "./skills/home-safety-check-2",
+  "./skills/home-safety-check-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-safety-check",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Safety Check",
+  "zh": "居家安全 儿童风险 燃气"
+ },
+ "profession": {
+  "en": "Home Safety Check",
+  "zh": "居家安全 隐患排查 防护"
+ },
+ "displayDescription": {
+  "en": "Handles Home Safety Check tasks end-to-end with built-in professional skills.",
+  "zh": "居家安全 隐患排查 防护：覆盖 儿童风险、燃气、用电、坠物 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "儿童风险"
+  },
+  {
+   "en": "practical capability",
+   "zh": "燃气"
+  },
+  {
+   "en": "practical capability",
+   "zh": "用电"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到儿童风险怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到燃气怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到用电怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到儿童风险怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "居家安全专家",
+  "to": "居家安全 儿童风险 燃气",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

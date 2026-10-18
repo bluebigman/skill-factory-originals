@@ -1,0 +1,121 @@
+{
+ "name": "budget",
+ "version": "2.0.0",
+ "domain": "旅行规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只算大头",
+   "then": "预算须含交通/住宿/餐饮/门票/购物/应急六项",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "应急缺失",
+   "then": "预留总额 10% 作为应急金",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "比价耗时",
+   "then": "只对住宿与交通比价，其余按体验优先",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "汇率",
+   "then": "跨境提前确认支付方式与手续费",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "记账",
+   "then": "每日记录实际支出，超支可在中途调整",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "花费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "省钱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "性价比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只算大头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "应急缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "比价耗时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "汇率",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记账",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每日",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "预留",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "其余",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "体验",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

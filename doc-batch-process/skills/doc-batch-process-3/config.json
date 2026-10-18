@@ -1,0 +1,72 @@
+{
+ "name": "doc-batch-process-3",
+ "version": "2.0.0",
+ "domain": "文档批处",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "模板先行",
+   "then": "先固化模板",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "变量清单",
+   "then": "列清全部变量",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "小样验证",
+   "then": "先跑小样",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常隔离",
+   "then": "单份失败不阻塞",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果核对",
+   "then": "批后抽样核对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "模板先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变量清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小样验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果核对",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

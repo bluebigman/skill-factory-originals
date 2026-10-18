@@ -1,0 +1,69 @@
+{
+ "name": "project-task-split-3",
+ "version": "2.0.0",
+ "domain": "项目任务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "风险前置",
+   "then": "把最不确定的事排在前面做",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "风险前置",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "交付",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "拆解",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "共同",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "确定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "独立",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "粒度",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

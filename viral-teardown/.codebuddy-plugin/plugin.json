@@ -1,0 +1,74 @@
+{
+ "name": "viral-teardown",
+ "version": "1.0.0",
+ "plugin": "viral-teardown",
+ "description": "Viral Teardown for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/viral-teardown.md"
+ ],
+ "skills": [
+  "./skills/viral-teardown-1",
+  "./skills/viral-teardown-2",
+  "./skills/viral-teardown-3"
+ ],
+ "expertType": "agent",
+ "agentName": "viral-teardown",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Viral Teardown",
+  "zh": "爆款拆解 拆结构不抄内容"
+ },
+ "profession": {
+  "en": "Viral Teardown",
+  "zh": "爆款拆解 结构复制 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Viral Teardown tasks end-to-end with built-in professional skills.",
+  "zh": "爆款拆解 结构复制 顾问：覆盖 拆结构不抄内容、找共性、看适配 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "爆款拆解",
+   "en": "viral-teardown"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到爆款拆解怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到结构复制怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到爆款拆解怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "爆款拆解专家",
+  "to": "爆款拆解 拆结构不抄内容",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

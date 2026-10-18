@@ -1,0 +1,72 @@
+{
+ "name": "error-code-registry-2",
+ "version": "2.0.0",
+ "domain": "错误码注册表",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "集中登记",
+   "then": "错误码集中登记",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分段分配",
+   "then": "按模块分段",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "含义稳定",
+   "then": "同码语义不随版本变",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "文档同步",
+   "then": "与实现同步更新",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "对外收敛",
+   "then": "对外暴露粗粒度",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "集中登记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分段分配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "含义稳定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文档同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对外收敛",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

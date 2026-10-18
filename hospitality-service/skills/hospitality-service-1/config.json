@@ -1,0 +1,72 @@
+{
+ "name": "hospitality-service-1",
+ "version": "2.0.0",
+ "domain": "服务标准设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "场景化",
+   "then": "按场景定标准",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "可执行",
+   "then": "标准可执行可检查",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "培训配套",
+   "then": "配培训材料",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "检查机制",
+   "then": "定期检查",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "反馈改进",
+   "then": "按反馈改进",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "场景化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "培训配套",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "检查机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反馈改进",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

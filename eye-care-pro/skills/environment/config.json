@@ -1,0 +1,121 @@
+{
+ "name": "environment",
+ "version": "2.0.0",
+ "domain": "用眼健康",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "单光源",
+   "then": "台灯须与房间顶灯同开，明暗反差是视疲劳主因",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "直射眩光",
+   "then": "光源位于侧前方并避免直射眼睛或屏幕",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "阅读距离",
+   "then": "阅读保持 33-40cm，躺卧阅读难以维持距离",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "字体过小",
+   "then": "调大字号替代眯眼，眯眼是近视加深的信号",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "户外光照",
+   "then": "每日户外 2 小时对延缓儿童近视进展有明确帮助",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "照明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "台灯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阅读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境光",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单光源",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "直射眩光",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阅读距离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字体过小",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "户外光照",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每日",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "儿童",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设置",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "保持",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

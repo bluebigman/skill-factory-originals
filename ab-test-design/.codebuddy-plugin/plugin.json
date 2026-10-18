@@ -1,0 +1,74 @@
+{
+ "name": "ab-test-design",
+ "version": "1.0.0",
+ "plugin": "ab-test-design",
+ "description": "Ab Test Design for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/ab-test-design.md"
+ ],
+ "skills": [
+  "./skills/ab-test-design-1",
+  "./skills/ab-test-design-2",
+  "./skills/ab-test-design-3"
+ ],
+ "expertType": "agent",
+ "agentName": "ab-test-design",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Ab Test Design",
+  "zh": "实验设计 单变量 先定主指标"
+ },
+ "profession": {
+  "en": "Ab Test Design",
+  "zh": "实验设计 指标定义 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Ab Test Design tasks end-to-end with built-in professional skills.",
+  "zh": "实验设计 指标定义 顾问：覆盖 单变量、先定主指标、算样本量 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "实验设计",
+   "en": "ab-test-design"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到实验设计怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到指标定义怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到实验设计怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:27",
+  "from": "实验设计专家",
+  "to": "实验设计 单变量 先定主指标",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

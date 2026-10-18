@@ -1,0 +1,121 @@
+{
+ "name": "title-cover",
+ "version": "2.0.0",
+ "domain": "小红书笔记",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标题无痛点",
+   "then": "标题须含具体人群+痛点+结果，泛标题点击率极低",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "封面文字过多",
+   "then": "封面文字控制在 10 字内，小图看不清长文案",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无对比",
+   "then": "前后对比类封面点击率显著更高",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "标题党",
+   "then": "标题与内容不符会掉粉并影响账号权重",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "统一风格",
+   "then": "封面风格统一可提升主页转化，风格跳跃会流失关注",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标题",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "封面",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "点击率",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "笔记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题无痛点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "封面文字过多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标题党",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "统一风格",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "控制",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "转化",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "平台",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "导致",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "流失",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

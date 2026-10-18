@@ -1,0 +1,72 @@
+{
+ "name": "product-roadmap-pro-3",
+ "version": "2.0.0",
+ "domain": "产品路线",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "价值成本比",
+   "then": "按价值与成本比排序",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "禁止插队",
+   "then": "无标准不得插队",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "主题化组织",
+   "then": "按主题组织而非功能堆叠",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "定期校准",
+   "then": "每季度复盘并调整",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "承诺留余",
+   "then": "对外承诺留出余量",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "价值成本比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "禁止插队",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "主题化组织",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期校准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "承诺留余",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

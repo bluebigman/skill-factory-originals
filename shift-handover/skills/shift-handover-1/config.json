@@ -1,0 +1,72 @@
+{
+ "name": "shift-handover-1",
+ "version": "2.0.0",
+ "domain": "交接班管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "清单化",
+   "then": "交接清单逐项",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "异常重点",
+   "then": "异常事项重点交接",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "双签确认",
+   "then": "双方签字确认",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "留痕",
+   "then": "交接记录留存",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "问题跟踪",
+   "then": "未决问题跟踪",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常重点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双签确认",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问题跟踪",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "content-calendar-2",
+ "version": "2.0.0",
+ "domain": "内容日历",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标注状态",
+   "then": "草稿/待审/已发三态标注清楚",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "留缓冲",
+   "then": "每周留一天空档应对突发",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标注状态",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "留缓冲",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "提前",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "至少",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "临时",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "时内",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "先排",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

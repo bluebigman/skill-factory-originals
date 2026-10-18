@@ -1,0 +1,49 @@
+{
+ "name": "restaurant-diagnose-3",
+ "version": "2.0.0",
+ "domain": "餐饮经营",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "看复购",
+   "then": "复购率比单日流水更能说明问题",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "看复购",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "区分",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "单日",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "流水",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

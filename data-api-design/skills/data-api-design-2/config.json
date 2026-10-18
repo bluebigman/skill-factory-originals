@@ -1,0 +1,72 @@
+{
+ "name": "data-api-design-2",
+ "version": "2.0.0",
+ "domain": "数据接口设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "聚合优先",
+   "then": "给聚合接口减少调用",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分页规范",
+   "then": "统一分页参数",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "限流保护",
+   "then": "设限流防滥用",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "字段可选",
+   "then": "支持字段选择",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本管理",
+   "then": "接口版本化",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "聚合优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分页规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "限流保护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "字段可选",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本管理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

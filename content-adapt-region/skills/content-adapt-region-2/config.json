@@ -1,0 +1,72 @@
+{
+ "name": "content-adapt-region-2",
+ "version": "2.0.0",
+ "domain": "内容区域适配",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "节庆对齐",
+   "then": "对齐目标市场节庆",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "文化审查",
+   "then": "审查文化禁忌",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "语言适配",
+   "then": "按目标语言改写",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "示例本地化",
+   "then": "换成当地案例",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "合规核验",
+   "then": "符合当地法规",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "节庆对齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文化审查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "语言适配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "示例本地化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合规核验",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "forge-demo-incident",
+ "name": "故障复盘 时间线、根因、固化措施",
+ "description": "故障复盘：时间线、根因、固化措施",
+ "kind": "expert",
+ "tags": [
+  "forge-demo-incident-1",
+  "forge-demo-incident-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "forge-demo-incident-core",
+   "name": "故障复盘",
+   "role": "core",
+   "items": [
+    {
+     "id": "forge-demo-incident-1",
+     "name": "时间线还原",
+     "summary": "时间线、根因、固化措施"
+    },
+    {
+     "id": "forge-demo-incident-2",
+     "name": "根因定位",
+     "summary": "时间线、根因、固化措施"
+    },
+    {
+     "id": "forge-demo-incident-3",
+     "name": "固化措施",
+     "summary": "时间线、根因、固化措施"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

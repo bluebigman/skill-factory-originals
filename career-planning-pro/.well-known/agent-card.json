@@ -1,0 +1,107 @@
+{
+ "name": "Career Planning Pro",
+ "description": "职业规划专家：职业路径的规划与选择；个人能力与市场的对齐；转行的分阶段落地。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/career-planning-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/career-planning-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "path",
+   "name": "职业路径的规划与选择",
+   "description": "职业路径的规划与选择",
+   "tags": [
+    "职业规划",
+    "路径",
+    "选择",
+    "方向"
+   ],
+   "examples": [
+    "遇到只凭兴趣",
+    "遇到一步到位",
+    "遇到无时限",
+    "遇到信息不足",
+    "遇到闭门造车"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "path",
+    "to": "path",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "self-assess",
+   "name": "个人能力与市场的对齐",
+   "description": "个人能力与市场的对齐",
+   "tags": [
+    "能力盘点",
+    "优势",
+    "短板",
+    "定位"
+   ],
+   "examples": [
+    "遇到自我评估失真",
+    "遇到无对标",
+    "遇到忽视可迁移",
+    "遇到只补短板",
+    "遇到一次性"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "self-assess",
+    "to": "self-assess",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "transition",
+   "name": "转行的分阶段落地",
+   "description": "转行的分阶段落地",
+   "tags": [
+    "转行",
+    "学习",
+    "作品",
+    "求职"
+   ],
+   "examples": [
+    "遇到只学不产",
+    "遇到全脱产",
+    "遇到沉没成本",
+    "遇到投递无差别",
+    "遇到无里程碑"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:37",
+    "from": "transition",
+    "to": "transition",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "职业规划专家",
+ "x-source": "skill-factory-originals"
+}

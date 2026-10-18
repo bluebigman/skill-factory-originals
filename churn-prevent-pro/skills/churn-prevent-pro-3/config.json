@@ -1,0 +1,72 @@
+{
+ "name": "churn-prevent-pro-3",
+ "version": "2.0.0",
+ "domain": "客户流失",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "行为信号",
+   "then": "监控活跃频次与关键功能使用变化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级干预",
+   "then": "按风险等级匹配干预力度",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "归因访谈",
+   "then": "流失前后做归因访谈",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "补救具体",
+   "then": "补求方案必须具体可执行",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "原因入库",
+   "then": "流失原因入库用于产品改进",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "行为信号",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级干预",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归因访谈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "补救具体",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "原因入库",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

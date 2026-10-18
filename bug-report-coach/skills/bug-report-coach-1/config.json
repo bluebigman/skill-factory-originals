@@ -1,0 +1,62 @@
+{
+ "name": "bug-report-coach-1",
+ "version": "2.0.0",
+ "domain": "缺陷报告",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "复现优先",
+   "then": "没有稳定复现步骤的缺陷单先补复现",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "含环境",
+   "then": "记录版本、环境、账号等必要条件",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "复现优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "含环境",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "稳定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "报告",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "test-combinatorial-3",
+ "version": "2.0.0",
+ "domain": "组合测试设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "参数建模",
+   "then": "先建参数与取值",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "两两覆盖",
+   "then": "用两两组合替代全组合",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "约束声明",
+   "then": "声明非法组合",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "用例精简",
+   "then": "在覆盖前提下精简用例数",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "覆盖报告",
+   "then": "输出覆盖统计",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "参数建模",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "两两覆盖",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "约束声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用例精简",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "覆盖报告",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

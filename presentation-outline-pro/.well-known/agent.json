@@ -1,0 +1,99 @@
+{
+ "name": "Presentation Outline Pro",
+ "description": "演示大纲专家：演示的叙事结构设计；演讲前的准备与预案；单页信息的设计规范。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/presentation-outline-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/presentation-outline-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "narrative",
+   "name": "演示的叙事结构设计",
+   "description": "演示的叙事结构设计",
+   "tags": [
+    "叙事",
+    "结构",
+    "逻辑",
+    "开头"
+   ],
+   "examples": [
+    "遇到不知讲什么",
+    "遇到开头无效",
+    "遇到结构松散",
+    "遇到信息过载",
+    "遇到结尾无力"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "narrative",
+    "to": "narrative",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "rehearsal",
+   "name": "演讲前的准备与预案",
+   "description": "演讲前的准备与预案",
+   "tags": [
+    "演练",
+    "提问",
+    "超时",
+    "紧张"
+   ],
+   "examples": [
+    "遇到超时",
+    "遇到被问倒",
+    "遇到紧张",
+    "遇到设备故障",
+    "遇到打断"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "rehearsal",
+    "to": "rehearsal",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "slide-design",
+   "name": "单页信息的设计规范",
+   "description": "单页信息的设计规范",
+   "tags": [
+    "排版",
+    "字体",
+    "配色",
+    "图示"
+   ],
+   "examples": [
+    "遇到文字过多",
+    "遇到图示混乱",
+    "遇到配色刺眼",
+    "遇到字号过小",
+    "遇到对齐随意"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:49",
+    "from": "slide-design",
+    "to": "slide-design",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "演示大纲专家"
+}

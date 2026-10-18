@@ -1,0 +1,74 @@
+{
+ "name": "table-to-chart",
+ "version": "1.0.0",
+ "plugin": "table-to-chart",
+ "description": "table-to-chart — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for table-to-chart tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/table-to-chart.md"
+ ],
+ "agentName": "table-to-chart",
+ "displayName": {
+  "zh": "表格转图表 先定意图 一图一义",
+  "en": "table-to-chart"
+ },
+ "profession": {
+  "zh": "表格转图表 顾问",
+  "en": "table-to-chart"
+ },
+ "displayDescription": {
+  "zh": "表格转图表 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "table-to-chart: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "表格转图表",
+   "en": "table-to-chart"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到表格转图表怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划表格转图表",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查表格转图表",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到表格转图表怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/table-to-chart-1",
+  "./skills/table-to-chart-2",
+  "./skills/table-to-chart-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "表格转图表专家",
+  "to": "表格转图表 先定意图 一图一义",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

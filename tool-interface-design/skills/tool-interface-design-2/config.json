@@ -1,0 +1,87 @@
+{
+ "name": "tool-interface-design-2",
+ "version": "2.0.0",
+ "domain": "工具设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "描述太短",
+   "then": "docstring 要写到「不看源码也能正确调用」",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "术语黑话",
+   "then": "改写为使用者视角的自然语言，禁止内部代号",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "场景缺失",
+   "then": "至少给 3 个「什么时候用」的例子",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "描述太短",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "术语黑话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "场景缺失",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "工具",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "禁止",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "全部",
+   "source": "SKILL.md#L60"
+  },
+  {
+   "term": "规范",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "显式",
+   "source": "SKILL.md#L59"
+  },
+  {
+   "term": "自然",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

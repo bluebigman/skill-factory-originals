@@ -1,0 +1,70 @@
+{
+ "name": "mp-title-coach-1",
+ "version": "2.0.0",
+ "domain": "公众号标题",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "具体胜抽象",
+   "then": "给具体对象与数字，避免空泛词",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "前置价值",
+   "then": "把读者收益放前半句",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "具体胜抽象",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "前置价值",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标题",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "数字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "读者",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "收益",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "公众号",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

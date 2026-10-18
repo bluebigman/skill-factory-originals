@@ -1,0 +1,72 @@
+{
+ "name": "agent-obs-dashboard-3",
+ "version": "2.0.0",
+ "domain": "观测看板",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "指标精简",
+   "then": "看板只放关键指标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "层次分明",
+   "then": "总览到明细",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异常高亮",
+   "then": "异常须视觉突出",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "下钻支持",
+   "then": "支持逐层下钻",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "告警联动",
+   "then": "点击可联动告警",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "指标精简",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "层次分明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常高亮",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "下钻支持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "告警联动",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

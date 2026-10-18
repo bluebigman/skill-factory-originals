@@ -1,0 +1,21 @@
+{
+ "rules": [
+  {
+   "when": "用例空泛",
+   "then": "改成带前置条件的可执行步骤"
+  },
+  {
+   "when": "覆盖不足",
+   "then": "补边界用例与异常路径"
+  }
+ ],
+ "keywords": [
+  "用例",
+  "覆盖",
+  "可复现"
+ ],
+ "boundary": "按验收标准派生可执行、可复现的用例",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,121 @@
+{
+ "name": "muscle-gain",
+ "version": "2.0.0",
+ "domain": "增肌减脂",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "热量不足",
+   "then": "增肌须热量盈余（约 +300 千卡/日），不足则练而无果",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "蛋白不足",
+   "then": "蛋白质按每公斤体重 1.6-2.0 克，分散到 4 餐",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "训练容量",
+   "then": "每个肌群每周 10-20 组，过少不刺激、过多难恢复",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "渐进超负荷",
+   "then": "每 2 周小幅加重量或次数，无渐进则无增长",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "恢复不足",
+   "then": "同一肌群间隔 48 小时以上，睡眠不足会抵消训练",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "增肌",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "力量训练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "蛋白质",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "增重",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "热量不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "蛋白不足",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "训练容量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "渐进超负荷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复不足",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "计划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "选择",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "单独",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "体重",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "则无",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

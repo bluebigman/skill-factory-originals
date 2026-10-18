@@ -1,0 +1,75 @@
+{
+ "name": "Seo Content Plan",
+ "description": "选题布局专家：覆盖 需求优先、一页一意图、内链结构、标题兑现 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/seo-content-plan",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/seo-content-plan",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "seo-content-plan-1",
+   "name": "针对 需求优先、一页一意图 等情境给出可执行处置",
+   "description": "针对 需求优先、一页一意图 等情境给出可执行处置",
+   "tags": [
+    "需求优先",
+    "一页一意图"
+   ],
+   "examples": [
+    "遇到需求优先",
+    "遇到一页一意图",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "seo-content-plan-2",
+   "name": "针对 内链结构、标题兑现 等情境给出可执行处置",
+   "description": "针对 内链结构、标题兑现 等情境给出可执行处置",
+   "tags": [
+    "内链结构",
+    "标题兑现"
+   ],
+   "examples": [
+    "遇到内链结构",
+    "遇到标题兑现",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "seo-content-plan-3",
+   "name": "针对 定期复检 等情境给出可执行处置",
+   "description": "针对 定期复检 等情境给出可执行处置",
+   "tags": [
+    "定期复检"
+   ],
+   "examples": [
+    "遇到定期复检",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "选题布局专家",
+ "x-source": "skill-factory-originals"
+}

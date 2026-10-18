@@ -1,0 +1,70 @@
+{
+ "name": "family-finance-coach-1",
+ "version": "2.0.0",
+ "domain": "家庭财务",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先储蓄后消费",
+   "then": "发薪即固定比例储蓄",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分类预算",
+   "then": "固定/弹性/储蓄三类",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先储蓄后消费",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分类预算",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "比例",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "三类",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "规划",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "弹性",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

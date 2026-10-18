@@ -1,0 +1,72 @@
+{
+ "name": "spreadsheet-audit-pro-3",
+ "version": "2.0.0",
+ "domain": "表格审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "公式全查",
+   "then": "全量检查公式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "硬编码",
+   "then": "识别硬编码数值",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异常值",
+   "then": "识别异常数值",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "逻辑校验",
+   "then": "关键合计须交叉验证",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "修改留痕",
+   "then": "审计修改留痕",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "公式全查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "硬编码",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常值",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逻辑校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "修改留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

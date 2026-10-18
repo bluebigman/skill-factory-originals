@@ -1,0 +1,72 @@
+{
+ "name": "safety-management-3",
+ "version": "2.0.0",
+ "domain": "安全管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分区排查",
+   "then": "按区域排查隐患",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "高危优先",
+   "then": "高危项优先整改",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "闭环整改",
+   "then": "整改闭环",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "培训到位",
+   "then": "安全培训覆盖",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期演练",
+   "then": "应急演练",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分区排查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "高危优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "闭环整改",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "培训到位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期演练",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

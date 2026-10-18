@@ -1,0 +1,72 @@
+{
+ "name": "newsletter-compose-3",
+ "version": "2.0.0",
+ "domain": "团队周报编排",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "固定栏目",
+   "then": "栏目稳定便于对比阅读",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "重点前置",
+   "then": "本周三件大事放首屏",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "数据可视化",
+   "then": "关键指标用表格不堆文字",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "问题不藏",
+   "then": "风险与阻塞单列一节",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "下期预告",
+   "then": "末尾列下期重点",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "固定栏目",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重点前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据可视化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问题不藏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "下期预告",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

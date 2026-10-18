@@ -1,0 +1,107 @@
+{
+ "name": "Content Optimization Pro",
+ "description": "内容优化专家：营销场景的文案结构；社交场景的文案写法；已有内容的优化方法。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/content-optimization-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/content-optimization-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "marketing-copy",
+   "name": "营销场景的文案结构",
+   "description": "营销场景的文案结构",
+   "tags": [
+    "营销",
+    "卖点",
+    "转化",
+    "痛点"
+   ],
+   "examples": [
+    "遇到自说自话",
+    "遇到无差异化",
+    "遇到无证据",
+    "遇到卖点过多",
+    "遇到合规"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:38",
+    "from": "marketing-copy",
+    "to": "marketing-copy",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "moments",
+   "name": "社交场景的文案写法",
+   "description": "社交场景的文案写法",
+   "tags": [
+    "朋友圈",
+    "社交文案",
+    "点赞",
+    "转发"
+   ],
+   "examples": [
+    "遇到自嗨",
+    "遇到硬广",
+    "遇到过长",
+    "遇到无配图",
+    "遇到频率"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:38",
+    "from": "moments",
+    "to": "moments",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "optimize",
+   "name": "已有内容的优化方法",
+   "description": "已有内容的优化方法",
+   "tags": [
+    "内容优化",
+    "改稿",
+    "转化低",
+    "完读"
+   ],
+   "examples": [
+    "遇到开头弱",
+    "遇到信息密度低",
+    "遇到无利益点",
+    "遇到无行动",
+    "遇到同质化"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:38",
+    "from": "optimize",
+    "to": "optimize",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "内容优化专家",
+ "x-source": "skill-factory-originals"
+}

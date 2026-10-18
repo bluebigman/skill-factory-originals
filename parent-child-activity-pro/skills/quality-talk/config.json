@@ -1,0 +1,121 @@
+{
+ "name": "quality-talk",
+ "version": "2.0.0",
+ "domain": "亲子活动",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "问什么都说还行",
+   "then": "改封闭式提问为具体场景提问（今天哪件事最麻烦）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "只顾说教",
+   "then": "对话中家长发言占比控制在 1/3 以内",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "不回应",
+   "then": "并肩做事时对话（开车/散步）比面对面质问更易开口",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "负面开头",
+   "then": "开场禁用成绩与问题清单，先建立连接再谈事",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "敷衍回答",
+   "then": "接受简短回答并留出沉默空间，追问逼问会彻底关闭对话",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "聊天",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不说话",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敷衍",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问答终结",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "问什么都说还行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只顾说教",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不回应",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "负面开头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "敷衍回答",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L38"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

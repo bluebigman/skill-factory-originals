@@ -1,0 +1,121 @@
+{
+ "name": "transition",
+ "version": "2.0.0",
+ "domain": "职业规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只学不产",
+   "then": "每阶段必须有可展示产物，纯学习无法证明能力",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "全脱产",
+   "then": "先兼职过渡降低财务风险，全脱产压力会扭曲判断",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "沉没成本",
+   "then": "不因已投入年限而拒绝转向，已投入无法回收",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "投递无差别",
+   "then": "按目标公司定制投递，海投回复率极低",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无里程碑",
+   "then": "设 30/60/90 天可验证里程碑并定期复盘",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "转行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "学习",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "作品",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "求职",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只学不产",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "全脱产",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沉没成本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "投递无差别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无里程碑",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L39"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

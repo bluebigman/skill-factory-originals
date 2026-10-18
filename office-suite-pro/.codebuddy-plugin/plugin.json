@@ -1,0 +1,66 @@
+{
+ "name": "office-suite-pro",
+ "version": "1.0.0",
+ "plugin": "office-suite-pro",
+ "description": "Office Suite Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/office-suite-pro.md"
+ ],
+ "skills": [
+  "./skills/data-process",
+  "./skills/formula",
+  "./skills/presentation"
+ ],
+ "expertType": "agent",
+ "agentName": "office-suite-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Office Suite Pro",
+  "zh": "excel 公式 ppt"
+ },
+ "profession": {
+  "en": "Office Suite Pro",
+  "zh": "表格应用 公式 演示制作"
+ },
+ "displayDescription": {
+  "en": "Handles Office Suite Pro tasks end-to-end with built-in professional skills.",
+  "zh": "表格应用 公式 演示制作：表格数据的整理与分析；常用公式与查找函数；PPT 的结构与呈现。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "原始与计算混放"
+  },
+  {
+   "en": "practical capability",
+   "zh": "硬编码"
+  },
+  {
+   "en": "practical capability",
+   "zh": "重复行"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到原始与计算混放怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到硬编码怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到重复行怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到原始与计算混放怎么办"
+ }
+}

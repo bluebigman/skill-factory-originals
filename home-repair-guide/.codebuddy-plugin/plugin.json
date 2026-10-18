@@ -1,0 +1,74 @@
+{
+ "name": "home-repair-guide",
+ "version": "1.0.0",
+ "plugin": "home-repair-guide",
+ "description": "Home Repair Guide for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-repair-guide.md"
+ ],
+ "skills": [
+  "./skills/home-repair-guide-1",
+  "./skills/home-repair-guide-2",
+  "./skills/home-repair-guide-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-repair-guide",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Repair Guide",
+  "zh": "家居维修 描述问题 比价"
+ },
+ "profession": {
+  "en": "Home Repair Guide",
+  "zh": "家居维修 报修沟通 对接"
+ },
+ "displayDescription": {
+  "en": "Handles Home Repair Guide tasks end-to-end with built-in professional skills.",
+  "zh": "家居维修 报修沟通 对接：覆盖 描述问题、比价、验收、费用 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "描述问题"
+  },
+  {
+   "en": "practical capability",
+   "zh": "比价"
+  },
+  {
+   "en": "practical capability",
+   "zh": "验收"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到描述问题怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到比价怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到验收怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到描述问题怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "家居维修专家",
+  "to": "家居维修 描述问题 比价",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

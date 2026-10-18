@@ -1,0 +1,72 @@
+{
+ "name": "office-struct-extract-1",
+ "version": "2.0.0",
+ "domain": "Office",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定字段",
+   "then": "抽前先列目标字段与类型",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "多格式统一",
+   "then": "docx/pptx/xlsx 统一输出同构结构",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "缺失标注",
+   "then": "缺字段标 null 不猜填",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "编号保留",
+   "then": "保留原始编号便于回溯",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "抽后校验",
+   "then": "抽完统计条数与源文档段落数比对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定字段",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多格式统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缺失标注",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "编号保留",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽后校验",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

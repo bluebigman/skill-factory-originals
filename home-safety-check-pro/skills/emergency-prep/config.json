@@ -1,0 +1,121 @@
+{
+ "name": "emergency-prep",
+ "version": "2.0.0",
+ "domain": "居家安全",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "无预案",
+   "then": "全家演练一次逃生路线并约定集合点",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "物资过期",
+   "then": "急救箱每半年检查有效期并补齐",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "燃气泄漏",
+   "then": "先开窗关阀撤离再报警，切勿在现场开关电器",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "火灾",
+   "then": "低姿撤离并湿毛巾捂口鼻，不乘电梯",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "急救",
+   "then": "严重外伤/窒息/昏迷立即拨打急救电话，本工具不做医疗处置",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "应急",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "急救箱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逃生",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "物资过期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "燃气泄漏",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "火灾",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "急救",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "固定",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "自伤",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

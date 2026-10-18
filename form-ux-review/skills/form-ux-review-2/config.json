@@ -1,0 +1,72 @@
+{
+ "name": "form-ux-review-2",
+ "version": "2.0.0",
+ "domain": "表单体验评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "字段最少",
+   "then": "只留必要字段",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "校验即时",
+   "then": "即时校验而非提交后",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "错误定位",
+   "then": "错误定位到具体字段",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分组合理",
+   "then": "长表单分组",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "保存草稿",
+   "then": "支持中途保存",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "字段最少",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "校验即时",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误定位",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分组合理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保存草稿",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

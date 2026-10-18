@@ -1,0 +1,121 @@
+{
+ "name": "vision-boundary",
+ "version": "2.0.0",
+ "domain": "用眼健康",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "突然模糊",
+   "then": "突发视力下降属急症，须立即就医",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "持续眼痛",
+   "then": "眼痛伴头痛或恶心须就医排查",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "飞蚊增多",
+   "then": "飞蚊突然大量增多伴闪光须尽快就诊",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "儿童视力",
+   "then": "儿童需定期专业筛查，家长自测不可替代",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "本工具边界",
+   "then": "本工具仅提供用眼习惯建议，不提供任何诊断与治疗",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "视力下降",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "模糊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "眼痛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "就诊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "突然模糊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "持续眼痛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "飞蚊增多",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "儿童视力",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "本工具边界",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "替代",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "就医",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家长",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每日",
+   "source": "SKILL.md#L67"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

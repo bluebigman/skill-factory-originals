@@ -1,0 +1,74 @@
+{
+ "name": "teen-time-coach",
+ "version": "1.0.0",
+ "plugin": "teen-time-coach",
+ "description": "Teen Time Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/teen-time-coach.md"
+ ],
+ "skills": [
+  "./skills/teen-time-coach-1",
+  "./skills/teen-time-coach-2",
+  "./skills/teen-time-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "teen-time-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Teen Time Coach",
+  "zh": "青少年 共同制定 可视化"
+ },
+ "profession": {
+  "en": "Teen Time Coach",
+  "zh": "青少年 时间管理 教练"
+ },
+ "displayDescription": {
+  "en": "Handles Teen Time Coach tasks end-to-end with built-in professional skills.",
+  "zh": "青少年 时间管理 教练：覆盖 共同制定、可视化、留白、只抓关键 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "共同制定"
+  },
+  {
+   "en": "practical capability",
+   "zh": "可视化"
+  },
+  {
+   "en": "practical capability",
+   "zh": "留白"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到共同制定怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到可视化怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到留白怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到共同制定怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "青少年专家",
+  "to": "青少年 共同制定 可视化",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

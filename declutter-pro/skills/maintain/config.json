@@ -1,0 +1,117 @@
+{
+ "name": "maintain",
+ "version": "2.0.0",
+ "domain": "极简整理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "反弹",
+   "then": "进一出一规则，总量守恒",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无位置",
+   "then": "新物品进门先定位置，无位置不进",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "间歇清理",
+   "then": "每季度做一次 30 分钟小清理，避免累积到大清理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "他人物品",
+   "then": "只处理自己的，代扔必引发冲突",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "标准过严",
+   "then": "允许存在一个混乱抽屉，全屋完美不可持续",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "维持",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反弹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "习惯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无位置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "间歇清理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "他人物品",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "标准过严",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定期",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "冲突",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "版本",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "允许",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

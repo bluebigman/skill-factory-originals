@@ -1,0 +1,75 @@
+{
+ "name": "Note Offline Sync",
+ "description": "笔记离线专家：覆盖 冲突留副本、单一主库、同步前提交、版本回溯 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/note-offline-sync",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/note-offline-sync",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "note-offline-sync-1",
+   "name": "针对 冲突留副本、单一主库 等情境给出可执行处置",
+   "description": "针对 冲突留副本、单一主库 等情境给出可执行处置",
+   "tags": [
+    "冲突留副本",
+    "单一主库"
+   ],
+   "examples": [
+    "遇到冲突留副本",
+    "遇到单一主库",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "note-offline-sync-2",
+   "name": "针对 同步前提交、版本回溯 等情境给出可执行处置",
+   "description": "针对 同步前提交、版本回溯 等情境给出可执行处置",
+   "tags": [
+    "同步前提交",
+    "版本回溯"
+   ],
+   "examples": [
+    "遇到同步前提交",
+    "遇到版本回溯",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "note-offline-sync-3",
+   "name": "针对 低频大文件 等情境给出可执行处置",
+   "description": "针对 低频大文件 等情境给出可执行处置",
+   "tags": [
+    "低频大文件"
+   ],
+   "examples": [
+    "遇到低频大文件",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "笔记离线专家",
+ "x-source": "skill-factory-originals"
+}

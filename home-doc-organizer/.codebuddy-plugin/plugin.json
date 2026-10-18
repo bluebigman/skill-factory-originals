@@ -1,0 +1,74 @@
+{
+ "name": "home-doc-organizer",
+ "version": "1.0.0",
+ "plugin": "home-doc-organizer",
+ "description": "Home Doc Organizer for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-doc-organizer.md"
+ ],
+ "skills": [
+  "./skills/home-doc-organizer-1",
+  "./skills/home-doc-organizer-2",
+  "./skills/home-doc-organizer-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-doc-organizer",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Doc Organizer",
+  "zh": "家庭证件 统一归档 电子备份"
+ },
+ "profession": {
+  "en": "Home Doc Organizer",
+  "zh": "家庭证件 资料归档 收纳"
+ },
+ "displayDescription": {
+  "en": "Handles Home Doc Organizer tasks end-to-end with built-in professional skills.",
+  "zh": "家庭证件 资料归档 收纳：覆盖 统一归档、电子备份、有效期提醒 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "统一归档"
+  },
+  {
+   "en": "practical capability",
+   "zh": "电子备份"
+  },
+  {
+   "en": "practical capability",
+   "zh": "有效期提醒"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到统一归档怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到电子备份怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到有效期提醒怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到统一归档怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "家庭证件专家",
+  "to": "家庭证件 统一归档 电子备份",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

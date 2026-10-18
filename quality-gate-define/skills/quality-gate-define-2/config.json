@@ -1,0 +1,78 @@
+{
+ "name": "quality-gate-define-2",
+ "version": "2.0.0",
+ "domain": "质量门禁",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "不过不发",
+   "then": "门禁不通过就不允许发布，不做例外",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "记录依据",
+   "then": "每次拦截记录原因，便于改进",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "不过不发",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录依据",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "允许",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "定义",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "每次",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "质量",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "前先",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "门槛",
+   "source": "SKILL.md#L57"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "inventory-basic-coach-2",
+ "version": "2.0.0",
+ "domain": "库存管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "季节性",
+   "then": "按去年同期系数",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "账实核对",
+   "then": "每月盘点",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "季节性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "账实核对",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "安全",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "周期",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "库存",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "每月",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "清理",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

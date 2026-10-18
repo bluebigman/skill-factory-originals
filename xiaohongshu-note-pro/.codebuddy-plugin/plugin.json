@@ -1,0 +1,74 @@
+{
+ "name": "xiaohongshu-note-pro",
+ "version": "1.0.0",
+ "plugin": "xiaohongshu-note-pro",
+ "description": "Xiaohongshu Note Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/xiaohongshu-note-pro.md"
+ ],
+ "skills": [
+  "./skills/compliance",
+  "./skills/note-structure",
+  "./skills/title-cover"
+ ],
+ "expertType": "agent",
+ "agentName": "xiaohongshu-note-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Xiaohongshu Note Pro",
+  "zh": "小红书笔记 极限词 功效宣称"
+ },
+ "profession": {
+  "en": "Xiaohongshu Note Pro",
+  "zh": "小红书笔记 种草文案 封面文案"
+ },
+ "displayDescription": {
+  "en": "Handles Xiaohongshu Note Pro tasks end-to-end with built-in professional skills.",
+  "zh": "小红书笔记 种草文案 封面文案：平台规则与广告合规；种草笔记的内容组织；笔记标题与封面的设计。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "极限词"
+  },
+  {
+   "en": "practical capability",
+   "zh": "功效宣称"
+  },
+  {
+   "en": "practical capability",
+   "zh": "引流"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到极限词怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到功效宣称怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到引流怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到极限词怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:54",
+  "from": "小红书笔记专家",
+  "to": "小红书笔记 极限词 功效宣称",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

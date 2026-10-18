@@ -1,0 +1,83 @@
+{
+ "name": "Permission Governance",
+ "description": "权限治理专家：覆盖 权限过宽、长期有效 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/permission-governance",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/permission-governance",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "permission-governance-1",
+   "name": "针对 权限过宽、长期有效 等情境给出可执行处置",
+   "description": "针对 权限过宽、长期有效 等情境给出可执行处置",
+   "tags": [
+    "权限过宽",
+    "长期有效",
+    "共享凭据"
+   ],
+   "examples": [
+    "遇到权限过宽",
+    "遇到长期有效",
+    "遇到共享凭据",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "permission-governance-2",
+   "name": "针对 高危无复核、动作不可逆 等情境给出可执行处置",
+   "description": "针对 高危无复核、动作不可逆 等情境给出可执行处置",
+   "tags": [
+    "高危无复核",
+    "动作不可逆",
+    "批量放大"
+   ],
+   "examples": [
+    "遇到高危无复核",
+    "遇到动作不可逆",
+    "遇到批量放大",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "permission-governance-3",
+   "name": "针对 范围漂移、静默扩权 等情境给出可执行处置",
+   "description": "针对 范围漂移、静默扩权 等情境给出可执行处置",
+   "tags": [
+    "范围漂移",
+    "静默扩权",
+    "审计盲区"
+   ],
+   "examples": [
+    "遇到范围漂移",
+    "遇到静默扩权",
+    "遇到审计盲区",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "权限治理专家",
+ "x-source": "skill-factory-originals"
+}

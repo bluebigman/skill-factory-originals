@@ -1,0 +1,72 @@
+{
+ "name": "dev-onboarding-2",
+ "version": "2.0.0",
+ "domain": "新人上手流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "环境一键化",
+   "then": "提供一键环境脚本",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "任务分级",
+   "then": "从简单任务起步",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "有导师",
+   "then": "指定导师答疑",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "文档补齐",
+   "then": "常见问题入文档",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "反馈回收",
+   "then": "定期回收新人反馈",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "环境一键化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "任务分级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "有导师",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文档补齐",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反馈回收",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

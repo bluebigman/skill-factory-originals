@@ -1,0 +1,74 @@
+{
+ "name": "exam-prep-coach-1",
+ "version": "2.0.0",
+ "domain": "考前复习",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按分值排序",
+   "then": "分值×掌握度决定优先级",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "模拟实战",
+   "then": "限时模拟一次熟悉节奏",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按分值排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "模拟实战",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "掌握",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "限时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "先级",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

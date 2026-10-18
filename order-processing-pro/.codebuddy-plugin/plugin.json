@@ -1,0 +1,74 @@
+{
+ "name": "order-processing-pro",
+ "version": "1.0.0",
+ "plugin": "order-processing-pro",
+ "description": "Order Processing Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/order-processing-pro.md"
+ ],
+ "skills": [
+  "./skills/after-sale",
+  "./skills/logistics",
+  "./skills/order-flow"
+ ],
+ "expertType": "agent",
+ "agentName": "order-processing-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Order Processing Pro",
+  "zh": "订单处理 拖延 无标准"
+ },
+ "profession": {
+  "en": "Order Processing Pro",
+  "zh": "订单处理 物流查询 售后流程"
+ },
+ "displayDescription": {
+  "en": "Handles Order Processing Pro tasks end-to-end with built-in professional skills.",
+  "zh": "订单处理 物流查询 售后流程：退换货与售后的流程；物流选择与异常处理；从下单到签收的流程管理。"
+ },
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "拖延"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无标准"
+  },
+  {
+   "en": "practical capability",
+   "zh": "过度让步"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到拖延怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无标准怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到过度让步怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到拖延怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "订单处理专家",
+  "to": "订单处理 拖延 无标准",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

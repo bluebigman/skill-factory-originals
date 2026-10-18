@@ -1,0 +1,74 @@
+{
+ "name": "fact-check-coach-1",
+ "version": "2.0.0",
+ "domain": "常识核查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先找源头",
+   "then": "追溯到最初出处再判断可信度",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "看时间",
+   "then": "信息是否过期是常见陷阱",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先找源头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看时间",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "信息",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "陷阱",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "常识",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "核查",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "追溯",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "出处",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

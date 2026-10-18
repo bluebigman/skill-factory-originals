@@ -1,0 +1,103 @@
+{
+ "name": "Exam Anxiety Coach",
+ "description": "考试焦虑专家：识别考前焦虑的身体与行为信号；考前家长该说什么不该说什么；把复习拆成不焦虑的清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/exam-anxiety-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/exam-anxiety-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "anxiety-scan",
+   "name": "识别考前焦虑的身体与行为信号",
+   "description": "识别考前焦虑的身体与行为信号",
+   "tags": [
+    "失眠",
+    "心慌",
+    "手抖",
+    "烦躁"
+   ],
+   "examples": [
+    "遇到失眠",
+    "遇到心慌",
+    "遇到手抖",
+    "遇到烦躁",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "anxiety-scan",
+    "to": "anxiety-scan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "parent-support",
+   "name": "考前家长该说什么不该说什么",
+   "description": "考前家长该说什么不该说什么",
+   "tags": [
+    "怎么说",
+    "别紧张",
+    "加油"
+   ],
+   "examples": [
+    "遇到怎么说",
+    "遇到别紧张",
+    "遇到加油",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "parent-support",
+    "to": "parent-support",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "study-plan-calm",
+   "name": "把复习拆成不焦虑的清单",
+   "description": "把复习拆成不焦虑的清单",
+   "tags": [
+    "复习不完",
+    "时间不够",
+    "抓不住重点"
+   ],
+   "examples": [
+    "遇到复习不完",
+    "遇到时间不够",
+    "遇到抓不住重点",
+    "手上有一段描述，想马上得到处置建议"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:43",
+    "from": "study-plan-calm",
+    "to": "study-plan-calm",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "考试焦虑专家",
+ "x-source": "skill-factory-originals"
+}

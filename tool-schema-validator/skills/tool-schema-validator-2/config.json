@@ -1,0 +1,72 @@
+{
+ "name": "tool-schema-validator-2",
+ "version": "2.0.0",
+ "domain": "工具契约",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "改产出先看消费方",
+   "then": "改下游字段前先读消费方代码",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "路径绝对",
+   "then": "路径类字段一律绝对路径",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "破坏性变更",
+   "then": "必须升版本并显式报错",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "静默降级",
+   "then": "禁止不告知的能力降级",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "契约回归",
+   "then": "变更后跑依赖方冒烟",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "改产出先看消费方",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "路径绝对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "破坏性变更",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "静默降级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "契约回归",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

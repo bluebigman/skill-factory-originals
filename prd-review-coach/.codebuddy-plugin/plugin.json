@@ -1,0 +1,74 @@
+{
+ "name": "prd-review-coach",
+ "version": "1.0.0",
+ "plugin": "prd-review-coach",
+ "description": "Prd Review Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/prd-review-coach.md"
+ ],
+ "skills": [
+  "./skills/prd-review-coach-1",
+  "./skills/prd-review-coach-2",
+  "./skills/prd-review-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "prd-review-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Prd Review Coach",
+  "zh": "需求评审 先对齐目标 一次一个"
+ },
+ "profession": {
+  "en": "Prd Review Coach",
+  "zh": "需求评审 优先级 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Prd Review Coach tasks end-to-end with built-in professional skills.",
+  "zh": "需求评审 优先级 顾问：覆盖 先对齐目标、一次一个、争议标记 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "01-ProductDesign",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "需求评审",
+   "en": "prd-review-coach"
+  },
+  {
+   "en": "ProductDesign",
+   "zh": "ProductDesign"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到需求评审怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到优先级怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到需求评审怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "需求评审专家",
+  "to": "需求评审 先对齐目标 一次一个",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

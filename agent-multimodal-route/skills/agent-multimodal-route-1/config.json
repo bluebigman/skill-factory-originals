@@ -1,0 +1,72 @@
+{
+ "name": "agent-multimodal-route-1",
+ "version": "2.0.0",
+ "domain": "多模态路",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "类型识别",
+   "then": "先识别输入模态",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "能力匹配",
+   "then": "匹配对应处理能力",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "降级声明",
+   "then": "不支持时明确声明",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "统一输出",
+   "then": "输出格式统一",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "异常兜底",
+   "then": "识别失败给兜底",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "类型识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "能力匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "降级声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "统一输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "family-schedule-coach",
+ "version": "1.0.0",
+ "plugin": "family-schedule-coach",
+ "description": "Family Schedule Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/family-schedule-coach.md"
+ ],
+ "skills": [
+  "./skills/family-schedule-coach-1",
+  "./skills/family-schedule-coach-2",
+  "./skills/family-schedule-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "family-schedule-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Family Schedule Coach",
+  "zh": "家庭日程 统一日历 提前一周"
+ },
+ "profession": {
+  "en": "Family Schedule Coach",
+  "zh": "家庭日程 接送安排 统筹"
+ },
+ "displayDescription": {
+  "en": "Handles Family Schedule Coach tasks end-to-end with built-in professional skills.",
+  "zh": "家庭日程 接送安排 统筹：覆盖 统一日历、提前一周 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "统一日历"
+  },
+  {
+   "en": "practical capability",
+   "zh": "提前一周"
+  },
+  {
+   "en": "practical capability",
+   "zh": "只提醒行动项"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到统一日历怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到提前一周怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只提醒行动项怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到统一日历怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "家庭日程专家",
+  "to": "家庭日程 统一日历 提前一周",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

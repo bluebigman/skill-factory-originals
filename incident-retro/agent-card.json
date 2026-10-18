@@ -1,0 +1,75 @@
+{
+ "name": "Incident Retro",
+ "description": "事故复盘专家：覆盖 先止损后复盘、对事不对人 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/incident-retro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/incident-retro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "incident-retro-1",
+   "name": "针对 先止损后复盘、对事不对人 等情境给出可执行处置",
+   "description": "针对 先止损后复盘、对事不对人 等情境给出可执行处置",
+   "tags": [
+    "先止损后复盘",
+    "对事不对人"
+   ],
+   "examples": [
+    "遇到先止损后复盘",
+    "遇到对事不对人",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "incident-retro-2",
+   "name": "针对 连问五次、改进可验证 等情境给出可执行处置",
+   "description": "针对 连问五次、改进可验证 等情境给出可执行处置",
+   "tags": [
+    "连问五次",
+    "改进可验证"
+   ],
+   "examples": [
+    "遇到连问五次",
+    "遇到改进可验证",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "incident-retro-3",
+   "name": "针对 沉淀监控 等情境给出可执行处置",
+   "description": "针对 沉淀监控 等情境给出可执行处置",
+   "tags": [
+    "沉淀监控"
+   ],
+   "examples": [
+    "遇到沉淀监控",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "事故复盘专家",
+ "x-source": "skill-factory-originals"
+}

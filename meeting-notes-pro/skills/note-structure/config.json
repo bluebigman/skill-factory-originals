@@ -1,0 +1,121 @@
+{
+ "name": "note-structure",
+ "version": "2.0.0",
+ "domain": "会议纪要",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "记成流水账",
+   "then": "只记三类：决议、行动项、待决项，讨论过程不入纪要",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "重点丢失",
+   "then": "每条决议写明「谁-做什么-何时完成」，缺一即无法执行",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "格式不一",
+   "then": "统一模板（时间/参会/决议/行动/待决），降低阅读成本",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "来不及记",
+   "then": "现场只记关键词与决策点，整理成文放在会后 2 小时内",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "争议记录",
+   "then": "有异议须如实记入并标注，粉饰纪要会在执行时爆雷",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "纪要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结构",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记成流水账",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重点丢失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "格式不一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "来不及记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "争议记录",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "固定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "降低",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "持续",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

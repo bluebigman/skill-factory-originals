@@ -1,0 +1,74 @@
+{
+ "name": "industrial-service-pro",
+ "version": "1.0.0",
+ "plugin": "industrial-service-pro",
+ "description": "industrial-service-pro — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for industrial-service-pro tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/industrial-service-pro.md"
+ ],
+ "agentName": "industrial-service-pro",
+ "displayName": {
+  "zh": "工业服务 服务分级 时限明确",
+  "en": "industrial-service-pro"
+ },
+ "profession": {
+  "zh": "工业服务 交付标准 顾问",
+  "en": "industrial-service-pro"
+ },
+ "displayDescription": {
+  "zh": "工业服务 交付标准 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "industrial-service-pro: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "工业服务",
+   "en": "industrial-service-pro"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到工业服务怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划工业服务",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查工业服务",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到工业服务怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/industrial-service-pro-1/",
+  "./skills/industrial-service-pro-2/",
+  "./skills/industrial-service-pro-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:41",
+  "from": "工业服务专家",
+  "to": "工业服务 服务分级 时限明确",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

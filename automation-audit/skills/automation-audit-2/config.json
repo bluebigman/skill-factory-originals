@@ -1,0 +1,72 @@
+{
+ "name": "automation-audit-2",
+ "version": "2.0.0",
+ "domain": "自动化审计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "清单化",
+   "then": "列出全部自动化任务",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "触发核对",
+   "then": "核对触发条件是否仍有效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "僵尸清理",
+   "then": "停用长期未触发的",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "冲突检查",
+   "then": "检查并发冲突",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "依赖梳理",
+   "then": "梳理任务间依赖",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "清单化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "触发核对",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "僵尸清理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖梳理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

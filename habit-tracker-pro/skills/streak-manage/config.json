@@ -1,0 +1,121 @@
+{
+ "name": "streak-manage",
+ "version": "2.0.0",
+ "domain": "习惯养成",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "断一天就放弃",
+   "then": "遵循绝不错过两次原则，单次中断不影响长期趋势",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "打卡焦虑",
+   "then": "打卡是工具非目的，为打卡而做的动作应删掉",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "补偿心态",
+   "then": "中断后不补做加倍，补偿式反弹是放弃前兆",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "记录方式",
+   "then": "记录要足够轻（一个勾/一个数字），记录成本高必断",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "周期复盘",
+   "then": "每两周看趋势而非单日，单日波动不构成判断依据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "打卡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "中断",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "破功",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "断一天就放弃",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打卡焦虑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "补偿心态",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "记录方式",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周期复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "持续",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "每天",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "长期",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

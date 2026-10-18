@@ -1,0 +1,72 @@
+{
+ "name": "metric-anomaly-alert-2",
+ "version": "2.0.0",
+ "domain": "指标异常",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "基线建模",
+   "then": "先建正常基线",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "季节因素",
+   "then": "考虑周期波动",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "分级告警",
+   "then": "按偏离程度分级",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "聚合降噪",
+   "then": "同类告警聚合",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "误报回流",
+   "then": "误报回流修正",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "基线建模",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "季节因素",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "聚合降噪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误报回流",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

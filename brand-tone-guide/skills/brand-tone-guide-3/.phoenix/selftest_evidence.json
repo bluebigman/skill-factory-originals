@@ -1,0 +1,9 @@
+{
+ "schema": "selftest_evidence/v1",
+ "at": "2026-10-18T19:52:46",
+ "skill": "brand-tone-guide-3",
+ "slug": "brand-tone-guide",
+ "passed": true,
+ "output": "SELFTEST PASS",
+ "note": "由 _reseal_evidence.py 真跑生成（原文件为他资产残留的 SELFTEST OK）"
+}

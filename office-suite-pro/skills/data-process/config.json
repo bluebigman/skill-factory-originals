@@ -1,0 +1,121 @@
+{
+ "name": "data-process",
+ "version": "2.0.0",
+ "domain": "excel",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "原始与计算混放",
+   "then": "原始数据/计算/呈现分离到不同工作表，混算必失控",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "硬编码",
+   "then": "参数与阈值集中放参数表，散落在公式里无法统一调整",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重复行",
+   "then": "先按主键去重再分析，不去重会导致所有指标虚高",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "公式冗长",
+   "then": "超过三层的嵌套须拆为辅助列，可读性优先",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本",
+   "then": "文件名带版本与日期，并用最终版统一替换旧版",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数据整理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "透视表",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "筛选",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "原始与计算混放",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "硬编码",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "公式冗长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "优先",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "日期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "工作",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "失控",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "导致",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

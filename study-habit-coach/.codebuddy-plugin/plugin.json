@@ -1,0 +1,74 @@
+{
+ "name": "study-habit-coach",
+ "version": "1.0.0",
+ "plugin": "study-habit-coach",
+ "description": "Study Habit Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/study-habit-coach.md"
+ ],
+ "skills": [
+  "./skills/focus-training",
+  "./skills/homework-routine",
+  "./skills/review-loop"
+ ],
+ "expertType": "agent",
+ "agentName": "study-habit-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Study Habit Coach",
+  "zh": "背单词 注意力 坐不住"
+ },
+ "profession": {
+  "en": "Study Habit Coach",
+  "zh": "学习习惯 作业辅导 专注力"
+ },
+ "displayDescription": {
+  "en": "Handles Study Habit Coach tasks end-to-end with built-in professional skills.",
+  "zh": "学习习惯 作业辅导 专注力：提升专注时长的具体方法；建立可执行的作业流程；遗忘曲线驱动的复习安排。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "注意力"
+  },
+  {
+   "en": "practical capability",
+   "zh": "坐不住"
+  },
+  {
+   "en": "practical capability",
+   "zh": "走神"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到注意力怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到坐不住怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到走神怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到注意力怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:52",
+  "from": "背单词专家",
+  "to": "背单词 注意力 坐不住",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

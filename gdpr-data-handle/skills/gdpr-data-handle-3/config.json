@@ -1,0 +1,72 @@
+{
+ "name": "gdpr-data-handle-3",
+ "version": "2.0.0",
+ "domain": "跨境数据",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小必要",
+   "then": "只采集实现目的所必需的数据",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "明示同意",
+   "then": "收集前明示用途并取得同意",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "跨境评估",
+   "then": "跨境传输前做合规评估",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "保留期限",
+   "then": "设定并到期执行删除",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "删除可证",
+   "then": "删除请求处理须可验证",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小必要",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "明示同意",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "跨境评估",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留期限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "删除可证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

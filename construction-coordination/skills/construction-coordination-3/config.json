@@ -1,0 +1,72 @@
+{
+ "name": "construction-coordination-3",
+ "version": "2.0.0",
+ "domain": "施工协调",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "工序清晰",
+   "then": "明确工序与依赖",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "资源调配",
+   "then": "人力材料机械调配",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "安全检查",
+   "then": "安全交底与检查",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "进度跟踪",
+   "then": "进度周跟踪",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更管理",
+   "then": "变更走流程",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "工序清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资源调配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "安全检查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "进度跟踪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更管理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

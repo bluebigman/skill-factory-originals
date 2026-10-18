@@ -1,0 +1,121 @@
+{
+ "name": "character-arc",
+ "version": "2.0.0",
+ "domain": "故事大纲",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "人物扁平",
+   "then": "给人物矛盾特质（勇敢但怯于承认错误）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "动机不明",
+   "then": "每个关键行动须有可理解的动机",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无变化",
+   "then": "主角在结尾须与开头在认知上有明确变化",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "配角工具化",
+   "then": "配角须有自己的目标，纯工具人会被读者察觉",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "关系张力",
+   "then": "人物关系的变化是情节推进的主要动力",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "人物",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "弧光",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成长",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "人物扁平",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "动机不明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无变化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配角工具化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关系张力",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "理解",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "开头",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "自己",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "结尾",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "读者",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "矛盾",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

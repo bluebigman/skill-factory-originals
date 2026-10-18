@@ -1,0 +1,72 @@
+{
+ "name": "agent-sandbox-policy-2",
+ "version": "2.0.0",
+ "domain": "沙箱策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "最小权限",
+   "then": "沙箱只给完成任务所需权限",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "网络受限",
+   "then": "默认禁网按需开白",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "文件隔离",
+   "then": "文件访问限定在授权目录",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "逃逸检测",
+   "then": "监控越界访问尝试",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "资源限额",
+   "then": "CPU内存时间均设上限",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "最小权限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "网络受限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "文件隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "逃逸检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资源限额",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "secure-deploy-check-3",
+ "version": "2.0.0",
+ "domain": "安全部署核查",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "默认关闭",
+   "then": "调试与示例默认关闭",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "端口收敛",
+   "then": "只开必要端口",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "鉴权前置",
+   "then": "所有入口鉴权",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "配置基线",
+   "then": "按基线核对",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "上线后扫",
+   "then": "上线后做一次扫描",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "默认关闭",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "端口收敛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "鉴权前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "配置基线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "上线后扫",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,79 @@
+{
+ "name": "multi-agent-orchestrate-1",
+ "version": "2.0.0",
+ "domain": "多智能体",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "职责重叠",
+   "then": "每个 Agent 的边界必须互斥，重叠即合并或划清",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "依赖混乱",
+   "then": "先画依赖图，无依赖的并行、有依赖的串行",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "串并行不当",
+   "then": "关键路径串行保正确，非关键路径并行提效率",
+   "source": "scripts/main.py#RULES[2]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "职责重叠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "依赖混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "串并行不当",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "冲突",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "校验",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "效率",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "正确",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

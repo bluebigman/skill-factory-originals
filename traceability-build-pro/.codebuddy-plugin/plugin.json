@@ -1,0 +1,74 @@
+{
+ "name": "traceability-build-pro",
+ "version": "1.0.0",
+ "plugin": "traceability-build-pro",
+ "description": "Traceability Build Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/traceability-build-pro.md"
+ ],
+ "skills": [
+  "./skills/traceability-build-pro-1",
+  "./skills/traceability-build-pro-2",
+  "./skills/traceability-build-pro-3"
+ ],
+ "expertType": "agent",
+ "agentName": "traceability-build-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Traceability Build Pro",
+  "zh": "追溯体系 编码唯一 正反可追"
+ },
+ "profession": {
+  "en": "Traceability Build Pro",
+  "zh": "追溯体系 批次管理 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Traceability Build Pro tasks end-to-end with built-in professional skills.",
+  "zh": "追溯体系 批次管理 顾问：覆盖 编码唯一、正反可追、数据同步 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "追溯体系",
+   "en": "traceability-build-pro"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到追溯体系怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到批次管理怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到追溯体系怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:53",
+  "from": "追溯体系专家",
+  "to": "追溯体系 编码唯一 正反可追",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

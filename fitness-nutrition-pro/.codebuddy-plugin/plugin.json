@@ -1,0 +1,74 @@
+{
+ "name": "fitness-nutrition-pro",
+ "version": "1.0.0",
+ "plugin": "fitness-nutrition-pro",
+ "description": "Fitness Nutrition Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/fitness-nutrition-pro.md"
+ ],
+ "skills": [
+  "./skills/fat-loss-meal",
+  "./skills/meal-prep",
+  "./skills/muscle-gain"
+ ],
+ "expertType": "agent",
+ "agentName": "fitness-nutrition-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Fitness Nutrition Pro",
+  "zh": "增肌减脂 结构优先 蛋白保留"
+ },
+ "profession": {
+  "en": "Fitness Nutrition Pro",
+  "zh": "增肌减脂 训练计划 营养餐"
+ },
+ "displayDescription": {
+  "en": "Handles Fitness Nutrition Pro tasks end-to-end with built-in professional skills.",
+  "zh": "增肌减脂 训练计划 营养餐：减脂期餐食结构与配比；健身餐的批量备餐；增肌期训练与营养安排。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "结构优先"
+  },
+  {
+   "en": "practical capability",
+   "zh": "蛋白保留"
+  },
+  {
+   "en": "practical capability",
+   "zh": "主食选择"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到结构优先怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到蛋白保留怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到主食选择怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到结构优先怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:39",
+  "from": "增肌减脂专家",
+  "to": "增肌减脂 结构优先 蛋白保留",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

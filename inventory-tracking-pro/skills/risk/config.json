@@ -1,0 +1,113 @@
+{
+ "name": "risk",
+ "version": "2.0.0",
+ "domain": "库存管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "损耗",
+   "then": "设置盘点与损耗记录，无记录无法定位问题",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "过季",
+   "then": "换季前 30 天开始清理上一季库存",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "退货积压",
+   "then": "退货品须在 7 天内质检并决定复用或报废",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "资金",
+   "then": "库存占用不超可用资金的一定比例，全押库存风险极高",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "断供",
+   "then": "关键单品须有备选供应商，单点依赖风险集中",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "风险",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "损耗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过季",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退货积压",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "资金",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "断供",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "决定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "库存",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "比例",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "单点",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "设置",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "复用",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

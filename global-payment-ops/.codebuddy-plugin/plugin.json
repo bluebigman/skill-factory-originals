@@ -1,0 +1,74 @@
+{
+ "name": "global-payment-ops",
+ "version": "1.0.0",
+ "plugin": "global-payment-ops",
+ "description": "global-payment-ops — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for global-payment-ops tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/global-payment-ops.md"
+ ],
+ "agentName": "global-payment-ops",
+ "displayName": {
+  "zh": "跨境收款 通道合规 费用透明",
+  "en": "global-payment-ops"
+ },
+ "profession": {
+  "zh": "跨境收款 流程核对 顾问",
+  "en": "global-payment-ops"
+ },
+ "displayDescription": {
+  "zh": "跨境收款 流程核对 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "global-payment-ops: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "07-SalesCommerce",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "跨境收款",
+   "en": "global-payment-ops"
+  },
+  {
+   "en": "SalesCommerce",
+   "zh": "SalesCommerce"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到跨境收款怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划跨境收款",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查跨境收款",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到跨境收款怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/global-payment-ops-1/",
+  "./skills/global-payment-ops-2/",
+  "./skills/global-payment-ops-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "跨境收款专家",
+  "to": "跨境收款 通道合规 费用透明",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

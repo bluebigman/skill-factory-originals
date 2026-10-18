@@ -1,0 +1,72 @@
+{
+ "name": "knowledge-freshness-2",
+ "version": "2.0.0",
+ "domain": "知识时效管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "标注时效",
+   "then": "每条标最后更新日",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "过期提醒",
+   "then": "过期自动提醒",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "复审流程",
+   "then": "到期复审流程",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "归档机制",
+   "then": "过期知识归档不删",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "责任人",
+   "then": "每条有维护人",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "标注时效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过期提醒",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复审流程",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归档机制",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任人",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "name": "acceptance-criteria-3",
+ "version": "2.0.0",
+ "domain": "验收标准",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "变更留痕",
+   "then": "标准变更须双方确认并记录",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "变更留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "每条",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "定义",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "判定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "写清",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "独立",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "验收",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "双方",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

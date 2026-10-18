@@ -1,0 +1,105 @@
+{
+ "name": "behavior-diagnose",
+ "version": "2.0.0",
+ "domain": "家庭教育",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "沉迷手机",
+   "then": "先约定单次时长上限（如30分钟）并给替代活动，避免直接没收引发对抗",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "厌学",
+   "then": "先定位学业挫败点（哪一科/哪类题），把任务拆到孩子能完成的粒度",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "顶嘴",
+   "then": "先接情绪（我知道你现在很生气），再谈规则，勿在情绪高峰讲道理",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "拖拉",
+   "then": "把任务切成15分钟小块并配即时反馈，避免用快点这类空指令",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "说谎",
+   "then": "先降低承认成本（承认不处罚），再讨论如何弥补",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "沉迷手机",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "厌学",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "顶嘴",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "拖拉",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "说谎",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

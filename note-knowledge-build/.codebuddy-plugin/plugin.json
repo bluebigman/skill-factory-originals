@@ -1,0 +1,74 @@
+{
+ "name": "note-knowledge-build",
+ "version": "1.0.0",
+ "plugin": "note-knowledge-build",
+ "description": "Note Knowledge Build for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/note-knowledge-build.md"
+ ],
+ "skills": [
+  "./skills/note-knowledge-build-1",
+  "./skills/note-knowledge-build-2",
+  "./skills/note-knowledge-build-3"
+ ],
+ "expertType": "agent",
+ "agentName": "note-knowledge-build",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Note Knowledge Build",
+  "zh": "笔记知识库 原子化 双向链接"
+ },
+ "profession": {
+  "en": "Note Knowledge Build",
+  "zh": "笔记知识库 结构搭建 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Note Knowledge Build tasks end-to-end with built-in professional skills.",
+  "zh": "笔记知识库 结构搭建 顾问：覆盖 原子化、双向链接、命名规范 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "原子化"
+  },
+  {
+   "en": "practical capability",
+   "zh": "双向链接"
+  },
+  {
+   "en": "practical capability",
+   "zh": "命名规范"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到原子化怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到双向链接怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到命名规范怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到原子化怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:44",
+  "from": "笔记知识库专家",
+  "to": "笔记知识库 原子化 双向链接",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

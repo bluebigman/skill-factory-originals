@@ -1,0 +1,117 @@
+{
+ "name": "cross-team",
+ "version": "2.0.0",
+ "domain": "职场沟通",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "推不动",
+   "then": "找对方 KPI 与你的诉求的交集，无交集则上提共同目标",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "口头承诺",
+   "then": "所有跨部门承诺落书面（邮件/群内确认），口头承诺必失效",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "责任模糊",
+   "then": "明确交付物、接口人与时限，模糊分工必互相甩锅",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "冲突升级",
+   "then": "先对齐事实再谈分歧，事实不清的争论纯属消耗",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "对方拖延",
+   "then": "给出明确时限与升级路径，无后果的催促无效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "跨部门",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "协作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "推不动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "协调",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口头承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "责任模糊",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突升级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对方拖延",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "目标",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "交付",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "再谈",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "共同",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "失效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事实",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

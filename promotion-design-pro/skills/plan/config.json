@@ -1,0 +1,121 @@
+{
+ "name": "plan",
+ "version": "2.0.0",
+ "domain": "活动方案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无时间轴",
+   "then": "明确预热/开售/收尾三段的时间点与动作",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "无分工",
+   "then": "每项动作指定责任人与完成时限",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无物料",
+   "then": "提前准备主图/详情/话术/客服预案，临场做必出错",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无预案",
+   "then": "准备爆单与冷场两套预案，无预案临场必乱",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "无公示",
+   "then": "活动规则须提前公示，事后解释无效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "活动方案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "策划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "执行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无时间轴",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无分工",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无物料",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无公示",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "成本",
+   "source": "SKILL.md#L37"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "设计",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "事后",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无效",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提升",
+   "source": "SKILL.md#L63"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

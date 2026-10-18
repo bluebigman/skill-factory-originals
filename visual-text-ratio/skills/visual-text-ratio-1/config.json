@@ -1,0 +1,66 @@
+{
+ "name": "visual-text-ratio-1",
+ "version": "2.0.0",
+ "domain": "图文配比",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "三段一图",
+   "then": "每三段文字配一张图或分隔，防疲劳",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "图有信息",
+   "then": "配图要承载信息，不做纯装饰",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "三段一图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图有信息",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "节奏",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "文字",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "疲劳",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "排版",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

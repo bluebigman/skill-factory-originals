@@ -1,0 +1,58 @@
+{
+ "slug": "language-learning-pro",
+ "source": "none(original)",
+ "date": "2026-10-01",
+ "origin": "需求缺口驱动原创：探测词[背单词/记不住/遗忘] 平台专家0/技能0 —— 未复制任何原文",
+ "schema": "provenance/v2",
+ "generated_at": "2026-10-01T12:00:50",
+ "generator": "wb_forge_expert.py",
+ "source_type": "self_authored_rules",
+ "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/fceb0b42bcbe5207e272fac095662c2601639038/language-learning-pro",
+ "source_license": null,
+ "demand_evidence": {
+  "probe_words": [
+   "背单词",
+   "记不住",
+   "遗忘"
+  ],
+  "probe_result": {
+   "expert": "0",
+   "skill": "0"
+  },
+  "probe_date": "2026-10-01",
+  "ref": "outputs/需求缺口清单与生产优先级_20261001.md",
+  "_reseal_note": "探测词按本包 config.json 关键词重写（原值为他资产）"
+ },
+ "knowledge_basis": {
+  "type": "self_authored",
+  "authority": "通用个人成长方法论（非引用特定文献/课程原文）",
+  "disclaimer": "本工具提供通用方法，不构成心理诊断或医疗建议"
+ },
+ "dupcheck": {
+  "baseline_docs": 463,
+  "max_doc_sim": 0.0,
+  "max_rule_sim": 0.0,
+  "verdict": "OK",
+  "tool": "wb_forge_dupcheck.py"
+ },
+ "note": "规则由生成器按通用领域知识编写；未复制任何受版权保护的原文",
+ "ai_generated": true,
+ "ai_disclosure": "本文档、领域规则与代码由 AI 生成器产出，经人工规则化整理与自动化合规检查；未复制任何受版权保护的原文",
+ "license": "MIT",
+ "copyright_holder": "SkillForge Lab",
+ "skill": "vocab",
+ "reseal": {
+  "at": "2026-10-18T20:02:25",
+  "reason": "修正证据身份冒用（原 slug 指向他资产）+ 补 merkle 证据",
+  "changes": [],
+  "principle": "不改 date/generated_at（历史事实）；修正痕迹必须保留"
+ },
+ "github_anchor": {
+  "sha": "fceb0b42bcbe5207e272fac095662c2601639038",
+  "tag": "v3-20261018",
+  "repo": "bluebigman/skill-factory-originals",
+  "verified": "逐字节比对一致（本地交付包 == GitHub 该 sha 下文件）",
+  "at": "2026-10-18T19:49:47",
+  "why_sha": "必须带 commit sha：branch 是会移动的指针，sha 是内容寻址，永远指向那一份字节"
+ }
+}

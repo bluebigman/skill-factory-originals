@@ -1,0 +1,74 @@
+{
+ "name": "knowledge-management-pro",
+ "version": "1.0.0",
+ "plugin": "knowledge-management-pro",
+ "description": "Knowledge Management Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/knowledge-management-pro.md"
+ ],
+ "skills": [
+  "./skills/capture",
+  "./skills/organize",
+  "./skills/summarize"
+ ],
+ "expertType": "agent",
+ "agentName": "knowledge-management-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Knowledge Management Pro",
+  "zh": "知识管理 只收藏 全量摘抄"
+ },
+ "profession": {
+  "en": "Knowledge Management Pro",
+  "zh": "知识管理 笔记体系 总结提炼"
+ },
+ "displayDescription": {
+  "en": "Handles Knowledge Management Pro tasks end-to-end with built-in professional skills.",
+  "zh": "知识管理 笔记体系 总结提炼：信息的捕捉与筛选；知识库的结构与关联；总结与复盘的方法。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "只收藏"
+  },
+  {
+   "en": "practical capability",
+   "zh": "全量摘抄"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无出处"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到只收藏怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到全量摘抄怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无出处怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到只收藏怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:42",
+  "from": "知识管理专家",
+  "to": "知识管理 只收藏 全量摘抄",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

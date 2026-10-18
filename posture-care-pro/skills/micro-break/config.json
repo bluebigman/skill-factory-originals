@@ -1,0 +1,121 @@
+{
+ "name": "micro-break",
+ "version": "2.0.0",
+ "domain": "久坐改善",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "肩颈僵硬",
+   "then": "每个方向 30 秒静态拉伸，弹震式拉伸易致损伤",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "腰背不适",
+   "then": "猫牛式与臀桥各 10 次，注意动作缓慢可控",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "眼睛疲劳",
+   "then": "20-20-20 规则：每 20 分钟看 20 英尺外 20 秒",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "手腕不适",
+   "then": "手腕中立位并做屈伸牵伸，持续麻木须就医",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "运动量",
+   "then": "中等强度每周累计 150 分钟，碎片化累计同样有效",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拉伸",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "活动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "僵硬",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "放松",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "肩颈僵硬",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "腰背不适",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "眼睛疲劳",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "手腕不适",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "运动量",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "调整",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "定时",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "持续",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "就医",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "减少",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "设置",
+   "source": "SKILL.md#L3"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

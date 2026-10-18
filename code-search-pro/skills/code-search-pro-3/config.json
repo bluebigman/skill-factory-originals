@@ -1,0 +1,72 @@
+{
+ "name": "code-search-pro-3",
+ "version": "2.0.0",
+ "domain": "代码检索定位",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定符号",
+   "then": "按函数类名精确检索",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "组合条件",
+   "then": "符号加目录缩小范围",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "看引用",
+   "then": "顺引用链判断影响面",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "历史追溯",
+   "then": "查提交历史看演变",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结果收敛",
+   "then": "排除生成与依赖目录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定符号",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "组合条件",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看引用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "历史追溯",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结果收敛",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "spreadsheet-audit-1",
+ "version": "2.0.0",
+ "domain": "表格审计核验",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "公式审查",
+   "then": "定位硬编码与断链引用",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "范围核验",
+   "then": "检查公式覆盖范围是否完整",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重复检测",
+   "then": "查找重复行与重复计算",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "异常扫描",
+   "then": "扫描数量级异常值",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "审计留痕",
+   "then": "输出问题清单与位置",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "公式审查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "范围核验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复检测",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常扫描",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "审计留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

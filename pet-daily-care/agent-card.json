@@ -1,0 +1,75 @@
+{
+ "name": "Pet Daily Care",
+ "description": "宠物日常专家：覆盖 定量喂食、饮水、驱虫日历、洗澡频率、异常判断 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/pet-daily-care",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/pet-daily-care",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "pet-daily-care-1",
+   "name": "针对 定量喂食、饮水 等情境给出可执行处置",
+   "description": "针对 定量喂食、饮水 等情境给出可执行处置",
+   "tags": [
+    "定量喂食",
+    "饮水"
+   ],
+   "examples": [
+    "遇到定量喂食",
+    "遇到饮水",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pet-daily-care-2",
+   "name": "针对 驱虫日历、洗澡频率 等情境给出可执行处置",
+   "description": "针对 驱虫日历、洗澡频率 等情境给出可执行处置",
+   "tags": [
+    "驱虫日历",
+    "洗澡频率"
+   ],
+   "examples": [
+    "遇到驱虫日历",
+    "遇到洗澡频率",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "pet-daily-care-3",
+   "name": "针对 异常判断 等情境给出可执行处置",
+   "description": "针对 异常判断 等情境给出可执行处置",
+   "tags": [
+    "异常判断"
+   ],
+   "examples": [
+    "遇到异常判断",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "宠物日常专家",
+ "x-source": "skill-factory-originals"
+}

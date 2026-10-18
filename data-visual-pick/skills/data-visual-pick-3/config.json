@@ -1,0 +1,72 @@
+{
+ "name": "data-visual-pick-3",
+ "version": "2.0.0",
+ "domain": "图表类型选择",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "比较用柱",
+   "then": "构成用堆叠或饼但类别不超五",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "趋势用线",
+   "then": "时间序列用折线",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "相关用散点",
+   "then": "分布用箱线",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "一图一义",
+   "then": "不混搭多个量纲",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "色盲友好",
+   "then": "避免仅靠红绿区分",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "比较用柱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "趋势用线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "相关用散点",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一图一义",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "色盲友好",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

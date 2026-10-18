@@ -1,0 +1,72 @@
+{
+ "name": "table-relation-map-1",
+ "version": "2.0.0",
+ "domain": "表关系梳理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "实体识别",
+   "then": "先识别业务实体",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "关系明确",
+   "then": "一对多与多对多标注",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "键一致",
+   "then": "关联键类型与含义一致",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "环形依赖处理",
+   "then": "拆桥表",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "图与说明并存",
+   "then": "关系图配文字说明",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "实体识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关系明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "键一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环形依赖处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "图与说明并存",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

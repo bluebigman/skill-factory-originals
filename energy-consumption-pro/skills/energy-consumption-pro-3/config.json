@@ -1,0 +1,72 @@
+{
+ "name": "energy-consumption-pro-3",
+ "version": "2.0.0",
+ "domain": "能耗管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分项计量",
+   "then": "先做分项分设备计量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "攻其大头",
+   "then": "先攻能耗占比最大的环节",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "峰谷优化",
+   "then": "错峰用能降低单位成本",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "余能回收",
+   "then": "评估余热余压回收可行性",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "效果实测",
+   "then": "节能量按实测数据核算",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分项计量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "攻其大头",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "峰谷优化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "余能回收",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "效果实测",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

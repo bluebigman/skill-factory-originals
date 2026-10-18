@@ -1,0 +1,75 @@
+{
+ "name": "Project Task Split",
+ "description": "项目任务专家：覆盖 拆到可交付、明确负责人、依赖排序、里程碑、风险前置 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/project-task-split",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/project-task-split",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "project-task-split-1",
+   "name": "针对 拆到可交付、明确负责人 等情境给出可执行处置",
+   "description": "针对 拆到可交付、明确负责人 等情境给出可执行处置",
+   "tags": [
+    "拆到可交付",
+    "明确负责人"
+   ],
+   "examples": [
+    "遇到拆到可交付",
+    "遇到明确负责人",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "project-task-split-2",
+   "name": "针对 依赖排序、里程碑 等情境给出可执行处置",
+   "description": "针对 依赖排序、里程碑 等情境给出可执行处置",
+   "tags": [
+    "依赖排序",
+    "里程碑"
+   ],
+   "examples": [
+    "遇到依赖排序",
+    "遇到里程碑",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "project-task-split-3",
+   "name": "针对 风险前置 等情境给出可执行处置",
+   "description": "针对 风险前置 等情境给出可执行处置",
+   "tags": [
+    "风险前置"
+   ],
+   "examples": [
+    "遇到风险前置",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "项目任务专家",
+ "x-source": "skill-factory-originals"
+}

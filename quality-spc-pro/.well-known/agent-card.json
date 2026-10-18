@@ -1,0 +1,75 @@
+{
+ "name": "Quality Spc Pro",
+ "description": "过程质量专家：覆盖 先稳后控、合理分组、失控先查 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/quality-spc-pro",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/quality-spc-pro",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "quality-spc-pro-1",
+   "name": "针对 先稳后控、合理分组 等情境给出可执行处置",
+   "description": "针对 先稳后控、合理分组 等情境给出可执行处置",
+   "tags": [
+    "先稳后控",
+    "合理分组"
+   ],
+   "examples": [
+    "遇到先稳后控",
+    "遇到合理分组",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "quality-spc-pro-2",
+   "name": "针对 失控先查、能力门槛 等情境给出可执行处置",
+   "description": "针对 失控先查、能力门槛 等情境给出可执行处置",
+   "tags": [
+    "失控先查",
+    "能力门槛"
+   ],
+   "examples": [
+    "遇到失控先查",
+    "遇到能力门槛",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "quality-spc-pro-3",
+   "name": "针对 记录完整 等情境给出可执行处置",
+   "description": "针对 记录完整 等情境给出可执行处置",
+   "tags": [
+    "记录完整"
+   ],
+   "examples": [
+    "遇到记录完整",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "过程质量专家",
+ "x-source": "skill-factory-originals"
+}

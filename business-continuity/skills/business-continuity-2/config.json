@@ -1,0 +1,72 @@
+{
+ "name": "business-continuity-2",
+ "version": "2.0.0",
+ "domain": "业务连续性",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "关键业务识别",
+   "then": "先识别关键业务",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "影响分析",
+   "then": "分析中断影响",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "恢复目标",
+   "then": "定恢复时间目标",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "预案演练",
+   "then": "定期演练",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期评审",
+   "then": "按周期评审",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "关键业务识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "影响分析",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预案演练",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期评审",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

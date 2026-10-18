@@ -1,0 +1,75 @@
+{
+ "name": "Family Finance Coach",
+ "description": "家庭财务专家：覆盖 先储蓄后消费、分类预算、大额共决、债务优先、边界 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/family-finance-coach",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/family-finance-coach",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "family-finance-coach-1",
+   "name": "针对 先储蓄后消费、分类预算 等情境给出可执行处置",
+   "description": "针对 先储蓄后消费、分类预算 等情境给出可执行处置",
+   "tags": [
+    "先储蓄后消费",
+    "分类预算"
+   ],
+   "examples": [
+    "遇到先储蓄后消费",
+    "遇到分类预算",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-finance-coach-2",
+   "name": "针对 大额共决、债务优先 等情境给出可执行处置",
+   "description": "针对 大额共决、债务优先 等情境给出可执行处置",
+   "tags": [
+    "大额共决",
+    "债务优先"
+   ],
+   "examples": [
+    "遇到大额共决",
+    "遇到债务优先",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "family-finance-coach-3",
+   "name": "针对 边界 等情境给出可执行处置",
+   "description": "针对 边界 等情境给出可执行处置",
+   "tags": [
+    "边界"
+   ],
+   "examples": [
+    "遇到边界",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "家庭财务专家",
+ "x-source": "skill-factory-originals"
+}

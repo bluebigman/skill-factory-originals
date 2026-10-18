@@ -1,0 +1,72 @@
+{
+ "name": "survey-design-pro-1",
+ "version": "2.0.0",
+ "domain": "问卷设计",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先定目标",
+   "then": "每个问题对应一个决策",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "避免引导",
+   "then": "选项中立不预设结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "单选多选分明",
+   "then": "能单选不用多选",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "量表统一",
+   "then": "同一量表全文统一",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "预测试",
+   "then": "小样本预试再正式发放",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先定目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免引导",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单选多选分明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "量表统一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "预测试",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

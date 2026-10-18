@@ -1,0 +1,99 @@
+{
+ "name": "Moving Relocation Pro",
+ "description": "搬迁清单专家：租退与房屋交接的核验；搬家全流程的时间线管理；搬入后的生活重建。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/moving-relocation-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/moving-relocation-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "handover-check",
+   "name": "租退与房屋交接的核验",
+   "description": "租退与房屋交接的核验",
+   "tags": [
+    "交接",
+    "押金",
+    "验收",
+    "水电"
+   ],
+   "examples": [
+    "遇到押金争议",
+    "遇到验收扯皮",
+    "遇到费用结清",
+    "遇到损坏认定",
+    "遇到争议解决"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "handover-check",
+    "to": "handover-check",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "move-plan",
+   "name": "搬家全流程的时间线管理",
+   "description": "搬家全流程的时间线管理",
+   "tags": [
+    "搬家",
+    "时间线",
+    "打包",
+    "丢东西"
+   ],
+   "examples": [
+    "遇到打包混乱",
+    "遇到物品丢失",
+    "遇到时间不够",
+    "遇到费用超支",
+    "遇到新居不适"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "move-plan",
+    "to": "move-plan",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  },
+  {
+   "id": "settle-in",
+   "name": "搬入后的生活重建",
+   "description": "搬入后的生活重建",
+   "tags": [
+    "入住",
+    "安顿",
+    "清单",
+    "生活重建"
+   ],
+   "examples": [
+    "遇到找不到东西",
+    "遇到生活不便",
+    "遇到周边不熟",
+    "遇到邻里关系",
+    "遇到长期凌乱"
+   ],
+   "id_fixed": {
+    "at": "2026-10-18T14:46:48",
+    "from": "settle-in",
+    "to": "settle-in",
+    "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
+   }
+  }
+ ],
+ "x-zh-name": "搬迁清单专家"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "project-tracking-pro",
+ "version": "1.0.0",
+ "plugin": "project-tracking-pro",
+ "description": "Project Tracking Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/project-tracking-pro.md"
+ ],
+ "skills": [
+  "./skills/plan-breakdown",
+  "./skills/progress-report",
+  "./skills/risk-control"
+ ],
+ "expertType": "agent",
+ "agentName": "project-tracking-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Project Tracking Pro",
+  "zh": "项目跟踪 任务过大 无里程碑"
+ },
+ "profession": {
+  "en": "Project Tracking Pro",
+  "zh": "项目跟踪 进度汇报 风险预警"
+ },
+ "displayDescription": {
+  "en": "Handles Project Tracking Pro tasks end-to-end with built-in professional skills.",
+  "zh": "项目跟踪 进度汇报 风险预警：项目任务的可执行拆解；项目进度的汇报方法；风险的识别与应对。"
+ },
+ "categoryId": "10-ProjectQuality",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "任务过大"
+  },
+  {
+   "en": "practical capability",
+   "zh": "无里程碑"
+  },
+  {
+   "en": "practical capability",
+   "zh": "依赖不清"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到任务过大怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到无里程碑怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到依赖不清怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到任务过大怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:47",
+  "from": "项目跟踪专家",
+  "to": "项目跟踪 任务过大 无里程碑",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

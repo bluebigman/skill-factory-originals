@@ -1,0 +1,113 @@
+{
+ "name": "stock-control",
+ "version": "2.0.0",
+ "domain": "库存管理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "断货",
+   "then": "按历史日均销量×补货周期×1.5 设安全库存，低于即补",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "压货",
+   "then": "滞销品设 60 天清理线，超线即促销或清仓",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "凭感觉补",
+   "then": "补货须看日均销量与在途，凭感觉必然偏差",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "季节性",
+   "then": "按去年同期系数调整，忽略季节必断货或积压",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "多仓",
+   "then": "多仓库存须统一视图，分散统计会重复下单",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "库存",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "断货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "压货",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "周转",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "凭感觉补",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "季节性",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多仓",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "无法",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "安全",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "决定",
+   "source": "SKILL.md#L65"
+  },
+  {
+   "term": "调整",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "周期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "历史",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

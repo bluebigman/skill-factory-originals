@@ -1,0 +1,66 @@
+{
+ "name": "pdf-table-extract-2",
+ "version": "2.0.0",
+ "domain": "文档表格",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "数值净化",
+   "then": "去除千分位与单位后再计算",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "行数对账",
+   "then": "提取后行数与原文页数对账",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "数值净化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行数对账",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "确定",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "文档",
+   "source": "SKILL.md#L11"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

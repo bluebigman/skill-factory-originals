@@ -1,0 +1,7 @@
+{
+ "slug": "forge-demo-abtest",
+ "boundary": "单变量、先定主指标、算样本量",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,74 @@
+{
+ "name": "home-service-diagnose",
+ "version": "1.0.0",
+ "plugin": "home-service-diagnose",
+ "description": "Home Service Diagnose for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-service-diagnose.md"
+ ],
+ "skills": [
+  "./skills/home-service-diagnose-1",
+  "./skills/home-service-diagnose-2",
+  "./skills/home-service-diagnose-3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-service-diagnose",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Home Service Diagnose",
+  "zh": "家政服务 排班先定 质检标准"
+ },
+ "profession": {
+  "en": "Home Service Diagnose",
+  "zh": "家政服务 排班质检 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Home Service Diagnose tasks end-to-end with built-in professional skills.",
+  "zh": "家政服务 排班质检 顾问：覆盖 排班先定、质检标准、换人成本 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "12-IndustryConsultant",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "家政服务",
+   "en": "home-service-diagnose"
+  },
+  {
+   "en": "IndustryConsultant",
+   "zh": "IndustryConsultant"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到家政服务怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到排班质检怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到家政服务怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:40",
+  "from": "家政服务专家",
+  "to": "家政服务 排班先定 质检标准",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "name": "agent-regression-guard",
+ "version": "1.0.0",
+ "plugin": "agent-regression-guard",
+ "description": "agent-regression-guard — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for agent-regression-guard tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/agent-regression-guard.md"
+ ],
+ "agentName": "agent-regression-guard",
+ "displayName": {
+  "zh": "回归守护 基线固定 全量回归",
+  "en": "agent-regression-guard"
+ },
+ "profession": {
+  "zh": "回归守护 基线 顾问",
+  "en": "agent-regression-guard"
+ },
+ "displayDescription": {
+  "zh": "回归守护 基线 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "agent-regression-guard: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "02-Engineering",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "回归守护",
+   "en": "agent-regression-guard"
+  },
+  {
+   "en": "Engineering",
+   "zh": "Engineering"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到回归守护怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划回归守护",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查回归守护",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到回归守护怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/agent-regression-guard-1/",
+  "./skills/agent-regression-guard-2/",
+  "./skills/agent-regression-guard-3/"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:28",
+  "from": "回归守护专家",
+  "to": "回归守护 基线固定 全量回归",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

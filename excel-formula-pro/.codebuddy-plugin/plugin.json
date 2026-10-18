@@ -1,0 +1,74 @@
+{
+ "name": "excel-formula-pro",
+ "version": "1.0.0",
+ "plugin": "excel-formula-pro",
+ "description": "Spreadsheet Formula Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/excel-formula-pro.md"
+ ],
+ "skills": [
+  "./skills/debug",
+  "./skills/formula-build",
+  "./skills/maintain"
+ ],
+ "expertType": "agent",
+ "agentName": "excel-formula-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Spreadsheet Formula Pro",
+  "zh": "表格公式 #N/A"
+ },
+ "profession": {
+  "en": "Spreadsheet Formula Pro",
+  "zh": "表格公式 数据处理 函数排查"
+ },
+ "displayDescription": {
+  "en": "Handles Spreadsheet Formula Pro tasks end-to-end with built-in professional skills.",
+  "zh": "表格公式 数据处理 函数排查：公式报错的定位方法；常用公式的构造思路；多人协作表格的维护。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "#N/A"
+  },
+  {
+   "en": "practical capability",
+   "zh": "#VALUE!"
+  },
+  {
+   "en": "practical capability",
+   "zh": "#REF!"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到#N/A怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到#VALUE!怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到#REF!怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到#N/A怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:38",
+  "from": "表格公式专家",
+  "to": "表格公式 #N/A",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

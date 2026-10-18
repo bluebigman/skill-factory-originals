@@ -1,0 +1,72 @@
+{
+ "name": "game-story-branch-3",
+ "version": "2.0.0",
+ "domain": "剧情分支",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主干清晰",
+   "then": "主干必须清晰可辨",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分支收敛",
+   "then": "分支须收敛回主干",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "选择有代价",
+   "then": "选择要产生可感知后果",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "状态记录",
+   "then": "关键状态必须记录",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "回看功能",
+   "then": "提供剧情回看与补漏",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主干清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分支收敛",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "选择有代价",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "状态记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "回看功能",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

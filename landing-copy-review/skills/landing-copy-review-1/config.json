@@ -1,0 +1,72 @@
+{
+ "name": "landing-copy-review-1",
+ "version": "2.0.0",
+ "domain": "落地页文案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "首屏说清",
+   "then": "三秒内说清是什么给谁",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "单一目标",
+   "then": "一个页面一个转化目标",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "证据支撑",
+   "then": "用案例与数据支撑",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "减少摩擦",
+   "then": "表单字段尽量少",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "对照测试",
+   "then": "上线后做 A/B",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "首屏说清",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "单一目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "证据支撑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "减少摩擦",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对照测试",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

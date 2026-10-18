@@ -1,0 +1,75 @@
+{
+ "name": "Game Level Design",
+ "description": "游戏关卡专家：覆盖 先教后考、难度锯齿、给反馈 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/game-level-design",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/game-level-design",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "game-level-design-1",
+   "name": "针对 先教后考、难度锯齿 等情境给出可执行处置",
+   "description": "针对 先教后考、难度锯齿 等情境给出可执行处置",
+   "tags": [
+    "先教后考",
+    "难度锯齿"
+   ],
+   "examples": [
+    "遇到先教后考",
+    "遇到难度锯齿",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "game-level-design-2",
+   "name": "针对 给反馈、多路径 等情境给出可执行处置",
+   "description": "针对 给反馈、多路径 等情境给出可执行处置",
+   "tags": [
+    "给反馈",
+    "多路径"
+   ],
+   "examples": [
+    "遇到给反馈",
+    "遇到多路径",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "game-level-design-3",
+   "name": "针对 可跳过 等情境给出可执行处置",
+   "description": "针对 可跳过 等情境给出可执行处置",
+   "tags": [
+    "可跳过"
+   ],
+   "examples": [
+    "遇到可跳过",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "游戏关卡专家",
+ "x-source": "skill-factory-originals"
+}

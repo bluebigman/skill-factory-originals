@@ -1,0 +1,65 @@
+{
+ "name": "travel-itinerary-3",
+ "version": "2.0.0",
+ "domain": "出行行程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "应急信息",
+   "then": "记录当地紧急电话与使馆信息",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "应急信息",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "先定",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "编排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "动线",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "紧急",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "行程",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "电话",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "地理",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

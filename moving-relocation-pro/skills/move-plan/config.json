@@ -1,0 +1,121 @@
+{
+ "name": "move-plan",
+ "version": "2.0.0",
+ "domain": "搬家",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "打包混乱",
+   "then": "按开放顺序倒序打包（最后用的先装），并标注房间+内容",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "物品丢失",
+   "then": "贵重与证件单独随身，绝不进搬家车",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时间不够",
+   "then": "提前 4 周开始，仅处理低频物品，最后一周只封高频",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "费用超支",
+   "then": "先确定计费方式（按车/按小时/按楼层），口头报价必加价",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "新居不适",
+   "then": "入住前完成水电燃气网络开通，当天办必影响入住",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "搬家",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打包",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "丢东西",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "打包混乱",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "物品丢失",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间不够",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "费用超支",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "新居不适",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "影响",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "标注",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "高频",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "证据",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "完成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "区分",
+   "source": "SKILL.md#L66"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

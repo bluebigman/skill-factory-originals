@@ -1,0 +1,72 @@
+{
+ "name": "privacy-policy-build-2",
+ "version": "2.0.0",
+ "domain": "隐私说明撰写",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "范围明确",
+   "then": "说明收集哪些信息",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "目的明确",
+   "then": "说明用途",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "共享说明",
+   "then": "是否共享给第三方",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "用户权利",
+   "then": "说明查询与删除途径",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "更新通知",
+   "then": "变更时通知用户",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "范围明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目的明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "共享说明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "用户权利",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "更新通知",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

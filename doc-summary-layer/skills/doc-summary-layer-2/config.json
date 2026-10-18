@@ -1,0 +1,72 @@
+{
+ "name": "doc-summary-layer-2",
+ "version": "2.0.0",
+ "domain": "文档分层摘要",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "三层输出",
+   "then": "一句话/一段/全文",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "结论先行",
+   "then": "首句给结论",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "保留数字",
+   "then": "关键数字保留",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "不添加解释",
+   "then": "摘要不加原文没有的",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可追溯到段",
+   "then": "摘要可回溯原段落",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "三层输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "保留数字",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不添加解释",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可追溯到段",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

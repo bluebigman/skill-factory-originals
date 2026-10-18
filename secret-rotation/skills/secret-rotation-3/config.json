@@ -1,0 +1,72 @@
+{
+ "name": "secret-rotation-3",
+ "version": "2.0.0",
+ "domain": "密钥轮换流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "周期明确",
+   "then": "按敏感度定周期",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "双活过渡",
+   "then": "新旧密钥并行一段时间",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "自动轮换",
+   "then": "尽可能自动化",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "轮换后验证",
+   "then": "验证调用正常",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "泄露即轮换",
+   "then": "泄露立即换",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "周期明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双活过渡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "自动轮换",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "轮换后验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "泄露即轮换",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "series-column-plan",
+ "version": "1.0.0",
+ "plugin": "series-column-plan",
+ "description": "Series Column Plan for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/series-column-plan.md"
+ ],
+ "skills": [
+  "./skills/series-column-plan-1",
+  "./skills/series-column-plan-2",
+  "./skills/series-column-plan-3"
+ ],
+ "expertType": "agent",
+ "agentName": "series-column-plan",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Series Column Plan",
+  "zh": "系列栏目 先定栏目 固定结构"
+ },
+ "profession": {
+  "en": "Series Column Plan",
+  "zh": "系列栏目 IP化 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Series Column Plan tasks end-to-end with built-in professional skills.",
+  "zh": "系列栏目 IP化 顾问：覆盖 先定栏目、固定结构、固定节奏 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "系列栏目",
+   "en": "series-column-plan"
+  },
+  {
+   "en": "ContentCreative",
+   "zh": "ContentCreative"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到系列栏目怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到IP化怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到顾问怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到系列栏目怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:50",
+  "from": "系列栏目专家",
+  "to": "系列栏目 先定栏目 固定结构",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

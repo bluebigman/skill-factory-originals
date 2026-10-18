@@ -1,0 +1,74 @@
+{
+ "name": "interview-answer-coach",
+ "version": "1.0.0",
+ "plugin": "interview-answer-coach",
+ "description": "Interview Answer Coach for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/interview-answer-coach.md"
+ ],
+ "skills": [
+  "./skills/interview-answer-coach-1",
+  "./skills/interview-answer-coach-2",
+  "./skills/interview-answer-coach-3"
+ ],
+ "expertType": "agent",
+ "agentName": "interview-answer-coach",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Interview Answer Coach",
+  "zh": "面试答题 先给结论"
+ },
+ "profession": {
+  "en": "Interview Answer Coach",
+  "zh": "面试答题 思路拆解 顾问"
+ },
+ "displayDescription": {
+  "en": "Handles Interview Answer Coach tasks end-to-end with built-in professional skills.",
+  "zh": "面试答题 思路拆解 顾问：覆盖 先给结论、STAR 结构 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "先给结论"
+  },
+  {
+   "en": "practical capability",
+   "zh": "STAR 结构"
+  },
+  {
+   "en": "practical capability",
+   "zh": "量化结果"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到先给结论怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到STAR 结构怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到量化结果怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到先给结论怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:41",
+  "from": "面试答题专家",
+  "to": "面试答题 先给结论",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

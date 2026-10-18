@@ -1,0 +1,117 @@
+{
+ "name": "soothe-method",
+ "version": "2.0.0",
+ "domain": "儿童情绪",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "越哄越哭",
+   "then": "减少语言输入，改为身体接触+节律动作（拍背、散步）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "崩溃大哭",
+   "then": "先共情再设限：我知道你很难过，但我们不能打人",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "睡前闹",
+   "then": "固定睡前程序（洗澡-故事-关灯），程序本身比哄更有效",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分离哭",
+   "then": "明确告知回来的时间点并兑现，勿偷偷离开",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "转移无效",
+   "then": "转移注意仅适用 3 岁以下；大童需先处理情绪再转移",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "安抚",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "哄不好",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "越哄越哭",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "崩溃",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "崩溃大哭",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "睡前闹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分离哭",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "转移无效",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "避免",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "固定",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

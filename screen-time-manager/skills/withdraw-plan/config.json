@@ -1,0 +1,117 @@
+{
+ "name": "withdraw-plan",
+ "version": "2.0.0",
+ "domain": "屏幕时间",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "直接没收",
+   "then": "禁止一刀切：先减 30%，直接归零必引发强对抗",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "反弹",
+   "then": "预留 2 周过渡期，每周递减并同步增加替代活动",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无聊哭闹",
+   "then": "提前准备替代清单（运动/手工/同伴），空手戒断必失败",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "家长自己刷",
+   "then": "家长同步减少使用，双标规则必然失效",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "反复回退",
+   "then": "记录每日达标率，看趋势而非单日，避免因一天失守就放弃",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "戒断",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "替代活动",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反弹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "情绪对抗",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "直接没收",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无聊哭闹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "家长自己刷",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "反复回退",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "避免",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "家庭",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "目标",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "提前",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "准备",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "每周",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

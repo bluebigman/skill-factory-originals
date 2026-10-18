@@ -1,0 +1,74 @@
+{
+ "name": "shop-data-analysis-pro",
+ "version": "1.0.0",
+ "plugin": "shop-data-analysis-pro",
+ "description": "Shop Data Analysis Pro for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/shop-data-analysis-pro.md"
+ ],
+ "skills": [
+  "./skills/diagnose",
+  "./skills/funnel",
+  "./skills/review"
+ ],
+ "expertType": "agent",
+ "agentName": "shop-data-analysis-pro",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Shop Data Analysis Pro",
+  "zh": "店铺数据分析 单日波动"
+ },
+ "profession": {
+  "en": "Shop Data Analysis Pro",
+  "zh": "店铺数据分析 转化漏斗 复盘"
+ },
+ "displayDescription": {
+  "en": "Handles Shop Data Analysis Pro tasks end-to-end with built-in professional skills.",
+  "zh": "店铺数据分析 转化漏斗 复盘：数据异常的原因定位；漏斗各环节的分析；周期性经营复盘。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "practical capability",
+   "zh": "单日波动"
+  },
+  {
+   "en": "practical capability",
+   "zh": "归因单一"
+  },
+  {
+   "en": "practical capability",
+   "zh": "对比缺失"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到单日波动怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到归因单一怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到对比缺失怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到单日波动怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:51",
+  "from": "店铺数据分析专家",
+  "to": "店铺数据分析 单日波动",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

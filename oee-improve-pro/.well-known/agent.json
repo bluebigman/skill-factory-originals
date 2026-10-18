@@ -1,0 +1,67 @@
+{
+ "name": "Oee Improve Pro",
+ "description": "设备效率专家：覆盖 损失分类、攻其大者、自动采集 等情境，给出可执行的处置与自查清单。",
+ "version": "1.0.0",
+ "protocolVersion": "0.3.0",
+ "url": "http://127.0.0.1:8931/a2a/oee-improve-pro",
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/oee-improve-pro",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "stateTransitionHistory": true
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "oee-improve-pro-1",
+   "name": "针对 损失分类、攻其大者 等情境给出可执行处置",
+   "description": "针对 损失分类、攻其大者 等情境给出可执行处置",
+   "tags": [
+    "损失分类",
+    "攻其大者"
+   ],
+   "examples": [
+    "遇到损失分类",
+    "遇到攻其大者",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "oee-improve-pro-2",
+   "name": "针对 自动采集、根因分层 等情境给出可执行处置",
+   "description": "针对 自动采集、根因分层 等情境给出可执行处置",
+   "tags": [
+    "自动采集",
+    "根因分层"
+   ],
+   "examples": [
+    "遇到自动采集",
+    "遇到根因分层",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  },
+  {
+   "id": "oee-improve-pro-3",
+   "name": "针对 目标分阶 等情境给出可执行处置",
+   "description": "针对 目标分阶 等情境给出可执行处置",
+   "tags": [
+    "目标分阶"
+   ],
+   "examples": [
+    "遇到目标分阶",
+    "手上有一段描述，想马上得到处置建议"
+   ]
+  }
+ ],
+ "x-zh-name": "设备效率专家"
+}

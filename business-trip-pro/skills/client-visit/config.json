@@ -1,0 +1,121 @@
+{
+ "name": "client-visit",
+ "version": "2.0.0",
+ "domain": "出差安排",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "无目标",
+   "then": "每次拜访定一个可验证目标（拿到预算数字/约下次日期）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "只讲产品",
+   "then": "先问现状与痛点，单向输出无法建立信任",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "承诺随意",
+   "then": "现场不承诺交期与价格，统一回后确认再答复",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "无记录",
+   "then": "会后 2 小时内发纪要确认共识，口头共识必失真",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "关系断档",
+   "then": "设下次触达时间点，无节奏的关系会自然冷却",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "拜访",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "客户",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "会面",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无目标",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只讲产品",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "承诺随意",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无记录",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关系断档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "验证",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "节奏",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "管理",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "安排",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "现场",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

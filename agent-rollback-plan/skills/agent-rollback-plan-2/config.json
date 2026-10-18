@@ -1,0 +1,72 @@
+{
+ "name": "agent-rollback-plan-2",
+ "version": "2.0.0",
+ "domain": "回滚预案",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "预案预演",
+   "then": "回滚必须演练过",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "恢复时限",
+   "then": "明确恢复时间目标",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "影响评估",
+   "then": "评估回滚影响面",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "数据一致",
+   "then": "回滚后数据须一致",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "决策标准",
+   "then": "明确何时该回滚",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "预案预演",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "恢复时限",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "影响评估",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "决策标准",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

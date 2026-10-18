@@ -1,0 +1,72 @@
+{
+ "name": "report-automation-pro-3",
+ "version": "2.0.0",
+ "domain": "报表自动",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定时可靠",
+   "then": "定时任务须可靠",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "失败告警",
+   "then": "失败即告警",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "数据就绪",
+   "then": "依赖数据就绪检查",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分发清单",
+   "then": "明确分发对象",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "版本管理",
+   "then": "报表版本可追溯",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定时可靠",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败告警",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "数据就绪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分发清单",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本管理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "name": "output",
+ "version": "2.0.0",
+ "domain": "读书笔记",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "只进不出",
+   "then": "每读完一本至少产出一篇输出（文章/分享/实践）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "不实践",
+   "then": "选 1 条立刻用在真实场景，未使用即未掌握",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无法检索",
+   "then": "定期回顾索引并合并重复卡片",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "输出拖延",
+   "then": "读完当周内输出，拖延后记忆衰减成本更高",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "过度整理",
+   "then": "整理时间不应超过阅读时间的一半",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "输出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "写作",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "应用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "复盘",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "只进不出",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不实践",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无法检索",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出拖延",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过度整理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "成本",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "小时",
+   "source": "SKILL.md#L66"
+  },
+  {
+   "term": "信息",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "定期",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "转化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "次只",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "至少",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "pdf-to-md",
+ "version": "1.0.0",
+ "plugin": "pdf-to-md",
+ "description": "Pdf To Md for end-to-end tasks with multiple built-in skills.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/pdf-to-md.md"
+ ],
+ "skills": [
+  "./skills/pdf-to-md-1",
+  "./skills/pdf-to-md-2",
+  "./skills/pdf-to-md-3"
+ ],
+ "expertType": "agent",
+ "agentName": "pdf-to-md",
+ "avatar": "avatars/expert.png",
+ "displayName": {
+  "en": "Pdf To Md",
+  "zh": "转换解析 分版式 表格优先"
+ },
+ "profession": {
+  "en": "Pdf To Md",
+  "zh": "文档PDF 转换解析 助手"
+ },
+ "displayDescription": {
+  "en": "Handles Pdf To Md tasks end-to-end with built-in professional skills.",
+  "zh": "文档PDF 转换解析 助手：覆盖 分版式、表格优先、不臆造 等情境，给出可执行的处置与自查清单。"
+ },
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "文档PDF",
+   "en": "pdf-to-md"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到文档PDF怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到转换解析怎么办"
+  },
+  {
+   "en": "How to handle practical capability",
+   "zh": "遇到助手怎么办"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to handle practical capability",
+  "zh": "遇到文档PDF怎么办"
+ },
+ "displayname_source": {
+  "at": "2026-10-18T14:34:46",
+  "from": "转换解析专家",
+  "to": "转换解析 分版式 表格优先",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

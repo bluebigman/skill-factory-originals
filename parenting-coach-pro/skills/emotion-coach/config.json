@@ -1,0 +1,105 @@
+{
+ "name": "emotion-coach",
+ "version": "2.0.0",
+ "domain": "家庭教育",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "发脾气",
+   "then": "先命名情绪（你现在很生气），身体先降温（离开现场/喝水）",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "哭闹",
+   "then": "蹲下来平视，先说我在，等情绪回落再谈问题",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "焦虑",
+   "then": "把担心写成清单，逐条区分能控制/不能控制，只处理前者",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "沉默",
+   "then": "用开放式提问+非评判语气，给孩子不说也行的安全感",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "抗拒",
+   "then": "给出有限选择（A或B），把控制感还给孩子",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "发脾气",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "哭闹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "焦虑",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "沉默",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抗拒",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "分钟",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "成本",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "提供心理",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L87"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L87"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

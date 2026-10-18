@@ -1,0 +1,66 @@
+{
+ "name": "product-roadmap-plan-1",
+ "version": "2.0.0",
+ "domain": "产品路线图",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按目标排",
+   "then": "按要达成的目标排序，不按功能多少排序",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "近细远粗",
+   "then": "近三个月细化，远期只写方向",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按目标排",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "近细远粗",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "排序",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "产品",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "达成",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "阶段",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "方向",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

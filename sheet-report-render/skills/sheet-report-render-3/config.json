@@ -1,0 +1,69 @@
+{
+ "name": "sheet-report-render-3",
+ "version": "2.0.0",
+ "domain": "表格报表",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "留原始表",
+   "then": "交付附源数据表便于复核",
+   "source": "scripts/main.py#RULES[0]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "留原始表",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "避免",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "助手",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "表格",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "交付",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "同类",
+   "source": "SKILL.md#L58"
+  },
+  {
+   "term": "指标",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "视化",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "复核",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

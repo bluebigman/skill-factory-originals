@@ -1,0 +1,72 @@
+{
+ "name": "pdf-parse-pro-2",
+ "version": "2.0.0",
+ "domain": "PDF",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "版式识别",
+   "then": "先判断单双栏版式",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "表格优先",
+   "then": "表格用专用识别而非文本流",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "顺序保证",
+   "then": "阅读顺序不得错乱",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "乱码兜底",
+   "then": "特殊字体走 OCR 兜底",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "抽取核对",
+   "then": "抽取后抽样核对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "版式识别",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "表格优先",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "顺序保证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "乱码兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "抽取核对",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

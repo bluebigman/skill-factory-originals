@@ -1,0 +1,96 @@
+{
+ "name": "teen-emotion-map",
+ "version": "2.0.0",
+ "domain": "青春期沟通",
+ "boundary": "本能力不提供心理或医学诊断；如涉及自伤、重度抑郁等，请转介专业机构。",
+ "rules": [
+  {
+   "when": "沉默",
+   "then": "不追问，用并肩活动（散步/开车）替代面对面谈话",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "暴躁",
+   "then": "先离开冲突现场10分钟，等双方降温再谈规则",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "顶嘴",
+   "then": "把你怎么说话呢换成我听到你很生气，我想听听原因",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "关门",
+   "then": "尊重物理边界，改用留言/便签传递关心",
+   "source": "scripts/main.py#RULES[3]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "沉默",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "暴躁",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "顶嘴",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关门",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "SKILL.md#L36"
+  },
+  {
+   "term": "分钟",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "重度",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "心理",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "医学诊断",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "度抑郁等",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "介专业机",
+   "source": "SKILL.md#L84"
+  },
+  {
+   "term": "专业机构",
+   "source": "SKILL.md#L84"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

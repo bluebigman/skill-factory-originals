@@ -1,0 +1,74 @@
+{
+ "name": "ontology-design",
+ "version": "1.0.0",
+ "plugin": "ontology-design",
+ "description": "ontology-design — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for ontology-design tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/ontology-design.md"
+ ],
+ "agentName": "ontology-design",
+ "displayName": {
+  "zh": "本体设计 范围收敛 关系明确",
+  "en": "ontology-design"
+ },
+ "profession": {
+  "zh": "本体设计 顾问",
+  "en": "ontology-design"
+ },
+ "displayDescription": {
+  "zh": "本体设计 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。。",
+  "en": "ontology-design: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "04-DataAI",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "本体设计",
+   "en": "ontology-design"
+  },
+  {
+   "en": "DataAI",
+   "zh": "DataAI"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到本体设计怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划本体设计",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查本体设计",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到本体设计怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/ontology-design-1",
+  "./skills/ontology-design-2",
+  "./skills/ontology-design-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T14:34:45",
+  "from": "本体设计专家",
+  "to": "本体设计 范围收敛 关系明确",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

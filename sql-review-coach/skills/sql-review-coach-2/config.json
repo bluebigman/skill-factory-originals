@@ -1,0 +1,72 @@
+{
+ "name": "sql-review-coach-2",
+ "version": "2.0.0",
+ "domain": "SQL",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先看执行计划",
+   "then": "未看计划不优化",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "索引匹配",
+   "then": "确认条件列有可用索引",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "避免函数包裹",
+   "then": "条件列上套函数会使索引失效",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "分页优化",
+   "then": "大偏移改游标分页",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "小结果集验证",
+   "then": "先用限制行数试跑",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先看执行计划",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "索引匹配",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免函数包裹",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分页优化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "小结果集验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

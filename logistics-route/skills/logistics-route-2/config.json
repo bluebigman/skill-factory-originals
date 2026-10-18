@@ -1,0 +1,72 @@
+{
+ "name": "logistics-route-2",
+ "version": "2.0.0",
+ "domain": "物流路线规划",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "约束先行",
+   "then": "先列约束条件",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "成本时间平衡",
+   "then": "成本与时效平衡",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "异常预案",
+   "then": "延误预案",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "多点优化",
+   "then": "多点配送做顺序优化",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "可追溯",
+   "then": "全程可追溯",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "约束先行",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本时间平衡",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "异常预案",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "多点优化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "可追溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

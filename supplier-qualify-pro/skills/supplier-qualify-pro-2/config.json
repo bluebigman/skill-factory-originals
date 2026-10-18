@@ -1,0 +1,74 @@
+{
+ "name": "supplier-qualify-pro-2",
+ "version": "2.0.0",
+ "domain": "供应商",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "试产验证",
+   "then": "先小批量试产再放量",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "双源供货",
+   "then": "关键物料保持双源，防单点断供",
+   "source": "scripts/main.py#RULES[1]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "试产验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "双源供货",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "现场",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "评估",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "单点",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "保持",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "分级",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "度分",
+   "source": "SKILL.md#L57"
+  },
+  {
+   "term": "报告",
+   "source": "SKILL.md#L58"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

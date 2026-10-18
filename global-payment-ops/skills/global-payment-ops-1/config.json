@@ -1,0 +1,72 @@
+{
+ "name": "global-payment-ops-1",
+ "version": "2.0.0",
+ "domain": "跨境收款",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "通道合规",
+   "then": "先确认通道与主体资质合规",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "费用透明",
+   "then": "核对费率、到账周期与中间行费用",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "汇率口径",
+   "then": "约定汇率取值时点并写入合同",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "退款路径",
+   "then": "明确退款与拒付的处理流程",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "对账周期",
+   "then": "固定对账周期与差异处理",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "通道合规",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "费用透明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "汇率口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退款路径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "对账周期",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

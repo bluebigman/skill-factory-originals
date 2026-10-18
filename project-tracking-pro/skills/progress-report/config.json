@@ -1,0 +1,121 @@
+{
+ "name": "progress-report",
+ "version": "2.0.0",
+ "domain": "项目跟踪",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "完成度失真",
+   "then": "用交付物完成度而非工时消耗，90% 卡住是经典陷阱",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "报喜不报忧",
+   "then": "偏差须显式标注并附补救方案",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "无对比",
+   "then": "显示计划值 vs 实际值，单看实际值无意义",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "口径不一",
+   "then": "团队统一完成度定义，各自理解必致判断失真",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "超期隐瞒",
+   "then": "超期须第一时间上报并给新日期，越晚报损失越大",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "汇报",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "进度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "完成度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "偏差",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "完成度失真",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "报喜不报忧",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "无对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "口径不一",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "超期隐瞒",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [
+  {
+   "term": "时间",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "无法",
+   "source": "SKILL.md#L63"
+  },
+  {
+   "term": "验证",
+   "source": "SKILL.md#L64"
+  },
+  {
+   "term": "方案",
+   "source": "scripts/main.py#RULES.then"
+  },
+  {
+   "term": "风险",
+   "source": "SKILL.md#L11"
+  },
+  {
+   "term": "任务",
+   "source": "SKILL.md#L3"
+  },
+  {
+   "term": "流程",
+   "source": "SKILL.md#L67"
+  },
+  {
+   "term": "计划",
+   "source": "scripts/main.py#RULES.then"
+  }
+ ],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}
