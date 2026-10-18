@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "teen-peer-pressure",
- "merkle_root": "2236a0fc277c3d66c1bcce1b40f70f0f5e4d23d9de0895ec3706228912856bdf",
+ "merkle_root": "9652a4c40cae0ab4c24d2238235e215cf3077ea0b8db6a10ca50ad1d6e0b9a00",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/teen-peer-pressure-1/run.py": "6d6ad10baad988b29ec856aa71bb2ca7be57e00cc5eceb531ecffca9e3992c03",
   "skills/teen-peer-pressure-1/selftest.py": "7009c3fa1cb687879b8504db2b93f8ae039263e53db4b12ba2077f53ed2aeedd",
   "skills/teen-peer-pressure-1/.phoenix/originality.json": "bb1ac89e4700f9446ba92bf62c60549607da13945e558f75a2830a854d776ab4",
-  "skills/teen-peer-pressure-1/.phoenix/provenance.json": "b742ef889fd6defe8a67db6886f18974e126b4917347fa6923b552d5cc5a5067",
-  "skills/teen-peer-pressure-1/.phoenix/selftest_evidence.json": "ad44bf1c047694a2f37c7e9fd0854234f86073843a8b412eb4f483b0d49f4365",
+  "skills/teen-peer-pressure-1/.phoenix/provenance.json": "a9c7f4db818ae35c51bbdf66605758112930a6800b27d90c4c8aa3cda80c3ad1",
+  "skills/teen-peer-pressure-1/.phoenix/selftest_evidence.json": "fa909bb062951009078568066aa7b55ca888eb243c7b017b3b7638f9e4d11252",
   "skills/teen-peer-pressure-1/references/creation/p0.md": "fee4417d9766b98a6cc2bce37b1647b6197a3068d13ab3cebf863f89528a8fb3",
   "skills/teen-peer-pressure-1/references/creation/p1.md": "94a81642094ee3e8e378c20c581fb325a4f5a9273107bd9140bdff762069b1c8",
   "skills/teen-peer-pressure-1/references/environment/p0.md": "70b236843ff8878979cdf694073105d572addbb38d6f4748263188acdf8f4fe6",
@@ -37,8 +37,8 @@
   "skills/teen-peer-pressure-2/run.py": "698e569bd69caf94033787e13df54db48eb0129e865a8a1b9a98cb6f00539989",
   "skills/teen-peer-pressure-2/selftest.py": "98926b4979922d27b306cecad75b6e7aad74d90435f9078ead3bc7001f8e9036",
   "skills/teen-peer-pressure-2/.phoenix/originality.json": "617fa7b8ef69bdf5627f11430b6c9a3a01ba80146a57fe70c8116f88c422d1d2",
-  "skills/teen-peer-pressure-2/.phoenix/provenance.json": "29f47e0b15cd7bccc9b6a691a65cb34b21e6cec0849bea0d35030b12b819c807",
-  "skills/teen-peer-pressure-2/.phoenix/selftest_evidence.json": "0aec1034f83da1f748e4ff196c717d90cc51311a3ec73fa3d8cc1ac92d78c427",
+  "skills/teen-peer-pressure-2/.phoenix/provenance.json": "ee14be4529508d881616f9a801c7c58953007cd942212ce863ac11d58c24907c",
+  "skills/teen-peer-pressure-2/.phoenix/selftest_evidence.json": "39aee922e5bb79385aac93664b8765db050756fd06a4e47aed3c1d27e7bfc349",
   "skills/teen-peer-pressure-2/references/creation/p0.md": "729ea9342ac45cf1f1f789d18fb3199e101be3be987e335b8a4e0ed23a64a3fa",
   "skills/teen-peer-pressure-2/references/creation/p1.md": "f5baae96e5f5508bfcf02cad2f5aa544401b046e1175fd5dcb03a42b89da3322",
   "skills/teen-peer-pressure-2/references/environment/p0.md": "5a5a4ab5aac96cefdb505ac1253dcbc1752fde1a92e00294d8b97298c3340d62",
@@ -54,8 +54,8 @@
   "skills/teen-peer-pressure-3/run.py": "ef5c43ba837a2b9fcab213d6f688156d8568827593f251136016a487db8d5656",
   "skills/teen-peer-pressure-3/selftest.py": "01f8c133d3881a22ebde77918b03cc272b753e50879bf41f41540bae5ec3078d",
   "skills/teen-peer-pressure-3/.phoenix/originality.json": "164ac97d3bc61001df08f24a6c7da0f79716fa43a506bced7d7e166c88ef914a",
-  "skills/teen-peer-pressure-3/.phoenix/provenance.json": "9ce80b108c3d2d5ca903be4e1e92c67ccd93eb4e21cf3f705ebecb211e836199",
-  "skills/teen-peer-pressure-3/.phoenix/selftest_evidence.json": "0f029c99ecd78055729dd9027090f9c4d072952df306c62e400a585fc40a3cec",
+  "skills/teen-peer-pressure-3/.phoenix/provenance.json": "87fcd3bda93a97457b2ca80c4b5adcaf1ac9422ce4bfe117f331162590fad0f8",
+  "skills/teen-peer-pressure-3/.phoenix/selftest_evidence.json": "a8066f9e6778332218aeb8f1980aa925490b9ea2e43fe59de3b16170d05d255b",
   "skills/teen-peer-pressure-3/references/creation/p0.md": "97ca3686765bd7dbf3895c00eb6b5574af7e60b664998770b1ee9987600b4ac2",
   "skills/teen-peer-pressure-3/references/creation/p1.md": "d537504df2ec5e874b37473e34046ab9ec65de1708f5982c6e4d39d67e9e8461",
   "skills/teen-peer-pressure-3/references/environment/p0.md": "f4a8b08bcf8f91908faafa82bd63496863ef4ce9ec04c393ea90f6baba9a0a0a",
@@ -66,7 +66,7 @@
   "skills/teen-peer-pressure-3/references/production/p1.md": "e8c287bc71dbfc039d7a34c53fa30ab6a477c58f838b8a0a73f8fb4e06c096cc",
   "skills/teen-peer-pressure-3/scripts/main.py": "5b7db44726a963662ee6da3e61c05ddbe02a1381a53d17548cd733664757cf96"
  },
- "sealed_at": "2026-10-18T20:11:26",
+ "sealed_at": "2026-10-18T21:04:42",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

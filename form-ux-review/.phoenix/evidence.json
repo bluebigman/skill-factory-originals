@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "form-ux-review",
- "merkle_root": "91fb7b8d094b0aa049ddf9fb63b5608f8087439e54da05a8ddb4abba4d200298",
+ "merkle_root": "65b452be9b5d0869e70000e8e0948e0c9b93b848e266af866938b607a054be8e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/form-ux-review-1/run.py": "485f824c472d88b969a88aaa8c1db23075398f10619591833fb72ec6ce17555d",
   "skills/form-ux-review-1/selftest.py": "e3e47036ac6187b07b39ccb6a752e6a9944c39f0803a4302e53d856f5e924997",
   "skills/form-ux-review-1/.phoenix/originality.json": "fd44873a89fbc101e19650d15853282fe8b632e30b0f668a16d9a6835dad6e14",
-  "skills/form-ux-review-1/.phoenix/provenance.json": "166dfa8ad9f46133c4c33210dbcc4048a8f2f98ce6accb95d79a08e515bb9555",
-  "skills/form-ux-review-1/.phoenix/selftest_evidence.json": "c8ec726fcb13e2d1aad0f6cc52df6f50f5c1cf8dc2d60bb616a8b4707ee070b1",
+  "skills/form-ux-review-1/.phoenix/provenance.json": "0818f1f0f142db33807f728c9b3f9a77eae84723901a0bcb3259015a5d438870",
+  "skills/form-ux-review-1/.phoenix/selftest_evidence.json": "124219695392425f548ae39c9c9a6c6065f211c1e20b65755545afb31ca645ca",
   "skills/form-ux-review-1/references/creation/p0.md": "e14be3d05ba387427b70b24c4594b2bfc97d1bec18597424e1dff44d826860e0",
   "skills/form-ux-review-1/references/creation/p1.md": "1b7ca9a392f7f8f2bb0f2751a383ae554121c3a907f89208fb3449c8b78edcaf",
   "skills/form-ux-review-1/references/environment/p0.md": "d69030652b58f2b77f6c1aee500c297fc1493aefdd03c83fbfe1f1484c764884",
@@ -37,8 +37,8 @@
   "skills/form-ux-review-2/run.py": "4d55edcb37b36565a990cfd7fa64fc779869577aa34dbe0cd516a8421e732026",
   "skills/form-ux-review-2/selftest.py": "e938a80a51082c39120681f98c5a1be73b25628c9bcc2630e4bf304347fdc56f",
   "skills/form-ux-review-2/.phoenix/originality.json": "7ce5a894accd068fe92e7ae92b3b951f3ef0194efa87a7fc7de4b4a76985da4c",
-  "skills/form-ux-review-2/.phoenix/provenance.json": "e40cd568980ab94100b643f82fcdb6f558aa1c3570ced4233a07b09e64d057b9",
-  "skills/form-ux-review-2/.phoenix/selftest_evidence.json": "01b49be5831d44dff52b5747d92f0d374fd7c55e01543379d9bbc4f442e1659b",
+  "skills/form-ux-review-2/.phoenix/provenance.json": "5cd35043bd82329850d729e2e382fcd0a99f047ecae5341af51356ac95a31920",
+  "skills/form-ux-review-2/.phoenix/selftest_evidence.json": "94b1b13a43a27cbb49bb938a730697a3f65cd44d18b11279fd8677f034ae11bc",
   "skills/form-ux-review-2/references/creation/p0.md": "7f2cf614b077034d7f5392ae540b297746b3c3bf0cd36b20ecdaa72648808ebc",
   "skills/form-ux-review-2/references/creation/p1.md": "d17af5a2f94aba55d08559dff7590951d839bf664f4b90236c2a276fba464297",
   "skills/form-ux-review-2/references/environment/p0.md": "a543c6c21902bbc4542b4d4b8e54709568b5a4512f61da1f2cb21f35818a0db8",
@@ -54,8 +54,8 @@
   "skills/form-ux-review-3/run.py": "572e5d8526376fbfe0b47c8daff30d653383500b3ecd236b6b21a5d248377e1e",
   "skills/form-ux-review-3/selftest.py": "614ec8d09162438ffbbfe21f2ae68d22df6a9736950b89bd18c129b9b3676ee3",
   "skills/form-ux-review-3/.phoenix/originality.json": "43ded7359c30110f395a7f4807cb85ede18b804025b29e56b46fc7e230b2c3a9",
-  "skills/form-ux-review-3/.phoenix/provenance.json": "1c15da2a563039ae956ddea33fb862477302caff0a457ab1ccdb269334e5be89",
-  "skills/form-ux-review-3/.phoenix/selftest_evidence.json": "c5901688efc380c312b7b8835fa0e57f8e719b6f35f168e8357b2ea5be36ad52",
+  "skills/form-ux-review-3/.phoenix/provenance.json": "828683e4d373d59ba104ce02bd4dd1f6504f0889eb15ff86919830bd8f91afea",
+  "skills/form-ux-review-3/.phoenix/selftest_evidence.json": "25c3f1b8e0c1c7d06e000fe9b6af2cd2301ac17d2006df939d7f72de916b7bc9",
   "skills/form-ux-review-3/references/creation/p0.md": "ccc12e749f79e7e44fff860d5de09682685d963b36a22d5da10e909605120720",
   "skills/form-ux-review-3/references/creation/p1.md": "5e84e8de1d19db9c7de52ca854afbe39d8db0ecd25f3d6284a3868b95de5866c",
   "skills/form-ux-review-3/references/environment/p0.md": "016f1377ec6ab6dd8b6e71e9d0558022b853c27c39d5199cd3bce4b71c6d03d7",
@@ -66,7 +66,7 @@
   "skills/form-ux-review-3/references/production/p1.md": "75b6b46185b940d8c121b13c5bf47917502a5bf3de0153ad71845df9761de753",
   "skills/form-ux-review-3/scripts/main.py": "7abc53cb5a3c9011c9e41c5512a4c9a155eecee4f62f79bc2eccb9383b520935"
  },
- "sealed_at": "2026-10-18T19:59:35",
+ "sealed_at": "2026-10-18T20:58:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

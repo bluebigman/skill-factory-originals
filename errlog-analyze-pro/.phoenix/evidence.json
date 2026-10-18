@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "errlog-analyze-pro",
- "merkle_root": "b6d54b5921530affabdd9d76f5a3120e48641731b0bb1c9749872472858f2c7e",
+ "merkle_root": "77494426bfb05fad18dd1bd172e8361b587968feb01a2d98ce2b6ef79aa9d89c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/errlog-analyze-pro-1/run.py": "868d3a12ea20043f25f87886c23a050f0f257242c85a4efa42c9a3938b607c58",
   "skills/errlog-analyze-pro-1/selftest.py": "5211eb82d06cfdf03962dcc010ec374eff1500e8b852bde7387e4aabf85ba246",
   "skills/errlog-analyze-pro-1/.phoenix/originality.json": "52a4110fd1e39b312db618b542f91ab5a32d8a98c03b3071ff79fba1e39b402c",
-  "skills/errlog-analyze-pro-1/.phoenix/provenance.json": "0a962805f172707866922e67460ceb52af6ab29057b384b14b91de9e8601c1d0",
-  "skills/errlog-analyze-pro-1/.phoenix/selftest_evidence.json": "484fb3e828092517eb2a27bed6a22cbd758e4e59c4f912c6305bcc5d680b817d",
+  "skills/errlog-analyze-pro-1/.phoenix/provenance.json": "9dba120d5592573e02edb94a6ebfd2a7874497be1b60cff1835c34873daaeb0c",
+  "skills/errlog-analyze-pro-1/.phoenix/selftest_evidence.json": "282ed36533d7d349be2c699e254d29693bcb5ee441ce206a3093e31f855a4875",
   "skills/errlog-analyze-pro-1/references/creation/p0.md": "89e0d4d839f1c63162477e8f72a25f9c6c2204abc14794fac848857a4f0dca1a",
   "skills/errlog-analyze-pro-1/references/creation/p1.md": "d7e5183f3fc98179870bd4ae60e0d0c91a8f1180b26737cca8afedb3f204d0b9",
   "skills/errlog-analyze-pro-1/references/environment/p0.md": "954ae805ece2ede368834e0d861fdc68d7c9f7b288b3be058fd73028efa481ab",
@@ -37,8 +37,8 @@
   "skills/errlog-analyze-pro-2/run.py": "175c6d0550192e4dfe4c66b90cb12aaba8e63ba317d47add67f629f1e845751e",
   "skills/errlog-analyze-pro-2/selftest.py": "fe566c3477db36821fb5af0b54d51d13983c1f850f3d50f1dbe69bdfce4d5135",
   "skills/errlog-analyze-pro-2/.phoenix/originality.json": "3d7af4672ede9d46c5c9c765a5e355c33bcdaa30b21e3b48396c75dd61aff9da",
-  "skills/errlog-analyze-pro-2/.phoenix/provenance.json": "d85bc8b2752a53c40d7e5fecbbe251503ba90627e713f08f10ef6b3aa6378d65",
-  "skills/errlog-analyze-pro-2/.phoenix/selftest_evidence.json": "bf208cef61a4f545d1e0132043b3ed3291339026ec72602356de531bb333cb37",
+  "skills/errlog-analyze-pro-2/.phoenix/provenance.json": "f17e0bd40efbc476eb65262c74e2c16a057494490358d5632637cc4038bca5d6",
+  "skills/errlog-analyze-pro-2/.phoenix/selftest_evidence.json": "dd443e76a24416edb6943c07cdab9bcc3cad8be6ffaaeb598d1dc07b5290df78",
   "skills/errlog-analyze-pro-2/references/creation/p0.md": "03afd462e0078a7243de2433784debfbe2c72ce7066753b7c42cb38b0e3188a2",
   "skills/errlog-analyze-pro-2/references/creation/p1.md": "727b712fcd2a59b3eb89c3ed993a8d5748f3fc92e3ae286c2b693b022f3e0236",
   "skills/errlog-analyze-pro-2/references/environment/p0.md": "0d21e0515a184e79a798fcfd0c78385e357c23cafe9ecfbabd0941489dc35211",
@@ -54,8 +54,8 @@
   "skills/errlog-analyze-pro-3/run.py": "91eae039f2c52ec86b81ea99c591ad6fa00d6f0bac0f939132268004f481c4ee",
   "skills/errlog-analyze-pro-3/selftest.py": "b5e4f545202b02d7169384d3757935ba70e9cdf70e9fa788065ab41b6e9edb9e",
   "skills/errlog-analyze-pro-3/.phoenix/originality.json": "126b4ebe4de8e404d4298ab3b5ab0b26c31d3db922a93c9db491dac2625b8c12",
-  "skills/errlog-analyze-pro-3/.phoenix/provenance.json": "818cff7b3319cdd3384e3210ccd803b9ff3dfef553504fc453ed6e812bcf88c5",
-  "skills/errlog-analyze-pro-3/.phoenix/selftest_evidence.json": "797897da387669a8071aa727d59cf75fe38e8f941ad4e80c1255358c06c5800b",
+  "skills/errlog-analyze-pro-3/.phoenix/provenance.json": "6b15d7f739fd3c0e94c0c68d9edca5158c1417fe9d0c91558302c4adf8da15af",
+  "skills/errlog-analyze-pro-3/.phoenix/selftest_evidence.json": "2be0eaee2f1ecccfe368441ea3c58f84217467d3d9cd7e291cb6af2b77982f23",
   "skills/errlog-analyze-pro-3/references/creation/p0.md": "71c3d9d99548620023ba5fa2ff6b063162d08f9e722efa1bab3b7a59d9688229",
   "skills/errlog-analyze-pro-3/references/creation/p1.md": "288f06749b4c61c9c1f488b0a45f1c791510d35380a1dc08b3bf422a12e0bcb6",
   "skills/errlog-analyze-pro-3/references/environment/p0.md": "c98b4d80a60f4b7ec145963fee98d779a6b8ccd0478177161ff3e2464ce01d57",
@@ -66,7 +66,7 @@
   "skills/errlog-analyze-pro-3/references/production/p1.md": "ff04691ba0635b739d2927747fdfc217876101a67f0a871cd9db9f339f34d9cc",
   "skills/errlog-analyze-pro-3/scripts/main.py": "e1539692b63c8f3f80c087664e2456ee3f64aeb04a7927f3cce22370e5639214"
  },
- "sealed_at": "2026-10-18T19:58:24",
+ "sealed_at": "2026-10-18T20:58:19",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

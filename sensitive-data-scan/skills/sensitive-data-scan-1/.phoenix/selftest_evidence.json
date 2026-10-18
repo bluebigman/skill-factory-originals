@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:08:54",
+ "at": "2026-10-18T21:03:38",
  "skill": "sensitive-data-scan-1",
  "slug": "sensitive-data-scan",
  "passed": true,

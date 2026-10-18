@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "oncall-handbook",
- "merkle_root": "4eb5deb897538e7fb910dec3c5c04b8d169343d81a3b3e289e61fc689a6bb3fa",
+ "merkle_root": "5bb56c578dc7d6b8a24aeae8efd09d96530893bf06c879eca6c8a08e32fc3607",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/oncall-handbook-1/run.py": "b07f661c491d5a6f69da4c9d1f28388382caaf443ae79b74d84b109dbd56a67a",
   "skills/oncall-handbook-1/selftest.py": "f42c75a40905ba7f783d541d26dee9ea8972ef87ccf284e290cde07d64138fac",
   "skills/oncall-handbook-1/.phoenix/originality.json": "6fdbfc9364a9dea2e3fd2e446c3c2d3a0fd0b89989ba4c6c5c34b0948defa8a3",
-  "skills/oncall-handbook-1/.phoenix/provenance.json": "73b1470ea0d6b98e1bde75288b576503d5c53ae501c258a103652316a8e3daf3",
-  "skills/oncall-handbook-1/.phoenix/selftest_evidence.json": "cfb1b5233a3d779f4dd888757fa6dab61b5c12b19fba4c029b16aaecafcbce08",
+  "skills/oncall-handbook-1/.phoenix/provenance.json": "ad93c334150fc9e8661a3a2fdf43e189084ff305631ddc8a2b8aec2fa84d309d",
+  "skills/oncall-handbook-1/.phoenix/selftest_evidence.json": "be558bd26a00195a40913e5014edf47e4fab37817b2c9401cbc9147467d43bb4",
   "skills/oncall-handbook-1/references/creation/p0.md": "cbc2795ba0727a17d3455a6ad7f2b310d71eee5701c48f412d5be7d5eea22b24",
   "skills/oncall-handbook-1/references/creation/p1.md": "e16834b19f84001b5bef9f743e8c47168e8b8a35b978347c23334fd61c02c98f",
   "skills/oncall-handbook-1/references/environment/p0.md": "3c5b7f5aaed25840b7603de97f2c2d0f6c14e76cf1c9cbd1d103faa0dd21e968",
@@ -37,8 +37,8 @@
   "skills/oncall-handbook-2/run.py": "eb23a8470c7b045856380433eb34e4d90e4565d12a8cf6d5d961fbf003fbd990",
   "skills/oncall-handbook-2/selftest.py": "c58f8ba658c016966558827444eba4d87fa2041254b8c235e0bfacde8549bdd3",
   "skills/oncall-handbook-2/.phoenix/originality.json": "5151b5cf444598d597675d8e847ad917abb4d7657b52d3a0c9e3226fee23e156",
-  "skills/oncall-handbook-2/.phoenix/provenance.json": "1dea50eddda6adbedccb3fb4ffeaf77828f3786233df6144ef4776634f37d3a8",
-  "skills/oncall-handbook-2/.phoenix/selftest_evidence.json": "c28fa4f11b36c05f6411d4c8e8b75e128f861ab3c2d9ce589c09ddd47aa53e47",
+  "skills/oncall-handbook-2/.phoenix/provenance.json": "08ba32151745a9f3965cbf50235914a5b3cf8407493022ea2d0b2656241ea33a",
+  "skills/oncall-handbook-2/.phoenix/selftest_evidence.json": "de86999a36fcb365bde10ec53a3578128077020081bc41f04583dfafcb5eda90",
   "skills/oncall-handbook-2/references/creation/p0.md": "599949ebd4f3108e2e1ab84a006daf1141579e9289c71d6ce404d889f2f703f8",
   "skills/oncall-handbook-2/references/creation/p1.md": "3cc008d9b09697d83854671d81ff34d4f27bd68f56537721713b220353d7d793",
   "skills/oncall-handbook-2/references/environment/p0.md": "d8f78b798e9c9a18da23a33d917243ca1705a411253a1a576fa7f8d7b54e72f9",
@@ -54,8 +54,8 @@
   "skills/oncall-handbook-3/run.py": "866ff058b45c21e7c5548b04b1af0cf54af0cdd0b1ab35ef3b9b39b06c1d3e66",
   "skills/oncall-handbook-3/selftest.py": "8443af8ffa6e4ff60111b46d22f4ccdf7226bdf91b66c0df7ceb8c3bd2a8adf2",
   "skills/oncall-handbook-3/.phoenix/originality.json": "4bd0b0895862600cc3802dab15dbb6baf9eebc20f5346e3c8b4d70f864a50444",
-  "skills/oncall-handbook-3/.phoenix/provenance.json": "f92ac903585927da96e99ec0e63252a88f8e0ffbfa74905631fb54d56d8792c4",
-  "skills/oncall-handbook-3/.phoenix/selftest_evidence.json": "fb2e72ac23d3e11422368f6acf5df7c0b4370c3442c2a7d99531c43167cf64be",
+  "skills/oncall-handbook-3/.phoenix/provenance.json": "16e3777bbb5be1ebe277bffefc9d4490834a0ca6668b7ddb688609b72ef914b0",
+  "skills/oncall-handbook-3/.phoenix/selftest_evidence.json": "a8ea2f0a391d57dbc4ec686ec165e6054e499cb6bad812a3c4a3174257485482",
   "skills/oncall-handbook-3/references/creation/p0.md": "bb09adae63d5c840da360cc4c7df744a00db82c2665ebeaaef670b4e15506023",
   "skills/oncall-handbook-3/references/creation/p1.md": "073097091991ec6739d38f4d4dfd0cb26e1383c0f89cfdb2074a507c8c4dca5a",
   "skills/oncall-handbook-3/references/environment/p0.md": "b02903ae551805277d3dab21300848c056be2914c0255be9036373084045dd41",
@@ -66,7 +66,7 @@
   "skills/oncall-handbook-3/references/production/p1.md": "90679776343bd2a9a1bfe07bcdb8a9d706ff83d923076541ce0583bb221cce2f",
   "skills/oncall-handbook-3/scripts/main.py": "2571ca0036af0a017c607eb595366efe3d16086f87f42800d605c24d77f1f27e"
  },
- "sealed_at": "2026-10-18T20:04:59",
+ "sealed_at": "2026-10-18T21:01:40",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

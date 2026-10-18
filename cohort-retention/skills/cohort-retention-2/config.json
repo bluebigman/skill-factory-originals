@@ -1,0 +1,72 @@
+{
+ "name": "cohort-retention-2",
+ "version": "2.0.0",
+ "domain": "留存分层分析",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按批次分层",
+   "then": "按首次行为时间分群",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "看曲线",
+   "then": "留存曲线是否收敛",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "关键期",
+   "then": "定位留存下降最快的时点",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "行为关联",
+   "then": "对比高留存用户行为",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "避免幸存者偏差",
+   "then": "纳入流失用户",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按批次分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "看曲线",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "关键期",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "行为关联",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免幸存者偏差",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

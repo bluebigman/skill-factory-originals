@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-team-workflow",
- "merkle_root": "0851fd9829f45e0c02d92f4086b75e719af2f2478e2156825f8b3764da7393b1",
+ "merkle_root": "bbc14f4ab7b5fa36c411cd6c8315ba476c30015bfc718c301e120bda82054cf7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-team-workflow-1/run.py": "8922eaa556b847c55c54a6554a1082afdba08b4f1051edaf22f4026f3ee76925",
   "skills/game-team-workflow-1/selftest.py": "1784092ede74217893cd981b697a8ea685209cf7db09007947e998168ea91942",
   "skills/game-team-workflow-1/.phoenix/originality.json": "abeebdf3d99263d6ed97b8b947c52186a2286d919379a4f4b1cbab4ff40f3851",
-  "skills/game-team-workflow-1/.phoenix/provenance.json": "d20f62669139c216c79e1118eee5cc038ab6061b19ac2b2c1a56d86b1e449b66",
-  "skills/game-team-workflow-1/.phoenix/selftest_evidence.json": "3a6d436e9baec17ccfac70a63d4ab232b6cc2e1b159823ea4d31ea8879075ca3",
+  "skills/game-team-workflow-1/.phoenix/provenance.json": "a22a5bdec3361e52adac8a33c7178839d84d6e95f7614881255f1cbcfe141b40",
+  "skills/game-team-workflow-1/.phoenix/selftest_evidence.json": "95979d014d9d8d189db816c22dd4ebf16d948241e10fe0f4ab1af9e929cc3e73",
   "skills/game-team-workflow-1/references/creation/p0.md": "b5c29916ef5700d2d4453c68755e4a439fd91f67053efd43317bf286ae937c9e",
   "skills/game-team-workflow-1/references/creation/p1.md": "840fdf033421058d400c92e64ea3155aafd7d3b308c0442f5e5dd47448d2da9c",
   "skills/game-team-workflow-1/references/environment/p0.md": "04be697898b11c212088864285cafd04ae9302e5847966c4642121b342404cd9",
@@ -37,8 +37,8 @@
   "skills/game-team-workflow-2/run.py": "3f644bf86de1d1874639d072efb60d4ef0497cf805e5beb61c4e42ce82041d2a",
   "skills/game-team-workflow-2/selftest.py": "b200f3fd631f8da0d5e7d6160287eb7f6b2fb30658bfc5edc85faecbc7db348e",
   "skills/game-team-workflow-2/.phoenix/originality.json": "761e6cf3972620300bf19ad17e42062f0655283877516eabbd2ad3f79d8e8276",
-  "skills/game-team-workflow-2/.phoenix/provenance.json": "ebe70be338092e3a0c0ba6f543fe356f190bb8d8cd7e431ffad59dc71fab46ab",
-  "skills/game-team-workflow-2/.phoenix/selftest_evidence.json": "fa69c2394b7424a15bef2f64cf8a323ccafa28968ad0daedfd57e4b8eee9f5cd",
+  "skills/game-team-workflow-2/.phoenix/provenance.json": "afa08cdd4537c13ab92381e54792563cc2522944ea1774b1b95190ffc011a5cd",
+  "skills/game-team-workflow-2/.phoenix/selftest_evidence.json": "76e5e698ca66b5f7de529b66eaa721e1dc2deebe1560d345f9809b410496c5c2",
   "skills/game-team-workflow-2/references/creation/p0.md": "857a5c9d72d469a709ed9ffbc3c7f7a70c5f101a286ebb77f49678cad61f5775",
   "skills/game-team-workflow-2/references/creation/p1.md": "9ea4b06bd4ec464eab97150b4e4d87867ea0437a349405715061944e406a2a8a",
   "skills/game-team-workflow-2/references/environment/p0.md": "c47ab250180bc1c012e0e162f04b1066181a9adf1c9a7161a449fafdbdf8a178",
@@ -54,8 +54,8 @@
   "skills/game-team-workflow-3/run.py": "bad0796ede8ce9129be77006b0549b25faeba1c3a9a95bc36f04e9358c9acdd1",
   "skills/game-team-workflow-3/selftest.py": "d0a533947515a6745c4a685e612f11dfe031cb0199735890f776d7d42f1db6a3",
   "skills/game-team-workflow-3/.phoenix/originality.json": "5806877fbe2f4d439f3f57b39301a804970f3df86b3c28c140cf1514a475c43b",
-  "skills/game-team-workflow-3/.phoenix/provenance.json": "3529798ff85d9cd5325645e9fff9e941ed0580f6ec884dfbe7154e7b9e463d8f",
-  "skills/game-team-workflow-3/.phoenix/selftest_evidence.json": "8e9cc41b8e8d9ad38569f86254db1fefb5c912b0be090425fe10770e4eebb737",
+  "skills/game-team-workflow-3/.phoenix/provenance.json": "2d8d50e50f942dc0d610cef6d4fb3791d1a24a754bb9bda9c18e487df8047720",
+  "skills/game-team-workflow-3/.phoenix/selftest_evidence.json": "fa620e020f2973c1530e282305be79939928c6402cb142cf8d193def8bffb3ce",
   "skills/game-team-workflow-3/references/creation/p0.md": "2e20bf3f940b877b6aa8f9993308f1ccc574cdd0c84f7ff22ce06fa8f320f19f",
   "skills/game-team-workflow-3/references/creation/p1.md": "8db1cf7c1fc5b319ea686c8f6f57fa03ae6f7327e59d0e67831df31ce7177d8a",
   "skills/game-team-workflow-3/references/environment/p0.md": "570539808f172586e8fd68fcb10caad4fba2449f79330d1d8107e4624241cbf9",
@@ -66,7 +66,7 @@
   "skills/game-team-workflow-3/references/production/p1.md": "3e74d134e14e9bac2060ebbfc2b3ab7b43144d9a408332e7c733e578c6e96219",
   "skills/game-team-workflow-3/scripts/main.py": "db95323e00a997b2d5e567dbc016568a17ece0fbb8d7c044ba9e8b011b6ed3fa"
  },
- "sealed_at": "2026-10-18T20:00:03",
+ "sealed_at": "2026-10-18T20:59:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

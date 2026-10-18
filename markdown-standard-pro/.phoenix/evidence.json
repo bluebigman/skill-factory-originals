@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "markdown-standard-pro",
- "merkle_root": "d04d16891719a50c8a29fc88180965db851ee7d9ca208537e4d8463dfc3365a5",
+ "merkle_root": "e253c2d964caeac8dd3b36a3f34e743c5cbf3ab4d3556becd0c8d03566da4199",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/markdown-standard-pro-1/run.py": "956ab35705fbef2d00a34a7f5629fae5c10da2670197952d5b8c05bd555d7a75",
   "skills/markdown-standard-pro-1/selftest.py": "cf81cf5ba5ff13bb3e17d64a5882f5950c528f473f83dd18c8f36bc56a883c74",
   "skills/markdown-standard-pro-1/.phoenix/originality.json": "2ba9d16a35d9211d4e27d3d3027459a92fa1373a3d621b7289b2ac221e633b48",
-  "skills/markdown-standard-pro-1/.phoenix/provenance.json": "0f9d1010c678a8e5167f4f3e1060841c8240716ca52f2245dcd186c8f1b258fe",
-  "skills/markdown-standard-pro-1/.phoenix/selftest_evidence.json": "42f5b6d9fd24debd4678eec995225a48ce317b41a225da6adf1b91098d605efd",
+  "skills/markdown-standard-pro-1/.phoenix/provenance.json": "ee025ab52805e57dc6d00e41025ce689a83306b4995b51047f89916cf9a2f7a5",
+  "skills/markdown-standard-pro-1/.phoenix/selftest_evidence.json": "128dbdf4e1888e2006ec801529ff383bf3452da5fccffdf7e4805eae74ea6967",
   "skills/markdown-standard-pro-1/references/creation/p0.md": "fb1fc0400ef72652502c1d121ab2a4246e88c12d1133268be195794d37ff7fba",
   "skills/markdown-standard-pro-1/references/creation/p1.md": "8bba2f500822edbf27ab60e9763369a51fc1faf8ae5b3586cd5032e52f15bd0b",
   "skills/markdown-standard-pro-1/references/environment/p0.md": "2fdc00764c4c237d227f3590c942009fea5fb1c748fd12dbd33d9b5841b50cba",
@@ -37,8 +37,8 @@
   "skills/markdown-standard-pro-2/run.py": "3fa16b15536e52d1cce757200bf90d8df91d5eb81fd96f8b569b5634ff9fc490",
   "skills/markdown-standard-pro-2/selftest.py": "c059218fa24feffafced9989a5fd22b07f2583b57ffe174be06891c453a3a529",
   "skills/markdown-standard-pro-2/.phoenix/originality.json": "cc9bc448971e3e234b1fe4ee4d96f20f05edb85d48fca58b4264521f3660c16f",
-  "skills/markdown-standard-pro-2/.phoenix/provenance.json": "801f15b82042920a57f4498650e319902dedf0df26b6e30a726659cd17acedab",
-  "skills/markdown-standard-pro-2/.phoenix/selftest_evidence.json": "e6df24d02c35bf534c04f9cb18c0fdcfbb5baa0b18773528477842f3cdb26430",
+  "skills/markdown-standard-pro-2/.phoenix/provenance.json": "03ba5bdd27ea8d5813279f26d6e36ebb24097088555e0ed2e8f9e611e4f8753c",
+  "skills/markdown-standard-pro-2/.phoenix/selftest_evidence.json": "f0e077f30d8cbaf2685f7c9bdca2637d72986c8de7bc0344e63f9a5fc7b038ef",
   "skills/markdown-standard-pro-2/references/creation/p0.md": "06a59e159326bf7e3f7adff9be7d36fffaae298faa8e4a0d9f835318805dfb29",
   "skills/markdown-standard-pro-2/references/creation/p1.md": "c5dd323fc2f619c5cc344cc45e1a6fec59762a8835bd2f9296999af846622896",
   "skills/markdown-standard-pro-2/references/environment/p0.md": "48af8140c8ca65b7fca3f0cfc78622aeaf6699d8e422a8c36384dcb0f235aee2",
@@ -54,8 +54,8 @@
   "skills/markdown-standard-pro-3/run.py": "95ef15ee0d8de42ef873f582e29a1047a1649258ce6d9261ada16d50b880a726",
   "skills/markdown-standard-pro-3/selftest.py": "c10ca0a98465f373f445c62e3eade5c71d7bc4757e49b2bd29c5403ee4e5620d",
   "skills/markdown-standard-pro-3/.phoenix/originality.json": "520f4bcb4b0bdd3614c8d2f79001acdf2e8ba8b8a321a77f78ec8f1903f87e82",
-  "skills/markdown-standard-pro-3/.phoenix/provenance.json": "7367cece9a3ba4089c7e7b8972afff54ea3e5470c61f81572e6d5259ec7cef97",
-  "skills/markdown-standard-pro-3/.phoenix/selftest_evidence.json": "c37c547e229edf31675936ca4092eadc3408e58dc0336bfd332c682aa31f5c16",
+  "skills/markdown-standard-pro-3/.phoenix/provenance.json": "92e1bcb92c209b8fdb13d3fcbbe032bf6a47db4e00ee0e9ef711eac56b904faf",
+  "skills/markdown-standard-pro-3/.phoenix/selftest_evidence.json": "796a892c769555e3caf166f84f3a35d735001f4985f6d2d6f9be6c6170c8c5bc",
   "skills/markdown-standard-pro-3/references/creation/p0.md": "eada7c57c8c445a422c27c2ab0ffb53742d8d048e825da310eea05fdf6d5aee9",
   "skills/markdown-standard-pro-3/references/creation/p1.md": "a5e699db521cfbdfb78782b9fa9e639ab2b6c47a54cff6fbf41df6ae574b19e6",
   "skills/markdown-standard-pro-3/references/environment/p0.md": "d4d40b216834636d3f53d44688ba89e95fccd491098fcf0825d4365a0b400c2f",
@@ -66,7 +66,7 @@
   "skills/markdown-standard-pro-3/references/production/p1.md": "d12837e628da5b8b33d808042f5003ec6c6722387d05e1466b991d0f84b3a55c",
   "skills/markdown-standard-pro-3/scripts/main.py": "6a3fb2110a60d27fb8da468dd1edbdf0f5d2c6d6514c745ddfadfdc538517901"
  },
- "sealed_at": "2026-10-18T20:03:04",
+ "sealed_at": "2026-10-18T21:00:41",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

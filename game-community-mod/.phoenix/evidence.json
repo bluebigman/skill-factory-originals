@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-community-mod",
- "merkle_root": "7dde6e0f43b86a099c62bdd1c7b0db0f95a2db9dc4267c16c36c0a927da702f9",
+ "merkle_root": "e46e4823c55f57eac22bd11cc147b5e8a7fd7e781beee8cd983287a15e50afc0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-community-mod-1/run.py": "dd2b7bdce7a2e36f0711fa7a2837af78e0c291eb36314264ad55d3891c9a76d0",
   "skills/game-community-mod-1/selftest.py": "4118047b3e3cecbc21edc585cd110a2f6bf516856901a373f9465936acc15cd1",
   "skills/game-community-mod-1/.phoenix/originality.json": "66951d8d9abe13ff94526bbe15c93b570dd254cc3c6d1ad30bbe1b99a52a45c4",
-  "skills/game-community-mod-1/.phoenix/provenance.json": "c1712e495b7e41b698eb2dd542baa4734307b3d3bf5095bffaba58da2b814de3",
-  "skills/game-community-mod-1/.phoenix/selftest_evidence.json": "28eb64a9b86019015dd8dbe41c3c71efda4c6d6cc4bd4f0b717c48991907df79",
+  "skills/game-community-mod-1/.phoenix/provenance.json": "835b5aadc38aca9b087ff390e0c4bf69f98298070a22bbd1196f3445ea97a667",
+  "skills/game-community-mod-1/.phoenix/selftest_evidence.json": "53b67de35769af9daae213eda788c77868cb39a2cb5cda811c0debaeafd771a5",
   "skills/game-community-mod-1/references/creation/p0.md": "d701a038992ffbd0bc48a5c45e22deeb5789e1d11294f03fae3a0275d442fcdb",
   "skills/game-community-mod-1/references/creation/p1.md": "3dcc2c57857fe7f864da7270487c0c9cb2b230440d21f5566cbbf29b9edfccef",
   "skills/game-community-mod-1/references/environment/p0.md": "ef289f1a8451214b0dbb6ed4b01da55dc8feae2234dc2a0121249ad9a2b9e26c",
@@ -37,8 +37,8 @@
   "skills/game-community-mod-2/run.py": "a243868184eb45d7ce4a762e591edb9be8b6506ac875bb27f3bffa3ab6032138",
   "skills/game-community-mod-2/selftest.py": "e2ffa8557dfff440b47b6f25a81ac5677351f6aa1a414a3eedbb0a6fa2f937ef",
   "skills/game-community-mod-2/.phoenix/originality.json": "d0b05a6d8aa527b71d218f0f47e07727a722c0260eab028401aac5d969f94061",
-  "skills/game-community-mod-2/.phoenix/provenance.json": "b107699f80f66f13a02cbb026b97dad5490c82e10fd9c8740c6e3b6ccb73caef",
-  "skills/game-community-mod-2/.phoenix/selftest_evidence.json": "9c4421ae6e82f47f6045aa0f965ea0f557662edf2347f7c2d90e057e108c9ea4",
+  "skills/game-community-mod-2/.phoenix/provenance.json": "05cdf376ad54a104df33d6995a9f3a6bdb72187faeefc544110f7ddbe2d00dce",
+  "skills/game-community-mod-2/.phoenix/selftest_evidence.json": "4e34a7138bfc3e1161facde740dafdcf46ff5868765930561b734acf981f86ca",
   "skills/game-community-mod-2/references/creation/p0.md": "6cfb1f5d5f6dcc644585faa6e35b38e1f16d310091e50c71bf75f36c216a3621",
   "skills/game-community-mod-2/references/creation/p1.md": "ba7e9d567101f26a45fe8fbc1e030228a0f31ecff907fffbfc9aa92a5b17d058",
   "skills/game-community-mod-2/references/environment/p0.md": "538bc5baabb5229d652ea7df24bd1f0012b02b25542f56a13add9c37df4a9130",
@@ -54,8 +54,8 @@
   "skills/game-community-mod-3/run.py": "31d6eeb36a2ed7e9e2e3d6bd8dc1ff67583d7ccb2cc9ef1442254e0b6a84070a",
   "skills/game-community-mod-3/selftest.py": "bcedfeeffee4a6138e2173eefde3373b7c192e5d6aa5f3ab77b5aabc095d4eef",
   "skills/game-community-mod-3/.phoenix/originality.json": "e4558e83012739228c4a12d95c8afe932734be6a291415232aa192134a6de157",
-  "skills/game-community-mod-3/.phoenix/provenance.json": "ee6ebebc119896ae22f0b0e367444bd20f17dae31661ce144d02e09d834911a1",
-  "skills/game-community-mod-3/.phoenix/selftest_evidence.json": "0f95977d8b41646b4db2338ee7d73e1f0e1b0ea81cb591abb4a64b9f260f6a2e",
+  "skills/game-community-mod-3/.phoenix/provenance.json": "624f0b981e1477d0cfcb1b2a6a6530505e8b64104f06c30e98c689c1d1a935c8",
+  "skills/game-community-mod-3/.phoenix/selftest_evidence.json": "0e86bcdb5efd3fe8c60aa97264b7946a5ee5c34b3083b6a3e95d907788bb1a40",
   "skills/game-community-mod-3/references/creation/p0.md": "6d9f65489ee2b5df9120b360925afef222f1dd9837a73c156027aa10a5eeab5d",
   "skills/game-community-mod-3/references/creation/p1.md": "435f790fcf36397e292574e1d6785b4ab3c4697fc340fa93c8d7fca414c6c280",
   "skills/game-community-mod-3/references/environment/p0.md": "5df02a05f2ac868733fc480fab4f0c94a67547eec1653c560fd399b09aae8bbf",
@@ -66,7 +66,7 @@
   "skills/game-community-mod-3/references/production/p1.md": "ff3434be162d54eb25ca0741341f2dcf2430a5bc16f9e1c3b77c14f6c1fa518a",
   "skills/game-community-mod-3/scripts/main.py": "eb51c6bda0bca6b4448f0f19d0c493743ebfcf14cb579d63a8a00e8eeb00c5b6"
  },
- "sealed_at": "2026-10-18T19:59:43",
+ "sealed_at": "2026-10-18T20:59:01",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:02:45",
+ "at": "2026-10-18T21:00:27",
  "skill": "log-audit-trail-2",
  "slug": "log-audit-trail",
  "passed": true,

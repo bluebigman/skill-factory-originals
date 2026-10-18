@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "global-payment-ops",
- "merkle_root": "97a05dd264bfeb22eaa2ca7b589987591e92a0ddf18698184b2a3afda0ee6a3e",
+ "merkle_root": "7d75043e9cea7532a4071a49f71bb0f5e14a6acfd7bc1b68e4497f998850782e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/global-payment-ops-1/run.py": "05f8dcda9256689d93ecb61241beb1c9096ed5b50f87c3db1a39724a2e6d9b82",
   "skills/global-payment-ops-1/selftest.py": "bdf25f34b23f23a8a4b5b4ad3024d0f560283f6c1f5def76b22283398583884c",
   "skills/global-payment-ops-1/.phoenix/originality.json": "7b2c3e79bd7856d1f7acf112d7fac35a8fef93f0e133a906eac41cd203830e46",
-  "skills/global-payment-ops-1/.phoenix/provenance.json": "21eb9cf4df2ac604152dd49a45152fb12e334383b9279f0dd5538e7b87952d5f",
-  "skills/global-payment-ops-1/.phoenix/selftest_evidence.json": "dc08e9a1bd30be49790ad4645c5010c9ae1ed62299c4ea75a499c85bf6765436",
+  "skills/global-payment-ops-1/.phoenix/provenance.json": "8c33f9fc474f77da311898501587edef6a032213024d9f957ab1aded84ffb926",
+  "skills/global-payment-ops-1/.phoenix/selftest_evidence.json": "58fa01813ad083293596491eca26556cac5309653e0a540467ad1531d621c435",
   "skills/global-payment-ops-1/references/creation/p0.md": "5c5f96bac482d9034af3f9ffe6fdc15b1be46f1e2c85922c443dbb6d635d9557",
   "skills/global-payment-ops-1/references/creation/p1.md": "bdb1d38cb5afa7713980498c0db10d7ac37131c6ebfc7a7c964b9e7d99508462",
   "skills/global-payment-ops-1/references/environment/p0.md": "e198b9802d699c9a1aa69f41d44efda987b1cb176207dd385795ac168db9c8a9",
@@ -37,8 +37,8 @@
   "skills/global-payment-ops-2/run.py": "57abe31543a3db5e2822b46f6973818842eb12511b1e02ad3273df012abb8f59",
   "skills/global-payment-ops-2/selftest.py": "954113dea8e2bd84b1f7bfbc4da34621223f23c9700ef4f79b49d1bcc6251831",
   "skills/global-payment-ops-2/.phoenix/originality.json": "ff002ab1836514c1b5d296ee6fad156efcea67f0182c55b74503becb8d1a9e08",
-  "skills/global-payment-ops-2/.phoenix/provenance.json": "09f6e844117892acb79a5a245fe6dcf309d095190d66c3a25db982ffd2a33c6b",
-  "skills/global-payment-ops-2/.phoenix/selftest_evidence.json": "39355045fd879e3aae89c214ef85f1d5f2fbb7892b7c722005e84736d2e8d080",
+  "skills/global-payment-ops-2/.phoenix/provenance.json": "9b25118d409720a37b5d5461b2fe3b2cd4a070fa2e3b95b335b4f4ea822ca7aa",
+  "skills/global-payment-ops-2/.phoenix/selftest_evidence.json": "b9f419ab481372f76e906a8760e8f65685cafa78a466a52491c69c1c19e12e4d",
   "skills/global-payment-ops-2/references/creation/p0.md": "c41b6afc1117bf50a0b9730e9b0a6b603c3326d56387f35b10369b3626e5f355",
   "skills/global-payment-ops-2/references/creation/p1.md": "2468d994cd9cceef9536812e0748f62f3b0c97132ab5d8d922065f5e405a0294",
   "skills/global-payment-ops-2/references/environment/p0.md": "0342f8c6ec9ba7a7eeea34018f961e3757d144d83bd3b82f44b1b3a76dca967b",
@@ -54,8 +54,8 @@
   "skills/global-payment-ops-3/run.py": "80aaeddc4b8f89f6d9d55907ed4791a46c57d24e9251a4baab18bd3a344dad2a",
   "skills/global-payment-ops-3/selftest.py": "ee6bc96ad750575eff3db6f58cfeaed3551d5ddba1e8016ed7bc46a6b928ba11",
   "skills/global-payment-ops-3/.phoenix/originality.json": "7282ee9b05aa807845d6f5b4edc6333413d47c072e68ecffa42bca666029e111",
-  "skills/global-payment-ops-3/.phoenix/provenance.json": "42efe5bdc4dab1ce040378412fab7226708cd2c27459641a9ccaf2fc7fb01c97",
-  "skills/global-payment-ops-3/.phoenix/selftest_evidence.json": "34838b17e31044b442258130bd1dab6a1a6606335d84547d3f71e216eb6ec5c9",
+  "skills/global-payment-ops-3/.phoenix/provenance.json": "654a10c9c42b96de66ccf2d6d4fee0b89c76daa7498e241e9b538321354c7cee",
+  "skills/global-payment-ops-3/.phoenix/selftest_evidence.json": "cee8fe24a9cf8b33bd5b93a2e90f37c4e90a977930c0602d11433d929b16f1cc",
   "skills/global-payment-ops-3/references/creation/p0.md": "91f54f96cf65c867575d2e2369e60c1fa8214e7a28cf4de3c894dbec7c56d6af",
   "skills/global-payment-ops-3/references/creation/p1.md": "0be152ec1c8147c07fc1d8e0efb158f2f6cbd2c99cbd2f8f13813e7b64e76aa9",
   "skills/global-payment-ops-3/references/environment/p0.md": "ba45d9258cfa317964d75ec8654d5aea171d9315be77d8cbebc5843084411458",
@@ -66,7 +66,7 @@
   "skills/global-payment-ops-3/references/production/p1.md": "6809ac6b267e793b33f5d318e3893131172eda7468651cec04f6a775064f16f3",
   "skills/global-payment-ops-3/scripts/main.py": "b6957791f511aa2c7930f261492e9c53217a7ca6091b19f6db6696c1f276b97f"
  },
- "sealed_at": "2026-10-18T20:00:15",
+ "sealed_at": "2026-10-18T20:59:15",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

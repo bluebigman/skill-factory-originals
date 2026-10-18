@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "campaign-review",
- "merkle_root": "5463d05f698cb8cbe86949a63450b077294125ebe9b5759de159c02dddd0fbab",
+ "merkle_root": "69e9e0478a22e42d7164dafba69399c942b7e74406381fdab57c068bf18415c1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/campaign-review-1/run.py": "71f5b8ab6c7e6742e6e98fafab3ed112b0a5b303091f58435dad9ed5f370fb9f",
   "skills/campaign-review-1/selftest.py": "eecace2e551f6e33528b82f1464ac9fc285b08970cb57727e9b208c2a4dde279",
   "skills/campaign-review-1/.phoenix/originality.json": "8349714bb9d0de7c1863559324e8312ec8a1b4c3e85acf58ece45637834a6ce5",
-  "skills/campaign-review-1/.phoenix/provenance.json": "3e0fd810ea97b37127effc5b62943d0f1bb0912c021644c23482a77487a78932",
-  "skills/campaign-review-1/.phoenix/selftest_evidence.json": "bc77721a1fff4d32dba87d3be4727b939668342a7b1b7ce3b0b8f85dfd9ae9b0",
+  "skills/campaign-review-1/.phoenix/provenance.json": "1b1d2a329c889685309dd4e9afd8773b415677f02d199cb1bafd03ce9cb21581",
+  "skills/campaign-review-1/.phoenix/selftest_evidence.json": "5ed45c490da2d5223d8b60a787e7c5f4aebc58ce082f6db0c404ac9bff93192a",
   "skills/campaign-review-1/references/creation/p0.md": "4dc230f528c43ae556f7d4f8a5a85fcdf21f157ac0f1d2ff853f26eac4568ee2",
   "skills/campaign-review-1/references/creation/p1.md": "3044921073c64811fd0e18703c398f9201b1b37ed3d6a8aba48d02049804d5ae",
   "skills/campaign-review-1/references/environment/p0.md": "c256080ce1f04345858c0798fdad4b12201a014334151d181698fe5db384d8e9",
@@ -37,8 +37,8 @@
   "skills/campaign-review-2/run.py": "a13532deefbec2e94f59fdcd47eca890bed5f599d516f7e08db707fe7b5f0cba",
   "skills/campaign-review-2/selftest.py": "863580bf7fb7a2247c78af28810278442d8a4f56ce88197d8d8c1b1eb0f5744b",
   "skills/campaign-review-2/.phoenix/originality.json": "a7774873346792402038b3e49ab74e4c24bb38a8967bc7a9db9df89600be2356",
-  "skills/campaign-review-2/.phoenix/provenance.json": "f82050589e4d0092c65df11a168024c3b2e125475c37315e9ab86fe114b8adc1",
-  "skills/campaign-review-2/.phoenix/selftest_evidence.json": "2d3a93139bc2dd45049bc1459a2eed9803efe3484de85e0100278e3b2bd5ecb9",
+  "skills/campaign-review-2/.phoenix/provenance.json": "f864e1211f417f39ce56c8a9d0ff7fcf2e98de1b1b13eacac51d438ba4702e3d",
+  "skills/campaign-review-2/.phoenix/selftest_evidence.json": "e4545675353a2c5984b234b7e264d26243d04a301beefe070584808ead5eb435",
   "skills/campaign-review-2/references/creation/p0.md": "f880c4f13851015bdca91bf2c5afcb33c60af98741d5f77c6bb41bc45de0e0f0",
   "skills/campaign-review-2/references/creation/p1.md": "29763462c2023505b80c5f62fe2f1a6dc893a3e3e8fb0371b2c4d9728f850b4b",
   "skills/campaign-review-2/references/environment/p0.md": "60625729f63964d24b34756da5ff96896f917d6bc3e0eb44e7911063177acc51",
@@ -54,8 +54,8 @@
   "skills/campaign-review-3/run.py": "63e2ce7151cc314b84d9981a5cd462c5bf8ee3327cea1d5eb7fbc608dc550d44",
   "skills/campaign-review-3/selftest.py": "f0c3fde79fcd89fe5f37e78c6c4eb98971cab3a152b89aa0730e3caa5114f882",
   "skills/campaign-review-3/.phoenix/originality.json": "4b8304059ac6a26442cdab9e9587994d30dad8b4372d6de472fe2e6633940dcf",
-  "skills/campaign-review-3/.phoenix/provenance.json": "aa46e55e54f0b2ab14897aa09e46e6adf4295ce9d804d9d4e4ba513d7ef29f95",
-  "skills/campaign-review-3/.phoenix/selftest_evidence.json": "fb024cb0f8e8e05769cebb39a6cbf4b9fcd2e17ab05e0c6f9599f668e2999e92",
+  "skills/campaign-review-3/.phoenix/provenance.json": "da1055bdc2b2f8837af6f820873024ea010a3cf9e02ecd012dd77870db96046d",
+  "skills/campaign-review-3/.phoenix/selftest_evidence.json": "3703fbb3b8cd644ec262c99a5025173161edd809a89bfd1af165adec65693cc0",
   "skills/campaign-review-3/references/creation/p0.md": "03c7e1aedb31fe1e01a1250f1fcf90e921c4435ad1c5c07f9ee6b908bb7efa31",
   "skills/campaign-review-3/references/creation/p1.md": "b51af09fe90a8861bc9a7526681888a95d3eff5e5dbf28cb5db110e0a40b6d35",
   "skills/campaign-review-3/references/environment/p0.md": "a359ffcf2235f9c0a94af4e85b01931c14be66728ed6b7dd98c8ac138e8698f6",
@@ -66,7 +66,7 @@
   "skills/campaign-review-3/references/production/p1.md": "e13b4caf249efeebcaa69eac06936d45736ce49356f7f49ebf85eaa733287f33",
   "skills/campaign-review-3/scripts/main.py": "70f89e4391ae11bd1698a578716e8dae1260338521b551a0cdc9f139031e8161"
  },
- "sealed_at": "2026-10-18T19:53:01",
+ "sealed_at": "2026-10-18T20:55:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

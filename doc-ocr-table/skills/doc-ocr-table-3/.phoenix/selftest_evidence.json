@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:57:16",
+ "at": "2026-10-18T20:57:39",
  "skill": "doc-ocr-table-3",
  "slug": "doc-ocr-table",
  "passed": true,

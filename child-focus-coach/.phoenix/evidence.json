@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-focus-coach",
- "merkle_root": "4c49185c5fdccdf6f63e0c9fa71476b00e7ac72e07a9d3718c58416d261b1e5c",
+ "merkle_root": "c2f640910fe40594c8109489104a3c709a4b55e6992dc55e1ce34bb8f1cf0b18",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-focus-coach-1/run.py": "13c72e3f9af95394a1faf77fe19ea6483080dce72341350837e55489589f1751",
   "skills/child-focus-coach-1/selftest.py": "2b7c40c13f3217c94a816762e04d741dd884d50e53ba38ead301330b896d7f92",
   "skills/child-focus-coach-1/.phoenix/originality.json": "3ead5628ec8f02c51e8543e09148bbfae492956b6909be30fd08a6877c84cc51",
-  "skills/child-focus-coach-1/.phoenix/provenance.json": "f061c095d1309c669bde69606625720af595533be3f4bbc91ec93f6c815c5623",
-  "skills/child-focus-coach-1/.phoenix/selftest_evidence.json": "4c91bece6f3b178fdf7ac41f65ae9c4c76fb4bc5f131add911c446d01c233be2",
+  "skills/child-focus-coach-1/.phoenix/provenance.json": "ea5314badd5b80205b80fdc3b782f7da78783528e394418a4fd5afaa9226e567",
+  "skills/child-focus-coach-1/.phoenix/selftest_evidence.json": "220cd2980c566613be0d2f95af4264f99e5c39b228f75d3773b874c54ef3b693",
   "skills/child-focus-coach-1/references/creation/p0.md": "3751a8a7d36deabe8cf3ba004e86fa46af59da6da7723d5e709a0bc7e9fc256e",
   "skills/child-focus-coach-1/references/creation/p1.md": "bb5b370c85a2bfb41a4e3bd837f11c555646395cfea39e1b885bd7a1e1bbf2a2",
   "skills/child-focus-coach-1/references/environment/p0.md": "99abe7915763199ca820b3535e0fd7eeceac4ab58e7365dc5cbd0246820e0767",
@@ -37,8 +37,8 @@
   "skills/child-focus-coach-2/run.py": "faea9046298908d4155eb16d4111f0d0fb4aec282ea3a176c7455fec75695b4e",
   "skills/child-focus-coach-2/selftest.py": "9cec057357aad887b290bee49d55e32120d27f6ccc1210d1d5365beaf3b4619e",
   "skills/child-focus-coach-2/.phoenix/originality.json": "418515ed21fb237b023b9ac0d66cfc8e6d7f0cab79a35145d6a771329459ffe3",
-  "skills/child-focus-coach-2/.phoenix/provenance.json": "e29bb37e0ad35e03a41b7e7a890b7a17847fc6815fbc9507b43f32426be4a158",
-  "skills/child-focus-coach-2/.phoenix/selftest_evidence.json": "04d7882ec99c79869714c7dd01f96373f772906ca7eb17da858710c87a1e8c92",
+  "skills/child-focus-coach-2/.phoenix/provenance.json": "e21a45d269fe059ca797b18d040fde3d0764b28a006ee4beafb196e68d5ce878",
+  "skills/child-focus-coach-2/.phoenix/selftest_evidence.json": "53726ecd4d4cf7d2c790a36ee4724c4dd5a063e1b18f1f22b93e41f35185dec4",
   "skills/child-focus-coach-2/references/creation/p0.md": "55d9b3f6ba7dd1e9235d7c6bccab18b4f3c0feae5e5b991929801f06b2fd8e30",
   "skills/child-focus-coach-2/references/creation/p1.md": "0e139f1a5f0df636c6ae8478446e9e8aa0822b0b8799327e5f52bcf61611038e",
   "skills/child-focus-coach-2/references/environment/p0.md": "f6c387bd7f145a1ba18fa625bd7d8119d317ffad1dff74f72367dcac8c9e4458",
@@ -54,8 +54,8 @@
   "skills/child-focus-coach-3/run.py": "cab3f8dd86166dffc9f128161f0bf1aefb409e5a9de436d9f081c01076f5923f",
   "skills/child-focus-coach-3/selftest.py": "b56c1fa68585a97fd7edf962960a3ddc5c46e64fe3d3db58d7e8b322362cbb45",
   "skills/child-focus-coach-3/.phoenix/originality.json": "8b6870b19e23d95ed0f615851e127044bc45584c81771becd0b9a068991d262a",
-  "skills/child-focus-coach-3/.phoenix/provenance.json": "55075d0c36b0de57eb4d486509806827ae08f6d99992ec803263bd1ac1132698",
-  "skills/child-focus-coach-3/.phoenix/selftest_evidence.json": "3b744b9e610ec0e39e211cafcf7fda7ea2bbbd4644753442f235bc4a2b6eb307",
+  "skills/child-focus-coach-3/.phoenix/provenance.json": "978bca38adc6366da3a1b56f24a91e41dc1488d0632ebd7f9f31d6b5aaf8c207",
+  "skills/child-focus-coach-3/.phoenix/selftest_evidence.json": "746dc2e5b25c5797fd31b947cb4db7b10796e34b6245ae80a0e4ae8ae0bc6c5b",
   "skills/child-focus-coach-3/references/creation/p0.md": "45a4f473a94966fd3ff0ebaa68706fa6fec6da6a4e4fa8464a6d18ad90c1e31c",
   "skills/child-focus-coach-3/references/creation/p1.md": "586249229da016e0c600274e7c8e20c2ee25c64844a5330b2d0a1559c31c9c2d",
   "skills/child-focus-coach-3/references/environment/p0.md": "2dcdc081843da33b1a4d509f008d3b5a6897002678acba7f2addd38b27a57905",
@@ -66,7 +66,7 @@
   "skills/child-focus-coach-3/references/production/p1.md": "4da0c885bde6ae48f499cbce33d7d2f764e50dcce0d7396d8049de7527b1665a",
   "skills/child-focus-coach-3/scripts/main.py": "cd5451c1291e7d385a3c8ba6f422be04585591c6587dc0d658a0566c6e2524e0"
  },
- "sealed_at": "2026-10-18T19:53:23",
+ "sealed_at": "2026-10-18T20:55:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

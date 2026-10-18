@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "customer-advocacy",
- "merkle_root": "272d970a605e9f11577453584dbee254347222ce4663d1d271c421446c98b2d7",
+ "merkle_root": "541f168bdff2981b84f3564dc511df8b603adc0dd2f67f4c2cb616d5cc32998f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/customer-advocacy-1/run.py": "a4fab118151d1055bdd4b3ac9420a3ae61ca92e8e3950ceeabe93550bc216b7c",
   "skills/customer-advocacy-1/selftest.py": "3b63270c8c6c7757c70ef300da9c6a665be1defe9ebd172eef6f8462a466d799",
   "skills/customer-advocacy-1/.phoenix/originality.json": "ad10795664365c3226f625816a76c9ce33e32e9036f81b67205a4913ae42b22d",
-  "skills/customer-advocacy-1/.phoenix/provenance.json": "54ab5539f3ac93f67aa5885581b44be89e768b8a87f91b3fed6b79022015ab81",
-  "skills/customer-advocacy-1/.phoenix/selftest_evidence.json": "32ff8ae611b994a6d31beeac30479ef0d8b52395b52d6f11b103bb635a8cf97c",
+  "skills/customer-advocacy-1/.phoenix/provenance.json": "9c45ceaa44808fad8813a0f816b70e82ee397f28b4d40ef4164b70fa57804805",
+  "skills/customer-advocacy-1/.phoenix/selftest_evidence.json": "8d76431f38869b58b09a054fe4d52b4135fc019a8fbcbdcd33e8e8c20b0d1f01",
   "skills/customer-advocacy-1/references/creation/p0.md": "637146a32ca079d0c8a79785831cfcd26a66994168104f2ba8c57ef68eff0498",
   "skills/customer-advocacy-1/references/creation/p1.md": "4588df231b89e31a2439366b963418e5db86f9014826acb10abca8f0cf7410fa",
   "skills/customer-advocacy-1/references/environment/p0.md": "f3c051e3b9d6d4d960fde359c6a905fa2981f8cd4cbeac4a633ee23321875dd2",
@@ -37,8 +37,8 @@
   "skills/customer-advocacy-2/run.py": "8e151e7b8bb98105accef79cc4176671be0424c1c85725010798b1006066166d",
   "skills/customer-advocacy-2/selftest.py": "05f6fb96b807f991888729493ee2fba57537693cf1dbc7bad66c19c1ddf53976",
   "skills/customer-advocacy-2/.phoenix/originality.json": "bb3ee0da42c5ef5dcdca27179e541ded1ea8247b0af87011d3cfe5c4e5ff6c2f",
-  "skills/customer-advocacy-2/.phoenix/provenance.json": "0fe5e0f259c52174bd1b703ce764a070ac03256bff887405871ed9e90a87980d",
-  "skills/customer-advocacy-2/.phoenix/selftest_evidence.json": "0b643d325d0cccc79623675a8ad04a596c1d6ba9367e62ca31831aeb6046a5d5",
+  "skills/customer-advocacy-2/.phoenix/provenance.json": "14d6aeffa5faf8b131e4d9bcceb45b1bacc37f57b59616d3e496618c10182c70",
+  "skills/customer-advocacy-2/.phoenix/selftest_evidence.json": "ff7778bc9d0bff756ac8d93f3292b75acc17b9fe21a1db1f4a676d33e3b14104",
   "skills/customer-advocacy-2/references/creation/p0.md": "974ffae7e28cdf3487483fef0d58d37d4bc8ccb430f6459f270935dd20f68984",
   "skills/customer-advocacy-2/references/creation/p1.md": "56cfc63bf47fa2fec422024407fe27504a011a14a0eb69789cefd4126bcb60f1",
   "skills/customer-advocacy-2/references/environment/p0.md": "f3a8e6065d575e2bb3433fc6cccd24fa82bc615db4c6002e05768536d3f67df9",
@@ -54,8 +54,8 @@
   "skills/customer-advocacy-3/run.py": "5fc5e1d7dde1e60bc5b1642cbbeacefc2fd414c8a087727166b3425ac4480316",
   "skills/customer-advocacy-3/selftest.py": "42587143e6f1aa7cc65020d02f6063236ceb87172d968bf0fac7145b0aace5b2",
   "skills/customer-advocacy-3/.phoenix/originality.json": "b4e88b6eea8a5d0442d2ca3390405df7b6fcc67a8a42dec5b0068dcc994f9a5a",
-  "skills/customer-advocacy-3/.phoenix/provenance.json": "0bbae31993c03376a2bb433665ddd97986132367ef5ceabccc527a68828dd8d4",
-  "skills/customer-advocacy-3/.phoenix/selftest_evidence.json": "0999e588edccc2faf2af98f435d009ccf6f3914bb06d1ac6cef19175f95d5003",
+  "skills/customer-advocacy-3/.phoenix/provenance.json": "3c5b0a19dda2245a37a3771379fa62b87e4e97448e9fe1b879ae6bf72b7d5b97",
+  "skills/customer-advocacy-3/.phoenix/selftest_evidence.json": "d22fbbf072569f443cee025e825ea8d8ecaca598bb3145319b96766f4e29e244",
   "skills/customer-advocacy-3/references/creation/p0.md": "f96f1e8080e58feac670d1a7e0ca7adca702fd26e99b789f70ff8a13a95654d0",
   "skills/customer-advocacy-3/references/creation/p1.md": "7df3d314464109c0738831de9d68c479ea2f0c1b15334146a57a4b2637038c35",
   "skills/customer-advocacy-3/references/environment/p0.md": "5a15f7588134a1aa3e99f83c17e37b5bc8b1a269879a57a680995a4295d0ff8b",
@@ -66,7 +66,7 @@
   "skills/customer-advocacy-3/references/production/p1.md": "3e62a74b2a31fa79135c2181e891cb48527796518cff59db55bef839dd44592e",
   "skills/customer-advocacy-3/scripts/main.py": "063934b8e9f703b686ccb22fea6475b767c8ea4b736e312ef30508be5d014229"
  },
- "sealed_at": "2026-10-18T19:54:54",
+ "sealed_at": "2026-10-18T20:56:19",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

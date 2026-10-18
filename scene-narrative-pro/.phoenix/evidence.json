@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "scene-narrative-pro",
- "merkle_root": "ee632f5c6b3170ef9d86e85b90dc948c73a0e5dec9558f1c6c752862b28f2208",
+ "merkle_root": "0017ec47bcada12a2fbc1661bea9cc7001c8309618139725f5d646c9a7bd875a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/scene-narrative-pro-1/run.py": "6a65561d3efd3a4aa2c8e30ba29937e897f6fcabd81302747d117ffcb9fd6b51",
   "skills/scene-narrative-pro-1/selftest.py": "c96bd2ab5595e321a585f7bb1fc817f66c64cdebc7f3c5bae082013dd6e913cc",
   "skills/scene-narrative-pro-1/.phoenix/originality.json": "81227c829af070d49ad181f678c54f6eafef63aa36db8cc5a150c67ef3abbe65",
-  "skills/scene-narrative-pro-1/.phoenix/provenance.json": "26ba47b372d5a11fcba2702de01cf548ac465abd8eade0750842542ea8904a8a",
-  "skills/scene-narrative-pro-1/.phoenix/selftest_evidence.json": "ec3b2ba25952df275c0cd47407e03f4127a2272338090ca5a917223bad2a9aa4",
+  "skills/scene-narrative-pro-1/.phoenix/provenance.json": "51d278a2ad1d3898e732090cd3c697de8f620c7c00bdb36f973453a9315ebd1e",
+  "skills/scene-narrative-pro-1/.phoenix/selftest_evidence.json": "266b2877afa068db257ecd73534b09eb0e0d8d5b32bece1af4d9a2e037b5389b",
   "skills/scene-narrative-pro-1/references/creation/p0.md": "8b4d812c6be6110c166de9b4c2c26913454f67d39734fef8b7cdba1d1eb1d6e6",
   "skills/scene-narrative-pro-1/references/creation/p1.md": "54e0b1bb93fcadc8154275d1bf4ad8066657037c48ea2b6121d41aba5c54403d",
   "skills/scene-narrative-pro-1/references/environment/p0.md": "d5320898a8396c5a1db65e9a2743608b071d458f8c77abf3f87b4f8fce7c0e2a",
@@ -37,8 +37,8 @@
   "skills/scene-narrative-pro-2/run.py": "2164bdc174137365e7d35d60f46ca1e9d0614018fee8d30c74adc4ea51949b59",
   "skills/scene-narrative-pro-2/selftest.py": "db2683a733022f58e11a318d00590f0772829405d65c2f585a9232310343adae",
   "skills/scene-narrative-pro-2/.phoenix/originality.json": "84322620a3c0f385c34561d90bb6395bbcab71430692f330e7da3448ceb0766a",
-  "skills/scene-narrative-pro-2/.phoenix/provenance.json": "b72e60d77fb356320f5643d661d45f39144eaf06e119f9be1c2d979389719605",
-  "skills/scene-narrative-pro-2/.phoenix/selftest_evidence.json": "54b8d18884858fc78220915acd047876a2da884c4c2babbaaaadca244ee7f4fc",
+  "skills/scene-narrative-pro-2/.phoenix/provenance.json": "709aa829e275368e5a54829208c3f11d04a1288b8980421137b1bdc4ba3ad69e",
+  "skills/scene-narrative-pro-2/.phoenix/selftest_evidence.json": "e23abbecd586f7d8fa5693a803d660398322d84ecf7647283dede27a72b445a8",
   "skills/scene-narrative-pro-2/references/creation/p0.md": "acacbe70b0bff7129353edfcca83af87ca8f4815f59426c15e4d1a96c8362180",
   "skills/scene-narrative-pro-2/references/creation/p1.md": "4e1598df6cc966e11c0c3d1e8cefc90c1f7e548e840f09aa0ded2f76eb67ffb5",
   "skills/scene-narrative-pro-2/references/environment/p0.md": "fba0f5af485ed4cf65530c7523709e5aaac36a4dc811102f24084f25846c1956",
@@ -54,8 +54,8 @@
   "skills/scene-narrative-pro-3/run.py": "4a2e2bf6f2a345699a284e357ace36d708221ef5b4749f24ef0023c800808400",
   "skills/scene-narrative-pro-3/selftest.py": "5f68c44e9af4ef8c8c80620fd73298f230caa150c5077c0406efebde48f55d66",
   "skills/scene-narrative-pro-3/.phoenix/originality.json": "c8a2f08c7f89d837355ff3fbf3d48a4132bf289f050a995e8cb54a50c189d881",
-  "skills/scene-narrative-pro-3/.phoenix/provenance.json": "7d09d6c0257c4d90083721d0a9cbfbef83be86a3c4baa252c5997769d36d9012",
-  "skills/scene-narrative-pro-3/.phoenix/selftest_evidence.json": "1e4f02203a7ce1fad451f528ed9866635aae8c5bcea059d9385e5f3ae99def6b",
+  "skills/scene-narrative-pro-3/.phoenix/provenance.json": "a4bf0ff1c9ef516f32af63eccb0a0e172214b0d460b79ad7c579c7b491056b78",
+  "skills/scene-narrative-pro-3/.phoenix/selftest_evidence.json": "41944f6af9ef919a4af3d283bef6db4d3111b84c9c9a882d9eb5ade34c97821a",
   "skills/scene-narrative-pro-3/references/creation/p0.md": "8de0731418c49d6368ece8a0d5d8633fd38262965596c66561caf1b413c44637",
   "skills/scene-narrative-pro-3/references/creation/p1.md": "0b4a7aeb836a49201900b2f60d1448550de1df02932df77d409c5402a064e2de",
   "skills/scene-narrative-pro-3/references/environment/p0.md": "b28410494a2534d29781079f737ea27aa4bb3d95be31eb81cb6e5d0d6144d01c",
@@ -66,7 +66,7 @@
   "skills/scene-narrative-pro-3/references/production/p1.md": "103d3a9e2cb439b752ce856ecae415b96d23d3b521a2afcfc1a658d691d65a46",
   "skills/scene-narrative-pro-3/scripts/main.py": "55d6c752d6daaa8c1951b4cdfe4d053faf821ad63666204a5966cb389101715d"
  },
- "sealed_at": "2026-10-18T20:08:20",
+ "sealed_at": "2026-10-18T21:03:20",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

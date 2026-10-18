@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:02:56",
+ "at": "2026-10-18T21:00:34",
  "skill": "logistics-diagnose-1",
  "slug": "logistics-diagnose",
  "passed": true,

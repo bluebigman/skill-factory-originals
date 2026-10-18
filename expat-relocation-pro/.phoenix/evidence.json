@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "expat-relocation-pro",
- "merkle_root": "3e1d7d1199e6fa558323ec167d869aeef7753ee16d520d80f81a12ac24757086",
+ "merkle_root": "609d121f03c9578c17af8a5f3da5f237249788b9376315b6fed7beacc07ba92a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/expat-relocation-pro-1/run.py": "5fb759d95ec6a44c036b83906e6dcad9d38f502d32af4af029fdb4daaf899ae2",
   "skills/expat-relocation-pro-1/selftest.py": "f27fd0cb1a81cc229f49cf8ff60add5b28a87638e7cd9d2cd2d28bcdb04ac1e2",
   "skills/expat-relocation-pro-1/.phoenix/originality.json": "18da6b2abb4a027d8f2741c0fa4ce735f037bb1a0cc1455ef514874bf00d8010",
-  "skills/expat-relocation-pro-1/.phoenix/provenance.json": "21fabbcff1a9bc09ceda9ac5c321aa5062fca26c72958f0d80224708f77a0788",
-  "skills/expat-relocation-pro-1/.phoenix/selftest_evidence.json": "4ff51a28433f733a78442f3438286abc8e481022829c04a5cce2f2505de29683",
+  "skills/expat-relocation-pro-1/.phoenix/provenance.json": "3bac5539181adc72167dde63ae1eb9a45eea94955ca305672e4500255b4a9e12",
+  "skills/expat-relocation-pro-1/.phoenix/selftest_evidence.json": "9a10b41cc78f1f0b2a67db881a06c6f06e4fe7676c39b3b1671777bea64bb776",
   "skills/expat-relocation-pro-1/references/creation/p0.md": "6f3cfa748647bcd0561365df467924ce30b6d06576411e3ad8d66656754be5ae",
   "skills/expat-relocation-pro-1/references/creation/p1.md": "d8e249c505088f606676144105838d86a52344f5e8725962b6d4b3d3f1c9a2e9",
   "skills/expat-relocation-pro-1/references/environment/p0.md": "84dbd397fb7baa62620a9df23148a3410d746889efae720af0d40c17908ac7ce",
@@ -37,8 +37,8 @@
   "skills/expat-relocation-pro-2/run.py": "cad104db5b9d070a430604b0ee5a6ff0e8f9072667ddc9abcef30dfc0b318c60",
   "skills/expat-relocation-pro-2/selftest.py": "448eab05e9c24b6ec1faccf86f31c0aa51309850f948ca01292a2619ee133738",
   "skills/expat-relocation-pro-2/.phoenix/originality.json": "115684e11457d70e8e2b79ed2e2b46e67166654890247f829cb1356ecef20c37",
-  "skills/expat-relocation-pro-2/.phoenix/provenance.json": "bfd2016e45bfde3eb1d195fd9590c9f56d0f89ba0a4f2c163d85e1cd82736aed",
-  "skills/expat-relocation-pro-2/.phoenix/selftest_evidence.json": "78fd5fbb5ffec9b7ae4af2d0bb84222821860072608a39db4aa5f2ba41cb7c79",
+  "skills/expat-relocation-pro-2/.phoenix/provenance.json": "1ade74abf6d64a9b01da24c83688b690f196e3c14a47c477ff6e535a335cd360",
+  "skills/expat-relocation-pro-2/.phoenix/selftest_evidence.json": "aaa6d4106beddc8afde3d6456ccdb90bee3c504f64d33d0c0110645e04efccb2",
   "skills/expat-relocation-pro-2/references/creation/p0.md": "89f8ce98e2e46657afa09d8770c88e260ff1b96f4e9637f890da42fa76721325",
   "skills/expat-relocation-pro-2/references/creation/p1.md": "c6362f3e26b110af278cc4eef5617380d714be16101133f689984326bf80c94c",
   "skills/expat-relocation-pro-2/references/environment/p0.md": "53c92a1460b773c9271d69f3e21ed0bbcbf3a4dedee480026a106cf6f3031a13",
@@ -54,8 +54,8 @@
   "skills/expat-relocation-pro-3/run.py": "776d1c2b3b305c4a9a5adc244db8e7c06322e05cff5b5dfe44f5e4e8989901a0",
   "skills/expat-relocation-pro-3/selftest.py": "8933b52abe9b3ba06da72b45b6e2f2bd6552cb9c0a297a39df704bc8c9ad707f",
   "skills/expat-relocation-pro-3/.phoenix/originality.json": "862f93437e77b9a4f2eeb39222ca7ac3e9f51a96e1132588f2fa384bbc467826",
-  "skills/expat-relocation-pro-3/.phoenix/provenance.json": "3cf007183ae1a18ac74335f74be3b94f2cc9b7709350de4a4405d25ce8e19f0f",
-  "skills/expat-relocation-pro-3/.phoenix/selftest_evidence.json": "816b2ba891dc3aef87f01d5b31580f31764950fccb3065c4c555041a4f6b60bd",
+  "skills/expat-relocation-pro-3/.phoenix/provenance.json": "ed06242ab72baafb88683b09ad647296c2961920b41e32fb385beab6fb7ca0e4",
+  "skills/expat-relocation-pro-3/.phoenix/selftest_evidence.json": "c39c7f80a3f41155825caeeb8e3aa72b668df473d3040797cf83e860124e5846",
   "skills/expat-relocation-pro-3/references/creation/p0.md": "0008053a63558126decffd50298f9c072cf4f913fbae49e545ac8b556e62dea8",
   "skills/expat-relocation-pro-3/references/creation/p1.md": "7cb15c0769691eaf2988111afc2f08a149403bcfc4c99e432a4da2ff568f5a34",
   "skills/expat-relocation-pro-3/references/environment/p0.md": "09f376222b688d2d6fabf424871a92643124636b2c79b59625f11eb6a8f67c9d",
@@ -66,7 +66,7 @@
   "skills/expat-relocation-pro-3/references/production/p1.md": "271ed15beb774592a19f2ac7880c6a3845e647f7ba80aaeba3920c44987058e4",
   "skills/expat-relocation-pro-3/scripts/main.py": "9ce978e2c9de2a84cadf6ad6c6b5cfc3922b49edcc1747958064589edd4daa0b"
  },
- "sealed_at": "2026-10-18T19:58:46",
+ "sealed_at": "2026-10-18T20:58:29",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

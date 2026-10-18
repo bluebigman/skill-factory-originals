@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "inventory-turn-pro",
- "merkle_root": "67ef17feb9941ee2206ca3ad76a5edc45ae1bd5a33da553de187b52d623fa882",
+ "merkle_root": "ae1095c9c2faf09fee96407cb1e804a75429105d3c1883d2387bc4de38ed3a0b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/inventory-turn-pro-1/run.py": "f26132fdc1c924e5f661ce4ec11f1ed5dd563af75beef7747e7a0e173ce5004d",
   "skills/inventory-turn-pro-1/selftest.py": "9bdef84123c01eeba6e6752eaff2885a4f24603302f36652e9d0117be1b9b3b6",
   "skills/inventory-turn-pro-1/.phoenix/originality.json": "f4ad47b5afe43dbc9467619b64f068e75935d168fcd275c85714c63951f67c8c",
-  "skills/inventory-turn-pro-1/.phoenix/provenance.json": "6a53c1ee0aaf89048d8d90f7be87725a57436a06df9fe86ca01c48ae2b5c11b9",
-  "skills/inventory-turn-pro-1/.phoenix/selftest_evidence.json": "0bd7ef8eef5224a322e5691e6caa306e08cdfa48ba3af9b2a0e567aa22f548d6",
+  "skills/inventory-turn-pro-1/.phoenix/provenance.json": "e4ed6c3d0177c6c44a99d1f25980689b974ba611e8049f8be1a676d306b4cef4",
+  "skills/inventory-turn-pro-1/.phoenix/selftest_evidence.json": "c88872f94760f238214b6a3235bd1084f871706ba8c57269c2e84c6bfe944248",
   "skills/inventory-turn-pro-1/references/creation/p0.md": "1cdadcebdc0e5df382276b91c0c6677da206e399e60887fb08e316be6bd6af09",
   "skills/inventory-turn-pro-1/references/creation/p1.md": "488bb89c87451f11343dfc3d203f9a924f0a5d4ddab436e091f3dd667a860787",
   "skills/inventory-turn-pro-1/references/environment/p0.md": "f17ce861d89d39e0a566ab26e5d4165bc9b144b287cc6f80b2d20f68ef8b1cd8",
@@ -37,8 +37,8 @@
   "skills/inventory-turn-pro-2/run.py": "19fc94d69381ceca4e995f98040d5160005f844d9680043cbb4d327fe3161941",
   "skills/inventory-turn-pro-2/selftest.py": "01fe2a88809c781f12b3b9899b619d48e5139fff862b430dd13bf81a17fc5588",
   "skills/inventory-turn-pro-2/.phoenix/originality.json": "e79361c8f8657344df3906adf1a2649ddc13662601920e0cf6fe35b658265554",
-  "skills/inventory-turn-pro-2/.phoenix/provenance.json": "1a17b6f74d415b15c3a1b4a9d96af6c56acf88b61452d610df7becd9298940ff",
-  "skills/inventory-turn-pro-2/.phoenix/selftest_evidence.json": "590faa677d1d1837bf205661604eb4d39c1c233b2c7576395ddc35907b41fbdb",
+  "skills/inventory-turn-pro-2/.phoenix/provenance.json": "d66a3b4c2a53ea25b5e033f341b799b2d3e6bb31506b512755a1bf5f769871b8",
+  "skills/inventory-turn-pro-2/.phoenix/selftest_evidence.json": "a377737a25366a30c62629d6279b02d97e3359434b03299c5f221c4e205365f9",
   "skills/inventory-turn-pro-2/references/creation/p0.md": "a4b197f67bcd0049314dc036bb8c4e3a9e5927d486071c6f1651faf8e6c72b8c",
   "skills/inventory-turn-pro-2/references/creation/p1.md": "8717b2f746c7ad5983a41c0d42761017db03392770c5688ddb1b6d78aaca99c0",
   "skills/inventory-turn-pro-2/references/environment/p0.md": "a295db927b8876758b71fc68968c487b091b9ca48da6390888eb32b5b4d736f8",
@@ -54,8 +54,8 @@
   "skills/inventory-turn-pro-3/run.py": "d6dd2a4c6b8f951a38bf8de4ea82d3433acba69852f943897f2cf12d32161549",
   "skills/inventory-turn-pro-3/selftest.py": "861946881813aa485efaef0742b56eee7e6898d2fa1d55cccde0cb117c797f57",
   "skills/inventory-turn-pro-3/.phoenix/originality.json": "3ad3b72d61813d45e9c0ca72d071eb1bf5f15fb0cddc9dd502f3d79652a2ed31",
-  "skills/inventory-turn-pro-3/.phoenix/provenance.json": "ae40ac3ae28693ac8da8027717c597d34d3f5fb82be92d9cf035d4ff956ecf16",
-  "skills/inventory-turn-pro-3/.phoenix/selftest_evidence.json": "4820296c596a09d3105099651fa50447df1e826939ae6fca0fa721fac2dc0f37",
+  "skills/inventory-turn-pro-3/.phoenix/provenance.json": "6f43b693150629443587e755332ea370c0e29b014a18346a6a99c59bbe2eb201",
+  "skills/inventory-turn-pro-3/.phoenix/selftest_evidence.json": "e0ba2212c303bd0c633429a84a314b1f11e7c09ab025c94eeef4d5d7da665b86",
   "skills/inventory-turn-pro-3/references/creation/p0.md": "663a3d96bf149916369b3f36fbc129e0eaf9f66a9141151e28e485bd65ba9063",
   "skills/inventory-turn-pro-3/references/creation/p1.md": "88d9a8c30b921163af58dd0e2276855b0865e53763174e247ad76acc0820ec58",
   "skills/inventory-turn-pro-3/references/environment/p0.md": "57b39e68df707475fce1a0396cce7d17e2b75b3291afccd1dd447192822e35c8",
@@ -66,7 +66,7 @@
   "skills/inventory-turn-pro-3/references/production/p1.md": "36043b0b36ad0706f67521a743df7991df327cdd0851a291748919e9204804a5",
   "skills/inventory-turn-pro-3/scripts/main.py": "d06ad38a5e6eec25138f5c0f61cd952f56cbc5e019f8884155f159afd460b622"
  },
- "sealed_at": "2026-10-18T20:01:55",
+ "sealed_at": "2026-10-18T21:00:03",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "teen-goal-setting",
- "merkle_root": "e3964762fefe661f1ee9d41b928d150bde8b85ed77d93879c56187c1b6519813",
+ "merkle_root": "a6ad479e751b96a7f030992e086b1a6e8f1e811a9e6769503a4bd8b292578390",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/teen-goal-setting-1/run.py": "aa66432b0a24cdedac18007fb976c7a6714e3b7d29432ecc40476fdcc7f1f059",
   "skills/teen-goal-setting-1/selftest.py": "2c37037f38f66cc2c5d7ee3547753cc16670e20eec3e567d093ab9fa88643a22",
   "skills/teen-goal-setting-1/.phoenix/originality.json": "a84c81ca2fd40cb3c72107efa2f20ce9d9f4475310b5a21e200a36f1edcbadda",
-  "skills/teen-goal-setting-1/.phoenix/provenance.json": "9df67f7b9e6b81c816d1e6c548a954d0d577e00675cd535c4708cf783e5d285e",
-  "skills/teen-goal-setting-1/.phoenix/selftest_evidence.json": "90588216845f32fe08bb77ac8b7d58b7284db4baf561af4aa219221d1ff3805b",
+  "skills/teen-goal-setting-1/.phoenix/provenance.json": "a0680e5e66c1f05b4cef5b9803492ade666504ed95e9a09f73f151a1dbfc47d6",
+  "skills/teen-goal-setting-1/.phoenix/selftest_evidence.json": "39363869c3e8842b6a7a4793430b07163f63456615b89fb600971082b03c2b0a",
   "skills/teen-goal-setting-1/references/creation/p0.md": "a0cafb422080fcf9b634d4be5fb73a7a6e2716a0b2aafbbf168a7fea1dbf4c68",
   "skills/teen-goal-setting-1/references/creation/p1.md": "35bb92a23c90bdb3365d1e9cebca9a2bb5f6889135b2f15cca735edfe4bb3765",
   "skills/teen-goal-setting-1/references/environment/p0.md": "8034b83f73d71e7a87802657126188dd9d545ecd4c4a3f50cc7156404bfb822a",
@@ -37,8 +37,8 @@
   "skills/teen-goal-setting-2/run.py": "80560f6b8d30b17d9035b0a24c2bb185b25299882bf40098f030be9af28fd040",
   "skills/teen-goal-setting-2/selftest.py": "9b7795e3690d842e63ec13248106874f8850a8cb473ee973f3bba043b34cf3d2",
   "skills/teen-goal-setting-2/.phoenix/originality.json": "efcde8882948287c99c783c4c2fff064ba68aedce8e3409d6be62640a36c62d1",
-  "skills/teen-goal-setting-2/.phoenix/provenance.json": "56d02ab75999f8e8de320f4280980a552159172e77ce4d38c5f998f44f3ff70d",
-  "skills/teen-goal-setting-2/.phoenix/selftest_evidence.json": "01e97f380a6cdaf45d32f910b942dc2623f7979e47fbe0c77b789de2c2b7d475",
+  "skills/teen-goal-setting-2/.phoenix/provenance.json": "00fac4279033c07066a2fade1341494f838ad3836a0fce11ad19f9cf204a901b",
+  "skills/teen-goal-setting-2/.phoenix/selftest_evidence.json": "f0978def82605a0c6a7ce3a1776919cd501a18afce29fbbbb33cbdf53f828f76",
   "skills/teen-goal-setting-2/references/creation/p0.md": "1dc0df1ad54c97285125ee4de3af68162ac33e451b4f25d65765b42afb867284",
   "skills/teen-goal-setting-2/references/creation/p1.md": "f4235674e77c7488fc48f5cd042fa29d3ca7d896a29a57f9a48ed6fcf3d56cd5",
   "skills/teen-goal-setting-2/references/environment/p0.md": "9ab963024f73d9533eaa4ad47b4c24b851ff3d1b3d2717c330e47b035c264480",
@@ -54,8 +54,8 @@
   "skills/teen-goal-setting-3/run.py": "27520c4d6c6c94082652b165127f12703ee5bf5d56ef5da090bc4dcd1b34a3a8",
   "skills/teen-goal-setting-3/selftest.py": "5c6df1ab92921cd886c79b626bee5de8d19ea04b710938f3301dbc7f7150d3bd",
   "skills/teen-goal-setting-3/.phoenix/originality.json": "d7f0aabcdf7bc762b81eccafe9dcb1376b847827f4c057dbfa401e37c2efdbe1",
-  "skills/teen-goal-setting-3/.phoenix/provenance.json": "4b6bec1a12d56b6e4e9926b937554df2e6238d0bc062539587ef459e129a2f73",
-  "skills/teen-goal-setting-3/.phoenix/selftest_evidence.json": "8b1f4f7fb34afd84e2c2970d762fd55a2521174b86dcc8e56dc411df88277196",
+  "skills/teen-goal-setting-3/.phoenix/provenance.json": "1e7b00a8947cc67859be27cc5739998cdd4edac3ba6098d470fea590d3df0110",
+  "skills/teen-goal-setting-3/.phoenix/selftest_evidence.json": "9c4249fbdd5b38bfaaec00182d883b425d574e3153b357b2bf7365d7612340be",
   "skills/teen-goal-setting-3/references/creation/p0.md": "afd2b3f878daddac29ee14bcfb6caaa3b864c36f762fb9fdd42cab0768bc1e47",
   "skills/teen-goal-setting-3/references/creation/p1.md": "d64dea42d9fc925890bb46bbd64f51ec0a35264601538a729684c4dbe2353ef5",
   "skills/teen-goal-setting-3/references/environment/p0.md": "3af8c52d380ddf29b2a6362c22840d07983bcbba45b5fe4b85a8b66f9f5985fc",
@@ -66,7 +66,7 @@
   "skills/teen-goal-setting-3/references/production/p1.md": "68566378b4c5f05600ecb65633664ed2d9670ca6492f88644e9549d11b4c9089",
   "skills/teen-goal-setting-3/scripts/main.py": "7a4ece7a3082930869978370312d3d19399a616a05aaa5648cd744c7ef913b78"
  },
- "sealed_at": "2026-10-18T20:11:20",
+ "sealed_at": "2026-10-18T21:04:40",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

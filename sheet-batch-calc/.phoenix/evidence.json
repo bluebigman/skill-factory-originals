@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sheet-batch-calc",
- "merkle_root": "016778d08a3782c88fb291df1afc8a8e3e320e48586bfc4c35f12184babf1a00",
+ "merkle_root": "8f0413126fbfda166ceb04d1d5cc7a575052e73f9d62898fa3ee14ed200d16de",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sheet-batch-calc-1/run.py": "532f800f3d8ffe726a5ea3aa708c31489575c955a3f373e637895d6ef6a14583",
   "skills/sheet-batch-calc-1/selftest.py": "46b75823908d0aebca8873406281b9966c2429b10841709c8f857f112e76835c",
   "skills/sheet-batch-calc-1/.phoenix/originality.json": "8fd36d4e52f6571f3e067040357d477e9e832c5877b2647aedb46abbb307fcde",
-  "skills/sheet-batch-calc-1/.phoenix/provenance.json": "803101635a3b559c2706842478942a64c76494f1d33a7a22b743b2a95352943e",
-  "skills/sheet-batch-calc-1/.phoenix/selftest_evidence.json": "13120d1f9692348ff11572be93f12bd716d4cf6199527bc99d0295e90387fdb4",
+  "skills/sheet-batch-calc-1/.phoenix/provenance.json": "05e5354a49276331a2e1177e1986057cf6c8ef66212557bb4e3a9432b70ce777",
+  "skills/sheet-batch-calc-1/.phoenix/selftest_evidence.json": "19a6fe42f1c9c00c8904348b1c087aa860774a06c36ba08ffd94615d8cb201b7",
   "skills/sheet-batch-calc-1/references/creation/p0.md": "91c95b67f1fd90c3ef1d18456fc5579d48dc7bc9bdd0c52be27d46c03e7f5e12",
   "skills/sheet-batch-calc-1/references/creation/p1.md": "c44414a7c40fe2d99a1b25de929f308507f7e96d87c6c41f11aacb5e596a63ed",
   "skills/sheet-batch-calc-1/references/environment/p0.md": "6fe559bfbba2c0e0abb46cd95aee317ee7029165244b4227aad322bc9f31b7ac",
@@ -37,8 +37,8 @@
   "skills/sheet-batch-calc-2/run.py": "bf8ff27a12fd111ba98c58d13976d8647738f0a2811e2b211faae84e6d93a00e",
   "skills/sheet-batch-calc-2/selftest.py": "320fafd0f18b931c6d6d76cfad5d145840251667ce104bb5e58d02a558ec0889",
   "skills/sheet-batch-calc-2/.phoenix/originality.json": "333ab406184bd3129bba5092be7cbb18f7ec94e0385e36b5367cbb290cd76aca",
-  "skills/sheet-batch-calc-2/.phoenix/provenance.json": "8979ead92bbcbc6f67b99681c9a077f9de56dd8799e8ce4befd91c9119d2c106",
-  "skills/sheet-batch-calc-2/.phoenix/selftest_evidence.json": "d28710ae21b033f85a9bebd45c34dd8e587c00bca1389cb19ad1471db0dcef85",
+  "skills/sheet-batch-calc-2/.phoenix/provenance.json": "0e33af823c0656f7cb2b92bc157a229afb2020e7c44461511a8af3180ce4e40b",
+  "skills/sheet-batch-calc-2/.phoenix/selftest_evidence.json": "fb306e8579490d1fb7de65f30de6e8f4931e35848e4283a327164114f9488f86",
   "skills/sheet-batch-calc-2/references/creation/p0.md": "8b59654be8bbf59a30a52773c05c2498ab8b4d86a7da2941ab5e77de0cd247be",
   "skills/sheet-batch-calc-2/references/creation/p1.md": "cfd8742d2fe3f7c5474ba3a07f25ef868ef5113354108f05bf0b2deef120d48b",
   "skills/sheet-batch-calc-2/references/environment/p0.md": "95e21c1e97c1d005698cf864a98a2214ac3125c16bfafe2c72ec60ad78075db2",
@@ -54,8 +54,8 @@
   "skills/sheet-batch-calc-3/run.py": "7ae6186a3ef80eb9ec48233d76d3b12e47e81b6b1b7f1507e189bbb72f6ab8f9",
   "skills/sheet-batch-calc-3/selftest.py": "74d405f0297683df6899714f5d47e4792fd8d7fdc160751a0c5276f13bf6b1fa",
   "skills/sheet-batch-calc-3/.phoenix/originality.json": "ff55ad6e7a121746e38c27fb73c94206828454d6d8924d5f6131e1ed415b3252",
-  "skills/sheet-batch-calc-3/.phoenix/provenance.json": "6789a972febf5b7c309b03d7ca0ea36333642322893586944c150d7765b0cfff",
-  "skills/sheet-batch-calc-3/.phoenix/selftest_evidence.json": "46fb6f62083c15e9246e128eaeedb33b4a3944fd78bdbe19600980b9ecfeced1",
+  "skills/sheet-batch-calc-3/.phoenix/provenance.json": "f45a8bf3478a8b7c9df99e7b2c9c7d895829eed7793db4c5e2c2ba7a33622eed",
+  "skills/sheet-batch-calc-3/.phoenix/selftest_evidence.json": "cacc9a714f76f42c72726a36914b8f24ef70f826eed805d8b1a11b03bfe4d8a4",
   "skills/sheet-batch-calc-3/references/creation/p0.md": "dd1335af4e1a48452bddd59c66f8568f8b743818909e36a226ca921abccd58ac",
   "skills/sheet-batch-calc-3/references/creation/p1.md": "4ae37cff29989b3509ca6345d5258fa9c4f20336b4c3b6864619d907e1881265",
   "skills/sheet-batch-calc-3/references/environment/p0.md": "61f713c5cc671d3a1713a8b4ef7e2994445e7496c821d56599d4fa381ea9bcb3",
@@ -66,7 +66,7 @@
   "skills/sheet-batch-calc-3/references/production/p1.md": "f0da2b1166e0ec8ba1cd42be8dcfd57ba6d7ac53b9a4780707a33c0027bcd843",
   "skills/sheet-batch-calc-3/scripts/main.py": "466a8bf729bbbffcaf7063efe24febd2284a39fc7e4d821ae1240e828af80d5f"
  },
- "sealed_at": "2026-10-18T20:09:16",
+ "sealed_at": "2026-10-18T21:03:49",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

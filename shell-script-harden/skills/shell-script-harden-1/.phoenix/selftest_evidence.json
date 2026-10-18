@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:09:27",
+ "at": "2026-10-18T21:03:54",
  "skill": "shell-script-harden-1",
  "slug": "shell-script-harden",
  "passed": true,

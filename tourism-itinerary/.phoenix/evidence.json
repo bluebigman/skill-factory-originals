@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "tourism-itinerary",
- "merkle_root": "14e45f993c1f91a95d9ce3eb6cbe28577ad9c31f2421f9903a8b3c00f12927c1",
+ "merkle_root": "b69472c8b0b620abfe422dbd2491331f3d9d1d261c148fcedcb6bc8921d3ab6b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/tourism-itinerary-1/run.py": "c648688c906df07eadee81f0df964ca232e8dac139016689c79a37f1e2eac17d",
   "skills/tourism-itinerary-1/selftest.py": "52740c77bca6da8fb00a6bcdef2b3a86528008b2be9dbe7a7d1d03514703d02e",
   "skills/tourism-itinerary-1/.phoenix/originality.json": "134879759bfcaab9ba84dbaebaa7133ce707eead0e3f682e78e6fa085d5a77b6",
-  "skills/tourism-itinerary-1/.phoenix/provenance.json": "066bc060dfe33a134d9233e83cbfa7e87c140c7118749bd22a8476885776860c",
-  "skills/tourism-itinerary-1/.phoenix/selftest_evidence.json": "b401860baa9295032e5151561136dff4f3cc41f9a08cbe2dfca58c3b394d4b41",
+  "skills/tourism-itinerary-1/.phoenix/provenance.json": "d751f98ab7aa35691a0acc51d701df1a5e31fde31683f4a0beb00a425d869af9",
+  "skills/tourism-itinerary-1/.phoenix/selftest_evidence.json": "81f4235339b8603de7a9a6302a30a4c4838b22130c001f398e858b9151fcc1b2",
   "skills/tourism-itinerary-1/references/creation/p0.md": "21cb5c4e46dda5ba915b33aaa503c5da6e61cf3a520faa2740d012281e1eed57",
   "skills/tourism-itinerary-1/references/creation/p1.md": "d3bfe5521c348576f746b5f08098a277fdcbd7ef79b4a82a6c31235e36177386",
   "skills/tourism-itinerary-1/references/environment/p0.md": "a08f8e1bc7e395596fbf1b2b4d0f3ae395d4a7c058030700677d6008d67d5aa2",
@@ -37,8 +37,8 @@
   "skills/tourism-itinerary-2/run.py": "2c17944d6e18ba663f46171882c942497b0f646ce172ca5daf993c16e4abd4fe",
   "skills/tourism-itinerary-2/selftest.py": "778ec78f1c8181dfc2466d3871f2744b7c88cd8d78ffb95b6a403fbb27ce3b1f",
   "skills/tourism-itinerary-2/.phoenix/originality.json": "6ee28a95a0ffdf70a4b54e2d875bc2870a443cb1b47c7ec98042c2faca9bcaee",
-  "skills/tourism-itinerary-2/.phoenix/provenance.json": "39683c3af4b401f58489df9132dc785263a86d8b78aa4f0d5b05b13f5cb372d8",
-  "skills/tourism-itinerary-2/.phoenix/selftest_evidence.json": "e701b514525603b3b2294813a7d9cb2b37b28ddef445c5808b63cc83c6c0a641",
+  "skills/tourism-itinerary-2/.phoenix/provenance.json": "d528812c138db34c438daf8129168709d50166192bdfd62796b5c1672a9706e6",
+  "skills/tourism-itinerary-2/.phoenix/selftest_evidence.json": "6932b459599014bad73cac265e501737e4f4a953036e0a7855faa7852d822dfb",
   "skills/tourism-itinerary-2/references/creation/p0.md": "5b79bb6e0d6d9884740bf51ea0d9516239ce1947acdaa4a4cc1afe2beb1909e4",
   "skills/tourism-itinerary-2/references/creation/p1.md": "9829c4606c0b92d3d1c4008f81e80ab9db3058d6e4c21fcea0dcfa76e0e06636",
   "skills/tourism-itinerary-2/references/environment/p0.md": "c67c0410b12218959fe87d336a8464e1f84ae7e8ddad174143541905fd89d275",
@@ -54,8 +54,8 @@
   "skills/tourism-itinerary-3/run.py": "32870912da79cc268b8dddef810df446316f7f8dae42961f0454f340c8c2d501",
   "skills/tourism-itinerary-3/selftest.py": "f1ce0852c043f8ceb52d612db975fd5a080af44d601358ad4ebcfe6b5ff9d643",
   "skills/tourism-itinerary-3/.phoenix/originality.json": "d61791aa88a091703793ad4e6b6e4e36015313af805b701a505d11cbda5c96d7",
-  "skills/tourism-itinerary-3/.phoenix/provenance.json": "f4680dbe555329387667dbccb889e43c82ef7b9aa65764452349a99c02257d18",
-  "skills/tourism-itinerary-3/.phoenix/selftest_evidence.json": "97392e2f7f26eb0a1f99bf8b813303c79330fac86f5d5841280dbfe2f5c88bd9",
+  "skills/tourism-itinerary-3/.phoenix/provenance.json": "5897b01227e18fae2341ee4943cd98f08864d07a3ab8e6e7c48e9bb4143a8a8b",
+  "skills/tourism-itinerary-3/.phoenix/selftest_evidence.json": "623c2c0b816e6f2ead6d122776dbc971c508c03720073ec1d4ebcb8b4789d2c9",
   "skills/tourism-itinerary-3/references/creation/p0.md": "a6281cb163845380c3979c123d8e33a159ef326375a3ea88a63aeee35cc1e948",
   "skills/tourism-itinerary-3/references/creation/p1.md": "93538d79e843a48f686c6033a469090cbbead6b9af9926d56960b1a913bf94fa",
   "skills/tourism-itinerary-3/references/environment/p0.md": "ad7926e32eb5efcbf537bbe91c5e1448ce1a9c503457087e914668db78bedfaf",
@@ -66,7 +66,7 @@
   "skills/tourism-itinerary-3/references/production/p1.md": "d99572628890ee17f694ecdb69484e910afc0f2c1db621228085bbf4cc63eba1",
   "skills/tourism-itinerary-3/scripts/main.py": "58d9f2a12275aa138e9e1da5cd67cc0d2a565f4b2308cd62f5005b11a2f5cb50"
  },
- "sealed_at": "2026-10-18T20:12:08",
+ "sealed_at": "2026-10-18T21:05:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

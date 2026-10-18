@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:57:01",
+ "at": "2026-10-18T20:57:33",
  "skill": "doc-graph-build-1",
  "slug": "doc-graph-build",
  "passed": true,

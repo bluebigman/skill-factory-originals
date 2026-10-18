@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-sandbox-policy",
- "merkle_root": "14574ed2a358a8783537bd5b7a4e9a5ab97bde1e20c1da5e81de9dda5a3ce68e",
+ "merkle_root": "b382314b7ca68a72718e054b244c08c86d78ad4a0c15a27ad9cdcd963b161132",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-sandbox-policy-1/run.py": "786a53de90b952808c1e368559a662d95bcae81142af02c591c0acf4d7fc7aa9",
   "skills/agent-sandbox-policy-1/selftest.py": "e03414239f8e37cdec1f967a82db84e0aee4231b658fa3b7e94d8b2c03da499b",
   "skills/agent-sandbox-policy-1/.phoenix/originality.json": "6eef687b28a30f5e78bc0e23c949300631bf7a3f83dca1d3e183f36efc75cd21",
-  "skills/agent-sandbox-policy-1/.phoenix/provenance.json": "4ac9b9f0334d1c9d4ad01b1409b4e8fe68598c8c9b4aa8a5586669204f4b8c72",
-  "skills/agent-sandbox-policy-1/.phoenix/selftest_evidence.json": "95da9340c93ad9970f03e1046f75a08a3daa06f724f7a861f8be54d1c59b70c6",
+  "skills/agent-sandbox-policy-1/.phoenix/provenance.json": "0c348b314f351699707f4f7a13b8cd634812886dc6352161ca29225d4cfd03a6",
+  "skills/agent-sandbox-policy-1/.phoenix/selftest_evidence.json": "669dac5a4c452561fe69e5e011583d615980c2d6388b66619de11479a78ae49b",
   "skills/agent-sandbox-policy-1/references/creation/p0.md": "6f7772c5b5cb595180e01826eaed72a89ecdab60814c83fc90f927118e37c6fb",
   "skills/agent-sandbox-policy-1/references/creation/p1.md": "14dbcd71c1145c7b8e805dec6ae5e140ac51dd31c5ca61dec240a677f81eb499",
   "skills/agent-sandbox-policy-1/references/environment/p0.md": "6dddcb11b4f760d5b777c6b488ddb405958a0b23b5154866fb71b15353896838",
@@ -37,8 +37,8 @@
   "skills/agent-sandbox-policy-2/run.py": "85617a3a9fa3e81ce6f3ff5b212f4ea2e51b707e2c0ce33ecae60a9750ac1bee",
   "skills/agent-sandbox-policy-2/selftest.py": "eb79a7bf2556647fbec6110b73d5b9272080cf2f56aec24bb11ba7cbb7bcc948",
   "skills/agent-sandbox-policy-2/.phoenix/originality.json": "f62ad6b7e96eb999bf6c5662293ddda994d2b3c874aaca2c225708d8ca792a5c",
-  "skills/agent-sandbox-policy-2/.phoenix/provenance.json": "69cf40a234ceb52287b7420d026fd359e74a82e49a1bd53ff16868793be7165a",
-  "skills/agent-sandbox-policy-2/.phoenix/selftest_evidence.json": "959bdbd0a2977cec59cf46e8d67cd2cd335a116f2eaf9a32315ca1eb6c427389",
+  "skills/agent-sandbox-policy-2/.phoenix/provenance.json": "a4c27a37b5da847bb7d5176e51821b49127caa640f50ed597c824d05f56712dc",
+  "skills/agent-sandbox-policy-2/.phoenix/selftest_evidence.json": "85a5e87c2d16821e451e28e845d6ce6c95c626c09c431548c2edc215185b41e8",
   "skills/agent-sandbox-policy-2/references/creation/p0.md": "408518fa1388a67f8607195a4229118d7bc3d2495938da1ebe8cebe53acb286f",
   "skills/agent-sandbox-policy-2/references/creation/p1.md": "db09fd819929db378dfddf5c07ec5ba0069a74d9ac31d3e90fcce95555e8a858",
   "skills/agent-sandbox-policy-2/references/environment/p0.md": "c9cb6888bd38a52f5156d0d67d11082e7b546f1e417eeec4c494584dd61640f0",
@@ -54,8 +54,8 @@
   "skills/agent-sandbox-policy-3/run.py": "bfec0314cfa68d140f215860425a0a53cdabcbae48764f5a6ea4bf979a650561",
   "skills/agent-sandbox-policy-3/selftest.py": "f7b29d26c29fd78bd10c8395689de0c92e4b56f5cbbf6dc9f39d771392727afc",
   "skills/agent-sandbox-policy-3/.phoenix/originality.json": "ce2b7d6811da5e3276e90d4a3e4be9e2b9ee929ada31807fcb480af753f4816f",
-  "skills/agent-sandbox-policy-3/.phoenix/provenance.json": "4cb93bfcb0c52f4e818f026ddaf91001477bb691b8858172130fd49a98b186aa",
-  "skills/agent-sandbox-policy-3/.phoenix/selftest_evidence.json": "4a6e7679c54ba593f469a37ea2112de3c8629b12ef7606d7b4fcdae5aa51b89b",
+  "skills/agent-sandbox-policy-3/.phoenix/provenance.json": "a9037f48ad0f101d2df0f8e51b48df1d3f8634416f6f887ef99f529e581036fa",
+  "skills/agent-sandbox-policy-3/.phoenix/selftest_evidence.json": "dbc34e990fd31531944ddd4a4629cc85d00ed2f9f25451ff63c9dc8e5de621c2",
   "skills/agent-sandbox-policy-3/references/creation/p0.md": "fdb4e6a7a169cc15f8ae004ac0746ca292398499a8ce560bfafb5f9fb1d225cf",
   "skills/agent-sandbox-policy-3/references/creation/p1.md": "8cd061c874e409521ea392616a08eea5ff291fd4930dc917d785cdff620e1be0",
   "skills/agent-sandbox-policy-3/references/environment/p0.md": "300b659a8c8af9f83e3b1eb4a27520707ad964b9203cb0b64e8ce8b708bdc42a",
@@ -66,7 +66,7 @@
   "skills/agent-sandbox-policy-3/references/production/p1.md": "d42eda05218efe87716289b044f4bf4fde3338e13e3b808519ebeb1c75b17263",
   "skills/agent-sandbox-policy-3/scripts/main.py": "e08a1013dc1391f45cea3fd8caada24d8a06e7e16cef0ecbc17f3340b01901f7"
  },
- "sealed_at": "2026-10-18T19:52:22",
+ "sealed_at": "2026-10-18T20:54:49",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

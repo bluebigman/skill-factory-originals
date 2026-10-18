@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-bullying-coach",
- "merkle_root": "8b1d6426432da06b977b3c83cf9350bd020a7288c2e1ef56fc622a0322ed4a10",
+ "merkle_root": "ecac13a9a252b5b173f11f2b7dc3ad113eeb20f22e1cf6855dffa6be0fd1b64d",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-bullying-coach-1/run.py": "f233d2ec2d166fecb3438b2260814bb6b5b2cbc949a74d071791a5ea78814805",
   "skills/child-bullying-coach-1/selftest.py": "6d99703c0558506cce0e38c0d1ab29ccdc1e04534e6069f0a71a05d8e0d1cec6",
   "skills/child-bullying-coach-1/.phoenix/originality.json": "4d58a69322848642a86bd213379415246900c708c1e6d1e522dd2d1a5de52f6d",
-  "skills/child-bullying-coach-1/.phoenix/provenance.json": "c1679a5fe1b55832aae1d51e5e9538a8731c495d62231d4e42ce62e9331e94b2",
-  "skills/child-bullying-coach-1/.phoenix/selftest_evidence.json": "4f65d31871a1bf48798ab20eaca27de34c9920d1f99ade9adb576778f318296d",
+  "skills/child-bullying-coach-1/.phoenix/provenance.json": "5f399b3d9cb84ca738c09c546d3070ebcd737ef51d88757a7ec7d6d81b22c9a6",
+  "skills/child-bullying-coach-1/.phoenix/selftest_evidence.json": "34eadb690405734cdee0755de0ac3bd475d0d0d90177db1c5b35ccfb10dd77d2",
   "skills/child-bullying-coach-1/references/creation/p0.md": "f7cefc34aa01a079e250169c8bf1a3ef7e0c6b81628c9c54e2a8ac74339a6a27",
   "skills/child-bullying-coach-1/references/creation/p1.md": "69e612f9388931ad23dbd599bad2378fbeb458776b9afbea2b2e909312c14f2e",
   "skills/child-bullying-coach-1/references/environment/p0.md": "e227794e4236e4be21a903484b1ea7ef7d5cf7cd4642f6c673af9b889e2171f1",
@@ -37,8 +37,8 @@
   "skills/child-bullying-coach-2/run.py": "b7642203e1cb8f06ae0ad8f363cfcb0a315ab8f1d380d284c5c404345dc2c162",
   "skills/child-bullying-coach-2/selftest.py": "d597e362ee6926489224dd2f77b2e62425512794bd030cc32b1395461f590af6",
   "skills/child-bullying-coach-2/.phoenix/originality.json": "dbeff5baec27b8f83f04b9bd2a7ec14c612f780cfdd5e580160b98d24b7aee1d",
-  "skills/child-bullying-coach-2/.phoenix/provenance.json": "42a991adbca1393102693976cbe39b44c307b41678fb19f8dcc2c92cd69a53cb",
-  "skills/child-bullying-coach-2/.phoenix/selftest_evidence.json": "b7904b0a368d0e12e82d2dddea0d334a924d852eae7dcd02495f601afc816214",
+  "skills/child-bullying-coach-2/.phoenix/provenance.json": "27db4adeda1a8e41cc8a0d337022e73bfd9f07d60693a54167d3d4247a54fc77",
+  "skills/child-bullying-coach-2/.phoenix/selftest_evidence.json": "ada91df66269e1a438d612004f609d17b254a6ee2c78fbc5c56cfb314659476a",
   "skills/child-bullying-coach-2/references/creation/p0.md": "3cb5abadc789e5952535eca46fb0f482efaa996d536703a5528978dc072badf8",
   "skills/child-bullying-coach-2/references/creation/p1.md": "03be582e7495cb147eaf8d840ef76c0b1264150e91de54912c6d724d51cedfe7",
   "skills/child-bullying-coach-2/references/environment/p0.md": "626c96fbc9d66733c45cd7f41de34fea48fc8ba8d6a1a67785b6c4b079651ab3",
@@ -54,8 +54,8 @@
   "skills/child-bullying-coach-3/run.py": "c59ea689a412f260dbb4001a8ee9157f68f2b3cb955e00e56c68a6bf6177c11d",
   "skills/child-bullying-coach-3/selftest.py": "21c9ac4e333e8ffa17b6750dbe17a291cbc6217013822a7967eb14def9765df9",
   "skills/child-bullying-coach-3/.phoenix/originality.json": "1b225bf509db04382376729eb55b5e2ff429e721102220e6539f1690a02d71f5",
-  "skills/child-bullying-coach-3/.phoenix/provenance.json": "c9825cee0ffa2be55c8b49ad23d5a51b34fbd9fd42fdef65256dc561728176e3",
-  "skills/child-bullying-coach-3/.phoenix/selftest_evidence.json": "ab19190eabe4aeefc762e2c6dc437ceeac831ba22d5c69cf08e38d57a99496ae",
+  "skills/child-bullying-coach-3/.phoenix/provenance.json": "6f15b19c6d5426b2fa7b0f0934bcf7fd5bce2123c2f164d99bd5fc44a7472b5a",
+  "skills/child-bullying-coach-3/.phoenix/selftest_evidence.json": "ac3d3d0fecb2a2f2fcedc9b4d0de611279fb94ad6e910fa4ff024abfad45d42a",
   "skills/child-bullying-coach-3/references/creation/p0.md": "d6f5248f0705d5c276f374978c4c6d8113a940963b59cb3b692a12901fae7020",
   "skills/child-bullying-coach-3/references/creation/p1.md": "b52c1b2d0282c14344a7897d7999040cc012e7c005dd87883a3c0aa17ce8e8ce",
   "skills/child-bullying-coach-3/references/environment/p0.md": "e5e9240dcd2990b554194f86f0c36d77fb0e0d63c54f61e4c5c9ae5ace139afa",
@@ -66,7 +66,7 @@
   "skills/child-bullying-coach-3/references/production/p1.md": "e84952d37eaf5d76c286dff255c56fe9ff2aaabd87abb3ee0e92269d7331241a",
   "skills/child-bullying-coach-3/scripts/main.py": "e7803131dcc8950ce15cbd0b03d7bfe1a51a58509069bb7d958722228463c235"
  },
- "sealed_at": "2026-10-18T19:53:17",
+ "sealed_at": "2026-10-18T20:55:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

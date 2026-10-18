@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-economy-balance",
- "merkle_root": "e8be011fafff883d15edaba8914fa3909c9994706b41dc6d70af6c35318e3512",
+ "merkle_root": "4581a407520e7a6f6d52641713323cacbd5e79325b9e310e5483060b388e7990",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-economy-balance-1/run.py": "0b51cef97e6a5c63332379de4d370867db6ad2527e91fde7e003782e6dfa7a48",
   "skills/game-economy-balance-1/selftest.py": "a109c349d3a5d7483c1d7c154fbddae9bf408ba534c3d5477fcc7e504e8395f3",
   "skills/game-economy-balance-1/.phoenix/originality.json": "b59299e66822cd64879cfe735e36f2d6dd5e06006218dc99911452e11306762f",
-  "skills/game-economy-balance-1/.phoenix/provenance.json": "d4c168d67a192ea5206e699e2f3f9474e65f11ca3094633814b232b7536b63d0",
-  "skills/game-economy-balance-1/.phoenix/selftest_evidence.json": "d4f4d48325053e7edc10787e854e3a3acf1e1f1703b515fbe0b4be90dc39767c",
+  "skills/game-economy-balance-1/.phoenix/provenance.json": "5eb4858a49d31b6a72da1eb60696e1a91d5bfeb65ffdd8c76a397152660b708b",
+  "skills/game-economy-balance-1/.phoenix/selftest_evidence.json": "e5cc9218a62c93112620e32ebb186cca0d4693b51fca8aba9092313213655ad8",
   "skills/game-economy-balance-1/references/creation/p0.md": "0436bf2474b3c342bf106063e22a30d696701a3456918005e30b0ebffe3676f6",
   "skills/game-economy-balance-1/references/creation/p1.md": "ad7be041a6f06bc9662d3622c33b908d0efcf1cb71c05a42d8e9aaaac9d94008",
   "skills/game-economy-balance-1/references/environment/p0.md": "669acb1082d628e058a2204d56980adedce9daa473d0505aa71be85adca535e9",
@@ -37,8 +37,8 @@
   "skills/game-economy-balance-2/run.py": "4f1254413ab868db8d15178439864c306e4053f6baa248cdd7021f8538092b2d",
   "skills/game-economy-balance-2/selftest.py": "f0a7fb2101a9b050f7b3c25066997205d03940ae3e72866c64010b5577fe35ef",
   "skills/game-economy-balance-2/.phoenix/originality.json": "9992f1882d6d41514a99a3d99003fbc1eec74938fe2766c1e3cc07b37ed3e751",
-  "skills/game-economy-balance-2/.phoenix/provenance.json": "a716660d782ef579b3f652d4ef345e7d28e32c182aa105059e17e99b5d0a0000",
-  "skills/game-economy-balance-2/.phoenix/selftest_evidence.json": "c9feb84675f02b69a1d8b82e1739a2706a38b69f2323e163b5604881ce86916b",
+  "skills/game-economy-balance-2/.phoenix/provenance.json": "2718e0d1241df7a6f67f0eb867881077ea977b38860a44e65fa5af04daf7b01b",
+  "skills/game-economy-balance-2/.phoenix/selftest_evidence.json": "f2017aea4a2016c19a3c389b83571e3ac1e4dd896a1a0b0d1bc62b8ebef215dc",
   "skills/game-economy-balance-2/references/creation/p0.md": "334ed65ac806b59710f0f6880d01fa67e080d228f3db05c79907e640fb0d7def",
   "skills/game-economy-balance-2/references/creation/p1.md": "dfcdaeea8e219ef1b164e529a9a156cae6e44ff2ad56750a5f0ceb6f212a2bb5",
   "skills/game-economy-balance-2/references/environment/p0.md": "8ce41db4744c0308de3dc86750643465a69864482474f103e03d55af98ceddfb",
@@ -54,8 +54,8 @@
   "skills/game-economy-balance-3/run.py": "67a094446b21c40e2c923a057baea2fbba13c8c5dba776b4de73cda957861513",
   "skills/game-economy-balance-3/selftest.py": "3daf1b73a079487fa582a5ec88d785a2361a50fceafa43543a9bf4cbfeab7632",
   "skills/game-economy-balance-3/.phoenix/originality.json": "454f84018af407df3ef4a3d24aa9ce87c57c9eb127363542a0ec631a4dc89642",
-  "skills/game-economy-balance-3/.phoenix/provenance.json": "ecfb5a618f78b266a219f8dca6a7732ef712f7ed791b25a5c335297c67c4ba82",
-  "skills/game-economy-balance-3/.phoenix/selftest_evidence.json": "0a8030a6f7016e840a8a07addea0a8eec2ead7507763a5fd4706f9e2e4a9a531",
+  "skills/game-economy-balance-3/.phoenix/provenance.json": "a4b9e46577c1a47dc8d27d388de3674d75124d8cf4b3b50ed42f66b5edda4919",
+  "skills/game-economy-balance-3/.phoenix/selftest_evidence.json": "bba1449a7de15044bc3cc4f08397a0386ed532e529f9dfc12e8de21d1acb6a0d",
   "skills/game-economy-balance-3/references/creation/p0.md": "d2621902806c74f0d322b60689bc90242bfca1a8d71e05c3fb13a0b4c43b0360",
   "skills/game-economy-balance-3/references/creation/p1.md": "7b927f688bae8e4af96ff637ace44807bba388d73c40b1acd3bcc50d3c9f2032",
   "skills/game-economy-balance-3/references/environment/p0.md": "9a6814e9061ad2fdcc17c59fd2757948bb325f7c0865b23828e6547c081aabbe",
@@ -66,7 +66,7 @@
   "skills/game-economy-balance-3/references/production/p1.md": "7dcdb918f7f478d0a5894599850622a9a7a93c6878631251383c9aeaaa05f68c",
   "skills/game-economy-balance-3/scripts/main.py": "2265abc7e24fdbe2039077e9979131d20e1b50fed00c5a31f3720763889379c5"
  },
- "sealed_at": "2026-10-18T19:59:44",
+ "sealed_at": "2026-10-18T20:59:03",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

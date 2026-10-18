@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:12:38",
+ "at": "2026-10-18T21:05:16",
  "skill": "viral-teardown-1",
  "slug": "viral-teardown",
  "passed": true,

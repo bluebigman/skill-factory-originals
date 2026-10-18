@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-meal-coach",
- "merkle_root": "c2cfa4da4e3a1fdac3aee6055840bca21c04e402bc4c154d5a1615e0c29b5c00",
+ "merkle_root": "810f5e6a5d748d35bec82317583c9bc2be81b5949cacd919d1477c1e70dcd0b9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-meal-coach-1/run.py": "397c32a3a996c33d1f5a984e375e1996e573b1a12bf7205a3eabce20dd8804b0",
   "skills/family-meal-coach-1/selftest.py": "381f9714a02b75d455ea00f76183b4b20f7425aba3c2e3941f4876ac5148d702",
   "skills/family-meal-coach-1/.phoenix/originality.json": "b16a8e860d7dadf8f1a255e7279c4ee05f558048a54f7d387d643a2075b3c29f",
-  "skills/family-meal-coach-1/.phoenix/provenance.json": "4761068ec433e6b790e93bf17d87dd2161af9d2fbbfcda64781c16bffbf49fb3",
-  "skills/family-meal-coach-1/.phoenix/selftest_evidence.json": "09a6dea7b835762329d375c29a2329950d2ce1ec75083779cd9cb6f4940fe9b7",
+  "skills/family-meal-coach-1/.phoenix/provenance.json": "36d85ce27a7ab0b11c2d00994febca063281a2b8ac1acf9d317b4d58f1ac4845",
+  "skills/family-meal-coach-1/.phoenix/selftest_evidence.json": "c33f8d6c08b9426346ac25fecbf398786a1713301f0bacdf3c52134c1b345dd7",
   "skills/family-meal-coach-1/references/creation/p0.md": "201d7cd1896899e09e94b6b8ac1f2c9fca92faa74405e276d5392a9b207e9995",
   "skills/family-meal-coach-1/references/creation/p1.md": "01553e89c88e8a83100e61c59e50552edd714803b583ce6a781f0a716fd06106",
   "skills/family-meal-coach-1/references/environment/p0.md": "ec3f2094a33e84cf40c078db2f6475fbc7b4d3b4cc8738ac936e70e8b42d7610",
@@ -37,8 +37,8 @@
   "skills/family-meal-coach-2/run.py": "f1fa83966206af10c1a9ba5632aa542b49633608e7fea8e15c36bab3a6025832",
   "skills/family-meal-coach-2/selftest.py": "fdf157be257076b0307a14943b8c96313c2bb2120f3b01dcf56585c9050b23a2",
   "skills/family-meal-coach-2/.phoenix/originality.json": "90a7ced7829adbd7cd90b6310c43513af41257b195e94f34179e4452bb775a40",
-  "skills/family-meal-coach-2/.phoenix/provenance.json": "e9a2bbc96291546e0b2e0b4a1adb7afe024198b2a4762f3b33e5be19e68117d6",
-  "skills/family-meal-coach-2/.phoenix/selftest_evidence.json": "7ecaff4185ea444c79625b7cf74839cecb4c0ecdfdb5454fdfabea2a0b7f1236",
+  "skills/family-meal-coach-2/.phoenix/provenance.json": "a3c763ea46f132d3eb3010c092c299b8a9e9a885cf547316890fbacc8a9b388f",
+  "skills/family-meal-coach-2/.phoenix/selftest_evidence.json": "96aad30abe913ee49f2b80e02da7085d5758dcaf3090c7dac17938ccee53f0e4",
   "skills/family-meal-coach-2/references/creation/p0.md": "c5936601e91e9b63b616b6020d0c162e2787827cdc56fcd2ea22edd558505c8d",
   "skills/family-meal-coach-2/references/creation/p1.md": "2c14a73db3944378e040271545bd9d1891a816792367edca6ec10b5be08f596f",
   "skills/family-meal-coach-2/references/environment/p0.md": "bf849e4dbbb44a59f5e76cc9e5ea7c400aa532237c928e746355d1c9d61cb11c",
@@ -54,8 +54,8 @@
   "skills/family-meal-coach-3/run.py": "44a0d3ba3e22b0e4e836a5ab0ec7f416f57bdd55bd271519dc96e7616dd265c1",
   "skills/family-meal-coach-3/selftest.py": "fbabe88fa1662679a78ec4953510e9fb3bfb4a99fe1fbb6132af9a7e6dff5480",
   "skills/family-meal-coach-3/.phoenix/originality.json": "d4d0eba36ddb1104995d8140799d96d1db8e619c7f538207aa2bafc9420553d9",
-  "skills/family-meal-coach-3/.phoenix/provenance.json": "d3b2ed521528aa36ee4389dd8ed12cce0b5811786d38de28a6c23b8fae1a5c08",
-  "skills/family-meal-coach-3/.phoenix/selftest_evidence.json": "ed53b6e8ead83445eb9c008163a5b09c3deecdc9bf95929fe547c4b49ca63871",
+  "skills/family-meal-coach-3/.phoenix/provenance.json": "81a241e5b02bf6d93266b1322c2b7cd0916fa343b69ea9b3b88e2494111c1492",
+  "skills/family-meal-coach-3/.phoenix/selftest_evidence.json": "b9c1dfb696df7e0373aac234dfc1a156d3070acf66715b91a773a7b3a8c7c59e",
   "skills/family-meal-coach-3/references/creation/p0.md": "3637aa82a84f5e710ef568edecfefeec7e798628a3422bbfc0bc7d5d47f86206",
   "skills/family-meal-coach-3/references/creation/p1.md": "403f66c26e3d275a6eb80dd9d03984b1f430443955ee8f9505f485ef351e4559",
   "skills/family-meal-coach-3/references/environment/p0.md": "669b5d01b541677486f160c15449c77792afa6e18300ba7a78874cd597ce35e1",
@@ -66,7 +66,7 @@
   "skills/family-meal-coach-3/references/production/p1.md": "bffaf2712a9899a80a5338a4c7973b899b29597f89ac3a008dc042bdfdfdfb19",
   "skills/family-meal-coach-3/scripts/main.py": "538a83e4b3ff228c82fd8db3501c57494487800c8e077e946f1c6a9f4dae8c5d"
  },
- "sealed_at": "2026-10-18T19:59:02",
+ "sealed_at": "2026-10-18T20:58:38",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

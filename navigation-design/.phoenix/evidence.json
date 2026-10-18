@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "navigation-design",
- "merkle_root": "f685979396a40a31851fc95821f0f6ad5ca2330008945151aa693ebe17a75295",
+ "merkle_root": "9f6543e1f491fb3c41a0ba13633a38461408f3ee218d60672cd99adf304ebf26",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/navigation-design-1/run.py": "11c3c216effc9c8a4e0907dbcbbe165c56b8427c10ea727ac91f2b07cf7e7aa2",
   "skills/navigation-design-1/selftest.py": "4262aca40d068db8d62601dced73a482950122d0f7e6b618ae1dd6c27bfc5caa",
   "skills/navigation-design-1/.phoenix/originality.json": "aa83f4b780f6fd89b092f54a73419dd97b6768b259f95d82711636dfb29826b4",
-  "skills/navigation-design-1/.phoenix/provenance.json": "378a68aacfffe081a866af621b9d5465b0ecad1ba0226fd8771b114e4a6c65bc",
-  "skills/navigation-design-1/.phoenix/selftest_evidence.json": "f18c5e8427ccdd23e57c081aaab61c872d2ddcc1d954736f620906d00ccff9af",
+  "skills/navigation-design-1/.phoenix/provenance.json": "7e247ee6ecd49922e85b323ecc62c4f1df2a1a7a17457c5722d3976a8a6790c7",
+  "skills/navigation-design-1/.phoenix/selftest_evidence.json": "5ed869a65dcf9c474e8c6046c1a95c7b24ed920a4e29551cc6f8d073f0f83225",
   "skills/navigation-design-1/references/creation/p0.md": "409512f2227759178dbfe2ad74c1c20c79de5f9272d94561f1bc3efc15516c98",
   "skills/navigation-design-1/references/creation/p1.md": "dfd689e62a3dd03193c442ffa8cc94bd79f3fd7025dec2683fdf236b365474a0",
   "skills/navigation-design-1/references/environment/p0.md": "20b67c087171723dd85b07112a91f6e6f9057b20e27cd202cdac0ee841404483",
@@ -37,8 +37,8 @@
   "skills/navigation-design-2/run.py": "24d4b530bdf00b59c05b49436f083bda3bed1f21ed7b1d495024e6389f9203a1",
   "skills/navigation-design-2/selftest.py": "1c549f0901769cdcbff2889682d59beaa0b80432fa53878009ef64529f5fb476",
   "skills/navigation-design-2/.phoenix/originality.json": "945b9ff116f4969860b8fe53f77f3e807101215048b2b5ea9834731face0eac1",
-  "skills/navigation-design-2/.phoenix/provenance.json": "1526da8fc153525c1cdb6046b5d2a2d25ede8cf26402b2e546cdf08ccfab0661",
-  "skills/navigation-design-2/.phoenix/selftest_evidence.json": "326ae538410c166c7d19f27f76a41e1a09d2cc127e64ca8df53eabad11fc557b",
+  "skills/navigation-design-2/.phoenix/provenance.json": "c7bb4491ee8d290d3bcc0302f0ff448c88b2ba3fda44b6ed5b65584c9dd13d66",
+  "skills/navigation-design-2/.phoenix/selftest_evidence.json": "c64f2086636842827a54a0b08f256a2a8fda0f3d391043476881867c2dbe7b36",
   "skills/navigation-design-2/references/creation/p0.md": "94bebc25560319779c240e26da4f809a2bc36af21c61bcfdae6b729c9fd8c4ef",
   "skills/navigation-design-2/references/creation/p1.md": "4137cd00197a1a15d433522c70671fe6212c349d9e6b21088cc16b95dae9c1bd",
   "skills/navigation-design-2/references/environment/p0.md": "2100a298f66aae55ae2017a1997b41b8a215ce6a3fe5f5bd95fd4f263b42bf4c",
@@ -54,8 +54,8 @@
   "skills/navigation-design-3/run.py": "c5d469a7b37a04d5a63629cd19bfc001b9571cf9dab4d62cef21cc5a8878b20f",
   "skills/navigation-design-3/selftest.py": "20bbdcbc1d18ea368aaaae91bc4736c4c69cc7d1fa88966bead0b154f449add2",
   "skills/navigation-design-3/.phoenix/originality.json": "9d87189ab96d63f6e5381b69e193428e84827ad39449601c9664f98ae44024b1",
-  "skills/navigation-design-3/.phoenix/provenance.json": "671c9cbf5412429af0ea05d0d379e02a70e508348113b006e550c58ed81338a3",
-  "skills/navigation-design-3/.phoenix/selftest_evidence.json": "34fe0a0de144ffb4041b9fbdcb067af7a986ea02c7582f0d2c174059eded5031",
+  "skills/navigation-design-3/.phoenix/provenance.json": "d7d3fc841637e88572da8d3a900f61990746abea5eae8de0df614180e680ebf7",
+  "skills/navigation-design-3/.phoenix/selftest_evidence.json": "c0eb2f190a78b96e760d65fa68d2cb83c4878dce7c94b0ffaa4f791ebbd18ce4",
   "skills/navigation-design-3/references/creation/p0.md": "4291e1bf9de484505899ad82ea82447d9d13fafecd051b392a667c8c65215c3e",
   "skills/navigation-design-3/references/creation/p1.md": "d2cc5491a971b44f45647cd9888903983a3e247f58300e56ab7b409751b4d669",
   "skills/navigation-design-3/references/environment/p0.md": "91430fd8cb87675122b84ea68079255c15c49535b7bbbffbcfae0f852bb3ef72",
@@ -66,7 +66,7 @@
   "skills/navigation-design-3/references/production/p1.md": "5e6dafbb536d98f614e90dc7e243bfe86a485fe184fd45cdbdbd392aed441f3b",
   "skills/navigation-design-3/scripts/main.py": "2add96825bcf2d72d4b2bab9ffc78aa33eeaf2401ded087cc6d2612efec7edd8"
  },
- "sealed_at": "2026-10-18T20:04:18",
+ "sealed_at": "2026-10-18T21:01:17",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

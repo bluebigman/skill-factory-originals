@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "metric-alert-design",
- "merkle_root": "1810cd86a61bf972ff008bea9b2e3221ca153a214a9be908464f5325f9e84b7c",
+ "merkle_root": "d203740768b4a39a8e6c27156410b55bb8d50f50e262264d072eee4ae9af4da1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/metric-alert-design-1/run.py": "ce1af5ac8f5dd1aa08c5562d61705d5ab5ce2cf93d4a22a8e5927ad69f5dbdb4",
   "skills/metric-alert-design-1/selftest.py": "ad0dca5e44627e3feb24e609811009d58ac97ad1b34d3ac402d18855fd48e36f",
   "skills/metric-alert-design-1/.phoenix/originality.json": "3c587aa96a04e184a6f20326d3edf94a5cd07896574f90f858fa4a4916dfbcf8",
-  "skills/metric-alert-design-1/.phoenix/provenance.json": "f735aa7d29354496053307727aac7adf82bda6c6ac923d349617ebbdc772895a",
-  "skills/metric-alert-design-1/.phoenix/selftest_evidence.json": "8a13f3e742d06f2866b83d881c317ec32986855f05b04202dd0b95f153b60ffd",
+  "skills/metric-alert-design-1/.phoenix/provenance.json": "9d5f8ba3c6ddc7080013ce156e55b8b04ab13ea0ac6703f7401e6a18c5284124",
+  "skills/metric-alert-design-1/.phoenix/selftest_evidence.json": "60d847f4c0753f4e49487881f5179296c2acd2b8a293a2cd2ffafca90a7f4c17",
   "skills/metric-alert-design-1/references/creation/p0.md": "f6a9767d55f36c1cebb6f863d13dd1f74f07566476a4317fd5895425cef66dc6",
   "skills/metric-alert-design-1/references/creation/p1.md": "c8c22bc62a0bc72f7c1d566cab27634dbfdd40894f575a211710551abf410d75",
   "skills/metric-alert-design-1/references/environment/p0.md": "351019ecbddba2a5e45a2766e5379c2a279fdd276d8c8bc2a49894dac18ec690",
@@ -37,8 +37,8 @@
   "skills/metric-alert-design-2/run.py": "e97cbb5bbb4c77e51251be0ed9cffaa41e5d51087c239d7b117c9c802490b919",
   "skills/metric-alert-design-2/selftest.py": "56a8432befe7220e166203b1f4c83fd38c34bd6d93277def5f159b7b9440903d",
   "skills/metric-alert-design-2/.phoenix/originality.json": "d22cc3931d9aabb46911f74bba931847a23de5b912fd6bf3d047f3f6d3e824a8",
-  "skills/metric-alert-design-2/.phoenix/provenance.json": "2398814db523fe0d1b66607330bf5e4d96a68da7eb036b514f2e6a115cca894e",
-  "skills/metric-alert-design-2/.phoenix/selftest_evidence.json": "8b416452e4d93619bfd6151c904a27786487ec3d11d764f6363f2331760585c5",
+  "skills/metric-alert-design-2/.phoenix/provenance.json": "612a69325a4bce1315098c524c82e6842e9087827b9315216e972b9019447fe3",
+  "skills/metric-alert-design-2/.phoenix/selftest_evidence.json": "881217af37885a310314dff333e77466400ef1cf4a8fbc58492ae851d45e638d",
   "skills/metric-alert-design-2/references/creation/p0.md": "cde62b9804b68881dddc74ea209e8c6521786e0f2f82bd90b26e150fae2a4faf",
   "skills/metric-alert-design-2/references/creation/p1.md": "9b685484911c5db8119318b650c3399edb503b8bc8711636358b983635d9b279",
   "skills/metric-alert-design-2/references/environment/p0.md": "e93a0b74da6ae36c10a1d3024883fe5c353c93786f4afa6cbc7c8c56b9f85e47",
@@ -54,8 +54,8 @@
   "skills/metric-alert-design-3/run.py": "3e6748be71c4e682b533116aefbbacfcc7656de208dc178199c528a739a65e20",
   "skills/metric-alert-design-3/selftest.py": "f63c21eaa080ceb6360007ad813784bb69f9a1411bf3ffb47361b162c5fb8d33",
   "skills/metric-alert-design-3/.phoenix/originality.json": "f9f1c8dc00d05658696a6e81794b7f3beb0bb16b1e356fe0ccb4e0dc5abc56b5",
-  "skills/metric-alert-design-3/.phoenix/provenance.json": "7bcd4aac4bd241c5d320faa1537434f30cca37e9ec9fd5763b929c03b4311399",
-  "skills/metric-alert-design-3/.phoenix/selftest_evidence.json": "948c9a94c25686d5c082548b32d750bcf1ebc239e076869af375ede2a51a08fd",
+  "skills/metric-alert-design-3/.phoenix/provenance.json": "5bb0889385f88300c204049b30fda5a17f447580ce7b675790d260d060439c92",
+  "skills/metric-alert-design-3/.phoenix/selftest_evidence.json": "e65a840cd2f37fd45166c2666ee7b8cfdcb20d5313a906ad4c4655bb8cf547d9",
   "skills/metric-alert-design-3/references/creation/p0.md": "8ee6500bf9dea51b766a9061263bf9815a11afc98ab714c9bd50204f71c8074f",
   "skills/metric-alert-design-3/references/creation/p1.md": "7cd259b590c0ea31a1cc0c483ea6859f393fd0d6c229b31c0db1fee7e42c6cf9",
   "skills/metric-alert-design-3/references/environment/p0.md": "7aeed4440b7f329cd37ba6d110b54a462fae8fff2d3df3783b903be409b2d3d6",
@@ -66,7 +66,7 @@
   "skills/metric-alert-design-3/references/production/p1.md": "f0523940832b7d3c8972d65a15c3ad8c71a4cce530c2adae27362ca2ba3ced6f",
   "skills/metric-alert-design-3/scripts/main.py": "6ac6d46416ac16e49e957c212675638430c1fb8c24618490d1ad1d38a9023570"
  },
- "sealed_at": "2026-10-18T20:03:36",
+ "sealed_at": "2026-10-18T21:00:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

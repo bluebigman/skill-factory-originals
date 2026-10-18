@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-hallucination-guard",
- "merkle_root": "0200ba9d405099c62875a6566172f37b4877955115edb1b3ff54c0400441c2a4",
+ "merkle_root": "06f064e906cbf2c00a4313fa7377eb19cbe515d2b9684206fd399c96086c2a48",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-hallucination-guard-1/run.py": "d67e0b6215034c557d23444a4c16c403dda6ed10ffccfc590057008aa3a70f48",
   "skills/agent-hallucination-guard-1/selftest.py": "78b3acc43778b794a5e435b2f0cf43767b5ad025946dd49fb4c4b26bd7c1fde0",
   "skills/agent-hallucination-guard-1/.phoenix/originality.json": "027575a2413f410d7e00033bb923f8ea3a3a6076e4e033a192d2762758cf970f",
-  "skills/agent-hallucination-guard-1/.phoenix/provenance.json": "049915ab7c0eccdbe99454c3fad62aff3124c1ab4a74744c2378fc7aa244456c",
-  "skills/agent-hallucination-guard-1/.phoenix/selftest_evidence.json": "3b8d0e0a8887c3766ec6f911379bcb6babdee5587130cf536006335345a93927",
+  "skills/agent-hallucination-guard-1/.phoenix/provenance.json": "29523da6b89a7fa67a75d4cc9cdd6f4f0acbc1c160389d5393ca4e164d997861",
+  "skills/agent-hallucination-guard-1/.phoenix/selftest_evidence.json": "98ad27ae88652c1c99561355910ecb5bb51d4fd5f27eb4c9df4b080a06eaeb0b",
   "skills/agent-hallucination-guard-1/references/creation/p0.md": "eba39712aa7280fb63dc7b5dcd1fc13e4ff73c64ca14b1e0522f5e03a03398c4",
   "skills/agent-hallucination-guard-1/references/creation/p1.md": "de07bfd7c0038ad1d85f5c98c00f8b42a12ef11b8944a11259c6eb02688e3ffd",
   "skills/agent-hallucination-guard-1/references/environment/p0.md": "bb9b20df533f7bd178067cc04472d23a32d2e3e71c20967b6b3c9d5390c77b63",
@@ -37,8 +37,8 @@
   "skills/agent-hallucination-guard-2/run.py": "516cc02e228ee2ce90df0b7af2494a8230bfa544fd338e6f61955f8cc2d5a14d",
   "skills/agent-hallucination-guard-2/selftest.py": "c4f89cfee2490b6ffff0a54b21c273431dead05e3e170176fd73f33fa5d6752d",
   "skills/agent-hallucination-guard-2/.phoenix/originality.json": "1c58e33acee1e1168363d479d78fba279173cbfda6b9931227ed6473b47ee2b6",
-  "skills/agent-hallucination-guard-2/.phoenix/provenance.json": "1cf1a5b85a64460ad23d9d92430eaa5a83b5473ab1d73ab27384a45664bfadee",
-  "skills/agent-hallucination-guard-2/.phoenix/selftest_evidence.json": "4af663b30fb4d6debdbaa732a667c10e64ade5634b1cd89fc3c35b7c08528fca",
+  "skills/agent-hallucination-guard-2/.phoenix/provenance.json": "609c417eded22926a76018e2b96ab4b361cc3a92f5679223f228c3346e2460d4",
+  "skills/agent-hallucination-guard-2/.phoenix/selftest_evidence.json": "2d50d6dbf03f219f1d3692a608caa657a0f4c4b2d88785996e0883d347d9defc",
   "skills/agent-hallucination-guard-2/references/creation/p0.md": "58a8805369ee81e75dca1717e60aa41ef9e0096e029c63c524390eb26f92b843",
   "skills/agent-hallucination-guard-2/references/creation/p1.md": "fe05858c7e368c4e1aa9389ab9b91ea5a986ae4861dc48e5ca2404aeefe58592",
   "skills/agent-hallucination-guard-2/references/environment/p0.md": "bbcd893f562ac3c307b0d1e01aeb306f872567ba9e291deec346c2b686489dbe",
@@ -54,8 +54,8 @@
   "skills/agent-hallucination-guard-3/run.py": "4274c16aaa44e90e66495eaf003c1d3124707d6c2b9c10928fbb358f14abc95e",
   "skills/agent-hallucination-guard-3/selftest.py": "446ddc8a43e53d50fa6535daf787e72f5a83d11e7bf6a4b7fd6dd13fb3cce41d",
   "skills/agent-hallucination-guard-3/.phoenix/originality.json": "0b7832ba0d25a61e883839bf3bc010cd94f9b7a58a92711b09c5a8849a385300",
-  "skills/agent-hallucination-guard-3/.phoenix/provenance.json": "6c8fe0c378481aebe995b6f0c4bad461dca4938932d8a04209ea060585c05cc7",
-  "skills/agent-hallucination-guard-3/.phoenix/selftest_evidence.json": "6430aa7403f79c4f8e0642aa313b655e1d68440d35ba21b5a8ccd1ca3df87e18",
+  "skills/agent-hallucination-guard-3/.phoenix/provenance.json": "a1b7e21ebd34803bbe3e7b94bb52749790d0f2015e0b6fcac8c2bed774e8c3e5",
+  "skills/agent-hallucination-guard-3/.phoenix/selftest_evidence.json": "1e409d316846a2e293a3f6762a84256f0599dd38391b48bba3c373a5bcee65eb",
   "skills/agent-hallucination-guard-3/references/creation/p0.md": "02ef003a059ae81c7dc83cfb5049d1b792247b6de034f1de9d0de5800b6c9641",
   "skills/agent-hallucination-guard-3/references/creation/p1.md": "82888a8d699b860567d85eef50d7baa997e23e15ecefb24ac70915a4f85829a9",
   "skills/agent-hallucination-guard-3/references/environment/p0.md": "f62aa911eb1f22fbf11461848d71bcad9b3ab7c4cc5c46ad077f1e0be5a499ca",
@@ -66,7 +66,7 @@
   "skills/agent-hallucination-guard-3/references/production/p1.md": "0479a974a01928380de06a2856707fa3ec86827cc71b8f05d9820f1f2a020633",
   "skills/agent-hallucination-guard-3/scripts/main.py": "6bbd0d4abb8154a482b8aecc30c090736ee15e7f7c4d90def04e4afb7d207e11"
  },
- "sealed_at": "2026-10-18T19:52:01",
+ "sealed_at": "2026-10-18T20:54:36",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

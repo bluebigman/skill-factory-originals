@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "graceful-degrade-pro",
- "merkle_root": "2bca2affaa904953b301c0396adb931f1baf20e3af46feb4d8ee0a4f2338781e",
+ "merkle_root": "172aeac2a34475bdff6a8ae63cc664f84944cb841fdd2a87c793951af5883457",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/graceful-degrade-pro-1/run.py": "f4632340095b216bfd40109ab5d733c5eb5da08de07113086f3c19ec249a36f0",
   "skills/graceful-degrade-pro-1/selftest.py": "0590fd0e4b1b662f21a85160c1d0e4dadd1d45f1fdc08b1a80149ec4fcd98189",
   "skills/graceful-degrade-pro-1/.phoenix/originality.json": "40490c72c5f9dad944d846c5c97c300e258e1e51e27d8ba3e46396beb06de6e2",
-  "skills/graceful-degrade-pro-1/.phoenix/provenance.json": "df4d216bca5724017af554b2bf20a8d24ae8ea691c40f0054c866a4be3465a98",
-  "skills/graceful-degrade-pro-1/.phoenix/selftest_evidence.json": "2620c6c0bf6d5655f548b31be56790083967ea11fbf15308b0f32d2434b0a9e6",
+  "skills/graceful-degrade-pro-1/.phoenix/provenance.json": "c2e6bc770f0a7198d47c62cf0c6eadc49cf53d5825633314d3cceab0ad9f6212",
+  "skills/graceful-degrade-pro-1/.phoenix/selftest_evidence.json": "b3ba34a9f96d00b8da9c3753db992c1a17f060867618f81158940fbc22b8cee0",
   "skills/graceful-degrade-pro-1/references/creation/p0.md": "2ec4e062f053dff3e7548ca0c14a02dd12e1218d3b1634d3a8b6e21323731dad",
   "skills/graceful-degrade-pro-1/references/creation/p1.md": "8e933399e8e7912281fe47e23f6bd5d291354125a6bebf2cbd930321c9cf39dc",
   "skills/graceful-degrade-pro-1/references/environment/p0.md": "62baedb320c183faf7d4c76883f86e98203f7b5bd8d07181e9a9a07da9db64dd",
@@ -37,8 +37,8 @@
   "skills/graceful-degrade-pro-2/run.py": "c08a6938609c80eb2b713e06b96658e4a737f9b98de53564f6b8ae2abe3a7498",
   "skills/graceful-degrade-pro-2/selftest.py": "861ee99bfd61d27ab1644011d10cbccd0f40455a58402eec5d28a65686d5021a",
   "skills/graceful-degrade-pro-2/.phoenix/originality.json": "42a6eb940f21980702d5dbf0e93510c66a2013eda29970f0a645c41622452139",
-  "skills/graceful-degrade-pro-2/.phoenix/provenance.json": "80251c7402709e88c39d4fd268f7f446188040140098bdd7622882f085efa9d3",
-  "skills/graceful-degrade-pro-2/.phoenix/selftest_evidence.json": "a09b5ddb5888d92d5e6b3a2d34fe364a6a60b275c53b6e7115c193f67c82f9ab",
+  "skills/graceful-degrade-pro-2/.phoenix/provenance.json": "ccf82608f6b2f179d1c488acca2b612b959a2f865a4d7d5f9ecf97e6825dfadb",
+  "skills/graceful-degrade-pro-2/.phoenix/selftest_evidence.json": "30c550dac1f3724940e32bd2120ab13727bb110e123287f29bcad923ba083666",
   "skills/graceful-degrade-pro-2/references/creation/p0.md": "36a2b2e86fd5c6409b2bd84244d66d92266ae1e1be6e407ef5eea0e044b43912",
   "skills/graceful-degrade-pro-2/references/creation/p1.md": "c64c274738bb4ab654256ad7bbdc1330f740e65ae1c17cac16036a1e6eae2abf",
   "skills/graceful-degrade-pro-2/references/environment/p0.md": "41295e279afc10e81275b6ea3b3c24bda1e908f02819d6dda0240878b9b86d80",
@@ -54,8 +54,8 @@
   "skills/graceful-degrade-pro-3/run.py": "25cd772284fc9cb89f078c89992c6e924d4fdfe4f37f2e249a921f0aed26cf5c",
   "skills/graceful-degrade-pro-3/selftest.py": "6fb142e62874cc53f004c061fa3c20c2171d684b6ca9052c58c11759cf1dffde",
   "skills/graceful-degrade-pro-3/.phoenix/originality.json": "876af18069cd13cf3299a27a777177ddd1a2b4f17f6a022bb3395f2feed0d30d",
-  "skills/graceful-degrade-pro-3/.phoenix/provenance.json": "883db4104cdb8ce921766c54f996c79249f76f6839442b55c6c0c89cefc9f2f0",
-  "skills/graceful-degrade-pro-3/.phoenix/selftest_evidence.json": "f8a8ea9e2948bcbd3dd407ff2259e50147c4dad58135c404a3921a521e13fcb4",
+  "skills/graceful-degrade-pro-3/.phoenix/provenance.json": "26ae0e7448c0449896030d5640f2eafce680d07c41323309384b2f722943a4b8",
+  "skills/graceful-degrade-pro-3/.phoenix/selftest_evidence.json": "61bec9f02511810324b9b59e57cac186de94d78165abbbaba7d1ea263e705836",
   "skills/graceful-degrade-pro-3/references/creation/p0.md": "4c02802ae33ced70fc38accdb02ce1bafd303d0ea7c80463af2dbb0afd6e5d9c",
   "skills/graceful-degrade-pro-3/references/creation/p1.md": "0d47de5029b8268c842b4698550d83520a2ebd1989c5bdbcb477cf8d44b8be07",
   "skills/graceful-degrade-pro-3/references/environment/p0.md": "e5d6450f20c57080cc80fe3710f8870e72d2387bd5c148869f1a3c1ceaf65e82",
@@ -66,7 +66,7 @@
   "skills/graceful-degrade-pro-3/references/production/p1.md": "9976898d87f3d2cb6051b882347500220667dd2adcfa069d0461f1c9ca198e55",
   "skills/graceful-degrade-pro-3/scripts/main.py": "bc54b1fb42640db842460eeed492ec65da52533e21783b72e65386241f7a0568"
  },
- "sealed_at": "2026-10-18T20:00:19",
+ "sealed_at": "2026-10-18T20:59:19",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:59:17",
+ "at": "2026-10-18T20:58:47",
  "skill": "file-rename-batch-3",
  "slug": "file-rename-batch",
  "passed": true,

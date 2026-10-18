@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "map-visual-design",
- "merkle_root": "e5ce1e096b3acc37508f8fa4a433b247d4980b04e7e20da2b0efbde726fce3b9",
+ "merkle_root": "fde668ba5051871f35b51c793b0ca87affbbe893e4c654b6f548a13b93fbca0b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/map-visual-design-1/run.py": "33038cc458f4282e27f328ad17c0ab96b8451beac3014e438a5f07485bf76aac",
   "skills/map-visual-design-1/selftest.py": "a0f170cf2f182c61997a81412962a2d9bdfa70c9ddd5ee65a713a79bf0d6f76a",
   "skills/map-visual-design-1/.phoenix/originality.json": "11df459d1a5b90a39e4d2addcf6da93fe325863123eaf2b72154fa0f8c598568",
-  "skills/map-visual-design-1/.phoenix/provenance.json": "1e25d3f97c5e2c33a143d3c0d7330b585044f19ea78a6d2e2f8ed8c907af0353",
-  "skills/map-visual-design-1/.phoenix/selftest_evidence.json": "2400b2ed1663c60ff5bc2228aad219fd99b16ddd6df6ea3574d89a1ffa403a25",
+  "skills/map-visual-design-1/.phoenix/provenance.json": "6f1443baae1f71e130ed1b2b4d88f0faaed6ff3bb392f52cb20dc80453fd0181",
+  "skills/map-visual-design-1/.phoenix/selftest_evidence.json": "7175350c1936243b3ac691b0c4d6542813e36a35f79d4b07aebae5ad9a0b6fed",
   "skills/map-visual-design-1/references/creation/p0.md": "09c67948490ce363f7150298e2b19996dd9a32dfaff40b122d18f0e480e7720d",
   "skills/map-visual-design-1/references/creation/p1.md": "4608b9ed9e7532600a95d750f09d7a9dc0b7b2727b9d0c8f9d926eaebad01bc2",
   "skills/map-visual-design-1/references/environment/p0.md": "051ad2a01e029bcfd7c203c22d87c8a6009063abd92182e5ed364464a494ff63",
@@ -37,8 +37,8 @@
   "skills/map-visual-design-2/run.py": "fdf430cd003d0762a7517dbf4b20b528c326bf306ad70d3d108905e1383267ba",
   "skills/map-visual-design-2/selftest.py": "cb996d34e123746a3b07ee55e49a2c0ec18cb2f7b00d5b492ef6b80c42092194",
   "skills/map-visual-design-2/.phoenix/originality.json": "9473ffde4d83e3bb92a080603ced2e7ce6aaace56d32884baad25e9f47dda4d2",
-  "skills/map-visual-design-2/.phoenix/provenance.json": "48b0a813c437f2b24173ed73ae35ce2a5ae0a5ed98be1c10d899caab1a0832ab",
-  "skills/map-visual-design-2/.phoenix/selftest_evidence.json": "f0e130d3f299a0067c3d90f970b362e951f89655aa6e73d573d048f799ea6656",
+  "skills/map-visual-design-2/.phoenix/provenance.json": "06a90a27bab8832145f6a51548b390f6e5feca7aaf5700d97c1b02534af3be63",
+  "skills/map-visual-design-2/.phoenix/selftest_evidence.json": "1f6727cd5c2d31641c72a245d7e27285230ea9ac87431bfb845cc26ec4fbda3d",
   "skills/map-visual-design-2/references/creation/p0.md": "06a5bd9a1d513d833610f1e3456fbd941dbe008ca257d7322acee123f9cef5ba",
   "skills/map-visual-design-2/references/creation/p1.md": "fdeb42d61b62b52359222e1d3854c1c0d0f2c460db58e96ed4e770dddc1b2944",
   "skills/map-visual-design-2/references/environment/p0.md": "1969557ab6b3712ac6390360beadfe0a8d34d934e800379406e972e1128a568e",
@@ -54,8 +54,8 @@
   "skills/map-visual-design-3/run.py": "1ba22b8931b775156915beed9969da35279edbc134aa01bc247390aeabbb28e1",
   "skills/map-visual-design-3/selftest.py": "8e9a16919ecdc0b3fe6bd9707b4c305176dcb4d65f4dfb1c7129f1b885bafeea",
   "skills/map-visual-design-3/.phoenix/originality.json": "cc852610a32855cfd4d6c02f5e5390b4e125959a5f0149df9bbf49ec45ecd007",
-  "skills/map-visual-design-3/.phoenix/provenance.json": "f6404a0ec1749411ab77bf4b4b558ee6fa47bd8e00e34f6eb7d8e987676c3181",
-  "skills/map-visual-design-3/.phoenix/selftest_evidence.json": "bb0138c4610ef231de90a73eb430799e9dc9939f1b9985aeb77e1ca5541e4440",
+  "skills/map-visual-design-3/.phoenix/provenance.json": "a402796709f0b912ecd492a4c206ee040d040a534d43cce0a31ff1f5d2169f3f",
+  "skills/map-visual-design-3/.phoenix/selftest_evidence.json": "1270e96c3efc1659f7f968724279c24c6f940ed1f4ea47c56217a68a6b45e2e9",
   "skills/map-visual-design-3/references/creation/p0.md": "2deb501a66190046a990908c88deb1fac9f707155a8f95aaac26023199867f2a",
   "skills/map-visual-design-3/references/creation/p1.md": "4b014ca121676d743baaf3cf56f9fbb4c747eef8c00be0bf6cbf8857a8236035",
   "skills/map-visual-design-3/references/environment/p0.md": "e9895ec7b80a6e41bad2caf868dafd2be51b5a1646b5e6f762536f33bad656cf",
@@ -66,7 +66,7 @@
   "skills/map-visual-design-3/references/production/p1.md": "2471c0c339cabb6d213a34cd07e43d78aa7a4b24bc47c911d559ece9718e91b2",
   "skills/map-visual-design-3/scripts/main.py": "3c093e83f4440aa264dc2122231384057283523879bfd0f31deae0f3ace0badd"
  },
- "sealed_at": "2026-10-18T20:03:04",
+ "sealed_at": "2026-10-18T21:00:40",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "safety-production-pro",
- "merkle_root": "5287ad92fddb351a2e591a8a0cdc641fd16293b4d045de10321664088347100e",
+ "merkle_root": "f22843ff76764838c4219833fe8b386011bbb570c6205f584db80ab729daac2d",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/safety-production-pro-1/run.py": "9602f28bfa2e12020916abac6c120ca878ac9d9ca30ad8675752c7bcebc1ecb8",
   "skills/safety-production-pro-1/selftest.py": "ab94725ea668e88ff0aa0699fbd680ed6978b8cda9cfa926b3c0d711a7ad99c3",
   "skills/safety-production-pro-1/.phoenix/originality.json": "280faebd8023dedd554bbaea0adf5e86c6e31b4fd8a2321c8171046ac2864bc4",
-  "skills/safety-production-pro-1/.phoenix/provenance.json": "f3acc2df5873b8eedff15c5e8dc2d9bfb3d5a9cae2a86e544b693e4ae72a4329",
-  "skills/safety-production-pro-1/.phoenix/selftest_evidence.json": "afd3a193d9f8262fc371644cc8a0dd858223300cd54583ec32f7308f779f00a1",
+  "skills/safety-production-pro-1/.phoenix/provenance.json": "d5c0770885798fc73578af670fac11301daeffdbf1b108428d690ca8cf8d0d16",
+  "skills/safety-production-pro-1/.phoenix/selftest_evidence.json": "93eed257ff7e1b19f68ab390dcc83bc21976f1fd5a93357ea70618980103f8af",
   "skills/safety-production-pro-1/references/creation/p0.md": "1026c113131c3185b420c4c046fb5bc40129e49449fd0486a106349b6ffb3b5e",
   "skills/safety-production-pro-1/references/creation/p1.md": "b1c298bc7822ad763919355975242620aa3c45e2133d05e0dbe8f4fa5dfde228",
   "skills/safety-production-pro-1/references/environment/p0.md": "906c33e996004f59aed19d029de029b8040a8df7452d8ffbe99062e8b29c2662",
@@ -37,8 +37,8 @@
   "skills/safety-production-pro-2/run.py": "6dab964300d2129da33004eb412917cb59ffd58ef00d85e6e1a6aa555c3de214",
   "skills/safety-production-pro-2/selftest.py": "0759ceff9a5463524a8df26fba4f6a868c9b6aad6ad7c577d76753a59f988d22",
   "skills/safety-production-pro-2/.phoenix/originality.json": "57b0b7c053ca8e62f84fc0b3f58ef15842c64a75c171f478e803dc4a56af19a0",
-  "skills/safety-production-pro-2/.phoenix/provenance.json": "6ba7e53e65fa08d990126bb99b2e7a3fd0559076b47b5264a400aa7df8b443a9",
-  "skills/safety-production-pro-2/.phoenix/selftest_evidence.json": "c1ffd39593f4e2c595939cdd3c31cd6d188b135b3a03df3b8137e2640ce73dc4",
+  "skills/safety-production-pro-2/.phoenix/provenance.json": "94fedc25876087fb93c2aaa1964be388db33ecc1b69741636dee37590b60426a",
+  "skills/safety-production-pro-2/.phoenix/selftest_evidence.json": "b37ed4decb513c4c6a59523d3055c8279998dade21034968c055e8f3bfe6757e",
   "skills/safety-production-pro-2/references/creation/p0.md": "6441e79ca1426ea2271c823560782b0dbbb2a0997f13b3f30c236502092d00e1",
   "skills/safety-production-pro-2/references/creation/p1.md": "c278998d635a2b7ddc70c2220f3d4bdcf1fd375d32ef3852ae289a7b3883b44b",
   "skills/safety-production-pro-2/references/environment/p0.md": "a6748627de911f144bbe541befdd5b5535f78dc6a2f23701f03512cf7678976e",
@@ -54,8 +54,8 @@
   "skills/safety-production-pro-3/run.py": "edef7eadf86e4a7c181b9fa48935805957991de31e9d29a14f3d6419db1a3802",
   "skills/safety-production-pro-3/selftest.py": "d24fb6315dccd17cec5a1607bd6b80d7d93a8854c17e868f3cdab3208c9becc1",
   "skills/safety-production-pro-3/.phoenix/originality.json": "04cf1e76541a1054ee4d930b2b06bcf1d93c28b9d17b1397c243ecfc2353e644",
-  "skills/safety-production-pro-3/.phoenix/provenance.json": "c205a5fdb47bb64888cc0f8c387f6fb9848ce70fa1d001cb7b016741d4b2162e",
-  "skills/safety-production-pro-3/.phoenix/selftest_evidence.json": "409aced32eea4e1c9d141fc0f4a5ba4cdcf0bdaada186f23f74754175bb848e3",
+  "skills/safety-production-pro-3/.phoenix/provenance.json": "c8bbdf8a93b7c5c9f3ffdb4811067a80fd8e0305d2eac5214aa3b448b30b0c20",
+  "skills/safety-production-pro-3/.phoenix/selftest_evidence.json": "5130e50a7579f69e1c452c9fe4e4a2c97cc683273e4845937ffc26745ed0bef8",
   "skills/safety-production-pro-3/references/creation/p0.md": "542f8047c9cdbfe5caf3965b49e89eefcf64987b8c91eff84f439c80f048a3f8",
   "skills/safety-production-pro-3/references/creation/p1.md": "23e7e0d2db45cea54e574fe20fce4ae12510213658c04c757a199728f024fe95",
   "skills/safety-production-pro-3/references/environment/p0.md": "9116d48caba539da6ab7392e4580a112ec251b369fc1389848ead8e570ae13e8",
@@ -66,7 +66,7 @@
   "skills/safety-production-pro-3/references/production/p1.md": "4b6d1964583c5c9acd4062cb06876241ae67cf9f6383a3e4bf7abca41fb9ac32",
   "skills/safety-production-pro-3/scripts/main.py": "3844a0533b936c1b16e0bced6ccc3ea291b6de8becb16cb183bdc590126cfeed"
  },
- "sealed_at": "2026-10-18T20:08:11",
+ "sealed_at": "2026-10-18T21:03:16",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

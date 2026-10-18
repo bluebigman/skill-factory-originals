@@ -1,0 +1,72 @@
+{
+ "name": "code-secret-scan-3",
+ "version": "2.0.0",
+ "domain": "代码密钥扫描",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "全仓扫描",
+   "then": "扫描全部提交历史",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "模式库",
+   "then": "涵盖常见密钥格式",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "误报处理",
+   "then": "误报可标记",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "泄露处置",
+   "then": "发现即轮换",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "防复发",
+   "then": "提交前钩子拦截",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "全仓扫描",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "模式库",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误报处理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "泄露处置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "防复发",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

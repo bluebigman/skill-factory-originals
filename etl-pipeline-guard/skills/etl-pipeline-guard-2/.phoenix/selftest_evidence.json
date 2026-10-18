@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:58:33",
+ "at": "2026-10-18T20:58:22",
  "skill": "etl-pipeline-guard-2",
  "slug": "etl-pipeline-guard",
  "passed": true,

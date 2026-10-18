@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "design-system-pro",
- "merkle_root": "262ba958c207cbbf68a3302af213744e53b54bb77921d8ad22b168c8e93b8be4",
+ "merkle_root": "a9a97f9eecb2138e9b1dc90a2b21bbf9aae3453ce7443309719c58ff557d45c4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/design-system-pro-1/run.py": "f452ff1ae0f0d7507c335ede00385ff446160e5c0fd24db2c6effd95b8946a7c",
   "skills/design-system-pro-1/selftest.py": "51cd9f806b3955759bfaa92b4276ec597282f84bf366e90639cb2a90749295a0",
   "skills/design-system-pro-1/.phoenix/originality.json": "60c39a3311e2b31affd34ca983762a580eb80a7d2e64c7220d395132e33d4d73",
-  "skills/design-system-pro-1/.phoenix/provenance.json": "7892ff7712052cbfc1b50f064727f813ff4f4abe6bfa6ac2aff8447906647acb",
-  "skills/design-system-pro-1/.phoenix/selftest_evidence.json": "d6ea1fa3cf1bf59c09ecc269dd2afbea3a1628cc8dfa1ec6e439e5cb2f8ac042",
+  "skills/design-system-pro-1/.phoenix/provenance.json": "fbda7e16708b70e64d1bf79cb3adf5681f82e523819afb8a233c8cdfbfd7b27f",
+  "skills/design-system-pro-1/.phoenix/selftest_evidence.json": "9a36c6909b3ca14b868357fd191b19f8ed772acaed8c3c616a302a400c91c72a",
   "skills/design-system-pro-1/references/creation/p0.md": "4e40acc16d272cc788bb68a5991a37e581276d968d008e4df31e61e9836366cd",
   "skills/design-system-pro-1/references/creation/p1.md": "de104171bfe1f0309c9940548cc4849e39018d1b8b38b7304c43faf2894fe9d0",
   "skills/design-system-pro-1/references/environment/p0.md": "fd55fbd676fa3af2ace69665f5585dfc1620a9acfbe898850aac5becd819f87c",
@@ -37,8 +37,8 @@
   "skills/design-system-pro-2/run.py": "b7ffd8f86ad4aea295eb5f7dc45c29852cdd6561125e1c4cd6c039b23afdc802",
   "skills/design-system-pro-2/selftest.py": "f3e8bef93e62c45190e4fb7756f02de2420a6456939981be44436c83d34724e2",
   "skills/design-system-pro-2/.phoenix/originality.json": "cf13dd504de3b63ce686a61339a95ea8c43b1ddb85a095036ceeeae90cf4bd64",
-  "skills/design-system-pro-2/.phoenix/provenance.json": "ababc0198f7f14b093b60cf342b35028e6c0b2430409292963a91e388071a252",
-  "skills/design-system-pro-2/.phoenix/selftest_evidence.json": "b48497e8a54f7bfe0fd3f4af7bdc22aa8d2f7cfdca23472380e05c1b3e01588b",
+  "skills/design-system-pro-2/.phoenix/provenance.json": "f18ab01bc073c6607a3cc8e6e82f72b6faa9346563f0a6791b35dfbaf62028f6",
+  "skills/design-system-pro-2/.phoenix/selftest_evidence.json": "c92d19b2d67a52e48b05b4c6124dd85e364ffc3f401104617356c65dee412116",
   "skills/design-system-pro-2/references/creation/p0.md": "1bbcfa6734d6bdcf2006d90fcfcc4a1fdda821c5552b4b44b25e523e5b936b3f",
   "skills/design-system-pro-2/references/creation/p1.md": "988863a42ce47c1e0232bc319c94f985bab1234491a89a0f74fb1adee2d35da9",
   "skills/design-system-pro-2/references/environment/p0.md": "97ed3d8b18e5986419f8120a37226e7c46ce9378d4da32afcad34d7d98ae711b",
@@ -54,8 +54,8 @@
   "skills/design-system-pro-3/run.py": "c345cde61d78759fc3373c875a18a4cf3c64c78820a494e92ecfa573e7b512fe",
   "skills/design-system-pro-3/selftest.py": "856c7baf27a3a0e94b0daa727108dca4ef24ddac2bc44cdc36951db4156c5fba",
   "skills/design-system-pro-3/.phoenix/originality.json": "40c5d01d4313263f7bd7885699a53831154c323b5edeb7fdcb30cea233f6bc83",
-  "skills/design-system-pro-3/.phoenix/provenance.json": "31072fef204e4b3b5dc255bc4b488b5fddc339bc606cdbba186099d2962be3df",
-  "skills/design-system-pro-3/.phoenix/selftest_evidence.json": "0927bbef7863c4b99f73b9283e5950487303a19808ac54b5b0daf10f01250bd4",
+  "skills/design-system-pro-3/.phoenix/provenance.json": "8d3c53d5b2724c2dd5ccaff8c3fa19e69cb3bd04e053e272f8f7d8998ced7b7a",
+  "skills/design-system-pro-3/.phoenix/selftest_evidence.json": "4d85d83633dfec14efe42a4d47f1247e31507b00d0f44729049cfa65367b7c29",
   "skills/design-system-pro-3/references/creation/p0.md": "47caee67349425c77ee9c575f71aa2be3404b7c443f036683df9ef154386d247",
   "skills/design-system-pro-3/references/creation/p1.md": "9d35c72fcdd33697848d64cd744cfbf9e77fdaf6714da6b50124ee87f3385cde",
   "skills/design-system-pro-3/references/environment/p0.md": "61dd19de6b97b29e30902fcd34fd900ac65541c605f3cae5d5545bf5285fcc0c",
@@ -66,7 +66,7 @@
   "skills/design-system-pro-3/references/production/p1.md": "6d9463b67ee85c3d74c43b0c04e93c6072b22e29360576fa7eff87cfbf91f203",
   "skills/design-system-pro-3/scripts/main.py": "712b0e98b1876917e7d38edceec1b5fba2c6161ac640bb8caace327c9245cec0"
  },
- "sealed_at": "2026-10-18T19:56:26",
+ "sealed_at": "2026-10-18T20:57:11",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

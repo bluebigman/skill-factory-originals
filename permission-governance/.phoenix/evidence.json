@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "permission-governance",
- "merkle_root": "86f1269a71285acae68898c860804ae7d8633a60595ebb2f9f6e11284cfae008",
+ "merkle_root": "dfe254669eb19f5579007e7bc108f217b5d19843c47781768de55801fec48e5f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/permission-governance-1/run.py": "375fd5e12d75521eb4c907708de607105326dba05e9b80a064787ad5f2c8ba5d",
   "skills/permission-governance-1/selftest.py": "d00ab0b700b37cf2844a540b6bd62111d2b4cd58450322dde3cc65f78a68ff21",
   "skills/permission-governance-1/.phoenix/originality.json": "5422b3fafcfafe005974f9d958ba963e84a41604899b7b703a8f25538782ea71",
-  "skills/permission-governance-1/.phoenix/provenance.json": "e02502a047874ce75dfbcca0c6b1d02601a09dff3efefea3ad42a892d4c0f858",
-  "skills/permission-governance-1/.phoenix/selftest_evidence.json": "48604a553edb35be454e34d449bbfff32d350efac33d32eb64bbbc46fae008c5",
+  "skills/permission-governance-1/.phoenix/provenance.json": "836458f9b62d1e0ecfc7589bcc65578d0031b5e22f7640ab558fa4fd677691be",
+  "skills/permission-governance-1/.phoenix/selftest_evidence.json": "c6004b242d75b05ad9de8467f7ac310c3294b1ca2b488ac27c2bb35a5bf5a8ed",
   "skills/permission-governance-1/references/creation/p0.md": "1816378d9945adc0e6f29c595c52aac08b96419f93e1a9863add2a1d74bb5ddf",
   "skills/permission-governance-1/references/creation/p1.md": "c23c498113fe260129501c19aab103f4b5051dd962deebbf706c31c586381b6a",
   "skills/permission-governance-1/references/environment/p0.md": "9a94c5c2190505c340e1bd595acb621193dd13c40e4b2402b5230145ddec183e",
@@ -37,8 +37,8 @@
   "skills/permission-governance-2/run.py": "6424c006289f26048a56f5e761c6343dc990f0deaa389443b96d2914dd318109",
   "skills/permission-governance-2/selftest.py": "db992a63bfd6cbf89c5d9e384329e716f2fcd3f2482d3be3e9f1afda35690b47",
   "skills/permission-governance-2/.phoenix/originality.json": "83cd50bff4e90d34e78fe5f59b907288dcfab69d2d9811b0aafa3aa3dd967217",
-  "skills/permission-governance-2/.phoenix/provenance.json": "44f91e86f0ef1789eb8acb8bd46f5105f40d961df3997b6f2916db5f595139bd",
-  "skills/permission-governance-2/.phoenix/selftest_evidence.json": "ca683d0039c3ca69ef53d84e75b32701ed30f8db2428a4c9426fb5116064f5cf",
+  "skills/permission-governance-2/.phoenix/provenance.json": "53fa5faf8e5abb0837f543328942cf65b0442281ae9a04c3e435d018cff5fae5",
+  "skills/permission-governance-2/.phoenix/selftest_evidence.json": "56fe5b1046ec5f85b75e87a6d3fe57f582418f4199105e3f01336238ef0d31d5",
   "skills/permission-governance-2/references/creation/p0.md": "2477618a940ff549da424246055856058c395a37696046b97986ceebfa8fa716",
   "skills/permission-governance-2/references/creation/p1.md": "baf0129a2ac5d94e79755693ecf9e6c0dd668c66fa18b9442aab4e6c86007483",
   "skills/permission-governance-2/references/environment/p0.md": "462e29342a1904efda84accd63d02dcd64cc337019f52001f6d8a3b48956d478",
@@ -54,8 +54,8 @@
   "skills/permission-governance-3/run.py": "4d6bb1f116dcf702e6b721645939068a754050bcd361fb9cb77881524f029352",
   "skills/permission-governance-3/selftest.py": "3aa5bcddde6baf04b1550abb6a26b5b6a8a571b20b5234ebecfd4c87315a162c",
   "skills/permission-governance-3/.phoenix/originality.json": "0538f67d5448805f0e8cd583471a6e4f84bf369473448436666e75e78ea139af",
-  "skills/permission-governance-3/.phoenix/provenance.json": "c285977ddcc8d2273b89a5cea1f379e8001c2243a915447f551684ec4f9bf263",
-  "skills/permission-governance-3/.phoenix/selftest_evidence.json": "2fb464d05ec6452909b9fa91d3c198b933caafd1767521bd1fd5814bdad590bb",
+  "skills/permission-governance-3/.phoenix/provenance.json": "b1875a37be5a0bd99a731ee6e1fa550981afed7a88a81d58ca3b1f7aecdb80c3",
+  "skills/permission-governance-3/.phoenix/selftest_evidence.json": "4e52bc8efbf074897feaf446dfa3fe1e0c0c0eedd9490f4e5ab51a85549b363a",
   "skills/permission-governance-3/references/creation/p0.md": "2a7683c9b447e8fad548d6659e2c066ed33adc3303bc657e373b8fb40146255a",
   "skills/permission-governance-3/references/creation/p1.md": "9c0212afe12992bd2674fac270b6943d0377ad61a798b093086a0d80aaed9531",
   "skills/permission-governance-3/references/environment/p0.md": "c2a0c2d91f149b58ec4a223e2691795e639096af260e739dbc6b24cfa0cde830",
@@ -66,7 +66,7 @@
   "skills/permission-governance-3/references/production/p1.md": "a03b05e7ca859646a1b3bc16d7d0ffaaa8f4a02aae2187bbbc60e874bfba1ef9",
   "skills/permission-governance-3/scripts/main.py": "ae8ce7e6285c07b6260cee5f542cd91f3b7844ee3d80b5fc4f66d3c7a7a09b74"
  },
- "sealed_at": "2026-10-18T20:05:42",
+ "sealed_at": "2026-10-18T21:02:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "design-review-method",
- "merkle_root": "96c41efe7ea87d8271ff8f60d9a7bbfa6bfbebd040a2cefa317f78d75f2a3bb7",
+ "merkle_root": "c1deca4eb54ce649e2823f944feac127182290c4b0cfece6e265677fe52ada77",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/design-review-method-1/run.py": "654ee2006b12b0e8489a61ac221f6aa15934738e1e6bfc2117cf034b72d8ee0c",
   "skills/design-review-method-1/selftest.py": "bf9febef7bcae96b9f26905a48795fd0adf101f243cd35aee1b21c2e2068e731",
   "skills/design-review-method-1/.phoenix/originality.json": "ff403fe3b624912d750f670c983bd64e79d3d2786f58ffad365fbf6c135cf935",
-  "skills/design-review-method-1/.phoenix/provenance.json": "63af82b226fd5719da59f4197382b1ce12a2be32d6b3d57dd9b69cf6d5697ac6",
-  "skills/design-review-method-1/.phoenix/selftest_evidence.json": "33ba8bb623717e1b255260a1fd5d5af5bfbc8efb8a7d07d77b42837d88fd5dca",
+  "skills/design-review-method-1/.phoenix/provenance.json": "69c32eedf352421dd78a719e3d1ef6caa37e172bd25239ba37dd1426764e7840",
+  "skills/design-review-method-1/.phoenix/selftest_evidence.json": "d2f28f5e04ed30867b423ace2a2318bcd50807219dbc3ebd9788c106aec584e5",
   "skills/design-review-method-1/references/creation/p0.md": "010eb6a504454f59c2378e160c0bdf046a973e2fd5581a043c59fba8bddb2a1c",
   "skills/design-review-method-1/references/creation/p1.md": "f6d11670c7b1b40df459c554c3501bc92fda3e53f9be19a85d119cb17f14aa55",
   "skills/design-review-method-1/references/environment/p0.md": "fbeaa9044a631da233e0950b1fd6514a0d0ddd5828d0ee800d53c0663e4a0d22",
@@ -37,8 +37,8 @@
   "skills/design-review-method-2/run.py": "9190e256a399e792758ea06136f66bd02a365bdec0ef38c15d9e23e1c78faccc",
   "skills/design-review-method-2/selftest.py": "52b8f154b0bfb2b24877c31edf2b475cdbabdb82272209bb7cfa71e2bf15518c",
   "skills/design-review-method-2/.phoenix/originality.json": "f79d93ae78a37e7e1ddd109c355cbb9f92578c2efac8983d22a30b960a05d747",
-  "skills/design-review-method-2/.phoenix/provenance.json": "8399c49b33e7537e200ea6222e1526d58c600541579fb4c1cd0bc198d5f1e172",
-  "skills/design-review-method-2/.phoenix/selftest_evidence.json": "cbe94376ed16c2295d7f0485cdacc95607aa40f02b3b3bbddeea41be16df57f5",
+  "skills/design-review-method-2/.phoenix/provenance.json": "fd3c66b58d4d0bf62d5ec5a9a72e999b97eabcbfe951ff55e6c0dba1f2d74ff9",
+  "skills/design-review-method-2/.phoenix/selftest_evidence.json": "45b7e96c5cf84a01f16d2063f7102da528c3c69c002389b8be9770317ebcece2",
   "skills/design-review-method-2/references/creation/p0.md": "445e6a5aba62912240771b498d1abc9286016af1794125210e1e3318599522ba",
   "skills/design-review-method-2/references/creation/p1.md": "0304df10d5cd2f907481cce5782b9b345abba8183060d35168f1f1eb78622240",
   "skills/design-review-method-2/references/environment/p0.md": "b38eae455f23caea334e281177d2195b20edf72a74a39e3c977aa3ea13159641",
@@ -54,8 +54,8 @@
   "skills/design-review-method-3/run.py": "7733859df5410994cd2339c29c8f7d5ad645ea7e9846c6f1a562d06203348830",
   "skills/design-review-method-3/selftest.py": "a3a829a980ec57635ef44b33d92c6730fec73c63e5c444f7e81c7e95be3e46e7",
   "skills/design-review-method-3/.phoenix/originality.json": "f85e91fc12da844df9ee28bc54d0d272ee9120a6021a5438aa6e5887980d141b",
-  "skills/design-review-method-3/.phoenix/provenance.json": "7a35e62f6eb33c7e16fcdc6348a1079ac2b5fd23d1b643b5425052f00ba2c258",
-  "skills/design-review-method-3/.phoenix/selftest_evidence.json": "b173ba3cd482298956cea3f6b6c68d8c2b0247bd047cd0a91fb93d4533115e58",
+  "skills/design-review-method-3/.phoenix/provenance.json": "86976f8f78c6da6e33318feed75d0fdb8d0fd221d3939687f043e362b9e30d25",
+  "skills/design-review-method-3/.phoenix/selftest_evidence.json": "68f671b29f40608bd37a71da961d73df03c21a6f56f3a3c7b98e47b3b172f491",
   "skills/design-review-method-3/references/creation/p0.md": "8c0fd7b6901c0beee086aad602e57bbc01455bec378bbd47a808201580d933a9",
   "skills/design-review-method-3/references/creation/p1.md": "3ae5fce8563b5879f6b86e7d7e8eb1d8799caf74d57739557c12d1f0dabe4933",
   "skills/design-review-method-3/references/environment/p0.md": "3eddb410713c4ebb8ccff2dafec60a0418cbfca996cd37f0ddda143c886b548b",
@@ -66,7 +66,7 @@
   "skills/design-review-method-3/references/production/p1.md": "702cd8cea27617309407553730269ec789b57e7e3eb9df369b94a0042465fca2",
   "skills/design-review-method-3/scripts/main.py": "76d99d26d472c79c56d56a9b1973f9d9086583b611676174a24d12972d9c466e"
  },
- "sealed_at": "2026-10-18T19:56:21",
+ "sealed_at": "2026-10-18T20:57:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

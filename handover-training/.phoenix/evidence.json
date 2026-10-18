@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "handover-training",
- "merkle_root": "50564ae7d1a76ca766e2ecd4571ec4073025e94b25d798ed32dc2fb0f308498f",
+ "merkle_root": "7ffc92280bdcdb6ed842e00439dead2fecb3a47560c2bb9409785fb37abbcdf5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/handover-training-1/run.py": "1ed5fe785b3d457193a0f2eb1db1aa7fb2984855d382af2a3bdc0749548d17e6",
   "skills/handover-training-1/selftest.py": "0a564d370ed0dcadd257943ddf4febe405f8f6a94ce4fdd4440c7dec468b48d9",
   "skills/handover-training-1/.phoenix/originality.json": "29b2217aa9012ed34063f39af4200e413794153b0effe0475a1b05f640033fdf",
-  "skills/handover-training-1/.phoenix/provenance.json": "78fa194223bc254b4618aab090f7f35703bd4902d030f4b9aa22399e09d6d521",
-  "skills/handover-training-1/.phoenix/selftest_evidence.json": "14e1ec47cb58da950011ff81718b19e435c4fb44a10cee49d97b66a631504b14",
+  "skills/handover-training-1/.phoenix/provenance.json": "21ba8da5845864e17448dfa1bf1a68cc00c2c76345426545ae20980cb0813a66",
+  "skills/handover-training-1/.phoenix/selftest_evidence.json": "90e549ebd9acab8b7322b70234fb7b2cd2ba5cc59f3ad84bf16f4019a6de17ac",
   "skills/handover-training-1/references/creation/p0.md": "9f9c5683366b16961b14eb0389acecb09ae6521095bab9bfd44953edb931c0b3",
   "skills/handover-training-1/references/creation/p1.md": "86892eba5ba7481e254d296128ce7edbcc48d3350088c1fcb72c755ac7ede977",
   "skills/handover-training-1/references/environment/p0.md": "732c10a8809950b706262d06746e712d240bd933b8ae9f4a0292a20859d9354a",
@@ -37,8 +37,8 @@
   "skills/handover-training-2/run.py": "91a86e149824786eae77adc0bd9f083698756262c6599a7ce36d035f7bf0ea6a",
   "skills/handover-training-2/selftest.py": "8ab028d0d3cc3408b6d3f54db08353ac6b2c44ce8e2c3eb0b76a414bef168a3f",
   "skills/handover-training-2/.phoenix/originality.json": "7c02089e83b61415a5738d849c084d1927a311ab69c2af21ec6255e9fd089d65",
-  "skills/handover-training-2/.phoenix/provenance.json": "ed1bb4d32c3e4c03bc29d83dcb74e22c0b18fc5b5da27e4c0ae43776b4ef7ace",
-  "skills/handover-training-2/.phoenix/selftest_evidence.json": "7258679ed60b2aa15a4bce59e1f6535db24facb49604271cbd386cdc680fd0b4",
+  "skills/handover-training-2/.phoenix/provenance.json": "0b0c6ff2a31cd40000f2ffed5e0d55d4d0550acf12eb6cffe4cbf69e2e94bd54",
+  "skills/handover-training-2/.phoenix/selftest_evidence.json": "66264bf6129ffb42a40a5dbd98d3e847e25e0d673cbeafc6bd4a5274486bca3a",
   "skills/handover-training-2/references/creation/p0.md": "e5b3a7eda1b76e319d0e4bd80f230f0a3b21a8221d40c0fb03fb29a1434c3d8a",
   "skills/handover-training-2/references/creation/p1.md": "ba9fc239ef6a4f839ab8dbe7e69515773027cf956ef578e55b5018e6c9ceaadd",
   "skills/handover-training-2/references/environment/p0.md": "53cae26f6e14a0399c6fa719d2f525bc2b0cac0e3ce566ca3cc6f01ade3aa25e",
@@ -54,8 +54,8 @@
   "skills/handover-training-3/run.py": "71faaf10710244d986634b1b347ead6755773e49926cadfe344cf0f4a3ed17c0",
   "skills/handover-training-3/selftest.py": "ad616ab8117259c15bcbfe02da30f755f4db395cefc8671ffc7e54a6fa7e15ce",
   "skills/handover-training-3/.phoenix/originality.json": "5d5dcbb931ea0b8266fe898979617d468203c4ed8dbfcb72ad923fd014225d4d",
-  "skills/handover-training-3/.phoenix/provenance.json": "769d0ac5346d6d9999922548fd64a54826465d1979e156740189e5dbc26daa3e",
-  "skills/handover-training-3/.phoenix/selftest_evidence.json": "5dec1724bd917be62b7f25ad63ccf41cf9517464f594fef9848b7e152494319a",
+  "skills/handover-training-3/.phoenix/provenance.json": "b3af768ec437366f03b810ec29572205530487804b380cd355b7ec392e5f239a",
+  "skills/handover-training-3/.phoenix/selftest_evidence.json": "caa164ecfdffa7061cb9f0e479c3516bd199ebfbea388af23fb853f22a1bffdd",
   "skills/handover-training-3/references/creation/p0.md": "722d41ae201860711cacb6c82e1da00c3e14441b3f222fd780cfe2365f42fb82",
   "skills/handover-training-3/references/creation/p1.md": "3d9e3c8885caf1d4117cefb9766a519d178d53f92a79a4a58f47804dc281cd3d",
   "skills/handover-training-3/references/environment/p0.md": "dc90912ee3c5238d34232c759613a48d3fc667f82e9178c669e532622247d1aa",
@@ -66,7 +66,7 @@
   "skills/handover-training-3/references/production/p1.md": "5b568d7cea76b74702b73581141b3f00b64c3af714f3d56a1452b4432e97544e",
   "skills/handover-training-3/scripts/main.py": "80e86fb954ef97fe074debd78bcb599ec42a2c62f1d3f2d9d45a1cafaa74b112"
  },
- "sealed_at": "2026-10-18T20:00:33",
+ "sealed_at": "2026-10-18T20:59:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

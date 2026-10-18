@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "consulting-framework",
- "merkle_root": "9bb22ebd85b58f8a3dfe44fc88c2b04a5146aa0f541eb3839ece95f47febcb54",
+ "merkle_root": "c1182f55f474f3f9bc7f44929288cd238a647ec6ebccaec4f82ddb713350e6a3",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/consulting-framework-1/run.py": "02f21d67f379612ec17746e8e23be62a7c5b9641aa80499e43aa2fceea9fccc5",
   "skills/consulting-framework-1/selftest.py": "3287309eb1cdf399fa5e9efe6b52c035e4a456fcc6793e52355d34f1a7b7643b",
   "skills/consulting-framework-1/.phoenix/originality.json": "eb61120ab8964c28da26551b41022c38010c699a81273611ae8c24e228cb706c",
-  "skills/consulting-framework-1/.phoenix/provenance.json": "8437d1c413a2d667384914cd41ac70b7c3e7378fd25daad24d1f892d24e0071a",
-  "skills/consulting-framework-1/.phoenix/selftest_evidence.json": "fbec7cbb516515455dd7fe904037f79bd52a9f7be133993de12b3ec3c4ca423a",
+  "skills/consulting-framework-1/.phoenix/provenance.json": "1e7d8679c51677439c5d69d464c5518ef0fe27b6cb58469aad3be9a85beabc4b",
+  "skills/consulting-framework-1/.phoenix/selftest_evidence.json": "42be9ae7e14c5045a42ef3f94a51a81f843816bad4c8724d3b2ce7e833b18cc2",
   "skills/consulting-framework-1/references/creation/p0.md": "759a99ef41e7d1539194e06d26849c23f33db77058ec2cb98ab2432fa3f5e2fc",
   "skills/consulting-framework-1/references/creation/p1.md": "612a871fa989654c67cd472a5934e1bdfde902625c17e2aaa00d4b34f3a2a67e",
   "skills/consulting-framework-1/references/environment/p0.md": "d57d789f9bd63988ac66c90f7b8b3416d4c653906f6ee4e4a8864a0d4865c893",
@@ -37,8 +37,8 @@
   "skills/consulting-framework-2/run.py": "cd874d69d0260acab4d5818949ce3de126931af943540c8b2563746a040e09b0",
   "skills/consulting-framework-2/selftest.py": "98d30eac75ba70754401523a867534a3fd8151341a6e5cf16bb430ad7c44712d",
   "skills/consulting-framework-2/.phoenix/originality.json": "0bea0a6bfb01962f8d243543133d173eebf148630821a8b83de738ab3cb0d961",
-  "skills/consulting-framework-2/.phoenix/provenance.json": "6db6af468d8a9a3a382a5b1edfb9b3f57a5a6ff428dfbb3b80cb53b13288af98",
-  "skills/consulting-framework-2/.phoenix/selftest_evidence.json": "eb205149ed63a4b47202e11070a4cffe48fa9e333523cbfc1cf685c128358b1f",
+  "skills/consulting-framework-2/.phoenix/provenance.json": "b6ab5c91c64d1ce11f80767213acdbd771af01a9b09a191021a1ac7a5ead1bd3",
+  "skills/consulting-framework-2/.phoenix/selftest_evidence.json": "0712df478c95b4bc1f9d7fe82cf1cdee4d9a6b3febb2e5fed0ddf92678080cfe",
   "skills/consulting-framework-2/references/creation/p0.md": "d5daf59add8ba4b7b8c5396e2734a7ca63dbafad988a289606c56a0e08e4be67",
   "skills/consulting-framework-2/references/creation/p1.md": "8b05d24397a352c0099e9aac9d24d83441e9f792fa6e8ec8d16abc8cfd7c3d8b",
   "skills/consulting-framework-2/references/environment/p0.md": "e92c7779b65aa74cc5597ada4b588fbed60b80929149f0d7ee5d0a279dec2510",
@@ -54,8 +54,8 @@
   "skills/consulting-framework-3/run.py": "ce74b62f0b51e44255debf91ca798e35bc44dce0b7edf1a10dc7b38589670c8e",
   "skills/consulting-framework-3/selftest.py": "af47f7120ecac1e7885de5badd2db0d4e8528a71e223f20e963a74c90f9cdd19",
   "skills/consulting-framework-3/.phoenix/originality.json": "3c5b12a224dc6340536d57b7b7b254726d64e9476dbb0a03635c1256d49093b8",
-  "skills/consulting-framework-3/.phoenix/provenance.json": "ddbf5deb9ff3156b9ea89009e51cdd0c51628b930c19daca821104e50ebfa159",
-  "skills/consulting-framework-3/.phoenix/selftest_evidence.json": "b0bb25b055e48053d81d975b2ccdecf673a3f77ac7295b305c794a3974fa278b",
+  "skills/consulting-framework-3/.phoenix/provenance.json": "a23c6acd47dcd524a3fb3c6e3cd6046e0b9ea5bd5c78ce83e4211232a57e5134",
+  "skills/consulting-framework-3/.phoenix/selftest_evidence.json": "78097a31cc1c8dd8be97e9aae7255da36daa07d909277e13a642429ef33b23df",
   "skills/consulting-framework-3/references/creation/p0.md": "777319140f8297cf18437e26053da6c3c8b8939e1d4ee92e49fde0937c602f27",
   "skills/consulting-framework-3/references/creation/p1.md": "26f410c44d812598936d6ea7a4b8209f1c65b9bdb616b93f644de89d5e348067",
   "skills/consulting-framework-3/references/environment/p0.md": "f92c8fed6ad31de1f1998c6fb7e7b2ed68f2bcebe677fbfd7d862f4dd79a4a7f",
@@ -66,7 +66,7 @@
   "skills/consulting-framework-3/references/production/p1.md": "a15e8900d9f165a0cfd571fafae4ad14365ab1a1987badcbef5db65e1e074d4a",
   "skills/consulting-framework-3/scripts/main.py": "38cb418ac6ab98c8306902768505c8976d972401394c1cf016a9240d87aa37e9"
  },
- "sealed_at": "2026-10-18T19:54:03",
+ "sealed_at": "2026-10-18T20:55:51",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

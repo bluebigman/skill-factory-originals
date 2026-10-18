@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-map-layout",
- "merkle_root": "ce16f5bceb3ab1c17771f007fc5d11af8de0158cffe7631f9b410cd187e55c4a",
+ "merkle_root": "bde3cee1926b1e16f9efeffd89f57910cceabc35c15bf46798b224b55bbe5190",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-map-layout-1/run.py": "918ab02324cf94512ce600fddd8b2f819e77e140ba5c272f422c92e9b80e038d",
   "skills/game-map-layout-1/selftest.py": "e672cac23dfe008274ebc66caba61f2d0b468485d42209d1d7e36c23040148bc",
   "skills/game-map-layout-1/.phoenix/originality.json": "dea6aa4ed22cb8c4e7df0477105f9c9c2beda8fc1b9c7de29348ae9ee8d12b56",
-  "skills/game-map-layout-1/.phoenix/provenance.json": "897afeb423a3d9f33dafeec3b83ab120d15d614bf7ff98b5305a770ec053b945",
-  "skills/game-map-layout-1/.phoenix/selftest_evidence.json": "3963a2efcc90eb009a4bcef2dfe660a3f11a0c26e03be61e1e1571398b8f74a2",
+  "skills/game-map-layout-1/.phoenix/provenance.json": "7792a675dc06e9e3b4dc7fe40f4efca3442d8d76e8b920bdfca755e42ed9bba7",
+  "skills/game-map-layout-1/.phoenix/selftest_evidence.json": "c11fd1f9a92d10852525141c4e0da2c2dbf2e33f3da9fc99a23b28eb1ef8ec19",
   "skills/game-map-layout-1/references/creation/p0.md": "9e52fa574a937f2db6c63eb8980a19717b24d4400432a467b426067dba637825",
   "skills/game-map-layout-1/references/creation/p1.md": "dcc58bf557c6c5f4bf6292a5478c913b9c32f250e448d40adfe923aca601a350",
   "skills/game-map-layout-1/references/environment/p0.md": "aa7d3c18e3952cce114cafa4effa0dfbd53e468cd09926385117a1004b8cfcc7",
@@ -37,8 +37,8 @@
   "skills/game-map-layout-2/run.py": "ba5e658b3e3397cae7325b5d33f990db0d6cdddd132068d098c36fb7ac4516f2",
   "skills/game-map-layout-2/selftest.py": "3e4534cda819f5d1aa0eb7ecc87f9aa6660dd29bf744225a64d5d8d9d33f4ea5",
   "skills/game-map-layout-2/.phoenix/originality.json": "08022d6259d6b71d6f5529e575593378d170ebc80b4eb161accd2c3593fcceda",
-  "skills/game-map-layout-2/.phoenix/provenance.json": "8900c431265824fb99ef8629f6afdb5095b87ffe8c969e53190c13a588a6cddf",
-  "skills/game-map-layout-2/.phoenix/selftest_evidence.json": "08a635ede821d4d2496fd2f4ab480d5b197d97cec6142aa3c83b6d743ce4c01f",
+  "skills/game-map-layout-2/.phoenix/provenance.json": "32fb3c8753b675cdbccb54c0cf5a0bb9901efd4cf35156645a6eacd5491b05b4",
+  "skills/game-map-layout-2/.phoenix/selftest_evidence.json": "f1a1be3bd3db203a275d3698e51149c20f57db27a9d5085f8e9945d9bd6cd701",
   "skills/game-map-layout-2/references/creation/p0.md": "0badea89abd77d0b21c98c2095a017d37f292e60a5dfafa71a2a1ff636edb20e",
   "skills/game-map-layout-2/references/creation/p1.md": "3c22ccd4e1e0e2c0d3feaeabfa892baed1aa8853a5c1c02045e9f5b4889897d0",
   "skills/game-map-layout-2/references/environment/p0.md": "f2e628edb039bce3c7630b00cb8e48334606c456444fd2b59086ac22aa8e347b",
@@ -54,8 +54,8 @@
   "skills/game-map-layout-3/run.py": "8c12dad50819acf107656d2f801bd64196a1b72eb24dc062f3805938e1663438",
   "skills/game-map-layout-3/selftest.py": "4d184151abdb84c1fabf2461702ebdeb499704fdc95fd1d6b37a1385f9eed941",
   "skills/game-map-layout-3/.phoenix/originality.json": "e3427840a686439cdf8c5b710306d5d386a04fc61ab189239038103cf7da1f88",
-  "skills/game-map-layout-3/.phoenix/provenance.json": "4e686aeb46359d87273a01e113d0bbc281f2fb512c655153c26dbf12b7b6cb0d",
-  "skills/game-map-layout-3/.phoenix/selftest_evidence.json": "5f9c7f656ec645d3ed7425e74fefb1ca410726cbb2f13ff53b0174fcfae2ce98",
+  "skills/game-map-layout-3/.phoenix/provenance.json": "3fc9c55233a3972c1125f935fb1d90aa7b75195c4ce6a5fc842ba1679645d27c",
+  "skills/game-map-layout-3/.phoenix/selftest_evidence.json": "5e0755dc558ceda7075eba041daf5a5e5c936e534159e97e038b7befc173e4cb",
   "skills/game-map-layout-3/references/creation/p0.md": "ed3651ef6bce12eacf32ced301e0c78516ca6100ad22d870f5caadc68cb5e1e4",
   "skills/game-map-layout-3/references/creation/p1.md": "bcf292fc9c508d7d0869eff3c1afcc2cbe9d61617cf2ba2f93986888f3ceaf97",
   "skills/game-map-layout-3/references/environment/p0.md": "3c71e11fb196d7e01724a54794ed49cade8cfa41530efb85026fd7c0cbc52382",
@@ -66,7 +66,7 @@
   "skills/game-map-layout-3/references/production/p1.md": "8253a3125bb86320bfa2814bd76fb0ec7deda601d1369246bf575dda8de33038",
   "skills/game-map-layout-3/scripts/main.py": "d9181fe1f48cf0ac9bd259be35b6d2f240dfca0b7b29d608ea6bc5d3e8375d05"
  },
- "sealed_at": "2026-10-18T19:59:55",
+ "sealed_at": "2026-10-18T20:59:06",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

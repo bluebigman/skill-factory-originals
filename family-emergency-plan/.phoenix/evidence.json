@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-emergency-plan",
- "merkle_root": "dc6e5062097f585acf5ffd193495a878813682b442b657b43482717c0334f47f",
+ "merkle_root": "07d140913f1ac7ce32cd06073a7d720503535525e86cefffbdc6fe5fc64b2410",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-emergency-plan-1/run.py": "3bdb675d486e549385bccb6c2ea8fc1f85b9f758f7f377915316dc535a177062",
   "skills/family-emergency-plan-1/selftest.py": "38c014f7d077cb8aa6f7e17408186083e89f56954d2fe3496abae1fb370ea231",
   "skills/family-emergency-plan-1/.phoenix/originality.json": "2c63b46bd75932e9c2e78a6f94f4ae1b0cd9438a0ef45fddf25a1103525eca86",
-  "skills/family-emergency-plan-1/.phoenix/provenance.json": "d2fc68b6d1cd19d2f1f6b6e07b5185c84f633f7e6b22db1621277a04b2a63109",
-  "skills/family-emergency-plan-1/.phoenix/selftest_evidence.json": "1d012a979ac81573f219580e3bee58143d5bc7b93a752c1f30ddccd8645bce81",
+  "skills/family-emergency-plan-1/.phoenix/provenance.json": "87ce9cb4d40c89fb24e78857575d87ae1c69df36ba33f3428db60d685fd3d391",
+  "skills/family-emergency-plan-1/.phoenix/selftest_evidence.json": "102d418543fbff4a9bd25ad07a59a048d5565542488ba6cda6651c346bfdad53",
   "skills/family-emergency-plan-1/references/creation/p0.md": "6084c09c21aa0b9ae161c0a51f4c1af976bb76c5bed75275a9894e46692b1a82",
   "skills/family-emergency-plan-1/references/creation/p1.md": "79cd9eb589487e7bb223e178b45d436e86efdb835a353b6ce1634c2111edc52a",
   "skills/family-emergency-plan-1/references/environment/p0.md": "80c61ec8e23cdcd281d87af1041a3ff577df119b6c4d4f86291ffab28f014634",
@@ -37,8 +37,8 @@
   "skills/family-emergency-plan-2/run.py": "58e4ca4327ee8dc5356d8ada47d0dd9c629819332ed7841aaa75a8ed3b0a3349",
   "skills/family-emergency-plan-2/selftest.py": "3e55414896e05ba5492888cac78a1b548414bb2df46493dfa248b4185a5717ea",
   "skills/family-emergency-plan-2/.phoenix/originality.json": "c1d5b511bbd0f24f63644238464557ecf46f4d7a99d755439bf7ce0a8f5bd334",
-  "skills/family-emergency-plan-2/.phoenix/provenance.json": "bf3ffd4c15009a9e86f6a33475f9117f2d50c5f82a66fea34e1af2f12edaa25f",
-  "skills/family-emergency-plan-2/.phoenix/selftest_evidence.json": "08a34aef132318e272eeadef20fa5e8f6c51485c2c8ef49bb3b13fe4d7997c5b",
+  "skills/family-emergency-plan-2/.phoenix/provenance.json": "32c4a57332a91013cf1ee759d32408294739c3999b05317dcd7dc691f755582c",
+  "skills/family-emergency-plan-2/.phoenix/selftest_evidence.json": "2d26a93669250f421743826181b79ae1bd911d7081e530090a5d47a933e13e5c",
   "skills/family-emergency-plan-2/references/creation/p0.md": "839086db572410fa66d435920a8cb3e60cb862a85bd238e0efeb084f42fab996",
   "skills/family-emergency-plan-2/references/creation/p1.md": "a35456435b476a1e1c7a5617a5fa3add23f1a0b4a16434f1d5aca51ae40aa016",
   "skills/family-emergency-plan-2/references/environment/p0.md": "1a86af863d31aeb1c9163af12a0ae1e8acea74dd19b171764dcf85eb9cce5f53",
@@ -54,8 +54,8 @@
   "skills/family-emergency-plan-3/run.py": "97a09aac3ee22f9c6f4735ce7221c02b2642bf8aa925c9798d179491e85b410c",
   "skills/family-emergency-plan-3/selftest.py": "f6f920f9719f9960c455cadc52c17272f688e9d03608d8d02f18d943d1b52eb3",
   "skills/family-emergency-plan-3/.phoenix/originality.json": "2218acfeccf087b79a0b71b7228970cda18f2dbfdd3d16a3c7c7d7c58ea920fe",
-  "skills/family-emergency-plan-3/.phoenix/provenance.json": "23d5255111c2aa4043e2dafe3efc9ef105bd9872b33f607a5ee0d83de32c0516",
-  "skills/family-emergency-plan-3/.phoenix/selftest_evidence.json": "cf4a2ed31ceb28bc24568e97c422c68cd5afa58cd4ac03ccaef9fb5478f058c7",
+  "skills/family-emergency-plan-3/.phoenix/provenance.json": "bc33d8a8c8a9b17932b43e17b03773f2d49d8630c52b14d4f4593557a254573a",
+  "skills/family-emergency-plan-3/.phoenix/selftest_evidence.json": "6e97aa4b17b76ff882bf0e4910fd631fb141bb002e1b8beaa45804ad03bc6268",
   "skills/family-emergency-plan-3/references/creation/p0.md": "45ba2aeb95add640e4cead4e5e518175227f247b5ef99647dff8d29c3fe41f62",
   "skills/family-emergency-plan-3/references/creation/p1.md": "a14fc56147fde94e163f1ef6a9d2279fe37a1a650b01b6fcf4871202c5797fa1",
   "skills/family-emergency-plan-3/references/environment/p0.md": "781a23b282a8c610a74a5e596244d45019df329c1ac420af2fc05356ff225b2c",
@@ -66,7 +66,7 @@
   "skills/family-emergency-plan-3/references/production/p1.md": "b9746add469c5cfecc3f01ca3428bd66e3732cfd950edfc76322229d611f3738",
   "skills/family-emergency-plan-3/scripts/main.py": "f9068bf49251d64ee5c14db413de3f9e9ca8bdfad1146f68d557937edf3e2806"
  },
- "sealed_at": "2026-10-18T19:58:59",
+ "sealed_at": "2026-10-18T20:58:37",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

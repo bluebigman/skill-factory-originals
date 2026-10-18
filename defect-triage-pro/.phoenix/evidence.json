@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "defect-triage-pro",
- "merkle_root": "a24044f9965a2f7ae034ed78a4398e4192df57178c3a5dd0a7f008598c98d3d0",
+ "merkle_root": "b1a166da94b8a88e62e98bec282ce1d7fbeb940354f19d1f3aa8d0d2c039bbb9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/defect-triage-pro-1/run.py": "2a429560985fb49b935bf3f03f2c27ee2a3f292d74f599282a5f1df98bf53ada",
   "skills/defect-triage-pro-1/selftest.py": "7a714e7387434f09880d6a4a3cf7daec7fba2d034e95e5d1828e7039700ee82a",
   "skills/defect-triage-pro-1/.phoenix/originality.json": "cf258f6d8dc3b7825e93b40d560c1d16053871c205e839e903e50987bc4c4769",
-  "skills/defect-triage-pro-1/.phoenix/provenance.json": "ef80ceab50bf5aa9ce772875c84486f054a90f183dc429919dbc516e2145b017",
-  "skills/defect-triage-pro-1/.phoenix/selftest_evidence.json": "f6ce58c4346cc887b7c5caccdacfad131ce5890cb7ee46d00eb663e2606e9669",
+  "skills/defect-triage-pro-1/.phoenix/provenance.json": "89b86368394dbb5749487f6c5df9926c96369ecd8e4f54ac6e3320dfbf00a791",
+  "skills/defect-triage-pro-1/.phoenix/selftest_evidence.json": "05a17c07508499f7c1d4cc4baf850c5af7a7d63d4cce037f4b5790b1b51ef190",
   "skills/defect-triage-pro-1/references/creation/p0.md": "52b85ec71c9c53efd70fa4aab629abd6acbaff8882bf2658e2265eac5d1421f0",
   "skills/defect-triage-pro-1/references/creation/p1.md": "9eda2573df162aefb3bc937b505bc1bfc7098b22b1fa4f23af9699a01c187a3a",
   "skills/defect-triage-pro-1/references/environment/p0.md": "433baa721613d3928ed0e379fd6a478420e9fbfab2ded16b550c4c3660c142d7",
@@ -37,8 +37,8 @@
   "skills/defect-triage-pro-2/run.py": "687349f259093e39a4d521bbc7e63895e407e9c651c0e448e5f3f5bbf75577db",
   "skills/defect-triage-pro-2/selftest.py": "5505f42f179725a13e9ed0f4568ca0d071a6e71e3778112d9d7fd44f4b0bf2d4",
   "skills/defect-triage-pro-2/.phoenix/originality.json": "30063afa90e3b64f723d503a653bf5b077edc2d655e85d174d526792780d9fc0",
-  "skills/defect-triage-pro-2/.phoenix/provenance.json": "d523d724884c71b24d927c09c2651156e9e048356c32ad1d791b1f41eeef7941",
-  "skills/defect-triage-pro-2/.phoenix/selftest_evidence.json": "279195314a610e3b6202741ccade3fad4900473cb809ed482f1983d7c404a072",
+  "skills/defect-triage-pro-2/.phoenix/provenance.json": "2caa912dfcf45f20ff662ace9012d7c0f1b957f5ebb40e7f037c481cd656759f",
+  "skills/defect-triage-pro-2/.phoenix/selftest_evidence.json": "5aac2de28f996b2349293883504027e799d81f00e29ff5f136e1f3cd1b7587ac",
   "skills/defect-triage-pro-2/references/creation/p0.md": "b53790164dd006b59fe4d0a1da68fe35455adc84f7e858025ed99c4cf98ae468",
   "skills/defect-triage-pro-2/references/creation/p1.md": "b705a48646a7d219827bc896ff70b4dd511351e54578d2edc28be4c12569ab1d",
   "skills/defect-triage-pro-2/references/environment/p0.md": "aa9d71bc2abfaf06114bd3e00a3cdbe31a4d9e3145af8847e6ebcc33d5e98e79",
@@ -54,8 +54,8 @@
   "skills/defect-triage-pro-3/run.py": "61c6a92a4c4dad47ae63d22c80c37296e9556192c6f1c1e1ce8172330eef97c3",
   "skills/defect-triage-pro-3/selftest.py": "5e030c62fa57b198a2a9488c9f45ff90e2f76a2d9e6bf3cff0166f045d5d142c",
   "skills/defect-triage-pro-3/.phoenix/originality.json": "f7dfc446e84a3bd18adf13f3dbdef53a81eff779975c73ad165e617586d88cee",
-  "skills/defect-triage-pro-3/.phoenix/provenance.json": "c5efd4eca66cd4db717d21a965f02367fc3374b061b66794d2f6dc7eb252dc3a",
-  "skills/defect-triage-pro-3/.phoenix/selftest_evidence.json": "c4ab7f1f944744651c351b82b97feeeda795c69cf5a83b0f6fbc0a32e4c67e69",
+  "skills/defect-triage-pro-3/.phoenix/provenance.json": "c8f3ffaef26f5e1af8fd4229d8385b0f7e0aab2b5c06f1a2c5a96dbf25ba1462",
+  "skills/defect-triage-pro-3/.phoenix/selftest_evidence.json": "47295fb125486c758384646fe05ce92bf3216bfa7c013369ca29488ae4644709",
   "skills/defect-triage-pro-3/references/creation/p0.md": "8fb7e01a448f611d9e83fd9ac7ffac15601882fdb2133241d91c9e0cec52db63",
   "skills/defect-triage-pro-3/references/creation/p1.md": "2679b2f271e039c72edb2f95065c4f9be04599e87a52ce77d85c50bc27084dbd",
   "skills/defect-triage-pro-3/references/environment/p0.md": "b6be6153980253136b0df896bf7a34601ca2886afbca62be51274d3a26480f95",
@@ -66,7 +66,7 @@
   "skills/defect-triage-pro-3/references/production/p1.md": "ba7caeeb995231827e936e931327f85432679d666ddf4a87eb75f35ad6e2d301",
   "skills/defect-triage-pro-3/scripts/main.py": "e0d013e14236ef65fab132906ecb80cbb3eea23d4d3d9e1b03953e6003e2e64b"
  },
- "sealed_at": "2026-10-18T19:56:16",
+ "sealed_at": "2026-10-18T20:57:06",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

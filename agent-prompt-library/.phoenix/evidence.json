@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-prompt-library",
- "merkle_root": "a67202a64f4f5242874ac313ccd6366238538e1eb4ef1903434561828d0d44c5",
+ "merkle_root": "0ce74d1f17c35be68d84d6825bbea0bc6024f6920d7ab3794ad013d741643a3a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-prompt-library-1/run.py": "5e7f0fe136999d82eb55c0a59866d6967f5bcad5553344affb7943a6c8e32bb6",
   "skills/agent-prompt-library-1/selftest.py": "5466df5b0bb8a4abb3f960c8161c4e139c96f1a7c0337a1079583c07baefbde7",
   "skills/agent-prompt-library-1/.phoenix/originality.json": "f1a3f4fcd90b8ca3358d541ded532733bec995e423fdb9bb123d141edeb242a6",
-  "skills/agent-prompt-library-1/.phoenix/provenance.json": "d2c6c88efd0715dcd474a95d0f05ef1e8b0fb72ec9f33b9fb31c46e9770c8f08",
-  "skills/agent-prompt-library-1/.phoenix/selftest_evidence.json": "196cd6c57fb36897c87915073e4c801566c3460ae407c40825248ccb65f3157e",
+  "skills/agent-prompt-library-1/.phoenix/provenance.json": "46dd1d2c66b54f2284f32d4473b21026c7265f9b1ca3883b4594dd0e45b0c9c3",
+  "skills/agent-prompt-library-1/.phoenix/selftest_evidence.json": "6f80f7a641672e4268be4384f4eb5e06a74d90ffb8b93f4b5ff9b22c78ec3494",
   "skills/agent-prompt-library-1/references/creation/p0.md": "3ff210cbbb01511c4d5fb13a2ee10ef769a8d1f499b6d25979bc1c3c99366584",
   "skills/agent-prompt-library-1/references/creation/p1.md": "b8a8a55de1b43a4fc4911ea1519616c957e1d1f2d636870b166b8b834276dac2",
   "skills/agent-prompt-library-1/references/environment/p0.md": "a9b36b764275e4e301cd739a6cd8ab51dd3e913b325360a3bdcd214c604ad117",
@@ -37,8 +37,8 @@
   "skills/agent-prompt-library-2/run.py": "a6053c77ea0200ebabd1fbb9de8905cce1adfa1b0ec1aa82e439950bf28a1ac7",
   "skills/agent-prompt-library-2/selftest.py": "2fd520ff649b96515de0519eebc245d91257e88379392cb78fa2774cc05e57a1",
   "skills/agent-prompt-library-2/.phoenix/originality.json": "e177d54921a7b83db8a7d92876bdbea02d2ebd6249fc0549be07602bdfa236dc",
-  "skills/agent-prompt-library-2/.phoenix/provenance.json": "2f9896d5de61238ae8b0e665e034a2785c5d7e602837e97d5705603569ec9086",
-  "skills/agent-prompt-library-2/.phoenix/selftest_evidence.json": "c957ce9a836d79933d736d8ad559ad5e87b3a18b47f38eee62b6440794922293",
+  "skills/agent-prompt-library-2/.phoenix/provenance.json": "86e33e5174476ed6f05a0ea55f17397b250debc17f565f23c062e93d779b0198",
+  "skills/agent-prompt-library-2/.phoenix/selftest_evidence.json": "f158b06b0977b3dc0f5b8c2a3a83c2a45c663b41fa68f53baacc7a5d7e29cfe0",
   "skills/agent-prompt-library-2/references/creation/p0.md": "14b86c44a3592d8f9790f961ff8ad96a9f24ba9d09d74926076e5369825e9cdf",
   "skills/agent-prompt-library-2/references/creation/p1.md": "31f96113cdc59755f29a4dd37e8c7851107932ea2f64f1f34c772cf2b800edcd",
   "skills/agent-prompt-library-2/references/environment/p0.md": "cb6b0e1a3c06de9bf32ca3fe9e9bb0dcdc79a9ba7598f3a7330198823b5898f7",
@@ -54,8 +54,8 @@
   "skills/agent-prompt-library-3/run.py": "e9dc046b6f0997096360a77f74efe40ffa1f0d6087991e182c9336414e830047",
   "skills/agent-prompt-library-3/selftest.py": "4cf9d51d55c6aebb3ef280c80b472ce42297f30bd0a2a0441aa18bc8eac9b9b4",
   "skills/agent-prompt-library-3/.phoenix/originality.json": "41236032e25ab60ee764975fa3db348d1ac95654c043644678187e0c866d23a4",
-  "skills/agent-prompt-library-3/.phoenix/provenance.json": "592d7f5df554803f9398656cdb8626d05f1c52b1dd3313f134cfacf552808876",
-  "skills/agent-prompt-library-3/.phoenix/selftest_evidence.json": "adc85932ce84a70b7d88f9fe03a9f8bb806fa856b7847cc8077cc1d465645b4e",
+  "skills/agent-prompt-library-3/.phoenix/provenance.json": "10f15a74e8cd0f72a527178c1f40fb5fc2d9cfa729b4f41ce2a35dcb24c9c8f8",
+  "skills/agent-prompt-library-3/.phoenix/selftest_evidence.json": "cb680ca38d4684f27f3540aa7694615713240dbd3ed4b81da310e2fdc74fb34e",
   "skills/agent-prompt-library-3/references/creation/p0.md": "07c8788d31e542b9406845c00c551b4f4e0246160f1d6dab99d003122f0aeba2",
   "skills/agent-prompt-library-3/references/creation/p1.md": "57baff04bd562ad247d15e8804c14061664bd744ae0fe9ecc1d2d8ee077068ea",
   "skills/agent-prompt-library-3/references/environment/p0.md": "2f943b57643ac0995be0cea2159047bfa64e4208aad0419a3ca290fb67c46df0",
@@ -66,7 +66,7 @@
   "skills/agent-prompt-library-3/references/production/p1.md": "b02a2ae25b651460cc4eab27524af535e4ce892a8e671f7d679adfec2a96fa13",
   "skills/agent-prompt-library-3/scripts/main.py": "f1b115cafe76c03235332c111f2321ceaf1698d022bf45933d03ac0edc91a6c9"
  },
- "sealed_at": "2026-10-18T19:52:16",
+ "sealed_at": "2026-10-18T20:54:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

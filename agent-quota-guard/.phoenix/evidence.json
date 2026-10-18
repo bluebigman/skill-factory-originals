@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-quota-guard",
- "merkle_root": "8a61014822e0813479ca528169805bc6dfdc1b785f22e359dcba76a3d83b2ee6",
+ "merkle_root": "5de4be2761a37a05674164acf84993ea75663f0db5c937d2ec7f4fb278692cff",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-quota-guard-1/run.py": "7e7b0042dfc3532c7c249c958eafecf287c1471fa0e8bdf03c40abdc1039b8eb",
   "skills/agent-quota-guard-1/selftest.py": "a11b2a179d688e98c10cf07d4f747bca49fa1739431e4528415479837a87c1be",
   "skills/agent-quota-guard-1/.phoenix/originality.json": "2f7e3c281c1045cc53dfd2cfc4d86d8c4b0a225a30359bd23f8ad1dad3e77e10",
-  "skills/agent-quota-guard-1/.phoenix/provenance.json": "e6c29fb6e1adfc2be1e3488f1b801ffd9898844809f9b3a352c4c2b9b39b461c",
-  "skills/agent-quota-guard-1/.phoenix/selftest_evidence.json": "edf8c941b0447df985ccbea99e6f2f30679c580b047356f2b2f9846329c88a68",
+  "skills/agent-quota-guard-1/.phoenix/provenance.json": "b37772a54c9d29fd14accdd713dfe720cd72e4c3f6c0d4e5f26e327ce30e327b",
+  "skills/agent-quota-guard-1/.phoenix/selftest_evidence.json": "351e80f1e19108c43e98bd50485626252f136593d9af61d59f85c715c8bc2bcd",
   "skills/agent-quota-guard-1/references/creation/p0.md": "c86f2e51fff1755aa883bdc022f64008e77e71376b5f8f0c30a2474b91909ffe",
   "skills/agent-quota-guard-1/references/creation/p1.md": "2f842672b3384fc03067e1c13cde5782d00069f951b792fb3ed0a785bfe011d7",
   "skills/agent-quota-guard-1/references/environment/p0.md": "8c79ba2769c9cd280886902be5d5315e001cce967c908b785dbce2440b5b2a43",
@@ -37,8 +37,8 @@
   "skills/agent-quota-guard-2/run.py": "db2f9443effd9fd5ac5e4ae44ed735bf7ab5e6e3f1d60b60f28bc3dbd629978f",
   "skills/agent-quota-guard-2/selftest.py": "ee4f287cf06131d5588f16b67e798d85f5c5cacef17b4991be07cccb7a115d58",
   "skills/agent-quota-guard-2/.phoenix/originality.json": "32318a3f036cb0349c2f95cfe0595e5a121c60bb613434b575ef3d6b2506b0dc",
-  "skills/agent-quota-guard-2/.phoenix/provenance.json": "c1505bded922a5264a8d0e72586d3444935698ee233a80085ef36826af605107",
-  "skills/agent-quota-guard-2/.phoenix/selftest_evidence.json": "9679e0a2cf1a21beaa18d532a71f8221defae5f3329512c2d00ec7e0da15d56f",
+  "skills/agent-quota-guard-2/.phoenix/provenance.json": "36ee6713be96b9573f69a738b7b39d1609594e5752b884ea7377ea1749ea4a14",
+  "skills/agent-quota-guard-2/.phoenix/selftest_evidence.json": "8862309dda2475628d646d2ff9ccdaa04305ccb3cc04726a515d44df3b541332",
   "skills/agent-quota-guard-2/references/creation/p0.md": "ed7842b0fe102385f4c94960cc330d396d87caabc4527cdaaf4cdd0b59816c02",
   "skills/agent-quota-guard-2/references/creation/p1.md": "9e75068ec1f90f3c322befe9ac152aec285fdd59ec4445f7e9c396b41f608676",
   "skills/agent-quota-guard-2/references/environment/p0.md": "c83561331f9140a7aa07ef14b1fb50e0665434a47952ef45245d10edc9875ce8",
@@ -54,8 +54,8 @@
   "skills/agent-quota-guard-3/run.py": "56b5fc1d623d8c98ed7d1f90aa9c0aa52f0b0816de76c413e356955168262445",
   "skills/agent-quota-guard-3/selftest.py": "429eb6ce64970a393c871eb36788df8a2d12b4b8f3bd8419c0b8c28828f4f123",
   "skills/agent-quota-guard-3/.phoenix/originality.json": "6b8cccee9898fb1bcb10ef7ebb16fb57c0335a7d98fb18b7416b962e00ccd500",
-  "skills/agent-quota-guard-3/.phoenix/provenance.json": "3008ae4c4e08df2f02316b6a26e94c3d66476a87d291df73d7a2b1a3ab47f6c7",
-  "skills/agent-quota-guard-3/.phoenix/selftest_evidence.json": "437a8a6064be10f30d88a7d9126a90d8087b90db712d0cbca269efabb75e568d",
+  "skills/agent-quota-guard-3/.phoenix/provenance.json": "ef15f913acd46f7cd7ce0c0d586562439808795c0b70519c5d149e76eb85b21a",
+  "skills/agent-quota-guard-3/.phoenix/selftest_evidence.json": "a76db5ce74bd5bfbe9ed96ecb870f76b6aea710321e20f5ccf49fa9083fbe21d",
   "skills/agent-quota-guard-3/references/creation/p0.md": "18fe19bdd22d3932c855fd7f2115575f876d0a64a590aba35297685722be3918",
   "skills/agent-quota-guard-3/references/creation/p1.md": "318b81df16cc3747ba80ae57545f71254236c53f0414b9039073894ce67c5404",
   "skills/agent-quota-guard-3/references/environment/p0.md": "f5ecde784f1d7a881c96a03fab3f2b000f9193df43a17fe953155bfee359fdaa",
@@ -66,7 +66,7 @@
   "skills/agent-quota-guard-3/references/production/p1.md": "ba67cb91d9dcd030f459b5cbe16e56ebd5d3c7578c10b4123310aa1783eea957",
   "skills/agent-quota-guard-3/scripts/main.py": "ca740ebe455031cd0d26a270482fe0819dbfe14d596ae2054842cab614a68dce"
  },
- "sealed_at": "2026-10-18T19:52:16",
+ "sealed_at": "2026-10-18T20:54:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:07:16",
+ "at": "2026-10-18T21:02:49",
  "skill": "refactor-safe-plan-2",
  "slug": "refactor-safe-plan",
  "passed": true,

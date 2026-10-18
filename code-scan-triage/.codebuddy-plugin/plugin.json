@@ -1,0 +1,66 @@
+{
+  "name": "code-scan-triage",
+  "version": "1.0.0",
+  "plugin": "code-scan-triage",
+  "description": "code-scan-triage — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for code-scan-triage tasks.",
+  "author": {
+    "name": "user_2fd890c9",
+    "email": ""
+  },
+  "agents": [
+    "./agents/code-scan-triage.md"
+  ],
+  "agentName": "code-scan-triage",
+  "displayName": {
+    "zh": "代码扫描处置专家",
+    "en": "code-scan-triage"
+  },
+  "profession": {
+    "zh": "代码扫描处置 顾问",
+    "en": "code-scan-triage"
+  },
+  "displayDescription": {
+    "zh": "代码扫描处置 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+    "en": "code-scan-triage: 3 built-in capabilities."
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "11-SecurityCompliance",
+  "tags": [
+    {
+      "en": "Productivity",
+      "zh": "效率工具"
+    },
+    {
+      "zh": "代码扫描处置",
+      "en": "code-scan-triage"
+    },
+    {
+      "en": "SecurityCompliance",
+      "zh": "SecurityCompliance"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "zh": "遇到代码扫描处置怎么办",
+      "en": "How to handle"
+    },
+    {
+      "zh": "帮我规划代码扫描处置",
+      "en": "Help me plan"
+    },
+    {
+      "zh": "帮我检查代码扫描处置",
+      "en": "Review for me"
+    }
+  ],
+  "defaultInitPrompt": {
+    "zh": "遇到代码扫描处置怎么办",
+    "en": "How to handle"
+  },
+  "skills": [
+    "./skills/code-scan-triage-1",
+    "./skills/code-scan-triage-2",
+    "./skills/code-scan-triage-3"
+  ],
+  "expertType": "agent"
+}

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "monitor-alert-tune",
- "merkle_root": "0c58bae3fd9d2f4a32f0d5cd2e701be4d1014602e68deda5cd0f3d3b08173fa8",
+ "merkle_root": "a53e6649d75e44421df94b0d73640a8de260a60281e9731a154627e13acf8da4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/monitor-alert-tune-1/run.py": "3b7fb346f4e53be4a8793e3081b4ed1a92dbb3b844a632562c88dcb4c0d80b73",
   "skills/monitor-alert-tune-1/selftest.py": "d962a872de543f6869d8fe163f6d64ab45080918244e45f27dcaeb7832ecae67",
   "skills/monitor-alert-tune-1/.phoenix/originality.json": "fb278753608dbc8b7ecd7177098f83b9b25be7ba1c5b118eff0e31bd8b1e672f",
-  "skills/monitor-alert-tune-1/.phoenix/provenance.json": "9a34b7be234334ed420a75a82e652f3d0ea6fa177ecb6f816ad3080227e0460f",
-  "skills/monitor-alert-tune-1/.phoenix/selftest_evidence.json": "adb1237022c582ae57c21dea283c225c197b84c27c755f1ad04cdc8b2df5002e",
+  "skills/monitor-alert-tune-1/.phoenix/provenance.json": "8c5fd56be21ff7bf51e6229cda11bd5183d255245ca1f102590c18d908b9aed1",
+  "skills/monitor-alert-tune-1/.phoenix/selftest_evidence.json": "27a885f22835efe6af7fb85b1d00a9e78318df3111a1508ca1bff1cd11e638ad",
   "skills/monitor-alert-tune-1/references/creation/p0.md": "8cf20593577fc69d31073d33d2c188ebcae6e84ee5a6d8802e78f8c501549226",
   "skills/monitor-alert-tune-1/references/creation/p1.md": "7e90391bbcdb416eab402cfa362154da811b8e73fa2582a42bd67912379f56be",
   "skills/monitor-alert-tune-1/references/environment/p0.md": "01c728dab07d2f1e074f1479c19fd0d49c13e812d45890029420eb1caf96a8da",
@@ -37,8 +37,8 @@
   "skills/monitor-alert-tune-2/run.py": "8a31c8e2977409a064a81d399ecb0d4eff9d79aeb8c226350d3692438691b963",
   "skills/monitor-alert-tune-2/selftest.py": "223b2217342ce92b59a93186eab5a09a1c72ab5dc697b7204a7b8a41dd7c919a",
   "skills/monitor-alert-tune-2/.phoenix/originality.json": "0aa31230206542cb6ff74eed325b7dca20877aa608a900aaf5cf44929c91d60c",
-  "skills/monitor-alert-tune-2/.phoenix/provenance.json": "c0264368b3adc77e2d8f63ae6890ce0f78269ed1c50c35ccc48c30cbfe03ad39",
-  "skills/monitor-alert-tune-2/.phoenix/selftest_evidence.json": "37b86e3035249843a5c8f4896ca920e791ba990e7a30f6622579530d8d8cd8ad",
+  "skills/monitor-alert-tune-2/.phoenix/provenance.json": "0efba1177e27d1d7153239c6b358bed361b7a4044a8eae0974183c08db34e859",
+  "skills/monitor-alert-tune-2/.phoenix/selftest_evidence.json": "1a70df18b952a37905850615633c4236388038425cb4dfdb8b442105e562894a",
   "skills/monitor-alert-tune-2/references/creation/p0.md": "12868adb5535be6e956724b7b60686a738431d36b39a5062d5a9fd5f134c952e",
   "skills/monitor-alert-tune-2/references/creation/p1.md": "23b4fd25cee6e0a057ccf8f3459b2da35b8f63ef7bbcc216b0d3c12cb0ed36a9",
   "skills/monitor-alert-tune-2/references/environment/p0.md": "6ff3ebd350f15b0e899a895dc273f2000f6f245e9052889529aeb90bea47c988",
@@ -54,8 +54,8 @@
   "skills/monitor-alert-tune-3/run.py": "acdaeaf4ba894d19f929890f9de7aaffb82a11622adbdb69bfe02c002dd50a85",
   "skills/monitor-alert-tune-3/selftest.py": "fb0676c24f7d4779b9e37256c778cd6f2e703a34a42913dda0cd087861ceed0b",
   "skills/monitor-alert-tune-3/.phoenix/originality.json": "9de164e3be1d3761cbd234426b54e12e700631243f54143c5d1346b2eb538881",
-  "skills/monitor-alert-tune-3/.phoenix/provenance.json": "9d8b242c8086771146b2828092cbc69e51a030924a2bad279ac873ed4ea14766",
-  "skills/monitor-alert-tune-3/.phoenix/selftest_evidence.json": "8e3e29dbe60b70f319247bd3ee1de9604c12b519f5b2a66623b50bb34f530e16",
+  "skills/monitor-alert-tune-3/.phoenix/provenance.json": "fec39114de230e77b0e8b91253c5ebff882db01bea80abef49d01a3d7dd1964a",
+  "skills/monitor-alert-tune-3/.phoenix/selftest_evidence.json": "3390fe8d1924a0524305286c012cb757814fbd885718662e071a1c84b0e33612",
   "skills/monitor-alert-tune-3/references/creation/p0.md": "89a5f37aff48b12da3314b936c3495e88def84f5018ef2061c6960caac516dab",
   "skills/monitor-alert-tune-3/references/creation/p1.md": "146a28746a2b11d618efc71c7047fec52152178ee89d5a8ca6383a679f2e42ac",
   "skills/monitor-alert-tune-3/references/environment/p0.md": "37c6eb0900d1a71383b78aed013a0d0fb609cb7283ec4ce2b999d51b270c5d08",
@@ -66,7 +66,7 @@
   "skills/monitor-alert-tune-3/references/production/p1.md": "6828fbd2a935659e977789706adb52255c035755da96a7a86aa7edc2d540b34d",
   "skills/monitor-alert-tune-3/scripts/main.py": "04ba5ee78af69a5c53de82b484b1c7120df58905b61051eb3025c441485957fb"
  },
- "sealed_at": "2026-10-18T20:03:56",
+ "sealed_at": "2026-10-18T21:01:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

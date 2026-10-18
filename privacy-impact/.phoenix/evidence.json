@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "privacy-impact",
- "merkle_root": "24c21801189beb8c8a7aae15482522d5ab39d4a86f11dbe5e414b9a4af53abc3",
+ "merkle_root": "9b0680c394cb5db556ae61e0aa850303fde34953d69c28690f949b7f6cdbf4a0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/privacy-impact-1/run.py": "7188d3d18576be974c83faf720eb5b231b22590186a948eb1fe369b56c4798d7",
   "skills/privacy-impact-1/selftest.py": "804e1f1840930dd67aa277bd263ffbe4457de1dff91b5a3cd27e2ebb5f1bde2c",
   "skills/privacy-impact-1/.phoenix/originality.json": "f8d3a47c7d6ee3caebc8df083d147394ee9393011242ef0e90474c1c71acc562",
-  "skills/privacy-impact-1/.phoenix/provenance.json": "eef24e798b2a4a8b942202f7716af9d9c2346203749946b339ddb3caf413e4f1",
-  "skills/privacy-impact-1/.phoenix/selftest_evidence.json": "062539edc86f78fbfd16c377239209cc51ecc4ba121657b926d8a816e03846e0",
+  "skills/privacy-impact-1/.phoenix/provenance.json": "a8f837cd495d72ba09ea7f137fdc28137c92203367b662b32b86962088f62a49",
+  "skills/privacy-impact-1/.phoenix/selftest_evidence.json": "f8bdaf71ada20d4a008b6cd32bc329166366d90ef2b0223698709579e231fa54",
   "skills/privacy-impact-1/references/creation/p0.md": "701cccd41198c9598e253dee5cefdd67f78143677ea653104310bd205da92e44",
   "skills/privacy-impact-1/references/creation/p1.md": "03d3288c7ea8007d199d212bc19f10f544be3adef5b2fbc6685e3881399655d4",
   "skills/privacy-impact-1/references/environment/p0.md": "6140cf6faab19c6e8b051e5bd56661479e1ccabb9e27de86936879e3660e5809",
@@ -37,8 +37,8 @@
   "skills/privacy-impact-2/run.py": "3296bbbbd99df6541a0ffa49dc68cf7c106c0e661316c3d821bc9e9d3a49c61c",
   "skills/privacy-impact-2/selftest.py": "c07ac5314f5b648b5f09a7d11ee919180f093fccc03e536830c5b0eb61fe9264",
   "skills/privacy-impact-2/.phoenix/originality.json": "dc963fbaeae6176ae4d90481c6c9a7f815b6d942aa2687a3665a22f679db639d",
-  "skills/privacy-impact-2/.phoenix/provenance.json": "aab37cbda4305c85e336fddd0344928b1e8ab2f833c1986589df041930695de3",
-  "skills/privacy-impact-2/.phoenix/selftest_evidence.json": "d05e1fa743122087c46c850b4608f5c6ea4d39472dc743148416d27d97e4708b",
+  "skills/privacy-impact-2/.phoenix/provenance.json": "9a7b4a0728ea6590c4b0bcd976384fb3a162fa605b68a106c2e3af20ebd4cfcc",
+  "skills/privacy-impact-2/.phoenix/selftest_evidence.json": "f69eb938d33dd14dee1325547b3cac154af0f4dcab61bd27a1836ea11f1e6efd",
   "skills/privacy-impact-2/references/creation/p0.md": "3a2eb72d190a936fa200213e11caba77fd1721b13b5ebea0df5343a96298f08d",
   "skills/privacy-impact-2/references/creation/p1.md": "1e6513fb18d3914bd7b2221928acc070555f61d143a5e3ab7f64640a2ea7cda0",
   "skills/privacy-impact-2/references/environment/p0.md": "2df8c271262e746368b04f4bd217be2db259b2b6a761338b12bec8fb882a7e6d",
@@ -54,8 +54,8 @@
   "skills/privacy-impact-3/run.py": "fb27acd067dabbfa3ae72a4254b88edc1e88c2b2706dd7efbb2b97073424079a",
   "skills/privacy-impact-3/selftest.py": "32114e25d9cd8fce384991ba44577c593f4f42df701fb2ef4d548950d27214d9",
   "skills/privacy-impact-3/.phoenix/originality.json": "54192143fb07f44ffc44666cbf233ef0eba76023dfdf5f0768c98ead268fa1bb",
-  "skills/privacy-impact-3/.phoenix/provenance.json": "f60c1f8836decaef83470117f6fe21f70dd1a5f818aaef1e247a04a5bedd58b3",
-  "skills/privacy-impact-3/.phoenix/selftest_evidence.json": "2e277f3ee6bcfd9f3d3717225ad218f2d68ba4e88d421a749f4cffee712a0110",
+  "skills/privacy-impact-3/.phoenix/provenance.json": "ea267d3a1bd4ce8c88321d54b65b69c74236001dc520f543d8cc28b0df809340",
+  "skills/privacy-impact-3/.phoenix/selftest_evidence.json": "2efb545b4609b9291cadde0dccc183e2f325bbef1816272503a01aaf9a1a9368",
   "skills/privacy-impact-3/references/creation/p0.md": "c49920d54aafd9e226f3927e46cb4d3f6c472e06a459db3bd2f4e3027c645191",
   "skills/privacy-impact-3/references/creation/p1.md": "d1ba316523dadf87c7408c5642fe43fab2ef1f01212e52e66a7ea436059dcf2a",
   "skills/privacy-impact-3/references/environment/p0.md": "fb783763ce528e83a1a679bad0ecd773480c3b8504f553e8c2b916a8b9d828f6",
@@ -66,7 +66,7 @@
   "skills/privacy-impact-3/references/production/p1.md": "066b4da78c7ecbbcd9db224e25685f5974c8ce665c8fc5cbf62ffd932c3f833a",
   "skills/privacy-impact-3/scripts/main.py": "ebc69519f0135556172b25f23de1117281b5e384ad3bc405874eb76b084cfcca"
  },
- "sealed_at": "2026-10-18T20:06:19",
+ "sealed_at": "2026-10-18T21:02:20",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

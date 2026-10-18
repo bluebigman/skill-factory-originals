@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ar-vr-usability",
- "merkle_root": "e5328e104055458f1cdfb68f40579fe3877f3aadf39832dd828fbb8822dc5c9f",
+ "merkle_root": "2417e03adc250b278c385a901c364d8b2ee93b2d189b9300fb2779b02b6f0ea0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ar-vr-usability-1/run.py": "d8b74b8409cdd4fe27649c0711d0dd2960990c7fd6eb78cf2e4b2a6a8be05908",
   "skills/ar-vr-usability-1/selftest.py": "761d9fe584b697ef62ef838da1d39fd098e7d82dc9fd86dea987ff80ef8e1281",
   "skills/ar-vr-usability-1/.phoenix/originality.json": "d98741a52869de90084609171db78c393f5141599807dda7b9e7e2bf1fb97732",
-  "skills/ar-vr-usability-1/.phoenix/provenance.json": "456f413593bd0dd5d31c241214af01140f793c70d2dd24bd8d3658cb515e975c",
-  "skills/ar-vr-usability-1/.phoenix/selftest_evidence.json": "4f71b1af31b24c6698cb5c7153d20abfc4193b1764dca1c63ac0b9943e40b311",
+  "skills/ar-vr-usability-1/.phoenix/provenance.json": "34f09287cfbab2e2b2ff32b099b0dd582da3cf8047bf0aa12cff3049bd311af0",
+  "skills/ar-vr-usability-1/.phoenix/selftest_evidence.json": "fe65a2c5cfebcb9cb171bb60b38da7f560f2f0cbdf75beae102fba8baaf40b04",
   "skills/ar-vr-usability-1/references/creation/p0.md": "57cb078c67051eadbf5a309b69a560b7f2338e3384fecc58802b829e8be3f7ba",
   "skills/ar-vr-usability-1/references/creation/p1.md": "43b170e785c6eb615829518bdde79c23e42a7d200a9b877a933a8ccc6455ea38",
   "skills/ar-vr-usability-1/references/environment/p0.md": "7f20d718750d8692b76e7e7e913612ce58935d20b0292a7ce526a1f3e623e482",
@@ -37,8 +37,8 @@
   "skills/ar-vr-usability-2/run.py": "2cde94c75ef0bec901ca34820e1536f0deafd622e13f9e6d3e5e90aa95640585",
   "skills/ar-vr-usability-2/selftest.py": "3ce1088cbf2cb9d1bba55218a4be8292ce8a230a0b3b860c0c7150002d0312e0",
   "skills/ar-vr-usability-2/.phoenix/originality.json": "a003d1d70e331582f2fbe4fa1ddfd18761cb10ee4160afffbe7a76a84bce227f",
-  "skills/ar-vr-usability-2/.phoenix/provenance.json": "dc3c5a977142e8dba4ea2c5c9aa4801fd0682a90049bd6e0611a2a0f76a2e46e",
-  "skills/ar-vr-usability-2/.phoenix/selftest_evidence.json": "6923d0a12c04a9d791cae04f883a590eb1db18c16012a5a56691cc56050101ee",
+  "skills/ar-vr-usability-2/.phoenix/provenance.json": "c5a86ba568427257f8135ea2eb2702bf3e62740b45428db2b1d9cf8c373c7c2b",
+  "skills/ar-vr-usability-2/.phoenix/selftest_evidence.json": "63f7bba438dd373eaca5e22f8578d338d2bbf20e15de833df6b46583cbb01720",
   "skills/ar-vr-usability-2/references/creation/p0.md": "240e57b9ca219d22813dd3739fd94953185c264f12e615b37779aba36c94343b",
   "skills/ar-vr-usability-2/references/creation/p1.md": "8ae71ccdff0d9c54f9c56b8d428170a1999e1f192014cec5f9b51c5186fa80a3",
   "skills/ar-vr-usability-2/references/environment/p0.md": "2648fa6d68d77207f5376dd805d55277b94d5530675ee5924a7a7e5b31c68e08",
@@ -54,8 +54,8 @@
   "skills/ar-vr-usability-3/run.py": "13761d6f6caa0f399056d39122e0c65d4f27e12e28f4217daba55a21805eee7c",
   "skills/ar-vr-usability-3/selftest.py": "584a75fa45dad9f22dc1b2335bf63277adaced626f478fcfb9fcca8801aaa614",
   "skills/ar-vr-usability-3/.phoenix/originality.json": "bcc45c34041b381322631a25dec7ca928666f5f99f23380d491ff74e914c00da",
-  "skills/ar-vr-usability-3/.phoenix/provenance.json": "f9dd0d79aa1717360d9c8674f88b3c0669c02c4fdf43c3bc45ea5c27a9f9c59c",
-  "skills/ar-vr-usability-3/.phoenix/selftest_evidence.json": "a3b004102b1bec8df9e4a7e4a31d30de32af4448e63c1d47b2d104482c4e26f0",
+  "skills/ar-vr-usability-3/.phoenix/provenance.json": "371269d1bb3a7e35b1bd8cc21a1eb44a14b303f85a98870020b6886b4afee34b",
+  "skills/ar-vr-usability-3/.phoenix/selftest_evidence.json": "db4a6226eafa43fc76deecf5816b930cb755f412fb83b33186d655df69b3e7cf",
   "skills/ar-vr-usability-3/references/creation/p0.md": "df296974ae81757683eba9484f2094baa7742741e1fb2363d9c281be0a676a4a",
   "skills/ar-vr-usability-3/references/creation/p1.md": "ef9a9a135f1b33dac4aafa9e96941087461f138cc4d3f0c452d3b133ef127b6b",
   "skills/ar-vr-usability-3/references/environment/p0.md": "3a3f52ff75a89521204e577e234cdbeaebe6148bdc48a3d8b53e93e4e1c6b8f8",
@@ -66,7 +66,7 @@
   "skills/ar-vr-usability-3/references/production/p1.md": "f5fc51bc94efa36277cd3d1a311866f9704a7e70633961030d70c43101af0ad9",
   "skills/ar-vr-usability-3/scripts/main.py": "98da6a14c70654562e309f2152dbd2d3967a453652db4ab2b05a75331c9e9acc"
  },
- "sealed_at": "2026-10-18T19:52:38",
+ "sealed_at": "2026-10-18T20:54:59",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "microcopy-coach",
- "merkle_root": "2742a3e94896b7eb20cbebb86e5e2fb53af46158e8311e0cf49733c18bb9f2d0",
+ "merkle_root": "1ef5e58b9a8e17b9b3058287b8c3ced25ab1190c4fb5c8d28e5e1cb79687021c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/microcopy-coach-1/run.py": "0e24ec78ae1166c361dcb29b50d24cbb1fccbe517c39820feb9c069ce26d2859",
   "skills/microcopy-coach-1/selftest.py": "0fff9019e97e2e5cccb74224e45795e5ca8b3b6d6564b94646858f962eb2fc5a",
   "skills/microcopy-coach-1/.phoenix/originality.json": "8997da541c5405061d9222a94ff27a5f60108f92b8b3dd366fd8da9cd832ee80",
-  "skills/microcopy-coach-1/.phoenix/provenance.json": "8450d27872de899914a096b238a1a5ae6a6b831f9eb938390966f812382d90f4",
-  "skills/microcopy-coach-1/.phoenix/selftest_evidence.json": "e84a28e24c299d460d3ec5b0fcfa0615b2fbee32a11b19dbd0e69ee35ef56e5d",
+  "skills/microcopy-coach-1/.phoenix/provenance.json": "9f2fc939713eae573f0798be38eb4e42b9d3f7ae9b38527ab741d00e7f569c5a",
+  "skills/microcopy-coach-1/.phoenix/selftest_evidence.json": "1c1d0314367f26fc9854e25fd3947edb2e190e4b75c3e5ef1b44069f64570f17",
   "skills/microcopy-coach-1/references/creation/p0.md": "639e526a053f91c5f1b72695787c722f06708e63f4f175388ab37978af0e311b",
   "skills/microcopy-coach-1/references/creation/p1.md": "4b36d5fc46b23c4324813533f77b122707136983ef38becbf5291548c50e6a69",
   "skills/microcopy-coach-1/references/environment/p0.md": "d1cfa10551a0bf99ea6f3f20dcc949150cdb5ad35ac93b307a080162b6af4cd7",
@@ -37,8 +37,8 @@
   "skills/microcopy-coach-2/run.py": "8fc067e431bdc87d85579f0cc96e635167c0d8e08e70ecf8883be37bd5b3488f",
   "skills/microcopy-coach-2/selftest.py": "d535f19c33e75800b8edf730c0ad4d0e2aed4635026b830af16c783da5ce8195",
   "skills/microcopy-coach-2/.phoenix/originality.json": "1663e673d19858d84edb92e4f425890dcb52b7ac3da83aa316820cc74d806052",
-  "skills/microcopy-coach-2/.phoenix/provenance.json": "2397a48c7d189585bef2f54fce570836ee99b833c197e9d560929561a9b2474a",
-  "skills/microcopy-coach-2/.phoenix/selftest_evidence.json": "121bf424019aec61f298308e18ad598f6d876bc96c9d4bea4197e3ce10c53ec4",
+  "skills/microcopy-coach-2/.phoenix/provenance.json": "024e6dfae12c32efa48824cf3dcd25d8c91087966d9668c56e456bb31ed4998e",
+  "skills/microcopy-coach-2/.phoenix/selftest_evidence.json": "7c104434dd1293a53d1fc89bf8f5eb847f7d8272ea0b71f254f00709084bcbcd",
   "skills/microcopy-coach-2/references/creation/p0.md": "5e2bf72fa07c3b67f0dbae7149fe836fea007f5c9cfd9c8876aa5db9e2e7901c",
   "skills/microcopy-coach-2/references/creation/p1.md": "8800d89b14f8a8fbd1aed09c010ff7137036b1c099b75b308c6cc55cb13075c5",
   "skills/microcopy-coach-2/references/environment/p0.md": "23a6f9fd11056c8bddaeddc42a074441281c7ccb7cc7b3ca6c3658fcc2f80b78",
@@ -54,8 +54,8 @@
   "skills/microcopy-coach-3/run.py": "b8b60209ad67a6e6f7b00ef03797fa02a0838bf3c05554209646cda30039bf28",
   "skills/microcopy-coach-3/selftest.py": "cec09e4114347849fe599116f578bd5ea1faeae978d7311535e74725fa5443ff",
   "skills/microcopy-coach-3/.phoenix/originality.json": "b1cbf6958926067e0e16f2e434543f0c01da043493680a05075d355c7006f12c",
-  "skills/microcopy-coach-3/.phoenix/provenance.json": "d2eb659c53dc3f31aea3bf24b5b2372027ebf1835fbfdc164f8da6c042bfce67",
-  "skills/microcopy-coach-3/.phoenix/selftest_evidence.json": "0acab88c9576e35d6e9c1acb072882486d108396245076d5d843f9c540a43465",
+  "skills/microcopy-coach-3/.phoenix/provenance.json": "1f0ce1d23c64f3d005fc67c9843679f6ed8655582ab2acf33ac490d0107aac01",
+  "skills/microcopy-coach-3/.phoenix/selftest_evidence.json": "65c316a349a9e8a92c27478dc188df1e51bce0ac3e84640fb6735148c7368f73",
   "skills/microcopy-coach-3/references/creation/p0.md": "191461775cb46741597e4fe46b9e33296546c8f931b78fc09ee6e109e0e20a36",
   "skills/microcopy-coach-3/references/creation/p1.md": "ad5fffe47ccfdd2cc05a9238da467f3ea306be578c0afcbb48aead58c866393e",
   "skills/microcopy-coach-3/references/environment/p0.md": "778f2e0b7dd53f46dfa7c38637d69189c609fa418a8e33ef579a1bf03c043f47",
@@ -66,7 +66,7 @@
   "skills/microcopy-coach-3/references/production/p1.md": "56bc69f051177146749d33fa9c647fd14c2dd74b9c3b16f3da269814e7258b6f",
   "skills/microcopy-coach-3/scripts/main.py": "f7dea3bbb270bb1415502eb823050841fc541758bab88fb0de480fb7258437b7"
  },
- "sealed_at": "2026-10-18T20:03:47",
+ "sealed_at": "2026-10-18T21:01:02",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

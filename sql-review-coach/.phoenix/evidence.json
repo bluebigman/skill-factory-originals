@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sql-review-coach",
- "merkle_root": "83b24eb6959622b87ca9295e0362bef50dc0c7fb447ffa4cfe34c46908f269cd",
+ "merkle_root": "f9bb48bfdc4f3004c699b99d2f74fa5af3c6bcc47bac445f5479b50d0d76f357",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sql-review-coach-1/run.py": "541e8f2d116c5a68c9001b0b59ef6109e8e63e952964b60737f23fd9ca6c5447",
   "skills/sql-review-coach-1/selftest.py": "4859b54c5aa06307afb81d23b28b95ce438a6fbb5f044b195191d6a8b6b322e0",
   "skills/sql-review-coach-1/.phoenix/originality.json": "23d7516a5f100162906dc2a5c71c7c7ef8420ed17056c592849ed740904fd55a",
-  "skills/sql-review-coach-1/.phoenix/provenance.json": "227405e283c429f910e413f9adbe25536c46e536f7165b8c925e258ac1471b66",
-  "skills/sql-review-coach-1/.phoenix/selftest_evidence.json": "ebce855d63baa49dca38928f856dfe896c0614cdd30cf85c8f090df5c4f96eec",
+  "skills/sql-review-coach-1/.phoenix/provenance.json": "e40c864221c3a89cc346408b23d85ad4205a558738f980a68fb76606c8c3f6ac",
+  "skills/sql-review-coach-1/.phoenix/selftest_evidence.json": "e91103b66a8388e0f448b38e119c29e62f3e31483a4ab73800b3ccbe74b576e1",
   "skills/sql-review-coach-1/references/creation/p0.md": "758c810468b11612477e8025d4efe48c5e2bb19938d225718eedeea9ef89b3d1",
   "skills/sql-review-coach-1/references/creation/p1.md": "8a7c5c64a38a77444d3d45c1ed1f30554a1355ec30899892d94b158e3034a6d7",
   "skills/sql-review-coach-1/references/environment/p0.md": "618b687236733005e9bdd383b84eb3ee9fcc616462e6cd7c5b1decfea2bf589b",
@@ -37,8 +37,8 @@
   "skills/sql-review-coach-2/run.py": "dcd6e8fc6d3d165fea6eae93d2e1abe7db4a5b043f5588f9ee3f54dff5a5dc2a",
   "skills/sql-review-coach-2/selftest.py": "1de01c2e6d93f1222eddabf506a913aaf9111f5ab7d0faa12597efdc1d0e33be",
   "skills/sql-review-coach-2/.phoenix/originality.json": "8b73e0dcd68253f9600097f5b8e79d9fda4723b5ece3c717c29dbd828fbfb8c6",
-  "skills/sql-review-coach-2/.phoenix/provenance.json": "d693e5444842f34aeeeb288072b7f56518ffd82dea567b03be357f62dc460430",
-  "skills/sql-review-coach-2/.phoenix/selftest_evidence.json": "9941d041760727929769d3f770f157df46d49254b253a905b0bd2b82ad3a846b",
+  "skills/sql-review-coach-2/.phoenix/provenance.json": "44c608ac5aa897857e3cbbee23dd8be758c98500ce9ea64716db4bb48435cb83",
+  "skills/sql-review-coach-2/.phoenix/selftest_evidence.json": "962bc5e8e6bdb259b319c6729c23a26b8362859878f373ba7f930ef14b89df27",
   "skills/sql-review-coach-2/references/creation/p0.md": "867785c15aefccced09854d867f85561dce2405bd1f951377284b96b0b363bf4",
   "skills/sql-review-coach-2/references/creation/p1.md": "3b6f1e94890aa2b4e28281363d1643f7cc24df88b8c5558403874406d88a239b",
   "skills/sql-review-coach-2/references/environment/p0.md": "8c980704a829be1b29c9daae32d43f5bf9d3fe7277dde14f16219baae086232a",
@@ -54,8 +54,8 @@
   "skills/sql-review-coach-3/run.py": "68d5647c57dadf7cabe7c7c48a5ac66ebb7a0cac5991403fa2fdb42e88dba7bc",
   "skills/sql-review-coach-3/selftest.py": "940a639cba9c0738157b38843793c196b94e6e2b56d2f1e4173b75974b9813b5",
   "skills/sql-review-coach-3/.phoenix/originality.json": "1d3767dd1424a6608701fd0628e8b7bb0f3202af34145d46996364d2f670faf9",
-  "skills/sql-review-coach-3/.phoenix/provenance.json": "90184970131e980cf037531ec9203fbacd7c485e35eb15eb6e6b2a453792dfa0",
-  "skills/sql-review-coach-3/.phoenix/selftest_evidence.json": "59bbd46fa7497f2dffd87869c744537fa19e57c9db7230f24012d0244bc4d4ee",
+  "skills/sql-review-coach-3/.phoenix/provenance.json": "a7d608f1265fa401f8fd36226daea5ad2fb3eafb94ed185030bf352f7eb501f3",
+  "skills/sql-review-coach-3/.phoenix/selftest_evidence.json": "a1946e1d63dadbe41303a6f04bacb0f47563f815d9a3c05605ec1ca5263de711",
   "skills/sql-review-coach-3/references/creation/p0.md": "3b9d18ce9bc02486669c6b4d7daab7f8031783658d5611717cff82a55964f328",
   "skills/sql-review-coach-3/references/creation/p1.md": "050c310954f88abb6b37403908485d9bd15c53a4aa5c2d15b1936c24ba36cd25",
   "skills/sql-review-coach-3/references/environment/p0.md": "e6b1382452122560570888dcb27f1bffe543ec26f4f4fd05815cef116573efdd",
@@ -66,7 +66,7 @@
   "skills/sql-review-coach-3/references/production/p1.md": "f1330b9aac4ca1cd8381db7ee7442863649c42fc9fe602942097c930b79d9f7f",
   "skills/sql-review-coach-3/scripts/main.py": "5485d73d94ba5dec8a4f7fceabb7fc78cc07a544095c9a7eb51c4b134f2cbfb3"
  },
- "sealed_at": "2026-10-18T20:10:10",
+ "sealed_at": "2026-10-18T21:04:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

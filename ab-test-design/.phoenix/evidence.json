@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ab-test-design",
- "merkle_root": "a3f43ac2216a1d2b4d653b73dfce9ccf5980dfc64fa586e5e6cf4530ae57e755",
+ "merkle_root": "b06cdb2f93f5f053b0e654cf0d9530546e88a19e4d9457881b984457989ff976",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ab-test-design-1/run.py": "3853c6067ab0b996ae71bac2f9c76acec581d34274ddaf86beb2a12ddbb69e72",
   "skills/ab-test-design-1/selftest.py": "a7cd7afe81deec2be74fa0e155603be3469049ca35a7230bdc2a81199c38982e",
   "skills/ab-test-design-1/.phoenix/originality.json": "ddd577d589912c51ca8430a8104aac9b64008e595cd702e660fdb2918c2c89dd",
-  "skills/ab-test-design-1/.phoenix/provenance.json": "adcbe235f4f48ce547e80b070562b0b8dbb9820fd55f8ff99152daa01e6f1cf0",
-  "skills/ab-test-design-1/.phoenix/selftest_evidence.json": "395b995f03f7348c5efa418d785d34051339123ae255b355953cdead1bd2bef0",
+  "skills/ab-test-design-1/.phoenix/provenance.json": "273c88f0aa1b89b3429e36faa0965a63f033568f89056035cf23f81cc4589a71",
+  "skills/ab-test-design-1/.phoenix/selftest_evidence.json": "fc52121e07a7d1c159183e20a0863686bbfde7b5bb7488794e8be16b2d2883b5",
   "skills/ab-test-design-1/references/creation/p0.md": "8c21017d4e41d792ade19b04b10ada3937fb3de3b9d5ab9b8ac768088fa851e7",
   "skills/ab-test-design-1/references/creation/p1.md": "c1a53bb75fc5a59514641e8266943bbd4ad90b119dff303d7de7f45d07f5677d",
   "skills/ab-test-design-1/references/environment/p0.md": "5e9261a522385fd69addae374070b5a566e740115b57feab525909bac944a79a",
@@ -37,8 +37,8 @@
   "skills/ab-test-design-2/run.py": "4474ea7b5451822310cf62b3dcb2ddca7b6b5fa64f9005fbe5830df3ee2583b2",
   "skills/ab-test-design-2/selftest.py": "91a5325ef52205c06a8202ce55ac3392fdb526e243f537cb3ee77ef1f8d87a9e",
   "skills/ab-test-design-2/.phoenix/originality.json": "3eb19645c468a38d4dd0a72f4b6efd03d910868833b00aa34d150b1ca3b3af7b",
-  "skills/ab-test-design-2/.phoenix/provenance.json": "04ec7ffe8a851c88a79f92dd40877374c514b200d36a39647c51de6a20005feb",
-  "skills/ab-test-design-2/.phoenix/selftest_evidence.json": "39e14b4fdc11a4bf1e6f36001b22da601bc2c3358506b3d81b18671687133b96",
+  "skills/ab-test-design-2/.phoenix/provenance.json": "ca4883c01e51fe6eb6eb0d57603a0e897bf4e74398622384098c96da063c0aae",
+  "skills/ab-test-design-2/.phoenix/selftest_evidence.json": "0a10a3046497bf1db8f5f7d1e573eae8187ce8111d308596828cfbe901121787",
   "skills/ab-test-design-2/references/creation/p0.md": "823abdbf80ee020ba2fc9a623bbea6495633c77866d62074d43f1a81038b72ef",
   "skills/ab-test-design-2/references/creation/p1.md": "d96077fb262a7c443efd5eeed47168e950876c0d3c547070a5d54a312caaebe8",
   "skills/ab-test-design-2/references/environment/p0.md": "069ff957e092fb712385abf130a0f8e1c963a014258cfa15d0edd350f05e0a1a",
@@ -54,8 +54,8 @@
   "skills/ab-test-design-3/run.py": "d486176e39a7a57945dff8d3b24120b7afc54ef0ef63a336db68629f3e3b8beb",
   "skills/ab-test-design-3/selftest.py": "3b9712b5dd52c7ac7c440a9a9d04e99cc2f548b2f613103252c83e5cb16b2a50",
   "skills/ab-test-design-3/.phoenix/originality.json": "0a3b1042bbbcd6122c7d02c45357a74c5093e3011affd823a4b6810ca3ed38be",
-  "skills/ab-test-design-3/.phoenix/provenance.json": "0c53507179777184f4368f90b79485e1c7c65da78916bab419e37e2965882bef",
-  "skills/ab-test-design-3/.phoenix/selftest_evidence.json": "6b5e1317bb3a669cab1d397591927696a8bfdd9c4cd96eb22c7af6c56c7b4460",
+  "skills/ab-test-design-3/.phoenix/provenance.json": "253899f940e38bfc943f026bd4842e34cd13d14eab6778d0fae880d2991700f8",
+  "skills/ab-test-design-3/.phoenix/selftest_evidence.json": "4320b6927ff4d5c627da403f20e9959b637a88b4bfc4a3ae019bb78199ccb3d6",
   "skills/ab-test-design-3/references/creation/p0.md": "95e48342bedf3d4e4d5e6c9585e950cb2ad705dcdca06578446b207205f7a42c",
   "skills/ab-test-design-3/references/creation/p1.md": "81d0d88fb1f1225e8c04d39bc3843466c8f7727a02b442395dc78db681d42cdf",
   "skills/ab-test-design-3/references/environment/p0.md": "34387afbbfc1da620d7dd964f0540c432d9af4739568d869eb55f745c2853c05",
@@ -66,7 +66,7 @@
   "skills/ab-test-design-3/references/production/p1.md": "d886e8e63cafbb5497de733ab7da24c422042975ba3b92c6b02c52731bb57d8b",
   "skills/ab-test-design-3/scripts/main.py": "bc472a22c224518932c50f2ca8c36492851b9e2f4be2f47a24abbf5f3d18236f"
  },
- "sealed_at": "2026-10-18T19:51:37",
+ "sealed_at": "2026-10-18T20:54:22",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

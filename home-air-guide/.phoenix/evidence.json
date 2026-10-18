@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "home-air-guide",
- "merkle_root": "789e81bafc0b3918fb08266aecf13209c8a285bb0832a83dd490ed711586f411",
+ "merkle_root": "203a5758641f70a4496c4dbf41b6dcdb8006d4b92c7e8332068aa74a32255092",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/home-air-guide-1/run.py": "3b65e8aaabaa9e483321320f784c4c1e3d25273c14431bf77fa8fc5f2bec88bc",
   "skills/home-air-guide-1/selftest.py": "81b85c5e059240bc89c6f0f64f0c2c6e6745017b7306109b659fb643297b818d",
   "skills/home-air-guide-1/.phoenix/originality.json": "21bc44155dc39efd2b2aeeb257e1eab32ac447e8371ddffb1821795ca5866aaa",
-  "skills/home-air-guide-1/.phoenix/provenance.json": "0e82a276d9b1f76f24e5fc9709439577d07c33b67cbb321bec4e150ed3adfa5d",
-  "skills/home-air-guide-1/.phoenix/selftest_evidence.json": "afe31ce5669a07640b55fc815a43d38fb4cc354c19a4924e24edaae7006e6aa9",
+  "skills/home-air-guide-1/.phoenix/provenance.json": "59ff8dcf25c76282059c91d58a8260c5ee5212138cec024712d4b79d059bb5ae",
+  "skills/home-air-guide-1/.phoenix/selftest_evidence.json": "a9e16b3892bc859f2e0cbfb5276f1d19d84831d2064f1a5883dd2fd8ec3f73ac",
   "skills/home-air-guide-1/references/creation/p0.md": "9aac5baa02f05569d6cb8376cfdab62da74fa66519cf10fb1df4cd87effa4347",
   "skills/home-air-guide-1/references/creation/p1.md": "9829ab3a1871fe30ba81dbcae56001f1b8108be093a828019edc544715de4709",
   "skills/home-air-guide-1/references/environment/p0.md": "4953e590ec20e87372ebcbceea7211fb3ce26847938d45293c81bd20a4389f0c",
@@ -37,8 +37,8 @@
   "skills/home-air-guide-2/run.py": "f11fb1edc37f113a7485521c810b02d0e6ad51bdbb793ece6b499579d967dfff",
   "skills/home-air-guide-2/selftest.py": "64f56e59b4e2d8f14c79c761263f13bb779e2092f8770aabe34e69a0282ae618",
   "skills/home-air-guide-2/.phoenix/originality.json": "67873aa90bb521d949331a875c8d3b1a37c780d49d06537a81cbd0036ca85dfa",
-  "skills/home-air-guide-2/.phoenix/provenance.json": "e09cb483d5b7a7e4d7a4650a4c665b507ca785c8c2508406d4e7813b6102fea3",
-  "skills/home-air-guide-2/.phoenix/selftest_evidence.json": "0aa0c2b837a19c3bca0f80cb08597ec8f025c83776fb865eb19807007baf77b8",
+  "skills/home-air-guide-2/.phoenix/provenance.json": "079ac87023cd979778d7d601145686cfe146f7afec15cd6e7b4e5e0cb4cd9192",
+  "skills/home-air-guide-2/.phoenix/selftest_evidence.json": "e6427461591398d490b9771996c3efddbd803af7b3597e3b593b720e8aaa115f",
   "skills/home-air-guide-2/references/creation/p0.md": "ca7dc144b176efbf9069437311ebc5ad2b25964683c41351076e54278f87d251",
   "skills/home-air-guide-2/references/creation/p1.md": "0fe7143034ae7c4a5cb209b868056c55ffa816bbdb28bb708288198e7c71b6f5",
   "skills/home-air-guide-2/references/environment/p0.md": "36162534fe0a850fa91084fdd008cfc9c776e61b6e936544179be6fd32e24fd0",
@@ -54,8 +54,8 @@
   "skills/home-air-guide-3/run.py": "ef3fe5d079a27aea0d3eeeaaf16a9c79c119955ef11bf320d153b4242a2e70a8",
   "skills/home-air-guide-3/selftest.py": "65e34fcb60e6858e48703569b4f2d14a9e06b48a06531273c18b41d66bdee508",
   "skills/home-air-guide-3/.phoenix/originality.json": "48bdeabbc009c1849398b2928b9dbb22cb23fc334b67a2894a2bbcfb6256be51",
-  "skills/home-air-guide-3/.phoenix/provenance.json": "8279f04eff6e0a2e2f68bf8d3a675f35a41d90eb69fce820d4d205feda9afec4",
-  "skills/home-air-guide-3/.phoenix/selftest_evidence.json": "e972a62f75d4726d94b575533e8e25f99f951c1f67b6d3b5b89e44ef79904f84",
+  "skills/home-air-guide-3/.phoenix/provenance.json": "7b7a47016bb5a2fd82d530011e5905032bda4555d1e77b000a90bf7633bc8cce",
+  "skills/home-air-guide-3/.phoenix/selftest_evidence.json": "e146f852ec3b95357b84abd57c1438f73705f8f10981905fb4b71cfbb17daa65",
   "skills/home-air-guide-3/references/creation/p0.md": "e7470567d68677f398e3ddcdb5249479be5c5774c548f48b5ee85741a47b12a0",
   "skills/home-air-guide-3/references/creation/p1.md": "a587184f678d0d04ac2c05d93ec7838ecbf9be8a36e1259d46dbf0bb9d024c62",
   "skills/home-air-guide-3/references/environment/p0.md": "3eafdbdf8eee68c6ec6ae9cb747676b5928ae6fbda7764b2b1dc0c5475d423fa",
@@ -66,7 +66,7 @@
   "skills/home-air-guide-3/references/production/p1.md": "54e0305d5b42f90a1291bf0c335e39f86068e850161f45624f7e3a4221c0dde0",
   "skills/home-air-guide-3/scripts/main.py": "c58a4c465431a15418852a62d0e73aa71d869bc9c92d22b8cbd39283a406d1cd"
  },
- "sealed_at": "2026-10-18T20:00:37",
+ "sealed_at": "2026-10-18T20:59:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

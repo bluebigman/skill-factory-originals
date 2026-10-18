@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-level-design",
- "merkle_root": "6c654f49be29dbcf98bb60c9f60c87e6bf67f917c8ccf387581d28c08f25c828",
+ "merkle_root": "ab508ee1de511beafb96813df104dbd572bb00012a52cfcd9ec2097d8444e869",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-level-design-1/run.py": "a34d4ecdf713b62c604e1e1381c013bfb8827f38408ae947186dbe69f3300b2b",
   "skills/game-level-design-1/selftest.py": "22b6920dc80f5d8290d46dabd3cb42bdabc6c2c9c046ea522634b121928c1492",
   "skills/game-level-design-1/.phoenix/originality.json": "f4fcfd96452630253827d5cb37f25955ec6ccbebb4ce71118f8f25f22657abdf",
-  "skills/game-level-design-1/.phoenix/provenance.json": "c0612ad4cf3f409aa090e5e4e9f65aa20d70a8b063a7d1a31431c799cbc49927",
-  "skills/game-level-design-1/.phoenix/selftest_evidence.json": "3c41c6775f3a8c99bf329d59aaf2c92d6bb65d96335af3ad94817237ce20d0d8",
+  "skills/game-level-design-1/.phoenix/provenance.json": "7d173df2e41a9833b1e58b4f9a42c0fd0f101cd5939bb0a896f02d96a478cc52",
+  "skills/game-level-design-1/.phoenix/selftest_evidence.json": "c0a95571e8aa078475e2debea53025e2e69e918b509e21b580d11ae567aad0da",
   "skills/game-level-design-1/references/creation/p0.md": "bf1ae89fbbda5e6dddfe6dd8084e235119edf93540311ce830ce5eac15e6832f",
   "skills/game-level-design-1/references/creation/p1.md": "9fc764b84ab405c848f5585a20c19fe1cde43da2345e25f3a9e0efecdba39187",
   "skills/game-level-design-1/references/environment/p0.md": "3369d9b6c7456193e4fb2704145e41dee441fbd309f46a5b79efb4c092473279",
@@ -37,8 +37,8 @@
   "skills/game-level-design-2/run.py": "3be8c0e447a610dd9efccea521d00739833ace0d8a8dec2aa9645111937441fb",
   "skills/game-level-design-2/selftest.py": "27da0948f472b2720fd28c81552cc1b1661c57943ea366a059a88707c116bea6",
   "skills/game-level-design-2/.phoenix/originality.json": "1fb7e6270d9f4e76c05743da3dbe0d8e374a83d109f486fead109df49a910c29",
-  "skills/game-level-design-2/.phoenix/provenance.json": "82160f0172ec1d7d2da0221a7628eacd6973175f66dd0bd46f2804b98c15ae24",
-  "skills/game-level-design-2/.phoenix/selftest_evidence.json": "b8daf89f576c18c0c19056c9a9ef6ef4d4c590dd509d78d43b0bf78e866b396b",
+  "skills/game-level-design-2/.phoenix/provenance.json": "c97ab2bcf0db85f57bb8e19f3e1b61dd783ba3c4eedb862305a05d2736148f58",
+  "skills/game-level-design-2/.phoenix/selftest_evidence.json": "b78dc7a373fc208394f5c2d0360d0faa655476a88f7b80437cf65ae9689a35d1",
   "skills/game-level-design-2/references/creation/p0.md": "70f3cde3d29f573ad40f69e354c926f9f6b6cbfe8a22de76cb6070d836c517a1",
   "skills/game-level-design-2/references/creation/p1.md": "1455b457096f3404aaa46d171a8ea73e15cc1686dea4c0147f24cd8e7f3f8575",
   "skills/game-level-design-2/references/environment/p0.md": "f28a1917767be79e9e9cfdfe649c7d4e697e5d005115f7ecdbc45b05ae648ce6",
@@ -54,8 +54,8 @@
   "skills/game-level-design-3/run.py": "4e450938ce91add8a54057557f84fd34a575411b1586d379d692d0cfcdce8678",
   "skills/game-level-design-3/selftest.py": "0e70e76e603504b1b0c2a7eed7f72f50837026a07348cce9bb8f162fba35fbfb",
   "skills/game-level-design-3/.phoenix/originality.json": "0142b13fc4317faafde2da2ea140711ba5f85fefc4a4ecd80704f1583818c036",
-  "skills/game-level-design-3/.phoenix/provenance.json": "3a5f53318c232a60232f1b9afc8f4c265bc56bff6e0842097135c770a4fcc31c",
-  "skills/game-level-design-3/.phoenix/selftest_evidence.json": "bec4f706b633893f1db7f97cb7d517499433da56346588ef24dc2456aa9fd3b7",
+  "skills/game-level-design-3/.phoenix/provenance.json": "69fa060dafb648f1be377b5ce041bbf869cd63231902efb686c9f8ce9800b16d",
+  "skills/game-level-design-3/.phoenix/selftest_evidence.json": "20bb711fabeb7c5d902ff7aa8feee85e96e1db3e59e1329b04e76ad7ff6a871b",
   "skills/game-level-design-3/references/creation/p0.md": "6106b7dcf939769199576a7ee233c565596e9cb0011c888bd8b9eacdbf622894",
   "skills/game-level-design-3/references/creation/p1.md": "daa206f3dadd5eaf0a9e07583eb1c904386c182f0ef15ebae124355d54222790",
   "skills/game-level-design-3/references/environment/p0.md": "2e5242af9c42eceb727c3115b5e4f4a6045a9170bfa23c526a8fdb72677ffaeb",
@@ -66,7 +66,7 @@
   "skills/game-level-design-3/references/production/p1.md": "4aa0c9e80cddf5062fa1a30f2e0387893dde7ca38e92663a0249d0f22c02af14",
   "skills/game-level-design-3/scripts/main.py": "cbab66e043857d24057fdb68fa8b41b537c867234b510a86b82fff250c532b36"
  },
- "sealed_at": "2026-10-18T19:59:52",
+ "sealed_at": "2026-10-18T20:59:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

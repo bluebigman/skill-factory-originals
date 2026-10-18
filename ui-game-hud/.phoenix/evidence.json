@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ui-game-hud",
- "merkle_root": "711c7dc3d83894fb5da03cadd5ca48f9a710dae55c755f1f647a43d9099142f0",
+ "merkle_root": "dc96d8b1bf2c29f92cf61f66bb220edc3371d775bc83eb91d1354a05003e5449",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ui-game-hud-1/run.py": "0987174eb04500c9959d8986ff73499c3027d93796d413d4399c4f5063bfe6c9",
   "skills/ui-game-hud-1/selftest.py": "df7a874071e49b695ae26da01f83ba0b296d31afd3afdf12d8ccbe217fded9c2",
   "skills/ui-game-hud-1/.phoenix/originality.json": "a0b1877ab0eec5f0b13e80b7f30569dcaa17fdbbec73bc6d719f44ea1d3aaa85",
-  "skills/ui-game-hud-1/.phoenix/provenance.json": "011024e0563da68beb7fc46aeeea265906b256177fb9ceea417bd830849bca70",
-  "skills/ui-game-hud-1/.phoenix/selftest_evidence.json": "9d030e6770a481b4dbb2ad3426be33d4999657a1dc213c9d740934063bc4de0b",
+  "skills/ui-game-hud-1/.phoenix/provenance.json": "74dde4127f5b9a57602d22ced0d1bcf13884a611499065a5b30e0413294bc351",
+  "skills/ui-game-hud-1/.phoenix/selftest_evidence.json": "69a7bdcd846fc0ef665aed53a2cb8cf81d809b745fb416efcf68076128d9fc6f",
   "skills/ui-game-hud-1/references/creation/p0.md": "7661ea668a87f6353e5e4f8c6691e6dfff550c7bb9058da43dbed030acba9c02",
   "skills/ui-game-hud-1/references/creation/p1.md": "e6d50ebead4fd5975462801de4e5dbd784b1a88c23bc2b9f598ba19b937951ff",
   "skills/ui-game-hud-1/references/environment/p0.md": "f398ed657821a7dcb3d5f921c92c0bbdc6fb29a6a7db598bbb83f5dfcfd6e176",
@@ -37,8 +37,8 @@
   "skills/ui-game-hud-2/run.py": "4c88a9ae73f178575b6895c5a6f448a12344f2e95808810de799385f4ce89d64",
   "skills/ui-game-hud-2/selftest.py": "6057ff0ca5e85e2d6faac10d2f0a17f71aebf5e7a67beb82ffc2bfbe3f078afb",
   "skills/ui-game-hud-2/.phoenix/originality.json": "e2cac97d47ce05999c96d3b215b3e2ab0538559c0e029e6fb007358fb55b1913",
-  "skills/ui-game-hud-2/.phoenix/provenance.json": "fba46fd9e09de3e6c2fb822aad70f1a343fbcbe0cfcfb7521998b686b9ba8329",
-  "skills/ui-game-hud-2/.phoenix/selftest_evidence.json": "a467471c381985dc1ee6b928c1db1ae3dbb01b0fe73957e51928bc2506d06390",
+  "skills/ui-game-hud-2/.phoenix/provenance.json": "71d04a77e6c358baf6829df3196c6fe74a11e3603693017078ec22f6cb0c8059",
+  "skills/ui-game-hud-2/.phoenix/selftest_evidence.json": "fa2cb0a631fdea866c203098614b5f333f32c303e7ec69a310b296afa2a7a13b",
   "skills/ui-game-hud-2/references/creation/p0.md": "74b31e74a1d68c3824cf96f09a88e07a741b4272427a681d773abcfb0dd050cd",
   "skills/ui-game-hud-2/references/creation/p1.md": "ec614df9c188b3025bad4c290544c30bc6b64e78025bc3f88098f6538d4e5409",
   "skills/ui-game-hud-2/references/environment/p0.md": "60584924e3c937edb4e4b880b6b2efefcf8d7101f8aad1ad41647cf9886975db",
@@ -54,8 +54,8 @@
   "skills/ui-game-hud-3/run.py": "0ff5c2612422eb47d4e33b2587035a8dd7b95ede53d3f92f58089e2778a827cd",
   "skills/ui-game-hud-3/selftest.py": "828ce89e714a39a7c5462648810917bbbe2c8980be26f911ee206dc186e889b6",
   "skills/ui-game-hud-3/.phoenix/originality.json": "1787894710e5170cb4e2cf39f6ff34cdf19b600545fa409826a1f7666d0b343f",
-  "skills/ui-game-hud-3/.phoenix/provenance.json": "889186512f502ef5e68839577ed980e8bc8eb055917e101042f42ae8f4715769",
-  "skills/ui-game-hud-3/.phoenix/selftest_evidence.json": "c447fdcdfd390ec74bcdce50fef70457ddd72d7ccede20e593e76145368d4917",
+  "skills/ui-game-hud-3/.phoenix/provenance.json": "8c14aaab307fc182c1fb263ebe9d2008d7dad71cc6392c000e31fad02802494c",
+  "skills/ui-game-hud-3/.phoenix/selftest_evidence.json": "c4c7fdd6a9234056db2c353ca4e2fe99dff8b1526ffcd04121aacaaa68c1ba4a",
   "skills/ui-game-hud-3/references/creation/p0.md": "4060ee40343d29632ad6a5549c85a07831970fd592c9d907c4191e03ef433ca1",
   "skills/ui-game-hud-3/references/creation/p1.md": "f9a74a6121690dfff96065134fadb8f9a6f7f5477052f453a292f4236c8a4581",
   "skills/ui-game-hud-3/references/environment/p0.md": "2db579f5d0f43216706706eec4d8b8649caf340c4eec2a1708671de47414f946",
@@ -66,7 +66,7 @@
   "skills/ui-game-hud-3/references/production/p1.md": "d95ee103694a61894da2d67ffdb89481c09042daa116b28f4ba31dd40f88751d",
   "skills/ui-game-hud-3/scripts/main.py": "69c90ad6deeb0b119e7143ca094c47593ed71bb624bf5dade03ecbfb2e903fb7"
  },
- "sealed_at": "2026-10-18T20:12:23",
+ "sealed_at": "2026-10-18T21:05:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

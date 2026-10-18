@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:08",
+ "at": "2026-10-18T20:54:41",
  "skill": "agent-obs-dashboard-2",
  "slug": "agent-obs-dashboard",
  "passed": true,

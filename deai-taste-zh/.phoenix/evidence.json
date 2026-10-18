@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "deai-taste-zh",
- "merkle_root": "856fbd400ecf6621ac425c727baa491bfa4cf7f5cea524726036eecfd416138c",
+ "merkle_root": "ec6338b035509e8ab0ab714078d2380d21fe897b6a8d842142b64bb4d0190a91",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/deai-taste-zh-1/run.py": "160a7271b53d8e4e65b354648afeb4394cfe9608ac11f96a3f478b99c3da8593",
   "skills/deai-taste-zh-1/selftest.py": "047e711de3ad4ca7aba981e468ff794565d9abb6ade43df1251b6c8646a61c65",
   "skills/deai-taste-zh-1/.phoenix/originality.json": "230dc28e8fbef487b86aeeb414c9f4141a2dd970cb641c6dddb23b6b554e45d3",
-  "skills/deai-taste-zh-1/.phoenix/provenance.json": "274d1927488eccdba15e373c81b28e6e7afbb64709694165edc6a08aa656e75d",
-  "skills/deai-taste-zh-1/.phoenix/selftest_evidence.json": "67e8806569ad4738fdac20f838d38c47f45bfa0cb3d13c8ea316ee84791e1f93",
+  "skills/deai-taste-zh-1/.phoenix/provenance.json": "46d1794f822fd8f62cdb1485d32950b4b46b415106b39d6208f1ddc693dceefb",
+  "skills/deai-taste-zh-1/.phoenix/selftest_evidence.json": "d684d964e7895340116e8b68d3bbb5af7ae276c9c00e456592edfa2e9d5fede4",
   "skills/deai-taste-zh-1/references/creation/p0.md": "0b41a9fb97c033abf479f7b4ccb7a532a20ab950bfd02b060c0ee2a2711ed625",
   "skills/deai-taste-zh-1/references/creation/p1.md": "076bf7131ef644abc76abf94dca69beb6b1bd7ab16ed4f61b15e8f51953f8602",
   "skills/deai-taste-zh-1/references/environment/p0.md": "4e0a3d15432076fedf4b4b8eea08ac98cbe0b96d1250c03c2a8dab9412526883",
@@ -37,8 +37,8 @@
   "skills/deai-taste-zh-2/run.py": "a87d97a69146f6e5ef622499be2b8ad20beffdefb7d3f2441c1fc7d8a7ff8870",
   "skills/deai-taste-zh-2/selftest.py": "9eb2a2c72c94e9807260219758253553237a8b4c189b110178d26e2d0c7d01f5",
   "skills/deai-taste-zh-2/.phoenix/originality.json": "e3473e62b3a5dcebbd7292cdec8b995838f6da39e727c9556a3894b9fef3a19d",
-  "skills/deai-taste-zh-2/.phoenix/provenance.json": "a19ba08a901535ce0f7c779d9e32334ccbe3a3becc40f1522cf5ec96ced7a7d3",
-  "skills/deai-taste-zh-2/.phoenix/selftest_evidence.json": "0d32d0197bd55ad7ebc1e5a595c4a5df3dcfa3ee661e67d64de19f3bd5b029e5",
+  "skills/deai-taste-zh-2/.phoenix/provenance.json": "6f8303ac7d9bffcfca84ba20cebbbc8ac9aaf0e8be61ec53e469bc3d4c665094",
+  "skills/deai-taste-zh-2/.phoenix/selftest_evidence.json": "b5805de149f7489f1c86ee8d2f4c110d646e66d5c47e8600357b254008cc7219",
   "skills/deai-taste-zh-2/references/creation/p0.md": "362f64ebe163aea9059ee34d5e7c3d0250d5d47bd8cb6b3810ae2a3ee8d3b598",
   "skills/deai-taste-zh-2/references/creation/p1.md": "ace4d4d8e64eaaaa5a6aaf1637b98948177d333e8bfcb5db6d7f6d6c67758b30",
   "skills/deai-taste-zh-2/references/environment/p0.md": "e5077dd5d3405dfc6db91f89ea9936b6d98297aa1c34e855814824208b4069fc",
@@ -54,8 +54,8 @@
   "skills/deai-taste-zh-3/run.py": "9208ddc71653d9dd8da5ff5377e0f30cc12b8edacf70f57f1938982e744b0cbe",
   "skills/deai-taste-zh-3/selftest.py": "4e5c501f6d276da462ef4192526bb61ba4431dfe705d71c941203358ae2cb4e0",
   "skills/deai-taste-zh-3/.phoenix/originality.json": "be33917d956077bfc34e0f113da250e1a835c8085cc9b04fcd467b0011af5e63",
-  "skills/deai-taste-zh-3/.phoenix/provenance.json": "dde21868004d2ab9b161c9cb0fee8e5941004e0acc48021739a54409406ba03a",
-  "skills/deai-taste-zh-3/.phoenix/selftest_evidence.json": "345f384f4ed14977ab85f439512cde0223fa43c031e33466796deddc04006f78",
+  "skills/deai-taste-zh-3/.phoenix/provenance.json": "de6f27dbde07bb752c71c329b162efe14e7ed2cd28dfc227f55146f513e61a58",
+  "skills/deai-taste-zh-3/.phoenix/selftest_evidence.json": "8c51babe63df0dc159dd10bf0446b3109ae43fbc9d8200284a7de8d012cb0d7c",
   "skills/deai-taste-zh-3/references/creation/p0.md": "ca804efdb9e590e1a4ba8a81971342240043c9d2a9af8822ff6e695040bb89c0",
   "skills/deai-taste-zh-3/references/creation/p1.md": "8621b0661a13edcadc5f98766e27631670f5b76d1682d0a70c6d73c3f6768755",
   "skills/deai-taste-zh-3/references/environment/p0.md": "824f624d63d7bbf0ca5551b30f59b3df0a1448353918cd3d95db17399d17e5f2",
@@ -66,7 +66,7 @@
   "skills/deai-taste-zh-3/references/production/p1.md": "5227d646509edb00a7c2f34fc558e5f4beb13d141c775ac6d8ddde46bb9cf3f7",
   "skills/deai-taste-zh-3/scripts/main.py": "0204b382304fafe8464b1b57f46ef11fe797766467e6a8bc208d8f3b23920940"
  },
- "sealed_at": "2026-10-18T19:56:08",
+ "sealed_at": "2026-10-18T20:57:01",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "report-chart-coach",
- "merkle_root": "7604edf5981afc72b3f9a9cc62a074a5be498851173b8d16ebe2c5b88792e387",
+ "merkle_root": "6ba4975c2f7095526d117330ead9e3554cd6aa266bb5a3e434e3c041879cc436",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/report-chart-coach-1/run.py": "ae61923e4531f82f5932e25b66d36f2555cfe9f7a385f2c6c394e17401f4cf52",
   "skills/report-chart-coach-1/selftest.py": "89821c984a25fa6e152484cb65b9a1f70f01ea0d1c16fe0aa5b818945238d7f8",
   "skills/report-chart-coach-1/.phoenix/originality.json": "8e8ec29e87da4701aafb49b9c453cebf7ea0d97cd1e1516ff3a0da70764f2b42",
-  "skills/report-chart-coach-1/.phoenix/provenance.json": "de36a89798786bec51bb85bf98ef7abe1f535bdcbd1f860e0930c7a4d9bb1ec0",
-  "skills/report-chart-coach-1/.phoenix/selftest_evidence.json": "098cc68c078541d95e99ad23815d9887f039514b451adff3c0b939a3faf70c31",
+  "skills/report-chart-coach-1/.phoenix/provenance.json": "6fb7bd125b144d794ac9f1c65517b9657fa3b139ab925b0c6349e75cb03d1fbc",
+  "skills/report-chart-coach-1/.phoenix/selftest_evidence.json": "88d55992e13cf18016734ed0f9c9893543d393e66f24f86de69aa109b1264aef",
   "skills/report-chart-coach-1/references/creation/p0.md": "63ab17ef1627404ab418ff76cf7b16fd71856725662573153174310b12a9350a",
   "skills/report-chart-coach-1/references/creation/p1.md": "8c7b90a5b207dcea69306f0fed8c77076b51027e9afe120e3ca54092376c9359",
   "skills/report-chart-coach-1/references/environment/p0.md": "49770521a373f7a02348fa5fb285c2df387cf00bbc9a1db162d59cd09f9ec705",
@@ -37,8 +37,8 @@
   "skills/report-chart-coach-2/run.py": "41b0a80ed0f9d716d58b1fcf3ab8934cd2e0f4a7422a2d30db151d41143b5e7b",
   "skills/report-chart-coach-2/selftest.py": "07b82e76019d72db9cbec489905463ac739c5ba8382b6114540c1f45b39dd900",
   "skills/report-chart-coach-2/.phoenix/originality.json": "59c8ab9b92d0879d1744f5a01ed1dab9d58cdae5f587f3ba451721345b3c217b",
-  "skills/report-chart-coach-2/.phoenix/provenance.json": "70c6064fe8e2691be28b8e5b24bfe1d0933caa948b7d24709b2e8063016e772f",
-  "skills/report-chart-coach-2/.phoenix/selftest_evidence.json": "cce16730a4fbdc74bc40c02fbc23043be28e9631d550e8662c606938d45281f7",
+  "skills/report-chart-coach-2/.phoenix/provenance.json": "b191122d47647c0b31c4b3ccd5f8db853d05237177b8804852aa0660c4aa7e46",
+  "skills/report-chart-coach-2/.phoenix/selftest_evidence.json": "9485ace7abca00991ee06493370c17515273ca27a92079339c063d5db0e27b41",
   "skills/report-chart-coach-2/references/creation/p0.md": "eb249f6825534c33237508a99237922034919c5b21349d7eecc7657410796be3",
   "skills/report-chart-coach-2/references/creation/p1.md": "e0f66b50f03cacc99ff7c379e5c50fc10e6fe0d96a55fc4af8da7ee96cf76355",
   "skills/report-chart-coach-2/references/environment/p0.md": "f461b2c8143619b9db07eb83a989d6bab37a848600be5cdd3f645dbcd3d96647",
@@ -54,8 +54,8 @@
   "skills/report-chart-coach-3/run.py": "53b548e433834ce77df0a83c4e1f0bd44a2ef7e751c5ec4a15280fc0d5cdf0c2",
   "skills/report-chart-coach-3/selftest.py": "f7e3a7814491c3d23eafdf4a366477a9f7dfa8a6a1dc903cd32bb74a35901641",
   "skills/report-chart-coach-3/.phoenix/originality.json": "370d551d9715abfb5b71f6e864eda63c38e13133d64e64ef0d09edec0106b782",
-  "skills/report-chart-coach-3/.phoenix/provenance.json": "bce466e760978344139c084db8fd7f172659063a9e8b3b05ea75cf004c8acb59",
-  "skills/report-chart-coach-3/.phoenix/selftest_evidence.json": "00d748f28dccd3e1741d4cbbe6d9b269aa6a76122801258619d205cb2ac94bfa",
+  "skills/report-chart-coach-3/.phoenix/provenance.json": "9ed99e716d0bef94dba694913ecba893c398d02a94a117c03c1cdcc39d78a02f",
+  "skills/report-chart-coach-3/.phoenix/selftest_evidence.json": "022b0cb2b875ed760999bb4929afa128c2846f2a1266d50269c662ca5d105b5a",
   "skills/report-chart-coach-3/references/creation/p0.md": "4e1d4ecf5cc13d3589120d9df86ac1b29a05ad47980e0fe20f74eac0631524c2",
   "skills/report-chart-coach-3/references/creation/p1.md": "87fc1186141f5f331e058f41e4a9470828ecfef9aada342fec9e1719bdf0fa6c",
   "skills/report-chart-coach-3/references/environment/p0.md": "cfc5b48599c3852483a1caaea988b82a1ca87d3a7945b345cbf16ebf9a2949fe",
@@ -66,7 +66,7 @@
   "skills/report-chart-coach-3/references/production/p1.md": "ed11879b8dc765409f08bcc7fe4f793e37c09028ba26a74d780320b799239d9d",
   "skills/report-chart-coach-3/scripts/main.py": "5ab94bc1a90d603b3f1f200068c51ddcafbdbd4ccb2dfe23fe6a72061dc8ee08"
  },
- "sealed_at": "2026-10-18T20:07:32",
+ "sealed_at": "2026-10-18T21:02:57",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

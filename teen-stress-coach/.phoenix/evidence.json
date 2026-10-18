@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "teen-stress-coach",
- "merkle_root": "2c0f368573722defbc4bdd4372d7e8ef6c10f9ac8987b0437a3c337c0446cac1",
+ "merkle_root": "59624e7828418f94041240e9dc938deb6fca9f0c266b514c00322173681c743f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/teen-stress-coach-1/run.py": "3269b552a6c009a4a759e6914f5e6b145b4d36867621248b9f0b79e2a7de9746",
   "skills/teen-stress-coach-1/selftest.py": "ace0f8523608289016ca21b740c7e704f57ee8330ec5c76390fd0471b845dd5a",
   "skills/teen-stress-coach-1/.phoenix/originality.json": "c63ce2fc36c187b8c05a561c66e1a6426a73a0755a4f60c7363cc8dfafa1cd7b",
-  "skills/teen-stress-coach-1/.phoenix/provenance.json": "9a920cb4976e1e0032868399275e57c5637f0db3f82b8e570ad35f560b6c91e6",
-  "skills/teen-stress-coach-1/.phoenix/selftest_evidence.json": "134c8867bc71f2ad62a2bb3c4dafa72109f9943a61145f6cdac0ef18eb101d8c",
+  "skills/teen-stress-coach-1/.phoenix/provenance.json": "575698b59141d044128aa3845ae862cdc94213bdbe0d824e5d4799342d4e6d9b",
+  "skills/teen-stress-coach-1/.phoenix/selftest_evidence.json": "3328e702d04a3a11ba789e7674432157766eb3d4946b5a2d7f1f017b61299dc0",
   "skills/teen-stress-coach-1/references/creation/p0.md": "50a422179386e2f9c08a9b54873e9d309aa1267fec834f8ee933ea7bcadc359f",
   "skills/teen-stress-coach-1/references/creation/p1.md": "c585df453e450c5052932c1ff630161d41f64ada547fee990d6c3e9089a9f2d6",
   "skills/teen-stress-coach-1/references/environment/p0.md": "33fe586ec183cb4949fa5b7ba76b3505e3a293f07195665b2e32127664084af6",
@@ -37,8 +37,8 @@
   "skills/teen-stress-coach-2/run.py": "745fad418b83f40d7202b5c0f453eac69c6e4df8403eea5431552a3c33f6c0bd",
   "skills/teen-stress-coach-2/selftest.py": "3f00fdcf7edd215a02da9f8a9633cce134df40e3d08e906942ed845f34dd8b85",
   "skills/teen-stress-coach-2/.phoenix/originality.json": "1998061bfec2bb28c0b3aaef47a7bc529ec43c00488b0f8b70c2ab67ffe47cc8",
-  "skills/teen-stress-coach-2/.phoenix/provenance.json": "6cc5d8c54d62d7e02928c3dce84f0bde6e62ea1e8e7900ea51739ade292d8661",
-  "skills/teen-stress-coach-2/.phoenix/selftest_evidence.json": "c479cc8b77ad785a62fa0fc27b9a5b19072ec6da91754c1c20eb0f6be557c5c6",
+  "skills/teen-stress-coach-2/.phoenix/provenance.json": "5edf7e6436dc56dd6ef6a521882230b420e03ed464d76dfef6399905539ed873",
+  "skills/teen-stress-coach-2/.phoenix/selftest_evidence.json": "f6e4039618167cf9e7813de8bca0379483d3a518ff8a81b1d4f149628fb265da",
   "skills/teen-stress-coach-2/references/creation/p0.md": "ac1e87bdf3adba044b468a9710583552348c052c9fbf94174647222a7ab9ac0b",
   "skills/teen-stress-coach-2/references/creation/p1.md": "5d98ac27131436c200345219dfa1f90b0f0ebec2cf078c089ba475c31a8795dc",
   "skills/teen-stress-coach-2/references/environment/p0.md": "de4b8d5f1c999424b0a9347223de54ab0d9225e764b81dd6acb9cf742979c067",
@@ -54,8 +54,8 @@
   "skills/teen-stress-coach-3/run.py": "e6eef923a7bec11f969c46d733c4eed92704a70d2e86c0c947e633371db55bbe",
   "skills/teen-stress-coach-3/selftest.py": "108d64509db33d42150260891086231b64d71bbafc44edac2ef0cb377b793d30",
   "skills/teen-stress-coach-3/.phoenix/originality.json": "bef9aa160ede222a49c227549c293f37cdd34410e4efc818d8e31267e73c0cbf",
-  "skills/teen-stress-coach-3/.phoenix/provenance.json": "2dedb66916821e3c528267199b36a716b3e8888749a8f3bfae09b82ff8c3ef57",
-  "skills/teen-stress-coach-3/.phoenix/selftest_evidence.json": "945b2a30866f1bcd6409026713b7cad7c99210c047a1c679fc41e8dfbfd98cea",
+  "skills/teen-stress-coach-3/.phoenix/provenance.json": "6706e6ccb4683dc9ecb9417d7404d549ecbff3d9ab3ad53b4c6a20b3c38f0c9e",
+  "skills/teen-stress-coach-3/.phoenix/selftest_evidence.json": "e73243f65dd168818e215c3732d1c4d335523e7d2f2c9b2334738c6e032974fa",
   "skills/teen-stress-coach-3/references/creation/p0.md": "741408bb1482527e896c966a97e8a9a526d7a7411c2464c04a3dfb35a48d116d",
   "skills/teen-stress-coach-3/references/creation/p1.md": "8185e011a9a068818d1a2dfd947d21cff50fe9d9e6d335ebfd079000b8e4ebfe",
   "skills/teen-stress-coach-3/references/environment/p0.md": "7c5722b6549043cff94132a58eb7914ce94e4d3209395d70cec66c9d12c3c048",
@@ -66,7 +66,7 @@
   "skills/teen-stress-coach-3/references/production/p1.md": "9a448437558cd4054dd03865e8946f30f2eba79ba1b82d5814ad2cdd638d3404",
   "skills/teen-stress-coach-3/scripts/main.py": "12ae77cbf3ca993bd7f1720142d207d342c20552535302da695f717f55902533"
  },
- "sealed_at": "2026-10-18T20:11:30",
+ "sealed_at": "2026-10-18T21:04:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

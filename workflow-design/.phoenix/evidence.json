@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "workflow-design",
- "merkle_root": "7aaa7c21c9b0a80a207c1873d88301f432325ad99631a054f51a445986f7d209",
+ "merkle_root": "b5189d55f4fcfe155b453addf74d5222eff600f3669f2ffaaf2dbfe817766b4d",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/workflow-design-1/run.py": "9c785f95b6dd207007f81d3abfe7d1eb7432f2dfd236fcbdbb80ae229b71a551",
   "skills/workflow-design-1/selftest.py": "67bf45390aa843fd2b639ee519f2694cd8c48f60f1d4c471fe61c2558864afd6",
   "skills/workflow-design-1/.phoenix/originality.json": "68800f29524bc137c49a165c343decf535976cd0e91a5945db5351ad6792a73b",
-  "skills/workflow-design-1/.phoenix/provenance.json": "cf6bb4feb1932672e36964c88caebf19f3d9a4bfbc91a1e172f53a6c16d5bde3",
-  "skills/workflow-design-1/.phoenix/selftest_evidence.json": "a43e19875dad452dda50a922a025d1621aaa3f7880a9938c3c42754f9495d377",
+  "skills/workflow-design-1/.phoenix/provenance.json": "1ee9cc3d6c9094443bad335153933391607ddc681178dcfced4caccdccabe7c5",
+  "skills/workflow-design-1/.phoenix/selftest_evidence.json": "9532be14dabe0a0638e4cc54fca7c669fafddb4ae2f8468206c55990302bb23a",
   "skills/workflow-design-1/references/creation/p0.md": "4a5dff34cc032fe03b0d76298db0f801358d412f0a2517c09afe942aa19f60b8",
   "skills/workflow-design-1/references/creation/p1.md": "e293b2c0b6c70dedf6b2a75a885545005222625a65c67e75f94d8891c259d8c6",
   "skills/workflow-design-1/references/environment/p0.md": "93ce9351a8e62588e79abde676f987251d049c40b37740295c7358af9c20b9f5",
@@ -37,8 +37,8 @@
   "skills/workflow-design-2/run.py": "3f16b636da5ea2429e0ee454c9172b67b96ac34ef3c8dc85e706e20c541bb2d5",
   "skills/workflow-design-2/selftest.py": "a60d9c35389d87722f95062596aedabc11f2310b33b85191361b03e9147d9950",
   "skills/workflow-design-2/.phoenix/originality.json": "a821882d713a812f6e4cd216dad015eb3c0350d889a433d6d5cdf7a30c1ccd14",
-  "skills/workflow-design-2/.phoenix/provenance.json": "e0d3a893512698b89a7d0ec04deeda1392682744b2421362aa93ddfc5320370c",
-  "skills/workflow-design-2/.phoenix/selftest_evidence.json": "d0aff00fc32021e6c0b88dcec27da2660368a25e4d594797794764ca454dbf67",
+  "skills/workflow-design-2/.phoenix/provenance.json": "e7bb055a978fda2e2f9ae8a56ad917d31e00011a15b65cc0399c1e260c2e12e4",
+  "skills/workflow-design-2/.phoenix/selftest_evidence.json": "e3b53a1a2748a0132717b7968c362ee5925b6258f5c71ee0d07f8a578b043103",
   "skills/workflow-design-2/references/creation/p0.md": "7c0aa3b64c559b4e1fa2332f75d90cb1b8937134b244c252af586eeb4e272502",
   "skills/workflow-design-2/references/creation/p1.md": "5e4dbeaf0c0cfa92ca194619be1f1c036e857930dc70346a8d97f8a5fb095566",
   "skills/workflow-design-2/references/environment/p0.md": "86c12d37277aa779a38eacab9452f85e80a7d0fee46da738649842ec4dd57352",
@@ -54,8 +54,8 @@
   "skills/workflow-design-3/run.py": "9444bbff06c457b0d9d440cd05a7a0acf6ea9132ff7cf1cd317cd68953154cdf",
   "skills/workflow-design-3/selftest.py": "f47e7c566ec2a71b9914ea4b3e2d834846692f750e6ad1d06af216df19ef671b",
   "skills/workflow-design-3/.phoenix/originality.json": "c174916e8f3981f9f1b9758ad06cd8ae014c33353f3671c4fbce16a0e062a278",
-  "skills/workflow-design-3/.phoenix/provenance.json": "1ac0c410a64888d93121399a4aafb7fb4e68a67ec68fb4ee110268a96f60a6ee",
-  "skills/workflow-design-3/.phoenix/selftest_evidence.json": "2569b5c2ff40c91ddce05cdfb3e19ad2bb8eab1e7e6282171fbb42ce013899dc",
+  "skills/workflow-design-3/.phoenix/provenance.json": "0d50265979f9a254a93311868af84049fae7bcb525df1910707c74881742939b",
+  "skills/workflow-design-3/.phoenix/selftest_evidence.json": "49cf8bd514d82e5a65e240b115bee5ebbed3ade234bac71c937d08807dc468a9",
   "skills/workflow-design-3/references/creation/p0.md": "2c1a8a6fb6a3a2a691cb69acfd5e979345fe75c009215d8d740922765d5d998a",
   "skills/workflow-design-3/references/creation/p1.md": "d61ac00d4ca930cef73f2d126e28ce95ddd9f607570365486458902512b7c1eb",
   "skills/workflow-design-3/references/environment/p0.md": "1efdbe44fea78761ee044cec58b96e4dd18d99ac1829add81b97ce2e4864975d",
@@ -66,7 +66,7 @@
   "skills/workflow-design-3/references/production/p1.md": "af693118b58a2b5d1e3048e4596edc46eb89fce0452ae6e03ac75fcacf6b0fa4",
   "skills/workflow-design-3/scripts/main.py": "58ab6ed641bd6a876eceac9a579b43edd495d88c4ee01372901050f2b6ada2d2"
  },
- "sealed_at": "2026-10-18T20:13:07",
+ "sealed_at": "2026-10-18T21:05:26",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "dep-audit-scan",
- "merkle_root": "2f1ee2374e2cac66ee9e5bab09f35cc10bc355f24c81b50588541b5c99480a93",
+ "merkle_root": "e31628517c659901e19b39cf7cb41bc3fc64938e4eb08a5beca7ec76aec4c443",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/dep-audit-scan-1/run.py": "36bd3a6b458073a98488502f89c83d9dc798b6ea6852e8ff7be266f3c7812221",
   "skills/dep-audit-scan-1/selftest.py": "b555d2e1e2005ee867e783bef64a356b52813b0349c53599a7f5c41c9cd42fee",
   "skills/dep-audit-scan-1/.phoenix/originality.json": "404ad111710d47748341963f176428055e6be4c28ad057b13de72e6219b6504a",
-  "skills/dep-audit-scan-1/.phoenix/provenance.json": "89d8ffa2c17f5e082738e5b3a58bd4eb120de3a766907324cbdc636e0ddcc643",
-  "skills/dep-audit-scan-1/.phoenix/selftest_evidence.json": "96da10ee61d05a6109be56cb077eb7bea64bb4fc9c201331f520a6386b8d60b7",
+  "skills/dep-audit-scan-1/.phoenix/provenance.json": "d1164f5e855a0bb373ef008824e859257e4223d6301dd96f4b876172bc360980",
+  "skills/dep-audit-scan-1/.phoenix/selftest_evidence.json": "98f14ca3716899081daa49c5c6bca6658d51ca2270da5964a7eac20ea6b731df",
   "skills/dep-audit-scan-1/references/creation/p0.md": "29ceb2143b32e7a83238f526e4f1f02ca4e0cdb15d516658cc04d69757ca6b98",
   "skills/dep-audit-scan-1/references/creation/p1.md": "f891a6deab880bd9a9630767dcdd6a5d80aa475ff17579db333e3a94944ad48c",
   "skills/dep-audit-scan-1/references/environment/p0.md": "3886e164f1ac347b333453fd109c530a33e28ef17ab8ded65f01c56a958cfdeb",
@@ -37,8 +37,8 @@
   "skills/dep-audit-scan-2/run.py": "89fbd7491629fa2c1d730e81f8c9dc4bba3c264d0483f631a7189905a2251b97",
   "skills/dep-audit-scan-2/selftest.py": "93ef677a0f0615c2a7af7dd67f3d1b66a677ddd197df5d2824615d0054f04fdd",
   "skills/dep-audit-scan-2/.phoenix/originality.json": "e2c61cf9075aa342914a0dea9454852895a794c2dea7f037b6e8ce1afbde8ace",
-  "skills/dep-audit-scan-2/.phoenix/provenance.json": "e096c9a9d79f03e3831c9621758eda5ef79c5a5d5bbc8eb82bdfb457df5f5080",
-  "skills/dep-audit-scan-2/.phoenix/selftest_evidence.json": "942b1994b0e101474c30d2587c1dcce76fe648ee8ae5f7e9144c0dd6e49c4471",
+  "skills/dep-audit-scan-2/.phoenix/provenance.json": "a6193e0bbf47d24376f5438cb55ce74300f9bba688379fc345bf74d4fb00cfd3",
+  "skills/dep-audit-scan-2/.phoenix/selftest_evidence.json": "bfbb000328e8941e5fd9f9d2ab402783c11e023a0651f37ec4156f65febfe6b3",
   "skills/dep-audit-scan-2/references/creation/p0.md": "bbca6d9fe6882d232ef076f9891a28722b4ff99ef9c7d3bc3dee85e1da10b052",
   "skills/dep-audit-scan-2/references/creation/p1.md": "6ded22ee8d2c29dffeda9391c231e259388cad2f487d34b24b525610db948b57",
   "skills/dep-audit-scan-2/references/environment/p0.md": "d42efe4ddb665f25908d231da759a37e84bb49c6a3e4fb8b35d0c31a0af3d5e2",
@@ -54,8 +54,8 @@
   "skills/dep-audit-scan-3/run.py": "c1a95fe841ec6a8be4cb482d6b369c1e0be66d56e00b702be5eb64e0855b93c1",
   "skills/dep-audit-scan-3/selftest.py": "6902aede65bb8b987f919dbe8c3064edab3db5bbd70e556cc1c0e59eb00aec5c",
   "skills/dep-audit-scan-3/.phoenix/originality.json": "8371baadb97227539c958c482f6b1118250764a2f1bee4dbd7846babe37a3910",
-  "skills/dep-audit-scan-3/.phoenix/provenance.json": "6a7b3505ad6febb66aa2f240f0ceba66dfaae910b5e42a4939a5c2134ef15d41",
-  "skills/dep-audit-scan-3/.phoenix/selftest_evidence.json": "bf5b88692d25fe8433cb8316449870d2b3a8e7b1683a1a6d96f8ae01c7ee138b",
+  "skills/dep-audit-scan-3/.phoenix/provenance.json": "a27c50f88e6baeec17ba47f3b221b99bb01678d3d20e95d86dceb0ec4d610479",
+  "skills/dep-audit-scan-3/.phoenix/selftest_evidence.json": "ead06d7665937f80c5876aa846ff86ddf3bcb9877dd707803702660f3334a191",
   "skills/dep-audit-scan-3/references/creation/p0.md": "f3e3ee21ecc2d010a9ab59a86a20ace9fa64c70d0ef6f9b6be93beca9c9168aa",
   "skills/dep-audit-scan-3/references/creation/p1.md": "12a0aa4c661d2b0b8b5a6f17344f7db7d07a90721a3962d3567fcebb33740c15",
   "skills/dep-audit-scan-3/references/environment/p0.md": "f1d2353e36567fe415ba730ba174664d3890bb570583356baabaf04ae7539a7a",
@@ -66,7 +66,7 @@
   "skills/dep-audit-scan-3/references/production/p1.md": "3db04805a59bb7fa6339856205aa12b7c3ed352bc87f6a54947665a2e2bb5453",
   "skills/dep-audit-scan-3/scripts/main.py": "ea60dd5c810e6d49e007742a4a8da064ea17f46b92f8a50d7f5af1533c0badb2"
  },
- "sealed_at": "2026-10-18T19:56:18",
+ "sealed_at": "2026-10-18T20:57:06",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

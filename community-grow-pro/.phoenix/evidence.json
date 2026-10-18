@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "community-grow-pro",
- "merkle_root": "4084bbcce83b2d96c9227df7de3e2061d55980432953600ef9f38615e31b9fce",
+ "merkle_root": "20ff94ff37b632d9b9f9e3da537b96af15d59910c5320f38032fc5cf86a42cd9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/community-grow-pro-1/run.py": "52ab42e8e113c298141bf0d5c503c7f4beac09a8de2ed5ca346a01ffe4c8a95f",
   "skills/community-grow-pro-1/selftest.py": "db998cbdd565acdaedc0eb0dc82750e7e1ec0c6a0a877040abfe28816282ef52",
   "skills/community-grow-pro-1/.phoenix/originality.json": "e4f302123428164accf827f2fb5c59268e8bf4f245848f85158ac49e58bd8ec1",
-  "skills/community-grow-pro-1/.phoenix/provenance.json": "073c80ecb70a5e7fca55c59ba41b382503971e558abe2837a1e99e3732e99c4d",
-  "skills/community-grow-pro-1/.phoenix/selftest_evidence.json": "935c53be9c72599b93d1930ea8951019e6c689b11e4dae73318ea1b7f855edc2",
+  "skills/community-grow-pro-1/.phoenix/provenance.json": "ca2755d59cf8af90a53f542f1c966402437b02800a7d1e84a43f532883d45196",
+  "skills/community-grow-pro-1/.phoenix/selftest_evidence.json": "770635556f302bbb5223ebb1aef92314cdc9e4c85d648de74dd91d56cd99bb7b",
   "skills/community-grow-pro-1/references/creation/p0.md": "18d0308d54ed66199be48cc339cd3462f4cc4653267bef85d7e0ab0a588c0840",
   "skills/community-grow-pro-1/references/creation/p1.md": "64abad990b080afc3de148cbbafec25adfee6d3c80029194fc9a30608c643722",
   "skills/community-grow-pro-1/references/environment/p0.md": "e7c2c4dce6bec6e401fdc40207c1087d82d1a425951bab0bb172188d43185921",
@@ -37,8 +37,8 @@
   "skills/community-grow-pro-2/run.py": "808375b392a6d61d54d5d506e54835001534e32008245025d651cd13752ed66b",
   "skills/community-grow-pro-2/selftest.py": "7882fbeb7709931ab3888b37b60d88b3507a25f2a06d55058af72752970fa8e6",
   "skills/community-grow-pro-2/.phoenix/originality.json": "7ad3a37e673e1f15dd8497817840a18bf92eff7d2721f2c67a70b74eab53da29",
-  "skills/community-grow-pro-2/.phoenix/provenance.json": "58ed797933d0c1a4daa6efbd9bf467ca8e57aae42af444e431c04abe07850a46",
-  "skills/community-grow-pro-2/.phoenix/selftest_evidence.json": "daf83e932022f0abb2d653115150fd3cf5354dca25eccdca27b57fa9e2fa73ab",
+  "skills/community-grow-pro-2/.phoenix/provenance.json": "ceceeceb68649e9208e7e039aa55ceefc7e7a8228675b373b3afb3a4a3f07549",
+  "skills/community-grow-pro-2/.phoenix/selftest_evidence.json": "c47e65d5f7723b576bb6925d7ae50bcb80eb59d12e88dd5cd4e90dc31c299280",
   "skills/community-grow-pro-2/references/creation/p0.md": "9c2432db3e1c85c60bc43352a6b3a8b32ff15a2ba5308ba2dfe91e6ed94fc618",
   "skills/community-grow-pro-2/references/creation/p1.md": "c66cc742554caf565b1aecf50666525e36f6b1c88710eb966d10afc1eb7be6c7",
   "skills/community-grow-pro-2/references/environment/p0.md": "431d205d86fe7111bf7b81cb1a5b77a3519155aa5957c37ac657f74f4d6dd2ef",
@@ -54,8 +54,8 @@
   "skills/community-grow-pro-3/run.py": "7c74a717cc5d8bb39818f6a59d84ac2024f662783c025ca38fb65df0c3bc6f42",
   "skills/community-grow-pro-3/selftest.py": "d3d50a0b1fe4c18b28a519f538dc25e7c7171905fd34be3d15a0faf5341a413f",
   "skills/community-grow-pro-3/.phoenix/originality.json": "d03ce5e3dfeb9dc2479fd1e947f3690194771f7f4ec8c18de229ed460c9debed",
-  "skills/community-grow-pro-3/.phoenix/provenance.json": "190d3f0329c28cd9e3a0f292df64856d850ec47a57b7cd8321eb03f4510f4b56",
-  "skills/community-grow-pro-3/.phoenix/selftest_evidence.json": "c3fcea1c5b6475074b1c8b1c151a25ea901c8efb36976d3fbf1d3dd6a7834d50",
+  "skills/community-grow-pro-3/.phoenix/provenance.json": "0e84fe1119b8a6655ef32eef1ccc79bd89ac558bc8e9b0eb882daf5e9f642149",
+  "skills/community-grow-pro-3/.phoenix/selftest_evidence.json": "0879b2eceda5826df9f8e252a1367e8e2a3ef39886d15c841a1c98baf40db1d6",
   "skills/community-grow-pro-3/references/creation/p0.md": "c1e2340549fe28868bf1a83f9c2e4dcb54457745c88492a537001027b00b5e1d",
   "skills/community-grow-pro-3/references/creation/p1.md": "f9f316da99bc0c36686ef92409cebd885731b0245204febc2dbeaa99454e42b3",
   "skills/community-grow-pro-3/references/environment/p0.md": "461d0ba677a4c92411c1dccee0a4c3b54ed1c67949dfafddfa263d08ebfe39a0",
@@ -66,7 +66,7 @@
   "skills/community-grow-pro-3/references/production/p1.md": "0b72863af35073d86f96286255e7782e8c8b92649b2627dd4de41f2508f2b65c",
   "skills/community-grow-pro-3/scripts/main.py": "d5ed500ecaa1ba54ec8c99c0fd70b0a3caeb9fe7595b399a00ab3697fa94de93"
  },
- "sealed_at": "2026-10-18T19:53:53",
+ "sealed_at": "2026-10-18T20:55:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,9 +1,8 @@
 {
- "schema": "evidence/v2",
- "algorithm": "sha256-merkle",
+ "schema": "phoenix-evidence/1",
  "slug": "forge-demo-incident",
- "sealed_at": "2026-10-18T20:37:44",
- "leaf_count": 35,
+ "merkle_root": "777de7cf365caa62f81f6eada7159160a1863857c66d6a42ee27acde0bad9a6a",
+ "leaf_count": 38,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
   "README.md": "f1c4efa10c081200024331b47770db73ecb47ee693523665d4c17dabfb09e43e",
@@ -11,7 +10,7 @@
   "capability.json": "2f3582f7ed1b4b4ff30e576a193bd207fdbe8fd2890cd21a57999116ca102de5",
   "config.json": "ef87505ccc71beee1e3f3fd689da48423de0fab563cdc457aeff2372f30cd052",
   ".codebuddy-plugin/plugin.json": "b43f6dfa85d956d54d7f7f30efaeb28107afd3b29eaf2320e60a518202758fd2",
-  ".phoenix/provenance.json": "d7f6ad9265969ea0dd1a39df9706987b4055d1d2c16c1b2dc892a5c831d35176",
+  ".phoenix/provenance.json": "ef7dfe83e207f27be8ad6be1004a6058c4c0486e4f6f947ef8afa2288cac3207",
   ".well-known/agent-card.json": "002b68b90c98b2bcf22540f224e36875a3f79600c08ae4926752c90f3fe85701",
   "a2a/server.py": "3ea6a4966427456775f59d8c926373eb8555530a0b192dfc1a77053d6d1bc12b",
   "agents/forge-demo-incident.md": "4aa7b9a5aba6ad8dc14159121b8af28cb73350167d02f1b9714a8515c7d52acb",
@@ -22,7 +21,8 @@
   "skills/forge-demo-incident-1/run.py": "50a91f50a4da14c00a4e7f8c7b19c96d10b8012387e9464bb0d56ae09aae4952",
   "skills/forge-demo-incident-1/selftest.py": "9befda7f95afc990e425e4d40ea9d34c45b9dabbb1179b5bbf130cde9db742f8",
   "skills/forge-demo-incident-1/.phoenix/originality.json": "2918522d6f298ed5344ce75c274f5d1a939168eeed8bf2bc8dfb151c6a73046a",
-  "skills/forge-demo-incident-1/.phoenix/provenance.json": "06c30ae96261a2f50ae417a00e7e767504aeb221630d93a167fc2f4340f6e075",
+  "skills/forge-demo-incident-1/.phoenix/provenance.json": "90c7dceae2b912692af7a2270c831f8ec47b7e2f0ad4e510491ad3a7519946fe",
+  "skills/forge-demo-incident-1/.phoenix/selftest_evidence.json": "a87fdae1b3e5ba3fa05b1169185f88f61510da0b54982128388aaf1eaf126095",
   "skills/forge-demo-incident-1/scripts/main.py": "ee20109dc75619c9f86f1bd180ee7b3d988d9eb254b155d0845363290a285f4d",
   "skills/forge-demo-incident-2/LICENSE": "1d4d70aae26ed295b2f1fed4feb5cabfba117516382efd7f3a4b2eab24d9006d",
   "skills/forge-demo-incident-2/SKILL.md": "00e5f92fa88b53b74cb5804bc5795c3ce9d605dde89fac51ca0ab02c76d15577",
@@ -30,7 +30,8 @@
   "skills/forge-demo-incident-2/run.py": "d2769890b8281b22cd1a2126f39dff0993a512e8cbf92120444d4b097909ad7c",
   "skills/forge-demo-incident-2/selftest.py": "0986e32cc04f61450653a5cd41676c49554cb37c163ad020400035b2fe93c7b6",
   "skills/forge-demo-incident-2/.phoenix/originality.json": "082ec21c562429965634f91083584b26c80b66cf3916ab5297e01f955339f303",
-  "skills/forge-demo-incident-2/.phoenix/provenance.json": "fb3398ec6e3771b729ffe4cc406fb93b158edc4cfd997ad81e5b19d0a7ccb61e",
+  "skills/forge-demo-incident-2/.phoenix/provenance.json": "6c286a88a38e79ea2c7af8f25793066ed7fc42bbae4824fd1a89f28373a5e4c7",
+  "skills/forge-demo-incident-2/.phoenix/selftest_evidence.json": "91cb06de3273b55f31c36792bbccaf07ce8605adcd97518029fb1ab11ce19d26",
   "skills/forge-demo-incident-2/scripts/main.py": "acd83e2e5e18daf878602ee69a8e4a9c52f512b2a215f7c887d41ab04b750269",
   "skills/forge-demo-incident-3/LICENSE": "25b07d4bd3f1b1f5c123d80402df751e853a3276c222ff51a85656dd39acd72a",
   "skills/forge-demo-incident-3/SKILL.md": "d4ea47667bad89f0df4c3eca2421fcb4899548a232a7d8467d7151306e859766",
@@ -38,9 +39,11 @@
   "skills/forge-demo-incident-3/run.py": "d810359bfffcb8df01003c29aebabef4007793dfe7108939fc6ae926ee2b8a8e",
   "skills/forge-demo-incident-3/selftest.py": "325f02220e97a207fea1b373e332c01e1ddeda3b6bf0ae4cb2c05a2c09ae73be",
   "skills/forge-demo-incident-3/.phoenix/originality.json": "9411cebf6208a2e97883c39c44e1a5287f501527db066afcbf246d03fbdc5d1d",
-  "skills/forge-demo-incident-3/.phoenix/provenance.json": "fe337fa051d65d2e3bf24046eead38c84d13c0596308765173ca6597dc35c7ec",
+  "skills/forge-demo-incident-3/.phoenix/provenance.json": "09125290dcc81743d4efe67685918f0692152f9c8a32eb3e9924efadb31de569",
+  "skills/forge-demo-incident-3/.phoenix/selftest_evidence.json": "7291488cf81211568cfaa8744412d01e255debabbead3bdaf46a7008d45531db",
   "skills/forge-demo-incident-3/scripts/main.py": "98fcc9d436ce7abc7c91ac76f4f21d031c179e77a8a305f21373c6ddc4599643"
  },
- "merkle_root": "3a2792e7fd9f79753a87086a3fe96c532aa9839117d0c087c3ace37661970cf2",
- "note": "merkle 覆盖包内全部文件（排除 evidence.json 自身）。任一字节改动都会导致根不一致，可验证内容未被篡改。"
+ "sealed_at": "2026-10-18T20:58:55",
+ "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
+ "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

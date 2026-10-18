@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-onboarding-pro",
- "merkle_root": "c249882140799c748a7a326b31e41c26dd3e7d13d3c5d074062e1fbd4bfc8e38",
+ "merkle_root": "f6157c7b8bdffa6d38421f49bc454efb86109cabaff14d03284cfd76d375326c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-onboarding-pro-1/run.py": "49a7d231716caab41351d46762bd7a20df68b287dae5e55a426e6aa2c631ada6",
   "skills/game-onboarding-pro-1/selftest.py": "08665de4cf97ba43467b4a4d59358b523ea878a92808b46315640d220a4255fe",
   "skills/game-onboarding-pro-1/.phoenix/originality.json": "a71779e75c161d69feded3cd7960098a1b661ffbc7f25962b4c52cf7de86a8ae",
-  "skills/game-onboarding-pro-1/.phoenix/provenance.json": "d8b95208d858ae9ead45f4b7c9835540eb858822ee44e1c63a6097bf26f2314d",
-  "skills/game-onboarding-pro-1/.phoenix/selftest_evidence.json": "42e0303f84299cfe21e8e81e8ac9c002e8d7809a839b0d81caea43584ca3f5c5",
+  "skills/game-onboarding-pro-1/.phoenix/provenance.json": "04e97991e0f47be53d6bd3466e911cffb1557f7412a6317168519e6b7a9ad896",
+  "skills/game-onboarding-pro-1/.phoenix/selftest_evidence.json": "e961ce6067a3606a64be765435977fcb1602896939aaaea41cf749a86c3d8021",
   "skills/game-onboarding-pro-1/references/creation/p0.md": "e473248dd2703b581f5327dc11fa8e06cbf8c4a61366feae6ec306b1d6fc4997",
   "skills/game-onboarding-pro-1/references/creation/p1.md": "9ac05192f3f958fe887d4ae19a190871b63b5a2a2970a93fc7ccd4737faa853a",
   "skills/game-onboarding-pro-1/references/environment/p0.md": "7e0633f84d577ba5f4db2be66300bb231cc2e99d2831e6fe7e8e201d1217768e",
@@ -37,8 +37,8 @@
   "skills/game-onboarding-pro-2/run.py": "40c7200e439171ab6109e818269ea1dde6d0496353cd6a737701f0097705a4ed",
   "skills/game-onboarding-pro-2/selftest.py": "77132e735dde7d2d900860ffe3806f25cc706e3bce3401ab5029af2fe7edbca3",
   "skills/game-onboarding-pro-2/.phoenix/originality.json": "28a8fcefce0964baeefe953ce53e8fcc848b5448b660fb5978cd1d6167b69d06",
-  "skills/game-onboarding-pro-2/.phoenix/provenance.json": "14171021a595191ad995fc9fe4611c470ce22e739503d160326b89b379cd5a10",
-  "skills/game-onboarding-pro-2/.phoenix/selftest_evidence.json": "9a35feab9b0afcee91a55105d493fc8ae4ed5f077923a9a0801d9a532b29d45f",
+  "skills/game-onboarding-pro-2/.phoenix/provenance.json": "62d3c20c769eefd1b7139d88c16cb541929d1efdca23d47a0cd8f4d6f0d687fc",
+  "skills/game-onboarding-pro-2/.phoenix/selftest_evidence.json": "9f38a765fc558293c7e96537e553e9e82c71c68b9534d7ae4e64ee0e67b13102",
   "skills/game-onboarding-pro-2/references/creation/p0.md": "ba123adab74a3617ef236fef95de967f1d123b1aac9679f1d3370e7966066db8",
   "skills/game-onboarding-pro-2/references/creation/p1.md": "73320843e44ab848958fbcde3e81142fae47b6c674f2813770da52d56a419d83",
   "skills/game-onboarding-pro-2/references/environment/p0.md": "ccd477d52f826cefc333115583d6fa470bb5040fac81a9f1c60da7ae9561ef87",
@@ -54,8 +54,8 @@
   "skills/game-onboarding-pro-3/run.py": "3954460db5df5e2646280c576f376a4156b693ee5e4a3739a4be0892618f45aa",
   "skills/game-onboarding-pro-3/selftest.py": "041b431b7c2ff5547f70b4515f400f83aeae6cbe3a07569c6a692e2cd97b19fc",
   "skills/game-onboarding-pro-3/.phoenix/originality.json": "7773ac477794d39ce86660f1f684acedbecd8dfa932e3eb0c1d1411db66fdbe9",
-  "skills/game-onboarding-pro-3/.phoenix/provenance.json": "2b84fceaaf531f57a19c9b53535de6135bd25c4fcb3ccd081e7ac390635ae6eb",
-  "skills/game-onboarding-pro-3/.phoenix/selftest_evidence.json": "8970bf2622efca92cc513dc24614072aefbf74540ce247e6ccaab9ca0f1e2ecb",
+  "skills/game-onboarding-pro-3/.phoenix/provenance.json": "f5cc77e54c6ab42b852d24cceaa4e0e345f06d54956e1828c00860355b8b80d1",
+  "skills/game-onboarding-pro-3/.phoenix/selftest_evidence.json": "80403760e96a1ac4269203dd938400d1ce443a67f33a9699ad87333c778abb62",
   "skills/game-onboarding-pro-3/references/creation/p0.md": "78e5e75e04113889da1be294b58e25f2a2d38ec320a8d8f58739c7545ee24e7a",
   "skills/game-onboarding-pro-3/references/creation/p1.md": "f15265b4473fecc0b3e43800ddcb703c591570478e8752a794149b1313bc8ef2",
   "skills/game-onboarding-pro-3/references/environment/p0.md": "ef56358d2962818418567182b1253261f3b8b5c9b4ddbc453be8fce6bb8dba35",
@@ -66,7 +66,7 @@
   "skills/game-onboarding-pro-3/references/production/p1.md": "be297d9ec8e4825e2fd4d4db85c235287be97435d323f6a49a73e427d63850f7",
   "skills/game-onboarding-pro-3/scripts/main.py": "5b74789996a431a2693f85871d3621fc213a1f55380f6097c7ce0898ba1fa941"
  },
- "sealed_at": "2026-10-18T19:59:55",
+ "sealed_at": "2026-10-18T20:59:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

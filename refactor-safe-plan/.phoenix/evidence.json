@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "refactor-safe-plan",
- "merkle_root": "9097f78c32dc7625439cabd8136f323d00df122b5d77dde320eb804ca8918d0d",
+ "merkle_root": "ec0180f099e1de4a85b56a793f57dcb5660eb81386bb1bd448f211f47570a8fb",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/refactor-safe-plan-1/run.py": "f95dd5fbcbd7ae0697a83a8e29336740bd6e24e833b5427c47cc91b4b2f6c783",
   "skills/refactor-safe-plan-1/selftest.py": "e94e5bd6a4dce57b487b967f81f533c4cbc096630fc4c71e232ac97091c19c7b",
   "skills/refactor-safe-plan-1/.phoenix/originality.json": "b039a3e4d8159e2c57be1166b2474e1db9de4712efbeacbcd99d73105e3e9e18",
-  "skills/refactor-safe-plan-1/.phoenix/provenance.json": "212b70c9697ace719e20bc54abfff5316d954ca728ec13e9566b4f6d8e3edcc5",
-  "skills/refactor-safe-plan-1/.phoenix/selftest_evidence.json": "44669568bf5908f9eeaa6522034ff03ffed16a9f33d224d3cd167b4013979224",
+  "skills/refactor-safe-plan-1/.phoenix/provenance.json": "b3659e187db2f980f507d1b59f91598df16357215433d1ed05125c7743c391ef",
+  "skills/refactor-safe-plan-1/.phoenix/selftest_evidence.json": "2bcd011fd001026d6307e6dfcac0eba0364a350ff0c8698da6d89e88b16ce2b3",
   "skills/refactor-safe-plan-1/references/creation/p0.md": "24676f3595437fee818c303316308d2554475dd141f7510e5ccba5915503709a",
   "skills/refactor-safe-plan-1/references/creation/p1.md": "5cdcd6059d03501388e30fb509c8d82aa28000a7cfee5fca533a9a9e468aa1cd",
   "skills/refactor-safe-plan-1/references/environment/p0.md": "73662b32637a4222f4ec4cc4c1c84f7e50844cc097c00f902a12e0f06cfb78d5",
@@ -37,8 +37,8 @@
   "skills/refactor-safe-plan-2/run.py": "a66fe87fe9856aaec47017a680fa1d54c9e97c6a3f46b42ed8c9f7ea23ac5b77",
   "skills/refactor-safe-plan-2/selftest.py": "89792cb1f24ff6ac9d57212ec45126a9c71f36bd89ddba3cae4c657d307ddf14",
   "skills/refactor-safe-plan-2/.phoenix/originality.json": "92fdfa82ad0d2d3c202921dc416061dc44105606711e5ba689cdac818987f851",
-  "skills/refactor-safe-plan-2/.phoenix/provenance.json": "ccc51e3dc37fb2df54c647c8b39b37795c1ef6d4a17e9b1d5b0bd92829b829ff",
-  "skills/refactor-safe-plan-2/.phoenix/selftest_evidence.json": "e55a0ba900f928e347fbbafbfa3e9cea98e5ee950b2b37ea960874726c1c2e4d",
+  "skills/refactor-safe-plan-2/.phoenix/provenance.json": "c2f3b083b47bcfc8fa503fc2102ead76719f363fd30d63336fbcbd428f7bd4b8",
+  "skills/refactor-safe-plan-2/.phoenix/selftest_evidence.json": "653d9f726413f9490ffba5c5f00aba3519f430451feea85d4f6a298f02bbb7b1",
   "skills/refactor-safe-plan-2/references/creation/p0.md": "bfa25a6f8ade97b1f2e6f94e5777f72ec42cd2af8a60f3adecdc64e1641cd4a7",
   "skills/refactor-safe-plan-2/references/creation/p1.md": "592f70b91f086e67cc233cc7b4ca496ca2eb1b08526bac165caa3a53658e3292",
   "skills/refactor-safe-plan-2/references/environment/p0.md": "bdb3cb532e4149cee9b95942f247cefc2069ef73ddf440e4f154e6b6fd1dedda",
@@ -54,8 +54,8 @@
   "skills/refactor-safe-plan-3/run.py": "f90891a6609203efaa1ffedc59dcd644a85e5cbbca8ca3a5973b388ddb395d49",
   "skills/refactor-safe-plan-3/selftest.py": "60884ef12da163b7f68d4c3d0d5b92798d3291ec6ec52dc23f0f5b747bad46b7",
   "skills/refactor-safe-plan-3/.phoenix/originality.json": "9406966af03d1be09034f451fd65003fda61bebdf2dbbd9ae37739e848781d63",
-  "skills/refactor-safe-plan-3/.phoenix/provenance.json": "86e1fb4303e5d95504fa175aafa6a3ae51ca903ce1fbb0c221639d4bc89e3be2",
-  "skills/refactor-safe-plan-3/.phoenix/selftest_evidence.json": "3e0c3484ac584becc9cadd81dd13bb5aea12b24d1f253e49d14ec6202ce0150f",
+  "skills/refactor-safe-plan-3/.phoenix/provenance.json": "e8807a0722ed5ef91f21eff1f4bbf6aee1c33d69730fe3c81b02091bc7f81d24",
+  "skills/refactor-safe-plan-3/.phoenix/selftest_evidence.json": "cc90355416dba9e39f7407ae4c3a506abcdb2fbc2883fc2f26a11ba9a6686191",
   "skills/refactor-safe-plan-3/references/creation/p0.md": "1d210450620121a0056d87adf77ef13d51434b3ebc6c764a01139b01ae9113ac",
   "skills/refactor-safe-plan-3/references/creation/p1.md": "a69ddcdf5bd3c25fef657be6a1a0f565d522a0cf5f8a6bea60a42f695e228d75",
   "skills/refactor-safe-plan-3/references/environment/p0.md": "2807f2db244f3543b04419e09092dd70279aa12b43268a0a7fce03649b89bbf3",
@@ -66,7 +66,7 @@
   "skills/refactor-safe-plan-3/references/production/p1.md": "f1dc92cfcf131a2bad4f159f333e4fbc678bcf489d0bfc00c5bbcbb7bb488351",
   "skills/refactor-safe-plan-3/scripts/main.py": "0fda49319be9f6467710cd54baaf3517622da4400c59ec957eb8b65231629844"
  },
- "sealed_at": "2026-10-18T20:07:16",
+ "sealed_at": "2026-10-18T21:02:49",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

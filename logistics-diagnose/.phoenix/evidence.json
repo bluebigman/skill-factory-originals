@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "logistics-diagnose",
- "merkle_root": "27626f157945f7c13bfb27ae5a851376d09e7335ef0f97af6c846f40fec87e2c",
+ "merkle_root": "7a1aa8f7221a3a9d271e101d3de2939a293f7080cc62f1619bef0e92a6a37c73",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/logistics-diagnose-1/run.py": "94447e91336d645043c9a2ab04ad562165cb7e8b3fa63113bd941c57a2ddf4ce",
   "skills/logistics-diagnose-1/selftest.py": "853c58297d20a2ffe4c43b60ddc495703342e24c6f3aa5aa6c6a5881061fa02b",
   "skills/logistics-diagnose-1/.phoenix/originality.json": "6798c736d0fe36a87e90b8a2425a095ac3750e17d54e848c6ce8f513b611ac55",
-  "skills/logistics-diagnose-1/.phoenix/provenance.json": "ea79ac8f7c3875868a5923e14a98ed836ceae331d5d1bf4831db707608f4b34f",
-  "skills/logistics-diagnose-1/.phoenix/selftest_evidence.json": "772251bd9fd3e5cd5d699377e2213b727089c1343ec97f043c44ad5a02c173bd",
+  "skills/logistics-diagnose-1/.phoenix/provenance.json": "9390f70b330f4cd5119a8ddbc5d6ec51f950b5c1f2c517056cbf7c5e4167aba7",
+  "skills/logistics-diagnose-1/.phoenix/selftest_evidence.json": "1aa868bc5a693b2c394a404d3e02a17e0130124f29b564b3db4c816f45e776b2",
   "skills/logistics-diagnose-1/references/creation/p0.md": "8a9b68551a6daa0f54bd88fe3526aef11243e556fa5a59780b260698986de567",
   "skills/logistics-diagnose-1/references/creation/p1.md": "c37d0f63f689542a942060490f7171b144d21c0e05cbfc691c4be451021c2117",
   "skills/logistics-diagnose-1/references/environment/p0.md": "8c1cff4467be730b90be393da46e673ebf94f22a975b7d53082a4558e917c519",
@@ -37,8 +37,8 @@
   "skills/logistics-diagnose-2/run.py": "582b6a56e26326b85da47866f608b194fc49751b401fc20ca18d2413d2368413",
   "skills/logistics-diagnose-2/selftest.py": "e0e336a9836d65296b31215abfb4581bb0784e462f12da45f99437fcc86c2a21",
   "skills/logistics-diagnose-2/.phoenix/originality.json": "1288ef8f52a872754994ba89a17cba324a8fca570a8e84e2929adc7503283607",
-  "skills/logistics-diagnose-2/.phoenix/provenance.json": "22d9a7df0e89a5685c74550b1ba0ef2f0c2371048a5026c2f720e3d2f1a86ce5",
-  "skills/logistics-diagnose-2/.phoenix/selftest_evidence.json": "b7a29836c8fad5dc9ed34eb862273613d58ce64b6a2959f5757464683a4a3570",
+  "skills/logistics-diagnose-2/.phoenix/provenance.json": "275f1c7c6f2c3c30e65f8ec9dfa00c15b7242bb562fcb66dbdfd07df5457baca",
+  "skills/logistics-diagnose-2/.phoenix/selftest_evidence.json": "8f689595f5ae99cda8e9de0924cbd4d8da060fc689ae1f4f708c9295ca613808",
   "skills/logistics-diagnose-2/references/creation/p0.md": "986e7c8c14eb05ad0bb8be26da819225889be36fb5bcb92e8743a5f92a437d48",
   "skills/logistics-diagnose-2/references/creation/p1.md": "abc3d3752954faf37055a19dc8226f9bed5ef4ae5cd5cd39e68dc02d6e4d418c",
   "skills/logistics-diagnose-2/references/environment/p0.md": "878f28e78631ce10bf4322d6e874d51fc1e2f9afef3e9cc512964c03e127b958",
@@ -54,8 +54,8 @@
   "skills/logistics-diagnose-3/run.py": "0e8b522b4b0b938a7dba85606da1774db586dbcb99b8b5741650188955fd8262",
   "skills/logistics-diagnose-3/selftest.py": "582a117bfffef64c2d3689808f888b8e5fb3d6ba8941ab1b70ae0377cec36d94",
   "skills/logistics-diagnose-3/.phoenix/originality.json": "9b5493ed4bdb39d0101ffca1f93149ef8a3cbe9192620d6b76a40a3cfda47ec2",
-  "skills/logistics-diagnose-3/.phoenix/provenance.json": "435251d399e99c333a876ad891a7d5693da39cf1cb616c7105ea6ce77a26cf29",
-  "skills/logistics-diagnose-3/.phoenix/selftest_evidence.json": "1ff35feb8ed2924dfb1c165c7662c4125adf9e3aff87f904ff3344b9c2126bf9",
+  "skills/logistics-diagnose-3/.phoenix/provenance.json": "04c1db08995c9b202603fbd73fdb65fca0d21d04e58edc322d9c90b0c55b59dc",
+  "skills/logistics-diagnose-3/.phoenix/selftest_evidence.json": "70912ba61ea9d7b13f43a8bafc7cd1fed151274b1cd01a360c691bd7bb4fb988",
   "skills/logistics-diagnose-3/references/creation/p0.md": "7b501a48fa35fcb4ca4497b2384e71e36abaa456e8b0690be08b410cc438bf72",
   "skills/logistics-diagnose-3/references/creation/p1.md": "40f4064427523263d97fa2682077707f1924e68026f4c5ddc97ae44fd24291ba",
   "skills/logistics-diagnose-3/references/environment/p0.md": "3e81e80deae69319322cbb078c45c02616afab56e785214aff861fbeb34f9828",
@@ -66,7 +66,7 @@
   "skills/logistics-diagnose-3/references/production/p1.md": "db37f5cc1422210bc666daceb7840d72022718b802cfb85aaa27a0cec5e68a44",
   "skills/logistics-diagnose-3/scripts/main.py": "6022032e64ee3f1fb2974e8df429b5856ae55ef842a68c7ff218678d36da384f"
  },
- "sealed_at": "2026-10-18T20:02:56",
+ "sealed_at": "2026-10-18T21:00:34",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

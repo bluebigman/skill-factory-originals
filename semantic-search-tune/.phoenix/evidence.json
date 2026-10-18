@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "semantic-search-tune",
- "merkle_root": "a84cca2f96d2bbe5708ece118bfe90f3734c75651b337c35923e5773f48c4a55",
+ "merkle_root": "309358833a26a1ca66d8d1dc16381dd64c25ac6277f0bd47a7f0c566baed90df",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/semantic-search-tune-1/run.py": "cf774007218bf487d1ececf99d9cba004ab86d659e236f26f22a88ae4fcfb879",
   "skills/semantic-search-tune-1/selftest.py": "de0d28cc0e317be2c0370f659668cd89c632596a5f504c738b78724293dacf87",
   "skills/semantic-search-tune-1/.phoenix/originality.json": "15ec8e4fdcc1438e8850acb292aa3922a814d9b1c900e0eec9e044899eb800e6",
-  "skills/semantic-search-tune-1/.phoenix/provenance.json": "283ff7857d6d1b9341b809af9787190cff12bfc6287a9e395bd3d06ff5417521",
-  "skills/semantic-search-tune-1/.phoenix/selftest_evidence.json": "94188468fd8abd41ca32ffb7a84c68d72086baf71acbe7255a8a400cb9105bd2",
+  "skills/semantic-search-tune-1/.phoenix/provenance.json": "5e37f3d2db3f38c36ddf5a4799c17bf51648cf0147a7084ff4fb233f2bb037a1",
+  "skills/semantic-search-tune-1/.phoenix/selftest_evidence.json": "40602a2524233bac187c177c5a1ee97a2292ae94455178ce7db443f74f57da42",
   "skills/semantic-search-tune-1/references/creation/p0.md": "9a6a4c73689754c2a3c77f9743dc38b49f99bac49f0b75ff2ca97cf8e8509a11",
   "skills/semantic-search-tune-1/references/creation/p1.md": "f4f0df54f82856689f6f2576f4eaa6dc42c39a548ead439928b2e32d47c0fd40",
   "skills/semantic-search-tune-1/references/environment/p0.md": "fc5c3af75c871103dc952a01fa5de5c903d3c7ede808be15bcbbf5d4e5bc4e92",
@@ -37,8 +37,8 @@
   "skills/semantic-search-tune-2/run.py": "fc663aa3926093b508f6c270328a3d306bc0d593fff6fd478a0c19d67af22cd2",
   "skills/semantic-search-tune-2/selftest.py": "599ff040f49e0029906e2d5c725cf217ef8f01fa969c0bc1ab0ecc378c31a81e",
   "skills/semantic-search-tune-2/.phoenix/originality.json": "f2dc5772c7bf75e9bf8a606cefd72a95030652723595bd887c624e7153433717",
-  "skills/semantic-search-tune-2/.phoenix/provenance.json": "6cf73eaf23bf864e34568b4f9a170e57d40d57bbd7161635de9055ad8544ff32",
-  "skills/semantic-search-tune-2/.phoenix/selftest_evidence.json": "2a6f836308e13b570fb8545a3c20430fc4c0728a4e5bd43362c95355508c621e",
+  "skills/semantic-search-tune-2/.phoenix/provenance.json": "4a8d500228dd17a70932b589b4cbdec8a32cb6bb89bfac7c5950a932e58e46ce",
+  "skills/semantic-search-tune-2/.phoenix/selftest_evidence.json": "e11c2cf9fc797db463538c71b2827d6ddbe5774e7a9f81cfff9830b890275a75",
   "skills/semantic-search-tune-2/references/creation/p0.md": "25d1ab0541c18b6e2c6266447f2773adc576bb7e3081112775f79191d1cb7d86",
   "skills/semantic-search-tune-2/references/creation/p1.md": "83ab1b22d72ba9bf5c5d66bc95f8269ec0069b824ed2f67b2e61e32d2a99d058",
   "skills/semantic-search-tune-2/references/environment/p0.md": "a9056d09d7b89adfe0edecfe2ef6a4ab075b3dd28db4c4b07129a29a3f5de533",
@@ -54,8 +54,8 @@
   "skills/semantic-search-tune-3/run.py": "e0a083fb9ed85a927b449294510cd29330fc29ee755303ff584a55d22d375457",
   "skills/semantic-search-tune-3/selftest.py": "85307e6f80b0c4b7d036fddd076278a6ae33a97e5529e6e13125efb7a6b59acb",
   "skills/semantic-search-tune-3/.phoenix/originality.json": "0db851a0caea7bf6f54ce737483917a640057a3a5782529acec3ea3b3bf412c2",
-  "skills/semantic-search-tune-3/.phoenix/provenance.json": "d4d071d43f3bc64624eb941b2cc12136bdd4f2326f6435bf1089797a65b0d24e",
-  "skills/semantic-search-tune-3/.phoenix/selftest_evidence.json": "5770f260dd858cbccefd0b72ea074f95da0ce69d4f06b5ca7f4a99a6d3ad704a",
+  "skills/semantic-search-tune-3/.phoenix/provenance.json": "a7fbd34554e3b6f216a00a5838c4b31a3088e57376bb927d3385c14b2a7c3100",
+  "skills/semantic-search-tune-3/.phoenix/selftest_evidence.json": "44cfe6b1dff02b8a28476b4ace3fd1781cca306335123f7a9d999427fa75e6fb",
   "skills/semantic-search-tune-3/references/creation/p0.md": "456eb03990dd6e183b36a6a1f43f1dcbef5b5bff1da4b8be7b3d56b06619d0bf",
   "skills/semantic-search-tune-3/references/creation/p1.md": "641eac6f5587bc639d99bcc4986720a5e4775242e2cc8491b992ef64d9e67d34",
   "skills/semantic-search-tune-3/references/environment/p0.md": "1d693841a9b55fa400ac7daf381962d65cfef0d9fee2fc96856a35e2902252fe",
@@ -66,7 +66,7 @@
   "skills/semantic-search-tune-3/references/production/p1.md": "6abf4dec99ff20384d1b08eed81b7d5fc17ebf944236d91cbe3f74225cb3fbc9",
   "skills/semantic-search-tune-3/scripts/main.py": "d3c31a4ad367748cd6065721b06c562b6ce270189eaf9a8682080aca6e2b3806"
  },
- "sealed_at": "2026-10-18T20:08:52",
+ "sealed_at": "2026-10-18T21:03:36",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

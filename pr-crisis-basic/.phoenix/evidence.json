@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "pr-crisis-basic",
- "merkle_root": "baccc1ac4c633f9c144373bc9daa6164b1f6f373f7530c9d396cba21f4caa9e9",
+ "merkle_root": "f9671e34775135a2ea1b6d71c710d2a7fd84c21a05886d5ac278fbae37b6e987",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/pr-crisis-basic-1/run.py": "22018cc92791e7f7d27f26637d707d1a8f48144a05eb0255fadb7cbf18d5ca46",
   "skills/pr-crisis-basic-1/selftest.py": "2cdcb8fdd7e7fe24b7fccbc92a74700b78a3489b9b498b2a6d7fe2c82e42e84f",
   "skills/pr-crisis-basic-1/.phoenix/originality.json": "917e21dd52f26e52a2bdbf3521c50bf6f11763c8513ea0eb03459acbef8e739f",
-  "skills/pr-crisis-basic-1/.phoenix/provenance.json": "a6a2d7b713ef7af43bb958137ca6ad24c3abbba66919f29ec100178fc78cc3bf",
-  "skills/pr-crisis-basic-1/.phoenix/selftest_evidence.json": "53916199f492cbbd6c12bd740657003473535824d8b1bfbfa296ca1a74fa35ba",
+  "skills/pr-crisis-basic-1/.phoenix/provenance.json": "29cf8163af148a651d1e196b594d0575fab2d16679aca7f61797f8b01b0cafd3",
+  "skills/pr-crisis-basic-1/.phoenix/selftest_evidence.json": "43610c3b4b40fe1a6ccf9e24f4a241341606355de40c47d01808671e7cc6855e",
   "skills/pr-crisis-basic-1/references/creation/p0.md": "9a73cf3d3bbda0586f31f5b5a277751400537237ee0f436094752c36ed2a36d6",
   "skills/pr-crisis-basic-1/references/creation/p1.md": "4d18c005fc648f73922638adb99e272a4207db1c34050245b7d60d9405942c96",
   "skills/pr-crisis-basic-1/references/environment/p0.md": "d76859fb9dc047f8552b7c517130a3221439a8befa16b49b2427821b8313f67d",
@@ -37,8 +37,8 @@
   "skills/pr-crisis-basic-2/run.py": "5607188f97e43272bc523fb8ad3e049c850f01d642a9473ceac12fd5cdc811d1",
   "skills/pr-crisis-basic-2/selftest.py": "91b71774c61547dd9c8d67e5a31c89e63321c0dc04f2a17c9bd7cb22bab95f91",
   "skills/pr-crisis-basic-2/.phoenix/originality.json": "8b92cf59f98993e9811ee585a5a05a44562b704331f06f2dd9cbe915caaeb341",
-  "skills/pr-crisis-basic-2/.phoenix/provenance.json": "4f551fe1fcf669885080d5e51a9cb249afd7b384a43f0b7fb4823c1452641c28",
-  "skills/pr-crisis-basic-2/.phoenix/selftest_evidence.json": "127c7949ba1fc82147350cdb78b98f35f94c7a3e60d3958dccf7760f5023ea69",
+  "skills/pr-crisis-basic-2/.phoenix/provenance.json": "5e850ee9f833e689798cb9c250a5a773190a411e612ccc78bd39506be49e333c",
+  "skills/pr-crisis-basic-2/.phoenix/selftest_evidence.json": "f0ba57c1f856d2d5368f4183fcba7d18130d72b90de7c45ac1bab40b9ae30e3c",
   "skills/pr-crisis-basic-2/references/creation/p0.md": "c927d834a2ffa7713e808c2c3648d1e61054e487dc92cd4fee7316c88eb01161",
   "skills/pr-crisis-basic-2/references/creation/p1.md": "85b6ed00dd9c4c47073f9d1a595c2a036b5f704ac1d002a894eab36620c6bcb0",
   "skills/pr-crisis-basic-2/references/environment/p0.md": "319f714bfdf99ddb3fcd896d3927cfd020de725b27f2f3fe5ca28071d0c6a518",
@@ -54,8 +54,8 @@
   "skills/pr-crisis-basic-3/run.py": "f130bb063e6d10af9f3a3f625415403d6af07a17b985f2b79d2f6aa0af4b10b4",
   "skills/pr-crisis-basic-3/selftest.py": "cf3d24aa98bfd9b6e2623fdafff3096732a8fa8d6dfcccc1e92a8255bf78dbd9",
   "skills/pr-crisis-basic-3/.phoenix/originality.json": "6a3ab296bae699d3eba0ec87b7087f7db6db36e11c9483534cf086c38485d584",
-  "skills/pr-crisis-basic-3/.phoenix/provenance.json": "d2b1ad45c3b42e68a0bda9862a01d3c154f9df47fafcc4109675f5616bf8154d",
-  "skills/pr-crisis-basic-3/.phoenix/selftest_evidence.json": "3f5572a37fd8d8a551df50988b06c53ce3dab651f116488f1a5e2ce49fb26065",
+  "skills/pr-crisis-basic-3/.phoenix/provenance.json": "cc534ddd74ff5668eff09d65850e46718bb146df3360e3a7ac55e5c7920725d1",
+  "skills/pr-crisis-basic-3/.phoenix/selftest_evidence.json": "d3747512382333ea68d8834a79629072d7a61697b2921720785c22f9ddff18ea",
   "skills/pr-crisis-basic-3/references/creation/p0.md": "26c89b75bec22b155e9de09bb0f93d94f5426c62e91ac46e75dcfd6e72b11b87",
   "skills/pr-crisis-basic-3/references/creation/p1.md": "defe469283f3c468734a93adc204a5b5cd54514ab77dbd47756458d1ff138493",
   "skills/pr-crisis-basic-3/references/environment/p0.md": "72a39fea08c2bca8569186cd2104eb02d461030d4fd27934ac07313051590911",
@@ -66,7 +66,7 @@
   "skills/pr-crisis-basic-3/references/production/p1.md": "e7e2e66067df3e4dc292b6785360a61055d3ff5ed1a9573968a38401594c66fb",
   "skills/pr-crisis-basic-3/scripts/main.py": "a0306e59c57f0353f119aaa2f7747443e2dd059abbdaeddc550378abb04a97fc"
  },
- "sealed_at": "2026-10-18T20:06:02",
+ "sealed_at": "2026-10-18T21:02:11",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

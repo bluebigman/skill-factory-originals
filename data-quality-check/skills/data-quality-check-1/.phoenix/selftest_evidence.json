@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:55:50",
+ "at": "2026-10-18T20:56:51",
  "skill": "data-quality-check-1",
  "slug": "data-quality-check",
  "passed": true,

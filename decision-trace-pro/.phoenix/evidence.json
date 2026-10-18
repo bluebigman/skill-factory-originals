@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "decision-trace-pro",
- "merkle_root": "145b85e2dac631aa13edfca24e47a0bd43c95e76d72384da5c985e2ff1ca748e",
+ "merkle_root": "0b1aa0690558883de1cec3db0e786dce035e1803d9f864eb7f8dda4c876f1078",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/decision-trace-pro-1/run.py": "6a86a2ac67e8fadde955700c9d906c9a8009801a7bc11d21154696497b5d9d19",
   "skills/decision-trace-pro-1/selftest.py": "fb3bbc12d1f38ff6d65b87cef5fb8d76e0569021a2f18c7dec0083f5e53e33ad",
   "skills/decision-trace-pro-1/.phoenix/originality.json": "49425fcea5ac412aa69dbb0e0348b204bf8a01925dd2ae743e5ec2ad273e4f2d",
-  "skills/decision-trace-pro-1/.phoenix/provenance.json": "f25ea8c24d6750e6dd01b8f0ab7205c58a3f25323134386b6ee5818572cdd0fe",
-  "skills/decision-trace-pro-1/.phoenix/selftest_evidence.json": "7e5b41ff9fb35abde44972022c02331e13914c75e683bd9111cd30ec48319d95",
+  "skills/decision-trace-pro-1/.phoenix/provenance.json": "00017ca3e0750283c2bd5327e67a86e064b2b54566c9fa4694025cedb439effa",
+  "skills/decision-trace-pro-1/.phoenix/selftest_evidence.json": "992364ec677282f141ef7a5a83403eebe3a5a6e7994aa31b0b83e8dcb31237f0",
   "skills/decision-trace-pro-1/references/creation/p0.md": "3a06f34b673246142ae96daf01c8f61442ceb9e010111b23e755f808e7bbd286",
   "skills/decision-trace-pro-1/references/creation/p1.md": "9dc6cba40ea1c879d48560e602cda3bd6eb45e2da36690142cc99289dd8e3b90",
   "skills/decision-trace-pro-1/references/environment/p0.md": "df94f244c55e3d831b022e8fece4ca4bd3c6fdcc5f1ca27db4dd55b1e31d4f78",
@@ -37,8 +37,8 @@
   "skills/decision-trace-pro-2/run.py": "3755d49593d0d416d4aa6315f800c087daf4ff7d4e73f15bc29fda8f4d45ac95",
   "skills/decision-trace-pro-2/selftest.py": "3a038a2d3adcfeafa2e34c64e5da8abe615246aa38ec8ceda2419f1dfe1995a0",
   "skills/decision-trace-pro-2/.phoenix/originality.json": "8ec04304d2bd789a4a4cf1512f190a90131f111825fdf2bcb29e56f34a437988",
-  "skills/decision-trace-pro-2/.phoenix/provenance.json": "96cfbae39d90e069d36885ef75699dd7bce7e83350a2accadb7726b228e226f8",
-  "skills/decision-trace-pro-2/.phoenix/selftest_evidence.json": "e18c3e1e332d08ed39107da1817601cc164923526a7ae8723c6f3703bdd4ea25",
+  "skills/decision-trace-pro-2/.phoenix/provenance.json": "40b9d9c5e1fbfa09268ad88d192fcc5c8a1b65428889c865638643e76b7c4537",
+  "skills/decision-trace-pro-2/.phoenix/selftest_evidence.json": "2a46cce721fcaeea30e821f14f9b12a2593ce5deecb9d7a91a9492167d006506",
   "skills/decision-trace-pro-2/references/creation/p0.md": "d591099faf14b78d79d35745dbb24399568cac074785f298885ed3596de4e9f8",
   "skills/decision-trace-pro-2/references/creation/p1.md": "21b8cb431d010b4a46e798609a3dd13a96d6e7d981a99b979a416f1c5f5f0b25",
   "skills/decision-trace-pro-2/references/environment/p0.md": "edf96726421c3172608cc0acc11a15158008db765e6729945de810328804bfe5",
@@ -54,8 +54,8 @@
   "skills/decision-trace-pro-3/run.py": "5aeffc40ef1f58f84ab40ae0e591fc3855a50a079b777ba7b374cfaa2daeb3b4",
   "skills/decision-trace-pro-3/selftest.py": "d9025d15bef19dc0205df1e3869297cdf1c5b6b82defe25122c13d77c7dbccbe",
   "skills/decision-trace-pro-3/.phoenix/originality.json": "a5a6b856a04a2c37d7a0c36c02bcd38db6485359d350891a441f45498e2fa480",
-  "skills/decision-trace-pro-3/.phoenix/provenance.json": "17bca10314833f990a463df770e48097e1ec86514a178c2ea63be85c4bcb7b5b",
-  "skills/decision-trace-pro-3/.phoenix/selftest_evidence.json": "7ad6420a152ee8f72f4b638641a49dba00a760cdee0b727e5b029c93c392d053",
+  "skills/decision-trace-pro-3/.phoenix/provenance.json": "23ff999a8c69228897854f26eac7ede879091fe5f274401eb8c6b7125b4cf4c7",
+  "skills/decision-trace-pro-3/.phoenix/selftest_evidence.json": "fdc2e9ec2cee450fec7137056aacb2b9c16c3fc6d86a81cd2f3f9103b75c81c7",
   "skills/decision-trace-pro-3/references/creation/p0.md": "f8e2cac4c5b383926900131d297cced2f412ea03fa48488560016bd2c5720066",
   "skills/decision-trace-pro-3/references/creation/p1.md": "c1fbd17da973400299c259a501080b04a6a82d11481995944aaa543bac331932",
   "skills/decision-trace-pro-3/references/environment/p0.md": "dad1d3a5cff8ae5f13166a387e4fffe48fd70e8e68d7e5725f8f6ef925a690b8",
@@ -66,7 +66,7 @@
   "skills/decision-trace-pro-3/references/production/p1.md": "a7027f830eee10472ba1213cc57b03af9da8fa4897ce221f108e0ba85baea46a",
   "skills/decision-trace-pro-3/scripts/main.py": "d04722eae6e39a692d0b71dc55e3727a87e87d8741b2f99d6de7be146a88db9e"
  },
- "sealed_at": "2026-10-18T19:56:10",
+ "sealed_at": "2026-10-18T20:57:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

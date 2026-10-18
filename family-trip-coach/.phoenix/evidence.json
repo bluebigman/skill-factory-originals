@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-trip-coach",
- "merkle_root": "31d1e9e6965ef8e8a6dd68bbaacaa417eb1342fe33baeea18eaa90538b6085af",
+ "merkle_root": "19d3a80961f8776b1af5b4840f080084ceb2bdcccd46ea81d5021722ae13e931",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-trip-coach-1/run.py": "4681d6fd54a5086714ed1137e86dbb978b9906eef3dba8501424a189bced0e6e",
   "skills/family-trip-coach-1/selftest.py": "c97b2bdc0c297cd2cb82c9ea87f704374ad56d079dadbb0f2986b4903fb40163",
   "skills/family-trip-coach-1/.phoenix/originality.json": "4b0b299c219866288a0bff6ae49bfa197f16c4ece9ba64a28d4a836c9c423bed",
-  "skills/family-trip-coach-1/.phoenix/provenance.json": "f7ee985cbdd2a8a2e2f6030a9c52f55b6d39bdbb9bf78e65e1fc5ad251f92a01",
-  "skills/family-trip-coach-1/.phoenix/selftest_evidence.json": "01ad72e60e68a66e24341d1dc42b6974b265b0d47cb778c3d933b270c12cfe67",
+  "skills/family-trip-coach-1/.phoenix/provenance.json": "dc0a96c49661275ddb571ba641c111e05930c6dcb5753f41968eed72ff2abec8",
+  "skills/family-trip-coach-1/.phoenix/selftest_evidence.json": "fc4fb13d378e93608b0582ba50a6af1b3e36f404d2e4833ee6201cffced49c07",
   "skills/family-trip-coach-1/references/creation/p0.md": "4d9d3d527ef90562545102637cd0c6c42cd1f9bacef2a3186e275b78f87578d1",
   "skills/family-trip-coach-1/references/creation/p1.md": "22478e69926dd8caeca9173c97d9cb216397162889c08b97a178f9704184b17a",
   "skills/family-trip-coach-1/references/environment/p0.md": "a843c2074424e194662a0b43334c56cb44a90068d6127c7bddd72d9bf69c644b",
@@ -37,8 +37,8 @@
   "skills/family-trip-coach-2/run.py": "881a40021ec0831cd464ab8797b3301a0c5462765453719b24db6f70feb5d7e7",
   "skills/family-trip-coach-2/selftest.py": "ad062cca9a8bd6dd2ab399160c1a1451f3907c0fab74094853e084cd0f261941",
   "skills/family-trip-coach-2/.phoenix/originality.json": "dba506a2b34da886fb8deef8332a88033e5c5824f9430865f7a3bbcf3f8e9445",
-  "skills/family-trip-coach-2/.phoenix/provenance.json": "2a8152f3a7b0b168382d0e9994c6377c329db6699855488f56268030d16b9efa",
-  "skills/family-trip-coach-2/.phoenix/selftest_evidence.json": "9c52bccc1f4a4d2a161025f5a7da6bfe88ec84193a507a7a0dfe398428a72061",
+  "skills/family-trip-coach-2/.phoenix/provenance.json": "1d8b47c98353965fbe4f33b751ee2a8fce64e5bb36b1dab5db90e1b0dbd68b46",
+  "skills/family-trip-coach-2/.phoenix/selftest_evidence.json": "48e862ec004abb02f3a8f2612efda4043daed6b85d6b5f83f87dc309a15ce13e",
   "skills/family-trip-coach-2/references/creation/p0.md": "ecf78ac9ef0d02ae4870f00cc096f1877a57311d15890dce5211e5dccad1364d",
   "skills/family-trip-coach-2/references/creation/p1.md": "b8761bf978e3fed79e0f6ca05d9697fd02c12c779bb39e5576507c73e145a9d2",
   "skills/family-trip-coach-2/references/environment/p0.md": "68bf9aaf185a8cb7dd8a880f8a97ad56ef3194ff419be92b85a19de329cffa37",
@@ -54,8 +54,8 @@
   "skills/family-trip-coach-3/run.py": "e194c4ee6beaca43133edd5ae8daafab4570b898ba457355c6c974d480ad6741",
   "skills/family-trip-coach-3/selftest.py": "7b5b155d23d2f0c66c1c856335650c787f6aeb03891b5e8ea47b0ef8443899a9",
   "skills/family-trip-coach-3/.phoenix/originality.json": "f434d6c92dc6746578b4e862dfb836f8c770971350e6d2b2ac96a307571f9455",
-  "skills/family-trip-coach-3/.phoenix/provenance.json": "52543acab657d634897103ff934fc4580669ffdee52efea0cd67ce0f7ed3ca96",
-  "skills/family-trip-coach-3/.phoenix/selftest_evidence.json": "531185f8bdc225b03e391d51e5aeb216b2dace695e5459558bbc0ce323b78b88",
+  "skills/family-trip-coach-3/.phoenix/provenance.json": "6678517bb317c113b5fee6c45c150393c766bbab51e3a4642b6b3ee7f2f2ce90",
+  "skills/family-trip-coach-3/.phoenix/selftest_evidence.json": "f2e08ebf230175ea38c5668498037b68f254defddaf64178bfb22103f8bf7280",
   "skills/family-trip-coach-3/references/creation/p0.md": "757d858e52b0b74688a8aba0e9b09875067d2b426f66235e884a21a70c726efe",
   "skills/family-trip-coach-3/references/creation/p1.md": "331fe28207552017532d372a4b82cb8004c294590d32c964d939a95e63d51d9b",
   "skills/family-trip-coach-3/references/environment/p0.md": "06b2a8bb29a5f545a83cf27bbabda8f7b1875be57f20fea08e050b950a0dc4fc",
@@ -66,7 +66,7 @@
   "skills/family-trip-coach-3/references/production/p1.md": "66c1acc8f632e09592642329f208dc93287cd31ab6b89ab6fc7c232fbbad4691",
   "skills/family-trip-coach-3/scripts/main.py": "5e7b33554c24e75c4af57ecf3a8225c676014b1c3f2cbebc86860cc144fbb138"
  },
- "sealed_at": "2026-10-18T19:59:10",
+ "sealed_at": "2026-10-18T20:58:43",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

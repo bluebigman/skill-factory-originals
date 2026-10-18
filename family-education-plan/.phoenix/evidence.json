@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-education-plan",
- "merkle_root": "9d370ed7e5a6165f7abdb61e11a123ebcc057b48ec5add192e887116300914a2",
+ "merkle_root": "b2f8596da813dca4bd7a1f3235248f2f54f71d4df6f63dfa8289ac4fe8395381",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-education-plan-1/run.py": "871165d247fa323a5f99fe6bc9c783ca55c4a022e2e373f4ebb015ded096eb4d",
   "skills/family-education-plan-1/selftest.py": "e58c9249b08383a55f83879b886c56612c37e144381a4ee3c40bb0281bc34dd0",
   "skills/family-education-plan-1/.phoenix/originality.json": "c5470c3c1e2e54bc74070b379867ea0dc3ccb1bb40abdcfa6fdcb1130e58e836",
-  "skills/family-education-plan-1/.phoenix/provenance.json": "2273e49e95afeb053b166c5e3fbc1a9997bd0d4b019b8a58a77e61e89fc146b0",
-  "skills/family-education-plan-1/.phoenix/selftest_evidence.json": "eb91d7243f6245658ab4ca6f84c18dbd0b8d10bc82ce07ccca39757de251177a",
+  "skills/family-education-plan-1/.phoenix/provenance.json": "8a02c79a6fdccf40a4b493804cb9500a97860a2146447ba9be3f03f91f041c42",
+  "skills/family-education-plan-1/.phoenix/selftest_evidence.json": "d34e78c4128adcd1e691802f6e84534bdd4d3d0f4a9da5ff4bf3509384deb721",
   "skills/family-education-plan-1/references/creation/p0.md": "e697f25a675af4a6c1fd52422f548623d3f45958909ebda01e34d98f5e5c0206",
   "skills/family-education-plan-1/references/creation/p1.md": "655a9d4e54167145597a365a0428a029d4de6683213242ca4760146e65c97222",
   "skills/family-education-plan-1/references/environment/p0.md": "4edd140c8535171c760f007b4b30bf6d36e1b022fef8e83722b12d6384b8c6fa",
@@ -37,8 +37,8 @@
   "skills/family-education-plan-2/run.py": "a24451fabab9409bb92808fac931d4e86a52afd52d75a861eba65f29e67b3113",
   "skills/family-education-plan-2/selftest.py": "d3fc1e4bbfda1fa8505cd06677d960aa52458774d7fc95d899e2fc3a4d891fb9",
   "skills/family-education-plan-2/.phoenix/originality.json": "489fb57da03a7c3902ab6c7894ae81f825f5f702647a8b923abb4d3d68872122",
-  "skills/family-education-plan-2/.phoenix/provenance.json": "b5cfb030ae4a02dc4172c658ce479fc9634dcb85f47fe7caa29e0d9cac667408",
-  "skills/family-education-plan-2/.phoenix/selftest_evidence.json": "fefad9c28ab65bda8f3b7260fd21756a1515a968eb352523d9a75295ea5ec381",
+  "skills/family-education-plan-2/.phoenix/provenance.json": "e5fd2461e9711d1c778e55ff3276c34464e5b09dd5033a428f35c78f00ecfa0b",
+  "skills/family-education-plan-2/.phoenix/selftest_evidence.json": "2f3c92f7256e5f7fa669313a2353ec12ed5bfecc715328a7eab851629f2b6d8b",
   "skills/family-education-plan-2/references/creation/p0.md": "77455ba3da0c411bdc9bf363347963615ec849360d540cf1a63e1cdbe19ecd2b",
   "skills/family-education-plan-2/references/creation/p1.md": "815778b054e21723511fa4d8254226e79ce999dba7f4a6a9c286931b53eb60b6",
   "skills/family-education-plan-2/references/environment/p0.md": "d82bcd3fd1e244eed94baff2f515e55ca1d420ffcc8f0ac65e4347f5bfac3483",
@@ -54,8 +54,8 @@
   "skills/family-education-plan-3/run.py": "d327a49716c8d0bf3a594c0c187c05da29ccfaf3f74dce69b2c89fe584b89100",
   "skills/family-education-plan-3/selftest.py": "92d9f482adb85311b2aae86871da987dab400a0e726684c8daa74cd2048b9fb1",
   "skills/family-education-plan-3/.phoenix/originality.json": "f2ee13d1e7bd839409c84d3f602980a8f188c55d7b7e04746cbb3824edbbe0e7",
-  "skills/family-education-plan-3/.phoenix/provenance.json": "b44db7734ba9f85f7d74e69f5893be8446764f73f55add04a2c7e94ea1d35d0b",
-  "skills/family-education-plan-3/.phoenix/selftest_evidence.json": "6290d1e16820bc62aa9d22db6e74c92a3a2f70eea9dc782faec8aee813986dfb",
+  "skills/family-education-plan-3/.phoenix/provenance.json": "d6da5225c9cd5ca55f6a93141f6a95e9e178db49bf603fa95291da20eee0654d",
+  "skills/family-education-plan-3/.phoenix/selftest_evidence.json": "a70fdb5139e059f7dd1bb198003fa5908625c2b45596c174d6ec38178c292537",
   "skills/family-education-plan-3/references/creation/p0.md": "c86579f6f8ee1a3daebde8881655eb3b7be73b79780e7150654a3e589ead5983",
   "skills/family-education-plan-3/references/creation/p1.md": "80fecca13471aac3f0c1a6f4cf24850b69fff5fc938f2bd871b4f6a30c8a0b1c",
   "skills/family-education-plan-3/references/environment/p0.md": "a2ac2373feb389ae3c0eb162d5282c7f4e238ace0f21ef9ed1c031f3f0a69d96",
@@ -66,7 +66,7 @@
   "skills/family-education-plan-3/references/production/p1.md": "0cc875f3c59ad446ff604a3a663640487bfab6a4892b84a469503ce89977cf8e",
   "skills/family-education-plan-3/scripts/main.py": "69e43b899b2df11ffa8bbf6c0678089e6a9c899f00c593a0b5dba3a69aebe3a2"
  },
- "sealed_at": "2026-10-18T19:58:59",
+ "sealed_at": "2026-10-18T20:58:36",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "procurement-cost-pro",
- "merkle_root": "41f1fc335f3aa844568a4fd2c39144dde1b67582f86c6e82e2d9e25b387b0ffd",
+ "merkle_root": "eacd64f48311b37eb5cb5d0b72cdbadd18cefa9bf5eb0676ca9bf3733e8c1e16",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/procurement-cost-pro-1/run.py": "d001bd224fcaa3190a566a4dbde6fa829c018152fdb2f1e0b8a7a1d5e0ab5b21",
   "skills/procurement-cost-pro-1/selftest.py": "c4989e5ad77dbb486a4ca087a269a25b02ae3a5ba04865a7d507b4102ea06998",
   "skills/procurement-cost-pro-1/.phoenix/originality.json": "5aef2128735409da00aa99450ba15146675aaf7379cdc78e07771281a6467f8d",
-  "skills/procurement-cost-pro-1/.phoenix/provenance.json": "5cc1842ef46ab19187f7af81f581897a53a51d3dd6f9e4c49595dc5595f2bfa2",
-  "skills/procurement-cost-pro-1/.phoenix/selftest_evidence.json": "a287846eb0e7411900fa7c1982b70ed47171cbb8ab105bd0ceedfee8e06bb766",
+  "skills/procurement-cost-pro-1/.phoenix/provenance.json": "a60bc2d588c7eb4051bd49dab09edd73af617d49df772c7e2545d8ffee3e4414",
+  "skills/procurement-cost-pro-1/.phoenix/selftest_evidence.json": "ac6e4fc301717e16d0d06d9c8ac410bc41ccc48819fc20f65bb0186121879a5d",
   "skills/procurement-cost-pro-1/references/creation/p0.md": "3ffe6c1b2b46376de7d80cbb64c4c12c56b40bb3ab0aa2f44b1f44ae049c3c47",
   "skills/procurement-cost-pro-1/references/creation/p1.md": "02d3a2a75e62a19bcc272e55795fcb3cb6708efec0760a0bec3b8e08a0b0e069",
   "skills/procurement-cost-pro-1/references/environment/p0.md": "7b1f6c877cc47caf2516f9919ca15831158b95aaaaf88dbb6be48afd3092b631",
@@ -37,8 +37,8 @@
   "skills/procurement-cost-pro-2/run.py": "1b1d5d19ddaa13dd33e5fb382c1c5ea26cbbcfa85415d1a9b01536c278d69770",
   "skills/procurement-cost-pro-2/selftest.py": "1f797db017f4f3c4e68ce3b16c0c0a25f0d21a8fd5a35d826c62eb177ceb6eaf",
   "skills/procurement-cost-pro-2/.phoenix/originality.json": "e584bc5a8a581ace5e922d89a2a7118664e0e200cbcdb5b68f81d2c97dd1ce25",
-  "skills/procurement-cost-pro-2/.phoenix/provenance.json": "ca2e779b266b0171caef0e8e5397b87c4ff28ff807554ff8ac069ff31b68f0bf",
-  "skills/procurement-cost-pro-2/.phoenix/selftest_evidence.json": "e9b940ae662977cf985586d3ab6120e6850ae8e5f2d2c9fe909ba65575d1992f",
+  "skills/procurement-cost-pro-2/.phoenix/provenance.json": "63de2cdbc929a83332c16f1ebc8155f0b37df49961756f9f5866791f43fd5ecb",
+  "skills/procurement-cost-pro-2/.phoenix/selftest_evidence.json": "cf1a134a4f66cc709025827a290d3258f8735edbed73a1c0b35e0944d9f19c24",
   "skills/procurement-cost-pro-2/references/creation/p0.md": "3f88e7781576f2aa7d9b44b75b5505ff681fa665b0c1df14fd97e2fbefd42625",
   "skills/procurement-cost-pro-2/references/creation/p1.md": "d89c7c5c8583f25723669d17d61b02febe2e9a8c4d05a29d5f6460876de9d126",
   "skills/procurement-cost-pro-2/references/environment/p0.md": "eeb5a30c1cc24e0c740075a166a12f587803585fe53f51c924356b8e21804e2d",
@@ -54,8 +54,8 @@
   "skills/procurement-cost-pro-3/run.py": "1ae5a70762feeaef98fd9d27fc81cd0a48fc28752c233fa5e7b2bb9757927202",
   "skills/procurement-cost-pro-3/selftest.py": "7b4aed0143c5250ec6269f11ec1c6fd8c5a2e382c77fbccfc0f9297cc969795f",
   "skills/procurement-cost-pro-3/.phoenix/originality.json": "f5c57d7f498739b5afcfad555e64fcf9c3ed6244705a67e00735960076a715fd",
-  "skills/procurement-cost-pro-3/.phoenix/provenance.json": "6d9751b72ad29bdd453696f58f8a9e0478746f4ec9771c9063f7d89b5990155b",
-  "skills/procurement-cost-pro-3/.phoenix/selftest_evidence.json": "4e390d46b59e141ca726fa70cdb032212ef7f946e512dfdd9c5d261b74cd3703",
+  "skills/procurement-cost-pro-3/.phoenix/provenance.json": "baafa43fbb97cad1de086c4fde25a38ede280be89f410ca5daa844a03c6f6912",
+  "skills/procurement-cost-pro-3/.phoenix/selftest_evidence.json": "b7ecf4caa962561653d513027139749f7b27a73dc124fff1aada45435137b556",
   "skills/procurement-cost-pro-3/references/creation/p0.md": "7fabdc91640174bcd495a887c0be1170937232be038bd447eb7eb6edfa996236",
   "skills/procurement-cost-pro-3/references/creation/p1.md": "5575b5a68060adf5ef0228f5bc20e939d9a781f23d7368fd47a33b1d598c72d3",
   "skills/procurement-cost-pro-3/references/environment/p0.md": "454adcf9bbe0658df3edc12dddbead7f49b7e125b4a4aecdc586353724405642",
@@ -66,7 +66,7 @@
   "skills/procurement-cost-pro-3/references/production/p1.md": "a6b633b7e02046bc8018083ea6e5a5d9144e466b4ca6e2e6a86b243942ba6853",
   "skills/procurement-cost-pro-3/scripts/main.py": "6eca320a44d585436d577a82d2aa891b64e0078ce447b22795d8a1682ba26691"
  },
- "sealed_at": "2026-10-18T20:06:26",
+ "sealed_at": "2026-10-18T21:02:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

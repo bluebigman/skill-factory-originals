@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:01:32",
+ "at": "2026-10-18T20:59:51",
  "skill": "integration-test-env-1",
  "slug": "integration-test-env",
  "passed": true,

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:04:09",
+ "at": "2026-10-18T21:01:13",
  "skill": "multi-source-merge-3",
  "slug": "multi-source-merge",
  "passed": true,

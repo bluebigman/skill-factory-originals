@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "inventory-basic-coach",
- "merkle_root": "96d24905437c16eba127d5b7c7b211a9d275321983e638df726c6d146f87c7ac",
+ "merkle_root": "858af561ee6daf65f3b9f6a1ff8098e911b27aee2969bc5d4e39034d5b2ce254",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/inventory-basic-coach-1/run.py": "28b78794df4e261502f7db0779123e08b770a507b38a9daf68057e86e9fc657c",
   "skills/inventory-basic-coach-1/selftest.py": "22919a5371bd4fa2bd3422fc02dc16c1ac2c9a573fbd1a1ecd20cbf151e62eea",
   "skills/inventory-basic-coach-1/.phoenix/originality.json": "a7bbb4322f0afa23cb400c831a84881570bed86b6ac1b81bfb9841d0f9a9ce7f",
-  "skills/inventory-basic-coach-1/.phoenix/provenance.json": "88e4f9da21bbddd6135bc2660bc3f08bc30bda0bb0f0ad2d0cd47f5c94615897",
-  "skills/inventory-basic-coach-1/.phoenix/selftest_evidence.json": "98d896772ad8c62af103be1313183bdda93b19551a3a52da0764ad28742d92d7",
+  "skills/inventory-basic-coach-1/.phoenix/provenance.json": "0791c7709e28f29e6310b4a3e5f5ce8c0d764b2a451eafa703ef95f6bfe73d3d",
+  "skills/inventory-basic-coach-1/.phoenix/selftest_evidence.json": "ef5afdcdff2b63d555e6ae10b6b9e21aa534e70c6d55520bded6c5acb1c7b46b",
   "skills/inventory-basic-coach-1/references/creation/p0.md": "0b3336af4c3928dbc69a1f6f9af978c9985297cfc2a5b97f725ba13bcdaa5495",
   "skills/inventory-basic-coach-1/references/creation/p1.md": "e0dafc77b731106a3c1fcf47a7554ede5c14293e78b8625f1511198b40bd43bd",
   "skills/inventory-basic-coach-1/references/environment/p0.md": "99eaea80447a3221f09631f6569e56e6cc0055fce181c9579ea2cb6755d53654",
@@ -37,8 +37,8 @@
   "skills/inventory-basic-coach-2/run.py": "261a56668958a8fcf2d4594496afc3523ad2d2b79711d3d746facbd95072fd18",
   "skills/inventory-basic-coach-2/selftest.py": "e689093b0b35d89d11a43bc84d663abe7bc9608580e038a3f6854bb2be5617f7",
   "skills/inventory-basic-coach-2/.phoenix/originality.json": "fe95f04bc7cb4de9a8f58c796437023ff322c9a73bf31b856a52589b209a31c8",
-  "skills/inventory-basic-coach-2/.phoenix/provenance.json": "69474226d40e506015a5e5df4c913a82bf62a8a529ca03abefe17bba1ad81e8d",
-  "skills/inventory-basic-coach-2/.phoenix/selftest_evidence.json": "77525205150101fc070480fd3f6853f00689a7caf3e827a9ca27decd703d9526",
+  "skills/inventory-basic-coach-2/.phoenix/provenance.json": "bc933c993617101c10eb7056210465f5f2dc74a1c56dfdea9d0a3d6c609e154b",
+  "skills/inventory-basic-coach-2/.phoenix/selftest_evidence.json": "03ac25385a5bfa37763b66df6068b0b4bcd92bd3af77547255b1e24888fa338d",
   "skills/inventory-basic-coach-2/references/creation/p0.md": "bc77bbfd7b9a3f65801db1f7ac8f45251337ab65f6182eb34c53f8f2054b558d",
   "skills/inventory-basic-coach-2/references/creation/p1.md": "d0e9fae2c516b1be531ce40c6d2f3c05f130a5a029aaa42f8e4a2283008bcc6d",
   "skills/inventory-basic-coach-2/references/environment/p0.md": "7322f3a497eb947f9f142ed07315fe7f614cd9e4efda798b8a591dde8012c0c5",
@@ -54,8 +54,8 @@
   "skills/inventory-basic-coach-3/run.py": "e5261e1dd726c222cc30423a4e6359e76ecc1983d040bf4af6735464e9584c3a",
   "skills/inventory-basic-coach-3/selftest.py": "5b4356a2f71debe1688ba549a3a3149b97a0372db41914ab667b4d3886212d10",
   "skills/inventory-basic-coach-3/.phoenix/originality.json": "43f970c85f9130b925b0dae197da045b38654ca1038dfaa5990e612032dd17d5",
-  "skills/inventory-basic-coach-3/.phoenix/provenance.json": "0d4db4fca80b00ca1e7d6d5dc4df4b4d3b7de43ce8dd8ca0e59b286283285b73",
-  "skills/inventory-basic-coach-3/.phoenix/selftest_evidence.json": "f97c6a998b5c0d764d234c2e88e8530cc9bf23bc209881650ced7a3a4eb88b2c",
+  "skills/inventory-basic-coach-3/.phoenix/provenance.json": "659fd8fd541d149f47b06c6869e1c2684a9ea9cf77ebb8ec84586cff9f0168fc",
+  "skills/inventory-basic-coach-3/.phoenix/selftest_evidence.json": "e88599db6f7fc551c23c763afa510e8fff51512d21e24a33da0d9f91a8e6b4cc",
   "skills/inventory-basic-coach-3/references/creation/p0.md": "0331307c50de046498f84fa7d38ff5f363719c7faaf85e817b5165864a139d2f",
   "skills/inventory-basic-coach-3/references/creation/p1.md": "9537ebb55c37aff977d89c5497de648d236f658ad940d831a42b5e20005a14b9",
   "skills/inventory-basic-coach-3/references/environment/p0.md": "5847593f03fd8e978df9062253ad09914142d46b248e1eb03c6f97991e38912e",
@@ -66,7 +66,7 @@
   "skills/inventory-basic-coach-3/references/production/p1.md": "8cc5cec7e7f75fab95751fb7e48b265959305844ad5d446d99a26e7d0d2a2924",
   "skills/inventory-basic-coach-3/scripts/main.py": "b0305e638e8b750351bc7675325566f1e0d2f96ebee04e1dbd8b63dde11adf42"
  },
- "sealed_at": "2026-10-18T20:01:52",
+ "sealed_at": "2026-10-18T21:00:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

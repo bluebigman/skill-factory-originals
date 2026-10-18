@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "business-continuity",
- "merkle_root": "84dba6a01c7fce54c5394417be7acf61e019a3d393b67513a6e044367784ace4",
+ "merkle_root": "bd44f87090758a03c22938ed392df6c5040d5ffcc1f3e1165e05354f2e54465c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/business-continuity-1/run.py": "b3092d8b236b8202382b851f09d0f3a4e753a11438e9795b1282ba96783cd239",
   "skills/business-continuity-1/selftest.py": "0dfeafdc358260e2d9c0ae7ae3da9e642ddd35fba01ba35dcc53ba4b269aa469",
   "skills/business-continuity-1/.phoenix/originality.json": "bf1c3d488fe4cbfac7eb0a2708b95475be15aa5490df119e33f1eca3e57c36ca",
-  "skills/business-continuity-1/.phoenix/provenance.json": "108aa55addf295f8a5a86671544261bb51fded29bd914299445446c161e06867",
-  "skills/business-continuity-1/.phoenix/selftest_evidence.json": "4a699de47d95d36e7af4227229c9e0080256a191d0b6011700ecc28bbf17715c",
+  "skills/business-continuity-1/.phoenix/provenance.json": "734fe4c50cea7919a2a04332742df71c0b52eea2a11f4783b08f6d813bd7b29e",
+  "skills/business-continuity-1/.phoenix/selftest_evidence.json": "b5704d11e6378da8a9a97a7e615332982668c67ad839176702ab42c1f672f9c7",
   "skills/business-continuity-1/references/creation/p0.md": "850208ad2851420c316890c6783438b6377077c53ee364f32a4b0f58f06d9c4e",
   "skills/business-continuity-1/references/creation/p1.md": "f54d0e8d77d9331386a7bb821b7e4005693b01cf4f14dcb27bd715432777a134",
   "skills/business-continuity-1/references/environment/p0.md": "349041b6869a549f48b7833cc791d978661f6c1fda27856b36ef31e3a8d8fd4e",
@@ -37,8 +37,8 @@
   "skills/business-continuity-2/run.py": "90cf08f4a47000b9917cace86e9ce14e191571524d6febf1483441cd2482d453",
   "skills/business-continuity-2/selftest.py": "4f9436414f3271abefd139b318970957e8f435384cccd6bfd70e136cd97488f8",
   "skills/business-continuity-2/.phoenix/originality.json": "6244edc9a9084b32acd1a83759911731755dc65ba942268c7766957e713990aa",
-  "skills/business-continuity-2/.phoenix/provenance.json": "a2438f4063bd5de25cb6719d8e797c6d915edcd1197ed97b8d20a787be36e3c8",
-  "skills/business-continuity-2/.phoenix/selftest_evidence.json": "f7066f8336e2334568fb978edb62a06c8ef9e7606b870c0d639d207b449175dc",
+  "skills/business-continuity-2/.phoenix/provenance.json": "9c46e645876cd96f2bd15d3675825732b0f49bb397479cdd807d8428d951dee7",
+  "skills/business-continuity-2/.phoenix/selftest_evidence.json": "5528fd179c943852ead1cf94991969d01526850eb280be44944eb18bee433d5b",
   "skills/business-continuity-2/references/creation/p0.md": "b944ee1577a49d3a9991f0558dcd9d82a5a6be89c27cc937fa211272fc15c42f",
   "skills/business-continuity-2/references/creation/p1.md": "69cdea4d85134e70cdbb734ace9e01c8c721a1d9eb477791f1063039f16a4fb1",
   "skills/business-continuity-2/references/environment/p0.md": "a37da20546c288d1de2ec514293ac52599cfb10d015be0bf69525e339be82f17",
@@ -54,8 +54,8 @@
   "skills/business-continuity-3/run.py": "183ebfeaecdd82082481ead179b942dd827a4b1f057d4cedb37d3dbe28526e63",
   "skills/business-continuity-3/selftest.py": "81a352a3f6b32267a4c1d879d861c0381745718357e7e4735a6e5f83bd5aae8d",
   "skills/business-continuity-3/.phoenix/originality.json": "6475e3200a08a91885a12ff53dc483b3405e42558204cf8b69d5ad478b9662db",
-  "skills/business-continuity-3/.phoenix/provenance.json": "38f6c9e2b21bef6a6a1e87235454bbf26d4ec3862f351d093d33e3ae0ac560ae",
-  "skills/business-continuity-3/.phoenix/selftest_evidence.json": "480f255b039a20ca4cf96126043bb4c026f80284ff556dc100a22fce7feb52c9",
+  "skills/business-continuity-3/.phoenix/provenance.json": "08e5ca4d32ac87a86638945ef5d794c0874f543d7d67d2c11b71e75c9ea92d51",
+  "skills/business-continuity-3/.phoenix/selftest_evidence.json": "e35aa72572e6d8e06b4c51dd8b55996dcb4d187a7881fe8f03b060eb73d3177b",
   "skills/business-continuity-3/references/creation/p0.md": "5d803bbc097129a8a568bfd2e07fa77106c94612c81c8dec435e1521678cfa3e",
   "skills/business-continuity-3/references/creation/p1.md": "71e8c20cf1ffeadd6b12a902bb41d245ad90ce35f4ad300a5a6286824402b018",
   "skills/business-continuity-3/references/environment/p0.md": "568a32225960539261e5babe74793ca5559916d4005b390087799cb0eaba6dc6",
@@ -66,7 +66,7 @@
   "skills/business-continuity-3/references/production/p1.md": "ccbbbedf9f54fab5dbbc3810c33bd5bda3a92d1b340745703a85eb0dfdc4b970",
   "skills/business-continuity-3/scripts/main.py": "42a690cfa5e6616514b1a534d3a8a265201a1e4de2535c7c0d0696d0d8fbb329"
  },
- "sealed_at": "2026-10-18T19:52:59",
+ "sealed_at": "2026-10-18T20:55:12",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

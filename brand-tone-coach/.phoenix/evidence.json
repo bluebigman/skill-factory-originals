@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "brand-tone-coach",
- "merkle_root": "ed1141323400796bfb7f2655129a064385fb022ef52d61602bcd2f4f2fac2eb5",
+ "merkle_root": "049eecf35fd3e99e37e0608a8be846e96d796e53d39478e667d55e69ffd060f1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/brand-tone-coach-1/run.py": "8a0ee4ed4df2bdfba2f8a543f11350f4dca3d6e00e03e3970e32fea3f5db67b6",
   "skills/brand-tone-coach-1/selftest.py": "dbdb95bbee0675bac5153150e93c53bb600773582b8b7b14c711d73fc04b1de7",
   "skills/brand-tone-coach-1/.phoenix/originality.json": "f3d7a20f3caa8561361ffc66c245be7903ff69515cc50182ada5b9f30ec81c85",
-  "skills/brand-tone-coach-1/.phoenix/provenance.json": "6761d1cb7508bb66332be0baace8225029aa7df8b982a45d2de54f9a844a02a3",
-  "skills/brand-tone-coach-1/.phoenix/selftest_evidence.json": "476b648bfb3fcaf2e6ab6f66fd7de17f04f50959ab5cfb1f564f741dbeaef31e",
+  "skills/brand-tone-coach-1/.phoenix/provenance.json": "20aeb71885a011fa37d09b13e5a1f1a5b5190afafe67d2d9db171f9702e1712f",
+  "skills/brand-tone-coach-1/.phoenix/selftest_evidence.json": "622b9a3771a75e39d9257d2dca7a41904486802733ff2d6867f4629d44321e68",
   "skills/brand-tone-coach-1/references/creation/p0.md": "94c51c056ee79304d0b01c765555c39754d51f0bccddcc771d6f992d9e025397",
   "skills/brand-tone-coach-1/references/creation/p1.md": "5e43f625c383c246dbb1d46e21f9c763dcfb2a1858d7d50ee5eaa7f7724746ca",
   "skills/brand-tone-coach-1/references/environment/p0.md": "8d36f735619e23a09c88ca43ce0ade1741110b26c0e4db68c9e0094422cf1d2b",
@@ -37,8 +37,8 @@
   "skills/brand-tone-coach-2/run.py": "51f46ce8297e87f40ae1f77e108cf1c39640cd39775bebd8bf81acb7594d8a29",
   "skills/brand-tone-coach-2/selftest.py": "0be3fa913ad7ca9f46969208d14d916a09962833fe4e50b72e749edcd42ee51e",
   "skills/brand-tone-coach-2/.phoenix/originality.json": "f8d37049511211fd8cd7ea907bf827727bd64d3b1630f3ea709e9c05972ffc53",
-  "skills/brand-tone-coach-2/.phoenix/provenance.json": "b7b99126f9c277fead898fc21aca3ea364212b4674f2461538c1d4ab7d7f7d9e",
-  "skills/brand-tone-coach-2/.phoenix/selftest_evidence.json": "3e9e4a7428338234ad8256bfd0de9326a3f13219c34e249dc077809203c6e070",
+  "skills/brand-tone-coach-2/.phoenix/provenance.json": "f191c09e82af15bdd9a1f78a86985a68fcfd71911c6782718681a5758a702c5f",
+  "skills/brand-tone-coach-2/.phoenix/selftest_evidence.json": "cfcebfbbeb781e4a05e750a934850b950dc1af4e28a1ab9a1d8c94529748e234",
   "skills/brand-tone-coach-2/references/creation/p0.md": "316bcfdca5249f31c104e9ca306cf48c89eb233ff550e396032c110670f3062c",
   "skills/brand-tone-coach-2/references/creation/p1.md": "1e49e9b1103f760c30e8a6782398c9d458f4c54ae094de6b6f5def1210ddac21",
   "skills/brand-tone-coach-2/references/environment/p0.md": "678661ba90b5b940521d9fd9dc9b3f2247df5522d94d0a85e632b250736b6656",
@@ -54,8 +54,8 @@
   "skills/brand-tone-coach-3/run.py": "4b4127a11b2df39ddd241e8d0b972b87901277d43a4a15211a99660b80152c77",
   "skills/brand-tone-coach-3/selftest.py": "38d87bd8eda6bbcf8fbd1a979e6f94a3e5b5183fdba774a3f6df4388e90f30fb",
   "skills/brand-tone-coach-3/.phoenix/originality.json": "a35dd594bb7cfaf6326b8eac6710579c94e3962dc8df75ad3cc7484779437752",
-  "skills/brand-tone-coach-3/.phoenix/provenance.json": "84cf212f73708f52acfc84be2923592c1fe91d2ed8e1d7f4461e8ae5c63dfa2d",
-  "skills/brand-tone-coach-3/.phoenix/selftest_evidence.json": "02a9f923e310459dbf33bac5ac951f44b844a18b13644949e0ac693510a07506",
+  "skills/brand-tone-coach-3/.phoenix/provenance.json": "98d4d234cdf2b9a5f5eef6c33eb2fa5d84ef6e08ad90a627aad6fed9ce8421a0",
+  "skills/brand-tone-coach-3/.phoenix/selftest_evidence.json": "e3c4d57bc2e424255117d4d6f5d937ced22eac7415d37cd9e10fc4260fc68d9a",
   "skills/brand-tone-coach-3/references/creation/p0.md": "4a5e85463b29e0773de028b42dafe1009a63c6b8b3c3f2233b11d4068bc59b58",
   "skills/brand-tone-coach-3/references/creation/p1.md": "8e41e95e2aa91870952a332d434933a07d8c8abd2dd51b9872c5ca77f41550bb",
   "skills/brand-tone-coach-3/references/environment/p0.md": "0743a2775e3a2cdc31220cddcad9cfb69943193b5c61465f7f2180a20669fb18",
@@ -66,7 +66,7 @@
   "skills/brand-tone-coach-3/references/production/p1.md": "cb2a191d3fe32fbb81cc48d334e166ff952d26ece55829f756e5e935c97d1b0d",
   "skills/brand-tone-coach-3/scripts/main.py": "6e8d8faa4ce549b9b497aa2ed4e19f7914aee02cb10344125996e265dd78cdc3"
  },
- "sealed_at": "2026-10-18T19:52:46",
+ "sealed_at": "2026-10-18T20:55:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

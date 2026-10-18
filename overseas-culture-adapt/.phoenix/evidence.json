@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "overseas-culture-adapt",
- "merkle_root": "04404d095564d2b52b705ed40dd3452903ef363c5adbc33eabccee1999b91bcc",
+ "merkle_root": "e1de08cc13f0c82350d65713b87db5fc01563cbd9750949f49b7f4833878670f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/overseas-culture-adapt-1/run.py": "37a2e101a57e22ac36cb85f848b51685a64c03f9bff54e1a761990c93d2b7c70",
   "skills/overseas-culture-adapt-1/selftest.py": "bef3399802a6a62b3546323bf31b1c02535e5bb4e4cb6294ee0910dafe93f48f",
   "skills/overseas-culture-adapt-1/.phoenix/originality.json": "add1567e649dae2e1c8cba9e1fa6e017d94de9c6e4228573782e0f42ae29d304",
-  "skills/overseas-culture-adapt-1/.phoenix/provenance.json": "04abaca82c2f5db6fa0fbbd3496a709bb4a362c805b71bbb247d931b37cbbcea",
-  "skills/overseas-culture-adapt-1/.phoenix/selftest_evidence.json": "f1ff8982546a14e0cbad809ff90d1dd24c7a4b2be35b7533b1669bdfbd7de069",
+  "skills/overseas-culture-adapt-1/.phoenix/provenance.json": "be9e5b449211809fc8af00a97739fce0c1ebbddee708b1ca771414adf0ae30a9",
+  "skills/overseas-culture-adapt-1/.phoenix/selftest_evidence.json": "2353e3659da657cdb26128e88c21752b80ee5b13e0e296ee139a3498acd81ec3",
   "skills/overseas-culture-adapt-1/references/creation/p0.md": "25694772ad940f0f95c44cbccb54c15b82ef1219b56b535a97815ef68ae50d21",
   "skills/overseas-culture-adapt-1/references/creation/p1.md": "3237c8d2a4ce34508ff1c6f84f0d1f72dd7d777ecf7d67bb597ba1039cb3b98c",
   "skills/overseas-culture-adapt-1/references/environment/p0.md": "0e186273a52282f279a26e18e19b02b5af8a63389835d93992d0dfc54e581855",
@@ -37,8 +37,8 @@
   "skills/overseas-culture-adapt-2/run.py": "c886c45bff907112961a73154751b8c973e0b369c487e417f72a2acb2ed4bfb9",
   "skills/overseas-culture-adapt-2/selftest.py": "fbd4e1fa7d580122c2204f87f054ff99880f819514666d51f6c52baace7e67c2",
   "skills/overseas-culture-adapt-2/.phoenix/originality.json": "86bdbd8540c03910e9448d80ce468a6eefd75f6eab4870ab20a9c8f5a2dd4347",
-  "skills/overseas-culture-adapt-2/.phoenix/provenance.json": "13db7b6f68f3387eac3d7e1496a65c8de2540eba605b3ba13ada860313c3acd4",
-  "skills/overseas-culture-adapt-2/.phoenix/selftest_evidence.json": "e2c0f51e086fd53d02027a63c109c805a2f5792b47b4f24112c79b0630f0292e",
+  "skills/overseas-culture-adapt-2/.phoenix/provenance.json": "4b0dc48da82219c561a3861d087c5dd94f3fb3e35943fbbca70e87411f48eae9",
+  "skills/overseas-culture-adapt-2/.phoenix/selftest_evidence.json": "c70c8cb3efcd6a41c9aa9ee50542e83e50b26dc528a3ee0943519aee745779f6",
   "skills/overseas-culture-adapt-2/references/creation/p0.md": "48f7d45f92f749bb5cb09517e1a0fd941096cc21c24707cbfca627bab1daba97",
   "skills/overseas-culture-adapt-2/references/creation/p1.md": "f79210b608e7824c60ad4ed98c8b6c0abe75ddda23c2e5bdd3f23792ed78b627",
   "skills/overseas-culture-adapt-2/references/environment/p0.md": "2d8dba11f7630c3bfbd9025540c9bf5089da3d98bea0db2984ddcac6b7a484d0",
@@ -54,8 +54,8 @@
   "skills/overseas-culture-adapt-3/run.py": "93887ea0b1aafea0569f7a2983e533666a59e8bf5852afdde3a8af895192e089",
   "skills/overseas-culture-adapt-3/selftest.py": "4bb0e7e4bf35c1898a02ba78e3759fd13be2f8f1e81fb9da6b3f3c5a775c9344",
   "skills/overseas-culture-adapt-3/.phoenix/originality.json": "c58ec39121ccd39b65f7152ea9213e54360b04120549fb8ab30e509ac9546c0a",
-  "skills/overseas-culture-adapt-3/.phoenix/provenance.json": "2787664ab77637eb0de359dcf068a6f0d9c75537f745fd7ecae3112ac5fa5784",
-  "skills/overseas-culture-adapt-3/.phoenix/selftest_evidence.json": "7647685d95f29c5603b2697ba648b57b6d9797278b5929b5682b560a6c5224dc",
+  "skills/overseas-culture-adapt-3/.phoenix/provenance.json": "9e9563ab6fbe56d60d81f359db48507aff32a054240805a5484ed7c9429d2fbd",
+  "skills/overseas-culture-adapt-3/.phoenix/selftest_evidence.json": "b0e7358611100d632cff7f227c76b9e11abd054dbcd3e8cb2f0b8c01801e4d58",
   "skills/overseas-culture-adapt-3/references/creation/p0.md": "572c97ade20a12f7bae0cfc9621d37043d7739aff99832b1200998652a4b1912",
   "skills/overseas-culture-adapt-3/references/creation/p1.md": "f28c5a914d55efec3bcc6f2113ba4f0d890b36b2217c71b1e68abc313a7ab6cd",
   "skills/overseas-culture-adapt-3/references/environment/p0.md": "4388c8bffb9533547584fda0488ed57c10f9e6e305c5cb2fed759c1f30fb81c9",
@@ -66,7 +66,7 @@
   "skills/overseas-culture-adapt-3/references/production/p1.md": "60be28eb7f79488e83f804c00d98665741fae6c49eeb36d4c272e06a2c59710f",
   "skills/overseas-culture-adapt-3/scripts/main.py": "74ca61a38cf0e278cc3f7c591b6a93ffc0a2f3d72595cf041808c26908bb0585"
  },
- "sealed_at": "2026-10-18T20:05:10",
+ "sealed_at": "2026-10-18T21:01:44",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

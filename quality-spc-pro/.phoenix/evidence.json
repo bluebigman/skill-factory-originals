@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "quality-spc-pro",
- "merkle_root": "f0cacf2bf67559df13ba3f427981c9ec2caba4ad655b62f9a40cc93ea2ed7c14",
+ "merkle_root": "ca7c18541f369786de4bd5e8e4faaadb761ea758e07477f89e61330b04e2f69f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/quality-spc-pro-1/run.py": "4103beb0813eb910719031974a6e8a6ceef282ffae33a62872309895ca6d90e9",
   "skills/quality-spc-pro-1/selftest.py": "a7b303700d35d355b502b22294cefd4f86a2f9cf256e8c8545a2e29067692977",
   "skills/quality-spc-pro-1/.phoenix/originality.json": "f8f66bcd4ebb9ef5eea0420505c64ec11d1180e766bbce8d1f33fc0ca9fb431f",
-  "skills/quality-spc-pro-1/.phoenix/provenance.json": "beffa5172917f646a3ef4d3ceeb10b9f66c6df692f1415accd6176c801ec23c2",
-  "skills/quality-spc-pro-1/.phoenix/selftest_evidence.json": "8455bc22173f11746022ca713779f0ea213ba921f885d0cd42de8b161a4a402f",
+  "skills/quality-spc-pro-1/.phoenix/provenance.json": "7ec24ee31e9a07b8986382b47f12164d024283cee3f2b4fc45736f3dcb9d707c",
+  "skills/quality-spc-pro-1/.phoenix/selftest_evidence.json": "9e4abb88460177d544fe6c09638d7a4c3961be8aa8a4c0c63a67386f163d13c8",
   "skills/quality-spc-pro-1/references/creation/p0.md": "8f1a7ba3d3c5008298f285b23e4e74ea78b42e25d6207f0471383406718fa481",
   "skills/quality-spc-pro-1/references/creation/p1.md": "d957e29502dbdd26fbf1746cf734d28bf59396e52b4c178e13e68bbe1e41b21f",
   "skills/quality-spc-pro-1/references/environment/p0.md": "968e0c909bc73641894c739cdd7bc0102e901441b4bfc9c90b7be21e9b6c438d",
@@ -37,8 +37,8 @@
   "skills/quality-spc-pro-2/run.py": "3d9d9a3847c87613ffc0b3067fb1623f7cf841efab7b9f224d98682dd61c774b",
   "skills/quality-spc-pro-2/selftest.py": "641c91580f18033425fd946190439be37c56162c29d8cbaa5a3bbef65c627dd6",
   "skills/quality-spc-pro-2/.phoenix/originality.json": "2947ce84a31835b5918ad1a9d157960c352b88a100e5c2a6463a51c378302340",
-  "skills/quality-spc-pro-2/.phoenix/provenance.json": "6cb125cdd4567248e89938ceae015546c6374140df935c95a6e50cb9ef1f6f43",
-  "skills/quality-spc-pro-2/.phoenix/selftest_evidence.json": "590842618c3e8769fc057cd02fab2fb5172a561f35842dcdfd57da02c609c828",
+  "skills/quality-spc-pro-2/.phoenix/provenance.json": "87b5a57f94b22adcbc1ae105c1f5542c8dc8dc24b03759413139b32346ef94b7",
+  "skills/quality-spc-pro-2/.phoenix/selftest_evidence.json": "90cb3cdb34a009fcd90dc7252b4fb1a2b28b3b908e5c065183454e3cb286b355",
   "skills/quality-spc-pro-2/references/creation/p0.md": "a8e8f72349611712b5c6ddb985fcb1ea8d9950c30364b04fd082ac603617784d",
   "skills/quality-spc-pro-2/references/creation/p1.md": "2facf297fc9db7a4ae9d09981733965191a7f32469d19c35a47f24b4b7cc423e",
   "skills/quality-spc-pro-2/references/environment/p0.md": "5b400f990d0983a80b82ed54d0a581eca9259a462a4a603f54084ae15e113ec4",
@@ -54,8 +54,8 @@
   "skills/quality-spc-pro-3/run.py": "d1d7437aee19ae64909606c814e63f155813c305aef13f7f38ea9c0f306bfd0f",
   "skills/quality-spc-pro-3/selftest.py": "4ef4be4d73930909d007b828bcbbdfc299ca7aed5c3c85c73defd2edecff75ea",
   "skills/quality-spc-pro-3/.phoenix/originality.json": "40772009d08d5db1f055fa9ebb27e40e2cd520ad72783eb3e3f7dc6c79df20c9",
-  "skills/quality-spc-pro-3/.phoenix/provenance.json": "e248593d14398175792abec58e54b800f1f75cc29844a77ad4eaed12e3cf0be2",
-  "skills/quality-spc-pro-3/.phoenix/selftest_evidence.json": "7bc0b99ad117a1e79deccf00e749eaeaa86b69bbe596ea816e6b0dd7816dc81c",
+  "skills/quality-spc-pro-3/.phoenix/provenance.json": "4665c345f03eb36c60c47b37eb842fa89b8928eed643a796dd16ddda8754ed3c",
+  "skills/quality-spc-pro-3/.phoenix/selftest_evidence.json": "c5f2cc7c42abacb184c9a782f7c37e52af096de2953520aa7287397031adc6c6",
   "skills/quality-spc-pro-3/references/creation/p0.md": "bd2f4a0a4bfc97d8f4daaed839e39e133e6fe3d4aafa0f628c4e108c661b52eb",
   "skills/quality-spc-pro-3/references/creation/p1.md": "767609703712c0272a502a9b04eba0573f92997bd49ece31171e4b01f928a5d9",
   "skills/quality-spc-pro-3/references/environment/p0.md": "7be657a2d92c1fc09fef70257a0f4044c36a964b82ef92e9dcf585cab8d72efc",
@@ -66,7 +66,7 @@
   "skills/quality-spc-pro-3/references/production/p1.md": "f88352188ccb3afe64144ac637269de0f6301efd745f5d57d7bb93d0e22522d3",
   "skills/quality-spc-pro-3/scripts/main.py": "763c93d9dab096ee397f5bc603a3f00a26e99dbdf5698806aa8b61196fcf5982"
  },
- "sealed_at": "2026-10-18T20:07:01",
+ "sealed_at": "2026-10-18T21:02:42",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

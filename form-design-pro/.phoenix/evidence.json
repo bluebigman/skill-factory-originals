@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "form-design-pro",
- "merkle_root": "bd90269bcf62c99ef0b031b2431fb422afd80ef90bede9108e2483fae7c33b83",
+ "merkle_root": "2920ee4ecb381b514bec9fc8c46916153dba2bc71c6d8670102ad8fb8200b795",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/form-design-pro-1/run.py": "ee7795340cfaf08b775dbf040d791a257fc1fcbd438cf0be49465d8f040958e7",
   "skills/form-design-pro-1/selftest.py": "8ce4f76fc586cfd9cfc216ce2ac21f1701c9ba28a52b9bf9b055f115475e0d70",
   "skills/form-design-pro-1/.phoenix/originality.json": "06517665bb8dca0c202f22172d4c6cd0ad7f5e9edfcad63c59900a416b63e3dc",
-  "skills/form-design-pro-1/.phoenix/provenance.json": "54ac06a504a22cf09f70c3cd57fd274b1a94eaaee4842b8eb7fd30bdbe79bdf9",
-  "skills/form-design-pro-1/.phoenix/selftest_evidence.json": "07f218e900a91ac4daf439d4eaca4e7db8807f877dc8a898e3a4b3e6df3fb421",
+  "skills/form-design-pro-1/.phoenix/provenance.json": "efc8e3cb46a92a825a681c2bad0fdf0239c02cc28a8b63222b01cbcf255417d0",
+  "skills/form-design-pro-1/.phoenix/selftest_evidence.json": "66f45e292ed9c98af547aaa6296416185f5e25dd4a4bb8d73307e0d0e04c3a7c",
   "skills/form-design-pro-1/references/creation/p0.md": "b21499433bc3046b122d8bef6b35f750a14402d6ae640129bbdea297c36539cf",
   "skills/form-design-pro-1/references/creation/p1.md": "bdd1dc5b3a0a20ac4b9b4679e1ee89895f6250008e29b217061119fe15f75735",
   "skills/form-design-pro-1/references/environment/p0.md": "4e53c16c51f473685569bcbc64509138d561131384d312b4ef13cdd6670a41ef",
@@ -37,8 +37,8 @@
   "skills/form-design-pro-2/run.py": "fbe9231364311045fc12bac378c405350cc2ef2404590c3c6344e2f8f1fb866b",
   "skills/form-design-pro-2/selftest.py": "21014525e217e5446712682a75452230e33705f341587fcb44dc5cab5ba1276d",
   "skills/form-design-pro-2/.phoenix/originality.json": "e87d7726064f45cf7e215af0341e028e724825b6fe1fdcb2a53276a64fe4a8bb",
-  "skills/form-design-pro-2/.phoenix/provenance.json": "f8c15c10a699ac57389727ae9cc5a03d260a0ce5f3afddeaa3e7f6195a9b8ba6",
-  "skills/form-design-pro-2/.phoenix/selftest_evidence.json": "9a93edb7d29698a1e18cf5a9fdbd7fd28130fb8eef52771819f6145e55559c25",
+  "skills/form-design-pro-2/.phoenix/provenance.json": "4916cd5eb391aa75bf2ed7b154851b732fe9ac2ebb5fe06a994f49efc190c7e9",
+  "skills/form-design-pro-2/.phoenix/selftest_evidence.json": "0b2b3899d20e0d4591a214e067c40dd2def175bbbaa58779f9df80466008c82b",
   "skills/form-design-pro-2/references/creation/p0.md": "974d759a5ac7d3873b240b746e43673d232e0d89272097fceaa7b5735dc15ef7",
   "skills/form-design-pro-2/references/creation/p1.md": "57a111f5852e5f00c96e5af14d51b52a3a636b4897c2ff9f67da645a1c9ebc21",
   "skills/form-design-pro-2/references/environment/p0.md": "f15148a9cb4a2a6d952e28e27307044637016517d4ef69717d4c497e3a171ff8",
@@ -54,8 +54,8 @@
   "skills/form-design-pro-3/run.py": "4a1fb4b65c8d3a1f4f59165ef8640a07eeb4056b87277994ff3a9b03f40100d3",
   "skills/form-design-pro-3/selftest.py": "bedbf380654f5fe1dd342833b0558d33a47a1a6e95d83d6876004e2c8f2feb62",
   "skills/form-design-pro-3/.phoenix/originality.json": "fbbd24a10b2a024d659d68f3a6b4d795c60b17a328489daf8f89860a18ad049b",
-  "skills/form-design-pro-3/.phoenix/provenance.json": "fb2bf1fcb4269a2bb9c4449d77c50d365bab4ab6def8074b5c2bc882392f6e4a",
-  "skills/form-design-pro-3/.phoenix/selftest_evidence.json": "8dc625059a3a8820240f51b6d6b2109c904d6313de0ee5954396b6842b51cced",
+  "skills/form-design-pro-3/.phoenix/provenance.json": "79bc516b0d9628c025f1927827df9233cfefc8e15b04f49f01e15a1d7feda8a1",
+  "skills/form-design-pro-3/.phoenix/selftest_evidence.json": "9083ef05b8b49ebbdb4e500d62ee1af6a4cb1153cc9483b56f3f1dd338c4d1e3",
   "skills/form-design-pro-3/references/creation/p0.md": "9c60117ad9b5c389859e46122ad8133330ff4f6ef4def7a9cfee1492e6d8d834",
   "skills/form-design-pro-3/references/creation/p1.md": "acffc50d15b0cc21d03194ab6481e04dd1c121f6c27056abe807203f3d863a48",
   "skills/form-design-pro-3/references/environment/p0.md": "5d5beece29195547a974a89bd2de374cf8929c605df266dd095a739b1896ae92",
@@ -66,7 +66,7 @@
   "skills/form-design-pro-3/references/production/p1.md": "bd28be4bc2816e531286c0f64fd1cadaadbdb637669a479f3d1b2ffdc7d2655e",
   "skills/form-design-pro-3/scripts/main.py": "dfedc8ae24e82388c3f37d82cb52aaaab1efa6d13e7beec023eadfb7f12597a6"
  },
- "sealed_at": "2026-10-18T19:59:32",
+ "sealed_at": "2026-10-18T20:58:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

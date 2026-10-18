@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "worksheet-template",
- "merkle_root": "535fa5ba803a6dc3abf37b5d4f424ed97cf9e66089a6470836d8ddaf95cd7b72",
+ "merkle_root": "097f81ffbf8fe60474b76c1290a18dcfb18c923f74599ae97d904da806efd589",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/worksheet-template-1/run.py": "b2efd5374d3cc97d320cb6c3be1f4e77f5f48ddaab04b77f8cf86371fc7780ac",
   "skills/worksheet-template-1/selftest.py": "758f3770970b5b216dc935b0b6951f4abf1db9249e746e68afb17a7e83733b75",
   "skills/worksheet-template-1/.phoenix/originality.json": "09ba140f22b0a3703d7244fec0e8a6e13307933a32d40620685d6b362fdf7398",
-  "skills/worksheet-template-1/.phoenix/provenance.json": "a6586f533d8d84d7a9c67e8b7f688954cd8409b63525ac8a135696acf0816ffb",
-  "skills/worksheet-template-1/.phoenix/selftest_evidence.json": "94fec63d9f5bdbb858456a6dbcc9ee166ceac4a03950972ddb19b5bac40104c3",
+  "skills/worksheet-template-1/.phoenix/provenance.json": "bc39525c909e0fbd716cb988cfff1bcdd75944502011f66c5c7979f1ad93a90a",
+  "skills/worksheet-template-1/.phoenix/selftest_evidence.json": "118465eca4bd75f97ca3100927c0a490def595718aeab77d3027d554d13db68c",
   "skills/worksheet-template-1/references/creation/p0.md": "214d0ae222ae36cf5f809fba22d46f9674e744ce1d59113b7714482b0222a0d8",
   "skills/worksheet-template-1/references/creation/p1.md": "3c4dc655a21afb562f0d7b6814bda7b4cb34627ecd3f05637c844c93a5fe54b1",
   "skills/worksheet-template-1/references/environment/p0.md": "5c61c86fdb561e7ce216e2ad5b58bbb6bde27f45e56b006d1ccd5d7540758854",
@@ -37,8 +37,8 @@
   "skills/worksheet-template-2/run.py": "961f82c71c7a86f9cf83efe9019dc68a081d5c7b2fb41b797420a19cc12deabe",
   "skills/worksheet-template-2/selftest.py": "b8ec68984bf8222320b0ed8869c2a377a9b5b8cc41bcba22a8608cdf0f2388e9",
   "skills/worksheet-template-2/.phoenix/originality.json": "de2175372c84d4e50f81166f3e1fababd17e556a7d4d2ce09a9ebdf05d22e580",
-  "skills/worksheet-template-2/.phoenix/provenance.json": "a717ea5be3796354af35a036c0b41e840f55e6385a8875010addc849fa3c8d01",
-  "skills/worksheet-template-2/.phoenix/selftest_evidence.json": "4cdcd682c0708165315338f87efb03dbf100e3baecaa4d6da5ae35e81c8321c9",
+  "skills/worksheet-template-2/.phoenix/provenance.json": "6bc11d1d51d1b19deb902ec059dd9a5b8491ecda10f611b0698b3f80bd792c0a",
+  "skills/worksheet-template-2/.phoenix/selftest_evidence.json": "d2eeddfc303618b7435c49e0170aac5d8323bf1320b877bbb2d5ce4d902b455e",
   "skills/worksheet-template-2/references/creation/p0.md": "d678a45e146d371ade50af5743ffb85cf02c448522d34ceca8528633da239d51",
   "skills/worksheet-template-2/references/creation/p1.md": "fba0db45a6f0be85126b248534aba2e8e93fd6307b37a9bf3c67572f3a3c6b13",
   "skills/worksheet-template-2/references/environment/p0.md": "280d9fb37442e579e902a49c04b7316fd0430f03a67cccc972708e807d6de09b",
@@ -54,8 +54,8 @@
   "skills/worksheet-template-3/run.py": "bf6f21e5750590a823da7e0c504d8736aa31eac9f033a61fe2efd4c1424f7c5f",
   "skills/worksheet-template-3/selftest.py": "d98335b6ff8738a503e2b06ade3dc4294ce1000b9c5a5369532b54ce5d6ed891",
   "skills/worksheet-template-3/.phoenix/originality.json": "dacb2f7ec6b31feb788f66386bc337a9b34ccb7499a07d65483729b4c7219bac",
-  "skills/worksheet-template-3/.phoenix/provenance.json": "fffdf5f8f391f1600df8258f76de5e4050c3a49f43955b20ff003c777f745f16",
-  "skills/worksheet-template-3/.phoenix/selftest_evidence.json": "6c6c53511480c8b795b96d4a3d12336d713898e313c407770f933b4060b8839a",
+  "skills/worksheet-template-3/.phoenix/provenance.json": "34582f5a843652e6be7c2819aad11ef9647401d38c2ebf9a53d159fb3f096f90",
+  "skills/worksheet-template-3/.phoenix/selftest_evidence.json": "ae8b16a7ffa24e10e3c7d5d004d7cf8f6edc305c51c732981550b875b6e83b4d",
   "skills/worksheet-template-3/references/creation/p0.md": "2e33d5c92ee8dfca05b2783d60d9181996c89f3f809aee8de7a54c247d73949d",
   "skills/worksheet-template-3/references/creation/p1.md": "41790650366ffd459aae0c119a14f1a32cf4395f0185d0e2d493a49047e1baac",
   "skills/worksheet-template-3/references/environment/p0.md": "f80cfa25fb896ad31436cbf48815fb9c64ff97f6b924013bbc3544a94e1ef50c",
@@ -66,7 +66,7 @@
   "skills/worksheet-template-3/references/production/p1.md": "a27dec7fc0ef3bf6276a74aa5072656eff335acc7cfeb1ce4c8d3786d8d7db08",
   "skills/worksheet-template-3/scripts/main.py": "2dc1f448e5f39bc9e17c3b35b52be79530e99ae38adc1ecf8fa3a50fb177fe50"
  },
- "sealed_at": "2026-10-18T20:13:09",
+ "sealed_at": "2026-10-18T21:05:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "quality-rule-engine",
- "merkle_root": "8e48e103d1bcb26e7cb8fbd73520451b46ba94a61d7ab225a67a628cb111eec6",
+ "merkle_root": "75bb6926a765031e6662efdf52bac1fb6db8ccd2b195976aa1ce422d8753fa94",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/quality-rule-engine-1/run.py": "441c4f0ac91b17e9a33c1a5a2f6d1ce47efc4d271e7cf5bbe7a03351f57cef14",
   "skills/quality-rule-engine-1/selftest.py": "429d5ae4dcf23162abe779b83edbbbecd9147db9db9c29862c4a13c87debfc39",
   "skills/quality-rule-engine-1/.phoenix/originality.json": "aa5d4a6e17eaf740997079aa043f98a712ca5095c2d8a0a930ef28eeac2c19ef",
-  "skills/quality-rule-engine-1/.phoenix/provenance.json": "9ebfc9551e61a5efd82d8902c9830afa778f44d4ab2ecb6cdb2d190636ff11ca",
-  "skills/quality-rule-engine-1/.phoenix/selftest_evidence.json": "4c0a698f4d808fdd601cb4c541340bf93d461ffbb483375ff1c6cbdc07e2612b",
+  "skills/quality-rule-engine-1/.phoenix/provenance.json": "c9f2122e1ad36edd691edbb7e7330f6cff6a88a1aeed9e65cbf46cdf5343146a",
+  "skills/quality-rule-engine-1/.phoenix/selftest_evidence.json": "43476d7712981efb06b36a03234535460765cc645bc4bea3917646463549505e",
   "skills/quality-rule-engine-1/references/creation/p0.md": "02ab215e979b2ed058245dd2498e4abf8372d9b5f0d73425a06ca63c5081156c",
   "skills/quality-rule-engine-1/references/creation/p1.md": "bd8f7c92e4d3bf2e7083cf1e59ac4682528d8ac7edba41737c377aa4b3940055",
   "skills/quality-rule-engine-1/references/environment/p0.md": "c46deb5f041ab68180fbeb43bef00ccfdff491eec37268514bd9f9226527572d",
@@ -37,8 +37,8 @@
   "skills/quality-rule-engine-2/run.py": "152360af089ce58de0e07301d0b2e2b643fbf17e85eaa55edbd2a3b73c73393a",
   "skills/quality-rule-engine-2/selftest.py": "92cadee51a274311bba8872c064da08b72daf3635d4f1dc5dc302abbc5b113f9",
   "skills/quality-rule-engine-2/.phoenix/originality.json": "be18204101c510123f7e5a5df91241689d350140b83d55a7e4ac802cd744818e",
-  "skills/quality-rule-engine-2/.phoenix/provenance.json": "2d62fec46d09729ce440be2cc7c0f62b1f11f358a2a19ad40ee34d7db742644b",
-  "skills/quality-rule-engine-2/.phoenix/selftest_evidence.json": "343136375701040fac0de2eed6f48fe06f97e30c4dc2bf42310229458b00714b",
+  "skills/quality-rule-engine-2/.phoenix/provenance.json": "7e9887b8bbb79b0f14b1bc08988fa259e3f5fa74470a418ab0f8f0d5673374c0",
+  "skills/quality-rule-engine-2/.phoenix/selftest_evidence.json": "acf8e15b83cb7c707b1c2e9ec6e8074f4f4960d37ae90e1bd8d46a35ea236537",
   "skills/quality-rule-engine-2/references/creation/p0.md": "5112ce68597896763a40332b16c0612a8baa651409270dff1f8b4ee67ffc0efc",
   "skills/quality-rule-engine-2/references/creation/p1.md": "fce6ea4091235b9c18d5e6a8420e7e75d03d83b3a03eb612f0b210ae555477eb",
   "skills/quality-rule-engine-2/references/environment/p0.md": "194cb3f827e4e1ee150bfad37b282db996df9365bbad72efe2f922e100445f2e",
@@ -54,8 +54,8 @@
   "skills/quality-rule-engine-3/run.py": "4622c632519faf657d5da2a0c0e35b53973d0d1a91a67bfefaf4098e3542b54e",
   "skills/quality-rule-engine-3/selftest.py": "ebd47c48c199f2d6cae6879a5cbe9aa8e5d39971b1ce21df9f0432375b721ced",
   "skills/quality-rule-engine-3/.phoenix/originality.json": "f7d49a7a5bc26a4667a9919aefa461dadc20d9970dc8fe498751e61f80117edb",
-  "skills/quality-rule-engine-3/.phoenix/provenance.json": "3b101f7ef42769b4c77570e8c4f7a31b86bbca8ecbe811c07715f25602bd222b",
-  "skills/quality-rule-engine-3/.phoenix/selftest_evidence.json": "21e4b8256366d7ccebddf858081259ae475065c7102786c4c38714f0bb28cb3c",
+  "skills/quality-rule-engine-3/.phoenix/provenance.json": "e8ac28f90d0eb21fb268a52b1781c761bdc66838c706fb2fc1e7907de4ee42d8",
+  "skills/quality-rule-engine-3/.phoenix/selftest_evidence.json": "8492e3823084cf3af1917364694f784b5376f8ed178b5685ec41948c7a897370",
   "skills/quality-rule-engine-3/references/creation/p0.md": "98b9c9af8eada40367459613ed8e654633eb78b0d5237d6604a90f2f00f7167b",
   "skills/quality-rule-engine-3/references/creation/p1.md": "45d618e6b23113e6b518ed303e39169f0646feb4eaee9321e12f834484abc541",
   "skills/quality-rule-engine-3/references/environment/p0.md": "70c9313148fa50aa8679df1d85f80e721d7fa80458fa265ef983255cbf4c98db",
@@ -66,7 +66,7 @@
   "skills/quality-rule-engine-3/references/production/p1.md": "9e938b1fe8934b5cadfb8741ed2ff643ea1ca98715e4eff89e1d0bacfbe5fcc6",
   "skills/quality-rule-engine-3/scripts/main.py": "255a997c5c24f14e959e2031970b9063aee6b10e6125e875f97089e4d253a1aa"
  },
- "sealed_at": "2026-10-18T20:07:01",
+ "sealed_at": "2026-10-18T21:02:41",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

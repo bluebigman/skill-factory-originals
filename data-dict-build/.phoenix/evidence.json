@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-dict-build",
- "merkle_root": "00df8aec698e644ba18e89b3d54a4aa134e1ba564cbd5279b328e6b0140fa4e5",
+ "merkle_root": "9379dd920535e9447a112cd1366be9cf154e65a43441559f20d5006d6b48389a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-dict-build-1/run.py": "22abd7604a07abc6d9af442773097699093433876a9b894a70c1ef230df06da0",
   "skills/data-dict-build-1/selftest.py": "4079c880609f74a8030f7d4b184c46a9dd78a7966409b998120268062de8079c",
   "skills/data-dict-build-1/.phoenix/originality.json": "cdaff813a0977a32d64d719a4ea37819e18a30f8a261cf5faf900a013b346060",
-  "skills/data-dict-build-1/.phoenix/provenance.json": "496f041e70426c614633aa431ea77f5d778b23c2d908563101006e2659186c6b",
-  "skills/data-dict-build-1/.phoenix/selftest_evidence.json": "f966e5d110a3e004e9c3259780a1979a9bf4cab2092b4806c546686b2bbaf3d1",
+  "skills/data-dict-build-1/.phoenix/provenance.json": "b21bca5c9978b3576b025607c15a78336e96a7d1fae1b533d12c077b7b642c98",
+  "skills/data-dict-build-1/.phoenix/selftest_evidence.json": "b1f782aea07af9c0ecdbf8730b221960b6762c567210aa297e5c7788b30e98b0",
   "skills/data-dict-build-1/references/creation/p0.md": "b859d856d782f8e50b965cf55977e47d8e0dc40522f08ee7e2546cd9139d5be2",
   "skills/data-dict-build-1/references/creation/p1.md": "82421c9c06260747191444ca8198f0ccd940e88338715625d5210023a5a43491",
   "skills/data-dict-build-1/references/environment/p0.md": "98ab1874cd45b5177d72b83dfb13ba4e4b852adc2b6e763f380fd8f0b1a5f5a8",
@@ -37,8 +37,8 @@
   "skills/data-dict-build-2/run.py": "03cf399440664f6ce48c9157e19057217cf8827b0e98032da093e04dd246f9fe",
   "skills/data-dict-build-2/selftest.py": "1aa20a710f01e9e38082552826d3ec846e6d65ff3eadbc5c0b09fdc83f95fbf8",
   "skills/data-dict-build-2/.phoenix/originality.json": "a9227d963feda26dbc0db5765705937e17e9f328bc8a5ef69c6b50887efc31a8",
-  "skills/data-dict-build-2/.phoenix/provenance.json": "6de3e81651b1451386a6c98dba12cadb94e5bc5c10c174fb4be583be77d506c0",
-  "skills/data-dict-build-2/.phoenix/selftest_evidence.json": "bf5ec1db9ef51f3dae192b5177d9d5105df72ea0e73c450d403ff7b7ad980cb1",
+  "skills/data-dict-build-2/.phoenix/provenance.json": "5e0ca2e8d6386c5a4b0135a8f5fe156739b6e3809f36eb8f21d5c998f788be91",
+  "skills/data-dict-build-2/.phoenix/selftest_evidence.json": "a03d3ad5f6d4eb0801e42b513516c85adaec85afb4233dff43ffc650ac140ab8",
   "skills/data-dict-build-2/references/creation/p0.md": "e1de59134111c12d99e008576fe8813a31115e8368693b61d14e61ac1226d0c5",
   "skills/data-dict-build-2/references/creation/p1.md": "22a5b8bfe497f341a3f66afc1d3eca1ccfbd454942d7905579bd2e05310746e5",
   "skills/data-dict-build-2/references/environment/p0.md": "ba1bc7462a3136bd7934f3094a270d849ec8282e41e3545aa44013c98e2db2dd",
@@ -54,8 +54,8 @@
   "skills/data-dict-build-3/run.py": "cf935b29eed58face86e9aea258e10b70a3f820a25d232edf5c1950ad64bfd7a",
   "skills/data-dict-build-3/selftest.py": "4985de93adfd79c423c131cdf65d75385443c46ab802c0c8350590e89a9b59bf",
   "skills/data-dict-build-3/.phoenix/originality.json": "6123d9d1ba84be2962de46e37440c7ebb17bb4e438859e00e8c0f318fc1319c2",
-  "skills/data-dict-build-3/.phoenix/provenance.json": "f5145970fbd09aa4a8537674e1ea27b3de0c25b9903b66442bd53aa1b6a2992b",
-  "skills/data-dict-build-3/.phoenix/selftest_evidence.json": "f53f7df5265cd50b399bacb9b66649493faeb5dc3334875aebadbfb906211e8f",
+  "skills/data-dict-build-3/.phoenix/provenance.json": "2b21f88c8fb637fa955d52a8b6f63ac04bd8314507f65a72f215ba0cad0c634f",
+  "skills/data-dict-build-3/.phoenix/selftest_evidence.json": "ccd0ffabefd5f2a8a18a47a9577550e64cfb3387669094482e36ab8035cea68c",
   "skills/data-dict-build-3/references/creation/p0.md": "8738b76b19f0bbeda0fdf692480df3513802fe02481c96607ac53f5ff81e161e",
   "skills/data-dict-build-3/references/creation/p1.md": "1768205aa677c84a696640bdd4b157fd4b2b387c264c9948b80e53485e2dc094",
   "skills/data-dict-build-3/references/environment/p0.md": "dc680c4129a38b127d6b5d70726f341c255bc9a9a65b480057290f059441ef78",
@@ -66,7 +66,7 @@
   "skills/data-dict-build-3/references/production/p1.md": "5bb87f5baa00d2fcb2d698f06fb2969a74da2d1d98d7a48589bec878607c7d0d",
   "skills/data-dict-build-3/scripts/main.py": "f8fb3b277dc2d0d955f284c3d5005d4ab6f005d3f35a5a2f0579ef35973c096b"
  },
- "sealed_at": "2026-10-18T19:55:29",
+ "sealed_at": "2026-10-18T20:56:38",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:04:51",
+ "at": "2026-10-18T21:01:35",
  "skill": "office-struct-extract-1",
  "slug": "office-struct-extract",
  "passed": true,

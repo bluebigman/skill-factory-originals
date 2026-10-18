@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "text-data-struct",
- "merkle_root": "d7865a1e71935940085897b23139e97bc02cc3e4562f634af32643bb557c0125",
+ "merkle_root": "2b4e71d440a8932545d190d48fe97bcf4e4e570873d3c7353d31fba56f84e4a7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/text-data-struct-1/run.py": "b5b8c1525fda0555b3c54dcca0e2f952e069b4c029f5bf31485ff60d1e0c49d5",
   "skills/text-data-struct-1/selftest.py": "eaa0d365745da33cbf198a54ba1bd8546204d7f96ce1c48cf4ed7c13247ab32e",
   "skills/text-data-struct-1/.phoenix/originality.json": "650752e86cff1a664e5e6b73677f5e8cc20bc2f24cb274778220954c30f6b3b9",
-  "skills/text-data-struct-1/.phoenix/provenance.json": "6317602a2a163aa887c24a4a2528e4c92e96e9f72ceb637af236a6bfbb9db843",
-  "skills/text-data-struct-1/.phoenix/selftest_evidence.json": "3776d86851cefa8720396bada5a374b308d5485a74a4880c5f8e2e4179cfbfee",
+  "skills/text-data-struct-1/.phoenix/provenance.json": "979c8f6ecb58ec70e9e130b1bf174f65d164d4e07791906ddcaf59f2206f8810",
+  "skills/text-data-struct-1/.phoenix/selftest_evidence.json": "be1c2542fe1e6d2a294d98702efe5a7588a9c6615c5f299ec7e647ca3f5ce585",
   "skills/text-data-struct-1/references/creation/p0.md": "62d7b99eb5a7db366a96c7232c08bd7e0812a817efc978d676ac99b9c2c9d71f",
   "skills/text-data-struct-1/references/creation/p1.md": "9f57b5f99fd5f7a24dd6ae8aa7f582b8a6237e684887ca169725fe70c0f5de52",
   "skills/text-data-struct-1/references/environment/p0.md": "76ed1e2510dcdf5d78a93c36740072a842cf569d094a4728a574ec0ca369c8d0",
@@ -37,8 +37,8 @@
   "skills/text-data-struct-2/run.py": "1b2ab20a543ff6ddd3e1abe8f736b7dd07157f347bdf96c17fdd002d3071963b",
   "skills/text-data-struct-2/selftest.py": "adb8f69f6b827c8bf53f0c752e5dfd512c7771e700b889797ea360419a86e92b",
   "skills/text-data-struct-2/.phoenix/originality.json": "58c7ef7ced9bcc0dee2d12621265eb110744fb4d84e3085f6b8b902f2668e488",
-  "skills/text-data-struct-2/.phoenix/provenance.json": "ec9b657412f40edb1dab989178aa4c5e5e951761284658a2e3f3cc4fd97f9451",
-  "skills/text-data-struct-2/.phoenix/selftest_evidence.json": "1f7522905aed97597a0c5052f5b05891cfa918d4df77ca787e5de2b3d2662234",
+  "skills/text-data-struct-2/.phoenix/provenance.json": "2b3d16a035ab20d2d61396d864d700b5da33cadabdbf5fbbba2e7bffcd3df710",
+  "skills/text-data-struct-2/.phoenix/selftest_evidence.json": "5e35778a05697e84309328c3423773dd45af2f6df0b59d40c5fd248391b44046",
   "skills/text-data-struct-2/references/creation/p0.md": "a2837a3b10e51645b7a8eb5cf6bd216a2e9db7706f1db352eb14668e6d8a0ed5",
   "skills/text-data-struct-2/references/creation/p1.md": "84d22a1f1fadb8016ddb5b78c79928780cb2283745aa23b68c36c5454fe252e8",
   "skills/text-data-struct-2/references/environment/p0.md": "3fe325d53570aba321716c71948661dd0fe683a8398b6db22ee88bf300bae2e8",
@@ -54,8 +54,8 @@
   "skills/text-data-struct-3/run.py": "e6d198c36fc38e2ff31e44ca421981caa8d3754f045000123c7b7188b28a7a5f",
   "skills/text-data-struct-3/selftest.py": "ebcde2422e5558e095547b2ee0fd9b70729a108a5dea26bc73ea0e7193c1906e",
   "skills/text-data-struct-3/.phoenix/originality.json": "faf7566c693f0d9c5f6cbf12130cc1c88e209eb2a518d4ab9dd5d019b9f96232",
-  "skills/text-data-struct-3/.phoenix/provenance.json": "fddbab94461300fe9b88839fb0f6e501a2d4100ea3c3d28a4c3af5e781aeee49",
-  "skills/text-data-struct-3/.phoenix/selftest_evidence.json": "176ce742487e578d1643bb08ec16785e7bce6cde862c4cacf848497f32c40df6",
+  "skills/text-data-struct-3/.phoenix/provenance.json": "1f84645fc6936fa635ada224d8a0acc3666ee46f56cb30e8fe76d42afb6be791",
+  "skills/text-data-struct-3/.phoenix/selftest_evidence.json": "0fc99bbce25751f6f728e7fbeff1f24ef1b0ff73dcb0a83f6c0020a7bb1ea536",
   "skills/text-data-struct-3/references/creation/p0.md": "5e76cabf79577eb31f1a6eb8d7a1b6418061ddd9d0a272b49aab5183e7a3ea62",
   "skills/text-data-struct-3/references/creation/p1.md": "c7775a192623ee07cc807836268d453d1172bd7732d76b04ec6d96910085180c",
   "skills/text-data-struct-3/references/environment/p0.md": "6645bd33c6b7c7695d0e2d7f43847dfd9f9ed9b31798e4d136f3fbf3eace7531",
@@ -66,7 +66,7 @@
   "skills/text-data-struct-3/references/production/p1.md": "673a84b6130dabe95bcba446cdbe8125f685e7a5e4af0ee3154109156062c2df",
   "skills/text-data-struct-3/scripts/main.py": "a214d958f0aad9f4fc048669bc8104f4a2a3c8713b96f45d9425d1944b352577"
  },
- "sealed_at": "2026-10-18T20:11:42",
+ "sealed_at": "2026-10-18T21:04:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

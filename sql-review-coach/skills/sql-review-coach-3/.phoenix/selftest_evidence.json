@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:10:10",
+ "at": "2026-10-18T21:04:13",
  "skill": "sql-review-coach-3",
  "slug": "sql-review-coach",
  "passed": true,

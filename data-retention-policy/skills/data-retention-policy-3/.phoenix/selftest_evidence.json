@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:55:55",
+ "at": "2026-10-18T20:56:55",
  "skill": "data-retention-policy-3",
  "slug": "data-retention-policy",
  "passed": true,

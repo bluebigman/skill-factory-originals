@@ -1,0 +1,66 @@
+{
+  "name": "code-quality-gate",
+  "version": "1.0.0",
+  "plugin": "code-quality-gate",
+  "description": "code-quality-gate — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for code-quality-gate tasks.",
+  "author": {
+    "name": "user_2fd890c9",
+    "email": ""
+  },
+  "agents": [
+    "./agents/code-quality-gate.md"
+  ],
+  "agentName": "code-quality-gate",
+  "displayName": {
+    "zh": "代码质量门禁专家",
+    "en": "code-quality-gate"
+  },
+  "profession": {
+    "zh": "代码质量门禁 顾问",
+    "en": "code-quality-gate"
+  },
+  "displayDescription": {
+    "zh": "代码质量门禁 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+    "en": "code-quality-gate: 3 built-in capabilities."
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "10-ProjectQuality",
+  "tags": [
+    {
+      "en": "Productivity",
+      "zh": "效率工具"
+    },
+    {
+      "zh": "代码质量门禁",
+      "en": "code-quality-gate"
+    },
+    {
+      "en": "ProjectQuality",
+      "zh": "ProjectQuality"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "zh": "遇到代码质量门禁怎么办",
+      "en": "How to handle"
+    },
+    {
+      "zh": "帮我规划代码质量门禁",
+      "en": "Help me plan"
+    },
+    {
+      "zh": "帮我检查代码质量门禁",
+      "en": "Review for me"
+    }
+  ],
+  "defaultInitPrompt": {
+    "zh": "遇到代码质量门禁怎么办",
+    "en": "How to handle"
+  },
+  "skills": [
+    "./skills/code-quality-gate-1",
+    "./skills/code-quality-gate-2",
+    "./skills/code-quality-gate-3"
+  ],
+  "expertType": "agent"
+}

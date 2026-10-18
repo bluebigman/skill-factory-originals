@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "regex-build-help",
- "merkle_root": "39e04e8f8fad608b8e8af348bd429888b93b46cce45b45a799c033ca9498e8d2",
+ "merkle_root": "b9f62eac0255912288d7a8911a246e29de166b05b13689d49617d1cb3f7e9848",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/regex-build-help-1/run.py": "361bad9e95da52fea0291db9ce23049351d9582b76e84a1ee556c11fbc6e403f",
   "skills/regex-build-help-1/selftest.py": "8d794ab29910235ca23cd86ffc767d79f5725e3eed2a9e3e3095f8ca99cea830",
   "skills/regex-build-help-1/.phoenix/originality.json": "f96d3cbc3c14abc483d72623b6d9a580cdc9fb27969a6d7f6381ee975232a83d",
-  "skills/regex-build-help-1/.phoenix/provenance.json": "817c10be3ecd846f83ec87420a8ac963ae284743aa3e98798d0a5df55d6d9d09",
-  "skills/regex-build-help-1/.phoenix/selftest_evidence.json": "2f3d65e24afab0f804b0a0f5d5326f4fdb553d571719e416abc8e1bb1a4f7dcf",
+  "skills/regex-build-help-1/.phoenix/provenance.json": "e60d7dcb1bd59f023c82bb943e4ff50564c021f54c4684df9507847647b61b98",
+  "skills/regex-build-help-1/.phoenix/selftest_evidence.json": "7b239d9a3b6c49647ac75c3fc05fb060944726047ddb67520b3f1ceb63ee518d",
   "skills/regex-build-help-1/references/creation/p0.md": "459ded1fc2b533347ddeb05035d9c6174221b39593c297fc91884952ed12776d",
   "skills/regex-build-help-1/references/creation/p1.md": "e72aff8ba7a4e59307ad6325361c5c50299ed74d0143458b31a70890b54d170c",
   "skills/regex-build-help-1/references/environment/p0.md": "c703e29dd76775f4e1bc34c11168d4791cf01566b39a8cbbeb71eca013468a58",
@@ -37,8 +37,8 @@
   "skills/regex-build-help-2/run.py": "f85c75de576e0a24d5a937baa2b88fb978fc89bf2894929d655a17cd61a4ded5",
   "skills/regex-build-help-2/selftest.py": "3417293187bfa16740ceeade64420320b0be0953c7222bb64c1bd390529319df",
   "skills/regex-build-help-2/.phoenix/originality.json": "80c7dc7a440cf5d0c2e138b29e675e5b0f1d8f1cc25b886142673d35e3da3964",
-  "skills/regex-build-help-2/.phoenix/provenance.json": "e565f039080ae4817bde38c645ba4e68751838c56be84a1c01581913c1cbbcf3",
-  "skills/regex-build-help-2/.phoenix/selftest_evidence.json": "9ebd7195f78daa540bd992b33921a804049739b07e50b6ab39a80fab3bcfe3d7",
+  "skills/regex-build-help-2/.phoenix/provenance.json": "a11753d4d7a6479ed0f0c8eaedb36d7ebab2cc1cb64dcf67bfa04ed2e7843e07",
+  "skills/regex-build-help-2/.phoenix/selftest_evidence.json": "cea90475213205929628b1eb4e816b92b4ac58a8be44c6708b9fc812aca31cb2",
   "skills/regex-build-help-2/references/creation/p0.md": "48b4b1246a15d24e5f4f80abb1b80fd6cf9d8340bc6ec974be5208ea4172f40a",
   "skills/regex-build-help-2/references/creation/p1.md": "f758f6b100283d0ef962e755c2481f6958c9511a82a8f3b7c4fc5d1449e11160",
   "skills/regex-build-help-2/references/environment/p0.md": "7c16d7f148bb964b2bdb1e5ffb1c3f134beceae7f2c01f676bb98c836adb080e",
@@ -54,8 +54,8 @@
   "skills/regex-build-help-3/run.py": "8a027e9ff5a79a513cbf588985e4535a4aa6bbc9c536f2f8c52de76861d8c3f2",
   "skills/regex-build-help-3/selftest.py": "a7764ffae7bd17a338b8d80116084e68273741cd68528abf71b1aeae76ebb6ef",
   "skills/regex-build-help-3/.phoenix/originality.json": "b51c72761a6f36382d27b876d4eb36e6e7da0430d381be2f063367237a7e738d",
-  "skills/regex-build-help-3/.phoenix/provenance.json": "c3c56ee25cb08275094691fdd313b61d1c02b14d1c0ae77bb68d4b6dbde261b7",
-  "skills/regex-build-help-3/.phoenix/selftest_evidence.json": "22c7d5cc5d625620c5b8406b6deec8f7c9f4cbe123a486c7bbbab95e6d426aa8",
+  "skills/regex-build-help-3/.phoenix/provenance.json": "3fb92ac644a369f16eec36e779fd64adca126d7ea48436de63065815c564d667",
+  "skills/regex-build-help-3/.phoenix/selftest_evidence.json": "2b6c3c9adc14bd7841589dc20df5b76f4dae58fd66ee5b6da4bfb34251984c15",
   "skills/regex-build-help-3/references/creation/p0.md": "71b94bf2f2b2efda2a10cc3fa9628f81a83038226d9b249fc2402ab5fd289c74",
   "skills/regex-build-help-3/references/creation/p1.md": "55556f97cadaad008bd5d89786de04ddb2e09524ea4b54c7f75566505ae25142",
   "skills/regex-build-help-3/references/environment/p0.md": "f382501c35f2a7d6a171b30f7be20dcbd32f9a605a8cc34e6bd464e89b2afce1",
@@ -66,7 +66,7 @@
   "skills/regex-build-help-3/references/production/p1.md": "c937c97eeb68b1cde8c67ab9e78f8a5ce053cdd4e421472a6ac734ffbc84a5c6",
   "skills/regex-build-help-3/scripts/main.py": "56c3d3f6ad4abc7955d759ce6cfdeaf7ea53c925dfca6676827cd5cbfc387f3a"
  },
- "sealed_at": "2026-10-18T20:07:19",
+ "sealed_at": "2026-10-18T21:02:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

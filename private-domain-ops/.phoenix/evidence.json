@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "private-domain-ops",
- "merkle_root": "37d6e7517bef17b2a1240d85022f3942fe419746718780d5afbab0ab64f6c56c",
+ "merkle_root": "095885248f1a7c87beda65f0a4c3cbdf831ca574e4ed2065bfeed4c52bf07834",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/private-domain-ops-1/run.py": "1c380a66ba3df4ed7a49996062fd257f311d7d48618184900722e0ff6f243e0f",
   "skills/private-domain-ops-1/selftest.py": "0e1677e2e6ea8961e71b3f7196e6bdb3e89c02f78b8b3f01f885c41cf38dac29",
   "skills/private-domain-ops-1/.phoenix/originality.json": "2153b43f98533d6b20941b251cece716d774b2ca124cf32cd33338907305577c",
-  "skills/private-domain-ops-1/.phoenix/provenance.json": "256b0c56b20d8b271ee714331f4726b68195903fda0b6000c28f7ce1f6c24cfc",
-  "skills/private-domain-ops-1/.phoenix/selftest_evidence.json": "ce351a9b128ac8bdd4c21fad1c2c47a42037ef39cf4114bf2b987fe94b929360",
+  "skills/private-domain-ops-1/.phoenix/provenance.json": "b2234ec60409ed442d837a674cba8ca8e7af19cf3d6b2ef370a4a7b941de497a",
+  "skills/private-domain-ops-1/.phoenix/selftest_evidence.json": "c191c39cf327dd63b2ddd289ab83c4c05e6b620f7ecb2c35e8e9fb0f46ed0ec7",
   "skills/private-domain-ops-1/references/creation/p0.md": "70926801dc94d92f5b936040a27179338b2f406353eadb06485ed76dd2e0ec00",
   "skills/private-domain-ops-1/references/creation/p1.md": "18dbb2070950c9467d1161fb15691cc1ab54810304cf0d13b00998d3a0727e7f",
   "skills/private-domain-ops-1/references/environment/p0.md": "9fb0a2bbbfbde554911ca8d920738c65c2227333ed6586fa0ee8afe7c9f55b1e",
@@ -37,8 +37,8 @@
   "skills/private-domain-ops-2/run.py": "10ed6b2f965dc934f79797eb56ebc3a601392dcb684f326b8d7b6a63cf88574c",
   "skills/private-domain-ops-2/selftest.py": "4c5b7dea5ab9723fcba0147afa12f39dbb6ab04d36902a0ef6e03a69bf4107e9",
   "skills/private-domain-ops-2/.phoenix/originality.json": "424f9cb541c6c8114cfe31bb0b689821023429f26c39fdf646eed6d06c7ca267",
-  "skills/private-domain-ops-2/.phoenix/provenance.json": "b633087a018844d335c8effd48ab4d477df437a2a54d7b2cef77bd2798b4bfa3",
-  "skills/private-domain-ops-2/.phoenix/selftest_evidence.json": "6837a3db4cb50be52d7f1db825d67dcf71ca7f3209882d385e0b2b69738c70c2",
+  "skills/private-domain-ops-2/.phoenix/provenance.json": "ddb1bdcf4e22dd8215956173951ae956a55d03db155db022d137aeb65fada6a0",
+  "skills/private-domain-ops-2/.phoenix/selftest_evidence.json": "a514c458038249e6a8e3f7e6757b5d9f9b2c1af410d6ce45c83146b938e0f7d8",
   "skills/private-domain-ops-2/references/creation/p0.md": "f075be00f91f194608de058490cb10ea11803f4584030b35a666dcbcb7d2f8ab",
   "skills/private-domain-ops-2/references/creation/p1.md": "7dafa74644464e1f8b34eb12cb3f66eb8ca9b4f8bdf6f19a22b6d73a742e2a6f",
   "skills/private-domain-ops-2/references/environment/p0.md": "7d695a731ca064e3804322b5ec92b95e40ec3f46c8b524e6fda805de43ab4f47",
@@ -54,8 +54,8 @@
   "skills/private-domain-ops-3/run.py": "e947b07748b935f84c6efd6e6766a5a7cd1bbcd36f592f990f574d37108ad408",
   "skills/private-domain-ops-3/selftest.py": "949812c0ebcd8063f7736589ef22ada08cac71cdc9d91d1f3ef5bf34fbe890dd",
   "skills/private-domain-ops-3/.phoenix/originality.json": "61ef8bfa059c2e0eeddd396b4174dad3d9684ed5632a5ba6366b08a04bcaa29b",
-  "skills/private-domain-ops-3/.phoenix/provenance.json": "409acf9681f0fb16563163990c24514ef111a6b57bdcce4b65d7e06434b122a1",
-  "skills/private-domain-ops-3/.phoenix/selftest_evidence.json": "6c954518d713505f549060d6b870dd78d9eabeaa28adb669cf6515d0c42bb6e0",
+  "skills/private-domain-ops-3/.phoenix/provenance.json": "e942da5923ee2f2067a87dfabc3c69aa6e8bada76b023d6319fe5d8bed70b619",
+  "skills/private-domain-ops-3/.phoenix/selftest_evidence.json": "0188c3a9365544d31d295f3a9634cd40792e16884a2a266e8d8ac1d149a9f43e",
   "skills/private-domain-ops-3/references/creation/p0.md": "c5103d2f2916778852599435eae45a06e311128b73c3751a75ce488448d16968",
   "skills/private-domain-ops-3/references/creation/p1.md": "4ff46d65535487a73df605a76551e909265ae6886eaa40ffeb8e7bc36c21d129",
   "skills/private-domain-ops-3/references/environment/p0.md": "0fde8b9649f03ba1b6c4ea520b1152fb27bac48429e55936fa35b5fc0953b001",
@@ -66,7 +66,7 @@
   "skills/private-domain-ops-3/references/production/p1.md": "684bbf8be54e0be07f4154e88f40ee0ac0b6336403591b74b8c7ca27eba58bad",
   "skills/private-domain-ops-3/scripts/main.py": "eb1829374e0a4a8b9f3249422a00002797e9d869a087a57c494e5fea901d5af3"
  },
- "sealed_at": "2026-10-18T20:06:23",
+ "sealed_at": "2026-10-18T21:02:22",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

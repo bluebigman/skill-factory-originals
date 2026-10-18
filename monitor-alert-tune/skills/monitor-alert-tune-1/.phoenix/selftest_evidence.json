@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:03:56",
+ "at": "2026-10-18T21:01:05",
  "skill": "monitor-alert-tune-1",
  "slug": "monitor-alert-tune",
  "passed": true,

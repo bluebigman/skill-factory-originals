@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "table-formula-coach",
- "merkle_root": "fef7ca19a9cdf8ea924f75b904b7ad1c95fb4456a0f4937c6282e2008c741403",
+ "merkle_root": "37fe96791681f1629b1fb5e86c1adc58496ab2856051b33163710ade3b29e039",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/table-formula-coach-1/run.py": "1cf89bb9c40790f6c248af1c7967f221c296e20e0d356fcea0561232b09b79f3",
   "skills/table-formula-coach-1/selftest.py": "7b8d6b2db3b51f49031b74ff5b2e47bd0bd17a8f0df814c1cbadba254e8ed7fd",
   "skills/table-formula-coach-1/.phoenix/originality.json": "58791d362455fa2984b00bef5f5359f5b0faf0a69f5009506d85f80053f8c81d",
-  "skills/table-formula-coach-1/.phoenix/provenance.json": "55bdcd1a32160185c6e43ff60d0d2db998e7f1a8df2eb26998509e79360dbfec",
-  "skills/table-formula-coach-1/.phoenix/selftest_evidence.json": "56551e5c5968c93429c349d25f2ee3ccea95a4037ad9b60b527a47d0f770ec2c",
+  "skills/table-formula-coach-1/.phoenix/provenance.json": "51f7fb4d0950b253e4200cd4e3bc92767473092b11a71511c1ae8b174885a0b1",
+  "skills/table-formula-coach-1/.phoenix/selftest_evidence.json": "ee3f21a0591ef8ae918125efce3b2961480f9aacea48a710742c40a2f63fb93f",
   "skills/table-formula-coach-1/references/creation/p0.md": "ff5362a100e93db68ebc9b6d3ae3d5e1e10ccba568f7f261409ddde2c7ad70b9",
   "skills/table-formula-coach-1/references/creation/p1.md": "7def4ef03be507b8482233a88ec92d804c29964cc56b152f8071bdd4eb04c3e5",
   "skills/table-formula-coach-1/references/environment/p0.md": "b36c890f12f1d73ea8baa3e5e39fb07d749966d41d31ae231742a53fc086f779",
@@ -37,8 +37,8 @@
   "skills/table-formula-coach-2/run.py": "12f106554ef0e085e6afcd72de229c404ccf12c2ccb1df96f044b5638aac3fb5",
   "skills/table-formula-coach-2/selftest.py": "e9bcfe68df1a22cd5b5016867712d868e24a014bb22aacd96ef111883563ba67",
   "skills/table-formula-coach-2/.phoenix/originality.json": "1e7e266a76208099d1ee70678e44601b1785edde8b93e252b41869a61a15f970",
-  "skills/table-formula-coach-2/.phoenix/provenance.json": "4d7fba75e7d3f69598f75fd111f45246f4f80dbf216964d4e13bfd8940fd1297",
-  "skills/table-formula-coach-2/.phoenix/selftest_evidence.json": "fbcc5d9205b9fb6bfac690ae543c8ffaf66e985b1177724e2dede4fcdc1e28cf",
+  "skills/table-formula-coach-2/.phoenix/provenance.json": "90b956b3fa11a477b2fcd98c5b283ede26b09137561fc67fc5cdd5e8b031154a",
+  "skills/table-formula-coach-2/.phoenix/selftest_evidence.json": "7f4a35de3e52fa42a21838460e1e720d02c3867cbc2bd4a22a9b315079b87609",
   "skills/table-formula-coach-2/references/creation/p0.md": "9ebf86879b65da721bbcb8772e20dca1331a00e08dad89875cc4f21a454ece27",
   "skills/table-formula-coach-2/references/creation/p1.md": "f1198e2798a97af8dd0a4e9bd9972dde5abdba6a971a273424c0464cb8a722f8",
   "skills/table-formula-coach-2/references/environment/p0.md": "86cde0aa7295a930988316692a47a89c0b1c38003447d178d693bcaf2d308851",
@@ -54,8 +54,8 @@
   "skills/table-formula-coach-3/run.py": "38479f8e37a3a279586851d8590205ee45af589e161455d96e5dc0adbeb6bbe3",
   "skills/table-formula-coach-3/selftest.py": "00f3522d5feb789fa96e7ac28ecaf0f422d24daf180967cb60cf927a045cbdfb",
   "skills/table-formula-coach-3/.phoenix/originality.json": "015667f2f804aab7a959bb18000318f967bf020f7656d1d91055501bae3dff25",
-  "skills/table-formula-coach-3/.phoenix/provenance.json": "93ffbc44def3ed68e0d7b7b259d021a8070841af8920e3de793a9a06d1c8b1a3",
-  "skills/table-formula-coach-3/.phoenix/selftest_evidence.json": "24e65715034cbc5609b6aaad339ed2b386bc59d844d55ed881a4b629d3c51630",
+  "skills/table-formula-coach-3/.phoenix/provenance.json": "24c0910dcefddb50d07342434705cac29709074e407d689967402a56ff674d6c",
+  "skills/table-formula-coach-3/.phoenix/selftest_evidence.json": "e895b186954b2c5187c52bca93a92680314595307c7430fa592be7604b171fe6",
   "skills/table-formula-coach-3/references/creation/p0.md": "e8f90fdd4b0666d337413006312a6cade07862d154c7cd6fc15f3648b7f63f36",
   "skills/table-formula-coach-3/references/creation/p1.md": "27bc852a6bb43e1463220b2972625e66c7da5464c8d63b01223c9e4120f63098",
   "skills/table-formula-coach-3/references/environment/p0.md": "4d4d6acfc56a6853dc705056baa36f924e7cb6d06c4b31c6f178c250258e3803",
@@ -66,7 +66,7 @@
   "skills/table-formula-coach-3/references/production/p1.md": "3444ef59cfa3082ae6bd562eb4f1d9a0cfee055bc2e0f47e1727ed31983f2a08",
   "skills/table-formula-coach-3/scripts/main.py": "38d3138465973e92611c78880d1bfcc0165e9329ac1a69d6a4e8795d50d079a9"
  },
- "sealed_at": "2026-10-18T20:10:45",
+ "sealed_at": "2026-10-18T21:04:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

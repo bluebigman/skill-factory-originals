@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-legal-boundary",
- "merkle_root": "7e2f97255179abee662a235c9bc4e9bfbc17be3b888a32bcc4dfb11adc4da1c3",
+ "merkle_root": "28a5c27af4a9e3bb3a7845059ab54eb790f6f69a024ad84d3257dbfa437ffe00",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-legal-boundary-1/run.py": "869ac5de8aa5d79faab5ee3d4bd4eb9d0b764ac0c6dffd1dee56051d396e0966",
   "skills/doc-legal-boundary-1/selftest.py": "993ce4ce9e6624a8372737fb263879330a1b0d13733e273e758e4f1a0feb0bec",
   "skills/doc-legal-boundary-1/.phoenix/originality.json": "56e66c1f888fe5495b9d9eb4736311c89e2042b9ff605db6bf83debec6bbc582",
-  "skills/doc-legal-boundary-1/.phoenix/provenance.json": "c5c2e75e0455a599e615e8c06397441ad057d26043f023689cb56e40103a8266",
-  "skills/doc-legal-boundary-1/.phoenix/selftest_evidence.json": "7ccf5733741b6fec9801fdfd01f41f1b149901e4067e01a312bfa26624131308",
+  "skills/doc-legal-boundary-1/.phoenix/provenance.json": "1fbec2bfc8c8348238e58af642f4fbfea16c1902a58ab01f1f59f67fdd7a3d44",
+  "skills/doc-legal-boundary-1/.phoenix/selftest_evidence.json": "64aec037d2e699cdaf85b10a761e0e10395c406201f4d4b3cae23d5ab88bb0f2",
   "skills/doc-legal-boundary-1/references/creation/p0.md": "7d442970bac57471cf7bba8666371209d683e63a4cc72630034e986d6fa52061",
   "skills/doc-legal-boundary-1/references/creation/p1.md": "6fd5e1a8e856628898c1559e7462c7f7bdb3e376069311a618c687bf36a777f1",
   "skills/doc-legal-boundary-1/references/environment/p0.md": "cf4a1b0c0d53308f579df12f73f75790229a61d668415db458d85505d52711d5",
@@ -37,8 +37,8 @@
   "skills/doc-legal-boundary-2/run.py": "ccae570ca0ddf10e54a638968d300cb53dea5d1144a743a10848c252325b5e5e",
   "skills/doc-legal-boundary-2/selftest.py": "69ba719866a9110fd6ab7e288b234c5b4f57c4a78b3a13c71351f9368cb85d19",
   "skills/doc-legal-boundary-2/.phoenix/originality.json": "7bb359f19f7ec1eaf3d6958f521cbcb966cfdf84ad0d65fbabe493094f634de5",
-  "skills/doc-legal-boundary-2/.phoenix/provenance.json": "46bf61bbd5783e0b8df252eac477876a5bd14347a9c7b0e69b242baddec8d2a0",
-  "skills/doc-legal-boundary-2/.phoenix/selftest_evidence.json": "10a38e02512469e6f0aa556ec3009a8fb9dda192966546709abbae85e07185aa",
+  "skills/doc-legal-boundary-2/.phoenix/provenance.json": "b83bde0a4d57aa644db35c2c131f948309899676b36ed61c9c1e4d05b0d1ed39",
+  "skills/doc-legal-boundary-2/.phoenix/selftest_evidence.json": "bd4024426e5fe74f5a07d1f2b33f36f9e6b098b572fdcb169bb1aa290038df84",
   "skills/doc-legal-boundary-2/references/creation/p0.md": "1398c1027ebf83f70ee695c06403c868cba6307080660490a02692ea4a874311",
   "skills/doc-legal-boundary-2/references/creation/p1.md": "2c117bfea9ccb867a24e57e1b30e69e792854e1623e7c5eae83e2c8fffe4fc51",
   "skills/doc-legal-boundary-2/references/environment/p0.md": "8b9c20e818c4770af310d92c8459cd1efc92a0f2f9a9dffec046dea4cc3a0cfe",
@@ -54,8 +54,8 @@
   "skills/doc-legal-boundary-3/run.py": "71db05969b5f44355585f4285766b777856aabebd9fb6e03985859497a44063b",
   "skills/doc-legal-boundary-3/selftest.py": "eaf4b73ca454360f8c605ea7d7c6aecf3a83316bfe526da5246818563d1d025f",
   "skills/doc-legal-boundary-3/.phoenix/originality.json": "4371db540dd9e093076eb97289faa50ea1add8ee5a09c669f19af0a326777291",
-  "skills/doc-legal-boundary-3/.phoenix/provenance.json": "145ebc201e6c534043b6395f169e493c22d43b6a0e4a82889dd6a7bda8f637ae",
-  "skills/doc-legal-boundary-3/.phoenix/selftest_evidence.json": "4bdec0aaf504ba193c9fac5621fe822a46fda854f2fc819ef04c95a256cfea95",
+  "skills/doc-legal-boundary-3/.phoenix/provenance.json": "f9e263464fe86fa9e9d13c31c54be354aad2dfdea144aaa48e688297459a3f7d",
+  "skills/doc-legal-boundary-3/.phoenix/selftest_evidence.json": "e43f1a4cd744339cc161d4ad138fbd06473f6ffc1b3aba50afbc3d22b78936f3",
   "skills/doc-legal-boundary-3/references/creation/p0.md": "44ded8bcf8a29978761fc71dcda07e445b164691911bbde306cf73f02614fa17",
   "skills/doc-legal-boundary-3/references/creation/p1.md": "b3e03a988d38b430c17f2ddb25c9c0857b36a28987b9d399ab0436e3ad35d627",
   "skills/doc-legal-boundary-3/references/environment/p0.md": "2f8e60bff2e0f7a3ed3c79731c466c84994441600a5fcfcc88b370376fd0958b",
@@ -66,7 +66,7 @@
   "skills/doc-legal-boundary-3/references/production/p1.md": "27b19f1163e2420a1d7567d6b0a308d41273596bba8d91e0d427e72643362c60",
   "skills/doc-legal-boundary-3/scripts/main.py": "d9e149557b14bb4c6d4a5f611781da7249cc4e887aa06d5c7f5feca65b7c9a06"
  },
- "sealed_at": "2026-10-18T19:57:09",
+ "sealed_at": "2026-10-18T20:57:34",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

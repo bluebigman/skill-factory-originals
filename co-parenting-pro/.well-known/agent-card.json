@@ -47,7 +47,7 @@
     "遇到老人插手"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:37",
+    "at": "2026-10-18T20:53:43",
     "from": "disagreement-align",
     "to": "disagreement-align",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -71,7 +71,7 @@
     "遇到互相指责"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:37",
+    "at": "2026-10-18T20:53:43",
     "from": "role-division",
     "to": "role-division",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -94,7 +94,7 @@
     "遇到冲突后修复"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:37",
+    "at": "2026-10-18T20:53:43",
     "from": "unified-message",
     "to": "unified-message",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

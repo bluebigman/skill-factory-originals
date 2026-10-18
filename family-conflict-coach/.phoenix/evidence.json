@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-conflict-coach",
- "merkle_root": "92915d39e8968958a574d555c2c8d9c1230bad99536d4fcbbbe6377fb9931266",
+ "merkle_root": "b9dd7e226fafa72aa4afd7b23bfb8a7c0f26fbd45b09113e1ae1555c8e39d0d7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-conflict-coach-1/run.py": "3b0b1db045d857d85b7678c0953173f022fc17fe9b36e45dc84a993e1921d9dc",
   "skills/family-conflict-coach-1/selftest.py": "488270e45a23436cd22ba82f5125425518bc4dc97bdf071abe1dc6ef2a55fc4a",
   "skills/family-conflict-coach-1/.phoenix/originality.json": "26d2b196ed879735c82239065b4eff75a93398bfeb4ec2dbe8c1fb74220216e2",
-  "skills/family-conflict-coach-1/.phoenix/provenance.json": "938427a00d8a410efe5e0e6a2eeec92cfe085b2913b96734b0f14fafbcc17456",
-  "skills/family-conflict-coach-1/.phoenix/selftest_evidence.json": "220433d574e1d82a1b3ba5655281ff7b94bf8b138856617b8eb7946e6cacf4a4",
+  "skills/family-conflict-coach-1/.phoenix/provenance.json": "4d7d36516cfffe1cbca10a046a36e77dd6d0878282ead009de7afbc72d9c7842",
+  "skills/family-conflict-coach-1/.phoenix/selftest_evidence.json": "68a8a556efb4acbb5c6cccd3245402ed1e7fc07a81a6ba07cc918f7089017755",
   "skills/family-conflict-coach-1/references/creation/p0.md": "367a489c54fcd3902d49e9baff0e19372fe5b9a097eed7f767f3d6f6a73479d2",
   "skills/family-conflict-coach-1/references/creation/p1.md": "3be3c6e247c4ae36a58bd48ce59d5d5f27b76aa117f7e976110dec83631ff6b7",
   "skills/family-conflict-coach-1/references/environment/p0.md": "d7a99048742a2c362fb9e6f05af885e482ea696b1011004b3ba5e8e55f945701",
@@ -37,8 +37,8 @@
   "skills/family-conflict-coach-2/run.py": "aa4c68410d7c89157d0e5a7854c6eb625d231aefc284e2b730e1a9e6e1678a98",
   "skills/family-conflict-coach-2/selftest.py": "3183bd50af355c5d4a5c8bef3deb7e271c874c01beafa9e3259cc15ef641169f",
   "skills/family-conflict-coach-2/.phoenix/originality.json": "22a0ef3914a6f57cf38775b6af2c42cc599849b8b07e7b20f79100da3d1deb07",
-  "skills/family-conflict-coach-2/.phoenix/provenance.json": "ff79e6a2bcd5743328dae58770718f91f7d0e15ce1cb70b1832b6e414a3092ad",
-  "skills/family-conflict-coach-2/.phoenix/selftest_evidence.json": "d8c61abce4935307ef4679f11ff2bd7dbf1335ae0911b8e9b1f85cd9cf168056",
+  "skills/family-conflict-coach-2/.phoenix/provenance.json": "5240b64641f8362a29faf340c0b94b4407aebb5f6269efc78f339412cd991729",
+  "skills/family-conflict-coach-2/.phoenix/selftest_evidence.json": "cb99e82b41227d84fcd4aad714690ec8c6967592166a6dbacefb381369ac4db8",
   "skills/family-conflict-coach-2/references/creation/p0.md": "79a1d8e5aeec620f3211d4dd4781aa4c0d8944bdb0c1d137aa8496650b772999",
   "skills/family-conflict-coach-2/references/creation/p1.md": "79f2a2d486d8db3633eb5783bbb012d55989dee1f967f1033a8af1b262b189a3",
   "skills/family-conflict-coach-2/references/environment/p0.md": "b2f69fea98bfa0626bb3bb7d9a760ec0e0e0e64cb92664696c7b0fe66b75e37b",
@@ -54,8 +54,8 @@
   "skills/family-conflict-coach-3/run.py": "a30630497eff35efb829c08d3c0f25859a7b93dfbc361c54703888bf1392c592",
   "skills/family-conflict-coach-3/selftest.py": "aaad65c7f16766b0a6fc96c75f259060b9395974a8a035cf2eb1408d10cd32da",
   "skills/family-conflict-coach-3/.phoenix/originality.json": "81fb910a7fb140eb63d057fe2036c5a60b81bb4d8e6cb0f11dc0e93c7053898f",
-  "skills/family-conflict-coach-3/.phoenix/provenance.json": "8eed2dd8338c7cfe7cd5f93f1208a13fdc2418a915457ef29b58ee985df1bc08",
-  "skills/family-conflict-coach-3/.phoenix/selftest_evidence.json": "66bff90b3d3851da22e1d11b2789f90beb0ab0356cc09d143af07c9fa2370008",
+  "skills/family-conflict-coach-3/.phoenix/provenance.json": "be905f60233b33265919097c7f66057be23d7a0237c5d42580d337e0053db0f4",
+  "skills/family-conflict-coach-3/.phoenix/selftest_evidence.json": "97a7bec606b8fb37864860ff1e9c8e70452a7a38672e80ede1e28b47ef97d9c8",
   "skills/family-conflict-coach-3/references/creation/p0.md": "dfffed0687775eb0e1401478a13b3265a33630ab194586ecfb92a2042bbc1e08",
   "skills/family-conflict-coach-3/references/creation/p1.md": "c1796df5790b528f4da3e074428fce30160883f161a24e2d66ff0b0afdb91ec0",
   "skills/family-conflict-coach-3/references/environment/p0.md": "85c00c0bcd657ba0a947f746210bd578d1f9cb4f8b1719eba20db06fabb5e641",
@@ -66,7 +66,7 @@
   "skills/family-conflict-coach-3/references/production/p1.md": "882b440197ec4df21ba94b67023fe0614fcf5b56a9ebb86326ceb055908be191",
   "skills/family-conflict-coach-3/scripts/main.py": "aa8ee8cc7c35eabff28f946b7eb6b738e748d03882d967d600c878933b46fffc"
  },
- "sealed_at": "2026-10-18T19:58:57",
+ "sealed_at": "2026-10-18T20:58:34",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

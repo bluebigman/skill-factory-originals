@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "incident-severity",
- "merkle_root": "d1d3bc7889c1409f29764e78da07904a527c9c9f79b3f8da20b08b6045e40a8a",
+ "merkle_root": "ac59a5136dc3cbcdadf7129734827ebe9168d5abe9661ed5c132de08a34fe2e6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/incident-severity-1/run.py": "b897083e8f6a43b8defd75b5ba403f086909bf8f4dabc0dfc131c2dd806f4766",
   "skills/incident-severity-1/selftest.py": "3d4279bcc7a8b4235e9e7d9c0d8276cd53b223484bcf85a83595dcc829e727f2",
   "skills/incident-severity-1/.phoenix/originality.json": "60ab4f31078fbdd20a8192ff66387b7c162c50adbeb8e403f304c7b6bd171b34",
-  "skills/incident-severity-1/.phoenix/provenance.json": "4c6ce93b0db899d1cadb7e28255f56eaace44e1e6cf55f42e97375ea104e7c0f",
-  "skills/incident-severity-1/.phoenix/selftest_evidence.json": "df48f5d7dc2cdf6b1f63686fe8a07c438055f54424dcd78215bc97ef0eacca96",
+  "skills/incident-severity-1/.phoenix/provenance.json": "00c331e70b376216b7e167ed1409021f6eb85fb2f41b50ea53402a964f1f876c",
+  "skills/incident-severity-1/.phoenix/selftest_evidence.json": "2a99529915c2fe1358908627e018ce433d24feedc9b9a64d3a70c26b6d37fc48",
   "skills/incident-severity-1/references/creation/p0.md": "d68eeb0b00d3295f79462f075fd8fba43e1b8ed82a056d60276d8f24885f4ede",
   "skills/incident-severity-1/references/creation/p1.md": "087939f5e19fc08e2429df47732304ea6613f18a24d00ae27e4057f245ab6ec4",
   "skills/incident-severity-1/references/environment/p0.md": "90b11f65f15ac152ac8dd6a5d4fc512b75cc743eaeb32709980f84f749fc1210",
@@ -37,8 +37,8 @@
   "skills/incident-severity-2/run.py": "6f10c80c45b2d1f493cc80c4aa9c3a6ca48a78e8f7f1ccb24206e232dde92661",
   "skills/incident-severity-2/selftest.py": "7af449dbbd19567b21471bed9111b7f3aa6a61581621ed2f5ecd8b59235f4d55",
   "skills/incident-severity-2/.phoenix/originality.json": "e232387f527a253b976953bd41bcdb6cf410811a398ab438c81d5557fbdde5c4",
-  "skills/incident-severity-2/.phoenix/provenance.json": "994c7ae256a56ad7d76448d8d9feb4c6ebd93f96e1dd80487b1f6679d9ac86e2",
-  "skills/incident-severity-2/.phoenix/selftest_evidence.json": "ea16cbeb3039dab2326e937899c2f61e1fe8cd91857d1c63a2e514f605b7b0ab",
+  "skills/incident-severity-2/.phoenix/provenance.json": "9a66206f285fe5e5c73419b540a18536679e486dfa252cdfd67bda515b5f31fa",
+  "skills/incident-severity-2/.phoenix/selftest_evidence.json": "a97a493713c4bad43851106613efbe265ebf7c132a1245e6f7749b87eebd491f",
   "skills/incident-severity-2/references/creation/p0.md": "1afba0b85b05ee03aa7a645af6abbf3616b46e85f80b297eb159192cd70bd0f5",
   "skills/incident-severity-2/references/creation/p1.md": "3333a51a5771b16a3181bd961dc4f4ff109ea56a4662806115e7b55a287445ac",
   "skills/incident-severity-2/references/environment/p0.md": "837d493f9c5f0845737d18d1888fbe2d671df18de9eb9e9fd56af0eb91749e8e",
@@ -54,8 +54,8 @@
   "skills/incident-severity-3/run.py": "89c0b3289601896fd5c88390858187e9b52f86ce27825da109aeae4b527c2696",
   "skills/incident-severity-3/selftest.py": "099988e480a8c8af49cfed4a52d49ff69bf248b00378fb4e046cd0a5016ac603",
   "skills/incident-severity-3/.phoenix/originality.json": "6b768e236e16b2675bc92ac541b2db1ce11c8e10a9fff0020c16afc02064e0a1",
-  "skills/incident-severity-3/.phoenix/provenance.json": "bd71f77c687cc88900340604111c8ad983a45e3d2ac5b2985d8ec661decd8cb0",
-  "skills/incident-severity-3/.phoenix/selftest_evidence.json": "304f15a1d1b2526dc265ce9286a2fe052f60a7ed824431a0ac98c5d0f3a72353",
+  "skills/incident-severity-3/.phoenix/provenance.json": "09c43fc6441363416906049c4c61d777d43d15fd73e956ed23f66900a39c9021",
+  "skills/incident-severity-3/.phoenix/selftest_evidence.json": "8c5f50687c212ddf97dac885ab3d767bead6f6bfe947c64d0ecf0eb40e8b337d",
   "skills/incident-severity-3/references/creation/p0.md": "b0f3e2dc8c5fffaba4f25777365721e34efebd8f822cec27d95d7659d7773a4a",
   "skills/incident-severity-3/references/creation/p1.md": "645e8981f8686efaecf42884073830fce2449f3b5fd8e67ed65da6dfbf377bb7",
   "skills/incident-severity-3/references/environment/p0.md": "f930d7b12c43520b2f653329dc692a21679ec54c1b1ad0af384b4831e17abd7d",
@@ -66,7 +66,7 @@
   "skills/incident-severity-3/references/production/p1.md": "91f9bf4fa6d694fa7657946a28cd88339225a0ca2b01a69aa9b0f1a1aa7aff4d",
   "skills/incident-severity-3/scripts/main.py": "5613eb745dd326dc85a99a0fa4cdfc9d985c74a79e60ed5440efac300e10f370"
  },
- "sealed_at": "2026-10-18T20:01:22",
+ "sealed_at": "2026-10-18T20:59:46",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

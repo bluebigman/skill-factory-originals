@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "home-service-diagnose",
- "merkle_root": "2a0df14060fe7706cba0153a95640047dc1599e2fc23f78b73e65a7397e1a399",
+ "merkle_root": "24960cef1ac7b9a48f8581e1dc30090339413d7ec0082d0e2c0c31a4e9e7a584",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/home-service-diagnose-1/run.py": "6d192936e2838ae0a9b783c3d120f49a9b8a61d14dc02a48c302293aa9e76812",
   "skills/home-service-diagnose-1/selftest.py": "655035c87cd98bdbab195322863b10655e754e0b5db7ade5cff615605d095c39",
   "skills/home-service-diagnose-1/.phoenix/originality.json": "864f5997e1369b78d95554716742d542ca1a7e553d67a0870770c9a28d0a54d5",
-  "skills/home-service-diagnose-1/.phoenix/provenance.json": "d454952fc31f687d91b87ec416e421e04f936402084ad45e31782dcee909f4b3",
-  "skills/home-service-diagnose-1/.phoenix/selftest_evidence.json": "a32d18d896a00ff2dd2bd6e871d17b9413e90829afd5b36fba9dd236fbe79e4a",
+  "skills/home-service-diagnose-1/.phoenix/provenance.json": "ed825bd5ff0ee2aa1303fab7b8068e7ba6a049686561b2b8135658cad56b2a5c",
+  "skills/home-service-diagnose-1/.phoenix/selftest_evidence.json": "451041792bd3f974173f1808417ffd8b5788faa53ab6c7ddb77fb24f3e97b6e7",
   "skills/home-service-diagnose-1/references/creation/p0.md": "5cf254f49ff27ecf9dfc5b01513e5d9becf7680451148c8e246d271e7b5361a5",
   "skills/home-service-diagnose-1/references/creation/p1.md": "5de2e21ab618f57559af004deb16bda1f3f86c5ac5f33511b18403907a282c40",
   "skills/home-service-diagnose-1/references/environment/p0.md": "19b7f8141df1856026abdc738e62bb55676c53a9e9e4cad18fa312af56fd4330",
@@ -37,8 +37,8 @@
   "skills/home-service-diagnose-2/run.py": "eea3b5a654cc174b8764c0e69dbebecc6cf8aa1b08a041619eff22d07c3f86d6",
   "skills/home-service-diagnose-2/selftest.py": "a5dc2e015810a1176bc26978d5a85cd7e330e453bc431efdd4828da3d7feeb53",
   "skills/home-service-diagnose-2/.phoenix/originality.json": "7049c7983b405b1d80bb1ee469e475625817a0bdb9206fb50b18a7c28c0dc8c9",
-  "skills/home-service-diagnose-2/.phoenix/provenance.json": "cdda18c276f9dfd70e728f72f5fc308f5f29a33f3e31e1e6b36034421ea5ec6c",
-  "skills/home-service-diagnose-2/.phoenix/selftest_evidence.json": "f7db1e1fa41ee1ffb689233285d3467b8d84df2451b8070b13f5f6d126933577",
+  "skills/home-service-diagnose-2/.phoenix/provenance.json": "c4e94bceffc161a1a60911a4a4608c8f4faf7051a999736bad8a0db06337f81b",
+  "skills/home-service-diagnose-2/.phoenix/selftest_evidence.json": "3dd0e54bd5af394283eac2303cfae2d59d52218c4869c45847cb29a1828ad7d5",
   "skills/home-service-diagnose-2/references/creation/p0.md": "60d803b10987e3d6d280606c92dc9280d73f8f17766d09afe9af6a95e94bfb9b",
   "skills/home-service-diagnose-2/references/creation/p1.md": "4e949e5363eae75c5371564d7e6608ef188c640653acff30852cd07db5b96e7f",
   "skills/home-service-diagnose-2/references/environment/p0.md": "b2d538cd93576fe622d94150e3ce02cc749449e59a04e351a986defac4d43c7c",
@@ -54,8 +54,8 @@
   "skills/home-service-diagnose-3/run.py": "7b5a032f4545e42184875161e858d6ef64c3696d35340b8257800ea6bfb0091e",
   "skills/home-service-diagnose-3/selftest.py": "9ef5f4781cecfcb5ecb0333021a41adf8dad4c23145954cf48cf80be296a925e",
   "skills/home-service-diagnose-3/.phoenix/originality.json": "a5a35cbf81b199c32a0b9d592e14d88d2e970df0e97eb8f401b82a12d11263b6",
-  "skills/home-service-diagnose-3/.phoenix/provenance.json": "cd791c5ebd2d237afd83d2bd904294f65a290a3bcb6eb68e3ea30b1e827c6e21",
-  "skills/home-service-diagnose-3/.phoenix/selftest_evidence.json": "8b4bd4d6a6dc537713cc685a178c2d8e4db4720f43b761c10a22647f53037ac2",
+  "skills/home-service-diagnose-3/.phoenix/provenance.json": "bd38d26ee62e1fef1736b03064aadcb0b97dacf0d86809327a38e93e276d2a83",
+  "skills/home-service-diagnose-3/.phoenix/selftest_evidence.json": "de3fd6a4a6339e1e0f77799581c9a637859e14573b66033704176443abb3c385",
   "skills/home-service-diagnose-3/references/creation/p0.md": "476f2f2cd23bdd96e8aa55b4ef8babb81db870bb8a96f0183a939a27ac6ffe74",
   "skills/home-service-diagnose-3/references/creation/p1.md": "f395f144d2c32e7db3d78cc4fff68580255065056ef8169aeea125641fa23bac",
   "skills/home-service-diagnose-3/references/environment/p0.md": "6d8d0847b3ad92c281da105cc79f14b7ccf21d0bcc21d720b97e3cd5a9ec20cd",
@@ -66,7 +66,7 @@
   "skills/home-service-diagnose-3/references/production/p1.md": "88984216ae4fe2edeee6619b6b0c41dac24b33cc19355c39cb0f64646ff12318",
   "skills/home-service-diagnose-3/scripts/main.py": "dc8c7d16b584fc090dc09285e2b85cc7d6839fec3af7710460c5ade2dd4d0549"
  },
- "sealed_at": "2026-10-18T20:00:51",
+ "sealed_at": "2026-10-18T20:59:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

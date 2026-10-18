@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-multimodal-route",
- "merkle_root": "487dc0c06c217e84042eb54c2f85af60bf0a55ffdc7c9e2d4a57e6d60ed77b12",
+ "merkle_root": "237151530f223491451a7a227b10a241ab41e3f0c004713d76758925b0f91e2b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-multimodal-route-1/run.py": "c2f6466f18fe81e4787227a1d92cc2d766c65758d661c9b74dff3fbe6162a26f",
   "skills/agent-multimodal-route-1/selftest.py": "c954bf89b454bc7e1186d177ae1c6cb21d38a7f1c921757d3d41a0a15064b573",
   "skills/agent-multimodal-route-1/.phoenix/originality.json": "5c2e24dda9f3ea8cda064b98d3746a89fb3bec3a38355b4cd10e48c3b0a04aef",
-  "skills/agent-multimodal-route-1/.phoenix/provenance.json": "6d19a19e2b08dcd054bfde4670645847edf2be2a8a7ae85b3cc969eea2c928fb",
-  "skills/agent-multimodal-route-1/.phoenix/selftest_evidence.json": "fdc461505b9cfb57e2ab812c57a924807c95eea6c45f3b24b040e885d54ded2d",
+  "skills/agent-multimodal-route-1/.phoenix/provenance.json": "b998e8ce9f0b6c2f0462ef2270c6500ab3d45b0e3b397a7a3c85f9078809d6ec",
+  "skills/agent-multimodal-route-1/.phoenix/selftest_evidence.json": "889a13cd29ed75d59269321fc69ef1469a2c2fd9c7bc4328f04b325e1a2709e0",
   "skills/agent-multimodal-route-1/references/creation/p0.md": "27185d39d41014d77f4924065bc0517db1987c37c3149613d00d1491c7358a30",
   "skills/agent-multimodal-route-1/references/creation/p1.md": "5d1be040aedf59289a718e7fe4bb9ae0743f2e9e5f6b0a98fa86b7460c9c9ff1",
   "skills/agent-multimodal-route-1/references/environment/p0.md": "8d4915e67d0fe0c4c6a6e63fd65fd60cdb5894d2c3129d38f63f94c86bf24102",
@@ -37,8 +37,8 @@
   "skills/agent-multimodal-route-2/run.py": "b252f383564762f3b49561be5219e10f4d99d72f72b50e8209cdd9eece0b3fe6",
   "skills/agent-multimodal-route-2/selftest.py": "258e07e3c7c6a000f7b73aed1f8583e8bc915600f543aa344048967bb1b6a971",
   "skills/agent-multimodal-route-2/.phoenix/originality.json": "14b458adc90e345b2e4df2950d826e880ecd1d369b6a61c9663c5eb13b0060a6",
-  "skills/agent-multimodal-route-2/.phoenix/provenance.json": "1637cc6aa1a3b8bca7b9921c47121cc27c715156d2dd03f70d0070570ca0127a",
-  "skills/agent-multimodal-route-2/.phoenix/selftest_evidence.json": "23cd563f1d71d30cf302f3ce44ed60f4dbbdcd79ef981b742510a79240310261",
+  "skills/agent-multimodal-route-2/.phoenix/provenance.json": "f236098fd9b11ca30cfaae2a2821e8260ee662f0e5a04940fdb6ec10ea4c0a94",
+  "skills/agent-multimodal-route-2/.phoenix/selftest_evidence.json": "efd7bd294271196551aa8709743229342b3deff96cd170a9077d0e560072873e",
   "skills/agent-multimodal-route-2/references/creation/p0.md": "b8b9bb2985deea5b6e9db1558df1ce389d9c38e2812f6f63b8dc2b7d27a8663b",
   "skills/agent-multimodal-route-2/references/creation/p1.md": "6c1707d9e38280f9af9d95521475b9a68c3572c42c3a2b1027f1225121424899",
   "skills/agent-multimodal-route-2/references/environment/p0.md": "f2637e6cd4d1e9f68c993be244d0b5be0d6802c2a0787ff82f62b6f352f6b571",
@@ -54,8 +54,8 @@
   "skills/agent-multimodal-route-3/run.py": "4774ee533a4aaf2b7e2525343d0e4c21bc186ab19297ce86f870cfa7bb8b770c",
   "skills/agent-multimodal-route-3/selftest.py": "99334b770ffc1e80970076b985a1293359e09f7d5490573a0160098f55e59f20",
   "skills/agent-multimodal-route-3/.phoenix/originality.json": "e9da1473f7fbbfe00206393d0f249a2ea51f7486d5d607bae1c9360ce368658a",
-  "skills/agent-multimodal-route-3/.phoenix/provenance.json": "cb24e32062a2ad1c34c5e39122307309c192d8cf0b331e3c2fe3a628ffaac55e",
-  "skills/agent-multimodal-route-3/.phoenix/selftest_evidence.json": "e81791c9c81990c308ed20ffe557f1e7feb1023dcb23d6d5c765e5c04275a5e6",
+  "skills/agent-multimodal-route-3/.phoenix/provenance.json": "c217ed6a1a5c877bebb452ea68913672ebe6687d79a0626edb90f430c3299c23",
+  "skills/agent-multimodal-route-3/.phoenix/selftest_evidence.json": "a66467911eb304a8935a045ccee57244fe0c18a663527d63c74095e91b23a2d0",
   "skills/agent-multimodal-route-3/references/creation/p0.md": "84048dc777a189450c7c9380a91cba48e9c7814d2e9f128f0456f8788709c2d1",
   "skills/agent-multimodal-route-3/references/creation/p1.md": "fca00a9c31a086bfc2d04969f7d1dea77a0b09884a1e5204233dd0210d43bcfd",
   "skills/agent-multimodal-route-3/references/environment/p0.md": "6dcbc8a2e3cf4e6519af62011363fd81c8916881f44019c44cb81a02cd753741",
@@ -66,7 +66,7 @@
   "skills/agent-multimodal-route-3/references/production/p1.md": "cda2a5de42ccb7ac9365e125577cac7b02a49154f59b4766a9ee342bb44611d1",
   "skills/agent-multimodal-route-3/scripts/main.py": "b1acdd841d3cccda2554a8ae4272caf384e1d7ea8bb433ff51b218a8e78698e9"
  },
- "sealed_at": "2026-10-18T19:52:08",
+ "sealed_at": "2026-10-18T20:54:41",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

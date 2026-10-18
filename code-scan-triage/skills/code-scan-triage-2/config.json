@@ -1,0 +1,72 @@
+{
+ "name": "code-scan-triage-2",
+ "version": "2.0.0",
+ "domain": "代码扫描处置",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按可利用性排序",
+   "then": "先处理可被利用的",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "误报标记",
+   "then": "误报标记并说明原因",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "修复验证",
+   "then": "修复后重扫确认",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "基线管理",
+   "then": "存量与新增分开",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "不静默忽略",
+   "then": "忽略须有记录",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按可利用性排序",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误报标记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "修复验证",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "基线管理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "不静默忽略",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

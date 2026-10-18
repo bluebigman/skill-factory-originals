@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "privacy-policy-build",
- "merkle_root": "8421d0f4da697d76bec06197203e26608ceed2825798a9d7d1ccf8bed8fec0bc",
+ "merkle_root": "25a845a64ae3dd050198c53cb055dbafed7b803e3c9698b5335703a06e873be2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/privacy-policy-build-1/run.py": "e38619265dd8a58568e20fca95ad889a96365b1ee7d5aecbe71beb00a14959a8",
   "skills/privacy-policy-build-1/selftest.py": "97ad1f003b6c7a8f45c7397bf8463c45e8ee03157b5994c75f513c4a01e279bb",
   "skills/privacy-policy-build-1/.phoenix/originality.json": "daaa8ccf38ec9b98bb9bc9e54b051e04789810946790655eea5d77251c965bec",
-  "skills/privacy-policy-build-1/.phoenix/provenance.json": "58ea84316f7091e6b277a9a6551c17d0a0e48e3fd023d77f2d93a239e905e9c4",
-  "skills/privacy-policy-build-1/.phoenix/selftest_evidence.json": "ff6f45de4f9179382b08122ac9cad0f9543790c2ea5934e1e2e9d763043880d2",
+  "skills/privacy-policy-build-1/.phoenix/provenance.json": "40723f5195fd2c74ce52a338ad19810fc0c00496cb06d7d0a2d366e7dfc8fed5",
+  "skills/privacy-policy-build-1/.phoenix/selftest_evidence.json": "d7ba145f7c68fbb2cb793f2ab6c147eaf59169011d858f91658a141d7742dfd7",
   "skills/privacy-policy-build-1/references/creation/p0.md": "1aeb3eb7082da2a4b288e840b1bd3f421cf909c736f5dd97e13e18bfa2ce8af8",
   "skills/privacy-policy-build-1/references/creation/p1.md": "855867e3ee40b4128ceb4b3500c06eac92ec021251dee04e2f4c5de8ad573dc9",
   "skills/privacy-policy-build-1/references/environment/p0.md": "dee5a4499b2f6c894e93c101211961c1847ad173790896a1d1aaa46b544f7e87",
@@ -37,8 +37,8 @@
   "skills/privacy-policy-build-2/run.py": "71b4fbca264acb6798b089983e8f3f9d6f6246cc3d0b8fa1396ddd96be34f62e",
   "skills/privacy-policy-build-2/selftest.py": "46ddd9fb0099f9cc08d5d1487d965870e52bc3d1f58557f57841504d5136fb51",
   "skills/privacy-policy-build-2/.phoenix/originality.json": "c2ec2739722e5db9ee8d588982b0d3887ee9c0b2fea07c2f9b78356c2670f905",
-  "skills/privacy-policy-build-2/.phoenix/provenance.json": "daf9370e9ac23e425d9cef6cf776dac2469db5b16a4bb5be9cbfefcb7cf39ede",
-  "skills/privacy-policy-build-2/.phoenix/selftest_evidence.json": "d8dc36b6fb9aeb48097f4d61839c04a48de3d7fb537c68c914d3c9c07fddf062",
+  "skills/privacy-policy-build-2/.phoenix/provenance.json": "5e6af084d2f64046f10db3d4163e57623e96e8d778fc9d786cbd11433933e537",
+  "skills/privacy-policy-build-2/.phoenix/selftest_evidence.json": "d3e9edd89fbe957977a089febe6daa222d39160dadbc55e4b281b9ff41251a82",
   "skills/privacy-policy-build-2/references/creation/p0.md": "afbf15fb67b4a2cf6cc3e9a71ce0870b2b11531e095a5bfd2691940aa89c015b",
   "skills/privacy-policy-build-2/references/creation/p1.md": "717167749b9bf2d3599c1a5b49c4077f0e0e815dae5ad99f5880d5eec6da1b07",
   "skills/privacy-policy-build-2/references/environment/p0.md": "d71790e25f06f8be0e5b86568378c5fe08307bfefadf18ec59cdf90e99ac6bd2",
@@ -54,8 +54,8 @@
   "skills/privacy-policy-build-3/run.py": "e510df99081e3b0caf797d9388760a145f69c136869f4c9106621477b641f495",
   "skills/privacy-policy-build-3/selftest.py": "8a579c7bc917871a2c5723147e66afce038fe22bff355767ac189d0a96cb96cf",
   "skills/privacy-policy-build-3/.phoenix/originality.json": "2820df765717d39d1d5b2cd2954bc07d310402b608acc06a884fffd665f24048",
-  "skills/privacy-policy-build-3/.phoenix/provenance.json": "589c5fae7c3b00159afd1891e3262fb5e9fa6ac6be67a0168651f1b971896c65",
-  "skills/privacy-policy-build-3/.phoenix/selftest_evidence.json": "66bdaf570930b08a527b06e322dc657bbbfc2ab270ff77ca216cadf5b9612e25",
+  "skills/privacy-policy-build-3/.phoenix/provenance.json": "070458e4917945e4173446d7e75edf0185d4228f061c202188cebe3fbc3c6c61",
+  "skills/privacy-policy-build-3/.phoenix/selftest_evidence.json": "21f24ab334889fdf6f7060673617f4d9e6133dd3f7630d8f40a05b26d0b6fdb3",
   "skills/privacy-policy-build-3/references/creation/p0.md": "79b1e947f3f14a2f099c1095c482cea42da695b64355b85a1a15bc1986efb1e0",
   "skills/privacy-policy-build-3/references/creation/p1.md": "24fb0ba1c3e06de3edc11f0beecea6fea8020321ecd4c83e9e528be8ea02f214",
   "skills/privacy-policy-build-3/references/environment/p0.md": "336ef09949fa0406076bc32e027eb5db39ef4aa2925a696a85b5964c834d8a92",
@@ -66,7 +66,7 @@
   "skills/privacy-policy-build-3/references/production/p1.md": "99848d98a4cc3abafb3954db53100e55f8d23ba5bc305a5856327167629084bb",
   "skills/privacy-policy-build-3/scripts/main.py": "53199424f453c68bab5a33ded5e9d9c2dd650d74673b23bb9d9c9ce92d951f12"
  },
- "sealed_at": "2026-10-18T20:06:22",
+ "sealed_at": "2026-10-18T21:02:21",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

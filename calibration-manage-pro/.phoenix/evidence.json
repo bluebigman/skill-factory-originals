@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "calibration-manage-pro",
- "merkle_root": "9d5f4567c0ca0fbef3457b119b30c756eeacb077e002cb12fc4cc584b756dc6b",
+ "merkle_root": "283e601af4bbb4dab92fdb2b91f72725a0732e831bbbc461802a71916650b5b9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/calibration-manage-pro-1/run.py": "0bdc5d6ff2ec56a993e13c9e26366c751b206ff59ee8416beec87d6cf6d7f71c",
   "skills/calibration-manage-pro-1/selftest.py": "4317ad44cf186fb19aa5acae6a5760bed4cc7142fbe6631bdb101891589eee9d",
   "skills/calibration-manage-pro-1/.phoenix/originality.json": "a6eb44f6332c0e46c6a963e900d8d1f17be97f20dab9545b33c950c3ed828c73",
-  "skills/calibration-manage-pro-1/.phoenix/provenance.json": "af55b7bfca58adc04ee88ab934b2739d1922ab89f8c3a92ebbfa8167f7c2c279",
-  "skills/calibration-manage-pro-1/.phoenix/selftest_evidence.json": "13377f988793f6ce1d3c3974dce8b5ec168cbd0ba9c57628a388e045ec4343e4",
+  "skills/calibration-manage-pro-1/.phoenix/provenance.json": "5f5dab99eae0f18bd599979fcacfbfe5421b23ecdf18d9b360e63212241d901d",
+  "skills/calibration-manage-pro-1/.phoenix/selftest_evidence.json": "97ffd9b27f4590c1d38ddd3274f4c1b8d0ce24c982e68cb11d877499a917525f",
   "skills/calibration-manage-pro-1/references/creation/p0.md": "0e47b1bb27b43e72f595ad922108cb94662a50270bcdc28e4cfcbddf2c6563a0",
   "skills/calibration-manage-pro-1/references/creation/p1.md": "94a0231ea11f4bf84f3df7daf9d1fb6acf94f9159583bb6a84cc14feb41293be",
   "skills/calibration-manage-pro-1/references/environment/p0.md": "f6990459daba2f424c869e4a30d6819840693b57c474c4a4e7bd31307587db37",
@@ -37,8 +37,8 @@
   "skills/calibration-manage-pro-2/run.py": "5a0a3f07b5f9bbd785eaa7b687eda806b53c4bab34ed144d8ceb7017c8db5b76",
   "skills/calibration-manage-pro-2/selftest.py": "b93fca6a900466e1562eba7c7725bb9cb7ae646b5cb0a65d216e6ff28f9b5069",
   "skills/calibration-manage-pro-2/.phoenix/originality.json": "5f23944284913adc259612f463cb8801ee257125a653281c58d0c0680514a1b2",
-  "skills/calibration-manage-pro-2/.phoenix/provenance.json": "7aae1f4f4ba596a06083a18fd12a325d031d027369f90aef69a7c6530bea4ca3",
-  "skills/calibration-manage-pro-2/.phoenix/selftest_evidence.json": "ec6282a2bd6507e2eb6353db166c2dbf8b9e0e0429cc5cc4852292611521f73b",
+  "skills/calibration-manage-pro-2/.phoenix/provenance.json": "df982afc223630f084183c281c07f8625d82750b55bc2785830ae7f28ae9189c",
+  "skills/calibration-manage-pro-2/.phoenix/selftest_evidence.json": "f0a4ec0633bfbd290e777299f3b8fb16a64ef3b2db9765bfe586f515fb2c3d5c",
   "skills/calibration-manage-pro-2/references/creation/p0.md": "738a4d5ea293d200d567718ca594f285db693999dc44e24b4628c99529034418",
   "skills/calibration-manage-pro-2/references/creation/p1.md": "fc7946bed83d4bf64a170e02ae8d91521a21ffa3b2a2e954f136bb649d623907",
   "skills/calibration-manage-pro-2/references/environment/p0.md": "4e15f363a888c6d20fdb7388a5a9054b23f3e89a778a7cf102259f443b00b849",
@@ -54,8 +54,8 @@
   "skills/calibration-manage-pro-3/run.py": "c6fdd6163f3e9c3bc62b74351c03b9fa380ae219ab9051247029077e711d1655",
   "skills/calibration-manage-pro-3/selftest.py": "f2f5e7de3b728b473210ad701ab4346d204c09580cc99c1e87e443d84e9a2127",
   "skills/calibration-manage-pro-3/.phoenix/originality.json": "2dc9c3e2bd7f4c973db242dcadae831c37e2c9a6a954a02188a7f297491d12b3",
-  "skills/calibration-manage-pro-3/.phoenix/provenance.json": "eca2f80700ef6b815b3bab1d72b8ba36a34a05970fc1a15e53b036040a72a2a3",
-  "skills/calibration-manage-pro-3/.phoenix/selftest_evidence.json": "d2e6f59239fc507f29e2f644090193c8416da8b8c005e4e03150952666af4099",
+  "skills/calibration-manage-pro-3/.phoenix/provenance.json": "574512a4d5de88462471aed62029468f0e14bc238e27e8af7ea757e84b7a6ac2",
+  "skills/calibration-manage-pro-3/.phoenix/selftest_evidence.json": "93e168a0081161d9033d0d151a9758db298a4314053a50059965f4093298baf3",
   "skills/calibration-manage-pro-3/references/creation/p0.md": "a871e65a237a628ecfd36b9dc88da793195c90a750561863832d818231993ff5",
   "skills/calibration-manage-pro-3/references/creation/p1.md": "2b9a7a03754aa91f8f6818534d578e2a8781ef9ec80ab57d95ab1c0219d8f540",
   "skills/calibration-manage-pro-3/references/environment/p0.md": "d3e5ed004eeb4f0273ea725de9af98f7dd8903b6ad0dfc6b4226ab454931d682",
@@ -66,7 +66,7 @@
   "skills/calibration-manage-pro-3/references/production/p1.md": "835748f75ba95be2a12e9c7ac8e85282353418a2ce1d821d49cccbae4aa84c35",
   "skills/calibration-manage-pro-3/scripts/main.py": "730691e770be0a70aaea29763cb899824214c399164e8c03467a30c89f04c6d4"
  },
- "sealed_at": "2026-10-18T19:53:01",
+ "sealed_at": "2026-10-18T20:55:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

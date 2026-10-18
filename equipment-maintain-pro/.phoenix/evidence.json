@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "equipment-maintain-pro",
- "merkle_root": "6d39f80d796217f7e8125ab5d62b56d0292fd8345bf1e40f2a73f1d7abd6470f",
+ "merkle_root": "3241cf3020f1f8d049824d71b25fd89250642b5e05520a1ec37fe2465ebcbf7b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/equipment-maintain-pro-1/run.py": "297abc7c7d5b177b072532b60cd5c120fff7974526dd65ad1f9cea7f9fdeaf7b",
   "skills/equipment-maintain-pro-1/selftest.py": "0fc5b22ff94df57e929bfe917fd69a233b6e5b45fa8f17394e2c30b5ceaeaec8",
   "skills/equipment-maintain-pro-1/.phoenix/originality.json": "15ea86d49708c1d1ab5d96d35762c44ee98cfa599acb1957ce6da602cb862b89",
-  "skills/equipment-maintain-pro-1/.phoenix/provenance.json": "b9dee801687471b06bfb0249297e772cd03f091cc750563026a7302961fccefc",
-  "skills/equipment-maintain-pro-1/.phoenix/selftest_evidence.json": "4941dbe0331c499f305f778f4a3da4fd5636f18f7907ddcb87f9055f5ea7213a",
+  "skills/equipment-maintain-pro-1/.phoenix/provenance.json": "d681dca7a7968a56782c76b4db5d095a1dcc5e0134c3349f4a71a4eb033e694c",
+  "skills/equipment-maintain-pro-1/.phoenix/selftest_evidence.json": "4b96f68f14485810b487592381c4c06e7ab18a759d79edb95d5a6a52d5e0e47e",
   "skills/equipment-maintain-pro-1/references/creation/p0.md": "e719a366c8a5e0b337f0a3189735854a95adc53ead23a43fcdd9d58551726214",
   "skills/equipment-maintain-pro-1/references/creation/p1.md": "d40608c608d951d744358aeee507568ca900178fb3e9e310ca607d86f9501876",
   "skills/equipment-maintain-pro-1/references/environment/p0.md": "74b635b5c04eb6e5f2676efa2f63092966b0096b11f10bc109cfc29f197bcf06",
@@ -37,8 +37,8 @@
   "skills/equipment-maintain-pro-2/run.py": "8bcdea897362ae2d359c0c949525839cf86c70c0a9a38aec0f02f0a52ad6559c",
   "skills/equipment-maintain-pro-2/selftest.py": "c0f5337797c70f1b380b6cbc9dafaaaa5697c6289ddd8079bad11d53b4d27258",
   "skills/equipment-maintain-pro-2/.phoenix/originality.json": "36d74c1b21d246af6f9c5758341ff929e48c34b2315ffcf5755203864858c9ae",
-  "skills/equipment-maintain-pro-2/.phoenix/provenance.json": "760ac6cf278d7c2cf452dfeea70292e69bec314684d2590cd2bca4106ffcc2fd",
-  "skills/equipment-maintain-pro-2/.phoenix/selftest_evidence.json": "086bd1c501f943ab7eaf57df8b1f8754d1f9152b8868b77414a1522254ae82a5",
+  "skills/equipment-maintain-pro-2/.phoenix/provenance.json": "5a46304bed0da7e3ae25b2911ed5895a24d776b283a571b1871e16bce62a428d",
+  "skills/equipment-maintain-pro-2/.phoenix/selftest_evidence.json": "8e50bfdc515dacbcb6d8bc5afd915dfa5db881b619fcf944bc288fcb20b96caf",
   "skills/equipment-maintain-pro-2/references/creation/p0.md": "7e88361e7fa642309984e6aa763ba7c5c772403d66f1ca8de36065eebf063035",
   "skills/equipment-maintain-pro-2/references/creation/p1.md": "44280bf7e4979e4e0539f732aba5a09ba4cfd796eb5deb66305004554b45c5f5",
   "skills/equipment-maintain-pro-2/references/environment/p0.md": "ee6e23d5bea68da277c5b1f09a31b9d4d69f8f90068b0be01de4b68094eccc3f",
@@ -54,8 +54,8 @@
   "skills/equipment-maintain-pro-3/run.py": "ad76835a29ababc2a4a2432432fe9bb7f496ea4671bce57564911de1cfbe84fb",
   "skills/equipment-maintain-pro-3/selftest.py": "c76a76f11b805d53f68a0e6647ade009f55514485c2511f10cbd21180f8f9abc",
   "skills/equipment-maintain-pro-3/.phoenix/originality.json": "329a69d34b9aea1ae3aedea437cac0eadcdca7c7d32ebb307605a45a92c7fd6d",
-  "skills/equipment-maintain-pro-3/.phoenix/provenance.json": "dcb4ca441ef8673a9887a80c1a97a8bdaa4061068422a486d99d40500387f15d",
-  "skills/equipment-maintain-pro-3/.phoenix/selftest_evidence.json": "d4d9f6a1044bcdf683800bbd27bffa9e0767fb889d8bae7d9368b472773a114f",
+  "skills/equipment-maintain-pro-3/.phoenix/provenance.json": "264b0dc3cf3d5604c8e001c1aed409b16e06b296cdceb4efdf99abf361e56074",
+  "skills/equipment-maintain-pro-3/.phoenix/selftest_evidence.json": "d16d73bb777c35cba3c0a3c8627d5e5bf993c07280cec0022d4302c5c919a8f6",
   "skills/equipment-maintain-pro-3/references/creation/p0.md": "ff29dad4ca880c005f01db7ac40eab1923617a86871b412adc1069291da7b4be",
   "skills/equipment-maintain-pro-3/references/creation/p1.md": "d19f876df0354862db76f4c25453e9b0d4eb798a64ac71b8f837027d2423b029",
   "skills/equipment-maintain-pro-3/references/environment/p0.md": "fb6c6cb107d0254398bddfa9f65b5c42d00d95b04e7043a83dd613c31e8a93a6",
@@ -66,7 +66,7 @@
   "skills/equipment-maintain-pro-3/references/production/p1.md": "796c1b007beb9c65955bbd94d3effa0b826e6d1bda4bea56f22264e1deeb5c5b",
   "skills/equipment-maintain-pro-3/scripts/main.py": "7c81ca2e44fc57e3af2e44468399a46ac6031835253f4bd4ec03e46b647af57f"
  },
- "sealed_at": "2026-10-18T19:58:23",
+ "sealed_at": "2026-10-18T20:58:18",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

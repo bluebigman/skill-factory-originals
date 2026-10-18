@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "nutrition-meal-coach",
- "merkle_root": "6ad4d28cfb473a6ed4fbb0115cf03978e6d6de2853bfbcfb6575151d758f70cc",
+ "merkle_root": "a47cd08819573dfc5bd0c80e6f2e5bd13c52451ecd683dedaca8fea237e557d5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/nutrition-meal-coach-1/run.py": "33827aefc41b173979748498e3b97b8764a18182bb97426632e8a46327093a34",
   "skills/nutrition-meal-coach-1/selftest.py": "fe17085b75dc216ed1022848602d02f506ba07e0cec24a581f912c9c882cb22b",
   "skills/nutrition-meal-coach-1/.phoenix/originality.json": "6e3fdca67604928f6f196a61bc6a6563e09c0e12e8b089fc1a6acf3f63a65f4c",
-  "skills/nutrition-meal-coach-1/.phoenix/provenance.json": "fdad2ff54b69c2ea832325a5c220afe61008fb7ba592aa49811a03544e92af99",
-  "skills/nutrition-meal-coach-1/.phoenix/selftest_evidence.json": "fe27fe078eaf2cd1bf90ade1ad5cc8c7077f960c4aca5ab42a9eeec57f4c3430",
+  "skills/nutrition-meal-coach-1/.phoenix/provenance.json": "15e01a24684dc046efd6ce635e5d3bbd6480e6ecefa6ae5f01754e6ff7648d5a",
+  "skills/nutrition-meal-coach-1/.phoenix/selftest_evidence.json": "8cd5828319bda02ed84017e78f50d5fe1dae857b6d8df5f285e29147c6ad2249",
   "skills/nutrition-meal-coach-1/references/creation/p0.md": "8440b7050c8778bcc86bf37a4614e643229a254b307d9486cb6d85d2e27f6a0d",
   "skills/nutrition-meal-coach-1/references/creation/p1.md": "e461c990ed78722a7ab4a6aeae998900c4923639b87d34b7bc7e7ae4e52b5e05",
   "skills/nutrition-meal-coach-1/references/environment/p0.md": "dd12dbc58b9e0acb6296d771e97fb66db6836a4e16321dd913fbf108556246a8",
@@ -37,8 +37,8 @@
   "skills/nutrition-meal-coach-2/run.py": "8352510f817682d6fe2311ad13b85884ad9dc311bc18d7c1a12c0e0e18057e87",
   "skills/nutrition-meal-coach-2/selftest.py": "68de87caf17d3d0f0ba507ae15939c68211d2e2e4cfecb0a0bfb3a80ce7b9bff",
   "skills/nutrition-meal-coach-2/.phoenix/originality.json": "23e7716e0cf06c245f69b877629b708a2594dd3b694b16ac66b83583c2925f2d",
-  "skills/nutrition-meal-coach-2/.phoenix/provenance.json": "051621de66b739688128aad2e30836b1442f73d7bc9c356d34aec356fd850200",
-  "skills/nutrition-meal-coach-2/.phoenix/selftest_evidence.json": "bef9428f5746fa4d9f117c704afb91c1287a0888b02c9caac0f6e719c5878228",
+  "skills/nutrition-meal-coach-2/.phoenix/provenance.json": "cb500adcf495fe27aa7d625805ec2b240e9a99d4d086308d4394400f830814a3",
+  "skills/nutrition-meal-coach-2/.phoenix/selftest_evidence.json": "bde53d91ba45aa6ce54633b3638af046ad38cb90095f5d1a46e89f6b319eed22",
   "skills/nutrition-meal-coach-2/references/creation/p0.md": "3c849da2e7eaf1e05ab6a9a4abec170985e36ae45e0284143b09d68f9bac1923",
   "skills/nutrition-meal-coach-2/references/creation/p1.md": "dd087118ee52de44e9dedcfc5096d5aa2404c6ef50efdb984f81d28e597302ba",
   "skills/nutrition-meal-coach-2/references/environment/p0.md": "49b72a82333fa4e943703eb1f12dc11eb7b60bafc3cfd17b6a48aa55d7b12695",
@@ -54,8 +54,8 @@
   "skills/nutrition-meal-coach-3/run.py": "6615961791a174707cceb3ac762ed55c78b6bf98ac080d73b160e7eed79e4c61",
   "skills/nutrition-meal-coach-3/selftest.py": "467d2bc806ea43ec093ae582e26e07ea4518e6cdb4f2458de2016f79e81fb53b",
   "skills/nutrition-meal-coach-3/.phoenix/originality.json": "53f362349530cc13faecd742bdd1891c887227ad16e209afff34089701e62411",
-  "skills/nutrition-meal-coach-3/.phoenix/provenance.json": "e49d0a0d467cc82ff55ed0344845e3711ac7006c5068e36dc675debf0746bdbb",
-  "skills/nutrition-meal-coach-3/.phoenix/selftest_evidence.json": "0af18e54d04c284c4a5bc19aac4edbd0b895356b0b7aeb75cd23b6b03b8d45cc",
+  "skills/nutrition-meal-coach-3/.phoenix/provenance.json": "d9e8da29c210bffcecbf483814558fc08a5328b1d82074cb1b3355df680c2723",
+  "skills/nutrition-meal-coach-3/.phoenix/selftest_evidence.json": "42b0980d5ecc9859e013a07d3db87dec374da91c82ae916963e0d61fa67dd62c",
   "skills/nutrition-meal-coach-3/references/creation/p0.md": "485bc00d981c303e9f134bae3d912ddc1461425b1f89a6cf6fbf7ee0e564e7f6",
   "skills/nutrition-meal-coach-3/references/creation/p1.md": "4969141c461a964539812eff83a5ccf7bfaf3cec317a45d6adb88d50563ceb3e",
   "skills/nutrition-meal-coach-3/references/environment/p0.md": "51ff458ef670790ae1bf321a2da1ade89d0b2277078426218bf7ae8b7d5b3a9d",
@@ -66,7 +66,7 @@
   "skills/nutrition-meal-coach-3/references/production/p1.md": "264866dfcbc47eae0e804955fba0cdac5f9b1e201f5c571236cee66d2d8f0bb5",
   "skills/nutrition-meal-coach-3/scripts/main.py": "ca145aa0d36e99dce4c317c750264c81c624f4d288b1e98a67b2da6b2a6cb6a1"
  },
- "sealed_at": "2026-10-18T20:04:38",
+ "sealed_at": "2026-10-18T21:01:26",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

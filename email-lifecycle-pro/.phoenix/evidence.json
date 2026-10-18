@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "email-lifecycle-pro",
- "merkle_root": "ea8f9d966f5938b0c7bfeda5cfb54742ead08a57ca7538da14134aa78008931a",
+ "merkle_root": "b850d7a9307efa2dd608620ea1894b51c991f8cff1c9478ecb1c6677ce85ff4a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/email-lifecycle-pro-1/run.py": "03a6ef9a0993ee06ee8553dd70762cddf0bb10d1d4998637987d07e0252ed988",
   "skills/email-lifecycle-pro-1/selftest.py": "dc3e006012c4e1270df542bc65b1fcdddb1259ee22825400c64201959c5c1f4c",
   "skills/email-lifecycle-pro-1/.phoenix/originality.json": "5664c676c5e3dd7c9ed03407fde45a384f5c4fb968c88f4cc8792c60770a296a",
-  "skills/email-lifecycle-pro-1/.phoenix/provenance.json": "d629260ff0e7f09014b00441addc3da95531b43450e99f034cb57029dfce6456",
-  "skills/email-lifecycle-pro-1/.phoenix/selftest_evidence.json": "75b5c498648fa0d73ffafd51388b5267ec857263d3d1984e7d9f5df62bfc42d4",
+  "skills/email-lifecycle-pro-1/.phoenix/provenance.json": "9d65fb5cd3b62cf45d830b9cec5a20e78f4542dc81ed2b7a19a072000d1c388c",
+  "skills/email-lifecycle-pro-1/.phoenix/selftest_evidence.json": "b47d965b8fb7b97549989d5569dea57cf94af77837aa143f15a03df4962fe7bd",
   "skills/email-lifecycle-pro-1/references/creation/p0.md": "dd78591333d0734d3868c98d197074f2ba835c119c46d11f423f6817ba6a65de",
   "skills/email-lifecycle-pro-1/references/creation/p1.md": "e8801e0b6cfc491f24a3712c756d32c622e019bb7677b538ea11a37eab6a3af8",
   "skills/email-lifecycle-pro-1/references/environment/p0.md": "bf78b2abfb41c5c25f91bf9d51b2a300470cd184a9eeb3d492df90503a057c63",
@@ -37,8 +37,8 @@
   "skills/email-lifecycle-pro-2/run.py": "b2417f465a719637a22d74252c6772bececde5e25dc91509ed28e50176da030f",
   "skills/email-lifecycle-pro-2/selftest.py": "1b1099e2a45d16932e4a22aa046f3beec89719aed6a9f7ca0a2018ff6a5c68af",
   "skills/email-lifecycle-pro-2/.phoenix/originality.json": "a5bb4e3a225d558a44d1edf9a9693b1e0c6518b1d7453c2a0d30f227a5d18449",
-  "skills/email-lifecycle-pro-2/.phoenix/provenance.json": "fcca1ade8706a13889bb7fa90954ba48e3874d046a64406c6ad973f57a5988a6",
-  "skills/email-lifecycle-pro-2/.phoenix/selftest_evidence.json": "6c1db90fce3fdb1b409d50aad58e5bf7c06a07396a5c41105cbd58c68e9eb0f0",
+  "skills/email-lifecycle-pro-2/.phoenix/provenance.json": "10eca7d7eedbb27629b07acdf064ac269db0032fae2accec2bb156d73aa7a17e",
+  "skills/email-lifecycle-pro-2/.phoenix/selftest_evidence.json": "b548ab17e82783b13821dbe76143fc049cc2f75b4b63509685d47ff0b1f426a8",
   "skills/email-lifecycle-pro-2/references/creation/p0.md": "275bfa60aa803e4c21c53d90fa2e1b72315ec39dfda6ea1e3c772b82f407e3fc",
   "skills/email-lifecycle-pro-2/references/creation/p1.md": "264f71ac25dd06f53db809a3541763ee6422bc6a4421e8e71c4cf6b905fc1bef",
   "skills/email-lifecycle-pro-2/references/environment/p0.md": "27f3f6a89c3b277ce53e8a0d184b0c1dce08af93783a38c6d0eb3cdeaec2e998",
@@ -54,8 +54,8 @@
   "skills/email-lifecycle-pro-3/run.py": "734d59447c786998dcab36242f749d27bcf13bdc36eec5742f4c719a4b3ac66a",
   "skills/email-lifecycle-pro-3/selftest.py": "c80b9e5849711eec6b09f1bc678e516a0420186b645c75576360a78212d568f4",
   "skills/email-lifecycle-pro-3/.phoenix/originality.json": "1e3e4390a1ad30c627affe75422b6b8d469c4a9a3f46ffe73b82474beaf7feb3",
-  "skills/email-lifecycle-pro-3/.phoenix/provenance.json": "e4fa4bd6a011e303bad75cc0989bac0fb1d723ceed18e89aa2654dc71b12b59e",
-  "skills/email-lifecycle-pro-3/.phoenix/selftest_evidence.json": "097cb0334801d0a956cad854546e762cf54b2ac9a2ce534a95c4e54a1f2d838a",
+  "skills/email-lifecycle-pro-3/.phoenix/provenance.json": "1234f058c4614ba92dda90bd4451c546dbb4196d44c999f8b3d3f55fbc331c45",
+  "skills/email-lifecycle-pro-3/.phoenix/selftest_evidence.json": "4c30be719079acd57c649eee1a69fbcd34c4e250e59b655fdd7ab4b6436c10bd",
   "skills/email-lifecycle-pro-3/references/creation/p0.md": "6fb066bfd8727a229e6312dde86cc92bfed144659ffedc86cdcae8bee8380fc6",
   "skills/email-lifecycle-pro-3/references/creation/p1.md": "ef1a1b56a5618418ae345a2d7b7817d215bcfb98637bd278f763cb6fe0b45d0b",
   "skills/email-lifecycle-pro-3/references/environment/p0.md": "38ac4a2c93b12e26693baa95dd1192629df22da292b5e44a137653d363b09eac",
@@ -66,7 +66,7 @@
   "skills/email-lifecycle-pro-3/references/production/p1.md": "97d155b22a46bb7cdf9cbdb8f10e9992285edb6b269c9110a0fa241edd7b13a8",
   "skills/email-lifecycle-pro-3/scripts/main.py": "6e3eaa7cdf32d005a369927811a58056409232851e6d682e0cd62355fb55f573"
  },
- "sealed_at": "2026-10-18T19:58:14",
+ "sealed_at": "2026-10-18T20:58:11",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

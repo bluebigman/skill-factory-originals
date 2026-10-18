@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "skill-install-audit",
- "merkle_root": "cb25cb1b82298557ac4e46f707d08a8800c73a685b247d217af12b050ebcfc7f",
+ "merkle_root": "299b12644a0af9043bbf804d5a279928ccbca431145c70b3bfae37084e99e070",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/skill-install-audit-1/run.py": "8d5a23f69bda1fa15b92322974703457a24d17e5648bdc35361bc7820ec0c0e5",
   "skills/skill-install-audit-1/selftest.py": "6e64c22f78ab4949077f8a0c8f63e9207f35cebb4c7134d1dbf7e5afc48a9d7a",
   "skills/skill-install-audit-1/.phoenix/originality.json": "eb35b75a0b0232e2677171ab6582914d6cb009ce1d881efc3db88372d3088243",
-  "skills/skill-install-audit-1/.phoenix/provenance.json": "47b7a51b82fb5e06adc331d28724c8fb25b9aa611dc4b5492d3a36c7869fcf0d",
-  "skills/skill-install-audit-1/.phoenix/selftest_evidence.json": "0d37c6ac5175be6cd826466ed231ba661a12f79a727fa67f4e9232507691363f",
+  "skills/skill-install-audit-1/.phoenix/provenance.json": "86f7bcc82117b326b7e6d8bb61ad9b8f2b8965787b0854ca7c3eb22437c6ceb7",
+  "skills/skill-install-audit-1/.phoenix/selftest_evidence.json": "be59bacd8dd7e269db64fc6c6af69628b141aa7529dedac6e2521787fbd6b88b",
   "skills/skill-install-audit-1/references/creation/p0.md": "7cd455c86fffeb719b0289019acdf5cdd21ab66a6fb2a35a08c8d64326b70bde",
   "skills/skill-install-audit-1/references/creation/p1.md": "a27e2fe751f1442399db902d8988685892b99d09cb5b1ad61e9ba3f210ffe851",
   "skills/skill-install-audit-1/references/environment/p0.md": "e49519f4446621817fa66084b57d62af64b9f101e64dc15df9bba9966ca988e3",
@@ -37,8 +37,8 @@
   "skills/skill-install-audit-2/run.py": "9838487cec5b5e24f101b6d54d97c6f17aa1f0be62eac519867f072adeeecb95",
   "skills/skill-install-audit-2/selftest.py": "a1d18cc3e577e3e53bbdbdee08ffdcd577c02a72be2096a6a79cff9b92242b31",
   "skills/skill-install-audit-2/.phoenix/originality.json": "3682dc332ed045c6072601187277cdabb6239c49c4fe8e1c66a8977ac3f6f6da",
-  "skills/skill-install-audit-2/.phoenix/provenance.json": "8be05ce1ee4918bb0d739e3a8cc32235484e502ce710fa14e91753be092bbd1c",
-  "skills/skill-install-audit-2/.phoenix/selftest_evidence.json": "781c7efeb5fcbe99a1f5d9127cb1c91f6edd37576573d692988cfda0c4162323",
+  "skills/skill-install-audit-2/.phoenix/provenance.json": "d50cb346fe08e0507182b454d27cc1928e2a0542ee31567be80a55864bc38b9d",
+  "skills/skill-install-audit-2/.phoenix/selftest_evidence.json": "e4e6c80615f2c8e167c02e8804047c09d93a375cf365f7d5d159e4bd98b25355",
   "skills/skill-install-audit-2/references/creation/p0.md": "9ee0a8b5c73132697d655ac487aa64c3349dfa472a4e2340dceb50f79f3841cf",
   "skills/skill-install-audit-2/references/creation/p1.md": "cb9ef55e62082df36a166ae93a41031c80875da3deddd5c92b0f480a70ece15f",
   "skills/skill-install-audit-2/references/environment/p0.md": "95cf34e3c5deae0cb5bbc805b5c6ea0475f2845a5c9a3edbca2d89b81f23988b",
@@ -54,8 +54,8 @@
   "skills/skill-install-audit-3/run.py": "1e6dffa0b8c3f99183da9f025e1d42e99a8c32f7379092274d394ad0afd3e282",
   "skills/skill-install-audit-3/selftest.py": "98a702a0c53b247733e7500bed54a32a544687c1caf1e330eef39f2941a7331f",
   "skills/skill-install-audit-3/.phoenix/originality.json": "59fdd3381394b772ef5482bfd5351acea6d7efe516f668c36887ede47bd68014",
-  "skills/skill-install-audit-3/.phoenix/provenance.json": "4bb9759ba45d2fab0c7514ed60ae2e7f00c397d67f888abc6325589d2f5a5589",
-  "skills/skill-install-audit-3/.phoenix/selftest_evidence.json": "71704ad3e398a5f7b50e29142ea1cd5498ef942e0e1ac514d7b2728bef7b0655",
+  "skills/skill-install-audit-3/.phoenix/provenance.json": "6df4de58dbc2f2ddfe880677b08df48406470a74ac914f6e8284ed06af031644",
+  "skills/skill-install-audit-3/.phoenix/selftest_evidence.json": "b62cd5b2175b2d36306e93cd71d28284ad942f19f5a72ed6f15d69b33da97152",
   "skills/skill-install-audit-3/references/creation/p0.md": "a53426333a98e209808dc0e6ef60eb00ca1ac1b4d03dac5c59cbca5f3bde1df2",
   "skills/skill-install-audit-3/references/creation/p1.md": "419f307ef757f8099cf729abfcaaedc69232e28ce08b052d6b6343e656e0e8e5",
   "skills/skill-install-audit-3/references/environment/p0.md": "a577ff132a7c81c50ba024d2a0e7a8fee837cb4988f635f56aeeedd168b99cc9",
@@ -66,7 +66,7 @@
   "skills/skill-install-audit-3/references/production/p1.md": "ccea28a273159338629e36dd4b7592c5129d53891c6bc7dab756d81323832f2a",
   "skills/skill-install-audit-3/scripts/main.py": "7f206d312f38ff7aec3d956268af9198df5d8443aa0f84cc418d2f388bfceedc"
  },
- "sealed_at": "2026-10-18T20:09:40",
+ "sealed_at": "2026-10-18T21:03:59",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

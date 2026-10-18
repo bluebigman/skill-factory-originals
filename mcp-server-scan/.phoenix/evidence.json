@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "mcp-server-scan",
- "merkle_root": "3946d3de427af4cdf596f64eef162f298955472f4c46af1af55e673b6bb23ae3",
+ "merkle_root": "da51428e7a127eb753615c34a048d0716a0cbd9fb6e29e81a5b61f4c7fe96393",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/mcp-server-scan-1/run.py": "b1e3688558a8cd9c2f50ece40ff5c689ad2512eacf0c9ff4fd5082f74d5066c6",
   "skills/mcp-server-scan-1/selftest.py": "4c777982dec9f2a3f74fbca4409b4bc2c48fb906a7143c3c8f129e75d5b7c13d",
   "skills/mcp-server-scan-1/.phoenix/originality.json": "6ac695d9b4bce8e8947d87ffd6743542c7a26ea45594ce498546b21d87ee6085",
-  "skills/mcp-server-scan-1/.phoenix/provenance.json": "a62c4d64aa760b09663b46ca13628618dd32c06873ac954d1ae4f4f9729d6221",
-  "skills/mcp-server-scan-1/.phoenix/selftest_evidence.json": "e5c2d8dfdfa9073864bae7aa9ca12dfb7a2e2c143ffb55cebd2adc9e42a2478d",
+  "skills/mcp-server-scan-1/.phoenix/provenance.json": "dfb13c166a45bd4723c4576921c979e581624c81bdef05feaa0080ec8b57f94e",
+  "skills/mcp-server-scan-1/.phoenix/selftest_evidence.json": "e5c7c7194a0a1798272da8ab876df9dd2dc0c98efef51accaf3165bd849316d1",
   "skills/mcp-server-scan-1/references/creation/p0.md": "970c696c220052272725a44ad187a85f49b1b364d4801d5c112abdc9560c776d",
   "skills/mcp-server-scan-1/references/creation/p1.md": "d515103566899d9cf359f37ce2fbdb5fcc8c3131a2346561369c296efbbee10e",
   "skills/mcp-server-scan-1/references/environment/p0.md": "a66115cdd402784f7c8c9557f518a126faf077c9a55ab6d27767872f6789baeb",
@@ -37,8 +37,8 @@
   "skills/mcp-server-scan-2/run.py": "4d1c402e9a4f2dabe7a2d47269fd1f6ef5ec9fa7d8122146493271d755c55fe3",
   "skills/mcp-server-scan-2/selftest.py": "e701d060ccaf9820efb8048ce46d8fc7e3ae0b26247a978556136e45c31ad35b",
   "skills/mcp-server-scan-2/.phoenix/originality.json": "7886adae3b815d854ba602166929d38981906b6b0d361dee07ee7d17af33dfed",
-  "skills/mcp-server-scan-2/.phoenix/provenance.json": "6225c3ef562e9b8ca38e57b2089e871688128a0d1dc3f2270e52871d311eef06",
-  "skills/mcp-server-scan-2/.phoenix/selftest_evidence.json": "c29f76074e6b7e8b097934d0ea157ba08c3fd20311735916f6df20c3fd518c16",
+  "skills/mcp-server-scan-2/.phoenix/provenance.json": "c700fab974e98be251f00ed4641d380ee63a1a5e87809ee445468648512c2c13",
+  "skills/mcp-server-scan-2/.phoenix/selftest_evidence.json": "b6365be4d7cf015e572ad2c4ef67420ad2c3b72bf9c61d70df04c8c21a024efe",
   "skills/mcp-server-scan-2/references/creation/p0.md": "d5d510e9cd9cb05517c73adda747f1dc89a825e326d8ec1cc68539a5d751ddc4",
   "skills/mcp-server-scan-2/references/creation/p1.md": "a2a07f2d4dad3e729e03cbe9c8406646750d1d1fd2090cf0584789792d195350",
   "skills/mcp-server-scan-2/references/environment/p0.md": "aed4128254ab9591a8529418154147dfb7bde2e3aa2a4301a2dbb23a9f3f0c2b",
@@ -54,8 +54,8 @@
   "skills/mcp-server-scan-3/run.py": "23a64b770ca794c0e7543890d533d2b5f9136624e5aa6b21fa583af59f31227d",
   "skills/mcp-server-scan-3/selftest.py": "53163109409b17a13b55acb11a00fc87aee08a4742dd9e4faaa5581c77fabc57",
   "skills/mcp-server-scan-3/.phoenix/originality.json": "ec7aefd32e417d2d4e99c1ef64cf6b04606ea7a9eac83a9ea597729c879d7482",
-  "skills/mcp-server-scan-3/.phoenix/provenance.json": "29b167c2a4ef316c4bc218151ecfee12ef1b5bc28f32fc8437f19a725176e63e",
-  "skills/mcp-server-scan-3/.phoenix/selftest_evidence.json": "c91d091eeee030af58d91451a216783323bf49dce2fca71a4cfc8b7c73353bda",
+  "skills/mcp-server-scan-3/.phoenix/provenance.json": "f0e1c616cb8b90c86d366a8a23c19a7d6165b3a6e4dfcca085382206462e1a64",
+  "skills/mcp-server-scan-3/.phoenix/selftest_evidence.json": "df987ba766ae34495e977c9534a601bbd08e2198f23abd68eb8d7133a79e77a2",
   "skills/mcp-server-scan-3/references/creation/p0.md": "9ca525eb337fe125c3fe9c1a6df8e4139c9c1d3daf0d72ff425bb5dcafcc3cde",
   "skills/mcp-server-scan-3/references/creation/p1.md": "dfed40f6ee504dea547a504b82ba5f9cd9523eec61c0c1ed574a57c440160e0e",
   "skills/mcp-server-scan-3/references/environment/p0.md": "c1b803ba63339fffcef5f1ba00029e85527ed44551d7e723e9bf09ae364d70af",
@@ -66,7 +66,7 @@
   "skills/mcp-server-scan-3/references/production/p1.md": "ef3688bb7c323b56eaac962da76020ab7be0a50fbdd1c32eec491d0e822efd51",
   "skills/mcp-server-scan-3/scripts/main.py": "1575011a80ed2e99190c0a68eb6a787fa7ade1e593f2001e3d11e31aa4a2dcfe"
  },
- "sealed_at": "2026-10-18T20:03:14",
+ "sealed_at": "2026-10-18T21:00:44",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

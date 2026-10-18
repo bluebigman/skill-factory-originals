@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "vuln-triage-flow",
- "merkle_root": "f7cb09a01f5e13696bbed311c4c4370f086a2bc50a67b639d6a9d6c51e00e6d8",
+ "merkle_root": "33e3e4a1cabe21068d40d52fae864ee144636f1ffeb7aef0b76440e1df5950c6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/vuln-triage-flow-1/run.py": "7ef8a2722a30f83eca383eaad4613abf3d21aee253e607e26517160a14b91e13",
   "skills/vuln-triage-flow-1/selftest.py": "1f1c9e36756f18a46b7e52eebb479b8f5727f0fcdbb920d55088a87191a969ce",
   "skills/vuln-triage-flow-1/.phoenix/originality.json": "c17cd222f2ac5b9fb594ca931743d2bbc0e7d9757a54db2e29f82e43131415bd",
-  "skills/vuln-triage-flow-1/.phoenix/provenance.json": "fde4232c64501e55d60ba1b2997e09a4cd7703531872a98bf776cc540a29c807",
-  "skills/vuln-triage-flow-1/.phoenix/selftest_evidence.json": "a74ae43229f113b5dfca783eedafdb2ff0a9c7eb3d0f93cd1be29b977838d151",
+  "skills/vuln-triage-flow-1/.phoenix/provenance.json": "ed9ba14c4d9045cc11869cf4f1e437318d9e503d6df2740eb0676cac77bb54f7",
+  "skills/vuln-triage-flow-1/.phoenix/selftest_evidence.json": "c2e40bdc3ce1178de610a62ce7a970b687e4c5fc9d6465d51957d49d6061a632",
   "skills/vuln-triage-flow-1/references/creation/p0.md": "55900af835ca7a7d8d5520822c5e6d793f05da4b2ac3d02097bdbd707dfcdf00",
   "skills/vuln-triage-flow-1/references/creation/p1.md": "af360cefdc9bcf21331e21820ac8332f5631af7c3ba72672a25cc6100cea7ed9",
   "skills/vuln-triage-flow-1/references/environment/p0.md": "729e23bbda2e20149575ea941dc148e56788a0198b6eee1b382b9f4ded2ec919",
@@ -37,8 +37,8 @@
   "skills/vuln-triage-flow-2/run.py": "40fbcc6b3cdc9675863ad6f8917f70ef2ca6f5a6f0bd80d0a2d9538b918c5019",
   "skills/vuln-triage-flow-2/selftest.py": "1d938797f19687ebe02c93b3ce3e52b0c651fa3542414e66bdf33c811e9003ad",
   "skills/vuln-triage-flow-2/.phoenix/originality.json": "0fd0a3175e317ef4c217356f3d5493bc306b9330bdce1da545631835b930e7df",
-  "skills/vuln-triage-flow-2/.phoenix/provenance.json": "e0149138e19b6e98ade691dd62d0ba1324f96d2ed733a43ff6fd99aafbc179d6",
-  "skills/vuln-triage-flow-2/.phoenix/selftest_evidence.json": "890bcc93ff3fb842291eff94f73d3e7c625bfe28ebe5316e797871479967e74d",
+  "skills/vuln-triage-flow-2/.phoenix/provenance.json": "f55a0941e31dfad70ce77dce763bce79b744e5e4bd8d1364075a47b8bdae98f0",
+  "skills/vuln-triage-flow-2/.phoenix/selftest_evidence.json": "5fda0da9c480766528ca94c6968163f929756f11fbc3fcc9ac77b965c83d156c",
   "skills/vuln-triage-flow-2/references/creation/p0.md": "29523304b59374fee9199357ac489785649f0b819aec674c5d89925bda3c4e74",
   "skills/vuln-triage-flow-2/references/creation/p1.md": "5fd4cd8c320a8732da958d4a945cfb90c3a3aedc72467330955382243f8ed3a8",
   "skills/vuln-triage-flow-2/references/environment/p0.md": "15850949a825171ceb5bd5f7ced5cddf85dd330fd3a67c5b3147289171f146e3",
@@ -54,8 +54,8 @@
   "skills/vuln-triage-flow-3/run.py": "d3452042384c5510e6f8ab43838b987898637ea70ebc0d17a41b045b563ae052",
   "skills/vuln-triage-flow-3/selftest.py": "060c5797bc4eafcda609cc77ec5a11666fc9750e5424636a196e52d385932095",
   "skills/vuln-triage-flow-3/.phoenix/originality.json": "0beebc39c951e662117889136d2a331d11f239002e0ce767f0a6cf11eaf0d3d8",
-  "skills/vuln-triage-flow-3/.phoenix/provenance.json": "5d06eb15e9e25c182630b31e63fb83f76f1f9a59883fc107a4d57bac3a8bb17b",
-  "skills/vuln-triage-flow-3/.phoenix/selftest_evidence.json": "a4d6d61fdd85f264152445c815471616975b35181bb78252d1a8c1e62ca733bc",
+  "skills/vuln-triage-flow-3/.phoenix/provenance.json": "04dcffb259e531a0efef18ea24aebfbf3a4758ae1ac5ef0b99689f4f761d0279",
+  "skills/vuln-triage-flow-3/.phoenix/selftest_evidence.json": "5befb2a5259e69e6d4d52c4d500e07994f4f9a2d18e380754a4ea47359abaddf",
   "skills/vuln-triage-flow-3/references/creation/p0.md": "fe35b4951523817333205a43e4b8b7ab3d3f259f79f53c7c44ad02d0bdc91bcb",
   "skills/vuln-triage-flow-3/references/creation/p1.md": "ae60b34f50271eb3eef7d327fd445a6dd6539cd89ccfa955f1332be82469c401",
   "skills/vuln-triage-flow-3/references/environment/p0.md": "7c997eb93661e3bcb3d6b6f2059b9d679eeca5fe34b3720c923bb3a640a97ddd",
@@ -66,7 +66,7 @@
   "skills/vuln-triage-flow-3/references/production/p1.md": "ac0e6c25c32038b31b4e08e3ef2866da992a03236c6a101f8f4fd2db2b43e56f",
   "skills/vuln-triage-flow-3/scripts/main.py": "1e10a4d8f3150f1bba2731c6411d164793173e938828ad0b7b12ce5a3d14e3a4"
  },
- "sealed_at": "2026-10-18T20:12:57",
+ "sealed_at": "2026-10-18T21:05:21",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

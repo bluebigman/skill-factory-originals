@@ -12,5 +12,20 @@
  "generator": "FACTORY/Z03_Original_Forge/_lib/forge_core v2.0.0",
  "clean_room": "规格驱动原创：先写规格（输入/输出/边界/异常/示例），再按规格实现；未抓取、未复制任何第三方代码",
  "note": "本资产由工厂内生成本器产出，非代码抓取",
- "parent_slug": "forge-demo-incident"
+ "parent_slug": "forge-demo-incident",
+ "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/7503019a360e066ae41581cf8bba0c9d7a078a23/forge-demo-incident",
+ "github_anchor": {
+  "sha": "7503019a360e066ae41581cf8bba0c9d7a078a23",
+  "tag": "v3.1-20261018",
+  "repo": "bluebigman/skill-factory-originals",
+  "verified": "逐字节比对一致（本地交付包 == GitHub 该 sha 下文件）",
+  "at": "2026-10-18T20:54:06",
+  "why_sha": "必须带 commit sha：branch 是会移动的指针，sha 是内容寻址，永远指向那一份字节"
+ },
+ "reseal": {
+  "at": "2026-10-18T20:58:55",
+  "reason": "修正证据身份冒用（原 slug 指向他资产）+ 补 merkle 证据",
+  "changes": [],
+  "principle": "不改 date/generated_at（历史事实）；修正痕迹必须保留"
+ }
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "viral-teardown",
- "merkle_root": "fa3929a9a0ab5eed1661115ae64a6dda484e6a3de33cbba2af206763a4834470",
+ "merkle_root": "85b8daf54f1615c42f4953820c6ef6f4cba8f7b802783adb0fda8e125e3c278b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/viral-teardown-1/run.py": "b639fa632cf15ccfc8837de1961394c639606fb6e438c1551ebf55fbd7a5a341",
   "skills/viral-teardown-1/selftest.py": "2433f2b6814bad77ed1114ad47544bc5efd4fe1a43a7da0b0890f9d8703c0044",
   "skills/viral-teardown-1/.phoenix/originality.json": "0dd63944d2ff8c1d794edff0894bfef393a10773bc3fb968c3e28236f3fe618c",
-  "skills/viral-teardown-1/.phoenix/provenance.json": "56a00f814ee19f5239fa1b6a39079a9efd43172aab05e24a3d51fb6a4924a564",
-  "skills/viral-teardown-1/.phoenix/selftest_evidence.json": "c6765e1bd301e377341e51502227d8f499685155f45f6fab9af3d18d7bbfbb3c",
+  "skills/viral-teardown-1/.phoenix/provenance.json": "68844625e8ffc5524673a6f6509c1685ece9e9b76e7af33a8790ae344da6f0bd",
+  "skills/viral-teardown-1/.phoenix/selftest_evidence.json": "923de918750e3304f1eadd5b4e805a7353180f21b7a8d224304bd76766f32bb3",
   "skills/viral-teardown-1/references/creation/p0.md": "ee43877f6c40e92dea6a26318bc15d2906bede8dae85c2ea8c0f5959a7bceec5",
   "skills/viral-teardown-1/references/creation/p1.md": "f85818ca0f525dafe716a6463ae04b820617b7da5e84c135fee5f414d2642c5b",
   "skills/viral-teardown-1/references/environment/p0.md": "7129d43f8cc0f3711a3f786fcd84bc57ade8be7a5414054c4e8313a312884d4a",
@@ -37,8 +37,8 @@
   "skills/viral-teardown-2/run.py": "1d0a08394cbffbb7ab682821e0a5b11368b89491d188331b7c2af153fbd09328",
   "skills/viral-teardown-2/selftest.py": "676860e3d22337fdbedec4f76da62d245103d169b687cb6696a3bff25c1802a4",
   "skills/viral-teardown-2/.phoenix/originality.json": "abea7bb6ab6bfb91719430ce5ec5e011526beb6317dd957bfc7a0742d28c2451",
-  "skills/viral-teardown-2/.phoenix/provenance.json": "e7fac838a51562fc547a5f5ae76b9bd0356d6e86d958e09f7200112bdd641262",
-  "skills/viral-teardown-2/.phoenix/selftest_evidence.json": "be0664a16de13e23f7e745e6fa2b56fc31b11e35adf0f77bac2db0a538dcac3e",
+  "skills/viral-teardown-2/.phoenix/provenance.json": "78a22c1fefb72e48592db432b9c4b5b85257f7439455e9857f0bad90130c4aa0",
+  "skills/viral-teardown-2/.phoenix/selftest_evidence.json": "ae3d1c0b62b2e5bd0d52a5d33aa1dab1e4d5b07e74dbf9d844253db9df88f601",
   "skills/viral-teardown-2/references/creation/p0.md": "c9fa55fdce8e589e3eb2c7ecfc723b9b44297d5fe421f4cc311497473a641d09",
   "skills/viral-teardown-2/references/creation/p1.md": "bf337d246d531653d70643457c8cc83b228becec7e0f411df7183bd8753259d2",
   "skills/viral-teardown-2/references/environment/p0.md": "c02ca869eefbf50e969934a10fec52ef6c11b85ad0e7ebf51550ceaed7ef5980",
@@ -54,8 +54,8 @@
   "skills/viral-teardown-3/run.py": "41345cb951ad2f1c9caa8934b303923007f8c127de5ee2f3d2b9b9a59f9590e0",
   "skills/viral-teardown-3/selftest.py": "3a5b6ab09c0e18ba1e7d5edd73830afb0c23ddf4de34b5c5703d132e2ffd4195",
   "skills/viral-teardown-3/.phoenix/originality.json": "a7af9cb6a2790d35323480f437623dcefd511911508cef08a78e45a9189dd660",
-  "skills/viral-teardown-3/.phoenix/provenance.json": "829f63885bab8414b09d5688af0bbb7bf6225138684d72b015b88b7872f5dd2d",
-  "skills/viral-teardown-3/.phoenix/selftest_evidence.json": "6ec71f7a3f27838b81e626839a99bdf4b9e856fe588d387eb0887708d1354277",
+  "skills/viral-teardown-3/.phoenix/provenance.json": "587b02c55452594709b2c4e32c5e3943502355a668e2b49af6f52c5c5cf8ed65",
+  "skills/viral-teardown-3/.phoenix/selftest_evidence.json": "116b538a29b3971d0f024e28ecef7ed61bc45907c7f2125273eee7ef2b604109",
   "skills/viral-teardown-3/references/creation/p0.md": "6acbeedabfb4ff8938789283219531c03e956648d7b2a8dd2ed594de9685e0b4",
   "skills/viral-teardown-3/references/creation/p1.md": "254bc9fcde150ab2f47d966185995d9e3feac5eb3325909cf77412689e69a999",
   "skills/viral-teardown-3/references/environment/p0.md": "b3003a3becc22ef1a1a207b1da9bd87d47a2de0be62a63ea4b9d8b59362f643c",
@@ -66,7 +66,7 @@
   "skills/viral-teardown-3/references/production/p1.md": "77e0a8740783f31301a15c53c5e7fe63e5962dba52391f88ba1853a70fb48ca8",
   "skills/viral-teardown-3/scripts/main.py": "0cc46d6d76e91b7f46f3651c374edb667c04fad4540a8e3b85673392dea53f50"
  },
- "sealed_at": "2026-10-18T20:12:38",
+ "sealed_at": "2026-10-18T21:05:16",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

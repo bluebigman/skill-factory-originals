@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:16",
+ "at": "2026-10-18T20:54:46",
  "skill": "agent-rollback-plan-3",
  "slug": "agent-rollback-plan",
  "passed": true,

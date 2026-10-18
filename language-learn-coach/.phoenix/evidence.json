@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "language-learn-coach",
- "merkle_root": "845386b63df420b1e6ba47dbbaa8f38f4be6c34af0f960a02f73474140d1033f",
+ "merkle_root": "7fa14acc558e5ef04c1c05cf2862307fb582833640a9ade48e8ceab7cfe7e8ca",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/language-learn-coach-1/run.py": "61d56076cc3980c8235bd0ead2b918ba7137c9e197ab8122468cae6abb1eab70",
   "skills/language-learn-coach-1/selftest.py": "80ba71412fb3903979b0ef5dcf0cc14c93bff91432d4528a8675fe5e7be58b5a",
   "skills/language-learn-coach-1/.phoenix/originality.json": "c0e20e850aabf77c1345a5f73cb15b26bbe4d4b61914dbb05933085ff8a8a348",
-  "skills/language-learn-coach-1/.phoenix/provenance.json": "d44abfac76bd07ecf3423263b3b27828061411023e9397d3fd79719cd0965b18",
-  "skills/language-learn-coach-1/.phoenix/selftest_evidence.json": "dd0f67b3b6dea4210cd6ae3077a0d2a8865f1cf31f708908551f69e54bca4c4a",
+  "skills/language-learn-coach-1/.phoenix/provenance.json": "57a29778d565991d5d1b08ccce09aaffa1373480538aa6aaeb4ed4d3bddd73da",
+  "skills/language-learn-coach-1/.phoenix/selftest_evidence.json": "80253bc8c49364541f61f26cb63656ae5ecf6972cd390d2d592f8e26c687553c",
   "skills/language-learn-coach-1/references/creation/p0.md": "ce6a31aa9ed7fab868e13e946ac265aa7c385a03c22ac35ad27e9e6da8222258",
   "skills/language-learn-coach-1/references/creation/p1.md": "267d6f83bbc019def7b563dab6630a1e0ea9f35c76ae79e06a5750a3d9db97f7",
   "skills/language-learn-coach-1/references/environment/p0.md": "debed1b6c06a178d95bb25072a497c7af2eb967ed2c791efd9dbc3370b11023a",
@@ -37,8 +37,8 @@
   "skills/language-learn-coach-2/run.py": "67f71cc48bd983070672192fcb495a487f89f46b628a0defa931f7a19a977929",
   "skills/language-learn-coach-2/selftest.py": "867bb60dc29a7e8ae0ed67721636171fe82276d89d4e3bc8a6d07dc9abe05196",
   "skills/language-learn-coach-2/.phoenix/originality.json": "e84eb1a666f76545e78b9610642922c46a188c36c6db684b8af737ab57e6aa39",
-  "skills/language-learn-coach-2/.phoenix/provenance.json": "6536f49063cdee8f23b1c13ba09576cf504382040622dd5baf3a93ef930b430e",
-  "skills/language-learn-coach-2/.phoenix/selftest_evidence.json": "cf7f64b0d46ad466237a0e447699d508d63a2269b3f7781a447f5414ff8ef3b7",
+  "skills/language-learn-coach-2/.phoenix/provenance.json": "0e0e901a0c6aab305177276780260f9d72a9467c7cc7c0b42de802aef710ba10",
+  "skills/language-learn-coach-2/.phoenix/selftest_evidence.json": "5bfcad2f9aa5e2895919c8dc60075e5570534df7cd9d97129d9274719b6db15d",
   "skills/language-learn-coach-2/references/creation/p0.md": "9b490a94a2440b79c559bfa35c29f719fdb2b9d4ee61476e0afc93aaaa76b32f",
   "skills/language-learn-coach-2/references/creation/p1.md": "d81838cd9efc03d0a101bbb037169ba91f2694b2f239402d3a61478a70835dc5",
   "skills/language-learn-coach-2/references/environment/p0.md": "5951c7358ad66647cc591c194d64d0bd8cc5e3b4010ac98d063c09e5713ebc3b",
@@ -54,8 +54,8 @@
   "skills/language-learn-coach-3/run.py": "0485ec361978980355d2d8645c94b57dc274abbbff238541187336122d61f2a2",
   "skills/language-learn-coach-3/selftest.py": "bd04298df1a83a0af06afb7bdeadf7b9588e6697a354f8443b5be3e239684f1d",
   "skills/language-learn-coach-3/.phoenix/originality.json": "727d405111a022148d176797ccd8fd2db89d1c37e717a3b1b803625836fa72a7",
-  "skills/language-learn-coach-3/.phoenix/provenance.json": "7ee8edf6fadd48da5d2cefe60712fa7c01257b818879a83fe0e10258183a7aee",
-  "skills/language-learn-coach-3/.phoenix/selftest_evidence.json": "92eb3e41eca30247d82b9ce8d30be31849c747f1a80ea49e5c559897b1d98756",
+  "skills/language-learn-coach-3/.phoenix/provenance.json": "0d67d39cc4328b3142237a5425190a468efbda8110bcb3f89c13f1cb5fc32e28",
+  "skills/language-learn-coach-3/.phoenix/selftest_evidence.json": "6a76345f3cd7e607c7d40ca4f334522e8e61d1c1726d0a2260dd9fbeb7743e4b",
   "skills/language-learn-coach-3/references/creation/p0.md": "0d684e4e872c3a2c9f2545b6f8d17eb30cb41dd524ad91840f0b77e04e06fe77",
   "skills/language-learn-coach-3/references/creation/p1.md": "740b6d0bb215d2b11bb6564f419afa4f97da33d98238ddfd68f317cb77dc6dba",
   "skills/language-learn-coach-3/references/environment/p0.md": "fa534696fe452ee1a741dfeee4b5f953127e38e2cc91bee82ad7525c8a269de0",
@@ -66,7 +66,7 @@
   "skills/language-learn-coach-3/references/production/p1.md": "9703e060cad1b2788b26e8331e4dc470e66e418c235bddcdf6fbf520f3a77332",
   "skills/language-learn-coach-3/scripts/main.py": "3d545a3ad22be3711943fb9601836028b69cedba515f4c31d38209365c8b739c"
  },
- "sealed_at": "2026-10-18T20:02:24",
+ "sealed_at": "2026-10-18T21:00:18",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

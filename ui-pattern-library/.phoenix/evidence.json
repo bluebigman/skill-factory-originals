@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ui-pattern-library",
- "merkle_root": "fe91a41eed961d88d92ef80a60167816c4fdec2139dab4a550639a9c9f132566",
+ "merkle_root": "2ec73946c172e25f7e21dce7e028a28d65a0964a579ef74e829824a77d1d1709",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ui-pattern-library-1/run.py": "e40b1db431c4ad3b8996334b420b3c2d420ae995260f3c98bd988b04ce3fe41a",
   "skills/ui-pattern-library-1/selftest.py": "a639160e3ed5e89b1adcdc39cae538dab907e56f65b3468c10461e8176c465ca",
   "skills/ui-pattern-library-1/.phoenix/originality.json": "353c255e68417b60525f03ba4acaadfa4d41f4aa8695ed032857b9e665204396",
-  "skills/ui-pattern-library-1/.phoenix/provenance.json": "8abbbf687ed8268ec95b5673aa16375992952c4b66755bdfb5a0de3d4a396bb5",
-  "skills/ui-pattern-library-1/.phoenix/selftest_evidence.json": "86c5c385f41b451de66f7d993b8a055354e5e86118e8dfe87663c2d9c6359598",
+  "skills/ui-pattern-library-1/.phoenix/provenance.json": "daf2d32cf0758d235439c5e4bae010cffc000bf78c52fd3e6ebb082766fa7674",
+  "skills/ui-pattern-library-1/.phoenix/selftest_evidence.json": "ad698d7f433b45d9b95ac6c102951517dbe6ef141e9efa3c55cf7e3afaf5c952",
   "skills/ui-pattern-library-1/references/creation/p0.md": "7fd5ddb1d8b583030fb5072371700a8e12f971a07b5da49df1ff754ace9ea262",
   "skills/ui-pattern-library-1/references/creation/p1.md": "067c4ff647d229b0fecef85737bda4439ac641c7077bb6ed2db882125c7a7207",
   "skills/ui-pattern-library-1/references/environment/p0.md": "411aa3e9ed4d2d629550931c328378d2be5e4cff4fcb08a5ccb9934ad18825c9",
@@ -37,8 +37,8 @@
   "skills/ui-pattern-library-2/run.py": "906f9f78e5cf35f86e6061c93f5ec8e98e8da8060da203613f3519cbd7b08375",
   "skills/ui-pattern-library-2/selftest.py": "26ffddd169088e08f2326bf9e5d78e1c201442cf63d7728a9c808987614e60f3",
   "skills/ui-pattern-library-2/.phoenix/originality.json": "de7dff938400345e34c6c227f5d05074e27975de570ea57d5cc7be613de99100",
-  "skills/ui-pattern-library-2/.phoenix/provenance.json": "f54942604c36cd782053def93a27e87d2f9a28fb20996f4a1e9639f3eb57c9c5",
-  "skills/ui-pattern-library-2/.phoenix/selftest_evidence.json": "bf6c407f7b288139e86c21d88562f4bb4db7ab3092279b5611b1ece3313af726",
+  "skills/ui-pattern-library-2/.phoenix/provenance.json": "abbf517546164bd3ff6f094b68c9575ee02ec0c5a62fc82755db983225be530a",
+  "skills/ui-pattern-library-2/.phoenix/selftest_evidence.json": "b0dd7a1ad12817e27a7ce1e4e20e536eeeee0ed800c475c6f37799666abae9b0",
   "skills/ui-pattern-library-2/references/creation/p0.md": "a9586dcf6bd27145d3257b5d6199e9630a54a159a17bfaef94ae11c2515f8d07",
   "skills/ui-pattern-library-2/references/creation/p1.md": "81e4847e63b3b48a3e6364864477c807d0fd2e77747126d7e08980d37677ec97",
   "skills/ui-pattern-library-2/references/environment/p0.md": "158c53a9e6faddf26dc74f383b04da50ecde53e41e4e73aba5aa7096e0f06b2a",
@@ -54,8 +54,8 @@
   "skills/ui-pattern-library-3/run.py": "725de8dfcd374e1a12a8d3062fcb335b9c1c572737cac7e4928296c6509aa44a",
   "skills/ui-pattern-library-3/selftest.py": "6737262b6eeef0001e8bb1882a0fccf71b266f7a4d667d502047864a1e759c10",
   "skills/ui-pattern-library-3/.phoenix/originality.json": "7f5130e12115a70fd5ed9db3a6acb9d2fab1bf98c42405c88b6f37258786c8c6",
-  "skills/ui-pattern-library-3/.phoenix/provenance.json": "5300314d099cd8f4e745e4912cda6ce0767d72effb4e1ee3ea73f03497bbd072",
-  "skills/ui-pattern-library-3/.phoenix/selftest_evidence.json": "4032b9f07506c67dd6685de583da2aee6740310a8d129e55550a721b243905e9",
+  "skills/ui-pattern-library-3/.phoenix/provenance.json": "a27d1495b4014b0b66615032de58e2625e79a982bd44074bcb13f35e4dcf77a1",
+  "skills/ui-pattern-library-3/.phoenix/selftest_evidence.json": "6400dc3f3079e3547695f699817515311f0c39ccb4787678fa3107963c1e344a",
   "skills/ui-pattern-library-3/references/creation/p0.md": "d6648b3493617aa5c6f4b68c89678f87876182e40ca5dda25abfc832b3e8c9a0",
   "skills/ui-pattern-library-3/references/creation/p1.md": "738e6dc43c3ee00ad0bce036da79e55acd25c8b627b6795e9613a287ef9cf44f",
   "skills/ui-pattern-library-3/references/environment/p0.md": "4ac57ebce3bc1527be58ec01e74e7f2e19b29fa85d591c86981a602ef8576a1d",
@@ -66,7 +66,7 @@
   "skills/ui-pattern-library-3/references/production/p1.md": "10a7cbc07ace16f41aede1b108b0dc532641b12e4af840456bd2f2606f7314b8",
   "skills/ui-pattern-library-3/scripts/main.py": "8f06dac1a8124bd2ed7ad5fa2e0c8ed023f217f94e09fbd3b99e0f211d695025"
  },
- "sealed_at": "2026-10-18T20:12:24",
+ "sealed_at": "2026-10-18T21:05:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

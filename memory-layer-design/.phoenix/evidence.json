@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "memory-layer-design",
- "merkle_root": "179b49a201c7de3da101c390092facdc140d3f08ff43c282edb3d427f503513a",
+ "merkle_root": "6e5910bf0f60234f3b336d0a49ab8c200938d4e5b8e63c271234abf806bb7cd2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/memory-layer-design-1/run.py": "9532bf5f1491c16d91def130c0fc17be80ed5cb126d89282c2e88559b8af9c3d",
   "skills/memory-layer-design-1/selftest.py": "158f2609d221e5b47c84465c127ae109aabeacb9a780f523de6faf1440c1b38d",
   "skills/memory-layer-design-1/.phoenix/originality.json": "a9f45869c363db67ee1f27e7ba6bede7d353f7cd00b9b9cbcd37bf85931e90d6",
-  "skills/memory-layer-design-1/.phoenix/provenance.json": "081ea66a28872250218a33392649fb6f2094f03ae592a1af1cca65e7fdd09cbe",
-  "skills/memory-layer-design-1/.phoenix/selftest_evidence.json": "5dff4e60abd17da48780e765bba2ab285ede6c65d5ee81496dbb5af18d8da0be",
+  "skills/memory-layer-design-1/.phoenix/provenance.json": "dac1cf23d32b74f8039a3b888179446d4c1a21416ab704c7beb7dd55bab128a3",
+  "skills/memory-layer-design-1/.phoenix/selftest_evidence.json": "1ca200bb30aab6416c0d2ff414e22bc74f899774785b015a8ae4c8ad0eb75b81",
   "skills/memory-layer-design-1/references/creation/p0.md": "d0a7bffe8be6957821a8e826d8801a0fef7b5d1588accc9cfdffe9b346a5f2bd",
   "skills/memory-layer-design-1/references/creation/p1.md": "5cbaa44ae8e60d1e4fd5bcd89dd9164041d7ecc69b66fa3001b6b7b700f81b0d",
   "skills/memory-layer-design-1/references/environment/p0.md": "4810e45692835583c1da0e45efeb2d418f943acbde77af131263dc3ffeab1ec8",
@@ -37,8 +37,8 @@
   "skills/memory-layer-design-2/run.py": "6c6079f40596892967d637d0d102f3c0783d40a14371787db34cf47074cdde01",
   "skills/memory-layer-design-2/selftest.py": "dbf0fc69cb9286b9fdfcc49b3a32c7289dba78df26d380b9df7a4e56c3f66afb",
   "skills/memory-layer-design-2/.phoenix/originality.json": "fa2736d5d8035575b17347b9aee5434e5d5702b57496c2d46d0ce3935a89381d",
-  "skills/memory-layer-design-2/.phoenix/provenance.json": "eb8ab7f19f2223da6f40e193a2d65ddaa4b14b27787cef960da596b6b14f7bea",
-  "skills/memory-layer-design-2/.phoenix/selftest_evidence.json": "b99fd0ee8a11d8464de5a5c4d70ac834d0e4d6ec9a027a93a8488666b686c38f",
+  "skills/memory-layer-design-2/.phoenix/provenance.json": "7bf4e57195f7fffd8c2c5c249cf87e097d7dcef5781e02483e758858abb61230",
+  "skills/memory-layer-design-2/.phoenix/selftest_evidence.json": "8d7cff736633e866d9a06f1a6ba544c76d7d1829bddf521a8039bc92958c472a",
   "skills/memory-layer-design-2/references/creation/p0.md": "d98cc7d09087f1b9ca93179ed1f949df096d54e65a05a114565821827a23a3b1",
   "skills/memory-layer-design-2/references/creation/p1.md": "e8fef6fa99824e8ba7ebdbaf1240e06a618d249734d0bbbe7cfd53c745ebadef",
   "skills/memory-layer-design-2/references/environment/p0.md": "a9db2b9a038f185c774327178a762612709e52741009b286a3da63f1f97cd964",
@@ -54,8 +54,8 @@
   "skills/memory-layer-design-3/run.py": "e296dc471267c7fffcbed2469c5061f0ddeb915b7e20cd4f4d0232b2e9fb2101",
   "skills/memory-layer-design-3/selftest.py": "87acfeb9c99976ebf276f41450517298c677a4d63ee909079e270ae19d2f9962",
   "skills/memory-layer-design-3/.phoenix/originality.json": "2dd62c43ea5b5ad60531c84c4920a153b25e6507d04bfacbecde67a34fd4769f",
-  "skills/memory-layer-design-3/.phoenix/provenance.json": "294c303cf282e62231382f750d8187ab68d6341143c51c769c6e8e242eef2436",
-  "skills/memory-layer-design-3/.phoenix/selftest_evidence.json": "598c33be7e704a5c3cd16db620ebaf74b1f919bd1a1940bb37369182431142ef",
+  "skills/memory-layer-design-3/.phoenix/provenance.json": "a3a961cdbce878dcc39f92e87d7fdf8bc66ac3fecaec9762df6c87a554a00dea",
+  "skills/memory-layer-design-3/.phoenix/selftest_evidence.json": "f764748bb8ee4192a9f0e726c92768bbb1a13ba5a2e85532ef3d880b65646aca",
   "skills/memory-layer-design-3/references/creation/p0.md": "ee39a761e2a53db7d9d0af0bf63e9de62c9658f1f61b3680ea4943e4f56b4d23",
   "skills/memory-layer-design-3/references/creation/p1.md": "7949a210bd1c358f05664af55754110a86dc3ffa12170f2e95ca5d7807438430",
   "skills/memory-layer-design-3/references/environment/p0.md": "4afc85f1c92df04991269a1f6f348923e52f7bac198ebeac9e49e233da6555ac",
@@ -66,7 +66,7 @@
   "skills/memory-layer-design-3/references/production/p1.md": "02648c47e0116274d06bee68398daaa3f786b553d419483cbb0285df1359cc0e",
   "skills/memory-layer-design-3/scripts/main.py": "665d094a10c6f69a2b66a1876d0208460991ac625610d49eeafa807b2df0b48c"
  },
- "sealed_at": "2026-10-18T20:03:28",
+ "sealed_at": "2026-10-18T21:00:53",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

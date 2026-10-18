@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:09:40",
+ "at": "2026-10-18T21:03:59",
  "skill": "skill-install-audit-3",
  "slug": "skill-install-audit",
  "passed": true,

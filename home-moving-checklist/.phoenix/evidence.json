@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "home-moving-checklist",
- "merkle_root": "d1f1724126f2ce8913cf943746ed60a3dee746dfefa7228d0af010a4f27fccfa",
+ "merkle_root": "1189aa7ebc32198fa231c92334b0d78a8980a3abf91614099d6eed5d375d4880",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/home-moving-checklist-1/run.py": "b2f6f253b38871b1d391391e48da253fc8483ec3a85865b1beb6f0a804043761",
   "skills/home-moving-checklist-1/selftest.py": "a12fd733940922c3547f15b79b3f57edfbfcb292dff2c86ce327ad79b9adf0d2",
   "skills/home-moving-checklist-1/.phoenix/originality.json": "4c224603871933ae8f5fd4b98aca3173960595b765d089a1aebb03b48e57b687",
-  "skills/home-moving-checklist-1/.phoenix/provenance.json": "4d50ad51cf8c212a173b84fcf82c4b2b3883fb19ee7fcf47437fec468b7aa287",
-  "skills/home-moving-checklist-1/.phoenix/selftest_evidence.json": "e185c3e9f98104485de3a90843388af25deae402413bf3c283c649e0dd43ce90",
+  "skills/home-moving-checklist-1/.phoenix/provenance.json": "359beca7340b0092c593761813e300bad3a4a4ba56a365f2607c2702cfef984f",
+  "skills/home-moving-checklist-1/.phoenix/selftest_evidence.json": "ad2960ae7050c62a59d98177181667fcb88ecadf379a5dfb14f73f8170aabc15",
   "skills/home-moving-checklist-1/references/creation/p0.md": "71de5702f1ac616cd15017612b561613413314d83643d5b763d1e51a16cebba2",
   "skills/home-moving-checklist-1/references/creation/p1.md": "55ccd420b19265e3a28c4740c00b3a1a2ca3e6a17644f304212a0c2b7d4b9227",
   "skills/home-moving-checklist-1/references/environment/p0.md": "5a81e4de1b08276f8c366eb1424514c39bfcef6bb9e9881e63bdf3b407578b6a",
@@ -37,8 +37,8 @@
   "skills/home-moving-checklist-2/run.py": "9ee2b8851ce26a9b36dd74f6854db361dbf712f538007b8d6ba370012363dff4",
   "skills/home-moving-checklist-2/selftest.py": "74a88a01c644db7a56a490a723d8e6d397c07d8c775443b446ee58ee3bbe19be",
   "skills/home-moving-checklist-2/.phoenix/originality.json": "55ae2d4af9e4ee1bb7c96b7f70dfce2de8df40e1714537b29bfdfff51d5230f1",
-  "skills/home-moving-checklist-2/.phoenix/provenance.json": "0cdfb58ae262b60034d33a3ac99a74a9874b993c28eb8a3e037fdb4175127676",
-  "skills/home-moving-checklist-2/.phoenix/selftest_evidence.json": "f3ca763cf939ce5ac1b357154c8a0907b56dee38f2265fde2ef87f758411912b",
+  "skills/home-moving-checklist-2/.phoenix/provenance.json": "e59197dfd1cfeeb12b2cece9b2a4148c185eb689a031101190790c50051fc1af",
+  "skills/home-moving-checklist-2/.phoenix/selftest_evidence.json": "de239cf8e4c35e32c32fa84d1f1a761a0f67f4062ae116766027811bb1dd76c3",
   "skills/home-moving-checklist-2/references/creation/p0.md": "f3a2f7bda92069f54810f1833cd601d176f91921c9c4e00677cd0dc9482bcaff",
   "skills/home-moving-checklist-2/references/creation/p1.md": "faae2939856c77e0cd5a40b7ce298123207ca0dea1d273f03ab7913bb47ac028",
   "skills/home-moving-checklist-2/references/environment/p0.md": "89ad18c0a247098286660df53c763b224ceb65a1e0e67bf32affd2ea5f176d49",
@@ -54,8 +54,8 @@
   "skills/home-moving-checklist-3/run.py": "676a93186d143e6d030d0fc4f1e8e020e46d0138dc650cf1464458a318b6bbe9",
   "skills/home-moving-checklist-3/selftest.py": "c2e1ff269c3691333ebe003af6a702587cf2e1863fb23506a3439d157374061e",
   "skills/home-moving-checklist-3/.phoenix/originality.json": "c07814be52310f3d93fa37b626ecbcb34c1abe71cafe26de872a14542cece882",
-  "skills/home-moving-checklist-3/.phoenix/provenance.json": "924a6deff35b88650ada4aa97184a77f8c69845d69b7fd41d824f3a8f183c34b",
-  "skills/home-moving-checklist-3/.phoenix/selftest_evidence.json": "118e96759b162371c9e3e4870eb5eb81a17e020ffc4192e07dd25130c2079cb8",
+  "skills/home-moving-checklist-3/.phoenix/provenance.json": "7eec94a0fa50e6cb8d255f5b9a575ff7b2561f839293c82a7667a96444519689",
+  "skills/home-moving-checklist-3/.phoenix/selftest_evidence.json": "8f6e562bbc6fa45a7e5289900d9a389a97de9e88e62c90e49ca7a19548aca4e8",
   "skills/home-moving-checklist-3/references/creation/p0.md": "188b8c23aa6a7a38de7675f23267b283d1d6112972062bc68711e4e820a0a815",
   "skills/home-moving-checklist-3/references/creation/p1.md": "15ea615871a8dfd5fe905eaca77faada93dd487ac1be6622ca30685197090fe7",
   "skills/home-moving-checklist-3/references/environment/p0.md": "c6fb12a37aa0bf00f69e74f3d5afc5bf904a1168901fe5f902de123e5d8c6ded",
@@ -66,7 +66,7 @@
   "skills/home-moving-checklist-3/references/production/p1.md": "c231be7e99ac5e876448289c4ed753c64e1d70b7192d4a5501f4f87e81273306",
   "skills/home-moving-checklist-3/scripts/main.py": "71e0f61b91c7d68f09f0c6efebd476f6b2aac1ca1feb0d7f37b5f44a1f9ae4ec"
  },
- "sealed_at": "2026-10-18T20:00:39",
+ "sealed_at": "2026-10-18T20:59:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

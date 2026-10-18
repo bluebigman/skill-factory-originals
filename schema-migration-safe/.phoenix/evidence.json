@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "schema-migration-safe",
- "merkle_root": "b6d3d020587b390529563028fbd284e8d138b86d85d7fc698b493ec2fd38cbbb",
+ "merkle_root": "7928cce9b210cf66f450b7c395cdb42b2fdda8a78081d8cd30e849324969e4aa",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/schema-migration-safe-1/run.py": "ee7efa342d6b8fc31645d41f8e6773d9b9812cebdec1d101283d157de2b0a296",
   "skills/schema-migration-safe-1/selftest.py": "759ee6cc46870d88a52a4ef59ed0d9ed1b208c737c56536c8e0571fd5b13dd24",
   "skills/schema-migration-safe-1/.phoenix/originality.json": "4903e911931de0e3f074853d5413eb6472ec2cb76a0d279e28574a68b2ae35db",
-  "skills/schema-migration-safe-1/.phoenix/provenance.json": "d39411cb14ca158a7ac1d9ec5f45d68551c7a26041c825cd9580ec7e44f9fb65",
-  "skills/schema-migration-safe-1/.phoenix/selftest_evidence.json": "1a74171d3fce77c326f3058b4a762dd53d0ba75f1b94a581b3b6e70deb88983b",
+  "skills/schema-migration-safe-1/.phoenix/provenance.json": "2a9567b86cc02a569e047daa163cf3795954a8852f25e3e2a15e773b34989b74",
+  "skills/schema-migration-safe-1/.phoenix/selftest_evidence.json": "4c96f78462ef67c6b4d8cec720f803c20ad52480c9e35123fd5ce9b075246300",
   "skills/schema-migration-safe-1/references/creation/p0.md": "119e66908c8584c14770c8457d69efd7053b416d8faa49b30117fcacd9a38198",
   "skills/schema-migration-safe-1/references/creation/p1.md": "53c61d0225ff26c3fc078bcd40bfad7bdd8a702ace812e93da14f5ca32c9dfdd",
   "skills/schema-migration-safe-1/references/environment/p0.md": "36d0a7635981c2dab820b7f6e533bf13017322f658c710af743fa6a30f013f8a",
@@ -37,8 +37,8 @@
   "skills/schema-migration-safe-2/run.py": "b63dd1648d2e89d14405d7b3dc65ea3be24076f4d62301351248c47e031c1a36",
   "skills/schema-migration-safe-2/selftest.py": "0eb4b4bbd91afa7c2bc10dbcbc6ec0269e92b10e4e461ccac71729c2c53a51a0",
   "skills/schema-migration-safe-2/.phoenix/originality.json": "44e0efc7eab5c0b4867957645ac7ea1143109bd75ba8ce41ba071aeed14cba80",
-  "skills/schema-migration-safe-2/.phoenix/provenance.json": "57c50d214388f8e6c288c2e11d384118fb0ad40679703ccec9ceb5f02f27e0f6",
-  "skills/schema-migration-safe-2/.phoenix/selftest_evidence.json": "50609b8a2ed573b0f038260405abec77335098829f53e4ecdc8a47044a957687",
+  "skills/schema-migration-safe-2/.phoenix/provenance.json": "576fc9ccb643e80b02b395ff8b04e3b912b4e8587fbee15e26f9209fc34f3fc8",
+  "skills/schema-migration-safe-2/.phoenix/selftest_evidence.json": "67e4641c40116b9983595aae8199bfdf1591d4661ae3112a6ae428e482ea6360",
   "skills/schema-migration-safe-2/references/creation/p0.md": "99551baa94615aa2daa011121329b9d9c064e6039227beb3fae37969ce0cf310",
   "skills/schema-migration-safe-2/references/creation/p1.md": "07d708d24be8adb5a0c40db62be1667874afcf33522e11c6e818f059178726d3",
   "skills/schema-migration-safe-2/references/environment/p0.md": "f0455668a2febea669b419869559c4dc22d1ad003377ab330f004a604d863fde",
@@ -54,8 +54,8 @@
   "skills/schema-migration-safe-3/run.py": "13b4e52d27fe27cb1e10646383e09a5c094909e14c359882b9c48bb2de95f33a",
   "skills/schema-migration-safe-3/selftest.py": "5eacbc52af2eaa9b54ae0758152c6b1ce41d8e44c054406709b09cad278b7d37",
   "skills/schema-migration-safe-3/.phoenix/originality.json": "a5f24083285c7f13e03258b6ce34cbff027fb844077f5c88b404ed2ee6ef8c9b",
-  "skills/schema-migration-safe-3/.phoenix/provenance.json": "4005f89448a5a374fbfb1a7f54ee9ecd1c592650fd5499b65fa2de7d5a6f704c",
-  "skills/schema-migration-safe-3/.phoenix/selftest_evidence.json": "3e651942d31d1b8667be8da946e0cccd8f56faf210f611b6ad36ee176328846a",
+  "skills/schema-migration-safe-3/.phoenix/provenance.json": "ae72e148665d26eaafc6368b941fb1ff5af5a39f11ddc787eb71ba1018385dac",
+  "skills/schema-migration-safe-3/.phoenix/selftest_evidence.json": "a97def249d106e65c7edc978318141f3977f2107e9358a1e7fb762f5ed425bd3",
   "skills/schema-migration-safe-3/references/creation/p0.md": "bbccd3ca9e4cfdc6be735171e6846a6c117788d7344200da10e08502692256c2",
   "skills/schema-migration-safe-3/references/creation/p1.md": "38e4cff490f96bb4f5f2d37547d9332a19580698604e215b42be7e4400520921",
   "skills/schema-migration-safe-3/references/environment/p0.md": "21d3fb25353e33c55a1d5607be2126c9787b6a116c86704757e91076331d5d2a",
@@ -66,7 +66,7 @@
   "skills/schema-migration-safe-3/references/production/p1.md": "5830f6135335ae7d6a0081306019da1c9c55fa9472dd39796234c2170cbe89f9",
   "skills/schema-migration-safe-3/scripts/main.py": "af752330b8e3b2fa6075dfed43f80531c279b2e339cba7d3c8608da536e4f5a9"
  },
- "sealed_at": "2026-10-18T20:08:27",
+ "sealed_at": "2026-10-18T21:03:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

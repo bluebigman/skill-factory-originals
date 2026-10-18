@@ -1,0 +1,66 @@
+{
+  "name": "browser-flow-record",
+  "version": "1.0.0",
+  "plugin": "browser-flow-record",
+  "description": "browser-flow-record — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for browser-flow-record tasks.",
+  "author": {
+    "name": "user_2fd890c9",
+    "email": ""
+  },
+  "agents": [
+    "./agents/browser-flow-record.md"
+  ],
+  "agentName": "browser-flow-record",
+  "displayName": {
+    "zh": "浏览器流程录制专家",
+    "en": "browser-flow-record"
+  },
+  "profession": {
+    "zh": "浏览器流程录制 助手",
+    "en": "browser-flow-record"
+  },
+  "displayDescription": {
+    "zh": "浏览器流程录制 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+    "en": "browser-flow-record: 3 built-in capabilities."
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "02-Engineering",
+  "tags": [
+    {
+      "en": "Productivity",
+      "zh": "效率工具"
+    },
+    {
+      "zh": "浏览器流程录制",
+      "en": "browser-flow-record"
+    },
+    {
+      "en": "Engineering",
+      "zh": "Engineering"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "zh": "遇到浏览器流程录制怎么办",
+      "en": "How to handle"
+    },
+    {
+      "zh": "帮我规划浏览器流程录制",
+      "en": "Help me plan"
+    },
+    {
+      "zh": "帮我检查浏览器流程录制",
+      "en": "Review for me"
+    }
+  ],
+  "defaultInitPrompt": {
+    "zh": "遇到浏览器流程录制怎么办",
+    "en": "How to handle"
+  },
+  "skills": [
+    "./skills/browser-flow-record-1",
+    "./skills/browser-flow-record-2",
+    "./skills/browser-flow-record-3"
+  ],
+  "expertType": "agent"
+}

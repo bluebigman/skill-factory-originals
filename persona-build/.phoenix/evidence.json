@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "persona-build",
- "merkle_root": "91b4728e5de990a6206fa93bf799fa45eb6082e81c776d95b4f6fcd20271ea4c",
+ "merkle_root": "23549c8b76ef519de440d726c2982f463dde67466bf037e18e3adf6a15bb1bf5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/persona-build-1/run.py": "4b8d5d37fae79647d59d92deaaa38d9703f335f739bd667ce0baca7255d3645b",
   "skills/persona-build-1/selftest.py": "81414c8722b4035070366a795a5c3cafb127165c2800d6ec8c5f2161f72c4f95",
   "skills/persona-build-1/.phoenix/originality.json": "1d3f56034052541b4688fd05872665a3d87e36c7bc25c497a77116514e74955b",
-  "skills/persona-build-1/.phoenix/provenance.json": "484544cb1eefbad4c1bc044a357a80ee508289c84d3cae142cd2674616b9e47e",
-  "skills/persona-build-1/.phoenix/selftest_evidence.json": "ae68f74fc23d9432801f7fd2009a64c2562942f77145ab3845455702515a6dc8",
+  "skills/persona-build-1/.phoenix/provenance.json": "3926c25550a1c64a62fd27ddad3c25050b4acc4f4813f05eaf059d8bcab255bd",
+  "skills/persona-build-1/.phoenix/selftest_evidence.json": "44cb312cea1a991e7b2bd2135cf24baa4b4af84c4f2fc5c77f5a89450d654731",
   "skills/persona-build-1/references/creation/p0.md": "e9b4f518f6abcde6a4bbb8d13bafb9922f170e8bb70382b5c586f4d73346f3c8",
   "skills/persona-build-1/references/creation/p1.md": "650dcd3ebd17f15e1c48c5ac6b9e6b738a702abb3801b066b96baaa20ac2aa11",
   "skills/persona-build-1/references/environment/p0.md": "06e0fea5080eac20c0fee811b3cd36283a0eae001b47f0e63f212ec425b5ccf5",
@@ -37,8 +37,8 @@
   "skills/persona-build-2/run.py": "b4d7922fa5c658daf168cd92e2c5827577e62b855695bcc9ba0fce89d9ff690b",
   "skills/persona-build-2/selftest.py": "38ef24cd625f7d61bc37687f3491ec763101ad75970bdcefb2c11bda7a42f51f",
   "skills/persona-build-2/.phoenix/originality.json": "f94dd5e30185c5ff9103193d369bd91acd07827a580e512a07a8fb0b16d75bee",
-  "skills/persona-build-2/.phoenix/provenance.json": "58dd280d3b87d8ae7f8cf1931644fc841d692542add26a075242ffc91b06b126",
-  "skills/persona-build-2/.phoenix/selftest_evidence.json": "8aa023ef689cdec8ff96b749f703314f69f847863bf48e6e5c7e7f8756b6444c",
+  "skills/persona-build-2/.phoenix/provenance.json": "fe7006de2a0e6ef7bb3968bfffd0a59bd7a847b5cb55ee52864497902c792843",
+  "skills/persona-build-2/.phoenix/selftest_evidence.json": "479f4134cb5e19a530db5d04bf1344bb998eb6d81fb7d945c751a07050fb48ec",
   "skills/persona-build-2/references/creation/p0.md": "6dcd00e8d4853490a89f86891e49469f0f7228072005127bf553b1a6cbcb4215",
   "skills/persona-build-2/references/creation/p1.md": "f1c841659614bdd24cf8c539984e0c132655fcd9de75d087d1b718dd8ad00d29",
   "skills/persona-build-2/references/environment/p0.md": "eafcdff583660e79418eb42a3aed8bad940466fbe1ddae1653be12e9df3fd6a7",
@@ -54,8 +54,8 @@
   "skills/persona-build-3/run.py": "68d14dfa17302d58c75697a33c7e9528b22b3ae6687378ade3aa18aaa83e523f",
   "skills/persona-build-3/selftest.py": "62e67bed85335b888e8c3862e53a098cddd10adf818c2b2b4a8f75b70bde93c5",
   "skills/persona-build-3/.phoenix/originality.json": "d28b3ec4484da4fb1c6b961fa17656d2d0324e5359bdee91946746635bfb4f02",
-  "skills/persona-build-3/.phoenix/provenance.json": "58b5465323b75046a8b8c47d9000c2d6a7274324ef937ec5f0651fe3c9228318",
-  "skills/persona-build-3/.phoenix/selftest_evidence.json": "a0b6ed2c4126ecc7b381c7215ab156778059139c8d363eb6d1fff5c113fe60ae",
+  "skills/persona-build-3/.phoenix/provenance.json": "42a6aa0936c6b1150010b82ae5af90223c046f092233757ea20b3a9bc807a904",
+  "skills/persona-build-3/.phoenix/selftest_evidence.json": "def4bcd7756e120f7eb0d82b9eb3144bffdd6c4d2e377476c851f46595ae2700",
   "skills/persona-build-3/references/creation/p0.md": "e850a627db091fd67e86e3cc16938db6b5fbac1974be1ceda32055072e823008",
   "skills/persona-build-3/references/creation/p1.md": "1d906235e520f7fe3c3dd8b9aab53983b1d79a99be3d04a44213caa6124a7e94",
   "skills/persona-build-3/references/environment/p0.md": "6e6b0c6f7a36ba644d51728526c32f837310ee29d044f9a9ec38e3b77fec9778",
@@ -66,7 +66,7 @@
   "skills/persona-build-3/references/production/p1.md": "784855e081d3bb6ba2da5b596b64269efea79f55e8ad5ad202ebbf828e75ed68",
   "skills/persona-build-3/scripts/main.py": "41a2e4da0aceabc77c50ec3bedee737f4ace6abf55be2b9b78e1e83bdeb1be17"
  },
- "sealed_at": "2026-10-18T20:05:43",
+ "sealed_at": "2026-10-18T21:02:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "etl-quality-gate",
- "merkle_root": "63a2e8900fd696dd22194434bd9342081a35c7638bfc29f6068cf203ae99a142",
+ "merkle_root": "3340f04b6f66858e95c7d3a30bf8870332ef43eac89bc29a36fdddb10394c019",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/etl-quality-gate-1/run.py": "e2e751e07aa6ef1ddda1a7266a80e263136a3b3f96272850fe2a6bb62a229b81",
   "skills/etl-quality-gate-1/selftest.py": "0de2e162a55e3eadcc57dc4970c33ff97545e1bd8e15bfc2ce6508a06b62dfdb",
   "skills/etl-quality-gate-1/.phoenix/originality.json": "1e4e869ffbd7959b9e85c770fa616beb4493637bd7bc2fb7da253fb623382cad",
-  "skills/etl-quality-gate-1/.phoenix/provenance.json": "d9366521dfab5753807988e964ca115a596f10e557d26131ec1fd66d963ea7a8",
-  "skills/etl-quality-gate-1/.phoenix/selftest_evidence.json": "18f0701e44f2ccbe7a615a98d7ea31f9e28957efe82191268bba446703031442",
+  "skills/etl-quality-gate-1/.phoenix/provenance.json": "325aaaf5ed3331d42c73111d6299ea7254567c16fa221c8d2e0735aa0feca5f4",
+  "skills/etl-quality-gate-1/.phoenix/selftest_evidence.json": "3042df6605f804fd569da8fd29f60529195b250eab88b0016432b5ea21b4a269",
   "skills/etl-quality-gate-1/references/creation/p0.md": "60f47efed1a1c76b0835aa84e56925e11a86b42f3b0aa1cfadf17a17aa12e27e",
   "skills/etl-quality-gate-1/references/creation/p1.md": "1b00d7b9fcce03cbf8fad66c6ccc0cef0d837137d7d153267ca2567624e8490c",
   "skills/etl-quality-gate-1/references/environment/p0.md": "d1eeafd5dc9aaed05dfac78453ba2aab89bb3c635df351a6337def2a2e3ca095",
@@ -37,8 +37,8 @@
   "skills/etl-quality-gate-2/run.py": "9c0a2f4b8bdccba1a43157c104386d451c576452c6d4b0211a2b02f779651089",
   "skills/etl-quality-gate-2/selftest.py": "d2f0b4583c986892f98e24961ad51ed9f170229c8b27398cb975494a31d54159",
   "skills/etl-quality-gate-2/.phoenix/originality.json": "b98a0773caf2769b98c924398c13d87b9ef7e2cb1c3784a4dd198de3aa9f5922",
-  "skills/etl-quality-gate-2/.phoenix/provenance.json": "8b632cc0955f61a75e89cd85609c933d4da4f9ed137f63dab4b40d00613ddc66",
-  "skills/etl-quality-gate-2/.phoenix/selftest_evidence.json": "fd358730505a054e543065536cce61902f1ba0152de1ed2d510ae88740e96367",
+  "skills/etl-quality-gate-2/.phoenix/provenance.json": "23713d75ff34a261b8f014b32a22be9370c2c41dcca6f2f3963610c1ef1db4fc",
+  "skills/etl-quality-gate-2/.phoenix/selftest_evidence.json": "c8ea8323f8cc17c28830aac62563f2d265a6acb80ae99a2522eaedb406111086",
   "skills/etl-quality-gate-2/references/creation/p0.md": "072619cd7f352824dd742cfd84d830ecd50403860432f61ce239478c351b612b",
   "skills/etl-quality-gate-2/references/creation/p1.md": "f9a955916a22b4c628609670c03ab072b3b3089bbc3650319c81919d8cf50f71",
   "skills/etl-quality-gate-2/references/environment/p0.md": "d2bbe73006ba7f09092ecc69272148a56a62e1f9417ab7e0e77fbc1141b65b31",
@@ -54,8 +54,8 @@
   "skills/etl-quality-gate-3/run.py": "d25a07e1c07f98e86dd4334617916cbea31ad59d66113372d077ef090ecbb770",
   "skills/etl-quality-gate-3/selftest.py": "84e405738eadf3d70859175fafd11859bab865fefa68fde43bcceb022ee72aec",
   "skills/etl-quality-gate-3/.phoenix/originality.json": "593104bdce44c6100d0f6af9816d9c39993e9c257c38db6cbfb28134aafe84b1",
-  "skills/etl-quality-gate-3/.phoenix/provenance.json": "75334fc2c6860255f5914294c40121324d376ee6d4db68520adc4a421a91f482",
-  "skills/etl-quality-gate-3/.phoenix/selftest_evidence.json": "e8821504cfc1d81b2f654d05e7c529d193323fe205ebb1c9f7f13df484ac96fc",
+  "skills/etl-quality-gate-3/.phoenix/provenance.json": "dcfbb7d34c5e4b08aa99657943967cb1cc86a1ded11f298fa20400357d9be18d",
+  "skills/etl-quality-gate-3/.phoenix/selftest_evidence.json": "65994d7d10b56c571023f473ae86787b11218dde75db4ca501f234f671fab470",
   "skills/etl-quality-gate-3/references/creation/p0.md": "9218dd1d9a6cc587d265c168bed13400afae3dd1802fab4c643d1452cc459147",
   "skills/etl-quality-gate-3/references/creation/p1.md": "be10229dd4d5a9b7b0543bafc1473fb73594c7089c00cd9179398b0f982d99ba",
   "skills/etl-quality-gate-3/references/environment/p0.md": "50fa7073331e4d9f199b8d6b302dd061f18559dc7405d79d134d999a0eeb9f29",
@@ -66,7 +66,7 @@
   "skills/etl-quality-gate-3/references/production/p1.md": "6c24b9e9aef268e2a85b7fd2122e9a4f40ecdbba00d4c4856fc8ebb4e6f7df91",
   "skills/etl-quality-gate-3/scripts/main.py": "d1244456eb48b7cb373876d45e4d1523529a03023ab48a0b40d1f48a44de72df"
  },
- "sealed_at": "2026-10-18T19:58:33",
+ "sealed_at": "2026-10-18T20:58:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

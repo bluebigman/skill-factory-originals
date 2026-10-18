@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "voice-note-organize",
- "merkle_root": "1ba57c637a2d9befcc9c2ecdb6aa51b4323033773977a1c320ec96aabd70d5f6",
+ "merkle_root": "9aee56dea8915ae206742af06aad5b119221b6f5e0d30e024da27864375289ac",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/voice-note-organize-1/run.py": "7324624b50d4c8aace83211c3956b3da8b7f9c092cc526984fb1fcb41e5b9ed4",
   "skills/voice-note-organize-1/selftest.py": "34d6f5d40b90d5c88b1d0fd23ef2dde568ce7d8f5018c5273bdef5da4274b8bc",
   "skills/voice-note-organize-1/.phoenix/originality.json": "a3686e9c54962eb1d94254955ed568bea5d98f2c4fef7c31da2527ab7e283261",
-  "skills/voice-note-organize-1/.phoenix/provenance.json": "d9f7e383244c17c1319ff16eafbe0dbfc7f67fd93504c46c99ab25e2a52ea6b9",
-  "skills/voice-note-organize-1/.phoenix/selftest_evidence.json": "4ae824cb03af5a9f81ccdceb646cc90f58d3ea27543f6787e2c93a36e39fae02",
+  "skills/voice-note-organize-1/.phoenix/provenance.json": "1498fd78110b810d15402f0b57b8d9449e3d8c9fc9dd248572946db8b07cbce2",
+  "skills/voice-note-organize-1/.phoenix/selftest_evidence.json": "aa479c8871e89bf0d5df8b7caf2838f4f7f6965ebe39b10e8b2755207df4719e",
   "skills/voice-note-organize-1/references/creation/p0.md": "a2a68cc69d9437988e50fa37f0fb4474c758f4120b1b09bdd24d807be966921a",
   "skills/voice-note-organize-1/references/creation/p1.md": "5bb509182ce71483183a3e2fc24993e7581f90e3c3547f6dd070ef9c1ad4815e",
   "skills/voice-note-organize-1/references/environment/p0.md": "c82662476db27b8c4c79bf2cd54aa9c9c1436cbfa06ee5652f351a5cf25e269e",
@@ -37,8 +37,8 @@
   "skills/voice-note-organize-2/run.py": "cd19d92c1ce4d94e8f3119816c3062805f2bbac19e579780653a2593f65a8989",
   "skills/voice-note-organize-2/selftest.py": "4a380f71017ca47192a3889908b05e85e47daed789ee92fb6f7cf5bf0f2d67d6",
   "skills/voice-note-organize-2/.phoenix/originality.json": "9e74b3ae3dda435c89d964e12a4d73ed79d778094270bb559779255eb8f35ba5",
-  "skills/voice-note-organize-2/.phoenix/provenance.json": "c0400586c08fc49933730d886e97aef83ad2c7e54d51ad9840ef95603895521b",
-  "skills/voice-note-organize-2/.phoenix/selftest_evidence.json": "0a745fd4a960d6e31c4f478698e5b471d8e22c7c9d08dbd3018d1ffb439b94ea",
+  "skills/voice-note-organize-2/.phoenix/provenance.json": "ab9935187ae02165aee04b7e1990426318fa8c08f312569744e9a49980d397cc",
+  "skills/voice-note-organize-2/.phoenix/selftest_evidence.json": "4b3ac18bbecce4e12a1b6ffef0bb5c3676caff98aeda267042a159ae0a9d4432",
   "skills/voice-note-organize-2/references/creation/p0.md": "f8688c8db0a3bf6fefbc011c545c3ed7e4c31176693bc86bd385a81335eb15a0",
   "skills/voice-note-organize-2/references/creation/p1.md": "41c46b54125a0bd1a43ece677fa11315e74edf2936a718b40ac9bfc504f24275",
   "skills/voice-note-organize-2/references/environment/p0.md": "a0f824fee58bd54311026d68570fab8c1b3f19bb794ef035596f090eaabf6418",
@@ -54,8 +54,8 @@
   "skills/voice-note-organize-3/run.py": "6f4acc0f0a872395c52596064c8c5eecb3d834be33276388e1645ecb7efa321f",
   "skills/voice-note-organize-3/selftest.py": "c68dbae17f8a1850aef4a3ff17da078a7b13ff17484896401e803d52c0841cd8",
   "skills/voice-note-organize-3/.phoenix/originality.json": "7b543956d56b3a113e67178b05edf0e93e08ea71adfbbb269b98ffa3d04e55ab",
-  "skills/voice-note-organize-3/.phoenix/provenance.json": "7a83dde06a0000508a5457e47d5a6c6a526cfbeac08de896ef5d290dd3df81f3",
-  "skills/voice-note-organize-3/.phoenix/selftest_evidence.json": "6c35989c2cad3a992b312b8b699e4cdf6eeeb9cf42eccfe3f6124e90e43f6b21",
+  "skills/voice-note-organize-3/.phoenix/provenance.json": "3949e1d97ed694a4078959909dd07088189418f7dc93077d472f8d897a0f2043",
+  "skills/voice-note-organize-3/.phoenix/selftest_evidence.json": "0f990a8e1a3a8c1229dbb76b9af1c8f6407f4a750bac8ffe07bc4777b6fe3860",
   "skills/voice-note-organize-3/references/creation/p0.md": "1f99c0ae483ae5ccff0a0eeeb226305cc3b4eb6d2eded5597295206fdbad5f29",
   "skills/voice-note-organize-3/references/creation/p1.md": "671d4897fb07c9927c45db47e8ba5256b83a0a3a39f44ebb23ffcec6553cc0de",
   "skills/voice-note-organize-3/references/environment/p0.md": "7dd4ac14d23f0412f9671546b04d1a006ba1aca963d33b4607c727e9f636e2ad",
@@ -66,7 +66,7 @@
   "skills/voice-note-organize-3/references/production/p1.md": "fa7b1920b9e9a5412af09006ac3313759ed9035f360dfdf3f41f9ec2ecf7008e",
   "skills/voice-note-organize-3/scripts/main.py": "b2cecb0709aa9ffc62030b3ac2969a7357420e6fd40f7d30223c67f6c9370777"
  },
- "sealed_at": "2026-10-18T20:12:50",
+ "sealed_at": "2026-10-18T21:05:21",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

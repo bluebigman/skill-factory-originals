@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "safety-management",
- "merkle_root": "e3dcdc89328ac9bd2d96557e2d13e724b485dc07c1ba5658f7606d76b506ea6c",
+ "merkle_root": "7229ee35979a6c672603b7ef1e92b7dc04f851007a2fb3361391b3db0d5a85d1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/safety-management-1/run.py": "b94b7264c75eaa54a7ce48d04ad1ef01d02d640e5ab11c0152e1c307accc1e6d",
   "skills/safety-management-1/selftest.py": "a4e09bef1d3e98e6a38c1435cbc1ce69b266ce18046f1a9b15e91ec2aaf2b8f8",
   "skills/safety-management-1/.phoenix/originality.json": "de87b59131218b00ccf2ac61809bf83720e3466ac072cb19f241d3198a8151b4",
-  "skills/safety-management-1/.phoenix/provenance.json": "768a3c9fd724d9abb9635ebb8c5d43883b3052aabc3268bd6bbf736f60dea8db",
-  "skills/safety-management-1/.phoenix/selftest_evidence.json": "a88f6138e1a3e1634dbade015adaea6dacc296bd9ec3e8eab5759be22bc4730b",
+  "skills/safety-management-1/.phoenix/provenance.json": "f53ba42705360392a7a37e4ae4901164c0f5e28d0527dc293aa4f2051b296b54",
+  "skills/safety-management-1/.phoenix/selftest_evidence.json": "9cd7c3fad322fc4f7b6b64b4ca20cacf6c604319012b01a76a011f9d290cbf35",
   "skills/safety-management-1/references/creation/p0.md": "045c9d331caeb287ff7f0b0c47eed1d6534488c4526f869c3de48bfac49fae42",
   "skills/safety-management-1/references/creation/p1.md": "85f19fc732c86b775326c3c51d64bf59bf03dcf11fcd6218c07a5e3e038a59bd",
   "skills/safety-management-1/references/environment/p0.md": "c641f056074a3e4bf1c291afc2e02b8494054695494fbe03b73ac6fc71fc81b5",
@@ -37,8 +37,8 @@
   "skills/safety-management-2/run.py": "87bd56f040a246fd08101c275fd127feb1bcadfdcea49a3645cd16fbc98c6e20",
   "skills/safety-management-2/selftest.py": "4616d9d0687d01d9d362ff2a439c445c9a018dc89d5768566c1feb5a51bef73c",
   "skills/safety-management-2/.phoenix/originality.json": "d2d44e5d0552e591f4706eeab6c42e5740d8fe7a92ebe334178bafd7551a26f4",
-  "skills/safety-management-2/.phoenix/provenance.json": "c01493f233b0627665814ae60a60fa8bde96dd25f3864a74d54829d3ad1d2d81",
-  "skills/safety-management-2/.phoenix/selftest_evidence.json": "539873759691ad0de76ea551f84478d2fa6a60e96af3c7ac8ddd6d0a5f69f74d",
+  "skills/safety-management-2/.phoenix/provenance.json": "bc1355f3c047fda2da995412109eadef495707559bd591677b4e947339027ea9",
+  "skills/safety-management-2/.phoenix/selftest_evidence.json": "915692831f26e3830c56f06877ec52da4ac3be509a5c581a7e11b74f6f9d00d8",
   "skills/safety-management-2/references/creation/p0.md": "d570a6f6a81a1376287d6fbb52cdd64592ac01cec7911055cdb8121c9d4ecc57",
   "skills/safety-management-2/references/creation/p1.md": "769c53ef92e572cd2327c038ff3d23a02fbcbdbc07dbc20484e9699a929bdbf7",
   "skills/safety-management-2/references/environment/p0.md": "bd8157794bd6a3faec5e2be9c5931bc2036b342bd0ad3fedcceebcd79505b4ce",
@@ -54,8 +54,8 @@
   "skills/safety-management-3/run.py": "8a34468909f723f82cadce3404da1a933c3c9f807279d0e26ba5d056f0cb2cd7",
   "skills/safety-management-3/selftest.py": "3267c4c2aa6657f0979678803cdc6746ff7d3dbec812aa1894a8048c01455348",
   "skills/safety-management-3/.phoenix/originality.json": "5f2a13a59e8fb0b414b979f656979da770babc153ab54df76e004eecaab4cffc",
-  "skills/safety-management-3/.phoenix/provenance.json": "297ae7ed4ba601a00f7524aabf585b24a99e956fb7fbabd969705f04d5cdb054",
-  "skills/safety-management-3/.phoenix/selftest_evidence.json": "0defd4a330d5e9a86b478e596546798626a4ce0caf8c81c59ddccfb353ef6c00",
+  "skills/safety-management-3/.phoenix/provenance.json": "75f83219921477c1081d9671159da7c97c49c85026e83f347478c73d98431ff0",
+  "skills/safety-management-3/.phoenix/selftest_evidence.json": "96c5d0d10b2f26c752a4b3fdaab5852b31026b257a4ebdad2a13744b4bd25f93",
   "skills/safety-management-3/references/creation/p0.md": "4d048fd5591f110fbc5e9859ddc77a423469dc44719b55002a1915e82420cfd6",
   "skills/safety-management-3/references/creation/p1.md": "ca8b28459736f912c6288be81104e4786cc84089a6465c93e8068a6b4af8d0a9",
   "skills/safety-management-3/references/environment/p0.md": "65ae6bef0c01269255fdd5340197975ee655386de3c3ab7b1522661ea53fd04b",
@@ -66,7 +66,7 @@
   "skills/safety-management-3/references/production/p1.md": "55b3230b4b0c8c16826fbbf6a9247bb97940bad6b54a85e4e129bcf9bb0f3c83",
   "skills/safety-management-3/scripts/main.py": "155ec5f797aa6112c9d166a6cef1bace0d1ef0b42e6a1afd051f7168b7f29561"
  },
- "sealed_at": "2026-10-18T20:08:09",
+ "sealed_at": "2026-10-18T21:03:15",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

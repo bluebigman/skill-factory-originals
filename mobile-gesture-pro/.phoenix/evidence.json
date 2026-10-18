@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "mobile-gesture-pro",
- "merkle_root": "01a8700ec04562d92a151632b5761004c4f4ffd9be1ab6a2907065cacbeb1cda",
+ "merkle_root": "8b7329feef389d9843c0f2ec92e968ec27b3213cedf3ea2613f58f0186ae2068",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/mobile-gesture-pro-1/run.py": "e33c925ae888a17e96191522094088c5e714726ab0dcad19e3daa5769d29e58e",
   "skills/mobile-gesture-pro-1/selftest.py": "9c83ef0fdabdcc529a1f07e255a59b68b4735dd050a8c69324aa6370a8164eaf",
   "skills/mobile-gesture-pro-1/.phoenix/originality.json": "99ee783319550515eb5cd5112afc5774e8deeeac38341e225ce609942b1b5ef6",
-  "skills/mobile-gesture-pro-1/.phoenix/provenance.json": "8a30d61204c1ffbf848579b33bb8f2cb62d64fee0948f04d73ea29a9b021094b",
-  "skills/mobile-gesture-pro-1/.phoenix/selftest_evidence.json": "2ad55ff0ae8fb107b8071e58753f27bacc64745c7fa62c185b81bf085facf9e4",
+  "skills/mobile-gesture-pro-1/.phoenix/provenance.json": "13277e4bdc0ac8f14a4209948f9a795081936c2dab6966bb6ba4f9fecad7bfa1",
+  "skills/mobile-gesture-pro-1/.phoenix/selftest_evidence.json": "15fc28e7a680d0bd5a8b025114b7942a2e1d99dfc6dea6385fa3a25f70873cce",
   "skills/mobile-gesture-pro-1/references/creation/p0.md": "1e9e1c06a2dd8f19c4c23449ee8b7f90d4a8388640a44d7123639f486f546e33",
   "skills/mobile-gesture-pro-1/references/creation/p1.md": "b00fdef48ef06ee3ca74e7d2915e2162899550b1a5d8b1ee6baeb0e8b687ed3e",
   "skills/mobile-gesture-pro-1/references/environment/p0.md": "454501196c8ee07f4d701d152e355d3fc6e094bbe11efd9275474a24f60f5dd3",
@@ -37,8 +37,8 @@
   "skills/mobile-gesture-pro-2/run.py": "4b9d29dc006adb54dc2fb8b59962e64b2f7719879620a536eb0f1648f5b97e4c",
   "skills/mobile-gesture-pro-2/selftest.py": "6279d35612a51f67bb925f384f812212488f00984df90f3bb4c0ce498e15d350",
   "skills/mobile-gesture-pro-2/.phoenix/originality.json": "0684a87cdf5844e5a84bea7eaac3198a3ecf2cb6f1f094153154a3be6d02f30d",
-  "skills/mobile-gesture-pro-2/.phoenix/provenance.json": "5c710d102410a2b4e89c86dadbd425f45b01d4df47852839f557da46f1416f36",
-  "skills/mobile-gesture-pro-2/.phoenix/selftest_evidence.json": "80843c07b01d3b015ca1bb6ce34a2e6bb51e69621ad389f7fa3f4f7aa1aa0d9d",
+  "skills/mobile-gesture-pro-2/.phoenix/provenance.json": "ee339659c7affd332e5383b09850ecc3dde3806385ade71da19af67d54977e58",
+  "skills/mobile-gesture-pro-2/.phoenix/selftest_evidence.json": "4c813976fab9c9c5c6c0127e7b298a7ce1811b168664b40a2bc24b1e3369e6bb",
   "skills/mobile-gesture-pro-2/references/creation/p0.md": "c24e74bed373eedbc295663ee4ca18029ab2d4c9fa3626913ae69b159e78d05f",
   "skills/mobile-gesture-pro-2/references/creation/p1.md": "39ba122c877fcb2b79a8111a4b4a1a682f90d823853dbfdc7bd4726a3a34bdca",
   "skills/mobile-gesture-pro-2/references/environment/p0.md": "80ed880a1d7efc2100f555b29cdea1edbc71ac81639a33c8e39494df26cc274a",
@@ -54,8 +54,8 @@
   "skills/mobile-gesture-pro-3/run.py": "ba9b500136433bb1bf666b3fe6ce30e675994eb3a2f15c43bbba59086df0847a",
   "skills/mobile-gesture-pro-3/selftest.py": "89e5d5836a0dacb4fa37baca20f80b36f3b106c9626eb92f18538930c72d1596",
   "skills/mobile-gesture-pro-3/.phoenix/originality.json": "f55c5734c16457b2a9712c4a77f7d28d1a0d84f62b275d14367fe060bee4c1f0",
-  "skills/mobile-gesture-pro-3/.phoenix/provenance.json": "655f8451b09e05d75b94613884a2d22680669f772c022bf7fa96ba5bb3d809ea",
-  "skills/mobile-gesture-pro-3/.phoenix/selftest_evidence.json": "9fd3ce6d061be2d291d090bee26d10e22af592dde36b8d31b202b9e35a75b3c9",
+  "skills/mobile-gesture-pro-3/.phoenix/provenance.json": "84168276147d4d4633fdb7f12fa8f75aef6a479c0616fccf1be1ac343cf0bf28",
+  "skills/mobile-gesture-pro-3/.phoenix/selftest_evidence.json": "9f10d0f1b381b2a685f1ec81420392e75b20821d2249648a3f7265564917d66f",
   "skills/mobile-gesture-pro-3/references/creation/p0.md": "3115793441b29bc0ce491be6f2b2991223d4a4a78d3c075c9bf4c551cdf33da6",
   "skills/mobile-gesture-pro-3/references/creation/p1.md": "990f561968cf6ae318f63b3db994a8bf5e0893280211c1802835b49a0fb345b5",
   "skills/mobile-gesture-pro-3/references/environment/p0.md": "fd98cd57b72659235649a83a8c40d7d024554862b1401d3bee9173b8fc593ca0",
@@ -66,7 +66,7 @@
   "skills/mobile-gesture-pro-3/references/production/p1.md": "33ae9a19014de50a54d4c639ac60e9ea68afd7af62b331b3e7d1863460eefec7",
   "skills/mobile-gesture-pro-3/scripts/main.py": "33699ae3f6b8b93e5da93375d576c4963c2243a27ec24c15e0adf2dea6b6fde0"
  },
- "sealed_at": "2026-10-18T20:03:50",
+ "sealed_at": "2026-10-18T21:01:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

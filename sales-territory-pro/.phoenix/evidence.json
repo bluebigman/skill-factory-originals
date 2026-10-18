@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sales-territory-pro",
- "merkle_root": "c310893e9551d974030390e7d43f1ccae8e008aa4f0b49984e46e22d6bd7b34d",
+ "merkle_root": "ecfc4c2927ce9ebf1694f63067f5c77fe99c542ed9bba3f423b99ed072be64bb",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sales-territory-pro-1/run.py": "269eb522cac723f16cb2582fd75e3d8223628409feb140fbb6375f3629a93279",
   "skills/sales-territory-pro-1/selftest.py": "d826f26e1d562fd8ee56f5f84cd6b26d827560151ae893352c8687e1acd6ff3b",
   "skills/sales-territory-pro-1/.phoenix/originality.json": "78f8548581ddb63ecaa6cfde8fc5c43e4b3b69f2b832d60999b3795a014d6fb2",
-  "skills/sales-territory-pro-1/.phoenix/provenance.json": "ecfbacd7432f707d7502b03b7f19b690ed692eb86ee50ae1ac746459c2faf89a",
-  "skills/sales-territory-pro-1/.phoenix/selftest_evidence.json": "8e75fb2464c5186fe88504f7d0f979cf2b220f66706d436d9d40650c0d5509e6",
+  "skills/sales-territory-pro-1/.phoenix/provenance.json": "924f2df21f4e1365c33e93a52adc40a0861ec38cf8962e441bd0f63f353bedf1",
+  "skills/sales-territory-pro-1/.phoenix/selftest_evidence.json": "8ea884bd85dc7a9a35608bb2762d1e27f18099b6ca10fe9e33d8fdea7443a8d2",
   "skills/sales-territory-pro-1/references/creation/p0.md": "aa1895d79229d32fee620894a1892aeb8519ae2f61ecc866d8f9f9ab3b95e10f",
   "skills/sales-territory-pro-1/references/creation/p1.md": "386d079fd30d73a5539c681e18bb7e2af75e473d4e87195cf2efd142cb783f55",
   "skills/sales-territory-pro-1/references/environment/p0.md": "ed5347639ee49f9656783ca7ad0417126d2d35223bf83bfd97b9fd214a73eb6b",
@@ -37,8 +37,8 @@
   "skills/sales-territory-pro-2/run.py": "858624b34cfabbe8b766e3d696017a9b7732b785b671a01d1a27fca2edbbd022",
   "skills/sales-territory-pro-2/selftest.py": "3caec6661013dfcdfa65816c67e3a63ac9a8028cf46d857fb2d14f8256ccfc09",
   "skills/sales-territory-pro-2/.phoenix/originality.json": "05e1411cf5624d6f6a73e7f35712d65a12e825bfd2f12662ceae736fe14b4d4d",
-  "skills/sales-territory-pro-2/.phoenix/provenance.json": "77514fe62a667c2548e66d85a4324dbb6beb5e5f2a482bbcc3d2cf264f6b99eb",
-  "skills/sales-territory-pro-2/.phoenix/selftest_evidence.json": "08f85b18e85fefb974c5f09c730f8d2c0e672ec6555753a070cdd6589eacec3a",
+  "skills/sales-territory-pro-2/.phoenix/provenance.json": "b87f2df1362021f2fb0accaf447fde4c741a3424d55018639e6d7ecc46945893",
+  "skills/sales-territory-pro-2/.phoenix/selftest_evidence.json": "5a6ed7c6785ae14fb1259fbbd30d5e00e8a0f1b2721f065131a0bb9ad02b5729",
   "skills/sales-territory-pro-2/references/creation/p0.md": "27831e9f8f72ba7e493ca7b4a2bc5ad599bd8a7b752958ccd389d3520355cb21",
   "skills/sales-territory-pro-2/references/creation/p1.md": "fa292cda7fb6963976f80837b67dc8ee123b47c559ffdffd0642541641ef1523",
   "skills/sales-territory-pro-2/references/environment/p0.md": "a8078f022b14d024cae0260b08ed60f9658288fba0a3d0750b0a39486176f2bd",
@@ -54,8 +54,8 @@
   "skills/sales-territory-pro-3/run.py": "98a82d89c6a8139468ecc459c2ea30a8b4c85b890b013176b737f8a9cbe1e3d9",
   "skills/sales-territory-pro-3/selftest.py": "4f1943e351c083c7af7807e5758108cac28ab190e39ddcbcf2c347d829664000",
   "skills/sales-territory-pro-3/.phoenix/originality.json": "79b93cfa29412ab804371e49a76d92d5e6260b86ef4cfb3636be50da7e6ef5d3",
-  "skills/sales-territory-pro-3/.phoenix/provenance.json": "22366a5370f3f0b093e10556095457af9411ae8fa5f18a05e36f8587db3026b0",
-  "skills/sales-territory-pro-3/.phoenix/selftest_evidence.json": "af03b61eb533fb2bfa2c586833cfea6b9bd08d5971e2b5d06ea2c6ceb30e9c4d",
+  "skills/sales-territory-pro-3/.phoenix/provenance.json": "4c44a99716b651043efdb51806e5cead5655bf997fb77636bef0c4ceb4d69cae",
+  "skills/sales-territory-pro-3/.phoenix/selftest_evidence.json": "2bcbd92ac2aaeaad190d1cb847a2bf22548f56b1a1354835843f1bd3647dee31",
   "skills/sales-territory-pro-3/references/creation/p0.md": "a5a3abc9d4034e1374e892b6508d14fdf7c362f706e8b8cf0366c3123919ab7c",
   "skills/sales-territory-pro-3/references/creation/p1.md": "a1dd1193cef9a538346300d7989ffac904e15482391ba9758d5cd8c059c4b1ef",
   "skills/sales-territory-pro-3/references/environment/p0.md": "89a8bd62ae024c73c0fc77cbcfc26f29daf55e7d35e1ec490e0d8ccb0947807e",
@@ -66,7 +66,7 @@
   "skills/sales-territory-pro-3/references/production/p1.md": "0aa052be4852d47ef812d4c7ac29099c6a486f23f38ec5d3179b3f1b98f617d1",
   "skills/sales-territory-pro-3/scripts/main.py": "9353c7fb8b8e66c9ea468218189ce2336e57124d1b70742c7e351b83a97ffebf"
  },
- "sealed_at": "2026-10-18T20:08:16",
+ "sealed_at": "2026-10-18T21:03:17",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

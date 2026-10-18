@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:58:06",
+ "at": "2026-10-18T20:58:06",
  "skill": "edu-institution-diagnose-2",
  "slug": "edu-institution-diagnose",
  "passed": true,

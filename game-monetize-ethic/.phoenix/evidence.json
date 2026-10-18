@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-monetize-ethic",
- "merkle_root": "99c2340372f8aec2a202a02a5334a39aaf1cbca192d3cb67719110f14b1c0853",
+ "merkle_root": "387c9895d370f94a61139876fd0138b88b4e196f166117861cc0d9542ef8eb50",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-monetize-ethic-1/run.py": "68e9746700ad475c7ad1675c8b7f09548fec91cb13cbba8760ae48d20f07f71f",
   "skills/game-monetize-ethic-1/selftest.py": "df84f38b9011e481140e0fa7195eac9c5758a06e47ff97540cca12e1fcefacb7",
   "skills/game-monetize-ethic-1/.phoenix/originality.json": "09cdfa8c66e39a7542098097532f529bfa1e3d2e014810c37d35b2512d63f37c",
-  "skills/game-monetize-ethic-1/.phoenix/provenance.json": "c6692950b606c932eaec76fab225eceeee9d79c472c308d2e31fc3e54415ccb4",
-  "skills/game-monetize-ethic-1/.phoenix/selftest_evidence.json": "b4cf4dad8e3306db7b42bcaea9becf77e8994d03d8359a5899f5c3e28c96d54c",
+  "skills/game-monetize-ethic-1/.phoenix/provenance.json": "1b7c80b8b9792d25f1a0308ffb38888706608bb09a8c7b2345354a02f735e560",
+  "skills/game-monetize-ethic-1/.phoenix/selftest_evidence.json": "7eaeca12187c445e9de2744284ea5cbc83ddca91910d5cdb48ebf83793efc49a",
   "skills/game-monetize-ethic-1/references/creation/p0.md": "52c22c7d7fd2a06b58c44e91451d9ca5f5abd82f01dde8841962d040ecf135e8",
   "skills/game-monetize-ethic-1/references/creation/p1.md": "93af0c21513d8131c0a445b1de0d2b178eb24aa1a8f985f010e912998aeb7de7",
   "skills/game-monetize-ethic-1/references/environment/p0.md": "fa2c96558227be256d603817f132a74227396a7b889273c59b0c33b9300e5247",
@@ -37,8 +37,8 @@
   "skills/game-monetize-ethic-2/run.py": "38fa1f3562b32f2644a39458a8e2af52886fe632a58f4526916269b00290e256",
   "skills/game-monetize-ethic-2/selftest.py": "48aaa828cfc8930a82b3b613677256d4c00679c43b5d2fb0a0051e3d0e9046d5",
   "skills/game-monetize-ethic-2/.phoenix/originality.json": "a2161b566a117b7e25aa32676f3b38c9c6c6f9c7ccd8febb718bcb314deb3d00",
-  "skills/game-monetize-ethic-2/.phoenix/provenance.json": "fc40cd9c48e78730521394e04f0e892a6ca75c7ddc35b0a35562c60cb7804708",
-  "skills/game-monetize-ethic-2/.phoenix/selftest_evidence.json": "3c9ef6302751d2e260f9b0af32d8fbefa06a9f707340f78694cc080f987f49c2",
+  "skills/game-monetize-ethic-2/.phoenix/provenance.json": "0070fb424e5731dbcd6699ed5cbde6cfa3d2b1442e7e7bea4a2ea9456283d178",
+  "skills/game-monetize-ethic-2/.phoenix/selftest_evidence.json": "28043c0fdd44a4a47920346ed9479e5b48454cdd78232e7a274b3940b01bbe10",
   "skills/game-monetize-ethic-2/references/creation/p0.md": "1e8a82fd19963a570589a06c920e429347410fc594337969f54e174f600ecb7b",
   "skills/game-monetize-ethic-2/references/creation/p1.md": "4c6ea4af3a2789374219beb0c07f5ea3a3015031ba71d30ef0278fef91d8dec9",
   "skills/game-monetize-ethic-2/references/environment/p0.md": "ba133fdb7ce35ba88e7b28c449d5130f937f6ee21263c1bba9e95bb9ef5d41e5",
@@ -54,8 +54,8 @@
   "skills/game-monetize-ethic-3/run.py": "55e833c5280c3edf33878a9f2e79f9cca6c4ddc44e1f89054c107fe531405ea2",
   "skills/game-monetize-ethic-3/selftest.py": "16fb8a51e078751ad164db20b84c5622850ab805f427e2d162f2538a87b4896c",
   "skills/game-monetize-ethic-3/.phoenix/originality.json": "b0f29015da5a4370cc561b750a3378f1a559079b6e04b7a53d7b41bf9a675fb8",
-  "skills/game-monetize-ethic-3/.phoenix/provenance.json": "8f7190df1c5e8d1f908f5a59692341c06f8d7d0b4976dda4ad066382992292a3",
-  "skills/game-monetize-ethic-3/.phoenix/selftest_evidence.json": "e8716182f09bb6ea998c4e20a91b0ac15905c3e641170c77d353a3422578c6c2",
+  "skills/game-monetize-ethic-3/.phoenix/provenance.json": "0d6cf2b6ed6ae905564a01f16e717941c842e634ebf5a756cde71fdcc1af5a14",
+  "skills/game-monetize-ethic-3/.phoenix/selftest_evidence.json": "56761d070e17695ebb04f53d73b76220f7ffdf42139fe7c145f68c638494119a",
   "skills/game-monetize-ethic-3/references/creation/p0.md": "a989ad7dc2bc2efd950d771fafd52a9b1f1a926e5eceb0fcdfed9480dc2cd8de",
   "skills/game-monetize-ethic-3/references/creation/p1.md": "b473847bacd37117bf1be5386907ba454a3f49c35f63fd3789424a0cd76bec98",
   "skills/game-monetize-ethic-3/references/environment/p0.md": "d3542452471109f37b394b95081b729e3a6da592c77a60a0a7d9e6c82e7aad15",
@@ -66,7 +66,7 @@
   "skills/game-monetize-ethic-3/references/production/p1.md": "c8b0b74ffca9707563772f969dcf5a15b9571347195f88f87c12414dcdb6c634",
   "skills/game-monetize-ethic-3/scripts/main.py": "dbbb4565b22a95f172d94419ec6ae599ac2f09ccc2d114b8d816b7724ea64272"
  },
- "sealed_at": "2026-10-18T19:59:55",
+ "sealed_at": "2026-10-18T20:59:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

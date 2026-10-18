@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "global-pricing-pro",
- "merkle_root": "1808760afd88358c807388ca42110e3fa545e791caa80248a75559f452c6b871",
+ "merkle_root": "43f69c5b5ae05c57482b1805ea5c6f9a60ce9102c5076f48f6ce7336eaf73cf2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/global-pricing-pro-1/run.py": "3a7e1089500a90103e88116e206af2056b18ad4062e4d6e82f3e0d8e46d9136f",
   "skills/global-pricing-pro-1/selftest.py": "5cde68f81f53a841c1c1a58b131e3a03347b5ed65e35ae8596b2139fe7aec756",
   "skills/global-pricing-pro-1/.phoenix/originality.json": "e7d74813736ff44c386bf212f94cb6e66ed68b315f468a08cc8e9ac148f10aa4",
-  "skills/global-pricing-pro-1/.phoenix/provenance.json": "552d3d6fdcb006b9d43edb87ea29be43cfcbeb1e5b5b4a2825e117b84befd008",
-  "skills/global-pricing-pro-1/.phoenix/selftest_evidence.json": "631614bd95a49b00f3f0ff490a26f5fcf6ee9c185d7baf7ef8ca42cf09ccafd3",
+  "skills/global-pricing-pro-1/.phoenix/provenance.json": "d4640372bcd9aefa8a56e32d394eb127f7263e4c4e6c3c846c4201b6d4aa68c6",
+  "skills/global-pricing-pro-1/.phoenix/selftest_evidence.json": "ae26b225481ccee25ecd2f3108dc30d76140ae24497f5511e72f3d4d4a12a206",
   "skills/global-pricing-pro-1/references/creation/p0.md": "998b6a2d6b450e33e093ee8c19aab7a50a9195531bac64565eb186bf1a119783",
   "skills/global-pricing-pro-1/references/creation/p1.md": "e0f22885dc2953b13bf2e3b3e604f96686945f8341812d65b2bec3d047737b94",
   "skills/global-pricing-pro-1/references/environment/p0.md": "0610735b36a83d13b8537aab954278d31071132f300dea58f30f14f1cba116fe",
@@ -37,8 +37,8 @@
   "skills/global-pricing-pro-2/run.py": "7f5998e0fb432511ef3b0322353891999d3fb03b792f8db1c389845777078ab0",
   "skills/global-pricing-pro-2/selftest.py": "a9c6dd7a5a83911f4cd1fb17132073eb76bec1c648b8b5d29138cb96f0ce6088",
   "skills/global-pricing-pro-2/.phoenix/originality.json": "df9ce1df83ee94cacddf7fc95c859c19d7d3cd7777269af3776e25039211e4ef",
-  "skills/global-pricing-pro-2/.phoenix/provenance.json": "36eec38066dcfdb4cfbfcd4e9892e141061779774a951d578e60bce08f4b35c7",
-  "skills/global-pricing-pro-2/.phoenix/selftest_evidence.json": "fafda2312723110f21bf4ce178db9d7126ec5106bd5038985f0f69821839fa73",
+  "skills/global-pricing-pro-2/.phoenix/provenance.json": "7d05b134a491cfc6d6ee83e000e1acb5c87748794e051ae823afdfba7cfd7d0a",
+  "skills/global-pricing-pro-2/.phoenix/selftest_evidence.json": "1ba2ad6440a1c81e204dcc42f7433c27951fbe77116f29694e0ee35878224ba3",
   "skills/global-pricing-pro-2/references/creation/p0.md": "2b789e0f29b747abd642539c96d54f2f6369f5fe3e1449c711d0cada077ec96f",
   "skills/global-pricing-pro-2/references/creation/p1.md": "af7bfd2a332102fd707e1a010b6c5be0552f7632ccf0b0cfd69bb4311300b68d",
   "skills/global-pricing-pro-2/references/environment/p0.md": "81fc45bd0a1b5e323727c4c940945d85ea8980520b67ec54137819051154a1ae",
@@ -54,8 +54,8 @@
   "skills/global-pricing-pro-3/run.py": "a2a44eb864efc7f79d546f263c44018a9530268fd249eb32e771820b6a60b83e",
   "skills/global-pricing-pro-3/selftest.py": "8b71241ea0ac76491156a66a18dfe3430a43a2bf8a8cca800e807eaa54ba3bc8",
   "skills/global-pricing-pro-3/.phoenix/originality.json": "2988ab73f0fcd80a655805f86fc7ffe7638c2cc0cef709c7c8db17dfd7ab23cf",
-  "skills/global-pricing-pro-3/.phoenix/provenance.json": "ab22377a4ed0000951642fea7342059a445d95052685004a418c21087ff65949",
-  "skills/global-pricing-pro-3/.phoenix/selftest_evidence.json": "9c47069bb799bea8d05dfc0dcfc1186e59d543da3d308baf0ab87735108b9f75",
+  "skills/global-pricing-pro-3/.phoenix/provenance.json": "6e32ff6f3d89a61cd341583d4b40b441660b9d0a9e1ca5333919577b68ea6e88",
+  "skills/global-pricing-pro-3/.phoenix/selftest_evidence.json": "ee002076520eb9fdf6c226f029c8dddb47d78d75e1fdcd20e9606e692d9e25af",
   "skills/global-pricing-pro-3/references/creation/p0.md": "de9768666be892aaec867eb12ce96b1d5ca894d87d873528c1bf1a3e601d4a16",
   "skills/global-pricing-pro-3/references/creation/p1.md": "8cda4b901366917f63f9af7b576940ce4aa6c7b774554e5a9935275e19c146da",
   "skills/global-pricing-pro-3/references/environment/p0.md": "af0162a2cc30ceb5da4f158927bc27d9012bb9d350b61a2898bf35902bf67ecb",
@@ -66,7 +66,7 @@
   "skills/global-pricing-pro-3/references/production/p1.md": "a95a1861bd06a5ccd70c6b533e7b22093926f2ca2d7b8611a612abcb326d08a4",
   "skills/global-pricing-pro-3/scripts/main.py": "b2b44df89ba0b2a6c2c72a29f6f392b53538827b74074569efd1da1d8300251b"
  },
- "sealed_at": "2026-10-18T20:00:16",
+ "sealed_at": "2026-10-18T20:59:17",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

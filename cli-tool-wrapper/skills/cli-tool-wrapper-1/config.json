@@ -1,0 +1,72 @@
+{
+ "name": "cli-tool-wrapper-1",
+ "version": "2.0.0",
+ "domain": "命令行工具封装",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "参数校验",
+   "then": "入口先校验必填参数",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "退出码规范",
+   "then": "成功失败用不同退出码",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "输出结构化",
+   "then": "支持结构化输出便于解析",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "错误可读",
+   "then": "错误信息含修复建议",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "帮助文档",
+   "then": "内置帮助信息",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "参数校验",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "退出码规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "输出结构化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "错误可读",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "帮助文档",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

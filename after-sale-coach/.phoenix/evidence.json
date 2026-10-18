@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "after-sale-coach",
- "merkle_root": "6bcbda64d8c991ec8b26c0193ce14ae603f2a1fff958f20acb5def31ad40b519",
+ "merkle_root": "3b413c456bdef2a361189258c2866887bd02a6701c8e0160447ec2135e6f5a92",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/after-sale-coach-1/run.py": "81d813178446bf1c2bdf19749b2494f1521339cea60765ada08a5f3763d9c0f9",
   "skills/after-sale-coach-1/selftest.py": "701a4a564c0288b57dd3df22fe55a18db901521bedfcf13e0ee3ca74ed2d3c12",
   "skills/after-sale-coach-1/.phoenix/originality.json": "129aef65c316569a406b6d11a4b112be2d272fa5a2e1f6e9481ec2b11fa070fb",
-  "skills/after-sale-coach-1/.phoenix/provenance.json": "05c587704c673ba9bfc2d39cab5eff64cc488ee63c5333a3ef7ced259cf91d14",
-  "skills/after-sale-coach-1/.phoenix/selftest_evidence.json": "b3e405ab8c16cc5b1924d44e7a5e6ee07c24a8ac4c193357dd2fa6fc9ac5e390",
+  "skills/after-sale-coach-1/.phoenix/provenance.json": "c62df03305d8c2adcbe7dc3bc0b63ec8811284752c8b895acafbaf3bc08dbd07",
+  "skills/after-sale-coach-1/.phoenix/selftest_evidence.json": "ebb5f28b8b38151233003cb1f63e8c8273f3673c726e0d04d4dbe6eff7d8c6d1",
   "skills/after-sale-coach-1/references/creation/p0.md": "87ccb847d49d355a543bbe37c4f0c7e592ef246d188938fe06bc6bd6b99ab228",
   "skills/after-sale-coach-1/references/creation/p1.md": "bf9a6485be1d6a815ab92042cc8daa51ed8786eef4f22af423154095e0a6de9d",
   "skills/after-sale-coach-1/references/environment/p0.md": "1779519e49c7a14782d5eae5cc457a832d86312f26af39eebfad1cd33f416a9e",
@@ -37,8 +37,8 @@
   "skills/after-sale-coach-2/run.py": "94bde67b09c6806e39d19a348a9077294b440790f6e0fc37ae84690344fd2273",
   "skills/after-sale-coach-2/selftest.py": "91e77b17cb7a4d710efb30b5aac19b0c4b79e1606d46334408ceb50283932416",
   "skills/after-sale-coach-2/.phoenix/originality.json": "2cd3ecddc0c2f9ad99dc9f4d2030328d31b32fcaf31e7760bc4be96229e7aad0",
-  "skills/after-sale-coach-2/.phoenix/provenance.json": "44ad7cb181643fabd40f6a15262e03ab511934a34e7453f00438e368ad923ad6",
-  "skills/after-sale-coach-2/.phoenix/selftest_evidence.json": "bf86fe2a0cbefba6308315ba2392021dd0078e0119375fb871131b0bc9aeb423",
+  "skills/after-sale-coach-2/.phoenix/provenance.json": "ae0cfc8a4b87dac7fea00859c24bbdadf45db0936745acdc7e9e3cd59a31f188",
+  "skills/after-sale-coach-2/.phoenix/selftest_evidence.json": "91f9b2c3444ba29a05658b0ef31b06e66e0cc38cda66829d807fd6cd1c266be3",
   "skills/after-sale-coach-2/references/creation/p0.md": "be6079f63a602f6c997cf5ac70a55148c8df26a17589d8d5a804fa8c2de56419",
   "skills/after-sale-coach-2/references/creation/p1.md": "745c498477d8c216bbb668967b22209af09e9377c1d8e2c29ddbf40e929049a3",
   "skills/after-sale-coach-2/references/environment/p0.md": "2bee84491e5a2ebd407ef9b8cca2c6dd21e7a6ea0d33c6ac15f709bc273bfbb2",
@@ -54,8 +54,8 @@
   "skills/after-sale-coach-3/run.py": "cdf0fcd3f5341badcf1cb00fdbe590da9cf0f3411ea9714eec0385400b0d33d3",
   "skills/after-sale-coach-3/selftest.py": "0ea9231700f0cbbccdd62daff138aaf9689af421e544d723b93849f8d543f571",
   "skills/after-sale-coach-3/.phoenix/originality.json": "49498c4281c768fd12ea7657d4de0080bf7693a6a21cb06ae027f78842988e79",
-  "skills/after-sale-coach-3/.phoenix/provenance.json": "f964dba7aef85bb1642c2b5385d8e5bc9d192550b16fb46bcf8457bee085a5bf",
-  "skills/after-sale-coach-3/.phoenix/selftest_evidence.json": "54bef8009c26b81ab5f11a8c91ae8adb1985482d7bc280151da0e1233688ae71",
+  "skills/after-sale-coach-3/.phoenix/provenance.json": "30bd27d098a24214b2cf1a299041fa29e0d37a0e72f82a05e5339c00475f1245",
+  "skills/after-sale-coach-3/.phoenix/selftest_evidence.json": "056e14c1eb6d6e2a0f395da3a0b608dc0a014f630f7adf174b03c1046f562683",
   "skills/after-sale-coach-3/references/creation/p0.md": "5e7c99d0485cd92aeb7b2d36c5c924e08c8b7eec894de4cd9603567ea4b7f30d",
   "skills/after-sale-coach-3/references/creation/p1.md": "ef991a5dc0c9108f1b57c76de53ded3399c52c893f134b06a2adf58034ae6456",
   "skills/after-sale-coach-3/references/environment/p0.md": "4ac47c61db429f98cc1a15d0531c1ea9c2f95e4a68353227dd660b648ed4d3fb",
@@ -66,7 +66,7 @@
   "skills/after-sale-coach-3/references/production/p1.md": "67b015664c6bbc3e5d4624a3f9ac51e04ee23afbcb08ad07c88a29f4833c2c77",
   "skills/after-sale-coach-3/scripts/main.py": "010329bce8024d1473721946a4f9214c7214cf0a11dea57911d85259b30336cf"
  },
- "sealed_at": "2026-10-18T19:51:44",
+ "sealed_at": "2026-10-18T20:54:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

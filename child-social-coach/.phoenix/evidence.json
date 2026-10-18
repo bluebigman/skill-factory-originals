@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-social-coach",
- "merkle_root": "15284b80b219f4d851edc6cf2b04ba69fbb313e7be8f401f62add7f2af5677ea",
+ "merkle_root": "0cf033247e830ea10b3b6ceb51dfe00a244200f597f3a0a7e76d7560b2b3e593",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-social-coach-1/run.py": "8ce50b6c5ac5adba07c2b981eff5cdcdaac73f9a35d0c27a7052ed515591ae42",
   "skills/child-social-coach-1/selftest.py": "fce1dc350e36c6f27ad0fc90ae9a025cfe39ff9c3dda5c8cd552f014412e661e",
   "skills/child-social-coach-1/.phoenix/originality.json": "2e88457df90dba238b43e82d2dd48d7cfafbc63708906e82d2da0c8f0999b901",
-  "skills/child-social-coach-1/.phoenix/provenance.json": "5062ad9fb31e1b378adbd4c4e8a7dc94e7bb1affe39723b28618f13b89f3f2c3",
-  "skills/child-social-coach-1/.phoenix/selftest_evidence.json": "b6f97b33cc29491ea333c305aca4d68d3344051506646b929f8607e67c48c5a7",
+  "skills/child-social-coach-1/.phoenix/provenance.json": "7a89a3da9583d7eda7046330b32e9398d9e74d7d3f8d6dad877567996767c59d",
+  "skills/child-social-coach-1/.phoenix/selftest_evidence.json": "ebb1b124c40b72bd8b15a36c6c88d3c885d70c351ce1a79b4c0a5c22e0662884",
   "skills/child-social-coach-1/references/creation/p0.md": "aff9ff1f8f777b93fa1505e1629744fe0a023eed580e7ec37dc341bfc9fe1280",
   "skills/child-social-coach-1/references/creation/p1.md": "6170a0dc171392f008692e18bc15a6b8905ed48cac8bb703ccee38813e03d7f3",
   "skills/child-social-coach-1/references/environment/p0.md": "8083f29ebdba6cceeff048e4b05751d98053f7f881ed1cb5130ac7171ba57a35",
@@ -37,8 +37,8 @@
   "skills/child-social-coach-2/run.py": "fd2684e3e435077bb8fc67513841ec9ad3aa3162c97959c34f52bb882e0fe602",
   "skills/child-social-coach-2/selftest.py": "9f5a9f3c7ced5bfe9a3c1195d994bb075dc22f9c7cb24e89f5ccc78ab0ac392b",
   "skills/child-social-coach-2/.phoenix/originality.json": "750a09634bdd131a2e4213de9213811ea3eb71c67c13ec609fc695f28a5ab37e",
-  "skills/child-social-coach-2/.phoenix/provenance.json": "369413f1b1459770ccb317aeb02f39ddb6b0ecc530f804d9a17e2291bd6b222c",
-  "skills/child-social-coach-2/.phoenix/selftest_evidence.json": "a89a92e804aa6a789d6765f0c1f10bb8f41fd987809e13e1db57fa90bcece8be",
+  "skills/child-social-coach-2/.phoenix/provenance.json": "3ca7019e6bdc040ef30629514040521f5c93d8ac650e4a594352ed59fb12a3c5",
+  "skills/child-social-coach-2/.phoenix/selftest_evidence.json": "f9fa45cd08b5d252ea17d6d8e3cb0be5633bfc4c1214d686b45de19fc65e77f0",
   "skills/child-social-coach-2/references/creation/p0.md": "2a194606b7cc19f940c0926d26870644fb9efa0d22f245944471983040646bc8",
   "skills/child-social-coach-2/references/creation/p1.md": "599f54a5331c5aa74078db90d89425e6290d8c3718faf3d5fa1a9fd1e1b28371",
   "skills/child-social-coach-2/references/environment/p0.md": "352f18ccb544f2fea10f5b0d5414522587a6d66671f7cd059b6c190bb37f1ba8",
@@ -54,8 +54,8 @@
   "skills/child-social-coach-3/run.py": "fd92db642e1234f8220afbd3fb840e155868c2ec0077668ce444237432b889c2",
   "skills/child-social-coach-3/selftest.py": "954754ec4fec4bf537d88ebb78a867109418769798b67f24c250db5fbcc9618d",
   "skills/child-social-coach-3/.phoenix/originality.json": "7635417fc33006b153f15f5fcd665e28e3b80338d976c139883b0b9afc75d320",
-  "skills/child-social-coach-3/.phoenix/provenance.json": "872cf2ac09bccec13de16ccf9d8b558d662516a72e60468c26b8e39953361ce5",
-  "skills/child-social-coach-3/.phoenix/selftest_evidence.json": "18753d2fd8227a1a151703dbf0ea74f73994a7b1cd96d82b87f7cbc759622b82",
+  "skills/child-social-coach-3/.phoenix/provenance.json": "6b7cc299f7edae9eecb7652db0dab47a2847d309053c20628f755f3ccb74fd70",
+  "skills/child-social-coach-3/.phoenix/selftest_evidence.json": "ccb0323aa6accbd4d81ad2dc570d8f63580d1c8b04974a4fdeff6f57e625705d",
   "skills/child-social-coach-3/references/creation/p0.md": "7d1a609da95b6dd557bcc558d9479275d8b20383ef641b4b933e31098a68c944",
   "skills/child-social-coach-3/references/creation/p1.md": "9b1680321db16c7c6cfa21fad2f8cd830d4fe484d44ed7275d6ef5f5f54d7cbb",
   "skills/child-social-coach-3/references/environment/p0.md": "81e07f55683219d39ac7071b2e4dce8b2f21081237e73b5964e0238caf1ea65e",
@@ -66,7 +66,7 @@
   "skills/child-social-coach-3/references/production/p1.md": "61a17ae6814ec6b9372e1e9357638e28a66ac33b7872177f7abebc4d7cb7f69d",
   "skills/child-social-coach-3/scripts/main.py": "b24a0c29d14340657f42db8fda6cc8d8394aebe19665a36d009577b449afcb13"
  },
- "sealed_at": "2026-10-18T19:53:25",
+ "sealed_at": "2026-10-18T20:55:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

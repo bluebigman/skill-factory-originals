@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:08:42",
+ "at": "2026-10-18T21:03:31",
  "skill": "secure-sdlc-3",
  "slug": "secure-sdlc",
  "passed": true,

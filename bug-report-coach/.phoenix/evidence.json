@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "bug-report-coach",
- "merkle_root": "fec841aeee2160d7c296c75d658a368e0be2cb6e3db0e86b12227977cd99d589",
+ "merkle_root": "29b786bedd2b3f7c20662b073e688e04efb0a846a7939c740b3603ca9f807ff7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/bug-report-coach-1/run.py": "7dbac6934c215907807532c019f0bda63823756534800809bf95e714e7c85941",
   "skills/bug-report-coach-1/selftest.py": "6065560ce696782ed3e76efc0c341608174f514ef39985df919e5d87cd137c0d",
   "skills/bug-report-coach-1/.phoenix/originality.json": "6f1edf6ee092d3d4cbc1e82d805717fc7b7927324282035f158ca629015d144b",
-  "skills/bug-report-coach-1/.phoenix/provenance.json": "84b3235efb41d04dc1dd277aab02b7f77e708ee5e3e9b7aa09d46d0b94280cb3",
-  "skills/bug-report-coach-1/.phoenix/selftest_evidence.json": "ef26b7e8a7573e37d2c9039a0e4bcab137d26271173ba6dffd4a15a3d5b46d91",
+  "skills/bug-report-coach-1/.phoenix/provenance.json": "4a64c98c62baf45c25dd09d85c9513b5d6e8d4e309e797ba0c25f13624918b18",
+  "skills/bug-report-coach-1/.phoenix/selftest_evidence.json": "71bf93e11859d8f597d28b55a9216f8fd331232dbd7c2270dd48461b874bcbc7",
   "skills/bug-report-coach-1/references/creation/p0.md": "0fb9d2395826f7dbe5c744aa3b27089af2b11744c662ebc0faefe4ad79a06676",
   "skills/bug-report-coach-1/references/creation/p1.md": "ac2d826d100fb762ff4ff3684ca577f95be2c35645877c5fdeafe7474c311afe",
   "skills/bug-report-coach-1/references/environment/p0.md": "10b3aaf9a52884a199072de0848257d8d8df00def69eb44e7259bd688d968c50",
@@ -37,8 +37,8 @@
   "skills/bug-report-coach-2/run.py": "4336f4da7ce2411a8cbad0fa18a380b8b728c6a518f03606285a953f5464e143",
   "skills/bug-report-coach-2/selftest.py": "1d652da01d1092c1c8b8a28035fbe2c2c43b89c72b0732532d5354a2448329c0",
   "skills/bug-report-coach-2/.phoenix/originality.json": "5f82f901d4d36b045066a93a41e2962595eb9a8ee8333c7217651ccac9e18059",
-  "skills/bug-report-coach-2/.phoenix/provenance.json": "891a3e251897129b89e678a1f34b51fa8d6abe99e91609b3352c7b59cb82fff3",
-  "skills/bug-report-coach-2/.phoenix/selftest_evidence.json": "42674a429a6db1585156adde24f8d1f4c69d5b3f763d0a6786e6360ce20a320a",
+  "skills/bug-report-coach-2/.phoenix/provenance.json": "2a31bb821236b0c7a5f40db7f8b3baafb7980bc12c00e9df0b31e33b92a05af2",
+  "skills/bug-report-coach-2/.phoenix/selftest_evidence.json": "a33f4d72bddf949fedeaab0b423c73da1847ff68c0e239a10d852516d02240da",
   "skills/bug-report-coach-2/references/creation/p0.md": "2a927f99edeaa1734f9284fa09f28c3c1221be5bcd0a30cc85b0f0223465bf38",
   "skills/bug-report-coach-2/references/creation/p1.md": "8bbf31a9011c9551fda8b84dfe156bb1ecba695fbe35755651a27a3457471dec",
   "skills/bug-report-coach-2/references/environment/p0.md": "81802eb18ac66dfbf7eaef6486616bc9e76622eabdd76836143a3c814fda6717",
@@ -54,8 +54,8 @@
   "skills/bug-report-coach-3/run.py": "ffbce915fd1d6b1a7c4ba363be9260d4d3451ef83ac6fa31b39502baaceb5929",
   "skills/bug-report-coach-3/selftest.py": "fd44acda9d3f9df7be05d54dcbcf77078209bebcd858ff91d34dead080320bbd",
   "skills/bug-report-coach-3/.phoenix/originality.json": "36483e8988d0aa28c676f8351a51e504c80ec3a597122e37cbe42669e071040e",
-  "skills/bug-report-coach-3/.phoenix/provenance.json": "8c1b7bd7253158a5717b21ed65c642ed7f1eddf4f647d15e601cf2b91bc17b63",
-  "skills/bug-report-coach-3/.phoenix/selftest_evidence.json": "85411118d7d0e44114aecfa48a990b97a5c6fc2b4c559c441809ec8f8b48b01a",
+  "skills/bug-report-coach-3/.phoenix/provenance.json": "dbd05a33e5ca9e31e0002f864f33741382d3f6261e3fc20889b18feb412544b4",
+  "skills/bug-report-coach-3/.phoenix/selftest_evidence.json": "fdb809be522a3da8d7b77c13480a106028b974023207b0c3bbf68f5fef12d475",
   "skills/bug-report-coach-3/references/creation/p0.md": "fdf8ddb1597e47f3a55e92e52ac7fc2aadb79eb7a2c663dfcf400c1532a751da",
   "skills/bug-report-coach-3/references/creation/p1.md": "6a91a015a0f8263e054ecd571d6ceca557d692a6600f2ffa6009c299a92276f3",
   "skills/bug-report-coach-3/references/environment/p0.md": "15335952f79303620bedc2df4e1993650793e2a8ba033ae3fc1a90feae5f9a17",
@@ -66,7 +66,7 @@
   "skills/bug-report-coach-3/references/production/p1.md": "9538c3718dc943b688c548961dbb1d0ad94c62aea18112c9d2c578443a06888e",
   "skills/bug-report-coach-3/scripts/main.py": "c7b16dbbe8732db9154813021dc14fa9bcd1700acf49cf5cfc2a229126c5236a"
  },
- "sealed_at": "2026-10-18T19:52:53",
+ "sealed_at": "2026-10-18T20:55:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

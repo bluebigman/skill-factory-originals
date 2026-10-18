@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "survey-design-pro",
- "merkle_root": "abfdce67ec91b4159837ae76cf0ee74827e7dcd7ff7b732ac35ab4054aef27b1",
+ "merkle_root": "4a711e344e6a3340bc91b9de18b0baecf4371fabd05bf0be172fae049cc56b76",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/survey-design-pro-1/run.py": "19917f0d96ce8a9c10345702f39269b3da35fa8884299315563750b38f7cc2c4",
   "skills/survey-design-pro-1/selftest.py": "63376653c0746a484af401a16621f2454af2628a0efbe85a0a6cb27c120ea00d",
   "skills/survey-design-pro-1/.phoenix/originality.json": "d0246c04dfcdcf1c4810d99a7391359875816b70af41d160c982001e0bf876ea",
-  "skills/survey-design-pro-1/.phoenix/provenance.json": "ea085328af8d401dc5dac1fb90b106fe486efb198e513d074710a470f4b07232",
-  "skills/survey-design-pro-1/.phoenix/selftest_evidence.json": "ac4d58fe590bbe7017b9ca1a33d68024bb59bec837a719984ae12597dcdccac4",
+  "skills/survey-design-pro-1/.phoenix/provenance.json": "a72fba188854bb91619b42c8e06b8d242931cd06be6b455df139595815605771",
+  "skills/survey-design-pro-1/.phoenix/selftest_evidence.json": "b4493f22093ddbb9d4993d548e644fdda7c9916a0b458b844fb7c4e4e7464bfd",
   "skills/survey-design-pro-1/references/creation/p0.md": "55687d002ef83114a92f925a182636e29def3756643ca05b1c78eba8ecc86a2c",
   "skills/survey-design-pro-1/references/creation/p1.md": "9df1c5130981d7f720f173cf50b5bfe7fb6ad13818919c8dca2021a590e9afa9",
   "skills/survey-design-pro-1/references/environment/p0.md": "93c8a1e837cb952ea5390bf47de96aa6c0c074f156940c45ab4cabedf068cd5f",
@@ -37,8 +37,8 @@
   "skills/survey-design-pro-2/run.py": "223bc8c5bb3a39de006e290910c687589525d9e1e7617e5f7b61198500d10129",
   "skills/survey-design-pro-2/selftest.py": "8a3ee904a2554e7bfc206609a6820db0b544926d7d466c4b55bdb11c1c08b148",
   "skills/survey-design-pro-2/.phoenix/originality.json": "0f3ad71abfbfe1cc3cd407771804b64fc79a9409de3161af8361b4dd81b81cd0",
-  "skills/survey-design-pro-2/.phoenix/provenance.json": "5babe2b392bd1f2747abb2da8e09042654361357b4c08f1371ea3a08ace6fc40",
-  "skills/survey-design-pro-2/.phoenix/selftest_evidence.json": "5c092282aca3d931592bb889d819bb30db532f769b622654eb98f40fb96a70f3",
+  "skills/survey-design-pro-2/.phoenix/provenance.json": "1f1c615d521827311d881c556752fadaa00501402a98594ddc6ba9645affec20",
+  "skills/survey-design-pro-2/.phoenix/selftest_evidence.json": "5bc5a808bf586232d07f1bc72755cad0df4cf337885255d2551bd522e15feec4",
   "skills/survey-design-pro-2/references/creation/p0.md": "9af71299cd9b380d2a3f49afea33045c9e7720587b7c8237bf22ac5cbca63148",
   "skills/survey-design-pro-2/references/creation/p1.md": "14158ab424d7dbf8bcd1c80fbe91eef0bd6d981b3679fddc833c4c367366ce93",
   "skills/survey-design-pro-2/references/environment/p0.md": "f131bd997d8d2fea3278614fffaf8eb68c6f5ae1031b4ae6405ea63c4ffe2b4e",
@@ -54,8 +54,8 @@
   "skills/survey-design-pro-3/run.py": "f5d21708386874f0e7ab7356c2a8409a8d5114fd95da4586d616787d4ff89d2a",
   "skills/survey-design-pro-3/selftest.py": "a41d457724ec668fdd049654b2940b82d6c0caf5b7ee60c78a736dcc1ff123ca",
   "skills/survey-design-pro-3/.phoenix/originality.json": "457dbd5bfe6f05c219124b8c916eae7cb03f2fb0a35a724a4f1370be324f755f",
-  "skills/survey-design-pro-3/.phoenix/provenance.json": "7c9545908b400463431d18b9dab0e6f9a023a69cf8cbf72ff605d884a70f7a18",
-  "skills/survey-design-pro-3/.phoenix/selftest_evidence.json": "be617f9b69578fd129fd16adf6358cd657025faaff752ebcd8a9b90eec2e1eb9",
+  "skills/survey-design-pro-3/.phoenix/provenance.json": "20039ba0a876e5ead2e9e6402caea650ec3078feec5fd446858154569e58dbdf",
+  "skills/survey-design-pro-3/.phoenix/selftest_evidence.json": "d655c24b74405fc11c5ce731767a4e8faa5dc9f7cc20953451a9a69a396759ab",
   "skills/survey-design-pro-3/references/creation/p0.md": "857a280839e3d0ae2173f596e0f5f8487092bde498e52a2ff304208e0d707242",
   "skills/survey-design-pro-3/references/creation/p1.md": "46f3e927b303be0ce77a8ea35f16d3097af4a305a5807b53b2d4cef95f01cf24",
   "skills/survey-design-pro-3/references/environment/p0.md": "6075f9de80e8e731262904f5d22097b78aa52a5284df049ae42f048123e94f06",
@@ -66,7 +66,7 @@
   "skills/survey-design-pro-3/references/production/p1.md": "6b94ff4d785c894f6bcf56fcfa8851f4fe931cae45315a3425258b62fdef84ce",
   "skills/survey-design-pro-3/scripts/main.py": "aba146f7635284af0f9adf6d38f21ceb7e3ee2abbf0383ffb4faeb047c6a721d"
  },
- "sealed_at": "2026-10-18T20:10:45",
+ "sealed_at": "2026-10-18T21:04:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

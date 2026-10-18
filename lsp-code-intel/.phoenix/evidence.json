@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "lsp-code-intel",
- "merkle_root": "6b242408e5701b4a531915b4e60dd7d5da08755e0ebb5d16574de0e74c5c3f90",
+ "merkle_root": "ce70cab0bb55cac71ff44f430121356af35de0bfef2bff736a5db245252e8221",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/lsp-code-intel-1/run.py": "d93ea19b9e386215a271dfd9de4774e59ee7f338deebd744bf4533f0585027cf",
   "skills/lsp-code-intel-1/selftest.py": "32c02b878cae4db0dab2c0f1ffd43566219cb1e2d29bc74a8c201b0eeb2f123f",
   "skills/lsp-code-intel-1/.phoenix/originality.json": "2f2f5e2bdb4298ebcdfabf393cd105c911b345640e5408d26bd1f09d0f39edd9",
-  "skills/lsp-code-intel-1/.phoenix/provenance.json": "3427e8ff39e66a068759502c43757385501ec153d00297800b20320c58d1ed37",
-  "skills/lsp-code-intel-1/.phoenix/selftest_evidence.json": "907cd36bfe6f9484f7054aa6c6e9d01dfb946c46f5774c1371ef93cb05db0def",
+  "skills/lsp-code-intel-1/.phoenix/provenance.json": "e755977828ab00caa1e6bd454ab311a6de9b07fbd6bd4f66affbcdf77ec6a099",
+  "skills/lsp-code-intel-1/.phoenix/selftest_evidence.json": "02a7a7af6ed538e42b8acde269a999de91e218eecb172c5772670d94829099fc",
   "skills/lsp-code-intel-1/references/creation/p0.md": "23be5424dfd06825503146014f29dd28ebef94376f9085e63c50d50ada1a6e97",
   "skills/lsp-code-intel-1/references/creation/p1.md": "fe0364bd7e5f59158f9bd3d6192cf07e9b62d5d495b2987d141e268c4687caa5",
   "skills/lsp-code-intel-1/references/environment/p0.md": "b8553ad18f4298b0030a124d0d1caf3cf26a2cf62e86609df2717373749de32c",
@@ -37,8 +37,8 @@
   "skills/lsp-code-intel-2/run.py": "b064b8421a5439679cde34e846feebfa7fff68f48977be573d4001ea6b846a33",
   "skills/lsp-code-intel-2/selftest.py": "0a418a734d577ebc552b53bc47cbf379d2c893f0b05b8d3baf2d379700928a3f",
   "skills/lsp-code-intel-2/.phoenix/originality.json": "e8f236acc6052a1f50c839d2123cc232e499ebf3067e87129819efbc591ccb05",
-  "skills/lsp-code-intel-2/.phoenix/provenance.json": "d0699d8158e08d41ea8dd173a3981a7f7dc55eb632ea20886f3979944732ccde",
-  "skills/lsp-code-intel-2/.phoenix/selftest_evidence.json": "0875d383324176369c8648de96a91b9abb2b706c2c1c91ecba8e7dbf8f2e764f",
+  "skills/lsp-code-intel-2/.phoenix/provenance.json": "6fedd2b925247a2347dcaa03d38b31fce8d61f332fd5d95729d104dfd43da336",
+  "skills/lsp-code-intel-2/.phoenix/selftest_evidence.json": "e1ebd2b3235b586c496ff383e3045b1a82da1b0b8251bf0cca1e64d4afdc521a",
   "skills/lsp-code-intel-2/references/creation/p0.md": "8e0a59ece052d0a0c4a62a7ca569242f0a82be83dd2383543a2d5b9257098854",
   "skills/lsp-code-intel-2/references/creation/p1.md": "a280d2ba2699a1b3cedc654b186d67cc78740913e265fc729939e3e15b1d922e",
   "skills/lsp-code-intel-2/references/environment/p0.md": "4606cf844d3e979694de43b3cb86da44105e368207d1756e7a2b9deccf970154",
@@ -54,8 +54,8 @@
   "skills/lsp-code-intel-3/run.py": "9c42a9134d294e906b2029573492bd8475fcf045426b54431eca974595174f87",
   "skills/lsp-code-intel-3/selftest.py": "340ba9f440501a2339510d4912b8584dd14c4ef68724b78c57e03e7b5e6260b9",
   "skills/lsp-code-intel-3/.phoenix/originality.json": "376516f173e568386993d85ea98495bd2a038e40e2e92a7a2929382d6ed12f0e",
-  "skills/lsp-code-intel-3/.phoenix/provenance.json": "b1537251155566a43072081ef9f30d2944a325c2e8167f7923cf2825c26da3d1",
-  "skills/lsp-code-intel-3/.phoenix/selftest_evidence.json": "e5b1e35506b4ce79cfcc2ffc4854dc7fea8e81ebbb46c6a51f2d0b3bcb2198e7",
+  "skills/lsp-code-intel-3/.phoenix/provenance.json": "e1f8df9bcdcbb5a4bed9ef9b59a3c08163bcae523c5b938e79aa5aa7ecc42cb2",
+  "skills/lsp-code-intel-3/.phoenix/selftest_evidence.json": "fbd60589cb0af697fb6009f1e8658ea8054cf7a1350638f78c23d80f9f4d21d7",
   "skills/lsp-code-intel-3/references/creation/p0.md": "e80d0786f61be3548c3b90f995db2d1fc5516dd69979c49429a5d8c13d541f1b",
   "skills/lsp-code-intel-3/references/creation/p1.md": "0b683d04ce3500f0bd44a283ef7eb79046e86d6fc0f5f6d78fe3e8bc5f5d2222",
   "skills/lsp-code-intel-3/references/environment/p0.md": "e2260409d2e67c0c1c3059e6a2565070d23e9bf0dd46595f8bf7bfcd8ba4ba1b",
@@ -66,7 +66,7 @@
   "skills/lsp-code-intel-3/references/production/p1.md": "81bf8c0fadaddc477d4e6c4744b22334bab236e7c90f165ae95373b0dce56d0b",
   "skills/lsp-code-intel-3/scripts/main.py": "96b5f7673b2897f593bed6cda3a00013819a52780ea2c17450fc1a618a29edb8"
  },
- "sealed_at": "2026-10-18T20:03:04",
+ "sealed_at": "2026-10-18T21:00:37",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

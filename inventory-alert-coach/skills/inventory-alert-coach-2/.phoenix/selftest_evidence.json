@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:01:48",
+ "at": "2026-10-18T21:00:00",
  "skill": "inventory-alert-coach-2",
  "slug": "inventory-alert-coach",
  "passed": true,

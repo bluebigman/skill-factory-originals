@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-retention-rule",
- "merkle_root": "a0acefa9b5306b5f94052604558b4e90411e68a918d412c2224849bc02463fe7",
+ "merkle_root": "11ae282f7e0d59beefe6fcfe6b50d7ce38edfc23dfaea5e7158ed634d6e75175",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-retention-rule-1/run.py": "6f44a4599f34ff1e40fb7b977495eb09aff9233978802a0bb5eeae034d929188",
   "skills/doc-retention-rule-1/selftest.py": "d3cd57acda076c29893767467ca10b03dc05745233b0479eb66c3115b3514647",
   "skills/doc-retention-rule-1/.phoenix/originality.json": "e8d1e2953336043e0a0b77bdb2a933ff03442569030c413f5043f85f3628eb05",
-  "skills/doc-retention-rule-1/.phoenix/provenance.json": "2e58887eeea433b66e9dbc43368134f7f3e531811f9fc50275fa1e105ab9a4dc",
-  "skills/doc-retention-rule-1/.phoenix/selftest_evidence.json": "c8bd15a717f49279450a679cae8b36e2e26f051c63078d0041360cdda314696a",
+  "skills/doc-retention-rule-1/.phoenix/provenance.json": "f94bb98c22947143ee415455e319db55ae9d48232e1b5b730e66b23e267a62b1",
+  "skills/doc-retention-rule-1/.phoenix/selftest_evidence.json": "83890f0a2c11d0eced4b089fe3164980aecd564446c81486807d89a1bba936b8",
   "skills/doc-retention-rule-1/references/creation/p0.md": "b2a7d48796f4fd7c9961d2488d7949d93e3c004b9aafbf95a91b903f811f3f30",
   "skills/doc-retention-rule-1/references/creation/p1.md": "7db55e0a0f2232f67727d563ad1b63eb47755d7b15db444736409149eef54599",
   "skills/doc-retention-rule-1/references/environment/p0.md": "3791e96fa6c3797c7416f00f8c8e9f62e6d14d035e39ff512555e95bba3314dc",
@@ -37,8 +37,8 @@
   "skills/doc-retention-rule-2/run.py": "e39e92c4bde1caa10446d6d6775eecc61187d7a83004384a6f2b53d0560b7fd3",
   "skills/doc-retention-rule-2/selftest.py": "39fe5faf35e47d28c3a9c49fbdecea81a01bdadfdf5e050326c45d9b82c8bfd3",
   "skills/doc-retention-rule-2/.phoenix/originality.json": "f0ef74e3ef7a9338fa5ed0e59df2a157644b647087f577b121e716891b05e79f",
-  "skills/doc-retention-rule-2/.phoenix/provenance.json": "426da339adee475d9526e678ac7ae359e40f95c55835350a9561ac34e6607a1d",
-  "skills/doc-retention-rule-2/.phoenix/selftest_evidence.json": "df1019cf4986344ec3e806600de3b323f36b373ef306b9e635594fa2f5f6488d",
+  "skills/doc-retention-rule-2/.phoenix/provenance.json": "f150f1e590e99272ff811642d7ca1e48e8457ca7625b233f5de57a62a16e94b2",
+  "skills/doc-retention-rule-2/.phoenix/selftest_evidence.json": "722c58fd171f442b2d0189a45bc8f728ca90fc5039390bf4b761596ee9b51f52",
   "skills/doc-retention-rule-2/references/creation/p0.md": "61f3f0d7ba10234c3036509b5161103fbe503ad1cdcc2cc09b4a66fdfe61bac5",
   "skills/doc-retention-rule-2/references/creation/p1.md": "1d5bed57f9c0b7f7c47522089684c289019e78b3f32e2ec4bd652b442fbf00e7",
   "skills/doc-retention-rule-2/references/environment/p0.md": "565a58d0953bd4f8cbda2c09e5239143757320af170c7e7361b1738d026077e2",
@@ -54,8 +54,8 @@
   "skills/doc-retention-rule-3/run.py": "7238ddc0e81a95a2cf28dacb45b7f1ca6da8fb4725c5f0b6740cdec6e192d61b",
   "skills/doc-retention-rule-3/selftest.py": "39e619ba577c495cd99d3dbf2f8ede0758c7f31a7eaed16dc834d64dffd36b9d",
   "skills/doc-retention-rule-3/.phoenix/originality.json": "3633db86ccac89841f87d1296e53befd27af4803115d7dd219f93bb6aefb6e2b",
-  "skills/doc-retention-rule-3/.phoenix/provenance.json": "aa055dbdc1e82e90a7e27e5fbf6d9e1008c064c7d6e78e488d787fe46b51c090",
-  "skills/doc-retention-rule-3/.phoenix/selftest_evidence.json": "b25fc88a510d50d498db156dfa9e142836e90a681bd19ffc327a0808b567819a",
+  "skills/doc-retention-rule-3/.phoenix/provenance.json": "235ac9e01b93ac4d4f7492a8a47d7d71492d13d4832bc1e9ba04cd9ce8b2abb7",
+  "skills/doc-retention-rule-3/.phoenix/selftest_evidence.json": "5ea368327e4d463ed2c57a5bfde9a573de4177bcc39484f155bce9ce16bef041",
   "skills/doc-retention-rule-3/references/creation/p0.md": "1278ea55942e244c6151ad6fae2f90b1184e638a74203965c0f4407e2badb291",
   "skills/doc-retention-rule-3/references/creation/p1.md": "c6eb58013ad53d102b2e25027f7f13382455c7d023108f25a71903697a71dc69",
   "skills/doc-retention-rule-3/references/environment/p0.md": "dd709e7461cc60dde693eea36ab0d96f1676899fe2431be29768fc197056811f",
@@ -66,7 +66,7 @@
   "skills/doc-retention-rule-3/references/production/p1.md": "19b6caf68ae5da51c7446a40e134700175dffc7c785b0dafde353ac5e42ae77c",
   "skills/doc-retention-rule-3/scripts/main.py": "72efb6343981d3ec37141de333e0d1f2077287ea8b5bec25968b9fcc5229816e"
  },
- "sealed_at": "2026-10-18T19:57:26",
+ "sealed_at": "2026-10-18T20:57:43",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

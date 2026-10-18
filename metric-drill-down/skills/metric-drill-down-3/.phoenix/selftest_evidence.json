@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:03:46",
+ "at": "2026-10-18T21:01:00",
  "skill": "metric-drill-down-3",
  "slug": "metric-drill-down",
  "passed": true,

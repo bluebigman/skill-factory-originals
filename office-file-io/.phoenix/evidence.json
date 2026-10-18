@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "office-file-io",
- "merkle_root": "979930aa17e25edaa00b8ba5185698073f2ed04155c76d364b624590972b2e3e",
+ "merkle_root": "43be9d4841968e634754d3e2ad1544e74e63a3876004070c7df6c04fa8519e14",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/office-file-io-1/run.py": "905bc20144bcad9dff065fd91fe3451c84831200084d18c32a8cfea7ca712847",
   "skills/office-file-io-1/selftest.py": "f8a39c221a88c52490cae54554639ef51b79e15ff7320354c118670d32321a1a",
   "skills/office-file-io-1/.phoenix/originality.json": "e9ee2d4057fadd7d45167ccc4a2c2372949b4da62a292c6fec0ae61a4282f5d8",
-  "skills/office-file-io-1/.phoenix/provenance.json": "30c724f00bb8e18416afbeee447f10b9225ef13206a79b62571c90f72cb0ff6f",
-  "skills/office-file-io-1/.phoenix/selftest_evidence.json": "2f18606f1f245d2e462f98fad4e81fa4b84e68e61e75c7c31ab27e95a1143155",
+  "skills/office-file-io-1/.phoenix/provenance.json": "b4a5e037d7708910ccca147d6ceaad4bd7de59c0e434360a2143e845baeb841b",
+  "skills/office-file-io-1/.phoenix/selftest_evidence.json": "66c5c46d1b292740d068c851e468bdb12b6daaa721faca29bcedc4090fcab8df",
   "skills/office-file-io-1/references/creation/p0.md": "1a37ba203f068050b27cffc5b27169ec331393d459a6fdc233ae0f977607eb47",
   "skills/office-file-io-1/references/creation/p1.md": "8eaa46887a6520bd8b005addd18c78d6a0af592a4f48b6db33121601549e049a",
   "skills/office-file-io-1/references/environment/p0.md": "e2f53831f91c70a1acfb0503d3521e76e74a1e63de2a23538a1bc2e4c11f4f01",
@@ -37,8 +37,8 @@
   "skills/office-file-io-2/run.py": "9552262de442c1ecf6058f72f72394fd143ce2568c2c7e86891fc99d3691817e",
   "skills/office-file-io-2/selftest.py": "3cf80179eaceeb7698b48440522ea5f16835d52b59133e5ab103d465a4ac38ab",
   "skills/office-file-io-2/.phoenix/originality.json": "ee4a7e80055d0b54dea6c848362c391be68387444139c0cf18abccae46aaf4a6",
-  "skills/office-file-io-2/.phoenix/provenance.json": "a92c4cf48acf4dc660595c95590475ea9db197925439c39c774295c62d841d18",
-  "skills/office-file-io-2/.phoenix/selftest_evidence.json": "11aa8271d89000ff641106337f42c4943b7d8c44a8e49cce4910b491be943257",
+  "skills/office-file-io-2/.phoenix/provenance.json": "8080944782093cc000b642842ecfedae81a92665654d46afbe0b90f88c041a1d",
+  "skills/office-file-io-2/.phoenix/selftest_evidence.json": "06f23d6b486f90188c8c23852f2d91ea4f669e40010f3473ba6101c8f0c02185",
   "skills/office-file-io-2/references/creation/p0.md": "f2700bb18736b6052517341449a62da51ab7d8dfbeede2cbe81aab0a4fbdbee9",
   "skills/office-file-io-2/references/creation/p1.md": "59987e0a64f6bf4ea1f025e7f875b43c8c65140a848ee86f0459117016a796ab",
   "skills/office-file-io-2/references/environment/p0.md": "ef8c4d6054689ecb1fca061e4677e4dd0ee858a9526a375d3068c6cf2a5075b6",
@@ -54,8 +54,8 @@
   "skills/office-file-io-3/run.py": "f25a4e8e4cba9aaf94f604432b9303550d5f9c2bdae6c0a0694af25058c93053",
   "skills/office-file-io-3/selftest.py": "8a38a0d635235d22a6238cfb89a219303538ab03e8b32b31d66fe1557d620ec2",
   "skills/office-file-io-3/.phoenix/originality.json": "c730a717278a53a8810aaaf7838a65518a09519408db81a356d753442f5594ba",
-  "skills/office-file-io-3/.phoenix/provenance.json": "9b47490476ae6404474b6260ec380cd0b85d194ee75d66c7223f5e4c843be603",
-  "skills/office-file-io-3/.phoenix/selftest_evidence.json": "3b61f1c1391e8e18a9b418f2ada1065e0df0ca9c2a846648a2c1ca26d5ae307a",
+  "skills/office-file-io-3/.phoenix/provenance.json": "860a4dc879b23c57625ad586286a5f93b26ff9c2d456a213da78dbae73508895",
+  "skills/office-file-io-3/.phoenix/selftest_evidence.json": "6c2475e80621308bd8ab5d2d08d98b3160193d5fc9e23f05e4a5835d6b149336",
   "skills/office-file-io-3/references/creation/p0.md": "aa4d95a333b82d0d13ae1aa825a4c49c3397809006cb64bbe61c2e6aa63e53f5",
   "skills/office-file-io-3/references/creation/p1.md": "822da4cb136b2bde5cbe792caad4333730436a7f82c16fb1e1263a4b4589b09c",
   "skills/office-file-io-3/references/environment/p0.md": "523a8f78afc04338fdcb3844a6b509d9861832013fb80db0abe4e08e4031f756",
@@ -66,7 +66,7 @@
   "skills/office-file-io-3/references/production/p1.md": "a26e50021edf016a5374dead5bd3e9aaab22fbebae401ed555ac424632eb513a",
   "skills/office-file-io-3/scripts/main.py": "56a1b320381872c3b3a9d20ed03a76a8f1c009d693058b0b698807393fbced8f"
  },
- "sealed_at": "2026-10-18T20:04:50",
+ "sealed_at": "2026-10-18T21:01:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

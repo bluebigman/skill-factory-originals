@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "production-scheduling-pro",
- "merkle_root": "c7c71d2ec7e077cd26ae17e4d62875de97391ff7452ccfc72c1ba0d8cdd54a14",
+ "merkle_root": "96cc03dd7ff9641486de47616138c3df45f527808c915e9a86280d270da22237",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/production-scheduling-pro-1/run.py": "ba65339b98b015871bff1b4ca91a3d90bd287df9e5843bcb90c3c5dd772f745e",
   "skills/production-scheduling-pro-1/selftest.py": "f88b36166a1b8e8ab6cb4b7d699aa8aecb6ed5fdcc86f8c085bd1cc666a9b13a",
   "skills/production-scheduling-pro-1/.phoenix/originality.json": "3ab492094e8be0c00a23569626440e834d66e3670e060e79ce0abf8dd30a2434",
-  "skills/production-scheduling-pro-1/.phoenix/provenance.json": "d3ab443e0c511aaaf15f5c89bc2a4a61eb46f553dc00f168471dcbc5d2f8d501",
-  "skills/production-scheduling-pro-1/.phoenix/selftest_evidence.json": "2991d43e9455d69e289cc50fb941cae79ad68b15eaee146ab655828ecc9551e2",
+  "skills/production-scheduling-pro-1/.phoenix/provenance.json": "0975848bd08bbdf81d754965a7ef1d6418db535b9240a71ed887716b882f8146",
+  "skills/production-scheduling-pro-1/.phoenix/selftest_evidence.json": "c63ebf9b6e0b3fce71cdc713e67eb4a5359c933841d949a9500349262a699256",
   "skills/production-scheduling-pro-1/references/creation/p0.md": "c67eedbeca3be881a0e906f503968e2272b48962baf042e2d4980b0e1d3f8795",
   "skills/production-scheduling-pro-1/references/creation/p1.md": "5859ec468b51f8b0b929e4384fcf7919874d8fa30a4232d24020ffa897f15b90",
   "skills/production-scheduling-pro-1/references/environment/p0.md": "54ba771f06c26a6bc12157c26644ce552fff01524257bf4759203dff1998766c",
@@ -37,8 +37,8 @@
   "skills/production-scheduling-pro-2/run.py": "ac70d9a30740320efb512a5faaab0cbc51ca99bfe698c74661890af64ef7f0d4",
   "skills/production-scheduling-pro-2/selftest.py": "ed6709402c156ce5f09f5996be93870fccdccce3c6b54c1df8397901b90a99c6",
   "skills/production-scheduling-pro-2/.phoenix/originality.json": "be0dd7cc01580c5442824750666cffe49128701e3f439c2088bb1f0f84e599ef",
-  "skills/production-scheduling-pro-2/.phoenix/provenance.json": "8f3fe265076e23ebfeec261b94a4d054d9c7d5457f52f7ba568c8ef4ac5982ff",
-  "skills/production-scheduling-pro-2/.phoenix/selftest_evidence.json": "6f62eb256d6d288f0836a150186007a0cb718f403c711e18659066ca8e9e0824",
+  "skills/production-scheduling-pro-2/.phoenix/provenance.json": "b86e38f2f4175861a97c9d755b04145ef6bb3fc6045043ae8cd425c1ee162c9a",
+  "skills/production-scheduling-pro-2/.phoenix/selftest_evidence.json": "8a9d97c21a517f5d306fb78c6b87ad0bd475c32abbb95aafddd7bc35274c9a68",
   "skills/production-scheduling-pro-2/references/creation/p0.md": "c9b8c4a77e2394a1b56d071ff7b994947be2afed3b6f7075954e7c136b74b873",
   "skills/production-scheduling-pro-2/references/creation/p1.md": "def96b618444949fd33197994cbe7558387435025016c6cbe41a4c2b2acb394c",
   "skills/production-scheduling-pro-2/references/environment/p0.md": "867cc7d35fc500ad180e09ee57cfb37af42a1ec9f1fd1898f0fdb2c65d553a16",
@@ -54,8 +54,8 @@
   "skills/production-scheduling-pro-3/run.py": "50a34ed8f2771a6a426f2e287491b160828901aac99ef3da170163d0fc035cf0",
   "skills/production-scheduling-pro-3/selftest.py": "1ae9f7d374ef5b54b757c0823838077a239c4ac9c11afe24a3947df6db6df88f",
   "skills/production-scheduling-pro-3/.phoenix/originality.json": "aba66ef23e8d07f20358e2f390ad5f86ffc88627bcc488809948037971435817",
-  "skills/production-scheduling-pro-3/.phoenix/provenance.json": "b5aa67e224a8cdbedd5c0fa94ae5ae8ae006fbd7abf25883be9f8f64255db24a",
-  "skills/production-scheduling-pro-3/.phoenix/selftest_evidence.json": "5e6ffe21c22e44600adf6ec3d79c2002f90b3ffbe8c4012cf661bd3181531479",
+  "skills/production-scheduling-pro-3/.phoenix/provenance.json": "ff41af1e2f12ad9e20e9380eba2934cd5775a19a5076211b41223299bc46d608",
+  "skills/production-scheduling-pro-3/.phoenix/selftest_evidence.json": "9dc4cc0ee606cec262eac71ea5aeac31842cf9f9c0a7bdf933316d1a9a72a093",
   "skills/production-scheduling-pro-3/references/creation/p0.md": "ab8d0f90770428b79a6ca45a71d65a73a269961930941093891b4e16f777ebca",
   "skills/production-scheduling-pro-3/references/creation/p1.md": "5a80adaba1780e33d83fd6679d18baad54c491f18f1e0b86c90404b228d1c712",
   "skills/production-scheduling-pro-3/references/environment/p0.md": "b1d6dca9bfb62545f51516e6b6d492aa7a6049e8afc5a42c542f110d546790f2",
@@ -66,7 +66,7 @@
   "skills/production-scheduling-pro-3/references/production/p1.md": "f7dc97bf0ac9b1fb59ef91522d301d4b2f217ca48a92788c4136aa2809f8bd94",
   "skills/production-scheduling-pro-3/scripts/main.py": "81fe4f0965c66ece5b896e8ba11a6627ba90d72588f50abfee00b6e449e582e2"
  },
- "sealed_at": "2026-10-18T20:06:34",
+ "sealed_at": "2026-10-18T21:02:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

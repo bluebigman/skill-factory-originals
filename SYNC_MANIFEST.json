@@ -1,8 +1,8 @@
 {
  "schema": "delivery_sync/v1",
- "synced_at": "2026-10-18T20:42:51+08:00",
+ "synced_at": "2026-10-18T21:12:06+08:00",
  "source": "wb_forge_batch/*.zip",
- "packages": 826,
+ "packages": 847,
  "note": "本次同步的是**交付版**（含 DIVERSIFIED_V3 差异化引擎、知识分层 references、能力化 displayName、修正后的 agent-card skill id）。此前仓库中的版本为旧引擎，与此不同源。",
  "pipeline": "FACTORY Z00-Z10 · 50 单元 · 六维审计 50/50 合格",
  "license": "MIT",

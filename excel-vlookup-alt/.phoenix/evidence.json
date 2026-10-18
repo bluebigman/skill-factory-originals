@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "excel-vlookup-alt",
- "merkle_root": "881b6bbf31b4b34acf5c83482bbbd6b491e8c1b82912da1715dcdae7595b4fe4",
+ "merkle_root": "79eb29dc93d4ea73fd9d7d39337717a6b1969ee629695444186c9f596a1efb65",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/excel-vlookup-alt-1/run.py": "5f258de77dc27ab728b8148a9cbe7b0173d40142f34fecd1c02a54752d7d5fbc",
   "skills/excel-vlookup-alt-1/selftest.py": "e7c93bb8f88aa3e63e786e2ad24d550280e26b19d96a08abd0d4358043d11f84",
   "skills/excel-vlookup-alt-1/.phoenix/originality.json": "9da53a680110f6a5a5f77534695358315c8e4084d8881e7e8cb9a6a82b5c403b",
-  "skills/excel-vlookup-alt-1/.phoenix/provenance.json": "2a971628977d59ce6b52dbd3b7b4a981df80bc858d33444d4d4b3bf84e3866fe",
-  "skills/excel-vlookup-alt-1/.phoenix/selftest_evidence.json": "25029311dc1cd93ced7288e7db24e51e65cd1bc2c88faf7d6d0b4c43c003e5b3",
+  "skills/excel-vlookup-alt-1/.phoenix/provenance.json": "80f1724f3fee9a1f3ca6560b9a7fcd83bb802a97c7e64533acdf5595ac3600a4",
+  "skills/excel-vlookup-alt-1/.phoenix/selftest_evidence.json": "8158e1b6fa4ff7b363a9a2cb74df891ced12a7589a5fc665880bdfb28af09621",
   "skills/excel-vlookup-alt-1/references/creation/p0.md": "6b54ab0e892ab660b81d0d774b5989c5b27a9743f8cf773656b3473258c1f659",
   "skills/excel-vlookup-alt-1/references/creation/p1.md": "0089b3ab9b5daa6d01bd0e783a6853eabb05c48285270a4188b7c396e5e6142e",
   "skills/excel-vlookup-alt-1/references/environment/p0.md": "9e689d7ccc36f88a5c257ae509e5f326d3a714fbeee1dfe7e9212d0f4dc5be95",
@@ -37,8 +37,8 @@
   "skills/excel-vlookup-alt-2/run.py": "0d37d36a4d9930a35433f9ef96cc61bebfeeb200c02707e5baf758775d472c9d",
   "skills/excel-vlookup-alt-2/selftest.py": "ac0345b1de709829c9ff2bbd8862a2bb84d33ab72c9750e5d25e558b9fea29f5",
   "skills/excel-vlookup-alt-2/.phoenix/originality.json": "0f528bbd5f4fb80471e994d0c60f5da49ca280fcbacd0b2e332d4832a2cd3b70",
-  "skills/excel-vlookup-alt-2/.phoenix/provenance.json": "cfe2ab38e96fcd2191ba4971b91b0bccf6179bf919653ba38e53d239b6fab285",
-  "skills/excel-vlookup-alt-2/.phoenix/selftest_evidence.json": "9b7629853776b8912b20d05661e99e2f3a57a67c2221d9e7b7353b8c681dd80a",
+  "skills/excel-vlookup-alt-2/.phoenix/provenance.json": "4f298ac23f0d2aa528e41ed02cd1ac5f6134a85aa08d597f163412ba0d64c055",
+  "skills/excel-vlookup-alt-2/.phoenix/selftest_evidence.json": "7331c0d0382739fd11d0b7771332a66670d4e90d07e3eec2e7a73cb04107bab9",
   "skills/excel-vlookup-alt-2/references/creation/p0.md": "ba30dbdd0402a03f2315721919545d090344cd7dffcfbb251c456728715c1c26",
   "skills/excel-vlookup-alt-2/references/creation/p1.md": "73be7b58c2ccf850130d59356393c031b06a01489dd0cb3ecf89d25690ab6088",
   "skills/excel-vlookup-alt-2/references/environment/p0.md": "3768eb570b3005f154ade1cfa08dfa912bfdd64f3ea0993b917f758a69b924e4",
@@ -54,8 +54,8 @@
   "skills/excel-vlookup-alt-3/run.py": "3623c749da6de37f9d59f283831fa4232d78f6307274c9a58a5bae3f334cf018",
   "skills/excel-vlookup-alt-3/selftest.py": "ae993c119bb5491675295fadfe01b014d9c1844855969444e50c37fb13ec4922",
   "skills/excel-vlookup-alt-3/.phoenix/originality.json": "118a86181361f8bbe212d593ba56d3a4e2e4b37e29d3dda54b5004d78dfd3cb6",
-  "skills/excel-vlookup-alt-3/.phoenix/provenance.json": "21b586494f9ca6aa05773585459ef2b4e0614e91aba52049d664d8780ae7ae4b",
-  "skills/excel-vlookup-alt-3/.phoenix/selftest_evidence.json": "3549fba3cdddea3e9af5d0b4d75e6963501076f8aab8073c4a1e757206c01b8e",
+  "skills/excel-vlookup-alt-3/.phoenix/provenance.json": "d8d1ea062930c7173d2703400e930c870868de260bf5649cce9b7fffcc4be5da",
+  "skills/excel-vlookup-alt-3/.phoenix/selftest_evidence.json": "8f90aa1f38cf10ee96073e1f9a466c2c857db50e62ca970a963e3a3bfef55beb",
   "skills/excel-vlookup-alt-3/references/creation/p0.md": "f249f14afdfb99eaab811645627e3cbd869b97acddf0977538f0280dda745c46",
   "skills/excel-vlookup-alt-3/references/creation/p1.md": "06a29dea43d29e537ec87c0e99a2fc55bf375923cb36fd9d172cb33e86d15da3",
   "skills/excel-vlookup-alt-3/references/environment/p0.md": "c9133210e03e9f1bd756ab16cbdb1bf825a656daa7d6ea8be736143be3939333",
@@ -66,7 +66,7 @@
   "skills/excel-vlookup-alt-3/references/production/p1.md": "ccc3a96b9e7d808ec24e257a4451c729edc0d070cda7bceac14be9b84ae1f9bf",
   "skills/excel-vlookup-alt-3/scripts/main.py": "00374886b99e7746b85b8ce5919bccbf4c3f903168917c32a77048e3e7868625"
  },
- "sealed_at": "2026-10-18T19:58:43",
+ "sealed_at": "2026-10-18T20:58:29",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

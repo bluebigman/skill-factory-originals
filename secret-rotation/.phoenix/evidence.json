@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "secret-rotation",
- "merkle_root": "45733845fba181d03c724b4258d9512cfde298d199dbfb1d8a4feb743841f18a",
+ "merkle_root": "b1ae37de3535be125e8b0945349c96c89ff8b27b8df425b4a9fb860e85eacccd",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/secret-rotation-1/run.py": "0c28d705ff4f1a7d720f01147b6fe9421b55a01c3e376fd06ff162b860bc246d",
   "skills/secret-rotation-1/selftest.py": "444ca5c123ea28867c2ae023050caa33cd91caf9a1f0af3e1e6e9d5067613009",
   "skills/secret-rotation-1/.phoenix/originality.json": "89a3e2a1fb28900e2ce9bf993d9e63b5c9cc5bae80c2d55db9eee55654699ca1",
-  "skills/secret-rotation-1/.phoenix/provenance.json": "2704e2b3b2aef8b070b47570c0618290f2d0e565ce5be4325d2b52413d9b261e",
-  "skills/secret-rotation-1/.phoenix/selftest_evidence.json": "826eda736dcfc7ae9c6df4e2f844fb6fab2d7dd61705d24a6630b65d212776c2",
+  "skills/secret-rotation-1/.phoenix/provenance.json": "00dfdf9bc85a75b218e6b10eedf2dcbd2fc5aeb5bc4e3ae3899e3991381e318b",
+  "skills/secret-rotation-1/.phoenix/selftest_evidence.json": "2db81889644b38991344b614e6ec063db81ef940e2c40b5e9b726523fbe8e0b9",
   "skills/secret-rotation-1/references/creation/p0.md": "5c4efc463564dc575ddf2842b28eaa9bd56bc453b955cc5219d0190df8ebd186",
   "skills/secret-rotation-1/references/creation/p1.md": "38db1fe723034354678feb7f83194ae49472b9d66b7d543db0583373f90c8ab7",
   "skills/secret-rotation-1/references/environment/p0.md": "00268787eb2062b1272fcd39b2cb4dcf4a9de4868abf16a5eb1f63543dab4531",
@@ -37,8 +37,8 @@
   "skills/secret-rotation-2/run.py": "714bab7224930f6bccfb7a3d8f7a2206934131cd9eb79334f545df38eff53717",
   "skills/secret-rotation-2/selftest.py": "17e7f6ad4d6bf5712e4d2fe5b4d20866dcda6a96b4b47cc01a6f367f0720f7ed",
   "skills/secret-rotation-2/.phoenix/originality.json": "7ef0fb863a8aa27132b2bda7601bd784992e76e233968670301d5b2a1c5a9c52",
-  "skills/secret-rotation-2/.phoenix/provenance.json": "30fc722ed2a42e0560ba35987eb40f01834bc883961fc3504c75ad61dc3b6869",
-  "skills/secret-rotation-2/.phoenix/selftest_evidence.json": "926a30776c3115d96cc11ba16a0fcd42f7ecd1e85b7019092212c037af31060c",
+  "skills/secret-rotation-2/.phoenix/provenance.json": "807bb832047481b977effa4f00b9ff9cf43865c36a7f5fb925a2d979986b8cd0",
+  "skills/secret-rotation-2/.phoenix/selftest_evidence.json": "50da26612b208a98e4b9a2640768fee01b1e61b0277072c7b2327cb030d79cb8",
   "skills/secret-rotation-2/references/creation/p0.md": "80984c0227c10e9e2b9618dddd022e64dcb277789c06bd9ef9a5fb8136662d1b",
   "skills/secret-rotation-2/references/creation/p1.md": "a14a5c0e6d091c22680fabe3df25ad5e084e0ee834269bf59ee0341c244d0195",
   "skills/secret-rotation-2/references/environment/p0.md": "e39f9af5d11b0b14e0dc78e59b5c2f60943bde99a419e3d6a533affe8e5a39bf",
@@ -54,8 +54,8 @@
   "skills/secret-rotation-3/run.py": "49e34e3df810cf0145c7ed0a6296434876309932135b86c11345ce68e821b93e",
   "skills/secret-rotation-3/selftest.py": "ef597eba12fd243a13ed5ea6c509033a39021a65bcc541024abfc4940359143c",
   "skills/secret-rotation-3/.phoenix/originality.json": "a731dce2ad055282ef658c3d0853ff2180976add97cec66fa9b3daec93f55de6",
-  "skills/secret-rotation-3/.phoenix/provenance.json": "49074c079e6e9d7e6d97aef14eb17301844caba56276cbc3ca33acf4f0980cd5",
-  "skills/secret-rotation-3/.phoenix/selftest_evidence.json": "a592e0c95189eb0540ad1faa71158ea1d1adc858581d7124bbad38845ff1d1c4",
+  "skills/secret-rotation-3/.phoenix/provenance.json": "c1c56565aa0a1288d3959d7a93019f6c75f540519007eea6276d6d5ba8794942",
+  "skills/secret-rotation-3/.phoenix/selftest_evidence.json": "713c957b4f7c9842b3e262b3470de0ce78e2f11fdf9213071f12323cdf07a0d6",
   "skills/secret-rotation-3/references/creation/p0.md": "bf55b2eb4a7b336ab88c79102e28030746aa1436de6b91d3809d2afbf95248ae",
   "skills/secret-rotation-3/references/creation/p1.md": "e7b74dd98063cfbc4dc5e0bc821c605f64e4ff84b2e38830c6812d12608e5dfd",
   "skills/secret-rotation-3/references/environment/p0.md": "c01092a31222cae581d7db2b6b5f1193551a3d9d263419ed218db37c4ab54696",
@@ -66,7 +66,7 @@
   "skills/secret-rotation-3/references/production/p1.md": "bba2bb9b293c98e5776c55f1344d42d73abe2abb9980f8e3d68626133f69de50",
   "skills/secret-rotation-3/scripts/main.py": "30d74c2dc9ef7b8308982e08872eb2b62b62e20773cfe32387e8349731d578a6"
  },
- "sealed_at": "2026-10-18T20:08:35",
+ "sealed_at": "2026-10-18T21:03:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

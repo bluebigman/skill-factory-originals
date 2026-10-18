@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-qa-method",
- "merkle_root": "13a22287a257fadba56a0eadf6e075e3373f61e34970d4f58fbf2457f47b584c",
+ "merkle_root": "056be4c761a652b866198e789b8bc9350b2604140b6ed78380422401a726a194",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-qa-method-1/run.py": "836d5f3aaed75f19134fe0c9f2218f3e970eb49f38d1ca1447175ef05d8d0588",
   "skills/game-qa-method-1/selftest.py": "6b4d2bcd3f2b342a5b005fbafa6ea0e3c010010d543e3333451cba325b558df9",
   "skills/game-qa-method-1/.phoenix/originality.json": "fc6abfbffa83d2fab6512ac6ad0ff727f2d64132a2e12e9c577b15a319a36075",
-  "skills/game-qa-method-1/.phoenix/provenance.json": "7c48fd241578e092899cf06b4e3ad0bf0bbf65d1e1f33b26cfb45e2ddcb23e45",
-  "skills/game-qa-method-1/.phoenix/selftest_evidence.json": "4f607643507764a36edfd2b8275eed083e11403a7c339c559b6e7b715c2769e8",
+  "skills/game-qa-method-1/.phoenix/provenance.json": "bbcf7af13ceccd7d533888ee7e4685995ae6b9f2d9adc198ead39069524ae40b",
+  "skills/game-qa-method-1/.phoenix/selftest_evidence.json": "0a3bfa6ecd324f29cda88f0e3cf1552f57f50f4a475ac26a08522f4604f53994",
   "skills/game-qa-method-1/references/creation/p0.md": "4f2384cd91f78f1e27d5bbde60d8a1d58d9ea107ff3ec1067ef3719c5799a4e3",
   "skills/game-qa-method-1/references/creation/p1.md": "0c8065cf5df9d8648c3f06ec862af65aa4595da2e48ebdb139ec56bf94a07295",
   "skills/game-qa-method-1/references/environment/p0.md": "f1e693fd32ab3fdb6bc1b2792a4747f7646678d497a97cd422bc07ff71057b75",
@@ -37,8 +37,8 @@
   "skills/game-qa-method-2/run.py": "7690d8ba83cc1519d8aeaa3bf93b0062d5987cea7cf47509a60d9f92bfaf4897",
   "skills/game-qa-method-2/selftest.py": "d3649ced9d1a1c57f1d13415ea9e69c67e0b1cc22e77a7c2d154058e1ae27bae",
   "skills/game-qa-method-2/.phoenix/originality.json": "f0307f86e3486b4898e05f220269ca63b9791662ef3c72bf2676c6f058a94448",
-  "skills/game-qa-method-2/.phoenix/provenance.json": "74aa60a30f2dff7edee0f1fccc87775aeac2bb7c11234ec57c3eb0f95eb61fda",
-  "skills/game-qa-method-2/.phoenix/selftest_evidence.json": "a4ea12a973e397c859fe4f05b76523fa12bb43b5c60dd8751b6508b9bda59d07",
+  "skills/game-qa-method-2/.phoenix/provenance.json": "05985458b2ae4d8de5a9714aa43c3389b7c0602e272c1b651ff61cef60ad69c1",
+  "skills/game-qa-method-2/.phoenix/selftest_evidence.json": "997702351839fc6a4f9194142c7c13b80025c39544068295a15b16f016e183fb",
   "skills/game-qa-method-2/references/creation/p0.md": "999039d1f529a02d5d1e84cb1d60469702826d47ee505c9dc34199ce43737942",
   "skills/game-qa-method-2/references/creation/p1.md": "8c371b68b47ad12a2cf55e5cefef4f5f7baa38568456d4f5bc2c0e39d599e0e1",
   "skills/game-qa-method-2/references/environment/p0.md": "6398854c347699957902dcd0dce31c4b86954833c13d23d4dda660dd4f44b712",
@@ -54,8 +54,8 @@
   "skills/game-qa-method-3/run.py": "48763ab12c301ba0931a7eee4009269803c30c795af9bb76e5a6d2865fda720e",
   "skills/game-qa-method-3/selftest.py": "8a4b3877e01791827114360d9630857dc407bcba7f430d79551d0cc7a53ccca0",
   "skills/game-qa-method-3/.phoenix/originality.json": "034e761316bfd16dec3f62b95508cdbd86b83e1b6e30984a0a346130eff049aa",
-  "skills/game-qa-method-3/.phoenix/provenance.json": "f86e4dfc54e2bdd31b3ddeb5ef4b7c1f30a7f8105c10d08f6f7244dd8ab026b8",
-  "skills/game-qa-method-3/.phoenix/selftest_evidence.json": "9739d3c45e03fb2bbd6c556161066abfc4ce428fc91e8f7872fde6f1c18eb42e",
+  "skills/game-qa-method-3/.phoenix/provenance.json": "6f2bf3983ae8af6594bec1cac97a795e50f5553ecea4f2acc8be825507cfe2a5",
+  "skills/game-qa-method-3/.phoenix/selftest_evidence.json": "02bfdd68ca4d2bef71095735ca4db522bfc127a9615019be2055967eb4bc11fe",
   "skills/game-qa-method-3/references/creation/p0.md": "5ce01fb085dcb4a56554de4190029de8d4a131ec79b561541badba34bb5d3739",
   "skills/game-qa-method-3/references/creation/p1.md": "2c7d3171ade18e7aff8578a4f0d2c6490af0f7eca9d8f1245e927b02566e0eb7",
   "skills/game-qa-method-3/references/environment/p0.md": "a32cc035291247859093076db9cb4fb4cf7fce5a4d56eb0c71e226d79a8d578e",
@@ -66,7 +66,7 @@
   "skills/game-qa-method-3/references/production/p1.md": "44ee5a74b6195c27988186eddb38c8aecfed759a1aa8948f7e57fb6aae91d8aa",
   "skills/game-qa-method-3/scripts/main.py": "24437cc424933b0d2bb71bc7c32bbe5beed440961b4fa9b5a74b4d3813c7befd"
  },
- "sealed_at": "2026-10-18T20:00:00",
+ "sealed_at": "2026-10-18T20:59:09",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

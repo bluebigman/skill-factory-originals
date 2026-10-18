@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "shop-review-coach",
- "merkle_root": "8ff275a8357e13f81313d866f3997556db9fc30b251c7b0ff66e249ecd1221d8",
+ "merkle_root": "9a89824b610db9882d390b5411c755087658960cf065a62679ff3136e46ebadc",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/shop-review-coach-1/run.py": "4446fe59a3a25122dd6bc7e58ab378967f31aa1ede6c92551a96139daf0a7c50",
   "skills/shop-review-coach-1/selftest.py": "6dcd99679f5898230f616c2fd149f28654fc261cbb4ff1186ba379863804b77b",
   "skills/shop-review-coach-1/.phoenix/originality.json": "4d8d91e98a9316f0017b03cdf575f98bf62471b351bf60241983566a5845da53",
-  "skills/shop-review-coach-1/.phoenix/provenance.json": "7b72492737e46a7a531c1b2b1eac2914879cb28a48c95d1cf7f03a864275bac0",
-  "skills/shop-review-coach-1/.phoenix/selftest_evidence.json": "78e61e2c38a8b824c45612959c74f0af3a218d0d39997e77ff35a1ae077ef5df",
+  "skills/shop-review-coach-1/.phoenix/provenance.json": "94dcbb6bc5c552bf9ec4378d9d9823ee2260ccfaabfa0130f48dde26d67fbaf6",
+  "skills/shop-review-coach-1/.phoenix/selftest_evidence.json": "8f7782e98c90937ff5020d4d9f4b4736b8b25ad4df8a5c6244ae482cbd28f90c",
   "skills/shop-review-coach-1/references/creation/p0.md": "7088066f71a0b1c95fd07ea508719dcf7fa25df37d0f64c8aca9940660d7f5e8",
   "skills/shop-review-coach-1/references/creation/p1.md": "2fd102de608abd3d09068598d56b9e79fa6037cb0758a17255410df9d99130a4",
   "skills/shop-review-coach-1/references/environment/p0.md": "03bec271ce5dec1ff4c83b9e7c1682957aadab7505c4e7476bfcd7f79f460068",
@@ -37,8 +37,8 @@
   "skills/shop-review-coach-2/run.py": "9e9e55b8a209e490e513e0763dac15eed55e9fb15d6dcc3ef095b33584995908",
   "skills/shop-review-coach-2/selftest.py": "3958af12fc96009d67e0df4e1c90ecd8197a7cdb103adbb8f79d90f0dcffc494",
   "skills/shop-review-coach-2/.phoenix/originality.json": "ea30a17502b63b1e0cdc844a5e3b8dcb0339e8fa1630c1f8da03907d51d9ec25",
-  "skills/shop-review-coach-2/.phoenix/provenance.json": "fbd41e269654bf06e3a771a0be3917c6b550d6e7b6fc0e405a1ab4b6bdd7c5c2",
-  "skills/shop-review-coach-2/.phoenix/selftest_evidence.json": "eae75dc0ebcd953fcc63e4e9cde5f1856d9988e8b4a9c1cddb302df186a03728",
+  "skills/shop-review-coach-2/.phoenix/provenance.json": "95ebd149be616cb1b9c3448d3e27c3582fedf347f7e75f8059a3f94a14bcf247",
+  "skills/shop-review-coach-2/.phoenix/selftest_evidence.json": "c2cf48dee9a678bb12709f52d7c6b65da194f539569864236c4067079c410202",
   "skills/shop-review-coach-2/references/creation/p0.md": "086d20f42aeba5a06c9113bc055264d43a8ed668238efb97310aa4b395fbf5bf",
   "skills/shop-review-coach-2/references/creation/p1.md": "6b7d90e8eb4c4e78e26e3eb37d2d9b187caa868b25b04d92f3805b1fb57611a6",
   "skills/shop-review-coach-2/references/environment/p0.md": "a14ac7fd18012038967266e1e7f9937523009a7e5c7116b1e69b8e5b1e85c74a",
@@ -54,8 +54,8 @@
   "skills/shop-review-coach-3/run.py": "c6affa40e06e89f70dfe6826f94dff34d46bd72a51a502f49dec6c55d8d34405",
   "skills/shop-review-coach-3/selftest.py": "2b671da3b1807587661650239ba40076806f4df213d43121c987e3ad2ed22421",
   "skills/shop-review-coach-3/.phoenix/originality.json": "56bd014123f88b934a1e12af76cc5a150424637db478ebb0b1a731779cc61672",
-  "skills/shop-review-coach-3/.phoenix/provenance.json": "581bd94993d4c76105fa9a2de1cbeaf3e01b303a4ece2de5765c89bda1039ff3",
-  "skills/shop-review-coach-3/.phoenix/selftest_evidence.json": "315d1473744602799f045da320ecf186678e8e9dd0f05f1190470e4b00abc289",
+  "skills/shop-review-coach-3/.phoenix/provenance.json": "aade116224c3356d6a78c718fb00f4a001080d66e5d1229fd6c69a4db3cd40e9",
+  "skills/shop-review-coach-3/.phoenix/selftest_evidence.json": "e199874954777ee61bd0fc1c687df7cc533cde4c2da4e00c3bcb9453e1d0fe96",
   "skills/shop-review-coach-3/references/creation/p0.md": "e093c0b2fcaab91a68bea85fa1945815172fdcfae3030cdeccb86732d0caa4e2",
   "skills/shop-review-coach-3/references/creation/p1.md": "b13b50e01ba06dc9cb16300d846e2db2761e671da1bd68cb828244cc094202b1",
   "skills/shop-review-coach-3/references/environment/p0.md": "fa17deb634ad53c9a27986638b94a4fa53934f430de30df4524da7efd9d74b61",
@@ -66,7 +66,7 @@
   "skills/shop-review-coach-3/references/production/p1.md": "a8f1c22294e3a0f6964abebd732a6722f87fe5a918d78253a4d67ff84216dec3",
   "skills/shop-review-coach-3/scripts/main.py": "b563be8e90930fd10010511e938f9495ff6014a012b3249b95e0474b1e63e61b"
  },
- "sealed_at": "2026-10-18T20:09:32",
+ "sealed_at": "2026-10-18T21:03:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

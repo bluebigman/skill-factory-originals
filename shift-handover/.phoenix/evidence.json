@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "shift-handover",
- "merkle_root": "3124e502ff5c1a44605d3f1d40c0eb125d861c6058e577060b469b3be1a4b4a0",
+ "merkle_root": "2ac1e88c504f68f6b0fbe8e09b3d039f90f2411cd5ea64c2c1d8045034430bf8",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/shift-handover-1/run.py": "a549315a1bf2aeb6cb67d58218b20d413f0ad6b56841caced461a26ec2bd09d1",
   "skills/shift-handover-1/selftest.py": "2b393aff4159ccb5ea3b6433fbd79a9a13bf48fbf582576a1ca0732577481662",
   "skills/shift-handover-1/.phoenix/originality.json": "388f56e76d2a1ff2f287b7a4adb801b0eec47aaf8f5a72bc5b3a1add61ef4708",
-  "skills/shift-handover-1/.phoenix/provenance.json": "6afeb7fc6f6c97042858b15006c47707057341eb0144468363ca22a71e75da67",
-  "skills/shift-handover-1/.phoenix/selftest_evidence.json": "63912ad66f0f85712db17ed95192e83bead6fe2401be3258275de006de45f0fe",
+  "skills/shift-handover-1/.phoenix/provenance.json": "06478e0fb98cb8af68822b8cb77ad82c30ef6cd32b944cc19f3c363fe13143db",
+  "skills/shift-handover-1/.phoenix/selftest_evidence.json": "c27b195190aa5406939e1453e89696176eaf000262458097e9ff67e103343e6f",
   "skills/shift-handover-1/references/creation/p0.md": "83b8999619978951850dd4b75050e7d4c854d680fca3288977ee7ba2579f3686",
   "skills/shift-handover-1/references/creation/p1.md": "61f91b41a8f46ef499c155e141bc4004645f652c3a52f602c12d274201477be6",
   "skills/shift-handover-1/references/environment/p0.md": "a71f20b0adb602406fdc8ceb74e15cdec569b6d9d50949c2bb808ed8e111c747",
@@ -37,8 +37,8 @@
   "skills/shift-handover-2/run.py": "be51854f31851512fb5dd093f68ec1cc3f04c7cc9faa00f4e178bcf567c3d7c4",
   "skills/shift-handover-2/selftest.py": "7bf93344ab6ab3a120cddecaaaa28951d8f4605224d3e5a229177f44a7f3e37f",
   "skills/shift-handover-2/.phoenix/originality.json": "42af2a2d4350d152af7657f630d522efc448d59283687038e0e19d6239f57c8a",
-  "skills/shift-handover-2/.phoenix/provenance.json": "f1408d037d1a6cafe6a1f19929a2f78997ccd34ee493f323fcdefe919ce84a4b",
-  "skills/shift-handover-2/.phoenix/selftest_evidence.json": "d851968eacbf3984818751e306b5dca7aaa49bda90bc3309914fac6f1cc2884b",
+  "skills/shift-handover-2/.phoenix/provenance.json": "c5e3a7a82fb6d14c418cb73bcff0c9e15610017a835144a58fcaf11068b34d10",
+  "skills/shift-handover-2/.phoenix/selftest_evidence.json": "ea1285566c9ac754f4cfd15b11ec4e489bf95ecf7c28c5e279846e80ba2ccd4b",
   "skills/shift-handover-2/references/creation/p0.md": "d746f8274434d033c45b68761ba50b5c42ef300a4854196e7244fb876e01bdc8",
   "skills/shift-handover-2/references/creation/p1.md": "f701c854e8fb649ff92a75bdbea73ea699ac3c508b75cff21f0254b696d74264",
   "skills/shift-handover-2/references/environment/p0.md": "2f8ee6671052814865941649015c8e755f7d276567df5023f9c0f35a7a08c4a2",
@@ -54,8 +54,8 @@
   "skills/shift-handover-3/run.py": "12cd2d49542fca8623c057ba3ba8aaeb35c5638ad803260fda65501846357d32",
   "skills/shift-handover-3/selftest.py": "1745bacdd4499724ae7548833864ef95a2cabf47f19529fae9ca647e27c80817",
   "skills/shift-handover-3/.phoenix/originality.json": "60f93e9507eb2f736f67bdad7c351c915051fc131d43dc88445662907f45af4e",
-  "skills/shift-handover-3/.phoenix/provenance.json": "8c74e97d34784cca932f2d23c30b016a3ddf0e78c68aec84f0a8a6428d37795c",
-  "skills/shift-handover-3/.phoenix/selftest_evidence.json": "1a1242fb80884f9c7158aec849acafeb93fac742f4c4e4a5a9263663e88555c1",
+  "skills/shift-handover-3/.phoenix/provenance.json": "a633609a0fa35f1f6e568649fd137399cb7046125fd797d453bfabb62d80f324",
+  "skills/shift-handover-3/.phoenix/selftest_evidence.json": "a6066cbd47ad80bace8e789a4cc34eb880e9a6443bca2a4003c6cf6bb467a555",
   "skills/shift-handover-3/references/creation/p0.md": "3168ffcf5a1c2b8bd0a0701e87b265ae37c55f3aec295af0ff7b47a6a0ea871c",
   "skills/shift-handover-3/references/creation/p1.md": "8721ddb0bc42b02efbc30182f952b6347ed0bef3c4303e2bd8c787e4111029ed",
   "skills/shift-handover-3/references/environment/p0.md": "51c1a7e0a7e72680da6cf414f7bb6958a2c5e0782f5affdf95c1cf0dbf7fd6e8",
@@ -66,7 +66,7 @@
   "skills/shift-handover-3/references/production/p1.md": "3ca8aa071a56f55b657f3c3509e4241028234a9d866cb918fc5829b80bb34f70",
   "skills/shift-handover-3/scripts/main.py": "dac8eb945e7b9dac4863618612109c3c2cc99e81c55c420844f01e065c5df746"
  },
- "sealed_at": "2026-10-18T20:09:30",
+ "sealed_at": "2026-10-18T21:03:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

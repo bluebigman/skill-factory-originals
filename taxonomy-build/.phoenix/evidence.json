@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "taxonomy-build",
- "merkle_root": "4096b36b052f3c86346e7750e4e47f940cd028085cab99f179d064abbccf3b8d",
+ "merkle_root": "2837f97f6b19163f3831c286e60f5e4d18f739cdf0822f72bc67e35c527d61f2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/taxonomy-build-1/run.py": "2935790ddfb6308a0cc55a65829cfeff50ef1879292e964e71ff07aeab5dcb33",
   "skills/taxonomy-build-1/selftest.py": "a342f5be8c12ae91228a5eec42c704500acd8b3bfc8ce97d4b8b0b5d6944976a",
   "skills/taxonomy-build-1/.phoenix/originality.json": "6a663938da1ce5215a8efeed9a63c264a086780dfdde82cadab1fbca0cfa471c",
-  "skills/taxonomy-build-1/.phoenix/provenance.json": "9096f8745da6d66f3a58b85efa017ee000a29e5da4906e034ed613e6671813d1",
-  "skills/taxonomy-build-1/.phoenix/selftest_evidence.json": "960a4b8f2488f1cd6acf3535c19e3f47101f8e6e32463827a0ce8edad4586ae1",
+  "skills/taxonomy-build-1/.phoenix/provenance.json": "4792152ed5f75c56143a8ff8af799b3cdcb58825a60a9cbfe16696a29700f1da",
+  "skills/taxonomy-build-1/.phoenix/selftest_evidence.json": "1b86299d031a5cc6184bcea4e5088804716649b79acb4c6ede5df91073aef7f5",
   "skills/taxonomy-build-1/references/creation/p0.md": "724b6b36a61af9855cb37b4b88011b6700cd134fe686ccc3503efe36354c8091",
   "skills/taxonomy-build-1/references/creation/p1.md": "17f101dd701c338b3c529b0e11ea3f2207f93d952ea8e611e25cf399c59b60d5",
   "skills/taxonomy-build-1/references/environment/p0.md": "f61919af08b0c4e5a5d65cb0b8a97d30515a14241b8f5989dfeb24a56dd68808",
@@ -37,8 +37,8 @@
   "skills/taxonomy-build-2/run.py": "fb88b6869516eb6d0c8f86727da76c3ddfeca12fa25baaaa26fee4082cb4f693",
   "skills/taxonomy-build-2/selftest.py": "79926333b6cf027b266fe6a013abf1e8db990d613415bb9841a006ec50fcd000",
   "skills/taxonomy-build-2/.phoenix/originality.json": "2d4114709021c74f6f57f3eadd7290cfbec7fbbee9a3c8d88c58c5b231e2813c",
-  "skills/taxonomy-build-2/.phoenix/provenance.json": "fe8cb91b9eca9d07ebbef2de04747c2644ab905431927088fe0b19de69e65337",
-  "skills/taxonomy-build-2/.phoenix/selftest_evidence.json": "f268cbe94f5f4d4891b68fd511f22bf120dbbacecda15bbf7539a91b7c8532eb",
+  "skills/taxonomy-build-2/.phoenix/provenance.json": "5df2581374bde9c5cade231e093617467c83afcf6a84fdd217df38ad575b28e4",
+  "skills/taxonomy-build-2/.phoenix/selftest_evidence.json": "adc623fcd6dc5e4668a9a8fad342ada36d98ebbd5c3fb7677277ad64a7d3da22",
   "skills/taxonomy-build-2/references/creation/p0.md": "5d49cec2606aaed147a756a0ab83deb9d20c4624b00875224372d4060ed803db",
   "skills/taxonomy-build-2/references/creation/p1.md": "212485782b6b335ed185e7d61abf0f964f0accfb488db8994c1c397cd37aa7d8",
   "skills/taxonomy-build-2/references/environment/p0.md": "a9dc905b138c21efd5591b5d87664cafcddb9f02ad854457d6032824a4abf058",
@@ -54,8 +54,8 @@
   "skills/taxonomy-build-3/run.py": "3d86c32354d0fde4684b24126d8a0d7871255f122a854772263901d5772ed29e",
   "skills/taxonomy-build-3/selftest.py": "85f18fa0bd4f62fe1426319722873dbc9a1106588d5175f3d7bf790531ca8c65",
   "skills/taxonomy-build-3/.phoenix/originality.json": "1a16d1e577ae85f649a81b0b5206de6ce4bec9db8db2fd25552e3b4bf2a3a8fa",
-  "skills/taxonomy-build-3/.phoenix/provenance.json": "f54a1491fe7e1469b77c6b44b974d0855f5c19fe30bc5c01857b2265d44c2f7f",
-  "skills/taxonomy-build-3/.phoenix/selftest_evidence.json": "ea34f9eaafd2f3d75bbeb54d7310aa6d9ba947daa3502840a9297bb6c448c05e",
+  "skills/taxonomy-build-3/.phoenix/provenance.json": "f48d2376fe1bd67f9c8ad17c059aeedb481782c1912e927db6e403f1631471c0",
+  "skills/taxonomy-build-3/.phoenix/selftest_evidence.json": "7af7e3e60fab558992094f54eb871424054ec9697ac7f9416f28a680f5096351",
   "skills/taxonomy-build-3/references/creation/p0.md": "aad0770eaa9d4eed6fb512eb3530dd19e13d4e048799196dd0cfab004cc07e19",
   "skills/taxonomy-build-3/references/creation/p1.md": "c24df9f5f94e0d2484c0430ec16fb11bc5210adb9af146b01bd92f8746a4238b",
   "skills/taxonomy-build-3/references/environment/p0.md": "e456629f8cdd86527d5ef76a33c3574c549c2255d28cab3d3937f8bb6075ec6b",
@@ -66,7 +66,7 @@
   "skills/taxonomy-build-3/references/production/p1.md": "7104a782bd6277ed16bd801eaceb5d3f38d857f0a4d89a6919be80bcde25b602",
   "skills/taxonomy-build-3/scripts/main.py": "ef4ea8ce3a4a5f97bb96b816ebbff255030d0144fbb655e114f1dacb9f234f24"
  },
- "sealed_at": "2026-10-18T20:11:02",
+ "sealed_at": "2026-10-18T21:04:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

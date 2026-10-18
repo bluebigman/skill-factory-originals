@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "observability-inject-pro",
- "merkle_root": "fa1c70285fb5bc82f39447587a749e23b2095906898cb5847fc302fa3de49ca2",
+ "merkle_root": "72453ed2e89ae693dd073a45f5352587225fe76a7eff9bfdc04619b3146226a9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/observability-inject-pro-1/run.py": "50be9f75bea6df2d4cc68ea925d8d7d2e61b5a99b516b6303f5967c2ac45f5be",
   "skills/observability-inject-pro-1/selftest.py": "5ee9fb3689d0222efb1a948fc01c5dfdcef29f205e4889cf34be6aa3297ea6db",
   "skills/observability-inject-pro-1/.phoenix/originality.json": "683b14babfcbe0cf102ae11dafcfdab57a6b237acd6303bd2270830d007c5ad3",
-  "skills/observability-inject-pro-1/.phoenix/provenance.json": "a8ec023d120cf31a50d91f06f4316a99030ed02277217bb1a60aa6519d7c3be7",
-  "skills/observability-inject-pro-1/.phoenix/selftest_evidence.json": "041dbc6d8b8f9d78f4e7c7a7849eb5204b34feace9ddee19750c7bd5aefff221",
+  "skills/observability-inject-pro-1/.phoenix/provenance.json": "053aea7ada729d48f012b68c11267fd91a89cd7c174c2dac91614975815bc26a",
+  "skills/observability-inject-pro-1/.phoenix/selftest_evidence.json": "538a394c2f3c6ec01dfe63b61d3959e803ecb23f1070596f245888754c9b3c33",
   "skills/observability-inject-pro-1/references/creation/p0.md": "bfb5675d8bdb282f5bc8c69fa81c16fd48ac55e9cb0fd63a2b05cb2d40b9604c",
   "skills/observability-inject-pro-1/references/creation/p1.md": "5aa6ac5f41c80293d9a1fedd9b191b5077b011fa85f3a9e44c8a17d506c8ea30",
   "skills/observability-inject-pro-1/references/environment/p0.md": "a557141da1f5afc82b167396fadaf7f462ad5928a4780177ecdad3c6bb1e2a5e",
@@ -37,8 +37,8 @@
   "skills/observability-inject-pro-2/run.py": "49c6a7278546cba7e3e6cd63eb49d2513cfe8679eb1034b314d9bdfb8a9ffd81",
   "skills/observability-inject-pro-2/selftest.py": "5427294e32d6a07a5097e436ad52316bf24b866c4cc979a66afa480940d8fc68",
   "skills/observability-inject-pro-2/.phoenix/originality.json": "b5c2a0c20dd02c6c5a6cde9a1c4f4c8fc70fc09e75d78ee8ed59afb5dd60b6fc",
-  "skills/observability-inject-pro-2/.phoenix/provenance.json": "129fa24bf07c328b26421c5b150ce3ae9141f6e537576c8e010a57a4be17f480",
-  "skills/observability-inject-pro-2/.phoenix/selftest_evidence.json": "11bf3c5ce7be0eba18d166952143c8af477d181965b8a9663dd5010b6a1f3972",
+  "skills/observability-inject-pro-2/.phoenix/provenance.json": "d6670acaaf165a910d4f2157f9175592e22f6c236d93fa1af40796577658b39a",
+  "skills/observability-inject-pro-2/.phoenix/selftest_evidence.json": "e27a33f1f02ed551a3bc03ce53ee379c5730d6377c25cdb6d3a79616ad67673d",
   "skills/observability-inject-pro-2/references/creation/p0.md": "96187c86fab03d0c09031ec3b3b66cd3df42efae32b2ba16fe14438e3c89b531",
   "skills/observability-inject-pro-2/references/creation/p1.md": "276a8c011c4284b751704c143e2dff511ec405be87a480fffe827d7b1dc406ad",
   "skills/observability-inject-pro-2/references/environment/p0.md": "50c5adfb4afdca6e444bfd9a2a52e3c6687b20f8a2af87868094b93e361f869e",
@@ -54,8 +54,8 @@
   "skills/observability-inject-pro-3/run.py": "88cfa79a7eac4d373b37cce643fcb6a259a740b831493d17f7acd4423b738957",
   "skills/observability-inject-pro-3/selftest.py": "0fa1d86652500369bc554553f67a59a60959726c6af30b01ccf5ac5de60e4f0c",
   "skills/observability-inject-pro-3/.phoenix/originality.json": "74e24af1ebbf4cbbbdb301ad81396fe121722a736e127a517327c0cb9f99f36e",
-  "skills/observability-inject-pro-3/.phoenix/provenance.json": "1b3dc2cb4d1882a992c4ddd0a022e2372843226c9f16fe4f83dd960ebaa3e009",
-  "skills/observability-inject-pro-3/.phoenix/selftest_evidence.json": "3175156fcd0edfd4634ab92a51283a886057e06e726a0b4c472e83fdf0aefe6d",
+  "skills/observability-inject-pro-3/.phoenix/provenance.json": "c86e09e17f0807173e52586d085c839115e41d94c4c877d3937695953f5a48de",
+  "skills/observability-inject-pro-3/.phoenix/selftest_evidence.json": "221d4879871d19f0d637fbf617b818074c91ff4ed4cc4f55b55ba058968d3a21",
   "skills/observability-inject-pro-3/references/creation/p0.md": "9f4e64f026771825f5ad497ea366152d969ef21086b6a603af4a7213bce31467",
   "skills/observability-inject-pro-3/references/creation/p1.md": "69a2fc3df6c283c4c7da81c2d50fdb3d25bcb18788df6b43aa7f74709010cee7",
   "skills/observability-inject-pro-3/references/environment/p0.md": "c601eae8b7d6a21aada88c943cd1bdbe98970ccdab6a2a4dace0a5b0efc9a7f1",
@@ -66,7 +66,7 @@
   "skills/observability-inject-pro-3/references/production/p1.md": "2d71db9ccf24ca073e075f5286e9b4d02ed4acaa0798ef5a0baa9532e9dc11c8",
   "skills/observability-inject-pro-3/scripts/main.py": "2fb16592e6fe8c76bb91efd2b22c17fff68f2549ac4f06a4db224f48548e3f64"
  },
- "sealed_at": "2026-10-18T20:04:41",
+ "sealed_at": "2026-10-18T21:01:29",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:08:02",
+ "at": "2026-10-18T21:03:11",
  "skill": "retry-backoff-design-1",
  "slug": "retry-backoff-design",
  "passed": true,

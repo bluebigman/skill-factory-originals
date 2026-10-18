@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "network-segmentation",
- "merkle_root": "813331ebc7c90d3e66bd41b353b5881ebc278799d926d151f045c7c74a7b4e3e",
+ "merkle_root": "e9fecb80fcaeef98723dabfaeaf89ce4921f64ac4e9d7b95849a3064c9f052d1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/network-segmentation-1/run.py": "83dc1d1d89403ee57138fd0d5ae7086dc029ec745c043fe1ad406d50d0180a4e",
   "skills/network-segmentation-1/selftest.py": "581aeab580f14192bc57bb4f55efd9b6113632363762775d26b05c43baddbfd5",
   "skills/network-segmentation-1/.phoenix/originality.json": "df0803b19c0d3c955ca6c1f4d43001719994506ef7127c3edb57170e4586e2ec",
-  "skills/network-segmentation-1/.phoenix/provenance.json": "45b79d53178ddb820301453a9b9c596c68a75702da08ae953e9b5eaf01fae1f4",
-  "skills/network-segmentation-1/.phoenix/selftest_evidence.json": "6b2a7dbe9278f4c6e9e7f16cf634c6144b2dbc9459dd0f4567cc9b92668a8d41",
+  "skills/network-segmentation-1/.phoenix/provenance.json": "c3d88aa53acd10ef104b449e424272e6523916c4c1fff9876a17ae7b0ccf82f8",
+  "skills/network-segmentation-1/.phoenix/selftest_evidence.json": "0f473c69b203edc0a866b9f7e298e48d36fa78a5039ce06074036854baa55b87",
   "skills/network-segmentation-1/references/creation/p0.md": "7ff686b24865685bcafbf613a947c5855d54dd33b0f299da7d70739fc28ab64a",
   "skills/network-segmentation-1/references/creation/p1.md": "804bd4daa1430c8f4690dfb8093cedca37de33b6ac7b7888bf6c63de032f08bd",
   "skills/network-segmentation-1/references/environment/p0.md": "476d4124e9c7539f0fd104d41392be429c31795bfaf7467efce1a696bec7e84e",
@@ -37,8 +37,8 @@
   "skills/network-segmentation-2/run.py": "f19a7693c5004b4ecd8b8a4f65a87e80bf02d8a4a284f5f9349388d03ec37208",
   "skills/network-segmentation-2/selftest.py": "a0179cccc9503a33e6149fbba3f703f25a2c8d74050035208756e71e121e246f",
   "skills/network-segmentation-2/.phoenix/originality.json": "959f02f536e0ab778c72e3536e2259e87d59fdee89b2bc2c8baba5814d2b59be",
-  "skills/network-segmentation-2/.phoenix/provenance.json": "b7fda575a50d4e045259b0bbfc28d71d542ee1e719487a88dff8cbcd6552864d",
-  "skills/network-segmentation-2/.phoenix/selftest_evidence.json": "115730a14587fbc4c712418f53307b94450dc1d90889e07ac482f144b1302e1b",
+  "skills/network-segmentation-2/.phoenix/provenance.json": "1fa3bab438ec2cc1da2f95d35ed410cb66da1a8e90240ca50dc329a0ee9e7be9",
+  "skills/network-segmentation-2/.phoenix/selftest_evidence.json": "17b985229dc3b9cba2cc95208aaffc421883968fe726642e147db270be35dd0c",
   "skills/network-segmentation-2/references/creation/p0.md": "01559fac435609c376e660546ffff7d66ba0ea41e3fb4d22b26612639a57d6d0",
   "skills/network-segmentation-2/references/creation/p1.md": "d3dc4a532457d6f6ff9a770caed509642398f4405d110fbe122398b8c0e2008e",
   "skills/network-segmentation-2/references/environment/p0.md": "06cca9c9b34ede68d7d480292aec9669af8f10b9c524cfb74c8797e44ad6cbf1",
@@ -54,8 +54,8 @@
   "skills/network-segmentation-3/run.py": "4ca3239f7bc486bb95799bbabd258cddfefb1c3fff94071458988f82023370e9",
   "skills/network-segmentation-3/selftest.py": "2009957803f27157eced5883c68f9121b8d1cf1608e35631b76c5e6508fad4fc",
   "skills/network-segmentation-3/.phoenix/originality.json": "af35d011ca7cdb4f63778a5773fd76aeb8db01d1edd617618ef2b58354f0f6bb",
-  "skills/network-segmentation-3/.phoenix/provenance.json": "78ff63110695c7fc963d1726cc96b925a559a7fbfd6748b13427376759e7990c",
-  "skills/network-segmentation-3/.phoenix/selftest_evidence.json": "fa47131ae90fac7beaf7da7fef95c46f49c36de05e90c0a8bcaf99a7e5efab37",
+  "skills/network-segmentation-3/.phoenix/provenance.json": "c084c706c49d18c1b6b9bfe404a32e23207e0ffb925f694b4cdca2a3206e5c6d",
+  "skills/network-segmentation-3/.phoenix/selftest_evidence.json": "408337cfb9544c15400e5a952eb2f31c618267d058a1a2794067b06c7e18ed4d",
   "skills/network-segmentation-3/references/creation/p0.md": "6fcce4adc009494b6225b8e642f89d640ce289446d42baf4775efd3a78fe6a84",
   "skills/network-segmentation-3/references/creation/p1.md": "78cac3eb44191be3a7fb334937ab21e447962beffaba16bb3ba004a837318a09",
   "skills/network-segmentation-3/references/environment/p0.md": "2c1c1cf27032edd1705ca25d8fe017dbd1c1472c8e782b37e58c19f9b321f14f",
@@ -66,7 +66,7 @@
   "skills/network-segmentation-3/references/production/p1.md": "cc76bc94985bef5637ed6435bb8666431064ea4f9195d4463ea8b4f5f42f66f4",
   "skills/network-segmentation-3/scripts/main.py": "8d2940bc2c1b2f2a073ab7c72d7e43bc0dd421052a6d604b9a81827d0b907a0e"
  },
- "sealed_at": "2026-10-18T20:04:20",
+ "sealed_at": "2026-10-18T21:01:18",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

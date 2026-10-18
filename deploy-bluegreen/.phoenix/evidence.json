@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "deploy-bluegreen",
- "merkle_root": "aaaca3c5fb0a39395b6eff06cef5a139b37ee1c5dc0dd3bbba98dfc64b61ce06",
+ "merkle_root": "e44c8cec73b3a41ea709010384b8730bb02f0555e07500e9a5afa11f834b1272",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/deploy-bluegreen-1/run.py": "70795fc48865ea405584184d92d674a87053d019ea2ecc3db850cc4e844a6a72",
   "skills/deploy-bluegreen-1/selftest.py": "700e42fad83ab03051885f1929f12a7e0c5f31511c95c06b8663e6bb2c79c043",
   "skills/deploy-bluegreen-1/.phoenix/originality.json": "4e720f70ac5b99d3d05dc8ce5a529484c82f70118fb828f1d6c433655b17942d",
-  "skills/deploy-bluegreen-1/.phoenix/provenance.json": "6040e41b2d48f6d808e8f84770fd7111ce1284f979f7eec8200cc8e525592888",
-  "skills/deploy-bluegreen-1/.phoenix/selftest_evidence.json": "67fd7d26f60f9752e70bb91152715e7ad983bcb7fab362919588098a3d8edb2c",
+  "skills/deploy-bluegreen-1/.phoenix/provenance.json": "b8d57e29e4cd7d41af718908af66c35a1a782bce955511c6102484328ab8e2c8",
+  "skills/deploy-bluegreen-1/.phoenix/selftest_evidence.json": "d27661db690a9737d620a09f4129d5762a157838e12b40db998676a6c633c146",
   "skills/deploy-bluegreen-1/references/creation/p0.md": "f93055666e18950a7d7f3663b13c10f7f4fcdff024c16f598961f15d78d97cd3",
   "skills/deploy-bluegreen-1/references/creation/p1.md": "a9ba201cccba68c91d98821d593b50f813c20cb85cda9d3763dd4e2bee670913",
   "skills/deploy-bluegreen-1/references/environment/p0.md": "4d95e8d1df336df052a98e0db91ef1ffd50a4150d3f72336a159cc9af88e6fa5",
@@ -37,8 +37,8 @@
   "skills/deploy-bluegreen-2/run.py": "7005fcce57d679e6dc1f307942558bc2d9564c3a9ed682895f711654791f3066",
   "skills/deploy-bluegreen-2/selftest.py": "6e197125ae0c7bdafea912fa306c390f91a5824540ba88016b9301fcdc96669f",
   "skills/deploy-bluegreen-2/.phoenix/originality.json": "117687aa2d84945869dfdba78421aea37c83e36bb63dd5423319e98630d82ed3",
-  "skills/deploy-bluegreen-2/.phoenix/provenance.json": "140bdea9cd82f02b6c21de9bd13e6a0ab8380dda74fa67b9d7adc3481023b1d3",
-  "skills/deploy-bluegreen-2/.phoenix/selftest_evidence.json": "5736d99599df14e781daaf2be9e5b8d9564589b1d8d8d74b2a71b9434f0e497b",
+  "skills/deploy-bluegreen-2/.phoenix/provenance.json": "3fa0c0095cfd05fcc8a04e2710369f98acdfd21b73b01766e2528f6e712d971f",
+  "skills/deploy-bluegreen-2/.phoenix/selftest_evidence.json": "89f3fe111002fed09ed97f6effe2866872b63601486c9d659a7703ca83a8dc97",
   "skills/deploy-bluegreen-2/references/creation/p0.md": "67cf6ea2728299b147c4468956ff1020654caff7d2ff45ccfb20ae9e2e494482",
   "skills/deploy-bluegreen-2/references/creation/p1.md": "090400e216feddade177f6486faaddf2dd5a26e35f3c68f880c5f363da6d1897",
   "skills/deploy-bluegreen-2/references/environment/p0.md": "5d6ee8f501df6ca7fb8dc3cdd457e566f5f0c8bc83f56f18bbb24e84ec05f05a",
@@ -54,8 +54,8 @@
   "skills/deploy-bluegreen-3/run.py": "c3c4bbb746d8abf3b4e6a44d71e7392ac2ec462f06279adff030e9551549d493",
   "skills/deploy-bluegreen-3/selftest.py": "e2d651994013c19d76845ec72eeb33f41c5d34d35c17c64d04d79d68a3fc8a42",
   "skills/deploy-bluegreen-3/.phoenix/originality.json": "bab98768df78fb619725df0a71d57f003017efe64910152ddadd2f631945bb0d",
-  "skills/deploy-bluegreen-3/.phoenix/provenance.json": "ccce0d60eb19ba1f3c270046ae0b55bd11e72242ef7cd168476ac7c5ca0d3e7f",
-  "skills/deploy-bluegreen-3/.phoenix/selftest_evidence.json": "9628182417d03bcc9908a5f31a0fb8375be75f53f8d1ef2e45137b8b59dc84e2",
+  "skills/deploy-bluegreen-3/.phoenix/provenance.json": "e117841ef798973eb4f2b42612ac240cf91fa526639a6abf5e25e52245933339",
+  "skills/deploy-bluegreen-3/.phoenix/selftest_evidence.json": "2ff85ea848c6aa4e2ba100d6f9a5db7c0f4ce48b34e369bab845bfe769ffd83e",
   "skills/deploy-bluegreen-3/references/creation/p0.md": "44fa50bf7ac2d81da4dcdb5ae1c7077c912d130250ffb4ce617ca8b35ed0fcd3",
   "skills/deploy-bluegreen-3/references/creation/p1.md": "744e616d72e35caf0917fe474d86a0bf3a15789936913280a4a8c334ad6a7ec3",
   "skills/deploy-bluegreen-3/references/environment/p0.md": "bbf138c4de0b669113717823f7103ddca3c061c74667a0928facc565f6853d32",
@@ -66,7 +66,7 @@
   "skills/deploy-bluegreen-3/references/production/p1.md": "6b097ef22164e96df8691fefcbaaeb434fd13a83df31e93d6390caec1ea305c6",
   "skills/deploy-bluegreen-3/scripts/main.py": "a42da414c5e35e1ad54b60674daf47c2489a460917a4ca2827841d74e79eecf4"
  },
- "sealed_at": "2026-10-18T19:56:20",
+ "sealed_at": "2026-10-18T20:57:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

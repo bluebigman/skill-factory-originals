@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "config-drift-check",
- "merkle_root": "06517d4a0fb0764c539da410af17af129ffdfe77ebca0521db415cfe606cf4c1",
+ "merkle_root": "8b8ba09e36cdee0e6584e8c641b9207e37665adfa68546f44797b0211fad3620",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/config-drift-check-1/run.py": "25b106850fbb4af313264936849af2a4ac04ac969a33b71b01fb655384a3717c",
   "skills/config-drift-check-1/selftest.py": "2b44c6945ac39a74cafd1a25afecc3cdcd51922254ea86f14c552335dd5be495",
   "skills/config-drift-check-1/.phoenix/originality.json": "7eaf8b91802a20ae8906670b8989d1a82decbeaffd97cfdf68a24b6da7540922",
-  "skills/config-drift-check-1/.phoenix/provenance.json": "d27b4f5678751ba43d4ea9e0cbea5c3ffa27479511236ce65914df4748fa8ddd",
-  "skills/config-drift-check-1/.phoenix/selftest_evidence.json": "e0a9846ec3bc517b76ffc6fdfaa9e0407aa2b4924f84a6e582996ec2802207d5",
+  "skills/config-drift-check-1/.phoenix/provenance.json": "2489f3167ac75ca8150d39a5b4320331866aa304206976cfe2017805cc1e1440",
+  "skills/config-drift-check-1/.phoenix/selftest_evidence.json": "0d4a4651998d9231e4671971eee17380cf2c38a17654c0b825771213cc208828",
   "skills/config-drift-check-1/references/creation/p0.md": "b5c271e50476809f778388223b5067a6a5b8341124d3ca0e0c31985562a841b2",
   "skills/config-drift-check-1/references/creation/p1.md": "cce627f7d846406738f0b176ce05c778386d3afe8fdf095c0898eed8d65b7a43",
   "skills/config-drift-check-1/references/environment/p0.md": "42b61e6c7683af0a805101ed64809ba011301bf2d487cd0b1d583096bc7fb89a",
@@ -37,8 +37,8 @@
   "skills/config-drift-check-2/run.py": "3adf372a23cd041b75fd24b9d4ae1272b6cff748fb4c3af24a6b51156b04da7a",
   "skills/config-drift-check-2/selftest.py": "1d0c41948c62e26ba0d804e0d7d72ba021e750015c67c19135a133a43a1b0e2e",
   "skills/config-drift-check-2/.phoenix/originality.json": "6c0757c2f98915694dd7282ea4196885936af8566197c0e5453baedc49180be7",
-  "skills/config-drift-check-2/.phoenix/provenance.json": "c632907da91544391dfabe4b1cbd5f1ffb13d33c7b8d09b521a4d354d3d09869",
-  "skills/config-drift-check-2/.phoenix/selftest_evidence.json": "d5227a2ebabdf62563d97a125113ec1a8e066d7bd4748e2e1425735075bc86e0",
+  "skills/config-drift-check-2/.phoenix/provenance.json": "cc70c3e82602101ea503e30484ee839879d4d9ed3e85c132630ae38a6785d909",
+  "skills/config-drift-check-2/.phoenix/selftest_evidence.json": "3f51c1e46e9b884e82cad1d032fe97ffe513c6e7220041ec20d7c9866d024e36",
   "skills/config-drift-check-2/references/creation/p0.md": "d6fe343d5c9c5e8bac40463a3a2d30638a59c2c616187876a1dc3e2a3ccf2992",
   "skills/config-drift-check-2/references/creation/p1.md": "4b97cf461fd2b7a086834a7df82043f3094c003365a4b3d23dd787196eb8fd31",
   "skills/config-drift-check-2/references/environment/p0.md": "5b4d5d20ef1f1605cc57acdd11bc94880e8b76aaaa5def28b45925daa7f45acb",
@@ -54,8 +54,8 @@
   "skills/config-drift-check-3/run.py": "9fa497089b8ee3fbae62445337fbc1b75006999d9825953e4891e0ba2df00faf",
   "skills/config-drift-check-3/selftest.py": "7f4cbb5192357a814559e017b5dc439960026c0ab91d42a2515cef1364ce154b",
   "skills/config-drift-check-3/.phoenix/originality.json": "ae2aa80422c3ff99dc707e8be7cdb65ebd7e1c9df87865844608b8a0ef4754f1",
-  "skills/config-drift-check-3/.phoenix/provenance.json": "837e34701049a1fbc426b98ea9d00f322276b3765b4a6cba70c49846bab68048",
-  "skills/config-drift-check-3/.phoenix/selftest_evidence.json": "d1e8e96a6be19973fbd4ec18d1dd191a9cac165225d324cd577cd1282b0654b0",
+  "skills/config-drift-check-3/.phoenix/provenance.json": "40e90d676fda0d5c8790efffda7d6207ce86c03cd7ad078b0fef8200cf244bcb",
+  "skills/config-drift-check-3/.phoenix/selftest_evidence.json": "8b99b459f91d997beb6f59959208d0da2a6bb6cc885cf8c1fdcfa9703d5b1564",
   "skills/config-drift-check-3/references/creation/p0.md": "a7691795e1270902ca2833e413be33cfc6bc6fbfe8ff619ebde6af862d7527cc",
   "skills/config-drift-check-3/references/creation/p1.md": "85a41447dc9946f619cdad5bf72fe0c6c843d9203dd4d6da8de189463737b12c",
   "skills/config-drift-check-3/references/environment/p0.md": "3d80dad6f8b085fb6e76197fe7e17538308ca124f25f1a1f527c70f1466639b5",
@@ -66,7 +66,7 @@
   "skills/config-drift-check-3/references/production/p1.md": "d23e581a3430f0f2927a6cfbb6845106d28b309a7acfc4dba64849ffd28d7fb9",
   "skills/config-drift-check-3/scripts/main.py": "3633e61291832e00c1b9a28b4da69e6673e5e02f88a1fd7cfe0d98d6a5279e59"
  },
- "sealed_at": "2026-10-18T19:54:02",
+ "sealed_at": "2026-10-18T20:55:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

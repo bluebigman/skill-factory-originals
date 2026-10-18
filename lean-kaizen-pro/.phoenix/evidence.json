@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "lean-kaizen-pro",
- "merkle_root": "5e641657388ed7a17b24b16a2f7376b3c377ffc77585398e9fc75aa62832440f",
+ "merkle_root": "43c9f3fc3018821c37e52794db710924ea7e688c3751edefa3daeb0806a74028",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/lean-kaizen-pro-1/run.py": "71133544d9373a044666c1be1593bedcb5bf3f4614e2b81e38655b17749dfde8",
   "skills/lean-kaizen-pro-1/selftest.py": "2351a82880a082e92a0bb3fc554e228e50a7ac3e637fb62e16de8646199551cd",
   "skills/lean-kaizen-pro-1/.phoenix/originality.json": "0cba88dc5e80dd877319bc947e6022b93a161f3842211963430bd84690e228f1",
-  "skills/lean-kaizen-pro-1/.phoenix/provenance.json": "ff4d23ce227fb31ceaec40d55a214240e3af07adff9f14d21f1eb2d6786fda4f",
-  "skills/lean-kaizen-pro-1/.phoenix/selftest_evidence.json": "510c80bcbcfb75386bda91dfd9657ba9d4f1c0a087eb144d061bbc7e4f29cafe",
+  "skills/lean-kaizen-pro-1/.phoenix/provenance.json": "a1a96d1acecf798a45687042e138b0e860f82aae7ce67f6a35617d34ab8d8d92",
+  "skills/lean-kaizen-pro-1/.phoenix/selftest_evidence.json": "d6ab562d0beecc19b8feffa682d5fba700e46ffbd9dc2144034becfe58ec3c50",
   "skills/lean-kaizen-pro-1/references/creation/p0.md": "3f84870aa18f4219e0517b9ee82c8e252c0747ce7feee32d6d2aef906f5642ae",
   "skills/lean-kaizen-pro-1/references/creation/p1.md": "9960399f2ffdb2a11329023349fd76f27f20ad4df406bdcb757c338d2cb0d7b9",
   "skills/lean-kaizen-pro-1/references/environment/p0.md": "178597e843d33ca92a8510df74a875fe925f81c7e0077ed9145ec568b283ed4d",
@@ -37,8 +37,8 @@
   "skills/lean-kaizen-pro-2/run.py": "89c05d9f1ca5f8e672221170c73c0e75dd78da31c1eca87992b873e5f74de7e1",
   "skills/lean-kaizen-pro-2/selftest.py": "9df3cdb6893fd5b801662cae67e395c27701f9953db9974c46305842a51fd7d1",
   "skills/lean-kaizen-pro-2/.phoenix/originality.json": "c6a49cce69c50f5693ce620ba5f097a43102287911c9f3255e56943904d14e7e",
-  "skills/lean-kaizen-pro-2/.phoenix/provenance.json": "a1d977697c0b378a909dfa957b54a5a65ba67149b52e8e7d3f9ca80f2b8d39bd",
-  "skills/lean-kaizen-pro-2/.phoenix/selftest_evidence.json": "261642d6861ae05844411f73e91ad19787363fabd353e1434842396634941294",
+  "skills/lean-kaizen-pro-2/.phoenix/provenance.json": "20d9cff6d2b7a5348c28690b8052022c2b4036cab2018ac3572336cb4af79a89",
+  "skills/lean-kaizen-pro-2/.phoenix/selftest_evidence.json": "c20bade6f70c4e14e274c20d9f947347fadcf041f5ae29a237efb699e3c4f7e8",
   "skills/lean-kaizen-pro-2/references/creation/p0.md": "e6f3c7beaaf605cbc60a380bc08ac8fd3d36815811a5f643d5a51ae2f2af5998",
   "skills/lean-kaizen-pro-2/references/creation/p1.md": "8ec3f8671f4188c3c0723ae6ce394fed3ca2363f8c62c8bdb0328e999c319ec3",
   "skills/lean-kaizen-pro-2/references/environment/p0.md": "cbe4497cdbb1245d2a6a960aaae62bd55f518296c74234fe3ee36fc0365c4fa9",
@@ -54,8 +54,8 @@
   "skills/lean-kaizen-pro-3/run.py": "8d608d6303275e24a6da30e65b5c3666b4da744159262c165c43e4519ab7339a",
   "skills/lean-kaizen-pro-3/selftest.py": "dea91a7187b4104622e36556dd5995c97f014129af473e1897a4e8eaf19ad4e3",
   "skills/lean-kaizen-pro-3/.phoenix/originality.json": "6d086d622461035880932143b693b2a21b69ed5dc011cb1c08eeb85ea852f706",
-  "skills/lean-kaizen-pro-3/.phoenix/provenance.json": "61d05019f4d9e5dc5f249b038ec9e7a2e45353397a4a51d5a0791a909d6a8c33",
-  "skills/lean-kaizen-pro-3/.phoenix/selftest_evidence.json": "b99e27a0ef6ce00448bcc47e1b375614ff05ac3e609f9536a70bbe628646f3d8",
+  "skills/lean-kaizen-pro-3/.phoenix/provenance.json": "e37bdc7bd39ec9eca63af34a966e91f1e865e63045de3dead585522be749203d",
+  "skills/lean-kaizen-pro-3/.phoenix/selftest_evidence.json": "dbc076c9091aa5c109b4d43183bf212d068ac51ad81df88cae5535310547650a",
   "skills/lean-kaizen-pro-3/references/creation/p0.md": "14be5969f62a7b1a1eb24031a9afcb002c92a2b663a3186ec00993e026c09247",
   "skills/lean-kaizen-pro-3/references/creation/p1.md": "51ff6aea26f14d17bd8571ca279edfea7396751fd112103ab1137166fef0d2cf",
   "skills/lean-kaizen-pro-3/references/environment/p0.md": "dd297992ca80d76300f202626d9e8ef088ce319542f1c0e2cb07be8802cabfd2",
@@ -66,7 +66,7 @@
   "skills/lean-kaizen-pro-3/references/production/p1.md": "1410df4f9852fd5c5d1edf12a47626f593afe258e12af6f5ba26c4c84e561832",
   "skills/lean-kaizen-pro-3/scripts/main.py": "c0e375e1c8008a45ff7c96fc1181b2ba89f0c7be334ff93955383ce14d970e98"
  },
- "sealed_at": "2026-10-18T20:02:26",
+ "sealed_at": "2026-10-18T21:00:19",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

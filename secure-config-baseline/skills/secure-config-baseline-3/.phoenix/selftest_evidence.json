@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:08:40",
+ "at": "2026-10-18T21:03:30",
  "skill": "secure-config-baseline-3",
  "slug": "secure-config-baseline",
  "passed": true,

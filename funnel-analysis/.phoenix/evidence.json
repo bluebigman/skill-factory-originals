@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "funnel-analysis",
- "merkle_root": "eff0751bfca032bbb457bc2d4741c308b4238cdb2f8c99e6442283c6424e8a51",
+ "merkle_root": "618e6555161eddc81a0e387c9863647fdef7cbf33eff47e10abd3d3ad502a86a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/funnel-analysis-1/run.py": "60d10ed5ad0c103d75fa4e65aaa4ab55172741ad0c21546c37fcb19cd4e372c3",
   "skills/funnel-analysis-1/selftest.py": "076edf2518a5ef8da47bf45d96f07bd0a1e70ddc0fb2269f3591f254bdd19d68",
   "skills/funnel-analysis-1/.phoenix/originality.json": "4b643b16158dfe853ce7962e4c54e42bb537fb19e32c18a26120cb547fde4300",
-  "skills/funnel-analysis-1/.phoenix/provenance.json": "2367f37d289f0c237d70fcc1bd75268139431c2ac04a8254d4a81ae0972e319e",
-  "skills/funnel-analysis-1/.phoenix/selftest_evidence.json": "dd8926b76f6ec78140d9e7ba96dc424538c58a4e14acdc11fc8106da075cb07f",
+  "skills/funnel-analysis-1/.phoenix/provenance.json": "01ad8caa65fc8ad3cb4d6a51a9a86e9a696666fa91cd5a4d9df98788743dcbea",
+  "skills/funnel-analysis-1/.phoenix/selftest_evidence.json": "7300dc7f65fa2739cc6be5fc2620dfeccba92c1f8122465d2ef94a8f6383e837",
   "skills/funnel-analysis-1/references/creation/p0.md": "2701aa811a581d226f0d484bd325bddb726b7209cde6c50bfeba4e84d3cf8115",
   "skills/funnel-analysis-1/references/creation/p1.md": "dc2f2b7b11e0b3a00c8b79eb6b404a1623452fb5668424e7454a445b1d807bf3",
   "skills/funnel-analysis-1/references/environment/p0.md": "68f4cf77f6976954e976a21aba698deede943061175fac323071fe1702a274a0",
@@ -37,8 +37,8 @@
   "skills/funnel-analysis-2/run.py": "2191de9a4cc59f68419a3eafb10662b81bb718baa6a4bc12e8a082b5effc38bb",
   "skills/funnel-analysis-2/selftest.py": "c7148f541d56e619cd1e9291199df7384f4ca07c88c5c8a86a5e9f6dd06d56ea",
   "skills/funnel-analysis-2/.phoenix/originality.json": "2dc19fa137bbae47993e5d6dbef6d320b2b84e55f5741bd9ba4da5c1cc7fc0d6",
-  "skills/funnel-analysis-2/.phoenix/provenance.json": "1856d71eb6e0655af1f68d4caffead0092abb085b77e9f6d2b63091b697a8d85",
-  "skills/funnel-analysis-2/.phoenix/selftest_evidence.json": "97aac384768fe727936026b15be7b2ace5f420968d4fb848ab23ae439a1610fe",
+  "skills/funnel-analysis-2/.phoenix/provenance.json": "f4f052d536a1ac867fc734288c5e26cba84a9974d5340ad8a85debb35089e6d1",
+  "skills/funnel-analysis-2/.phoenix/selftest_evidence.json": "9382b2aaeba5018797a79c1711c1d04c61d2a9fb20bfe8a5d0c998451746228b",
   "skills/funnel-analysis-2/references/creation/p0.md": "32f767780e47fff8a3bb6dc3f473d29946f4b7c1054c0c088db204573ae7b2e0",
   "skills/funnel-analysis-2/references/creation/p1.md": "d7cd6e9613b8073855affd0894f437244822adae01d9d410a3f0e40cde8b226f",
   "skills/funnel-analysis-2/references/environment/p0.md": "3d66b99455b69ba930a2e6cabdbeb1342408ae37553ebaf8abacb1e33708f254",
@@ -54,8 +54,8 @@
   "skills/funnel-analysis-3/run.py": "cb89f42f9623670b87639bb94e02b7a00ef674daccf605dc99d0bac469b395e8",
   "skills/funnel-analysis-3/selftest.py": "f49d5b09d734e591f21b2bf79b25ae2bb05bc50efd0559c97f006879868ae462",
   "skills/funnel-analysis-3/.phoenix/originality.json": "a896f29ace3b710f4f2bb17cf30a3f6c4b4010b3ea2b345781a17f7baa6a81f6",
-  "skills/funnel-analysis-3/.phoenix/provenance.json": "56314900d04f5f92869bfe325b73a0443524cfecc19c836f10ddfdc1d07f49ca",
-  "skills/funnel-analysis-3/.phoenix/selftest_evidence.json": "d95e2af3068a681bde53f82f336592c191d8eed3396d1404c82c33567dfbb7de",
+  "skills/funnel-analysis-3/.phoenix/provenance.json": "410b00bd7d88cf39462dee7df7f30d7218a89f3189526377ff59d3c0a560909c",
+  "skills/funnel-analysis-3/.phoenix/selftest_evidence.json": "3ccc7f64d9f126e9d4f0b8089b6c47f6c87f448c1d68a151b311451a2451df35",
   "skills/funnel-analysis-3/references/creation/p0.md": "7fd68e9a4772cbb6f30738e473972cc95485b0463dfdc07a875040f48b581b14",
   "skills/funnel-analysis-3/references/creation/p1.md": "8fe052f561c14498486004b991924e3c56304050c775be35a72809fb56d7b828",
   "skills/funnel-analysis-3/references/environment/p0.md": "754f68ef2b8decab92e180605f80fdd4d98d73f2e1cbe734397528a744f50d78",
@@ -66,7 +66,7 @@
   "skills/funnel-analysis-3/references/production/p1.md": "e1109621c439c689951bb5d934437ab30391dc7c6214c4cf64130e2193b817fa",
   "skills/funnel-analysis-3/scripts/main.py": "e9fe94a4170c6efa12b9daed017342c1e0c5e8fd645930b0db85981f59ea2aa1"
  },
- "sealed_at": "2026-10-18T19:59:37",
+ "sealed_at": "2026-10-18T20:58:59",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

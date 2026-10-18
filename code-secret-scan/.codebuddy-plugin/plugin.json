@@ -1,0 +1,74 @@
+{
+ "name": "code-secret-scan",
+ "version": "1.0.0",
+ "plugin": "code-secret-scan",
+ "description": "code-secret-scan — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for code-secret-scan tasks.",
+ "author": {
+  "name": "user_2fd890c9",
+  "email": ""
+ },
+ "agents": [
+  "./agents/code-secret-scan.md"
+ ],
+ "agentName": "code-secret-scan",
+ "displayName": {
+  "zh": "代码密钥扫描 全仓扫描",
+  "en": "code-secret-scan"
+ },
+ "profession": {
+  "zh": "代码密钥扫描 助手",
+  "en": "code-secret-scan"
+ },
+ "displayDescription": {
+  "zh": "代码密钥扫描 助手：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+  "en": "code-secret-scan: 3 built-in capabilities."
+ },
+ "avatar": "avatars/expert.png",
+ "categoryId": "11-SecurityCompliance",
+ "tags": [
+  {
+   "en": "Productivity",
+   "zh": "效率工具"
+  },
+  {
+   "zh": "代码密钥扫描",
+   "en": "code-secret-scan"
+  },
+  {
+   "en": "SecurityCompliance",
+   "zh": "SecurityCompliance"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "zh": "遇到代码密钥扫描怎么办",
+   "en": "How to handle"
+  },
+  {
+   "zh": "帮我规划代码密钥扫描",
+   "en": "Help me plan"
+  },
+  {
+   "zh": "帮我检查代码密钥扫描",
+   "en": "Review for me"
+  }
+ ],
+ "defaultInitPrompt": {
+  "zh": "遇到代码密钥扫描怎么办",
+  "en": "How to handle"
+ },
+ "skills": [
+  "./skills/code-secret-scan-1",
+  "./skills/code-secret-scan-2",
+  "./skills/code-secret-scan-3"
+ ],
+ "expertType": "agent",
+ "displayname_source": {
+  "at": "2026-10-18T20:53:37",
+  "from": "代码密钥扫描专家",
+  "to": "代码密钥扫描 全仓扫描",
+  "basis": "主名 + 包内真实 rules.when 前 2 项（可检索、可命中）",
+  "why": "单段「XX专家」放弃能力检索通道；线上实测 1 段名上架率显著更低",
+  "principle": "只改 displayName.zh；不动 name/agentName/MD 文件名"
+ }
+}

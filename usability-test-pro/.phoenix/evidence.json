@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "usability-test-pro",
- "merkle_root": "0949289f9559797689a1e38479ebb722aeb3db1f7577823d813a6ab7c1e4b858",
+ "merkle_root": "d06a95f0daa86b1fb4f211d974646919770d52c1036eb6a2c992512e0342264b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/usability-test-pro-1/run.py": "957fa953afecbfa70b90d95860375096552a7b716edc9faaac40262c4f0ba3b6",
   "skills/usability-test-pro-1/selftest.py": "a1f7b2ff55dc7180f0060eecc8b51aaba987651ec13573b32800b0dcf23d76d2",
   "skills/usability-test-pro-1/.phoenix/originality.json": "9cf54bdb3679d9be64b99d457d3983f2146b737ba03b8efa78a1269ca3eb232d",
-  "skills/usability-test-pro-1/.phoenix/provenance.json": "521a34a51c5df1f9996dd170faa182e3c2c89b7834ad0d105ddcaeaa7a90ad56",
-  "skills/usability-test-pro-1/.phoenix/selftest_evidence.json": "25bd7ddec3fc915fa4529428d72745735ac8e7587a9115b69946796fefadb0d1",
+  "skills/usability-test-pro-1/.phoenix/provenance.json": "4e79d5ab3293dddafe6513c66a59c7d5de45ba5541d46a39a5a46b3d25292fbf",
+  "skills/usability-test-pro-1/.phoenix/selftest_evidence.json": "ed92a4ccffe0dc72da36d727447898b1af9cd779c4cf0e836f1086337f97b37c",
   "skills/usability-test-pro-1/references/creation/p0.md": "10314b32960ba6042667e59dee751ece30cf73387af5b7d97eab05c5e1527557",
   "skills/usability-test-pro-1/references/creation/p1.md": "1f6bf38ee1aa8e94195dc65534ef0eb6c8d656149e34497372464bd5b762bd74",
   "skills/usability-test-pro-1/references/environment/p0.md": "4c3309608c33d14803ebe8359be6a2cc14387b076a99d41170c33d4ffe1ac7eb",
@@ -37,8 +37,8 @@
   "skills/usability-test-pro-2/run.py": "779d657b0e440af5cc0df28034674b349122afc217f8a80f538e47efda9e1d69",
   "skills/usability-test-pro-2/selftest.py": "1bafdbd7c5fcd8f506485adedc7e36b05f03cee2cc28355379ca4221c6cccf03",
   "skills/usability-test-pro-2/.phoenix/originality.json": "258eed367b9bd3cb35c8ed00ba65ba3e52730e4f5bd8d73d6a606f485d9008cb",
-  "skills/usability-test-pro-2/.phoenix/provenance.json": "e0c9107023f3a9df157f16b07eb8e031c8ff00f67dfb871ae3989dc6880b8451",
-  "skills/usability-test-pro-2/.phoenix/selftest_evidence.json": "8e18eb703a0104002a3e551d603ad0030591d918a3175067c24dfceca633aede",
+  "skills/usability-test-pro-2/.phoenix/provenance.json": "d0cc8c96bc96da0e2891ba2a59ef0794b497ebf287ed5180fd4f7c29413de0fa",
+  "skills/usability-test-pro-2/.phoenix/selftest_evidence.json": "52550c7aea0fca971886232c85c76a53be2e0e85c918c3c3dedbcecfac9859d3",
   "skills/usability-test-pro-2/references/creation/p0.md": "6aa79df5771b87f7a8a052876b5a2c0cfa160b790756421d9a4eb04652367bc5",
   "skills/usability-test-pro-2/references/creation/p1.md": "d1f45ed3fe3c6637e8254552043cb24178433ed3b322a65f0801a1d13a2e972b",
   "skills/usability-test-pro-2/references/environment/p0.md": "42e5c43a33263ae6db510cda339de5a743dec28a8c61523c574545b1055290a6",
@@ -54,8 +54,8 @@
   "skills/usability-test-pro-3/run.py": "87ec40c995bffc901820a7a835a978708eb0a3f1cfdfc5bf2be2d3418ad09a7d",
   "skills/usability-test-pro-3/selftest.py": "25b5d354f7b2394d70c9c92d9820c01f70f3f95587d9d5caa3702bd41a6971e2",
   "skills/usability-test-pro-3/.phoenix/originality.json": "c6d653d6d461ce23dfdc98679f57ca83e5df7343c233e44e39a54f7351d66953",
-  "skills/usability-test-pro-3/.phoenix/provenance.json": "7937c903c350bfa886ca3348e878587d1a4f8bd1762e0969f750f0d124d749a8",
-  "skills/usability-test-pro-3/.phoenix/selftest_evidence.json": "1ed205da57aacbd15f73d59ee4e29e82337a66f6387997a343df7be13d066b45",
+  "skills/usability-test-pro-3/.phoenix/provenance.json": "3ec2073666ada8815e6700b4c5f8cbf6d32fff09e6ae0bdfaf56bab4bdf53012",
+  "skills/usability-test-pro-3/.phoenix/selftest_evidence.json": "3e3835eec465dcede9e891eb72e85dd34074eaa406cb15c4f4e49b95cfccf3ec",
   "skills/usability-test-pro-3/references/creation/p0.md": "1ccf29d1b8dd1e55df51f33357300dea3fbcc3518a6fed909ad620f4bf986058",
   "skills/usability-test-pro-3/references/creation/p1.md": "d3f81b6ffa74a20ecc72608edd3e82311fcb047a75f15f9b94b263403f67c9cd",
   "skills/usability-test-pro-3/references/environment/p0.md": "11901b8b7016df085f1bf890871a254d684b4a7e289c360a8fe480463edc5803",
@@ -66,7 +66,7 @@
   "skills/usability-test-pro-3/references/production/p1.md": "394216103b621f844eca08993b78e72d29989e03f704a0cfce06b01975b9e376",
   "skills/usability-test-pro-3/scripts/main.py": "fe8a7d7b1398a7dc1f116d9bef4f2306dc3808c18cb26e1c19fe45a3c26d23c2"
  },
- "sealed_at": "2026-10-18T20:12:25",
+ "sealed_at": "2026-10-18T21:05:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

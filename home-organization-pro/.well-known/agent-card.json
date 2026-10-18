@@ -47,7 +47,7 @@
     "遇到贬值焦虑"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:45",
+    "at": "2026-10-18T20:53:45",
     "from": "declutter-rules",
     "to": "declutter-rules",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -71,7 +71,7 @@
     "遇到季节收纳"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:45",
+    "at": "2026-10-18T20:53:45",
     "from": "maintain-system",
     "to": "maintain-system",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -95,7 +95,7 @@
     "遇到重复购买"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:45",
+    "at": "2026-10-18T20:53:45",
     "from": "zone-planning",
     "to": "zone-planning",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

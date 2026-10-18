@@ -40,7 +40,7 @@
     "遇到广告诱导"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:52",
+    "at": "2026-10-18T20:53:48",
     "from": "content-curation",
     "to": "content-curation",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -64,7 +64,7 @@
     "遇到年龄差异"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:52",
+    "at": "2026-10-18T20:53:48",
     "from": "rule-design",
     "to": "rule-design",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -88,7 +88,7 @@
     "遇到反复回退"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:52",
+    "at": "2026-10-18T20:53:48",
     "from": "withdraw-plan",
     "to": "withdraw-plan",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

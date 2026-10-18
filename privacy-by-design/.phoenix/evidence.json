@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "privacy-by-design",
- "merkle_root": "eb8da142383ae371d82b8efc7b6debc05e3e31a2067a59b5fa7fc367957d4ca3",
+ "merkle_root": "5d2e5f9ec4043b89dad3dc443a94d99239c53807df13e3395e59c10d4b9e4709",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/privacy-by-design-1/run.py": "cc167d9dc6dd60c6036820f0d865214c770fa370402e915db815755951d8f15e",
   "skills/privacy-by-design-1/selftest.py": "b2b59709bbd8cb6e445c40c1298f95fe842f7ff784182bf66a6ff246c3880ffe",
   "skills/privacy-by-design-1/.phoenix/originality.json": "6de9f5f73d5a6abc6f055de3a23c41b78afafee6617a998f51631f2d4a6ee67e",
-  "skills/privacy-by-design-1/.phoenix/provenance.json": "b588d4469968093041ea1fb6070691a88a0e46286d4fc6ff3909731f7aaa3766",
-  "skills/privacy-by-design-1/.phoenix/selftest_evidence.json": "72725439dceb80060bb17bc764df58f500c1cedb786024cef349fd9c8bfb2bb9",
+  "skills/privacy-by-design-1/.phoenix/provenance.json": "5560db7b04541279d8bbb279146f2c88eb3bad017f10d283ee45977a2cce47a2",
+  "skills/privacy-by-design-1/.phoenix/selftest_evidence.json": "106c402aaa09c04dfc21dffc488e19be3d4b6c75de0d17673aecdbbc5cb18484",
   "skills/privacy-by-design-1/references/creation/p0.md": "fbc9021d3334dd58e09991598446ae9621cbe1965848c927110bc950e72dbbec",
   "skills/privacy-by-design-1/references/creation/p1.md": "3d603b94088b5992800bd196e04fdb731f817b0656da77d666a2be333797fff7",
   "skills/privacy-by-design-1/references/environment/p0.md": "0a6890be0716cc2892f82e8a0cbc9fbc50cc51c929d40acbd1e3e40cb5c5741f",
@@ -37,8 +37,8 @@
   "skills/privacy-by-design-2/run.py": "27d3b201e8449a07b6b879fa88fd5f83199f7abcd364f7bbbff13ada4b92df6f",
   "skills/privacy-by-design-2/selftest.py": "a3f02dcee11958dd7dbd144fc230ac8dff9ed8a2b72cfd87f7cc5f3516144a96",
   "skills/privacy-by-design-2/.phoenix/originality.json": "ff39cc9b558c6be6f4772ef92683edf0ee012c5bb691bc6be1778fc3b94af2d8",
-  "skills/privacy-by-design-2/.phoenix/provenance.json": "a1ffd6093cc109086a6c74e759bb350287b34ec1adb7b03ef40328503ed6f631",
-  "skills/privacy-by-design-2/.phoenix/selftest_evidence.json": "000d5cc1faaa28c083d8bd021064a1a0d50dcd22580e59cf03fa23b557b939fb",
+  "skills/privacy-by-design-2/.phoenix/provenance.json": "de391733328903ea4fecabed87468bdbcd33877038baeedabe8236f7cb17130f",
+  "skills/privacy-by-design-2/.phoenix/selftest_evidence.json": "bf1edba7efc9062ff010de7f66759ab84a201b5ac9c3ac8dde0e3719aa54b465",
   "skills/privacy-by-design-2/references/creation/p0.md": "330b19ec23ef30ba2c6aac3e68846850f61c248c08539afc50a909e00fe9430d",
   "skills/privacy-by-design-2/references/creation/p1.md": "0759c4d27fa9c754b70e95baa4bbdf6ad2f77652816f45070a5d312fc7ec8b77",
   "skills/privacy-by-design-2/references/environment/p0.md": "17b4a993f7026487674666b92e8699934f5b09ccf990ce35aacef6fd7cda0c8b",
@@ -54,8 +54,8 @@
   "skills/privacy-by-design-3/run.py": "579a822f060fac2b6350631631aa3251b909388e4efe17c906d64d24a048227e",
   "skills/privacy-by-design-3/selftest.py": "4c29120a19126894f5cfadc462ecb22daa468b08309015c305c2010aa089ec64",
   "skills/privacy-by-design-3/.phoenix/originality.json": "b692bc470825504ccf9e111bb2238f0b9473e168d1f0be08f0503dbd0f456720",
-  "skills/privacy-by-design-3/.phoenix/provenance.json": "ccdaa83b881ab311071b09c25c2ce88b1a04022d730e4539d54264c42fce77a1",
-  "skills/privacy-by-design-3/.phoenix/selftest_evidence.json": "16ee30291c0b8170258bce3d9ede087c944274c902e7d7902304eee52e5134b4",
+  "skills/privacy-by-design-3/.phoenix/provenance.json": "e96373f50b39245f70269e5a0b7cc5e9cc5d62f93030fa4a2e167c3a7757e918",
+  "skills/privacy-by-design-3/.phoenix/selftest_evidence.json": "2d4d47634374523bb98a6b0eb48612689cff81146bb9684c64d8a8e1d7ae8c46",
   "skills/privacy-by-design-3/references/creation/p0.md": "022feae65229f3fe5b72076f5dcd4c1d179f28d73ed1ff770e4fb7442dd78e2e",
   "skills/privacy-by-design-3/references/creation/p1.md": "9ffe9961b0104207d1299d0bace2c0193658bf48c988d5d8a8d9280f73ade6ed",
   "skills/privacy-by-design-3/references/environment/p0.md": "af1647db0f187c53879336229bcfc28701067e9b3b18e8d02890fabb4bccd08e",
@@ -66,7 +66,7 @@
   "skills/privacy-by-design-3/references/production/p1.md": "306c63c485de84f5d7ddd678b3a9cd427c3ebc6149dc2540d243cb732f10ca5b",
   "skills/privacy-by-design-3/scripts/main.py": "e741987f32dc3f4629c6fb05d4741fa992f63cd320eabbd8b872bba86e254b2b"
  },
- "sealed_at": "2026-10-18T20:06:18",
+ "sealed_at": "2026-10-18T21:02:19",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

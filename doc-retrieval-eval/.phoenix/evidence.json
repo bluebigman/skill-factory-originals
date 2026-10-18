@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-retrieval-eval",
- "merkle_root": "d73bac65dd8be73213c3bf4eedb9f57e20de3021b6319e445411e1d2b7746595",
+ "merkle_root": "478a854267f8b70cf9d522249860483222af021a706fc5510d9966c87887edc2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-retrieval-eval-1/run.py": "6b7fbcb128c2970ffe8f0a3134ab13b092c0a0010ab724ae3fac3cc3bc590638",
   "skills/doc-retrieval-eval-1/selftest.py": "7b3caa87473ec198b47f80e66a242891e1c8810b78a8e64f0833fd67bfbfbfa9",
   "skills/doc-retrieval-eval-1/.phoenix/originality.json": "8c74677df7aad46614f9bfc32acf340b5f21cf2efad138e08b3588e423cdc435",
-  "skills/doc-retrieval-eval-1/.phoenix/provenance.json": "b3e836bda59a3cc916d2b7c96fc02e2c5c1aad88e19e4d28b70b72de8d010d5b",
-  "skills/doc-retrieval-eval-1/.phoenix/selftest_evidence.json": "fa721c5b47b7e5280978587c2496c5dd16efcf223f59681774652f9c1a341747",
+  "skills/doc-retrieval-eval-1/.phoenix/provenance.json": "60d31bee891e640ddf2d9c8cd972f90c3581128dafdb390a623321a6a0f7cae6",
+  "skills/doc-retrieval-eval-1/.phoenix/selftest_evidence.json": "ae55027e8a0c710c9b6807bd5a7007715123f098624165f504a71b3d823d6d7a",
   "skills/doc-retrieval-eval-1/references/creation/p0.md": "99c3ae5c3a13dd9973590342d02a6b5594767965fe227ba4496f34d0cb429560",
   "skills/doc-retrieval-eval-1/references/creation/p1.md": "f61ccb4d5194a52a00729f2b321ffbf4dc2df646703062ce2d1d439b7d127642",
   "skills/doc-retrieval-eval-1/references/environment/p0.md": "a0d7d0129ed42ef2e20fff070bed104fd00e614f59c8ed83d6763bae24e75bc9",
@@ -37,8 +37,8 @@
   "skills/doc-retrieval-eval-2/run.py": "4335dd3262ab1bb1b15352dee93f696eedd8bdba864324ab1aa57dea289a22ad",
   "skills/doc-retrieval-eval-2/selftest.py": "be091383357d0cce4536b2462537bd1a6b16113f8bdfdd85bafcdcbbc4bb9f57",
   "skills/doc-retrieval-eval-2/.phoenix/originality.json": "975a531bc63b3a5e752c92f613e49a563dc65aa05ce0bd0106745f24340b641e",
-  "skills/doc-retrieval-eval-2/.phoenix/provenance.json": "191caaf8b721553dd162c37299fae97587c3bb996eb95f26d8fe57669f46b5ff",
-  "skills/doc-retrieval-eval-2/.phoenix/selftest_evidence.json": "b0b3e47fd5cf527bd9cf3a777b3316f7739cf4bc2b0baa85b7bc45f45d4b933c",
+  "skills/doc-retrieval-eval-2/.phoenix/provenance.json": "e4e51d64cde51f80a6ff118ed4c3644dcce8c2521bcca1940b4b2d532686ef53",
+  "skills/doc-retrieval-eval-2/.phoenix/selftest_evidence.json": "d738c751a0d780e9856df99e971f5c607e152785fbcd87e5bd5437206f6c57de",
   "skills/doc-retrieval-eval-2/references/creation/p0.md": "5d84363654768e0dd857ee7c6f071680c8855ff573f97ef232df7bdb412905a5",
   "skills/doc-retrieval-eval-2/references/creation/p1.md": "6cc661c09ffb119ac097ac6ca1310f9e8355d7e58b1504f809c13ee1c128e292",
   "skills/doc-retrieval-eval-2/references/environment/p0.md": "2861f430525d0f441b89280d162351466f0bcd4fa7986c2c1639d72d611fbdbb",
@@ -54,8 +54,8 @@
   "skills/doc-retrieval-eval-3/run.py": "96d6e80433e6975ebf35920fa4f02e33d90c2e6905e3261f8a9cbca32ef2ddeb",
   "skills/doc-retrieval-eval-3/selftest.py": "84c3516600ab05045ded95ce31f5efbef4279978c532eb0a2aa4f83b6de5a60d",
   "skills/doc-retrieval-eval-3/.phoenix/originality.json": "e5f6bec58626545d108840a7b302174a3ec50fe4f88c5766ad8abf0308df8bce",
-  "skills/doc-retrieval-eval-3/.phoenix/provenance.json": "79cb5dc8b043590251fd64d7e328ab8a14706e0c07c48ca2a3b3638b2f653659",
-  "skills/doc-retrieval-eval-3/.phoenix/selftest_evidence.json": "6efc9a82e7fa21af526c04ac0c66490245eb1a7bc893e40d174656dae291f3e4",
+  "skills/doc-retrieval-eval-3/.phoenix/provenance.json": "8e2ab2bb481e35bc267746257dfa921387e1a62dfbced9800545c8e155a95eea",
+  "skills/doc-retrieval-eval-3/.phoenix/selftest_evidence.json": "1ab8504ebeec59ca03d6740dfb07a924a45d995e9f7d276457567a5369645b8f",
   "skills/doc-retrieval-eval-3/references/creation/p0.md": "ae7804b4477038878b424addca613572c9b36ec368c14de8acc2627cd9201a2d",
   "skills/doc-retrieval-eval-3/references/creation/p1.md": "23e010f8d933f5f5510770ba31595fd58577feb2cbe7110c17fa7e5249d89017",
   "skills/doc-retrieval-eval-3/references/environment/p0.md": "ce76bfc2458046763c0ac1696a0466d4d475cdcf754b3da70e29279a5bdc8ae8",
@@ -66,7 +66,7 @@
   "skills/doc-retrieval-eval-3/references/production/p1.md": "1bc284cf15e1fe14ea8b85c5288e2f97d6fe1785b5d2d8ef8aac274e844dacb7",
   "skills/doc-retrieval-eval-3/scripts/main.py": "31067eb1192ec21824aee570a96048b84f3ba4290a922ff5492ed5a17abfb60b"
  },
- "sealed_at": "2026-10-18T19:57:26",
+ "sealed_at": "2026-10-18T20:57:46",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

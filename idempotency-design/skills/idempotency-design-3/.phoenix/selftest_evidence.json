@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:00:59",
+ "at": "2026-10-18T20:59:37",
  "skill": "idempotency-design-3",
  "slug": "idempotency-design",
  "passed": true,

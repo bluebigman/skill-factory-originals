@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "terms-boundary-check",
- "merkle_root": "02e1759883815388370f3279033b6ed6fc427bb6a9f8a1fe19beba9a1b6459a8",
+ "merkle_root": "d7813cd9e3e4febff48e5c090d53757879fe5913180a612a89dfd3370994b85c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/terms-boundary-check-1/run.py": "f625c567eb99d7d7d93536d3dd46f3eb29f4e8d2ae74cc48051457b8d541d3f5",
   "skills/terms-boundary-check-1/selftest.py": "0b78816bc1efbc47565aaf60b23dec6828ee877e4ea299d5935a86ee120e8104",
   "skills/terms-boundary-check-1/.phoenix/originality.json": "babd240a05841e6434dd5c5622890193a490b0907042e26389b3dd64a99f222e",
-  "skills/terms-boundary-check-1/.phoenix/provenance.json": "c7c723bf6ae8f76a4c983da67ed4814479d83fc36f0cdd07fc01e12ff08dc030",
-  "skills/terms-boundary-check-1/.phoenix/selftest_evidence.json": "1fa53f4df961514d352b931f0dc84e92d2efb3f76c6e74897e7a28c0e693e732",
+  "skills/terms-boundary-check-1/.phoenix/provenance.json": "6202e26d0b8036744cb89bad042da8847825e8b9c35774d065373dabd5414e60",
+  "skills/terms-boundary-check-1/.phoenix/selftest_evidence.json": "bdf3d867b1a2ce315ecaa40e582621206096cdaa91587bfa92123beebead5ec2",
   "skills/terms-boundary-check-1/references/creation/p0.md": "3c23fce334ca10179f4788dfe964ac5e36a13afb3b20b3cc76370470cc536c64",
   "skills/terms-boundary-check-1/references/creation/p1.md": "8d82bea615865870637f6aa7741e0d6435d66933cacfcde1ed316f5bd7b2178f",
   "skills/terms-boundary-check-1/references/environment/p0.md": "ee3ded15d91ea447c9ce0d8acd0db9a96153ca81bb27ff944ac8fa404fe70b5b",
@@ -37,8 +37,8 @@
   "skills/terms-boundary-check-2/run.py": "edeb19edf8cff2e20a0f88c0d994a22b78a768b79d92d2eba43c9c3615ab0863",
   "skills/terms-boundary-check-2/selftest.py": "0e94ec9d75ff8aceb4a2c32cd6df84e9d438fb1078002ccd6c23ecfbd6957c51",
   "skills/terms-boundary-check-2/.phoenix/originality.json": "7c206fc1f93244b162f6ed0adff57f39c385e701303b87026567467c0c52ad65",
-  "skills/terms-boundary-check-2/.phoenix/provenance.json": "59e7817396cde9f189d942f5f9552210931f814bd096fb6c36fbdd08dddbd0d1",
-  "skills/terms-boundary-check-2/.phoenix/selftest_evidence.json": "f7edcf474e70b0d28dbdfbbfbe5f2464a0f8010ac1889e6a8a6dadd403fc1792",
+  "skills/terms-boundary-check-2/.phoenix/provenance.json": "a4e075ad770a3c6f44e25121ee5874d937fb556489b2a8421d4d5365f39174d9",
+  "skills/terms-boundary-check-2/.phoenix/selftest_evidence.json": "e99e980eec49b19b7e3133e394efa0fc3cf3918d1297201b4622d74769cccf32",
   "skills/terms-boundary-check-2/references/creation/p0.md": "42773cb53c15f1b88a7be63d1e275879073a92e6aeb579d107d276c8a627029f",
   "skills/terms-boundary-check-2/references/creation/p1.md": "d23fca904148b6c7770d76318f41abf3ef0fb8bb88f42acec33757032a5a2dad",
   "skills/terms-boundary-check-2/references/environment/p0.md": "87e8f958d08a7c0257af11302d685c249409dd9c4b01e779c35f863b0f278b84",
@@ -54,8 +54,8 @@
   "skills/terms-boundary-check-3/run.py": "2fb8a58a480b2e3267d7118884f67b7a3e12e81e7dec8885f5923a7535e23947",
   "skills/terms-boundary-check-3/selftest.py": "e993cbb06b74570a72da32de533ef99cfb293df4af19d342962ef7d5263b5088",
   "skills/terms-boundary-check-3/.phoenix/originality.json": "3a77ea3a6ac495db780eeb22617e11bff1eb5eee453b19aa3c64a46a7c79a186",
-  "skills/terms-boundary-check-3/.phoenix/provenance.json": "1d78f8e7eb009e006098e00c27e219429ac4fa2753bdfa5110fa14e3dd3ba5da",
-  "skills/terms-boundary-check-3/.phoenix/selftest_evidence.json": "3487243de7568993c4495103121544dd8bf0eb615db5fa15c98c7ff287d5fa37",
+  "skills/terms-boundary-check-3/.phoenix/provenance.json": "bfdc9bc492350a00c081883c3c57f6561237e6a9621c86292c414501b21ed71f",
+  "skills/terms-boundary-check-3/.phoenix/selftest_evidence.json": "e4a90dcd66f90053ac195a3096db6b9fe3c38a004c3cb8ad3f85a6115072bcc4",
   "skills/terms-boundary-check-3/references/creation/p0.md": "610264011709695c67bee6b99d0a119dfd8d936cc8da4bdd1943dae2252a0a17",
   "skills/terms-boundary-check-3/references/creation/p1.md": "cd39716462e6299fd3ad4babf17fb48da417db65ca128581f704a3cbde38072a",
   "skills/terms-boundary-check-3/references/environment/p0.md": "3f8b0d05426653c4ae4c96a2c5b09687d4805fa3f791c549754ec26b394a4d41",
@@ -66,7 +66,7 @@
   "skills/terms-boundary-check-3/references/production/p1.md": "b1b05750bd414b73c0951d3597d138eb05d11fd2f0a5a0298b4f8e9a056ac2e2",
   "skills/terms-boundary-check-3/scripts/main.py": "98178e6242a5789f880ffe0b9b40eb6bd30eaf9a7c75e1b1c0012fd9ebba4c2f"
  },
- "sealed_at": "2026-10-18T20:11:35",
+ "sealed_at": "2026-10-18T21:04:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agriculture-plan",
- "merkle_root": "0f12b4d5396e7a761e9823f8bef6dbee47f4d99ba8e6656c81f84a849a181031",
+ "merkle_root": "1ed17876a929a845db5289a65ccbd459f875edbed2327fca2f887f7280239d08",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agriculture-plan-1/run.py": "d4c2f1f6c37999030ac82651f9599d26d296b0bedf2b8ffdbadf988976f7a9b5",
   "skills/agriculture-plan-1/selftest.py": "1db312480cf55e0b7185e9eebdca46535db3709be8f1baa46fcd105338cd9daa",
   "skills/agriculture-plan-1/.phoenix/originality.json": "6b13a51a913f08f7ef07fefda32cc4c951e4de7186ed538d3be2454aa445179a",
-  "skills/agriculture-plan-1/.phoenix/provenance.json": "2d3b0cf5b589e56c5b80718327f737d992704b88d695a0fbe2a97be72a7f16a7",
-  "skills/agriculture-plan-1/.phoenix/selftest_evidence.json": "8dd9bd5e1c47f7521ff22ee1807e30c362453e1ac0a8504bd7df200606f8ad8a",
+  "skills/agriculture-plan-1/.phoenix/provenance.json": "f86b894d1836be9cc9ab7d0afd0d70e3a68fcee6450780c429e4592bb22e6050",
+  "skills/agriculture-plan-1/.phoenix/selftest_evidence.json": "35c4d6e4df9a7b4946704604bb03ff722f191af61bd138c1f0a3185f02a9f3df",
   "skills/agriculture-plan-1/references/creation/p0.md": "fd088da7939b26508d72d52e8d6ed63fa5c6bf8f1c11ebbd550c967f81efebf0",
   "skills/agriculture-plan-1/references/creation/p1.md": "7fce0f979475394c9d776d367387852772df81a1e82bfaa572fab5485cf245b7",
   "skills/agriculture-plan-1/references/environment/p0.md": "6eea62bc62b613c98164245397c8ecda3939f24a80e2ffdd65c49be30b8358a1",
@@ -37,8 +37,8 @@
   "skills/agriculture-plan-2/run.py": "96818682107cbeb840159798dc38d3a0273d99ba05be2127db09ad13ada94983",
   "skills/agriculture-plan-2/selftest.py": "25f819c7a5e6b415c3e5a1235e3f4b999cc1c423dbbc15a401aab8ad24032d75",
   "skills/agriculture-plan-2/.phoenix/originality.json": "c65ad60070d848a3c8188beac6d6036952cb1a3f86e0d89a3dddc2a4f5a4f4bc",
-  "skills/agriculture-plan-2/.phoenix/provenance.json": "56ce887480adec4ce7d4bd67ea1a126414e0520a2ebde9acec02b9e770edc26f",
-  "skills/agriculture-plan-2/.phoenix/selftest_evidence.json": "6797571448f91a5f3d0ecb2854eaa53831606f2a33e15e914c2a029c6ce185f4",
+  "skills/agriculture-plan-2/.phoenix/provenance.json": "8734a71aba17c52b38c61a46df032e7f8d0bb194cd3c917d5da4bbfd67035e07",
+  "skills/agriculture-plan-2/.phoenix/selftest_evidence.json": "541c80c7b786d5933446bf66b4a8f91b305d2bcb141187e64c43aeb0edb15d84",
   "skills/agriculture-plan-2/references/creation/p0.md": "c2d060929b9c0ab55b12dbdf7ef1fd7f6bb49b01a0623ca33adce442b57c1b44",
   "skills/agriculture-plan-2/references/creation/p1.md": "bb3377244b60360af8cfe96d29339c9b9a2f022f6d650d2d2c2a71f7d17f283b",
   "skills/agriculture-plan-2/references/environment/p0.md": "e91de263826fdf6fd233fae6543ff0408dc172d0154c59e83bdb42a1abf97d1f",
@@ -54,8 +54,8 @@
   "skills/agriculture-plan-3/run.py": "ba69ca91a47b9665d8ff6673af3d5e5ed54b5bc97c30846a2e77b3a4a787d38e",
   "skills/agriculture-plan-3/selftest.py": "649544d6c9ccb94c8c4c82eb03bae88000cac8f9b23744ab6829099b9452b639",
   "skills/agriculture-plan-3/.phoenix/originality.json": "465b74ee4bee98113d33033290cd797ddb66982851af8c3d2f8d4653f523e710",
-  "skills/agriculture-plan-3/.phoenix/provenance.json": "c680b5df64a8466814c54af98c07dd0895f2749337913b8537f95a647235c7b0",
-  "skills/agriculture-plan-3/.phoenix/selftest_evidence.json": "e797f50d8e4ffbf6ec8be796da65739471f5897b29476aa950bf2f311a56d8fb",
+  "skills/agriculture-plan-3/.phoenix/provenance.json": "aab1bc2ae3f1465410b145699e9e69a78a1f9377e261865651efac94ceb5aace",
+  "skills/agriculture-plan-3/.phoenix/selftest_evidence.json": "b90651e619dbf01293dfad08738e4d5963a7b20a147fd12fb917b6d852f1aef2",
   "skills/agriculture-plan-3/references/creation/p0.md": "2e8117dcbd653b2f1c1fd7711f4beae76108b030d8e28f47c55387eb65ce7e66",
   "skills/agriculture-plan-3/references/creation/p1.md": "418ac0cbc0dac17608897aea1130ac2f6d47d48e1bc6e2af81976ae68be5efc4",
   "skills/agriculture-plan-3/references/environment/p0.md": "a0c5be7a9af82d30dbea15b35e354c10f7eac553c7f28279770bfbe08319e7cf",
@@ -66,7 +66,7 @@
   "skills/agriculture-plan-3/references/production/p1.md": "9abd9866265df300f0d1db27fcb6a22bf2f68d23ce254f619528c34050ce956a",
   "skills/agriculture-plan-3/scripts/main.py": "695aee7632f8f7ac846bf179eaad3733dbcbc8c752fa6d53b693cfe92a62062e"
  },
- "sealed_at": "2026-10-18T19:52:30",
+ "sealed_at": "2026-10-18T20:54:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

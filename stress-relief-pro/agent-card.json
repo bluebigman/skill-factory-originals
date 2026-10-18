@@ -47,7 +47,7 @@
     "遇到无边界"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:53",
+    "at": "2026-10-18T20:53:49",
     "from": "daily-recovery",
     "to": "daily-recovery",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -71,7 +71,7 @@
     "遇到现场失控"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:53",
+    "at": "2026-10-18T20:53:49",
     "from": "instant-relief",
     "to": "instant-relief",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -95,7 +95,7 @@
     "遇到本工具边界"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:53",
+    "at": "2026-10-18T20:53:49",
     "from": "professional-boundary",
     "to": "professional-boundary",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:00:00",
+ "at": "2026-10-18T20:59:09",
  "skill": "game-qa-method-3",
  "slug": "game-qa-method",
  "passed": true,

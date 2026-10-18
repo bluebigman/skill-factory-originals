@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "md-wechat-draft",
- "merkle_root": "1661350e292d3958cf05e072dbe9d242d336864f556b0966f04a937cadee70ef",
+ "merkle_root": "33f54e3ef14f7f3a58c7365f6c66e1cebb9aeb0a5bac8522f79bc8d6d8912e28",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/md-wechat-draft-1/run.py": "9e2f1a9827cb51b2d45dd85e2b04943216bc57c0d37df60db12fb4d7423f4c33",
   "skills/md-wechat-draft-1/selftest.py": "d690bde635b2ba1edaf1306e245824dfb32d80a0590075637942a4e78f4b3f1e",
   "skills/md-wechat-draft-1/.phoenix/originality.json": "b91fd34d4107e8b56474a4e8ca6f7813343dae4ad7b4d430ce3c1e2f64d784aa",
-  "skills/md-wechat-draft-1/.phoenix/provenance.json": "afc79bfd55d0381ebaf1d0e7259eb648cf16ae42134998ad1441bc1b4ce9dcdb",
-  "skills/md-wechat-draft-1/.phoenix/selftest_evidence.json": "51f65e594cb72c2535a012a6f4eb631713424e6fca89cf27607a512e473068b2",
+  "skills/md-wechat-draft-1/.phoenix/provenance.json": "28f2e728249d437ef166fd98e4e66ca134d7afd3633c34f80d087ece7119619e",
+  "skills/md-wechat-draft-1/.phoenix/selftest_evidence.json": "c16f68259eb382abcdccebc6c36e81f03266d231e8b0f4350c3c304596f5dca2",
   "skills/md-wechat-draft-1/references/creation/p0.md": "9877f7a781dfa9696aa91c80266edbc99cf8fed5fc38167887c683effe077cab",
   "skills/md-wechat-draft-1/references/creation/p1.md": "38e40486502b289cbc94b85aa2964e6c18b87340537176964d31f0e917b0af96",
   "skills/md-wechat-draft-1/references/environment/p0.md": "83c138d50a56e7b3053c8b189ff6886e22abd59f21b49bf183ddb41e106fda18",
@@ -37,8 +37,8 @@
   "skills/md-wechat-draft-2/run.py": "7d05a9b67fed3aa7af45da08d13ab9833de0f655e648bf3354614935d2ee7394",
   "skills/md-wechat-draft-2/selftest.py": "cb2c459ca3cbd08fc707cb1475255e56ba9f98d4bb3e1a09e3c9f3a0eacbc388",
   "skills/md-wechat-draft-2/.phoenix/originality.json": "3ae5742a136a31537d00b7f429ee7a966072b2a3cf6da7059fd42846a497d970",
-  "skills/md-wechat-draft-2/.phoenix/provenance.json": "d70116a5c741bf163211872ba7a2f0d9de90fe82febee69965022604721079fc",
-  "skills/md-wechat-draft-2/.phoenix/selftest_evidence.json": "59f01b50ba58ea014886e0146dac0167d1cd4eaeefe09587a46678e1089a8fee",
+  "skills/md-wechat-draft-2/.phoenix/provenance.json": "b6b6218119044fa0d991e76dabf9124aa0785f80789fbdfec294f297a2ec7afe",
+  "skills/md-wechat-draft-2/.phoenix/selftest_evidence.json": "fa305af9c701fe1037a883f1358f98b2c9c624df19a841c5061d5f0bd9f7daf1",
   "skills/md-wechat-draft-2/references/creation/p0.md": "d14bccdd27775c69d34a1ce781e9e74271fd2c89df8b2c1039483726cd1be2cd",
   "skills/md-wechat-draft-2/references/creation/p1.md": "351f293d09a1a1dfb84858b064dac0062c1a7ce6c78612e4a28fbd152ccb99e3",
   "skills/md-wechat-draft-2/references/environment/p0.md": "570005302e65afe3daeb16deff7f359a1e097374c81b22076e7da31bcc6ad84a",
@@ -54,8 +54,8 @@
   "skills/md-wechat-draft-3/run.py": "55597d3bb569f3d9fc02c71f7d58cbae0372d0abbae3cbda66ce421debb3ee9d",
   "skills/md-wechat-draft-3/selftest.py": "9125d1e3e314bd2a81a3f6f4f3b39dbccd43666f38b076649289e073f77efbcb",
   "skills/md-wechat-draft-3/.phoenix/originality.json": "3afde245ea5c3fcef7ebc62dd2cad77d462b3e1e0c78b9a4f47245b163ef7b2d",
-  "skills/md-wechat-draft-3/.phoenix/provenance.json": "cb53a234167d33398948b35f6e6029852c8724c9bd3575a66df0e61da98ff098",
-  "skills/md-wechat-draft-3/.phoenix/selftest_evidence.json": "98efe3541103bf6ab17f4a17d8da502284fc7dd2e14a5fba10a08a57e296dfc6",
+  "skills/md-wechat-draft-3/.phoenix/provenance.json": "1bc5d00304c1dbe7fb46df7a762890ff1ced5084c7ee82b9065f1917b5f7ab47",
+  "skills/md-wechat-draft-3/.phoenix/selftest_evidence.json": "42dfee7e006297d22e7e3a06b2eda0f679558976b81fb44153648d0c320d2ad1",
   "skills/md-wechat-draft-3/references/creation/p0.md": "9aaa6b68a4f9df9462afc811a285d6a2afe29edc07f0db2b064c27e0f86f7b81",
   "skills/md-wechat-draft-3/references/creation/p1.md": "4930302262d994a599eeafa69cc0b3b9f1badbf334c0f75a0371300f25364e74",
   "skills/md-wechat-draft-3/references/environment/p0.md": "2ed21a428f685bd451d13ca73add5ef5fd0f50b15dce73dc142c5d91c7d34028",
@@ -66,7 +66,7 @@
   "skills/md-wechat-draft-3/references/production/p1.md": "7e56a758ce482a03f2945e46257e2f2a84e57419676aa2c09b6320bbeaf479c9",
   "skills/md-wechat-draft-3/scripts/main.py": "cf9a15a5ce2d4f9983d5e7c3d966be9588870c9953539102d596486cb11b257c"
  },
- "sealed_at": "2026-10-18T20:03:14",
+ "sealed_at": "2026-10-18T21:00:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

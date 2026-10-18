@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "inventory-sync-guide",
- "merkle_root": "b3407897f1860b6b913be1dde7698800458a0f80b4aa46f17aa85c0016bbb0e2",
+ "merkle_root": "8bc341415eae3f92983fe6390dc4d0be0044b7e4f24d138953ff953e7e4cd97b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/inventory-sync-guide-1/run.py": "4a6875ec14084a1d08c60dd86a9ed7e2b29835651f77b07b948885dcfb82d45b",
   "skills/inventory-sync-guide-1/selftest.py": "9f4054883cb443bec03116c56f511565df7b69a1f0377fc8c22e00eaf365e79a",
   "skills/inventory-sync-guide-1/.phoenix/originality.json": "c0335da67d96b2149813d9a5bfbc944faee1c989b442e4e24798b283e45cd0ef",
-  "skills/inventory-sync-guide-1/.phoenix/provenance.json": "9e3cbea12030e588329c57e2afb56941f0243631f4a237b992e3668208d0bf03",
-  "skills/inventory-sync-guide-1/.phoenix/selftest_evidence.json": "c16ffb88d17f13ce4ae29563f6537f8c552cf49d09d078d350e97e47cea06d85",
+  "skills/inventory-sync-guide-1/.phoenix/provenance.json": "28d1defc1aa8716d717f0fc1bcc0c6037f4b366197d365d50ed21d14bc9afdc9",
+  "skills/inventory-sync-guide-1/.phoenix/selftest_evidence.json": "59b2b9453f34c8f72e691b0c53dce15bc24961679cb3ea0724e466ea1ced20cf",
   "skills/inventory-sync-guide-1/references/creation/p0.md": "b6ef06a8cd8ec4948f30af1cd92628212a45dc8a8e803d6fcab72efbadc5ea32",
   "skills/inventory-sync-guide-1/references/creation/p1.md": "bcc762a50ee5c57a4c79d7408761abbe59ec9e069f8da61e9fcf387fb0007588",
   "skills/inventory-sync-guide-1/references/environment/p0.md": "c29d4e517847a44dfba21c06089f6c5ac1f091f75850d7975994bcc63f374d37",
@@ -37,8 +37,8 @@
   "skills/inventory-sync-guide-2/run.py": "ac88fd302448399969c948e02064575ba64fa2414d63afe510c2d517fe228bf0",
   "skills/inventory-sync-guide-2/selftest.py": "ba908682eb4c9bda4e8ef4367ebd4dffa07b685e82c3e96fc56ffed4b950dfa3",
   "skills/inventory-sync-guide-2/.phoenix/originality.json": "08ba195c97a5558e9546af9d8afbd04824d5e31a73b45340f1b65228740b29be",
-  "skills/inventory-sync-guide-2/.phoenix/provenance.json": "f4816fd563f2854ff9f2bece7d25eddb9a118ab829391b76cf9f9cf4d36482e7",
-  "skills/inventory-sync-guide-2/.phoenix/selftest_evidence.json": "7ea2e1bfb90cea5508c9f45c2b8a52cf9ef48849bad7282e9254c4a5c326ccea",
+  "skills/inventory-sync-guide-2/.phoenix/provenance.json": "e8ab2e4c268f64dcc4b37ff9073e5a52bf5581a0c05289d59ce289e703c931ba",
+  "skills/inventory-sync-guide-2/.phoenix/selftest_evidence.json": "8a55666b360b50a2c28ec826fdc10ce1bf78fed5b88981eba87327599b7961e5",
   "skills/inventory-sync-guide-2/references/creation/p0.md": "0af490c19c718d7139ca24883da7d81219f89ed4de13bcba83dea0d6669950f2",
   "skills/inventory-sync-guide-2/references/creation/p1.md": "7629c0e2df40907e0954920bd16cb667dffb7f581fd41149a0179cefa0a3375d",
   "skills/inventory-sync-guide-2/references/environment/p0.md": "3a2d2c1ac1ba29ae7f3e87eaf2ecb1bab3c6c7c4101e7ace6320d8a5cdad9811",
@@ -54,8 +54,8 @@
   "skills/inventory-sync-guide-3/run.py": "c4fee0072d00c0f985e2df68f04562333ad2008d11cc9d985503aed606934423",
   "skills/inventory-sync-guide-3/selftest.py": "2c34fb871b35fbc646d58d75242059e92baef6af3b8838690424f8c8b30e4705",
   "skills/inventory-sync-guide-3/.phoenix/originality.json": "1beb71ba8cef6217e5d44a78a01b0b9c67524bbfedcd6283b9645ffded42c2e7",
-  "skills/inventory-sync-guide-3/.phoenix/provenance.json": "e29cc53b6707d5dab5631f3e2e558855c5edae093870e54372ad2c90855fd743",
-  "skills/inventory-sync-guide-3/.phoenix/selftest_evidence.json": "f3a93b811dccb5c7b44a43e58284ece5f7b338c8e86a605f0bc9f061100c1425",
+  "skills/inventory-sync-guide-3/.phoenix/provenance.json": "1537cd386fa95d2ab1868217ebbc5a0ced02c95fced77b862049d0e55d6cf591",
+  "skills/inventory-sync-guide-3/.phoenix/selftest_evidence.json": "f265bbc270d461f4de08557df37fd894cab19a0abdcea3636942de855b9c7aed",
   "skills/inventory-sync-guide-3/references/creation/p0.md": "92f0dae1dc79af4b7eb3cc1c4d8b88adcddd8f06168cf16d65c15af73037d7b2",
   "skills/inventory-sync-guide-3/references/creation/p1.md": "d1d4af1bb7d8282a6faee7f25622a69a53c7e4b0601c760aa742c76c10ad8bda",
   "skills/inventory-sync-guide-3/references/environment/p0.md": "df9b15dd2d95172b0a0b77b5e384b04011eac4899353324efb3e0fa6e5351675",
@@ -66,7 +66,7 @@
   "skills/inventory-sync-guide-3/references/production/p1.md": "62acce37d9d2c36b6ba06d49fee284e9af2e54ce6995ca8fb856818f5fab3a88",
   "skills/inventory-sync-guide-3/scripts/main.py": "5dbcbb9a88ba315cbf7c43159e3aa735ff777c32773d97a7b5fc9d10643e2caa"
  },
- "sealed_at": "2026-10-18T20:01:53",
+ "sealed_at": "2026-10-18T21:00:01",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

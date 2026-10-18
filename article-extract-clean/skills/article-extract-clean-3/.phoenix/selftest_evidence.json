@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:38",
+ "at": "2026-10-18T20:54:59",
  "skill": "article-extract-clean-3",
  "slug": "article-extract-clean",
  "passed": true,

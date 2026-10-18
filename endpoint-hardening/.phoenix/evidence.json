@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "endpoint-hardening",
- "merkle_root": "9f1db534a2e6f6a7f98097c44603944ee42829abfa198cb0c6212a65a731d096",
+ "merkle_root": "e7df9bd47e13dbc284b475869ca0a5b88d3cefc001d08d815f9fb2b195bac8ad",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/endpoint-hardening-1/run.py": "fafb9c1675053d3b96e388a1e8b67ac0e3150e3885c3170e582d15d02e22cf66",
   "skills/endpoint-hardening-1/selftest.py": "7e54a9b9a44335662e5147b0b5eb0291ed19a57f88df82ed02508391dd6041ab",
   "skills/endpoint-hardening-1/.phoenix/originality.json": "f5c3a0c94114a88bcd6cd0c0674e6cac1de7f9d0eb48f5392d1d78e0a82b9e70",
-  "skills/endpoint-hardening-1/.phoenix/provenance.json": "712f65012067a66abca75007c018d742c6586ab426f9c2e7b9ee6e7564212c23",
-  "skills/endpoint-hardening-1/.phoenix/selftest_evidence.json": "47af5911c54a45db46da4e56c12a33e4aabdcccee84be7fe83f6d312a61f27ac",
+  "skills/endpoint-hardening-1/.phoenix/provenance.json": "3da9bbb3a875cd370ec73cd416fb3b8704914e6420808efb8a4b61453e1863d4",
+  "skills/endpoint-hardening-1/.phoenix/selftest_evidence.json": "aac3bf70cc97bf78e54c1529a5124139a022cd2b4005e50ea11a0d3c941595be",
   "skills/endpoint-hardening-1/references/creation/p0.md": "94b18b2c7fb7a473d6649938d55db475f1002451a6b55cd8ca00f28ea25a99a4",
   "skills/endpoint-hardening-1/references/creation/p1.md": "90c888dd5ae5a7e577d45499f4fa403d47ae02692da65f386f74a0e415c965d0",
   "skills/endpoint-hardening-1/references/environment/p0.md": "2146a253ca7a6d2e2b616dd1308f21aa4b7ba7ecd7f6c011bd447350ae0c8791",
@@ -37,8 +37,8 @@
   "skills/endpoint-hardening-2/run.py": "695da23ca2f245e6d9fcf6a7fa2fdebaa2c48a056473065aac663ce05fa8905e",
   "skills/endpoint-hardening-2/selftest.py": "949364cadf20aff9546e8137fcf575f02a708ea0b4a92aac62d2e42c7f059c06",
   "skills/endpoint-hardening-2/.phoenix/originality.json": "1762476e6c3c2d6e66fd4464e666550a970690874c600b3c51ac4bfe2d8d8590",
-  "skills/endpoint-hardening-2/.phoenix/provenance.json": "4035ed8fe5ddd5f7bf7c3526a4b5d88ec1cc7841adf38105518489a0187602a3",
-  "skills/endpoint-hardening-2/.phoenix/selftest_evidence.json": "502ee2bdb664533fbfffe4ab483ea859ba28d78d6e2b2577e9f18138bff4640b",
+  "skills/endpoint-hardening-2/.phoenix/provenance.json": "ef62de04449a8d6ce16973bd4d5303819a7177e07954ac5cb893cd984e16400c",
+  "skills/endpoint-hardening-2/.phoenix/selftest_evidence.json": "671e12dc7cb3ab53b04f35b625ebcff6d0996010182b6c2765073f2fbfcef35a",
   "skills/endpoint-hardening-2/references/creation/p0.md": "c6dc607b6a2d062f224c5c64c1e73a90d0583f159632dca109e0f5c22f3262dc",
   "skills/endpoint-hardening-2/references/creation/p1.md": "25907e995e57b2a93570de689bdc88f440765dd016b0d282ab5045761bbe4173",
   "skills/endpoint-hardening-2/references/environment/p0.md": "bce49dd9eba3921934ada50501adfdb8da8771ee2292a1a9017023bcdab7b4da",
@@ -54,8 +54,8 @@
   "skills/endpoint-hardening-3/run.py": "a0eebcfd6d7f0f20d6f50ea8511827588777ec72f3adea991feeee14dbeb1e31",
   "skills/endpoint-hardening-3/selftest.py": "77881e13274401d6e43481acdd8c3229629929b536a928f7a30b2e6b1341eb58",
   "skills/endpoint-hardening-3/.phoenix/originality.json": "0ee4a7de44154650c803269ff2b23088599f99be8becde1444944b57110c9778",
-  "skills/endpoint-hardening-3/.phoenix/provenance.json": "80c9200b0a2c1185385a554f528b4128d09a5abdade39e98364528c45b7f27b9",
-  "skills/endpoint-hardening-3/.phoenix/selftest_evidence.json": "90d8c5a4a0bd1c29b8a50e1ba49349eca094db104af2d5eff947e36d2364372f",
+  "skills/endpoint-hardening-3/.phoenix/provenance.json": "e157e2348cda0c447a79909fe949baa4008322d2ffda9392c1d5d2dd177e8274",
+  "skills/endpoint-hardening-3/.phoenix/selftest_evidence.json": "002e8f626de2f9283986c5273cade0b6344fa4698950fed977f53a96a8ae9267",
   "skills/endpoint-hardening-3/references/creation/p0.md": "22abe898aef0e3369489f67988c57faef313cdf38912c19797f3ec571536577f",
   "skills/endpoint-hardening-3/references/creation/p1.md": "1d7070da94b23acb8a51f5306220dfcb436144de91d3e512fab463de4861f82d",
   "skills/endpoint-hardening-3/references/environment/p0.md": "9aab3bde4afc2dbcbe3b93c684251e4e123994d93dc9a85d948a64e9e0316111",
@@ -66,7 +66,7 @@
   "skills/endpoint-hardening-3/references/production/p1.md": "6babcea40e0ba2195743da18d4f7df5b1d5212cedde6877d7c5dbcd84fc67521",
   "skills/endpoint-hardening-3/scripts/main.py": "780be2fcc7c85aa70dc79ef9e45551b8bac6dd86bc87ad76f6bdb711a44070ff"
  },
- "sealed_at": "2026-10-18T19:58:17",
+ "sealed_at": "2026-10-18T20:58:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

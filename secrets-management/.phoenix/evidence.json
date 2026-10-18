@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "secrets-management",
- "merkle_root": "cb266e146af6ef479d1342751df4a7897665dc0e13d91e6d80e37093f7f8fa9c",
+ "merkle_root": "a997fc82c165ee2cbe02731fd5eb9e7e8b05adc6afbb72fa7b56292627b7fb9a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/secrets-management-1/run.py": "4edd87cfedfde68b59df0ddb9c3b9e2bf910c57994bf8fb17573625ba9a72958",
   "skills/secrets-management-1/selftest.py": "2374294352d5375de9c2a9513c1c8e5a526b0d716ce1d11097ec5ef7ca2493f6",
   "skills/secrets-management-1/.phoenix/originality.json": "d7b1ac19bc8148b519d3ab1c430bf823cb4fff7984af4010371dd452d4d3cee2",
-  "skills/secrets-management-1/.phoenix/provenance.json": "1a76bf68bac74e051eb49c035de1bb7c0b9ca0ca02894d2135c74f0831cec737",
-  "skills/secrets-management-1/.phoenix/selftest_evidence.json": "e99a5cd1a95a8f14642bfaccb6a8894222e389ffb0907c6f4a62d84b47cf2828",
+  "skills/secrets-management-1/.phoenix/provenance.json": "f7452abe9ce4542ce2f00d5f5e5199690c7f39b363bc9738788901c8c053fae7",
+  "skills/secrets-management-1/.phoenix/selftest_evidence.json": "8b67fd66d8ed7be7d380c55478aa1f1ff92600dd0d540f9a8f27d12be27b1b03",
   "skills/secrets-management-1/references/creation/p0.md": "897d0b55808966d33436a4734466903f295789a7175d6bca66720bc0e14f8423",
   "skills/secrets-management-1/references/creation/p1.md": "492aad859de7a8ad1c2ef170a4ec12029475055198e33b2e15dd9fdeb3318104",
   "skills/secrets-management-1/references/environment/p0.md": "7c88046cdd8fd48a4287b692d83e000aa0bb6c8d3c970896a3d8339c9d989938",
@@ -37,8 +37,8 @@
   "skills/secrets-management-2/run.py": "465c50a65d7bf5781491634d82a1762032d16ef6a821963b56bd7216ff0a7704",
   "skills/secrets-management-2/selftest.py": "86b4e6430c87dbbdab8c5f5ec4ca4aaca9546b4ea667b4491ea6881694504766",
   "skills/secrets-management-2/.phoenix/originality.json": "7c59f1190acab52e79c1a76381216bd7daa8be50b6f6dbf7b21f9718961fe477",
-  "skills/secrets-management-2/.phoenix/provenance.json": "8087c2b7cbab60c6938cae86332c4022031a286468b4c9f1723555e276850dfc",
-  "skills/secrets-management-2/.phoenix/selftest_evidence.json": "540d6b1b5781b86a3581e6cbb541b9842a25bf63a068cffe0a667cb2a9520e65",
+  "skills/secrets-management-2/.phoenix/provenance.json": "d7624a40c033b5e8013399935b485e04bb48acd448f89eeffdaf73342c912a8b",
+  "skills/secrets-management-2/.phoenix/selftest_evidence.json": "50ab76cfd255d8317f8a1620e750c3b50b5f0617990a5efef81fe4e3ea384b70",
   "skills/secrets-management-2/references/creation/p0.md": "dbb3997f22f11dc411148e7c725906f7eba1390230b37a710a5ea16a6d971473",
   "skills/secrets-management-2/references/creation/p1.md": "d8ef055376c79529ddb80604168db17c7a444595808f005b51d71739dcd6875c",
   "skills/secrets-management-2/references/environment/p0.md": "1d5ff0ea9e646d650d2145f47ad50610cf1fa71ec9c09940c38413e4b72ed4ec",
@@ -54,8 +54,8 @@
   "skills/secrets-management-3/run.py": "a9d3e90d9294bb4d1a40231a4f5be7a261e7a7c2893c7e598860fdf82c8db168",
   "skills/secrets-management-3/selftest.py": "7046edcf4595f42046f23cddf576e723f54203a400acd9739273c3b55fbed748",
   "skills/secrets-management-3/.phoenix/originality.json": "cfe6fa3a8ce739c04562091307bb3c5736790a177965eb0a33a29f293649bd42",
-  "skills/secrets-management-3/.phoenix/provenance.json": "ff40441a269a82f7501a7093b440509d99d7664d6791bec975007f4aa7a7cdd0",
-  "skills/secrets-management-3/.phoenix/selftest_evidence.json": "d64df81fa98a5e327ed78368c56f947f2ab755e31714c302f1eaa007a5c439d3",
+  "skills/secrets-management-3/.phoenix/provenance.json": "9951c5d1d19eabf7a5c826ba56aa6cffcaf193c43baee1cab87fa129573d7908",
+  "skills/secrets-management-3/.phoenix/selftest_evidence.json": "e90deb58546d44131f2713db803bd52fc01b4baf3f17e1e988a7469d74726fec",
   "skills/secrets-management-3/references/creation/p0.md": "d649db61926668c6113aaa956b1700b03d8fc081e7f29bdbe539db6a433296c9",
   "skills/secrets-management-3/references/creation/p1.md": "3241821a7b7673caad5d114f23003838810931a9af64604c53f90e73f9fbc00f",
   "skills/secrets-management-3/references/environment/p0.md": "440aa2da258ffdf5a5ab848192ab192ef7adfc1314046bd4edcf332474123fe1",
@@ -66,7 +66,7 @@
   "skills/secrets-management-3/references/production/p1.md": "d5c096a266befd5f9e17292ba8e78788e7103373c02fa0b180323b059a28dd67",
   "skills/secrets-management-3/scripts/main.py": "93a6c07f6aec084d2d68f930a7d3ca0d8cfb64f50790ee1b1d8b3bbcca91c6f1"
  },
- "sealed_at": "2026-10-18T20:08:35",
+ "sealed_at": "2026-10-18T21:03:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

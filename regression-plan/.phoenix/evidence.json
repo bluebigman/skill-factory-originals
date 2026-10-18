@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "regression-plan",
- "merkle_root": "535249191ee48c8b903195e6e3bde7f55408bed1ee69e543bbe395f602c7c4fa",
+ "merkle_root": "557fd11303ba663c04b08b8b47a131cae606ae4bbe32eace8e526d16c5e4076e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/regression-plan-1/run.py": "4133dbb0ad6de3259974be986683a433edb1c8bc0ac5b146b5519d05dc428e4d",
   "skills/regression-plan-1/selftest.py": "0fcf1d8c7c0ed6aa9ca9af645a261e8abd157a140930a73a6bdcd2dab6a5e5e8",
   "skills/regression-plan-1/.phoenix/originality.json": "483e05c79057b1589092793c737f7da03abe8be5fcdef8c92d05fe91a87106a7",
-  "skills/regression-plan-1/.phoenix/provenance.json": "dbe0bea36107dc8c62f69d9cbaea5e86147ed9734676e752d35cbd6026687f9f",
-  "skills/regression-plan-1/.phoenix/selftest_evidence.json": "7842695dede06f37317bd0c2c0d9b97126bdaa5651ea8f8d954f257c32f2413b",
+  "skills/regression-plan-1/.phoenix/provenance.json": "4fff2634ecd310ae5e6955da9871a82732ecdd0ce0bf82d2a0dc3572453adec6",
+  "skills/regression-plan-1/.phoenix/selftest_evidence.json": "e2fce928f2e0d98007018d98072c4d78dd57a3d0b795fc0abe9c8068da907ddc",
   "skills/regression-plan-1/references/creation/p0.md": "0d794a0a8e6b32003128eedeba08818071ab2a699c153d62513ab4a28e313f7b",
   "skills/regression-plan-1/references/creation/p1.md": "83346503f428e416062bcff4bc945449022b06da4c4683cec35ba357ab1ebafb",
   "skills/regression-plan-1/references/environment/p0.md": "bb1e998a350d0e7cd74b0774eac0cf5ae4a21e1015a763e09998ac78dd54d9f1",
@@ -37,8 +37,8 @@
   "skills/regression-plan-2/run.py": "8ae4362cb4d5f316a1f6923bc92acf7aa48e06f9d2d201eab08de7456b9143c1",
   "skills/regression-plan-2/selftest.py": "ce1ddce917b2d977add0ed1fb03a72c17020ec4d4a8cfcd0e077fb1c7bb3cb12",
   "skills/regression-plan-2/.phoenix/originality.json": "8475a8e07c26d3c19e666130d9fb720243854c0d1c90d873da2dd7d264112d44",
-  "skills/regression-plan-2/.phoenix/provenance.json": "5ed107b8812fe6279ed485f56b90a2568774b1b23aea52a497e05e338968c42a",
-  "skills/regression-plan-2/.phoenix/selftest_evidence.json": "bcec8bdee6eae5750b0f73b507c331e3a74720821f4091887c80f57e73cdbe53",
+  "skills/regression-plan-2/.phoenix/provenance.json": "4d46bbecc6f8830ba3a3a3b6f48ef537e31fee72f36a34b3a9a69565eacbd328",
+  "skills/regression-plan-2/.phoenix/selftest_evidence.json": "640e4c69f382abb17ad237d3a818686b289c59a6cbc964356347203eb2b93f18",
   "skills/regression-plan-2/references/creation/p0.md": "9b236ab562028523c4fa834b08e7658a90d6e3f584c366731f21c5cfaff79ffa",
   "skills/regression-plan-2/references/creation/p1.md": "d5a409a5dbabe4f8238a89e03f3f00d06644f850c0ee4fb992a7b315fdfe34f2",
   "skills/regression-plan-2/references/environment/p0.md": "593097d82f254fe6e095723ba7ceb1be893151973189c6bb3edce060ad11da54",
@@ -54,8 +54,8 @@
   "skills/regression-plan-3/run.py": "4f800607663078060f5924ff24854dc14b72be89871a465b1aa89e7329bcdf15",
   "skills/regression-plan-3/selftest.py": "b21cbcb5b6cd496b85b80bc7abbbf50aae46c7d8cdcc1a1f63854f4738d40b07",
   "skills/regression-plan-3/.phoenix/originality.json": "4761238c0fd1b0fce8094a2e4895ad9938b5f2008955d4f7db48fc690662a02a",
-  "skills/regression-plan-3/.phoenix/provenance.json": "1d7ac394f2239d2de78bd19f719aa0070b9d00cbc4b8c65f112a75905b5b2df6",
-  "skills/regression-plan-3/.phoenix/selftest_evidence.json": "462dd9d29be0737a8ffe0dc63dbf7389685423bfe907ff613d8faa8e1441d2b4",
+  "skills/regression-plan-3/.phoenix/provenance.json": "a04c6378f37829ce571d662739fb886bfdb477a991b480ebe836b6f5c1a43058",
+  "skills/regression-plan-3/.phoenix/selftest_evidence.json": "e38307d5670582e756b52c50e61a04cf7e5a6a6e11b71d960ac3912f08e34a61",
   "skills/regression-plan-3/references/creation/p0.md": "5ef79d9dc31f0778a4ac0030e839470707a4ae249eafe3ffca35762402e62b31",
   "skills/regression-plan-3/references/creation/p1.md": "588762b086310efca5abf3e119385e9ef5f0bdca77ba599a2174c8f3e5e88ea4",
   "skills/regression-plan-3/references/environment/p0.md": "9c3b7a6e3a6a86041cebec59f495072f58dc1d3cda6a74870ad0ed237dca6cca",
@@ -66,7 +66,7 @@
   "skills/regression-plan-3/references/production/p1.md": "147b2efb1d0b7fe1e2aa92e83942c06777e1866f723b0a0a9b6e150cd99b54bb",
   "skills/regression-plan-3/scripts/main.py": "de841c0e4a59048d9022f0368387cba2906fcefca45482d66c4a54269e9950e7"
  },
- "sealed_at": "2026-10-18T20:07:19",
+ "sealed_at": "2026-10-18T21:02:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

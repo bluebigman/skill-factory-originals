@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "shell-script-harden",
- "merkle_root": "07a6eb968c3da845f39b759874717e235a1fa924f3923dcd6228a9fe766cecc8",
+ "merkle_root": "7ca91d32b41fea43b9498c362707ab404f31f7c409c079e159b4ec8db77e8caf",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/shell-script-harden-1/run.py": "47c9a4357c9ccec7656ef8fc7ff3fde2ac469de7c20d72de6b4099a946e0358f",
   "skills/shell-script-harden-1/selftest.py": "08da0737070fc292eb4d56f55a61b7895d0e230cbccd65549e1e248c515348d2",
   "skills/shell-script-harden-1/.phoenix/originality.json": "d76ec57db3b0ee939bb794eec7c18af28349bb2f4cdee73971a4ed960cafba8a",
-  "skills/shell-script-harden-1/.phoenix/provenance.json": "a8082b08ceb2f7c21d135ed65e7cff1a0d131f023fff1241262881f7414cde5e",
-  "skills/shell-script-harden-1/.phoenix/selftest_evidence.json": "f701e0bdd68cc7683b53237613fe253bff3342a7cffea0bac0e56f3e755d92c4",
+  "skills/shell-script-harden-1/.phoenix/provenance.json": "8defa95b91b6485f66da890eab4432d1923dd581129cd226c02ee93a3dc280d9",
+  "skills/shell-script-harden-1/.phoenix/selftest_evidence.json": "658fd510cd41ed4068d3257ffee69638c56904249d6c190907b6050bf18bcc50",
   "skills/shell-script-harden-1/references/creation/p0.md": "c52aa878c4b0e74ae708f9eca7a2b52bb83252af2b12514016954dd6973da304",
   "skills/shell-script-harden-1/references/creation/p1.md": "46812ffbe0d41b5dfc37647ed037b9b5b14dfc895656d86a52c85848a68394f2",
   "skills/shell-script-harden-1/references/environment/p0.md": "3c369a8b919c749d25d330463e28fd185f7a1be49e5d4e1ab7286bd6e0afab62",
@@ -37,8 +37,8 @@
   "skills/shell-script-harden-2/run.py": "11b922f0ab1b5d88706fe1b6fb508d0a131f755dd68dbada6051a935cfa5a8fd",
   "skills/shell-script-harden-2/selftest.py": "0ec96733d202386966a9dccaeba2b96eb946350d5f582e43e1189166df254f17",
   "skills/shell-script-harden-2/.phoenix/originality.json": "f8fd526f28b88fe5054ecc9e544830ca24e92a575b516b702b56c1199b3dd83f",
-  "skills/shell-script-harden-2/.phoenix/provenance.json": "2c2d180e9ac4fc9177288158045943b9f8eac46c9ac6589eb2e7f8bc7d618663",
-  "skills/shell-script-harden-2/.phoenix/selftest_evidence.json": "02a42d894e6b508133856523f4282073995dc2bbb517b9ec095494a428bdf401",
+  "skills/shell-script-harden-2/.phoenix/provenance.json": "1a85641e4f47572360a98f77b5d2f071e8bc0f6747477b0570dfa2d121df74ea",
+  "skills/shell-script-harden-2/.phoenix/selftest_evidence.json": "48970fe71d8c033800a9fcb8822c2562fd074ce215790909315663a39c41d497",
   "skills/shell-script-harden-2/references/creation/p0.md": "ee15d2377c79519cfb68abf7d0c7dfa546a3e7f870f10ac623833058e26fe700",
   "skills/shell-script-harden-2/references/creation/p1.md": "307dd608c341325f3a7845b28d40154ff2a9833aa59a0d09cf047d619c797fd5",
   "skills/shell-script-harden-2/references/environment/p0.md": "5079e647e97e95aa8e52a2aedc3610ce98d9c86dba526b9dfb27d93cd01ffffe",
@@ -54,8 +54,8 @@
   "skills/shell-script-harden-3/run.py": "1e2fc9389d46b840a78d05840d82b08e1110ae7a7e8e6102169b2e09b243e1da",
   "skills/shell-script-harden-3/selftest.py": "aef9995a93cd88bc0c42b0e5a05c50a4dec4c282cd8c484b2d08ab2fc3c3f3ea",
   "skills/shell-script-harden-3/.phoenix/originality.json": "d83ebc8721aff20df247db34528118a2601fe6a696b4f6c8692383ef91e27fd4",
-  "skills/shell-script-harden-3/.phoenix/provenance.json": "129c1acb12526b3f5ef93ca1124b47a71b7c0e32de655e73518344925928b560",
-  "skills/shell-script-harden-3/.phoenix/selftest_evidence.json": "9866307c85deaa3b0261e8ac23ed1905505d73f687af69d6359a570320b8cbe6",
+  "skills/shell-script-harden-3/.phoenix/provenance.json": "1eb41f9b6e467cb62b57378ead99f7190836db1b01f568d3a6ce594e8c2c7766",
+  "skills/shell-script-harden-3/.phoenix/selftest_evidence.json": "53f3aa5126e8a2d109b73aa9a6081a9b14b6d916923f3043897569c94f0032b0",
   "skills/shell-script-harden-3/references/creation/p0.md": "496d5a1d9c26468c6fe629a4662083bad3f57f38fb84eef7d01427030cc6a275",
   "skills/shell-script-harden-3/references/creation/p1.md": "5674acf6ae2076894806bdf92182bb41390004816adde0631154675a79ab8e2c",
   "skills/shell-script-harden-3/references/environment/p0.md": "17a517a0d074dd1a389d60de8b1cebf5e1bb119b368cce9aaf66c01e18cdc9cd",
@@ -66,7 +66,7 @@
   "skills/shell-script-harden-3/references/production/p1.md": "d91aed16aafd0857292ac3477b7f20eac387b6c639ce703326f1151a96fe6cac",
   "skills/shell-script-harden-3/scripts/main.py": "9ca01119ea37517534516bb867686493db3407258353d254a1e9706aeb9ba20a"
  },
- "sealed_at": "2026-10-18T20:09:27",
+ "sealed_at": "2026-10-18T21:03:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

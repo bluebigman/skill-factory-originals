@@ -1,0 +1,72 @@
+{
+ "name": "channel-partner-pro-3",
+ "version": "2.0.0",
+ "domain": "渠道伙伴",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "分层管理",
+   "then": "按贡献与能力分层",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "规则前置",
+   "then": "返利与报备保护规则前置公示",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "冲突裁决",
+   "then": "明确冲突裁决流程",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "赋能配套",
+   "then": "提供培训与素材支持",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "定期评估",
+   "then": "定期评估并执行退出",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "分层管理",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "冲突裁决",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "赋能配套",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "定期评估",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

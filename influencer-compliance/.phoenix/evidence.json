@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "influencer-compliance",
- "merkle_root": "55cd2c4898616f6f0ce892c172652db45ad34648740d6e63eacb80cd0dcaf35f",
+ "merkle_root": "8f8932755919ec9998ff01d3433d0ec4c804bbf75f8313b59aa519e74335c503",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/influencer-compliance-1/run.py": "7837a87a14944fff50ff0c0a41436df9f2a824b79b7f56d7b2d0bbccde0d33ac",
   "skills/influencer-compliance-1/selftest.py": "c3243ed5549f3936f78e9c7bfe78cf34e3fed3f7af7f0128b02c79359e576c6d",
   "skills/influencer-compliance-1/.phoenix/originality.json": "5fef0b69b2bf4b30408cd6ab9279c62d58c2322a5e2e1790040f30aceea812fd",
-  "skills/influencer-compliance-1/.phoenix/provenance.json": "afdef86d978df90bfa3eccb489abbbed0cc1fc60fab9d307a4cfeb0fcf3d6e9e",
-  "skills/influencer-compliance-1/.phoenix/selftest_evidence.json": "6aea6e266d5d2472f21e553d0349fc5ded9d0257185505d5b677bd201bcde166",
+  "skills/influencer-compliance-1/.phoenix/provenance.json": "eb660893df4ec9679d5150eb7e5d02fe01a4e7c9fc23878022f7cb5d06aa994c",
+  "skills/influencer-compliance-1/.phoenix/selftest_evidence.json": "737ebbf55144191607816e6cf071fa85332743cd92f5525a7434389a1b27bebe",
   "skills/influencer-compliance-1/references/creation/p0.md": "19a6a11775b2d1358295509e1fd4c289977112552ef915be897736b31e2d9421",
   "skills/influencer-compliance-1/references/creation/p1.md": "c98dabc62e5a9463817bc657108ce68d1e9078b98f76eb7ab71c9a0d79d26e72",
   "skills/influencer-compliance-1/references/environment/p0.md": "6f1273416334b821c8daab50a14a9386389ca9d18735235626330568860a7fab",
@@ -37,8 +37,8 @@
   "skills/influencer-compliance-2/run.py": "7e6eff19828475ade65259b160c0e4337938d4e784f21a4d33f858f3db8c85c8",
   "skills/influencer-compliance-2/selftest.py": "b85adf2688a52e2246bc960b7b6bc9f477195f28186423a2b4bc24e1b5b0d176",
   "skills/influencer-compliance-2/.phoenix/originality.json": "668ea2dc6a63dfc2916bca48284514917e836aaf5cc2f22ca31de68747b3e364",
-  "skills/influencer-compliance-2/.phoenix/provenance.json": "fb61fccd3581be75fa9082dd8dbe4c6ebec03a9e09c83a5f851dc12ad75abb6a",
-  "skills/influencer-compliance-2/.phoenix/selftest_evidence.json": "9a461adae51fee40c7f1bc4554f025d6d4383f6651d3b91bd3838d2c2d48dd2c",
+  "skills/influencer-compliance-2/.phoenix/provenance.json": "de1f6502bbf8ccf91dd9b8f0e8ae462d7f3839784539ada07b3dbf32a8c7b1c0",
+  "skills/influencer-compliance-2/.phoenix/selftest_evidence.json": "ad07a2e37aab2b1bc4443a0182e7ffb9eab13520fc30d452a179518cc0eafb30",
   "skills/influencer-compliance-2/references/creation/p0.md": "67a883af863ae94dbf25cf205e95701ad9e2778661f18092552df13352b0c633",
   "skills/influencer-compliance-2/references/creation/p1.md": "94bb6d73b693495edcfd9247fa5c6c7bcdc103014811904f0322e46450bae1f1",
   "skills/influencer-compliance-2/references/environment/p0.md": "983154b7c6c159e3474ff77a0989590b1167398b657d82583b2d8a7af0b5938c",
@@ -54,8 +54,8 @@
   "skills/influencer-compliance-3/run.py": "7c6f0997d9e297116c777ae7376fdd5e04462f4e3aed15272159ed4c302bc5bd",
   "skills/influencer-compliance-3/selftest.py": "1c449a5f9b4cc9a430c7f651ab40259245a2560545db1409507abf3752d664b5",
   "skills/influencer-compliance-3/.phoenix/originality.json": "68577daa27c69eb7f81f650817e9d415b23ee4a35081c6b4d4b3a54156679ea5",
-  "skills/influencer-compliance-3/.phoenix/provenance.json": "3fb4dc8045d9b249d6aeec356b622f0d70957a9df409aae26d524e851b60ed6f",
-  "skills/influencer-compliance-3/.phoenix/selftest_evidence.json": "b2dc6ba763c756541a593d706fdca0e348e130cc10904696f652b83fc5c0e799",
+  "skills/influencer-compliance-3/.phoenix/provenance.json": "74bacf7945b562b774908fdc99dd863274ade4cad4377668599a4d3f21ac7dcd",
+  "skills/influencer-compliance-3/.phoenix/selftest_evidence.json": "ba28024b1e970a60bae6914ca66fc5776cf9c76c6c3f281ce4ff417ac5d0a4c4",
   "skills/influencer-compliance-3/references/creation/p0.md": "ac685ef67f2de6c2a0bc1fad3e0156e232c939d729be91a15c3bf66a85a985e1",
   "skills/influencer-compliance-3/references/creation/p1.md": "3733080c3a500d2b094fa89a8b530b7695a669c2b27defc9796befb652a2092f",
   "skills/influencer-compliance-3/references/environment/p0.md": "6f5885444858071f21f7c792205ea5d2f785905bb03dee55c15860e6a86b8d3b",
@@ -66,7 +66,7 @@
   "skills/influencer-compliance-3/references/production/p1.md": "e9687e76038c59257c35e304486ee7f18cee23a7e470237aeac61a08fff3da22",
   "skills/influencer-compliance-3/scripts/main.py": "306a9a830b77f6595f69fb14d8fdf97b21ddc77b85e276edb593944bf0c549fd"
  },
- "sealed_at": "2026-10-18T20:01:24",
+ "sealed_at": "2026-10-18T20:59:49",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

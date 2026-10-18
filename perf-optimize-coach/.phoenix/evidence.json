@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "perf-optimize-coach",
- "merkle_root": "8f0380ac30e35a5fcb61d91c7e29a4968a8f7d1571b45a57e77f1d1cf929aa43",
+ "merkle_root": "56671e6026155d6c76bafe70388a42fe08f2d0fdca99302c9ba13dfb674cab92",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/perf-optimize-coach-1/run.py": "0d1d1537f812178d121dab9d043a7556f4c38bf1607a082cb2c662387c98dc57",
   "skills/perf-optimize-coach-1/selftest.py": "d3f6796828c9ef50b94fc05cae77fd58369c6706b8a7ecc6e3beeb74154fbe87",
   "skills/perf-optimize-coach-1/.phoenix/originality.json": "42bd29aa49d2f318c9c22b7a6c9350312e30011bcb74a16296f505500a4c7030",
-  "skills/perf-optimize-coach-1/.phoenix/provenance.json": "8e14da6e283d696398a863864ad8ebaa82a3e6cdf76a0be28108112221e88b29",
-  "skills/perf-optimize-coach-1/.phoenix/selftest_evidence.json": "4e4011729819cb29fd36d6a4c6c73e257550ff57e9c6a603e23956158a233a67",
+  "skills/perf-optimize-coach-1/.phoenix/provenance.json": "4e7be15d98645f69924d193255b083fef5ae68c88c165ea281b7db3cc596b5d5",
+  "skills/perf-optimize-coach-1/.phoenix/selftest_evidence.json": "db28b2d22f55140a89443c8838f2b8106c9713ffaf4a849ddc6722de60ba3a7e",
   "skills/perf-optimize-coach-1/references/creation/p0.md": "4fe960a72bcdb4d4c7aae1ba43d7cf063bb2f2f50e7837b7247f640c01c15c04",
   "skills/perf-optimize-coach-1/references/creation/p1.md": "45cf9967ee1c75cf03f9c471d675b2f3de23a3025d2f871b85e07f60e2bc3957",
   "skills/perf-optimize-coach-1/references/environment/p0.md": "9f1c486c6bca9f64c4e699c41e90f75574e4dde283dc6dd718b558547171cc7b",
@@ -37,8 +37,8 @@
   "skills/perf-optimize-coach-2/run.py": "a971e04bebafa86e8d274929ec7bd7e234a5e53d4cffc00252ed2ef5edd4c252",
   "skills/perf-optimize-coach-2/selftest.py": "c2a94229098ba05afe018a9fcf05b5ee2f2e26312687331bb6668bb858b6ace4",
   "skills/perf-optimize-coach-2/.phoenix/originality.json": "1560069da870439db95a63c6d5911e4901406de15d663c63c04fc8bf15b6d8b1",
-  "skills/perf-optimize-coach-2/.phoenix/provenance.json": "9be798b14d6a8dff536a84d6af97ff3d195c770c8444126c9b26e4d8ec587374",
-  "skills/perf-optimize-coach-2/.phoenix/selftest_evidence.json": "6ef3db3285d9add37c9edeef2e3563d33cd3d0defa432f96bb54a993196b7496",
+  "skills/perf-optimize-coach-2/.phoenix/provenance.json": "30427d81fdb52da977782dddbfb4b136c4e9ba25589e7737dc440837e22e50d9",
+  "skills/perf-optimize-coach-2/.phoenix/selftest_evidence.json": "b7611864b957d26fab9f52f3019fdc2b554ee0fccb4a6600b39b224fe57548c5",
   "skills/perf-optimize-coach-2/references/creation/p0.md": "8031421448ae697299da2bc3fc5cfa233f64bb6352c823deaa81326357f9fbe3",
   "skills/perf-optimize-coach-2/references/creation/p1.md": "250317eaf2ce70f7e2618ca6f5321e10d00914447ec3ebe61f9159449b7cc982",
   "skills/perf-optimize-coach-2/references/environment/p0.md": "37bd12792f6f62d2173a685cf7ac744642cb6c726bc9f261449c53eff015ae90",
@@ -54,8 +54,8 @@
   "skills/perf-optimize-coach-3/run.py": "f72eabbac775aa6944c969dab657f2ab902b57cfd80a4e4bd72d8fdba733b92c",
   "skills/perf-optimize-coach-3/selftest.py": "4f690dca0bc7690baf663018a8d499ca91917e2016def453bde12ae24372780e",
   "skills/perf-optimize-coach-3/.phoenix/originality.json": "72fab08ad51aeb63bea7741fa8d1d59c4647e7cc9f734e23ef0369850f2acfec",
-  "skills/perf-optimize-coach-3/.phoenix/provenance.json": "8cf4147b24269ceedff29106249ae3a72d1812ab2ee205b2b99b3262d9d3b118",
-  "skills/perf-optimize-coach-3/.phoenix/selftest_evidence.json": "81b2d5cfdbc0172214dd10b1cd5f5da1b4c51083b6b0b2d11c92fabec46d326f",
+  "skills/perf-optimize-coach-3/.phoenix/provenance.json": "565baa76d6638c0451eac965eea1c739135bfd5e43987133a938e06bd25c9880",
+  "skills/perf-optimize-coach-3/.phoenix/selftest_evidence.json": "60d80543d598fae2f0ae641ce40f79d295509fedf048a3ac2a394837cdf8881e",
   "skills/perf-optimize-coach-3/references/creation/p0.md": "08afe21ee3cb8a2867fcc66277649256425f75782d10bb9fee528b007ab45cba",
   "skills/perf-optimize-coach-3/references/creation/p1.md": "eddba3b74702f3ea9e33f5ddc06a908bad96fa51e809bbd562c91e448bdfd345",
   "skills/perf-optimize-coach-3/references/environment/p0.md": "a9e3277d317c756664de4642d5acf995de26d5badc94d7c9a7d49a95c1d9fe15",
@@ -66,7 +66,7 @@
   "skills/perf-optimize-coach-3/references/production/p1.md": "2577590716a9832cf78dd5c3a4b6ec8975fc1aea6d0dfa5d2a02a064d568458d",
   "skills/perf-optimize-coach-3/scripts/main.py": "83f157f9f35c1f4f11b5858ccb419759cbd68c8adaaf249845f4363767b1b740"
  },
- "sealed_at": "2026-10-18T20:05:39",
+ "sealed_at": "2026-10-18T21:01:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:57:42",
+ "at": "2026-10-18T20:57:56",
  "skill": "doc-transcribe-struct-2",
  "slug": "doc-transcribe-struct",
  "passed": true,

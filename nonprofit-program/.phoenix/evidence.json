@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "nonprofit-program",
- "merkle_root": "94b92ac4ea5cb478d2a5d0bfc1946dae5663703d66fbd872eca67dbb11c5a42c",
+ "merkle_root": "21a42a32046db2d55c5802dece16fcd6d2c3bf2ba4f1f637019d8c81f293d964",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/nonprofit-program-1/run.py": "4f82f5a762354165697ad65c06ceed32f66c085296b6e8578cef28337646eae7",
   "skills/nonprofit-program-1/selftest.py": "9ae92213ef96dd3c3d2abc8231d8140195434226ebf2885d6461537a93989716",
   "skills/nonprofit-program-1/.phoenix/originality.json": "a0b826a2a3d7999601a256e308fa485fd0cb81c1dbc6e840f0fad9da15fbd188",
-  "skills/nonprofit-program-1/.phoenix/provenance.json": "b03d4dc89bcf95c66480fa37930c3b51809eea92fd945cff88b2756e98076742",
-  "skills/nonprofit-program-1/.phoenix/selftest_evidence.json": "ff3bce7c0fde85abdb37ea1b16179ddd522eb178e22e71eba179581e01896139",
+  "skills/nonprofit-program-1/.phoenix/provenance.json": "eac828a54455ecc5af2fc42c3ba0555f3ade2517ed9d9c665be8fd261fbf6426",
+  "skills/nonprofit-program-1/.phoenix/selftest_evidence.json": "cecc866195253854ea44a504221f785ee562b1b822117a6e59b0d253959e6d2b",
   "skills/nonprofit-program-1/references/creation/p0.md": "9052362d9c86b405d6a1411941e038a3ec0e0bd5f7af68c105b4f83168b34d6c",
   "skills/nonprofit-program-1/references/creation/p1.md": "7476ccf7de53e863e1286991d9bbdf67def129dfbe32a53ff5a7eb58a3e43ba7",
   "skills/nonprofit-program-1/references/environment/p0.md": "cc32aafd5124c70dc7c31b934408736fa071156fceffe771565e66076bdbeb4e",
@@ -37,8 +37,8 @@
   "skills/nonprofit-program-2/run.py": "f338e11fa6e3180e64659e2f7c6607b3fe57585e49d52c3e6a9e05877f3e1732",
   "skills/nonprofit-program-2/selftest.py": "fee82756763952e623a8cbfe2f5e2dc1e587bb500c8ee3a042e3d9211e7aadb7",
   "skills/nonprofit-program-2/.phoenix/originality.json": "2c2223bef7c10609304d8e47e869aa228d5ac71f3e5a15bc4713241eb98770b3",
-  "skills/nonprofit-program-2/.phoenix/provenance.json": "4ab3657a3d44e2a5c57c90abcf33263c43215da63714354db2931055427550ab",
-  "skills/nonprofit-program-2/.phoenix/selftest_evidence.json": "0217f5b253e34a4296b271cbafb14b8461bb3fc2020118197b8cb353f8cdb657",
+  "skills/nonprofit-program-2/.phoenix/provenance.json": "423fa78b7c1c5d584b46af558be1740f27bf7b8f8219b000b832c2164bab7408",
+  "skills/nonprofit-program-2/.phoenix/selftest_evidence.json": "3c4590fde041b6c30cd44602c3e6250476bd76d2d767ca8d1be73761bedb5444",
   "skills/nonprofit-program-2/references/creation/p0.md": "e63ab591cd627ffb4c4d675f20d262678ec9ad5e0f1ad7953d049e910cafd200",
   "skills/nonprofit-program-2/references/creation/p1.md": "7c12e84b2257561c868b636ed97b3dced5e99a3a4e3c0f285cabeafcb884251c",
   "skills/nonprofit-program-2/references/environment/p0.md": "fdb59e2fc2944f8ef250e1c52ec2238453a01886e4c8a3b2470c30100b9df53b",
@@ -54,8 +54,8 @@
   "skills/nonprofit-program-3/run.py": "4704dbc3e4392c47961420fb0646a48d9b9ed9c50d8fe9084181eb1a3d92ad80",
   "skills/nonprofit-program-3/selftest.py": "d90ba7d434d8e77d57fd9db749e9715bc11a0af848249ed92a329df4418aec6f",
   "skills/nonprofit-program-3/.phoenix/originality.json": "036aefeb1ce91934d63e69b045bcccaf5965f6659a83befa15cd66081858ad0c",
-  "skills/nonprofit-program-3/.phoenix/provenance.json": "d8508304e817c0a91f6cff9602cef55ad234bc2e0831a2780f54d7a17299359f",
-  "skills/nonprofit-program-3/.phoenix/selftest_evidence.json": "57344d23532182708e18d24627f81ee4018635350e577560e3f46babcecd76b7",
+  "skills/nonprofit-program-3/.phoenix/provenance.json": "8e0fde581f8ff7fc5b33bc90c388fd9db5601a9567d6953240f30c4b2bdfe65a",
+  "skills/nonprofit-program-3/.phoenix/selftest_evidence.json": "29d5e743de6c60f60c897f0cbaeae3972f1d6004a016546d72dc59a50e1ed759",
   "skills/nonprofit-program-3/references/creation/p0.md": "ba2485c892df80613cfac34d7c04178b1965b80eb14b7be84baabe134511859e",
   "skills/nonprofit-program-3/references/creation/p1.md": "563baccdbc632d64ee50dc17b8e733a82e6ca5f0041391ae56e6af92abb16b9c",
   "skills/nonprofit-program-3/references/environment/p0.md": "0626ce84c6bedc2da817d5e65c9a46ca63411ca4aabe817a5227647dfa53ec77",
@@ -66,7 +66,7 @@
   "skills/nonprofit-program-3/references/production/p1.md": "c90dcd91dc359892f1e6cbc985e0a51e41335f53d992d5a74751696e7c814b9b",
   "skills/nonprofit-program-3/scripts/main.py": "2fe944ce4b3e654dd2b293efe3e13d29a0ee600ce2f68abfd2456328c3110731"
  },
- "sealed_at": "2026-10-18T20:04:28",
+ "sealed_at": "2026-10-18T21:01:22",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

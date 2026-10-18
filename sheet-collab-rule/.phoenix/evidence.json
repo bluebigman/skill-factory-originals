@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sheet-collab-rule",
- "merkle_root": "f13477a26fc3f8f7a24594840e5b2e5290c9a8eadfe0a0a6baa93a7796d7a61d",
+ "merkle_root": "17fde1a1527dafde57eca3891010f560bec6d36cd249f356eea6109d8ddba184",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sheet-collab-rule-1/run.py": "6a48fefd6abd60e61cc31b03fc712ead02bc3abcf1435b0ba06b8f7819b21dde",
   "skills/sheet-collab-rule-1/selftest.py": "22ea7e128efe54366ac39735369c577168eb2be67f0e276b78e7f64480548494",
   "skills/sheet-collab-rule-1/.phoenix/originality.json": "b666e6f753648dad1710fcff2a2fcb6fd9ab2796763a273b233ff98c2d596d3b",
-  "skills/sheet-collab-rule-1/.phoenix/provenance.json": "85bb55757ba6cd2997967b005b545525c4b495c518b64802ad58bf8258e80975",
-  "skills/sheet-collab-rule-1/.phoenix/selftest_evidence.json": "070c1f1ef15258444d971162706c14fb640a4abe409f8e98d800352d4fc42bc1",
+  "skills/sheet-collab-rule-1/.phoenix/provenance.json": "76606f6b6e28e02f8b7f4195a87afd6a2bab75accec7137c2619b5c149bde9c4",
+  "skills/sheet-collab-rule-1/.phoenix/selftest_evidence.json": "d8a18c2a598320f24d5514c9e0e4577e259ad2b5dd50f4d2de9d26d39fabe4aa",
   "skills/sheet-collab-rule-1/references/creation/p0.md": "6da3bc9b50e4ccb0f211d5049fe2c2cc172d9d3b398b58dfa328be6bf1b1e810",
   "skills/sheet-collab-rule-1/references/creation/p1.md": "fc312de9fb94c0d3f4c0371e121d0853acee68d66cca64b773b530f31fb13abc",
   "skills/sheet-collab-rule-1/references/environment/p0.md": "2f2eea4ce475ae91dfc95cfc50f2644c8ddb66676e62a30855c590ea2d585bbc",
@@ -37,8 +37,8 @@
   "skills/sheet-collab-rule-2/run.py": "3061f713aa7ef79caef3f921d5b0c33a555b6ecac20715459b8913dc07708949",
   "skills/sheet-collab-rule-2/selftest.py": "dbf8127fe2eba6ccbb8989ff6a577ba71c9c691b82c288d36d407898010df053",
   "skills/sheet-collab-rule-2/.phoenix/originality.json": "f35f142ca5db53909f3c4a1e5347fdae7682d3ee9744282ed2c67f078a1bb65a",
-  "skills/sheet-collab-rule-2/.phoenix/provenance.json": "0570de764472eebe0690bfb89d44bffc373f199279bca2cfb9fc527394053f32",
-  "skills/sheet-collab-rule-2/.phoenix/selftest_evidence.json": "d6ad72e3224c44073e67079f710ad535931f519bf83720ebb6f8378e01f9db16",
+  "skills/sheet-collab-rule-2/.phoenix/provenance.json": "353f05af28c90e5e3ac4f7de8c39db74572dbc98151b29cd3d534160e9b42cf7",
+  "skills/sheet-collab-rule-2/.phoenix/selftest_evidence.json": "ee9e0a83aa6b5de7d87504494322e1d4aed5076ee1ec03faaeb46a3cadd29918",
   "skills/sheet-collab-rule-2/references/creation/p0.md": "23bcf8575f0e40740d5320f9fdef12f6c833ad08968b29015135a847355e76e7",
   "skills/sheet-collab-rule-2/references/creation/p1.md": "5a0ce1ca9e1825f7402535a2b4fcd00a35fe2a9b906447011205602c15d58a20",
   "skills/sheet-collab-rule-2/references/environment/p0.md": "cc03a8c9cad60b5af89e6a327258a6be459f1e6b6266cfa20212ae6bd923554b",
@@ -54,8 +54,8 @@
   "skills/sheet-collab-rule-3/run.py": "044a394d3ef52c603877bfc434a1463320e39a63d9843d92062046da54c5330d",
   "skills/sheet-collab-rule-3/selftest.py": "3d6ec21453f2eb21590a5ce92ef3113cd83cdfbaf4d3d6bdd546bfcbbbe39a9a",
   "skills/sheet-collab-rule-3/.phoenix/originality.json": "f7cff47b3f234080313f91dde13e36bdad1aafc732a5361998c1f78263638e4d",
-  "skills/sheet-collab-rule-3/.phoenix/provenance.json": "73e397fee83ec56a4aa83eabdaf778874404cee5092643a319b4b6801d8a1b5b",
-  "skills/sheet-collab-rule-3/.phoenix/selftest_evidence.json": "050c47fced5802ddbf18975e93cad127b85f047022f7513067c0c13caa272ce4",
+  "skills/sheet-collab-rule-3/.phoenix/provenance.json": "a3f1674746897bc2e1e69536216a2dbb4c5473cef4ef001cd23b9f4199a66292",
+  "skills/sheet-collab-rule-3/.phoenix/selftest_evidence.json": "0aba918d3516fbb0bdcb1c414a34295a7d4f1790c30d3472dbf481b6d09f855b",
   "skills/sheet-collab-rule-3/references/creation/p0.md": "5f861aa86dca30335558831e2f24815f91487cae2f54cb0e4b9cba20994b362a",
   "skills/sheet-collab-rule-3/references/creation/p1.md": "f45d6b3b6b40efa3e32c24df60a79d37f223b03ec9581330236a19a75e220235",
   "skills/sheet-collab-rule-3/references/environment/p0.md": "61fa731e510fffbeb1521331fdcdd8f185e87895ac95dd37230c7a4c47b1aa78",
@@ -66,7 +66,7 @@
   "skills/sheet-collab-rule-3/references/production/p1.md": "bdea987762d4121fb0a43c2c74446f3b7e391f923520d9cb83312453459ec912",
   "skills/sheet-collab-rule-3/scripts/main.py": "f96b0c876d085291c8abd43c1d6d7b45731a9391ee92be92b72316291a7130f2"
  },
- "sealed_at": "2026-10-18T20:09:22",
+ "sealed_at": "2026-10-18T21:03:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

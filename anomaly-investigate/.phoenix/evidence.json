@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "anomaly-investigate",
- "merkle_root": "9d62ceaf7c451c9255aa555d35a7a963f0fdbdbbb5df9eebd766f19fa3d95e4b",
+ "merkle_root": "29792998d7d17d187869a5aacc6d71978968cf2e4ed891eefda3ffeafcf1194a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/anomaly-investigate-1/run.py": "31b1136bf96ad7916b80fed4cdf57c4e62109f1c21e81b53c104e687489c1ad7",
   "skills/anomaly-investigate-1/selftest.py": "6220386079e0bdc7881f094e129e822ab749e7d0946a8048110ad806b12d9f77",
   "skills/anomaly-investigate-1/.phoenix/originality.json": "7cfb642db7ea194cf5517e270f1166a93d22010efb8e9194bf8f59dd6a11b8de",
-  "skills/anomaly-investigate-1/.phoenix/provenance.json": "c02d962a5802d334252f7dea8e2091c347f9259b6dd76e9f00fccdf793793b28",
-  "skills/anomaly-investigate-1/.phoenix/selftest_evidence.json": "f9ce207c042052e41556aec8b47af0d15e8ed2ca92e7ccd5b41fed033dc6cb5d",
+  "skills/anomaly-investigate-1/.phoenix/provenance.json": "356e0bbf141685aa884982ff8dc76a267dc9a4f97347054e31264a16cc0bf64a",
+  "skills/anomaly-investigate-1/.phoenix/selftest_evidence.json": "00901beb32a76e4e2991cbebc56e09c34ce3e258b5a859e26bdcc5adb4b6cec2",
   "skills/anomaly-investigate-1/references/creation/p0.md": "9073521af2551f67c73986c03427811c40532d38fb9f0c3d41de6d2d101dd7b4",
   "skills/anomaly-investigate-1/references/creation/p1.md": "099e362a0bfc04b47c908def8532cfde349aa3edb823032289b7ac64cef78ff3",
   "skills/anomaly-investigate-1/references/environment/p0.md": "66d073ed1bead8f2151f25dbb157e99e0bc6599c215b361e2c13694fde80d1b5",
@@ -37,8 +37,8 @@
   "skills/anomaly-investigate-2/run.py": "ae09ca96a6bb043986e15e16e5168e7e098b4dfda05adadfc0606f9308df4bbf",
   "skills/anomaly-investigate-2/selftest.py": "f852bea233a907eb61033e8ce5cb9da8c58a51e7b12648cccc1fd3121250c984",
   "skills/anomaly-investigate-2/.phoenix/originality.json": "3c6dc5d1d32e49d0dfe49a66bc32b54e44950e5aa568b1ba24d24fc1c2e80fd5",
-  "skills/anomaly-investigate-2/.phoenix/provenance.json": "5be3068616006c3d380b22fdc187a5b3ca1b20a2dda7b70c2c577952cb06f4fb",
-  "skills/anomaly-investigate-2/.phoenix/selftest_evidence.json": "5516ed4e08fd44743d7fd06de2c9275964b337d80f6b4f49aec7c9597c1a2726",
+  "skills/anomaly-investigate-2/.phoenix/provenance.json": "a555f35277fa82d2ef5ddfe755e428014a332f2ff1c961ac18ffdc7284f5f40f",
+  "skills/anomaly-investigate-2/.phoenix/selftest_evidence.json": "2978f549973649030a0b194db7b583214cef7f90bae17b670e5bcbc38f89a1dc",
   "skills/anomaly-investigate-2/references/creation/p0.md": "e1f0a6e20a25a5eb596c636dea74b94e2e5dc077a0a2a193c0ff9dd044f2b643",
   "skills/anomaly-investigate-2/references/creation/p1.md": "bfaf6095aa509c236ed2cd29e178ce07bd655229b4644a42ac9a2a4c3626708c",
   "skills/anomaly-investigate-2/references/environment/p0.md": "16b734723835892c609aeb011597b6a77d8a891aa2747bbf3b0443f51c8fbf0d",
@@ -54,8 +54,8 @@
   "skills/anomaly-investigate-3/run.py": "33882e353d743b18edc0890d7195bf430fbdcfd1b55c19838979b8c52c6071a3",
   "skills/anomaly-investigate-3/selftest.py": "11caf84633da69151b0b70ef16f76168f7acf49d2d8ab65235a903fb646c54a7",
   "skills/anomaly-investigate-3/.phoenix/originality.json": "5305fca12bc04454f8afda74621d51fb951648e126adab9763cdfa50d9c0d2e1",
-  "skills/anomaly-investigate-3/.phoenix/provenance.json": "2b3968c81c3a776e715a664693bd39be588e15519e5f94381e345d74cf01d86a",
-  "skills/anomaly-investigate-3/.phoenix/selftest_evidence.json": "f6e38a45f056a598ee330b60b3e2d2df994d51b2d28c26844976fe7ab9d2ca82",
+  "skills/anomaly-investigate-3/.phoenix/provenance.json": "2a1913ef9d3f45c5de1684ee32de9228bee093e39f553b7f3370ef1830d83500",
+  "skills/anomaly-investigate-3/.phoenix/selftest_evidence.json": "2fbc4a7d79e2f231b0f0b6cb61ddf1eafcfeb2e685787c7c33399c54586f8d2a",
   "skills/anomaly-investigate-3/references/creation/p0.md": "9907fe8bf648162179e855f2d15d47b33d6c60e95823608dace7a54aa82651a4",
   "skills/anomaly-investigate-3/references/creation/p1.md": "de4688006587e7752f01ad48ee849a7417495956ea5ae38f8b39bb59860e299f",
   "skills/anomaly-investigate-3/references/environment/p0.md": "70bd70b3b99ca2e35edd39b08a8ea53d111a76f6d6704edb8f612337be82f640",
@@ -66,7 +66,7 @@
   "skills/anomaly-investigate-3/references/production/p1.md": "78a4438c7dd122985b4e86873ddb8525057bcb9b3e3333bc8bab3ed3544daf7b",
   "skills/anomaly-investigate-3/scripts/main.py": "cf5551bbb5a707f2a081116e46941b54e7febdfd9fc9fc51794ceee72ce5196a"
  },
- "sealed_at": "2026-10-18T19:52:31",
+ "sealed_at": "2026-10-18T20:54:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "teen-time-coach",
- "merkle_root": "f33c23f657c973999a060b66a371d39055a5806a7dc580453ed41e7b165f81a3",
+ "merkle_root": "cf44b380274cec65ff9af1d1213331d620f4c8e498dbce43306e58034e38f786",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/teen-time-coach-1/run.py": "72c032cec697241086109dfea3eb97fbf98ae09808446b001caf172b841d6885",
   "skills/teen-time-coach-1/selftest.py": "3dffa5943472cad054abfd76c1f2c233706372a4647d7cda3a7f1a47a400e2d5",
   "skills/teen-time-coach-1/.phoenix/originality.json": "e8354aeeb428869a2c4604df2835fb50a5e10ca7e308424897ede9c342058ac1",
-  "skills/teen-time-coach-1/.phoenix/provenance.json": "9f1103a585d2b29ab750dafc289e51f97814954dc3abda52e3abf1c71f41677f",
-  "skills/teen-time-coach-1/.phoenix/selftest_evidence.json": "478735b213d5e9ed3b487ac0d45bc08ab9ca1edb927298a2ba3d5be2fe2937db",
+  "skills/teen-time-coach-1/.phoenix/provenance.json": "83a5722626bda2a4b6764197567b932298f736d144a33fb98000e199d675fd68",
+  "skills/teen-time-coach-1/.phoenix/selftest_evidence.json": "23552c4150b92585ca34d3f498f9552838bd322daa011642ef96148da64141b6",
   "skills/teen-time-coach-1/references/creation/p0.md": "69fde69f19adf003b9d4707b9bd5d41e96c42a7ce81a2d38edc80da1f00c24c9",
   "skills/teen-time-coach-1/references/creation/p1.md": "140893a2531dcc75657c4cf1042a9d41120d0561d0e77c04a37a7140a83a0a71",
   "skills/teen-time-coach-1/references/environment/p0.md": "ba3c1a7d995dd2f91c56ea24b4c0378f1c497600d3359121876cb4971f1dfaa7",
@@ -37,8 +37,8 @@
   "skills/teen-time-coach-2/run.py": "de21f1f72796137e5725cff223ade7039428347e4efc0fae92cf0f95e18163e3",
   "skills/teen-time-coach-2/selftest.py": "f6639f791483d4b7777d96176f98163eb28ec516334f3d013f1da4b7db7b7666",
   "skills/teen-time-coach-2/.phoenix/originality.json": "fab679979d3ed2d8a288198d4fe5451653c796850324be7c6b39b1a21175c463",
-  "skills/teen-time-coach-2/.phoenix/provenance.json": "7e8f17e6a3d472be35ceb22a4dbc72694bec6acfe68717df8c1c719ef9f2fed0",
-  "skills/teen-time-coach-2/.phoenix/selftest_evidence.json": "11c59b947fee31a51ee253f0f60b3f3594f64868aca8c91ada04f3b08b2d2d26",
+  "skills/teen-time-coach-2/.phoenix/provenance.json": "09ef10aa91812a98925f42d92f2553d0178e7932450d5c7f447a6c85bc02e6ce",
+  "skills/teen-time-coach-2/.phoenix/selftest_evidence.json": "66be81e1051ec2f2c484135bc0481fda2ac1a12ca181a21172cb4e7c0dac6a02",
   "skills/teen-time-coach-2/references/creation/p0.md": "cb563c6be12b4ad8605f46fba24525043a15d1ce329f60be9560f56c5445d522",
   "skills/teen-time-coach-2/references/creation/p1.md": "cd08d7473498393479b8fb02621012a4438e80b87e1068d56e73fa44ccee50d5",
   "skills/teen-time-coach-2/references/environment/p0.md": "2d67d20670685a412b4a63c1d5b6e9f225b1207c4b3d526acfc4386b4ca05253",
@@ -54,8 +54,8 @@
   "skills/teen-time-coach-3/run.py": "f65eb28da1f797b0ffbed805eea9496464e01f1f97203c6c6df04e8a41237b1d",
   "skills/teen-time-coach-3/selftest.py": "7794949549b18ffc2dd97a7d406e7712fd634ae333e497da208633535f9a93f6",
   "skills/teen-time-coach-3/.phoenix/originality.json": "5d1e02bcea921c968dbaa381ccaa0eabbd6e9e0679d22141d53ed83ce1601ef2",
-  "skills/teen-time-coach-3/.phoenix/provenance.json": "a34ea62ea62e6629f86c862d6645f16820122bd88da6a2d3dd93e81cbab58ef4",
-  "skills/teen-time-coach-3/.phoenix/selftest_evidence.json": "773f7fa3de7130b61a0bc7f538d6d541f1f3fdc6004ceae165a0f6aa51209b0e",
+  "skills/teen-time-coach-3/.phoenix/provenance.json": "c9dac26a4a183274b5be8541145d8beda0899f5dc54bd76598636d256f7ed04e",
+  "skills/teen-time-coach-3/.phoenix/selftest_evidence.json": "9632fbfa22f902bade44b6e8b16c630efd96db16cd769d096cc124f470b05d57",
   "skills/teen-time-coach-3/references/creation/p0.md": "8daba515c0c6cd110efda596b715e3f4facc5941ee83034e8d98911c348edfd7",
   "skills/teen-time-coach-3/references/creation/p1.md": "e16e17685a5fe53fe9ff48d825a537d09c7523bb2aef0b9cc7894bd043713564",
   "skills/teen-time-coach-3/references/environment/p0.md": "567dde0d94a5e1d15aa26e05e6d81966ec37864b863585d6ce95f63b19f16392",
@@ -66,7 +66,7 @@
   "skills/teen-time-coach-3/references/production/p1.md": "3430bd74a32f534868e874131db2b5abb0e64034f0d15689eda44d150f2c1ea3",
   "skills/teen-time-coach-3/scripts/main.py": "710938826cf18a864e1c2ccaf723c63007ae5611000f36feb318bb00069c806a"
  },
- "sealed_at": "2026-10-18T20:11:32",
+ "sealed_at": "2026-10-18T21:04:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

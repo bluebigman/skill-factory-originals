@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "content-hook-craft",
- "merkle_root": "e9fde9607497346ef05697d74e7478ccbd176dbfd1781328a330965e6758e607",
+ "merkle_root": "a86c9d24badd2828ee4b7cb5a2bd222b459f201017071f13525ee1965f4477bb",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/content-hook-craft-1/run.py": "e9d7b98aa425d17c8543c5986343ba87b0b6e66cf7aea07f76c90b9e85b2cd89",
   "skills/content-hook-craft-1/selftest.py": "de8ca4f8977004946a722f613b0d2631ca586f49d9d162600dde5b812c1263be",
   "skills/content-hook-craft-1/.phoenix/originality.json": "f5ef5b5ec857cdfb9eeae12536373a1dcd39020cb4dba8801256c542adadedb5",
-  "skills/content-hook-craft-1/.phoenix/provenance.json": "f6c76ee4836616ed4bcce49c696bddb2d2ae19a66cbb43ff9333dcacc3cb39b3",
-  "skills/content-hook-craft-1/.phoenix/selftest_evidence.json": "6e5c4f0c998ca2c6632aab0045227d64ad1561b803a87926e79c9aac1475eed9",
+  "skills/content-hook-craft-1/.phoenix/provenance.json": "cb1ee6843ef100271926bd8e1de9baadd209771a12b0ff5fed6162a4e60f1a0f",
+  "skills/content-hook-craft-1/.phoenix/selftest_evidence.json": "6926b8cec7dbd481ca15cb28a50601a8a961d6f13f3aa1b94cb3ba099eb5ec57",
   "skills/content-hook-craft-1/references/creation/p0.md": "816d1bf0d86cc45755c601ead819222d713c3a4111427a36d639931502e2d6e0",
   "skills/content-hook-craft-1/references/creation/p1.md": "304f1f80a3c07f7943780fd2dae77e92d65e24b48f4feb9f5ed750762a9d7a3a",
   "skills/content-hook-craft-1/references/environment/p0.md": "0356cc4b6d84392283b03422ea4d1ce72067812c7fe98cc50d85d4ab47aefc4f",
@@ -37,8 +37,8 @@
   "skills/content-hook-craft-2/run.py": "1cc6b557a8cdbc46b365c92350d0d1434ec250505c9ab6049d39c0d7feaded3b",
   "skills/content-hook-craft-2/selftest.py": "bf4eb5c55d3e781544bb880e4783987ae57130861f595dad3f7bbf0d415598a8",
   "skills/content-hook-craft-2/.phoenix/originality.json": "0f8e2145a6249dd81908f8d742309381747b1459ec6a7ecc1ac464734dd41ede",
-  "skills/content-hook-craft-2/.phoenix/provenance.json": "f86281301a65c16d2432d3f7c198968a025242ebc72780229ada687955a0c3ed",
-  "skills/content-hook-craft-2/.phoenix/selftest_evidence.json": "84ef4aaa6d0ba375d86537b2a02f76325d07957c81117f73225bae2d558f1492",
+  "skills/content-hook-craft-2/.phoenix/provenance.json": "fa6b720269969005511cedb230676f3a609bbb9e782bf5a0431ec339d7e77907",
+  "skills/content-hook-craft-2/.phoenix/selftest_evidence.json": "e953a50096b0256b16839aa95341dcf34bb8d9eee633404fe21a64825a1744cf",
   "skills/content-hook-craft-2/references/creation/p0.md": "032b31eeb0b3005b2aa96320437afa3811ddeef29689f95704f46ca6d750c795",
   "skills/content-hook-craft-2/references/creation/p1.md": "116597a624abd5ed1fab7628102020d0155e4f54af140527ae8f51ce83c254b3",
   "skills/content-hook-craft-2/references/environment/p0.md": "bc7ba4df7b4f8adecf695ad7b2f5cb7eb7427b1a9042b14c86af19bb0c615940",
@@ -54,8 +54,8 @@
   "skills/content-hook-craft-3/run.py": "bc9f6bd2ef85e720bcec023b77959a9fec59af387f14ddaee8fa8c91e1e3fae5",
   "skills/content-hook-craft-3/selftest.py": "416628a431abb6ecaa8a23b95d03d1a1241ea22b2d6caab17e4eb0c5b4fea97e",
   "skills/content-hook-craft-3/.phoenix/originality.json": "8cc029940fdec5ee6f0c45edd3fadd022e1779adfc805a44c4d941df2c4d1550",
-  "skills/content-hook-craft-3/.phoenix/provenance.json": "e77c65d6e1bea77655435aa028dfa5cb77e9bc9fe0d680c8963bf522891b21fc",
-  "skills/content-hook-craft-3/.phoenix/selftest_evidence.json": "ed841f97eee193359439d339c9d1932b1f2eb7b0a30790799a508dbb8500bd25",
+  "skills/content-hook-craft-3/.phoenix/provenance.json": "8a1d8b401bf861cb2aec01432eb29f25d5fde9898ef8c9afab20581f0ce49136",
+  "skills/content-hook-craft-3/.phoenix/selftest_evidence.json": "eba4ec340d70832297b88ff2cf46dbdaab12af02de4d96b841dac1546fbccba4",
   "skills/content-hook-craft-3/references/creation/p0.md": "bc626e69ba11ccc46afd4b8b9d8dc7130963fb0f07eda3d80b352a14634be595",
   "skills/content-hook-craft-3/references/creation/p1.md": "88481149d382ab19d469717541abb7ec72c8a8353a22e094d731ff73698ad5c0",
   "skills/content-hook-craft-3/references/environment/p0.md": "ca2a392c281ddc87c6fffdda6c098cbf2be72e72a087ef93327e224b7982f283",
@@ -66,7 +66,7 @@
   "skills/content-hook-craft-3/references/production/p1.md": "c0e98ecf87fb954ea95ceb50f6a694ef2ec7b152c40d59571686db4908ef23a7",
   "skills/content-hook-craft-3/scripts/main.py": "0030daa298b8327480f74e10a8bbaa67a622c2be58908c60d315aa9fddf70e77"
  },
- "sealed_at": "2026-10-18T19:54:16",
+ "sealed_at": "2026-10-18T20:55:59",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

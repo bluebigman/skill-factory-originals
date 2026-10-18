@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "retail-inventory",
- "merkle_root": "d573d8c7f4c851db7941e8300b8119b82d8a980ca89a56792125e72b61519aa4",
+ "merkle_root": "378a21fc68c3adc3ca85abf9931cd5f940fc2c39132280f0f40c7f73b9532957",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/retail-inventory-1/run.py": "e1414b95784a2e3bc66a3ff00fa0e7b41d9935a71e2fd08f674fbe50aca5c077",
   "skills/retail-inventory-1/selftest.py": "bf8a23dd3ab1f6deee3abb65ca0315d32dc1fa0fceb715284826e77ecf49d0b6",
   "skills/retail-inventory-1/.phoenix/originality.json": "8556aada5579b6c8894bd06a3903792d13416ca54c24bede97f372970728118d",
-  "skills/retail-inventory-1/.phoenix/provenance.json": "171f4d968a95334a3df467cb3c63053332e06039bb61453e3292bb984ec9f50f",
-  "skills/retail-inventory-1/.phoenix/selftest_evidence.json": "f8a12c6b40bbfaf073ba6d9fa7bcd112c7c061cab686001891886b354109e128",
+  "skills/retail-inventory-1/.phoenix/provenance.json": "4d7253edcaff1e895a9e5eadb3f27ec8196a8f1e482db89096390b6838f6a503",
+  "skills/retail-inventory-1/.phoenix/selftest_evidence.json": "cadd271f0b6f206b4d2a1dc1c3dbe23655c0d1de902bc75c1ed271379d5aa867",
   "skills/retail-inventory-1/references/creation/p0.md": "7d76f739a0105462fd80022c1dd8d7775f619becd5b3d43138b35ffe712965a5",
   "skills/retail-inventory-1/references/creation/p1.md": "e36269bc233dc68937141e776bacc0fe4dc41821c5e0c187fb2da2b61cfd470c",
   "skills/retail-inventory-1/references/environment/p0.md": "a40621ea362cfe752320321944fa9c6feda17960fdb7099df729984b3d1f6ef0",
@@ -37,8 +37,8 @@
   "skills/retail-inventory-2/run.py": "25ac6b36bacb69ff7a33b102b822e966d911da1402f9fbbc1c5e42c3178e259e",
   "skills/retail-inventory-2/selftest.py": "3fb6e888898eebdebb1439d7db7dc794885266dd9655e1b86eb3d18a2c1ab790",
   "skills/retail-inventory-2/.phoenix/originality.json": "9bb97e7ee03a0b23bab5ea359b1ea78a659ba2d05fa0d9ded253b4b0e2da4c7c",
-  "skills/retail-inventory-2/.phoenix/provenance.json": "74ce4358c5290588b2cb74884215685218f770382de4360bce8ef9c3362542a4",
-  "skills/retail-inventory-2/.phoenix/selftest_evidence.json": "c610c56e4a61f031ec60ce79873d8a371c2c750cce64daa0a14e2638905fa4b9",
+  "skills/retail-inventory-2/.phoenix/provenance.json": "e3d150754a69a616383d7f6af3920bec29c4e7f9f8d617955defd8673d810fb6",
+  "skills/retail-inventory-2/.phoenix/selftest_evidence.json": "5200684ff4daa44a9950376a807639a136119c8b0d1ddcbbc76dd93c0f49c115",
   "skills/retail-inventory-2/references/creation/p0.md": "446a4353349c58045498ec1f80dcaa37650253e52a0ef491a60e24831d96c6a1",
   "skills/retail-inventory-2/references/creation/p1.md": "29215d8be30bea3d9fb61f502126c2f91ada301dd874772472ac184b4688605d",
   "skills/retail-inventory-2/references/environment/p0.md": "d41462a229b1589e1a8a5b6fbd487abe55b660b019acf0398c866aa29c35e1d4",
@@ -54,8 +54,8 @@
   "skills/retail-inventory-3/run.py": "87fe4320ce19df33a6b1cbd69b17d98208e6730031a818cc251ac5f69b7ee729",
   "skills/retail-inventory-3/selftest.py": "8d1c0a7af5236adb7a964d84ca2788b391197c80530d46d2792cb5e70950c04c",
   "skills/retail-inventory-3/.phoenix/originality.json": "50d391876445c0665513b1147bf3f52b26dc697ecc64ceadca3ab717c9e8c2d0",
-  "skills/retail-inventory-3/.phoenix/provenance.json": "71a0470111c5606020297a873a8dd889497aee7dd2fdf8cdf713db57a260d4c0",
-  "skills/retail-inventory-3/.phoenix/selftest_evidence.json": "158c2685affbafd745a4b88b69a1e0c5350ee07dea7bd4afcd5f0bf4947087fc",
+  "skills/retail-inventory-3/.phoenix/provenance.json": "245281011f05c2c145ee18b5abbc99392451f9d20b8ba7d6416280cf116e0864",
+  "skills/retail-inventory-3/.phoenix/selftest_evidence.json": "9f657797f3ad9a98d6bb91f8d9472f7d67841580abb684a66befc5466912d0c7",
   "skills/retail-inventory-3/references/creation/p0.md": "7a5106e9a6c0c41ac02c42ad6a769f6dffa398bfdd63078c36872060d9fdd851",
   "skills/retail-inventory-3/references/creation/p1.md": "2d4dc961cc8564ff498c19998603e8411c268cfb201ede4313ef98ba3c751856",
   "skills/retail-inventory-3/references/environment/p0.md": "4edf7575ecf5b53ac303f48241c7bf6645be659d5ee419812159476d92053e4f",
@@ -66,7 +66,7 @@
   "skills/retail-inventory-3/references/production/p1.md": "b482c0836207463ecf1fa54898e73d3eca2de805a8d9d1362d00e650fcb4215a",
   "skills/retail-inventory-3/scripts/main.py": "56de55f7e2df0597dd64ecc52700b4fc3ea12d7799968fd91c68f2e44fb7911c"
  },
- "sealed_at": "2026-10-18T20:08:00",
+ "sealed_at": "2026-10-18T21:03:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

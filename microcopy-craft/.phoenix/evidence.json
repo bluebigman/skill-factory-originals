@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "microcopy-craft",
- "merkle_root": "2ab785273f8e3e460b523bf168d65f30a8e26bf0d964dca4be628a69dddb7d72",
+ "merkle_root": "f940d60baca45aa518c991c1fabc3125f314fed39d4914ef2d726ffe7ed1ce53",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/microcopy-craft-1/run.py": "f3d31ce273dde86d8cb70fa705decbade2e858d64b6bdd9449ba6098bcf68511",
   "skills/microcopy-craft-1/selftest.py": "80bb9911f8d16d916b6cfdace634c9df077d0430d29f7567f192fb71a257f3b6",
   "skills/microcopy-craft-1/.phoenix/originality.json": "13dc4ecd822e0e43e3ae0b8101b1c99df1b5c58c212c856d4bcd59637b8185fb",
-  "skills/microcopy-craft-1/.phoenix/provenance.json": "b8fb45d2671c518516a8cc4ac94017c7a51da93790a5bd049da4e3b48a9a3e00",
-  "skills/microcopy-craft-1/.phoenix/selftest_evidence.json": "2b0fdc9eaee971aa10204b098a097e426ad5cf602ee8c4922f7e969d2a11ff04",
+  "skills/microcopy-craft-1/.phoenix/provenance.json": "33afe0e5271fb94780d8a2b06f59c9da169f01a7d0905b64afdc255699870ef1",
+  "skills/microcopy-craft-1/.phoenix/selftest_evidence.json": "e639abff2c402eb13a503636ce5e5864faa0896929b4449b9dbb9b6e4f0c27ae",
   "skills/microcopy-craft-1/references/creation/p0.md": "bf0e7589abfcc39e4a4bf3c6b8681ae014f2dbd6261e72e4e4691bcdd288dab8",
   "skills/microcopy-craft-1/references/creation/p1.md": "febab809ecd4d6f0e8b89cade13bfd7dacd099e0b10c446259e23642180fb977",
   "skills/microcopy-craft-1/references/environment/p0.md": "69da6edec8dbd57bdebe9771077d0e58c2540538633e0fdcda8fbb9eacfdfa68",
@@ -37,8 +37,8 @@
   "skills/microcopy-craft-2/run.py": "baa257003442d313b3e5bc28cefb4b4ac3a05f0a0708aec7911ae391307060b0",
   "skills/microcopy-craft-2/selftest.py": "1abd580128881b171dbd2203bca0ec00a13b7f8790a92a8bc2e77a46b6288852",
   "skills/microcopy-craft-2/.phoenix/originality.json": "85e40fb46b22237c1b89d0eef500622f0320425c7f4c691691ccda93c0a5edd3",
-  "skills/microcopy-craft-2/.phoenix/provenance.json": "ca869c54700737f0581273705b874fe25f14cc40b48e08102a1e1b47524f7d14",
-  "skills/microcopy-craft-2/.phoenix/selftest_evidence.json": "bc8603e0c2fa8448090fdd09b6465d38c4d9914185658fa74e8c0623893d08b4",
+  "skills/microcopy-craft-2/.phoenix/provenance.json": "0057f84d166a837ec785b1d3204b6231d6972de57a682052d44cc6f2d26f1e4f",
+  "skills/microcopy-craft-2/.phoenix/selftest_evidence.json": "4051ecbd2316d07304208e24279ae5c6dce6bdeae22c2c2f40371dbbee383b42",
   "skills/microcopy-craft-2/references/creation/p0.md": "cfbf246760b83dc1bd28d507c255dc95cc0dbe3f375487798c23f7fd613404b5",
   "skills/microcopy-craft-2/references/creation/p1.md": "7c4fe099ebd6811c79403d8967cdd462488b56e70ca1a75f06e38b9f7cbc9074",
   "skills/microcopy-craft-2/references/environment/p0.md": "db0f640cfac775bf26c211413e7d7f952359f3c89f0bae91ec84e4cc7ee2dcee",
@@ -54,8 +54,8 @@
   "skills/microcopy-craft-3/run.py": "a8b6617c926589bbe55eb931368e8937b120564b3af9779ee6dbc0a6b0beee30",
   "skills/microcopy-craft-3/selftest.py": "757c070396f17956271df3136576ee9b88be1f7191b44b31e36de5e5a7cfc72a",
   "skills/microcopy-craft-3/.phoenix/originality.json": "711f5bec222151df7ca1f872dde58e4a53503fb8f734bec6d02e654bbdf2b02a",
-  "skills/microcopy-craft-3/.phoenix/provenance.json": "6ada84ec14004f78e6380f601a397d548c15d18bbb4f9188a1acc29605055a59",
-  "skills/microcopy-craft-3/.phoenix/selftest_evidence.json": "f1ade9df811135f08b317f3d53b6f398b6bf5c34b20d8e15f72181ca2c1499ae",
+  "skills/microcopy-craft-3/.phoenix/provenance.json": "0e39688c4cf260e614b11480454c1281f9d398c6838a4ad81660226d8f27522b",
+  "skills/microcopy-craft-3/.phoenix/selftest_evidence.json": "23ce0c26e4b1dc7ed82b2adab7d71150f5b100e5e5370327e936b70e0c9c9280",
   "skills/microcopy-craft-3/references/creation/p0.md": "19043427a2e3e6d01337542782f357534194e7ca1c1bba5cdbb676732d381f20",
   "skills/microcopy-craft-3/references/creation/p1.md": "68a5fa9578c7371fe2e8f41f2c4a32a73f785991bdc333364420a98dc94c9f7d",
   "skills/microcopy-craft-3/references/environment/p0.md": "8c6b0a9287b97b7f08fa6e0ab339de4b1112debd7992e31ebd74e2a8124d3035",
@@ -66,7 +66,7 @@
   "skills/microcopy-craft-3/references/production/p1.md": "3a55d31ca286167af086c680ed913d187e8ccb815e0ed9f53cca89af353b6bd5",
   "skills/microcopy-craft-3/scripts/main.py": "7a824a5878838a9818249f042961e53482db17b7bf16b67ce53003db9f241cf5"
  },
- "sealed_at": "2026-10-18T20:03:47",
+ "sealed_at": "2026-10-18T21:01:03",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,0 +1,72 @@
+{
+ "name": "code-metric-review-3",
+ "version": "2.0.0",
+ "domain": "代码度量评审",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "函数长度",
+   "then": "单函数控制在一屏内",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "圈复杂度",
+   "then": "分支超过阈值即拆",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "重复度",
+   "then": "重复片段抽公共函数",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "命名一致",
+   "then": "同概念同命名",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "注释必要",
+   "then": "只解释为什么不做注释说做什么",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "函数长度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "圈复杂度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "重复度",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名一致",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "注释必要",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

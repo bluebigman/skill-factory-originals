@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:12:57",
+ "at": "2026-10-18T21:05:21",
  "skill": "vuln-triage-flow-3",
  "slug": "vuln-triage-flow",
  "passed": true,

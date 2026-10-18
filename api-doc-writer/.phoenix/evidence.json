@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "api-doc-writer",
- "merkle_root": "f383f4d82db38fe68c3131b97b7d5baff053e85336ac0404d8382b32aba3346b",
+ "merkle_root": "d28d1077ae85c8b602e02a58b734852e15a8121089a5f76d9cd21e5f9a602704",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/api-doc-writer-1/run.py": "fc51f6dc097538e2fccd250f9da0da852268f24b3ad0259a6f03706366ed847e",
   "skills/api-doc-writer-1/selftest.py": "c79074df9368f527025c20676b5c2dd22d662079a22da7aaf0a8c9bc9c1be517",
   "skills/api-doc-writer-1/.phoenix/originality.json": "e4e7a96f1a532be3a80e5df73ae10ed867e1ba221c688a8631c9bad93c6e4486",
-  "skills/api-doc-writer-1/.phoenix/provenance.json": "edeae9279649c916b0775cde9051e0a1cf8064341eabc37033a40cff5c60e2f5",
-  "skills/api-doc-writer-1/.phoenix/selftest_evidence.json": "64752de5035368bbefadeeca1e715ae5cbfaee934e7d70b6021525c220a39e46",
+  "skills/api-doc-writer-1/.phoenix/provenance.json": "a0e0e0f2142bac1ccaa63f2743a1d38237efa00fb4d95c9b824b9388d1c7d96b",
+  "skills/api-doc-writer-1/.phoenix/selftest_evidence.json": "0d31f3fc7798364078f404ccb3d74c4f568ae81d6a47657f52f3cb20f092a636",
   "skills/api-doc-writer-1/references/creation/p0.md": "373d88039bccaa602fd94fad463d548197885bf6ade2c1e17dc8c2870399a839",
   "skills/api-doc-writer-1/references/creation/p1.md": "9fbf6644bc86c89650c00609a29d0e14f611129811d56871ba53046a20ecbead",
   "skills/api-doc-writer-1/references/environment/p0.md": "d899135ee02f1a22bea5f88df86d8d942227c272963c0f2c7998d2f01a65cbf2",
@@ -37,8 +37,8 @@
   "skills/api-doc-writer-2/run.py": "9b3bbd525f5da7f3bbf8d0a9d5f4a80180764116eddcb1352677694aa26b65ca",
   "skills/api-doc-writer-2/selftest.py": "e4728e3c274bd48808d3fce852dc826a9b2d77e8f694705880ff3e9abaedd24d",
   "skills/api-doc-writer-2/.phoenix/originality.json": "b9b5ff62c4fc20065e821cf4b212856db37a5ce17509bd21b2bb079f92dd96f6",
-  "skills/api-doc-writer-2/.phoenix/provenance.json": "c6a0894066bf81350ca109f301405ae05f972731f4cf6520eece471464d78993",
-  "skills/api-doc-writer-2/.phoenix/selftest_evidence.json": "461c16eb8333df4b6671ad1bd75a48b9472d3fa90f458a3a3773ffdc0826b246",
+  "skills/api-doc-writer-2/.phoenix/provenance.json": "9e5135656c488b26f73c055f6c7fec9b818e9cc751cf642cd2f5deb44bf85526",
+  "skills/api-doc-writer-2/.phoenix/selftest_evidence.json": "16f92a517d5ba6189515e5c6159331c52023b1a9579fe280ab3e7016b32fc10c",
   "skills/api-doc-writer-2/references/creation/p0.md": "7076ac752ecd0bb336d2964561bf9cb456b0f1265b66255a27f76949cdcbb9ce",
   "skills/api-doc-writer-2/references/creation/p1.md": "30e33902197471b1ebedda13623510bee8ccab97a025e8ac4b6ac2ad4311310b",
   "skills/api-doc-writer-2/references/environment/p0.md": "9296381ba74be61ca742afea9d926e84f97f47539e233142401ea1fb505202a4",
@@ -54,8 +54,8 @@
   "skills/api-doc-writer-3/run.py": "d57bbf428223ee7f6619b1da2809c1a569082e587e3cc6255df51ee317be34a5",
   "skills/api-doc-writer-3/selftest.py": "18b0e846c619955f63a443407d3d210756b477038d0e5d1405fe2b840a96ed61",
   "skills/api-doc-writer-3/.phoenix/originality.json": "fb3f06008d8618e6f55b2061fc9119292f2eb7879031479fa6ad46bb6b8f1459",
-  "skills/api-doc-writer-3/.phoenix/provenance.json": "03eec9f89aac7391239ee9d024ac1c7f61728f7ed14c5682c37a125a6a51ac1a",
-  "skills/api-doc-writer-3/.phoenix/selftest_evidence.json": "ef41e470e16b50463f940158c551e6e3d076dd6971c71c48ae36667968aa663b",
+  "skills/api-doc-writer-3/.phoenix/provenance.json": "a2601bd2eee91b600a6c2a3ce78870f62fc897e7759186fb746380a1d9917980",
+  "skills/api-doc-writer-3/.phoenix/selftest_evidence.json": "e5df8d995472ae57e2ff1612b12ef6f34707cad1bf8342eacb2d2b788f7fb9b4",
   "skills/api-doc-writer-3/references/creation/p0.md": "96148d02ac4ec975c0f134aa8e5ddf3ad19a7917db067f6a50af912887e87b5e",
   "skills/api-doc-writer-3/references/creation/p1.md": "ab15f4084933b1f68d99938c14cf1d6535e3e7ead2f15c6e3fc5f9fc329451f5",
   "skills/api-doc-writer-3/references/environment/p0.md": "b2c7ac45459d5d69e92f2e7d321b2832e9c53dae52ca4ccbbfedab2fd6fbbb38",
@@ -66,7 +66,7 @@
   "skills/api-doc-writer-3/references/production/p1.md": "5a1ba80576d6f0d0b098d72c4e2772531580676d2ba6eebfd0bfa0fa097c0d7d",
   "skills/api-doc-writer-3/scripts/main.py": "ffd9e77a686a378c8edd6c8981b1f76206422b84751e7f00d6e26bbfc9958966"
  },
- "sealed_at": "2026-10-18T19:52:31",
+ "sealed_at": "2026-10-18T20:54:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

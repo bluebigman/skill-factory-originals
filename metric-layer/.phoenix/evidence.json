@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "metric-layer",
- "merkle_root": "def0e3c4f2a6593b0d4267b76f7ac176f937479372acd7a1fc30f6305413b16d",
+ "merkle_root": "d402416e762c9b1a1875d10ecea90bda995275f231dd0b6247ea399928cad965",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/metric-layer-1/run.py": "743e3fe479c8c44eaebbd509daec9ea7dabc19542f824911c2367eab267826f1",
   "skills/metric-layer-1/selftest.py": "61c706d36007d4946dbf06f4b0893d9f3c1de64dc98af7455e454cd85f62c63d",
   "skills/metric-layer-1/.phoenix/originality.json": "00322af193f3cee8e0ab727248e9356870098408d26d1c397ae74de1193762d3",
-  "skills/metric-layer-1/.phoenix/provenance.json": "a1a2a3ea2f32278fc6800239755fe22068c53da0c57de6a173a8909df7e3c39d",
-  "skills/metric-layer-1/.phoenix/selftest_evidence.json": "7b04ac4c79537c8f1dc96200aabe9b2ca9d41300418ee965bc491cfe25102482",
+  "skills/metric-layer-1/.phoenix/provenance.json": "274242fdaec8d99cedb14ccb08665c76bcea6c2ada7afd274464a1c3ddf5ce51",
+  "skills/metric-layer-1/.phoenix/selftest_evidence.json": "22bbe983f67f755ac87c2032c5b00778672107c7b5056f4721d93fdc53d9d6ed",
   "skills/metric-layer-1/references/creation/p0.md": "bb277c007d2e60b2927ec4e1269821ef4cde1a3bae77e040206b1495a308c46d",
   "skills/metric-layer-1/references/creation/p1.md": "9e375b5f5ef3cfbf739ed4e6451b7e0fad02f0216ca91732600a58e48c0bab90",
   "skills/metric-layer-1/references/environment/p0.md": "ebc0c9fd8fd7923083b78c220c9c2cdba17ee6029e90eefa1d50b011abe66fd4",
@@ -37,8 +37,8 @@
   "skills/metric-layer-2/run.py": "b185a1dcea46634fce44df1489487227ecf4b685acf515a86cf9188ceeee387b",
   "skills/metric-layer-2/selftest.py": "77587616536ec6c532e24202bf0d4f4d2ac4bf5a31368645d689eea274583847",
   "skills/metric-layer-2/.phoenix/originality.json": "d968b71f9d4fc7c99e02838c94cefcf2be530d2e6f1a3f226a48b99f65214993",
-  "skills/metric-layer-2/.phoenix/provenance.json": "6a5a09bbcb03f52c537ef648ee93c5b8345d90a8cb8357b68fb4b0734ad0f7b9",
-  "skills/metric-layer-2/.phoenix/selftest_evidence.json": "ba55ea62b91597988196ae3c4b116bc410e1c735508023fb975548d03133c9bc",
+  "skills/metric-layer-2/.phoenix/provenance.json": "b69652cdb73846cc85bbf85ebcda4ac2b5278f73e1397b6ad5c5b330be74c5af",
+  "skills/metric-layer-2/.phoenix/selftest_evidence.json": "c01952093a2cf9f67a69c0da563532614efc667adf5c3906df912a3dd7d1e284",
   "skills/metric-layer-2/references/creation/p0.md": "da79a43889ad3c3bf6a389efc715f67b2f0b2dbc21e8515c869c57aff94843fa",
   "skills/metric-layer-2/references/creation/p1.md": "b5d6b714dd3e7875a5710d1827ebc5921e8063093f80f7effa914fa4b09e9157",
   "skills/metric-layer-2/references/environment/p0.md": "912058529f2c767373dea760dd2845d3a32ef1f341f63a8cc9922652f1131192",
@@ -54,8 +54,8 @@
   "skills/metric-layer-3/run.py": "d721d286fca2273b379275c66db3b42e542090bca8d234245977995de8cb1c73",
   "skills/metric-layer-3/selftest.py": "6d61d00db1f213c77498a22a49dada00de341071e0e1979e484dda590bdb6c55",
   "skills/metric-layer-3/.phoenix/originality.json": "8196f2cd3886a6d70da8e311572b4e63fdf30c822218a1a8c9b2f6b73f77a355",
-  "skills/metric-layer-3/.phoenix/provenance.json": "23f5b6309aea1b83cd8472d9250687c6328458384d2080d33c3cb63dc9b7569f",
-  "skills/metric-layer-3/.phoenix/selftest_evidence.json": "556564bd25bad955f2ea6cfb3da231e8e8b6500c9b7144d3dc6a3cb5fceb1a15",
+  "skills/metric-layer-3/.phoenix/provenance.json": "7ee1c5fd5e86cecd4e3a58f246107575ae79b05aa3e12807578e95b5cff85374",
+  "skills/metric-layer-3/.phoenix/selftest_evidence.json": "e47e4b8b04ae8f5ceebc04172772ca6b48d53358b200287f0739ad7358fd9d66",
   "skills/metric-layer-3/references/creation/p0.md": "3a891997c4b9ca3f725c0ef5aaf7b799788450168b2d3e2a99aa5c1b5e2b8a3a",
   "skills/metric-layer-3/references/creation/p1.md": "6a60651f990b3831b80963af1a97cdcee9ebb90d22cd9b6d1b614babf86f91e4",
   "skills/metric-layer-3/references/environment/p0.md": "daae2daf0a6ab4bd2d36d3bb7d85aa9525b79973a68804602218779a3c548467",
@@ -66,7 +66,7 @@
   "skills/metric-layer-3/references/production/p1.md": "3f1e55bcb7d396d8ee3acc7551a2e6517e555afc1e404134b2b2bf3fe5c52e88",
   "skills/metric-layer-3/scripts/main.py": "6625222bec68315224bb12f0f4957791f0a4f29855dfdfbcbc4f546ad8c3abec"
  },
- "sealed_at": "2026-10-18T20:03:46",
+ "sealed_at": "2026-10-18T21:01:01",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

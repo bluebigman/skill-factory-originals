@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-retention-policy",
- "merkle_root": "e3e021ea532cca7ee0bbd288eeb35b159d015bfd27cac4b54cf6eb5b761f62eb",
+ "merkle_root": "924201a8be36d26be6122da9d08ee1fbdb3935de19a60f4a6dc1473a89a9e806",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-retention-policy-1/run.py": "017588299b66fbbe191f0e88e5c0e0eaaff31462cc7d325f749fec90d48e2751",
   "skills/data-retention-policy-1/selftest.py": "1b6e6be4a4483ef884eeda9f21dbacced2485dd9448366ff2f3d165e2ff6bbc4",
   "skills/data-retention-policy-1/.phoenix/originality.json": "f40ea86e0b493b5338708a620a31ee213bdcbe48429c426fde8676c24e2ec090",
-  "skills/data-retention-policy-1/.phoenix/provenance.json": "05f31f330cdd0ed39645c01fb0f9af0a40e4502d5ef136fac715a33f64b6b144",
-  "skills/data-retention-policy-1/.phoenix/selftest_evidence.json": "e66e0daf561c7ff1ed4eb4bbcea040b129adf2b852e55753c655b640d6d2a324",
+  "skills/data-retention-policy-1/.phoenix/provenance.json": "005f4f5d6b4346e0da4a71b332e04743791c2478d5058c2340be72fd4cf09286",
+  "skills/data-retention-policy-1/.phoenix/selftest_evidence.json": "b1411625c91059aa3c627cc401740cf579fbe822b47708f4905168f66cba3e7a",
   "skills/data-retention-policy-1/references/creation/p0.md": "98a50b94368358c0b5e014acd12a63e227c37e41a5e353886c0ec98722e447f2",
   "skills/data-retention-policy-1/references/creation/p1.md": "ac075b8aa502262c3e68194870e6e3cdc41edcb02332a7812332e47da142ab05",
   "skills/data-retention-policy-1/references/environment/p0.md": "5fc5ce7d9dc7737be654dcf2bea99be8c828526865bf0bb783d6ce7866f87b8d",
@@ -37,8 +37,8 @@
   "skills/data-retention-policy-2/run.py": "17f25d00e294e5827b19edc6b5f25cc294a36830ab275876eb2bde6a6640d82b",
   "skills/data-retention-policy-2/selftest.py": "8c8fb51678301cf641580aa97c1609ae3d02701fed96dfc0a352b7e06cf1a4ad",
   "skills/data-retention-policy-2/.phoenix/originality.json": "1f649b3d9519ade4682342fffb23a95de189c03d5135af90a5fb6e1d85b502f1",
-  "skills/data-retention-policy-2/.phoenix/provenance.json": "c27da380050640a3292ea27665ed49fdb87809dae7d6e3c807d202c34ddc4d16",
-  "skills/data-retention-policy-2/.phoenix/selftest_evidence.json": "c85d7963dcc2cfcedb8b2e7365c11c8efe1323f08882769e2b61c78f7de2d397",
+  "skills/data-retention-policy-2/.phoenix/provenance.json": "e96cd3778760a161c0d1d93cb5de445d9319a3d56634ec9300628632312f9fd4",
+  "skills/data-retention-policy-2/.phoenix/selftest_evidence.json": "65c1cce5afc1417af80a10e4412485ad156631026ce9c10e73a10a68306ecd6e",
   "skills/data-retention-policy-2/references/creation/p0.md": "8a9a40adf5f401890a0778639db8a283b728c6a8e81fad096ab4e3fdff3b801f",
   "skills/data-retention-policy-2/references/creation/p1.md": "fae35bd6503253efdd8e531f1e0d9f9ba97d6e2caeb71b23f44cf612b9ce308c",
   "skills/data-retention-policy-2/references/environment/p0.md": "5e60399c99ab368d8a3ef1dc5b47f27712eeaf53cbca7baa7e6e0a2904253261",
@@ -54,8 +54,8 @@
   "skills/data-retention-policy-3/run.py": "871cb6c2f0771cdb01b2cb1122e3121a63ea5b3d598241e2ea049b69af5b5c32",
   "skills/data-retention-policy-3/selftest.py": "4baa947501f42a428bf59ed945fdbaacb201f462d2f1d8b64993099ca9b50da2",
   "skills/data-retention-policy-3/.phoenix/originality.json": "87cd4a94603604fed512225099a64390a3d2d052fb342bb085e3ab1d305e8604",
-  "skills/data-retention-policy-3/.phoenix/provenance.json": "9026f112bf75844f9862d6db87b4463ec5cb6245db23ca63cf4aace93a36362a",
-  "skills/data-retention-policy-3/.phoenix/selftest_evidence.json": "3c5353ccce4ccd39636e1488e7b351e2bd56267871aa4383f721a2c90945b350",
+  "skills/data-retention-policy-3/.phoenix/provenance.json": "2b3e8e74e700d88b73008c7eca7bf1c0e555489703b7bd4f38c37b7494fd9c0d",
+  "skills/data-retention-policy-3/.phoenix/selftest_evidence.json": "9b3a887330f39b3cd086132dec74bc1152809fd4dd684026152f3b81a816a064",
   "skills/data-retention-policy-3/references/creation/p0.md": "d9cd81523aaea976283ec9b8ce6608c26f82399f370ae1e5ee20f60f4515549f",
   "skills/data-retention-policy-3/references/creation/p1.md": "64d2699daee5dc8e253627af6901fd78e8404edf0a2b684885c7318e85d4beed",
   "skills/data-retention-policy-3/references/environment/p0.md": "1d5c318f861b237da8a4ce11418e9a4cd8697f5f73502f59d24f3b62f19bb08a",
@@ -66,7 +66,7 @@
   "skills/data-retention-policy-3/references/production/p1.md": "150cca2db7c385be31d26e90455632f10d04369e1314d74fe4d49a2d35012834",
   "skills/data-retention-policy-3/scripts/main.py": "53207745cd49f14fedd679da4bc6dffcb47783b96800089884a7efac84c75f17"
  },
- "sealed_at": "2026-10-18T19:55:55",
+ "sealed_at": "2026-10-18T20:56:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

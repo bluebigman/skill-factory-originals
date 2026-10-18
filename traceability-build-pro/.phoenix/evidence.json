@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "traceability-build-pro",
- "merkle_root": "454373d7bdaf3dc59f4a5014c7d2fb38350807a3ee2af084cdecb947f8375b74",
+ "merkle_root": "dee2547ab7b6291f656462314452c6a82cf600d0477a557e21ce55077c025cc6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/traceability-build-pro-1/run.py": "3795344f754bba8ed1523513e01dbadb2c268117104d83835c4b72c6181691f9",
   "skills/traceability-build-pro-1/selftest.py": "4d061efc32f38a33e3337db201a58de2eadcc3b9631812e72f664f24e6de05d5",
   "skills/traceability-build-pro-1/.phoenix/originality.json": "c75e31ff2acf8c074d2127f333c3b58b9b1c258a3360d808ddb6d5e50f3ddf86",
-  "skills/traceability-build-pro-1/.phoenix/provenance.json": "042b2463d7da176c5608c3dde9ebb7776929ec18f7693df73a73eaf46332ff7c",
-  "skills/traceability-build-pro-1/.phoenix/selftest_evidence.json": "b391f60d35c7936aa450a764a716f96c2daa6c577ca1715169169eea94f24db5",
+  "skills/traceability-build-pro-1/.phoenix/provenance.json": "8aed975a08202c6483e0467a00d878e4e5f5d236d2ebc10c40490b312627be60",
+  "skills/traceability-build-pro-1/.phoenix/selftest_evidence.json": "49f2c4ed66c0e7dd13f7a88bbf2afa43c3518a1b01adb4d4b843b3a69c31ad8a",
   "skills/traceability-build-pro-1/references/creation/p0.md": "ebe2d65e1f0ed5431144b37aed36919a22f1534e176ceebaa633679c0793bf5e",
   "skills/traceability-build-pro-1/references/creation/p1.md": "773e5639c7ae3b7b9920189d027a990649de092ec3233ca363a6f3357f4a7636",
   "skills/traceability-build-pro-1/references/environment/p0.md": "d12224d6e872e2a4572bddb500ac5985bbe2943dac6a33e77841b97398a78db4",
@@ -37,8 +37,8 @@
   "skills/traceability-build-pro-2/run.py": "9ee9b2bf2c631eef3df435591533976c618c173d02b9787f8a64f1cf0d55bc49",
   "skills/traceability-build-pro-2/selftest.py": "0f1dffd8fe9d5de285d81a4d7eadc292ed95a43f99d1d992c398148c9795d36a",
   "skills/traceability-build-pro-2/.phoenix/originality.json": "35b3d46541bea65c7b488aabbd1f304fe6c80911a2cd3cbdc6ba768073c29627",
-  "skills/traceability-build-pro-2/.phoenix/provenance.json": "1274611c9b9ee11253616a1b7ce573b57d1cf0bd9f82329cac1f3d6929178625",
-  "skills/traceability-build-pro-2/.phoenix/selftest_evidence.json": "d16d6dbe1269a959f53b856700351be1a72fdd8d365846773d10779c38b6eb52",
+  "skills/traceability-build-pro-2/.phoenix/provenance.json": "a01e97556b79d6620c6ecfe900d0b06a5944fda35ccdbc77b6fa5474b5c3f22b",
+  "skills/traceability-build-pro-2/.phoenix/selftest_evidence.json": "082423d287a6c75df5ce24ffba320bbf8581891aa65be9a9f0e5a09e18bb0531",
   "skills/traceability-build-pro-2/references/creation/p0.md": "6f45e9deaafac48b381e95c8b17e262ef8a5a44026a718c7372d464c56db4124",
   "skills/traceability-build-pro-2/references/creation/p1.md": "91c5863357694ffba0d2aa80d255c2c5629153b6a4b1735b5df8126e22614a0c",
   "skills/traceability-build-pro-2/references/environment/p0.md": "fa8086c00c19ae356d447906d6caebcfc17cd2ea727a9e9d28fafc49757f183e",
@@ -54,8 +54,8 @@
   "skills/traceability-build-pro-3/run.py": "e7e0ebf1e457854391bd2bf11102bfde2d3f8953dbe7159d0208b92842f83497",
   "skills/traceability-build-pro-3/selftest.py": "0cf77e6f426c14c257818a6ef121fc2f1e625a3fe7cbf8d4870188dd4e46dcd2",
   "skills/traceability-build-pro-3/.phoenix/originality.json": "910237815b9a4ba8cc6d1c603b2fbee86ae28e9b8f62eaabf3bab974f8f5e6e1",
-  "skills/traceability-build-pro-3/.phoenix/provenance.json": "776aba63a10949bcd6525189afcd66501d111990d147a269005c2dc5676be82c",
-  "skills/traceability-build-pro-3/.phoenix/selftest_evidence.json": "5dd8a00ff3ad54db37c88d808a0f642316a6b9c0237f2850e2b95070acc065c8",
+  "skills/traceability-build-pro-3/.phoenix/provenance.json": "d50b8a14768726f6e81c9993deb4c97d9d52619ca3e8b62cb23050884d57b3af",
+  "skills/traceability-build-pro-3/.phoenix/selftest_evidence.json": "e21ae2ceede9e01323abe0c24b296923d9fd714e54f20590044e989a017a7026",
   "skills/traceability-build-pro-3/references/creation/p0.md": "2493e4e9c1f196707357619d720bc8c7ba4b7d5009e0ab69b6df7913a9e74329",
   "skills/traceability-build-pro-3/references/creation/p1.md": "1a125a119f051db455c73a52ddd09e5d31b85e79f8b963f8b98fcfb2d4021552",
   "skills/traceability-build-pro-3/references/environment/p0.md": "89db257a20a91aa39367dc27afa6cd73f7cd7f66eb67ebe0905e4ac81a6c5a38",
@@ -66,7 +66,7 @@
   "skills/traceability-build-pro-3/references/production/p1.md": "748ee2d34dedff19f79c1ba5b06863932080ffdc9af916d5f5684167ace12e8e",
   "skills/traceability-build-pro-3/scripts/main.py": "512d77d637367445c1fe439a4fc64c69060e7bbe49480d773f7b8acfb01ff07e"
  },
- "sealed_at": "2026-10-18T20:12:12",
+ "sealed_at": "2026-10-18T21:05:02",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

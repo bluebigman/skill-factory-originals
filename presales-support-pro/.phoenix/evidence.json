@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "presales-support-pro",
- "merkle_root": "d682b3a9216d0956f70b75d350a2e9abdfbafb6286a30309e5dbbe222c4fa8be",
+ "merkle_root": "0f8eca7d4b18175da3a88c1973034d1355da0c02907e7222319ce3e7a2dd795e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/presales-support-pro-1/run.py": "d2d92387674c285c340dfcaeb50c803ea0a17924f0c4cde1d3c02fe70d996b34",
   "skills/presales-support-pro-1/selftest.py": "3071c51391f4eca19e2f33a803b59e026e1fee5580d68b8d0f6e750612d9cb18",
   "skills/presales-support-pro-1/.phoenix/originality.json": "239e4007acc0915cdf8d65dc531a7864a6b6aa395dc262337b5e76fc96589050",
-  "skills/presales-support-pro-1/.phoenix/provenance.json": "a29b65c480de640cf7af47adc58d704f58bc620ac1acacbdfc75766261d49ac7",
-  "skills/presales-support-pro-1/.phoenix/selftest_evidence.json": "64840e3b80861906f8a311f5935b416cd3949be49103d65b5d859bbc46d46965",
+  "skills/presales-support-pro-1/.phoenix/provenance.json": "1289e5f71e2628638c843775b59a8cbcb826479c9302696979a9e947a5db4972",
+  "skills/presales-support-pro-1/.phoenix/selftest_evidence.json": "aec0e72c4ce9e2a8abe69fb634e2fcc70edf25b2bb20b86aa3703f45cec5ca94",
   "skills/presales-support-pro-1/references/creation/p0.md": "7d45919f08ec8d33cb35301bf83d03eec11931d306690aaa4d40ca547b1af75d",
   "skills/presales-support-pro-1/references/creation/p1.md": "4d5a4d071eaf965c2e84b62f9c60031e02429fc7f783615b21dedacccfec5284",
   "skills/presales-support-pro-1/references/environment/p0.md": "21f772620cbdef220f5ed0a234b24afa2696f1fd10c20e4d56635dd835ed3b18",
@@ -37,8 +37,8 @@
   "skills/presales-support-pro-2/run.py": "a668ceb7cc6c9b5145d93d6fc7146e26db9a50a306e95ce847d15d38c7d191f5",
   "skills/presales-support-pro-2/selftest.py": "baa6eeb149dfc794f7d1042e516993579082e48cdf2cbfd7e6cbba0f96f34895",
   "skills/presales-support-pro-2/.phoenix/originality.json": "df1c4ab5c1875469c31454459aeda5d2580cd30898c4ecbe5a411d811d78e813",
-  "skills/presales-support-pro-2/.phoenix/provenance.json": "e50ec60da4e5f55280f631e639edc2d1992ed4fb271f7bdcff4fd1942a48e119",
-  "skills/presales-support-pro-2/.phoenix/selftest_evidence.json": "cac2652366d5065166cd39fbf1b2c6a6564874b2c0648fb84e832134c58444ac",
+  "skills/presales-support-pro-2/.phoenix/provenance.json": "97ede156ff6c6d8e41c42312872bd8a542a4620b8204c95bc17f50e0320d1675",
+  "skills/presales-support-pro-2/.phoenix/selftest_evidence.json": "108aaef5e59337b81d9828cdb695f921b841b075a4c2e890a0cead3d74936db2",
   "skills/presales-support-pro-2/references/creation/p0.md": "043e5d9f7bfdece9e0c8b9b75a985533646671b9eff70cf78894ec029f25057b",
   "skills/presales-support-pro-2/references/creation/p1.md": "1670a82b71f43180f7628daa038b8535b5e5b672a0d6d2bbfbdb39299b51db42",
   "skills/presales-support-pro-2/references/environment/p0.md": "91ebefb3fba14fca8a883b77733833339103df8422ca82b4dd74c2a846f3e136",
@@ -54,8 +54,8 @@
   "skills/presales-support-pro-3/run.py": "5c308f993ee56e004527241a2cd4513017614b0da92a3e0ff76ede54d21b23de",
   "skills/presales-support-pro-3/selftest.py": "a520579520c9b63f7b9c2881f18daf59439210768d531cd4a311ec96b1574a81",
   "skills/presales-support-pro-3/.phoenix/originality.json": "bc0268965fc89c8a34848ce745ccecf4b1085fa7556b85e11919a0459565f3f6",
-  "skills/presales-support-pro-3/.phoenix/provenance.json": "a92e335e5ad3f0ffb693b964c34550b0f74ee3a71fcf3e843fa13d1e6f4ba79c",
-  "skills/presales-support-pro-3/.phoenix/selftest_evidence.json": "5670f2eb453ffea2965f40326fec259bf0eb253d8c0edcf2d727da36d0c6e5b5",
+  "skills/presales-support-pro-3/.phoenix/provenance.json": "3a696e4ec6d7065b257ca75de12971de33c378092043c6ac2ea038cd7b3be491",
+  "skills/presales-support-pro-3/.phoenix/selftest_evidence.json": "a543b44c9556da17b985b2d5ea8982bbd7693a8c1f05732396f24a482bf35c24",
   "skills/presales-support-pro-3/references/creation/p0.md": "1d3b3fef882975d866ef60a864234602edbc8bb47feea4e083a2b7037ae411f5",
   "skills/presales-support-pro-3/references/creation/p1.md": "5d3e562140c590308a2ac72bb7e02466f0446c27d5ba60d16e8fa295604dc836",
   "skills/presales-support-pro-3/references/environment/p0.md": "98b35c00cb6ea033a70b11969e5115a31f6e5aac8bfc30beb3aa7b68b6c3cdc4",
@@ -66,7 +66,7 @@
   "skills/presales-support-pro-3/references/production/p1.md": "b712453776756523adffd5867b1d64a6a5fb7eba7ad4afe260646c6787e133e1",
   "skills/presales-support-pro-3/scripts/main.py": "834f53f620b43cc6508d624a61723ddb6e81558a5a8466b58cc1aced15b701aa"
  },
- "sealed_at": "2026-10-18T20:06:09",
+ "sealed_at": "2026-10-18T21:02:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

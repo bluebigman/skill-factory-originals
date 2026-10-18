@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "spreadsheet-audit-pro",
- "merkle_root": "4a4afed0945a78e59f4cd36fa6745cb4cc3648c17afc2ffc43da92616b984543",
+ "merkle_root": "cba051cf51be010705efc636b68ae624a2562b3ecaa1a13297806b0ebda9d51e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/spreadsheet-audit-pro-1/run.py": "8aa6f2c5e8258e0c79c9ab3624dc1e0d43fbe8c4f608947216b1ee998a52ae5a",
   "skills/spreadsheet-audit-pro-1/selftest.py": "8960722b6f164a0147e3e9aababfa1818a613cbaa80055c4f9de7282349d82cf",
   "skills/spreadsheet-audit-pro-1/.phoenix/originality.json": "0e12b1c4a1244a665aada5e487f52e447bf896c6d1272c72a9db79421ca9ba90",
-  "skills/spreadsheet-audit-pro-1/.phoenix/provenance.json": "b3804bc58b0b9b2b444338ac4f5e0b5d9746272893a0980e4303ae1a3dea93c4",
-  "skills/spreadsheet-audit-pro-1/.phoenix/selftest_evidence.json": "caf5a15a6ccc1000443c6e7824b8760f4d412b64ce0e3096e560a4e4d4449131",
+  "skills/spreadsheet-audit-pro-1/.phoenix/provenance.json": "a1242e8ef8a3d56b547484051727e6255d0af1012da65c26aba13fc91afc6f20",
+  "skills/spreadsheet-audit-pro-1/.phoenix/selftest_evidence.json": "8a6938243fbd009d08db9184d157ad36ea6f8020683f6e5baadbf37a639e30d2",
   "skills/spreadsheet-audit-pro-1/references/creation/p0.md": "e4d3730fc8bcacc702e198462afc701b911f0aa9f988da54bc5601e459d8166c",
   "skills/spreadsheet-audit-pro-1/references/creation/p1.md": "896ef6ee692653dca8311ca39fabad8c8f3fe7ac5ad8e71e0ff48c665053c39c",
   "skills/spreadsheet-audit-pro-1/references/environment/p0.md": "a4027e1bc99fe0f7044eeac29fe8e5f846a82d54f14ffaf298efab52655aff51",
@@ -37,8 +37,8 @@
   "skills/spreadsheet-audit-pro-2/run.py": "6818dd71e8f4514ad99d804533650152e7420b586975d36e7ff654c05472e98e",
   "skills/spreadsheet-audit-pro-2/selftest.py": "94b1d07400e5732a6db29b507e512e846c867121da85d3f9531c210d459d1cee",
   "skills/spreadsheet-audit-pro-2/.phoenix/originality.json": "dacc254651a92b05c7351a49592ca92b2626ed1c9406936938ad9e354559881c",
-  "skills/spreadsheet-audit-pro-2/.phoenix/provenance.json": "2f168d55af95c369e39405c2bdba7a989778c737b253456541a6a0df80c92da3",
-  "skills/spreadsheet-audit-pro-2/.phoenix/selftest_evidence.json": "6c2f6921c3d7f3d49de0da517c682ea0cefc56de608c05eb580ec7087ac148a6",
+  "skills/spreadsheet-audit-pro-2/.phoenix/provenance.json": "92a554c77f0d5fdccf78712a78045a5af33fbfaedf13dcfe31f21c7fe9da3971",
+  "skills/spreadsheet-audit-pro-2/.phoenix/selftest_evidence.json": "68b160221b117918b301d66fe9c8195559139fce0f0ebecca5b6e20eb04b2d10",
   "skills/spreadsheet-audit-pro-2/references/creation/p0.md": "7e15c825e91933bdcf940e21b3b11ce860947ec4890c034bceb2a1a7be9d90af",
   "skills/spreadsheet-audit-pro-2/references/creation/p1.md": "a21e4dca7be2970504049c279d72f3362c418f57053ef3a60506820afa251e96",
   "skills/spreadsheet-audit-pro-2/references/environment/p0.md": "e2606718920b34befeb7f367a7eeb930a2094794dbd6a67a01c94d84d241bdae",
@@ -54,8 +54,8 @@
   "skills/spreadsheet-audit-pro-3/run.py": "f49143dc3a87dbd7ab053c116264a7721cb400016da6e6b13f3c00c41c405a89",
   "skills/spreadsheet-audit-pro-3/selftest.py": "151ab6418c5725e18d4158498d7c415b62d2536ff06aff9212eefbfc39dd5997",
   "skills/spreadsheet-audit-pro-3/.phoenix/originality.json": "784b98a66a0c8471b93c41c318704a47f20b61bd8cde070ee652e96ae02d0ae2",
-  "skills/spreadsheet-audit-pro-3/.phoenix/provenance.json": "995a6bfdf25282074dbc8fd53217a599c6417c84756584a15dabc225ba1130dc",
-  "skills/spreadsheet-audit-pro-3/.phoenix/selftest_evidence.json": "e9f67b74ff8d5118bedcad89915cb31e09155620bbaa30797dc755f22013fe7b",
+  "skills/spreadsheet-audit-pro-3/.phoenix/provenance.json": "08b48f771e69340ca08326fcd951eb5b1ada3dd6f39a694d9461d98c776b7bb2",
+  "skills/spreadsheet-audit-pro-3/.phoenix/selftest_evidence.json": "5955b70d514edc226dc2b1b94550e5855f2a51712d533be7cf4ea26448627b85",
   "skills/spreadsheet-audit-pro-3/references/creation/p0.md": "aecb1ec115d4c0dc2799e147d735ac810c74bed22582b112ac18c92e1944236c",
   "skills/spreadsheet-audit-pro-3/references/creation/p1.md": "773201188f79c828173dd16ba781c8e9e97f3946971ea7697e49645b9f062283",
   "skills/spreadsheet-audit-pro-3/references/environment/p0.md": "2a59274f4614b59575b4b8fd655d194a6e5ab5bca1e8abb1c8dd4f45cbc2f079",
@@ -66,7 +66,7 @@
   "skills/spreadsheet-audit-pro-3/references/production/p1.md": "64aae5c7c601ad0f27d483f5cb93ace3ae688d6a283784e2f9909a868c4dc23a",
   "skills/spreadsheet-audit-pro-3/scripts/main.py": "0bef7e7bda5766007531f1b4d29cedf757dfd5daa62e0d5776e225b31def0a20"
  },
- "sealed_at": "2026-10-18T20:10:04",
+ "sealed_at": "2026-10-18T21:04:09",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

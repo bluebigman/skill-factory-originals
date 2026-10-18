@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-trace-audit",
- "merkle_root": "1b2dd616061224c9b63e3fcff44d325cc9dc5d4fbfed6da3b4566215684df134",
+ "merkle_root": "b14528f9ec1b5da02b04a3f60bc192cd4cd5bccc1bcc6c39612af60656696ffa",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-trace-audit-1/run.py": "687ddc8ce5add5e979958524306050fc46768db1d461be874a9073972e7cb65a",
   "skills/agent-trace-audit-1/selftest.py": "da9ecd52569bcfacf9d95ef4a7b4557de9b040045b3f78360e825ecff49ddfb8",
   "skills/agent-trace-audit-1/.phoenix/originality.json": "4bb0112fd5d87b9a0ebf138b6906a8261b4b490eb738d2834791405d95f20557",
-  "skills/agent-trace-audit-1/.phoenix/provenance.json": "4c595f7c61c69ea39b5d2f3e63c043cacb1977a7df08b6c54c1714dc18db6c96",
-  "skills/agent-trace-audit-1/.phoenix/selftest_evidence.json": "4e7e0355486b09fd46241d13929f163319cf05a380b3faaafc42873c197ec2ac",
+  "skills/agent-trace-audit-1/.phoenix/provenance.json": "e182b9f3bdceb4ecd1cfe98d090411e4ed83e3934f1bc3798b7b6336c144920b",
+  "skills/agent-trace-audit-1/.phoenix/selftest_evidence.json": "a1d8b70c865bfb98688434320c33786cf6cfa6c4aa68f9e455b567f520084179",
   "skills/agent-trace-audit-1/references/creation/p0.md": "4515f9871db439d5a5007290d9d7b39348dc629f66860d36774cd2e345cff234",
   "skills/agent-trace-audit-1/references/creation/p1.md": "07bb1fe3cee32a5daadc74cae8c51848f031f62962a0410306c1b9531aaa62d8",
   "skills/agent-trace-audit-1/references/environment/p0.md": "9ae8b3bed6a1888f72f8e907f434535709b9b58eefc4f697ae38a517377646fe",
@@ -37,8 +37,8 @@
   "skills/agent-trace-audit-2/run.py": "ffbcf56f4944866d56ba9aa94f2db1e36db6d63b72f7b70e468339a3634be412",
   "skills/agent-trace-audit-2/selftest.py": "1a4a56bbf3bb62c87fc3e84d97c8deea226b2e2727495310ab309a6548eec6a3",
   "skills/agent-trace-audit-2/.phoenix/originality.json": "8e96cb246c48b3ba81c165b0d9b956952d31cbeaa596a6f457063c1216638683",
-  "skills/agent-trace-audit-2/.phoenix/provenance.json": "07e84f69cf26c25b684061dc8ab90c8a82cdb151d0cc6fb30ef81c19d5d86d04",
-  "skills/agent-trace-audit-2/.phoenix/selftest_evidence.json": "bad3400f9fb4d3258fb72e94b0a4fc7c1ab87f9fb41c67e8f59b90a707232b18",
+  "skills/agent-trace-audit-2/.phoenix/provenance.json": "5b66d320e7840d35a03f329d61098ebfc5a207a6bb1600beb268add640bac075",
+  "skills/agent-trace-audit-2/.phoenix/selftest_evidence.json": "87223374ee60aad43719a5917edbf25564e5b0aa45c28f465fd776d01533a21b",
   "skills/agent-trace-audit-2/references/creation/p0.md": "f3ba467d362cb02794efac135944f8ae974e35ba3a90cbf07d3d33db984395a0",
   "skills/agent-trace-audit-2/references/creation/p1.md": "1819ecd7fd3e5d541585289b62c4e34901662ac2df4c745ef4a26bfa581ffa4d",
   "skills/agent-trace-audit-2/references/environment/p0.md": "dd0c5ca72d8d83ba197e939f06a4801cf83b87f9a6e2856e60655ccf494f8389",
@@ -54,8 +54,8 @@
   "skills/agent-trace-audit-3/run.py": "6c885d25bce75cacb2538671a61608cc0b7c5d0b4958a705d63e61ffb2a87eb3",
   "skills/agent-trace-audit-3/selftest.py": "b6ae881257e5e3d3f66a7b7769e2b9e12e09ed104769dfd8055a3b16e3036327",
   "skills/agent-trace-audit-3/.phoenix/originality.json": "5fb05a3638ab23c9ca2a30ffc8fdd7f46a4b8475e6deabbab03ad09c7fbaf417",
-  "skills/agent-trace-audit-3/.phoenix/provenance.json": "153314cee979bd03a40eb2f3b01c27d8f12e6061e419cfe10d42ac8682a1d135",
-  "skills/agent-trace-audit-3/.phoenix/selftest_evidence.json": "61bae9edb8a9f0e91bbebb6aefa50d59cba588e9025b546003d54ec4983687e6",
+  "skills/agent-trace-audit-3/.phoenix/provenance.json": "ef2fc76eb420b1a52d1656c2618235bf2099f474886df6988a12bfce46ab61c1",
+  "skills/agent-trace-audit-3/.phoenix/selftest_evidence.json": "27800a3d79508223d9190be337d303e9db6d7e2a813bed0d7945012e24af3ebd",
   "skills/agent-trace-audit-3/references/creation/p0.md": "cfbd8895720d9634fc6c5b7ae0f060835a0241f07d2f60fc6bd1db1c145d8667",
   "skills/agent-trace-audit-3/references/creation/p1.md": "ede59158d93e8d55d768cc6c8ed1597040feabfa6b5d68707dd9695039830e52",
   "skills/agent-trace-audit-3/references/environment/p0.md": "feba96e97bc8f96dee0265a59670df174b3de989280146aa472b5a49ef3ce81a",
@@ -66,7 +66,7 @@
   "skills/agent-trace-audit-3/references/production/p1.md": "7f29e712567548cbda3d0c0a4ec4a8364ac90583db0a9e8f5e6da00da696a0c1",
   "skills/agent-trace-audit-3/scripts/main.py": "409d20d1ca16e7dcfde5a303062f3b55532d41aa23d8a6f0b581a0c185c657e8"
  },
- "sealed_at": "2026-10-18T19:52:23",
+ "sealed_at": "2026-10-18T20:54:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:56:37",
+ "at": "2026-10-18T20:57:19",
  "skill": "doc-anonymize-1",
  "slug": "doc-anonymize",
  "passed": true,

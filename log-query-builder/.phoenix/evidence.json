@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "log-query-builder",
- "merkle_root": "c84a568539a943ff2d87b121be03da4524fa0a2e1479d54de35f59841479c32b",
+ "merkle_root": "0579ea98d47998d19c50f03f8d19cee0f0cdda247333ca16dbad3db1ee0fca9a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/log-query-builder-1/run.py": "7734134a8cb50bbc62e7c6d3bc84941b24dbb0f7ef55c579371a307ca25b694b",
   "skills/log-query-builder-1/selftest.py": "ab63608ad9d3add5f8f57b91fd70080bc821d6fd626494aab1326c84b79a27c3",
   "skills/log-query-builder-1/.phoenix/originality.json": "bcfa337a9f4b6ad38df38e5be36c14f30ab5d8bc1f25c37ffe1a9040a0815e86",
-  "skills/log-query-builder-1/.phoenix/provenance.json": "f484967f64d794d1c09a885b287f4e2e7be52a0c29228a5d76e0570130dc46f4",
-  "skills/log-query-builder-1/.phoenix/selftest_evidence.json": "7cafdc430a4504da0918126cc3755d3d5af23ae2c0bb060981d0d6286383f4dc",
+  "skills/log-query-builder-1/.phoenix/provenance.json": "89a2629f40baacb6c56dad6a8cbd4722e6e96500fe4b3337be286c556489bc1e",
+  "skills/log-query-builder-1/.phoenix/selftest_evidence.json": "4020b2e6ba83f171081bb243d28ceb86a75d26afd45261e6504844770f896de3",
   "skills/log-query-builder-1/references/creation/p0.md": "6be6f619235458a1066c80d1b807dedad6adac78cd7a04f3399687322c72e0e1",
   "skills/log-query-builder-1/references/creation/p1.md": "54a7ad308518dd95916ba7068bf8bd030ab52f80a563c92a8fe854e9315b481e",
   "skills/log-query-builder-1/references/environment/p0.md": "3ab75854e08d099d0f5b90d3aa7e41e43db95df9ac57d0318e2e91f57a748051",
@@ -37,8 +37,8 @@
   "skills/log-query-builder-2/run.py": "5b65243bf5268bb863acf506138f99aec48911398fd245d345c2dc317f527ef4",
   "skills/log-query-builder-2/selftest.py": "25c1c534fd92cacd11f41dc4dda241733a3da449cf0e2398ddadfb312b2e9502",
   "skills/log-query-builder-2/.phoenix/originality.json": "784423debaa0331290fa69c6f71031759510044e80a11f9f502d1954c19196c9",
-  "skills/log-query-builder-2/.phoenix/provenance.json": "c62e32fe2c4b60cd6bdf22e1f3eb2f5df5413c2ebc350877ae3f813146f9c316",
-  "skills/log-query-builder-2/.phoenix/selftest_evidence.json": "3e249c52584f06faf27c7a29b450fd20b5a1714773d8f0efd1b9fc16dd8ec128",
+  "skills/log-query-builder-2/.phoenix/provenance.json": "d5230ceec666ad8d5c7c8d7d40c6c4f6f1292bbbb8e18632470b8535687fcc56",
+  "skills/log-query-builder-2/.phoenix/selftest_evidence.json": "b19f49a25ee0e431d2c238bdaf4eff69b6c1d76bd245a8e8d38bb3ffc6381fc6",
   "skills/log-query-builder-2/references/creation/p0.md": "7419b097552e2dc214f09e44bcb295e6cf9ff236b22722293b120df6cfb5b58d",
   "skills/log-query-builder-2/references/creation/p1.md": "0fc34dc49de18b9577da31eb6f73e907ecb969c682cd3a7a6d884cf8d4fafbcc",
   "skills/log-query-builder-2/references/environment/p0.md": "b3900eeed2162141dda345c8c6b8781a5f94480466a1c0fd54407bf94cb7a80e",
@@ -54,8 +54,8 @@
   "skills/log-query-builder-3/run.py": "c0219b33a6c23fde0ed5b035642979d8368dc9f4d9273a4db62b304db1b40736",
   "skills/log-query-builder-3/selftest.py": "7550ce26ca65077cd988f9589fe0f917295101e4b487c1f42f798203b736efc8",
   "skills/log-query-builder-3/.phoenix/originality.json": "1fdb2ad20946418711c2ade5ff034575b6ee17f1044fcdea52163b1eaf886a25",
-  "skills/log-query-builder-3/.phoenix/provenance.json": "bd0386adf92362797f7c4dd7851c0475ebb5e84f33efb9561ba8e08149112a2c",
-  "skills/log-query-builder-3/.phoenix/selftest_evidence.json": "ac14f50211feccaf4efc830e6aaf0fa63520247265d5de8c061c2b792e9f041b",
+  "skills/log-query-builder-3/.phoenix/provenance.json": "9bfab09a67c3d20b9b3041e8cde20362786f00f42d2a4feb92d469b0e99a036b",
+  "skills/log-query-builder-3/.phoenix/selftest_evidence.json": "b53cb058417e3a855445194d7fdf412f8b4744d4d81759b299ed0127a807729e",
   "skills/log-query-builder-3/references/creation/p0.md": "88a69dcd8121898d8f30030490686e6cba4c5f08f7c23d178ce0e6d35d2a8072",
   "skills/log-query-builder-3/references/creation/p1.md": "7d6ea86b89e7ecf876c0d70c152b5b6b9caafc848ea999e4a9a982b815507f56",
   "skills/log-query-builder-3/references/environment/p0.md": "9294ae4177c0c7ffa6f1c09bf0a7be02458439f622c6a569426433dd6d73723f",
@@ -66,7 +66,7 @@
   "skills/log-query-builder-3/references/production/p1.md": "343716833e3df343522bac2d18c793c484dc8e63f7c6d5b373a34579702bbf36",
   "skills/log-query-builder-3/scripts/main.py": "9372971869da8c7d67914d002fef2d91688c0ebdee34e3cf1fbf8e3cd27e0e91"
  },
- "sealed_at": "2026-10-18T20:02:53",
+ "sealed_at": "2026-10-18T21:00:29",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

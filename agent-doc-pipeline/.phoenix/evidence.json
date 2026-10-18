@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-doc-pipeline",
- "merkle_root": "3825d9ec729a82154a354368694dec304987fc71f7a29a2b8ff3ffafda175b5d",
+ "merkle_root": "6b16fc416a7a4761f95de3e8e8b4309d52c4567c584638e2c4ac59f360cac068",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-doc-pipeline-1/run.py": "533545b9509f46c062dfe9fc9e897e7164cc0944d10046aa86655a9aeebc4af5",
   "skills/agent-doc-pipeline-1/selftest.py": "8d4ad670d8bdd6535f25c16e5bd0bc110862d04436b6f84add75520e07f84d82",
   "skills/agent-doc-pipeline-1/.phoenix/originality.json": "976a4795348d547ecff254006777b6b825fb32682bc5206df6c33504ddc60e4b",
-  "skills/agent-doc-pipeline-1/.phoenix/provenance.json": "37f08c9446f80de4bf5006cdd3be72598a2608fe7c800c48db895241cac4f802",
-  "skills/agent-doc-pipeline-1/.phoenix/selftest_evidence.json": "8c7da0aedf5d0035f6497d22b6b1d7a7fb2a5e04aed3b831f95cba925f919351",
+  "skills/agent-doc-pipeline-1/.phoenix/provenance.json": "8023ccbf09eeaf2ee3a51be82e288cf3f4572c338393064d8fb57616cb042b11",
+  "skills/agent-doc-pipeline-1/.phoenix/selftest_evidence.json": "3f2929d22479a4f203a088e723399a53ffd80a0e4a594616e56fe6d91499c880",
   "skills/agent-doc-pipeline-1/references/creation/p0.md": "c8888cdf97e67ed8a4552917b276b805de8ff107b729aa88991cf087f3a66230",
   "skills/agent-doc-pipeline-1/references/creation/p1.md": "ef582ee87c2ca4052cba121c8121db426886494096a26055141ebf2ed9023164",
   "skills/agent-doc-pipeline-1/references/environment/p0.md": "8fc7152eb40af62db4e1881e2f10c30e8802a548111225c04b9b1c712d49466a",
@@ -37,8 +37,8 @@
   "skills/agent-doc-pipeline-2/run.py": "c530e58c69725dd2e2639818a53ab1e7fb0e8648534c80f9e0bc6b37df1e68f0",
   "skills/agent-doc-pipeline-2/selftest.py": "9e0f49c4674b2a44b202c75cdab1c60f4078440a1a0327f611c592b4161d1d85",
   "skills/agent-doc-pipeline-2/.phoenix/originality.json": "9af303d49abe913de15d7e376ce22d7323db507a116617ece6bf1e1ff2117a9b",
-  "skills/agent-doc-pipeline-2/.phoenix/provenance.json": "b2e2ce042a7c08da0226ef464919c3f0f201af6571942ed927daa4b4c0438f7a",
-  "skills/agent-doc-pipeline-2/.phoenix/selftest_evidence.json": "ae705c29d36357b514ef2b1a7c6a96c1678119f1b5e73d60270279f093b85d72",
+  "skills/agent-doc-pipeline-2/.phoenix/provenance.json": "0b795177511ca19ffd913393a9e2149fccd9c75b74e14056bed86332e3f60cce",
+  "skills/agent-doc-pipeline-2/.phoenix/selftest_evidence.json": "f79666b8dd3e0b69109c434355ea274f1e8812007c0fe4a684df3334b8d0aa38",
   "skills/agent-doc-pipeline-2/references/creation/p0.md": "4c2de5910a25f4f378fa8aa226533efae236385f35a6168993c8805080b9a966",
   "skills/agent-doc-pipeline-2/references/creation/p1.md": "93a4b6836a40de9ef63c7ee06050d525bbc0ebc0da0505a060230af415cd3456",
   "skills/agent-doc-pipeline-2/references/environment/p0.md": "a75194d4ca5e8ffb35bd81b632944239fde3b88a32a0732e4607594b30bfc844",
@@ -54,8 +54,8 @@
   "skills/agent-doc-pipeline-3/run.py": "1871310bcb41985c895997448f6601a84a56eda7a85c105d027a7c11c310aa76",
   "skills/agent-doc-pipeline-3/selftest.py": "ac2e1f5d0807e1c8a2591a5a94fc308eb9fd2df99cc901d8a7232c213f72a49d",
   "skills/agent-doc-pipeline-3/.phoenix/originality.json": "d04488c88027484e30381a3d35038f57e2a9beb605f89ac9a90c4eeb82c3208a",
-  "skills/agent-doc-pipeline-3/.phoenix/provenance.json": "d00c3ad3d74bc6fdc5d54ff265b2541b76ebfd509dfcb27bbba0a459b8f11db9",
-  "skills/agent-doc-pipeline-3/.phoenix/selftest_evidence.json": "39659bf3d3e0289c769f254fd5d79d770d6991dff80757479a8b045c3665389f",
+  "skills/agent-doc-pipeline-3/.phoenix/provenance.json": "26a00dcd56fba6eaaab9e239c8279486e862f5eaa5961d2066319c806ba79073",
+  "skills/agent-doc-pipeline-3/.phoenix/selftest_evidence.json": "7e78b4bf8fd297e1d10760aa98d16f1431f115ca7639ea32516e86d20b4b2e9f",
   "skills/agent-doc-pipeline-3/references/creation/p0.md": "7ce258df18d87df514705080051da19b72a7209bdb3ca7115312a8aad1540c7f",
   "skills/agent-doc-pipeline-3/references/creation/p1.md": "c4dbc9481810b97f651a71bddb4646b608211745f6cc96505ea48b96fdfd8859",
   "skills/agent-doc-pipeline-3/references/environment/p0.md": "cc4a99851eb0cfddb8d375fbfe1c242bb12ccadd639fc5b11bfd208e39119732",
@@ -66,7 +66,7 @@
   "skills/agent-doc-pipeline-3/references/production/p1.md": "245b47e165772f8b08e17098f74e469c854e9943d0751bb911b20b36f9a276e8",
   "skills/agent-doc-pipeline-3/scripts/main.py": "fb6857b2508e149e811e10372fc2fe54a95321e68a14efbe37405ee1eecb409a"
  },
- "sealed_at": "2026-10-18T19:51:53",
+ "sealed_at": "2026-10-18T20:54:31",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

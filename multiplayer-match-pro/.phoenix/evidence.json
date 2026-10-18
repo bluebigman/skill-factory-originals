@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "multiplayer-match-pro",
- "merkle_root": "286472733809ba417c8a7d22acc5db1831590a36fc50b1a297e65c1381e8da5a",
+ "merkle_root": "20ff5e5f6a8ae16364546278d638282b59e19e482ac71b6548af9630e913d17c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/multiplayer-match-pro-1/run.py": "1738c8da31034f2abfb00d3104034d656b06b3bdfffcd6e57ac3ba94620e20f7",
   "skills/multiplayer-match-pro-1/selftest.py": "f2b61b62452723491e25bcce51c921db4310f8d5a94f9615774bf4f42e2f7bab",
   "skills/multiplayer-match-pro-1/.phoenix/originality.json": "a284b30d4ddf2c0ba8b50b5de9562d218967d2e303dd8178f1abf8ad99444c26",
-  "skills/multiplayer-match-pro-1/.phoenix/provenance.json": "4ff2d96f0d9e56f5420ace1a145f71af1f60b3c7f32ff57a60502290f65ed260",
-  "skills/multiplayer-match-pro-1/.phoenix/selftest_evidence.json": "45b98ea8608e42e4e2092e81a54930352d0b3e5271fe88e595039b4fc2c2ee24",
+  "skills/multiplayer-match-pro-1/.phoenix/provenance.json": "6b6507846d008e71475ec87d4ebc55a533557ddfe77ae1b5624c8cc1603bfefd",
+  "skills/multiplayer-match-pro-1/.phoenix/selftest_evidence.json": "6797edc880f85363a4c768233ef450be609e53fa3bb2ffb14a5b81e96a14a3d7",
   "skills/multiplayer-match-pro-1/references/creation/p0.md": "5bf62d8c02f79726b5d8f5c2f0309eaa801766a0a7fc535985d6baddd7a08baa",
   "skills/multiplayer-match-pro-1/references/creation/p1.md": "d62e6c13db331b07878a98e6fe4f56dd9ce31530298434cdcaa4db5ea547fb8f",
   "skills/multiplayer-match-pro-1/references/environment/p0.md": "788519b215314b8f5b91cb93ec7f69ce7a46519b93ded42184018ae36b3334d6",
@@ -37,8 +37,8 @@
   "skills/multiplayer-match-pro-2/run.py": "f736b04a4648698e17ccbde1e08ce669849da9e8354ee46f0740f1012e5a7091",
   "skills/multiplayer-match-pro-2/selftest.py": "c28f35ee8dbabdf5030526a2b2c7aa6df70a8af90953b85d01da436562097a21",
   "skills/multiplayer-match-pro-2/.phoenix/originality.json": "96c4ca71fd541a6aee7b9b5c12eef508e76951f975cd2d148f905bdd72549af8",
-  "skills/multiplayer-match-pro-2/.phoenix/provenance.json": "9a3704b5ea27f574b7c420ec85efc8bb132ca1134746a5fb5290bd5aa2d2bc11",
-  "skills/multiplayer-match-pro-2/.phoenix/selftest_evidence.json": "7ede05f29e0970f5343d914d0760263c92b9daec52f0d6281ade30015f32a239",
+  "skills/multiplayer-match-pro-2/.phoenix/provenance.json": "e9172e4f95602f4a39bfd175fa392893b994a47e4454671278663160c4967e92",
+  "skills/multiplayer-match-pro-2/.phoenix/selftest_evidence.json": "022dc77f67926a98234cecfa062ee646fb77d3bee69ad94f3c6dfae28783b329",
   "skills/multiplayer-match-pro-2/references/creation/p0.md": "e69db00849bdef4ae87369bc3a6b268884fa7362d7cdabadf29e10edee773012",
   "skills/multiplayer-match-pro-2/references/creation/p1.md": "39b642d15a3b1a6ddd97ff4cfe8c5eadecbce8c636f687e28f61acc216e0644b",
   "skills/multiplayer-match-pro-2/references/environment/p0.md": "98d3547be165ec98df29798cff595ddba2bb071719386d6c4cb6545bbe2beaf7",
@@ -54,8 +54,8 @@
   "skills/multiplayer-match-pro-3/run.py": "5ad296ef1432d542af7450561d9aaabc1e4250e72c1fdee6f45ef08d7382d678",
   "skills/multiplayer-match-pro-3/selftest.py": "ba70c98c29ec4dd83295e62079f4a868e3a2846a67add98559aebd631e67f58b",
   "skills/multiplayer-match-pro-3/.phoenix/originality.json": "d0fa3ee000c6f201de93501d603bafc5b6a64e77074a120dc5339a52c41cf99c",
-  "skills/multiplayer-match-pro-3/.phoenix/provenance.json": "039753e65fd497adda9245cade2f97063dfeeef6f24916ee4bc29f10040b0577",
-  "skills/multiplayer-match-pro-3/.phoenix/selftest_evidence.json": "dca70272117801d589ee02047f0062709af217f72776abec1d2e4390472e9861",
+  "skills/multiplayer-match-pro-3/.phoenix/provenance.json": "1238b4a1b909a304ce182a1910900f81796ac28f5e01e864805a0e86fd962b0f",
+  "skills/multiplayer-match-pro-3/.phoenix/selftest_evidence.json": "b9ee7358f708642a71c9302c4e3a7d6f3b096c075485a639d1b99e4e17f180ae",
   "skills/multiplayer-match-pro-3/references/creation/p0.md": "2e54049e68d96e1b37e35b9a72a8b0ac9d7825ac5e4aba7f2fc7b70a2bbaf559",
   "skills/multiplayer-match-pro-3/references/creation/p1.md": "ed05d092e9c6269e128a73db1a029f2bb27ed7c0232fbcf83b98c5b1b532503e",
   "skills/multiplayer-match-pro-3/references/environment/p0.md": "db5dc305156e8d68b34102b628d68f1c73d97e3cb34e800704520a5a62d5c175",
@@ -66,7 +66,7 @@
   "skills/multiplayer-match-pro-3/references/production/p1.md": "10f092ba5f2d2f52ab395ce719782df9a1d1c5ab6855c14ab5be0d7ba1b698b6",
   "skills/multiplayer-match-pro-3/scripts/main.py": "0b25411a383ba1f2967facf8856f8ff0e953e7976648ce5ee2bfb999bc6a9d23"
  },
- "sealed_at": "2026-10-18T20:04:09",
+ "sealed_at": "2026-10-18T21:01:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

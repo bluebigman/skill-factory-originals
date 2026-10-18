@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:54:38",
+ "at": "2026-10-18T20:56:09",
  "skill": "context-window-tune-3",
  "slug": "context-window-tune",
  "passed": true,

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:08:35",
+ "at": "2026-10-18T21:03:27",
  "skill": "secret-rotation-1",
  "slug": "secret-rotation",
  "passed": true,

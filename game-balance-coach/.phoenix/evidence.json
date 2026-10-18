@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-balance-coach",
- "merkle_root": "0cee3d4a6d058ec2656e16d62280cd3170b52079568bc65efb7da5406c9f87f0",
+ "merkle_root": "0019dcd0a65879484936d63369d4607a242150feff578a250cd9a6c0c9ade9de",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-balance-coach-1/run.py": "e7ee3f8a45d03209c0c29b9e7b7129163ec94bf02247b6f8bd227740431f88d5",
   "skills/game-balance-coach-1/selftest.py": "5ed92dedf6a9f30e1a7c5966843665c3517eeca7e76e9f57357c5b3928b263ea",
   "skills/game-balance-coach-1/.phoenix/originality.json": "65eb3d3677fe6577fea1529d3151424e921497ba64ba1246fe07bac3994366d8",
-  "skills/game-balance-coach-1/.phoenix/provenance.json": "28713c26dc3db0b57495c7cd6bf1b88f6262f8a56a0ac8c83ae2bf7bb10db162",
-  "skills/game-balance-coach-1/.phoenix/selftest_evidence.json": "94c66f9043d8027bf7da72e09ba7f341f2fcafdf82edce3d902ed72d6e3ed154",
+  "skills/game-balance-coach-1/.phoenix/provenance.json": "ad5d1fe372e537590fb496f65a491d6696ad9726f2de1b6cde00cbc9d8ff4b6f",
+  "skills/game-balance-coach-1/.phoenix/selftest_evidence.json": "0217118e2a1c548fcb81c6eceed13fa4929452ffda736e33a9a21a9d309933d2",
   "skills/game-balance-coach-1/references/creation/p0.md": "20787e5452c3127bcb1f7c1abd0bd0e5de98f02a2d5bd29a917da983e79a3a60",
   "skills/game-balance-coach-1/references/creation/p1.md": "2a73982f46b36aa87dc1f9f08dbbb6caa26430854c4c85906628055ed276dcb5",
   "skills/game-balance-coach-1/references/environment/p0.md": "565698cffb78f5eb8e4dbf9d32d3bd0c8b87731028eb6463f7ccdc73640c688f",
@@ -37,8 +37,8 @@
   "skills/game-balance-coach-2/run.py": "8a5543d111b37543d670bb7fca7efe7733b2d4d8e3328433aee02104ca665658",
   "skills/game-balance-coach-2/selftest.py": "4f2385941762469b07e926cc922a00a0a437904bc72416988c570ea8cfdc76a5",
   "skills/game-balance-coach-2/.phoenix/originality.json": "549026ac08e3dbb77471b6c6ed31727e01291ed73b1cc44eddd1fac2866984fb",
-  "skills/game-balance-coach-2/.phoenix/provenance.json": "56e43e609826b0612f8c2ed65c075c1fefc46851c4869b858b3a6e1365f1aacd",
-  "skills/game-balance-coach-2/.phoenix/selftest_evidence.json": "159ca25db99b2d4d3418e252da9dc9370517a61c1feb05f610040be834899a44",
+  "skills/game-balance-coach-2/.phoenix/provenance.json": "63c0155a42b519e9af0cd30c07394d1fd0fd16bf132a90267d7490e254c4146f",
+  "skills/game-balance-coach-2/.phoenix/selftest_evidence.json": "cb24af14648eb3776fd19475fe4575729467f588fb1dc40531fb8ce0365a7e74",
   "skills/game-balance-coach-2/references/creation/p0.md": "fafe28afdd8943d21a53595dd8fc63ae56c40d9a5f39cd2345a0e64e35ff60e5",
   "skills/game-balance-coach-2/references/creation/p1.md": "6467783e825738fbb750ac7d81d6891718e2bfb4d36541534ffd9694cbe94db4",
   "skills/game-balance-coach-2/references/environment/p0.md": "292b99c97e0992ab8423697011f07f09ce10b37beca8d81df6374b9d6750ff18",
@@ -54,8 +54,8 @@
   "skills/game-balance-coach-3/run.py": "373ad800b99a09eb72b2029d8a1e19fb454589836e8e97646e44f278c90eadb2",
   "skills/game-balance-coach-3/selftest.py": "62e544b25da1203ac8ef2cdd215e643914f21e4861e525a77cb34b2e0c14c6f5",
   "skills/game-balance-coach-3/.phoenix/originality.json": "83f5cf12c069ab5f35bb8ececbda3d1e6f266df318d87205ce1e72a8374388e9",
-  "skills/game-balance-coach-3/.phoenix/provenance.json": "db3b4cea24a57e9ac1cdfd89ecce7ede11e9e9b7971ee2e3878f0a16ebfeae36",
-  "skills/game-balance-coach-3/.phoenix/selftest_evidence.json": "b9206ddfdbd1e1a90abb5a95e619dd85ee75d00cf361664441f2a666a44ec99c",
+  "skills/game-balance-coach-3/.phoenix/provenance.json": "908d2d26569093e355836b7950432132c77f951ed4dcd8cf50a1ca28ee26147d",
+  "skills/game-balance-coach-3/.phoenix/selftest_evidence.json": "b7764154d2165d860ef1164137ab5ad2acdcd4f6b3d4bf288e1bad78f840b0bb",
   "skills/game-balance-coach-3/references/creation/p0.md": "276dfb99e297e89b21c5c0d33dca2b8033fc3022ae1b5195f193f206a43d7702",
   "skills/game-balance-coach-3/references/creation/p1.md": "f681877e5f1c2fb1bb7331eb2725ef796b77898a6524146ffae0dbf6f33fc913",
   "skills/game-balance-coach-3/references/environment/p0.md": "aee7c0a6f807502c82e672776e9ae60ad40638897a175a13a0dd5842fb72f8a4",
@@ -66,7 +66,7 @@
   "skills/game-balance-coach-3/references/production/p1.md": "37b2fec996061906be31ff37094af8f75b492158787f68ac8fd2c6d065965e81",
   "skills/game-balance-coach-3/scripts/main.py": "519c9434d3a2be0d8fea3e8a6638b6bf1be3f73d34f9b6aded43d0774e2eff46"
  },
- "sealed_at": "2026-10-18T19:59:41",
+ "sealed_at": "2026-10-18T20:59:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

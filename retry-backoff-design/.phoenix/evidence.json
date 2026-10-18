@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "retry-backoff-design",
- "merkle_root": "5d651b253d16a5747aa2d7da10246bb8fd7ab1e7d594fbb61f2144ad174fe13e",
+ "merkle_root": "89b4bab1e7928b54fab59273147c0d210c882892fbd66588aafd069ea237b0bc",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/retry-backoff-design-1/run.py": "03fa893971e76bc1ac71f01c12048072ba8fb941146a76e71a57ad06df358ad5",
   "skills/retry-backoff-design-1/selftest.py": "ff0f46a709fea37c835ab2dd9b240d0b5eca109423967cff3948047d4ed92d8a",
   "skills/retry-backoff-design-1/.phoenix/originality.json": "5b14955e951ea304e93f7f1d1eaedb8b9b9370a5399b36ba83327d8faddc9b8f",
-  "skills/retry-backoff-design-1/.phoenix/provenance.json": "d9fd6c86a43a7fbad350021ab409348dc4eaffa342aa3cecce534457e76d5e37",
-  "skills/retry-backoff-design-1/.phoenix/selftest_evidence.json": "4f3b60b7939329a667906f921f9066ff0cb213ceea84ecda587e4ec3461cf6eb",
+  "skills/retry-backoff-design-1/.phoenix/provenance.json": "3234f9ad80ff898fa84caa5614ce7b09db0af73c9f9cf822c7eddfb5b07ea217",
+  "skills/retry-backoff-design-1/.phoenix/selftest_evidence.json": "2573507915ba55a94c0cb0f413fe6155de098043b8574a10046022c65a4fe30f",
   "skills/retry-backoff-design-1/references/creation/p0.md": "90ba4751c59615892e8c875eaaf2de3ed21a554cbb88c5bd30ef7c6a445b2296",
   "skills/retry-backoff-design-1/references/creation/p1.md": "a980c85a07849ee3ea7e7d138c8a09a3ad7a2a26653f7af722b03d594286ecec",
   "skills/retry-backoff-design-1/references/environment/p0.md": "032f3004b0d18cb3159a8cf238e3de3127f53f9aea4357628ded960c6090907d",
@@ -37,8 +37,8 @@
   "skills/retry-backoff-design-2/run.py": "c36f3d52e089ea128f71e4e332121657b71577ff3fe132f50e8a02511f489d07",
   "skills/retry-backoff-design-2/selftest.py": "ef8fb9c3b01be565242398f05977293b6e988c6f7506cba4cf76e1383945f15e",
   "skills/retry-backoff-design-2/.phoenix/originality.json": "ba32e3c8cbf60ac17e89593a34ccccf2df8cf9bc7de5d4739d5e2ce074b97afa",
-  "skills/retry-backoff-design-2/.phoenix/provenance.json": "5c139b10f0c07c692f29f68cd2508f6cc3f83b06642f912e100b048ebefa8ce0",
-  "skills/retry-backoff-design-2/.phoenix/selftest_evidence.json": "f3e4f42c934faabba18cb661908a172ec8b1a51e1cac5386e43acb022c213173",
+  "skills/retry-backoff-design-2/.phoenix/provenance.json": "790d86ea10ae8ffd976704efe22dcaeb24ede21f4eb63ae333ebce06e7076570",
+  "skills/retry-backoff-design-2/.phoenix/selftest_evidence.json": "421a36d3d3a39c938f00986c9dc7564b8ca2331b742e12db7cd9c485fd1f3c32",
   "skills/retry-backoff-design-2/references/creation/p0.md": "62bb86c5fbb074d9ce6bd9cf5753722f01508994a60634578eb3533ac5facd25",
   "skills/retry-backoff-design-2/references/creation/p1.md": "ae5321315daa406b4e83c85e90cc214439028ae60158ba5de68cad2829afbd17",
   "skills/retry-backoff-design-2/references/environment/p0.md": "6dac32e71f0fccb58fbc36ca51ba181b78e1be32e38c49a3c327467278401b8a",
@@ -54,8 +54,8 @@
   "skills/retry-backoff-design-3/run.py": "5af5c0262c22edcf766e73706fa781478681625554d37ae5a449558950848d15",
   "skills/retry-backoff-design-3/selftest.py": "4e09032102357087614882b1ad06bbad43db1ac9dc95dbe4163f4209bfca363d",
   "skills/retry-backoff-design-3/.phoenix/originality.json": "85cf01bf538bf661645b57c37ac4d93a239c9a2aac0d876fdc12514ebfa55d1c",
-  "skills/retry-backoff-design-3/.phoenix/provenance.json": "da26bf70562324056ff86e293bcf59d6f420413d4f9996c9a6c6a6b5d394ccd1",
-  "skills/retry-backoff-design-3/.phoenix/selftest_evidence.json": "d8b5686a9cc0f32dcbbed5c71c9809b201181c3dcff9ba3758bf77c890c60d70",
+  "skills/retry-backoff-design-3/.phoenix/provenance.json": "2517295c3655b24565e20cd8793e957229c3f1d6037f0fff581eef13e16d997e",
+  "skills/retry-backoff-design-3/.phoenix/selftest_evidence.json": "459b92c590be6673e169d5c131571441bbff0fb26fbed3696c6eb1380df6cbc2",
   "skills/retry-backoff-design-3/references/creation/p0.md": "d7e9624f43d031bcfafa5c92d7012f1995326e1b50997ab42dd8036880b905d6",
   "skills/retry-backoff-design-3/references/creation/p1.md": "8793e9a07132a94e4799c04563373b672874db99eca506d5238f0a1471991fb6",
   "skills/retry-backoff-design-3/references/environment/p0.md": "25822772c1f2249ee45c9080a9aca45d4ca1460964345fbfda7d4749ec27fb0e",
@@ -66,7 +66,7 @@
   "skills/retry-backoff-design-3/references/production/p1.md": "691554cc3efba493d7885ad0fbabeb3845222bf20e9de314b8042ef84782823b",
   "skills/retry-backoff-design-3/scripts/main.py": "1f1dcffa8b8e1da7054afaba423406742e26c89fe54ebf1713cb72e132986e64"
  },
- "sealed_at": "2026-10-18T20:08:02",
+ "sealed_at": "2026-10-18T21:03:11",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

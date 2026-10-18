@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "contract-risk-read",
- "merkle_root": "247c1f064bff5d87808469d25484276d95e497f13e333f7c02ef7265a76a434c",
+ "merkle_root": "80048f127dd7921474709001eccc2515981053eae32b90e2bf275d336e733a00",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/contract-risk-read-1/run.py": "ca766680b66ffa34d5998d8de0f5b29d3386745a14ebae610e795e14af083b39",
   "skills/contract-risk-read-1/selftest.py": "95236f870cab6adb6390322fdfa4824aed0fb762882aa29305d94e5f7aea7b7c",
   "skills/contract-risk-read-1/.phoenix/originality.json": "8794bab9f2fa8b0c7d5b3945bd323ff81e5f098e488ab45834dd4bec2dc66dfe",
-  "skills/contract-risk-read-1/.phoenix/provenance.json": "86caab360106146878342ec3bd158cf28cbce2d16483c6e19d891e04d0b288eb",
-  "skills/contract-risk-read-1/.phoenix/selftest_evidence.json": "0d99df3c1abc94ac4e2d351757ec80322552e3e04c4456f0e85b14cfd6aeb1a8",
+  "skills/contract-risk-read-1/.phoenix/provenance.json": "1c7edf1d9d9b7ad6f496bb090f65d4a87576de1688bb53de60599891133007f1",
+  "skills/contract-risk-read-1/.phoenix/selftest_evidence.json": "3875da40649e63db0a70a113e5f9db637101b1e2a9acffdff5255a0e2c3baeca",
   "skills/contract-risk-read-1/references/creation/p0.md": "bbd7cf3bf4017c421d96f9826afa0698332b57882600ea42d0a4669a0b54769f",
   "skills/contract-risk-read-1/references/creation/p1.md": "03caa8525d1670b59c8b62cf23dfb27717c8f1d154d56e6ed3b290f4013a2074",
   "skills/contract-risk-read-1/references/environment/p0.md": "b441264534c5e9be2be97edab27ec39db27b1d1ce7ce28a34f346d909a5c3116",
@@ -37,8 +37,8 @@
   "skills/contract-risk-read-2/run.py": "5e13f75926c22cccec336f339ad33458bdbbb42cc755e053af17100f289e8f7e",
   "skills/contract-risk-read-2/selftest.py": "1e8f0a8b61a3e2d65c8dd491541dfadb067e9a1dd61e888c042099842c11275c",
   "skills/contract-risk-read-2/.phoenix/originality.json": "7a855289b61f32fe8d14f016b4c5f79260a809a60a381c425012ec314629a452",
-  "skills/contract-risk-read-2/.phoenix/provenance.json": "c0d4217dcc8942c79e57447c203079204fad873192302a26ab966e50e32cf5c6",
-  "skills/contract-risk-read-2/.phoenix/selftest_evidence.json": "15f72bff761e4da0bc93a81aa877d363470a70a662496810d7e81ac86d1c17d5",
+  "skills/contract-risk-read-2/.phoenix/provenance.json": "eda544811bfd36bfa412eadc182116b518e220be8642a254df882be3af4ab09f",
+  "skills/contract-risk-read-2/.phoenix/selftest_evidence.json": "4c849fc9fdcfa0ef963c0b7b07ee3c5768e322ff371bfe8103bb6fac851b1bcb",
   "skills/contract-risk-read-2/references/creation/p0.md": "602e3405da6ac121ea447c2f4d88bd53e5e88bf01913a60679a3e559a1af3ee5",
   "skills/contract-risk-read-2/references/creation/p1.md": "ef58196aa5d93ac061ecbab8a3c5a1bcaffcc2fdf6916aea1d932374dd1b28f0",
   "skills/contract-risk-read-2/references/environment/p0.md": "e0581420d4ebcc5ca65d12adc439141e44c5d8277b63ca8853a6577615d9fa4e",
@@ -54,8 +54,8 @@
   "skills/contract-risk-read-3/run.py": "2e8167571f499b8f3d02cc18b1f6b7e6371809c0023e4dad85c7b9df3722e7d1",
   "skills/contract-risk-read-3/selftest.py": "eb7a878d56b1c3ed0ec71c47a1b5446415f1518acd5f190babcc40f1ef1d29f1",
   "skills/contract-risk-read-3/.phoenix/originality.json": "2d2a7ed1a088c716197fbd587e4b2727f31e0d84ab4a1d7fe199e994c1a9c9d4",
-  "skills/contract-risk-read-3/.phoenix/provenance.json": "2264216b90dc51cd2719d59246dc07ff9ba6791cefd02ee3117eecf1af67cbac",
-  "skills/contract-risk-read-3/.phoenix/selftest_evidence.json": "63e5d4eb0d636d2e1543ea48f31e3a7e0e03a3b4b5f61017e29edceffaad43e2",
+  "skills/contract-risk-read-3/.phoenix/provenance.json": "718b8387c7e2a6f22d2f3a94af8bcc5a895a7a35f63b53df23cbe279e828f4ff",
+  "skills/contract-risk-read-3/.phoenix/selftest_evidence.json": "2d9bfbb33244e9973c70c6e0dabcdefd0a0a212b1b8eb7711944deeefc19f512",
   "skills/contract-risk-read-3/references/creation/p0.md": "56d71785bf8d982c29e37f701ed6e20671efc719607df638750272e6904eb188",
   "skills/contract-risk-read-3/references/creation/p1.md": "86651e3dec2853a80a65a8d6ea75f865701f490676160ccd23de3ec4290f7ffa",
   "skills/contract-risk-read-3/references/environment/p0.md": "11f3241d26f10a268db657263dd06e8d50e3bf6aec0b207bc5459519b217215d",
@@ -66,7 +66,7 @@
   "skills/contract-risk-read-3/references/production/p1.md": "b8b8ba79fe8a9e2fd930a0317f7cdfa331653ce1d8aca0a472bffc509d75d7e6",
   "skills/contract-risk-read-3/scripts/main.py": "391d875cd9ea9acf0d72b816f34a99ade439f255eb58e9365be75be9ed1b16a9"
  },
- "sealed_at": "2026-10-18T19:54:43",
+ "sealed_at": "2026-10-18T20:56:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

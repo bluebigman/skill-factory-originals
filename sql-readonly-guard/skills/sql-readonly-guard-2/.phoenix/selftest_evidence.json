@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:10:09",
+ "at": "2026-10-18T21:04:12",
  "skill": "sql-readonly-guard-2",
  "slug": "sql-readonly-guard",
  "passed": true,

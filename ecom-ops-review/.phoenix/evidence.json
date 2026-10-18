@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ecom-ops-review",
- "merkle_root": "f9f9a73f66f255889d18b97f1c6d39cda4584b50b644d0fb9f8defaebd05f552",
+ "merkle_root": "d168a6489dc3a5d19a4a0ef6add0dd90a0af4e305eb0551223bad887a93a1e20",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ecom-ops-review-1/run.py": "9a9af437e26d1199ccbad6a369a0046d453a20e2794efac4d97679f224d459e3",
   "skills/ecom-ops-review-1/selftest.py": "ded87ac48ae964799ca16331101589cf5b076680de03d32023e126970ae72877",
   "skills/ecom-ops-review-1/.phoenix/originality.json": "887c95beee0ea4e5d25c8988ef2ed44cd2c03181054a3e73119e864655673921",
-  "skills/ecom-ops-review-1/.phoenix/provenance.json": "a4f44b62d0f59f0a7e7c90343940d8f8f2eaf777d16d0f899acfa21e48948e93",
-  "skills/ecom-ops-review-1/.phoenix/selftest_evidence.json": "a47004465cb66a28156c0d6970b6f24698ee347219d2aa258d9138c9988f360c",
+  "skills/ecom-ops-review-1/.phoenix/provenance.json": "097ec4677f031e45ecc537f58fa74e335a397030ff7e617445ce6a4c9689720b",
+  "skills/ecom-ops-review-1/.phoenix/selftest_evidence.json": "3234034c93a5029f935b820f37729d4e6c87e9cfea3a1ef2e357603a431c9a3a",
   "skills/ecom-ops-review-1/references/creation/p0.md": "b777fcfd5d35720717016f2f2bb818668a245aca0ceee0d97301b42f692066c4",
   "skills/ecom-ops-review-1/references/creation/p1.md": "78e74b7ce67bb78f8887112a4e10c21385931d77e80cde26729302747b830535",
   "skills/ecom-ops-review-1/references/environment/p0.md": "601a1730c4b1c719a5770682946ca9bd1502054bf5864ab093b15ce53950667a",
@@ -37,8 +37,8 @@
   "skills/ecom-ops-review-2/run.py": "3083fe03e7c96e80a5499d0ef26218587ce50dfc33475442d25d3273556ac22f",
   "skills/ecom-ops-review-2/selftest.py": "fdc6e084eee1f1d717934e5716428f63d36b2fe690abf62f29a47e6a309aae50",
   "skills/ecom-ops-review-2/.phoenix/originality.json": "fba6c62be9d95a83f74de893e270ea99f4f8eba07af77e398d7f77e4f148871e",
-  "skills/ecom-ops-review-2/.phoenix/provenance.json": "6c961645c7e68bc72f04b88a21fe004cc95114e1e731a3fafddbf165185c2549",
-  "skills/ecom-ops-review-2/.phoenix/selftest_evidence.json": "8a065a6d10d3e9ba383bc12534099a289bcad23f9a0ae0e33e47668abb22d9bf",
+  "skills/ecom-ops-review-2/.phoenix/provenance.json": "b9ab113de23577e576bcfeacfb9819af7b584ee771da5767066c35a1cf5609ba",
+  "skills/ecom-ops-review-2/.phoenix/selftest_evidence.json": "ed699e3bcce637169a1ad70a2b87e4f7a305cee9b522de9b8322f0801f828ac4",
   "skills/ecom-ops-review-2/references/creation/p0.md": "884c0f1dbdc5d1658a9e0cc99197b4970cd589c4485548f6610a75c4f385b48a",
   "skills/ecom-ops-review-2/references/creation/p1.md": "d49728afa4d7453a609b55bd23c40c84ec694086b60fd476b031154f04c79395",
   "skills/ecom-ops-review-2/references/environment/p0.md": "e73123f277b21aae06baf58204b565a349bd82e0968c777cf0e3b7d70dca0cf6",
@@ -54,8 +54,8 @@
   "skills/ecom-ops-review-3/run.py": "68c98d948d75551eaa164ec3757d5bff6b4e699da3d1f3bd8be5dbe673f953e4",
   "skills/ecom-ops-review-3/selftest.py": "93d0f32672301b570d5315ed430aacce1d074db85e9d2829d4f808c7f3c2950b",
   "skills/ecom-ops-review-3/.phoenix/originality.json": "bb17b237fd7c5a70188aca3893127589a7567656e4de34934f461d6f22f4825e",
-  "skills/ecom-ops-review-3/.phoenix/provenance.json": "546199a7346bacc64156441f8f4bfba0e81a83742dc4487868380ed66f36d9d7",
-  "skills/ecom-ops-review-3/.phoenix/selftest_evidence.json": "1c50856d01c5e4d43ca6a45d3b69af10c93991ee20a94dac085b5f061c356ba6",
+  "skills/ecom-ops-review-3/.phoenix/provenance.json": "9cb443575060fe7fa9e835479c73955ddb549b39780c16b3ba411a74e945583b",
+  "skills/ecom-ops-review-3/.phoenix/selftest_evidence.json": "1e96db0606fd19dd994038306ac8fb2785d10ca84b0e938cd662c6c9c495b846",
   "skills/ecom-ops-review-3/references/creation/p0.md": "9ca99d3118d2be04507978915faa67ded44f1f9c345eff945d588ed4b3387063",
   "skills/ecom-ops-review-3/references/creation/p1.md": "75ea7427e2177136d6d1a37152637a53b9dfc03a415da2740a82fe99936ebe09",
   "skills/ecom-ops-review-3/references/environment/p0.md": "3053548e95b1186c843a0e30abe8cfeede144d88245e61467517566142276af9",
@@ -66,7 +66,7 @@
   "skills/ecom-ops-review-3/references/production/p1.md": "c4915f33c9e689173c8b7a7c421568762a17608491c60ac149ce0b24a2dee49b",
   "skills/ecom-ops-review-3/scripts/main.py": "7b9033a85742dba7b369346b96f15cbc32548aa62b8322edad510c88fdd9b861"
  },
- "sealed_at": "2026-10-18T19:57:57",
+ "sealed_at": "2026-10-18T20:58:02",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

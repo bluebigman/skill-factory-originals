@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "meeting-facilitation",
- "merkle_root": "65185ed4066f23cecd6fd7b38a992dbc67e6b1da6076f867199d67a68562c739",
+ "merkle_root": "61cece64cdf83b26d703b5b6e29ca03fb9527accb8e09243b1be542ed11e6121",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/meeting-facilitation-1/run.py": "4d792f707d85822b6c1158cddf2e6169076b46b1f8439252c3ff8151a6ba126b",
   "skills/meeting-facilitation-1/selftest.py": "041a22b7332ac66ab29dfc0134bf719855be5914d59b7bc29c6b143a9f430463",
   "skills/meeting-facilitation-1/.phoenix/originality.json": "71216790c24e76fe5fdfb7e84fd93bd6206464739aada065cfc815f4716bba62",
-  "skills/meeting-facilitation-1/.phoenix/provenance.json": "2b488bde762ae5de16b0c6260bd35af797c20ce153c319f88c237aa274ab2aff",
-  "skills/meeting-facilitation-1/.phoenix/selftest_evidence.json": "a04a1c6f2600f14cd2194264ba0157dfd27906dbd5ad7a8f777a1b460dd96c68",
+  "skills/meeting-facilitation-1/.phoenix/provenance.json": "72a9c857116c428ec6a9af5971ef23187409b12f8cfaca013155b8feffe8b1cd",
+  "skills/meeting-facilitation-1/.phoenix/selftest_evidence.json": "9c22b7ed60b0f732bb9284aa895a0cc6d7f9df750e1377309cb47df20c25f75a",
   "skills/meeting-facilitation-1/references/creation/p0.md": "cbe5d10331667ed040c84dfcdb3c91d688bfa48095a175dbef01cd646647d5fe",
   "skills/meeting-facilitation-1/references/creation/p1.md": "0197079608d21513a4d5a00711d067f0ce7c9f63ce4225a1dc290c20ca297954",
   "skills/meeting-facilitation-1/references/environment/p0.md": "be5f7704d3ec4dbf5b0be7694351c9bcee6b34d793e005f34432c351f034ca61",
@@ -37,8 +37,8 @@
   "skills/meeting-facilitation-2/run.py": "d6c4aaca0c8669de28b97866a0d05db704f6fc7432729fb785e2091df1fe725f",
   "skills/meeting-facilitation-2/selftest.py": "88549e4244932971627dee147830298b3080716ed349fae62a8982df77fa8a6f",
   "skills/meeting-facilitation-2/.phoenix/originality.json": "89f3f40ef50f421cd10bf275c8191187570e1f2dde5f20c59bf7d6f54f9cbed5",
-  "skills/meeting-facilitation-2/.phoenix/provenance.json": "defce9c083f7e55d7fa721b095371c7df30ad41883d9281af022dea1a4a51aaf",
-  "skills/meeting-facilitation-2/.phoenix/selftest_evidence.json": "797e5f99ad17109080ad4e8da22372e476d216d5dfb80dcfed6dae59f25a1e87",
+  "skills/meeting-facilitation-2/.phoenix/provenance.json": "4b3805c20cee286da43828437a3644ce1ba72730bb2a49d6b28803e6c41d0fe5",
+  "skills/meeting-facilitation-2/.phoenix/selftest_evidence.json": "8bfd482278936715fc8557995819d2b185045f721e6229e1700ad3e09fd6e1de",
   "skills/meeting-facilitation-2/references/creation/p0.md": "bd5a70f275346cf967db6793e6d9b0bb2750bab609d7a21390caecd983a0d457",
   "skills/meeting-facilitation-2/references/creation/p1.md": "bcfb54a7205443d28c35d90e422f83697eead58a153bf4e1552b6881622ecf1a",
   "skills/meeting-facilitation-2/references/environment/p0.md": "8d36d734ca81cd343efe82b2299e43300e1b3e31a98eb6ab4e04be951a609dd3",
@@ -54,8 +54,8 @@
   "skills/meeting-facilitation-3/run.py": "180a0832b3a1a6cf322456a5271492b43037bd489b870161da4cffa8c5878ba5",
   "skills/meeting-facilitation-3/selftest.py": "2907761be9f865876c2d3d83ab0534f73a6e4677f8dd75411331c033599323c2",
   "skills/meeting-facilitation-3/.phoenix/originality.json": "53b4b3bb1b339897414e9f9f7a94bde1b74ed6c67a9a6937a3cbfe21bf12162d",
-  "skills/meeting-facilitation-3/.phoenix/provenance.json": "96ac34486fde96c105b323f62caf9d1975c08f5d2cc7981cd5d1e85108f283bf",
-  "skills/meeting-facilitation-3/.phoenix/selftest_evidence.json": "d3254de4baed6e76b8ec0f169c999bf05636d71fcf902a8a0701b8be94a40792",
+  "skills/meeting-facilitation-3/.phoenix/provenance.json": "6d1cecdb7299f6d15b956fd6f0943e284be8bb006ded058b4a6cd4a48b92ac38",
+  "skills/meeting-facilitation-3/.phoenix/selftest_evidence.json": "bc74d258d5626d1fa484b050475c6ee959b83464d468ccba2b58c5b78e75c650",
   "skills/meeting-facilitation-3/references/creation/p0.md": "0a2dfdacc1de241944c1c022144446baefaff9ac370918a1f096ddf14ce4e9ce",
   "skills/meeting-facilitation-3/references/creation/p1.md": "50b29d25c0acd1eeca668227b61f7e957f7ff58c5c962c14511f90d5874c67e5",
   "skills/meeting-facilitation-3/references/environment/p0.md": "07081eed64c8174bbad38f8ff15c651e25e396e83953b5d5abe48c8036aaabe4",
@@ -66,7 +66,7 @@
   "skills/meeting-facilitation-3/references/production/p1.md": "25b8c0f5009eaf2748174391c9eb4d0b692a1fbbe90da49ca031dcdac79f2c76",
   "skills/meeting-facilitation-3/scripts/main.py": "7fcdb39cffa4af076fc79d5c91d2dc4cbd467f823b9b7bcce795508af5b8ed5e"
  },
- "sealed_at": "2026-10-18T20:03:22",
+ "sealed_at": "2026-10-18T21:00:48",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

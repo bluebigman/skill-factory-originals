@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:53",
+ "at": "2026-10-18T20:55:08",
  "skill": "build-cache-2",
  "slug": "build-cache",
  "passed": true,

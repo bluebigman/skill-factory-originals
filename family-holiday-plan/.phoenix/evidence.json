@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-holiday-plan",
- "merkle_root": "d4b8a32fde5034cc05b270a21dadcf08719d13af99abec02fff240de7b49c464",
+ "merkle_root": "ba50dd1d3923fce3130c71c102aab1397ac80711bfabd24633315c5762b539af",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-holiday-plan-1/run.py": "54e0aaac56a24167439f6b0420c01591ec60cc99c0ca7538f7d4b7cd211169ac",
   "skills/family-holiday-plan-1/selftest.py": "24f1d9b4d101570dd539240a899259b4449106193c29bc851e70cbfd12466a70",
   "skills/family-holiday-plan-1/.phoenix/originality.json": "7cbd49935e232f4311d978c4197719fb12a44ca2e6ca4a2c38fb66558d53e9da",
-  "skills/family-holiday-plan-1/.phoenix/provenance.json": "5ee9d9c01c1fb57b94f0ceb0de906ae43c4dad22ba767020e25c83b343b9259f",
-  "skills/family-holiday-plan-1/.phoenix/selftest_evidence.json": "d78353b3a041a85340f707d1d6f64f9d9bb2c3e5d5d71a45c9eb3c8da02321c0",
+  "skills/family-holiday-plan-1/.phoenix/provenance.json": "51dfd53c7d52bfadf6ec2d3c4db3cf6edc2e96544a75a343cb767797e7b02424",
+  "skills/family-holiday-plan-1/.phoenix/selftest_evidence.json": "13b7b3411799742f6c936ae6fc256617b83729e9e3928498016706c763c0ac41",
   "skills/family-holiday-plan-1/references/creation/p0.md": "f67aae92070a96db999c6589badb3267196c2b0fa947327d71c461eb37fa3722",
   "skills/family-holiday-plan-1/references/creation/p1.md": "502c81044cd510d89af10b6c3710a93228070e221a52f3a9be67044089c07e58",
   "skills/family-holiday-plan-1/references/environment/p0.md": "37987481492887d5a9f870e5603568876bfb5cd6421ae78e23c169635e2ee87f",
@@ -37,8 +37,8 @@
   "skills/family-holiday-plan-2/run.py": "d42465942c4dcd06c180aeff22ce9130425a87c66cc154bfbe1f5280db3294ef",
   "skills/family-holiday-plan-2/selftest.py": "a8d73f1e48f8a7aa76d5605477d3757cb43dc54054edb09e2faa4da79a461c0e",
   "skills/family-holiday-plan-2/.phoenix/originality.json": "6b8bb8c0e3a087bb7217e357ada4b6befdb13d34fc71d603d1c456148f9469f5",
-  "skills/family-holiday-plan-2/.phoenix/provenance.json": "f1ec26d8c78ac10672620a997e2583e1e775cef1b6f115c864b50bbe413f9b72",
-  "skills/family-holiday-plan-2/.phoenix/selftest_evidence.json": "814410ee2134febc774c8fc3c22531cfef0de96d2a646e1b9c3dfeff33a54dba",
+  "skills/family-holiday-plan-2/.phoenix/provenance.json": "bc42e19277ee2d3ad5fb83f2c974b2d163a0ba591e08d78ade5089a3663f83a5",
+  "skills/family-holiday-plan-2/.phoenix/selftest_evidence.json": "09206bc8bff65e467ab4aa95664581e1c61349c42693e5569a5a6401957aaca6",
   "skills/family-holiday-plan-2/references/creation/p0.md": "bb21644763d55cbd01f38da363f80c3fe354842129a153043db40d68022336e4",
   "skills/family-holiday-plan-2/references/creation/p1.md": "8d2bd22b2cef3d01ea6d11909412b607e1a7ec8e315a2193eaebf545a5f3d546",
   "skills/family-holiday-plan-2/references/environment/p0.md": "0f248d863fef8460df73825b1079700458fb306949046430b45a2fcd9484b0eb",
@@ -54,8 +54,8 @@
   "skills/family-holiday-plan-3/run.py": "95517c7e24f6194c6d652e5acbce0d2532d72206a77ae1f21c875cf866715bf5",
   "skills/family-holiday-plan-3/selftest.py": "ad455f2a8020a60139e5c2b7a0ae44f26446c393c38ea518cde287172d3a8019",
   "skills/family-holiday-plan-3/.phoenix/originality.json": "f88ef7c82e7f0f19c7832d98e51a88611639de1f21ede8792ef6ec4a2513f379",
-  "skills/family-holiday-plan-3/.phoenix/provenance.json": "93255021dc02fe38901a8e03d10b185ce0b833363c839c3c6eaf0add17d2119f",
-  "skills/family-holiday-plan-3/.phoenix/selftest_evidence.json": "72964fae0ce754665536a4d493f294b149d3d92538d421385446dc3091fd6e05",
+  "skills/family-holiday-plan-3/.phoenix/provenance.json": "77ff56d7ca0eda59cd2ae0715de2a2e16a476f4bf55f2d1065f9e42d2e4141ee",
+  "skills/family-holiday-plan-3/.phoenix/selftest_evidence.json": "900b1622941515eeebd97c229390d9ddaec091ca3a5f46f24da0bef5c6fa0b41",
   "skills/family-holiday-plan-3/references/creation/p0.md": "271ef72843b74732525efa531b1da88331bb5de2b76d6cb8dda2478f880ed18b",
   "skills/family-holiday-plan-3/references/creation/p1.md": "0f591d2f126e643ff8a4492e821ff72b02d2136244793c6b2f7ac1f65f152cb7",
   "skills/family-holiday-plan-3/references/environment/p0.md": "f508a57c098683dee7b1f776e021eec7728cfdb947612c6f16a37bbc1edb36da",
@@ -66,7 +66,7 @@
   "skills/family-holiday-plan-3/references/production/p1.md": "1a31b11bf77ebb168176d3e636d283a332e80aeb970947c2718d308ceafecff1",
   "skills/family-holiday-plan-3/scripts/main.py": "db2193484ac537887ba981fd2f3294a69ed4489a8e84ead7af073cee3055ea93"
  },
- "sealed_at": "2026-10-18T19:59:00",
+ "sealed_at": "2026-10-18T20:58:38",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:07:04",
+ "at": "2026-10-18T21:02:43",
  "skill": "query-cache-pro-1",
  "slug": "query-cache-pro",
  "passed": true,

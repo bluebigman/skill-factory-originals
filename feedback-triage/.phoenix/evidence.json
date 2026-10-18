@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "feedback-triage",
- "merkle_root": "dcf64cb58998f22beb85f2675d29048098412947e44c053ea3b9d425a06d6744",
+ "merkle_root": "d5d5d95cdd3222d513743aaae469432135cca1e3a9fa8e008beea970282b1641",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/feedback-triage-1/run.py": "ed2fe5a2cec7270f85da76c4d7c9490f3dcf0ca23bd7cc312698c4081a34dd57",
   "skills/feedback-triage-1/selftest.py": "7cb69041c1a1e920081dbf94b56722397ccdc49719422a593b8c134df60a4b0f",
   "skills/feedback-triage-1/.phoenix/originality.json": "7ac9188f178a6754b8241a5aa3ce39d681f69e4cd9fd9300f1ef13856ae00d12",
-  "skills/feedback-triage-1/.phoenix/provenance.json": "3c50065e107cc4a303b29dea96e0a6f6006f470ffb3750e99dd21a6dee34d710",
-  "skills/feedback-triage-1/.phoenix/selftest_evidence.json": "65928db34d90e071cc616d6db03aae7e09d5d01bb4cce5d82d85b982a816e1d2",
+  "skills/feedback-triage-1/.phoenix/provenance.json": "361b49bdd0525befe6d29d819695539366cb3dc7b2c2f348ecc9fa68bf7dd8fe",
+  "skills/feedback-triage-1/.phoenix/selftest_evidence.json": "8d3c6a7e2a0cac40a01222283d9468b2acf4bc18d4f35708d5feb5b17391b0c2",
   "skills/feedback-triage-1/references/creation/p0.md": "861cf7fe7788bb5694773abf861a3466750592337db99376e01963ab7c9ab244",
   "skills/feedback-triage-1/references/creation/p1.md": "491f53ad3e15ce0db47373dd591ddf962d679a71b199f12b4866ac0ff0efa910",
   "skills/feedback-triage-1/references/environment/p0.md": "96cd5648fdf913f78d4fa5f53d55d8460fc18603c425cbdda8582b1c7d324600",
@@ -37,8 +37,8 @@
   "skills/feedback-triage-2/run.py": "83e9e15eadff5f54c1fbb28f482d0f90facb392796e4d09bdce141189fd7726a",
   "skills/feedback-triage-2/selftest.py": "775435dd177dd53b29eb1f0160277f9861a133dd8c0cbd9a2bed29a547ca6004",
   "skills/feedback-triage-2/.phoenix/originality.json": "17b96c1ddb1409802c4c61f6350385f89c80604a6f4c2ef12c0becf3dcc022b4",
-  "skills/feedback-triage-2/.phoenix/provenance.json": "f77d6ec452e4299fadeb85db0dff6c4c21e415e26de6151f85be00b43e2cc8b8",
-  "skills/feedback-triage-2/.phoenix/selftest_evidence.json": "3d4a153995db1093cf07799e2d50437ed34b9d1483092facd6deb9d3afa02e55",
+  "skills/feedback-triage-2/.phoenix/provenance.json": "df5ddfcbcbb15e0062ed5e786b89350f876359a0fb994e1e58f0c26e0cfe8f47",
+  "skills/feedback-triage-2/.phoenix/selftest_evidence.json": "7b65b524f1a3826a7374e454777f82d0eac4ae30ffcfb01c08203989e7c5f215",
   "skills/feedback-triage-2/references/creation/p0.md": "9521fd19f97e9bb924ee45361adbd3842ac82cf10c1a0cadbc6be34220218733",
   "skills/feedback-triage-2/references/creation/p1.md": "ea53f4e1ceb47947576c66eaeff3454412eb1319db2c504d073748052a8cdca9",
   "skills/feedback-triage-2/references/environment/p0.md": "2e1859b796d5016c9f3e84ac2f8b3bf78092c8b14658dc6d76f97febcdc9edbe",
@@ -54,8 +54,8 @@
   "skills/feedback-triage-3/run.py": "4408022e40246e83b184499c2fea93c0197562b5e4170a576146dad2266ac138",
   "skills/feedback-triage-3/selftest.py": "f8168db920d55521b8e4ab962ec0ecbc188918abf502c93f3ad4661b98b72c13",
   "skills/feedback-triage-3/.phoenix/originality.json": "9c50c282c8f38d4c980ee4467a0d475bb4bda86e717f969a775882a8e9b9036e",
-  "skills/feedback-triage-3/.phoenix/provenance.json": "c38059fc8423395e5793b4edaae680a3264f171d7d8480b353c2a7b33462a71d",
-  "skills/feedback-triage-3/.phoenix/selftest_evidence.json": "8fa3624aa4c6a8f29bc22c5be05ec5a9397c35856ba269cbfd71f513ae7a40c5",
+  "skills/feedback-triage-3/.phoenix/provenance.json": "f9b126f92a32b8ae22b838ee065aba5eec74bac9c18b51e6feccfcd1e9435768",
+  "skills/feedback-triage-3/.phoenix/selftest_evidence.json": "91661b00d56fb55f6d5356db4fa5078037b39c06da5ea858918fe10700ce4fd8",
   "skills/feedback-triage-3/references/creation/p0.md": "eee5e315022886f464cfd0ca35911afae634823baa86007399d53a9447d5ba1f",
   "skills/feedback-triage-3/references/creation/p1.md": "0ecfcd6dce0ba3315cb58dd87a56cf494f2436a966c6423facb3ca908ae8696e",
   "skills/feedback-triage-3/references/environment/p0.md": "681f89c87ce68f5a769a70926af2bf217d8727787f42f018b5cce53fbdee79ec",
@@ -66,7 +66,7 @@
   "skills/feedback-triage-3/references/production/p1.md": "5a4247893141c3ae09d20d2bfa572d74912210e14eb7893de7ab1576d40d9871",
   "skills/feedback-triage-3/scripts/main.py": "28be6fa66c833d28699640628a20ae378755c31af3911136a26050f427e72182"
  },
- "sealed_at": "2026-10-18T19:59:17",
+ "sealed_at": "2026-10-18T20:58:46",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

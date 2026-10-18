@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sql-readonly-guard",
- "merkle_root": "17ec772e6c0b7baf440814b282307006dcfea17567e4e618b3de61b5818ee9e6",
+ "merkle_root": "dee62fb09234ea2ddab64f57e878a818dcf39f447eb9ab141682ca46d5530c4b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sql-readonly-guard-1/run.py": "8fab9459fd85dce75a36d38132b65c110df55c08e79dc80d465eb1775dc0f9cc",
   "skills/sql-readonly-guard-1/selftest.py": "ab223d8db6321739aa3994b08cc93537de0555274049a30e1f39311a661071f4",
   "skills/sql-readonly-guard-1/.phoenix/originality.json": "c1874f2518ff81e46d704bbd60189361281b27948b72a15f86fd209d762bb236",
-  "skills/sql-readonly-guard-1/.phoenix/provenance.json": "5cb753be11da84a031426690636207e8270be52006d18e0420e5fa4150046767",
-  "skills/sql-readonly-guard-1/.phoenix/selftest_evidence.json": "0762197ac16f76d0778a730df76a382e282adf5c15b607948108ebdb39e75e91",
+  "skills/sql-readonly-guard-1/.phoenix/provenance.json": "f48988b6cfefc205069020e71636c11830845239304c2345b2b5d68adce08754",
+  "skills/sql-readonly-guard-1/.phoenix/selftest_evidence.json": "88dabc8c57b6497fa529e9a1d0bb8da1d6f2af98f516033a50f352fb380b0808",
   "skills/sql-readonly-guard-1/references/creation/p0.md": "cfcfdee1e783c285c29e9263d20c7f1887b8e54a1d18dc46f71253cd42f7aae4",
   "skills/sql-readonly-guard-1/references/creation/p1.md": "cfda323fbde1902778640ed694152ee22d2d29727296d6775ffd0cf897f18448",
   "skills/sql-readonly-guard-1/references/environment/p0.md": "637c226e5ef91e1cd59219b8166b6423102cd3f394f0897aacc9a3fbef628598",
@@ -37,8 +37,8 @@
   "skills/sql-readonly-guard-2/run.py": "2e4ff312732d927cc123b899465fbe6381ac1c8ebb5900680004507a1f0280b4",
   "skills/sql-readonly-guard-2/selftest.py": "f096532102cea7bea36c498746e9bcccb4bf3e32a156391ca800fb1a9ebc3f9e",
   "skills/sql-readonly-guard-2/.phoenix/originality.json": "c34a7e3468faba48881c02c9ba0de9b5cfdd5a4caec83bdf1c9624f96df3286b",
-  "skills/sql-readonly-guard-2/.phoenix/provenance.json": "3abe00476f6b6e4fe36e4b946b5717e6db036bc620e778094e8218ef941de50b",
-  "skills/sql-readonly-guard-2/.phoenix/selftest_evidence.json": "26853d014b3e93727c5ae459316d54e1025c816dce484f06332b27ef94394dc7",
+  "skills/sql-readonly-guard-2/.phoenix/provenance.json": "bc0fc5795b78300b293462467bd0347b3d3ea6078afd93c69b5901e6fd432642",
+  "skills/sql-readonly-guard-2/.phoenix/selftest_evidence.json": "91f78b40baef7e677684ca58feaeb28eabab6375dc23ba3bc74a3f3ad0f0675c",
   "skills/sql-readonly-guard-2/references/creation/p0.md": "0bf08aeaaa69cab4e07480570ab2f46e80ae47a45c34267b49796f562e0528cc",
   "skills/sql-readonly-guard-2/references/creation/p1.md": "5788139fc2cb7fc493259d537191ddd36636f647d90da2bc48360dbc5ea34e3c",
   "skills/sql-readonly-guard-2/references/environment/p0.md": "d83190d5b943f127d18f506bdfaa55f81860ee0d3f2d8490d6ffbb98a8602e5e",
@@ -54,8 +54,8 @@
   "skills/sql-readonly-guard-3/run.py": "1fd414cad98990b397303a2018941f50d3f6a74876c96bb2e994369379679a88",
   "skills/sql-readonly-guard-3/selftest.py": "f681e0a193905417cd3021770e70203449f73026cf35ccc165cd72ce609c2a22",
   "skills/sql-readonly-guard-3/.phoenix/originality.json": "7bc7f0e0da10d50ec99b40b0a9fc5c96b4e85ce81af95953be95f8a43ae8b355",
-  "skills/sql-readonly-guard-3/.phoenix/provenance.json": "13fc3f1464ac445295e13fffc627e1fb645b68f0c5e50169432cd06711dfa965",
-  "skills/sql-readonly-guard-3/.phoenix/selftest_evidence.json": "c75c9a5fc01a62662bc5efece78ff8166c1e584537476d3dac401b3d84702491",
+  "skills/sql-readonly-guard-3/.phoenix/provenance.json": "9f4395b8a2d6ebfafb04449d29cfcc7476e1870724017976b5473985ae14b907",
+  "skills/sql-readonly-guard-3/.phoenix/selftest_evidence.json": "815fabd8ab17960fd5cc0e4b857a84a0bd6c39ef8ac1ddba8df0f0569117375f",
   "skills/sql-readonly-guard-3/references/creation/p0.md": "234abc3457ae1937b9ec3c4249173692fb186358152548da48a3b4499a848904",
   "skills/sql-readonly-guard-3/references/creation/p1.md": "d03a1917ad8d9fd31ff5a8a966ed9727f4876a20a752724bc303233319b24fb9",
   "skills/sql-readonly-guard-3/references/environment/p0.md": "0f9139dee7cf7728ad1f090693954c406f6a076a2a8daa39989c1c42b0af4e99",
@@ -66,7 +66,7 @@
   "skills/sql-readonly-guard-3/references/production/p1.md": "536fc86cc7a6015d67810b161e7ee6d64dec2fbeae7663487952a78f665451e1",
   "skills/sql-readonly-guard-3/scripts/main.py": "7a46c491b105365998b577dcd784e61b246d33a333a5a976a47f6c3bd70b4404"
  },
- "sealed_at": "2026-10-18T20:10:09",
+ "sealed_at": "2026-10-18T21:04:12",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

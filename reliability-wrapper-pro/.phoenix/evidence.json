@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "reliability-wrapper-pro",
- "merkle_root": "18248c993e5a2b87acc71fe05108b1548275216cd66ed7a1fbd03f8469b2f651",
+ "merkle_root": "102d77d60931be2240dd5f2a05f28625e461372852344699ee3260231ef478e9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/reliability-wrapper-pro-1/run.py": "82089b27e62de682877e44f2b5cad220ee9aca709c3464211909c4552226526f",
   "skills/reliability-wrapper-pro-1/selftest.py": "a13db3f7c39da86fb517dbf49821daf24d54e23b1f49c0276aa41393571cfe1d",
   "skills/reliability-wrapper-pro-1/.phoenix/originality.json": "b1b231f596e6bde872978fe56fc0ba137e51be5f2aac03e4083a66901259ec0a",
-  "skills/reliability-wrapper-pro-1/.phoenix/provenance.json": "47418a9017fc26c75fc744f404c2f9a56c601b07d3f2c5ce35e8d1906484c6cc",
-  "skills/reliability-wrapper-pro-1/.phoenix/selftest_evidence.json": "93141398cd70b542dd6952f5767fc85b49236476f5124c2a740f2c2f46473ce8",
+  "skills/reliability-wrapper-pro-1/.phoenix/provenance.json": "4bb60731ff29f369053f627476f5231ae0bb76ff1ebbbb21bcc434840b0ffc86",
+  "skills/reliability-wrapper-pro-1/.phoenix/selftest_evidence.json": "36a760b46315a03e6ac45279adae4cecefed7940201b0721004feeea26f38256",
   "skills/reliability-wrapper-pro-1/references/creation/p0.md": "87d4f2069aeaa09af591b2e2ce34c4a5e1c63493b34c4da3fe5d3de9b1b94024",
   "skills/reliability-wrapper-pro-1/references/creation/p1.md": "c47fbe8f3ba85800ef492a4b7550d8b925cec46c572997172654b686746d8517",
   "skills/reliability-wrapper-pro-1/references/environment/p0.md": "ec04bad2b082ccb9bb25ad4485d5a471c5223232faa259a2b53df1388cc3fb38",
@@ -37,8 +37,8 @@
   "skills/reliability-wrapper-pro-2/run.py": "ece9d57d0664a5cd191f0ec8cfa4e2a48ecf79f49397b22f22abfa924e7b4760",
   "skills/reliability-wrapper-pro-2/selftest.py": "cfe1b4c50e6d36b50eb17da4f06036b66be7b757854f48c973f9f07b354ad65f",
   "skills/reliability-wrapper-pro-2/.phoenix/originality.json": "4c0ebfbda37cc0f16aecff3d1ed4666fe59522040dfaa9931636dac8a63cd220",
-  "skills/reliability-wrapper-pro-2/.phoenix/provenance.json": "3086bcd6813418337fda76656b8a20178a7c2f9def903f056f2443c07ce9457e",
-  "skills/reliability-wrapper-pro-2/.phoenix/selftest_evidence.json": "2d1c6a6ac63654f8c1323ce7ac66c5c5387642e1788f8b754fa8326075b528cb",
+  "skills/reliability-wrapper-pro-2/.phoenix/provenance.json": "8144e1a5980332561150228cb25f7c5398d451743faf8ab5dd577c543fb5a92d",
+  "skills/reliability-wrapper-pro-2/.phoenix/selftest_evidence.json": "9a209d9d9c24d2fef3e520c1f171b98aa44b1034bfaab7538db9a4624df5dd10",
   "skills/reliability-wrapper-pro-2/references/creation/p0.md": "97f40819e9db75d53a3d3a96c31b183ec96f3358c0016ed8cff5ffc2e5c20d7c",
   "skills/reliability-wrapper-pro-2/references/creation/p1.md": "e86dbbbbdf6f8ffa89b8b1e39c90b92ddf403f8b5cf1d5aa639db174356c70a5",
   "skills/reliability-wrapper-pro-2/references/environment/p0.md": "74f46afacf297d3f4dbeb98dad6dd7452b153271ae0f84a091cbc804c5272c89",
@@ -54,8 +54,8 @@
   "skills/reliability-wrapper-pro-3/run.py": "1cf3d15a9da1e93d1b5ba3757d76eb313606f00f3e7056df040e39be918fdf60",
   "skills/reliability-wrapper-pro-3/selftest.py": "bf6c00eeb2863ef0f8b39effeb8905254157cc7c058e5ecaa2ddaff213201257",
   "skills/reliability-wrapper-pro-3/.phoenix/originality.json": "6c04552790b8e12070d034b71f137be5c2f9ced1489065440339ddd0d5f65cfb",
-  "skills/reliability-wrapper-pro-3/.phoenix/provenance.json": "1fbb0a2db14d418150ca29c179e6fbbf4c9c8fb909066e9e9758b7701e84def7",
-  "skills/reliability-wrapper-pro-3/.phoenix/selftest_evidence.json": "a0ae23d41d8ce1474e007fab536ff29ac37bab7ecf908c03373a8c35de7d5ef0",
+  "skills/reliability-wrapper-pro-3/.phoenix/provenance.json": "83ff7d872e881242fe61d95c81b1010c8916ffd403e3b2ade56e8995604bcdbf",
+  "skills/reliability-wrapper-pro-3/.phoenix/selftest_evidence.json": "eca9c18fc3d62a1aee17c1e57848ac6b58647a1c74937293f7c949c47134164f",
   "skills/reliability-wrapper-pro-3/references/creation/p0.md": "48eb1e433e7c3859e3d37b507a9699f4ca1af12db010433496b0f4ea984e3eb8",
   "skills/reliability-wrapper-pro-3/references/creation/p1.md": "c24b31a4b8e325eafb96ae78e6d5903894363eb29713ce39843cb977ddf64085",
   "skills/reliability-wrapper-pro-3/references/environment/p0.md": "733c810d2c544700ff92aecb2a3a8df6aa3d36adc4437bd223d9819ff0e694b5",
@@ -66,7 +66,7 @@
   "skills/reliability-wrapper-pro-3/references/production/p1.md": "13e86aeaa3130ec241f2fb733724c575b80f2b3622b2f9265e0ce18d319e3c2f",
   "skills/reliability-wrapper-pro-3/scripts/main.py": "90338976367f1515e2dca8a37971b60778ffec826d9c7492dca56c86e93cafdd"
  },
- "sealed_at": "2026-10-18T20:07:23",
+ "sealed_at": "2026-10-18T21:02:53",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

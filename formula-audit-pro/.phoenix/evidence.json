@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "formula-audit-pro",
- "merkle_root": "1de33186cd9be9c5b1db6cd3a7dc662fa688566e66507769be247bf75d15b381",
+ "merkle_root": "dba58562e0267766d8c52654350553a43b0cec74c64bf0b1813805f1dfbda27d",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/formula-audit-pro-1/run.py": "82e4220f0f3484c25a4c66468e6e81e6107422524853d2664fe41c6c97363322",
   "skills/formula-audit-pro-1/selftest.py": "cc101c46ff1fcbfde9037222f5048bfc1d783091c18f0c781e12b998eea4d27b",
   "skills/formula-audit-pro-1/.phoenix/originality.json": "4b54a1f686b912024762f546adad7e1b016ba8e4ab192cbb1c8e80d138facfe0",
-  "skills/formula-audit-pro-1/.phoenix/provenance.json": "e3d2b2805771714276b805c0d6b93501027f43c67f0190640f4dd376cbd47802",
-  "skills/formula-audit-pro-1/.phoenix/selftest_evidence.json": "cf0e5b3bb7ccd3d23a386dfec61090b53267211cdb674e53057a07cccf140c65",
+  "skills/formula-audit-pro-1/.phoenix/provenance.json": "a5facca5b3e03ba2ae95f0d3cdcc53863d45c24084bb9cac0a7dc39f1b95495c",
+  "skills/formula-audit-pro-1/.phoenix/selftest_evidence.json": "76acced72b7b945e49adb825b2901a5a81658f8236b7e169bc3a29d474f51b16",
   "skills/formula-audit-pro-1/references/creation/p0.md": "840b811e96063912db80babf3e84eb637ceb82ca18f0d9737dec8435cb703818",
   "skills/formula-audit-pro-1/references/creation/p1.md": "610dc80f53fe7ae7e80e6059d9658150abf9cb7082bea16cf0df78cb3fdb0d7a",
   "skills/formula-audit-pro-1/references/environment/p0.md": "395b52f189db7ee56f976dc8c994cee8dbadca41403b03de4c27e43f2d28cd38",
@@ -37,8 +37,8 @@
   "skills/formula-audit-pro-2/run.py": "e2cb730bbcf1138d8219dfe77d4dd26bebb6b1b1b358e6d5572b6d4163bf1a49",
   "skills/formula-audit-pro-2/selftest.py": "dc37990d941cd365fb31be405d6fcb7697746f729c2c8c47c48be4b0bf6ede95",
   "skills/formula-audit-pro-2/.phoenix/originality.json": "caf0a89f81dd3c9d62a8da767fa6ec4e25c0d763d15ee81573e84d116ba74b43",
-  "skills/formula-audit-pro-2/.phoenix/provenance.json": "b973fbac443bda9caf811f8e43b07ecefb32fcabf39706b39b033319f762297e",
-  "skills/formula-audit-pro-2/.phoenix/selftest_evidence.json": "ab6da43f061997797cb2fc24043a1843b2fc28ec2bf5c7c3ab523dd52f132cca",
+  "skills/formula-audit-pro-2/.phoenix/provenance.json": "52c306ab4c636ab8cad69c3a6c590cde4d41f1507d7d24de464225d09d02242e",
+  "skills/formula-audit-pro-2/.phoenix/selftest_evidence.json": "389cb1aed3d5eb16f0c51534419068348c300e03fad69814274a2355b4d991c8",
   "skills/formula-audit-pro-2/references/creation/p0.md": "3f12d6d56612d6b53d4457533b7c99bfd1a3d5dad9ea954e55888ba57fe79e50",
   "skills/formula-audit-pro-2/references/creation/p1.md": "76c0ce36aa2323801c02e5e19808236cb36144dae556591443d9b7c195f71919",
   "skills/formula-audit-pro-2/references/environment/p0.md": "764609d2b8e2c9692013e83046bf0acc7705f09fdf38fc61f03ffb8ad28b2213",
@@ -54,8 +54,8 @@
   "skills/formula-audit-pro-3/run.py": "4d44cf1237e6e02d80a6056af9139f8ae3705ea75ceb9122c8d3ad37e6c0a562",
   "skills/formula-audit-pro-3/selftest.py": "5e90af8fe7f865eb85673f52d4915e1706e0d47d120b95d5463660db44e3d8ad",
   "skills/formula-audit-pro-3/.phoenix/originality.json": "c8589575a0576555e469d0f026cc5df233ab8e24fb3141aa723f79fcc0228c8c",
-  "skills/formula-audit-pro-3/.phoenix/provenance.json": "bd44d7236dbabf04916e459daca13c3e2d5bae3c330048e0d8f4c3d1c6e76a44",
-  "skills/formula-audit-pro-3/.phoenix/selftest_evidence.json": "c7274af420a49b82f096aa6ca060c22273f9797ebc276a14fb14f38806ad78b1",
+  "skills/formula-audit-pro-3/.phoenix/provenance.json": "35025cfa8da3c64d6f17068e498bce8d5fc9ea54c9066f85087dc54e64486388",
+  "skills/formula-audit-pro-3/.phoenix/selftest_evidence.json": "506b36512b4d55d2f31d2502482a7e853f6fe0d7e8819cd923956d9fff93d0d1",
   "skills/formula-audit-pro-3/references/creation/p0.md": "1e40990f34f8d8f13bcb4dd1ac9a15805ebc1e7d134bb292390160cb882b906b",
   "skills/formula-audit-pro-3/references/creation/p1.md": "d5c3b00192262d6ca31a9dc1a82401700f07686c100163be8b98c020f30eb230",
   "skills/formula-audit-pro-3/references/environment/p0.md": "c12f9621898766eeb6e6db1281489234dd33830f9288c8d53811c85dbac284de",
@@ -66,7 +66,7 @@
   "skills/formula-audit-pro-3/references/production/p1.md": "711811e69c83297b9a527d26bccd2f0b0d4f86f6119613ba0fa7a531a3d39e15",
   "skills/formula-audit-pro-3/scripts/main.py": "3b1eb531a4605d3fe03509d25199dd626aea5a80adc00f09d76f579443d0a351"
  },
- "sealed_at": "2026-10-18T19:59:35",
+ "sealed_at": "2026-10-18T20:58:57",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

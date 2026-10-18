@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:57:57",
+ "at": "2026-10-18T20:58:02",
  "skill": "ecommerce-data-read-1",
  "slug": "ecommerce-data-read",
  "passed": true,

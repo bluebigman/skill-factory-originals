@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "log-standard-define",
- "merkle_root": "25b71d108f51c5105057c9f1ef38b5e43a2a4a821e7be0fdef9e49e9224dc603",
+ "merkle_root": "e5791ac3632ef97f213d2369b4493c5ea354a7bcfcff4a2bf5446a3897eaacc2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/log-standard-define-1/run.py": "c28e25dd559322eb50e26d676c948a002cee8613572800018cda4d0637fff817",
   "skills/log-standard-define-1/selftest.py": "236dc1b36aabced8f5095737845d65ca2efd7026f9bbee763aa88123a9b8b0aa",
   "skills/log-standard-define-1/.phoenix/originality.json": "c586bfe7bdd53ae3f3547aa9d1d862a7ce39be4b7a67e63ffc1d791b0cd7b53d",
-  "skills/log-standard-define-1/.phoenix/provenance.json": "f8e4575622215bb9e8d6ed24b8f2fe5020abfa0019feccf5024a0d984f3a6706",
-  "skills/log-standard-define-1/.phoenix/selftest_evidence.json": "b14ca3c289ef703db4f267d6879d8735e1415c7ef93ac50e41e5ced8c7dfb212",
+  "skills/log-standard-define-1/.phoenix/provenance.json": "96e93140bf39de62be7bf6713c92e122bb16aa47976c9ce003b341c6c8c9f8cc",
+  "skills/log-standard-define-1/.phoenix/selftest_evidence.json": "f3cfaf321751a1a37248b1234a2f1b62036c1d94613f7101a4472baf7ef0dba9",
   "skills/log-standard-define-1/references/creation/p0.md": "73a897e3b5682aab3d34613634c5e4eec7a8264e34af553da18d72f09c051844",
   "skills/log-standard-define-1/references/creation/p1.md": "0d0be88d0a24860be5b500d432a9c4291b2455cd95e46e52d7627aedd298fcbb",
   "skills/log-standard-define-1/references/environment/p0.md": "48bfb837d87382ab6f253338ceadf5684223c58c4e5ef932564c21919382bacb",
@@ -37,8 +37,8 @@
   "skills/log-standard-define-2/run.py": "e6825f95eba5b355d4595e5f8919c00e81b62e7e6f8c6a6dcf6dbba8c9efb48f",
   "skills/log-standard-define-2/selftest.py": "878256e7810df0b67969a73e19edf50b0ce1fb0eeaa03778fe1fad58f419c3ff",
   "skills/log-standard-define-2/.phoenix/originality.json": "d039d27138192e291264d25d7db66872e045218a582a36db9dd904568af04691",
-  "skills/log-standard-define-2/.phoenix/provenance.json": "adc3f196dca0e93e93485b218dfac4d1ebf043a548a69c396d7edf10fde96601",
-  "skills/log-standard-define-2/.phoenix/selftest_evidence.json": "e40a4ca9e985d0b2020efd97f9f4748666a52e6693cc9f5a6bb09da78180986a",
+  "skills/log-standard-define-2/.phoenix/provenance.json": "b94f45229c12c94de47e325c700d27997c92c07e2a1d432601e27037fccdec17",
+  "skills/log-standard-define-2/.phoenix/selftest_evidence.json": "a5170daea57ab91ecfd04b429be1418dd7e8f0f30681adb2c4b72802f1815acc",
   "skills/log-standard-define-2/references/creation/p0.md": "1d5fc7594b81972c13f5ac74bc2a1d7e7229764cdcc6d917e9ce05503f4a506b",
   "skills/log-standard-define-2/references/creation/p1.md": "543370e2c53fb7591b5b7d40ff519a3c0679db7d2004f4c91be2ec05154fc629",
   "skills/log-standard-define-2/references/environment/p0.md": "0f9f8103fc99f28adf252574bcfd30234773be36490d326ca06171d0b5890d4c",
@@ -54,8 +54,8 @@
   "skills/log-standard-define-3/run.py": "fc5333be11981679dbf0dd614f292ef93bb127c35478cb02fee46be6a2fe13a9",
   "skills/log-standard-define-3/selftest.py": "0afcc65b7cd0b47a79a19ca08ffa266135c50d09434e54af263c62d36b651313",
   "skills/log-standard-define-3/.phoenix/originality.json": "6e5d98a30ff933ccd6d96ccb395bef2c74c652b06e0a40f7ae73a27bd83428cc",
-  "skills/log-standard-define-3/.phoenix/provenance.json": "4471566ca0c00058e887549531d5c22ac599ecaf88a0cb77800a90174d14c67a",
-  "skills/log-standard-define-3/.phoenix/selftest_evidence.json": "845300f2e482557c3b5f930073f39b778d88e2e1f43a0127b847da3d3471e397",
+  "skills/log-standard-define-3/.phoenix/provenance.json": "11121934283a310b8a9b29af82361378b5a573459a9ac97f1012f04945f43f33",
+  "skills/log-standard-define-3/.phoenix/selftest_evidence.json": "1050c5b0b6fcdb3b5c853486f07444a1c7118ea17ca1a51a67699687e6923b18",
   "skills/log-standard-define-3/references/creation/p0.md": "dfa61f12c7e89899abdc44d6c511a4fb85fc2bc7d5dfc97132cb779b596a0d9a",
   "skills/log-standard-define-3/references/creation/p1.md": "1088a1263dd528bf1b69d587fb5a4b3ceff6c037600ebf118adc595093c53240",
   "skills/log-standard-define-3/references/environment/p0.md": "1fd76617a0521bf2abac43fba12a0d6b36003bbc10ea677bda51298a349ffe2e",
@@ -66,7 +66,7 @@
   "skills/log-standard-define-3/references/production/p1.md": "e9923b28e4fbb6939270e244f389ac4ab4b8288d381a5c919d4aa9f1985caa58",
   "skills/log-standard-define-3/scripts/main.py": "55d672e5438a5af00590ab16bc8b543ab25938b1f8bdfde5053da03cf7e5991e"
  },
- "sealed_at": "2026-10-18T20:02:54",
+ "sealed_at": "2026-10-18T21:00:31",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "teen-money-coach",
- "merkle_root": "a24adb9d9618b8b38778b3bb7cd34d6dd5edcadf1db8fb04dac5ab80ffdff08e",
+ "merkle_root": "424a71725175ac94dfe58c571229c41accf08aa2556d6e4d107655729f7422d2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/teen-money-coach-1/run.py": "64ecb8914ca62e1cdd74be70cde35ae62b8dcbc1a65dcea0845f7fda8513b5e8",
   "skills/teen-money-coach-1/selftest.py": "a13cbe759a367accf3e6bbddac6758ce3af2154862f8e60aa18c5edc0630fc78",
   "skills/teen-money-coach-1/.phoenix/originality.json": "31e30881e96ee471b7807713b1160c1c931e893ed4dd3a3a819e46e5bbbe32ea",
-  "skills/teen-money-coach-1/.phoenix/provenance.json": "f2803e0c389b52a2bacd2f86a640415f7c27a54cdd4259094d3a7ea4e5873f4a",
-  "skills/teen-money-coach-1/.phoenix/selftest_evidence.json": "03172d519f3a5a8a113fa8980294d9c4aa1b766fc166ee1e9fee1c6a474b98fc",
+  "skills/teen-money-coach-1/.phoenix/provenance.json": "c9b2c3587019db14861b5ab23d3510ac561e00d965fc9289ca8377859dad7c46",
+  "skills/teen-money-coach-1/.phoenix/selftest_evidence.json": "970b67eef221458ca3643420fac6d77b95a1c990b7c2d8248c959fd2fdf0e746",
   "skills/teen-money-coach-1/references/creation/p0.md": "faf1d9b9b5955dcdc6002132611fa05e6907ef359a80e866813a0534b0fc3b84",
   "skills/teen-money-coach-1/references/creation/p1.md": "f752a3a27575d38dae059dfb601804e8f13d0aebf52fe6c03c8560f4d1eedf4f",
   "skills/teen-money-coach-1/references/environment/p0.md": "3c8db79ad906e152d19e1dd8e7539d29b0c091db9a1206a385dbce5937f525f2",
@@ -37,8 +37,8 @@
   "skills/teen-money-coach-2/run.py": "0ba0eba95e8def55545a5c895ea979d23408aa51a0f5bb625796ea8fd337f0ee",
   "skills/teen-money-coach-2/selftest.py": "b2f8eb83d5af7e876e22e4f5e97f34e886557db0771887b96bb5d26152f7a016",
   "skills/teen-money-coach-2/.phoenix/originality.json": "c25cb8247d70374aa047a3341242010e2c2c918cdd63c3461197b9eeab5bde79",
-  "skills/teen-money-coach-2/.phoenix/provenance.json": "6ba0ce1ee4df02f08bcd9a97269903d177053cbd00b556a92877563d43f763fe",
-  "skills/teen-money-coach-2/.phoenix/selftest_evidence.json": "d82b0a647683ba940bf42c9853ec3be9f9d2daef3f9c41da3fb68285026703dc",
+  "skills/teen-money-coach-2/.phoenix/provenance.json": "2970cdb7563a0e9a9cfefc54031a969eda7a525c1a63761fc47330811e09740e",
+  "skills/teen-money-coach-2/.phoenix/selftest_evidence.json": "dd6c70f841d4f614cede93652ff190b7ca8771a2a2162d7b4e1c37fff82e61aa",
   "skills/teen-money-coach-2/references/creation/p0.md": "8f58569f871d2e8d0cf070e440c36d4a648461d5cf15420822a93871d744703b",
   "skills/teen-money-coach-2/references/creation/p1.md": "5bdf26a2cd06762dc5b32c0271a5374aac875100ce6a463d4c369c275db65c9a",
   "skills/teen-money-coach-2/references/environment/p0.md": "0425c27aff20385ce4a50971390e9f2f0fe11649145aebf98224a4e7ba618db5",
@@ -54,8 +54,8 @@
   "skills/teen-money-coach-3/run.py": "405d8cd8b4c1e605974fb6053a374447958416d5fdf852eebe98d3c63f6da845",
   "skills/teen-money-coach-3/selftest.py": "6a6088cdb21d15ad4c49131a1a9c9295d36817112fd9a2462ba5214dc8150e14",
   "skills/teen-money-coach-3/.phoenix/originality.json": "cc13aa785f2123b4145cfe596605b7e6916f46310b3af3120840c1832c51b9f4",
-  "skills/teen-money-coach-3/.phoenix/provenance.json": "3f27401770f8922e478f36559220ddec941f13198bb75848147dd735a124b696",
-  "skills/teen-money-coach-3/.phoenix/selftest_evidence.json": "c930b2698d3a0cfccd0ca283e482c37241840bff08f0cd20ffe9d98e0d8c4601",
+  "skills/teen-money-coach-3/.phoenix/provenance.json": "0a8ab9026415a5b29e1264dea7e1cf0fcc33a1411804f9e3009c4199ff4fceae",
+  "skills/teen-money-coach-3/.phoenix/selftest_evidence.json": "d0b71ffc1f3dbdeb2a48068cab6110227f42d1a50a3cf6eb6d5f4ad27e62747e",
   "skills/teen-money-coach-3/references/creation/p0.md": "144d9bded7884cf45d38e8340509a60e03c03e7dd4c81ad8af47ec44b87c6b69",
   "skills/teen-money-coach-3/references/creation/p1.md": "f996875ac9182e58dc609fe0f871d5343a1418bb8679f9e2e1b10edc2f15c18e",
   "skills/teen-money-coach-3/references/environment/p0.md": "a2ba68c78f90c29e71dc037a43cda6092f11816eec2b303df050198f9333f735",
@@ -66,7 +66,7 @@
   "skills/teen-money-coach-3/references/production/p1.md": "ce846baa9f43cef29d64234926a5b2eb3b6489b9f6f684ccf8c6dad2494d87c1",
   "skills/teen-money-coach-3/scripts/main.py": "006987c0950df7a918a6d029b6d1c1516b594701f2d4c481c89a724d89458334"
  },
- "sealed_at": "2026-10-18T20:11:24",
+ "sealed_at": "2026-10-18T21:04:41",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

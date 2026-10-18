@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "perf-profile-pro",
- "merkle_root": "c996db29b1c8351e7be097093e87d1fe8db02471747a23bf0f6348a8d860f1ca",
+ "merkle_root": "fbbde643a603640e7a16bff75ddc27b00dac843c1914e4f72272e33e0eab5f6f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/perf-profile-pro-1/run.py": "1689146ae724224214085369b3871d24e167c24c3fc7ec26bebd01b2eb16a58e",
   "skills/perf-profile-pro-1/selftest.py": "c7220ad3f2dbb01389abfec40d965be22a76bd8f6907ecbec8c2fbc5181ab210",
   "skills/perf-profile-pro-1/.phoenix/originality.json": "20d7f69a6388dec72e0401fbf7f7f817a324652c6d7e2559d7e9faac3d20a6e5",
-  "skills/perf-profile-pro-1/.phoenix/provenance.json": "4d0813b7743cfdaa6ddf54f8b6cc56ba87a44c26f093eac2d230c7bdc9c495af",
-  "skills/perf-profile-pro-1/.phoenix/selftest_evidence.json": "c5ed0d414eb24f6faeeeb12929569762434185803b9b12ffb22e9e23552834d4",
+  "skills/perf-profile-pro-1/.phoenix/provenance.json": "f00c5af02d33157d215d2acaab1a72e4316e8259223138de54b525b59eedddc3",
+  "skills/perf-profile-pro-1/.phoenix/selftest_evidence.json": "f3cfa75d394fe132d5520f43337c8532b79904d6d9a8ed44b45f06a35de43d32",
   "skills/perf-profile-pro-1/references/creation/p0.md": "005876436959ddfa3aec74917c5884e0ab88d7660b89fa72c94d9ade18278c5e",
   "skills/perf-profile-pro-1/references/creation/p1.md": "c2ca48095a0e49a9e68a412807f23ec3af2825534bc4c40058440b0f0fb342bd",
   "skills/perf-profile-pro-1/references/environment/p0.md": "9c1af4555851c07b484e8e22f228a76ecce4cfaaaf38fead03e64554b3c9f50e",
@@ -37,8 +37,8 @@
   "skills/perf-profile-pro-2/run.py": "cc014c2659799370d6169f4929e202682ef2df77ef18d7c64efadc5347151b1f",
   "skills/perf-profile-pro-2/selftest.py": "cba6bfc5fce85ba9d26ce4b54c1f5870e7422d3df26f4d1b6e0c798e8d5d88e8",
   "skills/perf-profile-pro-2/.phoenix/originality.json": "c59a557d267e51ea67224f86367e6e7c75fd4c91563b3b95b10647825e87b11a",
-  "skills/perf-profile-pro-2/.phoenix/provenance.json": "313215774d61c5688cbe8748c326848b0fa4a7f950a97dd2fc323707efe213a0",
-  "skills/perf-profile-pro-2/.phoenix/selftest_evidence.json": "db651bd7d2d9ae31c0a0790df66c10ca5d040e9c3bd6e2e4ac995c1f70c82178",
+  "skills/perf-profile-pro-2/.phoenix/provenance.json": "df78cd3673d369b957161820617d2c96330ea1dcd2e0d7a1a1a61e239bc85f77",
+  "skills/perf-profile-pro-2/.phoenix/selftest_evidence.json": "6627d53740a60640c2f9b1503d661e4dca3730590b821927862566d0346bdc00",
   "skills/perf-profile-pro-2/references/creation/p0.md": "0fcb9b4a8ffc9a0fd343debbced79d5b9a9feb9a6caa0820612bacaf566e05a9",
   "skills/perf-profile-pro-2/references/creation/p1.md": "ee537eb1e168b9d010f82e732210cc88f70f28e87c3314e8625ef9b28bab327d",
   "skills/perf-profile-pro-2/references/environment/p0.md": "ab1f47f91932f676a3b0198299e1f5c7ebe6f5fcba6184ebf4fa80fe04c6d180",
@@ -54,8 +54,8 @@
   "skills/perf-profile-pro-3/run.py": "d0d28ff9dc9109881504bbb2ef049c411c692fc3d426b6b537c5185e36557856",
   "skills/perf-profile-pro-3/selftest.py": "604a24ead9dd972baa9d56071edac977984129577e5090a7cf85e3db8dbe1459",
   "skills/perf-profile-pro-3/.phoenix/originality.json": "7026b42a46be527b087f79fc7f9e957183fa6067e0bf876945322a702a034e18",
-  "skills/perf-profile-pro-3/.phoenix/provenance.json": "96fc322ae084135a6f126b2c1ba075addff3e9364f182943b0aa7543178382da",
-  "skills/perf-profile-pro-3/.phoenix/selftest_evidence.json": "64d7e9f188b26e6e7b8d09a4fa539d119618a7cd569febd2b70177c42fb0bbcd",
+  "skills/perf-profile-pro-3/.phoenix/provenance.json": "ffc37dd484612dffdbacea397f1d5b0544f0518ad8eb85a7b2762055314e3869",
+  "skills/perf-profile-pro-3/.phoenix/selftest_evidence.json": "b96b54d278b253f64897041860f01c48a0c67eb5f1c0e129f7138a9e31e3a10c",
   "skills/perf-profile-pro-3/references/creation/p0.md": "d7aaa80c14cf1323da9def43bb0c48a4e8587837474a1479c4f080e4e1f86aaa",
   "skills/perf-profile-pro-3/references/creation/p1.md": "8a30ddb97d9bb58267762ac19b1f68c1976d9a0a191502b5f6f502274ec42df9",
   "skills/perf-profile-pro-3/references/environment/p0.md": "1d082d06717ec6c6cb7fe84015463e8642b24d5a7a6f383cf74157e6b6f8ba18",
@@ -66,7 +66,7 @@
   "skills/perf-profile-pro-3/references/production/p1.md": "66cc20d87776590ea4039de776569045d4ecf8f296dd189f2b8c7bb36592fa97",
   "skills/perf-profile-pro-3/scripts/main.py": "1f6c5bb3685be62efab9e3b3e34be2d50af51b3c87c7ac0cc6a367ef21980864"
  },
- "sealed_at": "2026-10-18T20:05:40",
+ "sealed_at": "2026-10-18T21:01:57",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

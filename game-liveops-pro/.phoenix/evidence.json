@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-liveops-pro",
- "merkle_root": "8ac42ddca13deb9fea713ae2cf53f3c4aba78c64968419267261dbb06fa2853d",
+ "merkle_root": "cab7907a26851f3a1ff232d885b9d7f8bcb4a186a02900627528d363d7cee2c9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-liveops-pro-1/run.py": "d56aa5a03f46c58885785c6a7d6267a160bf76bf63e23502a4c490b95130f77e",
   "skills/game-liveops-pro-1/selftest.py": "e78ab2402f4ceff0fd8428a5c4664d1216ff2db74dff03d8053b1903e8f323ea",
   "skills/game-liveops-pro-1/.phoenix/originality.json": "6659b0cdf772b2ba3c77b6ea67410f506b9d71c12cb4e2b9557b3085e1ae35e9",
-  "skills/game-liveops-pro-1/.phoenix/provenance.json": "b840a4fc3a5b390b16107412422abf748e018950a040c6c937415108f63e931a",
-  "skills/game-liveops-pro-1/.phoenix/selftest_evidence.json": "7ba57a374614cc7f85bd9d6a096033e1ac14958fc8198c193758ccb58804ae66",
+  "skills/game-liveops-pro-1/.phoenix/provenance.json": "1f1e8cdeed7193db9af5a13db6a3c56c23e42db3b59293db4a83782c6c90f21c",
+  "skills/game-liveops-pro-1/.phoenix/selftest_evidence.json": "df2ff2b79f0120e3264ad2d9c8d6b837b60e4a9faf15f61cbace9db14f4ee5eb",
   "skills/game-liveops-pro-1/references/creation/p0.md": "10f7238eb3f5e068a7a0fd857120bf2c29f9d4b1f4accdda9c78f347f90c2e78",
   "skills/game-liveops-pro-1/references/creation/p1.md": "185e93998828b87e2f45263f35c0fffb8c8c3de96a52158242749a49f6ef8135",
   "skills/game-liveops-pro-1/references/environment/p0.md": "566eff807d8bbd23403455e350d31754c4ed164e995c2ef530d687e289cf5761",
@@ -37,8 +37,8 @@
   "skills/game-liveops-pro-2/run.py": "84be7c58d98cb4f22546ea5141b3582c9beca02a990a7b4a83d8dd666b7c3b9c",
   "skills/game-liveops-pro-2/selftest.py": "34b771b5c9096112c150fafd7af60784cfe1ce1af77b49c7835b2913616a5d65",
   "skills/game-liveops-pro-2/.phoenix/originality.json": "9ef50d0ae1ccd32d0477294f990c7f4a3277c6af3d3fbd3d503f1d455a09c563",
-  "skills/game-liveops-pro-2/.phoenix/provenance.json": "26370ac4fd17001738503ec8dfcaf9e5668782874f6c6de02681fe31e7f5415a",
-  "skills/game-liveops-pro-2/.phoenix/selftest_evidence.json": "5ce091d417646ad3d82993bfcec3d9dd0202e7442891ec113cd79c4342aa309f",
+  "skills/game-liveops-pro-2/.phoenix/provenance.json": "b306d46cee5b333f921ed7be2cbf430eb370b733eca4c89f7800f8372204c78a",
+  "skills/game-liveops-pro-2/.phoenix/selftest_evidence.json": "3d5d48c3c52ea5a6e1216fbe9967ec2ce80388305358a189309916405341f2ed",
   "skills/game-liveops-pro-2/references/creation/p0.md": "e59fabf06983e4cb96d46f26f575db2a1b9384d1bcd46b53a92f9e136c914c87",
   "skills/game-liveops-pro-2/references/creation/p1.md": "d22285aa0d412f0c2e6944562ab0819f801c87aafaeb6d2b602f554b6e868f25",
   "skills/game-liveops-pro-2/references/environment/p0.md": "863cbc7aa38472f555e7a88f8865563b358f7f2e5d621284f669481097e322ce",
@@ -54,8 +54,8 @@
   "skills/game-liveops-pro-3/run.py": "06f16c72e2230516d1084067d25274ce1a67fdce7b0a71c7c6b802355cda9287",
   "skills/game-liveops-pro-3/selftest.py": "340e148695ba84eed91fb29c3f8635b6f5551126ac3e9eeae40116756b7226df",
   "skills/game-liveops-pro-3/.phoenix/originality.json": "960f2578d65ae1c02f98ffb7f32e336445c0307fedcd559dff901605caea72ed",
-  "skills/game-liveops-pro-3/.phoenix/provenance.json": "0b61627eb4349c7746828245451ea533070b97cc96a20fcbd444317c91920771",
-  "skills/game-liveops-pro-3/.phoenix/selftest_evidence.json": "654d0c7a55d490a00285ea57d912641845c3f9e16495b5b4987286c75cd08490",
+  "skills/game-liveops-pro-3/.phoenix/provenance.json": "fa5ad82821de906cf81da2fed6765fb5f7ee4afdf3d90fcb345f4d62e4bcaa8d",
+  "skills/game-liveops-pro-3/.phoenix/selftest_evidence.json": "936242e2affcf65b139489de488376027f8b61d309b9b7b1fb7c1ff7a981801a",
   "skills/game-liveops-pro-3/references/creation/p0.md": "2844bac0a3613447e5edd79c223fe1b182ca2379a1090086e931cc94d4fc4e54",
   "skills/game-liveops-pro-3/references/creation/p1.md": "786ab778c810a06f06ddc12998e6a6b886ea0604a83e5dd4e484d53129af3694",
   "skills/game-liveops-pro-3/references/environment/p0.md": "40d9844424b4a87e3e917657e889cf9c549e7166030185ba92d95027bacbfd5b",
@@ -66,7 +66,7 @@
   "skills/game-liveops-pro-3/references/production/p1.md": "ccec04d98c4c96bba4a66f7443458f227a31cf17bf5fa0a079cea560db4a73d7",
   "skills/game-liveops-pro-3/scripts/main.py": "d6f2f004b0cbde1d6e872ba9960daf3e6ac5ce464df4ff1c5e648d23d91c9e10"
  },
- "sealed_at": "2026-10-18T19:59:53",
+ "sealed_at": "2026-10-18T20:59:06",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

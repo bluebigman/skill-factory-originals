@@ -1,0 +1,66 @@
+{
+  "name": "cold-hot-separation",
+  "version": "1.0.0",
+  "plugin": "cold-hot-separation",
+  "description": "cold-hot-separation — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for cold-hot-separation tasks.",
+  "author": {
+    "name": "user_2fd890c9",
+    "email": ""
+  },
+  "agents": [
+    "./agents/cold-hot-separation.md"
+  ],
+  "agentName": "cold-hot-separation",
+  "displayName": {
+    "zh": "冷热数据分离专家",
+    "en": "cold-hot-separation"
+  },
+  "profession": {
+    "zh": "冷热数据分离 顾问",
+    "en": "cold-hot-separation"
+  },
+  "displayDescription": {
+    "zh": "冷热数据分离 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+    "en": "cold-hot-separation: 3 built-in capabilities."
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "04-DataAI",
+  "tags": [
+    {
+      "en": "Productivity",
+      "zh": "效率工具"
+    },
+    {
+      "zh": "冷热数据分离",
+      "en": "cold-hot-separation"
+    },
+    {
+      "en": "DataAI",
+      "zh": "DataAI"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "zh": "遇到冷热数据分离怎么办",
+      "en": "How to handle"
+    },
+    {
+      "zh": "帮我规划冷热数据分离",
+      "en": "Help me plan"
+    },
+    {
+      "zh": "帮我检查冷热数据分离",
+      "en": "Review for me"
+    }
+  ],
+  "defaultInitPrompt": {
+    "zh": "遇到冷热数据分离怎么办",
+    "en": "How to handle"
+  },
+  "skills": [
+    "./skills/cold-hot-separation-1",
+    "./skills/cold-hot-separation-2",
+    "./skills/cold-hot-separation-3"
+  ],
+  "expertType": "agent"
+}

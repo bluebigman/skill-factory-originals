@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "handover-doc",
- "merkle_root": "7e387a483e21e67b1e98701c1249b12098f08ad4bcaf26418bcfe0df17e1230e",
+ "merkle_root": "116f878390b09517a05fe65cc3dc1becf004c6291d5c5313c5d3d8ebb417dd6e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/handover-doc-1/run.py": "869b279c03ae4ae895a89cd9ac30696ed9ac37ab2d2b582cfd404f336cf9c2f0",
   "skills/handover-doc-1/selftest.py": "9f3d9388492153ff63484c3f5f6b9bbd21dfd931e3d612121c448c2b7a6d3591",
   "skills/handover-doc-1/.phoenix/originality.json": "9192b6e067311b6886abced154b6f188b5d763bce65f55a965d8779ff7032e19",
-  "skills/handover-doc-1/.phoenix/provenance.json": "29bee2db17efc4c2d47788958120c8da03e42806ff549ef6636bac532c8d31c5",
-  "skills/handover-doc-1/.phoenix/selftest_evidence.json": "45a4e7c24b7e322e0a9bb7fcdcfd0d43f6aebb496da55bd67c8c0bd5ef97c82e",
+  "skills/handover-doc-1/.phoenix/provenance.json": "0b2f6dcef191df76aa3fb55542ebc818822136293ceebaea441cdddd3f4b4b29",
+  "skills/handover-doc-1/.phoenix/selftest_evidence.json": "31c68eb0d91f271857112fca8ee397d6e74a69bfdca85c13808ff30b6202c4f8",
   "skills/handover-doc-1/references/creation/p0.md": "dbec5a0f9660acf06c6758be2e43ae55220c0969f41c4f125c265d85334587e5",
   "skills/handover-doc-1/references/creation/p1.md": "695478a050977564f9f69398ed2344229addd41021704a78980e802d0cd2e98a",
   "skills/handover-doc-1/references/environment/p0.md": "6607e0ef5fa6bfcedddfdeb99dfb3d120f54c0f23ea685fd80fc615f12889a50",
@@ -37,8 +37,8 @@
   "skills/handover-doc-2/run.py": "8892173304436995f2963c6d0352b9894b493e2803109207759195b082df7aa9",
   "skills/handover-doc-2/selftest.py": "a92ac7f843fa808975f4abfbfcf86301f7da2fbf6a4b6ac491381795b01ada98",
   "skills/handover-doc-2/.phoenix/originality.json": "aa0a79f1db58adb4116340a9367e478fe7fb6875080391332c9c9bb0783e9140",
-  "skills/handover-doc-2/.phoenix/provenance.json": "731e940b58e90706a9e17d13cea2507b1b8607cf7b30c27f91407f4e6cce2ed9",
-  "skills/handover-doc-2/.phoenix/selftest_evidence.json": "070eba287cd3b73748dde00b48b2ced134106cf193b82a6308ce40eb69b725b0",
+  "skills/handover-doc-2/.phoenix/provenance.json": "6f836659a33e92c8fbce5b84e34c275367721fb7061018d02d24970c0ef65021",
+  "skills/handover-doc-2/.phoenix/selftest_evidence.json": "b65e561cf35309f32685cbb18171a969830f3d29581bea375bc84cdf2d164452",
   "skills/handover-doc-2/references/creation/p0.md": "f2608c45dca8cf3882f737e99df38156d50325238bcee6f43521887e7143bda0",
   "skills/handover-doc-2/references/creation/p1.md": "53f39e9bbab55ba21d784f0816694c50b9bec80d82e35313c91ca279b879d503",
   "skills/handover-doc-2/references/environment/p0.md": "99a1ecc089cdf84c35f0f0369da5d92614571b2e0c3b65a7ac6a61891aa7cd67",
@@ -54,8 +54,8 @@
   "skills/handover-doc-3/run.py": "108d610f9f0c6e11a15ae2623c377f0d54b66b339e94a8d75a9d469286103f41",
   "skills/handover-doc-3/selftest.py": "f007fa2a7a21a21dbbbaf617c75c696a14a88334758519ae03f8b941c9864e56",
   "skills/handover-doc-3/.phoenix/originality.json": "a2f043855b93ca9e7c7f4f54f8721d5d09e00eedf3b8becf3866bd4141ccf875",
-  "skills/handover-doc-3/.phoenix/provenance.json": "161f575a2a0952d25c6534128c5f3f5ab3332237a6f80d81016248de5fb153d2",
-  "skills/handover-doc-3/.phoenix/selftest_evidence.json": "7f65f243193ac28095553f0d23a6bb4e19a2338c2ac0d116971f6598140513e1",
+  "skills/handover-doc-3/.phoenix/provenance.json": "31cb596fccf7c9d50b031217b9d2d606705a9ad22910648532857b0a959d6483",
+  "skills/handover-doc-3/.phoenix/selftest_evidence.json": "14016f536803cf9d7ff4630732d339546bde4ecb9b3c4f545960fbf2212ef135",
   "skills/handover-doc-3/references/creation/p0.md": "b945b4705a89f4d1c665316c8de3723cf3a3fc417f12e6a83bb53112c1dd198f",
   "skills/handover-doc-3/references/creation/p1.md": "69748a27cdca02ad4688fec4d3d31ff2d954fae52778f41b00b2b3d8e90acf32",
   "skills/handover-doc-3/references/environment/p0.md": "29706463e62dfadae6b0b06e6e4673aeba2f36fd954c382f4e4f9395f53e87fd",
@@ -66,7 +66,7 @@
   "skills/handover-doc-3/references/production/p1.md": "1597262095c5dce7146fcc236899731efd5768b3f72fd3a66fb5253f426b51a2",
   "skills/handover-doc-3/scripts/main.py": "b26e56e8ea1c089ed2cd8229b5af9634c44e7fd045e68bfe4e7eee9186adf32e"
  },
- "sealed_at": "2026-10-18T20:00:30",
+ "sealed_at": "2026-10-18T20:59:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

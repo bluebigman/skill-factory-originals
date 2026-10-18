@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "renewal-playbook",
- "merkle_root": "80b893640ba710433827afa6818fbc04b53eaa9eb952e09182ea04240ce29869",
+ "merkle_root": "cca71ff5e6fbedbefcdeff50997fb31170e773d28a6608af71862a4e60448f41",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/renewal-playbook-1/run.py": "fe181e07750d99418983828be6767d1f274481561a0e98c50bcadbcf5adce82a",
   "skills/renewal-playbook-1/selftest.py": "dc71099bfd83c0b97ce5be5266e1e8a7d6c34614b1311644a634a16ea7b33632",
   "skills/renewal-playbook-1/.phoenix/originality.json": "581b312ebd54489b2be3ee9220306a323c8c7026314d748e79a6ae434e6e5789",
-  "skills/renewal-playbook-1/.phoenix/provenance.json": "0ca1f372b22a0b8b9b2abea6df8c9b71c4524dd28418b3368449c6abba0833fd",
-  "skills/renewal-playbook-1/.phoenix/selftest_evidence.json": "3646688333bbd379ce1b2ed9b2313108094125f6e812afbb3076fbe8494a511c",
+  "skills/renewal-playbook-1/.phoenix/provenance.json": "7413fef8c087cd548e2fed31870aa6f0034b62334be05c37f699923859677dc1",
+  "skills/renewal-playbook-1/.phoenix/selftest_evidence.json": "15816e316892ba7d1f069fff82a6fb27d588204e943563c4657e554f3671cb04",
   "skills/renewal-playbook-1/references/creation/p0.md": "da0b70740a4d00fbbfad70ae6b20592ab32e16e29aff69468df04cb02f3d3b47",
   "skills/renewal-playbook-1/references/creation/p1.md": "2f1b0c709b7fecf5284f79cabe4ded017155a70a054a3c945ebf007d26aefe10",
   "skills/renewal-playbook-1/references/environment/p0.md": "d0fbe3410d1dd8e149a12b4e019a9b020f840962a2b8cbdc56bc30d32a1d88ae",
@@ -37,8 +37,8 @@
   "skills/renewal-playbook-2/run.py": "300ebf2a3fa3e197f5df7b5868f5f0d17ee47fd09a7752dfad1bd031c67a6dae",
   "skills/renewal-playbook-2/selftest.py": "8fc0246b90e0bc26ade557f274eefec5a7f25334dfa2951b651d9bf2d1a77761",
   "skills/renewal-playbook-2/.phoenix/originality.json": "c727447a849c29d921a952945eb4f2b1ec5474a21f9d5436eb1098edc6f7c352",
-  "skills/renewal-playbook-2/.phoenix/provenance.json": "ab81e4d301b7350062f84d1d2dd284c415807404c4ac36eba9a5da5017325d7d",
-  "skills/renewal-playbook-2/.phoenix/selftest_evidence.json": "9ed71da8194dd095f9d531b6fb2102b5f72fb8287d7bbb939db678b5fd945700",
+  "skills/renewal-playbook-2/.phoenix/provenance.json": "aa70ef28e95411ea3a275fe12f30029e0388640aca74c05692d0bf121dc8889b",
+  "skills/renewal-playbook-2/.phoenix/selftest_evidence.json": "8585000926c36313adc85f06f2ba0a41f44ca28ceca0afa1eb562c283e13165b",
   "skills/renewal-playbook-2/references/creation/p0.md": "fd521d41fe562bca41f4ffc50cfd127976b1dbb92b0912ddce6c8f86d94993a0",
   "skills/renewal-playbook-2/references/creation/p1.md": "25f66a6ae9be1f0a2ee196f3c0b5c13e1937b1fb31039069d7e99a32e23a3947",
   "skills/renewal-playbook-2/references/environment/p0.md": "682e2a3f5c185c4e5a1aafb9d6899e338fa6ab38eaad998346a918701c94ff9d",
@@ -54,8 +54,8 @@
   "skills/renewal-playbook-3/run.py": "9169f238e808ae7385a578542f4476a48f97b710b0d68c33c7716876ec44ce2b",
   "skills/renewal-playbook-3/selftest.py": "d22c1d28bce180d2caa56844a3db363fd614594d3ad929f6f2b36573c61b90d1",
   "skills/renewal-playbook-3/.phoenix/originality.json": "9d853f111a4cd11d2122741edd7b2cf09ef60010c4e305e7edeb3eb26b6fb8f6",
-  "skills/renewal-playbook-3/.phoenix/provenance.json": "639307e7634850c33a72e47577a947d1d12971f99b53d89808d4bef14a740686",
-  "skills/renewal-playbook-3/.phoenix/selftest_evidence.json": "c484d96664d3079241ffe42c9c1a0bcf2d24860b8f84ea643c4ab43f57b6f664",
+  "skills/renewal-playbook-3/.phoenix/provenance.json": "49320463b827d753af6ae06316ff0015129bb7f0003771e0cd2dfdb8f33a600d",
+  "skills/renewal-playbook-3/.phoenix/selftest_evidence.json": "7086873e9ffad5d0f27fa71696921314ed4b4ba5ecd3e370afd01d5bf18d2944",
   "skills/renewal-playbook-3/references/creation/p0.md": "4d7e379247200c7e4eebb363e79f3262632c4418b82ba4cc68dec2a2485fa1b6",
   "skills/renewal-playbook-3/references/creation/p1.md": "7ce480ce93c75e33f27453da427ead4acf3d6ea99c995bfcc517051b1b77248b",
   "skills/renewal-playbook-3/references/environment/p0.md": "2fc140d07d6e5dc8093a5e7a0d4b71ec479d57c7a17e1a6c8455531c35e97bfc",
@@ -66,7 +66,7 @@
   "skills/renewal-playbook-3/references/production/p1.md": "8d8de647da4f80be5e4acde853b21d42de4053e9ea0d21a98ac945bd7f31f91a",
   "skills/renewal-playbook-3/scripts/main.py": "573a915e9148fe8181c222960b7ba15e45b0725f481665bc9d223884e93db3fb"
  },
- "sealed_at": "2026-10-18T20:07:28",
+ "sealed_at": "2026-10-18T21:02:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

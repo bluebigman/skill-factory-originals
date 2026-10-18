@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:02:55",
+ "at": "2026-10-18T21:00:33",
  "skill": "log-troubleshoot-3",
  "slug": "log-troubleshoot",
  "passed": true,

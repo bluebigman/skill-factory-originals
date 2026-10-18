@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "timeout-budget",
- "merkle_root": "0f5b49b6d6f2e2a7db7c0637f10b4bc657ddbd16ced5bed4a4b351211315b861",
+ "merkle_root": "8a62220f3641af70c6d0585112deafc13454358c50f91ceb859f0250b8085acf",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/timeout-budget-1/run.py": "805efe3e823e333f56f549da60393163490aedff58711014abb8bf8210d65917",
   "skills/timeout-budget-1/selftest.py": "e7a3c26a7b1daaa17d92439e63724e64a2f329db7422104252a0b12f96b8a3a4",
   "skills/timeout-budget-1/.phoenix/originality.json": "5f8c7ae62e52aa1b39fbe034ee375738dcbc31036f8570f3144dee271fa7c3ef",
-  "skills/timeout-budget-1/.phoenix/provenance.json": "b824f4623b6c92df7279d9215ccc73b4d4cdcd296e37984ba990efdfa29efcf3",
-  "skills/timeout-budget-1/.phoenix/selftest_evidence.json": "59c9ef3e3aa075df079f5aa475e5f83c32e313b3f317e6ce52b6f942a5a36fea",
+  "skills/timeout-budget-1/.phoenix/provenance.json": "28ff58a6ad3961af9d2dc10d065148b5f48a6e1b8ad27f399e4810c161b92704",
+  "skills/timeout-budget-1/.phoenix/selftest_evidence.json": "fd47d142e4f7d3142649a8414122669115bab4fc1ef105c7e082ef62d6fc8cad",
   "skills/timeout-budget-1/references/creation/p0.md": "8c083a40a548c807162f7548fef83da59e4fe8d49dc708ddf17030307de51ceb",
   "skills/timeout-budget-1/references/creation/p1.md": "9fedc4f00a8201c7efb1d517aacb1ac8f299e53ab72508dec4535c9e7d5cfa29",
   "skills/timeout-budget-1/references/environment/p0.md": "9771ed4d97d8ab208f2d41201a3bbacddd0ef9fc4ee5805e494c1f1e9e477b8f",
@@ -37,8 +37,8 @@
   "skills/timeout-budget-2/run.py": "76fdea7d039c366d359c208e111dceaf5604788a0e13e3c1dba14184a5c54c83",
   "skills/timeout-budget-2/selftest.py": "b42d67f486b54c04fb742cda3df16ecc4502ebfba6a980f1dfffc5cfb365d915",
   "skills/timeout-budget-2/.phoenix/originality.json": "dca58f05ae37ecf5563bc81e78402334e8453f8718a2aab0f5d7306ba4594662",
-  "skills/timeout-budget-2/.phoenix/provenance.json": "345879dd6efee3db17dc62bb38c88bb0fb6df79433b8fd9cb5b7baabb3caf14d",
-  "skills/timeout-budget-2/.phoenix/selftest_evidence.json": "c976f4608b9dd30ae97cbd4fbe69c0fb70860b463caee62ac3f1412633704945",
+  "skills/timeout-budget-2/.phoenix/provenance.json": "c2902e7a5e6de77e3028e3cf6225abd410c57c112be5fe0bed473eca156c53da",
+  "skills/timeout-budget-2/.phoenix/selftest_evidence.json": "7402c0069f442df1d0c8845c444658e502529a46154c31d99dff59a5e92b998a",
   "skills/timeout-budget-2/references/creation/p0.md": "38766f2b357d9c7e841572bd01b36bdc21a5fe64b75b1529b16be1475e559a7b",
   "skills/timeout-budget-2/references/creation/p1.md": "94808aef8ecb9644e6ee381090a1d993d96eab862b0932b29100875424706f6c",
   "skills/timeout-budget-2/references/environment/p0.md": "c84167694d120db86340efccb7abcbde60b906a6c213e02b33ad4435f287742c",
@@ -54,8 +54,8 @@
   "skills/timeout-budget-3/run.py": "43074f49b8cbd4da220ed29fb664b1771dc8cb4dcdafe28eddc1410f245b1f14",
   "skills/timeout-budget-3/selftest.py": "22fa9873796c780a1c0f850033d9ef0212326c57a61bbe7b04d1385bd3c9c66c",
   "skills/timeout-budget-3/.phoenix/originality.json": "2d74ce5575f6256253db68a0501be9f6ea7e23ccbc910e898de37ba6a17f684d",
-  "skills/timeout-budget-3/.phoenix/provenance.json": "7e1511b4fef8c1641a0a8aab357ad3d3bdce2ebdc85e735e6c6a70bffb97b370",
-  "skills/timeout-budget-3/.phoenix/selftest_evidence.json": "c6ba7c25df9d61d73d77ce1cf0f4d71d854cb7c6ed0ebe4eadb7a91b27cbc981",
+  "skills/timeout-budget-3/.phoenix/provenance.json": "38836efc3c477fa12991c2002c5410cc27cbfcbba65bdfa79443f004da83f8e4",
+  "skills/timeout-budget-3/.phoenix/selftest_evidence.json": "e51bd927ef0b4aa83b1b945d62fb29e4006d1b02b275ac7714a5f6e422e9cc7b",
   "skills/timeout-budget-3/references/creation/p0.md": "19d29ab70f60f304944a64c8b11b8957526d49f14263e4994cd0ba9c6220d171",
   "skills/timeout-budget-3/references/creation/p1.md": "8cca1f78afad0d137c9b1de017b9d7e1a533ee56c30ea9e54b42142b5faee1f9",
   "skills/timeout-budget-3/references/environment/p0.md": "b215303f9c4938f655085d25d3c011b4cf2e235359af768914e744bba84b970b",
@@ -66,7 +66,7 @@
   "skills/timeout-budget-3/references/production/p1.md": "e618e1bc50641fd3df3a81e913336fa38db51774df68d8e4cdb673ebace6e47c",
   "skills/timeout-budget-3/scripts/main.py": "d4d2ed5fc13272a2e6629e46f6c6b8be5ab8757112bab328fc617f88d0dbab65"
  },
- "sealed_at": "2026-10-18T20:11:54",
+ "sealed_at": "2026-10-18T21:04:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

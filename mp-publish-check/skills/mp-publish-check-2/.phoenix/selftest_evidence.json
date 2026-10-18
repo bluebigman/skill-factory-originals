@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:03:59",
+ "at": "2026-10-18T21:01:09",
  "skill": "mp-publish-check-2",
  "slug": "mp-publish-check",
  "passed": true,

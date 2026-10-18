@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "deal-review-pro",
- "merkle_root": "df0fa2ca47f0e0443966f47a6734381363f49c9015dff963c310f63af8a14a4a",
+ "merkle_root": "d8d92424923232bbdb04809f87a05931fcd6e2e212e65d88219809a890bb8fbd",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/deal-review-pro-1/run.py": "9ed2dee64fbed24acf24015ea2ac5424e080780bbbbc48dda4ca693807205d63",
   "skills/deal-review-pro-1/selftest.py": "0dbb905dd30f7eaa7d51c4a6d5a4a810699449ac4bff8d915cad124660e63638",
   "skills/deal-review-pro-1/.phoenix/originality.json": "2a6ffbf0347a08f6c0c4ed9ca8c711e954e6ae34dcb8e0e1267f6b7689a85de8",
-  "skills/deal-review-pro-1/.phoenix/provenance.json": "47cd961218656ce34e3945e10b16e0391a9e1b177881c8258b15acb21058306a",
-  "skills/deal-review-pro-1/.phoenix/selftest_evidence.json": "f72d6ac0b0ba0d0297abc5cea021e70b4cb14de1cbe3eb717282f37c845e3c56",
+  "skills/deal-review-pro-1/.phoenix/provenance.json": "53b5349eb69e488b3963307130dc7b89f662867720f33cc80e98c9f55107e630",
+  "skills/deal-review-pro-1/.phoenix/selftest_evidence.json": "955b7dadbe2dc637f82fc2da672baf1a77ddf6a590f51972d9f4083dbe7d549d",
   "skills/deal-review-pro-1/references/creation/p0.md": "8b3ede16f21f6564577adae9ce91c2b9dd50c5749aaa17d0b08540bae13916b4",
   "skills/deal-review-pro-1/references/creation/p1.md": "d097c0b801a49b854a35ab22e02523d6309a7c4e79b9a3f57ae05a73f46b4ed5",
   "skills/deal-review-pro-1/references/environment/p0.md": "0694f0c65b7df17839dad6d83386bd1c5c62e91533b7fcda4be58b37900428a7",
@@ -37,8 +37,8 @@
   "skills/deal-review-pro-2/run.py": "faf42a90805629bc870c7f73308ff541f82168b89f405054c123cc726aa2f115",
   "skills/deal-review-pro-2/selftest.py": "c552ce670c50f2acddf0f4417ae8cdd907b217036c670d43a09dbd03b5a77b42",
   "skills/deal-review-pro-2/.phoenix/originality.json": "a200975ae14df1b8f74747a4dc65b1b1d70ec83421871392183bdfcd4b25bf0b",
-  "skills/deal-review-pro-2/.phoenix/provenance.json": "86557b2d71f5c428995b0849945f0fa28d939e76f227862f9c5b28abb858dc3d",
-  "skills/deal-review-pro-2/.phoenix/selftest_evidence.json": "111471f9e4179b8c1ccde538e14ef71cd232ec07ef5c581644fd6f06b9b64ffa",
+  "skills/deal-review-pro-2/.phoenix/provenance.json": "8433f8480a8212d07fe999e2aa06cf7448a575d820e80edca8a7a87efee6a440",
+  "skills/deal-review-pro-2/.phoenix/selftest_evidence.json": "93a8c9ff6a277da28cb08639e9bf0e1bba81d2990ea1aa2a42405c4735374dc0",
   "skills/deal-review-pro-2/references/creation/p0.md": "9704ee1d60cd035b50c5ef91e5ea883eeab0bb81f1bb6b3277116ae296d29625",
   "skills/deal-review-pro-2/references/creation/p1.md": "0def759e8152342d02dcfe210b61b71d88818e01916565fea5ba343c479e0623",
   "skills/deal-review-pro-2/references/environment/p0.md": "4c347394570e7ba4a9a4c1e33d049d8603a4d860a0b69114bada1c107c412ec2",
@@ -54,8 +54,8 @@
   "skills/deal-review-pro-3/run.py": "bc8b9b1f019ce1a94a9f3a9b0ff86510c896bb3e02e65de93422fe602e90c111",
   "skills/deal-review-pro-3/selftest.py": "10c8d05ee028e76b48a1ad36b4084b4bfcf454b07ad9a76c0fa190fc9dfe9e47",
   "skills/deal-review-pro-3/.phoenix/originality.json": "9ce45b1387c611751cb7add84ca33b8eb6698bad5616d2ddc52399cb9c7bc48b",
-  "skills/deal-review-pro-3/.phoenix/provenance.json": "0d4765515325b666938f7313bbaf2f37a2048c670ec32cae26aba214b8b7e464",
-  "skills/deal-review-pro-3/.phoenix/selftest_evidence.json": "6992734d9158e549dc1ffa7ddd15e145f215d75e2dd2e32d9da608e9e165937d",
+  "skills/deal-review-pro-3/.phoenix/provenance.json": "48ec4dd087234f2574735a4572972fbd5bb68d60c2ef588a88ad87e789cd5335",
+  "skills/deal-review-pro-3/.phoenix/selftest_evidence.json": "11cff6b034efb1abbf8af2a1adcc8f0e93d55b2570f4274f968535518cf280de",
   "skills/deal-review-pro-3/references/creation/p0.md": "5b4ebf618a61b9bfabdca48e1d4dfb97b66a58e621bc120012ee5ea0d03d004d",
   "skills/deal-review-pro-3/references/creation/p1.md": "bd0b37236a5dced187a02df7e1af9ff766dd4ac9036dd3210a341828ab579e3b",
   "skills/deal-review-pro-3/references/environment/p0.md": "ddb498bf435c149d0ff89ff3876900cd9aa882f896ae0f8feb3e5b0c4e65067c",
@@ -66,7 +66,7 @@
   "skills/deal-review-pro-3/references/production/p1.md": "bedbb452568bd0d94c9ac2bb3499204bc93df4a2462b8fedbb2036a54fcd34cb",
   "skills/deal-review-pro-3/scripts/main.py": "9542ea90e368963619ba3cd3cb3541db842c6e35ff1be6dcb79aaa1531df69e6"
  },
- "sealed_at": "2026-10-18T19:56:10",
+ "sealed_at": "2026-10-18T20:57:01",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

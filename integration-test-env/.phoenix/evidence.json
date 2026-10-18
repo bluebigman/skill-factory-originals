@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "integration-test-env",
- "merkle_root": "1ec48b48ff09adac6b8f94ef28a734193567d4894a3dac050cbaff6cd866175e",
+ "merkle_root": "ad1e9c2b6a2ae984e9a345ac6d65b02853028e083895b7c771a898c9d663adae",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/integration-test-env-1/run.py": "957ed69430bfe234fae4cd9347adc20e18e00c580865944983844af15c75043a",
   "skills/integration-test-env-1/selftest.py": "62223d25439c44c4bc6dc38757857f432a34bfff434c6ce8bcde903b3eb22920",
   "skills/integration-test-env-1/.phoenix/originality.json": "e35cdb8b724e404d2b3c72661aa280145f5bbf9a20dc9c02be485986fcd88dc5",
-  "skills/integration-test-env-1/.phoenix/provenance.json": "8a721204d9571d21b4f9944d7960b89e38c08a02a790b812c8c0ce9345d3750d",
-  "skills/integration-test-env-1/.phoenix/selftest_evidence.json": "8bf757c9b135a171f28f2bfe4565c9ae823a50aa721e901709575874bc5715e0",
+  "skills/integration-test-env-1/.phoenix/provenance.json": "152c6f94fc0dc18aa6e33a63ea498257ed01eddfa712ee8c2d2f261aa891073a",
+  "skills/integration-test-env-1/.phoenix/selftest_evidence.json": "e9ae7f3c0efd56e58017172e092283b52ec0d572909c79d9072a99a2d0962403",
   "skills/integration-test-env-1/references/creation/p0.md": "e186357d4844fdf166ca8678c00fec5bca6f1e8c21906c80fd674dc21e9f5f22",
   "skills/integration-test-env-1/references/creation/p1.md": "f16f0402a1add7d5e4b515f85232f4e0260d33bc441b5ab3413a5fa9ba0063f2",
   "skills/integration-test-env-1/references/environment/p0.md": "6d4d36d1032960eab8d76901c684e131de931622696f13ee9df65f35d761d249",
@@ -37,8 +37,8 @@
   "skills/integration-test-env-2/run.py": "962c99bef8ccdf2be95dfbd754924c7d15053f5ac2f5cd1f203d96d9fca3969f",
   "skills/integration-test-env-2/selftest.py": "1baa4b4814ecf8845b5feabae7fc4875d24051f884f675485233b482f2ea7d02",
   "skills/integration-test-env-2/.phoenix/originality.json": "d0857f7b4fb641d28c449dabbc42d38ca5691eab8e60cdf84a4aecf64fdec758",
-  "skills/integration-test-env-2/.phoenix/provenance.json": "c839bfd8533a9dffc1bfe97ffb7ee1c1a7d21d6143e1cff176b2c40c11b842ba",
-  "skills/integration-test-env-2/.phoenix/selftest_evidence.json": "c6fe2922fe113dd7e0fe550a79f3bab3882a6347606d14c28a55f50fe9599e2e",
+  "skills/integration-test-env-2/.phoenix/provenance.json": "26bf9bd29524f9b5395e9bac148ecccb0fdb8f6bae1c9601d8c13efaffec3a5d",
+  "skills/integration-test-env-2/.phoenix/selftest_evidence.json": "ac587356a81b3951aa454bc9115951ed9571933b34f95faa4b5db30e1424c08a",
   "skills/integration-test-env-2/references/creation/p0.md": "b78631dc17bc3c1d8b42ba520178f41aea2cceb1795ae9a977add61a40f26cd4",
   "skills/integration-test-env-2/references/creation/p1.md": "b423009b17c9b66735443c9ae6d3827efb1ae1bc7cc1dc60d606291938e09384",
   "skills/integration-test-env-2/references/environment/p0.md": "6cacd09f9672e7e923577fc8c47a2c21cde7801fbdd63cfa6146828ad6406c42",
@@ -54,8 +54,8 @@
   "skills/integration-test-env-3/run.py": "f3f2ed24c7541d2735432943f8cd57b6e1c6e45ef13ecfbbe6f3c6b40213c52b",
   "skills/integration-test-env-3/selftest.py": "c08476b0cf772baaa8fa25e4babb1553caadeff7a2cb1a78adea05e70199821b",
   "skills/integration-test-env-3/.phoenix/originality.json": "9ba22f7c6aa709b2790e9237163220a28c6a382d8fa123d687d45664072c5586",
-  "skills/integration-test-env-3/.phoenix/provenance.json": "2db50e016a8c68269f9cca99cdf816522845ac1f28cdcd961efc5d2d5f8fa2c6",
-  "skills/integration-test-env-3/.phoenix/selftest_evidence.json": "f7e6d27ef38de39e9eeee07eeacb451b26ac80193144a3e188e47be970716bcf",
+  "skills/integration-test-env-3/.phoenix/provenance.json": "599a5e73bcb8a4fe2fb8015a99b7a35f8db64175e9f23bdd973e02e45c5d6ac0",
+  "skills/integration-test-env-3/.phoenix/selftest_evidence.json": "b4dfd6cfabdf0a3c6731451faa7c06c16ffdfde9d1fd0ca42fe760796d355f5b",
   "skills/integration-test-env-3/references/creation/p0.md": "d6c3ecb5e9f05a812ad36d053977dda1fd370b43ba3855418a6bd46456760b0e",
   "skills/integration-test-env-3/references/creation/p1.md": "2c10fba3ebc11e1edb4864ff0c2d19c0f7d889a3018dbca193a09fd4e4514258",
   "skills/integration-test-env-3/references/environment/p0.md": "27d2883253298b6b4a4667c66fc7157735fdf6b0f3b1a9b4d2910de05a2dfc45",
@@ -66,7 +66,7 @@
   "skills/integration-test-env-3/references/production/p1.md": "360fe5776bccd5978b066e747c44f93dd525f5d3e148db6134f545511c7d1c9a",
   "skills/integration-test-env-3/scripts/main.py": "6c6ea05e026fab7abab5ad6a4e2b07d630e0b134d0872011e23763e644b59c9d"
  },
- "sealed_at": "2026-10-18T20:01:32",
+ "sealed_at": "2026-10-18T20:59:51",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

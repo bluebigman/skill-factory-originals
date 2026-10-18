@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "meeting-sync-pro",
- "merkle_root": "845b9bd2d0afc126dd3bcc856e10ec552b6804a92514e3c52248e9b211bda413",
+ "merkle_root": "889027146f36936b5048a722063a6ee8071485540485c716f3aa55df8e13afb8",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/meeting-sync-pro-1/run.py": "c0d3eb5bfe6133c37b80019d6fe903927d245607f327bbd7067d1d536f30164b",
   "skills/meeting-sync-pro-1/selftest.py": "f1c77758551aff0823ebbe5991535beedb9602b3bded95cc82327b39305f12b3",
   "skills/meeting-sync-pro-1/.phoenix/originality.json": "5746f62bfe8c058215802d3a5194d7cdcef16a71186e90ee1c41430addec7103",
-  "skills/meeting-sync-pro-1/.phoenix/provenance.json": "28c2d510c766852dd08768ae840d2c1ac65b2c000a61fa56b827bc012da0ed33",
-  "skills/meeting-sync-pro-1/.phoenix/selftest_evidence.json": "37801ca9c757a12063c217db7c09d82298bafdf268ddf429becca44e696582c2",
+  "skills/meeting-sync-pro-1/.phoenix/provenance.json": "d246c6ef708ab0271ff2bddb4d1848df42bd7a50001adecc9fc6986e9394df7c",
+  "skills/meeting-sync-pro-1/.phoenix/selftest_evidence.json": "3e6daeffc5d79ca6f49e6c60c8aaf05f56d898e02628c1036436bc440239f078",
   "skills/meeting-sync-pro-1/references/creation/p0.md": "0bae021c3d812a7eb1110671663c40db1adcb6aa3c28cdb8d7672af52feada35",
   "skills/meeting-sync-pro-1/references/creation/p1.md": "b0f38eaf0b43eca5498a6193ba5f2937c316d5f704955648fe4649ecbdfa77fa",
   "skills/meeting-sync-pro-1/references/environment/p0.md": "38368bbbb1372ca46c829a69dd7df7990d098b086e35972de7c130cee670fc21",
@@ -37,8 +37,8 @@
   "skills/meeting-sync-pro-2/run.py": "650adcd85254492159a8ac81ecb410df3f57d6e92c582b3a178e311b33769a07",
   "skills/meeting-sync-pro-2/selftest.py": "1db2f7f0dd95bde1a5eeccb53c1ab120c24218a003ac79bcfe13055af42e6244",
   "skills/meeting-sync-pro-2/.phoenix/originality.json": "c461b4296b46dce2e5f6e9b1e949bbc95c80c0a60aac0538b62129303aac9977",
-  "skills/meeting-sync-pro-2/.phoenix/provenance.json": "abd3dad0da2681a753297a495f5926b89fe74e1adc6e3e6fb701d2f22c493325",
-  "skills/meeting-sync-pro-2/.phoenix/selftest_evidence.json": "0e03bce05119a64b3d53740d8876805b66d30eddc4d807fea4b0d873b57144e4",
+  "skills/meeting-sync-pro-2/.phoenix/provenance.json": "c2261202dd8e20947247a1debe75f5d7080621bb651250a366132f7051861454",
+  "skills/meeting-sync-pro-2/.phoenix/selftest_evidence.json": "c4ef0167be0a114efc5b94496326becf26ff3c14c3c20a83370b7515ecedb13c",
   "skills/meeting-sync-pro-2/references/creation/p0.md": "5e54ea5a9b376adc8695a54f36c4d1a6d3eb83e380ea7124b1be2ef210ee7f73",
   "skills/meeting-sync-pro-2/references/creation/p1.md": "7199bc486ad28793811b95c02cf63f96892721aedfa364ccdd2df47d8faa21e3",
   "skills/meeting-sync-pro-2/references/environment/p0.md": "0db954967e21535538fdb2e9bd385dd3b11733b9f00633b9f8093db319d46e33",
@@ -54,8 +54,8 @@
   "skills/meeting-sync-pro-3/run.py": "459fb4503edd00df60033587005b8ca647adf132dd777bc368ca2691d606785e",
   "skills/meeting-sync-pro-3/selftest.py": "308a44d76acc2196905375953cc48590a41aa83a0aa1d03b379953687e24ffd1",
   "skills/meeting-sync-pro-3/.phoenix/originality.json": "b12cee5057d87b1bb0e3c63e337625a58d7bebc35b71c44e5e15d4398b9e4698",
-  "skills/meeting-sync-pro-3/.phoenix/provenance.json": "54078780e33c398e3890cd8d1168dd86739105237399e192ccef9283b8c4f650",
-  "skills/meeting-sync-pro-3/.phoenix/selftest_evidence.json": "2fe27af5cb506694698fa0b9d82511c4c7d6016166dafc6def81e8d33b0a7a98",
+  "skills/meeting-sync-pro-3/.phoenix/provenance.json": "a786037d630710337f7f0257ede1bf587bdc4aee4e95841e8a49bd581c7df425",
+  "skills/meeting-sync-pro-3/.phoenix/selftest_evidence.json": "996e841fee5ff30736b2cb5921b898e24b1d4ad81001ab3bc9d86f5fb4df1189",
   "skills/meeting-sync-pro-3/references/creation/p0.md": "c32a17de33ca264ad788033a5a8b1d20dc1f4ed863852b139425ff950ee0d168",
   "skills/meeting-sync-pro-3/references/creation/p1.md": "97aed39c70584b495cbabc104e512eebe30f03e5892d4e504699b128e85d6a3a",
   "skills/meeting-sync-pro-3/references/environment/p0.md": "849de7f12b3f8606f13ab3d9ed355208ae154512dac4a3510940efcc40987eb1",
@@ -66,7 +66,7 @@
   "skills/meeting-sync-pro-3/references/production/p1.md": "300931fa501241df8e5ffed048067c32dbdfc358605bf1a3a25469c4d8460b80",
   "skills/meeting-sync-pro-3/scripts/main.py": "a396e2d90d992599444f984682e6a3e3128f5449c92eef39398d033649d23ed0"
  },
- "sealed_at": "2026-10-18T20:03:25",
+ "sealed_at": "2026-10-18T21:00:53",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

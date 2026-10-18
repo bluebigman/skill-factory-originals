@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:07:11",
+ "at": "2026-10-18T21:02:47",
  "skill": "rag-pipeline-2",
  "slug": "rag-pipeline",
  "passed": true,

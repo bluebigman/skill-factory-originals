@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:53:16",
+ "at": "2026-10-18T20:55:22",
  "skill": "chart-data-verify-3",
  "slug": "chart-data-verify",
  "passed": true,

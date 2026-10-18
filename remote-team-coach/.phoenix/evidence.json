@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "remote-team-coach",
- "merkle_root": "30ef4a0393f02445cb48d73e42023fb7c2d2db2391f14c31b6587103af044a51",
+ "merkle_root": "d4f3e5e4ce051946c072e36f2f5e8ade3cf4afcab911660eea81c239f2aa02bd",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/remote-team-coach-1/run.py": "18759e88ec1df037d08f94c0cb79668952e7edc73c78efb8aefce77978743502",
   "skills/remote-team-coach-1/selftest.py": "271d2e88430fedda160d23fbcebedcfa7a10c7926e6f1410507abce176fe1954",
   "skills/remote-team-coach-1/.phoenix/originality.json": "79126a7d4b9209ac92924f592197acb2e17f7df8a763d6ba837204815856790c",
-  "skills/remote-team-coach-1/.phoenix/provenance.json": "0a926ce336fe54e125bb0b0d5775cb721d2565c4cf938109b75268eed0149f61",
-  "skills/remote-team-coach-1/.phoenix/selftest_evidence.json": "ae215136322e074fcd6817a97042d9fca4d7779b71fcab40ffe18f76d6a6dd02",
+  "skills/remote-team-coach-1/.phoenix/provenance.json": "77b92dd73288900a18342eacbeee2ea67715bd76fa0f369b8c644de90bafc2f4",
+  "skills/remote-team-coach-1/.phoenix/selftest_evidence.json": "50da135e5e874482368e5a19edb29d003f6739df67653cb7f49d0ee4dc3cbcdd",
   "skills/remote-team-coach-1/references/creation/p0.md": "bde12549e816b47bcc093aa3600570012b2bc7fdf90d04165458d8a8d48962f7",
   "skills/remote-team-coach-1/references/creation/p1.md": "33291652c4c2ccedf4043439371f2a4dff60051aef8e022971460feef02055ea",
   "skills/remote-team-coach-1/references/environment/p0.md": "75cee2d3635a8d5582b718852c5eb48f593dde4de73e9e393fbeae7bcbe1f267",
@@ -37,8 +37,8 @@
   "skills/remote-team-coach-2/run.py": "0d03399298389f6dc29600a6d7ccfe3febf7222dce5d5c7de66afbc70adc4a91",
   "skills/remote-team-coach-2/selftest.py": "687b0c9224d115372e53dcb20c0703b17a986205a4fcf0f16dbcc017cf2bb037",
   "skills/remote-team-coach-2/.phoenix/originality.json": "7f2b6b8ac24e7a7ed70cb23cd4265124bb5cb5d5c0d897617ee1e5740e57f35c",
-  "skills/remote-team-coach-2/.phoenix/provenance.json": "36a61b5917f913fbca99318e0a324accdb5d7320d61c36362b88d1b31bf98a63",
-  "skills/remote-team-coach-2/.phoenix/selftest_evidence.json": "b169f6f5884fce673b6026d1e6ca6f72da3e53943b2deed0c040eaa22d3c4425",
+  "skills/remote-team-coach-2/.phoenix/provenance.json": "ba16d31da9c70f2e1255e0b77d8d9cac1956d9777dc29cc047df9e630a6764d8",
+  "skills/remote-team-coach-2/.phoenix/selftest_evidence.json": "61304c6e57faa7dee4ee41e249352b263933bbf47a59f13e6b716a2bd6594949",
   "skills/remote-team-coach-2/references/creation/p0.md": "139f9bc06f2010c743a0a9fb495d644a28772a1f72e28a257c4e06e769467696",
   "skills/remote-team-coach-2/references/creation/p1.md": "e46f2d3461a85fe4c8acee6cd3beddf85919e2161191be8514a821dc1da4363c",
   "skills/remote-team-coach-2/references/environment/p0.md": "21c1b22111a275d355bde486443998a691296d6ff55271d4964dd344f3fcdbf1",
@@ -54,8 +54,8 @@
   "skills/remote-team-coach-3/run.py": "354cb4fc38a61d862d7d28e08ed72fbf4502bb8e4c067747e32a10be3bc1b140",
   "skills/remote-team-coach-3/selftest.py": "27c0f315ca9fc8545ed25f1d3e0e1ff0e0994c3e4299b21975fec0fb005f6b7b",
   "skills/remote-team-coach-3/.phoenix/originality.json": "7f8401a3c9d3c59a953151e57bcac02bb1aa55640eaa756ed882c84be6aa692d",
-  "skills/remote-team-coach-3/.phoenix/provenance.json": "9d7d71cee47d3d3767b06929622d5dfebd8183717226549e91c130cfb0d71658",
-  "skills/remote-team-coach-3/.phoenix/selftest_evidence.json": "39b370379091f879941b9b5d94d61dfd734077a1ccdc9e374903dc1ff7ee61f3",
+  "skills/remote-team-coach-3/.phoenix/provenance.json": "92ed055b7a8ecba9a7638b1afdd80b87bafee569c00c28479e4b651d4664d425",
+  "skills/remote-team-coach-3/.phoenix/selftest_evidence.json": "efc56cd3d95c898071b83b2fbd9146d48467db3df8cbe1261727f54c0e4b58d8",
   "skills/remote-team-coach-3/references/creation/p0.md": "483465d3841f66cc1aa0954bc227860be70de6a7d0d9bfc6d577716f208652fc",
   "skills/remote-team-coach-3/references/creation/p1.md": "1c26f9b195e76c25e797647797e81e3ad2e04c97760cea05767196d91935090a",
   "skills/remote-team-coach-3/references/environment/p0.md": "6e9cb2da4b93c1da58c6a493b783ec6c4984b6d973fe71499daf828cf0f13e41",
@@ -66,7 +66,7 @@
   "skills/remote-team-coach-3/references/production/p1.md": "a5595ad825b5a3eddef4cc494d5849042dfdf007aab9cf6aad38c4581c5e5b12",
   "skills/remote-team-coach-3/scripts/main.py": "fba359b48807339aec281f4faa781bad8d996e1d27a24b5b0f51abff91250a64"
  },
- "sealed_at": "2026-10-18T20:07:28",
+ "sealed_at": "2026-10-18T21:02:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

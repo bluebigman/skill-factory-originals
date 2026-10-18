@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:54:02",
+ "at": "2026-10-18T20:55:50",
  "skill": "config-drift-detect-1",
  "slug": "config-drift-detect",
  "passed": true,

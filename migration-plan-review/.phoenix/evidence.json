@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "migration-plan-review",
- "merkle_root": "a7e33b00cfd42f031d70cc2fedec45579c30c70723add69b6da1e8ef0eca4044",
+ "merkle_root": "6cc54b9786d948309d215d6438749aef5d753c449b6c7478ea4b847404edd1d4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/migration-plan-review-1/run.py": "981ac4e1fc0c62f98284497259d7b83cb7b6c6e0b68b80cbdf8c1bde1dab568b",
   "skills/migration-plan-review-1/selftest.py": "1aa03b303bcdf637342975e8c0b56c17a5870e32aae0f921a07e207ffba325ab",
   "skills/migration-plan-review-1/.phoenix/originality.json": "fe9831a9ed9cd43f0b995b220f765499f4b434d1dbae0e48e3bb8e19ce473009",
-  "skills/migration-plan-review-1/.phoenix/provenance.json": "063131024bc7c479af56d66777de9cd55546a2021fb53431ed2d0f26a5370e26",
-  "skills/migration-plan-review-1/.phoenix/selftest_evidence.json": "2f72737d3610f8c77c52bee94330212acba916108e05078acd545d764eccd9d7",
+  "skills/migration-plan-review-1/.phoenix/provenance.json": "3e86dd7c68c4489d14d31084a8ba8a2899a8024a722c5697e823dcee3be21d47",
+  "skills/migration-plan-review-1/.phoenix/selftest_evidence.json": "9b7af6e136125e9b87a5f81ba2c36ae9002fa32e5b3094a1b9a4f334977f365e",
   "skills/migration-plan-review-1/references/creation/p0.md": "2de499f08080cdc5620abb46cb2eac5c21fafc00d5ff053ab32c3ee7bca79953",
   "skills/migration-plan-review-1/references/creation/p1.md": "a76815b6175219bc05349fab1e98b2c1f9e0a539606ab75e126944ab2de9bacf",
   "skills/migration-plan-review-1/references/environment/p0.md": "a6eaa5bd693a2064c5b67434aae027bd84a1cbab73c586b6aec3fd83fbcb3d2f",
@@ -37,8 +37,8 @@
   "skills/migration-plan-review-2/run.py": "203bacbeaad3d648902e6da2249adf8c88fb21c2dbc56692953553e300af4909",
   "skills/migration-plan-review-2/selftest.py": "15adab24a678f5b013037dc14fbccfca0011fd81947650177b73b4585f6a4a2d",
   "skills/migration-plan-review-2/.phoenix/originality.json": "6760a85a763872817c40c21227a48328976104aa5819598c78c0340d0b9651e7",
-  "skills/migration-plan-review-2/.phoenix/provenance.json": "70f539b6066a1e043a297126ba66b7cd5ab9543dcc6d55a30c9b195c1bbff130",
-  "skills/migration-plan-review-2/.phoenix/selftest_evidence.json": "bfb991a33f12c6736f958a76d852dd61fe8d096b545044ce515d64cb20fd40d9",
+  "skills/migration-plan-review-2/.phoenix/provenance.json": "6c440919a68a15bf559f20cf5fd9ad1afa0c1e1625653fc32aba79c6bb4f38a2",
+  "skills/migration-plan-review-2/.phoenix/selftest_evidence.json": "442dd476b3eda71391d652cfc747a5433a45f3717f0000b3c279086e091c7ea0",
   "skills/migration-plan-review-2/references/creation/p0.md": "348d5209a9ca662c510ed435f8716453d74cdd14b56f44450988bf5a7dafc7c4",
   "skills/migration-plan-review-2/references/creation/p1.md": "2043b2ab454b338ee2079b99b2ce7365eb45e8a9ed60f388cdbd072d95207447",
   "skills/migration-plan-review-2/references/environment/p0.md": "7d6e913120b0c62c21ab2a63977b49e2d1e112d42393cd567aa64db6be2a2c07",
@@ -54,8 +54,8 @@
   "skills/migration-plan-review-3/run.py": "1f64ac4ec47ed1976152f03cc5a154e5eb12cabd983f5c557a64ff787b99fdeb",
   "skills/migration-plan-review-3/selftest.py": "72206c8f52c8db0bc41643b9a13f3b0b1b7a85a4bdb7cc594d3fd7a1f008bf7d",
   "skills/migration-plan-review-3/.phoenix/originality.json": "23b2a5fbfe86ffe7f756e6d1d43982919d1febc6eaaecaecba13ac167dfed3f9",
-  "skills/migration-plan-review-3/.phoenix/provenance.json": "6913b2ac728e800eeda25bddfa63e064be9d9b366a4404ce71273803db4ad5aa",
-  "skills/migration-plan-review-3/.phoenix/selftest_evidence.json": "949b92e263f35b2b672b3696dda777ad7944a4bcfc79f36e05fc420de2dd81eb",
+  "skills/migration-plan-review-3/.phoenix/provenance.json": "b923cbdcfd2e2fd6f6c2eb5d05e67898892a5b529a794a70592d0c5e171f26b0",
+  "skills/migration-plan-review-3/.phoenix/selftest_evidence.json": "106a622bea9f2294d8a34d0a8ace2a507c3c8408770da1caf3ac593a1c620eba",
   "skills/migration-plan-review-3/references/creation/p0.md": "3ec6d7ab9d5226e4d7984c0e6a0c9dbc1ea14c752d0524bf24263084deb21681",
   "skills/migration-plan-review-3/references/creation/p1.md": "d0fda4ef976c8e972c0b17bc8f6f7c143f0c9c02817019bc12e42060ecc4f656",
   "skills/migration-plan-review-3/references/environment/p0.md": "9fa2f2a0677ee7eb7358d313fa667ea319c1c51c6fefd54258b8a90de2f85d84",
@@ -66,7 +66,7 @@
   "skills/migration-plan-review-3/references/production/p1.md": "51b5fdd161e87a52975987d36ecf4dbbd25189fa03f64e7eed80104344144981",
   "skills/migration-plan-review-3/scripts/main.py": "d28d2787514f3572da8a3d359a4ebc7d118d3fd0a76e40dbb837632f96bfc601"
  },
- "sealed_at": "2026-10-18T20:03:48",
+ "sealed_at": "2026-10-18T21:01:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "quality-inspection",
- "merkle_root": "17618aceffc152c9fd1fde83d3b43ad491f04d555067820d29b9265433be199d",
+ "merkle_root": "37d6342db648211786dc2c1fbddc585295afeb4a62345d783ee5bf41fb7a4094",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/quality-inspection-1/run.py": "efa2852deb56a01b655dfd052b764ae1262da5caf3e3fb931ef759d528f2a09b",
   "skills/quality-inspection-1/selftest.py": "d1d63ce1ed76a73bf737a98c77fd1dd5afc0cc4cc473c5c429edd72f049ff3ce",
   "skills/quality-inspection-1/.phoenix/originality.json": "79b5e4cf347a31f24901b7fa6e9715d8b4e4469be5402c2157cce676da4ff103",
-  "skills/quality-inspection-1/.phoenix/provenance.json": "f3342479072936f4ea9ad994fd6ac2ab9e2d6418ef3843f02c489686b6128e0d",
-  "skills/quality-inspection-1/.phoenix/selftest_evidence.json": "471e26b1e71b688fff58056881e8eb017358595cc92163d642497c638a68d509",
+  "skills/quality-inspection-1/.phoenix/provenance.json": "7d660983c39524b4bfc9b25388e56028d821bbe6278ca8a9acc4456e2a6cc7e5",
+  "skills/quality-inspection-1/.phoenix/selftest_evidence.json": "70d2e5114d78742197e3170bd9c48ab14abaf2f0e5e7cde328f7fdaa71551f52",
   "skills/quality-inspection-1/references/creation/p0.md": "a90f42f87fd9bb54b1b12878492f7a73695c4e46a28a8e10945845f9879840b2",
   "skills/quality-inspection-1/references/creation/p1.md": "a2dcdd8c9d082747170df820f89c35e95ddabf5728dbc5fd0ef7e0aecc3cee74",
   "skills/quality-inspection-1/references/environment/p0.md": "1a632ceabd33aa89405dec167f57f2e3a8ea9e1588c9b73d5bd4ab40162906c3",
@@ -37,8 +37,8 @@
   "skills/quality-inspection-2/run.py": "47c5aef93d26cc6b295f850104669ecd82137e052c17e961cc106c1571ce8551",
   "skills/quality-inspection-2/selftest.py": "9297b4a20d0256f5b171a4c3f34b74b161feb8cf63945886acaf4e77c79c4ab7",
   "skills/quality-inspection-2/.phoenix/originality.json": "c3cde83d7cdae3c146c475449a2f0ee7dab65c2f973f78e7b3fe99c5b3f48cfd",
-  "skills/quality-inspection-2/.phoenix/provenance.json": "2b5fb8ba1ccd0301db5367862f814baef3512abdba1426f70c5ba4fa5df0f873",
-  "skills/quality-inspection-2/.phoenix/selftest_evidence.json": "040305cf5ac6960f6031045130438eb13b3c51f15e58a419df3f3e500aa31d37",
+  "skills/quality-inspection-2/.phoenix/provenance.json": "02943ad212196d1deee13b5b5717c14da54f4eb9d1ee2334eb63de8ef9edd835",
+  "skills/quality-inspection-2/.phoenix/selftest_evidence.json": "9d9bea9657233d8458415eb8ad4e45020d970ab7db47c64813e883eed9240d94",
   "skills/quality-inspection-2/references/creation/p0.md": "c317ab4829b4134346222a81735d15e984f66ece7ba44ef680c0d77dc3730ec5",
   "skills/quality-inspection-2/references/creation/p1.md": "bf7cf0d9c48e43782994a6f331212060e1edc99420c8409755e1f291dc67d37c",
   "skills/quality-inspection-2/references/environment/p0.md": "28a86dccf4f300544a638d81775e8c67ca0c2dee696662158d4d29cdffd8e7c0",
@@ -54,8 +54,8 @@
   "skills/quality-inspection-3/run.py": "ca0428cad4c3072487f0c320a71239005dca15048a2e13f803f1734ed4ac7393",
   "skills/quality-inspection-3/selftest.py": "327d8778ca8143376674eae0095d2c4cf4602858117bb83e29878de03cfe0eb3",
   "skills/quality-inspection-3/.phoenix/originality.json": "037e9b9e97521e54e06f84b5dae8ffafff5a9fac09277db21d91c20e1c738c51",
-  "skills/quality-inspection-3/.phoenix/provenance.json": "99fda110baa8a9e0d6c909b1c9f9212ceef3a98fb1a4dca6f08c63f7671e9c78",
-  "skills/quality-inspection-3/.phoenix/selftest_evidence.json": "4c9e37b4b47cc7f193a77ee6be1dbc9d9443e3ebebe8e3b392f27de73f72f335",
+  "skills/quality-inspection-3/.phoenix/provenance.json": "92acf67d059ba5a987a3b3f860403089489f802fa31d48b6271da65269115386",
+  "skills/quality-inspection-3/.phoenix/selftest_evidence.json": "f22831f369b3227a1219e30b61a595661e304e31deac2149ff75e1b89e97d0fc",
   "skills/quality-inspection-3/references/creation/p0.md": "789fbba63802690428fcba66b204fd8cbe685811719725090ab96ea4fcf94a55",
   "skills/quality-inspection-3/references/creation/p1.md": "eb83a0c193d9f91717ff41e9241d407c47a9e310da925dbb7c8f532f161b16c1",
   "skills/quality-inspection-3/references/environment/p0.md": "f6965bcf0fa1b9c96c6901012c0ded86a625e383ed1ab3fcd1858ed6bbdbd8b2",
@@ -66,7 +66,7 @@
   "skills/quality-inspection-3/references/production/p1.md": "0b1d4e0fd053def6ab8586ae4a53120210c8c302b36fe91db67bf605f5968741",
   "skills/quality-inspection-3/scripts/main.py": "7405ae20cb64cb6a97cc08ba717be0bb3491fa1376cbed3decfb437382f32a82"
  },
- "sealed_at": "2026-10-18T20:07:00",
+ "sealed_at": "2026-10-18T21:02:40",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

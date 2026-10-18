@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "idempotency-design",
- "merkle_root": "b2bec5df98814170458c23c4973521763614036360ab6bff98b454d6ea2d9a41",
+ "merkle_root": "b01387563758aedc1ee44e612caeaaa8090d755cbd48d35be8af201af29d61ff",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/idempotency-design-1/run.py": "769a314c7715bd9b51180887f76a18e61512f04b685ab372239cf4a9885249ae",
   "skills/idempotency-design-1/selftest.py": "6cbf2592980ecec35135217feb9334634136612f3e80e8889e108ab153960df5",
   "skills/idempotency-design-1/.phoenix/originality.json": "bf1958b71c63ed4053c60cf95e055340d7bed11a1c53d2f812f5aa436b2dae13",
-  "skills/idempotency-design-1/.phoenix/provenance.json": "4ceba480c23bf71c3a6e64a2a131c02b4beacffe007cadbd0afa1f99a4db3faf",
-  "skills/idempotency-design-1/.phoenix/selftest_evidence.json": "ca0a0d9759a92951475ea71ea29eb0c04aa32dc03361e35ced0a0fe8f1500b8f",
+  "skills/idempotency-design-1/.phoenix/provenance.json": "22d6d1e6a980dc1c8914c3ed2856cb549fe90214b519c9a573fd2ce936e5bc4b",
+  "skills/idempotency-design-1/.phoenix/selftest_evidence.json": "025fba77b6581b74b2b92d16023a0bbda2dc103cfed1876a0685df8aee78c718",
   "skills/idempotency-design-1/references/creation/p0.md": "d89391d0fdc3b45043db050a81b67f49528342a6b37066884be5c42f69b22092",
   "skills/idempotency-design-1/references/creation/p1.md": "ce5b9f48c27ee661f8685f12f01ad2f8180e8f044f6481a243707ecf02d69bb5",
   "skills/idempotency-design-1/references/environment/p0.md": "05e8f42ac2918b2dc929f5f5aab0af0916aee84a5c01d722cb75258ea1b44685",
@@ -37,8 +37,8 @@
   "skills/idempotency-design-2/run.py": "878d75163641104bc59ccac5fcdc65c0fc8fef87af37a530d5e426cf2c975b89",
   "skills/idempotency-design-2/selftest.py": "2b1f2e4fe21fa415fdda7fbeb25f7b93a6f32aa7e7ca2fb5f382a1e7bfec5e82",
   "skills/idempotency-design-2/.phoenix/originality.json": "a5fe29abbdd71e531021e756636fcbc50caa949dbeb0a8634cf2be7953698dac",
-  "skills/idempotency-design-2/.phoenix/provenance.json": "358cd890b80d695b8e030c11e6acde1ba45572e8334e7a4a563022c760a1cf08",
-  "skills/idempotency-design-2/.phoenix/selftest_evidence.json": "ea97c553dfb90a06b9e8109396218b6208fd358711b8f777cf0309df21f9cc6d",
+  "skills/idempotency-design-2/.phoenix/provenance.json": "9568b76cbc503d6b5c9324d897c5e2c104742887568fac5268a207645a7f4af9",
+  "skills/idempotency-design-2/.phoenix/selftest_evidence.json": "b60a1e6c41177a32615a7429bf16bdf8af310bbe631318c42bef77193a556b6a",
   "skills/idempotency-design-2/references/creation/p0.md": "e8b4092e7b44d94da563483e22e7e568c4ef356ab0bf92a0e0d12134df829336",
   "skills/idempotency-design-2/references/creation/p1.md": "02bdb8bc5972d7935b0bdd97330def14fc5c0fe9e8ec74781319dca46234a441",
   "skills/idempotency-design-2/references/environment/p0.md": "e97a7b849318cd342a62bc52b3845ca02cc78e00bfc9f433d90fe770389b6280",
@@ -54,8 +54,8 @@
   "skills/idempotency-design-3/run.py": "27359c398a7b793f699e4aff9ef136e1e19413179f27a30e63a366ccaf0b1a0c",
   "skills/idempotency-design-3/selftest.py": "95520de2fbd17d7d5225f290890d5a279c6c36f36143599046e766331fecd3ff",
   "skills/idempotency-design-3/.phoenix/originality.json": "7d18793ed5b592bbb7ee490827e00126475cb8d98bc59b1bdcda6c3147ae2d2e",
-  "skills/idempotency-design-3/.phoenix/provenance.json": "818c60883431235d5f746d1f73cbcb5600d532049cc507a9ca03bf3e6d602947",
-  "skills/idempotency-design-3/.phoenix/selftest_evidence.json": "b3e0648571200079e02d3f23919664f3d2fa589c37d44eb7671cda51af5e7bbd",
+  "skills/idempotency-design-3/.phoenix/provenance.json": "192967e0353bc7b7ce033582ea4353d32b6e5ddc73f28bdcf9d27e64fc9b1fee",
+  "skills/idempotency-design-3/.phoenix/selftest_evidence.json": "f0d22d68e4da17f648c66e541d9b9b68b47015727814b251dc89be5a94f498b9",
   "skills/idempotency-design-3/references/creation/p0.md": "93dc988bbbe0e36bd49ecca826bb45355f49cda329217ddba44592f252b2bf1f",
   "skills/idempotency-design-3/references/creation/p1.md": "34ca768d546f132424c53215f33d697a8300330f9d97c821ab28f479a7bc1fef",
   "skills/idempotency-design-3/references/environment/p0.md": "4537cbe19b68324634046798bcf686eb8feb4e5c774abcba0b0802c81579dddc",
@@ -66,7 +66,7 @@
   "skills/idempotency-design-3/references/production/p1.md": "9d2bc5051cc6c0b40528bd6c41c3f5a2f07a7470aa057315349d71e4625daff7",
   "skills/idempotency-design-3/scripts/main.py": "2e99a72ab2d673a48061386fb7165be63c23576e62686f8c2ae29e612d3bb67d"
  },
- "sealed_at": "2026-10-18T20:00:59",
+ "sealed_at": "2026-10-18T20:59:37",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

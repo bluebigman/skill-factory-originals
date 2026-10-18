@@ -1,0 +1,72 @@
+{
+ "name": "cold-hot-separation-3",
+ "version": "2.0.0",
+ "domain": "冷热数据分离",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "按访问频次",
+   "then": "按访问频率分层",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "归档可查",
+   "then": "归档后仍可检索",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "透明访问",
+   "then": "对上层透明",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "成本核算",
+   "then": "核算分层收益",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "迁移安全",
+   "then": "迁移过程不丢数据",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "按访问频次",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归档可查",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "透明访问",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "成本核算",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "迁移安全",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

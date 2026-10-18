@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "api-latency-pro",
- "merkle_root": "24b714eb67dd4c0c27fc3ee007d2aa4c1fd60b3c72d32c6efee155188ae9b9de",
+ "merkle_root": "03a18af51745bcd4970953682ddce041f7f26cfbf66cdfb3c4e94f813c6b25f5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/api-latency-pro-1/run.py": "a40c65a6b1ab810a1f1225b37d8bf2cc7964127550ea2ddd654b59af969c112a",
   "skills/api-latency-pro-1/selftest.py": "5f8bc719f4b8b04b1f34a8683c38276323e0411bf2d8868520c70f60acf966fd",
   "skills/api-latency-pro-1/.phoenix/originality.json": "a9850177c89fa0600c1d5e1c0a5b21bac3a3a0b11b6a355de03583151fcd2797",
-  "skills/api-latency-pro-1/.phoenix/provenance.json": "84e0e89fd00b506404f909f0f2f4af3822abe15d6e9d93a3878680de5ab1160f",
-  "skills/api-latency-pro-1/.phoenix/selftest_evidence.json": "6102dafc0f19a9f3581b92ee4f06a5ede05cfb4414962ffd024243597b6f427f",
+  "skills/api-latency-pro-1/.phoenix/provenance.json": "865a16d4d5c863c2a0df71c1b65777a58d95bc5f05a8523bd42230924fa83def",
+  "skills/api-latency-pro-1/.phoenix/selftest_evidence.json": "ef727161d81a01d9e7245a3260cf0205f7bb23c7cb0d6fa70451e0c3d2ffed99",
   "skills/api-latency-pro-1/references/creation/p0.md": "be46a6c57ca268c9eeb25d8664c416da13a6b3e3f190470f05203bfb314de9a7",
   "skills/api-latency-pro-1/references/creation/p1.md": "14412affaedad266480e6e99e9e2a9515d2be16302f1014871f20ff203e262a4",
   "skills/api-latency-pro-1/references/environment/p0.md": "019871e02325ef56dff007fe5477b2fe6ed12f59af8ac4796a2d5611e9e41c65",
@@ -37,8 +37,8 @@
   "skills/api-latency-pro-2/run.py": "2da6c94f34ef2b64d2d3b7005259fcbaea1a2215561af0c5e52ad5b0e02a094e",
   "skills/api-latency-pro-2/selftest.py": "2d7d4998000816631124d506496fdbe09e2158e86697f769dfdfd056eb9cdf96",
   "skills/api-latency-pro-2/.phoenix/originality.json": "f2ece5e89da623f072b5cbed5bf0e3316f0f1a41e31377d0f8065a407fb1a743",
-  "skills/api-latency-pro-2/.phoenix/provenance.json": "70598f6d6a76d4755a17d14951aea61723ef5691b864403c07f8309707f45799",
-  "skills/api-latency-pro-2/.phoenix/selftest_evidence.json": "f9204325acb6559b1486ebd43c81fcebf06a239380bf434a9f674a4b8d67c5bf",
+  "skills/api-latency-pro-2/.phoenix/provenance.json": "b4a35c21eed4ff45c618ebf5266a20d72c7f4f653e4a5f77613bb892d2bd369a",
+  "skills/api-latency-pro-2/.phoenix/selftest_evidence.json": "3fb5851995268cb16a746d3aed492579fa5cc422c2dad73e727730dedbdf13d0",
   "skills/api-latency-pro-2/references/creation/p0.md": "4e23a096a5de57e9fb16c2b194e1ceef4816eb0670d09963006995205c80de68",
   "skills/api-latency-pro-2/references/creation/p1.md": "a4018d672a30dfe0c4b11e33bf93db3bdf8528ef54b1113c88a85693e8b81c15",
   "skills/api-latency-pro-2/references/environment/p0.md": "886488007a14280dbfa8a2d1420ff1f0e6fdc410a10a6cc028ee16fcede6634d",
@@ -54,8 +54,8 @@
   "skills/api-latency-pro-3/run.py": "54d28945fd1173ee59e93e92f0c9d7393666f802bf8f8c9753c0ef949ce70ea8",
   "skills/api-latency-pro-3/selftest.py": "ad089fc23d362c1a6e53c7afecc0529664b0f6974619d4e1453cb598a4c4aa62",
   "skills/api-latency-pro-3/.phoenix/originality.json": "8004db0881ec053e3a2f33ef2865e7ff6a0cf5fb633cb789a89df507789ffd6d",
-  "skills/api-latency-pro-3/.phoenix/provenance.json": "60952abb6e6a90b58762b6e3a1fecc4b1f3639d06187b3dc541474e7060123a8",
-  "skills/api-latency-pro-3/.phoenix/selftest_evidence.json": "f3629307f2ca73e79c76a27d653f57e30cb3a39d041b485f6b85ab8a5d3da4b2",
+  "skills/api-latency-pro-3/.phoenix/provenance.json": "98458b8009f807bb8bc16ee18395d4778b6d4b653abac243dbdc78b28d144a21",
+  "skills/api-latency-pro-3/.phoenix/selftest_evidence.json": "e05cd319190395d6f9d72bba09d01889691da365489753315c4168fe4d84ece8",
   "skills/api-latency-pro-3/references/creation/p0.md": "04e5114c5ff33d9f883955bf04ad00b270a19c4a5bc043a8ccbdde993975fd14",
   "skills/api-latency-pro-3/references/creation/p1.md": "d2d7ac721a82fff694ba6ea7f525cb51b5575b41d8b915b8120147c3956966a0",
   "skills/api-latency-pro-3/references/environment/p0.md": "eab5980737e87be57f3fae4bf878307aa084a47e54d56b0bb157aa9d53d47a71",
@@ -66,7 +66,7 @@
   "skills/api-latency-pro-3/references/production/p1.md": "7b6ba19992a419a472c29717d5ab8fabb27bf8274386c735b2788139700fb349",
   "skills/api-latency-pro-3/scripts/main.py": "f90c4a86b31e7c39f41cce5b6fdb25ede24b190f8e1755c17888b3d5f612cc4e"
  },
- "sealed_at": "2026-10-18T19:52:37",
+ "sealed_at": "2026-10-18T20:54:58",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

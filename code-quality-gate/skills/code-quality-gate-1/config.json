@@ -1,0 +1,72 @@
+{
+ "name": "code-quality-gate-1",
+ "version": "2.0.0",
+ "domain": "代码质量门禁",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "门禁前置",
+   "then": "提交前跑门禁",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "规则分层",
+   "then": "阻塞项与提示项分开",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "存量与新增分开",
+   "then": "存量不计入新增门禁",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "误报标记",
+   "then": "误报可标记并说明",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "门槛清晰",
+   "then": "写清通过标准",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "门禁前置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "规则分层",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "存量与新增分开",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "误报标记",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "门槛清晰",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

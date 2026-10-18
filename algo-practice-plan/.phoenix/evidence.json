@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "algo-practice-plan",
- "merkle_root": "b562c56a657a36dd030f33602089664a87ecba2805b66e39595534055d3ca604",
+ "merkle_root": "ec9cd94e614654862a3ba62c6b8175f7024feda42319b8d834f9339bfb93da21",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/algo-practice-plan-1/run.py": "5f1093fcd6578c46817037b75991b1be292a29f40576a265da6ef4cd15ae0e02",
   "skills/algo-practice-plan-1/selftest.py": "2292679127fd5f4f7cf2e5b7e22297ae7a7463f1b0feed9288100e53c84e19d1",
   "skills/algo-practice-plan-1/.phoenix/originality.json": "c8af296a02da0dc4ee92865f33e93dc6bfae15468b4caab61c879b978bf76aac",
-  "skills/algo-practice-plan-1/.phoenix/provenance.json": "23ba9699b8e83f105dccc0b6de5e82a27409a3e7f3ea81b68a8d947b0d59adc8",
-  "skills/algo-practice-plan-1/.phoenix/selftest_evidence.json": "be7af2d6da6d3cebe2e153fba47554c5217bf0a1d84ff3d4eed2b9241330d724",
+  "skills/algo-practice-plan-1/.phoenix/provenance.json": "47a44acd791c7841606460c97ca3baeb25e1df4ea754f4c3d524a35769f30325",
+  "skills/algo-practice-plan-1/.phoenix/selftest_evidence.json": "ac35c1e64c4547f92e3341e916fbbac8ec3660248b5b7ae2440d4b00cfec2814",
   "skills/algo-practice-plan-1/references/creation/p0.md": "00bbaf86503c2e1de434664d4797824cec63ea7c57ff460f1ec7ca5f8e2f7ddf",
   "skills/algo-practice-plan-1/references/creation/p1.md": "c1e172a250060658be44c560316cc8927175eb85f347965dfda58e64789aa657",
   "skills/algo-practice-plan-1/references/environment/p0.md": "e6d289a78f399a4106e996fc2aa3822ae2c31c2c1ade2e5fee02b0058897bba5",
@@ -37,8 +37,8 @@
   "skills/algo-practice-plan-2/run.py": "ae423759d32fcd01d04f38fb29c396c27d501d9ef301b7afae60ee0f86285326",
   "skills/algo-practice-plan-2/selftest.py": "02b15816b896c78bd4fb190e888e43724b49a486b645c8dc80ebcc9e24f23859",
   "skills/algo-practice-plan-2/.phoenix/originality.json": "bd32e5c298137e122c66c511e050bd91d1967f35fc87a9358c0e880d635df4ee",
-  "skills/algo-practice-plan-2/.phoenix/provenance.json": "dd031ae88348ae39454ce71779eb97253e01a61dc9c2472eae98d3bff39ac56d",
-  "skills/algo-practice-plan-2/.phoenix/selftest_evidence.json": "daeac8e61518f31eacd6dc60680d4e36fb17f3b67c7917fe1dcc8c2524ab14d2",
+  "skills/algo-practice-plan-2/.phoenix/provenance.json": "99eb9b80e7c99f455761c843ccbb4800995c77cd8973cfbd67bee5e4c3bb45f9",
+  "skills/algo-practice-plan-2/.phoenix/selftest_evidence.json": "3e369acb4bde75f9c7eae933da2d1393946a71aa0a7001cb9437557f2a4a647b",
   "skills/algo-practice-plan-2/references/creation/p0.md": "b70b5c2c039ddbb2037ab481194eb4fae2daabe01f0a73416a89eacb3c19b0a7",
   "skills/algo-practice-plan-2/references/creation/p1.md": "987cae8b57e385f311bb91ecdca767ddd6192819bd6b4c37520ce8d743d6a869",
   "skills/algo-practice-plan-2/references/environment/p0.md": "87c822435d45c8961d9a4043823140f9d26096b8938422b71dc916af12a0d259",
@@ -54,8 +54,8 @@
   "skills/algo-practice-plan-3/run.py": "c06b8ee96641df7d1a45f87a7f22dafc472785bd9aac4ec5c0640454bebc212b",
   "skills/algo-practice-plan-3/selftest.py": "0b337d3da05020a7613cda8936810bbd015e7cfabbc75c19824282bc8bd95c54",
   "skills/algo-practice-plan-3/.phoenix/originality.json": "764e7eb976bebe602322821d417cf60b49fe79629f095573233486ab5410a239",
-  "skills/algo-practice-plan-3/.phoenix/provenance.json": "7bd8b8d664a54335caa7bcde9b450bb716e89d7ba181590b468a1c25b81cd7a2",
-  "skills/algo-practice-plan-3/.phoenix/selftest_evidence.json": "00e2faf335e78819bc5dd7b737d5cfa21c24d2b285a40eedd91d6b860fec96c5",
+  "skills/algo-practice-plan-3/.phoenix/provenance.json": "1297b713746fd47e4fb05d7ac9ce8da963ad09e89e05b05bf164756f1aa43b7c",
+  "skills/algo-practice-plan-3/.phoenix/selftest_evidence.json": "dea6b78a94848fdc5ae17ce3d6eefc518ed1dee87757c7f5c1b5fc661f3d8a12",
   "skills/algo-practice-plan-3/references/creation/p0.md": "9170e4c8f225b68cf0ff8ddc556c7a9cfe1d8e25e8e5f8d7475a822dafc7b298",
   "skills/algo-practice-plan-3/references/creation/p1.md": "10c4d1dcdc8d29c31f21e173f77cab0d26e0d8c481ee8efa00f56ef9f510076e",
   "skills/algo-practice-plan-3/references/environment/p0.md": "9cc90b51ed6daf82f76fc42225c502e14640dda72d385fd43a97ed0fc3e8ff8b",
@@ -66,7 +66,7 @@
   "skills/algo-practice-plan-3/references/production/p1.md": "171785037b031fd2e7c9eca63edff90807aa13e5c7b4f4cb52f59bc783e42a77",
   "skills/algo-practice-plan-3/scripts/main.py": "dccd0409ec7682f6efaca7ad706a514eb86e2054640fcc9e1d2730206eef3b02"
  },
- "sealed_at": "2026-10-18T19:52:31",
+ "sealed_at": "2026-10-18T20:54:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

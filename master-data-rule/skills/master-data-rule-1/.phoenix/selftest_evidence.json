@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:03:12",
+ "at": "2026-10-18T21:00:42",
  "skill": "master-data-rule-1",
  "slug": "master-data-rule",
  "passed": true,

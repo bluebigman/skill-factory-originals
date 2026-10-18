@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:04:41",
+ "at": "2026-10-18T21:01:29",
  "skill": "observability-inject-pro-3",
  "slug": "observability-inject-pro",
  "passed": true,

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "api-rate-limit-plan",
- "merkle_root": "c3bd34997a1417e8b41bec262919274b0242b9b78478f55ee4a9e1ee80273915",
+ "merkle_root": "cf2e12a393331ef26f84b263cc10018ba550ceebc9970525d64205802258fa95",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/api-rate-limit-plan-1/run.py": "38a7d4c60b9ac33d686909312948ddc893f79e6857f8c8ba1f559b462ce65a80",
   "skills/api-rate-limit-plan-1/selftest.py": "e4f45663815ba89ebbea524bdd915c3417889678cdf4a0c5f5e0b4af9600363b",
   "skills/api-rate-limit-plan-1/.phoenix/originality.json": "ac3cf3302af5d83e12d8f7fd099d6497cf191a3f654825e5b41103fa7a361c63",
-  "skills/api-rate-limit-plan-1/.phoenix/provenance.json": "785e2daa0a296fd85fe2a377778bd668c1a2382c4f3131faafa9fbfe851e8f8d",
-  "skills/api-rate-limit-plan-1/.phoenix/selftest_evidence.json": "6364924642c09aa0322caf5d5d4225d67d8c4e66be4937ecd7afc7b3597410df",
+  "skills/api-rate-limit-plan-1/.phoenix/provenance.json": "0b530c82d745ede2e1e8111d1e61314c1258909c2138e4e5e7aba3382a0bc236",
+  "skills/api-rate-limit-plan-1/.phoenix/selftest_evidence.json": "2cdc88ef67065c0a49d64694833d90da4d0b66107766161b8e73a8a45094c2d4",
   "skills/api-rate-limit-plan-1/references/creation/p0.md": "cd2bc21b3540a77bc407e304580dc2506e6c5164e20ef13edb84c8513fb49387",
   "skills/api-rate-limit-plan-1/references/creation/p1.md": "c4e6ed82795a7d488f59b51bf017665318016f208a0a9083f49766f16809dbb5",
   "skills/api-rate-limit-plan-1/references/environment/p0.md": "3ebfa3ae8698fc2ab90f405b01e10414e834a1c0068768bb8b0a6afde40235a4",
@@ -37,8 +37,8 @@
   "skills/api-rate-limit-plan-2/run.py": "8fc5b1cbfebfbd58373cf8c957c0e8d3d2105f9b5dd89c67fc6639ac1d545c9c",
   "skills/api-rate-limit-plan-2/selftest.py": "997eed319394903371c0986ac5f2f4831c5e5cae430c100ee5a39a509f2d916d",
   "skills/api-rate-limit-plan-2/.phoenix/originality.json": "d9699d67205944244fbed120704a3d90e4365804467a9cadecbe8f824535ae4f",
-  "skills/api-rate-limit-plan-2/.phoenix/provenance.json": "fcbb1055148bf0c6b1da515dc28aa80586bf7ed1e84e711d2c6be5dc0576c3c8",
-  "skills/api-rate-limit-plan-2/.phoenix/selftest_evidence.json": "69b1181d60d51aa1d9e9ffcb49c8a4b1da37e4d222cc7e0b75f842751e07153e",
+  "skills/api-rate-limit-plan-2/.phoenix/provenance.json": "2dde9b53f6e112276c5bc5764f477664e6c6709fea08789b873a72505ed83e45",
+  "skills/api-rate-limit-plan-2/.phoenix/selftest_evidence.json": "77dd23ea3316ce179d9a7014c8013830e49cb9d0813df4e194837f6c3e168c6f",
   "skills/api-rate-limit-plan-2/references/creation/p0.md": "b805c462dcef564a5eaf62ce67e446f90161abcf3543681905297dcb9a86a038",
   "skills/api-rate-limit-plan-2/references/creation/p1.md": "c95c6336188e8af40388793002b355006817db3bf91acb6a38da63ffb1cda714",
   "skills/api-rate-limit-plan-2/references/environment/p0.md": "35a2b1b808332a9e77eace3a2cc2be8504953e478b7c5ae445a22034235b5ca7",
@@ -54,8 +54,8 @@
   "skills/api-rate-limit-plan-3/run.py": "c80385e096770462487e8f1db3ef257fdf10665a129c325b494b3301ec150bd0",
   "skills/api-rate-limit-plan-3/selftest.py": "098df184a83b3c36b248f30d054807c9012e522ff9fb67fdee09ddd058c34a83",
   "skills/api-rate-limit-plan-3/.phoenix/originality.json": "1834b57c9b6d3ee56d599dd88760473ee6009238609ac1464b17406a8963aadc",
-  "skills/api-rate-limit-plan-3/.phoenix/provenance.json": "ab85f220f450601b9e853121974e653f2f34f4b830c8082b5aa4813dee92cbc0",
-  "skills/api-rate-limit-plan-3/.phoenix/selftest_evidence.json": "11bfa036c3c09d572eb972f9f0976b6f12e8ab6783b2a7fe6c31124b66b69435",
+  "skills/api-rate-limit-plan-3/.phoenix/provenance.json": "bbc103d3a83849881f8483b183afa26849d7f30eb7f274ef2ebd579e0524d67b",
+  "skills/api-rate-limit-plan-3/.phoenix/selftest_evidence.json": "36dc6b7653bf3c44095e61b1f6be62a4661b83e7b9367c0d92daa4762b6c451c",
   "skills/api-rate-limit-plan-3/references/creation/p0.md": "245ef864168ad70c713940a19dbf74d1dc34f0a6d2c1d6d9ca322783eee151a6",
   "skills/api-rate-limit-plan-3/references/creation/p1.md": "370a274b880fd3beedf1345adec41ebec796249f6c8869f81b65777f7020e08b",
   "skills/api-rate-limit-plan-3/references/environment/p0.md": "9262cde604b55219405d64a366ff2ab6aae9890b72c54fbcb077a0bd111b2f29",
@@ -66,7 +66,7 @@
   "skills/api-rate-limit-plan-3/references/production/p1.md": "8a5ec8f3745b11f47490db4aa3491d38cb57242a858211a9129053fae461904c",
   "skills/api-rate-limit-plan-3/scripts/main.py": "75408d9089ab6d9ea78c1896dc51d862f0e9716bfcb104e40b47fae667e9e8b3"
  },
- "sealed_at": "2026-10-18T19:52:38",
+ "sealed_at": "2026-10-18T20:54:59",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

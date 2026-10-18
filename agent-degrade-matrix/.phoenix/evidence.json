@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-degrade-matrix",
- "merkle_root": "b546df84a5c180a8c94836165c552b5a87715a962bfca694283c5f65dbce763a",
+ "merkle_root": "afa0a17810a0291b33fc1000c7149d57b3311adcc465fb49f354c7f0231072aa",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-degrade-matrix-1/run.py": "3fa6e887a7d099193168e83f358b4e00109c4a607ae20e364cabd30ce796e2d7",
   "skills/agent-degrade-matrix-1/selftest.py": "284d1b13cce76ee2c5ad6436db8d2b66efc6d9b8d9a8caeb28c2f65d1063a1ec",
   "skills/agent-degrade-matrix-1/.phoenix/originality.json": "4a2804ee88d11646a031b7f2710191478278c1a80e5f71de751a0bf71cd74fa0",
-  "skills/agent-degrade-matrix-1/.phoenix/provenance.json": "1b51e0b2f18bd0e4e8ad8b502ab18c729f3f3cc3e2d9f76d7d19c7fe5fc48afa",
-  "skills/agent-degrade-matrix-1/.phoenix/selftest_evidence.json": "a12b089689673ed4a2afa15dbc160a42059eec7cb01e0bbdc8080bdbe85d6471",
+  "skills/agent-degrade-matrix-1/.phoenix/provenance.json": "859af22af9dc5af3c3e8c45886ab935365e5027e4a4d901ba3ae23f0848787df",
+  "skills/agent-degrade-matrix-1/.phoenix/selftest_evidence.json": "535f9910e500ecb3b8878ddbda80f3ed6d93a7c969aca331fc03adb7294b72f7",
   "skills/agent-degrade-matrix-1/references/creation/p0.md": "4c9fbdf7234c25cea697d61f51144b3aeebbbb3e025a3eef85a287d789611b92",
   "skills/agent-degrade-matrix-1/references/creation/p1.md": "1a88d1ff4d3785be2cb5feed0fcce704679387a591f2373dbfe5b9d95d81137a",
   "skills/agent-degrade-matrix-1/references/environment/p0.md": "817248d1baf9db1e51b97027c80d00e925d262795cdd6fdf6188ea60139eb1e3",
@@ -37,8 +37,8 @@
   "skills/agent-degrade-matrix-2/run.py": "71498fa57bad6114259e718fc79df76cd1ef61d3107ed1a081c55424e88dcc1c",
   "skills/agent-degrade-matrix-2/selftest.py": "74d8c92b77355791875e6badd38e5a86d094fdccea7006efb369f09b45c8e357",
   "skills/agent-degrade-matrix-2/.phoenix/originality.json": "f30bcb85424a760958b49d8f6e35a316bb2b8a9387b698333013d8eef8465a96",
-  "skills/agent-degrade-matrix-2/.phoenix/provenance.json": "1c3a55963f41c83f4baf6793ae08ab50f71560f8ca9efe4b624e56d3ab25fd68",
-  "skills/agent-degrade-matrix-2/.phoenix/selftest_evidence.json": "9b02d4558c141e61ba68cc39c1078abd755615f96358854a3809f73b0fae049a",
+  "skills/agent-degrade-matrix-2/.phoenix/provenance.json": "7ef9c4bbb9a50511647216585c8b81a713ddc9150173904b5715d72a95ae52b8",
+  "skills/agent-degrade-matrix-2/.phoenix/selftest_evidence.json": "bc7af341dfd8052a77f37719f523370e17e0fb7699911ca559d420ee7a0f4ef5",
   "skills/agent-degrade-matrix-2/references/creation/p0.md": "999a3fc30a5b7166cdf0efa18aeb7c8cbd313de6d81dcbce2ccb475d3d98ce18",
   "skills/agent-degrade-matrix-2/references/creation/p1.md": "39c904d5ba0089593dd4cf0b9b9167da1eb7f03b20526d0947c4226a2645865f",
   "skills/agent-degrade-matrix-2/references/environment/p0.md": "da39007b91feff9a15443a5975ed0af812bb5333d04e0210d19ed80646bb1a28",
@@ -54,8 +54,8 @@
   "skills/agent-degrade-matrix-3/run.py": "6ba8683f28b92f12ec919d7770eaef962a378287e2f24c7984d1f97716f19e0f",
   "skills/agent-degrade-matrix-3/selftest.py": "2b060c007052ada814ee720d6b128c57c0aa2cf4bb0a61911229dd34377fa416",
   "skills/agent-degrade-matrix-3/.phoenix/originality.json": "6ca66bb20bcde512e25eeb9c9bd8f634ead869a97383f00474a4b6c2f2cb3518",
-  "skills/agent-degrade-matrix-3/.phoenix/provenance.json": "3fbd23081be71dad82ab35a53ad6bae65bf8445fc59baa883610f35f57962e58",
-  "skills/agent-degrade-matrix-3/.phoenix/selftest_evidence.json": "71cee3a09f9bf81ad11f43c28a50e3188a70ddf5f356ebdef183594a550ee474",
+  "skills/agent-degrade-matrix-3/.phoenix/provenance.json": "8922f92d07babf038b8816ed012904e79bfb7b15a25c2622f49fb987385ff332",
+  "skills/agent-degrade-matrix-3/.phoenix/selftest_evidence.json": "5b1da6b2908b87c1a3798b59a75d7eeaf2c6d52035158c011aa2297e8eb1c841",
   "skills/agent-degrade-matrix-3/references/creation/p0.md": "924ea827f898fa3f8d32754ff249267e29e528eabddf2843aa6722e56ed02190",
   "skills/agent-degrade-matrix-3/references/creation/p1.md": "2e3e823c9c000addbdc02b668c7edf4360999b44d95561058145865dcd92beb5",
   "skills/agent-degrade-matrix-3/references/environment/p0.md": "9f05e96a6a04d104fc2b5b641617cd6960ce98e60bc8632c07df00faa9366973",
@@ -66,7 +66,7 @@
   "skills/agent-degrade-matrix-3/references/production/p1.md": "bef41b28dd1b96de345c04dc1071bc4444a4dd5da8dede1a6cfd94e2d9be4554",
   "skills/agent-degrade-matrix-3/scripts/main.py": "9646baff60ae44dbc2ce47360f81a42e0a4e4f0ff48c3884ff3dca207d64fb72"
  },
- "sealed_at": "2026-10-18T19:51:53",
+ "sealed_at": "2026-10-18T20:54:31",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

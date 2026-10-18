@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "meta-management",
- "merkle_root": "4d0ab681fd74bc2615acfc906b0f8986fa021835a2ab3aa9d04177ee94c0e7d2",
+ "merkle_root": "6dd0abb88145ed88975e9c65a669c495b13bf7ce2f951fbb1aeaa971fea9eca1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/meta-management-1/run.py": "7d39f5242ed561c787ae18d396bc5ae937046bd1f03a174469327476627cbb08",
   "skills/meta-management-1/selftest.py": "b60d3eab32ebc9aa7222d68eca7e3472a29778cd9c1a48e6b004f9c0b35a7c06",
   "skills/meta-management-1/.phoenix/originality.json": "5a53e62c3b0807e3cbec2602407aaa49afe91892418479c82ddc3b6eedaa47f4",
-  "skills/meta-management-1/.phoenix/provenance.json": "005f27c3f2e8b8d7d14cfd865e55d9d1ad266c1c77358ba705dc7e05235d75c2",
-  "skills/meta-management-1/.phoenix/selftest_evidence.json": "7892bd373277ecbf8edccfb8f50516fbe1494e699ca32f32d1b8536ffd682ba1",
+  "skills/meta-management-1/.phoenix/provenance.json": "072ea770a5701692e40fb667a2e8d78163f1e7f39637624311864da385e47966",
+  "skills/meta-management-1/.phoenix/selftest_evidence.json": "135547d3ce23ed2ead06ff2c348349ae2795c2f4297339169e869ea2ec2454cd",
   "skills/meta-management-1/references/creation/p0.md": "314ff70ba15031f129d73b0271c644f00daa2e56a2c6859260f84993f6f2dd71",
   "skills/meta-management-1/references/creation/p1.md": "04e69b968ca14eddcc6fec4f868f267f5dbfe733db9f412cc821b49e216c0ec1",
   "skills/meta-management-1/references/environment/p0.md": "2ea1f19a42d4777086d4d302aa7e40a00e9797eb0a31e29809d5ae847296010c",
@@ -37,8 +37,8 @@
   "skills/meta-management-2/run.py": "d74b34fdeacd93860a4f750444c85b7abccd9bb5c28d4c49b0578f1cf23d8940",
   "skills/meta-management-2/selftest.py": "be9a9941bdf5efd48450d4789b34f52c90a050fc2101297d3ca2c8566ede2602",
   "skills/meta-management-2/.phoenix/originality.json": "383d99161ee0ac767d01e436194549979fec3963452d530f70f2c0a0a2a026a3",
-  "skills/meta-management-2/.phoenix/provenance.json": "3eab60a8add3478508eea8bdc3a62dc0b899fdbc8bb45b1037ea9584294dbbd9",
-  "skills/meta-management-2/.phoenix/selftest_evidence.json": "9d95708fb28c5bc92b7c273508c39d776738ef1190f4c9d933aedf3ec6c61782",
+  "skills/meta-management-2/.phoenix/provenance.json": "78c25e2e1397d4865c473459cc59e23a53e1ddee71307678b6ba125d55af5002",
+  "skills/meta-management-2/.phoenix/selftest_evidence.json": "e00f7084fee3beabaf021c0e51da59644fac8729d43ab5e24792f3a834cdb846",
   "skills/meta-management-2/references/creation/p0.md": "ac2708df596e8ebc564d3acdf22615c4e9b8c2d2f84d8b5d866600d01d05e800",
   "skills/meta-management-2/references/creation/p1.md": "07c6f398fb5f28d898010bc12298aec5fab7d165352a3bb9c0f15258bc254071",
   "skills/meta-management-2/references/environment/p0.md": "b59a06f7ab9d87d2d7a4e18b3aabb2df0993abf6963c68c227c49d7729ff0875",
@@ -54,8 +54,8 @@
   "skills/meta-management-3/run.py": "a6d043b872d1504d0cd6af1691cf59ff12ed00ee80bd907f3115e92301b29eec",
   "skills/meta-management-3/selftest.py": "040778083425ed204984e1a8a2101839bc702a35543236dac72f04d847f7764a",
   "skills/meta-management-3/.phoenix/originality.json": "76bdf970dcfe33b9f0fdcce25a365b01e1cca34859ba0ab42796a43211184971",
-  "skills/meta-management-3/.phoenix/provenance.json": "d6cdc7a2276ae57220f9a80a2c2ea2f30e1de99bf213676485f6649aabac54c1",
-  "skills/meta-management-3/.phoenix/selftest_evidence.json": "222ad80489ed5ec3020d3bd03f5821185f3ddb0050d508f526197518f614720d",
+  "skills/meta-management-3/.phoenix/provenance.json": "c1ad5a84fc817163c8c8917bb960b73ef80a8838238a825d04927b4e7acddf83",
+  "skills/meta-management-3/.phoenix/selftest_evidence.json": "40dc6c1e5e57d2756578a3fa160c7eda901ba68c29f6c142e9bd6a3c0c297e5e",
   "skills/meta-management-3/references/creation/p0.md": "7810b130ab7d7935d667c8d72ef695bb07bdea66326a5e76b894c29ba971bb54",
   "skills/meta-management-3/references/creation/p1.md": "2090e608b3753bdf65e5322a52e88f256dbfa144b2d12403b142a8b936d4c6f6",
   "skills/meta-management-3/references/environment/p0.md": "d8acee6dd8b9d2db32cac69846267ac38c6928223276ef725a2f32f708414524",
@@ -66,7 +66,7 @@
   "skills/meta-management-3/references/production/p1.md": "421d11e5b681de9b7c5bb270140c08b3eec9a4ed2cdcffe3b14c344a4efced28",
   "skills/meta-management-3/scripts/main.py": "4c5715730f446f3a3ae12d1b9d66f9db4d113fac104c1c4dad2438e53ee12934"
  },
- "sealed_at": "2026-10-18T20:03:35",
+ "sealed_at": "2026-10-18T21:00:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

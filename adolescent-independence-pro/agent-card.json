@@ -47,7 +47,7 @@
     "遇到放权反复"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:35",
+    "at": "2026-10-18T20:53:42",
     "from": "autonomy-release",
     "to": "autonomy-release",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -71,7 +71,7 @@
     "遇到边界被试探"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:35",
+    "at": "2026-10-18T20:53:42",
     "from": "boundary-setting",
     "to": "boundary-setting",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -95,7 +95,7 @@
     "遇到道歉"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:35",
+    "at": "2026-10-18T20:53:42",
     "from": "conflict-deescalate",
     "to": "conflict-deescalate",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

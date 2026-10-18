@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "education-course-design",
- "merkle_root": "a5c0aea8b1b54440b42da82d3bd52a0de28b82531bbb15adcecee4cc3f6dd415",
+ "merkle_root": "4232504a6c4bdc40d464ac07d31e3e17d931c7fe7a6a0b5a6cf7eade9395a7b8",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/education-course-design-1/run.py": "98877bae938042684d5a953e87b102492e2eb520a02d7fc636f64e8545c7c3ef",
   "skills/education-course-design-1/selftest.py": "9df4ac7079ffcfd735176c1e7de3e565b0e47fa5f690c90808677ad02300fc5a",
   "skills/education-course-design-1/.phoenix/originality.json": "f0f71901a86d8781bd6feab43343bc8be6433e128c8cc4cd4df3c2ddf33a9c24",
-  "skills/education-course-design-1/.phoenix/provenance.json": "46eb48964edd37ae9f203b831672e27d57f225dbf141b2fc97aa2e5c87a4ff31",
-  "skills/education-course-design-1/.phoenix/selftest_evidence.json": "baf109b2d107f14752ac8f9070eb3ab4fbe31781d7afce456a70f5555ef82512",
+  "skills/education-course-design-1/.phoenix/provenance.json": "a8f04b0509bfe3829dcd5b48c3808b2e75505dbec07b7d9126acb9f2aef069ea",
+  "skills/education-course-design-1/.phoenix/selftest_evidence.json": "b02e5c32178865361f689ce4164d630b26a7370e1f0ed681f4a7602c67f8abf3",
   "skills/education-course-design-1/references/creation/p0.md": "332a1efc6ca3205728510e40eec0647814a19d2421c2b3e054747531ed1622f7",
   "skills/education-course-design-1/references/creation/p1.md": "4468c9593284fac24463d1f505aafb2693ce93f623268e93eea8133cdd45023a",
   "skills/education-course-design-1/references/environment/p0.md": "bb2b7eb48c5e297d5b1fb74e0d18ea81bf0c3a10a7b5c1927cce99bebe728b68",
@@ -37,8 +37,8 @@
   "skills/education-course-design-2/run.py": "a3d82239bf1c03139254d128146107c13ae4dc42e0a30c37d642a3d91f2eefaf",
   "skills/education-course-design-2/selftest.py": "82d3800ad6a5fbb5cce7adfb9902d869750d89c47b98a8395abb9e005c9f311d",
   "skills/education-course-design-2/.phoenix/originality.json": "b3d6e39c221473338da470b6eb153558f9b2a6cd0794df3a3fd6c0a30cbb3335",
-  "skills/education-course-design-2/.phoenix/provenance.json": "db8d1248dc42ea10603c1faf5f326fb079a36618a0172558c05d610b10c62304",
-  "skills/education-course-design-2/.phoenix/selftest_evidence.json": "883b76727a5ec639fe11e18bf6b229d60406cd34ac44be75f00b4d4231bab8a2",
+  "skills/education-course-design-2/.phoenix/provenance.json": "69ebb3ad6f73eb5673f2f57c15d322586e87d98001d34c545af815af0027ee33",
+  "skills/education-course-design-2/.phoenix/selftest_evidence.json": "2309ecaaf0ed2cb1dda607a92c9e2943b16921aaa2b718251f8979c6662ad7a9",
   "skills/education-course-design-2/references/creation/p0.md": "681e57b3338c4686cbc07b3ebf21b361ef3cf7afd7c59527431530d7ae2e5779",
   "skills/education-course-design-2/references/creation/p1.md": "5ea724c7de22a174de4e9884dea15422df8a7c2968fa8bb7c808586620f11600",
   "skills/education-course-design-2/references/environment/p0.md": "e54c2ce784b88c5fdb6cc151ff801773036caba411ba463c57b26da976888297",
@@ -54,8 +54,8 @@
   "skills/education-course-design-3/run.py": "615f4208d7bd053a5c181fdc12461c071a1935edcaf8a43f61a258bb5cf9562d",
   "skills/education-course-design-3/selftest.py": "2dd6a821e560b23a45f4dd788ecb4167526797b9294dd84dc9ccb9736b8609da",
   "skills/education-course-design-3/.phoenix/originality.json": "a826bada117de9494a2cef63a24783a08536bbba617efcc516cb6ee2cf60dccb",
-  "skills/education-course-design-3/.phoenix/provenance.json": "451b2f809927fc8a86558f314faf38c13ea81aaa7b82e9eece2949f35fe00707",
-  "skills/education-course-design-3/.phoenix/selftest_evidence.json": "d032c3f08056306bbeb234e189ababbd09adcf5dd9d21689c89a23cae077957d",
+  "skills/education-course-design-3/.phoenix/provenance.json": "2a0c4ddbf3708f127511ea650bb0be54ecea223de1ae9eb0a3a37a79779a90ba",
+  "skills/education-course-design-3/.phoenix/selftest_evidence.json": "2872bb57aefed9e2573902b7feec95972100fd0e77cb74eeb9323a0d696c301b",
   "skills/education-course-design-3/references/creation/p0.md": "5fdb47ea7fa29b36bbc7dc59661c3eb753d31f4d77478fa3d97dd72f555d61cf",
   "skills/education-course-design-3/references/creation/p1.md": "df53198c3944ec081637ec8fa20b4800c0fbdaa2b1491aa8270c9fd5c665221a",
   "skills/education-course-design-3/references/environment/p0.md": "fa7f5c36f6cae96db7d601c8a62c2f3112f1c5cca7f7d58ca5bf2a998b563fc7",
@@ -66,7 +66,7 @@
   "skills/education-course-design-3/references/production/p1.md": "6404e04c12f37a59799e501a4fbf83ec953094218acd4e82f27e4bbfa26f66ca",
   "skills/education-course-design-3/scripts/main.py": "366df248494c2c01667bb3ca3f1eabda3ec7a662936eaf26403238a123d596e1"
  },
- "sealed_at": "2026-10-18T19:58:07",
+ "sealed_at": "2026-10-18T20:58:06",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

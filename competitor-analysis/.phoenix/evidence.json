@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "competitor-analysis",
- "merkle_root": "d89d85d1fd576d2171c51ce5116371099c5a26b31598baba39cdf05f8cbec927",
+ "merkle_root": "910fa014c90b7dce7fa3cf1b8e811a0ece579f427144c474209c6e989bf74511",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/competitor-analysis-1/run.py": "dbdefab2c4b08cba4b354b8ee91e240e06bc33b7e4f508dc57285895f359c1e3",
   "skills/competitor-analysis-1/selftest.py": "ad885ed522b928e1ea24716a014d5ddbc5d0d967e8dbd2050d617eb0f7336765",
   "skills/competitor-analysis-1/.phoenix/originality.json": "bb0ef990904e2b65ebf7e2e135c8efef4a0fdfe56ef8608f8b93431e12131732",
-  "skills/competitor-analysis-1/.phoenix/provenance.json": "80e3820bccf198955c156d3e7d3f9961dff8db6135d1cf4147eb03243a11a8e1",
-  "skills/competitor-analysis-1/.phoenix/selftest_evidence.json": "6b206d1be4feccc656a7cf878c6b32fedcf97202cfbe79797299141a42ad9906",
+  "skills/competitor-analysis-1/.phoenix/provenance.json": "ca67b91a81fa1f394b2f06a2bb8dac315937babef7d677a42a1af5695a9b66b9",
+  "skills/competitor-analysis-1/.phoenix/selftest_evidence.json": "920995edb49a87d7f47df233797ac0374775a7639dee3185bcf1cafc9be371fc",
   "skills/competitor-analysis-1/references/creation/p0.md": "61e3569f0fb2dbca352cd8d5c86a111923b894025488610f2cef3f6532aa9457",
   "skills/competitor-analysis-1/references/creation/p1.md": "a5d6086a42224b705f6df9955a20d419e6c5809379d976e978a34ba09f671927",
   "skills/competitor-analysis-1/references/environment/p0.md": "4109a256a29c340db6e8dc85dbf81f2eff69035ae999228318d5fa12aae946db",
@@ -37,8 +37,8 @@
   "skills/competitor-analysis-2/run.py": "e8def8fe4cbff49c635d039983bfdaa2715a5b121aa43c8f26895060d0dd0a8d",
   "skills/competitor-analysis-2/selftest.py": "7d1888c37176073a428377f807e1bb0ccee006b5549241c21475b4e9d374017c",
   "skills/competitor-analysis-2/.phoenix/originality.json": "b766ad288b924f66d069e33a47bbaff2e8a1520aca8efb69dfa21e4d61f5f765",
-  "skills/competitor-analysis-2/.phoenix/provenance.json": "0c8bc52511e1b3e059914e3ca4b7e423d7238e1045cda318efe0415815b2b1af",
-  "skills/competitor-analysis-2/.phoenix/selftest_evidence.json": "4c7f5e940a644fddf22d370fed5b11ecc49484f11fe393ca76dee5af1ba1bf42",
+  "skills/competitor-analysis-2/.phoenix/provenance.json": "c754fb29fe36920d5506517d0e79d7ee2baa9e37fec8fdebad8774eba9793499",
+  "skills/competitor-analysis-2/.phoenix/selftest_evidence.json": "7834a47ea33d9328fc44f7d04b66646cf129ba300c143cc8bfa7641d37ea45e5",
   "skills/competitor-analysis-2/references/creation/p0.md": "334c1b3e495440f53ae5b340100b2d712c9dfaf73490bc042e95d25512ec484a",
   "skills/competitor-analysis-2/references/creation/p1.md": "55eb84afefceff3e7a14e8df07e2cdc6d19905e2f187029b8c57c15826b6d4a4",
   "skills/competitor-analysis-2/references/environment/p0.md": "a852ec7d3fd1eb768b8cdb318667a6bd64dcba0d6a518702002694de76274d93",
@@ -54,8 +54,8 @@
   "skills/competitor-analysis-3/run.py": "6ba9b421520e37a3685197b3b5a541f01a3f7fd3c9268429c3fd83ed392930b4",
   "skills/competitor-analysis-3/selftest.py": "1c747c3d25953535a791324a1ac8f9c007e5b0da431d928eed4cc1118fe15263",
   "skills/competitor-analysis-3/.phoenix/originality.json": "a40840d2cc3a0f3a4cb90857cf2252624f11ea672352d1faf494c8b1b576980d",
-  "skills/competitor-analysis-3/.phoenix/provenance.json": "c64acd9905ca3818ca9933c89690cf247d3a62f4c8267f7aff53d86c9eb2040f",
-  "skills/competitor-analysis-3/.phoenix/selftest_evidence.json": "935be794d4be149f79404748093846a40366c6ee46ee867f4c41c34fa413baa0",
+  "skills/competitor-analysis-3/.phoenix/provenance.json": "67db8a77e5ce4bc713e6f05c2cae43f13b8967074f5326ec2cd5a0376582090b",
+  "skills/competitor-analysis-3/.phoenix/selftest_evidence.json": "727f7f536d8733a4bddf03c69f944f785c00a8dff0a8186df621850fe586ffaa",
   "skills/competitor-analysis-3/references/creation/p0.md": "a66099d3ff60c763ddc9af2aef5a6250261ac0de8eebd821cbdd687f50861cca",
   "skills/competitor-analysis-3/references/creation/p1.md": "634a4d476a4c65c90cfd209efae00b3e722b185844a19e02fcf5590b9c82c7fb",
   "skills/competitor-analysis-3/references/environment/p0.md": "554e7e1c1bb5d98f1f294299f0887d76ba73cc471fcef95d39656d15a32594f3",
@@ -66,7 +66,7 @@
   "skills/competitor-analysis-3/references/production/p1.md": "425ea94d09b4faa1c341ac49d665d458a85cace444676e00b84d2d407ba30272",
   "skills/competitor-analysis-3/scripts/main.py": "e7f12d06bc437a452071fd84272efc4ce51a31ce71bbd43eba81ceaaaf55685a"
  },
- "sealed_at": "2026-10-18T19:53:54",
+ "sealed_at": "2026-10-18T20:55:46",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

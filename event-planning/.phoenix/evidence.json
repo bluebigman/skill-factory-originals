@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "event-planning",
- "merkle_root": "cfacab928a3e4d95805188911f74460e3a953c890c3356f5b41101ec6c6fe4b7",
+ "merkle_root": "9bf6ed8e5ece133f8b1d8c07edb5c509caae8e11e4c0e6983b0f64fd8990bfbd",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/event-planning-1/run.py": "948f494edfda265e6d8b7437781cfa2405ce29790b9d7273f9c9565536679bc5",
   "skills/event-planning-1/selftest.py": "ced94a77317fa88693d813b13705ceba1ceb89dbeecec2dfa4efb7cd97e91548",
   "skills/event-planning-1/.phoenix/originality.json": "4211838e5bce3b6d430676fa3283de7392d14a1985af51631d1b8b599cc7b954",
-  "skills/event-planning-1/.phoenix/provenance.json": "5f480551f94a84dc061f41fd07021fed2c36cdcbe8fee95a2534edabf9102ec6",
-  "skills/event-planning-1/.phoenix/selftest_evidence.json": "419b2b620e8db1dc78674444793fb5933c6da36a1c2f66fed4c074be52dd4f25",
+  "skills/event-planning-1/.phoenix/provenance.json": "abed4ce4df596661fd10c2c704e47ee9152e82c22dd856a14211735474517002",
+  "skills/event-planning-1/.phoenix/selftest_evidence.json": "13c3316b03338460617002bc3582dd1a759c1a3631ed9176c1b9167c0ef2faf3",
   "skills/event-planning-1/references/creation/p0.md": "e1f4f28d7843057e6136910f4451ef454a36a1a5e2802537dedbb5b6ef74ff87",
   "skills/event-planning-1/references/creation/p1.md": "2935d3f65eae0e070ad0e6e3b3fca26bdf6e52eb56dea6aea463f08129a36224",
   "skills/event-planning-1/references/environment/p0.md": "bea64813ee3b696513b94875652cbcaf4b62b29f49d01a4dae98d98c83d781fa",
@@ -37,8 +37,8 @@
   "skills/event-planning-2/run.py": "d51cfcf167972a081be2105f893565f72b95f023ff678403bd6dc8c413cde611",
   "skills/event-planning-2/selftest.py": "7f93b899cf28c77558641eb88ed6c899f96876029666b05c040d54188d245cfe",
   "skills/event-planning-2/.phoenix/originality.json": "5cde37df221f7d3edc504471b5644bf6faf7581d3a78470f3f65acf86bc9ffcc",
-  "skills/event-planning-2/.phoenix/provenance.json": "d578cde1f6d38c9c69242c9e830029c523501c769375cbe9e15e065d4a73e7e9",
-  "skills/event-planning-2/.phoenix/selftest_evidence.json": "05e45b59cdf09d96e56d7c8fd1d9328e694feb6c26da9ef09f0bfd64db577d17",
+  "skills/event-planning-2/.phoenix/provenance.json": "adfafbdc5b326f1144bf6feb24595de6998fe8a1d0449ae62558d3cf00ee1876",
+  "skills/event-planning-2/.phoenix/selftest_evidence.json": "f53fa280e1b6ce5abcd9edf4acbf35623672079627cdb7f3a5c7f5a189fd51d6",
   "skills/event-planning-2/references/creation/p0.md": "14b44603d11881f99762d4c6d196ff14b26cc453f4c0b463db74abd9305f5be8",
   "skills/event-planning-2/references/creation/p1.md": "3da466ba314d9e5d51f2dc8701be4a9c269cdb5a77e31caddcde92bcac01d286",
   "skills/event-planning-2/references/environment/p0.md": "34edc75c213645c121eb8a46a239df297ede36b1be51c10ef27c8c2073685cb5",
@@ -54,8 +54,8 @@
   "skills/event-planning-3/run.py": "1f47ca776d89e08e2203edacde07defa9fe6fffeada92cb43b29bfdd5fb98201",
   "skills/event-planning-3/selftest.py": "818915da7c1463199c41b9c3342a08a6179571ccddfec40ead47883c2781ba55",
   "skills/event-planning-3/.phoenix/originality.json": "0dcf0cc2294b0bc4ec2897b515499720eedc954d64c57f5ce7ed03f803b24bd7",
-  "skills/event-planning-3/.phoenix/provenance.json": "04c289e6fabd355edd31f9c17ef4e0895fb2e3e25d051bbfc55999bc6c3575df",
-  "skills/event-planning-3/.phoenix/selftest_evidence.json": "3674a3816e70a386d48275fdeb76aa32bd37bdc6699b6bce5cfaed9626648b90",
+  "skills/event-planning-3/.phoenix/provenance.json": "d6db668d35cef1f7dc5c63ec951cbf2df70546644e790baeb9d67a16c433b1b7",
+  "skills/event-planning-3/.phoenix/selftest_evidence.json": "b7bb54f1485095563fa84042da2081a4ec91372a35648ebf80a028280c8043f4",
   "skills/event-planning-3/references/creation/p0.md": "746a7e0c0d85c0f5bd1331e234fcad2ba973a57ef16fe5324c60969233354188",
   "skills/event-planning-3/references/creation/p1.md": "d633c50339870004559895428d5fcb01322387486107ac1ffd0b6fc7db9c5a6e",
   "skills/event-planning-3/references/environment/p0.md": "a3138c76f13ebe6a80aed7dc1b6a2da656b553651c5beb5b5f2e220a38df24c1",
@@ -66,7 +66,7 @@
   "skills/event-planning-3/references/production/p1.md": "8b12ac362d2611d1e566816e97e9cbc40ddd37243948ef045f7fa7a57fea5665",
   "skills/event-planning-3/scripts/main.py": "64d84fb37ea984e71cd3740d3ecac8011db59203f912cae2c0f6a8a203940e65"
  },
- "sealed_at": "2026-10-18T19:58:35",
+ "sealed_at": "2026-10-18T20:58:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "popular-science-write",
- "merkle_root": "c1f735f6ed347fb94cc1dfdd37194f5a6224331c372240d76a6dac8d01b95ee8",
+ "merkle_root": "f4f4e0884a6d877eafc2a897cb6c39a72f09944ab76fda635ad5969490754611",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/popular-science-write-1/run.py": "c8d3bdabfc95a202d1c081bdf8a3dbdfd8f0b1055d2a84fc918df9244d4371f0",
   "skills/popular-science-write-1/selftest.py": "b5e6a472dbf3c41f4769d404e4dd5ff5aaf19442bc63a01fbdd54cb032c8934b",
   "skills/popular-science-write-1/.phoenix/originality.json": "3ab2c5fcb6c944f30607c1733a3389d39b9cfdffdd9e962f1ba429586ef92147",
-  "skills/popular-science-write-1/.phoenix/provenance.json": "d442c34e4c8bea01a558e90930c83f3d0d8421b0e1ccff847e05971744bb37d3",
-  "skills/popular-science-write-1/.phoenix/selftest_evidence.json": "00842665127155882c83c32afef260312d0b8a1d83ee3eccf70e829f09856a6c",
+  "skills/popular-science-write-1/.phoenix/provenance.json": "ca7d16edaae848379363f371a1c9e4e8fc1e33ad186bcb0001699347c85fb5e2",
+  "skills/popular-science-write-1/.phoenix/selftest_evidence.json": "727182a71937d2fec0b469d210ec09fa9f154cfc2daf70b55fb23d91dd2d18bb",
   "skills/popular-science-write-1/references/creation/p0.md": "87e56db3f53dd296d77fd7b55d036806fe4f12458b8c30ed6e8441ebe78a28db",
   "skills/popular-science-write-1/references/creation/p1.md": "d0ba829bb56656b75ca601f6f719759057e0c7d29cb2f22d9a9eaaa609964eb6",
   "skills/popular-science-write-1/references/environment/p0.md": "2fe5a6e1dfa96723315ed6d88f0f5db19053d1c79e75f691eb6e3dbf5bab7e54",
@@ -37,8 +37,8 @@
   "skills/popular-science-write-2/run.py": "c19ddbb2863c91cdad72be73ee641e5adebff56e7047e26d6d25e1c223a6b49a",
   "skills/popular-science-write-2/selftest.py": "304aeed73ec10fa8aed28081c275ca06dc230f6740f920b485b18eab89c8001e",
   "skills/popular-science-write-2/.phoenix/originality.json": "b1f3a5061d46a740c3dfa7bdab4102c05fb71433c06237cee50882510490e51e",
-  "skills/popular-science-write-2/.phoenix/provenance.json": "6170bddc0aba70d7bfc3d5edd10cf6daf13f63d3b64d79de92431204bcc38167",
-  "skills/popular-science-write-2/.phoenix/selftest_evidence.json": "579323921f6ab3fbeb16efd8457d2ca2c05dfe27a54fe7e7c170601533084d66",
+  "skills/popular-science-write-2/.phoenix/provenance.json": "5b91947e09e54d911ede6540244eae50bd1f546ff31eca565e67d1a0467c228d",
+  "skills/popular-science-write-2/.phoenix/selftest_evidence.json": "c4451a24bf6fff9d563a706e545e221aaef6911734bc2d6af7c5f50ac720527a",
   "skills/popular-science-write-2/references/creation/p0.md": "8993f3837ce292b6db972cf50c122892b38912469f5fa1ce453cc1d7a30a2b79",
   "skills/popular-science-write-2/references/creation/p1.md": "5b1dae39e60e28863545626e65cfdabcc8d9bf85776f6d9a16a623b054c0cffb",
   "skills/popular-science-write-2/references/environment/p0.md": "fa953667f45436f8f28977e2b66a9e86bbbc4d706af7e3472512de18a147d8a9",
@@ -54,8 +54,8 @@
   "skills/popular-science-write-3/run.py": "40b20daf1cf805833268fcad053aa96d2636123cebc5cfc961e6a1cdd7426cba",
   "skills/popular-science-write-3/selftest.py": "b6eb370571fdf0282256e765bda501f8fababa7a7c917306202535e2c507ca2e",
   "skills/popular-science-write-3/.phoenix/originality.json": "9d85d4a081aefa0a121d81b658b6a1169248083cba1256b5f66ef8eeb2120faa",
-  "skills/popular-science-write-3/.phoenix/provenance.json": "38715e6ec19008e49f5534851c41b4914f5b72ab6e6f3b9c247e45442ca2f28f",
-  "skills/popular-science-write-3/.phoenix/selftest_evidence.json": "4b2bbb18c2284256dd8d479883afd104c5eb6c3b5b294ced259b28e5cacd093a",
+  "skills/popular-science-write-3/.phoenix/provenance.json": "1c9a69560886a05a35b774979a621edd08ec1ff36501942c1f8551988c0594b9",
+  "skills/popular-science-write-3/.phoenix/selftest_evidence.json": "7a2c797091c54f58e74645e536935815e03b20f257b95297866789ec1c7f6b33",
   "skills/popular-science-write-3/references/creation/p0.md": "cbb44e7a3223b5dcd8a7ae95cda026d30eefe03fe9f422908a9c803a28e06513",
   "skills/popular-science-write-3/references/creation/p1.md": "ff543e22f1b5c0aa09b158dbe6c63eac0a289a532043a7213fc80f01eecee69b",
   "skills/popular-science-write-3/references/environment/p0.md": "0dde629589335d107abaf37c3f0361b462e5b4a372162244576720bf692447c2",
@@ -66,7 +66,7 @@
   "skills/popular-science-write-3/references/production/p1.md": "915d434af939d3ba6b0cc66fbfa5cbdd08890be094cbf5d61143908961777fe6",
   "skills/popular-science-write-3/scripts/main.py": "a1db36548c010a7d2480efeaabcf63748ecd7c74c74f850cbf70b58d590b825d"
  },
- "sealed_at": "2026-10-18T20:06:01",
+ "sealed_at": "2026-10-18T21:02:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:09:47",
+ "at": "2026-10-18T21:04:03",
  "skill": "slow-query-hunt-1",
  "slug": "slow-query-hunt",
  "passed": true,

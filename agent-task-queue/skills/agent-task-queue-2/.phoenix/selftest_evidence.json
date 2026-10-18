@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:23",
+ "at": "2026-10-18T20:54:50",
  "skill": "agent-task-queue-2",
  "slug": "agent-task-queue",
  "passed": true,

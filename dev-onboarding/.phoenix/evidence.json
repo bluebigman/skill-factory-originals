@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "dev-onboarding",
- "merkle_root": "540f694093663c2202340986c3d64be7d380407d81370aa786771d92c1ae5103",
+ "merkle_root": "c4e179acf634b3cfc72e999e393158c79de5897a04ec3b63315ecc8912ae44c6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/dev-onboarding-1/run.py": "f39d9201ebe3d1fb2c2a0d8d122db112aecae07fa7703fdcaa7ffabd9f823abe",
   "skills/dev-onboarding-1/selftest.py": "ab80384c5c274c4fa05a267f5a44e23c89dc9c5291bfe9911ef2c3ce6f380c87",
   "skills/dev-onboarding-1/.phoenix/originality.json": "34a859e5d92bce408d12199d2cdb2f01f412b3c32f3268b389f08d2e87abf0be",
-  "skills/dev-onboarding-1/.phoenix/provenance.json": "52bc483f41103eda49b7e0aba8f1e38e8d2402478fd6c733482002a208333f56",
-  "skills/dev-onboarding-1/.phoenix/selftest_evidence.json": "ff50fd18b1edc4a3867060db18ad20dbceebec3d11ab821dfab20a261857a686",
+  "skills/dev-onboarding-1/.phoenix/provenance.json": "0b4f3eef397943c3aed175de58a651ff82dac960c7e4533f6f1e39f567120ff0",
+  "skills/dev-onboarding-1/.phoenix/selftest_evidence.json": "db8125d35fb90da4bd192a957b21e9886277cf6bc0e91a0d76cd57a8c122aab8",
   "skills/dev-onboarding-1/references/creation/p0.md": "aec2f8eb98aeb0a7c2743ce7737e89067701d9ef9c79e4a4ff77d4d7c943db03",
   "skills/dev-onboarding-1/references/creation/p1.md": "8c36be3d2aa3f014eb4528abf830aa257b138ecb8433b99f3b422b4f1c287e52",
   "skills/dev-onboarding-1/references/environment/p0.md": "4f49181fc0a6098ffdb96b99862da14c3b694fd5b8dd9bd4aa7e9bc02795a608",
@@ -37,8 +37,8 @@
   "skills/dev-onboarding-2/run.py": "ead9d8235ee047b7da67ebe850a575b6a7fb7ce6b4ea826b2b4c50a19c5d7656",
   "skills/dev-onboarding-2/selftest.py": "117f27b2ddaca1902d2002a63d987cc615f78c56a0e14cdd3a2931c08b542163",
   "skills/dev-onboarding-2/.phoenix/originality.json": "f9f0600fe6534b7ceaac0115b65d5d221d3a910bb0fcdda53d1212109ab9ff15",
-  "skills/dev-onboarding-2/.phoenix/provenance.json": "40c2f1ef275788f712203fcfa5a4faee632f072bdcfd3d050e1627264e115419",
-  "skills/dev-onboarding-2/.phoenix/selftest_evidence.json": "b01df8b3e47c56d02426725e0f46fefadb23df11d43949e4e43eb62cfefb534a",
+  "skills/dev-onboarding-2/.phoenix/provenance.json": "c7ddea1612470821d60df928491ebf04f2d9ef61c973988743126f979c5148ad",
+  "skills/dev-onboarding-2/.phoenix/selftest_evidence.json": "73fbbce3015f1a114d1809e6947a1052be1790e33311cb0a1d4efa3cea7dae0b",
   "skills/dev-onboarding-2/references/creation/p0.md": "48aa80c00a14040ed5af2ba5fef7e3a45a1dc673086991f172efdeec592898a9",
   "skills/dev-onboarding-2/references/creation/p1.md": "7c05641bec4b50d49205a0544773f5e6eafdc5a34b8addbcf2fea902555c2a2f",
   "skills/dev-onboarding-2/references/environment/p0.md": "b98b701a342ac1b99595e130ee1c569d821c8af0726c5e20f3d4603f96ae0821",
@@ -54,8 +54,8 @@
   "skills/dev-onboarding-3/run.py": "b8a4011dfb446b07dbb2bbddb0a6d52c008e9c625d07232d85a5560a5d4de95e",
   "skills/dev-onboarding-3/selftest.py": "c90eb051c13271ddc1c4fb41e66a572e2bf6ebf32ebe55b14897c306a7e868e4",
   "skills/dev-onboarding-3/.phoenix/originality.json": "31447bf88767111e5646c71990d7f345b489de2102b65d03cf85ac1335ac5df8",
-  "skills/dev-onboarding-3/.phoenix/provenance.json": "45985152706f1983d9c974028ce530d7caf142362db416d1a9d4bc96bf40c23f",
-  "skills/dev-onboarding-3/.phoenix/selftest_evidence.json": "4cd1d8e74be9f9ebe41f8b402b0c56664f8e4aa3d8bd8973006255641e9e6ac2",
+  "skills/dev-onboarding-3/.phoenix/provenance.json": "14abb1cbee71e48ac8e95202fff465a627b56efe2540a8c84de4d07bcb8d9cc2",
+  "skills/dev-onboarding-3/.phoenix/selftest_evidence.json": "cd7c97aaaece2e4b02394faab38f5518a32144a8a4bd030046ca8d61c29e4449",
   "skills/dev-onboarding-3/references/creation/p0.md": "128a32606fc349d070132ab861fbdc1c645cfd6ead4ce04088f33e86add1b437",
   "skills/dev-onboarding-3/references/creation/p1.md": "dfb068aae8dbd85beca2714f55fade081b9ba55f635ddc2683ec7e8cd862d174",
   "skills/dev-onboarding-3/references/environment/p0.md": "77ed02a47ad7f68c019de511b33a8910691ae7d418f0d2f705e10a069c9977c3",
@@ -66,7 +66,7 @@
   "skills/dev-onboarding-3/references/production/p1.md": "8726316bdf624c42108a22c0a9a7e811d548b009ebcdfd32df5221f2f9ab5172",
   "skills/dev-onboarding-3/scripts/main.py": "a24bfeffd368228b4abf382a614d5c6a2de61296ce7e99e7c0a7adcaf9b219c1"
  },
- "sealed_at": "2026-10-18T19:56:28",
+ "sealed_at": "2026-10-18T20:57:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

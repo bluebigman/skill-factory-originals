@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "meeting-note-struct",
- "merkle_root": "38c9e9f46eb49f0f1edf5027bd145c49fdcfa6b4bbf10111b584fd9d2bc72f4e",
+ "merkle_root": "96f6c643620ac4b6a9367bd1f6bd24bb7b3ea9ecf1fc27e9f61bdbb625a77387",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/meeting-note-struct-1/run.py": "e816d31c4b17591a35144da3378665ef9400fedc4c94df55f27dd721c0e4ae78",
   "skills/meeting-note-struct-1/selftest.py": "6d7ff706b397f64569c26017d030522d78c81b0c51c1abff2030b1b6ba62a572",
   "skills/meeting-note-struct-1/.phoenix/originality.json": "02882c836a48f950ea18d92c135c067561e51529d1f15cf52ec43711e80849d6",
-  "skills/meeting-note-struct-1/.phoenix/provenance.json": "69b7c5d607ba40f56c14a380be44ee549afbe03364e6bfcb0f9f5a6a3f26caa9",
-  "skills/meeting-note-struct-1/.phoenix/selftest_evidence.json": "d9404dc0d0d757e75ff0d9dce89969918e2cb4a415897dc409414f06fafe2f80",
+  "skills/meeting-note-struct-1/.phoenix/provenance.json": "dabbd3f70fea87750b9d7e66a2c18bdab7500a9a36b2f6954f822bfa030e252a",
+  "skills/meeting-note-struct-1/.phoenix/selftest_evidence.json": "a881fa99b86cdd5561b0ce8674960c296cb34d43681cc8b1ddb8c9cf7c1ae6f9",
   "skills/meeting-note-struct-1/references/creation/p0.md": "05ba376989168c18ca5e89f7f1232c420570e6997b74dd02f252fb82cc41627b",
   "skills/meeting-note-struct-1/references/creation/p1.md": "65475b632717661a8688f008be1a047fe61986296a78a924fa5573ee0b65ab63",
   "skills/meeting-note-struct-1/references/environment/p0.md": "46e94786597d0942e7e836dd42080bd525de7a36b91b72907edbb223d692209c",
@@ -37,8 +37,8 @@
   "skills/meeting-note-struct-2/run.py": "b613d3056fd7c4c3a1e7de9449b908afb6eba07d2dcf0849b2d66c184e228522",
   "skills/meeting-note-struct-2/selftest.py": "1bc135903f92a720270d5ef89bd64f4fba0461cebbfdefb187a7bec0bd8e6ab1",
   "skills/meeting-note-struct-2/.phoenix/originality.json": "676fc14877ee4a0ec0855ae5ddce1a63a75723e711304c7efc422dccd905d792",
-  "skills/meeting-note-struct-2/.phoenix/provenance.json": "c35becc3ce5aa9a60d845298424ea3883fc1163ef98cc2d2ff9b305cde5f1cdc",
-  "skills/meeting-note-struct-2/.phoenix/selftest_evidence.json": "1e8efaa3cddee676fba5bd0c9345ca8bcb89b8c1f3d13993463242852e69d676",
+  "skills/meeting-note-struct-2/.phoenix/provenance.json": "21c0bc8e15021a8b0ac5acef8e1d0889c64615a6902c181c51325dc2195151b4",
+  "skills/meeting-note-struct-2/.phoenix/selftest_evidence.json": "3a2c7444a963a20b1d78d3e54cfb918b48056dd03db2604c63b939f13cba1ecd",
   "skills/meeting-note-struct-2/references/creation/p0.md": "c71d240909868c8291138f3a5f0e51b2cb38e97bf626b7ae43ec5a265d4e6b09",
   "skills/meeting-note-struct-2/references/creation/p1.md": "9f7ad000a67109a4f33e6f1c3bcb80d4de5b8ca43b3cb236492b90ed882aad13",
   "skills/meeting-note-struct-2/references/environment/p0.md": "175b1d21d7821e1fc0a4318812b8729cca1a5a7523a14f476023054fa1758ded",
@@ -54,8 +54,8 @@
   "skills/meeting-note-struct-3/run.py": "4f6b6944c70661089265399ca7c02891d741a3a856e1d326a4f7f7c978587d8a",
   "skills/meeting-note-struct-3/selftest.py": "c40a20a07efdff0c89c21e3715ba7d64613d13a288a8d54526f33718fa6150af",
   "skills/meeting-note-struct-3/.phoenix/originality.json": "de9462020144f7a8944aabe80f791e0c7756dd2dad1e772f5516b70e086b82c7",
-  "skills/meeting-note-struct-3/.phoenix/provenance.json": "54097ae29da8d3e8c1e5d2aeeebf2d84e82b266efa42bd83c0d785e2c7b6ca1b",
-  "skills/meeting-note-struct-3/.phoenix/selftest_evidence.json": "d170cf44799c44f6ab3c66df2d9f6b7babf437fb9658894a2da17694c128bcc2",
+  "skills/meeting-note-struct-3/.phoenix/provenance.json": "4db2578fe0b948de4ebde85e020669d0a89167a140b20e54285c0a6aed8439ce",
+  "skills/meeting-note-struct-3/.phoenix/selftest_evidence.json": "ddcb9a4c8efac16bb13b3706097e6be5bc5374e0b0845cfe94225e3b0e589823",
   "skills/meeting-note-struct-3/references/creation/p0.md": "9e7853fd393f98862a6dd05f74467434a3d081a06604747507143ce6ff1628c1",
   "skills/meeting-note-struct-3/references/creation/p1.md": "eee2c226211c4d34619291362a1243b9cd0aff4dd3701b73c763a4455ddfec1d",
   "skills/meeting-note-struct-3/references/environment/p0.md": "697bb05be2e089b7d225f832a49c55cb2ce5bd33e94b0af83d4676bb5448a617",
@@ -66,7 +66,7 @@
   "skills/meeting-note-struct-3/references/production/p1.md": "2ca006ecda0172a32af027377a6157adc5fbc3e8d8cb85a8d816172eab4b6315",
   "skills/meeting-note-struct-3/scripts/main.py": "240dd569544d16b2326551fde14d813714f7907bc491db09f97ba6f5a2d553cf"
  },
- "sealed_at": "2026-10-18T20:03:24",
+ "sealed_at": "2026-10-18T21:00:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

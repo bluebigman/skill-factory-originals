@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "security-baseline",
- "merkle_root": "8fc977b76dad20c9f192b57ca6b912da641355b812b2a02b95f999747e7c8273",
+ "merkle_root": "508d0af63c2617c343c4827f7dc07db8150bf25c1cdab4f873c0144325dd163e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/security-baseline-1/run.py": "2a5bfe0b23c8866b7da301b7be1f09e3f65d9a4861aeff2276fcaa15d5bb55a0",
   "skills/security-baseline-1/selftest.py": "a2c64cefdfe5ce11ba77ba47a6732c3fc301c0a51185c312a966ae688120a4e6",
   "skills/security-baseline-1/.phoenix/originality.json": "2c17502316e60871d0e08b3af984e09a25ab519730b848a7c14d322e7eecd04a",
-  "skills/security-baseline-1/.phoenix/provenance.json": "dc1fef509c918ef4c2b38550ec3f8e853713c1bf2029ef8a21ca3ecc4dfdc8c9",
-  "skills/security-baseline-1/.phoenix/selftest_evidence.json": "2c00514594ca3b1337c07d66817c2f1fa4ffa4d73d21ab77e1be3760f6e39b6f",
+  "skills/security-baseline-1/.phoenix/provenance.json": "2434961b2e77ee034afe900c34412ad8ddd8fec71202ac01b89d59945fef5bf9",
+  "skills/security-baseline-1/.phoenix/selftest_evidence.json": "d019061cee8ed030f375d3d48dcc4aed4170acb1694c4abdf0c159b4a9044947",
   "skills/security-baseline-1/references/creation/p0.md": "fb4a4a03b0a88fe994221ab2d9b2fbf15ec75fda764054a950c25a8a1c34bce8",
   "skills/security-baseline-1/references/creation/p1.md": "d1e94010ec93cd13589ac4bea172538e8227e73d0d51e878aa832cdddde667f5",
   "skills/security-baseline-1/references/environment/p0.md": "5539d66c7f5152fe7b56e1a15134d1c23693423833ce726676606f9a9175c021",
@@ -37,8 +37,8 @@
   "skills/security-baseline-2/run.py": "746e9ae293ad06bf9760f3d12a531f68104afa3e007fa4db49377ae2c1378199",
   "skills/security-baseline-2/selftest.py": "799ff1ac044a9680954604bb678432cf2794c62bc9d1784914a1d8b898756e2a",
   "skills/security-baseline-2/.phoenix/originality.json": "65de0de9b25ad895a1736ba4f1d96aebf8912a5d34dd8cf0fbf1f0f344fa950f",
-  "skills/security-baseline-2/.phoenix/provenance.json": "45da78240c27dcb7b4827f1b8ebe2485c32e73a3f2a91cf009fe246c8d379a7f",
-  "skills/security-baseline-2/.phoenix/selftest_evidence.json": "758ab25f3f4b569f67351d7f2dfc0a64e24c890183e13279eccf78ce3c4004a4",
+  "skills/security-baseline-2/.phoenix/provenance.json": "ff01eaa8ddfa14d5b95f6151afb81ad45bc756710726494688182843628eb966",
+  "skills/security-baseline-2/.phoenix/selftest_evidence.json": "1ee1c13e791487a0dcbb87ba6c307a4c81fa2e3828384961a300ee6c8e5f8c99",
   "skills/security-baseline-2/references/creation/p0.md": "bbc6663b0144ee70872e77c1a6377e458ac691fa064cea818bbc8db53c6b8456",
   "skills/security-baseline-2/references/creation/p1.md": "3d7c22cd3dada809bd0a1a34d6dbc27aec5e29602dbc65a43cf354f18320aff9",
   "skills/security-baseline-2/references/environment/p0.md": "2bb17b47b872221b3096cbc027ec89318577e00f8c214bea3f528fa8b70a6fb6",
@@ -54,8 +54,8 @@
   "skills/security-baseline-3/run.py": "488f0ae3d82de1d6a93e8facd566ab9e37e1572e2f06dcec2b729cbe1375c873",
   "skills/security-baseline-3/selftest.py": "a8b41a320a52705c02f1d3e3c5d23cc4e4119d4863dfd279c26a374426ec46c2",
   "skills/security-baseline-3/.phoenix/originality.json": "8b45ed59b78dbe8207c50454559e87efae22607404373ba86c97760213b6ecd5",
-  "skills/security-baseline-3/.phoenix/provenance.json": "8b49bf5502bd48a7b6c00d5a40d2d76b624dd0eff2f9f5768f559f9b1cf6559e",
-  "skills/security-baseline-3/.phoenix/selftest_evidence.json": "aa41741ba01d98d637e9464aa5302c1e835a2ba99210a3806df7709b5e91a45b",
+  "skills/security-baseline-3/.phoenix/provenance.json": "3948d40517a2924af29f8bea248e652e82bd5bdf14408b1761495e7ea54b3539",
+  "skills/security-baseline-3/.phoenix/selftest_evidence.json": "6d3757f809f6e349d5c68d138bde32913114343b18a92b8699dfdd7f7a5dcea5",
   "skills/security-baseline-3/references/creation/p0.md": "9dea3563888f008cc5b25970405d9a3557247a264d9d2c697240e68e04d544fb",
   "skills/security-baseline-3/references/creation/p1.md": "130b7137bc58f51bdd55e64a95a99da47f64d26fda561fc1b410ff1b7ec9ff41",
   "skills/security-baseline-3/references/environment/p0.md": "ba4775a0624dd31e126f083398482a1d1a8e443965bca55bf1d067a68ca2f4e6",
@@ -66,7 +66,7 @@
   "skills/security-baseline-3/references/production/p1.md": "913bb075065071037899159eb07305b0c7fadf9aa244b98fc9ee357232d25518",
   "skills/security-baseline-3/scripts/main.py": "b844adbeda02833106d94d002c3c549a9d0d388e449d82103c78ace271d742ae"
  },
- "sealed_at": "2026-10-18T20:08:44",
+ "sealed_at": "2026-10-18T21:03:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

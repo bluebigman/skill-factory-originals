@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "mrp-param-tune-pro",
- "merkle_root": "c526ac08c3cd95dd5c53525de5143d8e79fa669ce5f5d07e47bc4eb3d5899303",
+ "merkle_root": "f92ca7285488fcf60f260e89eeb80fa87a65e7c7b9603e7435dcfbc090dfe595",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/mrp-param-tune-pro-1/run.py": "9eb1e24320a92c92da88d1b8f30414dcc6f3ab56ee4a7ed2aba7412ef3737044",
   "skills/mrp-param-tune-pro-1/selftest.py": "879b363f86373873867fcd286507a979b5cd9395aead06f288f1b685bb7a144c",
   "skills/mrp-param-tune-pro-1/.phoenix/originality.json": "511dfbd54a56d6ab95e0b528660645d2906129411ef1399b796bb924781a3a3e",
-  "skills/mrp-param-tune-pro-1/.phoenix/provenance.json": "01a9630a017afb78942f866ae189dddd05c59e0c33fa8f2f8ba7b2a42587fbf8",
-  "skills/mrp-param-tune-pro-1/.phoenix/selftest_evidence.json": "177cb3256b85b67ecdd46fceadffa9e95e69a36240e2ff82d60daeb8a8433ffc",
+  "skills/mrp-param-tune-pro-1/.phoenix/provenance.json": "32a8e5f35249a8a7dec1e99f91935626d32c83748217c03140f082062913f943",
+  "skills/mrp-param-tune-pro-1/.phoenix/selftest_evidence.json": "457920a4c247e4a757970fdb34ff0768fa52e90e55c0fd87cbd7f69e3865f9bb",
   "skills/mrp-param-tune-pro-1/references/creation/p0.md": "e71f9585412deb9d1fd7ff3bdc70f285d0207a96496bf477cd1b806ffc8cc973",
   "skills/mrp-param-tune-pro-1/references/creation/p1.md": "80fdbd4e890a613e4469cf6f20f3136bd66e44299882fba12aec33d2e18bb0ff",
   "skills/mrp-param-tune-pro-1/references/environment/p0.md": "a93f322fbb706883578e010d8d3aeeb9791db822c857ea3547a7c6d4fa245f4f",
@@ -37,8 +37,8 @@
   "skills/mrp-param-tune-pro-2/run.py": "30cb0785137d3c6b1c4094ead6e6ac0c559929a603f43327714f2b19313f3e70",
   "skills/mrp-param-tune-pro-2/selftest.py": "8abbe2840b1c09bc4dfb40508cc4d5fb69d91275df24e0fe65ee675827aee4aa",
   "skills/mrp-param-tune-pro-2/.phoenix/originality.json": "8213f25c9ac5c509262931f513486c4e0da53c1387bce0fcb651f9938c2f2770",
-  "skills/mrp-param-tune-pro-2/.phoenix/provenance.json": "e219de6b206e6df176a630f71fd59b097094e427e844f771521a4a8e030552ea",
-  "skills/mrp-param-tune-pro-2/.phoenix/selftest_evidence.json": "191985ba8e170748ccfde6a972274995ac419d8f0cc9a917520c3f8ade4d6d61",
+  "skills/mrp-param-tune-pro-2/.phoenix/provenance.json": "635a4258a569a2ce2c4472ab58e6668592b6884c1cdf684e7c1e5d5fa583f65d",
+  "skills/mrp-param-tune-pro-2/.phoenix/selftest_evidence.json": "8f707e74a07babb2f2853e7ec2d9771ddb863c2dbd8e594c429901486a499d26",
   "skills/mrp-param-tune-pro-2/references/creation/p0.md": "848115747e007f2f622ba840a5cf5e921ceb573d947c2faf98da32ae01803122",
   "skills/mrp-param-tune-pro-2/references/creation/p1.md": "87e138929a25e6ec459ba4a0dbccf7eab173185258c1278c0c6d3a3b74a6549d",
   "skills/mrp-param-tune-pro-2/references/environment/p0.md": "b0493ae84c9b040b537d4ac94a9ebfd31b85140c6a0031eb21460ecf4261091d",
@@ -54,8 +54,8 @@
   "skills/mrp-param-tune-pro-3/run.py": "3b00dca30259c89131697b7f6253a995e7f19be3d28566811a02bfab9669a8dd",
   "skills/mrp-param-tune-pro-3/selftest.py": "7635a060311fb5ec8ac47a1a8312a01216b6284f36234672ebb8862d0e56c8e2",
   "skills/mrp-param-tune-pro-3/.phoenix/originality.json": "e33be65546d21e2e5038301e2484342582a62cfb588fbfb37d11aa80a6112b8c",
-  "skills/mrp-param-tune-pro-3/.phoenix/provenance.json": "afcf426eab4bc64ed6a14f7f4451297998e23f92a2c06a907e8e2d250ce95543",
-  "skills/mrp-param-tune-pro-3/.phoenix/selftest_evidence.json": "831b52f52395cac6ea62f414ab9f0dc545debc25d93ba3e16d2c098be67d9246",
+  "skills/mrp-param-tune-pro-3/.phoenix/provenance.json": "fff60a3970f6c79075d98d0a2b697b28902d6ec518f6b65b1a8f724444c111ce",
+  "skills/mrp-param-tune-pro-3/.phoenix/selftest_evidence.json": "4bd857a15bef63c11a0b9469025d500604c2ed11d744d611673f78314145aa72",
   "skills/mrp-param-tune-pro-3/references/creation/p0.md": "38929d5fb51be5f200abe2afa3291c9870f6ce80dfdfc0d1f70d887c545edc82",
   "skills/mrp-param-tune-pro-3/references/creation/p1.md": "0919e21c0f352dbdcf0a476cb0f5a96f5d424b64e14533e325c730b70a2da583",
   "skills/mrp-param-tune-pro-3/references/environment/p0.md": "de3974bedf2487a2625e70267303ed76b6281e4fa253976770a60112b313e3b9",
@@ -66,7 +66,7 @@
   "skills/mrp-param-tune-pro-3/references/production/p1.md": "99abe82b420cccb4b296eda7b0ad83dabfd86e238b75f70427c88685f30b35e0",
   "skills/mrp-param-tune-pro-3/scripts/main.py": "c290f12495e308b90f454cc16326ad63ee4697fc2517ebff366ac7c43dd62d27"
  },
- "sealed_at": "2026-10-18T20:04:06",
+ "sealed_at": "2026-10-18T21:01:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

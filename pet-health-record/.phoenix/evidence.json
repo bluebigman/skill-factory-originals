@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "pet-health-record",
- "merkle_root": "89170275e6347af9a36c880f34a3ab27443e94e3531a43e99990bbadd846d7c7",
+ "merkle_root": "f13bc40788e31dfbe558ac63fd3755cfb8d65d43117dd4ca00e313c0f1d68834",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/pet-health-record-1/run.py": "68818554abaf245f8a1243a05a6c4304377a6d54b8a0aa28128c7e34a2d7f22d",
   "skills/pet-health-record-1/selftest.py": "6ffccd8a72c986faa4c971822b37fb9fc2230fbbbc1a711afd9e24bff6258130",
   "skills/pet-health-record-1/.phoenix/originality.json": "33b834b5c30403966ecafe6d4a78a1dfe2fd18bb87e832455c25648f41bbbe34",
-  "skills/pet-health-record-1/.phoenix/provenance.json": "59102316af4637f00ed300055bd50edf454e635bde37cb1d124ee508c7799349",
-  "skills/pet-health-record-1/.phoenix/selftest_evidence.json": "9b7e2c396687ccbb1b47f796d3fac6d007d98b564ac57e6ff756965da9066e61",
+  "skills/pet-health-record-1/.phoenix/provenance.json": "7858b835f459779f501274edad697b7b16f6b26ef1bd0821b248f37284f033e3",
+  "skills/pet-health-record-1/.phoenix/selftest_evidence.json": "51d2f867f3f7510eeead438333f369c2c61f922358ddd3ced1ad4d62b7c775d0",
   "skills/pet-health-record-1/references/creation/p0.md": "43ab5d5e60fff1b915c243fa1ffbcf3387de21dcd077fd97d76deb245b3dbd84",
   "skills/pet-health-record-1/references/creation/p1.md": "1ed6b1a5a10933652a3497862e03b70e94711718c8ece25a54ad9a77a447bb9a",
   "skills/pet-health-record-1/references/environment/p0.md": "f5fa26c4648761a4621c109ec7632224d06326a733778fb8e76a2680064eed11",
@@ -37,8 +37,8 @@
   "skills/pet-health-record-2/run.py": "18e53d54d63aea3cb033d1e38d4711df0c41bf0e228d92725b813ad826c3ffc5",
   "skills/pet-health-record-2/selftest.py": "6ea38c865e0e2437219653c9c4392940392ebdb32413f82dcea5882f8452bfd7",
   "skills/pet-health-record-2/.phoenix/originality.json": "1f2a0dce673a943bf2d15d95907a2b1e886c1cb1797569385fd22e370d3fce65",
-  "skills/pet-health-record-2/.phoenix/provenance.json": "493b650a6355cc9ef82081015175e565ff7642cb6135f9113e7cef02cc1f8ef7",
-  "skills/pet-health-record-2/.phoenix/selftest_evidence.json": "a5aa0dfd6bc1e7c1666932655ee28b0e30479e37de6989d993b560bbca231895",
+  "skills/pet-health-record-2/.phoenix/provenance.json": "f0b68745f57c17122d5cce0afc2573fe2212485b8e8c15a2e0e24669505f8320",
+  "skills/pet-health-record-2/.phoenix/selftest_evidence.json": "43f8eecd9d688d840650e26d151e3216e206fec349a489a7551379aecaf7f8c0",
   "skills/pet-health-record-2/references/creation/p0.md": "b22fe1e4cddb0565e471e1aaec106979345ab8745aac67ef0678979377220baa",
   "skills/pet-health-record-2/references/creation/p1.md": "f5d67224f8277756d7d5372c8311e67c3d8b0926490734613f617158ab5519df",
   "skills/pet-health-record-2/references/environment/p0.md": "fe5af757d4be3d64c9889b90fb30fa31faf2111c9e406898177fc3affcc8f37e",
@@ -54,8 +54,8 @@
   "skills/pet-health-record-3/run.py": "0750ca6f9503a31c49a592140eb09bf7f5239f63ee26bf6ce92e69d0330ceca7",
   "skills/pet-health-record-3/selftest.py": "ee1a37a26498e7268d851931bd8c6f684c81b3d241c17f1030f356f678476c12",
   "skills/pet-health-record-3/.phoenix/originality.json": "cde0dad9e8566db8c00d18271fc7fb85b5835004289b0567362569e188afc6b9",
-  "skills/pet-health-record-3/.phoenix/provenance.json": "04252f68cad71eee7e366118308b423954bc1e2881c8739708715d0b4995085a",
-  "skills/pet-health-record-3/.phoenix/selftest_evidence.json": "9efd1573e8549ba8be0590089c5fc9ac066f194ec373e6994d1ffdeef111cd33",
+  "skills/pet-health-record-3/.phoenix/provenance.json": "792e5b97536cd92dd334b86e4ffd1d303102f35e511ee18c721aa2b9b140576d",
+  "skills/pet-health-record-3/.phoenix/selftest_evidence.json": "9188a85456aad67e00c4edb336c7ab7b8afe12edec6261b36376453aae1f7b6d",
   "skills/pet-health-record-3/references/creation/p0.md": "b1b95b6d247365d242b011164def38283a23ccedfe663589632748d0fcc8e9c5",
   "skills/pet-health-record-3/references/creation/p1.md": "bc92016a44507b0cb2b685cc478a417d5013914649ea794a5118078e7b83d5a0",
   "skills/pet-health-record-3/references/environment/p0.md": "94888487ff0f0e6b55b57eb234ec01ed8028380cc29a16a7be2931da4f55cc19",
@@ -66,7 +66,7 @@
   "skills/pet-health-record-3/references/production/p1.md": "52024964e864d51226342ebe6d6a96187376f3470f3335e0dd83ef6fd8885c22",
   "skills/pet-health-record-3/scripts/main.py": "fffff5ae9a5cf038e47c29720f81e7fbb1f8a2a460abb48712df6a069b3b0b17"
  },
- "sealed_at": "2026-10-18T20:05:52",
+ "sealed_at": "2026-10-18T21:02:03",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

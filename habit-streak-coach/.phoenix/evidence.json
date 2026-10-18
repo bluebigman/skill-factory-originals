@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "habit-streak-coach",
- "merkle_root": "93f798e3d3442cb58b8be554d125d8e4d7d828e8047ac251a520a0fdd7579040",
+ "merkle_root": "eed30261bb9e91fd879e8e127dde31f0b493fed363ff6b5cf3113f91e5bb57b4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/habit-streak-coach-1/run.py": "c1ef654be5b871d6655b2eb3179ed89aa6857f4217b53741e33ee6fefa0534ca",
   "skills/habit-streak-coach-1/selftest.py": "214822e360a8562156bdd1869bd5537f18e727a38b0349191378e96348677f25",
   "skills/habit-streak-coach-1/.phoenix/originality.json": "558e80831c7ac63021d4507355de7d569fec260e5027ca9cc6a96b25186ec25d",
-  "skills/habit-streak-coach-1/.phoenix/provenance.json": "ce43c1b02e2d6aa67f5125b8a5ca7120b2711173e39d50ab09a98a89902149cf",
-  "skills/habit-streak-coach-1/.phoenix/selftest_evidence.json": "15b17549842817d1ad53f17e15d23bf60118e08284a4f510cb0f72b5ec737b09",
+  "skills/habit-streak-coach-1/.phoenix/provenance.json": "5d57d0f79bb91cb3e14bcd71eb10fd5bc69bf6787bab9cc2bafac4d9686a9f08",
+  "skills/habit-streak-coach-1/.phoenix/selftest_evidence.json": "dab2218eb60b71fadffb0b8cf72f3af2fde63d3b358a3ef3fdebfb36a721ee39",
   "skills/habit-streak-coach-1/references/creation/p0.md": "7f329dacf53e6416424a2b74b69f9eb6300d7b0bfb8d692e5ee8c8da28975118",
   "skills/habit-streak-coach-1/references/creation/p1.md": "82c24b8134b64e5a913393d71b0cab68743864d69dc089139c0f14a624bc9861",
   "skills/habit-streak-coach-1/references/environment/p0.md": "27b22ffd2e7c869266bf8ded94959a6259f81a296e55ecc9a5145516126d78af",
@@ -37,8 +37,8 @@
   "skills/habit-streak-coach-2/run.py": "71ceacc4f94124737407c3f667f2bcfd72141f205b79378b67f8042fd104f8c7",
   "skills/habit-streak-coach-2/selftest.py": "848d6eca1b99694d22d37aea656559ac513004dab5ffc273a1770b386c301573",
   "skills/habit-streak-coach-2/.phoenix/originality.json": "412bf35ae3e70fef394591e6e960a62168fcafa4645381e503736be23766180c",
-  "skills/habit-streak-coach-2/.phoenix/provenance.json": "834ab01cd4f2dfd4b18e803b7e13d9b0a779f9c9efd8d2a069dbaf441e7e23dd",
-  "skills/habit-streak-coach-2/.phoenix/selftest_evidence.json": "d03e996bb7fc304c0d21b9ec091341c0413a3ea9be7ce775e013d33afdad12e1",
+  "skills/habit-streak-coach-2/.phoenix/provenance.json": "7ce499be0d61af78ebcd70d065c7f12918036cd10ea300ef67fd3dbc5ba2d22f",
+  "skills/habit-streak-coach-2/.phoenix/selftest_evidence.json": "8f4e11275e9dca301389b807bcca598d56d949556fa4e6ab21fcca089f0a959a",
   "skills/habit-streak-coach-2/references/creation/p0.md": "7dcad7442682d8ae414be1b77840170861718989613ba5d92fa0bfd799685537",
   "skills/habit-streak-coach-2/references/creation/p1.md": "dc95c9e1d036a5ec607d48122e410ed9a02fe67811119d1608c1974400a6aa45",
   "skills/habit-streak-coach-2/references/environment/p0.md": "8ab9af254f8e968a68732c3d930e2bbf86dac704ae0f49272e814bb8a55530b7",
@@ -54,8 +54,8 @@
   "skills/habit-streak-coach-3/run.py": "24c9b95fd1f02a88b67c8150c63d6301c17bc270380d6ab326c50f9d27b9b44a",
   "skills/habit-streak-coach-3/selftest.py": "76cfb3e8f7209c6324ff037a0d798ffebc006c34082e3f6ee779443724f4d858",
   "skills/habit-streak-coach-3/.phoenix/originality.json": "0eb1f7a700440fd94e5164fe1f6ae4f7ad74a3d53399210fc741a0062acbee01",
-  "skills/habit-streak-coach-3/.phoenix/provenance.json": "3f26375c0f112f74efd8abf7c3d7a51f727c17650121ec4eaa69020c004880c9",
-  "skills/habit-streak-coach-3/.phoenix/selftest_evidence.json": "da1dcd06c120c5cbe90ea9e27dc51a8820fa3c3400ebef3c1eb768c8dcbc5848",
+  "skills/habit-streak-coach-3/.phoenix/provenance.json": "2f9ca15a34312182e0bb9393b4624fa9d5161c9d6de39d0dcd3779f19a04f3ba",
+  "skills/habit-streak-coach-3/.phoenix/selftest_evidence.json": "0a515e250ae455d68b71c34ff7ab2802f02e77c2c4a6ba16808b1c2600aefbfd",
   "skills/habit-streak-coach-3/references/creation/p0.md": "f75cff7c88ba2c98a5279d7ce23cd36a7453c51f1be6c38aad05514a69bf40e5",
   "skills/habit-streak-coach-3/references/creation/p1.md": "de74fee6ba0f3a823ca8c240412426a8441da28e0aae3bef95e277775c5577a7",
   "skills/habit-streak-coach-3/references/environment/p0.md": "c4446364fbe51a4794e7710a5959c7852aa56cd5dc17ad92ee75ff481be0983e",
@@ -66,7 +66,7 @@
   "skills/habit-streak-coach-3/references/production/p1.md": "e6939107147f4cdb7ee65dd78d641a6472e5f5af401fd32edff33411129c8b96",
   "skills/habit-streak-coach-3/scripts/main.py": "e84a9863b51d106a83d1676c637ff7f3489248a10b349ada2be69ef27bad9a83"
  },
- "sealed_at": "2026-10-18T20:00:25",
+ "sealed_at": "2026-10-18T20:59:22",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

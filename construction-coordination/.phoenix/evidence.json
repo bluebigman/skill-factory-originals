@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "construction-coordination",
- "merkle_root": "fd21e8546eb0539e059a160e72ed15d441633f27a28f5336a063cc96476a9fb0",
+ "merkle_root": "3eead590f62b8773994fd41a7b003bc7f7b47cbf578cf11b41527c2ff537ce8f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/construction-coordination-1/run.py": "b1f592bfad5500a2c32576a96bb4978851c08687be4db084bbbe458f9560bfc6",
   "skills/construction-coordination-1/selftest.py": "e1ae77798190e7c4ce839cc57148c45dd75aa60b9664f8b378af14ad621c1eff",
   "skills/construction-coordination-1/.phoenix/originality.json": "b2683911a05d22ca2ac68339d26d98d7b3df36c157017fe465c2c3f1370ccb24",
-  "skills/construction-coordination-1/.phoenix/provenance.json": "72e0def57985d27042cc25fda64f5ccdf39e5b49e01436d1c4cced57085134d8",
-  "skills/construction-coordination-1/.phoenix/selftest_evidence.json": "a50fc6aa9a431175ce2d155eae2ca5df1e35519b271bea230f3716a19c10e494",
+  "skills/construction-coordination-1/.phoenix/provenance.json": "ece9ed90a0e533cd8724d8f0d5f9e5fe0e6b84a3caae4378f65d029cca799175",
+  "skills/construction-coordination-1/.phoenix/selftest_evidence.json": "2bc59831f26bda3061d4fb6076053a52be41613ca7a36fa3f68a916877103f06",
   "skills/construction-coordination-1/references/creation/p0.md": "b1f2174ace1f1aaa22bcad39d6f9de2952fb614d6ab6780563c7830a6b1c0d84",
   "skills/construction-coordination-1/references/creation/p1.md": "176f476945206c4f5c6327f33fa864f78304a5c4e4129f22082b421fa6b29cff",
   "skills/construction-coordination-1/references/environment/p0.md": "67854d2a4014bdd6b5c16556695cb8d85f30e368e77e77c32e8a496bdba74294",
@@ -37,8 +37,8 @@
   "skills/construction-coordination-2/run.py": "b10908a1a95941e35d0646ecbdf93bfd073c57be6ab27627a1b043151f446b28",
   "skills/construction-coordination-2/selftest.py": "33ac700e96e89c11bfa5e535c6e5c0dfff268f41138caa8c96e1c6cf98884954",
   "skills/construction-coordination-2/.phoenix/originality.json": "b9133445c06e9c14b2a6a714d9f494ff48aae4bcfb9fd592f1fa3b9dac7913d2",
-  "skills/construction-coordination-2/.phoenix/provenance.json": "a918d899c20528b0e92f8309dfa1a37c5e7ff23c42165c9e33c2783693c5b261",
-  "skills/construction-coordination-2/.phoenix/selftest_evidence.json": "03ccbbdee4c57efd16ee12861cbe81be885987e1f6fc714df1852bed7a3a7138",
+  "skills/construction-coordination-2/.phoenix/provenance.json": "3e2f85a9b0f0062822dc45c3dc399901bcdd67e15ae6dddfe1ea84d462bad7de",
+  "skills/construction-coordination-2/.phoenix/selftest_evidence.json": "f6c412c319d80134371985ecb3f9140ad6c1a530dbfad8a8b09eb4c695f6f9d9",
   "skills/construction-coordination-2/references/creation/p0.md": "dcb98188126291cac096ee3acda5c9e3006a32ff227a5e7a793921544880f168",
   "skills/construction-coordination-2/references/creation/p1.md": "1675cadc79d14715a94566ee1086de2186fb22c6ca41467691d20add3e66ee29",
   "skills/construction-coordination-2/references/environment/p0.md": "eda8dafe34da49b2a798704d48a5dfc33cba46e04b0399888cffc1419e997e27",
@@ -54,8 +54,8 @@
   "skills/construction-coordination-3/run.py": "721e20aa89cb3d8cab6ff15fc1e968fdeb9666cd869204cfb2a36b9416ac4351",
   "skills/construction-coordination-3/selftest.py": "1ac004d5c144c2e7c10a3b95b7ac89e5f270dd27a7605dcd06ccb9edc2a9fc54",
   "skills/construction-coordination-3/.phoenix/originality.json": "1c7c80a363fb66784f21708be85ebc08869df7901c1342619f0da63739486bbd",
-  "skills/construction-coordination-3/.phoenix/provenance.json": "290ee3885383c3578887eeabaaeb6759045df1018857fc6706dd8587ae7f5d74",
-  "skills/construction-coordination-3/.phoenix/selftest_evidence.json": "d60967eafcc8804a19bd9d0251c031c80210427b82973ba095e7313b29435c7a",
+  "skills/construction-coordination-3/.phoenix/provenance.json": "5d876a0645a53f14c8b5378d9f7206cfd0bf14a4a6e6ef89bfcab99662c21997",
+  "skills/construction-coordination-3/.phoenix/selftest_evidence.json": "421e8a855bd6b2b99b746fdf6e296e10fb6e74d7995191c51cef7c2ae0043bcd",
   "skills/construction-coordination-3/references/creation/p0.md": "e911b63a4fc1751a599e9b933088ab56e4851bb3a7dcad5e5433e38d5d9d1af7",
   "skills/construction-coordination-3/references/creation/p1.md": "51dd67597b3bf47a2aa7b0d2e84329736b23f678c309c0cad40b4db9c1308352",
   "skills/construction-coordination-3/references/environment/p0.md": "c48b9a9c4ba87ab4b973d3c62ad91b9392b59a87fafd36e030ef95adec2c5308",
@@ -66,7 +66,7 @@
   "skills/construction-coordination-3/references/production/p1.md": "c80a4307b65c204da52438333b7367c214649dce7613bb12580f9733a11ef2b0",
   "skills/construction-coordination-3/scripts/main.py": "b2dbf1cf7baf037a489a878e51850966b3cdaadb278da8b6a8f4fd3b70d9a018"
  },
- "sealed_at": "2026-10-18T19:54:03",
+ "sealed_at": "2026-10-18T20:55:51",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,0 +1,72 @@
+{
+ "name": "column-naming-rule-2",
+ "version": "2.0.0",
+ "domain": "字段命名规范",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "统一风格",
+   "then": "同一系统内统一大小写与分隔",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "语义明确",
+   "then": "名字表达含义不用缩写",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "类型后缀",
+   "then": "布尔与时间字段加后缀",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "避免保留字",
+   "then": "不用数据库保留字",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "变更慎行",
+   "then": "已上线字段变更走兼容流程",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "统一风格",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "语义明确",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "类型后缀",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "避免保留字",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变更慎行",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

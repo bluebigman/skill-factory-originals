@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "excel-pivot-analyze",
- "merkle_root": "a316e9bc71da858c74671fa18c3785d2143e6a06a81414116fb1368472b21263",
+ "merkle_root": "786a7f2ebadc61128fa31c0ebb007d0998541b75b71b00cbdfaa1f01561e2e73",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/excel-pivot-analyze-1/run.py": "f02be5ffc169594efe59ef27f21444d26b39089b42c9376f774b6a03135d93a8",
   "skills/excel-pivot-analyze-1/selftest.py": "62be90da9818411f71babd13884baa5a60ef1e558a449c000470656d25d7faa1",
   "skills/excel-pivot-analyze-1/.phoenix/originality.json": "aa8d9b46ddf4600916fa294d8d574fab4c948977c787cf103e5f5cdb1c856889",
-  "skills/excel-pivot-analyze-1/.phoenix/provenance.json": "bc125a533e2f970331fb7f84cd682389f301db4de17ab88879e584079be20f1a",
-  "skills/excel-pivot-analyze-1/.phoenix/selftest_evidence.json": "1e5305c752504bb8b4aa8b0f4794c78ba015d58881344e10741086afe727fb54",
+  "skills/excel-pivot-analyze-1/.phoenix/provenance.json": "4b35a1fc333b3eafe6b18296042acfa5de44a9cb4f8a1bbf43ee05d99f3e540c",
+  "skills/excel-pivot-analyze-1/.phoenix/selftest_evidence.json": "d0977f5bff337c911dab24b9e69ce6063fab45de21577e7319b23583342b4664",
   "skills/excel-pivot-analyze-1/references/creation/p0.md": "d295a7a0454f4933a1936b4f5c49c767528fcd3184b657346fc456f622c7c046",
   "skills/excel-pivot-analyze-1/references/creation/p1.md": "91fd3c3b5a6e719b8feeece56e43c5736009b13c9a340d3b410f96433b5222b6",
   "skills/excel-pivot-analyze-1/references/environment/p0.md": "5c0ef824eceadc06d7a9c9ab008bda9395cdc3d1aba15d6aa0497c01aa261bd7",
@@ -37,8 +37,8 @@
   "skills/excel-pivot-analyze-2/run.py": "076ac0e300c15e57d8a9241923446363df180e2c9ac8a9ee34a9a91c7fec16ef",
   "skills/excel-pivot-analyze-2/selftest.py": "2650f39964a30df41202ceda48fca90aba26c3dce4ec92bdf754252e1b5b8b10",
   "skills/excel-pivot-analyze-2/.phoenix/originality.json": "d06bf4752e77bd9e21a4d9ad5d55ac34c0b6ff497bcdfbc5fcacb328c0a2d1a2",
-  "skills/excel-pivot-analyze-2/.phoenix/provenance.json": "d885200be01539d483ec9bfa569859ce2fc88ade354d1a2c82989693729345de",
-  "skills/excel-pivot-analyze-2/.phoenix/selftest_evidence.json": "375a4ef43f725030c9b2684ddc4090c5779c6dc9d6d23f4b8d5350c8510439fe",
+  "skills/excel-pivot-analyze-2/.phoenix/provenance.json": "84a6ae01ada3581697be71f8929759e8531ac87dfc3bbbfe74eb96645eec05db",
+  "skills/excel-pivot-analyze-2/.phoenix/selftest_evidence.json": "eed67315da36867bbe14b2f5a086301161582b49180ad902ba57cfb238e948eb",
   "skills/excel-pivot-analyze-2/references/creation/p0.md": "87094ca0b3e530f4fab6f0940c9e354c4bbaaebb40f86fb9c5b26d2b3f0ae139",
   "skills/excel-pivot-analyze-2/references/creation/p1.md": "6e6281af0bc58b032d08af7e80d117eeb853c2004628e34f4a23baa5e0f7b635",
   "skills/excel-pivot-analyze-2/references/environment/p0.md": "e66e7b608c063052ea7cc149a420aebfdcb8883d5e0808a94564a041ce177eed",
@@ -54,8 +54,8 @@
   "skills/excel-pivot-analyze-3/run.py": "618a00d4bd1088edbe38f9fe000c92a2dc4104a099432778f22372f767870e86",
   "skills/excel-pivot-analyze-3/selftest.py": "2615cd527e2a3ce9eaa104bf10f06ece85ea20bcc83965370b1eea9ddb20d02d",
   "skills/excel-pivot-analyze-3/.phoenix/originality.json": "6751ee0e0edc5d6f55baac47728d4425493ca8c0761233a5a992e4d0a2d6ad31",
-  "skills/excel-pivot-analyze-3/.phoenix/provenance.json": "bed1eb2abd385a023d9b62294cdd0840a47117e87c46a3813e3ef4fb1721bcae",
-  "skills/excel-pivot-analyze-3/.phoenix/selftest_evidence.json": "1befc67efb7e7278e5f635b497bfe8e4b56b8885d805ea80fea1a5555a0ac310",
+  "skills/excel-pivot-analyze-3/.phoenix/provenance.json": "bd6503c75f46245911bfcd962308451c674795c5f8c1ef75b0bf5243e72f16d0",
+  "skills/excel-pivot-analyze-3/.phoenix/selftest_evidence.json": "d9f18701edd163b333a977a0de6385c2344f3f77f2f23284219805507e877099",
   "skills/excel-pivot-analyze-3/references/creation/p0.md": "cb802b64203f2852df660fe793b07f265b02945db754cd0f9c3a06be7a0bdf68",
   "skills/excel-pivot-analyze-3/references/creation/p1.md": "718c0aa22911ebefe22744d1ea75ed6025e96ef1a7977f44a0234c09846a2a7e",
   "skills/excel-pivot-analyze-3/references/environment/p0.md": "cc0a963998bdc33abc41993a6c472eeaea9b08719aea7fe52ebd0ff90bafab8c",
@@ -66,7 +66,7 @@
   "skills/excel-pivot-analyze-3/references/production/p1.md": "3b4b1d9a23285b73f122603ca55578ed58c56d34d9ea97c37fd5b613c550cac9",
   "skills/excel-pivot-analyze-3/scripts/main.py": "ab135257226e54a35f2418c23174d45cff23286f098a0e51b18210c4da9aafcb"
  },
- "sealed_at": "2026-10-18T19:58:43",
+ "sealed_at": "2026-10-18T20:58:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sql-review-pro",
- "merkle_root": "2020e7a4e31c3b952d79f2dd1e392055cd5246cb30638bdbdc94171024dea929",
+ "merkle_root": "879ec8db7a3219e6dd7dbef76d5500f6355127973c8e6e53281f8d0f3a039f93",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sql-review-pro-1/run.py": "a4020e4b009bf6a4d03583b412e6beae21b144339b0f89a37d7b75b69654ff6f",
   "skills/sql-review-pro-1/selftest.py": "cc0309aebbdb7466fca394dffec860b1d27de5ef90190ff7f69e7a1b96e65b7b",
   "skills/sql-review-pro-1/.phoenix/originality.json": "189738c49a935c0d1516d747e7ad57d73939292dabdb4cb667bdb89cfea32f0a",
-  "skills/sql-review-pro-1/.phoenix/provenance.json": "12607de3a0ef09d9c0d95fb4b64b3a9528ca327e844cfb8ad10681ac6e9471e4",
-  "skills/sql-review-pro-1/.phoenix/selftest_evidence.json": "98d197f88dfad98837ecfa8813af83341a43a8e78fcd3fc43b4978c296fe315b",
+  "skills/sql-review-pro-1/.phoenix/provenance.json": "98ca42081fa3aaa7b75ee56912120847b4c434073e21fa4e271611974f4a9d69",
+  "skills/sql-review-pro-1/.phoenix/selftest_evidence.json": "d33f3e8c783fd0d5c76fa6ff5f37a1420950384b6b879c408c75fac381edb9b5",
   "skills/sql-review-pro-1/references/creation/p0.md": "b853da3f794d9c38468ea0e10750ac18ba014c8eb96671181ad5df17f9673b68",
   "skills/sql-review-pro-1/references/creation/p1.md": "b2a47d5e48a1bef861e552c1ddd504fefa6309753ef74f9a7c38a4e36f97b27d",
   "skills/sql-review-pro-1/references/environment/p0.md": "0c7151e526d2b78c0c195d50988a7fc0efabbe6cc95544473ba4cc0c95cfafc2",
@@ -37,8 +37,8 @@
   "skills/sql-review-pro-2/run.py": "35692d22e8708f10990daa96d4e8759246721782bb25961ef2b5b5ba7fafb3d8",
   "skills/sql-review-pro-2/selftest.py": "30630dd7922bb7ab38e8d69349a3b52886590b7642aa6205cc5877f48d9bbff4",
   "skills/sql-review-pro-2/.phoenix/originality.json": "c0d925ab20a7b5c0d78c0404ffa4214c9a3108d5993b369e55c0bcadcc500805",
-  "skills/sql-review-pro-2/.phoenix/provenance.json": "3cd928798f796bd9167ac3ac3b03882d5fa36f3a75c7aaadf1954928d097245d",
-  "skills/sql-review-pro-2/.phoenix/selftest_evidence.json": "c63ecc05491d5bd74581c989fe63c6c7dcd09f9cde3e9cca5a4e251e5a443aa8",
+  "skills/sql-review-pro-2/.phoenix/provenance.json": "0600fbbac43ef2d9e5e4030302b8ed81ffa4d86b1b97d06f2ab40f4f9020704a",
+  "skills/sql-review-pro-2/.phoenix/selftest_evidence.json": "ea53e8dc34b828ff4515e3feaa5f08cc87ff912a63218beb53224a71ce06231f",
   "skills/sql-review-pro-2/references/creation/p0.md": "895fbcf906aae3310ffd916e8ca00f63c71ff27aaa6a0ba1d143c1051c46c9e6",
   "skills/sql-review-pro-2/references/creation/p1.md": "827b19f750bc38a15ba86886852fab26ed80a3062c3c25e9c767a9182ae5cf61",
   "skills/sql-review-pro-2/references/environment/p0.md": "28e5fede5607fa04173c138b3eeb2f167fcfc4e2410e975e2270e5afc93b5225",
@@ -54,8 +54,8 @@
   "skills/sql-review-pro-3/run.py": "1f87f61b5862b8a70c7e03719eb869c1ff072263467b662b11fb6bd50132e209",
   "skills/sql-review-pro-3/selftest.py": "a890cc1a750cb6090c5cb92812a274005b3a67acebacd78e8a022fc86046ce01",
   "skills/sql-review-pro-3/.phoenix/originality.json": "5f9c723dcd2d365d433831999f92f30b7505c5d1d8aa13c900f48e29c92c8cbb",
-  "skills/sql-review-pro-3/.phoenix/provenance.json": "b25733dd8016ea84590d3ed3fdbc043474152c7fe899faf3e1be2bda37b1c705",
-  "skills/sql-review-pro-3/.phoenix/selftest_evidence.json": "5c9ca2918260e021b2762a26a5bd6f26db1af5fecc11f9613c516f65bdba2c0d",
+  "skills/sql-review-pro-3/.phoenix/provenance.json": "84f1c064a4d69613f433ece2c6b4080fbaa7a48a58b6e9cc305e7f2340f9d12c",
+  "skills/sql-review-pro-3/.phoenix/selftest_evidence.json": "7ce3fd5a977dc8aec9a970732f01b2a6e7fc78b27cc2441c333b27942e4f99da",
   "skills/sql-review-pro-3/references/creation/p0.md": "903f6edfc4dc9cd98813e0b48ff231f086988e12d8f3a4c256b1543216b8374e",
   "skills/sql-review-pro-3/references/creation/p1.md": "af95f7b73d88689055e01781a2645c43ff4e13ea1e302685f6116ec9bdf2150f",
   "skills/sql-review-pro-3/references/environment/p0.md": "eaa15801305feff0552917193f0e55e47754e6b60b434227b109ff433a4790a3",
@@ -66,7 +66,7 @@
   "skills/sql-review-pro-3/references/production/p1.md": "ad5562d3cceaa177ac04b15201b589315cdbec8930153d83fe23fa0f068ecba0",
   "skills/sql-review-pro-3/scripts/main.py": "c34509f0918d2879ece356a15d46bc08049c47088a8a7bf35b6c8270c60c96b8"
  },
- "sealed_at": "2026-10-18T20:10:14",
+ "sealed_at": "2026-10-18T21:04:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

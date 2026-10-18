@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "intl-logistics-pro",
- "merkle_root": "577d75d16451c7acf74ba8b3e3a0a6bd940544322c68fdd985fdd36235c6f942",
+ "merkle_root": "c58d4f09a3da2428e9f644f3d7f8d654ea5af29e818ed12d1f409cbe16ecb566",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/intl-logistics-pro-1/run.py": "5b02aa6e1d3fb5f12437c3475ed9b69d98dcddf69301fd1012afc859a6650808",
   "skills/intl-logistics-pro-1/selftest.py": "2f56da10075fd0ec59843431498c9007b97cccdfdc6e567b1fc27dbef00416a1",
   "skills/intl-logistics-pro-1/.phoenix/originality.json": "1d330b60c74e5849a30bdfa90d24be236d7ad0f898ccb8253b771abd41d6beba",
-  "skills/intl-logistics-pro-1/.phoenix/provenance.json": "f1fd9a9548acb1e2e7642c503de153cb1626a8b91fa2d7af656232cc371f7b63",
-  "skills/intl-logistics-pro-1/.phoenix/selftest_evidence.json": "acbfd8d2a8d7237502ad70fcf4f53777497f85b23d8c40881bea82b75d859660",
+  "skills/intl-logistics-pro-1/.phoenix/provenance.json": "bf972ffefc747137822bb778789f7e4686648ac5ba7b61c6fdd9cfd5056d049d",
+  "skills/intl-logistics-pro-1/.phoenix/selftest_evidence.json": "e4ff8ae36b3b913791512027cbf739f1490f712e909ab9efef5dd01ddaeb7038",
   "skills/intl-logistics-pro-1/references/creation/p0.md": "b91fc36cc6a4438a0237dec95ff911c2f22e98850fd761678695649ccb081992",
   "skills/intl-logistics-pro-1/references/creation/p1.md": "9bb17a00dba633e375bb96f6358df3b7eddafe461b50affaf7e3af4825288b40",
   "skills/intl-logistics-pro-1/references/environment/p0.md": "66350ab6a66d3d43e672b388408eec222f41b402115cded14d96aecb70231813",
@@ -37,8 +37,8 @@
   "skills/intl-logistics-pro-2/run.py": "49bed0f035826bea53db7c1fbca07c76dc2dc301bed55e04d4d874d020105a85",
   "skills/intl-logistics-pro-2/selftest.py": "e445763bd189e69283b876850b23ab8450f1ac796bcc90881b2bbc96a9ac64cd",
   "skills/intl-logistics-pro-2/.phoenix/originality.json": "eaeb1f1a5ab9df718af1490d6b42eafcba84f72d7190c4917bb5e56cbdffb296",
-  "skills/intl-logistics-pro-2/.phoenix/provenance.json": "70eb9349793eb0beb6a5d203d4855968e91ad6cbc32509f30cb739952a869f1d",
-  "skills/intl-logistics-pro-2/.phoenix/selftest_evidence.json": "b3f91df5fad693e4485a4cacc1c2d951909a9805a2bb16e4c282f5cf100d9889",
+  "skills/intl-logistics-pro-2/.phoenix/provenance.json": "c8d135d0f6b92d37f09ff6fd5dd0ea3138b1a9d5e9522b038ad73ae4eca72f26",
+  "skills/intl-logistics-pro-2/.phoenix/selftest_evidence.json": "8d2f42a4021ee121a7535f966cee118e2e0306546eadcf4f7db6dca19c5cc5bc",
   "skills/intl-logistics-pro-2/references/creation/p0.md": "33ec2a20b470c5592bb9dd91f51e9eba0449feb6babdf2f663dfdb179735df4e",
   "skills/intl-logistics-pro-2/references/creation/p1.md": "d61fbca2c0be01dee1bce0a69857fde9e6379d548bfe7c68a3cd2463078b5ab4",
   "skills/intl-logistics-pro-2/references/environment/p0.md": "f0eb810db3a8b72266b823ff01d8d34d5c9d063919c28f63e9c6c748a25d5f1a",
@@ -54,8 +54,8 @@
   "skills/intl-logistics-pro-3/run.py": "9aa6986d84974ac5641e0bd768404963725d9abd56bcbba3283d20f47c4fc694",
   "skills/intl-logistics-pro-3/selftest.py": "99255bfc3666a2744c8441de7a9b16d2b59a413f9a85370a8336234cfe9b1788",
   "skills/intl-logistics-pro-3/.phoenix/originality.json": "afa0c3965ca72f2fe4d1b3bb8ee144cbb14be266ce0aa9b91599801f2b7505fd",
-  "skills/intl-logistics-pro-3/.phoenix/provenance.json": "6eb9c5e031a25da681926889a2d1c65d2b7fb2d6b6ea517d8699bffe96bdd874",
-  "skills/intl-logistics-pro-3/.phoenix/selftest_evidence.json": "0cc6ea2a2d0736fb1a3359fcaff9702e66bf9a9b5a56fa2f85003686ed936ee5",
+  "skills/intl-logistics-pro-3/.phoenix/provenance.json": "240e1133cea80f66cfd2dca535998701c76192f539c96f9438bcea847b6516be",
+  "skills/intl-logistics-pro-3/.phoenix/selftest_evidence.json": "e55e4f8e9ae3c1dd504b8e64fd3df3e0ba213b01347ac498d7fcafa41b83069f",
   "skills/intl-logistics-pro-3/references/creation/p0.md": "52bf43740d52351c85d26ea7e6c632e9ec82251bbb64b9d2d400f4759b5d5733",
   "skills/intl-logistics-pro-3/references/creation/p1.md": "191fc24e4a710f7851641c5fe729045158fdc0f8533efe6ea5e1db547f732dc9",
   "skills/intl-logistics-pro-3/references/environment/p0.md": "92418e8ca54ebfa53f6e606bfea3b8936adb5db6317a075d8b47789825526cca",
@@ -66,7 +66,7 @@
   "skills/intl-logistics-pro-3/references/production/p1.md": "a506ee2b0c686fe2a4eee020a873aaa0b34e4825d635aa082c2a14185bfac425",
   "skills/intl-logistics-pro-3/scripts/main.py": "c5030af369dbf51b9306f2a56790dd2e7c14a8f6bf4db45ab48fb23961c41528"
  },
- "sealed_at": "2026-10-18T20:01:43",
+ "sealed_at": "2026-10-18T20:59:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

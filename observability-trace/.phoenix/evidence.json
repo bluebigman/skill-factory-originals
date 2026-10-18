@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "observability-trace",
- "merkle_root": "a45adedd0277562a2264fef07f4a307ca738206e05416a37b131b898b6d04489",
+ "merkle_root": "8d4ec79bcdfe31c69fe4f6ee194706354490f4e79e6ffbad9d764bb3bd0ba258",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/observability-trace-1/run.py": "e2e6de52f599cb7581c574dccced1b59fe354deb48d970107d9c0a0c33139b39",
   "skills/observability-trace-1/selftest.py": "d15edbe1bfd613776b79b96d7d91efb3bfb056b6d4610318e863a162b817e94b",
   "skills/observability-trace-1/.phoenix/originality.json": "10f3a395b29e9a3edd26447c98895e2ee4734cc8b4387dc455a3bafabc0c614a",
-  "skills/observability-trace-1/.phoenix/provenance.json": "4e925221f49a310f7a4454f3193365498d5da4d93bcb79385507e24718c2479b",
-  "skills/observability-trace-1/.phoenix/selftest_evidence.json": "30db01e71df884fe5fee7ccbd4f34c344a02fe45a2af0e685eecc3357e5031f6",
+  "skills/observability-trace-1/.phoenix/provenance.json": "05918a9593fd9e558258dbec8d427c102930f4b053d1ab9f2f94b207a12d1e4f",
+  "skills/observability-trace-1/.phoenix/selftest_evidence.json": "cb4e923417be43a8b44bd9b73d8b658560551a76d64d08248e909b3b31094247",
   "skills/observability-trace-1/references/creation/p0.md": "0d603cadeaf3804a58b6136906245135a4c802854bb3c89b8fe3d290fb2d1246",
   "skills/observability-trace-1/references/creation/p1.md": "df1f60ba6f82fb934cb2fd8ff48f0768b11134456a30ea30238019cfef3891a2",
   "skills/observability-trace-1/references/environment/p0.md": "33459bc678c9e3b5a9ab08bd74ba980805f73428bca4442b945324a6a0fe680e",
@@ -37,8 +37,8 @@
   "skills/observability-trace-2/run.py": "8b9f1e5e885f3a28219cb022eed6788fc65c0fd2813475eb4f7f86b46cbe3cdc",
   "skills/observability-trace-2/selftest.py": "865d7ea91600eaa44b9a61ede6a54558e953dbca63979a1bdba24bcdd82bf621",
   "skills/observability-trace-2/.phoenix/originality.json": "d37f916a2eb1668540a0e9f7dec72ec6d58a22cd6c94b0dbe6ea6313b5ef3420",
-  "skills/observability-trace-2/.phoenix/provenance.json": "63eb61b1d001556c6800c731b40a7625d437d118998a8bbbff1086c4aa208be8",
-  "skills/observability-trace-2/.phoenix/selftest_evidence.json": "1acda89c0bd15f5ec1d8ece3a357428f2f9c3f455d15bdcffb1ec4f7ae4b91ec",
+  "skills/observability-trace-2/.phoenix/provenance.json": "3a120a8fde1a6257c23ed56e5ceeb0ef696feb5fef954b04af4c6019930a01e7",
+  "skills/observability-trace-2/.phoenix/selftest_evidence.json": "c3f9c6c7958f4aaac3e6ff635b1bce164ad980d4d7fdc860d6197718b10b4f84",
   "skills/observability-trace-2/references/creation/p0.md": "58265fd12ab840dcf82135b045ff4d9ba4a64b6bb33a51ade5ed10ac9385d8b9",
   "skills/observability-trace-2/references/creation/p1.md": "495d0769b6f232fd068977cc5c8bb9447f317f6abd38e7f8c63fb8b0309f2b3c",
   "skills/observability-trace-2/references/environment/p0.md": "376867b33b9b87fc6bccb04223f9af90dbce99598cad9ac439d7af803f1fce10",
@@ -54,8 +54,8 @@
   "skills/observability-trace-3/run.py": "50f48f3f3d0fd4f3675d2e70ee6058240a67be2d183e2cf977369cb18cbb87d6",
   "skills/observability-trace-3/selftest.py": "ac0c3e64f48d1ce37c12f13c133ff6c0468b24ea491994a5eece28b71eeec104",
   "skills/observability-trace-3/.phoenix/originality.json": "e770a30b13103b4ad7a6d383f6ae1ef367efe20bd3249461f4036a0e2abcc6ce",
-  "skills/observability-trace-3/.phoenix/provenance.json": "452b7eda769581438cbb02362d97e666fa9902e3c7b289c2cc26ad1b20599d33",
-  "skills/observability-trace-3/.phoenix/selftest_evidence.json": "2d318e33ea0f0e89f838fa5a59446848fa00ef9ad35a63e3c58710d8d9b140a8",
+  "skills/observability-trace-3/.phoenix/provenance.json": "65ca95b156a984bc1b505abf3cb5c8a7fd2acb1aeaf5eb69f7cb8ded639a85f8",
+  "skills/observability-trace-3/.phoenix/selftest_evidence.json": "f2f6f7212bdf0c5ce979c073f1cd30143fdac0aca5019efaf7b52ab31a9e0520",
   "skills/observability-trace-3/references/creation/p0.md": "cc63b2e7717f692279cdb2c50a3a56158624a94d3abe2f66b65aa32f417e7872",
   "skills/observability-trace-3/references/creation/p1.md": "64688a894cd8a6acc602857ce0e7f5784e7d36ebc810d0cf667bf07d74b31538",
   "skills/observability-trace-3/references/environment/p0.md": "c4e4a5911fd4dd7cba13b2987536edcd13ad71c1d474ffad2e2e868d502b6193",
@@ -66,7 +66,7 @@
   "skills/observability-trace-3/references/production/p1.md": "2486c974d082e93788273250eb52436702a5ccb86e7b6425fbd6f4c8452a4436",
   "skills/observability-trace-3/scripts/main.py": "4b0ebbde905428f6dd306a46f055fe5fa6e5f699f4be24bf1270414733c808fb"
  },
- "sealed_at": "2026-10-18T20:04:47",
+ "sealed_at": "2026-10-18T21:01:30",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

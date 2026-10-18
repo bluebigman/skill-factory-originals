@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "mp-cover-design",
- "merkle_root": "be1b1158c6e2c0eb428043c1c620fd835a714a6951f2376deeda32746691229f",
+ "merkle_root": "cdad4a46dcb2b83b84350756eaf5727f67ebb0468e808fb371fd47dd3d0d096b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/mp-cover-design-1/run.py": "0e13067579d1700e2150bf3dca83d4f21fa76f72b63cbf35e7f7c252367bf017",
   "skills/mp-cover-design-1/selftest.py": "fcd6bb08ea7bf2d2a74255f491aac60690036bdafa360b28b92da1a99961a0f5",
   "skills/mp-cover-design-1/.phoenix/originality.json": "dd41d225774064c68754d7369577b3d75c09362a5daf03dca32836754e28b352",
-  "skills/mp-cover-design-1/.phoenix/provenance.json": "1e443eae308e2d9a99fed258bc5d932aaa2beeed9146201bf0a0cf2677faef29",
-  "skills/mp-cover-design-1/.phoenix/selftest_evidence.json": "72388475c5dd4d9a6c9b4edfb3a67ef52d4b5000db3580caacd1048d292c9962",
+  "skills/mp-cover-design-1/.phoenix/provenance.json": "61f538d3350d40805a9aaaa7f3d46c5bdfc9c5d03dccedb5358faccc503082dd",
+  "skills/mp-cover-design-1/.phoenix/selftest_evidence.json": "9313a26ef0116cb7253c91cbebaefad56a90dcda57e724a3831f0b66defb5b63",
   "skills/mp-cover-design-1/references/creation/p0.md": "3f5501011324146647421a44a304f465c40418a68e57636d775c385e2802f94f",
   "skills/mp-cover-design-1/references/creation/p1.md": "7eaee875c2a729b7cd410f4fedd5231df3ceecef091a033c90acfb3d5a6d5de0",
   "skills/mp-cover-design-1/references/environment/p0.md": "af1e630eebff9fd498e977c8bed64844fda63c69258425e516a48f8e2bf7add7",
@@ -37,8 +37,8 @@
   "skills/mp-cover-design-2/run.py": "f2d0ba3a606e25c8b06748ba4642625dbe38e6f7edb3e6039b19ad40f7f3ab02",
   "skills/mp-cover-design-2/selftest.py": "031ac420574c617bca8f65b75ecea36b937b2c4a1c10b0be2f1614494755973d",
   "skills/mp-cover-design-2/.phoenix/originality.json": "f2aa64c1273f3f3b4447e8157b5f9c241031853afdde71ecc3d0bbf2e9bf9a1c",
-  "skills/mp-cover-design-2/.phoenix/provenance.json": "d13072c9108d12293edc118b1fe5ff2d734145656038bccb90d0a45bdb9a05d5",
-  "skills/mp-cover-design-2/.phoenix/selftest_evidence.json": "0ba3f5d9a53d507e663627155168aea4b98048ea135846f81aea2ad582e7904e",
+  "skills/mp-cover-design-2/.phoenix/provenance.json": "0b769345de962e562e00a6aef974a2138a46941ab807fffaa0a551ff13c0755b",
+  "skills/mp-cover-design-2/.phoenix/selftest_evidence.json": "2e40ea0d5d8b1a5134fd030f1d47802a1bd37ade3d447ae60bcfc3a7e2bda00e",
   "skills/mp-cover-design-2/references/creation/p0.md": "3203a850658448d91602091897478c61f4f324092927b40bf645c7acf40aead8",
   "skills/mp-cover-design-2/references/creation/p1.md": "f6d95e1a09a420632cea0731e89535befa6d1183af3c337d51392e55d9544412",
   "skills/mp-cover-design-2/references/environment/p0.md": "97363ca5640968500a9cde868ccc209f7c3306052d47a3952aa929ec22133c3a",
@@ -54,8 +54,8 @@
   "skills/mp-cover-design-3/run.py": "4081368bda3b3560d1781d131096d257e73d47a6b303b81dd067ff3225876c43",
   "skills/mp-cover-design-3/selftest.py": "6756c9199d0fa6adc6fc8efd809862fa4f496a8668606bd7fb19eee87a860f1a",
   "skills/mp-cover-design-3/.phoenix/originality.json": "57d3cb7698a1a6581c521456ab3c00c73d07ec0b111a88581dd4d4491a4c0f52",
-  "skills/mp-cover-design-3/.phoenix/provenance.json": "755ed7581f38fee81065b37465748a64017ae6f5ad4b371edb0babcb0fa1abf4",
-  "skills/mp-cover-design-3/.phoenix/selftest_evidence.json": "0fb9319665c61f2d1e74cc81f73d521b423771b7093790aeae998532ea7aa11d",
+  "skills/mp-cover-design-3/.phoenix/provenance.json": "04b9468bcd0c639d25dc83d9e067c1cb3fb4bc72261208d35a81339a185bf37c",
+  "skills/mp-cover-design-3/.phoenix/selftest_evidence.json": "459749ea0ed192c6f0036ea62245d116b10dab4414ec4e2f45980e0a38ea3f4e",
   "skills/mp-cover-design-3/references/creation/p0.md": "16d86c606c872b0ff966ef97540053b13ba84dc669e49053e5b924648cffd42b",
   "skills/mp-cover-design-3/references/creation/p1.md": "c77e954396555d5a17315e73a632f891e22c8ff9412a98e72a60de7dbcc7031e",
   "skills/mp-cover-design-3/references/environment/p0.md": "3128e3a517e30e678637f16c3c280242886bd361e1d24add2ee2be38f1f86e55",
@@ -66,7 +66,7 @@
   "skills/mp-cover-design-3/references/production/p1.md": "3560db8ef278230c9e7c8b799d6d0438d8cb1bd16423273fb12354bc779ae86d",
   "skills/mp-cover-design-3/scripts/main.py": "fba9434273dce60186bdacb902dff869ca60abcefcd448b7b8ae085dfd98e4c2"
  },
- "sealed_at": "2026-10-18T20:03:59",
+ "sealed_at": "2026-10-18T21:01:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-tool-selection",
- "merkle_root": "9f904ad5d47aff5efe9c292680a134544e3f10241ddf58ab9c9cb7277d642f4d",
+ "merkle_root": "46fc8f40c45f48aba451f600292aaa1fd357569964990689fb0ba9555d569c55",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-tool-selection-1/run.py": "79a79d3c084e4b72362e502a7dcf1e56026939cb10ce105fa281d2b7c42420fb",
   "skills/agent-tool-selection-1/selftest.py": "9ad59eecd4ddde8e256b4a71d36341f658399b585dc493df039d94ddd98ba864",
   "skills/agent-tool-selection-1/.phoenix/originality.json": "02a941aa97e70d0908001a4348034a38cfb979db223374af5c5252b83dc8ab77",
-  "skills/agent-tool-selection-1/.phoenix/provenance.json": "dfdb1f54dc885bc0737f48c02912a09ed5ab0204ec30f545dff4ee6436f161c9",
-  "skills/agent-tool-selection-1/.phoenix/selftest_evidence.json": "4090e897bdac53853201d981c5d0608697b79b6a387ae2a1af18e9417306c291",
+  "skills/agent-tool-selection-1/.phoenix/provenance.json": "55cf72053d62b53a8cf005b2583b938e086bf4974ff5a827ef061d864f94071c",
+  "skills/agent-tool-selection-1/.phoenix/selftest_evidence.json": "8f2e519f6e1956f294d04f77e3e7c2ebcaf85ee17c5895ee7fbc7442c7c6dae9",
   "skills/agent-tool-selection-1/references/creation/p0.md": "5899c2be74ba13dc8460191cfae79793abf6559fe3edec22623e5e5a0fe0cf8e",
   "skills/agent-tool-selection-1/references/creation/p1.md": "86e923c6ac2d4b80843abc8785699ad9ddf9866bc825535bd7cd5c831913a4fe",
   "skills/agent-tool-selection-1/references/environment/p0.md": "709ea3e5903b62271f1f568916216868d6f1a50e606fb8680cbbf00f7a2638fe",
@@ -37,8 +37,8 @@
   "skills/agent-tool-selection-2/run.py": "713a0e57b741053f81a947a8418ef5d699ca0ce52008d7580d1fbeea8c069093",
   "skills/agent-tool-selection-2/selftest.py": "72b845434e2fdb99274769315aa6c237bc3596f6006c6807902a9a1baa447f62",
   "skills/agent-tool-selection-2/.phoenix/originality.json": "040625c75485daa7bd51e5e599102ac4ef38a77af7b0a45b8d8307d91a1eb758",
-  "skills/agent-tool-selection-2/.phoenix/provenance.json": "ebd6dade3e52323b93c1425e6fce355bc4de6efed1928b2fdbfe3785a731d34c",
-  "skills/agent-tool-selection-2/.phoenix/selftest_evidence.json": "a92b9f4e2eee45d7c2c428789480064d47d0e4943a45d49696a971787bf9f735",
+  "skills/agent-tool-selection-2/.phoenix/provenance.json": "cb05f33ec0fb8445f0e05e9f0cddf89f48260a048f9c8b93a8ab6198276f57b7",
+  "skills/agent-tool-selection-2/.phoenix/selftest_evidence.json": "807b7cd4ef763e7799ebe2499b04a1d9346ef8c57b3ec063e87681441196de21",
   "skills/agent-tool-selection-2/references/creation/p0.md": "0fafba8ae17613bc6e5f80bccea7abaca7a9cf3104d00d70b63ca7c4cf2524fb",
   "skills/agent-tool-selection-2/references/creation/p1.md": "5c39f98146b82ecc541f4960150e1bb2d722a8d598b964af59ee0175a7a2821a",
   "skills/agent-tool-selection-2/references/environment/p0.md": "8becdc0cf19df5ddce1878b602837d288c9754d1efa309d6c412ec3731071d58",
@@ -54,8 +54,8 @@
   "skills/agent-tool-selection-3/run.py": "1f6467702ea0d06c4df58f228a15f51845dfd13a489537983d428eb968803562",
   "skills/agent-tool-selection-3/selftest.py": "6815eb54b0b6e47b3c51ad956caa2d814a819bae04a36e57da8f13b8fb040237",
   "skills/agent-tool-selection-3/.phoenix/originality.json": "911e593fe8eb6defc28eb1abd13e88d41d6d9c15074534227eab89e7e5f141db",
-  "skills/agent-tool-selection-3/.phoenix/provenance.json": "34768af29f5fd4e929627ee0c7329deca6af668f0bb1158ca4771b1f7e5d6953",
-  "skills/agent-tool-selection-3/.phoenix/selftest_evidence.json": "41f29a8c9a66b4091a1c97eb6d9d2d956e9fc189abcf6a044cfaa6d2b87b0e8f",
+  "skills/agent-tool-selection-3/.phoenix/provenance.json": "b26e5fe3a2bc9eab929a406814bf18e8a79be34351f9bfef0233ac904c641593",
+  "skills/agent-tool-selection-3/.phoenix/selftest_evidence.json": "2e5b06c1a6c6a79f0ca8e4671bc2fcae0b409a14bcdab5df5957cfa0b8b5eb0e",
   "skills/agent-tool-selection-3/references/creation/p0.md": "bafc8159e6b39c6fa3e21e2bdcbc6dc177bc65064f558814a081727a8322c1e2",
   "skills/agent-tool-selection-3/references/creation/p1.md": "04ff960f201211d5b062bb2fd43efb0a7f0f454c2afee366986c939ff74577e3",
   "skills/agent-tool-selection-3/references/environment/p0.md": "6854f6f5a77b363ae789ae593126ec728ca362a1ba843cff16b414b0eac54c5d",
@@ -66,7 +66,7 @@
   "skills/agent-tool-selection-3/references/production/p1.md": "bb139ee9204802e47bc6521957599ca90c08170100a46651687be54389b607f4",
   "skills/agent-tool-selection-3/scripts/main.py": "bc78a9b0252ed47b82c4d0d6acf361142c9181253f783bcd5768af491252764e"
  },
- "sealed_at": "2026-10-18T19:52:23",
+ "sealed_at": "2026-10-18T20:54:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

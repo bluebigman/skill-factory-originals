@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "tone-adaptation",
- "merkle_root": "e8b6d7aa0e8c7636920cbf0850139965d3487e47bf7f2b29dab1ba6f5f0dae51",
+ "merkle_root": "4438f3364b70e2f09b52e3a55b5f00156e38154eb7406657fccb02ada4bf8d32",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/tone-adaptation-1/run.py": "ecc6f4baaa888454be55b36a9d488ec91073e741c57f2b2a919221825021634c",
   "skills/tone-adaptation-1/selftest.py": "8e4a341b0bebbb6a15ca255207524558e136f609452c1f03eca8eeb3d5cbb6ed",
   "skills/tone-adaptation-1/.phoenix/originality.json": "d3c515386072081148b4a1bfdaf15b3461a2330c238354e6fdbeeb622e49c121",
-  "skills/tone-adaptation-1/.phoenix/provenance.json": "a93b52adc19cc9497f4fe54fbafb0084fa49c440fc8eb8f23fa3edf636c50238",
-  "skills/tone-adaptation-1/.phoenix/selftest_evidence.json": "45b83ca1f8b2668f6e56cff848f4bb6a2123cd80de1eb203913df79000fe30f8",
+  "skills/tone-adaptation-1/.phoenix/provenance.json": "12bf12fc10eae6e5cdddc41b9e5ba6b47a2f4c3b60d8147fc9a6674871afaad6",
+  "skills/tone-adaptation-1/.phoenix/selftest_evidence.json": "c6280dcd37f92ea1f14cffe0ea36d49e135c4f215d622b9574f5f9be5d3edc81",
   "skills/tone-adaptation-1/references/creation/p0.md": "e62d1addc560afb4e78c070747c86705348e174e32e828c57082f1a8d34f96d4",
   "skills/tone-adaptation-1/references/creation/p1.md": "5bc884beb5aacfa57b02b0784730d8a99ee65d8d4d1892722dfce08668c865fd",
   "skills/tone-adaptation-1/references/environment/p0.md": "33d32e72c30bdfcf2a776b41cea82d3e7a5a49e5f5f4b993bbddee3564ec74c8",
@@ -37,8 +37,8 @@
   "skills/tone-adaptation-2/run.py": "3dd1d9ac612a903c90f8079eaea7c3fba913e50c571f051087a6ce33d3dd4619",
   "skills/tone-adaptation-2/selftest.py": "8b01c3dd3898f86e8a274efecff03e46241653c31bc651153bb9c0dabbde862d",
   "skills/tone-adaptation-2/.phoenix/originality.json": "e67e1f221edd1a1272c42ec804eb4c6b984bcdb1874eeb4ed2946ff0362e08b9",
-  "skills/tone-adaptation-2/.phoenix/provenance.json": "35a1cad055ae3d411eaf9d4bfc6abf8c2014377f493bbc21d013324ad14bbc75",
-  "skills/tone-adaptation-2/.phoenix/selftest_evidence.json": "d5668084bedf9bd9a594773d8152dbeb66ebaba407caa9ef302a63e0a4cf57c5",
+  "skills/tone-adaptation-2/.phoenix/provenance.json": "99f376b6f8292e68a8290a5477b6a20086753be7c8ef6c632f1b3dc915b22659",
+  "skills/tone-adaptation-2/.phoenix/selftest_evidence.json": "e89dd102c6854a492819ca5d9257595e69894cee5ee069f397ce167cf24f0742",
   "skills/tone-adaptation-2/references/creation/p0.md": "da0920aab591b284113ea4c577aa0f1515842b080a23062983352f9aefcd2424",
   "skills/tone-adaptation-2/references/creation/p1.md": "a1adeabb1adedff33c0c43a177c380fe14fed332cc5ba43d898bceffd808cfa2",
   "skills/tone-adaptation-2/references/environment/p0.md": "bfeefb3b7a6de0908710fffd3db7c3ecb25c4bce9e7953d28221f053caf1b649",
@@ -54,8 +54,8 @@
   "skills/tone-adaptation-3/run.py": "2099379b47023fe25b23921214476ef9661ea86ca1a4d838a3363dace53ee0f9",
   "skills/tone-adaptation-3/selftest.py": "8edb8fe2c31d5a746223746673197f8543e2018c5f430ca1693b886a6c7f168f",
   "skills/tone-adaptation-3/.phoenix/originality.json": "58e8049844daec67ca1514cbc136dc2494b5a6b64aac4d1a100122cd5c3632b7",
-  "skills/tone-adaptation-3/.phoenix/provenance.json": "454f4d383bc706ada509bd3166a33fcee365a4ddd03288f6c172a0eb6703a776",
-  "skills/tone-adaptation-3/.phoenix/selftest_evidence.json": "a4ac1c1ca3075ccc03c17cb5ccbebeb5a3da1f84335eb38c79b1c0e56895bff7",
+  "skills/tone-adaptation-3/.phoenix/provenance.json": "91e8d65175a359abd0f6279b0bee310346d3cf013bbf6f7b77429aebdac9c794",
+  "skills/tone-adaptation-3/.phoenix/selftest_evidence.json": "987801be0d36e09080cff97090048b01d6022b30f02a8c59bf44f3689278e7d1",
   "skills/tone-adaptation-3/references/creation/p0.md": "b21aeba9239d25752a36e0e0fc854fc71930e0dcfd3a12d5b0aedcd2e67c88c1",
   "skills/tone-adaptation-3/references/creation/p1.md": "6bd68c2b8b8ff7970537509c24778e5d5acb7b549229a35c4813aa9437afacf3",
   "skills/tone-adaptation-3/references/environment/p0.md": "662ae85b5914d4396e24c72659bcc049a8ac94d4f6da861be9651efa3d08189c",
@@ -66,7 +66,7 @@
   "skills/tone-adaptation-3/references/production/p1.md": "84b68e781bdccf83b480113e11bb27b850e52e257623eff6b7d3cefba89d6896",
   "skills/tone-adaptation-3/scripts/main.py": "32041407ec569d754ac83f8a4684fb692ec1a517de5729c8f21476230c85357c"
  },
- "sealed_at": "2026-10-18T20:12:01",
+ "sealed_at": "2026-10-18T21:04:58",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

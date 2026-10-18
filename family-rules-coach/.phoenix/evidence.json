@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-rules-coach",
- "merkle_root": "f2fa8c67101ed151ed54d13faf59fcab707c9297de9068a353000b8439830dc2",
+ "merkle_root": "2af0923ab4e470b1764916e25e483958e3c27685f3b8f8b0c0adb6b13f0e2fdb",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-rules-coach-1/run.py": "ae5af5cffcf29b9515cb6fbe9dba8bbde8a7e9ded95dd0ca3e1be3db6a51ab6e",
   "skills/family-rules-coach-1/selftest.py": "b9c49ceb740d5c39c08ba9c54fcb2a685829f2504391a7dc959e628201dbf246",
   "skills/family-rules-coach-1/.phoenix/originality.json": "b63ede31c15912140baa7df626632d80fa8dad3468868c2610629122b5216cb0",
-  "skills/family-rules-coach-1/.phoenix/provenance.json": "034ecf8fc503f3c91134af11c58acf3459f38d1b0aec739b512fd730dfa4f81e",
-  "skills/family-rules-coach-1/.phoenix/selftest_evidence.json": "f54df6554b542ef34fdda4ce6bc042ad682e0f81d2228e6150b7e55a51df8059",
+  "skills/family-rules-coach-1/.phoenix/provenance.json": "96447ca0e9b4be2e264e897634fda8677719e4cbb040e1b5f8ab7e7ec7cfe258",
+  "skills/family-rules-coach-1/.phoenix/selftest_evidence.json": "4f6abac42004dee4aaa2dfb4559701651a7d37027423d31542926cc0c14466dd",
   "skills/family-rules-coach-1/references/creation/p0.md": "bf1499b53d307c08fb3a886da6f5b9a753afc1de64cf4aa300d7aaac341e71b0",
   "skills/family-rules-coach-1/references/creation/p1.md": "563d126fad7e6fe84402ed2ab257e946d898e958bc598896273f4708636d1adf",
   "skills/family-rules-coach-1/references/environment/p0.md": "bacece495a3198686e3eb5582ed11d852769109873b95461314ec595d719954c",
@@ -37,8 +37,8 @@
   "skills/family-rules-coach-2/run.py": "6431b4144d899b3ed9b71eadbd7a70dd24213bd661666edc0b51c8cd8cf80c2d",
   "skills/family-rules-coach-2/selftest.py": "3de973e5e49a5b1a0d9f473391b741186c8b5b44af2985ae45831a0c3c5a5eb5",
   "skills/family-rules-coach-2/.phoenix/originality.json": "1196ee4b3ef43ad217a507240239a835d80f6d1c9198c9b4e51814f13872c851",
-  "skills/family-rules-coach-2/.phoenix/provenance.json": "8a6d6e67127c6e96882767b766ed7a3123c6dfff1114a9cd4f27222672ccd949",
-  "skills/family-rules-coach-2/.phoenix/selftest_evidence.json": "fe49f6ce8c50402af58ffbac7e1360acc8deada0736a3f93ca196e38121dc8d6",
+  "skills/family-rules-coach-2/.phoenix/provenance.json": "656fca8b88ddb56da3f9f3737d24cc0244e41b22066de00b75e0148cb536bfde",
+  "skills/family-rules-coach-2/.phoenix/selftest_evidence.json": "27d81c63a9c8a0d5c14ff6459e26daf09b280e3abe0ae1ac1f529f604e314551",
   "skills/family-rules-coach-2/references/creation/p0.md": "128b8e8a8c82e17a1f6dccc878581c0c1ead3b737f61ab7318d0d258402bcf8c",
   "skills/family-rules-coach-2/references/creation/p1.md": "92c4ac8666f9799cbcdc6c3e015239d70aae1e9e4763c52835b503026b12b42d",
   "skills/family-rules-coach-2/references/environment/p0.md": "c8e7b099e71fb31ad2182112c1b6e24c41a4fd28434f4055d9b4737d8910779b",
@@ -54,8 +54,8 @@
   "skills/family-rules-coach-3/run.py": "ecba54fdcfa7261856e696d994e57976a1d7302ab796a8dad4293b6483b1d1ca",
   "skills/family-rules-coach-3/selftest.py": "0e29c4eea39fe7f77b0d714d1960a0066100479ed94d265728a010f8c24e22f6",
   "skills/family-rules-coach-3/.phoenix/originality.json": "51cb4f9c1baa1a92b4d5ff1156ab73a5a02ee2ba6b032c1bedfe18d979540135",
-  "skills/family-rules-coach-3/.phoenix/provenance.json": "938751a91ca310c86598f57354d7eac5e3df16fc9bf882bc5118abae61c7c5b4",
-  "skills/family-rules-coach-3/.phoenix/selftest_evidence.json": "0931942546c7fed3ebee81323c94b0879803fb4797ca27e8340d182e566542dc",
+  "skills/family-rules-coach-3/.phoenix/provenance.json": "9855781a00b4c587841bb63b4d345b793b317dee81d8ee089ddb91b60b759f60",
+  "skills/family-rules-coach-3/.phoenix/selftest_evidence.json": "8ca0dc69d6c93a19e6dde7cd6ef11f9893055d1a2c1b6c9ce1a07a161b3000f1",
   "skills/family-rules-coach-3/references/creation/p0.md": "29df8696a497688f5638356fced0d2ff644e7b49a3b490aa603be931fa819e0d",
   "skills/family-rules-coach-3/references/creation/p1.md": "80ab988a58930376fbe48ef59e9b9b7db964c3412334c54bade69c088b0be4a0",
   "skills/family-rules-coach-3/references/environment/p0.md": "5e2e615c75abc4f3366f54bc8d40e3121067e2c756538fdcf3dad38df3665918",
@@ -66,7 +66,7 @@
   "skills/family-rules-coach-3/references/production/p1.md": "327a4ee30d545d614639084f9a90c49052c9fc9d13d4aa7fb8ce7a41d88c941b",
   "skills/family-rules-coach-3/scripts/main.py": "b026629521da862a05042d9c0cd9e9b13a9df3d13a09befdec73d7c536e3183a"
  },
- "sealed_at": "2026-10-18T19:59:08",
+ "sealed_at": "2026-10-18T20:58:41",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

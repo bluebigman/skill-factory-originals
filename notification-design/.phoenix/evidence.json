@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "notification-design",
- "merkle_root": "023a88bd6e0d89e67e09d4934b1c8bda4bcc9ea769a98c1b0572838e39c6b450",
+ "merkle_root": "e584ba6e6ff36c4c32c1a7fd952c61dbecc80d7cc97511a2302e4cac375c4a70",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/notification-design-1/run.py": "19a1faca2c12279cfebfd580545d6f6823b081bea46bd5a710bbb06ac304cad3",
   "skills/notification-design-1/selftest.py": "d1a7148a3f0d64bca728a0b69999ddf8d654f5606a510573f56b6cac1feb790e",
   "skills/notification-design-1/.phoenix/originality.json": "b32745809f6bbdc73f89ba8be9b6e5c44a47022be09cb6931a82e7af40fddcaa",
-  "skills/notification-design-1/.phoenix/provenance.json": "1427b0e783efcd67ea13f70562f6564aef02984d2212b3c9e03658ef8c23c8d3",
-  "skills/notification-design-1/.phoenix/selftest_evidence.json": "7e2c9d21d56cab0880e8dfc71776f209eaadad314e29fabec5b4004d98261482",
+  "skills/notification-design-1/.phoenix/provenance.json": "a16933adf71dd3319c4201a3cd5a94c571a2de96bd5352d3b587b11f42109010",
+  "skills/notification-design-1/.phoenix/selftest_evidence.json": "ebc45672cf469ebbd192f97b65e277b1675841149ed9ad17946e5f480cbdd392",
   "skills/notification-design-1/references/creation/p0.md": "0126bde6961f701c269b4dbfbb6cbc69b54ddf1e98caf149d78762947bd7c7f1",
   "skills/notification-design-1/references/creation/p1.md": "17d2542fe4907820eaf74466f867110f10a48c5ce5e5f4a244b8c82c6035ce63",
   "skills/notification-design-1/references/environment/p0.md": "a2c8168eab9cec508e637590f607bd3bf66f9661919ea78100045e5ccada2038",
@@ -37,8 +37,8 @@
   "skills/notification-design-2/run.py": "57a38178b603e9d70bd42215744a6488cae5146160ff4eb71d0c79b11943890a",
   "skills/notification-design-2/selftest.py": "36e256b1313ec3a0146a2e75c83143cbe8a7b20eb58baf456f7d240f45c87a18",
   "skills/notification-design-2/.phoenix/originality.json": "6d6c4822f80939c545acc704a162f79a12fa51744549812c739e7657afae1721",
-  "skills/notification-design-2/.phoenix/provenance.json": "75fa70ebbcee2cad6ec9d369a5347378871e96bf9b6307430dfb973e41a46d6e",
-  "skills/notification-design-2/.phoenix/selftest_evidence.json": "79ecf9078fc1176e441d4b8315da0d45d05c4f5bb604cdac26bfa70a91a55b4c",
+  "skills/notification-design-2/.phoenix/provenance.json": "40acb53117ebb01d2dab9fc25f5d0c0667812937815a14ae4714630f040dba0f",
+  "skills/notification-design-2/.phoenix/selftest_evidence.json": "9097a011e4f5ecd9cac6e17248355e914e14e7c8b2c7d2f3f6c2eea83f690a23",
   "skills/notification-design-2/references/creation/p0.md": "299b7392dff60a3da8427fdf50c041f34a2d0957cacebd74645edc65705bfaee",
   "skills/notification-design-2/references/creation/p1.md": "78e5856346d25c036bf6e626b638c0d2551c45397f657711aee64317cfe70b06",
   "skills/notification-design-2/references/environment/p0.md": "879de00f595224b255cd8e722e57d7ebc034c6ce46a8e0c279169d5b31f4b3e4",
@@ -54,8 +54,8 @@
   "skills/notification-design-3/run.py": "6d45fd0985f1f6e342cbcee77de3a4fcf0285a1ac1e2c43f0b3f8fd0c8f63f54",
   "skills/notification-design-3/selftest.py": "cbc8d15b777f8bcfbeb4fa74ce65275b1af28f721fc6bbad25d7705ddacfc83a",
   "skills/notification-design-3/.phoenix/originality.json": "747d6ed887a6b85d102219c2e9691af9b2e007a2fa646ba8f0cc3b9e6a7ce26a",
-  "skills/notification-design-3/.phoenix/provenance.json": "1c6b0702ca5094c9be3e578c283469db43cd123358338a68bf383ecf366ea06f",
-  "skills/notification-design-3/.phoenix/selftest_evidence.json": "c61335862a30aa3e27b758d1fed925839d4c4b69c2863ffd7ea5db9c6c77c0ad",
+  "skills/notification-design-3/.phoenix/provenance.json": "81f3a9e6f316cf65c68e67a5aedbb1cb6796936a53cb169ccda1369c8d6df6fa",
+  "skills/notification-design-3/.phoenix/selftest_evidence.json": "5da68241470eaa5a08858b23dc0bc25d53e9531e3ef2753488704a504c488671",
   "skills/notification-design-3/references/creation/p0.md": "bbda1ae6a35d0bbc396c9480fae316c8da184e5b7ae6211b4605ebbe086f60a0",
   "skills/notification-design-3/references/creation/p1.md": "ebec72716ac7985bbe398242387ee456c66a0b1d59bb7ba853d41d434550b402",
   "skills/notification-design-3/references/environment/p0.md": "56ada1450203b3dc86d08b040710f5ea15443e370f407a41298685ba79673bab",
@@ -66,7 +66,7 @@
   "skills/notification-design-3/references/production/p1.md": "ad5ab65f40e15ddd0c5f5a6ac7c78093b2cdfb9205d88ee4cb8979eff42c65e2",
   "skills/notification-design-3/scripts/main.py": "70c7074108395793defbe72f36c5e628451bcb0a88050795a7a9d8cfc9a48a35"
  },
- "sealed_at": "2026-10-18T20:04:38",
+ "sealed_at": "2026-10-18T21:01:25",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

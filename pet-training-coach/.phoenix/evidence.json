@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "pet-training-coach",
- "merkle_root": "8bb4d472059a83b4e7a3425535091f4b5d108ea3bee385ba1d9bff01fcb7046d",
+ "merkle_root": "f302332ab0cbe68b826ceea1509fa827cebb769348439188bd4b826155250034",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/pet-training-coach-1/run.py": "1f51f12b9da1a360ed15001b2e9c2f2f9433dd612d022fc142537447dfd4f692",
   "skills/pet-training-coach-1/selftest.py": "c8759bf29a7f31ad2909cc3168ed9d8929ac3abdd8d1e695f99c91fc01084343",
   "skills/pet-training-coach-1/.phoenix/originality.json": "6c5f8b4d7321804bd8f69abec14e41c94af2ea1e6d83695b426723652fc8f97f",
-  "skills/pet-training-coach-1/.phoenix/provenance.json": "14d16c3dc6fa72cf437dd4e6a9b267e645b7255c033ea7ec47cb3519d82809c3",
-  "skills/pet-training-coach-1/.phoenix/selftest_evidence.json": "0f70e448fee1141d9a74e07ca52fe2f3435e9a978ffa7c85c880e77a9d768f80",
+  "skills/pet-training-coach-1/.phoenix/provenance.json": "c38c1a1efcb11c74b2cf93dc8c0846ebdbbf80a579f83b0aec39431cc8fecaf1",
+  "skills/pet-training-coach-1/.phoenix/selftest_evidence.json": "5538dbf5c87feda0d170bb2bd386c469158acf51d889be42cfb9518fafad4281",
   "skills/pet-training-coach-1/references/creation/p0.md": "aa828b6096fad3b1dff3faed4e0f00f611e4e38279a9c354f3f03bc46cbc8ad3",
   "skills/pet-training-coach-1/references/creation/p1.md": "3ec4bcbcc441760e57bdb86b8215a7b857e5d01ae5ef678fab8cd36510a46d60",
   "skills/pet-training-coach-1/references/environment/p0.md": "0728fb266b7a8f5c0b1ebffaeba0c818e8377d12603eb7e676e606d084537c12",
@@ -37,8 +37,8 @@
   "skills/pet-training-coach-2/run.py": "3f6a2501200c8ebda7d5c4a24bc91684cb5e8396a2ba9e64faef7fabdb348502",
   "skills/pet-training-coach-2/selftest.py": "f75d10c0a1a6246a195d37710727d601cc6ffe8107db68afbdf1565f64445076",
   "skills/pet-training-coach-2/.phoenix/originality.json": "6567acf4fec81ffe88c82b9290cd71c2705816577a50c190fc011a5aa957de2e",
-  "skills/pet-training-coach-2/.phoenix/provenance.json": "e94c5e44c18b40835b6c2a46785d3f039168b01ffa5b528071389aea45bdb30f",
-  "skills/pet-training-coach-2/.phoenix/selftest_evidence.json": "705378e332d3d63228808408c4673ab3268e42dd31c62dd76ac15e1e4346bf1e",
+  "skills/pet-training-coach-2/.phoenix/provenance.json": "eed38a120a5746866ce4ef3a7e19e22997cafc23286e493d4940971c443af879",
+  "skills/pet-training-coach-2/.phoenix/selftest_evidence.json": "c7b99daf61eff763e6313a2eb0a9463f5c1dade8b6e525e7f380cb3a0d719609",
   "skills/pet-training-coach-2/references/creation/p0.md": "cb9ae4e5bc737d7864abe886a07f364c7c8218f7d20c49895b27edd7386ac526",
   "skills/pet-training-coach-2/references/creation/p1.md": "df9c4c76a54b2193e40c34df646de5c74e0e4707247ce65554c72aeb67cd5bd8",
   "skills/pet-training-coach-2/references/environment/p0.md": "4ac1ec0543705535421de8ea61152a45497c3e5963ca115d2e2d1fb294b751b0",
@@ -54,8 +54,8 @@
   "skills/pet-training-coach-3/run.py": "b47061ea581718d2bab5840bc5c746dec530f3ddb6190567b4bad19d23b6328f",
   "skills/pet-training-coach-3/selftest.py": "be633380f3f00164776574799f5194b9a5648d37b1216e83f6aba7886806362c",
   "skills/pet-training-coach-3/.phoenix/originality.json": "7391c0d8f5a87e6ac9ec55041aee2bd5f88b4c92198493ba55c07f05269f03ac",
-  "skills/pet-training-coach-3/.phoenix/provenance.json": "f88fadb65b56ab599578e4ca9dfa00faaa3a73cecde50a390df1d7300f84ec39",
-  "skills/pet-training-coach-3/.phoenix/selftest_evidence.json": "16bdc962314dc16b7d0c40d794dabeeadd0c9523037fff5ec03bd53357301a72",
+  "skills/pet-training-coach-3/.phoenix/provenance.json": "dda5ec630e212f3c384bc7a3373e3fa82650cad9815767e4c3ea61b99750c632",
+  "skills/pet-training-coach-3/.phoenix/selftest_evidence.json": "eb6ef4f19026c09073b813f7f898d8b7c6c513a67c428d65ed8b2c095a13d249",
   "skills/pet-training-coach-3/references/creation/p0.md": "d6bced7a571d33d01d52829351b4d03700dfc72d53444c9cd3765070c00f1982",
   "skills/pet-training-coach-3/references/creation/p1.md": "20d63fdd4351f60fab6c9b4d316e9a60b8f06b6cda847157c641e5f349354f27",
   "skills/pet-training-coach-3/references/environment/p0.md": "e704101b4b142c3fba212443262cf3cdfbfbe3a5d10951b5e6bcfec8f2724c16",
@@ -66,7 +66,7 @@
   "skills/pet-training-coach-3/references/production/p1.md": "01a2564a9eb6be543cf2f68002c65302918e08a50ad6f39190a739a4ffb07368",
   "skills/pet-training-coach-3/scripts/main.py": "0a64750474f270b1cee725ed23650c8f35a63b5d65d1137c805fcdaed59125c4"
  },
- "sealed_at": "2026-10-18T20:05:53",
+ "sealed_at": "2026-10-18T21:02:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-doc-standard",
- "merkle_root": "8d823e6c5560dc1eff59b896de74dfd61b34dd02d9e2849d27fb692de4b76334",
+ "merkle_root": "0587cf8b45cbd62e99a931b83a3d62cd7a4e8226f18beb3a1cef27b7d0c46266",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-doc-standard-1/run.py": "efcd13b0456e53207c65bda198534ef30c8133fc104cfbee0707a2d1ead753a9",
   "skills/game-doc-standard-1/selftest.py": "99a8f2216cc4cf63b6b3ec10af1994278f47d4c5bb0c4c95db42195abcdc4500",
   "skills/game-doc-standard-1/.phoenix/originality.json": "46eb06aca8d4b543c0164e5733b8199805100184db3b60c4042ab2019e6c66c0",
-  "skills/game-doc-standard-1/.phoenix/provenance.json": "b50d788b614410be96c842e36a4e965f2eaaa9d9301dd3ba5eff9a129972104a",
-  "skills/game-doc-standard-1/.phoenix/selftest_evidence.json": "e41849f80a938cdefdbf9ec1b2cbd030f3f74773bab7a22f552773a886b1f473",
+  "skills/game-doc-standard-1/.phoenix/provenance.json": "ded45e15c342113245e365941864a6ba645bc3ee04e8ae6cb3b0b6b2aafca9ce",
+  "skills/game-doc-standard-1/.phoenix/selftest_evidence.json": "9c394bec30f6f2317c920279fbc73cba4f374c5b3a257abf40c8c43fdf339258",
   "skills/game-doc-standard-1/references/creation/p0.md": "10e23bbdcad43fc3896ad1347b1f1872500f93ff0925fc9e08d1397d216cff35",
   "skills/game-doc-standard-1/references/creation/p1.md": "c131547ccefe66e7b63763caf7ca03e1574b2d0e8a13afc39a5c5cf6a07e4428",
   "skills/game-doc-standard-1/references/environment/p0.md": "16a6b313bf2e26723a251e7e50afc2d7b0881c5e2ef79bfd57c1630b59a693a7",
@@ -37,8 +37,8 @@
   "skills/game-doc-standard-2/run.py": "361ed94ec8128d1c50d34d9f7f8fc56c08420470b75303bdc5816743834115f3",
   "skills/game-doc-standard-2/selftest.py": "7359326b1e7bb5a3ba04c2053f41498725fa5ca1cf327278a6185e34fd2a172e",
   "skills/game-doc-standard-2/.phoenix/originality.json": "16685e7a8312f227c94fe2ad53f12d348428a3a8cb24749ebba0f0cfcd828a19",
-  "skills/game-doc-standard-2/.phoenix/provenance.json": "b2f26dd37fbfffba74bbe9a0dcec4c744183cbad5e288695eb104f41ab771d1d",
-  "skills/game-doc-standard-2/.phoenix/selftest_evidence.json": "30ec99c3aa797eb4c6687efe58f65509e507c617b24ffcde1c953ee2f4a5dc8e",
+  "skills/game-doc-standard-2/.phoenix/provenance.json": "a3b6f88560e6cae3759db393be90e4a0071bea53088c80e3e87bad1c33fcc9ac",
+  "skills/game-doc-standard-2/.phoenix/selftest_evidence.json": "07a579db93c1d78c4c2203a1e710f58ca31b61db8a80622f6e1406b1a50c8cfa",
   "skills/game-doc-standard-2/references/creation/p0.md": "bb2c54bc68ab1547fb725279d2ca6b2b01f259eeb4ebb7386a808cf8acf4b1e1",
   "skills/game-doc-standard-2/references/creation/p1.md": "af4cac0e8842afbfcf1941a97c09d398d7a59f3c3135577a267e423ccb64bd25",
   "skills/game-doc-standard-2/references/environment/p0.md": "25373772b67f29bedef7ffa914406b042c88788a02acf7f90053edcfafbd853e",
@@ -54,8 +54,8 @@
   "skills/game-doc-standard-3/run.py": "ed03eb4e7b7607383558b59f57486108b8cef0da7d390e5b7c7ccbe3656f37f4",
   "skills/game-doc-standard-3/selftest.py": "3addad6a129e2221411172c1f88ea3af8b7ef48604d9a7406d7994f562bbef3d",
   "skills/game-doc-standard-3/.phoenix/originality.json": "081d64eb6e51a840c6583b3012b616b28d6092c909d404b0761347ef7cc91f1b",
-  "skills/game-doc-standard-3/.phoenix/provenance.json": "cb21f6377492201318060cb0427a4f9dc20c148fb07614f85313557d612fa4f3",
-  "skills/game-doc-standard-3/.phoenix/selftest_evidence.json": "2f7ff6e07ae1ccf8982f5555f43e22b1d12700c90f71e4256d09240e9bcfabf9",
+  "skills/game-doc-standard-3/.phoenix/provenance.json": "b7e780527b978c582f1c9266bf20490ee515f21a20fe4a9d31335a675efae21d",
+  "skills/game-doc-standard-3/.phoenix/selftest_evidence.json": "049583b3bcffc1ad601e899575be4086a54e9b6a871a15a1684a1b772f8800d1",
   "skills/game-doc-standard-3/references/creation/p0.md": "149a4af5764eef34e4d76d0b89190dabd91f3a323f8fe4649184c53999cdc34b",
   "skills/game-doc-standard-3/references/creation/p1.md": "2bc19d0bc571fe7383a11216525a93618707b2eb2343d96d85059cd5c32d10ae",
   "skills/game-doc-standard-3/references/environment/p0.md": "9b7f96f6cc79a2870bcbdd6b039c3f60b5e578911a2a524a22efa339cfde31c2",
@@ -66,7 +66,7 @@
   "skills/game-doc-standard-3/references/production/p1.md": "8a127c982154d8666d15c4c99629dbd8f558ade615fdecdddf5a64aff6960da1",
   "skills/game-doc-standard-3/scripts/main.py": "989db8dc3f311832c91f95ffdc5aeb164c9f5822f8d2b522b1faea63a9681e68"
  },
- "sealed_at": "2026-10-18T19:59:44",
+ "sealed_at": "2026-10-18T20:59:01",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

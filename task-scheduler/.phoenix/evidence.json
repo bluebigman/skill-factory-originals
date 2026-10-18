@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "task-scheduler",
- "merkle_root": "c77dea6a72acb55689e2cdbf56af157d7a682c76ca919eaae566a1a1db63eba2",
+ "merkle_root": "864133750e72b10727c2c1e03cad06d767e3e8288ec0edaf388b34e586ee3664",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/task-scheduler-1/run.py": "3f95e216c7af2166f81dea14aee640bf9c310b2ad8b3fc5167524168e49b3aca",
   "skills/task-scheduler-1/selftest.py": "502e87a3ede46ba66ce5493e2db20686d2690a84dae7e6da20caf32402873474",
   "skills/task-scheduler-1/.phoenix/originality.json": "b06ce734159a3360c856fa6382ed83761eb78ae67fe217cf763396c3a9bfd4a2",
-  "skills/task-scheduler-1/.phoenix/provenance.json": "85925881de80d421d07a1bd094318739318639fe1a9017d566086c70f286f14b",
-  "skills/task-scheduler-1/.phoenix/selftest_evidence.json": "a31f08844a238a562301c1b240d511e43fc0b53417a0d6aa8cbc5d90e0774632",
+  "skills/task-scheduler-1/.phoenix/provenance.json": "65d5da97d23dc2a9bbd0f1669f21e8961fb03851ee6c44eaf94ba40307704209",
+  "skills/task-scheduler-1/.phoenix/selftest_evidence.json": "561a81c9786f8f9094f543e090b8988612630795b949b271e1f5a7a5ed722f8d",
   "skills/task-scheduler-1/references/creation/p0.md": "ad3b12d6f232ae81c4d4b0dcc79f54fb5bcdebe9e1fc6413e28d687f9a206cc1",
   "skills/task-scheduler-1/references/creation/p1.md": "6479f25d32c17ae3417099f5ee60c8fb391b4401b3ca9bcbd4db83e3caa7cfd7",
   "skills/task-scheduler-1/references/environment/p0.md": "710cbb38a3cf474157e83d5b495897ad39e9e73de069881536e0798defe86ead",
@@ -37,8 +37,8 @@
   "skills/task-scheduler-2/run.py": "b2d6d9ba55f7ba9bc2c1b38999c85c72361ab6eb4b149afa299380d33483e546",
   "skills/task-scheduler-2/selftest.py": "b456cd0c3492476cbd4f2233a1bd6cb5115f7c26615c3ad496a650dff187212a",
   "skills/task-scheduler-2/.phoenix/originality.json": "1665c8fd8f8beb1dada654b1fbdecf5241761316ee0b798a28355d2ce5e6812d",
-  "skills/task-scheduler-2/.phoenix/provenance.json": "d9a15d6d3312a45e2f3a30a546bd0c449aba2a59d109ce1e2ee6e595832b0e1b",
-  "skills/task-scheduler-2/.phoenix/selftest_evidence.json": "c4365d2868d0852a0c2fb0944a7df1e27bf7afcb3f452e922c8794790cf57555",
+  "skills/task-scheduler-2/.phoenix/provenance.json": "d5f4ec0c60c515b44db942d07451487436eb461c9be09f49d4c4df0cbf12aec6",
+  "skills/task-scheduler-2/.phoenix/selftest_evidence.json": "40c18a26950800926baddd69c493b93d40bd1b30d82dc0ffb3b49407a6550ef0",
   "skills/task-scheduler-2/references/creation/p0.md": "536f2f9011251f1000a350a265fbf35b3b237fe6bfd7f92f7b76d146c8dec82b",
   "skills/task-scheduler-2/references/creation/p1.md": "b58511780d7cb38155977ed7e32c8b70068069ed8ad6689bc4e4cad380b91599",
   "skills/task-scheduler-2/references/environment/p0.md": "e6bae6b645d5b5d31edcd8a71ef1b6233be7eaf6b9aebcefcbeee9433aa9981b",
@@ -54,8 +54,8 @@
   "skills/task-scheduler-3/run.py": "43621b4e6763f0d1d7e55c661bf5af3af29dbf33376a80f2f415b42694f2ad70",
   "skills/task-scheduler-3/selftest.py": "beb282d790e31edfff6f0263592d3157422ec5eb1fdefbe21d78e77c92c702c4",
   "skills/task-scheduler-3/.phoenix/originality.json": "cc8ed934028a8039600653b5249ddf03a40277f1875f3e1d2ca086aca3f885fa",
-  "skills/task-scheduler-3/.phoenix/provenance.json": "5f1e5cc17f08bfcebcf15d87762062b70042632ea5988f44156c2a8ba2ae4873",
-  "skills/task-scheduler-3/.phoenix/selftest_evidence.json": "33ad979f0664c08d363e8fe24dc80bbde668d3c84a31497ba277074f901abbde",
+  "skills/task-scheduler-3/.phoenix/provenance.json": "b1efb9f45d02250e69fbc32dd120c9b4fdbc520a0e2732c4cde8994b438238d0",
+  "skills/task-scheduler-3/.phoenix/selftest_evidence.json": "4a7d15c0a2c2491fbff0182a18a0b26d8d9d0f4fa4d286baeab86505d7a6fb3a",
   "skills/task-scheduler-3/references/creation/p0.md": "17445dced698d91dbe7e64c38f0b2b3fef9e55eb4e28bfcca43b34c008316c77",
   "skills/task-scheduler-3/references/creation/p1.md": "f7e2698f594438d76c987e4dc263734d76d9820eee3db68bbc32102d25398d5d",
   "skills/task-scheduler-3/references/environment/p0.md": "63b1941caf7039b57ee53be346fc03cff0aae367f60bb289126579f64300065d",
@@ -66,7 +66,7 @@
   "skills/task-scheduler-3/references/production/p1.md": "e9e8aa4248b9d380ea9748fc734d745a2654a0620031a52bec5322a6f054be19",
   "skills/task-scheduler-3/scripts/main.py": "d15c9b563bcc0489d9553cd7d73e194933b3db71d550b264445bf6d833fc17ca"
  },
- "sealed_at": "2026-10-18T20:10:58",
+ "sealed_at": "2026-10-18T21:04:32",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

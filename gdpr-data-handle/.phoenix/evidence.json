@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "gdpr-data-handle",
- "merkle_root": "b480360490a5096cda7d2c6df924ad286f1e754e4587bc67dcc4255c5974663a",
+ "merkle_root": "15cf1ffe74790f97b21dae8553dd435fa9b0e01a0268ffab4907baf93edec9c3",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/gdpr-data-handle-1/run.py": "7e32ad98106078a40f0377f4fee3d2625e62838682eaa53d3e2a051e68dba2f3",
   "skills/gdpr-data-handle-1/selftest.py": "a1a724348c7fdcbef81b7cd8a5483c76c973537d75aadb506e808d13063beac2",
   "skills/gdpr-data-handle-1/.phoenix/originality.json": "5e28ed47a59bd5d856852756f8cf8fa64fb6046e342325af5d8444537ccbdf49",
-  "skills/gdpr-data-handle-1/.phoenix/provenance.json": "97d99d206b51133e0d70f6beb8031fe26e2fbe312218b1a5d19b2f4e65b4de24",
-  "skills/gdpr-data-handle-1/.phoenix/selftest_evidence.json": "53557799842cb74ff3fc44101526b743bb9cb2b1c11ec138aa5079a52ce31ebc",
+  "skills/gdpr-data-handle-1/.phoenix/provenance.json": "32fd41ce4cae1d1b2a04c8884d27b9ee8989022b7eea2bdf22ab3368ec7ca84f",
+  "skills/gdpr-data-handle-1/.phoenix/selftest_evidence.json": "71b2969432957f53d39485685cc8e0bfb1661e1c984b092cc4c6f4ddfe963bd7",
   "skills/gdpr-data-handle-1/references/creation/p0.md": "077a60b448ece4ec64aa41f4ccad0f1303c32d587296cfdff7b111d3db5f391b",
   "skills/gdpr-data-handle-1/references/creation/p1.md": "4be454941ecdcc3fa9a93ff45a66271a00712596f8c9293ff86d913c04f067c6",
   "skills/gdpr-data-handle-1/references/environment/p0.md": "862f3542e0c8f4b5f83c3fcb024302ede9bed57fbb2c13c422d48213b2e1029a",
@@ -37,8 +37,8 @@
   "skills/gdpr-data-handle-2/run.py": "8bbb5cb2e90a4342121f2837f85f4c3566c969c65679f8a644a77e80835f8692",
   "skills/gdpr-data-handle-2/selftest.py": "a75749da72a3788a2260780222fe4ee502a4f70ac42d83eb800ed12aea62694f",
   "skills/gdpr-data-handle-2/.phoenix/originality.json": "915a429a73537cf537bd3323aa99ced375e564a0821389d69750f88b05bdd5a8",
-  "skills/gdpr-data-handle-2/.phoenix/provenance.json": "7db1e122b17b28e396fb86aab269804ceef9230981ce6edde66cf25e184f2f39",
-  "skills/gdpr-data-handle-2/.phoenix/selftest_evidence.json": "a7ead46e24e3bc8d68907a1210089c0a5dfa6864ac5c240d212c5744c1cd6ebb",
+  "skills/gdpr-data-handle-2/.phoenix/provenance.json": "549564484dbb34814b053e3c0b7c3aa47ec2bdccbb2bdfeecc7416780477cc2d",
+  "skills/gdpr-data-handle-2/.phoenix/selftest_evidence.json": "9e2e1520655500e235bdb3e48f7624841d49002cd7cbf1e70f51bb3a83416c4c",
   "skills/gdpr-data-handle-2/references/creation/p0.md": "e41286197886e1f36c0399334b955ac3a6d4eda976ce9a5484ffeae2833fb67d",
   "skills/gdpr-data-handle-2/references/creation/p1.md": "1e07e795bef028686896d1c08124b7f5eb035a9b7f956c766993e6c2685e8826",
   "skills/gdpr-data-handle-2/references/environment/p0.md": "32cb1a89d6de0f5a1b146d00845b1c9c2ae2be32a0217733d4e7a2c5958803c6",
@@ -54,8 +54,8 @@
   "skills/gdpr-data-handle-3/run.py": "b1e0508c9783db747028c08b9fbe35825ce73396784da0db7b8dc3331bfe23c4",
   "skills/gdpr-data-handle-3/selftest.py": "b8fcfe1e2f35658ac64e3c9804fe2c2f8a784abef06f0e3710adab0d6e71dd20",
   "skills/gdpr-data-handle-3/.phoenix/originality.json": "36160a298c2f5badf9dd139e2aaf3d7e70c1ed58916127bb12a94fe9282b4a84",
-  "skills/gdpr-data-handle-3/.phoenix/provenance.json": "8abda898f01fbac9eedbd2e351f57e061b288f565e84447dac9a31b3b2f0ba9b",
-  "skills/gdpr-data-handle-3/.phoenix/selftest_evidence.json": "66840b6b5b9bc72a11bcf8b2ff129f771a97b161716c2c9398984984e12b136e",
+  "skills/gdpr-data-handle-3/.phoenix/provenance.json": "9d08ff3bd79732dfb47b16d1fb5ee9cfe48480e5126cbf2b68b30b99b2b6338f",
+  "skills/gdpr-data-handle-3/.phoenix/selftest_evidence.json": "240992ab29de2bdf2011f6e4da96b7d317c8b5b17ce56b1c4ca2355f2043baf3",
   "skills/gdpr-data-handle-3/references/creation/p0.md": "423bbb3ed8814d2f7ffa7e6d887759e4e8c7a0ca3f78e7bc4befe0ccc23798f6",
   "skills/gdpr-data-handle-3/references/creation/p1.md": "f68cb4f658ebdd19962bdea5b565af597b1bb151b614028ced0dfde7b6a423b7",
   "skills/gdpr-data-handle-3/references/environment/p0.md": "7319364b84d79a2c4a18e1e62a9f8a89979d15917a34eb61d58bb6c19d5666ff",
@@ -66,7 +66,7 @@
   "skills/gdpr-data-handle-3/references/production/p1.md": "619f9305ef08b1c2ffdbb339d68fd4dc4829a13b446051c63c4a92dd3877f582",
   "skills/gdpr-data-handle-3/scripts/main.py": "4a63db066f8dcba55f5e51039498061ae8979c167acf89fff62d40a9ed80f478"
  },
- "sealed_at": "2026-10-18T20:00:07",
+ "sealed_at": "2026-10-18T20:59:12",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

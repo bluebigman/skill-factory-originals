@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:56:16",
+ "at": "2026-10-18T20:57:06",
  "skill": "defect-triage-pro-1",
  "slug": "defect-triage-pro",
  "passed": true,

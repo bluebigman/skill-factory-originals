@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:56:28",
+ "at": "2026-10-18T20:57:11",
  "skill": "dev-env-bootstrap-2",
  "slug": "dev-env-bootstrap",
  "passed": true,

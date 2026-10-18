@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "knowledge-conflict",
- "merkle_root": "6fe6b0f2b03bd946598920e1e1e1a742410a68f15a24dff298746e3f104868e0",
+ "merkle_root": "6694f7189457fda28865afe644cfbc401ecc0864205b75e4978af1856e918d78",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/knowledge-conflict-1/run.py": "7c02cd507b21fceb761603156e34b23d15ca94e1be3985379ed2ce7c4fbdd49e",
   "skills/knowledge-conflict-1/selftest.py": "5c9cc2d6ed9fa623f651673c92a4c1266bd2bf3e6c7fde35c6600cded63e2c50",
   "skills/knowledge-conflict-1/.phoenix/originality.json": "68b429a270a7ee597ee0bfa80a26e72259ec0b7c10e598dd16d756f275be75b0",
-  "skills/knowledge-conflict-1/.phoenix/provenance.json": "246e8c06da7fdcdcf00ad9c9f58d1e8036544fd887ebfe44e94af5dcf9e6169c",
-  "skills/knowledge-conflict-1/.phoenix/selftest_evidence.json": "60ccc44e06825eb3b1271e75112bbc7349961ea1667dd6b4b168fa78ebdae842",
+  "skills/knowledge-conflict-1/.phoenix/provenance.json": "85188af9108a5eba144bb9099dd256bf5d6b0723c2363239c61912f6bcc0589e",
+  "skills/knowledge-conflict-1/.phoenix/selftest_evidence.json": "070edbb3a4e95ba4c7708cc2beb542d4ae7d8503f59167d249982241f1bbebcf",
   "skills/knowledge-conflict-1/references/creation/p0.md": "61c797896db07decb35ad05bba955c93ea0571f7ce8e910c1284785a21d280d1",
   "skills/knowledge-conflict-1/references/creation/p1.md": "c20403e29ad5539ae76e7f7408b24df68dcf3e5cd39e1d1813bcc6acc1aba9b7",
   "skills/knowledge-conflict-1/references/environment/p0.md": "60cdf1dcaf9c5800874fca35d941534ae59576a063a6647725cd5d309e7dacff",
@@ -37,8 +37,8 @@
   "skills/knowledge-conflict-2/run.py": "b059e10a1856165af4bf6fbb7a2bd9c5fb6f4ae94c1ff5979aac1b718d281642",
   "skills/knowledge-conflict-2/selftest.py": "1154712a1f60fb0a39fc71e4ad527f5d0d6f7dc52180b96d5ffb5a18307a31cf",
   "skills/knowledge-conflict-2/.phoenix/originality.json": "3508cf6c535de0c50f89e655c0e9537491c6f2bfd72ec1da7aced938a0ed8d75",
-  "skills/knowledge-conflict-2/.phoenix/provenance.json": "72715bd6d0e270be5d8937ee1459e398991db8f7f53dc4939da22820ef215d5b",
-  "skills/knowledge-conflict-2/.phoenix/selftest_evidence.json": "d5c187b4949b0867c307642087b6e5c3d54a0cfcfaae43827f86725f4b898e6a",
+  "skills/knowledge-conflict-2/.phoenix/provenance.json": "f5dd612879e1be82ac87c9a541c6705bc4ef92497d2bcba868d7476380392d51",
+  "skills/knowledge-conflict-2/.phoenix/selftest_evidence.json": "5a195d63f56e1f68289ce8f18cceb56ab4a611e29a407b6904ba77eeefb5ddfa",
   "skills/knowledge-conflict-2/references/creation/p0.md": "3875f25fdeb36aca606d20400c36d20c80bb4178d5bbdcf2f3c373ad4126f96f",
   "skills/knowledge-conflict-2/references/creation/p1.md": "736d7d3b604c51139eeb6065d027888b43b4f3d2d0f40c9a9a50d0b3663dd6dc",
   "skills/knowledge-conflict-2/references/environment/p0.md": "cda3a0adc3b46884bd2c87a2d63f5902ead83b5f1ed79c025412873342611dc8",
@@ -54,8 +54,8 @@
   "skills/knowledge-conflict-3/run.py": "72ba10d974c68b305d4180fa0cfe271a4d8f040553d46d62ddd630d41812595e",
   "skills/knowledge-conflict-3/selftest.py": "1eb2ff44ecab865fdf40f97b7f9f679a5f12ba3390277af654cd63e7b001e0e0",
   "skills/knowledge-conflict-3/.phoenix/originality.json": "f9eaf277170b9997948be9f3d04d95f89083758fef8aa695ed0dfe85e866b3bf",
-  "skills/knowledge-conflict-3/.phoenix/provenance.json": "e79f122d723a46423324447d144eec1d4bc3b2690cf47fadad50655b1a50b342",
-  "skills/knowledge-conflict-3/.phoenix/selftest_evidence.json": "f95af2f50faf75f51bd0bca0aa172c93c24f5399ee82a842eb09149855f41b62",
+  "skills/knowledge-conflict-3/.phoenix/provenance.json": "a5bee96acad45d8d60b508ca6dedcda509eb9aa866d53b3a04f55e7e01f81204",
+  "skills/knowledge-conflict-3/.phoenix/selftest_evidence.json": "ac683b06c0395a323780362f185c4ff8d2dc852ffb95029eb1c7281a2addb602",
   "skills/knowledge-conflict-3/references/creation/p0.md": "d9c3cfbfd2783cb56298bfa5abe09836d2294b71e72842b5c1d77c83dec50567",
   "skills/knowledge-conflict-3/references/creation/p1.md": "a788fb3984b22b9fb16c6b82739741ab81cdbdff2da0504d46b0a67884e75945",
   "skills/knowledge-conflict-3/references/environment/p0.md": "30483ce3db673ada78a142094940e4b65cc7b8aafbe0ff7e98d4469a99a33f23",
@@ -66,7 +66,7 @@
   "skills/knowledge-conflict-3/references/production/p1.md": "257be559468ccfccd39003a9fcaf991cdce10d6c3071f67b3d671c77e3246036",
   "skills/knowledge-conflict-3/scripts/main.py": "4eb2cc956aec86a7a6a66f151a2e29ec65e3148543b9468da3b78f8c03235697"
  },
- "sealed_at": "2026-10-18T20:02:05",
+ "sealed_at": "2026-10-18T21:00:09",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

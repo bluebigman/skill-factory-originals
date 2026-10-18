@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "kanban-flow-coach",
- "merkle_root": "3a420c5f277443e3dec37d358e0b4283e9b84b5e607f1b8bcb6ffc48b6a7303d",
+ "merkle_root": "13e215af344bc69c62dca3bf616976810d284c2d3a3b0635967f0951bfa4a2b0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/kanban-flow-coach-1/run.py": "24dd5dee691093d0529c74534b993f366035bf266479353f493129ec53ac3e4e",
   "skills/kanban-flow-coach-1/selftest.py": "558ddfdeddc3e771490121e9a06bfda65da6e92832963d23a1c62feac5897d96",
   "skills/kanban-flow-coach-1/.phoenix/originality.json": "50b4ff4e3cbe76a7bd1b7ceef9011b2b9d11c6db8a709f8b0f8993c1d54a12e1",
-  "skills/kanban-flow-coach-1/.phoenix/provenance.json": "19ab2c0ac5fe8ef111f5087dfbe4ac3c1742811d0cd260ad457577357a69c6af",
-  "skills/kanban-flow-coach-1/.phoenix/selftest_evidence.json": "901e85d445c323f7d288004cf68a564e77eeeb3838c2b9476d7cb9a468217df5",
+  "skills/kanban-flow-coach-1/.phoenix/provenance.json": "f2550a859d1224015a101a4f6095cde16ef8f1fb8fbd843ac41970be539ac411",
+  "skills/kanban-flow-coach-1/.phoenix/selftest_evidence.json": "8daef0396733e866e81314f7dcb3e399cfc00ddf8300cd69141e7e2832c68817",
   "skills/kanban-flow-coach-1/references/creation/p0.md": "750b03553dfc83a80d7cea68d88f303a106ffb05e5e2843f29fcc6ddd23c8b89",
   "skills/kanban-flow-coach-1/references/creation/p1.md": "d0feba37ca7cea193d89db5a28b2086c5e10f01be384d8b8f252a7d63700ddc8",
   "skills/kanban-flow-coach-1/references/environment/p0.md": "67e82cc532008e8937d40e1977ff02a14c2ec8dfcf0e725159aa31c7aaa248dc",
@@ -37,8 +37,8 @@
   "skills/kanban-flow-coach-2/run.py": "47e4483534a010c1151615d732b9eb8289bea33fbebb3b7270919d88fb45d8ee",
   "skills/kanban-flow-coach-2/selftest.py": "f642e15ab94dee0251ea51b1d208b68473982873c6a30fbaed48e385841095fe",
   "skills/kanban-flow-coach-2/.phoenix/originality.json": "201c3fe0eb915f8945f6698fd504259d90bce8b6fda4fa098776706a4baa3cea",
-  "skills/kanban-flow-coach-2/.phoenix/provenance.json": "862b529c4e097a281f737b0c919f8169be499205cbf51b23622b6fce3419e280",
-  "skills/kanban-flow-coach-2/.phoenix/selftest_evidence.json": "3f66f34b1cd4ee325f5b3552b2445ff9e2e4c2c18660f692362e8c7e8b402317",
+  "skills/kanban-flow-coach-2/.phoenix/provenance.json": "6bea183985eeccdc3c777dbd83e648b7cb88fe2025b2a5948551b9fc5e258cf4",
+  "skills/kanban-flow-coach-2/.phoenix/selftest_evidence.json": "0e21d7b8e9e0f3698db73f63625a0293664f20549ff993043bc081da57cccb4c",
   "skills/kanban-flow-coach-2/references/creation/p0.md": "ad91f79014b7bc2f38e658d2f78a9bd3a2489a7d532857bb476210f381eae2c6",
   "skills/kanban-flow-coach-2/references/creation/p1.md": "15b2d9cf0e126cfa5091e78c52408d905437eeaed8dd1b7c2e29922cbb16d137",
   "skills/kanban-flow-coach-2/references/environment/p0.md": "ddd975e2c69a8eca267ae53e25a25c5642f2e5c9fe1f6588f6feed6fea05ee20",
@@ -54,8 +54,8 @@
   "skills/kanban-flow-coach-3/run.py": "a3ffb0d9e8b7a795f5f63a5f3e8bd2f7340bb1cd96d9c50c3def9811692e99ac",
   "skills/kanban-flow-coach-3/selftest.py": "28881b7354c15144772d6d25a5e809bc5a21b32ba02fa536036878ed02824e6b",
   "skills/kanban-flow-coach-3/.phoenix/originality.json": "af2e6d80395d32552f67830465888b57f91acbe0e53e48448216c65458c9dc9e",
-  "skills/kanban-flow-coach-3/.phoenix/provenance.json": "7c2bd7fe4f161b08ef99109b2b448f2accad7bfc863dfc3840994f36791050c0",
-  "skills/kanban-flow-coach-3/.phoenix/selftest_evidence.json": "24dcdbea7c278941e65074d14b62eb05e2438b3c2d7341ea30f8ead32ac2b9c3",
+  "skills/kanban-flow-coach-3/.phoenix/provenance.json": "3a81ad28ea9c52bd7fe5b4803e3a14280e11c862b13049a9483d0d7b1a75cee5",
+  "skills/kanban-flow-coach-3/.phoenix/selftest_evidence.json": "68bc14932cf8718caaaec996d9b4b69a384e2473e50a4f685eb021b04de7a4ea",
   "skills/kanban-flow-coach-3/references/creation/p0.md": "58653f896c19628e4a1d30f3ca067eae629e12edeced6ad70523537029af86c3",
   "skills/kanban-flow-coach-3/references/creation/p1.md": "42f8fd4e8f34dd0a1431095ae31113b685b032546c2ab7453e6fd2a781a63c84",
   "skills/kanban-flow-coach-3/references/environment/p0.md": "5c9385d214416c536a586867baa9fa1e359b2997ee08b6e2aacda4b59db73867",
@@ -66,7 +66,7 @@
   "skills/kanban-flow-coach-3/references/production/p1.md": "757377eb5f12b23650dbb61c470c9e3d3932db277b02b0b5099697d8cdd61275",
   "skills/kanban-flow-coach-3/scripts/main.py": "22231592cebc7a49a90c86104664aec79349ed7b47547a03a35825b2af3ee65f"
  },
- "sealed_at": "2026-10-18T20:02:02",
+ "sealed_at": "2026-10-18T21:00:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

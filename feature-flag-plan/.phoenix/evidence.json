@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "feature-flag-plan",
- "merkle_root": "6a6ec3f8c5cdcc35759012b58966d917dd9e05b711ab5276fe4644ca5ab1a1a7",
+ "merkle_root": "b5fbf888fcc731e8951fe79d72166addf8473292e129a9b5d3a1e7731bc43159",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/feature-flag-plan-1/run.py": "d1727229cf16772f59736114ffef30f6192bbe2261249060139f44eb3127d231",
   "skills/feature-flag-plan-1/selftest.py": "1a86886b858263f2bef64a230d2461460f10b4076f8e5341dc53829bdd3b1cd2",
   "skills/feature-flag-plan-1/.phoenix/originality.json": "55ba35155b878db556df452e96c5d1b67b6c5bdf249ae95b5f9577186db5571b",
-  "skills/feature-flag-plan-1/.phoenix/provenance.json": "4b4327e61313c1824ce840f3a1ddae916dc105361eae0d3dfdca4ba880fd6d97",
-  "skills/feature-flag-plan-1/.phoenix/selftest_evidence.json": "9b9c56d705c69265ec451d4215dad1228efbfc80881bb3191f0f6de4d64155f6",
+  "skills/feature-flag-plan-1/.phoenix/provenance.json": "3debfda1db1f014f500a6841341d283d3d94efa1560abdd431737a92fa116e84",
+  "skills/feature-flag-plan-1/.phoenix/selftest_evidence.json": "638931fbbce57bf829a42a101e7ebd7f74126af1f366536b3c04c7aebe5b80e7",
   "skills/feature-flag-plan-1/references/creation/p0.md": "4cc6fac2e4b5ec6cc934e31c140f71533eee2c047d8ba537dd212fafab2318ca",
   "skills/feature-flag-plan-1/references/creation/p1.md": "e0a7babebfabb3ef07d66ff5f3d6c2ea7a63565f6fb0769172a1a55a9301d60a",
   "skills/feature-flag-plan-1/references/environment/p0.md": "535671e8394cd42d51df392c014bd7b12b701042bf76015bf53258cb411ddd1f",
@@ -37,8 +37,8 @@
   "skills/feature-flag-plan-2/run.py": "5c0b5496a689254423103869a60e629bebabce13cb3e3c2f182f538687ab6172",
   "skills/feature-flag-plan-2/selftest.py": "e929906936abd1783669224ad00a4696612c18ada1d90f387a0c83d359f7f9ba",
   "skills/feature-flag-plan-2/.phoenix/originality.json": "e7774d0738eee72025e3371597c7625015b59c11bf939468164e750e20cc8b08",
-  "skills/feature-flag-plan-2/.phoenix/provenance.json": "9dbc18923b4f22e3cbcd7f85aa2002d02b42efda9178686070516a39e9626c7d",
-  "skills/feature-flag-plan-2/.phoenix/selftest_evidence.json": "28e24c4f628f6b505742a627d731c7d12d065bbeea97bd421b2598e20ca20516",
+  "skills/feature-flag-plan-2/.phoenix/provenance.json": "0215e2be6982d9bbba0c558cd53e3c83e5f1d2ca93a212135b54bf30362bb9a4",
+  "skills/feature-flag-plan-2/.phoenix/selftest_evidence.json": "ac8efe02b5ca6f334710b0f2bc664bef7704741dcbf172cdeac4b4eb6efd3ede",
   "skills/feature-flag-plan-2/references/creation/p0.md": "e1eb27dadf2bb0115fa2450094d391d8a18ff96772b30ee664d394e1c408a25b",
   "skills/feature-flag-plan-2/references/creation/p1.md": "fe60666e539f1bd104fe32460400f0e89645fe88cae1282be18f37d165f3ebb6",
   "skills/feature-flag-plan-2/references/environment/p0.md": "b6b82e5e79f99de1639256d632471432902fa9e21b016c5428a07e6f4fe74781",
@@ -54,8 +54,8 @@
   "skills/feature-flag-plan-3/run.py": "6fd33569d398ee969b1530392cc74db4f3ad9c42de44af03dae1b7e3fd511f17",
   "skills/feature-flag-plan-3/selftest.py": "6df67a3af0085346ec0dabb1b30c8e39578b4a7af3de532493f45496ec1b78ec",
   "skills/feature-flag-plan-3/.phoenix/originality.json": "b46717ac1870dd353610ff80c7faf71b20bc2b107c24bee06817cff853d661be",
-  "skills/feature-flag-plan-3/.phoenix/provenance.json": "78ab9a8c7946846e92eae579ce4c3831aceb6efc22a43ace272c65dd94e6e66b",
-  "skills/feature-flag-plan-3/.phoenix/selftest_evidence.json": "d14f53161a5fd27e13eef044d51f597b96c70dd8f787e6739a4569412b8bc6a8",
+  "skills/feature-flag-plan-3/.phoenix/provenance.json": "b6e350232f5e411ffd494c0d08439245f31e057f2ab021b5f7ec558899aa9d0e",
+  "skills/feature-flag-plan-3/.phoenix/selftest_evidence.json": "b51ab0c16969f639a7d9420520276aa8bd407cf2c10929d81e20784e6c6b122d",
   "skills/feature-flag-plan-3/references/creation/p0.md": "00f3cf1c390490d4070a2a99b840aa9a9d13c36ddb27c77a43aa10b2f91663aa",
   "skills/feature-flag-plan-3/references/creation/p1.md": "22f714866f38b321c42de5d517aeec8c8f922ec4fa63eb54e560570b9c1e739e",
   "skills/feature-flag-plan-3/references/environment/p0.md": "b64720f8ab3538de5cdcd0cd17290281f802e467afbf4ebe776329f215715169",
@@ -66,7 +66,7 @@
   "skills/feature-flag-plan-3/references/production/p1.md": "4582b24b89cddf1967480e8bd477aa42f4fca2bdab8a6b971d1f7752453486b6",
   "skills/feature-flag-plan-3/scripts/main.py": "a6d10527a03cf421fb3b646f180a2584a4979a22943a71c7dec1905404375c9f"
  },
- "sealed_at": "2026-10-18T19:59:15",
+ "sealed_at": "2026-10-18T20:58:43",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

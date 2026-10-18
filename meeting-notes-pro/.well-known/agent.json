@@ -40,7 +40,7 @@
     "遇到完成判定"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:47",
+    "at": "2026-10-18T20:53:46",
     "from": "action-tracking",
     "to": "action-tracking",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -64,7 +64,7 @@
     "遇到跨部门"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:47",
+    "at": "2026-10-18T20:53:46",
     "from": "async-update",
     "to": "async-update",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -88,7 +88,7 @@
     "遇到争议记录"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:47",
+    "at": "2026-10-18T20:53:46",
     "from": "note-structure",
     "to": "note-structure",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

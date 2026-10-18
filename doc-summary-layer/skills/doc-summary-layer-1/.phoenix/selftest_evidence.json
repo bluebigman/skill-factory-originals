@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:57:41",
+ "at": "2026-10-18T20:57:53",
  "skill": "doc-summary-layer-1",
  "slug": "doc-summary-layer",
  "passed": true,

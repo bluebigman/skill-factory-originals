@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "paid-ads-guard",
- "merkle_root": "61819d2b9b04e1f9ca216182d06ed8a89a0c3cf56be05662c98a213af18b34d3",
+ "merkle_root": "88722591dbc5f5c15b950e563c5c0b9ffc75a771eae6a858b36cc5709bc3ef6d",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/paid-ads-guard-1/run.py": "a538d1c1099d00dc6d21f45aed349cbebfe9a9691fbb4faa448cf2d2c336f58a",
   "skills/paid-ads-guard-1/selftest.py": "35b30ac5e11866984b89cb8bd2e0c982c4e66eaf6ccc82376fdce607c0e2ed79",
   "skills/paid-ads-guard-1/.phoenix/originality.json": "b7838e675cd61106e788bd37d02aadfceabd77939b1c43772070480dfc36f353",
-  "skills/paid-ads-guard-1/.phoenix/provenance.json": "f81f5c6bdf52ed48e4e24822738b1620dde960c5168c8d3b4a3ae5a64beef5c5",
-  "skills/paid-ads-guard-1/.phoenix/selftest_evidence.json": "5bc16e1cec6736964483e307411a5085cdef92a82a9e4cb2bc78509d28adc312",
+  "skills/paid-ads-guard-1/.phoenix/provenance.json": "0fefddf126eab760bc7bdf22318a883b1a6615160cef7db18fe0f88ca3a735d1",
+  "skills/paid-ads-guard-1/.phoenix/selftest_evidence.json": "517f9797c8f91b996b07ffe36f3cdaff6966a3b8ed82e2c468d653c8170bb166",
   "skills/paid-ads-guard-1/references/creation/p0.md": "d01c9d2cb3562e4d78dfab92aa30618681ab08f4b3859a9e71ffc242b1a62d3b",
   "skills/paid-ads-guard-1/references/creation/p1.md": "9b8d6bc7c26e6bef7cfee51a4ce29b6b7ca6193e06d363dff3cebea9c905c163",
   "skills/paid-ads-guard-1/references/environment/p0.md": "281cb3a275737375ce1337e8a85ea36a3bb1e5ff7b2f0e2f6c339ffa105291aa",
@@ -37,8 +37,8 @@
   "skills/paid-ads-guard-2/run.py": "dd90ae12a06f995db2c62f741396afd26d36b669445dacfa0a3a744fbf656126",
   "skills/paid-ads-guard-2/selftest.py": "b6dcbdc91f3f2bb15e3f6ec2d3619b07a1d0b16be759661e19bf7420bc3542f8",
   "skills/paid-ads-guard-2/.phoenix/originality.json": "a33d70de6b0e5b8213a4ec49dcc3b89b1737b32b62738d422bc08f1810a3d2bc",
-  "skills/paid-ads-guard-2/.phoenix/provenance.json": "d0e516fe47e8ae27c6f1af1778701e3cc692fd8b5abe57f26efbd7d506c23113",
-  "skills/paid-ads-guard-2/.phoenix/selftest_evidence.json": "8bb051d064af5378ab99ce70bd96c26c0b471b3a48e9b5dcb247f4f7b13c7d39",
+  "skills/paid-ads-guard-2/.phoenix/provenance.json": "7f23392773bac9db95793978ad0272c5668648580882aa32e3fd5d93665a2ccf",
+  "skills/paid-ads-guard-2/.phoenix/selftest_evidence.json": "a5508c18f89e8b3c6d75e3e45aa8512094c0549fedfda7b371d4d69558568cc6",
   "skills/paid-ads-guard-2/references/creation/p0.md": "1705969109f7f00bf7526b84d8918bdb3cb748d7d3e0d97a6c096bb216a86f48",
   "skills/paid-ads-guard-2/references/creation/p1.md": "b9a0817135177432d181d7cc02613d8da6c8b416c029271cea1f936363a8862e",
   "skills/paid-ads-guard-2/references/environment/p0.md": "dac2f5b508eaf27d2446d29da6222ac926e046ae3d131ecb543b8f4320e2d520",
@@ -54,8 +54,8 @@
   "skills/paid-ads-guard-3/run.py": "599affe7b9fe38ad127603663e5a17b6b7bc8d65422726bf0b484937882b5dcc",
   "skills/paid-ads-guard-3/selftest.py": "414938aa12ce03dd5a36a6e1943fe95ca00226e999bd9c8904467fcb46ec2415",
   "skills/paid-ads-guard-3/.phoenix/originality.json": "1918c769412ccab6f183b47cc765a7ee2debd6def3c64e910fa7bdff74adf506",
-  "skills/paid-ads-guard-3/.phoenix/provenance.json": "93d696608062c291b52b0e708af39786b9f981d0ce903562252300d5cb4d2c0f",
-  "skills/paid-ads-guard-3/.phoenix/selftest_evidence.json": "3f596a4a5e215359c7a8113b30b6eddf6f11c6f6e744e78cddd80e27d1ed2bef",
+  "skills/paid-ads-guard-3/.phoenix/provenance.json": "87a766cd339b9c3642b3b4a6b841df8a4740a05ddfab2995594dc3ee23e78600",
+  "skills/paid-ads-guard-3/.phoenix/selftest_evidence.json": "e6abc43ac2496007b9fd6d58ea495a64e256594a34055f3dca10410a6f7e0445",
   "skills/paid-ads-guard-3/references/creation/p0.md": "195bebcf6241f7bbc16ca82f30c6e949fac446483a098e87d7845ae344912f4a",
   "skills/paid-ads-guard-3/references/creation/p1.md": "b7a33199f6e2b99636c28b4bf546bfe305b3aa97538f4ab92cb1db6226235b83",
   "skills/paid-ads-guard-3/references/environment/p0.md": "24514dfa1d0535d4870c0ed2ff241bc37f1cb8c1101e48d52c050b4b5c9da14b",
@@ -66,7 +66,7 @@
   "skills/paid-ads-guard-3/references/production/p1.md": "a8d212e32be19a0ee2ba7285cf8890ca9aca3a44d3b846454ec38df868319ddb",
   "skills/paid-ads-guard-3/scripts/main.py": "0d4914251bbb6c8628214622beb0035b688f539acb387a2b9e9ec33907c27715"
  },
- "sealed_at": "2026-10-18T20:05:18",
+ "sealed_at": "2026-10-18T21:01:46",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

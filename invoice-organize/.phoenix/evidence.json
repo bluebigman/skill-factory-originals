@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "invoice-organize",
- "merkle_root": "d7face6912c41040e7667603b7053358eec5c8bb6f355e05353d4c4a9c2721fe",
+ "merkle_root": "538e6b91e7c4f765003b1ebe45fe28760599a99d76e48b55047376311de3e27c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/invoice-organize-1/run.py": "6ca4843443f6ddc919e4561e10498384e6b9e01c2c117d734e01c7dc207cafb6",
   "skills/invoice-organize-1/selftest.py": "ccb8bf013a6fa173a650bd2acf7decf4736440dff7eacca04b599302cc7a0958",
   "skills/invoice-organize-1/.phoenix/originality.json": "07498b0e82921b6bf337ae44a7a38aa816a5b00a783499da16b5f9042c2d8492",
-  "skills/invoice-organize-1/.phoenix/provenance.json": "678f6c0c0fe584acfaa4fb3285ae972c746f48dfdf3940368a9b59c79cd90dbe",
-  "skills/invoice-organize-1/.phoenix/selftest_evidence.json": "be56ff6f489da8e792495e48a5dd518b14d490aa1d93a6797e8e25e1950f9db2",
+  "skills/invoice-organize-1/.phoenix/provenance.json": "d332301cf9450affa78dc657a0703f84c4d8ac67a9e757bd5a90cdf00229aa6d",
+  "skills/invoice-organize-1/.phoenix/selftest_evidence.json": "c3dc79cce3bb36b98eabaab92d8c74f6806bbf757fd9d7b13cbd682380c92674",
   "skills/invoice-organize-1/references/creation/p0.md": "6d73ab0a420c9d39f77230dba6318f2ae4cacfb9ac93cd1e9253de0df32da6e7",
   "skills/invoice-organize-1/references/creation/p1.md": "d5caf3cf2baa612287c9aaf4a84d50f4d921e6a488aaf93a1a5cc0d6912f5f1f",
   "skills/invoice-organize-1/references/environment/p0.md": "ca90cf1c9953cb595e3d01650631ca04a40cf0eff43e3fc1221b30b3175984fa",
@@ -37,8 +37,8 @@
   "skills/invoice-organize-2/run.py": "19ce47a7cb9b9065b33a366161d7ae1a3bbc99ffe578dcac9bb16a7142107270",
   "skills/invoice-organize-2/selftest.py": "5b4444a822158162c78a3e48f0ef1bf81b5bfde18b3ffb33c9a7cc2aaf205e61",
   "skills/invoice-organize-2/.phoenix/originality.json": "118912fba174ad60aeb2d0fc021b233c031e195c21a36e0b0aaef6da0560a07a",
-  "skills/invoice-organize-2/.phoenix/provenance.json": "9d7b950b03c84c0473062de4dafa28617da514222cc9efe8a925d2289acdc69c",
-  "skills/invoice-organize-2/.phoenix/selftest_evidence.json": "6ce46b27b502de1e6789e2ea0cc2b90ce0fbbf8e525fca03a5995c5534803cad",
+  "skills/invoice-organize-2/.phoenix/provenance.json": "47c47a0294b29a414cf695eb83fdd288a53e90e0197fb9705d84a8e511c4d0fe",
+  "skills/invoice-organize-2/.phoenix/selftest_evidence.json": "c2c3d4b36fa8c1c7fa9cf6b53959e8bfe346e36e30d7322f0e25b4fff13a4cc2",
   "skills/invoice-organize-2/references/creation/p0.md": "7526595b7c65cf695f7f703f720d384682e8010237cbbb54581d99dc9c8a0f78",
   "skills/invoice-organize-2/references/creation/p1.md": "d7333f81b7ccb38759ce7d2bd83399624a2857f441d9895c5a464162680137de",
   "skills/invoice-organize-2/references/environment/p0.md": "4cd0a4060b138c50dc44359b3c1c1c12b64fb94d634cd48102505b49fccb4bb0",
@@ -54,8 +54,8 @@
   "skills/invoice-organize-3/run.py": "6062188b5d80dcfdfb96bb47c29b26e887668c12f0dbb5f741bb6a7a7640c087",
   "skills/invoice-organize-3/selftest.py": "ce4f23fe0ea6217bed7032e769abe515e6df653a74accf6caca04e2a58f5f0d3",
   "skills/invoice-organize-3/.phoenix/originality.json": "602fd1c107f9f4c4aa9e91ea6c1baf4750e17128d11d3f7f94764447ee64c1de",
-  "skills/invoice-organize-3/.phoenix/provenance.json": "fd2f2d11508cc202850d5f25c35e1d28ab59917e2a9181f4f85ed5c5664c9a56",
-  "skills/invoice-organize-3/.phoenix/selftest_evidence.json": "386d03df8d2f74706c7314790b7686e10f62296861e89cf2f4f0000ed540dd51",
+  "skills/invoice-organize-3/.phoenix/provenance.json": "91bccdf324b93ce18cca3d05ecad8b852df38be6704a5300e4edf618318ec0d8",
+  "skills/invoice-organize-3/.phoenix/selftest_evidence.json": "8c6cd4ef3ed141a956081fef6089ee8ffe50aedcadfa4a001b70ac5d3226669d",
   "skills/invoice-organize-3/references/creation/p0.md": "c120583e1a01274e59670b05d6395e370d07eb2ff07eb447783606a1abec6104",
   "skills/invoice-organize-3/references/creation/p1.md": "9d108be34510565f269b2e331e63333be121f9ece4af14acb5fc196bed75626f",
   "skills/invoice-organize-3/references/environment/p0.md": "1a28248f46ac31cdbc3e60122d84be5c42e305304fdc04802d0ed015ebb6ca1c",
@@ -66,7 +66,7 @@
   "skills/invoice-organize-3/references/production/p1.md": "fd55bb5ba840803b81c2855daef66de755db901b62cd958848515f5d0913ec6c",
   "skills/invoice-organize-3/scripts/main.py": "75fffc47853712f1151dc23b92b8a1a6a94b0a3875e0cd7d2821917fd8bde83e"
  },
- "sealed_at": "2026-10-18T20:01:57",
+ "sealed_at": "2026-10-18T21:00:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

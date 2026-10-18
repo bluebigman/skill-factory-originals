@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "env-secret-vault",
- "merkle_root": "495b936a3cedcc72ee99d77a0b1e500328bedf0f1137ce29e3055e72f268a28f",
+ "merkle_root": "e286fe3dbab5504f33114b80b76bd2bd797d735e0c2e54dbb35249fdcdcb3e6b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/env-secret-vault-1/run.py": "ae67fd9e4dc8705950529ccc9feabec5fed69e9f26060094e2e2284bd501e7d3",
   "skills/env-secret-vault-1/selftest.py": "cf7c31de428c17a2020ae830b3b4d1377a9c2da1a5a757ffcfe58effca344e3b",
   "skills/env-secret-vault-1/.phoenix/originality.json": "0b0547511ef2ce1dde383d7e78903586c7abaf43b78dbae108434d94048d7021",
-  "skills/env-secret-vault-1/.phoenix/provenance.json": "9d761af9a4eef12fb109f77a816af53f5b9fd6ee90c2573871060947e0cb6b14",
-  "skills/env-secret-vault-1/.phoenix/selftest_evidence.json": "c07a1be6cc13fb5a244a103a5f69c816b98fb2d29a285fd1b7ec5095393dd4e0",
+  "skills/env-secret-vault-1/.phoenix/provenance.json": "eedebfb93d2ac8b65ec7363336e3d53ab713bea722652db07d9c7f4b8bc9f602",
+  "skills/env-secret-vault-1/.phoenix/selftest_evidence.json": "63f5daecf88fb9ccd8042c62fe2f1238b0c0e6ef5355817405f93a4147658a6c",
   "skills/env-secret-vault-1/references/creation/p0.md": "74d62c9a0c40460a0125a0abd0fb29bd33cd07fd3ea348ca26bac2cd6c1c537d",
   "skills/env-secret-vault-1/references/creation/p1.md": "6b92f4a96548be3e0c3eec36fb3b46fdb9d1327a4500947f20e8fae10ffc9bc1",
   "skills/env-secret-vault-1/references/environment/p0.md": "cd9ca17f266a70991e0e396ed4371ae3c903a0a37f80e29b33e199baac36052c",
@@ -37,8 +37,8 @@
   "skills/env-secret-vault-2/run.py": "62aa22e14ea8b2d5f2f9c1eec0c16d902024c51b310076ada0547324201c90a0",
   "skills/env-secret-vault-2/selftest.py": "f2f9e990c1349e62583786197ce8297993938a5d319817504250a2dad714cb48",
   "skills/env-secret-vault-2/.phoenix/originality.json": "88ec623e3ab8559bca465d9f381e32d9cbceb33f58200c291e682c2084303156",
-  "skills/env-secret-vault-2/.phoenix/provenance.json": "69a1c8edbd4bc8ea1d96a6e66b3281ceb8149d968f170cd78aeefb1dc2d24fb8",
-  "skills/env-secret-vault-2/.phoenix/selftest_evidence.json": "03571e08304ee4785db53c0418bee441609a56614a16078e8f58d8db727cb1c3",
+  "skills/env-secret-vault-2/.phoenix/provenance.json": "ba1c07dde7d712b65a77a4dbc138fccaf7258c9aa2dbe9586343cbee654c1f94",
+  "skills/env-secret-vault-2/.phoenix/selftest_evidence.json": "8d21df942167023dd5c748c2003fb18ea85a1856b4db2d2558b67256edf7176e",
   "skills/env-secret-vault-2/references/creation/p0.md": "32ae3270c46d3cfd54794655f57801d4727e054adfbd30474f77d1ede6538ea1",
   "skills/env-secret-vault-2/references/creation/p1.md": "d1f5f3c6954bbe20dddf0980e92f6e2b81603e92b20727b7deda482039ae0c5d",
   "skills/env-secret-vault-2/references/environment/p0.md": "3a5ef9c75d8821575753ee885c3b951d811f594d4227b4078f247ae9351d95ea",
@@ -54,8 +54,8 @@
   "skills/env-secret-vault-3/run.py": "ddec4e55b891e6157e3d94f2fae84f7cd62d68e0f96c7ba53e1f851ebe668e67",
   "skills/env-secret-vault-3/selftest.py": "097ac236af320c0fe531e3fef7901b8c4a004bbe01a665675705bdd1e2e57a88",
   "skills/env-secret-vault-3/.phoenix/originality.json": "4131d32f7c3408102d8558808302aaa15322b85b547b8794d7ffa792a43d9e2c",
-  "skills/env-secret-vault-3/.phoenix/provenance.json": "c0a3ef78889e8507014f1557ee1d9667fa9b8cc726d738650b63c52c72fa9a33",
-  "skills/env-secret-vault-3/.phoenix/selftest_evidence.json": "f5a33cdb21717f3d2cdd8a3c667b6ce5703f5fcc21cba7c8ba03b284c73331e2",
+  "skills/env-secret-vault-3/.phoenix/provenance.json": "ba900ca1289e4ab9a6c9fb880372fcff5a7a100704216568a01c45662a24062d",
+  "skills/env-secret-vault-3/.phoenix/selftest_evidence.json": "9174c3dd900d6fac8c5d1e0053c1d585ce33002e090ed8bbc1dbb651745f0f59",
   "skills/env-secret-vault-3/references/creation/p0.md": "3900a4a558923e421fe1e4120f75b0a413270d2a0464dc64f682ff16cd6b5b04",
   "skills/env-secret-vault-3/references/creation/p1.md": "0669ec8fc72f58ea691eaca682cc1d71a9abbc1d0f43dbd4cdd258efa1b2e586",
   "skills/env-secret-vault-3/references/environment/p0.md": "f9eced85b7f36f4c4732d90405e9f8ea1ddd24fceef07bd982bb74340ad15189",
@@ -66,7 +66,7 @@
   "skills/env-secret-vault-3/references/production/p1.md": "01e256ef9222411090c5cd2e3eca191451871c65829e6685240a3250580622ac",
   "skills/env-secret-vault-3/scripts/main.py": "71ace3b24571c5def2b8c8b8e15eb2ad6adba6bc574bbfbc62cecc69f758ac55"
  },
- "sealed_at": "2026-10-18T19:58:23",
+ "sealed_at": "2026-10-18T20:58:16",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

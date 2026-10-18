@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:03:36",
+ "at": "2026-10-18T21:00:58",
  "skill": "metric-anomaly-root-1",
  "slug": "metric-anomaly-root",
  "passed": true,

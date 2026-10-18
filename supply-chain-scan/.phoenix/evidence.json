@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "supply-chain-scan",
- "merkle_root": "34a5b5c1898cc3b74f1065c712b5631b79fb89fcd173da9d60e3730674615a6a",
+ "merkle_root": "63aa504cb13b0fa94a7ebda6d43988dec8d4ccee41d912df528ba8225746555c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/supply-chain-scan-1/run.py": "28286ad216074b1b933ea2bf3785e49c26fb206b30cf5be32e48c5f2e9660136",
   "skills/supply-chain-scan-1/selftest.py": "7aba934c59e5344de08dac30e4bc8b29552c6c879b690f4864db1a88b8e2e69e",
   "skills/supply-chain-scan-1/.phoenix/originality.json": "d3be90c6e98a05bc193c822f435a3b60fb505c5c14a8e2ade5df91eed1242d43",
-  "skills/supply-chain-scan-1/.phoenix/provenance.json": "00697b8539f24532f2ee3d27739055fedeffab493a1dfeb31ea514043f4bbb95",
-  "skills/supply-chain-scan-1/.phoenix/selftest_evidence.json": "48e97655924eff771d171ec78bf984a43130451975625290086abf296d1bad77",
+  "skills/supply-chain-scan-1/.phoenix/provenance.json": "f9407f534f84515cdf192ca5e2f01b15479b4f7b98da72228a2a6c3dbb361c90",
+  "skills/supply-chain-scan-1/.phoenix/selftest_evidence.json": "c125dd8960b8d0d782634604be46535e972a8a0e0595a617f8fc2de2d3847ad7",
   "skills/supply-chain-scan-1/references/creation/p0.md": "5c6e5eae242e46aade919721c65f9b74807377789e015a165768e9e8f14f6348",
   "skills/supply-chain-scan-1/references/creation/p1.md": "748d05f20cf6bef7a1189933ecd34993ceaec287c03dc33b7c84ac4b91845095",
   "skills/supply-chain-scan-1/references/environment/p0.md": "173a30cc882acd3d18581fe35813ea5695e810eb0b4cf52906cffd407d0a1ca2",
@@ -37,8 +37,8 @@
   "skills/supply-chain-scan-2/run.py": "c238c4572514a0cb5719a70b9f99d2671fdab7b89b46e3f692b445efe868bdcf",
   "skills/supply-chain-scan-2/selftest.py": "0747add40574696cb97ab31ed6fc45846319ac16740395c093fe9a801f6fb5a9",
   "skills/supply-chain-scan-2/.phoenix/originality.json": "38e175e966551d55f6e3ca3ef9350bdf82508881154602a91ce465e6da78f78a",
-  "skills/supply-chain-scan-2/.phoenix/provenance.json": "16cb939ee483df1e45ca73bf11cb23e56c317203b740d6d02a0ae19b64faebce",
-  "skills/supply-chain-scan-2/.phoenix/selftest_evidence.json": "fa41afbaacd4efc422b3d935009fe32f0961af90370c507776051a367c6d0c65",
+  "skills/supply-chain-scan-2/.phoenix/provenance.json": "2928f525e27c495f7b3c03b1cdeed1e99922ee5aac1c8102486563b5d3fbe8f5",
+  "skills/supply-chain-scan-2/.phoenix/selftest_evidence.json": "ad11f801f6a1acbd9defdcc9f0a53428ba2cf8ffaeb85a6de65f82400a70f3ae",
   "skills/supply-chain-scan-2/references/creation/p0.md": "8393f0787df27e5cdca72657b5e9118dce2236bf5ab877898fa7fb7a32c62a40",
   "skills/supply-chain-scan-2/references/creation/p1.md": "9f2b9a901d7d4382a5d833b11d424f197d373e9d6036924906b732bce856c67c",
   "skills/supply-chain-scan-2/references/environment/p0.md": "d75ebcf038868746712cd54b84632c63597b890006104fbf2aef52fec1c899e0",
@@ -54,8 +54,8 @@
   "skills/supply-chain-scan-3/run.py": "b997d92b4d0a7bf8bdf5fa407462e17c3e80bcd697f20ef4b1f3d5bb27848c02",
   "skills/supply-chain-scan-3/selftest.py": "33bfc9fbfaa413bbde5e798fb52eb44b4eef3b55b1c673714be5ecf7de8d25e9",
   "skills/supply-chain-scan-3/.phoenix/originality.json": "08b4741504392f3ae114e37aef561f3403dfb845461d035bcddf21f632296e5f",
-  "skills/supply-chain-scan-3/.phoenix/provenance.json": "22f97a5d603061d90d12863ccffc67dc1fd260e964631d8f7360b85ca22d61df",
-  "skills/supply-chain-scan-3/.phoenix/selftest_evidence.json": "9e8f9f9def9f25a6bc1dc24afdd857da517fa357b82a34cb1cde774889f95c68",
+  "skills/supply-chain-scan-3/.phoenix/provenance.json": "065a75b04f65828a2459b12e6b3ffb5db202160c7b7db207ae8eb1c96098bdd5",
+  "skills/supply-chain-scan-3/.phoenix/selftest_evidence.json": "59adb9480d70c0d0a20651377c52c5044438d1c537effda577caebde129fc7bc",
   "skills/supply-chain-scan-3/references/creation/p0.md": "18dbd8023ddb8d77384427c28b5a6e5a836dc3f14c2e131e351eb4749ac9a653",
   "skills/supply-chain-scan-3/references/creation/p1.md": "189928574b418771dc51f93ba4a385bd94c12d5dbc8be064dfb2c7c948ec11ec",
   "skills/supply-chain-scan-3/references/environment/p0.md": "172b7f2cc48f028b940e5c0ec728f24d7806303a4b32b75f8b53ae9552984f3d",
@@ -66,7 +66,7 @@
   "skills/supply-chain-scan-3/references/production/p1.md": "2c84ab6a361701ee44a32bd62e1e06cf2a440fd020489443f81a1e88f2ed3883",
   "skills/supply-chain-scan-3/scripts/main.py": "f6ea75d6af5adf1e2c3c5281152af2f325a321b5030600188f0eaf60c4330746"
  },
- "sealed_at": "2026-10-18T20:10:43",
+ "sealed_at": "2026-10-18T21:04:26",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

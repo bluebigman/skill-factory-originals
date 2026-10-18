@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "retail-diagnose",
- "merkle_root": "7c52f47809c24c32bbc1e27fa2d57fab640f6efeb0a8a4ccbd4452f805b076c9",
+ "merkle_root": "6319c0d1117cdc874e3de9e38445966221800921d0e976148abeb9978d6070f1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/retail-diagnose-1/run.py": "f38d367773716125679750caa401df6c8b70bb448c858dfb91799331cd94d7a3",
   "skills/retail-diagnose-1/selftest.py": "448606b8cba9364604e29e97817196df6b983efd2cf1daccf61edaba53b3861f",
   "skills/retail-diagnose-1/.phoenix/originality.json": "e751d7925500b9099436b8cf00f5fb0d05ad6dc260db5652db1c28bf5791ef61",
-  "skills/retail-diagnose-1/.phoenix/provenance.json": "adcc0a285231821cdb911e3380d88393826d1e3478a21a464e8c205f295f81ef",
-  "skills/retail-diagnose-1/.phoenix/selftest_evidence.json": "1186e73a635ad37d2eb14532e4ed0df80c54d649ba251dae242f4c8b448bd857",
+  "skills/retail-diagnose-1/.phoenix/provenance.json": "c44be31ca1c3bebeae04f58261a63be2c0c65aec0dbfd4f4cbd461f99fa9edc7",
+  "skills/retail-diagnose-1/.phoenix/selftest_evidence.json": "c36a994ba47d4b3766f341ce4e484868dcc8251a17eaf8315f6e54783f984f8a",
   "skills/retail-diagnose-1/references/creation/p0.md": "10fe1e8ba678d6709ff293977ceb8252f1a7e123b5c94dee0b6721823f8e8d89",
   "skills/retail-diagnose-1/references/creation/p1.md": "e61d077c0b5068c72b442bd3793867a135499e354f0879f4102a0d5c446f7c47",
   "skills/retail-diagnose-1/references/environment/p0.md": "3d316ba8ada0505fae07eae612fc5dce960526405118553dd46ef2cc015413ea",
@@ -37,8 +37,8 @@
   "skills/retail-diagnose-2/run.py": "852cc5dacb18a4b65614c1e0c8c0e9824b4307c2082974c3f213c486d60b422e",
   "skills/retail-diagnose-2/selftest.py": "0018d500a671d204ee0361f25cd9dfe865cf07d2cc09a4c20f4e972937a3ad60",
   "skills/retail-diagnose-2/.phoenix/originality.json": "7007dea40877c426a7116c4c55528928c5a2db6e8dd302946c0065b0e01996f6",
-  "skills/retail-diagnose-2/.phoenix/provenance.json": "df0526de954a441d0a927a5b7c52cebc95e0c9d2bb0eb23ce0dc3a34765e6716",
-  "skills/retail-diagnose-2/.phoenix/selftest_evidence.json": "3c6aba5d985471d4738476d3c951820ea36de636fc3e36d5f65c582861c0a2f5",
+  "skills/retail-diagnose-2/.phoenix/provenance.json": "d770447a66877debdaa9027a2f1f1ecd448b4e15847399738edc8ef731da9c5b",
+  "skills/retail-diagnose-2/.phoenix/selftest_evidence.json": "80061fbd579ebf3f965e45faa29d83d577e93818c55ba6dc35589385f8feace3",
   "skills/retail-diagnose-2/references/creation/p0.md": "1e5ca24273e8be10664da68b02e5285109b472ee7e1df621c38caf45dfe949dc",
   "skills/retail-diagnose-2/references/creation/p1.md": "d2d8cad014c3dc51067f31def8023cf0cda24a47db292bde5e27596a5375c432",
   "skills/retail-diagnose-2/references/environment/p0.md": "2cec473184aab886dd978025236352f9af844653f60b3f07ba9b1b8a19c33f01",
@@ -54,8 +54,8 @@
   "skills/retail-diagnose-3/run.py": "16529876ec4ec283e341a8abf79f27f0c1e02681c7c8f417b033606276178f0e",
   "skills/retail-diagnose-3/selftest.py": "8f6bd0224c35a0cc12f19180f8f93e6f6091cb5fe157f8d5ee24929b43908558",
   "skills/retail-diagnose-3/.phoenix/originality.json": "7fa2d4c99815e035d1d0c8da488e03aae647e514c233244a37f6dfcd7f043e6e",
-  "skills/retail-diagnose-3/.phoenix/provenance.json": "ec8a5df4528b0371ae428a924839b4f994b74115616516cbcae93f48f28714f8",
-  "skills/retail-diagnose-3/.phoenix/selftest_evidence.json": "f5c966e1042aa0154d43d30cadefac00f8c382e4b595c977412b0da68331d886",
+  "skills/retail-diagnose-3/.phoenix/provenance.json": "6ee1728131de1db2f85889373bef3e1c810b30b5b9297ce3cd8726053493e2e6",
+  "skills/retail-diagnose-3/.phoenix/selftest_evidence.json": "39855386d60746eb896722e7bcee6b66465d740b539825322e869983158f6533",
   "skills/retail-diagnose-3/references/creation/p0.md": "3023af337765cf6347a5652dccafe43987fc6d77075fb5f19503cd31192b453a",
   "skills/retail-diagnose-3/references/creation/p1.md": "5cf473396608a6c1ebfe9786c19156e62746ed7208ac03adc78467c8ccc86412",
   "skills/retail-diagnose-3/references/environment/p0.md": "429324f006f9819d0f95898d206b8b9b8492fc9630e2fe0295d011f562f7f789",
@@ -66,7 +66,7 @@
   "skills/retail-diagnose-3/references/production/p1.md": "d3d860b0fbf22e1e740988ad29281fb79f9bfcf5d7dcf10cd3ab5bc717d893cd",
   "skills/retail-diagnose-3/scripts/main.py": "901aa58fcb772db0cfa5e175ce76867a40e8c332541ab61482cc9cc50b41f249"
  },
- "sealed_at": "2026-10-18T20:07:59",
+ "sealed_at": "2026-10-18T21:03:09",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

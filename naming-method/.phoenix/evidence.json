@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "naming-method",
- "merkle_root": "7e17e67d16f985bc0689325b73aa816ba930adfb5968454ed8d295426312b09d",
+ "merkle_root": "b1ba8d5311b002f44e9917c69f5f5e79559900c5f3ff5f2cab91b4f85ca1751a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/naming-method-1/run.py": "0ce3e1a27e8227b61df067dee63078a02652055ed6fd44a9bbc76ea58d7ab0d1",
   "skills/naming-method-1/selftest.py": "eba15c3461e9d38f10a0687c1981af4f81c7ee6d1f4a10aea9e9c585c5d96fca",
   "skills/naming-method-1/.phoenix/originality.json": "391edb7f7e95e6f3244283079432a44ebadfd6063431d0dd954d570b0ec8ca8f",
-  "skills/naming-method-1/.phoenix/provenance.json": "99f91cee2107475712977d4d6960bee59fd85d53f60c061f52abf953fcc5a21f",
-  "skills/naming-method-1/.phoenix/selftest_evidence.json": "4f269ebd5302b19dc1811bfd34bc1202e4937597d33016adc142066142ee8531",
+  "skills/naming-method-1/.phoenix/provenance.json": "6a97298e2b889079d4c2396eaea2aba3b7505ff40108ac393cd47a3dd6892d03",
+  "skills/naming-method-1/.phoenix/selftest_evidence.json": "a2fbecf4108aeaaba7f148b928768746648b9d29c23c51547d414dae22ecfd4c",
   "skills/naming-method-1/references/creation/p0.md": "90249780985fc081eb423dd90c6c4bb7748a047de964fd1531818a3628813b98",
   "skills/naming-method-1/references/creation/p1.md": "17a0dde7b99c1331ff23392fd4d28947a12ff08721d66f04fb10d7b543578792",
   "skills/naming-method-1/references/environment/p0.md": "5e8969cff1cf3160f8c0a626fa1a1a6301278ea1ae584ee043f9962ae455882f",
@@ -37,8 +37,8 @@
   "skills/naming-method-2/run.py": "338f65061ad0bf23b28da7d246a8b9c39b25483d53a0b3c62a9ef4e710cf74c0",
   "skills/naming-method-2/selftest.py": "d4e197e574877ed1b3514061c66353b4960fba80d9ab5b4125cdf99d32114abe",
   "skills/naming-method-2/.phoenix/originality.json": "7d0199ee13944c344c24c0797e5b9711f8edb9834a19983eacc2e6a2dcc9f8aa",
-  "skills/naming-method-2/.phoenix/provenance.json": "8951ac2939fc1537df2345d1b21ec2c12fb7acd56b81ab8356df0e101de44db3",
-  "skills/naming-method-2/.phoenix/selftest_evidence.json": "75f851d58db0f900203feb5a411d3918bf774f9e8c4db51ed036c8111d9f936a",
+  "skills/naming-method-2/.phoenix/provenance.json": "a4a782a0386255f5831f4265987d987c1fbceb5cd88232a3d6fda587b55c8f92",
+  "skills/naming-method-2/.phoenix/selftest_evidence.json": "4c14e58e994b497b1ec54db8216c8d08167c3ef87ec6923ee0377154125c7c1d",
   "skills/naming-method-2/references/creation/p0.md": "4ee692a51d078d9f6e3a150cbe025bb46f6cc3c1047fa7ab39f630a8ac752269",
   "skills/naming-method-2/references/creation/p1.md": "60fb99e123f92bd0ade3913e013a7c73df7ce29bb18487d394d8fb24e172d4cf",
   "skills/naming-method-2/references/environment/p0.md": "d6e64f03d4a97b4d3540812b533807c79738bb09bc00de67384f5c5e78eecaf5",
@@ -54,8 +54,8 @@
   "skills/naming-method-3/run.py": "3967fe10cd6e6eb66fcc0457049b78930c57eff7e0359550fb23d5743294d3b2",
   "skills/naming-method-3/selftest.py": "52137e2f2b3d559f6216bf1ef65051e4f614d1ba3a4fe65ff540474282b2e0aa",
   "skills/naming-method-3/.phoenix/originality.json": "c1f26b620c980688f176827b7dff7bc8ea373c55198879a06dc191c075ed14e3",
-  "skills/naming-method-3/.phoenix/provenance.json": "52610d8c5af167918a0c43ff5756fa4c82914af01c518f5f8ca4c554e95d9830",
-  "skills/naming-method-3/.phoenix/selftest_evidence.json": "57058c85623a01894f06623a89cfa2842ee810315fd5f3377cb1acfb795e673e",
+  "skills/naming-method-3/.phoenix/provenance.json": "296f9b8d5b640a205af2429117279128aa4a0429a95f1a88c993d114c3506383",
+  "skills/naming-method-3/.phoenix/selftest_evidence.json": "051f0064f42d1089e4c2da2292259ea5ce33dd39cb958c594e030f754e77a797",
   "skills/naming-method-3/references/creation/p0.md": "59f01fd68b5f989db07f3e3ddf3a88da838222beba44c72e7a2faa300d9400eb",
   "skills/naming-method-3/references/creation/p1.md": "0efc54270fbad66329b0ee32df0e8892021b8defb4a85741fa03b27c77d17277",
   "skills/naming-method-3/references/environment/p0.md": "ee3e015dd9b7bd7331709a5b463addc90743aa042b666b4bf9d0b91b3ba340c9",
@@ -66,7 +66,7 @@
   "skills/naming-method-3/references/production/p1.md": "2f60a445c2e9345c2bc7af2d5e7af9e98c872c94d7a74ff3f2526ced5175cf5b",
   "skills/naming-method-3/scripts/main.py": "3b16c9f6d2e1ebfe2a2a4898bb560763037916bbcb936f99700aab14f07f6af4"
  },
- "sealed_at": "2026-10-18T20:04:17",
+ "sealed_at": "2026-10-18T21:01:16",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

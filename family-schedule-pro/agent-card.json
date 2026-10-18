@@ -47,7 +47,7 @@
     "遇到缓冲不足"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:43",
+    "at": "2026-10-18T20:53:45",
     "from": "calendar-unify",
     "to": "calendar-unify",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -71,7 +71,7 @@
     "遇到孩子课外班"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:43",
+    "at": "2026-10-18T20:53:45",
     "from": "load-balance",
     "to": "load-balance",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -95,7 +95,7 @@
     "遇到全家冲突"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:43",
+    "at": "2026-10-18T20:53:45",
     "from": "routine-design",
     "to": "routine-design",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

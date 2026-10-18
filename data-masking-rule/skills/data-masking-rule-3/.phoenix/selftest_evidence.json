@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:55:45",
+ "at": "2026-10-18T20:56:47",
  "skill": "data-masking-rule-3",
  "slug": "data-masking-rule",
  "passed": true,

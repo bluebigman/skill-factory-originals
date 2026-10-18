@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "visual-hierarchy",
- "merkle_root": "094053d19d755542280990d23035f13d2e6cd94365ca6bcea7e7548ccfae5dbf",
+ "merkle_root": "65e74daa3a80c1b0b73602d117b97dc7018c7afb69afa250f95a629310f0f004",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/visual-hierarchy-1/run.py": "5af7b55dbae9c891c202c5f33e3837315e375edecdfbcd816b154e26c0ce64d0",
   "skills/visual-hierarchy-1/selftest.py": "fbde93a6a21a158a6c4c65f2cdb4211a67099c46ee957db2762c2fe2c3dcb6ca",
   "skills/visual-hierarchy-1/.phoenix/originality.json": "483af35027f31b087a7d877ac0b509c383b8bb114273ae807d1eeac1fac771a8",
-  "skills/visual-hierarchy-1/.phoenix/provenance.json": "d8739c8ec22c878da7b16af2e5c14d1fb79e4a0d2ebc9475bf6cdad5cb1cb31e",
-  "skills/visual-hierarchy-1/.phoenix/selftest_evidence.json": "352cf36204bc495737f38fc2af6411dda9cd6a06b6a5ce273f696431e1a39998",
+  "skills/visual-hierarchy-1/.phoenix/provenance.json": "205bd8ab51910e6af974ec53c4b7943cd39dd028fd62c29bd09d5663c4200213",
+  "skills/visual-hierarchy-1/.phoenix/selftest_evidence.json": "020d3c619511cbb1756054699f84b2a085401bc3d8ef93dc73225bed731f1402",
   "skills/visual-hierarchy-1/references/creation/p0.md": "deaa97df964db77dd84af7a74130dbe0613be175f86e723e3d2fc648f7595109",
   "skills/visual-hierarchy-1/references/creation/p1.md": "81d978230ac49b288cd5dca2d8231c44815933648c441b00f32edc5a2c358d39",
   "skills/visual-hierarchy-1/references/environment/p0.md": "836f22b952a989f724fad38bf48e9060654b0a252989b5aff0aa513bc990558a",
@@ -37,8 +37,8 @@
   "skills/visual-hierarchy-2/run.py": "b5ea26d2058fc553aa27abc04151ee5ac128fa0694ccdf4872ab7b7ef8030efb",
   "skills/visual-hierarchy-2/selftest.py": "2d660e0c58b89826daacb3c7c1b0983a04718a85a49683ad78ccf35ac7081f0f",
   "skills/visual-hierarchy-2/.phoenix/originality.json": "bc7bda8a98cda72b68c76a89f20682a55e057c669ed0f3a5eb6fb273181b70b7",
-  "skills/visual-hierarchy-2/.phoenix/provenance.json": "35d675b2db7e8b39223dfa8378d71e64ec7978f4592378e77fab82c967eb00cd",
-  "skills/visual-hierarchy-2/.phoenix/selftest_evidence.json": "699baeea25a70a753fafc7ea51f6028aae09d6c8564d50a5004e2c64ea714067",
+  "skills/visual-hierarchy-2/.phoenix/provenance.json": "bf8856a0650e778aa99aa402cab4af3fed2fc25625636aad95463b9d4d0e9b0d",
+  "skills/visual-hierarchy-2/.phoenix/selftest_evidence.json": "2addb23405a2321bccd51feb1e801c6fe6ce084eaecbc02c6a0cb11261d93ce4",
   "skills/visual-hierarchy-2/references/creation/p0.md": "b4ca54a45ce57b687dd3ab18fc39eb6f39dd0d8ab18ff6c1ab4f60bbbf01c062",
   "skills/visual-hierarchy-2/references/creation/p1.md": "7ab934d74a2cd6bd1f354d4e005674d8682b2cdda083628756ac4feee562712e",
   "skills/visual-hierarchy-2/references/environment/p0.md": "237fd600ff644045509908e613ac88b10c284d06affa22ddd477cf025d713bae",
@@ -54,8 +54,8 @@
   "skills/visual-hierarchy-3/run.py": "f8bd8c0b9c974985b3bf6ce59e7807d208992133bd19a5cddae4e81828a77fe5",
   "skills/visual-hierarchy-3/selftest.py": "94d7c771d540deca059cf68804eb9a71eb25d96394561d06ca1db7c74243c7d1",
   "skills/visual-hierarchy-3/.phoenix/originality.json": "f506896df237666f1d2a16f211674481f0a7c28788cb5cd67114f4a4094b0e19",
-  "skills/visual-hierarchy-3/.phoenix/provenance.json": "9741fdac85bf3f3119aca91b084e1d53e57a15077382f396fcccbf0c38b50cd8",
-  "skills/visual-hierarchy-3/.phoenix/selftest_evidence.json": "ceb46b4cc0eee24fa1f6a0de55bd7b46c0473f77dfe2187bce25591d2d255ce9",
+  "skills/visual-hierarchy-3/.phoenix/provenance.json": "03b74356dd84151fb9795261da1c7a8f847c9d956795a32719ff9709f518bfb5",
+  "skills/visual-hierarchy-3/.phoenix/selftest_evidence.json": "bed0446cee03c4ee4945127545ae997ecade783696e39a9d9b8ad78f1a8d09a9",
   "skills/visual-hierarchy-3/references/creation/p0.md": "a3f3f985cace6c755da067573a2a8894410df62fd1778c29e95edae56b30c49e",
   "skills/visual-hierarchy-3/references/creation/p1.md": "af121f82ee38635c30f1e33b7b7edf4531479d218690cff40ee8ec2712e3a6d8",
   "skills/visual-hierarchy-3/references/environment/p0.md": "eefeb3b69181d2ee42dd3dd9f51ba2ac97b57106de461d9e9514055d72f5781d",
@@ -66,7 +66,7 @@
   "skills/visual-hierarchy-3/references/production/p1.md": "c3a7a72f85bc08cde03660536f4fc546fabbf3ab464b55644939956601aad9d1",
   "skills/visual-hierarchy-3/scripts/main.py": "fcd3677fe77fcaf7a2b9aa0f49af2e7d16a81a7e8798907104683b771c9248fa"
  },
- "sealed_at": "2026-10-18T20:12:46",
+ "sealed_at": "2026-10-18T21:05:18",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

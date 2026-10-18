@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "security-training",
- "merkle_root": "8dd810eff08cb4bf3cb44ff4e5bd359579b50cef31bbfe775895df52449b1979",
+ "merkle_root": "84f6296271d8277c50e4e9867fad18f6422f2cf1ec3eaad7e2a387d020504ccb",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/security-training-1/run.py": "7a9d9054576c67911d0da63d26a5517e1e1c229700c162b72fd1f045d6f8da81",
   "skills/security-training-1/selftest.py": "7f561a803955a3492f57f6c5271c1144de881d5e875bbe08c004d84b1f72ffb5",
   "skills/security-training-1/.phoenix/originality.json": "fe2dc491bea41409783f3a919a3f9f9e285822a53c03d7a17ad5bf66d9265c0b",
-  "skills/security-training-1/.phoenix/provenance.json": "6ec231e547e499ebc47fc279ea4eaba6f7700f64faeeba584a261f4348e55cd9",
-  "skills/security-training-1/.phoenix/selftest_evidence.json": "72fd0ce6671bc9e6c4c2a1beb65d0f1e16276c2105e6c21fddae1ca5e3e4bbbc",
+  "skills/security-training-1/.phoenix/provenance.json": "cc9ec080567182e10efa514bd6a85f9f438da64fd703e0d3ff22e5b841592eff",
+  "skills/security-training-1/.phoenix/selftest_evidence.json": "c7a1de7bb60f97cd5a2adb127c4721e5d19373038b71bb6177154ff8be8a848f",
   "skills/security-training-1/references/creation/p0.md": "2321196a5adc4637ab5c4aff245099c0d22af76ef9832cbc6578b6ecf79c3981",
   "skills/security-training-1/references/creation/p1.md": "5f1efdce041b5f1715e1378bd9200ac2bcb10975e20e0276e193bfa1bf1bc7f7",
   "skills/security-training-1/references/environment/p0.md": "ff53c89fe29a05b153e729eb17f09e2118e66d5c4e0cbab07fae879a10ee1add",
@@ -37,8 +37,8 @@
   "skills/security-training-2/run.py": "e8133002fc29dbc5347c3d8a4b5799586698c902796805a9068f4e5f97a8d8ab",
   "skills/security-training-2/selftest.py": "0d7fcc9bb62dffdffa96c5db57ca901e87f066dbb50ca144e628d5c462792797",
   "skills/security-training-2/.phoenix/originality.json": "f1c6f4941e34f4e5aaea1de2bd0de7f45fd29cbd110ab83c77867cf13782a59c",
-  "skills/security-training-2/.phoenix/provenance.json": "023ac5fdab9ac39c8ca1fdf1a192e89103b92c8e0b28b951c6f14b3956fe8874",
-  "skills/security-training-2/.phoenix/selftest_evidence.json": "43012aa30ecd113bfc75b76bd3f5cd327034d98e3d805828597485cb7a98b060",
+  "skills/security-training-2/.phoenix/provenance.json": "b40cb15eed7ede1f5d22d4f4a4dca984d50800f88735515540d9fd8d523b3795",
+  "skills/security-training-2/.phoenix/selftest_evidence.json": "09c643642c38d8b32f77d65994c40f6b53de6927ff7dd6bd6e30a2052a5e89ae",
   "skills/security-training-2/references/creation/p0.md": "b99ee99d0c652b21323afa4867f7c8fee2032a0477883ab2b35659769c751d01",
   "skills/security-training-2/references/creation/p1.md": "5ecc751abb33b17397f447ec89069b33ba89d6bf34c459874ef333eee243458e",
   "skills/security-training-2/references/environment/p0.md": "b55364985ddc7d933c6bbd3150a32ab2a33a16e5cd1375c31de0a2a79abe1198",
@@ -54,8 +54,8 @@
   "skills/security-training-3/run.py": "18fb94e6657580b68dbba7dbe49fd77faf1c44a5319698a9f3a26ca676270769",
   "skills/security-training-3/selftest.py": "e83515ca353df137289921b8fbb4d187f41224426e1ef08b1d064b59ad101705",
   "skills/security-training-3/.phoenix/originality.json": "ed90308a356dd023e45347077569af1586cda8360f73267e13fcffb322235bc9",
-  "skills/security-training-3/.phoenix/provenance.json": "3dfdef4bb342d77bdfdb7c9ef3a7a5487c46f37f74ee2f80ea4b790f40aeb014",
-  "skills/security-training-3/.phoenix/selftest_evidence.json": "114ba0c472489b9a7fb35617d504970bc86245c0cdf08b1391883d906ea6b67c",
+  "skills/security-training-3/.phoenix/provenance.json": "5c246f21c29662b1433d979a49e28dc79c8ac5147b8e92a727930b29c3529073",
+  "skills/security-training-3/.phoenix/selftest_evidence.json": "d20e1b960a514b3e87bbb0bac95d95daa061bf32ec50e7c82c4f5d8661b9ade2",
   "skills/security-training-3/references/creation/p0.md": "9a01418f5845f248bfff71dbed2da16eb9e5a60fe32591b62341fd6b226b03b5",
   "skills/security-training-3/references/creation/p1.md": "dd25be4db8d47a3b5b4806b8f8515550822412dd33f3706825729706283ad962",
   "skills/security-training-3/references/environment/p0.md": "8f7ab46d3fc9777d1449b390677cf8a487265bb1cfc81747a58d9832cb855785",
@@ -66,7 +66,7 @@
   "skills/security-training-3/references/production/p1.md": "50c1af5c61d362aee7b9330f79067a5e6ba15728d36a5da27774ff32e52ee59e",
   "skills/security-training-3/scripts/main.py": "f51b8c34db61a11253ab4179bc20045e860d1e3cbc3d6cf2253110c4eb4376a8"
  },
- "sealed_at": "2026-10-18T20:08:45",
+ "sealed_at": "2026-10-18T21:03:34",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

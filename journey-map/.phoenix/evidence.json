@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "journey-map",
- "merkle_root": "268e28d71e56507c840f08a9e2cbed6e30664cfff546b9e12369e93cef23f60c",
+ "merkle_root": "9c130760bcb6180a743cf296008e5beb07c26a691ebe206b1cbc7af43570fc74",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/journey-map-1/run.py": "4d757b607c6e714cebf06e7e6abba812c716ba7aef0fe54b5e6ed509d44bf407",
   "skills/journey-map-1/selftest.py": "73f5ddf351a0ff5cc932b0a31ca5e85df25b8e6cb1e8662999c6254d1144cf87",
   "skills/journey-map-1/.phoenix/originality.json": "bc656ba211d83618f9565c5b15aa7bb6bf08a48e0f5a17ef275571e84d2e79ca",
-  "skills/journey-map-1/.phoenix/provenance.json": "4cc100a30413d9c643cde100d2fd6fd396935a2bd6d9b9c541c136d6399df6ee",
-  "skills/journey-map-1/.phoenix/selftest_evidence.json": "6280586a24d285930647ddda74fd782ca87110628d34d458acbc4e86e44fdd7e",
+  "skills/journey-map-1/.phoenix/provenance.json": "c89acbc7abfa4de05c11a80f1ba0e9af68a94bf57926685069ebf50a86253e14",
+  "skills/journey-map-1/.phoenix/selftest_evidence.json": "4d27f4fc4ae108469be69b8c60a7edf2723c4fd11141765201979880a8f931ba",
   "skills/journey-map-1/references/creation/p0.md": "7f263368c8c4bb6433bee2a6fe8e7e29b5f53cce6479d1d7dfb6b09c33a09c80",
   "skills/journey-map-1/references/creation/p1.md": "a52521b53982e4b0c37640a51d284305418da90b67698f1b12bfff17d2c7268a",
   "skills/journey-map-1/references/environment/p0.md": "2608995211c1283d7d61cfb035083fa0c2cc833f9ab415c356ba6d28669358d7",
@@ -37,8 +37,8 @@
   "skills/journey-map-2/run.py": "2810cfcdb2740b304a5f3329d462ed73aa89c14bc2cb40e5fc8517a0a6df084c",
   "skills/journey-map-2/selftest.py": "c13eef1fa10e3ad17def65358016d8e05ed65c78fa969a32748f9f81a85a37a5",
   "skills/journey-map-2/.phoenix/originality.json": "3e01411e36fa52c04f79ee32e25ae0ba2f2bdf68e3784932978435ce52736aa3",
-  "skills/journey-map-2/.phoenix/provenance.json": "74e9c85caa55b5e265a31b2964abdd14744e528fd594712a25d15b141378f259",
-  "skills/journey-map-2/.phoenix/selftest_evidence.json": "bdf5e504b5c47b596a547c93f95ca63b4218ec58173a20bad192bc795c028811",
+  "skills/journey-map-2/.phoenix/provenance.json": "d0f22c9b2f0a867719e83c00e8c2c3439d833cf7fe3fa7974563d59d64665291",
+  "skills/journey-map-2/.phoenix/selftest_evidence.json": "4c1976578a9413af6a994601d3cce698ddf59a93aa2d7f29d7fa18bdb14168e8",
   "skills/journey-map-2/references/creation/p0.md": "2bc4302489cd185844f68f70050155de17fca2183028b04c2c041436d74fd7f0",
   "skills/journey-map-2/references/creation/p1.md": "8fb1719dc25ab6318c91ce816e5d379cc996987b8f1ab76542fce75d30ff47dc",
   "skills/journey-map-2/references/environment/p0.md": "921f5a2ed15acc329c08708b56188a2b715857ebfd461f062afa2d8e9e86db44",
@@ -54,8 +54,8 @@
   "skills/journey-map-3/run.py": "4eac0119ae8a6769ff442050b73e849aab95f2c112ac5888dbd1b41808329062",
   "skills/journey-map-3/selftest.py": "fe6dce254a90a1c9130c84f72dd9b05463dbeadc888e72770c1d8238b0fe1a85",
   "skills/journey-map-3/.phoenix/originality.json": "7b5e708bc2ffed6b011ff91812d6033c7074a91e5e404c57c0b21ace4fe55d61",
-  "skills/journey-map-3/.phoenix/provenance.json": "d1d73572cbe9e407913106ea8d9fe9aabd96bfc54c869e8783169433b02a315d",
-  "skills/journey-map-3/.phoenix/selftest_evidence.json": "142e7133441e614164d0271e0955d956fc53af1b6edf386db8d6447f339c664c",
+  "skills/journey-map-3/.phoenix/provenance.json": "698832c6cdc9d42d6bc19858fbdd3885479016dc621d64c763c84e332b377d32",
+  "skills/journey-map-3/.phoenix/selftest_evidence.json": "dbf84b687f0e00acad95e63f94f5ec4d153c8708bd6aa20b41c7d4665046fe7f",
   "skills/journey-map-3/references/creation/p0.md": "e3e4635701dfd8c53790ca220d26fdd15cf728a773a643057d9997ebbe7ceced",
   "skills/journey-map-3/references/creation/p1.md": "f9d1655b561e790fb7dca7210fc82ff478e7d633f5b4acb08615ad684cd3c4d3",
   "skills/journey-map-3/references/environment/p0.md": "7b593708b96b503adc3341e82ebaa66e5e4ff3b35cc75c6bd24ac0ef38fca44a",
@@ -66,7 +66,7 @@
   "skills/journey-map-3/references/production/p1.md": "d7de825a3b4c6767bea560a95517c9ff7608a4dcd8078fb9d0d8463d4ac94dbb",
   "skills/journey-map-3/scripts/main.py": "743ef2705d706c2bedab5a318782f21ffb2e03ec2c0526269d2c8e84d0c70de0"
  },
- "sealed_at": "2026-10-18T20:02:02",
+ "sealed_at": "2026-10-18T21:00:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

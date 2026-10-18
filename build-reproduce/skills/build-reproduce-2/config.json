@@ -1,0 +1,72 @@
+{
+ "name": "build-reproduce-2",
+ "version": "2.0.0",
+ "domain": "构建可复现",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "锁版本",
+   "then": "依赖锁定文件入库",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "固定基础镜像",
+   "then": "基础镜像用固定标签",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时间无关",
+   "then": "构建不依赖当前时间",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "环境声明",
+   "then": "声明所需工具链版本",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "产物校验",
+   "then": "产物哈希可用于比对",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "锁版本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "固定基础镜像",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时间无关",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "环境声明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "产物校验",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

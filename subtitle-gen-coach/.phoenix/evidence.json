@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "subtitle-gen-coach",
- "merkle_root": "5cb70654170a66bc1c01207d398e07e10beeafcd8b0fe092c6bf6dfaab9e6101",
+ "merkle_root": "cee44e169caef78d0decaa8fa95f91c4f4dec7a32979f02679848b69f1408317",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/subtitle-gen-coach-1/run.py": "283d91f89d211e095f56c40a58eafb193b7b60a6da931a067ccb46477b949e4a",
   "skills/subtitle-gen-coach-1/selftest.py": "2b282ee562cdfafc71608a86ca892de918c741320c9aa16b8f448d871434176c",
   "skills/subtitle-gen-coach-1/.phoenix/originality.json": "6754d15964ceed3160ef8477fa0e9d90052fa475c915b176de10d9643123449b",
-  "skills/subtitle-gen-coach-1/.phoenix/provenance.json": "2a1f471796d2a87348758a51f527e37c436e0b157757b722075a434b83600fab",
-  "skills/subtitle-gen-coach-1/.phoenix/selftest_evidence.json": "b8a9b2809f5e3303816b716d5c97bab098e826fd8f7eb1005b6cc9a40162110e",
+  "skills/subtitle-gen-coach-1/.phoenix/provenance.json": "e3e390870d0e3e6df446cbb60a51ab1ed403e2182370435ab89a2aed29098ca7",
+  "skills/subtitle-gen-coach-1/.phoenix/selftest_evidence.json": "501c3160250793e10e62645efae43ac9c1c5a8a5c0dc1166bb22a10e2ee3a362",
   "skills/subtitle-gen-coach-1/references/creation/p0.md": "32b331940f530f8034d8cf46c225baff1c40cd42a803a2dc577b762a49495828",
   "skills/subtitle-gen-coach-1/references/creation/p1.md": "7be8add973acb2ada36e63f6095bbe25797eb991ee8d3725f4e73bfb67cbf972",
   "skills/subtitle-gen-coach-1/references/environment/p0.md": "15bb26f14ffe12e9fbc5ed9a0bcc6c1ca067b50a64be0706df8cdd7ac1b42f2e",
@@ -37,8 +37,8 @@
   "skills/subtitle-gen-coach-2/run.py": "8ae0347eed0b53e76bb6ef8dbcc9fdd3a3dddafb35a5e08fd8c38f53f304d3d3",
   "skills/subtitle-gen-coach-2/selftest.py": "eec5bae01cbd9d912f3334546a3a08db9aa49d259da6cfdd2f59b4577ee9de0e",
   "skills/subtitle-gen-coach-2/.phoenix/originality.json": "4bc219a6320096c9e68d887d4917e2508839395a7b419d2c040bda5fee129cd0",
-  "skills/subtitle-gen-coach-2/.phoenix/provenance.json": "2c3ea4d9093344ee95074a218159f3746c599c14f649457de1194899a95ffd71",
-  "skills/subtitle-gen-coach-2/.phoenix/selftest_evidence.json": "07e9070bc8efd29251a395846a8246548a842029c22881fdb832a807f75f446e",
+  "skills/subtitle-gen-coach-2/.phoenix/provenance.json": "adb5ce6caa8d587a3a8c8b458f28d0d38e506e432a4bda8be6ab6901f5282d6f",
+  "skills/subtitle-gen-coach-2/.phoenix/selftest_evidence.json": "ae0cb2d6d9837e671da53d4153fd8bec985b6e5cb4da0e0d3ee6bcf7cebf9104",
   "skills/subtitle-gen-coach-2/references/creation/p0.md": "23f69bef684f79737bbeb0345e74ff614759042ca19590eb3d69e5bd385ec1d8",
   "skills/subtitle-gen-coach-2/references/creation/p1.md": "54ca7d6f3e98d15c60ff8bb8fc2b5ad0c6949b60a6708ebdb268bf99bbed3fe2",
   "skills/subtitle-gen-coach-2/references/environment/p0.md": "0f7c446538d7afba92f442e4c997e59be5914f81e158215b9a93f8aa807a77a6",
@@ -54,8 +54,8 @@
   "skills/subtitle-gen-coach-3/run.py": "2778364852e562c9ee723c621ea7fdefeaf7864376ecb7fba82695c63839d866",
   "skills/subtitle-gen-coach-3/selftest.py": "c29f8b20b235c97c75d882b69b8da22b5ea1e2a4046249fed8a34d33c5852a26",
   "skills/subtitle-gen-coach-3/.phoenix/originality.json": "9384a9e799fc53d1c3dd1c93f5adda73e739f6b8259bd1507d61a372d2ae13b7",
-  "skills/subtitle-gen-coach-3/.phoenix/provenance.json": "73cd70a249e548f205632bcda0aad6dc986e61161f55d0b5f7c0837f8140a501",
-  "skills/subtitle-gen-coach-3/.phoenix/selftest_evidence.json": "9aa4fd35f9ca7b712f327f61e1266a2e09ed90ecd3532309d7c90f78e220caee",
+  "skills/subtitle-gen-coach-3/.phoenix/provenance.json": "91d4e4cc9ec244b1e238b9fbc51579c338e000176c827960215e4d9217e39882",
+  "skills/subtitle-gen-coach-3/.phoenix/selftest_evidence.json": "4077328a480f3b596560bb3f9f4cfd3571deedb2ae8e691a2ddb64703559142d",
   "skills/subtitle-gen-coach-3/references/creation/p0.md": "4b370ac318a3f6038419468a26adfad7963cd7c64bf4e22ddbfa9300f6c368ba",
   "skills/subtitle-gen-coach-3/references/creation/p1.md": "2775ca8967e8f7b35eb62a71556811f217bfb426a07a0a17394794abfef94bdb",
   "skills/subtitle-gen-coach-3/references/environment/p0.md": "9d494bdbd20caface8484734b5fd3c8ac7d2798bed2323a7e7a32b264fc198d2",
@@ -66,7 +66,7 @@
   "skills/subtitle-gen-coach-3/references/production/p1.md": "fb9a6084254f14dd6e757522b8a0e01d1170e2987439745d0979f2555c8396ca",
   "skills/subtitle-gen-coach-3/scripts/main.py": "65ef2956a07e609a740ccf11581b6b70a0fdc34816e5d0c2646391251b79a247"
  },
- "sealed_at": "2026-10-18T20:10:35",
+ "sealed_at": "2026-10-18T21:04:22",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

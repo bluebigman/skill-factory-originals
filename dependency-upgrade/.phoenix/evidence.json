@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "dependency-upgrade",
- "merkle_root": "8bfa1db8a8323c6772f4d1491d3805a46a70360e7b9a436cf7cb702d3caea8e5",
+ "merkle_root": "4f75e947d5e7b9e412c722bf70bc8190b0a51222eb5376bd0caaaf322e4edd28",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/dependency-upgrade-1/run.py": "6ef74bc94dc76f5adce400e3a2d51ef2c1b0855e00b5bf5ce47977c0e69f0ba6",
   "skills/dependency-upgrade-1/selftest.py": "4857d02017d763b84d0a50029b03c5746f8f0b9beda57a7bc9aa7d71c60d9286",
   "skills/dependency-upgrade-1/.phoenix/originality.json": "9777be9262096792c65a5d8dd7034fe8f5307e8025f331eb74cc76e2ba91ee02",
-  "skills/dependency-upgrade-1/.phoenix/provenance.json": "b4d6e1b1af88263afe01d0dc82732712dc71d691d6441c9088d75f16c60d22c0",
-  "skills/dependency-upgrade-1/.phoenix/selftest_evidence.json": "b2ae4d26e78f6d63ad469800dd3f87de97f76157e07cfb9d9c36d84ebe1407ec",
+  "skills/dependency-upgrade-1/.phoenix/provenance.json": "d37ea1156d1776344c3562f1779c7e7ca0e545f7f82d1a68f71ecefc08636d50",
+  "skills/dependency-upgrade-1/.phoenix/selftest_evidence.json": "5fde17e6f454e72695e75dbd041d1c7dc467b13876671d7263749ae6bad14254",
   "skills/dependency-upgrade-1/references/creation/p0.md": "ba14b23ecf01f6662e18c998ec22d0bc95b192204f493c8c87f36ae6dcc78558",
   "skills/dependency-upgrade-1/references/creation/p1.md": "3247cd7605def2818b4b624fc7de53429dc03e8f6bc3f35ab3835529f63b50e6",
   "skills/dependency-upgrade-1/references/environment/p0.md": "e1093511fb0f3c42ec4cef95e041929cdd000f10290de1c249cc44017c216869",
@@ -37,8 +37,8 @@
   "skills/dependency-upgrade-2/run.py": "b3e0fa5cf05cab707411e3ca5dd56b4479dbfd13ea16f20886d115c407f67fe6",
   "skills/dependency-upgrade-2/selftest.py": "f35654d67409232edb9cdb6a1db4b520440d25318e2d0d12cdf9dd3c5cf75584",
   "skills/dependency-upgrade-2/.phoenix/originality.json": "3c05d0c92885654373625c9b9b0acf9f1742df6c454f35cf9c1eee1f46f62386",
-  "skills/dependency-upgrade-2/.phoenix/provenance.json": "4e93b10deaed161845ea0ee619dcab857c2c340505ef6b8d04d2220d60ef0b77",
-  "skills/dependency-upgrade-2/.phoenix/selftest_evidence.json": "63f78735041f59920841559607bdf2f79b798a55e93e4fccb4d0395cf8d49aa1",
+  "skills/dependency-upgrade-2/.phoenix/provenance.json": "5ec42b2eb4b3049ad1723ace7e3061bb59d19c65d24efc8a74a62d4d5d84bfc8",
+  "skills/dependency-upgrade-2/.phoenix/selftest_evidence.json": "6c4214c527333daa71d2556b2fe7cfdab4efb357a58f849aeb3cddd491606274",
   "skills/dependency-upgrade-2/references/creation/p0.md": "255675c5a9acdc3f69c59b024e6b72438e472b0023e09ab7266636124b84c2cc",
   "skills/dependency-upgrade-2/references/creation/p1.md": "3274e2d18ea2dcdd80f6d784af954b4ca067c45f3c88ab90a3e2e888dbf8667a",
   "skills/dependency-upgrade-2/references/environment/p0.md": "d48a8ca1dde51dd53aa505c9fa09f58ae00f41fb1380d224ae335ce86394d892",
@@ -54,8 +54,8 @@
   "skills/dependency-upgrade-3/run.py": "bc8374bf3c787a09a87c7661577308fd04f1235c9b803c8d1a39b109fe349abb",
   "skills/dependency-upgrade-3/selftest.py": "a0cab4e7970fe63f968b3eada47897e7e20d4e056a8ec3e5ea6522bd57199f9c",
   "skills/dependency-upgrade-3/.phoenix/originality.json": "c35e22a40705f50adc634b5b3a10f3ef09237c3896eda600daf1d9aed8855703",
-  "skills/dependency-upgrade-3/.phoenix/provenance.json": "37ec396338944d77821db28e99526348527d5d1fd26ba8bb0c5d39ec29896c7b",
-  "skills/dependency-upgrade-3/.phoenix/selftest_evidence.json": "1bd13af80c3c4799a866231fc47a174be72d354a9a5ff4ab25bb4d5d9429c749",
+  "skills/dependency-upgrade-3/.phoenix/provenance.json": "495f4504ba12c56b02b9edbfa9f4df1950ac0bff3d8364de98e15d8464133475",
+  "skills/dependency-upgrade-3/.phoenix/selftest_evidence.json": "edc02c85c74894d6e17f0559d1bd582489e49e2948c08043802ea8443e9413e7",
   "skills/dependency-upgrade-3/references/creation/p0.md": "c5eef448a43c21c2565d8df1ba050c2eec9d8bde68ef9daaf83b2c06d99d0f2d",
   "skills/dependency-upgrade-3/references/creation/p1.md": "f63ff22944e67565693d80f75a97bc7896dc28c102515df3be4353c2c44f4d31",
   "skills/dependency-upgrade-3/references/environment/p0.md": "31962b29d45243c9a6ae6a393250aaec3c8275451aa6328738058d9238038eb6",
@@ -66,7 +66,7 @@
   "skills/dependency-upgrade-3/references/production/p1.md": "91eeac75e517ff51e5f80dbaf96fe77e0086114e8f66ddfc2ded9349eff6bdfc",
   "skills/dependency-upgrade-3/scripts/main.py": "75f78c23b627114f4a6d70f8a506c0bf054f366a6f8cd3f595335ac1fb1682e0"
  },
- "sealed_at": "2026-10-18T19:56:19",
+ "sealed_at": "2026-10-18T20:57:09",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "excel-model-build",
- "merkle_root": "90410b8bd8dcb1a29789ae7367f1bad0d53b24f23c2f646739bb1145c1555c68",
+ "merkle_root": "52a31ec33e2ef84a260560b3bce1981b91b50bd231552c8dc88e8222a41563e0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/excel-model-build-1/run.py": "274a0e5acf0922352e28039574ccfa81087ccb9b824b2861df29dffde405b928",
   "skills/excel-model-build-1/selftest.py": "600272b818b2ea5419faeb67e1cf72c0a27c22e274a5b29306b4b822252cf70d",
   "skills/excel-model-build-1/.phoenix/originality.json": "a24b29f2f47cb0fc29e23ad5c9c6780c0d74f8c1ee241eeb86bdbaeaa5f2a1b8",
-  "skills/excel-model-build-1/.phoenix/provenance.json": "b57ec8c21197eee694adc38e2720a9dec1360ceb2018a05798d64fca079a2362",
-  "skills/excel-model-build-1/.phoenix/selftest_evidence.json": "c080d98b82a41ef45de63813a92d990f258511c43cadd1ac618a453369911bea",
+  "skills/excel-model-build-1/.phoenix/provenance.json": "35c5a91bbe97aac63ecb4657b09d722e3ca6d85251182242de26d5d0f043e364",
+  "skills/excel-model-build-1/.phoenix/selftest_evidence.json": "df7f64eed7d98e423960ce1ff281c2bbe8f544fadcc0967bd7bb5c0c0c3aaee6",
   "skills/excel-model-build-1/references/creation/p0.md": "7e6c7c3c06148b0734f181389eb7daed4aa243fefd17627b6149711ec8a0892d",
   "skills/excel-model-build-1/references/creation/p1.md": "211b780c1fb888f5d513bcd1e3a270f12b93cfe965aa472aef19ef7cc63aec32",
   "skills/excel-model-build-1/references/environment/p0.md": "2a2ef4f3e01883c791f54afa1f3597d5bcf0fb66b3b59c470449048c4e81c973",
@@ -37,8 +37,8 @@
   "skills/excel-model-build-2/run.py": "202b7812252fa1cd1464a2a0f3e230127362f29b1432b27c1f752a3dea54f7e3",
   "skills/excel-model-build-2/selftest.py": "93f8a0567cc9062b76ea3565165720457a6efaebc52887d6f26f8b52fb2949d6",
   "skills/excel-model-build-2/.phoenix/originality.json": "515ee647a407e85ead869610d06a4f9b1bf2c6c69fffb8f53a7758ac32425b32",
-  "skills/excel-model-build-2/.phoenix/provenance.json": "729ea1bda924836612eca8fc00a39eba71a262ecc3361b57698ccba37b5a90d8",
-  "skills/excel-model-build-2/.phoenix/selftest_evidence.json": "4f69d43ddb993a2f68219bd96b0e08d6427c74cb65b089cbfb7909ca54b65331",
+  "skills/excel-model-build-2/.phoenix/provenance.json": "1ad130485c588700e435213a42249ae3ea97f1bac09fa2cad3fd83aa6969675b",
+  "skills/excel-model-build-2/.phoenix/selftest_evidence.json": "4342f79259ea61e5025890493bcc36cf2b8e912d185093ab7b7cd113537edc0d",
   "skills/excel-model-build-2/references/creation/p0.md": "ccac913c117b1db5eca91669eceec565a326a49ca33b09eeba78adc62199ab9a",
   "skills/excel-model-build-2/references/creation/p1.md": "98d9fe0accae77c724b2575c7aa420abb062aceecfe55450bc109e10a89f563d",
   "skills/excel-model-build-2/references/environment/p0.md": "2c377cadc386483bf81e4e4a0191b6b699779fb31d30805fb4f12a3884de5253",
@@ -54,8 +54,8 @@
   "skills/excel-model-build-3/run.py": "7302284995b8a543a0b2a31dbefb9e4be7ef337105eb3c98af58bae833303d4f",
   "skills/excel-model-build-3/selftest.py": "ea7d18ca3374a12c3185fd5da02001cd9a93c81b0a161e073aed01a69bb13f64",
   "skills/excel-model-build-3/.phoenix/originality.json": "c78ad3a7b91222bfbfc115f8cc840a1971131bf044637300a799c9c36442640f",
-  "skills/excel-model-build-3/.phoenix/provenance.json": "c569d1106a315ba59961c5a5c833e9db703f5c4ad8ede54fed5dc74556df9145",
-  "skills/excel-model-build-3/.phoenix/selftest_evidence.json": "064eb4a5c67865fbd99d0988ee5e67c16d56adc30a66d9886d2606927c918ad7",
+  "skills/excel-model-build-3/.phoenix/provenance.json": "7a28d80039d857350cbec5ab1f937e52507509341560b4672ee4892b5cfe8b7e",
+  "skills/excel-model-build-3/.phoenix/selftest_evidence.json": "1bd8866a48f3432c8e3f188c974a1ffb8d3be6c505dcfae4c8b1554474df3d1e",
   "skills/excel-model-build-3/references/creation/p0.md": "010ffb706ab35d02df9545218f9e8e7da9593383e6d58a80983078f979e6459f",
   "skills/excel-model-build-3/references/creation/p1.md": "19cd1c5ce8db4bd360df3fc90f23600eb4856e6371b0d4cab10bb7e6df7cd6b2",
   "skills/excel-model-build-3/references/environment/p0.md": "67110909826fbf13927f1b02b1eaa5b62f98c7061239977f1029ca856f14d45e",
@@ -66,7 +66,7 @@
   "skills/excel-model-build-3/references/production/p1.md": "03c9dec70e76a640eb633f354336cf79a5c425c12a7e4f9dd34a9bb4b59ceee2",
   "skills/excel-model-build-3/scripts/main.py": "c99f2cb8f03292f9e50425d2c3833d97bb2c95a41879b1b8ae5a07c02be79a01"
  },
- "sealed_at": "2026-10-18T19:58:43",
+ "sealed_at": "2026-10-18T20:58:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

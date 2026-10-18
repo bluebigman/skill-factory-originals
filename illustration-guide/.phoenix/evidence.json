@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "illustration-guide",
- "merkle_root": "82a27c179d7227389d9b81aeacb204342abe24fd5ec7a658c50b43c2ea623592",
+ "merkle_root": "60748f5a5efffbd3e797daade0e6eef3cdbccadc30764799f27fdc5f4b0e3e6b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/illustration-guide-1/run.py": "32aa0956cb401ebb2b3222551395230dff849a5d59b6ca1f799f77a94ce17952",
   "skills/illustration-guide-1/selftest.py": "fccd5083bda1eb720946a1c2cb39c49e0acb7d095ca0e62ffce49607c0eae3ec",
   "skills/illustration-guide-1/.phoenix/originality.json": "525d2c11db7c49e9a6254d2df777f63dc87bdfdba436daa85b26fbfe4c07291a",
-  "skills/illustration-guide-1/.phoenix/provenance.json": "425c0c2b51c084ac982d754baaad477f3de361670fda6274b3c0c255f6dae5bb",
-  "skills/illustration-guide-1/.phoenix/selftest_evidence.json": "381f4211f508c6c9f5b3d319213be5f62c72373e9614d62f4462ea55c4086965",
+  "skills/illustration-guide-1/.phoenix/provenance.json": "203a59a2bab2afa4d0f29d1db8f4c1cbce6ff7848c7d28f44c8ad772b8058549",
+  "skills/illustration-guide-1/.phoenix/selftest_evidence.json": "e0316b572570c7a7739b268e7900bedcce9eed95f0250bb153b35f68ee5e17f9",
   "skills/illustration-guide-1/references/creation/p0.md": "6512d9ac2fbbfcace6ae1238d9478b53df1973bfeb675539630234fc850ab11e",
   "skills/illustration-guide-1/references/creation/p1.md": "8a1bdfadda4ebbad4dbdb6f8102b98c00c94e791bfe3ae43ce794b1d78444031",
   "skills/illustration-guide-1/references/environment/p0.md": "46c3a805701fdb4b47d8e464b2b68e94b47dee548a24b82543e6568153b78246",
@@ -37,8 +37,8 @@
   "skills/illustration-guide-2/run.py": "850890bb1b579d94fff35f706f7809c71007920f2d22441208137c0936782b03",
   "skills/illustration-guide-2/selftest.py": "4c57d899269b135c57d10d1a137eb395d4f44d5ca8e804f79b87ef1fa805d647",
   "skills/illustration-guide-2/.phoenix/originality.json": "db739c5f46b9ff1bbe2c8351f9af8d10c74c83b805a203eda59c62f415188b8f",
-  "skills/illustration-guide-2/.phoenix/provenance.json": "848ab384e9a8cd90162665453c75b2e0031cff50bc1f7a6a5bb2b9226bc449af",
-  "skills/illustration-guide-2/.phoenix/selftest_evidence.json": "f20bc6755e0bb2b234e843182d8ab6bf6eb657994fc56371ce74ae2feffb97b5",
+  "skills/illustration-guide-2/.phoenix/provenance.json": "187ba41b913eb59d935f22da5aa713f2b68c862ec306686c4ca43f58e2c3f7f1",
+  "skills/illustration-guide-2/.phoenix/selftest_evidence.json": "f392b804ffbc56a48f4d50b41941cfdae09003e9f1aa6ff0f40ce7fc770df8e9",
   "skills/illustration-guide-2/references/creation/p0.md": "812d305e5e90a5b406139a8b96fdbb166eb39c616d8d523164203d7b5650d585",
   "skills/illustration-guide-2/references/creation/p1.md": "beddb1a22322e53b621b8c57a139f28496ea40522d548d40cf4f6b10f8d611bf",
   "skills/illustration-guide-2/references/environment/p0.md": "b59412595d0afab0db6e385e07897bae4d037d6307072690c155ee4894ec7bf1",
@@ -54,8 +54,8 @@
   "skills/illustration-guide-3/run.py": "73667663d89378d93fefd6c5b0806c0d6bd072fd6e85bbfa2bb69147f6cadfc7",
   "skills/illustration-guide-3/selftest.py": "148c1555fe58f5d2ca9ff83a9e59e667e763127580e331d8c4d67294753d539a",
   "skills/illustration-guide-3/.phoenix/originality.json": "d604f6130c4f197fd68e2b49bb70dba3092016ecc5c286475f2b556c8fefd418",
-  "skills/illustration-guide-3/.phoenix/provenance.json": "dbcd37574e3d226c495ef2b4431b64d8eb98f885480bc93772f6d270d50f7375",
-  "skills/illustration-guide-3/.phoenix/selftest_evidence.json": "baa0aeecdaa3e73edf30fd765fa03066086a5c6098f0f20cb301d6ef818b48fe",
+  "skills/illustration-guide-3/.phoenix/provenance.json": "fade7342e4d3b2324a43bd6c1b2c1823d28c38d447ef77c2b47fa1b12a68d9e9",
+  "skills/illustration-guide-3/.phoenix/selftest_evidence.json": "3325c9c4aa0d4d25d85adc198ac3aa6722fd038b4be70d56ebb3a02f750c4762",
   "skills/illustration-guide-3/references/creation/p0.md": "911eb7edc7195172297aee4ed12355add8994a209baf2b9dedd8feea56dcc23f",
   "skills/illustration-guide-3/references/creation/p1.md": "dd57db219be054e95b90797b8749bc4cfe69f3dd23ec732aa281c2737bfd8801",
   "skills/illustration-guide-3/references/environment/p0.md": "cd7cef11ab8d73a4f0d158da010c4a690add8978a8c7afd3fe22a5a08b391673",
@@ -66,7 +66,7 @@
   "skills/illustration-guide-3/references/production/p1.md": "9892f24be63c978d324c08559b9b08c900756682c4e68ce1de9eb6c32e2d4ded",
   "skills/illustration-guide-3/scripts/main.py": "4b2444dfc26875ce69f03c744f3b1069f4e120f00b6350f56be0321d5e549971"
  },
- "sealed_at": "2026-10-18T20:01:03",
+ "sealed_at": "2026-10-18T20:59:40",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

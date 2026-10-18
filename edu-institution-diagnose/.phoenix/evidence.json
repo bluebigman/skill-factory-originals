@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "edu-institution-diagnose",
- "merkle_root": "5c768c6ab8282d6627aa701af9c61efda48bcb7fe46d3cee7c606eaa1b78bc27",
+ "merkle_root": "16cd2d9bc32d29d846511c6e0d30adf620efb4bd600d797fa20f85f07e906cc1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/edu-institution-diagnose-1/run.py": "e961f1c1672eca48950fc1bb69678152092e8c8c59556e796daaa81b0c80f9e7",
   "skills/edu-institution-diagnose-1/selftest.py": "e6dc2852879fcde37279b4ab59abdf8273ac8a2536c2221f94faf4720244267e",
   "skills/edu-institution-diagnose-1/.phoenix/originality.json": "9be6a10b55346ff6679fd4d6bf00391e0d89d9870723d3e5f8828d04d8a38321",
-  "skills/edu-institution-diagnose-1/.phoenix/provenance.json": "955da054a1c6ca805b998794a5aefe51d9c134f17bd8a6ca42b87e9f38ee5dad",
-  "skills/edu-institution-diagnose-1/.phoenix/selftest_evidence.json": "fe071426fb1592e19b63d24267224980a5221befcf06b2b69220b71167b6369b",
+  "skills/edu-institution-diagnose-1/.phoenix/provenance.json": "b776a556710581ab5579e4e20c257144759ca6cb2189ff4eecaa3d9d714ad378",
+  "skills/edu-institution-diagnose-1/.phoenix/selftest_evidence.json": "ff61e682fd8de51811408be534695f8bd4853d0b7f4786b4b3e13b14c03c5dbd",
   "skills/edu-institution-diagnose-1/references/creation/p0.md": "856a84d1f98a7c0600d24fc5e0b720c5fbe7196b9f2240c258120e840b6df891",
   "skills/edu-institution-diagnose-1/references/creation/p1.md": "faa2def28bf5e971bc09988aeca6adbdd27032340beaa6b5963dd073ca942d2c",
   "skills/edu-institution-diagnose-1/references/environment/p0.md": "edcbfd0a529babe674e279d889d3524217c18c333b13aef3f349cdc89389a5c2",
@@ -37,8 +37,8 @@
   "skills/edu-institution-diagnose-2/run.py": "0e645ee8dd9166127701fee53b1261c18a58ded5f8cd4f5fd5bc451e359f4d51",
   "skills/edu-institution-diagnose-2/selftest.py": "ac7b20987c8ef689ec60c644e106d64fb23f4dbc40f0e7b2a8f6d013456af53d",
   "skills/edu-institution-diagnose-2/.phoenix/originality.json": "144af1b0321e0d3cef4647232afff0e7b366113ec6763c0ad5d37b101aaf937b",
-  "skills/edu-institution-diagnose-2/.phoenix/provenance.json": "5f003ad5652a147de96ad4314dd0ec23811d268ed231e2004a7a128fd7b5afa8",
-  "skills/edu-institution-diagnose-2/.phoenix/selftest_evidence.json": "a67990133dda6fc4f0035c197700d6b8eea9a212e5ffd2dd6bc7e642bdf39464",
+  "skills/edu-institution-diagnose-2/.phoenix/provenance.json": "aaf92b6de8a19f2652f9305d33ac113063e5ee981a0edfce9e7fb39dd5216f4a",
+  "skills/edu-institution-diagnose-2/.phoenix/selftest_evidence.json": "006cb7d6e1d33b7a2b8c8d62d5328d489bb5b6ccd6c08e2c9614226b2739d0f1",
   "skills/edu-institution-diagnose-2/references/creation/p0.md": "fb014fdf24fa582bb43a312cb5a42dd6b46b7f45ffe40ce570454f0572461c9f",
   "skills/edu-institution-diagnose-2/references/creation/p1.md": "0fa668c199ae563f62e700e5e378693e2a254e3b9c088ebfbeb4c3748ba4e7a0",
   "skills/edu-institution-diagnose-2/references/environment/p0.md": "f2ab2067eff94bb4a296ff226eec38a28aec456abc468248ceca15b690ecaf51",
@@ -54,8 +54,8 @@
   "skills/edu-institution-diagnose-3/run.py": "e484c1606fd313cd7ba92364d6e91e49bbaf975c3638c0cd470e276d369cd494",
   "skills/edu-institution-diagnose-3/selftest.py": "b4d93eee9631f17c4e62448c0a52549c9afca4a59218245220fc2fdd397ddf16",
   "skills/edu-institution-diagnose-3/.phoenix/originality.json": "669a127bd03240aaaf952bb4fe3618053bd781f1f13d76a1119b2014fc2bdcc1",
-  "skills/edu-institution-diagnose-3/.phoenix/provenance.json": "402db9b232f6d875b410efd63ed65129c7f82bc6b04711eb0a78c0316b248fc8",
-  "skills/edu-institution-diagnose-3/.phoenix/selftest_evidence.json": "33cf5f473e4a199f9aacacc155a9e23799b6eb2059f28607d4b86ac015a7e4ba",
+  "skills/edu-institution-diagnose-3/.phoenix/provenance.json": "f1f8fb8a4a58f1567ad2a2cd95b666e993a99dbc254f0995031e992b10ba9dd8",
+  "skills/edu-institution-diagnose-3/.phoenix/selftest_evidence.json": "36b0f1a3b89b7b98688ef593ed43f9a836b6b0f95d0f196a6fa6d84c1bd1f8e7",
   "skills/edu-institution-diagnose-3/references/creation/p0.md": "e73b6fd094f109e9cb8f33dbc006a617c44123045c427b934ea6aa802b3086b0",
   "skills/edu-institution-diagnose-3/references/creation/p1.md": "c7c990f71d1f4922d2816558de11f4f7d6944fcdbbfcbbb38fe496fb895bd53f",
   "skills/edu-institution-diagnose-3/references/environment/p0.md": "10c1c6acc2615490e68ba8c0486cc0b405550e8f14f2096253ea766c543370cf",
@@ -66,7 +66,7 @@
   "skills/edu-institution-diagnose-3/references/production/p1.md": "2980ed31546d397a7415b1c8ea41166b816adef2e1f73d010ab295d10d6f5699",
   "skills/edu-institution-diagnose-3/scripts/main.py": "0a33d7c8d5833a92e870015d184ade2893be1143a673837dcf659bb9c2a40b74"
  },
- "sealed_at": "2026-10-18T19:58:06",
+ "sealed_at": "2026-10-18T20:58:06",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

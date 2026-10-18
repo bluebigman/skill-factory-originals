@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sheet-formula-build",
- "merkle_root": "b132194043b2a641233bbe14b683574ae094ac562a60b6a78aae4b923bf21491",
+ "merkle_root": "089d8dd628fa13e2f70f74031ddd32adca6d3e8d45f44043c5d8c3c7f4457705",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sheet-formula-build-1/run.py": "829b449d357b2c25ce142b2ba8bda447bea8fbfe29028eecf660fe086c114127",
   "skills/sheet-formula-build-1/selftest.py": "667849ec2562014f38c7a0d8ab3a007df66bd6c1fac138d0c24cf41fb80354d2",
   "skills/sheet-formula-build-1/.phoenix/originality.json": "fa872c58ef528f9a6483143d2db0a76bbbe56320d859434693fcca7086aa1e7c",
-  "skills/sheet-formula-build-1/.phoenix/provenance.json": "a9e2e636cecfc37c2cb1d67ed8f852ff23aee4e405be5406d3e37cfbc2aa5ac7",
-  "skills/sheet-formula-build-1/.phoenix/selftest_evidence.json": "8dee01d9f2cd7e6623ca61878f216942eb77f4de42680b3ce18f6188a9fec864",
+  "skills/sheet-formula-build-1/.phoenix/provenance.json": "b57bbfdd12acecdc9b2c1dd6bfc56474173698bdc3fee36ff26b20a0c51d6683",
+  "skills/sheet-formula-build-1/.phoenix/selftest_evidence.json": "2dfe0ceda31c7f25886a8202fc09db0dbd971338e987e8431dd1bb75ebbaba70",
   "skills/sheet-formula-build-1/references/creation/p0.md": "c88af4a86ecc1086abd18790564e4538da5d02b5246df2a300d32daba4fe6721",
   "skills/sheet-formula-build-1/references/creation/p1.md": "c46fa17aa6ec5bb35493f533c84570d19d4bb3e29abf06687056c2ad94156764",
   "skills/sheet-formula-build-1/references/environment/p0.md": "3f2f5aca7995fa458f236f2246d17f57e20acc40f87097e694bb8b1edf9f7acd",
@@ -37,8 +37,8 @@
   "skills/sheet-formula-build-2/run.py": "ca83a80f341d292ebf2faf1cca02e62d74d48e80079b28c24ec3abc39222ba25",
   "skills/sheet-formula-build-2/selftest.py": "3a3757b0a713a0ad936dda9747e9b85034c08fdb201cde02479e56e2d9083676",
   "skills/sheet-formula-build-2/.phoenix/originality.json": "64cf791de55c8dfb4a3e3ae61e54efe05c90ca189f71b9b85def4132d06bea4e",
-  "skills/sheet-formula-build-2/.phoenix/provenance.json": "63e2e709522df1b1f9c58baf799e865b63b2627ae355d2b95df3e31df0402bb9",
-  "skills/sheet-formula-build-2/.phoenix/selftest_evidence.json": "a57eef49eaa275f9ecb877cad8eb8950157275fe51c6b982dcbf1d3c40e94564",
+  "skills/sheet-formula-build-2/.phoenix/provenance.json": "bcfc0d0f5248a8621b184415f2f222aafc10d517b6a6ad233b78a7a18a49a3f4",
+  "skills/sheet-formula-build-2/.phoenix/selftest_evidence.json": "12c0eaf4a710b32d34d54c5bbaea6b183a6d8cc0523d0e68e28ae4c6ccffbf61",
   "skills/sheet-formula-build-2/references/creation/p0.md": "d082312907260bd390a9962a48693ebd21b9d87aaffea1f2c3c8d8822f3ef856",
   "skills/sheet-formula-build-2/references/creation/p1.md": "38ce420aed91691be05622b48176cd7a8681e08e57f2fb56594a0bb625bce1ff",
   "skills/sheet-formula-build-2/references/environment/p0.md": "17eda83b3d130d293f16a8877da2bd001b39829b5a919305f573fbb8d0f4371f",
@@ -54,8 +54,8 @@
   "skills/sheet-formula-build-3/run.py": "edfbe3d7b6fa75289bc69207cdbb382636d97a14381c09714cf7a6c1b3107ed3",
   "skills/sheet-formula-build-3/selftest.py": "b4af7ade608f7db218b4101dae6523a15eb9a4f12875d2ca3a617ea8c9dd8f5d",
   "skills/sheet-formula-build-3/.phoenix/originality.json": "7bd9fa60d5bfc6ea08b5b0a0db2a40b0d540f21d33e962141203e4defea53ec1",
-  "skills/sheet-formula-build-3/.phoenix/provenance.json": "23bee0f70b0da910c96dffe7e2b83b4b9ff2dd7f0a1099fee2d6ac266a331f72",
-  "skills/sheet-formula-build-3/.phoenix/selftest_evidence.json": "f1be688976a538b93bae464b48753a46be103264767cc6a7cb86ff7334d3f14f",
+  "skills/sheet-formula-build-3/.phoenix/provenance.json": "c9f5a7fe6335db02fc09647fefccfc44c0c1d945464cdda36d8930dca39ccee0",
+  "skills/sheet-formula-build-3/.phoenix/selftest_evidence.json": "519c801fc168c47c82e591e769bba3ca321875bab81d2182813e7b82582a1e6d",
   "skills/sheet-formula-build-3/references/creation/p0.md": "8fba99b6fd868c97fa1a1d9f4494c0ef09d91bd5e1453cb8ebfd049b1d7379f3",
   "skills/sheet-formula-build-3/references/creation/p1.md": "1b6d0a626e936c196f33fa4e84aad418192664109528cbdb96d300fc635c0813",
   "skills/sheet-formula-build-3/references/environment/p0.md": "3a72dae8d94941b7fa7d3943d5597f935782df99104a5dc1a4625bb7be183885",
@@ -66,7 +66,7 @@
   "skills/sheet-formula-build-3/references/production/p1.md": "5ce08ddcb3cfeab5db15e2a0fd5cae178957c1ef5423fcb4660eeb853bfaa344",
   "skills/sheet-formula-build-3/scripts/main.py": "0ede5c100a6884233ddc6e490555101fdd02a548b67c765c9245a029025b2a45"
  },
- "sealed_at": "2026-10-18T20:09:24",
+ "sealed_at": "2026-10-18T21:03:52",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

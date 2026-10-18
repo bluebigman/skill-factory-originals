@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "pet-daily-care",
- "merkle_root": "39c26270659ed0edf98a2ec8d867800817aad14499b0d65082c4eacf322e6da9",
+ "merkle_root": "fa018883a2e3afa577da842f53dd23109727a06aef9788439ba4b7e25a7761dd",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/pet-daily-care-1/run.py": "33f984ccc10a40ea7e06f9635b8a4d1235ceaeb21ab495d23963ed000b1d0636",
   "skills/pet-daily-care-1/selftest.py": "09564a6cfdb6b39bcd3289bc0cdae4ce054d3f2579946057ba7c2ea6f10d9cab",
   "skills/pet-daily-care-1/.phoenix/originality.json": "e9f78b22bf65ba8e3eacf307a319b0df79f0de908022e818dd89cb01d94e584d",
-  "skills/pet-daily-care-1/.phoenix/provenance.json": "43580886979b532def7f748284b8d61d8e31a379bd4b1111b6a37a33963fc092",
-  "skills/pet-daily-care-1/.phoenix/selftest_evidence.json": "ca61994b388848cb7843508187a235aec2b5f27e1c6013f760ed8a0bd2000da7",
+  "skills/pet-daily-care-1/.phoenix/provenance.json": "f2d011566a544476551b01e88299ce23e3208393e175b1f5e269cb9e9f5d3c13",
+  "skills/pet-daily-care-1/.phoenix/selftest_evidence.json": "134a556bbedbb95c2b04396d5dcdc86d40fe1109570dee8b387b0aebc8effb3a",
   "skills/pet-daily-care-1/references/creation/p0.md": "bfa0180736b4846223e2830302b4e3b2ce94a95e52cf0993de7cdc6b11d49012",
   "skills/pet-daily-care-1/references/creation/p1.md": "db1c39f7ca433f3ae57925ac017216b13ec36b71463c9895329ad0d4674159ea",
   "skills/pet-daily-care-1/references/environment/p0.md": "74aaf624d4a6f2316e3c8967769785448731fe245c2bf5b25abd9ce7e8e515c3",
@@ -37,8 +37,8 @@
   "skills/pet-daily-care-2/run.py": "b6b1127d0a12ca3a149248b49cb459932ce8526b38fcd72f9cf280b37c92f974",
   "skills/pet-daily-care-2/selftest.py": "2325308f92ab5d68d67de22a95787833896e3d8fa1ee0c1d544d261235cb9746",
   "skills/pet-daily-care-2/.phoenix/originality.json": "3bf5461866b8ae2f26d178aebd26ff9a49d79d4392567a2753140d5337608b1a",
-  "skills/pet-daily-care-2/.phoenix/provenance.json": "2673e79ae88a62e45f0cf8e50dfe1e031fa8b8d59edf60657d85165e0af002a3",
-  "skills/pet-daily-care-2/.phoenix/selftest_evidence.json": "bbc4b429334dffa3b0f55e8d67983e89e7064f7d23938137751c525ccf460339",
+  "skills/pet-daily-care-2/.phoenix/provenance.json": "174d172f500767766d14ca89f240ff61e9d3bc1316e2ade3dd715b43fc9b3d97",
+  "skills/pet-daily-care-2/.phoenix/selftest_evidence.json": "cac9fc500cf64049f0f86a1d832745764d030b211911750a465be6054d112ae0",
   "skills/pet-daily-care-2/references/creation/p0.md": "b2911ced06d694e4d646062514ce5517517fc68e4612dc2378a811d7f0c6c3d8",
   "skills/pet-daily-care-2/references/creation/p1.md": "0623b23328f4499ca82e47ab17bd5ba37e74e6dee97cfa80cb7e9f351204778f",
   "skills/pet-daily-care-2/references/environment/p0.md": "f18b78244a6a233f69704fdbeb624eea0b75b86efe591dc2aa6e1b6fa549a682",
@@ -54,8 +54,8 @@
   "skills/pet-daily-care-3/run.py": "c31f058e52074354b3f1a515dc2930c0e3342431790cc63149864b60d97fe74d",
   "skills/pet-daily-care-3/selftest.py": "d242ca33bc3113cad4fccbeacabc0dbb467c6b145b43d439e6b0193a0e31b812",
   "skills/pet-daily-care-3/.phoenix/originality.json": "c2f81b9c33c2bc9df05492812e4d889d56053975253081dc35d4023368fc5967",
-  "skills/pet-daily-care-3/.phoenix/provenance.json": "d28f917c311e09c8f8fc4c8ef8e0687bc62594dce8345efdd54c2d043a353d11",
-  "skills/pet-daily-care-3/.phoenix/selftest_evidence.json": "bd073a1b098ae746eee8a0175185c24cb8597ac647fa482504b7590dea5b1931",
+  "skills/pet-daily-care-3/.phoenix/provenance.json": "ddd7cc17ee79c74a655f671b7945c30ddb09a8323445fbd80031f81cce43572d",
+  "skills/pet-daily-care-3/.phoenix/selftest_evidence.json": "6376a1b0560aa92aff92dd5c0422245c460060b97c664f05b3a710f259300ef4",
   "skills/pet-daily-care-3/references/creation/p0.md": "1637f497195b4a0286d80727194691232b71dc2ec8dbde54160a8a31731422e0",
   "skills/pet-daily-care-3/references/creation/p1.md": "0ad331f827ae66f3b525b7de69284b780586e420da591a8a9a9bf889fb0988d4",
   "skills/pet-daily-care-3/references/environment/p0.md": "479ef288055c425a5334422711041cf57befc7c99e951b1c87f32bb479fdfa97",
@@ -66,7 +66,7 @@
   "skills/pet-daily-care-3/references/production/p1.md": "abb82e299029076997a632fcb43caf7d00480f499bcb04532223d4b9d0b50b3b",
   "skills/pet-daily-care-3/scripts/main.py": "61a2de5be71f86c8c72392496f5587bb44a10b1573588a31cc942131d3cea94a"
  },
- "sealed_at": "2026-10-18T20:05:52",
+ "sealed_at": "2026-10-18T21:02:03",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

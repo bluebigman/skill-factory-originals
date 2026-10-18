@@ -47,7 +47,7 @@
     "遇到范围蔓延"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:50",
+    "at": "2026-10-18T20:53:47",
     "from": "plan-breakdown",
     "to": "plan-breakdown",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -71,7 +71,7 @@
     "遇到超期隐瞒"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:50",
+    "at": "2026-10-18T20:53:47",
     "from": "progress-report",
     "to": "progress-report",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -95,7 +95,7 @@
     "遇到外部依赖"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:50",
+    "at": "2026-10-18T20:53:47",
     "from": "risk-control",
     "to": "risk-control",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-ocr-postfix",
- "merkle_root": "25d3cb1501b50a99190528cb87a8488af9ac4778af3a530ed9511eebaf9e44a8",
+ "merkle_root": "ff28720abb9a0b5d5e915a0a8445ceaf971d022fdde3cf3858745a8390bc6329",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-ocr-postfix-1/run.py": "0e6e3b024f57e88a3f84a170eede0a37a1e91618c271622061f3a7ff5679a22a",
   "skills/doc-ocr-postfix-1/selftest.py": "90da2ab230a389718958b31b34588dcf905b49cdfeed9917deb14209eb052c6b",
   "skills/doc-ocr-postfix-1/.phoenix/originality.json": "8d0fa560befd962a661546891e5c126e69768102cc5a11ba72ef25ff83431717",
-  "skills/doc-ocr-postfix-1/.phoenix/provenance.json": "2586ca47fb7cf5de8e5c48f0a488bff4aa2dcdf340add5d3847091aa852312e8",
-  "skills/doc-ocr-postfix-1/.phoenix/selftest_evidence.json": "15f734607dc3ddce943c53d28449702f0a53416ea41b1010b800ece9156a3d90",
+  "skills/doc-ocr-postfix-1/.phoenix/provenance.json": "7e8a90a8f906d62d1e95cb3a4b337b71b203b5b8e81ca9e617b2fdf08289c86c",
+  "skills/doc-ocr-postfix-1/.phoenix/selftest_evidence.json": "42537d8c8b3cd2fd5ac813ab7a5c86fd9e6751c96623cfdb79546cf27903255b",
   "skills/doc-ocr-postfix-1/references/creation/p0.md": "8de50b4521a4dd316224db74fb8cc127bfeb28eeed0711be35110ace56f88d17",
   "skills/doc-ocr-postfix-1/references/creation/p1.md": "4c1923711830f60a209969525664baaeaecf911d344fbe897fd2faf48f19e7ec",
   "skills/doc-ocr-postfix-1/references/environment/p0.md": "5fac0cbd7e63bfb371aa76485444fcbe76243806984ed7e7640f7bee4e383fe1",
@@ -37,8 +37,8 @@
   "skills/doc-ocr-postfix-2/run.py": "56fd7ed70cf63149c0d8effb85e6938e6fab5251eb29985f0856604004b4f2ed",
   "skills/doc-ocr-postfix-2/selftest.py": "ebd824c618dfde7c96ddc2c66308e0bb11cec5ce502a75e3d3ec981b388a595e",
   "skills/doc-ocr-postfix-2/.phoenix/originality.json": "30a06919764a2f38d97028fc17352cc096a0fba0ea097c07fe85c874de77999f",
-  "skills/doc-ocr-postfix-2/.phoenix/provenance.json": "a2b8cd236b52d87934481022032810c2073028758e4951376002470d1555be9e",
-  "skills/doc-ocr-postfix-2/.phoenix/selftest_evidence.json": "34f45b5b69539005ee2ba7399a5ce3f941348e3242219705ded34ab2d533faa7",
+  "skills/doc-ocr-postfix-2/.phoenix/provenance.json": "93f7f3871a17d146101639f16b221bb66c8cdd7d6e87eee8e3f6258c13d333ef",
+  "skills/doc-ocr-postfix-2/.phoenix/selftest_evidence.json": "19f966dd387316bc56a4d889f0c138edc4b98ee24f0607d6ab31170a93aa9601",
   "skills/doc-ocr-postfix-2/references/creation/p0.md": "c4b7976a81ee3633e927dc475c5e91138c62be9a12e526528728e8b397cd4b8d",
   "skills/doc-ocr-postfix-2/references/creation/p1.md": "4b2737719df69f6b61ddc04d1b92942aa955e49fd91577b522aef305326f8756",
   "skills/doc-ocr-postfix-2/references/environment/p0.md": "326f5873e08f87ac20b5c4cc42b5537b9e901c637fbc89bfcb12be336bf136e8",
@@ -54,8 +54,8 @@
   "skills/doc-ocr-postfix-3/run.py": "2180f306b00e828094a94714d906045f282af052aea64484d0b8a595e9ded970",
   "skills/doc-ocr-postfix-3/selftest.py": "780a91b7dede0c97a0e2ed5426b5de2f2275c3db36f545f678970a9c7bc20dfc",
   "skills/doc-ocr-postfix-3/.phoenix/originality.json": "5f2037acb59a766e3ef161d6f3ee91cb9632ca359ee932094ff4572fcd8bbf2a",
-  "skills/doc-ocr-postfix-3/.phoenix/provenance.json": "95f495e53ff4b2a23742dc6f8e74452b54f128cc0b89a5f6329475410aec3683",
-  "skills/doc-ocr-postfix-3/.phoenix/selftest_evidence.json": "4b49fc8760db28f0b7478ccf6603b0b42eb9fcfd35e36b82d627e454660ad8f7",
+  "skills/doc-ocr-postfix-3/.phoenix/provenance.json": "b43d70541823737150246152cae343008d8f16b8c11d44c0f55493e545e4043a",
+  "skills/doc-ocr-postfix-3/.phoenix/selftest_evidence.json": "03aa6fffcc2e2f830ba67ddb88630b3dccc3473c56bd714b160b1394168bbb10",
   "skills/doc-ocr-postfix-3/references/creation/p0.md": "3df190ca28fdf20787cb879d2934b296de97eba9379e135b2069de2a17c058c4",
   "skills/doc-ocr-postfix-3/references/creation/p1.md": "08dbf52fee6cace2752572c7713d72cc09396392a1ccf72b85bd7f160a1fbf83",
   "skills/doc-ocr-postfix-3/references/environment/p0.md": "7c7326580456d2cf1429f9c9e71616050c7fbe6587541ed60f440c5c05b67fd8",
@@ -66,7 +66,7 @@
   "skills/doc-ocr-postfix-3/references/production/p1.md": "31e11faf44d92cd3121c4069fc5853e273266c612d22442ffa9ac6d91f8807f4",
   "skills/doc-ocr-postfix-3/scripts/main.py": "e3e6d76a3dffab75a4ad65a0da809e414ec8fce06a288cf46cd9dd67f3a35e96"
  },
- "sealed_at": "2026-10-18T19:57:16",
+ "sealed_at": "2026-10-18T20:57:39",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

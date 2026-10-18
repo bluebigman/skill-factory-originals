@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "fitness-home-coach",
- "merkle_root": "88318391ba929193e26c462acb8bd0b96f08d071d1faeb90739b5cd9741352bf",
+ "merkle_root": "e7b4f54280d9b917f3050f8313bd0a795ca72c8105fe8b16dd2a5c67cad5d62c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/fitness-home-coach-1/run.py": "3ca387748d143df9dfb45b6e2a2f3f40d7460ca95afd168ebb19f8a1396f62e0",
   "skills/fitness-home-coach-1/selftest.py": "5a9bd2ce7004cad27643f45d00d8b5df028b87464f415430086b5eb8cab4e6c7",
   "skills/fitness-home-coach-1/.phoenix/originality.json": "60a775c19dc52e78b9f80aa50a87c1e261a20560f18551f94c3aeea3de82f7c0",
-  "skills/fitness-home-coach-1/.phoenix/provenance.json": "76b61da06acb2f5d16bab4a6af755491108b876d7b0b7f9b0a43ce56b9974e16",
-  "skills/fitness-home-coach-1/.phoenix/selftest_evidence.json": "53ded9a7ce9fb84ddad4b5e6f3ca76c473c39ec34d8ed1e62958c7076fb55d4f",
+  "skills/fitness-home-coach-1/.phoenix/provenance.json": "354fbec92cfd22f8c625c5fcc5404dab08cd316822e6e6655ac75bac6fee574e",
+  "skills/fitness-home-coach-1/.phoenix/selftest_evidence.json": "bb1004a2a55a8b34ff544e084e6cfd2875aa6e479ec9bb0eafef48eb19c735e3",
   "skills/fitness-home-coach-1/references/creation/p0.md": "633f5914daa73c28d08614d82f8dbbc446228643cf6ac83a7c37e1e3ee7bd5ff",
   "skills/fitness-home-coach-1/references/creation/p1.md": "44fd32e8bdac1fdc42669a3373fa89d9199edb99bac10a59d2fa5e9a415bb386",
   "skills/fitness-home-coach-1/references/environment/p0.md": "3afdebf5ae60aa7126f56178c62d789a71b7a279d4df42c18fbf9972de0c2085",
@@ -37,8 +37,8 @@
   "skills/fitness-home-coach-2/run.py": "3acc05e9823ea6ac083fca70426309f7dd834883303aed24f63292c379242840",
   "skills/fitness-home-coach-2/selftest.py": "7ecba0f6704fc63281a619ca025b82b29abf968b7afb4162dc6ded46c917cfab",
   "skills/fitness-home-coach-2/.phoenix/originality.json": "4b91b6e7d4d29021af85380f3b538b00bb32878692bb34fa9f2ae91edeaed91d",
-  "skills/fitness-home-coach-2/.phoenix/provenance.json": "4cff0072d1c7ec485e9faad81fb2713bf70bfa711e94164b9d9666ed3a9bdace",
-  "skills/fitness-home-coach-2/.phoenix/selftest_evidence.json": "8bbe9e2a780e50717de36f359db61471483f7434f03d4dfdffd0cde31e2f0939",
+  "skills/fitness-home-coach-2/.phoenix/provenance.json": "63106eba1655ab4780180897be0cf3548e45b655b185f3a7aedae31a4e1d311d",
+  "skills/fitness-home-coach-2/.phoenix/selftest_evidence.json": "bbed76e8eda38c05d9abe347db92c6bd57cb57409607b345f465eb5c87f2ebd3",
   "skills/fitness-home-coach-2/references/creation/p0.md": "2f885c5a1cb155dd5e5d938fee5233d6c9d3abfa949ae55b4040aa0d65bfee66",
   "skills/fitness-home-coach-2/references/creation/p1.md": "6af477fc4d4d126dc0d03483e9aaab8eb42b766cf5883ed665461b4869532449",
   "skills/fitness-home-coach-2/references/environment/p0.md": "080108bdeb9a7c3874a80fa0b27911e1bc132b526ddf908896bf6e9b6c83cd7f",
@@ -54,8 +54,8 @@
   "skills/fitness-home-coach-3/run.py": "5733fe1c3af28b0eca8e5924ccd03b060d7febeebf3efa86ad82cbf8f8026ffb",
   "skills/fitness-home-coach-3/selftest.py": "1842015267f0591aad1c439afb6ed98483d3181dc2d241010a5d1b9be108b568",
   "skills/fitness-home-coach-3/.phoenix/originality.json": "c28d92856f2aae12d0a06381b8a67ac6abe0f1aec86c59faa70540256bc5f986",
-  "skills/fitness-home-coach-3/.phoenix/provenance.json": "6a551fb1612b8ab71c84937d058353ea60a68874d804c792c0da6a97a1b596e0",
-  "skills/fitness-home-coach-3/.phoenix/selftest_evidence.json": "95221108a157ede514bfe9c87521c4ef75ded1051471b0345508c465d30e2c3c",
+  "skills/fitness-home-coach-3/.phoenix/provenance.json": "938f3a5cf41a536fa889adeafcd526ac06313d164ebb152facce09642fbf3f68",
+  "skills/fitness-home-coach-3/.phoenix/selftest_evidence.json": "68c2789aa05b969eedf5d67b33d639ecc86e62e2f1ea1608df42a59f18a1028c",
   "skills/fitness-home-coach-3/references/creation/p0.md": "a9f5c5859b3f6e50865acb4263d7094954d793e1035689011e0902a1af9247f1",
   "skills/fitness-home-coach-3/references/creation/p1.md": "5ace024bac4c0513be84fbc3e9f95f9600d885cc1a89209f2db528fdb2d18f50",
   "skills/fitness-home-coach-3/references/environment/p0.md": "b4e56b2e2f146224bc0d99698634141392e1326138fcd9bf6e329a029a690c48",
@@ -66,7 +66,7 @@
   "skills/fitness-home-coach-3/references/production/p1.md": "561d2418de68195963ffc8f0765c9d6d28ba2dccdbaaa6f6881b7721b784326c",
   "skills/fitness-home-coach-3/scripts/main.py": "0147b9569514f7d5f8f5d7bfe0b7bee1b732fc29c19798fa3061079783771cb9"
  },
- "sealed_at": "2026-10-18T19:59:24",
+ "sealed_at": "2026-10-18T20:58:48",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

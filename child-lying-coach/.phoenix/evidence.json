@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-lying-coach",
- "merkle_root": "49aa1cdf09da230696d36df29fc3fec65ea2708f6d31c270201a4549c9b89b45",
+ "merkle_root": "4426a6294a6fc68c4d7de3ce1fac3212912ed6abc40177b327c6e8acdc6c8fe5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-lying-coach-1/run.py": "5eee96ddc229c5e0eb318feeb8cf3d6ec00be73d6b1aa37efaa768124f5385f3",
   "skills/child-lying-coach-1/selftest.py": "e6396bc9d049a5e3041895bdc4a020f75720ab556af6fdb87ab8815df84de1ef",
   "skills/child-lying-coach-1/.phoenix/originality.json": "5fa55b50b48004d67f107c24a09ee77853a15be57c7be03d827454bf511dc2c8",
-  "skills/child-lying-coach-1/.phoenix/provenance.json": "895143b6bce3326932d47deaa837bfc56b481020f6f35531db9aa8ba395e988c",
-  "skills/child-lying-coach-1/.phoenix/selftest_evidence.json": "0d3897b3b8784ccaed9f59f8b9cdd16a2bb08a56bfc3acbf8c01d7740229dec5",
+  "skills/child-lying-coach-1/.phoenix/provenance.json": "1b58f3de6c7a0ccc47f45e843ff576b09fbb3160e8726b28eb5d0c7a7de59ea3",
+  "skills/child-lying-coach-1/.phoenix/selftest_evidence.json": "b467f4997480f845a4a2838215de6a42e20457c9e37a8d209ace4d372fc007d4",
   "skills/child-lying-coach-1/references/creation/p0.md": "ae4217bf82ff09c9245e16f0808b296c34a55714faab350b76500f60601accb7",
   "skills/child-lying-coach-1/references/creation/p1.md": "07df205592e21df40c4a7b885d7ca53e05c7225db3d260a5bff2e97e86d3dd6b",
   "skills/child-lying-coach-1/references/environment/p0.md": "ba2354aa60363efc227736eda6ba43fc867ca633c0799cab7044f4933f299664",
@@ -37,8 +37,8 @@
   "skills/child-lying-coach-2/run.py": "e1a4c6f872ba17a58f7633f1d4b1972e6eab9cc60681f04d5373bdd65412f67a",
   "skills/child-lying-coach-2/selftest.py": "0ed47165c93890f1e4ae90bf0e3d5d302261b170809cf23761313db8742a4a9b",
   "skills/child-lying-coach-2/.phoenix/originality.json": "cc6de7a1b7ef358eb2b97379ca5e3037fe74257cd28369db49d048cb50108b56",
-  "skills/child-lying-coach-2/.phoenix/provenance.json": "ca4abf49145464b4397f7dbac1e889537b38187c1851a83ef9e2fbe961eea421",
-  "skills/child-lying-coach-2/.phoenix/selftest_evidence.json": "24ef5f9beef53af15d689d70809d61d206c9589cf3ae544d7fece9bed8f2783e",
+  "skills/child-lying-coach-2/.phoenix/provenance.json": "468733bd6d52b30ac465ac7f39b2a9a3aa5c6c9cc8d835f6dd791fa296ea9a96",
+  "skills/child-lying-coach-2/.phoenix/selftest_evidence.json": "3bac7367f3cd6c3b8a767182e91e91c6e11a50188bcf45da82085cf93b1bce3e",
   "skills/child-lying-coach-2/references/creation/p0.md": "f3fd9422cc593449e3c0d770f13d5267ca4e83d6c33673885633166069602382",
   "skills/child-lying-coach-2/references/creation/p1.md": "184904da1f2254bcaf8613a502541f2aac46c693d538557be553c61208a93eae",
   "skills/child-lying-coach-2/references/environment/p0.md": "c9c289f7e2acf8257eb8ed3d61f815c21ad5ab38cb683e9eb6aa7bf38d8b220c",
@@ -54,8 +54,8 @@
   "skills/child-lying-coach-3/run.py": "16a652144085f9842feefcadf63d367b0aca703b5c37902bb7990816dcb00f4d",
   "skills/child-lying-coach-3/selftest.py": "cd7202d48ba3da46781d2d39e2cbc45c77dad6a7493adcbc14cc2ab64bd35739",
   "skills/child-lying-coach-3/.phoenix/originality.json": "962c87774a22620ebb3ca228d996c43aa88706a5f90ba92e5e484298287b138a",
-  "skills/child-lying-coach-3/.phoenix/provenance.json": "620f82cfa109ac9d3c08d02efc4008a959e5636b69ddbe3995217159f3961d57",
-  "skills/child-lying-coach-3/.phoenix/selftest_evidence.json": "33bce753b9fcfec9d031ed7ac22261ce9b6b7573c68097593d3ee81c6ec23643",
+  "skills/child-lying-coach-3/.phoenix/provenance.json": "5e4c3dde235c627f2071f068344a82de1bb211564752b8c59c115c5f994ca359",
+  "skills/child-lying-coach-3/.phoenix/selftest_evidence.json": "56db9f6a0597debb8f96e8085352dc732293d52dbb1e5c0046de5324a712dfaf",
   "skills/child-lying-coach-3/references/creation/p0.md": "be6a5882bd27c3a1089f4c0dbe38903b317ed34525e24a3d2ab59ff585f48390",
   "skills/child-lying-coach-3/references/creation/p1.md": "cf361bc12e0234ba64f9c8bc567fd83b25cdc4e2d4fc5161de9470bd9cdd77bb",
   "skills/child-lying-coach-3/references/environment/p0.md": "73044eab9076b934a4dcd473c124ca6f3264dd8e8dbc1f0c9c2404ba50148a2c",
@@ -66,7 +66,7 @@
   "skills/child-lying-coach-3/references/production/p1.md": "9d1d75224c464143de444a3246f13ab3df075c82f500b7858915721eb3a0e744",
   "skills/child-lying-coach-3/scripts/main.py": "e2ee0d50efef2c3123002236b756305a508db40e7b22023dddb8611003d5304b"
  },
- "sealed_at": "2026-10-18T19:53:24",
+ "sealed_at": "2026-10-18T20:55:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

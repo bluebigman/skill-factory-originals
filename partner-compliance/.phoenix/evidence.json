@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "partner-compliance",
- "merkle_root": "b7ec8f1ca447a2c670662e93f7ad9b25d86930687f736551ed4ea9b6051ea106",
+ "merkle_root": "e07ab50eabbb14f32889a0dc9eef7903fd7f580355ffc57c2af817af771b2ddb",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/partner-compliance-1/run.py": "c99957231e41dbeff8e9d537722e290a435942fcaa9517e40b3c3b41ff838117",
   "skills/partner-compliance-1/selftest.py": "49697f3c26c028246d88e28a29a4e78ff8155f9cfcdd53aed58ee97fef5fdea0",
   "skills/partner-compliance-1/.phoenix/originality.json": "a5f36bcaefbb81cc6191571ab7db949b36211dd14a97e4e871b51ce7f107929d",
-  "skills/partner-compliance-1/.phoenix/provenance.json": "192bd03fd652ab2d7c41d674f4905daa22f498f36a427f0844059fd92e1d74e9",
-  "skills/partner-compliance-1/.phoenix/selftest_evidence.json": "458f4e00b4433d4bc44a0483e5edab460f6354bcfc6e1ba1a2f1d1552cfa3c32",
+  "skills/partner-compliance-1/.phoenix/provenance.json": "d8f9634ebcb84cc5c17e84228fe90417ec2bd0f2118e51cdf681cafc2e40dab8",
+  "skills/partner-compliance-1/.phoenix/selftest_evidence.json": "c44b980bb2608dfbdc116fd86b9a9c701ac16212fc90941a2db4d80eed564089",
   "skills/partner-compliance-1/references/creation/p0.md": "c4aeeab4a9fca54e24534062034fac2d4728f526d5b837d9788c7c78ecf5c352",
   "skills/partner-compliance-1/references/creation/p1.md": "124d7d2a126927af88431e0488482749fe2fc82597dcf22694d18dc5956482fc",
   "skills/partner-compliance-1/references/environment/p0.md": "6b886323e2ae67769f8efcaf8ac5c5099a4d1ae6e2d6d3a0ba77c71ef2575e47",
@@ -37,8 +37,8 @@
   "skills/partner-compliance-2/run.py": "84495f1b153efe71f40b762b6fab9fc20eafc184857b151ad8f4ed741277bd51",
   "skills/partner-compliance-2/selftest.py": "0a572db7a2b240c51b6db8a9227cce8d6ec119dd13b9b8c27afbb19dbe89a9a7",
   "skills/partner-compliance-2/.phoenix/originality.json": "8fbaaae8003540a27b65e959f645fe438867f6a97e7b91d105d3ee3dbfb013c0",
-  "skills/partner-compliance-2/.phoenix/provenance.json": "00682618c3c1c3886de29fcf2fdb8c42fec0f945c9eee96815ab5c47143922ee",
-  "skills/partner-compliance-2/.phoenix/selftest_evidence.json": "bc3887e500efc6d4cf5c4575258c58812a5c3ae1e6441b217030b73fa8b2e2d8",
+  "skills/partner-compliance-2/.phoenix/provenance.json": "16cfc6a033db8601976e67f628dac7d8fb3480f260d02d43d628780270f6ec13",
+  "skills/partner-compliance-2/.phoenix/selftest_evidence.json": "6a87031dee58344aff40b91c75a1dc8be10af69d7ba1a8874e343c26679eadb6",
   "skills/partner-compliance-2/references/creation/p0.md": "7d043ead8ee5565c73a1a3ec353e64d6e6c0740e223104f9b4e3f801de28416b",
   "skills/partner-compliance-2/references/creation/p1.md": "f19aa176c7401dafbf2c7e2653e465db40224a9d0395cb0ec0c5679fdcd3dbfc",
   "skills/partner-compliance-2/references/environment/p0.md": "6337aee6b67e3f1f954edab477ad701b093580fde919e166ce74118bbbff82d3",
@@ -54,8 +54,8 @@
   "skills/partner-compliance-3/run.py": "38267ba34772b02038f7dcc69ae4a0d50e9645875df68f8663b951abe6d580d5",
   "skills/partner-compliance-3/selftest.py": "4dae31b4b330e7a70cbae7d68134638697a8d924f63cdec963c828f4275bc089",
   "skills/partner-compliance-3/.phoenix/originality.json": "eaf7fc742b15749413b77e732702a3259a1edbdcb71a1461bfea7ab97ba70f5c",
-  "skills/partner-compliance-3/.phoenix/provenance.json": "6ab97069aa66fba1d078bb440c5caae2a4f9d3922b1f1e2e18abdc786866e068",
-  "skills/partner-compliance-3/.phoenix/selftest_evidence.json": "1b4a407874609b476c52f042f62bd2a1076f4f1e868bc56b9ed16eac713b8dea",
+  "skills/partner-compliance-3/.phoenix/provenance.json": "3b0103f71a6faed5b0053cd337fdaaa7a2b55490dc80aa3065ebbcecba765597",
+  "skills/partner-compliance-3/.phoenix/selftest_evidence.json": "2b7bd69614d34a441149690056f0a9f20e72957a04dcf7403018f08b5ee70e5d",
   "skills/partner-compliance-3/references/creation/p0.md": "3f3e8b03908c980bb55bfebc6141ddd27465296f3d4cb60057d76afcd582b469",
   "skills/partner-compliance-3/references/creation/p1.md": "0632612d63a1cec9e63d8e6aaa0320b43ae40727c77f85c0044903e5af2a66c0",
   "skills/partner-compliance-3/references/environment/p0.md": "3259bc5edfbf23994372401d0cc7840c74a68a5439775e743a732ec043f6417d",
@@ -66,7 +66,7 @@
   "skills/partner-compliance-3/references/production/p1.md": "861e60050468a67b40e33341136ba69abb39c4d87b0424c1f8e8f9ac6d0fe7b6",
   "skills/partner-compliance-3/scripts/main.py": "acfb1e7f53e6a3bfdb634cc9ff7a6d42342785bde8c8fddb76fd9b32d45130f8"
  },
- "sealed_at": "2026-10-18T20:05:21",
+ "sealed_at": "2026-10-18T21:01:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "brand-tone-guide",
- "merkle_root": "8c53410ff33c974f98b05115ef8832f47f9a521f701fbbd76e209dc4ac0482a4",
+ "merkle_root": "3fcf90104d2d53dd9a9be0cc30ae8729e297c9563aeb5cf9fa9c9b7e6fd2d863",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/brand-tone-guide-1/run.py": "352990bc76e7814ec86dc68313738f66b411c33f9d5ee5f67391b0919359450f",
   "skills/brand-tone-guide-1/selftest.py": "06bd2486755bea5722320328d5a82dbe111f28a852b93a9dc1df81ddceb93a3e",
   "skills/brand-tone-guide-1/.phoenix/originality.json": "24fcea2953d53edb3d5f027b3841bb57a62d6eee54b3da609ca9ab6644b23a5e",
-  "skills/brand-tone-guide-1/.phoenix/provenance.json": "36c1ddb1a5629937f67072b4fda8a9ba9c1ccb312f119f9e4f5a9270d60a8200",
-  "skills/brand-tone-guide-1/.phoenix/selftest_evidence.json": "2de84a05568fa973d21e762a1a924fcb86c05ad8651518b38e1ab246556a850f",
+  "skills/brand-tone-guide-1/.phoenix/provenance.json": "0f24dd153ed3c9f5f22d77b60cc381ab492ec82d81fbd715dd34765e760c5910",
+  "skills/brand-tone-guide-1/.phoenix/selftest_evidence.json": "d11ef22a1e8236508edbcf0118b495d3749e7b55aa790b50da65d349e5b1e62c",
   "skills/brand-tone-guide-1/references/creation/p0.md": "8eec08e26faa74be5e2f526196dfb2ac70dfcc4a266b51cef08101a7c28fe2f0",
   "skills/brand-tone-guide-1/references/creation/p1.md": "cd411e55f1e4ab20da6ebb61eebb3305838ce6c57ae50be00ac5fca08e6e51db",
   "skills/brand-tone-guide-1/references/environment/p0.md": "5642156d726df76d0a9642ee7d2cfb39d94723eb59ee44efd460fab3501f7290",
@@ -37,8 +37,8 @@
   "skills/brand-tone-guide-2/run.py": "f6e181dafd4e0f93706ded08928fc4cbf97dcffd31f85bca6b3f7a76c92ec99e",
   "skills/brand-tone-guide-2/selftest.py": "7a62da5208114314d84c44b93cf3b62a0529edb0f8bec7fb75ffd3881270fb78",
   "skills/brand-tone-guide-2/.phoenix/originality.json": "64d787df242faa9efe736bc7eeec1316af88e28943ae222f0e7914f1dcc3a78a",
-  "skills/brand-tone-guide-2/.phoenix/provenance.json": "729f93a2c9dca2e4153c32cf11bfdec7522807ed8e6df5354128e08478705dbb",
-  "skills/brand-tone-guide-2/.phoenix/selftest_evidence.json": "e3444703cdd08d69d1260d674fa76e770162a84a835ddfb22bb110662e36907f",
+  "skills/brand-tone-guide-2/.phoenix/provenance.json": "abd8567ab61c1f9e64a4bd89134e4659c6be4e9a40be4b9df2808481b4d86d6c",
+  "skills/brand-tone-guide-2/.phoenix/selftest_evidence.json": "2bd20d808c91a479dc7467a5809a1ba1ef230d1bb41385fc922c4bbc6c071972",
   "skills/brand-tone-guide-2/references/creation/p0.md": "fc41acaac88bf97de6351b96d7fee188c63a0c7eddf5f7563cca7d96b8f0ebff",
   "skills/brand-tone-guide-2/references/creation/p1.md": "e58b0b27024e03a86f5ac7bb70d6b1fefab0d80f615858eafea8c37d8c6a7282",
   "skills/brand-tone-guide-2/references/environment/p0.md": "3acb9e36c4899c616c68f9233332d9a40421a0758530d85fc9352eb2ab42c150",
@@ -54,8 +54,8 @@
   "skills/brand-tone-guide-3/run.py": "cd9d3cef5479494255b8e75d20ae094bbb9ac3f862c9ac72abb760efbf1fb8e9",
   "skills/brand-tone-guide-3/selftest.py": "1691278d2118226d1b6e405c68b4cc84d102b8fa3b8321e4e6b7e63c25ed7101",
   "skills/brand-tone-guide-3/.phoenix/originality.json": "e369d23f02e70c4a95e323673b4d2a682a3726090ebcfe798b1465a91cbdc810",
-  "skills/brand-tone-guide-3/.phoenix/provenance.json": "17fd3272d4191031e0cd43eb10b8f06ee96d6d06cf37eb41a5300918b9af897a",
-  "skills/brand-tone-guide-3/.phoenix/selftest_evidence.json": "5f0c52fad4fd71fed3ecd508308c894a957dc8debb971a5e5ec57be7320f89c7",
+  "skills/brand-tone-guide-3/.phoenix/provenance.json": "0f8485cb92f8f143f165b37ea9a10086b827c273f964708ec25c92ef46c76fc0",
+  "skills/brand-tone-guide-3/.phoenix/selftest_evidence.json": "0bc52a99501bd7819f10b4e8f56a37f72aa3b980f0f48eaead0c95682bd8320e",
   "skills/brand-tone-guide-3/references/creation/p0.md": "cee306cc4f039539d01caa00350f670827bebe6b74961fb516625ce9e89c5033",
   "skills/brand-tone-guide-3/references/creation/p1.md": "fe6e9e30295dfec66673f40b5ff52db384e92937d5fd6b553b2398a0fc3f4489",
   "skills/brand-tone-guide-3/references/environment/p0.md": "2b77916ba445d9dd7b0dcd724a91902d0aa4e639547507e81437c4eb8a4e7c92",
@@ -66,7 +66,7 @@
   "skills/brand-tone-guide-3/references/production/p1.md": "00ecf79b1a649cdcebcb9a6c65c7aa062623c2b721186c8b17eb0fdd07c0df04",
   "skills/brand-tone-guide-3/scripts/main.py": "5de068c52d0d4de0da40312112d542828a937eb5d91a6ff0b108264047949c62"
  },
- "sealed_at": "2026-10-18T19:52:46",
+ "sealed_at": "2026-10-18T20:55:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

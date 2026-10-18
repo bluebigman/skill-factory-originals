@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "manufacturing-sop",
- "merkle_root": "2bf5903714a372e041cf4ffc2f08c525d6b841c3d9e596efaf9424360be918c2",
+ "merkle_root": "3b8f1098be84107a34ef0dd98d96d3308b46b2d5fe0c6e51e50313aba9707648",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/manufacturing-sop-1/run.py": "c7990577dbfc0d379f9842443f9eab2ab4d0d8a844e8b004d218bdc4313b5e16",
   "skills/manufacturing-sop-1/selftest.py": "4ba29ae60ccefa2cd01e40ce4d3cfa6d183cdef76c96725820720a54b0ec3b85",
   "skills/manufacturing-sop-1/.phoenix/originality.json": "2fbf499570568c6160f4b616fc8fda5aa6b0cfc11976d8899722b9c2058fb79b",
-  "skills/manufacturing-sop-1/.phoenix/provenance.json": "102a370c658d0bba1d41f07014b9a6f753873ed1ae4505a9098ab60bd92e6a47",
-  "skills/manufacturing-sop-1/.phoenix/selftest_evidence.json": "4465ec30f9b1d2723b43d799f1c3bb799af05e39376b4c46655994a9e87a350b",
+  "skills/manufacturing-sop-1/.phoenix/provenance.json": "34f8ff46c949d3d913743f149f63822cf1dc21e2d92094b6385905a97f39aadc",
+  "skills/manufacturing-sop-1/.phoenix/selftest_evidence.json": "85524465b0e636b11610242300bb74db0df0e71b09b6ee3571b275e557f59c79",
   "skills/manufacturing-sop-1/references/creation/p0.md": "319c379c3d006438ac38f16439969e66a2dc2e9c7316e15267bf828a8144f09e",
   "skills/manufacturing-sop-1/references/creation/p1.md": "8e224c7ef9c8003847d2c56f7ba5fd89d9b0b1e19ee96bae9ac354397d41ee7a",
   "skills/manufacturing-sop-1/references/environment/p0.md": "4bc5749e4a9d474a831a09e060d17c54abc3fa2804a997f9ddded39caa160285",
@@ -37,8 +37,8 @@
   "skills/manufacturing-sop-2/run.py": "e9fa6295e1065aae5356a4a604d7f021f2e83cf37158b5edc3be9141b7c9b278",
   "skills/manufacturing-sop-2/selftest.py": "551ea6fe2676b0e8c843592e833f92a22f270e900a24096e975625f8c1186b52",
   "skills/manufacturing-sop-2/.phoenix/originality.json": "5e8b66a290cfdb65827c0cc1e6c1a7ca0733c844d89823b530033f08c60db26a",
-  "skills/manufacturing-sop-2/.phoenix/provenance.json": "9a07ee47a2f3486b6204176d2d74ea680362b309301c2b1650fc6703fbedb1b7",
-  "skills/manufacturing-sop-2/.phoenix/selftest_evidence.json": "e724cb567ed5bf08c0115e3d585ed2f0eff71a743145de0d0d54f801023546e0",
+  "skills/manufacturing-sop-2/.phoenix/provenance.json": "8d139408a0423672a5c7d10b9a4d96006e2a85f4168a3892efd2bb02f472923c",
+  "skills/manufacturing-sop-2/.phoenix/selftest_evidence.json": "5e5a39a292b6891771952edc0710a05add2381c97223a7b042bac5c503cb533f",
   "skills/manufacturing-sop-2/references/creation/p0.md": "8facc00748635461fe37719184707d8f5a18b8fd3c5bfc4e0d62a0ff5cf4950c",
   "skills/manufacturing-sop-2/references/creation/p1.md": "038631d7fd02a2a7bbe5fcf2164e26cd36f16a57bc64fcf9ba09d08d4c7e8cd5",
   "skills/manufacturing-sop-2/references/environment/p0.md": "b61ce048aa78aa800f02a1f95a8cc7baf2e09b60163d122704d5e47c0ff6818f",
@@ -54,8 +54,8 @@
   "skills/manufacturing-sop-3/run.py": "779fcee38252c8d4cf73d0d89c5fc9fa3c10ff1778e74f8a90c78eedaead8592",
   "skills/manufacturing-sop-3/selftest.py": "51703c23ac9d8a79144292ac8bf4b518fd1ccaa1728c6ec0de48cb01e547ada9",
   "skills/manufacturing-sop-3/.phoenix/originality.json": "0a99db79778d604c553cee67a25893eb1769af3fe6ff9e7fb3b3f0e9f8b02bbf",
-  "skills/manufacturing-sop-3/.phoenix/provenance.json": "32dd446822981176e65746550d21bc6df1a0187c87986fe7ca54eeceb7950d5f",
-  "skills/manufacturing-sop-3/.phoenix/selftest_evidence.json": "db6358b75fdba1299131a392ee7f683e8c860247c23660c02146e9c68cffeef6",
+  "skills/manufacturing-sop-3/.phoenix/provenance.json": "d20f1fb19653bb54f4d2b4378ddbc9e8c2d0c72a47e45cc0b62bbb5f357ae8fb",
+  "skills/manufacturing-sop-3/.phoenix/selftest_evidence.json": "e3fc3e1003493e002228f61f2fa2abfce6b1a2b24707783d9b208360b956562c",
   "skills/manufacturing-sop-3/references/creation/p0.md": "01b5e5015e6bd29773d07d62e968fbe89ef60ce821f46132302fd0325df3e235",
   "skills/manufacturing-sop-3/references/creation/p1.md": "43af3f20195f9b980c86041436d53922f20eb401f49a3541d4d247066a90e04a",
   "skills/manufacturing-sop-3/references/environment/p0.md": "2c005451860149d4cabca9c8700bb63a4eb27fcd071ab6d31db9164188dc5919",
@@ -66,7 +66,7 @@
   "skills/manufacturing-sop-3/references/production/p1.md": "6b8e87ffb98bd4f8401349da66e301cae25c4fa69ffa3abf1f331d65e99b65da",
   "skills/manufacturing-sop-3/scripts/main.py": "21d055388133d67c763b3eed7d848ff7760e3564bd1d7abc6f6713907593afc2"
  },
- "sealed_at": "2026-10-18T20:03:04",
+ "sealed_at": "2026-10-18T21:00:39",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

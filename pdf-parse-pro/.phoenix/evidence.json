@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "pdf-parse-pro",
- "merkle_root": "40603d4bf16ac2255032a4a858cde2d4f90f8de475f64a1c6f3770ec7b2bad88",
+ "merkle_root": "db8ec5a36be5af769e95d6c57114447b403830f96d267af56975c2ab82ea18da",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/pdf-parse-pro-1/run.py": "e5b1527458e45bfcee48ed74abc7bd91674f43a5367be0e807a9e7c06f519efb",
   "skills/pdf-parse-pro-1/selftest.py": "f3cf76713583428c76a6189e0b504ce1ade4bfb1e6ba54618baa6a89ae487bb3",
   "skills/pdf-parse-pro-1/.phoenix/originality.json": "0c79133c154cd98d7414354ff12c0e16a986858a708ada6b6400a0762a595f0a",
-  "skills/pdf-parse-pro-1/.phoenix/provenance.json": "0de33a7cde475bdc8fc155fbe9c3e0f2f55b1f89823cc5695a052013d913703f",
-  "skills/pdf-parse-pro-1/.phoenix/selftest_evidence.json": "656ae7df907efba0bfbd8ddc6ed2c5b3ffee9399cd33615c49edb027804754a9",
+  "skills/pdf-parse-pro-1/.phoenix/provenance.json": "7ade32e2cf0f1f103957d1efd3ff4ee26e59a2bc6f151945e5d817591f20950c",
+  "skills/pdf-parse-pro-1/.phoenix/selftest_evidence.json": "b9a9d0c58160e1bf9ef27dea93bfaadd5977fe5b213621b1f2a2472a3fc41f3e",
   "skills/pdf-parse-pro-1/references/creation/p0.md": "8d76b012b61efaacda17ecd2157d50b80784e407171bde77e5c74cde1eade045",
   "skills/pdf-parse-pro-1/references/creation/p1.md": "b106b3b49da0e54898c0d17a37d89b936441ba9fc5b71f82e384240bca1044c2",
   "skills/pdf-parse-pro-1/references/environment/p0.md": "172ce51f483e8bfad96fac0d49955acef95c43824598d7ad775e2523efcafe59",
@@ -37,8 +37,8 @@
   "skills/pdf-parse-pro-2/run.py": "e9a6adf640bc43ee1203a7df39e07f83a7a59ecddb4b1348e44aa56e1fbe89a6",
   "skills/pdf-parse-pro-2/selftest.py": "78f7107c848c08edbd9cd411aea67837834aed222a8b84b74112f70a70e02401",
   "skills/pdf-parse-pro-2/.phoenix/originality.json": "250fcccaf14e9386f4eb19a9be20e931c7811a09b0bf77e557fcf0bdb710834c",
-  "skills/pdf-parse-pro-2/.phoenix/provenance.json": "e14c77215e9b0d8617166cc516e424954ae69a0a92786818c27c8b94f4f1c8b2",
-  "skills/pdf-parse-pro-2/.phoenix/selftest_evidence.json": "2c4f591a30fa866698b6ab68100d6e10b4542338dd6f8c0b69c2e0cc75331635",
+  "skills/pdf-parse-pro-2/.phoenix/provenance.json": "c4fc98ae96822ebc66e04e2ba608b0778837f5b58f20558f655bf2293dc64530",
+  "skills/pdf-parse-pro-2/.phoenix/selftest_evidence.json": "a0a209361922689585f7667e3ea07b2d24c068119eb04c89dd5e20ccda86fe8b",
   "skills/pdf-parse-pro-2/references/creation/p0.md": "e6dbc4d2058704b10bf0e6ee07790f7c7ecfb38002a898fbded8db233a3044fc",
   "skills/pdf-parse-pro-2/references/creation/p1.md": "57f151c51213116e68840655d368f206179bc63f379c36775018b2ab544955eb",
   "skills/pdf-parse-pro-2/references/environment/p0.md": "079e654aa4d120cdfb4765fa6ac58bf3e8236d86cb4b8fd498d189f78ba40be2",
@@ -54,8 +54,8 @@
   "skills/pdf-parse-pro-3/run.py": "f44a540a00cf85befc5283ee3bddaa130ce25f739c680ecb45c4d5d691f0270a",
   "skills/pdf-parse-pro-3/selftest.py": "073744838cdc90df07099e1f9599aa2b047ea126cca38322e1eb0f446fca7820",
   "skills/pdf-parse-pro-3/.phoenix/originality.json": "c2454f9d0c7f598276e8b0226f1f543408f37ae9fcfe15deba3b9470ee4933c0",
-  "skills/pdf-parse-pro-3/.phoenix/provenance.json": "b12741d49f67605ea2fed58d43451d57a86b08315c6c798c307915de700188f0",
-  "skills/pdf-parse-pro-3/.phoenix/selftest_evidence.json": "c2b37081ff5025c37694bedbdf493679f1ff13c55db6ace24cc538e1d3d71d91",
+  "skills/pdf-parse-pro-3/.phoenix/provenance.json": "f7020940c6933f1cf931bf900200062fed5cc96aa5edee703b8131fa1f30996f",
+  "skills/pdf-parse-pro-3/.phoenix/selftest_evidence.json": "4b384b75dc676d5e2f6ac451016c51885795fe4b074095b38e947d1137ac3bbd",
   "skills/pdf-parse-pro-3/references/creation/p0.md": "5b462d98c72ded913a6ede3e9b614a45b612a40f6312435ef7f0c50a9b922400",
   "skills/pdf-parse-pro-3/references/creation/p1.md": "ec3ed607eb710aa985e6947af24a1a6a62f4e8fd97bb0ba3205480bac1a53492",
   "skills/pdf-parse-pro-3/references/environment/p0.md": "636f166466c6812c386ee89c47dc6a91002e35ed887ee58eed159654450a8c99",
@@ -66,7 +66,7 @@
   "skills/pdf-parse-pro-3/references/production/p1.md": "e2f06a36065c47a5dd1b84d62977182ad538eb4830a5ac6c2226a91fa4604638",
   "skills/pdf-parse-pro-3/scripts/main.py": "5f6f73b14ef9f5079c4cd66a7b2379c075f704af99db0537b73a05b3079b7236"
  },
- "sealed_at": "2026-10-18T20:05:29",
+ "sealed_at": "2026-10-18T21:01:52",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

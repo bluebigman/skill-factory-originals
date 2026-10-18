@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-consistency-pro",
- "merkle_root": "002b228d8da88f3ac79129d4e50b7e9afe68ff628896784eee9fc559ca8caa06",
+ "merkle_root": "228a22877abaedd1ea19f2b0d2b7638d944e70f3300fc0306703d623a313acd4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-consistency-pro-1/run.py": "d6c43adab25974d4312c3c57fb80d9f22c3c08a18c9eea2aef9bfd6e7d2c1406",
   "skills/data-consistency-pro-1/selftest.py": "cc09cf51e10a1fea17a270f8d3709a6d57534dfd6ff70c0733a7bba18636d507",
   "skills/data-consistency-pro-1/.phoenix/originality.json": "6a91cad54e68ba6c1551f4807cb6c2e0eff6d606e8f921193d9e19f7dc01897e",
-  "skills/data-consistency-pro-1/.phoenix/provenance.json": "a99a770475ed8ca906097de0b9230be404ed12f7ff18feaec45b1ed054b56192",
-  "skills/data-consistency-pro-1/.phoenix/selftest_evidence.json": "526c0bfc9985c059fe7daa82c2d90c219a364e83ba4b18cd9b58e94e2c4cff69",
+  "skills/data-consistency-pro-1/.phoenix/provenance.json": "8825db43796c3c3c9fcbb4de1629db2984bdb7ff54c57f301a1d236851bbc1eb",
+  "skills/data-consistency-pro-1/.phoenix/selftest_evidence.json": "a49eafaba34704e7b915242bbdd2e2c3c735986ae3d9e65ff937d1fbc9e73287",
   "skills/data-consistency-pro-1/references/creation/p0.md": "5e38908653d6b53518af7ac115bf602ab412234c8c48d2e290ddfc55015443bc",
   "skills/data-consistency-pro-1/references/creation/p1.md": "5fb9f0e6c35bf0ad066eaf490ff8724a021653759dc37a16a277abf082f5d090",
   "skills/data-consistency-pro-1/references/environment/p0.md": "46db181140e27dc88b618e6879a20877f3975fccfb5a4f773f01c7a925a9018d",
@@ -37,8 +37,8 @@
   "skills/data-consistency-pro-2/run.py": "1db696c73eff3f736744b68e631e7109bf27870a866f9198c2b34bf8d00a735b",
   "skills/data-consistency-pro-2/selftest.py": "dcf7ad0b39aff3f921ef67e7fe5b75c7e7e9984c48ca7d2d1ff4100d1cf8092d",
   "skills/data-consistency-pro-2/.phoenix/originality.json": "643abdef6aa727cfc1814036e66bfec4369f1c21505d33ea019095536126948d",
-  "skills/data-consistency-pro-2/.phoenix/provenance.json": "039242e1278bc62716fc94aaabbea832c62568cc259008be4a461bdbd001e2b6",
-  "skills/data-consistency-pro-2/.phoenix/selftest_evidence.json": "860ee04c7a5b2d12d884619e482aafee923cb1f62aa6e8e4039146e689ced99f",
+  "skills/data-consistency-pro-2/.phoenix/provenance.json": "b326a9cfac4e9fa6449151843e422bad03d759b36bd525ae25dfa00aaea15c4b",
+  "skills/data-consistency-pro-2/.phoenix/selftest_evidence.json": "461f6f61b9b7fc809320b354fdbaf8ab8dc959bf2a45bd3fc1c45939f8ae9a94",
   "skills/data-consistency-pro-2/references/creation/p0.md": "e10d304f371fbb0dda53b8c63ffdb02a65f7530a5c441f07e08a3d87e9c3d5ff",
   "skills/data-consistency-pro-2/references/creation/p1.md": "6ee6ba8dc7f6e216a6ae96f63809dc46f0b3be8e1f2dcd750a48a9b757be1778",
   "skills/data-consistency-pro-2/references/environment/p0.md": "a8052c673879050f8f7428a3bec2b7cf559e8a3ec1b78479e226a0068ddffa4f",
@@ -54,8 +54,8 @@
   "skills/data-consistency-pro-3/run.py": "b1d33cdc50e76fb7c24a393beb0aba0231078fb5b1982563de06d530cb610b1f",
   "skills/data-consistency-pro-3/selftest.py": "979f2253a00b60a9ce23e7b6af65060eaba52ec826d7c18315aee0ab03fbffb3",
   "skills/data-consistency-pro-3/.phoenix/originality.json": "f8a44c59a08089eaef9554d5450122744352d82bb781548926ebc4e7aa868d22",
-  "skills/data-consistency-pro-3/.phoenix/provenance.json": "f02daba90f8cc852bc0282766ae598cbd55f7067ffd53e2216f1068ef2120bfd",
-  "skills/data-consistency-pro-3/.phoenix/selftest_evidence.json": "4ecfc7ccf4cf8a030dbe99d4c259a50f48f1dfa0bcab6ffa805b5403436ba324",
+  "skills/data-consistency-pro-3/.phoenix/provenance.json": "8d8eef049e1d72a2ca7cfa295e4232d83b76668e6eb7ff7bfe636bed929e7066",
+  "skills/data-consistency-pro-3/.phoenix/selftest_evidence.json": "e39a7771d7527b4b3b5fa5287c5f077eef34beeed91e2f151ee0c67511a90b89",
   "skills/data-consistency-pro-3/references/creation/p0.md": "5e19c545a44b4da003512a5495f3300c7440f747f63ede8cccc1f11e253d9725",
   "skills/data-consistency-pro-3/references/creation/p1.md": "e9879bce476366e6a33a5d4c0dd729d827a3ce24bcd960850ff664c4e682a510",
   "skills/data-consistency-pro-3/references/environment/p0.md": "346b2592cec0259c49ce4153ab173cada4f5fc26b0c628dac5e7cce23668ebb0",
@@ -66,7 +66,7 @@
   "skills/data-consistency-pro-3/references/production/p1.md": "1dd1e56d160657aa235bb1dfa79ad22cab4eca990cfb702699996bf9122d8c73",
   "skills/data-consistency-pro-3/scripts/main.py": "00ac5856b74b021c5af1388f65f0ae4298adea20286dda1ac31a2c23d35623d5"
  },
- "sealed_at": "2026-10-18T19:55:23",
+ "sealed_at": "2026-10-18T20:56:37",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

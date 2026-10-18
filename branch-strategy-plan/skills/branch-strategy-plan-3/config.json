@@ -1,0 +1,72 @@
+{
+ "name": "branch-strategy-plan-3",
+ "version": "2.0.0",
+ "domain": "分支策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主干稳定",
+   "then": "主干始终可发布",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "短分支",
+   "then": "分支存活周期尽量短",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "命名规范",
+   "then": "分支名含类型与任务号",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "合并前同步",
+   "then": "合并前同步主干减少冲突",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "及时清理",
+   "then": "合并后删除分支",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主干稳定",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "短分支",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "命名规范",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "合并前同步",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "及时清理",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

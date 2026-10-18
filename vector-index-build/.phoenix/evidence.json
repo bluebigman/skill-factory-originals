@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "vector-index-build",
- "merkle_root": "3846f84499f0c683f8c9af52723da449f2eb0faef85612af5c64f7441bb8fb17",
+ "merkle_root": "8e8347fae05f9a25a7f6441cfe29f4266af954589736166480a3f93acd00b91e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/vector-index-build-1/run.py": "027d10bb1951c992cbde92dd7c3d9c2cf846543cf65f50977a817d01c41c8337",
   "skills/vector-index-build-1/selftest.py": "b01dbbe152ca18afabc4b8dff8b1d902185204ee4342b433ece6735c6784af94",
   "skills/vector-index-build-1/.phoenix/originality.json": "05ce40ef479138976816c48f8df49050e08a3734a60ba849f61cb3965bd10c49",
-  "skills/vector-index-build-1/.phoenix/provenance.json": "58da3097d8c663c7d046b5fdfc56126f25d3b0455ee4cb8d2e49ee576dd72d65",
-  "skills/vector-index-build-1/.phoenix/selftest_evidence.json": "04f197c6155df11796c4c919240cea02741d7f6563edb0edb6801017b3223398",
+  "skills/vector-index-build-1/.phoenix/provenance.json": "a1d0d08e85f80e02e71c32fa0ae73c68b86c80ce646378ee94e022083b2bac7f",
+  "skills/vector-index-build-1/.phoenix/selftest_evidence.json": "eebeed5f7836891199458a9ebcf2c278d15e692f4c664ec34236c2f652287152",
   "skills/vector-index-build-1/references/creation/p0.md": "56015f40f5ce46f4013a179edbbe38cd84d3dcf6b49ae8330ef02546edf8bdc3",
   "skills/vector-index-build-1/references/creation/p1.md": "2cc99feae8ab68c8e0794373ae2c73127e10461ae2f5a6f53ecb6cc1bdaa0e3a",
   "skills/vector-index-build-1/references/environment/p0.md": "713963816419022400bdba75f0c696252102bca895ff60cf123a5c5d4891c7c9",
@@ -37,8 +37,8 @@
   "skills/vector-index-build-2/run.py": "813987aacfda5f3334ec938aca66a4b2a29a082a148e068745bfe3debe615ede",
   "skills/vector-index-build-2/selftest.py": "ca676fe94a655a5d4f580e68b22c1834faa76acf5797f129d8d00ca6e0873f1e",
   "skills/vector-index-build-2/.phoenix/originality.json": "700819ff3526c03f363cde3ad26f40080e016806a7a8a8a4d201e4d221b242cd",
-  "skills/vector-index-build-2/.phoenix/provenance.json": "ee3e68fc7d4b2d7985e6e3de188c45055c23e832dce27fa1578d9cc1c4e961ff",
-  "skills/vector-index-build-2/.phoenix/selftest_evidence.json": "54b0a538bf0e20f93fa22411d47b5d264f230415318ae16444202dd33bf86578",
+  "skills/vector-index-build-2/.phoenix/provenance.json": "087d9aa85046a8d7df8588347f6178d56b59adcda29b4347040bcd289eea9cab",
+  "skills/vector-index-build-2/.phoenix/selftest_evidence.json": "67cdda42264b28b06c069bf0a9728b145de88144f9744ba2d85b1686f37c4b4d",
   "skills/vector-index-build-2/references/creation/p0.md": "7a92c5d64f1a1730fe4fa2c8172a8b304e4cc2984fee74184d1551cf2fb89919",
   "skills/vector-index-build-2/references/creation/p1.md": "7a4c2afb5754270a5f4014fb6d3de0aac8baf28b98258ad256ca41200ed4f8e6",
   "skills/vector-index-build-2/references/environment/p0.md": "3c9751a679a395039872f719c26f071607dce049bcf9d2861e7d4fddbd37474d",
@@ -54,8 +54,8 @@
   "skills/vector-index-build-3/run.py": "84907a9ad9328fce767d4333f8ddc090fe65cfeb409cee9fab36d6bbf2ef1da7",
   "skills/vector-index-build-3/selftest.py": "3ec4fe3b5d89f257221347d632c84cdccd1268c20c1f80f65ece8cd32807fe75",
   "skills/vector-index-build-3/.phoenix/originality.json": "e44a57a419f3edfe023d5cec65f759300f72e7da05b5af6f40feda18a69a30f6",
-  "skills/vector-index-build-3/.phoenix/provenance.json": "b69e65629c21d995f1b6996f1fb45411496314101b8486bddb86020bc1f4e4f1",
-  "skills/vector-index-build-3/.phoenix/selftest_evidence.json": "23a67a72fb546e4579f23731df499e1bbd960714aa7dd85f6830659f85ec2c17",
+  "skills/vector-index-build-3/.phoenix/provenance.json": "9bb399344a410d3ef1470c7c5420e6c94b53f3f91e232f1c99a824a8074a4f82",
+  "skills/vector-index-build-3/.phoenix/selftest_evidence.json": "be624a79f13b5677187c4f8245ac5041acee90f9dc27de21a95dc29780bde163",
   "skills/vector-index-build-3/references/creation/p0.md": "a2c7192ac48562ab331a803ff693be62e351687a63bc396fe1d4b6927e3ab5b3",
   "skills/vector-index-build-3/references/creation/p1.md": "fed2e84c3773d0969ee30150e24acac4e20ce78db64bfcef731d895cc6697a5e",
   "skills/vector-index-build-3/references/environment/p0.md": "7ba992ea602e7be5eeabc8423f4429fd0e7d7be0eafe0795fa968262f65fdfa6",
@@ -66,7 +66,7 @@
   "skills/vector-index-build-3/references/production/p1.md": "201901de0549f89d722c37b89131804f05542b480330137c35cb60ea6d4dfead",
   "skills/vector-index-build-3/scripts/main.py": "d1a6834d669aa6925bc50d067a1b2df5965793a6bcb887d794e82f60743d4e3f"
  },
- "sealed_at": "2026-10-18T20:12:36",
+ "sealed_at": "2026-10-18T21:05:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

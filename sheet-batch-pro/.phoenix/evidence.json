@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sheet-batch-pro",
- "merkle_root": "0c29b694f0be7da653be43c6ad4c040bb4d4a3d5deca40bdf5067e2c2e74e178",
+ "merkle_root": "daea7f70e245d3da7b85986645cd0ef278ab780f9d38105b22ad7e2677f72453",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sheet-batch-pro-1/run.py": "c6be2a1788b39f9899dd39dd5325025be5471b3dcc6caf21d0c0f173fdfac996",
   "skills/sheet-batch-pro-1/selftest.py": "efa8d8d33110ac6bf77e72f2d779989a33668cb60e2ca72f93c1b9bb49a4bad3",
   "skills/sheet-batch-pro-1/.phoenix/originality.json": "45aac31e0651d943e8b31211a0be7c12a95f4f5b52e2f1becaea03f5fde75e3c",
-  "skills/sheet-batch-pro-1/.phoenix/provenance.json": "feffafe6bd55c0499b5d762d85270f3a4de138c9a36373a9d5ac495ca43331f7",
-  "skills/sheet-batch-pro-1/.phoenix/selftest_evidence.json": "8609541232918019f921eac02e5d93b94a34891e8c25f973034a11b11fd31731",
+  "skills/sheet-batch-pro-1/.phoenix/provenance.json": "c8593cc18b1abd24305fb82a340ca2edbea7e54fc9034eaa2a2c7032afe31a52",
+  "skills/sheet-batch-pro-1/.phoenix/selftest_evidence.json": "aaf65bc479f392e65c2cb51973dd12d682788e503d4f050c0be73126be9a8b9e",
   "skills/sheet-batch-pro-1/references/creation/p0.md": "402ca8467c04e902ca541e81eef3cfddf64fc467c3d06e2d5f5995dc3d0849ca",
   "skills/sheet-batch-pro-1/references/creation/p1.md": "b765a8e19280eb9fc90ca2edfaa843b63561bdd08071ff1cfa4cb8870f98a8e5",
   "skills/sheet-batch-pro-1/references/environment/p0.md": "8760beeefad68ffe135a253fcec76cb72690eaad7ce294e3bd4ed1a087426358",
@@ -37,8 +37,8 @@
   "skills/sheet-batch-pro-2/run.py": "c3aec89a79be6f90627f054db77902c45af7868280583d07c0218ae1b7aec275",
   "skills/sheet-batch-pro-2/selftest.py": "81db054f6569ddd06e74e1ae040974287a5f9c0561b5f36343b4c815f86c1d1b",
   "skills/sheet-batch-pro-2/.phoenix/originality.json": "5b4a97b01e6e602bc15ea070fc98004cb8f0b1f04ddf11f312f7e057f8f6c30f",
-  "skills/sheet-batch-pro-2/.phoenix/provenance.json": "3bf881830e6677b644e127e445ce3688b3d8bddb6652475bb73989faffc26bed",
-  "skills/sheet-batch-pro-2/.phoenix/selftest_evidence.json": "007712969bc7e15a21b0e38622acc63099de70de53a0b8108b0c3766301e5dc4",
+  "skills/sheet-batch-pro-2/.phoenix/provenance.json": "d50d6e9cda9e910c81ad8dd2cdf4852595436478291649c086dc881e25817951",
+  "skills/sheet-batch-pro-2/.phoenix/selftest_evidence.json": "1ea4260d438bb69e95d8189b1b02648ca9129dc0d8da62edb2c1c1256fb39120",
   "skills/sheet-batch-pro-2/references/creation/p0.md": "3b09696ccf3a3bd6e8a1ac377a1db09ba700abd4690aad4af35f373a485521b4",
   "skills/sheet-batch-pro-2/references/creation/p1.md": "db9025d32a83156387d8c44ed53dfd33b24d4a2689cc4c3e81f121b0f268f680",
   "skills/sheet-batch-pro-2/references/environment/p0.md": "5346592ea23a9c5baefbe036f6fe4aa046b492c28ada515f15bbab8333434996",
@@ -54,8 +54,8 @@
   "skills/sheet-batch-pro-3/run.py": "e86eb7fa6c84785aeddb774cfa2909c00d0c76a984d2169e08787a225f374637",
   "skills/sheet-batch-pro-3/selftest.py": "d498f646513cdb0573a5f5696eb2204baf992684696144559cafcd3af3172bed",
   "skills/sheet-batch-pro-3/.phoenix/originality.json": "91f45ab3e5a19357a4026625b6b29bc63ebe9a4b6a6ca6ab69b3e96436db8a02",
-  "skills/sheet-batch-pro-3/.phoenix/provenance.json": "ece7dc8f6e40730067bfecda998f71e50ca604063cf1ee44d6e843ab52dcd999",
-  "skills/sheet-batch-pro-3/.phoenix/selftest_evidence.json": "eff143946b97aff476530e0089f55be6c4f0a78c564fceca5f6ab753f9d61863",
+  "skills/sheet-batch-pro-3/.phoenix/provenance.json": "b9365d010ec15e29c21c013e3f387c21d9d571ee1b4ec7c5975a2f7d4078109b",
+  "skills/sheet-batch-pro-3/.phoenix/selftest_evidence.json": "3851433da4cec0e04c6e8a1aa65838490caf0dfe05fa95d374653b02827ff51d",
   "skills/sheet-batch-pro-3/references/creation/p0.md": "7f0af4f0a1fe60d80f0852cc38471695f977a8de117cd2ce5316af8ce2fd9b4b",
   "skills/sheet-batch-pro-3/references/creation/p1.md": "eef2460c59e71d0905f183ca46ffacb6d51430ff435b0f055d7ca3b2bdbbe00c",
   "skills/sheet-batch-pro-3/references/environment/p0.md": "4077ca1bba4ea7e3d54f9c5c47672267ba0a87fdc3f73265cd67231136227ca1",
@@ -66,7 +66,7 @@
   "skills/sheet-batch-pro-3/references/production/p1.md": "7b9afd80996fea15382fc344fef66b5f8096c8ed8f79a5a19d8fddd16eeb46e7",
   "skills/sheet-batch-pro-3/scripts/main.py": "ea9e691054c1a1b560a842601f8eed6820644ab58285ae21d76e27c63ee2a061"
  },
- "sealed_at": "2026-10-18T20:09:17",
+ "sealed_at": "2026-10-18T21:03:49",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

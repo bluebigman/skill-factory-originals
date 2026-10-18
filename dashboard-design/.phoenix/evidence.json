@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "dashboard-design",
- "merkle_root": "c4edd4bee3bb2c2777898ebaf4919fa50e26b566f870c787bd8c95d4b2bc479c",
+ "merkle_root": "7f50c2addceabbf94078855044fb882a744526019372986cc087a98e73d05088",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/dashboard-design-1/run.py": "c56f12995e3b76351dd291c0a8d40204fdf62223142738d7bb44581d7a0b1d7a",
   "skills/dashboard-design-1/selftest.py": "d1354319b10241899af483d22b84b51a64b39062ac269804a35d834288f600cb",
   "skills/dashboard-design-1/.phoenix/originality.json": "05a7515dd9b730db22419f022ae0713bfb2f24401a32dc004226e23c9a729d2a",
-  "skills/dashboard-design-1/.phoenix/provenance.json": "7f081e6f8d45ebb218a4a16e9e3465dcae3662c19a9ce2f9b5363d875d22ccc2",
-  "skills/dashboard-design-1/.phoenix/selftest_evidence.json": "a6869c247379b9a2731b67d7d4a97247d8a6b0994bf35a70ef9a44c5603a2f3d",
+  "skills/dashboard-design-1/.phoenix/provenance.json": "b388d931ec0f265fdf46c68e050d297a71bb52c9ae20ec5188dc500aa9f3a7a2",
+  "skills/dashboard-design-1/.phoenix/selftest_evidence.json": "289274dbe9707f7d5cd486875e2eeaf921dda0001284512d38fe8c493797ff29",
   "skills/dashboard-design-1/references/creation/p0.md": "89d621d497c4c63459dfd5a8586841492d0c81de2e54ecb9f01bfe0ed8fe70c6",
   "skills/dashboard-design-1/references/creation/p1.md": "c05d8db491acf63feb680312f3c681defb1a42425751dd812dffba7563143732",
   "skills/dashboard-design-1/references/environment/p0.md": "26a0946047104cc960d48a744af9f695aa1f81021dc3775eed5d4161445ffccb",
@@ -37,8 +37,8 @@
   "skills/dashboard-design-2/run.py": "a75b58d6d5631465c27565dfa74c037388a096c71561f2c50844e646e2ad24e0",
   "skills/dashboard-design-2/selftest.py": "897dc4fbe8beb9a378f54d48aa8059afd097bbec4658d900d6e801867fd7a84b",
   "skills/dashboard-design-2/.phoenix/originality.json": "e1d291ea429196481f57334d5672ce25364da35092e4762e6e843adb3317f226",
-  "skills/dashboard-design-2/.phoenix/provenance.json": "3ab9efbd644c982c3b2637e62ff9edb1189deed2ba8cb8eb3fa16c0b0e54039f",
-  "skills/dashboard-design-2/.phoenix/selftest_evidence.json": "3ce9ae07cb49b832185a67c643261dff09e130f8c49523f390141e9e2c030b41",
+  "skills/dashboard-design-2/.phoenix/provenance.json": "bfedce717d9025c68a3b07321772e25df7dfd49b752a40a59c15c8ceae8f6275",
+  "skills/dashboard-design-2/.phoenix/selftest_evidence.json": "9833babac6ae0960408a7c458d964e277fffef56590854553a661e821c34107b",
   "skills/dashboard-design-2/references/creation/p0.md": "13e91cc09a5ef5873b9aa52c3ef28dee8276896cd1d27e953685439e39d6aa2d",
   "skills/dashboard-design-2/references/creation/p1.md": "3961e30756dcb43dfa0a93195550ec0f41834f085be3f2684283d82d29343d10",
   "skills/dashboard-design-2/references/environment/p0.md": "db1cb3b2ed9bde2df9696527029b6b27a1f19f40d3a967b7fb54845995b8d01b",
@@ -54,8 +54,8 @@
   "skills/dashboard-design-3/run.py": "490adfb4788a15c381bd03e6c7ccfe19dbcdc96b88df11d070502b58fd2cd59a",
   "skills/dashboard-design-3/selftest.py": "213583173468907c3bca6cb0d7ccaef53a28d2024141ba573c1eb023f3b71afe",
   "skills/dashboard-design-3/.phoenix/originality.json": "994301439c4f220a3fb96268531131df3e3cd5b52488c3251c7f480337ed3799",
-  "skills/dashboard-design-3/.phoenix/provenance.json": "dbde190db0b18f207351cb1eb55b715f3708b76d7ebc8af85149ee8376bab1ca",
-  "skills/dashboard-design-3/.phoenix/selftest_evidence.json": "b5d56cf8abf3ef730f2cd1c90428782f7b73ba664ccc8659e9722f4057bfcca1",
+  "skills/dashboard-design-3/.phoenix/provenance.json": "9dc45c7abe189b1f8f4482d66727b0ee91046082861593b99a00f8fa88ca8826",
+  "skills/dashboard-design-3/.phoenix/selftest_evidence.json": "9f94850c507417cb000bc8587f9eb3e1cd749e73384eb373ce7b493331f115d2",
   "skills/dashboard-design-3/references/creation/p0.md": "1679b99d20b34d7e694628336884bb425072d1b2e4c0996f938130433fa79f81",
   "skills/dashboard-design-3/references/creation/p1.md": "9d115379115a49c6e71915bfbbca9834a2a92b4fa418fc5b99986d33938abf02",
   "skills/dashboard-design-3/references/environment/p0.md": "32a1f553ab79d0f9b2b20416a1151bc0a85eb87f9b443253e0b770e90fb2046f",
@@ -66,7 +66,7 @@
   "skills/dashboard-design-3/references/production/p1.md": "6ac19ff88655c6ca44a07b51c6ac77fdb9bd27e0cac2e473ac7b0fa361f8a82b",
   "skills/dashboard-design-3/scripts/main.py": "1f497969038d73dd73c96979790eb9e79673a16561fa38913ebc8133b53193ca"
  },
- "sealed_at": "2026-10-18T19:55:02",
+ "sealed_at": "2026-10-18T20:56:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

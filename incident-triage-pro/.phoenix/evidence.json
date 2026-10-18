@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "incident-triage-pro",
- "merkle_root": "fa98bb4a10b24a7541bab8706fe21055909741aeb14d75993d5ec8d804a5995e",
+ "merkle_root": "3c7d470d2e392b184a412c10bd24db0665bd6421cb745f0837ff40006a5bc0e5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/incident-triage-pro-1/run.py": "fe8171beab5ae95eccc0d48760c9e3d995c5d4130d723d37942fbc917770024f",
   "skills/incident-triage-pro-1/selftest.py": "8d75753fc97a0ce1d0def151d86e4db9d6d149eef61a42e02fcda35e47f6ec76",
   "skills/incident-triage-pro-1/.phoenix/originality.json": "5ea3fab7c719337fae1245b4049d1f501d4a6281008fe6cf400cc90ec7a7dd2d",
-  "skills/incident-triage-pro-1/.phoenix/provenance.json": "5094bf55898ec8b1a34545763572cfabf93ea9803f04f4c8b68e0552fea81df0",
-  "skills/incident-triage-pro-1/.phoenix/selftest_evidence.json": "19c0b4473e29764af25191d7cb967c4894f558dc9616f5fda69f4f9efbf76a63",
+  "skills/incident-triage-pro-1/.phoenix/provenance.json": "fc93747e1432a7259f7c6428115f8da7550cb776ab67dec86e90b4348ed30295",
+  "skills/incident-triage-pro-1/.phoenix/selftest_evidence.json": "aaa426a2ccfc97c9846096e285e064e8bdbf3bfc54d7197e8fd8e33f313fda84",
   "skills/incident-triage-pro-1/references/creation/p0.md": "9489455d5760365eb79b0383c752f4b123c342a1afad5f6946e93472dc0387f2",
   "skills/incident-triage-pro-1/references/creation/p1.md": "7f06a768f1af60274287cbb2bfae0ae435ee3dbafcd51e8ba2aac543aebe5f6c",
   "skills/incident-triage-pro-1/references/environment/p0.md": "dae94c6a26e7fadebe093db2282b8c22d43832c4b45c2702b27092b1d4ecefb4",
@@ -37,8 +37,8 @@
   "skills/incident-triage-pro-2/run.py": "9ce539964fd6eadfb6a6abc4b033d01c87e8e396465e4c4461c70bdb44ae270d",
   "skills/incident-triage-pro-2/selftest.py": "74ba3466dfdefebaf6c2ebd6037f8c82454f171f6a49ce438ba2317f094528dc",
   "skills/incident-triage-pro-2/.phoenix/originality.json": "4392dd002150276dffdd85cf2c1f8774a4f7f2247f8d0263bd9a7de37a723e6f",
-  "skills/incident-triage-pro-2/.phoenix/provenance.json": "d8a94a1ecef9b84be46e22a65e89394641316891fdef2f2eeafad59ac47955b9",
-  "skills/incident-triage-pro-2/.phoenix/selftest_evidence.json": "8a8e04a06150ed43c8081e82d33d37689c2757cac19ce11a3f47cc0bee335f10",
+  "skills/incident-triage-pro-2/.phoenix/provenance.json": "3f57bbbf35dad3144eedee14c03872bb546b978542a64370b54e3e2a8ef9fdc4",
+  "skills/incident-triage-pro-2/.phoenix/selftest_evidence.json": "8edc1a2eba8f70fbf5bd6303413f5c7094e8f7c91ea55c5596970cce718fcc65",
   "skills/incident-triage-pro-2/references/creation/p0.md": "73d790f613d034bcf9e7dc44aa6971d2e55dcb8db35ebc9bfb76e0cd1f6c47ff",
   "skills/incident-triage-pro-2/references/creation/p1.md": "0a196fbc80fd311ed40cbd55f14ebfe8c175acc0688ec0bd722d06e88d288c98",
   "skills/incident-triage-pro-2/references/environment/p0.md": "7488a66197ff8dd65395fede77ff087b6f3a8192035904af12ae756e9155b579",
@@ -54,8 +54,8 @@
   "skills/incident-triage-pro-3/run.py": "5c49f983956a87de879970f2f34d7221ed223aeaad5044a0e3f0a23638a1abe0",
   "skills/incident-triage-pro-3/selftest.py": "fc4c6263f149a27d2c0ead344446e9b858bf8c7123d0e8b8e36068e95019554e",
   "skills/incident-triage-pro-3/.phoenix/originality.json": "3c692f42510657f7dab608f1034812c42a7bdfe35baf8a5d15be1c56307003c4",
-  "skills/incident-triage-pro-3/.phoenix/provenance.json": "2b7159216248777a377d3d37b2afc4bc878205041f25bd9a60ae8497a55734aa",
-  "skills/incident-triage-pro-3/.phoenix/selftest_evidence.json": "539320b2bcb7800821f312808a6d31b5963a93809803f287f43f41c16c935f3d",
+  "skills/incident-triage-pro-3/.phoenix/provenance.json": "a8805055979808ee659b4dfaccbd7363d49e3100198eb7ad9f4802541a06cc73",
+  "skills/incident-triage-pro-3/.phoenix/selftest_evidence.json": "35d599a4ddccb8438ff7326c51e8ff2760faf4a933f68e40168bf7d5bf669ad1",
   "skills/incident-triage-pro-3/references/creation/p0.md": "af905229799520d587b443896c86e45b87414d8c27d5069c557a473f1d4f38d6",
   "skills/incident-triage-pro-3/references/creation/p1.md": "1da8920c09974bdd55315575517636ba58baab24c9b83eb30148c9445243d370",
   "skills/incident-triage-pro-3/references/environment/p0.md": "7d5b3f110141ccc2e6749e3c9b04b1f79df6d9a7ed666d6de207d235e2268f41",
@@ -66,7 +66,7 @@
   "skills/incident-triage-pro-3/references/production/p1.md": "f4768fd308527ad4fdd67a1ac1e0b71f9fd32c86514cfbf16aab094207add342",
   "skills/incident-triage-pro-3/scripts/main.py": "95c8eff3494cfedd3bf77ae073f71e1172cc5b06f51701bc140e3aecaa166c13"
  },
- "sealed_at": "2026-10-18T20:01:23",
+ "sealed_at": "2026-10-18T20:59:47",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

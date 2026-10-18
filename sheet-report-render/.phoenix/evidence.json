@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sheet-report-render",
- "merkle_root": "a13dfb06ccfc9c22c08c245526c2bf1dfd7649a0d8e863b483dbea3381b5874d",
+ "merkle_root": "7fb47c11793a9e8e2bd09acaaad1062522a6e51c4c838d3549d3bb09ca3cb185",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sheet-report-render-1/run.py": "eb1587f24ed276488d62d194bbb2a8887c489e30be1354be05d2df5d4fee57fb",
   "skills/sheet-report-render-1/selftest.py": "95e7f5d79ef9d9f1566244e9f8b2f8b8fc06741d38090ce465545e5026e563ce",
   "skills/sheet-report-render-1/.phoenix/originality.json": "e666ce4125545e28fbcfe6b43d2af1cfa0be861284bfdf71511707f4d74643b4",
-  "skills/sheet-report-render-1/.phoenix/provenance.json": "b5642229578cadea95a7ff3599e93347e78f04091c3b777cf699c47b434f98e8",
-  "skills/sheet-report-render-1/.phoenix/selftest_evidence.json": "69aa905ad603757ed49e284c346c255ee5d1664032bf02abc968b1eabb6ee856",
+  "skills/sheet-report-render-1/.phoenix/provenance.json": "a47bb87c0c96217a237bbd74ddbf71d6f5d77f15255acc153c040a2e0ea823f4",
+  "skills/sheet-report-render-1/.phoenix/selftest_evidence.json": "df78bcd1a1252f259d9578dbad175bc1844fb37be14b84fae1fc6a28e3f4bde7",
   "skills/sheet-report-render-1/references/creation/p0.md": "d25a1373603ba6e5305325145ada7a7e234c94156cc333a04579d53ce227b852",
   "skills/sheet-report-render-1/references/creation/p1.md": "f333515dbffb9fe77df44675fe87619581e3aacb4a2ed2cb10d39379a3bd12f7",
   "skills/sheet-report-render-1/references/environment/p0.md": "3014759a26690f339f3e2dc853d36b33c0fc41891c0562b2fc816abea6cea48e",
@@ -37,8 +37,8 @@
   "skills/sheet-report-render-2/run.py": "51d91a2ad8ff5be139852c58b198b95f06a6aea77cf75130994fe35af43a351d",
   "skills/sheet-report-render-2/selftest.py": "a12a1ca9216312aa676797cce81225ccd6c5b43ee23910b03f9c92ea5c0a5142",
   "skills/sheet-report-render-2/.phoenix/originality.json": "ccd8783ccbd66af9840e53eea1825ad5431a213868dfb8d7bcdd14d8c0486f0f",
-  "skills/sheet-report-render-2/.phoenix/provenance.json": "cb5011795e56e630c7003f5cad28d80d44ed9ac23d258ee47d51f22f9fc0a8da",
-  "skills/sheet-report-render-2/.phoenix/selftest_evidence.json": "34a4880d0f9afc1f3a54ba13a65993e906f1fc030f02720899962585fe2fa066",
+  "skills/sheet-report-render-2/.phoenix/provenance.json": "c8c9d77988c5850529105b37bede28a4989c77ab4bce2878c8696cebffcdac40",
+  "skills/sheet-report-render-2/.phoenix/selftest_evidence.json": "eca0256a16600b0a6ff5d8acad75fb88c332e3ea70de0d8b6d45f151b330f066",
   "skills/sheet-report-render-2/references/creation/p0.md": "3d05279ec16f08f005c82cc671aabcdabe90c4f6d95121b87fbef093b91d6fb2",
   "skills/sheet-report-render-2/references/creation/p1.md": "bf70b2124027be8a119d378c2a101e8c77f8252bd8e3bd968ae9cb7968859321",
   "skills/sheet-report-render-2/references/environment/p0.md": "7df6e8649b144bcaab862776291bb07d8c99ccc2b4212acb75be776fe3f05920",
@@ -54,8 +54,8 @@
   "skills/sheet-report-render-3/run.py": "162ef3750726a29e4886446c1fb10ef04500b991731407bd74b12f5e1377f7a5",
   "skills/sheet-report-render-3/selftest.py": "84099a2d4b1422e0c341ff33f29da89f6e22d434c4e29b5897f7dbe6d4502e76",
   "skills/sheet-report-render-3/.phoenix/originality.json": "7c5db4657cab8c39e390006ff7adaf62fe52cda3fd7fb8e74ffaf323fa3ac7ca",
-  "skills/sheet-report-render-3/.phoenix/provenance.json": "df37b2ac68d2d1a2c636542488a898a11ac9c9a43850afbc17aea55591e40bf2",
-  "skills/sheet-report-render-3/.phoenix/selftest_evidence.json": "6b4e99891d42a815ee863c0bdc63ada91e29a7ae588917840d2200c123be2f3e",
+  "skills/sheet-report-render-3/.phoenix/provenance.json": "d4d3e2cf421f94998ddaa55a13147039debfe769ee4660d2a8b58bb070755b5f",
+  "skills/sheet-report-render-3/.phoenix/selftest_evidence.json": "e4e0dbc75a6362e84116bd3a4783fac52bb52d7de8660c2da12cc1668761b02b",
   "skills/sheet-report-render-3/references/creation/p0.md": "baae6ef26cf7b2c7ec2ab777ffad676628bdb59a0675955505f9a1bece511d7d",
   "skills/sheet-report-render-3/references/creation/p1.md": "441e053b885d796f2780177fac7dc1e8c05c9b998aeb6ece4354996639b2ba9a",
   "skills/sheet-report-render-3/references/environment/p0.md": "c3d68cdd36279ce71c7fff9ef2b5b4faf23ae083a6eb0b56f10eb4bcb01c5220",
@@ -66,7 +66,7 @@
   "skills/sheet-report-render-3/references/production/p1.md": "8a9072357ea46015480a1e1e1b0fe79750a5e64f5cd6bde0558e14b3aef37033",
   "skills/sheet-report-render-3/scripts/main.py": "d4529c671410aa29874ce556c075ee660d5158c85feb41d2894de6e160872f72"
  },
- "sealed_at": "2026-10-18T20:09:27",
+ "sealed_at": "2026-10-18T21:03:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

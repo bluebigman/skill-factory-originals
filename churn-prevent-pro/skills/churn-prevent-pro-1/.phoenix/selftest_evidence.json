@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:53:32",
+ "at": "2026-10-18T20:55:32",
  "skill": "churn-prevent-pro-1",
  "slug": "churn-prevent-pro",
  "passed": true,

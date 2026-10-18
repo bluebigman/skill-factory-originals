@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "tech-writing-cn",
- "merkle_root": "17d2034cffc45e5a806fd79756c329ed1db67e34a0a4bc1481962880f50294c4",
+ "merkle_root": "922a346281f1355aaa8e483d0c72ca873494c6ba5a14207c92fcf202f0fc6ec4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/tech-writing-cn-1/run.py": "5aeff48c4d1b9634d974bda0b69aabe77a0267e5669ea1387815e50e7e410e64",
   "skills/tech-writing-cn-1/selftest.py": "e5df8537695570dfe15551223855233deec00491d3790db6f41456ec8d58732d",
   "skills/tech-writing-cn-1/.phoenix/originality.json": "a1820b99566004ea058b1e47ac0b8653189a8b6d4cff4faa0f6d3ef2cf1717e5",
-  "skills/tech-writing-cn-1/.phoenix/provenance.json": "25b59ca00101ddff049578f1a96a9999f03f21f4f2ac3c16d7bd65f9352e760f",
-  "skills/tech-writing-cn-1/.phoenix/selftest_evidence.json": "869e0ea94e18d964e98ea70c99a03b08c02700d4fa8469d2d833e1e7d63c5b1b",
+  "skills/tech-writing-cn-1/.phoenix/provenance.json": "ec34fd3f3fb9922d6179a39d73dbdfe7711e8ca06587f24ac906f31bd0350183",
+  "skills/tech-writing-cn-1/.phoenix/selftest_evidence.json": "9ebae1553e0489052b092ebef34a4d04c1219a0c765aca6b327476ab1d361582",
   "skills/tech-writing-cn-1/references/creation/p0.md": "b476b20597b83d920047a0e300bcf553752c91356a32427a3fd30ca70fefc9cd",
   "skills/tech-writing-cn-1/references/creation/p1.md": "8e12b7125d1ded5db738a96ef66a5a5f728623af2fd7ea1d650126ecf6130e6c",
   "skills/tech-writing-cn-1/references/environment/p0.md": "2f649aa90d74cd216e94344a4350baeead1285cb26d3e82893289a30c8dbcef0",
@@ -37,8 +37,8 @@
   "skills/tech-writing-cn-2/run.py": "b37ab6ff9aad1911e0885604ec8cc468367f9d1d354be871b8f7a82ae5dcd834",
   "skills/tech-writing-cn-2/selftest.py": "387db944ab711315f7e381093e08b0cd46e3e120f49302bb9f209452bc4f8114",
   "skills/tech-writing-cn-2/.phoenix/originality.json": "f5b54a24fdda3200067cee35e00084f446271d8cc0269be621bd44c642cf75e2",
-  "skills/tech-writing-cn-2/.phoenix/provenance.json": "b6ca7926db719a206f60501f69629889f5cf1acf011f30de6d56261cafeac7b6",
-  "skills/tech-writing-cn-2/.phoenix/selftest_evidence.json": "9e2cddec1ef1a6682672bcd9675bec0747f8a1842aaa7bf2d17a0ab9790ac506",
+  "skills/tech-writing-cn-2/.phoenix/provenance.json": "cafa21840c8779c46d48aec537f7ce6308f83457c7ea98bcb6aa37c4e3583f34",
+  "skills/tech-writing-cn-2/.phoenix/selftest_evidence.json": "5ec214ae02850670200020c9fd1c7c5c979e1783759ea31c4b3e983b42b67bdd",
   "skills/tech-writing-cn-2/references/creation/p0.md": "962caf6f191041932d983a0b2057574aa85ef1d49126a424f5449b65bcd8ef93",
   "skills/tech-writing-cn-2/references/creation/p1.md": "020faa4721546afc6850b2f47c9e14ffa9de6b5a14a4b7af23e6da1f2a1922b0",
   "skills/tech-writing-cn-2/references/environment/p0.md": "7e5217848088ef505dfd055f23c6a5cee8b92c2b55cd962ff5e1b9a57840b58d",
@@ -54,8 +54,8 @@
   "skills/tech-writing-cn-3/run.py": "012db2ba39dd6868097d2e242fda43f2fd2996343222dcc006f621dc105b6528",
   "skills/tech-writing-cn-3/selftest.py": "a06a7317f930167acf16ac30e194a1b4f24a680affee5fbeb58deb637b2a91e7",
   "skills/tech-writing-cn-3/.phoenix/originality.json": "e2fc55e28763da32eca87bb87099e4c891e50228bb7edc5872d74ecc57edbd82",
-  "skills/tech-writing-cn-3/.phoenix/provenance.json": "9c856bb6b93960d1b6474c8d21f1d8b873661f227e8c26d93f5c869602e56e4c",
-  "skills/tech-writing-cn-3/.phoenix/selftest_evidence.json": "559c08b01db7ae9cea7f225dbb398cdf00958dcaba9bbfd9610f34d3dd769bf6",
+  "skills/tech-writing-cn-3/.phoenix/provenance.json": "9f38aaeed87863e9a71e2a8016b77b80e77fc8fb0d9df87ac1aa20247818f4b4",
+  "skills/tech-writing-cn-3/.phoenix/selftest_evidence.json": "2821acba86c605a031387c257f66d62e3bf577b4b260543e25d7887baa08bb11",
   "skills/tech-writing-cn-3/references/creation/p0.md": "6bfd2f9ccca1c48636725cfb5e4563f05137e61e9f0b8790322920d3ac6a71f3",
   "skills/tech-writing-cn-3/references/creation/p1.md": "9c1206c47256529e2bc95767e77cd8399f7773c3da60797b1a7244bbf65b0cff",
   "skills/tech-writing-cn-3/references/environment/p0.md": "2c84dc9e9f8e70038638500b128030c6a14b296d3923b337ec6baf8d5a463f14",
@@ -66,7 +66,7 @@
   "skills/tech-writing-cn-3/references/production/p1.md": "cfd6ad99f0152770fe32068671cebe28f24c68e169c5168504a58f5a7d2f818a",
   "skills/tech-writing-cn-3/scripts/main.py": "1f4b876d0235eba592c060e0b0a1ac9b55c5572b91aa615367a3a86458124d56"
  },
- "sealed_at": "2026-10-18T20:11:18",
+ "sealed_at": "2026-10-18T21:04:39",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

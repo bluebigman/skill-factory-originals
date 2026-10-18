@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-glossary-build",
- "merkle_root": "b3ffee2e6fbce1e32e5dc9bcbcddd041e38cfea427254d37d0664b5c83d27a28",
+ "merkle_root": "7bbb3f9fb7b44865d480642320dbfe46ad7f0acbbf418175f157edcd672488ec",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-glossary-build-1/run.py": "60f7f505ff43604f1fac2a00a0a2283485d6efa9f804fd89e843628d8b043644",
   "skills/doc-glossary-build-1/selftest.py": "f8650766c0e3a600e72c4b9bf1a5dde3941b7d7dc6d948094215039460812f86",
   "skills/doc-glossary-build-1/.phoenix/originality.json": "2e9ae52ee014530a0b9c9f2e7731b1527aeac7c2c90cfb3c674e81425e4f50fb",
-  "skills/doc-glossary-build-1/.phoenix/provenance.json": "152ae480107ff9ddab5d7106b1290e48f5e51f3c59df95913b8cea450b9269a2",
-  "skills/doc-glossary-build-1/.phoenix/selftest_evidence.json": "c1a2e23de802225d310a4be48f0d6967ffd967adcbaed973cfa331e86dfa4fff",
+  "skills/doc-glossary-build-1/.phoenix/provenance.json": "a90c57eb1101bcfeeafcac4a48fc9b047889f2ffaa583bf81527b30a9cd93a2a",
+  "skills/doc-glossary-build-1/.phoenix/selftest_evidence.json": "804b1cb67681537a7051cb1472ffb0569c7aa02eaaa850d80e8cbfaf07dbd592",
   "skills/doc-glossary-build-1/references/creation/p0.md": "b2b840c3cd16f8b412a51baecea2cd39189355cec1522513aa2626fb7f68c5e2",
   "skills/doc-glossary-build-1/references/creation/p1.md": "74b063a81b77d9eb6c0aba0f2c0bf96de7e635b025ddaad0eeecc2cf6d5293ae",
   "skills/doc-glossary-build-1/references/environment/p0.md": "f079ab9289dac1e47a9c76e376db8c5d328d9a5c049985dcefa1687e45705a2a",
@@ -37,8 +37,8 @@
   "skills/doc-glossary-build-2/run.py": "6de7409036946018028c4ff491d0218813407acae49153778cca3244bef03f42",
   "skills/doc-glossary-build-2/selftest.py": "0e58ab472bf30024eebba044c9c9854b1f3e83388ff6a5214fa9944ee975349b",
   "skills/doc-glossary-build-2/.phoenix/originality.json": "57f241f6549d6066121b8b8bff62709b46b9713010fdc991e052033e4fbb4e73",
-  "skills/doc-glossary-build-2/.phoenix/provenance.json": "05e69506d25f04faaf26cf10795d7302290fda22437f8b8c405acd627251faea",
-  "skills/doc-glossary-build-2/.phoenix/selftest_evidence.json": "c543f45c14f5e15061ed2808aecf5e99901428266a42e72e7b0cb9007c0efdfa",
+  "skills/doc-glossary-build-2/.phoenix/provenance.json": "88deb4fd406d2e826a1c88effa91b17f16cc5d8e8e70802e1dd1160c6bd9e6a5",
+  "skills/doc-glossary-build-2/.phoenix/selftest_evidence.json": "7c7de7df17da4365effabb0432aca486f1489418bc07e17d568d04004b64f877",
   "skills/doc-glossary-build-2/references/creation/p0.md": "cb7b7be3df973ae928d1b18f0eae6b74edb8ca0d42235a7059d925f6f62b5767",
   "skills/doc-glossary-build-2/references/creation/p1.md": "aa1406c8a4c082817dbcbe79e92bf91ae7b0f4fb6586f5b4a92297a742b2ee07",
   "skills/doc-glossary-build-2/references/environment/p0.md": "247e84c37352fac4b407f5becd899c7d89d7940b9c049ef67468949b3fca40d1",
@@ -54,8 +54,8 @@
   "skills/doc-glossary-build-3/run.py": "8698d9aafa13687b89f203bc59597aa9a27e664099e4146395ce6b2f38755bd5",
   "skills/doc-glossary-build-3/selftest.py": "6ed7d42f5cde25a468dea8192863661b0da63411086389032126989698df568e",
   "skills/doc-glossary-build-3/.phoenix/originality.json": "58efb21f8f78d464ae43172e7932f8c1d987889f66782c0370e6ddcfb04b46cf",
-  "skills/doc-glossary-build-3/.phoenix/provenance.json": "9dd4d539278ea4953ecb5a74766d273e8a4248a19fd54109de15c3b77c6578b4",
-  "skills/doc-glossary-build-3/.phoenix/selftest_evidence.json": "801b06bba14ec6bc182ca0fc9aae365f85f9f20aa182839b857a58ea5fe18ef0",
+  "skills/doc-glossary-build-3/.phoenix/provenance.json": "34e4d6a81b2cc6e1121a383c397c500815906bd71e60bd61f8bf09393180de3e",
+  "skills/doc-glossary-build-3/.phoenix/selftest_evidence.json": "bb3cbe3088b4812dd0100bfdcf2cdf05bb7dd8a1d5768339873064623c009c03",
   "skills/doc-glossary-build-3/references/creation/p0.md": "377b65f5c788c47083d3d87955392570455c60e36f16dca36dabafa00d22cdcb",
   "skills/doc-glossary-build-3/references/creation/p1.md": "7afcc5ea50f3a13c1b44ee696765e458f183a9b8502db9acdcdb97680957abf7",
   "skills/doc-glossary-build-3/references/environment/p0.md": "105479c61a559def6550ff3342a3583b54fdef6fa20bc2ff8d271c0f899fbfc6",
@@ -66,7 +66,7 @@
   "skills/doc-glossary-build-3/references/production/p1.md": "460ca041341341f304f81566eade9622dbcd21643256fcc289bdd7ccae270513",
   "skills/doc-glossary-build-3/scripts/main.py": "3b5255239ebc417b454ebe9742e4a611bfab7c5fd0e83b3e01c231eda607ae23"
  },
- "sealed_at": "2026-10-18T19:57:01",
+ "sealed_at": "2026-10-18T20:57:32",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "word-track-review",
- "merkle_root": "4faa4f39f5ea31aed7ea9811650d82d3ad7503f42ecd95679ebd5b2975080d8c",
+ "merkle_root": "640f5543ffae5ecb134423e79e79d99a945f1051d12921860d4d47e8b9256115",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/word-track-review-1/run.py": "02fd385015a5b8fee856edc8560d25ecb63b8a391971b02f405d5b945c2fd68b",
   "skills/word-track-review-1/selftest.py": "5773ccf5bbe868859620708de1fbf78d8864049063961a231e050f8a46ce35ba",
   "skills/word-track-review-1/.phoenix/originality.json": "cbc44a96266716f55c5763d705f71c7a58faf2a592a5e5536a8c016bc285eda3",
-  "skills/word-track-review-1/.phoenix/provenance.json": "e3420f0958d1452cc6d9fd85f7aafea9a1031305bbc895f1f84449a3f4565950",
-  "skills/word-track-review-1/.phoenix/selftest_evidence.json": "372b6d3145ad5baeba7ad6d4b274b4861fdf2d032d257cbce6b03d83a41562a9",
+  "skills/word-track-review-1/.phoenix/provenance.json": "1e7ee3d11c9624f89ae4b234b7dbba0a688fae4c9044fe47e03e61646031400a",
+  "skills/word-track-review-1/.phoenix/selftest_evidence.json": "8891c6bce8298e2f94145b7f54ad56e993a88f823d6dbadea93801bcd4ef3da0",
   "skills/word-track-review-1/references/creation/p0.md": "2e1a8878e3fe4a28ef7145a7d7f339ae61d7ec9c2052beb74ee2205f0588cf73",
   "skills/word-track-review-1/references/creation/p1.md": "00193e0ded815c7bf49124209978b9c8a34ea0096df7019336c89460a0ad7d08",
   "skills/word-track-review-1/references/environment/p0.md": "22a04d7cf2938a0ca6b0b57da4d3a0969a84fd9a29ca602eb22e03fe446c9327",
@@ -37,8 +37,8 @@
   "skills/word-track-review-2/run.py": "d161b7590cc7daae3544f164326bdd5fd2c0beb89b8443012c144c6fc1852561",
   "skills/word-track-review-2/selftest.py": "3f485d7d67dc0272b75f5b5598cccd92669e1c0fd6ff273a00a2298578b84ce5",
   "skills/word-track-review-2/.phoenix/originality.json": "a624e2978580c2d9ac9c48558a54385f36f72f8cd287b9aa24fdf907d7ccbfa1",
-  "skills/word-track-review-2/.phoenix/provenance.json": "2f487a1157e386947de4b0a9e1d3b3988e3fc820b13bcf5444bdd3ca18bb0b9b",
-  "skills/word-track-review-2/.phoenix/selftest_evidence.json": "474245fca94052baca8acd7e954cade3c6ce2a1120589f6f1bdbd7771d8b8be2",
+  "skills/word-track-review-2/.phoenix/provenance.json": "69092dccb705961904a91fe21a35bca297fb5414bce9dc25b71c2be1529c08ca",
+  "skills/word-track-review-2/.phoenix/selftest_evidence.json": "8a4b462c6c57a24a3f3d8858a287fe789263280f4ae55f700660226ac017eb4a",
   "skills/word-track-review-2/references/creation/p0.md": "c6dd7aae9cb32911df0a498471bfc7bef28e52f11def1957d55e7c868c213f6e",
   "skills/word-track-review-2/references/creation/p1.md": "089c9800c50c49b0a9df4fd501481f5606d024aad43f101bf34742a1d9201304",
   "skills/word-track-review-2/references/environment/p0.md": "482ea2d49e2258756326387f6f227a7416aaa1bc1d98c22f4bd0826c68570327",
@@ -54,8 +54,8 @@
   "skills/word-track-review-3/run.py": "63dae0be72a3ac216edd4d46464bb3e9af4a06c62476383439d9f5c4d25ecce3",
   "skills/word-track-review-3/selftest.py": "2ea5d7b3b63fe5dcb75a2b342e7effb500e217245dbc774d344f413dc5ebd9a6",
   "skills/word-track-review-3/.phoenix/originality.json": "f01db482d6f4edab87159fa6fe96ba87bca1a7d6fd65da52f21045cdf810a76e",
-  "skills/word-track-review-3/.phoenix/provenance.json": "59b1bc3fbcbe43f5886e02639de5ffbe060103df08b58d25bed2f5bb1cceda5a",
-  "skills/word-track-review-3/.phoenix/selftest_evidence.json": "5d25822fcc39610de5fe0218e1b0b77e4ea6951a66591c6f72ff241bc8d544e1",
+  "skills/word-track-review-3/.phoenix/provenance.json": "551783f2ce73d68b563a37e066d1c97c9695227adcab8e9f0b8ab43052142bdb",
+  "skills/word-track-review-3/.phoenix/selftest_evidence.json": "a364ca26299430e3ddb463b3565a7a89bc1010ea4e8926ede21067322f5b4382",
   "skills/word-track-review-3/references/creation/p0.md": "bd2a4ea67a2d770aa2984f44d2f989351d56766088a186bf456e427892828cc5",
   "skills/word-track-review-3/references/creation/p1.md": "071e46100e6f2b9c4d3f98cb096ff408b7cfa101030c8cfed6854c85a771ee3d",
   "skills/word-track-review-3/references/environment/p0.md": "bb5125cb16fee6000f4c453f79333f5695496dff0530f09bc85355d038a3b5a7",
@@ -66,7 +66,7 @@
   "skills/word-track-review-3/references/production/p1.md": "0ee5633aab33048820b22a3c028b6a0a93176c3906544e13dcb815de33301134",
   "skills/word-track-review-3/scripts/main.py": "afd78d42158358e19603e970c626a740d57f32fd382f5424d9b9e2f562589b74"
  },
- "sealed_at": "2026-10-18T20:13:03",
+ "sealed_at": "2026-10-18T21:05:26",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "forecast-sanity",
- "merkle_root": "b0c5a85779769baa6802e28318b852dfbc54eef2e68f5ea1846cdb679381bad0",
+ "merkle_root": "8b5de93f19b8f451e0fc95447cc61965acfc4b185127e28f5bfcb9fbc7304b14",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/forecast-sanity-1/run.py": "05b68b93f7f5ba0b9ff71ea1ad2b60917752ea43345793d3fcea1472cd536026",
   "skills/forecast-sanity-1/selftest.py": "345b326c45f5fc5e18fc0e2f5add0a185f820ca650c1c28b3f002f2927fffbf4",
   "skills/forecast-sanity-1/.phoenix/originality.json": "31c1341bd6b2e5b37cc33d2b5a54622f671c64964fbcb470cfcd1f0e392eb00e",
-  "skills/forecast-sanity-1/.phoenix/provenance.json": "33c075b2fab66e32f1fdb1cb90ad6bb81dae47244ea77a5374407cc6c30033cc",
-  "skills/forecast-sanity-1/.phoenix/selftest_evidence.json": "7ede1a0498400823d291f13f6d2f28b0d27c7ccf271cda8a747942d4a4692cdb",
+  "skills/forecast-sanity-1/.phoenix/provenance.json": "519a76bfd328ba8fe7a828f9f4211881f907b5b2a50cd3a6fbead47baa507081",
+  "skills/forecast-sanity-1/.phoenix/selftest_evidence.json": "7a189cc31b7efb594fce232284785e6b03bd7703fce9b1ceab2149e65d8553c3",
   "skills/forecast-sanity-1/references/creation/p0.md": "176889ecf0544960d3e1a9c7e33c7ead96ffa2db0f1d272084f188f6adc38814",
   "skills/forecast-sanity-1/references/creation/p1.md": "6b40e7ff71adc22f59e6636dd523b64ecae6e9d45c213e4416d07543ffb779b3",
   "skills/forecast-sanity-1/references/environment/p0.md": "a3f912acec74efc0d4b311f57d0725fe227e1dc40ba759351ff3e5bb659c557d",
@@ -37,8 +37,8 @@
   "skills/forecast-sanity-2/run.py": "6392e83f07f16f97fa4ac0c6c233c842b7b924fe3924515b66ae3bbc66e34610",
   "skills/forecast-sanity-2/selftest.py": "d9f3b13c6e7d5440561ece9f05e17a8435a5819a0b37eaee37f327a289d0dc75",
   "skills/forecast-sanity-2/.phoenix/originality.json": "bab26972e0111cac1cfe93f2868d8bbc81d7ae2cd9efb6d4e35707a3d5afb3df",
-  "skills/forecast-sanity-2/.phoenix/provenance.json": "5711e85ea0b678ef683a2db8cebf1bed12248d5766434f7550eeb5887c0622ae",
-  "skills/forecast-sanity-2/.phoenix/selftest_evidence.json": "3714ca18eb55a7eec0ac2926e2af569885e7d760edc89c3cf715e122feb295b9",
+  "skills/forecast-sanity-2/.phoenix/provenance.json": "a5f2438d88bd00c89568d774f04d854719cbba1efd27e45d91aa613ab50a1347",
+  "skills/forecast-sanity-2/.phoenix/selftest_evidence.json": "54f6ae02646f976c979afca6c04400a231ccb71d2c6af2cde6c390f985aecd00",
   "skills/forecast-sanity-2/references/creation/p0.md": "670f09f2ff4ed66e91ba8b355a5a26beca46c20d1f87ab97911c3f764bc5ca07",
   "skills/forecast-sanity-2/references/creation/p1.md": "43529c0234c9f1cd8bed04fee4d53dd9a4655b9300985677e3f9982017d195c4",
   "skills/forecast-sanity-2/references/environment/p0.md": "faa70c2fb9e22eb3da57a86dc3297b379afdc6a0ad97a5bba81f4bb4e3a82306",
@@ -54,8 +54,8 @@
   "skills/forecast-sanity-3/run.py": "755adc00042d41c6951c48f810d9049c51df3cc305af7900f731805bbd8b7a2c",
   "skills/forecast-sanity-3/selftest.py": "0b68611baea51240ecf39d9224dee0a51748fe995b4d4fd7326fed26d31d357b",
   "skills/forecast-sanity-3/.phoenix/originality.json": "2117d3528e6e8805fb450b5626fc2a81d26dff2fd0c4a0f60da5c894ec4512df",
-  "skills/forecast-sanity-3/.phoenix/provenance.json": "549da537b07552c130fc526ae48a5e6ad2db5e93d0f9008b087c7760556f0169",
-  "skills/forecast-sanity-3/.phoenix/selftest_evidence.json": "e77f4fd6929d2201adf7c302e058678c085f4ec66bcc179f14808a56f64b3e54",
+  "skills/forecast-sanity-3/.phoenix/provenance.json": "05381b89b72341443510a079344d7b6fdfba855e1aa2b6e7e91a9515549f42b9",
+  "skills/forecast-sanity-3/.phoenix/selftest_evidence.json": "13ef29208d683b906073bb3fc1059d7df1e3e605899494446470ca3b3b49df65",
   "skills/forecast-sanity-3/references/creation/p0.md": "e4c720183ae85bb035b8afc5b2e810bafaa458cd90120c24c1eb3e256a74b3d5",
   "skills/forecast-sanity-3/references/creation/p1.md": "b9b354c5c26722473c69cf6eb3279097b331e3a3b38b5de8e364ce3e88a0b334",
   "skills/forecast-sanity-3/references/environment/p0.md": "bf4ccb341a9fddf89eb433d9800e98ff1898a3e9b2e3c5df1c43569c3e85159e",
@@ -66,7 +66,7 @@
   "skills/forecast-sanity-3/references/production/p1.md": "cda89fc7987c80bd0a717e5a8424596bd89f7e81e87deaa654a90de4e4a0ef05",
   "skills/forecast-sanity-3/scripts/main.py": "01dc155c6885ffe3bdb687f5c6f3e251041a992c370581bf55ab8d0169576013"
  },
- "sealed_at": "2026-10-18T19:59:28",
+ "sealed_at": "2026-10-18T20:58:52",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

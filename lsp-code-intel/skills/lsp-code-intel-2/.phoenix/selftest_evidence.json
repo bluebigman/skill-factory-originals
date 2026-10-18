@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:03:04",
+ "at": "2026-10-18T21:00:37",
  "skill": "lsp-code-intel-2",
  "slug": "lsp-code-intel",
  "passed": true,

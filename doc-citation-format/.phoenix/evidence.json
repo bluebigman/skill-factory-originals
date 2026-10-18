@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-citation-format",
- "merkle_root": "b3bb12b329b5942ed9d3d243634937fbb64a1721f562e1d67e83ceebb7cb9c42",
+ "merkle_root": "c170298ccd50d2875e9a6536791bb9e19d4c589dbeb35af6ae9c7b3f6e58f390",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-citation-format-1/run.py": "9a69ca20d213be03685b1a9b8068d75559966f90050d812733ed29c08fc267db",
   "skills/doc-citation-format-1/selftest.py": "0638b753691fd10acb2c19654c488fb6834aa7009e11db2fb9baaf1def7920eb",
   "skills/doc-citation-format-1/.phoenix/originality.json": "f37e875fa4b1c146737065f0c8624bdeff958640a463085311f7b621dd002b0e",
-  "skills/doc-citation-format-1/.phoenix/provenance.json": "c5d98377dc2fe7f20358670195c39bc78e308741dffc0605233343863bc5c569",
-  "skills/doc-citation-format-1/.phoenix/selftest_evidence.json": "854e041587b8863a3c9308e46cca94c97d80254b4f7bc6d4f17e69220f696e10",
+  "skills/doc-citation-format-1/.phoenix/provenance.json": "2b70330b6525d08c01e331599ca352e43a575bb8b452fbd6ffd1b9ef5fdb176e",
+  "skills/doc-citation-format-1/.phoenix/selftest_evidence.json": "aee7dae391e7d8af2828f64cdd9c1bbe76bcf6de62c93d05724fd1af218e507f",
   "skills/doc-citation-format-1/references/creation/p0.md": "ea0ea467cd8ff325298de3eab34fd9995a48eb276791332bc09aaa5dc71c342b",
   "skills/doc-citation-format-1/references/creation/p1.md": "aba84dcfef22bbc81ea81edaa59626520eaf9e3e4c94890c849ba9da936c665f",
   "skills/doc-citation-format-1/references/environment/p0.md": "111a2c48bb3c44800b3a96dac3dc96c3e3783fc352f070691d32356bb8af27ee",
@@ -37,8 +37,8 @@
   "skills/doc-citation-format-2/run.py": "d022053cc77b2e6183f7cf45adb5f67fda63d7708fdbf619772414df489bfbb8",
   "skills/doc-citation-format-2/selftest.py": "1b2f34bb55719b5e6e9ae1819b681fc167e88589b28eba74bb9b158e2a8b82e1",
   "skills/doc-citation-format-2/.phoenix/originality.json": "072bce05cfc16a2f53816933a6a50963e9d33a7574bd666aed8fe395a95494bb",
-  "skills/doc-citation-format-2/.phoenix/provenance.json": "89ccc0e4ddfdc4f6dc2e4095dc09673321f96b262ac37e568d48127d05f72dd6",
-  "skills/doc-citation-format-2/.phoenix/selftest_evidence.json": "5a0d1a1cc494c8dde4c47ce32da50de91dcba55cce926b664273c21ae8a00fab",
+  "skills/doc-citation-format-2/.phoenix/provenance.json": "665cd4a2075f9bb60c93f436148242bc5c70dc1c468ea550737613dcbefe92bc",
+  "skills/doc-citation-format-2/.phoenix/selftest_evidence.json": "6b2880b9eceb83c6f706d4e2d659c06532849430334e3f0f95141cba317bf1e3",
   "skills/doc-citation-format-2/references/creation/p0.md": "eb36c1b580dcd12634f55ee50acd0d0c442e86ac0ec5ef1b140960e27acea43a",
   "skills/doc-citation-format-2/references/creation/p1.md": "f9ade26805fefcb82c832b90dcedea219a8b1799ce4c93dbaa6b7edb92c354d6",
   "skills/doc-citation-format-2/references/environment/p0.md": "b4269aa7ee9a5ae748fe19d21b17c97773729e9db5e52664b8b1d36f3e4836ad",
@@ -54,8 +54,8 @@
   "skills/doc-citation-format-3/run.py": "d8832a44c6195c3fbb369402dfc35e1eb2520b523e0144baa6d1664600dd3309",
   "skills/doc-citation-format-3/selftest.py": "fba55f27c7f54be0afcbf949e7e4bc131f8d5f37b074e7edc7597088ea07119d",
   "skills/doc-citation-format-3/.phoenix/originality.json": "688970108bb87fe04d03a423b8321341aa7cc6ab0ca09bb313a9baabcbb41be0",
-  "skills/doc-citation-format-3/.phoenix/provenance.json": "f37bc2dbc08ae401dcac16aca11614f277cf901bd574270d24253fd2f229c538",
-  "skills/doc-citation-format-3/.phoenix/selftest_evidence.json": "998ee248e447d5881c5501b0a175b49e621277ffaab3dd10c291b4a08493152f",
+  "skills/doc-citation-format-3/.phoenix/provenance.json": "111de5be7fc68f068f0f0d979c831307b07689da90292b155260cf4f5b29fefc",
+  "skills/doc-citation-format-3/.phoenix/selftest_evidence.json": "a1447c35b93de1538e31993df14df23c7371e8300b2c45a45769337fde8fb79f",
   "skills/doc-citation-format-3/references/creation/p0.md": "923ad9c6602614fdf8927feeb8c28d13c3adeb8f1f9402099f6f850a88a0dcb9",
   "skills/doc-citation-format-3/references/creation/p1.md": "a7d02fb21ebd884351aa38bb86557537f57bcbee8062d08755571d44b01c1515",
   "skills/doc-citation-format-3/references/environment/p0.md": "23f61e6abb31e2c4c8f1296184e4954790c60f31b8a6051528074695f98e73e3",
@@ -66,7 +66,7 @@
   "skills/doc-citation-format-3/references/production/p1.md": "89713f700e1822521881074c5f401da7bb52f7da54956e6e592927f87dc410fd",
   "skills/doc-citation-format-3/scripts/main.py": "29deb871a3abc2ea4cf0784040a2edb75d5b7295f7f9eef411aeb37963dc0a52"
  },
- "sealed_at": "2026-10-18T19:56:46",
+ "sealed_at": "2026-10-18T20:57:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

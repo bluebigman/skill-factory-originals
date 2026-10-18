@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:23",
+ "at": "2026-10-18T20:54:50",
  "skill": "agent-trace-audit-3",
  "slug": "agent-trace-audit",
  "passed": true,

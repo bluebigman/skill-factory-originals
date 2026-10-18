@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "audio-meeting-minutes",
- "merkle_root": "c18fecfa486d47ea97ce291d6d4bf10888be5839ebcc587999ea2f0a54f1b3cb",
+ "merkle_root": "2ab705c79f56fed4b765904272a52b060f2ca816990078218a6f52820081a1d7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/audio-meeting-minutes-1/run.py": "46ca40588d0dcc388e66a6e0078c8799519f9101c970cca833a130a335c9247b",
   "skills/audio-meeting-minutes-1/selftest.py": "58329faea7b9fbbfbc2f9fed3e46a46f810e7df302ff27381fb896849c381d39",
   "skills/audio-meeting-minutes-1/.phoenix/originality.json": "7f527b81470bad6c5f99059ad568bcca21262363d40843d28d5dc832217395a8",
-  "skills/audio-meeting-minutes-1/.phoenix/provenance.json": "fd8eeb2be8935105e36a817652dc93acbbc27af7b80654967830b87f83c0d2ea",
-  "skills/audio-meeting-minutes-1/.phoenix/selftest_evidence.json": "b783f9481a9225398b2cbcc62e1e72cfdd183f94dc36bc9b7876d39e3f253ffa",
+  "skills/audio-meeting-minutes-1/.phoenix/provenance.json": "dbf1c208bf2c5cbb5afdc5a5b14b1f5b2cdfa1e53045a7d6950e890fc082c13d",
+  "skills/audio-meeting-minutes-1/.phoenix/selftest_evidence.json": "5a71ebd1a5753ddc1db57999e8664ef754a628f13dfde3b755aedb508e85c808",
   "skills/audio-meeting-minutes-1/references/creation/p0.md": "44c7be1e861a7557a7587e91e4daea75fb9ac88219c7c0351a52c4517aafe619",
   "skills/audio-meeting-minutes-1/references/creation/p1.md": "8519c4dbdfdb034b6b642e89dc2efce9ea6d3bb4eadfc4a153fd87aab5cd9cb6",
   "skills/audio-meeting-minutes-1/references/environment/p0.md": "1e87b4223d83e621e2a13caf227ae33990be204cdf7b99a114bf92947f113708",
@@ -37,8 +37,8 @@
   "skills/audio-meeting-minutes-2/run.py": "c7dd297ed2a0f895d0f6770b973bdfee2fa95707b5954ed0158cc5587c097528",
   "skills/audio-meeting-minutes-2/selftest.py": "ab37cd66ec0614ef5087fff31790a5aaa68ceb752a05eb812abde5dc498ad9d0",
   "skills/audio-meeting-minutes-2/.phoenix/originality.json": "e90a05d81dd3da91e184edb943cbae7cb32f0e604427b00aef3bb15bc8961f14",
-  "skills/audio-meeting-minutes-2/.phoenix/provenance.json": "948545ffbea3772349a95642dc1292d8e425b4123a801f2d9be4ca3621392a13",
-  "skills/audio-meeting-minutes-2/.phoenix/selftest_evidence.json": "294e08b4e2a2fb36eb6b876b1bc706c8bb6d0187b01c0c46fa3d12067bf0ef28",
+  "skills/audio-meeting-minutes-2/.phoenix/provenance.json": "4fbcd63f04ae6b58e97dd1edb70784efea28fce1955ce2aea7a8f0dd76ed4ce3",
+  "skills/audio-meeting-minutes-2/.phoenix/selftest_evidence.json": "35273b61900a11ac18bec6d7074ffca74e54947a6e9766e1c2fac408f5fa8f79",
   "skills/audio-meeting-minutes-2/references/creation/p0.md": "dad014c89b4de89231661ae3996d70afff9260a7749fb4311d9280a3cc65fdcc",
   "skills/audio-meeting-minutes-2/references/creation/p1.md": "a423b171748862b83bb4eaa46364215c71d08bd36ec66d073f2eed27ab331f5b",
   "skills/audio-meeting-minutes-2/references/environment/p0.md": "0c817683c1682bda9f22a49ecb050a349c3a32ac5f09e0c6d02a35d2116e788a",
@@ -54,8 +54,8 @@
   "skills/audio-meeting-minutes-3/run.py": "830bbf11dcee6a2b06d9c7bcda7b7e83fe766aa606333b718032b2cf31530927",
   "skills/audio-meeting-minutes-3/selftest.py": "c04a8c878c98a1466d799ccf292dafcda0b16cc48f1490f0a109e5cd3eb4600d",
   "skills/audio-meeting-minutes-3/.phoenix/originality.json": "f85455664ca226e2da579594b8dc29e2f88b63de9a6560821365311cab13d46c",
-  "skills/audio-meeting-minutes-3/.phoenix/provenance.json": "d4b49029a8740052328e318b2eb705cac5661a2165089cf8bf5e5b541aa2d150",
-  "skills/audio-meeting-minutes-3/.phoenix/selftest_evidence.json": "68dc47ba836f5477ceff1e32e68fbc8ea6d55eb58a9972137e738fe9c134e97a",
+  "skills/audio-meeting-minutes-3/.phoenix/provenance.json": "3043eee60697e163b0772c26bdeefdffc973a9bc6efdab00ead52de338a8449a",
+  "skills/audio-meeting-minutes-3/.phoenix/selftest_evidence.json": "e54a3e93d87c140b70b35d80824a3c9f2ce90a19e4421c84a7fc25a4ad66810b",
   "skills/audio-meeting-minutes-3/references/creation/p0.md": "ea44df31cbf5ff19c4dd50de30baa497303d50b24027ed18124218c0f292d839",
   "skills/audio-meeting-minutes-3/references/creation/p1.md": "65e1dbe21dee6f7ea9536459594a948044bf58135edb72f68877212b595d6b93",
   "skills/audio-meeting-minutes-3/references/environment/p0.md": "5fb3e79ede501727ff3c4d9a060126163431b9c51ad4aa9efa29bde86392658b",
@@ -66,7 +66,7 @@
   "skills/audio-meeting-minutes-3/references/production/p1.md": "d0a4047dd67ee8d406372c50caf25156dd86c9ded07b9916f178bd43c6a7e5b4",
   "skills/audio-meeting-minutes-3/scripts/main.py": "56017a0f3f815b2f72fab3fbf84878ba6631d890c28ea5b526c7507806c5b3c9"
  },
- "sealed_at": "2026-10-18T19:52:38",
+ "sealed_at": "2026-10-18T20:54:59",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-study-plan",
- "merkle_root": "a9fb79625578feb7d12fc07ac7660f634855f67a07b9060ea23c9c79e547c5db",
+ "merkle_root": "dc47250fb7f98c29572a51a7c43ccace1cfd962d694dd8fba4a03086a4a0240b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-study-plan-1/run.py": "895706af13f7ea81c96212c0e48f5f57d07532cad578da51cd5d121dab6a7108",
   "skills/child-study-plan-1/selftest.py": "181d38a20d049a59a7a7108c2f68828eef52a5a138a75d9f7ac1f72aa13941ae",
   "skills/child-study-plan-1/.phoenix/originality.json": "2c9a7f4bce3a10a6ea8ea513d5c97f84c32e7210be57192873cdc39bbedf6482",
-  "skills/child-study-plan-1/.phoenix/provenance.json": "aaa76f1f3d985731eb63adfb12018dde8a82014e60f9e592e6f5f231cd353cac",
-  "skills/child-study-plan-1/.phoenix/selftest_evidence.json": "4a396799e5a832e536663ee36aad3e85a69400247c1139a8c9dd962e0cbb805f",
+  "skills/child-study-plan-1/.phoenix/provenance.json": "c689e143c1c4c74f383367c76968f32c367dd5bbb11c9b7361082eca1e0886fc",
+  "skills/child-study-plan-1/.phoenix/selftest_evidence.json": "8de5ddea340aa5d402696cc4d647c963fbc722cb628ce6c2404c43363a16b47b",
   "skills/child-study-plan-1/references/creation/p0.md": "08892e8b195483a0b85815ee4422aa88a8cee64c680840ecd97bae65b5d3e2b4",
   "skills/child-study-plan-1/references/creation/p1.md": "b26069a08b7fe2095ef1524208ccc0c3882c52003e2dd1c84802bc29eb7db0db",
   "skills/child-study-plan-1/references/environment/p0.md": "02f90d5f8bc308c5d3b78af234d7ee998cf94f4654e056a8fc12aa6936504162",
@@ -37,8 +37,8 @@
   "skills/child-study-plan-2/run.py": "04f0a571a796e0dada76e512738b8fcf2a2237ef26bbaa832ca78b70a2347aea",
   "skills/child-study-plan-2/selftest.py": "f6899915f37391bda20f4e5b75bd3c8cf32430151bd2a53632c77b8ffd1c596f",
   "skills/child-study-plan-2/.phoenix/originality.json": "4c5813193a4938ff3ed4f5b3da2d0dce76ce61d9019b486343ea5a6f677de208",
-  "skills/child-study-plan-2/.phoenix/provenance.json": "c47e40490716f4b1d68d9bd9911bc633ece637ff42112cac6b06886ddc634f4b",
-  "skills/child-study-plan-2/.phoenix/selftest_evidence.json": "56eecc125a79b3f402d606ea31b13abd42d41403c2a50bfc9ce1a2cc8d6efa8a",
+  "skills/child-study-plan-2/.phoenix/provenance.json": "82b97281d0fdb395012f25929700b31fc4c3b467d48ac56b093efa61dec32540",
+  "skills/child-study-plan-2/.phoenix/selftest_evidence.json": "bc0255e9401770194aee30f5cbab22c1f8f4d19b00329a8ec5f2bc9bc0a2a6d9",
   "skills/child-study-plan-2/references/creation/p0.md": "a302e77f0bb922a433a2fe20212d4692211bf7fc5efd7b3a936b0abe05585afe",
   "skills/child-study-plan-2/references/creation/p1.md": "bed3679ea93a7881e89c2f9eed4c83f349fc086f08b5820e3ab6dbb24a667b1f",
   "skills/child-study-plan-2/references/environment/p0.md": "9416f75688ddd4e66863d28ccb617aeacd1b7808d0847b67b90855f34d880ded",
@@ -54,8 +54,8 @@
   "skills/child-study-plan-3/run.py": "c73f0a0dec9c11616f8f93acf485d7c7a805477722c2590ee25314735f3226b7",
   "skills/child-study-plan-3/selftest.py": "4768b5e67d444cd18eaadd409aaa3feb8ba41784c554a9c6f82ac9f34379f30d",
   "skills/child-study-plan-3/.phoenix/originality.json": "ef632569474fda28f44f9e1b62bd4a0d6674d0652fcd389f540a0143e908710f",
-  "skills/child-study-plan-3/.phoenix/provenance.json": "33aab9d63379521f74c437121c06533ca6ddc6bce347414c55e1e741a8a19cc2",
-  "skills/child-study-plan-3/.phoenix/selftest_evidence.json": "ee1dea8fa7054e0d6aac0cd5a090a73f7b59b08cffcf3de9ecc27df2e3f5ce0b",
+  "skills/child-study-plan-3/.phoenix/provenance.json": "711769dba5586b1ae1c5e4443ef98034b4806159aa5948e644586eac09ee92d8",
+  "skills/child-study-plan-3/.phoenix/selftest_evidence.json": "79690802a86fdcd1cbc02ed0348f01cbd2a03db8c4424006f62aea4dd78b3797",
   "skills/child-study-plan-3/references/creation/p0.md": "6b9288440d17e21418d6c118a88b0444ed04f777ad39f792888bb9bc4ccb3494",
   "skills/child-study-plan-3/references/creation/p1.md": "00b72bdf3fb3c413bbe8a4bf48805f31b5f9d4429b614e7688b61f7d382caa91",
   "skills/child-study-plan-3/references/environment/p0.md": "ce47605caa17ca1aed3d14efc7071dc8438d36b2ef70bfc3416a0e4468b5631b",
@@ -66,7 +66,7 @@
   "skills/child-study-plan-3/references/production/p1.md": "69847c1305d2711c44d75511a0216716f4c77bbe6ee05155b4cc2fc9b3e16341",
   "skills/child-study-plan-3/scripts/main.py": "176fe46a6079d255cbbcc24da15c7fbe04a89211ef0f87271f933038e52893b3"
  },
- "sealed_at": "2026-10-18T19:53:30",
+ "sealed_at": "2026-10-18T20:55:31",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

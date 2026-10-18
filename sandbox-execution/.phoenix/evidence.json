@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sandbox-execution",
- "merkle_root": "a9ee1fe8e6320072ae3bbbab3a3c5ce1a946129cc87fb9b8cc6d7ada9e5d2eff",
+ "merkle_root": "072d2674fe62e0c6840a5c488ef2776ec0d88a2d366db6fb2659cbbac0d255b0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sandbox-execution-1/run.py": "a1e3d008b6e7c3cb4c7b5a92488dbb564c9a310b6c6d8c7384a4afe6712524a3",
   "skills/sandbox-execution-1/selftest.py": "df28bbe0296bcfc8e2d58fea6adc70734f5fbccf715be8a12f4cc3e234d2664c",
   "skills/sandbox-execution-1/.phoenix/originality.json": "09d882c76c6b20442f43d2b05680b942ca6f5e53272910a51956a1aca9c1b65e",
-  "skills/sandbox-execution-1/.phoenix/provenance.json": "4b1487eb68120ad14504af3ddf7dd762c2ab875aa4a312e91d1985ddb7195455",
-  "skills/sandbox-execution-1/.phoenix/selftest_evidence.json": "f0372b808a839bf111a87cfb4dd7775a4835834443231173dd9d75ab5b52151f",
+  "skills/sandbox-execution-1/.phoenix/provenance.json": "5777072462c0b2afe0f8a6bb79060929c647f4395d490e59ee210b904e030521",
+  "skills/sandbox-execution-1/.phoenix/selftest_evidence.json": "7d483f8b6a973dcaa1b108e056d4a80ecdd8b7aacd325e2f811473a8c64e73ac",
   "skills/sandbox-execution-1/references/creation/p0.md": "eedf66fee265f3fedf35c80efba5d37078c8eb6db95fc4273f91aa2ea341cae2",
   "skills/sandbox-execution-1/references/creation/p1.md": "0eb0b278d60f17baf5bdefa2b59e50c3b66de7751ed8fa2bf49d4f1574201b9f",
   "skills/sandbox-execution-1/references/environment/p0.md": "3741558a0440095d2f0da21057b7d1495545b20e5845d317dbaa1c8d26cde9a7",
@@ -37,8 +37,8 @@
   "skills/sandbox-execution-2/run.py": "2822a4456cd3c620b65a9f21261d25fdf8d653e11e476c862196c15bdf090c6b",
   "skills/sandbox-execution-2/selftest.py": "4d8437608accb4c26ad6e2162217cc22970e636b21ee47941c7d14e471c340f5",
   "skills/sandbox-execution-2/.phoenix/originality.json": "71e28a825697a7641688ad4e0c816b60d8a4072f97af1b19764b22fd23b2f117",
-  "skills/sandbox-execution-2/.phoenix/provenance.json": "808de57a24b430af34595aec4f628127914fe8153b0903ac4ff6d804e40b869f",
-  "skills/sandbox-execution-2/.phoenix/selftest_evidence.json": "dfcc222e700238ae4114db4f6d2801217d50a7b73e3e2482b89fa8932efb9ff4",
+  "skills/sandbox-execution-2/.phoenix/provenance.json": "093b96d6f8aa48d4cbcf815f630cb14559f1a78250536632f90db30117162830",
+  "skills/sandbox-execution-2/.phoenix/selftest_evidence.json": "624a480944712e70cf384250561f2b098b4d12091479413ae8cc2d065ed75bc9",
   "skills/sandbox-execution-2/references/creation/p0.md": "b84de8353ca125f8f8d767bf1eba82dd31f4e5596e393769405ba182b67d3669",
   "skills/sandbox-execution-2/references/creation/p1.md": "7f6a74a68f77d41f41f19e146369f504df1d3f6add7de00bbe589f707771f337",
   "skills/sandbox-execution-2/references/environment/p0.md": "8bb8d1bbfc20f27069542c4b4e450d3f89137cfe8ec11769a48530947e3911c1",
@@ -54,8 +54,8 @@
   "skills/sandbox-execution-3/run.py": "e3f00f2bacfca40e494e06ad6d6d01bd8eee2ccd08de7a351310bb2306b485d1",
   "skills/sandbox-execution-3/selftest.py": "f5d1aaf711592e9d2deebd5f5aa351fe22a3e5a5b04d7176fa571cb45dfd486a",
   "skills/sandbox-execution-3/.phoenix/originality.json": "4497bbf756849cda464bfb24bbaa10a31048e5bc75558fb64ebaefff63565d34",
-  "skills/sandbox-execution-3/.phoenix/provenance.json": "597ad02b8326f8b816f60773677bf63434b067dd8c8eb748cd91c47bb7dd0219",
-  "skills/sandbox-execution-3/.phoenix/selftest_evidence.json": "866ddf27afc0eea3602c5679f510ee9235f3550b851ce81588374ce577e819d2",
+  "skills/sandbox-execution-3/.phoenix/provenance.json": "5fa80d732a595adea4689e6627d71be19c313e976f3c08fa87ed9764108624e7",
+  "skills/sandbox-execution-3/.phoenix/selftest_evidence.json": "3bff4d55bd0c3aa90f42e4fb389bfe0fb3749354fb3564820c74acb43e765fb8",
   "skills/sandbox-execution-3/references/creation/p0.md": "f62ff0521555f415261854c0188cc2ab17ec28f3ad5ccef77260a12a7dfc568c",
   "skills/sandbox-execution-3/references/creation/p1.md": "f811e18637087ee268bd338879fa626c523493c746256a445dae5ea9f5e3c438",
   "skills/sandbox-execution-3/references/environment/p0.md": "12a6a2426d69f1ba94ba14629cc1b57a0eb248f914e25fb73bd7395a707d9cf9",
@@ -66,7 +66,7 @@
   "skills/sandbox-execution-3/references/production/p1.md": "5ea4486952d88a1a990b6eead329218a73ee5798ca38b799d1890316a9ab35d7",
   "skills/sandbox-execution-3/scripts/main.py": "82271597baf424c9741541abfa23add984bcc464a0fc1b54ce876a42114beced"
  },
- "sealed_at": "2026-10-18T20:08:18",
+ "sealed_at": "2026-10-18T21:03:19",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

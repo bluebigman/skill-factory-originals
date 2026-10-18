@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "playtest-method",
- "merkle_root": "6ee2f6a863f1fa555ee04d0d9c84c8ca64d7a80149dc3928f12dc75a086a5265",
+ "merkle_root": "240d7a795c78f2a11434b503d226b27a211538e87ae848a318a9f5ff929e1d62",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/playtest-method-1/run.py": "fc29d4192bc6acbc75da4e16688f8061cfb697ff839d6905fb2285b6fa147cd1",
   "skills/playtest-method-1/selftest.py": "ebf277f4d2bf7ff46f9e8e1d9eb7ac5bff2b51f7e427ba33930bd3026f42f8a9",
   "skills/playtest-method-1/.phoenix/originality.json": "fa710e4c70efcb0467036e49cf96a528f0ecdf32062f6b49930c1687442f5fcb",
-  "skills/playtest-method-1/.phoenix/provenance.json": "84057b40e3baad292ea8c32fb23597029e6a6629643873b20fb4f4a19a67b60b",
-  "skills/playtest-method-1/.phoenix/selftest_evidence.json": "c35137d3dff6e690fafc6615d398ebada10d3eb9abab8a75627418b84f4ed5d1",
+  "skills/playtest-method-1/.phoenix/provenance.json": "5911d46a44706af3857e912a6e5c0f02044acc4cea7c6f865c1760da5d51a869",
+  "skills/playtest-method-1/.phoenix/selftest_evidence.json": "9750ff693ebc768223e2a163cfa67332ac394926320aeeebebc68313a48856d8",
   "skills/playtest-method-1/references/creation/p0.md": "c6addb525783f4d63c7dd717ddaf74917c70bc68ee13d4241917cee5ad697740",
   "skills/playtest-method-1/references/creation/p1.md": "4389ae3e8db6e51ce11e8475b871387d957146b343099e727b563716a90d134a",
   "skills/playtest-method-1/references/environment/p0.md": "a3430555f33c411f14b503ba1d909d75945f9a77dd8d14707c09d0b742771adb",
@@ -37,8 +37,8 @@
   "skills/playtest-method-2/run.py": "4776435c9b8d4f47396a2fcf1e137a37e23ea074b09c1b2a4a1a1dc25379b0d2",
   "skills/playtest-method-2/selftest.py": "b6208ffe7843028979e5d425946c1cdc6e03cc1e79bc5c53ffdd2ec8cdf34d41",
   "skills/playtest-method-2/.phoenix/originality.json": "cd93bb893761be3d2a5e1cd7d20ea3d1e5bbc45d03a2dc5a1f40d37cf23e187b",
-  "skills/playtest-method-2/.phoenix/provenance.json": "56c4d5d2c384e278f3e78d72ae2160fb85f139e1cb16250cf005755d11bff9d4",
-  "skills/playtest-method-2/.phoenix/selftest_evidence.json": "b974fbf957ad44bf4f783340ca53988b6a8c089837ed6818d734604dda9e14ef",
+  "skills/playtest-method-2/.phoenix/provenance.json": "081ce8c3e2a96925f78274e8ac4859713d387fa02f8f2fe1fad65b782ec613b9",
+  "skills/playtest-method-2/.phoenix/selftest_evidence.json": "7c2b89ba0664b4d653ea97837a8620a1e689cf5780a20ed79807b2f0dbac5d18",
   "skills/playtest-method-2/references/creation/p0.md": "3b515088d5a2ac4bb1221c4dfd531b8d456d08117c9129bea052593bcc59db33",
   "skills/playtest-method-2/references/creation/p1.md": "ce31c9981e7686207a891349504c3f2fc0e21c672a20b746345b1b22e1be06a4",
   "skills/playtest-method-2/references/environment/p0.md": "6637ce08ed812ad5e8fe7bd150f1fc8fd8a2c24394556fabe294fb45eb33a597",
@@ -54,8 +54,8 @@
   "skills/playtest-method-3/run.py": "957703a15296dc55aa1ee71607dc917c946f8dfdedae6203e27410d71bfeb78e",
   "skills/playtest-method-3/selftest.py": "ccf2354cbb884f64fa0d09bb79565022d662760b47baf6c901f8b93bd55de39a",
   "skills/playtest-method-3/.phoenix/originality.json": "ec6812a2121656c2e82a359eccd119089902649874a515ccf7068c2f98c52c4b",
-  "skills/playtest-method-3/.phoenix/provenance.json": "203d75d2ba2961f96cd998c57c57ad1647294f28657d1eb0637244efb88e921d",
-  "skills/playtest-method-3/.phoenix/selftest_evidence.json": "c52a8c52853691a0a50bd8981e402655a3982a2f72fe13c1eca022852dfc199b",
+  "skills/playtest-method-3/.phoenix/provenance.json": "c36e558cca237bde95b471316d21c30fde3355b7105b584574cbac1d1103d5fc",
+  "skills/playtest-method-3/.phoenix/selftest_evidence.json": "ddc85dcddeba358d91ba89e9d1516956e7d34a6791a81d8c74d015d0caafb605",
   "skills/playtest-method-3/references/creation/p0.md": "c3a9711a9fedfaf50fee88d7e56c19454deec7aada22bb5f806a6f76c0e933de",
   "skills/playtest-method-3/references/creation/p1.md": "af95fd542c992f4755966aac69c146637ea2a72a88cba585283032e595c2d7c0",
   "skills/playtest-method-3/references/environment/p0.md": "925b86f16fce85cc946801c3f83e239c357e63be8784679011be8f465368f1e3",
@@ -66,7 +66,7 @@
   "skills/playtest-method-3/references/production/p1.md": "63a3deaa4840c9727e4d93d301dd55dbbd47624f07d4eaa6327400f73acbf586",
   "skills/playtest-method-3/scripts/main.py": "960edebef43c686beea2a264662f3a37e1c1c33ed69d8f04a9a15d947f9d2113"
  },
- "sealed_at": "2026-10-18T20:05:59",
+ "sealed_at": "2026-10-18T21:02:07",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

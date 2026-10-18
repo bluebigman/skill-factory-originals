@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:03:14",
+ "at": "2026-10-18T21:00:44",
  "skill": "mcp-server-scan-2",
  "slug": "mcp-server-scan",
  "passed": true,

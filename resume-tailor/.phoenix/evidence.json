@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "resume-tailor",
- "merkle_root": "e3fa89f38eb22b8eabd1e009d9908b67cdc20e2a219babf4151304f0b9d765db",
+ "merkle_root": "19530f6bf40e352a229fd28cc971c2ca4ad02fbe9aa5b7dc45663a119adad3f6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/resume-tailor-1/run.py": "c826df3441396c03266fcb96210d8dc4b2b5fd758c297e982954b5da390b9afd",
   "skills/resume-tailor-1/selftest.py": "20ec59085da210d7a8afbb92191ef003e4ef24e1a7e10b0c5e5ba44132963232",
   "skills/resume-tailor-1/.phoenix/originality.json": "3d7ac1a0331936641007c2aff1b891c027387edb54ee1866d6552414da634bab",
-  "skills/resume-tailor-1/.phoenix/provenance.json": "391faebf5ef1b14baa944034637e69504285d7a3d952543a261d474b560a6c1d",
-  "skills/resume-tailor-1/.phoenix/selftest_evidence.json": "f98f989bde226c8aea3a72b9e89356837f73ce406a6ea04059a860c5a74067b9",
+  "skills/resume-tailor-1/.phoenix/provenance.json": "2e360bdec8a60bcf76562b88916a056338b188ce05e8df1bed84a7f1e2126864",
+  "skills/resume-tailor-1/.phoenix/selftest_evidence.json": "6d84de793ce6385372076f59206f5d80eb3b903ad4d886a303a1266fcb2cb9ed",
   "skills/resume-tailor-1/references/creation/p0.md": "421cd89697676309bdf780e8d5d4d0f88aa2258737597fa009e74ab3a9f01748",
   "skills/resume-tailor-1/references/creation/p1.md": "674a29b6cba2cd4c6cff06ae03290fd70f562c12dca8939aff40e73fc8e9c17d",
   "skills/resume-tailor-1/references/environment/p0.md": "f570c05ccee2e0542ca0417f89542bc63a06b9c4410ae77145ab2d4e9f1f2465",
@@ -37,8 +37,8 @@
   "skills/resume-tailor-2/run.py": "98116a19c0540d04e81733fc591ce9751f369bf6862035d41d69c81bca6bf673",
   "skills/resume-tailor-2/selftest.py": "ebb486e40e91e768247acf320b489796851abf5c280c595e0ed0e4a17fe30f3e",
   "skills/resume-tailor-2/.phoenix/originality.json": "85c6978d86660dd391a0e7401f969fb1e98cc39a348f4ae4df36ac5b3454f60c",
-  "skills/resume-tailor-2/.phoenix/provenance.json": "d5d10464e71c89f53c51a5c0a312aec981b47572c8177754179ffce270436a3a",
-  "skills/resume-tailor-2/.phoenix/selftest_evidence.json": "ee3352fcf53091239d687ba59cfff4c944eb0327344c7942dbdd1c29177e3d3d",
+  "skills/resume-tailor-2/.phoenix/provenance.json": "9431d613a13966c9c5e63d3218a4f43cd79540210fdafa07cf9309a3a700409a",
+  "skills/resume-tailor-2/.phoenix/selftest_evidence.json": "9890015f08911b27c1c1762d12bdb5a6942007911a011b0460eb0519d8125878",
   "skills/resume-tailor-2/references/creation/p0.md": "4530c88e151385b8514cb40349631665a3edd8a5db07f5c880a156f833f3b46f",
   "skills/resume-tailor-2/references/creation/p1.md": "5b383123314b91c8286a8246cafd80b16d772e7a01e9be1b64e964153b32b368",
   "skills/resume-tailor-2/references/environment/p0.md": "1c0c5748bd883f7398b2b4d8787a71c8c6f55abf508cb0c48526d8361c865645",
@@ -54,8 +54,8 @@
   "skills/resume-tailor-3/run.py": "e1976276260239191678338d0e234e137d5692005dd9c9e6418a43fce627626c",
   "skills/resume-tailor-3/selftest.py": "0b0c53e5644ceb24f8031457851003db88ce37845f1b1673327d7bad46de5abb",
   "skills/resume-tailor-3/.phoenix/originality.json": "ff69a078fe59c3341daa2cb3a8ace0ea0c8f49ca6fda21afe83470ef5d6fcfb1",
-  "skills/resume-tailor-3/.phoenix/provenance.json": "7194d7cf25bea7aa78630efcef6d30a2299eb7c1a578860c16a526f826b4f1a8",
-  "skills/resume-tailor-3/.phoenix/selftest_evidence.json": "50a29f5890ca006cf96b5ac66b7a5be583419f01204b63aa0efccfe2cdb4555b",
+  "skills/resume-tailor-3/.phoenix/provenance.json": "4f1f3d459073a7c46fdd163e712e3c7135fcf18fcc9768c90fdc3ac4961e1625",
+  "skills/resume-tailor-3/.phoenix/selftest_evidence.json": "897c7ac64961618da3751490c669d044a7ca08a8a0ef1918f4256aee10ebd44e",
   "skills/resume-tailor-3/references/creation/p0.md": "f505b23eb7092100628c76cb9c14570f5656437f1b89d71e97ac21418f4ebe85",
   "skills/resume-tailor-3/references/creation/p1.md": "04526d6584bf7027ce56f1b0e3aba1dcf04b3144bb88fdb80c2f3933b5e43513",
   "skills/resume-tailor-3/references/environment/p0.md": "bac0e365ab47ef612b9d2bf59bcf07e5e9faea369ce552284eeafa9a30a0f7b4",
@@ -66,7 +66,7 @@
   "skills/resume-tailor-3/references/production/p1.md": "81c7e7589b4644fc31117f30f05ad555db50eadfc83d44975fcba190f6decaef",
   "skills/resume-tailor-3/scripts/main.py": "b42ab8b321a1e6f60d0876deab7ecdb393edd9b046fa7769cadd8271de3be91a"
  },
- "sealed_at": "2026-10-18T20:07:57",
+ "sealed_at": "2026-10-18T21:03:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

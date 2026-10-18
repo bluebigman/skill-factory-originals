@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "token-cost-control",
- "merkle_root": "cb4a0413e0665138885509760daa4785baac094418ecf316e8b2f68958ebff56",
+ "merkle_root": "09146f6652c8b72dae601ac927767cd24ea6da308919610e894b3159a4e1d9b4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/token-cost-control-1/run.py": "1b0af5d5c0fefa16114bab2bfa44a1145de3072449920f55e36d618450a692ce",
   "skills/token-cost-control-1/selftest.py": "80823c84e15a0d40821243d18f6d58659154295b2a48e5150d459dc8d165d528",
   "skills/token-cost-control-1/.phoenix/originality.json": "d0a33199027f986489a0f5f83c65d92982e08a5af6c3636323d7b1b1554dfce0",
-  "skills/token-cost-control-1/.phoenix/provenance.json": "10299e55cb99f83c798e780545b72c888ef4cbc85fe262e632a37c96d711c73a",
-  "skills/token-cost-control-1/.phoenix/selftest_evidence.json": "bdd38fc10dba95068f9d415890a2ad9fc0ac8a5ebd4df83591b6bbaceabfb2f1",
+  "skills/token-cost-control-1/.phoenix/provenance.json": "13cc55aa6e836ff3e3489fc8bf08265bbe0a5dca3b479400d12bb24ddcec36c3",
+  "skills/token-cost-control-1/.phoenix/selftest_evidence.json": "eb6fa97396380be2236edfc77c3fdd6857e0720cf3bb60315dc928cac52dbe25",
   "skills/token-cost-control-1/references/creation/p0.md": "e399ee4dcb290d2fbc5f0fd13931ad19f03bd251c4874c9c91fb071c954aded5",
   "skills/token-cost-control-1/references/creation/p1.md": "70afe15b0a8cc8dfb203e5be0acb77186173d0a1a26bf1a658c123a84136baa5",
   "skills/token-cost-control-1/references/environment/p0.md": "d74e09c538126969141adcdb35dbed67dd797ed1b8a5ab029dbc2c8711920e1c",
@@ -37,8 +37,8 @@
   "skills/token-cost-control-2/run.py": "2859b726c6548f2485d308d919ff7ddcd0b3f2d11116a0c55782cc5383f25e36",
   "skills/token-cost-control-2/selftest.py": "d03f48ae6d1f706479f02244490c7bfcfc5422c1ea691260676ba3a060aa486f",
   "skills/token-cost-control-2/.phoenix/originality.json": "937b0d9444a50e01656ac7cf2ef8088a6e541c1a9fae8033ea8e33668194aff4",
-  "skills/token-cost-control-2/.phoenix/provenance.json": "c64f2fa0e9d735264bcc96e655e848c598a3759a685e1ccb0baab797547c3859",
-  "skills/token-cost-control-2/.phoenix/selftest_evidence.json": "9ab5f787a06381df0b59845af7f1516d4aa456a8f90f2c278a5bd1b28f58ae2c",
+  "skills/token-cost-control-2/.phoenix/provenance.json": "6207816861000cccc2b4aabd1034b6b0ac9a518ed4ccfabdbca4416539861481",
+  "skills/token-cost-control-2/.phoenix/selftest_evidence.json": "581d4fb43ef6f4d5996451a76edae7e3a8bb5443674f8dbf92e8edde699b51af",
   "skills/token-cost-control-2/references/creation/p0.md": "c3c5692fd33b40193af5bde12e73e48c450730aa5108e5e3b8b63935ffaafdaf",
   "skills/token-cost-control-2/references/creation/p1.md": "7ebcabd7829b958f8ba7ca837deb58c6b18d6d8789d07606b2f787798b3ff48d",
   "skills/token-cost-control-2/references/environment/p0.md": "abd9f14d99448cc3fa8ae49ba16806db6a181d9478ee4945b3e4d07ce9b49e50",
@@ -54,8 +54,8 @@
   "skills/token-cost-control-3/run.py": "14ac1fed6b0a8327cc90cb79fd832cc822408c8f49a983223c7d60fe7b80a32e",
   "skills/token-cost-control-3/selftest.py": "7aa2762d007066648c39c909ce474bf96dfa0d3737b3039ee65c0b3df351eda4",
   "skills/token-cost-control-3/.phoenix/originality.json": "72c0ff9fb2aedced7ecae0fa25769bba4bf1e80496f619ba4b38c39a2794dab9",
-  "skills/token-cost-control-3/.phoenix/provenance.json": "f709b0626d9239f8a3c86c6b4da9b92d2e3fbbdad41258290d81762de3b99a9a",
-  "skills/token-cost-control-3/.phoenix/selftest_evidence.json": "a1f07b38629f7af6fcedb784ee0053e817f6754ee115a2327002622b7590cff8",
+  "skills/token-cost-control-3/.phoenix/provenance.json": "1bbfed93e432a83fb528b75f119b3d6f99f9ca28902c29d241d6d66e316af85b",
+  "skills/token-cost-control-3/.phoenix/selftest_evidence.json": "2703b8e6bba4022573a87848cce154314870ee8ed48fe2c2de9dbda28dbd3dc1",
   "skills/token-cost-control-3/references/creation/p0.md": "b5c4cb0913c8ba7a8318519a1f97b63db9630757c963a0e5382d40fba176e2ae",
   "skills/token-cost-control-3/references/creation/p1.md": "25dee16b26f1c30dea73ad7c21852b01f542cf90e71dd23bef3b0da1c3a5eb82",
   "skills/token-cost-control-3/references/environment/p0.md": "720e5b94a3d65d72653b21ca801d6367eaada037b59187424b1eca8957ceae4c",
@@ -66,7 +66,7 @@
   "skills/token-cost-control-3/references/production/p1.md": "fdd8be9d64b600ebf920154e5df084991db4fe9b572c4625600b23aaa9943645",
   "skills/token-cost-control-3/scripts/main.py": "dd609bf8c827da0293783bb46c4b72cfe20a42caf070a434428f3dfee9c42dd6"
  },
- "sealed_at": "2026-10-18T20:11:57",
+ "sealed_at": "2026-10-18T21:04:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

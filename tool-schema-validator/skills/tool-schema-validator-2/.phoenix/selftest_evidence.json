@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:12:04",
+ "at": "2026-10-18T21:04:59",
  "skill": "tool-schema-validator-2",
  "slug": "tool-schema-validator",
  "passed": true,

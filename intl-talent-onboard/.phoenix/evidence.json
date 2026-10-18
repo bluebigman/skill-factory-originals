@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "intl-talent-onboard",
- "merkle_root": "846d9bbbbc37cfd424fb1e12c3f5c185eac7487d65731f40e6a4ce072353a0bb",
+ "merkle_root": "01c66a87a8c26cb3b83466326d30b1aa177386822cbfba517016f004fa4d1e95",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/intl-talent-onboard-1/run.py": "163a1e4a216801f7fd0c0b71d52ffbd067ca98f39fe66d22af96c132de1b4a97",
   "skills/intl-talent-onboard-1/selftest.py": "8d10fdabdb5bd1a1b4f9ef3169b0079398046303ccb3b34b3ee2249de320e5a5",
   "skills/intl-talent-onboard-1/.phoenix/originality.json": "7d6e8feeaa8ad6635508093953977bd877b987e4b24283003e94f87a7d506dca",
-  "skills/intl-talent-onboard-1/.phoenix/provenance.json": "3f6115110a88c88f83e1b083df24ea956418ffb0ed2602daea32b3c0632f3790",
-  "skills/intl-talent-onboard-1/.phoenix/selftest_evidence.json": "066ed3f8bd806515ff9f64b9d8da49c4a887828d98c3862b7d957c6a4b59a340",
+  "skills/intl-talent-onboard-1/.phoenix/provenance.json": "b4a7cb4ce6dc2f19994c32b964391874f948ff6b2fc7700238b2f3e02eee5b26",
+  "skills/intl-talent-onboard-1/.phoenix/selftest_evidence.json": "85744e7dbc805947b03eeafa44b28169752f3e293c2b6674635275b52dc5be49",
   "skills/intl-talent-onboard-1/references/creation/p0.md": "4f43868fb7d1b11511f53a6ff5cf7e40565196f0dda6b5c6a5f8caa959972802",
   "skills/intl-talent-onboard-1/references/creation/p1.md": "aaf4e45a7572b355c00aa0562569bb519703577c8f924080e9f70287fe90a307",
   "skills/intl-talent-onboard-1/references/environment/p0.md": "b47ad9fd44b31b699658f2f9531324b1303bc4d39d7498bc878968624ceaf8fa",
@@ -37,8 +37,8 @@
   "skills/intl-talent-onboard-2/run.py": "eeac2dcb666bc523882ac7c370872dbf6d0890cd5784622b014e3bdd4eea715f",
   "skills/intl-talent-onboard-2/selftest.py": "e4c9d38f487f4aa7778874843a1441493169a68da3767b0d12bff927408385cd",
   "skills/intl-talent-onboard-2/.phoenix/originality.json": "dcdef9bd19cea2b52a57f1dce65e11d130279ca9f3263e882044790aac47a90a",
-  "skills/intl-talent-onboard-2/.phoenix/provenance.json": "37d326970d755f5d1c55f375ec1380f2b5cbe5f1ee8ba93907cbd89f80f7bec9",
-  "skills/intl-talent-onboard-2/.phoenix/selftest_evidence.json": "ac7af799abd61cb06ca31cc27dd5493f87543c98c03f03a6715b4a09dc6c5643",
+  "skills/intl-talent-onboard-2/.phoenix/provenance.json": "b34cb286103fe40e9dd45c5dac5d6a84d31a90b2606552ba3355341ca258c17b",
+  "skills/intl-talent-onboard-2/.phoenix/selftest_evidence.json": "2889c783aa0bb113f799ebd75aa86b6fa7d14190be5420fb075f0261b3d98a25",
   "skills/intl-talent-onboard-2/references/creation/p0.md": "bbed1ec78a76da01c6f89a1638b440d242462da938957c8292d14c6b5dc5c00c",
   "skills/intl-talent-onboard-2/references/creation/p1.md": "5521aa8bd441fae57b69399109364df074b16f641f52399da3cfcd67cb9e5741",
   "skills/intl-talent-onboard-2/references/environment/p0.md": "ccc4b69282063e2d520101bb4bb42d697c9a59df4320229fca726efeae2f0a3a",
@@ -54,8 +54,8 @@
   "skills/intl-talent-onboard-3/run.py": "7ae5243f266451e567cebb6fb77506f6a9f72daaf0915628b83952dbdd454280",
   "skills/intl-talent-onboard-3/selftest.py": "2573be13aabdea0c82b1db8dc7d582cd78ab1e3cb74cc73aebb0bbde947bf4f8",
   "skills/intl-talent-onboard-3/.phoenix/originality.json": "1e12e24b7203c846f7df5205bbd0d4c944954168f51dd4544986e69f98900c3b",
-  "skills/intl-talent-onboard-3/.phoenix/provenance.json": "835cc15a13200964ceec491c00bbf0969b357793b2474a117c23ee147e6d3f98",
-  "skills/intl-talent-onboard-3/.phoenix/selftest_evidence.json": "7ad10c702ea8479519de60f8014e14b6d4d1e9e8830f781b0f9cbde708c18551",
+  "skills/intl-talent-onboard-3/.phoenix/provenance.json": "fe4509e68ed9a94422077aac157f607dc450c5e3e0a714ceea7779e19dc9d8e0",
+  "skills/intl-talent-onboard-3/.phoenix/selftest_evidence.json": "613596672d38eeb835c407bd4c9f3050f8f2a6161effb6270ab72967fcb5e5e7",
   "skills/intl-talent-onboard-3/references/creation/p0.md": "e8259212123a0ff685c0e790a81d2469b794135c03b93942f2192fb2e3349520",
   "skills/intl-talent-onboard-3/references/creation/p1.md": "49761a006740b17a18a7e2ce730fd0f2218ba6728d5078c6ccd95faf1b3c1593",
   "skills/intl-talent-onboard-3/references/environment/p0.md": "8d0b85076005ca4e70da614dddf90789186ae9c9c0c35dded82f99097065e32e",
@@ -66,7 +66,7 @@
   "skills/intl-talent-onboard-3/references/production/p1.md": "c38d73b65c89bac734c441253545dc830ba2f9886192c9ba00a7901ea8408c1c",
   "skills/intl-talent-onboard-3/scripts/main.py": "fb4967278bf9972c3e6c4438dd10e067e11e6cdd4fad1ff9bcdbd42cc4ab6a58"
  },
- "sealed_at": "2026-10-18T20:01:47",
+ "sealed_at": "2026-10-18T21:00:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

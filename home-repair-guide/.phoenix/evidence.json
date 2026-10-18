@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "home-repair-guide",
- "merkle_root": "1d15293baaeafe06334417cdbd23df8bed9eb346fd9f70d31aacfada238afb67",
+ "merkle_root": "6ac7ef46838c2a8e210d7a409bbff2cd391b9c2256fafdac0a888b3da300be6e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/home-repair-guide-1/run.py": "c0aa5edead6aed10449c27fe8c0e1e3daf6ae305b0eb6dbfd3f798d6a9ceb126",
   "skills/home-repair-guide-1/selftest.py": "7da2f6af2ee677a442a940f157d5293072b02a95007617152baf62e1a903d9ae",
   "skills/home-repair-guide-1/.phoenix/originality.json": "2244d2ad3b1f6361af5fa9e3920dfc01023ef5025b97ced89adf46e16f193a36",
-  "skills/home-repair-guide-1/.phoenix/provenance.json": "44222a694f67ed7d579cc78cf28677af139e0c461c82c028f82867c5a8d58374",
-  "skills/home-repair-guide-1/.phoenix/selftest_evidence.json": "79ccf86a8c1c98740e6fdfbaf92196195aed31c06a0a46fec6d2170094a4e8c9",
+  "skills/home-repair-guide-1/.phoenix/provenance.json": "0768844baf2f2a529be587a74ada2662cb820dbc17e91abbae240a543a171abc",
+  "skills/home-repair-guide-1/.phoenix/selftest_evidence.json": "f6508d7120a1e8b04de5d12af6490d92f3883583f68df6d196384f4370143522",
   "skills/home-repair-guide-1/references/creation/p0.md": "0a09199ff5e7483ce95367a63682110fb46ff1d86ac45203761839c6df464431",
   "skills/home-repair-guide-1/references/creation/p1.md": "d1ad2083aace5d0546672b37f23ddca776c9ed604057fa7d65a64fbeb34563fb",
   "skills/home-repair-guide-1/references/environment/p0.md": "f8b993e8bef768c21eb9503cc6c7a1c56c4d3b5a38e38bfced807825e13d4e68",
@@ -37,8 +37,8 @@
   "skills/home-repair-guide-2/run.py": "3808e3432d5b137ec7a624024d1e7e197033fc644c2721a22cc14bdd99381482",
   "skills/home-repair-guide-2/selftest.py": "70b0dc8ffb5de0301b0313ecc6e100f2dc74e25e6a1229e67c959cc4e429debe",
   "skills/home-repair-guide-2/.phoenix/originality.json": "a74f4b660194a4dc25fd2f1d16fbdfcc7d25be62df849063511b4ca4183cdb1b",
-  "skills/home-repair-guide-2/.phoenix/provenance.json": "f0d804427c69c7e60202dd67c54dad0b3a848dc86acac8444a99dcd824613392",
-  "skills/home-repair-guide-2/.phoenix/selftest_evidence.json": "6aef5cd3b511891d4ab74a5e207e72e70516d2f1333ae39100a95b412180016a",
+  "skills/home-repair-guide-2/.phoenix/provenance.json": "f7d26c288a59f76bde96824f9d4cd73a3994ee9e1b15fdf43482d60a93ba7008",
+  "skills/home-repair-guide-2/.phoenix/selftest_evidence.json": "8cabe630fb628f7d5ee63598e434cec402b16ecf02293e9bd4393a74ec860c93",
   "skills/home-repair-guide-2/references/creation/p0.md": "360a038c89461a78bb61e4498ac08a3420e6ebe0c920020db8651fd133bd147c",
   "skills/home-repair-guide-2/references/creation/p1.md": "8602cedeb347b6e5ed0250e1adfe66819f1256b99db675fe9f8ddb8635f9783b",
   "skills/home-repair-guide-2/references/environment/p0.md": "76a0b656b79bb9355ab9d043b71cee258112ec0967d5c62113b5a400ce86ff41",
@@ -54,8 +54,8 @@
   "skills/home-repair-guide-3/run.py": "76e977b7b971d6f256858b8e74e6fe373b0cf9de9568a1afcb5cbbd3ffd6229d",
   "skills/home-repair-guide-3/selftest.py": "1933cf17078145f3a69ac15f2d369651141d4b9a84cfd1b6d5e79f3d3f442245",
   "skills/home-repair-guide-3/.phoenix/originality.json": "2535e9ee51ee71dcdf0780a9124bdc05005003f7bf35927a8668010d79c96982",
-  "skills/home-repair-guide-3/.phoenix/provenance.json": "eb6b7a473f8ecfd860a6a1caa7e405f631245f48beacb40f2f2b4bc2a770159e",
-  "skills/home-repair-guide-3/.phoenix/selftest_evidence.json": "4d5fe65c680760d2f3ae469b2d821ab5645cfcff5a67aad3cb05c4140b9092ee",
+  "skills/home-repair-guide-3/.phoenix/provenance.json": "164b16ed1484926cb809162b987082ca74c3bc52457b1eec5cf4d88fe396b7c8",
+  "skills/home-repair-guide-3/.phoenix/selftest_evidence.json": "aa6d0f1279d3a240f709cf8c78951a3b9440f7ac3b912b41fd73b5906359f5e7",
   "skills/home-repair-guide-3/references/creation/p0.md": "36dd7c95eb8d088c8a370d70b24cd09d5cb85c2453cad1698957f0ce4904d94b",
   "skills/home-repair-guide-3/references/creation/p1.md": "e877954f91ff0af959444dde8ccfec74213a28dc1a69d90147412cd0b8af076a",
   "skills/home-repair-guide-3/references/environment/p0.md": "156d170f5d9665e825594794ab27ee4577294773472bfd605da49926f1345f50",
@@ -66,7 +66,7 @@
   "skills/home-repair-guide-3/references/production/p1.md": "16ce7a800610f17e52596fc890fe4f7296fc84cdc22e43a5af0262b98eb2e047",
   "skills/home-repair-guide-3/scripts/main.py": "3bfae167b8c2eb492b301cb5c8f3b42756217d087a47cd88b709f7a355c0e26e"
  },
- "sealed_at": "2026-10-18T20:00:46",
+ "sealed_at": "2026-10-18T20:59:32",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

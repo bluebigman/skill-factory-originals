@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:57:08",
+ "at": "2026-10-18T20:57:34",
  "skill": "doc-index-shard-1",
  "slug": "doc-index-shard",
  "passed": true,

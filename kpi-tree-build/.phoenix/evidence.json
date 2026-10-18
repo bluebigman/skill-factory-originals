@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "kpi-tree-build",
- "merkle_root": "8e7aeb37cdc558940eabcfe60ba80e1ff8bbb1d5705a21a74feb29f202cb914a",
+ "merkle_root": "94c4c906c4c1a0b5dd57582d6426a9eafcbd1bfbd00dd5cc84b1f6de0c33c2a4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/kpi-tree-build-1/run.py": "4981be9b2c4c5e7c63f5cc52cb2a0bc39e2befede2df0768cb1abeae41213f1f",
   "skills/kpi-tree-build-1/selftest.py": "12804fc1c7d4b1059b033eda600186ff41c8af0d35f443a3c580b9283804484f",
   "skills/kpi-tree-build-1/.phoenix/originality.json": "0e2c76c3a9c5cd7f195373e2e6f11083c4e49e87f53dc4ebe6dfc776b63bfbdd",
-  "skills/kpi-tree-build-1/.phoenix/provenance.json": "4b12df44dacd9566eabb2ad99a484d9a121ee0ed7d116b148bc11a4a88b5d46b",
-  "skills/kpi-tree-build-1/.phoenix/selftest_evidence.json": "5568e30062096f937161e3f52b92d50bf391b6a94030efa8d22f618772e5b5ab",
+  "skills/kpi-tree-build-1/.phoenix/provenance.json": "03ec9d877e2c75599eb45bfb9f09eeca81b689d8db72f2d79f8f5865d4251c4c",
+  "skills/kpi-tree-build-1/.phoenix/selftest_evidence.json": "55c459599507cba420cb5c2b3fd88420915ed154eefa84ea62bbecf8426ead7e",
   "skills/kpi-tree-build-1/references/creation/p0.md": "0d59a6f7c0837d400ad963a966c292109a75971292a4e7828f18bb564ef3dd04",
   "skills/kpi-tree-build-1/references/creation/p1.md": "dc7268380ecd4a32b57fa4abab6ecafcd4fe8831e875510341e59c8813812af9",
   "skills/kpi-tree-build-1/references/environment/p0.md": "c79b739f9f4c72ccb93eb5a9fd02b2abe9a4aa50aecce8c5fa12f6b5939a0214",
@@ -37,8 +37,8 @@
   "skills/kpi-tree-build-2/run.py": "7d210b03cd7fc3a3e5aa4aac585d9ccc8e7c18fbdb3ac345e2a3e2e688a9a488",
   "skills/kpi-tree-build-2/selftest.py": "d88f93625c780c2cef032712512250d534fbedd1c5068ccd48c8a7b3ff92c7e1",
   "skills/kpi-tree-build-2/.phoenix/originality.json": "569d6e88fa862173cd6f8914671c3fca7dd600c5e46b2ea7cc8ad6cd983030d8",
-  "skills/kpi-tree-build-2/.phoenix/provenance.json": "680e46406374a214b5c080ba4146bf90994cfd8d76bc82ad8ca4e37732b08cc4",
-  "skills/kpi-tree-build-2/.phoenix/selftest_evidence.json": "2ac26ad0dc15bb4d1b5b24b51d6ddef6f13c723b5c767929afe26ecbe7fb2d91",
+  "skills/kpi-tree-build-2/.phoenix/provenance.json": "2f3f38a282f3d26ead196bf264ff29f87b736ed7cd9ff700abd36d547b154b8f",
+  "skills/kpi-tree-build-2/.phoenix/selftest_evidence.json": "18eddbb622dff71dfa8a7196dd8c5b07cbeae08b30f71b38a54f9b4a98548581",
   "skills/kpi-tree-build-2/references/creation/p0.md": "cfbbea91de59998a06bb11de94925b2038e73fb23a31750bd0f2201de593ef33",
   "skills/kpi-tree-build-2/references/creation/p1.md": "94ea0b69c76192c0047b48bd757e1950f485af96024edb3ea9794791c73e0919",
   "skills/kpi-tree-build-2/references/environment/p0.md": "e333745803789c87d5092685cc83d4f7d3c706403d5e17f3f47368fe913ba79c",
@@ -54,8 +54,8 @@
   "skills/kpi-tree-build-3/run.py": "15263c292705bbf4afcc174b3aee16492398348fbe560b49214d85569d71ea4f",
   "skills/kpi-tree-build-3/selftest.py": "d9a6d0c9a6671faa6f57431b8888d5f56013f98b6fa89363724c9a14f040b9f2",
   "skills/kpi-tree-build-3/.phoenix/originality.json": "374848ed21e09aabef04b11a9c46a28122e8723a770012354098ce757ee53dba",
-  "skills/kpi-tree-build-3/.phoenix/provenance.json": "fc2cc2187a07a5151691ac17951d9e3a85c76824f4f594d3b1394913f11b4d6d",
-  "skills/kpi-tree-build-3/.phoenix/selftest_evidence.json": "fcb35480c56dc44ee9d500d78336e8515ebcaa5c91883fa0ec37ee4416840991",
+  "skills/kpi-tree-build-3/.phoenix/provenance.json": "1217eee4da126589791cd6da24bc724ae04697a8caef868a3e395eb06dfe0819",
+  "skills/kpi-tree-build-3/.phoenix/selftest_evidence.json": "3f482c175a42832c03c0d1c5d3e3e359aabc6f81d5ba0cda2007b2ddb8a00c19",
   "skills/kpi-tree-build-3/references/creation/p0.md": "b5e5f29a2ff516702bc876ea38ae1817e553bcb95e2122e9f7134c5babc3b295",
   "skills/kpi-tree-build-3/references/creation/p1.md": "64bf1279903ee52b4a1d8a1d877aead475dac89c812f514b1fa577cc8c226643",
   "skills/kpi-tree-build-3/references/environment/p0.md": "8680e02d314a21eeff32ffd8af8c78cadb030150898a8a01922303c49486da97",
@@ -66,7 +66,7 @@
   "skills/kpi-tree-build-3/references/production/p1.md": "8fb29a2284c7be88a0751515bd4576acff610d564b5e5a3b3182af6aa8e325f1",
   "skills/kpi-tree-build-3/scripts/main.py": "de2bd60b70b50612540b8adc9288b5bcf47372b425873109b628085602f95ea0"
  },
- "sealed_at": "2026-10-18T20:02:15",
+ "sealed_at": "2026-10-18T21:00:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

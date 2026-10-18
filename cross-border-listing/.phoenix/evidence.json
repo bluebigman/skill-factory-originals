@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "cross-border-listing",
- "merkle_root": "248056b6ffb6295bb2986caf185d060850f76eb9300df4ff153a58e556421100",
+ "merkle_root": "6c3fc309f1fc5ea9df309e5759772123db32acb1328ed995503f6342ffc08a00",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/cross-border-listing-1/run.py": "8535af4794b6b984392a1288b0de6318d09da7c8801686d944f8aa33a96c9659",
   "skills/cross-border-listing-1/selftest.py": "9e0c2018c42a553a425dc15ba617db77ed04f44f503f13d4f8cb1c5971b5e4fe",
   "skills/cross-border-listing-1/.phoenix/originality.json": "cbb5add25af7b8492e1912c4911f08f8a85de2babbf1c5c51531d247cc409253",
-  "skills/cross-border-listing-1/.phoenix/provenance.json": "da35023a93a1e05e255e7577b8544722203c7c5a6f191f4a726ddfa68e043c55",
-  "skills/cross-border-listing-1/.phoenix/selftest_evidence.json": "b4ef9f9564f6a71ff80318c3e36c8f39b2c463d3d7aa9f3921d7cfc0ebcc26da",
+  "skills/cross-border-listing-1/.phoenix/provenance.json": "005ddce04ef169f0baf88011bc086a3d38893e5c0ccbe9efe4e32f8deadf6a42",
+  "skills/cross-border-listing-1/.phoenix/selftest_evidence.json": "3ca91400ad52470dfae9e4d44e75b60b731dfe066d7a4600b37a134ed40c1439",
   "skills/cross-border-listing-1/references/creation/p0.md": "a9a58d27f6904e82b902db6bf97c4ab611405a2c8ebc3c160386ca39b686a87c",
   "skills/cross-border-listing-1/references/creation/p1.md": "bc2a81b9ebdd1c4db882ad9ae2f7fce42ed492e8eb380f6d97769a27c2459ec7",
   "skills/cross-border-listing-1/references/environment/p0.md": "b5f8e3324a099c3b235309af908c218ac864c7b2ba9aa76b3bcbde4a7c765bf6",
@@ -37,8 +37,8 @@
   "skills/cross-border-listing-2/run.py": "b807aa76f4ec5e08cb803687d8b988d717c163899941f21875469233442d8c31",
   "skills/cross-border-listing-2/selftest.py": "58713bcd742870079134030e601ce75566389e827921c9837f5fd6aee1209b03",
   "skills/cross-border-listing-2/.phoenix/originality.json": "d7abd6bba05a9edd7677cd0eacd46612995efedf3b8c0a4462213b6d22de8415",
-  "skills/cross-border-listing-2/.phoenix/provenance.json": "19b57936007e24e95d3114df71f3d8fb8e60876a09db5970d929bb32f2e2e1d3",
-  "skills/cross-border-listing-2/.phoenix/selftest_evidence.json": "78878a17b0ac4e1eaf87a3870500e456e49879f3dc96b005467d785bb2a712d5",
+  "skills/cross-border-listing-2/.phoenix/provenance.json": "15838f6353e00e73a812639afe59d9315cc29e710293b3469e54d17379c92904",
+  "skills/cross-border-listing-2/.phoenix/selftest_evidence.json": "5dfa06e43d0134932e5d5085a77237952ac3dbf4ed38bb8724f6ad5e11b833e3",
   "skills/cross-border-listing-2/references/creation/p0.md": "060dcc3085bef1d677fd71f59e5bebda184bddac445f35f442cef3216e709e27",
   "skills/cross-border-listing-2/references/creation/p1.md": "b2ab1f60a40852f5521034ab119768a4890a9b2af605c2e7921ea8bd958f44fa",
   "skills/cross-border-listing-2/references/environment/p0.md": "00409dbc9aac701f4a559c4f2de95c9b1b34d99d1db6e15364d8162ba9689385",
@@ -54,8 +54,8 @@
   "skills/cross-border-listing-3/run.py": "85d07d96b460dcc25802c125f3e2ffadcb99858593428f94f9f828dbd344ae1f",
   "skills/cross-border-listing-3/selftest.py": "f8646dbf0405b6ddafc3f6fe10cfe74812f3e5fa16b51732a9f97ed232d52072",
   "skills/cross-border-listing-3/.phoenix/originality.json": "67579eeb0597f2eca93b697a0a5f220183eef8e189d09aab68721125476639d3",
-  "skills/cross-border-listing-3/.phoenix/provenance.json": "fb16558e3625ce9e8954f7f1cdde908e7816545d7a97f78ed6e26bdb984ec317",
-  "skills/cross-border-listing-3/.phoenix/selftest_evidence.json": "ee34dacc9e1580dec35d8af5e0f35fe9ef2a277d94c90a43792ff303e0fedf44",
+  "skills/cross-border-listing-3/.phoenix/provenance.json": "2758f229fb22d226fa1fee99d5274c02f59acb54d46b382bdc230bee9630f836",
+  "skills/cross-border-listing-3/.phoenix/selftest_evidence.json": "0f8b7b6d87b2b06e358a569ddba39f070d7ce4ae3f8a9844a52d7d5c584ec2c7",
   "skills/cross-border-listing-3/references/creation/p0.md": "a10ece258c4a2010ed9eedfc33c638f5ae936064b23617a1f6bf42f8350e99c9",
   "skills/cross-border-listing-3/references/creation/p1.md": "7f73ec79ab65e56ccc9ba734a14bcf06a0dbe3d921829efd132e133a6547c662",
   "skills/cross-border-listing-3/references/environment/p0.md": "332aae118cfe8813f77b4818f555b9771170d4203e048424b96eae9e728752ca",
@@ -66,7 +66,7 @@
   "skills/cross-border-listing-3/references/production/p1.md": "a097aae7e4cc3a53c903cfd960e438cab51d2f9191f63a777bfab6f32f751613",
   "skills/cross-border-listing-3/scripts/main.py": "a8312a93d116db58d92afcfc0bf79c6b2f2f89486ae55e512a0f5bf198f5c137"
  },
- "sealed_at": "2026-10-18T19:54:50",
+ "sealed_at": "2026-10-18T20:56:18",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

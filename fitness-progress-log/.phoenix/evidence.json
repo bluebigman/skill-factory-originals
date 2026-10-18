@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "fitness-progress-log",
- "merkle_root": "13f1933d57ef45a78660464c9859d2bd6a0f0e7d8dd427ea439c1f5e4dab0996",
+ "merkle_root": "e38eda57fdd45332928bf090f9fe48e0a3089781890509a6ed77f892ac9e747b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/fitness-progress-log-1/run.py": "9681578e3c4268e957454220a555b772b83ab70ac4c0406e97828bc12d86c88c",
   "skills/fitness-progress-log-1/selftest.py": "15f53a0fd1dc5555fde4244eed5bf0817c3af83b6ac54aecacd4206ee7affecf",
   "skills/fitness-progress-log-1/.phoenix/originality.json": "cb05b3ade7fbf9c650f012dd65d08678488869216ac3c047ab639bae070ecafc",
-  "skills/fitness-progress-log-1/.phoenix/provenance.json": "15eb35c9da1060046066dda7affaf3737b1f752625e91deb8d010221bb5bd98f",
-  "skills/fitness-progress-log-1/.phoenix/selftest_evidence.json": "a795401a0c837fc2ee206af3d52d06b563b20c54727291b194e2705ab3ab27ca",
+  "skills/fitness-progress-log-1/.phoenix/provenance.json": "fe75d36861ad1e998e8d12662a0fce0dcf09c97c4d01f87d19740c84459313e0",
+  "skills/fitness-progress-log-1/.phoenix/selftest_evidence.json": "04d52bc4ff06c62e6f116564a1b5e76e971d15d86e9f7c50c12a24153609583f",
   "skills/fitness-progress-log-1/references/creation/p0.md": "f27f3200d25b386e372972415961fa660d71b3ffca0efbf8f2bdb2c3e64a1dd2",
   "skills/fitness-progress-log-1/references/creation/p1.md": "2d41be8043232389543ccd3459bb94c46e3f8ecfefa8714bed76b872f0e6c68f",
   "skills/fitness-progress-log-1/references/environment/p0.md": "ade91b4c74418ff28a817f2d38f8729df166e313bb2d80069d8a55db47b2746d",
@@ -37,8 +37,8 @@
   "skills/fitness-progress-log-2/run.py": "9d09782c50ab81960c8f2923d744133b65c2276781227adbc61fe4b45b2db19b",
   "skills/fitness-progress-log-2/selftest.py": "d7d55202b7ee7083fd4b6050377305d293d72b5bb62fff39460cd261928830a3",
   "skills/fitness-progress-log-2/.phoenix/originality.json": "f8d25ebe5a507867ab1d5f35d0bdda5d228f8fa4a90473af7f8eea833db1fd5e",
-  "skills/fitness-progress-log-2/.phoenix/provenance.json": "795e09550c6ec0824b3c614b5a4f11570c9304cfa38fbaed6e6bb1f96e181ba8",
-  "skills/fitness-progress-log-2/.phoenix/selftest_evidence.json": "756354694ed0db0469ebd4b1b1ece1f860440827c90826b7c852b39e0da5ffbe",
+  "skills/fitness-progress-log-2/.phoenix/provenance.json": "4a4065fb1956f0c98e54b68e90a9b7f8ec584e01647b01be2f75ff70512668cf",
+  "skills/fitness-progress-log-2/.phoenix/selftest_evidence.json": "3153f673a619f6b40eca1c59c31a80fe76415ad033fd8ccef98247f74ee5bebb",
   "skills/fitness-progress-log-2/references/creation/p0.md": "12aba0510c32d2d8b2f4a38f6b22a6b08fd24b38060908bb32a838c610cd5849",
   "skills/fitness-progress-log-2/references/creation/p1.md": "063c4a17f9db6445a515f64fa4daed445ad8b85af2acb11f39b4da09cada5393",
   "skills/fitness-progress-log-2/references/environment/p0.md": "1f5eecfcd4d9056d04cf98de7d60927d857f87da8dbdcb787125b6cc6771fa11",
@@ -54,8 +54,8 @@
   "skills/fitness-progress-log-3/run.py": "8331fee82c3791225600bf1792ef793d41097fb8776630fbc4ab63c0f3ef6351",
   "skills/fitness-progress-log-3/selftest.py": "72efeea631447b2c4abe285a99588dcca6c7a339fd69ab524d3c2d6524f51aef",
   "skills/fitness-progress-log-3/.phoenix/originality.json": "2b9b8de6cf8f1f2a6db71425a96a9b06500f0e83a45380e1437fe8fc6355c858",
-  "skills/fitness-progress-log-3/.phoenix/provenance.json": "ac0c584c88fc17bd9b8ed53f52dcf8d90eff53a5d2190650650d6796f97eb58b",
-  "skills/fitness-progress-log-3/.phoenix/selftest_evidence.json": "fe0a0b6d8dd0cc802f90c2ced9ad0679dfe5bad829b2e0e9e5545b39aa81aef5",
+  "skills/fitness-progress-log-3/.phoenix/provenance.json": "627897ecc8f59bb2c2596a28f450d971b6e2370d747018d4ba2d95a9c06fc196",
+  "skills/fitness-progress-log-3/.phoenix/selftest_evidence.json": "62e200def2980c12ad19afebc7f64896facb431a1b670419dd763557f398d20c",
   "skills/fitness-progress-log-3/references/creation/p0.md": "9c0dcef417242e43df98d37f01c602835092c8d51ec00bc7d49358ab4b38a829",
   "skills/fitness-progress-log-3/references/creation/p1.md": "284fda59ef3bd87b6197810d8c0c94c13d8216d4eccadaedd1c399938b6104a0",
   "skills/fitness-progress-log-3/references/environment/p0.md": "4c5c1c0977df844d926c3ee6bd464fd042c2a037978e21b21caa120a3158709e",
@@ -66,7 +66,7 @@
   "skills/fitness-progress-log-3/references/production/p1.md": "69a320eb6b8325c1823635b382c5661e157c80d53ca97378c38ef00862c2d167",
   "skills/fitness-progress-log-3/scripts/main.py": "de79c3c28c466cb64f3502de4a078e25154f8035e79ad8ac86751273bb79041d"
  },
- "sealed_at": "2026-10-18T19:59:26",
+ "sealed_at": "2026-10-18T20:58:52",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

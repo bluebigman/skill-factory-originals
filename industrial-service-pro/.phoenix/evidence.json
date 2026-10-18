@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "industrial-service-pro",
- "merkle_root": "3995d3b64e6376f7346c45305f94f8fa082a2ab8a14b94944b596eedac61eb3c",
+ "merkle_root": "21490c5e7c1662ae376febb9683d9a1c69305e20f60884c0eef655c0aa9283e8",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/industrial-service-pro-1/run.py": "a9308495cf35717d2b4239645961ebf51b91fb467243525db41d5e756bb4af05",
   "skills/industrial-service-pro-1/selftest.py": "260d9bd8e2281a8658df949a450b7e77fbe5a7c9177b7f39b548be9e17ae16e8",
   "skills/industrial-service-pro-1/.phoenix/originality.json": "8afd69cd71f0d34f6e3049054b86789dd25ae5678a8c8fd8730fec94afda30be",
-  "skills/industrial-service-pro-1/.phoenix/provenance.json": "b6ae15328640187c97892a3b164a7264bb35e704d1c9f9cb65431e22bfc15ec5",
-  "skills/industrial-service-pro-1/.phoenix/selftest_evidence.json": "42f4149806d1ac41a5ace713427773f3d303d4e4cac9e3df3b830641eda350bc",
+  "skills/industrial-service-pro-1/.phoenix/provenance.json": "fb2e7e1067c1781c60be49af2d349a05ba5dfd1e740e3140006f87a9a3eecb6f",
+  "skills/industrial-service-pro-1/.phoenix/selftest_evidence.json": "9eca3a91bd3685ff2afb0a5158a9f8636d7f3bdc6efbda747011a88121a23f83",
   "skills/industrial-service-pro-1/references/creation/p0.md": "43fcf26ad4d51a4fe3c053b895e490c52897714af0cc0f21d2215795b98fac90",
   "skills/industrial-service-pro-1/references/creation/p1.md": "525d6e66f9ab21ac6b17992a7d6461405d4bb92b6f45e899c840de1011eefad1",
   "skills/industrial-service-pro-1/references/environment/p0.md": "c41da05ffee97d6db971b98ebb2f9f18727d2a157593d588fafbff136b3b9bfc",
@@ -37,8 +37,8 @@
   "skills/industrial-service-pro-2/run.py": "fd6e2880dc7a865ec6747ec6407e7fcd724b066e3d3b50f2e2f52f933266dec8",
   "skills/industrial-service-pro-2/selftest.py": "22d2b4e79b59ba6516a4945871689d7465bca074b65f589fc22ac846478410ad",
   "skills/industrial-service-pro-2/.phoenix/originality.json": "c3a25425f137912940ab2ece6a91b83efe17d3687bec6698f07f49ffe6febc1c",
-  "skills/industrial-service-pro-2/.phoenix/provenance.json": "0782400cffa967b8e7dab1f040def72944a86042382f80a88571b344c868b9b2",
-  "skills/industrial-service-pro-2/.phoenix/selftest_evidence.json": "5477028f8fd1f5df1744afc83f0a3defd343c414a773e463d05a9f231ba63322",
+  "skills/industrial-service-pro-2/.phoenix/provenance.json": "ac3c1177cc49f2810464bf205f3a159815ffc77e628839bce030161bc7ef9e17",
+  "skills/industrial-service-pro-2/.phoenix/selftest_evidence.json": "6e2752a71245999e120cc26b07d6acda9cb973ee5abaf675b13e0bbe2a79a743",
   "skills/industrial-service-pro-2/references/creation/p0.md": "4b7a924ea5813955c0175e9cf8efa675af9308a97b83dc215b180918c0f96cc9",
   "skills/industrial-service-pro-2/references/creation/p1.md": "3d5779104fadaa2f6d5d45fa911454fd8048774517bb35b21497bbce43f675bf",
   "skills/industrial-service-pro-2/references/environment/p0.md": "1cc231c0ae960d9fa65c3c638b98a15f0dfa7a2f585da7e44c1cf86e6852236c",
@@ -54,8 +54,8 @@
   "skills/industrial-service-pro-3/run.py": "793357dd2fee1949538d292337d5c9c2e74c49ea59d0d56b48bab58cdb08a304",
   "skills/industrial-service-pro-3/selftest.py": "234657a59768c6a6ac14ccfe1e7b0b79f8f4a8722caa6f90f927ed8eeb757d8d",
   "skills/industrial-service-pro-3/.phoenix/originality.json": "08ee09a51713d1c95665abe31741f70ccdedcedcd1244a0f841f03ee7260d974",
-  "skills/industrial-service-pro-3/.phoenix/provenance.json": "4c55debde0c34bce8857f463e02e22db8dbe671b25b8df9403e44e1530f934bb",
-  "skills/industrial-service-pro-3/.phoenix/selftest_evidence.json": "ea70d71a6b3da33351198739e7b9253062a1d4649b992f7f8e9f5d578335c4d9",
+  "skills/industrial-service-pro-3/.phoenix/provenance.json": "05c8ef19477f3d230d95b591a85dafa94afa1c4e638e0cf1e9ce097079249073",
+  "skills/industrial-service-pro-3/.phoenix/selftest_evidence.json": "8c8b6bb592e10cd2b5576b4da2543edf2b7e9101ff0d53500b7b0cd65fe3491d",
   "skills/industrial-service-pro-3/references/creation/p0.md": "e59a5451e344837da08296c26a8012b57ed8b89aee64b8c1a086544dfc8f15ae",
   "skills/industrial-service-pro-3/references/creation/p1.md": "f6a85942228e09b2d579dca23751c3ce0d979f4f8938342e53c52763dd816e16",
   "skills/industrial-service-pro-3/references/environment/p0.md": "89266c39fe7819e25923ec7cfc4c77b0d16160530907808a843c1bf227af7ddb",
@@ -66,7 +66,7 @@
   "skills/industrial-service-pro-3/references/production/p1.md": "d112df61886f7b9ca380287578361478225a822a46a6bf080ad9bfef8817a323",
   "skills/industrial-service-pro-3/scripts/main.py": "c2621c1297a11cfbe27d3cfb981eef7a85e42cff6fa6d5cf9a250dbd4096cd6d"
  },
- "sealed_at": "2026-10-18T20:01:23",
+ "sealed_at": "2026-10-18T20:59:47",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

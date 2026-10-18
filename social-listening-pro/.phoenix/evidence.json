@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "social-listening-pro",
- "merkle_root": "07bfd3438f2315c7853c4e173454d050d1565ae1cffad761f56423dfe6a76749",
+ "merkle_root": "87b08a8d35410b4ea836cf47941dfccd80c960eea06808eb273d2a0286b822a4",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/social-listening-pro-1/run.py": "5d4b27b0115009219da725949606a049512151f1c33d6d3d13f0855c39e8661c",
   "skills/social-listening-pro-1/selftest.py": "8e9ccfcf67f64f79a8aada43a2f851fe45228699ee59ffbf250d01130c23c3d3",
   "skills/social-listening-pro-1/.phoenix/originality.json": "e335af09fe5d63fe948826aa6e4cd8a7dfee06b98f140f49485e76c44b844945",
-  "skills/social-listening-pro-1/.phoenix/provenance.json": "698915547d5209805f9cd5d37d28228b366c18094a8e37b44fcb7a7dbd0b4be6",
-  "skills/social-listening-pro-1/.phoenix/selftest_evidence.json": "e11dbb256fbb6316271a4815e1f6327cc4134cdf448f6103900093b48c76ba7e",
+  "skills/social-listening-pro-1/.phoenix/provenance.json": "2bb62498bf273fc38a4e0744e4fb33afca5c1fc00c26cc4c95ec0a96e248665e",
+  "skills/social-listening-pro-1/.phoenix/selftest_evidence.json": "361e06b86e18bcb503b79844f8b5eb100f92b7398ef7a2656db2cd59c6d2f799",
   "skills/social-listening-pro-1/references/creation/p0.md": "7414a0bc2b80e942149aa6f1cfc8fa147cb098bf34eed90e956d0e80dbe4abd6",
   "skills/social-listening-pro-1/references/creation/p1.md": "3b33e31a79130ce67e88bdd05c247359574310cfe5d2d55981f0245bf412c60e",
   "skills/social-listening-pro-1/references/environment/p0.md": "976aa7a65afe046123c939b2e17b4992849e05276d3ba897b3ea0672c1c111ab",
@@ -37,8 +37,8 @@
   "skills/social-listening-pro-2/run.py": "cfbf17d534b081a159cc50513d12d3aa2d11ee380f3d2e9e231a1a900b84a85d",
   "skills/social-listening-pro-2/selftest.py": "9ac489a1d47b4a9f9ca1932f3ebd7a0939ad9ab5a56aa6d2a33d87cb7216ecd8",
   "skills/social-listening-pro-2/.phoenix/originality.json": "d42b8ad2748886112460b370f311490af742ed35a923a049818da508bd46eacf",
-  "skills/social-listening-pro-2/.phoenix/provenance.json": "477d71bbb5d32b338ab07105309e86654fdbedcd62c6e28d2b65b159e3c4195e",
-  "skills/social-listening-pro-2/.phoenix/selftest_evidence.json": "d1be3c38d6b14403cf6e14144c8f8269bf3c4750a1cf245bd105a4a1bbfbe6fe",
+  "skills/social-listening-pro-2/.phoenix/provenance.json": "2cb63e7f105f98059e005d5b63e4f948a3556a61240fda2ad34a180c8e85414c",
+  "skills/social-listening-pro-2/.phoenix/selftest_evidence.json": "030e1507e05db5de14169517f39b45afb87b063dad3800ddd5e37a8ac7db0a9b",
   "skills/social-listening-pro-2/references/creation/p0.md": "9e35967fb381bab20157b76ae7591386df880deb4fe486c1633d25791bdfd464",
   "skills/social-listening-pro-2/references/creation/p1.md": "135d1ac4858f9bd999878ca542768b7a178a75107a1dc9b3a4480a99371151df",
   "skills/social-listening-pro-2/references/environment/p0.md": "1b63eee8f3d9d32039e37ab7db039544ce5befed652a474b3463ef6b8bc97880",
@@ -54,8 +54,8 @@
   "skills/social-listening-pro-3/run.py": "e6c3f78161870745c04f816b8fe9e74da98eec35f1591c5e6930b2d47f16a919",
   "skills/social-listening-pro-3/selftest.py": "1539d98c7d2a444b0547644f25b0b1c3eefc144f2cee0e9094fbc2a5f4ee28af",
   "skills/social-listening-pro-3/.phoenix/originality.json": "037c3a76938d706e6fce49c9dbbec29944cf5af9fe5de6fd31cf095577fa4a14",
-  "skills/social-listening-pro-3/.phoenix/provenance.json": "18412dc90c5eaef78322783ea9fbe4d32d18874ac0ecc28e7b64e4091eabb13a",
-  "skills/social-listening-pro-3/.phoenix/selftest_evidence.json": "7079ca8f461c604de71585313c48f9437bb10b253ba364c15020261226c46d30",
+  "skills/social-listening-pro-3/.phoenix/provenance.json": "1e87fc264c4721fc1063ba12c98eb9fae57c12daa505e8ceaa80a8f2222e09d6",
+  "skills/social-listening-pro-3/.phoenix/selftest_evidence.json": "f9a2ca8ec92b098c7625aa50b4c57e8475c8c0c9756535419f3c020335bb6f54",
   "skills/social-listening-pro-3/references/creation/p0.md": "272a8f6b9c70d22e6830e9ad67dab909f92f3525582fffe01abe9a9c172c3a49",
   "skills/social-listening-pro-3/references/creation/p1.md": "86f80a80b7dac163640019ff8c073d129db4a290f45608845a9ead9ee9a2b32a",
   "skills/social-listening-pro-3/references/environment/p0.md": "6c9cc3ebefe343fc85d87641d97289783025c4bce267b9cc5602230edd214269",
@@ -66,7 +66,7 @@
   "skills/social-listening-pro-3/references/production/p1.md": "591711320755d0bb6e753d2de9fa8f7c945cb5a9b5405199347630926fef9d78",
   "skills/social-listening-pro-3/scripts/main.py": "1d81c3e9d2a2ea3914adcebb5b8074169945b30266c0f33653a6ff14372ac586"
  },
- "sealed_at": "2026-10-18T20:09:51",
+ "sealed_at": "2026-10-18T21:04:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "marketing-mix-pro",
- "merkle_root": "c7153382bd4530ad08b961176da5c9cc37a0cfd9be39a3e30921dae1aa6a74ce",
+ "merkle_root": "31a0734d664c03677bdb51bb85b2d5d3fee1754ec91f217c3086f80fee967ef6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/marketing-mix-pro-1/run.py": "bd6c9f6f5aea82828ff3c07bc24721375a67f7cae7a2f3d1b8eacf4cd61ff8d0",
   "skills/marketing-mix-pro-1/selftest.py": "63bfaf56c9a0d49549c28068a26fe1a7a9a71ec72715d948fb6102c6bd0e3308",
   "skills/marketing-mix-pro-1/.phoenix/originality.json": "cc5eaebf437d77f600c935df382b9199e3876eb84f0b39cb9bbe086891c27add",
-  "skills/marketing-mix-pro-1/.phoenix/provenance.json": "8e4170eacd6af65e24224fad282955264ecdfa9f75fd0ecd65a563b1862c6351",
-  "skills/marketing-mix-pro-1/.phoenix/selftest_evidence.json": "6826424f1c0ec43c0f08d1d0c1b6f00f1d1852d915e093b0325f5085e94a1f51",
+  "skills/marketing-mix-pro-1/.phoenix/provenance.json": "d5805e7af4262573822797fb4d5812c308cbd439c0a66cf8a8a34eb8e318ec8f",
+  "skills/marketing-mix-pro-1/.phoenix/selftest_evidence.json": "8e5d3cbb04a0e2814d93a98c18bcb19e3be8b602db4b0c26e25260b58f926983",
   "skills/marketing-mix-pro-1/references/creation/p0.md": "862cd3be75ebed193826cf23d1f5a60ffd7a0c28ddaac6fe9b0a269154f69794",
   "skills/marketing-mix-pro-1/references/creation/p1.md": "e77fcb7a311c7a8da04b46d5957ca729d714fe8b428d822e40fd99ba5cb3c337",
   "skills/marketing-mix-pro-1/references/environment/p0.md": "a48e1daaf7a45a83639887d9ccb38db670b3b90fd5216740803bfa88cd9223d5",
@@ -37,8 +37,8 @@
   "skills/marketing-mix-pro-2/run.py": "bbe8d40f72a866f6d568bc6f832f8cb8de8f720a1f5fb9366da8c284056f6654",
   "skills/marketing-mix-pro-2/selftest.py": "68aef7d35d748589310fce66eff37385e69ab219235f2c6d5e2f41eb369a2c8a",
   "skills/marketing-mix-pro-2/.phoenix/originality.json": "cbc04d23699d6b3a6b25ca957e1b6b0156b87472703414fa79563812e8b09658",
-  "skills/marketing-mix-pro-2/.phoenix/provenance.json": "6ae6f9819548bed435c7f0c77690d4a3dfc5f3d1515c53db1ef75b94b6df764a",
-  "skills/marketing-mix-pro-2/.phoenix/selftest_evidence.json": "41c25957c962bf70b5e659f66f691e98e45a2e7a851d872cae0dd78d762b0193",
+  "skills/marketing-mix-pro-2/.phoenix/provenance.json": "44e2b7f2f4a0fbbe8fbce691182dc09018823d36f08bab12cac78422da514d11",
+  "skills/marketing-mix-pro-2/.phoenix/selftest_evidence.json": "f0747493145c51562faaf711140a9d123fa4ba58834ba243e0ce9bc8b61bb46f",
   "skills/marketing-mix-pro-2/references/creation/p0.md": "dbbfbec11d890e6e12e89bcc04e9d36a8d972a601ba8d563bd5fb6990412c10a",
   "skills/marketing-mix-pro-2/references/creation/p1.md": "a629f4b261bb92d07a2b01457bda3599bef58a4c58104cf03e5ac1c832aae746",
   "skills/marketing-mix-pro-2/references/environment/p0.md": "4856701d18a41c9a52e55d82e2573fd28d650590d1957b478a09f12587fe34d6",
@@ -54,8 +54,8 @@
   "skills/marketing-mix-pro-3/run.py": "7dd49ba08f3f52d373bb72c5061f6fc3990fc95815e4aa57790d20d72b8da7c4",
   "skills/marketing-mix-pro-3/selftest.py": "14beb85dabe99e674b4aa15b69d8cda8189afb20daf8d1d7da03a818f51620c1",
   "skills/marketing-mix-pro-3/.phoenix/originality.json": "280701ff2325201114757d23a24dac68d18df0590b0ab9dca9e4ea21c43d87f8",
-  "skills/marketing-mix-pro-3/.phoenix/provenance.json": "4ac02cff4036291fecca9953da41a69d979ccb06ef0e82ff32c3cb2bd633e1cc",
-  "skills/marketing-mix-pro-3/.phoenix/selftest_evidence.json": "09897fc92a2e0de50b92a0aa374c1e30c3733d97e1d6f5f8fed05d7acc69119d",
+  "skills/marketing-mix-pro-3/.phoenix/provenance.json": "483b740a8a5a2407aa7b9d0506fde58c90f4e8a25002b96cd882e384fa14ebef",
+  "skills/marketing-mix-pro-3/.phoenix/selftest_evidence.json": "0f1570504ead10a6a7ca380f55171b0c0bff366815346a4e66e72b729770d27f",
   "skills/marketing-mix-pro-3/references/creation/p0.md": "68f793f1b2d5a0528dd91f4e8a8d1d771f178b23e78fb385ab41f024f549bc0d",
   "skills/marketing-mix-pro-3/references/creation/p1.md": "8cd97d369e61d3715d63e761aab4b14b28f75e61d3490e706e529f739978853a",
   "skills/marketing-mix-pro-3/references/environment/p0.md": "e0debada47e5b4d126538e84d475423436b83d43150eb69735580af85d4031dc",
@@ -66,7 +66,7 @@
   "skills/marketing-mix-pro-3/references/production/p1.md": "8129eb4c42155c5f153b6a32ef6e2c4572d58e26e721723dc834a2532e0a1d66",
   "skills/marketing-mix-pro-3/scripts/main.py": "827148da81c181169c861092cab85e4fa4eb7f61cd13c08f48fef13ac680dd1b"
  },
- "sealed_at": "2026-10-18T20:03:09",
+ "sealed_at": "2026-10-18T21:00:41",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

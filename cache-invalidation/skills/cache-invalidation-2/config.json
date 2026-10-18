@@ -1,0 +1,72 @@
+{
+ "name": "cache-invalidation-2",
+ "version": "2.0.0",
+ "domain": "缓存失效策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "主动失效",
+   "then": "写后主动失效优先",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "键含版本",
+   "then": "键含版本防脏读",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "过期兜底",
+   "then": "设过期时间兜底",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "穿透保护",
+   "then": "空值短期缓存",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "一致性验证",
+   "then": "关键路径验证一致性",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "主动失效",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "键含版本",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "过期兜底",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "穿透保护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一致性验证",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

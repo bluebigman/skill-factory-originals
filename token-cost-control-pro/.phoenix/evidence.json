@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "token-cost-control-pro",
- "merkle_root": "54f77b2885efdbc191cd8d4f475e7e8662aa443176a2db00feea2f38bb8113f9",
+ "merkle_root": "0a34e39ca6d88c6e3363a55ebdebbae93e10f4ffe2c01aebfa2a018875c26d64",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/token-cost-control-pro-1/run.py": "7e4a842ba7e16fb377dfceea0f120bc0892ca2368e0c723be52bf2b4268a116a",
   "skills/token-cost-control-pro-1/selftest.py": "06f2f37187c44ded05b8283ba307a843038bde2422ec07ae8f9df96560f6d897",
   "skills/token-cost-control-pro-1/.phoenix/originality.json": "6b856d3609cc4c96a132d50560db224a940532b04bc91eb05d7e77a7339e3262",
-  "skills/token-cost-control-pro-1/.phoenix/provenance.json": "72272efa62b8859fd3e1dd915495db0c34d83ef7a036ae8fb5b049140835340d",
-  "skills/token-cost-control-pro-1/.phoenix/selftest_evidence.json": "1f4a2b628771b62ab6549f24510f5bc962e7004de122d6fa56f39c87947f79c5",
+  "skills/token-cost-control-pro-1/.phoenix/provenance.json": "c90bec68f07eee7f095d1295a0b73bffe7435451a92c50f788680fc8d74b9c5f",
+  "skills/token-cost-control-pro-1/.phoenix/selftest_evidence.json": "00eafb01d497ff97c9c194d1e0c1c70b7fb17200bb1d0437c878e54d2d73e3b0",
   "skills/token-cost-control-pro-1/references/creation/p0.md": "cf23ef4ea50b00092ac108314d728fe945b50d2315ddd0772a9c725edd6c4225",
   "skills/token-cost-control-pro-1/references/creation/p1.md": "4a7834ad0a20445e299accefb2c22df51c10d17b6d1363dc3112be135ea0ee5e",
   "skills/token-cost-control-pro-1/references/environment/p0.md": "e8747d0999e272a497f93980323f58809626bc130338bb05e4550bf8da03dc63",
@@ -37,8 +37,8 @@
   "skills/token-cost-control-pro-2/run.py": "0f76440ebead6f50ef32ad11cc92a184c15c3ae17e023b5072163cb8f35fac88",
   "skills/token-cost-control-pro-2/selftest.py": "3c2add1464aa1a25684723222b603d1f4999e8cfd644d14e59c81e9430bf76de",
   "skills/token-cost-control-pro-2/.phoenix/originality.json": "932afc46a4a91b96a7b7beb587fb0a632482634e075169be0fd760722bd78fba",
-  "skills/token-cost-control-pro-2/.phoenix/provenance.json": "9996d7fe515a98290956519e683f374c29f4447138a16f7e482529462817acf1",
-  "skills/token-cost-control-pro-2/.phoenix/selftest_evidence.json": "c51b5fa96d5aa6cc5eed05167654195723de3ce3bbfa899ced488bb5efc7dd19",
+  "skills/token-cost-control-pro-2/.phoenix/provenance.json": "831d89607652c1e2db6eb62b9cb813e60df7f011265599f75798a2094f3da212",
+  "skills/token-cost-control-pro-2/.phoenix/selftest_evidence.json": "dae40668101ed5c93a9cffe4aa4f6e1086d46d95b2cc323bf4fdacf781a3b9c9",
   "skills/token-cost-control-pro-2/references/creation/p0.md": "1d62c6fc88f94ab360e33d94806ee116b2f57ec5b6301bcbedcbc0b067a35014",
   "skills/token-cost-control-pro-2/references/creation/p1.md": "f30a72484037a96253769ab60d4606b59793678eabe1ee3d67ccb3f37a66be74",
   "skills/token-cost-control-pro-2/references/environment/p0.md": "e11c2a634051d3061bf2231c972d124765096966b8f87d9a64d79d9b7ddab12c",
@@ -54,8 +54,8 @@
   "skills/token-cost-control-pro-3/run.py": "2a5e64956d92313b8f766a43b2ad3c721fe276983f980b1d4127ef02108d4040",
   "skills/token-cost-control-pro-3/selftest.py": "46e172ac8b822aa993c627ebca492966c31046fadf00ab9ef74fcb47982dcea5",
   "skills/token-cost-control-pro-3/.phoenix/originality.json": "9e57e2dad11ae376c31b49f8dc1850d3230b6fb4512feeb3c3700a5bee6c1866",
-  "skills/token-cost-control-pro-3/.phoenix/provenance.json": "8ee1e8a39b068df2b940519bb45249d9283b49556560e098c6a5ef696943de64",
-  "skills/token-cost-control-pro-3/.phoenix/selftest_evidence.json": "aa59c83e182d21bd0fa092771c0492c3e9647e5037b0a3522c95d0158b7c01bd",
+  "skills/token-cost-control-pro-3/.phoenix/provenance.json": "68088beca16a2cfd7631b3cad60b2bfbbaddab2562fe0abf7833128d389941d0",
+  "skills/token-cost-control-pro-3/.phoenix/selftest_evidence.json": "4fde7a92be97032998b30b9605baca4f904e0bb7aee5429fd7b036c975b00981",
   "skills/token-cost-control-pro-3/references/creation/p0.md": "fb2a67bd0d086ee623a21165d0063b34155e4c26df76a02d6a75936e487b4b5d",
   "skills/token-cost-control-pro-3/references/creation/p1.md": "68ca0a3f84202e562fec5531c0d270787fe46d5404ad4dadfb8dcfe9f46613b3",
   "skills/token-cost-control-pro-3/references/environment/p0.md": "50b1a4e5ee9a3eebb0f6ca898f5170fa03823843f84abed99c71ca8ad0c452a4",
@@ -66,7 +66,7 @@
   "skills/token-cost-control-pro-3/references/production/p1.md": "4113811355e98c8a218ebae93a9efdc5a7bc1167b215f35ca415842811c673d7",
   "skills/token-cost-control-pro-3/scripts/main.py": "ab1aeec7c63b9ce908cc8caa65379428a2f0058e32caea11e042b9be51fc2502"
  },
- "sealed_at": "2026-10-18T20:11:56",
+ "sealed_at": "2026-10-18T21:04:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

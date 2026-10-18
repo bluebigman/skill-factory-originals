@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "franchise-standard",
- "merkle_root": "778acb6a76455fd7e0ae8ca2fa8246425dac32952589b95709e8e17539b29dd6",
+ "merkle_root": "81f4ca7444ea7a893f604d4439052005a29ef36945f49dc797c62b55fba05b9c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/franchise-standard-1/run.py": "cd972f9c1225bf12558c2991259d34b879d9ff56b18292986f6fa7aa53c6f1bd",
   "skills/franchise-standard-1/selftest.py": "921937664916f875f4f8f2057644aaf07711f102f1a1fd13fd26a065996328d8",
   "skills/franchise-standard-1/.phoenix/originality.json": "f9126eaf4e108749fcc6f54cef9c64eea471e3130b41e329d6bda44a85fccd90",
-  "skills/franchise-standard-1/.phoenix/provenance.json": "6ef517b8240d85783cb06a7e695d55eeb4a4d0f22b96db9b0f2ee13f9482941d",
-  "skills/franchise-standard-1/.phoenix/selftest_evidence.json": "175b07fc2a22fe282e3a48fa1bc0eae29841055827f07440ebb85e50622a5748",
+  "skills/franchise-standard-1/.phoenix/provenance.json": "8e60195449ce864f8a197f435bca4676949f3ed0de421a813f4f8f3046325a17",
+  "skills/franchise-standard-1/.phoenix/selftest_evidence.json": "31beeaac38d82249d08496442fd0cf134f73506a09e4059644766cde45646f60",
   "skills/franchise-standard-1/references/creation/p0.md": "f1f1f94f098f2a543d0c2e2567abe8975c1ebae6d2635d4c2dfbd1c494efa6f9",
   "skills/franchise-standard-1/references/creation/p1.md": "171b64d22f15d95f7fc68ff23ae0a9809175edf695870d69b4ee6cb6d210ba95",
   "skills/franchise-standard-1/references/environment/p0.md": "7b3542c9b97bc4ffbf9ed7605044d53365c63083d0d44970c03931a67618c71c",
@@ -37,8 +37,8 @@
   "skills/franchise-standard-2/run.py": "89eca96cb46dea4f8dd21af8602770f3d9be4b6df94f3448030ce6fc430f56c4",
   "skills/franchise-standard-2/selftest.py": "172e6f53f35c93dc02d02188fc70eb126af9f505e0cb49d2281e08dfe1763b42",
   "skills/franchise-standard-2/.phoenix/originality.json": "eccee38fe8ad9464edea315eb7b4df79e384acf45ac79f35deee4175d99de6b8",
-  "skills/franchise-standard-2/.phoenix/provenance.json": "724e96e67541c7c0c6e0cb8b06da9fd8331b3665dc4cc373eff08a22e20a4ad1",
-  "skills/franchise-standard-2/.phoenix/selftest_evidence.json": "63c0a5bc10f34b8c3035bd8aa06ecb4cd8344d38adcb3a881b8f70b790807257",
+  "skills/franchise-standard-2/.phoenix/provenance.json": "0edd0a097077b3effa5c5718b717e8c150bd6311e7e527151514dbb91980dd05",
+  "skills/franchise-standard-2/.phoenix/selftest_evidence.json": "4779aa73d1ff3b2a4d8ded683fba6f956d833829266c1b932d0c75e2ee1860d1",
   "skills/franchise-standard-2/references/creation/p0.md": "9fe8b8e0be461362649409ca1ab7a1eabd2722e6e7fd147316256ed56ef7e9fa",
   "skills/franchise-standard-2/references/creation/p1.md": "b78032a982ba4844887cfe11ff27bf99ff11c75df4b2edaf915c16956bc87ffc",
   "skills/franchise-standard-2/references/environment/p0.md": "dc8f963f6e3afdecfd212792afe3dee456a8492aa869411a2af29121224b9802",
@@ -54,8 +54,8 @@
   "skills/franchise-standard-3/run.py": "e5117a20ea0edc17eb61e95496d4855dc319039a36ea3feb3dea6cd9b139aacf",
   "skills/franchise-standard-3/selftest.py": "9b0d69f513e453cfc29c6916a7b2cef84ff5ce6499eccc21000f7d2a93c61b52",
   "skills/franchise-standard-3/.phoenix/originality.json": "cca986c5477ae1f8698b420a83915f510a2fec1410a564be8f492e6fa160146b",
-  "skills/franchise-standard-3/.phoenix/provenance.json": "fde7e0da4c177cd8d18c4cd76a9aa065fdb9f7842c15a4e39323b9247f917ea3",
-  "skills/franchise-standard-3/.phoenix/selftest_evidence.json": "c211315ecd315714af05913b27dbce2661cb77f7c697392b3c5df9330e3988bb",
+  "skills/franchise-standard-3/.phoenix/provenance.json": "55a11615e53c5560fca9f9d53331c62bc3785ce54a62706df9d8bef2977cb853",
+  "skills/franchise-standard-3/.phoenix/selftest_evidence.json": "5d97848584d5a969c28279e35bd7b768ac3fa9e83a28ea29bc31112905b0b729",
   "skills/franchise-standard-3/references/creation/p0.md": "a74badeeecd82f474f9040a50034ab25ce096ff281551e32685bebdddf247e87",
   "skills/franchise-standard-3/references/creation/p1.md": "e1e03c24eef28954196ad0b3df65cb4eaacb8fed16af3d0ff94a40b107427931",
   "skills/franchise-standard-3/references/environment/p0.md": "928cf7c40c4943be56585d361f74e38d68fc00c6fd451ba8020e3a2907dcbb1a",
@@ -66,7 +66,7 @@
   "skills/franchise-standard-3/references/production/p1.md": "5d0ae03763de702b6be5943e5f143c1bbb88cd38684fa1841b5077e4dcb190a3",
   "skills/franchise-standard-3/scripts/main.py": "09c1c8efd2c9d6dd951ca9b8799f76bc9dba3630d98a7b68bf44a6100f8892ac"
  },
- "sealed_at": "2026-10-18T19:59:35",
+ "sealed_at": "2026-10-18T20:58:58",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

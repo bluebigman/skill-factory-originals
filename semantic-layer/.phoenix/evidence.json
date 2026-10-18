@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "semantic-layer",
- "merkle_root": "66e6c2ce4a3823510da55daedf091b06a6faa3e080d4c09d7d5ae88a2b635bf1",
+ "merkle_root": "414aa47f749262bc9818be580c2628908a5d6c77ba08d0c279fc5d649cd1c4e9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/semantic-layer-1/run.py": "a4a2fc65c97377648510f1c7c8805870c5f78db5c8b887931c6c3b54a822712f",
   "skills/semantic-layer-1/selftest.py": "39e6d3c0016f26452d3e009f0c1a7458879fe467e788b59a303022889408f591",
   "skills/semantic-layer-1/.phoenix/originality.json": "e9bc63aca2991def4ca2eb35c457278dbb5916aac27be8a6864c25265a9ab727",
-  "skills/semantic-layer-1/.phoenix/provenance.json": "3c81b5c03cfacdd1f4472d813ffce86af966f01ec475d7cb3262d119c4c71548",
-  "skills/semantic-layer-1/.phoenix/selftest_evidence.json": "27eeb5d90c62a0f2f12b444d13835ba31cc410ec7cd94c950246992ff9c8146f",
+  "skills/semantic-layer-1/.phoenix/provenance.json": "e2149ce1ace619ee955ea71d179d2bc22b19331dd27d6d44963ff5d5d62ade40",
+  "skills/semantic-layer-1/.phoenix/selftest_evidence.json": "d911eba45dfd43f9b7749a884c3899f3c53710e6055e8755f740cdb7ef8681e8",
   "skills/semantic-layer-1/references/creation/p0.md": "16a121eb5db9a5e562babe556ed27585ec805486370361e7f69f167cf4e75507",
   "skills/semantic-layer-1/references/creation/p1.md": "a590ab43bbe1e07ce72aefbeecc1df14acd1fd19f6b13bfafd31d977cbd3d0fe",
   "skills/semantic-layer-1/references/environment/p0.md": "b902aa0fd2c63a8911f662ee96a9091e6bcad2b1e32f84b9415405e0c7b473fd",
@@ -37,8 +37,8 @@
   "skills/semantic-layer-2/run.py": "96d4caf8272f4ac729874b5544660540cf5f7c59e1bbf7c0af96e887256c044c",
   "skills/semantic-layer-2/selftest.py": "44111df44aec8659b91a97c6622c7bf3e837dec46b61976245b443dc1d44e674",
   "skills/semantic-layer-2/.phoenix/originality.json": "59831473353545dd62b103fa439d151a8a0dbc82bd171df0eb6385f50d76f976",
-  "skills/semantic-layer-2/.phoenix/provenance.json": "1206a8a2527b5e718563575f2610354382b42ec568cfa402bc0269b25d13b4d4",
-  "skills/semantic-layer-2/.phoenix/selftest_evidence.json": "921f6e5bb55eda16fd06275e03a72f6d7cf5044ba30e8a24f9d628cd08e45a55",
+  "skills/semantic-layer-2/.phoenix/provenance.json": "17758f1fb4358fec09ed0309d96332ddc392bb8986518868e55eda937ab1bda1",
+  "skills/semantic-layer-2/.phoenix/selftest_evidence.json": "11d84904a1bbd4b972d910ef3913189b225d725ce6843975772c60fd4f11bb6b",
   "skills/semantic-layer-2/references/creation/p0.md": "a34fbdc92d2b1c249f53370c883527afa0b6a688e73d89601d1041f83c002c0c",
   "skills/semantic-layer-2/references/creation/p1.md": "ed77b95f35b933893abfa787b07d719ca9f91f2516c5f23b988f3e43ad811dd2",
   "skills/semantic-layer-2/references/environment/p0.md": "a4d4d2e7aa82e9927dc2fbc83a03fdd5fe4dca3f9aa5b4d426b01d65a616ff68",
@@ -54,8 +54,8 @@
   "skills/semantic-layer-3/run.py": "1c17531277f01658b537e2769c5b48df06b56cff632f7f9b7c6aaf9fc958c02d",
   "skills/semantic-layer-3/selftest.py": "55a7e6e8a12aafa759e88044414e1f8452b7146a61fb7f56445b61ae4e47d57c",
   "skills/semantic-layer-3/.phoenix/originality.json": "16e2ab59d478e3a6cf5c92e8de7ca82c3d55177519e8891406919972c97c6070",
-  "skills/semantic-layer-3/.phoenix/provenance.json": "492d8e3a2d6b707d8407ba672d9ce768ab0f81ef324e77e2624e416fe30231c8",
-  "skills/semantic-layer-3/.phoenix/selftest_evidence.json": "bcbdba1fc274bd33f134d7555cf9da98a22d8b6ce09f6c5da59435030914ba3e",
+  "skills/semantic-layer-3/.phoenix/provenance.json": "786a640842396b133a0243d199c0579024f83a1a540485269a39c5098ab6933b",
+  "skills/semantic-layer-3/.phoenix/selftest_evidence.json": "4fe828ba689403eb8529a7cf87082a424dbaf144987de146ba00fbc580307388",
   "skills/semantic-layer-3/references/creation/p0.md": "93a0534a41976b2eeb7471774a67cd693da0014ec3943cbbc497820c9fb7d367",
   "skills/semantic-layer-3/references/creation/p1.md": "473eb9854ecb2646cbb7e93a2cf942e7f7937badd22dcbb22375f063f9c72d93",
   "skills/semantic-layer-3/references/environment/p0.md": "fb70d4dd8c4f9daf3ff0089ef3130c80e2c7f1b62adf1a1389ee6d07f6a02146",
@@ -66,7 +66,7 @@
   "skills/semantic-layer-3/references/production/p1.md": "b3d4468932f9a3d0dd3a3b1ef4ff1379d34d6dec855ec6f4dc45490f3da9959c",
   "skills/semantic-layer-3/scripts/main.py": "ad58ee18514e739fa99a6d6e15af9b0321e356b25c5b9f4dfc62ff45e81e4014"
  },
- "sealed_at": "2026-10-18T20:08:51",
+ "sealed_at": "2026-10-18T21:03:35",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

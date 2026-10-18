@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-chore-coach",
- "merkle_root": "d2cb55207965fd64c54600a6f303831d9be9dde4a6db3c5e01c407a5fc10807a",
+ "merkle_root": "57fb1fceffdf3a4ff0aa6ce88c21b2ddb265cdd605e333985619e7ce9a901961",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-chore-coach-1/run.py": "236683cc7a5ddf2e9d86a2bb0e4f1f2e1e8e7f3be183115e8bb3937734ce49d4",
   "skills/child-chore-coach-1/selftest.py": "487e35f83d1f1ba25ab12b5ba2256c4a4ef1b83d6136f35d609faca180e2e461",
   "skills/child-chore-coach-1/.phoenix/originality.json": "040546209f49b7a040f8128ce808a712eff1721f34e0f75ae020a19f5bcc37bb",
-  "skills/child-chore-coach-1/.phoenix/provenance.json": "0008b6d94d029696c4e13f15b6eb71c860640658b05bbd0b5ba2b3421c86ba87",
-  "skills/child-chore-coach-1/.phoenix/selftest_evidence.json": "959ae619d368c21abbc3d24a894f498320b5f4545fd8ee46391497216ff97ed8",
+  "skills/child-chore-coach-1/.phoenix/provenance.json": "769886639b5b4ea97f8086770de0b58e626f8193b16240d12a31ee90c119ab2a",
+  "skills/child-chore-coach-1/.phoenix/selftest_evidence.json": "0994ae2551042f07c59720e4beb1baa1436d440bf79b00280a2ae94eacf1c541",
   "skills/child-chore-coach-1/references/creation/p0.md": "cfbd04bce64ccd1a60b5a4f67e0fbc8cf87197c2d43a181d85ad55c466de8d68",
   "skills/child-chore-coach-1/references/creation/p1.md": "730c28d994a2119d90ba91602dc8dd468ad2a9a3f5aa744c3adbf4a4cfe9d9e4",
   "skills/child-chore-coach-1/references/environment/p0.md": "8f9c6fd7ae59b43f4a5c142d8bff6d15b0360840715c80d3bd65798afe7d332e",
@@ -37,8 +37,8 @@
   "skills/child-chore-coach-2/run.py": "62aefafdd7f0db24119e99f14948e1f10ba053942200478581bea2793abb8528",
   "skills/child-chore-coach-2/selftest.py": "b37b1aa94652f7718b38b4a737b52b7709ebbcb9fffeb59b807591ec9304f7bd",
   "skills/child-chore-coach-2/.phoenix/originality.json": "cf57582f6daa44ab12065059a8058f7ef0160bb7ea97cfe87d9866a8d37518b5",
-  "skills/child-chore-coach-2/.phoenix/provenance.json": "93c965859bbf9fbd14fbccf22108b54908678de8125850d759cec4b33d07a2e0",
-  "skills/child-chore-coach-2/.phoenix/selftest_evidence.json": "21fc0c6364b0b44e1ad71c2ea686d8095ad15d66db4771994be8022a8954df42",
+  "skills/child-chore-coach-2/.phoenix/provenance.json": "2576214be66af098d5e067a6bae13526b563fe46a6c3afa125130957dc43468b",
+  "skills/child-chore-coach-2/.phoenix/selftest_evidence.json": "2c43131d8043a18f8ccd0ad3d0c209cddb8ba8195c23ad9c2408a79769c90eb5",
   "skills/child-chore-coach-2/references/creation/p0.md": "61dc00edee31580b7b6cbc12f96cc6f1f19dc72ce0d91c47188f77a0a4c02fe6",
   "skills/child-chore-coach-2/references/creation/p1.md": "1a2e42a5872f208a990ac010282746977dfb2247fda00784d612767aaf002002",
   "skills/child-chore-coach-2/references/environment/p0.md": "fd821af0af47bc3f13d44b61052c3a729a321de32d109d5148a6e2b91bd184a2",
@@ -54,8 +54,8 @@
   "skills/child-chore-coach-3/run.py": "1572418492653fa772634f41e710a950c91b8885716ebea88e9d381cdad2fdd2",
   "skills/child-chore-coach-3/selftest.py": "9d7edc3a7d3c0cc9e37c2695e134804229b8b2a40607696e8ad4791f3335bc8b",
   "skills/child-chore-coach-3/.phoenix/originality.json": "27e6fa14b44788995e5141a65f1cb7aa75a9c0e3d7f559e55cab797ea15bfbdd",
-  "skills/child-chore-coach-3/.phoenix/provenance.json": "a396d8d79015aad3f159e2b3e589f5d8851ccd8654a2003225dd867e76328907",
-  "skills/child-chore-coach-3/.phoenix/selftest_evidence.json": "f0f5c624f54d780f7ce06fa18615572cdfa4b7da644240131d7e4226c5bef0c1",
+  "skills/child-chore-coach-3/.phoenix/provenance.json": "b583cd1f69452fdaae5090508177f1bb360ac72437bf1128cfe8edebb044a624",
+  "skills/child-chore-coach-3/.phoenix/selftest_evidence.json": "5fd80532a27bb601625360b2e2a3d9180569d92db1cdd1fd0581eb8e34649d87",
   "skills/child-chore-coach-3/references/creation/p0.md": "bd0f06592cff800b3ba5e0afaa828627081654520be040f2ea2823bf6a84b9f8",
   "skills/child-chore-coach-3/references/creation/p1.md": "423614e3044f6680e9546c33bfd461393b495e587f80c7df24acb4541ee2f209",
   "skills/child-chore-coach-3/references/environment/p0.md": "84f2d64713e9326f6718a39ea302e9c144738c051f067222e4b176f56521947f",
@@ -66,7 +66,7 @@
   "skills/child-chore-coach-3/references/production/p1.md": "32e8cdcc22a6abfaf8f11c70b2d31f46688dd448886024ac007962ebbdb07de4",
   "skills/child-chore-coach-3/scripts/main.py": "64eafac0042cb4decc607596a5f7fa6c0612f75f8fe9979dff6bc4ace75f1607"
  },
- "sealed_at": "2026-10-18T19:53:18",
+ "sealed_at": "2026-10-18T20:55:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

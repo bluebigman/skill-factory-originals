@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "training-material",
- "merkle_root": "37b2f391b4e5f251675aa1c47bfd992c372065d5305add554e5109d184ef03bd",
+ "merkle_root": "97622bbca234bdc5d0634fde79907034df72cd5bd4c78187945b3d69a6ea3a24",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/training-material-1/run.py": "678d75577948db65c9d7fdb01a7a0440d2b65f01fbbaec417299d00ec3c10dd7",
   "skills/training-material-1/selftest.py": "06127925e2894be9cb4e387cfcdbf22cf0138452583a6f364c807e57aaab71b0",
   "skills/training-material-1/.phoenix/originality.json": "6755ed0241daeeeda5cf38bf1942c765df160c3d019519a685276130fa485e1e",
-  "skills/training-material-1/.phoenix/provenance.json": "49909a242e27f3348d3774011a8cbd07e6145098f1e1919b1dca795bb90772be",
-  "skills/training-material-1/.phoenix/selftest_evidence.json": "7bc85f5966043203ec686da119ea3bfbd17626a5a8dac235aaece10fc2fec0ff",
+  "skills/training-material-1/.phoenix/provenance.json": "81edd0048c4084d46e2caa66a3e8d8976673068c8e403f4617ee7f0d002e5401",
+  "skills/training-material-1/.phoenix/selftest_evidence.json": "d4a29276f0a5f3b44a7f48714e841b4c676508273bb0aca215b19cab089ad267",
   "skills/training-material-1/references/creation/p0.md": "6fa835456e7fd092ed9204a0b2da432a4bf89b536ede2bfcb336eaabd6a04a96",
   "skills/training-material-1/references/creation/p1.md": "3dcd3b8bf3ca7532d782662fad41c64f7c207b6c91dd2e10083ef0ada9da17d3",
   "skills/training-material-1/references/environment/p0.md": "4c07e94e2bc81f90d8d8757d762738a01dd3a01a873bc3360d760e0cc818e1c0",
@@ -37,8 +37,8 @@
   "skills/training-material-2/run.py": "33d13178e707defbe1e3d7b22268eb711221e063df9fb250c50839d0d12b31bc",
   "skills/training-material-2/selftest.py": "e88499593f87d072561d3785e66fb619d91d016d5663f6f54ef440967460430b",
   "skills/training-material-2/.phoenix/originality.json": "ea049a13dfd739ad1a31914f68a18c7da9deb0b2ea93510ff172dcb418ce3728",
-  "skills/training-material-2/.phoenix/provenance.json": "4c7891b8a403739e050bc700ac17974f349c15cbab50b9dc4873001bcac5cfa9",
-  "skills/training-material-2/.phoenix/selftest_evidence.json": "26715f2cbefaa7432f0aaa8deda65766dedbf750578ae7a095a51a5e15745d58",
+  "skills/training-material-2/.phoenix/provenance.json": "c1921b122479ff7f6f3bcc0b55c4da0c5712f0500eba0c91ea51ce7c4c657a15",
+  "skills/training-material-2/.phoenix/selftest_evidence.json": "4a6009ca132f23194d5706a2e0b1a96245cba1433a65dd22707de59c9fd77707",
   "skills/training-material-2/references/creation/p0.md": "ac3e3db2508c286fb760cf29163eae485b89e1ee8d6b81acbed0fc767709436e",
   "skills/training-material-2/references/creation/p1.md": "63bca9192f9e31cd9102eb9a5a60ee85490f5584a83ee7733b5db1860b2b7452",
   "skills/training-material-2/references/environment/p0.md": "f1d2c8237fe794ff51c9afe0b20d94282951f156e470504710293ed1855db158",
@@ -54,8 +54,8 @@
   "skills/training-material-3/run.py": "8d62ed382ececba536ab419d60c3f3a0f5f8e3c654993bd62c35e42d3dd7d34c",
   "skills/training-material-3/selftest.py": "0d418345bb00f44c6626ba21a1561e52bf1ab92ae2d05ce1728da93eba926b5b",
   "skills/training-material-3/.phoenix/originality.json": "00320c1eda78993dbec341f68ca70ce20f7291fc5687af4d8abc3d395cff04ed",
-  "skills/training-material-3/.phoenix/provenance.json": "753b9e076d40d81eb4b0b28d7ced0a1661cc8975feca877c3f15fca5814c63fe",
-  "skills/training-material-3/.phoenix/selftest_evidence.json": "a178489ff9881c2d4035263922a54e9460040f774c03324587ab754db4434885",
+  "skills/training-material-3/.phoenix/provenance.json": "393bebe7f8b9e0522cea9d789f029101f46a49ec5ce77536459d66bc722b07fa",
+  "skills/training-material-3/.phoenix/selftest_evidence.json": "63a25748e189cf1fa7daef14a56a38fd5a04eb3e8f30caaa2666864e5eba2b5f",
   "skills/training-material-3/references/creation/p0.md": "8edb4ed2e1f0bac2024441fb2166bd1c059ae7308d37313c0509f5dcd4e4fad3",
   "skills/training-material-3/references/creation/p1.md": "f63bf78cd6ceb3e331fe79c5634093bf7b9f28d81e30f5a25316d1fa879750b5",
   "skills/training-material-3/references/environment/p0.md": "bf0583a6b6ac58cb275795af044d5a5c7e605f763051d92444e39a616787e87e",
@@ -66,7 +66,7 @@
   "skills/training-material-3/references/production/p1.md": "7f6add73f981904aaa7ddbbeeb6d32fe5c3d3a3bddba3ee8cfbac4d27d200c0a",
   "skills/training-material-3/scripts/main.py": "fef65dfe982517d8828770710935aa92f250cbf6a4a3640d8c42b73a12f7b86e"
  },
- "sealed_at": "2026-10-18T20:12:13",
+ "sealed_at": "2026-10-18T21:05:03",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

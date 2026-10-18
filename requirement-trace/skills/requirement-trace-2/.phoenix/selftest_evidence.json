@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:07:52",
+ "at": "2026-10-18T21:03:06",
  "skill": "requirement-trace-2",
  "slug": "requirement-trace",
  "passed": true,

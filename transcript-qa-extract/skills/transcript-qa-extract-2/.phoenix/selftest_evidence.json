@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:12:13",
+ "at": "2026-10-18T21:05:03",
  "skill": "transcript-qa-extract-2",
  "slug": "transcript-qa-extract",
  "passed": true,

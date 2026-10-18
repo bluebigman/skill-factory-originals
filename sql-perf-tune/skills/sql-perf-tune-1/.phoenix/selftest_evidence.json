@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:10:07",
+ "at": "2026-10-18T21:04:12",
  "skill": "sql-perf-tune-1",
  "slug": "sql-perf-tune",
  "passed": true,

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "hr-recruit-flow",
- "merkle_root": "43e759bd8c6e73063cc15d53f6adcb9f8d5777b64bc2fc3c87cdc3ccaac927eb",
+ "merkle_root": "83bae0b97cb2cb0a21232a4e91244cf2cd04bd9fd887aee389df94c1e6a7479c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/hr-recruit-flow-1/run.py": "527c90c706f1385a3a1f26975f1c12244fac33f4b6b5c646967d10f0f1c5757d",
   "skills/hr-recruit-flow-1/selftest.py": "5a1cd8243397ebaf60c0fc4eeafb6f5e0cf0ada9c5ab1705f677b557a6af41d4",
   "skills/hr-recruit-flow-1/.phoenix/originality.json": "b4b5119860dd1ba938216df89c99f45d9a1c65a38d2acfdb723838e2cdd05b15",
-  "skills/hr-recruit-flow-1/.phoenix/provenance.json": "24a9497b0b991e558be79c1fb5d686814dee569ab11e08ca91c54aacdbdddcb1",
-  "skills/hr-recruit-flow-1/.phoenix/selftest_evidence.json": "a0ef743b547054e91f9000cee291572bf41bc5bdafab060d565cd54e00054a9f",
+  "skills/hr-recruit-flow-1/.phoenix/provenance.json": "ad88b6f846b3fde0f3a47fe7080d49d55e8776b750b0403ee1c510e7e51b03e7",
+  "skills/hr-recruit-flow-1/.phoenix/selftest_evidence.json": "8fba24bbab8fe19094790e2587134900cb575adf955cd1f2e72c2658673c3568",
   "skills/hr-recruit-flow-1/references/creation/p0.md": "106669c951a9a0e917d247d483c89d58da18bbf9c711fdfef2e4623a78e814c1",
   "skills/hr-recruit-flow-1/references/creation/p1.md": "8ddec7a6e8232245366f79f34c82e505002985a3bdd5a0f49f5933c2dfc84b20",
   "skills/hr-recruit-flow-1/references/environment/p0.md": "8fcb98ef000fc23ae8c1519f6681d43c2e2599567932511c35328eb4b2dc2e06",
@@ -37,8 +37,8 @@
   "skills/hr-recruit-flow-2/run.py": "76f0c583494c5c8c1703b38adf08daebc3de6387338787f1b273c602d36df03b",
   "skills/hr-recruit-flow-2/selftest.py": "77e860e5fc089003b717c9528d41aac62dfb5f2ab0bfe71a7dab1f732892169e",
   "skills/hr-recruit-flow-2/.phoenix/originality.json": "786ff44c56c1a1ce8a5be53a79abb2e368090b5e744f379800bba9d350c6f730",
-  "skills/hr-recruit-flow-2/.phoenix/provenance.json": "35ad3c9859f93fac7b71b2195dcb2ff30d239b9c4a9a76a78d330cd5f94abb88",
-  "skills/hr-recruit-flow-2/.phoenix/selftest_evidence.json": "098e0c4927342a8bb6f6d57d05518b4765657d7990e285974af622387dd2fc95",
+  "skills/hr-recruit-flow-2/.phoenix/provenance.json": "76f1b3b8d900e03ff4ad7873e08bacbb902c0e0065ec52d0cef42f1b4cbfa018",
+  "skills/hr-recruit-flow-2/.phoenix/selftest_evidence.json": "fcc52dcea74c7f6eeca4aa9fbb3c4472d0bc5bf124ebe9b9b0737a2612c18079",
   "skills/hr-recruit-flow-2/references/creation/p0.md": "70b618f3d9c7c5c501f53a20a32defc388b5c5eb176977fe282fa04f312b2a97",
   "skills/hr-recruit-flow-2/references/creation/p1.md": "3dbf23ec09b031b7a2ca9542c876c07c848c1e258fecf40e6653c42b74761c2a",
   "skills/hr-recruit-flow-2/references/environment/p0.md": "13539469a499a40cb277206026882cfcfe862f89f9497f5058d59b4cf23c7cef",
@@ -54,8 +54,8 @@
   "skills/hr-recruit-flow-3/run.py": "0c2ee6fb0d50cabb64f2f09e48aa771b7aa05f3c80d1567e8e068a7e74db05cf",
   "skills/hr-recruit-flow-3/selftest.py": "f16f6726a9897bf307b466e9a80e9d78764635ba4615966acf4250bb882b526f",
   "skills/hr-recruit-flow-3/.phoenix/originality.json": "ce94c1fd957dcd43bbed911e8bf7cbcb363976858a8fa413541019c55e8bdf4b",
-  "skills/hr-recruit-flow-3/.phoenix/provenance.json": "cbf2ab06af6a1d30bdf6af3ce26c8ff5e1c2927808121db76c9362d36779953a",
-  "skills/hr-recruit-flow-3/.phoenix/selftest_evidence.json": "6b1dbd2fe7f94056187e19191e861410c588276e197b640f75954be07802c157",
+  "skills/hr-recruit-flow-3/.phoenix/provenance.json": "f7da0d5adfa25046a110cd5550659370ed232b37bdab8b7d04a0bb31483a640d",
+  "skills/hr-recruit-flow-3/.phoenix/selftest_evidence.json": "de97f09b22300f724d6ab388dc66949982a1eb1f54bd94661a5bd01c97cf9cbe",
   "skills/hr-recruit-flow-3/references/creation/p0.md": "a3ea038368d71b738fbf79932d9f61b58b50e9ba250172f15ca4786d5f5931d2",
   "skills/hr-recruit-flow-3/references/creation/p1.md": "7023e0411b34c6d4113ff0032c62804cccfd251af05ae4899de7d1497ff75b8f",
   "skills/hr-recruit-flow-3/references/environment/p0.md": "e5deb37b9579e2bf71176a3816b1c072b2d0871da7919cc62d22ada6fc016a0f",
@@ -66,7 +66,7 @@
   "skills/hr-recruit-flow-3/references/production/p1.md": "28b01722a85e2016501e70893930ecee78498c08b4322dca1699616de47df130",
   "skills/hr-recruit-flow-3/scripts/main.py": "d9003e45da414797837416649d75b1017e15e412494faddbd82cc68a51659e43"
  },
- "sealed_at": "2026-10-18T20:00:58",
+ "sealed_at": "2026-10-18T20:59:37",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

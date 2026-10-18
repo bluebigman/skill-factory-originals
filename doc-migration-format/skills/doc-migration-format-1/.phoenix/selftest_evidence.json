@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:57:10",
+ "at": "2026-10-18T20:57:38",
  "skill": "doc-migration-format-1",
  "slug": "doc-migration-format",
  "passed": true,

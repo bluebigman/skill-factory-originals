@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "identity-federation",
- "merkle_root": "e22a9dd9a5a46dafac10adf3b9b52a15a2e09e8436847fde00a30bce96c8d9ad",
+ "merkle_root": "943ba39116d5388a2af06c746aa9bf88bf2308f2c670b75209fcac2602a3b6f7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/identity-federation-1/run.py": "7456b0941283e424d927510897a391d6f4bda4401443a0f04a6100cdd6587745",
   "skills/identity-federation-1/selftest.py": "0ad7ba943bae08d15735df508e28ab0a8d369ebe35c3e687394e356dc577ccdb",
   "skills/identity-federation-1/.phoenix/originality.json": "f5085adceb98eb4fcf60d7cbbe3994280e6cd1a299ce355903530771704b4183",
-  "skills/identity-federation-1/.phoenix/provenance.json": "d7678bc9ea964c5c695543258969ad36d8b802b96ab710630d591df8c4c208d6",
-  "skills/identity-federation-1/.phoenix/selftest_evidence.json": "b186162a082076d499b3cf988ba84d10f0ce923ac6ad95f3ee50f2b1c531dba6",
+  "skills/identity-federation-1/.phoenix/provenance.json": "373ec4c98787def97e54db05b653c9609c9abf071857a19ae0b07c8096c07e3d",
+  "skills/identity-federation-1/.phoenix/selftest_evidence.json": "e2d19c54827ac8d9e9464afa61c3556059f5b578267792dd2480f61e2cbb8557",
   "skills/identity-federation-1/references/creation/p0.md": "7b25d3f2d40eedaa1289a212f422acfe55654d666a4d27c5f6414eedd4204cba",
   "skills/identity-federation-1/references/creation/p1.md": "007cfbe10ac69841fed9c15ecf57500a7f82ef29e72f574b28c5bf6b0bbb316c",
   "skills/identity-federation-1/references/environment/p0.md": "ee10a447d22add2312c358733d490e5310423ca93d971e0a34c1cc8bd2c2c53f",
@@ -37,8 +37,8 @@
   "skills/identity-federation-2/run.py": "b3ef8056e82c64e7399a8ec34c575bd2d8c25fc0b0c871ab28be56ffb3fe011a",
   "skills/identity-federation-2/selftest.py": "05ea61c6359bb82ff9347fee0c212e212340766aa0539294444050b88bc08b0d",
   "skills/identity-federation-2/.phoenix/originality.json": "8a573b2f5fde7ee525a3251bd35b09f202596c0870d899dadccb655137b16e06",
-  "skills/identity-federation-2/.phoenix/provenance.json": "63bf0137dd43d676b69e020f78db8a080926aa018bb87db15a1fa4b0cd8654ed",
-  "skills/identity-federation-2/.phoenix/selftest_evidence.json": "7ac813581976f29a74d4fed7586443b3383cfb866c68d4f5223a3db6ac3f2a0b",
+  "skills/identity-federation-2/.phoenix/provenance.json": "70349a49b09f492f52a67153e564d84adeb8ab5c6f55ef11750a4fbf996ac3bd",
+  "skills/identity-federation-2/.phoenix/selftest_evidence.json": "3576a7b6c514d25ae07b175c3786fd7b752df7cd101b264fc7e8f8ae56a19911",
   "skills/identity-federation-2/references/creation/p0.md": "95d12041663bde9001ad75544cda827f66830610c41a971afd43d807faed20be",
   "skills/identity-federation-2/references/creation/p1.md": "2c3c23be085a5ffb6cf8c32620a56f7c84045e037be981663607b298a86c1ea4",
   "skills/identity-federation-2/references/environment/p0.md": "f40c52dfa3beed6373eabf20b1147919e948353393deaf0643751eb3b7433797",
@@ -54,8 +54,8 @@
   "skills/identity-federation-3/run.py": "ed51c025e48dc299525973ae1d06f583aec681c11aea4e91cd278e580b84d0ee",
   "skills/identity-federation-3/selftest.py": "1e6e88670448999f7bdc94afef66d79848ab9c335682a42b74d41cbb7b2acbac",
   "skills/identity-federation-3/.phoenix/originality.json": "5ae232fb57d7b1c4f626b20eab049e0a1510fb64d5385b98c195448ef0b97bc0",
-  "skills/identity-federation-3/.phoenix/provenance.json": "2fec98ae20b919ebbb18c6031c9daddbd6ee85e2cbd5be547fd985cc3b33a4d9",
-  "skills/identity-federation-3/.phoenix/selftest_evidence.json": "d68936b0dc3ad7bdcb9952a1b9ec308c7a027b62ba23791902cd629cd81ce10c",
+  "skills/identity-federation-3/.phoenix/provenance.json": "b784e2a28796e80c1c63ec7e1b3a3791b59b2cc7e0fa82a8fc130fe3328f3de6",
+  "skills/identity-federation-3/.phoenix/selftest_evidence.json": "f6aa3acb401d5ce7a4375fbf4be3877f75326c7edcb84594aca31f1555ea4346",
   "skills/identity-federation-3/references/creation/p0.md": "cb9328b98aa2ca448ba0b56aa428a381717ca07a23445bbed3515d788a69ef04",
   "skills/identity-federation-3/references/creation/p1.md": "35873e016e41d3e7f76ad58d89b58d3a7cd5f7aa57addf7a83ebc4b19d71c418",
   "skills/identity-federation-3/references/environment/p0.md": "b24e92bbd55a306d432f34431f63279ab8f8b811d1fbde279ad395d5743db5d1",
@@ -66,7 +66,7 @@
   "skills/identity-federation-3/references/production/p1.md": "3d671ba19c246a40154512f77aab4fd914c4fc2156f6e0786a7c1fde3ac9d0a0",
   "skills/identity-federation-3/scripts/main.py": "decaca4568ecc655d08087f4feb1510cb8463c71dcd27cda4cc55768792eb2d0"
  },
- "sealed_at": "2026-10-18T20:01:02",
+ "sealed_at": "2026-10-18T20:59:40",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

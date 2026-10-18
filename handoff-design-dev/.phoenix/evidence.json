@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "handoff-design-dev",
- "merkle_root": "674c0fb22f05aaa592ac49d1457c76e987064ba75a36496cc737c1cfe7ae9fd6",
+ "merkle_root": "2f8e6b0e9be27f32dccd301eb797a8529931686863ec6c70f2f28b3869cacd89",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/handoff-design-dev-1/run.py": "0ba7ad1d3001dd2ce8e8dc7cfe640c4c012e8b60bf910b62291045f11a001951",
   "skills/handoff-design-dev-1/selftest.py": "0c4a560eb33d51390d43b5819fca62ea9b2773db1ed1b4356cb45aee4fce7900",
   "skills/handoff-design-dev-1/.phoenix/originality.json": "1d5b1c7264d2290b324896b63fcdaa54545006e3cda5d7a9d1d3ab36ec643cd8",
-  "skills/handoff-design-dev-1/.phoenix/provenance.json": "79825f90222b15182def3116ba45b4e8f54bb393394e1b62e86747af9c5e224a",
-  "skills/handoff-design-dev-1/.phoenix/selftest_evidence.json": "9bc04488df4b1ecae52a7f9e50759d0f888955022715bc6e9ec29ace8ca90f03",
+  "skills/handoff-design-dev-1/.phoenix/provenance.json": "bb4e8a5c1fd4156941559002ce99324aadbe4a5bbbe54d451684d47866f2d3bb",
+  "skills/handoff-design-dev-1/.phoenix/selftest_evidence.json": "145cab5d39208f5a57c96914845e7ee2f8ccf66890d4e1eefce425d978b06ce6",
   "skills/handoff-design-dev-1/references/creation/p0.md": "1834e4946cd3c7cf10c4b74cf0816b2c11eb8fed79b51a8cd2a9ad26d5207a90",
   "skills/handoff-design-dev-1/references/creation/p1.md": "562bfddb1c5d9e2431ad25f5c5d662b1fd96c911749da9d54fb310a88701723b",
   "skills/handoff-design-dev-1/references/environment/p0.md": "64480f1fb21e8d1967a270be4ed168144ed7a93d3fd5f06074184e49690fef2b",
@@ -37,8 +37,8 @@
   "skills/handoff-design-dev-2/run.py": "c4f6f1964f1bf674faa7a06c8909bdd95a516bbbaeaa7f2c5854a513f7da2839",
   "skills/handoff-design-dev-2/selftest.py": "278fca47099f17adb309224e9b641772f635401b5ab3d9775246286dd39c1f50",
   "skills/handoff-design-dev-2/.phoenix/originality.json": "6ca143222a5e20db030dbc9ab46043873e237bf757578d5f2c7ad8ea3740b1df",
-  "skills/handoff-design-dev-2/.phoenix/provenance.json": "adf75ff3e0d991a8fe8382bb4b7921fd0b4aa1fcf57ecb6cc84dfef340d762f5",
-  "skills/handoff-design-dev-2/.phoenix/selftest_evidence.json": "2c761bd02529f956fcc52d0d7111b17246353110c7fa174c0c7f85d5725dcf46",
+  "skills/handoff-design-dev-2/.phoenix/provenance.json": "9a5a495c762ed15b5909a3f49de1fc42741afe8f4a1d4a4c9267d1179a5f76ba",
+  "skills/handoff-design-dev-2/.phoenix/selftest_evidence.json": "34c0b81e0acf0a4c8397ccb2d5eab53acc99f12093bf81c8b7c890c561972e88",
   "skills/handoff-design-dev-2/references/creation/p0.md": "a682bb81750fee495c6e08ce82fc134b0902fcdadcc706d8efd3f92eb442a769",
   "skills/handoff-design-dev-2/references/creation/p1.md": "8d7e56313aef2060a15d6ec6e87849ca583f52ea0db4edd6b21d96ad764c60e9",
   "skills/handoff-design-dev-2/references/environment/p0.md": "73dcae681213e7a625c05610b05845eaf33fc5670e646e32ebdb29d29e60c3c2",
@@ -54,8 +54,8 @@
   "skills/handoff-design-dev-3/run.py": "463cdf2f6fd9a487736498cac876eeb91c4535d1824f0ed19700d33c28c22ce9",
   "skills/handoff-design-dev-3/selftest.py": "6b67febe569b16d2fb2ad2ae59fa871a980e8472e77bc1c0ad1cc6f9bcf47c1b",
   "skills/handoff-design-dev-3/.phoenix/originality.json": "de890684225af6d4ae3b681d81db689144738b729bcac99aac3e1de72c9bc85e",
-  "skills/handoff-design-dev-3/.phoenix/provenance.json": "6ebf4fbfd98ef8d7897befe109310f6387983ad2455726c80f7fcaaafe655150",
-  "skills/handoff-design-dev-3/.phoenix/selftest_evidence.json": "1342f8e3f939faad19ca4e4db800fcf50a53cc7e52edb38641b975c931b9edf3",
+  "skills/handoff-design-dev-3/.phoenix/provenance.json": "efccd3d17505f50cd17409554a72a5da93d031e39784956e07c1cfe48326a42f",
+  "skills/handoff-design-dev-3/.phoenix/selftest_evidence.json": "522452e776d3d1a675f3acba94d2d11a648f0908d0b3dc1fb422f0e3e453ef1a",
   "skills/handoff-design-dev-3/references/creation/p0.md": "0290b894baa97de8e2f5aa9b974855864e061e60812215b61020dc08cc2b53aa",
   "skills/handoff-design-dev-3/references/creation/p1.md": "9767cea56aaf9ea7b7d7eec1152d160bf5194868e8339570a6e87612fb7d7118",
   "skills/handoff-design-dev-3/references/environment/p0.md": "64da0ce474abe3ec0e55bf31866f3f4f8f34947323b159eba1ce845884c8ede9",
@@ -66,7 +66,7 @@
   "skills/handoff-design-dev-3/references/production/p1.md": "67e76260a08d8cfdc672ed09a6564e67ea7411ea8fb8d46a7ff8d1686344a57b",
   "skills/handoff-design-dev-3/scripts/main.py": "95d9ec19676f78f7401ff8281394ac1e715a6b473d8f64018f47fc38563a26d2"
  },
- "sealed_at": "2026-10-18T20:00:30",
+ "sealed_at": "2026-10-18T20:59:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

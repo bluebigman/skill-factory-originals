@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ai-flavor-remove",
- "merkle_root": "3712c0bf2bb50fe1624e22d184a90a1784a85ce8d82e290fe3922ec8a4251b3b",
+ "merkle_root": "93ae7e3923f39023b80a7d152e74f38ff2ffaecce97559f9f69c364ba507a91c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ai-flavor-remove-1/run.py": "32e2d44edb0b26ddd96a5a47580a04f1f37ad6e10f521693524932ebd777ecaa",
   "skills/ai-flavor-remove-1/selftest.py": "315878b4c7a77f8948ad6cf9f1ba20ccb0232b51468d4b245b80e021b60f7a51",
   "skills/ai-flavor-remove-1/.phoenix/originality.json": "48674c31f3bd152b6a0960d437ba818013dbf335ad5353525cdee051381f6c7f",
-  "skills/ai-flavor-remove-1/.phoenix/provenance.json": "8a36de1f89b06660b07e32fd07de561fc936a56dbcd99670cb05f09c327ec688",
-  "skills/ai-flavor-remove-1/.phoenix/selftest_evidence.json": "a144362df649e006ceb87baefe4e786c88c88f0adef65a47f34246ccdc6b8068",
+  "skills/ai-flavor-remove-1/.phoenix/provenance.json": "140652bb714dbca523166d458b5f58667a1b1f3e6814802b4dc4fd2452273efd",
+  "skills/ai-flavor-remove-1/.phoenix/selftest_evidence.json": "b065efdcdd89f375c4c98afdc17c1c9679fb417bc0101994e4573493fbf0c38b",
   "skills/ai-flavor-remove-1/references/creation/p0.md": "943d9e122e521226533d75bff29711f4113e8ed72a585a55089d616dd6d156fa",
   "skills/ai-flavor-remove-1/references/creation/p1.md": "199230c32afb68ac022b3f4b907df3169b93f5b2c9132abc41c5a18a1be2e17f",
   "skills/ai-flavor-remove-1/references/environment/p0.md": "35618d4d28ce7b106ad5fb75d3fa5d708a447b80e31ba1494a972871f7a1d722",
@@ -37,8 +37,8 @@
   "skills/ai-flavor-remove-2/run.py": "3ad2e06f5c415bc192ce30fc4000b7cbf26d0c6ab61803f975de5b6d88e71ded",
   "skills/ai-flavor-remove-2/selftest.py": "765be0208287383f01c2153ddbde33df7633c98e1ffc6a5e7214a671e922fdec",
   "skills/ai-flavor-remove-2/.phoenix/originality.json": "57323f2db064e63d18d682f608c56d865cb3a35388084d62777cdfae87575248",
-  "skills/ai-flavor-remove-2/.phoenix/provenance.json": "b93ae30e526e4be905d6feab114971c32d28855bf0f769de2ce9999c7243cf10",
-  "skills/ai-flavor-remove-2/.phoenix/selftest_evidence.json": "dfb96277ec342cb6427f3e065b946e15e25961e55b160b6447d049cb6e2293cd",
+  "skills/ai-flavor-remove-2/.phoenix/provenance.json": "28bb4404d40de4453e8ea8d406c8045a9eee9e8dd1bbaa49f613b6c26227b0eb",
+  "skills/ai-flavor-remove-2/.phoenix/selftest_evidence.json": "433a4b6e8028a818ae5d98e7e147277529171c25d853ebe168903cca47c5a8b8",
   "skills/ai-flavor-remove-2/references/creation/p0.md": "d3bf3a7adc716124acc32e5a8ae1df0c1c10d6a5fa560f5d5a43b725ba32ea8b",
   "skills/ai-flavor-remove-2/references/creation/p1.md": "127e7aec64fe1776d4a7d5c75f85ea54847d01ed0dc15203cbf4fbf8d780d86f",
   "skills/ai-flavor-remove-2/references/environment/p0.md": "22e649f779ecef0ef673eec2d94f1f74e9ffb3f2555a35f4f790dbd4faaffeea",
@@ -54,8 +54,8 @@
   "skills/ai-flavor-remove-3/run.py": "cc0fe6d6f46e4af8b6d44fe30f176b1de062a61e1e0556646e863d0f786f0f49",
   "skills/ai-flavor-remove-3/selftest.py": "23a0ca26b9ffeeff0b5f4b5def0bc5795e2a507bb460000971c42c5d77143b41",
   "skills/ai-flavor-remove-3/.phoenix/originality.json": "0e66c72ba5e39274aa93542c48bba886cd3434e959293081d0aa54dfba01beb3",
-  "skills/ai-flavor-remove-3/.phoenix/provenance.json": "81d73e22e1dcc44a0bfa5edcd7a1ad16645c691e8ff125376750513de2438fef",
-  "skills/ai-flavor-remove-3/.phoenix/selftest_evidence.json": "3be0b6886bea1d706ee6f884f92740e979536f5957d97c1f29e13fbb9a8154da",
+  "skills/ai-flavor-remove-3/.phoenix/provenance.json": "fcfec88a079b37740c1acf2e5fa37668170c9292dce7f4eac40f204775c6351a",
+  "skills/ai-flavor-remove-3/.phoenix/selftest_evidence.json": "efa04969b6786bc331d2ea0878b25b4ed400f322e877768ea9ac0abafd0bc6a0",
   "skills/ai-flavor-remove-3/references/creation/p0.md": "fef0f29c86f1598dc9cd2c7c9f4b7b372f03f83a6de2f198e37548b18ddd0142",
   "skills/ai-flavor-remove-3/references/creation/p1.md": "3ab5ba16579b8c48abbc0f4f1f256be681a9039f22389e474a2ae803c71bf75c",
   "skills/ai-flavor-remove-3/references/environment/p0.md": "0951bedf1aa9ed6b73afcaf764215dfbde76707d132b8f3de67cc88589f71df9",
@@ -66,7 +66,7 @@
   "skills/ai-flavor-remove-3/references/production/p1.md": "595258a8d5cd111a83af69ec1bd8392b1e26f3c4365ea8e5bc265ef68c5fe200",
   "skills/ai-flavor-remove-3/scripts/main.py": "3625de2482ef2f2de531123b69cdc5e1eadadb8cd1ebf306b47b1ab93e95b125"
  },
- "sealed_at": "2026-10-18T19:52:30",
+ "sealed_at": "2026-10-18T20:54:54",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

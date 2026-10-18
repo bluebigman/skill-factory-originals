@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ad-creative-coach",
- "merkle_root": "c73536e4b6bc71eb6cf3fb3e324ac7e2ab02e6399d5f0bd30819af71cdea49a9",
+ "merkle_root": "ac0fc635f88d894ea4e9394533a15ae5ab7161442ff2661e83ad9bdfad78fcea",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ad-creative-coach-1/run.py": "2240631873c17f2e80e88af6f1ca1cbc537820269384f29150d22de59b0fe555",
   "skills/ad-creative-coach-1/selftest.py": "7be8735550a6ec0fa42c7cb17c73e76aa0e018de51a07d4ba69df812e7835b7f",
   "skills/ad-creative-coach-1/.phoenix/originality.json": "634e23702e98a8808c5fc4049d2a5b4816d0a0677086c57c5708d218fbd52595",
-  "skills/ad-creative-coach-1/.phoenix/provenance.json": "e6d9e28107ddeb3808e4edf6b6eee50ac8c2411c9e0766f15e5071332e7c751a",
-  "skills/ad-creative-coach-1/.phoenix/selftest_evidence.json": "6da2fefa54674d07c5802270ef05d4d20243baa482b31902bab28ebf8ff57cbc",
+  "skills/ad-creative-coach-1/.phoenix/provenance.json": "e149b65f63dbaa102b7bad468523dcfbcbb665c80a5b9ce97c38b3004b940c32",
+  "skills/ad-creative-coach-1/.phoenix/selftest_evidence.json": "aa9a4f15fd18cb59bf2ce9271b21c38f0c045d5490ab959293201d8e496c105b",
   "skills/ad-creative-coach-1/references/creation/p0.md": "9794128e1c0243fe1902bb9dd868b79987f8acd8612553df780b74d1cd9612ff",
   "skills/ad-creative-coach-1/references/creation/p1.md": "52621afaf4e527daa3879f3de2f860a9dbf1abe5cf1edaad2a7183ddca12b3d4",
   "skills/ad-creative-coach-1/references/environment/p0.md": "28daed0f6fe3d331d0ccd1188679b1bb4fbd90ebc5afa36a88a62da8603891fa",
@@ -37,8 +37,8 @@
   "skills/ad-creative-coach-2/run.py": "69e538f5cf2e07ffe48a0c16851f791e0c053ebf3b9e1271087d794b8381772f",
   "skills/ad-creative-coach-2/selftest.py": "f526b9bb63415cec5d0cb237403ee3f2fa3233f0f0ebba9d5eb2eeb2d9b8c623",
   "skills/ad-creative-coach-2/.phoenix/originality.json": "045a66076d2b2aa9aee49b928f552c735b1f95c8ac24f45cfd60da35a1a7a49a",
-  "skills/ad-creative-coach-2/.phoenix/provenance.json": "ff121556e053a7a23196f419a8cc5c33cf29c9228c5256897e5a7259f48fd3cf",
-  "skills/ad-creative-coach-2/.phoenix/selftest_evidence.json": "d720eda3e910483bb0f71bcbfc0d2b6fa214bcd2a0fdaf3d4b5242eaeedb1ec1",
+  "skills/ad-creative-coach-2/.phoenix/provenance.json": "42aea30cb5020f5bdb0b1695be3285373562a212fe0083a4b4ca271fcaecc61e",
+  "skills/ad-creative-coach-2/.phoenix/selftest_evidence.json": "eca0e37dcb9300df03e316ed559c1d9fd80366b1b05b8a613f40bd6d76b56abb",
   "skills/ad-creative-coach-2/references/creation/p0.md": "15e0b8e062c95e2e1ec5b44cbb79dd0e12e9db5a4aae7a7761f467c421cdbbe7",
   "skills/ad-creative-coach-2/references/creation/p1.md": "a0f5ccea4180cf52f4350a28403fdb1f5e599e0dda2b9b13f9f52fa247b2e909",
   "skills/ad-creative-coach-2/references/environment/p0.md": "0d503f76bdb7a0b35b0d19424554346d456fdf946926f8be860b9a16671eb04f",
@@ -54,8 +54,8 @@
   "skills/ad-creative-coach-3/run.py": "e0ba2135c4d33c6b710b711ca0d2c53152e2c284be46c1818891a940c9ed8372",
   "skills/ad-creative-coach-3/selftest.py": "3d98ce265b0068bf336f8574eba9415268b01303b793ecef8f6fa7336b9ef0aa",
   "skills/ad-creative-coach-3/.phoenix/originality.json": "325a5efb30e9cd732e55221621e3d79d6deab501beb4dfd35a1de07595380e29",
-  "skills/ad-creative-coach-3/.phoenix/provenance.json": "55171d306eb6f849b39e6abe0c4322cbe070aad17e22b232929067ae517d3b87",
-  "skills/ad-creative-coach-3/.phoenix/selftest_evidence.json": "163395393c486a98d6782f91c8a58454eac26355ceb742ae67ecc380fbea7140",
+  "skills/ad-creative-coach-3/.phoenix/provenance.json": "9f516dc63aff9c0d1d121a9988418e9b26a3ec4d9329f19cdf25ab69b48d6406",
+  "skills/ad-creative-coach-3/.phoenix/selftest_evidence.json": "f797986ee213715d931398f7d721563f519111fbad2d409bcb539d7c56c521b5",
   "skills/ad-creative-coach-3/references/creation/p0.md": "35de159c0fcee6a6b589bdd072102be1f5086d00ba80040ad1d9ed32fccd6e77",
   "skills/ad-creative-coach-3/references/creation/p1.md": "46ba8d0fa04f02ef6e6d9fd9ff2304d5b03c0170c984d2bf96e5574c0d0db2df",
   "skills/ad-creative-coach-3/references/environment/p0.md": "7f125d6a11a79a9daf1d12d400ae156be1ef5b35e969936a2791851c1091080c",
@@ -66,7 +66,7 @@
   "skills/ad-creative-coach-3/references/production/p1.md": "54e0b981eaf9fa8d0c29dbf82b9fde0af8cddd1997d3867769a6cf27614f59e0",
   "skills/ad-creative-coach-3/scripts/main.py": "7d175889419dd45a9ba23a500a1002ddf8c4b590babb049b2896e9244dc36047"
  },
- "sealed_at": "2026-10-18T19:51:37",
+ "sealed_at": "2026-10-18T20:54:22",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "tool-interface-design-pro",
- "merkle_root": "03cd294cadc3058f36b49ee048cc8f0e01cf72913a8fe3e9b884345bff6867b6",
+ "merkle_root": "0fcd18545fa6c9bfcb73f119373e81996a073b9072be60f5ed506c787d27dd3f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/tool-interface-design-pro-1/run.py": "fbec9fcb9f49b9336ab6dca37f5841698e3b296c011dbf456e6473e9ed923371",
   "skills/tool-interface-design-pro-1/selftest.py": "cdac37ec4ceda11c523c2a1983b4e1fc1cd820f375eb8408821d6e54862ab099",
   "skills/tool-interface-design-pro-1/.phoenix/originality.json": "9d26a2d46be1e7dcc36d2c73ee46d49800433da982565b8a30daa3a3d9f55f61",
-  "skills/tool-interface-design-pro-1/.phoenix/provenance.json": "5fc2003c6d0cfd0cb7411db2a0bc6ab13184655d2c928044796839ac63394bcb",
-  "skills/tool-interface-design-pro-1/.phoenix/selftest_evidence.json": "8d4d391485b90b554ba0457f09dc9abf1aa016262c7937807fdfb5cfd9f891f1",
+  "skills/tool-interface-design-pro-1/.phoenix/provenance.json": "9bcb6582aa7dab7bd4a28f502ce9a7f86f2bc6fa12b5b9a9302e5df4740a926e",
+  "skills/tool-interface-design-pro-1/.phoenix/selftest_evidence.json": "7ef4569878371d243473f92ac2efc5809f4485bd47bb02095e403fa64a7e0ebe",
   "skills/tool-interface-design-pro-1/references/creation/p0.md": "a315a4a7c23684d17946db5da1c38294cb45da73e9a9f98ff42f99dbda5ef4b3",
   "skills/tool-interface-design-pro-1/references/creation/p1.md": "6deb29c41b57fb0ae5d826f138742f93d6b1c6d00185bc9a3fc9172dabe92855",
   "skills/tool-interface-design-pro-1/references/environment/p0.md": "395d674a7c058fdf79e659dc382e03f90d99d25b910bd3502cadc47109b30cb4",
@@ -37,8 +37,8 @@
   "skills/tool-interface-design-pro-2/run.py": "80bb7dbfd760ed788e1e4886e833779f8f4cb2973bd88dd15a8ee6657c12f6fc",
   "skills/tool-interface-design-pro-2/selftest.py": "2cbfafb81daf552e67442fa9ac5b341b4e0bb19f00de0fee6d0854c69b540472",
   "skills/tool-interface-design-pro-2/.phoenix/originality.json": "be46e2f79851bfb636d2d52e6b2ea0ec4dce7acbf39e2ee9f456d651b52cc69f",
-  "skills/tool-interface-design-pro-2/.phoenix/provenance.json": "7211bd040e49c1fdc9dace25d84c966fb7cc3371237726c2dc8e529916bf9b7a",
-  "skills/tool-interface-design-pro-2/.phoenix/selftest_evidence.json": "d2b8e9c978acf9077ec2fdffc7e40426f55f943ce9a77a0a2cd67e0658814ea5",
+  "skills/tool-interface-design-pro-2/.phoenix/provenance.json": "984a814aeb8adb3d997fc98a0a00cb9f11c1d424bec2bc9da4922eade0974d31",
+  "skills/tool-interface-design-pro-2/.phoenix/selftest_evidence.json": "c0bdd43cb915ffae33a829104c876449b0fd8d466766b4be0fb1192624c2ec18",
   "skills/tool-interface-design-pro-2/references/creation/p0.md": "59e767f9cc1661cdf3353c32f2a11fc81330e9291ebe2ac77c94a6c74f9e9d52",
   "skills/tool-interface-design-pro-2/references/creation/p1.md": "54f7f1178fdf8ea3186a9dfc32c4ef57db1eacda01a284466e8cebdedf2b90cd",
   "skills/tool-interface-design-pro-2/references/environment/p0.md": "da1bd80135447f5ddc838a9e44e36c46ebfec2c29f04ab18e69eb3a16efd0725",
@@ -54,8 +54,8 @@
   "skills/tool-interface-design-pro-3/run.py": "c75c5f4e9bbb6eb2707b2ab8d3332f352f52005412df6f38e18e90f4581417c7",
   "skills/tool-interface-design-pro-3/selftest.py": "3b690f680d8b849c7f10cc7aa9f2ec944fc49a35bc48d6c89c25a5f70e3c8382",
   "skills/tool-interface-design-pro-3/.phoenix/originality.json": "5942bd6334a2409b6e4f2f004b247f50d993218c29a5825320de0c4be6b482ad",
-  "skills/tool-interface-design-pro-3/.phoenix/provenance.json": "e13077a5e27307932b79b5b62120d6ffa69e60da3e0706a7f8de061df1e41b24",
-  "skills/tool-interface-design-pro-3/.phoenix/selftest_evidence.json": "b200ed37e9e4274d686337773d005113201fe590d90c17e35b8cb33993d32beb",
+  "skills/tool-interface-design-pro-3/.phoenix/provenance.json": "c6e6476a47c855a7e8263ff589f69b91db420db624c5b6924118c497d0dce5a7",
+  "skills/tool-interface-design-pro-3/.phoenix/selftest_evidence.json": "6c42bac8fc4a705fa0842b55e56d5dd2fe313b17a2e9df675fef0b437074a61d",
   "skills/tool-interface-design-pro-3/references/creation/p0.md": "1ad58003419b6b44c8329ba321916210ff772aae5e2dbf732cb27de8febac70f",
   "skills/tool-interface-design-pro-3/references/creation/p1.md": "e6a4b5ae19eef31c80359ede3c048d1fa437f140a3dfe519a4d358d5f87042b1",
   "skills/tool-interface-design-pro-3/references/environment/p0.md": "a2d3f70196543c19190e8e2373f0bdc674195907b622cc3daef2918dae89dfc5",
@@ -66,7 +66,7 @@
   "skills/tool-interface-design-pro-3/references/production/p1.md": "63052e5b7da43a7e6c41ce1753ec6893d8489ae73907eac6c14c6336c1e32d89",
   "skills/tool-interface-design-pro-3/scripts/main.py": "581a7996c4c288fa80dbd20ba9de0696a2eccd1032c94e16b395df20dee255d6"
  },
- "sealed_at": "2026-10-18T20:12:01",
+ "sealed_at": "2026-10-18T21:04:58",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

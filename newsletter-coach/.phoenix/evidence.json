@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "newsletter-coach",
- "merkle_root": "60ff3aa7cd9f0002daa5ac9daf37d5ac6d9eef87d7f5d8a252d71d220d61b80a",
+ "merkle_root": "0cabec787272788877e5e063bdb48a1c931b051f1e1f9ee82704ec244226d5ba",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/newsletter-coach-1/run.py": "2667c96412101416380b1b451e94fb6cfc59bbf793368f1c8803a9d1914092e5",
   "skills/newsletter-coach-1/selftest.py": "b35248ff37245b2537316397a81196fa7b6207b5fc370bc9f0370e433997aca7",
   "skills/newsletter-coach-1/.phoenix/originality.json": "cbe9504fa4b22ba23f3a609f052e80874121b8f24c6527a3c16a5ea23b96e848",
-  "skills/newsletter-coach-1/.phoenix/provenance.json": "7ac3bfa60efe7846bf4810b5896605d94686204b2295c945ff3efca54ffee51e",
-  "skills/newsletter-coach-1/.phoenix/selftest_evidence.json": "61e88ea6e56fc763b32e2e04b880b0f6be581bcead0e0c9cf415fcd9249d9797",
+  "skills/newsletter-coach-1/.phoenix/provenance.json": "5cc0c3a54e0a42c0563d207d9a295c3ac0a884c89a522e7d7715d74319171d56",
+  "skills/newsletter-coach-1/.phoenix/selftest_evidence.json": "875336f7097eeea48aae788f07ea5a891446b55675b68a37becadd84e43c07f6",
   "skills/newsletter-coach-1/references/creation/p0.md": "d2f3531932c6a01a74a83e291343d1da7ad30420c7dc0ead01612fc19c09d923",
   "skills/newsletter-coach-1/references/creation/p1.md": "e025d9716be4c0e3f8a0f8ba2f33c2d9c9adc99eb9ef02b0016bae96851823b2",
   "skills/newsletter-coach-1/references/environment/p0.md": "838fc2f9b61741693a010ae3c3c9c4770736e6df7b75c2ad095d3c33b8a76635",
@@ -37,8 +37,8 @@
   "skills/newsletter-coach-2/run.py": "42168f7a4ecaa6776f91520fc42bc9a54176200a93845a9d45ee112498004c46",
   "skills/newsletter-coach-2/selftest.py": "09cc58ccb44164bcc052081341986f622c313c04059f113d3d8dc6527729b5d0",
   "skills/newsletter-coach-2/.phoenix/originality.json": "8678afec46ff27be05cf93ab72ee767a1837d69788d24b057aba2385799a16dc",
-  "skills/newsletter-coach-2/.phoenix/provenance.json": "0f2a4907746d27ca91c3174ad461c08c4800d5d9e35e66a7ebc50d47d2a271a5",
-  "skills/newsletter-coach-2/.phoenix/selftest_evidence.json": "813b313014f34a70ca506e3f30c413eb33c06401690bc7ab4301390137a0ad1a",
+  "skills/newsletter-coach-2/.phoenix/provenance.json": "6f9be96c1718137f95d7fa7fd135008bd495460cc1a98c223e6a0fa2079306a7",
+  "skills/newsletter-coach-2/.phoenix/selftest_evidence.json": "4f068bf71e8366b98fc89ccd34abb1fc739536a5ff6e396ff7a1fc3773953b8e",
   "skills/newsletter-coach-2/references/creation/p0.md": "22fc473b2529b6f54df6db61ce9653d113b0784e7b554a92850818bf63625fc5",
   "skills/newsletter-coach-2/references/creation/p1.md": "972fe80c64df33cb8f7b5c90ecd10297a501c8948d4dd4a99da871c0d45fd295",
   "skills/newsletter-coach-2/references/environment/p0.md": "f211415c6a87ea2d4fef5502ed39af51c5b45a8ac125e104679f90e71c235408",
@@ -54,8 +54,8 @@
   "skills/newsletter-coach-3/run.py": "a5e01ae50145ff57cee6d2abf17e69f05a89e270e114516dffd43edf6360f4ad",
   "skills/newsletter-coach-3/selftest.py": "fd454cb7ab91936cf99e1e1c2b1caa9ed034a9cdaacebe6378ca3d72170f2f6d",
   "skills/newsletter-coach-3/.phoenix/originality.json": "6562e30c025a3ecca4e94fb056a299989384b771289abf4bbc08c8e470bade14",
-  "skills/newsletter-coach-3/.phoenix/provenance.json": "4bec52a2745349f8675c917c1261da7d0247c8f4fa18103e90bd7ee67ed480bc",
-  "skills/newsletter-coach-3/.phoenix/selftest_evidence.json": "dc3e6bc0f6540e135e18a51e92bb4cd13e217d99691fe00f63e69ca26d3a9166",
+  "skills/newsletter-coach-3/.phoenix/provenance.json": "81ead36c3ba8dabbe7ecd91cba97250c2d96a4dc768c6a56253286d906561420",
+  "skills/newsletter-coach-3/.phoenix/selftest_evidence.json": "f0826a5afeac82237a09fc5940771cf79b6147597536d4147726dc306dcf777a",
   "skills/newsletter-coach-3/references/creation/p0.md": "5664a132860b37a3cc609228ebb95eda73cd891fcefece6b024e845d536f440b",
   "skills/newsletter-coach-3/references/creation/p1.md": "3f2cdd3a904364dc4ca797835c6e172ff2fa8f657d47b2135d10dd789b2a14cf",
   "skills/newsletter-coach-3/references/environment/p0.md": "595b176377d5a96e16386db7e019d06227414a64fbe0db8d2b47448d45b89488",
@@ -66,7 +66,7 @@
   "skills/newsletter-coach-3/references/production/p1.md": "43b07d9dafaadf606372ebfa6d76a582541be8efd2c9dc8636aba430e90662e5",
   "skills/newsletter-coach-3/scripts/main.py": "0de85518d8ba70c91998f898e81eacfa2d6172a119bb62fd9eef6d985500b11b"
  },
- "sealed_at": "2026-10-18T20:04:26",
+ "sealed_at": "2026-10-18T21:01:20",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

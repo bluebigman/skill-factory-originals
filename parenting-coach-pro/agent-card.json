@@ -48,7 +48,7 @@
     "遇到说谎"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:49",
+    "at": "2026-10-18T20:53:47",
     "from": "behavior-diagnose",
     "to": "behavior-diagnose",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -73,7 +73,7 @@
     "遇到开场"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:49",
+    "at": "2026-10-18T20:53:47",
     "from": "communication-script",
     "to": "communication-script",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -98,7 +98,7 @@
     "遇到抗拒"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:49",
+    "at": "2026-10-18T20:53:47",
     "from": "emotion-coach",
     "to": "emotion-coach",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

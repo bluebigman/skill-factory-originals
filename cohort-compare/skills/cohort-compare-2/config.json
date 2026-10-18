@@ -1,0 +1,72 @@
+{
+ "name": "cohort-compare-2",
+ "version": "2.0.0",
+ "domain": "同期群对比",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "定义口径",
+   "then": "同期群定义写清",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "横向对比",
+   "then": "不同群在同一生命周期对比",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "纵向追踪",
+   "then": "同一群随时间的演变",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "控制变量",
+   "then": "尽量控制外部差异",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论谨慎",
+   "then": "群间差异标注未控制因素",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "定义口径",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "横向对比",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "纵向追踪",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "控制变量",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论谨慎",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

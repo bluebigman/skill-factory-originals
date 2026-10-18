@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:01:28",
+ "at": "2026-10-18T20:59:51",
  "skill": "input-validation-rule-1",
  "slug": "input-validation-rule",
  "passed": true,

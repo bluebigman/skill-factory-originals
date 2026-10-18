@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "access-audit",
- "merkle_root": "0d68628d796308a9ddde997e92d5d38c478f31befdc069baae84a07617ff5d12",
+ "merkle_root": "12bf864e0c0c5fea439ac7fbd1e216f1f1e9db396d889bf62f68c42bb9de61c1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/access-audit-1/run.py": "748244eb3a4adf630b5a278215cdd49b7e3bf51eb90fe96b2b8766247a547c00",
   "skills/access-audit-1/selftest.py": "53811d74138dfc052c946b38e7b196b9d4066aa01960811500405d1edebd7cbb",
   "skills/access-audit-1/.phoenix/originality.json": "ed1daf5085826a0f05f38c92a95759e21532767768fbe50b7f2fb83df782ee89",
-  "skills/access-audit-1/.phoenix/provenance.json": "fa0a05b7cd0c97668ab182a53583ad9532d41414c9d39a0dd1fd91bb932dc3cf",
-  "skills/access-audit-1/.phoenix/selftest_evidence.json": "0572c46d56a6367458fddb6da4476f6b816f9569d2db43a9f483566c5b9922ce",
+  "skills/access-audit-1/.phoenix/provenance.json": "f53817cf41919120111340f03e3ab6d6fd32e7ee10c20d4c4e114e7872ba9226",
+  "skills/access-audit-1/.phoenix/selftest_evidence.json": "801743028f10704b27e4a5d0f26a5a256499c757ffa5dbad457158a50a0601e7",
   "skills/access-audit-1/references/creation/p0.md": "cd6cdefaa4e707b2ede183f9a4a08769cba5f0f6579d7ff874cb68a0da2ab4e6",
   "skills/access-audit-1/references/creation/p1.md": "064daaac4507f209b2656f49505cdc9d35bee688c46860f783a4eab45d5b99c2",
   "skills/access-audit-1/references/environment/p0.md": "0788e21a7d1c9ccd023024d90f4103175bf664ba4522b9a764844676ccc7d041",
@@ -37,8 +37,8 @@
   "skills/access-audit-2/run.py": "5166b63a7c98ca02dfa1e096ac1e77f29fa0ff59b2d5ef94bfa30107fee26f01",
   "skills/access-audit-2/selftest.py": "71203a229c31b19508ad458b33792fea9358f7a9276c83b52163f7ab0466e250",
   "skills/access-audit-2/.phoenix/originality.json": "1046e04866b3753517c2f292bc30f15d25295240d2c2d6623b90106b3e903de3",
-  "skills/access-audit-2/.phoenix/provenance.json": "68ee68151b56278e67d8d8c344ae426f62e562f762aa6f120734b3da859d6174",
-  "skills/access-audit-2/.phoenix/selftest_evidence.json": "9e989e252da94472c8a75794841a30611cbbf4668c730ba9580946cf1b71b013",
+  "skills/access-audit-2/.phoenix/provenance.json": "cb76841a907041691ce88dc578b066c5b1b5c8d5591c7aadd19508f5994b135e",
+  "skills/access-audit-2/.phoenix/selftest_evidence.json": "285f8457fc018fc0af62489ae10664865cfc4a007535719d4d403d60d867de2a",
   "skills/access-audit-2/references/creation/p0.md": "6e7d84373438ab6999346cfbbd86d35e1aa11cccfada8ad9ccf83a5eb7ad9077",
   "skills/access-audit-2/references/creation/p1.md": "c6212b70f5ee0b88b5bc348a2065d49c0da7e8568f78cbd408e040186bfdca3d",
   "skills/access-audit-2/references/environment/p0.md": "3ba615ed016476b339ebf41eb3f5114594394a7fdc5f3e52f12990a7191f865d",
@@ -54,8 +54,8 @@
   "skills/access-audit-3/run.py": "fba2266be88b1afd5c8be9d09dcdf5ed4a51796fcaeb8440c3deb05567402d49",
   "skills/access-audit-3/selftest.py": "039c1feff3062a73669e6b60ebb6112cda826b15862eb6690c9479669f552e25",
   "skills/access-audit-3/.phoenix/originality.json": "54883f49a807bdf7a386d6d3323a3893b75476dbe4027d86775337604166f4a8",
-  "skills/access-audit-3/.phoenix/provenance.json": "82e306034ca9f43677a752ceebce53b7b2be74634f6fe09019c5628c65beaab9",
-  "skills/access-audit-3/.phoenix/selftest_evidence.json": "95813ccc3a86c7c6d4cfc9847051e297e75322c745c443b30c165019222590de",
+  "skills/access-audit-3/.phoenix/provenance.json": "5d5e1ec0b043b1665ada64025f4ef7dccb06897c07b9f07eee325d248e6cf575",
+  "skills/access-audit-3/.phoenix/selftest_evidence.json": "b451cb5e31c75e2133d2e077ad1e3f9174c87618a0b0e1eeb1f233ac2d4adc32",
   "skills/access-audit-3/references/creation/p0.md": "668c67e42c4244e4a0b17c6b7fa3658ef08ef705bf8ee99bba43aabcd812d016",
   "skills/access-audit-3/references/creation/p1.md": "bdd51618a8cdae9498c74d083707e0ab36a3f1590ab3300ceb89850b54672a7d",
   "skills/access-audit-3/references/environment/p0.md": "530f8968726e0ba6173f917fde6228c5e63a22b3f8c5a149a9b1de4ec703fa44",
@@ -66,7 +66,7 @@
   "skills/access-audit-3/references/production/p1.md": "37050913ba664e34ac30e93153e7bc075963fdfcb8f838667d94832da2f97bbb",
   "skills/access-audit-3/scripts/main.py": "ac7b1b0f77176a0e9f6cf4ff7da56a92d080099f08e6e27d6ce2ba6ee48bf19e"
  },
- "sealed_at": "2026-10-18T19:51:37",
+ "sealed_at": "2026-10-18T20:54:22",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

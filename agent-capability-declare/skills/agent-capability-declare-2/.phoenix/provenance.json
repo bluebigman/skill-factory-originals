@@ -7,7 +7,7 @@
  "generated_at": "2026-10-02T08:30:46",
  "generator": "wb_forge_expert.py",
  "source_type": "self_authored_rules",
- "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/fceb0b42bcbe5207e272fac095662c2601639038/agent-capability-declare",
+ "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/7503019a360e066ae41581cf8bba0c9d7a078a23/agent-capability-declare",
  "source_license": null,
  "demand_evidence": {
   "probe_words": [
@@ -38,7 +38,7 @@
  "note": "规则由生成器按通用领域知识编写；未复制任何受版权保护的原文",
  "skill": "agent-capability-declare-2",
  "reseal": {
-  "at": "2026-10-18T19:51:44",
+  "at": "2026-10-18T20:54:27",
   "reason": "修正证据身份冒用（原 slug 指向他资产）+ 补 merkle 证据",
   "changes": [],
   "principle": "不改 date/generated_at（历史事实）；修正痕迹必须保留"
@@ -51,11 +51,11 @@
   "principle": "只补已核实存在的；不存在一律不写（避免伪造证据）"
  },
  "github_anchor": {
-  "sha": "fceb0b42bcbe5207e272fac095662c2601639038",
-  "tag": "v3-20261018",
+  "sha": "7503019a360e066ae41581cf8bba0c9d7a078a23",
+  "tag": "v3.1-20261018",
   "repo": "bluebigman/skill-factory-originals",
   "verified": "逐字节比对一致（本地交付包 == GitHub 该 sha 下文件）",
-  "at": "2026-10-18T19:49:30",
+  "at": "2026-10-18T20:53:57",
   "why_sha": "必须带 commit sha：branch 是会移动的指针，sha 是内容寻址，永远指向那一份字节"
  }
 }

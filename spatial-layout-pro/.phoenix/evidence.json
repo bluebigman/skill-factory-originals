@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "spatial-layout-pro",
- "merkle_root": "5a44f62376bf97a333939f9be7f547c66ab64d7131b6f3f8831c23bc0f44e927",
+ "merkle_root": "e026fcadf3406dd77e083df06025f2e8f6cbf41289a8f1ef978307e185b564c0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/spatial-layout-pro-1/run.py": "2e59be006909daf413f7a6262636a4b54db9523cfa97e77b55d60bff958c81a2",
   "skills/spatial-layout-pro-1/selftest.py": "c224a510e3ae0cecf278649d07794e39473007b84a8f1b7466889a2840d4a540",
   "skills/spatial-layout-pro-1/.phoenix/originality.json": "62cb1a2e7aff8dc2bc1a0d7cab691a8e877e49b030efcd43c2560f7baaf40c90",
-  "skills/spatial-layout-pro-1/.phoenix/provenance.json": "4a78c30b8628c006f37506824d09ffd9bcf3c689b004a13a3fb182ae6bfe2aa0",
-  "skills/spatial-layout-pro-1/.phoenix/selftest_evidence.json": "2f8f4959d96d37673bc5fd77253e33071ccb44796567e0f9daa3d83a167cf497",
+  "skills/spatial-layout-pro-1/.phoenix/provenance.json": "dda93919507aede279e21a9146fea40acf22a875c1c1aba1677baef7a2450cda",
+  "skills/spatial-layout-pro-1/.phoenix/selftest_evidence.json": "2338751cc614dc6b669b02197e1bef25270e4dc6acc594095a69d350a776981e",
   "skills/spatial-layout-pro-1/references/creation/p0.md": "16c76053c3914ce6cf8a6e6f4aab7b10e1bfb8c23eb77de5bc9b6f1763679e6d",
   "skills/spatial-layout-pro-1/references/creation/p1.md": "36fc358e2e9bc500ac6445ba9262292a8bec8e24c4d229e69cfd51cf713b3943",
   "skills/spatial-layout-pro-1/references/environment/p0.md": "fd7d9bd50e66373c4b562296de9f4b8039328ebc88ddc0ad0dc1f6229c48c468",
@@ -37,8 +37,8 @@
   "skills/spatial-layout-pro-2/run.py": "ccc945ee6120ec6e1cf427c8ecda846db6611b038ae490c7d1821cf3c1a5b425",
   "skills/spatial-layout-pro-2/selftest.py": "00fe4a7fcd46175570b41bc6952be60aeabffab75587fcd110216e19df9ee076",
   "skills/spatial-layout-pro-2/.phoenix/originality.json": "fca2471ee62854898e62b33f6a201ba276ee78b90b8c9147f66c0ac4c940a862",
-  "skills/spatial-layout-pro-2/.phoenix/provenance.json": "d399a66070af2c5cac1a421a2d4942322e4f1c27a6156a26d7cf5c367e2ae7ad",
-  "skills/spatial-layout-pro-2/.phoenix/selftest_evidence.json": "1506a9cf171ec07fcbe13ce29ceb7ef442711be17d83d24fbe18c76e867d3de9",
+  "skills/spatial-layout-pro-2/.phoenix/provenance.json": "7df901be78092159e2a133b68b75dab0c1eb1f473d2dc0e29804d2523702a061",
+  "skills/spatial-layout-pro-2/.phoenix/selftest_evidence.json": "2b55e9daa54125afab0e0b9981383b26d9726ff1d9cc5ed5bbec60df811ecea2",
   "skills/spatial-layout-pro-2/references/creation/p0.md": "7dbbf8fc27178410a2200184834289b0401f467a27192ff6c9620c1e76005488",
   "skills/spatial-layout-pro-2/references/creation/p1.md": "7fd1b68391361743e54c67bb8410b334a7425d1c7c51171d8eea55e7d8b38dc4",
   "skills/spatial-layout-pro-2/references/environment/p0.md": "9c640bca0989343f3dc6a68f2e1c111874d10299967e5137a61627b75eb36e76",
@@ -54,8 +54,8 @@
   "skills/spatial-layout-pro-3/run.py": "3c8ec7e55c64dfbaf8fab51ef1be55d2f2e9b3f10408f2b6daf54a8ab0593045",
   "skills/spatial-layout-pro-3/selftest.py": "0370d8c5871c42779e12d4eafbbcc2570e30405893e455e7d1ed8e9c3581fe78",
   "skills/spatial-layout-pro-3/.phoenix/originality.json": "b129c20d8ce8ee880d6b1777a6f2893b89cacda1bb948e93c8fb2958addd0ca5",
-  "skills/spatial-layout-pro-3/.phoenix/provenance.json": "92e37983ef0919148167784980a83d472c0c0239297bc105face91a28ef57720",
-  "skills/spatial-layout-pro-3/.phoenix/selftest_evidence.json": "fbd23911ad7c093f99503197990da222fd4e89d916ac894052d6664083c17866",
+  "skills/spatial-layout-pro-3/.phoenix/provenance.json": "8b6845af6e2c0797df22f06b7ed06b1e5dd64554878367a87ed58521313cfcf0",
+  "skills/spatial-layout-pro-3/.phoenix/selftest_evidence.json": "52ace35fd0d43388f97019757f6bb4a1a31f3798921a7930d6ac0a91b1240d46",
   "skills/spatial-layout-pro-3/references/creation/p0.md": "e62717cdcf732dbfc3b80e1e6f6c9111dc0f942953ac8c70f955f1e2fc2932c3",
   "skills/spatial-layout-pro-3/references/creation/p1.md": "50a06982888b400a35d2a4df8829ecf5b73224f2808911ffdba28b1f14dbe342",
   "skills/spatial-layout-pro-3/references/environment/p0.md": "455fa006293d7953424d855ae6bb2fdc3c6c7fb1f3884818e11f82b2991961ca",
@@ -66,7 +66,7 @@
   "skills/spatial-layout-pro-3/references/production/p1.md": "da3b894cfcb2e35edc7e658744b2b38bdbb378370b330b196909b9e4d90a63df",
   "skills/spatial-layout-pro-3/scripts/main.py": "150d1ffd1731bb673a75283ddcac912a8dc0da889c9d4c28dcd9c5020587d9df"
  },
- "sealed_at": "2026-10-18T20:09:58",
+ "sealed_at": "2026-10-18T21:04:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

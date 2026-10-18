@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:55:06",
+ "at": "2026-10-18T20:56:27",
  "skill": "dashboard-perf-1",
  "slug": "dashboard-perf",
  "passed": true,

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "rollback-safety",
- "merkle_root": "d5343c7dc9dd092624c9f647ee6ac85daab58cdcfadc95e2a215f3f091d0ed99",
+ "merkle_root": "ad6fd510b4ab6e746aa552b5256ea44b45cf59401606257cd197770bd1163a1e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/rollback-safety-1/run.py": "b3a3b77849fc7b7e0ec7364e772bdc60b117c23562d97351ef6cd42e3cbfa1ae",
   "skills/rollback-safety-1/selftest.py": "62eb93265e608bbcfb9ea435e3a771982176d47b6887dc098ee07cbc4bd2fce1",
   "skills/rollback-safety-1/.phoenix/originality.json": "e5d848aefca0cb638890fcedf20a93c5e8e531e4d2ad7c3844edc32470436bc8",
-  "skills/rollback-safety-1/.phoenix/provenance.json": "4669e8c0075ed23ae1e88162f08065bbb6fce80745c74387db1128b6e694afd5",
-  "skills/rollback-safety-1/.phoenix/selftest_evidence.json": "c5766d783f22076d47e1cea3d6e422d72307630291845db9c9c73f7abbcae16e",
+  "skills/rollback-safety-1/.phoenix/provenance.json": "6473a278ec7127b46239eac69800675ff5fa0ed542e12b6f992402a49502f6f2",
+  "skills/rollback-safety-1/.phoenix/selftest_evidence.json": "d3576498074ddef11aa6842459495d079c820aaa0f5f75e9ea107454cd1edf53",
   "skills/rollback-safety-1/references/creation/p0.md": "2afabd283ca56000d88c9cdca498e8a8a26f14b7225e3cb8dd662e0fe0606c21",
   "skills/rollback-safety-1/references/creation/p1.md": "35ed87540f01507b40a2d072e6261cad29decccb25af07cd2ad0b5453e373a6e",
   "skills/rollback-safety-1/references/environment/p0.md": "fbc479e7eec8350cd108de9f8d92312d6d5a907eede8a5835f8f3393d545f1c4",
@@ -37,8 +37,8 @@
   "skills/rollback-safety-2/run.py": "c448c8ded6944da0a4ef024919ae64db74c821f5feaa93348811e4289aae78a1",
   "skills/rollback-safety-2/selftest.py": "e9f83f4ccf52ac7b243329062d8746149c6617456b089a86b604181467826d1f",
   "skills/rollback-safety-2/.phoenix/originality.json": "c33b183408880c332b08537a50f6a163819ecd42b49392dcfa0aa5dbfa949780",
-  "skills/rollback-safety-2/.phoenix/provenance.json": "fee89eb2306be93b71ccf92799324c8ec93b932309f7629b01aeb65fb81b0c66",
-  "skills/rollback-safety-2/.phoenix/selftest_evidence.json": "241f155572aefc775044dbf7e7d8b76e738857b44502a48a3dc75d5ae5c8ed54",
+  "skills/rollback-safety-2/.phoenix/provenance.json": "9996c3eddedd52c971546400b55e69ed151d07d0bbef8682d639cd1803e0f639",
+  "skills/rollback-safety-2/.phoenix/selftest_evidence.json": "3665e8b9f7175e33b40a82afc72ecadb214f487baf43dae17e50ca13baa56f50",
   "skills/rollback-safety-2/references/creation/p0.md": "88c7a1c4e964f725d05e9a1f240a64a955b7ec9b881f85f3da670c5d34372cfb",
   "skills/rollback-safety-2/references/creation/p1.md": "4a147479771619100a0a72ca1648348e00a6737373de93329b493b974e7087df",
   "skills/rollback-safety-2/references/environment/p0.md": "5a0da36e90bc7e89a6912a9b6e72e968f2580e68ee933f326954a22c2a445232",
@@ -54,8 +54,8 @@
   "skills/rollback-safety-3/run.py": "2a35f7c8615b90c129d577dae0c77c2ea6f921d3d55a643e6f302bb3ffed78c6",
   "skills/rollback-safety-3/selftest.py": "48aa196ea21d83d1620e6ac909d19bc650501cbe75e141659acf556ab0f346ee",
   "skills/rollback-safety-3/.phoenix/originality.json": "f354ba4c3c8ddcbbbb48795a01b804f91897bf79a224754b25e3683183f734ee",
-  "skills/rollback-safety-3/.phoenix/provenance.json": "9e8a8bc648e110898337dd156a521192eb2a8204d10dd50798932f55b31869b3",
-  "skills/rollback-safety-3/.phoenix/selftest_evidence.json": "8bfbc1826d915665c576666d701c21a2ea816e54c4110affa51f3fd54a50bbc1",
+  "skills/rollback-safety-3/.phoenix/provenance.json": "4a28dc1725f5857a75b90287245e081a800db642e428ef5542225bfea40a7e5c",
+  "skills/rollback-safety-3/.phoenix/selftest_evidence.json": "191568de644e3ceac21e97f915ea4906241982acd99797235dd6f85e51d06690",
   "skills/rollback-safety-3/references/creation/p0.md": "a7de50279b4d49c4db5667e62c8a8036273b05aa1568261276a92613ad5b541b",
   "skills/rollback-safety-3/references/creation/p1.md": "0f3cda1ddc0954b62d3524c10392d9820c1926449a3f40a1f66d6b0a4b84d956",
   "skills/rollback-safety-3/references/environment/p0.md": "1fab6db6ac05514a06d39df5448e08424c77b490172403bbaeda86f0e8e775eb",
@@ -66,7 +66,7 @@
   "skills/rollback-safety-3/references/production/p1.md": "d0cbd553a84426c68ec4d04ff371060c73c693300559ced6001dd2775f57716a",
   "skills/rollback-safety-3/scripts/main.py": "850236d87bff162459d87bc2f1cf8f5a28c0dec68f7b163db730afeb083ae60f"
  },
- "sealed_at": "2026-10-18T20:08:06",
+ "sealed_at": "2026-10-18T21:03:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

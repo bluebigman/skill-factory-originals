@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-sign-flow",
- "merkle_root": "632c280bb45a0385ee610afa379fa52c1821554dad56d2c942063783e4c43c1d",
+ "merkle_root": "7e32603e95c6ee7bdcdf8d1428417e132f1366caf11e9668d2bbe27bf3280653",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-sign-flow-1/run.py": "5eabfa98ab220e702a90db63837e0c89efcd33be8c234546d53c07422edbe5d9",
   "skills/doc-sign-flow-1/selftest.py": "b117b5a74d985c7903d59b0df04fb5cbeae12a91401d6a4bdc6f0a9ee5a4a653",
   "skills/doc-sign-flow-1/.phoenix/originality.json": "94a99eebfb48190f68987fbef0163279e295b74d577ec045e0be8facb925c95d",
-  "skills/doc-sign-flow-1/.phoenix/provenance.json": "51323830a2221e3be769b30cb0cc6af79cadd4ea09fdb26ad405101b32457955",
-  "skills/doc-sign-flow-1/.phoenix/selftest_evidence.json": "756913380f08aa493328330034a3220264b6f8d902d737abd5c0347285b66c19",
+  "skills/doc-sign-flow-1/.phoenix/provenance.json": "cc03e790981b4b51ca9c5975061acb566dce40707275e578ab74ae3d51e5d4e2",
+  "skills/doc-sign-flow-1/.phoenix/selftest_evidence.json": "dc162e8c549774e00b5756643870fa82b16171f913c39efaac1ce72c0465b914",
   "skills/doc-sign-flow-1/references/creation/p0.md": "4264eddaf6de7f36c60b9566b68064be419f0216cd6ce5f39ee5394c22f1dc8a",
   "skills/doc-sign-flow-1/references/creation/p1.md": "7ae0e58cb0f5d4c8bdb670ce15ba320d006ca722d56a9372849d624d9e61561d",
   "skills/doc-sign-flow-1/references/environment/p0.md": "f95136ef8cbd37fc1efc1d068f29b419aad5c1245effae6d43e7ab7cd392904b",
@@ -37,8 +37,8 @@
   "skills/doc-sign-flow-2/run.py": "cca86f6cb2bc766b09a6db60dd07c52779829ba83df99cc4af0c54f0b07e9acb",
   "skills/doc-sign-flow-2/selftest.py": "f607c96daf607f1baa2ae7abc7ff47a8b6f0f44fbb3e9018117531e2e12094f3",
   "skills/doc-sign-flow-2/.phoenix/originality.json": "08282e78ff8911b0019c5a541be96feb648ca028161afcbd3e03dc76a81039b9",
-  "skills/doc-sign-flow-2/.phoenix/provenance.json": "2c7b0829f18471c2e4a343e11342172473467012de309e7db900319fdbd83e3c",
-  "skills/doc-sign-flow-2/.phoenix/selftest_evidence.json": "af3abbd31db8079aeea9e0718806b0f685d2e6f673a1bf100ebec2c0d364b934",
+  "skills/doc-sign-flow-2/.phoenix/provenance.json": "46c1ece94aad7a4abacd10e306d94f02ddeb6419fd9041d4c171dd05d9c3272f",
+  "skills/doc-sign-flow-2/.phoenix/selftest_evidence.json": "20e63a4b60c01ede8783df33ee5a775ffe387fcc07e337fa479cafaf63e527f6",
   "skills/doc-sign-flow-2/references/creation/p0.md": "282ce40b8c0726137892f2d932ce7baa4db53c9f1747364e53ec8e416c4c5f17",
   "skills/doc-sign-flow-2/references/creation/p1.md": "8a4718d5a587fb64c3a7dce454ab270c7c09e2e1d44f33ced850f7fd263bd994",
   "skills/doc-sign-flow-2/references/environment/p0.md": "f9ea2208c1d3e09e92a6382b3adfadd47146767a8249a81461790ca09c15293d",
@@ -54,8 +54,8 @@
   "skills/doc-sign-flow-3/run.py": "5f5f80bc191ec82e152abd9d9b9ab0abdfe2a5a078827c27c7fc539abc0f5bf8",
   "skills/doc-sign-flow-3/selftest.py": "5d23a3edb7224459df50f0283134ae91d964dd530c902a2cd6075ee7c0d3a5f5",
   "skills/doc-sign-flow-3/.phoenix/originality.json": "307c129619c1ed5bbf176d5d7791f71b5fb20a86888fa0e54e1b232f7d466a8c",
-  "skills/doc-sign-flow-3/.phoenix/provenance.json": "cb2e9654e9356b6fe5f8f01a21695b5300c140c0db0c5e52154d94e18bc1a9df",
-  "skills/doc-sign-flow-3/.phoenix/selftest_evidence.json": "bb9a834d938ac13fe05353db91fc6aea0c7a5f6f001b787307818c22a2c55c64",
+  "skills/doc-sign-flow-3/.phoenix/provenance.json": "58987b510e63b97f2c735304563e56e2a18a1cf3f4b690e1bc241cc8d4b4a3aa",
+  "skills/doc-sign-flow-3/.phoenix/selftest_evidence.json": "63856352249c4d321319ee9d63bda7202d53de44ff29d5de6b99c6bf4f1d44b0",
   "skills/doc-sign-flow-3/references/creation/p0.md": "bdf8dc5bfc140deb8a25e9c630a6896304a9da94f2d27aba8157b48c76073686",
   "skills/doc-sign-flow-3/references/creation/p1.md": "a900b3afa21acceaed3f45316f1cd05ee8bbe5d3520b4c249ec865c8b757e597",
   "skills/doc-sign-flow-3/references/environment/p0.md": "489cf0e9a8a7be422c4d638a3365019779ddbe919440e246f3c96c1748636758",
@@ -66,7 +66,7 @@
   "skills/doc-sign-flow-3/references/production/p1.md": "732e4919ec0bdd77964b6a2336a03234c2474412f17bead49f8781ab3c1a0d3c",
   "skills/doc-sign-flow-3/scripts/main.py": "654321c6705770614d1267b0fcfb35c4a677a9b46dcaac1b764d5b47e90ac6cb"
  },
- "sealed_at": "2026-10-18T19:57:28",
+ "sealed_at": "2026-10-18T20:57:48",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

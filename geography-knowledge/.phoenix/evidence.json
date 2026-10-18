@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "geography-knowledge",
- "merkle_root": "2431b37ac96c5184df3fa099df75eb6a87e6dfa6af32460f15a619eabe3bf232",
+ "merkle_root": "a8a1805b376ea8621e69109c2ceaa2d980c7604fd8a82cb571d5b25f8aa53dea",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/geography-knowledge-1/run.py": "2194aaf00752a9b97080d73aed5e25c1ba981f45cf00aa48d900df12528dac2e",
   "skills/geography-knowledge-1/selftest.py": "53ebfd86ac481ec058d510f2cc0a799b5edbeee85343f62cabeb93565bc2bcef",
   "skills/geography-knowledge-1/.phoenix/originality.json": "aabf670e17b94d2ad831a6b393d917e876fb6c5e875746eee3283d2a341c980a",
-  "skills/geography-knowledge-1/.phoenix/provenance.json": "4d6fc9b1b0147e6b1b6c9bc0a2a549789aa4dcdb44aaf881ed3c010da2222de0",
-  "skills/geography-knowledge-1/.phoenix/selftest_evidence.json": "7fbab44ded2efa079e81a493bf228c94f2ec1fdbcf58a80a3dc44389f304f7e3",
+  "skills/geography-knowledge-1/.phoenix/provenance.json": "504af7a9b427e300da7302ebc299f9ffbcc990a44a757dda242c7aa5ad942830",
+  "skills/geography-knowledge-1/.phoenix/selftest_evidence.json": "e5a1ace843f8dac1725255b83f04fb68c25cf32c49baac77d9a5da186b1ef9dd",
   "skills/geography-knowledge-1/references/creation/p0.md": "2837022663f8a2462af3045311d02c25dae751727eca553c05d7615b08d26af8",
   "skills/geography-knowledge-1/references/creation/p1.md": "3a2a7cabbd6830149c1682f847ccb889aded49fbc8fd5181598ac52096d41079",
   "skills/geography-knowledge-1/references/environment/p0.md": "12dc969a7be73f15a217c8c0ea65f8b6556b9d1aeeeee23e5572914d65ba0973",
@@ -37,8 +37,8 @@
   "skills/geography-knowledge-2/run.py": "87d1bddef88765aa039e608c10b824873a146904ccea6dccb478f28af896770c",
   "skills/geography-knowledge-2/selftest.py": "fce2000b366df676dbd45df23f3c5966df58f394836c99ec95a431c7dd7b2668",
   "skills/geography-knowledge-2/.phoenix/originality.json": "7785382d51f9e188ba3a5a1efce7c59dcf7e186de7677e26583805e9f3050a1d",
-  "skills/geography-knowledge-2/.phoenix/provenance.json": "15548fe0dfeb03721428c95ffd2fd4d5c5c00d09beefdda8d0c288c2df896a58",
-  "skills/geography-knowledge-2/.phoenix/selftest_evidence.json": "e28011632d99fcf3a824023f958e39512ef1393e7b05ac1a5ecf272911ec9308",
+  "skills/geography-knowledge-2/.phoenix/provenance.json": "66a79b41c1239c19739bcaba19ac033236f946a39761d187f0564f19aa3a6fe5",
+  "skills/geography-knowledge-2/.phoenix/selftest_evidence.json": "131a9c313ed4a1e321f7f7c78ae307564302c377bf57dd414a79ad3984ba6fa7",
   "skills/geography-knowledge-2/references/creation/p0.md": "9143dc4a6c39af85d0a640ab037572647c20b6ee3665fa8002151da7e101af1f",
   "skills/geography-knowledge-2/references/creation/p1.md": "0630a7f05be3f115631eb6bdbc96ae1b3bf5edb1061bafb868e166239b0613e1",
   "skills/geography-knowledge-2/references/environment/p0.md": "7461ae3af4df91e826c86b2143d0278e705fba94121891cd9cd1450ceb9aa948",
@@ -54,8 +54,8 @@
   "skills/geography-knowledge-3/run.py": "ba8e1590cdbb91e48382ffbad5305cd105ec273805ece3c0ded9089f3f4a4ca0",
   "skills/geography-knowledge-3/selftest.py": "b6be4e87ee8198550d6f46c73aeff552e526fe229f0bf37c07a311a1ea403d33",
   "skills/geography-knowledge-3/.phoenix/originality.json": "33eba1122e6add36b513dc92e3dc8a977fa4c1aa1875c3dbd1cef32dad697b66",
-  "skills/geography-knowledge-3/.phoenix/provenance.json": "08d57685e9bbbc405f268e57f718f3fd63bec7caf5bca1a8688d36018766af43",
-  "skills/geography-knowledge-3/.phoenix/selftest_evidence.json": "e01317d0b2c34fc4d92c9fea84a717b73fd7c4ef0fa62dc134e31ce51d7a90db",
+  "skills/geography-knowledge-3/.phoenix/provenance.json": "045ea2f78060f7d812ef23fcea3e060004fe0c987ecae5edd52a7a231cc36ed2",
+  "skills/geography-knowledge-3/.phoenix/selftest_evidence.json": "80b8f1fc862984d5084d56f4dbce1cc7fd88e4627ee0b6870fe4b2912ab68417",
   "skills/geography-knowledge-3/references/creation/p0.md": "51fdd6b523fd3750fa70b1d4ce278924aa21f7e882546b44868ba9d8d3c0061f",
   "skills/geography-knowledge-3/references/creation/p1.md": "d44252f598be777b9ebad4f0dcbb1f3ddd0730ab92531e447b17e40c22e298b8",
   "skills/geography-knowledge-3/references/environment/p0.md": "430a718f9bd1545c101dbbc647e30cb8ddd6fc697184c93fc476aa77dc2162f6",
@@ -66,7 +66,7 @@
   "skills/geography-knowledge-3/references/production/p1.md": "f093292817c0168754c173c45f1d7c2c4ddcb6696488a47caaff65d6eb3e0892",
   "skills/geography-knowledge-3/scripts/main.py": "e0afbc3cc0ffae8cabd706908bc545d505db208bc40dc83a1bbd7dbdce858577"
  },
- "sealed_at": "2026-10-18T20:00:07",
+ "sealed_at": "2026-10-18T20:59:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

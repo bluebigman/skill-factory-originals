@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "rollback-drill",
- "merkle_root": "7dd11580c407938965dd20558170cdcf954f2ea119a43b223258b4e13f3dc999",
+ "merkle_root": "c5f0273642870ce43c8bc867211453066cf470300e22b565109fd116e0edaa78",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/rollback-drill-1/run.py": "deca992412db250a73b68f3ec4445d6e1cf144e449dd77bc6adca951adb63f78",
   "skills/rollback-drill-1/selftest.py": "8becde2c353be87189fbe72607d6aef8c30850cd0b7a4150b0e7bfca97035d1f",
   "skills/rollback-drill-1/.phoenix/originality.json": "63df544b002462d4ceced203d223dc9d3ad651251d5af4fac7ea81da6194b258",
-  "skills/rollback-drill-1/.phoenix/provenance.json": "cbfccffa0ebf3b3336c599446e2eae7349409ff1932bbd91cdb49319f6a248d9",
-  "skills/rollback-drill-1/.phoenix/selftest_evidence.json": "8da5572934fbb107c1bc9606fab1d62e7f5cea68353e2a0241d0933ffe582129",
+  "skills/rollback-drill-1/.phoenix/provenance.json": "d7e40726a970ce6997792ebf46e7ba49593fc8d88af8e1a15df0f99d768e4719",
+  "skills/rollback-drill-1/.phoenix/selftest_evidence.json": "9364915d0073fcd71555397f5fab28110dbdd73ac5195f0f1a6187b4acc298a7",
   "skills/rollback-drill-1/references/creation/p0.md": "6c6898900576ad53e80f349399b65b166d71febf0d037d1dc7e9a3725354fc32",
   "skills/rollback-drill-1/references/creation/p1.md": "0be6048d9cda4325f2f1ee181adbe1eb0287d740cd42d6d70bdaf2e7ef1d7b22",
   "skills/rollback-drill-1/references/environment/p0.md": "399470e3b9d042c03c513a4e17fe393a0306055f979d0e5a835f2aa5e6fff180",
@@ -37,8 +37,8 @@
   "skills/rollback-drill-2/run.py": "ed019d8dc6a67b366891065fb0482ca9dda9694b124b3ac07925fef74c2d59eb",
   "skills/rollback-drill-2/selftest.py": "7f6a5dcbe364517088ec0b61cc0f8878ba37bd473fd54033793ce7f29f17d7eb",
   "skills/rollback-drill-2/.phoenix/originality.json": "a18a87ebfd7f4cc12dd645b2fd3983fb27eab486676fc6ae71967a8f27c61541",
-  "skills/rollback-drill-2/.phoenix/provenance.json": "f2eae3fda41476d18c775da89c6a4374513850f3de16b11dc76aafab34684758",
-  "skills/rollback-drill-2/.phoenix/selftest_evidence.json": "5fa3f8060ee40971fb24d81b085628d1be08fff43c64ae01db3b8a973cc2dbc6",
+  "skills/rollback-drill-2/.phoenix/provenance.json": "542823ff3d2eef26ee3ec276df23264bfe09057e850babfee978e3bc001d4a29",
+  "skills/rollback-drill-2/.phoenix/selftest_evidence.json": "3d0f081b8c7bfe1ef58f9390173348a8066166607972517e11e075e89d8bfaf9",
   "skills/rollback-drill-2/references/creation/p0.md": "098df5801c40ae9cc061e47849b0d02389fc9afdc6ea666e8469610e6f79c18b",
   "skills/rollback-drill-2/references/creation/p1.md": "8927c244131a1a3d03fd86fc3b507a9f6a091912719aa386287c39828152f8b6",
   "skills/rollback-drill-2/references/environment/p0.md": "a62ff90d118e3a48d2ddecba5519d55cfa6671c609ce9a7cc67b187bf3986090",
@@ -54,8 +54,8 @@
   "skills/rollback-drill-3/run.py": "840a7621f388068e8b0abcc86604bcffac3e612ca683d0e839b06e717f742ec5",
   "skills/rollback-drill-3/selftest.py": "819dfa465c64bf6ab721cf8e398341bab7312621c78a74f7fb385270222f7449",
   "skills/rollback-drill-3/.phoenix/originality.json": "c83d37f8b24a26ceef099a59615c9e254e73eaffb29828435ac8784ad3ceb4ef",
-  "skills/rollback-drill-3/.phoenix/provenance.json": "a8318c1e59375b0fb62acfbdd0f24cdbdeb7f16df3209e5e0d3596ac8ceb19dd",
-  "skills/rollback-drill-3/.phoenix/selftest_evidence.json": "99384a2be83c6f9d8d9b3380138e84def3b84547bc0b38668a042f887a268ecf",
+  "skills/rollback-drill-3/.phoenix/provenance.json": "a2b15db4d04ad3695e00434e954cd41b558ceb13b4c19c53e7251111fc458bf3",
+  "skills/rollback-drill-3/.phoenix/selftest_evidence.json": "97fe4a2e5737dff8d20c944330061d0ce066b81c0e1638d6cd815d6a6e3da16f",
   "skills/rollback-drill-3/references/creation/p0.md": "8043d064eeb90eaa1bc877cac450c0f3bfdabcb882af02ca031a08bc28da9b7b",
   "skills/rollback-drill-3/references/creation/p1.md": "255af4109cb1b958469e348c25953628a8c933bacc1b2e5dff5e65cf2cd9c7a3",
   "skills/rollback-drill-3/references/environment/p0.md": "7e9e5c7ea367ef23be1f8e07a12aa43d5f181894759daf65629ac729f1fd8581",
@@ -66,7 +66,7 @@
   "skills/rollback-drill-3/references/production/p1.md": "ac9fb490c40a55ae80f218a6fbc663828666a3e0788ba02fb17f5b684d91fdd3",
   "skills/rollback-drill-3/scripts/main.py": "74d69974901f10fb5e3721738b29174b67b20e0ecf698954f8d3cb03dcf75732"
  },
- "sealed_at": "2026-10-18T20:08:03",
+ "sealed_at": "2026-10-18T21:03:12",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

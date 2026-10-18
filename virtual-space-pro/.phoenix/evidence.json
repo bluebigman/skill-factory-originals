@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "virtual-space-pro",
- "merkle_root": "92c680026fcb485f148b4cdc2cda0071edfe9c1ba7c8eb62bfab841489f32787",
+ "merkle_root": "336a04b568ff77b87c10f400c6964be63442eb58426dfdac6a41d62006cbb9c2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/virtual-space-pro-1/run.py": "c9d2d3f07d77316920650a65f94a41ea0749b678d51021e57af67adcd8a8c3ed",
   "skills/virtual-space-pro-1/selftest.py": "78cb451593c63ad260960e89677b94ef66c533db50fda7eb3d2a43b10766cf61",
   "skills/virtual-space-pro-1/.phoenix/originality.json": "e77cfbf8be13e30ca5779e55944abed86a827c085edee2492d1d03730bf13f45",
-  "skills/virtual-space-pro-1/.phoenix/provenance.json": "3e83fb1d30547e78d65d911ef914123ad1e25d09a944275bd2a47779aafe2708",
-  "skills/virtual-space-pro-1/.phoenix/selftest_evidence.json": "49ef36592c7d06df0c633f317302334248594f75c1ba40fcbf347004065ba0e1",
+  "skills/virtual-space-pro-1/.phoenix/provenance.json": "87deaa101b58df10b5b49e4ae55450c3f7875e61cfff1ecc88722837a5f77a73",
+  "skills/virtual-space-pro-1/.phoenix/selftest_evidence.json": "1e237d21043df85c125675d8a19735cf879fcdb2decd3b0e79fef7935c2d9634",
   "skills/virtual-space-pro-1/references/creation/p0.md": "a11c57c69769a5c18af6d9b641efbd225083d11b297e135c18dbdb78373160f6",
   "skills/virtual-space-pro-1/references/creation/p1.md": "3b7eb3e6fd3614b5579d5c920cdb45e71b36a12ec7db044c0a6672a31990a3b4",
   "skills/virtual-space-pro-1/references/environment/p0.md": "7f850137ff8cee5f7cdb75b90eb0d1ba217e4a7c0687bd7a50bd040f40cb290c",
@@ -37,8 +37,8 @@
   "skills/virtual-space-pro-2/run.py": "88d6c2898a021f45452ed137390ea4118b6b6e1044e3c82e8b07751379f6b872",
   "skills/virtual-space-pro-2/selftest.py": "73d5c87d6d0203a4704f8eb87dee2247c9c9fe2e0a61908f93d09bd945a2bea0",
   "skills/virtual-space-pro-2/.phoenix/originality.json": "39d35a46f65655950585aa4060b41a6dbacbe4d3bff5d012baf6abc407fd2f6e",
-  "skills/virtual-space-pro-2/.phoenix/provenance.json": "0a971b200977fca15fe14245452bddf167de174d0bc0fc7a032c8a8fd97b42dd",
-  "skills/virtual-space-pro-2/.phoenix/selftest_evidence.json": "f31a2697914a73f5ce7ba681a668a9d77f9b3c423d5c0ad80ccebefd398a6f4c",
+  "skills/virtual-space-pro-2/.phoenix/provenance.json": "64ccfc6538e799c050cfd79618e0c38f0d9038a19b06914e16d2a61502a54a3c",
+  "skills/virtual-space-pro-2/.phoenix/selftest_evidence.json": "c392fef1c21c95b6e90f5ef5997aca80b782509ceec10c2f301fe29fe9910bb9",
   "skills/virtual-space-pro-2/references/creation/p0.md": "b5807516d63eef083b1c08016a09c12fd2fa2b994ff979724ed8de06533a6aa9",
   "skills/virtual-space-pro-2/references/creation/p1.md": "7e914e10b564080683e45e7fdfc26aaba15edd653caf48d9b4cfa7c55a0ebada",
   "skills/virtual-space-pro-2/references/environment/p0.md": "deb4f62bafe8c059a3c48e738980a8ae80668288cf067afb90caefd1b6d84687",
@@ -54,8 +54,8 @@
   "skills/virtual-space-pro-3/run.py": "349fc6db4ff9d05c9d45f1383f1df289f1a9b202778508d68e1f610d1cc9624a",
   "skills/virtual-space-pro-3/selftest.py": "b72c4cdfdba3e3dee72bf5786b590e8a56e0e3ae388e7555c600cdb655504b14",
   "skills/virtual-space-pro-3/.phoenix/originality.json": "5a20ecbc5928c9c34cd54e6c3e10af2f75ccb7a9238cb7b367e44d9268aac634",
-  "skills/virtual-space-pro-3/.phoenix/provenance.json": "24da5380d898f388794d76a6c7469c1d4ffad462e659b6dac368496948c01f4f",
-  "skills/virtual-space-pro-3/.phoenix/selftest_evidence.json": "2eb5318be3db2cd2ea4d234e07727b8f224b0275351379fa32902d6d9013b6b9",
+  "skills/virtual-space-pro-3/.phoenix/provenance.json": "e4c5e8e4be44af90485f631f703774eaca0e996827b30114b82dd4f9bd373561",
+  "skills/virtual-space-pro-3/.phoenix/selftest_evidence.json": "58930a2723745f68957293727adc4a9a0cfabfd040443788f6a01d1b9af2177f",
   "skills/virtual-space-pro-3/references/creation/p0.md": "f77e9a6fd1ab2740fd6b985ffbd266f991aceb85cdddba266986903c56ec876d",
   "skills/virtual-space-pro-3/references/creation/p1.md": "467bca521f81b296a31cf7ced525a151bff4f4c17e94cc08a6643898d711fa0d",
   "skills/virtual-space-pro-3/references/environment/p0.md": "665fefdd71e4855b81c191202c0c65d50d71755830d66da40b538201f6f2b51f",
@@ -66,7 +66,7 @@
   "skills/virtual-space-pro-3/references/production/p1.md": "e15c9c28ecf9d251d6eabd49b3a445bb1bcc785fd4b82ec20bbffd578ad20b07",
   "skills/virtual-space-pro-3/scripts/main.py": "97a7f8210d76ff05e48a23d6c22ac5e65004e62fee5e9078590fd44d8546a301"
  },
- "sealed_at": "2026-10-18T20:12:44",
+ "sealed_at": "2026-10-18T21:05:17",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

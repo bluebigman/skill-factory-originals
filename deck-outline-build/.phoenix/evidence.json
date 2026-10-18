@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "deck-outline-build",
- "merkle_root": "8ae013fbd182539cf96020b5e16adffaaf311c37b809ebef4d45cb98976d8028",
+ "merkle_root": "4058327e9415e95be4faa7c86b0521965b8504204aa7a5f5897a3a1cd46958f0",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/deck-outline-build-1/run.py": "7418f99f95632f2437c60b1aabde865c4ed0f9d5990e79a9dc6d8c0a36c2c15f",
   "skills/deck-outline-build-1/selftest.py": "0ad64b80d5f375a5f20874dbd5c80ab53af68bad4fb7f599034343b0e7a62340",
   "skills/deck-outline-build-1/.phoenix/originality.json": "8bbf2a3629d180faa82172100fb4b90ee7f90e4b31c0050bc06038feb6290882",
-  "skills/deck-outline-build-1/.phoenix/provenance.json": "76908a98e484fab9915fe15fb7c7a8787bda1267f8c45298e3a36e7729af9b00",
-  "skills/deck-outline-build-1/.phoenix/selftest_evidence.json": "a931e2710596de0e30da08cfe3a263833b23c9bdde57fe2c61bc159d62462ba5",
+  "skills/deck-outline-build-1/.phoenix/provenance.json": "4ca3a291a40ecfc2f6ced4e14c2529a20b8b0fec9bc4c83b1013d697f040e387",
+  "skills/deck-outline-build-1/.phoenix/selftest_evidence.json": "d02590516d9342ac858fcd5776733ac382d0a741a33c6d2c163080854a77458c",
   "skills/deck-outline-build-1/references/creation/p0.md": "1628a2325f8d44551bb322296357732b021cb027f1959a3ca4d0b11b11d228f8",
   "skills/deck-outline-build-1/references/creation/p1.md": "c5aeeece06d6e674c55d6c20003a551607bdb50be6f85c72b27a7a3b116efd39",
   "skills/deck-outline-build-1/references/environment/p0.md": "db6e494215083b88d128c6a75bffc887e622579e0367235e8ee0b6dab71f2b5f",
@@ -37,8 +37,8 @@
   "skills/deck-outline-build-2/run.py": "149a8870ea6cb02883fa37cec567c804fe437018c62c506b64ff515e2cbb814a",
   "skills/deck-outline-build-2/selftest.py": "b8a518cabf80aca2ac977200d74a218eb64178e90d00260378f35be7fcace48b",
   "skills/deck-outline-build-2/.phoenix/originality.json": "12ec4775d65fb5712fad86a55084b4206d360207e3d66fce93593517a91ef4d6",
-  "skills/deck-outline-build-2/.phoenix/provenance.json": "614491b8009d7a2c0c934d783e617b26d8afdf9439afc95578ed63fe0f091642",
-  "skills/deck-outline-build-2/.phoenix/selftest_evidence.json": "c5c79bee69632e0c3bde02938f69761cfc4e1e37c6b25dc2347e51d0ac34d6b7",
+  "skills/deck-outline-build-2/.phoenix/provenance.json": "527728fd50e164075c71dbde2b7fd343532c578bbaa1852371e80f8f08e2d027",
+  "skills/deck-outline-build-2/.phoenix/selftest_evidence.json": "378dd8388ccce10874278155821ed341b33e82694e865009c2f94f8950aa4971",
   "skills/deck-outline-build-2/references/creation/p0.md": "5f41fa7c3fc8a351bd8052a7bd539e28db7de4c8eff38009c6a452924af25796",
   "skills/deck-outline-build-2/references/creation/p1.md": "2ef1b5c95c9aefd4538305e3c01a970dfd6ac491956b70910339855011983a59",
   "skills/deck-outline-build-2/references/environment/p0.md": "bf9ab1ba4b4122f042139c5cb4b9f1f9a5f3d9120336dc39d22b73ab8ece0e22",
@@ -54,8 +54,8 @@
   "skills/deck-outline-build-3/run.py": "217413d3d6b59251184dac540f8665a647a9f5eb8334eeddbe17c3b9df9d46b7",
   "skills/deck-outline-build-3/selftest.py": "d702c999e395fc394758e0a31a9c68cae677c7dee386cab623be2cb1c6e64011",
   "skills/deck-outline-build-3/.phoenix/originality.json": "4666439bd3cbff23942321eba26a001398114edee3a86e8f5f6d6d05d8fd4bff",
-  "skills/deck-outline-build-3/.phoenix/provenance.json": "5a2718f87c9cd3422332f71916dee55a738d246b8ba78262760f8383eca2d555",
-  "skills/deck-outline-build-3/.phoenix/selftest_evidence.json": "df0f0d18cd5048d4e7998a17f60af2b56dc96f96d86cc11f9d031e9fd8364079",
+  "skills/deck-outline-build-3/.phoenix/provenance.json": "ff4985004ed42fe3bfa3f9af380245e7d5f5003b581b5484e1c4eeaea19f3eaf",
+  "skills/deck-outline-build-3/.phoenix/selftest_evidence.json": "5f5655d58fc7ada275e3daa8fdc767fc04851869b9fbb58931794b10c829f201",
   "skills/deck-outline-build-3/references/creation/p0.md": "f6112df55c4aa3ed0dececd3a6fc77fdf0efcf8e0b070d48c4a063a9a98f84c4",
   "skills/deck-outline-build-3/references/creation/p1.md": "dae4d872c56acaa6cef5866b4b538c47c19adf9f9c7d82e588b37e4173dedab2",
   "skills/deck-outline-build-3/references/environment/p0.md": "da9dbfe1236bde2272d7b2364d434b8d5a66c5451906e44b77f5c704b584ad90",
@@ -66,7 +66,7 @@
   "skills/deck-outline-build-3/references/production/p1.md": "291618ed502c7b0e75b92a85171c2f0e08d73063b3a046bf97d89314d23b0d04",
   "skills/deck-outline-build-3/scripts/main.py": "31b20c891761381efe1d109b616793a6c6879983d17e8d1b71b4c71dad2f7370"
  },
- "sealed_at": "2026-10-18T19:56:11",
+ "sealed_at": "2026-10-18T20:57:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

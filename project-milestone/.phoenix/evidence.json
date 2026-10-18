@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "project-milestone",
- "merkle_root": "b7f0ffcbcbb02b4c34e394dc1051d03bcd98bd37f06e6f8d9a4ff22dc83ea88b",
+ "merkle_root": "6e2ab0fd079f346227ca551f5029eaec949030438be9be53d19f08cd911ed03c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/project-milestone-1/run.py": "81bf464f66d2c038193abab0aad7d38ca728d55ba6e593119efb3e523ef503ca",
   "skills/project-milestone-1/selftest.py": "e8a81918a1e17a1629c570b6ec7f5e82836d50c5e8bd6993fc19703eee26597e",
   "skills/project-milestone-1/.phoenix/originality.json": "2254ebd62211f728bb6c342b2f0d528fc8b99666d2629fc722c76fb495d03cf4",
-  "skills/project-milestone-1/.phoenix/provenance.json": "ce8cfe7b230278c31ed65fdc71efcd5d4aef72b2004820f612ea7f87f94316e2",
-  "skills/project-milestone-1/.phoenix/selftest_evidence.json": "eecb25dc2f5df250235c44a308f6fea83c6cd289eb41c3925b5d80beb8285e77",
+  "skills/project-milestone-1/.phoenix/provenance.json": "be9d3260a4d1ae7323cd3e753beaa9c9d17a75c2ae6c7700d7dbc76d53d7fbc1",
+  "skills/project-milestone-1/.phoenix/selftest_evidence.json": "3780860ec33aff68e85897690dafa090acaf4d70f2ef80258686a3b19975fefc",
   "skills/project-milestone-1/references/creation/p0.md": "ee87f1922542c3e7a118f73a454410bb7899e97ee257d526cfdb5fad9751c84b",
   "skills/project-milestone-1/references/creation/p1.md": "c9bbb4a18fa2fe5d61f7839ee5b77753a013083ffa419dde80e19c6d9db10f90",
   "skills/project-milestone-1/references/environment/p0.md": "5794946a67cd7f29c79b3c2d57198d54691ec358b377e02678e6414942c2e506",
@@ -37,8 +37,8 @@
   "skills/project-milestone-2/run.py": "3af366c72e542e6d0f06f38a805b63a7864b0b6035ae110b60465d0ccac294d1",
   "skills/project-milestone-2/selftest.py": "0094a394c415952c729758c7556e6a4c3b6dca1c5b9274f202edc8ae14c16177",
   "skills/project-milestone-2/.phoenix/originality.json": "e055c508eea8e28973206107ca8ec4d751753f9d14b9a01693093963261a4edc",
-  "skills/project-milestone-2/.phoenix/provenance.json": "9c217bfc51ed894eb381141d65f513b68579238f63e233bd849c9f3fe86f7f27",
-  "skills/project-milestone-2/.phoenix/selftest_evidence.json": "747d6e5e6aa5bccf24ad5b1593275cb9d7f496effe4b23c9b88fdee6ba2af44f",
+  "skills/project-milestone-2/.phoenix/provenance.json": "6c2bee63ab34157a66b6334d54dc773cf0ce436f6e73c58e3b551a82f7824651",
+  "skills/project-milestone-2/.phoenix/selftest_evidence.json": "c5cf58d46d734e5006720eeb94a3261fa415b58c9c3bf08140da0bca69b852f0",
   "skills/project-milestone-2/references/creation/p0.md": "2a9ec79ef9fe5a8fb734922cee2a58286efad94b5c6088200d18ba3844176aa1",
   "skills/project-milestone-2/references/creation/p1.md": "c073776875f22498ff43f50fdcdfe4097604aba63c6f183afdf833ffeb4e369a",
   "skills/project-milestone-2/references/environment/p0.md": "9bd7b2f140b178f14a80ef1e8d130ae4163b5ee1f6d0786a4ff054154f6a18c3",
@@ -54,8 +54,8 @@
   "skills/project-milestone-3/run.py": "ebc4a37b96b42d545bc9679705a0bcdb76625b59fd9c448d90120caad9a64144",
   "skills/project-milestone-3/selftest.py": "da560285a739ca160109e79711a4880a2ab501f554789416bb0ee2c12e4ff32a",
   "skills/project-milestone-3/.phoenix/originality.json": "8ca6c35cf87e10a3bf952e0f5d1ece1d37250d241e6d5f8a08908564992c066a",
-  "skills/project-milestone-3/.phoenix/provenance.json": "3c2eab83310345cfc2f1e039c8b1f8b3faa42fd6cde9361a1e04f657770c5ac6",
-  "skills/project-milestone-3/.phoenix/selftest_evidence.json": "332bf3acb4f32fbb52b90af1c4a6a801faf9625c48762afef2a00c747a52c10d",
+  "skills/project-milestone-3/.phoenix/provenance.json": "2ee39229ee6d287a98393e249e15df216837c2bc659c53e7854b5f1baa238bcf",
+  "skills/project-milestone-3/.phoenix/selftest_evidence.json": "d724345087bc46d1b79cde1019ba2a5c5ad6762d37bf3a96dce099ee91141640",
   "skills/project-milestone-3/references/creation/p0.md": "5a7cd5c1f6ebad200d28b043ce1c4a2775d1f527c7bd88738f7fb0ebf5a383e6",
   "skills/project-milestone-3/references/creation/p1.md": "149d863029814625810043e9db8ccfdc6e6cff66d1a22ea6d77e4fc233f3ec9d",
   "skills/project-milestone-3/references/environment/p0.md": "d048e87dcca1a145d7c19ef973e82fb556abeff9f61c2aab619faea06316e95d",
@@ -66,7 +66,7 @@
   "skills/project-milestone-3/references/production/p1.md": "ffa2cf615df37230fceff0cd7e6d061addc5908faa6f5e39ba752f279ca581d5",
   "skills/project-milestone-3/scripts/main.py": "84afa56d9a3429a22d4e930b4e8b4c5e386e231ff66392ae2d5374578e227e76"
  },
- "sealed_at": "2026-10-18T20:06:36",
+ "sealed_at": "2026-10-18T21:02:29",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

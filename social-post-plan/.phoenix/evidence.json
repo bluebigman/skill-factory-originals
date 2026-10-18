@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "social-post-plan",
- "merkle_root": "ed17a03433e8d9c3ee80e8852eb87c89a999d5011c7a0b6a34833a0b4550ca2c",
+ "merkle_root": "5b15f7e329ffcc3cab6f9cc60b540913dc9f490cb367c8b0625d7a7e5930e649",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/social-post-plan-1/run.py": "5e67ee049f1008a36f44430cc0ebb6d7b406335457e728bf6edf7ef210d4f3f7",
   "skills/social-post-plan-1/selftest.py": "d9659166ca6c38f0d55de5355955c31e93e0022a6b7d15462a3ce2617655bcca",
   "skills/social-post-plan-1/.phoenix/originality.json": "f85f8907e0733dc342fc349ab259570fef3d8a5cc11c4921ecae67fda5bfafb0",
-  "skills/social-post-plan-1/.phoenix/provenance.json": "d5ba05c5707f189df09342498127c8c9b0574603cdb463999d14bd66df189a3a",
-  "skills/social-post-plan-1/.phoenix/selftest_evidence.json": "41b247fc06c350efdd40dd5e73ac0fdca305df4f4b2f7fdad9684a14dc8fbc6a",
+  "skills/social-post-plan-1/.phoenix/provenance.json": "14d18c1f49507c9f0fab3b52ba25c10f94941f6094da1ca696df06dc2538a155",
+  "skills/social-post-plan-1/.phoenix/selftest_evidence.json": "e9e79071c8b0e3b6102092767085c2b9580db7505b7e8c00af6c7da259f41d21",
   "skills/social-post-plan-1/references/creation/p0.md": "fd4f4c8cf0f56ccd37d11affb3353f7581b26821404a86b6f8b3480ea6d7c25a",
   "skills/social-post-plan-1/references/creation/p1.md": "370355cce06fdd9c93b232d4b6204008c4f829fd0c6156d32f379bdef1403a90",
   "skills/social-post-plan-1/references/environment/p0.md": "997cc3b627e4a0457a81357fdeb1ab7d820b50b0ffd59bab04ee0d76f21418e9",
@@ -37,8 +37,8 @@
   "skills/social-post-plan-2/run.py": "31d7ebbbe81e9daceb3b5d6b0265bbe1a05f2bbe8d0f25566ac74759f3675401",
   "skills/social-post-plan-2/selftest.py": "3729e44d4fff0e16b7d03b9c8078bf79796cdb7c0d0f7d7556ba50a04e394c29",
   "skills/social-post-plan-2/.phoenix/originality.json": "083676023f940999f1549380b96551857dc1b3b51630d9bf193591f95e9fa287",
-  "skills/social-post-plan-2/.phoenix/provenance.json": "a9300e0c54da416fe469936d490f80e0aa0753c30baedb5ae1ca069bdd60a034",
-  "skills/social-post-plan-2/.phoenix/selftest_evidence.json": "db182afa9adf2028f66af58b551640a1b8e6d4dfa3d5d960fd7ca739530c6ba9",
+  "skills/social-post-plan-2/.phoenix/provenance.json": "ac9592a881da13ad0d284ee635490a0f220e7a0c106a2f4bbcc280c67549431e",
+  "skills/social-post-plan-2/.phoenix/selftest_evidence.json": "92331b7103ee418623849063d7868fbe9df777fba040b98c054bfbd10bd698aa",
   "skills/social-post-plan-2/references/creation/p0.md": "504b4096c09482eec97464f21c28ff3d31361e1d6458294ddb1f22cd4380e3ac",
   "skills/social-post-plan-2/references/creation/p1.md": "2d29024ffc74a2e84aa1318b6edc56e792d75ae6b5a10cdd4ef0fac62e5c8241",
   "skills/social-post-plan-2/references/environment/p0.md": "b6affd42bd9c0dec32598e27794491db2eb7e8ae001eaef5e35691cfb73bc0fa",
@@ -54,8 +54,8 @@
   "skills/social-post-plan-3/run.py": "75dfc8b0313bd5a740748e2f251a625cc134c78bf0a29b013424ac4313a828d3",
   "skills/social-post-plan-3/selftest.py": "12211b25ecf711b771cd567e91efd2d84adc39353b9a3045418f59a8a12cf2b2",
   "skills/social-post-plan-3/.phoenix/originality.json": "3d5cde157b29357a9570df135058561fa3c10d4d226e73da550617c46653e291",
-  "skills/social-post-plan-3/.phoenix/provenance.json": "475b53b0f148b0b3ce690c5d08038aa17fdc3c32261f3236f9ecfc5deece622f",
-  "skills/social-post-plan-3/.phoenix/selftest_evidence.json": "b9754eaac60641b083a3cbaf80c060188088edd15862c5e2f66c81e224636100",
+  "skills/social-post-plan-3/.phoenix/provenance.json": "6392850d876638932820cfc9bb11752a08aa66608abde29f701da4e6816c4424",
+  "skills/social-post-plan-3/.phoenix/selftest_evidence.json": "79aeaf88d55a40291f28c3f9533c9151a6d942d20205c103422786c262c2e878",
   "skills/social-post-plan-3/references/creation/p0.md": "89ed415e8682927b9619595b1e33a774727ebcf79a19b06fdbb866716a974494",
   "skills/social-post-plan-3/references/creation/p1.md": "399a5ac291f6ba1d8502c8f3373243138be89d6893ee21644aa7d82eee52df87",
   "skills/social-post-plan-3/references/environment/p0.md": "c8979e88b6613028e14e1918c64639aee832c7d53e2046e658456803e593328f",
@@ -66,7 +66,7 @@
   "skills/social-post-plan-3/references/production/p1.md": "470e3879aa39ac244477f080067e3cad414b22c5929bd824acab1ccd32d71afa",
   "skills/social-post-plan-3/scripts/main.py": "538f9a40c4883dbfa40a9c5389f42d2460144a44edb3231d04c33460d19010b1"
  },
- "sealed_at": "2026-10-18T20:09:52",
+ "sealed_at": "2026-10-18T21:04:04",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

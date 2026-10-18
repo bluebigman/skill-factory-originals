@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "service-health-pro",
- "merkle_root": "75cd01a846cc809e189bdba06d736f372b95cc40164d8988281bbbc0677b41b0",
+ "merkle_root": "5d7a53d5ef1a9df014572d0243d26257b3155d2d3b05b3cd7ab5e283cf5d06a6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/service-health-pro-1/run.py": "7ccd4eb7b092c42ce5ae0bd0df458ccf3d7799b4e998bcf041787d91b7948b86",
   "skills/service-health-pro-1/selftest.py": "f38314ee4a246a994b7940afb6d79f2ff2d47c7089db4499145c260628e34fc9",
   "skills/service-health-pro-1/.phoenix/originality.json": "1269c8deee2445e6aa98ad95f3cb0776186fd1d1248abbd680d8abafd9397db9",
-  "skills/service-health-pro-1/.phoenix/provenance.json": "ebf99c45bb32300c75021f0744b31d9e2ff47ea1ce77c49266407af2d9414920",
-  "skills/service-health-pro-1/.phoenix/selftest_evidence.json": "acf5c4ba364a782ef0ad698c607694b8a6d4023f706ddf471f6033ad93d9212d",
+  "skills/service-health-pro-1/.phoenix/provenance.json": "5e35b6012fc762d375bad162a82e323ca19c8777f6327dcd8723198aa482deb0",
+  "skills/service-health-pro-1/.phoenix/selftest_evidence.json": "8252d59e4e18e7850e7c4ef47a0da0c2130abcb69334f05fa7501118b2b0e754",
   "skills/service-health-pro-1/references/creation/p0.md": "0ec50a7edc8b53784868c71a42c0fca02da37fc85d4cd7772869a2dbf519df50",
   "skills/service-health-pro-1/references/creation/p1.md": "07d1882b65c41734436bf569a261f72ed4e8f252f680ee71ed5eeb9af7ef4ecd",
   "skills/service-health-pro-1/references/environment/p0.md": "b6ff0acca7e9a7c67ec34ddf60e9e20b8d427c9b35c77a8de188fe8aaa7cc3fe",
@@ -37,8 +37,8 @@
   "skills/service-health-pro-2/run.py": "8433a3566cfb45a14b7453e29afe2f71770f49e212c27483610f4b2d351fd803",
   "skills/service-health-pro-2/selftest.py": "70a3db002a1b36d45352d85a243fea10c2705cf85b53fe391f95ab3980eacbca",
   "skills/service-health-pro-2/.phoenix/originality.json": "691ec6be4c2e9bfa5742ca2a1eb5a650a317504ad44b2b54b26b550be484e7c9",
-  "skills/service-health-pro-2/.phoenix/provenance.json": "deee26431ddebee7335e6157f0f439553df47679db6e9a5524b7d2d1d927b7bb",
-  "skills/service-health-pro-2/.phoenix/selftest_evidence.json": "350b86ffc68bbc4d12a90c5288e8a1332c5cfb151f3a79b1407fa5a75d45eca6",
+  "skills/service-health-pro-2/.phoenix/provenance.json": "3b16cab8d897a88a0a8ff1345ad95918a0129b60abf4ecea8b332b042bd5c672",
+  "skills/service-health-pro-2/.phoenix/selftest_evidence.json": "babca87a16c1dc2e4514b6f8b03b70ace9d3cc405c8e877d7862b61a34d1b568",
   "skills/service-health-pro-2/references/creation/p0.md": "d2a8b1f45d7dccd3218b8a9de010295598fa2bd6434d60f2c7c07be366f3e729",
   "skills/service-health-pro-2/references/creation/p1.md": "4bbd98a28fd1a6ce6b2a2f0f11837460b0ebaa55128cd4bec71939823f87d266",
   "skills/service-health-pro-2/references/environment/p0.md": "5360e86ae45bc3d14bc3804dac76ecb55b9df368740a2f20214be3651b8de1aa",
@@ -54,8 +54,8 @@
   "skills/service-health-pro-3/run.py": "daa289bb054e37cef3c2e551fa08e6dc4f1e6c651cce6e1a62642fc239467eca",
   "skills/service-health-pro-3/selftest.py": "e7064e399db838fc79b3d6da79e5e9ab9d3b2590dcd53f724dd50ec1a981ef13",
   "skills/service-health-pro-3/.phoenix/originality.json": "0b78ee97e6bfd8e135580ad4e6bd6ff5ac03fcac1db444823d3ebcc2f95bacd3",
-  "skills/service-health-pro-3/.phoenix/provenance.json": "5504d8895e4665b8b0b5bd319d078007b6dec0f1b76adec1eaba05a31a6112ea",
-  "skills/service-health-pro-3/.phoenix/selftest_evidence.json": "0c2571284b04c21a2955efbd4efb92d69f6c19e53e675e1777ea5123bd599354",
+  "skills/service-health-pro-3/.phoenix/provenance.json": "73240f39a79ccc1993652002408be64f6624a57ee596e311d5778ec61ac4db0d",
+  "skills/service-health-pro-3/.phoenix/selftest_evidence.json": "a512516867005a35d1581585e12eb243984cfee3927fc7a9d4eb51f95c45b794",
   "skills/service-health-pro-3/references/creation/p0.md": "f46c741a756bcbeca91e2fd3d035c0ec3f1ed41ae38efb4a0efbae0cfda086ed",
   "skills/service-health-pro-3/references/creation/p1.md": "be2de5f4e11fc5f60a0f9246bf83e19bd044af304def91df660efd68f252f3fe",
   "skills/service-health-pro-3/references/environment/p0.md": "e8d8e637e4af3fbdda238a53b183fafb39312bf2f1a0b69aefe720877427ea6c",
@@ -66,7 +66,7 @@
   "skills/service-health-pro-3/references/production/p1.md": "7063b38156b51df3a3d7ede485b72fdd1e9ac4baa7a97061be308bd4f09ff741",
   "skills/service-health-pro-3/scripts/main.py": "ea4478a9695c17b6ce8957f2b2926856420fc77f37e1c80bb53516ca3cce5ec8"
  },
- "sealed_at": "2026-10-18T20:09:09",
+ "sealed_at": "2026-10-18T21:03:44",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

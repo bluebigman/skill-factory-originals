@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "sales-script-coach",
- "merkle_root": "32ad03b23bdb86f506da952050c113b1dbc9555a96d517ba4c8e39bb30914716",
+ "merkle_root": "9b2ca90978308df7e37399c04d33a2d745ea764eda5c819a129bb8763c327470",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/sales-script-coach-1/run.py": "d05dad68036bf8cc492e7c4abad5da53f4de610f03a615dbc299bbbc1b03e4be",
   "skills/sales-script-coach-1/selftest.py": "a4c6accc8160e1652b7113442b49fcb6c76f944b94fcca12e306b98a0391fa51",
   "skills/sales-script-coach-1/.phoenix/originality.json": "c62c29c58c3d56bba515e9f0a0033bafbb0c9f42f9190de4be782074411e0d1f",
-  "skills/sales-script-coach-1/.phoenix/provenance.json": "d280ba0a15778ed32bf90e8fe691ad688a36e4b14b5834bb788e80fc8d5f4219",
-  "skills/sales-script-coach-1/.phoenix/selftest_evidence.json": "e80de97ea38f36aef57b3a553896d7610683310d94062bc6d0366b669e95344b",
+  "skills/sales-script-coach-1/.phoenix/provenance.json": "d991339015da7d1a5d28f56b7996b8ed7cda1ddabc2401752f50fd91c30b99b1",
+  "skills/sales-script-coach-1/.phoenix/selftest_evidence.json": "f87f3e7711e4a2012b438bedb2c676e30cef147aefd7043e5709caa5c12e3772",
   "skills/sales-script-coach-1/references/creation/p0.md": "4589ce6b103f0a455502ef2663480bcf1501ea72c76e1050c9ae5abf19635fa8",
   "skills/sales-script-coach-1/references/creation/p1.md": "b3d0f3ff9f886dec6bb1d967c4669dadb11bd5ef0b36cbdc53d01b444c728755",
   "skills/sales-script-coach-1/references/environment/p0.md": "87e35550691924e6f1b75827d0f6caa0ed99a48e10e4cac6e952a428d7e843cc",
@@ -37,8 +37,8 @@
   "skills/sales-script-coach-2/run.py": "ae64d418b3b757a580dd0e823965b269702947e3f3137ca5982bdfafc65fc634",
   "skills/sales-script-coach-2/selftest.py": "8908d2d19cf32d46b7890e4cfc5328d29e7b3cef56e1049b82d1c91197b291dd",
   "skills/sales-script-coach-2/.phoenix/originality.json": "67a5395bdb205883ea89f8f275e6c67dc9aceca1d78b3dce95e47212909b87ae",
-  "skills/sales-script-coach-2/.phoenix/provenance.json": "c0777c041f04c279cce15cbc58767fa1483ae7245f4ace09de1d82c2114d422b",
-  "skills/sales-script-coach-2/.phoenix/selftest_evidence.json": "46be337dae4da0aad16865f2cc43bd4811b7f6d9b3d41ba39a2b0667a863426c",
+  "skills/sales-script-coach-2/.phoenix/provenance.json": "d986b5e6abee9abc9636209e3ed15b191b6bff59de38708b0bfee04bc95970d3",
+  "skills/sales-script-coach-2/.phoenix/selftest_evidence.json": "5c5779e1b725ea005defeac24fdde30b421be0b1817750915e8543cf1350ac4f",
   "skills/sales-script-coach-2/references/creation/p0.md": "eb757fa370d32d21e5677bae4673c95dfa1ca31dea3c76e7ad1395b215e66406",
   "skills/sales-script-coach-2/references/creation/p1.md": "419d8621b19b853cd6ea5ce89edd290fd75812a9a1618cff15fd1667ef7af1ad",
   "skills/sales-script-coach-2/references/environment/p0.md": "c624b94bf188c0e8636ee60fef23f5bbbdb43cc4b238335fd1df9702ed53f738",
@@ -54,8 +54,8 @@
   "skills/sales-script-coach-3/run.py": "62c633fec93f09c91c42eb4dae4cde6f8f2fbc7453c703f7ef2c1069061bbc49",
   "skills/sales-script-coach-3/selftest.py": "d0c76369c54a9cae5c9eff4d581cef003c2fcb688416197d91f6466a9683b88c",
   "skills/sales-script-coach-3/.phoenix/originality.json": "2898c62682b557b2ee5e0ed1a406c84d90e2ab41bebd1ae4f60e2665341ff965",
-  "skills/sales-script-coach-3/.phoenix/provenance.json": "743384d9358476c7783d1e4dc41296151b2715aa930ae016d1ee93230a8011a1",
-  "skills/sales-script-coach-3/.phoenix/selftest_evidence.json": "e3905c704e7d0965dccc759328d19adba99e56306591f94d91cf8f73c79f33c4",
+  "skills/sales-script-coach-3/.phoenix/provenance.json": "a7c31d68252e5e6fdab5ac316040e4d56bd717ec5fe6779011deb1f20cd67cbd",
+  "skills/sales-script-coach-3/.phoenix/selftest_evidence.json": "d08059c5b522a627e6697e1a222eda34c00b350c2a599590fde0b4b3279eb868",
   "skills/sales-script-coach-3/references/creation/p0.md": "6741e36a16d031830c6cbf3c7f134a9ced318a18b4986db6b9d22c63f80000db",
   "skills/sales-script-coach-3/references/creation/p1.md": "7cc74d6b1b5387cebc5ca8ad6b8c9d8ab0760a11daa044d08ece7129ec42e063",
   "skills/sales-script-coach-3/references/environment/p0.md": "115ecb749475dbdb4d3a7f70979522ea4741468924423453ed8d792982c56753",
@@ -66,7 +66,7 @@
   "skills/sales-script-coach-3/references/production/p1.md": "6ff352052fa4a41fb077b88658ac5815e8e7ba3c4893196067d94ad8419d7acf",
   "skills/sales-script-coach-3/scripts/main.py": "0d6f643088ef6e03017f8f21347c0cd0a79ac334affa513173947966df61e77b"
  },
- "sealed_at": "2026-10-18T20:08:13",
+ "sealed_at": "2026-10-18T21:03:16",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

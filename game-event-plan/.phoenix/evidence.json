@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-event-plan",
- "merkle_root": "59230f108ded22e895e24c4eaed621a8791cd17a6e6d47de6fe2dbac1f3788b8",
+ "merkle_root": "3352ba66fd4eb626b7790abcf1acf5673366567bb1022132331c120dff6d8ee9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-event-plan-1/run.py": "fb10f05123d1b4f5c03b0344c97714d8b7048c5f22adc6dd908645194bca2fb3",
   "skills/game-event-plan-1/selftest.py": "02772e70dc7cb37996f89357a1cb6e7d4219db67aca0ec774c9dc71c2ee94612",
   "skills/game-event-plan-1/.phoenix/originality.json": "81276c4bed1918f775f43c2f2342fa4261bddb6da11d48be4121887ad021414f",
-  "skills/game-event-plan-1/.phoenix/provenance.json": "1d38a848a05a2b23b3e83bf1cba4e11abd4859bd02a057491bf9f57573ac2287",
-  "skills/game-event-plan-1/.phoenix/selftest_evidence.json": "b67ae6c972b0960c3cf5d9321d343264c00e35374b6c888422756edca89b426d",
+  "skills/game-event-plan-1/.phoenix/provenance.json": "72efd95881f7fe5aeb3f01b5d6f6976c95c61d0e3f84252c137e26d8c777228c",
+  "skills/game-event-plan-1/.phoenix/selftest_evidence.json": "0876ed0be724dad4d935afe09843871e4c8945baef1a0c5c427b64a5c643b097",
   "skills/game-event-plan-1/references/creation/p0.md": "e9eb537fe9bd1eca2d5cd8f908a9549cf4abb330a2b226fcbd58909bcd62e856",
   "skills/game-event-plan-1/references/creation/p1.md": "33e9ba2466cd4ead514ffe0fcaf1a8884dba5bd71b8fdd7e7ff56ce2b5a2f9bd",
   "skills/game-event-plan-1/references/environment/p0.md": "53c64da88aa72723eeb6f9e597ce8a37b9ede87ca0bf8834fa70eae50272e797",
@@ -37,8 +37,8 @@
   "skills/game-event-plan-2/run.py": "cc6c8c72c6c50a1b3c4ae24013979b5165c31c49da9e43311b5b7b9dbf61ff1f",
   "skills/game-event-plan-2/selftest.py": "575e86ec966c6dab823d49ed9224f9e9664d76fa437d63fc736f7de19a50ae13",
   "skills/game-event-plan-2/.phoenix/originality.json": "5de3a889cc792bbf42aced0a86c38cb1065b63c5ffebf5d1bf2ae3da08de8e7c",
-  "skills/game-event-plan-2/.phoenix/provenance.json": "3e86133372c97ea96ea97e1eb36e104642bcbedf51ea75fccc0acfd3ea18c963",
-  "skills/game-event-plan-2/.phoenix/selftest_evidence.json": "4dd114bac521b4098b0c851adca14f187144cac0e64257d285f4e552265efdc6",
+  "skills/game-event-plan-2/.phoenix/provenance.json": "cb0752542b28c730003139072da4db89141c62284860dd8493baa8b426fbcb9c",
+  "skills/game-event-plan-2/.phoenix/selftest_evidence.json": "eeac20c05a7d7a8635bea8920496d7ba2586fef5d7caec12e10d353ee74f6338",
   "skills/game-event-plan-2/references/creation/p0.md": "cb386082c8ddce3729e9e3d7b2eb244911913f2318732cc48165cfd819591d5a",
   "skills/game-event-plan-2/references/creation/p1.md": "668ecce644fa5abfdfef211636c56bad631f26e786729fdb31c058c6e87534f3",
   "skills/game-event-plan-2/references/environment/p0.md": "72c4472ca93119a18202f2e3e8c70e5079cddc2e6f722e771e0bd25de1c97772",
@@ -54,8 +54,8 @@
   "skills/game-event-plan-3/run.py": "5d059986fec9ce4613131b6dc07bb414bc6d75636c6d9b57a35448cff27ddf5b",
   "skills/game-event-plan-3/selftest.py": "6bebb2e31ecb3ed7b829ee8c187742c3f4605aaeef82607ca3e3d136d83aab34",
   "skills/game-event-plan-3/.phoenix/originality.json": "2f70849d0cb50a68ed1f598829610dd9ac3a175f8fed45f9622d8e1daeb95f4e",
-  "skills/game-event-plan-3/.phoenix/provenance.json": "e43885fbfb316fcf58a42a5aa33c3916a35d5a484abbf51ebbbc9d8e5bf777cd",
-  "skills/game-event-plan-3/.phoenix/selftest_evidence.json": "06d22f72e9f3467f054c1652ea0bcdf306a7e498a2a731a7482b08f2beb6e559",
+  "skills/game-event-plan-3/.phoenix/provenance.json": "c94991f4c187b60536d2f75f70ec80af8dae5b48426f55908604042149d54d70",
+  "skills/game-event-plan-3/.phoenix/selftest_evidence.json": "b6fbc405fcf4e691dade1192ba6a98568a21d08f4d2d4131ac7218a69c7ff48c",
   "skills/game-event-plan-3/references/creation/p0.md": "819c5e517d58876634cdee225bf136ce5bbacf688fd64c21c78ac04125feb647",
   "skills/game-event-plan-3/references/creation/p1.md": "843524f38375b6beae1d41fd2ba0997de0949b5c2dd5d9404daa678422fb88fe",
   "skills/game-event-plan-3/references/environment/p0.md": "ef0c57a96da7f99f1978596d66c68958f3e685bbcf8fd2c9894028270f9b95d9",
@@ -66,7 +66,7 @@
   "skills/game-event-plan-3/references/production/p1.md": "f2892550ce2358a43d808177529ad6d864cce1ba4b3df90db84163a04c72828f",
   "skills/game-event-plan-3/scripts/main.py": "95ba2ac56883ced781670b876e222628660f8f62d32a3ec6b2a76f3f31b0f609"
  },
- "sealed_at": "2026-10-18T19:59:45",
+ "sealed_at": "2026-10-18T20:59:03",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

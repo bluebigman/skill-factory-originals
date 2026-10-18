@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "cs-health-score",
- "merkle_root": "ac1a873f299f1848b69c1608ab5230ad716afbbcabaed6380077639b76ddd810",
+ "merkle_root": "a599b046024f87cfc0460280fc3d8468129f1ffbc9b0818fa8ceabfe342480ef",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/cs-health-score-1/run.py": "5d9d9130327a13b99f9f1b1a87b900ee3dc855edada0dd43a64faf04002d2862",
   "skills/cs-health-score-1/selftest.py": "dcad414c51bbd9d310170f58c31530374cf3d39848e344b8b322705717596d3d",
   "skills/cs-health-score-1/.phoenix/originality.json": "cf3c2c24d02bb391bfea443d0a88af3d5cbb9382f16a59dc9c4a4772a180ca50",
-  "skills/cs-health-score-1/.phoenix/provenance.json": "7e2c54d14941998d316b6daa2001753f4e7827c5b702fa66fff3c3183622a051",
-  "skills/cs-health-score-1/.phoenix/selftest_evidence.json": "f5cc9d0a920d11d074a6353ab970d510a4060934b0337d3b38b63ce4ad183232",
+  "skills/cs-health-score-1/.phoenix/provenance.json": "80781174c6457f9509b78ebdf86f625062177384fde16ad7ea239d11b22d403d",
+  "skills/cs-health-score-1/.phoenix/selftest_evidence.json": "5cc4c169b215f99893c9d52e5485a6ca74273dab94e9652c10de205bd277c3b1",
   "skills/cs-health-score-1/references/creation/p0.md": "1c2ac8e867f58cf7172fcfc6970eb34077386d47fdab59549d71972a344990be",
   "skills/cs-health-score-1/references/creation/p1.md": "6354a53b409866c76a01fd16e90dac3830ced9f7bcd627003aa400b99293742c",
   "skills/cs-health-score-1/references/environment/p0.md": "3a01ade1f4f094b88fa42fddbd22e7832e7c096aab8683385ee9688c7b8c690b",
@@ -37,8 +37,8 @@
   "skills/cs-health-score-2/run.py": "8490955a03d675371260eb317d999f8ca3c3ee04251ae27c09c444dfcf5f9843",
   "skills/cs-health-score-2/selftest.py": "982f92c03199eb98f762da3b80d952fa441436584d41a09c8556c33095f7ac68",
   "skills/cs-health-score-2/.phoenix/originality.json": "e4a29371c5fd2ffd209526df2170b28ec50585d3ba153878916fec9ab040810d",
-  "skills/cs-health-score-2/.phoenix/provenance.json": "0e83a3ab511c2efad9a6e5226ad4f0700b9c7a4fd85bd588d38813d75407c696",
-  "skills/cs-health-score-2/.phoenix/selftest_evidence.json": "f601d5f139754a5f7ea8f2dddf3cd74a132f51db63141aa80d39e6e3858164d2",
+  "skills/cs-health-score-2/.phoenix/provenance.json": "f0531b9e7a3b43034103bc10eaa9e3e071607c254f3983521409eba501df9d15",
+  "skills/cs-health-score-2/.phoenix/selftest_evidence.json": "bca09aa6c82b612e718ffd8577e5351866fa5c2c5261c2f9d5d7e90e7231b079",
   "skills/cs-health-score-2/references/creation/p0.md": "6269e299ab7aeb4244a6c5cf6db3de8dbd0fb35cc8bf49eabb4929278b7b9b06",
   "skills/cs-health-score-2/references/creation/p1.md": "68f04ffa257cac982f3b4cb90592e874eca4c0a99a7a9c243d696a117dc815d7",
   "skills/cs-health-score-2/references/environment/p0.md": "7a6969acfe970f77ec013eef3ecc2d671684b0b5a81f4f769f41ca175ac5ca3e",
@@ -54,8 +54,8 @@
   "skills/cs-health-score-3/run.py": "bedec66cd4d3c34a3bd9dc0db8518dfda5957bb94c97e010f448c7dc4498029d",
   "skills/cs-health-score-3/selftest.py": "d2f355513eb5b859fa9ac4372bcccf1d6ac2785d6c3aae64dc720f9711c49f4e",
   "skills/cs-health-score-3/.phoenix/originality.json": "baf6a79b986f0a73e3b4bc0575e10590b227eb9f807adfc1e64a40351d17f6bc",
-  "skills/cs-health-score-3/.phoenix/provenance.json": "7c34e68d15d8f79c56b88e882c346778842303023b8c4e34738f6c9539902670",
-  "skills/cs-health-score-3/.phoenix/selftest_evidence.json": "7afe6e54396b2882f3d4572c615b8a66a51ee479f424d00663ad285152af7908",
+  "skills/cs-health-score-3/.phoenix/provenance.json": "67960151ef3f0c2662ca179a90c89efbd0c944ad5b362cdcf738393b94b54624",
+  "skills/cs-health-score-3/.phoenix/selftest_evidence.json": "2b20ee9decf0b6bd0851b647b2467ba4738c9e106a4796508c78c39e47a3deb4",
   "skills/cs-health-score-3/references/creation/p0.md": "8ac142cc75303181a392a9014f8c93e623447a8892836a6f9b2245e40957d6b3",
   "skills/cs-health-score-3/references/creation/p1.md": "7178401f06c5ba32d6286681515fdfa9a45e5190c8ed0f6a5e28b1488cf351fc",
   "skills/cs-health-score-3/references/environment/p0.md": "c92743619e78127b55b1743299162eaf37f37367bfc95affebbbcf952c6e3ef0",
@@ -66,7 +66,7 @@
   "skills/cs-health-score-3/references/production/p1.md": "2e665d6e25cc34af33476885a736badde5b9466e025895b70c5d3dbe39628efa",
   "skills/cs-health-score-3/scripts/main.py": "249ceb5a1906e996b1d07afda31274eb270e902a06991f38e0113d3b7386a483"
  },
- "sealed_at": "2026-10-18T19:54:53",
+ "sealed_at": "2026-10-18T20:56:18",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

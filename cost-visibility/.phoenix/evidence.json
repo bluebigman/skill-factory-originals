@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "cost-visibility",
- "merkle_root": "115b924a13b7a774134d8eb375ac7ae0ef24d7d66166d16d177cf94c8bd9d0ad",
+ "merkle_root": "ebd13517acb14fa40a920ecf666c067568f7a3772bb7f0f35673a4cd75e392f9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/cost-visibility-1/run.py": "92e973affb32ca41f411b7ae544f378ffe528c636399dd984ea7d1c4984448c4",
   "skills/cost-visibility-1/selftest.py": "38634e5cb86283a31ccb9dfc2caba50884101187545acb51f659196419953e9e",
   "skills/cost-visibility-1/.phoenix/originality.json": "74ae7d1d150e2078c35e96e82a34dc04da90b32f3967b456b5fc6610ce3db749",
-  "skills/cost-visibility-1/.phoenix/provenance.json": "1068160527ad751e6786fdaf8535dd94f0ffb60d77eb998136e32bd17e2655d4",
-  "skills/cost-visibility-1/.phoenix/selftest_evidence.json": "b84f2467d240ff34affc44f6d1cba19e5157297b96adb4f6e681874b743032bc",
+  "skills/cost-visibility-1/.phoenix/provenance.json": "01fd4d8c65aea79a46929bc962599d2622b1055621d5a3306ad1d1611a859935",
+  "skills/cost-visibility-1/.phoenix/selftest_evidence.json": "49f6406bd004b31909a0f08555491fd0d854db4de276a0acf93c2f9262bec82e",
   "skills/cost-visibility-1/references/creation/p0.md": "0cef70c1dceef0c7662c0365d2bacb4497d9b06b7de37ef66154a13eff94c223",
   "skills/cost-visibility-1/references/creation/p1.md": "3646b80f5f62d7f9e7b0ed28ee35ff9f9ea7f36c738340bf2038d8ae3eb818d2",
   "skills/cost-visibility-1/references/environment/p0.md": "2c36f80888e7e9d80748d159be6a290ffcac0960c13b069bab74ef736ae770bd",
@@ -37,8 +37,8 @@
   "skills/cost-visibility-2/run.py": "25c81e5a79c421457055c9bd7cd140871d517efdc89ea8acc3e33da53f30d896",
   "skills/cost-visibility-2/selftest.py": "e2696a00255cbfbc2e4a19d106836119105834effa8f1bd0d19c6565ca9e0503",
   "skills/cost-visibility-2/.phoenix/originality.json": "4f17713f8d4e71225e4f9eb469ff4cb95b60fab07a0336bf93fb2befa30d48fa",
-  "skills/cost-visibility-2/.phoenix/provenance.json": "94a90963a702a690bf55b69d7f8c6d00c9ec27d64784441a0334638172d096c0",
-  "skills/cost-visibility-2/.phoenix/selftest_evidence.json": "6f63ee8a5064f2c897efb487cc915b6dacfba77bff045280f2213a878d504149",
+  "skills/cost-visibility-2/.phoenix/provenance.json": "67f4669aecc7f46cf5d9eeb98cc9daad1d2ce437e6f9fc5d46f4f428c0fde6f2",
+  "skills/cost-visibility-2/.phoenix/selftest_evidence.json": "2f3316167c1a709c21caf9050c6d92d856d8c07d109a4fac029cb9ee77c009ed",
   "skills/cost-visibility-2/references/creation/p0.md": "9b04c7ca19b5ab6f1de7e4ddd3a009d2b449e6dd51b3c8d15c264ab99b50563d",
   "skills/cost-visibility-2/references/creation/p1.md": "f985833f1d9fbbd6d0527cc7106e576aae8aa8b000ff8808732faa67d8240c12",
   "skills/cost-visibility-2/references/environment/p0.md": "c07ab1ae7d7b58f9e88b675fe399871eab80c2be4d1ea51d9b2c5e2ec27e46c6",
@@ -54,8 +54,8 @@
   "skills/cost-visibility-3/run.py": "f1d209e611f53497d6427e02c9bd13b7c175dcb4f97e0ce0f1add1137246f1d7",
   "skills/cost-visibility-3/selftest.py": "425368af78bc51c7e953890fa361ecf7c83d3e5e31c9baad47b6ec9b10bac136",
   "skills/cost-visibility-3/.phoenix/originality.json": "e0a2f57aebc6121e53d0dfc454827cf8f3d3212c05e146ab3a2a46b339575ff5",
-  "skills/cost-visibility-3/.phoenix/provenance.json": "71b73e0a7d20f52be3c5e8c707103649a1c842c2ef3d2d6ebf23e183042c6716",
-  "skills/cost-visibility-3/.phoenix/selftest_evidence.json": "ca28de118003c1a9157ff36920fbab508c141eb723f721d314dda004fb14eee6",
+  "skills/cost-visibility-3/.phoenix/provenance.json": "6f42465a1e2bfe9be56fdee9268efbf220f9de501e65819886f8a4e373fca871",
+  "skills/cost-visibility-3/.phoenix/selftest_evidence.json": "92d35fbb13f52a032c71472cf77e5a9838eba602c481ed3726715171bd9e64ed",
   "skills/cost-visibility-3/references/creation/p0.md": "f60966bb41a66a27b56fb4d22f11e6933acffbe8103d5a056e727f812c71f35d",
   "skills/cost-visibility-3/references/creation/p1.md": "02d2bd5ff63e5fdcee67926c9404d5fee74b50fc59940c73bb336cece6d0ced0",
   "skills/cost-visibility-3/references/environment/p0.md": "62ba119160b62ce124a4492494a24188a6080cbb7abacaa5c176ae76bc462409",
@@ -66,7 +66,7 @@
   "skills/cost-visibility-3/references/production/p1.md": "7407888fd949d2ddfc1caa40f2ab595248e2ea856b55adbe6d0a5a7ba46c7946",
   "skills/cost-visibility-3/scripts/main.py": "4353cc386b02575f63060df8f3dc478303c632090a3a6f964aa9cdb4ff4a5e05"
  },
- "sealed_at": "2026-10-18T19:54:46",
+ "sealed_at": "2026-10-18T20:56:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

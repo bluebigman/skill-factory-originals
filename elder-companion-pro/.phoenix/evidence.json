@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "elder-companion-pro",
- "merkle_root": "0ecf43f3db7a07a6354979774001bfa96a6ed8828678bcf8eb96a6e22c1d9b66",
+ "merkle_root": "04a7423a1e106d52753fa865b3fec6d3e428701fe5c25d88ad1ad4870262bd77",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/elder-companion-pro-1/run.py": "52ceda5c30068d484b96a471a7efb4b74c70fbf1770c00352410978c2ba6f9fb",
   "skills/elder-companion-pro-1/selftest.py": "b48b3d8644f02eb65057c3b8b41b7ce2431d66187428b23da577fff1cc5f01fc",
   "skills/elder-companion-pro-1/.phoenix/originality.json": "9dabb8674c3dd3774960bbcd8ea1de401dfc02c1a8f268cee69903b14fadda1e",
-  "skills/elder-companion-pro-1/.phoenix/provenance.json": "6a5f0a7a5e58c1a3b46316cb06a4520fee6e36c9b977708e9c5277a3e23f200d",
-  "skills/elder-companion-pro-1/.phoenix/selftest_evidence.json": "d7da4854f03c6aee740d5e5a9bccd9504c33fabddcf4209c7ebe6683df5e3403",
+  "skills/elder-companion-pro-1/.phoenix/provenance.json": "6ba9ee7922ac10568a021b67ba25f16adfab4dfd0ead79eb9e0237e2851adef9",
+  "skills/elder-companion-pro-1/.phoenix/selftest_evidence.json": "d0eac2970e83ff921c0ec9a54b486ac296c4b5a0434f73fe988548d58897239c",
   "skills/elder-companion-pro-1/references/creation/p0.md": "824dff2d0fe45b3ab7513e522cc6eb7b94d71f06b132ea9859248106d72b5263",
   "skills/elder-companion-pro-1/references/creation/p1.md": "cfc9fc4edccec2b5f4788f028bcb3509270f5008c7578a86c010c6846b157464",
   "skills/elder-companion-pro-1/references/environment/p0.md": "49b0400155daf63f3808d446b3287d0314b70423dc57826cd39e7928f3f3d18f",
@@ -37,8 +37,8 @@
   "skills/elder-companion-pro-2/run.py": "37400a189ac525e4a0fdb31217948af24cd45e29431f9ca4b79a65aaa82279ba",
   "skills/elder-companion-pro-2/selftest.py": "ec4a85a315831108625f99aa7af1edc1803af6d89e52c6e26fc6596cda83a02a",
   "skills/elder-companion-pro-2/.phoenix/originality.json": "3828fdd929e70a23884574a3870c7af0468d95056a4168ba5de475afd8c2f1ea",
-  "skills/elder-companion-pro-2/.phoenix/provenance.json": "378557e694b70a9afb241def52f6ddbce4d8dc7d2fc73833b3f9f4eca5db22d0",
-  "skills/elder-companion-pro-2/.phoenix/selftest_evidence.json": "9c09bd8b318f7b06e812f066335393e4d8d74f5320cab04a51c5f344ebd66eb8",
+  "skills/elder-companion-pro-2/.phoenix/provenance.json": "44476606c29b7266ec3da005bf43a8fd53b9d0bff1f49b1d1f25d084c7f6630a",
+  "skills/elder-companion-pro-2/.phoenix/selftest_evidence.json": "8d70bcfcbcba39483f364c0338668026c22b2120cec8fc4a38531da549d4024d",
   "skills/elder-companion-pro-2/references/creation/p0.md": "dc64d3135407d2308515aa67c196d634aff94acff8cab45239dc27bddeb20252",
   "skills/elder-companion-pro-2/references/creation/p1.md": "8c3219ab586d9438f8d76cac29477230a1ed856d0753b2a9406f7efeb6984ad0",
   "skills/elder-companion-pro-2/references/environment/p0.md": "e1e357b3968a22594fc3e544031e0234e653d716576288696aa43c23aafc58e4",
@@ -54,8 +54,8 @@
   "skills/elder-companion-pro-3/run.py": "7af590a25ad0ff51f48274b0fd45ea194dbbde9a039171a6f5e7fc8055e28207",
   "skills/elder-companion-pro-3/selftest.py": "a6a6957f1ecaa5f3b8863bcbcdb7fea04473b66379af654131e1248916564375",
   "skills/elder-companion-pro-3/.phoenix/originality.json": "cc51dd9a75e06679dbfe0817791d5a2cfc829afb2e2ce6fe203b7554c5d14bf5",
-  "skills/elder-companion-pro-3/.phoenix/provenance.json": "ebf53c6efaa75c40cfd44a3a1490ef5def6e0661eec41803549c58ddd04d36c7",
-  "skills/elder-companion-pro-3/.phoenix/selftest_evidence.json": "8b49bde7f9684d39972bb3335cfd91c3d8d777a33f3ad7d2667182233af6eecb",
+  "skills/elder-companion-pro-3/.phoenix/provenance.json": "275d4655312e0b744fe1b4f6df8bf09f046981a4f8b0790e31142530fd6b8e18",
+  "skills/elder-companion-pro-3/.phoenix/selftest_evidence.json": "8406124dba89009696fcca2acf11959cd3cbd4b1593e811a8420711e51149f58",
   "skills/elder-companion-pro-3/references/creation/p0.md": "1cfc0d3dd669a0a0618c53fe0f1b724ea7c278d97b5adff782d02fd7b29e5da8",
   "skills/elder-companion-pro-3/references/creation/p1.md": "d20d2dde859c5544c8ef3a1d3000f32b529643ec77d6e83fdf2d38d5ef9a97a2",
   "skills/elder-companion-pro-3/references/environment/p0.md": "0474f670d9f980e5ddece015ad9bfbeefca8a52f4b351e2712e07de37d99e3e1",
@@ -66,7 +66,7 @@
   "skills/elder-companion-pro-3/references/production/p1.md": "e8cdfa08ce62e435c56b6e55c9fd88972c8ab1468f7d4347d77a107ec2ecbda7",
   "skills/elder-companion-pro-3/scripts/main.py": "f36c950a9aed408bd8ecc2aa8ac3d73a7d28a0515baa7669745edee507ce0502"
  },
- "sealed_at": "2026-10-18T19:58:07",
+ "sealed_at": "2026-10-18T20:58:09",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

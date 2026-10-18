@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "metric-drill-down",
- "merkle_root": "d20c5eabd4fddc876bfbba4144021751423a51106d3a1768e0e606a1d0d47321",
+ "merkle_root": "b87c218178fdee57fcafbd472e2571ec38ca3559945b44a671f999df160638de",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/metric-drill-down-1/run.py": "f6fe075dc7e146a44df325f284eb8e5775eee65f23e679c072fd08f8675f4c83",
   "skills/metric-drill-down-1/selftest.py": "1886b112fadb3c7f2d76f298c78e2eb584dc4bd0f0c7555882ba0dd242e82bee",
   "skills/metric-drill-down-1/.phoenix/originality.json": "c3ad3566ccbb56919a7e2cfe8b19df45cb55afa26004aa86ac780aaf56012fe7",
-  "skills/metric-drill-down-1/.phoenix/provenance.json": "18d69b69a1326003a6a160d3b2a329bb53bfe5f28df3013f2db953b49588f40d",
-  "skills/metric-drill-down-1/.phoenix/selftest_evidence.json": "ae02c5b4d82cfaae44c2c75fd5de90b0676cc00127b17ed25771611c95265c14",
+  "skills/metric-drill-down-1/.phoenix/provenance.json": "5f350ee487f907f023dc47495fd622452b945bd14570edfaff59d98064596e04",
+  "skills/metric-drill-down-1/.phoenix/selftest_evidence.json": "6e1589cd5292471e06de7fad5871d747087dfecb9ecbcec4f65ece57f1187a2d",
   "skills/metric-drill-down-1/references/creation/p0.md": "724b6a7ec2dac99991be5e837c016ad6c4558613291ecc31f64db6609af5edea",
   "skills/metric-drill-down-1/references/creation/p1.md": "4ba97e6097088e975340c8581a7e8c09c5898144b9b2796f6f6c49a45d874774",
   "skills/metric-drill-down-1/references/environment/p0.md": "e166908652cabc206a9c54eef5acafb03327aa972325f27c00f078249578d617",
@@ -37,8 +37,8 @@
   "skills/metric-drill-down-2/run.py": "cbee53d324a94a9b42acae33326c295ae079792ec609113e2944a20d008a064a",
   "skills/metric-drill-down-2/selftest.py": "1279ec1ed1979b64a066e1a831ad48b66791851a266bce4cc019a5aefdfef75d",
   "skills/metric-drill-down-2/.phoenix/originality.json": "7507bc7baa5d4a3bb9be6691b43fe2eb4cec1d2a6d624054a23b1ba503d6fa05",
-  "skills/metric-drill-down-2/.phoenix/provenance.json": "2e938635689c820c270d635d866f34867d0462c4a2fca0676c97353194ee6e42",
-  "skills/metric-drill-down-2/.phoenix/selftest_evidence.json": "e161d979e27b719c6a373c22e7ae6e0a5155bd8fbcb1fdf54792658772ca9422",
+  "skills/metric-drill-down-2/.phoenix/provenance.json": "4fc53f65fe274ac590f1c25c772504fe827a5f28563c2afd8f60de697b1416fb",
+  "skills/metric-drill-down-2/.phoenix/selftest_evidence.json": "48dbd2b73022612f4b2192f610820e0874419620aeb0f51adb6c874ad20fc065",
   "skills/metric-drill-down-2/references/creation/p0.md": "1488b1f9d566b0d060ce175f1ff45adca52bd3a155453da8664afe03ddadcbb3",
   "skills/metric-drill-down-2/references/creation/p1.md": "9e9c4230c575d4b8e43fca65bba4bc9ef0018b564702c427dabca5105a123f65",
   "skills/metric-drill-down-2/references/environment/p0.md": "69929422b84f34f2e6fd96b28390959401067bfa2cd0cb09dc9251b6c5096e78",
@@ -54,8 +54,8 @@
   "skills/metric-drill-down-3/run.py": "10a5039e00145cdcffeecedeb5b702b89dace4015ab9a4ef94cb021a5b1e5875",
   "skills/metric-drill-down-3/selftest.py": "6c34ecb7298fd4bfc236d64dcf2063d1e17541c108a58298289c4dcbfb285dc6",
   "skills/metric-drill-down-3/.phoenix/originality.json": "04c64e54af4cf05446a802d38e4735204511734c238556bf9a2c6ee4f43308ae",
-  "skills/metric-drill-down-3/.phoenix/provenance.json": "2ca56780f584abb6f28f114d5b97470f10ca4abc72eb681c242af7b78993e648",
-  "skills/metric-drill-down-3/.phoenix/selftest_evidence.json": "124d3ff054581e2defd9c2dfe55829245eaedef4305e2ba723c2e6d0715cb28b",
+  "skills/metric-drill-down-3/.phoenix/provenance.json": "b012d84980cfb4ec18bc6ffbdb31bcf61aef75462c867b7809ca74962f82e3e1",
+  "skills/metric-drill-down-3/.phoenix/selftest_evidence.json": "00b6c0416666be3b7afa943a6dd8b44cfc5ae03338d207c52d7b892be858b99c",
   "skills/metric-drill-down-3/references/creation/p0.md": "ca0bdd1df161dedbe5c837ef036677f351b369cf383c6f67c71d804c971a3e46",
   "skills/metric-drill-down-3/references/creation/p1.md": "fa30db77ae1c22200e6f4c93f709afc613ab97e30213cb1e2bfc4b5968f45424",
   "skills/metric-drill-down-3/references/environment/p0.md": "1c506b9ee4223c0320396af25d46e9a22bf7675d757ddab8f02da81f8b85d298",
@@ -66,7 +66,7 @@
   "skills/metric-drill-down-3/references/production/p1.md": "5f5d0f6297f692e8a202d8658aeb17e1f86b171b650152d451bcb8e3c3e1675f",
   "skills/metric-drill-down-3/scripts/main.py": "fda1a640711b2feb7da51b3fdb79d96f703a86193e5911e5be844234a4ad77ce"
  },
- "sealed_at": "2026-10-18T20:03:46",
+ "sealed_at": "2026-10-18T21:01:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

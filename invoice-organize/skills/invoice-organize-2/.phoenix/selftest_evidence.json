@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:01:57",
+ "at": "2026-10-18T21:00:04",
  "skill": "invoice-organize-2",
  "slug": "invoice-organize",
  "passed": true,

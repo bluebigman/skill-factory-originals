@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-cost-attribution",
- "merkle_root": "2e5a3f8db585ad750e3967ada0b77d6769386155415596dfc830b3bbe45954ec",
+ "merkle_root": "a1f582f183c4f6bd689faf039c428f0854b9ca3f3c76ec3e2bc4d541bc290466",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-cost-attribution-1/run.py": "e3fef30960334885b277e527e1bc0f1623d8945e5eafaccf5397801dfb1f7211",
   "skills/agent-cost-attribution-1/selftest.py": "9f4f003728d62bee9bac8c92f12a80c177b1929eac6a230bd1b376aad496c868",
   "skills/agent-cost-attribution-1/.phoenix/originality.json": "8dfbea48348f8c0d9f9499be5c35dc7c9e001b48875334b025f431da29d14285",
-  "skills/agent-cost-attribution-1/.phoenix/provenance.json": "762e1432abd10950ebcbb83ba5fd1890773d833558fda8c4000393d46a525301",
-  "skills/agent-cost-attribution-1/.phoenix/selftest_evidence.json": "720bd5bed449c0f1b625838cd4f0f1e92e5d16a3a86ec0b0170db79d1ee02a73",
+  "skills/agent-cost-attribution-1/.phoenix/provenance.json": "ad02e1d7e22145e119a0e5fd8ef5a0e1ec33d512b3c3164d978849f28a525531",
+  "skills/agent-cost-attribution-1/.phoenix/selftest_evidence.json": "7d5740307f502b5f79f889d5037761a9fcfcb9dfc6dda0b273c31058b75ae86c",
   "skills/agent-cost-attribution-1/references/creation/p0.md": "a5fd0b533b2fe8985e8a41a4f9ea88b263e5302cc4f444e98caf5ba1929724b3",
   "skills/agent-cost-attribution-1/references/creation/p1.md": "5115303f89fdd004e849c13ea5937c2b30ba157f00c624a0564f39ddbc6350c1",
   "skills/agent-cost-attribution-1/references/environment/p0.md": "76172f6e828c9f7eefa2fa84c68e59773af7974a13c353877439db0e3e28ee82",
@@ -37,8 +37,8 @@
   "skills/agent-cost-attribution-2/run.py": "7e74ef87bf7d74928e8b0521e2bf7e9ec23e4813e17a0e0415367263c20e658f",
   "skills/agent-cost-attribution-2/selftest.py": "ac8515cfb3d6a3835d62b5308dae2bc53c66c8657b4fed828ed0f38b64a80e7f",
   "skills/agent-cost-attribution-2/.phoenix/originality.json": "fdaf5d074f3903c6ff52a57118ab6f54462ddd16c646c4a6652a087730a2a758",
-  "skills/agent-cost-attribution-2/.phoenix/provenance.json": "eb25dbc47978cc85e79c126ff4615cacf67857653e5ff4444f845c5e08848636",
-  "skills/agent-cost-attribution-2/.phoenix/selftest_evidence.json": "773213913b530e4db637456acad43da330fbea7185b5451c92205a1074d61d5e",
+  "skills/agent-cost-attribution-2/.phoenix/provenance.json": "0156206bf40879b0c49ba171bc15244ea0e20465d8f0347ff95055ca4ee6904c",
+  "skills/agent-cost-attribution-2/.phoenix/selftest_evidence.json": "9867f53480dde9883d0ebbe7f2436187b9a4334112e003dec52369f09ed91a03",
   "skills/agent-cost-attribution-2/references/creation/p0.md": "310c6cdb19965d658b9e5af480e214c0c5c4a82e7ce193d6b9185499874f867b",
   "skills/agent-cost-attribution-2/references/creation/p1.md": "50bb4db9e66edf2b98a957dec43b089350f32fa25e71bcf0f802e26643ad3526",
   "skills/agent-cost-attribution-2/references/environment/p0.md": "509c1716cf3f9c75acf77840c5cc9ead2fc1641ee85f2bc14d8a98d8a2605a3f",
@@ -54,8 +54,8 @@
   "skills/agent-cost-attribution-3/run.py": "1a14ff34c882c4409fb2b2e12757ee43d19ddd14bbf9e8e88f293541a7e1d071",
   "skills/agent-cost-attribution-3/selftest.py": "fe919ed907b7b5cfbe731576003b0a1599410a696a975c037fb5740bf22c05ec",
   "skills/agent-cost-attribution-3/.phoenix/originality.json": "d88923f6b0e65b95aaaaed046c6d0a339f951f5d2d2bf75f6583ceac3e5eb081",
-  "skills/agent-cost-attribution-3/.phoenix/provenance.json": "24049b49e601ae595113bc108d6b8714daa781d3b0e935ccca0031faed651f73",
-  "skills/agent-cost-attribution-3/.phoenix/selftest_evidence.json": "8be27458c40b536d6c08e3593006f66e6409ad8c1248d6125cad48dbbc128f7a",
+  "skills/agent-cost-attribution-3/.phoenix/provenance.json": "3af8b77d2abf0881c930bc9742c94b4dbafc5112a425397049218ea3a7db4111",
+  "skills/agent-cost-attribution-3/.phoenix/selftest_evidence.json": "f6ccf4c47ef7434c1a9a8817d8fea0f20069af4d516ea2e6fb72cbbcc34fd6e5",
   "skills/agent-cost-attribution-3/references/creation/p0.md": "8ef282ad1cd8ea8b2da0a9cb5f79eb8153efa6a6d9af3965907b8373528c6aec",
   "skills/agent-cost-attribution-3/references/creation/p1.md": "2f428a0fda94899274ab58377933bb7be8f4bf40153b83e9c02d5a9b9c4f7aca",
   "skills/agent-cost-attribution-3/references/environment/p0.md": "064228fad021df844ff30f294e72d8f1925221be4dae9f1fa6b74a77abc40469",
@@ -66,7 +66,7 @@
   "skills/agent-cost-attribution-3/references/production/p1.md": "c404c3f791b652b8c35c8a17c5556338a2ab8869783ed742ad5a962ad6363431",
   "skills/agent-cost-attribution-3/scripts/main.py": "86c8c70597bea8439341e338d1185e50ff336a6597773c6f82288e7ae478271a"
  },
- "sealed_at": "2026-10-18T19:51:53",
+ "sealed_at": "2026-10-18T20:54:31",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

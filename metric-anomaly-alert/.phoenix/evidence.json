@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "metric-anomaly-alert",
- "merkle_root": "92001167edc23931ebe8225aa50818ebb97edb56b4d0a5391824735c9bf6dfe6",
+ "merkle_root": "90b4a66075683a12e8fa06c12dca4ac7ffff8ba928ca71fcadb41a3a5686f4c8",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/metric-anomaly-alert-1/run.py": "50914555bfec1e577d9f619c08ccbd40b86cf88fb496eac8983a7b19ab460a62",
   "skills/metric-anomaly-alert-1/selftest.py": "9831aeac0e83cb54b960bafdd07efc120c3b012ab99a42276f8c03595297f2ee",
   "skills/metric-anomaly-alert-1/.phoenix/originality.json": "bcb7ea6cf7371a510b29ecc9f87f8c2545aa6800c03c0a19c3ea3a77dbbfe858",
-  "skills/metric-anomaly-alert-1/.phoenix/provenance.json": "807f3dd9c2185dce665a5aa56bce909174e3767c28f9a8ba0c9ab85f0e90cf80",
-  "skills/metric-anomaly-alert-1/.phoenix/selftest_evidence.json": "0fe037092f25b9eebff5cc021c9598d37f8c2f84a5b85a0adb538c3f1f1bdef8",
+  "skills/metric-anomaly-alert-1/.phoenix/provenance.json": "78cf801d5b173f6bfb7978a4bcd35864ba0cd63590d4fca7d8e197540b4a2357",
+  "skills/metric-anomaly-alert-1/.phoenix/selftest_evidence.json": "b29eaf9de1239b096c38466766f3fc29451468b4384a9e74e778c023327e7351",
   "skills/metric-anomaly-alert-1/references/creation/p0.md": "39897252ea053ff5b64c05a6b7fe9051194f762365f8fda87f36f9d3aa672600",
   "skills/metric-anomaly-alert-1/references/creation/p1.md": "4ef21436d0e70029ba96705284d9fc60b40c35d52857a172bde214e461454d1b",
   "skills/metric-anomaly-alert-1/references/environment/p0.md": "dfe7d7684725ddcdd034613216f338e9ac92b1eb81c18de623afd774212376fe",
@@ -37,8 +37,8 @@
   "skills/metric-anomaly-alert-2/run.py": "3ad13d980eb69d23cef2040eeb5b2aaf890ed9deb77c671046132870a19548f6",
   "skills/metric-anomaly-alert-2/selftest.py": "475d69c40c37eb0291ddbab13fd5e12071a427b94fcdae1f2ce22d1b1e75e34e",
   "skills/metric-anomaly-alert-2/.phoenix/originality.json": "fbe14ca3a21627b11c32485dfda07bc443fc922559a9b52b16fbe123a55d4781",
-  "skills/metric-anomaly-alert-2/.phoenix/provenance.json": "a6926c7beec18fb606e1f278ded5fae67c465cc16ba005fbb86c68743f208dcc",
-  "skills/metric-anomaly-alert-2/.phoenix/selftest_evidence.json": "4865cbf9da5d1289acf6d4b24cfe5f10b8b87640a7d5a481bb4dd66548ad3b29",
+  "skills/metric-anomaly-alert-2/.phoenix/provenance.json": "9e73f7760989f63b57e3a59603d6db330df11ca0c33ee33b5b8e128af34560f1",
+  "skills/metric-anomaly-alert-2/.phoenix/selftest_evidence.json": "48b14fa75a9e7f5e45449806f4697d576551fbf87c01db96f111560c9aa79ff7",
   "skills/metric-anomaly-alert-2/references/creation/p0.md": "5c96397045c474a219806b026920bcfea352288f4fd14b67ad98cac0c3845c66",
   "skills/metric-anomaly-alert-2/references/creation/p1.md": "dc26fd4cc9e1a5c6f3ec6e37c3c9c8e49f2055d5ab148b0096a82767a328f2a0",
   "skills/metric-anomaly-alert-2/references/environment/p0.md": "c2a4d6622aee5dd31db397b86640026488be6914f7b4115ad3f34df58b18cf4b",
@@ -54,8 +54,8 @@
   "skills/metric-anomaly-alert-3/run.py": "83f2d4155f38e21802cd6b262e6e58f4824a49133b8c375d95060997257b0a19",
   "skills/metric-anomaly-alert-3/selftest.py": "a75f1609a195d72d44484eab7df21cfc025198b4870e39ebc407d6da373755cc",
   "skills/metric-anomaly-alert-3/.phoenix/originality.json": "4bd9f481b70bb4b5302dbe8d13550c1e2cc8e6ad39e320bcb167a50548bdcf0b",
-  "skills/metric-anomaly-alert-3/.phoenix/provenance.json": "0664b2902c1b72db7b2f041f74018469f62b4c3e9a5be254226f151a1d5255dd",
-  "skills/metric-anomaly-alert-3/.phoenix/selftest_evidence.json": "a9da5e98899f6e2a4c3d71efe386c70a2b8cc43c9e4ae88fed36a995ac339aa5",
+  "skills/metric-anomaly-alert-3/.phoenix/provenance.json": "4adbe581172c0316e5a57cbaed3efff8cb5afe770ec7aa980aa9570b67be19a3",
+  "skills/metric-anomaly-alert-3/.phoenix/selftest_evidence.json": "fc89a62f0d97a6d1b819e19e7b8517c5e34d22058f8958aeabb322316b6c452d",
   "skills/metric-anomaly-alert-3/references/creation/p0.md": "cedcb448f53459670f1de8e5eb0b525c117cc4c8c705b46b116d1eb2b09e1cd2",
   "skills/metric-anomaly-alert-3/references/creation/p1.md": "59f58719c11773e19db149b6dcce892aba077325689715a75b8941919d0254d5",
   "skills/metric-anomaly-alert-3/references/environment/p0.md": "a74973a468fb4dafbc6cea3858b390ad7f0b7a63b57e135cb4478a02661fe7d3",
@@ -66,7 +66,7 @@
   "skills/metric-anomaly-alert-3/references/production/p1.md": "3791768bfbea11180e08f99779eb3e7d67526d5a446c51afcd4bc61251c4a25b",
   "skills/metric-anomaly-alert-3/scripts/main.py": "1792528b06b04a859841b3d529290d443888eeb7b2ce4689c7e1a5c90067de3f"
  },
- "sealed_at": "2026-10-18T20:03:36",
+ "sealed_at": "2026-10-18T21:00:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-data-boundary",
- "merkle_root": "9eb96ac1c0df076b263d61aea120f816815ad5653af2a23ae6155577b95aa442",
+ "merkle_root": "32de65c25e671a4bb4a35f7078fddb67fae9b7f363bf523fd0ca11ba62aae171",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-data-boundary-1/run.py": "d9bbb6122e0ebdf5743569de7a0a6dbecc758d5ad74dcd74b7cad68bdd7d7226",
   "skills/agent-data-boundary-1/selftest.py": "725c990f883f850fc7ba5ced54f4ce281bd4de656022eb94f7681dbc02ca0d7e",
   "skills/agent-data-boundary-1/.phoenix/originality.json": "959569e6cad60a546b7dcc46df74098be52092ed15a2348593be9dacfba1250a",
-  "skills/agent-data-boundary-1/.phoenix/provenance.json": "de36b106f294fb91d9d1ca9866a89bc357e88479a717333ea22c25adc6b0f885",
-  "skills/agent-data-boundary-1/.phoenix/selftest_evidence.json": "1f621c25653312e0bce86aa37d2eeedc5989077c2e29283fb3cecd5dac6b75aa",
+  "skills/agent-data-boundary-1/.phoenix/provenance.json": "eb75e7f9446ca5c65b0c06cfe90d2adaadd1679b549eb509f88ce4a61b3d47f5",
+  "skills/agent-data-boundary-1/.phoenix/selftest_evidence.json": "28b527d85166cd7b5c9c7c9363598e1f6a76f1fb0c2f10f7633ec498540415b0",
   "skills/agent-data-boundary-1/references/creation/p0.md": "2ffaa5eeec67733e478240324624f8725ed0dbdd5cd79373c5b9f026384d317f",
   "skills/agent-data-boundary-1/references/creation/p1.md": "29e9b895923f5c52fbc4d9845199b2223cd1914977e9f9e5d162dce14c841120",
   "skills/agent-data-boundary-1/references/environment/p0.md": "cedcfc2383beff242d4ea2952a914a2dd4fd70a0fcd9fce44c66a3a002420469",
@@ -37,8 +37,8 @@
   "skills/agent-data-boundary-2/run.py": "b9a459f36729e8dc9212367b7c88ceaf8d10cd643b481c6838f0fa58db11dd7c",
   "skills/agent-data-boundary-2/selftest.py": "146eb4617c7939010e073ae7548d624aa7ddb6ed151e0a28492055b43c7202c5",
   "skills/agent-data-boundary-2/.phoenix/originality.json": "146050c8cb8b371f0477c61ce87829dd9ec9142bcbeb91f18f47df43674c1eaf",
-  "skills/agent-data-boundary-2/.phoenix/provenance.json": "ca42033b524108c07607face77f9f1895a9c315781aa763f9519a89e06b0e3c6",
-  "skills/agent-data-boundary-2/.phoenix/selftest_evidence.json": "949be4c12c752f58bb38ee482632c97548ea4f7ed3a19e7115e79b4c97e06fb4",
+  "skills/agent-data-boundary-2/.phoenix/provenance.json": "9ccbf9d65272f695c627782739aa07b92c08fa303784448f440fadb52df9884a",
+  "skills/agent-data-boundary-2/.phoenix/selftest_evidence.json": "7aad86629e1f8646efd15c9e5fea5dc5420c991ce27e319a8737dbc6c4c92ec0",
   "skills/agent-data-boundary-2/references/creation/p0.md": "219f352146b053c987cd9aaaf1799a8ab030eae2be9efc46bf157e7ed6b95af1",
   "skills/agent-data-boundary-2/references/creation/p1.md": "e60042827ead019d0cb3179f363e095b5aff53813e10a1de923f6e3218316885",
   "skills/agent-data-boundary-2/references/environment/p0.md": "25136fbbff0f987d6dba50ee8c05b556119e8e34f24f33d2621a7aed7e774c17",
@@ -54,8 +54,8 @@
   "skills/agent-data-boundary-3/run.py": "cc429ab908728dd08bf5aed14c6ceed72189f8589dbf44ed5e95917b8c82dca4",
   "skills/agent-data-boundary-3/selftest.py": "c02547e86f2e8931361acd7fb3bf309ca9c5917decc3878fb1e43054793fad53",
   "skills/agent-data-boundary-3/.phoenix/originality.json": "5fe15f5dc65ebb1fbbcc21ba219837fe0ead2cdaeee7a8f13a402f4f8727c90e",
-  "skills/agent-data-boundary-3/.phoenix/provenance.json": "4033891eb69ce6985ce4549b2fa6c3d255c0bae149fed999e27b1b965b942388",
-  "skills/agent-data-boundary-3/.phoenix/selftest_evidence.json": "8e4f4ab8b38811b10e231834db6c32e2feafafd1cea3ad7769660a5b98bccb0c",
+  "skills/agent-data-boundary-3/.phoenix/provenance.json": "ddee4f388fbdff864699bc903b51dfc682026cf6e4628b21ab6e286492577727",
+  "skills/agent-data-boundary-3/.phoenix/selftest_evidence.json": "6e3a5c69c88ded576b01ae60239257d369f14c0a98fc6db73fa0e81e432af940",
   "skills/agent-data-boundary-3/references/creation/p0.md": "dafbd428b68e5b5c47d594b10916f7c3456e27b66c64f8507225588e13bf95f2",
   "skills/agent-data-boundary-3/references/creation/p1.md": "65ee679ffb9a1c710bff59e1f02022fb214eeec00f14453cee56d83720efc992",
   "skills/agent-data-boundary-3/references/environment/p0.md": "7f44b56892669c23684decf54f6215f05fed76cf2c4cb1e5d8fbf4f5be26089f",
@@ -66,7 +66,7 @@
   "skills/agent-data-boundary-3/references/production/p1.md": "b76b9765c8d90a90f919a8f16d28c1ca6d71e8c41da17f31630e258686be6e9f",
   "skills/agent-data-boundary-3/scripts/main.py": "6910ab5bc4ec2d109a816bc9df81a73dcc9cecb2f0c03899ef47c38568257eaa"
  },
- "sealed_at": "2026-10-18T19:51:53",
+ "sealed_at": "2026-10-18T20:54:31",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:05:29",
+ "at": "2026-10-18T21:01:51",
  "skill": "pdf-content-extract-1",
  "slug": "pdf-content-extract",
  "passed": true,

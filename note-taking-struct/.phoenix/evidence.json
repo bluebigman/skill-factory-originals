@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "note-taking-struct",
- "merkle_root": "475ff0114b29a6099084298db8c489812908e5ef45d046f884a4a8f5107a2b7c",
+ "merkle_root": "c196b3707829a8d219508a6df6602571ade34f079fe0597831cdbf1c3c8cfea6",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/note-taking-struct-1/run.py": "7da8f3e0b930de7669bcca2bbf41d2536759a7520dae19d380fb5131920ec40e",
   "skills/note-taking-struct-1/selftest.py": "b6f64699129286319aed68980aef95529ad066e3b63d51dc11f3e2d2919a996e",
   "skills/note-taking-struct-1/.phoenix/originality.json": "670d802237b60e4bc3015b4dc0cb3059a61183b69edbd89213bdebc0b7b9a04d",
-  "skills/note-taking-struct-1/.phoenix/provenance.json": "72f823f2aa0d9fd78ba28de1d089e9da6cd0f309930cf46174da32ddc87b5c18",
-  "skills/note-taking-struct-1/.phoenix/selftest_evidence.json": "119cb62082cd898fe32a1e0899f5970fd2d9dabccad0968e0610d6b2a0475c7e",
+  "skills/note-taking-struct-1/.phoenix/provenance.json": "abe4635a2f29b97de6d05977d38629449c8dbf7f031a1a46ac13421f7c0d1ca7",
+  "skills/note-taking-struct-1/.phoenix/selftest_evidence.json": "34965544b51cdbc36ed0ac56c1b19d307bc9192541ff40c01ecc73f30331c806",
   "skills/note-taking-struct-1/references/creation/p0.md": "5945ffdd17e1e654e37f709180c3934f204370e0263347cd32847ea116702f11",
   "skills/note-taking-struct-1/references/creation/p1.md": "ea6e82dd340e7aae73b5d95775d5dbcfab2b8299a1391fb1ab8c1caae8d4d3f0",
   "skills/note-taking-struct-1/references/environment/p0.md": "10c585975fc29d1f9530501c0497f72d0d6f8da1a561b89517bb012a3047827d",
@@ -37,8 +37,8 @@
   "skills/note-taking-struct-2/run.py": "1411930d7fc1cccd8b50a71a74c0eac6c189bfbc0bf944d742b8da9705dc564b",
   "skills/note-taking-struct-2/selftest.py": "21c70f2b8d1818bcd37057d121c3aacbc71bd47e71f560d343b7884d1a11084c",
   "skills/note-taking-struct-2/.phoenix/originality.json": "c53b6c373e04d37040d71a0d026b9aeb1217465c026bf5fee209e13c90de69a6",
-  "skills/note-taking-struct-2/.phoenix/provenance.json": "2fe3eb8a122bf052d34e9162acc7b4b72e541376dc20b704c17667596e7be7f9",
-  "skills/note-taking-struct-2/.phoenix/selftest_evidence.json": "b5af2b27bc658ee228f15214954d044f9b3cf7599ade34e55126b0933cb312c7",
+  "skills/note-taking-struct-2/.phoenix/provenance.json": "8f33c8746951b55c81c99c7106bb21328ef0a45c8c0a14ce4ae45a3e047221f6",
+  "skills/note-taking-struct-2/.phoenix/selftest_evidence.json": "6b95f468feb28fc35eff10e544200bd4b3c795c89fa9288541c9912fa6741bc0",
   "skills/note-taking-struct-2/references/creation/p0.md": "8f72147fd1dc0334972796ca1097831e8fb4486bc8e317fb21eae2801b50d1dc",
   "skills/note-taking-struct-2/references/creation/p1.md": "faae37aed0e8c5659ad4fd7c6a8ed64ae8d119b4a07427209e40c84861c4d53e",
   "skills/note-taking-struct-2/references/environment/p0.md": "006a3a2144632b37d02d34a59e6564597ff5a6435f57dab4668fa262b00daf63",
@@ -54,8 +54,8 @@
   "skills/note-taking-struct-3/run.py": "32e63d4daae54ed2020ce0fd22ea43cfff433eef19d55a7eb229e8a9a077b9a6",
   "skills/note-taking-struct-3/selftest.py": "7097630dd7ee2f2858245691fb52eda27e05825c6ac13455502ed269ac5b46aa",
   "skills/note-taking-struct-3/.phoenix/originality.json": "452d420101877afe0b779de9e43ee4f7831734916def1d89e6853ed18d51f47a",
-  "skills/note-taking-struct-3/.phoenix/provenance.json": "fa27bba73ef9ea7df337c7f1edda4fb58f7dbef7a5874db9b21306df23b478c2",
-  "skills/note-taking-struct-3/.phoenix/selftest_evidence.json": "5165ead33086fbc1a2b23757d6296761cd1971adab25e9002f3368672a5a8e2c",
+  "skills/note-taking-struct-3/.phoenix/provenance.json": "13f2974ae02f68fee61890dafdb4e989a42712f433251f537a2f02185204e623",
+  "skills/note-taking-struct-3/.phoenix/selftest_evidence.json": "7c19c68599801a96005e5aea78150dda1da6609625190aab3d6af79c301b5022",
   "skills/note-taking-struct-3/references/creation/p0.md": "304b3e96599e32002637acd3c80dee1441690277c730eb18472d11bef4b18d1e",
   "skills/note-taking-struct-3/references/creation/p1.md": "903be6213e34e625316316e15fc2c739e9b10ab707235cbc656792821b1d5b56",
   "skills/note-taking-struct-3/references/environment/p0.md": "7fdb06fc6e9b347ae10a5ea79341a4ed6aba25ec29dee7424a71f60ba0d3e6b6",
@@ -66,7 +66,7 @@
   "skills/note-taking-struct-3/references/production/p1.md": "c165878dc66e018ef2e4adeaa85d52b2ed93ead3167cdf39934225e952c3ef2c",
   "skills/note-taking-struct-3/scripts/main.py": "770796995d0eb1b9e3010a48d6c29f2c9707b0de45ba4c48dd5ea29e6a8f1762"
  },
- "sealed_at": "2026-10-18T20:04:31",
+ "sealed_at": "2026-10-18T21:01:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

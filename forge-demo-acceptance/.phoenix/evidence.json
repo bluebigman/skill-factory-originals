@@ -1,9 +1,8 @@
 {
- "schema": "evidence/v2",
- "algorithm": "sha256-merkle",
+ "schema": "phoenix-evidence/1",
  "slug": "forge-demo-acceptance",
- "sealed_at": "2026-10-18T20:37:42",
- "leaf_count": 35,
+ "merkle_root": "86c7e3633a93bdea6ace7b703994b4881cbac0b709af045c551031656c9f3290",
+ "leaf_count": 38,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
   "README.md": "1ce09dd3e1c4565d5121a5e36800f3d3ea362235a34525e97589c188f753c6f0",
@@ -11,7 +10,7 @@
   "capability.json": "081a3f017c91b790fb21e7c292c95d3636a9484aeec65657ed18a88d4d5b22b8",
   "config.json": "e20edbc1466ce6ef47f8688cdb09d0fd9c024753578ba3fb2e45414a2a659865",
   ".codebuddy-plugin/plugin.json": "25ec07ca731bb13747c13f6a3444af68ac711d09be1f77e2165efe0e1d06dbd9",
-  ".phoenix/provenance.json": "19e45d861882a7d1f4ba0728e60a2b8e99b9415f9fb3ac586d788be307f43ad8",
+  ".phoenix/provenance.json": "ffe482df93e308d3fa67fd3e4b1cc493bbe68009820e86781b6e627db7440dca",
   ".well-known/agent-card.json": "b8752e65ed9c35f77aa4439e9153343a36c7daa75a5d3f5b49135fa01324e5f8",
   "a2a/server.py": "3ea6a4966427456775f59d8c926373eb8555530a0b192dfc1a77053d6d1bc12b",
   "agents/forge-demo-acceptance.md": "d2dc5a25f44cf23bec0e6f17af361f2046dba3fae65ca6e645be3c1ba1221073",
@@ -22,7 +21,8 @@
   "skills/forge-demo-acceptance-1/run.py": "4bec230eab4e153a5aa990cd9fa037735a52aa94e6c81cd3013c43ce748c736b",
   "skills/forge-demo-acceptance-1/selftest.py": "8ff589ea9c5bc7a793252d9ff0ec97c7c36c92f337bc6167f9f7fc6824541748",
   "skills/forge-demo-acceptance-1/.phoenix/originality.json": "d73b470d8b3a5efd2815be8a5dbd2b824855b0b3c6477d9a58079972813c785d",
-  "skills/forge-demo-acceptance-1/.phoenix/provenance.json": "e938d814cf4b664c03197a6929e7226a663103e38cd975a5660d3002ef3cf5b5",
+  "skills/forge-demo-acceptance-1/.phoenix/provenance.json": "757d1d7967d4abd240fa6513579633ff8631966a54d40355cc5df219bf3dc708",
+  "skills/forge-demo-acceptance-1/.phoenix/selftest_evidence.json": "a5dffe1f797a602ff41c24f119afd074dc2adc9a9a46bb76251ba6fc77cb8273",
   "skills/forge-demo-acceptance-1/scripts/main.py": "8e34a8817394d9fe73c57355b59083cddc4be1ec886fec49018463f59c931381",
   "skills/forge-demo-acceptance-2/LICENSE": "de1dd358389f07b86fa3aea768e75eea7141de24ead70291a59a50f9a75bf10e",
   "skills/forge-demo-acceptance-2/SKILL.md": "7414cefefa972be9575bef21d88fabc9f0f23e7bee1e90b6fc770153f3c61216",
@@ -30,7 +30,8 @@
   "skills/forge-demo-acceptance-2/run.py": "8da11f722d169e3262c70cecbd6e86313029929b9b6c02d6688326a975b5779f",
   "skills/forge-demo-acceptance-2/selftest.py": "08946efe3f68c750af4fd8783ee6371aa97d9dd8519c7b1e05e4f57831ed5dd8",
   "skills/forge-demo-acceptance-2/.phoenix/originality.json": "7ad2c0a4474ec66284b977c4fad230f9bb2e73feeecf752bca00a4afcfcf0020",
-  "skills/forge-demo-acceptance-2/.phoenix/provenance.json": "a7167eac16727cbb87a66818206e41168b846c1901e05433fdbfdb34e70d737c",
+  "skills/forge-demo-acceptance-2/.phoenix/provenance.json": "008ca842b493c8a6f03edf7a175cf95c055855cf1d471c531c11ae64e428fd99",
+  "skills/forge-demo-acceptance-2/.phoenix/selftest_evidence.json": "3aa3e4d0cbb4d60cc15c4572af6f09353a4e086a119d34b687f4e8cc0fb7ddb6",
   "skills/forge-demo-acceptance-2/scripts/main.py": "722b4eb5bf273bbf28bec68f06ff1a4de7635cadc38263f2147f07be00cb2c5b",
   "skills/forge-demo-acceptance-3/LICENSE": "293a471ac78945f70ffa497507d7f1744e9c4d5164ecf6168544b56167738d77",
   "skills/forge-demo-acceptance-3/SKILL.md": "4d944566909f2ef9393cd2c78554f3efcedff87db2e71b505c6716232951b660",
@@ -38,9 +39,11 @@
   "skills/forge-demo-acceptance-3/run.py": "c29ed5b0a2e1ed89e1ecd3fd5bd1cada1035de6d74fb874bb4846722aed1e805",
   "skills/forge-demo-acceptance-3/selftest.py": "90846f27e27ca489ec40974a9cb7a8891915f1294937a288dd5ee1567d1bda8a",
   "skills/forge-demo-acceptance-3/.phoenix/originality.json": "0d3fcb326c184dc3664dd49c86a426e94bca5d5d903be4c8b1949653d88000c6",
-  "skills/forge-demo-acceptance-3/.phoenix/provenance.json": "3e49d5ab1b36192bd6bfc2b929d324b70f66dbc438a579687f46a4e57ad11a37",
+  "skills/forge-demo-acceptance-3/.phoenix/provenance.json": "a2c638605c2325b8acb2c679b1d659a3c4816df6415b4c78aa82f182541404a4",
+  "skills/forge-demo-acceptance-3/.phoenix/selftest_evidence.json": "1068ce209a1a8fc1356d2ca503ae3a6c91a79ffceed3b8213a517ab09e380d69",
   "skills/forge-demo-acceptance-3/scripts/main.py": "e271e35719862e261f4d58b7d3b24aa35b02ac0dc4399af1bbf22eaa91c6b668"
  },
- "merkle_root": "2a76f94be8260a997b7f4a9c9379ee0e67e50d1b18a40ae3d3b0b3daf6db870e",
- "note": "merkle 覆盖包内全部文件（排除 evidence.json 自身）。任一字节改动都会导致根不一致，可验证内容未被篡改。"
+ "sealed_at": "2026-10-18T20:58:54",
+ "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
+ "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

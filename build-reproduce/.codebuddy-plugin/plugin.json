@@ -1,0 +1,66 @@
+{
+  "name": "build-reproduce",
+  "version": "1.0.0",
+  "plugin": "build-reproduce",
+  "description": "build-reproduce — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for build-reproduce tasks.",
+  "author": {
+    "name": "user_2fd890c9",
+    "email": ""
+  },
+  "agents": [
+    "./agents/build-reproduce.md"
+  ],
+  "agentName": "build-reproduce",
+  "displayName": {
+    "zh": "构建可复现专家",
+    "en": "build-reproduce"
+  },
+  "profession": {
+    "zh": "构建可复现 顾问",
+    "en": "build-reproduce"
+  },
+  "displayDescription": {
+    "zh": "构建可复现 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+    "en": "build-reproduce: 3 built-in capabilities."
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "02-Engineering",
+  "tags": [
+    {
+      "en": "Productivity",
+      "zh": "效率工具"
+    },
+    {
+      "zh": "构建可复现",
+      "en": "build-reproduce"
+    },
+    {
+      "en": "Engineering",
+      "zh": "Engineering"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "zh": "遇到构建可复现怎么办",
+      "en": "How to handle"
+    },
+    {
+      "zh": "帮我规划构建可复现",
+      "en": "Help me plan"
+    },
+    {
+      "zh": "帮我检查构建可复现",
+      "en": "Review for me"
+    }
+  ],
+  "defaultInitPrompt": {
+    "zh": "遇到构建可复现怎么办",
+    "en": "How to handle"
+  },
+  "skills": [
+    "./skills/build-reproduce-1",
+    "./skills/build-reproduce-2",
+    "./skills/build-reproduce-3"
+  ],
+  "expertType": "agent"
+}

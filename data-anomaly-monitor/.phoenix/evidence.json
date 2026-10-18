@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-anomaly-monitor",
- "merkle_root": "9741938537a5e3b81ecd39167a26e7eaa5c342c793100cbe35ad5c6588b0803a",
+ "merkle_root": "8bcbf8db06b1f08dcdf9ac3b545a44a7f0870a09e05d6e5e30e56ea3db02c25d",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-anomaly-monitor-1/run.py": "12e0524a8c6756b05d7735440f65b13ad92601b3d3adea3b046d9d80cd2e6737",
   "skills/data-anomaly-monitor-1/selftest.py": "b091b29cb0f964d2450cf89ff767d6b3742e71f2b6016899272f0f971c8aea04",
   "skills/data-anomaly-monitor-1/.phoenix/originality.json": "662f51fde195b3add952714868b72237286a82d016e32f41d6fc3a1f7df2e7a5",
-  "skills/data-anomaly-monitor-1/.phoenix/provenance.json": "fa9830f08c5bfabf254f0c0a50433039ee243f07f0f8f3ee941f16aba3d3d525",
-  "skills/data-anomaly-monitor-1/.phoenix/selftest_evidence.json": "ba0ed079d8b7046dcb79eb8be66c4e06d7f573697ebeba5efebf99d5baef0a3b",
+  "skills/data-anomaly-monitor-1/.phoenix/provenance.json": "165ae415b7eee02d5b08224073c36d43b221e1357cf6cecd7906ebd5935892a0",
+  "skills/data-anomaly-monitor-1/.phoenix/selftest_evidence.json": "79e47a63c3dc404914f671ea8235d6bff73c2038b587c8d9943ceda6f36d6bff",
   "skills/data-anomaly-monitor-1/references/creation/p0.md": "caa7aba4fbbf8367443c583cd577142ae5d3970d8062359f1e9a8938a793ab31",
   "skills/data-anomaly-monitor-1/references/creation/p1.md": "b491b3b26a796830a16acd0ec26568c678fef3d0daf683f89701d2a924af40f2",
   "skills/data-anomaly-monitor-1/references/environment/p0.md": "961a832ed3edce089554c098d17724d2167ba5b85ae97ce11ab6ff3ddb047c7a",
@@ -37,8 +37,8 @@
   "skills/data-anomaly-monitor-2/run.py": "bf13f8ae6522c377d3cf88d1e6e600f3f51932d1ec9a92f70bd1b4ae230f87cf",
   "skills/data-anomaly-monitor-2/selftest.py": "b2c8804189eb6c6316eed0c03abb962b6a0ace95743802e2681e4d0843daaa4a",
   "skills/data-anomaly-monitor-2/.phoenix/originality.json": "f17789de6b9d2d8e8c0e48b7581c7b93bfce000755cbea2c4d980d42cf9dbfec",
-  "skills/data-anomaly-monitor-2/.phoenix/provenance.json": "0a0ad9e9c8f19f3187fd58bf2b686b494b317642d9b48411fc40b2b879094fdc",
-  "skills/data-anomaly-monitor-2/.phoenix/selftest_evidence.json": "dd46a337ee0cdc64da7015e2b08213941aef3e9e98ab370a7a054ef394c37f13",
+  "skills/data-anomaly-monitor-2/.phoenix/provenance.json": "345336fe7b70dd04715d33c404b9ce5d620c8ac95c8d2423fc149dbcd9145b95",
+  "skills/data-anomaly-monitor-2/.phoenix/selftest_evidence.json": "e51bd35d0c427fa8a35ac10b31651a3163d1e43cf67fc6e79bfa8bf60eec760f",
   "skills/data-anomaly-monitor-2/references/creation/p0.md": "fe4bb222b9b1400a686af4cb0cf5c2933082fcd02956c95195ae0ad551a1f246",
   "skills/data-anomaly-monitor-2/references/creation/p1.md": "9a1eedf4ba06b5e472e7d4dfcc9853d0707f7dfd0b4f08726387694655922e7c",
   "skills/data-anomaly-monitor-2/references/environment/p0.md": "6041fcbe24f4801f7a349a644523c1aff436a7d35c1de6630dc3ccd8afc20396",
@@ -54,8 +54,8 @@
   "skills/data-anomaly-monitor-3/run.py": "eb8b17ae129b0da0bf6ab6860703e79929cec392482f713f16fad378c3cbd551",
   "skills/data-anomaly-monitor-3/selftest.py": "e57a47b6d3d93a348b90a28d1e315d251d16f6005c8fd3703da02cb23437871b",
   "skills/data-anomaly-monitor-3/.phoenix/originality.json": "b704c4150ca9b3e72fb624b94eafdb58e1ee18a029946546b5a5142a7e45f980",
-  "skills/data-anomaly-monitor-3/.phoenix/provenance.json": "6233532592359385d27c9220e9378a1f33f1741608e37407f245d2aab666c5b1",
-  "skills/data-anomaly-monitor-3/.phoenix/selftest_evidence.json": "c3ac87a4d340cf3217449ecb313cf028db7733f638c5df1d6b51018cf715334c",
+  "skills/data-anomaly-monitor-3/.phoenix/provenance.json": "3881666c02f008e54c7c26ef4f7ba99ddb3c228d2515aebb91bc24ebc76821c4",
+  "skills/data-anomaly-monitor-3/.phoenix/selftest_evidence.json": "dc36f57b8e36f3ca844c58a361ac5536b3df099a4a133d285d3ccdd340d8abd9",
   "skills/data-anomaly-monitor-3/references/creation/p0.md": "04fa4f1c93228e6d9dafec45bcb5789d4e94d3e20be35cd15975455f1bfec1ef",
   "skills/data-anomaly-monitor-3/references/creation/p1.md": "c6e3e0eede1634bf70f3f68d5c892901b5c80db892a84b195081261b102b6433",
   "skills/data-anomaly-monitor-3/references/environment/p0.md": "76e0e62d0e2af4da5d0d736187c0b13081b824b870c8e85857578afb5896034a",
@@ -66,7 +66,7 @@
   "skills/data-anomaly-monitor-3/references/production/p1.md": "69617abdfa7e4c8adfaa534258a11d26fff1deb6b1abb50c5a52920699de6098",
   "skills/data-anomaly-monitor-3/scripts/main.py": "91394d1fd9fd8ad1f969a2491c5353865193555eaec17b77280dd17765812d33"
  },
- "sealed_at": "2026-10-18T19:55:10",
+ "sealed_at": "2026-10-18T20:56:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

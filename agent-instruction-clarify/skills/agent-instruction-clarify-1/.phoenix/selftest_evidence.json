@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:08",
+ "at": "2026-10-18T20:54:40",
  "skill": "agent-instruction-clarify-1",
  "slug": "agent-instruction-clarify",
  "passed": true,

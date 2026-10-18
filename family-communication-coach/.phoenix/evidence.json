@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-communication-coach",
- "merkle_root": "1cb9b4af770889224693906c623ed2593db4573209d25831901a19c3037fa103",
+ "merkle_root": "2d487b04f84841f673cff1f89993935373d33b1744a3ba9c0f25a8b3d1df37ea",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-communication-coach-1/run.py": "e29e2c94a864b68dc10b2ad3e0cfcb8c8e1ec0843892f718c31b16190d5423ca",
   "skills/family-communication-coach-1/selftest.py": "63f8a3d322e53655e9fae3f578f4b048b0c9b8ccc18543211fb874ca760745b0",
   "skills/family-communication-coach-1/.phoenix/originality.json": "7364f2c84e9f55789787bac33170b3a1fdf7486076a378dfac785bdf03656a79",
-  "skills/family-communication-coach-1/.phoenix/provenance.json": "ca5ddc7efa3559c980b54b0be794ddaef6cd5040b6e5b0a6ac957bf026a84017",
-  "skills/family-communication-coach-1/.phoenix/selftest_evidence.json": "bb69437fbb1b78398226c1b9ef1204297d18fc289f8d70a56a6d025c996abf81",
+  "skills/family-communication-coach-1/.phoenix/provenance.json": "fd745013ddd3be822eff2bd135772af7c7e8dc3973398ba3c52c68b59d5a9429",
+  "skills/family-communication-coach-1/.phoenix/selftest_evidence.json": "e88b3a360345e80c8ca2d333254b27531bce4da7609aa5a12d3107965d10d243",
   "skills/family-communication-coach-1/references/creation/p0.md": "2fd353a49c053134f8e190c560dfacec6b24b8e21b714e2151fbb33b9464a964",
   "skills/family-communication-coach-1/references/creation/p1.md": "5eb12c9b78553d4d3b372c2a2b6183034062904e02679921fdb6e47208c16782",
   "skills/family-communication-coach-1/references/environment/p0.md": "9e880a2b0ba3dff5e1b021c98435bbce689fecb798665d5750573616dbc52e40",
@@ -37,8 +37,8 @@
   "skills/family-communication-coach-2/run.py": "05916f66a56e1e7272eec1dfe1872ed15e27559b46e7076523d1eca7fd697a04",
   "skills/family-communication-coach-2/selftest.py": "b57ec6caeb5dd984b7227b4e938588241de1678f673ade4ce08cf92569b80747",
   "skills/family-communication-coach-2/.phoenix/originality.json": "a957657d3c1b2d4776a51dfe4e33cc18598fd51c72919efb99d8291d514f4b3b",
-  "skills/family-communication-coach-2/.phoenix/provenance.json": "09c220ac77ea147c2cb7bec87055887858878604553d7a450a3b802149602301",
-  "skills/family-communication-coach-2/.phoenix/selftest_evidence.json": "403a5be946ba67781683fdc66baf0009227acc87184213a5c65229dd159f838f",
+  "skills/family-communication-coach-2/.phoenix/provenance.json": "ee48c8b2f4cbe3a174385d65649713c6ecc5971ba1994d3bdad0f6d62b3891f6",
+  "skills/family-communication-coach-2/.phoenix/selftest_evidence.json": "a5322b9b5145f15d1ddd91a677f073c6b7a0648f39794e49113797d38615153a",
   "skills/family-communication-coach-2/references/creation/p0.md": "0a489d41bd9edf539e8a00f2f94f3cef149320b3f3a8495f80f92171d99ec90f",
   "skills/family-communication-coach-2/references/creation/p1.md": "613d0078e69e703ac6173201a6583c30020d570936f27610e5a0e335ff743061",
   "skills/family-communication-coach-2/references/environment/p0.md": "faa7d6e72d3274a08e2f00b6f4efffef33f2286ae6cd552a0b40ffbf17afb5d2",
@@ -54,8 +54,8 @@
   "skills/family-communication-coach-3/run.py": "a47f2e7be779fcdf728972a700419be53df0fb86b155530ebee02d844a75d5d5",
   "skills/family-communication-coach-3/selftest.py": "36e0ea6c0bdda58597b6b2173cd64849cd4f2221d9f13e5b1a9744e3cd443000",
   "skills/family-communication-coach-3/.phoenix/originality.json": "0431a844c1f3071a45a5421fe616372d87a045b9a4c3e64fa4ba2d68dad5d2e7",
-  "skills/family-communication-coach-3/.phoenix/provenance.json": "a031e0879c345f16647709db9b2669e12951964870e7e5e065c3e0a45085ba27",
-  "skills/family-communication-coach-3/.phoenix/selftest_evidence.json": "5c2b964583cde6a239d6cf77ad94f0cee14541d981d3c2eaa013408b454c02f7",
+  "skills/family-communication-coach-3/.phoenix/provenance.json": "551597a3d11f2141322cc08f7e67b644e1909587722b4b747e90ba78f6180de2",
+  "skills/family-communication-coach-3/.phoenix/selftest_evidence.json": "f32f621882ab8fc6bf9ca6ca63974bc772be009a81fdf54293088940bbf9bbfe",
   "skills/family-communication-coach-3/references/creation/p0.md": "2e0cd82051d03cc2298f7e8d0b4ddf6d8497b66165839d8510c67d370ca54e28",
   "skills/family-communication-coach-3/references/creation/p1.md": "e4438bfc58bc7bb64df0ed08b0cb9a87ca9a336de1c79877ad5adc49edb1f50c",
   "skills/family-communication-coach-3/references/environment/p0.md": "15922f0d28481df2931131004a08d9036887e52cf0f4f01bfe094200cce30c7e",
@@ -66,7 +66,7 @@
   "skills/family-communication-coach-3/references/production/p1.md": "03c6f609a2cbf25bc894bcf5d53d387b9dd280c448a4ae678ddfb4f21218ec0b",
   "skills/family-communication-coach-3/scripts/main.py": "2bebd2cc07a17f63d8e9933fd0d297d59dc1a7c2a09b77fa658a787b904ab3ca"
  },
- "sealed_at": "2026-10-18T19:58:51",
+ "sealed_at": "2026-10-18T20:58:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

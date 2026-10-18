@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-regression-guard",
- "merkle_root": "3ce895ed494ca3f7b8a48ff7671dce4a27617e081104384b8ab69d6bdc737404",
+ "merkle_root": "48d3cf940e3b5b9329bd632d93055c8ca7dc4da606957d778f978612e5d255c5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-regression-guard-1/run.py": "90b5d8cfbf61e833a5db9da0965f22802219572c99e35303b1c6b09dfe9bf82e",
   "skills/agent-regression-guard-1/selftest.py": "4c66e462d323e8cebb58ff8f093217fe688370a2931eec1b418a5f8fa893bfc1",
   "skills/agent-regression-guard-1/.phoenix/originality.json": "2f872cea4030b8edbca42690480fa86238aa69136221578d3b60476f8f17734c",
-  "skills/agent-regression-guard-1/.phoenix/provenance.json": "8669d89f3ca67c3339fe164e75591da380429badd19a348e0f05853fd8c9f1e0",
-  "skills/agent-regression-guard-1/.phoenix/selftest_evidence.json": "c19af3fcd9aded996b5ad73dc189cd6d41476344ea685e0762970e23b3af9163",
+  "skills/agent-regression-guard-1/.phoenix/provenance.json": "4ccd26add34e7f8c229da5a51f6a2c5b93bae7beddd9d821af5a0cb7e3b21e5f",
+  "skills/agent-regression-guard-1/.phoenix/selftest_evidence.json": "2db4145b82aa574036af197f9ee1ef672c0854fc163f13c272d07be3736de74c",
   "skills/agent-regression-guard-1/references/creation/p0.md": "3043d71e176c246e1b87a11d18821b504d9a15f8f5b433b56a9b2b265323eecb",
   "skills/agent-regression-guard-1/references/creation/p1.md": "9ce53b8c01442d6e0342cdabad803661af9c9f66d27866363ad50ac2ef2f656e",
   "skills/agent-regression-guard-1/references/environment/p0.md": "90453593f92082908e9e276a1e084bbc0c4fdb4cfc99e4d48b678d32442b72e8",
@@ -37,8 +37,8 @@
   "skills/agent-regression-guard-2/run.py": "08ea7acf672c46c02df271560adbee6996f62fbc154b80fa977bc45c958d8cd3",
   "skills/agent-regression-guard-2/selftest.py": "f57533a327953ea511a1e0e3d915fd7600a874a9644e6b56c01c0bf074eb68fc",
   "skills/agent-regression-guard-2/.phoenix/originality.json": "7547799e1ad793b2b41b42d08e85f48a56752da7156e9a7ae14934e1481d3d00",
-  "skills/agent-regression-guard-2/.phoenix/provenance.json": "164b119c4864604b46113f36885b50b5dade034de491faa51bbac9f0c76d2674",
-  "skills/agent-regression-guard-2/.phoenix/selftest_evidence.json": "b72d7178a49fec9a948abb5a951b14e3de0519e82f5a111877e748365ff2fed6",
+  "skills/agent-regression-guard-2/.phoenix/provenance.json": "0c1a5d0b65249a0b115a03c12750769f19fd6f11376f6daf2530be1e701ac329",
+  "skills/agent-regression-guard-2/.phoenix/selftest_evidence.json": "ddf9ee6d0b54543271a2454f159f4664cdf53d2f9a5bfb0dd2493db463315c07",
   "skills/agent-regression-guard-2/references/creation/p0.md": "d23dc52bf0d36c686a6fadee0d81aafc4534e5590c7054b80bbbb91c24a8503b",
   "skills/agent-regression-guard-2/references/creation/p1.md": "107dc68bf75093a35aa273bbfcea8cc1db9b08a8dbe10b2fbef1bb0742b7a588",
   "skills/agent-regression-guard-2/references/environment/p0.md": "07dbff9f3456692dcae491dbe55a6f3bf63ee0ee42c2878b428bfa1f3c9b13fb",
@@ -54,8 +54,8 @@
   "skills/agent-regression-guard-3/run.py": "e90d5ec00925b1ee554e21d8c2eec22602953d3c0b96e625062c1b486e7485a1",
   "skills/agent-regression-guard-3/selftest.py": "39f1d513de58197038283652d3ea094b56dc70662b5489bdb0b42637895a2826",
   "skills/agent-regression-guard-3/.phoenix/originality.json": "caa2b66aec614a0900b824b24c14e7047d0ac8aa267d7de838cbd9690b38b9d4",
-  "skills/agent-regression-guard-3/.phoenix/provenance.json": "271f58575f438d262e1bd5d542d2661f7aa835a37e3c1c52646f43965c002d9d",
-  "skills/agent-regression-guard-3/.phoenix/selftest_evidence.json": "abc3fb981c7b72771616cae52b6e1c70fd7e8419aa0971ed953df691d750ca91",
+  "skills/agent-regression-guard-3/.phoenix/provenance.json": "fe2ff0509b06a6a01d748422c0c49afc26a5416443cc6be114e0b2a15cc8aab5",
+  "skills/agent-regression-guard-3/.phoenix/selftest_evidence.json": "a4532693fa5d91a30ea5437ce0be7cbce817db65ef0864ccf58474afeb6af1a0",
   "skills/agent-regression-guard-3/references/creation/p0.md": "f71dbc44f77ff74bc8d640447b2f8cb7be09d53d33fc7406d4e88f7b113deede",
   "skills/agent-regression-guard-3/references/creation/p1.md": "4c904c8087080c4defcd5d2527397648b71fe36c6b3a1a780502fb846067a4e7",
   "skills/agent-regression-guard-3/references/environment/p0.md": "b34e19c7e29cc62c49aeffcb5331570f2bc0be3a48d02300ac24273d7c9baf06",
@@ -66,7 +66,7 @@
   "skills/agent-regression-guard-3/references/production/p1.md": "5d9a204797d646ea5ddf79b9af075fc4d8a5288b8b1b2a15d6e20a722ace1341",
   "skills/agent-regression-guard-3/scripts/main.py": "0ec78af06ba7404853129286f17bfcd532822894ccee2e2da174fa90a702dd6e"
  },
- "sealed_at": "2026-10-18T19:52:16",
+ "sealed_at": "2026-10-18T20:54:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

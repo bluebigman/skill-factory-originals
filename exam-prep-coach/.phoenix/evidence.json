@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "exam-prep-coach",
- "merkle_root": "65c28e1799a154c9bfc295be13f79351ecb7b90444e27d60d0c3b9f02a741031",
+ "merkle_root": "8043ba4fc145e08518fd9078642ab3e35cf1146b0ee33c3ec786b7b6583d920f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/exam-prep-coach-1/run.py": "687b1b2411e51952b888c2af5e0d457292246f1bf9da1a5ad27d4ed58e207b67",
   "skills/exam-prep-coach-1/selftest.py": "1455a32431a20c3dfef29e40acb527f3e9fb81ab18300c2055931c92a7c50047",
   "skills/exam-prep-coach-1/.phoenix/originality.json": "cfba3dd7ac9afd3c9027adf9e6eadf261436884a56072c5b993e82b7dee15daf",
-  "skills/exam-prep-coach-1/.phoenix/provenance.json": "ce708a23c39606b31a06d3147a05573d30e2779691aeefc46beb463529006b6f",
-  "skills/exam-prep-coach-1/.phoenix/selftest_evidence.json": "5382776102a04da4b4db316d54b53a5bae6dd26f3f7f99541faba6c3d191633f",
+  "skills/exam-prep-coach-1/.phoenix/provenance.json": "221cf39ba3887ad20a6cbc53f9d1d1ecbe98d12d5db7d86678e30e999ee34204",
+  "skills/exam-prep-coach-1/.phoenix/selftest_evidence.json": "c2232e21b18b924ab9e669620599ab531cd5d3415410599a1d39e6ff65f1ee9e",
   "skills/exam-prep-coach-1/references/creation/p0.md": "9ea33596b4be2cc9c05bf51da30bbdf4aa9c9ee49e741cf379adb78a52f67d5f",
   "skills/exam-prep-coach-1/references/creation/p1.md": "5c34f954e1701bf343d6db08cf289a90d6317dabdc37ba7b529d78e04af75bb8",
   "skills/exam-prep-coach-1/references/environment/p0.md": "e1dbb349277a3e2196d8a89c62c4e9c52cf7b760a46cefdcbb7e3caac5ede9b1",
@@ -37,8 +37,8 @@
   "skills/exam-prep-coach-2/run.py": "acad894e740c109d6944fb5296387b05d6efc71606074bd2c5d6b448aa3abb54",
   "skills/exam-prep-coach-2/selftest.py": "97af96a5ee0421d135d107d0f1504d8c3cd51d2668a6b09a1c8f87381c142e22",
   "skills/exam-prep-coach-2/.phoenix/originality.json": "2fe78aa87cec68573aea2b755e62dffdccb31d27791986cd12e58c73c262168f",
-  "skills/exam-prep-coach-2/.phoenix/provenance.json": "07ae4a26f6373c7d7978b9af994f2e899d1a5ba35ac5674fa3e82af7311f3feb",
-  "skills/exam-prep-coach-2/.phoenix/selftest_evidence.json": "0422647babbf398e02beed9474e3ef78b139e7183525f8f0ff5896076cee83ac",
+  "skills/exam-prep-coach-2/.phoenix/provenance.json": "128584663b4594b5d636cb5475e3788fe3beee27b547ea961783c1cd2ffd7311",
+  "skills/exam-prep-coach-2/.phoenix/selftest_evidence.json": "3c99c705d50a5d2bf425f74ae3d7fdfd88979d66cf3d547b68ddef3ab611b16d",
   "skills/exam-prep-coach-2/references/creation/p0.md": "0e4f41274078f286b63c0e5568af5eee2aea4023d844a15e00f3a1c6556a7822",
   "skills/exam-prep-coach-2/references/creation/p1.md": "1bccaab3474d5fefd9c4f50f6d2049b9113a66256aeb03dc85a95914b8613fc6",
   "skills/exam-prep-coach-2/references/environment/p0.md": "e3980aa74728951e85311f02fe03c4cee19114dbf3928fef0d83cfce1386e376",
@@ -54,8 +54,8 @@
   "skills/exam-prep-coach-3/run.py": "4013cf400169385771e35a6413a7dbf99c2ecadba81eb51b7847921ab21ca890",
   "skills/exam-prep-coach-3/selftest.py": "95eac3aa9b2c4722bd3f5436b6a823a9555969a8ad02ddb46cec30456c0558c1",
   "skills/exam-prep-coach-3/.phoenix/originality.json": "52422f108a37c73cae6c258957ccfa5cceab974cc51c9b5f04333bc81d050c95",
-  "skills/exam-prep-coach-3/.phoenix/provenance.json": "35d3d4b681651d2452eeaa9f6e165388f32c914cc9f7ddc1ca0ad7c97d4d4f0e",
-  "skills/exam-prep-coach-3/.phoenix/selftest_evidence.json": "b41bc053d76a4f25698347d8b919f739f9472001b14b92195602a691bff680b3",
+  "skills/exam-prep-coach-3/.phoenix/provenance.json": "377847da2cfbf0cff5374f79794379a5e0abb74d4f27139ddead8edda2bc6eb3",
+  "skills/exam-prep-coach-3/.phoenix/selftest_evidence.json": "8ac57cc27728b866f8ed20a8e2b6d6fac0014481396a89bc2c9109e74227e629",
   "skills/exam-prep-coach-3/references/creation/p0.md": "2269f32bd9cb3423b69722a47eae0c1a3566327b787da7df0fe95796ab2e95e6",
   "skills/exam-prep-coach-3/references/creation/p1.md": "d4cf739130708c2ec2712e44a8e0005b1c4e24f2871e720301d75909c3ac24ad",
   "skills/exam-prep-coach-3/references/environment/p0.md": "07ea5fdcea36df2192e9a892cf9cf75727b7b181f5f77abc3ab86f13464ac2bd",
@@ -66,7 +66,7 @@
   "skills/exam-prep-coach-3/references/production/p1.md": "b4b043f24c66024fbdcb0c174c9944460344f0b87599e698cfdb28f47254696c",
   "skills/exam-prep-coach-3/scripts/main.py": "160b0a1d61bb3180c4b53a643c6e73af1e9fdefab0d8907127b450cf021c6673"
  },
- "sealed_at": "2026-10-18T19:58:41",
+ "sealed_at": "2026-10-18T20:58:25",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

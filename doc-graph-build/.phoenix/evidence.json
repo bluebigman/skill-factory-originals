@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-graph-build",
- "merkle_root": "6b800a93a9d37a1100caad45c8a0f1a968923033d0062a967eeca0f5f6f5ab17",
+ "merkle_root": "56dece3d711e08606dad7c4846fc389d6e7a21c3314cb5f3e9aec8059e3d1c90",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-graph-build-1/run.py": "1e7375e5e8acab99299d4037c5a1bf72e5f25198c2ee2fe6c695280fab43490c",
   "skills/doc-graph-build-1/selftest.py": "bbf5fb2d8f45794ebeaf9af865da58bb68c32fc0aecb651734596acdbc70ea0b",
   "skills/doc-graph-build-1/.phoenix/originality.json": "09b7daf2b7ef9d7b53fce5f30dd7771fd5522d7951d6ffaa7a4819571af6b85e",
-  "skills/doc-graph-build-1/.phoenix/provenance.json": "6da384d1877a5dffe10a07b1aa9ee92b312fb7b4663e09cf7b63c435c9f9367e",
-  "skills/doc-graph-build-1/.phoenix/selftest_evidence.json": "35dd822ddf19b67332a14372ef7684fd2f445b7e0a16a28374162216b51e3f5f",
+  "skills/doc-graph-build-1/.phoenix/provenance.json": "9d7ccb893a40f1d0c3f22ed6abedd030524644343b4fd003f665017536551465",
+  "skills/doc-graph-build-1/.phoenix/selftest_evidence.json": "1df6e67c737cd825e2452e15c3d6784695245c4ce7854cfcec80dc78ad1858b4",
   "skills/doc-graph-build-1/references/creation/p0.md": "a525a6cc10865a1d7fba185dbe0d575b9fea19325e197b06e8514901d60a1008",
   "skills/doc-graph-build-1/references/creation/p1.md": "dd7f803c0375ed28635f82feecd2b76cd71a46cf874306bd4e2da1cae8dd26a8",
   "skills/doc-graph-build-1/references/environment/p0.md": "f57380217153b60a76c07af129b765c092cbadfebce420854156511b2876aae5",
@@ -37,8 +37,8 @@
   "skills/doc-graph-build-2/run.py": "e43c934cf18df567b8bfbddb6931f41cec013d511b7b6175b546b04b2362d59c",
   "skills/doc-graph-build-2/selftest.py": "80504a7a75d8964dd97a62417d04cbb313fc50bc0898cce9c7d0c5bff31a22e1",
   "skills/doc-graph-build-2/.phoenix/originality.json": "a68657d9953c6ff8ed970cb2e36c36eb90602b317ba0205726e802c2dc7c0aa6",
-  "skills/doc-graph-build-2/.phoenix/provenance.json": "bd38cc3d1e9f14c49cb641561fc222d7fd4e0134277e93a091220320f0509a4f",
-  "skills/doc-graph-build-2/.phoenix/selftest_evidence.json": "8470f2a46fc4546633199330596be04f441038900d6517151c7fb373bc7ae0c0",
+  "skills/doc-graph-build-2/.phoenix/provenance.json": "3e415d2f00006f3302b34c07ad668d56affe13e4c8719f95cf89422ed15a3a30",
+  "skills/doc-graph-build-2/.phoenix/selftest_evidence.json": "975961401f1abd86d35a020f63f57f680534316dda8f3d2702420a06e8d95363",
   "skills/doc-graph-build-2/references/creation/p0.md": "76b818b07def3eebcd44e3c54c9804dedf8721a8a95fede453b87a7226175370",
   "skills/doc-graph-build-2/references/creation/p1.md": "2460c108add3109a04dad59d39a0643918e9a24717bb5a7bdee7867ed851c432",
   "skills/doc-graph-build-2/references/environment/p0.md": "cde20c361f2138ea22361259b451b0f45ad296b3e41e43dea84eaba347b053ef",
@@ -54,8 +54,8 @@
   "skills/doc-graph-build-3/run.py": "9a93a4689d8d95819f7fb465d3fbcea6a6fc613dd12aea87bb880cc424794820",
   "skills/doc-graph-build-3/selftest.py": "d350be886bffbe1372fc1cc8f867cad4b1da5890ce1b563332c9c294d4f5aa45",
   "skills/doc-graph-build-3/.phoenix/originality.json": "2d804bc8ce3c427e0649d9cac62c215be23c1ca443b291aa53f2c1421168101b",
-  "skills/doc-graph-build-3/.phoenix/provenance.json": "8e6a9e422c3ab66512578bf4e7565eb2770656a9a444e7362765e05ac45c88ef",
-  "skills/doc-graph-build-3/.phoenix/selftest_evidence.json": "0fa59e64e0e5592b2894e6255afbea2ed46a2cbbe8c2f0b25528f4805ab9caa1",
+  "skills/doc-graph-build-3/.phoenix/provenance.json": "3a79bcb12a4e612ff76f66b225e4dec92d8ac4878665f4db7976b772104b0416",
+  "skills/doc-graph-build-3/.phoenix/selftest_evidence.json": "7f8a2ac5fd8f4bf4918e3e4cd188200c03d19630762826ce9d19a7e438cb5681",
   "skills/doc-graph-build-3/references/creation/p0.md": "597fa67cc24c4435644ff6b6fe6be9249377953e114ab764e93f7c729bcc0b38",
   "skills/doc-graph-build-3/references/creation/p1.md": "f094b4614abf7b2a9345b7339de5c6388f873d68e4a4383879cf56473fd8ad90",
   "skills/doc-graph-build-3/references/environment/p0.md": "c504110d85f5a44777cf1a24282a4740000a5cbf1442c607a0b8a74792f8541f",
@@ -66,7 +66,7 @@
   "skills/doc-graph-build-3/references/production/p1.md": "ceec2814e0888e0750e0c1ffd2333c4732924d5f1b1b729b8f4ad678d92945e8",
   "skills/doc-graph-build-3/scripts/main.py": "7f8ab60f1338cf6ac8e5e45362189d6c10fe90be0281fc9c1120fb7f5dfe3b78"
  },
- "sealed_at": "2026-10-18T19:57:01",
+ "sealed_at": "2026-10-18T20:57:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

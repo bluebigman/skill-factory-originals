@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "log-troubleshoot",
- "merkle_root": "85ffccc7135429ae869d67fc45db72f0db80f947b487e3ec939261d176684d67",
+ "merkle_root": "0a7fda7ac0e1a17e09ec155ccaaa6267a059155850b298cc8e7784a8f97782c9",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/log-troubleshoot-1/run.py": "34cd87f40dc6d5024a1c36b7d4a17940d6f99f877e133fba57c51555edb9960e",
   "skills/log-troubleshoot-1/selftest.py": "729bf5306dcc85e36cced4d0349db2835d36c21ce34424dc977c55aee9993819",
   "skills/log-troubleshoot-1/.phoenix/originality.json": "bf1e1fd8f84b12af57676d0340021a2f3322bc4b61eb6e4d31233df74f12d245",
-  "skills/log-troubleshoot-1/.phoenix/provenance.json": "510702824842ad9222fa13c7212315a45fb3968b9157eea7423d08a6fa2397a2",
-  "skills/log-troubleshoot-1/.phoenix/selftest_evidence.json": "78dfd3f640880e025681153e4e943b6548cb9dcd15f080813e9f147819109f21",
+  "skills/log-troubleshoot-1/.phoenix/provenance.json": "8e83c181f5889346ce2b0b6c068db673f35ba027c569909efefbe852a43b7882",
+  "skills/log-troubleshoot-1/.phoenix/selftest_evidence.json": "85b0f91103d19357a6ce7b854cefc339a5ea577ad47aff02f8c1c640d153da83",
   "skills/log-troubleshoot-1/references/creation/p0.md": "cf9521a6f455f6875b50f054723ed413757554750898a2c982435efd2990ff73",
   "skills/log-troubleshoot-1/references/creation/p1.md": "165b1918cc83a8415ccb57ae9b476014c87b708574cbc05bcbaafe7cee18e9c8",
   "skills/log-troubleshoot-1/references/environment/p0.md": "b058c5e6c150cdb357f7e98d0f9ded111db88208c235b5cf066e463d00cc4a18",
@@ -37,8 +37,8 @@
   "skills/log-troubleshoot-2/run.py": "b2fd4353cd1516d62d613ef81c775e8f38181ffb215b3554c9a768ebcfc68267",
   "skills/log-troubleshoot-2/selftest.py": "d8b4d0a4636bf2f83158c1b538d3140b1918756ebfb374b42384a80453181c56",
   "skills/log-troubleshoot-2/.phoenix/originality.json": "bd2c49db0dd83cf3d60b3f2df98805da8888f59bf97b34351e2c619a69408c41",
-  "skills/log-troubleshoot-2/.phoenix/provenance.json": "5edbdd7394cff40fe69683cdcaca3ff1faf81bfe32e8967f2f95be0e2c22ac9e",
-  "skills/log-troubleshoot-2/.phoenix/selftest_evidence.json": "e4bb2c78297a0f3ad6d7520a93a16ae2449b884eee9bf107717d850b19fc90a4",
+  "skills/log-troubleshoot-2/.phoenix/provenance.json": "7cc611ae7f7f281662fcf91f23d1370e121b793c94d5545b07058887eab07c7b",
+  "skills/log-troubleshoot-2/.phoenix/selftest_evidence.json": "574ff4611c8b23e4f3a14f72130c0dbe2697e4ad7157a51f2ee99c5141e3f656",
   "skills/log-troubleshoot-2/references/creation/p0.md": "d95019c87ba1251d2345b37148c471d31a056983ee96594714c86c73722b302a",
   "skills/log-troubleshoot-2/references/creation/p1.md": "63277e54592b7401fd9c928836512fe8eee37dcb359f7320ef0a9c666f787741",
   "skills/log-troubleshoot-2/references/environment/p0.md": "5b88a6c8bdd0cf335d599b266c09de336a7dc7451998baca85b804ace9af2c97",
@@ -54,8 +54,8 @@
   "skills/log-troubleshoot-3/run.py": "4a386ef10e425b34387bce71cb2b7fab049a69a5adb21e55b21643736d5f6cdc",
   "skills/log-troubleshoot-3/selftest.py": "6ebd3e41c54a9c3abcde22385cb1d6a4dfc02d45516157e88af1eb20eb8a8a98",
   "skills/log-troubleshoot-3/.phoenix/originality.json": "47c668979011c23ced7f88f568732d814b46fa36abae82d4201b6575cb6746e1",
-  "skills/log-troubleshoot-3/.phoenix/provenance.json": "f137c17c2a06db5ec31e0884a4185745fd8e149dd87edc83ea2bcfb10b0a463b",
-  "skills/log-troubleshoot-3/.phoenix/selftest_evidence.json": "10d7e1072e1a85eea4142cfb82040c3870c851b4267d430da1f77f4f31ac761c",
+  "skills/log-troubleshoot-3/.phoenix/provenance.json": "44c19f03dc0471e7e677e11ad6180a86828f2808fc19a2c3a86a6589308e3a71",
+  "skills/log-troubleshoot-3/.phoenix/selftest_evidence.json": "5800e9a2d0f2b27ae3bb9714ca0b63718303806ea36d69d8c02a6d125d601371",
   "skills/log-troubleshoot-3/references/creation/p0.md": "e36c0b69cc9c11869396b6897b91238b8e28b592104fa2cc002846b4b89781d3",
   "skills/log-troubleshoot-3/references/creation/p1.md": "4e2c332f871697f089563dc303cf7ae691f39ab657933c0b99f8a7350432ca76",
   "skills/log-troubleshoot-3/references/environment/p0.md": "e4397f104368e64b285f4caa4ed35aa27c27d50cd06433bc49f2ae9a3c1196d5",
@@ -66,7 +66,7 @@
   "skills/log-troubleshoot-3/references/production/p1.md": "d15510180ea21bf6c1eac72bf275847277946ad5841c23246ab4e3011959d610",
   "skills/log-troubleshoot-3/scripts/main.py": "4d40fa35279145fc8af17e59053c0248bd1130ab2dabadc6d567bbfed10e6702"
  },
- "sealed_at": "2026-10-18T20:02:55",
+ "sealed_at": "2026-10-18T21:00:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "cross-border-invoice-pro",
- "merkle_root": "c0f720e1a37c48e7f9f499117686d2740a88ddab40e0ab333d869317b4c73ea8",
+ "merkle_root": "efdad2a162124e4ae426f8daf570e5926be2898d81644a50631fbd3087c1f98c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/cross-border-invoice-pro-1/run.py": "c1c8c9c77f1b67a2826185fb443c1a61492950694092edd3ecc9781e7059b882",
   "skills/cross-border-invoice-pro-1/selftest.py": "3d68ed3877b55609b45d287ec8b9757c38dfacf3c571ff64c570b9952c36ac74",
   "skills/cross-border-invoice-pro-1/.phoenix/originality.json": "2f7dcb73f8ddc0a765df47c4de4d14d380d9b618b30d75c78ca5b53fb9409f16",
-  "skills/cross-border-invoice-pro-1/.phoenix/provenance.json": "5799492210ee92da89b3167695bba1cfbb403a60e17b1bbd9ccc49905af542bd",
-  "skills/cross-border-invoice-pro-1/.phoenix/selftest_evidence.json": "ca56aac3f6ec2e5830690f6655e0697a4245b59f751c96a10e3895cbade4eef1",
+  "skills/cross-border-invoice-pro-1/.phoenix/provenance.json": "01e2531f82c57eee02590f98d13183b079f5a16400fd5d6ba3d450b97220724d",
+  "skills/cross-border-invoice-pro-1/.phoenix/selftest_evidence.json": "2f77519261b544ac95096a98044dfeb1a7ac9a316712362a11fa05e0c6355436",
   "skills/cross-border-invoice-pro-1/references/creation/p0.md": "5e02b018193d64157f8422f2af5054a29b607072038601c29df4315cacd73261",
   "skills/cross-border-invoice-pro-1/references/creation/p1.md": "eafbcc894c203eb0e1f586f636dc1fd8d9c8662385ec211ee031cae158307d4d",
   "skills/cross-border-invoice-pro-1/references/environment/p0.md": "ae046dddb179bc4ef23d4bafe665b163e9e7b080509943323c9e80ac4be896f4",
@@ -37,8 +37,8 @@
   "skills/cross-border-invoice-pro-2/run.py": "532419b14fc87c3d8143c7a674ada2d2fa0d5a951386c789753934e724449a8c",
   "skills/cross-border-invoice-pro-2/selftest.py": "6b25666bfe81b74f6255dcdb0bfabd7f04548edf894103a74d81f526b63ef0c7",
   "skills/cross-border-invoice-pro-2/.phoenix/originality.json": "3c253e39e7ba35cdf56353bc360cc51e4be73acff94b95fea6634c9bc5938a52",
-  "skills/cross-border-invoice-pro-2/.phoenix/provenance.json": "b74b7211f31eb91ece92a5eb1900e7ae233f5f4cc8db925085d0c5f3f72d5f14",
-  "skills/cross-border-invoice-pro-2/.phoenix/selftest_evidence.json": "697bd1c153cc4ca823a058ab53a18fd822cb50defc4e43f6e9ee5c28ab720e60",
+  "skills/cross-border-invoice-pro-2/.phoenix/provenance.json": "2f1653d99f1f8acca9f00bf503e89cd935b73d586b016f12b3028ebe7cac0f79",
+  "skills/cross-border-invoice-pro-2/.phoenix/selftest_evidence.json": "1a0e3e46e61cb2a510b8224d903ea22edb565e42e3cf2d6f1f2b3dc0a1c803fa",
   "skills/cross-border-invoice-pro-2/references/creation/p0.md": "b910df41102586084c5d6a56b65d3c7231b473a2fd8070e1c5fe682c711c7a2f",
   "skills/cross-border-invoice-pro-2/references/creation/p1.md": "3b577d33a44c40843b57418251919ba6fc412772c8b9c710a904e42d50aab7da",
   "skills/cross-border-invoice-pro-2/references/environment/p0.md": "1c6d6f334b0f65419175bdbf537fb1eea40dd33d8ad7b47d94d2c77352b5cc85",
@@ -54,8 +54,8 @@
   "skills/cross-border-invoice-pro-3/run.py": "e98e8454d296e8777eca8c56ed1a67c39982e474a2bb0095d610d456e7381957",
   "skills/cross-border-invoice-pro-3/selftest.py": "f42920ce8ecd377a8d82e4e1f92a9dcda40e75dd94866d02d0c5a2c0b82d6604",
   "skills/cross-border-invoice-pro-3/.phoenix/originality.json": "909b821c4c86aa1ffafc258e56568a9e8122d753ebefb5791e35ee59c214e82b",
-  "skills/cross-border-invoice-pro-3/.phoenix/provenance.json": "a4f95b55370e661d42fe6c399e93a70c5caf18c628c2802f030829dc774de3c4",
-  "skills/cross-border-invoice-pro-3/.phoenix/selftest_evidence.json": "a590ec8a7cdcd4a68f147eded3ce75c0955fda87cd80957163105b6ebb6401a7",
+  "skills/cross-border-invoice-pro-3/.phoenix/provenance.json": "ca0f5f9f8bdfdff38c81f4d03eeadabcd36c2e20cfcf6ff8f3a8c16a6656b564",
+  "skills/cross-border-invoice-pro-3/.phoenix/selftest_evidence.json": "b1969f5c8169a7d4d493f0fa6890e5c1b8677f57f85ddef34a13e49ea1fc03aa",
   "skills/cross-border-invoice-pro-3/references/creation/p0.md": "1bc437b98788b37b9292a96c1b433b1749e8d14769d2319691bb8d275c44a9b5",
   "skills/cross-border-invoice-pro-3/references/creation/p1.md": "03417699ae1f79921b580a5ea2a789b178394ffa47d40b7706721b3a7b51803f",
   "skills/cross-border-invoice-pro-3/references/environment/p0.md": "bbf64b914107aae95dc549a36d9bd5d97e2686a3993ba7a3b9a8e022e084ee6d",
@@ -66,7 +66,7 @@
   "skills/cross-border-invoice-pro-3/references/production/p1.md": "44b88bb90ed5d07f5405bbeb2a1704b932325fb585152ed654e554c6ab3d02ca",
   "skills/cross-border-invoice-pro-3/scripts/main.py": "61e073c196d2907455a6d88706a3dafc7fc12a78d0cf3a41b1995cb47fd278cf"
  },
- "sealed_at": "2026-10-18T19:54:47",
+ "sealed_at": "2026-10-18T20:56:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

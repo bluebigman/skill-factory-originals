@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-budget-coach",
- "merkle_root": "a8ebe193805b0af97fc6e092859418243adf99052d9ea285357e39e29aca0b5e",
+ "merkle_root": "3fb70479ca4672c3b1753abb66a8492cd3c8cd8a80c1411a7bd1b06fd96dd9f8",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-budget-coach-1/run.py": "f69e09083810f30fed7b06401c2f6f2751f4509468d1c5ac37fbce256d11016c",
   "skills/family-budget-coach-1/selftest.py": "091e88e3cf7ca8b8cc806637ce43575f0270b6fed7fbb39a5809cfaeafe29464",
   "skills/family-budget-coach-1/.phoenix/originality.json": "3e5bb55524691d31f6bf9fdad53b0118beaa0531bdcf3bcf821c89b507e2a308",
-  "skills/family-budget-coach-1/.phoenix/provenance.json": "0fbf0bafa4c12aeb5298b655f161ab1ca3a915575544f4f72e6664740cde9c66",
-  "skills/family-budget-coach-1/.phoenix/selftest_evidence.json": "e4f9904a7202b2be528964f88bd8e87142335fe8764a6ea6ca240464ec48b709",
+  "skills/family-budget-coach-1/.phoenix/provenance.json": "e0fb6b4d37adac71e078f0ce096967947be67d156ee00ea14293eb390003489f",
+  "skills/family-budget-coach-1/.phoenix/selftest_evidence.json": "b18288ad245e785ed7f08c9a1b3df59e340644594d35d2480b5ba8187b2a01bd",
   "skills/family-budget-coach-1/references/creation/p0.md": "0e4866a1cffb1870f736e23bcc50d2a08ad4c884b5583c3a205e49f8ba81f245",
   "skills/family-budget-coach-1/references/creation/p1.md": "56d8551c6a73472bfadd1059b93f73c3a5e35c1cf22d646cc413fc904c295640",
   "skills/family-budget-coach-1/references/environment/p0.md": "dda4936563be1847d1798b3de53877adc8142eb7ab6d7a4b684430df915e0902",
@@ -37,8 +37,8 @@
   "skills/family-budget-coach-2/run.py": "f14fcfa6aba51b2d54883bcf7bb4ae6d68773b51ed733c19baf8cac1ea797f89",
   "skills/family-budget-coach-2/selftest.py": "c5e60d1129a1c4e662b0feb8af357bc51e5643838527a57720388ddb56483262",
   "skills/family-budget-coach-2/.phoenix/originality.json": "a2a9108dfba32ebf91785f7d9cf21b0f1e908e23a48934a6bb5262c6c6281e0e",
-  "skills/family-budget-coach-2/.phoenix/provenance.json": "c86c6afe78d69977bc25939fabbec6f5b43a57d83cb01af6d98d69e11db9448f",
-  "skills/family-budget-coach-2/.phoenix/selftest_evidence.json": "c8fb798ab028bcc7ceea0b0d4b70731b2ea69732df9c3be3f76e9da7f33e5fcd",
+  "skills/family-budget-coach-2/.phoenix/provenance.json": "a53faa7135a2530661526d8bb0ddf560d5de13b38518f89106f842dcdc8e77e0",
+  "skills/family-budget-coach-2/.phoenix/selftest_evidence.json": "0958a4184382025ed90f942e65a4898828d0108e489392e106eba3dbf77694cd",
   "skills/family-budget-coach-2/references/creation/p0.md": "39fd03fc2b53435bd1a7d859aedb9939ee9e0533177c48168803411d8a35ad79",
   "skills/family-budget-coach-2/references/creation/p1.md": "187d55ee5871bc0e1471bafc6672ffb624f6dbedf5408a8a4babc9afc7800351",
   "skills/family-budget-coach-2/references/environment/p0.md": "259bf5a707c5a6aef9dca929c100df4252ad44c1f699cd7ef29f8f2f1cf0e4a7",
@@ -54,8 +54,8 @@
   "skills/family-budget-coach-3/run.py": "ca7efed9fe0a430cdb7c690fc39c0cda8ea15fb9f08f29e4b1a9c37ff526c72e",
   "skills/family-budget-coach-3/selftest.py": "ffff901ad2a9346bae01253018db9db7ddc716dc1d5b1d0b72de1a5cc7ee3951",
   "skills/family-budget-coach-3/.phoenix/originality.json": "8d812129813918de89bc85f37bd3cfbdf8ecdac14826602e19a3f359ace62e63",
-  "skills/family-budget-coach-3/.phoenix/provenance.json": "06c321a1544a5eb10fcea4c7e692f5003c70d46c638d3267d5e2ca0b188568bb",
-  "skills/family-budget-coach-3/.phoenix/selftest_evidence.json": "a3b29405f08a500411d94d4fc7d9ca24099d9fc1dfdd06c10346a6197b2461ec",
+  "skills/family-budget-coach-3/.phoenix/provenance.json": "8b6a9cfe4ed1598dee43a5c09ed9a35fdd117603deeddcf0c38f909af25d3eab",
+  "skills/family-budget-coach-3/.phoenix/selftest_evidence.json": "742383335180e5b5b18305d272d395156ac2ecacf7b948c3d04dd0253df2e93c",
   "skills/family-budget-coach-3/references/creation/p0.md": "2dd0894ce09b5e339179385b45999f37d20bf2eb4e3a5ab5ad9f417af7ab5591",
   "skills/family-budget-coach-3/references/creation/p1.md": "e06e045ed554635ffe5cebffeab43b60018af6198f9ebbc0686c10af50ac2d95",
   "skills/family-budget-coach-3/references/environment/p0.md": "79eac1ef70cc902345a282c6e623f22ee39b2b6a9141b88e5d322e2977db5f44",
@@ -66,7 +66,7 @@
   "skills/family-budget-coach-3/references/production/p1.md": "33bc9ffc78aeaf9c3deeb107b71932a9325391da8431f95fecf19243f5c505b7",
   "skills/family-budget-coach-3/scripts/main.py": "a4e0751b2423639a9afe963f3a8062d7bab9c6530061dd6f541b812228faee49"
  },
- "sealed_at": "2026-10-18T19:58:51",
+ "sealed_at": "2026-10-18T20:58:32",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

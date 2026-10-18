@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "runbook-automate",
- "merkle_root": "36daa2e2a1ecd469dc74d5086d076f9436804e61e95677023f8a5022f9aca85d",
+ "merkle_root": "b33ae2d8069ca136266dfec702f03d3ebb82422850316416cbb3995e4a98bcc2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/runbook-automate-1/run.py": "a38de17e3e7205909403ed7b4c6f1c1bdcf5599f72338f2e74e1f797c1910255",
   "skills/runbook-automate-1/selftest.py": "72a77be68d0715a114c7b72a6a6ca2d99fb16bd73956159c47cc2dc2c54a9296",
   "skills/runbook-automate-1/.phoenix/originality.json": "2173f14279b529fe89133f049b8ade8962f6fccdf2d585ab0b2720d77ef81a2f",
-  "skills/runbook-automate-1/.phoenix/provenance.json": "b06113e04c0450417dd045ac7649db842f2116d3ce320c9155dcc184bd2af414",
-  "skills/runbook-automate-1/.phoenix/selftest_evidence.json": "aa509e120ba795ce1fa0287b9057a6d9b14ad1bb267045dc389542b9479a3768",
+  "skills/runbook-automate-1/.phoenix/provenance.json": "72c5584eba1eb28a94c4365ff90479ba6526ff9f5c7fa213b7f0a1463eb32075",
+  "skills/runbook-automate-1/.phoenix/selftest_evidence.json": "d6c33445d33c14d45d2ed3a236d906dee3a8e74e5da8a54c4efaf62f867b368b",
   "skills/runbook-automate-1/references/creation/p0.md": "713716df124dd2bde66d52088537f1fa672550d181aecd8598202bde6cda10e3",
   "skills/runbook-automate-1/references/creation/p1.md": "1dad89b0050a5350fb1b2a9e17e595718fab92b2ae44ef373d0a16da1393805d",
   "skills/runbook-automate-1/references/environment/p0.md": "8290a1e795e05b3bf0d0826d5a463fc58b3004a67516d95f7788db6eafe1b95b",
@@ -37,8 +37,8 @@
   "skills/runbook-automate-2/run.py": "8844470be5ad812577c04f1cb4e0c3598bb493df22a228be1595e840592ca653",
   "skills/runbook-automate-2/selftest.py": "734dcb7035cffc3f1457f2e6c70b12292917ffd19e2780c6097465b77ed5bb20",
   "skills/runbook-automate-2/.phoenix/originality.json": "b5ea42e307deba0b3d09652f7ac901f2f119555cc17a7efb2a23440c40f28fdf",
-  "skills/runbook-automate-2/.phoenix/provenance.json": "10376230346e5e49db2b252d08ec567e3914bb00f41862e879e305006238174e",
-  "skills/runbook-automate-2/.phoenix/selftest_evidence.json": "86d9eaedabbd29bfc902cf2425ee54dd46315c70a37e07355d5fcb38512ddc54",
+  "skills/runbook-automate-2/.phoenix/provenance.json": "cab87b02d21fd57db26d9316413f23a90bbb16da8f3a36288dbc7e327fe3307b",
+  "skills/runbook-automate-2/.phoenix/selftest_evidence.json": "72d952962e8d684506ac630f680ce6053d63f649b252987637d25d3c96a322a7",
   "skills/runbook-automate-2/references/creation/p0.md": "9dcd685ac5e9d40b9d5be297bc8af3f7e570cf77976c2a4305aa3f5b4c15df1e",
   "skills/runbook-automate-2/references/creation/p1.md": "b7b5a57759a3b99a6d2e2e8feb4f5c62dea8230dd7463d465408df112738b6d1",
   "skills/runbook-automate-2/references/environment/p0.md": "4bcbf3e61a14c7df58d233e1a7b6f47650c4af08c530fba1311fe5423c71b9f2",
@@ -54,8 +54,8 @@
   "skills/runbook-automate-3/run.py": "24ecf13fd30cf997d42374d0ea3c89609a8c50a3251c28f67ed88b0111089bfe",
   "skills/runbook-automate-3/selftest.py": "be2a13948911314889117a1593d8957a7ce9e6d54f2618c42dabe182bdc15d2d",
   "skills/runbook-automate-3/.phoenix/originality.json": "7be5c1b866ef391e9f5faa6679da64364603795117bf508875c7848e70600f87",
-  "skills/runbook-automate-3/.phoenix/provenance.json": "2718f62bae485897cbb33f32d772b7180126cdb492fe2502ec98bba025cbd68f",
-  "skills/runbook-automate-3/.phoenix/selftest_evidence.json": "d6cc3fc5e7565bfb1ff4eb6b694d100925d38de12ab15af3dbd6affb619140c6",
+  "skills/runbook-automate-3/.phoenix/provenance.json": "b1dcb3ecfaa9bc9a94a47891146de667f3cee113ff064971b15d5bf973eb73a2",
+  "skills/runbook-automate-3/.phoenix/selftest_evidence.json": "d9925e421ad56600d1d78ec697ff218b3c1ca2ffea786ed83e48ed7d2ba71753",
   "skills/runbook-automate-3/references/creation/p0.md": "2aeec490a13cca5da185f6981c5c6e2c12994109dedc775a84f4b2c79fb92613",
   "skills/runbook-automate-3/references/creation/p1.md": "f10707f433a83bc0ad143f1d32f4886f0faaf9809e7d8b8517c8f472dac337be",
   "skills/runbook-automate-3/references/environment/p0.md": "8319c345eb6542456f8a8c9ab3f064a13d586b653a0ff8930b2848152b9d6364",
@@ -66,7 +66,7 @@
   "skills/runbook-automate-3/references/production/p1.md": "366da3c8a090c08e8bbdba85033fb5f1e6e7a4f0b2a7eec1518b5b5245c1e400",
   "skills/runbook-automate-3/scripts/main.py": "aa30e264d2c47791a312067129ba587d48827feaf0b51388621494a72b051cd1"
  },
- "sealed_at": "2026-10-18T20:08:08",
+ "sealed_at": "2026-10-18T21:03:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

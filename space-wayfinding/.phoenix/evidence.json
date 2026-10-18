@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "space-wayfinding",
- "merkle_root": "901422217b361fe06c617789f3f1b0a4be69a583221b3ce5364fdca2bb541617",
+ "merkle_root": "cd4247809b1d6a3280d2f5190462fbd6a48a2ad3a527ca8596df844cc54d353a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/space-wayfinding-1/run.py": "9bba21f6d01c8a6b19439465820e14ac43f7ca9aea703f96f4c2a1fce5ba55b0",
   "skills/space-wayfinding-1/selftest.py": "3e2842a47327b85bc5f61bba3e9fbd26507915825db717f8ae3eb2aee10b0889",
   "skills/space-wayfinding-1/.phoenix/originality.json": "0befa8923ef89708e4d4167c52987ac4093434aa1253b44641c1b53d67aa5ecc",
-  "skills/space-wayfinding-1/.phoenix/provenance.json": "f0f66922180c3ea7a13ca8f3d81ead980babd82fb3dbd794ce9990a647d35443",
-  "skills/space-wayfinding-1/.phoenix/selftest_evidence.json": "369c89f800bb765344592172eeb2904f160082a11542cceed3ae564ad0e1c61f",
+  "skills/space-wayfinding-1/.phoenix/provenance.json": "64cabf7d675a7b6c310db2ae13fd6238574f9759ec0707e258640903d7135cef",
+  "skills/space-wayfinding-1/.phoenix/selftest_evidence.json": "7bb7ae236e4396ab0d51a914dda25a4453484ccc7bcf29028f2859ca51e595c3",
   "skills/space-wayfinding-1/references/creation/p0.md": "0d892996fa96db2cb235700700520fe76655baea8fef87d0c9d67531708605b5",
   "skills/space-wayfinding-1/references/creation/p1.md": "159dc6093196c031de52fd518fdc7d5b9cabda3920adf638d87d2262db29227c",
   "skills/space-wayfinding-1/references/environment/p0.md": "1fdd95ae3d6ffea7685c65d943a260d59401ef5d5f5c14f5abc51884dfe4c4c5",
@@ -37,8 +37,8 @@
   "skills/space-wayfinding-2/run.py": "b3310ddad473790529fb1132a7a8212ec4069a8c442904168a0d0dd30b11325d",
   "skills/space-wayfinding-2/selftest.py": "d5aa8a927b5ef0407b1fdcfacd3b46ff1bb566ca63408552aead7d63767d8139",
   "skills/space-wayfinding-2/.phoenix/originality.json": "8de396cd230fd79ea45c3b146fc9a22133d311991a0fbb2ee47e16d90e6983e1",
-  "skills/space-wayfinding-2/.phoenix/provenance.json": "65a15f6cc9b5ac8cf3ceffaa4a2387c40ea35014ea85625a26205bcc2313e3bd",
-  "skills/space-wayfinding-2/.phoenix/selftest_evidence.json": "c47b1ffb17510ccada5d65444dfa70a5418579a987e802aba1d5990563c16d45",
+  "skills/space-wayfinding-2/.phoenix/provenance.json": "47ea383a1873f46647a906510f8b54e41e23b0fdcd310581a25361cb2eba71f0",
+  "skills/space-wayfinding-2/.phoenix/selftest_evidence.json": "543db08f71284893daa7adf65f2961463ea7f806657fcdad1c8a3e8d34f77008",
   "skills/space-wayfinding-2/references/creation/p0.md": "3b018b706a0ab64546d2d7cc91bfe9fffa3d483bda7344eb39278229f9ce0273",
   "skills/space-wayfinding-2/references/creation/p1.md": "1b4a43a8ebc322f7f0bcb61b0667aa4d5257b47f6ab7e706eeb5e61c6e6fa1c4",
   "skills/space-wayfinding-2/references/environment/p0.md": "05c8a60c1afc40de64a5c561f6080c19dcbc3709dc849ba539abae48e74455b7",
@@ -54,8 +54,8 @@
   "skills/space-wayfinding-3/run.py": "93c78ce3cf3bedb62bd9a9a5c4937a1555350aa8825f0cf68256f1ad4ab87499",
   "skills/space-wayfinding-3/selftest.py": "d6b74032c79e552057e56d2ae462cec206021a4e20b5b5eec4822304d341d14b",
   "skills/space-wayfinding-3/.phoenix/originality.json": "b68e67fea74eba3467a08dfb5c0f0f26cfb281c9901ed5ea2af6ddea6b582da3",
-  "skills/space-wayfinding-3/.phoenix/provenance.json": "1c97c2fd2fc51dfb5ac4add5fa582b806aba81c00f1a3e71b813caedc905a9eb",
-  "skills/space-wayfinding-3/.phoenix/selftest_evidence.json": "a4d7fdc0b47920718e279420f040609d323946d2347cbf8d19f10287ad285775",
+  "skills/space-wayfinding-3/.phoenix/provenance.json": "24da6b2cd2dba5aee1fdb020649427a36f68323d77322c61011f6ef8508ccac7",
+  "skills/space-wayfinding-3/.phoenix/selftest_evidence.json": "520e39c9a7db989f1f0d3fc7a8180468952cd82301c652033c4729018ffffc3d",
   "skills/space-wayfinding-3/references/creation/p0.md": "6891b65a2a186246aa445d60d880598629dbc0e393cd26f0b38393d09c2e2838",
   "skills/space-wayfinding-3/references/creation/p1.md": "e49734ba7ddc257f6f33e967f28f1d3239fa93ba8987b9efdde6fa67006dc47f",
   "skills/space-wayfinding-3/references/environment/p0.md": "5768bb60d9302cb75bc37a406fd463a6d97428bc3b749054da2488ab18509f41",
@@ -66,7 +66,7 @@
   "skills/space-wayfinding-3/references/production/p1.md": "92ca776fafd676d46515d4d8baffdb09448447fabc57f9c4693573336888b93d",
   "skills/space-wayfinding-3/scripts/main.py": "56e7eb3c60291561622ec710b3cb935cae124ad60ddb1d887f194d92e56369e0"
  },
- "sealed_at": "2026-10-18T20:09:58",
+ "sealed_at": "2026-10-18T21:04:07",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

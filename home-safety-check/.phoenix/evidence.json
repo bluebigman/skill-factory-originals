@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "home-safety-check",
- "merkle_root": "2354f0470936f9411249e6c94199e31c9bca945cecb5484cfed508299280c98c",
+ "merkle_root": "6877e9bc73816e03d62f99d770e325c067c872971a2c153b10cf9765d4521d1e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/home-safety-check-1/run.py": "48b00aa5c0f4a5f7841899261533325a50636c31a13dda7d943f5f49a3127896",
   "skills/home-safety-check-1/selftest.py": "7d6b295de0d4e621ac1c558dce1b170cee5c03b779eb5d47f8bee5f1c68b8787",
   "skills/home-safety-check-1/.phoenix/originality.json": "87d498e4462de52f7ec0d1519fd7badd732af9be2cb1d69954abc04705656446",
-  "skills/home-safety-check-1/.phoenix/provenance.json": "cad11b3324b078d9a9064a4f3fcc7de4c7c550eac12ab050931c65ae7606bea9",
-  "skills/home-safety-check-1/.phoenix/selftest_evidence.json": "0406e3789a7b4bb0a6c7e2b160f84e464c73cdfa97116d3ff2cc4158636e4a6e",
+  "skills/home-safety-check-1/.phoenix/provenance.json": "638a1019daedeca91e6052e55f7dbf57a13632baf3230a8bbf8b0b6ff18b0d07",
+  "skills/home-safety-check-1/.phoenix/selftest_evidence.json": "a3007bae6d128b42a252d2b68b4bb62b82d071e2f5412beca78e5a51d193d42c",
   "skills/home-safety-check-1/references/creation/p0.md": "cc41ea40f05a8810d32a26f29aaadad7cb3567135c82d6adb45cf28359ded86c",
   "skills/home-safety-check-1/references/creation/p1.md": "1985a553e7cad60fa8019db2afa68559a668974c4cbb39aba4ed7e9fff50cb14",
   "skills/home-safety-check-1/references/environment/p0.md": "1ceff55c2b28bb7e9eaf4cd6fd513a5a3b1acefa46e6f9b4b55f0760cf6bc133",
@@ -37,8 +37,8 @@
   "skills/home-safety-check-2/run.py": "5b3c9da4571035d4d983eb91f2c04cb8c2183ff833fe6afdd432f0e78b7f6b69",
   "skills/home-safety-check-2/selftest.py": "1cf5dff56df2f82d708c4471aad402cc543fffb5cef83ac6b3fb69cc111ef46a",
   "skills/home-safety-check-2/.phoenix/originality.json": "312937729c5f4e4a7993d4e3e2beaf3810f13962a3eedae3760e01f59868bf0d",
-  "skills/home-safety-check-2/.phoenix/provenance.json": "61aa63d50f4d8488f673169101c84bdfc0e3df44b02538ae3fcb2f3772ee8c24",
-  "skills/home-safety-check-2/.phoenix/selftest_evidence.json": "01e3254e510b0e5131e1f3e09ac4ca02c2b5cf9b6be0c0078d4e6a2b77069c3f",
+  "skills/home-safety-check-2/.phoenix/provenance.json": "f85216f9b7574d44c6a6e6c5d5f0d46b077a708b357af0c004837dd2d8da9871",
+  "skills/home-safety-check-2/.phoenix/selftest_evidence.json": "798b96adf3f996ca6203c778ec30aa4901337b6e8d785532af9ec777d0b514d1",
   "skills/home-safety-check-2/references/creation/p0.md": "6be5170f99c2318f6a043ddfd72e890f3dd5d9d8850706dccff1ea2c06acf954",
   "skills/home-safety-check-2/references/creation/p1.md": "a435c2b1c5506519ed58938ab1edbe21d2e7774bf0182d4998099ac6a1205e46",
   "skills/home-safety-check-2/references/environment/p0.md": "9ec70637e7517f124b7f0c6a14f9cb7f396c5e473bc30277ee61797fc73645ed",
@@ -54,8 +54,8 @@
   "skills/home-safety-check-3/run.py": "baa9ac0f173ff77a00b4a730844584edcfc864959d2c7ab1d5a33a5b105db5dc",
   "skills/home-safety-check-3/selftest.py": "f21760bb8d80b5a37c08f57cc804507c242ce1dd55cb749fb9dd74823bd102d9",
   "skills/home-safety-check-3/.phoenix/originality.json": "e40cc0512d6d63acafdb663d688e566610d748c242baaedae279aa93e55bf2bf",
-  "skills/home-safety-check-3/.phoenix/provenance.json": "ad6e61c1e116bb0ba8291b2e2074310b6b11200aac545441c694256ab8006071",
-  "skills/home-safety-check-3/.phoenix/selftest_evidence.json": "c15f6aff97a6166735c1519d80297c354145c1bee4333db968c4a4a152ad9338",
+  "skills/home-safety-check-3/.phoenix/provenance.json": "ef2a28b260602f5dd9e5d1e2580a947fb7743ac5208438a63f96b67bcccc478a",
+  "skills/home-safety-check-3/.phoenix/selftest_evidence.json": "e17d581b8edb6d6a5091ef272e990904bfc2900e647e071d249e6137307d90e0",
   "skills/home-safety-check-3/references/creation/p0.md": "279daded92f3f409c36f2f90be9ea42017987797a403244ef26af59bb23061fb",
   "skills/home-safety-check-3/references/creation/p1.md": "39a82e59f3843a86328bcb8ab99167f73ef08f00cb4c216038783aa0a7a6fc2e",
   "skills/home-safety-check-3/references/environment/p0.md": "bb0531651d081cb0278cd3d100687c176c8a578977aef3608a88ac6d2306a017",
@@ -66,7 +66,7 @@
   "skills/home-safety-check-3/references/production/p1.md": "6ea68c9538dbde5fe5b790c694060b81181043c9b2584f18fec709d199da17ba",
   "skills/home-safety-check-3/scripts/main.py": "edf704dce9d4d961cd99b954e08aa8d8370406f0eb0671273a6e293f29e25f0c"
  },
- "sealed_at": "2026-10-18T20:00:49",
+ "sealed_at": "2026-10-18T20:59:33",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

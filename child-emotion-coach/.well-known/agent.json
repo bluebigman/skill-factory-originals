@@ -41,7 +41,7 @@
     "遇到憋屈不说"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:37",
+    "at": "2026-10-18T20:53:43",
     "from": "emotion-identify",
     "to": "emotion-identify",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -65,7 +65,7 @@
     "遇到情绪回放"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:37",
+    "at": "2026-10-18T20:53:43",
     "from": "emotion-naming",
     "to": "emotion-naming",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"
@@ -89,7 +89,7 @@
     "遇到转移无效"
    ],
    "id_fixed": {
-    "at": "2026-10-18T14:46:37",
+    "at": "2026-10-18T20:53:43",
     "from": "soothe-method",
     "to": "soothe-method",
     "why": "原 id 属他资产（生成器用了固定样例 ID 当模板）"

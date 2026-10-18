@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-translate-polish",
- "merkle_root": "da8040d414827dc98c93fc688e12f0c6f0f239c90214387ecbceff77e8f729c4",
+ "merkle_root": "f6d15b8e847379366d0171aed69fe50a37dbfcfccf32efb7986b9fbd4d9b1222",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-translate-polish-1/run.py": "2db38fdd6ddabdeb9411d918997c6d49956b4b9eca35ebc82e583aee23983c3e",
   "skills/doc-translate-polish-1/selftest.py": "f4064b5b325fd901c9387cc83b02688a8e58943cf8fa2857031661bd07ff440d",
   "skills/doc-translate-polish-1/.phoenix/originality.json": "1fc92ff98796884115433009a70f6fc4e8091b5681bc22c2069e76668d940115",
-  "skills/doc-translate-polish-1/.phoenix/provenance.json": "136ee52a66a4702d452138d012e47c9b36e49e346ab914b4c3d35ad2b3c962e7",
-  "skills/doc-translate-polish-1/.phoenix/selftest_evidence.json": "53a24eedc7ecf4ddac5ab583c7c40650a344f2b55e1faab6eba9360f29ee990f",
+  "skills/doc-translate-polish-1/.phoenix/provenance.json": "c236ffb8d49977ccfee473f6bef3ddccd685f7d61be45a0cb6e0bf5b5713b83e",
+  "skills/doc-translate-polish-1/.phoenix/selftest_evidence.json": "7b168e6b2a6e8705df57fb8aede3acd680340cb18cf032f9987cb39cf668ac0e",
   "skills/doc-translate-polish-1/references/creation/p0.md": "bf99fc865b8b697160dacd4fea0745538046ca9393f3e29329f53a9c3108e2ba",
   "skills/doc-translate-polish-1/references/creation/p1.md": "62c17027f80fb6edf071c93ab57e1b639ce3fa9f73905ee0fa6bfed2b1660e8f",
   "skills/doc-translate-polish-1/references/environment/p0.md": "11ba10676df90bbe0e7b378e9c200b3f2cc490510b395781d2b25e42f1aa9393",
@@ -37,8 +37,8 @@
   "skills/doc-translate-polish-2/run.py": "a0d62fde6b49b7f1b73f8de2bd09acd27facfd1c816b484393ed7176ec82ba9a",
   "skills/doc-translate-polish-2/selftest.py": "6dbef39ef3d190757b3212efa2557a1fbb2ffda90e6c481a9d5beb9702264da0",
   "skills/doc-translate-polish-2/.phoenix/originality.json": "8513427d3bb66007abf78397e3bf78416a8d6f66439261f38ed5ba1a3a0c4db1",
-  "skills/doc-translate-polish-2/.phoenix/provenance.json": "508e4e7899b51cc242d7ed99e3d1369a056f61b6f79c4ec34913878351e80f12",
-  "skills/doc-translate-polish-2/.phoenix/selftest_evidence.json": "acc370c0d707c778d9ebfd77ebd20eb4397f494ea17ac27adf32569c4eed514e",
+  "skills/doc-translate-polish-2/.phoenix/provenance.json": "40ee731a1d2af669c2bddfc2db5578495333a9ee9d78370732921aed4b1c4db4",
+  "skills/doc-translate-polish-2/.phoenix/selftest_evidence.json": "22a885735f7123a2efeddaf48e9fb6c38aa9033a2853487896fb46e69ae62a58",
   "skills/doc-translate-polish-2/references/creation/p0.md": "3751061f01a00a72134dffa4d183e2b6a4c26679602815f70725aee2fd204719",
   "skills/doc-translate-polish-2/references/creation/p1.md": "e08cc9f4d582584553ea628b3ddc7f000e9df5ae8dc430e0cf93fd11a4a7bf76",
   "skills/doc-translate-polish-2/references/environment/p0.md": "46670bc76b39d22a69c9dbba476417f78a108cb045be7fbeaea12e053690927c",
@@ -54,8 +54,8 @@
   "skills/doc-translate-polish-3/run.py": "60e4fcec80570c8f9b563facb564d65afa15a3d0ecb9049c7f9540e6f26515d2",
   "skills/doc-translate-polish-3/selftest.py": "ab7b9f2952c0ff029e6823ce91fad61fd8982b394da994135f39930062be5a09",
   "skills/doc-translate-polish-3/.phoenix/originality.json": "21374e687f4ce4cec5ca914333af70a3c0f3d37f3cefe1632bedbb1f1c8970f0",
-  "skills/doc-translate-polish-3/.phoenix/provenance.json": "776962f14fb9c5aa9db3f6f0790093646c22d36cfb693d11868e9d185a887db8",
-  "skills/doc-translate-polish-3/.phoenix/selftest_evidence.json": "ccf11982b3bbf0cc559577ede55b39a03fdd19221f59c50c5ece1e2c39259cca",
+  "skills/doc-translate-polish-3/.phoenix/provenance.json": "7e9bba1996d39edd6ce7c599f7cf2de81800401018ac20d78812cc2a1e23da78",
+  "skills/doc-translate-polish-3/.phoenix/selftest_evidence.json": "93a9d9ced605d9e8ec064640f6102191da12e058f2465692a914efd882b19f90",
   "skills/doc-translate-polish-3/references/creation/p0.md": "1d9b24f61ec1bad060cc68330f3a7c5e7d7acefbc896101a0301c87e6843c396",
   "skills/doc-translate-polish-3/references/creation/p1.md": "4107fa652d59fd122da421ef895822415339653e54182cb8bec35e83f1a509eb",
   "skills/doc-translate-polish-3/references/environment/p0.md": "dbcbea4567c1b0f76f819d80e350cd8267fa715e3ce7ae1a4e74d794d9283393",
@@ -66,7 +66,7 @@
   "skills/doc-translate-polish-3/references/production/p1.md": "613a51cf4c5f207211473ca1866a8a84cfa8c50ba77caeb1971f1f4fd039ce27",
   "skills/doc-translate-polish-3/scripts/main.py": "7c7e96f7ff07003581d642c715d40425b14d8f10146cb849f0971689895d7ce8"
  },
- "sealed_at": "2026-10-18T19:57:43",
+ "sealed_at": "2026-10-18T20:57:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "log-to-metric",
- "merkle_root": "699ec08ce1d48b88d90020a7fb18ce7962a2d4b70cb58bc583b9ff4227dcded8",
+ "merkle_root": "132b81fd8cac2a75111caef314a479d840ec43562e6266412624d33299b10b4c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/log-to-metric-1/run.py": "44011eebd391e2d29c2a46fc709c10a730aff4d8b45a148dd2d05de250ace26a",
   "skills/log-to-metric-1/selftest.py": "32bfcde7c5f943830a034b38c7a1603774a15de7a7a6dee1b30629206287be6a",
   "skills/log-to-metric-1/.phoenix/originality.json": "6552ea54d8a74b48678da1d7cff5f35459fa740d7df3ac2acd63e2d288dc462a",
-  "skills/log-to-metric-1/.phoenix/provenance.json": "4b74824887bde775185819d221d7a95e1880fef741d28133a37d38547ec50b2f",
-  "skills/log-to-metric-1/.phoenix/selftest_evidence.json": "92309d1c9fb5f34c8f64187627da501e7507345b4c8a3559808bc55403bbdb9e",
+  "skills/log-to-metric-1/.phoenix/provenance.json": "a30685f10ce58a6a391f5cb31cefe6b7f1f417ea9845fc3112e1fba6e30b55aa",
+  "skills/log-to-metric-1/.phoenix/selftest_evidence.json": "712d17c358402c254526327c16395044d9d74b80ef625d0e2563dde5764a9b9d",
   "skills/log-to-metric-1/references/creation/p0.md": "95d302452caeb2cf9b0fde86eafa086de4ba5a0843c176362753f9570bfcb50e",
   "skills/log-to-metric-1/references/creation/p1.md": "a60febbf5983a8bf5b9d20ba87c0727483b8641e91e17681a2ed78731c6001c0",
   "skills/log-to-metric-1/references/environment/p0.md": "a9d2c5ebb202802a97995b73640f46f77842d0c2a5ecfa76ea0cf42f5d12e279",
@@ -37,8 +37,8 @@
   "skills/log-to-metric-2/run.py": "d22fe83a1b4333b1cbc8bc763e3de3d0399cafc91da7d3208b729d4da5f93585",
   "skills/log-to-metric-2/selftest.py": "d7a1400def7690ecaafea9f2f787afac0c2110184f3a908b37842bf71bea5e44",
   "skills/log-to-metric-2/.phoenix/originality.json": "8c5fa0bd9510dee70c0ceb3e6e593d1c202349095a57588595ae7ba619433e5c",
-  "skills/log-to-metric-2/.phoenix/provenance.json": "f653f10262df0988eab57a64925cf5c982ea628b0607645bb95c4fb8645f7d26",
-  "skills/log-to-metric-2/.phoenix/selftest_evidence.json": "a15e9623c22d4014201379f513d1c23d6c951566c047fa1e703bf28ad33f184e",
+  "skills/log-to-metric-2/.phoenix/provenance.json": "9f263426242275f8af40f71d5405693adbf2be6310bc1db68bb599bbfdfae440",
+  "skills/log-to-metric-2/.phoenix/selftest_evidence.json": "a6e88c551dba6659c2069315af53d540833dd3365b85e7b592c462b27cccf790",
   "skills/log-to-metric-2/references/creation/p0.md": "be540ee9112c263b170e9d606ec182e20c31616cb2eee24429ef59a4321a905d",
   "skills/log-to-metric-2/references/creation/p1.md": "0aba49059b64af99eee8e27414f5512539a80a72c44ab33eabb25f4beb39a90e",
   "skills/log-to-metric-2/references/environment/p0.md": "ad0ddd3aaa82be120ae80b2ead60a244b48189a7866796ffc029bc97a8986229",
@@ -54,8 +54,8 @@
   "skills/log-to-metric-3/run.py": "1446f0577a966e0ddcd81cfb229dc5a369d1229a9dc17c13348bc62088651c1f",
   "skills/log-to-metric-3/selftest.py": "6c39f8217857db435f573874fc81c82bf549787c509f2ff56e7044e4718553cf",
   "skills/log-to-metric-3/.phoenix/originality.json": "28676cbf39c22fc277cdcc7cf3326564ac917d5b3bca0fdf1d903afe087d79bd",
-  "skills/log-to-metric-3/.phoenix/provenance.json": "abf7974c54dba9264df0981f5da68127bdb0dde8eb918025501fc793c427db30",
-  "skills/log-to-metric-3/.phoenix/selftest_evidence.json": "9d08ecf8ed7a5b6ea423d9b031477980c014cf5e422e62c6410f96e78192b6ea",
+  "skills/log-to-metric-3/.phoenix/provenance.json": "fad8854995b7769999d41bdceeccd1d0f949b70885524bca6ebbb5a99fcf9eaa",
+  "skills/log-to-metric-3/.phoenix/selftest_evidence.json": "5c45a38d6b5e59bc0b3b2510727b1c151d291d26f10bb8974a2cbbc06c8550e2",
   "skills/log-to-metric-3/references/creation/p0.md": "88b1a379eb9a30270d446326093910b636dfe7e9e4575591fe6f185a7a899503",
   "skills/log-to-metric-3/references/creation/p1.md": "f8aeb612050e2f1ba9ca70753469e45f78287b4675001681927e126465ddfef6",
   "skills/log-to-metric-3/references/environment/p0.md": "fe5df6ea131ee788695d0450911b262ef57380b2983e0b55f4d43d2c990c229d",
@@ -66,7 +66,7 @@
   "skills/log-to-metric-3/references/production/p1.md": "7e0a811f4e5733c137c0747e7db6995146706e0bdd749a588934251a3eaba673",
   "skills/log-to-metric-3/scripts/main.py": "f27fde1816c658cd5475b129cac885faf63ca67eb428a787e57583e4915af0c2"
  },
- "sealed_at": "2026-10-18T20:02:54",
+ "sealed_at": "2026-10-18T21:00:32",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

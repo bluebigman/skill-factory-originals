@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "metric-definition",
- "merkle_root": "3c28dae5e3095479094b50e821330c5e3a65a5afa0ca26ff7b925f417f2ee186",
+ "merkle_root": "1b2fce9e346d3280ba16c8ce658c507763f7eaf7bd91c1caf3db0cb27e36abce",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/metric-definition-1/run.py": "4462342399340f5f91dfede3bc81cc88b6b77500bbc02fcf3dfadeb8e913527b",
   "skills/metric-definition-1/selftest.py": "eeb2538ffec6221905da20549f63d2b2a73c0b6a28a346c27e82276037a01baa",
   "skills/metric-definition-1/.phoenix/originality.json": "84bec9d74fa6dd0867384b3d864df43fdc6d7a20e51f72cddc6d9beb8a4ad31f",
-  "skills/metric-definition-1/.phoenix/provenance.json": "3a3220f3ee5e2bc16d54167412dcba5d5e687707a3bcbe6867cb15002b51e978",
-  "skills/metric-definition-1/.phoenix/selftest_evidence.json": "6d9b440c988e0d68054224488f9c5290b18db3b60315ec34aba9426c6226d90b",
+  "skills/metric-definition-1/.phoenix/provenance.json": "44ae4930b4d3fc9722060c7184f493d4b0c42c2be1e9afd548391a26b2706b4d",
+  "skills/metric-definition-1/.phoenix/selftest_evidence.json": "a809b12a856c263539cab310a73938dfbe646354b59c87e042e4dc93fc057e2a",
   "skills/metric-definition-1/references/creation/p0.md": "cba944b77bc85eec9998f0f41b29b90d7bd27b54ac7227ce2c34d30b1d9016bd",
   "skills/metric-definition-1/references/creation/p1.md": "0d0d1617aac9b00cc0da293183c31dbbcee6bf52b4a508c3e1bd0f96615bd3d1",
   "skills/metric-definition-1/references/environment/p0.md": "a67637e8aa3a2011aea2da37fe3b62914a84a730555421ae6acac299681abcdd",
@@ -37,8 +37,8 @@
   "skills/metric-definition-2/run.py": "79a85e953b6e125ba23ab7790fe1f2f469e305d2d1886ba46b56eb5582769262",
   "skills/metric-definition-2/selftest.py": "9cf3ebd99912e63dfb2633d486581c29fecd15a071333d4e828e22ff335c83a8",
   "skills/metric-definition-2/.phoenix/originality.json": "141df7b0d932e3d2e827736ceff1d036cc55a41d03e5ae768c32c9d7f3561adf",
-  "skills/metric-definition-2/.phoenix/provenance.json": "4afbe54e6484892f76f6fb26715b2def8c68824af0be46dd8287596ed9631fe0",
-  "skills/metric-definition-2/.phoenix/selftest_evidence.json": "cdfff3bd0dc19f29e439262bec224de96e4140858b4c278e1eec84b91b3e5b64",
+  "skills/metric-definition-2/.phoenix/provenance.json": "d2eca4d220656067c121973eb6d3ef60e3d52fc0a7356b4077182a047b840ebd",
+  "skills/metric-definition-2/.phoenix/selftest_evidence.json": "2b65392444037636069db92b1a26549e1fa0d08778c54677d53dbea47806735b",
   "skills/metric-definition-2/references/creation/p0.md": "a7d3a9f88464bfca00b0e3c40167312318258de8eee40a4099140bc6da74c823",
   "skills/metric-definition-2/references/creation/p1.md": "d54729db82f044ae3aefc5d034c934cc21053bc66eb51c31452bc9ab64beaf15",
   "skills/metric-definition-2/references/environment/p0.md": "bf445c7c646261c678a52d059c92772be9fa38f75c387508f3ae2efe591f4f88",
@@ -54,8 +54,8 @@
   "skills/metric-definition-3/run.py": "aec07a0ab98c98d2b53d3a4efa62b35d90d7e5dbfbdedafb8092baa02b2c7bdb",
   "skills/metric-definition-3/selftest.py": "0978b6cf8590228eebf82989ab72ef844e0d31e5af095bb73fba35d0fae26861",
   "skills/metric-definition-3/.phoenix/originality.json": "4198881b0525f1eedc5732718dae0b888043c96a51cb6c82dd0b724f636d593e",
-  "skills/metric-definition-3/.phoenix/provenance.json": "cb5c9a7739a4068facea3cf225c63a6861c441b4a7304ba563ffd1cbb039a90b",
-  "skills/metric-definition-3/.phoenix/selftest_evidence.json": "64f866b6d4f9bb683f29f291c346929fcc6b2ccffe38f365c81c0880baa2ea1e",
+  "skills/metric-definition-3/.phoenix/provenance.json": "671ce0dd337a6368a547f5c2b3bc676dd0e738c3fa36f76f1f48347d1319f5a1",
+  "skills/metric-definition-3/.phoenix/selftest_evidence.json": "19d97ca8f852bee3c50784339fbdc66d5bf85b3a66551035d172edc6d21f68c3",
   "skills/metric-definition-3/references/creation/p0.md": "cff91a6b29c5814793f34f04b42c90349ef0e958fc8c7535ac9655cecd5735fe",
   "skills/metric-definition-3/references/creation/p1.md": "bd073fc439e088715732141a10729fbc0318a636aaaae481bbd058e3e74a0852",
   "skills/metric-definition-3/references/environment/p0.md": "8b6ddb71eb6d9cad161f6f5ba78588e216af58177972d73f05c228f93e777917",
@@ -66,7 +66,7 @@
   "skills/metric-definition-3/references/production/p1.md": "04f05c07f09a1843f67fc9940d5cc5e7365c5d748956ee09a461f74dd80b331e",
   "skills/metric-definition-3/scripts/main.py": "fa97508fad2fd1e2423e5de241bf57abb8e7209616f6ab381a1bb7abc2b789aa"
  },
- "sealed_at": "2026-10-18T20:03:41",
+ "sealed_at": "2026-10-18T21:00:59",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "service-sla-pro",
- "merkle_root": "22f95a80b32b6bbace932db9ce72d8afdf7745a9b1a68db0a59478f71e35f8b9",
+ "merkle_root": "b60a02002fde831ea85b71465ed4eb3530834a1aac2afe6ae9f7987b9f55c3b2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/service-sla-pro-1/run.py": "622e285dcb776e4eb99547a1aff96ab1361d3ce0a6a79a2222a9cad8d5b6ea99",
   "skills/service-sla-pro-1/selftest.py": "25df779a6677dc7f65410c4bbb69d593ec8942205a71256d4b7adbc1416673be",
   "skills/service-sla-pro-1/.phoenix/originality.json": "aaa13fdbfd64d6cdee4bbe74371835495ebc4c3867a093595995bff4af2dff04",
-  "skills/service-sla-pro-1/.phoenix/provenance.json": "88e5a4deef819325993fe3ef2a9feb730c92ac8eb77450c3f901b26e00268e8c",
-  "skills/service-sla-pro-1/.phoenix/selftest_evidence.json": "11f0380697125ea2c0891c941844aa5b718d71d135efafa7f8b116c2efe9b53f",
+  "skills/service-sla-pro-1/.phoenix/provenance.json": "d92fe860925be3586b30ae4eecc263bb32167ced3d0cc8c438e008e021114021",
+  "skills/service-sla-pro-1/.phoenix/selftest_evidence.json": "0b9793e10f61dde741599f700ffff124ad201e0983475b5c0a1b73f3d30d5a18",
   "skills/service-sla-pro-1/references/creation/p0.md": "2b0d2db21a3dbf57d8b4e3ed49f3223e2057da839a3f4b492f74b45749988301",
   "skills/service-sla-pro-1/references/creation/p1.md": "b3c33ad9ba1a653eca78c0e14ff4925ad63ce0c9229ca3552b4b5143c8dd7668",
   "skills/service-sla-pro-1/references/environment/p0.md": "a317a3ad08723998ef957e17b17d26718f85b943c6806742adfda5a48047af33",
@@ -37,8 +37,8 @@
   "skills/service-sla-pro-2/run.py": "738fde3ca2d861a55524a0928f5e6d862c25d4c3aadea94ab4f32f8314c8299a",
   "skills/service-sla-pro-2/selftest.py": "4a05ee76a5ca1ce827b746f93eb28ea50e04d4478f9659bbee27f5ca755389f8",
   "skills/service-sla-pro-2/.phoenix/originality.json": "575d72b2af60467359684c34eb8ef2ec037ba243aa2d7ab296993ad6ee9c4d70",
-  "skills/service-sla-pro-2/.phoenix/provenance.json": "76eb4399bcc2980e74b746f283d7dbf6340919a558189bff9a8f541d5acac4f3",
-  "skills/service-sla-pro-2/.phoenix/selftest_evidence.json": "30e218f8895d8fbbe810f4a817f91be83da6b0b9b0528082311ec82a46cf8e0b",
+  "skills/service-sla-pro-2/.phoenix/provenance.json": "838e9b8b785132abc760bb4c19b1f3f2df585172b83210ddfa926434cd21588b",
+  "skills/service-sla-pro-2/.phoenix/selftest_evidence.json": "7eafe7b37b7b21b06433679ea4b061478f125a5b47fb352262b6bea472505052",
   "skills/service-sla-pro-2/references/creation/p0.md": "c225d563e91012de016b2b552c415e96fef1e09cbf3c1687c1701815bf3611c0",
   "skills/service-sla-pro-2/references/creation/p1.md": "1d40bfcc59467228002d03512ac11bba2d9e2dff4e6490ec2cd9e42f318b9ab6",
   "skills/service-sla-pro-2/references/environment/p0.md": "d6e6276abedd49de284eb9560e9b28bf5d9039010bc2c0002d7bf26b0350d231",
@@ -54,8 +54,8 @@
   "skills/service-sla-pro-3/run.py": "8633111a2ebf94c7744c9260915edac40580604e343a45fc2c3089986004696c",
   "skills/service-sla-pro-3/selftest.py": "b26dc278a5f3e38dd181cfc19ea9699ca89b08fcf4bf513b43e1a2eba222df54",
   "skills/service-sla-pro-3/.phoenix/originality.json": "8b1a3a5109404be435f8b8df116c48713639c962d2ec07ab3a580f048dbb2647",
-  "skills/service-sla-pro-3/.phoenix/provenance.json": "328f120129b57ad31f1020467a3a0d8bea9c41c06eada17cc54099fa9d687541",
-  "skills/service-sla-pro-3/.phoenix/selftest_evidence.json": "23954084a7a7f73855532a6d715fb57ee5d0fa6be229407a7191902db71cf9d2",
+  "skills/service-sla-pro-3/.phoenix/provenance.json": "d001cb21f810de3622dee21e6aa5be02811e2d43c0a451146dd36c5595a4b7db",
+  "skills/service-sla-pro-3/.phoenix/selftest_evidence.json": "699fef42de86d93c8b095668c67cae75d843a59c20e36f489a4a4bb172fc1fc6",
   "skills/service-sla-pro-3/references/creation/p0.md": "34aba28fc65274a78db6a388d09d9452dec86bf9945801cb7a91f967a3db4f51",
   "skills/service-sla-pro-3/references/creation/p1.md": "8e6ebfc4426aaa2263276bf17b59b61d7b1d4ebacc0523504faf1811e545dd90",
   "skills/service-sla-pro-3/references/environment/p0.md": "6e609d7a0f66f8c94d69bfa84af19234eed5c569a8a77e49e726c10e5f1fbb44",
@@ -66,7 +66,7 @@
   "skills/service-sla-pro-3/references/production/p1.md": "cfbbfbc08735af28750dd30688aa09cff00e9e0ee339c0d5bbe73d01946e9457",
   "skills/service-sla-pro-3/scripts/main.py": "15f54897063e122d9c50c4f8b1cec5013142ca19a9c83c64424e0ad38c4c5743"
  },
- "sealed_at": "2026-10-18T20:09:12",
+ "sealed_at": "2026-10-18T21:03:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

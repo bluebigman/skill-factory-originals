@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "quality-gate-define",
- "merkle_root": "cd0503f6f4ddbf13211977d00794798a8afa025b77dc92ad16452212b847facd",
+ "merkle_root": "1c5788f7abdbafe3e60c8df010a3ecb5b64f12bcb3b8fd66e88800de1b926442",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/quality-gate-define-1/run.py": "6f42d1b3e90011928da8ec86c6259a84a2f10fdb2cfa1b1450b514faaa5df09d",
   "skills/quality-gate-define-1/selftest.py": "9b0e18e56d102791f507c6f2fa550fad10cd07fba399e9cfa66c125869cd0ee7",
   "skills/quality-gate-define-1/.phoenix/originality.json": "f84db0859db1c9643ded04bd161dcae5db5b9571b45cb81ff71e755ff789d6cb",
-  "skills/quality-gate-define-1/.phoenix/provenance.json": "044ad5484fb97de27f451802ba6c9d0d1297c059c353f12c0927d67120e3eaa9",
-  "skills/quality-gate-define-1/.phoenix/selftest_evidence.json": "33546068137ae73a9f7d3141226cdf9bc6f26210af1b1df9ce0e69e46c095acb",
+  "skills/quality-gate-define-1/.phoenix/provenance.json": "28683c9c6a48eb4472c07b4e7349b99e7ae75d6712476b19e990a4f0ed299a73",
+  "skills/quality-gate-define-1/.phoenix/selftest_evidence.json": "6074065c98d80f71f326c150702a3087cc3b86ae6cd56c19be1778d0bfec88d4",
   "skills/quality-gate-define-1/references/creation/p0.md": "22dc52ac7e67a0c0d463c114b3ad9c6d91d1adbe8a5be8d65c0018e09f4d16d0",
   "skills/quality-gate-define-1/references/creation/p1.md": "dc529265c9f9330f882b9e820c6799b844ad9f21c120252e5960305a2860074e",
   "skills/quality-gate-define-1/references/environment/p0.md": "fe02f1fe2f4ff3187398b4674d91d7fa926a6d76a6de8cefd3ffefc83bb8afdf",
@@ -37,8 +37,8 @@
   "skills/quality-gate-define-2/run.py": "9a3e3351e5cbc90c6b26e2ef9f2b4ed57a1e4fb41db57b5749aa6471565a1fdd",
   "skills/quality-gate-define-2/selftest.py": "1ba0667bd3b9057f7d45a1b240caa5177dd5a1a3ed10c5e505195a0da3763c1a",
   "skills/quality-gate-define-2/.phoenix/originality.json": "c3d5b15f2084acc994c9355000891d82831e3e0919c2f324e4fcfafdb335cfec",
-  "skills/quality-gate-define-2/.phoenix/provenance.json": "a71b0a1c287208db98dc1e8cf8810008ef11203902961d0ee92d97cdc7386a02",
-  "skills/quality-gate-define-2/.phoenix/selftest_evidence.json": "4b81715a35440c3f53284e932b95e2203b5295b7b3ea82c1ac80b20ca868fc31",
+  "skills/quality-gate-define-2/.phoenix/provenance.json": "2a581809c91b0cabfc329e87155585a29a88069109c7671dabb2a8a3caa5b4ab",
+  "skills/quality-gate-define-2/.phoenix/selftest_evidence.json": "b3a403d6b4a1e8b2352835116fb4b4f0094a21f38acc911a51002cac099bed99",
   "skills/quality-gate-define-2/references/creation/p0.md": "3b62fe387e0b16f78e2437e8e1c1e778cfe20181f87e952e02be60bf0f8682e8",
   "skills/quality-gate-define-2/references/creation/p1.md": "e39056bf0c22c3f8cc105e52a8f98f4ff4511d1166564ae567d6ed3ade9dc38b",
   "skills/quality-gate-define-2/references/environment/p0.md": "4048d42861c7dbe5f38078355f038899f6ecf76b4a0b28b66d8f6790974d11a1",
@@ -54,8 +54,8 @@
   "skills/quality-gate-define-3/run.py": "d1f2b66c2925bd0e4c964dccec38f84a8b12dc538aeca4714f23d1a52924c5d0",
   "skills/quality-gate-define-3/selftest.py": "3d825f327bcf0d2d3239ee5d8d27e65b18d583a5d8fa116fdd811f4325a76844",
   "skills/quality-gate-define-3/.phoenix/originality.json": "b3cd9df31debf2659ef56625b89f67306e38886e3b183c6179abd680ee787dba",
-  "skills/quality-gate-define-3/.phoenix/provenance.json": "f374b0c830175dff6a7f40e27ece4d315cf5ac5c6adaf2b53260e47a1ee3e9ec",
-  "skills/quality-gate-define-3/.phoenix/selftest_evidence.json": "d1043c893265cfc706845085bac5061f39f715ca727efb98da1b88dff7d481d6",
+  "skills/quality-gate-define-3/.phoenix/provenance.json": "fdb4b11106027554040538bfbbc39024a92fd1d265c4f18089f2ad776896bc62",
+  "skills/quality-gate-define-3/.phoenix/selftest_evidence.json": "fb632c2c9c474ffa132fb0ac0f228d49e2934e98e435f994699547dbd905085b",
   "skills/quality-gate-define-3/references/creation/p0.md": "3266d8284ca69a4f5476b01f2db7e4b2ed2bf46e681e0fa433f8b88198605f3e",
   "skills/quality-gate-define-3/references/creation/p1.md": "1b503ca173940c5b18ff6de5b93d0d7e9362d4c420323841437f71c991808fed",
   "skills/quality-gate-define-3/references/environment/p0.md": "202771b14af2e0c60c9453d3941bfe0a13160db3bde5c8336f5bd079b954f974",
@@ -66,7 +66,7 @@
   "skills/quality-gate-define-3/references/production/p1.md": "9f6f29a3a13d1f534fd398eff2e812c8347a39799d8f2958c7a5725bc90a6543",
   "skills/quality-gate-define-3/scripts/main.py": "aeece928180d805ef85038e9d77fde3b9a5524b8d5891aa9110cb9f29f81d69b"
  },
- "sealed_at": "2026-10-18T20:06:57",
+ "sealed_at": "2026-10-18T21:02:40",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

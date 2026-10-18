@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-lineage-trace",
- "merkle_root": "97fdd82f9303fd5aef7965b7fc63d5cad718670781c47002c78b3cda53e51061",
+ "merkle_root": "99ec5e25d9fed9dd6b18227b43bb7e672ca10451de201dd55771bf272903e767",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-lineage-trace-1/run.py": "3c58893189c94a811da5da007389e6f2a83b4857b85b40cc0224596ff154ff46",
   "skills/data-lineage-trace-1/selftest.py": "d29cbcb24b3cb371e47dd92205c93221e3e296e86344607af2b6b1320bdae6f4",
   "skills/data-lineage-trace-1/.phoenix/originality.json": "3e3319519149bc0c0fc0918922c6dadf76327481ba88a10776b07da6c78af3ac",
-  "skills/data-lineage-trace-1/.phoenix/provenance.json": "764bc0b6db32df1569405db74a49f11c8f763770363b23e505257d8d36ea7db2",
-  "skills/data-lineage-trace-1/.phoenix/selftest_evidence.json": "67b89e702febc64ce52dc393b77d3a67b88c42ff4b0dccc819f45cbfb13de38e",
+  "skills/data-lineage-trace-1/.phoenix/provenance.json": "13d6881038f5092d466a1335e416b00fcdc94d62f3e8d8d811db5ec9ec7f96aa",
+  "skills/data-lineage-trace-1/.phoenix/selftest_evidence.json": "37118f722640b51b9dceb0d0ee1905904cfeae4cb8fa16c9e19428f83f7dce48",
   "skills/data-lineage-trace-1/references/creation/p0.md": "5cb0dd70f2125358125ee9abcc2f1c49b693ea6f0ef9eaa76789776197c96584",
   "skills/data-lineage-trace-1/references/creation/p1.md": "8483195b7c3186c3da2235f3548593633129f67f6c45a2ecbde3d66994f9e753",
   "skills/data-lineage-trace-1/references/environment/p0.md": "7db54f4c50251ac516a3330e062522ecbe49ccce39099dba507619c7f35132b8",
@@ -37,8 +37,8 @@
   "skills/data-lineage-trace-2/run.py": "2f1280d6c719e60a8fa671034907d8ef3e5e82da3c3db639d5a77ba0e1781866",
   "skills/data-lineage-trace-2/selftest.py": "34eba2a81a94ae7cc9024569032fb2bb4f99f41b0c12fa13401f478d389f1bfe",
   "skills/data-lineage-trace-2/.phoenix/originality.json": "4c37451aad95da0f8b0dc2fd2f62c627939418867cf1d90c8eff74153aec40b1",
-  "skills/data-lineage-trace-2/.phoenix/provenance.json": "4f9737e4612c140d2a34fd376f74eb73d16359e52c8de386cb1c8b86c6962ec0",
-  "skills/data-lineage-trace-2/.phoenix/selftest_evidence.json": "f1bca8f1ae33cd1d82a37df4cc29b66d5822ded94269c2f90fbd9423a1074f0c",
+  "skills/data-lineage-trace-2/.phoenix/provenance.json": "540dc656b54b51459be66aff65a6e943c020b5af706475ae772c6d643642103b",
+  "skills/data-lineage-trace-2/.phoenix/selftest_evidence.json": "3bc7261690560dad63d62221b2894abac3ae404efc559004f9df5830af62f0d5",
   "skills/data-lineage-trace-2/references/creation/p0.md": "4f0088581eb2b3fbb4e46f2ca30e2e6e8b85793c74abca9c7f72a8126c7c13c2",
   "skills/data-lineage-trace-2/references/creation/p1.md": "14ca4203de39a7b58c197fb687cce0e76b7c17047723ed73777f5b29c8fb0763",
   "skills/data-lineage-trace-2/references/environment/p0.md": "46ae75b160b1a0f98b653972fdc045b65037dac8df04988c540a12d213d6ac50",
@@ -54,8 +54,8 @@
   "skills/data-lineage-trace-3/run.py": "cf83e60cfe74b3e06baefe2e67c763872d36b58f3efb93f65327ab54d0af5913",
   "skills/data-lineage-trace-3/selftest.py": "e72522740c8e1ff3510ed4a995608d11adfb3c78bb390d694538495cb212baf2",
   "skills/data-lineage-trace-3/.phoenix/originality.json": "5182b457aec8b93502b9459acf8c9e4a87b4f0a2187ef93788070a09c2d8d6c2",
-  "skills/data-lineage-trace-3/.phoenix/provenance.json": "edbacd870805b8aeb13c53bd17d4e7877b3f922ffbdd8b341a895d1c4a68eea0",
-  "skills/data-lineage-trace-3/.phoenix/selftest_evidence.json": "2c2f8dbf47ca1e7e23799de0ce59bc8fcd139e1b7c464b8905901277c5fc8137",
+  "skills/data-lineage-trace-3/.phoenix/provenance.json": "66a7629c827bddf400244c0b32238fb9160f0a15202ddd946c0c0de81dab0f57",
+  "skills/data-lineage-trace-3/.phoenix/selftest_evidence.json": "2564594c010350c1a3084441df665671a0cf7dc6e7fe9879b60a913644a2c00e",
   "skills/data-lineage-trace-3/references/creation/p0.md": "808c6858e2463260534de00a034403a81344cd3886452a43a5922e07aa405142",
   "skills/data-lineage-trace-3/references/creation/p1.md": "ff4262368cdf845bd1319f67cfd19b529bdca7ae90392fc328db05cba30b2f26",
   "skills/data-lineage-trace-3/references/environment/p0.md": "835f6f90a5187cffafc1fa11bfe5503d5911a1b7caeaf24ecf0db16e6d52a42b",
@@ -66,7 +66,7 @@
   "skills/data-lineage-trace-3/references/production/p1.md": "170df574c5c883b4868f796fdfda7c561695795452e763367e9bd7613101d618",
   "skills/data-lineage-trace-3/scripts/main.py": "a9f83c5263409ae65ba8bc913adf4fcb97c28043c877c20b1b2b666d6a5ba444"
  },
- "sealed_at": "2026-10-18T19:55:37",
+ "sealed_at": "2026-10-18T20:56:43",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

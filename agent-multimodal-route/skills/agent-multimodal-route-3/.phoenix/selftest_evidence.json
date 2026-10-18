@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:08",
+ "at": "2026-10-18T20:54:41",
  "skill": "agent-multimodal-route-3",
  "slug": "agent-multimodal-route",
  "passed": true,

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-watermark-apply",
- "merkle_root": "e638b9fae2b4c20b458bf5a8a459e3fd58dc879d9ae0c30056ee24e1d4c7474c",
+ "merkle_root": "0aa2524aec736de1344f735f1848743d229ea0659659db30d826b953267234e1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-watermark-apply-1/run.py": "1da4638364ae6faf763c3378647e232bde4fb1f98077181f6410433cfa236b6c",
   "skills/doc-watermark-apply-1/selftest.py": "7f95debc00e86781f35fa62b4199abb5c0cccdd7b555a6d440645272868a3c82",
   "skills/doc-watermark-apply-1/.phoenix/originality.json": "1403d28083907175b598a3921709ae03646f9802829da7fa3f8c834a8d34658c",
-  "skills/doc-watermark-apply-1/.phoenix/provenance.json": "f636cc371a074035ef1db403cd7316375a68dfdf9116ceb646ec538be436f7a3",
-  "skills/doc-watermark-apply-1/.phoenix/selftest_evidence.json": "c036d27f02533a97b87e58029d9686fde839ccd64e091479c7ef0a04eee94393",
+  "skills/doc-watermark-apply-1/.phoenix/provenance.json": "1bf018f2a361e95dcb70dfc80bb2ed9f4098117fa1f45c4a97f0a62b7e13032b",
+  "skills/doc-watermark-apply-1/.phoenix/selftest_evidence.json": "7e2665af461acf555a5b5806f7f9cae807f09784b88e7e8f3277d7fba6759788",
   "skills/doc-watermark-apply-1/references/creation/p0.md": "f442c6c6537d9c9f164de22087f50d27a61316c8fed78ea2768cc72e5ba6f034",
   "skills/doc-watermark-apply-1/references/creation/p1.md": "0c9d99481cb4c8675cac3676e6b6a09c30cd0045186b74b0bb2b09ce0c4282ca",
   "skills/doc-watermark-apply-1/references/environment/p0.md": "f5d563488a8a55268215a67bd872e08e05936000625273d8d14870341f309450",
@@ -37,8 +37,8 @@
   "skills/doc-watermark-apply-2/run.py": "c231e6619070b1c677638a4dd8a3f40947a10b3543cedcdd6ffea06cff3ff223",
   "skills/doc-watermark-apply-2/selftest.py": "295bb57ff949aee24328c0884bdd81205b62dded0537282ba0a47d14a5e97532",
   "skills/doc-watermark-apply-2/.phoenix/originality.json": "f44a49dbcf9e1ef8ea956d51e06f9dfba44daa8acc7ae27d0a9ecae4e93e17ee",
-  "skills/doc-watermark-apply-2/.phoenix/provenance.json": "4fb57edb0df972e57885f6d70d019742169e191de208243029f7d4a6e9c11c54",
-  "skills/doc-watermark-apply-2/.phoenix/selftest_evidence.json": "9272cf51340aa55f661eb0f5d7e610218f5ae9cad166bbcbe176f31af166c23c",
+  "skills/doc-watermark-apply-2/.phoenix/provenance.json": "d35d4c3448c0560e828463e0a7d54463da5b7d97073291a758c711a1e6f41229",
+  "skills/doc-watermark-apply-2/.phoenix/selftest_evidence.json": "7fe0aebbd6cf10d68986617cd29135c93d76fc8cfa0e682ebc90e582169803c0",
   "skills/doc-watermark-apply-2/references/creation/p0.md": "54e09e27c2d2ddfeea0d902572ff56efcb7a0be7ebb740edee3777418d9b49f7",
   "skills/doc-watermark-apply-2/references/creation/p1.md": "a6b3fd8502dcaabd4fead33262390aabaee4956f505d531f2e7ac62a53c7b48c",
   "skills/doc-watermark-apply-2/references/environment/p0.md": "b5084841ffe1eedef257eec2c673fed3f400b07000e5cffcc30fdf5f83a73fb5",
@@ -54,8 +54,8 @@
   "skills/doc-watermark-apply-3/run.py": "9635f7f0f690920da97752b178af1e1b23e3cf0a5c86fd27165fda277058dc5c",
   "skills/doc-watermark-apply-3/selftest.py": "c201184b5f0890b1cd90e035d7aff067fdf340d019f1e5ec120b61312ca59a9c",
   "skills/doc-watermark-apply-3/.phoenix/originality.json": "f839172efcbc1e93a7a9417a76017e40b7c054acff4271f8a1200dfa34057940",
-  "skills/doc-watermark-apply-3/.phoenix/provenance.json": "1ec06f324a8c85f1536827357b00fac418fcda3cc6105b83d0d7b184bf480941",
-  "skills/doc-watermark-apply-3/.phoenix/selftest_evidence.json": "be315eac87af50a1c18588a19ea614ad9cff7cd450858959e1e023f5322a55ae",
+  "skills/doc-watermark-apply-3/.phoenix/provenance.json": "052fd7a29268a687368da5a2498812f982ecde5bb5ff1b0937fbfa4d67045b08",
+  "skills/doc-watermark-apply-3/.phoenix/selftest_evidence.json": "29f00916789e538ff0befa236ee66872bc9882f0bdf38b5e6c2ba9e29dad8be9",
   "skills/doc-watermark-apply-3/references/creation/p0.md": "e6091e8381b52e326eae1780f9c0c6c2187d660ee943b078987019cbd32df454",
   "skills/doc-watermark-apply-3/references/creation/p1.md": "a27d9f19422fd86484ed6280fd5e3aa85fda15e4ead65e8634fcf6862339a5fd",
   "skills/doc-watermark-apply-3/references/environment/p0.md": "2c3dc3e5093b74481981e5e78882e4ebfe3497e8dc2896b8f0dbd785cb4fb329",
@@ -66,7 +66,7 @@
   "skills/doc-watermark-apply-3/references/production/p1.md": "41abd6fbf050e35660ac11a0b9f83d07532814cededf53e4767ab829697786e1",
   "skills/doc-watermark-apply-3/scripts/main.py": "e448414cdd771de9b63ea5ab371321d5400f54a9482f7e701ea5894379f0239d"
  },
- "sealed_at": "2026-10-18T19:57:51",
+ "sealed_at": "2026-10-18T20:58:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

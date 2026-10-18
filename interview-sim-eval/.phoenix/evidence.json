@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "interview-sim-eval",
- "merkle_root": "a3f939c281d590c0eb7696ddaa00b8b2b18bfc73bcf408c30c1c5a2415441619",
+ "merkle_root": "b7c88d5979ca2704798df0572d3ec2a8c073d6fabdbceaf7c31b12d885becf16",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/interview-sim-eval-1/run.py": "84ea31810a21412ef9adac5f540238574f9f57c628c3beb1fefa8a1331f8308b",
   "skills/interview-sim-eval-1/selftest.py": "54c2f0079b8db1f9c113c6580b655c36d07a988176ea9073648c852a5db7157d",
   "skills/interview-sim-eval-1/.phoenix/originality.json": "b96ffd1956d84f3e145ddc625376bd14bbbec1c88c0634f11c202007bf0d599b",
-  "skills/interview-sim-eval-1/.phoenix/provenance.json": "47d1ed9609000c4c617acead3e3f5435b965c1d54f949b0ae21f60e0683b730a",
-  "skills/interview-sim-eval-1/.phoenix/selftest_evidence.json": "df0538e127dc2a067241eba01b0c6e1309dce13c3979765d90b039e3fea2b57c",
+  "skills/interview-sim-eval-1/.phoenix/provenance.json": "f2b6e409fdd04461bf070e0e76fab4dd45cf949691c05a07b06efdff342fd3c4",
+  "skills/interview-sim-eval-1/.phoenix/selftest_evidence.json": "7356d82a8572b169ebf28634b73610214c78b745ac7e10adbe1bd0c5d546101b",
   "skills/interview-sim-eval-1/references/creation/p0.md": "d4c64df5e63153f5f5547fd2721f722298f985ee5c77ed490e8ccb9cf1bf1e7f",
   "skills/interview-sim-eval-1/references/creation/p1.md": "669600deb0454cfbfa26d65fb047d3ff47b777eb21279de22d83315b448c11f0",
   "skills/interview-sim-eval-1/references/environment/p0.md": "4124aa1a23ff4e272d5bb1fed3a002bbc9524f869bc6ad3c8cafae321966084c",
@@ -37,8 +37,8 @@
   "skills/interview-sim-eval-2/run.py": "1a1e7b185dd87dc7c1ba1a715563ef73054547be9d171367b3ae4ae2c7ef4459",
   "skills/interview-sim-eval-2/selftest.py": "f92a059a7feb72c01d5191471d6aaa20db2ead24b0fc2f4dc249bd026c2a9354",
   "skills/interview-sim-eval-2/.phoenix/originality.json": "cc3eb960e862539ac8cafc881164173aaabf986a18a34c56038e6c2a3a29fa40",
-  "skills/interview-sim-eval-2/.phoenix/provenance.json": "15ff63e2235cb23c7c9c71137c0e4f9b7333be59987b2c4d90c31f8f63f6c38a",
-  "skills/interview-sim-eval-2/.phoenix/selftest_evidence.json": "f585810d19ff0ea80e337d96600b03877cf7e4573b5574e83374bb3bc984a7fa",
+  "skills/interview-sim-eval-2/.phoenix/provenance.json": "cb019c48336d6facb6d143614673e377bcf0e67276f2490bfb78d821490b60c7",
+  "skills/interview-sim-eval-2/.phoenix/selftest_evidence.json": "2afd2f23a1685e003565068d79fe7d143a9f7a30ea559cc7145996231637e493",
   "skills/interview-sim-eval-2/references/creation/p0.md": "d368cc9651b781f80b8d82070e9f61be1cf2ed277e13e8cd12ec4d4d5819be11",
   "skills/interview-sim-eval-2/references/creation/p1.md": "45da6b99192378440a5f633c80fc825c4794326218600c12e27c43d82d4986c6",
   "skills/interview-sim-eval-2/references/environment/p0.md": "fdcda6aefff2e33628a62c23e2a80dc5cdcf8061e63e844e599dacb7cba90a47",
@@ -54,8 +54,8 @@
   "skills/interview-sim-eval-3/run.py": "31621890282f41a13f749466fc601b80b60050d8059dd302ced3b4a54dcc5239",
   "skills/interview-sim-eval-3/selftest.py": "2ff6e2819ce492d96d82c288744913a573ce29580bc69adbd5d84e1c225b9207",
   "skills/interview-sim-eval-3/.phoenix/originality.json": "20490198d801d965365ef3110dceab6d4c21fff2f2c305a1d4d08a0caaad6fff",
-  "skills/interview-sim-eval-3/.phoenix/provenance.json": "ac1dcca8c3a4b33924ba757a453c4ef36f3a562c3f89322e9f0c3b7bde39183d",
-  "skills/interview-sim-eval-3/.phoenix/selftest_evidence.json": "984c7e9d5d13dd4bbf4170384ecb794882944fc3b7f1e0ef6a3969120c887cc6",
+  "skills/interview-sim-eval-3/.phoenix/provenance.json": "e5e6eac531c2f481d1c46b9d092a39c5c0802a578b3f97fe2e362849bd614bce",
+  "skills/interview-sim-eval-3/.phoenix/selftest_evidence.json": "932d50ce6dc554c625f528fc19f2cfc567867b5916c0c1cec4f3a9264ab22d56",
   "skills/interview-sim-eval-3/references/creation/p0.md": "63723ab285ab55f046845698789e80ce9ae8dda4eef883aaff305f3e0f7ba881",
   "skills/interview-sim-eval-3/references/creation/p1.md": "11884307da42a80f240a8a52fda5ca3859c57f1c1c7aa7d05c093a069292d9f8",
   "skills/interview-sim-eval-3/references/environment/p0.md": "6abd3de850bfee4138193ef22c957e97f67fceed622bbf2e3db5636eda244c3c",
@@ -66,7 +66,7 @@
   "skills/interview-sim-eval-3/references/production/p1.md": "ddb0d8d5eb3b10409cc4a46ad97953a1296078bf74f0944623e0968bc43109b2",
   "skills/interview-sim-eval-3/scripts/main.py": "8b1ee041139a20e4882fb1422329ce6b9fcd62b9b51378b71e12e09b2ffca2ff"
  },
- "sealed_at": "2026-10-18T20:01:40",
+ "sealed_at": "2026-10-18T20:59:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

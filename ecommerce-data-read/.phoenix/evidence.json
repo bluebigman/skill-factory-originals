@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ecommerce-data-read",
- "merkle_root": "8d98d1e10dd5d82c4e397f41d2f78850d716a11a990bc187129d2c260108df80",
+ "merkle_root": "85d2eaa0bb3e22feb5d2747e6927f3440a0e7d87d3d1c1c34862a258880d7432",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ecommerce-data-read-1/run.py": "9ec405054efaa8821d6dc46ee3dc50b38373b93046da0e18b45a081dcb2c35b2",
   "skills/ecommerce-data-read-1/selftest.py": "a24926aab6b841936e9aaaa7a437a0ee3d836acf2715383d2ebc620bcdcf70ec",
   "skills/ecommerce-data-read-1/.phoenix/originality.json": "896d4d61a459072597c59ded63bb3f8c3541747aa26b8c0d587c95bed1fcb9d7",
-  "skills/ecommerce-data-read-1/.phoenix/provenance.json": "a4f7d56174dc79aa921d2acc73c71fbc1e77039964d4a919dcc38e2c7b763e79",
-  "skills/ecommerce-data-read-1/.phoenix/selftest_evidence.json": "3017803bbe05aa3d28c1dd804c60e29b7eb47833e73b97eab70ab9b59d282f6a",
+  "skills/ecommerce-data-read-1/.phoenix/provenance.json": "c426519485eb92b15c38d4ada14c41185d2985662af126e1c92f0806aaf99a40",
+  "skills/ecommerce-data-read-1/.phoenix/selftest_evidence.json": "7d38f4ab8cd393d5f7104956307d90624a4b8249420ea2389108ca7741533b9e",
   "skills/ecommerce-data-read-1/references/creation/p0.md": "cc082c0d499b03fe2567968b2f2e372b58dde88a9dfe29022c96704607e848bd",
   "skills/ecommerce-data-read-1/references/creation/p1.md": "873c8dba6cd2358fa63f6e7b59d487725953ae903d9c62eeb41edc70692717e0",
   "skills/ecommerce-data-read-1/references/environment/p0.md": "29c3c28b2656c2b15c995f1fab5f77fa1b9c67b4e9861fc6cdbd83dcad07dc57",
@@ -37,8 +37,8 @@
   "skills/ecommerce-data-read-2/run.py": "9fb911eaaab4aab38c0aa28185ab497c3f0b36772e1160063d5bcf00945eba54",
   "skills/ecommerce-data-read-2/selftest.py": "3136a6ec01ba512d3588641368691ab323a90b1efa344deb026f3889091af85a",
   "skills/ecommerce-data-read-2/.phoenix/originality.json": "5d13a4c6f4dfcc8faafac1bfb73ec68be34392642d00df92a6a84ec51ac489bd",
-  "skills/ecommerce-data-read-2/.phoenix/provenance.json": "4c58af8140f42ce9ba7a649fc81324b2f6311775fe0da3f6547462c51ae2e698",
-  "skills/ecommerce-data-read-2/.phoenix/selftest_evidence.json": "d9bbe3ab7e7c7c67dfdcc76b9ac43cc7ea44f8f333554976c5c643e1e80ee1f7",
+  "skills/ecommerce-data-read-2/.phoenix/provenance.json": "c5591d268d95d77c003c211a05ee213e75d460140256d5cc6f4cdf57dc5e4121",
+  "skills/ecommerce-data-read-2/.phoenix/selftest_evidence.json": "c5d5f403dca01791351629b5d9edaaf36771f7a2b3fcf2b0aaa0faa4685244fe",
   "skills/ecommerce-data-read-2/references/creation/p0.md": "05e212bd1b6817b41d898e75dfb56842d730f6f5a897d179ae5d1fd29325a8b6",
   "skills/ecommerce-data-read-2/references/creation/p1.md": "8f13bfc43e68d6817f59724198c4afa917e4468122aee4a60fe000374fcefdf9",
   "skills/ecommerce-data-read-2/references/environment/p0.md": "fabcd510b5ceb406c59c4ffc640c2b27e27d48f10d2035f263032221155422f1",
@@ -54,8 +54,8 @@
   "skills/ecommerce-data-read-3/run.py": "2cccb769eb5f9d16d8506e286240babc47ffa4866f9a4ee13552904f0afeadc9",
   "skills/ecommerce-data-read-3/selftest.py": "9cbd2a59cb366e5e21430f42edb5ed32c34df8686719da4b6e6abd0641d49562",
   "skills/ecommerce-data-read-3/.phoenix/originality.json": "2aede2c628e11e66a820cbcb672fe3cedcf7ef751f50831c051f6b864bcfe7a1",
-  "skills/ecommerce-data-read-3/.phoenix/provenance.json": "d5483f30016380851415b237c3def08cf4e71fa16eac34615be6258b9a28ee8c",
-  "skills/ecommerce-data-read-3/.phoenix/selftest_evidence.json": "410b77223b651c89ff78f1f6a69d457056d9db50c5bccee54e87c2fb1ea89172",
+  "skills/ecommerce-data-read-3/.phoenix/provenance.json": "3e702443035797a4b7d5e1c5b33ab0ac2ee829f825cb656395f5f32c0024de22",
+  "skills/ecommerce-data-read-3/.phoenix/selftest_evidence.json": "67ef140c2d03172697dd56dddb2b00e116b7285d012ba9952f36cf63ac429512",
   "skills/ecommerce-data-read-3/references/creation/p0.md": "7abf3d7b0ba09b0c354edc546b7cc898ce4a0ee579c83eb3a6c67d80d88eef98",
   "skills/ecommerce-data-read-3/references/creation/p1.md": "f7abd6c447fea424e23357c4aec0b0c5016a188c3725150c61ba9d9a75edd285",
   "skills/ecommerce-data-read-3/references/environment/p0.md": "1aa62d9fbaa04d8f86b25f78120fc1446fbed796f7c23f5294b91d64cfb6af3f",
@@ -66,7 +66,7 @@
   "skills/ecommerce-data-read-3/references/production/p1.md": "e57e24debad443b1954526e7ba9efbfee83926c0bdd41d15179f5679537b0238",
   "skills/ecommerce-data-read-3/scripts/main.py": "eb61a61017702da7bdf3b0c39d85227a3fd7d489094804f7554463658ada2d66"
  },
- "sealed_at": "2026-10-18T19:57:57",
+ "sealed_at": "2026-10-18T20:58:02",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-mask-pro",
- "merkle_root": "6b9bcdd9d771bf89d021a13a19a89ec81e206dc0234b2de515b9eeafd832571a",
+ "merkle_root": "48eaaf069313aa2b8ac87fc4d369824fba840d5bddd01dd04bd0cfbc395c0cc7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-mask-pro-1/run.py": "d65c695c5d9644a010bac6f0bdf88968890450b480129d94b6beb7a03febd152",
   "skills/data-mask-pro-1/selftest.py": "b632ff2fa851e2b136113aac845c1a595558590deebdd2e75e85f92f6567d27c",
   "skills/data-mask-pro-1/.phoenix/originality.json": "0887b3ffe4e657e683a64bdbd7e5666de7710498e3507ec4b794fe9f2d9844d7",
-  "skills/data-mask-pro-1/.phoenix/provenance.json": "bf9a1280c291bae90992ed309dd143c2ce8e945964e8fff395027946453a2c90",
-  "skills/data-mask-pro-1/.phoenix/selftest_evidence.json": "20a0f072f1779402789b35a57b84b785dd9ae4362bb10e7684c02cea6230dd3b",
+  "skills/data-mask-pro-1/.phoenix/provenance.json": "bd4f297538d28ac91124785cd8252e24aa706a3a85ac971a70e841963280566a",
+  "skills/data-mask-pro-1/.phoenix/selftest_evidence.json": "cf9f9659ff41d15fb5bcb391909057d11560782ac7d8942c543279a1ceca783f",
   "skills/data-mask-pro-1/references/creation/p0.md": "2d0df3873d628b076569bed97d7d128341794111fb470d658fe8414b44ad7865",
   "skills/data-mask-pro-1/references/creation/p1.md": "3283c9fa8037ab347869aae04a14d3e0ba4991b6e9e76394c1f6a5ff9b45cf89",
   "skills/data-mask-pro-1/references/environment/p0.md": "5f723ef5dcc54f14145493794443ed414562ff1408399682e39d0554d66d9514",
@@ -37,8 +37,8 @@
   "skills/data-mask-pro-2/run.py": "7b586ca8fd51428e84cdcae2cf17416153b413a47c00ccc9465ee30d88622a18",
   "skills/data-mask-pro-2/selftest.py": "1d4d6d72496591b738c43c9e748147b29eaa5b3383a0647c7dde16601bf03be0",
   "skills/data-mask-pro-2/.phoenix/originality.json": "bdf85aa2cd464ccc6725207e8fc668b59a094d585ad1b4e122d4d83f53ec571c",
-  "skills/data-mask-pro-2/.phoenix/provenance.json": "3ef462509386675b62304974928525b8e993a3ecfc9a9893e13153223115114d",
-  "skills/data-mask-pro-2/.phoenix/selftest_evidence.json": "1c58fbdb8ee7888f29574a0d4703b99a7808282f4b2280ccb6e5a2cc8133ba31",
+  "skills/data-mask-pro-2/.phoenix/provenance.json": "f0e98db738539c097917f8c498a43417c9495f0eaf84ed8ed2554c7c1e4d3470",
+  "skills/data-mask-pro-2/.phoenix/selftest_evidence.json": "c7f164fcf99164bdaec2642f2b61e140b891977804a89d5f04a6be6682d33b16",
   "skills/data-mask-pro-2/references/creation/p0.md": "fe4d2d3c36a0e0f8f80ba15c3d262964d2ce1bf91b4ae4dda3d245fd4472c835",
   "skills/data-mask-pro-2/references/creation/p1.md": "5cedf25fedba835ca25b141cd3c66870394239b33398456e5185a96cab651226",
   "skills/data-mask-pro-2/references/environment/p0.md": "c37bef85ee6d6c52e7928251a386feb86e80b8b870317cda899d4afe847f038b",
@@ -54,8 +54,8 @@
   "skills/data-mask-pro-3/run.py": "24ddcfc6885beecbdd160ba371ee6246064d6f57b3acb34be6ff55a0cf0f1ffb",
   "skills/data-mask-pro-3/selftest.py": "d35a3c8f4f0aad6f5bb038d50a367eea6d845c16c6d894a36f94216c83e21357",
   "skills/data-mask-pro-3/.phoenix/originality.json": "f7e538afa0f94919002b4110dbcbe6ade71777954d1b1ff56b43cb11e78c7d4a",
-  "skills/data-mask-pro-3/.phoenix/provenance.json": "634ee6fd562329b421b109c815150e7c07e24fad2192c4a0151e1588e5209e88",
-  "skills/data-mask-pro-3/.phoenix/selftest_evidence.json": "123a0e3834f613c23808e9bcea9c04b7cd8fc9e45a0e5a403a52b839447da057",
+  "skills/data-mask-pro-3/.phoenix/provenance.json": "640616e657c4bc8d50517a8d8ee57c0ae27cbaaa9b45da5e8d2911cbd5d55d7f",
+  "skills/data-mask-pro-3/.phoenix/selftest_evidence.json": "1b4eac1774aabf7aea6413d18b495cdd87f780e3ea242f1c89f80475b265b4fb",
   "skills/data-mask-pro-3/references/creation/p0.md": "3e5e772e6a159003d1eb514aab31886bb04c5f2af489e367f8f09336109be79f",
   "skills/data-mask-pro-3/references/creation/p1.md": "387d6486af839546221929584264c70b5cb19afc4df8b35e35783a28e90a033e",
   "skills/data-mask-pro-3/references/environment/p0.md": "18977435ed8ea5bbace0f2a10fec6bfd8a51f3f209ca1d8c053b4b0ae2a784e1",
@@ -66,7 +66,7 @@
   "skills/data-mask-pro-3/references/production/p1.md": "df3dfca38af57863da3bf74035aa6a8c3e41b172a8f2b46ea32cff72b571fcd3",
   "skills/data-mask-pro-3/scripts/main.py": "dddaa059f077791d16541fd0c312366cbb44d2d286587bd596a115e8e1644852"
  },
- "sealed_at": "2026-10-18T19:55:39",
+ "sealed_at": "2026-10-18T20:56:47",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

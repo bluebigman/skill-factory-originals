@@ -1,0 +1,72 @@
+{
+ "name": "bug-bisect-guide-2",
+ "version": "2.0.0",
+ "domain": "缺陷二分定位",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先复现",
+   "then": "稳定复现才能二分",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "范围对半",
+   "then": "每次砍掉一半范围",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "版本二分",
+   "then": "用版本历史二分定位引入点",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "变量隔离",
+   "then": "一次只变一个因素",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "结论留痕",
+   "then": "记录定位过程",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先复现",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "范围对半",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "版本二分",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "变量隔离",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "结论留痕",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "energy-consumption-pro",
- "merkle_root": "462a679161bd18b26b7e1158efe63c6e720447263b86f71dbc925dc9156c67c8",
+ "merkle_root": "49534e5f56c2cefe4e2427200e20c990a763c3e20e075d270c4c22fd7380715c",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/energy-consumption-pro-1/run.py": "09a40475879e20668ed31ae767a9f15bb5ebb6c452d4be7c9a04805b0950c5e4",
   "skills/energy-consumption-pro-1/selftest.py": "aead9c13fec9b913bc912a95d109ddbe2e60ab23d06b97cfab70cb2246326a0a",
   "skills/energy-consumption-pro-1/.phoenix/originality.json": "3b35b3c72b912c6e840a8b1c5322a8dfe79b24b60a65f5dbaff2e9e4694953e5",
-  "skills/energy-consumption-pro-1/.phoenix/provenance.json": "f5d4d9d2efeae6ccfe665e938a944b104ab1ecd693787a8cabdf161df2dd6392",
-  "skills/energy-consumption-pro-1/.phoenix/selftest_evidence.json": "b0a3accaf2282f361fa20b9c1e9a1f8bcd444979b571b64c0934193743edf978",
+  "skills/energy-consumption-pro-1/.phoenix/provenance.json": "20ce386bced23c56cd17b39c4cb13a863a6fe72a208803d9db30e67359c6c062",
+  "skills/energy-consumption-pro-1/.phoenix/selftest_evidence.json": "2bbc18966aa520c02826928e3fac3d1246b01d098b0b90add9110f2392caae5b",
   "skills/energy-consumption-pro-1/references/creation/p0.md": "b3bf5b16b001f9751f176c2736dad2f07a555dadc4d02b2fc49f0873e0dddc72",
   "skills/energy-consumption-pro-1/references/creation/p1.md": "5269cb971ffd7a9493e687ee3d80704974a619bc960cc4ff2d33b5448c77c42b",
   "skills/energy-consumption-pro-1/references/environment/p0.md": "c3f715a35c31fb9f77b0cc4422593773165a3a61b6958ea3940201bc4e1c9ed7",
@@ -37,8 +37,8 @@
   "skills/energy-consumption-pro-2/run.py": "3c419c2da96f2c2173ae74801d0bbc7c7821eea16cc2708ba6672c0b73f91a0d",
   "skills/energy-consumption-pro-2/selftest.py": "0aa7f4ee5dc8b0848d8603d083e53094bd9d55abaea3abaae8745cf33edb2a66",
   "skills/energy-consumption-pro-2/.phoenix/originality.json": "74425fdff83261c629405ed374ad8dfe71a05501805177b0e8aa0e9a116f54fe",
-  "skills/energy-consumption-pro-2/.phoenix/provenance.json": "008fe651f3d23f1862f8f620d094988fcdc3c34946c4c39b85a56f38237ad009",
-  "skills/energy-consumption-pro-2/.phoenix/selftest_evidence.json": "a4d141eb7020acd644683e68ac88f8117f7115412115515b63c55075fdf0704d",
+  "skills/energy-consumption-pro-2/.phoenix/provenance.json": "6d140e255785473e96874377e07c826464e26906fac74db625cdd74731751503",
+  "skills/energy-consumption-pro-2/.phoenix/selftest_evidence.json": "ebd9e8f108ff86c6a8c45f1f92c94a582e1d0290abf98aced1a79f01a8f87d19",
   "skills/energy-consumption-pro-2/references/creation/p0.md": "4cb39de477c733f2c04c782846e297774af58cc141aff5d7e452788ab2655454",
   "skills/energy-consumption-pro-2/references/creation/p1.md": "9d5b6fff24f147350740f1863f79e81dd6b472fb3d58afe9d958a8a46b5eacce",
   "skills/energy-consumption-pro-2/references/environment/p0.md": "79d82f108ccfbe1d04fabd54f6e82ce73bee4c129e868b01c3949d5df136b81c",
@@ -54,8 +54,8 @@
   "skills/energy-consumption-pro-3/run.py": "f11d06a2bf6e88d5eaebba817200707e8ede030559bd23c43a14c391f4634950",
   "skills/energy-consumption-pro-3/selftest.py": "6b32ccea652d49c0b7aa8ed1b2a926fbdd1c80e0307189630ec3422f449b2df7",
   "skills/energy-consumption-pro-3/.phoenix/originality.json": "f0b3f7a1c026dc6f32955fa18b0098486fde73dc4cf0f294220e12a48d5fd824",
-  "skills/energy-consumption-pro-3/.phoenix/provenance.json": "4f52aa16eddfa39865b78e9bef983985b895a30668bdbc10aa6edfc9655d27a3",
-  "skills/energy-consumption-pro-3/.phoenix/selftest_evidence.json": "2d37a69da0c2e3f8ff9dd320c6a34f889141ac834aeff49e6f0dbcb41cf0e880",
+  "skills/energy-consumption-pro-3/.phoenix/provenance.json": "e53e1a17cf1c623a6931000e5d4d6b08cb0cbf5af91be504548af29bd68aa9cd",
+  "skills/energy-consumption-pro-3/.phoenix/selftest_evidence.json": "f6927ca3e1c2d6a8117f8fb0f275165e124864d34da2321af90f2b8fd89a8a62",
   "skills/energy-consumption-pro-3/references/creation/p0.md": "c3f1c6a521e949ee4ff802e55857b483957851281df37e271b5f22ec5cce3b6f",
   "skills/energy-consumption-pro-3/references/creation/p1.md": "4ece140e271f7cdfb5ccad8c463927b6755134623cfadc28a798c9f05674517d",
   "skills/energy-consumption-pro-3/references/environment/p0.md": "8a9b6e98f551b04ed06e81294557a55faa8374f394e36ea6f9905bdd2d5d8d79",
@@ -66,7 +66,7 @@
   "skills/energy-consumption-pro-3/references/production/p1.md": "389f13d3c1b9bbbce4045410ac87d56d3ff2472adba33c9c046f5e22271a1068",
   "skills/energy-consumption-pro-3/scripts/main.py": "d1c8ad7abb374166dd02d62c477f4db8c7e889b9aeb7447e71345433d1c3bd14"
  },
- "sealed_at": "2026-10-18T19:58:18",
+ "sealed_at": "2026-10-18T20:58:15",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

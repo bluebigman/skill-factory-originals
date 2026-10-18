@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "contract-mfg-audit-pro",
- "merkle_root": "3d5a50a74313767eea95192e7d716ba78bad29a70f66cb87fefab9cc85595620",
+ "merkle_root": "33f3bd7d2e795ad5d52c47bc235c5c85ca62513919331d4f20b00f8f501b481a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/contract-mfg-audit-pro-1/run.py": "00e3641b54adb4f16b454e3955dfbca4b1d924cfa519bf68cb17a380f3d56cb3",
   "skills/contract-mfg-audit-pro-1/selftest.py": "0b4af42f3234bdf161c6230dac4d1e6f68359dfc91b5544df44d915e4d3d8b73",
   "skills/contract-mfg-audit-pro-1/.phoenix/originality.json": "d1f2e4cb068e06352f47eee4c602e7d3ebc155e734b7b020a1d5dd97559c2823",
-  "skills/contract-mfg-audit-pro-1/.phoenix/provenance.json": "569a42912cd4c3d38de9d100e9ede9fb9938c3e655b10c2ad7560a22047caf83",
-  "skills/contract-mfg-audit-pro-1/.phoenix/selftest_evidence.json": "02adb908fd4c4e65f7ea151068c96aa6f2e55485691386bae625165a9733d042",
+  "skills/contract-mfg-audit-pro-1/.phoenix/provenance.json": "2e23b38c5a05780a295866ab968fcd9954dd70921ab34bf290de3a35fe853479",
+  "skills/contract-mfg-audit-pro-1/.phoenix/selftest_evidence.json": "f792991fb86f49f5c0d909ddcb51cb98f001ccd425ad228c6697165d6c8c2b07",
   "skills/contract-mfg-audit-pro-1/references/creation/p0.md": "e668ed63467c1ffeac874eb9a243b415a1c472cc988e09dd2ca9236e88ef1a90",
   "skills/contract-mfg-audit-pro-1/references/creation/p1.md": "71c57f3604ed4464b5f7e9094041e4e179046c5a03928379711edbfde7b0e5a6",
   "skills/contract-mfg-audit-pro-1/references/environment/p0.md": "aa82388e1dd04f4ec83fc432034438e27c5b2af1ee0442de8942a236ef263ce9",
@@ -37,8 +37,8 @@
   "skills/contract-mfg-audit-pro-2/run.py": "5efcb47fd9b029598caef10bbdbd1300f05464da1f589ec6a8b499b6d6fe24f1",
   "skills/contract-mfg-audit-pro-2/selftest.py": "0bcca4636ed8c29854302b3c1109a022e2ea7029b6a01c713ffa70df441ca4f6",
   "skills/contract-mfg-audit-pro-2/.phoenix/originality.json": "c6e89712f648a7c3b493283a88fe8a43f2c704e29efc3d398c2958b1ad7c1f55",
-  "skills/contract-mfg-audit-pro-2/.phoenix/provenance.json": "4291306cdbfc6cf2c4ad6b284978ccc009f76f661fd05b009edc23a569d04bdc",
-  "skills/contract-mfg-audit-pro-2/.phoenix/selftest_evidence.json": "db2abb39aca79825122f6fcbf2970af05acd41cfef9ec3977a3a9457b888932d",
+  "skills/contract-mfg-audit-pro-2/.phoenix/provenance.json": "f9f8939d9cb38c564815f7bceec29ba8c09915b2837114406e429df6a60599f5",
+  "skills/contract-mfg-audit-pro-2/.phoenix/selftest_evidence.json": "4f72cf453a1807e2f50d5e944180c8a799e09e59efa66dca485284859f299949",
   "skills/contract-mfg-audit-pro-2/references/creation/p0.md": "3c4eeb16ee6291a9227d8f8469911708698e78993d7a9a6bb48aad9683cf0e7a",
   "skills/contract-mfg-audit-pro-2/references/creation/p1.md": "5301c50a01013ca19b80c36e554e6fc25393c5a091553ff3f77a726e80920343",
   "skills/contract-mfg-audit-pro-2/references/environment/p0.md": "3fba6dd8b7d2561ea328aa267772fc3fa2b2eab7e0bd1447130faeefdb9066f7",
@@ -54,8 +54,8 @@
   "skills/contract-mfg-audit-pro-3/run.py": "6519e111f17d028252fd3e07c5d9e578221ff18d225085a4863a26c04aa9fb12",
   "skills/contract-mfg-audit-pro-3/selftest.py": "3150125bb70cf03bf621fe895c89606de8b71bfab0b46093c3bc88e199d473b8",
   "skills/contract-mfg-audit-pro-3/.phoenix/originality.json": "267eb58ac7b4b473ff6660df99a2c68eda3d353b30b1039e5682fefcd0edfe32",
-  "skills/contract-mfg-audit-pro-3/.phoenix/provenance.json": "dbda61e1b696789816eab68f1f23b2da9cac596b31d7b759a3c80b08fe37e12e",
-  "skills/contract-mfg-audit-pro-3/.phoenix/selftest_evidence.json": "743667529643fa0aeaea646047928ac7e360cbcb37a9b651df9383be64ccf570",
+  "skills/contract-mfg-audit-pro-3/.phoenix/provenance.json": "283e77b533967671ffd0f69fbf9ab01bde64c1891be4d56054ffd316cc43c346",
+  "skills/contract-mfg-audit-pro-3/.phoenix/selftest_evidence.json": "f71bac97f0519400bbaaba67b868247e2267262e30bc7900d2d0f68d67711522",
   "skills/contract-mfg-audit-pro-3/references/creation/p0.md": "e2b54c3933326e5f1b128ac1ec390ee7fee56d1d60b354bfd46baed95ad9b1da",
   "skills/contract-mfg-audit-pro-3/references/creation/p1.md": "d41026c93e3335899fabfc6b5b3e7c0f12ccde91e2baca4bd690ff91a432e550",
   "skills/contract-mfg-audit-pro-3/references/environment/p0.md": "ebeb31ef663c107e5ea97c9c53b85248e2fdd9d8b373b8eca7fea886e392e15f",
@@ -66,7 +66,7 @@
   "skills/contract-mfg-audit-pro-3/references/production/p1.md": "e6f3cca84bac5cadbef9f940c6b1d3a9cc62f3bed96d997cafbc6fa41fb60a56",
   "skills/contract-mfg-audit-pro-3/scripts/main.py": "fb7b2ae43843bf8b4f4d69174a899131a70193f554ce03b96a8d546968667ec6"
  },
- "sealed_at": "2026-10-18T19:54:42",
+ "sealed_at": "2026-10-18T20:56:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

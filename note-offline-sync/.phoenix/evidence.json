@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "note-offline-sync",
- "merkle_root": "cf6e8982bbf7e33434f404995dbca84d41b25f360eead514d05be9b82238fd02",
+ "merkle_root": "39bd23549682f7f3fc5cfd04060b0f3cc44f3287fd7401389c700a2411cff882",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/note-offline-sync-1/run.py": "89e3a304090afdb83a2c631c94111f24479d76f2329c32a02284b984fae5febc",
   "skills/note-offline-sync-1/selftest.py": "884c43a4e000066b81f86a93f64ef9fc1e099bc009442219b5ea4c77871af442",
   "skills/note-offline-sync-1/.phoenix/originality.json": "ad2c8031136f03b39d1543102bea28a86a8d9de9d802d3a9acc520b1ed67c600",
-  "skills/note-offline-sync-1/.phoenix/provenance.json": "60a4975917ce5db9f00ca63fe5107c2939549578b163a8f0b759216f3ce87dcb",
-  "skills/note-offline-sync-1/.phoenix/selftest_evidence.json": "5a07313da7d87ae4fbe99f695bc74ab5a11a60e80ae23efd0c394dc7da8de2f2",
+  "skills/note-offline-sync-1/.phoenix/provenance.json": "a2a80ae482b6559f9a17738d589cc844af37015177efe316d77dfdf02dbc6663",
+  "skills/note-offline-sync-1/.phoenix/selftest_evidence.json": "4bbb8f67d98bbd751e6c9b54fd547c35d1b9e3f534d81a772bb296513ec81674",
   "skills/note-offline-sync-1/references/creation/p0.md": "67fe073067cb21444044f459d81608f1da199b7d2c24e89c7744dc8078c0deef",
   "skills/note-offline-sync-1/references/creation/p1.md": "efe94d659cbe6ee4dde602950d0c9d76f623012a433ee3951026de35235d540b",
   "skills/note-offline-sync-1/references/environment/p0.md": "a629051cdaccede035875a018510f88932229ce8cd4a8f654c1904373e6a53af",
@@ -37,8 +37,8 @@
   "skills/note-offline-sync-2/run.py": "ad44128190de4f3d0b650ecccea22f53dcb65dd59420b58ebe71c17c616c0704",
   "skills/note-offline-sync-2/selftest.py": "5819eb2b6dbc5abb8a04207d7bdbdb6da5cf6eb9294d045f804265ba27f06f1d",
   "skills/note-offline-sync-2/.phoenix/originality.json": "6442c0956ed6c5dd378f8b455b8f763e1199422781e06b72b21cca37820d4d89",
-  "skills/note-offline-sync-2/.phoenix/provenance.json": "798ff47db1242cfe4c31adc2a0de492becf34f3d748557284838a1d10e3fcca8",
-  "skills/note-offline-sync-2/.phoenix/selftest_evidence.json": "438d8dc615b1760863fa77b9a9e44355de8b38ee521d8d325bc8d55f6a55a839",
+  "skills/note-offline-sync-2/.phoenix/provenance.json": "f98bd2a97925238591db35cb814e29fe45c25807cff6b9fe3efdd2befb03ebf9",
+  "skills/note-offline-sync-2/.phoenix/selftest_evidence.json": "da72ea52136d643f1526b384e1628bb3365982ee22bddd5a502dcf8671557bda",
   "skills/note-offline-sync-2/references/creation/p0.md": "58bcfd038c169d7dcf5d20301d50932432190260e850516846f36b0b7b6a373e",
   "skills/note-offline-sync-2/references/creation/p1.md": "582014be3b74c0a34b22fff3cbb9e5b5f54a05d748ae2c0599e1ea1d346ed3d1",
   "skills/note-offline-sync-2/references/environment/p0.md": "4f215f410efb6d3c4a951071dfad642323a3ad8e7bbf6d58c7c96b26a9a389df",
@@ -54,8 +54,8 @@
   "skills/note-offline-sync-3/run.py": "b2ea5f9c021b33b99b5f4c80a0813612743237ddd9df755c23070cc79679935b",
   "skills/note-offline-sync-3/selftest.py": "94174ab60a4f42bcb6587b3876b5ec084bb5b71f3b6de492cb0045e99bc74948",
   "skills/note-offline-sync-3/.phoenix/originality.json": "6d7da79ab9d792efe391551417f18efcdd6940821fabad31c1100dd2b063e955",
-  "skills/note-offline-sync-3/.phoenix/provenance.json": "b61685368870002c83add103ee9ea0e20dadaffac008a9b9ac84ef6358fcaa38",
-  "skills/note-offline-sync-3/.phoenix/selftest_evidence.json": "cbd0849256bcb63d9e394ac99ae6079bfc33b4b63da13aa0f22dfdee15233706",
+  "skills/note-offline-sync-3/.phoenix/provenance.json": "d4e4f42f91635116246008611e5def5bed26ed4890d16f18cb1c70678b7e165f",
+  "skills/note-offline-sync-3/.phoenix/selftest_evidence.json": "c53a1cf0a6c781c80b8354b1266c78fa84413f1484d5c754183014906f2e38bf",
   "skills/note-offline-sync-3/references/creation/p0.md": "13421b53741bc3f06f184377e625038a2d2c0d0c4274c62e2c3e0a1f33c1bb70",
   "skills/note-offline-sync-3/references/creation/p1.md": "996b452937e810aabf8726eea4f89bf583e6c80e1f5828ab77925e55f0d32d35",
   "skills/note-offline-sync-3/references/environment/p0.md": "0c6e736cdf5b6419d927ca46e72c1e3fd2f5efc922c29df3bf437db0a0fada30",
@@ -66,7 +66,7 @@
   "skills/note-offline-sync-3/references/production/p1.md": "d2e34bf917ba55ddbfac4238680814337ffa0aa669445faa6e9f519e865fac39",
   "skills/note-offline-sync-3/scripts/main.py": "0175fb0c48ec2fade9b13b2715d796f5cde9817d877279d26903eefd70725674"
  },
- "sealed_at": "2026-10-18T20:04:30",
+ "sealed_at": "2026-10-18T21:01:24",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "fitness-plan-coach",
- "merkle_root": "d5efb47809e403f84e4b662e5e0d076c4eddd448f07c6f3e55163f00ecbd865d",
+ "merkle_root": "3781567d8dde7817873054f4a7234651f06e7a36ab580390384dfc465e6c7749",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/fitness-plan-coach-1/run.py": "eca9e55cb9c1eaa143913585792856d138c0bcfc14be429abd6128ca4756c919",
   "skills/fitness-plan-coach-1/selftest.py": "32f0bbffc33263ddfdcdc8d3f9013afcd30d2f8d8389a3e3ce406e29fa53fda2",
   "skills/fitness-plan-coach-1/.phoenix/originality.json": "bf92b643d73a99c57284a3a16beb4631c1ddb07f890cf28d0f59092ea26d0cf6",
-  "skills/fitness-plan-coach-1/.phoenix/provenance.json": "c773bf82d4a9c14ac031750066077cfda44f06095ab6b8c30767b5344abc50eb",
-  "skills/fitness-plan-coach-1/.phoenix/selftest_evidence.json": "b45e1cc42cf5c685f6e41f13b5d9b75697a9e2b94e526aa5540a95cb200bc8fd",
+  "skills/fitness-plan-coach-1/.phoenix/provenance.json": "549bea924b9eac3573d3ab3dee90d09bb20c89a6742683e79aece3dcf0291d6c",
+  "skills/fitness-plan-coach-1/.phoenix/selftest_evidence.json": "b2105e43e34d26c0a8abf3b58da803f20fff4675987ff39713ec35f46067db99",
   "skills/fitness-plan-coach-1/references/creation/p0.md": "4355066ad7cbc7e474c93dca837d5d2bea966fc5d706cb50150de21f8eca2f81",
   "skills/fitness-plan-coach-1/references/creation/p1.md": "af2dd489ee440e1eb0deffeebbddf03c52c385ccfa900b1036f7175a3cfaa5ea",
   "skills/fitness-plan-coach-1/references/environment/p0.md": "57a6202ee87a90a90a1812bd3882908cea62e75ce56978cd6d4ddcfa7c0c4a19",
@@ -37,8 +37,8 @@
   "skills/fitness-plan-coach-2/run.py": "263ee09c6ff3324e2f6f4ef796f902c061a82b673a9bf1c647dd53fef36b8901",
   "skills/fitness-plan-coach-2/selftest.py": "a2462e01377b1673e2ea300f016e0ef7c30c54e97896a5993003a9293c4242d5",
   "skills/fitness-plan-coach-2/.phoenix/originality.json": "f8e352ee923e99acafd4d032de1ed924227b203bae3ccb3702526737745da212",
-  "skills/fitness-plan-coach-2/.phoenix/provenance.json": "d28f1cca63aa08054be1b28d1e0304adb77cb15b131df0c2dc31a9aa6e1236a2",
-  "skills/fitness-plan-coach-2/.phoenix/selftest_evidence.json": "ebe1be32fe771eae96c2c503cf44d358b41e47429a3e9cd6638a55c41575b7b9",
+  "skills/fitness-plan-coach-2/.phoenix/provenance.json": "21f7d421129bc13885b3e1f4edd3fd75fb48060f76c096b5b32a408dc1f5e9e5",
+  "skills/fitness-plan-coach-2/.phoenix/selftest_evidence.json": "c8232d864261c5ef87fbae547d201728127080d9f0eb655c7af390f120354d2b",
   "skills/fitness-plan-coach-2/references/creation/p0.md": "22fc724ab2871a5a4b2fdcb2b8bbc1bd3c9772ffb2cff1a7224149401f503d83",
   "skills/fitness-plan-coach-2/references/creation/p1.md": "6b70d8921194b45ce7c58518ee8e3cb3121fcaf9a896a18bdd9170599c8cc2fd",
   "skills/fitness-plan-coach-2/references/environment/p0.md": "9a1d1a5adeba71e2888bcbe25657a93ce3c0df72a09e5a3f28c96c3453636c71",
@@ -54,8 +54,8 @@
   "skills/fitness-plan-coach-3/run.py": "5cd5926a3bec2d31c169feea395e64b03b6f4a9e556ff997f4b2f57a450109b3",
   "skills/fitness-plan-coach-3/selftest.py": "6b31a80c0659d407ba716b5afc7abca1047cbbb5234daa2f0dd6f00500a81b4a",
   "skills/fitness-plan-coach-3/.phoenix/originality.json": "d1e53370e9de3f69c7aed801a161d6340090e384166c767e543ed9866092eb35",
-  "skills/fitness-plan-coach-3/.phoenix/provenance.json": "efa0a9dc88c4cd34798d42c95c017c72d4f1fa3da4f87f3210d63e1f55b17e0c",
-  "skills/fitness-plan-coach-3/.phoenix/selftest_evidence.json": "11e7f191006ca4df6c5c2c7d6ce884ee95396766e2bf9cfb9884c6225fab8e5f",
+  "skills/fitness-plan-coach-3/.phoenix/provenance.json": "c3d69e99450d6e7c220d875fc15533b043d6e123080727276d6026d870875cd6",
+  "skills/fitness-plan-coach-3/.phoenix/selftest_evidence.json": "d47597921939d3f2e49a6d0c621e74cc4458c3d89b521b40fe3e8bef19825829",
   "skills/fitness-plan-coach-3/references/creation/p0.md": "7ec12e856397d2f03c974c41d11f291336ec28226d04191977fdcafe6cfc36d1",
   "skills/fitness-plan-coach-3/references/creation/p1.md": "820be2257b4424c851fdbe7f0ce1277b3818819dfac2f392102f8ec796b8e3c6",
   "skills/fitness-plan-coach-3/references/environment/p0.md": "365a50afc69f88d2828e84c379ddd6acfdab1880185f14ee18acaf03cd958532",
@@ -66,7 +66,7 @@
   "skills/fitness-plan-coach-3/references/production/p1.md": "1384a4d6f3b6fe0d78f88df58614f11751f14b4ea90608470ef790c8534de7fe",
   "skills/fitness-plan-coach-3/scripts/main.py": "6b795ae3318c53386780c9242fc64b6e7a939868c2733a83bde98dbf05d3ca87"
  },
- "sealed_at": "2026-10-18T19:59:26",
+ "sealed_at": "2026-10-18T20:58:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "idempotent-migration",
- "merkle_root": "335d4f8325f9b0bba7b072694428437ffaf5e8c414fdb76e27bea4e38d176925",
+ "merkle_root": "6479ddbec24f27eb69d1693f49b9beb30f08c9bd0d317fd140d518dd0b8f3e6b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/idempotent-migration-1/run.py": "9312337aeb038b54abece2221c4aa7235668c37e89bdb0e8cc3001100d301249",
   "skills/idempotent-migration-1/selftest.py": "0c4f5bce0be503ce1167c412b43677ac318ae1137e968518646444618a4d563d",
   "skills/idempotent-migration-1/.phoenix/originality.json": "8924032eb7094ce97a8983bd7f6054789ffeb28cb385168ff1bda05dcb1ee1f7",
-  "skills/idempotent-migration-1/.phoenix/provenance.json": "8b5e0e0ae24b2370248de9e98fd9c2e336f2cd1ea822ebbf89947fdd1d920b52",
-  "skills/idempotent-migration-1/.phoenix/selftest_evidence.json": "1033b362c06e66dd1899ffa96d3900926fdfe08c59f19961d448acb8f3c7c3f4",
+  "skills/idempotent-migration-1/.phoenix/provenance.json": "90c5fdfb4f755bf17340cb3e3d165782cc5180be9d422b7ca73e47a0092c8f79",
+  "skills/idempotent-migration-1/.phoenix/selftest_evidence.json": "880e45b184f7a1f8c0279fe8c02b3dc1260df1a36d3713bfa6c9e18d7a179ac3",
   "skills/idempotent-migration-1/references/creation/p0.md": "8dcda5828e3be46417f23c46890bc508d8b0a974518c4c25c47bc03c1e6b1975",
   "skills/idempotent-migration-1/references/creation/p1.md": "944ce82f2139ad7c2789b3fe94f48b6c8559aeb22adb6aa3a01cfa3d49847514",
   "skills/idempotent-migration-1/references/environment/p0.md": "7635835f81e1a698caf6715eeafac5a78b5920c4b6ec43bfaf5456570e4a46ca",
@@ -37,8 +37,8 @@
   "skills/idempotent-migration-2/run.py": "357c2cbf80c7987cea7dbd6f8eea4abd288c890f2b25abbf9c393a17588b9c6f",
   "skills/idempotent-migration-2/selftest.py": "3876802c4cdf8368be3a83056010fe24618ad9c4a0fe4932c114a1d83a89afe2",
   "skills/idempotent-migration-2/.phoenix/originality.json": "3e82e339bc199e1ca43d0b5da57ded395ba265184bec9c952f19e8b5a30bd486",
-  "skills/idempotent-migration-2/.phoenix/provenance.json": "91bb4979abce6a7a470e649aaea4dc8acddf1efcbdbb008beaaa79493ad25bca",
-  "skills/idempotent-migration-2/.phoenix/selftest_evidence.json": "039e8ac7394a4bd4e10e13b6a51a382a3938919acdc96816644e8eec806786e2",
+  "skills/idempotent-migration-2/.phoenix/provenance.json": "38292b67694ad3a3c005e407abcc136a07476dc882c9c008a20324532adfb5c4",
+  "skills/idempotent-migration-2/.phoenix/selftest_evidence.json": "8b02972979dfd6bf6a40c83b0dbf72a2ad807aa652566111dfd4b36574fc9ec3",
   "skills/idempotent-migration-2/references/creation/p0.md": "773e5a3a8da57b1ad765da1622d8412ef7c01315a1473edbcb0570cce8cf91d6",
   "skills/idempotent-migration-2/references/creation/p1.md": "937265b39d56d994bd650af8d6d4ea3130cf89a1d2b4be79eba485747629e4cf",
   "skills/idempotent-migration-2/references/environment/p0.md": "d71ebd696574fb8c8c72ba592092669d0014fa23d289121ea53868811f16d2cf",
@@ -54,8 +54,8 @@
   "skills/idempotent-migration-3/run.py": "bcdd56b6fb4bfd567e0b9c5ad6cdc76ac8362425b7b3f580a930b70841c2376b",
   "skills/idempotent-migration-3/selftest.py": "fde3c7f5ee40ccfa02d7d38901f8b6860f4ae835e994bd72ce3da19b04c8f964",
   "skills/idempotent-migration-3/.phoenix/originality.json": "3abb76702dd556df4ca27b4462843b9bb228dd78f35171e22685c217b7a7d714",
-  "skills/idempotent-migration-3/.phoenix/provenance.json": "235531036d66278b220a82528359775b0a6d6118d72f61b9dbf43ec86242840c",
-  "skills/idempotent-migration-3/.phoenix/selftest_evidence.json": "e9278411d05419c8828d10eb056b5720faf203e48d127d4c8589bd87c3f448d2",
+  "skills/idempotent-migration-3/.phoenix/provenance.json": "29439d31db5bf91f633cc4f4511c7ede88c38009ca5346a4e98b5e9d9269b030",
+  "skills/idempotent-migration-3/.phoenix/selftest_evidence.json": "38d36a251766aa70644f6a058dadcec6506276432825a5ab655e85ce874aa375",
   "skills/idempotent-migration-3/references/creation/p0.md": "2d929d265f9c7309fa7d849f4593216c5968c2924e406f7599cbcab23a753cbd",
   "skills/idempotent-migration-3/references/creation/p1.md": "d9a293b9b2a95a4c2d57e790a6bb471c3eec5df11f0b0f80a060421fb636403a",
   "skills/idempotent-migration-3/references/environment/p0.md": "2d19a112c1259d9599068967dff1afe336f7c9882faf65ad037113070e98896e",
@@ -66,7 +66,7 @@
   "skills/idempotent-migration-3/references/production/p1.md": "61de01a77ea6818c637df33b1af0e39b995da7a45556ccadfd597f6232775385",
   "skills/idempotent-migration-3/scripts/main.py": "f880a7210c1382136119ba729f096ca0ca2cdd34a0752176e848ffec873f1eae"
  },
- "sealed_at": "2026-10-18T20:01:01",
+ "sealed_at": "2026-10-18T20:59:38",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

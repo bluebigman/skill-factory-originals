@@ -1,0 +1,66 @@
+{
+  "name": "ci-pipeline-design",
+  "version": "1.0.0",
+  "plugin": "ci-pipeline-design",
+  "description": "ci-pipeline-design — an end-to-end expert agent with 3 built-in skills, delivering verifiable results for ci-pipeline-design tasks.",
+  "author": {
+    "name": "user_2fd890c9",
+    "email": ""
+  },
+  "agents": [
+    "./agents/ci-pipeline-design.md"
+  ],
+  "agentName": "ci-pipeline-design",
+  "displayName": {
+    "zh": "持续集成流程专家",
+    "en": "ci-pipeline-design"
+  },
+  "profession": {
+    "zh": "持续集成流程 顾问",
+    "en": "ci-pipeline-design"
+  },
+  "displayDescription": {
+    "zh": "持续集成流程 顾问：内置 3 项专业能力，针对常见情境给出可执行的归因与处置动作。",
+    "en": "ci-pipeline-design: 3 built-in capabilities."
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "02-Engineering",
+  "tags": [
+    {
+      "en": "Productivity",
+      "zh": "效率工具"
+    },
+    {
+      "zh": "持续集成流程",
+      "en": "ci-pipeline-design"
+    },
+    {
+      "en": "Engineering",
+      "zh": "Engineering"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "zh": "遇到持续集成流程怎么办",
+      "en": "How to handle"
+    },
+    {
+      "zh": "帮我规划持续集成流程",
+      "en": "Help me plan"
+    },
+    {
+      "zh": "帮我检查持续集成流程",
+      "en": "Review for me"
+    }
+  ],
+  "defaultInitPrompt": {
+    "zh": "遇到持续集成流程怎么办",
+    "en": "How to handle"
+  },
+  "skills": [
+    "./skills/ci-pipeline-design-1",
+    "./skills/ci-pipeline-design-2",
+    "./skills/ci-pipeline-design-3"
+  ],
+  "expertType": "agent"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "cache-strategy-review-1",
+ "version": "2.0.0",
+ "domain": "缓存策略",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "失效策略",
+   "then": "明确过期与主动失效",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "键设计",
+   "then": "键含版本防脏读",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "穿透防护",
+   "then": "空结果也缓存短期",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "雪崩防护",
+   "then": "过期时间加随机抖动",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "一致性",
+   "then": "写后失效优先于写后更新",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "失效策略",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "键设计",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "穿透防护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "雪崩防护",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "一致性",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

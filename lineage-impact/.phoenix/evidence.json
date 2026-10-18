@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "lineage-impact",
- "merkle_root": "ef680b48c87198c4178fd9d5d624f84eeaf3b4e06dc005a7223c3f631c4eec5e",
+ "merkle_root": "da7549ae3afb8fc11c33a17d8278cfe0e7cd1fbc3cd22819e846f6d6fb67bb59",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/lineage-impact-1/run.py": "1310f64eb55929e56163284c988bbddff0e770cfd59b2f15c5c3166f8371cac9",
   "skills/lineage-impact-1/selftest.py": "0f97297d4a84633f1b6fe029c2afc96aa9e3a701c5b5715df139e3274d4ad5e4",
   "skills/lineage-impact-1/.phoenix/originality.json": "0613adac7e7b14d84b71d56d9bf7cde02f16c594dec6478fcef41b936ce6f660",
-  "skills/lineage-impact-1/.phoenix/provenance.json": "6f027ae8398dcf283c3b7d27eac1355e531d89f26a0c33e7821a726289ca9e38",
-  "skills/lineage-impact-1/.phoenix/selftest_evidence.json": "635dff1e2669039afbcc2cc2364acfa866bb230b8bf33724d53f311cf182ee35",
+  "skills/lineage-impact-1/.phoenix/provenance.json": "a655a978ab4e68f907919dc79d5a8a937b937df0cbfeb678decc57c4b5b2e513",
+  "skills/lineage-impact-1/.phoenix/selftest_evidence.json": "0e810dea3b8ea2087acfab7105fcb61e3e08f278d80bbb2949900a99e929bfa5",
   "skills/lineage-impact-1/references/creation/p0.md": "2e90de07ab7388ea0c923ff58bb621879e9e08f026c4708dd8690ca4f79ea824",
   "skills/lineage-impact-1/references/creation/p1.md": "e33d848c28a1f1375c49b0188cc387f32ec1659cdbebdd74735e401c21df5d38",
   "skills/lineage-impact-1/references/environment/p0.md": "80300c2f0274c2f2cddbc6ae7c0d01e10c720a75e6893a456ebf9dd68022d8a2",
@@ -37,8 +37,8 @@
   "skills/lineage-impact-2/run.py": "803d63b3ced3597d998d2a88c2e9a2e4b678de83f8aa7e8d77eb982706afb2d7",
   "skills/lineage-impact-2/selftest.py": "af6d39c76fab2ce2c1c1abfaf8ef4c20b21fe8f4567ea30b1361670daa63190a",
   "skills/lineage-impact-2/.phoenix/originality.json": "489576eaf5f42bd829a8ec3e04d0b69e6aa54051f326bb0d6d69a32a231acc43",
-  "skills/lineage-impact-2/.phoenix/provenance.json": "73cb7a17fedf66b4a0ed12aadaf7e7a435a2579b4dfe49959e8b4b29855c0b23",
-  "skills/lineage-impact-2/.phoenix/selftest_evidence.json": "bee96e52a3fadb2eddf1ffa5d1dd8940c42af683a327cbb4909541267a2650a1",
+  "skills/lineage-impact-2/.phoenix/provenance.json": "9a68c6227e0b643d272334001c8e1f64aeefa82d5ba931d24742bfb2e46469b3",
+  "skills/lineage-impact-2/.phoenix/selftest_evidence.json": "0f18c99a02082a0d0ed09da94038d1a9f8dbff5be9496b407439f2c343e989c4",
   "skills/lineage-impact-2/references/creation/p0.md": "79144e3461538cf660cd23dba90970322aa46c1f9435e9895bc4a769d35d89ec",
   "skills/lineage-impact-2/references/creation/p1.md": "abd6f6b1869d35318a65805909181d4aabe7a7358ddd7f44df3730b03b08c549",
   "skills/lineage-impact-2/references/environment/p0.md": "57df81a526c27b90830459b90db2b54c86f3d6343a3dc76d394acc06b7250a5d",
@@ -54,8 +54,8 @@
   "skills/lineage-impact-3/run.py": "e3740d56ce8ba6fa79652020d373f60d9ac6fc075277c019f30fdfa428fe1ec0",
   "skills/lineage-impact-3/selftest.py": "90260b06d01b8ff68ddfbcd118d9407117d6e440df5b63690ff3dddf885b7cb2",
   "skills/lineage-impact-3/.phoenix/originality.json": "29e423f12b1ae6531dcbee6a60923d96617cdf0251d9e3e109b228467e216414",
-  "skills/lineage-impact-3/.phoenix/provenance.json": "c710dfc1505bf3f7bf540fd052399f501a99e2bdbb357678669cfb6e7d7784bd",
-  "skills/lineage-impact-3/.phoenix/selftest_evidence.json": "5e72abb4ebbc06f1b35b0a4b371fd8d3a0fe77167b65db0ee3337a25c7892526",
+  "skills/lineage-impact-3/.phoenix/provenance.json": "53c08c53d157bd77e1d3030b62f26efa71fe5647a8bb26389cf22d6613ce9986",
+  "skills/lineage-impact-3/.phoenix/selftest_evidence.json": "ad5a2aadfd4d89b2059f689412b92f941f899272d0dd492758e829042889bd5a",
   "skills/lineage-impact-3/references/creation/p0.md": "8d4f8ec8317544199dcb6053aef410697216caaf208af4710b06436ff7e0d28c",
   "skills/lineage-impact-3/references/creation/p1.md": "f4f8d6f9ae521666dbcb60a30fe0c069942c63ab39e9da7d39c842bffb83484b",
   "skills/lineage-impact-3/references/environment/p0.md": "d1a34c5c981af97b9411aa2b5847cf74ee8227fad0c80a872f301bca6c91deca",
@@ -66,7 +66,7 @@
   "skills/lineage-impact-3/references/production/p1.md": "88d653f0e7ececfe1ef54d5b8965a23d9b76a09f335754ff17cac080437f2e04",
   "skills/lineage-impact-3/scripts/main.py": "57ab04a97b242370bf1307f3b2e84e3ce51cdda40ab7e57e16ebd6b3e1464bee"
  },
- "sealed_at": "2026-10-18T20:02:35",
+ "sealed_at": "2026-10-18T21:00:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

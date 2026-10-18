@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "debug-breakpoint-pro",
- "merkle_root": "09066a98cdb56d88186cfddc7bd8030eae289e0bf383df9aa5d0fd147e745124",
+ "merkle_root": "8f13512b7e593d658da6e1dc81855f84f3341ae19468f544495313be97fc30e7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/debug-breakpoint-pro-1/run.py": "73080832e4539bcaa6be86b0e243c90bfb71d39bea09b62c9a40635bde68ac5c",
   "skills/debug-breakpoint-pro-1/selftest.py": "efa0d5a975f2d28c1fd05768d0c32bb28addf8b14896ffea4d5e4f3c014829d9",
   "skills/debug-breakpoint-pro-1/.phoenix/originality.json": "abae8bfa519b187499e1ee8340add90ea54bfee99d5654661ea4c385e98e0f71",
-  "skills/debug-breakpoint-pro-1/.phoenix/provenance.json": "52910eb1e9aedff216fc7e01cd91dcf3dd1a276e6c34fe8d80bfcaa202179ef3",
-  "skills/debug-breakpoint-pro-1/.phoenix/selftest_evidence.json": "5f9085b29ab1aa895a92557ded6cc93d67d20daee81d951dec5b207bd606a14b",
+  "skills/debug-breakpoint-pro-1/.phoenix/provenance.json": "21fe424ec6d95db722ad12488af5e0c0e9d23262e9d6b4b9a4457ace2a203eae",
+  "skills/debug-breakpoint-pro-1/.phoenix/selftest_evidence.json": "c31ac3f8f01b1f85e3eec1aa3a14dd5102c8d57521206fbfa2f9ce89505524ee",
   "skills/debug-breakpoint-pro-1/references/creation/p0.md": "0e6190426ea3e485b313c4617b860b5587b8a397fb7e0bb3aa34c6af1988df12",
   "skills/debug-breakpoint-pro-1/references/creation/p1.md": "250e9ebf1a18406b3faaf41fadc48317c7ff189441ff6a88148a4419ea370050",
   "skills/debug-breakpoint-pro-1/references/environment/p0.md": "bee11697d7a59490d3cf8fb3bbd9d55f22929e4ad88e6a564764d7edf64cf042",
@@ -37,8 +37,8 @@
   "skills/debug-breakpoint-pro-2/run.py": "0f0c69af569b6094aa0abfce3b4616eaa1a783c8a4d7a14e53522ad316ae2928",
   "skills/debug-breakpoint-pro-2/selftest.py": "930f47f000faedc028ea6915de98c87f6e16a276cd1f967939f9c8182bb149fb",
   "skills/debug-breakpoint-pro-2/.phoenix/originality.json": "9978c61de1228ba5cfbb1a8912b5d0629e35516873aecc3e96022c2a4acbfed7",
-  "skills/debug-breakpoint-pro-2/.phoenix/provenance.json": "0ef0989b8f65f3fb390bb9302c001fccebb704ca085257e3dbbae623c3a6710a",
-  "skills/debug-breakpoint-pro-2/.phoenix/selftest_evidence.json": "63d4db1e9d2a7e470a9b465198b3d7243211092f0e2819807bdc3d93892b9b5c",
+  "skills/debug-breakpoint-pro-2/.phoenix/provenance.json": "c028afc0085e2628abcf433c6d996bb99804cd0efbe68fdb72218f869890f8e5",
+  "skills/debug-breakpoint-pro-2/.phoenix/selftest_evidence.json": "c469cd97d3dcb6ed19d3546e9819661fde5577a13a9481e8e8ff559664088c88",
   "skills/debug-breakpoint-pro-2/references/creation/p0.md": "76f25dc920f77b50ba2a63c9927e6abe4531ca598b254e9935bab13bd70f4d78",
   "skills/debug-breakpoint-pro-2/references/creation/p1.md": "73fd570f24ffcfb5660632abe2ebcedb200a7266d9f1915b5af91076be3353da",
   "skills/debug-breakpoint-pro-2/references/environment/p0.md": "d0c12da2a449ae600bb3df442365173df09b34c83539bbc48543aa60337aeab2",
@@ -54,8 +54,8 @@
   "skills/debug-breakpoint-pro-3/run.py": "08d4c856541b86758e84783f33e9e2aa7af03b11f16679fbc4ef4405ec3542f1",
   "skills/debug-breakpoint-pro-3/selftest.py": "4d9ec875c6aa12f4baf5bec83df00724f18af8cc73ff52e8a67e5229e2e4e9bc",
   "skills/debug-breakpoint-pro-3/.phoenix/originality.json": "c1a4235afd3051bcf237cfabdf661f2f0c63664dc058debe5ab9fcd37d42677c",
-  "skills/debug-breakpoint-pro-3/.phoenix/provenance.json": "45e705d1c9619ea429cb9ee942f37c27fe00a6834ceff37f7162b02707d4f72b",
-  "skills/debug-breakpoint-pro-3/.phoenix/selftest_evidence.json": "d47124c78bea0a25f9aedba722db7de2e1922b18f5956c0a978e14e23110f474",
+  "skills/debug-breakpoint-pro-3/.phoenix/provenance.json": "245d740a82486c53941ca297fa83a496be67abc171de7e58b8ef2c614eb701e6",
+  "skills/debug-breakpoint-pro-3/.phoenix/selftest_evidence.json": "712b27fc638e149f6cc28735a6cddfd58a8ac5eaed1e3071ebba77d4ac3cb802",
   "skills/debug-breakpoint-pro-3/references/creation/p0.md": "a73d2e29fbc252eac3fb4f69598a4b90f089a2c9f49c5ee79169f846603f2a3e",
   "skills/debug-breakpoint-pro-3/references/creation/p1.md": "7f341f6a9cb4b5c46e4c49eb13348fc07639a556d66806e4b4f9e21d9ed14194",
   "skills/debug-breakpoint-pro-3/references/environment/p0.md": "8e6706790416211834432fcca008b1d8c861090d6015020e2b745603ca01fb62",
@@ -66,7 +66,7 @@
   "skills/debug-breakpoint-pro-3/references/production/p1.md": "7af7f7555d15dcb01779ca9d71d78465f0b5bddaefe01a6a699fa26a7c978062",
   "skills/debug-breakpoint-pro-3/scripts/main.py": "0e8f23d3900cc75c083a159d166bc6c60b566913af1eada04cd3e987ca8fd599"
  },
- "sealed_at": "2026-10-18T19:56:10",
+ "sealed_at": "2026-10-18T20:57:01",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

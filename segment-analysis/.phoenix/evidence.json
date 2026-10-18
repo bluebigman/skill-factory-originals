@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "segment-analysis",
- "merkle_root": "300923c047ec9c9e68726debd0e06a0a5f9854d97701e36fc14b3967689fb558",
+ "merkle_root": "7133071bb5a807e7696744a91975ebc7ab0d3202461db8ca5d8b6b7a2c18fa56",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/segment-analysis-1/run.py": "933d8509340da133d7e4b310437b35cbd2079913fea63a8139ffeadb2b0a9a63",
   "skills/segment-analysis-1/selftest.py": "57d5cc6150e3074e788f2da867b09497cfea9ce5ac26111fd65315ba8dcbb6b7",
   "skills/segment-analysis-1/.phoenix/originality.json": "c639e37bf3279622a52c41849b095f922b85b9ffa1523b056f0d79f699dd5544",
-  "skills/segment-analysis-1/.phoenix/provenance.json": "802bbd452cf84340c984f62639a26b803e2d4d252c6eb66c06df935735be088a",
-  "skills/segment-analysis-1/.phoenix/selftest_evidence.json": "5080b965c7cc1924500402e10ae607327f8146f4318bb488498069d73361a38f",
+  "skills/segment-analysis-1/.phoenix/provenance.json": "b011d5deb7fac7855b80eb6c323aabf7b830eee461b8ff3b9145f24893ac41da",
+  "skills/segment-analysis-1/.phoenix/selftest_evidence.json": "723a5decd160e73a462768aa32ec488b323d8928990509a701f1307bbd3704bf",
   "skills/segment-analysis-1/references/creation/p0.md": "fa3f8c748eca20ae52be586cf6cb47f2ef073e504c759fdaa6b2eab271753ee2",
   "skills/segment-analysis-1/references/creation/p1.md": "ceae6b1564917df2fc01552d1bfa031c9b8d42250eecbbcc2a8c3f946f5d0ac8",
   "skills/segment-analysis-1/references/environment/p0.md": "b13578d9e8f973d02deae36db6cb56a6863adb150c67e436ced8d165a40540c1",
@@ -37,8 +37,8 @@
   "skills/segment-analysis-2/run.py": "5b8de906c0f3ad048108f1f8273b7384c3cc3ab8fc98741eeeabc6ea3a077d77",
   "skills/segment-analysis-2/selftest.py": "33dde46705bc944ee38e24679349ab569a63849b487795e5131d575b9bab1b3e",
   "skills/segment-analysis-2/.phoenix/originality.json": "bf0242b991968dd53f15f7924a51d9061117d99c63b6b9d08715e3010a277ca1",
-  "skills/segment-analysis-2/.phoenix/provenance.json": "ab00430337592d63a4891f57dd30aaa2c184e76e629a1305a34b2e13e42c5b66",
-  "skills/segment-analysis-2/.phoenix/selftest_evidence.json": "c04ee1117c70c4c04ce5671f471aa56468df5c5f6c00a986c5df82986214fd3a",
+  "skills/segment-analysis-2/.phoenix/provenance.json": "5c8a4b576b21839e007492adde85dda185d4c264e51ebe2fa323ea547bfb848a",
+  "skills/segment-analysis-2/.phoenix/selftest_evidence.json": "1c5108f072f2877c59ede9414f4a49ff83481cfce8654637c17b7e87203b6822",
   "skills/segment-analysis-2/references/creation/p0.md": "4bc7b484e981a34a1a3b6edce7deaffed368aa5d1c839d2eca4c76f2664456dd",
   "skills/segment-analysis-2/references/creation/p1.md": "0f52d8c060b4c2c3a0bc5c572336cf54ff08c03a3a0d8971dbae3df82ad3d832",
   "skills/segment-analysis-2/references/environment/p0.md": "b129a3c7d4aab58d1d8d8c89cc9d95096f1bf66fd78d49780821d69de1b28c08",
@@ -54,8 +54,8 @@
   "skills/segment-analysis-3/run.py": "4a8ba07322c1667055b9aa66a52a250b48d86c2dce71c9c1f202c5b24d2d3853",
   "skills/segment-analysis-3/selftest.py": "315b8eed59afbe7f14a3143b06c49e6a27725ff0254c90f23eb18f9761d0c28b",
   "skills/segment-analysis-3/.phoenix/originality.json": "1ce80c02bd65ddc592617a282ab08361d341a3494a96e0ba3a89c09fbf5cd845",
-  "skills/segment-analysis-3/.phoenix/provenance.json": "b74de87e7232f0e2c55f28c0def82d5a1e5a7824b6794233ff02124ecdb53340",
-  "skills/segment-analysis-3/.phoenix/selftest_evidence.json": "6620e159005c04ef521415c5c99167562ccd2dcb4d61cc1d8faaab42bea45281",
+  "skills/segment-analysis-3/.phoenix/provenance.json": "aeebafcc21240e44d87a258ba594f37d1b29df6dd3a225d1b3ee3784e647d3fb",
+  "skills/segment-analysis-3/.phoenix/selftest_evidence.json": "fb97902a9761242471b2449deff14ee9724eb778ec6aab45b18760be9d1570f0",
   "skills/segment-analysis-3/references/creation/p0.md": "99c1c8eecf3aedc6c7ebaa43f2fa075f0c47437f742b4d469f4af105745d8054",
   "skills/segment-analysis-3/references/creation/p1.md": "f95ba824bfd678351860d480166eefb36e5d7555b7b83359287918ea2887bfbc",
   "skills/segment-analysis-3/references/environment/p0.md": "27d6011a1a48aacf7c1c185ff331affbffd6bb6634b046549f385ca15df47112",
@@ -66,7 +66,7 @@
   "skills/segment-analysis-3/references/production/p1.md": "231efdae95cde2ad487fe5c5b8bc4feabeca27bbfb6a761e780c88cb81af1e64",
   "skills/segment-analysis-3/scripts/main.py": "adcd1f56160f5954505ccf46a08c46d56deb15effba448ae7a0811df764d8b90"
  },
- "sealed_at": "2026-10-18T20:08:47",
+ "sealed_at": "2026-10-18T21:03:35",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

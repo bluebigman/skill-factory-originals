@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "multi-agent-orchestrate-pro",
- "merkle_root": "1533832a540b8acbe5b8f4fd673f61193cc02ef161204a051a2d60e00759c9cf",
+ "merkle_root": "e7af2bb11264ce13b4bf616b5e1fd4f12ae5095c3bdd76a666e960b0bdd24235",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/multi-agent-orchestrate-pro-1/run.py": "42a7d1efbf6a69dcbb2463eb61bbac00778ad911576f1cb32c63c6edfc1058eb",
   "skills/multi-agent-orchestrate-pro-1/selftest.py": "df3eb20c244af829f15e8b41c66a239fc1431642e7ab47eaa1b9a66d171606e4",
   "skills/multi-agent-orchestrate-pro-1/.phoenix/originality.json": "a37216998ae44d22302426e12c20118aab7cc54ed370cbfac89de38dd56d4307",
-  "skills/multi-agent-orchestrate-pro-1/.phoenix/provenance.json": "102a8cc47574fbf3955cf632da7288609ecfaabd16b795cbb5d6343ce603b480",
-  "skills/multi-agent-orchestrate-pro-1/.phoenix/selftest_evidence.json": "8bba05477e1d85c5b5b92d7692583a5a60c40e3e95aaf6a6b9bed9415c5aa3c9",
+  "skills/multi-agent-orchestrate-pro-1/.phoenix/provenance.json": "c26d657a394b50d0bb29301a1b46e7e367ba8f1a9e72f0f493acef453a506a21",
+  "skills/multi-agent-orchestrate-pro-1/.phoenix/selftest_evidence.json": "fc1041ab15b30be900761d5d3fa6ff41644a90400566e0bb13707e5b11ead753",
   "skills/multi-agent-orchestrate-pro-1/references/creation/p0.md": "82e1834a45388211bc7057a1e1687160b984146909b734577828b42d77851f27",
   "skills/multi-agent-orchestrate-pro-1/references/creation/p1.md": "bbb78867fd9b02f7bba36116e7a6f9e7d26fbbe2c4d6608340598e54a7e4ceed",
   "skills/multi-agent-orchestrate-pro-1/references/environment/p0.md": "d479eaba4bdcf88540cb1664f5afc7b7d30d6144f81f3594d79ef48ada16d871",
@@ -37,8 +37,8 @@
   "skills/multi-agent-orchestrate-pro-2/run.py": "91730105591d3326fb4d1c8d06c97a09d515d7d271cf8f63d6ee5c2f4ad98bd8",
   "skills/multi-agent-orchestrate-pro-2/selftest.py": "97b75c896fe101f25f3f8736f6f71a291955c74fb466a8278716105cfc1a015b",
   "skills/multi-agent-orchestrate-pro-2/.phoenix/originality.json": "2d7672e726298108e5ce61145bbeef28b02c14969f6959618fc038ead3ba52d9",
-  "skills/multi-agent-orchestrate-pro-2/.phoenix/provenance.json": "9c7f6c9f6a1ea2a092cb93d95c05d7f9698d38c3ad2d0c00d17fdb85a434878a",
-  "skills/multi-agent-orchestrate-pro-2/.phoenix/selftest_evidence.json": "01859e24242a6ed9c3e4dced001d9cd233c5a12189f7e73660c47834b454d898",
+  "skills/multi-agent-orchestrate-pro-2/.phoenix/provenance.json": "6cc6a20444ff9204e2ff629014ca8d47782fb5afe5b3ed3aa5b6f9d9c2c7fd24",
+  "skills/multi-agent-orchestrate-pro-2/.phoenix/selftest_evidence.json": "dc7e77cc715b558af97047af4faf0db81af3f541ffab99d4cab5ecef2e4fe27d",
   "skills/multi-agent-orchestrate-pro-2/references/creation/p0.md": "9f872f2b7e16c839942d5ae1fba07680a248461a4195ae8566c0a3ae570e9da7",
   "skills/multi-agent-orchestrate-pro-2/references/creation/p1.md": "c615c971413c7f9d7148b1c0049830ad28683e92875d6bc90aba2ac25f30300c",
   "skills/multi-agent-orchestrate-pro-2/references/environment/p0.md": "a4cbed1379fb64699490ceda3d1b7e1f48966e903594148478016d2b929f1721",
@@ -54,8 +54,8 @@
   "skills/multi-agent-orchestrate-pro-3/run.py": "a15f47341a6c4215e2982db044d336b06ea9203a4ec6ab8b10444b9140bf3b03",
   "skills/multi-agent-orchestrate-pro-3/selftest.py": "55fc1e42a9cc6c18103d99b485d6c90b876ffe23f26cde1611852a5f80ddaeda",
   "skills/multi-agent-orchestrate-pro-3/.phoenix/originality.json": "022588ce4dce1e863cd9b793879dafcdbb79540b1ae52a6213f6f4836411e123",
-  "skills/multi-agent-orchestrate-pro-3/.phoenix/provenance.json": "f70dea8b9f4d0a24498ce6ed77c85c5dc49e7b39959501ce6dface69eb298e59",
-  "skills/multi-agent-orchestrate-pro-3/.phoenix/selftest_evidence.json": "8bc5937409491543048732927ea8a6eaa5ee0b44dda5fa88e6a10a17dca83280",
+  "skills/multi-agent-orchestrate-pro-3/.phoenix/provenance.json": "a723f07392cf87616af9b460d2605dc4bdaee29d8d2e24dbb48e4f37a70c09bf",
+  "skills/multi-agent-orchestrate-pro-3/.phoenix/selftest_evidence.json": "c6884c0a82af23be911fa3980f59a110aa2e70d4b09b479d5c6aabdf8e329be3",
   "skills/multi-agent-orchestrate-pro-3/references/creation/p0.md": "da38822bf12634f019862c7beba6feed64e889ff3a8b08d211b4111035287dfe",
   "skills/multi-agent-orchestrate-pro-3/references/creation/p1.md": "c6e689e4b2a9bf99e9a193ad01e72e24c51852f540bfdcf4859f6c90ba53d383",
   "skills/multi-agent-orchestrate-pro-3/references/environment/p0.md": "58b67be78da5f8e052d05ab3cf7f792b2add094a72f9cb3e448324c6b57ee6d4",
@@ -66,7 +66,7 @@
   "skills/multi-agent-orchestrate-pro-3/references/production/p1.md": "53196e8558cd3358bfd82e398016aca4a43811470c65c110b2618d5271c6c23d",
   "skills/multi-agent-orchestrate-pro-3/scripts/main.py": "f9341fdbbb6c7a8abbd4ebf16c5284013635949184521c5c8b464565ab8d9801"
  },
- "sealed_at": "2026-10-18T20:04:07",
+ "sealed_at": "2026-10-18T21:01:11",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

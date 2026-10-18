@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "naming-convention-pro",
- "merkle_root": "0e2912f3b1d09ef7ef0ace33ecb45b5107981bf4a36a0bc5960e380dcae30e42",
+ "merkle_root": "1ffbc378d961263f3d387cab77b90c21ce9287c77cba3820092eed7afd3f044b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/naming-convention-pro-1/run.py": "a9a421de30e23d18e8c043e553d498ab8d83fee4654377d67c532a366e123f0f",
   "skills/naming-convention-pro-1/selftest.py": "68e332704f42eb8a63f1cb68df159b22931336e091e7a847f19e15bed07dbd92",
   "skills/naming-convention-pro-1/.phoenix/originality.json": "83aafc48e9881c0288323ffed1e117c623ca7af97881940528042f4ed2b0e896",
-  "skills/naming-convention-pro-1/.phoenix/provenance.json": "94d29cc65f657a677e4fccf592510186dbdc218a89ea76ea495da920f78e3810",
-  "skills/naming-convention-pro-1/.phoenix/selftest_evidence.json": "38861776d964c48d01b2c78571171999dee3436847d599c74c2029ecb90f82f9",
+  "skills/naming-convention-pro-1/.phoenix/provenance.json": "f68a5eab0c7881247d5984724a091ed55ce625ccaa86abb8a44707d515ade31e",
+  "skills/naming-convention-pro-1/.phoenix/selftest_evidence.json": "73717e2e86f474b864c10c94e75c54ca0b2374805cd81f03ef01634509d75595",
   "skills/naming-convention-pro-1/references/creation/p0.md": "6aed6802b2ac87d844d11b530cc749a9885ea26cd1eeacef034a9a0391326a4c",
   "skills/naming-convention-pro-1/references/creation/p1.md": "edfcefa80a1c8113b16831fecd7107fdf96d5c78806b1eb5faf4313d20b70cba",
   "skills/naming-convention-pro-1/references/environment/p0.md": "b30c150e776dd56b3178c05fc62af505aa19f72cb5f46d7538ab16c666f9ce7f",
@@ -37,8 +37,8 @@
   "skills/naming-convention-pro-2/run.py": "8a7098c5a96dce8a4031868f7541c45caa74f85da7de72a305c5c003653d305f",
   "skills/naming-convention-pro-2/selftest.py": "7f56619613492ca06ec37da91e63b8542c01d2bb38341a766d1f086047906add",
   "skills/naming-convention-pro-2/.phoenix/originality.json": "c75c41a59f404b601a6c8558fdba02c141ea734c0520b9dde22cabe4fcba5603",
-  "skills/naming-convention-pro-2/.phoenix/provenance.json": "a723f0dcd2208e1838bfc40f4c94a5fb35cf5f0b591441a8b0531ca22c7068ad",
-  "skills/naming-convention-pro-2/.phoenix/selftest_evidence.json": "8c6226fa912907358bc930f7bbbd12cf6919c9c5d656cc4437f354c55c6e307a",
+  "skills/naming-convention-pro-2/.phoenix/provenance.json": "ad3dc7adb3e6222378ac26cc577fcbd0f62aa667ac5ff79e6cb1d1fd550ed012",
+  "skills/naming-convention-pro-2/.phoenix/selftest_evidence.json": "4dd4f3188b62e26f1337699c3ced32885f7971ba008030ec55079b8668a56927",
   "skills/naming-convention-pro-2/references/creation/p0.md": "05abef8e4093b765713fb4111491e3ad3543eb684dc5d8fb319dc1371135b3a8",
   "skills/naming-convention-pro-2/references/creation/p1.md": "f05e8c08020e7e45495d398b441fd80d17683a8b4aa09b43d387c85f77a79cc1",
   "skills/naming-convention-pro-2/references/environment/p0.md": "4205c9d5a43a92f503893f715b55a71ce8ca39819f3a3ad3fe1079c46c816982",
@@ -54,8 +54,8 @@
   "skills/naming-convention-pro-3/run.py": "040c722ebe89023b0efdab0e1c5930bd1e0861b06c5fd86aa0f9a346196cb26b",
   "skills/naming-convention-pro-3/selftest.py": "e7fb1684062c6564f5abc7903270d0d12dc440ac59e0d8bc11c3ecff532deeef",
   "skills/naming-convention-pro-3/.phoenix/originality.json": "ba4d88ee73dc9e606a025716ea46631e4a06bfaea4a70143524588ef5e8d2ce9",
-  "skills/naming-convention-pro-3/.phoenix/provenance.json": "5718d9710327c091a021c69385784865526b656bad2f07c0b717c323766915a3",
-  "skills/naming-convention-pro-3/.phoenix/selftest_evidence.json": "99ae38e813d29904746bfa8efa6cefea07da1c3e199035d1678d1ef9fed1e742",
+  "skills/naming-convention-pro-3/.phoenix/provenance.json": "7097ecda15dde3518984cd823d847feda51e8cdf65b89420af5356cb1d54e7ca",
+  "skills/naming-convention-pro-3/.phoenix/selftest_evidence.json": "682a7f91355d41b61b15ac9a56dd39854deacf1727a2ccfe5154f9de97e69f2e",
   "skills/naming-convention-pro-3/references/creation/p0.md": "042ab49e94bea57e27e117d465e6cb159227bf22a92bd1020f4759e3ea3e250a",
   "skills/naming-convention-pro-3/references/creation/p1.md": "915b5cb58868ccb88a5b901d270f76b0543a741db76e23088b1a7d0cb576ad27",
   "skills/naming-convention-pro-3/references/environment/p0.md": "13bbe2dd50779e10761101fbd63993d4c90581d665252a7fa9777a2a82a10dae",
@@ -66,7 +66,7 @@
   "skills/naming-convention-pro-3/references/production/p1.md": "be73e6c53dc5d3b9f2c7fa51e22f6bf60064d15136fd840ea4f0675e7f8d32e8",
   "skills/naming-convention-pro-3/scripts/main.py": "277bad3522d1a95e80e79b1feec3d0a47afb96b2ba6c355a68c000d73b378dde"
  },
- "sealed_at": "2026-10-18T20:04:16",
+ "sealed_at": "2026-10-18T21:01:15",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ecommerce-newbie-coach",
- "merkle_root": "913f8f95c9a609e9ea290990621315ed00c726ca8e1b4cce7fb7634a7d1450ec",
+ "merkle_root": "5b9dc15f750002fcbfd8ba243a3f409a1d4e36c7784019b69e804e2d0da2eb34",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ecommerce-newbie-coach-1/run.py": "bf3c7f027853f22347744675cedfc865676b3b71e84200cb78801ae3d49976da",
   "skills/ecommerce-newbie-coach-1/selftest.py": "ab14b12d8fea73964f2163323c104085af8d99311ea5b069cd6a3a44404b3ace",
   "skills/ecommerce-newbie-coach-1/.phoenix/originality.json": "c069b90572ff47df3c28fad9ed9d2c29c1bf9fa96811a98a8cae41352d70358a",
-  "skills/ecommerce-newbie-coach-1/.phoenix/provenance.json": "1b15094afaaa294999721ba33e74d59106cb437404db2f4e51c37a8021bcad92",
-  "skills/ecommerce-newbie-coach-1/.phoenix/selftest_evidence.json": "85dacd05c5d6b499cbe9724d41fdc7f64f812f6264d1406d076ffe3baa6acfee",
+  "skills/ecommerce-newbie-coach-1/.phoenix/provenance.json": "6845854cc4adc73bb60c5978579c9ea515eb8b0cbbef15424dc2051e7c44f1fe",
+  "skills/ecommerce-newbie-coach-1/.phoenix/selftest_evidence.json": "6c20ff46a726b374bec6c107df07542253104eeda0f6a44f54a93fdf66d45ae4",
   "skills/ecommerce-newbie-coach-1/references/creation/p0.md": "d05837db1488f73f2344ce89c2651d7b7f384df7d70dd1decf557ecafffac443",
   "skills/ecommerce-newbie-coach-1/references/creation/p1.md": "7f68ad1ddfd0c5000344a9b9ed6c2b5f55fdca843f6d2046e1ab438ef3c5925c",
   "skills/ecommerce-newbie-coach-1/references/environment/p0.md": "95b79e4f5b39a18afba02f92eda09b2cb0156e05e62c5ab3b7c15ff245dc0c3c",
@@ -37,8 +37,8 @@
   "skills/ecommerce-newbie-coach-2/run.py": "97cf23acaa315b62192f5cd1fde4f1adae67641bb459a49dce29ca6d6cdf3d74",
   "skills/ecommerce-newbie-coach-2/selftest.py": "0b9111f6a9e741d6bee6868017b26e534b002996bece87b02347ac755363fb8e",
   "skills/ecommerce-newbie-coach-2/.phoenix/originality.json": "307036fc8e36eb995cc634bbc76fece474650d0753908aa514e79ca683480415",
-  "skills/ecommerce-newbie-coach-2/.phoenix/provenance.json": "84a2162e1b0fd706eec57d60714bca5cefd4f298f007c50c3ffaf4ce23f74545",
-  "skills/ecommerce-newbie-coach-2/.phoenix/selftest_evidence.json": "aa596b4f5cdbe447c8eeeb5a0b3bab8e40cdfb8d28910d8ec1be6d1598b1b895",
+  "skills/ecommerce-newbie-coach-2/.phoenix/provenance.json": "1da879a98cf66d611ea06cab9b2da16e67130330a9afb91bf06073832b426f33",
+  "skills/ecommerce-newbie-coach-2/.phoenix/selftest_evidence.json": "894ffc53d3281960f8e1b759ff1a436560919c9d51fa5686a8a9e0a59d8abcb9",
   "skills/ecommerce-newbie-coach-2/references/creation/p0.md": "8df5ed6046eb2f73bd8f7a6164f11e47cce21800748fa45538c5108595469a30",
   "skills/ecommerce-newbie-coach-2/references/creation/p1.md": "ae42937e30b83406633671668d0dccfb4ea39a2cf535c1dff28d668e9f10f22a",
   "skills/ecommerce-newbie-coach-2/references/environment/p0.md": "e5eab5dfa3541e6356500fd2d1ee81ca6c6be55c60e77e4f003b6660f9bbdde4",
@@ -54,8 +54,8 @@
   "skills/ecommerce-newbie-coach-3/run.py": "782288166736fa542f9ac244431aa107d77fe409b9cdd2ffa45043e1c52d0697",
   "skills/ecommerce-newbie-coach-3/selftest.py": "bd10eba3aba90309fd8cc0e614ca5d2bb8b5802e3b5bdabe1d9716c33f148830",
   "skills/ecommerce-newbie-coach-3/.phoenix/originality.json": "1f154568f101a362cae04098cee79698fd8b490dbe4d4815575cf06962599e4d",
-  "skills/ecommerce-newbie-coach-3/.phoenix/provenance.json": "2a44e5c61083fde56cbd55426063ea7a453131d0a294d6edbd1d3790c4712e00",
-  "skills/ecommerce-newbie-coach-3/.phoenix/selftest_evidence.json": "e01491b44116850ea8a09c0a1c5d4fb818cef803a14a3c71317040d626ffae83",
+  "skills/ecommerce-newbie-coach-3/.phoenix/provenance.json": "af8f364b74e88700aef4bd07e98765f6eac6fc1e1c9a4513b9908ebbbe0c8b1f",
+  "skills/ecommerce-newbie-coach-3/.phoenix/selftest_evidence.json": "912b7300ee3f2290ecefe1a9c514635290b29657d81068eba0b8f78b3e937bbc",
   "skills/ecommerce-newbie-coach-3/references/creation/p0.md": "7a5fc3a4a5f6acf4124e68bf03af14f73feab214efb29ee45dee199dfe83a3a3",
   "skills/ecommerce-newbie-coach-3/references/creation/p1.md": "9419d6801105515423d8bc2addfa7c355406a340af4133ddd36fbf27d8d18576",
   "skills/ecommerce-newbie-coach-3/references/environment/p0.md": "eb5067a64ebdcd02bcf5fb742dc0515ba6d27743ddf320efa80bb537bb2cbbbe",
@@ -66,7 +66,7 @@
   "skills/ecommerce-newbie-coach-3/references/production/p1.md": "2a37c672e5e195f2847a4a00718a2390eeac33303ac50ef4abc823187b647d4f",
   "skills/ecommerce-newbie-coach-3/scripts/main.py": "bcc0cd6c8966edb62342bb8d19739157ac5bf1dd7d3a7dd914adcbfd472d3acf"
  },
- "sealed_at": "2026-10-18T19:57:58",
+ "sealed_at": "2026-10-18T20:58:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "hospitality-service",
- "merkle_root": "b22c416db4cce3581d7aa6bf2e42e7e76fc49e82cf8d6c306dbe43531a1c6d11",
+ "merkle_root": "25e793c3f2e8503c48246b712314ea54f835bf998498e7d1c06a9fa76b95faad",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/hospitality-service-1/run.py": "57b5c448c1033abcbf859920de0653a46364360724b2b1637f22034ddb440a60",
   "skills/hospitality-service-1/selftest.py": "babbc45ad8995df56610eff9fedc4ca633eb54acf46cc309a7e8556b1270399e",
   "skills/hospitality-service-1/.phoenix/originality.json": "76e6c946ebcb409aafc58ed43ce2bdcf686866005a060d7170202fd19747768e",
-  "skills/hospitality-service-1/.phoenix/provenance.json": "ecbed166937a0988277b22c01baf57232cd3ec64496a0db4f3aee799f05ab162",
-  "skills/hospitality-service-1/.phoenix/selftest_evidence.json": "a3f148761683546ac5fa8b829709ae623b30631506d66ce864a4c0382fec4fe7",
+  "skills/hospitality-service-1/.phoenix/provenance.json": "c72fa8b44dca99501dfbb7e89e6733d6bc7f2a9a9da45667c24170470e41fe72",
+  "skills/hospitality-service-1/.phoenix/selftest_evidence.json": "1568a3067fb7bdafbf852a7e5e7323953a086c3eeeefa3e8d5535d10413546c5",
   "skills/hospitality-service-1/references/creation/p0.md": "4cc07ac68a5eaed9456fe7b5df023b6f9b3891a90579069ffb85fa64f56c9757",
   "skills/hospitality-service-1/references/creation/p1.md": "551b85499a65026572b809dc7cc4422ae35d9de5fe99de7abc60a68ee76a126f",
   "skills/hospitality-service-1/references/environment/p0.md": "3e097dcb6af6a8eb30ca76653c4db977e5f6c0920a5907c373a86e453c68d0f1",
@@ -37,8 +37,8 @@
   "skills/hospitality-service-2/run.py": "d6ea02cd671398e5fdd4f29a6f2bffa0d88cc716a2269bc5e6a989d9557cf441",
   "skills/hospitality-service-2/selftest.py": "10515f3f1213f81669593e07c3b2d99cbe9ff7c76e3ab889243f3625bd3d93ca",
   "skills/hospitality-service-2/.phoenix/originality.json": "c4e927a50360b7d98ea19b501cde2c26fcdc610f1a981bfc58d9e9909f8a5ceb",
-  "skills/hospitality-service-2/.phoenix/provenance.json": "a7ea5eaaa07afeccfa4393ef82d0d10553bc8c6f268b3087255d7d4316b35f18",
-  "skills/hospitality-service-2/.phoenix/selftest_evidence.json": "3db6cd8cbc4b07fe9a29c99e65f31162dd1d091cdeca4c45135198ae43357efb",
+  "skills/hospitality-service-2/.phoenix/provenance.json": "e30ad04d9566e2f4199cad1e0ee697c189d80a9a0049db9f42974f4226b519dc",
+  "skills/hospitality-service-2/.phoenix/selftest_evidence.json": "ebd42a58bff61ec07ea35be76a24a1ce585be6d582fa10bdc270f9716c008e51",
   "skills/hospitality-service-2/references/creation/p0.md": "42d58ce96fb04e173eca5e0866065412ad50a7208c510124d4f5ea5065ad2b6e",
   "skills/hospitality-service-2/references/creation/p1.md": "1fe8ec65b5ea21b42cb7e37ba58931b23ed032abcbd0a617c7da66c4887f6ce8",
   "skills/hospitality-service-2/references/environment/p0.md": "dc9c203faf0a27f096f0723c34d99ada2cedea5e78d93b0a3de6f2eba7df216f",
@@ -54,8 +54,8 @@
   "skills/hospitality-service-3/run.py": "574aff0a500081cdac80082880c502a77ff5c960209cdadaf0516234b27125c1",
   "skills/hospitality-service-3/selftest.py": "c8914e88e2a1c51c2cc89dcd1dfa4da592957e831d0fd644a91026462f8dd80a",
   "skills/hospitality-service-3/.phoenix/originality.json": "5c44474d51605944eb2d8bb21c70e44595efdb65308e488921ff4ccfe42387cd",
-  "skills/hospitality-service-3/.phoenix/provenance.json": "604b347ef92776937e6a2241d6e457b80eff0c83acffef81d6d70914916484bf",
-  "skills/hospitality-service-3/.phoenix/selftest_evidence.json": "474288886479ed9e8274c88cc88fe6c46d5e78bdfe5cdb7aaa7a1633d2ee5098",
+  "skills/hospitality-service-3/.phoenix/provenance.json": "1a34003626b410a3badbbf0b775fc13c2a179f5b02afc469319b59c306bfea85",
+  "skills/hospitality-service-3/.phoenix/selftest_evidence.json": "337105117c62acdea84fe6744c08f2b4961258d9ea94b4f429296518c114d1e1",
   "skills/hospitality-service-3/references/creation/p0.md": "d6ca938463cd4c0d033e7897a94cd862fbad79c3acebe6bee4171f104d4f9032",
   "skills/hospitality-service-3/references/creation/p1.md": "9a070c4d329b568e03e230f96fc7ce7b9a1723eb21b6a000325dbbd14b20a7fe",
   "skills/hospitality-service-3/references/environment/p0.md": "e9290743d1fd2c131cd5cdb195e652a48eef9af1821c042a7a8106373d06a2c1",
@@ -66,7 +66,7 @@
   "skills/hospitality-service-3/references/production/p1.md": "734a891f58a8faeda7d79c6cf47b2dd6278f1c8de4db232c3869d0706e887e44",
   "skills/hospitality-service-3/scripts/main.py": "adfb29f5c0f4977cdce2df63a34fdabc0adf7acc00b8fc09a91c44f736ea291d"
  },
- "sealed_at": "2026-10-18T20:00:54",
+ "sealed_at": "2026-10-18T20:59:36",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

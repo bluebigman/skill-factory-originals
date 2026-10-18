@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "intl-meeting-coach",
- "merkle_root": "54f44c2f50d5bf1c56868b9b6f6224561522259aebc0ccf61ed8b3df6582bd92",
+ "merkle_root": "62659b91f23c917e93f24cba603d97f8c352f78583ef54221784ab60a872230a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/intl-meeting-coach-1/run.py": "e51505e4512d0070e5af37ec91e6a954f6b813670dc97d3c8ccc018a94e0a7c1",
   "skills/intl-meeting-coach-1/selftest.py": "1d59defef9269ce721e4f2aef1169ea341443d843224fbcab20ca3daa39997af",
   "skills/intl-meeting-coach-1/.phoenix/originality.json": "86260b1a84f05c99ec4f7ab7ec02fe573b3aeaf072dccfbfe95625246c3e63b2",
-  "skills/intl-meeting-coach-1/.phoenix/provenance.json": "2b6b83f675391e828251d7395fe2c2b12cb9780be389523d23c663177d8c0049",
-  "skills/intl-meeting-coach-1/.phoenix/selftest_evidence.json": "4aac0ec4c9cb0c9ed49cff7770305c3ce43c8ee730f171516aa5b817f38d0187",
+  "skills/intl-meeting-coach-1/.phoenix/provenance.json": "789e36b614cc6059a58bf71206b314b77487b88d3fbbf2787affcfef51a1a732",
+  "skills/intl-meeting-coach-1/.phoenix/selftest_evidence.json": "140933b46af20fbed10bdcbec753faeefde3a9aa33b77ebe377337ef3e153c74",
   "skills/intl-meeting-coach-1/references/creation/p0.md": "8792933f39d6e8364d3400afef10319a67f1d9c94965f551f373199b4cc302e9",
   "skills/intl-meeting-coach-1/references/creation/p1.md": "232df4f8fa26138130e72099b809aad4c5dacd0895523a063fcdc51732de50be",
   "skills/intl-meeting-coach-1/references/environment/p0.md": "3fe5d5679b51b877d3fd33b346eb4f8a50d9ccff91c9655844350e2e5eb65290",
@@ -37,8 +37,8 @@
   "skills/intl-meeting-coach-2/run.py": "70160258a61c8d4e84b48e6883ca42ab030e3b514f259a4fc6b50ceeddcf017d",
   "skills/intl-meeting-coach-2/selftest.py": "a5aacb5dbd86596ab617da662e6765a795f587ef6391ff4e88fd484552087062",
   "skills/intl-meeting-coach-2/.phoenix/originality.json": "1530ef2b0cdc359d3e026d66fa7342496d7386e63f1087f33bfd0e478bf72f6d",
-  "skills/intl-meeting-coach-2/.phoenix/provenance.json": "dff877c137563dd4a9a35c1bff80ce40eba7a12aa6a0fd070e17cd9d08e94672",
-  "skills/intl-meeting-coach-2/.phoenix/selftest_evidence.json": "bcb290bf5d7ba1359bf2843dcb0b1801669f751182372da1c3d6031d78a85cae",
+  "skills/intl-meeting-coach-2/.phoenix/provenance.json": "6108e01f150643e2b3ff8b90fbd499e823e5ee8307a7dc627a70c05a8c384670",
+  "skills/intl-meeting-coach-2/.phoenix/selftest_evidence.json": "928031439354a0dcc5aafa19525792a96ee06808d5dc2cf3c0c01cc0bd1aea4a",
   "skills/intl-meeting-coach-2/references/creation/p0.md": "73e91bb3966c601a194194ab6fa16b53b56d10c4a0495a13cedbac4b17cc2eea",
   "skills/intl-meeting-coach-2/references/creation/p1.md": "3cc2b1ca03687a7401496b661f8e4d2aaea31272cff56fa8f8292f5587951ca0",
   "skills/intl-meeting-coach-2/references/environment/p0.md": "2349e28c72c73a1286ecf6cf304ce28efaf10c19c76e690908c859e92a0e2868",
@@ -54,8 +54,8 @@
   "skills/intl-meeting-coach-3/run.py": "1b2b90e620108b05314842880174be4a4bd124cc1175407bdc759baa9565e12f",
   "skills/intl-meeting-coach-3/selftest.py": "29c68041c16da6789476b4b755cda2877ac692dcd317ad5bda63094faca023fe",
   "skills/intl-meeting-coach-3/.phoenix/originality.json": "fd1ad57f0c73f457f8be29f1efbc05af69349d6b1a468c3503fe9f515fcae281",
-  "skills/intl-meeting-coach-3/.phoenix/provenance.json": "2cf98cc676b72795a4fb2bf432b73ed537d80e04b4f0cb67559c077b0e26e216",
-  "skills/intl-meeting-coach-3/.phoenix/selftest_evidence.json": "29e0947c176737219071ecb8c5887ae5f10f21482c6af725e38f7383cf1bf614",
+  "skills/intl-meeting-coach-3/.phoenix/provenance.json": "92d21eb9e11d093c9083e8eb88e5c8801eacb0502923015db6470ee9b232e8ac",
+  "skills/intl-meeting-coach-3/.phoenix/selftest_evidence.json": "fc2ea9bcd05620ef35e07289670161618562c2b78a59f069ed99f1553737a3db",
   "skills/intl-meeting-coach-3/references/creation/p0.md": "e4b2607a60e6187b9cdb1bd96a8b5c1407d61d3aca34a6fd6a6e3536244852af",
   "skills/intl-meeting-coach-3/references/creation/p1.md": "2487273eca9c00ccfc87721e7e42fea10c9c335a6a014e2fad1d855c562d040c",
   "skills/intl-meeting-coach-3/references/environment/p0.md": "6a6718a664fda33a06f1c64900e8a755d3989a2c425a079ddde6a7cbfb41cb39",
@@ -66,7 +66,7 @@
   "skills/intl-meeting-coach-3/references/production/p1.md": "bc9fefcae2ed24c30e612510189109d027d393c0e9e41b278898a1bcc7d0192e",
   "skills/intl-meeting-coach-3/scripts/main.py": "5dd3df5cda16a15c5658e48b62caf4095e146c2eca40494e0989f30d1786c731"
  },
- "sealed_at": "2026-10-18T20:01:45",
+ "sealed_at": "2026-10-18T20:59:56",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

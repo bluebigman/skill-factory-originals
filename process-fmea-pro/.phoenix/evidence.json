@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "process-fmea-pro",
- "merkle_root": "cd763dd788ec8a474aa96ab5e7253b2e1aa9d17c5e542624ee9a316ed6acc569",
+ "merkle_root": "00fd44eef613d44a42fa8a5ee36462cfd5b9ce05d6bbbce964da8243f24f1799",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/process-fmea-pro-1/run.py": "824f9bdbe0bbe3e1726f03242ced2e40b5f70585505354cb2aaf69ebabf7021a",
   "skills/process-fmea-pro-1/selftest.py": "c03a98f3d845337db0ec3ecdc8f872bb1cc2b8b588064f606d382a383e8087c4",
   "skills/process-fmea-pro-1/.phoenix/originality.json": "12f5ffebfa2266411e8226276321daeb1c60845244c58c4acbca6532ba674578",
-  "skills/process-fmea-pro-1/.phoenix/provenance.json": "1a7e5c2fc2cf7b0fa4b8a8a5f6a818b37dd644b65f93d3410bc457894c1a176a",
-  "skills/process-fmea-pro-1/.phoenix/selftest_evidence.json": "92ef04d6aa142e9eaa577f649c05318d75c5ca84730b1a7330e310956754c70e",
+  "skills/process-fmea-pro-1/.phoenix/provenance.json": "f628d5be954940889c80512ca427cfc53b7aa7275f422b596329a3772a71e374",
+  "skills/process-fmea-pro-1/.phoenix/selftest_evidence.json": "a16510509dced99fde6321c50d16be6628202753cc76654776375370c8b2e487",
   "skills/process-fmea-pro-1/references/creation/p0.md": "7a5a2e70918343d714bffd4ce18b1e59df85471e9996ca892501ff54cd9e0f4a",
   "skills/process-fmea-pro-1/references/creation/p1.md": "16672430c3f1574b0a163387617e750fec4dccc4c3a9f00131327411bcc68617",
   "skills/process-fmea-pro-1/references/environment/p0.md": "bb94242adae06b8b97e42b400a50f2030c4c3fbde92a862be20f714562e7012e",
@@ -37,8 +37,8 @@
   "skills/process-fmea-pro-2/run.py": "ddde941c0c808fb19cb0d0b6e013b8701d13291519e7a8cf17f915656293ce03",
   "skills/process-fmea-pro-2/selftest.py": "d808e4ccb7f40f5a57d2850cc58fe64bf3e684b1ff91005ab1317027137e32c1",
   "skills/process-fmea-pro-2/.phoenix/originality.json": "a76d36c64ee6a437afb4704de9ec690f6edf97234f4a62a0220be2fe69fcc7a3",
-  "skills/process-fmea-pro-2/.phoenix/provenance.json": "26a42a1afbe7c6973b666f85f29ac19bfe0c5be87dd73b3ea94f4ce7698fb0a1",
-  "skills/process-fmea-pro-2/.phoenix/selftest_evidence.json": "66826e4c12122e50da3785a2520c33d5ab07bfa7f48eb7bc0645a0cb15ef52db",
+  "skills/process-fmea-pro-2/.phoenix/provenance.json": "e10ea33d1574f646d9ce584eb1e9b104bba79fa535f0564079dfc641d31b2ab5",
+  "skills/process-fmea-pro-2/.phoenix/selftest_evidence.json": "8a62007076792dd976bfbebd4e36aaed55d3307e2f3ed05c177706c9b7a2cbe9",
   "skills/process-fmea-pro-2/references/creation/p0.md": "55a38797c22eec39209792ec4d7f81f7f8e633e0bf7ef100990fe7044961c868",
   "skills/process-fmea-pro-2/references/creation/p1.md": "378f2b46be81c29ff456ce64708e91e186575c1a76d16b6c8aae6ffdc6ecb3e2",
   "skills/process-fmea-pro-2/references/environment/p0.md": "cfce9938076fc6e634cb1ad27f40ff913b8453929c5b3960b2953a210885a31f",
@@ -54,8 +54,8 @@
   "skills/process-fmea-pro-3/run.py": "89134a9a13d41ae32dde0538d9914ab054559ca1ae933f5d667f928548832fe3",
   "skills/process-fmea-pro-3/selftest.py": "6c24c761d9bfdae09ce9f82e16246761fc473d38516f42885eee2cb661676953",
   "skills/process-fmea-pro-3/.phoenix/originality.json": "01c44367adbbb56ffc482faa3f41b7804a24f7fb1e8a4beba0a4f98222dd9eed",
-  "skills/process-fmea-pro-3/.phoenix/provenance.json": "c374587ca6946cf4e1a4ed99fd95950d20a11909e5419b4bb29b2b68326f5b81",
-  "skills/process-fmea-pro-3/.phoenix/selftest_evidence.json": "ccff35dc2ee37f39cb48b51bf659fa6d9cb4861f58e791c0be4f7fe955f371c2",
+  "skills/process-fmea-pro-3/.phoenix/provenance.json": "5821002094aeeb9bd3a71d8cc58e85c12515ebc1463ffbfa06f44df74dd0cff3",
+  "skills/process-fmea-pro-3/.phoenix/selftest_evidence.json": "02a1389cc1448871dce52d4a057726ce0629b3c9c50344ea4a868d3cf7e9c8ae",
   "skills/process-fmea-pro-3/references/creation/p0.md": "5c96b06e2834081c50c014a96d0d5668e2015630d34d8dc797e1d1003763eef3",
   "skills/process-fmea-pro-3/references/creation/p1.md": "dd32e833ef9b04556075338b6ce5a2a7907577b37ff42d27ab527e1f352dbaf0",
   "skills/process-fmea-pro-3/references/environment/p0.md": "bbfe7b96d4b78ff7569d1ecfd62216f785bf5822f0e61b1636fa93b42e1e65e5",
@@ -66,7 +66,7 @@
   "skills/process-fmea-pro-3/references/production/p1.md": "1c50a1af3d1948d8bc0bec1dca0fc697845c6e90ca84a5a31694719e819deaa7",
   "skills/process-fmea-pro-3/scripts/main.py": "39ac3cb5468f1a0514b637292b6e00c7aefa0f2619d80cca0c0706b7ac678465"
  },
- "sealed_at": "2026-10-18T20:06:26",
+ "sealed_at": "2026-10-18T21:02:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

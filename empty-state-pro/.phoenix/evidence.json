@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "empty-state-pro",
- "merkle_root": "768037ab79d6e22bfce553ab9bafcf3378c4e23015b9d3cfa5622c82a962f6ab",
+ "merkle_root": "18556110a6028ef01810e4e9f783bdb9a7a79bb78a8900225a26adade78f6b4a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/empty-state-pro-1/run.py": "2fe4961e8ff398d3b976b369b164b7536108429c6afd9f0583f2435cac08cf7d",
   "skills/empty-state-pro-1/selftest.py": "b0cdcb32d990d7dd848d2cb5678f9c86b35254d6fbbc3c67d13a666ba668f6c4",
   "skills/empty-state-pro-1/.phoenix/originality.json": "c071ed5034624ce723eb887303d72cead6bb6a888926b3b801be70f90cb2e09e",
-  "skills/empty-state-pro-1/.phoenix/provenance.json": "733fbc17e25ff385425798bef582105b51ce51ff347b55b9198a35e5ef23c131",
-  "skills/empty-state-pro-1/.phoenix/selftest_evidence.json": "57dbf83aebe186f57260c90dda73a4a0258aada518fd7a6f13a32d5224ed6db2",
+  "skills/empty-state-pro-1/.phoenix/provenance.json": "89ea0b88ae92ebb56359d1350a6ef37c74538a2af49ccf6fede2285317724826",
+  "skills/empty-state-pro-1/.phoenix/selftest_evidence.json": "fe1c86cffec30ade9376931b84cb1d57fe3cd75f865e24761f928a4be533cdc3",
   "skills/empty-state-pro-1/references/creation/p0.md": "7b214d05444b38fb8e780d3aa00a5169cd488556b27e30d8a9fd1ead243247e1",
   "skills/empty-state-pro-1/references/creation/p1.md": "b49e7d14cd681b4591a23df6615e5baa05abe843e3ec92165495cf65637aeb37",
   "skills/empty-state-pro-1/references/environment/p0.md": "4105092c3e6860ed4b928adfcab9385bf38fbcbf43f904e6bf223af35e6fd24b",
@@ -37,8 +37,8 @@
   "skills/empty-state-pro-2/run.py": "016a774499bcd9fb36758a0c9e11a8369964a9b58beaa19d37dec51d78810924",
   "skills/empty-state-pro-2/selftest.py": "ddefd0208f5bc252ead299ecc2b81b05edbcbf62e9ddd4e44ded4505297e4bf2",
   "skills/empty-state-pro-2/.phoenix/originality.json": "00713dd0288ac6bae540513328d2540c0a852b7fbab5495b6bcd817fb98ba6e2",
-  "skills/empty-state-pro-2/.phoenix/provenance.json": "c47e431811d8911e29f48de41a6c74fec2e6e4cac3b6163b9834503de764a534",
-  "skills/empty-state-pro-2/.phoenix/selftest_evidence.json": "b863bc905fdcb3a1d564e730725fa5915b268898b411ebd9ab4dfbe91cdf100d",
+  "skills/empty-state-pro-2/.phoenix/provenance.json": "d28cb5067da343ee9bad45a662c674601dab6b1c6479e3d6c5843ba69a507dfa",
+  "skills/empty-state-pro-2/.phoenix/selftest_evidence.json": "5e32dc9717569408cec0c84b75a57ccb1f707cbba8b1f4c1057b5d0706c28735",
   "skills/empty-state-pro-2/references/creation/p0.md": "a031ae31ae9e7c22356c314e8d1348fbc4852a0561f9a4421fd5344f095434a1",
   "skills/empty-state-pro-2/references/creation/p1.md": "b53d86813802b81b0d0f8d2d3e2e981b3ba31898fdae1451920d228f2c11a6c8",
   "skills/empty-state-pro-2/references/environment/p0.md": "ddfa331e0b25ed73aed1a45ff5c31f43edca5becab64582783c4a809034f4083",
@@ -54,8 +54,8 @@
   "skills/empty-state-pro-3/run.py": "9eae0b3b15613f4b7856a360f694cab9bef5b99306833591ea7030fcf3c62246",
   "skills/empty-state-pro-3/selftest.py": "d5e2b9c8c4e5eda2a747560ec660f486a4ea2a63e3275557f179d712b32a3581",
   "skills/empty-state-pro-3/.phoenix/originality.json": "71037c281926bba99f679d20dfe0e1a0db20e32b74f7c1f7ff6b7f9cb321005d",
-  "skills/empty-state-pro-3/.phoenix/provenance.json": "fd27106843b99588e69e1d35b4e19c3a3a73882058a8306b05e7d5a7f1f4fa10",
-  "skills/empty-state-pro-3/.phoenix/selftest_evidence.json": "3b99098c0bccaf4f26f1696a716548cf9d1972d1a41c663ec4be37d32072710d",
+  "skills/empty-state-pro-3/.phoenix/provenance.json": "1f84b667e7df99f37228da794126213afac0858c9f9d5a2e655f2e3dd2b8e1b4",
+  "skills/empty-state-pro-3/.phoenix/selftest_evidence.json": "66f4ba41c037ecbe965d9c35d10fdddad2e14be2b6f998e69b59a34470026705",
   "skills/empty-state-pro-3/references/creation/p0.md": "72f2a192318b43b1b9bf3ca04b3b2ac203f2d0815cf81423b30a46bc89b07e87",
   "skills/empty-state-pro-3/references/creation/p1.md": "c007e056812e53c39a8dc988e17501f05fb07cd211fd7faf3b29c70f989de5ab",
   "skills/empty-state-pro-3/references/environment/p0.md": "1f05aa99f6af54d08a35c4542e263e72715147e445edb24309d505bf1d1c0d0f",
@@ -66,7 +66,7 @@
   "skills/empty-state-pro-3/references/production/p1.md": "d8b34041c71392c5ab15b1cb183c064d1cc48801e39d21a8bb5bfd81d4ada055",
   "skills/empty-state-pro-3/scripts/main.py": "d9472199783c063b36b0d550a6b2cb3394e6f41983f3b2d1e60237d0e281c443"
  },
- "sealed_at": "2026-10-18T19:58:15",
+ "sealed_at": "2026-10-18T20:58:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "table-formula-pro",
- "merkle_root": "869e4bfc06edbf71ac2c92669f41c68968acbe233e9d660fdd87bb7e0e13253c",
+ "merkle_root": "fbb308d30005e025a2934e034edc39747b5f06d8dcc7b85cc0eeb127a3691ba7",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/table-formula-pro-1/run.py": "0c32081600d7acc500476a775e4316371df85346283a3117ce63b3b71cda78ae",
   "skills/table-formula-pro-1/selftest.py": "10efda64c6b54dfd12295a8d27224e82998d25519a96bf796b0f1ea66ce84e18",
   "skills/table-formula-pro-1/.phoenix/originality.json": "268f7ac595157c5d2eff226afa52d1cdb3e87a4b0a3d28cc0eb719a76d87d666",
-  "skills/table-formula-pro-1/.phoenix/provenance.json": "464d9df85f68a13b54df604edb720a3104aaffe0c8b28f757c9dcdb22afddf00",
-  "skills/table-formula-pro-1/.phoenix/selftest_evidence.json": "457f03dcd5ea7084fb1b7255ceaf7f26488cf971f0c22d37649c6a6d226629d5",
+  "skills/table-formula-pro-1/.phoenix/provenance.json": "d1f6d248e42af4a5e6467d11246e48ef107a6354ec8032ceac361acb79e179c6",
+  "skills/table-formula-pro-1/.phoenix/selftest_evidence.json": "e811d876c32ad8abf48394af9d5c2c826974a3f396fdd199e031e71834d81b56",
   "skills/table-formula-pro-1/references/creation/p0.md": "506c6563241bf1fab654036aa62967f2bbf3dc393f156c1b4e3dbb7fc85293d7",
   "skills/table-formula-pro-1/references/creation/p1.md": "2a6efd8cfa2cd3608dfaaab0facddf5bbf9bd71ce4108854cd459edd8cbecfec",
   "skills/table-formula-pro-1/references/environment/p0.md": "5a386416cc36d4dfe47ed77f8ae18d5bd51dde14f421a9fa07d263198a213eba",
@@ -37,8 +37,8 @@
   "skills/table-formula-pro-2/run.py": "8a98ab70868a0321acdf1209cbf113938df7a42dabde0a75aa502ae59ad02878",
   "skills/table-formula-pro-2/selftest.py": "79fa796b8f348014b6378173d3803521c742357b4692e1bfde923f9860adfb15",
   "skills/table-formula-pro-2/.phoenix/originality.json": "d844744d63ed52884c9c1fea699b8a379dc88a7555c67ac2de81e35d3c50a40b",
-  "skills/table-formula-pro-2/.phoenix/provenance.json": "31275847c20776fe7f2278d17b896c25152942fe0a17d13a1cb0ef9ae54f2a94",
-  "skills/table-formula-pro-2/.phoenix/selftest_evidence.json": "2236f923595dc638ed96b42e44f4994cf25ed6e7c89288e5b3ca135150703e7f",
+  "skills/table-formula-pro-2/.phoenix/provenance.json": "2c68c415ef3594ea6a6922bb124988e170bf7f78f28fab77d05fbe4f02a2b195",
+  "skills/table-formula-pro-2/.phoenix/selftest_evidence.json": "486e56375b898e8e4d1702240518b396d60d38cd37878a8e2b50019b1fdcc889",
   "skills/table-formula-pro-2/references/creation/p0.md": "dfaed34074c6a1f57950379cc4028d5255872b8f8277f7154de9394e76a2b670",
   "skills/table-formula-pro-2/references/creation/p1.md": "000f0000e12bf4f259514a1e41ff2962fc0d58cc51f17fccf10217a802e6004e",
   "skills/table-formula-pro-2/references/environment/p0.md": "a7c5aa0e42eea4f190c913482c79199eed41537c3262ceef85ce3bd8cd341697",
@@ -54,8 +54,8 @@
   "skills/table-formula-pro-3/run.py": "c04c523cfe8d9abe142e4df41903bce3028b27a554f57b71f3aa3862d1d32917",
   "skills/table-formula-pro-3/selftest.py": "038aaf54271b0d32bd89e6a1df8b88222e1b3d317350c52db8b75daba12d80b8",
   "skills/table-formula-pro-3/.phoenix/originality.json": "015dc9d7a08f58df40d8358a91c969c1960e5a40dce17d57b35541b498e8c0de",
-  "skills/table-formula-pro-3/.phoenix/provenance.json": "3f88f9bdb7997dd71358a521f1451931ce85aaf8c1f81cd0185ac5eaca459877",
-  "skills/table-formula-pro-3/.phoenix/selftest_evidence.json": "b8e2ddbfd1577cf89284c0c5e4acf220b672f325e7d1f60989e098a4c4b12209",
+  "skills/table-formula-pro-3/.phoenix/provenance.json": "82795c02d1289558b97028ea6f5fc945bf2f265483792b5937bf309b76faf1b0",
+  "skills/table-formula-pro-3/.phoenix/selftest_evidence.json": "b27eb875a8325d67d3fa6009359dd8cd19eb29cc450f0ef4a5a21b7f014db677",
   "skills/table-formula-pro-3/references/creation/p0.md": "39250093417d0761cca6d21f1dc312aee0ccc3e62b39c05e9fc478d303fc9e69",
   "skills/table-formula-pro-3/references/creation/p1.md": "019719da7389ebad1a43de45cbac4f0eb97cfb41307f04e8c0afbd46e7ec348c",
   "skills/table-formula-pro-3/references/environment/p0.md": "01f8c421f60f83c4ee7a8769af636cdae00c1c571d4ab35c4799b0505ba1aa84",
@@ -66,7 +66,7 @@
   "skills/table-formula-pro-3/references/production/p1.md": "60653d6411bf45078368ea54e27ff643116b7ecb8977bc3c27641713715c9570",
   "skills/table-formula-pro-3/scripts/main.py": "7c3a7e571930079c64b5ea9389578d278ff692dbfc33f2bd6ee4ddb1353d9326"
  },
- "sealed_at": "2026-10-18T20:10:49",
+ "sealed_at": "2026-10-18T21:04:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:00:35",
+ "at": "2026-10-18T20:59:26",
  "skill": "history-context-read-3",
  "slug": "history-context-read",
  "passed": true,

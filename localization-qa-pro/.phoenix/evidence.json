@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "localization-qa-pro",
- "merkle_root": "b8f2ccc7cbd4872868003b1d5aa194d8469c69c18cc1aaa26041cfce6a5a9a47",
+ "merkle_root": "ad17dbdda03c1dfbd13dc6eea9760012dbfac3d6535863836b08474eb1df498b",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/localization-qa-pro-1/run.py": "73dd22f73f7e0fd476a8092825aa8a36c5c53445b0fd8bbf90a363c2adb0f259",
   "skills/localization-qa-pro-1/selftest.py": "6002f59163c6f2cf840ff584910ca50fc180114c6d541e8b0f0ee5e4c447f0c5",
   "skills/localization-qa-pro-1/.phoenix/originality.json": "22bf6634db81f4171623831b9a2e282085275b8db68f6130776f0fb16a0ff2bc",
-  "skills/localization-qa-pro-1/.phoenix/provenance.json": "c2481fab4d3db35250916d322583ed11f2a2cd323fc14cc188f4ac12ea832a3e",
-  "skills/localization-qa-pro-1/.phoenix/selftest_evidence.json": "15cb1d7b9574434f60737c773070b3dd685c856906ea672d8cb22fb475587e98",
+  "skills/localization-qa-pro-1/.phoenix/provenance.json": "ab2dc15f18c41b7ee39cd4144a96bc3dd99b48729989c16260be169d41af2f8f",
+  "skills/localization-qa-pro-1/.phoenix/selftest_evidence.json": "d4fd8450e6db8e7346d74759dc78eda5b64c81186ac5d092c4909b874b9dfa46",
   "skills/localization-qa-pro-1/references/creation/p0.md": "9c7751a92f856e25e6b02c75215138d7a154659039a2b20b88cc10c97d81a0f7",
   "skills/localization-qa-pro-1/references/creation/p1.md": "5168e2b0c7c158b913abadecbf003f58ba6128d60a653a25ee4676f1036c3ed2",
   "skills/localization-qa-pro-1/references/environment/p0.md": "cc0d2f3dd1cc04976324898e9e5bc4e5b39c8cfd82a6f808f1dc57f3d5610dab",
@@ -37,8 +37,8 @@
   "skills/localization-qa-pro-2/run.py": "8ce47c5a8fcaff7a53e66e8fdb96fec8f316041cd8de928fd126a6b8ce7d6def",
   "skills/localization-qa-pro-2/selftest.py": "acb4e4e097ebbddd1604c11e413e6832a3c10cd3e1cbf8241da2843425023278",
   "skills/localization-qa-pro-2/.phoenix/originality.json": "123d9d9ec95bad3a9f3615dd8b216c5e990350acfaad11d75eb12865a82b55c3",
-  "skills/localization-qa-pro-2/.phoenix/provenance.json": "e86cdd819ad256855ef8d54d08da4b06bab3bc1e42fe7cdc5f1f2c49e1710afc",
-  "skills/localization-qa-pro-2/.phoenix/selftest_evidence.json": "abc202fafd13b316df51a751f482f4a656d9963154a788ec89680146772ae0c0",
+  "skills/localization-qa-pro-2/.phoenix/provenance.json": "e34a40cf1b11d4c00e2bdfbc257fe56c3f193e9d5b28a8ee026c02f60ffb6052",
+  "skills/localization-qa-pro-2/.phoenix/selftest_evidence.json": "d7c59748ddc5181c3954d4aa0a48012972b27a66964726074a23ac10fb77ef62",
   "skills/localization-qa-pro-2/references/creation/p0.md": "791925c064c25a3a310692fa1ae5aa91f1f387c7ba99c8854ab62d0be35695d6",
   "skills/localization-qa-pro-2/references/creation/p1.md": "50f5d468bfab2fed8aabb8eb3cb4b1e41c671aefe50d767a6c47ade6fa7c39c5",
   "skills/localization-qa-pro-2/references/environment/p0.md": "d11a68e926173ff5af54ba592e89405dbfec34b477b1aedf5281c7a2d17f76fb",
@@ -54,8 +54,8 @@
   "skills/localization-qa-pro-3/run.py": "675db325697feedfe7731db960c93a2d7bed281fb6708d6f0ab66c1a28a11b68",
   "skills/localization-qa-pro-3/selftest.py": "9fffcf128fe0b17c46fafb0c80826bf7992903f4f449d3425971d9aeac64b274",
   "skills/localization-qa-pro-3/.phoenix/originality.json": "19b71d93c0adeacfd6ee0324fe99f55ae5c7699437f251984456fba00300a3f4",
-  "skills/localization-qa-pro-3/.phoenix/provenance.json": "32063fefba81bb6aee3581ad7da5511a583276531554117620efc1a0fd3dcd71",
-  "skills/localization-qa-pro-3/.phoenix/selftest_evidence.json": "0c77373debb28e4b0cda321da3909e8630fcb34983127628249b995a4372bfad",
+  "skills/localization-qa-pro-3/.phoenix/provenance.json": "dd041a86078b3cd954de8f2344493129ea5dc3771fa445e7b90ae55bbecb3f40",
+  "skills/localization-qa-pro-3/.phoenix/selftest_evidence.json": "a5e12660bf6562356bdd6771dd1cef9fe56b05a1f768f3885d17d99200e39523",
   "skills/localization-qa-pro-3/references/creation/p0.md": "00982582cef1e8ecbdf241d488df594d3d05c096134e60b315dc06cd50bde2cd",
   "skills/localization-qa-pro-3/references/creation/p1.md": "b72f8347b6bea6d4a8cdccbc1900ec9c96a5576773583596da82d35c1bc6dc66",
   "skills/localization-qa-pro-3/references/environment/p0.md": "dbf198e830e74ef912cd6a63abb1e71e75d3dd0cc0d162af38e15a2861a8186d",
@@ -66,7 +66,7 @@
   "skills/localization-qa-pro-3/references/production/p1.md": "34c6029e738c7b225f48bac7c556d44de770ef7f6388c24e87462921d7693e08",
   "skills/localization-qa-pro-3/scripts/main.py": "340582641d61bb7bc05b0bd781c0f0c2287629553c3aa50ef01e6981d0c75968"
  },
- "sealed_at": "2026-10-18T20:02:44",
+ "sealed_at": "2026-10-18T21:00:26",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

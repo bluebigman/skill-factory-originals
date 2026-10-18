@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "log-pattern-mining",
- "merkle_root": "7973543570224c7b9114acc994021f18aad17d84298eb0b66f8234a7a0e4054a",
+ "merkle_root": "0ab81a44c2918a2a9b2709f77ed50d3b3fa33fbe1d330f3921ca65c1a2c27baf",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/log-pattern-mining-1/run.py": "56c857c766c85395a05c480f648d8839a3f6d7cdaa5ae56f8ecf314ff4a089c6",
   "skills/log-pattern-mining-1/selftest.py": "8be4c8474f135430f3b0aa600dc121f6021ba54ae707c79c43f2f019cae52f69",
   "skills/log-pattern-mining-1/.phoenix/originality.json": "00551b4c6603a1dff47df2da0e89484a60754388730278c45dbf9f45eddcba0e",
-  "skills/log-pattern-mining-1/.phoenix/provenance.json": "310942a094d9112e607def50e8369ea5272fd5e4cfb2fb2053aa1b562e61d669",
-  "skills/log-pattern-mining-1/.phoenix/selftest_evidence.json": "bf6fb260a300e2285add49d62a50f4dbb891353739d080aed3fe81e69b2269fb",
+  "skills/log-pattern-mining-1/.phoenix/provenance.json": "cd162bfbc4c777f4730a1134a3fa54da4d048000430722660906033d091a2e88",
+  "skills/log-pattern-mining-1/.phoenix/selftest_evidence.json": "c25d940e3e6f62259a6b01312deb7e8dfb1177525f626c023404cbde5df3e3df",
   "skills/log-pattern-mining-1/references/creation/p0.md": "e41686c385fb923c7623d47a72e4635f98f83ec41d9f91e4623cd2c68b261ba1",
   "skills/log-pattern-mining-1/references/creation/p1.md": "abed3e89b0e6da1b1047807611d99c955f28ac96dfacfb5e7e71b9001b02f7ac",
   "skills/log-pattern-mining-1/references/environment/p0.md": "c7b2d15a1f3ffd0fb56b2901b2f63b4313700ea652bcdee24d99d60ed694340b",
@@ -37,8 +37,8 @@
   "skills/log-pattern-mining-2/run.py": "6f2512d0c244a3932b573b3248c1e86be990b1a24aa4544b5d4c68cdf4c7ea28",
   "skills/log-pattern-mining-2/selftest.py": "5afa0b03df4b0b3f3a427f5982982418a91a8162d22d68470e54741a4a79e690",
   "skills/log-pattern-mining-2/.phoenix/originality.json": "7b138a05dcd0b422e0c457a838d19cfa1d497a55e6a4b72e38f0a49b808e7eed",
-  "skills/log-pattern-mining-2/.phoenix/provenance.json": "3471c2e853e4f6b9a906099a9edf1f614a51fd5694a36cab23ecc8f68b68a896",
-  "skills/log-pattern-mining-2/.phoenix/selftest_evidence.json": "9cd95005307f5d86b14954de00e13926373813cef7e0e27d0af41cc11c939b19",
+  "skills/log-pattern-mining-2/.phoenix/provenance.json": "45b86695be9307814aae9043a3fcac38ae419d09b1045b8afb37c02635d1fa5a",
+  "skills/log-pattern-mining-2/.phoenix/selftest_evidence.json": "b0b9b6b2167a726d31e4d912c6857eaa532435fc0abee676c0f688002b61a7e2",
   "skills/log-pattern-mining-2/references/creation/p0.md": "0c5c26371af65c0790948a7fc4c2495e85d888cd93d5e8e0810792c64c22a2e8",
   "skills/log-pattern-mining-2/references/creation/p1.md": "9c0bc5556ca0eed95bde856f4ecbc92bfcaae6412484a38fd17cd777921a825f",
   "skills/log-pattern-mining-2/references/environment/p0.md": "cb67dd3212a45f9d61163be8cf79600d103df1cf5271cebf29a6b3d17386df28",
@@ -54,8 +54,8 @@
   "skills/log-pattern-mining-3/run.py": "27271f2df528b0a865602ba64508c842aa024f21d165f4ca5a28e7f27fa265b5",
   "skills/log-pattern-mining-3/selftest.py": "3de1cf8933d1edf354528000ad60c752741bf76c8301715a8d17430a7b6bcabf",
   "skills/log-pattern-mining-3/.phoenix/originality.json": "718a28097a520df69c0c1650f28f40ea9b0dff3be9b4607c52791d3504f629fb",
-  "skills/log-pattern-mining-3/.phoenix/provenance.json": "41c77be3e37cfcb1dbcc94652c4bea528d6c381c360d8921d67ecfe15017bc01",
-  "skills/log-pattern-mining-3/.phoenix/selftest_evidence.json": "b4a009e1ef45e679928a2aa9dd103ef4ee2859d9e439512ab7dcb3b5a9e3c940",
+  "skills/log-pattern-mining-3/.phoenix/provenance.json": "ceac95303bc961f42e20e92f95fdce17acc33d17da02be1599b36d171170b734",
+  "skills/log-pattern-mining-3/.phoenix/selftest_evidence.json": "4580170361efb8fc7c1b442b33c81cf64ac2a7458d62fd9fe567e618b6cce5a7",
   "skills/log-pattern-mining-3/references/creation/p0.md": "0ebc5c257246b45dd1c049b91d9575e584a198c344f4fc87b78bc7b5c6579454",
   "skills/log-pattern-mining-3/references/creation/p1.md": "5d43ea0979c94d25e99dfbc6c6b661ae651c737d603cd0244227744fb2a00e69",
   "skills/log-pattern-mining-3/references/environment/p0.md": "4d424eb15fd13e3f47634cda2e76df6a47f1f3ed19f473bb4926ba899bae96e1",
@@ -66,7 +66,7 @@
   "skills/log-pattern-mining-3/references/production/p1.md": "ad6f739a5a4bd27754808ead55dc0cefaf6c07e503d5b53268352aaab1558ed7",
   "skills/log-pattern-mining-3/scripts/main.py": "6caab1c731da2fd2e873daea9b077a2e3ffe523c3be2cb7002731ed62921c044"
  },
- "sealed_at": "2026-10-18T20:02:47",
+ "sealed_at": "2026-10-18T21:00:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

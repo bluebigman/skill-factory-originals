@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "vendor-management",
- "merkle_root": "de22603947c9f11758d0b31954d62f98faac5641d622e580c155949c6813dab3",
+ "merkle_root": "ed262a62923ea0ab29e3231cbaf910573034f35621eeda6a878b2fc7df9959cf",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/vendor-management-1/run.py": "fb9cd1a5606e812f98c893db0a7436c19c949e4b8aeae1ce8cc21fa35c519377",
   "skills/vendor-management-1/selftest.py": "f4ea7d6501f48e1e53651b557070867db44fa292666eb44667728a62ac712459",
   "skills/vendor-management-1/.phoenix/originality.json": "6266f06f3aecddcab1c02fb269019eadc539ad63fc62c8495137f00373174765",
-  "skills/vendor-management-1/.phoenix/provenance.json": "43dbd78859420692e2ebfdfb102e086782a289658eb4a69c71dde48c8f348bd8",
-  "skills/vendor-management-1/.phoenix/selftest_evidence.json": "6059055aa428968f50c18240c83da73a3cf45a88d04f50f7161e6ddaf8fe052d",
+  "skills/vendor-management-1/.phoenix/provenance.json": "18a1a7829655dd9171e2c1ce19b26d1813dd16cd3c4bc4e66c2e0a83ce481101",
+  "skills/vendor-management-1/.phoenix/selftest_evidence.json": "5e59652df382889355806fdc3eb89851f50aa45b77b7b8319d0f0263dbdde92f",
   "skills/vendor-management-1/references/creation/p0.md": "4276248289fa76b52c276b36ac6b352b50c5fa3c509921dcc14c524d40df4ffa",
   "skills/vendor-management-1/references/creation/p1.md": "293469fb8aa52b759fe9d399d00af3514434f75514c72b9b9314c8c470e25139",
   "skills/vendor-management-1/references/environment/p0.md": "76730685cf01d71ffdf1afe3e089bac9068b8c521244acbb1dae45b86dc22832",
@@ -37,8 +37,8 @@
   "skills/vendor-management-2/run.py": "4542b6168bde55f5d03261d474999718761263efbe6d88d2268b28ca5f48b2d3",
   "skills/vendor-management-2/selftest.py": "a6f61a694ed3c24a6aa33b8d378e91543adb35454a36e845cdf029790c94ddfa",
   "skills/vendor-management-2/.phoenix/originality.json": "ec23c6d034a8a638a58ac8a4cd378b7566f67eab07f156c1cb7592f30ee09517",
-  "skills/vendor-management-2/.phoenix/provenance.json": "d4cd650a799e9d5d79cc2cc9a97f46baaa3d852fa472b7c01a5254757ef441af",
-  "skills/vendor-management-2/.phoenix/selftest_evidence.json": "fda1448b751f7f170cd628d8debcef013d521452a408744f4998afd506731337",
+  "skills/vendor-management-2/.phoenix/provenance.json": "248a27e4df7327acd04509fd806de38db317c600b952bc29b1d3deda584ce6b7",
+  "skills/vendor-management-2/.phoenix/selftest_evidence.json": "4f6ed55b529194eafd559f692811fcdda0a47a5c3d75179f005cb16cc64aa162",
   "skills/vendor-management-2/references/creation/p0.md": "4150810f2d23bdcbd647726f2378cc31c684195b7fb493c89a3a423b0535d4be",
   "skills/vendor-management-2/references/creation/p1.md": "2417ac28106475b36d8f8b0f7cb774c2a38ac21fcc4210c15709f5a747aca988",
   "skills/vendor-management-2/references/environment/p0.md": "2607bf3a2cb385de96747aacc92891bf79b569ac507a61dfeb6d1fd9ce933541",
@@ -54,8 +54,8 @@
   "skills/vendor-management-3/run.py": "813ac892bd0a96068c9bd5ef66cef327a0e8d6a5cc7695285ad677682fcae36c",
   "skills/vendor-management-3/selftest.py": "8bba6868715e31bcf72d33e4b4fe94165bfdb17129bafe7251c2548cdd6a432f",
   "skills/vendor-management-3/.phoenix/originality.json": "f146ff03091cce0dab636309c55d8e596b50134b8ce289f0da50bfdf817e367d",
-  "skills/vendor-management-3/.phoenix/provenance.json": "006dcefdddde60a7e5f30778c178f2d67ad607a0b0e8731fa6bdbeacbbd805d1",
-  "skills/vendor-management-3/.phoenix/selftest_evidence.json": "ea5285fa4605ccb6556ea0f40b0a4b91542ee953b089d06588aa63d177dd74a5",
+  "skills/vendor-management-3/.phoenix/provenance.json": "0e857ac1cee6c439e150dbacd03168083f702eaf4086b10832a781c4511d26af",
+  "skills/vendor-management-3/.phoenix/selftest_evidence.json": "45a61d99691b268713ad3868fb7401842cab6edb6a9bce93c31f078579a36a65",
   "skills/vendor-management-3/references/creation/p0.md": "6235f832fd9ffd93a57fc272eea671ef90a2ecfc5a4709edf395fe1bee75707c",
   "skills/vendor-management-3/references/creation/p1.md": "5b3fe22c544681d51b2f3b8b99de768cf38a0d201331cda2ae6c0de1294a002f",
   "skills/vendor-management-3/references/environment/p0.md": "7af50d4fcbb67a805882811bfdb41e8a59a45508b3a0f1d1d675646cb897edd1",
@@ -66,7 +66,7 @@
   "skills/vendor-management-3/references/production/p1.md": "e61ef3ae6cf1408b546e37de9513f1879bcf8990cc707947e528c76835048a1f",
   "skills/vendor-management-3/scripts/main.py": "1366f3cae11f67b01f6d2b6fbdf01d0aef432b692ed64e505b21ef0110fc2259"
  },
- "sealed_at": "2026-10-18T20:12:36",
+ "sealed_at": "2026-10-18T21:05:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

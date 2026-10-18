@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "gamification-design",
- "merkle_root": "3ab4b39f65eb5527d32b64ca2faeff8a1adf0f8b71af2ac267f03d74d66ce40a",
+ "merkle_root": "4cbb442c7930238751bd1d8a16c01de75be1d669fa4b7f5688abaecccdd758b2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/gamification-design-1/run.py": "8abdc6e65050b835edc00477b419e81f4f0228ce98b8daee779f59d45d20ecbc",
   "skills/gamification-design-1/selftest.py": "de9f5a055e1bbc5c575c24176037632ed3e4e7748e3675c1faff92fa524977ff",
   "skills/gamification-design-1/.phoenix/originality.json": "1c5551f56ef8323b01cef0ee6e9c8cc884ced31c8fc74e4c58be80255c4e19a3",
-  "skills/gamification-design-1/.phoenix/provenance.json": "1816cca82fb4e23fd1f8703f864ed6ffee89088bc49fb03f290d493ae5a540ec",
-  "skills/gamification-design-1/.phoenix/selftest_evidence.json": "fbd44972bd1d8cfcb883e45fd68d13e570de5fcf57d52ce870ab6a9a87079a32",
+  "skills/gamification-design-1/.phoenix/provenance.json": "8c5c09cddc87393fd8ab144644f284f234e32aff24b503e72341e89fcd37e73b",
+  "skills/gamification-design-1/.phoenix/selftest_evidence.json": "de52e919744d559f3e17c85237fc7e16003fefa9499123d49f3a425586bd0bd1",
   "skills/gamification-design-1/references/creation/p0.md": "b2930efb0849c62bc7a3626dd0adf6a294e86381d25bcd2ff37eafd569d21763",
   "skills/gamification-design-1/references/creation/p1.md": "4913baff2b3212548f035ab8b784dc4079d12bd36f00afe1c794f6685c0e3c6a",
   "skills/gamification-design-1/references/environment/p0.md": "493ddc11799decbd5d71d2266dd67e55535998f4c497c7e7de9d4fd27e43fda9",
@@ -37,8 +37,8 @@
   "skills/gamification-design-2/run.py": "3421af45505bd9c53b28018a310ea8419b2a498501463722a2c95dba13bb4ad6",
   "skills/gamification-design-2/selftest.py": "075ba14cc13dd4624f020780a5f0f5836aaae9da0e989b96de4663b2f9e99b4b",
   "skills/gamification-design-2/.phoenix/originality.json": "cc7fa889ef7c158ecbd2779d3b086715082b608c3e4d7bfa428398cd2db58fdf",
-  "skills/gamification-design-2/.phoenix/provenance.json": "320a09daf29b719f86925f4f50cf72148965dcd42039fe1c3199a51f974b8734",
-  "skills/gamification-design-2/.phoenix/selftest_evidence.json": "7aa2b170bb2b8e0b2330a2b6f6cd409c4c940dd0c6f100ef3b1224d9ae4262a2",
+  "skills/gamification-design-2/.phoenix/provenance.json": "caa34c371b05355267ea708261c03cd405488a200a49a961371c12f528c04505",
+  "skills/gamification-design-2/.phoenix/selftest_evidence.json": "4faaf90e116202885951399ad17aedf8349757ef7dd8018aaad28d3f5b739384",
   "skills/gamification-design-2/references/creation/p0.md": "7a7314bdfc323b23680fae69e3f65ff36c075b916ce591f578a1cfbf1c220cf3",
   "skills/gamification-design-2/references/creation/p1.md": "9c3e48277595767854e372ed0fc1f2b2133aaa75f46a211f5f3e1d8b874bae5b",
   "skills/gamification-design-2/references/environment/p0.md": "ee7ad68c03d6e045b66fb62c3ce4d14e1ed0a37c92774bfa2a8bd7546b6060b3",
@@ -54,8 +54,8 @@
   "skills/gamification-design-3/run.py": "0b867f0b61cd99934ecf42e7ce423ad05d7427b1c147067d529346a75abd3796",
   "skills/gamification-design-3/selftest.py": "01a23ac54aac4430c3a4ff4aacf643768a0ed32bca74a976dbd4fcbde2bbd161",
   "skills/gamification-design-3/.phoenix/originality.json": "1803b9c5d3f98fb97fb8946ab638e699c8c859c83e0c28fb009e759c338304f6",
-  "skills/gamification-design-3/.phoenix/provenance.json": "2f20c364efe36948ce4098be64907c39089ee5c3f3a825cbbc31bbdd2a3cc188",
-  "skills/gamification-design-3/.phoenix/selftest_evidence.json": "52ed06791a726f87aa35a1854b50c3a4eb5835714cc9802e49d2146cd8618dd6",
+  "skills/gamification-design-3/.phoenix/provenance.json": "3b25668419e84a493ff77df1395298d93f7d42b6199ba6087cf95cee7ce8983b",
+  "skills/gamification-design-3/.phoenix/selftest_evidence.json": "ca62b5c6f1882cc1d3452ee873537c330620be235b169ff5be94cbbf48735362",
   "skills/gamification-design-3/references/creation/p0.md": "16e7a3738769fc6c0cc3ca9acdf936ab53a983d1bbc020671b0c233d1e6f4b11",
   "skills/gamification-design-3/references/creation/p1.md": "52f7e2adce75b99de7ccb3d81f3f3e2058addb02d642d24acd13ca875c88043b",
   "skills/gamification-design-3/references/environment/p0.md": "553e83d8171cf897e50ede2fb2f4c2a4607cb97ab4bdc373d7cacee5afff7b48",
@@ -66,7 +66,7 @@
   "skills/gamification-design-3/references/production/p1.md": "b23a7a0a6ffdf737a49d4444aee0ee391be1bde9c2634b24e2c260af88d43e61",
   "skills/gamification-design-3/scripts/main.py": "fca11b4b4339149a9055c8098267165a8561afe5a1aeec47540f966853eeb68e"
  },
- "sealed_at": "2026-10-18T20:00:07",
+ "sealed_at": "2026-10-18T20:59:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "tdd-flow-coach",
- "merkle_root": "ff31681096af3f95ecda9fe2d18fc68fc4d426b13d688837365ab0cff28cda7b",
+ "merkle_root": "4d380c604da8d4debf1489cae954e7b20ef55ae7b81aa7eb8b1038021efc0a11",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/tdd-flow-coach-1/run.py": "038f50168faaf708c18ef3141b0be3818b3e2d42e6189ce92f6c303879a32b03",
   "skills/tdd-flow-coach-1/selftest.py": "aee77c2d2ed513f483fbfb7a0167f0b650ef2dbaa27c4e3ea52e5f1db2b92d28",
   "skills/tdd-flow-coach-1/.phoenix/originality.json": "b7e1a2cc11e996d09a33c859dfb19883e5b55401eb4e60ad2a287ed9e8ae426f",
-  "skills/tdd-flow-coach-1/.phoenix/provenance.json": "cb1a91629f223acb3ccca78db1d5ef2a27f7014ebcef03cf30b07aa6d0e1bcf7",
-  "skills/tdd-flow-coach-1/.phoenix/selftest_evidence.json": "3cb51b4ac47a325d86d878f2ab1ef2910177652017d7edc192eeae6795925b44",
+  "skills/tdd-flow-coach-1/.phoenix/provenance.json": "9c400a99c5cd49a35e3028fafa9b9655043c55b0f356569325fb1f23f08834db",
+  "skills/tdd-flow-coach-1/.phoenix/selftest_evidence.json": "4bf34ed263775f912b86885470e200249c74c869708b9b648d0753ec50ac885a",
   "skills/tdd-flow-coach-1/references/creation/p0.md": "528ae2bfc77174ce9f0027d23223c2f74c487641a127bc80b3dceeb1f4335cc1",
   "skills/tdd-flow-coach-1/references/creation/p1.md": "4f29f5cb07b43185aee85cc48448c55b709786c63cb943f005f039f5b6aed2df",
   "skills/tdd-flow-coach-1/references/environment/p0.md": "0ef5a42b0e56f53b3c412cfb640e96e64b63deff6b3b2d9422f7b6f955e3ceb1",
@@ -37,8 +37,8 @@
   "skills/tdd-flow-coach-2/run.py": "4c65cab87c2b9796a55881f875592bd7908cf6a7f188d08dc6f418878973a7d4",
   "skills/tdd-flow-coach-2/selftest.py": "a54f7a54cbd203d48a08d30c98e3a919b3f7690753ab5f668dc4a0940a4043fb",
   "skills/tdd-flow-coach-2/.phoenix/originality.json": "7c9603a8c45cade4ce20e995e6f5f566be0bf4647d1c925b8ec77241fd48685b",
-  "skills/tdd-flow-coach-2/.phoenix/provenance.json": "9933f72ae88863b19b48a2b7dade2e2bb77c504593ca3f99947644f4e14824cb",
-  "skills/tdd-flow-coach-2/.phoenix/selftest_evidence.json": "fbd84197cd6aff3ded66d79e7d458a8aa6fe2395b1ad910300b557c9eba8d382",
+  "skills/tdd-flow-coach-2/.phoenix/provenance.json": "3098323c04ac726bc3bdb6806053137e30cb287d12a380e2df7683ce1cdea66b",
+  "skills/tdd-flow-coach-2/.phoenix/selftest_evidence.json": "ace057075640e3e1e8e1c9668b957ca7419854caeb6529a028302f1eec0f0f60",
   "skills/tdd-flow-coach-2/references/creation/p0.md": "5b09a26a5d8309384cb3858a9e2d8f3c7e4444352c519f50684a1662b357fbfb",
   "skills/tdd-flow-coach-2/references/creation/p1.md": "ac0265ebc4505be7bf9a359240d12765d79578f78376135e9ced1301c508105b",
   "skills/tdd-flow-coach-2/references/environment/p0.md": "354c190f90638ea8041b80162a0672d435d101ade70bef7806bbec24cd5086e3",
@@ -54,8 +54,8 @@
   "skills/tdd-flow-coach-3/run.py": "bd9d56847feaa3035633ec9145f9b8522c3e8489894f59076a6509f37532f67b",
   "skills/tdd-flow-coach-3/selftest.py": "0fcbfc58a5d3386a7607d1a9e93e2e3b6af285a24ea630ece8ad23f52d576ebe",
   "skills/tdd-flow-coach-3/.phoenix/originality.json": "779ee58b24dbe568d31516db57c2e8aa59ae8f020767fc6622ee526b25b3031b",
-  "skills/tdd-flow-coach-3/.phoenix/provenance.json": "cdc9fa1a1444889720cb515d0e2b408ef420c7eb76fbbb11d239c2dd2568f8ee",
-  "skills/tdd-flow-coach-3/.phoenix/selftest_evidence.json": "17a080b6f15c241fa8973fc39757c7eb13c1405796664d86e32de1b28648aec3",
+  "skills/tdd-flow-coach-3/.phoenix/provenance.json": "d7def75cfc65657e8070bc766fc7e7ac57cd90ade25a18b6e2fa2459d942071d",
+  "skills/tdd-flow-coach-3/.phoenix/selftest_evidence.json": "d99147b4225d1cddb5650568f36b70b0a7fab6a7220fc26dbd064dfde5de8ad7",
   "skills/tdd-flow-coach-3/references/creation/p0.md": "a90ebc5ce77d6a6ac1653b7ffa4a7450422874e8848a1c9c4e3a37a5fca339c0",
   "skills/tdd-flow-coach-3/references/creation/p1.md": "fb3be701f3cc09e4b5c9f14cf7c97f2085f55f6429860aea1df69068c2e0e4d6",
   "skills/tdd-flow-coach-3/references/environment/p0.md": "19ad44ca667fbfa3f0eb3201a78b4c819f59585bdff3149a0ad02af275edf718",
@@ -66,7 +66,7 @@
   "skills/tdd-flow-coach-3/references/production/p1.md": "346f4ffbae3b5baae363a0d223ba9f948ea0fc577308776766d7f14c48b4d449",
   "skills/tdd-flow-coach-3/scripts/main.py": "8de46479f1b2006252d76be03b90eba62ee66a04ff1cde616d616a345115f694"
  },
- "sealed_at": "2026-10-18T20:11:06",
+ "sealed_at": "2026-10-18T21:04:35",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

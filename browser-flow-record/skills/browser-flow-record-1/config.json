@@ -1,0 +1,72 @@
+{
+ "name": "browser-flow-record-1",
+ "version": "2.0.0",
+ "domain": "浏览器流程录制",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "先稳定选择器",
+   "then": "优先用稳定属性定位",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "等待显式化",
+   "then": "用显式等待替代固定等待",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败截图",
+   "then": "失败时自动截图留存",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "参数外置",
+   "then": "可变项外置为参数",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "录后复核",
+   "then": "回放验证流程",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "先稳定选择器",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "等待显式化",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败截图",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "参数外置",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "录后复核",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

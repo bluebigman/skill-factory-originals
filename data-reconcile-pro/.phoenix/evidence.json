@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-reconcile-pro",
- "merkle_root": "293c27605de793fc4a367e62a1606e45c446b1042676cf7aaeb53fe24a508f00",
+ "merkle_root": "6961a41e2e5ef1cb185f490247bbfc074ae7ca251f48e3c6bfce7794b0888f14",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-reconcile-pro-1/run.py": "c6f10365a2e750bf63bb1fa5d81df386c3c0ef057454d54243cca8c007217687",
   "skills/data-reconcile-pro-1/selftest.py": "9efe28aabcdbac6a71ef050de96606444157f1eb6997b54e160307bad49c4a05",
   "skills/data-reconcile-pro-1/.phoenix/originality.json": "480e714157f62233bc9537266cf7d67ef5046251aeb57782f5704ac03cf75917",
-  "skills/data-reconcile-pro-1/.phoenix/provenance.json": "38713479a4b0a0507bfa5405cd9fb71363cb21df9eb6d726fd25ad813a497007",
-  "skills/data-reconcile-pro-1/.phoenix/selftest_evidence.json": "35ab19ce34aea0d62213f7b0d53d62e70a85dae1db3e07a27cdc3b6251d07598",
+  "skills/data-reconcile-pro-1/.phoenix/provenance.json": "c2efb096007890703ef5457601897ba1eed3db2279ebbefaa873ab6c583cd55f",
+  "skills/data-reconcile-pro-1/.phoenix/selftest_evidence.json": "88008c4eb4f4c6b58002545dd8a20294be017f6b2704255c5215e511da8d4f58",
   "skills/data-reconcile-pro-1/references/creation/p0.md": "058dd347ea274895322782b8ca811dda5fb960e3a4ed1c476669dc08a7c2cb56",
   "skills/data-reconcile-pro-1/references/creation/p1.md": "83a9b79f7de0ea4d6b521d03c192a85178aa503d93d60a2d5a3cca4eb972bbf2",
   "skills/data-reconcile-pro-1/references/environment/p0.md": "ce966f5e7eeead62c016b98934be263d30158e16f2081ea2ccaddb1cf4e3547b",
@@ -37,8 +37,8 @@
   "skills/data-reconcile-pro-2/run.py": "d49b8ecc5915bd718627d39e3c1801c4e549c624845550328b684985e5d7942f",
   "skills/data-reconcile-pro-2/selftest.py": "8349fee15d3717717bf272e33c70f646c2c3b969511f7dc4f100df4f2f1256c1",
   "skills/data-reconcile-pro-2/.phoenix/originality.json": "39623a25e87f1248f7745878fa1a5c2519c9b07ce9a72b20d3625ae6ac480faf",
-  "skills/data-reconcile-pro-2/.phoenix/provenance.json": "8548f91f779e57060cfd4fc06701cb73f58c6bc65bfdcc9a1102dbe1fe1de250",
-  "skills/data-reconcile-pro-2/.phoenix/selftest_evidence.json": "b46cbcf22c80907774abeadfd2b01cdb34de870a1d0c95946f8dbfa98b4c63c5",
+  "skills/data-reconcile-pro-2/.phoenix/provenance.json": "4b0eb36414450b359adecda28035eda2c93e1fb189787702d4dbfd363b536824",
+  "skills/data-reconcile-pro-2/.phoenix/selftest_evidence.json": "12946b963dac372437b5d818e7bacaa2aca90bfbd9ee1768ec7579185cda611f",
   "skills/data-reconcile-pro-2/references/creation/p0.md": "364672c3cbbdc343e39cbf5eac6281b1b199d3d9c53ea54b521825fb52343b91",
   "skills/data-reconcile-pro-2/references/creation/p1.md": "52c6a922a1de6ef4f9421f602c9a9c29fb947877654ca112f92c10c6c3bdf2da",
   "skills/data-reconcile-pro-2/references/environment/p0.md": "63cca2ac8c93fab8f7be76259d6aa494a1caf4e077fae3351610ac26eaebb75a",
@@ -54,8 +54,8 @@
   "skills/data-reconcile-pro-3/run.py": "16bf29258f1df0c831e963731abbc04ee460e0c67fb9d49029f53adf8ea08df7",
   "skills/data-reconcile-pro-3/selftest.py": "c16414ebbbf2974c0f9b6237e4b6f1ed02b0a2101aea438c3f3af3d31aed37ec",
   "skills/data-reconcile-pro-3/.phoenix/originality.json": "33c9ee009e427c838764ee77cb94094b7aba1b9b6cfe8274565a4de4e52bf7f1",
-  "skills/data-reconcile-pro-3/.phoenix/provenance.json": "5a05bc879401e813d0fc5bffd2e0312e3215fd06e45830bc7330bc0fd0f4002b",
-  "skills/data-reconcile-pro-3/.phoenix/selftest_evidence.json": "08a3ac4fabdd57ad24626571e8c5628ee6064268a5b12988cbf31af525201d78",
+  "skills/data-reconcile-pro-3/.phoenix/provenance.json": "dfbc878eb922a8baa5e0a7d24adf5b6932fd27c6ddeb6c8a9bd3f54633cb99e8",
+  "skills/data-reconcile-pro-3/.phoenix/selftest_evidence.json": "70366caa60fa7996edf476b9b0fd937a053de07a7c3f511d733b0ea92ea87324",
   "skills/data-reconcile-pro-3/references/creation/p0.md": "45309cc5ce6bdb4c43bf163ee0eab428edd69bb8248a9f44a90162c82697d134",
   "skills/data-reconcile-pro-3/references/creation/p1.md": "3e8ff7387f61c86107e5e7b5c9ac58dc38cf319b654600f1e9987c5ffecb9aa7",
   "skills/data-reconcile-pro-3/references/environment/p0.md": "700375b86aba0abf09c27fe3784e896aaf73d5e83e53d3638b84acb29748e633",
@@ -66,7 +66,7 @@
   "skills/data-reconcile-pro-3/references/production/p1.md": "9a56cec6dc9d1eab1e55a6090af912a1d7d2fef0a52a8b74c83e89f8e449bdad",
   "skills/data-reconcile-pro-3/scripts/main.py": "0a2bfe6ad450c6fbea39848dd70e4093258fe459e70c50332c9e9e2ca295b5a8"
  },
- "sealed_at": "2026-10-18T19:55:53",
+ "sealed_at": "2026-10-18T20:56:52",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

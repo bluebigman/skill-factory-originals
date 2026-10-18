@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-sex-education",
- "merkle_root": "1de058dd5be41fcde8599f45334b29f39e80e54826f1fbd51c38e1583a7f56ca",
+ "merkle_root": "bf72527660e8e6875da47a45739a6ff8bdf9a83716e5cf32e3c5b65e5be7fa17",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-sex-education-1/run.py": "0fbe055e9c004be6b14f39ebde29f56b5f080b71b4b10897ff5b6ec065aacd79",
   "skills/child-sex-education-1/selftest.py": "6b751d8dcd609da868cc792adf05e61c4f70bf7f07fca0cabd81f7066f26e98b",
   "skills/child-sex-education-1/.phoenix/originality.json": "d7981a2e6382c5773317d44bc4c14caec09c86048cc1eab58008e63cd18ca5de",
-  "skills/child-sex-education-1/.phoenix/provenance.json": "b9899cf0d9316d24366ad05e727a0943f3e09380f76ca42d3df6d742aa6c1c2b",
-  "skills/child-sex-education-1/.phoenix/selftest_evidence.json": "4576956ee674cf2110f23c0ed5642a806b544977c22a3c98086523f88fdf7667",
+  "skills/child-sex-education-1/.phoenix/provenance.json": "e1d31ecfaba66a7719260f061b362027ff03c7ede014fd417986714d983b02fa",
+  "skills/child-sex-education-1/.phoenix/selftest_evidence.json": "ce43ef046297a5628be21342171f1b4740dbd93fe519765fef256bb3deac0e5a",
   "skills/child-sex-education-1/references/creation/p0.md": "fe74a48e3d2510159df2d125f41853f931d9aeb973bbe0dad8b0fe894997723f",
   "skills/child-sex-education-1/references/creation/p1.md": "676728f91e4a28719524665f9adf5858b9c4a68a0e81f0fbe8e1b7d3d3610c4a",
   "skills/child-sex-education-1/references/environment/p0.md": "fe3dd0d9eaaf60afdef74d4243d2343f154599e1d278a442d047d45a04bb0b22",
@@ -37,8 +37,8 @@
   "skills/child-sex-education-2/run.py": "c07ec7255f2e91091e52805b3cc5660c21a5977e8b89dcfb98874b9bd9a2b913",
   "skills/child-sex-education-2/selftest.py": "78da0b242f6997edad643fa8dec28d4ee91961626ef87c0f3cf400ddce8c4222",
   "skills/child-sex-education-2/.phoenix/originality.json": "0b03009cb94ebd8f9504a1975b65e3d09ff5a0cc0c25c3dd7637e8d0e882a372",
-  "skills/child-sex-education-2/.phoenix/provenance.json": "3633f74326de168ad8afc7d7749ef91a803f0489142738e22ab8f06af08731b0",
-  "skills/child-sex-education-2/.phoenix/selftest_evidence.json": "976176d75c57f22c9840c156a765b17d330cb7b7f551fda0eec92d2015d8dbf2",
+  "skills/child-sex-education-2/.phoenix/provenance.json": "dfa2d5541f4bb0e9b7cdda902b3b59fc46bae4fdb96ac38ba92e53522becbe05",
+  "skills/child-sex-education-2/.phoenix/selftest_evidence.json": "70f24a6c9b9772cfb4f96b91209bbdefd8080d07e95565ce000e3501121bbafb",
   "skills/child-sex-education-2/references/creation/p0.md": "3dacf8abd90314c5eabda47ab8a76234865e08b31ff863fb501377fbf4db4e17",
   "skills/child-sex-education-2/references/creation/p1.md": "a393173599c38b21b5317f7642e26a9bcb6a5c0d6ea239b3be9894bf5b2f70ad",
   "skills/child-sex-education-2/references/environment/p0.md": "25b13c91916528e34e2a8e62491b97f08dbb0c9236576fd36213a982ec80fc12",
@@ -54,8 +54,8 @@
   "skills/child-sex-education-3/run.py": "2793be7fbcfc2b1471300ebde2b58948b1f309c3c6ce5b0301cac72f4f55d2ea",
   "skills/child-sex-education-3/selftest.py": "30249a7dd6472b6aa5be68ad429b9a14e1426713a8183351b57fc9618f8953e5",
   "skills/child-sex-education-3/.phoenix/originality.json": "560cbd87d426c00a2b6e659d3973141d7eff5c974640b8e11bdc31ed15ca937b",
-  "skills/child-sex-education-3/.phoenix/provenance.json": "7bc503acb09e291882138bf13b16aeed7c43c30d44b481791d82fbd9ec016bd3",
-  "skills/child-sex-education-3/.phoenix/selftest_evidence.json": "e1f19fd67e6d5e32c783e97cfa82433886404f2969e241c740d715176f63a655",
+  "skills/child-sex-education-3/.phoenix/provenance.json": "b0b65c15a5ceb3eff5a6d44f1fdaba46826277120145d8cc1f70561711b4aaef",
+  "skills/child-sex-education-3/.phoenix/selftest_evidence.json": "f6edc2c882827bf8b37d984b8548f4460c5ed053c08cf776729180a5b56915d5",
   "skills/child-sex-education-3/references/creation/p0.md": "5053d591b17a29c1718b13b51c7fb90928972b48642aaf797eb025e6ef7dfe82",
   "skills/child-sex-education-3/references/creation/p1.md": "71f2281f9e86e79b6bc0fb2094be1489559cd70f55f5b680cb92540778df1c6c",
   "skills/child-sex-education-3/references/environment/p0.md": "63197ced4e475821f1a048b2d51e142f311642caa65bb76b8cbada11e8a4f8be",
@@ -66,7 +66,7 @@
   "skills/child-sex-education-3/references/production/p1.md": "6abea25bb0e9699fd4a2f9f8076557ca385a83f8560de365b6573c934a25c8b4",
   "skills/child-sex-education-3/scripts/main.py": "f584c2073deffab45c372aa086952a1706c64b3c43762dda1b60f8a807cf5c81"
  },
- "sealed_at": "2026-10-18T19:53:25",
+ "sealed_at": "2026-10-18T20:55:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

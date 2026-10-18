@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-archival-pro",
- "merkle_root": "5820b7f02ca21a6e9c807975f6917074175dd545da0a12b579ba63670a452785",
+ "merkle_root": "d797666bac6b549d2f5022e4415eb473f77276ba9ab236f3324f1f116d31ac4f",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-archival-pro-1/run.py": "6e2589f6974cda9570536ba1fd21e5b22c81b6ecc73df096dbf57074a6b77b99",
   "skills/data-archival-pro-1/selftest.py": "6b4986f589672f24d2951419d3c0823171ccca8342b1aac8ec1480f95a9ca559",
   "skills/data-archival-pro-1/.phoenix/originality.json": "4b62adf07aa979527c35b01e6dee19fd75f1d52b54d0e0b0addbe2181772d92e",
-  "skills/data-archival-pro-1/.phoenix/provenance.json": "1c112fd24d5ef301df52d87f63845dfdf06f0182f858ba61e532e53da30cc68c",
-  "skills/data-archival-pro-1/.phoenix/selftest_evidence.json": "fc1291c2e7c5480aab72be0287b67ca1c6a1f14b3ebf459a1371495a59109d19",
+  "skills/data-archival-pro-1/.phoenix/provenance.json": "900fe6b9d27902b435360518c1219d7f1a855580dbc8443c5dc248235747c8c5",
+  "skills/data-archival-pro-1/.phoenix/selftest_evidence.json": "bb33f170e599d0332a5303a97cb65d58a2229d5989ee2d211e2de0170c83546d",
   "skills/data-archival-pro-1/references/creation/p0.md": "2367e2e056625bede5c2a9c3d96adbad1e9df25ef37c29cde1c81cb60f750b1f",
   "skills/data-archival-pro-1/references/creation/p1.md": "e2359cbfc5e537891b78e28d20e7fe7385b9c3819cefc7d6cbeca2bd9b028343",
   "skills/data-archival-pro-1/references/environment/p0.md": "bb1d82f4e9b7202cc5f320415bed6baf9e276b1637cbc3d3a5d9eed11057c995",
@@ -37,8 +37,8 @@
   "skills/data-archival-pro-2/run.py": "ad45c88a239e150a0bfd3389a5e2a9c78d6c23fe9cfea90dad87248c45ce915b",
   "skills/data-archival-pro-2/selftest.py": "18e30a7d5a92616b1568b1288e7e582ccb358ff6dbdb349ed56a745c7731d7e4",
   "skills/data-archival-pro-2/.phoenix/originality.json": "637037c86cc80f1835b5a267eae0163f9caf367f48b2b6a09f924ce81a88a65e",
-  "skills/data-archival-pro-2/.phoenix/provenance.json": "e3cc622ac5c3da19b22d2d1ccb4edfa0d046d8e595a85c648c9dfa9b757a6852",
-  "skills/data-archival-pro-2/.phoenix/selftest_evidence.json": "61bb874b224d7a149df9cd5a00bc5df5fa7854ad352e277c391545e33460f3f3",
+  "skills/data-archival-pro-2/.phoenix/provenance.json": "8844ea37f80f35c508c72710933d5b9a39090ce27403721ecb5787b0b9c5aaaf",
+  "skills/data-archival-pro-2/.phoenix/selftest_evidence.json": "865db4862e4f2139534f4f95a6490880572beac28ac30296f4d5e2f40ed48e35",
   "skills/data-archival-pro-2/references/creation/p0.md": "7aa60b87154b979a06f3ab61fc6374a937c6db45ad00b4a98ee4b36860bf5b78",
   "skills/data-archival-pro-2/references/creation/p1.md": "745f833698f8786c23117a53fefd0abb348aede6791fb10643a3b57056b2d6ae",
   "skills/data-archival-pro-2/references/environment/p0.md": "7a7e417bb88adc3cccb37c1acbb780fe52020df8ad495f99700066f301f7c74d",
@@ -54,8 +54,8 @@
   "skills/data-archival-pro-3/run.py": "d838efe67d05688dbd8ad0e4084018f091182f816c6bad4fab265fe740ac14c4",
   "skills/data-archival-pro-3/selftest.py": "14640c5797cc73dd2b353806db92acd606ced16d2238e6dabd98f3463e86dfe4",
   "skills/data-archival-pro-3/.phoenix/originality.json": "17265db0afb5c9d9051eb93ad041db69c48572f3269660dfd28a79e701a90958",
-  "skills/data-archival-pro-3/.phoenix/provenance.json": "b14c3415532297a651c9d2379fc648872f0e966ea57661860a3be8fdffbf9446",
-  "skills/data-archival-pro-3/.phoenix/selftest_evidence.json": "3a6b294d98b9ea2751c7622dc45d3fddb506f465fccfe83b736153138fa5b7e3",
+  "skills/data-archival-pro-3/.phoenix/provenance.json": "215046d7fc549937436d0d16f3229eb6e773ab4f7bf836f32446c60e85e7c9b2",
+  "skills/data-archival-pro-3/.phoenix/selftest_evidence.json": "a40bb8af4755bf25448037ed2576698be3b6a29f9313f2f82fe6f28cffa69fb8",
   "skills/data-archival-pro-3/references/creation/p0.md": "95fbfce68eff5217ca2c53a37b909033a9053d65cbfae8e9661a7af58cd52d0e",
   "skills/data-archival-pro-3/references/creation/p1.md": "4c7a2327e9de17f246071391b2e9d92244661cea900407bd7bc0a5d626a4389d",
   "skills/data-archival-pro-3/references/environment/p0.md": "8d6ee5f6e193bc9c8ada0ae931756454f13bacc8cb61e3d4508afc620db88690",
@@ -66,7 +66,7 @@
   "skills/data-archival-pro-3/references/production/p1.md": "9619e825a8eb8c1c4649c6362158b5210a85f241814844b56286aded1b08de78",
   "skills/data-archival-pro-3/scripts/main.py": "534139eed2b186aefa586c6d08706b850169b4375c36d8034f9dc528d71004ba"
  },
- "sealed_at": "2026-10-18T19:55:10",
+ "sealed_at": "2026-10-18T20:56:28",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

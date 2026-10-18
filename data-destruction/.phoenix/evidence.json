@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-destruction",
- "merkle_root": "56fd6f3f3d655ca40de5f0cf0fb2038897bc2ba60de2b3bb60fe8a1f746d153f",
+ "merkle_root": "7d3f6106967dd9482ca3df7639f39fe21d256d0bc9c4dabe656e10e015af9481",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-destruction-1/run.py": "cc3ff8320820e14f106aa12875c637cac1c630a48be2dd532537e175a089f842",
   "skills/data-destruction-1/selftest.py": "536dd5998f70b30729b6bbf540687a9bbcce5d67b5c8785e42e7c6d5d9ca15d1",
   "skills/data-destruction-1/.phoenix/originality.json": "17ab911355b70846eb16d07473d57e444b0b6fb61132774d310a7f81d662e0e9",
-  "skills/data-destruction-1/.phoenix/provenance.json": "98c3f8291e018bd333e7899a6ec247bb342c66c0ff316455cd495ae7eb2f3d05",
-  "skills/data-destruction-1/.phoenix/selftest_evidence.json": "48e6bef6cedf613f2f6aa2ac75ecb064234e7f4db54bd3cdea18fce2b757dc37",
+  "skills/data-destruction-1/.phoenix/provenance.json": "422d772bea1dc35648e4d681e441f24feb3a9be8b8ac9bc67ed3125a0ec3268f",
+  "skills/data-destruction-1/.phoenix/selftest_evidence.json": "9454b36d5f8918de013800e53d2beb9e4967aca0879b15a2952599106f5eeeea",
   "skills/data-destruction-1/references/creation/p0.md": "932f6c377e3bd48a682da180f4b9cc9141567455e6aa25123583b5a21334d54c",
   "skills/data-destruction-1/references/creation/p1.md": "2d65fa3d774207368b1ab8bce2a87582c12887abbb6c0014572cd511b4147b40",
   "skills/data-destruction-1/references/environment/p0.md": "4e8b2e89c3404c7f61274a98c351f41b4e36722cee688bf38c00550210518789",
@@ -37,8 +37,8 @@
   "skills/data-destruction-2/run.py": "ed9a724fa482edee0d5168ae751b34036268154d376cfefcad28e55bb483b076",
   "skills/data-destruction-2/selftest.py": "b7f05480ec3893ce68f7dd57b88e2d7bb8ea58fa7a1e0cacb3db733025f8f632",
   "skills/data-destruction-2/.phoenix/originality.json": "b4d6fd4f5951dfc5667f92e137d5ec1442dbb4ed59b62ad0d9eafa49f9fa8c92",
-  "skills/data-destruction-2/.phoenix/provenance.json": "c8044f58519fb98ac60ffa1d53bb2e6b5b6026aa1067195137ea60d7538140df",
-  "skills/data-destruction-2/.phoenix/selftest_evidence.json": "63e79ec4f6b11371b28981ec96013681684b0346b21e79cde36650bcb766055f",
+  "skills/data-destruction-2/.phoenix/provenance.json": "ce53c9d3c221be1512190964e797603f3ea2fd25f2222238b5ff642f65eaceb8",
+  "skills/data-destruction-2/.phoenix/selftest_evidence.json": "161645e0d89b0370e4b8dae4c06fdbf68952769bbb442d1980c7c34e4c13974d",
   "skills/data-destruction-2/references/creation/p0.md": "a23a8f0edb60b313fdeba02ea6fae8606baba30974dea091d0a671d5900fb06e",
   "skills/data-destruction-2/references/creation/p1.md": "4fbd31944defc99e7f80a32b060cf159a202aff1c9c29cb83132b377957ad661",
   "skills/data-destruction-2/references/environment/p0.md": "57a011bb2922d243f7cc1e0aaf209513582bfecf0db0adb4d83732fafb286509",
@@ -54,8 +54,8 @@
   "skills/data-destruction-3/run.py": "94d61d6b7b0fc278e41432c982323ef766aee5face7fc5bfca1260dcd083d722",
   "skills/data-destruction-3/selftest.py": "0ac1efca3af4b1e89037f7671c35e912cec583ffb9f5412c1d7ef2256be3a581",
   "skills/data-destruction-3/.phoenix/originality.json": "c1bfeb34a9a3009b8ed462a8f21df02e9c1cfe6f6321b3b8c4164507f3b85cde",
-  "skills/data-destruction-3/.phoenix/provenance.json": "9977c083eee1952c903589b4588070c0cb805202308927225b1fdc3cb1bf83ce",
-  "skills/data-destruction-3/.phoenix/selftest_evidence.json": "19015b9d09bee0764dc46df372c524085f97b051023a4a7496cfca9f2947bca3",
+  "skills/data-destruction-3/.phoenix/provenance.json": "976fa6ec038857130b5b5f907e1b8d857ea2bdf70775cec6e945348cf36372cf",
+  "skills/data-destruction-3/.phoenix/selftest_evidence.json": "3dbc945b5ed9332ad4e2af8643f05a34e9a802d472c86767de649e6946319d32",
   "skills/data-destruction-3/references/creation/p0.md": "3132902f819259fab8320418277c37d5ee33a0586d6accd6e2e58c40eec09514",
   "skills/data-destruction-3/references/creation/p1.md": "526f8a9ff22993178c4f953bb8e68b83768f2f01798ee5e2c9855390ea65b918",
   "skills/data-destruction-3/references/environment/p0.md": "534a4d513432cef0484bb633cb35d81888c1aa57bd40784c3e219281afbf9f52",
@@ -66,7 +66,7 @@
   "skills/data-destruction-3/references/production/p1.md": "bf2409924f5a7ab560acdd1f5410d66604dc2c9a8c32e57df4c6137184dcb2c0",
   "skills/data-destruction-3/scripts/main.py": "f9c541627394cf30baaf6c9ad343514efd1d22222d7b0f73c82188be3bfb97a3"
  },
- "sealed_at": "2026-10-18T19:55:28",
+ "sealed_at": "2026-10-18T20:56:38",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

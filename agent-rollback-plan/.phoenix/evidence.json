@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-rollback-plan",
- "merkle_root": "9fefc2f7af86adb422c01529ee2d9e7bdab22f90aba5a210d9d820bd82656c52",
+ "merkle_root": "cd74cf46717ede309c6f2279a69e286796b7702579c51df7e74c4000081a6e06",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-rollback-plan-1/run.py": "e0ca474c8d8c3026d23456ec68142cd5a26ef344318772fdaa81fa7ffaeb5d44",
   "skills/agent-rollback-plan-1/selftest.py": "c996431ffeb7353ac0a31ab0e3d4fb50f955e5883f53fb3972afa2b1a8f11973",
   "skills/agent-rollback-plan-1/.phoenix/originality.json": "69ea3f64c3745422eb13d8fe418207f10d49045ca98265bb7bb09d3460f6569b",
-  "skills/agent-rollback-plan-1/.phoenix/provenance.json": "0dc33e3fa151f3debae5c04baa744c1bceeeb2b6147896e2adedb9702f8abcec",
-  "skills/agent-rollback-plan-1/.phoenix/selftest_evidence.json": "1feab1427f1bf54cbd7726bbec28a257a4fcca400d77f311ca25330b589e9a97",
+  "skills/agent-rollback-plan-1/.phoenix/provenance.json": "fd47e75445c64368824b6766846f61d1d206451f9bc9e2f0218069aef5f6844e",
+  "skills/agent-rollback-plan-1/.phoenix/selftest_evidence.json": "585f364b207e80335cf260c4d2c93e7b44a4d13f6ba595feda091261fc776b01",
   "skills/agent-rollback-plan-1/references/creation/p0.md": "1f608f56e8e6ba6147cb4dc2ebbebaa270cfa112691f944663e7b964c128470d",
   "skills/agent-rollback-plan-1/references/creation/p1.md": "1fe72fe44fe63448e08ba466efe87362dd34e47b81bd471522c64387b2ce3ac8",
   "skills/agent-rollback-plan-1/references/environment/p0.md": "d1f4e59bac432df9c77116d1f819730fae5d0306f0d6a0b08eb78c5d9f07e5e5",
@@ -37,8 +37,8 @@
   "skills/agent-rollback-plan-2/run.py": "e175f6c0ebe3e9be931cb4026132270dcf87e46ba3b31fcf4f3575089fbb0c8b",
   "skills/agent-rollback-plan-2/selftest.py": "723f22c880c10c0c1ddd82ad30f554ad0d58c7ac35211cc2622b6bd0e6cf4bfa",
   "skills/agent-rollback-plan-2/.phoenix/originality.json": "b8091700af2ef707d1491c086951cb5b38a962a45d3ec472dc8888b6844b75ef",
-  "skills/agent-rollback-plan-2/.phoenix/provenance.json": "f94a10362ad65820232e35f1b7ceffeacee734fd3996b2e9273c51c9bb1ea921",
-  "skills/agent-rollback-plan-2/.phoenix/selftest_evidence.json": "d6c47937e4537d8d5d013b477f58250f16409d395997644af3226edb83f268f3",
+  "skills/agent-rollback-plan-2/.phoenix/provenance.json": "ddb1a5379226b6d2cf41418cf5b1d0cd1182cd0e45faa33a83377cbeed1e548a",
+  "skills/agent-rollback-plan-2/.phoenix/selftest_evidence.json": "abb613b4274818b493fc261f81aa5023d2591ec9a690aa2975408d22040b4e1f",
   "skills/agent-rollback-plan-2/references/creation/p0.md": "f850a9859d53a6d4cd9a719388ccfec589c5f46273ed43107422cbfdb1b39d9f",
   "skills/agent-rollback-plan-2/references/creation/p1.md": "84ef9a0868fd2e41ce59f60fc7b1334d6e0215edd88ce5152fa1940e57ae4613",
   "skills/agent-rollback-plan-2/references/environment/p0.md": "7235f8362fbd7303441de79f0d3187656d28c24a83fe6948c5dd34528736d44e",
@@ -54,8 +54,8 @@
   "skills/agent-rollback-plan-3/run.py": "477962806491a27a7a9f7cd1e911c1863c8fa7fcb3271434e7ed196f25832d17",
   "skills/agent-rollback-plan-3/selftest.py": "5730b8a2b135cfe25967d625ac7a4cf6ac2b2a5e4cbff6793b9eda75ee2a8c85",
   "skills/agent-rollback-plan-3/.phoenix/originality.json": "1e102ab574fe3f8260d0e4527668aa395ab3a205fe487db8b4b40dd97a4a4d95",
-  "skills/agent-rollback-plan-3/.phoenix/provenance.json": "296967e5d2ac03217ff072bacd726f8195e5e7b6acd542e3c6d9bfc817529312",
-  "skills/agent-rollback-plan-3/.phoenix/selftest_evidence.json": "288bd07759b1d8c84bc00f69c45fd2a2bd3197f535ea8d38058be15e65b0e9a8",
+  "skills/agent-rollback-plan-3/.phoenix/provenance.json": "a97bbe7b93928ff2e8cfb9f42277134d5b34b426f3b376593c0ecc5b3e734ead",
+  "skills/agent-rollback-plan-3/.phoenix/selftest_evidence.json": "e089b5193ef5e15136549480e1a624e44979036584244c90c44aa5255558d297",
   "skills/agent-rollback-plan-3/references/creation/p0.md": "5cf633e5832c8ae6b1067b1e4b288c4fa8f998a8a4bb7f98ff6bbe9cc5e3b5fa",
   "skills/agent-rollback-plan-3/references/creation/p1.md": "219435ff07a360358f1167769e858f03c958f6ef569e31e224ec5183905555af",
   "skills/agent-rollback-plan-3/references/environment/p0.md": "fbff4bc9a037876f823ca5d8de78f4ff4081767af9a2c8a3200fbd03a5807ac9",
@@ -66,7 +66,7 @@
   "skills/agent-rollback-plan-3/references/production/p1.md": "25a032ac0e1376931f8c60f62dae33516c5c5daf85dede03a193c52842dc32b0",
   "skills/agent-rollback-plan-3/scripts/main.py": "3eeb753643c1480f8a539f2eb547e6f4e39396757608e6dae4b399e286203fc0"
  },
- "sealed_at": "2026-10-18T19:52:16",
+ "sealed_at": "2026-10-18T20:54:46",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

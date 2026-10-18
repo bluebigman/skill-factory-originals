@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:01:23",
+ "at": "2026-10-18T20:59:47",
  "skill": "incident-triage-pro-1",
  "slug": "incident-triage-pro",
  "passed": true,

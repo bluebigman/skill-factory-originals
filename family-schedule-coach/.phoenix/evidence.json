@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-schedule-coach",
- "merkle_root": "4f787f5db3bd782e877cfbf83e8a7f791e5c7bc04e93e9e3f9597a2b6945fbac",
+ "merkle_root": "f0eb51a783bec708aede530fcd11431ba06212755ae9820a6fd25814feb182ac",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-schedule-coach-1/run.py": "7c8ab2bfdd2a5b44adce146af123aacd3fa1dd4e4b8c1edd2c74d0ea71eb7c10",
   "skills/family-schedule-coach-1/selftest.py": "736108510c250aed0e4c024fd32410f78d2c3797dff2433e41de4b7c9553469b",
   "skills/family-schedule-coach-1/.phoenix/originality.json": "49599620b0ebe272392b53a362e551b9880a8a6acaba6cf18a5ba24f2d949408",
-  "skills/family-schedule-coach-1/.phoenix/provenance.json": "4724141fedc8b7e82c1838b65934b2f690fde453aeb0b4a63d72af7cdd98915f",
-  "skills/family-schedule-coach-1/.phoenix/selftest_evidence.json": "3d950e77bdb87872168b8901345f45c1d7717b2c8ac418896ba86c4b1d0d76cc",
+  "skills/family-schedule-coach-1/.phoenix/provenance.json": "86b415e03c535ec5748999aa57cfde5c853c67bf4f60472662eb1a153f4a6eff",
+  "skills/family-schedule-coach-1/.phoenix/selftest_evidence.json": "f56752af73297c679d1a340bdf44acd9359d2a8b21c36f8b336e61fb71cab453",
   "skills/family-schedule-coach-1/references/creation/p0.md": "7add6b6c7c8179ce1e5ba77b41e8bef4c34604018fb59920f2454652c30666a3",
   "skills/family-schedule-coach-1/references/creation/p1.md": "09854a070bed55880a1a95cfd070c93ce291201a0fb5a7f07618ea11fe9d395a",
   "skills/family-schedule-coach-1/references/environment/p0.md": "02adf590e8a2a9ef0f3e26e2080cc7baa1fb3fe70552d4353a42ba80f1466364",
@@ -37,8 +37,8 @@
   "skills/family-schedule-coach-2/run.py": "b5f401ac9a8323ea9e536b2e49b886b7bbcad9b39bc28d2001e969a1f9fa81f2",
   "skills/family-schedule-coach-2/selftest.py": "4905b5c86d16f49e997ae1221bf93f38e9e6610f269b2df7ac6e1005aebdc5e2",
   "skills/family-schedule-coach-2/.phoenix/originality.json": "3e416c946a5acd9d6b62a4a857ec01096d5696e6d88ae0a734aee8bb3e2b782c",
-  "skills/family-schedule-coach-2/.phoenix/provenance.json": "9ffcd3c98a6a3bb8ed725a9a75f672175c04e15dc6577130dbd838b2784d7648",
-  "skills/family-schedule-coach-2/.phoenix/selftest_evidence.json": "c5165d6a6fb4de6daee006209a9e066b9249804cdbcd7d59db598f68053b411d",
+  "skills/family-schedule-coach-2/.phoenix/provenance.json": "66a043e591756b14a5fbd9fe2701dd5ef6e444f909c3bc442f2497534d390b7e",
+  "skills/family-schedule-coach-2/.phoenix/selftest_evidence.json": "7e6f6595b38a7098f20d49dfde99372a9bfa5c79d683eb579d66aac5148a23a3",
   "skills/family-schedule-coach-2/references/creation/p0.md": "1e27bfbd79aa4b5f06117a49649e91b064897b8e3b0608b9f8930815cdc8ea5a",
   "skills/family-schedule-coach-2/references/creation/p1.md": "8579b23d59d6a9de081b5d41480cd89f2ab5341a83e02a1e61ff12f810f2ae24",
   "skills/family-schedule-coach-2/references/environment/p0.md": "5a7e6d627f3b2a8aaa8bd59e330399de3458986664384912c05d20ef25e5e5b3",
@@ -54,8 +54,8 @@
   "skills/family-schedule-coach-3/run.py": "d9617027dcc5d24af131edbc4e02e438d17cfd57f8e5a57c714802ff7e630c15",
   "skills/family-schedule-coach-3/selftest.py": "2a8484fa90751ff0233d5ec8d6979ab14fe412f6981f3dfe0b5a4b146b84e456",
   "skills/family-schedule-coach-3/.phoenix/originality.json": "18667df82bc1040648a94054d5ef41a4eefa97d1567195cecef727025df5ee34",
-  "skills/family-schedule-coach-3/.phoenix/provenance.json": "8c31c4eaa0031cb1184dc59f6d293f70030d995e35cc18783bb61d1a4b1f117d",
-  "skills/family-schedule-coach-3/.phoenix/selftest_evidence.json": "b9e400c55afd9be9e120bfb67546619d702449404b7083b37d59cec5e6ededcf",
+  "skills/family-schedule-coach-3/.phoenix/provenance.json": "b1060a991c251881c184cbb90e030f2b448bd8f2b1d65297ee76e2d8bb4301a7",
+  "skills/family-schedule-coach-3/.phoenix/selftest_evidence.json": "d43037ca7b29458a2fc23a558f48cee1c158381576c2f361faa7944c37eaa2dd",
   "skills/family-schedule-coach-3/references/creation/p0.md": "916b598937d78b8833c0866f267e03f53dc737096a53f1a44228e660f564958b",
   "skills/family-schedule-coach-3/references/creation/p1.md": "9cb11175c98b9e2ca71256c5532c16af78f2d4d582fba0b9d1500585e0acc68f",
   "skills/family-schedule-coach-3/references/environment/p0.md": "cbaf7559e4fb3a69ab77c0c5e3608e381bfef5f051d9482f69b8b55d770382b4",
@@ -66,7 +66,7 @@
   "skills/family-schedule-coach-3/references/production/p1.md": "543d58a20beacadd48ceec07b4ef2c6658ef06d403a949b460de5cfcb622a815",
   "skills/family-schedule-coach-3/scripts/main.py": "90faf91946d8fea7f4658f7a34126b87612f0a9e0b9b7ae6bbd869c667140619"
  },
- "sealed_at": "2026-10-18T19:59:08",
+ "sealed_at": "2026-10-18T20:58:41",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

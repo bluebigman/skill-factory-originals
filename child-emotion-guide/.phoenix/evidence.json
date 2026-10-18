@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "child-emotion-guide",
- "merkle_root": "7b91d39b004363a5b2da3e4f8d36ff6ed68a10d8f7825b1eba12a68867454e68",
+ "merkle_root": "c2782577cc0616e0f503ad47b9cf9ca3aa21398fe26acb4143cd55efedc6ad39",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/child-emotion-guide-1/run.py": "136c4cd10eec993aecee5a5be5448bb48456e09103b63ddb5ec10d149f1ddd98",
   "skills/child-emotion-guide-1/selftest.py": "71a280cef1825d29f202cdeecd37fe70140840d8d3c991ef5cafb1717f7b51ee",
   "skills/child-emotion-guide-1/.phoenix/originality.json": "89d8aae3a3352c2028439547989fde0887ceb9f70e89e9de3f4198ec886f494e",
-  "skills/child-emotion-guide-1/.phoenix/provenance.json": "24beb19ac83548ad0f29057281d861e21327919ca92f1aa5e4d0c1de336124c7",
-  "skills/child-emotion-guide-1/.phoenix/selftest_evidence.json": "87f6e038359664a14a0e9ec8de48a190831ffe3c48b48596e2e420f9e0094829",
+  "skills/child-emotion-guide-1/.phoenix/provenance.json": "3216b9026c9d1c5c9fc15167b530845ed4e7e5ab63483bcd11dc53b584aa6e27",
+  "skills/child-emotion-guide-1/.phoenix/selftest_evidence.json": "993607f47e9a567a7cf96711c7b112a9629798465897c99552a4deca02cc7276",
   "skills/child-emotion-guide-1/references/creation/p0.md": "b2a93ccbfd268586086181410209befc2fa452215150e19d524dc547b3819b0c",
   "skills/child-emotion-guide-1/references/creation/p1.md": "cec79a5578efb54bb45e423e325c7eac9402a97c1b2299e8f5f51bb5ff9ae1e6",
   "skills/child-emotion-guide-1/references/environment/p0.md": "b83de7e18cec9303fbf9f94e866e47e3f2bb4822c1d9207c4480f1572df89958",
@@ -37,8 +37,8 @@
   "skills/child-emotion-guide-2/run.py": "408006102dca515bf80984bea20d51d5ae68de3156977f684debe28da785cb35",
   "skills/child-emotion-guide-2/selftest.py": "8ba572e495ab4f3f1ef20a72160454472c0e556d8e4dffa6fe2b3bd014503809",
   "skills/child-emotion-guide-2/.phoenix/originality.json": "6cca6295700f91010f92d52f50e1c4deaaa1e00ce64566c08ed5169a63c8d600",
-  "skills/child-emotion-guide-2/.phoenix/provenance.json": "e4922ebee8140007d40eedd6b669498d56e8d6a8827df25ff1ea0109858dbdd8",
-  "skills/child-emotion-guide-2/.phoenix/selftest_evidence.json": "4dc81994171eb4f657c1360b5bc78b542b4301da181fb8b7e59bd3728c18c1aa",
+  "skills/child-emotion-guide-2/.phoenix/provenance.json": "c0f02fdb6a606c5876c430e347ea7ff2d55898ab106455c4bf80e6a4bf3ddf60",
+  "skills/child-emotion-guide-2/.phoenix/selftest_evidence.json": "34f00c51b4d03c388126c908f720ec550a470cff7e4e1dce0902947cea183e4a",
   "skills/child-emotion-guide-2/references/creation/p0.md": "004be4e73365430fb5c096ac76060932d5cba14c32629e26d2f1af38bc8d0d66",
   "skills/child-emotion-guide-2/references/creation/p1.md": "23780fdaea110294c1a3774fff137d067bf699f0c08ab6f043a2ee4305ddb3a0",
   "skills/child-emotion-guide-2/references/environment/p0.md": "e20773c7a5d8b38b925b3743f351aff6b213bcbb3827d96d358615b1bcc6f656",
@@ -54,8 +54,8 @@
   "skills/child-emotion-guide-3/run.py": "48760776edde55512e60161b7f2567d7964d701f9d0f3673f422b354b33948b2",
   "skills/child-emotion-guide-3/selftest.py": "69a0070c40dae4b3443063cb2aab1e174283cd6d169ff61a0a6df290b89d4678",
   "skills/child-emotion-guide-3/.phoenix/originality.json": "75a5b95c5335b608ccec39bcce24e4e4d4bb944b6cd63d74c14fd4339a33c40a",
-  "skills/child-emotion-guide-3/.phoenix/provenance.json": "349e56198e967e93bc46363ee34ca273f64c15e657fd9bc65bf0e65323b391c3",
-  "skills/child-emotion-guide-3/.phoenix/selftest_evidence.json": "c7663b41a869ffd078c2bb594795c0531df8bf64337707901e2e0c3508d75d4e",
+  "skills/child-emotion-guide-3/.phoenix/provenance.json": "73ab9c9f8503db6a1f1a714891a3babf4e8a14bd204cc6df1977c2fe9d1ea02d",
+  "skills/child-emotion-guide-3/.phoenix/selftest_evidence.json": "a5bd0e6539dbcdfc38eb43a12754f4e65579d395a7d02d3c529da6c59a83d364",
   "skills/child-emotion-guide-3/references/creation/p0.md": "bdd1258b9ec98fc4033cc73733600e16ca945c2e91ff03885094aac98b646224",
   "skills/child-emotion-guide-3/references/creation/p1.md": "85133a053907821a0daf8e269978107ee3d52056a04c532b4cbfefeccf01e301",
   "skills/child-emotion-guide-3/references/environment/p0.md": "4ed05e9bd99985c7a831b0979eb11821ccbe677a7246023db92efe2f258861c2",
@@ -66,7 +66,7 @@
   "skills/child-emotion-guide-3/references/production/p1.md": "b65b3c62171101c605fa4e37bf01fc54866581bf95566e0bfa76bdad608a5e84",
   "skills/child-emotion-guide-3/scripts/main.py": "776506ad2d31474a30d4edd1e0c6272ae8b97c2e18bd64a690c76d7414e67e9f"
  },
- "sealed_at": "2026-10-18T19:53:23",
+ "sealed_at": "2026-10-18T20:55:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:01",
+ "at": "2026-10-18T20:54:36",
  "skill": "agent-feedback-loop-1",
  "slug": "agent-feedback-loop",
  "passed": true,

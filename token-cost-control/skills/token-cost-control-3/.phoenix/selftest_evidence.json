@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:11:57",
+ "at": "2026-10-18T21:04:55",
  "skill": "token-cost-control-3",
  "slug": "token-cost-control",
  "passed": true,

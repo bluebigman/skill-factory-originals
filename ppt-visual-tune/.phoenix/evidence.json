@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ppt-visual-tune",
- "merkle_root": "c25163f91c0925361d929aec65ff86479f69e9e16c9e0eb50a3924d5cc3df441",
+ "merkle_root": "1e4226e5cbeade9e45dbec348ab2a3a89b07cffce34c6e0fd1c75a5147e46c86",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ppt-visual-tune-1/run.py": "1f7225627d0b324dca1e3fad64bf445c98d9d21c43d1b90c8e2b6caee96aa8a1",
   "skills/ppt-visual-tune-1/selftest.py": "571d90326ebb5a7f000a448abe1ac17b97a800aa65d852d56c2db6aa5ac56293",
   "skills/ppt-visual-tune-1/.phoenix/originality.json": "1d837ec3beafc223646a5b573f3d4dc1f016e7cd5e741b0e788aaac9873b7718",
-  "skills/ppt-visual-tune-1/.phoenix/provenance.json": "5559b290a31d33d27e67049f0ad5d65b88288730fadcf36a826b9c6993c7f3d5",
-  "skills/ppt-visual-tune-1/.phoenix/selftest_evidence.json": "144e037a2f70d4b6b835f6ed7d4ab6815452e16ff43391a116b674e4131d6125",
+  "skills/ppt-visual-tune-1/.phoenix/provenance.json": "2e73886e4f9c40e37a5d5e9f651dfb3535684b12890a6d3e8156bbcf64eefe3a",
+  "skills/ppt-visual-tune-1/.phoenix/selftest_evidence.json": "3f1c41b97fbabf776106dff0ddaa7ac11386143b30d8f8e69bfa57dd08c5b3c5",
   "skills/ppt-visual-tune-1/references/creation/p0.md": "8360e299124f0bbe49d6ffebc865d93237286bb111e924b39b5fa11f66857a33",
   "skills/ppt-visual-tune-1/references/creation/p1.md": "d297ac028095265205792c48b840d2a487089132fbfe7f9f5dc0fddb6595d636",
   "skills/ppt-visual-tune-1/references/environment/p0.md": "45c12fafbdb257a5dbe612cee048def61f6561e32be95a3cb7731019a8e1d48d",
@@ -37,8 +37,8 @@
   "skills/ppt-visual-tune-2/run.py": "62cda44a4f3060bb3d1f6d9177a7d7c6ce97e94894447445ad98949b121fe88f",
   "skills/ppt-visual-tune-2/selftest.py": "d2466bcf39d4c9e8843944cfc583671c46d7b583b9d7074aac7580f96f7a4ee3",
   "skills/ppt-visual-tune-2/.phoenix/originality.json": "a007109f773c6f1d03316490e22e5cdb5ea0d17a97659f56575b437b16733d59",
-  "skills/ppt-visual-tune-2/.phoenix/provenance.json": "e403d7295119757db9bd7397c221ce8d04292e77957f7e9958caabf2d13f6ca5",
-  "skills/ppt-visual-tune-2/.phoenix/selftest_evidence.json": "c52240aeff8ab06bc093b97cb41f3785fbc2cd29c22f8111f29cb724f8c52df0",
+  "skills/ppt-visual-tune-2/.phoenix/provenance.json": "3fc5dc177379c8ed7ac84de33c9b9b41531f9bd7167e05b3e30aeaf80db14049",
+  "skills/ppt-visual-tune-2/.phoenix/selftest_evidence.json": "54ccbf4e074970cfbc36ad36ca11ce786312093e53c791f40bc179a166708dec",
   "skills/ppt-visual-tune-2/references/creation/p0.md": "82e5fb46be26ce9645a4a7991a50296e2e2ee2ed5b7c47d31a50e0a0018c8125",
   "skills/ppt-visual-tune-2/references/creation/p1.md": "1a42e9e5d6a13f350a11b2ed577a446c5c6452a9522e09b006374b62763e2bfa",
   "skills/ppt-visual-tune-2/references/environment/p0.md": "b40cdb65e55a468ba2e118eb6e52d72d0b94081a240d59853c7edd2418d627a4",
@@ -54,8 +54,8 @@
   "skills/ppt-visual-tune-3/run.py": "841e7217c966fb1ec25d6117e83c4ca7bc6b772301a6bcdc904c5ce7b95e99c7",
   "skills/ppt-visual-tune-3/selftest.py": "236e62900819bf29867ae95173c6cfa66fe72ffef5a8ed1351aeb7f4a5770ff2",
   "skills/ppt-visual-tune-3/.phoenix/originality.json": "4170b354d9481de40cc5382f76b8187c590f59df3eb0918fa0ada4b7b29c434d",
-  "skills/ppt-visual-tune-3/.phoenix/provenance.json": "903f5f363a8973f0e4ea7331fa7187d54b24f911d34d8300189b754d3204b9a1",
-  "skills/ppt-visual-tune-3/.phoenix/selftest_evidence.json": "55b0224cefe9bd43f4ba6a246d6bd655bd92a50643eba994a047f84ce7ffb86d",
+  "skills/ppt-visual-tune-3/.phoenix/provenance.json": "eb2d96863e43dc8ec4045abbe46f393cdbc0744000059a9ce224db3d29cdd793",
+  "skills/ppt-visual-tune-3/.phoenix/selftest_evidence.json": "f60bea6ddd1e9382dab873f2ce7af13787f7042d4930e5337e6745760648485b",
   "skills/ppt-visual-tune-3/references/creation/p0.md": "d1f3628efc0c91f0601ef5435fce2f627e8994ca5a0e6f4fa7a4794bd4a2cb8f",
   "skills/ppt-visual-tune-3/references/creation/p1.md": "337672de1e01f1991f21012b378d83642e1c5abc54186b235918a09329bad285",
   "skills/ppt-visual-tune-3/references/environment/p0.md": "fdb6d3cfdcfccf8851e2025389757d729ae2a2ca816f35484af72bde72dd697b",
@@ -66,7 +66,7 @@
   "skills/ppt-visual-tune-3/references/production/p1.md": "e33e5a10c457159f235835cf6a6c0184385d8c77286faaa5d0c68eeccbe4c6a3",
   "skills/ppt-visual-tune-3/scripts/main.py": "904428da4a1f779c7215edc50fd023fa2879c9d3a078dfbd5a1c63c0b0be610c"
  },
- "sealed_at": "2026-10-18T20:06:02",
+ "sealed_at": "2026-10-18T21:02:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

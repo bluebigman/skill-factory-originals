@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "inventory-alert-coach",
- "merkle_root": "e421847d19810168470f35c1576bd341a4337055983cfccbd56c6f35a11f0cd4",
+ "merkle_root": "a6ce3a7d7f576bdccb72236ef7d55db0d9b4db1e79f5f9f38fb10af157564d48",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/inventory-alert-coach-1/run.py": "e6930cb9646b66e49682eca1dbf2aaac4eb8ced8b1bae0db688d6653e3f87667",
   "skills/inventory-alert-coach-1/selftest.py": "5c592b13be9a6bb6d81c14a59d68aee40824dc1e3794a5fd4a26dba57ac3aaf0",
   "skills/inventory-alert-coach-1/.phoenix/originality.json": "02da5664c8b9d76c41a76c3b48a23a97d5d0bbbcc4c09f0547689c29cf818870",
-  "skills/inventory-alert-coach-1/.phoenix/provenance.json": "4d95f54fadb433901b0ce122c2fbfd94cb8a8756d1f1983563e8b71b64884927",
-  "skills/inventory-alert-coach-1/.phoenix/selftest_evidence.json": "83a58fc7021d34364f162800d0640db417a6622308ca179a8cc0e85fe3c1cadc",
+  "skills/inventory-alert-coach-1/.phoenix/provenance.json": "2f8784239b807ede8d6d0e8c33dd8b3f7eb39be31d0cc0f04456a6698627c515",
+  "skills/inventory-alert-coach-1/.phoenix/selftest_evidence.json": "c484961580859259089027cb27945fd6acdf2494afe3f5ae5580897041559dd2",
   "skills/inventory-alert-coach-1/references/creation/p0.md": "dd958750cb990560b3f6fc2baa1dca2a9e29da969147a5ecd38193f083b656ac",
   "skills/inventory-alert-coach-1/references/creation/p1.md": "8f2671a645d635b11de66f415e8ac537a3b2c1dcce021b7e32592723a86dcae7",
   "skills/inventory-alert-coach-1/references/environment/p0.md": "d2e701202425cdbf6dbb98ceb8c7a763495ed0a04c57965ae656a569c6cea9a4",
@@ -37,8 +37,8 @@
   "skills/inventory-alert-coach-2/run.py": "d3133a7df3e4bca90b62dcdafea648881af11e4567008f0e73ed1ff2c0c0d3a7",
   "skills/inventory-alert-coach-2/selftest.py": "c5a0c16ccab6be860dc9829e38717ca79e5df9308e0ef03846ba30e61404330b",
   "skills/inventory-alert-coach-2/.phoenix/originality.json": "d0e64e65ab587be15e69d3670fac17372905e5fe8d4a6074fd4d7b49e2c01c75",
-  "skills/inventory-alert-coach-2/.phoenix/provenance.json": "45be70efca319d8a4a7bc9957600a02c1e3ef708cadebd3a9379da6ffd0870d7",
-  "skills/inventory-alert-coach-2/.phoenix/selftest_evidence.json": "59fc7cc2dddf0d9ea3abf2589c442b4cda5d4b30b9bbcf66592f3f2cd0011bb7",
+  "skills/inventory-alert-coach-2/.phoenix/provenance.json": "70700afd3e3cd95dd14baedee073b28ca9e36696f9e911617176b50af13b02c0",
+  "skills/inventory-alert-coach-2/.phoenix/selftest_evidence.json": "29093df713021b24ffc8cf7fa15b50b2729f292d45fc185bd135aca8583df8ad",
   "skills/inventory-alert-coach-2/references/creation/p0.md": "be69437e291704efd4f5a54bb910eb22b7d67051b823134fd580b34ec51e7aa6",
   "skills/inventory-alert-coach-2/references/creation/p1.md": "2d75553d43b2ba3886b2924fceb28985f09fd7881d36e8c2c6f3110a09f874b8",
   "skills/inventory-alert-coach-2/references/environment/p0.md": "7aeed662c9ff60cbc8289131143388fd172daf9be2f526438f7b61fb950499ff",
@@ -54,8 +54,8 @@
   "skills/inventory-alert-coach-3/run.py": "d780c57c19cd07879416147df090915a92495b4e32277558798cf51394088a55",
   "skills/inventory-alert-coach-3/selftest.py": "a4afaf9bc853434bdc8c0441c0ec304608755c6f7e3bd30b5260fe8423b08086",
   "skills/inventory-alert-coach-3/.phoenix/originality.json": "416bdd866767f0f071237be4d243da3b9a04846e42fa96ed976c7617015a7e79",
-  "skills/inventory-alert-coach-3/.phoenix/provenance.json": "3c20c91e85aeb2c3878af779fdceaa67684fb4da1c34c7b9784f0851baf4a98c",
-  "skills/inventory-alert-coach-3/.phoenix/selftest_evidence.json": "f8102054dc94647e0e0f262182abd1d539068a39dc3feb6e3707835b85c68761",
+  "skills/inventory-alert-coach-3/.phoenix/provenance.json": "55e749bd71cde024cd0c7fb6d09a6870e667bd70ed26aea3f58f4d7a8abbd14c",
+  "skills/inventory-alert-coach-3/.phoenix/selftest_evidence.json": "5a5cb85d0446d85ab1990706da15387d86ef67fbe53fb092fdb0d2588e5b3891",
   "skills/inventory-alert-coach-3/references/creation/p0.md": "151072a02ef899809dfbdd10efcf1e2c36c14475ebb7b105e09be8ad51686cd3",
   "skills/inventory-alert-coach-3/references/creation/p1.md": "bf78906c9d94af9e5827296d886dd18cb8914a8b07f9056a7bf44ab87874e9db",
   "skills/inventory-alert-coach-3/references/environment/p0.md": "47414d78b2e144c774f12b61a1d0c4c775f2c9286d852866010715d4a3bd7ca9",
@@ -66,7 +66,7 @@
   "skills/inventory-alert-coach-3/references/production/p1.md": "0ab78ebee6d73920c4302583a5af1fc00b8b43714f85b52dd6dbe7e009ed0583",
   "skills/inventory-alert-coach-3/scripts/main.py": "71b5ddf882fa1af166f526e76f7e8c82f8632ba37f1638cfed2a0cef68b1fdae"
  },
- "sealed_at": "2026-10-18T20:01:48",
+ "sealed_at": "2026-10-18T21:00:00",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

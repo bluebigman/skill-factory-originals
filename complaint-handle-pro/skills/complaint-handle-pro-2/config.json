@@ -1,0 +1,72 @@
+{
+ "name": "complaint-handle-pro-2",
+ "version": "2.0.0",
+ "domain": "客诉处理",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "首问负责",
+   "then": "首问人负责跟进到底",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "分级升级",
+   "then": "按影响面确定升级层级",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "时限承诺",
+   "then": "明确响应与解决时限",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "补偿标准",
+   "then": "补偿标准事先公开明确",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "归因改流程",
+   "then": "投诉归因到流程而非个人",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "首问负责",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "分级升级",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "时限承诺",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "补偿标准",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "归因改流程",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-story-branch",
- "merkle_root": "5f224c0068433c8c75d0aacba71da5c3e4d616c3e323126ff247ddf342440ac8",
+ "merkle_root": "409ac43d6fe917cabb0195fffe6311c809719616c07bafd48906b7dddff71979",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-story-branch-1/run.py": "70d7f27c4903fb05aedbf60928e44180eca68c84ef3f12ebd34646ff8b48898d",
   "skills/game-story-branch-1/selftest.py": "3e8fd1c2bd334779a290461a8f8c83dec397357d43fcfef10a01a0d53903ab12",
   "skills/game-story-branch-1/.phoenix/originality.json": "3b8cf408407084081834f7a3a7ccb783a6bcc70f273f95dbd23777aaf31da609",
-  "skills/game-story-branch-1/.phoenix/provenance.json": "52ac574c840b74e86312a708c084927f5b2364d533ffcd343f2de5ccd92136c0",
-  "skills/game-story-branch-1/.phoenix/selftest_evidence.json": "2bc757b0532718c97428a856e1623cc0055f40c56cd01aacb731584a1976d243",
+  "skills/game-story-branch-1/.phoenix/provenance.json": "17dbeaef3800dfdd79feec8d71fb671f6305d66d106649995a594671e48f32ad",
+  "skills/game-story-branch-1/.phoenix/selftest_evidence.json": "f7ae2c72ddb20e66023ef0b82c2555a3e978c18093583dc6f410fd17217751be",
   "skills/game-story-branch-1/references/creation/p0.md": "cb952a7d8d85aa197b2f0742fed7da720ead9c3ae2d3bd364dc65c9d6367e769",
   "skills/game-story-branch-1/references/creation/p1.md": "54d7c17bac2971b4b51423add3c8f21f57d714b01201aae098ce077c6d4405f1",
   "skills/game-story-branch-1/references/environment/p0.md": "cd36c0952117abf2b26cd6a3d4d83f832fe55b55e806b2056c3fc4f009306bbc",
@@ -37,8 +37,8 @@
   "skills/game-story-branch-2/run.py": "c229e501d30d09d7c5e996d5ce44318b8560efa5e81d58b06aa7bac39b3aeb34",
   "skills/game-story-branch-2/selftest.py": "98f25c172f40ea30db13ffdcf03fe549ffd2c9d087015483376dac5b94058fd9",
   "skills/game-story-branch-2/.phoenix/originality.json": "6913905489e8e48ce5fb3abff6ad42c24663b33ea7ed6db7de1ff1895939410a",
-  "skills/game-story-branch-2/.phoenix/provenance.json": "f12c35c23e2e29f752c10bded042ea48ba536cb2f19afa6f44ebc49ba162dda4",
-  "skills/game-story-branch-2/.phoenix/selftest_evidence.json": "fdd6a0837aa2a20da715d4857d39693b66c6ea0d24162398a3374bae1f2aea2d",
+  "skills/game-story-branch-2/.phoenix/provenance.json": "8cf2fd116e2a739266b36c58ef8d9af12cb34cc2f3b2423aaea7d489cf9d0063",
+  "skills/game-story-branch-2/.phoenix/selftest_evidence.json": "39d449104fc06a42ce80312a9344181d485bbac52deca8b589a274187f9f2f28",
   "skills/game-story-branch-2/references/creation/p0.md": "84087622fdbbbc5e49e7d711f7478ef2131555df9dcb2d5472d448f6bb6e28cb",
   "skills/game-story-branch-2/references/creation/p1.md": "b520df4a3d941be4ab7916161ba4d794351dcd76c2b1d6d69ea5df52fb18f340",
   "skills/game-story-branch-2/references/environment/p0.md": "9f721f4a281c77e0a7ffa0531bd9a5a58139ffd76dc13b3318236d54cfefea14",
@@ -54,8 +54,8 @@
   "skills/game-story-branch-3/run.py": "4a384b41fb6f6a415472c30ec3eec09afff8780b52cc3f0831240e7f556fbfbb",
   "skills/game-story-branch-3/selftest.py": "87777a3a1fbcbcd092b8eb28afb2e5c45fcbe7238c59909de6250017651a407c",
   "skills/game-story-branch-3/.phoenix/originality.json": "07c3958940ac42a57314b6ae904b521c231ffbf33a72c3d19df6a698bf3ceffe",
-  "skills/game-story-branch-3/.phoenix/provenance.json": "24b27bcb761c3ac522d02d00f713d71e6cf7f88dca23e10ad72b74dcfc924746",
-  "skills/game-story-branch-3/.phoenix/selftest_evidence.json": "717c974388dabfb46cf7826a44ab445e5f85fbbf7019647ab67b3802893e408b",
+  "skills/game-story-branch-3/.phoenix/provenance.json": "fcd4b7ea503f06e7b87449f8c04adb6ba04fe66427f5ffa41087c1fd951f2d24",
+  "skills/game-story-branch-3/.phoenix/selftest_evidence.json": "b741714923684499010cbf7ca034cc9505583a64a3077e5483b665f6c866c896",
   "skills/game-story-branch-3/references/creation/p0.md": "9c7cc812acaf46e4254b206bf16a6de874c339bf69766dbff4d5d8f5d1456b18",
   "skills/game-story-branch-3/references/creation/p1.md": "051e827cca08a6f4afb41e2e83dfdf5ffad73a6c39d20cea03f9cb9410f4e34b",
   "skills/game-story-branch-3/references/environment/p0.md": "73427fc527195d36fcc995c92150d38f6b24b0637dafbb52ba38cec54f8b0d65",
@@ -66,7 +66,7 @@
   "skills/game-story-branch-3/references/production/p1.md": "4b256d880c4b3d82b2a39df2da1116a8403b9d53f0c3acbc3ad4d6c3c1754f9e",
   "skills/game-story-branch-3/scripts/main.py": "06ff2eb907fb8a68df160c019fd0c0277895acbceb5b97a4b7c040f57da1867c"
  },
- "sealed_at": "2026-10-18T20:00:03",
+ "sealed_at": "2026-10-18T20:59:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

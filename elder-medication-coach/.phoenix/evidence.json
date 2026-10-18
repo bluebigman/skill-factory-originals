@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "elder-medication-coach",
- "merkle_root": "8611cc5bd344fda6c1405579344d4020fb971c425a3c598c4ca18553fb9bdbfc",
+ "merkle_root": "d34f8f918b6f8e3045affcbc4feb4dccf127cdfa11f59efc97cde0ae28545464",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/elder-medication-coach-1/run.py": "bd75fe094bdbd0fe966c0cdaf71359c7eb85989b978942d526f95936b7b8d6df",
   "skills/elder-medication-coach-1/selftest.py": "c0586371c34318979f234f8d5f598933c867ff93c952ee5bda6a2659902c2038",
   "skills/elder-medication-coach-1/.phoenix/originality.json": "8455c5b4c8a37fd6bf23d59c011a0e874aa51510dabf58ff49911ed4d6ab43c3",
-  "skills/elder-medication-coach-1/.phoenix/provenance.json": "f950ed7be2510e2d780bbd45050c96aa9241c7c3175211dcb45f32e1934d11e1",
-  "skills/elder-medication-coach-1/.phoenix/selftest_evidence.json": "3288aa422fc3d6d77290462cb6da06e7d83e493fe65650cf06392164204ea3a4",
+  "skills/elder-medication-coach-1/.phoenix/provenance.json": "2da6ef228c3e25d3572cc6beba06094792ad9205218184b7057a80e6fba8de68",
+  "skills/elder-medication-coach-1/.phoenix/selftest_evidence.json": "d120340a9d71a97fb0fcdcbea9e752a78b41d5b459af3999e41aacca1f88f208",
   "skills/elder-medication-coach-1/references/creation/p0.md": "a0652ec409d9be6a1183d36760a6998d5d34603818b093c873b9e5b9d2496bb4",
   "skills/elder-medication-coach-1/references/creation/p1.md": "9ee45925b3c6dff6b7bcbecb1c50c892a393a2bea2ae3b415c4c019f3aec91f2",
   "skills/elder-medication-coach-1/references/environment/p0.md": "c706b4bcadeca21da75dd4a21ecb3afa5b913a086aea56cb118d8b6928df1213",
@@ -37,8 +37,8 @@
   "skills/elder-medication-coach-2/run.py": "1d5d54bf8336bfd3fff302817a2e1ac2c9e30f845befed375fb12ad0524701bf",
   "skills/elder-medication-coach-2/selftest.py": "bc557f71cde88f1de4147351e04efe3ad9a41bb1d74e8871a46679521c32da3b",
   "skills/elder-medication-coach-2/.phoenix/originality.json": "825de5bf8d7abe732f017dea3c7acd8fa05640e9e1662aa04f1178439f0734d4",
-  "skills/elder-medication-coach-2/.phoenix/provenance.json": "90130e613f9f73f90e218f4b4f8f4bb681ad4396aa39f3767b50ae95b1ad1358",
-  "skills/elder-medication-coach-2/.phoenix/selftest_evidence.json": "3389175e4871d9415392fc0f00c7a53192c8eef09665a31b91f249aa4b8c0e56",
+  "skills/elder-medication-coach-2/.phoenix/provenance.json": "a19b2838eaf28f6a0de1af4a7922101be9bc07d2beac8c1e1c45317faaed35aa",
+  "skills/elder-medication-coach-2/.phoenix/selftest_evidence.json": "7f95a7ceeef44baf113d51e153526f6c51d4778108196e9e196544b627c8a31b",
   "skills/elder-medication-coach-2/references/creation/p0.md": "760cffceab96e0bb516aa1fe1a7dadfa1acf207c16cc246382a50168320aca3c",
   "skills/elder-medication-coach-2/references/creation/p1.md": "d5a6c000cccba15dd410baeea284337b9077a342d5775655feb60f33b23833d1",
   "skills/elder-medication-coach-2/references/environment/p0.md": "fb070ff5b5bf88ed8f6e5635212ab1de13724db45f58691bac19e57e160ae81c",
@@ -54,8 +54,8 @@
   "skills/elder-medication-coach-3/run.py": "77d56dd69fdb83a09edc7a04c003f56e19351bd45cdfdc243861584fc46e9604",
   "skills/elder-medication-coach-3/selftest.py": "230252bdbb1a9061ffd1943fb942e53212178cc017272e114147de3ddc8ef36f",
   "skills/elder-medication-coach-3/.phoenix/originality.json": "4855521a867c8e53e75d5fa9812d7ec8a04e35d5dfab1d33012af232f6bfa7d7",
-  "skills/elder-medication-coach-3/.phoenix/provenance.json": "ece169eb63333e0797ba5fa35af5d835c29e0c4d38f7a5fef5362cef8e2740d4",
-  "skills/elder-medication-coach-3/.phoenix/selftest_evidence.json": "097ff1aa07a0778f88cc7be7465b6b788254280ec86d8b1b733704e05cae5d94",
+  "skills/elder-medication-coach-3/.phoenix/provenance.json": "8b55f002446561f231738cc5a37c05cb33dfb10a4bf1964deec4d01ae64e6b1a",
+  "skills/elder-medication-coach-3/.phoenix/selftest_evidence.json": "2c39f13dad7a091bc5c640ebedc9deb49e885416b237731478997746fde1cb4b",
   "skills/elder-medication-coach-3/references/creation/p0.md": "9022d6f947cd8394f35f3ab930521a42e77a01be2755b709b84c19d769dcaf11",
   "skills/elder-medication-coach-3/references/creation/p1.md": "165b7c865fe13b5c84e3556b92563b617ba8ab6a107f2f604917fc9ad2ac0f55",
   "skills/elder-medication-coach-3/references/environment/p0.md": "c8df00b339f3158ea43d41baf194c7d86f70f524939cda70995368f1fd4baa19",
@@ -66,7 +66,7 @@
   "skills/elder-medication-coach-3/references/production/p1.md": "599528087256a248137d1cb36f6e69f50d19ffb59531dae7acf23be96df7d43a",
   "skills/elder-medication-coach-3/scripts/main.py": "7f72863a17ae94b19dfcedeab3ad3dab93383c36e5c258ee17209a58de37a476"
  },
- "sealed_at": "2026-10-18T19:58:09",
+ "sealed_at": "2026-10-18T20:58:10",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

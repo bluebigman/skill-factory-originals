@@ -1,0 +1,72 @@
+{
+ "name": "ci-pipeline-design-2",
+ "version": "2.0.0",
+ "domain": "持续集成流程",
+ "boundary": "本能力提供通用方法性建议，不构成专业诊断、治疗、法律或投资意见。",
+ "rules": [
+  {
+   "when": "快速反馈",
+   "then": "单元测试前置并控制在十分钟内",
+   "source": "scripts/main.py#RULES[0]"
+  },
+  {
+   "when": "阶段分明",
+   "then": "构建-测试-扫描-制品分阶段",
+   "source": "scripts/main.py#RULES[1]"
+  },
+  {
+   "when": "失败即停",
+   "then": "任阶段失败不进入下一阶段",
+   "source": "scripts/main.py#RULES[2]"
+  },
+  {
+   "when": "缓存复用",
+   "then": "依赖与构建产物做缓存",
+   "source": "scripts/main.py#RULES[3]"
+  },
+  {
+   "when": "产物可溯",
+   "then": "制品带提交号与构建时间",
+   "source": "scripts/main.py#RULES[4]"
+  }
+ ],
+ "keywords": [
+  {
+   "term": "快速反馈",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "阶段分明",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "失败即停",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "缓存复用",
+   "source": "scripts/main.py#KEYWORDS"
+  },
+  {
+   "term": "产物可溯",
+   "source": "scripts/main.py#KEYWORDS"
+  }
+ ],
+ "recall_terms": [],
+ "features": [
+  "cli",
+  "selftest",
+  "dry-run",
+  "error-handling",
+  "json-output",
+  "term-recall",
+  "confidence",
+  "clarify",
+  "idempotent-cache"
+ ],
+ "encoding_fallback": [
+  "utf-8",
+  "gbk",
+  "gb18030"
+ ]
+}

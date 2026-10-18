@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ux-metrics-pro",
- "merkle_root": "2130a59af33bb856cc2895cd1d32a5e58c7619bd342710ac0eea7c4b9a7f5b06",
+ "merkle_root": "7a8c53342d2f7d9a8b281ebd256516a86208cb62e4559367f0c1907b4fe74821",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ux-metrics-pro-1/run.py": "51bb8c5d8fb4dd2ee6d6933d49402ce33935300843c602f1b0d857d3ce219783",
   "skills/ux-metrics-pro-1/selftest.py": "b713284537ab4a799043028040c51ad4828938e2b25822675ec195d0bf2d06cd",
   "skills/ux-metrics-pro-1/.phoenix/originality.json": "69ab83bb464c5836e0d7eee083f08c5e5fe4820575a49361ec06ddaebe0f7e15",
-  "skills/ux-metrics-pro-1/.phoenix/provenance.json": "7c38315116221a7079ac8f1fa3fcda06000a8fb100006947932a4314df834d98",
-  "skills/ux-metrics-pro-1/.phoenix/selftest_evidence.json": "e0ec5d8c67b428d4f406efc64bd4d51deb8b0fb8f1ff7bc5da2bc3314620f600",
+  "skills/ux-metrics-pro-1/.phoenix/provenance.json": "891402c7b9a420da83a62fb1155a22cace6b5bcbd829e791a47f64da457e7878",
+  "skills/ux-metrics-pro-1/.phoenix/selftest_evidence.json": "1f891ad631e4e5caa3ec1fea7f3c74a79e93104ef0d2f66b93ed7649ae39452e",
   "skills/ux-metrics-pro-1/references/creation/p0.md": "2a943839acdd74f14d2dfc104d72277d7aba7f12ccebfc24f742e5730b80cee1",
   "skills/ux-metrics-pro-1/references/creation/p1.md": "1a14265d5e47a35654d662e78161ea3a83bb27fe7f994959227865abd9835647",
   "skills/ux-metrics-pro-1/references/environment/p0.md": "15049c3a87ddf4379d4ddbebaaf9ac3b95e43f1ba0e7dde15eabccea4aa3bc0c",
@@ -37,8 +37,8 @@
   "skills/ux-metrics-pro-2/run.py": "29c734be1fa37c6d0ae885898bdb63a4a770920698b1c478e47b71f385ebb36b",
   "skills/ux-metrics-pro-2/selftest.py": "f11e0298bba90dae8e1c6b53f01d4553588c774b2279c7e22592fc76d1a42323",
   "skills/ux-metrics-pro-2/.phoenix/originality.json": "fa5c57a720339d361d8ead32bcea6e35b1d3f3bdfe55851b563dfa01af15176a",
-  "skills/ux-metrics-pro-2/.phoenix/provenance.json": "8be77c104b034c979839f9c657bd05cdc5dcfce54d940194192fd6c9a8db46ac",
-  "skills/ux-metrics-pro-2/.phoenix/selftest_evidence.json": "2dd312a58fc3f125123da62c355175dc871aa3e9cf27056225bc3671150096d4",
+  "skills/ux-metrics-pro-2/.phoenix/provenance.json": "3e676236b42ed9e575334396714e4ae85a0696b5a454271bf502178a8906eb44",
+  "skills/ux-metrics-pro-2/.phoenix/selftest_evidence.json": "a1f362628f5d3ad1aea6d7e9ac1b7226b8db83f8a1d7db6b92478cf9ca231794",
   "skills/ux-metrics-pro-2/references/creation/p0.md": "01af1d0d244cb65708efad0bb541030698bcbbb3410d477eb9d20f95e9eea3be",
   "skills/ux-metrics-pro-2/references/creation/p1.md": "09e20328f04cd5234ccb496aa4b3f8e702e97da0285237cd495ef1d55ac45465",
   "skills/ux-metrics-pro-2/references/environment/p0.md": "98b6bc5716dee339afb3b1e99686e44a5ef39e063a20bbc7780bd610abd0e247",
@@ -54,8 +54,8 @@
   "skills/ux-metrics-pro-3/run.py": "8a45ca4a07cebf80f6d0bddf62529e2b828c103d4d764fe9a08c9d3f5688720a",
   "skills/ux-metrics-pro-3/selftest.py": "52b9ee0e619c3c922e840300b077f1683a6dcab0f9c8c12604ccc49540261e72",
   "skills/ux-metrics-pro-3/.phoenix/originality.json": "ea94962e73e9c0613b970821aa728810159464abd43275e2e35c111a0e239ac1",
-  "skills/ux-metrics-pro-3/.phoenix/provenance.json": "a5a4f8832c8d2f57895d8f6a86843ad5653bbf6a9e43360beb728b61ce013aa4",
-  "skills/ux-metrics-pro-3/.phoenix/selftest_evidence.json": "0d5531db77817589d0e3a06ea96619e9c2bb9014567cbbccc2c5de310ce9cb1c",
+  "skills/ux-metrics-pro-3/.phoenix/provenance.json": "8c24373b3c0dfb41aea11fc4864eb54e37bf7cc930553aa16c2bd855c11cb684",
+  "skills/ux-metrics-pro-3/.phoenix/selftest_evidence.json": "10bb0d9a0f07f51766aa82097e5d129a1c06bd0cbc02f9d41582763654fdc024",
   "skills/ux-metrics-pro-3/references/creation/p0.md": "1ac00a4d7c7402f2e1024eccca2dd094b43118056da26590bc06928bbcc5dd15",
   "skills/ux-metrics-pro-3/references/creation/p1.md": "c3f7d9fe8a22492a1336d97d24d263f616c2018582d3d0aa4eb5cbabc6082865",
   "skills/ux-metrics-pro-3/references/environment/p0.md": "773544fabf26836112ad4a045fe4a75488fe35f24946e55b0bd58ef296e36b16",
@@ -66,7 +66,7 @@
   "skills/ux-metrics-pro-3/references/production/p1.md": "de4e02e20a643e7725558c2a007acbd520106779fb5d14643eb4c5c0d0b2087f",
   "skills/ux-metrics-pro-3/scripts/main.py": "51e1f1e10a2212a4b3572b55344f250bfb841200a83054e9249f92c7da70435c"
  },
- "sealed_at": "2026-10-18T20:12:34",
+ "sealed_at": "2026-10-18T21:05:13",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

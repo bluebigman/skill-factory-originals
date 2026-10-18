@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-identity-manage",
- "merkle_root": "a48694763d45189f7d6adcea44b2fe6b23ef9cff69ec9962902ae459628f7682",
+ "merkle_root": "5036c25d22f743daa1388aaed97ae10f39fd46a944d3700220a593a028b2eb23",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-identity-manage-1/run.py": "0fa427d148f5558f7dc6c2e9c7cb3e7070035dc9f43509c6cc5394e560d00bbb",
   "skills/agent-identity-manage-1/selftest.py": "56bd8776bc55bba8f1a3fd12f09554086ca93f89deb506ab8341cccaa5a36243",
   "skills/agent-identity-manage-1/.phoenix/originality.json": "bd0f1e0bed0f2b92f06bdd239cbf3b61e75ef7d5f07dbec53af69c872b6d4edf",
-  "skills/agent-identity-manage-1/.phoenix/provenance.json": "afaa5bc7352cb0f4bc382a3760d3a1821c8d73e56d041e8135eb43aaa91117c9",
-  "skills/agent-identity-manage-1/.phoenix/selftest_evidence.json": "1152c7e9686bdea03f0a9eb8e5451806d61f82c0e479808e17dfe4a10fb0e6e9",
+  "skills/agent-identity-manage-1/.phoenix/provenance.json": "d395e731c9e6e228f3cb4a0fe608663ce60f4f8b52d0ba033c42228b69159187",
+  "skills/agent-identity-manage-1/.phoenix/selftest_evidence.json": "e4968ece4d8a42bcf67900b56e4ff246603d434c8913bfbd2382c582c86c843b",
   "skills/agent-identity-manage-1/references/creation/p0.md": "1d4c02561dd5b296a9003827f6946496dc2621737817a72f664605bb4eb6ad9b",
   "skills/agent-identity-manage-1/references/creation/p1.md": "41b59ac2019efba21d0609bc8de13ecd4b2630bde40a7152ae49148cd41d146b",
   "skills/agent-identity-manage-1/references/environment/p0.md": "d5df9f5394bf489eecce1097f37c7db59f2e13c179facfd6eb7d8f8b6fae0ca7",
@@ -37,8 +37,8 @@
   "skills/agent-identity-manage-2/run.py": "8f5925540184e1fb90ab141067a773e533328aeeba0e49ea4a0b57be7e6861a4",
   "skills/agent-identity-manage-2/selftest.py": "e0e4740839fa2f18b32d1d9b4600a0a4c2607918af5ec2c8c22ad2df7330cfb1",
   "skills/agent-identity-manage-2/.phoenix/originality.json": "3707d5aaf5c237ee474dd55fce3f7215e8461bf77b9f8b8a8a9b179d119dcbd5",
-  "skills/agent-identity-manage-2/.phoenix/provenance.json": "750497659fca6b2f1dfefa8b18d35d6b12ba1004eb62c2ba3bc7f7799997f85e",
-  "skills/agent-identity-manage-2/.phoenix/selftest_evidence.json": "62f0b86adea0fd0df94a05e76c5536bcc65a2edadb1e8905267b0edda1250618",
+  "skills/agent-identity-manage-2/.phoenix/provenance.json": "04729d96066121efd93f315c3cd26414121dad6e56b057e1a0131ebff145f9b6",
+  "skills/agent-identity-manage-2/.phoenix/selftest_evidence.json": "d3efaa5f78ab663395e00403f276ccd6cebce808618439c88fe57142a131e5c1",
   "skills/agent-identity-manage-2/references/creation/p0.md": "07d1fe4acfba543df9d100ab7fd29c05588bcf5b7d6fee30afbd7b05eea1c188",
   "skills/agent-identity-manage-2/references/creation/p1.md": "cf888a2242a1661b244ae73bd50bdb3ea5dcaa9d85222b1840b7a5220b743e44",
   "skills/agent-identity-manage-2/references/environment/p0.md": "63c949195250e62e3f3b61a6bcc91fec81aa09725af0e7d548e996543b96c618",
@@ -54,8 +54,8 @@
   "skills/agent-identity-manage-3/run.py": "75a3ef95040403ad7717cfe688eb6d08b134dbee50b8d8aff4b98249db5634f5",
   "skills/agent-identity-manage-3/selftest.py": "76dbf7f0a0dac8f41b019ef3b89dd5fc86364dd8307dff079646dc6a52fa0df4",
   "skills/agent-identity-manage-3/.phoenix/originality.json": "5c87547d362e34078d769bafc91b015aaf160faee0940f5e19800d5f2cf82d36",
-  "skills/agent-identity-manage-3/.phoenix/provenance.json": "3784144bbc818494f440d406b9a33a59854c442b123374560038cc8b181fa71c",
-  "skills/agent-identity-manage-3/.phoenix/selftest_evidence.json": "440d6ac38880419620210f2a9f8d1689a4f1586a79cc7daeb7403c7bbc4c33c8",
+  "skills/agent-identity-manage-3/.phoenix/provenance.json": "8f89f4aa0d51ec302c4e09158b1ed4d8309c9d6dc03892d54ab55eba2c2f96fa",
+  "skills/agent-identity-manage-3/.phoenix/selftest_evidence.json": "9520fb0127a556f8e650113dd468b8b2955758c341d7cd3dc168f4e1251dd820",
   "skills/agent-identity-manage-3/references/creation/p0.md": "2906b70bbb825ddd869aa968d6b36dc97b375172f101f6ce0f3f7c85eaac7bf7",
   "skills/agent-identity-manage-3/references/creation/p1.md": "1b2833b42460e720cc853e4dd4470eed26b1b93d5949f4e45bad22158f21a140",
   "skills/agent-identity-manage-3/references/environment/p0.md": "723bb6742c423afba7eaaa48be65d802bf467a58fb8ae569e9853360e83a0ed1",
@@ -66,7 +66,7 @@
   "skills/agent-identity-manage-3/references/production/p1.md": "9aed41919447f1e11f98b76120d8bd287cfcdaabf7b7f94519f012fa02fc25c3",
   "skills/agent-identity-manage-3/scripts/main.py": "7727d86e612bf0390acf76858439a81b50fb64b0904688f8b00fd42f957b76b5"
  },
- "sealed_at": "2026-10-18T19:52:01",
+ "sealed_at": "2026-10-18T20:54:36",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

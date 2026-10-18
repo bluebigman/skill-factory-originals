@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:10:58",
+ "at": "2026-10-18T21:04:32",
  "skill": "task-scheduler-2",
  "slug": "task-scheduler",
  "passed": true,

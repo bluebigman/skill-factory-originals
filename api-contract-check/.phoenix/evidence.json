@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "api-contract-check",
- "merkle_root": "e27b57943c0670089653043132328b8efbd8248718556d5b50f42405025767a6",
+ "merkle_root": "34754c4db0c5e952459e348f68e528394954b1609499ac4459d9fd1c96805011",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/api-contract-check-1/run.py": "27a9c95d206695ecde4bd120d89b7c9518aef951292aefbcb95e5cde86d03dd6",
   "skills/api-contract-check-1/selftest.py": "405dc1a3536f5e7f4f20e2a2307f25874a62c4bbacd48c83a383f6b9ad59ca47",
   "skills/api-contract-check-1/.phoenix/originality.json": "8524a8692db4f2dfb99e463309fe95b7f5e4b264b8a681675c102235cb27c994",
-  "skills/api-contract-check-1/.phoenix/provenance.json": "1f4539e4f5707c4c8e4473636037284684067a64f9a75ab93f84b37313b2ad30",
-  "skills/api-contract-check-1/.phoenix/selftest_evidence.json": "568e0a7c9e5c1f1dc36af1aa08679d4decdd6ba75c3364dce92afc7fe95c535e",
+  "skills/api-contract-check-1/.phoenix/provenance.json": "a489895af5aec58f8aad40ce47fc60fd8c14eb83f307514f0aa8ad6029228790",
+  "skills/api-contract-check-1/.phoenix/selftest_evidence.json": "1095b31c727b1eeb654d8997cc35f7d89948fa5e54aac851355c45b38776f773",
   "skills/api-contract-check-1/references/creation/p0.md": "afc3442bcd2994628d0e954c767a6037abb13b89d6cc904ca431934116d32b3f",
   "skills/api-contract-check-1/references/creation/p1.md": "7de0a8ff763dab2e8830caa580f95bc82ced751965f375c939cd2455a0f0af07",
   "skills/api-contract-check-1/references/environment/p0.md": "2e0603119c306c93c44dbe254727b5179730627eb0c0e5dddb3ad052175370c2",
@@ -37,8 +37,8 @@
   "skills/api-contract-check-2/run.py": "307009af27dec38139a4a45b714eea457bf32954e9211ddd626ea55a26c372cc",
   "skills/api-contract-check-2/selftest.py": "c8a5412b536567681a0396c736d50bbb680e4ebff3f6585c3898bbd5321fb4b1",
   "skills/api-contract-check-2/.phoenix/originality.json": "25748aea0ae7241c839a31f1ac4a9a08308a937811d60729dd93020d042a1fa0",
-  "skills/api-contract-check-2/.phoenix/provenance.json": "a68879bf8d80e97c17a53e58519f967c2274761454edb42dbd099314d21b69cf",
-  "skills/api-contract-check-2/.phoenix/selftest_evidence.json": "b6a193839392e4296dddeb14bc4868a6c75af6efdeb1fda90867600954c308bb",
+  "skills/api-contract-check-2/.phoenix/provenance.json": "9b9aad15937da75a60498b71bbf14a4465854da43cc502808b1b2cffef384f94",
+  "skills/api-contract-check-2/.phoenix/selftest_evidence.json": "0a41ef93cf88ec97bd030c34c449293a541ad5659b48dec1c34ad4eac2dc7a68",
   "skills/api-contract-check-2/references/creation/p0.md": "d7d5b4488e46fdb3d55fa2428ca77e2924776ee9f1aafca917735710a9ed2f4a",
   "skills/api-contract-check-2/references/creation/p1.md": "f6916bcdf9c434d940a4113535a92f9366ee927a4da5f4ca4b977251bc2f6b8e",
   "skills/api-contract-check-2/references/environment/p0.md": "cde3b8ae7bef0f0dd507304c5c339eac23c0f187e3e52d080d9bf4f5a848a53d",
@@ -54,8 +54,8 @@
   "skills/api-contract-check-3/run.py": "4e8b3bd9c2a512e1de75524091d819ff53a7d3259e51f11a72a3072d99346066",
   "skills/api-contract-check-3/selftest.py": "e1a231bc3f14fa6c9b890148c386fc12185f7cb0327cb597009bb3e019c3f4e9",
   "skills/api-contract-check-3/.phoenix/originality.json": "c289cd34bedaa353c2bd78d60fc3054aeaef984d4b39dbdb5411bfe3ea39901a",
-  "skills/api-contract-check-3/.phoenix/provenance.json": "441c4d5e72f44fd9a11a0f849accfc0c1e554385a275a2eaf91f331187878cc7",
-  "skills/api-contract-check-3/.phoenix/selftest_evidence.json": "73fbd180ecfefbb0169b3e03d537029b60c16e24bec766dc0e891b90503602eb",
+  "skills/api-contract-check-3/.phoenix/provenance.json": "dbf7165d0d66a740e48166370378b5af1c31724755a7b8db558d4168512c7f05",
+  "skills/api-contract-check-3/.phoenix/selftest_evidence.json": "423ed9246a1c3efbf57d07ff3d4f50cf3e18c43a5fc106e14490c4422da7962e",
   "skills/api-contract-check-3/references/creation/p0.md": "078c89e52d02055efff13ee133561ed00480f2c68a4d309d72dc5431be0ed70c",
   "skills/api-contract-check-3/references/creation/p1.md": "7fba9f3ca4bbf3cdb08b77ae6f3807becb3aa025aa8823e00af71239433c1ca7",
   "skills/api-contract-check-3/references/environment/p0.md": "d221adf124c05ab1d4b679e25609acd4186fbbba50d340f6c9bc24f4eba68109",
@@ -66,7 +66,7 @@
   "skills/api-contract-check-3/references/production/p1.md": "ffe8ebd7fdfe67a0626f8dbcd48bac00ec8f810fdaf9cd1f2e0f94bfd1a64040",
   "skills/api-contract-check-3/scripts/main.py": "c2a7e201d6663c5c28860bc2a93fd416cc034fc0ecd517513f9ae7f6f3564421"
  },
- "sealed_at": "2026-10-18T19:52:31",
+ "sealed_at": "2026-10-18T20:54:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

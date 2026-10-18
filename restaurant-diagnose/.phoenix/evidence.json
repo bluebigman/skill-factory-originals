@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "restaurant-diagnose",
- "merkle_root": "b8690757086c635bb16f13c1ba36069c427b44747046a60b0e0188c5b029755d",
+ "merkle_root": "77fe2aabd6a4c2b8849c321c8d6fc67a7f11cc9b09e92b9297fbfb9e6fe5cf27",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/restaurant-diagnose-1/run.py": "969d08d27271c7c2b55c681fd020932bc68f6c8c20e201b89c6dbca6ab503699",
   "skills/restaurant-diagnose-1/selftest.py": "117bca28cd07d6f784b6e882f54bc7aba2acec50f3dfad69d95396c7da03f9e6",
   "skills/restaurant-diagnose-1/.phoenix/originality.json": "d575e591c8983e8708c51a2f7a4039d331cb985f67ec04bba6e16c8f0bf4c19d",
-  "skills/restaurant-diagnose-1/.phoenix/provenance.json": "a0485de9c8350933897507e280c38c9c354b89ebc9d0248cb6397f5fdd91533c",
-  "skills/restaurant-diagnose-1/.phoenix/selftest_evidence.json": "3ebf3101479c9a54eab5247263b484f6f8083e0d8b91325c9455523f911e9856",
+  "skills/restaurant-diagnose-1/.phoenix/provenance.json": "f5140b9f9f787223c4b6a2d2ae103e7c26bd1ef45d329a911ec81a3094e724b7",
+  "skills/restaurant-diagnose-1/.phoenix/selftest_evidence.json": "eb40a8df543b3bcaa8cc60923d052704a4d1030df87c98c851a7b5556b3790e8",
   "skills/restaurant-diagnose-1/references/creation/p0.md": "9bb02c2ac6c71047adf12bdd8abe9be114416dcf35327c3765b92a753fababdb",
   "skills/restaurant-diagnose-1/references/creation/p1.md": "93236df873f007f99f38edb981fbac955716e2dcbf614bb62f98741d008d2c2a",
   "skills/restaurant-diagnose-1/references/environment/p0.md": "7144d8369ee5f4df45917a3364b2976f4db8ee79db34fafb0dd423574e08df7e",
@@ -37,8 +37,8 @@
   "skills/restaurant-diagnose-2/run.py": "b93506694f3f7e9ad50e54e0d0ef3322a11dec04e6850091685f97b95a1c100d",
   "skills/restaurant-diagnose-2/selftest.py": "7d40a971c04e3f155f79e0c16a564baaab584c6ee3a3d8825a7673d47d2c4b05",
   "skills/restaurant-diagnose-2/.phoenix/originality.json": "043b15bade67b2f13ca6c2cb0b3fc0eae4641e61fbf8c7063f97d91f5038ebcc",
-  "skills/restaurant-diagnose-2/.phoenix/provenance.json": "0e497dc4968bab15292715f7f9224e5076e7d99868c8db6153d850d63c80376a",
-  "skills/restaurant-diagnose-2/.phoenix/selftest_evidence.json": "ee5881a2944fb31dcd8614a1e2e839578a27cc60ec7e27260f2481a16973e2dd",
+  "skills/restaurant-diagnose-2/.phoenix/provenance.json": "8b9242718e1624958a2d0d1c236a631a51a872f6efe721bcd3fecc67935a6247",
+  "skills/restaurant-diagnose-2/.phoenix/selftest_evidence.json": "d9ae329cd14dd0719db625290e3826b7ca7bbddec9fdc1a219d081d472b879fc",
   "skills/restaurant-diagnose-2/references/creation/p0.md": "475c9bd721222a796cd3c914deb6663b22baac8b54f6b9ebf56e42f6143ae40e",
   "skills/restaurant-diagnose-2/references/creation/p1.md": "bc75d48a66da3f7075735b5002d45218edc15b0b9abb9169930e81b72e80ed8f",
   "skills/restaurant-diagnose-2/references/environment/p0.md": "4804a757c743055c693a5485da6ffd0299a93ff8f92549369b381794a79fde3e",
@@ -54,8 +54,8 @@
   "skills/restaurant-diagnose-3/run.py": "33c3f4642248b243cd46584dccef2728eb51293ad334a888dec7fc72679f787a",
   "skills/restaurant-diagnose-3/selftest.py": "4dc9690cb042617ea8df6698e7fed2849190d222a8098a57fe99ce35ccfa7fa0",
   "skills/restaurant-diagnose-3/.phoenix/originality.json": "87969aea87b236cc35745987f71f4fa2ce17ca4ac92ba6c3728704399bc3240e",
-  "skills/restaurant-diagnose-3/.phoenix/provenance.json": "b7600b57c40cd28ccd77911c52db50b7e257758ad465dc8cae832d1b971b789a",
-  "skills/restaurant-diagnose-3/.phoenix/selftest_evidence.json": "f370967ffdbb01e2bd0d715ab28fcbf9344c304a64f668e253536938be234ef3",
+  "skills/restaurant-diagnose-3/.phoenix/provenance.json": "2d42e20205554f5a381d6f144c759020cdca5151cef087830181654acc0b3ea5",
+  "skills/restaurant-diagnose-3/.phoenix/selftest_evidence.json": "ccaccf429dcb49cdff98db4f2290e610c8a9a6e73ae91d1a4772447e0b82ee88",
   "skills/restaurant-diagnose-3/references/creation/p0.md": "5841de8a0b9b9c62d436440cca7f2bbf1661cced1c1a527ebc3ee8ba8be91e63",
   "skills/restaurant-diagnose-3/references/creation/p1.md": "0750adbfbbb97d5a7ecd23d3b7887b10ad1ef38faf55ea270b9a79999e9c682e",
   "skills/restaurant-diagnose-3/references/environment/p0.md": "0b73f80435fbabebf8f49e4b572c71be4ee86622a8cba933fbcf36a4f4ce4852",
@@ -66,7 +66,7 @@
   "skills/restaurant-diagnose-3/references/production/p1.md": "a38dad151280ab60a578ff81b8202342605c1e4ea0db3c6ffe6b5fe82eddbeeb",
   "skills/restaurant-diagnose-3/scripts/main.py": "ad61ed7936f803a5f4b4a0cec02bc6534e0a90b84dce4d120b224c76655f0e90"
  },
- "sealed_at": "2026-10-18T20:07:53",
+ "sealed_at": "2026-10-18T21:03:07",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

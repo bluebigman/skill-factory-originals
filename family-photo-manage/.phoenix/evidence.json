@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "family-photo-manage",
- "merkle_root": "38031d38550db83424e664f167edcb43f0bc8a6e57cdea2a2eb6ced91c5208fc",
+ "merkle_root": "8b400cf5344202f09c8d5a47f3572448398a3749515e0aabe191f01e7cdc68db",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/family-photo-manage-1/run.py": "1e6a95c7ab59cd5204b07990cb5ab3f38e3d32d62bef2d8945ed12c72cc1c710",
   "skills/family-photo-manage-1/selftest.py": "deda9a6f078cf3223ba8e2b1f213e6873d7b79df2ae13f73eb1867df5664e794",
   "skills/family-photo-manage-1/.phoenix/originality.json": "4b160d19734dc4abfe6ac8632472913e799f780d96c1e9e548c71eac2a816588",
-  "skills/family-photo-manage-1/.phoenix/provenance.json": "76b1b6ba555edd7b73680d1cef02793a027419e6d3d67675359dab331891015f",
-  "skills/family-photo-manage-1/.phoenix/selftest_evidence.json": "c72964303f78965e76150db54748bd580e95ab554fc54fd1bfc129d57c679e6e",
+  "skills/family-photo-manage-1/.phoenix/provenance.json": "f011dde741bd7c5498e6392bddcfdec81918dbff1f0ba8ba9398ba4b3a225ba4",
+  "skills/family-photo-manage-1/.phoenix/selftest_evidence.json": "aff308e552502e2d5d582233c0a839c1e7ca35f7ed1b3c5e00e3f3822efaec7c",
   "skills/family-photo-manage-1/references/creation/p0.md": "4ac12493c4aedb6a71d89099211ca7e88c81e59c5b8b6a4b9f41039bef16903d",
   "skills/family-photo-manage-1/references/creation/p1.md": "41b5c85cade81b121af0cbd5c2cc5a35b1d725c0da4bb2c2edbab031527be73c",
   "skills/family-photo-manage-1/references/environment/p0.md": "576949c1b4cdc473bbc5151f74c2e5ebb1348d83266f32e06ea485df85701046",
@@ -37,8 +37,8 @@
   "skills/family-photo-manage-2/run.py": "cf54cbc36bc6ed55aa5cc473bac2ab4d295ca6081374496b80277e29783f29e1",
   "skills/family-photo-manage-2/selftest.py": "56e12b770e74f345f2885909a5411363e346170c718ae5e7a10b676a46fc88b1",
   "skills/family-photo-manage-2/.phoenix/originality.json": "0327f89da95191f8d5c4810d27f308b8ba0f866fa4f38deeec1cf5f6151d9057",
-  "skills/family-photo-manage-2/.phoenix/provenance.json": "c7f54df7d6fd5ba8b4332a29ef7a6a20e02cc3cb498ff99b53878811bc16927f",
-  "skills/family-photo-manage-2/.phoenix/selftest_evidence.json": "4846ae2b1da5a4ed199765a4e85a58ddf5a2fe943028d0214778a5bf0d28148a",
+  "skills/family-photo-manage-2/.phoenix/provenance.json": "9d407f1e0e30202c162f290b948a3eceba71886837cd641c6d6321f2c662ed5f",
+  "skills/family-photo-manage-2/.phoenix/selftest_evidence.json": "64b720dc5a7e7149be32d214ad5b4209f37c45f1bb6da11ab600e83e7a518ace",
   "skills/family-photo-manage-2/references/creation/p0.md": "1019a8eb855467c51d5d16a22b472ef6faba31aca361657456631ca72e95d340",
   "skills/family-photo-manage-2/references/creation/p1.md": "095ed0ca71619d62c3d1fa4ff806c51c4c195e1a3e592c82f90acc44160d0c9d",
   "skills/family-photo-manage-2/references/environment/p0.md": "0aaa057da61e950c7027fe909b618c61be501ad41f8b731714c9247aacd55889",
@@ -54,8 +54,8 @@
   "skills/family-photo-manage-3/run.py": "ae0f55140bc99114990fb59ec0c43c0b07bb53699bd97c2742ec31db06b75292",
   "skills/family-photo-manage-3/selftest.py": "0bc1af11e9e26dd4d14046d10e746e6a5076f99e44e3566819be0e6722abf910",
   "skills/family-photo-manage-3/.phoenix/originality.json": "f40f6ab3e4f7f8a7359d59ce4af366c33e8a42d4b2b2823586b3c3f8018c659d",
-  "skills/family-photo-manage-3/.phoenix/provenance.json": "b0d6ba4ce164e86921c7182d6a3f9e200fc600338226633e1630c1e7b552b144",
-  "skills/family-photo-manage-3/.phoenix/selftest_evidence.json": "a2dc5f3597e46d1e7b4e5e922ac76fbfd72f5d06e26f002af23aa7b988554879",
+  "skills/family-photo-manage-3/.phoenix/provenance.json": "39406e8862cc54e8370352786897e44ea7a6c14d4bf83009c7d8994f61ed6020",
+  "skills/family-photo-manage-3/.phoenix/selftest_evidence.json": "4181b48fb24e086ac92e2533beeda6c6e9f28feaf985c117d478136391622c04",
   "skills/family-photo-manage-3/references/creation/p0.md": "00b5f0fa74dc74124cd79fe49e0fd8c7f26cb677a69f139a5ac3801e15ad3d5b",
   "skills/family-photo-manage-3/references/creation/p1.md": "e95835e3763abddc3cae606fb70f4abf459ced675e89590cc621b4d9600da3ed",
   "skills/family-photo-manage-3/references/environment/p0.md": "2fb0d803f21fb24d403645f18b46e4925e499f57a7acf8663390d5d223ad32f1",
@@ -66,7 +66,7 @@
   "skills/family-photo-manage-3/references/production/p1.md": "40a29894386183011ecd374a4f583ef3ed795afa4b7b26af3ee2a94a051e2f33",
   "skills/family-photo-manage-3/scripts/main.py": "8b7df19b98b19bdef11a8c3d6849cdc9315abf1ef7d85e6d84ecb9fe75d4f481"
  },
- "sealed_at": "2026-10-18T19:59:06",
+ "sealed_at": "2026-10-18T20:58:39",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

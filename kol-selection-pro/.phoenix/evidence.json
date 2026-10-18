@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "kol-selection-pro",
- "merkle_root": "907ca398f1e6779d008b0b865d00273fd6c0f6e350f817d76b3174337dfcbb70",
+ "merkle_root": "464375458c70d0f881af7dbe6950b8fc73fe29c301d6d43fe5c006f6dfa6a92a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/kol-selection-pro-1/run.py": "93add7b9b8892d3b59ecb6a0a7f9e4a0fbc7ac35d21ad01515e35c384dcbac5d",
   "skills/kol-selection-pro-1/selftest.py": "71d7c9d28b1b154c9e61bb6bfd89ea922f22e3529214f104e84449330111016e",
   "skills/kol-selection-pro-1/.phoenix/originality.json": "528609a390b4f7efc0102657e03578984455a2ef3999c385c55f437a056016fe",
-  "skills/kol-selection-pro-1/.phoenix/provenance.json": "d7981dbfc192226be69ec046d5125c57c485ad53cc866da0278b79eefb9222a1",
-  "skills/kol-selection-pro-1/.phoenix/selftest_evidence.json": "aa07ee6a2c47356e61a78ced6b1b9361f9c1c33becf755b727759be4c0e4cfbd",
+  "skills/kol-selection-pro-1/.phoenix/provenance.json": "c9096b48bcaf9aaee059e3d970d75fb112feddbfb5d0aa3b8b82dea96b850db6",
+  "skills/kol-selection-pro-1/.phoenix/selftest_evidence.json": "6aa43f10400dc02b3f6fb2173f45a658ee4749bbfac14ec6d4cf2731aa49bee1",
   "skills/kol-selection-pro-1/references/creation/p0.md": "d8b568de192a1a864b5de10a2fa4d34fe6fc54547587a51c8fb3333d65f1d710",
   "skills/kol-selection-pro-1/references/creation/p1.md": "9b974105284203c9e2fa9bd43d16d0050355b3b7fba0e62361a4dc0c824209de",
   "skills/kol-selection-pro-1/references/environment/p0.md": "7f14474c8b2d01baa677a9ae42f94cbec6ef94419a6767636049452cd372ebf4",
@@ -37,8 +37,8 @@
   "skills/kol-selection-pro-2/run.py": "03078e736a9d6ddd7051ffd1359c12e0b51263d1daf04a14ef08553d79f2b4bb",
   "skills/kol-selection-pro-2/selftest.py": "60e9446f2bd07212811e2838f537973a20497b1951ebe4e261640928050ff8af",
   "skills/kol-selection-pro-2/.phoenix/originality.json": "f760d0402a1f3f7430c8856494085811d8da546c29bbdd2aaf243844f8f88207",
-  "skills/kol-selection-pro-2/.phoenix/provenance.json": "a0ad206b64185a1bdbe97d5349f4b3ab00e534c7690103967b941cbc5ac84dcb",
-  "skills/kol-selection-pro-2/.phoenix/selftest_evidence.json": "b06f545cafe92b34caad2011c6e1a79757d65cda52cc27cb6b85c1eeba1e0a64",
+  "skills/kol-selection-pro-2/.phoenix/provenance.json": "7a12b2301fbefd353faada792b0febafc4e4e93c2d1a2a129db4bc0aacd0ac11",
+  "skills/kol-selection-pro-2/.phoenix/selftest_evidence.json": "65d4d5b6d07a98c48352d55b70ace1c693d69e27b89e7dc9781baec3d7804cf6",
   "skills/kol-selection-pro-2/references/creation/p0.md": "95156bf75bcfd61bc3c89719ad08d1723abb2706e37bd562e3251630be14028e",
   "skills/kol-selection-pro-2/references/creation/p1.md": "0a68c72813a3a5ff6b02a5674afd4f34a3973a7e7ff6e2f1704a4e156cadccba",
   "skills/kol-selection-pro-2/references/environment/p0.md": "1093e9e12856dcd23cb7f63cbbe4d8e270aa64eede88653860f69d24bb1c9e5c",
@@ -54,8 +54,8 @@
   "skills/kol-selection-pro-3/run.py": "854104aa525c848dc7715916a9c90d71d71467ea7aa566cb28a05741ec4c3101",
   "skills/kol-selection-pro-3/selftest.py": "24b5adf1eee9015546c3917a26449eaa65a38aa481a5baf6ff1d253791db882f",
   "skills/kol-selection-pro-3/.phoenix/originality.json": "6c5bd543a705890874efcec533126254a54272c97bb53277230a3197aa84c5fb",
-  "skills/kol-selection-pro-3/.phoenix/provenance.json": "b87287ba08640b8253919df93e2eed7c4d14bf4e4acabba1dbce910b94e95794",
-  "skills/kol-selection-pro-3/.phoenix/selftest_evidence.json": "fe1b51818f885e9c4c19bd9af06a5374cdc963be6b73d81a0100cb6531c5ea2a",
+  "skills/kol-selection-pro-3/.phoenix/provenance.json": "2883b20c7b073d7d27c09973792b2422fc614d0dfebad383738503dffc233e5d",
+  "skills/kol-selection-pro-3/.phoenix/selftest_evidence.json": "d151f86f1a219c69981406f168af638a6692f988b920566cf1c4bf0b5f492744",
   "skills/kol-selection-pro-3/references/creation/p0.md": "5b5b77d1c44131e5c4e3b5dcd2bbcf694bf77fc2bd4d96455cfa7927e638a73b",
   "skills/kol-selection-pro-3/references/creation/p1.md": "a89a3eeb09385ab363e6e48c6f35b15440471c14dcce107953c7a02400621f1b",
   "skills/kol-selection-pro-3/references/environment/p0.md": "f56efbe29cfc9d74cc2a06f25e28f6edc2eb7eca4753de81592689d94ff85040",
@@ -66,7 +66,7 @@
   "skills/kol-selection-pro-3/references/production/p1.md": "ae9f58081834e65d1ca1f41b85415aa49f1bdd38996de333c24eef896892c0c4",
   "skills/kol-selection-pro-3/scripts/main.py": "8ffdb74aded930b592669f71091c10e8dd8383a20654b9fa27b50323cfb16cf6"
  },
- "sealed_at": "2026-10-18T20:02:15",
+ "sealed_at": "2026-10-18T21:00:14",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

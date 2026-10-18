@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:02:54",
+ "at": "2026-10-18T21:00:32",
  "skill": "log-to-metric-1",
  "slug": "log-to-metric",
  "passed": true,

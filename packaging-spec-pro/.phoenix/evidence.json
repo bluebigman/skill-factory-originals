@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "packaging-spec-pro",
- "merkle_root": "69f6bd91557426c182eb813d6d253245f870d0ea03040e171ce1c5dbf7baa9df",
+ "merkle_root": "d0c81d5b3b3223a494fa6a057824011d96c744f6b1570fa2d8082500dd3562c8",
  "leaf_count": 57,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -16,8 +16,8 @@
   "skills/packaging-spec-pro-1/run.py": "29ca695653ddc84a4f3dbe8ab6ea6f49e3ed9da8d670af9415b5ec13dc00018c",
   "skills/packaging-spec-pro-1/selftest.py": "8eaeaf1d7313b598e80a6f03f7fb3fdb0894a51c7c7b515e94ee017992880356",
   "skills/packaging-spec-pro-1/.phoenix/originality.json": "8a82654ecc442ee6732c1c38130aacc871046c1a7efbb0eff6dd74cac13ae99f",
-  "skills/packaging-spec-pro-1/.phoenix/provenance.json": "bb9311238a9233aefeedb11291cdd0c46af43431372e73eff57ce283a30eee59",
-  "skills/packaging-spec-pro-1/.phoenix/selftest_evidence.json": "fada04764525b9cfecce310e0644a36ba995ee609e26feecdc7efb10706bab6a",
+  "skills/packaging-spec-pro-1/.phoenix/provenance.json": "c6b0f864ac6a3d1b258e8974bad0590bcc8e9fcd06486df2f41e8fef559a21f8",
+  "skills/packaging-spec-pro-1/.phoenix/selftest_evidence.json": "441f9fb7e95971618f7ece66bebeaeb4b54215a399638d6717b4ef9b8616ab77",
   "skills/packaging-spec-pro-1/references/creation/p0.md": "1c4b16f1dd597d421a1c014776e52ddb3d7cf5f316bcd7b9b9b50a01f04a8476",
   "skills/packaging-spec-pro-1/references/creation/p1.md": "59e7fe33f6fbfaf19d7d456426b43925cab7c13904c967ea8625f292c81d302e",
   "skills/packaging-spec-pro-1/references/environment/p0.md": "bdde7097eb3cad3e0d855be697a3e4d4d82f770612548dcfc368146326ef212d",
@@ -33,8 +33,8 @@
   "skills/packaging-spec-pro-2/run.py": "5b23172e1a9d3f2ba0a58698cb7b681fc17dc03aedf6ec9ad7785169c4d5f080",
   "skills/packaging-spec-pro-2/selftest.py": "71c51fb70781a0ac6be688f0a7b903e5dca27321cc9f9379c8a5eaf6f0b1d6e3",
   "skills/packaging-spec-pro-2/.phoenix/originality.json": "1bba10ffd5124926f0d803ce54768e233cc915cfcf606812ce727281235aff24",
-  "skills/packaging-spec-pro-2/.phoenix/provenance.json": "3440a195794912af47f61600ab70d8a60ff74706af7817b49ce2887fa01d132f",
-  "skills/packaging-spec-pro-2/.phoenix/selftest_evidence.json": "9f5ab9d39d604a9cd812cde09c6b7b36afafc95569192b7e45155369e8e1b933",
+  "skills/packaging-spec-pro-2/.phoenix/provenance.json": "fdf5c5b097e9d8a6748fd858e9921ae55bb40b3b8d585878a34ce5bcba2ad93e",
+  "skills/packaging-spec-pro-2/.phoenix/selftest_evidence.json": "05fb343d8787696288ce828d0bce740a317d4448107aae7436feaeb49a509e48",
   "skills/packaging-spec-pro-2/references/creation/p0.md": "87eeec902bd28182bd776e86800ade577c8fd4ac4c6e1b5710b6e88db5429961",
   "skills/packaging-spec-pro-2/references/creation/p1.md": "07dd5689208c069bada686c121fab618daabb66931b20ce3fb9c7b80f89262f7",
   "skills/packaging-spec-pro-2/references/environment/p0.md": "533791a1dc70a6aa8af8a4ff5208616c4e1dc1c8d88e4995739c007c979ecdad",
@@ -50,8 +50,8 @@
   "skills/packaging-spec-pro-3/run.py": "c94f43ab86b92073b2da053f7690d83032966675ad46b6f0978f849cb239cfbf",
   "skills/packaging-spec-pro-3/selftest.py": "8e08de9af861ad8a207f47fb8d0d488adbe291653d60e5ed9ed11573093c3606",
   "skills/packaging-spec-pro-3/.phoenix/originality.json": "cb985899f4db7b264a256af604a4746b7bf1e68419123331544aa6593298b38b",
-  "skills/packaging-spec-pro-3/.phoenix/provenance.json": "2c07a21f7883ea080fa3c3a5968537bc9dde508583ef2f00eca1b771a752f19c",
-  "skills/packaging-spec-pro-3/.phoenix/selftest_evidence.json": "59697061f8b1412a1f40480afda5fc943e5036878120e42beea57b9953278e49",
+  "skills/packaging-spec-pro-3/.phoenix/provenance.json": "6b06f20a0a1172a9bcf319a65d00bfdef5df5aaf2afcb06000e750a9f7a7b830",
+  "skills/packaging-spec-pro-3/.phoenix/selftest_evidence.json": "4a7a36cc33e416bdcee8ecdbd613bd31c117ef4fa59cad9dc1daf917eb02cbb6",
   "skills/packaging-spec-pro-3/references/creation/p0.md": "9674cef73b32a5785c6682dd94392573fa10e6eca4bcf02c0ea42a52b624a68e",
   "skills/packaging-spec-pro-3/references/creation/p1.md": "b23823cadd3662f3812586762e26bc44773313f61e18b998912725fccc67fb05",
   "skills/packaging-spec-pro-3/references/environment/p0.md": "1e6c5c1d2b9f5f369f2d34006457b0a84dca3cb90c69f213b8bc980a6958c6a0",
@@ -62,7 +62,7 @@
   "skills/packaging-spec-pro-3/references/production/p1.md": "0e0f07b6a5384d189a448963d76900f822d2c9a7f038792ac8c4fd6ceeed6e97",
   "skills/packaging-spec-pro-3/scripts/main.py": "8c1b524855ce5abb2efbbf74adf144e0f5f7dfc2deb5578dece061c2f4d8c1d4"
  },
- "sealed_at": "2026-10-18T20:05:12",
+ "sealed_at": "2026-10-18T21:01:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

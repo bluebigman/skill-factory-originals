@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "queue-backpressure",
- "merkle_root": "12e124321b99b757b43f0dd4c97b27698662c36c168b19bfad6bf59d391776bb",
+ "merkle_root": "b87b14fe5e9e3d36955a11d421112f8ec0b48c448184ee8b31136282bbb214fc",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/queue-backpressure-1/run.py": "75cf8e94aba80f641c47294ce0408c51c8dc6d82b97a59bcf3aa07e85e8426f2",
   "skills/queue-backpressure-1/selftest.py": "322584879cfe5bdf459de23f54ef2afa5eca2f44ec638f4d8e90af88f8ce5a6a",
   "skills/queue-backpressure-1/.phoenix/originality.json": "cba0b5b4005fc19de4baf1124d86e54ed998acb9dc184a008dd3958fe69c71cf",
-  "skills/queue-backpressure-1/.phoenix/provenance.json": "aa283bf581c3ccef7b978dd09086c2032dad492a6ef656c0dc6b6d0258f2e820",
-  "skills/queue-backpressure-1/.phoenix/selftest_evidence.json": "bda39bcf19d68ad06a48170b7324b8903fd6b35b523f1f713481627afe8fa2cb",
+  "skills/queue-backpressure-1/.phoenix/provenance.json": "e9b60a0eb15b9de59009e8b79ac6abd576e6e2d7094bdb4fc908a31e33e7403d",
+  "skills/queue-backpressure-1/.phoenix/selftest_evidence.json": "d055137abe17d16e4c3b841245392d6b3e02ed96f69ac671ebd02b3a91ee27f1",
   "skills/queue-backpressure-1/references/creation/p0.md": "87df0bdd3f3e62f243c6005d1969f42449b21acc822f1da0bbc95e6f532b3de4",
   "skills/queue-backpressure-1/references/creation/p1.md": "744e7804da560e19144e8dec3e82e4aaa45e8aa394a3d06299d2b578e9df33c8",
   "skills/queue-backpressure-1/references/environment/p0.md": "8d3440ae20995da4ceec9c5f9f5f115fc3a89785c88c7440fbd540410c72c3b0",
@@ -37,8 +37,8 @@
   "skills/queue-backpressure-2/run.py": "e38eb09859777fada1cd754f945dee1e887d7e7fd3b752651c85e14a3e9c317a",
   "skills/queue-backpressure-2/selftest.py": "a1d9648eb828196bd4ff0245bb42df0b6d2c01457149f1540e6305f7b1ea4af5",
   "skills/queue-backpressure-2/.phoenix/originality.json": "baf497b541cd25e92895f9ea3044392383d62365aaac1eb3d24dd84494439d55",
-  "skills/queue-backpressure-2/.phoenix/provenance.json": "0b93cb49fc3c5792bd4984376d5989142c5de7d186a144f3fa3ea6bab33f72a7",
-  "skills/queue-backpressure-2/.phoenix/selftest_evidence.json": "066e804aae7c54b171e5a11030eea3b8d63f8f861009ed9100e221c01d65e739",
+  "skills/queue-backpressure-2/.phoenix/provenance.json": "cb90c836676b7607c2a54b1a481f5416bbda56d4907f7988dd09fc156790cdfe",
+  "skills/queue-backpressure-2/.phoenix/selftest_evidence.json": "8ebbc945d267ba68230e6e73935ac2950ce685a8a259575231774310944b8eff",
   "skills/queue-backpressure-2/references/creation/p0.md": "b8c62751ad394cbf4c5cb9477ef9b194e73b571e8f6fa7d1acbdafb161e60865",
   "skills/queue-backpressure-2/references/creation/p1.md": "dcb93ddb4c80ce747f135108d3c9e5b0987817336338ab352f0b88ec3fa65e45",
   "skills/queue-backpressure-2/references/environment/p0.md": "992780b3d5720f8aa6c5b5d06d15b3601522fd67897f552c3a6afc4a6671219e",
@@ -54,8 +54,8 @@
   "skills/queue-backpressure-3/run.py": "02a73de7775d30ab14a63d953e1ff7187bbf358fa18ad56001b18ad3c4cc69e5",
   "skills/queue-backpressure-3/selftest.py": "eb44162d72cc6a1a530c8a82d29c7f5b5ace85a910905c21ad81574ac8de62e6",
   "skills/queue-backpressure-3/.phoenix/originality.json": "5a41c50beb390990ff6c02047662f334d4364bacc620a9e0c5809a5899c71b36",
-  "skills/queue-backpressure-3/.phoenix/provenance.json": "7095d2440927df3d85cd4378d4695f1c83ab727c1ad4d14f8c74c9a251d717f4",
-  "skills/queue-backpressure-3/.phoenix/selftest_evidence.json": "78e470ded77c916ee35e132435fc26d9919913ef0b2f8c7d92ff62cf6d241ed4",
+  "skills/queue-backpressure-3/.phoenix/provenance.json": "99db9a66ae19d2a6d9fa4f53d5c65970c123dcee73097d7902987ff2efcb796f",
+  "skills/queue-backpressure-3/.phoenix/selftest_evidence.json": "ce8a623d0fca99b502e4aa0c44437e2ee2ecb6a9261dd0d56489d8241b586f18",
   "skills/queue-backpressure-3/references/creation/p0.md": "b8d4b46db3458d1fcc8ff0bda28276f6b84861ad6d277fa8fd33799b5cfe907d",
   "skills/queue-backpressure-3/references/creation/p1.md": "f565305887435d7c72192215927177fbdcf49a0628e8ab710762bc4e01b21646",
   "skills/queue-backpressure-3/references/environment/p0.md": "5553ff08c92f6e9db6098fcbc9efbd5352f4ff0363cc5c6e6c0e1c65df10fff3",
@@ -66,7 +66,7 @@
   "skills/queue-backpressure-3/references/production/p1.md": "5f01bce896858a0230fe1954f0c2a6a6772246786e6db1d11aee02657af82219",
   "skills/queue-backpressure-3/scripts/main.py": "8176b3fd38e1b049a6869cdd93cda699509b55e963a3f52436c52cd23ed64ee9"
  },
- "sealed_at": "2026-10-18T20:07:10",
+ "sealed_at": "2026-10-18T21:02:45",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

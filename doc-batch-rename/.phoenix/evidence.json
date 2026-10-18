@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "doc-batch-rename",
- "merkle_root": "9173f0cbc26d21b16e01e209215d11b59eb5ed0658cab607e084e04d424366e6",
+ "merkle_root": "db2bd4868f208dc12d466bf4161c1608761520136b7134f88de805d21e1ad17e",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/doc-batch-rename-1/run.py": "be3e221d5381d358d76899c252f74bebe22ae529706381f821b72d6e5672a877",
   "skills/doc-batch-rename-1/selftest.py": "af8a6cc6515c0a4575c537ccc446a4411cbab1a4d0535bad5543508a3350c983",
   "skills/doc-batch-rename-1/.phoenix/originality.json": "9cb929153f62890aca39f2b0d34780edbf456b59c4defc9c7d8df96ab59060fc",
-  "skills/doc-batch-rename-1/.phoenix/provenance.json": "75ba750f5fe5bccb3505e9876e5d880ee8fee00634324b7555baa5e5692b0b4d",
-  "skills/doc-batch-rename-1/.phoenix/selftest_evidence.json": "aeb1d62cdbb67e69d1f2efc97c2c241cee6d771d2d31c876116c49347c3e3f20",
+  "skills/doc-batch-rename-1/.phoenix/provenance.json": "679db0565bd46f77650e90fe0b03d12953f6be21939396519faf61b9f909a3d1",
+  "skills/doc-batch-rename-1/.phoenix/selftest_evidence.json": "98527cc8f33c620dcca0455e4d679744f463ddbcadf62d7fc955271b33b857be",
   "skills/doc-batch-rename-1/references/creation/p0.md": "55f785041ae72e4a3a388645857bdfe881bbe98ac8b140397e486501cc837290",
   "skills/doc-batch-rename-1/references/creation/p1.md": "a475a449c2266d191b7f83343d37452c46448e555e3186535b3fada728a0a295",
   "skills/doc-batch-rename-1/references/environment/p0.md": "1978302365756bf216189c6a4394fdc34f8758f2d92b988a3b03ef8ee76c7bcc",
@@ -37,8 +37,8 @@
   "skills/doc-batch-rename-2/run.py": "85dc7213873530801978eb791a907e9dc726acff4811ae7055ec277b5fb99430",
   "skills/doc-batch-rename-2/selftest.py": "35c950418df0547d428eff5c8281ed74c14eabd1f0cea519d96d2bcd594af866",
   "skills/doc-batch-rename-2/.phoenix/originality.json": "f9f4bfde2cbc418b3972e19b8988106beff329fe33ded0f46cd9c46ad9464841",
-  "skills/doc-batch-rename-2/.phoenix/provenance.json": "c37138fff86630bc3571ff8cbb9125e1a4e5a43f7eb9fd021458a35057a9bb3f",
-  "skills/doc-batch-rename-2/.phoenix/selftest_evidence.json": "601dcdd771ebdbe667468e5991aec55dd4e2d0ff09a29150bcedc46d696838b7",
+  "skills/doc-batch-rename-2/.phoenix/provenance.json": "aa154c604574063a90dee6ce8f851822b9e918bc5b4f872f8b7537bcea81898c",
+  "skills/doc-batch-rename-2/.phoenix/selftest_evidence.json": "126a1049aaeeec7a8c6c1d433e8eb119608ef6f42a12e1ba6eefcb11ad43dd99",
   "skills/doc-batch-rename-2/references/creation/p0.md": "ddb9003a30c66777c236ec60cfd6c61015fdeb620ad19b498daa334e097fa9cc",
   "skills/doc-batch-rename-2/references/creation/p1.md": "da3d2c3a5312b5bbb6668648311b40e70c1331513742848d7beb65fb937ed46f",
   "skills/doc-batch-rename-2/references/environment/p0.md": "c2091232f3b8da099e4cd1e8bbbdd27605d993d3b5659fae1b41aad74ed28e58",
@@ -54,8 +54,8 @@
   "skills/doc-batch-rename-3/run.py": "f6b7aa0bcc82619600c262c18dfcf862b83f6d7307ed45728cc8be7f7650664b",
   "skills/doc-batch-rename-3/selftest.py": "a5ec1756ad027342b91d13098a0110f2b5928d3c1ab20b4704fc9a3680981397",
   "skills/doc-batch-rename-3/.phoenix/originality.json": "e8f32d1df086053cab9d3f927e2bf453d800ba4bf884b6a3d87be615cf990be1",
-  "skills/doc-batch-rename-3/.phoenix/provenance.json": "460d333571d5478b4561d55c715e0c5f99566b7fb2364324a8e7f2aaadd8fbe9",
-  "skills/doc-batch-rename-3/.phoenix/selftest_evidence.json": "0b689500af302610c2b3cc019009d0d5f117e76564ed21eb3785f288df12ef46",
+  "skills/doc-batch-rename-3/.phoenix/provenance.json": "2a147baeb27453be7786fbec52eff11b4dec82262b8f682555e255261fd41c8f",
+  "skills/doc-batch-rename-3/.phoenix/selftest_evidence.json": "aea760ebeaa4f49a470ff46a530312eb848a5db0b6ee483b08ab726d1159ff78",
   "skills/doc-batch-rename-3/references/creation/p0.md": "5760d5bddcf60368ab5fa1600d9a072baf5bb1d3c313328065c03e43a1e3e944",
   "skills/doc-batch-rename-3/references/creation/p1.md": "08f26e7b2b82cdc8f5816ef9476ead2f00e81a40464d2eba2abc7e66d75cc76b",
   "skills/doc-batch-rename-3/references/environment/p0.md": "efcccfbc7710b89b14bdd966501a63ca4da89fac2cc55bdf625d59f036920407",
@@ -66,7 +66,7 @@
   "skills/doc-batch-rename-3/references/production/p1.md": "46f0545a70e3b5171f9a3f2d03ebe6939f4e952f3b2e9a04acce405656bfa90c",
   "skills/doc-batch-rename-3/scripts/main.py": "54c6b3119610135183b445757c2614a13a2a73d4f7008aae69536a45fb00002f"
  },
- "sealed_at": "2026-10-18T19:56:46",
+ "sealed_at": "2026-10-18T20:57:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

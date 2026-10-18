@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "typography-scale",
- "merkle_root": "3b7e36116bc21ed684a80bac8ae528389122a825318ce11a0147d252d60fc59b",
+ "merkle_root": "48d5b18d099beac6a1378b431dfdeb12f6c21b70271a2fb693da7d9d7ce6fb05",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/typography-scale-1/run.py": "2f405a92267733ba079713421398e2b9f18d2c85cd2b5df4c13d966bb37951c5",
   "skills/typography-scale-1/selftest.py": "493f51977c666701d3c10ee24af4c3b586e89373f1098c2ecc71da4deb86c4cb",
   "skills/typography-scale-1/.phoenix/originality.json": "d8a73e9401d3a9d2b3c6f140093ac73c6bcc4f8dc5483fd44c396b3e59ca2c53",
-  "skills/typography-scale-1/.phoenix/provenance.json": "94a99ec6d6cc973adbca09d09ec607bf1106147f62d593a3bc31ded73685f528",
-  "skills/typography-scale-1/.phoenix/selftest_evidence.json": "b29b177f42ef4c31222ed518f6b8b6f0f064cda371b9e3a2ada45f0d8c18d7fb",
+  "skills/typography-scale-1/.phoenix/provenance.json": "ae40fd2123bbf9c400cd94087f561ddff67105a631d84192d3d647e987ae961a",
+  "skills/typography-scale-1/.phoenix/selftest_evidence.json": "5333961600309ab4ef7a0c37b63f479c0fcbfede2c7b0f95129d5ff4aceb224a",
   "skills/typography-scale-1/references/creation/p0.md": "c48c9765736c803c7bbbb20c0381440db13b3268380c8727e04149af990c8b0d",
   "skills/typography-scale-1/references/creation/p1.md": "e4e5adfc18d67383a9c8174f110857dccbb06a75ec3262502a10d8aad2e773fe",
   "skills/typography-scale-1/references/environment/p0.md": "f2ba18d6702703359bc65341eea4a461d61474c3675760e87d30583a9a8c3e78",
@@ -37,8 +37,8 @@
   "skills/typography-scale-2/run.py": "c5a55d74077758702d1b4992c95a7276d1631dccbd0769cb0f6ccb04e1ff59b4",
   "skills/typography-scale-2/selftest.py": "746d1f8047040d3a3831748a746b9289d25160b5f3788e6c5483b6d8ca90f460",
   "skills/typography-scale-2/.phoenix/originality.json": "d49142d6d294afc8120d2c006b8736016df3a576654d1ed10352ebb4b693ceb0",
-  "skills/typography-scale-2/.phoenix/provenance.json": "b3331694d1c302497731c16e9904c9f1ada616d1b2dd90cae16a470dcb15570e",
-  "skills/typography-scale-2/.phoenix/selftest_evidence.json": "8e9f8aa77c0c94e4280910d358d9590ae65832968e25437e0985f60bf35dda03",
+  "skills/typography-scale-2/.phoenix/provenance.json": "3fc8db51a772ca2504c30047c2d87e77d0a5bfad9fee6bd7b0be9992c44cc136",
+  "skills/typography-scale-2/.phoenix/selftest_evidence.json": "e8b43c11233ba9abee8af13d6cc45b76ecc62bc286bc2c6a57b42e9ed66db9a6",
   "skills/typography-scale-2/references/creation/p0.md": "eff67b51e2977672f90b12e130a4ff59da3599d1fbfcd2fa1d53252f9ef8ec86",
   "skills/typography-scale-2/references/creation/p1.md": "e3f4daaec627b7e905cd8fbe8a28d723f89759619e6341b900de6518871133dc",
   "skills/typography-scale-2/references/environment/p0.md": "461b0e88ef6481ab6bef01042d8546997a5e557d2c5be63c0481979649220d23",
@@ -54,8 +54,8 @@
   "skills/typography-scale-3/run.py": "4cd8643ea6780bee9476920201753c8def5439e1e62d94c02b1af614930f0fb3",
   "skills/typography-scale-3/selftest.py": "fde6a6ee3d266fc64d830816cc88c2dfb8e8483d6d3685962e66a137606c7068",
   "skills/typography-scale-3/.phoenix/originality.json": "0e1a4bad07f4b1464a076387bab96934c3450619ec8911bc5e860d9c78e7af6b",
-  "skills/typography-scale-3/.phoenix/provenance.json": "f77a7a04e671cdc33e7fc544981b71228f17b0f3dd91c569037fe53500058433",
-  "skills/typography-scale-3/.phoenix/selftest_evidence.json": "676404023a1e352a0f9a5775e479ddd23ca37f5f0bb655d132d0c79319b4395b",
+  "skills/typography-scale-3/.phoenix/provenance.json": "1d7b5076826c1b94bc9312d6b8b19a2bf413195587c31e427cdaf63a56f18e93",
+  "skills/typography-scale-3/.phoenix/selftest_evidence.json": "0725ee8a426c5eb86c6bf47f9d7377b8dfd11503640bb0a2bb2cd4223a27d256",
   "skills/typography-scale-3/references/creation/p0.md": "fd4306d702057ace880a5e8b302e7e6c5c49aadb69bbd0d2316ba86fbf9c5cfc",
   "skills/typography-scale-3/references/creation/p1.md": "0ca1c11f8a27ec03848638760e3d12cf213a396b601b73d7abb07c0350ca665f",
   "skills/typography-scale-3/references/environment/p0.md": "23ebc441a08c7ff28ebe9eca35c63cb4547618436a13670a58b1e6412bf081e4",
@@ -66,7 +66,7 @@
   "skills/typography-scale-3/references/production/p1.md": "f3fe408099d6f22704757163f3d87e6b24f7fb1a6ce9a51cf556a5363880cdae",
   "skills/typography-scale-3/scripts/main.py": "f551b0e2038222cd6072d90dc291e34f553f159b48b57020a8aab262e2390270"
  },
- "sealed_at": "2026-10-18T20:12:21",
+ "sealed_at": "2026-10-18T21:05:07",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

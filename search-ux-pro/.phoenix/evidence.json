@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "search-ux-pro",
- "merkle_root": "caeb9a026eeaf716b2f539fee42f84f2c51a7b8390bbbce3b9b3f2a4c5a056b9",
+ "merkle_root": "c2c9e0fbaeba35947310b1f4d2e1f3c5d70e223fedd1c65b106d6ccc0d214ab5",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/search-ux-pro-1/run.py": "24c8936d70f08bb73b0a7350655bb00802a2af174d4ab3159209f7a9424d6576",
   "skills/search-ux-pro-1/selftest.py": "427483890d052185e6efdf8b59930db2b38a1c46353e05381c3c645b78bc770b",
   "skills/search-ux-pro-1/.phoenix/originality.json": "bce79d441d2fe6bdc793fea038436ba6cc0a13d6cab0a694e933154861837cee",
-  "skills/search-ux-pro-1/.phoenix/provenance.json": "ed2c2085adab63605161a471439427b5786166cd4d966e637bf24ef34de5cf5a",
-  "skills/search-ux-pro-1/.phoenix/selftest_evidence.json": "21e5b604553aef9548f7b241b41f03d460b5133aa7a68dfe1f4b2c1160a9c967",
+  "skills/search-ux-pro-1/.phoenix/provenance.json": "d05f726adb95a4d67ce0cae164a31b36bc00752421b4c85d6a5363ae38e24d1d",
+  "skills/search-ux-pro-1/.phoenix/selftest_evidence.json": "eb3e92fa3b5dbad0be749ed4583107ef237ab005fa6ef676a9d4e7a358d469ad",
   "skills/search-ux-pro-1/references/creation/p0.md": "7b4bbad8a7977c807a7652ea07393a9c9f247968683b393de37b4edae845e938",
   "skills/search-ux-pro-1/references/creation/p1.md": "b2776e379f4855265a434a04d4afbe46d849967bca8f2e9d142e0fd74cb1c3a5",
   "skills/search-ux-pro-1/references/environment/p0.md": "c11756447079f08d960761a40f493ef3249c60a2bf751076449c73d9b41e93c0",
@@ -37,8 +37,8 @@
   "skills/search-ux-pro-2/run.py": "c4399bfbd5cd950dd42c0f74f3214ef09b9ddf32991f583bae740751d0f58b92",
   "skills/search-ux-pro-2/selftest.py": "d4c6bbc1212a6ce590bd5235b51f828bab2545aeb86646fd23ed416e62c70991",
   "skills/search-ux-pro-2/.phoenix/originality.json": "8c6ae473068a4fbf915d896aea3bdcec1535254476c5a1352f87defea4e597e8",
-  "skills/search-ux-pro-2/.phoenix/provenance.json": "5fc6860429cc4bce3ac5fea380267662d7a92bc942fc7b77561d4f293bf6be4e",
-  "skills/search-ux-pro-2/.phoenix/selftest_evidence.json": "e403f3455bc364772594582a1adc5540b86daf1633336f0124ce34cdaa4700aa",
+  "skills/search-ux-pro-2/.phoenix/provenance.json": "9732414f156813b83d3b56da59f6ad5da45ad1008864b921b156857eed60a0e9",
+  "skills/search-ux-pro-2/.phoenix/selftest_evidence.json": "c6bd9134150e8ae91f4fb5fb8c2df1476baf5300fc2ee3af18f25a9db2891842",
   "skills/search-ux-pro-2/references/creation/p0.md": "47668cba446b3e1ef3beb683b308da79e0785b60e6f836395afff684987b7a3d",
   "skills/search-ux-pro-2/references/creation/p1.md": "3ef9ae5bdfc1ffac96ad9450e52be1ee8dbaff06714c6b28c1031518cecceb01",
   "skills/search-ux-pro-2/references/environment/p0.md": "64ee8070d8cb57f5347a68d26d5fa58be818cd46b1846b85ce2d99437018b1c3",
@@ -54,8 +54,8 @@
   "skills/search-ux-pro-3/run.py": "3459345f4866b1d3ab863f51df8bbe792a91ed794c3a513112a93df2e370f05e",
   "skills/search-ux-pro-3/selftest.py": "bf8ee1864df0b3d1dee3b8872f60f3c71e241445de3b2cbd16b024930747278b",
   "skills/search-ux-pro-3/.phoenix/originality.json": "9579ec4141c549ddbf4e1aabfb1ac49c9d6038c46a66e4067d81ce9b232b8e36",
-  "skills/search-ux-pro-3/.phoenix/provenance.json": "5e74eb0a2f9b4db394e1c84ac437038888df7c081e292de9eb35578fb47f696e",
-  "skills/search-ux-pro-3/.phoenix/selftest_evidence.json": "1a0adcb0e506544ee3dd795d42a14037c6f05b3b6488d2e00b68730077be3f92",
+  "skills/search-ux-pro-3/.phoenix/provenance.json": "b9ddb33347898ae2bf3acd0bcb1d5a5d8baef317520a4e4b2651e696b2c44f16",
+  "skills/search-ux-pro-3/.phoenix/selftest_evidence.json": "c58f78c453c5dde76c85e107eb6fbdee9e996923b1e3f855dcf419c65d74a23a",
   "skills/search-ux-pro-3/references/creation/p0.md": "67bf1c0b595af3ae711a570e6ec8698230c4f290e9eb96bd56163713efb42534",
   "skills/search-ux-pro-3/references/creation/p1.md": "790490f13ac6f8cda07057bc05be840835fd4e95b09f353c8354d2c90afc271d",
   "skills/search-ux-pro-3/references/environment/p0.md": "96a0c87229e5dc6ccf7436557b403a5c556d573b0a69f60265f68a3947f9d8cd",
@@ -66,7 +66,7 @@
   "skills/search-ux-pro-3/references/production/p1.md": "320d0909aab1ae98545bb3fc8258ed354219bda702aa1c6d0d1ed75679f3eaad",
   "skills/search-ux-pro-3/scripts/main.py": "3effaf6d54e46fa42c54551dc9d7a43edca61a378fe2464e58b9370e57040c2c"
  },
- "sealed_at": "2026-10-18T20:08:33",
+ "sealed_at": "2026-10-18T21:03:26",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

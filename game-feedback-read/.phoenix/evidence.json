@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "game-feedback-read",
- "merkle_root": "6ffb2488fff620390d76b7c3c1cd9179ca93ea65b22f5342c72a11b21e6927e1",
+ "merkle_root": "823a57b36338f703309b728a2fb768e37b1c6f7326f7b44461976c64eb5e888a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/game-feedback-read-1/run.py": "591249d9c269c21d70750949b7ff06e121480c3868f76af1f44faaa65ada927b",
   "skills/game-feedback-read-1/selftest.py": "fec9f9b8e239be4a3d3adb0267d12d8caec27c8d1530090df6a7240b38751da0",
   "skills/game-feedback-read-1/.phoenix/originality.json": "402f3cecfcb99d8d8437811db8c77e35c348c84852ec7d7518f805cdd76aeefa",
-  "skills/game-feedback-read-1/.phoenix/provenance.json": "ef486f4eaf498c3b1f3521600ac861d332266f975f3b6a4f56aea7732cee533e",
-  "skills/game-feedback-read-1/.phoenix/selftest_evidence.json": "4094fc44640b85d220ebe1665a8d502805f04ef87691c1b5e4c24dbceb72e931",
+  "skills/game-feedback-read-1/.phoenix/provenance.json": "1a30bb7798459b2c214a966b1dc2709a621772b495f57e3c654f6cd802dd8905",
+  "skills/game-feedback-read-1/.phoenix/selftest_evidence.json": "e26be7797132618762a58d49367117fb3c331b4b9136a39e6be5cdb7986145ab",
   "skills/game-feedback-read-1/references/creation/p0.md": "091654ad0a8bf7e38c0bb95d423d7063e3327a148bbe8cccce316ca0a8bde7c6",
   "skills/game-feedback-read-1/references/creation/p1.md": "a001ce676c199d954f619a7ccea6c29f29112d664959c02469ad504f21beb9d1",
   "skills/game-feedback-read-1/references/environment/p0.md": "741ff0b52537fc92738dba49b756d3df3bd57419e644d9c0cae84aa8cb62f70d",
@@ -37,8 +37,8 @@
   "skills/game-feedback-read-2/run.py": "aa54da0d649636f55664b5f9dccc8c2692a54fd867f60e05b575f63b2821a079",
   "skills/game-feedback-read-2/selftest.py": "cd1a7ad094695f006583c27b3332f74ff80800fb57f77fe6c79242b00f349433",
   "skills/game-feedback-read-2/.phoenix/originality.json": "a0b6cb5fe77c55b46eae1e513b07d7fbed2eccedcbd923ef648673c83855930d",
-  "skills/game-feedback-read-2/.phoenix/provenance.json": "5cf4011dad5bf7a9a473289e0de5c5e93bf0042361df1d5066541846217fadbc",
-  "skills/game-feedback-read-2/.phoenix/selftest_evidence.json": "624baaaa8318bf5fa6bda961142717722e0239f48944e63a24521be0430c98f2",
+  "skills/game-feedback-read-2/.phoenix/provenance.json": "f6eaef1277fe57b88ab010916453657f60c6a86f4fdd98bfe60e648138081153",
+  "skills/game-feedback-read-2/.phoenix/selftest_evidence.json": "1d4eec85a76cb567d8717fadae46ebc4f109ea0884e28a198ffe3fd10875c332",
   "skills/game-feedback-read-2/references/creation/p0.md": "2abae5c57dff3fc6430e8b00b4ab7b74e97ba493e1d630933928f4e516a5c536",
   "skills/game-feedback-read-2/references/creation/p1.md": "5448fa392b0dfa891b66cc5e57b47f052e94a0d3a270421203646562ae5be998",
   "skills/game-feedback-read-2/references/environment/p0.md": "848317617be8b65c809a8a6a6f473fb4c53b608321eee96aa001ce58d0cfcb04",
@@ -54,8 +54,8 @@
   "skills/game-feedback-read-3/run.py": "05661e5118880e3a2ec83d481127f02158b9d440a2f76ca226c9bf792b58c806",
   "skills/game-feedback-read-3/selftest.py": "017e966fc335cf2b6da53446a3584d00900bc29702e8a9a91a04c04ff42ce610",
   "skills/game-feedback-read-3/.phoenix/originality.json": "2987cf226eeb4550ce9ad91c8e4438489095785c968956dfb312b46c1d8e4e9f",
-  "skills/game-feedback-read-3/.phoenix/provenance.json": "ddd633d47115185ac2e1b5ac9084217c27508869a6c7d728063488578080fc68",
-  "skills/game-feedback-read-3/.phoenix/selftest_evidence.json": "0eb03a4f1c97f3abb365776a0f5290cf734fd3c07d95cf6b6226196ca1b9d75f",
+  "skills/game-feedback-read-3/.phoenix/provenance.json": "078628d4eff811a0e03bab38121440ce03f746574074cee6e42b1e829c7c024d",
+  "skills/game-feedback-read-3/.phoenix/selftest_evidence.json": "d7c3e008475499d3e2249882a5aa075d13cbb76f69ab0dad12320a50407d6083",
   "skills/game-feedback-read-3/references/creation/p0.md": "a3492f116d89aa94534ef484d05b1aa1927546a34575c4f0127c2c7a33a00069",
   "skills/game-feedback-read-3/references/creation/p1.md": "eb1c2cf988f1c6daa38462dd1397c8a87bf02e5a343ac5e7a28d3f5d73d9585c",
   "skills/game-feedback-read-3/references/environment/p0.md": "03cded88bc511ee9ff103acb332e11c84a1f2f1ce628998d1b6ed0aa5deb21f4",
@@ -66,7 +66,7 @@
   "skills/game-feedback-read-3/references/production/p1.md": "50bfa0fcb53598d006eec54d9b9c5b90a6b15736a1215776d30687f621332ed9",
   "skills/game-feedback-read-3/scripts/main.py": "3a8dd84542c1f9b95d29a1ce05a423a044d40c599b97734b47f291f26837d685"
  },
- "sealed_at": "2026-10-18T19:59:50",
+ "sealed_at": "2026-10-18T20:59:05",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

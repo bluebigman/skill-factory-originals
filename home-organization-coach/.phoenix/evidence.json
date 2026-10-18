@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "home-organization-coach",
- "merkle_root": "23617b8ab3c4d2a44eec571a9c4d3442a32eab2ded86781f31466e751f19fda5",
+ "merkle_root": "25665e1e07c78ff0daf67410ea7631b5708140b6465eea18cdc04deee4b43073",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/home-organization-coach-1/run.py": "8bff755a28cdc0c15656652f6a85c8f446fb85240f739a24241a8bf2536d2438",
   "skills/home-organization-coach-1/selftest.py": "d7acd3a72dc9b43ff334c2cf9726cc589c970f78e82e6880c7b80294b0035992",
   "skills/home-organization-coach-1/.phoenix/originality.json": "34036636cff19dc92d6fc3de1d2487886d45dae717c7549d3da71d7a6f6d30c9",
-  "skills/home-organization-coach-1/.phoenix/provenance.json": "a8afefda5186d6f24ef5b23717722118f0f69331c01814ea656a7f5c8c9dafc5",
-  "skills/home-organization-coach-1/.phoenix/selftest_evidence.json": "fd06aee9363c2951e501634771a3658d0318e04d55c714f4de2c445511424c55",
+  "skills/home-organization-coach-1/.phoenix/provenance.json": "2c06063deac68e0372614394294dc34e9d8502c32e2c3c73559179ea97b16061",
+  "skills/home-organization-coach-1/.phoenix/selftest_evidence.json": "81337cbb7f01bddb326437c4afbf174a584f928f86cf37a3f9609e2a37102dea",
   "skills/home-organization-coach-1/references/creation/p0.md": "261269ab3cab544b7a3c8c0470354bfbffad2c0be7e7e3345011bcb9e12765b4",
   "skills/home-organization-coach-1/references/creation/p1.md": "fb3ecbe0ea5110d18d98034ae5d5801cd5853ded5c9cad63aab45a1c917961c0",
   "skills/home-organization-coach-1/references/environment/p0.md": "f3af01d649a3ced602b70b2197cbd8c08cb760d26a17a16f11df6a1697ca00a3",
@@ -37,8 +37,8 @@
   "skills/home-organization-coach-2/run.py": "1e029e194d740bac0d503b92456e7a1e87f549512826579092ea65c4eda00453",
   "skills/home-organization-coach-2/selftest.py": "6b444495c2bf7f8bf289e5bdbbc7b00d474907e80158b1e46eea6012e108ce65",
   "skills/home-organization-coach-2/.phoenix/originality.json": "80c5659fff9dd7b67a9e24f80b9ab018a62c9c60c89332531960f1d4f5375c61",
-  "skills/home-organization-coach-2/.phoenix/provenance.json": "97fc3a151379acd936c278100103232cbb285b920733b5f0dadcb62b7852d4e7",
-  "skills/home-organization-coach-2/.phoenix/selftest_evidence.json": "50541da24fe70bd35793134f4ec4484bc69dd99ea3f0b0f67e1fbbeaacdb846d",
+  "skills/home-organization-coach-2/.phoenix/provenance.json": "3d580cf35b1e6f70d165b5da82295294d66a473163a0c42ff45f91f31f83a60c",
+  "skills/home-organization-coach-2/.phoenix/selftest_evidence.json": "4bd9aaa94aa289f98cfb5edcf62e487d9ebf1d52e03f09caf98de55ea70d0efa",
   "skills/home-organization-coach-2/references/creation/p0.md": "99ebb2dc8a42a56e6bb446d1570b265c23860645c4e8935318af5b2451399de9",
   "skills/home-organization-coach-2/references/creation/p1.md": "6506e7cb3d69334f9c38cfa47df568a0c6a41f3b615cc29167a4528c3a0bcacb",
   "skills/home-organization-coach-2/references/environment/p0.md": "2b02a926aa3981842763604f6916f52cc106e9d7b0b75c08cb1b6618e29698e5",
@@ -54,8 +54,8 @@
   "skills/home-organization-coach-3/run.py": "daa6899cc4f2c5b04922d69cca7dd5ecd9ebe84167308f1842a48b366c275cec",
   "skills/home-organization-coach-3/selftest.py": "03d46700d7ed7b25cf463652368d1e6cf7476ac5feb03a99f00ade3d485c80ea",
   "skills/home-organization-coach-3/.phoenix/originality.json": "01654e92858c38f712d6690677c1571277cfa013693349a7746675afdd1181a7",
-  "skills/home-organization-coach-3/.phoenix/provenance.json": "a7a0418d96f8cf4184d10c641edd70f6888eaf5d01ef1d337421477081107e63",
-  "skills/home-organization-coach-3/.phoenix/selftest_evidence.json": "c5ffcd3e9b3826ef4e54622f8d5ccc1974fc26fe8e2cc83ce22f65c42844cfe2",
+  "skills/home-organization-coach-3/.phoenix/provenance.json": "5ee63e3c5f43b8269ec49cf30338989dd40cece6b86e75cffeb079ec1972c007",
+  "skills/home-organization-coach-3/.phoenix/selftest_evidence.json": "7d1dbf3969473aed40b8742d38b245afddaf62d25d93d78c1b36c4670cc6bf95",
   "skills/home-organization-coach-3/references/creation/p0.md": "8a986d99e88740e458f6cc84ba1bdea5327a7275f2bcf16c37c8fb2c9a6f42df",
   "skills/home-organization-coach-3/references/creation/p1.md": "547985defba7eba62e708d90079ce03af73839dd5d8aa68a660aa7f91a110c84",
   "skills/home-organization-coach-3/references/environment/p0.md": "dd207b793cb9ba0b70ec0797fdbb0fcde63e2a20dcbf7ba3ab1b0abe45bfc5c7",
@@ -66,7 +66,7 @@
   "skills/home-organization-coach-3/references/production/p1.md": "a003f307099d21bb755763b8135576538e587acd836257e82335bcd5fccba744",
   "skills/home-organization-coach-3/scripts/main.py": "12b79c8087fb5652a8e137d4a6e5b4a15654b68ba7381c1434c9151a998020e4"
  },
- "sealed_at": "2026-10-18T20:00:42",
+ "sealed_at": "2026-10-18T20:59:29",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

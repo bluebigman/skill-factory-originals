@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "win-loss-analysis",
- "merkle_root": "b5f93312f99952bd8754dea39e9928152bf0cce097556c19f2e3fb544a3dd3b2",
+ "merkle_root": "dc398c49d2c114ec0ea11c20c5a5d9de47891d3b449e76ec9566f531cc35e20a",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/win-loss-analysis-1/run.py": "d4de90aef3304fba409c7ad7500c7a86098ff6ae917a2dedb7844829c0e26f9b",
   "skills/win-loss-analysis-1/selftest.py": "59a9aa6b236037b994000fa2e5fc21f4519c3c46aca4aa2236a68899a42dbd2d",
   "skills/win-loss-analysis-1/.phoenix/originality.json": "0c12f9dba7f6d34d736e6ab297707b99e9645c706b3339c405fe0f1b3f5e6bce",
-  "skills/win-loss-analysis-1/.phoenix/provenance.json": "4b8b629c52574119c51b35590ab433e12b52b627de1e3a20a8ad71ac38aaaf02",
-  "skills/win-loss-analysis-1/.phoenix/selftest_evidence.json": "e702e5898dfa5490f5caaae94fcbd453e0a58d96395f6565249dc101d882f590",
+  "skills/win-loss-analysis-1/.phoenix/provenance.json": "1b7abebd2d651c10bd19b7acd2a11cd6aa05df7c8542c2bd7fdede56f1ae1285",
+  "skills/win-loss-analysis-1/.phoenix/selftest_evidence.json": "800c662f53ec8e6c908b938304cd86b20ae07c4534d3635973136e1ac24baac7",
   "skills/win-loss-analysis-1/references/creation/p0.md": "2f17b3f70d9a68b60ca6ed0c09244406999e9348ab4a572b3ac06d0b973d8798",
   "skills/win-loss-analysis-1/references/creation/p1.md": "dc4fc8a7bea089571ee217fe0d06368fc89b73db55876c1285b30906f075bf67",
   "skills/win-loss-analysis-1/references/environment/p0.md": "00191fbdd5eba144eb0557b0de8434737a8473454a668b556b16b5c69c2c8ae2",
@@ -37,8 +37,8 @@
   "skills/win-loss-analysis-2/run.py": "c5db7f1606f58809578ed93f7bfdb020d1922e6e8d6e7d487dcdbd870945ba97",
   "skills/win-loss-analysis-2/selftest.py": "846e49526995873ec4beeadcf65d9d29acb8b636a4d72266b8e9cff49775d3a5",
   "skills/win-loss-analysis-2/.phoenix/originality.json": "450b11a48e07d87adb56e773dcb5e760807054c70041c32efbf5ed2dd699efad",
-  "skills/win-loss-analysis-2/.phoenix/provenance.json": "93e6b819d4dd1b851c98489cf00a3fe398e7dccfa186e4bf15f6f3afb3108f4c",
-  "skills/win-loss-analysis-2/.phoenix/selftest_evidence.json": "6c623ad66d9f2a8692bfa0f1f20dc0fa7621602d43298241f107a99e6b87e184",
+  "skills/win-loss-analysis-2/.phoenix/provenance.json": "013ac15f4f9cb37ac023ffb5f59aab643eca02c20b79a0aac9cb32bcd1c363f3",
+  "skills/win-loss-analysis-2/.phoenix/selftest_evidence.json": "872f2ff32063ab8c29ffe361f9af035d80a5b319972346e9e6dbe2538be24671",
   "skills/win-loss-analysis-2/references/creation/p0.md": "38253118ef77ee747b89c761d8ee6a1e25e892d583f4cc4442f737592e7ee882",
   "skills/win-loss-analysis-2/references/creation/p1.md": "fee34bf51174b7ca7b748b332d258f7b8df6b5a46e6cfaaf3ea1e2f23c3d136e",
   "skills/win-loss-analysis-2/references/environment/p0.md": "aaacf5265ced2c0bce8782629c9331e832a549ff0349491b2bcf519a1b75cd33",
@@ -54,8 +54,8 @@
   "skills/win-loss-analysis-3/run.py": "b5db34a5e0b7a5c3468526efa2760b65c4d3e9f9a613f4b03ff429dfd31f114f",
   "skills/win-loss-analysis-3/selftest.py": "8009572246bc17cb58c3801d4234380eb6f3d64421486d5df81aeb4ba8cee461",
   "skills/win-loss-analysis-3/.phoenix/originality.json": "7ded003f669064d5b8a44f00e278f87ad5de430ba944ce5370bda8caa735b126",
-  "skills/win-loss-analysis-3/.phoenix/provenance.json": "e8eed41a337f67ebc70a64a2f4dc3cbd6a5983379af98fbbb6d041ac907aba54",
-  "skills/win-loss-analysis-3/.phoenix/selftest_evidence.json": "96176c79b18bb943eeba6dd78a926cf6a0490eafda7d2bfe7cbdafae8b75a46b",
+  "skills/win-loss-analysis-3/.phoenix/provenance.json": "c0267b5b221a974e474ba7ad5ddcb37ed34dd96cea7b3d970e4ff5226d02bacf",
+  "skills/win-loss-analysis-3/.phoenix/selftest_evidence.json": "1bad2ced12aeaaa660a09316e3f103c18c271aad6988258fd65e754304cf3b91",
   "skills/win-loss-analysis-3/references/creation/p0.md": "eaa43fe4bf8aa2bc5bb3e890a96d3ce7288bb30ff5a4d30992d32d67940ac8e4",
   "skills/win-loss-analysis-3/references/creation/p1.md": "74e2d6664203816e000c680f435c561051af4698802e3d0803b057c5066d5667",
   "skills/win-loss-analysis-3/references/environment/p0.md": "ceb4a100b4d7b63c38859ee9ddcb4c06fcbd18e62d03adb72f120578971648b1",
@@ -66,7 +66,7 @@
   "skills/win-loss-analysis-3/references/production/p1.md": "568b16d95a46aacc379f50831e01d7964c384ec798cff7773fdd4357a58cb250",
   "skills/win-loss-analysis-3/scripts/main.py": "d2c3c065412ff3cc504634eb8a978d857664e1c26695e28f2e0e2a569d6b0840"
  },
- "sealed_at": "2026-10-18T20:13:00",
+ "sealed_at": "2026-10-18T21:05:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

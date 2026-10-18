@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:00:11",
+ "at": "2026-10-18T20:59:14",
  "skill": "git-worktree-guide-2",
  "slug": "git-worktree-guide",
  "passed": true,

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:08:52",
+ "at": "2026-10-18T21:03:36",
  "skill": "semantic-search-tune-3",
  "slug": "semantic-search-tune",
  "passed": true,

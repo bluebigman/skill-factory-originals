@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "agent-error-playbook",
- "merkle_root": "eced2db062f1e8f0584c29f5e3244044f6d8ce7a226b80d033f67012ff94b9c2",
+ "merkle_root": "b052629a7caba7b18c4d47a26ed44aac94f057e4781398602ad34667bd10dbde",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/agent-error-playbook-1/run.py": "f5209f7b00c66dc99999bcc49d4172c4517091983ac24da936e1fcbfcea78a10",
   "skills/agent-error-playbook-1/selftest.py": "e6354f00e4bdefb2cf2c5b087d3609963442acda3723c8f946cc2afb6aa41eec",
   "skills/agent-error-playbook-1/.phoenix/originality.json": "24f30d657d10d60ecd9d9ad2aba186ff940f209d611cb973b9560bab10b7dce6",
-  "skills/agent-error-playbook-1/.phoenix/provenance.json": "6896738108b398b603c675f567a0a6b68c91f817abb24f3596d20a83b1d69b89",
-  "skills/agent-error-playbook-1/.phoenix/selftest_evidence.json": "05da0c62dadb5821a45ad8739079ea195c393dd5a5b4ca27a90e54f7c0777bd8",
+  "skills/agent-error-playbook-1/.phoenix/provenance.json": "aeecf6037c76e616efa4303192d56a002ac4d03ecf6245b89e1351ef06e24bae",
+  "skills/agent-error-playbook-1/.phoenix/selftest_evidence.json": "0f07d3ceced4c4e9e8eca65780d84f94ff374dde3132f6557c008c9008dbc897",
   "skills/agent-error-playbook-1/references/creation/p0.md": "4f46876414e6164741bd07a5234a00ca3dc61c12d045c56592eefe302d3883c6",
   "skills/agent-error-playbook-1/references/creation/p1.md": "53382a54d4ff9161dff7f15cac2a3eb4a03314c5361a8e37b3287e2f5235860e",
   "skills/agent-error-playbook-1/references/environment/p0.md": "43b2e1002c344f67d06f4ce529194b00aa8b71f7653889d3349c3506a1ac47a0",
@@ -37,8 +37,8 @@
   "skills/agent-error-playbook-2/run.py": "34ec8717b1f937efeadc8f44059274cc0a0c1f1fec07917315ba0523d3e6997e",
   "skills/agent-error-playbook-2/selftest.py": "d494cb5ea0dc3fa9a392ce230cc9c9f16a9e9d171b350432be4bd78810c42188",
   "skills/agent-error-playbook-2/.phoenix/originality.json": "52b769d54a00789c285423a23326a482221902bcc1a4b7804e22411df24c8dbb",
-  "skills/agent-error-playbook-2/.phoenix/provenance.json": "f033954dd32277bc2f0d5d1edbf514926d3f7af3e881c6682ee58d0210f5815a",
-  "skills/agent-error-playbook-2/.phoenix/selftest_evidence.json": "31b07b6431c0fad66d638faf8849fc80c29056db6f758b1f749e5bb3a090dae6",
+  "skills/agent-error-playbook-2/.phoenix/provenance.json": "bc855e799b82dd370704d4760514d89883010e495c1438490ca80afbeb26722d",
+  "skills/agent-error-playbook-2/.phoenix/selftest_evidence.json": "20c37f95ca291acfdc033adb79fd42849f4b4b478db68e3e8d82436dbe3294a0",
   "skills/agent-error-playbook-2/references/creation/p0.md": "482ed2491bdf30c72bd9119fe03629bf20c11d08f33a52ce07e77dd6d4d8994c",
   "skills/agent-error-playbook-2/references/creation/p1.md": "d4f4e0cc755bd290377dc43552d59bed4df109b4d9d31909598a3c62cac333f2",
   "skills/agent-error-playbook-2/references/environment/p0.md": "dd33c07d0cc8b6be0f14c866ab625b0f2d0ab00272bb01a4463ded76b9864038",
@@ -54,8 +54,8 @@
   "skills/agent-error-playbook-3/run.py": "cea9a3f2468a05423601382e1f44cd9b251ba6da4ab0940dcda0a6c145c5f2d4",
   "skills/agent-error-playbook-3/selftest.py": "3d39bd63300d2257470b3700096347ec49e935037b95910958fadd37b8c1685b",
   "skills/agent-error-playbook-3/.phoenix/originality.json": "e6a437bc351dd54a82aaee271bf17f382043693d01f39133997d2a9ce316af27",
-  "skills/agent-error-playbook-3/.phoenix/provenance.json": "980463d7c46055477c1ff8a58d147ddcef76c3f5a8ffcf3447ebfb2e58ea29c7",
-  "skills/agent-error-playbook-3/.phoenix/selftest_evidence.json": "174c0efcd8c96247417d9ba8eefddf2ae2f1e266fc3d5b851623e732314b8a2e",
+  "skills/agent-error-playbook-3/.phoenix/provenance.json": "b6b086fef8c0d29a2d7e9fd102b7781e916df224f9065bee45fd5be1746f2fb3",
+  "skills/agent-error-playbook-3/.phoenix/selftest_evidence.json": "503d3110c135cfb61fb50931c4ad2adacb20d6895310127ca925682e8239eb0b",
   "skills/agent-error-playbook-3/references/creation/p0.md": "dd27ae735b7fee0107006c3769197cc76a6ca6b738e5ee7275e439857f7ccb1c",
   "skills/agent-error-playbook-3/references/creation/p1.md": "1aa08182f98e4c51c81eea505f7b44efc2250958ba856c34267d3447db20e2a7",
   "skills/agent-error-playbook-3/references/environment/p0.md": "a88863ab27184beb7ca5c7c831b1633ada45fff9173db4a611bb890b99a3b4a4",
@@ -66,7 +66,7 @@
   "skills/agent-error-playbook-3/references/production/p1.md": "9b7bd4ad86ba81c5da2f0e2fe528627c83de5cec989ffd836550b91bfd64a7f0",
   "skills/agent-error-playbook-3/scripts/main.py": "288372ac6544912de9ff7489275f2bf11751a4675771bb0c34da951a512a5bb5"
  },
- "sealed_at": "2026-10-18T19:52:00",
+ "sealed_at": "2026-10-18T20:54:36",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:58:22",
+ "at": "2026-10-18T20:58:15",
  "skill": "env-config-parity-2",
  "slug": "env-config-parity",
  "passed": true,

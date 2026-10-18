@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "product-roadmap-pro",
- "merkle_root": "2176de977810d40e91ac8281c961eb2fc0228c40b103861d441f9c0a3d40dcc9",
+ "merkle_root": "9286b4a5bd3e4bb425e0a4346b2ccb7ae69878b7fdd3e0a9a9a049212449f5c2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/product-roadmap-pro-1/run.py": "0a9cf2436b19d8a4c42d5fbe2ed1fdfcfccd44cf4afb907cb69e88970a17866a",
   "skills/product-roadmap-pro-1/selftest.py": "00e8f254db379cf89f5ef4621cbcb7a9f21bb51964d74d8b398fe00da8128b14",
   "skills/product-roadmap-pro-1/.phoenix/originality.json": "d68a0c25d86c599e3a68a45e9d6ed98d8b6a7c4ae5efe904ac31eb00befb52d6",
-  "skills/product-roadmap-pro-1/.phoenix/provenance.json": "19bdb11f538f448e5e17b94ada078bd4c108e5c44bc6f9bc8f2a73fa6d0238d8",
-  "skills/product-roadmap-pro-1/.phoenix/selftest_evidence.json": "49847544c245767d97835e929fb2710e3213b2e42cec6be243112e62b2dd5fb4",
+  "skills/product-roadmap-pro-1/.phoenix/provenance.json": "9a4869debe2ce5754d5b7c85338bd18bba98fb990cc7a8b1dfe590cf725fd411",
+  "skills/product-roadmap-pro-1/.phoenix/selftest_evidence.json": "4b03717a608ffc639d95105b38d6b2cd06ff3ce311842d5a7337ee87030fa357",
   "skills/product-roadmap-pro-1/references/creation/p0.md": "91ca93743b04f1a1dc6624784a3b1f20641be6cff42c8d7c1fc0bda7b699d375",
   "skills/product-roadmap-pro-1/references/creation/p1.md": "37e23a58561359dc10a0ef45cade1ef894e4181b7a59207f398bec4eae9c312f",
   "skills/product-roadmap-pro-1/references/environment/p0.md": "1998095732eb21ac9c6ba84ba7542a31bf79790837e87711ab29f0d055198669",
@@ -37,8 +37,8 @@
   "skills/product-roadmap-pro-2/run.py": "5ba10be0e054346fbee5616d032613160e8226e492f58cafaf7fbd11ed5710f0",
   "skills/product-roadmap-pro-2/selftest.py": "e9cb4f8e7f6926cdc2e3491f449163ce00e783f6921793126c08dba0fd2ce93c",
   "skills/product-roadmap-pro-2/.phoenix/originality.json": "155f5eb6cfc62cdd5fca6758f14a9d0be74eb52c79e3eea9ed54c9dd20969131",
-  "skills/product-roadmap-pro-2/.phoenix/provenance.json": "b7b9cb9418dce907cd2c94813f7bb331153386058160b1cbe653a21c26a17367",
-  "skills/product-roadmap-pro-2/.phoenix/selftest_evidence.json": "a0f815fed892974feadb8b4adaf6787f0d0dd32a44d6c6a87a9612b3819e2a91",
+  "skills/product-roadmap-pro-2/.phoenix/provenance.json": "c5fa4a2cc642cf7970f052fba225637605f75eba17269340a3d69c3e97b7efaf",
+  "skills/product-roadmap-pro-2/.phoenix/selftest_evidence.json": "7fec6a2360ed5e49b1cd8e6618fa918d72a4f66a00df9b1dbae8995d9f5accc7",
   "skills/product-roadmap-pro-2/references/creation/p0.md": "0d74a72ef34aa123da3672de690d1fc48d80355c01a8dec67e7eb98a26151b1b",
   "skills/product-roadmap-pro-2/references/creation/p1.md": "1ae41210eaaf8ea7dd05deeae695f852b934ed643a1e2e068b49e29cd872621e",
   "skills/product-roadmap-pro-2/references/environment/p0.md": "ec4640f46a0ed1acc5f046f847971ecd32b4667aef110eece10e937130c51be8",
@@ -54,8 +54,8 @@
   "skills/product-roadmap-pro-3/run.py": "3a06f39ef78c3e4ab3b304526837ae6b5be30a90841d12affce96e0d8ab2f086",
   "skills/product-roadmap-pro-3/selftest.py": "8eb3f026fdcb5cf9f4e2186e831a3c4200684e6a8e9e7915653902222833355c",
   "skills/product-roadmap-pro-3/.phoenix/originality.json": "b66d62b602efd993655709d370110df09896d91c7e86578a6d7e6ebac3a0b3a0",
-  "skills/product-roadmap-pro-3/.phoenix/provenance.json": "d08d8466636be7334ea7af57b0695890abd084beecbfd06f6228b541f3dacf7f",
-  "skills/product-roadmap-pro-3/.phoenix/selftest_evidence.json": "6b69d16561412d4ac037b0a0bdf657eafb8d6cd8c1f6b128c43bf1c03939c293",
+  "skills/product-roadmap-pro-3/.phoenix/provenance.json": "8e1a232895fa1bf27b6574cfb580b9a6bab0999cd18c6823847df4f1fbcfe2cd",
+  "skills/product-roadmap-pro-3/.phoenix/selftest_evidence.json": "77bde3d5f2f93a4a1b90e3dfa9166602ceb0928c97fe8e1cdc4b685c3be44ef7",
   "skills/product-roadmap-pro-3/references/creation/p0.md": "79973bf995e10d56563d9d22f7eb09f520ca1ddee4db6c70ca170111e27601d3",
   "skills/product-roadmap-pro-3/references/creation/p1.md": "35d0e6bb0074a9979d1467e94123d6274019e377fac88a77364a47d8736383fd",
   "skills/product-roadmap-pro-3/references/environment/p0.md": "2ee2c2dd2c0a6c97c70b4b9258fe191e20bea85bb834d7b807cada1b3c47ba67",
@@ -66,7 +66,7 @@
   "skills/product-roadmap-pro-3/references/production/p1.md": "eefa3fd0092aa4dec5740a42ea3a225e3e7d9c239d1a2f95ad66ea499704b0b4",
   "skills/product-roadmap-pro-3/scripts/main.py": "3e0c36399530e950d6bdd61f04afb52d3d404c1da0cbaa0bd1402091fcb9d5e5"
  },
- "sealed_at": "2026-10-18T20:06:31",
+ "sealed_at": "2026-10-18T21:02:27",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

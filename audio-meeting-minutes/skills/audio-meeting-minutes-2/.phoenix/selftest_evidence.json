@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:52:38",
+ "at": "2026-10-18T20:54:59",
  "skill": "audio-meeting-minutes-2",
  "slug": "audio-meeting-minutes",
  "passed": true,

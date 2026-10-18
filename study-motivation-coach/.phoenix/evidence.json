@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "study-motivation-coach",
- "merkle_root": "ae9f2e11ec62388edcd8520e67e57e09dbace3ff5fce2f49daa4c0b4cb83061e",
+ "merkle_root": "323c4fcf22eaa5b76af53c8a46f1e8be8418e8a8dddf29c2b37f81557fca3350",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/study-motivation-coach-1/run.py": "402514e454ddbef374bb0007016d5cdb196e18b9f001d16b180661c9f260b46f",
   "skills/study-motivation-coach-1/selftest.py": "2c5d5df9bfe895963253ea0c78fa015fe08ee7183febe1fe01200f3b70e816b7",
   "skills/study-motivation-coach-1/.phoenix/originality.json": "f15db34014339554da1cae8b59816ac258c0c185e85c6e3feb41fe97e4d880d0",
-  "skills/study-motivation-coach-1/.phoenix/provenance.json": "c8580151d8f9e1b4d65080f7a5248df69f17a74e4689cbb8d1027ef2587f4f6a",
-  "skills/study-motivation-coach-1/.phoenix/selftest_evidence.json": "da49e3b132d1b6d81fe79873f2dd248fba7e8aad3131c3ef2973321378e02c83",
+  "skills/study-motivation-coach-1/.phoenix/provenance.json": "c8c31e69715473a132892039881cf3654903c03a2f6039a330b418208e49b4de",
+  "skills/study-motivation-coach-1/.phoenix/selftest_evidence.json": "afecbc8838b34857e36f4e8db7575112dd3fa5eb621db8250704449f932f76c9",
   "skills/study-motivation-coach-1/references/creation/p0.md": "777cd3672662df9c930b61074044fded7a72c70688faaada67986bc746cd58f5",
   "skills/study-motivation-coach-1/references/creation/p1.md": "3e1e51e0d336c04fa17fdf3e6ed7a72a8ca306a5633c5dd5bdb2cc99d87a6419",
   "skills/study-motivation-coach-1/references/environment/p0.md": "520126f451158cb067e9e80c51faae23b77498721866975f49db0d111fba48c5",
@@ -37,8 +37,8 @@
   "skills/study-motivation-coach-2/run.py": "ec5292db32837c2327ad184ac134e52acd581db3a3b1ea32135286af091fc694",
   "skills/study-motivation-coach-2/selftest.py": "2ba48a055491d121e83a7da78417546214ae38ffdc6326cab2f63fcaaea3d435",
   "skills/study-motivation-coach-2/.phoenix/originality.json": "062f620b49469ebdb45ccf37208b121fa19b6586cd056fce901cd7ad425dfb96",
-  "skills/study-motivation-coach-2/.phoenix/provenance.json": "f4d0f7ec7c0c7aea5f42e039e2ede0a95581051d38491c35703cf5ccfbc2e389",
-  "skills/study-motivation-coach-2/.phoenix/selftest_evidence.json": "8fd066ae22d2f63dddc7ca4d2a29f55583d6db547b15954df363794ca380e66a",
+  "skills/study-motivation-coach-2/.phoenix/provenance.json": "d0d37d33a32be073e00e97578b3f70a62b0b037916e0f938b36e621815876dcf",
+  "skills/study-motivation-coach-2/.phoenix/selftest_evidence.json": "baafc81a5f7b83c87de03171f3fc65856f1aae47fed8a32631eabef31eec495a",
   "skills/study-motivation-coach-2/references/creation/p0.md": "49d8b624bfb2732f965be307c15d0e33c12db33fdb3057a2e18a70174de40b2d",
   "skills/study-motivation-coach-2/references/creation/p1.md": "b081d7b7ab719050022c20c0816cd01c9efb14fd51b70930c8a3ef2398a4495b",
   "skills/study-motivation-coach-2/references/environment/p0.md": "7f763f6d675ffef3743f0a830ca54e380953bbacdfc00edc7307849e148c509f",
@@ -54,8 +54,8 @@
   "skills/study-motivation-coach-3/run.py": "a2203d05a61b3ba2ce9b2b9f43a117e41371363303c2f710734dbd4f13d88746",
   "skills/study-motivation-coach-3/selftest.py": "3ef659e8e2ba28e3665b813e3005024006e375608319362113a3631f5e660885",
   "skills/study-motivation-coach-3/.phoenix/originality.json": "f892327c31bf81535aaa571e3d3eee23d9cc1d40a8e803f4e9cd30e79de15825",
-  "skills/study-motivation-coach-3/.phoenix/provenance.json": "e2e2146f7191fe40ef9a0f02be287c1e574ee0a06c2dc050b46ca66aef808183",
-  "skills/study-motivation-coach-3/.phoenix/selftest_evidence.json": "0582fad8e562a0065e05944dd628070f24734d70fd1518746791a0269f41f2a8",
+  "skills/study-motivation-coach-3/.phoenix/provenance.json": "b8b00cef453a129a0d32d98e38858d4226ec1680643b8cfeb38a1b7f854d715c",
+  "skills/study-motivation-coach-3/.phoenix/selftest_evidence.json": "1ff4b4b540b86a163046eab8d78f69e50591bf9ed7148d7d7c409bd050e326e2",
   "skills/study-motivation-coach-3/references/creation/p0.md": "f13330fb7fca1c1285aa5142bcca29dec412aa560a3c26b48c1dfa901964af2f",
   "skills/study-motivation-coach-3/references/creation/p1.md": "d7ce39bec8f00fd06b0641a1cc31137788227d23da36a80334392d3fc91e0cde",
   "skills/study-motivation-coach-3/references/environment/p0.md": "51b9576db50aadff0ed845327ebb9feb45e48563adf937e34ee8eb3a27d30823",
@@ -66,7 +66,7 @@
   "skills/study-motivation-coach-3/references/production/p1.md": "cd432b8ee9a0d372b64c5d5dd2f039fb548f922bb49a88d2fd348a663df41068",
   "skills/study-motivation-coach-3/scripts/main.py": "ecd928490fe0a3d90050086858aa37d41ed368ff27b0c67032ed9502481ee954"
  },
- "sealed_at": "2026-10-18T20:10:31",
+ "sealed_at": "2026-10-18T21:04:21",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "tech-debt-ledger",
- "merkle_root": "304668694cd7db51220dda189eee200a5a73b756808b93afc3b22fe2b1204261",
+ "merkle_root": "140554ca0807a0c5f0f09fd6ecb06bdfb22d2ba4031a0de37fb91c23a6ea6ec1",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/tech-debt-ledger-1/run.py": "cf0308f849170b2933deb6f31199ba87417a01a9c187d2504307c40f893b9139",
   "skills/tech-debt-ledger-1/selftest.py": "0901f0b0f7463f1b6133ca0b93fb809d215d0a8f4b3d5b074b5802d5fd0991b4",
   "skills/tech-debt-ledger-1/.phoenix/originality.json": "c4c906e688b0b7c90ecd7712ea193434db28aca7fa68ccec73fba881fdd51309",
-  "skills/tech-debt-ledger-1/.phoenix/provenance.json": "6ff6ee27f4772f08bc26c8c7123abe8cacd7dd4263ecfcdfc61ce812eeb15d47",
-  "skills/tech-debt-ledger-1/.phoenix/selftest_evidence.json": "a706e9a60aae613732975907baee7684a767f170e2ccdbce57473c479751d382",
+  "skills/tech-debt-ledger-1/.phoenix/provenance.json": "6e2bc0bdb82ee0ca0f048d52819d99838334dc0ef1dfd60112ac2fb51a5aea65",
+  "skills/tech-debt-ledger-1/.phoenix/selftest_evidence.json": "bc0405fefd768a3c1084c035bd833ded9fb1663e8fa9053fc4239450423f7421",
   "skills/tech-debt-ledger-1/references/creation/p0.md": "76728bdcd2789436be860fd50246378dec2a1c600e6f1b499e5f10cde4684bec",
   "skills/tech-debt-ledger-1/references/creation/p1.md": "66ce8b33d6a351adcc8d5d662536351791e39c608ab239873f78397b37571474",
   "skills/tech-debt-ledger-1/references/environment/p0.md": "664d833e7877d9582ac4c7ead6816d3c3611b336b98acb58d50a8c51c22a142e",
@@ -37,8 +37,8 @@
   "skills/tech-debt-ledger-2/run.py": "876ab36508ab3b08ae8154d9475ff1870722b8428f580d72db81efb049b8f208",
   "skills/tech-debt-ledger-2/selftest.py": "34c22eae8a55d29ea24cc9cc7bae6b8162a48aa50677a0c760296b0969c680d4",
   "skills/tech-debt-ledger-2/.phoenix/originality.json": "f97cd1641345296fc2ebf315c8021b36ff22174936c58699596616c672f3f586",
-  "skills/tech-debt-ledger-2/.phoenix/provenance.json": "bef6780a89a2f702ca75bae027e31a30d27a6dce67ae461ab8b790e543c48633",
-  "skills/tech-debt-ledger-2/.phoenix/selftest_evidence.json": "f539bb11c186ae63fd9c3aebb7a1b609b3e0100d524e02cfdbb11f1e1cec0ba7",
+  "skills/tech-debt-ledger-2/.phoenix/provenance.json": "295fe14ee295c13bcf96222a19c258bde8ba00539ee00446068b9670aa392d10",
+  "skills/tech-debt-ledger-2/.phoenix/selftest_evidence.json": "662aef87b6a94d9d6f8103a325df2f81b0f13587c93039ecf716be42ebe10332",
   "skills/tech-debt-ledger-2/references/creation/p0.md": "b677dfa6157cf157061aa4b1c44ccc14094b8a23920bfca3b8bb03267196d833",
   "skills/tech-debt-ledger-2/references/creation/p1.md": "f7b409fb4930a5c4fffdfe8b7ac9fc1cbf6ebd878a72852bd3263612447921d4",
   "skills/tech-debt-ledger-2/references/environment/p0.md": "7570f0e7c08c91f468c84fcc9d8de48dffd62056628d491cc92f4b3a8b1dee30",
@@ -54,8 +54,8 @@
   "skills/tech-debt-ledger-3/run.py": "2fd2ae02bc46db3524c8c360f0635490388637c9d22c928bc922427e67f479b2",
   "skills/tech-debt-ledger-3/selftest.py": "f373530cee18f25ef7fbd52c3a8e6e8a285b63391be83500c0bc4466718a924a",
   "skills/tech-debt-ledger-3/.phoenix/originality.json": "60e1d92d3de9a363dea094f12ff5a9331ffbd7f2ee59a18a18918327d95d8ef0",
-  "skills/tech-debt-ledger-3/.phoenix/provenance.json": "717cbe28f4aee1cb9528ef07def3295bd2231dfc4296957fc0e2988f3fcec5ce",
-  "skills/tech-debt-ledger-3/.phoenix/selftest_evidence.json": "0d57237a8407b2ff483bcd61f6a24d7043a7f0c4f469a750504b00b5e2ad9f9f",
+  "skills/tech-debt-ledger-3/.phoenix/provenance.json": "a07b1c796e6c775f19ab148df93b82c35c59b442553ad19140e3fac1aea89f27",
+  "skills/tech-debt-ledger-3/.phoenix/selftest_evidence.json": "985abbb8773ada407e0d5a3d7cf393e2eb85b469b27e8b158d6231a97dfde227",
   "skills/tech-debt-ledger-3/references/creation/p0.md": "cd60fdb8a9bed4bb48e04eaa4e1853d65b47413dc8927c568f12bb1ba981d836",
   "skills/tech-debt-ledger-3/references/creation/p1.md": "2c2347e7f5433d6b9db276fbe0d0f9afe0fb46c457230784745c13072827ebec",
   "skills/tech-debt-ledger-3/references/environment/p0.md": "a195ba675908b9dad1ef97c15217b0bf34710bef89de841b33977db06e0eace3",
@@ -66,7 +66,7 @@
   "skills/tech-debt-ledger-3/references/production/p1.md": "17f92ed6c38a46a6bbb870beebd5ec749d4cf572597091f6b0a33a38fa86f470",
   "skills/tech-debt-ledger-3/scripts/main.py": "0941f60cabcf85451033489ad5b63c0e3e0e68b6446ae6a3f18e40b4827684ab"
  },
- "sealed_at": "2026-10-18T20:11:09",
+ "sealed_at": "2026-10-18T21:04:36",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

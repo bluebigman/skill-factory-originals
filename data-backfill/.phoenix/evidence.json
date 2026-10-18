@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "data-backfill",
- "merkle_root": "1f7d5624e8195dacefeab43a346ae8eb603f32a3c577e43721f8ce870d257782",
+ "merkle_root": "a526be8b74876b2726e89659eca3334881b21514badce73588afd03d37f34a26",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/data-backfill-1/run.py": "9bbc14fa55841899d07776999890c51589d41ac7ef9a1fd434e15bacccdac73c",
   "skills/data-backfill-1/selftest.py": "eae6ebe49b21651155d4bbcea9d12295c62434ae4012e1854eeb8052cc8fb1b9",
   "skills/data-backfill-1/.phoenix/originality.json": "0623f7c29a3487caa04939c971d3fe32321ce2a6ec73535bd952df886bd1a694",
-  "skills/data-backfill-1/.phoenix/provenance.json": "5b0f7d1b7f3872412810cf0d686c35a63fbf4447ae60d986947c7716678c39ce",
-  "skills/data-backfill-1/.phoenix/selftest_evidence.json": "729d5f9ff4dbd5cecdd53a5cfbca8e6de7c62575c4d7fd566e889740849c39ea",
+  "skills/data-backfill-1/.phoenix/provenance.json": "6e0799c3e8701fbf737d56633fe7ca3e05e51fe84c448f5824016af93c6623b0",
+  "skills/data-backfill-1/.phoenix/selftest_evidence.json": "1b42a75f0a77e9fd17f8e5c90e8d4c958688ce8fa5e0691f0c61c780f9d1ecdd",
   "skills/data-backfill-1/references/creation/p0.md": "4b2d4524c09f3872db0d1c47d25062289fbeb35df6adc4a929039366a742a051",
   "skills/data-backfill-1/references/creation/p1.md": "fbe66b45c79d9bdffe8cef6547cc8b7c2cbb10e1568d218b3c29f7d4e939ad62",
   "skills/data-backfill-1/references/environment/p0.md": "e9bcf5c8d23c4fb903e2279403cf4dfdcef2a353a886574e9b3df52cbe97b176",
@@ -37,8 +37,8 @@
   "skills/data-backfill-2/run.py": "7625c54808274e757e323df28ad89456152f8d6caf976c13515f799eab087b77",
   "skills/data-backfill-2/selftest.py": "87a68bb14e68b9130934bc346cb535e58439555bb7ca9d0bd850fe1f53d9304f",
   "skills/data-backfill-2/.phoenix/originality.json": "02e364ad0817ac0a4c16304ad6a3aed0221185abbb9f0f66f6004b666c184ab6",
-  "skills/data-backfill-2/.phoenix/provenance.json": "12a792c60c9fd70099aab6c96d124d7cff490aeede32e85dda77d41350078726",
-  "skills/data-backfill-2/.phoenix/selftest_evidence.json": "9599792c686d851700d2d3c093a2806d0e613adeb51de5e4fb76d01b3477b60a",
+  "skills/data-backfill-2/.phoenix/provenance.json": "ecbcc68d4c08b0886553aaacebac007da0842dfacf4d6c4a4a766e2bf4ae9b3d",
+  "skills/data-backfill-2/.phoenix/selftest_evidence.json": "c36905df48540d1eed393ae4703656386008114a583732dfebb5a170eac177c7",
   "skills/data-backfill-2/references/creation/p0.md": "07a91c60a709085c8bc7d2be6007f666ee84ca8eacc330507686cf4b36da7e9b",
   "skills/data-backfill-2/references/creation/p1.md": "f3ee9c76f0d52b7514b2a7665120a6c810a23a97099500b522ea449de3c316cd",
   "skills/data-backfill-2/references/environment/p0.md": "e6f5f6161190e243f5b3729a4f15003914edf0b1a29265a0d0d4f6c43bf814df",
@@ -54,8 +54,8 @@
   "skills/data-backfill-3/run.py": "c123136c490655ed2118590193d474dfc28b59ab84325749051c38078579cf65",
   "skills/data-backfill-3/selftest.py": "af0a2c64a0fc8145b725d4d50e30d2706a9197d371a92b29fcb9b90d6d37b71b",
   "skills/data-backfill-3/.phoenix/originality.json": "79d35cf0bb19b0321fec5f103454130d2a6c823ea7e7ed53cfb52a294b373a6d",
-  "skills/data-backfill-3/.phoenix/provenance.json": "d811ee0b19041f02499e4c3d486d809a14d4320b57f43c143053ffb678027f23",
-  "skills/data-backfill-3/.phoenix/selftest_evidence.json": "05a8575cca0a16fb124049c5a8b91c725660639d7a85c903bf8232e3192cf199",
+  "skills/data-backfill-3/.phoenix/provenance.json": "8639b55fc67e25a376dd1f76a38af58677f6e027cfd5da41e36b3a8e2edea85d",
+  "skills/data-backfill-3/.phoenix/selftest_evidence.json": "38c7007b02ed2bf56855eb61211f97f7a77dc7998da8f8309e5812aefed2714c",
   "skills/data-backfill-3/references/creation/p0.md": "c48f75aba644a7b0d59120faa33af59bfb531657f34441c76bfaaa869a1ea059",
   "skills/data-backfill-3/references/creation/p1.md": "546e5ef09c6e1c3c86825abc090ee0eb963213fbec5bd3c34c8feaf52e469288",
   "skills/data-backfill-3/references/environment/p0.md": "f88a07e7788d2866b68a2105a5b110aeaab860838a81bb3389900aef1440c304",
@@ -66,7 +66,7 @@
   "skills/data-backfill-3/references/production/p1.md": "b564f183e1e9000b03b3ec33729e867ba17019ace31de9dd95f5cc4ac284c741",
   "skills/data-backfill-3/scripts/main.py": "bb72f8c8218b6f4e4dd3ce4ad01f05e0ccee4df2df90e1874b33a67d739b07ec"
  },
- "sealed_at": "2026-10-18T19:55:15",
+ "sealed_at": "2026-10-18T20:56:32",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

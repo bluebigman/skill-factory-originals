@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "rag-pipeline",
- "merkle_root": "a61413dda9b2a3ca99cbfce0551e7bd72ad4d9c563dcd7fa3d9b17d4279a6bc7",
+ "merkle_root": "981601e3501138abd8a4dcb31d79004aece6bbab5fd2d645acfa6200242f15a3",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/rag-pipeline-1/run.py": "a7229058c9ab47d1a3f23187b6a6ce3898f87a52e63a51b275527689f57a952f",
   "skills/rag-pipeline-1/selftest.py": "a3ca7e5f887ea8938751fb8779b84247d1f84947784097041620d6c77f1fbb0d",
   "skills/rag-pipeline-1/.phoenix/originality.json": "059736839ae2edf0034f6b99efa51575f768edd57ee807550ecb811c55edd8d8",
-  "skills/rag-pipeline-1/.phoenix/provenance.json": "edc566211d4d64917af4d4f28b0333963cb8c7383eaeff95d88adbae33965872",
-  "skills/rag-pipeline-1/.phoenix/selftest_evidence.json": "70792888850bab672eecb2955f3b2f4bf81e26d067b5e8a24b5c60329c724e46",
+  "skills/rag-pipeline-1/.phoenix/provenance.json": "56abafdeb6ca2578d4d3f368e44edb9481974dcfebd4179c27df32c43a2ff422",
+  "skills/rag-pipeline-1/.phoenix/selftest_evidence.json": "c60a312017fa4dccb0a69c7ab2ee40bcadb9ab184fc81629ad362d5f2a75e1e7",
   "skills/rag-pipeline-1/references/creation/p0.md": "ca2f5bc02bfabc6909fb341eaf02abb21acb9a2d1bf4581e6269c85e8f6b90ac",
   "skills/rag-pipeline-1/references/creation/p1.md": "8694ff2cde847b373c21264c6adf95c98bb348fc030a20bbdaae04d7235a06f5",
   "skills/rag-pipeline-1/references/environment/p0.md": "c23a6a50d9b922302b8930606247fd6ec201b900e36a31a24a1d4803a57958cd",
@@ -37,8 +37,8 @@
   "skills/rag-pipeline-2/run.py": "29b06c8dc528ef235929a9bd5ff66bbb407b2aa75d20ad725ca4255224031b0c",
   "skills/rag-pipeline-2/selftest.py": "477b8932d849c906163ccbaf8f0473f708bb4660620813dcdb7fdbee0c2ffd09",
   "skills/rag-pipeline-2/.phoenix/originality.json": "46a4542a9a0fd7d7241ffed0cffac0f7e366d23a5c23fd8da9cfc2c3d06348a0",
-  "skills/rag-pipeline-2/.phoenix/provenance.json": "f08cf422f842dce6c58ae1003df2b193b55b46702368556a4acd6645323c7334",
-  "skills/rag-pipeline-2/.phoenix/selftest_evidence.json": "50c07ba106a05c4dbc1f73235b34707638dd341670402bef8ab7b95a82634565",
+  "skills/rag-pipeline-2/.phoenix/provenance.json": "42f991408b24398e156b405d0e3ea7de24a73879a9fcbf88242bf45f9b9cec11",
+  "skills/rag-pipeline-2/.phoenix/selftest_evidence.json": "7d3c872c728dde73992335e6f321477814a7e758fa72ebe04b4679d5b1b7a42f",
   "skills/rag-pipeline-2/references/creation/p0.md": "8da25bc9a4885a75729aa0f7cff5f717566af5ddf12284dfd388ae88e55a172c",
   "skills/rag-pipeline-2/references/creation/p1.md": "6fb606d102fcdb6c6df12976bb351247de373236bd8367cfec6615631b82f0f1",
   "skills/rag-pipeline-2/references/environment/p0.md": "e061e912ae23e992d50ce1c94846de82ae770ad5151d94d43b56b5b264058d8f",
@@ -54,8 +54,8 @@
   "skills/rag-pipeline-3/run.py": "4ed044b2b4df09fb41d538f1c9596027fed70b670585bcd60e463fd7faa5c277",
   "skills/rag-pipeline-3/selftest.py": "4864cfb82e38fab5bd6ac0f657188d762d9b2773aec7a8ab73baa7e28cebc527",
   "skills/rag-pipeline-3/.phoenix/originality.json": "665aa5fe0e67bb71d42a42a3ccd82d6e3e544112ffbc52f02d974122c7af66f6",
-  "skills/rag-pipeline-3/.phoenix/provenance.json": "e58d9bf6b77b68fcc35a5ca96c3bf9af292d86fea084bb5a1060b7f9498028d4",
-  "skills/rag-pipeline-3/.phoenix/selftest_evidence.json": "52d138841b11c969f1699736940a0dc0f7d174a8db15c406fcd45947a106c916",
+  "skills/rag-pipeline-3/.phoenix/provenance.json": "9cd6ddde43bf5ba3455c17928da8e59537170f0bd2757cc2efce9851675b0e64",
+  "skills/rag-pipeline-3/.phoenix/selftest_evidence.json": "e8ba985af3d650b493b1de96c8434f5874e757500b396ab04beb0eb23b07ed9a",
   "skills/rag-pipeline-3/references/creation/p0.md": "cd169990b32d9441b905aab41aaf44fd35a7eec66b49dcace0a166a6c99fab3d",
   "skills/rag-pipeline-3/references/creation/p1.md": "d738538b68a620def9d182118e95069356ae9b8b700ad561ca1fc8378c7ef163",
   "skills/rag-pipeline-3/references/environment/p0.md": "df73ff59ee4b91339e8e7833fdbd4b8ccee99a051c081b6044c6c3a931f79875",
@@ -66,7 +66,7 @@
   "skills/rag-pipeline-3/references/production/p1.md": "596c39a5aeb290de532cb4a5fcbcf75e95bd01cdf3f152edb55055c968faf3ef",
   "skills/rag-pipeline-3/scripts/main.py": "84091dd11c76e23c592477fceb35529e3b49d72af9567210696d5c3e1c7a7bab"
  },
- "sealed_at": "2026-10-18T20:07:11",
+ "sealed_at": "2026-10-18T21:02:47",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

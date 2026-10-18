@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "warehouse-slot-pro",
- "merkle_root": "a78fd137d9b09dc6c92fcbbd9c0eb560f0bbe24c103821a9f6340b593de9e0fb",
+ "merkle_root": "e14888318a9923c6469b554fb47686c742ac076b1a9b92b5162801b53d2c4905",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/warehouse-slot-pro-1/run.py": "84b756d688a413882e044814f6f6de5e0b32827db6e8a992cf11944cdbeb17b1",
   "skills/warehouse-slot-pro-1/selftest.py": "28e111c83e61bd5dd463b64c855b0ee3a3164c0f54b2ac8a7dd114cd50593e69",
   "skills/warehouse-slot-pro-1/.phoenix/originality.json": "448717b192be143d30553881d12c5cf754ccb226210a303a53fe4b3c6da63843",
-  "skills/warehouse-slot-pro-1/.phoenix/provenance.json": "5b7008d27a2cbd51777032b30463feda4d9e63c1ef6079e122e1f520f9118e9b",
-  "skills/warehouse-slot-pro-1/.phoenix/selftest_evidence.json": "2320cc20d280c82a585d0e6fdc55e587e25deb835812586f2baeb6deaa3af8f1",
+  "skills/warehouse-slot-pro-1/.phoenix/provenance.json": "db7228ce2d5e5888587e3b9ac9ba0733103308fbe877a64fc092ff8ff8ff7e57",
+  "skills/warehouse-slot-pro-1/.phoenix/selftest_evidence.json": "b625dc2c050625aa7b385cb7f27de5ee92db28c9e77299a209c1be85b9154593",
   "skills/warehouse-slot-pro-1/references/creation/p0.md": "63c5b4d9de1baa0b2fac997ad0c0d43b3598a38e59843bdb0571a3820861e5f7",
   "skills/warehouse-slot-pro-1/references/creation/p1.md": "79a58e3457261f9bd986e72fa39bd2963bd61355d48d6006c4700df900767016",
   "skills/warehouse-slot-pro-1/references/environment/p0.md": "39f154f466e1546a4903ce831ffff2df6e8cec2b230d5bebafaae6b5b4843804",
@@ -37,8 +37,8 @@
   "skills/warehouse-slot-pro-2/run.py": "365bf89a57441f5e4817c9d130a6c44bb343d23187b8ca003926710e930ac57e",
   "skills/warehouse-slot-pro-2/selftest.py": "0c50d54976f53c297992033c2b771d79bf106c86a2725da0b324609ebc0ed41a",
   "skills/warehouse-slot-pro-2/.phoenix/originality.json": "f814406bfb6592a787de26e2d6445275087aa97f84296c446cedee8865aa3938",
-  "skills/warehouse-slot-pro-2/.phoenix/provenance.json": "b2dd9d9d30801b340515da9fc37419cc47d84aff94d3df9a78ce5191d18f5664",
-  "skills/warehouse-slot-pro-2/.phoenix/selftest_evidence.json": "33fde1c870f7e8d08880b995997ed11940f8759bfae653b43db72591fbf6e3a6",
+  "skills/warehouse-slot-pro-2/.phoenix/provenance.json": "2d0975cd9cbaeced246dd16b31c51a338fa101ba55686b6edb452737073059bb",
+  "skills/warehouse-slot-pro-2/.phoenix/selftest_evidence.json": "f4a22057a135ae3b08bf964850eefa4df35cfb9d7b43c62f8e162236a36cb927",
   "skills/warehouse-slot-pro-2/references/creation/p0.md": "0f5ca205b13d2303b15d5032740fa9400eb6c4edf5334736e62f0943833fc8b1",
   "skills/warehouse-slot-pro-2/references/creation/p1.md": "061e1444aff4f111e96f94a91fb02a92526fa908f35c02023b26071276733d77",
   "skills/warehouse-slot-pro-2/references/environment/p0.md": "0251ca36b15df2037dba1160c5738efaa6e8bbd4130f7101292b1d0fe81dcf3b",
@@ -54,8 +54,8 @@
   "skills/warehouse-slot-pro-3/run.py": "a27d26a2c4afbb7ecb67c27a1ead3504a08e434048fa3e7b932d88dfcf95e0d1",
   "skills/warehouse-slot-pro-3/selftest.py": "5194d6bfe95fe9eb2ec817c143662c9fd7653b4c7935d649314e2c08882447fa",
   "skills/warehouse-slot-pro-3/.phoenix/originality.json": "6d8915d5bce8f92c3f30a089f1a21dd741a7bb38f64c26d09e0d0cfde8e7535e",
-  "skills/warehouse-slot-pro-3/.phoenix/provenance.json": "c4275cb69c3334aa3ac34af7fca449e790198b2533472692ab68cc86db5054a4",
-  "skills/warehouse-slot-pro-3/.phoenix/selftest_evidence.json": "a53326bf799fd70d6683fba53a88ce11cc7320b54ffc68d15b15f5e82f5e5e9d",
+  "skills/warehouse-slot-pro-3/.phoenix/provenance.json": "9345af9cf514aa8c76f462cf33b730ab47ec88e9e6939346be0a0a6102082237",
+  "skills/warehouse-slot-pro-3/.phoenix/selftest_evidence.json": "8005f22a287804f189aebbc55b22930d3a6b4e6959b1d57f33ba1b34a55b76c9",
   "skills/warehouse-slot-pro-3/references/creation/p0.md": "c64fecc268213386cedf5dbab6d3916c60a1fd3a41c451db856ed80f5815a76c",
   "skills/warehouse-slot-pro-3/references/creation/p1.md": "caf6340eecbb5d451c1c2ee82b652df9d69f6726117c4b0b1945d1ad4d731c1d",
   "skills/warehouse-slot-pro-3/references/environment/p0.md": "f94088f8fa861e252e4097210dc29ce1716ee2767b58b247e440ae4aa8246f94",
@@ -66,7 +66,7 @@
   "skills/warehouse-slot-pro-3/references/production/p1.md": "84cca75645cab5ac442261631afbaaf3b26f1e5493c7bd80400fb5b45e286e98",
   "skills/warehouse-slot-pro-3/scripts/main.py": "1321ca495001f46883b7e1844802cbc427426bdc42a026676c42add26ce5a8a3"
  },
- "sealed_at": "2026-10-18T20:12:59",
+ "sealed_at": "2026-10-18T21:05:23",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "meeting-minutes-pro",
- "merkle_root": "374121f870c9a85d18a42947b4998a8ee43b4192a97099afa2fdc49099167786",
+ "merkle_root": "759ae3c577d22ce9e778064e71bd2cf2dcd5bb012a7469a4ea47738047ed6970",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/meeting-minutes-pro-1/run.py": "f11942bc7838ca0e9d86359a65d0aeda332f28439cbe98777b81b02be5b87db8",
   "skills/meeting-minutes-pro-1/selftest.py": "db7ee2626b7d3246dc27f143918fcf99e86183308105070ccc90b816be24a9eb",
   "skills/meeting-minutes-pro-1/.phoenix/originality.json": "24ccccbe5dd1ed85f86326308f932e6d6be152e4b10da5674a9109a1cc486f9f",
-  "skills/meeting-minutes-pro-1/.phoenix/provenance.json": "d92428832803fe15a03faf9792f43ccd602dda92e6f185e620edec9dfbb36e4d",
-  "skills/meeting-minutes-pro-1/.phoenix/selftest_evidence.json": "1a3c222f3631b3d03968eaac9cc63d252ff4e3012cd8be569fcd0846a5308003",
+  "skills/meeting-minutes-pro-1/.phoenix/provenance.json": "50c2fe67fb4facc0fc84fa060b952e1895dc9a0605ca61a56ac631034c17dae6",
+  "skills/meeting-minutes-pro-1/.phoenix/selftest_evidence.json": "8efb93c5c87b5b8e93b2fa1c19ec47b6c1619c13b51d8b312d7c28ed3b7ede41",
   "skills/meeting-minutes-pro-1/references/creation/p0.md": "64388f71e54a5ade422b0ce3086c12554aea711be842742f6f23d09a22b5f04c",
   "skills/meeting-minutes-pro-1/references/creation/p1.md": "8cdf96fc4123461d3ba5f8f6e8bbab8c448b185ec5ec495d31c17da694067f0d",
   "skills/meeting-minutes-pro-1/references/environment/p0.md": "30512ca0b519a42df90f9cbebab575e2f61f6e55518c52408bbf7c09ecef4673",
@@ -37,8 +37,8 @@
   "skills/meeting-minutes-pro-2/run.py": "7630d4368b3458757eb4f1e618d2d2392b7595b8fd8f403b2e914a8f1a75a776",
   "skills/meeting-minutes-pro-2/selftest.py": "62f20c0b9c6667569d715a6c771a5d8b883fc19be9c47ba0e4eb880e0688bea3",
   "skills/meeting-minutes-pro-2/.phoenix/originality.json": "248483cb671caf421e8d27e5e9cdb399307b93b33f414ac304224688067e9ced",
-  "skills/meeting-minutes-pro-2/.phoenix/provenance.json": "50bd35081cc57b238caaf43d759688ccfb190192c8a22892aa11b006eb831742",
-  "skills/meeting-minutes-pro-2/.phoenix/selftest_evidence.json": "8ebbac39466498e547c3182202a78107aa54887e1eab08937b50fe8956c7c040",
+  "skills/meeting-minutes-pro-2/.phoenix/provenance.json": "5d1785bd15037039a01e7b71381941eaf6d8ff4c933f2db77a874571d84f4e6a",
+  "skills/meeting-minutes-pro-2/.phoenix/selftest_evidence.json": "7770d68b2ac0f36d9d1e93eb8c7801ec058bf86d03b187be9293b02c4009ac2a",
   "skills/meeting-minutes-pro-2/references/creation/p0.md": "9c6fdb89ac9351b7b34fc64fa01959ee1a5c7172644068856603fce43a3ebec5",
   "skills/meeting-minutes-pro-2/references/creation/p1.md": "7451013ac9421a2c96584380195bb7640464388bdec7d5b1353ef98ea9bd5abc",
   "skills/meeting-minutes-pro-2/references/environment/p0.md": "cab2ed82b51912fd21e42678a6847a0dd5e387448bef9d666d6626a13a1d832d",
@@ -54,8 +54,8 @@
   "skills/meeting-minutes-pro-3/run.py": "c155a3908d7daa1537e5e2fa2f13c8937a66bfbe487810fa9c878ddf15b90e8b",
   "skills/meeting-minutes-pro-3/selftest.py": "68df1eca05563b723f3aa15cf765ce93664e0633a8d7e19b5c25bceed86ad349",
   "skills/meeting-minutes-pro-3/.phoenix/originality.json": "557a2dd809fc934a54817e7811d8ae88744ff264fcfbaeaf568981b9dbe3e2c5",
-  "skills/meeting-minutes-pro-3/.phoenix/provenance.json": "5cdcebe18101e62ddd827221af046bee22e540e6e16ce445ca569439317023e6",
-  "skills/meeting-minutes-pro-3/.phoenix/selftest_evidence.json": "bf119f2e620d98e29f41c4baf62060a9fafc259233b0c24ab04f362ff1e41b34",
+  "skills/meeting-minutes-pro-3/.phoenix/provenance.json": "02d6a508bf1e984b9f05bb724df29d2d3d98dafbacad828a791a7aab442dd477",
+  "skills/meeting-minutes-pro-3/.phoenix/selftest_evidence.json": "8721df559cc87802d79a1c230ee04b434ef5e65d1879ed93ea97970b1af03c03",
   "skills/meeting-minutes-pro-3/references/creation/p0.md": "37bdb65a4d3ba3a7f294da95c8cc487a66cbd653b1c2b9ce7c83ad2e5fc95c37",
   "skills/meeting-minutes-pro-3/references/creation/p1.md": "a2f11b51ff0410d8be04c9481cb634f88d2efbafed10a3158705c6a5c384551d",
   "skills/meeting-minutes-pro-3/references/environment/p0.md": "e7c72e392dba5057830ab26d11dfa51a3b564f3e63e9eaa2a5e98c0f32577d27",
@@ -66,7 +66,7 @@
   "skills/meeting-minutes-pro-3/references/production/p1.md": "76db431a3e3d964260ee16a8afabe6c448027ed16b857a3e186b64af024b4510",
   "skills/meeting-minutes-pro-3/scripts/main.py": "4edf8d2ee9ce47416b1f959c7b2f701cf12bc380bd5b6c1aa0431eb498faccea"
  },
- "sealed_at": "2026-10-18T20:03:24",
+ "sealed_at": "2026-10-18T21:00:50",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "ugc-operation",
- "merkle_root": "4a2c7eb8d26d7112a4d7b5fe811d7518e121ca75795d5598edaff52bd2645ffb",
+ "merkle_root": "d4faee33f240fa766e45a0549404faa81fa134a50fe51876fa80e6a3458d1785",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/ugc-operation-1/run.py": "402ac676458945f913627e3193a159d0b4cbef04dee4729522f509d186d19404",
   "skills/ugc-operation-1/selftest.py": "94b6ada1c7a99d81dbc20f11088663758b27da3bb6d5b250d11ac6a9e6963aad",
   "skills/ugc-operation-1/.phoenix/originality.json": "7ad68c7ab0a71d2c5eecb72851e2bc34bd687041bfa9ff0345928ca3ad9bac12",
-  "skills/ugc-operation-1/.phoenix/provenance.json": "c00bc2fbf8f5b8f7c7aad63b1a41f40ae090b95e21f6b46a5d5474c18afae351",
-  "skills/ugc-operation-1/.phoenix/selftest_evidence.json": "5d61d6b8bb65f9b32fcd28bf83dfeb255b21a5ec620c02e03c4a8348d64be547",
+  "skills/ugc-operation-1/.phoenix/provenance.json": "518a5cb303d5bd8fff26efa6b9bf7bd0e0a6709ae7d4ea488ab3e60fbda840c4",
+  "skills/ugc-operation-1/.phoenix/selftest_evidence.json": "b70099cd776dade2c2940c1231550f897621becb419369fac32b861cfb389378",
   "skills/ugc-operation-1/references/creation/p0.md": "23aad8198461f089e8dd2a45bcbf77046d61859cd4e9357fad82697c3644cc05",
   "skills/ugc-operation-1/references/creation/p1.md": "9a1b532592db712f06c4a757f9a6c19edee0dc7ade5bf164a8bfffb9c88dddb8",
   "skills/ugc-operation-1/references/environment/p0.md": "9aa679b0a01d7680fab31f497dc273602dae61e0eb07cf8cc992e406424d488b",
@@ -37,8 +37,8 @@
   "skills/ugc-operation-2/run.py": "9ea9a5588700ace54c8861cab4fa25b8396dad56c431392b9c3fef9d134f5887",
   "skills/ugc-operation-2/selftest.py": "b71e371a5d792ea660e9ee011d6504916909ccad25562621ed77174c41aaa6b5",
   "skills/ugc-operation-2/.phoenix/originality.json": "ab7f5be6d9375a2c7bbda1f4be5002a45ebda6a773b0188b3c90e9b61539db6d",
-  "skills/ugc-operation-2/.phoenix/provenance.json": "6da7cfe787ce14624c4b81f1be33527dbb09a6e6072553fb1644f7a40fe26792",
-  "skills/ugc-operation-2/.phoenix/selftest_evidence.json": "7e1875dd8d9699430317fc6cf22cf0d779417bd06a08242f8af8c886f8697d8e",
+  "skills/ugc-operation-2/.phoenix/provenance.json": "e229fe735dc91dcf027ac8800ad6f15434b6622fc7c69524f456a622605df7a4",
+  "skills/ugc-operation-2/.phoenix/selftest_evidence.json": "29e5ec20a70b265e010f2933b73f5326b4aee65c5eb684fe75cdabd7ea2ec8c4",
   "skills/ugc-operation-2/references/creation/p0.md": "b93a103a8ca5229e9b6ac3536a66fb80d502f1bee078c325f3ff4e1738c44e97",
   "skills/ugc-operation-2/references/creation/p1.md": "7258939b777166136d5ed23cad7470d3be512dfbf8777eaf5e87e916e5a88e8e",
   "skills/ugc-operation-2/references/environment/p0.md": "47b56b8e4d5e572bf1c501ce6438ce007ae2850ab94e079a7a2c1016dc989840",
@@ -54,8 +54,8 @@
   "skills/ugc-operation-3/run.py": "5ad085fd9b9f60bb2d37d9a7c8342d5108972d89bf74c9fa04ff6b352df547c5",
   "skills/ugc-operation-3/selftest.py": "165e56d6236f0ef4a5fb63e30d22b98436b01a27aa8a71448b58903b71276382",
   "skills/ugc-operation-3/.phoenix/originality.json": "220f2d68d4b66a70acaa7dcb4fdc1891f08727758e21644c5d8aa5696c4362de",
-  "skills/ugc-operation-3/.phoenix/provenance.json": "71a536af0f0b9c35f683820a6d877c016503900c318ef6771f6f157f64904aca",
-  "skills/ugc-operation-3/.phoenix/selftest_evidence.json": "36b8c21dc1c7b4ab0c06e8db29376bdde52596a4bc7ae1a7cd509a0007a0e7f5",
+  "skills/ugc-operation-3/.phoenix/provenance.json": "4959a8af05caeecd860311a84f444135b9bdca5bd2408596440d4802f2866544",
+  "skills/ugc-operation-3/.phoenix/selftest_evidence.json": "386b58c8ba4fac50fa861947796c26090b23dc31abbe2bec0786273cfaf03d6f",
   "skills/ugc-operation-3/references/creation/p0.md": "fe50f89d2baeb501dc6a0d2824f3ccad7d623f0ec1e7df24648fa48c858085bb",
   "skills/ugc-operation-3/references/creation/p1.md": "32536387f5c099ac13b4ad67cd4c916452ce29a0f51f6a97c4567575c08de1ba",
   "skills/ugc-operation-3/references/environment/p0.md": "678b67d8b077a7a7a12cc6f8ff07cf674d269fa0b318d934077e8c77ee632ced",
@@ -66,7 +66,7 @@
   "skills/ugc-operation-3/references/production/p1.md": "9ff62f447523b5966a618d8f60d7783de0562d88e9ff138668555cc50125fc00",
   "skills/ugc-operation-3/scripts/main.py": "c721826c17044ee2062218d08309b2954dda40fcfe45529af4f4fe05ce3d1728"
  },
- "sealed_at": "2026-10-18T20:12:23",
+ "sealed_at": "2026-10-18T21:05:08",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

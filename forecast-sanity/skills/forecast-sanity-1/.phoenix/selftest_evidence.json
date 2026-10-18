@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:59:28",
+ "at": "2026-10-18T20:58:52",
  "skill": "forecast-sanity-1",
  "slug": "forecast-sanity",
  "passed": true,

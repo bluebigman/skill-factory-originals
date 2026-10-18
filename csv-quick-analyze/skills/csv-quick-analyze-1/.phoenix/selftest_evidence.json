@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T19:54:53",
+ "at": "2026-10-18T20:56:18",
  "skill": "csv-quick-analyze-1",
  "slug": "csv-quick-analyze",
  "passed": true,

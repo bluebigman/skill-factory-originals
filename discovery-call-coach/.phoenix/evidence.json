@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "discovery-call-coach",
- "merkle_root": "d399b0e1fd2a0fe2cd716cf77b7c1def729cbcdb58f17c25ad5b11fff31ff7da",
+ "merkle_root": "7594a59f0523861d84a28bde2de05467b3e90ae94391440e816a72b692107cb2",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/discovery-call-coach-1/run.py": "91ad0719598e168efc050bda452ede07cf8b5c5b19488c3f7371084943908197",
   "skills/discovery-call-coach-1/selftest.py": "fed54dd0c3e8199fd8e4b8cff185186f39ad8469e0de6594f7a31e9a15427357",
   "skills/discovery-call-coach-1/.phoenix/originality.json": "d28d0540df6772256a95f9fe708a1c7aa3c9ea1660fd8e025af71c49f729e750",
-  "skills/discovery-call-coach-1/.phoenix/provenance.json": "1a2f9d80b65c351b6d5acb25e5b8cf5b27fc2c97acac9fef430b1d2a32c91118",
-  "skills/discovery-call-coach-1/.phoenix/selftest_evidence.json": "d9e43aff769a6ce3ded71d2f7dc448d172e3778232c9410b71b5609ea1d84697",
+  "skills/discovery-call-coach-1/.phoenix/provenance.json": "bff0ef7fe0601ee0123ddb9b476a5f0407a748dc1d7150035c44a1050df575d2",
+  "skills/discovery-call-coach-1/.phoenix/selftest_evidence.json": "9f998ef4120d487231e56ca4cc0a2d59069fc1123b22a036a06174f3e0394bd9",
   "skills/discovery-call-coach-1/references/creation/p0.md": "95980b9c408c349e12dd059a766618e12fd9bc07ac8717b652816c52235a506a",
   "skills/discovery-call-coach-1/references/creation/p1.md": "42bdd60cad6b176b312bb813c06c0cf29d94152fa25ff57ce62920ca68cd1ee9",
   "skills/discovery-call-coach-1/references/environment/p0.md": "7591b2467c6e09c56adaa9bace35d5af08b64c788cd990845c6aa088bf708a2c",
@@ -37,8 +37,8 @@
   "skills/discovery-call-coach-2/run.py": "78a7fcb4534172423fa4e1bac758f3e54c21626628ca9b6ec7f677b013f18f45",
   "skills/discovery-call-coach-2/selftest.py": "6ea9870be7017458cd11d8af17dc78a757b92f171138a54a7543e077626a4996",
   "skills/discovery-call-coach-2/.phoenix/originality.json": "3863d0bd4303b85efaedaf5c23b1c3553376690af10a0ed668dea40c49b5b719",
-  "skills/discovery-call-coach-2/.phoenix/provenance.json": "c789d56830ff39cbf153b09b4f44fae13665afa435a26e97d889165999f30ad5",
-  "skills/discovery-call-coach-2/.phoenix/selftest_evidence.json": "7e4038fa0cadd382d84d4f7acd306c0c2c1a974a133486c4e76f139d7882cf2a",
+  "skills/discovery-call-coach-2/.phoenix/provenance.json": "a461fed3182d45b5c370a89289350ee0217858cbe1410b9cf82d8dda0955a5e2",
+  "skills/discovery-call-coach-2/.phoenix/selftest_evidence.json": "1068abab9b5ca50c722ae05f098a257375248d9eed2d7d262d7e4746e0f84f45",
   "skills/discovery-call-coach-2/references/creation/p0.md": "27f65fabcde46035f5498566d42636990b3931a14e7284df55c990bec5753963",
   "skills/discovery-call-coach-2/references/creation/p1.md": "bca78776df1b5f3e6987cbed17991fddbc5b52ddc5da3b1407dafd649accf2e8",
   "skills/discovery-call-coach-2/references/environment/p0.md": "9d72a0a9fa8812baace590bdabbc400c6396e2a5d389e266dd948026d916c57d",
@@ -54,8 +54,8 @@
   "skills/discovery-call-coach-3/run.py": "187ae56df5ade399c80abdd48c1cdcf2456d0cedf4aa368fc6495bc894cda928",
   "skills/discovery-call-coach-3/selftest.py": "f7011ad191232b6180736de3cadac7645629924f02d26aafcf53b5379a0544ea",
   "skills/discovery-call-coach-3/.phoenix/originality.json": "7649f5f13a88d8f3e8a22cc95670da3071b7f37df31cecc3a11d7d2741a556fa",
-  "skills/discovery-call-coach-3/.phoenix/provenance.json": "99c96ea7d68b6835737d54b667ea10384af839df377f70543ffe93a0c10db559",
-  "skills/discovery-call-coach-3/.phoenix/selftest_evidence.json": "3fb0b06828d0cd1090a5dc7955f4f803b6f4acdc4fdc5b4d4e25ff14d7f2fbbf",
+  "skills/discovery-call-coach-3/.phoenix/provenance.json": "9cd45c50f3dabf0f14ab924f39cb8b8fa477442bce1a420312383189107a5c32",
+  "skills/discovery-call-coach-3/.phoenix/selftest_evidence.json": "062bf2cc114cad63e6cb2cf0836ec9fea8f7605897dc47625fb0176544812b65",
   "skills/discovery-call-coach-3/references/creation/p0.md": "59a13693bcd231d9f9b1427959274b5150352adf6038f48243e6949f4186fa18",
   "skills/discovery-call-coach-3/references/creation/p1.md": "a40d46d244b48ddf086b1b26e3faf07c84c80406a52ff431daadb5739d13ecf0",
   "skills/discovery-call-coach-3/references/environment/p0.md": "561217e2a12adfa83b58785414b60c1752fff7719b62b31d652faf0596f24e37",
@@ -66,7 +66,7 @@
   "skills/discovery-call-coach-3/references/production/p1.md": "6e9bcfc41787fd1d38a667fb406ca63faaf8cb2e604498f104c28121ac7e551f",
   "skills/discovery-call-coach-3/scripts/main.py": "bd4f28c0c2900bf8420f94c867ba3f4920b644f1a61d7382f58c527f64338e09"
  },
- "sealed_at": "2026-10-18T19:56:34",
+ "sealed_at": "2026-10-18T20:57:15",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "dim-model-design",
- "merkle_root": "3086721728838d63c71a36c6ff3a59b8a4c8794c14135c701944423b0208d069",
+ "merkle_root": "8b4d3caf94c1a15603f10aaad0715e093f0e2aac8132731d56a15c049b69c254",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/dim-model-design-1/run.py": "da1e65d012fea6cbd9363e076b89f674cb4e0fd7e850ecfea524208842e76174",
   "skills/dim-model-design-1/selftest.py": "0406134976ae783c92f8a71510efce75831acd51cdd67771ca69a00b1fcab979",
   "skills/dim-model-design-1/.phoenix/originality.json": "08ba658c0fec1ec4eaca8b144e637b94b92646375b278dee0d0cf60aa65e1df4",
-  "skills/dim-model-design-1/.phoenix/provenance.json": "3687104a44a89600784eaf50117c7ace8d93eaf3a48b55fdcb428be7e9f145be",
-  "skills/dim-model-design-1/.phoenix/selftest_evidence.json": "15693987904ccff49b9d39cdfe9fc47f3bb39a75c668424d9ed04b7507fb6cb5",
+  "skills/dim-model-design-1/.phoenix/provenance.json": "47037cd6cb1969bdade2fe669aa1406af254ad9267cb6144f60e14c83d7b1ba2",
+  "skills/dim-model-design-1/.phoenix/selftest_evidence.json": "6da9196b9b43ecef857eec578538b84ff9c574723090d14eb0dcc7c3236e01c0",
   "skills/dim-model-design-1/references/creation/p0.md": "5e5b6731bdf828f0f01ccd08c25193f0d08dd55e6903563224497f9f6f989103",
   "skills/dim-model-design-1/references/creation/p1.md": "f504043821beee200533462f8993371ea14fa7a806d05ced96623b6178961eee",
   "skills/dim-model-design-1/references/environment/p0.md": "d4075511fb02c58a432045bf6d372e1f62eec64ea423540dfb8777201fd87d8d",
@@ -37,8 +37,8 @@
   "skills/dim-model-design-2/run.py": "bd6cf52f12fd31c08cf313a95cb81d7c723aa5693075f99e934508a6889e749a",
   "skills/dim-model-design-2/selftest.py": "6489ed618c6a352dabe983b0ec914ff8174df6d96a93306cee0c0bfebdc9f392",
   "skills/dim-model-design-2/.phoenix/originality.json": "1489c26940af09c64cf55b73840f2af5d3ac35f0e567ea494f24998359b644f9",
-  "skills/dim-model-design-2/.phoenix/provenance.json": "f4be0e68453be9a9eb1e96176bb247029129b41c234120c9fa4a5cb1761e67ef",
-  "skills/dim-model-design-2/.phoenix/selftest_evidence.json": "61fc2ceafb25a2c5cb96127a5b5aa4cc40615659b1b800937c98c55d781fa547",
+  "skills/dim-model-design-2/.phoenix/provenance.json": "1b91534cf46891fb14eb7ec1931fe668a0e20ab4fc3d61b829c69f350a365cf8",
+  "skills/dim-model-design-2/.phoenix/selftest_evidence.json": "480efd67654d6f88b94d8e7af0e8c6b02c14a1f20c7787b9c7e9664b5b7fbeb6",
   "skills/dim-model-design-2/references/creation/p0.md": "524507a8aed4cfaacf3c5b407904acb2aa27fc73518d86c340e3805f7ea25eb9",
   "skills/dim-model-design-2/references/creation/p1.md": "65dfdd3bab54863b19b0065efb0b0902d26c3ac5e1c4ddcd750d0ce822a7d528",
   "skills/dim-model-design-2/references/environment/p0.md": "7949c9578d9ea55ae2c0566010d12511138f5b517ce9421bfd639f5ee6d1d289",
@@ -54,8 +54,8 @@
   "skills/dim-model-design-3/run.py": "21922b4f7f59449b0e84d53919bcbf36cc751dcf478938517363c834465a2636",
   "skills/dim-model-design-3/selftest.py": "409c57276b6071eaf58be6eeec2b77058ba488990148dbfe5df69a7a2f377d25",
   "skills/dim-model-design-3/.phoenix/originality.json": "495933c0f9ee61b106a889a495b336c6484c5e9f588af826c4cc6c428c22e7bb",
-  "skills/dim-model-design-3/.phoenix/provenance.json": "5315b529aeb90b63b744d972bc966baa55191c55c157671108e1485f85825c7b",
-  "skills/dim-model-design-3/.phoenix/selftest_evidence.json": "79df2de6cf9194ec0db71b0430b8a5f5b34c963b7624af0ce1b22411318efdd1",
+  "skills/dim-model-design-3/.phoenix/provenance.json": "ca6fc9f7a719ffacc10a54c2a06d216a780a835617779fc3cd11ae0ca421762c",
+  "skills/dim-model-design-3/.phoenix/selftest_evidence.json": "acc31bdc8b7a18c05713d661478274b8e01b3b1419971c1ac0b1207f6a62cf32",
   "skills/dim-model-design-3/references/creation/p0.md": "d5dcb05e8c16e3e1217e43a77cb0590c0c25c345878cba4d7b9efa1f0afdf2a7",
   "skills/dim-model-design-3/references/creation/p1.md": "74ce2294e5e415645381246279cb2c18cdedd08e33bdece10450b861501442b7",
   "skills/dim-model-design-3/references/environment/p0.md": "38bc17382d40e9846acc3b017129e811889d81095f9815e9fa2ec4da93de10bf",
@@ -66,7 +66,7 @@
   "skills/dim-model-design-3/references/production/p1.md": "fec41ab60087a4bdca6c35cf55ad975b0a6a4115c13a1b144fd2ee17e3af5292",
   "skills/dim-model-design-3/scripts/main.py": "46c45430349b01c8cb96ba2fe4d4e50dcc69c5d2db606864d160323ebdb6a9af"
  },
- "sealed_at": "2026-10-18T19:56:29",
+ "sealed_at": "2026-10-18T20:57:15",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

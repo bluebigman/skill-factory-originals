@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "perf-bottleneck-pro",
- "merkle_root": "ee3c7478543ca74aa6b15ce7d835a799fafb962b99135510ae405664939cffa8",
+ "merkle_root": "d735dd4a7503a5c1680ed49796be7630925c1459080b74a3a198b2b64e035521",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/perf-bottleneck-pro-1/run.py": "3a0eeb339b045b5a9e6f1e5184d03be3241add852777c38439e46c66408736e5",
   "skills/perf-bottleneck-pro-1/selftest.py": "0d19991c89e9e854e7dab17901b3ef2cf2381b04a14d4540f803de7b8dac54d2",
   "skills/perf-bottleneck-pro-1/.phoenix/originality.json": "d2ff7fdc3851815b0dcc19ba5b9fa521c7bcac00c6b7a7817c488b7ea073d7d4",
-  "skills/perf-bottleneck-pro-1/.phoenix/provenance.json": "f5e95ad8de7e8b01dde05789c9f1d88a4cb00aa889aea65101f1ab255ddbb35a",
-  "skills/perf-bottleneck-pro-1/.phoenix/selftest_evidence.json": "745ac45fbb561c14ae9c315aa782ae3a0857ebe5d0864f53ef39715e6703af06",
+  "skills/perf-bottleneck-pro-1/.phoenix/provenance.json": "e4b2a45e580f159e71f0869426c2a6eda106bd13b04350d36b3c8d25fcd2a91f",
+  "skills/perf-bottleneck-pro-1/.phoenix/selftest_evidence.json": "61824bfb5e36e76d0b48110b4263c7c4cf8bd801cd265337d84aa142972348fd",
   "skills/perf-bottleneck-pro-1/references/creation/p0.md": "c6ab43070f4c5d5af68cfa15107207e3192201d635d79a843ebb86c78e821f61",
   "skills/perf-bottleneck-pro-1/references/creation/p1.md": "85078140f93ebb73b733f511433aa028766e98dd594be64af7fa88a9c1334c41",
   "skills/perf-bottleneck-pro-1/references/environment/p0.md": "7d9d4723c95e37dc3443a03082c97d5c6ee35ce6ecee902556ea124b1f4313b2",
@@ -37,8 +37,8 @@
   "skills/perf-bottleneck-pro-2/run.py": "151ec9f6608531fa457992b9cc754406ef89bef6f81fe95c402a59d8e674aa4f",
   "skills/perf-bottleneck-pro-2/selftest.py": "cb8dcf2411257e808d283592e3f7058d6d1b929447630a9d514d9243b2f60b61",
   "skills/perf-bottleneck-pro-2/.phoenix/originality.json": "563d0435f8402f909b11296173df91375a7279eb2a4982b6d290b770a4403c5a",
-  "skills/perf-bottleneck-pro-2/.phoenix/provenance.json": "c3a47b794f920634e1ccc7e656cbcb54517eb2f86b251672b5099063a50bd416",
-  "skills/perf-bottleneck-pro-2/.phoenix/selftest_evidence.json": "d314fccde474e83dfb4aa48e8798a7585f9c36710cadd8caadb2db4672e4408c",
+  "skills/perf-bottleneck-pro-2/.phoenix/provenance.json": "b1335097bd12a4a3262674aa14a1d1ed4d2e73d33c7bb11b70e8769614f43a42",
+  "skills/perf-bottleneck-pro-2/.phoenix/selftest_evidence.json": "53dee57508ce226c805f866b856fda076b336aca955bcc30971ff71a42f99361",
   "skills/perf-bottleneck-pro-2/references/creation/p0.md": "fc05dbcfdab56bc8e08f066a5d84a4082043759c347b609fa8b79289d9a51cfa",
   "skills/perf-bottleneck-pro-2/references/creation/p1.md": "8675463ab052c255312b35b7e2664a7e565558c8c7eb8a317142cb6ec0ee03f5",
   "skills/perf-bottleneck-pro-2/references/environment/p0.md": "edf0759a110f2d9bb21710a8ca46d80c2f439a2e0498e501786a580f08b96e94",
@@ -54,8 +54,8 @@
   "skills/perf-bottleneck-pro-3/run.py": "a52f61727994634b3a56dd7b784369dfac0e7f83b83ad13b3eb1980beefb8ee5",
   "skills/perf-bottleneck-pro-3/selftest.py": "18e3796b2c11e303606d56477bc99047a3adafd87e6759c690a1babd94f793eb",
   "skills/perf-bottleneck-pro-3/.phoenix/originality.json": "29df4e500cadd61ee7e9ebc12c64b0ab001fb3b7b1ca3ecd9a55132ec64b47bd",
-  "skills/perf-bottleneck-pro-3/.phoenix/provenance.json": "b04558f4cd7652e27cd4ae293f257ad994dcb26deb9d91ee091687b0b331e3bc",
-  "skills/perf-bottleneck-pro-3/.phoenix/selftest_evidence.json": "38093247b50f6075adc670799653c8cc854ae39b37c064abb7b5bca45d904d7e",
+  "skills/perf-bottleneck-pro-3/.phoenix/provenance.json": "6212d690e20c751d125a1a00cdc1c91eb22d5ba1569ad46332395b1ee6fb57f6",
+  "skills/perf-bottleneck-pro-3/.phoenix/selftest_evidence.json": "f66869bf424f34fe25d1339c85f86d5c5b0125781fd1de8147d6abbd76e30805",
   "skills/perf-bottleneck-pro-3/references/creation/p0.md": "503874dbd8a37826dbceb48b8324bb5ae299d43a65464caa24ab7e88573b5c43",
   "skills/perf-bottleneck-pro-3/references/creation/p1.md": "20a383691ec99f17fb2bc17f4a44079753b0e1fabda49707e4c755b9cbfe3f71",
   "skills/perf-bottleneck-pro-3/references/environment/p0.md": "e5d94cba5fff44255edc71fb724a343b6c29b33aa2d479ba241481d7b9a4f8cc",
@@ -66,7 +66,7 @@
   "skills/perf-bottleneck-pro-3/references/production/p1.md": "f898a0be931775ae0da1b1631b067757f09b365e0777b8cc4c76cdec9cc5cdb3",
   "skills/perf-bottleneck-pro-3/scripts/main.py": "23b577750692a840bc1d73153a19807cf4b71be6b544e6f74cff445325987311"
  },
- "sealed_at": "2026-10-18T20:05:32",
+ "sealed_at": "2026-10-18T21:01:55",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

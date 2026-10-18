@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "fact-check-coach",
- "merkle_root": "a8a2b0fffdd203bfe88fedb4273be35a4cb8a41b4846056eab3366ef1ebfa711",
+ "merkle_root": "c4974c75fa5df7d3ea437f25a47607452e6f3a116afb5d8fdef05caf362c2049",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/fact-check-coach-1/run.py": "c5ff5e9b1179c74413ecbf3007ad48cad7420ad03a2ebd6d64ccb036f52c01cd",
   "skills/fact-check-coach-1/selftest.py": "3b9faf508a7a02cdd76f4896a010c0f7a96350003595ed12d194b8b2e4441c7d",
   "skills/fact-check-coach-1/.phoenix/originality.json": "e011f4c4bd55d95805f5ef05d103cf212c44faec1675a4dd38e614764c79ba60",
-  "skills/fact-check-coach-1/.phoenix/provenance.json": "6b84a6e921cb9ae9f40f952ffc4c924604a723fbb3b6cb9538134fde12587f57",
-  "skills/fact-check-coach-1/.phoenix/selftest_evidence.json": "2428cb9af5927e47aa2469745270a7a092e92d939ef8f98ae4812fc68bca44ee",
+  "skills/fact-check-coach-1/.phoenix/provenance.json": "8954306266ba14d3a405ff81b34c555b964683780af0040e0631f20a8d0e6dc2",
+  "skills/fact-check-coach-1/.phoenix/selftest_evidence.json": "73138a1c6a8f007dcaa98ae4e76d7a72f2eb9bd068e084df423d85ff732fa574",
   "skills/fact-check-coach-1/references/creation/p0.md": "83aa86f230e1cd1b862cad5c0014d76874bb34e4aeec24df4ee96e759a10cf30",
   "skills/fact-check-coach-1/references/creation/p1.md": "239eb7380f75a4c620b1d9a345ec5189b47ae61636716a9091a4fd90e56a721b",
   "skills/fact-check-coach-1/references/environment/p0.md": "eb1b778a53624813edb2dfd78245351fc7e48ae7ee0a0ebcabde001b932bf500",
@@ -37,8 +37,8 @@
   "skills/fact-check-coach-2/run.py": "8c037a54e8d479ac060b4be7d11a8221f1c46e79ae744511136c25afae14cf2d",
   "skills/fact-check-coach-2/selftest.py": "4324b17c6a622fb03c617ff7a2acdf02e1c18e5517e5539173794eb3a8c91f67",
   "skills/fact-check-coach-2/.phoenix/originality.json": "e37d82115f4973eb0d10458f7045cb958203a129be51dbd5fae41ac4f7cc47e3",
-  "skills/fact-check-coach-2/.phoenix/provenance.json": "15dc944ab3c87adfec7daf8c321b5410fce8937108f4c5a5ce453d7eb8ba477f",
-  "skills/fact-check-coach-2/.phoenix/selftest_evidence.json": "30eb77e4b7afcdf14d9e4927090125f2deccc2e4cc17ae0119c0c474eefa27fe",
+  "skills/fact-check-coach-2/.phoenix/provenance.json": "3d60d8cda924728dbf1b4067e0d6486ac439c0cd6664c02f7b35d728503ac840",
+  "skills/fact-check-coach-2/.phoenix/selftest_evidence.json": "5998e2646fcdb0165f517445573a3fa91a004aa0cb43269dd72b7afedcc8cfd0",
   "skills/fact-check-coach-2/references/creation/p0.md": "80aadbde69ee69cd1a1f82c194cb6eec87d41adad66ed315e20bb4f830330ebb",
   "skills/fact-check-coach-2/references/creation/p1.md": "81c6c940a061fb001702d1a1b4e5bc8efa6340562cecbb822b0c3b38ce56f58a",
   "skills/fact-check-coach-2/references/environment/p0.md": "21f246770f522769bce072f9c363a8953fd28d574a1110e343c02ed56b1eaf02",
@@ -54,8 +54,8 @@
   "skills/fact-check-coach-3/run.py": "db2164e3282f490771f6f5606cea3cf76a2cc2addbbf8e9c92828b9e35424407",
   "skills/fact-check-coach-3/selftest.py": "857ffb9722d87cc14894f1f450118f75add16b272049e995979fd0223e674a0f",
   "skills/fact-check-coach-3/.phoenix/originality.json": "2d6d40410706e6ba96fbca53a4d720c9dfe00e85e6fdf9b9075b3343fbbfb319",
-  "skills/fact-check-coach-3/.phoenix/provenance.json": "7e75f32ace56b78c4c0cb6da13ddf6036fc2c8e507dccb554cc202feb93a524f",
-  "skills/fact-check-coach-3/.phoenix/selftest_evidence.json": "76fb63816e729588f5e1f8dde48246ff5a11ce086216ac97def5a5c48dfdce00",
+  "skills/fact-check-coach-3/.phoenix/provenance.json": "b34237bb85eb47c49a3b395c651dafa81551363d3b87f793169849588fe0cda2",
+  "skills/fact-check-coach-3/.phoenix/selftest_evidence.json": "b7052a93253aac657e713552245b4dbd8b864620832dffe0a50668eb165d773c",
   "skills/fact-check-coach-3/references/creation/p0.md": "6cf33d0399d443b36a59628cc08a019348a675523063873ac86e91637743ae18",
   "skills/fact-check-coach-3/references/creation/p1.md": "3023fcd7123640630ea640d29a40b7b404ceb3b2acd2e6a07c0fda326550fdfd",
   "skills/fact-check-coach-3/references/environment/p0.md": "7bc9da7043a91772262a7940aaa155d1e84a99e4960f1d5ecd8866c969d35cb8",
@@ -66,7 +66,7 @@
   "skills/fact-check-coach-3/references/production/p1.md": "5e900f03fa7aab55340bcc8405004d2cd8a18a19138a5a7a40dd9f3b32053b2b",
   "skills/fact-check-coach-3/scripts/main.py": "e3aa2cfacf4f6266b37a81ea3e4d91b088454bbac7ff28159a796c4f725cc77a"
  },
- "sealed_at": "2026-10-18T19:58:51",
+ "sealed_at": "2026-10-18T20:58:32",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

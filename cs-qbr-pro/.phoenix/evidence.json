@@ -1,7 +1,7 @@
 {
  "schema": "phoenix-evidence/1",
  "slug": "cs-qbr-pro",
- "merkle_root": "f4668cccb90c5b29ed50a80fe1195bc2f67895c78b1af701f2e4fda089f42da8",
+ "merkle_root": "4c588a4be475c1c8bf92fd86b7e0384d87aa9a90eb15acd900e37812d6328316",
  "leaf_count": 61,
  "leaves": {
   "LICENSE": "8f505609e75f2a8f1915bb7edb6b2a8e963ef8f812867a93f4bf4102f6dc5765",
@@ -20,8 +20,8 @@
   "skills/cs-qbr-pro-1/run.py": "2ef9841bb4a62760bbd1a77c75f785bacbcfff7c15b1070bde8fb5575c4c97b0",
   "skills/cs-qbr-pro-1/selftest.py": "ad8523d1fe25d95132a28a7cbffce8bc42da0eae19e30605ff668f339ea790b9",
   "skills/cs-qbr-pro-1/.phoenix/originality.json": "91c9d66f1f060a9e0a9331f80b50da14f0520ee013c730de3522cd9db0132845",
-  "skills/cs-qbr-pro-1/.phoenix/provenance.json": "4b44713af728bf88de0bf7b76433f34487264d2843877033368685e31545e860",
-  "skills/cs-qbr-pro-1/.phoenix/selftest_evidence.json": "f855dd48c79320bcac3a8cad1608f6357ee07069fda60bd3826e91af120d5089",
+  "skills/cs-qbr-pro-1/.phoenix/provenance.json": "85e8098ab3be961ba96542ec007262b44898b8b697cb7422d52a96ead8434029",
+  "skills/cs-qbr-pro-1/.phoenix/selftest_evidence.json": "1096b327d0845c5da66efb4e21a17950eae70cef188903a7e9125d3a8df8d2df",
   "skills/cs-qbr-pro-1/references/creation/p0.md": "b7a05c93a0cd47ddf6da76fbe271dbe43ea335d19ec0d0854ebeb334ba2340aa",
   "skills/cs-qbr-pro-1/references/creation/p1.md": "3349b62df64913b6e11d390d13fb7ff06b06f07c64141b2ede6319dd9ceea293",
   "skills/cs-qbr-pro-1/references/environment/p0.md": "3fe76ca18f22b32cf3257daa07ac94ba65a69f4dfc3aa37fac7e2d847079a835",
@@ -37,8 +37,8 @@
   "skills/cs-qbr-pro-2/run.py": "f616a4504a40c0bb83749417d165ceb4c8a615dfe632d667f5a499b1cefc54c9",
   "skills/cs-qbr-pro-2/selftest.py": "4a77e6bae98dc9dd39542a5e9b3d86ddd5c5f394f4efeca6f502172c1092475d",
   "skills/cs-qbr-pro-2/.phoenix/originality.json": "cf001be51725c9a7ccf1dbeec628bea4224a360333d8d06f09bd04fe515f5ca5",
-  "skills/cs-qbr-pro-2/.phoenix/provenance.json": "43cb3f3c4184f416181ee2f00f6b43d4078bdf1d936a1f16d736fd1214d78c3e",
-  "skills/cs-qbr-pro-2/.phoenix/selftest_evidence.json": "f736a29c6eba0f853902b54c6198b89d796cd964257b1d8043b3bbf7c557038f",
+  "skills/cs-qbr-pro-2/.phoenix/provenance.json": "9e6c1044522d4f089cb8150182aa0dc5f7bbeea02939202cceb2a1b6454df5be",
+  "skills/cs-qbr-pro-2/.phoenix/selftest_evidence.json": "d6857ebffee60b2347ea897f6fe793b5f7480c79931f9c7e4b102e6e0b156617",
   "skills/cs-qbr-pro-2/references/creation/p0.md": "9cab56baa82b4ffd26a596c9d6113f8902b13aafb2fe1ae2064f2e2a8ebc029d",
   "skills/cs-qbr-pro-2/references/creation/p1.md": "d1d62fce0da8abef8d018a839466738b4fe8b8e7259bbb1d2f0e074c78d21b33",
   "skills/cs-qbr-pro-2/references/environment/p0.md": "28876016cce0519c841e2ed163f5e1c4f0650301297bebc277d8f3a4ff372e8f",
@@ -54,8 +54,8 @@
   "skills/cs-qbr-pro-3/run.py": "e7b64c1a2fbfcad5822e2781f9683c4e167f541bceb3a9047ebf1cbb2343c147",
   "skills/cs-qbr-pro-3/selftest.py": "674a8c58145383be3bb1a0a8246f141cc35662cae737891a8a118d1669cd2512",
   "skills/cs-qbr-pro-3/.phoenix/originality.json": "b8ad5a47457eab064529f422f8d4a37c070827446b702bf228c0efd5dd8f485d",
-  "skills/cs-qbr-pro-3/.phoenix/provenance.json": "1816296164282b6eabeb936b6d261e82ba07173571a33612730903d45f466811",
-  "skills/cs-qbr-pro-3/.phoenix/selftest_evidence.json": "5c7cce909bd7e3a549e6c402a97ef528cd311bcf48ce0e9a94cf8be42e749264",
+  "skills/cs-qbr-pro-3/.phoenix/provenance.json": "b63eae1aa8be9e7efa6259a7cd9c0087c3896c9989114e7f769e7fa61b9b8bbb",
+  "skills/cs-qbr-pro-3/.phoenix/selftest_evidence.json": "806cd30959c2f424ff0f1fe19d185d9beda1ec95bb6ccbb6b6269ee6367852a3",
   "skills/cs-qbr-pro-3/references/creation/p0.md": "a288636ede78811af43f615574315e58d33feeb9ee466c8cf58a35dede2b9c81",
   "skills/cs-qbr-pro-3/references/creation/p1.md": "3e413bf0b75a6e5757029a6e44ed39e8de7ce18e7e0bed8a4a74c050070e9e4e",
   "skills/cs-qbr-pro-3/references/environment/p0.md": "845623d021fb1c955e983be7df04f7ade6e44b35d1c93b28b7716720a89ce10b",
@@ -66,7 +66,7 @@
   "skills/cs-qbr-pro-3/references/production/p1.md": "03b46986b5e9c2153b1e3e13bffaeadf32204cc548102de39dabda6cd82b2915",
   "skills/cs-qbr-pro-3/scripts/main.py": "86cec65445a9a32d4f5c2d4f4c81ad28cc098ff80d22ead8c9ba4d4295caf579"
  },
- "sealed_at": "2026-10-18T19:54:53",
+ "sealed_at": "2026-10-18T20:56:18",
  "algorithm": "sha256(path\\0content-norm) → merkle(sorted, pairwise)",
  "note": "换行归一化；叶子含相对路径，可检测文件内容互换；仅 evidence.json 自身不入叶子"
 }

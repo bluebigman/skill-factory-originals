@@ -1,6 +1,6 @@
 {
  "schema": "selftest_evidence/v1",
- "at": "2026-10-18T20:01:06",
+ "at": "2026-10-18T20:59:41",
  "skill": "image-brief-generate-1",
  "slug": "image-brief-generate",
  "passed": true,
