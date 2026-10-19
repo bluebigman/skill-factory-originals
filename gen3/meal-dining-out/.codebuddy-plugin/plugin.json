@@ -1,0 +1,72 @@
+{
+ "name": "meal-dining-out",
+ "version": "1.0.0",
+ "plugin": "meal-dining-out",
+ "description": "Meal Dining Out",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-dining-out.md"
+ ],
+ "skills": [
+  "./skills/meal-dining-out-1",
+  "./skills/meal-dining-out-2",
+  "./skills/meal-dining-out-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal dining out 1",
+  "meal dining out 2",
+  "meal dining out 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-dining-out",
+ "displayName": {
+  "en": "Meal Dining Out",
+  "zh": "外面吃饭怎么点 食材选择"
+ },
+ "profession": {
+  "en": "Meal Dining Out",
+  "zh": "外面吃饭怎么点 食材选择 顾问"
+ },
+ "displayDescription": {
+  "en": "避免点多或不够",
+  "zh": "外面吃饭怎么点 食材选择：覆盖避免点多或不够等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal dining out 1",
+   "zh": "meal dining out 1"
+  },
+  {
+   "en": "meal dining out 2",
+   "zh": "meal dining out 2"
+  },
+  {
+   "en": "meal dining out 3",
+   "zh": "meal dining out 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-dining-out-1",
+   "zh": "meal dining out 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-dining-out-1",
+   "zh": "meal dining out 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-dining-out-1",
+  "zh": "meal dining out 1 第一步该怎么做"
+ }
+}

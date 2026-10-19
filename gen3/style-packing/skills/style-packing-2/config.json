@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "叠成一摞",
+   "then": "卷起来：卷放省空间且少皱"
+  },
+  {
+   "when": "重物放上面",
+   "then": "重物靠轮：省力"
+  },
+  {
+   "when": "鞋不装袋",
+   "then": "鞋单独装袋：避免污染衣物"
+  },
+  {
+   "when": "不留余量",
+   "then": "留 20% 余量：回来要带东西"
+  }
+ ],
+ "keywords": [
+  "打包",
+  "不皱",
+  "怎么装",
+  "叠成一摞",
+  "重物放上面",
+  "鞋不装袋",
+  "不留余量"
+ ],
+ "boundary": "怎么装不皱",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

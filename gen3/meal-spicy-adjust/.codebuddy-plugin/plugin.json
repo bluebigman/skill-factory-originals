@@ -1,0 +1,72 @@
+{
+ "name": "meal-spicy-adjust",
+ "version": "1.0.0",
+ "plugin": "meal-spicy-adjust",
+ "description": "Meal Spicy Adjust",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-spicy-adjust.md"
+ ],
+ "skills": [
+  "./skills/meal-spicy-adjust-1",
+  "./skills/meal-spicy-adjust-2",
+  "./skills/meal-spicy-adjust-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal spicy adjust 1",
+  "meal spicy adjust 2",
+  "meal spicy adjust 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-spicy-adjust",
+ "displayName": {
+  "en": "Meal Spicy Adjust",
+  "zh": "家里口味不一样怎么调 配比方法"
+ },
+ "profession": {
+  "en": "Meal Spicy Adjust",
+  "zh": "家里口味不一样怎么调 配比方法 顾问"
+ },
+ "displayDescription": {
+  "en": "怎么一菜两吃",
+  "zh": "家里口味不一样怎么调 配比方法：覆盖怎么一菜两吃等情境，给出可执行处置与自查清单，并明确能力边界与转"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal spicy adjust 1",
+   "zh": "meal spicy adjust 1"
+  },
+  {
+   "en": "meal spicy adjust 2",
+   "zh": "meal spicy adjust 2"
+  },
+  {
+   "en": "meal spicy adjust 3",
+   "zh": "meal spicy adjust 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-spicy-adjust-1",
+   "zh": "meal spicy adjust 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-spicy-adjust-1",
+   "zh": "meal spicy adjust 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-spicy-adjust-1",
+  "zh": "meal spicy adjust 1 第一步该怎么做"
+ }
+}

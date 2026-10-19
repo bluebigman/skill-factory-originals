@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "随机走",
+   "then": "按线串：地铁线/河岸线/老街线"
+  },
+  {
+   "when": "只去商场",
+   "then": "混合：公园+老街区+市场"
+  },
+  {
+   "when": "走回头路",
+   "then": "单向：起点终点不同"
+  },
+  {
+   "when": "不看营业时间",
+   "then": "查时间：小店常下午才开"
+  }
+ ],
+ "keywords": [
+  "城市",
+  "一天",
+  "路线",
+  "随机走",
+  "只去商场",
+  "走回头路",
+  "不看营业时间"
+ ],
+ "boundary": "怎么串起来",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

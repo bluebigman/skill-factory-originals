@@ -1,0 +1,63 @@
+{
+ "name": "Style Shopping Trap",
+ "description": "买前必须看什么",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/style-shopping-trap",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/style-shopping-trap",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "style-shopping-trap-1",
+   "name": "试穿要点",
+   "description": "试穿要点：买前必须看什么",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "style-shopping-trap-2",
+   "name": "网购判断",
+   "description": "网购判断：买前必须看什么",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "style-shopping-trap-3",
+   "name": "决策纪律",
+   "description": "决策纪律：买前必须看什么",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-talkback",
+ "name": "顶嘴拒绝沟通 长期预防 分清是正常独立、情绪宣泄还是关系已经破裂",
+ "description": "顶嘴拒绝沟通 长期预防：分清是正常独立、情绪宣泄还是关系已经破裂",
+ "kind": "expert",
+ "tags": [
+  "child-talkback-1",
+  "child-talkback-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-talkback-core",
+   "name": "顶嘴拒绝沟通 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-talkback-1",
+     "name": "顶嘴性质分辨",
+     "summary": "分清是正常独立、情绪宣泄还是关系已经破裂"
+    },
+    {
+     "id": "child-talkback-2",
+     "name": "开口的正确方式",
+     "summary": "分清是正常独立、情绪宣泄还是关系已经破裂"
+    },
+    {
+     "id": "child-talkback-3",
+     "name": "关系修复动作",
+     "summary": "分清是正常独立、情绪宣泄还是关系已经破裂"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

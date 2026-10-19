@@ -1,0 +1,72 @@
+{
+ "name": "health-immunity",
+ "version": "1.0.0",
+ "plugin": "health-immunity",
+ "description": "Health Immunity",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-immunity.md"
+ ],
+ "skills": [
+  "./skills/health-immunity-1",
+  "./skills/health-immunity-2",
+  "./skills/health-immunity-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health immunity 1",
+  "health immunity 2",
+  "health immunity 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-immunity",
+ "displayName": {
+  "en": "Health Immunity",
+  "zh": "老感冒怎么提高抵抗力 风险识别"
+ },
+ "profession": {
+  "en": "Health Immunity",
+  "zh": "老感冒怎么提高抵抗力 风险识别 顾问"
+ },
+ "displayDescription": {
+  "en": "先找原因",
+  "zh": "老感冒怎么提高抵抗力 风险识别：覆盖先找原因等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health immunity 1",
+   "zh": "health immunity 1"
+  },
+  {
+   "en": "health immunity 2",
+   "zh": "health immunity 2"
+  },
+  {
+   "en": "health immunity 3",
+   "zh": "health immunity 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-immunity-1",
+   "zh": "health immunity 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-immunity-1",
+   "zh": "health immunity 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-immunity-1",
+  "zh": "health immunity 1 第一步该怎么做"
+ }
+}

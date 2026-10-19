@@ -1,0 +1,63 @@
+{
+ "name": "Meal Allergy Avoid",
+ "description": "先搞清到底对什么过敏",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/meal-allergy-avoid",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/meal-allergy-avoid",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "meal-allergy-avoid-1",
+   "name": "过敏原识别",
+   "description": "过敏原识别：先搞清到底对什么过敏",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-allergy-avoid-2",
+   "name": "替代方案",
+   "description": "替代方案：先搞清到底对什么过敏",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-allergy-avoid-3",
+   "name": "外出与应急",
+   "description": "外出与应急：先搞清到底对什么过敏",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

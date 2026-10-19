@@ -1,0 +1,72 @@
+{
+ "name": "child-reading-habit",
+ "version": "1.0.0",
+ "plugin": "child-reading-habit",
+ "description": "Child Reading Habit",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-reading-habit.md"
+ ],
+ "skills": [
+  "./skills/child-reading-habit-1",
+  "./skills/child-reading-habit-2",
+  "./skills/child-reading-habit-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child reading habit 1",
+  "child reading habit 2",
+  "child reading habit 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-reading-habit",
+ "displayName": {
+  "en": "Child Reading Habit",
+  "zh": "阅读习惯培养 分步处置"
+ },
+ "profession": {
+  "en": "Child Reading Habit",
+  "zh": "阅读习惯培养 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是识字量、兴趣、环境还是被逼出来的反感",
+  "zh": "阅读习惯培养 分步处置：覆盖分清是识字量、兴趣、环境还是被逼出来的反感等情境，给出可执行处置与自查清"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child reading habit 1",
+   "zh": "child reading habit 1"
+  },
+  {
+   "en": "child reading habit 2",
+   "zh": "child reading habit 2"
+  },
+  {
+   "en": "child reading habit 3",
+   "zh": "child reading habit 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-reading-habit-1",
+   "zh": "child reading habit 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-reading-habit-1",
+   "zh": "child reading habit 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-reading-habit-1",
+  "zh": "child reading habit 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "讲道理",
+   "then": "先解决生理：饿/困/热是主因"
+  },
+  {
+   "when": "强行赶行程",
+   "then": "随时调整：孩子状态差就回酒店"
+  },
+  {
+   "when": "用手机哄",
+   "then": "备选：先用活动（找颜色/数车），手机留后手"
+  },
+  {
+   "when": "不预告",
+   "then": "提前说流程：知道下一步会安心"
+  }
+ ],
+ "keywords": [
+  "路上",
+  "情绪",
+  "讲道理",
+  "强行赶行程",
+  "用手机哄",
+  "不预告"
+ ],
+ "boundary": "怎么处理",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

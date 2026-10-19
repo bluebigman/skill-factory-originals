@@ -1,0 +1,63 @@
+{
+ "name": "Child Hobby Choice",
+ "description": "先分清是孩子想学、家长焦虑还是真有天赋",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-hobby-choice",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-hobby-choice",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-hobby-choice-1",
+   "name": "需求澄清",
+   "description": "需求澄清：先分清是孩子想学、家长焦虑还是真有天赋",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-hobby-choice-2",
+   "name": "筛选标准",
+   "description": "筛选标准：先分清是孩子想学、家长焦虑还是真有天赋",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-hobby-choice-3",
+   "name": "坚持与放弃",
+   "description": "坚持与放弃：先分清是孩子想学、家长焦虑还是真有天赋",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

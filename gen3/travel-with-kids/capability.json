@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-with-kids",
+ "name": "带孩子出门怎么玩 预算控制 按孩子节奏排",
+ "description": "带孩子出门怎么玩 预算控制：按孩子节奏排",
+ "kind": "expert",
+ "tags": [
+  "travel-with-kids-1",
+  "travel-with-kids-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-with-kids-core",
+   "name": "带孩子出门怎么玩 预算控制",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-with-kids-1",
+     "name": "行程强度控制",
+     "summary": "按孩子节奏排"
+    },
+    {
+     "id": "travel-with-kids-2",
+     "name": "必备物品",
+     "summary": "按孩子节奏排"
+    },
+    {
+     "id": "travel-with-kids-3",
+     "name": "路上情绪",
+     "summary": "按孩子节奏排"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

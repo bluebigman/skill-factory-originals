@@ -1,0 +1,72 @@
+{
+ "name": "meal-breakfast",
+ "version": "1.0.0",
+ "plugin": "meal-breakfast",
+ "description": "Meal Breakfast",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-breakfast.md"
+ ],
+ "skills": [
+  "./skills/meal-breakfast-1",
+  "./skills/meal-breakfast-2",
+  "./skills/meal-breakfast-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal breakfast 1",
+  "meal breakfast 2",
+  "meal breakfast 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-breakfast",
+ "displayName": {
+  "en": "Meal Breakfast",
+  "zh": "早餐吃什么有营养 成本控制"
+ },
+ "profession": {
+  "en": "Meal Breakfast",
+  "zh": "早餐吃什么有营养 成本控制 顾问"
+ },
+ "displayDescription": {
+  "en": "蛋白+主食+纤维三件套",
+  "zh": "早餐吃什么有营养 成本控制：覆盖蛋白+主食+纤维三件套等情境，给出可执行处置与自查清单，并明确能力边"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal breakfast 1",
+   "zh": "meal breakfast 1"
+  },
+  {
+   "en": "meal breakfast 2",
+   "zh": "meal breakfast 2"
+  },
+  {
+   "en": "meal breakfast 3",
+   "zh": "meal breakfast 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-breakfast-1",
+   "zh": "meal breakfast 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-breakfast-1",
+   "zh": "meal breakfast 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-breakfast-1",
+  "zh": "meal breakfast 1 第一步该怎么做"
+ }
+}

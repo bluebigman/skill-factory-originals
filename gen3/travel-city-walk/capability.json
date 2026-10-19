@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-city-walk",
+ "name": "城市里怎么玩一天 行程规划 怎么串起来",
+ "description": "城市里怎么玩一天 行程规划：怎么串起来",
+ "kind": "expert",
+ "tags": [
+  "travel-city-walk-1",
+  "travel-city-walk-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-city-walk-core",
+   "name": "城市里怎么玩一天 行程规划",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-city-walk-1",
+     "name": "路线设计",
+     "summary": "怎么串起来"
+    },
+    {
+     "id": "travel-city-walk-2",
+     "name": "体验选择",
+     "summary": "怎么串起来"
+    },
+    {
+     "id": "travel-city-walk-3",
+     "name": "成本与体力",
+     "summary": "怎么串起来"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

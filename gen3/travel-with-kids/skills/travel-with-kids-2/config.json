@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "只带衣服",
+   "then": "带药：退烧/止泻/创可贴/体温计"
+  },
+  {
+   "when": "不带零食",
+   "then": "带干粮：孩子饿起来等不了"
+  },
+  {
+   "when": "不带换洗",
+   "then": "多带一套：弄脏弄湿很常见"
+  },
+  {
+   "when": "不带玩具",
+   "then": "带安抚物：路上与陌生环境需要"
+  }
+ ],
+ "keywords": [
+  "带什么",
+  "必备",
+  "准备",
+  "只带衣服",
+  "不带零食",
+  "不带换洗",
+  "不带玩具"
+ ],
+ "boundary": "带什么能救命",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

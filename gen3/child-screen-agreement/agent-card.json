@@ -1,0 +1,63 @@
+{
+ "name": "Child Screen Agreement",
+ "description": "分清是规则不清、执行不一致还是技术漏洞",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-screen-agreement",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-screen-agreement",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-screen-agreement-1",
+   "name": "约定失效原因",
+   "description": "约定失效原因：分清是规则不清、执行不一致还是技术漏洞",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-screen-agreement-2",
+   "name": "执行方法",
+   "description": "执行方法：分清是规则不清、执行不一致还是技术漏洞",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-screen-agreement-3",
+   "name": "规则设计",
+   "description": "规则设计：分清是规则不清、执行不一致还是技术漏洞",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

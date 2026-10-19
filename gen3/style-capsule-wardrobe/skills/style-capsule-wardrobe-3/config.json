@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "只买不出",
+   "then": "一进一出：买一件走一件"
+  },
+  {
+   "when": "舍不得扔",
+   "then": "设期限：一年未穿即处理"
+  },
+  {
+   "when": "换季不整理",
+   "then": "换季必整理：把当季的重新过一遍"
+  },
+  {
+   "when": "冲动购物",
+   "then": "冷静期：想买的放购物车 3 天"
+  }
+ ],
+ "keywords": [
+  "维持",
+  "不反弹",
+  "断舍离",
+  "只买不出",
+  "舍不得扔",
+  "换季不整理",
+  "冲动购物"
+ ],
+ "boundary": "怎么不反弹",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

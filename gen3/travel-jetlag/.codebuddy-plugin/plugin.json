@@ -1,0 +1,72 @@
+{
+ "name": "travel-jetlag",
+ "version": "1.0.0",
+ "plugin": "travel-jetlag",
+ "description": "Travel Jetlag",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-jetlag.md"
+ ],
+ "skills": [
+  "./skills/travel-jetlag-1",
+  "./skills/travel-jetlag-2",
+  "./skills/travel-jetlag-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel jetlag 1",
+  "travel jetlag 2",
+  "travel jetlag 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-jetlag",
+ "displayName": {
+  "en": "Travel Jetlag",
+  "zh": "倒时差怎么办 避坑要点"
+ },
+ "profession": {
+  "en": "Travel Jetlag",
+  "zh": "倒时差怎么办 避坑要点 顾问"
+ },
+ "displayDescription": {
+  "en": "提前调",
+  "zh": "倒时差怎么办 避坑要点：覆盖提前调等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel jetlag 1",
+   "zh": "travel jetlag 1"
+  },
+  {
+   "en": "travel jetlag 2",
+   "zh": "travel jetlag 2"
+  },
+  {
+   "en": "travel jetlag 3",
+   "zh": "travel jetlag 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-jetlag-1",
+   "zh": "travel jetlag 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-jetlag-1",
+   "zh": "travel jetlag 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-jetlag-1",
+  "zh": "travel jetlag 1 第一步该怎么做"
+ }
+}

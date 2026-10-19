@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "跟团购物点",
+   "then": "拒绝：不买不需要的"
+  },
+  {
+   "when": "景区内消费",
+   "then": "出景区买：价差明显"
+  },
+  {
+   "when": "临时改行程",
+   "then": "改签费高：行程定前想清"
+  },
+  {
+   "when": "买纪念品",
+   "then": "少买：多数回家就闲置"
+  }
+ ],
+ "keywords": [
+  "浪费",
+  "冤枉钱",
+  "避坑",
+  "跟团购物点",
+  "景区内消费",
+  "临时改行程",
+  "买纪念品"
+ ],
+ "boundary": "怎么不花冤枉钱",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

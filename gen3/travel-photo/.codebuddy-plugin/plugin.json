@@ -1,0 +1,72 @@
+{
+ "name": "travel-photo",
+ "version": "1.0.0",
+ "plugin": "travel-photo",
+ "description": "Travel Photo",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-photo.md"
+ ],
+ "skills": [
+  "./skills/travel-photo-1",
+  "./skills/travel-photo-2",
+  "./skills/travel-photo-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel photo 1",
+  "travel photo 2",
+  "travel photo 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-photo",
+ "displayName": {
+  "en": "Travel Photo",
+  "zh": "旅游怎么拍好看 准备清单"
+ },
+ "profession": {
+  "en": "Travel Photo",
+  "zh": "旅游怎么拍好看 准备清单 顾问"
+ },
+ "displayDescription": {
+  "en": "什么时候拍",
+  "zh": "旅游怎么拍好看 准备清单：覆盖什么时候拍等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "06-ContentCreative",
+ "tags": [
+  {
+   "en": "travel photo 1",
+   "zh": "travel photo 1"
+  },
+  {
+   "en": "travel photo 2",
+   "zh": "travel photo 2"
+  },
+  {
+   "en": "travel photo 3",
+   "zh": "travel photo 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-photo-1",
+   "zh": "travel photo 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-photo-1",
+   "zh": "travel photo 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-photo-1",
+  "zh": "travel photo 1 第一步该怎么做"
+ }
+}

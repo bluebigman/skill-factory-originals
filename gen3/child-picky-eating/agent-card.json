@@ -1,0 +1,63 @@
+{
+ "name": "Child Picky Eating",
+ "description": "分清是感官敏感、权力斗争还是真的不爱吃",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-picky-eating",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-picky-eating",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-picky-eating-1",
+   "name": "挑食类型判断",
+   "description": "挑食类型判断：分清是感官敏感、权力斗争还是真的不爱吃",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-picky-eating-2",
+   "name": "上桌规则设计",
+   "description": "上桌规则设计：分清是感官敏感、权力斗争还是真的不爱吃",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-picky-eating-3",
+   "name": "食物呈现改造",
+   "description": "食物呈现改造：分清是感官敏感、权力斗争还是真的不爱吃",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

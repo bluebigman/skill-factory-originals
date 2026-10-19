@@ -1,0 +1,72 @@
+{
+ "name": "travel-city-walk",
+ "version": "1.0.0",
+ "plugin": "travel-city-walk",
+ "description": "Travel City Walk",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-city-walk.md"
+ ],
+ "skills": [
+  "./skills/travel-city-walk-1",
+  "./skills/travel-city-walk-2",
+  "./skills/travel-city-walk-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel city walk 1",
+  "travel city walk 2",
+  "travel city walk 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-city-walk",
+ "displayName": {
+  "en": "Travel City Walk",
+  "zh": "城市里怎么玩一天 行程规划"
+ },
+ "profession": {
+  "en": "Travel City Walk",
+  "zh": "城市里怎么玩一天 行程规划 顾问"
+ },
+ "displayDescription": {
+  "en": "怎么串起来",
+  "zh": "城市里怎么玩一天 行程规划：覆盖怎么串起来等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel city walk 1",
+   "zh": "travel city walk 1"
+  },
+  {
+   "en": "travel city walk 2",
+   "zh": "travel city walk 2"
+  },
+  {
+   "en": "travel city walk 3",
+   "zh": "travel city walk 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-city-walk-1",
+   "zh": "travel city walk 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-city-walk-1",
+   "zh": "travel city walk 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-city-walk-1",
+  "zh": "travel city walk 1 第一步该怎么做"
+ }
+}

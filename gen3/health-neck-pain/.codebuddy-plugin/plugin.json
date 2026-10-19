@@ -1,0 +1,72 @@
+{
+ "name": "health-neck-pain",
+ "version": "1.0.0",
+ "plugin": "health-neck-pain",
+ "description": "Health Neck Pain",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-neck-pain.md"
+ ],
+ "skills": [
+  "./skills/health-neck-pain-1",
+  "./skills/health-neck-pain-2",
+  "./skills/health-neck-pain-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health neck pain 1",
+  "health neck pain 2",
+  "health neck pain 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-neck-pain",
+ "displayName": {
+  "en": "Health Neck Pain",
+  "zh": "脖子肩膀疼怎么缓解 自查步骤"
+ },
+ "profession": {
+  "en": "Health Neck Pain",
+  "zh": "脖子肩膀疼怎么缓解 自查步骤 顾问"
+ },
+ "displayDescription": {
+  "en": "先看是姿势还是其他",
+  "zh": "脖子肩膀疼怎么缓解 自查步骤：覆盖先看是姿势还是其他等情境，给出可执行处置与自查清单，并明确能力边界"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health neck pain 1",
+   "zh": "health neck pain 1"
+  },
+  {
+   "en": "health neck pain 2",
+   "zh": "health neck pain 2"
+  },
+  {
+   "en": "health neck pain 3",
+   "zh": "health neck pain 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-neck-pain-1",
+   "zh": "health neck pain 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-neck-pain-1",
+   "zh": "health neck pain 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-neck-pain-1",
+  "zh": "health neck pain 1 第一步该怎么做"
+ }
+}

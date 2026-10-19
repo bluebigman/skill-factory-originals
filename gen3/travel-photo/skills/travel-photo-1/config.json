@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "正午拍",
+   "then": "避开正午：顶光硬，清晨与黄昏更合适"
+  },
+  {
+   "when": "逆光直接拍",
+   "then": "侧逆光：人或景更有层次"
+  },
+  {
+   "when": "阴天不拍",
+   "then": "阴天好拍人：光线柔和"
+  },
+  {
+   "when": "室内开闪光",
+   "then": "关闪光：用环境光或靠窗"
+  }
+ ],
+ "keywords": [
+  "拍照",
+  "光线",
+  "正午拍",
+  "逆光直接拍",
+  "阴天不拍",
+  "室内开闪光"
+ ],
+ "boundary": "什么时候拍",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

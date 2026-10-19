@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-kids-nutrition",
+ "name": "孩子长身体吃什么 配比方法 按年龄看关键营养",
+ "description": "孩子长身体吃什么 配比方法：按年龄看关键营养",
+ "kind": "expert",
+ "tags": [
+  "meal-kids-nutrition-1",
+  "meal-kids-nutrition-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-kids-nutrition-core",
+   "name": "孩子长身体吃什么 配比方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-kids-nutrition-1",
+     "name": "生长需求核算",
+     "summary": "按年龄看关键营养"
+    },
+    {
+     "id": "meal-kids-nutrition-2",
+     "name": "挑食下的营养兜底",
+     "summary": "按年龄看关键营养"
+    },
+    {
+     "id": "meal-kids-nutrition-3",
+     "name": "喂养方式调整",
+     "summary": "按年龄看关键营养"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

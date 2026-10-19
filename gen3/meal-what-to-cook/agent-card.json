@@ -1,0 +1,63 @@
+{
+ "name": "Meal What To Cook",
+ "description": "按冰箱里已有的东西反推能做什么",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/meal-what-to-cook",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/meal-what-to-cook",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "meal-what-to-cook-1",
+   "name": "现有食材盘点",
+   "description": "现有食材盘点：按冰箱里已有的东西反推能做什么",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-what-to-cook-2",
+   "name": "成本与时间控制",
+   "description": "成本与时间控制：按冰箱里已有的东西反推能做什么",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-what-to-cook-3",
+   "name": "营养搭配校验",
+   "description": "营养搭配校验：按冰箱里已有的东西反推能做什么",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-safety-training",
+ "version": "1.0.0",
+ "plugin": "child-safety-training",
+ "description": "Child Safety Training",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-safety-training.md"
+ ],
+ "skills": [
+  "./skills/child-safety-training-1",
+  "./skills/child-safety-training-2",
+  "./skills/child-safety-training-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child safety training 1",
+  "child safety training 2",
+  "child safety training 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-safety-training",
+ "displayName": {
+  "en": "Child Safety Training",
+  "zh": "安全意识训练 长期预防"
+ },
+ "profession": {
+  "en": "Child Safety Training",
+  "zh": "安全意识训练 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "先搞清该防哪些场景",
+  "zh": "安全意识训练 长期预防：覆盖先搞清该防哪些场景等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child safety training 1",
+   "zh": "child safety training 1"
+  },
+  {
+   "en": "child safety training 2",
+   "zh": "child safety training 2"
+  },
+  {
+   "en": "child safety training 3",
+   "zh": "child safety training 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-safety-training-1",
+   "zh": "child safety training 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-safety-training-1",
+   "zh": "child safety training 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-safety-training-1",
+  "zh": "child safety training 1 第一步该怎么做"
+ }
+}

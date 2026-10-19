@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "水电改造",
+   "then": "不省：后期维修成本极高"
+  },
+  {
+   "when": "防水",
+   "then": "不省：漏水赔偿远超防水费"
+  },
+  {
+   "when": "五金件",
+   "then": "不省：铰链滑轨决定柜体寿命"
+  },
+  {
+   "when": "环保材料",
+   "then": "不省：甲醛影响健康"
+  }
+ ],
+ "keywords": [
+  "不能省",
+  "哪里",
+  "底线",
+  "水电改造",
+  "防水",
+  "五金件",
+  "环保材料"
+ ],
+ "boundary": "底线项",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

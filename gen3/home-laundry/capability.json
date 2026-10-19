@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-laundry",
+ "name": "衣服怎么洗不坏 收纳方案 洗前先分",
+ "description": "衣服怎么洗不坏 收纳方案：洗前先分",
+ "kind": "expert",
+ "tags": [
+  "home-laundry-1",
+  "home-laundry-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-laundry-core",
+   "name": "衣服怎么洗不坏 收纳方案",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-laundry-1",
+     "name": "分类与预处理",
+     "summary": "洗前先分"
+    },
+    {
+     "id": "home-laundry-2",
+     "name": "洗涤参数",
+     "summary": "洗前先分"
+    },
+    {
+     "id": "home-laundry-3",
+     "name": "晾晒与保养",
+     "summary": "洗前先分"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

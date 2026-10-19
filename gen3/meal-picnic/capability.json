@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-picnic",
+ "name": "带饭带菜怎么准备 食材选择 哪些菜经得起放",
+ "description": "带饭带菜怎么准备 食材选择：哪些菜经得起放",
+ "kind": "expert",
+ "tags": [
+  "meal-picnic-1",
+  "meal-picnic-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-picnic-core",
+   "name": "带饭带菜怎么准备 食材选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-picnic-1",
+     "name": "适合携带的菜",
+     "summary": "哪些菜经得起放"
+    },
+    {
+     "id": "meal-picnic-2",
+     "name": "分装与保温",
+     "summary": "哪些菜经得起放"
+    },
+    {
+     "id": "meal-picnic-3",
+     "name": "野餐与外出",
+     "summary": "哪些菜经得起放"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

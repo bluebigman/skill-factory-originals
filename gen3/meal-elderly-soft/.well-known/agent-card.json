@@ -1,0 +1,63 @@
+{
+ "name": "Meal Elderly Soft",
+ "description": "按咀嚼能力调整形态",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/meal-elderly-soft",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/meal-elderly-soft",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "meal-elderly-soft-1",
+   "name": "软烂度适配",
+   "description": "软烂度适配：按咀嚼能力调整形态",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-elderly-soft-2",
+   "name": "吞咽安全",
+   "description": "吞咽安全：按咀嚼能力调整形态",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-elderly-soft-3",
+   "name": "食欲与营养",
+   "description": "食欲与营养：按咀嚼能力调整形态",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "name": "home-move",
+ "version": "1.0.0",
+ "plugin": "home-move",
+ "description": "Home Move",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-move.md"
+ ],
+ "skills": [
+  "./skills/home-move-1",
+  "./skills/home-move-2",
+  "./skills/home-move-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home move 1",
+  "home move 2",
+  "home move 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-move",
+ "displayName": {
+  "en": "Home Move",
+  "zh": "搬家怎么不出错 收纳方案"
+ },
+ "profession": {
+  "en": "Home Move",
+  "zh": "搬家怎么不出错 收纳方案 顾问"
+ },
+ "displayDescription": {
+  "en": "怎么打包不丢",
+  "zh": "搬家怎么不出错 收纳方案：覆盖怎么打包不丢等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home move 1",
+   "zh": "home move 1"
+  },
+  {
+   "en": "home move 2",
+   "zh": "home move 2"
+  },
+  {
+   "en": "home move 3",
+   "zh": "home move 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-move-1",
+   "zh": "home move 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-move-1",
+   "zh": "home move 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-move-1",
+  "zh": "home move 1 第一步该怎么做"
+ }
+}

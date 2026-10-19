@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "插队拍照",
+   "then": "排队：热门机位依次"
+  },
+  {
+   "when": "长时间占位",
+   "then": "拍几张就让：考虑他人"
+  },
+  {
+   "when": "乱丢垃圾",
+   "then": "带走：山上/古迹尤其"
+  }
+ ],
+ "keywords": [
+  "景区",
+  "游客",
+  "排队",
+  "插队拍照",
+  "长时间占位",
+  "乱丢垃圾"
+ ],
+ "boundary": "公共礼节",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

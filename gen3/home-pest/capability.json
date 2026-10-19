@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-pest",
+ "name": "家里有虫怎么处理 清洁顺序 先分清是什么",
+ "description": "家里有虫怎么处理 清洁顺序：先分清是什么",
+ "kind": "expert",
+ "tags": [
+  "home-pest-1",
+  "home-pest-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-pest-core",
+   "name": "家里有虫怎么处理 清洁顺序",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-pest-1",
+     "name": "虫害类型识别",
+     "summary": "先分清是什么"
+    },
+    {
+     "id": "home-pest-2",
+     "name": "灭杀方法",
+     "summary": "先分清是什么"
+    },
+    {
+     "id": "home-pest-3",
+     "name": "预防",
+     "summary": "先分清是什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

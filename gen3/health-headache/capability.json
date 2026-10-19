@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-headache",
+ "name": "头疼怎么办 日常维护 先分清危险信号",
+ "description": "头疼怎么办 日常维护：先分清危险信号",
+ "kind": "expert",
+ "tags": [
+  "health-headache-1",
+  "health-headache-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-headache-core",
+   "name": "头疼怎么办 日常维护",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-headache-1",
+     "name": "类型与警示",
+     "summary": "先分清危险信号"
+    },
+    {
+     "id": "health-headache-2",
+     "name": "缓解方法",
+     "summary": "先分清危险信号"
+    },
+    {
+     "id": "health-headache-3",
+     "name": "诱因记录",
+     "summary": "先分清危险信号"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

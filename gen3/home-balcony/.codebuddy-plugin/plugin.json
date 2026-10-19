@@ -1,0 +1,72 @@
+{
+ "name": "home-balcony",
+ "version": "1.0.0",
+ "plugin": "home-balcony",
+ "description": "Home Balcony",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-balcony.md"
+ ],
+ "skills": [
+  "./skills/home-balcony-1",
+  "./skills/home-balcony-2",
+  "./skills/home-balcony-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home balcony 1",
+  "home balcony 2",
+  "home balcony 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-balcony",
+ "displayName": {
+  "en": "Home Balcony",
+  "zh": "阳台怎么利用 清洁顺序"
+ },
+ "profession": {
+  "en": "Home Balcony",
+  "zh": "阳台怎么利用 清洁顺序 顾问"
+ },
+ "displayDescription": {
+  "en": "先定阳台干什么",
+  "zh": "阳台怎么利用 清洁顺序：覆盖先定阳台干什么等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home balcony 1",
+   "zh": "home balcony 1"
+  },
+  {
+   "en": "home balcony 2",
+   "zh": "home balcony 2"
+  },
+  {
+   "en": "home balcony 3",
+   "zh": "home balcony 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-balcony-1",
+   "zh": "home balcony 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-balcony-1",
+   "zh": "home balcony 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-balcony-1",
+  "zh": "home balcony 1 第一步该怎么做"
+ }
+}

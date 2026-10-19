@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-sedentary",
+ "name": "久坐怎么动 日常维护 哪些信号要警惕",
+ "description": "久坐怎么动 日常维护：哪些信号要警惕",
+ "kind": "expert",
+ "tags": [
+  "health-sedentary-1",
+  "health-sedentary-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-sedentary-core",
+   "name": "久坐怎么动 日常维护",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-sedentary-1",
+     "name": "久坐危害识别",
+     "summary": "哪些信号要警惕"
+    },
+    {
+     "id": "health-sedentary-2",
+     "name": "工位微运动",
+     "summary": "哪些信号要警惕"
+    },
+    {
+     "id": "health-sedentary-3",
+     "name": "工位设置",
+     "summary": "哪些信号要警惕"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

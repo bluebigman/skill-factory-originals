@@ -1,0 +1,72 @@
+{
+ "name": "health-sleep-bad",
+ "version": "1.0.0",
+ "plugin": "health-sleep-bad",
+ "description": "Health Sleep Bad",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-sleep-bad.md"
+ ],
+ "skills": [
+  "./skills/health-sleep-bad-1",
+  "./skills/health-sleep-bad-2",
+  "./skills/health-sleep-bad-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health sleep bad 1",
+  "health sleep bad 2",
+  "health sleep bad 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-sleep-bad",
+ "displayName": {
+  "en": "Health Sleep Bad",
+  "zh": "睡不好怎么调 改善方法"
+ },
+ "profession": {
+  "en": "Health Sleep Bad",
+  "zh": "睡不好怎么调 改善方法 顾问"
+ },
+ "displayDescription": {
+  "en": "先分清类型",
+  "zh": "睡不好怎么调 改善方法：覆盖先分清类型等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health sleep bad 1",
+   "zh": "health sleep bad 1"
+  },
+  {
+   "en": "health sleep bad 2",
+   "zh": "health sleep bad 2"
+  },
+  {
+   "en": "health sleep bad 3",
+   "zh": "health sleep bad 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-sleep-bad-1",
+   "zh": "health sleep bad 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-sleep-bad-1",
+   "zh": "health sleep bad 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-sleep-bad-1",
+  "zh": "health sleep bad 1 第一步该怎么做"
+ }
+}

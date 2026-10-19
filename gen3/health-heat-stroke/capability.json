@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-heat-stroke",
+ "name": "中暑怎么防怎么处理 日常维护 哪些情况危险",
+ "description": "中暑怎么防怎么处理 日常维护：哪些情况危险",
+ "kind": "expert",
+ "tags": [
+  "health-heat-stroke-1",
+  "health-heat-stroke-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-heat-stroke-core",
+   "name": "中暑怎么防怎么处理 日常维护",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-heat-stroke-1",
+     "name": "风险识别",
+     "summary": "哪些情况危险"
+    },
+    {
+     "id": "health-heat-stroke-2",
+     "name": "现场处理",
+     "summary": "哪些情况危险"
+    },
+    {
+     "id": "health-heat-stroke-3",
+     "name": "预防",
+     "summary": "哪些情况危险"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

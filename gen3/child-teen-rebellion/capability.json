@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-teen-rebellion",
+ "name": "叛逆期怎么沟通 长期预防 分清是正常分离、情绪困扰还是关系破裂",
+ "description": "叛逆期怎么沟通 长期预防：分清是正常分离、情绪困扰还是关系破裂",
+ "kind": "expert",
+ "tags": [
+  "child-teen-rebellion-1",
+  "child-teen-rebellion-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-teen-rebellion-core",
+   "name": "叛逆期怎么沟通 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-teen-rebellion-1",
+     "name": "叛逆性质判断",
+     "summary": "分清是正常分离、情绪困扰还是关系破裂"
+    },
+    {
+     "id": "child-teen-rebellion-2",
+     "name": "沟通方式调整",
+     "summary": "分清是正常分离、情绪困扰还是关系破裂"
+    },
+    {
+     "id": "child-teen-rebellion-3",
+     "name": "信任重建",
+     "summary": "分清是正常分离、情绪困扰还是关系破裂"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

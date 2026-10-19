@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-color-match",
+ "name": "颜色怎么搭不土 避坑要点 先看自己适合什么色",
+ "description": "颜色怎么搭不土 避坑要点：先看自己适合什么色",
+ "kind": "expert",
+ "tags": [
+  "style-color-match-1",
+  "style-color-match-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-color-match-core",
+   "name": "颜色怎么搭不土 避坑要点",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-color-match-1",
+     "name": "肤色与颜色",
+     "summary": "先看自己适合什么色"
+    },
+    {
+     "id": "style-color-match-2",
+     "name": "配色比例",
+     "summary": "先看自己适合什么色"
+    },
+    {
+     "id": "style-color-match-3",
+     "name": "避坑",
+     "summary": "先看自己适合什么色"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

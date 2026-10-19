@@ -1,0 +1,72 @@
+{
+ "name": "meal-weight-loss",
+ "version": "1.0.0",
+ "plugin": "meal-weight-loss",
+ "description": "Meal Weight Loss",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-weight-loss.md"
+ ],
+ "skills": [
+  "./skills/meal-weight-loss-1",
+  "./skills/meal-weight-loss-2",
+  "./skills/meal-weight-loss-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal weight loss 1",
+  "meal weight loss 2",
+  "meal weight loss 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-weight-loss",
+ "displayName": {
+  "en": "Meal Weight Loss",
+  "zh": "减脂期怎么吃 食材选择"
+ },
+ "profession": {
+  "en": "Meal Weight Loss",
+  "zh": "减脂期怎么吃 食材选择 顾问"
+ },
+ "displayDescription": {
+  "en": "先看总量再看结构",
+  "zh": "减脂期怎么吃 食材选择：覆盖先看总量再看结构等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "08-FinanceInvestment",
+ "tags": [
+  {
+   "en": "meal weight loss 1",
+   "zh": "meal weight loss 1"
+  },
+  {
+   "en": "meal weight loss 2",
+   "zh": "meal weight loss 2"
+  },
+  {
+   "en": "meal weight loss 3",
+   "zh": "meal weight loss 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-weight-loss-1",
+   "zh": "meal weight loss 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-weight-loss-1",
+   "zh": "meal weight loss 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-weight-loss-1",
+  "zh": "meal weight loss 1 第一步该怎么做"
+ }
+}

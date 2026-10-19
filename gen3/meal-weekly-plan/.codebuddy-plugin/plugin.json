@@ -1,0 +1,72 @@
+{
+ "name": "meal-weekly-plan",
+ "version": "1.0.0",
+ "plugin": "meal-weekly-plan",
+ "description": "Meal Weekly Plan",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-weekly-plan.md"
+ ],
+ "skills": [
+  "./skills/meal-weekly-plan-1",
+  "./skills/meal-weekly-plan-2",
+  "./skills/meal-weekly-plan-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal weekly plan 1",
+  "meal weekly plan 2",
+  "meal weekly plan 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-weekly-plan",
+ "displayName": {
+  "en": "Meal Weekly Plan",
+  "zh": "一周菜谱怎么排 快手做法"
+ },
+ "profession": {
+  "en": "Meal Weekly Plan",
+  "zh": "一周菜谱怎么排 快手做法 顾问"
+ },
+ "displayDescription": {
+  "en": "按重复度与新鲜度排一周",
+  "zh": "一周菜谱怎么排 快手做法：覆盖按重复度与新鲜度排一周等情境，给出可执行处置与自查清单，并明确能力边界"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal weekly plan 1",
+   "zh": "meal weekly plan 1"
+  },
+  {
+   "en": "meal weekly plan 2",
+   "zh": "meal weekly plan 2"
+  },
+  {
+   "en": "meal weekly plan 3",
+   "zh": "meal weekly plan 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-weekly-plan-1",
+   "zh": "meal weekly plan 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-weekly-plan-1",
+   "zh": "meal weekly plan 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-weekly-plan-1",
+  "zh": "meal weekly plan 1 第一步该怎么做"
+ }
+}

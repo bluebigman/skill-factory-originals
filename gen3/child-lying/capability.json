@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-lying",
+ "name": "撒谎怎么处理 分步处置 分清是怕惩罚、想讨好、想象还是习惯性",
+ "description": "撒谎怎么处理 分步处置：分清是怕惩罚、想讨好、想象还是习惯性",
+ "kind": "expert",
+ "tags": [
+  "child-lying-1",
+  "child-lying-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-lying-core",
+   "name": "撒谎怎么处理 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-lying-1",
+     "name": "撒谎动机分辨",
+     "summary": "分清是怕惩罚、想讨好、想象还是习惯性"
+    },
+    {
+     "id": "child-lying-2",
+     "name": "问话方式",
+     "summary": "分清是怕惩罚、想讨好、想象还是习惯性"
+    },
+    {
+     "id": "child-lying-3",
+     "name": "后果与修复",
+     "summary": "分清是怕惩罚、想讨好、想象还是习惯性"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

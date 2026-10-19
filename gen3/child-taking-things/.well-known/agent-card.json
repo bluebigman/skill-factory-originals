@@ -1,0 +1,63 @@
+{
+ "name": "Child Taking Things",
+ "description": "分清是物权概念缺失、冲动还是有意偷拿",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-taking-things",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-taking-things",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-taking-things-1",
+   "name": "行为性质分辨",
+   "description": "行为性质分辨：分清是物权概念缺失、冲动还是有意偷拿",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-taking-things-2",
+   "name": "当场处理",
+   "description": "当场处理：分清是物权概念缺失、冲动还是有意偷拿",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-taking-things-3",
+   "name": "长期教育",
+   "description": "长期教育：分清是物权概念缺失、冲动还是有意偷拿",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

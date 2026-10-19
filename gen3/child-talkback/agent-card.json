@@ -1,0 +1,63 @@
+{
+ "name": "Child Talkback",
+ "description": "分清是正常独立、情绪宣泄还是关系已经破裂",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-talkback",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-talkback",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-talkback-1",
+   "name": "顶嘴性质分辨",
+   "description": "顶嘴性质分辨：分清是正常独立、情绪宣泄还是关系已经破裂",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-talkback-2",
+   "name": "开口的正确方式",
+   "description": "开口的正确方式：分清是正常独立、情绪宣泄还是关系已经破裂",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-talkback-3",
+   "name": "关系修复动作",
+   "description": "关系修复动作：分清是正常独立、情绪宣泄还是关系已经破裂",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

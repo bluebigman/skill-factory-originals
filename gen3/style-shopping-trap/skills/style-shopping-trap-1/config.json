@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "只看正面",
+   "then": "看侧面与背面：侧面决定是否显厚"
+  },
+  {
+   "when": "站着看",
+   "then": "坐着看：坐下是否勒、是否上移"
+  },
+  {
+   "when": "不抬手",
+   "then": "抬手试：肩袖是否卡"
+  },
+  {
+   "when": "不看洗标",
+   "then": "看洗标：不能机洗的要想清能否维护"
+  }
+ ],
+ "keywords": [
+  "试穿",
+  "不合适",
+  "踩坑",
+  "只看正面",
+  "站着看",
+  "不抬手",
+  "不看洗标"
+ ],
+ "boundary": "买前必须看什么",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "只靠周末运动",
+   "then": "每天微动：每小时起身"
+  },
+  {
+   "when": "屏幕太低",
+   "then": "抬高屏幕：视线平齐上缘"
+  },
+  {
+   "when": "枕头太高",
+   "then": "枕头合适：侧睡填满肩颈空隙"
+  }
+ ],
+ "keywords": [
+  "预防",
+  "不再疼",
+  "长期",
+  "只靠周末运动",
+  "屏幕太低",
+  "枕头太高"
+ ],
+ "boundary": "怎么不再犯",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

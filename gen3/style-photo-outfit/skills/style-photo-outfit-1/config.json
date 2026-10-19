@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "穿细条纹",
+   "then": "避开：细密条纹在镜头里会摩尔纹"
+  },
+  {
+   "when": "穿全黑",
+   "then": "避开纯黑：容易糊成一团，用深蓝/深灰替代"
+  },
+  {
+   "when": "大 logo",
+   "then": "避开：抢画面且显廉价"
+  },
+  {
+   "when": "穿皱的衣服",
+   "then": "熨平：褶皱在照片里特别明显"
+  }
+ ],
+ "keywords": [
+  "拍照",
+  "上镜",
+  "穿什么",
+  "穿细条纹",
+  "穿全黑",
+  "大 logo",
+  "穿皱的衣服"
+ ],
+ "boundary": "镜头与肉眼的差异",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

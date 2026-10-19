@@ -1,0 +1,72 @@
+{
+ "name": "health-postpartum",
+ "version": "1.0.0",
+ "plugin": "health-postpartum",
+ "description": "Health Postpartum",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-postpartum.md"
+ ],
+ "skills": [
+  "./skills/health-postpartum-1",
+  "./skills/health-postpartum-2",
+  "./skills/health-postpartum-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health postpartum 1",
+  "health postpartum 2",
+  "health postpartum 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-postpartum",
+ "displayName": {
+  "en": "Health Postpartum",
+  "zh": "产后怎么恢复 日常维护"
+ },
+ "profession": {
+  "en": "Health Postpartum",
+  "zh": "产后怎么恢复 日常维护 顾问"
+ },
+ "displayDescription": {
+  "en": "按阶段来",
+  "zh": "产后怎么恢复 日常维护：覆盖按阶段来等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health postpartum 1",
+   "zh": "health postpartum 1"
+  },
+  {
+   "en": "health postpartum 2",
+   "zh": "health postpartum 2"
+  },
+  {
+   "en": "health postpartum 3",
+   "zh": "health postpartum 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-postpartum-1",
+   "zh": "health postpartum 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-postpartum-1",
+   "zh": "health postpartum 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-postpartum-1",
+  "zh": "health postpartum 1 第一步该怎么做"
+ }
+}

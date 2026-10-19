@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "只靠通风",
+   "then": "刮水+通风：洗后刮一遍再开排风"
+  },
+  {
+   "when": "浴帘贴墙",
+   "then": "拉开晾：浴帘贴墙会长霉"
+  },
+  {
+   "when": "毛巾挂里面",
+   "then": "移出去：潮湿环境滋生细菌"
+  },
+  {
+   "when": "拖鞋放里面",
+   "then": "沥水架：鞋底积水是异味源"
+  }
+ ],
+ "keywords": [
+  "干爽",
+  "分离",
+  "只靠通风",
+  "浴帘贴墙",
+  "毛巾挂里面",
+  "拖鞋放里面"
+ ],
+ "boundary": "怎么保持干",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

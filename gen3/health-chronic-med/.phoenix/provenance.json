@@ -1,0 +1,15 @@
+{
+ "schema": "provenance/v2",
+ "slug": "health-chronic-med",
+ "skill": "health-chronic-med",
+ "source_project": "original",
+ "source": "none(original)",
+ "source_type": "self_authored_rules",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "date": "2026-10-19",
+ "generated_at": "2026-10-19T21:36:21",
+ "generator": "FACTORY/Z03_Original_Forge/_lib/forge_core v2.0.0",
+ "clean_room": "规格驱动原创：先写规格（输入/输出/边界/异常/示例），再按规格实现；未抓取、未复制任何第三方代码",
+ "note": "本资产由工厂内生成本器产出，非代码抓取"
+}

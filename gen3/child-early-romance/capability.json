@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-early-romance",
+ "name": "早恋怎么引导 分步处置 分清是单纯好感、真的交往还是被纠缠",
+ "description": "早恋怎么引导 分步处置：分清是单纯好感、真的交往还是被纠缠",
+ "kind": "expert",
+ "tags": [
+  "child-early-romance-1",
+  "child-early-romance-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-early-romance-core",
+   "name": "早恋怎么引导 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-early-romance-1",
+     "name": "情况判断",
+     "summary": "分清是单纯好感、真的交往还是被纠缠"
+    },
+    {
+     "id": "child-early-romance-2",
+     "name": "回应方式",
+     "summary": "分清是单纯好感、真的交往还是被纠缠"
+    },
+    {
+     "id": "child-early-romance-3",
+     "name": "边界与引导",
+     "summary": "分清是单纯好感、真的交往还是被纠缠"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

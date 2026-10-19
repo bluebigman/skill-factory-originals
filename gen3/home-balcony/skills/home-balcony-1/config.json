@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "当仓库用",
+   "then": "先定功能：晾晒/休闲/种植选一个主功能"
+  },
+  {
+   "when": "什么都想放",
+   "then": "分区：一半晾晒一半休闲"
+  },
+  {
+   "when": "不考虑承重",
+   "then": "看承重：老楼阳台不宜堆重物"
+  },
+  {
+   "when": "不留通道",
+   "then": "留通道：至少 60cm"
+  }
+ ],
+ "keywords": [
+  "阳台",
+  "利用",
+  "改造",
+  "当仓库用",
+  "什么都想放",
+  "不考虑承重",
+  "不留通道"
+ ],
+ "boundary": "先定阳台干什么",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

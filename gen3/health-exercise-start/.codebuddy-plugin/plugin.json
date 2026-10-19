@@ -1,0 +1,72 @@
+{
+ "name": "health-exercise-start",
+ "version": "1.0.0",
+ "plugin": "health-exercise-start",
+ "description": "Health Exercise Start",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-exercise-start.md"
+ ],
+ "skills": [
+  "./skills/health-exercise-start-1",
+  "./skills/health-exercise-start-2",
+  "./skills/health-exercise-start-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health exercise start 1",
+  "health exercise start 2",
+  "health exercise start 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-exercise-start",
+ "displayName": {
+  "en": "Health Exercise Start",
+  "zh": "想开始运动怎么起步 日常维护"
+ },
+ "profession": {
+  "en": "Health Exercise Start",
+  "zh": "想开始运动怎么起步 日常维护 顾问"
+ },
+ "displayDescription": {
+  "en": "先看能不能练",
+  "zh": "想开始运动怎么起步 日常维护：覆盖先看能不能练等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health exercise start 1",
+   "zh": "health exercise start 1"
+  },
+  {
+   "en": "health exercise start 2",
+   "zh": "health exercise start 2"
+  },
+  {
+   "en": "health exercise start 3",
+   "zh": "health exercise start 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-exercise-start-1",
+   "zh": "health exercise start 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-exercise-start-1",
+   "zh": "health exercise start 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-exercise-start-1",
+  "zh": "health exercise start 1 第一步该怎么做"
+ }
+}

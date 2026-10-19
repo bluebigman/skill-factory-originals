@@ -1,0 +1,72 @@
+{
+ "name": "child-peer-conflict",
+ "version": "1.0.0",
+ "plugin": "child-peer-conflict",
+ "description": "Child Peer Conflict",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-peer-conflict.md"
+ ],
+ "skills": [
+  "./skills/child-peer-conflict-1",
+  "./skills/child-peer-conflict-2",
+  "./skills/child-peer-conflict-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child peer conflict 1",
+  "child peer conflict 2",
+  "child peer conflict 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-peer-conflict",
+ "displayName": {
+  "en": "Child Peer Conflict",
+  "zh": "和同学处不好 分步处置"
+ },
+ "profession": {
+  "en": "Child Peer Conflict",
+  "zh": "和同学处不好 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是技能不足、被排斥还是性格内向",
+  "zh": "和同学处不好 分步处置：覆盖分清是技能不足、被排斥还是性格内向等情境，给出可执行处置与自查清单，并明"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child peer conflict 1",
+   "zh": "child peer conflict 1"
+  },
+  {
+   "en": "child peer conflict 2",
+   "zh": "child peer conflict 2"
+  },
+  {
+   "en": "child peer conflict 3",
+   "zh": "child peer conflict 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-peer-conflict-1",
+   "zh": "child peer conflict 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-peer-conflict-1",
+   "zh": "child peer conflict 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-peer-conflict-1",
+  "zh": "child peer conflict 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-money-sense",
+ "name": "财商启蒙 分步处置 先看孩子处在哪个阶段",
+ "description": "财商启蒙 分步处置：先看孩子处在哪个阶段",
+ "kind": "expert",
+ "tags": [
+  "child-money-sense-1",
+  "child-money-sense-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-money-sense-core",
+   "name": "财商启蒙 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-money-sense-1",
+     "name": "金钱认知现状",
+     "summary": "先看孩子处在哪个阶段"
+    },
+    {
+     "id": "child-money-sense-2",
+     "name": "零花钱规则",
+     "summary": "先看孩子处在哪个阶段"
+    },
+    {
+     "id": "child-money-sense-3",
+     "name": "消费决策训练",
+     "summary": "先看孩子处在哪个阶段"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

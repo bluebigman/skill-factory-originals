@@ -1,0 +1,72 @@
+{
+ "name": "style-body-shape",
+ "version": "1.0.0",
+ "plugin": "style-body-shape",
+ "description": "Style Body Shape",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-body-shape.md"
+ ],
+ "skills": [
+  "./skills/style-body-shape-1",
+  "./skills/style-body-shape-2",
+  "./skills/style-body-shape-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style body shape 1",
+  "style body shape 2",
+  "style body shape 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-body-shape",
+ "displayName": {
+  "en": "Style Body Shape",
+  "zh": "什么版型显瘦 场合选择"
+ },
+ "profession": {
+  "en": "Style Body Shape",
+  "zh": "什么版型显瘦 场合选择 顾问"
+ },
+ "displayDescription": {
+  "en": "先认清自己的比例",
+  "zh": "什么版型显瘦 场合选择：覆盖先认清自己的比例等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style body shape 1",
+   "zh": "style body shape 1"
+  },
+  {
+   "en": "style body shape 2",
+   "zh": "style body shape 2"
+  },
+  {
+   "en": "style body shape 3",
+   "zh": "style body shape 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-body-shape-1",
+   "zh": "style body shape 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-body-shape-1",
+   "zh": "style body shape 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-body-shape-1",
+  "zh": "style body shape 1 第一步该怎么做"
+ }
+}

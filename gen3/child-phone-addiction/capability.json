@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-phone-addiction",
+ "name": "沉迷手机管控 话术模板 分清是正常使用、过度使用还是已经影响生活",
+ "description": "沉迷手机管控 话术模板：分清是正常使用、过度使用还是已经影响生活",
+ "kind": "expert",
+ "tags": [
+  "child-phone-addiction-1",
+  "child-phone-addiction-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-phone-addiction-core",
+   "name": "沉迷手机管控 话术模板",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-phone-addiction-1",
+     "name": "沉迷程度判断",
+     "summary": "分清是正常使用、过度使用还是已经影响生活"
+    },
+    {
+     "id": "child-phone-addiction-2",
+     "name": "约定怎么谈",
+     "summary": "分清是正常使用、过度使用还是已经影响生活"
+    },
+    {
+     "id": "child-phone-addiction-3",
+     "name": "替代活动设计",
+     "summary": "分清是正常使用、过度使用还是已经影响生活"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

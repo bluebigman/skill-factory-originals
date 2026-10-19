@@ -1,0 +1,72 @@
+{
+ "name": "child-screen-agreement",
+ "version": "1.0.0",
+ "plugin": "child-screen-agreement",
+ "description": "Child Screen Agreement",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-screen-agreement.md"
+ ],
+ "skills": [
+  "./skills/child-screen-agreement-1",
+  "./skills/child-screen-agreement-2",
+  "./skills/child-screen-agreement-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child screen agreement 1",
+  "child screen agreement 2",
+  "child screen agreement 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-screen-agreement",
+ "displayName": {
+  "en": "Child Screen Agreement",
+  "zh": "屏幕时间约定执行 长期预防"
+ },
+ "profession": {
+  "en": "Child Screen Agreement",
+  "zh": "屏幕时间约定执行 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是规则不清、执行不一致还是技术漏洞",
+  "zh": "屏幕时间约定执行 长期预防：覆盖分清是规则不清、执行不一致还是技术漏洞等情境，给出可执行处置与自查清"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child screen agreement 1",
+   "zh": "child screen agreement 1"
+  },
+  {
+   "en": "child screen agreement 2",
+   "zh": "child screen agreement 2"
+  },
+  {
+   "en": "child screen agreement 3",
+   "zh": "child screen agreement 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-screen-agreement-1",
+   "zh": "child screen agreement 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-screen-agreement-1",
+   "zh": "child screen agreement 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-screen-agreement-1",
+  "zh": "child screen agreement 1 第一步该怎么做"
+ }
+}

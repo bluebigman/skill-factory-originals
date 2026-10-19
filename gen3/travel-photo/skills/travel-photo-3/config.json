@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "摆拍看镜头",
+   "then": "抓拍：走动/回头/做事"
+  },
+  {
+   "when": "站得笔直",
+   "then": "有动作：手有事做更自然"
+  },
+  {
+   "when": "穿与环境同色",
+   "then": "对比色：跳出来"
+  },
+  {
+   "when": "只拍人",
+   "then": "带环境：人+景才是旅游照"
+  }
+ ],
+ "keywords": [
+  "人像",
+  "自然",
+  "怎么摆",
+  "摆拍看镜头",
+  "站得笔直",
+  "穿与环境同色",
+  "只拍人"
+ ],
+ "boundary": "怎么让人自然",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

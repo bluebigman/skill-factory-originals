@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "上身厚",
+   "then": "V 领+落肩：拉长颈部，避免高领紧身"
+  },
+  {
+   "when": "胯宽",
+   "then": "A 字下装：避免紧身裤与低腰"
+  },
+  {
+   "when": "个子矮",
+   "then": "高腰+同色系：拉长腿部线条"
+  },
+  {
+   "when": "肩窄",
+   "then": "有结构的上装：避免过度落肩"
+  }
+ ],
+ "keywords": [
+  "适合",
+  "版型",
+  "上身厚",
+  "胯宽",
+  "个子矮",
+  "肩窄"
+ ],
+ "boundary": "不同体型怎么选",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

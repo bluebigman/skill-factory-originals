@@ -1,0 +1,72 @@
+{
+ "name": "meal-holiday-feast",
+ "version": "1.0.0",
+ "plugin": "meal-holiday-feast",
+ "description": "Meal Holiday Feast",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-holiday-feast.md"
+ ],
+ "skills": [
+  "./skills/meal-holiday-feast-1",
+  "./skills/meal-holiday-feast-2",
+  "./skills/meal-holiday-feast-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal holiday feast 1",
+  "meal holiday feast 2",
+  "meal holiday feast 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-holiday-feast",
+ "displayName": {
+  "en": "Meal Holiday Feast",
+  "zh": "过节请客怎么配菜 食材选择"
+ },
+ "profession": {
+  "en": "Meal Holiday Feast",
+  "zh": "过节请客怎么配菜 食材选择 顾问"
+ },
+ "displayDescription": {
+  "en": "按人数定冷热荤素",
+  "zh": "过节请客怎么配菜 食材选择：覆盖按人数定冷热荤素等情境，给出可执行处置与自查清单，并明确能力边界与转"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal holiday feast 1",
+   "zh": "meal holiday feast 1"
+  },
+  {
+   "en": "meal holiday feast 2",
+   "zh": "meal holiday feast 2"
+  },
+  {
+   "en": "meal holiday feast 3",
+   "zh": "meal holiday feast 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-holiday-feast-1",
+   "zh": "meal holiday feast 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-holiday-feast-1",
+   "zh": "meal holiday feast 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-holiday-feast-1",
+  "zh": "meal holiday feast 1 第一步该怎么做"
+ }
+}

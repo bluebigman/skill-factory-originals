@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-move",
+ "name": "搬家怎么不出错 收纳方案 怎么打包不丢",
+ "description": "搬家怎么不出错 收纳方案：怎么打包不丢",
+ "kind": "expert",
+ "tags": [
+  "home-move-1",
+  "home-move-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-move-core",
+   "name": "搬家怎么不出错 收纳方案",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-move-1",
+     "name": "打包策略",
+     "summary": "怎么打包不丢"
+    },
+    {
+     "id": "home-move-2",
+     "name": "搬家当天",
+     "summary": "怎么打包不丢"
+    },
+    {
+     "id": "home-move-3",
+     "name": "搬后一周",
+     "summary": "怎么打包不丢"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

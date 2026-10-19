@@ -1,0 +1,72 @@
+{
+ "name": "child-taking-things",
+ "version": "1.0.0",
+ "plugin": "child-taking-things",
+ "description": "Child Taking Things",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-taking-things.md"
+ ],
+ "skills": [
+  "./skills/child-taking-things-1",
+  "./skills/child-taking-things-2",
+  "./skills/child-taking-things-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child taking things 1",
+  "child taking things 2",
+  "child taking things 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-taking-things",
+ "displayName": {
+  "en": "Child Taking Things",
+  "zh": "拿了别人东西 当场应对"
+ },
+ "profession": {
+  "en": "Child Taking Things",
+  "zh": "拿了别人东西 当场应对 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是物权概念缺失、冲动还是有意偷拿",
+  "zh": "拿了别人东西 当场应对：覆盖分清是物权概念缺失、冲动还是有意偷拿等情境，给出可执行处置与自查清单，并"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child taking things 1",
+   "zh": "child taking things 1"
+  },
+  {
+   "en": "child taking things 2",
+   "zh": "child taking things 2"
+  },
+  {
+   "en": "child taking things 3",
+   "zh": "child taking things 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-taking-things-1",
+   "zh": "child taking things 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-taking-things-1",
+   "zh": "child taking things 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-taking-things-1",
+  "zh": "child taking things 1 第一步该怎么做"
+ }
+}

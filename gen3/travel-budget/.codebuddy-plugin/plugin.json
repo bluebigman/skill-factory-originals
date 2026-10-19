@@ -1,0 +1,72 @@
+{
+ "name": "travel-budget",
+ "version": "1.0.0",
+ "plugin": "travel-budget",
+ "description": "Travel Budget",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-budget.md"
+ ],
+ "skills": [
+  "./skills/travel-budget-1",
+  "./skills/travel-budget-2",
+  "./skills/travel-budget-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel budget 1",
+  "travel budget 2",
+  "travel budget 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-budget",
+ "displayName": {
+  "en": "Travel Budget",
+  "zh": "旅游怎么省钱 避坑要点"
+ },
+ "profession": {
+  "en": "Travel Budget",
+  "zh": "旅游怎么省钱 避坑要点 顾问"
+ },
+ "displayDescription": {
+  "en": "钱花在哪",
+  "zh": "旅游怎么省钱 避坑要点：覆盖钱花在哪等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel budget 1",
+   "zh": "travel budget 1"
+  },
+  {
+   "en": "travel budget 2",
+   "zh": "travel budget 2"
+  },
+  {
+   "en": "travel budget 3",
+   "zh": "travel budget 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-budget-1",
+   "zh": "travel budget 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-budget-1",
+   "zh": "travel budget 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-budget-1",
+  "zh": "travel budget 1 第一步该怎么做"
+ }
+}

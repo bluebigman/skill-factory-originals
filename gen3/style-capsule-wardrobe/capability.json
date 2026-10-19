@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-capsule-wardrobe",
+ "name": "衣柜怎么精简 场合选择 先看清自己有什么",
+ "description": "衣柜怎么精简 场合选择：先看清自己有什么",
+ "kind": "expert",
+ "tags": [
+  "style-capsule-wardrobe-1",
+  "style-capsule-wardrobe-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-capsule-wardrobe-core",
+   "name": "衣柜怎么精简 场合选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-capsule-wardrobe-1",
+     "name": "现有清点",
+     "summary": "先看清自己有什么"
+    },
+    {
+     "id": "style-capsule-wardrobe-2",
+     "name": "核心款建立",
+     "summary": "先看清自己有什么"
+    },
+    {
+     "id": "style-capsule-wardrobe-3",
+     "name": "进出机制",
+     "summary": "先看清自己有什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

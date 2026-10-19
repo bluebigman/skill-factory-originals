@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-eye-strain",
+ "name": "眼睛干涩怎么办 改善方法 怎么减负",
+ "description": "眼睛干涩怎么办 改善方法：怎么减负",
+ "kind": "expert",
+ "tags": [
+  "health-eye-strain-1",
+  "health-eye-strain-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-eye-strain-core",
+   "name": "眼睛干涩怎么办 改善方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-eye-strain-1",
+     "name": "用眼习惯",
+     "summary": "怎么减负"
+    },
+    {
+     "id": "health-eye-strain-2",
+     "name": "环境与工具",
+     "summary": "怎么减负"
+    },
+    {
+     "id": "health-eye-strain-3",
+     "name": "何时就医",
+     "summary": "怎么减负"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

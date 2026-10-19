@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-holiday-feast",
+ "name": "过节请客怎么配菜 食材选择 按人数定冷热荤素",
+ "description": "过节请客怎么配菜 食材选择：按人数定冷热荤素",
+ "kind": "expert",
+ "tags": [
+  "meal-holiday-feast-1",
+  "meal-holiday-feast-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-holiday-feast-core",
+   "name": "过节请客怎么配菜 食材选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-holiday-feast-1",
+     "name": "菜量与结构规划",
+     "summary": "按人数定冷热荤素"
+    },
+    {
+     "id": "meal-holiday-feast-2",
+     "name": "出菜顺序与节奏",
+     "summary": "按人数定冷热荤素"
+    },
+    {
+     "id": "meal-holiday-feast-3",
+     "name": "主食与收尾",
+     "summary": "按人数定冷热荤素"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

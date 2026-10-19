@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-wedding-guest",
+ "name": "参加婚礼穿什么 搭配方案 先避开雷区",
+ "description": "参加婚礼穿什么 搭配方案：先避开雷区",
+ "kind": "expert",
+ "tags": [
+  "style-wedding-guest-1",
+  "style-wedding-guest-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-wedding-guest-core",
+   "name": "参加婚礼穿什么 搭配方案",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-wedding-guest-1",
+     "name": "场合与禁忌",
+     "summary": "先避开雷区"
+    },
+    {
+     "id": "style-wedding-guest-2",
+     "name": "按场地选款",
+     "summary": "先避开雷区"
+    },
+    {
+     "id": "style-wedding-guest-3",
+     "name": "细节与礼节",
+     "summary": "先避开雷区"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

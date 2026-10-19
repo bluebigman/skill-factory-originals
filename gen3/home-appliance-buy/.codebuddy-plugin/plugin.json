@@ -1,0 +1,72 @@
+{
+ "name": "home-appliance-buy",
+ "version": "1.0.0",
+ "plugin": "home-appliance-buy",
+ "description": "Home Appliance Buy",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-appliance-buy.md"
+ ],
+ "skills": [
+  "./skills/home-appliance-buy-1",
+  "./skills/home-appliance-buy-2",
+  "./skills/home-appliance-buy-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home appliance buy 1",
+  "home appliance buy 2",
+  "home appliance buy 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-appliance-buy",
+ "displayName": {
+  "en": "Home Appliance Buy",
+  "zh": "家电怎么选不踩坑 处理步骤"
+ },
+ "profession": {
+  "en": "Home Appliance Buy",
+  "zh": "家电怎么选不踩坑 处理步骤 顾问"
+ },
+ "displayDescription": {
+  "en": "先算清要什么",
+  "zh": "家电怎么选不踩坑 处理步骤：覆盖先算清要什么等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home appliance buy 1",
+   "zh": "home appliance buy 1"
+  },
+  {
+   "en": "home appliance buy 2",
+   "zh": "home appliance buy 2"
+  },
+  {
+   "en": "home appliance buy 3",
+   "zh": "home appliance buy 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-appliance-buy-1",
+   "zh": "home appliance buy 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-appliance-buy-1",
+   "zh": "home appliance buy 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-appliance-buy-1",
+  "zh": "home appliance buy 1 第一步该怎么做"
+ }
+}

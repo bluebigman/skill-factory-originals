@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-bullying",
+ "name": "校园被欺负应对 话术模板 分清是偶发冲突、持续欺凌还是互相打闹",
+ "description": "校园被欺负应对 话术模板：分清是偶发冲突、持续欺凌还是互相打闹",
+ "kind": "expert",
+ "tags": [
+  "child-bullying-1",
+  "child-bullying-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-bullying-core",
+   "name": "校园被欺负应对 话术模板",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-bullying-1",
+     "name": "欺凌性质判断",
+     "summary": "分清是偶发冲突、持续欺凌还是互相打闹"
+    },
+    {
+     "id": "child-bullying-2",
+     "name": "家长第一反应",
+     "summary": "分清是偶发冲突、持续欺凌还是互相打闹"
+    },
+    {
+     "id": "child-bullying-3",
+     "name": "应对与恢复",
+     "summary": "分清是偶发冲突、持续欺凌还是互相打闹"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "health-knee-protect",
+ "version": "1.0.0",
+ "plugin": "health-knee-protect",
+ "description": "Health Knee Protect",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-knee-protect.md"
+ ],
+ "skills": [
+  "./skills/health-knee-protect-1",
+  "./skills/health-knee-protect-2",
+  "./skills/health-knee-protect-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health knee protect 1",
+  "health knee protect 2",
+  "health knee protect 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-knee-protect",
+ "displayName": {
+  "en": "Health Knee Protect",
+  "zh": "膝盖疼怎么护 改善方法"
+ },
+ "profession": {
+  "en": "Health Knee Protect",
+  "zh": "膝盖疼怎么护 改善方法 顾问"
+ },
+ "displayDescription": {
+  "en": "先分清",
+  "zh": "膝盖疼怎么护 改善方法：覆盖先分清等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health knee protect 1",
+   "zh": "health knee protect 1"
+  },
+  {
+   "en": "health knee protect 2",
+   "zh": "health knee protect 2"
+  },
+  {
+   "en": "health knee protect 3",
+   "zh": "health knee protect 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-knee-protect-1",
+   "zh": "health knee protect 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-knee-protect-1",
+   "zh": "health knee protect 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-knee-protect-1",
+  "zh": "health knee protect 1 第一步该怎么做"
+ }
+}

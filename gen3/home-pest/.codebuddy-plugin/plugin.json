@@ -1,0 +1,72 @@
+{
+ "name": "home-pest",
+ "version": "1.0.0",
+ "plugin": "home-pest",
+ "description": "Home Pest",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-pest.md"
+ ],
+ "skills": [
+  "./skills/home-pest-1",
+  "./skills/home-pest-2",
+  "./skills/home-pest-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home pest 1",
+  "home pest 2",
+  "home pest 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-pest",
+ "displayName": {
+  "en": "Home Pest",
+  "zh": "家里有虫怎么处理 清洁顺序"
+ },
+ "profession": {
+  "en": "Home Pest",
+  "zh": "家里有虫怎么处理 清洁顺序 顾问"
+ },
+ "displayDescription": {
+  "en": "先分清是什么",
+  "zh": "家里有虫怎么处理 清洁顺序：覆盖先分清是什么等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home pest 1",
+   "zh": "home pest 1"
+  },
+  {
+   "en": "home pest 2",
+   "zh": "home pest 2"
+  },
+  {
+   "en": "home pest 3",
+   "zh": "home pest 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-pest-1",
+   "zh": "home pest 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-pest-1",
+   "zh": "home pest 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-pest-1",
+  "zh": "home pest 1 第一步该怎么做"
+ }
+}

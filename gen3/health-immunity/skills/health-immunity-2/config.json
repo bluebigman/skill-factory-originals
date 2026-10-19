@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "靠保健品",
+   "then": "先睡够：睡眠不足直接压低免疫"
+  },
+  {
+   "when": "不运动",
+   "then": "规律中等强度：每周 150 分钟"
+  },
+  {
+   "when": "饮食单一",
+   "then": "蛋白+蔬果：蛋白与多种维生素"
+  },
+  {
+   "when": "长期压力",
+   "then": "减压：慢性压力抑制免疫"
+  }
+ ],
+ "keywords": [
+  "怎么提高",
+  "改善",
+  "靠保健品",
+  "不运动",
+  "饮食单一",
+  "长期压力"
+ ],
+ "boundary": "最有效的",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

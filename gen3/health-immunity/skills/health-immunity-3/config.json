@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "骤冷骤热",
+   "then": "渐进加衣：不要一次穿太多"
+  },
+  {
+   "when": "空气干燥",
+   "then": "加湿：40-60% 湿度"
+  },
+  {
+   "when": "人多密闭",
+   "then": "戴口罩：流感季最有效"
+  },
+  {
+   "when": "生病硬扛上班",
+   "then": "休息：带病上班既慢愈也传人"
+  }
+ ],
+ "keywords": [
+  "换季",
+  "天气变化",
+  "预防",
+  "骤冷骤热",
+  "空气干燥",
+  "人多密闭",
+  "生病硬扛上班"
+ ],
+ "boundary": "怎么过渡",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

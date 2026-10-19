@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-noisy-neighbor",
+ "name": "邻居太吵怎么办 成本控制 是偶发还是持续",
+ "description": "邻居太吵怎么办 成本控制：是偶发还是持续",
+ "kind": "expert",
+ "tags": [
+  "home-noisy-neighbor-1",
+  "home-noisy-neighbor-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-noisy-neighbor-core",
+   "name": "邻居太吵怎么办 成本控制",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-noisy-neighbor-1",
+     "name": "先分清性质",
+     "summary": "是偶发还是持续"
+    },
+    {
+     "id": "home-noisy-neighbor-2",
+     "name": "沟通方式",
+     "summary": "是偶发还是持续"
+    },
+    {
+     "id": "home-noisy-neighbor-3",
+     "name": "升级路径",
+     "summary": "是偶发还是持续"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

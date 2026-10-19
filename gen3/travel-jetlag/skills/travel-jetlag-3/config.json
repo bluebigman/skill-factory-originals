@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "立刻上班",
+   "then": "留 1 天缓冲：尤其跨 5 小时以上"
+  },
+  {
+   "when": "白天睡很久",
+   "then": "小睡 20 分钟：不超 30 分钟"
+  },
+  {
+   "when": "不看当地作息",
+   "then": "按本地时间吃饭睡觉"
+  }
+ ],
+ "keywords": [
+  "回来",
+  "恢复",
+  "睡不着",
+  "立刻上班",
+  "白天睡很久",
+  "不看当地作息"
+ ],
+ "boundary": "回来怎么调",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

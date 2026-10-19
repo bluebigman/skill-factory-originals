@@ -1,0 +1,72 @@
+{
+ "name": "home-kitchen-organize",
+ "version": "1.0.0",
+ "plugin": "home-kitchen-organize",
+ "description": "Home Kitchen Organize",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-kitchen-organize.md"
+ ],
+ "skills": [
+  "./skills/home-kitchen-organize-1",
+  "./skills/home-kitchen-organize-2",
+  "./skills/home-kitchen-organize-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home kitchen organize 1",
+  "home kitchen organize 2",
+  "home kitchen organize 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-kitchen-organize",
+ "displayName": {
+  "en": "Home Kitchen Organize",
+  "zh": "厨房怎么收纳 处理步骤"
+ },
+ "profession": {
+  "en": "Home Kitchen Organize",
+  "zh": "厨房怎么收纳 处理步骤 顾问"
+ },
+ "displayDescription": {
+  "en": "按操作流程分区",
+  "zh": "厨房怎么收纳 处理步骤：覆盖按操作流程分区等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home kitchen organize 1",
+   "zh": "home kitchen organize 1"
+  },
+  {
+   "en": "home kitchen organize 2",
+   "zh": "home kitchen organize 2"
+  },
+  {
+   "en": "home kitchen organize 3",
+   "zh": "home kitchen organize 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-kitchen-organize-1",
+   "zh": "home kitchen organize 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-kitchen-organize-1",
+   "zh": "home kitchen organize 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-kitchen-organize-1",
+  "zh": "home kitchen organize 1 第一步该怎么做"
+ }
+}

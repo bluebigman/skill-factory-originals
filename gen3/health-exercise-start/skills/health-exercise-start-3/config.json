@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "突然加量",
+   "then": "每周不超 10%：渐进原则"
+  },
+  {
+   "when": "不做热身",
+   "then": "热身 5 分钟：动态拉伸"
+  },
+  {
+   "when": "忽略恢复",
+   "then": "留恢复日：隔天练"
+  },
+  {
+   "when": "疼了还练",
+   "then": "疼就停：区分肌肉酸痛与关节疼痛"
+  }
+ ],
+ "keywords": [
+  "加量",
+  "进阶",
+  "受伤",
+  "突然加量",
+  "不做热身",
+  "忽略恢复",
+  "疼了还练"
+ ],
+ "boundary": "怎么加量",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

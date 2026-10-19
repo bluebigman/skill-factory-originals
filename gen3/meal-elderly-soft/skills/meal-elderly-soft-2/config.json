@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "给干饭加汤泡",
+   "then": "分开：汤泡饭更容易呛，干湿分开吃"
+  },
+  {
+   "when": "大口喂",
+   "then": "小勺慢喂：每口半勺，确认咽下再下一口"
+  },
+  {
+   "when": "边吃边说话",
+   "then": "吃饭时少说话：分心易呛"
+  },
+  {
+   "when": "饭后立刻躺",
+   "then": "饭后坐 30 分钟：防反流"
+  }
+ ],
+ "keywords": [
+  "吞咽",
+  "安全",
+  "给干饭加汤泡",
+  "大口喂",
+  "边吃边说话",
+  "饭后立刻躺"
+ ],
+ "boundary": "防呛是第一位",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

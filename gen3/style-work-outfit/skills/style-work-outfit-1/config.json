@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "全按休闲穿",
+   "then": "看公司：有客户/对外岗位需要更正式"
+  },
+  {
+   "when": "全按正装",
+   "then": "看日常：多数岗位 smart casual 即可"
+  },
+  {
+   "when": "有重要会议",
+   "then": "单独备一套：会议日穿更正式的一套"
+  },
+  {
+   "when": "不确定正式度",
+   "then": "参考上级：看直属领导穿什么，往上半档"
+  }
+ ],
+ "keywords": [
+  "上班",
+  "通勤",
+  "穿什么",
+  "全按休闲穿",
+  "全按正装",
+  "有重要会议",
+  "不确定正式度"
+ ],
+ "boundary": "先定正式度",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

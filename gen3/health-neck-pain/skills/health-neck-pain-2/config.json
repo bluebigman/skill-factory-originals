@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "用力转脖子",
+   "then": "缓慢：小幅度多次，不猛转"
+  },
+  {
+   "when": "只拉伸不 strengthening",
+   "then": "加练背：靠墙收下巴/俯身划船"
+  },
+  {
+   "when": "一次做很久",
+   "then": "多次短时：每小时 1 分钟"
+  },
+  {
+   "when": "疼的时候练",
+   "then": "疼时不练：急性期休息"
+  }
+ ],
+ "keywords": [
+  "怎么缓解",
+  "动作",
+  "拉伸",
+  "用力转脖子",
+  "只拉伸不 strengthening",
+  "一次做很久",
+  "疼的时候练"
+ ],
+ "boundary": "几个能立刻做的",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-plan-3day",
+ "name": "三天假去哪玩 行程规划 按时间与预算筛",
+ "description": "三天假去哪玩 行程规划：按时间与预算筛",
+ "kind": "expert",
+ "tags": [
+  "travel-plan-3day-1",
+  "travel-plan-3day-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-plan-3day-core",
+   "name": "三天假去哪玩 行程规划",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-plan-3day-1",
+     "name": "目的地筛选",
+     "summary": "按时间与预算筛"
+    },
+    {
+     "id": "travel-plan-3day-2",
+     "name": "行程编排",
+     "summary": "按时间与预算筛"
+    },
+    {
+     "id": "travel-plan-3day-3",
+     "name": "预算与预订",
+     "summary": "按时间与预算筛"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

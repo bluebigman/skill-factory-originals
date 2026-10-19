@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-kindergarten-entry",
+ "name": "入园适应陪跑 长期预防 分清是正常适应期还是需要干预",
+ "description": "入园适应陪跑 长期预防：分清是正常适应期还是需要干预",
+ "kind": "expert",
+ "tags": [
+  "child-kindergarten-entry-1",
+  "child-kindergarten-entry-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-kindergarten-entry-core",
+   "name": "入园适应陪跑 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-kindergarten-entry-1",
+     "name": "适应阶段判断",
+     "summary": "分清是正常适应期还是需要干预"
+    },
+    {
+     "id": "child-kindergarten-entry-2",
+     "name": "入园准备",
+     "summary": "分清是正常适应期还是需要干预"
+    },
+    {
+     "id": "child-kindergarten-entry-3",
+     "name": "家园配合",
+     "summary": "分清是正常适应期还是需要干预"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

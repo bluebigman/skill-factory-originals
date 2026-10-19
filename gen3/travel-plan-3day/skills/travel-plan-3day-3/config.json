@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "临时订",
+   "then": "提前订：车票与住宿是较大变量"
+  },
+  {
+   "when": "住景区内",
+   "then": "住交通枢纽：出行更灵活"
+  },
+  {
+   "when": "不买保险",
+   "then": "买意外险：几十块覆盖大风险"
+  },
+  {
+   "when": "带太多现金",
+   "then": "移动支付+少量现金"
+  }
+ ],
+ "keywords": [
+  "预算",
+  "预订",
+  "省钱",
+  "临时订",
+  "住景区内",
+  "不买保险",
+  "带太多现金"
+ ],
+ "boundary": "怎么省钱省心",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

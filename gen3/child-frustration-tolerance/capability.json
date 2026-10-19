@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-frustration-tolerance",
+ "name": "输不起怎么办 分步处置 分清是年龄特点、完美主义还是被过度保护",
+ "description": "输不起怎么办 分步处置：分清是年龄特点、完美主义还是被过度保护",
+ "kind": "expert",
+ "tags": [
+  "child-frustration-tolerance-1",
+  "child-frustration-tolerance-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-frustration-tolerance-core",
+   "name": "输不起怎么办 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-frustration-tolerance-1",
+     "name": "抗挫现状判断",
+     "summary": "分清是年龄特点、完美主义还是被过度保护"
+    },
+    {
+     "id": "child-frustration-tolerance-2",
+     "name": "当场处理",
+     "summary": "分清是年龄特点、完美主义还是被过度保护"
+    },
+    {
+     "id": "child-frustration-tolerance-3",
+     "name": "长期培养",
+     "summary": "分清是年龄特点、完美主义还是被过度保护"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

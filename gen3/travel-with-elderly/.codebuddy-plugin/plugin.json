@@ -1,0 +1,72 @@
+{
+ "name": "travel-with-elderly",
+ "version": "1.0.0",
+ "plugin": "travel-with-elderly",
+ "description": "Travel With Elderly",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-with-elderly.md"
+ ],
+ "skills": [
+  "./skills/travel-with-elderly-1",
+  "./skills/travel-with-elderly-2",
+  "./skills/travel-with-elderly-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel with elderly 1",
+  "travel with elderly 2",
+  "travel with elderly 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-with-elderly",
+ "displayName": {
+  "en": "Travel With Elderly",
+  "zh": "带老人出门注意什么 准备清单"
+ },
+ "profession": {
+  "en": "Travel With Elderly",
+  "zh": "带老人出门注意什么 准备清单 顾问"
+ },
+ "displayDescription": {
+  "en": "按老人身体排",
+  "zh": "带老人出门注意什么 准备清单：覆盖按老人身体排等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel with elderly 1",
+   "zh": "travel with elderly 1"
+  },
+  {
+   "en": "travel with elderly 2",
+   "zh": "travel with elderly 2"
+  },
+  {
+   "en": "travel with elderly 3",
+   "zh": "travel with elderly 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-with-elderly-1",
+   "zh": "travel with elderly 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-with-elderly-1",
+   "zh": "travel with elderly 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-with-elderly-1",
+  "zh": "travel with elderly 1 第一步该怎么做"
+ }
+}

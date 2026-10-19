@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "直接按摩",
+   "then": "先看姿势：屏幕高度与坐姿是主因"
+  },
+  {
+   "when": "只做拉伸",
+   "then": "调整工位：不改变诱因会反复"
+  },
+  {
+   "when": "疼就贴膏药",
+   "then": "看性质：持续疼痛或伴手麻需就医"
+  },
+  {
+   "when": "忍着",
+   "then": "不硬撑：长期会加重"
+  }
+ ],
+ "keywords": [
+  "脖子疼",
+  "肩膀",
+  "僵硬",
+  "直接按摩",
+  "只做拉伸",
+  "疼就贴膏药",
+  "忍着"
+ ],
+ "boundary": "先看是姿势还是其他",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

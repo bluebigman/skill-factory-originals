@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-hobby-choice",
+ "name": "兴趣班怎么选 当场应对 先分清是孩子想学、家长焦虑还是真有天赋",
+ "description": "兴趣班怎么选 当场应对：先分清是孩子想学、家长焦虑还是真有天赋",
+ "kind": "expert",
+ "tags": [
+  "child-hobby-choice-1",
+  "child-hobby-choice-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-hobby-choice-core",
+   "name": "兴趣班怎么选 当场应对",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-hobby-choice-1",
+     "name": "需求澄清",
+     "summary": "先分清是孩子想学、家长焦虑还是真有天赋"
+    },
+    {
+     "id": "child-hobby-choice-2",
+     "name": "筛选标准",
+     "summary": "先分清是孩子想学、家长焦虑还是真有天赋"
+    },
+    {
+     "id": "child-hobby-choice-3",
+     "name": "坚持与放弃",
+     "summary": "先分清是孩子想学、家长焦虑还是真有天赋"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

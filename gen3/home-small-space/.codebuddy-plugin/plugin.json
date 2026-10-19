@@ -1,0 +1,72 @@
+{
+ "name": "home-small-space",
+ "version": "1.0.0",
+ "plugin": "home-small-space",
+ "description": "Home Small Space",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-small-space.md"
+ ],
+ "skills": [
+  "./skills/home-small-space-1",
+  "./skills/home-small-space-2",
+  "./skills/home-small-space-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home small space 1",
+  "home small space 2",
+  "home small space 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-small-space",
+ "displayName": {
+  "en": "Home Small Space",
+  "zh": "小户型怎么收纳 处理步骤"
+ },
+ "profession": {
+  "en": "Home Small Space",
+  "zh": "小户型怎么收纳 处理步骤 顾问"
+ },
+ "displayDescription": {
+  "en": "先算清楚有多少可用的面",
+  "zh": "小户型怎么收纳 处理步骤：覆盖先算清楚有多少可用的面等情境，给出可执行处置与自查清单，并明确能力边界"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home small space 1",
+   "zh": "home small space 1"
+  },
+  {
+   "en": "home small space 2",
+   "zh": "home small space 2"
+  },
+  {
+   "en": "home small space 3",
+   "zh": "home small space 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-small-space-1",
+   "zh": "home small space 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-small-space-1",
+   "zh": "home small space 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-small-space-1",
+  "zh": "home small space 1 第一步该怎么做"
+ }
+}

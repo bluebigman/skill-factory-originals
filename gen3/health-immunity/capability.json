@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-immunity",
+ "name": "老感冒怎么提高抵抗力 风险识别 先找原因",
+ "description": "老感冒怎么提高抵抗力 风险识别：先找原因",
+ "kind": "expert",
+ "tags": [
+  "health-immunity-1",
+  "health-immunity-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-immunity-core",
+   "name": "老感冒怎么提高抵抗力 风险识别",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-immunity-1",
+     "name": "易感原因",
+     "summary": "先找原因"
+    },
+    {
+     "id": "health-immunity-2",
+     "name": "基础改善",
+     "summary": "先找原因"
+    },
+    {
+     "id": "health-immunity-3",
+     "name": "换季应对",
+     "summary": "先找原因"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

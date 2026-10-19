@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-shopping-trap",
+ "name": "买衣服怎么不踩坑 场合选择 买前必须看什么",
+ "description": "买衣服怎么不踩坑 场合选择：买前必须看什么",
+ "kind": "expert",
+ "tags": [
+  "style-shopping-trap-1",
+  "style-shopping-trap-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-shopping-trap-core",
+   "name": "买衣服怎么不踩坑 场合选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-shopping-trap-1",
+     "name": "试穿要点",
+     "summary": "买前必须看什么"
+    },
+    {
+     "id": "style-shopping-trap-2",
+     "name": "网购判断",
+     "summary": "买前必须看什么"
+    },
+    {
+     "id": "style-shopping-trap-3",
+     "name": "决策纪律",
+     "summary": "买前必须看什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

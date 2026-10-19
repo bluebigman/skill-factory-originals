@@ -1,0 +1,72 @@
+{
+ "name": "health-heat-stroke",
+ "version": "1.0.0",
+ "plugin": "health-heat-stroke",
+ "description": "Health Heat Stroke",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-heat-stroke.md"
+ ],
+ "skills": [
+  "./skills/health-heat-stroke-1",
+  "./skills/health-heat-stroke-2",
+  "./skills/health-heat-stroke-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health heat stroke 1",
+  "health heat stroke 2",
+  "health heat stroke 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-heat-stroke",
+ "displayName": {
+  "en": "Health Heat Stroke",
+  "zh": "中暑怎么防怎么处理 日常维护"
+ },
+ "profession": {
+  "en": "Health Heat Stroke",
+  "zh": "中暑怎么防怎么处理 日常维护 顾问"
+ },
+ "displayDescription": {
+  "en": "哪些情况危险",
+  "zh": "中暑怎么防怎么处理 日常维护：覆盖哪些情况危险等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health heat stroke 1",
+   "zh": "health heat stroke 1"
+  },
+  {
+   "en": "health heat stroke 2",
+   "zh": "health heat stroke 2"
+  },
+  {
+   "en": "health heat stroke 3",
+   "zh": "health heat stroke 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-heat-stroke-1",
+   "zh": "health heat stroke 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-heat-stroke-1",
+   "zh": "health heat stroke 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-heat-stroke-1",
+  "zh": "health heat stroke 1 第一步该怎么做"
+ }
+}

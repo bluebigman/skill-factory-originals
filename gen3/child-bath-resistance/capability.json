@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-bath-resistance",
+ "name": "刷牙洗澡抗拒 日常维护 分清是感官不适、恐惧还是权力斗争",
+ "description": "刷牙洗澡抗拒 日常维护：分清是感官不适、恐惧还是权力斗争",
+ "kind": "expert",
+ "tags": [
+  "child-bath-resistance-1",
+  "child-bath-resistance-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-bath-resistance-core",
+   "name": "刷牙洗澡抗拒 日常维护",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-bath-resistance-1",
+     "name": "抗拒原因识别",
+     "summary": "分清是感官不适、恐惧还是权力斗争"
+    },
+    {
+     "id": "child-bath-resistance-2",
+     "name": "降低抗拒的方法",
+     "summary": "分清是感官不适、恐惧还是权力斗争"
+    },
+    {
+     "id": "child-bath-resistance-3",
+     "name": "习惯建立",
+     "summary": "分清是感官不适、恐惧还是权力斗争"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

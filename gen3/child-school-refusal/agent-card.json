@@ -1,0 +1,63 @@
+{
+ "name": "Child School Refusal",
+ "description": "分清是身体、人际、学业压力还是家庭因素",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-school-refusal",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-school-refusal",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-school-refusal-1",
+   "name": "拒学原因排查",
+   "description": "拒学原因排查：分清是身体、人际、学业压力还是家庭因素",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-school-refusal-2",
+   "name": "返校步骤",
+   "description": "返校步骤：分清是身体、人际、学业压力还是家庭因素",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-school-refusal-3",
+   "name": "与学校协同",
+   "description": "与学校协同：分清是身体、人际、学业压力还是家庭因素",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

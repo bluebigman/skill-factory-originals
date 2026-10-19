@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-seasonal",
+ "name": "当季吃什么 食材选择 按季节选食材",
+ "description": "当季吃什么 食材选择：按季节选食材",
+ "kind": "expert",
+ "tags": [
+  "meal-seasonal-1",
+  "meal-seasonal-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-seasonal-core",
+   "name": "当季吃什么 食材选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-seasonal-1",
+     "name": "时令判断",
+     "summary": "按季节选食材"
+    },
+    {
+     "id": "meal-seasonal-2",
+     "name": "挑选方法",
+     "summary": "按季节选食材"
+    },
+    {
+     "id": "meal-seasonal-3",
+     "name": "储存与搭配",
+     "summary": "按季节选食材"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-tidying",
+ "version": "1.0.0",
+ "plugin": "child-tidying",
+ "description": "Child Tidying",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-tidying.md"
+ ],
+ "skills": [
+  "./skills/child-tidying-1",
+  "./skills/child-tidying-2",
+  "./skills/child-tidying-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child tidying 1",
+  "child tidying 2",
+  "child tidying 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-tidying",
+ "displayName": {
+  "en": "Child Tidying",
+  "zh": "房间乱怎么管 收纳方案"
+ },
+ "profession": {
+  "en": "Child Tidying",
+  "zh": "房间乱怎么管 收纳方案 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是不会收、没地方放还是不在乎",
+  "zh": "房间乱怎么管 收纳方案：覆盖分清是不会收、没地方放还是不在乎等情境，给出可执行处置与自查清单，并明确"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "child tidying 1",
+   "zh": "child tidying 1"
+  },
+  {
+   "en": "child tidying 2",
+   "zh": "child tidying 2"
+  },
+  {
+   "en": "child tidying 3",
+   "zh": "child tidying 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-tidying-1",
+   "zh": "child tidying 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-tidying-1",
+   "zh": "child tidying 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-tidying-1",
+  "zh": "child tidying 1 第一步该怎么做"
+ }
+}

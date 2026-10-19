@@ -1,0 +1,63 @@
+{
+ "name": "Child Reading Habit",
+ "description": "分清是识字量、兴趣、环境还是被逼出来的反感",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-reading-habit",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-reading-habit",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-reading-habit-1",
+   "name": "阅读门槛诊断",
+   "description": "阅读门槛诊断：分清是识字量、兴趣、环境还是被逼出来的反感",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-reading-habit-2",
+   "name": "共读方法",
+   "description": "共读方法：分清是识字量、兴趣、环境还是被逼出来的反感",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-reading-habit-3",
+   "name": "习惯固化",
+   "description": "习惯固化：分清是识字量、兴趣、环境还是被逼出来的反感",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

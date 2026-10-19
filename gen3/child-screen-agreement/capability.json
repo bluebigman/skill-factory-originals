@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-screen-agreement",
+ "name": "屏幕时间约定执行 长期预防 分清是规则不清、执行不一致还是技术漏洞",
+ "description": "屏幕时间约定执行 长期预防：分清是规则不清、执行不一致还是技术漏洞",
+ "kind": "expert",
+ "tags": [
+  "child-screen-agreement-1",
+  "child-screen-agreement-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-screen-agreement-core",
+   "name": "屏幕时间约定执行 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-screen-agreement-1",
+     "name": "约定失效原因",
+     "summary": "分清是规则不清、执行不一致还是技术漏洞"
+    },
+    {
+     "id": "child-screen-agreement-2",
+     "name": "执行方法",
+     "summary": "分清是规则不清、执行不一致还是技术漏洞"
+    },
+    {
+     "id": "child-screen-agreement-3",
+     "name": "规则设计",
+     "summary": "分清是规则不清、执行不一致还是技术漏洞"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

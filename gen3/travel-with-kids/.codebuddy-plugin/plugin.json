@@ -1,0 +1,72 @@
+{
+ "name": "travel-with-kids",
+ "version": "1.0.0",
+ "plugin": "travel-with-kids",
+ "description": "Travel With Kids",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-with-kids.md"
+ ],
+ "skills": [
+  "./skills/travel-with-kids-1",
+  "./skills/travel-with-kids-2",
+  "./skills/travel-with-kids-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel with kids 1",
+  "travel with kids 2",
+  "travel with kids 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-with-kids",
+ "displayName": {
+  "en": "Travel With Kids",
+  "zh": "带孩子出门怎么玩 预算控制"
+ },
+ "profession": {
+  "en": "Travel With Kids",
+  "zh": "带孩子出门怎么玩 预算控制 顾问"
+ },
+ "displayDescription": {
+  "en": "按孩子节奏排",
+  "zh": "带孩子出门怎么玩 预算控制：覆盖按孩子节奏排等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "travel with kids 1",
+   "zh": "travel with kids 1"
+  },
+  {
+   "en": "travel with kids 2",
+   "zh": "travel with kids 2"
+  },
+  {
+   "en": "travel with kids 3",
+   "zh": "travel with kids 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-with-kids-1",
+   "zh": "travel with kids 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-with-kids-1",
+   "zh": "travel with kids 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-with-kids-1",
+  "zh": "travel with kids 1 第一步该怎么做"
+ }
+}

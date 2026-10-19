@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "表面一层油",
+   "then": "撇油或冷藏后去凝油"
+  },
+  {
+   "when": "只靠味精",
+   "then": "用食材提鲜：干贝/香菇/玉米/胡萝卜"
+  },
+  {
+   "when": "汤太咸",
+   "then": "加水会淡：改加无盐食材（如冬瓜/豆腐）稀释"
+  }
+ ],
+ "keywords": [
+  "去油",
+  "不腻",
+  "调味",
+  "表面一层油",
+  "只靠味精",
+  "汤太咸"
+ ],
+ "boundary": "怎么让汤不腻",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

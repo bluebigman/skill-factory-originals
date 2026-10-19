@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-photo",
+ "name": "旅游怎么拍好看 准备清单 什么时候拍",
+ "description": "旅游怎么拍好看 准备清单：什么时候拍",
+ "kind": "expert",
+ "tags": [
+  "travel-photo-1",
+  "travel-photo-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-photo-core",
+   "name": "旅游怎么拍好看 准备清单",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-photo-1",
+     "name": "光线与时间",
+     "summary": "什么时候拍"
+    },
+    {
+     "id": "travel-photo-2",
+     "name": "构图",
+     "summary": "什么时候拍"
+    },
+    {
+     "id": "travel-photo-3",
+     "name": "人物与场景",
+     "summary": "什么时候拍"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "住高层无电梯",
+   "then": "必须有电梯：老楼要确认"
+  },
+  {
+   "when": "行程太赶",
+   "then": "留缓冲：交通衔接留 30 分钟"
+  },
+  {
+   "when": "地面滑",
+   "then": "防滑鞋：浴室尤其注意"
+  },
+  {
+   "when": "不告知同行",
+   "then": "告知：同行人知道老人情况"
+  }
+ ],
+ "keywords": [
+  "舒适",
+  "安全",
+  "细节",
+  "住高层无电梯",
+  "行程太赶",
+  "地面滑",
+  "不告知同行"
+ ],
+ "boundary": "细节",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

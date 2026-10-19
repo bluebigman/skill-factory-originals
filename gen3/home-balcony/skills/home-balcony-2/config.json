@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "晾衣杆横在中间",
+   "then": "靠边或升降：不挡视线"
+  },
+  {
+   "when": "杂物堆地上",
+   "then": "上墙：置物架+挂件"
+  },
+  {
+   "when": "洗衣机放阳台",
+   "then": "注意排水与防晒：加罩"
+  },
+  {
+   "when": "拖把水桶乱放",
+   "then": "集中一区：拖把架+接水盘"
+  }
+ ],
+ "keywords": [
+  "晾晒",
+  "收纳",
+  "怎么放",
+  "晾衣杆横在中间",
+  "杂物堆地上",
+  "洗衣机放阳台",
+  "拖把水桶乱放"
+ ],
+ "boundary": "怎么兼顾",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

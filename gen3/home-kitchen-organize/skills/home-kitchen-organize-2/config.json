@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "调料装原瓶",
+   "then": "统一分装：同款瓶更整齐且省空间"
+  },
+  {
+   "when": "常用工具收柜里",
+   "then": "挂墙：铲勺挂杆比抽屉方便"
+  },
+  {
+   "when": "砧板平放",
+   "then": "立放：通风不易发霉"
+  },
+  {
+   "when": "保鲜膜乱塞",
+   "then": "固定位：抽屉分隔盒"
+  }
+ ],
+ "keywords": [
+  "调料",
+  "常用",
+  "怎么放",
+  "调料装原瓶",
+  "常用工具收柜里",
+  "砧板平放",
+  "保鲜膜乱塞"
+ ],
+ "boundary": "常用的怎么放",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-exercise-start",
+ "name": "想开始运动怎么起步 日常维护 先看能不能练",
+ "description": "想开始运动怎么起步 日常维护：先看能不能练",
+ "kind": "expert",
+ "tags": [
+  "health-exercise-start-1",
+  "health-exercise-start-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-exercise-start-core",
+   "name": "想开始运动怎么起步 日常维护",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-exercise-start-1",
+     "name": "起点评估",
+     "summary": "先看能不能练"
+    },
+    {
+     "id": "health-exercise-start-2",
+     "name": "可持续计划",
+     "summary": "先看能不能练"
+    },
+    {
+     "id": "health-exercise-start-3",
+     "name": "进阶与避免受伤",
+     "summary": "先看能不能练"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

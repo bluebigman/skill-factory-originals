@@ -1,0 +1,27 @@
+{
+ "rules": [
+  {
+   "when": "一天一套",
+   "then": "复用：外套/裤子可连穿，内搭带够"
+  },
+  {
+   "when": "不带洗涤用品",
+   "then": "带小瓶：洗衣液分装或洗衣片"
+  },
+  {
+   "when": "酒店洗衣贵",
+   "then": "手洗快干：选速干材质"
+  }
+ ],
+ "keywords": [
+  "复用",
+  "几天",
+  "一天一套",
+  "不带洗涤用品",
+  "酒店洗衣贵"
+ ],
+ "boundary": "三天以上怎么处理",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

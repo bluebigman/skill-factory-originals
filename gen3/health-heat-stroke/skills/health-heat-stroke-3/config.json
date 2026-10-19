@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "只在口渴才喝",
+   "then": "定时喝：不等口渴"
+  },
+  {
+   "when": "正午外出",
+   "then": "避开 11-15 点"
+  },
+  {
+   "when": "穿深色紧身",
+   "then": "浅色宽松：利于散热"
+  },
+  {
+   "when": "车里留人",
+   "then": "决不：车内温度升得极快"
+  }
+ ],
+ "keywords": [
+  "预防",
+  "怎么防",
+  "避免",
+  "只在口渴才喝",
+  "正午外出",
+  "穿深色紧身",
+  "车里留人"
+ ],
+ "boundary": "怎么防",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

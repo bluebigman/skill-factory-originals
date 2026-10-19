@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-chronic-med",
+ "name": "长期吃药怎么管理 改善方法 先理清在吃什么",
+ "description": "长期吃药怎么管理 改善方法：先理清在吃什么",
+ "kind": "expert",
+ "tags": [
+  "health-chronic-med-1",
+  "health-chronic-med-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-chronic-med-core",
+   "name": "长期吃药怎么管理 改善方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-chronic-med-1",
+     "name": "用药清单",
+     "summary": "先理清在吃什么"
+    },
+    {
+     "id": "health-chronic-med-2",
+     "name": "服药纪律",
+     "summary": "先理清在吃什么"
+    },
+    {
+     "id": "health-chronic-med-3",
+     "name": "安全与复查",
+     "summary": "先理清在吃什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "毛衣挂晾",
+   "then": "平铺晾：挂着会拉长"
+  },
+  {
+   "when": "白衣晒很久",
+   "then": "避强光：长时间暴晒会发黄"
+  },
+  {
+   "when": "深色反面晒",
+   "then": "翻面：减少褪色"
+  },
+  {
+   "when": "不叠直接塞",
+   "then": "折叠或挂：塞会起皱变形"
+  }
+ ],
+ "keywords": [
+  "晾晒",
+  "保养",
+  "发黄",
+  "毛衣挂晾",
+  "白衣晒很久",
+  "深色反面晒",
+  "不叠直接塞"
+ ],
+ "boundary": "怎么晾不变形",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-hobby-choice",
+ "version": "1.0.0",
+ "plugin": "child-hobby-choice",
+ "description": "Child Hobby Choice",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-hobby-choice.md"
+ ],
+ "skills": [
+  "./skills/child-hobby-choice-1",
+  "./skills/child-hobby-choice-2",
+  "./skills/child-hobby-choice-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child hobby choice 1",
+  "child hobby choice 2",
+  "child hobby choice 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-hobby-choice",
+ "displayName": {
+  "en": "Child Hobby Choice",
+  "zh": "兴趣班怎么选 当场应对"
+ },
+ "profession": {
+  "en": "Child Hobby Choice",
+  "zh": "兴趣班怎么选 当场应对 顾问"
+ },
+ "displayDescription": {
+  "en": "先分清是孩子想学、家长焦虑还是真有天赋",
+  "zh": "兴趣班怎么选 当场应对：覆盖先分清是孩子想学、家长焦虑还是真有天赋等情境，给出可执行处置与自查清单，"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child hobby choice 1",
+   "zh": "child hobby choice 1"
+  },
+  {
+   "en": "child hobby choice 2",
+   "zh": "child hobby choice 2"
+  },
+  {
+   "en": "child hobby choice 3",
+   "zh": "child hobby choice 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-hobby-choice-1",
+   "zh": "child hobby choice 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-hobby-choice-1",
+   "zh": "child hobby choice 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-hobby-choice-1",
+  "zh": "child hobby choice 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "早上买鞋",
+   "then": "下午买：脚到下午会胀"
+  },
+  {
+   "when": "只看码数",
+   "then": "试走：走 10 分钟再决定"
+  },
+  {
+   "when": "前掌挤",
+   "then": "留余量：前掌要有一指空间"
+  },
+  {
+   "when": "新鞋磨脚",
+   "then": "磨合或换：磨脚说明版型不合，不要硬忍"
+  }
+ ],
+ "keywords": [
+  "合脚",
+  "尺码",
+  "买鞋",
+  "早上买鞋",
+  "只看码数",
+  "前掌挤",
+  "新鞋磨脚"
+ ],
+ "boundary": "什么时候买才准",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

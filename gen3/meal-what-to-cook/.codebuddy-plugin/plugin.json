@@ -1,0 +1,72 @@
+{
+ "name": "meal-what-to-cook",
+ "version": "1.0.0",
+ "plugin": "meal-what-to-cook",
+ "description": "Meal What To Cook",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-what-to-cook.md"
+ ],
+ "skills": [
+  "./skills/meal-what-to-cook-1",
+  "./skills/meal-what-to-cook-2",
+  "./skills/meal-what-to-cook-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal what to cook 1",
+  "meal what to cook 2",
+  "meal what to cook 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-what-to-cook",
+ "displayName": {
+  "en": "Meal What To Cook",
+  "zh": "今天做什么菜 快手做法"
+ },
+ "profession": {
+  "en": "Meal What To Cook",
+  "zh": "今天做什么菜 快手做法 顾问"
+ },
+ "displayDescription": {
+  "en": "按冰箱里已有的东西反推能做什么",
+  "zh": "今天做什么菜 快手做法：覆盖按冰箱里已有的东西反推能做什么等情境，给出可执行处置与自查清单，并明确能"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal what to cook 1",
+   "zh": "meal what to cook 1"
+  },
+  {
+   "en": "meal what to cook 2",
+   "zh": "meal what to cook 2"
+  },
+  {
+   "en": "meal what to cook 3",
+   "zh": "meal what to cook 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-what-to-cook-1",
+   "zh": "meal what to cook 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-what-to-cook-1",
+   "zh": "meal what to cook 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-what-to-cook-1",
+  "zh": "meal what to cook 1 第一步该怎么做"
+ }
+}

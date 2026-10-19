@@ -1,0 +1,72 @@
+{
+ "name": "home-bathroom",
+ "version": "1.0.0",
+ "plugin": "home-bathroom",
+ "description": "Home Bathroom",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-bathroom.md"
+ ],
+ "skills": [
+  "./skills/home-bathroom-1",
+  "./skills/home-bathroom-2",
+  "./skills/home-bathroom-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home bathroom 1",
+  "home bathroom 2",
+  "home bathroom 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-bathroom",
+ "displayName": {
+  "en": "Home Bathroom",
+  "zh": "卫生间怎么保持干爽 清洁顺序"
+ },
+ "profession": {
+  "en": "Home Bathroom",
+  "zh": "卫生间怎么保持干爽 清洁顺序 顾问"
+ },
+ "displayDescription": {
+  "en": "先找源头",
+  "zh": "卫生间怎么保持干爽 清洁顺序：覆盖先找源头等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home bathroom 1",
+   "zh": "home bathroom 1"
+  },
+  {
+   "en": "home bathroom 2",
+   "zh": "home bathroom 2"
+  },
+  {
+   "en": "home bathroom 3",
+   "zh": "home bathroom 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-bathroom-1",
+   "zh": "home bathroom 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-bathroom-1",
+   "zh": "home bathroom 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-bathroom-1",
+  "zh": "home bathroom 1 第一步该怎么做"
+ }
+}

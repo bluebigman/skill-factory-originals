@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "一双穿到底",
+   "then": "轮换：两双轮换寿命更长"
+  },
+  {
+   "when": "鞋底磨平还穿",
+   "then": "及时换：磨平后缓冲失效，伤膝踝"
+  },
+  {
+   "when": "不清洁",
+   "then": "定期清洁：尤其白鞋，脏了显旧"
+  },
+  {
+   "when": "雨天泡水",
+   "then": "阴干：暴晒会变形开裂"
+  }
+ ],
+ "keywords": [
+  "保养",
+  "替换",
+  "穿得久",
+  "一双穿到底",
+  "鞋底磨平还穿",
+  "不清洁",
+  "雨天泡水"
+ ],
+ "boundary": "怎么穿得久",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

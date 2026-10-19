@@ -1,0 +1,63 @@
+{
+ "name": "Child Bedtime",
+ "description": "分清是精力过剩、刺激过度还是作息紊乱",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-bedtime",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-bedtime",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-bedtime-1",
+   "name": "入睡困难归因",
+   "description": "入睡困难归因：分清是精力过剩、刺激过度还是作息紊乱",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-bedtime-2",
+   "name": "睡前仪式",
+   "description": "睡前仪式：分清是精力过剩、刺激过度还是作息紊乱",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-bedtime-3",
+   "name": "环境调整",
+   "description": "环境调整：分清是精力过剩、刺激过度还是作息紊乱",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

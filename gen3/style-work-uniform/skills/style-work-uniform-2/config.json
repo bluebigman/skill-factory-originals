@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "内搭太花",
+   "then": "选素色：工装本身已有信息量"
+  },
+  {
+   "when": "鞋随便穿",
+   "then": "鞋定风格：运动鞋/乐福鞋差别很大"
+  },
+  {
+   "when": "背包不搭",
+   "then": "统一色彩：包与鞋同色系"
+  },
+  {
+   "when": "发型不管",
+   "then": "发型影响较大：整洁比造型重要"
+  }
+ ],
+ "keywords": [
+  "内搭",
+  "配件",
+  "怎么配",
+  "内搭太花",
+  "鞋随便穿",
+  "背包不搭",
+  "发型不管"
+ ],
+ "boundary": "能自由的部分",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

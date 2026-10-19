@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-work-outfit",
+ "name": "上班穿什么 搭配方案 先定正式度",
+ "description": "上班穿什么 搭配方案：先定正式度",
+ "kind": "expert",
+ "tags": [
+  "style-work-outfit-1",
+  "style-work-outfit-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-work-outfit-core",
+   "name": "上班穿什么 搭配方案",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-work-outfit-1",
+     "name": "场合定调",
+     "summary": "先定正式度"
+    },
+    {
+     "id": "style-work-outfit-2",
+     "name": "组合公式",
+     "summary": "先定正式度"
+    },
+    {
+     "id": "style-work-outfit-3",
+     "name": "舒适与实用",
+     "summary": "先定正式度"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

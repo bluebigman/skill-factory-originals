@@ -1,0 +1,72 @@
+{
+ "name": "health-weight-gain",
+ "version": "1.0.0",
+ "plugin": "health-weight-gain",
+ "description": "Health Weight Gain",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-weight-gain.md"
+ ],
+ "skills": [
+  "./skills/health-weight-gain-1",
+  "./skills/health-weight-gain-2",
+  "./skills/health-weight-gain-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health weight gain 1",
+  "health weight gain 2",
+  "health weight gain 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-weight-gain",
+ "displayName": {
+  "en": "Health Weight Gain",
+  "zh": "太瘦怎么吃胖 风险识别"
+ },
+ "profession": {
+  "en": "Health Weight Gain",
+  "zh": "太瘦怎么吃胖 风险识别 顾问"
+ },
+ "displayDescription": {
+  "en": "先看清为什么瘦",
+  "zh": "太瘦怎么吃胖 风险识别：覆盖先看清为什么瘦等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "08-FinanceInvestment",
+ "tags": [
+  {
+   "en": "health weight gain 1",
+   "zh": "health weight gain 1"
+  },
+  {
+   "en": "health weight gain 2",
+   "zh": "health weight gain 2"
+  },
+  {
+   "en": "health weight gain 3",
+   "zh": "health weight gain 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-weight-gain-1",
+   "zh": "health weight gain 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-weight-gain-1",
+   "zh": "health weight gain 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-weight-gain-1",
+  "zh": "health weight gain 1 第一步该怎么做"
+ }
+}

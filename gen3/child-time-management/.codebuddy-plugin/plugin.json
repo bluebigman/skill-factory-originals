@@ -1,0 +1,72 @@
+{
+ "name": "child-time-management",
+ "version": "1.0.0",
+ "plugin": "child-time-management",
+ "description": "Child Time Management",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-time-management.md"
+ ],
+ "skills": [
+  "./skills/child-time-management-1",
+  "./skills/child-time-management-2",
+  "./skills/child-time-management-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child time management 1",
+  "child time management 2",
+  "child time management 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-time-management",
+ "displayName": {
+  "en": "Child Time Management",
+  "zh": "时间管理带教 长期预防"
+ },
+ "profession": {
+  "en": "Child Time Management",
+  "zh": "时间管理带教 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "先看孩子有没有时间概念",
+  "zh": "时间管理带教 长期预防：覆盖先看孩子有没有时间概念等情境，给出可执行处置与自查清单，并明确能力边界与"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child time management 1",
+   "zh": "child time management 1"
+  },
+  {
+   "en": "child time management 2",
+   "zh": "child time management 2"
+  },
+  {
+   "en": "child time management 3",
+   "zh": "child time management 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-time-management-1",
+   "zh": "child time management 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-time-management-1",
+   "zh": "child time management 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-time-management-1",
+  "zh": "child time management 1 第一步该怎么做"
+ }
+}

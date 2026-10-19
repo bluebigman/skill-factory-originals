@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-grandparent-conflict",
+ "name": "隔代教养分歧 长期预防 分清是原则冲突、习惯差异还是情绪对抗",
+ "description": "隔代教养分歧 长期预防：分清是原则冲突、习惯差异还是情绪对抗",
+ "kind": "expert",
+ "tags": [
+  "child-grandparent-conflict-1",
+  "child-grandparent-conflict-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-grandparent-conflict-core",
+   "name": "隔代教养分歧 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-grandparent-conflict-1",
+     "name": "分歧性质分辨",
+     "summary": "分清是原则冲突、习惯差异还是情绪对抗"
+    },
+    {
+     "id": "child-grandparent-conflict-2",
+     "name": "沟通策略",
+     "summary": "分清是原则冲突、习惯差异还是情绪对抗"
+    },
+    {
+     "id": "child-grandparent-conflict-3",
+     "name": "边界设定",
+     "summary": "分清是原则冲突、习惯差异还是情绪对抗"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

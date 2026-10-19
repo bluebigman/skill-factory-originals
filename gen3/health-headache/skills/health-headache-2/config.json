@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "硬扛",
+   "then": "环境调整：暗、静、冷敷或热敷（看类型）"
+  },
+  {
+   "when": "一直看屏幕",
+   "then": "离开屏幕：20 分钟"
+  },
+  {
+   "when": "不喝水",
+   "then": "补水：脱水是常见诱因"
+  },
+  {
+   "when": "不吃东西",
+   "then": "规律进食：低血糖会诱发"
+  }
+ ],
+ "keywords": [
+  "怎么缓解",
+  "缓解",
+  "办法",
+  "硬扛",
+  "一直看屏幕",
+  "不喝水",
+  "不吃东西"
+ ],
+ "boundary": "能自己做的",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

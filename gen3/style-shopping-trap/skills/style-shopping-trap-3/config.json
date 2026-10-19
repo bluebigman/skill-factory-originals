@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "冲动下单",
+   "then": "冷静 3 天：还想买再买"
+  },
+  {
+   "when": "因为打折买",
+   "then": "问需求：不需要的再便宜也是浪费"
+  },
+  {
+   "when": "买重复的",
+   "then": "先清点：同类已有就不买"
+  },
+  {
+   "when": "不合身也留",
+   "then": "退了：将就穿的最终都不会穿"
+  }
+ ],
+ "keywords": [
+  "不后悔",
+  "怎么买",
+  "纪律",
+  "冲动下单",
+  "因为打折买",
+  "买重复的",
+  "不合身也留"
+ ],
+ "boundary": "怎么少买错",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

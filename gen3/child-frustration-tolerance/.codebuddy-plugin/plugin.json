@@ -1,0 +1,72 @@
+{
+ "name": "child-frustration-tolerance",
+ "version": "1.0.0",
+ "plugin": "child-frustration-tolerance",
+ "description": "Child Frustration Tolerance",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-frustration-tolerance.md"
+ ],
+ "skills": [
+  "./skills/child-frustration-tolerance-1",
+  "./skills/child-frustration-tolerance-2",
+  "./skills/child-frustration-tolerance-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child frustration tolerance 1",
+  "child frustration tolerance 2",
+  "child frustration tolerance 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-frustration-tolerance",
+ "displayName": {
+  "en": "Child Frustration Tolerance",
+  "zh": "输不起怎么办 分步处置"
+ },
+ "profession": {
+  "en": "Child Frustration Tolerance",
+  "zh": "输不起怎么办 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是年龄特点、完美主义还是被过度保护",
+  "zh": "输不起怎么办 分步处置：覆盖分清是年龄特点、完美主义还是被过度保护等情境，给出可执行处置与自查清单，"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child frustration tolerance 1",
+   "zh": "child frustration tolerance 1"
+  },
+  {
+   "en": "child frustration tolerance 2",
+   "zh": "child frustration tolerance 2"
+  },
+  {
+   "en": "child frustration tolerance 3",
+   "zh": "child frustration tolerance 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-frustration-tolerance-1",
+   "zh": "child frustration tolerance 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-frustration-tolerance-1",
+   "zh": "child frustration tolerance 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-frustration-tolerance-1",
+  "zh": "child frustration tolerance 1 第一步该怎么做"
+ }
+}

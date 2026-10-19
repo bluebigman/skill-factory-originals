@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "全程步行",
+   "then": "混合交通：地铁+步行"
+  },
+  {
+   "when": "不带水",
+   "then": "带水：城市里买水贵"
+  },
+  {
+   "when": "穿新鞋",
+   "then": "穿旧鞋：一天要走 1 万步以上"
+  }
+ ],
+ "keywords": [
+  "轻松",
+  "体力",
+  "成本",
+  "全程步行",
+  "不带水",
+  "穿新鞋"
+ ],
+ "boundary": "怎么轻松",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

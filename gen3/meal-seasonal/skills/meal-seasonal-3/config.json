@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "全部塞冰箱",
+   "then": "分温区：根茎常温，叶菜冷藏"
+  },
+  {
+   "when": "只吃一种",
+   "then": "搭配：当季菜互相搭配，营养更均衡"
+  },
+  {
+   "when": "吃不完就扔",
+   "then": "先处理：吃不完的焯水冷冻或腌渍"
+  }
+ ],
+ "keywords": [
+  "储存",
+  "搭配",
+  "怎么存",
+  "全部塞冰箱",
+  "只吃一种",
+  "吃不完就扔"
+ ],
+ "boundary": "当季菜怎么存怎么配",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "meal-elderly-soft",
+ "version": "1.0.0",
+ "plugin": "meal-elderly-soft",
+ "description": "Meal Elderly Soft",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-elderly-soft.md"
+ ],
+ "skills": [
+  "./skills/meal-elderly-soft-1",
+  "./skills/meal-elderly-soft-2",
+  "./skills/meal-elderly-soft-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal elderly soft 1",
+  "meal elderly soft 2",
+  "meal elderly soft 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-elderly-soft",
+ "displayName": {
+  "en": "Meal Elderly Soft",
+  "zh": "老人牙口不好怎么做 食材选择"
+ },
+ "profession": {
+  "en": "Meal Elderly Soft",
+  "zh": "老人牙口不好怎么做 食材选择 顾问"
+ },
+ "displayDescription": {
+  "en": "按咀嚼能力调整形态",
+  "zh": "老人牙口不好怎么做 食材选择：覆盖按咀嚼能力调整形态等情境，给出可执行处置与自查清单，并明确能力边界"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal elderly soft 1",
+   "zh": "meal elderly soft 1"
+  },
+  {
+   "en": "meal elderly soft 2",
+   "zh": "meal elderly soft 2"
+  },
+  {
+   "en": "meal elderly soft 3",
+   "zh": "meal elderly soft 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-elderly-soft-1",
+   "zh": "meal elderly soft 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-elderly-soft-1",
+   "zh": "meal elderly soft 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-elderly-soft-1",
+  "zh": "meal elderly soft 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-homework-procrastination",
+ "version": "1.0.0",
+ "plugin": "child-homework-procrastination",
+ "description": "Child Homework Procrastination",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-homework-procrastination.md"
+ ],
+ "skills": [
+  "./skills/child-homework-procrastination-1",
+  "./skills/child-homework-procrastination-2",
+  "./skills/child-homework-procrastination-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child homework procrastination 1",
+  "child homework procrastination 2",
+  "child homework procrastination 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-homework-procrastination",
+ "displayName": {
+  "en": "Child Homework Procrastination",
+  "zh": "作业拖拉陪写 长期预防"
+ },
+ "profession": {
+  "en": "Child Homework Procrastination",
+  "zh": "作业拖拉陪写 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是不会、不想、不能专注还是被干扰",
+  "zh": "作业拖拉陪写 长期预防：覆盖分清是不会、不想、不能专注还是被干扰等情境，给出可执行处置与自查清单，并"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child homework procrastination 1",
+   "zh": "child homework procrastination 1"
+  },
+  {
+   "en": "child homework procrastination 2",
+   "zh": "child homework procrastination 2"
+  },
+  {
+   "en": "child homework procrastination 3",
+   "zh": "child homework procrastination 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-homework-procrastination-1",
+   "zh": "child homework procrastination 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-homework-procrastination-1",
+   "zh": "child homework procrastination 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-homework-procrastination-1",
+  "zh": "child homework procrastination 1 第一步该怎么做"
+ }
+}

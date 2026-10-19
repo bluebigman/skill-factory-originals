@@ -1,0 +1,72 @@
+{
+ "name": "style-packing",
+ "version": "1.0.0",
+ "plugin": "style-packing",
+ "description": "Style Packing",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-packing.md"
+ ],
+ "skills": [
+  "./skills/style-packing-1",
+  "./skills/style-packing-2",
+  "./skills/style-packing-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style packing 1",
+  "style packing 2",
+  "style packing 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-packing",
+ "displayName": {
+  "en": "Style Packing",
+  "zh": "出差旅行怎么带衣服 避坑要点"
+ },
+ "profession": {
+  "en": "Style Packing",
+  "zh": "出差旅行怎么带衣服 避坑要点 顾问"
+ },
+ "displayDescription": {
+  "en": "先算天数与场景",
+  "zh": "出差旅行怎么带衣服 避坑要点：覆盖先算天数与场景等情境，给出可执行处置与自查清单，并明确能力边界与转"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style packing 1",
+   "zh": "style packing 1"
+  },
+  {
+   "en": "style packing 2",
+   "zh": "style packing 2"
+  },
+  {
+   "en": "style packing 3",
+   "zh": "style packing 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-packing-1",
+   "zh": "style packing 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-packing-1",
+   "zh": "style packing 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-packing-1",
+  "zh": "style packing 1 第一步该怎么做"
+ }
+}

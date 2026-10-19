@@ -1,0 +1,31 @@
+{
+ "rules": [
+  {
+   "when": "响就害怕",
+   "then": "分清：无痛弹响多为正常，伴痛要查"
+  },
+  {
+   "when": "疼就完全不动",
+   "then": "分情况：急性期休息，慢性期需适度运动"
+  },
+  {
+   "when": "忍痛运动",
+   "then": "不硬撑：加重损伤"
+  },
+  {
+   "when": "只看膝",
+   "then": "看整体：髋踝力量与膝痛相关"
+  }
+ ],
+ "keywords": [
+  "膝盖",
+  "响就害怕",
+  "疼就完全不动",
+  "忍痛运动",
+  "只看膝"
+ ],
+ "boundary": "先分清",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

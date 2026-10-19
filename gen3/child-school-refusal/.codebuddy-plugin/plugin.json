@@ -1,0 +1,72 @@
+{
+ "name": "child-school-refusal",
+ "version": "1.0.0",
+ "plugin": "child-school-refusal",
+ "description": "Child School Refusal",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-school-refusal.md"
+ ],
+ "skills": [
+  "./skills/child-school-refusal-1",
+  "./skills/child-school-refusal-2",
+  "./skills/child-school-refusal-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child school refusal 1",
+  "child school refusal 2",
+  "child school refusal 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-school-refusal",
+ "displayName": {
+  "en": "Child School Refusal",
+  "zh": "不上学怎么办 分步处置"
+ },
+ "profession": {
+  "en": "Child School Refusal",
+  "zh": "不上学怎么办 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是身体、人际、学业压力还是家庭因素",
+  "zh": "不上学怎么办 分步处置：覆盖分清是身体、人际、学业压力还是家庭因素等情境，给出可执行处置与自查清单，"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child school refusal 1",
+   "zh": "child school refusal 1"
+  },
+  {
+   "en": "child school refusal 2",
+   "zh": "child school refusal 2"
+  },
+  {
+   "en": "child school refusal 3",
+   "zh": "child school refusal 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-school-refusal-1",
+   "zh": "child school refusal 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-school-refusal-1",
+   "zh": "child school refusal 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-school-refusal-1",
+  "zh": "child school refusal 1 第一步该怎么做"
+ }
+}

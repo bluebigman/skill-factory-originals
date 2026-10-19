@@ -1,0 +1,72 @@
+{
+ "name": "home-noisy-neighbor",
+ "version": "1.0.0",
+ "plugin": "home-noisy-neighbor",
+ "description": "Home Noisy Neighbor",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-noisy-neighbor.md"
+ ],
+ "skills": [
+  "./skills/home-noisy-neighbor-1",
+  "./skills/home-noisy-neighbor-2",
+  "./skills/home-noisy-neighbor-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home noisy neighbor 1",
+  "home noisy neighbor 2",
+  "home noisy neighbor 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-noisy-neighbor",
+ "displayName": {
+  "en": "Home Noisy Neighbor",
+  "zh": "邻居太吵怎么办 成本控制"
+ },
+ "profession": {
+  "en": "Home Noisy Neighbor",
+  "zh": "邻居太吵怎么办 成本控制 顾问"
+ },
+ "displayDescription": {
+  "en": "是偶发还是持续",
+  "zh": "邻居太吵怎么办 成本控制：覆盖是偶发还是持续等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home noisy neighbor 1",
+   "zh": "home noisy neighbor 1"
+  },
+  {
+   "en": "home noisy neighbor 2",
+   "zh": "home noisy neighbor 2"
+  },
+  {
+   "en": "home noisy neighbor 3",
+   "zh": "home noisy neighbor 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-noisy-neighbor-1",
+   "zh": "home noisy neighbor 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-noisy-neighbor-1",
+   "zh": "home noisy neighbor 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-noisy-neighbor-1",
+  "zh": "home noisy neighbor 1 第一步该怎么做"
+ }
+}

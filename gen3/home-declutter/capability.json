@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-declutter",
+ "name": "东西太多怎么扔 清洁顺序 什么该走什么该留",
+ "description": "东西太多怎么扔 清洁顺序：什么该走什么该留",
+ "kind": "expert",
+ "tags": [
+  "home-declutter-1",
+  "home-declutter-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-declutter-core",
+   "name": "东西太多怎么扔 清洁顺序",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-declutter-1",
+     "name": "判断标准",
+     "summary": "什么该走什么该留"
+    },
+    {
+     "id": "home-declutter-2",
+     "name": "执行顺序",
+     "summary": "什么该走什么该留"
+    },
+    {
+     "id": "home-declutter-3",
+     "name": "防反弹",
+     "summary": "什么该走什么该留"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

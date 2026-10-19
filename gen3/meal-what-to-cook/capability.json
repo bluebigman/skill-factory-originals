@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-what-to-cook",
+ "name": "今天做什么菜 快手做法 按冰箱里已有的东西反推能做什么",
+ "description": "今天做什么菜 快手做法：按冰箱里已有的东西反推能做什么",
+ "kind": "expert",
+ "tags": [
+  "meal-what-to-cook-1",
+  "meal-what-to-cook-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-what-to-cook-core",
+   "name": "今天做什么菜 快手做法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-what-to-cook-1",
+     "name": "现有食材盘点",
+     "summary": "按冰箱里已有的东西反推能做什么"
+    },
+    {
+     "id": "meal-what-to-cook-2",
+     "name": "成本与时间控制",
+     "summary": "按冰箱里已有的东西反推能做什么"
+    },
+    {
+     "id": "meal-what-to-cook-3",
+     "name": "营养搭配校验",
+     "summary": "按冰箱里已有的东西反推能做什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

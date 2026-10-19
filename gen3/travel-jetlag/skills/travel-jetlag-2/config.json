@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "白天补觉",
+   "then": "白天不睡：撑到当地晚上"
+  },
+  {
+   "when": "拉窗帘",
+   "then": "见光：白天多晒太阳，晚上避强光"
+  },
+  {
+   "when": "靠咖啡撑",
+   "then": "上午咖啡：下午 2 点后不喝"
+  },
+  {
+   "when": "不运动",
+   "then": "适度运动：帮助调整生物钟"
+  }
+ ],
+ "keywords": [
+  "适应",
+  "白天困",
+  "白天补觉",
+  "拉窗帘",
+  "靠咖啡撑",
+  "不运动"
+ ],
+ "boundary": "怎么快速适应",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

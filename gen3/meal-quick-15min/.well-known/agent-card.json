@@ -1,0 +1,63 @@
+{
+ "name": "Meal Quick 15Min",
+ "description": "只用手边工具 15 分钟出餐",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/meal-quick-15min",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/meal-quick-15min",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "meal-quick-15min-1",
+   "name": "速成菜谱选择",
+   "description": "速成菜谱选择：只用手边工具 15 分钟出餐",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-quick-15min-2",
+   "name": "并行操作设计",
+   "description": "并行操作设计：只用手边工具 15 分钟出餐",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "meal-quick-15min-3",
+   "name": "简化与妥协",
+   "description": "简化与妥协：只用手边工具 15 分钟出餐",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

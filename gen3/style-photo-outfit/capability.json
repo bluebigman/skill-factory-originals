@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-photo-outfit",
+ "name": "拍照穿什么好看 挑选方法 镜头与肉眼的差异",
+ "description": "拍照穿什么好看 挑选方法：镜头与肉眼的差异",
+ "kind": "expert",
+ "tags": [
+  "style-photo-outfit-1",
+  "style-photo-outfit-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-photo-outfit-core",
+   "name": "拍照穿什么好看 挑选方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-photo-outfit-1",
+     "name": "上镜原则",
+     "summary": "镜头与肉眼的差异"
+    },
+    {
+     "id": "style-photo-outfit-2",
+     "name": "按场景选",
+     "summary": "镜头与肉眼的差异"
+    },
+    {
+     "id": "style-photo-outfit-3",
+     "name": "构图配合",
+     "summary": "镜头与肉眼的差异"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

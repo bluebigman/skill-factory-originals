@@ -1,0 +1,72 @@
+{
+ "name": "child-puberty-body",
+ "version": "1.0.0",
+ "plugin": "child-puberty-body",
+ "description": "Child Puberty Body",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-puberty-body.md"
+ ],
+ "skills": [
+  "./skills/child-puberty-body-1",
+  "./skills/child-puberty-body-2",
+  "./skills/child-puberty-body-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child puberty body 1",
+  "child puberty body 2",
+  "child puberty body 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-puberty-body",
+ "displayName": {
+  "en": "Child Puberty Body",
+  "zh": "青春期身体变化怎么讲 风险识别"
+ },
+ "profession": {
+  "en": "Child Puberty Body",
+  "zh": "青春期身体变化怎么讲 风险识别 顾问"
+ },
+ "displayDescription": {
+  "en": "什么时候讲、谁来讲",
+  "zh": "青春期身体变化怎么讲 风险识别：覆盖什么时候讲、谁来讲等情境，给出可执行处置与自查清单，并明确能力边"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child puberty body 1",
+   "zh": "child puberty body 1"
+  },
+  {
+   "en": "child puberty body 2",
+   "zh": "child puberty body 2"
+  },
+  {
+   "en": "child puberty body 3",
+   "zh": "child puberty body 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-puberty-body-1",
+   "zh": "child puberty body 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-puberty-body-1",
+   "zh": "child puberty body 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-puberty-body-1",
+  "zh": "child puberty body 1 第一步该怎么做"
+ }
+}

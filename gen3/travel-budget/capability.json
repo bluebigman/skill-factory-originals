@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-budget",
+ "name": "旅游怎么省钱 避坑要点 钱花在哪",
+ "description": "旅游怎么省钱 避坑要点：钱花在哪",
+ "kind": "expert",
+ "tags": [
+  "travel-budget-1",
+  "travel-budget-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-budget-core",
+   "name": "旅游怎么省钱 避坑要点",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-budget-1",
+     "name": "费用结构",
+     "summary": "钱花在哪"
+    },
+    {
+     "id": "travel-budget-2",
+     "name": "省钱方法",
+     "summary": "钱花在哪"
+    },
+    {
+     "id": "travel-budget-3",
+     "name": "避免浪费",
+     "summary": "钱花在哪"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

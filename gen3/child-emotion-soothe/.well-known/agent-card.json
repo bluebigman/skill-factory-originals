@@ -1,0 +1,63 @@
+{
+ "name": "Child Emotion Soothe",
+ "description": "判断孩子这次是挫败、求关注、逃避还是生理原因",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-emotion-soothe",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-emotion-soothe",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-emotion-soothe-1",
+   "name": "情绪类型识别",
+   "description": "情绪类型识别：判断孩子这次是挫败、求关注、逃避还是生理原因",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-emotion-soothe-2",
+   "name": "当下三步处置",
+   "description": "当下三步处置：判断孩子这次是挫败、求关注、逃避还是生理原因",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-emotion-soothe-3",
+   "name": "事后复盘与预防",
+   "description": "事后复盘与预防：判断孩子这次是挫败、求关注、逃避还是生理原因",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

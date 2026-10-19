@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-knee-protect",
+ "name": "膝盖疼怎么护 改善方法 先分清",
+ "description": "膝盖疼怎么护 改善方法：先分清",
+ "kind": "expert",
+ "tags": [
+  "health-knee-protect-1",
+  "health-knee-protect-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-knee-protect-core",
+   "name": "膝盖疼怎么护 改善方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-knee-protect-1",
+     "name": "疼痛性质",
+     "summary": "先分清"
+    },
+    {
+     "id": "health-knee-protect-2",
+     "name": "运动调整",
+     "summary": "先分清"
+    },
+    {
+     "id": "health-knee-protect-3",
+     "name": "日常保护",
+     "summary": "先分清"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "name": "Child Separation Anxiety",
+ "description": "分清是正常适应、过渡困难还是分离焦虑障碍",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-separation-anxiety",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-separation-anxiety",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-separation-anxiety-1",
+   "name": "焦虑程度判断",
+   "description": "焦虑程度判断：分清是正常适应、过渡困难还是分离焦虑障碍",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-separation-anxiety-2",
+   "name": "送别方式",
+   "description": "送别方式：分清是正常适应、过渡困难还是分离焦虑障碍",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-separation-anxiety-3",
+   "name": "安全感建设",
+   "description": "安全感建设：分清是正常适应、过渡困难还是分离焦虑障碍",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

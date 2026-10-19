@@ -1,0 +1,72 @@
+{
+ "name": "health-eye-strain",
+ "version": "1.0.0",
+ "plugin": "health-eye-strain",
+ "description": "Health Eye Strain",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-eye-strain.md"
+ ],
+ "skills": [
+  "./skills/health-eye-strain-1",
+  "./skills/health-eye-strain-2",
+  "./skills/health-eye-strain-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health eye strain 1",
+  "health eye strain 2",
+  "health eye strain 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-eye-strain",
+ "displayName": {
+  "en": "Health Eye Strain",
+  "zh": "眼睛干涩怎么办 改善方法"
+ },
+ "profession": {
+  "en": "Health Eye Strain",
+  "zh": "眼睛干涩怎么办 改善方法 顾问"
+ },
+ "displayDescription": {
+  "en": "怎么减负",
+  "zh": "眼睛干涩怎么办 改善方法：覆盖怎么减负等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health eye strain 1",
+   "zh": "health eye strain 1"
+  },
+  {
+   "en": "health eye strain 2",
+   "zh": "health eye strain 2"
+  },
+  {
+   "en": "health eye strain 3",
+   "zh": "health eye strain 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-eye-strain-1",
+   "zh": "health eye strain 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-eye-strain-1",
+   "zh": "health eye strain 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-eye-strain-1",
+  "zh": "health eye strain 1 第一步该怎么做"
+ }
+}

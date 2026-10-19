@@ -1,0 +1,63 @@
+{
+ "name": "Child Hitting Biting",
+ "description": "分清是语言不足、模仿、求关注还是情绪失控",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-hitting-biting",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-hitting-biting",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-hitting-biting-1",
+   "name": "攻击行为归因",
+   "description": "攻击行为归因：分清是语言不足、模仿、求关注还是情绪失控",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-hitting-biting-2",
+   "name": "当场制止方式",
+   "description": "当场制止方式：分清是语言不足、模仿、求关注还是情绪失控",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-hitting-biting-3",
+   "name": "替代行为训练",
+   "description": "替代行为训练：分清是语言不足、模仿、求关注还是情绪失控",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

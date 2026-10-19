@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-emotion-soothe",
+ "name": "孩子情绪失控安抚 话术模板 判断孩子这次是挫败、求关注、逃避还是生理原因",
+ "description": "孩子情绪失控安抚 话术模板：判断孩子这次是挫败、求关注、逃避还是生理原因",
+ "kind": "expert",
+ "tags": [
+  "child-emotion-soothe-1",
+  "child-emotion-soothe-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-emotion-soothe-core",
+   "name": "孩子情绪失控安抚 话术模板",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-emotion-soothe-1",
+     "name": "情绪类型识别",
+     "summary": "判断孩子这次是挫败、求关注、逃避还是生理原因"
+    },
+    {
+     "id": "child-emotion-soothe-2",
+     "name": "当下三步处置",
+     "summary": "判断孩子这次是挫败、求关注、逃避还是生理原因"
+    },
+    {
+     "id": "child-emotion-soothe-3",
+     "name": "事后复盘与预防",
+     "summary": "判断孩子这次是挫败、求关注、逃避还是生理原因"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

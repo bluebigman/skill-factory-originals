@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "一次全拆",
+   "then": "先拆必需：其余按需拆"
+  },
+  {
+   "when": "不换锁",
+   "then": "换锁：租房必换，自住也建议"
+  },
+  {
+   "when": "不办变更",
+   "then": "改地址：快递/水电/银行/证件"
+  },
+  {
+   "when": "不熟悉周边",
+   "then": "先找三处：超市/药店/医院"
+  }
+ ],
+ "keywords": [
+  "搬后",
+  "安顿",
+  "整理",
+  "一次全拆",
+  "不换锁",
+  "不办变更",
+  "不熟悉周边"
+ ],
+ "boundary": "怎么快速安顿",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

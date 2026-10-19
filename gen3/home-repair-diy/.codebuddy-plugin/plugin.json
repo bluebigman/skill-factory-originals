@@ -1,0 +1,72 @@
+{
+ "name": "home-repair-diy",
+ "version": "1.0.0",
+ "plugin": "home-repair-diy",
+ "description": "Home Repair Diy",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-repair-diy.md"
+ ],
+ "skills": [
+  "./skills/home-repair-diy-1",
+  "./skills/home-repair-diy-2",
+  "./skills/home-repair-diy-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home repair diy 1",
+  "home repair diy 2",
+  "home repair diy 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-repair-diy",
+ "displayName": {
+  "en": "Home Repair Diy",
+  "zh": "小修小补自己怎么弄 处理步骤"
+ },
+ "profession": {
+  "en": "Home Repair Diy",
+  "zh": "小修小补自己怎么弄 处理步骤 顾问"
+ },
+ "displayDescription": {
+  "en": "先分清风险",
+  "zh": "小修小补自己怎么弄 处理步骤：覆盖先分清风险等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home repair diy 1",
+   "zh": "home repair diy 1"
+  },
+  {
+   "en": "home repair diy 2",
+   "zh": "home repair diy 2"
+  },
+  {
+   "en": "home repair diy 3",
+   "zh": "home repair diy 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-repair-diy-1",
+   "zh": "home repair diy 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-repair-diy-1",
+   "zh": "home repair diy 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-repair-diy-1",
+  "zh": "home repair diy 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-work-uniform",
+ "name": "有工装怎么穿出自己 场合选择 先看能改什么",
+ "description": "有工装怎么穿出自己 场合选择：先看能改什么",
+ "kind": "expert",
+ "tags": [
+  "style-work-uniform-1",
+  "style-work-uniform-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-work-uniform-core",
+   "name": "有工装怎么穿出自己 场合选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-work-uniform-1",
+     "name": "在规则内优化",
+     "summary": "先看能改什么"
+    },
+    {
+     "id": "style-work-uniform-2",
+     "name": "内搭与配件",
+     "summary": "先看能改什么"
+    },
+    {
+     "id": "style-work-uniform-3",
+     "name": "心态与形象",
+     "summary": "先看能改什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

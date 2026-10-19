@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-attention-focus",
+ "name": "注意力不集中 分步处置 分清是年龄正常、环境干扰还是需要专业评估",
+ "description": "注意力不集中 分步处置：分清是年龄正常、环境干扰还是需要专业评估",
+ "kind": "expert",
+ "tags": [
+  "child-attention-focus-1",
+  "child-attention-focus-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-attention-focus-core",
+   "name": "注意力不集中 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-attention-focus-1",
+     "name": "专注力现状评估",
+     "summary": "分清是年龄正常、环境干扰还是需要专业评估"
+    },
+    {
+     "id": "child-attention-focus-2",
+     "name": "环境与任务改造",
+     "summary": "分清是年龄正常、环境干扰还是需要专业评估"
+    },
+    {
+     "id": "child-attention-focus-3",
+     "name": "专注力训练",
+     "summary": "分清是年龄正常、环境干扰还是需要专业评估"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

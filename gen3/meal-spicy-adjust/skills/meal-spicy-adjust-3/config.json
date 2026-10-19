@@ -1,0 +1,27 @@
+{
+ "rules": [
+  {
+   "when": "清淡=没味",
+   "then": "用鲜味：菌菇/番茄/干贝/高汤提鲜"
+  },
+  {
+   "when": "只靠盐",
+   "then": "用酸与香：柠檬/醋/葱姜蒜/香菜"
+  },
+  {
+   "when": "放很多酱油",
+   "then": "控钠：酱油含盐高，用香料替代部分咸味"
+  }
+ ],
+ "keywords": [
+  "调味",
+  "没味道",
+  "清淡=没味",
+  "只靠盐",
+  "放很多酱油"
+ ],
+ "boundary": "怎么让清淡也有味",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

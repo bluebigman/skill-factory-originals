@@ -1,0 +1,72 @@
+{
+ "name": "child-talkback",
+ "version": "1.0.0",
+ "plugin": "child-talkback",
+ "description": "Child Talkback",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-talkback.md"
+ ],
+ "skills": [
+  "./skills/child-talkback-1",
+  "./skills/child-talkback-2",
+  "./skills/child-talkback-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child talkback 1",
+  "child talkback 2",
+  "child talkback 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-talkback",
+ "displayName": {
+  "en": "Child Talkback",
+  "zh": "顶嘴拒绝沟通 长期预防"
+ },
+ "profession": {
+  "en": "Child Talkback",
+  "zh": "顶嘴拒绝沟通 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是正常独立、情绪宣泄还是关系已经破裂",
+  "zh": "顶嘴拒绝沟通 长期预防：覆盖分清是正常独立、情绪宣泄还是关系已经破裂等情境，给出可执行处置与自查清单"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child talkback 1",
+   "zh": "child talkback 1"
+  },
+  {
+   "en": "child talkback 2",
+   "zh": "child talkback 2"
+  },
+  {
+   "en": "child talkback 3",
+   "zh": "child talkback 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-talkback-1",
+   "zh": "child talkback 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-talkback-1",
+   "zh": "child talkback 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-talkback-1",
+  "zh": "child talkback 1 第一步该怎么做"
+ }
+}

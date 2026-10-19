@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "只做米饭",
+   "then": "加一样：饺子/面/杂粮饭，增加选择"
+  },
+  {
+   "when": "饭后无水果",
+   "then": "备果盘：切好上桌，比整果更受欢迎"
+  },
+  {
+   "when": "剩菜太多",
+   "then": "按人数做：宁可少一道，不要剩一半"
+  }
+ ],
+ "keywords": [
+  "主食",
+  "收尾",
+  "解腻",
+  "只做米饭",
+  "饭后无水果",
+  "剩菜太多"
+ ],
+ "boundary": "主食与解腻",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

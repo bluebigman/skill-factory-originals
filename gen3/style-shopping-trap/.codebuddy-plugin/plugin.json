@@ -1,0 +1,72 @@
+{
+ "name": "style-shopping-trap",
+ "version": "1.0.0",
+ "plugin": "style-shopping-trap",
+ "description": "Style Shopping Trap",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-shopping-trap.md"
+ ],
+ "skills": [
+  "./skills/style-shopping-trap-1",
+  "./skills/style-shopping-trap-2",
+  "./skills/style-shopping-trap-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style shopping trap 1",
+  "style shopping trap 2",
+  "style shopping trap 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-shopping-trap",
+ "displayName": {
+  "en": "Style Shopping Trap",
+  "zh": "买衣服怎么不踩坑 场合选择"
+ },
+ "profession": {
+  "en": "Style Shopping Trap",
+  "zh": "买衣服怎么不踩坑 场合选择 顾问"
+ },
+ "displayDescription": {
+  "en": "买前必须看什么",
+  "zh": "买衣服怎么不踩坑 场合选择：覆盖买前必须看什么等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style shopping trap 1",
+   "zh": "style shopping trap 1"
+  },
+  {
+   "en": "style shopping trap 2",
+   "zh": "style shopping trap 2"
+  },
+  {
+   "en": "style shopping trap 3",
+   "zh": "style shopping trap 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-shopping-trap-1",
+   "zh": "style shopping trap 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-shopping-trap-1",
+   "zh": "style shopping trap 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-shopping-trap-1",
+  "zh": "style shopping trap 1 第一步该怎么做"
+ }
+}

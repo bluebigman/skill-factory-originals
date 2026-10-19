@@ -1,0 +1,72 @@
+{
+ "name": "meal-kids-nutrition",
+ "version": "1.0.0",
+ "plugin": "meal-kids-nutrition",
+ "description": "Meal Kids Nutrition",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-kids-nutrition.md"
+ ],
+ "skills": [
+  "./skills/meal-kids-nutrition-1",
+  "./skills/meal-kids-nutrition-2",
+  "./skills/meal-kids-nutrition-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal kids nutrition 1",
+  "meal kids nutrition 2",
+  "meal kids nutrition 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-kids-nutrition",
+ "displayName": {
+  "en": "Meal Kids Nutrition",
+  "zh": "孩子长身体吃什么 配比方法"
+ },
+ "profession": {
+  "en": "Meal Kids Nutrition",
+  "zh": "孩子长身体吃什么 配比方法 顾问"
+ },
+ "displayDescription": {
+  "en": "按年龄看关键营养",
+  "zh": "孩子长身体吃什么 配比方法：覆盖按年龄看关键营养等情境，给出可执行处置与自查清单，并明确能力边界与转"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal kids nutrition 1",
+   "zh": "meal kids nutrition 1"
+  },
+  {
+   "en": "meal kids nutrition 2",
+   "zh": "meal kids nutrition 2"
+  },
+  {
+   "en": "meal kids nutrition 3",
+   "zh": "meal kids nutrition 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-kids-nutrition-1",
+   "zh": "meal kids nutrition 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-kids-nutrition-1",
+   "zh": "meal kids nutrition 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-kids-nutrition-1",
+  "zh": "meal kids nutrition 1 第一步该怎么做"
+ }
+}

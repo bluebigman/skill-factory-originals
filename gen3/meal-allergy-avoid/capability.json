@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-allergy-avoid",
+ "name": "有人过敏怎么避开 配比方法 先搞清到底对什么过敏",
+ "description": "有人过敏怎么避开 配比方法：先搞清到底对什么过敏",
+ "kind": "expert",
+ "tags": [
+  "meal-allergy-avoid-1",
+  "meal-allergy-avoid-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-allergy-avoid-core",
+   "name": "有人过敏怎么避开 配比方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-allergy-avoid-1",
+     "name": "过敏原识别",
+     "summary": "先搞清到底对什么过敏"
+    },
+    {
+     "id": "meal-allergy-avoid-2",
+     "name": "替代方案",
+     "summary": "先搞清到底对什么过敏"
+    },
+    {
+     "id": "meal-allergy-avoid-3",
+     "name": "外出与应急",
+     "summary": "先搞清到底对什么过敏"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

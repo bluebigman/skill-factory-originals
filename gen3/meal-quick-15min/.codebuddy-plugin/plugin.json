@@ -1,0 +1,72 @@
+{
+ "name": "meal-quick-15min",
+ "version": "1.0.0",
+ "plugin": "meal-quick-15min",
+ "description": "Meal Quick 15Min",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-quick-15min.md"
+ ],
+ "skills": [
+  "./skills/meal-quick-15min-1",
+  "./skills/meal-quick-15min-2",
+  "./skills/meal-quick-15min-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal quick 15min 1",
+  "meal quick 15min 2",
+  "meal quick 15min 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-quick-15min",
+ "displayName": {
+  "en": "Meal Quick 15Min",
+  "zh": "十五分钟能做啥菜 配比方法"
+ },
+ "profession": {
+  "en": "Meal Quick 15Min",
+  "zh": "十五分钟能做啥菜 配比方法 顾问"
+ },
+ "displayDescription": {
+  "en": "只用手边工具 15 分钟出餐",
+  "zh": "十五分钟能做啥菜 配比方法：覆盖只用手边工具 15 分钟出餐等情境，给出可执行处置与自查清单，并明确"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal quick 15min 1",
+   "zh": "meal quick 15min 1"
+  },
+  {
+   "en": "meal quick 15min 2",
+   "zh": "meal quick 15min 2"
+  },
+  {
+   "en": "meal quick 15min 3",
+   "zh": "meal quick 15min 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-quick-15min-1",
+   "zh": "meal quick 15min 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-quick-15min-1",
+   "zh": "meal quick 15min 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-quick-15min-1",
+  "zh": "meal quick 15min 1 第一步该怎么做"
+ }
+}

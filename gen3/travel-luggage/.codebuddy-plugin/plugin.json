@@ -1,0 +1,72 @@
+{
+ "name": "travel-luggage",
+ "version": "1.0.0",
+ "plugin": "travel-luggage",
+ "description": "Travel Luggage",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-luggage.md"
+ ],
+ "skills": [
+  "./skills/travel-luggage-1",
+  "./skills/travel-luggage-2",
+  "./skills/travel-luggage-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel luggage 1",
+  "travel luggage 2",
+  "travel luggage 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-luggage",
+ "displayName": {
+  "en": "Travel Luggage",
+  "zh": "行李怎么精简 预算控制 清单法"
+ },
+ "profession": {
+  "en": "Travel Luggage",
+  "zh": "行李怎么精简 预算控制 顾问"
+ },
+ "displayDescription": {
+  "en": "怎么不忘",
+  "zh": "行李怎么精简 预算控制：覆盖怎么不忘等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel luggage 1",
+   "zh": "travel luggage 1"
+  },
+  {
+   "en": "travel luggage 2",
+   "zh": "travel luggage 2"
+  },
+  {
+   "en": "travel luggage 3",
+   "zh": "travel luggage 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-luggage-1",
+   "zh": "travel luggage 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-luggage-1",
+   "zh": "travel luggage 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-luggage-1",
+  "zh": "travel luggage 1 第一步该怎么做"
+ }
+}

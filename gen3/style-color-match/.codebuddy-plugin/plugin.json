@@ -1,0 +1,72 @@
+{
+ "name": "style-color-match",
+ "version": "1.0.0",
+ "plugin": "style-color-match",
+ "description": "Style Color Match",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-color-match.md"
+ ],
+ "skills": [
+  "./skills/style-color-match-1",
+  "./skills/style-color-match-2",
+  "./skills/style-color-match-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style color match 1",
+  "style color match 2",
+  "style color match 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-color-match",
+ "displayName": {
+  "en": "Style Color Match",
+  "zh": "颜色怎么搭不土 避坑要点"
+ },
+ "profession": {
+  "en": "Style Color Match",
+  "zh": "颜色怎么搭不土 避坑要点 顾问"
+ },
+ "displayDescription": {
+  "en": "先看自己适合什么色",
+  "zh": "颜色怎么搭不土 避坑要点：覆盖先看自己适合什么色等情境，给出可执行处置与自查清单，并明确能力边界与转"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style color match 1",
+   "zh": "style color match 1"
+  },
+  {
+   "en": "style color match 2",
+   "zh": "style color match 2"
+  },
+  {
+   "en": "style color match 3",
+   "zh": "style color match 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-color-match-1",
+   "zh": "style color match 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-color-match-1",
+   "zh": "style color match 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-color-match-1",
+  "zh": "style color match 1 第一步该怎么做"
+ }
+}

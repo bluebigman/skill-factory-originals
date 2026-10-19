@@ -1,0 +1,63 @@
+{
+ "name": "Child Exam Anxiety",
+ "description": "分清是怕失败、怕被评价还是准备不足",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-exam-anxiety",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-exam-anxiety",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-exam-anxiety-1",
+   "name": "焦虑来源定位",
+   "description": "焦虑来源定位：分清是怕失败、怕被评价还是准备不足",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-exam-anxiety-2",
+   "name": "考前支持",
+   "description": "考前支持：分清是怕失败、怕被评价还是准备不足",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-exam-anxiety-3",
+   "name": "应试方法",
+   "description": "应试方法：分清是怕失败、怕被评价还是准备不足",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

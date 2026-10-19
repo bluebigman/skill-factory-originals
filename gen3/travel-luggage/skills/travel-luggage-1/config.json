@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "凭记忆收",
+   "then": "列清单：按场景（洗漱/衣物/电子/证件）"
+  },
+  {
+   "when": "不收一份留底",
+   "then": "留底：常用清单存手机，每次微调"
+  },
+  {
+   "when": "证件放行李",
+   "then": "证件随身：不托运"
+  },
+  {
+   "when": "不列药",
+   "then": "列药：常吃的必须带足"
+  }
+ ],
+ "keywords": [
+  "行李",
+  "忘东西",
+  "清单",
+  "凭记忆收",
+  "不收一份留底",
+  "证件放行李",
+  "不列药"
+ ],
+ "boundary": "怎么不忘",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

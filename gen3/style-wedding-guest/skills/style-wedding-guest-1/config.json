@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "穿白色",
+   "then": "避开：白色是新娘专属（除非指定 dress code）"
+  },
+  {
+   "when": "穿全黑",
+   "then": "避开：丧气，可用黑色做点缀"
+  },
+  {
+   "when": "太隆重",
+   "then": "不抢风头：不穿婚纱感、不戴夸张头饰"
+  },
+  {
+   "when": "太随便",
+   "then": "看场地：酒店需正装感，户外可休闲"
+  }
+ ],
+ "keywords": [
+  "婚礼",
+  "穿什么",
+  "禁忌",
+  "穿白色",
+  "穿全黑",
+  "太隆重",
+  "太随便"
+ ],
+ "boundary": "先避开雷区",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

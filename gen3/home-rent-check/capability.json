@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-rent-check",
+ "name": "租房怎么验收 清洁顺序 先看什么",
+ "description": "租房怎么验收 清洁顺序：先看什么",
+ "kind": "expert",
+ "tags": [
+  "home-rent-check-1",
+  "home-rent-check-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-rent-check-core",
+   "name": "租房怎么验收 清洁顺序",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-rent-check-1",
+     "name": "看房要点",
+     "summary": "先看什么"
+    },
+    {
+     "id": "home-rent-check-2",
+     "name": "合同与押金",
+     "summary": "先看什么"
+    },
+    {
+     "id": "home-rent-check-3",
+     "name": "交接与退租",
+     "summary": "先看什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

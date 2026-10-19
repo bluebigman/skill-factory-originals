@@ -1,0 +1,63 @@
+{
+ "name": "Child Sibling Conflict",
+ "description": "分清是抢资源、争关注还是年龄差导致的必然摩擦",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-sibling-conflict",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-sibling-conflict",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-sibling-conflict-1",
+   "name": "冲突类型判断",
+   "description": "冲突类型判断：分清是抢资源、争关注还是年龄差导致的必然摩擦",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-sibling-conflict-2",
+   "name": "当场怎么处理",
+   "description": "当场怎么处理：分清是抢资源、争关注还是年龄差导致的必然摩擦",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-sibling-conflict-3",
+   "name": "长期机制",
+   "description": "长期机制：分清是抢资源、争关注还是年龄差导致的必然摩擦",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

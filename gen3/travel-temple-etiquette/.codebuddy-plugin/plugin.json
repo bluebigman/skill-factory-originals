@@ -1,0 +1,72 @@
+{
+ "name": "travel-temple-etiquette",
+ "version": "1.0.0",
+ "plugin": "travel-temple-etiquette",
+ "description": "Travel Temple Etiquette",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-temple-etiquette.md"
+ ],
+ "skills": [
+  "./skills/travel-temple-etiquette-1",
+  "./skills/travel-temple-etiquette-2",
+  "./skills/travel-temple-etiquette-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel temple etiquette 1",
+  "travel temple etiquette 2",
+  "travel temple etiquette 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-temple-etiquette",
+ "displayName": {
+  "en": "Travel Temple Etiquette",
+  "zh": "寺庙景区怎么注意礼节 准备清单"
+ },
+ "profession": {
+  "en": "Travel Temple Etiquette",
+  "zh": "寺庙景区怎么注意礼节 准备清单 顾问"
+ },
+ "displayDescription": {
+  "en": "基本礼节",
+  "zh": "寺庙景区怎么注意礼节 准备清单：覆盖基本礼节等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel temple etiquette 1",
+   "zh": "travel temple etiquette 1"
+  },
+  {
+   "en": "travel temple etiquette 2",
+   "zh": "travel temple etiquette 2"
+  },
+  {
+   "en": "travel temple etiquette 3",
+   "zh": "travel temple etiquette 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-temple-etiquette-1",
+   "zh": "travel temple etiquette 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-temple-etiquette-1",
+   "zh": "travel temple etiquette 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-temple-etiquette-1",
+  "zh": "travel temple etiquette 1 第一步该怎么做"
+ }
+}

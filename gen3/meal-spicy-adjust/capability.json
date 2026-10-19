@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-spicy-adjust",
+ "name": "家里口味不一样怎么调 配比方法 怎么一菜两吃",
+ "description": "家里口味不一样怎么调 配比方法：怎么一菜两吃",
+ "kind": "expert",
+ "tags": [
+  "meal-spicy-adjust-1",
+  "meal-spicy-adjust-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-spicy-adjust-core",
+   "name": "家里口味不一样怎么调 配比方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-spicy-adjust-1",
+     "name": "基础口味分离",
+     "summary": "怎么一菜两吃"
+    },
+    {
+     "id": "meal-spicy-adjust-2",
+     "name": "特殊人群照顾",
+     "summary": "怎么一菜两吃"
+    },
+    {
+     "id": "meal-spicy-adjust-3",
+     "name": "调味技巧",
+     "summary": "怎么一菜两吃"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

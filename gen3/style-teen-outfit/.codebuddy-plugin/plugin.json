@@ -1,0 +1,72 @@
+{
+ "name": "style-teen-outfit",
+ "version": "1.0.0",
+ "plugin": "style-teen-outfit",
+ "description": "Style Teen Outfit",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-teen-outfit.md"
+ ],
+ "skills": [
+  "./skills/style-teen-outfit-1",
+  "./skills/style-teen-outfit-2",
+  "./skills/style-teen-outfit-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style teen outfit 1",
+  "style teen outfit 2",
+  "style teen outfit 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-teen-outfit",
+ "displayName": {
+  "en": "Style Teen Outfit",
+  "zh": "青春期孩子穿什么 场合选择"
+ },
+ "profession": {
+  "en": "Style Teen Outfit",
+  "zh": "青春期孩子穿什么 场合选择 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是审美差异还是安全问题",
+  "zh": "青春期孩子穿什么 场合选择：覆盖分清是审美差异还是安全问题等情境，给出可执行处置与自查清单，并明确能"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style teen outfit 1",
+   "zh": "style teen outfit 1"
+  },
+  {
+   "en": "style teen outfit 2",
+   "zh": "style teen outfit 2"
+  },
+  {
+   "en": "style teen outfit 3",
+   "zh": "style teen outfit 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-teen-outfit-1",
+   "zh": "style teen outfit 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-teen-outfit-1",
+   "zh": "style teen outfit 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-teen-outfit-1",
+  "zh": "style teen outfit 1 第一步该怎么做"
+ }
+}

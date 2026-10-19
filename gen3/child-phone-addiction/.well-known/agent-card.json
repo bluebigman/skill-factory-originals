@@ -1,0 +1,63 @@
+{
+ "name": "Child Phone Addiction",
+ "description": "分清是正常使用、过度使用还是已经影响生活",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-phone-addiction",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-phone-addiction",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-phone-addiction-1",
+   "name": "沉迷程度判断",
+   "description": "沉迷程度判断：分清是正常使用、过度使用还是已经影响生活",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-phone-addiction-2",
+   "name": "约定怎么谈",
+   "description": "约定怎么谈：分清是正常使用、过度使用还是已经影响生活",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-phone-addiction-3",
+   "name": "替代活动设计",
+   "description": "替代活动设计：分清是正常使用、过度使用还是已经影响生活",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

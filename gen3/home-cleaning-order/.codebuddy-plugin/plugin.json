@@ -1,0 +1,72 @@
+{
+ "name": "home-cleaning-order",
+ "version": "1.0.0",
+ "plugin": "home-cleaning-order",
+ "description": "Home Cleaning Order",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-cleaning-order.md"
+ ],
+ "skills": [
+  "./skills/home-cleaning-order-1",
+  "./skills/home-cleaning-order-2",
+  "./skills/home-cleaning-order-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home cleaning order 1",
+  "home cleaning order 2",
+  "home cleaning order 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-cleaning-order",
+ "displayName": {
+  "en": "Home Cleaning Order",
+  "zh": "打扫顺序怎么排 处理步骤"
+ },
+ "profession": {
+  "en": "Home Cleaning Order",
+  "zh": "打扫顺序怎么排 处理步骤 顾问"
+ },
+ "displayDescription": {
+  "en": "从上到下从里到外",
+  "zh": "打扫顺序怎么排 处理步骤：覆盖从上到下从里到外等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home cleaning order 1",
+   "zh": "home cleaning order 1"
+  },
+  {
+   "en": "home cleaning order 2",
+   "zh": "home cleaning order 2"
+  },
+  {
+   "en": "home cleaning order 3",
+   "zh": "home cleaning order 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-cleaning-order-1",
+   "zh": "home cleaning order 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-cleaning-order-1",
+   "zh": "home cleaning order 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-cleaning-order-1",
+  "zh": "home cleaning order 1 第一步该怎么做"
+ }
+}

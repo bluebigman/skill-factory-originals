@@ -1,0 +1,72 @@
+{
+ "name": "child-bath-resistance",
+ "version": "1.0.0",
+ "plugin": "child-bath-resistance",
+ "description": "Child Bath Resistance",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-bath-resistance.md"
+ ],
+ "skills": [
+  "./skills/child-bath-resistance-1",
+  "./skills/child-bath-resistance-2",
+  "./skills/child-bath-resistance-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child bath resistance 1",
+  "child bath resistance 2",
+  "child bath resistance 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-bath-resistance",
+ "displayName": {
+  "en": "Child Bath Resistance",
+  "zh": "刷牙洗澡抗拒 日常维护"
+ },
+ "profession": {
+  "en": "Child Bath Resistance",
+  "zh": "刷牙洗澡抗拒 日常维护 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是感官不适、恐惧还是权力斗争",
+  "zh": "刷牙洗澡抗拒 日常维护：覆盖分清是感官不适、恐惧还是权力斗争等情境，给出可执行处置与自查清单，并明确"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "child bath resistance 1",
+   "zh": "child bath resistance 1"
+  },
+  {
+   "en": "child bath resistance 2",
+   "zh": "child bath resistance 2"
+  },
+  {
+   "en": "child bath resistance 3",
+   "zh": "child bath resistance 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-bath-resistance-1",
+   "zh": "child bath resistance 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-bath-resistance-1",
+   "zh": "child bath resistance 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-bath-resistance-1",
+  "zh": "child bath resistance 1 第一步该怎么做"
+ }
+}

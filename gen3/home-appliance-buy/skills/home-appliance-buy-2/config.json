@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "只看价格",
+   "then": "看核心参数：容量/能效/噪音"
+  },
+  {
+   "when": "忽略能效",
+   "then": "算电费：长期用能效差更贵"
+  },
+  {
+   "when": "不看噪音",
+   "then": "看分贝：卧室附近要低于 40dB"
+  },
+  {
+   "when": "不看售后",
+   "then": "看网点：本地有无服务点决定维修速度"
+  }
+ ],
+ "keywords": [
+  "参数",
+  "看什么",
+  "对比",
+  "只看价格",
+  "忽略能效",
+  "不看噪音",
+  "不看售后"
+ ],
+ "boundary": "关键参数",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,31 @@
+{
+ "rules": [
+  {
+   "when": "弯腰抱娃",
+   "then": "屈膝下蹲：保护腰"
+  },
+  {
+   "when": "长时间站立",
+   "then": "交替：站坐结合"
+  },
+  {
+   "when": "睡眠不足",
+   "then": "补觉优先：恢复需要睡眠"
+  },
+  {
+   "when": "独自硬撑",
+   "then": "求助：家人支持与专业帮助都要"
+  }
+ ],
+ "keywords": [
+  "怎么护",
+  "弯腰抱娃",
+  "长时间站立",
+  "睡眠不足",
+  "独自硬撑"
+ ],
+ "boundary": "日常怎么护",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

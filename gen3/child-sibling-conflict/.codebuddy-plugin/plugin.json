@@ -1,0 +1,72 @@
+{
+ "name": "child-sibling-conflict",
+ "version": "1.0.0",
+ "plugin": "child-sibling-conflict",
+ "description": "Child Sibling Conflict",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-sibling-conflict.md"
+ ],
+ "skills": [
+  "./skills/child-sibling-conflict-1",
+  "./skills/child-sibling-conflict-2",
+  "./skills/child-sibling-conflict-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child sibling conflict 1",
+  "child sibling conflict 2",
+  "child sibling conflict 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-sibling-conflict",
+ "displayName": {
+  "en": "Child Sibling Conflict",
+  "zh": "手足争抢调解 分步处置"
+ },
+ "profession": {
+  "en": "Child Sibling Conflict",
+  "zh": "手足争抢调解 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是抢资源、争关注还是年龄差导致的必然摩擦",
+  "zh": "手足争抢调解 分步处置：覆盖分清是抢资源、争关注还是年龄差导致的必然摩擦等情境，给出可执行处置与自查"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child sibling conflict 1",
+   "zh": "child sibling conflict 1"
+  },
+  {
+   "en": "child sibling conflict 2",
+   "zh": "child sibling conflict 2"
+  },
+  {
+   "en": "child sibling conflict 3",
+   "zh": "child sibling conflict 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-sibling-conflict-1",
+   "zh": "child sibling conflict 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-sibling-conflict-1",
+   "zh": "child sibling conflict 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-sibling-conflict-1",
+  "zh": "child sibling conflict 1 第一步该怎么做"
+ }
+}

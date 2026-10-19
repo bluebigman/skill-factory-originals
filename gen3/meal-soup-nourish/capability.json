@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-soup-nourish",
+ "name": "煲什么汤养人 配比方法 不同季节不同汤",
+ "description": "煲什么汤养人 配比方法：不同季节不同汤",
+ "kind": "expert",
+ "tags": [
+  "meal-soup-nourish-1",
+  "meal-soup-nourish-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-soup-nourish-core",
+   "name": "煲什么汤养人 配比方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-soup-nourish-1",
+     "name": "按体质与季节选",
+     "summary": "不同季节不同汤"
+    },
+    {
+     "id": "meal-soup-nourish-2",
+     "name": "火候与时间",
+     "summary": "不同季节不同汤"
+    },
+    {
+     "id": "meal-soup-nourish-3",
+     "name": "去油与调味",
+     "summary": "不同季节不同汤"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-quick-15min",
+ "name": "十五分钟能做啥菜 配比方法 只用手边工具 15 分钟出餐",
+ "description": "十五分钟能做啥菜 配比方法：只用手边工具 15 分钟出餐",
+ "kind": "expert",
+ "tags": [
+  "meal-quick-15min-1",
+  "meal-quick-15min-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-quick-15min-core",
+   "name": "十五分钟能做啥菜 配比方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-quick-15min-1",
+     "name": "速成菜谱选择",
+     "summary": "只用手边工具 15 分钟出餐"
+    },
+    {
+     "id": "meal-quick-15min-2",
+     "name": "并行操作设计",
+     "summary": "只用手边工具 15 分钟出餐"
+    },
+    {
+     "id": "meal-quick-15min-3",
+     "name": "简化与妥协",
+     "summary": "只用手边工具 15 分钟出餐"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

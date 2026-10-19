@@ -1,0 +1,72 @@
+{
+ "name": "meal-leftover-reuse",
+ "version": "1.0.0",
+ "plugin": "meal-leftover-reuse",
+ "description": "Meal Leftover Reuse",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-leftover-reuse.md"
+ ],
+ "skills": [
+  "./skills/meal-leftover-reuse-1",
+  "./skills/meal-leftover-reuse-2",
+  "./skills/meal-leftover-reuse-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal leftover reuse 1",
+  "meal leftover reuse 2",
+  "meal leftover reuse 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-leftover-reuse",
+ "displayName": {
+  "en": "Meal Leftover Reuse",
+  "zh": "剩菜怎么处理 配比方法"
+ },
+ "profession": {
+  "en": "Meal Leftover Reuse",
+  "zh": "剩菜怎么处理 配比方法 顾问"
+ },
+ "displayDescription": {
+  "en": "分清哪些能留",
+  "zh": "剩菜怎么处理 配比方法：覆盖分清哪些能留等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal leftover reuse 1",
+   "zh": "meal leftover reuse 1"
+  },
+  {
+   "en": "meal leftover reuse 2",
+   "zh": "meal leftover reuse 2"
+  },
+  {
+   "en": "meal leftover reuse 3",
+   "zh": "meal leftover reuse 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-leftover-reuse-1",
+   "zh": "meal leftover reuse 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-leftover-reuse-1",
+   "zh": "meal leftover reuse 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-leftover-reuse-1",
+  "zh": "meal leftover reuse 1 第一步该怎么做"
+ }
+}

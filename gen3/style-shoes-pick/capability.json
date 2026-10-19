@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-shoes-pick",
+ "name": "鞋怎么选不累脚 挑选方法 按走路量选",
+ "description": "鞋怎么选不累脚 挑选方法：按走路量选",
+ "kind": "expert",
+ "tags": [
+  "style-shoes-pick-1",
+  "style-shoes-pick-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-shoes-pick-core",
+   "name": "鞋怎么选不累脚 挑选方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-shoes-pick-1",
+     "name": "场景与鞋型",
+     "summary": "按走路量选"
+    },
+    {
+     "id": "style-shoes-pick-2",
+     "name": "合脚判断",
+     "summary": "按走路量选"
+    },
+    {
+     "id": "style-shoes-pick-3",
+     "name": "保养与替换",
+     "summary": "按走路量选"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-jetlag",
+ "name": "倒时差怎么办 避坑要点 提前调",
+ "description": "倒时差怎么办 避坑要点：提前调",
+ "kind": "expert",
+ "tags": [
+  "travel-jetlag-1",
+  "travel-jetlag-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-jetlag-core",
+   "name": "倒时差怎么办 避坑要点",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-jetlag-1",
+     "name": "出发前调整",
+     "summary": "提前调"
+    },
+    {
+     "id": "travel-jetlag-2",
+     "name": "到达后应对",
+     "summary": "提前调"
+    },
+    {
+     "id": "travel-jetlag-3",
+     "name": "返程恢复",
+     "summary": "提前调"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

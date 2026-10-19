@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "自然风景",
+   "then": "对比色：红/黄/白在绿背景中突出"
+  },
+  {
+   "when": "城市街拍",
+   "then": "简洁：纯色+一个有设计感的单品"
+  },
+  {
+   "when": "证件照",
+   "then": "深色上装：与白底对比，不穿高领"
+  },
+  {
+   "when": "室内暖光",
+   "then": "避开黄绿：会显气色差"
+  }
+ ],
+ "keywords": [
+  "旅游",
+  "证件照",
+  "场景",
+  "自然风景",
+  "城市街拍",
+  "室内暖光"
+ ],
+ "boundary": "不同拍摄场景",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

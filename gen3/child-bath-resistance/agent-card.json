@@ -1,0 +1,63 @@
+{
+ "name": "Child Bath Resistance",
+ "description": "分清是感官不适、恐惧还是权力斗争",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-bath-resistance",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-bath-resistance",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-bath-resistance-1",
+   "name": "抗拒原因识别",
+   "description": "抗拒原因识别：分清是感官不适、恐惧还是权力斗争",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-bath-resistance-2",
+   "name": "降低抗拒的方法",
+   "description": "降低抗拒的方法：分清是感官不适、恐惧还是权力斗争",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-bath-resistance-3",
+   "name": "习惯建立",
+   "description": "习惯建立：分清是感官不适、恐惧还是权力斗争",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

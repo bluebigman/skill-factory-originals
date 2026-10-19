@@ -1,0 +1,72 @@
+{
+ "name": "style-work-uniform",
+ "version": "1.0.0",
+ "plugin": "style-work-uniform",
+ "description": "Style Work Uniform",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-work-uniform.md"
+ ],
+ "skills": [
+  "./skills/style-work-uniform-1",
+  "./skills/style-work-uniform-2",
+  "./skills/style-work-uniform-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style work uniform 1",
+  "style work uniform 2",
+  "style work uniform 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-work-uniform",
+ "displayName": {
+  "en": "Style Work Uniform",
+  "zh": "有工装怎么穿出自己 场合选择"
+ },
+ "profession": {
+  "en": "Style Work Uniform",
+  "zh": "有工装怎么穿出自己 场合选择 顾问"
+ },
+ "displayDescription": {
+  "en": "先看能改什么",
+  "zh": "有工装怎么穿出自己 场合选择：覆盖先看能改什么等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style work uniform 1",
+   "zh": "style work uniform 1"
+  },
+  {
+   "en": "style work uniform 2",
+   "zh": "style work uniform 2"
+  },
+  {
+   "en": "style work uniform 3",
+   "zh": "style work uniform 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-work-uniform-1",
+   "zh": "style work uniform 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-work-uniform-1",
+   "zh": "style work uniform 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-work-uniform-1",
+  "zh": "style work uniform 1 第一步该怎么做"
+ }
+}

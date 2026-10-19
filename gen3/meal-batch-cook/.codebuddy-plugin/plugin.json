@@ -1,0 +1,72 @@
+{
+ "name": "meal-batch-cook",
+ "version": "1.0.0",
+ "plugin": "meal-batch-cook",
+ "description": "Meal Batch Cook",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-batch-cook.md"
+ ],
+ "skills": [
+  "./skills/meal-batch-cook-1",
+  "./skills/meal-batch-cook-2",
+  "./skills/meal-batch-cook-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal batch cook 1",
+  "meal batch cook 2",
+  "meal batch cook 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-batch-cook",
+ "displayName": {
+  "en": "Meal Batch Cook",
+  "zh": "一次做一周的菜 成本控制"
+ },
+ "profession": {
+  "en": "Meal Batch Cook",
+  "zh": "一次做一周的菜 成本控制 顾问"
+ },
+ "displayDescription": {
+  "en": "哪些适合一次做多",
+  "zh": "一次做一周的菜 成本控制：覆盖哪些适合一次做多等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal batch cook 1",
+   "zh": "meal batch cook 1"
+  },
+  {
+   "en": "meal batch cook 2",
+   "zh": "meal batch cook 2"
+  },
+  {
+   "en": "meal batch cook 3",
+   "zh": "meal batch cook 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-batch-cook-1",
+   "zh": "meal batch cook 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-batch-cook-1",
+   "zh": "meal batch cook 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-batch-cook-1",
+  "zh": "meal batch cook 1 第一步该怎么做"
+ }
+}

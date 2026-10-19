@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "酒店宴会厅",
+   "then": "正装感：连衣裙/西装，避免球鞋短裤"
+  },
+  {
+   "when": "户外草坪",
+   "then": "舒适：中跟鞋，避免细高跟陷土"
+  },
+  {
+   "when": "中式婚礼",
+   "then": "看风格：喜庆色可用，避免过度西式"
+  },
+  {
+   "when": "不写 dress code",
+   "then": "问新人：不确定就直接问"
+  }
+ ],
+ "keywords": [
+  "场地",
+  "酒店",
+  "户外",
+  "酒店宴会厅",
+  "户外草坪",
+  "中式婚礼",
+  "不写 dress code"
+ ],
+ "boundary": "不同婚礼不同穿法",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

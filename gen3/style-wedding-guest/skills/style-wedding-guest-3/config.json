@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "香水太浓",
+   "then": "少喷：密闭空间浓香影响他人"
+  },
+  {
+   "when": "带大包",
+   "then": "小包：宴席不便放大包"
+  },
+  {
+   "when": "穿新鞋",
+   "then": "穿过的鞋：要走动与站立"
+  },
+  {
+   "when": "红包与穿着无关",
+   "then": "分开：礼金按关系定，与穿什么无关"
+  }
+ ],
+ "keywords": [
+  "细节",
+  "礼节",
+  "香水太浓",
+  "带大包",
+  "穿新鞋",
+  "红包与穿着无关"
+ ],
+ "boundary": "容易被忽略的",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

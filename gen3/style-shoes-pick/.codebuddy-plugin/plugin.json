@@ -1,0 +1,72 @@
+{
+ "name": "style-shoes-pick",
+ "version": "1.0.0",
+ "plugin": "style-shoes-pick",
+ "description": "Style Shoes Pick",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-shoes-pick.md"
+ ],
+ "skills": [
+  "./skills/style-shoes-pick-1",
+  "./skills/style-shoes-pick-2",
+  "./skills/style-shoes-pick-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style shoes pick 1",
+  "style shoes pick 2",
+  "style shoes pick 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-shoes-pick",
+ "displayName": {
+  "en": "Style Shoes Pick",
+  "zh": "鞋怎么选不累脚 挑选方法"
+ },
+ "profession": {
+  "en": "Style Shoes Pick",
+  "zh": "鞋怎么选不累脚 挑选方法 顾问"
+ },
+ "displayDescription": {
+  "en": "按走路量选",
+  "zh": "鞋怎么选不累脚 挑选方法：覆盖按走路量选等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style shoes pick 1",
+   "zh": "style shoes pick 1"
+  },
+  {
+   "en": "style shoes pick 2",
+   "zh": "style shoes pick 2"
+  },
+  {
+   "en": "style shoes pick 3",
+   "zh": "style shoes pick 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-shoes-pick-1",
+   "zh": "style shoes pick 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-shoes-pick-1",
+   "zh": "style shoes pick 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-shoes-pick-1",
+  "zh": "style shoes pick 1 第一步该怎么做"
+ }
+}

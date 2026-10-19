@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "住最便宜的",
+   "then": "位置优先：省下的交通时间与钱更值"
+  },
+  {
+   "when": "吃快餐",
+   "then": "吃当地市场：便宜且真实"
+  },
+  {
+   "when": "买通票",
+   "then": "算需求：玩不到 3 个点不划算"
+  },
+  {
+   "when": "不买保险",
+   "then": "保险别省：几十块覆盖大风险"
+  }
+ ],
+ "keywords": [
+  "怎么省",
+  "便宜",
+  "住最便宜的",
+  "吃快餐",
+  "买通票",
+  "不买保险"
+ ],
+ "boundary": "哪些真能省",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

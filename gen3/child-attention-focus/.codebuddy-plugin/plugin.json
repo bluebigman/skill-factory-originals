@@ -1,0 +1,72 @@
+{
+ "name": "child-attention-focus",
+ "version": "1.0.0",
+ "plugin": "child-attention-focus",
+ "description": "Child Attention Focus",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-attention-focus.md"
+ ],
+ "skills": [
+  "./skills/child-attention-focus-1",
+  "./skills/child-attention-focus-2",
+  "./skills/child-attention-focus-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child attention focus 1",
+  "child attention focus 2",
+  "child attention focus 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-attention-focus",
+ "displayName": {
+  "en": "Child Attention Focus",
+  "zh": "注意力不集中 分步处置"
+ },
+ "profession": {
+  "en": "Child Attention Focus",
+  "zh": "注意力不集中 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是年龄正常、环境干扰还是需要专业评估",
+  "zh": "注意力不集中 分步处置：覆盖分清是年龄正常、环境干扰还是需要专业评估等情境，给出可执行处置与自查清单"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child attention focus 1",
+   "zh": "child attention focus 1"
+  },
+  {
+   "en": "child attention focus 2",
+   "zh": "child attention focus 2"
+  },
+  {
+   "en": "child attention focus 3",
+   "zh": "child attention focus 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-attention-focus-1",
+   "zh": "child attention focus 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-attention-focus-1",
+   "zh": "child attention focus 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-attention-focus-1",
+  "zh": "child attention focus 1 第一步该怎么做"
+ }
+}

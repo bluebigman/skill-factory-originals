@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-neck-pain",
+ "name": "脖子肩膀疼怎么缓解 自查步骤 先看是姿势还是其他",
+ "description": "脖子肩膀疼怎么缓解 自查步骤：先看是姿势还是其他",
+ "kind": "expert",
+ "tags": [
+  "health-neck-pain-1",
+  "health-neck-pain-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-neck-pain-core",
+   "name": "脖子肩膀疼怎么缓解 自查步骤",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-neck-pain-1",
+     "name": "成因排查",
+     "summary": "先看是姿势还是其他"
+    },
+    {
+     "id": "health-neck-pain-2",
+     "name": "缓解动作",
+     "summary": "先看是姿势还是其他"
+    },
+    {
+     "id": "health-neck-pain-3",
+     "name": "预防",
+     "summary": "先看是姿势还是其他"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

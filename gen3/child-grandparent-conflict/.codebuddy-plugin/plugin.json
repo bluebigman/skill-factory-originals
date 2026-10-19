@@ -1,0 +1,72 @@
+{
+ "name": "child-grandparent-conflict",
+ "version": "1.0.0",
+ "plugin": "child-grandparent-conflict",
+ "description": "Child Grandparent Conflict",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-grandparent-conflict.md"
+ ],
+ "skills": [
+  "./skills/child-grandparent-conflict-1",
+  "./skills/child-grandparent-conflict-2",
+  "./skills/child-grandparent-conflict-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child grandparent conflict 1",
+  "child grandparent conflict 2",
+  "child grandparent conflict 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-grandparent-conflict",
+ "displayName": {
+  "en": "Child Grandparent Conflict",
+  "zh": "隔代教养分歧 长期预防"
+ },
+ "profession": {
+  "en": "Child Grandparent Conflict",
+  "zh": "隔代教养分歧 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是原则冲突、习惯差异还是情绪对抗",
+  "zh": "隔代教养分歧 长期预防：覆盖分清是原则冲突、习惯差异还是情绪对抗等情境，给出可执行处置与自查清单，并"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child grandparent conflict 1",
+   "zh": "child grandparent conflict 1"
+  },
+  {
+   "en": "child grandparent conflict 2",
+   "zh": "child grandparent conflict 2"
+  },
+  {
+   "en": "child grandparent conflict 3",
+   "zh": "child grandparent conflict 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-grandparent-conflict-1",
+   "zh": "child grandparent conflict 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-grandparent-conflict-1",
+   "zh": "child grandparent conflict 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-grandparent-conflict-1",
+  "zh": "child grandparent conflict 1 第一步该怎么做"
+ }
+}

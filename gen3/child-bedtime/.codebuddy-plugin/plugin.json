@@ -1,0 +1,72 @@
+{
+ "name": "child-bedtime",
+ "version": "1.0.0",
+ "plugin": "child-bedtime",
+ "description": "Child Bedtime",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-bedtime.md"
+ ],
+ "skills": [
+  "./skills/child-bedtime-1",
+  "./skills/child-bedtime-2",
+  "./skills/child-bedtime-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child bedtime 1",
+  "child bedtime 2",
+  "child bedtime 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-bedtime",
+ "displayName": {
+  "en": "Child Bedtime",
+  "zh": "晚上不肯睡 话术模板"
+ },
+ "profession": {
+  "en": "Child Bedtime",
+  "zh": "晚上不肯睡 话术模板 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是精力过剩、刺激过度还是作息紊乱",
+  "zh": "晚上不肯睡 话术模板：覆盖分清是精力过剩、刺激过度还是作息紊乱等情境，给出可执行处置与自查清单，并明"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child bedtime 1",
+   "zh": "child bedtime 1"
+  },
+  {
+   "en": "child bedtime 2",
+   "zh": "child bedtime 2"
+  },
+  {
+   "en": "child bedtime 3",
+   "zh": "child bedtime 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-bedtime-1",
+   "zh": "child bedtime 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-bedtime-1",
+   "zh": "child bedtime 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-bedtime-1",
+  "zh": "child bedtime 1 第一步该怎么做"
+ }
+}

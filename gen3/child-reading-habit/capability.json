@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-reading-habit",
+ "name": "阅读习惯培养 分步处置 分清是识字量、兴趣、环境还是被逼出来的反感",
+ "description": "阅读习惯培养 分步处置：分清是识字量、兴趣、环境还是被逼出来的反感",
+ "kind": "expert",
+ "tags": [
+  "child-reading-habit-1",
+  "child-reading-habit-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-reading-habit-core",
+   "name": "阅读习惯培养 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-reading-habit-1",
+     "name": "阅读门槛诊断",
+     "summary": "分清是识字量、兴趣、环境还是被逼出来的反感"
+    },
+    {
+     "id": "child-reading-habit-2",
+     "name": "共读方法",
+     "summary": "分清是识字量、兴趣、环境还是被逼出来的反感"
+    },
+    {
+     "id": "child-reading-habit-3",
+     "name": "习惯固化",
+     "summary": "分清是识字量、兴趣、环境还是被逼出来的反感"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

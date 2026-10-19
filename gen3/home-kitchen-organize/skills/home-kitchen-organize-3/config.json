@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "攒着一起洗",
+   "then": "边做边洗：等锅时洗砧板"
+  },
+  {
+   "when": "不擦油污",
+   "then": "每次做完擦一次：油污积累后难清"
+  },
+  {
+   "when": "没有归位习惯",
+   "then": "用完即归：设 3 分钟收尾"
+  },
+  {
+   "when": "囤太多干货",
+   "then": "控量：干货按三个月用量"
+  }
+ ],
+ "keywords": [
+  "维持",
+  "清洁",
+  "不乱",
+  "攒着一起洗",
+  "不擦油污",
+  "没有归位习惯",
+  "囤太多干货"
+ ],
+ "boundary": "怎么不反复乱",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

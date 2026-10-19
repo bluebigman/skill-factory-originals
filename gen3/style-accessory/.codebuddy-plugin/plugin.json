@@ -1,0 +1,72 @@
+{
+ "name": "style-accessory",
+ "version": "1.0.0",
+ "plugin": "style-accessory",
+ "description": "Style Accessory",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-accessory.md"
+ ],
+ "skills": [
+  "./skills/style-accessory-1",
+  "./skills/style-accessory-2",
+  "./skills/style-accessory-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style accessory 1",
+  "style accessory 2",
+  "style accessory 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-accessory",
+ "displayName": {
+  "en": "Style Accessory",
+  "zh": "配饰怎么用 场合选择 数量控制"
+ },
+ "profession": {
+  "en": "Style Accessory",
+  "zh": "配饰怎么用 场合选择 顾问"
+ },
+ "displayDescription": {
+  "en": "少而准",
+  "zh": "配饰怎么用 场合选择：覆盖少而准等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style accessory 1",
+   "zh": "style accessory 1"
+  },
+  {
+   "en": "style accessory 2",
+   "zh": "style accessory 2"
+  },
+  {
+   "en": "style accessory 3",
+   "zh": "style accessory 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-accessory-1",
+   "zh": "style accessory 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-accessory-1",
+   "zh": "style accessory 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-accessory-1",
+  "zh": "style accessory 1 第一步该怎么做"
+ }
+}

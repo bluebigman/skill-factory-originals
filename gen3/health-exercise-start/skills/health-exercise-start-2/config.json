@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "每天一小时",
+   "then": "从 10 分钟开始：先建立习惯"
+  },
+  {
+   "when": "全靠意志力",
+   "then": "降低门槛：提前备好装备/固定时间"
+  },
+  {
+   "when": "一次不落",
+   "then": "允许缺：一周 3 次即有效"
+  },
+  {
+   "when": "不记录",
+   "then": "记录：打卡与进度可视化"
+  }
+ ],
+ "keywords": [
+  "坚持",
+  "三天热度",
+  "计划",
+  "每天一小时",
+  "全靠意志力",
+  "一次不落",
+  "不记录"
+ ],
+ "boundary": "怎么不放弃",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-lying",
+ "version": "1.0.0",
+ "plugin": "child-lying",
+ "description": "Child Lying",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-lying.md"
+ ],
+ "skills": [
+  "./skills/child-lying-1",
+  "./skills/child-lying-2",
+  "./skills/child-lying-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child lying 1",
+  "child lying 2",
+  "child lying 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-lying",
+ "displayName": {
+  "en": "Child Lying",
+  "zh": "撒谎怎么处理 分步处置"
+ },
+ "profession": {
+  "en": "Child Lying",
+  "zh": "撒谎怎么处理 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是怕惩罚、想讨好、想象还是习惯性",
+  "zh": "撒谎怎么处理 分步处置：覆盖分清是怕惩罚、想讨好、想象还是习惯性等情境，给出可执行处置与自查清单，并"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child lying 1",
+   "zh": "child lying 1"
+  },
+  {
+   "en": "child lying 2",
+   "zh": "child lying 2"
+  },
+  {
+   "en": "child lying 3",
+   "zh": "child lying 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-lying-1",
+   "zh": "child lying 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-lying-1",
+   "zh": "child lying 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-lying-1",
+  "zh": "child lying 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "不带常用药",
+   "then": "带足：慢病药按天数+3 天余量"
+  },
+  {
+   "when": "不带病历",
+   "then": "带病历摘要：慢病/过敏/用药清单"
+  },
+  {
+   "when": "不查医院",
+   "then": "查附近医院：知道最近的在哪"
+  },
+  {
+   "when": "不考虑饮食",
+   "then": "注意忌口：慢病饮食限制"
+  }
+ ],
+ "keywords": [
+  "健康",
+  "用药",
+  "不带常用药",
+  "不带病历",
+  "不查医院",
+  "不考虑饮食"
+ ],
+ "boundary": "最要紧的",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "meal-blood-sugar",
+ "version": "1.0.0",
+ "plugin": "meal-blood-sugar",
+ "description": "Meal Blood Sugar",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-blood-sugar.md"
+ ],
+ "skills": [
+  "./skills/meal-blood-sugar-1",
+  "./skills/meal-blood-sugar-2",
+  "./skills/meal-blood-sugar-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal blood sugar 1",
+  "meal blood sugar 2",
+  "meal blood sugar 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-blood-sugar",
+ "displayName": {
+  "en": "Meal Blood Sugar",
+  "zh": "控糖怎么吃 成本控制"
+ },
+ "profession": {
+  "en": "Meal Blood Sugar",
+  "zh": "控糖怎么吃 成本控制 顾问"
+ },
+ "displayDescription": {
+  "en": "分清主食类型与吃法",
+  "zh": "控糖怎么吃 成本控制：覆盖分清主食类型与吃法等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "08-FinanceInvestment",
+ "tags": [
+  {
+   "en": "meal blood sugar 1",
+   "zh": "meal blood sugar 1"
+  },
+  {
+   "en": "meal blood sugar 2",
+   "zh": "meal blood sugar 2"
+  },
+  {
+   "en": "meal blood sugar 3",
+   "zh": "meal blood sugar 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-blood-sugar-1",
+   "zh": "meal blood sugar 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-blood-sugar-1",
+   "zh": "meal blood sugar 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-blood-sugar-1",
+  "zh": "meal blood sugar 1 第一步该怎么做"
+ }
+}

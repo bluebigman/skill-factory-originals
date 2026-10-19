@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "椅子随便坐",
+   "then": "调高度：脚平放，膝 90 度"
+  },
+  {
+   "when": "屏幕太低",
+   "then": "抬高：视线平齐屏幕上缘"
+  },
+  {
+   "when": "一直靠背",
+   "then": "交替：靠背与不靠背轮换"
+  },
+  {
+   "when": "手腕悬空",
+   "then": "支撑：腕托或前臂支撑"
+  }
+ ],
+ "keywords": [
+  "工位",
+  "设置",
+  "坐姿",
+  "椅子随便坐",
+  "屏幕太低",
+  "一直靠背",
+  "手腕悬空"
+ ],
+ "boundary": "怎么减少负荷",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

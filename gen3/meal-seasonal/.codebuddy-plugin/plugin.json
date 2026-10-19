@@ -1,0 +1,72 @@
+{
+ "name": "meal-seasonal",
+ "version": "1.0.0",
+ "plugin": "meal-seasonal",
+ "description": "Meal Seasonal",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-seasonal.md"
+ ],
+ "skills": [
+  "./skills/meal-seasonal-1",
+  "./skills/meal-seasonal-2",
+  "./skills/meal-seasonal-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal seasonal 1",
+  "meal seasonal 2",
+  "meal seasonal 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-seasonal",
+ "displayName": {
+  "en": "Meal Seasonal",
+  "zh": "当季吃什么 食材选择 时令判断"
+ },
+ "profession": {
+  "en": "Meal Seasonal",
+  "zh": "当季吃什么 食材选择 顾问"
+ },
+ "displayDescription": {
+  "en": "按季节选食材",
+  "zh": "当季吃什么 食材选择：覆盖按季节选食材等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal seasonal 1",
+   "zh": "meal seasonal 1"
+  },
+  {
+   "en": "meal seasonal 2",
+   "zh": "meal seasonal 2"
+  },
+  {
+   "en": "meal seasonal 3",
+   "zh": "meal seasonal 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-seasonal-1",
+   "zh": "meal seasonal 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-seasonal-1",
+   "zh": "meal seasonal 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-seasonal-1",
+  "zh": "meal seasonal 1 第一步该怎么做"
+ }
+}

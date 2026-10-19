@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-weekly-plan",
+ "name": "一周菜谱怎么排 快手做法 按重复度与新鲜度排一周",
+ "description": "一周菜谱怎么排 快手做法：按重复度与新鲜度排一周",
+ "kind": "expert",
+ "tags": [
+  "meal-weekly-plan-1",
+  "meal-weekly-plan-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-weekly-plan-core",
+   "name": "一周菜谱怎么排 快手做法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-weekly-plan-1",
+     "name": "七天菜单排布",
+     "summary": "按重复度与新鲜度排一周"
+    },
+    {
+     "id": "meal-weekly-plan-2",
+     "name": "采购清单生成",
+     "summary": "按重复度与新鲜度排一周"
+    },
+    {
+     "id": "meal-weekly-plan-3",
+     "name": "备菜与保鲜",
+     "summary": "按重复度与新鲜度排一周"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

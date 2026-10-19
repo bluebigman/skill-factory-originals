@@ -1,0 +1,72 @@
+{
+ "name": "child-money-sense",
+ "version": "1.0.0",
+ "plugin": "child-money-sense",
+ "description": "Child Money Sense",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-money-sense.md"
+ ],
+ "skills": [
+  "./skills/child-money-sense-1",
+  "./skills/child-money-sense-2",
+  "./skills/child-money-sense-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child money sense 1",
+  "child money sense 2",
+  "child money sense 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-money-sense",
+ "displayName": {
+  "en": "Child Money Sense",
+  "zh": "财商启蒙 分步处置"
+ },
+ "profession": {
+  "en": "Child Money Sense",
+  "zh": "财商启蒙 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "先看孩子处在哪个阶段",
+  "zh": "财商启蒙 分步处置：覆盖先看孩子处在哪个阶段等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "08-FinanceInvestment",
+ "tags": [
+  {
+   "en": "child money sense 1",
+   "zh": "child money sense 1"
+  },
+  {
+   "en": "child money sense 2",
+   "zh": "child money sense 2"
+  },
+  {
+   "en": "child money sense 3",
+   "zh": "child money sense 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-money-sense-1",
+   "zh": "child money sense 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-money-sense-1",
+   "zh": "child money sense 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-money-sense-1",
+  "zh": "child money sense 1 第一步该怎么做"
+ }
+}

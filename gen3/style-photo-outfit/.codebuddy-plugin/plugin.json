@@ -1,0 +1,72 @@
+{
+ "name": "style-photo-outfit",
+ "version": "1.0.0",
+ "plugin": "style-photo-outfit",
+ "description": "Style Photo Outfit",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-photo-outfit.md"
+ ],
+ "skills": [
+  "./skills/style-photo-outfit-1",
+  "./skills/style-photo-outfit-2",
+  "./skills/style-photo-outfit-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style photo outfit 1",
+  "style photo outfit 2",
+  "style photo outfit 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-photo-outfit",
+ "displayName": {
+  "en": "Style Photo Outfit",
+  "zh": "拍照穿什么好看 挑选方法"
+ },
+ "profession": {
+  "en": "Style Photo Outfit",
+  "zh": "拍照穿什么好看 挑选方法 顾问"
+ },
+ "displayDescription": {
+  "en": "镜头与肉眼的差异",
+  "zh": "拍照穿什么好看 挑选方法：覆盖镜头与肉眼的差异等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style photo outfit 1",
+   "zh": "style photo outfit 1"
+  },
+  {
+   "en": "style photo outfit 2",
+   "zh": "style photo outfit 2"
+  },
+  {
+   "en": "style photo outfit 3",
+   "zh": "style photo outfit 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-photo-outfit-1",
+   "zh": "style photo outfit 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-photo-outfit-1",
+   "zh": "style photo outfit 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-photo-outfit-1",
+  "zh": "style photo outfit 1 第一步该怎么做"
+ }
+}

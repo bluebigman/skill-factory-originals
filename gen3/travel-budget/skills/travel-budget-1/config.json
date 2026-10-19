@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "只省门票",
+   "then": "省大项：交通与住宿占 60%"
+  },
+  {
+   "when": "旺季出行",
+   "then": "错峰：淡季价差可达一半"
+  },
+  {
+   "when": "临时订",
+   "then": "提前：车票与住宿越早越便宜"
+  },
+  {
+   "when": "不算杂费",
+   "then": "算全：市内交通/餐饮/购物"
+  }
+ ],
+ "keywords": [
+  "省钱",
+  "预算",
+  "花钱",
+  "只省门票",
+  "旺季出行",
+  "临时订",
+  "不算杂费"
+ ],
+ "boundary": "钱花在哪",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

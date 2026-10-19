@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-leftover-reuse",
+ "name": "剩菜怎么处理 配比方法 分清哪些能留",
+ "description": "剩菜怎么处理 配比方法：分清哪些能留",
+ "kind": "expert",
+ "tags": [
+  "meal-leftover-reuse-1",
+  "meal-leftover-reuse-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-leftover-reuse-core",
+   "name": "剩菜怎么处理 配比方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-leftover-reuse-1",
+     "name": "可留与不可留判断",
+     "summary": "分清哪些能留"
+    },
+    {
+     "id": "meal-leftover-reuse-2",
+     "name": "再加工方式",
+     "summary": "分清哪些能留"
+    },
+    {
+     "id": "meal-leftover-reuse-3",
+     "name": "源头减量",
+     "summary": "分清哪些能留"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

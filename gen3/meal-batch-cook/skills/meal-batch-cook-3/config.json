@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "每天同样的组合",
+   "then": "换主食与配菜：同一底菜配不同主食"
+  },
+  {
+   "when": "复热后变干",
+   "then": "加一点水或汤汁：微波时盖盖子"
+  },
+  {
+   "when": "只吃荤菜",
+   "then": "每天现做一道素：3 分钟快炒即可"
+  }
+ ],
+ "keywords": [
+  "搭配",
+  "复热",
+  "不单调",
+  "每天同样的组合",
+  "复热后变干",
+  "只吃荤菜"
+ ],
+ "boundary": "怎么让一周不单调",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

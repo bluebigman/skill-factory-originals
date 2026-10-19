@@ -1,0 +1,31 @@
+{
+ "rules": [
+  {
+   "when": "长时间跪坐",
+   "then": "避免：增加髌骨压力"
+  },
+  {
+   "when": "上下楼快跑",
+   "then": "慢下：下楼对膝冲击更大"
+  },
+  {
+   "when": "体重不管",
+   "then": "控体重：每减 1kg 膝负荷减 4kg"
+  },
+  {
+   "when": "受凉不管",
+   "then": "保暖：寒冷会加重不适"
+  }
+ ],
+ "keywords": [
+  "保护",
+  "长时间跪坐",
+  "上下楼快跑",
+  "体重不管",
+  "受凉不管"
+ ],
+ "boundary": "怎么做",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

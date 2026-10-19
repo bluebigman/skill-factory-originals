@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-food-safety",
+ "name": "食材坏了怎么判断 快手做法 用感官判断风险",
+ "description": "食材坏了怎么判断 快手做法：用感官判断风险",
+ "kind": "expert",
+ "tags": [
+  "meal-food-safety-1",
+  "meal-food-safety-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-food-safety-core",
+   "name": "食材坏了怎么判断 快手做法",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-food-safety-1",
+     "name": "变质识别",
+     "summary": "用感官判断风险"
+    },
+    {
+     "id": "meal-food-safety-2",
+     "name": "储存时限",
+     "summary": "用感官判断风险"
+    },
+    {
+     "id": "meal-food-safety-3",
+     "name": "加热与复热",
+     "summary": "用感官判断风险"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

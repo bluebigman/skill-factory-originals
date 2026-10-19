@@ -1,0 +1,72 @@
+{
+ "name": "child-kindergarten-entry",
+ "version": "1.0.0",
+ "plugin": "child-kindergarten-entry",
+ "description": "Child Kindergarten Entry",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-kindergarten-entry.md"
+ ],
+ "skills": [
+  "./skills/child-kindergarten-entry-1",
+  "./skills/child-kindergarten-entry-2",
+  "./skills/child-kindergarten-entry-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child kindergarten entry 1",
+  "child kindergarten entry 2",
+  "child kindergarten entry 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-kindergarten-entry",
+ "displayName": {
+  "en": "Child Kindergarten Entry",
+  "zh": "入园适应陪跑 长期预防"
+ },
+ "profession": {
+  "en": "Child Kindergarten Entry",
+  "zh": "入园适应陪跑 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是正常适应期还是需要干预",
+  "zh": "入园适应陪跑 长期预防：覆盖分清是正常适应期还是需要干预等情境，给出可执行处置与自查清单，并明确能力"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child kindergarten entry 1",
+   "zh": "child kindergarten entry 1"
+  },
+  {
+   "en": "child kindergarten entry 2",
+   "zh": "child kindergarten entry 2"
+  },
+  {
+   "en": "child kindergarten entry 3",
+   "zh": "child kindergarten entry 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-kindergarten-entry-1",
+   "zh": "child kindergarten entry 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-kindergarten-entry-1",
+   "zh": "child kindergarten entry 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-kindergarten-entry-1",
+  "zh": "child kindergarten entry 1 第一步该怎么做"
+ }
+}

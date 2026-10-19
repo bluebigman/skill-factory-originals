@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "要求三菜一汤",
+   "then": "降到一荤一素：15 分钟内做不到三菜"
+  },
+  {
+   "when": "必须现做米饭",
+   "then": "用隔夜饭：炒饭比新煮更快"
+  },
+  {
+   "when": "觉得没营养",
+   "then": "加一个蛋或一杯奶：补蛋白最快"
+  }
+ ],
+ "keywords": [
+  "简化",
+  "凑合",
+  "够吃就行",
+  "要求三菜一汤",
+  "必须现做米饭",
+  "觉得没营养"
+ ],
+ "boundary": "不求完美但营养够",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-appliance-buy",
+ "name": "家电怎么选不踩坑 处理步骤 先算清要什么",
+ "description": "家电怎么选不踩坑 处理步骤：先算清要什么",
+ "kind": "expert",
+ "tags": [
+  "home-appliance-buy-1",
+  "home-appliance-buy-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-appliance-buy-core",
+   "name": "家电怎么选不踩坑 处理步骤",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-appliance-buy-1",
+     "name": "需求先定",
+     "summary": "先算清要什么"
+    },
+    {
+     "id": "home-appliance-buy-2",
+     "name": "参数怎么看",
+     "summary": "先算清要什么"
+    },
+    {
+     "id": "home-appliance-buy-3",
+     "name": "购买时机",
+     "summary": "先算清要什么"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-tidying",
+ "name": "房间乱怎么管 收纳方案 分清是不会收、没地方放还是不在乎",
+ "description": "房间乱怎么管 收纳方案：分清是不会收、没地方放还是不在乎",
+ "kind": "expert",
+ "tags": [
+  "child-tidying-1",
+  "child-tidying-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-tidying-core",
+   "name": "房间乱怎么管 收纳方案",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-tidying-1",
+     "name": "乱的成因分析",
+     "summary": "分清是不会收、没地方放还是不在乎"
+    },
+    {
+     "id": "child-tidying-2",
+     "name": "收纳系统搭建",
+     "summary": "分清是不会收、没地方放还是不在乎"
+    },
+    {
+     "id": "child-tidying-3",
+     "name": "维持机制",
+     "summary": "分清是不会收、没地方放还是不在乎"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "name": "Child Morning Wakeup",
+ "description": "分清是睡眠不足、起床气还是拖延策略",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-morning-wakeup",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-morning-wakeup",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-morning-wakeup-1",
+   "name": "赖床原因排查",
+   "description": "赖床原因排查：分清是睡眠不足、起床气还是拖延策略",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-morning-wakeup-2",
+   "name": "叫醒方式改进",
+   "description": "叫醒方式改进：分清是睡眠不足、起床气还是拖延策略",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-morning-wakeup-3",
+   "name": "作息前移",
+   "description": "作息前移：分清是睡眠不足、起床气还是拖延策略",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

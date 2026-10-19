@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-picky-eating",
+ "name": "挑食不爱吃菜 食材选择 分清是感官敏感、权力斗争还是真的不爱吃",
+ "description": "挑食不爱吃菜 食材选择：分清是感官敏感、权力斗争还是真的不爱吃",
+ "kind": "expert",
+ "tags": [
+  "child-picky-eating-1",
+  "child-picky-eating-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-picky-eating-core",
+   "name": "挑食不爱吃菜 食材选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-picky-eating-1",
+     "name": "挑食类型判断",
+     "summary": "分清是感官敏感、权力斗争还是真的不爱吃"
+    },
+    {
+     "id": "child-picky-eating-2",
+     "name": "上桌规则设计",
+     "summary": "分清是感官敏感、权力斗争还是真的不爱吃"
+    },
+    {
+     "id": "child-picky-eating-3",
+     "name": "食物呈现改造",
+     "summary": "分清是感官敏感、权力斗争还是真的不爱吃"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

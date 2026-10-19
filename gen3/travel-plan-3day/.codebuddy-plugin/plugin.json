@@ -1,0 +1,72 @@
+{
+ "name": "travel-plan-3day",
+ "version": "1.0.0",
+ "plugin": "travel-plan-3day",
+ "description": "Travel Plan 3Day",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-plan-3day.md"
+ ],
+ "skills": [
+  "./skills/travel-plan-3day-1",
+  "./skills/travel-plan-3day-2",
+  "./skills/travel-plan-3day-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel plan 3day 1",
+  "travel plan 3day 2",
+  "travel plan 3day 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-plan-3day",
+ "displayName": {
+  "en": "Travel Plan 3Day",
+  "zh": "三天假去哪玩 行程规划"
+ },
+ "profession": {
+  "en": "Travel Plan 3Day",
+  "zh": "三天假去哪玩 行程规划 顾问"
+ },
+ "displayDescription": {
+  "en": "按时间与预算筛",
+  "zh": "三天假去哪玩 行程规划：覆盖按时间与预算筛等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel plan 3day 1",
+   "zh": "travel plan 3day 1"
+  },
+  {
+   "en": "travel plan 3day 2",
+   "zh": "travel plan 3day 2"
+  },
+  {
+   "en": "travel plan 3day 3",
+   "zh": "travel plan 3day 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-plan-3day-1",
+   "zh": "travel plan 3day 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-plan-3day-1",
+   "zh": "travel plan 3day 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-plan-3day-1",
+  "zh": "travel plan 3day 1 第一步该怎么做"
+ }
+}

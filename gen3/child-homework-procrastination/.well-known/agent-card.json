@@ -1,0 +1,63 @@
+{
+ "name": "Child Homework Procrastination",
+ "description": "分清是不会、不想、不能专注还是被干扰",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-homework-procrastination",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-homework-procrastination",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-homework-procrastination-1",
+   "name": "拖拉原因定位",
+   "description": "拖拉原因定位：分清是不会、不想、不能专注还是被干扰",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-homework-procrastination-2",
+   "name": "陪写方式调整",
+   "description": "陪写方式调整：分清是不会、不想、不能专注还是被干扰",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-homework-procrastination-3",
+   "name": "作业流程建立",
+   "description": "作业流程建立：分清是不会、不想、不能专注还是被干扰",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "rules": [
+  {
+   "when": "躺床上刷手机",
+   "then": "床只用于睡：睡不着就起来"
+  },
+  {
+   "when": "强迫自己睡",
+   "then": "20 分钟睡不着就起：做无聊的事再回床"
+  },
+  {
+   "when": "白天补觉",
+   "then": "不补：白天睡会削弱夜间睡意"
+  },
+  {
+   "when": "睡前喝酒",
+   "then": "不喝：酒助入睡但破坏深睡"
+  }
+ ],
+ "keywords": [
+  "改善",
+  "躺床上刷手机",
+  "强迫自己睡",
+  "白天补觉",
+  "睡前喝酒"
+ ],
+ "boundary": "怎么改善",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-early-romance",
+ "version": "1.0.0",
+ "plugin": "child-early-romance",
+ "description": "Child Early Romance",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-early-romance.md"
+ ],
+ "skills": [
+  "./skills/child-early-romance-1",
+  "./skills/child-early-romance-2",
+  "./skills/child-early-romance-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child early romance 1",
+  "child early romance 2",
+  "child early romance 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-early-romance",
+ "displayName": {
+  "en": "Child Early Romance",
+  "zh": "早恋怎么引导 分步处置"
+ },
+ "profession": {
+  "en": "Child Early Romance",
+  "zh": "早恋怎么引导 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是单纯好感、真的交往还是被纠缠",
+  "zh": "早恋怎么引导 分步处置：覆盖分清是单纯好感、真的交往还是被纠缠等情境，给出可执行处置与自查清单，并明"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child early romance 1",
+   "zh": "child early romance 1"
+  },
+  {
+   "en": "child early romance 2",
+   "zh": "child early romance 2"
+  },
+  {
+   "en": "child early romance 3",
+   "zh": "child early romance 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-early-romance-1",
+   "zh": "child early romance 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-early-romance-1",
+   "zh": "child early romance 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-early-romance-1",
+  "zh": "child early romance 1 第一步该怎么做"
+ }
+}

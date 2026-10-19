@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-body-shape",
+ "name": "什么版型显瘦 场合选择 先认清自己的比例",
+ "description": "什么版型显瘦 场合选择：先认清自己的比例",
+ "kind": "expert",
+ "tags": [
+  "style-body-shape-1",
+  "style-body-shape-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-body-shape-core",
+   "name": "什么版型显瘦 场合选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-body-shape-1",
+     "name": "体型判断",
+     "summary": "先认清自己的比例"
+    },
+    {
+     "id": "style-body-shape-2",
+     "name": "版型选择",
+     "summary": "先认清自己的比例"
+    },
+    {
+     "id": "style-body-shape-3",
+     "name": "细节调整",
+     "summary": "先认清自己的比例"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

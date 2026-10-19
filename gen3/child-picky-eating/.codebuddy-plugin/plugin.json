@@ -1,0 +1,72 @@
+{
+ "name": "child-picky-eating",
+ "version": "1.0.0",
+ "plugin": "child-picky-eating",
+ "description": "Child Picky Eating",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-picky-eating.md"
+ ],
+ "skills": [
+  "./skills/child-picky-eating-1",
+  "./skills/child-picky-eating-2",
+  "./skills/child-picky-eating-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child picky eating 1",
+  "child picky eating 2",
+  "child picky eating 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-picky-eating",
+ "displayName": {
+  "en": "Child Picky Eating",
+  "zh": "挑食不爱吃菜 食材选择"
+ },
+ "profession": {
+  "en": "Child Picky Eating",
+  "zh": "挑食不爱吃菜 食材选择 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是感官敏感、权力斗争还是真的不爱吃",
+  "zh": "挑食不爱吃菜 食材选择：覆盖分清是感官敏感、权力斗争还是真的不爱吃等情境，给出可执行处置与自查清单，"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "child picky eating 1",
+   "zh": "child picky eating 1"
+  },
+  {
+   "en": "child picky eating 2",
+   "zh": "child picky eating 2"
+  },
+  {
+   "en": "child picky eating 3",
+   "zh": "child picky eating 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-picky-eating-1",
+   "zh": "child picky eating 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-picky-eating-1",
+   "zh": "child picky eating 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-picky-eating-1",
+  "zh": "child picky eating 1 第一步该怎么做"
+ }
+}

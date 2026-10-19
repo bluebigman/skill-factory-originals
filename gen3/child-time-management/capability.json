@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-time-management",
+ "name": "时间管理带教 长期预防 先看孩子有没有时间概念",
+ "description": "时间管理带教 长期预防：先看孩子有没有时间概念",
+ "kind": "expert",
+ "tags": [
+  "child-time-management-1",
+  "child-time-management-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-time-management-core",
+   "name": "时间管理带教 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-time-management-1",
+     "name": "时间感诊断",
+     "summary": "先看孩子有没有时间概念"
+    },
+    {
+     "id": "child-time-management-2",
+     "name": "工具与方法",
+     "summary": "先看孩子有没有时间概念"
+    },
+    {
+     "id": "child-time-management-3",
+     "name": "习惯固化",
+     "summary": "先看孩子有没有时间概念"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

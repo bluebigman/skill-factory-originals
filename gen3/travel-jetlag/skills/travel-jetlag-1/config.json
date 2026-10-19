@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "到了再调",
+   "then": "提前 3 天：每天提前/推迟 1 小时睡"
+  },
+  {
+   "when": "不查目的地时间",
+   "then": "按目的地作息：提前按当地时间吃饭"
+  },
+  {
+   "when": "飞行中一直睡",
+   "then": "分段睡：按目的地夜间睡"
+  }
+ ],
+ "keywords": [
+  "时差",
+  "倒时差",
+  "出国",
+  "到了再调",
+  "不查目的地时间",
+  "飞行中一直睡"
+ ],
+ "boundary": "提前调",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

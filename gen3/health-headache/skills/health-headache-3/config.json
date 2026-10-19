@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "不记录",
+   "then": "记头：时间/持续/诱因/伴随症状"
+  },
+  {
+   "when": "只记疼",
+   "then": "记生活：睡眠/饮食/压力/天气"
+  },
+  {
+   "when": "不复查",
+   "then": "复诊带记录：比口头描述准"
+  }
+ ],
+ "keywords": [
+  "诱因",
+  "记录",
+  "规律",
+  "不记录",
+  "只记疼",
+  "不复查"
+ ],
+ "boundary": "怎么找规律",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-separation-anxiety",
+ "version": "1.0.0",
+ "plugin": "child-separation-anxiety",
+ "description": "Child Separation Anxiety",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-separation-anxiety.md"
+ ],
+ "skills": [
+  "./skills/child-separation-anxiety-1",
+  "./skills/child-separation-anxiety-2",
+  "./skills/child-separation-anxiety-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child separation anxiety 1",
+  "child separation anxiety 2",
+  "child separation anxiety 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-separation-anxiety",
+ "displayName": {
+  "en": "Child Separation Anxiety",
+  "zh": "分离焦虑缓解 长期预防"
+ },
+ "profession": {
+  "en": "Child Separation Anxiety",
+  "zh": "分离焦虑缓解 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是正常适应、过渡困难还是分离焦虑障碍",
+  "zh": "分离焦虑缓解 长期预防：覆盖分清是正常适应、过渡困难还是分离焦虑障碍等情境，给出可执行处置与自查清单"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child separation anxiety 1",
+   "zh": "child separation anxiety 1"
+  },
+  {
+   "en": "child separation anxiety 2",
+   "zh": "child separation anxiety 2"
+  },
+  {
+   "en": "child separation anxiety 3",
+   "zh": "child separation anxiety 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-separation-anxiety-1",
+   "zh": "child separation anxiety 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-separation-anxiety-1",
+   "zh": "child separation anxiety 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-separation-anxiety-1",
+  "zh": "child separation anxiety 1 第一步该怎么做"
+ }
+}

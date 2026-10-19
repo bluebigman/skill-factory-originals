@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-with-elderly",
+ "name": "带老人出门注意什么 准备清单 按老人身体排",
+ "description": "带老人出门注意什么 准备清单：按老人身体排",
+ "kind": "expert",
+ "tags": [
+  "travel-with-elderly-1",
+  "travel-with-elderly-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-with-elderly-core",
+   "name": "带老人出门注意什么 准备清单",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-with-elderly-1",
+     "name": "强度与节奏",
+     "summary": "按老人身体排"
+    },
+    {
+     "id": "travel-with-elderly-2",
+     "name": "健康与用药",
+     "summary": "按老人身体排"
+    },
+    {
+     "id": "travel-with-elderly-3",
+     "name": "舒适与安全",
+     "summary": "按老人身体排"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

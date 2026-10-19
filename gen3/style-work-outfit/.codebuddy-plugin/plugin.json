@@ -1,0 +1,72 @@
+{
+ "name": "style-work-outfit",
+ "version": "1.0.0",
+ "plugin": "style-work-outfit",
+ "description": "Style Work Outfit",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-work-outfit.md"
+ ],
+ "skills": [
+  "./skills/style-work-outfit-1",
+  "./skills/style-work-outfit-2",
+  "./skills/style-work-outfit-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style work outfit 1",
+  "style work outfit 2",
+  "style work outfit 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-work-outfit",
+ "displayName": {
+  "en": "Style Work Outfit",
+  "zh": "上班穿什么 搭配方案 场合定调"
+ },
+ "profession": {
+  "en": "Style Work Outfit",
+  "zh": "上班穿什么 搭配方案 顾问"
+ },
+ "displayDescription": {
+  "en": "先定正式度",
+  "zh": "上班穿什么 搭配方案：覆盖先定正式度等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style work outfit 1",
+   "zh": "style work outfit 1"
+  },
+  {
+   "en": "style work outfit 2",
+   "zh": "style work outfit 2"
+  },
+  {
+   "en": "style work outfit 3",
+   "zh": "style work outfit 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-work-outfit-1",
+   "zh": "style work outfit 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-work-outfit-1",
+   "zh": "style work outfit 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-work-outfit-1",
+  "zh": "style work outfit 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "不查相互作用",
+   "then": "问药师：多种药同服需评估"
+  },
+  {
+   "when": "不记录反应",
+   "then": "记不良反应：出现异常及时反馈"
+  },
+  {
+   "when": "不定期复查",
+   "then": "按医嘱复查：很多药需监测指标"
+  },
+  {
+   "when": "不看说明书",
+   "then": "看关键：禁忌/不良反应/储存"
+  }
+ ],
+ "keywords": [
+  "安全",
+  "复查",
+  "不查相互作用",
+  "不记录反应",
+  "不定期复查",
+  "不看说明书"
+ ],
+ "boundary": "别出事",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

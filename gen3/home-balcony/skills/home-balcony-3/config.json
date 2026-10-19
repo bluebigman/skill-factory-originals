@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "什么都种",
+   "then": "按光照：南向可种果蔬，北向选耐阴"
+  },
+  {
+   "when": "天天浇水",
+   "then": "见干见湿：多数植物死于浇水过多"
+  },
+  {
+   "when": "不防虫",
+   "then": "定期检查：阳台虫害易扩散进屋"
+  },
+  {
+   "when": "不考虑风",
+   "then": "高层防风：花盆固定"
+  }
+ ],
+ "keywords": [
+  "种什么",
+  "种植",
+  "养花",
+  "什么都种",
+  "天天浇水",
+  "不防虫",
+  "不考虑风"
+ ],
+ "boundary": "怎么种活",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

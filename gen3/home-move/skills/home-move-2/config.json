@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "不点数",
+   "then": "点数：按箱号核对，缺箱当场找"
+  },
+  {
+   "when": "不检查家具",
+   "then": "先检查：搬运磕碰当场拍照"
+  },
+  {
+   "when": "不标记易碎",
+   "then": "标易碎：并单独交代"
+  },
+  {
+   "when": "不最后走一遍",
+   "then": "最后清场：检查柜内/抽屉/阳台"
+  }
+ ],
+ "keywords": [
+  "当天",
+  "怎么搬",
+  "不点数",
+  "不检查家具",
+  "不标记易碎",
+  "不最后走一遍"
+ ],
+ "boundary": "当天怎么盯",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

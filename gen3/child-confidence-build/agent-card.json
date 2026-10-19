@@ -1,0 +1,63 @@
+{
+ "name": "Child Confidence Build",
+ "description": "分清是能力不足、被否定太多还是气质内向",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-confidence-build",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-confidence-build",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-confidence-build-1",
+   "name": "自信缺失来源",
+   "description": "自信缺失来源：分清是能力不足、被否定太多还是气质内向",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-confidence-build-2",
+   "name": "语言方式",
+   "description": "语言方式：分清是能力不足、被否定太多还是气质内向",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-confidence-build-3",
+   "name": "实践机会",
+   "description": "实践机会：分清是能力不足、被否定太多还是气质内向",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

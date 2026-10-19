@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-mold-damp",
+ "name": "家里潮湿发霉怎么办 收纳方案 先找水源",
+ "description": "家里潮湿发霉怎么办 收纳方案：先找水源",
+ "kind": "expert",
+ "tags": [
+  "home-mold-damp-1",
+  "home-mold-damp-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-mold-damp-core",
+   "name": "家里潮湿发霉怎么办 收纳方案",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-mold-damp-1",
+     "name": "潮湿原因排查",
+     "summary": "先找水源"
+    },
+    {
+     "id": "home-mold-damp-2",
+     "name": "除霉处理",
+     "summary": "先找水源"
+    },
+    {
+     "id": "home-mold-damp-3",
+     "name": "长期防霉",
+     "summary": "先找水源"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

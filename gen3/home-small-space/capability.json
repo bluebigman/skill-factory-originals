@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-small-space",
+ "name": "小户型怎么收纳 处理步骤 先算清楚有多少可用的面",
+ "description": "小户型怎么收纳 处理步骤：先算清楚有多少可用的面",
+ "kind": "expert",
+ "tags": [
+  "home-small-space-1",
+  "home-small-space-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-small-space-core",
+   "name": "小户型怎么收纳 处理步骤",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-small-space-1",
+     "name": "空间盘点",
+     "summary": "先算清楚有多少可用的面"
+    },
+    {
+     "id": "home-small-space-2",
+     "name": "分区与动线",
+     "summary": "先算清楚有多少可用的面"
+    },
+    {
+     "id": "home-small-space-3",
+     "name": "视觉显大",
+     "summary": "先算清楚有多少可用的面"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

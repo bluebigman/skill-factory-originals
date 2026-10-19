@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-postpartum",
+ "name": "产后怎么恢复 日常维护 按阶段来",
+ "description": "产后怎么恢复 日常维护：按阶段来",
+ "kind": "expert",
+ "tags": [
+  "health-postpartum-1",
+  "health-postpartum-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-postpartum-core",
+   "name": "产后怎么恢复 日常维护",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-postpartum-1",
+     "name": "恢复阶段",
+     "summary": "按阶段来"
+    },
+    {
+     "id": "health-postpartum-2",
+     "name": "核心与盆底",
+     "summary": "按阶段来"
+    },
+    {
+     "id": "health-postpartum-3",
+     "name": "生活调整",
+     "summary": "按阶段来"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "全天站立",
+   "then": "选厚底缓冲：薄底硬底不适合久站"
+  },
+  {
+   "when": "通勤走 20 分钟以上",
+   "then": "选运动底：外表正式但内里是运动鞋底"
+  },
+  {
+   "when": "正式场合",
+   "then": "带备用：正式鞋配一双平底换"
+  },
+  {
+   "when": "跟太高",
+   "then": "控高度：日常不超过 5cm"
+  }
+ ],
+ "keywords": [
+  "累脚",
+  "走一天",
+  "全天站立",
+  "通勤走 20 分钟以上",
+  "正式场合",
+  "跟太高"
+ ],
+ "boundary": "按走路量选",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

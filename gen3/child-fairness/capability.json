@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-fairness",
+ "name": "觉得你偏心 分步处置 分清是客观不均、感受差异还是阶段需求",
+ "description": "觉得你偏心 分步处置：分清是客观不均、感受差异还是阶段需求",
+ "kind": "expert",
+ "tags": [
+  "child-fairness-1",
+  "child-fairness-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-fairness-core",
+   "name": "觉得你偏心 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-fairness-1",
+     "name": "偏心感受来源",
+     "summary": "分清是客观不均、感受差异还是阶段需求"
+    },
+    {
+     "id": "child-fairness-2",
+     "name": "回应方式",
+     "summary": "分清是客观不均、感受差异还是阶段需求"
+    },
+    {
+     "id": "child-fairness-3",
+     "name": "机制设计",
+     "summary": "分清是客观不均、感受差异还是阶段需求"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-separation-anxiety",
+ "name": "分离焦虑缓解 长期预防 分清是正常适应、过渡困难还是分离焦虑障碍",
+ "description": "分离焦虑缓解 长期预防：分清是正常适应、过渡困难还是分离焦虑障碍",
+ "kind": "expert",
+ "tags": [
+  "child-separation-anxiety-1",
+  "child-separation-anxiety-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-separation-anxiety-core",
+   "name": "分离焦虑缓解 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-separation-anxiety-1",
+     "name": "焦虑程度判断",
+     "summary": "分清是正常适应、过渡困难还是分离焦虑障碍"
+    },
+    {
+     "id": "child-separation-anxiety-2",
+     "name": "送别方式",
+     "summary": "分清是正常适应、过渡困难还是分离焦虑障碍"
+    },
+    {
+     "id": "child-separation-anxiety-3",
+     "name": "安全感建设",
+     "summary": "分清是正常适应、过渡困难还是分离焦虑障碍"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

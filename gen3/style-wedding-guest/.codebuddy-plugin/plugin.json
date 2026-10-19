@@ -1,0 +1,72 @@
+{
+ "name": "style-wedding-guest",
+ "version": "1.0.0",
+ "plugin": "style-wedding-guest",
+ "description": "Style Wedding Guest",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-wedding-guest.md"
+ ],
+ "skills": [
+  "./skills/style-wedding-guest-1",
+  "./skills/style-wedding-guest-2",
+  "./skills/style-wedding-guest-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style wedding guest 1",
+  "style wedding guest 2",
+  "style wedding guest 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-wedding-guest",
+ "displayName": {
+  "en": "Style Wedding Guest",
+  "zh": "参加婚礼穿什么 搭配方案"
+ },
+ "profession": {
+  "en": "Style Wedding Guest",
+  "zh": "参加婚礼穿什么 搭配方案 顾问"
+ },
+ "displayDescription": {
+  "en": "先避开雷区",
+  "zh": "参加婚礼穿什么 搭配方案：覆盖先避开雷区等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style wedding guest 1",
+   "zh": "style wedding guest 1"
+  },
+  {
+   "en": "style wedding guest 2",
+   "zh": "style wedding guest 2"
+  },
+  {
+   "en": "style wedding guest 3",
+   "zh": "style wedding guest 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-wedding-guest-1",
+   "zh": "style wedding guest 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-wedding-guest-1",
+   "zh": "style wedding guest 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-wedding-guest-1",
+  "zh": "style wedding guest 1 第一步该怎么做"
+ }
+}

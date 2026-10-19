@@ -1,0 +1,72 @@
+{
+ "name": "home-declutter",
+ "version": "1.0.0",
+ "plugin": "home-declutter",
+ "description": "Home Declutter",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-declutter.md"
+ ],
+ "skills": [
+  "./skills/home-declutter-1",
+  "./skills/home-declutter-2",
+  "./skills/home-declutter-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home declutter 1",
+  "home declutter 2",
+  "home declutter 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-declutter",
+ "displayName": {
+  "en": "Home Declutter",
+  "zh": "东西太多怎么扔 清洁顺序"
+ },
+ "profession": {
+  "en": "Home Declutter",
+  "zh": "东西太多怎么扔 清洁顺序 顾问"
+ },
+ "displayDescription": {
+  "en": "什么该走什么该留",
+  "zh": "东西太多怎么扔 清洁顺序：覆盖什么该走什么该留等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home declutter 1",
+   "zh": "home declutter 1"
+  },
+  {
+   "en": "home declutter 2",
+   "zh": "home declutter 2"
+  },
+  {
+   "en": "home declutter 3",
+   "zh": "home declutter 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-declutter-1",
+   "zh": "home declutter 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-declutter-1",
+   "zh": "home declutter 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-declutter-1",
+  "zh": "home declutter 1 第一步该怎么做"
+ }
+}

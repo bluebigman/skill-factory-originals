@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-bedtime",
+ "name": "晚上不肯睡 话术模板 分清是精力过剩、刺激过度还是作息紊乱",
+ "description": "晚上不肯睡 话术模板：分清是精力过剩、刺激过度还是作息紊乱",
+ "kind": "expert",
+ "tags": [
+  "child-bedtime-1",
+  "child-bedtime-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-bedtime-core",
+   "name": "晚上不肯睡 话术模板",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-bedtime-1",
+     "name": "入睡困难归因",
+     "summary": "分清是精力过剩、刺激过度还是作息紊乱"
+    },
+    {
+     "id": "child-bedtime-2",
+     "name": "睡前仪式",
+     "summary": "分清是精力过剩、刺激过度还是作息紊乱"
+    },
+    {
+     "id": "child-bedtime-3",
+     "name": "环境调整",
+     "summary": "分清是精力过剩、刺激过度还是作息紊乱"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

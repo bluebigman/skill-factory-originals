@@ -1,0 +1,27 @@
+{
+ "rules": [
+  {
+   "when": "靠饿减",
+   "then": "加蛋白和纤维：饱腹感来自蛋白+蔬菜+足够水"
+  },
+  {
+   "when": "晚上饿得睡不着",
+   "then": "留一份低卡加餐：无糖酸奶/黄瓜/蛋白"
+  },
+  {
+   "when": "体重卡住不动",
+   "then": "先查睡眠与训练：平台期常是恢复不足"
+  }
+ ],
+ "keywords": [
+  "代谢",
+  "不饿",
+  "靠饿减",
+  "晚上饿得睡不着",
+  "体重卡住不动"
+ ],
+ "boundary": "怎么不饿着减",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

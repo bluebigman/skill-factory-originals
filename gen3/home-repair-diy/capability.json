@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-repair-diy",
+ "name": "小修小补自己怎么弄 处理步骤 先分清风险",
+ "description": "小修小补自己怎么弄 处理步骤：先分清风险",
+ "kind": "expert",
+ "tags": [
+  "home-repair-diy-1",
+  "home-repair-diy-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-repair-diy-core",
+   "name": "小修小补自己怎么弄 处理步骤",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-repair-diy-1",
+     "name": "可自己修与不可",
+     "summary": "先分清风险"
+    },
+    {
+     "id": "home-repair-diy-2",
+     "name": "常见处理",
+     "summary": "先分清风险"
+    },
+    {
+     "id": "home-repair-diy-3",
+     "name": "什么时候叫人",
+     "summary": "先分清风险"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

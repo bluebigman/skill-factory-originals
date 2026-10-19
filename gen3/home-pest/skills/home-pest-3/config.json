@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "垃圾不过夜",
+   "then": "每天倒：厨余是主要吸引源"
+  },
+  {
+   "when": "食物敞开放",
+   "then": "密封：所有干货装密封罐"
+  },
+  {
+   "when": "不封缝隙",
+   "then": "封堵：管道缝隙/门缝/窗纱"
+  }
+ ],
+ "keywords": [
+  "预防",
+  "不再有",
+  "防虫",
+  "垃圾不过夜",
+  "食物敞开放",
+  "不封缝隙"
+ ],
+ "boundary": "怎么不再来",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

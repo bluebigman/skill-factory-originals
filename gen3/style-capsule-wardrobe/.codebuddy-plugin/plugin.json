@@ -1,0 +1,72 @@
+{
+ "name": "style-capsule-wardrobe",
+ "version": "1.0.0",
+ "plugin": "style-capsule-wardrobe",
+ "description": "Style Capsule Wardrobe",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/style-capsule-wardrobe.md"
+ ],
+ "skills": [
+  "./skills/style-capsule-wardrobe-1",
+  "./skills/style-capsule-wardrobe-2",
+  "./skills/style-capsule-wardrobe-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "style capsule wardrobe 1",
+  "style capsule wardrobe 2",
+  "style capsule wardrobe 3"
+ ],
+ "expertType": "agent",
+ "agentName": "style-capsule-wardrobe",
+ "displayName": {
+  "en": "Style Capsule Wardrobe",
+  "zh": "衣柜怎么精简 场合选择"
+ },
+ "profession": {
+  "en": "Style Capsule Wardrobe",
+  "zh": "衣柜怎么精简 场合选择 顾问"
+ },
+ "displayDescription": {
+  "en": "先看清自己有什么",
+  "zh": "衣柜怎么精简 场合选择：覆盖先看清自己有什么等情境，给出可执行处置与自查清单，并明确能力边界与转介条"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "style capsule wardrobe 1",
+   "zh": "style capsule wardrobe 1"
+  },
+  {
+   "en": "style capsule wardrobe 2",
+   "zh": "style capsule wardrobe 2"
+  },
+  {
+   "en": "style capsule wardrobe 3",
+   "zh": "style capsule wardrobe 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with style-capsule-wardrobe-1",
+   "zh": "style capsule wardrobe 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in style-capsule-wardrobe-1",
+   "zh": "style capsule wardrobe 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with style-capsule-wardrobe-1",
+  "zh": "style capsule wardrobe 1 第一步该怎么做"
+ }
+}

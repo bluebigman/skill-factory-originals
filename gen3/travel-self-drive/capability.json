@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-self-drive",
+ "name": "自驾游怎么准备 行程规划 出发前必查",
+ "description": "自驾游怎么准备 行程规划：出发前必查",
+ "kind": "expert",
+ "tags": [
+  "travel-self-drive-1",
+  "travel-self-drive-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-self-drive-core",
+   "name": "自驾游怎么准备 行程规划",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-self-drive-1",
+     "name": "车况与路线",
+     "summary": "出发前必查"
+    },
+    {
+     "id": "travel-self-drive-2",
+     "name": "驾驶节奏",
+     "summary": "出发前必查"
+    },
+    {
+     "id": "travel-self-drive-3",
+     "name": "应急准备",
+     "summary": "出发前必查"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "name": "child-fairness",
+ "version": "1.0.0",
+ "plugin": "child-fairness",
+ "description": "Child Fairness",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-fairness.md"
+ ],
+ "skills": [
+  "./skills/child-fairness-1",
+  "./skills/child-fairness-2",
+  "./skills/child-fairness-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child fairness 1",
+  "child fairness 2",
+  "child fairness 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-fairness",
+ "displayName": {
+  "en": "Child Fairness",
+  "zh": "觉得你偏心 分步处置"
+ },
+ "profession": {
+  "en": "Child Fairness",
+  "zh": "觉得你偏心 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是客观不均、感受差异还是阶段需求",
+  "zh": "觉得你偏心 分步处置：覆盖分清是客观不均、感受差异还是阶段需求等情境，给出可执行处置与自查清单，并明"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child fairness 1",
+   "zh": "child fairness 1"
+  },
+  {
+   "en": "child fairness 2",
+   "zh": "child fairness 2"
+  },
+  {
+   "en": "child fairness 3",
+   "zh": "child fairness 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-fairness-1",
+   "zh": "child fairness 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-fairness-1",
+   "zh": "child fairness 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-fairness-1",
+  "zh": "child fairness 1 第一步该怎么做"
+ }
+}

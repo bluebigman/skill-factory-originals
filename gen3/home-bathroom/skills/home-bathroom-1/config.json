@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "喷空气清新剂",
+   "then": "找源：地漏/马桶法兰/存水弯"
+  },
+  {
+   "when": "只清洁表面",
+   "then": "清缝隙：霉斑与污垢藏在胶缝"
+  },
+  {
+   "when": "不开排风",
+   "then": "开排风：洗后 15 分钟"
+  },
+  {
+   "when": "地漏不处理",
+   "then": "换防臭地漏芯：最有效"
+  }
+ ],
+ "keywords": [
+  "卫生间",
+  "异味",
+  "味道",
+  "喷空气清新剂",
+  "只清洁表面",
+  "不开排风",
+  "地漏不处理"
+ ],
+ "boundary": "先找源头",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

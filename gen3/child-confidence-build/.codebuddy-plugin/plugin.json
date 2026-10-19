@@ -1,0 +1,72 @@
+{
+ "name": "child-confidence-build",
+ "version": "1.0.0",
+ "plugin": "child-confidence-build",
+ "description": "Child Confidence Build",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-confidence-build.md"
+ ],
+ "skills": [
+  "./skills/child-confidence-build-1",
+  "./skills/child-confidence-build-2",
+  "./skills/child-confidence-build-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child confidence build 1",
+  "child confidence build 2",
+  "child confidence build 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-confidence-build",
+ "displayName": {
+  "en": "Child Confidence Build",
+  "zh": "自信心建立 分步处置"
+ },
+ "profession": {
+  "en": "Child Confidence Build",
+  "zh": "自信心建立 分步处置 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是能力不足、被否定太多还是气质内向",
+  "zh": "自信心建立 分步处置：覆盖分清是能力不足、被否定太多还是气质内向等情境，给出可执行处置与自查清单，并"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child confidence build 1",
+   "zh": "child confidence build 1"
+  },
+  {
+   "en": "child confidence build 2",
+   "zh": "child confidence build 2"
+  },
+  {
+   "en": "child confidence build 3",
+   "zh": "child confidence build 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-confidence-build-1",
+   "zh": "child confidence build 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-confidence-build-1",
+   "zh": "child confidence build 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-confidence-build-1",
+  "zh": "child confidence build 1 第一步该怎么做"
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "name": "Child Lying",
+ "description": "分清是怕惩罚、想讨好、想象还是习惯性",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-lying",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-lying",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-lying-1",
+   "name": "撒谎动机分辨",
+   "description": "撒谎动机分辨：分清是怕惩罚、想讨好、想象还是习惯性",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-lying-2",
+   "name": "问话方式",
+   "description": "问话方式：分清是怕惩罚、想讨好、想象还是习惯性",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-lying-3",
+   "name": "后果与修复",
+   "description": "后果与修复：分清是怕惩罚、想讨好、想象还是习惯性",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

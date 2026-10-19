@@ -1,0 +1,28 @@
+{
+ "rules": [
+  {
+   "when": "觉得工装难看就邋遢",
+   "then": "整洁优先：干净合身比款式重要"
+  },
+  {
+   "when": "只在上班穿",
+   "then": "准备下班装：换装能切换状态"
+  },
+  {
+   "when": "不注意仪态",
+   "then": "体态比衣服重要：站直收腹立刻不一样"
+  }
+ ],
+ "keywords": [
+  "心态",
+  "形象",
+  "好看",
+  "觉得工装难看就邋遢",
+  "只在上班穿",
+  "不注意仪态"
+ ],
+ "boundary": "怎么不被工装限制",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

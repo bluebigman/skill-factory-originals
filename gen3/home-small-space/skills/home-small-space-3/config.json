@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "深色家具",
+   "then": "浅色为主：浅色后退感，显大"
+  },
+  {
+   "when": "隔断太多",
+   "then": "减少隔断：通透比分区重要"
+  },
+  {
+   "when": "落地家具",
+   "then": "用高脚：露出地面显通透"
+  },
+  {
+   "when": "灯太少",
+   "then": "加主光+辅光：明暗层次让空间有深度"
+  }
+ ],
+ "keywords": [
+  "显大",
+  "视觉",
+  "小空间",
+  "深色家具",
+  "隔断太多",
+  "落地家具",
+  "灯太少"
+ ],
+ "boundary": "怎么让小空间显大",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

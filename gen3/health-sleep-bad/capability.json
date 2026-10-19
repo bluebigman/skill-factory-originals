@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-sleep-bad",
+ "name": "睡不好怎么调 改善方法 先分清类型",
+ "description": "睡不好怎么调 改善方法：先分清类型",
+ "kind": "expert",
+ "tags": [
+  "health-sleep-bad-1",
+  "health-sleep-bad-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-sleep-bad-core",
+   "name": "睡不好怎么调 改善方法",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-sleep-bad-1",
+     "name": "睡眠问题分类",
+     "summary": "先分清类型"
+    },
+    {
+     "id": "health-sleep-bad-2",
+     "name": "行为调整",
+     "summary": "先分清类型"
+    },
+    {
+     "id": "health-sleep-bad-3",
+     "name": "环境与节律",
+     "summary": "先分清类型"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

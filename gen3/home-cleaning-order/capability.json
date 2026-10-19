@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "home-cleaning-order",
+ "name": "打扫顺序怎么排 处理步骤 从上到下从里到外",
+ "description": "打扫顺序怎么排 处理步骤：从上到下从里到外",
+ "kind": "expert",
+ "tags": [
+  "home-cleaning-order-1",
+  "home-cleaning-order-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "home-cleaning-order-core",
+   "name": "打扫顺序怎么排 处理步骤",
+   "role": "core",
+   "items": [
+    {
+     "id": "home-cleaning-order-1",
+     "name": "清洁顺序",
+     "summary": "从上到下从里到外"
+    },
+    {
+     "id": "home-cleaning-order-2",
+     "name": "清洁剂选择",
+     "summary": "从上到下从里到外"
+    },
+    {
+     "id": "home-cleaning-order-3",
+     "name": "时间与分工",
+     "summary": "从上到下从里到外"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "燃气相关",
+   "then": "必须专业：任何燃气操作都不自己动"
+  },
+  {
+   "when": "墙内水管",
+   "then": "找专业：砸墙风险高"
+  },
+  {
+   "when": "电路改造",
+   "then": "找电工：不只是断电问题"
+  },
+  {
+   "when": "保修期内",
+   "then": "先联系售后：自己动会失保"
+  }
+ ],
+ "keywords": [
+  "找人",
+  "专业",
+  "别硬来",
+  "燃气相关",
+  "墙内水管",
+  "电路改造",
+  "保修期内"
+ ],
+ "boundary": "别硬来",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

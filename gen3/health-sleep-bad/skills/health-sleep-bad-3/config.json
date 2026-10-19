@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "开灯睡",
+   "then": "全暗：遮光窗帘或眼罩"
+  },
+  {
+   "when": "作息不固定",
+   "then": "固定起床时间：比固定睡觉更重要"
+  },
+  {
+   "when": "睡前激烈运动",
+   "then": "提前 3 小时：运动有益但时间要对"
+  },
+  {
+   "when": "卧室太热",
+   "then": "降到 18-22 度"
+  }
+ ],
+ "keywords": [
+  "环境",
+  "节律",
+  "光线",
+  "开灯睡",
+  "作息不固定",
+  "睡前激烈运动",
+  "卧室太热"
+ ],
+ "boundary": "外部条件",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

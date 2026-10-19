@@ -1,0 +1,72 @@
+{
+ "name": "health-headache",
+ "version": "1.0.0",
+ "plugin": "health-headache",
+ "description": "Health Headache",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Forge Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/health-headache.md"
+ ],
+ "skills": [
+  "./skills/health-headache-1",
+  "./skills/health-headache-2",
+  "./skills/health-headache-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "health headache 1",
+  "health headache 2",
+  "health headache 3"
+ ],
+ "expertType": "agent",
+ "agentName": "health-headache",
+ "displayName": {
+  "en": "Health Headache",
+  "zh": "头疼怎么办 日常维护"
+ },
+ "profession": {
+  "en": "Health Headache",
+  "zh": "头疼怎么办 日常维护 顾问"
+ },
+ "displayDescription": {
+  "en": "先分清危险信号",
+  "zh": "头疼怎么办 日常维护：覆盖先分清危险信号等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "health headache 1",
+   "zh": "health headache 1"
+  },
+  {
+   "en": "health headache 2",
+   "zh": "health headache 2"
+  },
+  {
+   "en": "health headache 3",
+   "zh": "health headache 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with health-headache-1",
+   "zh": "health headache 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in health-headache-1",
+   "zh": "health headache 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with health-headache-1",
+  "zh": "health headache 1 第一步该怎么做"
+ }
+}

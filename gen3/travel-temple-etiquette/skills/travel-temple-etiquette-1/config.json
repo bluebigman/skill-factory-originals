@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "穿短裤吊带",
+   "then": "着装得体：遮肩遮膝"
+  },
+  {
+   "when": "大声喧哗",
+   "then": "安静：不打电话不嬉笑"
+  },
+  {
+   "when": "手指佛像",
+   "then": "不用手指：用手掌示意"
+  },
+  {
+   "when": "踩门槛",
+   "then": "不踩：跨过去"
+  }
+ ],
+ "keywords": [
+  "寺庙",
+  "礼节",
+  "穿短裤吊带",
+  "大声喧哗",
+  "手指佛像",
+  "踩门槛"
+ ],
+ "boundary": "基本礼节",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

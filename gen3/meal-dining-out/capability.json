@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-dining-out",
+ "name": "外面吃饭怎么点 食材选择 避免点多或不够",
+ "description": "外面吃饭怎么点 食材选择：避免点多或不够",
+ "kind": "expert",
+ "tags": [
+  "meal-dining-out-1",
+  "meal-dining-out-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-dining-out-core",
+   "name": "外面吃饭怎么点 食材选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-dining-out-1",
+     "name": "按人数定量",
+     "summary": "避免点多或不够"
+    },
+    {
+     "id": "meal-dining-out-2",
+     "name": "场合与礼节",
+     "summary": "避免点多或不够"
+    },
+    {
+     "id": "meal-dining-out-3",
+     "name": "避坑与性价比",
+     "summary": "避免点多或不够"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

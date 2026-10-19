@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "一天一套",
+   "then": "按天数减半：可复用"
+  },
+  {
+   "when": "带全套洗漱",
+   "then": "带分装：小瓶或固体"
+  },
+  {
+   "when": "带备用鞋",
+   "then": "只带一双：穿一双带一双足够"
+  },
+  {
+   "when": "带很多电子",
+   "then": "带一个充电宝+多口充电器"
+  }
+ ],
+ "keywords": [
+  "精简",
+  "少带",
+  "一个包",
+  "一天一套",
+  "带全套洗漱",
+  "带备用鞋",
+  "带很多电子"
+ ],
+ "boundary": "怎么少带",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

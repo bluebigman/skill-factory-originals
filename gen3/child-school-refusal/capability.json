@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-school-refusal",
+ "name": "不上学怎么办 分步处置 分清是身体、人际、学业压力还是家庭因素",
+ "description": "不上学怎么办 分步处置：分清是身体、人际、学业压力还是家庭因素",
+ "kind": "expert",
+ "tags": [
+  "child-school-refusal-1",
+  "child-school-refusal-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-school-refusal-core",
+   "name": "不上学怎么办 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-school-refusal-1",
+     "name": "拒学原因排查",
+     "summary": "分清是身体、人际、学业压力还是家庭因素"
+    },
+    {
+     "id": "child-school-refusal-2",
+     "name": "返校步骤",
+     "summary": "分清是身体、人际、学业压力还是家庭因素"
+    },
+    {
+     "id": "child-school-refusal-3",
+     "name": "与学校协同",
+     "summary": "分清是身体、人际、学业压力还是家庭因素"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

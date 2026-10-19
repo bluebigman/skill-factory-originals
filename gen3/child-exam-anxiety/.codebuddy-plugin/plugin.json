@@ -1,0 +1,72 @@
+{
+ "name": "child-exam-anxiety",
+ "version": "1.0.0",
+ "plugin": "child-exam-anxiety",
+ "description": "Child Exam Anxiety",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-exam-anxiety.md"
+ ],
+ "skills": [
+  "./skills/child-exam-anxiety-1",
+  "./skills/child-exam-anxiety-2",
+  "./skills/child-exam-anxiety-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child exam anxiety 1",
+  "child exam anxiety 2",
+  "child exam anxiety 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-exam-anxiety",
+ "displayName": {
+  "en": "Child Exam Anxiety",
+  "zh": "考试紧张怎么帮 话术模板"
+ },
+ "profession": {
+  "en": "Child Exam Anxiety",
+  "zh": "考试紧张怎么帮 话术模板 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是怕失败、怕被评价还是准备不足",
+  "zh": "考试紧张怎么帮 话术模板：覆盖分清是怕失败、怕被评价还是准备不足等情境，给出可执行处置与自查清单，并"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child exam anxiety 1",
+   "zh": "child exam anxiety 1"
+  },
+  {
+   "en": "child exam anxiety 2",
+   "zh": "child exam anxiety 2"
+  },
+  {
+   "en": "child exam anxiety 3",
+   "zh": "child exam anxiety 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-exam-anxiety-1",
+   "zh": "child exam anxiety 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-exam-anxiety-1",
+   "zh": "child exam anxiety 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-exam-anxiety-1",
+  "zh": "child exam anxiety 1 第一步该怎么做"
+ }
+}

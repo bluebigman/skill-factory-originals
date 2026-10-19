@@ -1,0 +1,63 @@
+{
+ "name": "Child Attention Focus",
+ "description": "分清是年龄正常、环境干扰还是需要专业评估",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-attention-focus",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-attention-focus",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-attention-focus-1",
+   "name": "专注力现状评估",
+   "description": "专注力现状评估：分清是年龄正常、环境干扰还是需要专业评估",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-attention-focus-2",
+   "name": "环境与任务改造",
+   "description": "环境与任务改造：分清是年龄正常、环境干扰还是需要专业评估",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-attention-focus-3",
+   "name": "专注力训练",
+   "description": "专注力训练：分清是年龄正常、环境干扰还是需要专业评估",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

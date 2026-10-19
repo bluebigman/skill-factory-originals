@@ -1,0 +1,72 @@
+{
+ "name": "meal-soup-nourish",
+ "version": "1.0.0",
+ "plugin": "meal-soup-nourish",
+ "description": "Meal Soup Nourish",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-soup-nourish.md"
+ ],
+ "skills": [
+  "./skills/meal-soup-nourish-1",
+  "./skills/meal-soup-nourish-2",
+  "./skills/meal-soup-nourish-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal soup nourish 1",
+  "meal soup nourish 2",
+  "meal soup nourish 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-soup-nourish",
+ "displayName": {
+  "en": "Meal Soup Nourish",
+  "zh": "煲什么汤养人 配比方法"
+ },
+ "profession": {
+  "en": "Meal Soup Nourish",
+  "zh": "煲什么汤养人 配比方法 顾问"
+ },
+ "displayDescription": {
+  "en": "不同季节不同汤",
+  "zh": "煲什么汤养人 配比方法：覆盖不同季节不同汤等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal soup nourish 1",
+   "zh": "meal soup nourish 1"
+  },
+  {
+   "en": "meal soup nourish 2",
+   "zh": "meal soup nourish 2"
+  },
+  {
+   "en": "meal soup nourish 3",
+   "zh": "meal soup nourish 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-soup-nourish-1",
+   "zh": "meal soup nourish 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-soup-nourish-1",
+   "zh": "meal soup nourish 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-soup-nourish-1",
+  "zh": "meal soup nourish 1 第一步该怎么做"
+ }
+}

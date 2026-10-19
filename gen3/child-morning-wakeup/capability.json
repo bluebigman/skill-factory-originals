@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-morning-wakeup",
+ "name": "赖床叫不起 当场应对 分清是睡眠不足、起床气还是拖延策略",
+ "description": "赖床叫不起 当场应对：分清是睡眠不足、起床气还是拖延策略",
+ "kind": "expert",
+ "tags": [
+  "child-morning-wakeup-1",
+  "child-morning-wakeup-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-morning-wakeup-core",
+   "name": "赖床叫不起 当场应对",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-morning-wakeup-1",
+     "name": "赖床原因排查",
+     "summary": "分清是睡眠不足、起床气还是拖延策略"
+    },
+    {
+     "id": "child-morning-wakeup-2",
+     "name": "叫醒方式改进",
+     "summary": "分清是睡眠不足、起床气还是拖延策略"
+    },
+    {
+     "id": "child-morning-wakeup-3",
+     "name": "作息前移",
+     "summary": "分清是睡眠不足、起床气还是拖延策略"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

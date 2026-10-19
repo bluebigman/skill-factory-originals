@@ -1,0 +1,63 @@
+{
+ "name": "Child Frustration Tolerance",
+ "description": "分清是年龄特点、完美主义还是被过度保护",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-frustration-tolerance",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-frustration-tolerance",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-frustration-tolerance-1",
+   "name": "抗挫现状判断",
+   "description": "抗挫现状判断：分清是年龄特点、完美主义还是被过度保护",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-frustration-tolerance-2",
+   "name": "当场处理",
+   "description": "当场处理：分清是年龄特点、完美主义还是被过度保护",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-frustration-tolerance-3",
+   "name": "长期培养",
+   "description": "长期培养：分清是年龄特点、完美主义还是被过度保护",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

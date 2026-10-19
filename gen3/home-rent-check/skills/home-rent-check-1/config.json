@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "只看装修",
+   "then": "看水电：水压/下水/电路负荷"
+  },
+  {
+   "when": "白天看",
+   "then": "晚上也看：噪音/采光/路灯"
+  },
+  {
+   "when": "不看邻居",
+   "then": "看楼道：公共区域状态反映管理"
+  },
+  {
+   "when": "不问费用",
+   "then": "问全：物业/取暖/网络/中介费"
+  }
+ ],
+ "keywords": [
+  "租房",
+  "看房",
+  "只看装修",
+  "白天看",
+  "不看邻居",
+  "不问费用"
+ ],
+ "boundary": "先看什么",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

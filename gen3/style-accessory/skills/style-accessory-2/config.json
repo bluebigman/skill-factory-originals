@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "圆脸戴圆环",
+   "then": "选长线条：拉长视觉"
+  },
+  {
+   "when": "方领配短项链",
+   "then": "留白：方领适合中等长度或不戴"
+  },
+  {
+   "when": "脖子短戴高领",
+   "then": "V 领+长项链：拉长颈部"
+  },
+  {
+   "when": "耳垂薄戴大耳环",
+   "then": "减重量：选轻材质，避免拉伤"
+  }
+ ],
+ "keywords": [
+  "脸型",
+  "领口",
+  "圆脸戴圆环",
+  "方领配短项链",
+  "脖子短戴高领",
+  "耳垂薄戴大耳环"
+ ],
+ "boundary": "怎么选适合自己",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

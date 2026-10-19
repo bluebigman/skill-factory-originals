@@ -1,0 +1,72 @@
+{
+ "name": "meal-food-safety",
+ "version": "1.0.0",
+ "plugin": "meal-food-safety",
+ "description": "Meal Food Safety",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-food-safety.md"
+ ],
+ "skills": [
+  "./skills/meal-food-safety-1",
+  "./skills/meal-food-safety-2",
+  "./skills/meal-food-safety-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal food safety 1",
+  "meal food safety 2",
+  "meal food safety 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-food-safety",
+ "displayName": {
+  "en": "Meal Food Safety",
+  "zh": "食材坏了怎么判断 快手做法"
+ },
+ "profession": {
+  "en": "Meal Food Safety",
+  "zh": "食材坏了怎么判断 快手做法 顾问"
+ },
+ "displayDescription": {
+  "en": "用感官判断风险",
+  "zh": "食材坏了怎么判断 快手做法：覆盖用感官判断风险等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal food safety 1",
+   "zh": "meal food safety 1"
+  },
+  {
+   "en": "meal food safety 2",
+   "zh": "meal food safety 2"
+  },
+  {
+   "en": "meal food safety 3",
+   "zh": "meal food safety 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-food-safety-1",
+   "zh": "meal food safety 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-food-safety-1",
+   "zh": "meal food safety 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-food-safety-1",
+  "zh": "meal food safety 1 第一步该怎么做"
+ }
+}

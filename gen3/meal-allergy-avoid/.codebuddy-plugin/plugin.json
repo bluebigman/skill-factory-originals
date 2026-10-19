@@ -1,0 +1,72 @@
+{
+ "name": "meal-allergy-avoid",
+ "version": "1.0.0",
+ "plugin": "meal-allergy-avoid",
+ "description": "Meal Allergy Avoid",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-allergy-avoid.md"
+ ],
+ "skills": [
+  "./skills/meal-allergy-avoid-1",
+  "./skills/meal-allergy-avoid-2",
+  "./skills/meal-allergy-avoid-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal allergy avoid 1",
+  "meal allergy avoid 2",
+  "meal allergy avoid 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-allergy-avoid",
+ "displayName": {
+  "en": "Meal Allergy Avoid",
+  "zh": "有人过敏怎么避开 配比方法"
+ },
+ "profession": {
+  "en": "Meal Allergy Avoid",
+  "zh": "有人过敏怎么避开 配比方法 顾问"
+ },
+ "displayDescription": {
+  "en": "先搞清到底对什么过敏",
+  "zh": "有人过敏怎么避开 配比方法：覆盖先搞清到底对什么过敏等情境，给出可执行处置与自查清单，并明确能力边界"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal allergy avoid 1",
+   "zh": "meal allergy avoid 1"
+  },
+  {
+   "en": "meal allergy avoid 2",
+   "zh": "meal allergy avoid 2"
+  },
+  {
+   "en": "meal allergy avoid 3",
+   "zh": "meal allergy avoid 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-allergy-avoid-1",
+   "zh": "meal allergy avoid 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-allergy-avoid-1",
+   "zh": "meal allergy avoid 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-allergy-avoid-1",
+  "zh": "meal allergy avoid 1 第一步该怎么做"
+ }
+}

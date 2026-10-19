@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-puberty-body",
+ "name": "青春期身体变化怎么讲 风险识别 什么时候讲、谁来讲",
+ "description": "青春期身体变化怎么讲 风险识别：什么时候讲、谁来讲",
+ "kind": "expert",
+ "tags": [
+  "child-puberty-body-1",
+  "child-puberty-body-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-puberty-body-core",
+   "name": "青春期身体变化怎么讲 风险识别",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-puberty-body-1",
+     "name": "沟通时机判断",
+     "summary": "什么时候讲、谁来讲"
+    },
+    {
+     "id": "child-puberty-body-2",
+     "name": "讲什么内容",
+     "summary": "什么时候讲、谁来讲"
+    },
+    {
+     "id": "child-puberty-body-3",
+     "name": "日常支持",
+     "summary": "什么时候讲、谁来讲"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

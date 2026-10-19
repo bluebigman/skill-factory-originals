@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "travel-temple-etiquette",
+ "name": "寺庙景区怎么注意礼节 准备清单 基本礼节",
+ "description": "寺庙景区怎么注意礼节 准备清单：基本礼节",
+ "kind": "expert",
+ "tags": [
+  "travel-temple-etiquette-1",
+  "travel-temple-etiquette-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "travel-temple-etiquette-core",
+   "name": "寺庙景区怎么注意礼节 准备清单",
+   "role": "core",
+   "items": [
+    {
+     "id": "travel-temple-etiquette-1",
+     "name": "着装与行为",
+     "summary": "基本礼节"
+    },
+    {
+     "id": "travel-temple-etiquette-2",
+     "name": "参拜方式",
+     "summary": "基本礼节"
+    },
+    {
+     "id": "travel-temple-etiquette-3",
+     "name": "与其他游客",
+     "summary": "基本礼节"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

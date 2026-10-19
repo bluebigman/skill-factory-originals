@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-safety-training",
+ "name": "安全意识训练 长期预防 先搞清该防哪些场景",
+ "description": "安全意识训练 长期预防：先搞清该防哪些场景",
+ "kind": "expert",
+ "tags": [
+  "child-safety-training-1",
+  "child-safety-training-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-safety-training-core",
+   "name": "安全意识训练 长期预防",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-safety-training-1",
+     "name": "风险场景梳理",
+     "summary": "先搞清该防哪些场景"
+    },
+    {
+     "id": "child-safety-training-2",
+     "name": "训练方法",
+     "summary": "先搞清该防哪些场景"
+    },
+    {
+     "id": "child-safety-training-3",
+     "name": "应急动作",
+     "summary": "先搞清该防哪些场景"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

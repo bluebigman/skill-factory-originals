@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-weight-loss",
+ "name": "减脂期怎么吃 食材选择 先看总量再看结构",
+ "description": "减脂期怎么吃 食材选择：先看总量再看结构",
+ "kind": "expert",
+ "tags": [
+  "meal-weight-loss-1",
+  "meal-weight-loss-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-weight-loss-core",
+   "name": "减脂期怎么吃 食材选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-weight-loss-1",
+     "name": "热量与结构核算",
+     "summary": "先看总量再看结构"
+    },
+    {
+     "id": "meal-weight-loss-2",
+     "name": "可持续餐单设计",
+     "summary": "先看总量再看结构"
+    },
+    {
+     "id": "meal-weight-loss-3",
+     "name": "饥饿与代谢管理",
+     "summary": "先看总量再看结构"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

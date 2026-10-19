@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "when": "只吃不练",
+   "then": "必须练：无训练增重多为脂肪"
+  },
+  {
+   "when": "只做有氧",
+   "then": "以力量为主：复合动作优先"
+  },
+  {
+   "when": "天天练",
+   "then": "留恢复：同一肌群间隔 48 小时"
+  },
+  {
+   "when": "不记录",
+   "then": "记录：重量与围度按月对比"
+  }
+ ],
+ "keywords": [
+  "训练",
+  "增肌",
+  "只吃不练",
+  "只做有氧",
+  "天天练",
+  "不记录"
+ ],
+ "boundary": "怎么练",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

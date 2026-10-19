@@ -1,0 +1,72 @@
+{
+ "name": "child-hitting-biting",
+ "version": "1.0.0",
+ "plugin": "child-hitting-biting",
+ "description": "Child Hitting Biting",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Anvil Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-hitting-biting.md"
+ ],
+ "skills": [
+  "./skills/child-hitting-biting-1",
+  "./skills/child-hitting-biting-2",
+  "./skills/child-hitting-biting-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child hitting biting 1",
+  "child hitting biting 2",
+  "child hitting biting 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-hitting-biting",
+ "displayName": {
+  "en": "Child Hitting Biting",
+  "zh": "打人咬人纠正 长期预防"
+ },
+ "profession": {
+  "en": "Child Hitting Biting",
+  "zh": "打人咬人纠正 长期预防 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是语言不足、模仿、求关注还是情绪失控",
+  "zh": "打人咬人纠正 长期预防：覆盖分清是语言不足、模仿、求关注还是情绪失控等情境，给出可执行处置与自查清单"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child hitting biting 1",
+   "zh": "child hitting biting 1"
+  },
+  {
+   "en": "child hitting biting 2",
+   "zh": "child hitting biting 2"
+  },
+  {
+   "en": "child hitting biting 3",
+   "zh": "child hitting biting 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-hitting-biting-1",
+   "zh": "child hitting biting 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-hitting-biting-1",
+   "zh": "child hitting biting 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-hitting-biting-1",
+  "zh": "child hitting biting 1 第一步该怎么做"
+ }
+}

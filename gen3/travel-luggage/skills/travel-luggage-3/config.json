@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "平叠",
+   "then": "卷放：省空间少皱"
+  },
+  {
+   "when": "重物放底部",
+   "then": "重物靠近背部：背着省力"
+  },
+  {
+   "when": "液体放外层",
+   "then": "液体密封装袋：防漏"
+  },
+  {
+   "when": "不留空",
+   "then": "留 10-20%：回程带东西"
+  }
+ ],
+ "keywords": [
+  "打包",
+  "怎么装",
+  "空间",
+  "平叠",
+  "重物放底部",
+  "液体放外层",
+  "不留空"
+ ],
+ "boundary": "怎么装",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

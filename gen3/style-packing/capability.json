@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-packing",
+ "name": "出差旅行怎么带衣服 避坑要点 先算天数与场景",
+ "description": "出差旅行怎么带衣服 避坑要点：先算天数与场景",
+ "kind": "expert",
+ "tags": [
+  "style-packing-1",
+  "style-packing-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-packing-core",
+   "name": "出差旅行怎么带衣服 避坑要点",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-packing-1",
+     "name": "按行程定衣量",
+     "summary": "先算天数与场景"
+    },
+    {
+     "id": "style-packing-2",
+     "name": "打包方法",
+     "summary": "先算天数与场景"
+    },
+    {
+     "id": "style-packing-3",
+     "name": "复用与洗涤",
+     "summary": "先算天数与场景"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "style-accessory",
+ "name": "配饰怎么用 场合选择 少而准",
+ "description": "配饰怎么用 场合选择：少而准",
+ "kind": "expert",
+ "tags": [
+  "style-accessory-1",
+  "style-accessory-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "style-accessory-core",
+   "name": "配饰怎么用 场合选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "style-accessory-1",
+     "name": "数量控制",
+     "summary": "少而准"
+    },
+    {
+     "id": "style-accessory-2",
+     "name": "按脸型与领口选",
+     "summary": "少而准"
+    },
+    {
+     "id": "style-accessory-3",
+     "name": "材质与保养",
+     "summary": "少而准"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

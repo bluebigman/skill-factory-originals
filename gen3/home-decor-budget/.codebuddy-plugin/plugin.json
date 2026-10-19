@@ -1,0 +1,72 @@
+{
+ "name": "home-decor-budget",
+ "version": "1.0.0",
+ "plugin": "home-decor-budget",
+ "description": "Home Decor Budget",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Craft Bench",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-decor-budget.md"
+ ],
+ "skills": [
+  "./skills/home-decor-budget-1",
+  "./skills/home-decor-budget-2",
+  "./skills/home-decor-budget-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home decor budget 1",
+  "home decor budget 2",
+  "home decor budget 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-decor-budget",
+ "displayName": {
+  "en": "Home Decor Budget",
+  "zh": "装修预算怎么控 成本控制"
+ },
+ "profession": {
+  "en": "Home Decor Budget",
+  "zh": "装修预算怎么控 成本控制 顾问"
+ },
+ "displayDescription": {
+  "en": "钱花在哪",
+  "zh": "装修预算怎么控 成本控制：覆盖钱花在哪等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home decor budget 1",
+   "zh": "home decor budget 1"
+  },
+  {
+   "en": "home decor budget 2",
+   "zh": "home decor budget 2"
+  },
+  {
+   "en": "home decor budget 3",
+   "zh": "home decor budget 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-decor-budget-1",
+   "zh": "home decor budget 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-decor-budget-1",
+   "zh": "home decor budget 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-decor-budget-1",
+  "zh": "home decor budget 1 第一步该怎么做"
+ }
+}

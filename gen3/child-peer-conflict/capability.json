@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-peer-conflict",
+ "name": "和同学处不好 分步处置 分清是技能不足、被排斥还是性格内向",
+ "description": "和同学处不好 分步处置：分清是技能不足、被排斥还是性格内向",
+ "kind": "expert",
+ "tags": [
+  "child-peer-conflict-1",
+  "child-peer-conflict-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-peer-conflict-core",
+   "name": "和同学处不好 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-peer-conflict-1",
+     "name": "社交困难类型",
+     "summary": "分清是技能不足、被排斥还是性格内向"
+    },
+    {
+     "id": "child-peer-conflict-2",
+     "name": "社交技能训练",
+     "summary": "分清是技能不足、被排斥还是性格内向"
+    },
+    {
+     "id": "child-peer-conflict-3",
+     "name": "应对排挤",
+     "summary": "分清是技能不足、被排斥还是性格内向"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

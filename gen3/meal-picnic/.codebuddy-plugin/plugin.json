@@ -1,0 +1,72 @@
+{
+ "name": "meal-picnic",
+ "version": "1.0.0",
+ "plugin": "meal-picnic",
+ "description": "Meal Picnic",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/meal-picnic.md"
+ ],
+ "skills": [
+  "./skills/meal-picnic-1",
+  "./skills/meal-picnic-2",
+  "./skills/meal-picnic-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "meal picnic 1",
+  "meal picnic 2",
+  "meal picnic 3"
+ ],
+ "expertType": "agent",
+ "agentName": "meal-picnic",
+ "displayName": {
+  "en": "Meal Picnic",
+  "zh": "带饭带菜怎么准备 食材选择"
+ },
+ "profession": {
+  "en": "Meal Picnic",
+  "zh": "带饭带菜怎么准备 食材选择 顾问"
+ },
+ "displayDescription": {
+  "en": "哪些菜经得起放",
+  "zh": "带饭带菜怎么准备 食材选择：覆盖哪些菜经得起放等情境，给出可执行处置与自查清单，并明确能力边界与转介"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "meal picnic 1",
+   "zh": "meal picnic 1"
+  },
+  {
+   "en": "meal picnic 2",
+   "zh": "meal picnic 2"
+  },
+  {
+   "en": "meal picnic 3",
+   "zh": "meal picnic 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with meal-picnic-1",
+   "zh": "meal picnic 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in meal-picnic-1",
+   "zh": "meal picnic 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with meal-picnic-1",
+  "zh": "meal picnic 1 第一步该怎么做"
+ }
+}

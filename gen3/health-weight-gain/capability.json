@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "health-weight-gain",
+ "name": "太瘦怎么吃胖 风险识别 先看清为什么瘦",
+ "description": "太瘦怎么吃胖 风险识别：先看清为什么瘦",
+ "kind": "expert",
+ "tags": [
+  "health-weight-gain-1",
+  "health-weight-gain-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "health-weight-gain-core",
+   "name": "太瘦怎么吃胖 风险识别",
+   "role": "core",
+   "items": [
+    {
+     "id": "health-weight-gain-1",
+     "name": "原因排查",
+     "summary": "先看清为什么瘦"
+    },
+    {
+     "id": "health-weight-gain-2",
+     "name": "饮食策略",
+     "summary": "先看清为什么瘦"
+    },
+    {
+     "id": "health-weight-gain-3",
+     "name": "训练配合",
+     "summary": "先看清为什么瘦"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

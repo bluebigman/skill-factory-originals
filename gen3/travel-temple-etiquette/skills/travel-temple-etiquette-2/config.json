@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "随便拜",
+   "then": "按场所规矩：看指示或跟随他人"
+  },
+  {
+   "when": "拍照开闪光",
+   "then": "不闪：很多殿内禁止拍摄"
+  },
+  {
+   "when": "带荤食入内",
+   "then": "不带：尊重场所规定"
+  },
+  {
+   "when": "不给香火钱",
+   "then": "随缘：不攀比金额"
+  }
+ ],
+ "keywords": [
+  "拜佛",
+  "怎么拜",
+  "参拜",
+  "随便拜",
+  "拍照开闪光",
+  "带荤食入内",
+  "不给香火钱"
+ ],
+ "boundary": "怎么做",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

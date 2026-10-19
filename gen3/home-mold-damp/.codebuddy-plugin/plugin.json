@@ -1,0 +1,72 @@
+{
+ "name": "home-mold-damp",
+ "version": "1.0.0",
+ "plugin": "home-mold-damp",
+ "description": "Home Mold Damp",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Lathe Lab",
+  "email": ""
+ },
+ "agents": [
+  "./agents/home-mold-damp.md"
+ ],
+ "skills": [
+  "./skills/home-mold-damp-1",
+  "./skills/home-mold-damp-2",
+  "./skills/home-mold-damp-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "home mold damp 1",
+  "home mold damp 2",
+  "home mold damp 3"
+ ],
+ "expertType": "agent",
+ "agentName": "home-mold-damp",
+ "displayName": {
+  "en": "Home Mold Damp",
+  "zh": "家里潮湿发霉怎么办 收纳方案"
+ },
+ "profession": {
+  "en": "Home Mold Damp",
+  "zh": "家里潮湿发霉怎么办 收纳方案 顾问"
+ },
+ "displayDescription": {
+  "en": "先找水源",
+  "zh": "家里潮湿发霉怎么办 收纳方案：覆盖先找水源等情境，给出可执行处置与自查清单，并明确能力边界与转介条件"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "home mold damp 1",
+   "zh": "home mold damp 1"
+  },
+  {
+   "en": "home mold damp 2",
+   "zh": "home mold damp 2"
+  },
+  {
+   "en": "home mold damp 3",
+   "zh": "home mold damp 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with home-mold-damp-1",
+   "zh": "home mold damp 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in home-mold-damp-1",
+   "zh": "home mold damp 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with home-mold-damp-1",
+  "zh": "home mold damp 1 第一步该怎么做"
+ }
+}

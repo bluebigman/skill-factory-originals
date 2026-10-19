@@ -1,0 +1,63 @@
+{
+ "name": "Child Bullying",
+ "description": "分清是偶发冲突、持续欺凌还是互相打闹",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-bullying",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-bullying",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-bullying-1",
+   "name": "欺凌性质判断",
+   "description": "欺凌性质判断：分清是偶发冲突、持续欺凌还是互相打闹",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-bullying-2",
+   "name": "家长第一反应",
+   "description": "家长第一反应：分清是偶发冲突、持续欺凌还是互相打闹",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-bullying-3",
+   "name": "应对与恢复",
+   "description": "应对与恢复：分清是偶发冲突、持续欺凌还是互相打闹",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

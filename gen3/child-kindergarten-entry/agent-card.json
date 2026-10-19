@@ -1,0 +1,63 @@
+{
+ "name": "Child Kindergarten Entry",
+ "description": "分清是正常适应期还是需要干预",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-kindergarten-entry",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-kindergarten-entry",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-kindergarten-entry-1",
+   "name": "适应阶段判断",
+   "description": "适应阶段判断：分清是正常适应期还是需要干预",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-kindergarten-entry-2",
+   "name": "入园准备",
+   "description": "入园准备：分清是正常适应期还是需要干预",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-kindergarten-entry-3",
+   "name": "家园配合",
+   "description": "家园配合：分清是正常适应期还是需要干预",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

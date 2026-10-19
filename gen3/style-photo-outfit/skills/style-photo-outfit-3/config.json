@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "全身照",
+   "then": "鞋要有分量：不要头重脚轻"
+  },
+  {
+   "when": "半身照",
+   "then": "领口有细节：V 领/衬衫领"
+  },
+  {
+   "when": "坐姿",
+   "then": "下装要挺：避免软塌面料堆叠"
+  },
+  {
+   "when": "合影",
+   "then": "避免与背景同色：站在深色背景前穿浅色"
+  }
+ ],
+ "keywords": [
+  "构图",
+  "怎么拍",
+  "配合",
+  "全身照",
+  "半身照",
+  "坐姿",
+  "合影"
+ ],
+ "boundary": "穿什么配合怎么拍",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

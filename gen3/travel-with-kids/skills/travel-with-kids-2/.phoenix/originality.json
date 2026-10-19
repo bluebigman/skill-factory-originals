@@ -1,0 +1,13 @@
+{
+ "claim": "original_work",
+ "author": "SkillForge Lab",
+ "method": "clean-room（规格驱动，非代码抓取）",
+ "differentiators": [
+  "规则表驱动：判定逻辑全部来自本技能自己的 rules（when→then），不是通用模板套壳",
+  "可自检：自带 selftest，能独立验证引擎可用性",
+  "边界明确：明确列出「不做什么」与转介条件，不对专业领域给结论",
+  "领域专属：注入该领域专属判断算法，不是跨领域共用同一套逻辑"
+ ],
+ "not_copied_from": "未从任何开源仓库或第三方产品抓取代码",
+ "at": "2026-10-19T21:36:29"
+}

@@ -1,0 +1,63 @@
+{
+ "name": "Child Grandparent Conflict",
+ "description": "分清是原则冲突、习惯差异还是情绪对抗",
+ "version": "1.0.0",
+ "supportedInterfaces": [
+  {
+   "url": "http://127.0.0.1:8931/a2a/child-grandparent-conflict",
+   "protocolBinding": "JSONRPC",
+   "protocolVersion": "1.0.0",
+   "tenant": ""
+  }
+ ],
+ "provider": {
+  "organization": "SkillForge Lab",
+  "url": "https://github.com/bluebigman/skill-factory-originals"
+ },
+ "documentationUrl": "https://github.com/bluebigman/skill-factory-originals/tree/main/child-grandparent-conflict",
+ "iconUrl": "",
+ "capabilities": {
+  "streaming": false,
+  "pushNotifications": false,
+  "extendedAgentCard": false
+ },
+ "defaultInputModes": [
+  "text/plain"
+ ],
+ "defaultOutputModes": [
+  "text/plain",
+  "application/json"
+ ],
+ "skills": [
+  {
+   "id": "child-grandparent-conflict-1",
+   "name": "分歧性质分辨",
+   "description": "分歧性质分辨：分清是原则冲突、习惯差异还是情绪对抗",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-grandparent-conflict-2",
+   "name": "沟通策略",
+   "description": "沟通策略：分清是原则冲突、习惯差异还是情绪对抗",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  },
+  {
+   "id": "child-grandparent-conflict-3",
+   "name": "边界设定",
+   "description": "边界设定：分清是原则冲突、习惯差异还是情绪对抗",
+   "tags": [
+    "原创",
+    "规则化",
+    "可自检"
+   ]
+  }
+ ]
+}

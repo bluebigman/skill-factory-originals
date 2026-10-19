@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "meal-elderly-soft",
+ "name": "老人牙口不好怎么做 食材选择 按咀嚼能力调整形态",
+ "description": "老人牙口不好怎么做 食材选择：按咀嚼能力调整形态",
+ "kind": "expert",
+ "tags": [
+  "meal-elderly-soft-1",
+  "meal-elderly-soft-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "meal-elderly-soft-core",
+   "name": "老人牙口不好怎么做 食材选择",
+   "role": "core",
+   "items": [
+    {
+     "id": "meal-elderly-soft-1",
+     "name": "软烂度适配",
+     "summary": "按咀嚼能力调整形态"
+    },
+    {
+     "id": "meal-elderly-soft-2",
+     "name": "吞咽安全",
+     "summary": "按咀嚼能力调整形态"
+    },
+    {
+     "id": "meal-elderly-soft-3",
+     "name": "食欲与营养",
+     "summary": "按咀嚼能力调整形态"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

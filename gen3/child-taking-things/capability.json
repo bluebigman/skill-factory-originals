@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-taking-things",
+ "name": "拿了别人东西 当场应对 分清是物权概念缺失、冲动还是有意偷拿",
+ "description": "拿了别人东西 当场应对：分清是物权概念缺失、冲动还是有意偷拿",
+ "kind": "expert",
+ "tags": [
+  "child-taking-things-1",
+  "child-taking-things-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-taking-things-core",
+   "name": "拿了别人东西 当场应对",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-taking-things-1",
+     "name": "行为性质分辨",
+     "summary": "分清是物权概念缺失、冲动还是有意偷拿"
+    },
+    {
+     "id": "child-taking-things-2",
+     "name": "当场处理",
+     "summary": "分清是物权概念缺失、冲动还是有意偷拿"
+    },
+    {
+     "id": "child-taking-things-3",
+     "name": "长期教育",
+     "summary": "分清是物权概念缺失、冲动还是有意偷拿"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}

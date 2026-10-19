@@ -1,0 +1,72 @@
+{
+ "name": "child-bullying",
+ "version": "1.0.0",
+ "plugin": "child-bullying",
+ "description": "Child Bullying",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Smithy Studio",
+  "email": ""
+ },
+ "agents": [
+  "./agents/child-bullying.md"
+ ],
+ "skills": [
+  "./skills/child-bullying-1",
+  "./skills/child-bullying-2",
+  "./skills/child-bullying-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "child bullying 1",
+  "child bullying 2",
+  "child bullying 3"
+ ],
+ "expertType": "agent",
+ "agentName": "child-bullying",
+ "displayName": {
+  "en": "Child Bullying",
+  "zh": "校园被欺负应对 话术模板"
+ },
+ "profession": {
+  "en": "Child Bullying",
+  "zh": "校园被欺负应对 话术模板 顾问"
+ },
+ "displayDescription": {
+  "en": "分清是偶发冲突、持续欺凌还是互相打闹",
+  "zh": "校园被欺负应对 话术模板：覆盖分清是偶发冲突、持续欺凌还是互相打闹等情境，给出可执行处置与自查清单，"
+ },
+ "categoryId": "15-Education",
+ "tags": [
+  {
+   "en": "child bullying 1",
+   "zh": "child bullying 1"
+  },
+  {
+   "en": "child bullying 2",
+   "zh": "child bullying 2"
+  },
+  {
+   "en": "child bullying 3",
+   "zh": "child bullying 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with child-bullying-1",
+   "zh": "child bullying 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in child-bullying-1",
+   "zh": "child bullying 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with child-bullying-1",
+  "zh": "child bullying 1 第一步该怎么做"
+ }
+}

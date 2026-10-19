@@ -1,0 +1,33 @@
+{
+ "rules": [
+  {
+   "when": "按年轻人节奏",
+   "then": "减半：每天的行程量减一半"
+  },
+  {
+   "when": "爬山下坡",
+   "then": "避开陡坡：选平路与电梯"
+  },
+  {
+   "when": "连续走两小时",
+   "then": "每 40 分钟休息：找座位"
+  },
+  {
+   "when": "不安排午休",
+   "then": "必须午休：老人恢复慢"
+  }
+ ],
+ "keywords": [
+  "老人",
+  "旅游",
+  "走不动",
+  "按年轻人节奏",
+  "爬山下坡",
+  "连续走两小时",
+  "不安排午休"
+ ],
+ "boundary": "按老人身体排",
+ "copyright_holder": "SkillForge Lab",
+ "license": "MIT",
+ "source_project": "original"
+}

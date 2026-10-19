@@ -1,0 +1,72 @@
+{
+ "name": "travel-self-drive",
+ "version": "1.0.0",
+ "plugin": "travel-self-drive",
+ "description": "Travel Self Drive",
+ "avatar": "avatars/expert.png",
+ "author": {
+  "name": "Quarry Works",
+  "email": ""
+ },
+ "agents": [
+  "./agents/travel-self-drive.md"
+ ],
+ "skills": [
+  "./skills/travel-self-drive-1",
+  "./skills/travel-self-drive-2",
+  "./skills/travel-self-drive-3"
+ ],
+ "license": "MIT",
+ "keywords": [
+  "travel self drive 1",
+  "travel self drive 2",
+  "travel self drive 3"
+ ],
+ "expertType": "agent",
+ "agentName": "travel-self-drive",
+ "displayName": {
+  "en": "Travel Self Drive",
+  "zh": "自驾游怎么准备 行程规划"
+ },
+ "profession": {
+  "en": "Travel Self Drive",
+  "zh": "自驾游怎么准备 行程规划 顾问"
+ },
+ "displayDescription": {
+  "en": "出发前必查",
+  "zh": "自驾游怎么准备 行程规划：覆盖出发前必查等情境，给出可执行处置与自查清单，并明确能力边界与转介条件。"
+ },
+ "categoryId": "09-OperationsHR",
+ "tags": [
+  {
+   "en": "travel self drive 1",
+   "zh": "travel self drive 1"
+  },
+  {
+   "en": "travel self drive 2",
+   "zh": "travel self drive 2"
+  },
+  {
+   "en": "travel self drive 3",
+   "zh": "travel self drive 3"
+  }
+ ],
+ "quickPrompts": [
+  {
+   "en": "How to start with travel-self-drive-1",
+   "zh": "travel self drive 1 第一步该怎么做"
+  },
+  {
+   "en": "Common mistakes in travel-self-drive-1",
+   "zh": "travel self drive 1 最容易踩的坑是什么"
+  },
+  {
+   "en": "How to verify the output is correct",
+   "zh": "产出怎么核对才算过关"
+  }
+ ],
+ "defaultInitPrompt": {
+  "en": "How to start with travel-self-drive-1",
+  "zh": "travel self drive 1 第一步该怎么做"
+ }
+}

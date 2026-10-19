@@ -1,0 +1,47 @@
+{
+ "contractVersion": "1.0",
+ "id": "child-confidence-build",
+ "name": "自信心建立 分步处置 分清是能力不足、被否定太多还是气质内向",
+ "description": "自信心建立 分步处置：分清是能力不足、被否定太多还是气质内向",
+ "kind": "expert",
+ "tags": [
+  "child-confidence-build-1",
+  "child-confidence-build-2"
+ ],
+ "examplePrompts": [],
+ "capabilities": [
+  {
+   "id": "child-confidence-build-core",
+   "name": "自信心建立 分步处置",
+   "role": "core",
+   "items": [
+    {
+     "id": "child-confidence-build-1",
+     "name": "自信缺失来源",
+     "summary": "分清是能力不足、被否定太多还是气质内向"
+    },
+    {
+     "id": "child-confidence-build-2",
+     "name": "语言方式",
+     "summary": "分清是能力不足、被否定太多还是气质内向"
+    },
+    {
+     "id": "child-confidence-build-3",
+     "name": "实践机会",
+     "summary": "分清是能力不足、被否定太多还是气质内向"
+    }
+   ]
+  }
+ ],
+ "sla": {
+  "maxTurns": 100,
+  "language": "zh-CN"
+ },
+ "provenance": {
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyrightHolder": "SkillForge Lab",
+  "generatedBy": "clean-room",
+  "generator": "forge_core v2.0.0"
+ }
+}
